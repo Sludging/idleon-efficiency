@@ -1,6 +1,6 @@
 # The Hole: approved delivery parts
 
-**Status:** APPROVED PRODUCT/DELIVERY SCOPE / PUBLISHED / PARTS 1–2 COMPLETE — Original approval recorded on 2026-10-12. Part 1 [#441](https://github.com/Sludging/idleon-efficiency/issues/441) was accepted as complete on 2026-10-14; part 2 [#442](https://github.com/Sludging/idleon-efficiency/issues/442) was accepted as complete on 2026-10-15. Parent [#440](https://github.com/Sludging/idleon-efficiency/issues/440) remains open. Parts 3–7 remain open and unselected. Acceptance, execution evidence, and limits remain in the [current handoff](hole-research-brief.md#current-handoff).
+**Status:** APPROVED PRODUCT/DELIVERY SCOPE / PUBLISHED / PARTS 1–3 COMPLETE — Original approval recorded on 2026-10-12. Part 1 [#441](https://github.com/Sludging/idleon-efficiency/issues/441) was accepted as complete on 2026-10-14; part 2 [#442](https://github.com/Sludging/idleon-efficiency/issues/442) was accepted as complete on 2026-10-15; part 3 [#443](https://github.com/Sludging/idleon-efficiency/issues/443) was accepted as complete on 2026-10-16. Parent [#440](https://github.com/Sludging/idleon-efficiency/issues/440) remains open. Parts 4–7 remain open and unselected. Acceptance, execution evidence, and limits remain in the [current handoff](hole-research-brief.md#current-handoff).
 
 **Scope sources:** [Approved research brief](hole-research-brief.md) and [approved product specification](hole-spec-draft.md).
 
@@ -92,10 +92,12 @@ Every part follows these boundaries:
 
 ### Acceptance outcomes
 
-- [ ] Players can inspect all four released skilling caverns and distinguish dedicated current progress, required/remaining resources, completed layers/depths, earned Opals, and claim readiness; full progress does not imply an automatic claim.
-- [ ] Players can compare each character's correct skill efficiency with the cavern's displayed requirement, separately from required resource quantity and account-wide progress.
-- [ ] Players see one shared layer-claim counter across all four caverns, separate from Lantern uses; the source-six/Wiki-five limit conflict remains explicit until verified, not silently converted into a definitive remaining allowance.
-- [ ] Players can inspect Motherlode lifetime ore and owned layer/Study/schematic synergies, including Well, Harp, cross-skilling reductions, and Fountain effects, without substituting current resources for completed progression.
+- [x] Players can inspect all four released skilling caverns and distinguish dedicated current progress, required/remaining resources, completed layers/depths, earned Opals, and claim readiness; full progress does not imply an automatic claim.
+- [x] Players can compare each character's correct skill efficiency with the cavern's displayed requirement, separately from required resource quantity and account-wide progress.
+- [x] Players see one shared layer-claim counter across all four caverns, separate from Lantern uses; the source-six/Wiki-five limit conflict remains explicit and does not imply a verified remaining allowance.
+- [x] Players can inspect Motherlode lifetime ore and owned layer/Study/schematic synergies, including Well, Harp, cross-skilling reductions, and Fountain effects, without substituting current resources for completed progression.
+
+**Accepted limits:** Part 3 acceptance covers the implemented backend and UI outcomes, not verified assigned-character game parity, live claim/reset behavior, or all-cavern parity. The source-six versus Wiki-five conflict remains unresolved; no maximum, remaining allowance, or claim availability is asserted. See the [current handoff](hole-research-brief.md#part-3-ui-acceptance-and-local-settlement--2026-10-16) for accepted evidence, explicit limits, and settlement. Issues [#443](https://github.com/Sludging/idleon-efficiency/issues/443) and [#440](https://github.com/Sludging/idleon-efficiency/issues/440) remain open.
 
 **Data note:** Resolve displayed threshold scaling, character efficiency inputs, shared-counter/reset semantics, and the six-versus-five daily limit within this part. A missing Wiki threshold table is not evidence of no requirement; unknowns must not become zero or scope omissions.
 
@@ -201,4 +203,4 @@ The original product/delivery approval changed scope documents only. It ran no b
 
 The human approved the [product specification](hole-spec-draft.md) and these seven delivery parts on 2026-10-12, and authorized publication. That approval settled product and delivery scope only. At publication, all seven parts were unselected and stopped; no ready-for-agent label or execution authorization followed from publication.
 
-The human later selected the three-tab IA on 2026-10-12 and separately authorized parts 1 and 2 through completion. Part 1 was accepted on 2026-10-14; part 2 was accepted on 2026-10-15. The [handoff](hole-research-brief.md#current-handoff) retains their approvals, results, and check limits. Parts 3–7 remain open and unselected; no other part is authorized. The rejected historical rail preview remains historical, not selected-direction proof.
+The human later selected the three-tab IA on 2026-10-12 and separately authorized parts 1, 2, and 3 through completion. Part 1 was accepted on 2026-10-14; part 2 was accepted on 2026-10-15; part 3 was accepted on 2026-10-16. The [handoff](hole-research-brief.md#current-handoff) retains approvals, results, and check limits. Parts 4–7 remain open and unselected; no other part is authorized. The rejected historical rail preview remains historical, not selected-direction proof.
