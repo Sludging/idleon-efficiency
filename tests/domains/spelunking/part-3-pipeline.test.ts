@@ -6,6 +6,7 @@ import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import type { Player } from '../../../data/domain/player';
 import { normalizeCompanionStates } from '../../../data/domain/companions/companionState';
 import { saved } from './part-2-test-helpers';
+import type { Cooking } from '../../../data/domain/world-4/cooking';
 
 interface AccountRun {
     data: Map<string, unknown>;
@@ -49,7 +50,8 @@ function part3Snapshot(data: Map<string, unknown>): string {
         elixirs: [owner.elixirs.equippedSlots, owner.elixirs.memorizedIndices, owner.elixirs.ownedCount,
             owner.elixirs.slotLimit, owner.elixirs.duplicateLimit, owner.elixirs.memorizeLimit,
             owner.elixirs.consumptionReduction, owner.elixirs.descriptions],
-        upgrades: owner.upgrades.map(upgrade => [upgrade.index, upgrade.sourceBonus]),
+        upgrades: owner.upgrades.map(upgrade => [upgrade.index, upgrade.sourceBonus,
+            upgrade.nextCost, upgrade.costToMax, upgrade.costNext10, upgrade.remainingCap]),
         observations: [owner.spelunkingSkillLevelTotal, owner.bestDepthTotal, owner.biggestHaulDigitTotal,
             owner.grandDiscoveryCount, owner.exaltedStampFragments, owner.prismaBubblesFound,
             owner.exaltDropChanceDenominator, owner.prismaDropChanceDenominator, owner.deepPocketsMultiplier,
@@ -388,6 +390,54 @@ describe('Spelunking Part 3 normal account factory and repeated processing', () 
         [44, 45, 46].forEach(index => {
             expect(owner.upgrades[index].sourceBonus).toBe(owner.getUpgradeBonus(index) * grandCount);
         });
+    });
+
+    it('prepares quotes from account producers and refreshes them for changed first-user input', () => {
+        const run = freshAccount();
+        let data = run.data;
+        const owner = data.get('spelunking') as Spelunking;
+        const players = data.get('players') as Player[];
+        const savedPlayerNames = readArrayField<string[]>(run.save, 'playerNames');
+        const firstSavedPlayer = players.find(player => player.playerName === savedPlayerNames[0]);
+        expect(firstSavedPlayer).toBeDefined();
+        const firstPlayer = firstSavedPlayer!;
+        const firstLevelSave = copySave(run.save);
+        const firstPlayerSkillLevels = readArrayField<(number | string)[]>(
+            firstLevelSave, `Lv0_${firstPlayer.playerID}`
+        );
+        const oldSkillLevel = Number(firstPlayerSkillLevels[SkillsIndex.Spelunking]);
+        const newSkillLevel = oldSkillLevel < 50 ? 50 : 0;
+        firstPlayerSkillLevels[SkillsIndex.Spelunking] = newSkillLevel;
+        replaceArrayField(firstLevelSave, `Lv0_${firstPlayer.playerID}`, firstPlayerSkillLevels);
+
+        const initialCost = owner.upgrades[0].nextCost;
+        expect(initialCost).toBeDefined();
+        const cooking = data.get('cooking') as Cooking;
+        const mealBonus = cooking.getMealBonusForKey('SplkUpg');
+        const oldMealScale = Math.min(2, Math.max(1, 1 + Math.floor(oldSkillLevel / 50)));
+        const newMealScale = Math.min(2, Math.max(1, 1 + Math.floor(newSkillLevel / 50)));
+
+        data = processSave(run, data, firstLevelSave);
+        const updatedOwner = data.get('spelunking') as Spelunking;
+        const updatedCost = updatedOwner.upgrades[0].nextCost;
+        expect(updatedCost).toBeDefined();
+        if (mealBonus > 0 && oldMealScale !== newMealScale) {
+            expect(updatedCost).not.toBe(initialCost);
+        }
+        expect(updatedOwner.canAffordUpgrade(updatedOwner.upgrades[0], 0)).toBe(true);
+        updatedOwner.prepareUpgradePrices(undefined);
+        expect(updatedOwner.upgrades.every(upgrade => upgrade.nextCost === undefined
+            && upgrade.costToMax === undefined && upgrade.costNext10 === undefined)).toBe(true);
+
+        const noAmberSave = copySave(firstLevelSave);
+        const noAmberSpelunking = readArrayField<(number | string)[][]>(noAmberSave, 'Spelunk');
+        noAmberSpelunking[4][0] = 0;
+        replaceArrayField(noAmberSave, 'Spelunk', noAmberSpelunking);
+        data = processSave(run, data, noAmberSave);
+        const noAmberOwner = data.get('spelunking') as Spelunking;
+        expect(noAmberOwner.ownedAmber).toBe(0);
+        expect(noAmberOwner.upgrades[0].nextCost).toBe(updatedCost);
+        expect(noAmberOwner.canAffordUpgrade(noAmberOwner.upgrades[0])).toBe(false);
     });
 
     it('keeps Part 3 observations stable across fresh factories and repeated normal processing', () => {

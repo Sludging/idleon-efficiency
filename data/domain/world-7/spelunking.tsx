@@ -35,10 +35,47 @@ import type { BigFish } from "./bigFish";
 import type { LegendTalents } from "./legendTalents";
 import type { Meritocraty } from "./meritocraty";
 import type { SushiStation } from "./sushi";
+import type { Cooking } from "../world-4/cooking";
+import type { JellyOperator } from "./jellyOperator";
 
 const ELIXIR_EFFECT_QUANTITIES = [25, 1, 30, 1, 20, 60, 25, 30, 1, 1, 1, 0];
 const GRAND_DISCOVERIES_PER_TUNNEL = 10;
 const GRAND_DISCOVERY_UPGRADE_INDEX = 43;
+const UNBOUNDED_UPGRADE_LEVEL = 99_999;
+
+export interface SpelunkingUpgradeCostInputs {
+    talentDiscount: number;
+    mealDiscount: number;
+    retention: number;
+}
+
+const getLevelSquareSum = (start: number, count: number): number => {
+    const squarePrefix = (level: number): number => level * (level + 1) * (2 * level + 1) / 6;
+    return squarePrefix(start + count - 1) - squarePrefix(start - 1);
+};
+
+const getWeightedLevelPowerSum = (increment: number, start: number, count: number): number => {
+    if (increment === 1) {
+        return count * (10 + start) + count * (count - 1) / 2;
+    }
+
+    // Directly sum near-one powers to avoid cancellation in the closed form.
+    if (Math.abs(increment - 1) < 1e-5) {
+        let sum = 0;
+        let power = 1;
+        for (let offset = 0; offset < count; offset++) {
+            sum += (10 + start + offset) * power;
+            power *= increment;
+        }
+        return Math.pow(increment, start) * sum;
+    }
+
+    const power = Math.pow(increment, count);
+    const geometricSum = (power - 1) / (increment - 1);
+    const weightedOffsetSum = (increment - count * power + (count - 1) * power * increment)
+        / Math.pow(1 - increment, 2);
+    return Math.pow(increment, start) * ((10 + start) * geometricSum + weightedOffsetSum);
+};
 
 export class AmberDenomination {
     private readonly imageData: ImageData;
@@ -367,6 +404,17 @@ export interface UpgradeSourceBonusInputs {
 export class Upgrade {
     public level: number = -1;
     public sourceBonus: number = 0;
+    public nextCost: number | undefined;
+    public costToMax: number | undefined;
+    public costNext10: number | undefined;
+    private costInputs: SpelunkingUpgradeCostInputs | undefined;
+
+    get remainingCap(): number | undefined {
+        return this.data.maxLevel === UNBOUNDED_UPGRADE_LEVEL
+            ? undefined
+            : Math.max(0, this.data.maxLevel - this.level);
+    }
+
 
     constructor(public index: number, public data: SpelunkingUpgradeModel) {
     }
@@ -385,6 +433,92 @@ export class Upgrade {
 
     getBonus(): number {
         return this.data.bonusPerLevel * this.purchasedLevel;
+    }
+    prepareCostQuotes(inputs: SpelunkingUpgradeCostInputs | undefined): void {
+        this.costInputs = inputs;
+        this.nextCost = this.getCost();
+        this.costToMax = this.getCostToMax();
+        this.costNext10 = this.getCostForNextNLevels();
+    }
+
+    getCost(level: number = this.level): number | undefined {
+        if (!this.costInputs) {
+            return undefined;
+        }
+        const factor = this.getCostFactor(level, this.costInputs);
+        if (level === -1) {
+            return factor;
+        }
+        return 0.25 * factor * Math.pow(this.data.costIncrement, level)
+            + Math.pow(level, 2) + 5 * level;
+    }
+
+    getCostForNextNLevels(levelCount: number = 10): number | undefined {
+        if (!this.costInputs) {
+            return undefined;
+        }
+        const remainingCap = this.remainingCap;
+        const purchaseCount = remainingCap === undefined
+            ? Math.max(0, levelCount)
+            : Math.min(Math.max(0, levelCount), remainingCap);
+        let total = 0;
+        for (let offset = 0; offset < purchaseCount; offset++) {
+            total += this.getCost(this.level + offset)!;
+        }
+        return total;
+    }
+
+    getCostToMax(): number | undefined {
+        const remainingCap = this.remainingCap;
+        if (!this.costInputs || remainingCap === undefined) {
+            return undefined;
+        }
+        if (remainingCap === 0) {
+            return 0;
+        }
+
+        let total = 0;
+        let firstLevel = this.level;
+        let normalLevelCount = remainingCap;
+        if (this.level === -1) {
+            total = this.getCost(-1)!;
+            firstLevel = 0;
+            normalLevelCount--;
+        }
+        if (normalLevelCount === 0) {
+            return total;
+        }
+
+        const increment = this.data.costIncrement;
+        const weightedLevels = getWeightedLevelPowerSum(increment, firstLevel, normalLevelCount);
+        const levelSum = normalLevelCount * (2 * firstLevel + normalLevelCount - 1) / 2;
+        const levelSquareSum = getLevelSquareSum(firstLevel, normalLevelCount);
+        const factor = this.getCostBaseFactor(this.costInputs);
+        return total + 0.25 * factor * weightedLevels + levelSquareSum + 5 * levelSum;
+    }
+
+    private getCostFactor(level: number, inputs: SpelunkingUpgradeCostInputs): number {
+        let factor = inputs.talentDiscount * inputs.mealDiscount * (10 + level) * this.data.costBase
+            * inputs.retention * Math.pow(9.5, this.data.column) * Math.pow(6.3, this.data.x2);
+        if (this.index >= 52) {
+            factor *= 1e7;
+        }
+        if (this.index >= 66) {
+            factor *= 1e9;
+        }
+        return factor;
+    }
+
+    private getCostBaseFactor(inputs: SpelunkingUpgradeCostInputs): number {
+        let factor = inputs.talentDiscount * inputs.mealDiscount * this.data.costBase * inputs.retention
+            * Math.pow(9.5, this.data.column) * Math.pow(6.3, this.data.x2);
+        if (this.index >= 52) {
+            factor *= 1e7;
+        }
+        if (this.index >= 66) {
+            factor *= 1e9;
+        }
+        return factor;
     }
 
     updateSourceBonus(inputs: UpgradeSourceBonusInputs): void {
@@ -739,6 +873,16 @@ export class Spelunking extends Domain {
     getUpgradeBonus(index: number): number {
         return this.upgrades.find(upgrade => upgrade.index === index)?.getBonus() ?? 0;
     }
+    prepareUpgradePrices(inputs: SpelunkingUpgradeCostInputs | undefined): void {
+        for (const upgrade of this.upgrades) {
+            upgrade.prepareCostQuotes(inputs);
+        }
+    }
+
+    canAffordUpgrade(upgrade: Upgrade, cost?: number): boolean {
+        const quote = cost ?? upgrade.nextCost;
+        return quote !== undefined && this.ownedAmber >= quote;
+    }
     getEffectiveUpgradeBonus(index: number): number {
         return this.upgrades.find(upgrade => upgrade.index === index)?.getEffectiveBonus(
             this.manic.totalDepth, this.trackometerLevel
@@ -946,6 +1090,30 @@ export const updateSpelunkingPresentation = (data: Map<string, any>): void => {
     };
     for (const upgrade of spelunking.upgrades) {
         upgrade.updateSourceBonus(sourceBonusInputs);
+    }
+    const savedPlayerNames = data.get("playerNames") as string[];
+    const firstSavedUsernamePlayer = players.find(player => player.playerName === savedPlayerNames[0]);
+    if (!firstSavedUsernamePlayer) {
+        spelunking.prepareUpgradePrices(undefined);
+    }
+    else {
+        const cooking = data.get("cooking") as Cooking;
+        const jellyOperator = data.get("jellyOperator") as JellyOperator;
+        let maximumTalentBonus = 0;
+        for (const player of players) {
+            maximumTalentBonus = Math.max(maximumTalentBonus,
+                player.getTalentBonusAtInputs(235, player.finalTalentInputs));
+        }
+
+        const talentDiscount = 1 / (1
+            + Math.max(0, maximumTalentBonus * royalArmory.getTotalRoyalStatueLevels()) / 100);
+        const mealLevelScale = Math.min(2,
+            Math.max(1, 1 + Math.floor(firstSavedUsernamePlayer.skills.get(SkillsIndex.Spelunking)!.level / 50)));
+        const mealDiscount = 1 / (1 + cooking.getMealBonusForKey("SplkUpg") * mealLevelScale / 100);
+        const retention = Math.max(0.1, 1
+            - (Math.max(sushi.getBonusFromIndex(6), sushi.getBonusFromIndex(27))
+                + jellyOperator.getObstructionBonus(22)) / 100);
+        spelunking.prepareUpgradePrices({ talentDiscount, mealDiscount, retention });
     }
 
     const upgrade5 = spelunking.getUpgradeBonus(5);
