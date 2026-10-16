@@ -57,6 +57,8 @@ import { HoleCurrencyModel } from "../../model/holeCurrencyModel";
 import { initGodInfoRepo } from "../../data/GodInfoRepo";
 import type { Divinity } from "../divinity";
 import type { ImageData } from "../../imageData";
+import { SkillsIndex } from "../../SkillsIndex";
+import type { Skilling, SkillingSkill } from "../../skilling";
 
 export interface HoleUpgradeEffect {
  key: string;
@@ -1185,12 +1187,30 @@ export class Bell {
  }
 }
 
+export interface HoleCharacterCapability {
+ playerID: number;
+ playerName: string;
+ skill: SkillingSkill;
+ efficiency: number;
+ meetsThreshold: boolean | null;
+}
+
 export class ResourceCavren {
  layer: number = 0;
+ layerState: number | null = null;
  resourceExtracted: number = 0;
+ resourceCurrent: number | null = null;
+ completedLayers: number | null = null;
+ resourceRequirement: number | null = null;
+ resourceRemaining: number | null = null;
+ resourceRequirementMet: boolean | null = null;
+ efficiencyThreshold: number | null = null;
  efficiencyType: string = "";
+ readonly cavernId: number;
+ characterCapabilities: HoleCharacterCapability[] = [];
 
  constructor(public index: number, public name: string, public resource: string) {
+  this.cavernId = [1, 7, 11, 16][index];
   switch (resource) {
    case "Ores":
     this.efficiencyType = "Mining";
@@ -1209,6 +1229,65 @@ export class ResourceCavren {
     break;
   }
  }
+
+ parse(savedHole: number[][]): void {
+  const current = savedHole[11]?.[this.index * 2];
+  const layerState = savedHole[11]?.[this.index * 2 + 1];
+  const completedLayers = savedHole[7]?.[this.cavernId];
+  this.resourceCurrent = current == null ? null : Number(current);
+  this.layerState = layerState == null ? null : Number(layerState);
+  this.completedLayers = completedLayers == null ? null : Number(completedLayers);
+  this.layer = this.layerState ?? 0;
+  this.resourceExtracted = this.resourceCurrent ?? 0;
+  this.resourceRequirement = null;
+  this.resourceRemaining = null;
+  this.resourceRequirementMet = null;
+  this.efficiencyThreshold = null;
+ }
+
+ prepare(reductions: number | null): void {
+  if (this.layerState === null) {
+   this.efficiencyThreshold = null;
+   this.resourceRequirement = null;
+   this.resourceRemaining = null;
+   this.resourceRequirementMet = null;
+   return;
+  }
+
+  this.efficiencyThreshold = 0.25 * 20000 * (1 + 99 * Math.floor(this.index / 3))
+   * Math.pow(1.8, 1 + this.layerState);
+  if (reductions === null || this.resourceCurrent === null) {
+   this.resourceRequirement = null;
+   this.resourceRemaining = null;
+   this.resourceRequirementMet = null;
+   return;
+  }
+
+  const requirementBase = (1 + 99 * Math.floor(this.index / 3)) * 200;
+  this.resourceRequirement = requirementBase * Math.pow(2.2, 1 + this.layerState) / (1 + reductions / 100);
+  this.resourceRemaining = Math.max(0, this.resourceRequirement - this.resourceCurrent);
+  this.resourceRequirementMet = this.resourceCurrent >= this.resourceRequirement;
+ }
+
+ prepareCharacterCapabilities(players: Player[], assignments: (number | null)[], skilling: Skilling): void {
+  this.characterCapabilities = [];
+  const skill = ([SkillsIndex.Mining, SkillsIndex.Catching, SkillsIndex.Chopping, SkillsIndex.Fishing] as const)[this.index]!;
+
+  assignments.forEach((assignedCavernId, playerIndex) => {
+   if (assignedCavernId !== this.cavernId) return;
+   const player = players.find(candidate => candidate.playerID === playerIndex);
+   if (!player) return;
+
+   const efficiency = skilling.getSkillEfficiency(player.playerID, skill);
+   this.characterCapabilities.push({
+    playerID: player.playerID,
+    playerName: player.playerName,
+    skill,
+    efficiency,
+    meetsThreshold: this.efficiencyThreshold === null ? null : efficiency >= this.efficiencyThreshold,
+   });
+  });
+ }
 }
 
 export class ResourceCavrens {
@@ -1217,19 +1296,27 @@ export class ResourceCavrens {
   "The Hive": new ResourceCavren(1, "The Hive", "Bugs"),
   "Evertree": new ResourceCavren(2, "Evertree", "Logs"),
   "The Bottomless Trench": new ResourceCavren(3, "The Bottomless Trench", "Fish"),
+ };
+ lifetimeMotherlodeOre: number | null = null;
+ sharedClaimCounter: number | null = null;
+ characterAssignments: (number | null)[] | null = null;
 
+ parse(savedHole: number[][], optionListAccount: number[], assignments: number[]): void {
+  Object.values(this.cavrens).forEach(cavern => cavern.parse(savedHole));
+  const lifetimeOre = savedHole[11]?.[32];
+  const claimCounter = optionListAccount[318];
+  this.lifetimeMotherlodeOre = lifetimeOre == null ? null : Number(lifetimeOre);
+  this.sharedClaimCounter = claimCounter == null ? null : Number(claimCounter);
+  this.characterAssignments = assignments.map(assignment => assignment == null ? null : Number(assignment));
  }
 
- parse(extraCalculations: number[] = []): void {
-  Object.values(this.cavrens).forEach(cavren => {
-   cavren.layer = extraCalculations[cavren.index * 2 + 1] || 0;
-   cavren.resourceExtracted = extraCalculations[cavren.index * 2] || 0;
-  });
+ prepare(reductions: number | null): void {
+  Object.values(this.cavrens).forEach(cavern => cavern.prepare(reductions));
  }
 
  getTotalResourceLayers(): number {
   return Object.values(this.cavrens).reduce(
-   (sum, cavren) => sum + Math.round(Math.max(0, cavren.layer)),
+   (sum, cavern) => sum + Math.round(Math.max(0, cavern.layer)),
    0,
   );
  }
@@ -1443,9 +1530,20 @@ export class Hole extends Domain {
   return this.researchExpUpgradeLevel * holeResearchExpUpgradeBasePercent;
  }
 
- // TODO: 
- // Well - DONE?
- // Caverns
+ getResourceRequirementReduction(): number | null {
+  const studyIds = [1, 7, 11, 16];
+  const progressionIndices = [1, 3, 5, 7];
+  const studies = studyIds.map(index => this.studies[index]);
+  const caverns = Object.values(this.resourceCavrens.cavrens);
+  if (!this.sourceSaveAvailable.collectibles || studies.some(study => !study.levelAvailable) ||
+   progressionIndices.some(index => caverns[Math.floor(index / 2)].layerState === null)) {
+   return null;
+  }
+
+  return this.jar.getBonus(5) + studies.reduce((sum, study, index) =>
+   sum + study.getBonus() * caverns[index].layerState!, 0);
+ }
+
  // Engineer - DONE?
  // Bravery
  // Bell
@@ -1974,9 +2072,7 @@ export class Hole extends Domain {
    bonus.level = holeData[17][bonus.index] || 0;
   });
 
-  // Resource Caverns
-  // TODO: Calculate required efficiency, and required resource for next layer.
-  hole.resourceCavrens.parse(holeData[11] || []);
+  hole.resourceCavrens.parse(holeData, optionListAccount, hole.playerLocationData);
 
   hole.well.parse(hole, holeData);
   // TODO: Finish this, missing information
@@ -2052,6 +2148,7 @@ export const updateHole = (data: Map<string, any>) => {
   hole.gambit.gambitPointsMulti = 1 + gambitMultipliers / 100;
  }
  hole.gambit.updateUnlockedBonuses();
+ hole.resourceCavrens.prepare(hole.getResourceRequirementReduction());
 }
 
 export const updateHoleStudyEffects = (data: Map<string, any>): void => {
@@ -2129,4 +2226,16 @@ export const updateHolePresentation = (data: Map<string, any>): void => {
   summoningPercent: summoning.getSummoningWinnerBonusFromIndex(21), vaultPercent: vault.getBonusForId(73),
  });
  hole.prepareUpgradeInspection(players, data.get("divinity") as Divinity);
+};
+
+export const updateHoleCharacterCapabilities = (data: Map<string, any>): void => {
+ const hole = data.get("hole") as Hole;
+ const players = data.get("players") as Player[];
+ const skilling = data.get("skilling") as Skilling;
+ const resourceCavrens = hole.resourceCavrens;
+ const assignments = resourceCavrens.characterAssignments ?? [];
+
+ Object.values(resourceCavrens.cavrens).forEach(cavern => {
+  cavern.prepareCharacterCapabilities(players, assignments, skilling);
+ });
 };

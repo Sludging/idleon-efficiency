@@ -1,5 +1,4 @@
 import { Card } from "./cards";
-import type { GoldenFood } from "./golden-food";
 import { Companion, getCompanionActiveBonus } from "./companions";
 import { Domain, RawData } from "./base/domain";
 import { Family } from "./family";
@@ -9,13 +8,14 @@ import { SkillsIndex } from "./SkillsIndex";
 import { Prayer } from "./world-3/prayers";
 import { ShrineConstants, Shrine } from "./world-3/construction/shrines";
 import { PlayerStatues, StatueConst } from "./world-1/statues";
-import { ClassIndex } from "./talents";
+import { ClassIndex, getRightHandOfActionBonus } from "./talents";
 import { ImageData } from "./imageData";
 import { Divinity } from "./world-5/divinity";
 import { Achievement } from "./achievements";
 import { Rift, SkillMastery } from "./world-4/rift";
 import { Breeding } from "./world-4/breeding";
 import { Worship, TotalizerBonus } from "./world-3/worship";
+import { Votes } from "./world-2/votes";
 import { Summoning } from "./world-6/summoning";
 import { Guild } from './guild';
 import { Cooking } from "./world-4/cooking";
@@ -29,9 +29,215 @@ import { Friends } from "./friends";
 import { Hole } from "./world-5/hole/hole";
 import { Hoops } from "./world-1/hoops";
 import { IslandExpeditions } from "./world-2/islandExpedition";
+import { Poppy } from "./world-2/poppy";
+import { getStampBonusForKey, Stamp } from "./world-1/stamps";
+import { EquipmentSets } from "./misc/equipmentSets";
+import { AtomCollider } from "./world-3/construction/atomCollider";
+import { Storage } from "./storage";
+import { Lab } from "./world-4/lab";
+import { GoldenFood } from "./golden-food";
+import { Bribe } from "./world-1/bribes";
+import { getStatCards, type SkillStatsDNSkill } from "./player-stats";
+import { lavaLog } from "../utility";
+export type SkillingSkill = SkillStatsDNSkill;
+
+
+const getStarSignEfficiency = (player: Player, bonusText: string): number =>
+    player.starSigns.reduce((total, sign) => total + sign.getBonus(bonusText), 0);
+
+
 
 export class Skilling extends Domain {
     private allEfficiencies = new Map<number, number>();
+    private skillEfficiencies = new Map<number, Record<SkillingSkill, number>>();
+    private allBaseSkillEfficiencies = new Map<number, number>();
+
+    getSkillEfficiency(playerID: number, skill: SkillingSkill): number {
+        const result = this.skillEfficiencies.get(playerID)?.[skill];
+        if (result === undefined) {
+            throw new Error(`Skill efficiency has not been calculated for player ${playerID} and skill ${skill}`);
+        }
+        return result;
+    }
+
+    getAllBaseSkillEfficiency(player: Player): number {
+        const result = this.allBaseSkillEfficiencies.get(player.playerID);
+        if (result === undefined) {
+            throw new Error(`AllBaseSkillEff has not been calculated for player ${player.playerID}`);
+        }
+        return result;
+    }
+
+    updateSkillEfficiencies(data: Map<string, any>): void {
+        const players = data.get("players") as Player[];
+        const stamps = data.get("stamps") as Stamp[][];
+        const breeding = data.get("breeding") as Breeding;
+        const divinity = data.get("divinity") as Divinity;
+        const alchemy = data.get("alchemy") as Alchemy;
+        const hole = data.get("hole") as Hole;
+        const skillMastery = (data.get("rift") as Rift).bonuses.find(bonus => bonus.name === "Skill Mastery") as SkillMastery;
+        const votes = data.get("votes") as Votes;
+        const equipmentSets = data.get("equipmentSets") as EquipmentSets;
+        const goldenFood = data.get("goldenFood") as GoldenFood;
+        const atomCollider = data.get("collider") as AtomCollider;
+        const storage = data.get("storage") as Storage;
+        const achievements = data.get("achievements") as Achievement[];
+        const bribes = data.get("bribes") as Bribe[];
+        const lab = data.get("lab") as Lab;
+        const sneaking = data.get("sneaking") as Sneaking;
+
+        const atomEfficiency = atomCollider.atoms.find(atom => atom.index === 1)!.getBonus();
+        const fishingRooBonus = (data.get("poppy") as Poppy).getGlobalBonus(0);
+        const fishingBribe = bribes.find(bribe => bribe.bribeIndex === 29)!.getBonus();
+
+        this.skillEfficiencies.clear();
+        this.allBaseSkillEfficiencies.clear();
+        for (const player of players) {
+            const postOfficeBox = player.postOffice.find(box => box.index === 20)!;
+            const allBaseSkillEfficiency = breeding.shinyBonuses.find(bonus => bonus.data.index === 22)!.getBonus()
+                + getStampBonusForKey(stamps, "BaseAllEff")
+                + divinity.gods.find(god => god.index === 2)!.getBlessingBonus(player)
+                + (postOfficeBox.bonuses[1].getBonus(postOfficeBox.level, 1)
+                    + (player.getChipBonus("eff") + (player.getTalentBonus(636)
+                        + lab.jewels[12].getBonus())));
+            this.allBaseSkillEfficiencies.set(player.playerID, allBaseSkillEfficiency);
+
+            const miningLevel = player.skills.get(SkillsIndex.Mining)!.level;
+            const choppingLevel = player.skills.get(SkillsIndex.Chopping)!.level;
+            const fishingLevel = player.skills.get(SkillsIndex.Fishing)!.level;
+            const catchingLevel = player.skills.get(SkillsIndex.Catching)!.level;
+            const miningPower = player.stats.getSkillStatsDN(SkillsIndex.Mining);
+            const choppingPower = player.stats.getSkillStatsDN(SkillsIndex.Chopping);
+            const fishingPower = player.stats.getSkillStatsDN(SkillsIndex.Fishing);
+            const catchingPower = player.stats.getSkillStatsDN(SkillsIndex.Catching);
+            const strength = player.stats.strength;
+            const agility = player.stats.agility;
+            const wisdom = player.stats.wisdom;
+            const miningTalent142 = player.getTalentBonus(142);
+            const miningTalent101 = player.getTalentBonus(101);
+            const rightHandMining = getRightHandOfActionBonus(players, player, SkillsIndex.Mining);
+            const rightHandChopping = getRightHandOfActionBonus(players, player, SkillsIndex.Chopping);
+            const rightHandFishing = getRightHandOfActionBonus(players, player, SkillsIndex.Fishing);
+            const rightHandCatching = getRightHandOfActionBonus(players, player, SkillsIndex.Catching);
+            const allEfficiencies = this.getAllEfficiencies(player);
+            const statCards = getStatCards(player);
+            const cardBonus = (index: number) => Card.GetTotalBonusForId(statCards, index);
+            const achievement = (index: number) => achievements.find(value => value.index === index)!;
+            const copperSet = equipmentSets.getSetBonus("COPPER_SET", player, true);
+            const platinumSet = equipmentSets.getSetBonus("PLATINUM_SET", player, true);
+            const starSignMining = getStarSignEfficiency(player, "Mining Efficiency");
+            const starSignChopping = getStarSignEfficiency(player, "Chop Efficiency");
+            const starSignFishing = getStarSignEfficiency(player, "Fishing Efficiency");
+            const starSignCatching = getStarSignEfficiency(player, "Catch Efficiency");
+            const baseMiningStamp = getStampBonusForKey(stamps, "BaseMinEff");
+            const baseChoppingStamp = getStampBonusForKey(stamps, "BaseChopEff");
+            const baseFishingStamp = getStampBonusForKey(stamps, "BaseFishEff");
+            const baseCatchingStamp = getStampBonusForKey(stamps, "BaseCatchEff");
+            const miningVial = alchemy.getVialBonusForKey("MinEff");
+            const choppingVial = alchemy.getVialBonusForKey("ChopEff");
+            const fishingVial = alchemy.getVialBonusForKey("FishEff");
+            const catchingVial = alchemy.getVialBonusForKey("CatchEff");
+            const miningBubble = alchemy.getBubbleBonusForKey("MinEff", player);
+            const choppingBubble = alchemy.getBubbleBonusForKey("ChopEff", player);
+            const miningMonument = hole.getMonumentBonus("Bravery", 0);
+            const choppingMonument = hole.getMonumentBonus("Wisdom", 0);
+            const catchingMonument = hole.getMonumentBonus("Justice", 0);
+            const miningExtraEfficiency = 1;
+            const miningAtomLog = lavaLog(storage.amountInStorage("Copper"));
+            const choppingLog = lavaLog(storage.amountInStorage("Leaf1"));
+            const catchingLog = lavaLog(storage.amountInStorage("OakTree"));
+            const miningGoldFood = goldenFood.getSkillEfficiencyMultiplier(player, sneaking, "MiningEff");
+            const fishingGoldFood = goldenFood.getSkillEfficiencyMultiplier(player, sneaking, "FishingEff");
+            const miningSkillEffPct = player.getPostOfficeBonus("MinEffPct");
+            const choppingSkillEffPct = player.getPostOfficeBonus("ChopEffPct");
+            const fishingSkillEffPct = player.getPostOfficeBonus("FishEffPct");
+            const catchingSkillEffPct = player.getPostOfficeBonus("CatchEffPct");
+            const miningRiftBonus = skillMastery.getSkillBonus(SkillsIndex.Mining, 1);
+            const choppingRiftBonus = skillMastery.getSkillBonus(SkillsIndex.Chopping, 1);
+            const fishingRiftBonus = skillMastery.getSkillBonus(SkillsIndex.Fishing, 1);
+            const catchingRiftBonus = skillMastery.getSkillBonus(SkillsIndex.Catching, 1);
+
+            const miningEfficiency = 12 + (Math.pow(miningPower, 1.3) +
+                (Math.pow(strength + 1, 0.6) * (1 + miningTalent142 / 100) +
+                    (baseMiningStamp + allBaseSkillEfficiency))) *
+                (1 + miningLevel / 200) *
+                (1 + (miningSkillEffPct + rightHandMining) / 100) *
+                (1 + Math.pow(strength / 100, 0.35) * (1 + miningTalent142 / 100)) *
+                miningGoldFood *
+                (1 + (player.getTalentBonus(85) +
+                    (player.gear.getBonus(EquipmentBonus.MiningEfficiency) +
+                        (miningRiftBonus + (votes.getCurrentBonus(7) + copperSet)))) / 100) *
+                (1 + (cardBonus(24) +
+                    (starSignMining + (miningVial + miningMonument))) / 100) *
+                (1 + miningPower / 100) *
+                miningExtraEfficiency *
+                (1 + miningBubble / 100) *
+                (1 + (miningTalent101 * (atomEfficiency + miningAtomLog)) / 100) *
+                allEfficiencies;
+
+            const choppingEfficiency = 8 + (Math.pow(choppingPower, 1.3) +
+                (Math.pow((wisdom + 2) * (1 + player.getTalentBonus(462) / 100) *
+                    (1 + player.getTalentBonus(532) / 100), 0.6) +
+                    (baseChoppingStamp + allBaseSkillEfficiency))) *
+                (1 + choppingLevel / 200) *
+                (1 + (choppingSkillEffPct + rightHandChopping + starSignChopping) / 100) *
+                (1 + (choppingBubble + choppingMonument) / 100) *
+                (1 + Math.pow((wisdom * (1 + player.getTalentBonus(462) / 100)) / 100, 0.35) *
+                    (1 + player.getTalentBonus(532) / 100)) *
+                (1 + (player.getTalentBonus(445) +
+                    (player.gear.getBonus(EquipmentBonus.ChopEfficiency) +
+                        (choppingRiftBonus + (votes.getCurrentBonus(9) + copperSet)))) / 100) *
+                (1 + (cardBonus(27) + (choppingVial + 10 * (achievement(352).completed ? 1 : 0))) / 100) *
+                (1 + choppingPower / 100) *
+                (1 + (player.getTalentBonus(461) * choppingLog) / 100) *
+                allEfficiencies;
+
+            const fishingEfficiency = (Math.pow(fishingPower, 1.3) +
+                (Math.pow(strength, 0.6) * (1 + miningTalent142 / 100) +
+                    (baseFishingStamp + allBaseSkillEfficiency))) *
+                (1 + fishingLevel / 200) *
+                (1 + Math.pow(strength / 100, 0.35) *
+                    (1 + (miningTalent142 +
+                        (fishingRiftBonus + (votes.getCurrentBonus(8) + platinumSet)) +
+                        15 * fishingBribe +
+                        getStampBonusForKey(stamps, "FishEffPerLv") * fishingLevel) / 100)) *
+                (1 + (fishingSkillEffPct + rightHandFishing) / 100) *
+                (1 + fishingPower / 100) *
+                allEfficiencies *
+                fishingGoldFood *
+                (1 + (cardBonus(30) + fishingVial +
+                    (player.gear.getBonus(EquipmentBonus.FishingEfficiency) +
+                        fishingRooBonus)) / 100) *
+                (1 + player.getTalentBonus(85) / 100) *
+                (1 + starSignFishing / 100);
+
+            const catchingEfficiency = (Math.pow(catchingPower, 1.3) +
+                (Math.pow(agility * (1 + player.getTalentBonus(296) / 100), 0.6) *
+                    (1 + player.getTalentBonus(367) / 100) +
+                    (baseCatchingStamp + allBaseSkillEfficiency))) *
+                (1 + catchingLevel / 200) *
+                (1 + Math.pow((agility * (1 + player.getTalentBonus(296) / 100)) / 100, 0.35) *
+                    (1 + player.getTalentBonus(367) / 100)) *
+                (1 + (cardBonus(32) +
+                    (catchingVial + catchingMonument +
+                        (catchingRiftBonus +
+                            (votes.getCurrentBonus(10) + platinumSet))) +
+                    (player.gear.getBonus(EquipmentBonus.CatchEfficiency) +
+                        10 * (achievement(351).completed ? 1 : 0))) / 100) *
+                (1 + (catchingSkillEffPct + rightHandCatching + starSignCatching) / 100) *
+                (1 + (player.getTalentBonus(295) * (atomEfficiency + catchingLog)) / 100) *
+                (1 + (catchingPower + Math.min(5, 5 * (achievement(74).completed ? 1 : 0))) / 100) *
+                allEfficiencies *
+                (1 + player.getTalentBonus(263) / 100);
+
+            this.skillEfficiencies.set(player.playerID, {
+                [SkillsIndex.Mining]: miningEfficiency,
+                [SkillsIndex.Chopping]: choppingEfficiency,
+                [SkillsIndex.Fishing]: fishingEfficiency,
+                [SkillsIndex.Catching]: catchingEfficiency,
+            });
+        }
+    }
 
     getRawKeys(): RawData[] {
         return [];
@@ -262,4 +468,7 @@ export class Skilling extends Domain {
 
 export const updateAllEfficiencies = (data: Map<string, any>): void => {
     (data.get("skilling") as Skilling).updateAllEfficiencies(data);
+};
+export const updateSkillEfficiencies = (data: Map<string, any>): void => {
+    (data.get("skilling") as Skilling).updateSkillEfficiencies(data);
 };

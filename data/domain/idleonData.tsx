@@ -6,7 +6,7 @@ import { Alchemy, updateAlchemy, updateAlchemySlabBubbles, updateAlchemyTomeBubb
 import { updatePlayerTalentContexts } from './player';
 import { updateEquipmentProperties } from './equipment';
 import { GoldenFood, updateGoldenFood } from './golden-food';
-import { updatePlayerDropRates, updatePlayerPowers, updatePlayerSecondaryStats, updatePlayerStats } from './player-stats';
+import { updatePlayerDropRates, updatePlayerPowers, updatePlayerSecondaryStats, updatePlayerSkillStatsDN, updatePlayerStats } from './player-stats';
 import { Bribes } from './world-1/bribes';
 import { GemStore } from './gemPurchases';
 import { Achievements } from './achievements';
@@ -68,7 +68,7 @@ import { IslandExpeditions, updateIslandExpeditions } from './world-2/islandExpe
 import { Tome, updateTomeBonuses, updateTomeScores } from './world-4/tome';
 import { KillRoy } from './world-2/killroy';
 import { updateVotesBonus, Votes } from './world-2/votes';
-import { Hole, updateHole, updateHolePresentation, updateHoleStudyEffects, updateHoleUpgradeEffects } from './world-5/hole/hole';
+import { Hole, updateHole, updateHoleCharacterCapabilities, updateHolePresentation, updateHoleStudyEffects, updateHoleUpgradeEffects } from './world-5/hole/hole';
 import { UpgradeVault } from './upgradeVault';
 import { Grimoire, updateGrimoireEfficiency, updateGrimoireUpgradeCosts } from './grimoire';
 import { Tesseract, updateArcaneCultistImpact, updateTesseractEfficiency, updateTesseractUpgradeCosts } from './tesseract';
@@ -94,7 +94,7 @@ import { Poppy, updatePoppyFishRate, updatePoppyGlobalBonus } from './world-2/po
 import { updateNonDepositedZenithClusters, ZenithMarket } from './world-7/zenithShop';
 import { Gallery, updateGallery } from './world-7/gallery';
 import { HatRack, updateHatRack } from './world-7/hatRack';
-import { Skilling, updateAllEfficiencies } from './skilling';
+import { Skilling, updateAllEfficiencies, updateSkillEfficiencies } from './skilling';
 import { updateAttributeTalents, updatePowerTalents, updateRightHandOfActionBonuses } from './talents';
 import { updatePlayerHealth } from './player-health';
 
@@ -397,6 +397,9 @@ const postProcessingMap: Record<string, Function> = {
     // Nobisect reads independent all-skill efficiency after attributes and health-scaled bubbles are ready.
     "allEfficiencies": (doc: Cloudsave, accountData: Map<string, any>) => updateAllEfficiencies(accountData),
     "divinityBlessings": (_doc: Cloudsave, accountData: Map<string, any>) => updateDivinityBlessings(accountData),
+    "updatePlayerSkillStatsDN": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerSkillStatsDN(accountData),
+    "updateSkillEfficiencies": (_doc: Cloudsave, accountData: Map<string, any>) => updateSkillEfficiencies(accountData),
+    "updateHoleCharacterCapabilities": (_doc: Cloudsave, accountData: Map<string, any>) => updateHoleCharacterCapabilities(accountData),
 }
 
 // I really really hate this.

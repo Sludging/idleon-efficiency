@@ -58,8 +58,10 @@ import type { ResearchGrid } from './world-7/research';
 import { RoyalArmory } from './world-6/royalArmory/royalArmory';
 import { PlayerHealth } from './player-health';
 import { PlayerStats } from './player-stats';
+import { initFishingToolkitRepo } from './data/FishingToolkitRepo';
 import type { CoralKid } from './world-7/coralKid';
 export type { TalentLevelInputs } from './talents';
+const fishingToolkitRepo = initFishingToolkitRepo();
 
 
 
@@ -106,6 +108,7 @@ export class Player {
     gear: PlayerEquipment = new PlayerEquipment();
     foodSlotsOwned: number = 0;
     stats: PlayerStats = new PlayerStats();
+    fishingToolkitPower: number = 0;
     readonly health: PlayerHealth = new PlayerHealth();
     level: number = 0; // combine to one "class" class
     class: string = "Blank"; // combine to one "class" class
@@ -297,6 +300,19 @@ export class Player {
     // Return persistent normal-character mana, not temporary dungeon mana.
     getMaxMP(): number {
         return this.health.getMaxMP();
+    }
+
+    getPostOfficeBonus(bonusKey: string): number {
+        let total = 0;
+        for (const box of this.postOffice) {
+            for (let index = 0; index < box.bonuses.length; index++) {
+                const bonus = box.bonuses[index];
+                if (bonus.data.bonusKey === bonusKey) {
+                    total += bonus.getBonus(box.level, index);
+                }
+            }
+        }
+        return total;
     }
 
     getTalentBonus = (skillIndex: number) => {
@@ -645,6 +661,7 @@ const keyFunctionMap: Record<string, Function> = {
     "money": (doc: Cloudsave, player: Player) => { player.money = doc.get(`Money_${player.playerID}`) },
     "foodSlots": (doc: Cloudsave, player: Player) => { player.foodSlotsOwned = doc.get(`FoodSlO_${player.playerID}`); },
     "skills": (doc: Cloudsave, player: Player) => parseSkills(doc.get(`Lv0_${player.playerID}`), doc.get(`Exp0_${player.playerID}`), doc.get(`ExpReq0_${player.playerID}`), player),
+    "fishingToolkit": (doc: Cloudsave, player: Player) => parseFishingToolkit(doc.get(`PVFishingToolkit_${player.playerID}`), player),
     "talents": (doc: Cloudsave, player: Player) => parseTalents(
         doc.get(`SL_${player.playerID}`),
         doc.get(`SM_${player.playerID}`),
@@ -765,6 +782,21 @@ const parseSkills = (skills: Array<number>, skillXP: Array<number>, skillXPReqs:
         }
     })
 }
+
+const parseFishingToolkit = (savedSelections: unknown, player: Player): void => {
+    if (savedSelections === undefined) {
+        player.fishingToolkitPower = 0;
+        return;
+    }
+
+    const selections = typeof savedSelections === 'string'
+        ? JSON.parse(savedSelections) as number[]
+        : savedSelections as number[];
+    const [weightIndex, lineIndex] = selections;
+    const weight = fishingToolkitRepo.find(toolkit => toolkit.id === `Weight${weightIndex}`)!;
+    const line = fishingToolkitRepo.find(toolkit => toolkit.id === `Line${lineIndex}`)!;
+    player.fishingToolkitPower = weight.data.fishingPower + line.data.fishingPower;
+};
 
 const parseStarSigns = (starSigns: string, player: Player) => {
     if (starSigns == undefined) {

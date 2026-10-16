@@ -83,6 +83,59 @@ export type SkillPowerSkill =
     | SkillsIndex.Trapping
     | SkillsIndex.Worship;
 
+export type SkillStatsDNSkill =
+    | SkillsIndex.Mining
+    | SkillsIndex.Chopping
+    | SkillsIndex.Fishing
+    | SkillsIndex.Catching;
+
+export type SkillStatsDN = Record<SkillStatsDNSkill, number>;
+
+export interface SkillStatsDNInputs {
+    toolW: number;
+    toolM: number;
+    toolA: number;
+    fishingHighscore: number;
+    totalMiningPower: number;
+    totalChoppingPower: number;
+    totalFishingPower: number;
+    totalCatchingPower: number;
+}
+
+function equippedToolWeaponPower(player: Player, slot: number): number {
+    const tool = player.gear.tools[slot];
+    if (!tool || tool.internalName === 'Blank') return 0;
+
+    const weaponPower = tool.getProperty('Weapon_Power');
+    return weaponPower ? weaponPower.value + weaponPower.stone : 0;
+}
+
+function prepareSkillStatsDN(player: Player, inputs: SkillStatsDNInputs): SkillStatsDN {
+    const miningLevel = player.skills.get(SkillsIndex.Mining)!.level;
+    const mining = equippedToolWeaponPower(player, 0) *
+        (1 + player.getTalentBonus(103) * miningLevel / 10 / 100) *
+        (1 + inputs.toolW / 100) + 4 + inputs.totalMiningPower;
+    const chopping = equippedToolWeaponPower(player, 1) *
+        (1 + inputs.toolM / 100) + 4 + inputs.totalChoppingPower;
+
+    const fishing = equippedToolWeaponPower(player, 2) *
+        (1 + inputs.toolW / 100) +
+        (3 + player.fishingToolkitPower) +
+        (inputs.totalFishingPower +
+            Math.min(inputs.fishingHighscore, player.getTalentBonus(116)));
+
+    const catching = equippedToolWeaponPower(player, 3) *
+        (1 + inputs.toolA / 100) + 3 + inputs.totalCatchingPower;
+
+    return {
+        [SkillsIndex.Mining]: mining,
+        [SkillsIndex.Chopping]: chopping,
+        [SkillsIndex.Fishing]: fishing,
+        [SkillsIndex.Catching]: catching,
+    };
+}
+
+
 interface PowerSources {
     alchemy: Alchemy;
     family: Family;
@@ -146,14 +199,11 @@ interface DropRateSources {
     research: ResearchGrid;
     minehead: Minehead;
     equinox: Equinox;
-    account: Account;
     sushi: SushiStation;
     jellyOperator: JellyOperator;
-    sigils: Sigils;
-    saltLick: SaltLick;
 }
 
-function getStatCards(player: Player): Card[] {
+export function getStatCards(player: Player): Card[] {
     // Equipped passive cards must not contribute twice. Reuse prepared card objects without a set or map.
     const cards: Card[] = [];
     for (const card of player.cardInfo!.equippedCards) {
@@ -216,6 +266,8 @@ export class PlayerStats {
     private preparedDefence: number | undefined;
     private preparedAccuracy: number | undefined;
     private preparedDropRateMultiplier: number | undefined;
+    private preparedMovementSpeed: number | undefined;
+    private preparedSkillStatsDN: SkillStatsDN | undefined;
 
     get defence(): number {
         if (this.preparedDefence === undefined) {
@@ -250,6 +302,17 @@ export class PlayerStats {
             throw new Error('Skill powers have not been calculated');
         }
         return this.skillPowers[skill];
+    }
+
+    getSkillStatsDN(skill: SkillStatsDNSkill): number {
+        if (this.preparedSkillStatsDN === undefined) {
+            throw new Error('SkillStatsDN has not been prepared');
+        }
+        return this.preparedSkillStatsDN[skill];
+    }
+
+    prepareSkillStatsDN(player: Player, inputs: SkillStatsDNInputs): void {
+        this.preparedSkillStatsDN = prepareSkillStatsDN(player, inputs);
     }
 
     updatePowers(player: Player, sources: PowerSources): void {
@@ -790,8 +853,25 @@ export const updatePlayerDropRates = (accountData: Map<string, any>): void => {
     };
     for (const player of players) {
         player.stats.updateDropRate(player, players, sources);
-        account: accountData.get('account') as Account,
     }
 };
-        sigils: accountData.get('sigils') as Sigils,
-        saltLick: accountData.get('saltLick') as SaltLick,
+
+export const updatePlayerSkillStatsDN = (accountData: Map<string, any>): void => {
+    const players = accountData.get('players') as Player[];
+    const alchemy = accountData.get('alchemy') as Alchemy;
+    const account = accountData.get('account') as Account;
+
+    for (const player of players) {
+        
+        player.stats.prepareSkillStatsDN(player, {
+            toolW: alchemy.getBubbleBonusForKey('ToolW', player),
+            toolM: alchemy.getBubbleBonusForKey('ToolM', player),
+            toolA: alchemy.getBubbleBonusForKey('ToolA', player),
+            fishingHighscore: account.minigameHighscores[1],
+            totalMiningPower: player.stats.getSkillPower(SkillsIndex.Mining),
+            totalChoppingPower: player.stats.getSkillPower(SkillsIndex.Chopping),
+            totalFishingPower: player.stats.getSkillPower(SkillsIndex.Fishing),
+            totalCatchingPower: player.stats.getSkillPower(SkillsIndex.Catching),
+        });
+    }
+};

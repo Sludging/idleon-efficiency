@@ -177,6 +177,11 @@ export class GoldenFood extends Domain {
         return bonus;
     }
 
+    getSkillEfficiencyMultiplier(player: Player, sneaking: Sneaking, effect: 'MiningEff' | 'FishingEff'): number {
+        return 1 + this.calculateEffect(player, sneaking, effect, this.getEffectivity(player)) / 100;
+    }
+
+
     updatePlayer(player: Player, sneaking: Sneaking, account: GoldenFoodAccountInputs,
         character: GoldenFoodCharacterInputs, talent99: number, alchemyTalent99: number,
         deathBringer: number, alchemyDeathBringer: number): void {
