@@ -1,17 +1,26 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Box, Heading, Text } from 'grommet';
 import ContentTabs from '../../../components/base/ContentTabs';
 import TipDisplay from '../../../components/base/TipDisplay';
 import { useShallow } from 'zustand/react/shallow';
 import SpelunkingDisplay, { CollectionStatus } from '../../../components/world-7/spelunking/spelunkingDisplay';
 import { SpelunkingCharacters, SpelunkingJournal, SpelunkingSummary } from '../../../components/world-7/spelunking/spelunkingPart2';
+import { SpelunkingAdvanced, SpelunkingEquipment, SpelunkingShop } from '../../../components/world-7/spelunking/spelunkingPart3';
 import type { Player } from '../../../data/domain/player';
 import { Spelunking } from '../../../data/domain/world-7/spelunking';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 
-type SpelunkingTab = 'Tunnels' | 'Journal & Pages';
+type SpelunkingTab = 'Tunnels' | 'Journal & Pages' | 'Shop' | 'Equipment' | 'Advanced';
+function scrollOwner(element: HTMLElement | null): HTMLElement {
+    let owner = element?.parentElement ?? null;
+    while (owner) {
+        if (/(auto|scroll)/.test(getComputedStyle(owner).overflowY) && owner.scrollHeight > owner.clientHeight) return owner;
+        owner = owner.parentElement;
+    }
+    return document.scrollingElement as HTMLElement;
+}
 
 export default function SpelunkingContent() {
     const { theData, lastUpdated } = useAppDataStore(useShallow(state => ({
@@ -21,6 +30,18 @@ export default function SpelunkingContent() {
     const [snapshot, setSnapshot] = useState<{ spelunking: Spelunking; players: Player[] }>();
     const [hydrated, setHydrated] = useState(false);
     const [tab, setTab] = useState<SpelunkingTab>('Tunnels');
+    const contentRef = useRef<HTMLDivElement>(null);
+    const pendingScroll = useRef<{ owner: HTMLElement; top: number } | null>(null);
+    const tabScrollPositions = useRef(new Map<SpelunkingTab, { owner: HTMLElement; top: number }>());
+    useLayoutEffect(() => {
+        if (pendingScroll.current !== null) {
+            const { owner, top } = pendingScroll.current;
+            pendingScroll.current = null;
+            requestAnimationFrame(() => {
+                owner.scrollTop = top;
+            });
+        }
+    }, [tab]);
 
     useEffect(() => {
         const spelunking = theData.get('spelunking') as Spelunking;
@@ -45,7 +66,7 @@ export default function SpelunkingContent() {
                     <Text>Spelunking account data is not available.</Text>
                     <Text size="small">Load an account save to view Spelunking data.</Text>
                 </Box>
-            ) : <Box gap="small">
+            ) : <Box ref={contentRef} gap="small" data-spelunking-tab-content>
                 <SpelunkingSummary spelunking={snapshot.spelunking} players={snapshot.players} />
                 <SpelunkingCharacters spelunking={snapshot.spelunking} players={snapshot.players} />
                 <Box data-spelunking-tab-region>
@@ -53,12 +74,21 @@ export default function SpelunkingContent() {
                         options={[
                             { value: 'Tunnels', label: 'Tunnels' },
                             { value: 'Journal & Pages', label: 'Journal & Pages' },
+                            { value: 'Shop', label: 'Shop' },
+                            { value: 'Equipment', label: 'Equipment' },
+                            { value: 'Advanced', label: 'Advanced' },
                         ]}
                         value={tab}
-                        onChange={setTab}
+                        onChange={nextTab => {
+                            const owner = scrollOwner(contentRef.current);
+                            const position = { owner, top: owner.scrollTop };
+                            tabScrollPositions.current.set(tab, position);
+                            pendingScroll.current = tabScrollPositions.current.get(nextTab) ?? position;
+                            setTab(nextTab);
+                        }}
                     />
                 </Box>
-                {tab === 'Tunnels' && (
+                <Box style={{ display: tab === 'Tunnels' ? undefined : 'none' }}>
                     <SpelunkingDisplay
                         spelunking={snapshot.spelunking}
                         showLocked={showLocked}
@@ -66,8 +96,8 @@ export default function SpelunkingContent() {
                         onShowLockedChange={setShowLocked}
                         onCollectionStatusChange={setCollectionStatus}
                     />
-                )}
-                {tab === 'Journal & Pages' && <Box gap="small" data-spelunking-journal>
+                </Box>
+                <Box style={{ display: tab === 'Journal & Pages' ? undefined : 'none' }} gap="small" data-spelunking-journal>
                     <Box align="end">
                         <TipDisplay heading="About soft caps" maxWidth="420px" body={
                             <Box gap="xsmall" data-spelunking-soft-cap-detail>
@@ -78,7 +108,16 @@ export default function SpelunkingContent() {
                         </TipDisplay>
                     </Box>
                     <SpelunkingJournal spelunking={snapshot.spelunking} players={snapshot.players} />
-                </Box>}
+                </Box>
+                <Box style={{ display: tab === 'Shop' ? undefined : 'none' }}>
+                    <SpelunkingShop spelunking={snapshot.spelunking} />
+                </Box>
+                <Box style={{ display: tab === 'Equipment' ? undefined : 'none' }}>
+                    <SpelunkingEquipment spelunking={snapshot.spelunking} />
+                </Box>
+                <Box style={{ display: tab === 'Advanced' ? undefined : 'none' }}>
+                    <SpelunkingAdvanced spelunking={snapshot.spelunking} />
+                </Box>
             </Box>}
         </Box>
     );

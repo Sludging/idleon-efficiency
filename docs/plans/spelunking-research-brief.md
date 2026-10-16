@@ -1771,12 +1771,12 @@ These questions concern source semantics, parsing, calculations, and unaudited d
  
 ## Part 3 UI acceptance and local commit — 2026-10-16
 
-**Acceptance:** The human accepted the Part 3 UI result and its stated check limits. Fresh independent Phase 8 review found zero Standards and zero Spec findings. Direct screenshot inspection covered Shop, Equipment, Advanced, Tunnels, and Journal in `.ui-verification/runs/2026-10-16T00-22-09-182Z-1925/`.
+**Acceptance:** The human accepted the Part 3 UI result and its stated check limits. The fresh independent Phase 8 review found zero Standards and zero Spec findings. This acceptance covers only the selected Part 3 UI layer; accepted Part 1/2 work and the accepted Part 3 backend remain unchanged.
 
-**Accepted evidence:** The retained production packet verified all 68 Shop rows, 12 Elixirs, seven tools, corrected Trackometer values (`+3% / +24%`, `+2% / +16%`, unowned maximum stamina `0`), Manic percentages, saved Mode `Off`, natural view heights, verified artwork, filters, restored nonzero scroll, and retained Tunnels/Journal content. No checks were rerun.
+**Accepted outcome:** The production route shows all 68 shop upgrades, all 12 elixirs, seven tools, Amber and verified artwork, saved equipment and advanced state, filters, and per-view scroll retention. Corrected Trackometer effects show `+3% / +24%` and `+2% / +16%`; unowned values remain zero. Owned generic bonuses stay paired with intrinsic wording. Existing Tunnels and Journal views remain available.
 
-**Accepted limits, not waivers:** Source descriptions retain unknown quantities as `?`; generic owned/per-level shop bonus plus intrinsic text adds no exports. Unsupported next-price is omitted. Evidence uses one unpaired save, not connected-game parity. Shared Nav hydration, NitroPay, CORS, and HTTP errors remain. Wider fixture-hash tests remain failed. No TypeScript, build, or lint claim is made.
+**Accepted evidence:** The exact-source packet [2026-10-16T00-22-09-182Z-1925](../../.ui-verification/runs/2026-10-16T00-22-09-182Z-1925/) retains production screenshots and source provenance. Scenario assertions passed for all 68 Shop rows, 12 Elixirs, seven tools, advanced values, filters, scroll restoration, and retained views. No check was rerun for acceptance or commit.
 
-**Commit isolation:** Accepted Part 1/2 UI prerequisites are not fully in `HEAD`; the route and Part 2 component contain pending accepted UI work required by the Part 3 integration. Commit only that prerequisite UI layer now. Keep Part 3 route/component changes, approved Part 3 UI plan, and this Part 3 acceptance record out of that commit; isolate them for a fresh acceptance worker.
+**Accepted limits:** Unknown source quantities display `?`; generic owned bonuses remain paired with intrinsic text; unsupported next cost and affordability are omitted. Evidence uses one retained, unpaired save and offline Jelly_Operator v1.22, not connected-game parity. Shared Nav hydration, NitroPay, CORS, `ERR_FAILED`, HTTP 403, and the wider fixture-pairing failures remain unwaived. No TypeScript, build, or lint claim is made.
 
-**Stop:** Local prerequisite commit only. No push, PR, deployment, tracker action, or check rerun.
+**Preservation and stop:** No issue was updated or closed; no push, PR, or deployment occurred. Commit only the accepted Part 3 UI layer locally. Preserve unrelated work and the user's index. Stop after the local commit.
