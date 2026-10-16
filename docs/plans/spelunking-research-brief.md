@@ -1768,3 +1768,15 @@ These questions concern source semantics, parsing, calculations, and unaudited d
 - **R15:** [Account pipeline](../../data/domain/idleonData.tsx):165,266–340,400–444 — existing Spelunking registration; Cards update precedes Tome score and Gallery; every parse completes before `postProcessingMap`; `postPostProcessingMap` follows those updates.
 
 **Current boundary:** The delegated supervisor accepted the selected Part 2 compact-layout UI and its stated check limits after fresh zero-finding Standards/Spec review and direct retained-evidence inspection. All three outcomes are complete. Overall verification remains `passed: false`, exit 1, with `scopedAssertionsPassed: true`, `runtimeClean: false`, five errors, and nine warnings. Shared failures and historical TS18047 remain failed and unwaived. Commit only the component delta, two narrow artwork-owner additions, revised UI plan, and selected Part 2 handoff changes. Keep the preexisting Part 1 historical-integration correction uncommitted. Preserve accepted top-layout `0335230b`, backend calculations, Part 1, prior approvals, generated data, saves, private evidence, overlap history, unrelated changes, and preexisting index entries. No implementation, check/review reruns, push, PR, deployment, tracker action or closure, WikiBot, or Part 3 is authorized. Stop after the isolated local commit.
+ 
+## Part 3 UI acceptance and local commit — 2026-10-16
+
+**Acceptance:** The human accepted the Part 3 UI result and its stated check limits. Fresh independent Phase 8 review found zero Standards and zero Spec findings. Direct screenshot inspection covered Shop, Equipment, Advanced, Tunnels, and Journal in `.ui-verification/runs/2026-10-16T00-22-09-182Z-1925/`.
+
+**Accepted evidence:** The retained production packet verified all 68 Shop rows, 12 Elixirs, seven tools, corrected Trackometer values (`+3% / +24%`, `+2% / +16%`, unowned maximum stamina `0`), Manic percentages, saved Mode `Off`, natural view heights, verified artwork, filters, restored nonzero scroll, and retained Tunnels/Journal content. No checks were rerun.
+
+**Accepted limits, not waivers:** Source descriptions retain unknown quantities as `?`; generic owned/per-level shop bonus plus intrinsic text adds no exports. Unsupported next-price is omitted. Evidence uses one unpaired save, not connected-game parity. Shared Nav hydration, NitroPay, CORS, and HTTP errors remain. Wider fixture-hash tests remain failed. No TypeScript, build, or lint claim is made.
+
+**Commit isolation:** Accepted Part 1/2 UI prerequisites are not fully in `HEAD`; the route and Part 2 component contain pending accepted UI work required by the Part 3 integration. Commit only that prerequisite UI layer now. Keep Part 3 route/component changes, approved Part 3 UI plan, and this Part 3 acceptance record out of that commit; isolate them for a fresh acceptance worker.
+
+**Stop:** Local prerequisite commit only. No push, PR, deployment, tracker action, or check rerun.

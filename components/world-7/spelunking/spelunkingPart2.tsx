@@ -1,14 +1,34 @@
-import { Box, Grid, Meter, Text } from 'grommet';
+import { useContext } from 'react';
+import { Box, Grid, Meter, Text, ThemeContext } from 'grommet';
+import { normalizeColor } from 'grommet/utils';
+import styled from 'styled-components';
 import { CharacterBox } from '../../base/CharacterBox';
 import IconImage from '../../base/IconImage';
 import ShadowBox from '../../base/ShadowBox';
-import TextAndLabel from '../../base/TextAndLabel';
+import TextAndLabel, { ComponentAndLabel } from '../../base/TextAndLabel';
 import TipDisplay from '../../base/TipDisplay';
 import type { Player } from '../../../data/domain/player';
 import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import { Skilling } from '../../../data/domain/skilling';
 import type { Chapter, ChapterBonus, Spelunking } from '../../../data/domain/world-7/spelunking';
 import { commaNotation, notateNumber, toTime } from '../../../data/utility';
+
+const JournalTable = styled.table<{ $muted: string }>`
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-variant-numeric: tabular-nums;
+    font-size: 12px;
+    line-height: 20px;
+    th { font-weight: 400; color: ${({ $muted }) => $muted}; text-align: left; }
+    th, td { padding: 0 6px 0 0; vertical-align: middle; }
+    th:last-child, td:last-child { padding: 0; text-align: right; }
+    th:nth-child(2), td:nth-child(2) { text-align: center; }
+    col:nth-child(2) { width: 35px; }
+    col:nth-child(3) { width: 94px; }
+    col:nth-child(4) { width: 128px; }
+    col:nth-child(5) { width: 80px; }
+`;
 
 interface SpelunkingPart2Props {
     spelunking: Spelunking;
@@ -35,16 +55,47 @@ export function SpelunkingSummary({ spelunking, players }: SpelunkingPart2Props)
                     text={`${commaNotation(spelunking.dailyReadsRemaining)} / ${commaNotation(spelunking.dailyReadLimit)}`}
                     textSize="16px"
                     labelSize="12px"
-                    tooltip={<Text color="dark-1" size="small" data-spelunking-read-detail>Account-wide allowance in the saved daily period.</Text>}
                 />
             </ShadowBox>
             <ShadowBox background="dark-1" pad="small" gap="xxsmall" data-spelunking-summary-card="stamina">
                 <Text size="small" weight={500}>Stamina</Text>
                 <Box direction="row" gap="medium" align="start">
-                    <TextAndLabel label="Recharge" text={`${spelunking.hourlyRecharge.toFixed(2)} stamina/h`} textSize="16px" labelSize="12px" />
+                    <ComponentAndLabel label="Recharge" labelSize="12px" component={
+                        <TipDisplay heading="Stamina recharge" maxWidth="620px" size="small" body={
+                            <Box gap="small" data-spelunking-recharge-detail style={{ maxHeight: '40vh', overflowY: 'auto', overflowWrap: 'anywhere' }}>
+                                <Box gap="xxsmall">
+                                    <Text size="xsmall" weight="bold">Base</Text>
+                                    <Text size="xsmall" data-recharge-base>{notateNumber(spelunking.baseHourlyRecharge, 'Smaller')} stamina/h</Text>
+                                </Box>
+                                <Grid columns={['minmax(0, 1fr)', 'minmax(0, 1fr)']} gap="medium">
+                                    <Box gap="xsmall">
+                                        <Text size="xsmall" weight="bold">Additive bonuses</Text>
+                                        <Box gap="xxsmall">
+                                            {spelunking.additiveRechargeContributors.map((entry, index) => (
+                                                <Text key={index} size="xsmall" data-recharge-additive={index} style={{ opacity: entry.value === 0 ? 0.6 : 1 }}>
+                                                    {entry.source.replace(/_/g, ' ').replace(/\s*@\s*/g, ' ')}: {entry.value >= 0 ? '+' : ''}{notateNumber(entry.value, 'Smaller')}%
+                                                </Text>
+                                            ))}
+                                        </Box>
+                                    </Box>
+                                    <Box gap="xsmall">
+                                        <Text size="xsmall" weight="bold">Multipliers</Text>
+                                        <Box gap="xxsmall">
+                                            {spelunking.rechargeMultiplierContributors.map((entry, index) => (
+                                                <Text key={index} size="xsmall" data-recharge-multiplier={index} style={{ opacity: entry.value === 1 ? 0.6 : 1 }}>
+                                                    {entry.source.replace(/_/g, ' ').replace(/\s*@\s*/g, ' ').replace('}', notateNumber(entry.value, 'Smaller'))}: ×{notateNumber(entry.value, 'Smaller')}
+                                                </Text>
+                                            ))}
+                                        </Box>
+                                    </Box>
+                                </Grid>
+                            </Box>
+                        }>
+                            <Text size="16px" tabIndex={0} data-spelunking-recharge-trigger style={{ textDecoration: 'underline dotted', textUnderlineOffset: '4px', cursor: 'help' }}>{spelunking.hourlyRecharge.toFixed(2)} stamina/h</Text>
+                        </TipDisplay>
+                    } />
                     <TipDisplay heading="Time to refill the team" maxWidth="520px" body={
                         <Box gap="xsmall" data-spelunking-refill-detail>
-                            <Text color="dark-1" size="small">Uses saved stamina with unchanged recharge and no spending. All characters recharge together. This is not a live timer.</Text>
                             {players.map(player => {
                                 const stamina = spelunking.stamina.find(entry => entry.playerID === player.playerID)!;
                                 const hours = stamina.getHoursUntilFull(spelunking.hourlyRecharge);
@@ -81,30 +132,27 @@ function ChapterBonusRow({ chapterIndex, bonus }: { chapterIndex: number; bonus:
         : `${bonus.data.bonus.startsWith('+') ? '+' : ''}${limit.toFixed(2)}${bonus.data.bonus.startsWith('x') ? 'x' : bonus.data.bonus.includes('%') ? '%' : ''}`;
 
     return (
-        <Box gap="xxsmall" pad={{ vertical: 'xsmall' }} border={{ side: 'bottom', color: 'grey-1' }} data-spelunking-bonus={bonus.index} style={{ opacity: bonus.level === 0 ? 0.65 : 1 }}>
-            <Grid columns={['minmax(0, 1fr)', '48px', '104px']} gap="small" align="center" data-bonus-main-row>
-                <Text size="13px" data-bonus-effect>{earnedEffect(bonus)}</Text>
-                <Text size="13px" textAlign="end" data-bonus-level>{commaNotation(bonus.level)}</Text>
-                <TipDisplay heading="Minimum pages per stack" body={
-                    <Text color="dark-1" size="small" data-spelunking-requirement-detail={`${chapterIndex}-${bonus.index}`}>{commaNotation(bonus.data.requiredPages)} pages per stack</Text>
-                }>
-                    <Text size="13px" textAlign="end" data-spelunking-requirement={`${chapterIndex}-${bonus.index}`}>{notateNumber(bonus.data.requiredPages)}</Text>
-                </TipDisplay>
-            </Grid>
-            {limit !== undefined && <Grid columns={['minmax(0, 1fr)', '48px', '104px']} gap="small">
-                <Box gap="xxsmall" data-spelunking-progress={`${chapterIndex}-${bonus.index}`} data-spelunking-progress-value={progress} data-spelunking-effect-limit={limit}>
-                    <Box direction="row" justify="between" gap="xsmall">
-                        <Text size="12px" color="accent-2">{progressText}</Text>
-                        <Text size="12px" color="accent-2">Soft cap {limitText}</Text>
+        <tr data-spelunking-bonus={bonus.index} style={{ opacity: bonus.level === 0 ? 0.65 : 1 }}>
+            <td data-bonus-effect>{earnedEffect(bonus)}</td>
+            <td data-bonus-level>{commaNotation(bonus.level)}</td>
+            <td>
+                <Text size="12px" data-spelunking-requirement={`${chapterIndex}-${bonus.index}`}>{notateNumber(bonus.data.requiredPages)}</Text>
+            </td>
+            <td>
+                {limit !== undefined && <Box direction="row" gap="xxsmall" align="center" data-spelunking-progress={`${chapterIndex}-${bonus.index}`} data-spelunking-progress-value={progress} data-spelunking-effect-limit={limit}>
+                    <Box flex>
+                        <Meter aria-label={`Chapter ${chapterIndex + 1} bonus ${bonus.index + 1} earned progress`} values={[{ value: Math.min(99.9, percentage!), color: 'brand' }]} max={100} thickness="6px" size="full" background="grey-1" round />
                     </Box>
-                    <Meter aria-label={`Chapter ${chapterIndex + 1} bonus ${bonus.index + 1} earned progress`} values={[{ value: Math.min(99.9, percentage!), color: 'brand' }]} max={100} thickness="6px" size="full" background="grey-1" round />
-                </Box>
-            </Grid>}
-        </Box>
+                    <Text size="12px" style={{ width: '40px', flexShrink: 0, textAlign: 'right', whiteSpace: 'nowrap' }}>{progressText}</Text>
+                </Box>}
+            </td>
+            <td>{limitText}</td>
+        </tr>
     );
 }
 
 function ChapterCard({ chapter, players }: { chapter: Chapter; players: Player[] }) {
+    const theme = useContext(ThemeContext);
     const storageStacks = chapter.chestPageStacks.filter(stack => stack.count > 0);
     const inventories = players.map(player => ({
         player,
@@ -160,12 +208,13 @@ function ChapterCard({ chapter, players }: { chapter: Chapter; players: Player[]
                     </TipDisplay>
                 ) : ownedPagesDisplay}
             </Box>
-            <Grid columns={['minmax(0, 1fr)', '48px', '104px']} gap="small" align="end">
-                <Text size="12px" color="accent-2">Earned bonus</Text>
-                <Text size="12px" color="accent-2" textAlign="end">Level</Text>
-                <Text size="12px" color="accent-2" textAlign="end">Min. pages / stack</Text>
-            </Grid>
-            {chapter.bonuses.map(bonus => <ChapterBonusRow key={bonus.index} chapterIndex={chapter.index} bonus={bonus} />)}
+            <JournalTable $muted={normalizeColor('accent-2', theme)} aria-label={`${chapter.pageItem.displayName} bonuses`}>
+                <colgroup><col /><col /><col /><col /><col /></colgroup>
+                <thead>
+                    <tr><th scope="col">Earned bonus</th><th scope="col">Level</th><th scope="col">Min. pages</th><th scope="col">Progress</th><th scope="col">Soft cap</th></tr>
+                </thead>
+                <tbody>{chapter.bonuses.map(bonus => <ChapterBonusRow key={bonus.index} chapterIndex={chapter.index} bonus={bonus} />)}</tbody>
+            </JournalTable>
         </ShadowBox>
     );
 }
@@ -181,7 +230,6 @@ export function SpelunkingJournal({ spelunking, players }: SpelunkingPart2Props)
 export function SpelunkingCharacters({ spelunking, players }: SpelunkingPart2Props) {
     return (
         <Box gap="xsmall" data-spelunking-character-grid>
-            <Text size="12px">Characters</Text>
             <Grid columns={{ size: 'small', count: 'fill' }} gap="xsmall">
                 {players.map(player => {
                     const skill = player.skills.get(SkillsIndex.Spelunking)!;
@@ -197,20 +245,13 @@ export function SpelunkingCharacters({ spelunking, players }: SpelunkingPart2Pro
                                             <Text size="11px" style={{ whiteSpace: 'nowrap' }}>Lv {commaNotation(skill.level)}</Text>
                                         </Box>
                                     </TipDisplay>
-                                    <TipDisplay heading="Saved stamina / maximum" body={
-                                        <Box gap="xsmall" data-spelunking-stamina-detail={player.playerID}>
-                                            <Text color="dark-1" size="small">{commaNotation(stamina.current)} / {commaNotation(stamina.maximum)} stamina</Text>
-                                            {stamina.current > stamina.maximum && <Text color="dark-1" size="small">Saved amount exceeds maximum.</Text>}
-                                        </Box>
-                                    }>
-                                        <Box direction="row" align="center" gap="xxsmall" data-stamina-trigger={player.playerID}>
-                                            <IconImage data={stamina.getImageData()} scale={0.4} />
-                                            <Text size="11px" style={{ whiteSpace: 'nowrap' }} data-spelunking-stamina={player.playerID}>{commaNotation(stamina.current)} / {commaNotation(stamina.maximum)}</Text>
-                                        </Box>
-                                    </TipDisplay>
+                                    <Box direction="row" align="center" gap="xxsmall" data-stamina-trigger={player.playerID}>
+                                        <IconImage data={stamina.getImageData()} scale={0.4} />
+                                        <Text size="11px" style={{ whiteSpace: 'nowrap' }} data-spelunking-stamina={player.playerID}>{commaNotation(stamina.current)} / {commaNotation(stamina.maximum)}</Text>
+                                    </Box>
                                 </Box>
                                 <TipDisplay heading="Spelunking EXP" body={
-                                    <Text color="dark-1" size="small" data-spelunking-exp-exact={player.playerID}>{commaNotation(skill.currentXP)} / {commaNotation(skill.xpReq)} EXP</Text>
+                                    <Text color="dark-1" size="small" data-spelunking-exp-exact={player.playerID}>{notateNumber(skill.currentXP)} / {notateNumber(skill.xpReq)} EXP</Text>
                                 }>
                                     <Box data-spelunking-exp={player.playerID} data-exp-current={skill.currentXP} data-exp-required={skill.xpReq}>
                                         <Meter aria-label={`${player.playerName} Spelunking EXP`} values={[{ value: skill.currentXP / skill.xpReq * 100, color: 'brand' }]} max={100} thickness="4px" size="full" background="grey-1" round />

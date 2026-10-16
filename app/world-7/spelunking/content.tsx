@@ -39,14 +39,6 @@ export default function SpelunkingContent() {
         <Box gap="small" data-spelunking-content>
             <Box direction="row" align="center" justify="between">
                 <Heading level="2" size="medium" margin={{ top: 'medium', bottom: 'small' }} style={{ fontWeight: 'normal' }}>Spelunking</Heading>
-                <TipDisplay heading="About soft caps" maxWidth="420px" body={
-                    <Box gap="xsmall" data-spelunking-soft-cap-detail>
-                        <Text color="dark-1" size="small">Each new level adds less to these bonuses. Soft caps show their upper limit at your current Sailing artifact strength.</Text>
-                        <Text color="dark-1" size="small">Bars show progress from levels, starting at 0%. They do not reach 100%.</Text>
-                    </Box>
-                }>
-                    <Text size="12px" color="accent-2" data-spelunking-soft-cap-trigger style={{ textDecoration: 'underline dotted' }}>About soft caps</Text>
-                </TipDisplay>
             </Box>
             {!snapshot ? (
                 <Box gap="small">
@@ -75,7 +67,18 @@ export default function SpelunkingContent() {
                         onCollectionStatusChange={setCollectionStatus}
                     />
                 )}
-                {tab === 'Journal & Pages' && <SpelunkingJournal spelunking={snapshot.spelunking} players={snapshot.players} />}
+                {tab === 'Journal & Pages' && <Box gap="small" data-spelunking-journal>
+                    <Box align="end">
+                        <TipDisplay heading="About soft caps" maxWidth="420px" body={
+                            <Box gap="xsmall" data-spelunking-soft-cap-detail>
+                                <Text color="dark-1" size="small">Majority of lore bonuses have soft caps..</Text>
+                            </Box>
+                        }>
+                            <Text size="12px" color="accent-2" data-spelunking-soft-cap-trigger style={{ textDecoration: 'underline dotted' }}>About soft caps</Text>
+                        </TipDisplay>
+                    </Box>
+                    <SpelunkingJournal spelunking={snapshot.spelunking} players={snapshot.players} />
+                </Box>}
             </Box>}
         </Box>
     );
