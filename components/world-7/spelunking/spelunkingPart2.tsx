@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import type { ReactNode } from 'react';
 import { Box, Grid, Meter, Text, ThemeContext } from 'grommet';
 import { normalizeColor } from 'grommet/utils';
 import styled from 'styled-components';
@@ -43,11 +44,12 @@ function earnedEffect(bonus: ChapterBonus): string {
         : `${value}${bonus.data.bonus}`;
 }
 
-export function SpelunkingSummary({ spelunking, players }: SpelunkingPart2Props) {
+export function SpelunkingSummary({ spelunking, players, children }: SpelunkingPart2Props & { children?: ReactNode }) {
     const allFullHours = spelunking.getHoursUntilAllFull();
 
     return (
-        <Box direction="row" gap="small" data-spelunking-summary>
+        <Box direction="row" wrap gap="small" data-spelunking-summary>
+            {children}
             <ShadowBox background="dark-1" pad="small" gap="xxsmall" data-spelunking-summary-card="reads">
                 <Text size="small" weight={500}>Daily page reads</Text>
                 <TextAndLabel

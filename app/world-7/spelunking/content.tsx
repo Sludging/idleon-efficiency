@@ -7,12 +7,12 @@ import TipDisplay from '../../../components/base/TipDisplay';
 import { useShallow } from 'zustand/react/shallow';
 import SpelunkingDisplay, { CollectionStatus } from '../../../components/world-7/spelunking/spelunkingDisplay';
 import { SpelunkingCharacters, SpelunkingJournal, SpelunkingSummary } from '../../../components/world-7/spelunking/spelunkingPart2';
-import { SpelunkingAdvanced, SpelunkingEquipment, SpelunkingShop } from '../../../components/world-7/spelunking/spelunkingPart3';
+import { SpelunkingElixirs, SpelunkingPart3Summary, SpelunkingShop } from '../../../components/world-7/spelunking/spelunkingPart3';
 import type { Player } from '../../../data/domain/player';
 import { Spelunking } from '../../../data/domain/world-7/spelunking';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 
-type SpelunkingTab = 'Tunnels' | 'Journal & Pages' | 'Shop' | 'Equipment' | 'Advanced';
+type SpelunkingTab = 'Tunnels' | 'Journal & Pages' | 'Shop' | 'Elixirs';
 function scrollOwner(element: HTMLElement | null): HTMLElement {
     let owner = element?.parentElement ?? null;
     while (owner) {
@@ -67,7 +67,9 @@ export default function SpelunkingContent() {
                     <Text size="small">Load an account save to view Spelunking data.</Text>
                 </Box>
             ) : <Box ref={contentRef} gap="small" data-spelunking-tab-content>
-                <SpelunkingSummary spelunking={snapshot.spelunking} players={snapshot.players} />
+                <SpelunkingSummary spelunking={snapshot.spelunking} players={snapshot.players}>
+                    <SpelunkingPart3Summary spelunking={snapshot.spelunking} />
+                </SpelunkingSummary>
                 <SpelunkingCharacters spelunking={snapshot.spelunking} players={snapshot.players} />
                 <Box data-spelunking-tab-region>
                     <ContentTabs
@@ -75,8 +77,7 @@ export default function SpelunkingContent() {
                             { value: 'Tunnels', label: 'Tunnels' },
                             { value: 'Journal & Pages', label: 'Journal & Pages' },
                             { value: 'Shop', label: 'Shop' },
-                            { value: 'Equipment', label: 'Equipment' },
-                            { value: 'Advanced', label: 'Advanced' },
+                            { value: 'Elixirs', label: 'Elixirs' },
                         ]}
                         value={tab}
                         onChange={nextTab => {
@@ -112,11 +113,8 @@ export default function SpelunkingContent() {
                 <Box style={{ display: tab === 'Shop' ? undefined : 'none' }}>
                     <SpelunkingShop spelunking={snapshot.spelunking} />
                 </Box>
-                <Box style={{ display: tab === 'Equipment' ? undefined : 'none' }}>
-                    <SpelunkingEquipment spelunking={snapshot.spelunking} />
-                </Box>
-                <Box style={{ display: tab === 'Advanced' ? undefined : 'none' }}>
-                    <SpelunkingAdvanced spelunking={snapshot.spelunking} />
+                <Box style={{ display: tab === 'Elixirs' ? undefined : 'none' }}>
+                    <SpelunkingElixirs spelunking={snapshot.spelunking} />
                 </Box>
             </Box>}
         </Box>
