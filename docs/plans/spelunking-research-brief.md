@@ -1,3 +1,13 @@
+## Part 3 backend acceptance — 2026-10-16
+
+**Acceptance:** The human accepted the revised Part 3 backend and its stated check limits. Fresh independent review found zero Standards and zero Spec findings.
+
+**Accepted evidence:** The durable focused Jest receipt records 7 tests passing with exit 0. The normal account-factory smoke populated 68 finite source bonuses and 12 resolved descriptions, then processed repeated and changed saves. Evidence was inspected, not rerun.
+
+**Accepted limits:** Evidence uses offline Jelly_Operator v1.22 and one unpaired save, not connected-game parity. The broader suite, TypeScript, build, lint, and UI binding/rendering remain unproved. No UI acceptance is implied.
+
+**Scope and commit:** Commit only the accepted domain, focused regression test, revised backend plan, and this selected handoff record. Preserve other staged and unstaged work. No push, PR, deployment, or issue closure is authorized.
+
 ## Part 3 Phase 3 — backend plan approved, 2026-10-15
 
 The human selected approved Part 3 (#437), “Amber, equipment, and advanced progression.” Accepted Parts 1 (#435) and 2 (#436) remain closed and unchanged.

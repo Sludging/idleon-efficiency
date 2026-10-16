@@ -2,6 +2,8 @@ import type * as SaveLoader from '../../utils/cloudsave-loader';
 import type * as Pipeline from '../../../data/domain/idleonData';
 import { Cloudsave } from '../../../data/domain/cloudsave';
 import type { Spelunking } from '../../../data/domain/world-7/spelunking';
+import { SkillsIndex } from '../../../data/domain/SkillsIndex';
+import type { Player } from '../../../data/domain/player';
 import { normalizeCompanionStates } from '../../../data/domain/companions/companionState';
 import { saved } from './part-2-test-helpers';
 
@@ -46,7 +48,12 @@ function part3Snapshot(data: Map<string, unknown>): string {
         automaticToolUse: [owner.automaticToolUse.fullClearSetting, owner.automaticToolUse.eligible],
         elixirs: [owner.elixirs.equippedSlots, owner.elixirs.memorizedIndices, owner.elixirs.ownedCount,
             owner.elixirs.slotLimit, owner.elixirs.duplicateLimit, owner.elixirs.memorizeLimit,
-            owner.elixirs.consumptionReduction],
+            owner.elixirs.consumptionReduction, owner.elixirs.descriptions],
+        upgrades: owner.upgrades.map(upgrade => [upgrade.index, upgrade.sourceBonus]),
+        observations: [owner.spelunkingSkillLevelTotal, owner.bestDepthTotal, owner.biggestHaulDigitTotal,
+            owner.grandDiscoveryCount, owner.exaltedStampFragments, owner.prismaBubblesFound,
+            owner.exaltDropChanceDenominator, owner.prismaDropChanceDenominator, owner.deepPocketsMultiplier,
+            [owner.bestUnlockedTool.index, owner.bestUnlockedTool.data.name, owner.bestUnlockedTool.data.damageMultiplier]],
         manic: [owner.manic.unlocked, owner.manic.enabled, owner.manic.depthByTunnel, owner.manic.totalDepth,
             owner.manic.staminaCostMultiplier, [54, 55, 56].map(index => owner.getEffectiveUpgradeBonus(index))],
         overstim: [owner.overstim.unlocked, owner.overstim.level, owner.overstim.fill, owner.overstim.threshold,
@@ -57,6 +64,106 @@ function part3Snapshot(data: Map<string, unknown>): string {
 }
 
 describe('Spelunking Part 3 normal account factory and repeated processing', () => {
+    it('matches retained Part 3 source formulas and saved account outputs', () => {
+        const run = freshAccount();
+        const owner = run.data.get('spelunking') as Spelunking;
+        const spelunkingSave = saved('Spelunk');
+        const currencies = spelunkingSave[4];
+        const shopLevels = spelunkingSave[5];
+        const rawBonus = (index: number): number =>
+            owner.upgrades[index].data.bonusPerLevel * Math.max(0, Number(shopLevels[index] ?? -1));
+        const players = run.data.get('players') as Player[];
+        const skillLevelTotal = players.reduce((total, player) =>
+            total + Math.max(0, player.skills.get(SkillsIndex.Spelunking)!.level), 0);
+        const bestDepthTotal = spelunkingSave[1].reduce((total, depth) => total + Number(depth), 0);
+        const biggestHaulDigitTotal = spelunkingSave[2].reduce((total, haul) => {
+            const amount = Number(haul);
+            return total + Math.ceil(Math.log(Math.max(amount, 1)) / 2.30259);
+        }, 0);
+        const discoveryCount = spelunkingSave[6].length;
+        const grandDiscoveryCount = spelunkingSave[44].reduce((total, count) => total + Number(count), 0);
+
+        expect(owner.spelunkingSkillLevelTotal).toBe(skillLevelTotal);
+        expect(owner.bestDepthTotal).toBe(bestDepthTotal);
+        expect(owner.biggestHaulDigitTotal).toBe(biggestHaulDigitTotal);
+        expect(owner.grandDiscoveryCount).toBe(grandDiscoveryCount);
+        expect(owner.exaltedStampFragments).toBe(currencies[3]);
+        expect(owner.prismaBubblesFound).toBe(currencies[4]);
+        expect(owner.exaltDropChanceDenominator).toBe(
+            60 * Math.pow(8, currencies[3]) / (1 + rawBonus(27) / 100)
+        );
+        expect(owner.prismaDropChanceDenominator).toBe(
+            100 * Math.pow(1.5, currencies[4]) / (1 + rawBonus(28) / 100)
+        );
+
+        const expectedSourceBonuses: Record<number, number> = {
+            0: rawBonus(0) * skillLevelTotal,
+            1: rawBonus(1) * (1 + 5 * discoveryCount / 100),
+            2: rawBonus(2) * (2 + bestDepthTotal / 100),
+            3: rawBonus(3) * (1 + 3 * biggestHaulDigitTotal / 100),
+            7: 15 + rawBonus(7) / (250 + rawBonus(7)) * 45,
+            8: rawBonus(8) * (1 + skillLevelTotal / 100),
+            9: rawBonus(9) * (1 + bestDepthTotal / 100),
+            10: rawBonus(10) * (1 + 5 * discoveryCount / 100),
+            19: Math.max(10, 50 - rawBonus(19)),
+            25: 1 + rawBonus(25),
+            38: 20 + rawBonus(38),
+            44: rawBonus(44) * grandDiscoveryCount,
+            45: rawBonus(45) * grandDiscoveryCount,
+            46: rawBonus(46) * grandDiscoveryCount,
+            54: rawBonus(54) * (1 + 5 * owner.manic.totalDepth / 100),
+            55: rawBonus(55) * (1 + 5 * owner.manic.totalDepth / 100),
+            56: rawBonus(56) * (1 + 5 * owner.manic.totalDepth / 100),
+            59: rawBonus(59) * currencies[8],
+            60: rawBonus(60) * currencies[8],
+            61: rawBonus(61) * currencies[8],
+        };
+        expect(owner.deepPocketsMultiplier).toBe(1 + 7 * rawBonus(21) / 100);
+        expect(owner.upgrades[21].sourceBonus).toBe(rawBonus(21));
+        const testedSourceBonusIndices = Object.keys(expectedSourceBonuses).map(Number);
+        // Index 43's numeric Grand Discovery chance is intentionally absent from these regressions.
+        expect(testedSourceBonusIndices).not.toContain(43);
+        testedSourceBonusIndices.forEach(index => {
+            expect(owner.upgrades[index].sourceBonus).toBe(expectedSourceBonuses[index]);
+        });
+        for (const upgrade of owner.upgrades) {
+            if (!Object.prototype.hasOwnProperty.call(expectedSourceBonuses, upgrade.index)) {
+                expect(upgrade.sourceBonus).toBe(rawBonus(upgrade.index));
+            }
+        }
+
+        const bestUnlockedTool = owner.tools
+            .filter(tool => tool.index <= 4)
+            .filter(tool => {
+                const unlock = tool.data.unlock;
+                if (unlock.kind === 'default') {
+                    return true;
+                }
+                return unlock.kind === 'upgrade'
+                    && unlock.upgradeIndex !== undefined
+                    && rawBonus(unlock.upgradeIndex) >= (unlock.minimumBonus ?? 0);
+            })
+            .reduce((best, tool) => tool.index > best.index ? tool : best);
+        expect(owner.bestUnlockedTool).toBe(bestUnlockedTool);
+        expect([owner.bestUnlockedTool.index, owner.bestUnlockedTool.data.name,
+            owner.bestUnlockedTool.data.damageMultiplier]).toEqual([
+            bestUnlockedTool.index, bestUnlockedTool.data.name, bestUnlockedTool.data.damageMultiplier,
+        ]);
+
+        const authorizedElixirQuantities = [25, 1, 30, 1, 20, 60, 25, 30, 1, 1, 1, 0];
+        expect(owner.elixirs.descriptions).toHaveLength(12);
+        owner.elixirs.records.forEach((record, index) => {
+            const expectedDescription = record.data.description.replace(
+                '{', String(authorizedElixirQuantities[index])
+            );
+            expect(owner.elixirs.descriptions[index]).toBe(expectedDescription);
+            expect(owner.elixirs.descriptions[index].match(/%/g)?.length ?? 0)
+                .toBe(record.data.description.match(/%/g)?.length ?? 0);
+            expect(owner.elixirs.descriptions[index].match(/@/g)?.length ?? 0)
+                .toBe(record.data.description.match(/@/g)?.length ?? 0);
+        });
+    });
+
     it('maps saved progression and checks tool and elixir rule outcomes', () => {
         const run = freshAccount();
         const owner = run.data.get('spelunking') as Spelunking;
@@ -186,6 +293,101 @@ describe('Spelunking Part 3 normal account factory and repeated processing', () 
         const autoUse = (data.get('spelunking') as Spelunking).automaticToolUse;
         expect(autoUse.eligible).toBe(false);
         expect(autoUse.fullClearSetting).toBe(saved('OptLacc')[538] === 1);
+    });
+
+    it('recalculates source bonuses from varied prepared account inputs', () => {
+        const run = freshAccount();
+        const owner = run.data.get('spelunking') as Spelunking;
+        const ownedBonus = (index: number) => owner.upgrades[index].getBonus();
+        const inputs = {
+            spelunkingSkillLevelTotal: 85,
+            ordinaryDiscoveryCount: 17,
+            bestDepthTotal: 237,
+            biggestHaulDigitTotal: 42,
+            grandDiscoveryCount: 19,
+            manicTotalDepth: 73,
+            trackometerLevel: 4,
+        };
+
+        owner.upgrades.forEach(upgrade => upgrade.updateSourceBonus(inputs));
+        expect(owner.upgrades[0].sourceBonus).toBe(ownedBonus(0) * 85);
+        expect(owner.upgrades[1].sourceBonus).toBe(ownedBonus(1) * (1 + 5 * 17 / 100));
+        expect(owner.upgrades[2].sourceBonus).toBe(ownedBonus(2) * (2 + 237 / 100));
+        expect(owner.upgrades[3].sourceBonus).toBe(ownedBonus(3) * (1 + 3 * 42 / 100));
+        expect(owner.upgrades[8].sourceBonus).toBe(ownedBonus(8) * (1 + 85 / 100));
+        expect(owner.upgrades[9].sourceBonus).toBe(ownedBonus(9) * (1 + 237 / 100));
+        expect(owner.upgrades[10].sourceBonus).toBe(ownedBonus(10) * (1 + 5 * 17 / 100));
+        [44, 45, 46].forEach(index => {
+            expect(owner.upgrades[index].sourceBonus).toBe(ownedBonus(index) * 19);
+        });
+        [54, 55, 56].forEach(index => {
+            expect(owner.upgrades[index].sourceBonus).toBe(ownedBonus(index) * (1 + 5 * 73 / 100));
+        });
+        [59, 60, 61].forEach(index => {
+            expect(owner.upgrades[index].sourceBonus).toBe(ownedBonus(index) * 4);
+        });
+
+        const zeroInputs = { ...inputs, spelunkingSkillLevelTotal: 0, ordinaryDiscoveryCount: 0,
+            bestDepthTotal: 0, biggestHaulDigitTotal: 0, grandDiscoveryCount: 0,
+            manicTotalDepth: 0, trackometerLevel: 0 };
+        owner.upgrades.forEach(upgrade => upgrade.updateSourceBonus(zeroInputs));
+        expect(owner.upgrades[0].sourceBonus).toBe(0);
+        expect(owner.upgrades[1].sourceBonus).toBe(ownedBonus(1));
+        expect(owner.upgrades[2].sourceBonus).toBe(ownedBonus(2) * 2);
+        expect(owner.upgrades[3].sourceBonus).toBe(ownedBonus(3));
+        [44, 45, 46].forEach(index => expect(owner.upgrades[index].sourceBonus).toBe(0));
+        [59, 60, 61].forEach(index => expect(owner.upgrades[index].sourceBonus).toBe(0));
+    });
+
+    it('replaces source bonus inputs from an isolated changed save copy', () => {
+        const run = freshAccount();
+        const changedSave = copySave(run.save);
+        const changedSpelunking = readArrayField<(number | string)[][]>(changedSave, 'Spelunk');
+        changedSpelunking[1] = Array.from(changedSpelunking[1] ?? [], (_, index) => index * 10);
+        changedSpelunking[2] = [1, 10, 100, 1000, 0];
+        changedSpelunking[6] = [];
+        changedSpelunking[44] = Array.from(changedSpelunking[44] ?? [], (_, index) => index === 0 ? 2 : 0);
+        changedSpelunking[4] = [...(changedSpelunking[4] ?? [])];
+        changedSpelunking[4][3] = 2;
+        changedSpelunking[4][4] = 3;
+        replaceArrayField(changedSave, 'Spelunk', changedSpelunking);
+
+        const playerNames = readArrayField<string[]>(changedSave, 'playerNames');
+        playerNames.forEach((_, playerID) => {
+            const skillLevels = readArrayField<(number | string)[]>(changedSave, `Lv0_${playerID}`);
+            skillLevels[SkillsIndex.Spelunking] = playerID === 0 ? 120 : playerID === 1 ? -5 : 0;
+            replaceArrayField(changedSave, `Lv0_${playerID}`, skillLevels);
+        });
+
+        const data = processSave(run, run.data, changedSave);
+        const owner = data.get('spelunking') as Spelunking;
+        const skillTotal = playerNames.length > 0 ? 120 : 0;
+        const depthTotal = changedSpelunking[1].slice(0, 10)
+            .reduce((total, depth) => total + Number(depth), 0);
+        const haulDigitTotal = [1, 10, 100, 1000, 0].reduce((total, haul) =>
+            total + Math.ceil(Math.log(Math.max(haul, 1)) / 2.30259), 0);
+        const grandCount = 2;
+
+        expect(owner.spelunkingSkillLevelTotal).toBe(skillTotal);
+        expect(owner.bestDepthTotal).toBe(depthTotal);
+        expect(owner.biggestHaulDigitTotal).toBe(haulDigitTotal);
+        expect(owner.getTotalDiscoveries()).toBe(0);
+        expect(owner.grandDiscoveryCount).toBe(grandCount);
+        expect(owner.exaltedStampFragments).toBe(2);
+        expect(owner.prismaBubblesFound).toBe(3);
+        expect(owner.exaltDropChanceDenominator).toBe(
+            60 * Math.pow(8, 2) / (1 + owner.getUpgradeBonus(27) / 100)
+        );
+        expect(owner.prismaDropChanceDenominator).toBe(
+            100 * Math.pow(1.5, 3) / (1 + owner.getUpgradeBonus(28) / 100)
+        );
+        expect(owner.upgrades[0].sourceBonus).toBe(owner.getUpgradeBonus(0) * skillTotal);
+        expect(owner.upgrades[2].sourceBonus).toBe(owner.getUpgradeBonus(2) * (2 + depthTotal / 100));
+        expect(owner.upgrades[3].sourceBonus).toBe(owner.getUpgradeBonus(3) * (1 + 3 * haulDigitTotal / 100));
+        expect(owner.upgrades[1].sourceBonus).toBe(owner.getUpgradeBonus(1));
+        [44, 45, 46].forEach(index => {
+            expect(owner.upgrades[index].sourceBonus).toBe(owner.getUpgradeBonus(index) * grandCount);
+        });
     });
 
     it('keeps Part 3 observations stable across fresh factories and repeated normal processing', () => {

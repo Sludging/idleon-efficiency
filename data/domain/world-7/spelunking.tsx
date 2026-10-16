@@ -1,4 +1,4 @@
-import { commaNotation, lavaFunc, notateNumber } from "../../utility";
+import { commaNotation, lavaFunc, lavaLog, notateNumber } from "../../utility";
 import { Domain, RawData } from "../base/domain";
 import { initSpelunkingChapterRepo, SpelunkingChapterBase } from "../data/SpelunkingChapterRepo";
 import { initSpelunkingMetadataRepo } from "../data/SpelunkingMetadataRepo";
@@ -36,6 +36,7 @@ import type { LegendTalents } from "./legendTalents";
 import type { Meritocraty } from "./meritocraty";
 import type { SushiStation } from "./sushi";
 
+const ELIXIR_EFFECT_QUANTITIES = [25, 1, 30, 1, 20, 60, 25, 30, 1, 1, 1, 0];
 const GRAND_DISCOVERIES_PER_TUNNEL = 10;
 const GRAND_DISCOVERY_UPGRADE_INDEX = 43;
 
@@ -353,8 +354,19 @@ export class SpelunkingStamina {
     }
 }
 
+export interface UpgradeSourceBonusInputs {
+    spelunkingSkillLevelTotal: number;
+    ordinaryDiscoveryCount: number;
+    bestDepthTotal: number;
+    biggestHaulDigitTotal: number;
+    grandDiscoveryCount: number;
+    manicTotalDepth: number;
+    trackometerLevel: number;
+}
+
 export class Upgrade {
     public level: number = -1;
+    public sourceBonus: number = 0;
 
     constructor(public index: number, public data: SpelunkingUpgradeModel) {
     }
@@ -368,10 +380,64 @@ export class Upgrade {
 
     parse(savedLevel: number | string | undefined): void {
         this.level = Number(savedLevel ?? -1);
+        this.sourceBonus = this.getBonus();
     }
 
     getBonus(): number {
         return this.data.bonusPerLevel * this.purchasedLevel;
+    }
+
+    updateSourceBonus(inputs: UpgradeSourceBonusInputs): void {
+        const ownedBonus = this.getBonus();
+        this.sourceBonus = ownedBonus;
+        switch (this.index) {
+            case 0:
+                this.sourceBonus = ownedBonus * inputs.spelunkingSkillLevelTotal;
+                break;
+            case 1:
+            case 10:
+                this.sourceBonus = ownedBonus * (1 + 5 * inputs.ordinaryDiscoveryCount / 100);
+                break;
+            case 2:
+                this.sourceBonus = ownedBonus * (2 + inputs.bestDepthTotal / 100);
+                break;
+            case 3:
+                this.sourceBonus = ownedBonus * (1 + 3 * inputs.biggestHaulDigitTotal / 100);
+                break;
+            case 7:
+                this.sourceBonus = 15 + ownedBonus / (250 + ownedBonus) * 45;
+                break;
+            case 8:
+                this.sourceBonus = ownedBonus * (1 + inputs.spelunkingSkillLevelTotal / 100);
+                break;
+            case 9:
+                this.sourceBonus = ownedBonus * (1 + inputs.bestDepthTotal / 100);
+                break;
+            case 19:
+                this.sourceBonus = Math.max(10, 50 - ownedBonus);
+                break;
+            case 25:
+                this.sourceBonus = 1 + ownedBonus;
+                break;
+            case 38:
+                this.sourceBonus = 20 + ownedBonus;
+                break;
+            case 44:
+            case 45:
+            case 46:
+                this.sourceBonus = ownedBonus * inputs.grandDiscoveryCount;
+                break;
+            case 54:
+            case 55:
+            case 56:
+                this.sourceBonus = this.getEffectiveBonus(inputs.manicTotalDepth, inputs.trackometerLevel);
+                break;
+            case 59:
+            case 60:
+            case 61:
+                this.sourceBonus = this.getEffectiveBonus(inputs.manicTotalDepth, inputs.trackometerLevel);
+                break;
+        }
     }
 
     getEffectiveBonus(manicTotalDepth: number, trackometerLevel: number): number {
@@ -419,6 +485,7 @@ interface SpelunkingElixirUpgradeBonuses {
 
 export class SpelunkingElixirs {
     records: SpelunkingElixirBase[] = [];
+    descriptions: string[] = [];
     equippedSlots: number[] = [];
     memorizedIndices: number[] = [];
     ownedCount: number = 0;
@@ -434,6 +501,9 @@ export class SpelunkingElixirs {
 
     init(): void {
         this.records = initSpelunkingElixirRepo();
+        this.descriptions = this.records.map((record, index) =>
+            record.data.description.replace("{", String(ELIXIR_EFFECT_QUANTITIES[index]))
+        );
         this.equippedSlots = [];
         this.memorizedIndices = [];
         this.ownedCount = 0;
@@ -585,6 +655,14 @@ export class Spelunking extends Domain {
     }
     ownedAmber: number = 0;
     exaltedStampFragments: number = 0;
+    prismaBubblesFound: number = 0;
+    exaltDropChanceDenominator: number = 60;
+    prismaDropChanceDenominator: number = 100;
+    deepPocketsMultiplier: number = 1;
+    spelunkingSkillLevelTotal: number = 0;
+    bestDepthTotal: number = 0;
+    biggestHaulDigitTotal: number = 0;
+    grandDiscoveryCount: number = 0;
     grandDiscoveryUpgrade!: Upgrade;
     ownedEpilogueCount: number = 0;
     private readonly researchExpEpilogue = initTomeEpilogueBonusRepo().find(bonus => bonus.index === 7)!;
@@ -605,6 +683,16 @@ export class Spelunking extends Domain {
             }
         }
         return AMBER_DENOMINATIONS[0];
+    }
+
+    get bestUnlockedTool(): SpelunkingTool {
+        let bestTool = this.tools[0];
+        for (const tool of this.tools) {
+            if (tool.index <= 4 && tool.isUnlocked(index => this.getUpgradeBonus(index))) {
+                bestTool = tool;
+            }
+        }
+        return bestTool;
     }
 
     get availableTunnelCount(): number {
@@ -726,6 +814,14 @@ export class Spelunking extends Domain {
         this.trackometer.unlocked = false;
         this.ownedAmber = 0;
         this.exaltedStampFragments = 0;
+        this.prismaBubblesFound = 0;
+        this.exaltDropChanceDenominator = 60;
+        this.prismaDropChanceDenominator = 100;
+        this.deepPocketsMultiplier = 1;
+        this.spelunkingSkillLevelTotal = 0;
+        this.bestDepthTotal = 0;
+        this.biggestHaulDigitTotal = 0;
+        this.grandDiscoveryCount = 0;
         this.ownedEpilogueCount = 0;
         return this;
     }
@@ -781,8 +877,12 @@ export class Spelunking extends Domain {
             currencies[8], currencies[9], spelunking.getUpgradeBonus(59) >= 1
         );
         spelunking.ownedAmber = Number(currencies[0] ?? 0);
-        // Exalted Stamp Fragments add to the Compass bonus for exalted stamps.
         spelunking.exaltedStampFragments = Number(currencies[3] ?? 0);
+        spelunking.prismaBubblesFound = Number(currencies[4] ?? 0);
+        spelunking.exaltDropChanceDenominator = 60 * Math.pow(8, spelunking.exaltedStampFragments)
+            / (1 + spelunking.getUpgradeBonus(27) / 100);
+        spelunking.prismaDropChanceDenominator = 100 * Math.pow(1.5, spelunking.prismaBubblesFound)
+            / (1 + spelunking.getUpgradeBonus(28) / 100);
     }
 }
 
@@ -816,6 +916,37 @@ export const updateSpelunkingPresentation = (data: Map<string, any>): void => {
     players.forEach(player => {
         highestSpecialty = Math.max(highestSpecialty, player.getTalentBonus(236));
     });
+
+    let skillLevelTotal = 0;
+    for (const player of players) {
+        skillLevelTotal = Math.round(skillLevelTotal + Math.max(0, player.skills.get(SkillsIndex.Spelunking)!.level));
+    }
+    spelunking.spelunkingSkillLevelTotal = skillLevelTotal;
+
+    let bestDepthTotal = 0;
+    let biggestHaulDigitTotal = 0;
+    for (const tunnel of spelunking.tunnels) {
+        bestDepthTotal = Math.round(bestDepthTotal + tunnel.bestDepth);
+        biggestHaulDigitTotal = Math.round(biggestHaulDigitTotal + Math.ceil(lavaLog(tunnel.biggestHaul)));
+    }
+    spelunking.bestDepthTotal = bestDepthTotal;
+    spelunking.biggestHaulDigitTotal = biggestHaulDigitTotal;
+    const ordinaryDiscoveryCount = spelunking.getTotalDiscoveries();
+    spelunking.grandDiscoveryCount = spelunking.grandSummary.found;
+    spelunking.deepPocketsMultiplier = 1 + 7 * spelunking.getUpgradeBonus(21) / 100;
+
+    const sourceBonusInputs: UpgradeSourceBonusInputs = {
+        spelunkingSkillLevelTotal: skillLevelTotal,
+        ordinaryDiscoveryCount,
+        bestDepthTotal,
+        biggestHaulDigitTotal,
+        grandDiscoveryCount: spelunking.grandDiscoveryCount,
+        manicTotalDepth: spelunking.manic.totalDepth,
+        trackometerLevel: spelunking.trackometerLevel,
+    };
+    for (const upgrade of spelunking.upgrades) {
+        upgrade.updateSourceBonus(sourceBonusInputs);
+    }
 
     const upgrade5 = spelunking.getUpgradeBonus(5);
     const maximumInputs: StaminaMaximumInputs = {
