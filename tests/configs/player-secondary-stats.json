@@ -1,6 +1,6 @@
 {
-  "description": "Independent native normal Defence and Accuracy source replay from TotalStats.1.22.js:498-537 for the shared target player. Embeds the gear replay without changing its arithmetic. Never call TotalStats, Shrine, initializers, or Roo recomputation. Native getters may write prepared scratch. No refresh, switching, or reset.",
-  "target": "Persistent normal Defence and Accuracy",
+  "description": "Independent native normal Defence and base Accuracy source replay from TotalStats.1.22.js:498-537 for the shared target player. Embeds gear replay without changing arithmetic. Never call TotalStats, Shrine, initializers, or Roo recomputation. Native getters may write prepared scratch. No refresh, switching, or reset.",
+  "target": "Persistent normal Defence and base Accuracy",
   "extractions": [
     {
       "label": "secondary_stats",

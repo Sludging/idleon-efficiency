@@ -627,10 +627,18 @@ export class Food extends Item {
         return Food.getBoostFoodContribution(player, inputs, "WeaponPowerBoosts", talentInputs);
     }
 
+    static getMovementSpeedContribution(
+        player: Player,
+        inputs: BoostFoodEffectivenessInputs,
+        talentInputs: TalentLevelInputs = player.finalTalentInputs,
+    ): number {
+        return Food.getBoostFoodContribution(player, inputs, "MoveSpdBoosts", talentInputs);
+    }
+
     private static getBoostFoodContribution(
         player: Player,
         inputs: BoostFoodEffectivenessInputs,
-        effect: "HpBaseBoosts" | "WeaponPowerBoosts",
+        effect: "HpBaseBoosts" | "WeaponPowerBoosts" | "MoveSpdBoosts",
         talentInputs: TalentLevelInputs,
     ): number {
         let contribution = 0;

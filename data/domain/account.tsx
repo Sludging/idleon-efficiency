@@ -129,6 +129,7 @@ export class Account extends Domain {
     hasDeathBringerBundle: boolean = false;
     hasExplorerBundle: boolean = false;
     weeklyBoss: WeeklyBoss = new WeeklyBoss();
+    movementSpeedBonusPercent: number = 0;
 
     // corresponds to a.engine.getGameAttribute("CurrenciesOwned").h.TalentPoints
     talentPointsOwned: number[] = [];
@@ -191,6 +192,7 @@ export class Account extends Domain {
         const charCount = data.get("charCount") as number;
 
         account.plunderousMobKills = Number(optionList?.[139] ?? 0);
+        account.movementSpeedBonusPercent = Number(optionList?.[438] ?? 0);
         account.weeklyBoss.parse(optionList);
         const rawData = data.get("rawData") as Record<string, string | undefined>;
         const bundles: Record<string, string | number> = rawData.BundlesReceived === undefined

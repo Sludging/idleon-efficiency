@@ -14,10 +14,17 @@ describe('Persistent normal player Defence and base Accuracy', () => {
     player = getTargetPlayer(loadGameDataFromSave('latest').get('players') as Player[]);
   });
 
-  it.each(['defence', 'accuracy'] as const)('matches normal calculated %s', key => {
-    expect(player.stats[key]).toMatchLiveGameWithDetails(replay[key], {
+  it('matches persistent normal Defence', () => {
+    expect(player.stats.defence).toMatchLiveGameWithDetails(replay.defence, {
       tolerance: 0,
-      context: `${player.playerName} persistent ${key}; native inputs and stages: ${JSON.stringify(replay)}`,
+      context: `${player.playerName} persistent Defence; native inputs and stages: ${JSON.stringify(replay)}`,
+    });
+  });
+
+  it('matches separately named base Accuracy', () => {
+    expect(player.stats.baseAccuracy).toMatchLiveGameWithDetails(replay.accuracy, {
+      tolerance: 0,
+      context: `${player.playerName} persistent base Accuracy; native inputs and stages: ${JSON.stringify(replay)}`,
     });
   });
 });

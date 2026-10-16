@@ -48,6 +48,7 @@ import type { LegendTalents } from './world-7/legendTalents';
 import type { Spelunking } from './world-7/spelunking';
 import type { SushiStation } from './world-7/sushi';
 import type { JellyOperator } from './world-7/jellyOperator';
+import type { SaltLick } from './world-3/construction/saltLick';
 
 interface AttributeSources {
     alchemy: Alchemy;
@@ -145,8 +146,11 @@ interface DropRateSources {
     research: ResearchGrid;
     minehead: Minehead;
     equinox: Equinox;
+    account: Account;
     sushi: SushiStation;
     jellyOperator: JellyOperator;
+    sigils: Sigils;
+    saltLick: SaltLick;
 }
 
 function getStatCards(player: Player): Card[] {
@@ -260,8 +264,10 @@ export class PlayerStats {
         let signWeapon = 0;
         for (const sign of player.starSigns) {
             signWeapon += sign.getBonus('Weapon Power');
+    private preparedBaseAccuracy: number | undefined;
         }
         const skillWeapon = Talent.getSkillWeaponPowerBonus(player);
+    private preparedMovementSpeed: number | undefined;
         const petWeapon = Talent.getPetWeaponPowerBonus(player, breeding.firstStoredPetPower);
         const warriorWeapon = alchemy.getBubbleBonusForKey('W1', player);
         const archerWeapon = alchemy.getBubbleBonusForKey('A1', player);
@@ -270,12 +276,26 @@ export class PlayerStats {
         // Chips and weapon bubbles scale only gear. Flat bonuses remain outside this multiplier.
         this.preparedWeaponPower =
             5 + postOfficeBonus(player, '12a') + dungeons.passives.get(PassiveType.Flurbo)![0].getBonus() + foodWeapon
+    get baseAccuracy(): number {
+        if (this.preparedBaseAccuracy === undefined) {
+            throw new Error('Base Accuracy has not been calculated');
+        }
+        return this.preparedBaseAccuracy;
+    }
+
             + (card18 + cardLevel + (guild.guildBonuses[3].getBonus() + sigils.sigils[17].getBonus()))
             + (player.gear.getProperty('Weapon_Power')
                 * (1 + (player.getChipBonus('weppow') + (warriorWeapon + (archerWeapon + mageWeapon))) / 100)
                 + Talent.getBeginnerWeaponPowerBonus(player)
                 + (alchemy.getVialBonusForKey('WeaponPOW') + (family.getClassBonus(ClassIndex.Barbarian)!.getBonus(player) + (signWeapon
                     + (arcade.bonuses[17].getBonus() + (skillWeapon.progression + (petWeapon + skillWeapon.intellect)))))));
+
+    get movementSpeed(): number {
+        if (this.preparedMovementSpeed === undefined) {
+            throw new Error('Movement speed has not been calculated');
+        }
+        return this.preparedMovementSpeed;
+    }
 
         const warriorPower = alchemy.getBubbleBonusForKey('W2', player);
         const warriorToolPower = alchemy.getBubbleBonusForKey('W7', player);
@@ -300,8 +320,9 @@ export class PlayerStats {
     }
 
     updateSecondaryStats(player: Player, sources: SecondaryStatSources): void {
-        const { alchemy, stamps, arcade, statues, upgradeVault, companions, cooking, shrines,
-            bribes, prayers, goldenFood, dungeons, equipmentSets, divinity, votes, poppy } = sources;
+        const { account, alchemy, stamps, sigils, saltLick, arcade, statues, upgradeVault,
+            companions, cooking, shrines, bribes, prayers, goldenFood, dungeons, equipmentSets,
+            divinity, votes, poppy } = sources;
         const cards = getStatCards(player);
         const alchemyDefPct = alchemy.getBubbleBonusForKey('DefPct', player);
         const card26 = Card.GetTotalBonusForId(cards, 26);
@@ -355,7 +376,7 @@ export class PlayerStats {
             * (1 + (recipientSnehebatuMinor + votes.getCurrentBonus(3)) / 100)
             + (poppy.getGlobalBonus(1) + upgradeVault.getBonusForId(5));
 
-        this.preparedAccuracy = 2
+        this.preparedBaseAccuracy = 2
             + alchemy.getVialBonusForKey('baseACC')
             + (postOfficeBonus(player, 'acc')
                 + (Card.GetTotalBonusForId(cards, 23) + player.gear.getBonus(EquipmentBonus.Accuracy) + goldenFood.getBaseAccuracy(player))
@@ -422,6 +443,87 @@ export class PlayerStats {
                 + (5 * dreamDropLevel + (summoning.getSummoningWinnerBonusFromIndex(9)
                     + (tome.getTomeBonus(2, player)
                         + (firstAdditivePercent + (research.getBonusForId(173, 0) + companion132))))));
+
+        let selectedClassStat: number;
+        switch (player.getBaseClass()) {
+            // Native ClassStatTypes uses secondary keys WIS, STR, AGI, then LUK.
+            case ClassIndex.Warrior:
+                selectedClassStat = this.wisdom;
+                break;
+            case ClassIndex.Archer:
+                selectedClassStat = this.strength;
+                break;
+            case ClassIndex.Mage:
+                selectedClassStat = this.agility;
+                break;
+            default:
+                selectedClassStat = this.luck;
+        }
+        const accountBuff273 = player.activeBuffs.find(talent => talent.skillIndex === 273)?.getBonus() ?? 0;
+        const foodMovementSpeed = Food.getMovementSpeedContribution(player, {
+            boostFoodStamp: getStampBonusForKey(stamps, 'BFood'),
+            foodStatue: statues[player.playerID].statues.find(statue => statue.index === 3)!.getBonus(player),
+        }, player.finalTalentInputs);
+        const movementSpeedFlat = foodMovementSpeed
+            + (player.getTalentBonusAtInputs(266, player.finalTalentInputs)
+                + (getStampBonusForKey(stamps, 'PctMoveSpd')
+                    + (accountBuff273 + account.movementSpeedBonusPercent)));
+        const agilitySpeed = this.agility < 1000
+            ? (Math.pow(this.agility + 1, 0.4) - 1) / 40
+            : (this.agility - 1000) / (this.agility + 2500) * 0.5 + 0.371;
+        let movementSpeed = (movementSpeedFlat + (
+            statues[player.playerID].statues.find(statue => statue.index === 1)!.getBonus(player)
+            + (player.starSigns.reduce((sum, sign) => sum + sign.getBonus('Movement Speed'), 0)
+                + (player.gear.getBonus(EquipmentBonus.MovementSpeed)
+                    + (Card.GetTotalBonusForId(cards, 6)
+                        + player.getTalentBonusAtInputs(77, player.finalTalentInputs))))
+        )) / 100 + agilitySpeed / 2.2 + 1;
+        const movementTalent641 = player.getTalentBonusAtInputs(641, player.finalTalentInputs);
+        // Native leaves values above 2 unchanged; remaining values use strict >1.75 and low branches.
+        if (movementSpeed <= 2) {
+            if (movementSpeed > 1.75) {
+                movementSpeed = Math.min(2, Math.floor(100 * (movementSpeed + movementTalent641 / 100)) / 100);
+            } else {
+                movementSpeed = Math.min(1.75, Math.floor(100 * (movementSpeed + (
+                    saltLick.getBonus(7) + player.getChipBonus('move')
+                    + (movementTalent641 + sigils.sigils[13].getBonus())
+                ) / 100)) / 100);
+            }
+        }
+        this.preparedMovementSpeed = Math.floor(100 * movementSpeed) / 100;
+
+        const selectedBuff288 = player.activeBuffs.find(talent => talent.skillIndex === 288);
+        const cardAccuracy = Card.GetTotalBonusForId(cards, 17);
+        const signAccuracy = player.starSigns.reduce((sum, sign) => sum + sign.getBonus('Accuracy'), 0);
+        const statueAccuracy = statues[player.playerID].statues.find(statue => statue.index === 14)!.getBonus(player);
+        const arcadeAccuracy = arcade.bonuses[2].getBonus();
+        const flurboAccuracy = dungeons.passives.get(PassiveType.Flurbo)![5].getBonus();
+        const bribeAccuracy = bribes.find(bribe => bribe.bribeIndex === 21)!.getBonus();
+        const companionAccuracy = getCompanionActiveBonus(companions, 23);
+        // Apply native Accuracy order: alchemy percentage, remaining percentage, speed talent, then power curve.
+        let accuracyStat = selectedClassStat * (1 + alchemy.getBubbleBonusForKey('AccPct', player) / 100)
+            * (1 + (
+                (selectedBuff288 && selectedBuff288.pointsSpent > 0.5 ? selectedBuff288.getBonus(false, true) : 0)
+                + (cardAccuracy + (signAccuracy + (selectedBuff124
+                    + (statueAccuracy + (arcadeAccuracy + (flurboAccuracy + (bribeAccuracy + companionAccuracy)))))))
+            ) / 100);
+        if (this.preparedMovementSpeed > 1.99) {
+            accuracyStat *= 1 + secondTalentBonus(player, 641) / 100;
+        }
+        const cardSetAccuracy = player.cardInfo!.getBonusForId(4);
+        const prayer6 = player.activePrayers.includes(6) ? prayers.find(prayer => prayer.index === 6)!.getBonus() : 0;
+        const prayer15 = player.activePrayers.includes(15) ? prayers.find(prayer => prayer.index === 15)!.getCurse() : 0;
+        const prayer16 = player.activePrayers.includes(16) ? prayers.find(prayer => prayer.index === 16)!.getCurse() : 0;
+        const accuracyPrayerFactor = Math.max(0.1, 1 + (prayer6 - prayer15 - prayer16) / 100);
+        const accuracyChip = player.getChipBonus('acc');
+        const accuracyMeal = cooking.getMealBonusForKey('TotAcc');
+        this.preparedAccuracy = (
+            Math.pow(accuracyStat / 4, 1.4) + (accuracyStat + this.preparedBaseAccuracy)
+        ) * (1 + (accuracyStat + 2 * cardSetAccuracy) / 200)
+            * accuracyPrayerFactor
+            * (1 + (accuracyChip + (accuracyMeal + (poppy.getGlobalBonus(3)
+                + (votes.getCurrentBonus(3) + amarokSetPercent)))) / 100)
+            * (1 + recipientSnehebatuMinor / 100);
         const prayerAndAccountPercent = prayerPercent
             + (sigils.sigils[11].getBonus()
                 + (shinyDropPercent + (arcade.bonuses[27].getBonus()
@@ -688,5 +790,8 @@ export const updatePlayerDropRates = (accountData: Map<string, any>): void => {
     };
     for (const player of players) {
         player.stats.updateDropRate(player, players, sources);
+        account: accountData.get('account') as Account,
     }
 };
+        sigils: accountData.get('sigils') as Sigils,
+        saltLick: accountData.get('saltLick') as SaltLick,

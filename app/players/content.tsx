@@ -319,6 +319,11 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                             <TextAndLabel label="LUK" text={commaNotation(player.stats.luck)} textSize="small" />
                             <TextAndLabel label="Defence" text={notateNumber(player.stats.defence)} textSize="small" />
                             <TextAndLabel label="Accuracy" text={notateNumber(player.stats.accuracy)} textSize="small" />
+                            <TextAndLabel
+                                label="Movement speed"
+                                text={`${commaNotation(player.stats.movementSpeed * 100)}%`}
+                                textSize="small"
+                            />
                             <TextAndLabel label="Weapon power" text={notateNumber(player.stats.weaponPower)} textSize="small" />
                             <TextAndLabel
                                 label="Drop rate"
@@ -450,7 +455,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                 )}
                             </Box>
                         </Box>
-                    }                    
+                    }
                     {
                         activePrayers.length > 0 &&
                         <Box gap="small">
@@ -517,13 +522,13 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                                         direction={TipDirection.Down}
                                                         size='small'>
                                                         <IconImage data={(slot.chip as Chip).getImageData()} />
-                                                    </TipDisplay> 
+                                                    </TipDisplay>
                                                     :
                                                     <Box width={{ max: '42px', min: '42px' }} height={{ max: '42px', min: '42px' }} align="center">
                                                         {
                                                             (player.skills.get(SkillsIndex.Intellect)?.level ?? 0) < slot.lvlReq && <Text size="xsmall">Lv {slot.lvlReq}</Text>
                                                         }
-                
+
                                                     </Box>
                                             }
                                         </Box>
@@ -855,7 +860,7 @@ function TalentDisplay({ player }: { player: Player }) {
                 {player.extraLevelsFromAchievements > 0 && <TextAndLabel label="Achievements" text={`+${player.extraLevelsFromAchievements}`} />}
                 {player.extraLevelsFromEquinox > 0 && <TextAndLabel label="Equinox" text={`+${player.extraLevelsFromEquinox}`} />}
                 {player.extraLevelsFromSlug > 0 && <TextAndLabel label="Slug companion" text={`+${player.extraLevelsFromSlug}`} />}
-                {(player.extraLevelsFromBear > 0 || player.extraLevelsFromTalent > 0 || player.extraLevelsFromES > 0 || player.extraLevelsFromSlug > 0 || player.extraLevelsFromEquinox > 0 || player.extraLevelsFromAchievements > 0) && 
+                {(player.extraLevelsFromBear > 0 || player.extraLevelsFromTalent > 0 || player.extraLevelsFromES > 0 || player.extraLevelsFromSlug > 0 || player.extraLevelsFromEquinox > 0 || player.extraLevelsFromAchievements > 0) &&
                     <CheckBox
                         checked={bookMaxLevel}
                         label={<Box direction="row" align="center">
@@ -1295,12 +1300,12 @@ function PlayerTab({ player }: PlayerTabProps) {
 
 function Players() {
     const [index, setIndex] = useState<number>(0);
-    
+
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
     const playerData = theData.get("players") as Player[];
-    
+
     const onActive = (nextIndex: number) => setIndex(nextIndex);
 
 
