@@ -1,6 +1,6 @@
 ## Part 3 Phase 4 — backend executed, 2026-10-16
 
-**Status:** Implemented approved backend plan for #437. Independent review is recorded below. Stop before further changes, commit, staging, or issue action. Existing Part 1/2 behavior and earlier Part 3 work remain unchanged.
+**Status:** Implemented approved backend plan for #437. Independent review is recorded below. The accepted pricing backend is committed locally; existing Part 1/2 behavior and earlier Part 3 work remain unchanged.
 
 **Backend changes:** `Upgrade` now owns source-ordered next-cost quotes, finite remaining cap, cost-to-max, and cap-bounded next-10 totals. `Spelunking` prepares shared discounts once after existing final player/talent and producer processing, matching `charNames[0]` to `Player.playerName`. Talent 235 uses the account maximum of `Player.getTalentBonusAtInputs(235, player.finalTalentInputs)`; its source scale comes from `RoyalArmory.getTotalRoyalStatueLevels()`, whose native `CalcTalentMAP[235]` source is the rounded RoyalG level sum in `docs/game-snippets/alchemy/TalentCalc.1.22.js:231-236`. Missing first-user player context clears all price quotes instead of selecting a fallback. Amber affordability compares only Amber with the requested quote; locked and maxed state remain separate. No UI, generated data, saved state, purchase simulation, or static price copy changed.
 
@@ -68,13 +68,13 @@ Cost-to-max and next-10 are derived totals, not native source outputs. The finit
 
 ## Part 3 backend acceptance — 2026-10-16
 
-**Acceptance:** The human accepted the revised Part 3 backend and its stated check limits. Fresh independent review found zero Standards and zero Spec findings.
+**Acceptance:** The human accepted the revised Part 3 pricing backend and its stated check limits. Fresh independent review found zero Standards and zero Spec findings.
 
-**Accepted evidence:** The durable focused Jest receipt records 7 tests passing with exit 0. The normal account-factory smoke populated 68 finite source bonuses and 12 resolved descriptions, then processed repeated and changed saves. Evidence was inspected, not rerun.
+**Accepted evidence:** The focused pricing tests passed **2 suites / 12 tests**, exit 0. The normal account-factory smoke matched original `ShopUpgCost` exactly for five representative rows. Evidence was inspected, not rerun.
 
-**Accepted limits:** Evidence uses offline Jelly_Operator v1.22 and one unpaired save, not connected-game parity. The broader suite, TypeScript, build, lint, and UI binding/rendering remain unproved. No UI acceptance is implied.
+**Accepted limits:** Evidence uses offline Jelly_Operator v1.22 and one account, not connected-game, all-row, or other-account parity. Aggregates are derived projections. The smoke used transpile-only after the pre-existing `Sneaking` TypeScript error. No full suite, TypeScript check, build, lint, or UI integration is proved. Missing-first-profile and reordered-name routing remain unexercised; source inspection found no fallback. No UI acceptance is implied.
 
-**Scope and commit:** Commit only the accepted domain, focused regression test, revised backend plan, and this selected handoff record. Preserve other staged and unstaged work. No push, PR, deployment, or issue closure is authorized.
+**Scope and commit:** Commit `22cbc143b2e53cb6dda2c97d43b25b917b88a407` contains the pricing domain, focused regression tests, revised backend plan, and selected handoff records. Preserve other staged and unstaged work. No push, PR, deployment, or issue closure is authorized.
 
 ## Part 3 Phase 3 — backend plan approved, 2026-10-15
 
