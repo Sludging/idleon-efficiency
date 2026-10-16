@@ -1,3 +1,10 @@
+## Current handoff — Part 3 UI accepted, 2026-10-16
+
+**Acceptance and outcomes:** The human accepted all ten UI outcomes after fresh final Standards 0 / Spec 0 review and direct inspection of the corrected summary, aligned high-contrast tooltips, and side-by-side twelve-icon Elixir grid. Preserve existing views, filters, and nonzero scroll. Accepted UI includes next and bulk Shop costs; finite max or unbounded next-10; raw-Amber affordability; neutral locked/maxed rows; dimmed locked rows with useful potential and no false level-one effect; 22–24px Amber; memorization and consumption above Elixirs; six-pixel summary bars; dim unowned benefits; bold actual total bonus; canonical shared icons and memorized cue.
+
+**Evidence reused, not rerun:** Default `08-28-49-877Z-65337` covers ten outcomes, 68 rows, five native quotes, contrast, stable tooltips, and desktop summary. Alternate `08-26-22-839Z-60122` covers three unowned cards at `0.76` opacity and tooltips at `0.6`. Grid `08-38-10-580Z-77791` covers twelve icons at desktop and narrow widths. Focused `08-44-49-971Z-85308` matches component SHA-256 `402ec642dbdbdb327afd0020d048dc3073dd11bac97c366255b04849e4ffe25e`.
+
+**Limits and commit boundary:** Shared hydration, NitroPay, CORS, failed-resource, and HTTP 403 errors remain unwaived. Pricing is offline v1.22, one account, five comparisons; no connected-game parity. No full suite, TypeScript, build, lint, or formatter claim. Historical Zenith duplicate-`totalOwnedClusters` and Sneaking TS2304 failures remain. Commit only accepted component, canonical image helper, and this handoff record; preserve user route/Part 2 overlap, staged deletions, generated files, and unrelated work. No push, PR, deployment, or issue action.
 ## Part 3 Phase 4 — backend executed, 2026-10-16
 
 **Status:** Implemented approved backend plan for #437. Independent review is recorded below. The accepted pricing backend is committed locally; existing Part 1/2 behavior and earlier Part 3 work remain unchanged.

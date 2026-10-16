@@ -633,6 +633,10 @@ export class SpelunkingElixirs {
         return Math.min(0.6, (this.upgradeConsumptionReduction + this.chapterConsumptionReduction) / 100);
     }
 
+    getImageData(index: number): ImageData {
+        return { location: `CaveElix${index}`, width: 46, height: 46 };
+    }
+
     init(): void {
         this.records = initSpelunkingElixirRepo();
         this.descriptions = this.records.map((record, index) =>
