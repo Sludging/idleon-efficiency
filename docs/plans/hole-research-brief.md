@@ -9,7 +9,79 @@
 ## Current handoff
 
 - **Selected part and authority:** The human selected part 3 only: [#443 — Skilling layers and character capability](https://github.com/Sludging/idleon-efficiency/issues/443), covering Motherlode, Undying Hive, Evertree, and Bottomless Trench as specified in the approved delivery parts. The human delegated routine supervision within part 3, including plan approval, revisions, acceptance, publication, and local-commit authorization. Publication and local commitment require relevant explicit supervisor approval; this selection alone authorizes no such action. The parent is a read-only delegated supervisor under [the feature workflow](../human/feature-workflow.md). Workers must be fresh for each action and run strictly serially. Before exploratory research, follow [repository research-specialist rules](../../AGENTS.md#research-specialists): delegate game-source, caller, runtime, player-meaning, and WikiBot static-data exploration to `game-researcher`, and repository pattern discovery to `pattern-researcher`. No WikiBot work is authorized. Preserve completed parts 1–2, canonical navigation, prior approvals, evidence and check limits, unrelated work, accepted calculations, and supplied generated prerequisites.
-- **Current gate (2026-10-16):** The supervisor accepted the amended UI after the latest independent review found zero actionable specification or standards findings. User-directed display changes supersede conflicting earlier UI requirements only for the four selected cavern details and navigation labels; retain backend values and historical evidence. The user's source-six allowance selection governs the remaining-claims display; do not restate the earlier no-allowance restriction as current. No push, PR, deployment, or issue closure. Parts 4–7 remain unselected.
+- **Current gate (2026-10-16):** The supervisor accepted the five production UI followups after fresh independent review found zero specification, standards, or scope findings, and authorized a scoped local commit. Preserve parts 1–2, earlier nine reductions, source-six policy, dynamic data owners, normal production shell, and all other 14 support states. Parts 4–7 remain unselected. No push, PR, deployment, or issue closure.
+
+### Part 3 phase 7 five selected UI followups — 2026-10-16
+
+Implemented only the five approved presentation changes in [Hole content](../../app/world-5/hole/content.tsx). The four cavern views now use intrinsic-size sibling fields in one wrapping Grommet row, with medium vertical and small horizontal gaps. Current/required resources have no tooltip or information icon; met resources retain green color. All four thresholds use **Efficiency required**. Required efficiency, remaining claims, and owned-effect descriptions use the shared `TextAndLabel` tooltip icon. Motherlode lifetime ore and owned effects stay in the same field flow. Values and effects remain dynamic from existing domain owners; no backend, calculation, static data, shell, rail, or other support-state changes were made.
+
+- `yarn ui:run .ui-verification/hole-part3-wrapping-20261016.cjs` passed on normal `/world-5/hole` at **1440×1000**, using the configured `tests/fixtures/saves/latest.json` through the account pipeline. The private [report](../../.ui-verification/runs/2026-10-16T08-12-33-619Z-19619/hole-wrapping-report.json) confirms all four selected views, **11 qualifying character names only** in each efficiency tip, all 18 unnumbered ordered rail entries, and the 14 preserved support states. It records owned dynamic effect values and tooltip geometry. Actual tooltip-to-icon distances were **54.85px** for efficiency, **67px** for claims, and **12.72–15px** for owned effects. Resource fields had zero SVG information icons.
+- The [normal production capture](../../.ui-verification/runs/2026-10-16T08-12-33-619Z-19619/motherlode-production.png) shows Opal/Lantern summaries, centered tabs, Motherlode **19** layers, **10.3M / 20.1M** ore, **1.31B** lifetime ore, **638M** Mining, **6** claims, and owned effects **+45.57/hr** and **6.12×**. The [constrained capture](../../.ui-verification/runs/2026-10-16T08-12-33-619Z-19619/motherlode-wrapped-production.png) and report show natural wrapping at browser-only **640px max-width**: field-row origins **431.44px** and **496.44px**, a **65px** gap. No production panel width was added. The [shell/support capture](../../.ui-verification/runs/2026-10-16T08-12-33-619Z-19619/hole-shell-production.png) records a preserved non-resource state.
+- The Impeccable detector returned `[]`. Browser output retained shared hydration mismatch, NitroPay `document.browsingTopics()` failure, RL identity CORS, one failed resource, and one HTTP 403; no selected Hole runtime error was reported. A follow-up capture first found the shared app starting; no service was restarted. After it became healthy, the final scenario passed.
+- Verification limits: one configured save and desktop viewport only. No tests, builds, lint, type checks, game actions, save mutation, mobile/tablet, accessibility, new game parity, or live claim/reset checks. Source-six/Wiki-five and reset timing remain unresolved. No independent review, acceptance, publication, commitment, push, PR, deployment, or issue closure occurred.
+### Part 3 phase 8 fresh independent UI review — 2026-10-16
+
+**Method and scope:** Followed [the scoped UI review guidance](../agents/ui-patterns.md), [the approved part 3 UI plan](hole-part-3-ui-plan.md), and phase 8 of [the feature workflow](../human/feature-workflow.md). Reviewed issue [#443](https://github.com/Sludging/idleon-efficiency/issues/443), the current uncommitted `app/world-5/hole/content.tsx` diff, production screenshots and report, coding standards, and the player outcome. Code remained read-only; no checks were rerun.
+
+#### Specification and player outcome
+
+**Zero confirmed actionable specification or scope findings.** The diff replaces the selected resource-cavern grid and separate benefit rows with one intrinsic-size, wrapping sibling row. It removes resource tooltips/icons, retains met-resource green, labels each threshold **Efficiency required**, and routes the three retained tooltip types through `TextAndLabel`. Motherlode lifetime ore remains distinct and colocated with current/required ore. The normal production capture preserves the real Opal/Lantern summaries, centered tabs, and existing shell. The constrained capture shows natural wrapping with the benefits on a second row. The report confirms four selected caverns, 18 ordered unnumbered rail entries, and all 14 other support states. No earlier reductions were reversed.
+
+#### Standards and maintainability
+
+**Zero confirmed actionable standards or maintainability findings.** The changed composition uses the approved simple Grommet wrapping row, existing spacing tokens, and shared `TextAndLabel` tooltip affordance. It adds no abstraction, fallback, impossible-`undefined` guard, or unrelated behavior. The approved plan remains reviewable; no departure from its scope or applicable standards was found.
+
+#### Evidence and limits
+
+- Inspected the [normal production capture](../../.ui-verification/runs/2026-10-16T08-12-33-619Z-19619/motherlode-production.png), [constrained capture](../../.ui-verification/runs/2026-10-16T08-12-33-619Z-19619/motherlode-wrapped-production.png), and [production report](../../.ui-verification/runs/2026-10-16T08-12-33-619Z-19619/hole-wrapping-report.json). The captured local-save outcome shows all planned fields, claims and owned dynamic effects; the report records qualifying names and tooltip geometry.
+- Evidence remains one configured save and desktop viewport. No new game parity, mobile/tablet, accessibility, or live claim/reset evidence is claimed. Existing shared browser errors remain as recorded above.
+- No UI run, tests, build, lint, type check, or detector was rerun.
+
+**Summary and stop:** Specification **0**; standards/maintainability **0**. No confirmed scope expansion or overcomplication. No fix, acceptance, publication, commitment, or other-part work occurred.
+
+### Part 3 phase 9 accepted UI and local commitment — 2026-10-16
+
+The supervisor accepted the five selected production UI changes and their stated check limits after the fresh phase 8 review found zero specification, standards, or scope findings. The local commit contains only `app/world-5/hole/content.tsx` and this plan and handoff.
+
+1. Current/required resources have no tooltip or information icon; met resources retain green color.
+2. All four thresholds use **Efficiency required**.
+3. Progress, resources, Motherlode lifetime ore, efficiency, claims, and owned effects use one intrinsic-size wrapping field row with existing gaps. At a browser-only **640px** constraint, wrapped row origins are **65px** apart.
+4. Required-efficiency, remaining-claims, and owned-effect descriptions use the same `TextAndLabel` tooltip icon and anchor.
+5. Existing values and owned dynamic effects remain sourced from their domain owners; no backend, calculation, static-data, shell, rail, or other support-state change was included.
+
+The production evidence remains one configured local save at **1440×1000** on the normal `/world-5/hole` route. It covers the four selected caverns, shared shell, all 18 unnumbered rail entries, all 14 other support states, qualifying names only, tooltip anchors, and dynamic effects. Existing shared hydration mismatch, NitroPay `document.browsingTopics()` failure, RL identity CORS, failed resource, and HTTP 403 remain; no selected Hole exception was reported.
+
+No tests, builds, lint, type checks, game actions, save mutation, mobile/tablet, accessibility, game-parity, or live claim/reset checks ran. Source-six/Wiki-five and reset timing remain unresolved. No research, game, WikiBot, source, issue publication, push, PR, deployment, or issue closure occurred. Preserve the earlier nine reductions, parts 1–2, and other parts as unselected.
+
+### Part 3 phase 6 amended UI plan approval — 2026-10-16
+
+The human approved the current [part 3 UI plan](hole-part-3-ui-plan.md) and authorized publication. Published to [issue #443](https://github.com/Sludging/idleon-efficiency/issues/443#issuecomment-6210938075). This approval governs only the five selected presentation changes for Motherlode, Undying Hive, Evertree, and Bottomless Trench. It supersedes conflicting resource-tooltip, efficiency-label, and field-layout presentation decisions; prior approvals, acceptance, commitments, and evidence remain history.
+
+The approved plan preserves the normal production shell, centered tabs, artwork and all 18 unnumbered navigation entries. It keeps dynamic values and benefits on existing owners, with resource tooltips removed, consistent **Efficiency required** labels, intrinsic-size sibling fields in a wrapping row, existing spacing tokens, and consistent `TextAndLabel` tooltip icons for efficiency, claims, and owned-effect descriptions. The constrained 640px composition and representative preview data are display evidence only, not permission to copy preview rail sizing, borders, padding, values, or names into production.
+
+Part 3 only remains selected. Preserve source-six policy and all earlier accepted behavior. No implementation, acceptance, or commit occurred or is authorized by this approval.
+
+### Part 3 phase 6 selected UI follow-up — 2026-10-16
+
+The user selected five amendments for the four resource caverns only:
+
+1. Remove tooltip and information icon from current/required resource fields.
+2. Label Mining, Catching, Chopping, and Fishing thresholds **Efficiency required** consistently. Preserve each threshold and qualifying-name tooltip.
+3. Replace the four-column grid and Motherlode special placement with one wrapping row. Keep progress, resource, Motherlode **Lifetime ore**, required efficiency, remaining claims, and owned effects as sibling fields.
+4. Give wrapped rows visible vertical space using existing spacing tokens; keep horizontal gaps modest.
+5. Give required efficiency, remaining claims, and effect descriptions the same small information icon beside each label. Keep existing tooltip content.
+
+The revised standalone [part 3 UI plan](hole-part-3-ui-plan.md) records presentation, existing data/integration responsibilities, and verification. All earlier reductions remain: no numbered rail, local Opals, remaining-resource field, readiness text, character table/assignments, repeated cavern names, or redundant headings. Preserve current/required color, dynamic values, source-six remaining claims, qualifying names only, unknown-threshold **Unavailable** versus known-empty **None**, account summaries, centered tabs, and all other support states.
+
+**Preview verification:** `yarn ui:run .ui-verification/hole-part3-react-preview-a3d.cjs` passed at **1440×1000**. The disposable React route renders through the normal app shell and reuses `ContentTabs`, `LeftNavButton`, `IconImage`, `TextAndLabel`, Grommet theme, and actual `TextAndLabel` tooltip props. Display values are clearly labeled representatives, not account calculations or new game evidence. It preserves account-wide Opal/Lantern summaries, centered tabs, and all 18 canonical unnumbered nav entries with artwork.
+
+- The selected detail panel is constrained to **640px** on desktop. Six intrinsic-size siblings wrap: Layers, current/required resource, Motherlode **Lifetime ore**, Efficiency required, Claims remaining, and owned effect. Reported first-row label y-coordinate is **457px**; effect wraps at **522px**. Lifetime ore sits at **x=515px** in the same row. Resource field has zero information icons.
+- All four caverns show **Efficiency required** with retained representative thresholds: Motherlode **638M**, Hive **197M**, Evertree **638M**, Trench **179M**. Efficiency, claims, and effect hover opened their descriptions. Actual screenshot measurements place tooltips **90–101px** from icon anchors, not at screen origin.
+- [Motherlode wrapped render](../../.ui-verification/runs/2026-10-16T08-00-11-457Z-69644/motherlode-normal.png) · [Hive render](../../.ui-verification/runs/2026-10-16T08-00-11-457Z-69644/hive-normal.png)
+- [Efficiency tooltip](../../.ui-verification/runs/2026-10-16T08-00-11-457Z-69644/efficiency-tooltip.png) · [claims tooltip](../../.ui-verification/runs/2026-10-16T08-00-11-457Z-69644/claims-tooltip.png) · [effect tooltip](../../.ui-verification/runs/2026-10-16T08-00-11-457Z-69644/effect-tooltip.png)
+- [Preview report](../../.ui-verification/runs/2026-10-16T08-00-11-457Z-69644/preview-report.json) · [runner result](../../.ui-verification/runs/2026-10-16T08-00-11-457Z-69644/result.json) · [browser errors](../../.ui-verification/runs/2026-10-16T08-00-11-457Z-69644/errors.json)
+
+The run passed the scoped browser assertions, including all 18 rail names, six-field wrapping, resource icon absence, and the three hovered tooltip states. Browser output also contained existing hydration, NitroPay `document.browsingTopics()`, RL identity CORS, failed-resource, and HTTP 403 errors; an unrelated `clickerBonusSummary.tsx:119` parse error also appeared. No preview-specific runtime error occurred. The temporary route and scenario were removed after capture. No production/backend/generated-data changes, tests, builds, lint, type checks, game interaction, save mutation, mobile/tablet, accessibility check, publication, or commit occurred. Stop before commit.
 
 ### Part 3 amended UI acceptance and local commitment — 2026-10-16
 

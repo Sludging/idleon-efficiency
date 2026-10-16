@@ -334,54 +334,49 @@ export default function HoleContent() {
                         <Box gap="small"><Text color="accent-2" size="small">Owned Study benefit</Text><Benefit index={cavern} effects={studies[cavern].effects} dailyPurchases={hole.studies[cavern].dailyCoveUpgradesPurchased} /></Box>
                         <Text size="small">Other cavern tools are not supported on this website yet.</Text>
                     </> : <>
-                        <Box gap="small" data-testid="resource-cavern-progress">
-                            <Grid columns={["minmax(0, 1fr)", "minmax(0, 1fr)", "minmax(0, 1fr)", "minmax(0, 1fr)"]} gap="small" align="start" data-testid="resource-cavern-fields">
-                                <TextAndLabel label={cavern === 11 ? "Trunks" : cavern === 16 ? "Depth" : "Layers"} text={number(selectedResourceCavern.completedLayers)} textSize="small" labelSize="xsmall" />
-                                <Box gap="xsmall">
-                                    <TipDisplay heading="Resource requirement" size="small" maxWidth="520px" body={<Box gap="xsmall" data-testid="resource-requirement-tip">
-                                        <Text size="xsmall">Requirement context includes AMETHYST HEARTSTONE and these cross-cavern Studies:</Text>
-                                        {requirementStudies.map(study => <Box key={study.index} gap="xxsmall"><Text size="xsmall" weight="bold">Study {study.index}: {study.data.name.replace(/_/g, " ")}</Text><Text size="xsmall">{study.getDescription().replace(/_/g, " ")}</Text></Box>)}
-                                    </Box>}>
-                                    <TextAndLabel
-                                        label={`${resourceCavernResourceNames[cavern]} current / required`}
-                                        text={`${number(selectedResourceCavern.resourceCurrent)} / ${number(selectedResourceCavern.resourceRequirement)}`}
-                                        textSize="small"
-                                        labelSize="xsmall"
-                                        textColor={selectedResourceCavern.resourceRequirementMet === true ? "status-ok" : undefined}
-                                    />
-                                    </TipDisplay>
-                                    {selectedResourceCavern.name === "Motherload" && <TextAndLabel label="Lifetime ore" text={number(hole.resourceCavrens.lifetimeMotherlodeOre)} textSize="small" labelSize="xsmall" />}
-                                </Box>
-                                <TipDisplay heading="Characters meeting requirement" size="small" maxWidth="320px" body={<ResourceCharactersTooltip
-                                    efficiencyThreshold={selectedResourceCavern.efficiencyThreshold}
-                                    characters={resourceCharacters}
-                                />}>
-                                    <TextAndLabel
-                                        label={`${selectedResourceCavern.efficiencyType} required`}
-                                        text={number(selectedResourceCavern.efficiencyThreshold)}
-                                        textSize="small"
-                                        labelSize="xsmall"
-                                    />
-                                </TipDisplay>
-                                <TipDisplay heading="Shared cavern claims" size="small" maxWidth="420px" body={<Box gap="xsmall" data-testid="shared-claim-tip">
+                        <Box direction="row" gap={{ row: "medium", column: "small" }} align="start" wrap data-testid="resource-cavern-fields">
+                            <TextAndLabel label={cavern === 11 ? "Trunks" : cavern === 16 ? "Depth" : "Layers"} text={number(selectedResourceCavern.completedLayers)} textSize="small" labelSize="xsmall" />
+                            <TextAndLabel
+                                label={`${resourceCavernResourceNames[cavern]} current / required`}
+                                text={`${number(selectedResourceCavern.resourceCurrent)} / ${number(selectedResourceCavern.resourceRequirement)}`}
+                                textSize="small"
+                                labelSize="xsmall"
+                                textColor={selectedResourceCavern.resourceRequirementMet === true ? "status-ok" : undefined}
+                            />
+                            {selectedResourceCavern.name === "Motherload" && <TextAndLabel label="Lifetime ore" text={number(hole.resourceCavrens.lifetimeMotherlodeOre)} textSize="small" labelSize="xsmall" />}
+                            <TextAndLabel
+                                label="Efficiency required"
+                                text={number(selectedResourceCavern.efficiencyThreshold)}
+                                textSize="small"
+                                labelSize="xsmall"
+                                tooltip={<ResourceCharactersTooltip efficiencyThreshold={selectedResourceCavern.efficiencyThreshold} characters={resourceCharacters} />}
+                            />
+                            <TextAndLabel
+                                label="Claims remaining"
+                                text={number(hole.resourceCavrens.getRemainingSharedClaims())}
+                                textSize="small"
+                                labelSize="xsmall"
+                                tooltip={<Box gap="xsmall" data-testid="shared-claim-tip">
                                     <Text size="xsmall">Six claims per day are shared across all four resource caverns.</Text>
                                     <Text size="xsmall">Claims are made manually in game.</Text>
-                                </Box>}>
-                                    <TextAndLabel label="Claims remaining" text={number(hole.resourceCavrens.getRemainingSharedClaims())} textSize="small" labelSize="xsmall" />
-                                </TipDisplay>
-                            </Grid>
+                                </Box>}
+                            />
+                            {selectedSynergy.map(({ index, schematic, effect }) => {
+                                const target = ({ 58: "Bucket Fill Rate", 15: "Well bucket fill", 41: "Harp note production", 80: "Jar Rupie value", 94: "Fountain currency" } as Record<number, string>)[index];
+                                const value = effect && typeof effect.value === "number"
+                                    ? index === 58 ? `${effect.value > 0 ? "+" : ""}${precise(effect.value, "/hr")}` : precise(effect.value, "×")
+                                    : number(null, effect ? undefined : "Schematic effect is unavailable.");
+                                const description = schematic.getDescription().replace(/_/g, " ");
+                                return <TextAndLabel
+                                    key={index}
+                                    label={target}
+                                    text={value}
+                                    textSize="small"
+                                    labelSize="xsmall"
+                                    tooltip={description || undefined}
+                                />;
+                            })}
                         </Box>
-                        {selectedSynergy.map(({ index, schematic, effect }) => {
-                            const target = ({ 58: "Bucket Fill Rate", 15: "Well bucket fill", 41: "Harp note production", 80: "Jar Rupie value", 94: "Fountain currency" } as Record<number, string>)[index];
-                            const value = effect && typeof effect.value === "number"
-                                ? index === 58 ? `${effect.value > 0 ? "+" : ""}${precise(effect.value, "/hr")}` : precise(effect.value, "×")
-                                : number(null, effect ? undefined : "Schematic effect is unavailable.");
-                            const description = schematic.getDescription().replace(/_/g, " ");
-                            return <Box key={index} direction="row" gap="small" align="center" wrap data-testid={`cavern-synergy-${index}`}>
-                                <TextAndLabel label={target} text={value} textSize="small" labelSize="xsmall" />
-                                {description !== "" && <TipDisplay heading={`${target} details`} size="small" maxWidth="420px" body={<Text size="xsmall">{description}</Text>}><CircleInformation size="12px" /></TipDisplay>}
-                            </Box>;
-                        })}
                         {selectedSynergy.length === 0 && <Text size="small">{hole.schematics.filter(schematic => (resourceCavernSynergyIds[cavern] ?? []).includes(schematic.index)).some(schematic => !schematic.saveAvailable) ? "Unavailable: Saved schematic ownership is missing." : "No owned relevant benefits."}</Text>}
                     </>}
                 </Box>
