@@ -26,11 +26,9 @@ export default function SushiContent() {
     const discoveredCount = station.sushi.filter((sushi) => sushi.unlocked).length;
 
     return (
-        <Box>
+        <Box gap="medium">
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Sushi Station</Heading>
-            <Box margin={{ bottom: 'medium' }}>
-                <SushiOverview station={station} />
-            </Box>
+            <SushiOverview station={station} />
             <Box gap="small">
                 <ContentTabs<SushiSection>
                     options={[
