@@ -7,9 +7,11 @@ import { Lab, SlabSovereigntyBonus } from "../../world-4/lab";
 import { ArtifactModel } from "../../model/artifactModel";
 import { Player } from "../../player";
 import { Sailing } from "./sailing";
-import { SkillsIndex } from "../../SkillsIndex";
+import { getCogPlayerBuildSpeed } from "../../world-3/construction/playerBuildSpeed";
 import type { Slab } from "../slab";
 import { ClassIndex } from "../../talents";
+import type { Summoning } from "../../world-6/summoning";
+import { SkillsIndex } from "../../SkillsIndex";
 
 export enum ArtifactStatus {
     Unobtained,
@@ -36,14 +38,14 @@ export class Artifact {
                     return new FauxoryTuskArtifact(artifact.index, artifact.data);
                 case 4:
                     return new GoldRelicArtifact(artifact.index, artifact.data);
-                case 5: 
+                case 5:
                     return new GenieLampArtifact(artifact.index, artifact.data);
                 case 2:
                 case 10:
                 case 18:
-                case 20: 
+                case 20:
                     return new SlabInfluencedArtifact(artifact.index, artifact.data);
-                case 11: 
+                case 11:
                     return new AshenUrnArtifact(artifact.index, artifact.data);
                 case 12:
                     return new AmberiteArtifact(artifact.index, artifact.data);
@@ -259,10 +261,10 @@ export class AshenUrnArtifact extends Artifact {
         if (this.status == ArtifactStatus.Ancient) {
             return 400;
         }
-        if (this.status == ArtifactStatus.Eldritch) { 
+        if (this.status == ArtifactStatus.Eldritch) {
             return 600;
         }
-        if (this.status == ArtifactStatus.Sovereign) { 
+        if (this.status == ArtifactStatus.Sovereign) {
             return 800;
         }
         if (this.status == ArtifactStatus.Omnipotent) {
@@ -385,11 +387,24 @@ export class FunHippoeteArtifact extends Artifact {
 
     override getBonus = (showUnobtained: boolean = false) => {
         if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
-            // The Hippoete aggregates Construction speed across every character before applying the game logarithm.
             return this.data.qtyBonus * lavaLog(this.constructionSpeed) * this.getBonusMultiplier();
         }
 
         return 0;
+    }
+
+    getBonusForPlayer = (player: Player, data: Map<string, any>, showUnobtained: boolean = false) => {
+        if (!showUnobtained && this.status == ArtifactStatus.Unobtained) {
+            return 0;
+        }
+
+        const players = data.get("players") as Player[];
+        const summoning = data.get("summoning") as Summoning;
+        // ArtifactBonus builds artifacts in index order; WinBonus(13) sees unbuilt ArtifactBonus(32) while constructing index 8.
+        const winnerBonus13 = summoning.summonBonuses.find(bonus => bonus.index === 13)?.getBonusWithArtifactBonus(0) ?? 0;
+        const constructionSpeed = players.reduce((total, targetPlayer) =>
+            total + getCogPlayerBuildSpeed(targetPlayer, player, data, winnerBonus13), 0);
+        return this.data.qtyBonus * lavaLog(constructionSpeed) * this.getBonusMultiplier();
     }
 }
 
@@ -426,17 +441,23 @@ export const updateArtifacts = (data: Map<string, any>) => {
     (sailing.artifacts[1] as ManekiKatArtifact).highestLevel = highestLevel;
     (sailing.artifacts[11] as AshenUrnArtifact).highestLevel = highestLevel;
 
-    // Fun Hippoete is account-wide: every character contributes their Construction build speed.
-    (sailing.artifacts[8] as FunHippoeteArtifact).constructionSpeed =
-        players.reduce((total, player) => total + player.buildSpeed.value, 0);
 
     // Cooking related (parse data)
     (sailing.artifacts[13] as TriagulonArtifact).turkeyOwned = cooking.meals[0].count;
-    
+
     // Collider related (parse data)
     (sailing.artifacts[29] as TheTrueLanternArtifact).particlesOwned = collider.particles;
 
     return sailing.artifacts;
+}
+
+export const updateArtifactBuildSpeed = (data: Map<string, any>) => {
+    const sailing = data.get("sailing") as Sailing;
+    const players = data.get("players") as Player[];
+
+    // The account display uses finalized per-character rates; player-aware bonuses use their native build context instead.
+    (sailing.artifacts[8] as FunHippoeteArtifact).constructionSpeed =
+        players.reduce((total, player) => total + player.buildSpeed.value, 0);
 }
 
 export const updateSailingArtifactSlabBoost = (data: Map<string, any>) => {

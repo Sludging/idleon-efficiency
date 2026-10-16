@@ -1,0 +1,161 @@
+{
+  "extractions": {
+    "damage_bubble_bdmg_hp": {
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.bdmgHP; })()",
+      "result": 28522.830823974422
+    },
+    "damage_bubble_bdmg_spd": {
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.bdmgSPD; })()",
+      "result": 6312
+    },
+    "damage_bubble_bdmg_mp": {
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.bdmgMP; })()",
+      "result": 3052
+    },
+    "damage_bubble_w12": {
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.W12; })()",
+      "result": 1595.190380761523
+    },
+    "damage_bubble_a12": {
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.A12; })()",
+      "result": 491.2280701754386
+    },
+    "damage_bubble_m12": {
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.M12; })()",
+      "result": 3113.082039911308
+    },
+    "damage_maximum_hp": {
+      "expression": "idleon.callFunction(\"PlayerHPmax\")",
+      "result": 928315634504.8214
+    },
+    "damage_maximum_mp": {
+      "expression": "idleon.callFunction(\"PlayerMPmax\")",
+      "result": 3128731.0999999996
+    },
+    "damage_bubble_w6": {
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.W6; })()",
+      "result": 266.7888858201313
+    },
+    "damage_bubble_a6": {
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.A6; })()",
+      "result": 0
+    },
+    "damage_bubble_m6": {
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.M6; })()",
+      "result": 0
+    },
+    "damage_movement_speed": {
+      "expression": "idleon.callFunction(\"PlayerSpeedBonus\")",
+      "result": 677.05
+    },
+    "damage_boost_food_effectiveness": {
+      "expression": "idleon.callFunction(\"FoodBonuses\", \"BaseDmgBoostsEffectBonus\")",
+      "result": 963.0729374623655
+    },
+    "damage_orion_bonus_1": {
+      "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 1, 0)",
+      "result": 19250
+    },
+    "damage_orion_bonus_2": {
+      "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 2, 0)",
+      "result": 3850
+    },
+    "damage_poppy_bonus_4": {
+      "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 4, 0)",
+      "result": 2660
+    },
+    "damage_bubba_bonus_4": {
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 4, 0)",
+      "result": 210
+    },
+    "damage_spelunk_shop_64": {
+      "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 64, 0)",
+      "result": 0
+    },
+    "damage_land_rank_14": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"LankRankUpgBonus\", 14, 0)",
+      "result": 2488.494330879228
+    },
+    "damage_statue_0": {
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven0\")",
+      "result": 1318911.675742035
+    },
+    "damage_statue_22": {
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven22\")",
+      "result": 7697.787486967742
+    },
+    "damage_stamp_base": {
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseDmg\")",
+      "result": 37760.4
+    },
+    "damage_stamp_percent": {
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"PctDmg\")",
+      "result": 213.64382921540837
+    },
+    "damage_stamp_boost_food": {
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BFood\")",
+      "result": 179.59354838709677
+    },
+    "damage_summoning_winner_0": {
+      "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 0, 0)",
+      "result": 16706.9175
+    },
+    "damage_arcade_bonus_0": {
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 0, 0)",
+      "result": 20
+    },
+    "damage_vault_bonus_0": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 0, 0)",
+      "result": 2810.5
+    },
+    "damage_vault_bonus_20": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 20, 0)",
+      "result": 308
+    },
+    "damage_vault_bonus_27": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 27, 0)",
+      "result": 77
+    },
+    "damage_vault_bonus_15": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 15, 0)",
+      "result": 7.7
+    },
+    "damage_vault_bonus_10": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 10, 0)",
+      "result": 77
+    },
+    "damage_vault_bonus_80": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 80, 0)",
+      "result": 228.16
+    },
+    "damage_bribe_20": {
+      "expression": "idleon.callFunction(\"GetBribeBonus\", \"20\")",
+      "result": 2
+    },
+    "damage_bribe_30": {
+      "expression": "idleon.callFunction(\"GetBribeBonus\", \"30\")",
+      "result": 2
+    },
+    "damage_talent_284": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 284)",
+      "result": 0
+    },
+    "damage_talent_113": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 113)",
+      "result": 0
+    },
+    "damage_talent_97": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 97)",
+      "result": 547
+    },
+    "damage_talent_5": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 5)",
+      "result": 218.8
+    },
+    "damage_boost_food_contribution": {
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DummyNumbersStatManager\").h.DDoTdn; })()",
+      "result": 0
+    }
+  },
+  "errors": {}
+}

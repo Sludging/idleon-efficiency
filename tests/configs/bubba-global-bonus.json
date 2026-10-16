@@ -33,6 +33,16 @@
       "description": "Megaflesh ownership contribution at upgrade threshold 11"
     },
     {
+      "label": "global_bonus_multi",
+      "expression": "20 * (idleon.callFunction(\"Bubbastuff\", \"MegafleshOwned\", 1, 0) + idleon.callFunction(\"Bubbastuff\", \"MegafleshOwned\", 3, 0) + idleon.callFunction(\"Bubbastuff\", \"MegafleshOwned\", 6, 0) + idleon.callFunction(\"Bubbastuff\", \"MegafleshOwned\", 9, 0) + idleon.callFunction(\"Bubbastuff\", \"MegafleshOwned\", 11, 0))",
+      "description": "Bubba global bonus multiplier from Megaflesh"
+    },
+    {
+      "label": "bonus_upgrade_3",
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"TotUpgBonus\", 3, 0)",
+      "description": "Upgrade 3 bonus used by Bubba global bonuses"
+    },
+    {
       "label": "global_bonus_1",
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 1, 0)",
       "description": "Global bonus 1: +{% Build Rate (base 10)"

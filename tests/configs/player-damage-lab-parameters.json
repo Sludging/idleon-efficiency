@@ -1,0 +1,31 @@
+{
+  "description": "Compare native Lab mainframe and jewel damage bonuses with typed Lab owners",
+  "target": "Player maximum damage Lab parameters",
+  "extractions": [
+    {
+      "label": "player_damage_lab_mainframe_0",
+      "expression": "idleon.callFunction(\"MainframeBonus\", 0)",
+      "description": "Native MainframeBonus(0), used by component D"
+    },
+    {
+      "label": "player_damage_lab_mainframe_11",
+      "expression": "idleon.callFunction(\"MainframeBonus\", 11)",
+      "description": "Native MainframeBonus(11), used by component D"
+    },
+    {
+      "label": "player_damage_lab_mainframe_110",
+      "expression": "idleon.callFunction(\"MainframeBonus\", 110)",
+      "description": "Native MainframeBonus(110), corresponding to Lab Jewel 10"
+    },
+    {
+      "label": "player_damage_breeding_tot_pets_found",
+      "expression": "idleon.callFunction(\"Breeding\", \"TotPetsFound\", \"0\", 0, 0)",
+      "description": "Native total discovered pets, bounded by available pet worlds"
+    },
+    {
+      "label": "player_damage_breeding_world_bound",
+      "expression": "Math.max(3, Number(idleon.engine.getGameAttribute(\"OptionsListAccount\")[117]))",
+      "description": "Native pet-world boundary initialized in ActorEvents breeding GenINFO slot 71"
+    }
+  ]
+}

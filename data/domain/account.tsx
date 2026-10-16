@@ -130,6 +130,24 @@ export class Account extends Domain {
     hasExplorerBundle: boolean = false;
     weeklyBoss: WeeklyBoss = new WeeklyBoss();
     movementSpeedBonusPercent: number = 0;
+    spelunkingPowerBonus: number = 0;
+    fractalIslandProgress: number = 0;
+    island0Currency: number = 0;
+    randomizerMonsterTargetsCompleted: number = 0;
+    classExperienceShimmerCount: number = 0;
+    classExperienceBonusPoints: number = 0;
+    lifetimeFishCaught: number = 0;
+    hasEquinoxBundle: boolean = false;
+    wormholeEmperorProgress: number = 0;
+    wraithOverlordProgress: number = 0;
+    damageShimmerCount: number = 0;
+    damageVaultProgress: number = 0;
+    damageBonusPoints: number = 0;
+    lateDamageBonusPoints: number = 0;
+    damageMultiplierFloorInput: number = 0;
+    damageExponentInput: number = 0;
+    hasDamageMultiplierBundle: boolean = false;
+    cavernDamageUpgradeLevel: number = 0;
 
     // corresponds to a.engine.getGameAttribute("CurrenciesOwned").h.TalentPoints
     talentPointsOwned: number[] = [];
@@ -152,15 +170,20 @@ export class Account extends Domain {
         [AFKTypeEnum.PayingRespect]: 0,
         [AFKTypeEnum.Spelunking]: 0,
     };
+    getFractalIslandArtifactBonus(): number {
+        return this.fractalIslandProgress >= 2500 ? 1 : 0;
+    }
+
 
     getRawKeys(): RawData[] {
         return [
-            {key: "CYKeysAll", perPlayer: false, default: []},
-            {key: "CYColosseumTickets", perPlayer: false, default: 0},
-            {key: "FamValColosseumHighscores", perPlayer: false, default: []},
-            {key: "FamValMinigameHiscores", perPlayer: false, default: []},
-            {key: "CYTalentPoints", perPlayer: false, default: []},
-            {key: "SM_", perPlayer: true, default: {}},
+            { key: "CYKeysAll", perPlayer: false, default: [] },
+            { key: "CYColosseumTickets", perPlayer: false, default: 0 },
+            { key: "FamValColosseumHighscores", perPlayer: false, default: [] },
+            { key: "FamValMinigameHiscores", perPlayer: false, default: [] },
+            { key: "CYTalentPoints", perPlayer: false, default: [] },
+            { key: "WeeklyBoss", perPlayer: false, default: {} },
+            { key: "SM_", perPlayer: true, default: {} },
         ]
     }
 
@@ -193,13 +216,31 @@ export class Account extends Domain {
 
         account.plunderousMobKills = Number(optionList?.[139] ?? 0);
         account.movementSpeedBonusPercent = Number(optionList?.[438] ?? 0);
-        account.weeklyBoss.parse(optionList);
+        account.spelunkingPowerBonus = Number(optionList?.[500] ?? 0);
+        account.fractalIslandProgress = Number(optionList?.[184] ?? 0);
+        account.island0Currency = Number(optionList?.[161] ?? 0);
+        account.randomizerMonsterTargetsCompleted = Number(optionList?.[338] ?? 0);
+        account.classExperienceShimmerCount = Number(optionList?.[179] ?? 0);
+        account.classExperienceBonusPoints = Number(optionList?.[421] ?? 0);
+        account.lifetimeFishCaught = Number(optionList?.[345] ?? 0);
+        account.wormholeEmperorProgress = Number(optionList?.[152] ?? 0);
+        account.wraithOverlordProgress = Number(optionList?.[329] ?? 0);
+        account.damageShimmerCount = Number(optionList?.[178] ?? 0);
+        account.damageVaultProgress = Number(optionList?.[346] ?? 0);
+        account.damageBonusPoints = Number(optionList?.[419] ?? 0);
+        account.lateDamageBonusPoints = Number(optionList?.[435] ?? 0);
+        account.damageMultiplierFloorInput = Number(optionList?.[232] ?? 0);
+        account.damageExponentInput = Number(optionList?.[473] ?? 0);
+        account.cavernDamageUpgradeLevel = Number(optionList?.[649] ?? 0);
+        account.weeklyBoss.parse(optionList, data.get("WeeklyBoss") as Record<string, unknown>);
         const rawData = data.get("rawData") as Record<string, string | undefined>;
         const bundles: Record<string, string | number> = rawData.BundlesReceived === undefined
             ? {}
             : JSON.parse(rawData.BundlesReceived);
         account.hasDeathBringerBundle = Number(bundles.bun_v) === 1;
         account.hasExplorerBundle = Number(bundles.bun_p) === 1;
+        account.hasEquinoxBundle = Number(bundles.bun_q) === 1;
+        account.hasDamageMultiplierBundle = Number(bundles.bon_a) === 1;
 
         account.talentPointsOwned = [];
         talentPointsOwned.forEach((points) => {

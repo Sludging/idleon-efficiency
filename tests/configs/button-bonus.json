@@ -23,14 +23,49 @@
       "description": "Accumulated Research XP bonus from saved presses"
     },
     {
+      "label": "button_bonus_1",
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 1, 0)",
+      "description": "Accumulated Minehead Currency bonus from saved presses"
+    },
+    {
+      "label": "button_bonus_2",
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 2, 0)",
+      "description": "Accumulated Sushi Bucks bonus from saved presses"
+    },
+    {
+      "label": "button_bonus_3",
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 3, 0)",
+      "description": "Accumulated Artifact Odds bonus from saved presses"
+    },
+    {
+      "label": "button_bonus_4",
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 4, 0)",
+      "description": "Accumulated Xtra Masterclass Drops bonus from saved presses"
+    },
+    {
+      "label": "button_bonus_5",
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 5, 0)",
+      "description": "Accumulated Spelunk POW bonus from saved presses"
+    },
+    {
+      "label": "button_bonus_6",
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 6, 0)",
+      "description": "Accumulated Cooking SPD bonus from saved presses"
+    },
+    {
       "label": "button_bonus_7",
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 7, 0)",
-      "description": "Accumulated Cooking SPD bonus"
+      "description": "Accumulated Crop Evo bonus from saved presses"
     },
     {
       "label": "button_bonus_8",
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 8, 0)",
       "description": "Accumulated Class EXP bonus from saved presses"
+    },
+    {
+      "label": "button_next_bonus_index",
+      "expression": "Math.floor(idleon.engine.getGameAttribute('OptionsListAccount')[594]/5)%9",
+      "description": "Button bonus category selected by the next press, using completed press count"
     }
   ]
 }

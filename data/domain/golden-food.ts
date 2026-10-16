@@ -62,6 +62,9 @@ export interface GoldenFoodResults {
     defencePercent: number;
     baseAccuracy: number;
     dropRatePercent: number;
+    baseDamage: number;
+    damageMultiplier: number;
+    classExperiencePercent: number;
 }
 
 export class GoldenFood extends Domain {
@@ -137,6 +140,18 @@ export class GoldenFood extends Domain {
         return this.getResults(player).dropRatePercent;
     }
 
+    getBaseDamage(player: Player): number {
+        return this.getResults(player).baseDamage;
+    }
+
+    getDamageMultiplier(player: Player): number {
+        return this.getResults(player).damageMultiplier;
+    }
+
+    getClassExperiencePercent(player: Player): number {
+        return this.getResults(player).classExperiencePercent;
+    }
+
     private calculateEffectivity(account: GoldenFoodAccountInputs, character: GoldenFoodCharacterInputs,
         talent99: number, alchemy: number, deathBringer: number): number {
         const cardsAndLateBonuses = Math.min(4 * account.cropFallCardLevel, 50)
@@ -201,6 +216,9 @@ export class GoldenFood extends Domain {
             defencePercent: this.calculateEffect(player, sneaking, 'Defence', effectivity),
             baseAccuracy: this.calculateEffect(player, sneaking, 'BaseAcc', effectivity),
             dropRatePercent: this.calculateEffect(player, sneaking, 'DropRatez', effectivity),
+            baseDamage: this.calculateEffect(player, sneaking, 'BaseDamage', effectivity),
+            damageMultiplier: 1 + this.calculateEffect(player, sneaking, 'Damage', effectivity) / 100,
+            classExperiencePercent: this.calculateEffect(player, sneaking, 'ClassEXPz', effectivity),
         });
     }
 
@@ -295,6 +313,6 @@ export const updateGoldenFood = (accountData: Map<string, any>): void => {
             alchemy: alchemy.getBubbleBonusForKey('GFoodz', player),
             alchemyBeforeHealth,
         }, player.getTalentBonusAtInputs(99, finalInputs),
-        player.getTalentBonusAtInputs(99, beforeActiveBubbleMultiplierInputs), deathBringer, alchemyDeathBringer);
+            player.getTalentBonusAtInputs(99, beforeActiveBubbleMultiplierInputs), deathBringer, alchemyDeathBringer);
     }
 };

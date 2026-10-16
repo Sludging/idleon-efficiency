@@ -1,0 +1,16 @@
+{
+  "description": "Compare Jelly Operator Class EXP bonuses with the retained game save",
+  "target": "Jelly Operator Class EXP obstruction bonuses",
+  "extractions": [
+    {
+      "label": "jelly_class_exp_30",
+      "expression": "idleon.allScripts.ActorEvents_189._customBlock_JellyOperation(\"RoG_BonusQTY\", 30, 0)",
+      "description": "Jelly Operator obstruction 30 Class EXP bonus"
+    },
+    {
+      "label": "jelly_class_exp_62",
+      "expression": "idleon.allScripts.ActorEvents_189._customBlock_JellyOperation(\"RoG_BonusQTY\", 62, 0)",
+      "description": "Jelly Operator obstruction 62 Class EXP bonus"
+    }
+  ]
+}

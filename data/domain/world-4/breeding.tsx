@@ -405,6 +405,7 @@ export class Breeding extends Domain {
     shinyBonuses: ShinyBonus[] = [];
 
     speciesUnlocks: number[] = [];
+    petWorldCount: number = 3;
     skillLevel: number = 0;
     deadCells: number = 0;
 
@@ -485,6 +486,7 @@ export class Breeding extends Domain {
         // Animalistic Ferocity uses the first raw slot, even when its species is filtered from the display list.
         // Empty storage starts with zero-power slots in the game. Replace this input before any parse early return.
         breeding.firstStoredPetPower = petsStored.length === 0 ? 0 : petsStored[0][2];
+        breeding.petWorldCount = Math.max(3, optionList[117] ?? 0);
         const pets = data.get("Pets") as any[][];
         const territory = data.get("Territory") as any[][];
         const breedingData = data.get("Breeding") as number[][];
@@ -598,6 +600,14 @@ export class Breeding extends Domain {
             const totalLevels = shinyPets.reduce((sum, pet) => sum += pet.shinyLevel, 0);
             breeding.shinyBonuses.push(new ShinyBonus(shinyPets[0].shinyBonus, totalLevels, shinyPets));
         });
+    }
+
+    getTotalPetsFound(): number {
+        let totalPetsFound = 0;
+        for (let world = 0; world < this.petWorldCount; world++) {
+            totalPetsFound += this.speciesUnlocks[world] ?? 0;
+        }
+        return totalPetsFound;
     }
 }
 

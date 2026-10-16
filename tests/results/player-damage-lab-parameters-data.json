@@ -1,0 +1,25 @@
+{
+  "extractions": {
+    "player_damage_lab_mainframe_0": {
+      "expression": "idleon.callFunction(\"MainframeBonus\", 0)",
+      "result": 122.4
+    },
+    "player_damage_lab_mainframe_11": {
+      "expression": "idleon.callFunction(\"MainframeBonus\", 11)",
+      "result": 982.8000000000001
+    },
+    "player_damage_lab_mainframe_110": {
+      "expression": "idleon.callFunction(\"MainframeBonus\", 110)",
+      "result": 32
+    },
+    "player_damage_breeding_tot_pets_found": {
+      "expression": "idleon.callFunction(\"Breeding\", \"TotPetsFound\", \"0\", 0, 0)",
+      "result": 68
+    },
+    "player_damage_breeding_world_bound": {
+      "expression": "Math.max(3, Number(idleon.engine.getGameAttribute(\"OptionsListAccount\")[117]))",
+      "result": 4
+    }
+  },
+  "errors": {}
+}

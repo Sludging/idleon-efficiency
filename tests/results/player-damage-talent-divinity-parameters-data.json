@@ -1,0 +1,41 @@
+{
+  "extractions": {
+    "talent_calculation_31": {
+      "expression": "idleon.callFunction('TalentCalc', 31)",
+      "result": 0
+    },
+    "talent_calculation_110": {
+      "expression": "idleon.callFunction('TalentCalc', 110)",
+      "result": 0
+    },
+    "talent_calculation_125": {
+      "expression": "idleon.callFunction('TalentCalc', 125)",
+      "result": 660
+    },
+    "talent_calculation_305": {
+      "expression": "idleon.callFunction('TalentCalc', 305)",
+      "result": 0
+    },
+    "talent_calculation_470": {
+      "expression": "idleon.callFunction('TalentCalc', 470)",
+      "result": 0
+    },
+    "talent_calculation_485": {
+      "expression": "idleon.callFunction('TalentCalc', 485)",
+      "result": 0
+    },
+    "talent_calculation_656": {
+      "expression": "idleon.callFunction('TalentCalc', 656)",
+      "result": 130
+    },
+    "divinity_minor_bonus_4": {
+      "expression": "idleon.callFunction('Divinity', 'Bonus_Minor', 3, 4)",
+      "result": 236.16556193358443
+    },
+    "divinity_minor_bonus_7": {
+      "expression": "idleon.callFunction('Divinity', 'Bonus_Minor', 3, 7)",
+      "result": 472.33112386716886
+    }
+  },
+  "errors": {}
+}

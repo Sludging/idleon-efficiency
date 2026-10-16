@@ -97,13 +97,13 @@ export class Printer extends Domain {
                 // First 5 sample slots
                 range(0, 5).forEach(sampleIndex => {
                     const arrayIndex = 5 + (sampleIndex * 2) + (playerIndex * 14);
-                    samples.push(new Sample(printerData[arrayIndex], printerData[arrayIndex + 1]));
+                    samples.push(new Sample(printerData[arrayIndex], Number(printerData[arrayIndex + 1])));
                 });
 
                 // Second set of 5 sample slots
                 range(0, 5).forEach(sampleIndex => {
                     const arrayIndex = (sampleIndex * 2) + (playerIndex * 10);
-                    samples.push(new Sample(extraPrinterData[arrayIndex], extraPrinterData[arrayIndex + 1]));
+                    samples.push(new Sample(extraPrinterData[arrayIndex], Number(extraPrinterData[arrayIndex + 1])));
                 });
 
                 // Active printing slots
@@ -116,7 +116,7 @@ export class Printer extends Domain {
 
                     const matchingSample = samples.find(sample => sample.item == printingItem);
                     // Old print, without an active sample.
-                    const printingQuantity = printerData[6 + 10 + (activeIndex * 2) + (playerIndex * 14)]
+                    const printingQuantity = Number(printerData[6 + 10 + (activeIndex * 2) + (playerIndex * 14)])
 
                     // If we have an old print, without an active sample.
                     if (!matchingSample) {

@@ -70,6 +70,10 @@ export class Prayer {
         return Math.round(this.data.x2 * Math.max(1, 1 + (this.level - 1) / 10));
     }
 
+    getCurseForPlayer(player: Player): number {
+        return player.activePrayers.includes(this.index) ? this.getCurse() : 0;
+    }
+
     getBonusText = (): string => {
         return this.data.bonus.replace("{", this.getBonus().toString());
     }

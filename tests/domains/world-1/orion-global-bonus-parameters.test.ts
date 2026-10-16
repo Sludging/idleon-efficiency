@@ -16,6 +16,7 @@ import { loadExtractionResults, validateExtractionHealth, getExtractedValue } fr
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Companion, getCompanionActiveBonus } from '../../../data/domain/companions';
 import { LegendTalents } from '../../../data/domain/world-7/legendTalents';
+import { Orion } from '../../../data/domain/world-1/orion';
 
 const saveName = 'latest';
 const extractionResultsName = 'orion-global-bonus-data.json';
@@ -38,6 +39,14 @@ const parameterSpecs = {
       return getCompanionActiveBonus(companions, 51);
     }
   },
+  global_bonus_multi: {
+    description: 'Owl megafeather multiplier for Orion account-wide bonuses',
+    extractionKey: 'global_bonus_multi',
+    domainExtractor: (gameData: Map<string, any>) => {
+      const orion = gameData.get("orion") as Orion;
+      return orion.getGlobalBonusMulti();
+    }
+  }
 };
 
 describe('Orion Domain - Global Bonus - Parameters', () => {
@@ -58,3 +67,4 @@ describe('Orion Domain - Global Bonus - Parameters', () => {
     });
   });
 });
+

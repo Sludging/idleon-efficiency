@@ -52,6 +52,7 @@ feature family's pattern where applicable.
   keeps identity and details together on a dark-1 surface with medium padding and small
   gaps. Its image beside the name and level is a useful composition reference, not a
   requirement for every card's fields.
+- **Simple bonus collections:** prefer a grid of dense cards when entries contain only an identity, effect, and a few related values. Use aligned rows or tables when comparing fields across entries benefits from shared columns. Do not stretch sparse entries into full-width rows by default.
 - **Tables:** Reuse [EfficiencyUpgradeTable](../../components/account/shared/EfficiencyUpgradeTable.tsx)
   for a compatible elite-class feature and preserve that family's controls. Its columns
   and filters remain feature-specific. [StampsTableView](../../components/world-1/stampTableView.tsx)

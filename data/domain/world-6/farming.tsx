@@ -35,7 +35,7 @@ import { Talent } from "../talents";
 
 // Only the Exotic Market bonuses consumed by implemented features are supported.
 const exoticMarketBonusData = initExoticMarketRepo().reduce<Record<number, { bonusPerLevel: number, diminishing: boolean }>>((bonuses, upgrade) => {
-    if (upgrade.index === 14 || upgrade.index === 40 || upgrade.index === 44 || upgrade.index === 48 || upgrade.index === 49 || upgrade.index === 51 || upgrade.index === 59) {
+    if (upgrade.index === 14 || (upgrade.index >= 16 && upgrade.index <= 20) || upgrade.index === 40 || upgrade.index === 41 || upgrade.index === 42 || upgrade.index === 44 || upgrade.index === 45 || upgrade.index === 48 || upgrade.index === 49 || upgrade.index === 50 || upgrade.index === 51 || upgrade.index === 59) {
         bonuses[upgrade.index] = {
             bonusPerLevel: upgrade.data.effect,
             diminishing: upgrade.data.x4 === 1,
@@ -756,6 +756,14 @@ export class Farming extends Domain {
         return this.totalStickers;
     }
 
+    getStickerDamageMultiplier(researchGrid: ResearchGrid): number {
+        if (researchGrid.getBonusForId(47, 1) <= 0) {
+            return 1;
+        }
+
+        return 1 + researchGrid.getBonusForId(47) * this.getTotalStickers() / 100;
+    }
+
     getStickerBonus(index: number): number {
         return this.stickers.find(sticker => sticker.index === index)?.getBonus() ?? 0;
     }
@@ -802,14 +810,22 @@ export class Farming extends Domain {
         this.cropsToCollect.sort((collect1, collect2) => { return collect1.crop.index > collect2.crop.index ? 1 : -1 });
     }
 
-    updateBeansFromConvertinCurrentDepot = (jadeUpgradeBonus15: number) => {
+    updateBeansFromConvertinCurrentDepot = (emporiumBonus15: number, achievementBonus363: number, vaultBonus85: number) => {
         let fromCrops = 0;
 
         this.cropDepot.filter(crop => crop.quantityOwned > 0).forEach(crop => {
-            fromCrops += (crop.quantityOwned * Math.pow(2.5, crop.seed.index) * Math.pow(1.08, crop.index - crop.seed.data.cropIdMin));
+            fromCrops += crop.quantityOwned * Math.pow(2.5, crop.seed.index) * Math.pow(1.08, crop.index - crop.seed.data.cropIdMin);
         });
 
-        this.magicBeansFromDepot = Math.pow(fromCrops, 0.5) * (1 + this.getMarketUpgradeBonusValue(6) / 100) * Math.max(1, jadeUpgradeBonus15);
+        // BeanTradeQTY applies additive bean bonuses before its two separate multiplicative Exotic upgrades.
+        const additiveBonus = 25 * emporiumBonus15 + 5 * achievementBonus363
+            + this.getExoticMarketBonusValue(16) + this.getExoticMarketBonusValue(17) + this.getExoticMarketBonusValue(18)
+            + vaultBonus85;
+        this.magicBeansFromDepot = Math.sqrt(fromCrops)
+            * (1 + this.getMarketUpgradeBonusValue(6) / 100)
+            * (1 + additiveBonus / 100)
+            * (1 + this.getExoticMarketBonusValue(19) / 100)
+            * (1 + this.getExoticMarketBonusValue(20) / 100);
     }
 
     updatePlotsOGChance = (bonusFromMarketUpgrade11: number, bonusFromPristineCharm11: number, bonusFromStarSign67: number, bonusFromTaskBoard: number, bonusFromAchievement365: number) => {
@@ -1051,8 +1067,10 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     farming.updateGrowthRate(vialGrowthSpeedBonus, summoningWinnerBonus2);
 
     // Update Magic beans collected if collecting now
-    const jadeUpgrade15 = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 15)?.purchased ? 1.25 : 1;
-    farming.updateBeansFromConvertinCurrentDepot(jadeUpgrade15);
+    const emporiumBonus15 = Number(sneaking.jadeUpgrades.find(upgrade => upgrade.index === 15)?.purchased ?? false);
+    const achievementBonus363 = achievements[363].completed ? 1 : 0;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+    farming.updateBeansFromConvertinCurrentDepot(emporiumBonus15, achievementBonus363, upgradeVault.getBonusForId(85));
 
     // Update each Crops Evolution chance in plots
     const summoningWinnerBonus10 = summoning.summonBonuses.find(bonus => bonus.index == 10)?.getBonus() ?? 0;

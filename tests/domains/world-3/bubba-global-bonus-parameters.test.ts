@@ -43,8 +43,19 @@ const parameterSpecs = {
     domainExtractor: (gameData: Map<string, any>) =>
       (gameData.get("bubba") as Bubba).getMegafleshQuantity(11),
   },
+  global_bonus_multi: {
+    description: 'Bubba global bonus multiplier from Megaflesh',
+    extractionKey: 'global_bonus_multi',
+    domainExtractor: (gameData: Map<string, any>) =>
+      (gameData.get("bubba") as Bubba).getGlobalBonusMulti(),
+  },
+  bonus_upgrade_3: {
+    description: 'Bubba upgrade 3 bonus used by global bonuses',
+    extractionKey: 'bonus_upgrade_3',
+    domainExtractor: (gameData: Map<string, any>) =>
+      (gameData.get("bubba") as Bubba).getUpgradeBonus(3),
+  },
 };
-
 describe('Bubba Domain - Global Bonus - Parameters', () => {
   let extractionResults: any;
   let gameData: Map<string, any>;
@@ -63,3 +74,4 @@ describe('Bubba Domain - Global Bonus - Parameters', () => {
     });
   });
 });
+

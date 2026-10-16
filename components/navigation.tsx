@@ -25,12 +25,14 @@ const navItems: NavItem[] = [
             { subLink: "/forge", label: "Forge" },
             { subLink: "/anvil", label: "Anvil" },
             { subLink: "/bribes", label: "Bribes" },
+            { subLink: "/owl", label: "Owl" },
         ]
     },
     {
         link: "/world-2", label: "W2", subLinks: [
             { subLink: "/alchemy", label: "Alchemy" },
             { subLink: "/arcade", label: "Arcade" },
+            { subLink: "/kangaroo", label: "Kangaroo" },
         ]
     },
     {
@@ -40,6 +42,7 @@ const navItems: NavItem[] = [
             { subLink: "/trapping", label: "Trapping" },
             { subLink: "/equinox", label: "Equinox" },
             { subLink: "/armor-smithy", label: "Armor Smithy" },
+            { subLink: "/bubba", label: "Bubba" },
         ]
     },
     {
@@ -74,6 +77,8 @@ const navItems: NavItem[] = [
             { subLink: "/sushi", label: "Sushi Station" },
             { subLink: "/jelly-operator", label: "Jelly Operator" },
             { subLink: "/advice-fish", label: "Advice Fish" },
+            { subLink: "/zenith-market", label: "Zenith Market" },
+            { subLink: "/the-button", label: "The Button" },
         ]
     },
     { link: "/players", label: "Players" },

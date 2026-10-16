@@ -1,0 +1,44 @@
+{
+  "extractions": {
+    "player_class_experience_multiplier": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 15, 0)",
+      "result": 4753362152544.022
+    },
+    "player_maximum_damage": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0)",
+      "result": {
+        "type": "large_number",
+        "value": "4.975258141047525e+28"
+      }
+    },
+    "player_maximum_damage_base_component": {
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DummyNumbersStatManager\").h.DamageDealtLIST[0]; })()",
+      "result": 1953903.356456963
+    },
+    "player_damage_attribute_contribution": {
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DummyNumbersStatManager\").h.DamageDealtSTATtype; })()",
+      "result": 51114635.83018866
+    },
+    "player_maximum_damage_percent_component": {
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DummyNumbersStatManager\").h.DamageDealtLIST[1]; })()",
+      "result": 27403354.410089895
+    },
+    "player_maximum_damage_total_multiplier": {
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DummyNumbersStatManager\").h.DamageDealtLIST[2]; })()",
+      "result": 929199168649002.2
+    },
+    "player_maximum_damage_sigil_lab_bonus": {
+      "expression": "idleon.callFunction(\"Labb\", \"SigilBonus\", \"Blank\", 4, 0)",
+      "result": 70000
+    },
+    "player_maximum_damage_cosmo_bonus_2_4": {
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 2, 4)",
+      "result": 300
+    },
+    "player_maximum_damage_box_reward_base_damage": {
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.BoxRewards.h.basedmg; })()",
+      "result": 400
+    }
+  },
+  "errors": {}
+}

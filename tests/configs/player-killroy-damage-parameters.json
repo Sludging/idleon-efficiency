@@ -1,0 +1,11 @@
+{
+  "description": "Compare Killroy Prime's Death Note damage bonus with its native helper",
+  "target": "Player Killroy damage parameter",
+  "extractions": [
+    {
+      "label": "player_killroy_damage_bonus",
+      "expression": "idleon.callFunction(\"RiftStuff\", \"KillroyDMG\", 0)",
+      "description": "Native Killroy damage bonus from best Killroy kills for Death Note mobs"
+    }
+  ]
+}

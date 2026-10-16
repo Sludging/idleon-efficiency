@@ -1,4 +1,5 @@
 import { Domain, RawData } from "../base/domain";
+import { ImageData } from "../imageData";
 import { Companion, getCompanionActiveBonus } from "../companions";
 import { initOrionUpgradeRepo, OrionUpgradeBase } from "../data/OrionUpgradeRepo";
 import { Item } from "../items";
@@ -10,6 +11,10 @@ import { Meritocraty } from "../world-7/meritocraty";
 
 export class OrionGlobalBonus {
     constructor(public index: number, public desc: string, public value: number) { }
+
+    getImageData(): ImageData {
+        return { location: `ClickerOwlBonus${this.index}`, width: 24, height: 24 };
+    }
 
     static fromBase() {
         return [
@@ -52,6 +57,10 @@ export class Orion extends Domain {
     meritoBonus12: number = 0;
     gambitBonus8: number | null = 0;
     
+    getCurrencyImageData(): ImageData {
+        return { location: "ClickerFeatherCurrency", width: 72, height: 72 };
+    }
+
     getRawKeys(): RawData[] {
         return [];
     }
@@ -102,6 +111,23 @@ export class Orion extends Domain {
         } else {
             return 1 / (1 + 10 * this.getUpgradeLevel(3) / 100) * (1 / (1 + 20 * this.getUpgradeLevel(7) / 100)) * (1 / (1 + this.getMegafeatherQuantity(2) * this.getUpgradeLevel(0) / 100)) * upgrade.data.x0 * Math.pow(upgrade.data.x1, upgrade.level);
         }
+    }
+
+    getNextGlobalBonusUpgrade(): {
+        bonusIndex: number;
+        cost: number;
+        resourceBalance: number;
+        canAfford: boolean;
+    } {
+        const bonusIndex = this.getUpgradeLevel(1) % this.bonuses.length;
+        const cost = this.getUpgradeCost(1);
+
+        return {
+            bonusIndex,
+            cost,
+            resourceBalance: this.ownedFeather,
+            canAfford: this.ownedFeather >= cost,
+        };
     }
 
     getUpgradeLevel(index: number): number {

@@ -46,6 +46,15 @@ export class Slab extends Domain {
     getSlabBonusMultiplier(): number {
         return this.slabBonusMultiplier;
     }
+    getSpelunkingPowerBonus(mainframeBonusPercent: number, unlocked: boolean): number {
+        if (!unlocked) {
+            return 0;
+        }
+
+        const bonusLevels = Math.floor(Math.max(0, this.registeredItemCount - 1300) / 5);
+        return 3 * (1 + mainframeBonusPercent / 100) * this.getSlabBonusMultiplier() * bonusLevels;
+    }
+
 
     updateCalculationState(meritocraty: Meritocraty, legendTalents: LegendTalents, upgradeVault: UpgradeVault): void {
         // Multi Meritocracy, Legend Talents, and Super Slab multiply every Slab bonus.
@@ -56,7 +65,7 @@ export class Slab extends Domain {
 
     getRawKeys(): RawData[] {
         return [
-            {key: "Cards1", perPlayer: false, default: []}
+            { key: "Cards1", perPlayer: false, default: [] }
         ]
     }
 

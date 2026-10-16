@@ -1,0 +1,51 @@
+{
+  "description": "Farming magic beans collected from the current crop depot",
+  "target": "Farming magic beans from depot",
+  "extractions": [
+    {
+      "label": "farming_market_upgrade_6_bonus",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"BasketUpgQTY\", 0, 6)",
+      "description": "BeanTradeQTY market upgrade multiplier input"
+    },
+    {
+      "label": "farming_ninja_emporium_15_bonus",
+      "expression": "idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 15, 0)",
+      "description": "BeanTradeQTY Sneaking Emporium multiplier input"
+    },
+    {
+      "label": "farming_exotic_bonus_16",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 16, 0)",
+      "description": "BeanTradeQTY Legumioso I multiplier input"
+    },
+    {
+      "label": "farming_exotic_bonus_17",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 17, 0)",
+      "description": "BeanTradeQTY Legumioso II multiplier input"
+    },
+    {
+      "label": "farming_exotic_bonus_18",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 18, 0)",
+      "description": "BeanTradeQTY Legumioso III multiplier input"
+    },
+    {
+      "label": "farming_exotic_bonus_19",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 19, 0)",
+      "description": "BeanTradeQTY Largumes I multiplier input"
+    },
+    {
+      "label": "farming_exotic_bonus_20",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 20, 0)",
+      "description": "BeanTradeQTY Largumes II multiplier input"
+    },
+    {
+      "label": "farming_vault_upgrade_85_bonus",
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 85, 0)",
+      "description": "BeanTradeQTY Vault multiplier input"
+    },
+    {
+      "label": "farming_magic_beans_from_depot",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"BeanTradeQTY\", 0, 0)",
+      "description": "Native bean quantity from converting the current crop depot"
+    }
+  ]
+}

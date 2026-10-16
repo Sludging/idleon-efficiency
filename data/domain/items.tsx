@@ -635,6 +635,14 @@ export class Food extends Item {
         return Food.getBoostFoodContribution(player, inputs, "MoveSpdBoosts", talentInputs);
     }
 
+    static getBaseDamageContribution(
+        player: Player,
+        inputs: BoostFoodEffectivenessInputs,
+        talentInputs: TalentLevelInputs = player.finalTalentInputs,
+    ): number {
+        return Food.getBoostFoodContribution(player, inputs, "BaseDmgBoosts", talentInputs);
+    }
+
     static getWorshipSoulContribution(
         player: Player,
         inputs: BoostFoodEffectivenessInputs,
@@ -643,10 +651,23 @@ export class Food extends Item {
         return Food.getBoostFoodContribution(player, inputs, "WorshipSoulBoosts", talentInputs);
     }
 
+    static getClassExperienceContribution(player: Player): number {
+        let contribution = 0;
+        for (let slot = 0; slot < player.foodSlotsOwned; slot++) {
+            const food = player.gear.food[slot];
+            if (!food || food.count === 0 || food.effect !== "ClassEXP") {
+                continue;
+            }
+            // Native FoodBonuses falls back to 1 for ClassEXPEffectBonus.
+            contribution += food.effectAmount;
+        }
+        return contribution;
+    }
+
     private static getBoostFoodContribution(
         player: Player,
         inputs: BoostFoodEffectivenessInputs,
-        effect: "HpBaseBoosts" | "WeaponPowerBoosts" | "MoveSpdBoosts" | "WorshipSoulBoosts",
+        effect: "HpBaseBoosts" | "WeaponPowerBoosts" | "MoveSpdBoosts" | "BaseDmgBoosts" | "WorshipSoulBoosts",
         talentInputs: TalentLevelInputs,
     ): number {
         let contribution = 0;

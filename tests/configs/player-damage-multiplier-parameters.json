@@ -1,0 +1,81 @@
+{
+  "description": "Compare source-mapped typed damage multiplier parameters with original native helpers",
+  "target": "Player damage multiplier parameters",
+  "extractions": [
+    {
+      "label": "damage_tome_bonus_0",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 0, 0)",
+      "description": "Native TomeBonus(0) percentage contribution used by the total damage multiplier"
+    },
+    {
+      "label": "damage_construction_mastery_1",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ConstMasteryBonus\", 1, 0)",
+      "description": "Native Construction Mastery selector 1 damage percentage contribution"
+    },
+    {
+      "label": "damage_killroy_multiplier",
+      "expression": "idleon.callFunction(\"RiftStuff\", \"KillroyDMG\", 0)",
+      "description": "Native Killroy total-damage percentage contribution applied by the total damage multiplier"
+    },
+    {
+      "label": "damage_minehead_bonus_0",
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 0, 0)",
+      "description": "Native Minehead opponent research bonus 0 used as a total-damage multiplier"
+    },
+    {
+      "label": "damage_minehead_bonus_4",
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 4, 0)",
+      "description": "Native Minehead opponent research bonus 4 used as a total-damage multiplier"
+    },
+    {
+      "label": "damage_jelly_obstruction_37",
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 37, 0)",
+      "description": "Native Jelly Operator obstruction 37 bonus used as a total-damage multiplier"
+    },
+    {
+      "label": "damage_royal_statue_0",
+      "expression": "idleon.callFunction(\"RoyalG\", \"StatueBon\", 0, 0)",
+      "description": "Native Royal Armory statue 0 bonus used as a total-damage multiplier"
+    },
+    {
+      "label": "damage_hole_fountain_1_16",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 16)",
+      "description": "Native Hole fountain total bonus for water 1 and upgrade 16 used by total damage"
+    },
+    {
+      "label": "damage_sushi_49",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 49, 0)",
+      "description": "Native Sushi bonus 49 used as a total-damage multiplier"
+    },
+    {
+      "label": "damage_family_bonus_20",
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.FamBonusQTYs.h[20]; })()",
+      "description": "Native family total-damage quantity at key 20 used in the D component"
+    },
+    {
+      "label": "damage_family_bonus_80",
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.FamBonusQTYs.h[80]; })()",
+      "description": "Native late family damage multiplier at key 80 used in the D component"
+    },
+    {
+      "label": "damage_eclipse_skulls",
+      "expression": "idleon.callFunction(\"RiftStuff\", \"eclipseSkulls\", 0)",
+      "description": "Native Eclipse Skulls total-damage percentage bonus"
+    },
+    {
+      "label": "damage_rift_skill_etc_0",
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillETC\", 0)",
+      "description": "Native Rift Skill Mastery total damage contribution used by the D component"
+    },
+    {
+      "label": "damage_msa_bonus",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 0, 0)",
+      "description": "Native MSA Totalizer damage bonus used by the D component"
+    },
+    {
+      "label": "damage_weapon_power_bonus",
+      "expression": "idleon.callFunction(\"Minehead\", \"WepPowDmgPCT\", 0, 0)",
+      "description": "Native weapon-power damage percentage multiplier contribution"
+    }
+  ]
+}

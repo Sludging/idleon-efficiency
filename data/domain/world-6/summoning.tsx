@@ -162,7 +162,7 @@ export class SummonBonus {
         this.bonusValue = bonusValue;
     }
 
-    getBonus = (): number => {
+    getBonusWithArtifactBonus = (artifactBonus: number): number => {
         switch (true)
         {
             case this.index == 20:
@@ -171,13 +171,15 @@ export class SummonBonus {
             case this.index == 31:
                 return this.bonusValue;
             case this.index == 19:
-                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.godshardSetBonus) / 100);
+                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.godshardSetBonus) / 100);
             case 20 <= this.index && 33 >= this.index:
-                return this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning31Bonus + this.godshardSetBonus + this.emperorBonus) / 100);
+                return this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning31Bonus + this.godshardSetBonus + this.emperorBonus) / 100);
             default:
-                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning31Bonus + this.godshardSetBonus + this.emperorBonus) / 100);
+                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning31Bonus + this.godshardSetBonus + this.emperorBonus) / 100);
         }
     }
+
+    getBonus = (): number => this.getBonusWithArtifactBonus(this.artifactBonus);
 
     static getBonusValueForDisplay = (bonusId: number, bonusValue: number): number => {
         switch (true)

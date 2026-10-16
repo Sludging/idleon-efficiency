@@ -4,6 +4,7 @@ import { Item } from "../items";
 import { ZenithMarketModel } from "../model/zenithMarketModel";
 import { Player } from "../player";
 import { Storage } from "../storage";
+import { commaNotation, notateNumber } from "../../utility";
 
 export interface NonDepositedCluster {
     source: string,
@@ -12,22 +13,41 @@ export interface NonDepositedCluster {
 
 export class ZenithMarketBonus {
     public level: number = 0;
+    public unlocked: boolean;
 
-    constructor(public index: number, public data: ZenithMarketModel) {}
-
-    getBonus(): number {
-        return this.data.bonusPerLevel * this.level;
+    constructor(public index: number, public data: ZenithMarketModel) {
+        this.unlocked = index === 0;
     }
 
-    getNextLevelCost(): number {
-        const nextlevelCost = this.level + this.data.unlockCost * Math.pow(this.data.costExponent, this.level);
+    getBonus(): number {
+        return Math.floor(this.data.bonusPerLevel * this.level);
+    }
 
-        // Not sure why the cost is not always floored, it's like that in-game tho
-        if (1E6 > nextlevelCost) {
-            return Math.floor(nextlevelCost);
+    getBonusText(): string {
+        const bonus = this.getBonus();
+        const description = this.data.description.replace("{", commaNotation(bonus));
+
+        return description.replace("}", notateNumber(1 + bonus / 100, "MultiplierInfo").replace("#", ""));
+    }
+
+    getNextLevelCost(level: number = this.level): number {
+        const nextLevelCost = level + this.data.unlockCost * Math.pow(this.data.costExponent, level);
+
+        // The game floors costs below 1,000,000 and preserves fractions above it.
+        if (1E6 > nextLevelCost) {
+            return Math.floor(nextLevelCost);
         }
 
-        return nextlevelCost;
+        return nextLevelCost;
+    }
+
+    getCostToMax(): number {
+        let totalCost = 0;
+        for (let level = this.level; level < this.data.maxLevel; level++) {
+            totalCost += this.getNextLevelCost(level);
+        }
+
+        return totalCost;
     }
 
     static fromBase(data : ZenithMarketBase[]) {
@@ -67,6 +87,7 @@ export class ZenithMarket extends Domain {
 
         zenithMarket.bonuses.forEach(bonus => {
             bonus.level = zenithMarketLevels[bonus.index] || 0;
+            bonus.unlocked = bonus.index === 0 || (zenithMarketLevels[bonus.index - 1] ?? 0) >= 1;
         });
     }
 

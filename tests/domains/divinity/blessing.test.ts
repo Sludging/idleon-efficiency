@@ -41,7 +41,8 @@ describe('Divinity Domain - Blessing Bonus', () => {
    if (!god) throw new Error('God 2 (Nobisect) not found');
 
    const extractedBonus = extractionResults.extractions.divinity_blessing_2.result;
-   const calculatedBonus = god.getBlessingBonus(getTargetPlayer(gameData.get('players') as Player[]));
+   const players = gameData.get('players') as Player[];
+   const calculatedBonus = god.getBlessingBonus(getTargetPlayer(players));
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
     tolerance: 0,

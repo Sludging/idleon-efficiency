@@ -20,6 +20,7 @@ export class Gaming extends Domain {
     level = 0;
     bits = 0;
     reclaimedCrownCount = 0;
+    evolvedPlantCount: number | null = null;
     metadata: GamingMetadataModel = initGamingMetadataRepo()[0].data;
     plants: Plant[] = Plant.fromBase(initGamingSpeciesRepo());
     fertilizer: FertilizerUpgrade[] = FertilizerUpgrade.fromBase(initGamingUpgradeRepo());
@@ -55,6 +56,7 @@ export class Gaming extends Domain {
         this.level = 0;
         this.bits = 0;
         this.reclaimedCrownCount = 0;
+        this.evolvedPlantCount = null;
 
         this.metadata = initGamingMetadataRepo()[0].data;
         this.plants = Plant.fromBase(initGamingSpeciesRepo());
@@ -79,6 +81,12 @@ export class Gaming extends Domain {
         const skillLevels = data.get("Lv0_0") as number[] ?? [];
         gaming.level = Number(skillLevels[SkillsIndex.Gaming] ?? 0);
         gaming.bits = Number(savedGaming[0] ?? 0);
+        const savedSprouts = data.get("GamingSprout") as unknown[][] | undefined;
+        // The game reads this account-wide cell directly for Button task 40.
+        const evolvedPlantCount = savedSprouts?.[28]?.[1];
+        gaming.evolvedPlantCount = typeof evolvedPlantCount === "number" && Number.isFinite(evolvedPlantCount)
+            ? evolvedPlantCount
+            : null;
         const research = data.get("Research") as unknown[][] ?? [];
         gaming.reclaimedCrownCount = research[11]?.length ?? 0;
 

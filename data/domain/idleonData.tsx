@@ -7,6 +7,7 @@ import { updatePlayerTalentContexts } from './player';
 import { updateEquipmentProperties } from './equipment';
 import { GoldenFood, updateGoldenFood } from './golden-food';
 import { updatePlayerDropRates, updatePlayerPowers, updatePlayerSecondaryStats, updatePlayerSkillStatsDN, updatePlayerStats } from './player-stats';
+import { updateButtonTaskProgress } from './world-7/buttonTaskProgress';
 import { Bribes } from './world-1/bribes';
 import { GemStore } from './gemPurchases';
 import { Achievements } from './achievements';
@@ -40,7 +41,7 @@ import { Divinity, updateDivinity, updateDivinityBlessings } from './world-5/div
 import { Sailing, updateSailing, updateMinTravelTimeAndSpeed } from './world-5/sailing/sailing';
 import { Gaming, updateGaming, updateGamingDisplay, updateSuperbitImpacts } from './world-5/gaming';
 import { AtomCollider, updateAtomCollider } from './world-3/construction/atomCollider';
-import { updateArtifacts, updateSailingArtifactSlabBoost } from './world-5/sailing/artifacts';
+import { updateArtifactBuildSpeed, updateArtifacts, updateSailingArtifactSlabBoost } from './world-5/sailing/artifacts';
 import { Constellations } from './constellations';
 import { Slab, updateSlabBonusDisplay, updateSlabBonusMultiplier } from './world-5/slab';
 import { Capacity, updateCapacity } from './capacity';
@@ -415,6 +416,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "traps": (doc: Cloudsave, accountData: Map<string, any>) => updateTrapDisplayData(accountData),
     "slab": (doc: Cloudsave, accountData: Map<string, any>) => updateSlabBonusDisplay(accountData),
     "playersExtraMaths": (doc: Cloudsave, accountData: Map<string, any>) => playerExtraCalculations(accountData),
+    "artifactBuildSpeed": (_doc: Cloudsave, accountData: Map<string, any>) => updateArtifactBuildSpeed(accountData),
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
     "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
     "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateMinTravelTimeAndSpeed(accountData),
@@ -439,6 +441,8 @@ const postPostProcessingMap: Record<string, Function> = {
     "researchDisplay": (_doc: Cloudsave, accountData: Map<string, any>) => updateResearchDisplay(accountData),
     // Hole inspection uses settled account bonuses, Player contexts and matching Statue bonuses.
     "holePresentation": (_doc: Cloudsave, accountData: Map<string, any>) => updateHolePresentation(accountData),
+    // Button task progress uses settled account and character results.
+    "buttonTaskProgress": (_doc: Cloudsave, accountData: Map<string, any>) => updateButtonTaskProgress(accountData),
 }
 
 export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: CompanionState[], serverVars: Record<string, any>, isStatic: boolean = false) => {

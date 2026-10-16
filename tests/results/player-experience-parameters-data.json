@@ -1,0 +1,45 @@
+{
+  "extractions": {
+    "class_experience_food": {
+      "expression": "idleon.callFunction('Minehead','TotalFoodBonuses','ClassEXP')",
+      "result": 0
+    },
+    "shim_lantern_bonus": {
+      "expression": "idleon.callFunction('Sailing','ArtifactBonus',31)",
+      "result": 5
+    },
+    "dream_cloud_bonus_70": {
+      "expression": "idleon.callFunction('Dreamstuff','CloudBonus',70)",
+      "result": 0
+    },
+    "experience_totalizer_bonus_4": {
+      "expression": "idleon.callFunction('GamingStatType','MSA_Bonus',4,0)",
+      "result": 131.04000000000002
+    },
+    "experience_sigil_bonus_8": {
+      "expression": "idleon.callFunction('Labb','SigilBonus','Blank',8,0)",
+      "result": 140
+    },
+    "experience_total_titan_kills": {
+      "expression": "idleon.callFunction('Windwalker','TotalTitanKills',0,0)",
+      "result": 33
+    },
+    "experience_shiny_bonus_1": {
+      "expression": "idleon.callFunction('Breeding','ShinyBonusS','Nah',1,-1)",
+      "result": 29
+    },
+    "native_farming_exotic_50": {
+      "expression": "idleon.callFunction('FarmingStuffs','ExoticBonusQTY',50,0)",
+      "result": 45.331069609507644
+    },
+    "native_box_monster_exp": {
+      "expression": "(() => { idleon.callFunction('Minehead','Button_uHave',15,0); return idleon.engine.getGameAttribute('DNSM').h.BoxRewards.h.monsterExp; })()",
+      "result": 18.51063829787234
+    },
+    "native_active_exp_bubble": {
+      "expression": "(() => { idleon.callFunction('Minehead','Button_uHave',15,0); return idleon.engine.getGameAttribute('DNSM').h.AlchBubbles.h.expACTIVE; })()",
+      "result": 14208.1
+    }
+  },
+  "errors": {}
+}

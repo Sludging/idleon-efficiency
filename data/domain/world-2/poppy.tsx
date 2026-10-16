@@ -1,4 +1,5 @@
 import { Domain, RawData } from "../base/domain";
+import { ImageData } from "../imageData";
 import { Companion, getCompanionActiveBonus } from "../companions";
 import { initPoppyUpgradeRepo, PoppyUpgradeBase } from "../data/PoppyUpgradeRepo";
 import { Item } from "../items";
@@ -28,6 +29,10 @@ export class PoppyFisherooBonus {
 
 export class PoppyGlobalBonus {
     constructor(public index: number, public desc: string, public value: number) { }
+
+    getImageData(): ImageData {
+        return { location: `ClickerRooBonus${this.index}`, width: 24, height: 24 };
+    }
 
     static fromBase() {
         return [
@@ -86,6 +91,10 @@ export class Poppy extends Domain {
     meritoBonus12: number = 0;
     gambitBonus8: number | null = 0;
     
+    getCurrencyImageData(): ImageData {
+        return { location: "ClickerFishCurrency", width: 72, height: 72 };
+    }
+
     getRawKeys(): RawData[] {
         return [];
     }
@@ -147,6 +156,23 @@ export class Poppy extends Domain {
             * (1 / (1 + 5 * this.getMegafishQuantity(10) * this.getTarpitUpgradeLevel(7) / 100));
 
         return reduction * (1 / Math.max(1, this.getFisherooBonus(2))) * upgrade.data.x0 * Math.pow(upgrade.data.x1, upgrade.level);
+    }
+
+    getNextGlobalBonusUpgrade(): {
+        bonusIndex: number;
+        cost: number;
+        resourceBalance: number;
+        canAfford: boolean;
+    } {
+        const bonusIndex = this.getUpgradeLevel(3) % this.bonuses.length;
+        const cost = this.getUpgradeCost(3);
+
+        return {
+            bonusIndex,
+            cost,
+            resourceBalance: this.ownedFishes,
+            canAfford: this.ownedFishes >= cost,
+        };
     }
 
     getTarpitUpgradeCost(index: number): number {

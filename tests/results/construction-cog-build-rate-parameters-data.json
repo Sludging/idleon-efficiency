@@ -1,0 +1,17 @@
+{
+  "extractions": {
+    "construction_small_cog_build_speed_bonus": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"SmallCogBonusTOTAL\", 1, 0)",
+      "result": 39480
+    },
+    "construction_companion_157_bonus": {
+      "expression": "idleon.callFunction(\"Companions\", 157, 0)",
+      "result": 200
+    },
+    "construction_royal_outpost_build_speed_multiplier": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostROGbon\", 0, 0)",
+      "result": 5.444444444444445
+    }
+  },
+  "errors": {}
+}

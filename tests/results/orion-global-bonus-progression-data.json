@@ -1,0 +1,20 @@
+{
+  "extractions": {
+    "next_bonus_index": {
+      "expression": "idleon.engine.getGameAttribute(\"OptionsListAccount\")[255] % 6",
+      "result": 5
+    },
+    "next_bonus_cost": {
+      "expression": "idleon.callFunction(\"Summoning\", \"OwlCost\", 1, 0)",
+      "result": {
+        "type": "large_number",
+        "value": "4.4093638908938975e+38"
+      }
+    },
+    "can_afford_next_bonus": {
+      "expression": "idleon.engine.getGameAttribute(\"OptionsListAccount\")[253] >= idleon.callFunction(\"Summoning\", \"OwlCost\", 1, 0) ? 1 : 0",
+      "result": 1
+    }
+  },
+  "errors": {}
+}

@@ -1,0 +1,26 @@
+{
+  "description": "Extract Bubba's next permanent bonus upgrade from the current account state",
+  "target": "Bubba Next Permanent Bonus Upgrade",
+  "extractions": [
+    {
+      "label": "next_bonus_index",
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"RealLV\", 3, 0) % 7 + 1",
+      "description": "Next Bubba Boon index: the current permanent upgrade level cycles through seven ordered bonuses numbered one through seven"
+    },
+    {
+      "label": "next_bonus_cost",
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"UpgCost\", 3, 0)",
+      "description": "Current cost of the permanent Bubba Boon upgrade in meat slices"
+    },
+    {
+      "label": "can_afford_next_bonus",
+      "expression": "idleon.engine.getGameAttribute(\"Bubba\")[0][0] >= idleon.callFunction(\"Bubbastuff\", \"UpgCost\", 3, 0) ? 1 : 0",
+      "description": "Whether current meat slices meet the game price for the next permanent Bubba Boon upgrade"
+    },
+    {
+      "label": "minehead_bonus_5",
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 5, 0)",
+      "description": "Minehead's sixth progression reward: percent cost reduction used by Bubba UpgCost"
+    }
+  ]
+}

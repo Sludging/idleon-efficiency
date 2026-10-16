@@ -1,4 +1,4 @@
-import { lavaLog as gameLog, nFormatter } from "../utility";
+import { lavaLog as gameLog, lavaLog2, nFormatter } from "../utility";
 import { Domain, RawData } from "./base/domain";
 import { TesseractUpgradeBase, initTesseractUpgradeRepo } from "./data/TesseractUpgradeRepo";
 import { ImageData } from "./imageData";
@@ -6,7 +6,7 @@ import { Item } from "./items";
 import { TesseractUpgradeModel } from "./model/tesseractUpgradeModel";
 import { Player } from "./player";
 import { EquipmentBonus } from "./equipment-effects";
-import { ClassIndex } from "./talents";
+import { ClassIndex, Talent } from "./talents";
 import {
     EfficiencyUpgrade,
     EfficiencyDomain,
@@ -245,6 +245,13 @@ export class PrismaBubbleTesseractUpgrade extends TesseractUpgrade {
     }
 }
 
+type ArcaneMapStatusKillCounts = Readonly<{
+    status0KillCount: number;
+    status1KillCount: number;
+    status2KillCount: number;
+}>;
+
+
 export enum TesseractType {
     Purple = 0,
     Brown = 1,
@@ -450,6 +457,7 @@ export class Tesseract extends Domain implements EfficiencyDomain {
     currentArcaneDefense: number = 0;
     efficiencyResults: Map<string, EfficiencyPathInfo> = new Map();
     bestArcaneCultist: Player | null = null;
+    arcaneMapStatusKillCounts: (ArcaneMapStatusKillCounts | null)[] = [];
     pristineBonus22: number = 0;
     arcadeBonus50: number = 0;
     labBonus123: number = 0;
@@ -493,7 +501,8 @@ export class Tesseract extends Domain implements EfficiencyDomain {
 
     getRawKeys(): RawData[] {
         return [
-            { key: "Arcane", perPlayer: false, default: [] }
+            { key: "Arcane", perPlayer: false, default: [] },
+            { key: "MapBon", perPlayer: false, default: [] },
         ]
     }
 
@@ -650,6 +659,19 @@ export class Tesseract extends Domain implements EfficiencyDomain {
         const upgradesData = data.get("Arcane") as number[];
         const optionList = data.get("OptLacc") as number[];
         const rawData = data.get("rawData") as Record<string, any>;
+        const mapBonusData = data.get("MapBon") as number[][];
+        tesseract.arcaneMapStatusKillCounts = mapBonusData.map(row => {
+            if (row.length < 3) {
+                return null;
+            }
+
+            return {
+                status0KillCount: Number(row[0]),
+                status1KillCount: Number(row[1]),
+                status2KillCount: Number(row[2]),
+            };
+        });
+
 
         // Calculate total tesseract level first
         tesseract.totalTesseractLevel = upgradesData.reduce((sum, level) => sum + level, 0);
@@ -904,6 +926,31 @@ export class Tesseract extends Domain implements EfficiencyDomain {
     public getUpgradeBonus(upgradeId: number): number {
         const upgrade = this.upgrades.find(u => u.id === upgradeId);
         return upgrade ? upgrade.bonus : 0;
+    }
+
+    getArcaneMapMultiBonus(player: Player, players: readonly Player[]): number {
+        const mapStatusKillCounts = this.arcaneMapStatusKillCounts[player.currentMapId];
+        if (mapStatusKillCounts === null) {
+            return 0;
+        }
+
+        const maxBonus = 100 * (Talent.getAccountTalentBonus(players, 589, player.finalTalentInputs) - 1)
+            + Math.min(10, this.getUpgradeBonus(58));
+        const status1KillCount = mapStatusKillCounts.status1KillCount;
+        if (status1KillCount < 1) {
+            return Math.min(maxBonus, 0);
+        }
+
+        // Arcane Map Multiplier uses map-specific StatusArc1 kills and caps them with Overwhelming Energy.
+        const log10MapKills = gameLog(status1KillCount);
+        const mapMultiplier =
+            (2 * Math.max(0, log10MapKills - 3.5) +
+                Math.max(0, lavaLog2(status1KillCount) - 12)) *
+                (log10MapKills / 2.5) +
+            (Math.min(2, status1KillCount / 1000) +
+                Math.max(5 * (log10MapKills - 5), 0));
+
+        return Math.min(maxBonus, mapMultiplier);
     }
 
     private getTalentBonus(player: Player | null, skillIndex: number): number {

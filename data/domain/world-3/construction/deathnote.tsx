@@ -24,6 +24,7 @@ export const deathNoteMinibossesOrder = "slimeB poopBig babayaga babaHour babaMu
 export class Deathnote extends Domain {
     mobKillCount: Map<string, number[]> = new Map()
     playerKillsByMap: Map<number, Map<number, number>> = new Map();
+    private playerKillsLeftToAdvance: Map<number, number[][]> = new Map();
     hasRiftBonus: boolean = false;
     hasMinibosses: boolean = false;
     private totalWorldRank: number = 0;
@@ -41,6 +42,30 @@ export class Deathnote extends Domain {
             case killCount > 1000000000: return this.hasRiftBonus ? 20 : 10;
             default: return 0;
         }
+    }
+
+    getEclipseSkullsDamageBonus = (): number => {
+        let skullCount = 0;
+        for (let worldIndex = 0; worldIndex < 6; worldIndex++) {
+            for (const mob of deathNoteMobOrder[worldIndex]) {
+                const mobKills = this.mobKillCount.get(mob);
+                let totalKills = 0;
+                if (mobKills) {
+                    for (const kills of mobKills) {
+                        totalKills += kills;
+                    }
+                }
+                if (this.getDeathnoteRank(totalKills) >= 15) {
+                    skullCount++;
+                }
+            }
+        }
+
+        return 5 * skullCount;
+    }
+
+    getKillsLeftToAdvance(playerID: number, mapIndex: number): number | undefined {
+        return this.playerKillsLeftToAdvance.get(playerID)?.[mapIndex]?.[0];
     }
 
     getNormalWorldRank = (killCount: number, eclipseSkullsActive: boolean): number => {
@@ -192,11 +217,15 @@ export class Deathnote extends Domain {
         // init again to reset the data set;
         // TODO: This is very ugly, need to do better.
         deathNote.init([], 0);
+        deathNote.playerKillsLeftToAdvance.clear();
 
         const enemyRepo = initEnemyRepo();
 
         const charCount = data.get("charCount") as number;
         const klaData = range(0, charCount).map((_, i) => { return data.get(`KLA_${i}`) }) as number[][][];
+        klaData.forEach((playerKillData, playerID) => {
+            deathNote.playerKillsLeftToAdvance.set(playerID, playerKillData);
+        });
 
         // Get the kill count per map (so we can get values for strange maps that can be chowed/zowed)
         klaData.forEach((playerKillData, pIndex) => {

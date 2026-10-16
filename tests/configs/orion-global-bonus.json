@@ -41,6 +41,11 @@
       "label": "global_bonus_5",
       "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 5, 0)",
       "description": "Global bonus 5: +{ All Stat (base 2)"
+    },
+    {
+      "label": "global_bonus_multi",
+      "expression": "100*idleon.callFunction(\"Summoning\", \"OwlMegafeather\", 1, 0)+100*idleon.callFunction(\"Summoning\", \"OwlMegafeather\", 3, 0)+100*idleon.callFunction(\"Summoning\", \"OwlMegafeather\", 5, 0)+100*idleon.callFunction(\"Summoning\", \"OwlMegafeather\", 7, 0)+100*Math.min(1,idleon.callFunction(\"Summoning\", \"OwlMegafeather\", 9, 0))+50*Math.max(0,idleon.callFunction(\"Summoning\", \"OwlMegafeather\", 9, 0)-1)",
+      "description": "Multiplier from owned Owl megafeathers used for Orion's account-wide bonuses"
     }
   ]
 }
