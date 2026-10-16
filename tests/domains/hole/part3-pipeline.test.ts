@@ -1,4 +1,4 @@
-import { ResourceCavren } from '../../../data/domain/world-5/hole/hole';
+import { ResourceCavren, ResourceCavrens } from '../../../data/domain/world-5/hole/hole';
 import type { Hole } from '../../../data/domain/world-5/hole/hole';
 import type { Account } from '../../../data/domain/account';
 import type { Alchemy } from '../../../data/domain/world-2/alchemy/alchemy';
@@ -65,6 +65,23 @@ describe('Hole cavern resource shortfall', () => {
    expect(cavern.resourceRequirementMet).toBe(current >= resourceRequirement);
   });
 
+ });
+});
+
+describe('Hole shared cavern claims', () => {
+ it('returns remaining daily claims for known usage and unavailable for unknown usage', () => {
+  const resourceCavrens = new ResourceCavrens();
+  [
+   { usage: 0, remaining: 6 },
+   { usage: 2, remaining: 4 },
+   { usage: 6, remaining: 0 },
+   { usage: 8, remaining: 0 },
+  ].forEach(({ usage, remaining }) => {
+   resourceCavrens.sharedClaimCounter = usage;
+   expect(resourceCavrens.getRemainingSharedClaims()).toBe(remaining);
+  });
+  resourceCavrens.sharedClaimCounter = null;
+  expect(resourceCavrens.getRemainingSharedClaims()).toBeNull();
  });
 });
 

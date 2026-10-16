@@ -1309,6 +1309,9 @@ export class ResourceCavrens {
   this.sharedClaimCounter = claimCounter == null ? null : Number(claimCounter);
   this.characterAssignments = assignments.map(assignment => assignment == null ? null : Number(assignment));
  }
+ getRemainingSharedClaims(): number | null {
+  return this.sharedClaimCounter === null ? null : Math.max(0, 6 - this.sharedClaimCounter);
+ }
 
  prepare(reductions: number | null): void {
   Object.values(this.cavrens).forEach(cavern => cavern.prepare(reductions));

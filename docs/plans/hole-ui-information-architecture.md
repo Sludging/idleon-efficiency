@@ -17,7 +17,7 @@ Exactly three top-level tabs, in this order: **Villagers**, **Upgrades**, **Cave
 |---|---|
 | [Villagers](#villagers) | Shared progression and Opal information across all five villagers; relevant individual details when useful. |
 | [Upgrades](#upgrades) | Left-side selection: **Majik**, **Schematics**, **Studies**, **Measurements**, in that order. |
-| [Caverns](#caverns) | Left-side selection: one entry for each of the 18 numbered cavern names, in game/release order. |
+| [Caverns](#caverns) | Left-side selection: one entry for each of the 18 cavern identities, in game/release order. |
 
 The simpler navigation does not impose a common workspace, content depth, or summary/detail template.
 Keep cavern selection directly discoverable; do not pre-consolidate it into Combat, Production, Skilling, or Monuments navigation.
@@ -59,29 +59,31 @@ Subsystem-specific browsing, comparison, search, or filtering may help; this dir
 
 ## Caverns
 
-Initially expose all 18 individual entries below, numbered and named in this order. Mechanical similarities may support comparison without replacing individual access.
+Initially expose all 18 individual entries below, named in this order. Mechanical similarities may support comparison without replacing individual access.
 Each cavern owns its local progression, production, wallets, upgrades, rewards, character capability, and relevant source/modifier links.
-Access/requirements, earned Opals, owned effective benefits, and relevant Study effects stay with the affected information.
+Access/requirements, owned effective benefits, and relevant Study effects stay with the affected information. Keep the account-wide Opal summary; do not repeat local Earned Opals when completed progress communicates cavern progress.
+
+For the accepted part 3 presentation, the table's numeric prefixes show canonical order; they are not displayed navigation indices. Follow the [part 3 UI plan](hole-part-3-ui-plan.md) for the selected four-cavern detail and navigation presentation.
 
 | Cavern | Distinct information retained from the approved scopes |
 |---|---|
 | **1. Well** | Bucket assignments/rates; obstruction versus stock/capacity; expansion settings/gates; gold effects; next Opal cost. |
-| **2. Motherlode** | Mining/current ore, completed layers, separate lifetime ore, requirements/readiness, and Well synergies. |
+| **2. Motherlode** | Mining/current ore, completed layers, separate lifetime ore, required ore, and owned Well benefits. |
 | **3. Dawg Den** | Eight amplifiers/charges/caps/debuffs; account score/Opal threshold; four class-group kill records and bucket effects. |
 | **4. Bravery** | Four monument concepts; starting swords/rethrows/retelling, baseline damage sources, best Last Stand, owned rewards. |
 | **5. Bell** | Four modes/saved mode; separate banks/rates; six improvements/costs; Clean odds/failures; seven bonuses; Renew consequences. |
 | **6. Harp** | Saved power/rate/layout/tune, slots, owned string EXP/levels/passives including unassigned types, ten notes/access/costs. |
 | **7. Lamp** | Wish stock/expected daily gain; purchase/access/effects/costs; schematic discount stacks; category-specific reset consequences. |
-| **8. Undying Hive** | Catching/Fractalfly progress, layers, requirements/readiness, and owned Harp synergy. |
+| **8. Undying Hive** | Catching/Fractal Flies, completed layers, required flies, and owned Harp benefits. |
 | **9. Gloomie Mushroom Grotto** | Colony clears, current credited kills/quota/readiness, Monarch HP, separate lifetime credited kills, Opals/synergies. |
 | **10. Justice** | Four monument concepts; starting coins/health/popularity/dismissals, achievements, contextual case consequences/search. |
 | **11. Jars** | Saved board/type/quality/producers/work/rates; ten types/access/costs; 12 holdings; pending gilded bonus; 40 discovery/enchantment collectibles and preferred target. |
-| **12. Evertree** | Choppin/Everlog/trunk progress, requirements/readiness, and cross-skilling reductions. |
+| **12. Evertree** | Chopping/Everlogs, completed trunks, required Everlogs, and owned cross-skilling benefits. |
 | **13. Wisdom** | Four monument concepts; normal-story starting attempts, per-clear gains, instamatches, and permanent rewards. |
 | **14. Gambit** | Six challenges/access/survival records; verified points/contributors/thresholds; daily entry/preservation; earned doublers/saved assignments; future effects distinct. |
 | **15. Temple** | Sanctum, torches/sources, Illuminate/Search/Amplify costs/effects/shortfalls, Search chance, awakening reset, active-only respawn/drop context. |
 | **16. Fountain** | Nine wallets/pending stacks/royal state; desire/ignore; bars/rates/capacity; all 60 Regular/Yellow/Green slots; marble amount/levels/eligibility; luck/ducks/Opals. |
-| **17. Bottomless Trench** | Fishing/Trench Fish/depth progress, requirements/readiness, and Fountain/cross-skilling synergies. |
+| **17. Bottomless Trench** | Fishing/Trench Fish, completed depths, required fish, and owned Fountain/cross-skilling benefits. |
 | **18. Crystal Glunko Cove** | Twelve shapes/boosted targets/kills; 24 upgrades/access/costs/shortfalls; local/global effects and character outputs; Study-discount usage; earned rewards. |
 
 **Fountain needs substantial local room.** Preserve all nine spendable wallets separately from pending production stacks, royal state, and snapshot balances.
@@ -92,9 +94,9 @@ Keep luck, ducks, earned/next-purchase Opals, Study inputs, and named Trench/oth
 Local views are available when they serve these tasks; the old Production & wallets / Upgrades / Marbleization composition is not mandatory.
 Fountain may need more depth than a simpler cavern. Shared left navigation is not a content-size limit.
 
-**Comparisons remain reachable within Caverns.** Support the four skilling caverns together and all-character Mining, Catching, Choppin, and Fishing capability against corresponding requirements.
-Keep gathered/required/remaining resources, completed layers/trunks/depths, readiness, and efficiency thresholds distinct; saved assignments do not prove live activity or contribution history.
-Keep shared claim usage and the unresolved source-six/Wiki-five limit explicit, without inventing an authoritative remaining allowance.
+**Comparisons remain reachable within Caverns.** Support the four skilling caverns together; show each matching-skill efficiency threshold and list qualifying imported character names in its tooltip. Do not show exact character outputs, saved assignments, locations, or redundant character counts.
+Show current/required resource and completed layers/trunks/depths. Do not duplicate resource remaining quantities or separate readiness text; color current/required green when gathered quantity meets its requirement.
+Show remaining shared claims as the source allowance of six minus recorded usage. Unknown usage stays unavailable. Explain that six claims per day are shared across all four resource caverns and manual claims happen in game; do not invent reset timing or claim availability.
 Support comparison across Bravery, Justice, and Wisdom while separating lifetime credited respect hours, claimed/claimable milestones, stored story-charge seconds, and permanent reward levels/effects.
 Comparison control placement and format remain page-design choices. Neither two extra left-navigation entries nor comparison blocks before the selected cavern are mandatory.
 

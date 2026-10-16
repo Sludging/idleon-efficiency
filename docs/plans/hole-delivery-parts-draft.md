@@ -79,7 +79,7 @@ Every part follows these boundaries:
 
 ## 3. Skilling layers and character capability: Motherlode, Undying Hive, Evertree, and Bottomless Trench
 
-**Outcome:** Players can compare current character capability with the requirements and claim progress of Motherlode (2), Undying Hive (8), Evertree (12), and Bottomless Trench (17), while understanding their shared daily constraint and owned synergies.
+**Outcome:** Players can inspect Motherlode (2), Undying Hive (8), Evertree (12), and Bottomless Trench (17), compare required skill thresholds with qualifying character names, and understand resource progress and remaining shared claims without implying saved assignments or activity.
 
 **Blocked by:** No approved delivery-part blockers. Shared planning gates and unassessed technical dependencies are stated in the delivery contract.
 
@@ -88,18 +88,18 @@ Every part follows these boundaries:
 - **Backend:** Provide access, completed layers/trunks/depths, dedicated gathered/required/remaining resources, displayed efficiency thresholds, readiness, earned Opals, and the single shared daily layer-claim counter. Keep Motherlode lifetime ore separate from current layer ore and completed layers.
 - **Backend:** Provide character identity, saved cavern assignment, and relevant Mining, Catching, Choppin, or Fishing efficiency. Match each skill to the correct displayed threshold; shared account progress must not imply individual contribution history or current activity.
 - **Backend:** Verify consumed camp/cross-account modifiers, including Studies, requirement reductions, schematics, and associated Well, Harp, cross-skilling, and Fountain synergies. Provide owned effective benefits with their actual progress basis.
-- **UI:** Let players inspect all four skilling caverns' claim progress, requirements, shared usage, owned synergies, and character capability comparisons. Include manual-claim and rescue context only where needed to interpret recorded progress and requirements.
+- **UI:** Show compact progression, current/required resource, required skill efficiency, remaining shared claims, and owned effective benefits for all four skilling caverns. The accepted UI omits navigation indices, separate remaining-resource amounts, local earned Opals, readiness text, the character table and assignments, redundant headings, and repeated cavern names. Keep the account-wide Opal summary and Motherlode lifetime ore distinction. The efficiency tooltip lists qualifying imported character names only. Claims use the user-selected source allowance of six minus known shared usage; unknown usage stays unavailable. Explain manual claims without inventing reset timing.
 
 ### Acceptance outcomes
 
-- [x] Players can inspect all four released skilling caverns and distinguish dedicated current progress, required/remaining resources, completed layers/depths, earned Opals, and claim readiness; full progress does not imply an automatic claim.
-- [x] Players can compare each character's correct skill efficiency with the cavern's displayed requirement, separately from required resource quantity and account-wide progress.
-- [x] Players see one shared layer-claim counter across all four caverns, separate from Lantern uses; the source-six/Wiki-five limit conflict remains explicit and does not imply a verified remaining allowance.
-- [x] Players can inspect Motherlode lifetime ore and owned layer/Study/schematic synergies, including Well, Harp, cross-skilling reductions, and Fountain effects, without substituting current resources for completed progression.
+- [x] Players can inspect all four released skilling caverns' completed progress and current/required resources; the UI omits separate remaining-resource amounts, local Opals, and readiness text.
+- [x] Players can compare each required skill threshold with qualifying imported character names only; the UI does not show exact outputs, saved assignments, locations, or redundant character counts.
+- [x] Players see remaining shared claims from the user-selected source allowance of six minus known usage; unknown usage stays unavailable. This user-selected display value does not establish fresh game parity or resolve historical source disagreement.
+- [x] Players can inspect Motherlode lifetime ore and owned effective benefits without substituting current resources for completed progression; the UI uses concise labels and no redundant heading.
 
-**Accepted limits:** Part 3 acceptance covers the implemented backend and UI outcomes, not verified assigned-character game parity, live claim/reset behavior, or all-cavern parity. The source-six versus Wiki-five conflict remains unresolved; no maximum, remaining allowance, or claim availability is asserted. See the [current handoff](hole-research-brief.md#part-3-ui-acceptance-and-local-settlement--2026-10-16) for accepted evidence, explicit limits, and settlement. Issues [#443](https://github.com/Sludging/idleon-efficiency/issues/443) and [#440](https://github.com/Sludging/idleon-efficiency/issues/440) remain open.
+**Accepted limits:** Part 3 acceptance covers the implemented backend and UI outcomes, not verified assigned-character game parity, live claim/reset behavior, or all-cavern parity. The user selected six as the UI allowance; source-six/Wiki-five disagreement remains historical evidence, not a current display restriction or fresh game-parity claim. See the [current handoff](hole-research-brief.md#current-handoff) for accepted evidence, limits, and local commitment. Issues [#443](https://github.com/Sludging/idleon-efficiency/issues/443) and [#440](https://github.com/Sludging/idleon-efficiency/issues/440) remain open.
 
-**Data note:** Resolve displayed threshold scaling, character efficiency inputs, shared-counter/reset semantics, and the six-versus-five daily limit within this part. A missing Wiki threshold table is not evidence of no requirement; unknowns must not become zero or scope omissions.
+**Data note:** Verify displayed threshold scaling, character efficiency inputs, and shared-counter/reset semantics. The source-six/Wiki-five discrepancy remains a game-parity research question; the user-selected UI allowance of six is not a game verification. A missing Wiki threshold table is not evidence of no requirement; unknowns must not become zero or scope omissions.
 
 ## 4. Well, Bell, Harp, and Lamp progression
 

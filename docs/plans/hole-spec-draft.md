@@ -27,7 +27,7 @@ Each story describes one complete player experience and maps to the same-numbere
    As a player, I want to inspect all camp upgrades, including Pocket Divinity, with their progression, requirements, costs, and effective benefits, so I can understand what I own, what is available, and which resources compete.
 
 3. **Skilling layers and character capability**  
-   As a player, I want to inspect Motherlode, Hive, Evertree, and Trench progression alongside each character's relevant capability, so I can distinguish layer readiness, resource and efficiency requirements, and the shared claim allowance.
+   As a player, I want to inspect Motherlode, Hive, Evertree, and Trench progression with each required skill threshold and names of characters that meet it, so I can understand resource requirements and shared claims without implying saved assignments or contribution history.
 
 4. **Well, Bell, Harp, and Lamp progression**  
    As a player, I want to inspect these caverns' production, saved settings, upgrades, resources, and effective benefits, so I can understand current progression, competing costs, and reset consequences.
@@ -46,9 +46,9 @@ Each story describes one complete player experience and maps to the same-numbere
 - **Complete released scope:** Camp, all five villagers, and all 18 released caverns remain required. Future placeholders and unavailable source-only entries must not appear as released useful effects.
 - **Visibility:** Show released content, including locked entries, by default. Where useful, offer **Show unlocked** to restrict the view. Browsing, search, filtering, and read-only comparisons are capabilities to use where they help; no global control set or presentation layout is prescribed.
 - **Ownership and meaning:** Preserve account-wide versus character-specific state, current versus lifetime totals, stock versus dedicated progress, saved level versus claim-ready progress, and owned versus potential benefits. Unknown inputs must not become zero. Saved settings do not establish transient actor selections.
-- **Current calculations:** Show verified current-state rates, effects, costs, shortfalls, and capability comparisons with relevant contributors and effective caps. Probabilities and expected gains are not guaranteed outcomes. Pocket Divinity is not dismissed as useless with Doot; verify the effective character gate and overlap.
-- **Snapshot boundary:** Do not advance production, balances, readiness, or progress from import time to now. Do not imply live freshness or reconstruct active challenge state from persistent totals.
-- **Shared constraints:** Distinguish Lantern inventory and daily usage, shared skilling claims, Gambit entry, and Cove discount usage. The six-versus-five layer limit remains an explicit data question until verified, not an invented authoritative allowance.
+- **Current calculations:** Show verified current-state rates, effects, costs, shortfalls, and capability comparisons with relevant contributors and effective caps. Part 3's accepted UI shows qualifying character names only, not values or saved assignments. Probabilities and expected gains are not guaranteed outcomes. Pocket Divinity is not dismissed as useless with Doot; verify the effective character gate and overlap.
+- **Snapshot boundary:** Do not advance production, balances, readiness, or progress from import time to now. Do not imply live freshness or reconstruct active challenge state from persistent totals. Part 3's accepted presentation omits a separate readiness field.
+- **Shared constraints:** Distinguish Lantern inventory and daily usage, shared skilling claims, Gambit entry, and Cove discount usage. The part 3 user-selected UI displays remaining claims from the source allowance of six minus known shared usage; this is a presentation decision, not fresh game-parity evidence. The source-six/Wiki-five conflict remains historical evidence.
 - **Context, not a game guide:** Explain only what players need to interpret displayed state, requirements, benefits, costs, and reset consequences. Wisdom covers normal-story saved starting capability and permanent progression, not instructions for playing its memory game.
 
 ## Verification
