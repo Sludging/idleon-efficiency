@@ -635,10 +635,18 @@ export class Food extends Item {
         return Food.getBoostFoodContribution(player, inputs, "MoveSpdBoosts", talentInputs);
     }
 
+    static getWorshipSoulContribution(
+        player: Player,
+        inputs: BoostFoodEffectivenessInputs,
+        talentInputs: TalentLevelInputs = player.finalTalentInputs,
+    ): number {
+        return Food.getBoostFoodContribution(player, inputs, "WorshipSoulBoosts", talentInputs);
+    }
+
     private static getBoostFoodContribution(
         player: Player,
         inputs: BoostFoodEffectivenessInputs,
-        effect: "HpBaseBoosts" | "WeaponPowerBoosts" | "MoveSpdBoosts",
+        effect: "HpBaseBoosts" | "WeaponPowerBoosts" | "MoveSpdBoosts" | "WorshipSoulBoosts",
         talentInputs: TalentLevelInputs,
     ): number {
         let contribution = 0;

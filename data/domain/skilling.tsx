@@ -39,7 +39,8 @@ import { GoldenFood } from "./golden-food";
 import { Bribe } from "./world-1/bribes";
 import { getStatCards, type SkillStatsDNSkill } from "./player-stats";
 import { lavaLog } from "../utility";
-export type SkillingSkill = SkillStatsDNSkill;
+import type { Sneaking } from "./world-6/sneaking";
+export type SkillingSkill = SkillStatsDNSkill | SkillsIndex.Worship;
 
 
 const getStarSignEfficiency = (player: Player, bonusText: string): number =>
@@ -81,6 +82,7 @@ export class Skilling extends Domain {
         const goldenFood = data.get("goldenFood") as GoldenFood;
         const atomCollider = data.get("collider") as AtomCollider;
         const storage = data.get("storage") as Storage;
+        const statues = data.get("statues") as PlayerStatues[];
         const achievements = data.get("achievements") as Achievement[];
         const bribes = data.get("bribes") as Bribe[];
         const lab = data.get("lab") as Lab;
@@ -229,12 +231,42 @@ export class Skilling extends Domain {
                 (1 + (catchingPower + Math.min(5, 5 * (achievement(74).completed ? 1 : 0))) / 100) *
                 allEfficiencies *
                 (1 + player.getTalentBonus(263) / 100);
+            // Skulls label this upgraded stat as Worship Power; resolve it by its Weapon_Power key.
+            const worshipSkullWeaponPower = player.gear.tools[5]?.getProperty("Weapon_Power")?.getValue() ?? 0;
+            const worshipStatuePower = statues[player.playerID].statues
+                .find(statue => statue.index === 16)!.getBonus(player);
+            const worshipPower = player.stats.getSkillPower(SkillsIndex.Worship);
+            // The skull contributes here and again through shared Worship Power, matching game source.
+            const worshipPowerTerm = Math.pow(
+                worshipSkullWeaponPower * (1 + alchemy.getBubbleBonusForKey("ToolM", player) / 100)
+                + 4 + worshipPower + worshipStatuePower,
+                1.3,
+            );
+            // Count only this character's inventory and shared chest, not other characters or refinery.
+            const worshipSoulCount = storage.playerStorage[player.playerID]
+                .reduce((total, item) => total + (item.internalName === "Soul1" ? item.count : 0), 0)
+                + storage.chest.reduce((total, item) => total + (item.internalName === "Soul1" ? item.count : 0), 0);
+            // Skill Mastery returns the source's 10-point coefficient; do not scale it again.
+            const worshipMastery = skillMastery.getSkillBonus(SkillsIndex.Worship, 1);
+            // Game adds the outer 10 after every multiplicative efficiency bonus.
+            const worshipEfficiency = (worshipPowerTerm +
+                (Math.pow(wisdom + 1, 0.6) * (1 + player.getTalentBonus(532) / 100) +
+                    (getStampBonusForKey(stamps, "WorshipEff") + allBaseSkillEfficiency))) *
+                (1 + player.skills.get(SkillsIndex.Worship)!.level / 200) *
+                (1 + (player.getTalentBonus(445) * worshipMastery
+                    + player.getPostOfficeBonus("18a")
+                    + getRightHandOfActionBonus(players, player, SkillsIndex.Worship)
+                    + getStarSignEfficiency(player, "Worship Efficiency")) / 100) *
+                allEfficiencies *
+                (1 + player.getTalentBonus(476) * (atomEfficiency + lavaLog(worshipSoulCount)) / 100)
+                + 10;
 
             this.skillEfficiencies.set(player.playerID, {
                 [SkillsIndex.Mining]: miningEfficiency,
                 [SkillsIndex.Chopping]: choppingEfficiency,
                 [SkillsIndex.Fishing]: fishingEfficiency,
                 [SkillsIndex.Catching]: catchingEfficiency,
+                [SkillsIndex.Worship]: worshipEfficiency,
             });
         }
     }

@@ -2,6 +2,8 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   roots: ['<rootDir>/tests'],
+  // Match TypeScript's repository-root baseUrl for bare local imports.
+  modulePaths: ['<rootDir>'],
   testMatch: ['**/tests/**/*.test.ts'],
   collectCoverageFrom: [
     'data/domain/**/*.tsx',
