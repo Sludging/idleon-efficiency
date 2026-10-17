@@ -78,6 +78,7 @@ const navItems: NavItem[] = [
             { subLink: "/jelly-operator", label: "Jelly Operator" },
             { subLink: "/advice-fish", label: "Advice Fish" },
             { subLink: "/zenith-market", label: "Zenith Market" },
+            { subLink: "/menagerie", label: "Menagerie" },
             { subLink: "/the-button", label: "The Button" },
         ]
     },
