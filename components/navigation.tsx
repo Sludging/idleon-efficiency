@@ -70,7 +70,7 @@ const navItems: NavItem[] = [
     },
     {
         link: "/world-7", label: "W7", subLinks: [
-            { subLink: "/spelunking", label: "Spelunking (Coming Soon)" },
+            { subLink: "/spelunking", label: "Spelunking" },
             { subLink: "/research", label: "Research" },
             { subLink: "/legendTalents", label: "Legend Talents" },
             { subLink: "/coral", label: "Coral Reef" },

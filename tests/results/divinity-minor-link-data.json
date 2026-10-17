@@ -10,7 +10,7 @@
     },
     "divinity_minor_bonus_6": {
       "expression": "idleon.callFunction(\"Divinity\", \"Bonus_Minor\", -1, 6)",
-      "result": 118.4461126005362
+      "result": 118.57430103408657
     }
   },
   "errors": {}

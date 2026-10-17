@@ -14,7 +14,7 @@
     },
     "orblet_market_bonus_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 3, 0)",
-      "result": 4
+      "result": 8
     },
     "orblet_market_bonus_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 5, 0)",
@@ -22,7 +22,7 @@
     },
     "orblet_market_bonus_6": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 6, 0)",
-      "result": 20
+      "result": 25
     },
     "orblet_market_bonus_7": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 7, 0)",

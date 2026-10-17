@@ -2,67 +2,67 @@
   "extractions": {
     "xp_multiplier_6_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 0, 6)",
-      "result": 6.48
+      "result": 6.75
     },
     "xp_multiplier_6_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 1, 6)",
-      "result": 1.62
+      "result": 1.6875
     },
     "xp_multiplier_6_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 2, 6)",
-      "result": 1.863
+      "result": 1.940625
     },
     "xp_multiplier_6_3": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 3, 6)",
-      "result": 1.62
+      "result": 1.6875
     },
     "xp_multiplier_6_4": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 4, 6)",
-      "result": 1.62
+      "result": 1.6875
     },
     "xp_multiplier_31_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 0, 31)",
-      "result": 7.128000000000001
+      "result": 7.425000000000001
     },
     "xp_multiplier_31_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 1, 31)",
-      "result": 1.7820000000000003
+      "result": 1.8562500000000002
     },
     "xp_multiplier_31_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 2, 31)",
-      "result": 2.0493
+      "result": 2.1346875
     },
     "xp_multiplier_31_3": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 3, 31)",
-      "result": 1.7820000000000003
+      "result": 1.8562500000000002
     },
     "xp_multiplier_31_4": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 4, 31)",
-      "result": 1.7820000000000003
+      "result": 1.8562500000000002
     },
     "xp_multiplier_53_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 0, 53)",
-      "result": 7.128000000000001
+      "result": 7.425000000000001
     },
     "xp_multiplier_51_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 2, 51)",
-      "result": 1.863
+      "result": 1.940625
     },
     "xp_multiplier_1_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 0, 1)",
-      "result": 19.6992
+      "result": 20.655
     },
     "xp_multiplier_1_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 2, 1)",
-      "result": 5.66352
+      "result": 5.9383125
     },
     "xp_hourly_6_0": {
       "expression": "(() => { const call = (name,t,i) => idleon.callFunction(\"RoyalG\",name,t,i); const rows = idleon.getAttr(\"RoyalMaps\"); const g = idleon.getAttr(\"RoyalG\"); const row = rows[6]; let gain = 0; if (0 < 2) { if (call(\"HasOutpost\",6,0) === 1 && row.length > 2) gain = call(\"BarExpRate\",0,6) * call(\"TotalUnitsz\",6,1); } for (let w = 0; w < 8; w++) { const roles = g[6+2*w] || []; const maps = g[7+2*w] || []; for (let u = 0; u < roles.length; u++) { if (Number(maps[u]) !== 6) continue; const role = Number(roles[u]); if (role >= 5 && role - 3 === 0) gain += call(\"BarExpRate\",role-3,6); else if (role === 4 && row.length !== 1 && call(\"ArmoryUpgBonus\",17,0) >= 1) { let selected = 0; let best = -1; for (let t = 0; t < 5; t++) { const level = call(\"OutpostEXPrank\",6,t); if (level > best) { best = level; selected = t; } } if (selected === 0) gain += call(\"BarExpRate\",3,6) / 2; } } } return gain; })()",
-      "result": 6.48
+      "result": 6.75
     },
     "xp_saved_6_0": {
       "expression": "Number(idleon.getAttr(\"RoyalMaps\")[6][3])",
-      "result": 2084.5377023693222
+      "result": 2352.230834819836
     },
     "xp_hourly_6_1": {
       "expression": "(() => { const call = (name,t,i) => idleon.callFunction(\"RoyalG\",name,t,i); const rows = idleon.getAttr(\"RoyalMaps\"); const g = idleon.getAttr(\"RoyalG\"); const row = rows[6]; let gain = 0; if (1 < 2) { if (call(\"HasOutpost\",6,0) === 1 && row.length > 2) gain = call(\"BarExpRate\",1,6) * call(\"TotalUnitsz\",6,3); } for (let w = 0; w < 8; w++) { const roles = g[6+2*w] || []; const maps = g[7+2*w] || []; for (let u = 0; u < roles.length; u++) { if (Number(maps[u]) !== 6) continue; const role = Number(roles[u]); if (role >= 5 && role - 3 === 1) gain += call(\"BarExpRate\",role-3,6); else if (role === 4 && row.length !== 1 && call(\"ArmoryUpgBonus\",17,0) >= 1) { let selected = 0; let best = -1; for (let t = 0; t < 5; t++) { const level = call(\"OutpostEXPrank\",6,t); if (level > best) { best = level; selected = t; } } if (selected === 1) gain += call(\"BarExpRate\",3,6) / 2; } } } return gain; })()",
@@ -86,27 +86,27 @@
     },
     "xp_hourly_53_0": {
       "expression": "(() => { const call = (name,t,i) => idleon.callFunction(\"RoyalG\",name,t,i); const rows = idleon.getAttr(\"RoyalMaps\"); const g = idleon.getAttr(\"RoyalG\"); const row = rows[53]; let gain = 0; if (0 < 2) { if (call(\"HasOutpost\",53,0) === 1 && row.length > 2) gain = call(\"BarExpRate\",0,53) * call(\"TotalUnitsz\",53,1); } for (let w = 0; w < 8; w++) { const roles = g[6+2*w] || []; const maps = g[7+2*w] || []; for (let u = 0; u < roles.length; u++) { if (Number(maps[u]) !== 53) continue; const role = Number(roles[u]); if (role >= 5 && role - 3 === 0) gain += call(\"BarExpRate\",role-3,53); else if (role === 4 && row.length !== 1 && call(\"ArmoryUpgBonus\",17,0) >= 1) { let selected = 0; let best = -1; for (let t = 0; t < 5; t++) { const level = call(\"OutpostEXPrank\",53,t); if (level > best) { best = level; selected = t; } } if (selected === 0) gain += call(\"BarExpRate\",3,53) / 2; } } } return gain; })()",
-      "result": 14.256000000000002
+      "result": 14.850000000000001
     },
     "xp_saved_53_0": {
       "expression": "Number(idleon.getAttr(\"RoyalMaps\")[53][3])",
-      "result": 5622.316755224945
+      "result": 6211.241646616136
     },
     "xp_hourly_51_2": {
       "expression": "(() => { const call = (name,t,i) => idleon.callFunction(\"RoyalG\",name,t,i); const rows = idleon.getAttr(\"RoyalMaps\"); const g = idleon.getAttr(\"RoyalG\"); const row = rows[51]; let gain = 0; if (2 < 2) { if (call(\"HasOutpost\",51,0) === 1 && row.length > 2) gain = call(\"BarExpRate\",2,51) * call(\"TotalUnitsz\",51,3); } for (let w = 0; w < 8; w++) { const roles = g[6+2*w] || []; const maps = g[7+2*w] || []; for (let u = 0; u < roles.length; u++) { if (Number(maps[u]) !== 51) continue; const role = Number(roles[u]); if (role >= 5 && role - 3 === 2) gain += call(\"BarExpRate\",role-3,51); else if (role === 4 && row.length !== 1 && call(\"ArmoryUpgBonus\",17,0) >= 1) { let selected = 0; let best = -1; for (let t = 0; t < 5; t++) { const level = call(\"OutpostEXPrank\",51,t); if (level > best) { best = level; selected = t; } } if (selected === 2) gain += call(\"BarExpRate\",3,51) / 2; } } } return gain; })()",
-      "result": 3.726
+      "result": 3.88125
     },
     "xp_hourly_1_0": {
       "expression": "(() => { const call = (name,t,i) => idleon.callFunction(\"RoyalG\",name,t,i); const rows = idleon.getAttr(\"RoyalMaps\"); const g = idleon.getAttr(\"RoyalG\"); const row = rows[1]; let gain = 0; if (0 < 2) { if (call(\"HasOutpost\",1,0) === 1 && row.length > 2) gain = call(\"BarExpRate\",0,1) * call(\"TotalUnitsz\",1,1); } for (let w = 0; w < 8; w++) { const roles = g[6+2*w] || []; const maps = g[7+2*w] || []; for (let u = 0; u < roles.length; u++) { if (Number(maps[u]) !== 1) continue; const role = Number(roles[u]); if (role >= 5 && role - 3 === 0) gain += call(\"BarExpRate\",role-3,1); else if (role === 4 && row.length !== 1 && call(\"ArmoryUpgBonus\",17,0) >= 1) { let selected = 0; let best = -1; for (let t = 0; t < 5; t++) { const level = call(\"OutpostEXPrank\",1,t); if (level > best) { best = level; selected = t; } } if (selected === 0) gain += call(\"BarExpRate\",3,1) / 2; } } } return gain; })()",
-      "result": 19.6992
+      "result": 20.655
     },
     "xp_hourly_1_2": {
       "expression": "(() => { const call = (name,t,i) => idleon.callFunction(\"RoyalG\",name,t,i); const rows = idleon.getAttr(\"RoyalMaps\"); const g = idleon.getAttr(\"RoyalG\"); const row = rows[1]; let gain = 0; if (2 < 2) { if (call(\"HasOutpost\",1,0) === 1 && row.length > 2) gain = call(\"BarExpRate\",2,1) * call(\"TotalUnitsz\",1,3); } for (let w = 0; w < 8; w++) { const roles = g[6+2*w] || []; const maps = g[7+2*w] || []; for (let u = 0; u < roles.length; u++) { if (Number(maps[u]) !== 1) continue; const role = Number(roles[u]); if (role >= 5 && role - 3 === 2) gain += call(\"BarExpRate\",role-3,1); else if (role === 4 && row.length !== 1 && call(\"ArmoryUpgBonus\",17,0) >= 1) { let selected = 0; let best = -1; for (let t = 0; t < 5; t++) { const level = call(\"OutpostEXPrank\",1,t); if (level > best) { best = level; selected = t; } } if (selected === 2) gain += call(\"BarExpRate\",3,1) / 2; } } } return gain; })()",
-      "result": 5.66352
+      "result": 5.9383125
     },
     "xp_orblet_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 6, 0)",
-      "result": 20
+      "result": 25
     },
     "xp_purity_shop_bonus": {
       "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 65, 0)",
@@ -118,7 +118,7 @@
     },
     "xp_support_bonus": {
       "expression": "idleon.callFunction(\"RoyalG\", \"SupportEXP\", 0, 0)",
-      "result": 204
+      "result": 206
     },
     "xp_jelly_bonus": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 1, 0)",
@@ -206,7 +206,7 @@
     },
     "xp_threshold_6_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 6, 0)",
-      "result": 2271.5632994418984
+      "result": 3149.901108559433
     },
     "xp_threshold_6_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 6, 2)",
@@ -214,7 +214,7 @@
     },
     "xp_threshold_53_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 53, 0)",
-      "result": 5988.749482648622
+      "result": 8217.895123412276
     }
   },
   "errors": {}

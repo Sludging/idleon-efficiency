@@ -2,68 +2,68 @@
   "extractions": {
     "big_fish_bonus_0": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 0)",
-      "result": 4.219653179190751
+      "result": 5.9016393442622945
     },
     "big_fish_bonus_1": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 1)",
-      "result": 2.5205479452054793
+      "result": 4.208530805687204
     },
     "big_fish_bonus_2": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 2)",
-      "result": 3.6065573770491803
+      "result": 9.637305699481866
     },
     "big_fish_bonus_3": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 3)",
-      "result": 0.38461538461538464
+      "result": 4.623655913978494
     },
     "big_fish_bonus_4": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 4)",
-      "result": 1.8518518518518516
+      "result": 10.294117647058822
     },
     "big_fish_bonus_5": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 5)",
-      "result": 0
+      "result": 3.0069930069930066
     },
     "big_fish_cost_0": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 0)",
       "result": {
         "type": "large_number",
-        "value": "2.7683969383865974e+30"
+        "value": "5.646444001390946e+34"
       }
     },
     "big_fish_cost_1": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 1)",
       "result": {
         "type": "large_number",
-        "value": "6.3780644458109655e+31"
+        "value": "5.6240416224185144e+35"
       }
     },
     "big_fish_cost_2": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 2)",
       "result": {
         "type": "large_number",
-        "value": "2.2325895603567526e+32"
+        "value": "4.5536070914712237e+36"
       }
     },
     "big_fish_cost_3": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 3)",
       "result": {
         "type": "large_number",
-        "value": "1.8076565461144807e+33"
+        "value": "1.715295021951947e+38"
       }
     },
     "big_fish_cost_4": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 4)",
       "result": {
         "type": "large_number",
-        "value": "3.167928963804251e+35"
+        "value": "1.836714000832658e+39"
       }
     },
     "big_fish_cost_5": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 5)",
       "result": {
         "type": "large_number",
-        "value": "1.0387115103197146e+38"
+        "value": "4.2315753580703e+40"
       }
     },
     "big_fish_unlock_req_0": {
@@ -92,13 +92,13 @@
     },
     "big_fish_bonus_6": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 6)",
-      "result": 0
+      "result": 1.3636363636363638
     },
     "big_fish_cost_6": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 6)",
       "result": {
         "type": "large_number",
-        "value": "1.0418307620239161e+41"
+        "value": "4.214786498604317e+41"
       }
     },
     "big_fish_unlock_req_6": {

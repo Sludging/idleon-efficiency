@@ -12,7 +12,7 @@
       "expression": "idleon.callFunction(\"SushiStuff\",\"CurrencyperHR\",0,0)",
       "result": {
         "type": "large_number",
-        "value": "1.773740160556614e+23"
+        "value": "1.8074925731331244e+23"
       }
     },
     "sushi_upgrade_qty_0": {
@@ -67,12 +67,12 @@
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgCost\",36,0)",
       "result": {
         "type": "large_number",
-        "value": "1.1326747356425023e+24"
+        "value": "1.1326747356425027e+24"
       }
     },
     "sushi_free_shaker_chance": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"FreeShaker\",0,0)",
-      "result": 0.16
+      "result": 0.161
     },
     "sushi_perfecto_chance_occupied_tier": {
       "expression": "(()=>{const tiers=idleon.getAttr(\"Sushi\")[0];const tier=tiers.find(value=>value>=0);return idleon.callFunction(\"SushiStuff\",\"PerfectOdds\",tier,0)})()",
@@ -82,7 +82,7 @@
       "expression": "idleon.callFunction(\"SushiStuff\",\"SaffronHRS\",0,0)*idleon.callFunction(\"SushiStuff\",\"CurrencyGain\",0,0)",
       "result": {
         "type": "large_number",
-        "value": "5.3212204816698425e+23"
+        "value": "5.422477719399373e+23"
       }
     },
     "sushi_shaker_fuel_per_use": {
@@ -271,11 +271,11 @@
     },
     "sushi_dependency_research_188": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",188,0)",
-      "result": 2.5
+      "result": 2.6
     },
     "sushi_dependency_research_189": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",189,0)",
-      "result": 75
+      "result": 78
     },
     "sushi_dependency_jelly_obstruction_18": {
       "expression": "idleon.callFunction(\"JellyOperation\",\"RoG_BonusQTY\",18,0)",
@@ -291,7 +291,7 @@
     },
     "sushi_dependency_button_2": {
       "expression": "idleon.callFunction(\"Minehead\",\"Button_Bonuses\",2,0)",
-      "result": 41.5625
+      "result": 41.824999999999996
     },
     "sushi_dependency_minehead_11": {
       "expression": "idleon.callFunction(\"Minehead\",\"BonusQTY\",11,0)",

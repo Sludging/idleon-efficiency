@@ -71,7 +71,7 @@ The [.impeccable/design.json](.impeccable/design.json) sidecar carries tooling p
 
 ## Typography
 
-Rubik is loaded through `next/font` in weights 400, 500, and 700. The frontmatter family reflects the rendered app-root stack, including its generated fallback, rather than a literal family string set in `customTheme`.
+Rubik loads locally from the full-coverage variable font at weights 300–900; use 400, 500, and 700 for the established regular, medium, and bold text roles. The font comes from the [official Google Fonts Rubik directory](https://github.com/google/fonts/tree/main/ofl/rubik), specifically [`Rubik[wght].ttf`](https://github.com/google/fonts/blob/main/ofl/rubik/Rubik%5Bwght%5D.ttf), and is licensed under the SIL Open Font License 1.1; see [`lib/fonts/OFL.txt`](lib/fonts/OFL.txt). The frontmatter family reflects the rendered app-root stack, including its generated fallback, rather than a literal family string set in `customTheme`.
 
 - **Body:** observed themed app-root default. The custom theme sets the base size; inherited typography supplies the line height. This is not a rule that every value or control uses body sizing.
 - **Ordinary feature heading:** use `<Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>`, as specified by the [UI work guide](docs/agents/ui-patterns.md) and shown in [Legend Talents](app/world-7/legendTalents/content.tsx). The frontmatter records its observed desktop rendering. Subsections, documents, authentication, and intentionally different hierarchies are exceptions, not additional display roles defined here.

@@ -384,8 +384,8 @@ export function SpelunkingPart3Summary({ spelunking }: SpelunkingPart3Props) {
             <ShadowBox background="dark-1" pad="small" gap="xxsmall" data-spelunking-summary-card="amber">
                 <Text size="12px" color="accent-2">Amber</Text>
                 <Box direction="row" align="center" gap="small">
-                    <IconImage data={spelunking.currentAmberDenomination.getImageData()} scale={0.9} />
-                    <Text size="24px" weight={500} data-spelunking-amber-value>
+                    <IconImage data={spelunking.currentAmberDenomination.getImageData()} scale={0.7} />
+                    <Text size="medium" weight={500} data-spelunking-amber-value>
                         {spelunking.currentAmberDenomination.formatAmount(spelunking.ownedAmber)}
                     </Text>
                 </Box>

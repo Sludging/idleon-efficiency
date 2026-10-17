@@ -30,11 +30,11 @@
     },
     "button_task_2_requirement": {
       "expression": "Number(idleon.engine.getGameAttribute(\"CustomLists\").h.ButtonTasks[20][1]) * Math.pow(Number(idleon.engine.getGameAttribute(\"CustomLists\").h.ButtonTasks[20][3]), idleon.engine.getGameAttribute(\"OptionsListAccount\")[594] + 2)",
-      "result": 3723.571761363372
+      "result": 3723.571761363371
     },
     "button_task_2_have": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 20, 0)",
-      "result": 61821
+      "result": 62234
     },
     "button_task_0_press_count": {
       "expression": "idleon.engine.getGameAttribute(\"OptionsListAccount\")[594]",

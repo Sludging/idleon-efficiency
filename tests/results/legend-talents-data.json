@@ -38,7 +38,7 @@
     },
     "zenith_market_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 5, 0)",
-      "result": 10
+      "result": 17
     },
     "sushi_19": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 19, 0)",
@@ -227,7 +227,7 @@
     },
     "talent_35_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 35, 0)",
-      "result": 1
+      "result": 25
     },
     "talent_38_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 38, 0)",
@@ -239,7 +239,7 @@
     },
     "talent_40_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 40, 0)",
-      "result": null
+      "result": 0
     },
     "super_talent_unlocked": {
       "expression": "idleon.callFunction(\"Thingies\", \"SuperTalentPTS_unlockedstatus\", 0, 0)",
@@ -247,7 +247,7 @@
     },
     "super_talent_bonus_levels": {
       "expression": "idleon.callFunction(\"Thingies\", \"SuperTalentPTS_LVgiven\", 0, 0)",
-      "result": 110
+      "result": 117
     }
   },
   "errors": {}

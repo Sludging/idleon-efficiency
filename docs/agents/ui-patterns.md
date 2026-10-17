@@ -8,7 +8,8 @@ For new UI pages or changes to visual composition, use the `impeccable` skill fo
 task. Critiques and audits stay within supported behavior; they are not permission for broad
 redesign or repeated polish passes.
 The [product context](../../PRODUCT.md) and [visual context](../../DESIGN.md) record project
-facts and visual references. Use the [UI verification guide](ui-verification.md) for private
+facts and visual references. Apply the [UI direction](../insights/ui-feedback.md) when choosing or reviewing composition and content.
+Use the [UI verification guide](ui-verification.md) for private
 Docker Playwright feature checks and screenshots during mockup planning.
 
 ## Workflow

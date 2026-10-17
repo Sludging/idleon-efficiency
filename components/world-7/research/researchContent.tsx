@@ -231,7 +231,7 @@ export default function ResearchContent() {
             </Box>}
             {tab === "Posty Notes" && <Box as="section" id="research-posty-notes" gap="medium" aria-label="Posty Notes">
                 <Box direction="row" wrap gap="medium">
-                    <SourceValue label="Owned Shapes" value={String(research.shapeOwnership.count)}><Box gap="small"><Text size="xsmall">{research.shapeOwnership.ownedShapes.map(shape => shape.name).join(", ") || "None"}</Text><Contributions entries={research.shapeOwnership.contributors} /></Box></SourceValue>
+                    <SourceValue label="Owned Shapes" value={String(research.shapeOwnership.count)}><Box gap="small"><Contributions entries={research.shapeOwnership.contributors} /></Box></SourceValue>
                     {nextNote && <TextAndLabel label="Next Posty Note" text={`Research level ${nextNote.data.requiredResearchLevel}`} textSize="small" labelSize="xsmall" />}
                 </Box>
                 <Grid columns={{ count: size === "small" ? 1 : 3, size: "auto" }} gap="medium">

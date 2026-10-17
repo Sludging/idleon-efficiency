@@ -36,17 +36,17 @@
         ],
         "trackometer": 8,
         "current": [
-          1893,
-          2553,
-          2555,
-          2390,
-          2555,
-          2559,
-          2966,
-          2467,
-          2556,
-          2638,
-          2301
+          2240,
+          2986,
+          3171.905772943185,
+          2801,
+          3165.884848031582,
+          2992,
+          3549,
+          3189.6908525601493,
+          2989,
+          3275,
+          2701
         ],
         "dailyUsed": 0
       }
@@ -141,51 +141,51 @@
     },
     "stamina_recharge_hourly": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 25.92742784899369
+      "result": 285.2017063389306
     },
     "stamina_max_player_0": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",0,0)",
-      "result": 1893
+      "result": 2240
     },
     "stamina_max_player_1": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",1,0)",
-      "result": 2553
+      "result": 2986
     },
     "stamina_max_player_2": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",2,0)",
-      "result": 2555
+      "result": 3453
     },
     "stamina_max_player_3": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",3,0)",
-      "result": 2390
+      "result": 2801
     },
     "stamina_max_player_4": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",4,0)",
-      "result": 2555
+      "result": 3370
     },
     "stamina_max_player_5": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",5,0)",
-      "result": 2559
+      "result": 2992
     },
     "stamina_max_player_6": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",6,0)",
-      "result": 2966
+      "result": 3549
     },
     "stamina_max_player_7": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",7,0)",
-      "result": 2467
+      "result": 3267
     },
     "stamina_max_player_8": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",8,0)",
-      "result": 2556
+      "result": 2989
     },
     "stamina_max_player_9": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",9,0)",
-      "result": 2638
+      "result": 3275
     },
     "stamina_max_player_10": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",10,0)",
-      "result": 2301
+      "result": 2701
     },
     "artifact_35": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Sailing(\"ArtifactBonus\",35,0)",
@@ -217,7 +217,7 @@
     },
     "companion_148": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Companions(148)",
-      "result": 35
+      "result": 50
     },
     "mastery_stamina_indicator": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_RiftStuff(\"RiftSkillBonus,18\",3)",
@@ -293,11 +293,11 @@
     },
     "big_fish_advice_1": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"BigFishBonuses\",1,0)",
-      "result": 2.5205479452054793
+      "result": 4.208530805687204
     },
     "meritocracy_17": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Summoning2(\"MeritocBonusz\",17,0)",
-      "result": 0
+      "result": 1000
     },
     "legend_talent_30": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Thingies(\"LegendPTS_bonus\",30,0)",
@@ -321,47 +321,47 @@
     },
     "refill_hours_player_0": {
       "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",0,0)-1893)/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 0
+      "result": 1.2166827627168155
     },
     "refill_hours_player_1": {
       "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",1,0)-2553)/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 0
+      "result": 1.5182237356091675
     },
     "refill_hours_player_2": {
       "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",2,0)-2555)/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 0
+      "result": 3.14864876345735
     },
     "refill_hours_player_3": {
       "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",3,0)-2390)/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 0
+      "result": 1.441085347194845
     },
     "refill_hours_player_4": {
       "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",4,0)-2555)/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 0
+      "result": 2.8576266617124055
     },
     "refill_hours_player_5": {
       "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",5,0)-2559)/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 0
+      "result": 1.5182237356091675
     },
     "refill_hours_player_6": {
       "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",6,0)-2635)/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 12.76640328257039
+      "result": 3.204749409576857
     },
     "refill_hours_player_7": {
       "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",7,0)-2467)/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 0
+      "result": 2.8050323059753675
     },
     "refill_hours_player_8": {
       "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",8,0)-2556)/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 0
+      "result": 1.5182237356091675
     },
     "refill_hours_player_9": {
       "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",9,0)-2638)/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 0
+      "result": 2.233506973632886
     },
     "refill_hours_player_10": {
       "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",10,0)-2301)/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 0
+      "result": 1.4025161529876837
     },
     "chapter_metadata": {
       "expression": "idleon.getAttr(\"CustomLists\").h.SpelunkChapters.slice(0,6)",
@@ -410,7 +410,7 @@
             "0"
           ],
           [
-            "+{%_Spelunking|EXP_gain",
+            "+{%|Spelunking_EXP_gain",
             "30",
             "500",
             "decay",
@@ -442,7 +442,7 @@
         ],
         [
           [
-            "+{_Max_Stamina|for_All_Players",
+            "+{_Max|Stamina_for_All_Players",
             "25",
             "500",
             "decay",
@@ -474,7 +474,7 @@
         ],
         [
           [
-            "+{%_Max_Stamina|for_All_Players",
+            "+{%_Max|Stamina_for_All_Players",
             "10",
             "400",
             "decay",
@@ -484,7 +484,7 @@
             "0"
           ],
           [
-            "+{%_Spelunking|EXP_gain",
+            "+{%|Spelunking_EXP_gain",
             "50",
             "600",
             "decay",
@@ -504,12 +504,12 @@
             "0"
           ],
           [
-            "{%_extra_Chapter|LVs_from_Pages",
+            "{%_extra|Chapter_LVs_from_Pages",
             "50",
             "2000",
             "decay",
             "1",
-            "2500000",
+            "500000",
             "0",
             "0"
           ]
@@ -541,7 +541,7 @@
             "3500",
             "decay",
             "1",
-            "5000000",
+            "1000000",
             "0",
             "0"
           ]
@@ -573,7 +573,7 @@
             "6000",
             "decay",
             "1",
-            "1000000",
+            "1500000",
             "0",
             "0"
           ]
@@ -620,17 +620,17 @@
         ],
         "trackometer": 8,
         "current": [
-          1893,
-          2553,
-          2555,
-          2390,
-          2555,
-          2559,
-          2966,
-          2467,
-          2556,
-          2638,
-          2301
+          2240,
+          2986,
+          3171.9849956393905,
+          2801,
+          3165.964070727787,
+          2992,
+          3549,
+          3189.7700752563546,
+          2989,
+          3275,
+          2701
         ],
         "dailyUsed": 0
       }

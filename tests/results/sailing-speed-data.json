@@ -2,7 +2,7 @@
   "extractions": {
     "divinity_minor_bonus_6": {
       "expression": "idleon.callFunction(\"Divinity\", \"Bonus_Minor\", -1, 6)",
-      "result": 118.4461126005362
+      "result": 118.57430103408657
     },
     "card_w5c1_bonus": {
       "expression": "4 * idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w5c1\")",
@@ -46,7 +46,7 @@
     },
     "statue_24_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven24\")",
-      "result": 9582.636686451611
+      "result": 15585.201139199995
     },
     "meal_bonus_sailing": {
       "expression": "idleon.callFunction(\"MealBonus\", \"Sailing\")",
@@ -74,7 +74,7 @@
     },
     "boat_0_captain_speed_bonus": {
       "expression": "window.frames[0].__idleon_cheats__[\"scripts.ActorEvents_579\"]._customBlock_CaptBonusCalc(0, window.frames[0].__idleon_cheats__[\"com.stencyl.Engine\"].engine.getGameAttribute(\"Boats\")[0][0])",
-      "result": 378
+      "result": 396
     },
     "boat_1_captain_speed_bonus": {
       "expression": "window.frames[0].__idleon_cheats__[\"scripts.ActorEvents_579\"]._customBlock_CaptBonusCalc(0, window.frames[0].__idleon_cheats__[\"com.stencyl.Engine\"].engine.getGameAttribute(\"Boats\")[1][0])",
@@ -82,7 +82,7 @@
     },
     "boat_0_island_distance": {
       "expression": "idleon.callFunction(\"Sailing\", \"IslandDistance\", idleon.getAttr(\"Boats\")[0][1], 0)",
-      "result": 200000000000
+      "result": 15000000
     },
     "shiny_bonus_18": {
       "expression": "idleon.callFunction(\"Breeding\", \"ShinyBonusS\", \"Nah\", 18, -1)",
@@ -94,7 +94,7 @@
     },
     "boat_0_destination": {
       "expression": "idleon.getAttr(\"Boats\")[0][1]",
-      "result": 16
+      "result": 12
     },
     "boat_0_route_state": {
       "expression": "idleon.getAttr(\"Boats\")[0][2]",
@@ -102,7 +102,7 @@
     },
     "boat_1_destination": {
       "expression": "idleon.getAttr(\"Boats\")[1][1]",
-      "result": 16
+      "result": 12
     },
     "boat_1_route_state": {
       "expression": "idleon.getAttr(\"Boats\")[1][2]",
@@ -110,27 +110,27 @@
     },
     "boat_0_current_speed": {
       "expression": "idleon.callFunction(\"Sailing\", \"BoatSpeed\", 0, 4)",
-      "result": 204276172130.02148
+      "result": 276377946395.7856
     },
     "boat_0_next_speed": {
       "expression": "idleon.callFunction(\"Sailing\", \"BoatSpeed\", 0, 6)",
-      "result": 205470649399.85114
+      "result": 277994029032.393
     },
     "boat_0_island_bound_speed": {
       "expression": "idleon.callFunction(\"Sailing\", \"BoatSpeed\", 0, 0)",
-      "result": 204276172130.02148
+      "result": 30000000
     },
     "boat_1_current_speed": {
       "expression": "idleon.callFunction(\"Sailing\", \"BoatSpeed\", 1, 4)",
-      "result": 76371122165.79146
+      "result": 99577465111.52371
     },
     "boat_1_next_speed": {
       "expression": "idleon.callFunction(\"Sailing\", \"BoatSpeed\", 1, 6)",
-      "result": 77002111091.05963
+      "result": 100400188097.77562
     },
     "boat_1_island_bound_speed": {
       "expression": "idleon.callFunction(\"Sailing\", \"BoatSpeed\", 1, 0)",
-      "result": 76371122165.79146
+      "result": 30000000
     }
   },
   "errors": {}

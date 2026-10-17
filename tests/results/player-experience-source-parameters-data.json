@@ -2,7 +2,7 @@
   "extractions": {
     "farming_sticker_0": {
       "expression": "idleon.callFunction('FarmingStuffs','StickerBonus',0,0)",
-      "result": 178.75
+      "result": 194.60000000000002
     },
     "hole_schematic_47": {
       "expression": "idleon.callFunction('Holes','B_UPG',47,0)",
@@ -26,19 +26,19 @@
     },
     "research_130": {
       "expression": "idleon.callFunction('ResearchStuff','Grid_Bonus',130,0)",
-      "result": 7.5
+      "result": 7.800000000000001
     },
     "research_131": {
       "expression": "idleon.callFunction('ResearchStuff','Grid_Bonus',131,0)",
-      "result": 7.5
+      "result": 7.800000000000001
     },
     "research_132": {
       "expression": "idleon.callFunction('ResearchStuff','Grid_Bonus',132,0)",
-      "result": 7.5
+      "result": 7.800000000000001
     },
     "research_152": {
       "expression": "idleon.callFunction('ResearchStuff','Grid_Bonus',152,0)",
-      "result": 7.5
+      "result": 7.800000000000001
     },
     "zenith_market_9": {
       "expression": "idleon.callFunction('Thingies','ZenithMarketBonus',9,0)",
@@ -46,7 +46,7 @@
     },
     "big_fish_4": {
       "expression": "idleon.callFunction('Spelunk','BigFishBonuses',4,0)",
-      "result": 1.8518518518518516
+      "result": 10.294117647058822
     },
     "dancing_coral_3": {
       "expression": "idleon.callFunction('Thingies','DancingCoralBonus',3,0)",
@@ -90,11 +90,11 @@
     },
     "gear_monster_exp": {
       "expression": "idleon.callFunction('EtcBonuses','4')",
-      "result": 210.26642985526564
+      "result": 205.11642985526566
     },
     "gear_class_exp_multi": {
       "expression": "idleon.callFunction('EtcBonuses','78')",
-      "result": 277.92201246678854
+      "result": 272.42201246678854
     },
     "gear_bonus_class_exp": {
       "expression": "idleon.callFunction('EtcBonuses','84')",
@@ -158,7 +158,7 @@
     },
     "button_bonus_8": {
       "expression": "idleon.callFunction('Minehead','Button_Bonuses',8,0)",
-      "result": 51.953125
+      "result": 52.28125
     },
     "iron_set_class_exp": {
       "expression": "idleon.callFunction('GetSetBonus','IRON_SET','Bonus',0,0)",
@@ -166,7 +166,7 @@
     },
     "talent_328": {
       "expression": "idleon.callFunction('getbonus2',1,328,-1)",
-      "result": 4.823529411764706
+      "result": 4.83419689119171
     },
     "talent_35": {
       "expression": "idleon.callFunction('GetTalentNumber',1,35)",
@@ -198,7 +198,7 @@
     },
     "statue_bonus_10": {
       "expression": "idleon.callFunction('ArbitraryCode','StatueBonusGiven10')",
-      "result": 7396.845177806453
+      "result": 12030.229639679997
     },
     "meritocracy_bonus_27": {
       "expression": "idleon.callFunction('Summoning2','MeritocBonusz',27,0)",

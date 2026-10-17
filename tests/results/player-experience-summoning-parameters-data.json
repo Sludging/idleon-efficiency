@@ -18,7 +18,7 @@
     },
     "owl_bonus_0": {
       "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 0, 0)",
-      "result": 9625
+      "result": 11550
     },
     "voting_bonus_15": {
       "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 15, 0)",

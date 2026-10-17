@@ -113,7 +113,7 @@ The following testing seams are a delivery proposal.
 - **Rendered UI seam:** Verify each part with a real saved account.
   Compare rendered information with populated backend state and verified metadata.
   Check catalogue counts, current values, ownership, requirements, discovery conditions, contributors, search, and default visibility.
-  For Part 1, check four tabs, three sorts, stable discovery counts, distinct discovery/study requirements, hidden-only reveal lines, illustrated rewards, and shared theme progress bars. Artwork tint uses approximate current-level palette-derived CSS hue, not exact in-game artwork parity. For Part 2, check full default catalogues, all State options, combined search/filters, Show maxed, clears, source and active-owner tooltips, linked conditions, actual placement/rotation, and complete saved-owner coverage.
+  For Part 1, check four tabs, three sorts, stable discovery counts, distinct discovery/study requirements, hidden-only reveal lines, and shared theme progress bars. Artwork tint uses approximate current-level palette-derived CSS hue, not exact in-game artwork parity. For Part 2, check full default catalogues, all State options, combined search/filters, Show maxed, clears, source and active-owner tooltips, linked conditions, actual placement/rotation, and complete saved-owner coverage.
 ## Out of Scope
 
 - Separate character Research progression or an assumed maximum-EXP account policy.

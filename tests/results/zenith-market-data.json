@@ -2,15 +2,15 @@
   "extractions": {
     "zenith_market_0_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 0, 0)",
-      "result": 70
+      "result": 134
     },
     "zenith_market_2_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 2, 0)",
-      "result": 33
+      "result": 49
     },
     "zenith_market_5_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 5, 0)",
-      "result": 10
+      "result": 17
     },
     "zenith_market_9_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 9, 0)",
@@ -18,11 +18,11 @@
     },
     "zenith_market_1_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 1, 0)",
-      "result": 4
+      "result": 5
     },
     "zenith_market_3_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 3, 0)",
-      "result": 170
+      "result": 210
     },
     "zenith_market_4_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 4, 0)",
@@ -46,19 +46,19 @@
     },
     "zenith_market_0_cost": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 0, 0)",
-      "result": 133
+      "result": 6562
     },
     "zenith_market_1_cost": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 1, 0)",
-      "result": 2596
+      "result": 15557
     },
     "zenith_market_2_cost": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 2, 0)",
-      "result": 118
+      "result": 390
     },
     "zenith_market_3_cost": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 3, 0)",
-      "result": 1698
+      "result": 5888
     },
     "zenith_market_4_cost": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 4, 0)",
@@ -66,7 +66,7 @@
     },
     "zenith_market_5_cost": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 5, 0)",
-      "result": 10089
+      "result": 413637
     },
     "zenith_market_6_cost": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 6, 0)",
@@ -130,19 +130,19 @@
     },
     "zenith_market_0_cost_to_max": {
       "expression": "(() => { const index = 0; const levels = idleon.engine.getGameAttribute(\"Spelunk\")[45]; const row = idleon.engine.getGameAttribute(\"CustomLists\").h.ZenithMarket[index]; let total = 0; for (let level = Number(levels[index]); level < Number(row[3]); level++) { const price = level + Number(row[1]) * Math.pow(Number(row[2]), level); total += price < 1000000 ? Math.floor(price) : price; } return total; })()",
-      "result": 1202499206458661.2
+      "result": 1202499206411364.2
     },
     "zenith_market_1_cost_to_max": {
       "expression": "(() => { const index = 1; const levels = idleon.engine.getGameAttribute(\"Spelunk\")[45]; const row = idleon.engine.getGameAttribute(\"CustomLists\").h.ZenithMarket[index]; let total = 0; for (let level = Number(levels[index]); level < Number(row[3]); level++) { const price = level + Number(row[1]) * Math.pow(Number(row[2]), level); total += price < 1000000 ? Math.floor(price) : price; } return total; })()",
-      "result": 2596
+      "result": 0
     },
     "zenith_market_2_cost_to_max": {
       "expression": "(() => { const index = 2; const levels = idleon.engine.getGameAttribute(\"Spelunk\")[45]; const row = idleon.engine.getGameAttribute(\"CustomLists\").h.ZenithMarket[index]; let total = 0; for (let level = Number(levels[index]); level < Number(row[3]); level++) { const price = level + Number(row[1]) * Math.pow(Number(row[2]), level); total += price < 1000000 ? Math.floor(price) : price; } return total; })()",
-      "result": 1698367921.3991048
+      "result": 1698364444.3991048
     },
     "zenith_market_3_cost_to_max": {
       "expression": "(() => { const index = 3; const levels = idleon.engine.getGameAttribute(\"Spelunk\")[45]; const row = idleon.engine.getGameAttribute(\"CustomLists\").h.ZenithMarket[index]; let total = 0; for (let level = Number(levels[index]); level < Number(row[3]); level++) { const price = level + Number(row[1]) * Math.pow(Number(row[2]), level); total += price < 1000000 ? Math.floor(price) : price; } return total; })()",
-      "result": 309898616.0477496
+      "result": 309873723.0477496
     },
     "zenith_market_4_cost_to_max": {
       "expression": "(() => { const index = 4; const levels = idleon.engine.getGameAttribute(\"Spelunk\")[45]; const row = idleon.engine.getGameAttribute(\"CustomLists\").h.ZenithMarket[index]; let total = 0; for (let level = Number(levels[index]); level < Number(row[3]); level++) { const price = level + Number(row[1]) * Math.pow(Number(row[2]), level); total += price < 1000000 ? Math.floor(price) : price; } return total; })()",
@@ -150,7 +150,7 @@
     },
     "zenith_market_5_cost_to_max": {
       "expression": "(() => { const index = 5; const levels = idleon.engine.getGameAttribute(\"Spelunk\")[45]; const row = idleon.engine.getGameAttribute(\"CustomLists\").h.ZenithMarket[index]; let total = 0; for (let level = Number(levels[index]); level < Number(row[3]); level++) { const price = level + Number(row[1]) * Math.pow(Number(row[2]), level); total += price < 1000000 ? Math.floor(price) : price; } return total; })()",
-      "result": 41204616.976166055
+      "result": 40628044.976166055
     },
     "zenith_market_6_cost_to_max": {
       "expression": "(() => { const index = 6; const levels = idleon.engine.getGameAttribute(\"Spelunk\")[45]; const row = idleon.engine.getGameAttribute(\"CustomLists\").h.ZenithMarket[index]; let total = 0; for (let level = Number(levels[index]); level < Number(row[3]); level++) { const price = level + Number(row[1]) * Math.pow(Number(row[2]), level); total += price < 1000000 ? Math.floor(price) : price; } return total; })()",

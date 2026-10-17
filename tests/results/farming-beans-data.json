@@ -34,7 +34,7 @@
     },
     "farming_magic_beans_from_depot": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"BeanTradeQTY\", 0, 0)",
-      "result": 9210965847.966543
+      "result": 9713959971.153898
     }
   },
   "errors": {}

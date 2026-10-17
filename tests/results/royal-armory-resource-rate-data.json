@@ -2,11 +2,11 @@
   "extractions": {
     "royal_armory_rate_row_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostResourceRate\", 1, 0)",
-      "result": 2875335.1845257645
+      "result": 3002985.6595872664
     },
     "royal_armory_rate_row_0_empty": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostResourceRate\", 0, 0)",
-      "result": 57193.28449150184
+      "result": 59341.97203992246
     },
     "royal_armory_rate_companion_141": {
       "expression": "idleon.callFunction(\"Companions\", 141)",
@@ -50,7 +50,7 @@
     },
     "royal_armory_rate_armory_upgrade_70": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 70, 0)",
-      "result": 228
+      "result": 245
     },
     "royal_armory_rate_armory_upgrade_73": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 73, 0)",
@@ -66,7 +66,7 @@
     },
     "royal_armory_rate_support_collection": {
       "expression": "idleon.callFunction(\"RoyalG\", \"SupportCollection\", 0, 0)",
-      "result": 204
+      "result": 206
     },
     "royal_armory_rate_total_supports_row_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalSupports\", 1, 0)",
@@ -82,11 +82,11 @@
     },
     "royal_armory_rate_total_statz_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalStatz\", 0, 0)",
-      "result": 358
+      "result": 371
     },
     "royal_armory_rate_total_statz_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalStatz\", 1, 0)",
-      "result": 192
+      "result": 193
     },
     "royal_armory_rate_total_statz_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalStatz\", 2, 0)",
@@ -94,7 +94,7 @@
     },
     "royal_armory_rate_total_statz_3": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalStatz\", 3, 0)",
-      "result": 15.791641549411715
+      "result": 20.927551616241512
     },
     "royal_armory_rate_unit_spec_effect_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 0, 0)",

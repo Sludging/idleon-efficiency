@@ -2,158 +2,175 @@
 
 ## Player outcomes
 
-Extend [Part 2 (#436)](https://github.com/Sludging/idleon-efficiency/issues/436) on `/world-7/spelunking`:
+Refine [Part 2 (#436)](https://github.com/Sludging/idleon-efficiency/issues/436) on `/world-7/spelunking`:
 
-- Read the account's daily page allowance and shared stamina recharge/refill summary before choosing a view.
-- Compare all characters' Spelunking level, EXP, and saved / maximum stamina without switching tabs.
-- Inspect six Journal chapters and all 20 bonus levels, earned effects, page requirements, and soft-cap progress.
-- Find each page's gathering cave and owned quantity, with exact named storage and inventory stacks on hover.
+- Read daily page allowance, shared stamina recharge, and team refill before choosing a view.
+- Compare every character's skill level, EXP progress, and saved / maximum stamina without redundant tooltips.
+- Inspect known recharge contributors through a Research-style breakdown.
+- Read Journal effects, levels, requirements, progress, and soft caps in aligned Outposts-style table rows.
 
-This is an **Operate** surface in IE's existing visual style. Show current progression and stats, not a planning calculator.
+This is an **Operate** surface in IE's current visual style. Present account progression and stats, not a planning calculator.
 
 ## Page composition
 
-Keep the ordinary heading, route metadata, shared outer wrapper, Rubik typography, and existing charcoal/blue theme.
+Keep the ordinary Spelunking heading, shared outer wrapper, Rubik, charcoal surfaces, and blue meters.
 Use this order in both views:
 
-1. **Spelunking** heading, with one **About soft caps** tooltip trigger alongside it.
-2. A compact summary: **Daily page reads** and **Stamina**.
-3. A persistent **Characters** grid containing every actual character in source order.
-4. `ContentTabs` with **Tunnels** and **Journal & Pages** only.
-5. The selected content.
+1. Spelunking heading, without soft-cap help alongside it.
+2. Compact Daily page reads and grouped Stamina summary.
+3. Persistent compact character grid, without a Characters heading.
+4. Existing `ContentTabs`: Tunnels and Journal & Pages.
+5. Selected content. Journal alone includes About soft caps above its chapter grid.
 
-Tunnels starts selected. Remove the Characters tab; do not replace it with a collapsible panel or character selector.
-Keep Part 1's cards, artwork, totals, Show locked, and Collection status controls unchanged within Tunnels.
-Keep those controls' state when switching views. Add no Part 3 content.
+Tunnels starts selected. Preserve Part 1 cards, artwork, totals, Show locked, and Collection status.
+Keep both filter states when changing views. Add no tabs, selectors, or Part 3 content.
+Keep existing small section gaps. Do not add another page-content width or horizontal inset.
 
-### Summary
+### Summary and recharge detail
 
-Use compact dark-1 `ShadowBox` sections with small padding and gaps, sized to their content rather than full-width dashboard tiles.
+Keep compact dark-1 `ShadowBox` sections, small padding, and existing summary labels.
 
-| Section | Visible information | Hover detail |
+| Field | Visible value | Detail |
 |---|---|---|
-| Daily page reads | `remaining / limit`, with the small **Remaining / limit** label | Account-wide allowance in the saved daily period. |
-| Stamina | **Recharge** with `stamina/h` units; **Team refill** with a duration, or **Full** at zero | Saved-snapshot assumptions and every named character's individual duration. |
+| Daily page reads | Remaining / limit, including the existing small label | No tooltip or information icon. |
+| Recharge | Existing shared rate to two decimals, with stamina/h | Research-style contributor tooltip on the value. |
+| Team refill | Backend duration, or Full at zero | Every named character's individual duration. No assumption paragraph. |
 
-Recharge and Team refill are adjacent values inside one Stamina section, not separate summary cards.
-Use the accepted backend's maximum individual duration. Characters recharge concurrently; do not sum their durations.
-The refill tooltip says: **Uses saved stamina with unchanged recharge and no spending. All characters recharge together. This is not a live timer.**
-Keep snapshot semantics in this tooltip, not a visible sentence beneath the summary.
-Do not extrapolate elapsed time or reset daily reads.
+Remove the exact rejected paragraph: “Uses saved stamina with unchanged recharge and no spending. All characters recharge together. This is not a live timer.”
+Do not replace it with another disclaimer. Retain all individual refill rows and their `playerID` associations.
+Keep the backend account estimate: maximum individual duration, not a sum.
+Do not extrapolate elapsed time, alter recharge, or roll daily reads forward.
 
-### Persistent character grid
+Use Research Current gains as the recharge-tooltip composition reference:
 
-Follow the actual compact composition in [Sneaking Player Activity](../../components/world-6/sneaking/playerActivitySection.tsx#L30-L55) and [Lab players in tubes](../../app/world-4/lab/content.tsx#L35-L59), not only their component name.
-Use `Grid` fill-sized small cells with an xsmall gap. Remove the previous grid padding and right/bottom cell margins.
-Reuse [CharacterBox](../../components/base/CharacterBox.tsx#L6-L18): dark-2, compact vertical padding, small horizontal padding, class portrait beside a 12px name.
-Use a neutral grey-1 border. Do not copy green active-state meaning from Sneaking/Lab.
+- Attach `TipDisplay` to the dotted-underlined value, with a 4px underline offset and help cursor.
+- Keep the existing 16px summary value. Use xsmall contributor text and bold group labels.
+- Use heading **Stamina recharge**, maximum width 620px, and bounded 40vh content with vertical overflow.
+- Show **Base** first with `baseHourlyRecharge` and stamina/h units.
+- Put **Additive bonuses** and **Multipliers** in two equal columns, separated by a medium gap.
+- Show all six additive entries as signed percentages and all four applied multipliers as ×factors.
+- Keep prepared collection order. Retain zero and neutral contributors with opacity 0.6, as Research does.
+- Use `notateNumber(value, 'Smaller')` for contributor amounts. Keep percentages distinct from multiplier factors.
 
-Inside each card:
+Use intrinsic backend `source` strings. Remove underscore and `@` presentation separators only.
+For the generated Meritocracy `}x` placeholder, insert the prepared multiplier factor in the UI.
+The applied amount remains a ×factor. This substitution formats generated text; it does not recalculate recharge.
+Keep both chapter page names, including Chapter Three and Chapter Six, so identical recharge effects remain distinguishable.
+Do not import Research's reward framework, author source descriptions, or add producer APIs.
 
-- Keep the class portrait and 12px character name in the shared shell.
-- Put the authentic Spelunking skill icon beside **Lv N**. Put the authentic stamina lightning icon beside **saved / maximum**.
-- Keep these two groups on one line. Use 11px values and approximately 14–15px icons. Remove the stacked word labels and vertical divider.
-- Put one rounded, 4px brand/grey-1 EXP bar at the bottom. Show no EXP text outside its tooltip.
-- Hover the skill group to identify Spelunking and show the named character's level. Hover stamina for its full label and above-maximum detail.
-- Hover the EXP bar for **Spelunking EXP** and exact grouped **current / next-level requirement** counts.
+### Compact characters
 
-Use parsed `currentXP / xpReq` for this ordinary skill EXP bar, not the Journal soft-cap ratio.
-This is progress within the current level, not a stamina bar, forecast, or completion claim.
-Keep the shared CharacterBox unchanged; the denser content belongs to Spelunking's caller.
-At 1440×1000, the preview keeps all eleven source-order characters in two rows, six then five.
-Keep the saved stamina value unchanged when it exceeds maximum.
-Show the above-maximum explanation on stamina hover, not an extra card-height sentence.
-Do not repeat recharge/refill in character cards or imply activity, eligibility, or a dive recommendation.
+Keep all actual characters in source order and the shared `CharacterBox` shell unchanged.
+Retain class portrait, 12px name, neutral grey-1 border, inline authentic skill/stamina icons, and 11px values.
+Keep the current fill-sized small cells and xsmall gaps. Remove only the Characters heading.
 
-### Journal chapters
+- Retain Spelunking-level hover on the skill group.
+- Remove the stamina `TipDisplay` entirely. Keep its icon and saved / maximum text directly visible.
+- Preserve saved stamina above maximum. Do not clamp or substitute the cap.
+- Keep one rounded bottom 4px EXP bar, without visible EXP text.
+- EXP hover retains **Spelunking EXP**, but uses `notateNumber(currentXP) / notateNumber(xpReq)` instead of `commaNotation`.
 
-Keep six source-order dark-1 chapter cards in two columns, with small padding and gaps.
-Keep page artwork beside the full game page name, including its chapter number. Show its named gathering cave below.
-Keep the existing compact **Owned pages** total at the header's right edge.
-Its hover lists each nonempty stack separately under **Storage** or **[character name] inventory**.
-Owned pages includes chest and inventories; never label this pooled count Storage or imply one readable stack.
-Keep zero quantities visible without empty-location messages.
-Page artwork retains the generated item description tooltip; remove only game `@` padding separators.
+The EXP ratio still uses the parsed current-level EXP and requirement. Formatting does not change geometry.
+Do not add stamina bars, individual recharge columns, activity claims, or character selection.
 
-Use the same three grid tracks for each chapter's column header and every bonus main row: `minmax(0, 1fr)`, `48px`, `104px`.
-The main row contains the generated earned-effect text, right-aligned level, and right-aligned **Min. pages / stack**.
-Vertically center the level and requirement against their own effect text. Keep their placement independent of the bar's height.
-Put bounded progress, Soft cap, and the 6px bar beneath the effect column only.
-A thin grey-1 bottom divider and xsmall vertical padding group each effect, its values, and its bar as one record.
-Do not reserve an empty cap/bar line for the two unbounded effects. Their main row and divider remain.
-Keep 14px chapter names, 13px effect/level/requirement text, and 12px supporting text.
-Keep exact grouped page requirements on hover. Exclude FILLER, not real zero-level entries.
+### Journal-local help
 
-At level zero, remove **Not earned**. Show zero for additive/percentage effects and a neutral `1.00x` for a `decayMulti` multiplier.
-Do not show the artifact-scaled formula baseline as an earned level bonus.
-Keep level zero and zero earned-progress visible; dim the complete row to opacity `0.65`, following Outposts' inactive-row treatment.
-A multiplier-worded `decay` effect still shows its zero result; wording alone does not choose a formula.
-Nonzero levels retain the accepted `getBonus()` effect.
-
-### Soft caps and bars
-
-Place one **About soft caps** tooltip beside the page heading. Use simple text:
+Show one **About soft caps** trigger inside Journal & Pages, above the chapter grid, aligned to its right edge.
+Do not render it beside the global heading, in Tunnels, or outside the Journal conditional content.
+Keep its existing two paragraphs unchanged:
 
 > Each new level adds less to these bonuses. Soft caps show their upper limit at your current Sailing artifact strength.
+>
 > Bars show progress from levels, starting at 0%. They do not reach 100%.
 
-Remove both old visible explanatory notes and all repeated per-bar formula lectures.
-Show **Soft cap [effect value and unit]** and the earned-progress percentage beside each bounded bar.
-Use the existing domain getters; the percentage is earned progress, not current effect divided by its limit.
-For both unbounded Base Spelunking Efficiency bonuses, omit the bar, progress percentage, and **No soft cap** label.
+### Journal rows: actual Outposts style
 
-Match [Royal Armory Outposts](../../components/account/royalArmoryDisplay.tsx#L495-L516): Grommet `Meter`, brand fill, grey-1 track, `thickness="6px"`, `size="full"`, `round`, and small supporting text.
-Reuse only the bar styling and inactive opacity. Outpost rank thresholds, timers, columns, and reachable completion do not apply here.
-Keep all 18 bounded bars. Level-zero entries have empty tracks and `0.0%`.
-Use one decimal place for progress; display `<100%` if rounding would produce 100%.
-Keep fill below full width. Do not add Complete, Maxed, checkmarks, maximum levels, or forecasts.
+Keep six source-order dark-1 chapter cards in two columns, with existing small padding and gaps.
+Preserve page artwork, full generated page names, named gathering caves, Owned pages totals, and location tooltips.
+Retain separate nonempty Storage and named inventory stacks. Do not pool them into a readable stack.
+Keep generated page descriptions on artwork, with only `@` separators removed.
+
+Replace the current main-row grid plus supporting bar grid with one five-column HTML table per chapter.
+Copy the actual Outposts rank table's recognizable mechanics from `components/account/royalArmoryDisplay.tsx:339–353,495–517`:
+
+- `width: 100%`, `border-collapse: collapse`, and `table-layout: fixed`.
+- Tabular numerals, 12px table text, and 20px line-height.
+- Normal-weight muted headers, left aligned except Level and final Soft cap.
+- Cell padding exactly `0 6px 0 0`; final cell padding 0.
+- `vertical-align: middle` for every header and body cell.
+- Center Level. Right-align the final Soft cap column.
+- Place each 6px Meter directly in its row's Progress cell, beside that effect's other values.
+- Use `brand`, `grey-1`, `size="full"`, `max={100}`, and `round` exactly as Outposts does.
+- Remove the old stacked supporting line, xsmall vertical row padding, 12px grid gaps, and per-row divider.
+
+The five Journal columns are **Earned bonus**, **Level**, **Min. pages / stack**, **Progress**, and **Soft cap**.
+Use one shared colgroup for headers and all rows:
+
+| Column | Width | Content-driven comparison with Outposts |
+|---|---|---|
+| Earned bonus | Remaining width | Generated effects need more space than Outposts' 62px Rank labels. Keep readable text. |
+| Level | 35px | Exact Outposts Level width. |
+| Min. pages / stack | 94px | Exact Outposts XP width, with Journal-specific contents. |
+| Progress | 128px | Fixed space for inline Meter and a 40px right-aligned percentage. Outposts uses remaining space here. |
+| Soft cap | 80px | Journal effect units need more space than Outposts' 58px ETA values. |
+
+These width changes follow Journal content, not a different style. Do not force long effects into the Rank label width.
+Rows retain Outposts' 20px line-height and zero vertical padding. Wrapped effects can make a row 40px high.
+All cells remain middle-aligned within that same row. Do not impose artificial fixed heights or truncate effects.
+The Min. pages / stack heading can wrap within its 94px column; values do not truncate.
+
+For bounded bonuses, retain domain limit and earned-progress getters. Place percentage beside the inline Meter.
+Show Soft cap amount with the effect's existing numeric unit. Keep progress to one decimal; use `<100%` when rounding implies 100%.
+Keep fill below complete. Never add Complete, Maxed, reachable levels, timers, or Outpost rank mechanics.
+For both unbounded bonuses, omit bar, percentage, and cap content. Keep blank table cells for column alignment only.
+Do not add No soft cap or a supporting placeholder row.
+
+Keep every real bonus, including zero levels. Exclude FILLER.
+At level zero, show zero additive/percentage effects and neutral `1.00x` for `decayMulti`.
+Dim the whole row to opacity 0.65. Keep empty tracks and `0.0%` for bounded zero-level rows.
+Retain exact grouped minimum page requirements on hover.
 
 ## Data and integration
 
-Use the accepted [Part 2 backend plan](spelunking-part-2-backend-plan.md) and its existing owner APIs unchanged.
+Use the accepted [Part 2 backend and recharge contributor contract](spelunking-part-2-backend-plan.md).
+No backend or imagery-owner changes are needed.
 
-| Existing data | Display responsibility |
+| Existing data | UI responsibility |
 |---|---|
-| `Spelunking.chapters`, `pageItem`, `gatheringSource` | Six chapter/page/cave identities and artwork. |
-| `ChapterBonus.level`, `getBonus()`, `data.bonus`, `data.requiredPages` | Current owned effect, source wording, level, and minimum stack requirement. |
-| `getEffectLimit()`, `getProgressToEffectLimit()` | Soft-cap value and earned-progress ratio; undefined means no soft cap. |
-| `chestPageStacks`, `playerPageStacks[playerID]` | Display subtotal and exact individual named stacks. |
-| `dailyReadsRemaining`, `dailyReadLimit` | Account-wide remaining / limit; leave usage and parsing unchanged. |
-| `Player.skills.get(SkillsIndex.Spelunking)` | Level, current EXP, and next-level requirement. |
-| `Spelunking.stamina`, joined by `playerID` | Saved current, maximum, and individual refill detail. |
-| `hourlyRecharge`, `getHoursUntilAllFull()` | Shared recharge and concurrent team-refill summary. |
+| `baseHourlyRecharge`, `additiveRechargeContributors`, `rechargeMultiplierContributors` | Base, six percentages, four applied factors, and intrinsic source labels. |
+| `hourlyRecharge`, `getHoursUntilAllFull()` | Unchanged summary rate and concurrent snapshot estimate. |
+| `stamina` joined by `playerID`, individual refill getter | Saved / maximum and named refill rows. |
+| Player skill level, currentXP, xpReq | Inline level and existing EXP geometry; canonical formatted hover counts. |
+| Chapter bonus metadata, level, effect/limit/progress getters | Earned effect, minimum pages, cap, and earned progress. |
+| Chapter page/cave metadata and separate owned stacks | Existing artwork, identities, counts, and named location details. |
+| `dailyReadsRemaining`, `dailyReadLimit` | Visible remaining / limit, without tooltip. |
 
-Use `IconImage` with owner-provided image metadata. Retain `Item.getImageData()` and `Player.getClassImageData()`.
-Add only the missing `SkillsIndex.Spelunking` case in `Skilling.getSkillImageData()`: `ClassIcons60`, using the existing 38×36 skill frame.
-This is an image-API mapping, not a game-data table or calculation change.
-Expose the source-verified stamina lightning through `SpelunkingStamina.getImageData()`: `CaveShopUpg4`, with its native 34×34 frame.
-This is the game's Big Time Stamina artwork, not a battery item, substitute skill icon, cropped bar, or guessed sprite.
-The original character UI also draws its stamina mark through a game font. Do not claim the selected sprite is that extracted font glyph.
-Keep gathering cave identity textual. Do not construct asset URLs or copy mechanics/static tables in the component.
-Use existing `commaNotation`, canonical `notateNumber`, and `toTime` helpers unchanged.
-Exact EXP means the site's grouped integer precision, not preservation of fractional EXP.
+Use existing owner image metadata with `IconImage`: class portraits, `ClassIcons60` skill art, `CaveShopUpg4` stamina art, and six page images.
+Do not construct new URLs, put images in public, add static tables, or modify generated data.
 
-The route owns the one shared summary, persistent grid, and two-tab state.
-The existing Part 2 component owns chapter and character rendering. Update only bonus-row composition and character child content.
-Retain the store's `useShallow` selection, mutable Map `lastUpdated` dependency, hydration-safe snapshot effect, and empty-Players guard.
-Do not show initialized empty data as a loaded full account. Keep initialized domain objects required.
-Keep all accepted backend calculations unchanged. The two image-owner additions above need no new export, preparation hook, store, or framework.
+The route owns Journal-only help, persistent summary/characters, tabs, and Tunnels state.
+The existing Part 2 component owns the tooltip changes and chapter table composition.
+Keep `useShallow`, mutable Map `lastUpdated`, hydration-safe snapshot effect, and empty-Players guard.
+Do not add stores, new shared components, calculation hooks, caches, or missing-object fallback branches.
 
-## References and verification
+## References and delivery verification
 
-- [Toolbox public Spelunking → Lore → Chapters](https://idleontoolbox.com/account/world-7/spelunking?profile=liiiiiiiiiiiig&t=Lore&nt=Chapters): compact chapter-local effects, artwork, levels, page requirements, and bars. Reference only; do not copy its dashboard, FILLER, formulas, account values, or visual theme.
-- [Wiki Spelunking](https://idleon.wiki/wiki/Spelunking): Cave Nodes provide Spelunky Pages and skill EXP; pages improve the account-wide Lore Journal. This establishes player vocabulary, not formula parity.
-- Sneaking/Lab code and comparative browser captures establish the narrow character-card composition. Outposts code and capture establish the Meter style.
+- [Royal Armory Outposts](../../components/account/royalArmoryDisplay.tsx#L339): exact table and cell mechanics plus inline Meter placement.
+- [Research Current gains](../../components/world-7/research/researchContent.tsx#L41): dotted value tooltip and grouped contributor presentation.
+- [Toolbox public Spelunking → Lore → Chapters](https://idleontoolbox.com/account/world-7/spelunking?profile=liiiiiiiiiiiig&t=Lore&nt=Chapters): chapter-local game imagery, effects, levels, and requirements. Reference only; keep IE's style.
+- [Wiki Spelunking](https://idleon.wiki/wiki/Spelunking): Journal/page/cave vocabulary, not calculation authority.
 
-After separate production authorization, exercise the actual route at 1440×1000 with the retained real save:
+After separate production authorization, verify the actual route at 1440×1000:
 
-- Check main-row association and header-column alignment for all twenty bonuses. Include bounded, unbounded, and zero-level entries.
-- Check absence of **No soft cap** and its empty placeholder line. Retain all eighteen bounded bars and their current meanings.
-- Check all eleven compact CharacterBox cards, both icon identities, inline values, and bottom 4px EXP bars with no visible EXP text.
-- Open and dismiss every character's skill, stamina, and exact-EXP tooltip. Confirm each EXP bar uses that character's parsed ratio.
-- Retain six chapters, current effects and requirements, neutral/zero effects, named page locations, ordinary scrolling, and source-order playerID joins.
-- Keep summary → characters → tabs, existing section gaps, heading/help, recharge/refill, and Tunnels filter persistence unchanged.
-- Preserve saved amounts above maximum and the source save. Record runtime errors without suppressing or waiving them.
+1. Confirm all eight requested outcomes, including absent stamina/read tooltips and deleted paragraph/heading.
+2. Open and dismiss EXP tooltips for all eleven characters; compare with canonical `notateNumber` output.
+3. Open recharge detail; compare base, six additive values, four factors, and intrinsic labels with accepted backend collections.
+4. Confirm refill retains every correctly named individual row.
+5. Confirm help appears only in Journal and opens/dismisses there.
+6. Compare Outposts and Journal table/cell geometry, row alignment, headers, and inline 6px Meter style.
+7. Keep six chapters, twenty bonuses, eighteen bounded bars, eleven compact characters, and 4px EXP bars.
+8. Preserve neutral/zero rows, two unbounded rows, page locations, saved above-cap stamina, and filter persistence.
+9. Preserve the real save; record runtime errors without suppression or waiver.
 
-Planning previews do not prove production behavior, connected-game parity, recharge eligibility, daily rollover, or deployment.
-Approval history, comparative captures, preview references, observations, errors, and current gate belong in the [handoff](spelunking-research-brief.md#current-handoff).
+Preview evidence is design evidence, not production acceptance or connected-game parity.
+Approval history, fresh comparisons, preview references, observations, and known failures belong in the [current handoff](spelunking-research-brief.md#current-handoff).

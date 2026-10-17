@@ -7,10 +7,10 @@
         "restored": true,
         "preparationResult": 1,
         "early": {
-          "effectiveness": 963.0729374623655,
+          "effectiveness": 1563.3293827372038,
           "baseHP": 0,
           "powerFoodEffect": 18,
-          "foodStatue": 95826.36686451612,
+          "foodStatue": 155852.01139199996,
           "equipmentFoodEffect": 0,
           "boostFoodStamp": 179.59354838709677,
           "starSignFoodEffect": 150,
@@ -19,10 +19,10 @@
           "talentFoodEffect": 33.333333333333336
         },
         "final": {
-          "effectiveness": 963.0729374623655,
+          "effectiveness": 1563.3293827372038,
           "baseHP": 0,
           "powerFoodEffect": 18,
-          "foodStatue": 95826.36686451612,
+          "foodStatue": 155852.01139199996,
           "equipmentFoodEffect": 0,
           "boostFoodStamp": 179.59354838709677,
           "starSignFoodEffect": 150,

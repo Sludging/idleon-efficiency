@@ -38,7 +38,7 @@
     },
     "native_active_exp_bubble": {
       "expression": "(() => { idleon.callFunction('Minehead','Button_uHave',15,0); return idleon.engine.getGameAttribute('DNSM').h.AlchBubbles.h.expACTIVE; })()",
-      "result": 14208.1
+      "result": 14253.1
     }
   },
   "errors": {}

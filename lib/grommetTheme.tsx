@@ -2,10 +2,10 @@
  
 import { dark } from 'grommet'
 import { deepMerge } from 'grommet/utils';
-import { Rubik } from 'next/font/google';
+import localFont from 'next/font/local';
 import { css } from 'styled-components';
  
-const rubik = Rubik({ subsets: ['latin'], weight: ["400", "500", "700"], display: "swap" })
+const rubik = localFont({ src: './fonts/Rubik-Variable.ttf', weight: '300 900', display: 'swap' })
 
 export const customTheme = deepMerge(dark, {
     global: {

@@ -13,7 +13,7 @@
     },
     "can_afford_next_bonus": {
       "expression": "idleon.engine.getGameAttribute(\"OptionsListAccount\")[267] >= idleon.callFunction(\"Summoning\", \"RooCost\", 3, 0) ? 1 : 0",
-      "result": 0
+      "result": 1
     }
   },
   "errors": {}

@@ -327,9 +327,9 @@ export const updateAccount = (data: Map<string, any>) => {
     for (const key of enumKeys) {
         account.activity[key as keyof typeof AFKTypeEnum] = 0;
     }
-    
+
     // Check how many players are in each activity type.
-    GroupByFunction(players, function (player: Player) { return player.currentMonster && player.currentMonster.details ? player.currentMonster.details.AFKtype : undefined })
+    GroupByFunction(players, function(player: Player) { return player.currentMonster && player.currentMonster.details ? player.currentMonster.details.AFKtype : undefined })
         .forEach(players => {
             const firstPlayer = players[0] ?? undefined;
             if (firstPlayer && firstPlayer.currentMonster && firstPlayer.currentMonster.details) {

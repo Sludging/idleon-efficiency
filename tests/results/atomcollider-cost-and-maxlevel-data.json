@@ -66,7 +66,7 @@
     },
     "atom_5_cost": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomCost\", 5, 0)",
-      "result": 334593247.7435306
+      "result": 334593247.74353063
     },
     "atom_8_cost": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomCost\", 8, 0)",

@@ -2,39 +2,39 @@
   "extractions": {
     "crop_sc_0_bonus": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 0, 0)",
-      "result": 14124.783343389527
+      "result": 14191.725444543032
     },
     "crop_sc_1_bonus": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 1, 0)",
-      "result": 218.42663025506204
+      "result": 222.79516286016326
     },
     "crop_sc_2_bonus": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 2, 0)",
-      "result": 5649.913337355811
+      "result": 5676.690177817212
     },
     "crop_sc_3_bonus": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 3, 0)",
-      "result": 1813534878.2405362
+      "result": 1994888366.06459
     },
     "crop_sc_4_bonus": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 4, 0)",
-      "result": 10593.587507542145
+      "result": 10643.794083407274
     },
     "crop_sc_5_bonus": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 5, 0)",
-      "result": 4943.674170186334
+      "result": 4967.103905590061
     },
     "crop_sc_6_bonus": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 6, 0)",
-      "result": 70.62391671694763
+      "result": 70.95862722271517
     },
     "crop_sc_7_bonus": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 7, 0)",
-      "result": 371.528661401952
+      "result": 374.87576645962724
     },
     "crop_sc_8_bonus": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 8, 0)",
-      "result": 184.09077817213839
+      "result": 200.8263034605146
     },
     "crop_sc_9_bonus": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 9, 0)",

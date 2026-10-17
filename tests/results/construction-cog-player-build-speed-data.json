@@ -2,11 +2,11 @@
   "extractions": {
     "player_build_speed_player_3": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 3, 0)",
-      "result": 13875423075493.686
+      "result": 14479842281615.977
     },
     "player_build_speed_player_7": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 7, 0)",
-      "result": 1092435123427.5199
+      "result": 1676042491992.662
     }
   },
   "errors": {}

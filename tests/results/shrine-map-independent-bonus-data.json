@@ -1,7 +1,7 @@
 {
   "extractions": {
     "map_independent_shrine": {
-      "expression": "(() => { const attr = key => idleon.engine.getGameAttribute(key);\n const prepared = attr(\"DNSM\").h;\n const required = (map, key, owner) => {\n  if (!map || !Object.prototype.hasOwnProperty.call(map, key)) throw new Error(\"Missing prepared \" + owner + \" \" + key);\n  const value = Number(map[key]);\n  if (!Number.isFinite(value)) throw new Error(\"Non-finite prepared \" + owner + \" \" + key);\n  return value;\n };\n const name = attr(\"UserInfo\")[0];\n const context = {playerId: attr(\"GetPlayersUsernames\").indexOf(name), playerName: name, characterClass: attr(\"CharacterClass\"), level: Number(attr(\"Lv0\")[0]), currentMap: attr(\"CurrentMap\"), dungeon: idleon.callFunction(\"Dungon\"), version: idleon.getGameVersion()};\n if (context.playerId !== 3 || context.dungeon !== -1 || context.version.version !== \"1.22\") throw new Error(\"Permanent Shrine replay requires the target player in normal delivered 1.22 context: \" + JSON.stringify(context));\n const call = (name, ...args) => idleon.callFunction(name, ...args);\n const artifact0 = required(prepared.SailzArtiBonusL, 0, \"Sailing artifact\");\n const shrineRow = attr(\"ShrineInfo\")[1], shrineDefinition = attr(\"CustomLists\").h.ShrineInfo[1];\n if (!shrineRow || !shrineDefinition) throw new Error(\"Missing initialized Shrine definition or progress\");\n const shrineLevel = required(shrineRow, 3, \"Shrine built level\");\n const boss3BLevel = call(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"Boss3B\");\n const mapIndependentShrine = artifact0 >= 1 && shrineLevel > 0.5\n  ? (1 + 5 * boss3BLevel / 100) * ((shrineLevel - 1) * required(shrineDefinition, 3, \"Shrine increment\") + required(shrineDefinition, 2, \"Shrine initial bonus\")) : 0;\n if (![artifact0,boss3BLevel,mapIndependentShrine].every(Number.isFinite)) throw new Error(\"Non-finite permanent Shrine result\");\n return {bonus:mapIndependentShrine,artifact0,boss3BLevel,context}; })()",
+      "expression": "(() => { const attr = key => idleon.engine.getGameAttribute(key);\n const prepared = attr(\"DNSM\").h;\n const required = (map, key, owner) => {\n  if (!map || !Object.prototype.hasOwnProperty.call(map, key)) throw new Error(\"Missing prepared \" + owner + \" \" + key);\n  const value = Number(map[key]);\n  if (!Number.isFinite(value)) throw new Error(\"Non-finite prepared \" + owner + \" \" + key);\n  return value;\n };\n const name = attr(\"UserInfo\")[0];\n const context = {playerId: attr(\"GetPlayersUsernames\").indexOf(name), playerName: name, characterClass: attr(\"CharacterClass\"), level: Number(attr(\"Lv0\")[0]), currentMap: attr(\"CurrentMap\"), dungeon: idleon.callFunction(\"Dungon\"), version: idleon.getGameVersion()};\n if (context.playerId !== 3 || context.dungeon !== -1) throw new Error(\"Permanent Shrine replay requires the target player in normal context: \" + JSON.stringify(context));\n const call = (name, ...args) => idleon.callFunction(name, ...args);\n const artifact0 = required(prepared.SailzArtiBonusL, 0, \"Sailing artifact\");\n const shrineRow = attr(\"ShrineInfo\")[1], shrineDefinition = attr(\"CustomLists\").h.ShrineInfo[1];\n if (!shrineRow || !shrineDefinition) throw new Error(\"Missing initialized Shrine definition or progress\");\n const shrineLevel = required(shrineRow, 3, \"Shrine built level\");\n const boss3BLevel = call(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"Boss3B\");\n const mapIndependentShrine = artifact0 >= 1 && shrineLevel > 0.5\n  ? (1 + 5 * boss3BLevel / 100) * ((shrineLevel - 1) * required(shrineDefinition, 3, \"Shrine increment\") + required(shrineDefinition, 2, \"Shrine initial bonus\")) : 0;\n if (![artifact0,boss3BLevel,mapIndependentShrine].every(Number.isFinite)) throw new Error(\"Non-finite permanent Shrine result\");\n return {bonus:mapIndependentShrine,artifact0,boss3BLevel,context}; })()",
       "result": {
         "bonus": 137.70000000000002,
         "artifact0": 1,
@@ -11,11 +11,11 @@
           "playerName": "Sludgev4",
           "characterClass": 16,
           "level": 1384,
-          "currentMap": 100,
+          "currentMap": 324,
           "dungeon": -1,
           "version": {
-            "title": "Jelly_Operator",
-            "version": "1.22"
+            "title": "Luminous_Menagerie",
+            "version": "1.23"
           }
         }
       }

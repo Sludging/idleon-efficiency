@@ -18,7 +18,7 @@
           "Sludgev10",
           "Sludgev11"
         ],
-        "version": 389.1
+        "version": 395.1
       }
     },
     "paired_hole_inputs": {
@@ -32,11 +32,11 @@
           151
         ],
         "exp": [
-          2126310372778975,
-          75557045711636.7,
-          716039671260143.1,
-          309324648977493.2,
-          67858033791072.32
+          2363201389368159.5,
+          134040130449709.69,
+          1229267586379241,
+          367807733715546.3,
+          126341118529132.05
         ],
         "investments": [
           114,
@@ -87,9 +87,9 @@
           645050.2468780265,
           214429.636600765,
           221428.0462261185,
-          33080817.04944553,
-          32925287.59399511,
-          33807343.279147044,
+          37401978.81707617,
+          37246449.36162575,
+          38128505.04677769,
           840302.5741329693,
           1076598.0439762478,
           1076614.8450074797,
@@ -129,7 +129,7 @@
           0
         ],
         "lanternUses": 0,
-        "wishes": 3427,
+        "wishes": 3457,
         "layers": [
           19,
           17,
@@ -152,15 +152,15 @@
           ],
           [
             600,
-            84723258140.28096
+            526531663177.78094
           ],
           [
             586,
-            73193465381.8518
+            364166904553.1018
           ],
           [
             605,
-            101429940535.92377
+            297239299284.42377
           ],
           [
             557,
@@ -172,39 +172,39 @@
           ],
           [
             583,
-            36310140175.53903
+            120146732543.03893
           ],
           [
             594,
-            123025930248.25847
+            261636058120.2089
           ],
           [
             533,
-            87873769467.70424
+            228603740359.35367
           ],
           [
             533,
-            79979116800.9635
+            217992152469.86398
           ],
           [
             467,
-            9546722598.751324
+            25939957661.501316
           ],
           [
             553,
-            41268513719.210884
+            79465432184.5109
           ],
           [
             481,
-            15705070791.192322
+            40138587986.69238
           ],
           [
             526,
-            5856242535.039724
+            90386921747.03976
           ],
           [
             494,
-            3714085554.5691323
+            37366750337.019104
           ],
           [
             155,
@@ -216,7 +216,7 @@
           ],
           [
             367,
-            23138936.33122752
+            3799418632.6312275
           ],
           [
             135,
@@ -295,11 +295,11 @@
     },
     "statue_28": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven28\")",
-      "result": 5291.688929032258
+      "result": 6666.932159999998
     },
     "statue_factor": {
       "expression": "1 + idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven28\") / 100",
-      "result": 53.91688929032258
+      "result": 67.66932159999998
     },
     "jar_4": {
       "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 4, 0)",
@@ -335,11 +335,11 @@
     },
     "lore_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 1, 0)",
-      "result": 232.06877286462168
+      "result": 232.1676213243579
     },
     "exotic_51": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 51, 0)",
-      "result": 0
+      "result": 25.583756345177665
     },
     "arcade_38": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 38)",
@@ -411,11 +411,11 @@
     },
     "measurement_0": {
       "expression": "idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 0, 0)",
-      "result": 309.6110318644068
+      "result": 310.2916149152543
     },
     "measurement_7": {
       "expression": "idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 7, 0)",
-      "result": 291.5489793510325
+      "result": 291.9889085545723
     },
     "majik_0": {
       "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 0)",
@@ -594,7 +594,7 @@
     },
     "study_requirement_3": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 3, 0)",
-      "result": 1323488.9800848444
+      "result": 1323488.9800848442
     },
     "study_requirement_4": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 4, 0)",
@@ -626,27 +626,27 @@
     },
     "study_requirement_11": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 11, 0)",
-      "result": 27733391.1991762
+      "result": 27733391.199176196
     },
     "study_requirement_12": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 12, 0)",
-      "result": 27733391.1991762
+      "result": 27733391.199176196
     },
     "study_requirement_13": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 13, 0)",
-      "result": 27733391.1991762
+      "result": 27733391.199176196
     },
     "study_requirement_14": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 14, 0)",
-      "result": 2977850.2051909
+      "result": 2977850.2051908993
     },
     "study_requirement_15": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 15, 0)",
-      "result": 41600086.798764296
+      "result": 41600086.79876429
     },
     "study_requirement_16": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 16, 0)",
-      "result": 41600086.798764296
+      "result": 41600086.79876429
     },
     "study_requirement_17": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 17, 0)",

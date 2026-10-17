@@ -2,15 +2,15 @@
   "extractions": {
     "boat_0_artifact_find_multiplier": {
       "expression": "idleon.callFunction(\"Sailing\", \"BoatArtiMulti\", 0, 0)",
-      "result": 523526988.09918916
+      "result": 10868678787.940706
     },
     "boat_1_artifact_find_multiplier": {
       "expression": "idleon.callFunction(\"Sailing\", \"BoatArtiMulti\", 1, 0)",
-      "result": 576693451.2672799
+      "result": 11957954765.282421
     },
     "sailing_artifact_bonus_3": {
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 3, 0)",
-      "result": 1092
+      "result": 1116
     },
     "boat_0_captain_artifact_bonus": {
       "expression": "window.frames[0].__idleon_cheats__[\"scripts.ActorEvents_579\"]._customBlock_CaptBonusCalc(3, window.frames[0].__idleon_cheats__[\"com.stencyl.Engine\"].engine.getGameAttribute(\"Boats\")[0][0])",
@@ -50,11 +50,11 @@
     },
     "farming_sticker_bonus_2": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"StickerBonus\", 2, 0)",
-      "result": 206.25
+      "result": 208.50000000000003
     },
     "research_grid_bonus_109": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 109, 0)",
-      "result": 31.25
+      "result": 32.5
     },
     "upgrade_vault_bonus_63": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 63, 0)",
@@ -78,11 +78,11 @@
     },
     "button_bonus_3": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 3, 0)",
-      "result": 41.5625
+      "result": 41.824999999999996
     },
     "research_grid_bonus_106": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 106, 0)",
-      "result": 125
+      "result": 130
     },
     "alchemy_vial_6turtle": {
       "expression": "idleon.getAttr(\"DNSM\").h.AlchVials.h[\"6turtle\"]",
@@ -118,7 +118,7 @@
     },
     "tome_epilogue_bonus_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 3, 0)",
-      "result": 153.350397818109
+      "result": 153.42057032987418
     },
     "pristine_bonus_2": {
       "expression": "idleon.callFunction(\"Ninja\", \"PristineBon\", 2, 0)",

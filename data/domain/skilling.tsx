@@ -358,7 +358,7 @@ export class Skilling extends Domain {
         }
     }
     static getXPReq = (skill: SkillsIndex, level: number) => {
-        switch(skill) {
+        switch (skill) {
             case SkillsIndex.Smithing:
                 return (15 + Math.pow(level, 2) + 13 * level) * Math.pow(1.225 - Math.min(0.114, (0.135 * level) / (level + 50)), level) - 26;
             case SkillsIndex.Construction:
@@ -375,23 +375,23 @@ export class Skilling extends Domain {
 
     // if ("AllSkillxpz" == d) {
     static getAllSkillXP = (
-            player: Player, 
-            players: Player[],
-            shrines: Shrine[], 
-            playerStatues: PlayerStatues, 
-            prayers: Prayer[], 
-            saltLickBonus: number = 0, 
-            dungeonBonus: number = 0, 
-            divinity: Divinity,
-            cards: Card[],
-            achievements: Achievement[],
-            skillMastery: SkillMastery,
-            breeding: Breeding, 
-            worship: Worship,
-            guild: Guild,
-            summoning: Summoning,
-            goldenFood: GoldenFood
-        ) => {
+        player: Player,
+        players: Player[],
+        shrines: Shrine[],
+        playerStatues: PlayerStatues,
+        prayers: Prayer[],
+        saltLickBonus: number = 0,
+        dungeonBonus: number = 0,
+        divinity: Divinity,
+        cards: Card[],
+        achievements: Achievement[],
+        skillMastery: SkillMastery,
+        breeding: Breeding,
+        worship: Worship,
+        guild: Guild,
+        summoning: Summoning,
+        goldenFood: GoldenFood
+    ) => {
         const skillingCardBonus = Card.GetTotalBonusForId(player.cardInfo?.equippedCards ?? [], 50);
 
         const goldenFoodBonus = goldenFood.getSkillExp(player);
@@ -408,9 +408,9 @@ export class Skilling extends Domain {
 
         const divinityBonus = divinity.gods[7].getMinorLinkBonus(player);
         const w5crystalCardBonus = cards.find(card => card.id == "w5a4")?.getBonus() ?? 0;
-        const achieveBonuses = (10 * (achievements[283].completed ? 1 : 0)) + 
-        (25 * (achievements[284].completed ? 1 : 0)) +
-        (10 * (achievements[294].completed ? 1 : 0))
+        const achieveBonuses = (10 * (achievements[283].completed ? 1 : 0)) +
+            (25 * (achievements[284].completed ? 1 : 0)) +
+            (10 * (achievements[294].completed ? 1 : 0))
 
         const riftBonus = skillMastery.getTotalBonusByIndex(3) + skillMastery.getTotalBonusByIndex(6)
         const shinyBonus = breeding.shinyBonuses.find(bonus => bonus.data.index == 2)?.getBonus() ?? 0;

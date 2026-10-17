@@ -36,19 +36,20 @@ Research broadly across relevant domains and shared utilities. Examine multiple 
 
 ## UPDATE-01 — Calculate values before they are needed
 
-Run each calculation after the values it uses are ready. Distinguish values read during parsing from values calculated by an update. Reading another domain’s parsed state does not require that domain’s update to run first. Put bonuses that other domains can use in `postProcessingMap`, after their required updates. Keep UI-only calculations in `postPostProcessingMap`.
+Run each calculation after the values it uses are ready. Distinguish values read during parsing from values calculated by an update. Put bonuses that other domains can use in `postProcessingMap`, after their required updates. Keep UI-only calculations in `postPostProcessingMap`.
 
 ## DATA-01 — Treat required objects as required
 
 Use direct access for domains and objects that initialization always creates. Do not add `| undefined`, optional chaining or default values to handle objects that cannot be missing. Keep checks and defaults for data that can actually be missing, such as optional save fields.
 
 ## PLAN-01 — Feature delivery plans
+
 Write plans as standalone descriptions of the feature and its delivery. Include outcomes, responsibilities, required data, integration, and verification. Keep approval history, progress, and agent instructions in the handoff. Include design details and scope boundaries only when they resolve a concrete delivery question.
 
 ## SIMPLE-01 — Solve the current problem
 
 Implement the agreed requirements and the changes needed to make them work. Get approval before expanding those requirements. Design for current uses, not possible future features.
 
-Prefer clear code and established project patterns. Add extra layers, options, dependencies, or process only when they solve an identified problem in the current work. Explain that problem rather than appealing to “best practice” or “future-proofing.” Simplicity means fewer concepts to understand and maintain, not fewer lines or avoiding object-oriented design.
+Prefer clear code and established repository patterns. Add extra layers, options, dependencies, or process only when they solve an identified problem in the current work. Explain that problem rather than appealing to “best practice” or “future-proofing.” Simplicity means fewer concepts to understand and maintain, not fewer lines or avoiding object-oriented design.
 
 Match error handling and operational safeguards to expected inputs and the consequences of failure. Treat this as a hobby project, not a regulated financial system. Verify changed behavior, without importing processes designed for risks this project does not face.

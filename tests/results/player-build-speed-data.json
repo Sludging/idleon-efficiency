@@ -38,7 +38,7 @@
     },
     "sheepies_killed": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultKillzTotal\", 11, 0)",
-      "result": 10
+      "result": 12
     },
     "bubba_bonus_1": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 1, 0)",
@@ -62,43 +62,43 @@
     },
     "build_speed_player_0": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 0, 0)",
-      "result": 794799762005.7596
+      "result": 846620861605.5898
     },
     "build_speed_player_1": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 1, 0)",
-      "result": 457864228208.41876
+      "result": 497591326207.07477
     },
     "build_speed_player_2": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 2, 0)",
-      "result": 286972246744.0583
+      "result": 472185326309.7697
     },
     "build_speed_player_3": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 3, 0)",
-      "result": 13875423075493.686
+      "result": 14479842281615.977
     },
     "build_speed_player_4": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 4, 0)",
-      "result": 286530075495.3015
+      "result": 471575881409.8006
     },
     "build_speed_player_5": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 5, 0)",
-      "result": 459635526062.5823
+      "result": 489446994001.05365
     },
     "build_speed_player_6": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 6, 0)",
-      "result": 1136508780058.7617
+      "result": 1276220835142.1978
     },
     "build_speed_player_7": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 7, 0)",
-      "result": 1092435123427.5199
+      "result": 1676042491992.662
     },
     "build_speed_player_8": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 8, 0)",
-      "result": 453747553296.74286
+      "result": 483856987943.60803
     },
     "build_speed_player_9": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 9, 0)",
-      "result": 382452565329.5477
+      "result": 480768487036.8286
     }
   },
   "errors": {}

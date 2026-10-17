@@ -13,15 +13,15 @@
     },
     "amber_gate_bonus_20": {
       "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 20, 0)",
-      "result": 777
+      "result": 822
     },
     "amber_gate_bonus_41": {
       "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 41, 0)",
-      "result": 1288
+      "result": 1356
     },
     "amber_gate_bonus_51": {
       "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 51, 0)",
-      "result": 500
+      "result": 585
     },
     "amber_gate_bonus_66": {
       "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 66, 0)",

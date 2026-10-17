@@ -2,7 +2,7 @@
   "extractions": {
     "gallery_trophy_agility_percent": {
       "expression": "idleon.getDNSM(\"GalleryTrophyBonTOT\").h[\"%_AGI\"]",
-      "result": 15.504819881834802
+      "result": 14.7548198818348
     },
     "gallery_nametag_skill_efficiency": {
       "expression": "Object.prototype.hasOwnProperty.call(idleon.getDNSM(\"GalleryNametagBonTOT\").h, \"%_SKILL_EFFICIENCY\") ? idleon.getDNSM(\"GalleryNametagBonTOT\").h[\"%_SKILL_EFFICIENCY\"] : 0",

@@ -113,7 +113,7 @@
           3,
           3,
           8,
-          0,
+          2,
           0,
           0,
           0,
@@ -512,7 +512,7 @@
     },
     "observation_levels": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"TotalObsLVs\", -1, 0)",
-      "result": 187
+      "result": 189
     },
     "minimum_roll": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"MinRoll\", 0, 0)",
@@ -548,19 +548,19 @@
     },
     "epilogue_refresh": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", -1, 0)",
-      "result": 631.4481367142912
+      "result": 631.7850843751136
     },
     "exp_multiplier": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"ResearchEXPmulti\", 0, 0)",
-      "result": 3442.3757882238774
+      "result": 3745.3440264312276
     },
     "exp_total": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"ResearchEXPrateTOT\", 0, 0)",
-      "result": 78964611.11647023
+      "result": 89559167.41845876
     },
     "kaleidoscope_base": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Kalei_MultiBase\", 0, 0)",
-      "result": 1.21
+      "result": 1.244
     },
     "offline_percent": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"AFKgainsRatePCT\", 0, 0)",
@@ -601,9 +601,9 @@
         0,
         0,
         0,
-        7080.211289209767,
+        7340.391162409591,
         0,
-        15858.77503140129,
+        16571.742619275537,
         0,
         0,
         0,
@@ -655,8 +655,8 @@
         0,
         0,
         0,
-        20.142674999999997,
-        20.142674999999997,
+        20.494782000000004,
+        20.494782000000004,
         0,
         0,
         0,
@@ -680,7 +680,7 @@
         316.8735885620117,
         439.7043173859382,
         1785.8089180752618,
-        751.8698665522701,
+        751.86986655227,
         958.4205416177222,
         221.01207323165886,
         274.1949597045217,
@@ -704,7 +704,7 @@
         834.054230864,
         934.915283203125,
         24469.09446507304,
-        173.26099999999997,
+        617.6353167249998,
         190.944,
         209.843,
         230,
@@ -731,30 +731,30 @@
         1,
         1,
         1,
-        2.21,
+        2.2439999999999998,
         1,
         1,
         1,
         1,
         1,
         1,
-        5.84,
+        5.976,
         1,
-        2.21,
-        1,
-        1,
-        1,
-        1,
-        4.63,
-        1,
-        5.84,
+        2.2439999999999998,
         1,
         1,
         1,
         1,
+        4.732,
+        1,
+        5.976,
         1,
         1,
-        4.63,
+        1,
+        1,
+        1,
+        1,
+        4.732,
         1,
         1,
         1,
@@ -772,7 +772,7 @@
     },
     "exp_subtotal": {
       "expression": "Array.from({length:idleon.callFunction(\"ResearchStuff\",\"OccurrencesToBeFound\",0,0)},(_,index)=>idleon.callFunction(\"ResearchStuff\",\"ResearchEXPrateObj\",index,0)).reduce((sum,value)=>sum+value,0)",
-      "result": 22938.986320611057
+      "result": 23912.13378168513
     },
     "point_term": {
       "expression": "Math.round(1+Math.min(1,Math.floor(idleon.getAttr(\"Lv0\")[20]/60))+idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",50,1))",
@@ -780,7 +780,7 @@
     },
     "grid_31_0": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 31, 0)",
-      "result": 28.125
+      "result": 29.25
     },
     "grid_31_1": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 31, 1)",
@@ -792,7 +792,7 @@
     },
     "grid_50_0": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 50, 0)",
-      "result": 6.25
+      "result": 6.5
     },
     "grid_50_1": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 50, 1)",
@@ -800,7 +800,7 @@
     },
     "grid_51_0": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 51, 0)",
-      "result": 37.5
+      "result": 39
     },
     "grid_51_1": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 51, 1)",
@@ -808,19 +808,19 @@
     },
     "grid_52_0": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 52, 0)",
-      "result": 56.25
+      "result": 58.5
     },
     "grid_70_0": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 70, 0)",
-      "result": 69
+      "result": 71.75999999999999
     },
     "grid_71_0": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 71, 0)",
-      "result": 2.875
+      "result": 2.9899999999999998
     },
     "grid_72_0": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 72, 0)",
-      "result": 28.75
+      "result": 29.900000000000002
     },
     "grid_72_1": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 72, 1)",
@@ -828,7 +828,7 @@
     },
     "grid_90_0": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 90, 0)",
-      "result": 5.75
+      "result": 5.9799999999999995
     },
     "grid_90_1": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 90, 1)",
@@ -836,7 +836,7 @@
     },
     "grid_91_0": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 91, 0)",
-      "result": 5.75
+      "result": 5.9799999999999995
     },
     "grid_91_1": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 91, 1)",
@@ -844,31 +844,31 @@
     },
     "grid_92_0": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 92, 0)",
-      "result": 71.87499999999999
+      "result": 74.75
     },
     "grid_93_0": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 93, 0)",
-      "result": 18.75
+      "result": 19.5
     },
     "grid_94_2": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 94, 2)",
-      "result": 1168.75
+      "result": 1228.5
     },
     "grid_110_0": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 110, 0)",
-      "result": 143.74999999999997
+      "result": 149.5
     },
     "grid_111_0": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 111, 0)",
-      "result": 14.375
+      "result": 14.950000000000001
     },
     "grid_112_2": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 112, 2)",
-      "result": 215.625
+      "result": 224.25000000000003
     },
     "farming_sticker": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"StickerBonus\", 1, 0)",
-      "result": 75.625
+      "result": 76.45
     },
     "crop_scientist": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 9, 0)",
@@ -892,11 +892,11 @@
     },
     "sailing_research": {
       "expression": "idleon.callFunction(\"Sailing\", \"SlabboBonus\", 7, 0)",
-      "result": 16.515772
+      "result": 16.758651
     },
     "epilogue_research": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 7, 0)",
-      "result": 28.346052683324945
+      "result": 28.368876757021038
     },
     "card_w7b1": {
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7b1\")",
@@ -936,7 +936,7 @@
     },
     "button_research": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 0, 0)",
-      "result": 41.5625
+      "result": 41.824999999999996
     },
     "killroy_research": {
       "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 5, 0)",
@@ -1092,7 +1092,7 @@
     },
     "tome_reference": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[84]",
-      "result": 44272
+      "result": 44382
     },
     "grimoire_epilogue": {
       "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 17, 0)",
@@ -1104,7 +1104,7 @@
     },
     "gambit_score": {
       "expression": "idleon.callFunction(\"Holes\", \"GambitPts\", 777, 0)",
-      "result": 4318260.9105447335
+      "result": 4320560.222590943
     },
     "offline_contributions": {
       "expression": "[idleon.callFunction(\"Companions\", 28),idleon.callFunction(\"Holes\", \"GambitBonuses\", 15, 0),idleon.callFunction(\"Minehead\", \"BonusQTY\", 1, 0),idleon.callFunction(\"Minehead\", \"BonusQTY\", 10, 0),idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 71, 0),idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 111, 0),Math.min(6,Math.round(idleon.getAttr(\"Sailing\")[3][36])),Math.min(idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7b11\"),10),20*idleon.callFunction(\"Companions\", 153),10*idleon.callFunction(\"CompLV2\", 153),2*idleon.getAttr(\"GemItemsPurchased\")[45],idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 4, 0),idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 24, 0)]",
@@ -1113,8 +1113,8 @@
         3,
         2,
         3,
-        2.875,
-        14.375,
+        2.9899999999999998,
+        14.950000000000001,
         5,
         1,
         20,
@@ -1134,7 +1134,7 @@
     },
     "slab_registrations": {
       "expression": "idleon.getAttr(\"Cards\")[1].length",
-      "result": 1642
+      "result": 1645
     },
     "worship_waves": {
       "expression": "idleon.getAttr(\"TotemInfo\")[0].reduce((total,waves)=>total+Number(waves),0)",
@@ -1146,7 +1146,7 @@
     },
     "gambit_points_multiplier": {
       "expression": "idleon.callFunction(\"Holes\",\"GambitPTSmulti\",0,0)",
-      "result": 4.992266859205776
+      "result": 4.994925054151624
     },
     "gambit_score_requirement": {
       "expression": "idleon.callFunction(\"Holes\",\"GambitPtsREQ\",15,0)",
@@ -1154,7 +1154,7 @@
     },
     "gambit_measurement_13": {
       "expression": "idleon.callFunction(\"Holes\",\"MeasurementBonusTOTAL\",13,0)",
-      "result": 62.426685920577626
+      "result": 62.69250541516245
     },
     "gambit_study_13": {
       "expression": "idleon.callFunction(\"Holes\",\"StudyBolaiaBonuses\",13,0)",
@@ -1186,11 +1186,11 @@
     },
     "gambit_measurement_multi_6": {
       "expression": "idleon.callFunction(\"Holes\",\"MeasurementMulti\",6,0)",
-      "result": 4.8848
+      "result": 4.9056
     },
     "gambit_deathnote_world_total": {
       "expression": "[0,1,2,3,4,5,6].reduce((total,world)=>total+idleon.callFunction(\"WorkbenchStuff\",\"OverkillQTY\",world,0),0)",
-      "result": 2060
+      "result": 2070
     },
     "gambit_measurement_cosmos": {
       "expression": "idleon.callFunction(\"Holes\",\"CosmoBonusQTY\",1,3)",

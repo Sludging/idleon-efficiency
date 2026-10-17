@@ -240,21 +240,6 @@ function signBonus(player: Player, attribute: PrimaryAttribute, percent: boolean
 }
 
 
-function postOfficeBonus(player: Player, key: string): number {
-    let total = 0;
-    for (const box of player.postOffice) {
-        let subtotal = 0;
-        for (let index = 0; index < box.bonuses.length; index++) {
-            const bonus = box.bonuses[index];
-            if (bonus.data.bonusKey === key) {
-                subtotal += bonus.getBonus(box.level, index);
-            }
-        }
-        total += subtotal;
-    }
-    return total;
-}
-
 function pristineBonus(sneaking: Sneaking, itemId: number): number {
     const charm = sneaking.pristineCharms.find(charm => charm.data.itemId === itemId)!;
     return charm.unlocked ? charm.getBonus() : 0;
@@ -355,7 +340,7 @@ export class PlayerStats {
 
         // Chips and weapon bubbles scale only gear. Flat bonuses remain outside this multiplier.
         this.preparedWeaponPower =
-            5 + postOfficeBonus(player, '12a') + dungeons.passives.get(PassiveType.Flurbo)![0].getBonus() + foodWeapon
+            5 + player.getPostOfficeBonus('12a') + dungeons.passives.get(PassiveType.Flurbo)![0].getBonus() + foodWeapon
             + (card18 + cardLevel + (guild.guildBonuses[3].getBonus() + sigils.sigils[17].getBonus()))
             + (player.gear.getProperty('Weapon_Power')
                 * (1 + (player.getChipBonus('weppow') + (warriorWeapon + (archerWeapon + mageWeapon))) / 100)
@@ -420,7 +405,7 @@ export class PlayerStats {
 
         // Only gear receives this inner percentage. Floor the additive base before later multipliers.
         const defenceBase = Math.floor(
-            postOfficeBonus(player, 'def')
+            player.getPostOfficeBonus('def')
             + card26
             + Math.min(player.level, alchemyDefPct)
             + (stampBaseDef + equipmentBaseDef + arcade1 + statue7)
@@ -444,7 +429,7 @@ export class PlayerStats {
 
         this.preparedBaseAccuracy = 2
             + alchemy.getVialBonusForKey('baseACC')
-            + (postOfficeBonus(player, 'acc')
+            + (player.getPostOfficeBonus('acc')
                 + (Card.GetTotalBonusForId(cards, 23) + player.gear.getBonus(EquipmentBonus.Accuracy) + goldenFood.getBaseAccuracy(player))
                 + (getStampBonusForKey(stamps, 'BaseAcc') + upgradeVault.getBonusForId(4)))
             + player.gear.getProperty('Accuracy');
@@ -599,7 +584,7 @@ export class PlayerStats {
                 + (player.cardInfo!.getBonusForId(5) + (player.cardInfo!.getBonusForId(6)
                     + (cloverShrinePercent + prayerAndAccountPercent))));
         const additivePercent = player.getTalentBonusAtInputs(279, talentInputs)
-            + (postOfficeBonus(player, 'DropRate')
+            + (player.getPostOfficeBonus('DropRate')
                 + (player.gear.getBonus(EquipmentBonus.DropRate) + player.gear.getBonus(EquipmentBonus.DropChance)
                     + (alchemy.getBubbleBonusForKey('DropRate', player) + (Card.GetTotalBonusForId(cards, 10)
                         + (player.getTalentBonusAtInputs(24, talentInputs) + signAndSetPercent)))));
@@ -652,7 +637,7 @@ export class PlayerStats {
         const talentFlat = player.getTalentBonusAtInputs(652, player.finalTalentInputs);
         const archerFlatBubble = alchemy.getBubbleBonusForKey('A4', player);
         // Flat All Stat rounds once after Post Office, meals, and Guild. Source 1.22: AllStat, lines 95873–95876.
-        const allStatFlat = Math.floor(postOfficeBonus(player, '20a') + cooking.getMealBonusForKey('Stat')
+        const allStatFlat = Math.floor(player.getPostOfficeBonus('20a') + cooking.getMealBonusForKey('Stat')
             + guild.guildBonuses[1].getBonus());
         // Keep the nested percentage sum and its single tenth-point floor. Dummy Target remains fractional here.
         // Source 1.22: AllStatPCT, lines 95877–95896.
@@ -686,7 +671,7 @@ export class PlayerStats {
                 (player.getTalentBonusAtInputs(98, player.finalTalentInputs) + player.getTalentBonusAtInputs(203, player.finalTalentInputs) +
                     ((player.activeBuffs.find(talent => talent.skillIndex === 94)?.getBonus() ?? 0) + (secondTalentBonus(player, 142) + islandExpeditions.getShimmerBonus(0)))) +
                 (family.getClassBonus(ClassIndex.Warrior)!.getBonus(player) +
-                    (signBonus(player, 'STR', false) + postOfficeBonus(player, '23b') +
+                    (signBonus(player, 'STR', false) + player.getPostOfficeBonus('23b') +
                         (will + (Card.GetTotalBonusForId(cards, 9) + (baseAllStat + (allStatFlat + (sigils.sigils[0].getBonus() +
                             (alchemy.getBubbleBonusForKey('W4', player) + (breeding.shinyBonuses.find(bonus => bonus.data.index === 6)!.getBonus() +
                                 (arcade.bonuses[19].getBonus() + orionAllStat))))))))))
@@ -702,7 +687,7 @@ export class PlayerStats {
                     (getStampBonusForKey(stamps, 'BaseAGI') + player.gear.getBonus(EquipmentBonus.AgilityFlat))) +
                 (player.getTalentBonusAtInputs(278, player.finalTalentInputs) + player.getTalentBonusAtInputs(428, player.finalTalentInputs) + islandExpeditions.getShimmerBonus(1)) +
                 (family.getClassBonus(ClassIndex.Archer)!.getBonus(player) +
-                    (signBonus(player, 'AGI', false) + postOfficeBonus(player, '21b') +
+                    (signBonus(player, 'AGI', false) + player.getPostOfficeBonus('21b') +
                         (will + (Card.GetTotalBonusForId(cards, 7) + (baseAllStat + (allStatFlat + (sigils.sigils[1].getBonus() +
                             (secondTalentBonus(player, 367) + (archerFlatBubble + (breeding.shinyBonuses.find(bonus => bonus.data.index === 7)!.getBonus() +
                                 (arcade.bonuses[20].getBonus() + orionAllStat)))))))))))
@@ -717,7 +702,7 @@ export class PlayerStats {
                 (player.getTalentBonusAtInputs(12, player.finalTalentInputs) + Talent.getAccountTalentBonus(players, 53, player.finalTalentInputs) +
                     (getStampBonusForKey(stamps, 'BaseWIS') + player.gear.getBonus(EquipmentBonus.WisdomFlat))) +
                 (player.getTalentBonusAtInputs(459, player.finalTalentInputs) + islandExpeditions.getShimmerBonus(2)) + family.getClassBonus(ClassIndex.Mage)!.getBonus(player) +
-                (signBonus(player, 'WIS', false) + postOfficeBonus(player, '22b') +
+                (signBonus(player, 'WIS', false) + player.getPostOfficeBonus('22b') +
                     (player.getTalentBonusAtInputs(593, player.finalTalentInputs) + will +
                         (Card.GetTotalBonusForId(cards, 5) + (baseAllStat + (allStatFlat + (sigils.sigils[2].getBonus() +
                             (secondTalentBonus(player, 532) + (alchemy.getBubbleBonusForKey('M4', player) +
@@ -732,9 +717,9 @@ export class PlayerStats {
                 (allStatEquipmentPercent + (allStatPercent + pristineBonus(sneaking, 5)) + signBonus(player, 'LUK', true))) / 100) *
             (player.gear.getProperty('LUK') +
                 (player.getTalentBonusAtInputs(13, player.finalTalentInputs) + Talent.getAccountTalentBonus(players, 54, player.finalTalentInputs) +
-                    (getStampBonusForKey(stamps, 'BaseLUK') + postOfficeBonus(player, '15c') +
+                    (getStampBonusForKey(stamps, 'BaseLUK') + player.getPostOfficeBonus('15c') +
                         (player.gear.getBonus(EquipmentBonus.LuckFlat) + islandExpeditions.getShimmerBonus(3)))) +
-                (postOfficeBonus(player, 'LUK') + (family.getClassBonus(ClassIndex.Journeyman)!.getBonus(player) + signBonus(player, 'LUK', false) +
+                (player.getPostOfficeBonus('LUK') + (family.getClassBonus(ClassIndex.Journeyman)!.getBonus(player) + signBonus(player, 'LUK', false) +
                     (questChungus + (will + (Card.GetTotalBonusForId(cards, 2) + (player.getTalentBonusAtInputs(23, player.finalTalentInputs) +
                         (baseAllStat + (allStatFlat + (sigils.sigils[3].getBonus() + (archerFlatBubble +
                             (breeding.shinyBonuses.find(bonus => bonus.data.index === 9)!.getBonus() + (arcade.bonuses[22].getBonus() + orionAllStat))))))))))))

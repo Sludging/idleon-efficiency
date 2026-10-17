@@ -2,27 +2,27 @@
   "extractions": {
     "farming_sticker_bonus_0": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",0,0)",
-      "result": 178.75
+      "result": 194.60000000000002
     },
     "farming_sticker_bonus_1": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",1,0)",
-      "result": 75.625
+      "result": 76.45
     },
     "farming_sticker_bonus_2": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",2,0)",
-      "result": 206.25
+      "result": 208.50000000000003
     },
     "farming_sticker_bonus_3": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",3,0)",
-      "result": 3093.75
+      "result": 3127.5000000000005
     },
     "farming_sticker_bonus_4": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",4,0)",
-      "result": 385
+      "result": 389.20000000000005
     },
     "farming_sticker_bonus_5": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",5,0)",
-      "result": 288.75
+      "result": 291.90000000000003
     },
     "farming_sticker_bonus_6": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",6,0)",
@@ -30,7 +30,7 @@
     },
     "sticker_research_bonus": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",68,2)",
-      "result": 37.5
+      "result": 39
     },
     "sticker_event_shop_bonus": {
       "expression": "idleon.callFunction(\"Summoning\",\"EventShopOwned\",37,0)",

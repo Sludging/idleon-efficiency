@@ -2,30 +2,30 @@
   "extractions": {
     "player_class_experience_multiplier": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 15, 0)",
-      "result": 4753362152544.022
+      "result": 5714060625757.497
     },
     "player_maximum_damage": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0)",
       "result": {
         "type": "large_number",
-        "value": "4.975258141047525e+28"
+        "value": "5.1135901919855255e+28"
       }
     },
     "player_maximum_damage_base_component": {
       "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DummyNumbersStatManager\").h.DamageDealtLIST[0]; })()",
-      "result": 1953903.356456963
+      "result": 1963380.9684327405
     },
     "player_damage_attribute_contribution": {
       "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DummyNumbersStatManager\").h.DamageDealtSTATtype; })()",
-      "result": 51114635.83018866
+      "result": 52887070.38475718
     },
     "player_maximum_damage_percent_component": {
       "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DummyNumbersStatManager\").h.DamageDealtLIST[1]; })()",
-      "result": 27403354.410089895
+      "result": 27934038.854179464
     },
     "player_maximum_damage_total_multiplier": {
       "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DummyNumbersStatManager\").h.DamageDealtLIST[2]; })()",
-      "result": 929199168649002.2
+      "result": 932368538619105.8
     },
     "player_maximum_damage_sigil_lab_bonus": {
       "expression": "idleon.callFunction(\"Labb\", \"SigilBonus\", \"Blank\", 4, 0)",

@@ -6,7 +6,7 @@
     },
     "coral_reef_cost_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 1)",
-      "result": 10
+      "result": 36450.00000000001
     },
     "coral_reef_cost_2": {
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 2)",

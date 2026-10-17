@@ -2,19 +2,19 @@
   "extractions": {
     "bubble_TotalSTR": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.TotalSTR",
-      "result": 397698.51062019885
+      "result": 398644.83088573493
     },
     "bubble_TotalAGI": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.TotalAGI",
-      "result": 404762.20963925536
+      "result": 405672.2062401491
     },
     "bubble_TotalWIS": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.TotalWIS",
-      "result": 407489.9119780956
+      "result": 408386.022376268
     },
     "bubble_TotalLUK": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.TotalLUK",
-      "result": 50933.249592745975
+      "result": 51065.467879373115
     },
     "bubble_W4": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.W4",
@@ -114,7 +114,7 @@
     },
     "stamp_BaseAGI": {
       "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseAGI\")",
-      "result": 1277.5
+      "result": 1307.5
     },
     "stamp_BaseWIS": {
       "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseWIS\")",
@@ -278,7 +278,7 @@
     },
     "buff_94": {
       "expression": "idleon.callFunction(\"GetBuffBonuses\", 94, 1)",
-      "result": 0
+      "result": 452
     },
     "quest_count": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"TotalQuestsComplete\")",

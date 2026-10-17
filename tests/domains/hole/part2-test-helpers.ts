@@ -88,7 +88,7 @@ export interface Part2AccountRun {
 }
 
 // Registrations keep domain instances. Isolate modules to create a fresh real account owner.
-export function freshPart2Account(): Part2AccountRun {
+export function freshPart2Account(charNames?: string[]): Part2AccountRun {
  let run: Part2AccountRun;
  jest.isolateModules(() => {
   const loader: typeof SaveLoader = require('../../utils/cloudsave-loader');
@@ -96,7 +96,7 @@ export function freshPart2Account(): Part2AccountRun {
   const items: typeof AccountItems = require('../../../data/domain/items');
   const save = loader.loadTestSave('latest');
   const account = pipeline.initAccountDataKeys(items.initAllItems());
-  const data = pipeline.updateIdleonData(account, save, save.get('playerNames'),
+  const data = pipeline.updateIdleonData(account, save, charNames ?? save.get('playerNames'),
    normalizeCompanionStates(save.get('companions')), save.get('servervars'), true).getData();
   loader.validateGameDataStructure(data);
   run = { data, save, process: pipeline.updateIdleonData };

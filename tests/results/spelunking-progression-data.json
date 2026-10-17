@@ -150,7 +150,7 @@
     },
     "grand_upgrade_bonus": {
       "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0)",
-      "result": 213
+      "result": 223
     }
   },
   "errors": {}

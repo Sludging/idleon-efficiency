@@ -315,12 +315,12 @@
     {
       "label": "meritocracy_17",
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Summoning2(\"MeritocBonusz\",17,0)",
-      "description": "Meritocracy bonus 17 output"
+      "description": "Meritocracy bonus 17 recharge percentage. Compare the applied stamina recharge multiplier using 1 + percent / 100."
     },
     {
       "label": "legend_talent_30",
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Thingies(\"LegendPTS_bonus\",30,0)",
-      "description": "Legend talent 30 output"
+      "description": "Legend Talent 30 recharge percentage. Compare the applied stamina recharge multiplier using 1 + percent / 100."
     },
     {
       "label": "royal_outpost_category_2",
@@ -330,7 +330,7 @@
     {
       "label": "sushi_11",
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_SushiStuff(\"RoG_BonusQTY\",11,0)",
-      "description": "Sushi bonus 11 output"
+      "description": "Sushi bonus 11 recharge percentage. Compare the applied stamina recharge multiplier using 1 + percent / 100."
     },
     {
       "label": "bubble_Y11",
@@ -340,7 +340,7 @@
     {
       "label": "native_card_w7a10",
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"CardLv\",\"w7a10\")",
-      "description": "Native card level for w7a10"
+      "description": "Native card level for w7a10. Compare the additive stamina recharge percentage using min(2 * nativeLevel, 20)."
     },
     {
       "label": "refill_hours_player_0",

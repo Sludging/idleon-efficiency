@@ -169,7 +169,7 @@
           0,
           0,
           0,
-          0,
+          1,
           1,
           1,
           1,
@@ -679,7 +679,7 @@
           3,
           3,
           8,
-          0,
+          2,
           0,
           0,
           0,
@@ -821,8 +821,8 @@
           0,
           0
         ],
-        "accumulatedReduction": 4523.20000000001,
-        "spelunkingReduction": 11308
+        "accumulatedReduction": 4553.20000000001,
+        "spelunkingReduction": 11383
       }
     },
     "points_earned": {
@@ -831,11 +831,11 @@
     },
     "points_spent": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_PTSspent\",-1,0)",
-      "result": 115
+      "result": 116
     },
     "points_available": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_PTSavailable\",0,0)",
-      "result": 1
+      "result": 0
     },
     "catalogue": {
       "expression": "idleon.getAttr(\"CustomLists\").h.ResGridSquares.map((square, index) => ({ index, name: square[0], template: square[5], cap: idleon.callFunction(\"ResearchStuff\",\"Grid_MaxLV\",index,0), level: idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",index,1), primary: idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",index,0), secondary: idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",index,2), reachable: idleon.callFunction(\"ResearchStuff\",\"Grid_CanWeSelect\",index,0), canUpgrade: idleon.callFunction(\"ResearchStuff\",\"Grid_CanWeUpgrade\",index,0) })).filter(square => square.name !== \"Name\")",
@@ -846,7 +846,7 @@
           "template": "Raises_the_minimum_possible_Roll_by_+1_for_each_failed_Roll,_up_to_+$._This_resets_back_to_0_upon_a_successful_Roll._Also_+{%_Research_EXP_Gain.",
           "cap": 3,
           "level": 3,
-          "primary": 28.125,
+          "primary": 29.25,
           "secondary": 75,
           "reachable": 1,
           "canUpgrade": 0
@@ -857,8 +857,8 @@
           "template": "Unlocks_a_new_TRUE_Damage_Multiplier_as_shown_in_the_Sticker_Depot,_which_goes_up_by_+{%_for_every_Sticker_you_find!",
           "cap": 2,
           "level": 2,
-          "primary": 3,
-          "secondary": 3,
+          "primary": 3.12,
+          "secondary": 3.12,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -868,8 +868,8 @@
           "template": "Reduces_the_Cycle_Time_for_the_Polymerization_tab_in_the_Refinery_by_{%",
           "cap": 4,
           "level": 4,
-          "primary": 150,
-          "secondary": 150,
+          "primary": 156,
+          "secondary": 156,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -879,8 +879,8 @@
           "template": "Unlocks_a_new_tab_in_the_Refinery,_POLYMERIZATION!_Also,_+{%_faster_refinery_cycles_for_ALL_tabs!",
           "cap": 2,
           "level": 2,
-          "primary": 15,
-          "secondary": 15,
+          "primary": 15.600000000000001,
+          "secondary": 15.600000000000001,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -890,8 +890,8 @@
           "template": "Get_+|_extra_Research_PTS_every_10_Research_LVs!_Also,_+{%_Research_EXP_Gain!",
           "cap": 1,
           "level": 1,
-          "primary": 6.25,
-          "secondary": 6.25,
+          "primary": 6.5,
+          "secondary": 6.5,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -901,8 +901,8 @@
           "template": "Increase_the_max_possible_Roll_while_searching_for_new_observations_by_+|,_and_+{%_Research_EXP_gain!",
           "cap": 4,
           "level": 4,
-          "primary": 37.5,
-          "secondary": 37.5,
+          "primary": 39,
+          "secondary": 39,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -912,21 +912,21 @@
           "template": "Twists_the_Kaleidoscope_behind_both_of_your_eyes,_increasing_their_effect_by_+{%",
           "cap": 3,
           "level": 3,
-          "primary": 56.25,
-          "secondary": 56.25,
+          "primary": 58.5,
+          "secondary": 58.5,
           "reachable": 1,
           "canUpgrade": 0
         },
         {
           "index": 67,
-          "name": "Sticky_Crowns",
+          "name": "Stickery_Crowns",
           "template": "For_every_King_Rat_Crown_you_reclaim,_your_Megacrop_growth_chance_goes_up_by_{%._Total_Bonus:^x",
           "cap": 3,
           "level": 1,
-          "primary": 37.5,
-          "secondary": 937.5,
+          "primary": 39,
+          "secondary": 975,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
         },
         {
           "index": 68,
@@ -934,8 +934,8 @@
           "template": "For_every_King_Rat_Crown_you_reclaim,_all_your_stickers_gives_{%_higher_bonuses._Total_Bonus:$%",
           "cap": 1,
           "level": 1,
-          "primary": 1.5,
-          "secondary": 37.5,
+          "primary": 1.56,
+          "secondary": 39,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -945,8 +945,8 @@
           "template": "All_Tiny_Cogs_you_get_have_a_{%_chance_be_1_Tier_higher_than_they_otherwise_would've_been!_Huge,_honestly!",
           "cap": 2,
           "level": 2,
-          "primary": 150,
-          "secondary": 150,
+          "primary": 156,
+          "secondary": 156,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -956,8 +956,8 @@
           "template": "Multiplies_Research_EXP_gain_by_}x,_TRUE_multiplier_style!_So_this_bonus_will_never_be_additive!",
           "cap": 4,
           "level": 4,
-          "primary": 69,
-          "secondary": 69,
+          "primary": 71.75999999999999,
+          "secondary": 71.75999999999999,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -967,8 +967,8 @@
           "template": "Further_increases_your_Research_AFK_Gains_rate_by_+{%,_in_your_unending_quest_for_100%",
           "cap": 2,
           "level": 2,
-          "primary": 2.875,
-          "secondary": 2.875,
+          "primary": 2.9899999999999998,
+          "secondary": 2.9899999999999998,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -978,8 +978,8 @@
           "template": "Gives_+|_Kaleidoscopes_to_use_for_Observations!_Also,_+{%_Kaleidoscope_effect!",
           "cap": 4,
           "level": 4,
-          "primary": 28.75,
-          "secondary": 28.75,
+          "primary": 29.900000000000002,
+          "secondary": 29.900000000000002,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -989,10 +989,10 @@
           "template": "Unlocks_new_dreams_to_complete_at_the_Equinox_Valley_in_World_3!_@_Also_boosts_Equinox_Bar_Fill_Rate_by_}x",
           "cap": 3,
           "level": 1,
-          "primary": 25,
-          "secondary": 25,
+          "primary": 26,
+          "secondary": 26,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
         },
         {
           "index": 87,
@@ -1000,8 +1000,8 @@
           "template": "Unlocks_the_Zuperbits_page_of_Superbits_in_Gaming!_Yea,_you_ain't_done_with_those_just_yet!_Also_gives_}x_Gaming_Bit_Multi!",
           "cap": 2,
           "level": 2,
-          "primary": 600,
-          "secondary": 600,
+          "primary": 624,
+          "secondary": 624,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1011,10 +1011,10 @@
           "template": "Unlocks_the_Sticker_mechanic_for_Farming!_Also,_boosts_Megacrop_growth_chance_by_}x",
           "cap": 3,
           "level": 1,
-          "primary": 75,
-          "secondary": 75,
+          "primary": 78,
+          "secondary": 78,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
         },
         {
           "index": 89,
@@ -1022,10 +1022,10 @@
           "template": "Unlocks_the_Tiny_Cog_board,_and_generates_a_single_Tiny_Cog_per_day!_Also_boosts_Flaggy_Rate_by_}x",
           "cap": 4,
           "level": 3,
-          "primary": 900,
-          "secondary": 900,
+          "primary": 936,
+          "secondary": 936,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
         },
         {
           "index": 90,
@@ -1033,8 +1033,8 @@
           "template": "Gives_you_+|_more_Daily_Rolls_for_getting_new_Observations!_Also,_+{%_Research_EXP_gain!",
           "cap": 4,
           "level": 4,
-          "primary": 5.75,
-          "secondary": 5.75,
+          "primary": 5.9799999999999995,
+          "secondary": 5.9799999999999995,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1044,8 +1044,8 @@
           "template": "Gives_+|_Optical_Monocles_to_use_for_Observations!_Also_+{%_Insight_EXP_gain,_to_level_up_your_Observations_faster_with!",
           "cap": 4,
           "level": 4,
-          "primary": 5.75,
-          "secondary": 5.75,
+          "primary": 5.9799999999999995,
+          "secondary": 5.9799999999999995,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1055,8 +1055,8 @@
           "template": "Taking_only_what_you_need_from_it,_your_Optical_Monocles_generate_+{%_more_Insight!",
           "cap": 2,
           "level": 2,
-          "primary": 71.87499999999999,
-          "secondary": 71.87499999999999,
+          "primary": 74.75,
+          "secondary": 74.75,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1066,8 +1066,8 @@
           "template": "Psst..._you_forgot_to_give_Observation_LV_a_purpose_while_helping_Lava_research_new_content!_How_about_you_do..._Observations_give_}x_more_EXP_per_LV!",
           "cap": 3,
           "level": 3,
-          "primary": 18.75,
-          "secondary": 18.75,
+          "primary": 19.5,
+          "secondary": 19.5,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1077,8 +1077,8 @@
           "template": "Design_problem,_why_would_players_level_up_old_Observations?_How_about..._+{%_Research_EXP_per_TOTAL_Observation_LV!_@_Total_Bonus:$%",
           "cap": 4,
           "level": 4,
-          "primary": 6.25,
-          "secondary": 1168.75,
+          "primary": 6.5,
+          "secondary": 1228.5,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1088,8 +1088,8 @@
           "template": "Your_Sailing_Boats_turn_into_the_Undead_Battalion_at_LV_400+_These_boats_find_3x_more_Treasure,_are_3x_faster,_and_have_3x_higher_Artifact_Find_Chance!",
           "cap": 1,
           "level": 1,
-          "primary": 1.25,
-          "secondary": 1.25,
+          "primary": 1.3,
+          "secondary": 1.3,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1099,8 +1099,8 @@
           "template": "Unlocks_a_new_island_in_Sailing,_THE_MAW!_@_Also,_}x_Artifact_Find_Chance._You'll_need_it.",
           "cap": 4,
           "level": 4,
-          "primary": 125,
-          "secondary": 125,
+          "primary": 130,
+          "secondary": 130,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1110,8 +1110,8 @@
           "template": "+{%_Palette_Luck_for_every_King_Rat_Crown_you_reclaim._@_Total_Bonus:$%",
           "cap": 1,
           "level": 1,
-          "primary": 3.75,
-          "secondary": 93.75,
+          "primary": 3.9000000000000004,
+          "secondary": 97.50000000000001,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1121,8 +1121,8 @@
           "template": "You_can_now_buy_the_Rat_King_from_the_Import_Shop_in_Gaming!_Also,_+{%_King_Tokens_per_hour!",
           "cap": 2,
           "level": 2,
-          "primary": 62.5,
-          "secondary": 62.5,
+          "primary": 65,
+          "secondary": 65,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1132,8 +1132,8 @@
           "template": "Unlocks_Transcendent_Sailing_Artifacts_tier,_and_boosts_Artifact_Find_Chance_by_a_smol_+{%",
           "cap": 1,
           "level": 1,
-          "primary": 31.25,
-          "secondary": 31.25,
+          "primary": 32.5,
+          "secondary": 32.5,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1143,8 +1143,8 @@
           "template": "Boosts_Research_EXP_gain_by_+{%_@_You'll_be_filling_out_this_Grid_in_no_time_at_all!",
           "cap": 2,
           "level": 2,
-          "primary": 143.74999999999997,
-          "secondary": 143.74999999999997,
+          "primary": 149.5,
+          "secondary": 149.5,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1154,8 +1154,8 @@
           "template": "+{%_Research_AFK_Gains._This_affects_OFFLINE_gains_for_Research,_Minehead,_Insight..._everything_Research_related!",
           "cap": 2,
           "level": 2,
-          "primary": 14.375,
-          "secondary": 14.375,
+          "primary": 14.950000000000001,
+          "secondary": 14.950000000000001,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1165,8 +1165,8 @@
           "template": "+{%_Research_EXP_gain_per_Observation_found!_@_Total_Bonus:+$%",
           "cap": 1,
           "level": 1,
-          "primary": 7.1875,
-          "secondary": 215.625,
+          "primary": 7.4750000000000005,
+          "secondary": 224.25000000000003,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1176,8 +1176,8 @@
           "template": "All_button_bonuses_are_+{%_bigger,_which_is_ballin'_since_all_button_upgrades_sans_Class_EXP_are_multiplicative!",
           "cap": 3,
           "level": 3,
-          "primary": 18.75,
-          "secondary": 18.75,
+          "primary": 19.5,
+          "secondary": 19.5,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1187,10 +1187,10 @@
           "template": "Every_week,_you_get_+|_Insta_uses_for_The_Button_on_the_Mantaray_map,_which_let_you_skip_the_current_demand._@_Also,_+{%_chance_for_+1_use_every_day",
           "cap": 2,
           "level": 1,
-          "primary": 3.75,
-          "secondary": 3.75,
+          "primary": 3.9000000000000004,
+          "secondary": 3.9000000000000004,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
         },
         {
           "index": 127,
@@ -1198,8 +1198,8 @@
           "template": "What_kind_of_word_is_Eclectopl..._whatever,_this_gives_you_+{%_TRUE_DMG_Multi_per_Eclectic_Sigil!",
           "cap": 1,
           "level": 1,
-          "primary": 1.25,
-          "secondary": 1.25,
+          "primary": 1.3,
+          "secondary": 1.3,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1209,8 +1209,8 @@
           "template": "Sigils_can_be_upgraded_a_5th_time_to_Eclectic!_@_NOTE:You_must_defeat_Lore_Boss_7_in_Spelunking_first!",
           "cap": 1,
           "level": 1,
-          "primary": 12.5,
-          "secondary": 12.5,
+          "primary": 13,
+          "secondary": 13,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1220,10 +1220,10 @@
           "template": "You_can_now_speak_to_Mr_Minehead_and_play_his_Depth_Charge_game!_Also,_+{_base_Minehead_Currency/hr",
           "cap": 4,
           "level": 1,
-          "primary": 15,
-          "secondary": 15,
+          "primary": 15.600000000000001,
+          "secondary": 15.600000000000001,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
         },
         {
           "index": 130,
@@ -1231,10 +1231,10 @@
           "template": "Raises_the_Max_LV_of_certain_Yellow_Legend_Talents_by_+|._Also,_}x_Class_EXP_gain!",
           "cap": 3,
           "level": 1,
-          "primary": 7.5,
-          "secondary": 7.5,
+          "primary": 7.800000000000001,
+          "secondary": 7.800000000000001,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
         },
         {
           "index": 131,
@@ -1242,10 +1242,10 @@
           "template": "Raises_the_Max_LV_of_certain_Red_Legend_Talents_by_+|._@_Also,_}x_Class_EXP_gain!",
           "cap": 3,
           "level": 1,
-          "primary": 7.5,
-          "secondary": 7.5,
+          "primary": 7.800000000000001,
+          "secondary": 7.800000000000001,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
         },
         {
           "index": 132,
@@ -1253,10 +1253,10 @@
           "template": "Raises_the_Max_LV_of_certain_Brown_Legend_Talents_by_+|._Also,_}x_Class_EXP_gain!",
           "cap": 3,
           "level": 1,
-          "primary": 7.5,
-          "secondary": 7.5,
+          "primary": 7.800000000000001,
+          "secondary": 7.800000000000001,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
         },
         {
           "index": 146,
@@ -1264,10 +1264,10 @@
           "template": "Your_Minehead_Damage_is_boosted_by_+{%_for_every_tile_revealed_in_a_single_turn._This_resets_at_the_start_of_every_turn.",
           "cap": 2,
           "level": 1,
-          "primary": 12.5,
-          "secondary": 12.5,
+          "primary": 13,
+          "secondary": 13,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
         },
         {
           "index": 147,
@@ -1275,10 +1275,10 @@
           "template": "Gives_you_+|_more_tries_every_day_at_Mr_Minehead's_Depth_Charge!_Also,_+{%_Minehead_Currency/hr",
           "cap": 4,
           "level": 1,
-          "primary": 31.25,
-          "secondary": 31.25,
+          "primary": 32.5,
+          "secondary": 32.5,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
         },
         {
           "index": 148,
@@ -1286,10 +1286,10 @@
           "template": "Multiplies_Minehead_Currency/hr_by_}x",
           "cap": 4,
           "level": 1,
-          "primary": 31.25,
-          "secondary": 31.25,
+          "primary": 32.5,
+          "secondary": 32.5,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
         },
         {
           "index": 149,
@@ -1297,8 +1297,8 @@
           "template": "You_can_now_speak_to_Glimbo,_and_make_trades_with_him!_Also_boosts_coins_dropped_by_monsters_by_}x!",
           "cap": 1,
           "level": 1,
-          "primary": 22.5,
-          "secondary": 22.5,
+          "primary": 23.400000000000002,
+          "secondary": 23.400000000000002,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1308,8 +1308,8 @@
           "template": "Reduces_the_cost_of_all_OG_Masterclass_upgrades_(DB,_WW,_AC)_by_{%_every_day,_FOREVER!_Total_Reduction:-&%",
           "cap": 2,
           "level": 2,
-          "primary": 30,
-          "secondary": 30,
+          "primary": 31.200000000000003,
+          "secondary": 31.200000000000003,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1319,8 +1319,8 @@
           "template": "Boosts_Spelunking_POW_by_+{%_every_day,_FOREVER!_@_Total_Boost:^x_POW",
           "cap": 2,
           "level": 2,
-          "primary": 75,
-          "secondary": 11308,
+          "primary": 78,
+          "secondary": 11383,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1330,10 +1330,32 @@
           "template": "Raises_the_Max_LV_of_certain_Green_Legend_Talents_by_+|._Also,_}x_Class_EXP_gain!",
           "cap": 3,
           "level": 1,
-          "primary": 7.5,
-          "secondary": 7.5,
+          "primary": 7.800000000000001,
+          "secondary": 7.800000000000001,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
+        },
+        {
+          "index": 164,
+          "name": "Menagerie_Missionary",
+          "template": "Unlocks_+|_more_Missions_for_the_Luminous_Menagerie,_so_you_can_claim_more_shells_and_rank_up!_@_Also,_+{%_hourly_Lumi_Gains",
+          "cap": 4,
+          "level": 0,
+          "primary": 0,
+          "secondary": 0,
+          "reachable": 1,
+          "canUpgrade": 0
+        },
+        {
+          "index": 165,
+          "name": "Lil'_Baby_Menagerie",
+          "template": "Adds_a_baby_menagerie_jellyfish_here_in_town_for_quick_access_to_the_Luminous_Menagerie!_@_Also_boosts_hourly_Lumi_Gains_by_}x",
+          "cap": 4,
+          "level": 1,
+          "primary": 6.5,
+          "secondary": 6.5,
+          "reachable": 1,
+          "canUpgrade": 0
         },
         {
           "index": 166,
@@ -1341,10 +1363,10 @@
           "template": "If_your_1st_click_is_on_a_depth_charge,_50%_chance_it_wiggles_and_doesn't_count!_Happens_up_to_|_times_per_game._@_Also,_+{%_Minehead_Currency_gain!",
           "cap": 4,
           "level": 1,
-          "primary": 18.75,
-          "secondary": 18.75,
+          "primary": 19.5,
+          "secondary": 19.5,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
         },
         {
           "index": 167,
@@ -1352,10 +1374,10 @@
           "template": "Multiplies_all_damage_you_deal_in_Mr_Minehead's_Depth_Charge_by_}x",
           "cap": 3,
           "level": 1,
-          "primary": 18.75,
-          "secondary": 18.75,
+          "primary": 19.5,
+          "secondary": 19.5,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
         },
         {
           "index": 168,
@@ -1363,8 +1385,8 @@
           "template": "+{%_Drop_Rate_TRUE_Multi_per_100_Glimbo_Trades!_@_Total_Bonus:^x_DR",
           "cap": 1,
           "level": 1,
-          "primary": 1.25,
-          "secondary": 5,
+          "primary": 1.3,
+          "secondary": 5.2,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1374,10 +1396,10 @@
           "template": "Some_of_Glimbo's_trades_give_+|_additional_LVs!_This_works_retroactively._Also,_}x_Coin_gain",
           "cap": 2,
           "level": 1,
-          "primary": 15,
-          "secondary": 15,
+          "primary": 15.600000000000001,
+          "secondary": 15.600000000000001,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
         },
         {
           "index": 170,
@@ -1388,7 +1410,7 @@
           "primary": 0,
           "secondary": 0,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
         },
         {
           "index": 171,
@@ -1396,10 +1418,10 @@
           "template": "Increases_the_Max_LV_of_all_Day_and_Night_Market_upgrades_by_+{",
           "cap": 4,
           "level": 1,
-          "primary": 75,
-          "secondary": 75,
+          "primary": 78,
+          "secondary": 78,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
         },
         {
           "index": 172,
@@ -1407,10 +1429,10 @@
           "template": "The_first_MISC_Bonus_on_your_Attire_Equipment_(i.e._Clothing)_gives_}x_more_bonus!",
           "cap": 2,
           "level": 1,
-          "primary": 37.5,
-          "secondary": 37.5,
+          "primary": 39,
+          "secondary": 39,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
         },
         {
           "index": 173,
@@ -1418,8 +1440,8 @@
           "template": "<._Also,_+{%_Drop_Rate.",
           "cap": 1,
           "level": 1,
-          "primary": 31.25,
-          "secondary": 31.25,
+          "primary": 32.5,
+          "secondary": 32.5,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1429,10 +1451,10 @@
           "template": "Multiplies_all_damage_dealt_by_your_cells_during_operations_by_}x_@_A_true_operator_must_consider_the_indirect_bloodcell_gain...",
           "cap": 4,
           "level": 1,
-          "primary": 6.25,
-          "secondary": 6.25,
+          "primary": 6.5,
+          "secondary": 6.5,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
         },
         {
           "index": 186,
@@ -1440,10 +1462,10 @@
           "template": "Gives_you_+|_more_operations_to_start_every_day_at_the_Jelly_Operator_game!",
           "cap": 4,
           "level": 2,
-          "primary": 5,
-          "secondary": 5,
+          "primary": 5.2,
+          "secondary": 5.2,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
         },
         {
           "index": 187,
@@ -1451,10 +1473,10 @@
           "template": "You_can_now_speak_to_the_Jelly_found_in_the_Jellofish_map_to_play_the_Jelly_Operator_game!_@_Also,_}x_more_Bloodcells_gained_from_operations!",
           "cap": 4,
           "level": 3,
-          "primary": 37.5,
-          "secondary": 37.5,
+          "primary": 39,
+          "secondary": 39,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
         },
         {
           "index": 188,
@@ -1462,8 +1484,8 @@
           "template": "Every_day,_you_get_another_+|_extra_uses_for_ALL_your_shakers_at_the_Sushi_Station!_@_And_+{%_chance_for_free_use_when_using_Shakers!",
           "cap": 2,
           "level": 2,
-          "primary": 2.5,
-          "secondary": 2.5,
+          "primary": 2.6,
+          "secondary": 2.6,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1473,10 +1495,10 @@
           "template": "You_can_now_speak_to_the_knife_found_in_the_map_past_Glimbo_to_play_the_Sushi_Station_game!_@_Also,_}x_more_Bucks_gained_from_your_Sushi!",
           "cap": 4,
           "level": 2,
-          "primary": 75,
-          "secondary": 75,
+          "primary": 78,
+          "secondary": 78,
           "reachable": 1,
-          "canUpgrade": 1
+          "canUpgrade": 0
         },
         {
           "index": 190,
@@ -1484,8 +1506,8 @@
           "template": "Multiplies_your_EXP_gain_for_Cooking_Mastery,_a_feature_unlocked_at_Rift_61,_by_a_massive_}x_@_Also_gives_+|_Yellow_PTS_to_spend_on_Meals!",
           "cap": 4,
           "level": 4,
-          "primary": 375,
-          "secondary": 375,
+          "primary": 390,
+          "secondary": 390,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1495,8 +1517,8 @@
           "template": "Regal_Mobs_now_have_a_{%_chance_to_give_+3_kills_for_your_Royal_Guardian's_Orb_of_Virisimilitude_instead_of_simply_+2_kills",
           "cap": 4,
           "level": 4,
-          "primary": 50,
-          "secondary": 50,
+          "primary": 52,
+          "secondary": 52,
           "reachable": 1,
           "canUpgrade": 0
         }
@@ -1669,8 +1691,8 @@
         0,
         0,
         0,
-        0,
-        0,
+        1,
+        1,
         1,
         1,
         1,
@@ -1749,7 +1771,7 @@
     },
     "grid_shared_multiplier": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus_Allmulti\",0,0)",
-      "result": 1.25
+      "result": 1.3
     },
     "companion_0": {
       "expression": "idleon.callFunction(\"Companions\",0)",
@@ -1757,7 +1779,7 @@
     },
     "companion_55": {
       "expression": "idleon.callFunction(\"Companions\",55)",
-      "result": 20
+      "result": 25
     },
     "companion_153": {
       "expression": "idleon.callFunction(\"Companions\",153)",
@@ -1824,7 +1846,7 @@
     },
     "observation_levels": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"TotalObsLVs\",-1,0)",
-      "result": 187
+      "result": 189
     },
     "discoveries": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"TotalOccurrencesFound\",-1,0)",
@@ -2084,91 +2106,91 @@
       "result": [
         {
           "index": 31,
-          "text": "Raises_the_minimum_possible_Roll_by_+1_for_each_failed_Roll,_up_to_+75._This_resets_back_to_0_upon_a_successful_Roll._Also_+28.1%_Research_EXP_Gain."
+          "text": "Raises_the_minimum_possible_Roll_by_+1_for_each_failed_Roll,_up_to_+75._This_resets_back_to_0_upon_a_successful_Roll._Also_+29.3%_Research_EXP_Gain."
         },
         {
           "index": 47,
-          "text": "Unlocks_a_new_TRUE_Damage_Multiplier_as_shown_in_the_Sticker_Depot,_which_goes_up_by_+3%_for_every_Sticker_you_find!"
+          "text": "Unlocks_a_new_TRUE_Damage_Multiplier_as_shown_in_the_Sticker_Depot,_which_goes_up_by_+3.1%_for_every_Sticker_you_find!"
         },
         {
           "index": 48,
-          "text": "Reduces_the_Cycle_Time_for_the_Polymerization_tab_in_the_Refinery_by_150%"
+          "text": "Reduces_the_Cycle_Time_for_the_Polymerization_tab_in_the_Refinery_by_156%"
         },
         {
           "index": 49,
-          "text": "Unlocks_a_new_tab_in_the_Refinery,_POLYMERIZATION!_Also,_+15%_faster_refinery_cycles_for_ALL_tabs!"
+          "text": "Unlocks_a_new_tab_in_the_Refinery,_POLYMERIZATION!_Also,_+15.6%_faster_refinery_cycles_for_ALL_tabs!"
         },
         {
           "index": 50,
-          "text": "Get_+1_extra_Research_PTS_every_10_Research_LVs!_Also,_+6.3%_Research_EXP_Gain!"
+          "text": "Get_+1_extra_Research_PTS_every_10_Research_LVs!_Also,_+6.5%_Research_EXP_Gain!"
         },
         {
           "index": 51,
-          "text": "Increase_the_max_possible_Roll_while_searching_for_new_observations_by_+4,_and_+37.5%_Research_EXP_gain!"
+          "text": "Increase_the_max_possible_Roll_while_searching_for_new_observations_by_+4,_and_+39%_Research_EXP_gain!"
         },
         {
           "index": 52,
-          "text": "Twists_the_Kaleidoscope_behind_both_of_your_eyes,_increasing_their_effect_by_+56.3%"
+          "text": "Twists_the_Kaleidoscope_behind_both_of_your_eyes,_increasing_their_effect_by_+58.5%"
         },
         {
           "index": 67,
-          "text": "For_every_King_Rat_Crown_you_reclaim,_your_Megacrop_growth_chance_goes_up_by_37.5%._Total_Bonus:10.38x"
+          "text": "For_every_King_Rat_Crown_you_reclaim,_your_Megacrop_growth_chance_goes_up_by_39%._Total_Bonus:10.75x"
         },
         {
           "index": 68,
-          "text": "For_every_King_Rat_Crown_you_reclaim,_all_your_stickers_gives_1.5%_higher_bonuses._Total_Bonus:38%"
+          "text": "For_every_King_Rat_Crown_you_reclaim,_all_your_stickers_gives_1.6%_higher_bonuses._Total_Bonus:39%"
         },
         {
           "index": 69,
-          "text": "All_Tiny_Cogs_you_get_have_a_150%_chance_be_1_Tier_higher_than_they_otherwise_would've_been!_Huge,_honestly!"
+          "text": "All_Tiny_Cogs_you_get_have_a_156%_chance_be_1_Tier_higher_than_they_otherwise_would've_been!_Huge,_honestly!"
         },
         {
           "index": 70,
-          "text": "Multiplies_Research_EXP_gain_by_1.69x,_TRUE_multiplier_style!_So_this_bonus_will_never_be_additive!"
+          "text": "Multiplies_Research_EXP_gain_by_1.72x,_TRUE_multiplier_style!_So_this_bonus_will_never_be_additive!"
         },
         {
           "index": 71,
-          "text": "Further_increases_your_Research_AFK_Gains_rate_by_+2.9%,_in_your_unending_quest_for_100%"
+          "text": "Further_increases_your_Research_AFK_Gains_rate_by_+3%,_in_your_unending_quest_for_100%"
         },
         {
           "index": 72,
-          "text": "Gives_+4_Kaleidoscopes_to_use_for_Observations!_Also,_+28.8%_Kaleidoscope_effect!"
+          "text": "Gives_+4_Kaleidoscopes_to_use_for_Observations!_Also,_+29.9%_Kaleidoscope_effect!"
         },
         {
           "index": 86,
-          "text": "Unlocks_new_dreams_to_complete_at_the_Equinox_Valley_in_World_3!_@_Also_boosts_Equinox_Bar_Fill_Rate_by_1.25x"
+          "text": "Unlocks_new_dreams_to_complete_at_the_Equinox_Valley_in_World_3!_@_Also_boosts_Equinox_Bar_Fill_Rate_by_1.26x"
         },
         {
           "index": 87,
-          "text": "Unlocks_the_Zuperbits_page_of_Superbits_in_Gaming!_Yea,_you_ain't_done_with_those_just_yet!_Also_gives_7.00x_Gaming_Bit_Multi!"
+          "text": "Unlocks_the_Zuperbits_page_of_Superbits_in_Gaming!_Yea,_you_ain't_done_with_those_just_yet!_Also_gives_7.24x_Gaming_Bit_Multi!"
         },
         {
           "index": 88,
-          "text": "Unlocks_the_Sticker_mechanic_for_Farming!_Also,_boosts_Megacrop_growth_chance_by_1.75x"
+          "text": "Unlocks_the_Sticker_mechanic_for_Farming!_Also,_boosts_Megacrop_growth_chance_by_1.78x"
         },
         {
           "index": 89,
-          "text": "Unlocks_the_Tiny_Cog_board,_and_generates_a_single_Tiny_Cog_per_day!_Also_boosts_Flaggy_Rate_by_10.00x"
+          "text": "Unlocks_the_Tiny_Cog_board,_and_generates_a_single_Tiny_Cog_per_day!_Also_boosts_Flaggy_Rate_by_10.36x"
         },
         {
           "index": 90,
-          "text": "Gives_you_+4_more_Daily_Rolls_for_getting_new_Observations!_Also,_+5.8%_Research_EXP_gain!"
+          "text": "Gives_you_+4_more_Daily_Rolls_for_getting_new_Observations!_Also,_+6%_Research_EXP_gain!"
         },
         {
           "index": 91,
-          "text": "Gives_+4_Optical_Monocles_to_use_for_Observations!_Also_+5.8%_Insight_EXP_gain,_to_level_up_your_Observations_faster_with!"
+          "text": "Gives_+4_Optical_Monocles_to_use_for_Observations!_Also_+6%_Insight_EXP_gain,_to_level_up_your_Observations_faster_with!"
         },
         {
           "index": 92,
-          "text": "Taking_only_what_you_need_from_it,_your_Optical_Monocles_generate_+71.9%_more_Insight!"
+          "text": "Taking_only_what_you_need_from_it,_your_Optical_Monocles_generate_+74.8%_more_Insight!"
         },
         {
           "index": 93,
-          "text": "Psst..._you_forgot_to_give_Observation_LV_a_purpose_while_helping_Lava_research_new_content!_How_about_you_do..._Observations_give_1.19x_more_EXP_per_LV!"
+          "text": "Psst..._you_forgot_to_give_Observation_LV_a_purpose_while_helping_Lava_research_new_content!_How_about_you_do..._Observations_give_1.20x_more_EXP_per_LV!"
         },
         {
           "index": 94,
-          "text": "Design_problem,_why_would_players_level_up_old_Observations?_How_about..._+6.3%_Research_EXP_per_TOTAL_Observation_LV!_@_Total_Bonus:1,169%"
+          "text": "Design_problem,_why_would_players_level_up_old_Observations?_How_about..._+6.5%_Research_EXP_per_TOTAL_Observation_LV!_@_Total_Bonus:1,229%"
         },
         {
           "index": 105,
@@ -2176,39 +2198,39 @@
         },
         {
           "index": 106,
-          "text": "Unlocks_a_new_island_in_Sailing,_THE_MAW!_@_Also,_2.25x_Artifact_Find_Chance._You'll_need_it."
+          "text": "Unlocks_a_new_island_in_Sailing,_THE_MAW!_@_Also,_2.30x_Artifact_Find_Chance._You'll_need_it."
         },
         {
           "index": 107,
-          "text": "+3.8%_Palette_Luck_for_every_King_Rat_Crown_you_reclaim._@_Total_Bonus:94%"
+          "text": "+3.9%_Palette_Luck_for_every_King_Rat_Crown_you_reclaim._@_Total_Bonus:98%"
         },
         {
           "index": 108,
-          "text": "You_can_now_buy_the_Rat_King_from_the_Import_Shop_in_Gaming!_Also,_+62.5%_King_Tokens_per_hour!"
+          "text": "You_can_now_buy_the_Rat_King_from_the_Import_Shop_in_Gaming!_Also,_+65%_King_Tokens_per_hour!"
         },
         {
           "index": 109,
-          "text": "Unlocks_Transcendent_Sailing_Artifacts_tier,_and_boosts_Artifact_Find_Chance_by_a_smol_+31.3%"
+          "text": "Unlocks_Transcendent_Sailing_Artifacts_tier,_and_boosts_Artifact_Find_Chance_by_a_smol_+32.5%"
         },
         {
           "index": 110,
-          "text": "Boosts_Research_EXP_gain_by_+144%_@_You'll_be_filling_out_this_Grid_in_no_time_at_all!"
+          "text": "Boosts_Research_EXP_gain_by_+150%_@_You'll_be_filling_out_this_Grid_in_no_time_at_all!"
         },
         {
           "index": 111,
-          "text": "+14.4%_Research_AFK_Gains._This_affects_OFFLINE_gains_for_Research,_Minehead,_Insight..._everything_Research_related!"
+          "text": "+15%_Research_AFK_Gains._This_affects_OFFLINE_gains_for_Research,_Minehead,_Insight..._everything_Research_related!"
         },
         {
           "index": 112,
-          "text": "+7.2%_Research_EXP_gain_per_Observation_found!_@_Total_Bonus:+216%"
+          "text": "+7.5%_Research_EXP_gain_per_Observation_found!_@_Total_Bonus:+224%"
         },
         {
           "index": 125,
-          "text": "All_button_bonuses_are_+18.8%_bigger,_which_is_ballin'_since_all_button_upgrades_sans_Class_EXP_are_multiplicative!"
+          "text": "All_button_bonuses_are_+19.5%_bigger,_which_is_ballin'_since_all_button_upgrades_sans_Class_EXP_are_multiplicative!"
         },
         {
           "index": 126,
-          "text": "Every_week,_you_get_+1_Insta_uses_for_The_Button_on_the_Mantaray_map,_which_let_you_skip_the_current_demand._@_Also,_+3.8%_chance_for_+1_use_every_day"
+          "text": "Every_week,_you_get_+1_Insta_uses_for_The_Button_on_the_Mantaray_map,_which_let_you_skip_the_current_demand._@_Also,_+3.9%_chance_for_+1_use_every_day"
         },
         {
           "index": 127,
@@ -2220,7 +2242,7 @@
         },
         {
           "index": 129,
-          "text": "You_can_now_speak_to_Mr_Minehead_and_play_his_Depth_Charge_game!_Also,_+15_base_Minehead_Currency/hr"
+          "text": "You_can_now_speak_to_Mr_Minehead_and_play_his_Depth_Charge_game!_Also,_+15.6_base_Minehead_Currency/hr"
         },
         {
           "index": 130,
@@ -2236,15 +2258,15 @@
         },
         {
           "index": 146,
-          "text": "Your_Minehead_Damage_is_boosted_by_+12.5%_for_every_tile_revealed_in_a_single_turn._This_resets_at_the_start_of_every_turn."
+          "text": "Your_Minehead_Damage_is_boosted_by_+13%_for_every_tile_revealed_in_a_single_turn._This_resets_at_the_start_of_every_turn."
         },
         {
           "index": 147,
-          "text": "Gives_you_+1_more_tries_every_day_at_Mr_Minehead's_Depth_Charge!_Also,_+31.3%_Minehead_Currency/hr"
+          "text": "Gives_you_+1_more_tries_every_day_at_Mr_Minehead's_Depth_Charge!_Also,_+32.5%_Minehead_Currency/hr"
         },
         {
           "index": 148,
-          "text": "Multiplies_Minehead_Currency/hr_by_1.31x"
+          "text": "Multiplies_Minehead_Currency/hr_by_1.33x"
         },
         {
           "index": 149,
@@ -2252,23 +2274,31 @@
         },
         {
           "index": 150,
-          "text": "Reduces_the_cost_of_all_OG_Masterclass_upgrades_(DB,_WW,_AC)_by_30%_every_day,_FOREVER!_Total_Reduction:-97.83%"
+          "text": "Reduces_the_cost_of_all_OG_Masterclass_upgrades_(DB,_WW,_AC)_by_31.2%_every_day,_FOREVER!_Total_Reduction:-97.85%"
         },
         {
           "index": 151,
-          "text": "Boosts_Spelunking_POW_by_+75%_every_day,_FOREVER!_@_Total_Boost:114.08x_POW"
+          "text": "Boosts_Spelunking_POW_by_+78%_every_day,_FOREVER!_@_Total_Boost:114.83x_POW"
         },
         {
           "index": 152,
           "text": "Raises_the_Max_LV_of_certain_Green_Legend_Talents_by_+1._Also,_1.08x_Class_EXP_gain!"
         },
         {
+          "index": 164,
+          "text": "Unlocks_+0_more_Missions_for_the_Luminous_Menagerie,_so_you_can_claim_more_shells_and_rank_up!_@_Also,_+0%_hourly_Lumi_Gains"
+        },
+        {
+          "index": 165,
+          "text": "Adds_a_baby_menagerie_jellyfish_here_in_town_for_quick_access_to_the_Luminous_Menagerie!_@_Also_boosts_hourly_Lumi_Gains_by_1.07x"
+        },
+        {
           "index": 166,
-          "text": "If_your_1st_click_is_on_a_depth_charge,_50%_chance_it_wiggles_and_doesn't_count!_Happens_up_to_1_times_per_game._@_Also,_+18.8%_Minehead_Currency_gain!"
+          "text": "If_your_1st_click_is_on_a_depth_charge,_50%_chance_it_wiggles_and_doesn't_count!_Happens_up_to_1_times_per_game._@_Also,_+19.5%_Minehead_Currency_gain!"
         },
         {
           "index": 167,
-          "text": "Multiplies_all_damage_you_deal_in_Mr_Minehead's_Depth_Charge_by_1.19x"
+          "text": "Multiplies_all_damage_you_deal_in_Mr_Minehead's_Depth_Charge_by_1.20x"
         },
         {
           "index": 168,
@@ -2276,7 +2306,7 @@
         },
         {
           "index": 169,
-          "text": "Some_of_Glimbo's_trades_give_+1_additional_LVs!_This_works_retroactively._Also,_1.15x_Coin_gain"
+          "text": "Some_of_Glimbo's_trades_give_+1_additional_LVs!_This_works_retroactively._Also,_1.16x_Coin_gain"
         },
         {
           "index": 170,
@@ -2284,19 +2314,19 @@
         },
         {
           "index": 171,
-          "text": "Increases_the_Max_LV_of_all_Day_and_Night_Market_upgrades_by_+75"
+          "text": "Increases_the_Max_LV_of_all_Day_and_Night_Market_upgrades_by_+78"
         },
         {
           "index": 172,
-          "text": "The_first_MISC_Bonus_on_your_Attire_Equipment_(i.e._Clothing)_gives_1.38x_more_bonus!"
+          "text": "The_first_MISC_Bonus_on_your_Attire_Equipment_(i.e._Clothing)_gives_1.39x_more_bonus!"
         },
         {
           "index": 173,
-          "text": "Arctis_nods_in_approval..._all_Research_Grid_bonuses_are_1.05x_higher._Also,_+31.3%_Drop_Rate."
+          "text": "Arctis_nods_in_approval..._all_Research_Grid_bonuses_are_1.05x_higher._Also,_+32.5%_Drop_Rate."
         },
         {
           "index": 185,
-          "text": "Multiplies_all_damage_dealt_by_your_cells_during_operations_by_1.06x_@_A_true_operator_must_consider_the_indirect_bloodcell_gain..."
+          "text": "Multiplies_all_damage_dealt_by_your_cells_during_operations_by_1.07x_@_A_true_operator_must_consider_the_indirect_bloodcell_gain..."
         },
         {
           "index": 186,
@@ -2304,33 +2334,33 @@
         },
         {
           "index": 187,
-          "text": "You_can_now_speak_to_the_Jelly_found_in_the_Jellofish_map_to_play_the_Jelly_Operator_game!_@_Also,_1.38x_more_Bloodcells_gained_from_operations!"
+          "text": "You_can_now_speak_to_the_Jelly_found_in_the_Jellofish_map_to_play_the_Jelly_Operator_game!_@_Also,_1.39x_more_Bloodcells_gained_from_operations!"
         },
         {
           "index": 188,
-          "text": "Every_day,_you_get_another_+2_extra_uses_for_ALL_your_shakers_at_the_Sushi_Station!_@_And_+2.5%_chance_for_free_use_when_using_Shakers!"
+          "text": "Every_day,_you_get_another_+2_extra_uses_for_ALL_your_shakers_at_the_Sushi_Station!_@_And_+2.6%_chance_for_free_use_when_using_Shakers!"
         },
         {
           "index": 189,
-          "text": "You_can_now_speak_to_the_knife_found_in_the_map_past_Glimbo_to_play_the_Sushi_Station_game!_@_Also,_1.75x_more_Bucks_gained_from_your_Sushi!"
+          "text": "You_can_now_speak_to_the_knife_found_in_the_map_past_Glimbo_to_play_the_Sushi_Station_game!_@_Also,_1.78x_more_Bucks_gained_from_your_Sushi!"
         },
         {
           "index": 190,
-          "text": "Multiplies_your_EXP_gain_for_Cooking_Mastery,_a_feature_unlocked_at_Rift_61,_by_a_massive_4.75x_@_Also_gives_+4_Yellow_PTS_to_spend_on_Meals!"
+          "text": "Multiplies_your_EXP_gain_for_Cooking_Mastery,_a_feature_unlocked_at_Rift_61,_by_a_massive_4.90x_@_Also_gives_+4_Yellow_PTS_to_spend_on_Meals!"
         },
         {
           "index": 191,
-          "text": "Regal_Mobs_now_have_a_50%_chance_to_give_+3_kills_for_your_Royal_Guardian's_Orb_of_Virisimilitude_instead_of_simply_+2_kills"
+          "text": "Regal_Mobs_now_have_a_52%_chance_to_give_+3_kills_for_your_Royal_Guardian's_Orb_of_Virisimilitude_instead_of_simply_+2_kills"
         }
       ]
     },
     "accumulated_reduction_percent": {
       "expression": "Math.floor(1e4*(1-1/(1+Number(idleon.getAttr(\"OptionsListAccount\")[499])/100)))/100",
-      "result": 97.83
+      "result": 97.85
     },
     "masterclass_cost_multiplier": {
       "expression": "1/(1+Number(idleon.getAttr(\"OptionsListAccount\")[499])/100)",
-      "result": 0.021630039799273186
+      "result": 0.021490587122840153
     },
     "pairing_after": {
       "expression": "(() => { const research = idleon.getAttr(\"Research\"); return { levels: research[0], owners: research[1], placements: research[6], found: research[2], insightLevels: research[4], crowns: research[11], trades: research[12], researchLevel: Number(idleon.getAttr(\"Lv0\")[20]), artifactStatus: Number(idleon.getAttr(\"Sailing\")[3][37]), researchMerit: Number(idleon.getAttr(\"Tasks\")[2][6][3]), rift: idleon.getAttr(\"Rift\"), accumulatedReduction: Number(idleon.getAttr(\"OptionsListAccount\")[499]), spelunkingReduction: Number(idleon.getAttr(\"OptionsListAccount\")[500]) }; })()",
@@ -2501,7 +2531,7 @@
           0,
           0,
           0,
-          0,
+          1,
           1,
           1,
           1,
@@ -3011,7 +3041,7 @@
           3,
           3,
           8,
-          0,
+          2,
           0,
           0,
           0,
@@ -3153,8 +3183,8 @@
           0,
           0
         ],
-        "accumulatedReduction": 4523.20000000001,
-        "spelunkingReduction": 11308
+        "accumulatedReduction": 4553.20000000001,
+        "spelunkingReduction": 11383
       }
     }
   },

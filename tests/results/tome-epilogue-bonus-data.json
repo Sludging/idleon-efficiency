@@ -2,43 +2,43 @@
   "extractions": {
     "lore_epic_bonus_0": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 0, 0)",
-      "result": 631.4481367142912
+      "result": 631.7850843751136
     },
     "lore_epic_bonus_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 1, 0)",
-      "result": 232.06877286462168
+      "result": 232.1676213243579
     },
     "lore_epic_bonus_2": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 2, 0)",
-      "result": 1133.5098979263942
+      "result": 1134.091141127495
     },
     "lore_epic_bonus_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 3, 0)",
-      "result": 153.350397818109
+      "result": 153.42057032987418
     },
     "lore_epic_bonus_4": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 4, 0)",
-      "result": 571.3973746073606
+      "result": 571.8344479390266
     },
     "lore_epic_bonus_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 5, 0)",
-      "result": 291.8741967294394
+      "result": 292.06737923343155
     },
     "lore_epic_bonus_6": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 6, 0)",
-      "result": 911.3875730184781
+      "result": 911.8371054014087
     },
     "lore_epic_bonus_7": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 7, 0)",
-      "result": 28.346052683324945
+      "result": 28.368876757021038
     },
     "lore_epic_bonus_8": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 8, 0)",
-      "result": 334.17544344010867
+      "result": 334.34027198051655
     },
     "lore_epic_bonus_9": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 9, 0)",
-      "result": 140.5606622247346
+      "result": 140.6800041330984
     },
     "lore_epic_bonus_10": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 10, 0)",

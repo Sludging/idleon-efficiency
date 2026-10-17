@@ -18,7 +18,7 @@
     },
     "royal_armory_purchase_price_display_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 1, 0)",
-      "result": 26861053.75433535
+      "result": 55923417.940763004
     },
     "royal_armory_purchase_price_display_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 0, 0)",
@@ -26,7 +26,7 @@
     },
     "royal_armory_purchase_price_display_24": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 24, 0)",
-      "result": 14566764.752496313
+      "result": 36416911.881240785
     },
     "royal_armory_purchase_price_display_30": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 30, 0)",
@@ -51,15 +51,15 @@
     "royal_armory_purchase_context": {
       "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const lists = idleon.getAttr(\"CustomLists\").h; const royalG = idleon.getAttr(\"RoyalG\"); return { unlockedCount: idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0), rows: [1, 0, 24, 30].map(d => { const k = 0 | asNumber(lists.Research[43][d]); const r = Math.round(asNumber(lists.ArmoryUpg[d][3])); return { displayIndex: d, catalogIndex: k, purchaseResourceType: r, catalogResourceType: asNumber(lists.ArmoryUpg[k][3]), rawQuantity: asNumber(royalG[1][r]), level: asNumber(royalG[2][k]), maxLevel: asNumber(lists.ArmoryUpg[k][4]) }; }) }; })()",
       "result": {
-        "unlockedCount": 36,
+        "unlockedCount": 37,
         "rows": [
           {
             "displayIndex": 1,
             "catalogIndex": 46,
             "purchaseResourceType": 0,
             "catalogResourceType": 22,
-            "rawQuantity": 46418944.6511968,
-            "level": 126,
+            "rawQuantity": 128680827.17637691,
+            "level": 132,
             "maxLevel": 200
           },
           {
@@ -67,7 +67,7 @@
             "catalogIndex": 30,
             "purchaseResourceType": 0,
             "catalogResourceType": 14,
-            "rawQuantity": 46418944.6511968,
+            "rawQuantity": 128680827.17637691,
             "level": 1,
             "maxLevel": 1
           },
@@ -76,16 +76,16 @@
             "catalogIndex": 80,
             "purchaseResourceType": 11,
             "catalogResourceType": 9,
-            "rawQuantity": 6769485.000198439,
-            "level": 6,
+            "rawQuantity": 13442398.336422728,
+            "level": 7,
             "maxLevel": 100
           },
           {
             "displayIndex": 30,
             "catalogIndex": 50,
             "purchaseResourceType": 14,
-            "catalogResourceType": 23,
-            "rawQuantity": 7998482.484593188,
+            "catalogResourceType": 24,
+            "rawQuantity": 29113589.639797878,
             "level": 8,
             "maxLevel": 100
           }

@@ -18,7 +18,7 @@
     },
     "spelunk_power_button_6": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Minehead(\"Button_Bonuses\", 6, 0)",
-      "result": 83.125
+      "result": 83.64999999999999
     },
     "spelunk_power_chapter_1_2": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\", 1, 2)",
@@ -38,7 +38,7 @@
     },
     "spelunk_power_upgrade_0": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ShopUpgBonus\", 0, 0)",
-      "result": 453250
+      "result": 483175
     },
     "spelunk_power_upgrade_1": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ShopUpgBonus\", 1, 0)",
@@ -54,15 +54,15 @@
     },
     "spelunk_power_upgrade_14": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ShopUpgBonus\", 14, 0)",
-      "result": 782
+      "result": 844
     },
     "spelunk_power_upgrade_15": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ShopUpgBonus\", 15, 0)",
-      "result": 1055
+      "result": 1175
     },
     "spelunk_power_upgrade_16": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ShopUpgBonus\", 16, 0)",
-      "result": 1500
+      "result": 1610
     },
     "spelunk_power_upgrade_17": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ShopUpgBonus\", 17, 0)",
@@ -70,7 +70,7 @@
     },
     "spelunk_power_upgrade_46": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ShopUpgBonus\", 46, 0)",
-      "result": 484
+      "result": 506
     },
     "spelunk_power_upgrade_54": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ShopUpgBonus\", 54, 0)",
@@ -82,7 +82,7 @@
     },
     "spelunk_power_crop_scientist_8": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_FarmingStuffs(\"CropSCbonus\", 8, 0)",
-      "result": 184.09077817213839
+      "result": 200.8263034605146
     },
     "spelunk_power_msa_9": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_GamingStatType(\"MSA_Bonus\", 9, 0)",
@@ -110,7 +110,7 @@
     },
     "spelunk_power_slab_6": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Sailing(\"SlabboBonus\", 6, 0)",
-      "result": 495.4731599999999
+      "result": 502.75952999999987
     }
   },
   "errors": {}

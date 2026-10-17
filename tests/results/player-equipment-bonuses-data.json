@@ -2,19 +2,19 @@
   "extractions": {
     "equipment_bonus_48": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"48\")",
-      "result": 81.04927952733921
+      "result": 78.0492795273392
     },
     "equipment_bonus_2": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"2\")",
-      "result": 3361.190883191181
+      "result": 3212.1908831911805
     },
     "equipment_bonus_3": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"3\")",
-      "result": 94.78847454062378
+      "result": 93.98847454062378
     },
     "equipment_bonus_45": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"45\")",
-      "result": 172.51936404139383
+      "result": 164.3193640413938
     },
     "equipment_bonus_32": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"32\")",
@@ -34,15 +34,15 @@
     },
     "equipment_research_172": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 172, 0)",
-      "result": 37.5
+      "result": 39
     },
     "gallery_trophy_skill_efficiency": {
       "expression": "idleon.getDNSM(\"GalleryTrophyBonTOT\").h[\"%_SKILL_EFFICIENCY\"]",
-      "result": 62.01927952733921
+      "result": 59.019279527339194
     },
     "gallery_nametag_drop_rate": {
       "expression": "idleon.getDNSM(\"GalleryNametagBonTOT\").h[\"%_DROP_RATE\"]",
-      "result": 311.13005229548503
+      "result": 296.08005229548496
     },
     "hat_rack_skill_efficiency": {
       "expression": "idleon.getDNSM(\"PremHatBonTOT\").h[\"%_SKILL_EFFICIENCY\"]",
@@ -52,38 +52,38 @@
       "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.TotalStatsETCmap.h",
       "result": {
         "0": 0,
-        "%_ALL_AFK_GAIN": 322.58378142987095,
-        "%_CLASS_EXP_MULTI": 277.92201246678854,
+        "%_ALL_AFK_GAIN": 314.73378142987093,
+        "%_CLASS_EXP_MULTI": 272.42201246678854,
         "%_DAMAGE_BONUS": 30,
         "%_MOB_RESPAWN": 40,
         "%_ALL_STATS": 36.65,
-        "%_DAMAGE_MULTI": 333.1502535421638,
-        "%_DROP_RATE": 3361.190883191181,
+        "%_DAMAGE_MULTI": 317.55025354216383,
+        "%_DROP_RATE": 3212.1908831911805,
         "%_MINING_EFFICINCY": 35,
         "%_CHOP_EFFICIENCY": 5,
-        "%_MONEY": 94.78847454062378,
+        "%_MONEY": 93.98847454062378,
         "%_FISHIN_EFFICINCY": 5,
         "%_CATCH_EFFICINCY": 5,
-        "%_TOTAL_DAMAGE": 172.51936404139383,
-        "%_XP_FROM_MONSTERS": 210.26642985526564,
-        "Weapon_Power": 239.25286816193673,
-        "STR": 632.7919733838658,
-        "AGI": 687.9781597354252,
-        "WIS": 612.118880208086,
-        "LUK": 1194.0447264002307,
-        "Defence": 1191.204701046014,
-        "%_LUK": 16.745205472381585,
-        "%_SKILL_EXP": 392.8974038700903,
-        "%_SKILL_AFK_GAIN": 41.75964821507507,
-        "%_SKILL_EFFICIENCY": 81.04927952733921,
-        "%_AFK_GAINS_MULTI": 74.08582611522907,
-        "%_BOSS_DAMAGE": 37.21156771640352,
-        "%_AGI": 15.504819881834802,
-        "%_MULTIKILL_PER_TIER": 33.07694908124758,
-        "%_MINING_XP_GAIN": 51.68273293944934,
-        "%_DROP_RATE_MULTI": 116.48739383163259,
-        "%_FIGHT_AFK_GAIN": 23.153864356873303,
-        "%_KILLS_IN_WORLD_7": 51.68273293944934,
+        "%_TOTAL_DAMAGE": 164.3193640413938,
+        "%_XP_FROM_MONSTERS": 205.11642985526566,
+        "Weapon_Power": 228.4328681619367,
+        "STR": 606.0319733838658,
+        "AGI": 659.2181597354252,
+        "WIS": 586.358880208086,
+        "LUK": 1139.8847264002306,
+        "Defence": 1138.604701046014,
+        "%_LUK": 15.935205472381584,
+        "%_SKILL_EXP": 375.1474038700903,
+        "%_SKILL_AFK_GAIN": 39.739648215075064,
+        "%_SKILL_EFFICIENCY": 78.0492795273392,
+        "%_AFK_GAINS_MULTI": 70.58582611522907,
+        "%_BOSS_DAMAGE": 35.41156771640352,
+        "%_AGI": 14.7548198818348,
+        "%_MULTIKILL_PER_TIER": 31.47694908124757,
+        "%_MINING_XP_GAIN": 49.18273293944933,
+        "%_DROP_RATE_MULTI": 111.18739383163259,
+        "%_FIGHT_AFK_GAIN": 22.033864356873302,
+        "%_KILLS_IN_WORLD_7": 49.18273293944933,
         "%_MULTIKILL": 25.95,
         "%_BONUS_MONEY": 43.25,
         "%_DIVINITY_EXP": 25.95,
@@ -98,44 +98,44 @@
       "expression": "({trophy: idleon.engine.getGameAttribute(\"DNSM\").h.GalleryTrophyBonTOT.h, nametag: idleon.engine.getGameAttribute(\"DNSM\").h.GalleryNametagBonTOT.h, hat: idleon.engine.getGameAttribute(\"DNSM\").h.PremHatBonTOT.h})",
       "result": {
         "trophy": {
-          "%_XP_FROM_MONSTERS": 106.46642985526563,
-          "Weapon_Power": 119.49047855600686,
-          "STR": 371.28875343700406,
-          "AGI": 433.3080329643433,
-          "WIS": 371.28875343700406,
-          "LUK": 657.6110939215534,
-          "Defence": 720.4572971759238,
-          "%_LUK": 16.745205472381585,
-          "%_SKILL_EXP": 335.9377641064207,
-          "%_DROP_RATE": 2769.1608308956957,
-          "%_TOTAL_DAMAGE": 169.51936404139383,
-          "%_SKILL_AFK_GAIN": 12.403855905467841,
-          "%_SKILL_EFFICIENCY": 62.01927952733921,
-          "%_DAMAGE_MULTI": 93.0289192910088,
-          "%_AFK_GAINS_MULTI": 31.009639763669604,
-          "%_BOSS_DAMAGE": 37.21156771640352,
-          "%_AGI": 15.504819881834802
+          "%_XP_FROM_MONSTERS": 101.31642985526564,
+          "Weapon_Power": 113.71047855600686,
+          "STR": 353.328753437004,
+          "AGI": 412.34803296434325,
+          "WIS": 353.328753437004,
+          "LUK": 625.8010939215534,
+          "Defence": 685.6072971759237,
+          "%_LUK": 15.935205472381584,
+          "%_SKILL_EXP": 319.6877641064207,
+          "%_DROP_RATE": 2635.2108308956954,
+          "%_TOTAL_DAMAGE": 161.3193640413938,
+          "%_SKILL_AFK_GAIN": 11.80385590546784,
+          "%_SKILL_EFFICIENCY": 59.019279527339194,
+          "%_DAMAGE_MULTI": 88.5289192910088,
+          "%_AFK_GAINS_MULTI": 29.5096397636696,
+          "%_BOSS_DAMAGE": 35.41156771640352,
+          "%_AGI": 14.7548198818348
         },
         "nametag": {
-          "%_DROP_RATE": 311.13005229548503,
-          "Weapon_Power": 104.19238960592988,
-          "STR": 181.92321994686168,
-          "AGI": 161.2501267710819,
-          "WIS": 161.2501267710819,
-          "LUK": 462.0436324786771,
-          "Defence": 366.9474038700903,
-          "%_MULTIKILL_PER_TIER": 33.07694908124758,
-          "%_SKILL_EXP": 31.009639763669604,
-          "%_MINING_XP_GAIN": 51.68273293944934,
-          "%_SKILL_AFK_GAIN": 29.355792309607224,
-          "%_ALL_AFK_GAIN": 162.2837814298709,
-          "%_DAMAGE_MULTI": 229.47133425115504,
-          "%_DROP_RATE_MULTI": 109.56739383163259,
-          "%_MONEY": 16.53847454062379,
-          "%_FIGHT_AFK_GAIN": 23.153864356873303,
-          "%_AFK_GAINS_MULTI": 41.34618635155947,
-          "%_KILLS_IN_WORLD_7": 51.68273293944934,
-          "%_CLASS_EXP_MULTI": 113.70201246678855
+          "%_DROP_RATE": 296.08005229548496,
+          "Weapon_Power": 99.15238960592986,
+          "STR": 173.12321994686167,
+          "AGI": 153.45012677108193,
+          "WIS": 153.45012677108193,
+          "LUK": 439.6936324786771,
+          "Defence": 349.1974038700903,
+          "%_MULTIKILL_PER_TIER": 31.47694908124757,
+          "%_SKILL_EXP": 29.509639763669597,
+          "%_MINING_XP_GAIN": 49.18273293944933,
+          "%_SKILL_AFK_GAIN": 27.935792309607223,
+          "%_ALL_AFK_GAIN": 154.4337814298709,
+          "%_DAMAGE_MULTI": 218.37133425115505,
+          "%_DROP_RATE_MULTI": 104.26739383163259,
+          "%_MONEY": 15.738474540623786,
+          "%_FIGHT_AFK_GAIN": 22.033864356873302,
+          "%_AFK_GAINS_MULTI": 39.34618635155947,
+          "%_KILLS_IN_WORLD_7": 49.18273293944933,
+          "%_CLASS_EXP_MULTI": 108.20201246678853
         },
         "hat": {
           "Weapon_Power": 15.569999999999999,

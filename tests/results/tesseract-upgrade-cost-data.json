@@ -2,17 +2,17 @@
   "extractions": {
     "tesseract_upgrade_cost_0": {
       "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgCost\", 0, 0)",
-      "result": 2024241540931.2102
+      "result": 2011190899173.2942
     },
     "tesseract_upgrade_cost_49": {
       "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgCost\", 49, 0)",
-      "result": 55333839924162.125
+      "result": 54977092911842.68
     },
     "tesseract_upgrade_cost_57": {
       "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgCost\", 57, 0)",
       "result": {
         "type": "large_number",
-        "value": "360896671480393660"
+        "value": "358569907072156000"
       }
     },
     "tesseract_silver_discount_bonus_49": {
@@ -25,7 +25,7 @@
     },
     "tesseract_first_three_cost_multiplier": {
       "expression": "idleon.callFunction(\"Summoning\", \"First3MC_CostRedux\", 0, 0)",
-      "result": 0.021630039799273186
+      "result": 0.021490587122840153
     }
   },
   "errors": {}
