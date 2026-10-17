@@ -133,6 +133,14 @@ export const initAtomColliderRepo = () => {
                 "baseCost": 1500000,
                 "bonusPerLv": 1,
                 "desc": "Boosts your Jelly Operator Bloodcell gain by +{%! Can you guess whether this is a new multiplier? I'll give you a hint, it's always relevant..."
+            }),
+        new AtomColliderBase(16, <AtomColliderModel>{
+                "name": "Chlorine - Lumi Gainer",
+                "growthFactor": 5000000,
+                "baseExponent": 1.65,
+                "baseCost": 10000000,
+                "bonusPerLv": 2,
+                "desc": "Boosts your hourly Lumi Gain over at the Luminous Menagerie by +{%! This is NOT a new multiplier, you'll have to live with an additive atom bonus, womp womp."
             })    
 ]
 }

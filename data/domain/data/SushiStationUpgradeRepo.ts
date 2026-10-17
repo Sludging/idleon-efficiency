@@ -364,7 +364,7 @@ export const initSushiStationUpgradeRepo = () => {
                 "costExponent": 2,
                 "bonusPerLevel": 1,
                 "costMultiplier": 0,
-                "description": "When a sushi is created, it instantly generates { minute's worth of Bucks!"
+                "description": "When a sushi is created, it instantly generates { minutes worth of Bucks based on its tier!"
             }),
         new SushiStationUpgradeBase(36, <SushiStationUpgradeModel>{
                 "index": 36,

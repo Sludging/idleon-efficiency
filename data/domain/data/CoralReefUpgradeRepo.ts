@@ -22,19 +22,19 @@ export const initCoralReefUpgradeRepo = () => {
                 "x11": 389
             }),
         new CoralReefUpgradeBase(1, <CoralReefUpgradeModel>{
-                "desc": "Orange...",
-                "x0": 1,
-                "x1": 10,
-                "x2": 1.5,
-                "x3": 300,
-                "x4": 332,
-                "x5": 63,
-                "x6": 400,
-                "x7": 300,
+                "desc": "Instantly gives +{ Shells for the Luminous Menagerie!",
+                "x0": 13,
+                "x1": 5000,
+                "x2": 2.7,
+                "x3": 226,
+                "x4": 329,
+                "x5": 55,
+                "x6": 342,
+                "x7": 100,
                 "x8": 20,
-                "x9": 0,
-                "x10": 400,
-                "x11": 400
+                "x9": 38,
+                "x10": 480,
+                "x11": 176
             }),
         new CoralReefUpgradeBase(2, <CoralReefUpgradeModel>{
                 "desc": "Adds a new bonus to your Tome's Epilogue in World 4, which goes up with your Tome Score!",

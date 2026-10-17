@@ -430,13 +430,13 @@ export const initJadeUpgradeRepo = () => {
                 "bonus": "Your Optical Monocles give 1.35x more Insight EXP/hr, and your Kaleidoscopes have a 1.06x larger boost to adjacent magnifiers!"
             }),
         new JadeUpgradeBase(47, <JadeUpgradeModel>{
-                "name": "UNDER CONSTRUCTION",
+                "name": "Menagerie Maxxing",
                 "costA": 500,
                 "costB": 1,
                 "imageId": 47,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates, since this isn't out yet!"
+                "bonus": "You get +1 extra mission in the Luminous Menagerie, as well as a small but noble 1.10x hourly Lumi gains multiplier!"
             }),
         new JadeUpgradeBase(48, <JadeUpgradeModel>{
                 "name": "UNDER CONSTRUCTION",
@@ -448,6 +448,24 @@ export const initJadeUpgradeRepo = () => {
                 "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates, I made myself clear before!"
             }),
         new JadeUpgradeBase(49, <JadeUpgradeModel>{
+                "name": "UNDER CONSTRUCTION",
+                "costA": 500,
+                "costB": 1,
+                "imageId": 49,
+                "filler1": "filler",
+                "filler2": "filler",
+                "bonus": "This bonus isn't out yet. 'nuff said."
+            }),
+        new JadeUpgradeBase(50, <JadeUpgradeModel>{
+                "name": "UNDER CONSTRUCTION",
+                "costA": 500,
+                "costB": 1,
+                "imageId": 49,
+                "filler1": "filler",
+                "filler2": "filler",
+                "bonus": "This bonus isn't out yet. 'nuff said."
+            }),
+        new JadeUpgradeBase(51, <JadeUpgradeModel>{
                 "name": "UNDER CONSTRUCTION",
                 "costA": 500,
                 "costB": 1,

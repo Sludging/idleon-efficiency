@@ -2602,7 +2602,7 @@ export const initMapDataRepo = () => {
         new MapDataBase(324, <MapDataModel>{
                 "enemy": "w7b10",
                 "world": "Shimmerfin Deep",
-                "map": <MapNameModel>{"intName": "uAquaB10", "name": "fillername", "id": 324},
+                "map": <MapNameModel>{"intName": "uAquaB10", "name": "Molten Edge", "id": 324},
                 "portalRequirements": [1000000000],
                 "x": 729,
                 "y": 213

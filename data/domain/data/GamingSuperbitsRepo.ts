@@ -490,10 +490,10 @@ export const initGamingSuperbitsRepo = () => {
                 "superbitId": 68
             }),
         new GamingSuperbitBase(69, <GamingSuperbitModel>{
-                "description": "You? Buying THIS?? YOU'RE BROOOOKE!!!",
-                "x1": 2,
-                "x2": 150,
-                "name": "Not Happening",
+                "description": "1.25x hourly Lumi Gains for the Menagerie",
+                "x1": 5,
+                "x2": 108,
+                "name": "Lumi Gainz",
                 "superbitId": 69
             }),
         new GamingSuperbitBase(70, <GamingSuperbitModel>{

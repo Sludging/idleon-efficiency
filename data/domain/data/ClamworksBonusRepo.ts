@@ -38,6 +38,43 @@ export const initClamworksBonusRepo = () => {
                 "value": 10,
                 "cost": 1.25
             }),
-        new ClamworksBonusBase(8, <ClamworksBonusModel>{"description": "All upgrades are }x cheaper", "value": 16, "cost": 1.22})    
+        new ClamworksBonusBase(8, <ClamworksBonusModel>{"description": "All upgrades are }x cheaper", "value": 16, "cost": 1.22}),
+        new ClamworksBonusBase(9, <ClamworksBonusModel>{
+                "description": "Active clam kills give +$ @  Scurge EXP, with each Scurge Lv earning green pearls!",
+                "value": 1,
+                "cost": undefined
+            }),
+        new ClamworksBonusBase(10, <ClamworksBonusModel>{
+                "description": "Increases the value of all pearls found by }x",
+                "value": 50,
+                "cost": undefined
+            }),
+        new ClamworksBonusBase(11, <ClamworksBonusModel>{
+                "description": "Reduce your DMG by $x, and get }x more Scurge EXP! (Hold down to reset)",
+                "value": 200,
+                "cost": undefined
+            }),
+        new ClamworksBonusBase(12, <ClamworksBonusModel>{"description": "All pearl upgrades are $% cheaper", "value": 25, "cost": undefined}),
+        new ClamworksBonusBase(13, <ClamworksBonusModel>{"description": "Boost Scurge EXP gain by }x", "value": 150, "cost": undefined}),
+        new ClamworksBonusBase(14, <ClamworksBonusModel>{
+                "description": "Each Upgrade LV on this page lowers cost of the pearl upgrade in the same slot by }x",
+                "value": 10,
+                "cost": undefined
+            }),
+        new ClamworksBonusBase(15, <ClamworksBonusModel>{
+                "description": "Start with $% Scurge EXP instead of 0% every time you level up",
+                "value": 1,
+                "cost": undefined
+            }),
+        new ClamworksBonusBase(16, <ClamworksBonusModel>{
+                "description": "Get a }x Scurge EXP multi for each real player in the map! @ Total Bonus:$x",
+                "value": 10,
+                "cost": undefined
+            }),
+        new ClamworksBonusBase(17, <ClamworksBonusModel>{
+                "description": "Each Scurge LV gives a }x multiplier to Pearl Value",
+                "value": 10,
+                "cost": undefined
+            })    
 ]
 }

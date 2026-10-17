@@ -74,7 +74,7 @@ export const initDreamUpgradeRepo = () => {
             }),
         new DreamUpgradeBase(11, <DreamUpgradeModel>{
                 "name": "Voter Rights",
-                "upgrade": "1% higher Ballot Bonus from the voter slime in World 2 town. This boosts the bonus that players vote for each week!",
+                "upgrade": "1% higher Ballot Bonus from the voter slime in World 2 town! @   @ Total Bonus: % Bonus Ballot Multiplier",
                 "x1": 15,
                 "x2": 1
             }),
