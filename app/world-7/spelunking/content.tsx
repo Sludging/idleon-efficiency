@@ -7,7 +7,7 @@ import TipDisplay from '../../../components/base/TipDisplay';
 import { useShallow } from 'zustand/react/shallow';
 import SpelunkingDisplay, { CollectionStatus } from '../../../components/world-7/spelunking/spelunkingDisplay';
 import { SpelunkingCharacters, SpelunkingJournal, SpelunkingSummary } from '../../../components/world-7/spelunking/spelunkingPart2';
-import { SpelunkingElixirs, SpelunkingPart3Summary, SpelunkingShop } from '../../../components/world-7/spelunking/spelunkingPart3';
+import { SpelunkingElixirs, SpelunkingManicModeDetail, SpelunkingPart3Summary, SpelunkingShop } from '../../../components/world-7/spelunking/spelunkingPart3';
 import type { Player } from '../../../data/domain/player';
 import { Spelunking } from '../../../data/domain/world-7/spelunking';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
@@ -57,7 +57,7 @@ export default function SpelunkingContent() {
     }
 
     return (
-        <Box gap="small" data-spelunking-content>
+        <Box gap="large" data-spelunking-content>
             <Box direction="row" align="center" justify="between">
                 <Heading level="2" size="medium" margin={{ top: 'medium', bottom: 'small' }} style={{ fontWeight: 'normal' }}>Spelunking</Heading>
             </Box>
@@ -66,55 +66,63 @@ export default function SpelunkingContent() {
                     <Text>Spelunking account data is not available.</Text>
                     <Text size="small">Load an account save to view Spelunking data.</Text>
                 </Box>
-            ) : <Box ref={contentRef} gap="small" data-spelunking-tab-content>
-                <SpelunkingSummary spelunking={snapshot.spelunking} players={snapshot.players}>
+            ) : <Box ref={contentRef} gap="large" data-spelunking-tab-content>
+                <SpelunkingSummary
+                    spelunking={snapshot.spelunking}
+                    players={snapshot.players}
+                    manicDetail={<SpelunkingManicModeDetail spelunking={snapshot.spelunking} />}
+                >
                     <SpelunkingPart3Summary spelunking={snapshot.spelunking} />
                 </SpelunkingSummary>
                 <SpelunkingCharacters spelunking={snapshot.spelunking} players={snapshot.players} />
-                <Box data-spelunking-tab-region>
-                    <ContentTabs
-                        options={[
-                            { value: 'Tunnels', label: 'Tunnels' },
-                            { value: 'Journal & Pages', label: 'Journal & Pages' },
-                            { value: 'Shop', label: 'Shop' },
-                            { value: 'Elixirs', label: 'Elixirs' },
-                        ]}
-                        value={tab}
-                        onChange={nextTab => {
-                            const owner = scrollOwner(contentRef.current);
-                            const position = { owner, top: owner.scrollTop };
-                            tabScrollPositions.current.set(tab, position);
-                            pendingScroll.current = tabScrollPositions.current.get(nextTab) ?? position;
-                            setTab(nextTab);
-                        }}
-                    />
-                </Box>
-                <Box style={{ display: tab === 'Tunnels' ? undefined : 'none' }}>
-                    <SpelunkingDisplay
-                        spelunking={snapshot.spelunking}
-                        showLocked={showLocked}
-                        collectionStatus={collectionStatus}
-                        onShowLockedChange={setShowLocked}
-                        onCollectionStatusChange={setCollectionStatus}
-                    />
-                </Box>
-                <Box style={{ display: tab === 'Journal & Pages' ? undefined : 'none' }} gap="small" data-spelunking-journal>
-                    <Box align="end">
-                        <TipDisplay heading="About soft caps" maxWidth="420px" body={
-                            <Box gap="xsmall" data-spelunking-soft-cap-detail>
-                                <Text color="dark-1" size="small">Majority of lore bonuses have soft caps..</Text>
-                            </Box>
-                        }>
-                            <Text size="12px" color="accent-2" data-spelunking-soft-cap-trigger style={{ textDecoration: 'underline dotted' }}>About soft caps</Text>
-                        </TipDisplay>
+                <Box gap="medium" data-spelunking-tab-group>
+                    <Box align="center" data-spelunking-tab-region>
+                        <ContentTabs
+                            options={[
+                                { value: 'Tunnels', label: 'Tunnels' },
+                                { value: 'Journal & Pages', label: 'Journal & Pages' },
+                                { value: 'Shop', label: 'Shop' },
+                                { value: 'Elixirs', label: 'Elixirs' },
+                            ]}
+                            value={tab}
+                            onChange={nextTab => {
+                                const owner = scrollOwner(contentRef.current);
+                                const position = { owner, top: owner.scrollTop };
+                                tabScrollPositions.current.set(tab, position);
+                                pendingScroll.current = tabScrollPositions.current.get(nextTab) ?? position;
+                                setTab(nextTab);
+                            }}
+                        />
                     </Box>
-                    <SpelunkingJournal spelunking={snapshot.spelunking} players={snapshot.players} />
-                </Box>
-                <Box style={{ display: tab === 'Shop' ? undefined : 'none' }}>
-                    <SpelunkingShop spelunking={snapshot.spelunking} />
-                </Box>
-                <Box style={{ display: tab === 'Elixirs' ? undefined : 'none' }}>
-                    <SpelunkingElixirs spelunking={snapshot.spelunking} />
+                    <Box data-spelunking-panels>
+                        <Box style={{ display: tab === 'Tunnels' ? undefined : 'none' }} data-spelunking-tab-panel="Tunnels">
+                            <SpelunkingDisplay
+                                spelunking={snapshot.spelunking}
+                                showLocked={showLocked}
+                                collectionStatus={collectionStatus}
+                                onShowLockedChange={setShowLocked}
+                                onCollectionStatusChange={setCollectionStatus}
+                            />
+                        </Box>
+                        <Box style={{ display: tab === 'Journal & Pages' ? undefined : 'none' }} gap="small" data-spelunking-journal data-spelunking-tab-panel="Journal & Pages">
+                            <Box align="end">
+                                <TipDisplay heading="About soft caps" maxWidth="420px" body={
+                                    <Box gap="xsmall" data-spelunking-soft-cap-detail>
+                                        <Text color="dark-1" size="small">Majority of lore bonuses have soft caps..</Text>
+                                    </Box>
+                                }>
+                                    <Text size="12px" color="accent-2" data-spelunking-soft-cap-trigger style={{ textDecoration: 'underline dotted' }}>About soft caps</Text>
+                                </TipDisplay>
+                            </Box>
+                            <SpelunkingJournal spelunking={snapshot.spelunking} players={snapshot.players} />
+                        </Box>
+                        <Box style={{ display: tab === 'Shop' ? undefined : 'none' }} data-spelunking-tab-panel="Shop">
+                            <SpelunkingShop spelunking={snapshot.spelunking} />
+                        </Box>
+                        <Box style={{ display: tab === 'Elixirs' ? undefined : 'none' }} data-spelunking-tab-panel="Elixirs">
+                            <SpelunkingElixirs spelunking={snapshot.spelunking} />
+                        </Box>
+                    </Box>
                 </Box>
             </Box>}
         </Box>

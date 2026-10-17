@@ -8,7 +8,7 @@ import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 import TipDisplay from "../../base/TipDisplay";
 import { commaNotation, notateNumber } from "../../../data/utility";
 import type { SushiStation, SushiShaker } from "../../../data/domain/world-7/sushi";
-import { SushiCard } from "./SushiCard";
+import RoundedShadowBox from "../../base/RoundedShadowBox";
 import { sushiBucksImage, sushiFuelBalanceImage, sushiFuelCostImage } from "./sushiImages";
 
 const formatPercent = (value: number): string => `${(value * 100).toLocaleString(undefined, { maximumSignificantDigits: 3 })}%`;
@@ -131,7 +131,7 @@ const SushiOverview = ({ station }: { station: SushiStation }) => {
                 {station.shakers.map(shaker => {
                     const effect = shakerEffect(shaker);
                     return (
-                        <SushiCard key={shaker.kind} background="dark-1" pad="medium" gap="small" style={{ opacity: shaker.unlocked ? 1 : 0.55 }}>
+                        <RoundedShadowBox key={shaker.kind} background="dark-1" pad="medium" gap="small" style={{ opacity: shaker.unlocked ? 1 : 0.55 }}>
                             <Box direction="row" wrap gap="small" align="center" justify="between">
                                 <Box direction="row" wrap gap="small" align="center" style={{ minWidth: 0 }}>
                                     <IconImage data={station.getShakerImageData(shaker.kind)} scale={0.8} />
@@ -163,7 +163,7 @@ const SushiOverview = ({ station }: { station: SushiStation }) => {
                                 />
                                 <TextAndLabel label="Bonus fuel" text={bonusFuelChance > 0 ? formatPercent(bonusFuelChance) : "—"} textSize="xsmall" labelSize="xsmall" />
                             </Grid>
-                        </SushiCard>
+                        </RoundedShadowBox>
                     );
                 })}
             </Grid>

@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { notateNumber, toTime } from "../../../data/utility";
 import type { Sushi } from "../../../data/domain/world-7/sushi";
 import IconImage from "../../base/IconImage";
-import { SushiCard } from "./SushiCard";
+import RoundedShadowBox from "../../base/RoundedShadowBox";
 
 export function SushiCollection({ sushi }: { sushi: Sushi[] }) {
     const theme = useContext(ThemeContext);
@@ -31,7 +31,7 @@ export function SushiCollection({ sushi }: { sushi: Sushi[] }) {
                 const isReadyToLevel = experience >= required;
 
                 return (
-                    <SushiCard
+                    <RoundedShadowBox
                         key={entry.index}
                         role="listitem"
                         aria-label={entry.data.name}
@@ -111,7 +111,7 @@ export function SushiCollection({ sushi }: { sushi: Sushi[] }) {
                                 {notateNumber(entry.getPassiveKnowledgeExperiencePerDay(), "Smaller")} EXP/day
                             </Text>
                         </Box>
-                    </SushiCard>
+                    </RoundedShadowBox>
                 );
             })}
         </Box>
