@@ -8,6 +8,8 @@ import { initGamingPaletteRepo } from "../data/GamingPaletteRepo";
 import { initGamingSpeciesRepo } from "../data/GamingSpeciesRepo";
 import { initGamingSuperbitsRepo } from "../data/GamingSuperbitsRepo";
 import { initGamingUpgradeRepo } from "../data/GamingUpgradeRepo";
+import { initRandoList2Repo } from "../data/RandoList2Repo";
+
 import { GamingMetadataModel } from "../model/gamingMetadataModel";
 import { AtomCollider } from "../world-3/construction/atomCollider";
 import { Construction } from "../world-3/construction/construction";
@@ -16,11 +18,14 @@ import { FertilizerUpgrade, Garden, Logbook, MutationProgress, Plant } from "./g
 import { Import } from "./gaming/imports";
 import { PaletteColor, PaletteProgress, Superbit, SuperbitBoard } from "./gaming/palette";
 
+const cglunkoBonusCoefficient = Number(initRandoList2Repo()[13].data.elements[14]);
+
 export class Gaming extends Domain {
     level = 0;
     bits = 0;
     reclaimedCrownCount = 0;
     evolvedPlantCount: number | null = null;
+    cglunkoBonus: number | null = null;
     metadata: GamingMetadataModel = initGamingMetadataRepo()[0].data;
     plants: Plant[] = Plant.fromBase(initGamingSpeciesRepo());
     fertilizer: FertilizerUpgrade[] = FertilizerUpgrade.fromBase(initGamingUpgradeRepo());
@@ -33,11 +38,16 @@ export class Gaming extends Domain {
     logbook = new Logbook(this.plants);
     palette = new PaletteProgress();
 
-    isSuperbitPurchased = (id: number): boolean => this.superbits.find(superbit => superbit.superbitId === id)?.purchased ?? false;
+    isSuperbitPurchased = (id: number): boolean =>
+        this.superbits.find(superbit => superbit.superbitId === id)?.purchased ?? false;
 
     getPaletteBonus = (index: number): number => this.paletteColors.find(color => color.index === index)?.getBonus() ?? 0;
 
     getImport = (id: number): Import | undefined => this.imports.find(importItem => importItem.importId === id);
+
+    getCglunkoBonus(): number | null {
+        return this.cglunkoBonus;
+    }
 
     getRawKeys(): RawData[] {
         return [
@@ -57,6 +67,7 @@ export class Gaming extends Domain {
         this.bits = 0;
         this.reclaimedCrownCount = 0;
         this.evolvedPlantCount = null;
+        this.cglunkoBonus = null;
 
         this.metadata = initGamingMetadataRepo()[0].data;
         this.plants = Plant.fromBase(initGamingSpeciesRepo());
@@ -81,6 +92,10 @@ export class Gaming extends Domain {
         const skillLevels = data.get("Lv0_0") as number[] ?? [];
         gaming.level = Number(skillLevels[SkillsIndex.Gaming] ?? 0);
         gaming.bits = Number(savedGaming[0] ?? 0);
+        const savedAccountOptions = data.get("OptLacc") as number[] | null;
+        const cglunkoUpgradeLevel = savedAccountOptions?.[644];
+        gaming.cglunkoBonus = cglunkoUpgradeLevel == null ? null
+            : Number(cglunkoUpgradeLevel) * cglunkoBonusCoefficient;
         const savedSprouts = data.get("GamingSprout") as unknown[][] | undefined;
         // The game reads this account-wide cell directly for Button task 40.
         const evolvedPlantCount = savedSprouts?.[28]?.[1];

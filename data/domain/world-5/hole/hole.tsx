@@ -102,7 +102,7 @@ const holeResearchExpUpgradeBasePercent = 1;
 
 
 export class Wish {
- wishCount: number = 0;
+ wishCount: number | null = null;
 
  constructor(public index: number, public data: LampWishModel) { }
 
@@ -1120,71 +1120,184 @@ export class Monuments {
  }
 }
 
+export type BellImprovementWallet =
+ | { type: "character"; currency: string; values: { playerID: number; balance: number; affordable: boolean | null }[] }
+ | { type: "account"; currency: string; balance: number | null; affordable: boolean | null };
+
 export class BellImprovement {
- level: number = 0;
+ level: number | null = null;
+ cost: number | null = null;
+ quantity: number | null = null;
+ wallet: BellImprovementWallet | null = null;
 
  constructor(public index: number, public data: BellImprovementModel) { }
 }
 
 export class BellBonus {
- level: number = 0;
+ level: number | null = null;
 
  constructor(public index: number, public data: BellBonusModel) { }
 
- /*    if ("BellUpgAfford" == e)
-        return (
-            0 == t
-                ? ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Money")), (e.h.HoleozDN = s))
-                : 1 == t
-                  ? ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Holes")[9][3]), (e.h.HoleozDN = s))
-                  : 2 == t
-                    ? ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Gaming")[0]), (e.h.HoleozDN = s))
-                    : 3 == t
-                      ? ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Holes")[9][14]), (e.h.HoleozDN = s))
-                      : 4 == t
-                        ? ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Divinity")[39]), (e.h.HoleozDN = s))
-                        : 5 == t && ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Holes")[9][25]), (e.h.HoleozDN = s)),
-            c.asNumber(a.engine.getGameAttribute("DNSM").h.HoleozDN) >= n._customBlock_Holes("BellCosts", t, 0) ? 1 : 0
-        );
-    if ("BellCosts" == e)
-        return 0 == t
-            ? c.asNumber(a.engine.getGameAttribute("CustomLists").h.HolesInfo[42][0 | t]) * Math.pow(1.25, c.asNumber(a.engine.getGameAttribute("Holes")[16][0 | t]))
-            : 2 == t
-              ? c.asNumber(a.engine.getGameAttribute("CustomLists").h.HolesInfo[42][0 | t]) * Math.pow(1.5, c.asNumber(a.engine.getGameAttribute("Holes")[16][0 | t]))
-              : c.asNumber(a.engine.getGameAttribute("CustomLists").h.HolesInfo[42][0 | t]) * Math.pow(1.1, c.asNumber(a.engine.getGameAttribute("Holes")[16][0 | t]));
-    if ("BellBonuss" == e) return c.asNumber(a.engine.getGameAttribute("Holes")[17][0 | t]) * c.asNumber(a.engine.getGameAttribute("CustomLists").h.HolesInfo[59][Math.round(2 * t + 1)]); */
-
- getBonus(): number {
-  return this.level * parseFloat(this.data.value);
+ getBonus(): number | null {
+  return this.level === null ? null : this.level * Number(this.data.value);
  }
 
  getDescription(): string {
+  const bonus = this.getBonus();
+  if (bonus === null) return this.data.description;
   if (this.data.description.includes("}x")) {
-   return this.data.description.replace(/}/g, (1 + (this.getBonus() / 100)).toFixed(2));
+   return this.data.description.replace(/}/g, (1 + bonus / 100).toFixed(2));
   }
-  return this.data.description.replace(/[{}]/g, this.getBonus().toFixed(2));
+  return this.data.description.replace(/[{}]/g, bonus.toFixed(2));
  }
 }
 
-
-
-
 export class Bell {
- // TODO: Improvement logic / costs / speed / exp per hour etc not done.
  improvements: BellImprovement[] = [];
  bonuses: BellBonus[] = [];
- // TODO: Think if we need bell actions.
+ modeNames = ["Ringing", "Pinging", "Cleaning", "Renewing"];
+ mode: number | null = null;
+ // Game's BellTypesOwned is 3, the maximum mode index; modes 0 through 3 are available.
+ maximumModeIndex = 3;
+ unlockedModeCount = this.maximumModeIndex + 1;
+ xpBanks: (number | null)[] = [];
+ improvementProgress: (number | null)[] = [];
+ modeRates: (number | null)[] = [];
+ modeRequirements: (number | null)[] = [];
+ cleanMethodCount: number | null = null;
+ cleanFailures: number | null = null;
+ cleanOdds: number | null = null;
+ renewEffects: { resetBellXp: number | null; renewXpConsumed: number | null; clearedBonusLevels: (number | null)[]; retainedImprovementLevels: (number | null)[]; retainedOpals: number | null } =
+  { resetBellXp: null, renewXpConsumed: null, clearedBonusLevels: [], retainedImprovementLevels: [], retainedOpals: null };
 
  constructor() {
-  const improvementData = initBellImprovementRepo();
-  improvementData.forEach(improvement => {
-   this.improvements.push(new BellImprovement(improvement.index, improvement.data));
-  })
-  const bonusData = initBellBonusRepo();
-  bonusData.forEach(bonus => {
-   this.bonuses.push(new BellBonus(bonus.index, bonus.data));
-  })
+  this.improvements = initBellImprovementRepo().map(record => new BellImprovement(record.index, record.data));
+  this.bonuses = initBellBonusRepo().map(record => new BellBonus(record.index, record.data));
  }
+
+ parse(holeData: number[][]): void {
+  const improvementLevels = holeData[16];
+  const bonusLevels = holeData[17];
+  const bellState = holeData[18];
+  const mode = holeData[11]?.[19];
+  this.mode = mode == null ? null : Number(mode);
+  const methodCount = bellState?.[5];
+  const failures = holeData[11]?.[31];
+  this.cleanMethodCount = methodCount == null ? null : Number(methodCount);
+  this.cleanFailures = failures == null ? null : Number(failures);
+  this.xpBanks = Array.from({ length: 4 }, (_, index) => bellState?.[index * 2] == null
+   ? null : Number(bellState[index * 2]));
+  this.improvementProgress = Array.from({ length: 4 }, (_, index) => bellState?.[index * 2 + 1] == null
+   ? null : Number(bellState[index * 2 + 1]));
+  this.modeRates = [];
+  this.modeRequirements = [];
+  this.improvements.forEach(improvement => {
+   const level = improvementLevels?.[improvement.index];
+   improvement.level = level == null ? null : Number(level);
+   improvement.cost = null;
+   improvement.quantity = null;
+   improvement.wallet = null;
+  });
+  this.bonuses.forEach(bonus => {
+   const level = bonusLevels?.[bonus.index];
+   bonus.level = level == null ? null : Number(level);
+  });
+  this.cleanOdds = null;
+  this.renewEffects = {
+   resetBellXp: this.xpBanks[0] ?? null,
+   renewXpConsumed: this.xpBanks[3] ?? null,
+   clearedBonusLevels: Array.from({ length: 12 }, (_, index) => bonusLevels?.[index] == null ? null : Number(bonusLevels[index])),
+   retainedImprovementLevels: this.improvements.map(improvement => improvement.level),
+   retainedOpals: holeData[9]?.[0] == null ? null : Number(holeData[9][0]),
+  };
+ }
+
+ prepare(hole: Hole, players: Player[], gaming: Gaming, divinity: Divinity): void {
+  const methodCount = this.cleanMethodCount;
+  const failures = this.cleanFailures;
+  const cleanUpgrade = hole.schematics.find(schematic => schematic.index === 43);
+  const cleanModifier = cleanUpgrade?.saveAvailable && failures !== null
+   ? cleanUpgrade.getBonus(25) * failures : null;
+  this.cleanOdds = methodCount === null || cleanModifier === null ? null
+   : Math.min(0.9, (0.6 / Math.max(1, 0.8 * methodCount + 1)) * (1 + cleanModifier / 100));
+
+  const quantitySchematic = hole.schematics.find(schematic => schematic.index === 45);
+  const quantityMultiplier = quantitySchematic?.numericBenefitAvailable ? quantitySchematic.getBonus(0) : null;
+  this.improvements.forEach(improvement => {
+   const level = improvement.level;
+   if (level === null) {
+    improvement.cost = null;
+    improvement.quantity = null;
+   } else {
+    const baseCost = Number(improvement.data.baseValue);
+    const exponent = improvement.index === 0 ? 1.25 : improvement.index === 2 ? 1.5 : 1.1;
+    improvement.cost = baseCost * Math.pow(exponent, level);
+    improvement.quantity = quantityMultiplier === null ? null
+     : 2 * level * Math.max(1, quantityMultiplier * improvement.data.quantityCoefficient);
+   }
+   const cost = improvement.cost;
+
+   if (improvement.index === 0) {
+    improvement.wallet = { type: "character", currency: improvement.data.resource, values: players.map(player => ({
+     playerID: player.playerID,
+     balance: player.money,
+     affordable: cost === null ? null : player.money >= cost,
+    })) };
+    return;
+   }
+
+   let walletBalance: number | null;
+   switch (improvement.index) {
+    case 1: walletBalance = hole.currencies.find(currency => currency.index === 3)!.stock; break;
+    case 2: walletBalance = gaming.bits; break;
+    case 3: walletBalance = hole.currencies.find(currency => currency.index === 14)!.stock; break;
+    case 4: walletBalance = divinity.atomsBalance; break;
+    case 5: walletBalance = hole.currencies.find(currency => currency.index === 25)!.stock; break;
+    default: walletBalance = null;
+   }
+   improvement.wallet = {
+    type: "account",
+    currency: improvement.data.resource,
+    balance: walletBalance,
+    affordable: cost === null || walletBalance === null ? null : walletBalance >= cost,
+   };
+  });
+
+  const ringQuantities = [this.improvements[0].quantity, this.improvements[2].quantity,
+   this.improvements[4].quantity, this.improvements[5].quantity];
+  const pingQuantity = this.improvements[3].quantity;
+  const cleanQuantity = this.improvements[1].quantity;
+  const monument = hole.getMonumentBonus("Bravery", 7);
+  const measurement = hole.measurements[2].effectiveBenefit;
+  const jar11 = hole.jar.getBonus(11);
+  const jar36 = hole.jar.getBonus(36);
+  const ringRate = ringQuantities.some(value => value === null) || measurement === null ? null
+   : 10 * (1 + monument / 100) * (1 + measurement / 100) *
+    (1 + ringQuantities.reduce((sum, value) => sum + (value ?? 0), 0) / 100) *
+    (1 + jar11 / 100) * (1 + jar36 / 100);
+  const pingRate = pingQuantity === null || measurement === null
+   ? null : 10 * (1 + monument / 100) * (1 + measurement / 100) * (1 + pingQuantity / 100);
+  const cleanRate = cleanQuantity === null ? null : 10 * (1 + cleanQuantity / 100);
+  this.modeRates = [ringRate, pingRate, cleanRate, 10];
+
+  const ringProgress = this.improvementProgress[0];
+  const pingProgress = this.improvementProgress[1];
+  const cleanProgress = this.improvementProgress[2];
+  this.modeRequirements = [
+   ringProgress === null ? null : (5 + 3 * ringProgress) * Math.pow(1.05, ringProgress),
+   pingProgress === null ? null : (10 + 10 * pingProgress + Math.pow(pingProgress, 2.5)) * Math.pow(1.75, pingProgress),
+   cleanProgress === null ? null : 100 * Math.pow(3, cleanProgress),
+   25,
+  ];
+ }
+ get selectedRate(): number | null {
+  return this.mode === null ? null : this.modeRates[this.mode] ?? null;
+ }
+
+ get selectedRequirement(): number | null {
+  return this.mode === null ? null : this.modeRequirements[this.mode] ?? null;
+ }
+
 }
 
 export interface HoleCharacterCapability {
@@ -1326,78 +1439,247 @@ export class ResourceCavrens {
 }
 
 export class HarpString {
- level: number = 0;
- unlocked: boolean = false;
+ level: number | null = null;
+ experience: number | null = null;
+ unlocked: boolean | null = null;
+ assignedSlots: number[] = [];
+ passiveBonus: number | null = null;
+ nextLevelExperience: number | null = null;
+
  constructor(public index: number, public data: HarpStringModel) { }
 
- getBonus(): number {
-  return 0;
+ getBonus(): number | null {
+  return this.level === null ? null : this.level * this.data.multiplier;
  }
 
  getDescription(): string {
+  const bonus = this.getBonus();
+  if (bonus === null) return this.data.description;
   if (this.data.description.includes("}x")) {
-   return this.data.description.replace(/}/g, (1 + (this.getBonus() / 100)).toFixed(2));
+   return this.data.description.replace(/}/g, (1 + bonus / 100).toFixed(2));
   }
-  return this.data.description.replace(/[{}]/g, this.getBonus().toFixed(2));
+  return this.data.description.replace(/[{}]/g, bonus.toFixed(2));
  }
 }
 
+export type HarpTriggerEffectContext =
+ | { type: "notes"; noteCount: number | null; firstNoteIndex: number | null; lastNoteIndex: number | null; produced: number | null }
+ | { type: "opal"; chance: number | null }
+ | { type: "experience"; additionalRecipients: number[] | null }
+ | { type: "none" };
+
+export interface HarpExperienceContext {
+ regularGain: number | null;
+ studyBonusGain: number | null;
+ randomBranchChance: 0.01;
+ studyBonusGateActive: boolean | null;
+ effectiveStudyBonusChance: number | null;
+}
+
+export interface HarpAssignedStringContext {
+ slot: number;
+ stringIndex: number;
+ sequenceOrder: number;
+ passiveBonus: number | null;
+ triggerStatus: "power-below-threshold" | "runtime-cycle-state-unavailable" | "power-unavailable";
+ effect: HarpTriggerEffectContext;
+ experience: HarpExperienceContext;
+}
+
 export class Harp {
- notes: { name: string, index: number, current: number }[] = [];
+ notes: { name: string; index: number; current: number | null; accessible: boolean | null }[] = [];
  strings: HarpString[] = [];
- stringCount = 0;
+ stringCount: number | null = null;
+ power: number | null = null;
+ powerPerHour: number | null = null;
+ tune: number | null = null;
+ selectedNote: number | null = null;
+ layout: (number | null)[] = [];
+ layoutAvailable: boolean = false;
+ highestUnlockedNoteIndex: number | null = null;
+ noteCost: number | null = null;
+ assignedStringEffects: HarpAssignedStringContext[] = [];
+ stringEffectUnavailableReason: string | null = null;
+ studyBonusGateActive: boolean | null = null;
+ studyBonusGateUnavailableReason: string | null = null;
 
  constructor() {
-  const harpNotes = initHarpNotesRepo();
-  harpNotes.forEach(note => {
-   this.notes.push({ name: note.data.noteName, index: note.index, current: 0 });
-  })
-  const harpStrings = initHarpStringsRepo();
-  harpStrings.forEach(string => {
-   this.strings.push(new HarpString(string.index, string.data));
-  })
+  this.notes = initHarpNotesRepo().map(note => ({
+   name: note.data.noteName, index: note.index, current: null, accessible: null,
+  }));
+  this.strings = initHarpStringsRepo().map(string => new HarpString(string.index, string.data));
  }
 
- parse(holeData: number[][]): void {
-  const noteData = holeData[9].slice(10, 20);
-  this.notes.forEach((note, index) => {
-   note.current = noteData[index];
-  })
-
+ parse(holeData: (number[] | undefined)[]): void {
+  const noteBalances = holeData[9];
+  const savedHarp = holeData[11];
   const stringData = holeData[19];
-  this.strings.forEach((string, index) => {
-   string.level = stringData[2 * index];
-   // TODO: Verify this.
-   string.unlocked = string.level > 0;
-  })
+  const assignments = holeData[20];
+  this.highestUnlockedNoteIndex = savedHarp?.[20] == null ? null : Number(savedHarp[20]);
+  this.selectedNote = savedHarp?.[21] == null ? null : Number(savedHarp[21]);
+  this.tune = this.selectedNote;
+  this.power = savedHarp?.[22] == null ? null : Number(savedHarp[22]);
+  this.layoutAvailable = assignments != null;
+  this.layout = assignments == null ? [] : assignments.map(value => value == null ? null : Number(value));
+  this.slotCount = null;
+  this.notes.forEach(note => {
+   const balance = noteBalances?.[10 + note.index];
+   note.current = balance == null ? null : Number(balance);
+   note.accessible = this.highestUnlockedNoteIndex === null ? null : note.index <= this.highestUnlockedNoteIndex;
+  });
+  this.strings.forEach(string => {
+   const level = stringData?.[2 * string.index];
+   const experience = stringData?.[2 * string.index + 1];
+   string.level = level == null ? null : Number(level);
+   string.unlocked = string.level === null ? null : string.level > 0;
+   string.experience = experience == null ? null : Number(experience);
+   string.passiveBonus = string.getBonus();
+   string.nextLevelExperience = string.level === null ? null : (4 + string.level) * Math.pow(1.15, string.level);
+   string.assignedSlots = this.layout.flatMap((assigned, slot) => assigned === string.index ? [slot] : []);
+  });
+  this.stringCount = this.strings.some(string => string.unlocked === null) ? null
+   : this.strings.reduce((sum, string) => sum + (string.unlocked ? 1 : 0), 0);
+  this.noteCost = this.highestUnlockedNoteIndex === null || this.highestUnlockedNoteIndex >= 9
+   ? null : Harp.getNextNoteCost(this.highestUnlockedNoteIndex);
+  this.powerPerHour = null;
+ }
+
+ prepare(hole: Hole): void {
+  const powerString = this.strings[2];
+  this.powerPerHour = powerString.level === null ? null
+   : 200 * (1 + powerString.level * powerString.data.multiplier / 100);
+
+  const stringExperienceStudy = hole.studies[5];
+  this.studyBonusGateActive = stringExperienceStudy.levelAvailable ? stringExperienceStudy.ownedRule : null;
+  this.studyBonusGateUnavailableReason = stringExperienceStudy.levelAvailable ? null : "Saved Study 5 level is missing.";
+  this.stringEffectUnavailableReason = !this.layoutAvailable ? "Saved Harp assignment layout is missing."
+   : this.slotCount === null ? "Prepared Harp active slot count is unavailable."
+    : this.layout.length < this.slotCount ? "Saved Harp assignment layout does not contain all active slots."
+     : "Harp trigger counters 128 and 129 and cycle flag 113 are transient runtime state, not saved or exposed by prepared owner APIs.";
+  if (!this.layoutAvailable || this.slotCount === null || this.layout.length < this.slotCount) {
+   this.assignedStringEffects = [];
+   return;
+  }
+  const triggerStatus = this.power === null ? "power-unavailable"
+   : this.power < 100 ? "power-below-threshold" : "runtime-cycle-state-unavailable";
+  const assignedEffects: HarpAssignedStringContext[] = [];
+  for (let slot = 0; slot < this.slotCount; slot++) {
+   const stringIndex = this.layout[slot];
+   if (stringIndex == null) continue;
+   const string = this.strings[stringIndex];
+   if (string === undefined) continue;
+   const experience: HarpExperienceContext = {
+    regularGain: null, studyBonusGain: null, randomBranchChance: 0.01,
+    studyBonusGateActive: this.studyBonusGateActive,
+    effectiveStudyBonusChance: this.studyBonusGateActive === null ? null : this.studyBonusGateActive ? 0.01 : 0,
+   };
+   let effect: HarpTriggerEffectContext;
+   if ([0, 3, 5].includes(stringIndex)) {
+    const count = stringIndex === 0 ? 1 : stringIndex === 3 ? 3
+     : this.highestUnlockedNoteIndex === null ? null : Math.round(1 + this.highestUnlockedNoteIndex);
+    const noteLimit = this.highestUnlockedNoteIndex === null ? null : Math.round(this.highestUnlockedNoteIndex);
+    const first = stringIndex === 0 ? this.selectedNote === null ? null : Math.round(this.selectedNote)
+     : stringIndex === 3 ? this.selectedNote === null ? null : Math.round(this.selectedNote - 1) : 0;
+    const firstNoteIndex = first === null || noteLimit === null ? null : Math.max(0, Math.min(noteLimit, first));
+    const lastNoteIndex = first === null || count === null || count < 1 || noteLimit === null ? null
+     : Math.max(0, Math.min(noteLimit, first + count - 1));
+    effect = { type: "notes", noteCount: count, firstNoteIndex, lastNoteIndex, produced: null };
+   } else if (stringIndex === 1) {
+    effect = { type: "opal", chance: null };
+   } else if (stringIndex === 4) {
+    const additionalRecipients: number[] = [];
+    let additionalRecipientsAvailable = true;
+    this.strings.forEach(candidate => {
+     if (candidate.index === 4) return;
+     if (candidate.unlocked === null) additionalRecipientsAvailable = false;
+     else if (candidate.unlocked) additionalRecipients.push(candidate.index);
+    });
+    effect = { type: "experience", additionalRecipients: additionalRecipientsAvailable ? additionalRecipients : null };
+   } else {
+    effect = { type: "none" };
+   }
+   assignedEffects.push({ slot, stringIndex, sequenceOrder: assignedEffects.length,
+    passiveBonus: string.passiveBonus, triggerStatus, effect, experience });
+  }
+  this.assignedStringEffects = assignedEffects;
+ }
+
+ static getNextNoteCost(highestUnlockedNoteIndex: number): number {
+  return 150 * Math.pow(1 + highestUnlockedNoteIndex, 1.5) * Math.pow(4.5, highestUnlockedNoteIndex);
  }
 }
 
 export class Lamp {
  zenithMarketBonus: number = 0;
  wishes: Wish[] = [];
- // This is hard-coded in the game, can move to the repo maybe.
+ wishStock: number | null = null;
+ wishesPerDay: number | null = null;
+ schematicCostDiscount: number | null = null;
+ resetConsequences: { category: string; before: number[] | null; after: number[] | null }[] = [];
  specialBonusArray = "25,10,8;15,40,10;20,35,12;5,1,1;2,2,2".split(";");
 
  constructor() {
   this.wishes = Wish.fromBase(initLampWishRepo());
  }
 
- getBonus(holeBonus: boolean = false, specialIndex?: number, inlineIndex?: number): number {
-  // This implementation is pretty odd so writing some notes.
-  // 1. Wish 7 gives bonus of 25 * wishCount for hold related resources.
-  // 2. Everything else comes from a weird string which is indexed on 2 indexes.
+ parse(holeData: (number[] | undefined)[]): void {
+  const levels = holeData[21];
+  const stock = holeData[11]?.[25];
+  this.wishStock = stock == null ? null : Number(stock);
+  this.wishes.forEach(wish => {
+   const level = levels?.[wish.index];
+   wish.wishCount = level == null ? null : Number(level);
+  });
+  this.wishesPerDay = null;
+  this.schematicCostDiscount = this.wishes[5].wishCount === null ? null
+   : Math.max(0.01, Math.pow(0.85, this.wishes[5].wishCount));
+  const resetSources = [
+   ["All Opals Invested", holeData[3]],
+   ["Conjuror PTS Invested", holeData[4] && holeData[5] && holeData[6] ? [...holeData[4], ...holeData[5], ...holeData[6]] : undefined],
+   ["Jar Collectible Enchantment LVs", holeData[24]],
+   ["All Summoning Doublers", holeData[28]],
+  ] as const;
+  this.resetConsequences = resetSources.map(([category, values]) => ({
+   category,
+   before: values == null ? null : values.map(Number),
+   after: values == null ? null : values.map(value => category === "Jar Collectible Enchantment LVs"
+    ? Math.min(Number(value), 1) : category === "All Summoning Doublers" ? -1 : 0),
+  }));
+ }
 
-  // TODO: Wonder if we should make this code nicer at some point.
+ prepare(hole: Hole, cavernCount: number | null): void {
+  const measurement = hole.measurements[4].effectiveBenefit;
+  const cosmo = hole.majiks.HoleUpgrades.find(upgrade => upgrade.index === 2);
+  const monument = hole.getMonumentBonus("Wisdom", 7);
+  const bell = hole.bell.bonuses[3]?.getBonus() ?? null;
+  const study = hole.getStudyBolaiaBonuses(6);
+  this.wishesPerDay = cavernCount === null || measurement === null || !cosmo?.saveAvailable || monument === null || bell === null
+   ? null : cavernCount < 6 ? 0
+    : 1 + (measurement + cosmo.getBonus() + bell + monument + 100 * study) / 100;
+  this.schematicCostDiscount = this.wishes[5].wishCount === null ? null
+   : Math.max(0.01, Math.pow(0.85, this.wishes[5].wishCount));
+ }
+
+ getWishCost(wishIndex: number): number | null {
+  const wish = this.wishes[wishIndex];
+  if (!wish || wish.wishCount === null) return null;
+  const level = wish.wishCount;
+  if (wishIndex === 0) return level < 11 ? Math.floor(1 + 2 * level + Math.pow(level, 2)) : 999999;
+  if (wishIndex === 2) return Math.floor(1 + 2 * level + Math.pow(level, 1.7));
+  return Math.floor(level * wish.data.x2 + wish.data.x1);
+ }
+
+ getBonus(holeBonus: boolean = false, specialIndex?: number, inlineIndex?: number): number | null {
   if (holeBonus) {
-   return 25 * this.wishes[7].wishCount * (1 + this.zenithMarketBonus / 100);
+   const wishLevel = this.wishes[7].wishCount;
+   return wishLevel === null ? null : 25 * wishLevel * (1 + this.zenithMarketBonus / 100);
   }
-
   if (specialIndex != undefined && inlineIndex != undefined) {
    const wishIndex = Math.min(11, Math.round(4 + 2 * specialIndex));
-   return Number(this.specialBonusArray[specialIndex].split(",")[inlineIndex]) * this.wishes[wishIndex].wishCount * (1 + this.zenithMarketBonus / 100);
+   const wishLevel = this.wishes[wishIndex].wishCount;
+   return wishLevel === null ? null
+    : Number(this.specialBonusArray[specialIndex].split(",")[inlineIndex]) * wishLevel * (1 + this.zenithMarketBonus / 100);
   }
-
   return 0;
  }
 }
@@ -1471,6 +1753,8 @@ export class Hole extends Domain {
  measurements: Measurement[] = Measurement.fromBase(initMeasurementRepo());
  currencies: HoleCurrency[] = HoleCurrency.fromBase(initHoleCurrencyRepo());
  schematicAvailabilityCount: number | null = null;
+ savedGemShopBucketPurchase: number | null = null;
+ wellExpansionLevel: number | null = null;
 
  get schematicCatalogue(): Schematic[] {
   return [...this.schematics].sort((left, right) => left.availabilitySlot - right.availabilitySlot);
@@ -1513,8 +1797,8 @@ export class Hole extends Domain {
  earlyExplorerExpUpgrade: number | null = null;
  villagerBundleBonus: number | null = null;
  wishesAvailable: number | null = null;
- anotherTry: { access: boolean | null; wishCost: number; availableWishes: number | null; affordable: boolean | null; resets: AnotherTryReset[] } =
-  { access: null, wishCost: this.lamp.wishes[1].data.x1, availableWishes: null, affordable: null, resets: [] };
+ anotherTry: { access: boolean | null; wishCost: number | null; availableWishes: number | null; affordable: boolean | null; resets: AnotherTryReset[] } =
+  { access: null, wishCost: null, availableWishes: null, affordable: null, resets: [] };
  allocationEffects: { leastUnlockedInvestment: number | null; equalSpreadPercent: number | null;
   unavailableReason: string | null; equalSpreadUnavailableReason: string | null;
   opalEnthusiasm: { villagerId: number; investedTens: number | null; percent: number | null; unavailableReason: string | null }[] } =
@@ -1606,6 +1890,7 @@ export class Hole extends Domain {
   const stringSlots = additionalStrings.saveAvailable && this.sourceSaveAvailable.schematics
    ? Math.min(15, Math.round(1 + additionalStrings.getBonus() +
     [32, 33, 34, 35, 36].reduce((sum, id) => sum + this.getSchematicBonus(id, 1), 0))) : null;
+  this.harp.slotCount = stringSlots;
   this.schematics.forEach(schematic => schematic.prepareHarpStrings(stringSlots));
  }
 
@@ -1615,11 +1900,11 @@ export class Hole extends Domain {
   // The exported order stores catalogue IDs by availability slot, not inverse ranks.
   const schematicOrder = this.schematics.map(schematic => schematic.data.order);
   this.villagers.forEach(villager => villager.prepareNextUnlock(schematicOrder, this.measurements.length, this.studies.length));
-  const wish = this.lamp.wishes[1];
-  const wishCost = Math.floor(wish.wishCount * wish.data.x2 + wish.data.x1);
+  const wishCost = this.lamp.getWishCost(1);
   const access = cavernCount === null ? null : cavernCount > 6;
   this.anotherTry = { access, wishCost, availableWishes: this.wishesAvailable,
-   affordable: access === null || this.wishesAvailable === null ? null : access && this.wishesAvailable >= wishCost,
+   affordable: access === null || this.wishesAvailable === null || wishCost === null
+    ? null : access && this.wishesAvailable >= wishCost,
    resets: [
     { category: "Opals", clears: ["All villager Opal investments"],
      retains: ["Earned Opals", "Villager levels", "Stored villager EXP"] },
@@ -1902,6 +2187,10 @@ export class Hole extends Domain {
   const savedHoleData = (data.get("Holes") ?? []) as number[][];
   const spelunkData = data.get("Spelunk") as number[][] | null;
   const holeData = Array.from({ length: 35 }, (_, index) => savedHoleData[index] ?? []);
+  const aspectHoleData = [...holeData] as (number[] | undefined)[];
+  [3, 4, 5, 6, 20, 21, 24, 28].forEach(index => {
+   if (savedHoleData[index] == null) aspectHoleData[index] = undefined;
+  });
   const optionListAccount = (data.get("OptLacc") ?? []) as number[];
   const rawData = data.get("rawData") as Record<string, unknown>;
   const playerNames = data.get("playerNames") as string[];
@@ -1927,8 +2216,7 @@ export class Hole extends Domain {
   hole.growthInputs = null;
   hole.allocationEffects = { leastUnlockedInvestment: null, equalSpreadPercent: null,
    unavailableReason: "Not prepared.", equalSpreadUnavailableReason: "Not prepared.", opalEnthusiasm: [] };
-  hole.anotherTry = { access: null, wishCost: hole.lamp.wishes[1].data.x1,
-   availableWishes: null, affordable: null, resets: [] };
+  hole.anotherTry = { access: null, wishCost: null, availableWishes: null, affordable: null, resets: [] };
   hole.dailyLanternUses = savedHoleData[11]?.[84] == null ? null : Number(savedHoleData[11][84]);
   hole.wishesAvailable = savedHoleData[11]?.[25] == null ? null : Number(savedHoleData[11][25]);
   const reservedInvestments = savedHoleData[3]?.slice(5, 8);
@@ -2024,12 +2312,12 @@ export class Hole extends Domain {
    ? `Saved Study inputs are missing: ${missingStudyInputs.join(", ")}.` : null;
 
   const gemPurchases = data.get("GemItemsPurchased") as number[] | null;
+  hole.savedGemShopBucketPurchase = gemPurchases?.[2] == null ? null : Number(gemPurchases[2]);
+  hole.wellExpansionLevel = savedHoleData[11]?.[1] == null ? null : Number(savedHoleData[11][1]);
   hole.majiks.parse(savedHoleData, gemPurchases?.[4]);
   hole.currencies.forEach(currency => currency.parse(savedHoleData[9]));
-
-  hole.lamp.wishes.forEach(wish => {
-   wish.wishCount = Number(holeData[21][wish.index] ?? 0);
-  });
+  hole.lamp.parse(aspectHoleData);
+  hole.wishesAvailable = hole.lamp.wishStock;
 
 
 
@@ -2067,19 +2355,12 @@ export class Hole extends Domain {
    });
   });
 
-  // Bell 
-  hole.bell.improvements.forEach(improvement => {
-   improvement.level = holeData[16][improvement.index] || 0;
-  });
-  hole.bell.bonuses.forEach(bonus => {
-   bonus.level = holeData[17][bonus.index] || 0;
-  });
+  hole.bell.parse(holeData);
 
   hole.resourceCavrens.parse(holeData, optionListAccount, hole.playerLocationData);
 
   hole.well.parse(hole, holeData);
-  // TODO: Finish this, missing information
-  hole.harp.parse(holeData);
+  hole.harp.parse(aspectHoleData);
 
   hole.dawgDen.bestScore = holeData[11][8] || 0;
 
@@ -2111,6 +2392,9 @@ export const updateHole = (data: Map<string, any>) => {
  const tesseract = data.get("tesseract") as Tesseract;
  const legendTalents = data.get("legendTalents") as LegendTalents;
  const zenithMarket = data.get("zenithMarket") as ZenithMarket;
+ const gaming = data.get("gaming") as Gaming;
+ const players = data.get("players") as Player[];
+ const divinity = data.get("divinity") as Divinity;
 
  // Tome quantities are numeric prepared inputs, not display-formatted strings.
  const studyLevels = hole.savedStudyLevelsForMeasurements === null ? null
@@ -2151,7 +2435,16 @@ export const updateHole = (data: Map<string, any>) => {
   hole.gambit.gambitPointsMulti = 1 + gambitMultipliers / 100;
  }
  hole.gambit.updateUnlockedBonuses();
+ hole.bell.prepare(hole, players, gaming, divinity);
+ const explorer = hole.villagers[VillagerIndex.Polonai];
+ const cavernCount = explorer.saveAvailable ? Math.min(hole.studies.length, explorer.level) : null;
+ hole.lamp.prepare(hole, cavernCount);
+ hole.harp.prepare(hole);
+ const stamps = data.get("stamps") as Stamp[][];
+ const stampBonus = getStampBonusForKey(stamps, "CavernRes");
+ hole.well.prepare(hole, hole.savedGemShopBucketPurchase, stampBonus, gaming.getCglunkoBonus());
  hole.resourceCavrens.prepare(hole.getResourceRequirementReduction());
+
 }
 
 export const updateHoleStudyEffects = (data: Map<string, any>): void => {

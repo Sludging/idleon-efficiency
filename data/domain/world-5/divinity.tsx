@@ -162,6 +162,7 @@ export class GodOffering {
 export class Divinity extends Domain {
     playerInfo: PlayerDivinityInfo[] = [];
     currentDivinity: number = 0;
+    atomsBalance: number | null = null;
     gods: DivinityGod[] = DivinityGod.fromBase(initGodInfoRepo());
     offerings: GodOffering[] = [];
     godRank: number = 0;
@@ -216,6 +217,7 @@ export class Divinity extends Domain {
 
         divinity.playerInfo = [];
         divinity.offerings = [];
+        divinity.atomsBalance = divinityData[39] == null ? null : Number(divinityData[39]);
         divinity.gods.forEach(god => {
             god.linkedPlayers = [];
         });
