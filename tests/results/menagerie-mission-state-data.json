@@ -1,0 +1,21 @@
+{
+  "extractions": {
+    "mission_available_count": {
+      "expression": "idleon.callFunction(\"MenagerieStuff\", \"UpgUnlocked\", 0, 0)",
+      "result": 3
+    },
+    "mission_0_claims": {
+      "expression": "idleon.engine.getGameAttribute(\"Menagerie\")[1][0]",
+      "result": 6
+    },
+    "mission_0_requirement": {
+      "expression": "idleon.callFunction(\"MenagerieStuff\", \"Cost\", 0, 0)",
+      "result": 16000
+    },
+    "mission_bank_bundle": {
+      "expression": "idleon.callFunction(\"Thingies\", \"Have_ban_k\", 0, 0)",
+      "result": 0
+    }
+  },
+  "errors": {}
+}

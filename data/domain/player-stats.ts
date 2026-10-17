@@ -48,6 +48,7 @@ import type { LegendTalents } from './world-7/legendTalents';
 import type { Spelunking } from './world-7/spelunking';
 import type { SushiStation } from './world-7/sushi';
 import type { JellyOperator } from './world-7/jellyOperator';
+import type { Menagerie } from './menagerie';
 import type { SaltLick } from './world-3/construction/saltLick';
 
 interface AttributeSources {
@@ -204,6 +205,7 @@ interface DropRateSources {
     equinox: Equinox;
     sushi: SushiStation;
     jellyOperator: JellyOperator;
+    menagerie: Menagerie;
 }
 
 export function getStatCards(player: Player): Card[] {
@@ -521,7 +523,7 @@ export class PlayerStats {
         const { account, alchemy, stamps, family, sigils, breeding, arcade, guild, hole, shrines,
             prayers, goldenFood, equipmentSets, votes, orion, companions, sneaking, summoning,
             achievements, farming, grimoire, upgradeVault, emperor, friends, legendTalents,
-            spelunking, royalArmory, tome, research, minehead, equinox, sushi, jellyOperator } = sources;
+            spelunking, royalArmory, tome, research, minehead, equinox, sushi, jellyOperator, menagerie } = sources;
         const cards = getStatCards(player);
         const talentInputs = player.finalTalentInputs;
         const miniBossCardLevel = player.cardInfo!.cards.find(card => card.id === 'mini5a')!.getLevels();
@@ -602,6 +604,7 @@ export class PlayerStats {
 
         // Map multipliers stay excluded. Minehead's two rewards are permanent account progression.
         multiplier *= 1 + royalArmory.statues.find(statue => statue.index === 1)!.getBonus() / 100;
+        multiplier *= menagerie.getBonusMultiplier(24);
         multiplier *= 1 + Card.GetTotalBonusForId(cards, 101) / 100;
         multiplier *= 1 + family.getClassBonus(ClassIndex.Royal_Guardian)!.getBonus(player) / 100;
         multiplier *= 1 + 0.3 * getCompanionActiveBonus(companions, 168);
@@ -841,6 +844,7 @@ export const updatePlayerDropRates = (accountData: Map<string, any>): void => {
         equinox: accountData.get('equinox') as Equinox,
         sushi: accountData.get('sushi') as SushiStation,
         jellyOperator: accountData.get('jellyOperator') as JellyOperator,
+        menagerie: accountData.get('menagerie') as Menagerie,
     };
     for (const player of players) {
         player.stats.updateDropRate(player, players, sources);

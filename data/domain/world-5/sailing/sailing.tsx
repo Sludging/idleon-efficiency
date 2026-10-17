@@ -34,6 +34,7 @@ import { LegendTalents } from "../../world-7/legendTalents";
 import type { Gaming } from "../gaming";
 import type { Slab } from "../slab";
 import type { Lab } from "../../world-4/lab";
+import type { Menagerie } from "../../menagerie";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -132,6 +133,7 @@ export class Boat {
     daveyJonesBonus: number = 1;
     arcadeBonus: number = 0;
     activeEnderCaptains: number = 0;
+    menagerieMultiplier: number = 1;
 
     speed: number = 0;
 
@@ -198,7 +200,7 @@ export class Boat {
 
         const firstMath = (5 + (2 + Math.pow(Math.floor(lootUpgrades / 8), 2) * lootUpgrades));
         const secondMath = (1 + (this.sigilBonus + (captainBonus + (this.genieLampBonus + (25 * Math.min(30, this.activeEnderCaptains) + this.arcadeBonus)))) / 100);
-        return firstMath * secondMath * (1 + this.unendingSearchBonus / 100) * this.daveyJonesBonus * (1 + this.holeLampBonus / 100);
+        return firstMath * secondMath * (1 + this.unendingSearchBonus / 100) * this.daveyJonesBonus * (1 + this.holeLampBonus / 100) * this.menagerieMultiplier;
     }
 
     getSpeedValue = (
@@ -431,6 +433,7 @@ export const updateSailing = (data: Map<string, any>) => {
     const slab = data.get("slab") as Slab;
     const gaming = data.get("gaming") as Gaming;
     const lab = data.get("lab") as Lab;
+    const menagerie = data.get("menagerie") as Menagerie;
 
     // Slab's multiplier and Lab's mainframe bonuses are ready before Sailing.
     sailing.updateResearchInputs(slab, gaming, lab);
@@ -469,6 +472,7 @@ export const updateSailing = (data: Map<string, any>) => {
         boat.holeLampBonus = holeLampLootBonus;
         boat.arcadeBonus = arcadeBonus;
         boat.activeEnderCaptains = activeEnderCaptains;
+        boat.menagerieMultiplier = menagerie.getBonusMultiplier(9);
     });
 
     // Nice info to have for the UI

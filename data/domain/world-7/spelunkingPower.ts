@@ -15,6 +15,7 @@ import { TotalizerBonus, Worship } from '../world-3/worship';
 import { JellyOperator } from './jellyOperator';
 import { Spelunking } from './spelunking';
 import { SushiStation } from './sushi';
+import { Menagerie } from '../menagerie';
 
 /**
  * Calculates persistent normal-world Spelunking power for Button task 50.
@@ -36,6 +37,7 @@ export const getPersistentSpelunkingPower = (data: Map<string, any>): number => 
     const upgrade54 = upgrades[54].sourceBonus;
     const summoning = data.get('summoning') as Summoning;
     const sushi = data.get('sushi') as SushiStation;
+    const menagerie = data.get('menagerie') as Menagerie;
     const jellyOperator = data.get('jellyOperator') as JellyOperator;
     const button = data.get('button') as Button;
     const taskBoard = data.get('taskboard') as TaskBoard;
@@ -72,6 +74,7 @@ export const getPersistentSpelunkingPower = (data: Map<string, any>): number => 
 
     const multiplier = (1 + summoning.getSummoningWinnerBonusFromIndex(27) / 100)
         * (1 + sushi.getBonusFromIndex(20) / 100)
+        * menagerie.getBonusMultiplier(22)
         * (1 + jellyOperator.getObstructionBonus(38) / 100)
         * (1 + jellyOperator.getObstructionBonus(21) / 100)
         * (1 + button.getBonusForIndex(6) / 100)

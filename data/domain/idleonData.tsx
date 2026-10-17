@@ -98,6 +98,7 @@ import { HatRack, updateHatRack } from './world-7/hatRack';
 import { Skilling, updateAllEfficiencies, updateSkillEfficiencies } from './skilling';
 import { updateAttributeTalents, updatePowerTalents, updateRightHandOfActionBonuses } from './talents';
 import { updatePlayerHealth } from './player-health';
+import { Menagerie, prepareMenagerie, updateMenagerieMissions } from "./menagerie";
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -210,6 +211,7 @@ const domainList: Domain[] = [
     new Gallery("gallery"),
     new HatRack("hatRack"),
     new Skilling("skilling"),
+    new Menagerie("menagerie"),
 ]
 
 export class IdleonData {
@@ -278,6 +280,8 @@ const postProcessingMap: Record<string, Function> = {
     "holeStudyEffects": (_doc: Cloudsave, accountData: Map<string, any>) => updateHoleStudyEffects(accountData),
     // Camp effects use parsed Majik and Harp state before their shared consumers.
     "holeUpgradeEffects": (_doc: Cloudsave, accountData: Map<string, any>) => updateHoleUpgradeEffects(accountData),
+    // Parse-owned Menagerie effects must be ready before the earliest recipient calculation.
+    "menageriePrepared": (_doc: Cloudsave, accountData: Map<string, any>) => prepareMenagerie(accountData),
     // Minehead rewards are account-wide inputs to downstream bonus consumers.
     "minehead": (doc: Cloudsave, accountData: Map<string, any>) => updateMinehead(accountData),
     "jellyOperator": (doc: Cloudsave, accountData: Map<string, any>) => updateJellyOperator(accountData),
@@ -352,7 +356,7 @@ const postProcessingMap: Record<string, Function> = {
     // Prepare exalted stamp scaling after its account inputs and before stamp bonuses.
     "compassExaltedStampBonus": (_doc: Cloudsave, accountData: Map<string, any>) => updateCompassExaltedStampBonus(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStamps(accountData),
-    "forge": (doc: Cloudsave, accountData: Map<string, any>) => updateForge(accountData.get("forge"), accountData.get("gems")),
+    "forge": (doc: Cloudsave, accountData: Map<string, any>) => updateForge(accountData.get("forge"), accountData.get("gems"), accountData.get("menagerie")),
     "worshipTotalizer": (doc: Cloudsave, accountData: Map<string, any>) => updateWorshipTotalizer(accountData),
     "arcade": (doc: Cloudsave, accountData: Map<string, any>) => updateArcade(accountData),
     "cooking": (doc: Cloudsave, accountData: Map<string, any>) => updateCooking(accountData),
@@ -441,6 +445,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "researchDisplay": (_doc: Cloudsave, accountData: Map<string, any>) => updateResearchDisplay(accountData),
     // Hole inspection uses settled account bonuses, Player contexts and matching Statue bonuses.
     "holePresentation": (_doc: Cloudsave, accountData: Map<string, any>) => updateHolePresentation(accountData),
+    "menagerieMissions": (_doc: Cloudsave, accountData: Map<string, any>) => updateMenagerieMissions(accountData),
     // Button task progress uses settled account and character results.
     "buttonTaskProgress": (_doc: Cloudsave, accountData: Map<string, any>) => updateButtonTaskProgress(accountData),
 }

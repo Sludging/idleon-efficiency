@@ -128,6 +128,9 @@ export class Account extends Domain {
     plunderousMobKills: number = 0;
     hasDeathBringerBundle: boolean = false;
     hasExplorerBundle: boolean = false;
+    hasBankBundle: boolean = false;
+    hasBundleL: boolean = false;
+    hasBundleM: boolean = false;
     weeklyBoss: WeeklyBoss = new WeeklyBoss();
     movementSpeedBonusPercent: number = 0;
     spelunkingPowerBonus: number = 0;
@@ -241,6 +244,9 @@ export class Account extends Domain {
         account.hasExplorerBundle = Number(bundles.bun_p) === 1;
         account.hasEquinoxBundle = Number(bundles.bun_q) === 1;
         account.hasDamageMultiplierBundle = Number(bundles.bon_a) === 1;
+        account.hasBankBundle = Number(bundles.ban_k) === 1;
+        account.hasBundleL = Number(bundles.ban_l) === 1;
+        account.hasBundleM = Number(bundles.ban_m) === 1;
 
         account.talentPointsOwned = [];
         talentPointsOwned.forEach((points) => {

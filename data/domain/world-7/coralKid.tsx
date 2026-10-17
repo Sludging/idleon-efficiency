@@ -53,6 +53,7 @@ export class CoralKidBonus {
 
 export class CoralKid extends Domain {
     coralKidBonuses: CoralKidBonus[] = CoralKidBonus.fromBase();
+    private lumiUpgradeLevel = 0;
 
     getRawKeys(): RawData[] {
         return [];
@@ -66,6 +67,7 @@ export class CoralKid extends Domain {
         const coralKid = data.get(this.getDataKey()) as CoralKid;
         const optionList = data.get("OptLacc") as number[];
 
+        coralKid.lumiUpgradeLevel = Number(optionList[620] ?? 0);
         coralKid.coralKidBonuses.forEach(upgrade => {
             upgrade.level = optionList[427 + upgrade.index] || 0;
         });
@@ -73,6 +75,10 @@ export class CoralKid extends Domain {
 
     getBonusFromIndex(index: number): number {
         return this.coralKidBonuses.find(bonus => bonus.index == index)?.getBonus() || 0;
+    }
+
+    getLumiGenerationBonus(): number {
+        return Math.round(5 * this.lumiUpgradeLevel);
     }
 
     getBonusTextFromIndex(index: number): string {

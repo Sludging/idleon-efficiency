@@ -32,6 +32,7 @@ import { Votes } from "../world-2/votes";
 import { EquipmentSets } from "../misc/equipmentSets";
 import { Stat } from "../base/stat";
 import type { Rift } from "./rift";
+import type { Menagerie } from "../menagerie";
 
 const spiceValues: number[] = "0 3 5 8 10 13 15 19 20 23 27 31 33 37 41 45 48 50 53 56 58 60 63 66 70 73".split(" ").map(value => parseInt(value));
 const mealLuckValues: number[] = "1 .20 .10 .05 .02 .01 .004 .001 .0005 .0003".split(" ").map(value => parseFloat(value));
@@ -277,7 +278,8 @@ type KitchenSpeedParameters = {
     vaultBonus54: number,
     holeBravey2Bonus: number,
     holeSchematic56: number,
-    lampBonus00: number
+    lampBonus00: number,
+    menagerieMultiplier: number
 }
 
 export class Kitchen {
@@ -337,7 +339,8 @@ export class Kitchen {
             vaultBonus54,
             holeBravey2Bonus,
             holeSchematic56,
-            lampBonus00
+            lampBonus00,
+            menagerieMultiplier
         } = params;
 
         return 10 *
@@ -362,6 +365,7 @@ export class Kitchen {
             (1 + mealCookBonus / 100) *
             (1 + starsign58bonus / 100) *
             (1 + summoningWinnerBonus / 100) *
+            menagerieMultiplier *
             (1 + holeBravey2Bonus / 100) *
             Math.max(1, holeSchematic56) *
             (1 + ceramicCardBonus / 100) *
@@ -671,6 +675,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const companions = data.get("companions") as Companion[];
     const button = data.get("button") as Button;
     const eventShop = data.get("eventShop") as EventShop;
+    const menagerie = data.get("menagerie") as Menagerie;
     const companion162Bonus = getCompanionActiveBonus(companions, 162);
 
     const bestLadleSkillLevel = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 148)?.maxLevel ?? 0)));
@@ -792,7 +797,8 @@ export const updateCooking = (data: Map<string, any>) => {
         vaultBonus54: upgradeVaultBonus,
         holeBravey2Bonus: holeBravey2Bonus,
         holeSchematic56: holeSchematic56,
-        lampBonus00: holeLampBonus
+        lampBonus00: holeLampBonus,
+        menagerieMultiplier: menagerie.getBonusMultiplier(4)
     }
 
     let totalCookingSpeed = 0;

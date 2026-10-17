@@ -8,6 +8,7 @@ import { UpgradeVault } from "../upgradeVault";
 import { Hole } from "../world-5/hole/hole";
 import { LegendTalents } from "../world-7/legendTalents";
 import { Meritocraty } from "../world-7/meritocraty";
+import { Menagerie } from "../menagerie";
 
 export class OrionGlobalBonus {
     constructor(public index: number, public desc: string, public value: number) { }
@@ -56,6 +57,7 @@ export class Orion extends Domain {
     vaultUpgrade21: number = 0;
     meritoBonus12: number = 0;
     gambitBonus8: number | null = 0;
+    menagerieCostReduction: number = 1;
     
     getCurrencyImageData(): ImageData {
         return { location: "ClickerFeatherCurrency", width: 72, height: 72 };
@@ -106,8 +108,10 @@ export class Orion extends Domain {
             return 0;
         }
 
+        const menagerieCostReduction = index == 0 ? this.menagerieCostReduction : 1;
+
         if (index == 0) {
-            return 1 / (1 + 10 * this.getUpgradeLevel(3) / 100) * (1 / (1 + 20 * this.getUpgradeLevel(7) / 100)) * (1 / (1 + this.getMegafeatherQuantity(2) * this.getUpgradeLevel(0) / 100)) * upgrade.data.x0 * upgrade.level * Math.pow(Math.max(1.05, upgrade.data.x1 - .025 * this.getMegafeatherQuantity(8)), upgrade.level);
+            return 1 / (1 + 10 * this.getUpgradeLevel(3) / 100) * (1 / (1 + 20 * this.getUpgradeLevel(7) / 100)) * (1 / (1 + this.getMegafeatherQuantity(2) * this.getUpgradeLevel(0) / 100)) * menagerieCostReduction * upgrade.data.x0 * upgrade.level * Math.pow(Math.max(1.05, upgrade.data.x1 - .025 * this.getMegafeatherQuantity(8)), upgrade.level);
         } else {
             return 1 / (1 + 10 * this.getUpgradeLevel(3) / 100) * (1 / (1 + 20 * this.getUpgradeLevel(7) / 100)) * (1 / (1 + this.getMegafeatherQuantity(2) * this.getUpgradeLevel(0) / 100)) * upgrade.data.x0 * Math.pow(upgrade.data.x1, upgrade.level);
         }
@@ -168,9 +172,11 @@ export const updateOrionGlobalBonus = (data: Map<string, any>) => {
     const orion = data.get("orion") as Orion;
     const companions = data.get("companions") as Companion[];
     const legendTalents = data.get("legendTalents") as LegendTalents;
+    const menagerie = data.get("menagerie") as Menagerie;
 
     orion.companionBonus51 = getCompanionActiveBonus(companions, 51);
     orion.legendTalent26 = legendTalents.getBonusFromIndex(26);
+    orion.menagerieCostReduction = 1 / (1 + menagerie.getBonusValue(16) / 100);
 
     return orion;
 }

@@ -41,6 +41,7 @@ import { Glimbo } from "./glimbo";
 import { TaskBoard } from "../tasks";
 import { Rift } from "../world-4/rift";
 import { commaNotation, nFormatter, notateNumber } from "../../utility";
+import type { Menagerie } from "../menagerie";
 
 const RESEARCH_GRID_ALL_MULTI_CHALLENGES = [71, 72, 76];
 const RESEARCH_GRID_ALL_MULTI_COMPANION = 55;
@@ -1318,6 +1319,7 @@ const researchPercentMultiplier = (
 
 /** Prepare Research presentation after all producers, including late Royal Armory inputs. */
 export const updateResearchDisplay = (data: Map<string, any>): ResearchGrid => {
+  const menagerie = data.get("menagerie") as Menagerie;
   const research = data.get("research") as ResearchGrid;
   const players = data.get("players") as Player[];
   const companions = data.get("companions") as Companion[];
@@ -1531,6 +1533,7 @@ export const updateResearchDisplay = (data: Map<string, any>): ResearchGrid => {
     basis: `with Research EXP selected (${outpostReward.builtOutpostCount} built Outposts)${outpostReward.available ? "" : "; requires the selector to be unlocked"}`,
     acquired: outpostReward.available, active: outpostReward.selected,
   };
+  const menagerieExpMultiplier = menagerie.getBonusMultiplier(3);
   const expMultipliers = [
     researchPercentMultiplier(gridExp.source, research.getBonusForId(70), gridExp.gate, gridExp.reward),
     researchPercentMultiplier(`Equinox: ${equinox.upgrades.find(upgrade => upgrade.index === 12)!.data.name}`, equinox.getResearchExpBonus()),
@@ -1553,6 +1556,12 @@ export const updateResearchDisplay = (data: Map<string, any>): ResearchGrid => {
       const contribution = jellyContribution(index);
       return researchPercentMultiplier(contribution.source, contribution.value, contribution.gate, contribution.reward);
     }),
+    {
+      source: "Menagerie: Research EXP",
+      inputValue: menagerieExpMultiplier,
+      value: menagerieExpMultiplier,
+      operation: "multiply" as const,
+    },
     outpostExp,
   ];
   const purchase = gems.purchases.find(purchase => purchase.no === 45)!;

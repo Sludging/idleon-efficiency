@@ -58,6 +58,7 @@ import { Minehead } from '../world-7/minehead';
 import { JellyOperator } from '../world-7/jellyOperator';
 import { EventShop } from '../eventShop';
 import { IslandExpeditions } from '../world-2/islandExpedition';
+import { Menagerie } from '../menagerie';
 
 export enum TomeScoreColors {
     Platinum = "#6EE3FF",
@@ -1166,6 +1167,12 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 121:
                 line.updateAllPlayersCurrentValue(jellyOperator.getSuccessfulOperations());
+                break;
+            case 122:
+                line.updateAllPlayersCurrentValue((data.get("menagerie") as Menagerie).savedTomeRank);
+                break;
+            case 123:
+                line.updateAllPlayersCurrentValue((data.get("menagerie") as Menagerie).totalMenagerieBonusLevels);
                 break;
             default:
                 line.updateAllPlayersCurrentValue(0);

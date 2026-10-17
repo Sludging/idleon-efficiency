@@ -8,6 +8,7 @@ import { UpgradeVault } from "../upgradeVault";
 import { Hole } from "../world-5/hole/hole";
 import { LegendTalents } from "../world-7/legendTalents";
 import { Meritocraty } from "../world-7/meritocraty";
+import { Menagerie } from "../menagerie";
 
 const FisherooBonuses = [
     "{x bluefin fish caught",
@@ -85,6 +86,7 @@ export class Poppy extends Domain {
     // Global bonus boost
     companionBonus51: number = 0;
     legendTalent26: number = 0;
+    menagerieCostReduction: number = 1;
 
     // Fish rate boost
     vaultUpgrade21: number = 0;
@@ -154,8 +156,9 @@ export class Poppy extends Domain {
         const reductionBase = upgrade.index == 0 ? 1 + upgrade.level : 1;
         const reduction = reductionBase * (1 / (1 + 10 * this.getUpgradeLevel(4) / 100)) * (1 / (1 + 15 * this.getTarpitUpgradeLevel(3) / 100)) 
             * (1 / (1 + 5 * this.getMegafishQuantity(10) * this.getTarpitUpgradeLevel(7) / 100));
+        const menagerieCostReduction = index == 0 ? this.menagerieCostReduction : 1;
 
-        return reduction * (1 / Math.max(1, this.getFisherooBonus(2))) * upgrade.data.x0 * Math.pow(upgrade.data.x1, upgrade.level);
+        return reduction * (1 / Math.max(1, this.getFisherooBonus(2))) * menagerieCostReduction * upgrade.data.x0 * Math.pow(upgrade.data.x1, upgrade.level);
     }
 
     getNextGlobalBonusUpgrade(): {
@@ -247,9 +250,11 @@ export const updatePoppyGlobalBonus = (data: Map<string, any>) => {
     const poppy = data.get("poppy") as Poppy;
     const companions = data.get("companions") as Companion[];
     const legendTalents = data.get("legendTalents") as LegendTalents;
+    const menagerie = data.get("menagerie") as Menagerie;
 
     poppy.companionBonus51 = getCompanionActiveBonus(companions, 51);
     poppy.legendTalent26 = legendTalents.getBonusFromIndex(26);
+    poppy.menagerieCostReduction = 1 / (1 + menagerie.getBonusValue(18) / 100);
 
     return poppy;
 }

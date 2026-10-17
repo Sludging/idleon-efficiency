@@ -87,6 +87,7 @@ export class JellyOperatorUpgrade {
     costReduction: number = 1;
     previousUpgradePurchased: boolean = false;
     descriptionValue: number = 0;
+    menagerieDoubled = false;
 
     constructor(public index: number, public data: JellyOperatorUpgradeModel) { }
 
@@ -95,7 +96,7 @@ export class JellyOperatorUpgrade {
     }
 
     getQuantity = (): number => {
-        return this.data.bonusPerLevel * this.level;
+        return this.data.bonusPerLevel * this.level * (this.menagerieDoubled ? 2 : 1);
     }
 
     getBonus = (): number => {
@@ -198,6 +199,13 @@ export class JellyOperator extends Domain {
     plotPurchasesLeft: number = 0;
     selectedFever: JellyFeverBase | null = null;
 
+    jellyOperatorDoublersOwned = 0;
+    jellyOperatorDoublersRemaining = 0;
+    prepareMenagerieDoublerSelections(menagerie: { isJellyOperatorUpgradeDoubled(index: number): boolean }): void {
+        this.upgrades.forEach(upgrade => {
+            upgrade.menagerieDoubled = menagerie.isJellyOperatorUpgradeDoubled(upgrade.index);
+        });
+    }
     static getBloodcellImageData(): ImageData {
         return { location: "Bloodcells", width: 26, height: 24 };
     }
@@ -373,6 +381,13 @@ export class JellyOperator extends Domain {
 
 export const updateJellyOperator = (data: Map<string, any>) => {
     const jellyOperator = data.get("jellyOperator") as JellyOperator;
+    const menagerie = data.get("menagerie") as {
+        getResourceBalances(): { jellyOperatorDoublersOwned: number; jellyOperatorDoublers: number };
+    };
+    const resources = menagerie.getResourceBalances();
+    jellyOperator.jellyOperatorDoublersOwned = resources.jellyOperatorDoublersOwned;
+    jellyOperator.jellyOperatorDoublersRemaining = resources.jellyOperatorDoublers;
+
     const lowerCholesterolQuantity = jellyOperator.upgrades.find(upgrade => upgrade.index === 34)?.getQuantity() ?? 0;
     const costReduction = 1 / (1 + lowerCholesterolQuantity / 100);
 

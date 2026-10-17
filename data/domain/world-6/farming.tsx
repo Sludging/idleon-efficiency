@@ -628,6 +628,7 @@ export class Farming extends Domain {
     totalStickers: number = 0;
     exoticMarketLevels: number[] = [];
     marketCostMultiplier: number = 1;
+    organicLabelsAvailable: number = 0;
 
     cropNames = ["Apple", "Orange", "Lemon", "Pear", "Strawberry", "Bananas", "Blueberry", "Red Grapes", "Red Pear", "Pineapple", "Lime", "Raspberry", "Fig", "Peach", "Purple Grapes", "Yellow Pear", "Watermelon", "Green Grapes", "Dragon Fruit", "Mango", "Gold Blueberry",
         "Carrot", "Potato", "Beat", "Tomato", "Artichoke", "Roma Tomato", "Butternut Squash", "Avocado", "Red Pepper", "Broccoli", "Beatroot", "Coconut", "Sliced Tomato", "Cashew", "Turnip", "Coffee Bean", "Pumpkin", "Sliced Cucumber", "Eggplant", "Lettuce", "Garlic", "Green Beans", "Bell Pepper", "Corn", "Gold Sliced Tomato",
@@ -999,7 +1000,10 @@ export const updateFarmingStickerBonuses = (data: Map<string, any>): Farming => 
 
 export const updateFarmingLevel = (data: Map<string, any>) => {
     const farming = data.get("farming") as Farming;
+    const menagerie = data.get("menagerie") as { getResourceBalances(): { organicLabels: number } };
     const players = data.get("players") as Player[];
+
+    farming.organicLabelsAvailable = menagerie.getResourceBalances().organicLabels;
 
     const levels: number[] = [];
     players.forEach(player => {

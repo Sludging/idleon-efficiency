@@ -21,6 +21,7 @@ import { Emperor } from "./emperor";
 import { EquipmentSets } from "../misc/equipmentSets";
 import { Tesseract } from "../tesseract";
 import { GemStore } from "../gemPurchases";
+import { Menagerie } from "../menagerie";
 
 const WhiteBattleOrder = [
     "Pet1", "Pet2", "Pet3", "Pet0", "Pet4", "Pet6", "Pet5", "Pet10", "Pet11"
@@ -726,6 +727,7 @@ export const updateSummoningUpgrades= (data: Map<string, any>) => {
     const summoning = data.get("summoning") as Summoning;
     const players = data.get("players") as Player[];
     const tesseract = data.get("tesseract") as Tesseract;
+    const menagerie = data.get("menagerie") as Menagerie;
     
     // Update upgrade bonuses
     const levels: number[] = [];
@@ -770,12 +772,15 @@ export const updateSummoningUpgrades= (data: Map<string, any>) => {
     const costReductionFromUpgrade72 = 1 / (1 + summoning.getUpgradeBonusFromIndex(72) / 100);
     const costReductionFromUpgrade75 = 1 / (1 + summoning.getUpgradeBonusFromIndex(75) / 100);
     
-    const totalCostReduction = costReductionFromTalent595 * costReductionFromTesseract54 * costReductionFromUpgrade49 * costReductionFromUpgrade57 
-        * costReductionFromUpgrade72 * costReductionFromUpgrade75;
-
+    const totalCostReductionBeforeMenagerie = costReductionFromTalent595 * costReductionFromTesseract54 * costReductionFromUpgrade49 * costReductionFromUpgrade57 
+        * costReductionFromUpgrade72;
+    
     summoning.summonUpgrades.forEach(upgrade => {
-        upgrade.totalCostReduction = totalCostReduction;
+        const boostQuantity = menagerie.getBonusValue(7);
+        const menagerieCostReduction = 1 / Math.max(1, Math.pow(Math.min(50, 1 + boostQuantity / 100), Math.floor(upgrade.level / 50)));
+        upgrade.totalCostReduction = totalCostReductionBeforeMenagerie * menagerieCostReduction * costReductionFromUpgrade75;
     });
+
 
     return summoning;
 }

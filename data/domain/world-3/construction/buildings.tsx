@@ -10,6 +10,7 @@ export class Building {
     bonus: string
     lvlUpReq: ComponentModel[]
     maxLvl: number
+    baseMaxLvl: number
     costIncrement: number
     bonusInc: number[]
     misc: number
@@ -30,8 +31,16 @@ export class Building {
     constructor(public index: number, data: BuildingModel, multiplier: number = 0) {
         this.description = data.description;
         this.bonus = data.bonus;
-        this.lvlUpReq = data.lvlUpReq as ComponentModel[];
         this.maxLvl = data.maxLvl;
+        this.baseMaxLvl = data.maxLvl;
+        this.lvlUpReq = data.lvlUpReq.map(requirement => {
+            if (!("item" in requirement) || typeof requirement.item !== "string"
+                || !("quantity" in requirement) || typeof requirement.quantity !== "number") {
+                throw new Error(`Building ${data.name} has invalid level-up requirement data.`);
+            }
+
+            return { item: requirement.item, quantity: requirement.quantity };
+        });
         this.costIncrement = data.costInc;
         this.bonusInc = data.bonusInc;
         this.misc = data.misc;

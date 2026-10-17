@@ -14,6 +14,7 @@ import { ConstructionMastery, Rift } from "../../world-4/rift";
 import { Stamp } from "../../world-1/stamps";
 import { Storage } from "../../storage";
 import { DancingCoral } from "../../world-7/dancingCoral";
+import { Menagerie } from "../../menagerie";
 import { Player } from "../../player";
 import { CogBoard, getRoyalOutpostCogBuildSpeedMultiplier } from "./cog";
 import type { RoyalArmory } from "../../world-6/royalArmory/royalArmory";
@@ -140,11 +141,13 @@ export const updateConstruction = (data: Map<string, any>) => {
     const rift = data.get("rift") as Rift;
     const storage = data.get("storage") as Storage;
     const dancingCoral = data.get("dancingCoral") as DancingCoral;
+    const menagerie = data.get("menagerie") as Menagerie;
     const costCruncher = construction?.buildings.find(building => building.index == 5) as Building;
 
     // Figure out max building levels
     const constMastery = rift.bonuses.find(bonus => bonus.name == "Construct Mastery") as ConstructionMastery;
     construction.buildings.forEach(building => {
+        building.maxLvl = building.baseMaxLvl;
         switch (building.index) {
             // Library
             case 1:
@@ -177,7 +180,12 @@ export const updateConstruction = (data: Map<string, any>) => {
             case 24:
             case 25:
             case 26:
-                building.maxLvl += constMastery.getBonusByIndex(5) + (dancingCoral.isDancingCoralPurchased(building.index - 18) ? 100 : 0);
+                building.maxLvl = Math.round(
+                    building.baseMaxLvl
+                    + constMastery.getBonusByIndex(5)
+                    + (dancingCoral.isDancingCoralPurchased(building.index - 18) ? 100 : 0)
+                    + menagerie.getBonusValue(5),
+                );
                 break;
         }
 

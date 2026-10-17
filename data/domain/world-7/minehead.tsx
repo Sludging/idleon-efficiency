@@ -33,6 +33,7 @@ export class MineheadUpgrade {
     serverCostScaling: number = 1;
     mineheadCostReduction: number = 1;
     sushiCostReduction: number = 1;
+    menagerieDoubled = false;
 
     constructor(public index: number, public data: MineheadUpgradeModel) { }
 
@@ -41,7 +42,7 @@ export class MineheadUpgrade {
     }
 
     getBonus(): number {
-        return this.data.quantityPerLevel * this.level;
+        return this.data.quantityPerLevel * this.level * (this.menagerieDoubled ? 2 : 1);
     }
 
     getRequiredLevel(): number {
@@ -77,7 +78,14 @@ export class Minehead extends Domain {
     opponentsDefeated: number = 0;
     currency: number = 0;
     serverCostScaling: number = 1;
+    mineheadDoublersOwned = 0;
+    mineheadDoublersRemaining = 0;
     private preparedTradeDropRateMultiplier: number | undefined;
+    prepareMenagerieDoublerSelections(menagerie: { isMineheadUpgradeDoubled(index: number): boolean }): void {
+        this.upgrades.forEach(upgrade => {
+            upgrade.menagerieDoubled = menagerie.isMineheadUpgradeDoubled(upgrade.index);
+        });
+    }
 
     getRawKeys(): RawData[] {
         return [
@@ -156,6 +164,12 @@ export class Minehead extends Domain {
 export const updateMinehead = (data: Map<string, any>) => {
     const minehead = data.get("minehead") as Minehead;
     const sushi = data.get("sushi") as SushiStation;
+    const menagerie = data.get("menagerie") as {
+        getResourceBalances(): { mineheadDoublersOwned: number; mineheadDoublers: number };
+    };
+    const resources = menagerie.getResourceBalances();
+    minehead.mineheadDoublersOwned = resources.mineheadDoublersOwned;
+    minehead.mineheadDoublersRemaining = resources.mineheadDoublers;
 
     // Progression indices gate earned rewards; display IDs are presentation-only.
     minehead.opponents.forEach(opponent => {

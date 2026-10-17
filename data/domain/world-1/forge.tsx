@@ -1,6 +1,7 @@
 import { lavaFunc, range } from "../../utility";
 import { Domain, RawData } from "../base/domain";
 import { GemStore } from "../gemPurchases";
+import type { Menagerie } from "../menagerie";
 import { Item } from "../items";
 
 const getDescRegex = () => { return /Smelt down (\d+) Ores into 1 Bar at the Forge. Smelting will take (\d+) Seconds per Bar using Forge Slot 1./g; };
@@ -8,6 +9,7 @@ const getOilRegex = () => { return /Increases (.*) by (\d+)% for (.*) it's in. (
 
 export class ForgeSlot {
     brimestone: boolean = false
+    menagerieMultiplier: number = 1;
 
     constructor(public ores: Item, public oils: Item, public bars: Item, public progress: number) { }
 
@@ -42,7 +44,7 @@ export class ForgeSlot {
     }
 
     getSpeed = (upgradeBonus: number) => {
-        let speed = Math.round(upgradeBonus) / 100;
+        let speed = Math.round(upgradeBonus * this.menagerieMultiplier) / 100;
         speed *= this.getOilSpeed();
         if (this.brimestone) {
             speed *= 1.5;
@@ -201,11 +203,12 @@ export class Forge extends Domain {
     }
 }
 
-export const updateForge = (forge: Forge, gemStore: GemStore) => {
+export const updateForge = (forge: Forge, gemStore: GemStore, menagerie: Menagerie) => {
     const brimeStoneBought = gemStore.purchases.find(purchase => purchase.no == 104)?.pucrhased ?? 0;
     forge.slots.forEach((slot, index) => {
         if (index < brimeStoneBought)
             slot.brimestone = true;
+        slot.menagerieMultiplier = menagerie.getBonusMultiplier(11);
     });
 
     return forge;

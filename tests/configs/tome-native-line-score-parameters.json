@@ -1,0 +1,626 @@
+{
+  "description": "Compare every native Tome line score with the highest IE TomeLine score for the matching saved character count. Extract native TomePTS one line at a time.",
+  "target": "Native Tome line scores",
+  "extractions": [
+    {
+      "label": "tome_pts_0",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 0, 0)",
+      "description": "Native score for Tome line 0; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_1",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 1, 0)",
+      "description": "Native score for Tome line 1; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_2",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 2, 0)",
+      "description": "Native score for Tome line 2; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_3",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 3, 0)",
+      "description": "Native score for Tome line 3; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_4",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 4, 0)",
+      "description": "Native score for Tome line 4; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_5",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 5, 0)",
+      "description": "Native score for Tome line 5; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_6",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 6, 0)",
+      "description": "Native score for Tome line 6; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_7",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 7, 0)",
+      "description": "Native score for Tome line 7; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_8",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 8, 0)",
+      "description": "Native score for Tome line 8; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_9",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 9, 0)",
+      "description": "Native score for Tome line 9; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_10",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 10, 0)",
+      "description": "Native score for Tome line 10; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_11",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 11, 0)",
+      "description": "Native score for Tome line 11; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_12",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 12, 0)",
+      "description": "Native score for Tome line 12; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_13",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 13, 0)",
+      "description": "Native score for Tome line 13; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_14",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 14, 0)",
+      "description": "Native score for Tome line 14; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_15",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 15, 0)",
+      "description": "Native score for Tome line 15; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_16",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 16, 0)",
+      "description": "Native score for Tome line 16; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_17",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 17, 0)",
+      "description": "Native score for Tome line 17; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_18",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 18, 0)",
+      "description": "Native score for Tome line 18; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_19",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 19, 0)",
+      "description": "Native score for Tome line 19; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_20",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 20, 0)",
+      "description": "Native score for Tome line 20; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_21",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 21, 0)",
+      "description": "Native score for Tome line 21; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_22",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 22, 0)",
+      "description": "Native score for Tome line 22; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_23",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 23, 0)",
+      "description": "Native score for Tome line 23; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_24",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 24, 0)",
+      "description": "Native score for Tome line 24; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_25",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 25, 0)",
+      "description": "Native score for Tome line 25; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_26",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 26, 0)",
+      "description": "Native score for Tome line 26; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_27",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 27, 0)",
+      "description": "Native score for Tome line 27; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_28",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 28, 0)",
+      "description": "Native score for Tome line 28; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_29",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 29, 0)",
+      "description": "Native score for Tome line 29; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_30",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 30, 0)",
+      "description": "Native score for Tome line 30; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_31",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 31, 0)",
+      "description": "Native score for Tome line 31; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_32",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 32, 0)",
+      "description": "Native score for Tome line 32; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_33",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 33, 0)",
+      "description": "Native score for Tome line 33; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_34",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 34, 0)",
+      "description": "Native score for Tome line 34; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_35",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 35, 0)",
+      "description": "Native score for Tome line 35; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_36",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 36, 0)",
+      "description": "Native score for Tome line 36; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_37",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 37, 0)",
+      "description": "Native score for Tome line 37; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_38",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 38, 0)",
+      "description": "Native score for Tome line 38; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_39",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 39, 0)",
+      "description": "Native score for Tome line 39; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_40",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 40, 0)",
+      "description": "Native score for Tome line 40; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_41",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 41, 0)",
+      "description": "Native score for Tome line 41; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_42",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 42, 0)",
+      "description": "Native score for Tome line 42; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_43",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 43, 0)",
+      "description": "Native score for Tome line 43; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_44",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 44, 0)",
+      "description": "Native score for Tome line 44; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_45",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 45, 0)",
+      "description": "Native score for Tome line 45; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_46",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 46, 0)",
+      "description": "Native score for Tome line 46; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_47",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 47, 0)",
+      "description": "Native score for Tome line 47; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_48",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 48, 0)",
+      "description": "Native score for Tome line 48; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_49",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 49, 0)",
+      "description": "Native score for Tome line 49; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_50",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 50, 0)",
+      "description": "Native score for Tome line 50; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_51",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 51, 0)",
+      "description": "Native score for Tome line 51; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_52",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 52, 0)",
+      "description": "Native score for Tome line 52; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_53",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 53, 0)",
+      "description": "Native score for Tome line 53; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_54",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 54, 0)",
+      "description": "Native score for Tome line 54; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_55",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 55, 0)",
+      "description": "Native score for Tome line 55; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_56",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 56, 0)",
+      "description": "Native score for Tome line 56; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_57",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 57, 0)",
+      "description": "Native score for Tome line 57; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_58",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 58, 0)",
+      "description": "Native score for Tome line 58; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_59",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 59, 0)",
+      "description": "Native score for Tome line 59; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_60",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 60, 0)",
+      "description": "Native score for Tome line 60; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_61",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 61, 0)",
+      "description": "Native score for Tome line 61; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_62",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 62, 0)",
+      "description": "Native score for Tome line 62; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_63",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 63, 0)",
+      "description": "Native score for Tome line 63; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_64",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 64, 0)",
+      "description": "Native score for Tome line 64; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_65",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 65, 0)",
+      "description": "Native score for Tome line 65; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_66",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 66, 0)",
+      "description": "Native score for Tome line 66; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_67",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 67, 0)",
+      "description": "Native score for Tome line 67; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_68",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 68, 0)",
+      "description": "Native score for Tome line 68; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_69",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 69, 0)",
+      "description": "Native score for Tome line 69; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_70",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 70, 0)",
+      "description": "Native score for Tome line 70; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_71",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 71, 0)",
+      "description": "Native score for Tome line 71; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_72",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 72, 0)",
+      "description": "Native score for Tome line 72; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_73",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 73, 0)",
+      "description": "Native score for Tome line 73; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_74",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 74, 0)",
+      "description": "Native score for Tome line 74; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_75",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 75, 0)",
+      "description": "Native score for Tome line 75; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_76",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 76, 0)",
+      "description": "Native score for Tome line 76; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_77",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 77, 0)",
+      "description": "Native score for Tome line 77; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_78",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 78, 0)",
+      "description": "Native score for Tome line 78; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_79",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 79, 0)",
+      "description": "Native score for Tome line 79; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_80",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 80, 0)",
+      "description": "Native score for Tome line 80; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_81",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 81, 0)",
+      "description": "Native score for Tome line 81; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_82",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 82, 0)",
+      "description": "Native score for Tome line 82; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_83",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 83, 0)",
+      "description": "Native score for Tome line 83; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_84",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 84, 0)",
+      "description": "Native score for Tome line 84; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_85",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 85, 0)",
+      "description": "Native score for Tome line 85; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_86",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 86, 0)",
+      "description": "Native score for Tome line 86; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_87",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 87, 0)",
+      "description": "Native score for Tome line 87; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_88",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 88, 0)",
+      "description": "Native score for Tome line 88; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_89",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 89, 0)",
+      "description": "Native score for Tome line 89; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_90",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 90, 0)",
+      "description": "Native score for Tome line 90; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_91",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 91, 0)",
+      "description": "Native score for Tome line 91; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_92",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 92, 0)",
+      "description": "Native score for Tome line 92; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_93",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 93, 0)",
+      "description": "Native score for Tome line 93; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_94",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 94, 0)",
+      "description": "Native score for Tome line 94; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_95",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 95, 0)",
+      "description": "Native score for Tome line 95; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_96",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 96, 0)",
+      "description": "Native score for Tome line 96; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_97",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 97, 0)",
+      "description": "Native score for Tome line 97; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_98",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 98, 0)",
+      "description": "Native score for Tome line 98; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_99",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 99, 0)",
+      "description": "Native score for Tome line 99; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_100",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 100, 0)",
+      "description": "Native score for Tome line 100; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_101",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 101, 0)",
+      "description": "Native score for Tome line 101; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_102",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 102, 0)",
+      "description": "Native score for Tome line 102; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_103",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 103, 0)",
+      "description": "Native score for Tome line 103; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_104",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 104, 0)",
+      "description": "Native score for Tome line 104; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_105",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 105, 0)",
+      "description": "Native score for Tome line 105; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_106",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 106, 0)",
+      "description": "Native score for Tome line 106; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_107",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 107, 0)",
+      "description": "Native score for Tome line 107; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_108",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 108, 0)",
+      "description": "Native score for Tome line 108; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_109",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 109, 0)",
+      "description": "Native score for Tome line 109; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_110",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 110, 0)",
+      "description": "Native score for Tome line 110; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_111",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 111, 0)",
+      "description": "Native score for Tome line 111; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_112",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 112, 0)",
+      "description": "Native score for Tome line 112; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_113",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 113, 0)",
+      "description": "Native score for Tome line 113; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_114",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 114, 0)",
+      "description": "Native score for Tome line 114; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_115",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 115, 0)",
+      "description": "Native score for Tome line 115; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_116",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 116, 0)",
+      "description": "Native score for Tome line 116; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_117",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 117, 0)",
+      "description": "Native score for Tome line 117; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_118",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 118, 0)",
+      "description": "Native score for Tome line 118; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_119",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 119, 0)",
+      "description": "Native score for Tome line 119; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_120",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 120, 0)",
+      "description": "Native score for Tome line 120; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_121",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 121, 0)",
+      "description": "Native score for Tome line 121; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_122",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 122, 0)",
+      "description": "Native score for Tome line 122; compare with the highest saved-character IE score for this line."
+    },
+    {
+      "label": "tome_pts_123",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 123, 0)",
+      "description": "Native score for Tome line 123; compare with the highest saved-character IE score for this line."
+    }
+  ]
+}
