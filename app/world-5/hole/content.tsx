@@ -16,6 +16,8 @@ import ResourceCharactersTooltip from "../../../components/world-5/hole/Resource
 import Schematics from "../../../components/world-5/hole/schematics";
 import Measurements from "../../../components/world-5/hole/measurements";
 import { usePreservedScroll } from "../../../components/world-5/hole/upgradeInspection";
+import Part4CavernDetails from "../../../components/world-5/hole/part4Caverns";
+import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import type { Companion } from "../../../data/domain/companions";
 import { Item } from "../../../data/domain/items";
 import type { Player } from "../../../data/domain/player";
@@ -25,7 +27,6 @@ import { SkillsIndex } from "../../../data/domain/SkillsIndex";
 import type { Skilling, SkillingSkill } from "../../../data/domain/skilling";
 import type { Villager, VillagerCharacterRate } from "../../../data/domain/world-5/hole/villager";
 import { commaNotation, nFormatter, notateNumber } from "../../../data/utility";
-import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { DataStatus } from "../../../lib/stores/appDataStore";
 
 // Dimensions come from the inspected HolePOI art map. Jars uses neutral art, not the saved aesthetic.
@@ -215,6 +216,7 @@ export default function HoleContent() {
     const selectedResourceCavern = resourceCavernPosition < 0
         ? null
         : Object.values(hole.resourceCavrens.cavrens)[resourceCavernPosition];
+    const part4Cavern = [0, 4, 5, 6].includes(cavern);
     const skilling = data.get("skilling") as Skilling;
     const resourceCharacters = selectedResourceCavern === null ? [] : characters
         .map(character => ({
@@ -328,8 +330,8 @@ export default function HoleContent() {
             {tab === "Caverns" && <ShadowBox flex={false} data-testid="caverns-panel"><Grid rows="1" columns={["25%", "75%"]}>
                 <Box pad="medium" height="100%" data-testid="cavern-rail">{cavernArt.map((image, index) => <Box direction="row" align="center" key={image.name} data-testid={`cavern-nav-${index}`}><CavernImage index={index} width={32} height={28} /><Box flex><LeftNavButton text={image.name} isActive={cavern === index} clickHandler={() => preserveScroll(() => setCavern(index))} /></Box></Box>)}</Box>
                 <Box fill background="dark-1" pad="medium" gap="medium" style={{ minWidth: 0 }} data-testid="selected-cavern">
-                    <Box direction="row" gap="small" align="center"><CavernImage index={cavern} width={96} height={80} /><Heading level="3" size="small" margin="none">{cavernArt[cavern].name}</Heading></Box>
-                    {selectedResourceCavern === null ? <>
+                    <Box direction="row" gap="small" align="center"><CavernImage index={cavern} width={96} height={80} />{!part4Cavern && <Heading level="3" size="small" margin="none">{cavernArt[cavern].name}</Heading>}</Box>
+                    {part4Cavern ? <Part4CavernDetails hole={hole} cavern={cavern} players={data.get("players") as Player[]} /> : selectedResourceCavern === null ? <>
                         {hole.cavernOpalSources.filter(source => source.owner === `cavern:${cavern}`).map(source => <TextAndLabel key={source.id} label="Earned Opals" text={number(source.opals, source.unavailableReason)} tooltip={exact(source.opals, source.unavailableReason)} />)}
                         <Box gap="small"><Text color="accent-2" size="small">Owned Study benefit</Text><Benefit index={cavern} effects={studies[cavern].effects} dailyPurchases={hole.studies[cavern].dailyCoveUpgradesPurchased} /></Box>
                         <Text size="small">Other cavern tools are not supported on this website yet.</Text>

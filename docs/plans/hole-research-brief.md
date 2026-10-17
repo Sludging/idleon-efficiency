@@ -1,6 +1,6 @@
 # The Hole: research brief
 
-- **Status:** Parts 1–3 remain human-accepted complete. Part 4 backend is accepted by the delegated supervisor and human; its recorded evidence and limits are below. Part 4 phase 6 UI planning is next, not authorized here. Parts 5–7 remain unselected. Parent issue [#440](https://github.com/Sludging/idleon-efficiency/issues/440) remains open. No push, PR, deployment, or issue closure.
+- **Status:** Parts 1–3 remain human-accepted complete. Part 4 backend and UI are accepted; backend local commit is `067577c3`, and this UI layer is authorized for local commit. UI evidence and check limits are below. The user retains longer smoke testing. Parts 5–7 remain unselected. Parent issue [#440](https://github.com/Sludging/idleon-efficiency/issues/440) remains open. No push, PR, deployment, or issue closure.
 
 **Final settlement (2026-10-16):** The human said, “Ok I approve settling this part work as complete, well done. Make sure to record and update any relevant documentation and issues”. This approves recording part 3 as complete and updating relevant documentation and issues. Separately, the human had said, “Alright commit your work, if any file you touched has other changes only commit your hunk”. This is the prior commit authority; neither statement includes “I accept this UI result and its stated check limits.” Parts 1–2 remain complete; parts 4–7 remain unselected. The parent remains open.
 
@@ -8,8 +8,25 @@
 
 ## Current handoff
 
-- **Selected part and authority:** The human selected part 4 only: [#444 — Well, Bell, Harp, and Lamp progression](https://github.com/Sludging/idleon-efficiency/issues/444). The supervisor approved the backend plan in [receipt #444](https://github.com/Sludging/idleon-efficiency/issues/444#issuecomment-6227478771), and accepted the reviewed backend result with its stated limits. The human then accepted this backend layer and its limits, authorizing only its local commit. Part 4 phase 4 backend is accepted; phase 6 UI planning is next and requires its own approval. Parts 1–3 remain accepted; parts 5–7 remain unselected.
+- **Selected part and authority:** The human selected part 4 only: [#444 — Well, Bell, Harp, and Lamp progression](https://github.com/Sludging/idleon-efficiency/issues/444). The supervisor approved its backend plan in [receipt #444](https://github.com/Sludging/idleon-efficiency/issues/444#issuecomment-6227478771), accepted the reviewed backend result with its stated limits, and authorized local commit `067577c3` under the user's standing delegation. The human accepted the UI result and its stated check limits on 2026-10-17. Part 4 backend and UI are accepted; this UI layer is authorized for local commit. Parts 1–3 remain human-accepted; parts 5–7 remain unselected. User longer smoke testing remains outstanding.
 - **Accepted backend evidence and limits:** Six focused behavior tests passed, plus normal standalone import and nonmutation smoke. v1.23 game evidence includes Well aggregate `100350592397289070`, Bell rates/costs/quantities/Clean/seven effects, Harp power/slots/passives, and corrected Lamp daily `29.953020408163265` with observed costs/effects. This is not full all-branch parity. Evidence uses one save and current 1.23 assets; capture provenance is unknown. Direct Stamp probe `69` versus app owner `50.98039215686274` remains unexplained despite matching aggregate. Lamp costs 8–11 and other effect arguments timed out; resets remain source-only, with no actions. Transient Harp output remains excluded. No full suite, build, lint, or typecheck ran. Six tests cover representative, not exhaustive, unknown-row combinations. Preserve unrelated historical limits: part 1/2 paired inputs mismatch, and part 3 STR baseline is old v1.22 evidence.
+
+### Part 4 phase 6 preview evidence withdrawn — user override — 2026-10-17
+
+- The prior `2026-10-17T06-25-38-801Z-5258` preview is invalid as semantic evidence. It used invented state and benefit copy, including a false Lantern allowance, false Lamp effects, invented Bell caps, wrong Harp units, and a nonexistent bucket gate after ten slots. Do not reuse its captures or assertions.
+- User override: skip the mockup stage. A fresh worker must implement the requested production UI using new Sushi and Spelunking UI styles. Limit initial checks to page load and basic interactions; the user will run longer smoke checks.
+- This session stopped preview work immediately. No new captures or production implementation were completed. Removed temporary route, component, and scenario; restored `app/world-5/hole/content.tsx`. Exact but unverified source snapshots remain under ignored `.ui-verification/hole-part4-final/source-copies/`: `part4-preview-page.tsx`, `Part4Preview.tsx`, `hole-part4-final.cjs`, and `hole-content-with-preview.tsx`. Treat these as incomplete source only, not runnable or evidence.
+- No build, tests, lint, formatter, acceptance, publication, or commit ran in this stopped phase. Earlier preview errors and reference findings are historical only, not design approval or production evidence.
+
+### Part 4 phase 7 live UI implementation — 2026-10-17
+
+- Implemented production Well, Bell, Harp, and Lamp details in `components/world-5/hole/part4Caverns.tsx`, routed only for those four existing rail entries in `app/world-5/hole/content.tsx`. Existing shell, summary, tabs, art, ordered rail, and other 14 support states remain.
+- Composition follows new Sushi/Spelunking patterns: compact value strips, rounded dark-1 cards, and grey-1 inset metrics. Views use accepted owner/model data and remain read-only. Per-wish, Harp-string, and sediment image metadata is absent; existing selected-cavern art remains authoritative.
+- Final minimal browser run passed on `https://app:3000/world-5/hole` with configured `latest.json` save, selecting Well, Bell, Harp, Lamp and hovering one local detail. Screenshots: [Well](../../.ui-verification/runs/2026-10-17T06-57-24-888Z-41688/hole-well.png), [Bell](../../.ui-verification/runs/2026-10-17T06-57-24-888Z-41688/hole-bell.png), [Harp](../../.ui-verification/runs/2026-10-17T06-57-24-888Z-41688/hole-harp.png), [Lamp](../../.ui-verification/runs/2026-10-17T06-57-24-888Z-41688/hole-lamp.png). Result: [`result.json`](../../.ui-verification/runs/2026-10-17T06-57-24-888Z-41688/result.json).
+- Observed unrelated browser noise: a navigation hydration-attribute mismatch, NitroPay `document.browsingTopics()` exception, RL identity CORS denial, one failed resource, and one HTTP 403. Final view interactions passed; no Hole-specific runtime error remained.
+- Limits: one local save and desktop viewport; no full game parity, build, test, lint, or typecheck. Save was not changed. User owns longer smoke test. No independent review, human acceptance, commit, or publication occurred.
+- Temporary scenario was only a local verification aid and is removed after evidence capture; screenshot artifacts remain ignored under `.ui-verification`.
+
 ### Part 4 phase 5 selected correction and verification — 2026-10-17
 
 Corrected Well gold-bucket ownership and multiplier mapping from v1.23 source. Harp now stores each note balance only as `current` and next-note cost only as `noteCost`. Removed unused Gaming Superbit69 special state/parser; retained `isSuperbitPurchased` and Cglunko getter.
@@ -3312,3 +3329,41 @@ The offline tool documents `--save PATH` and `/cloud-save` read-only input inspe
 **Bell levels (`Holes[17][0..11]`):** The game calculates each level's effect as `Holes[17][t] × HolesInfo[59][2*t+1]` (`240969`). The Bell UI loops over all twelve saved indices and reads labels from `HolesInfo[59][2*n]` (`262070–103`). The generated `BellBonusRepo` contains seven indexed records only: index 0 Bucket Fill Rate, 1 All Villager EXP, 2 Harp Note Gains, 3 Daily Lamp Wishes, 4 Extra Rupie Chance, 5 Double Torch Chance, 6 Coins from Fountain (`data/domain/data/BellBonusRepo.ts:7–16`). No source mapping from twelve saved level slots to those seven repository records is defined. Code directly pairs slot `n` with flattened metadata pair `n`, so only slots 0–6 align with the seven static records; slots 7–11 are not mapped by any evidenced rule. Do not infer family/label/effect assignments for those five slots.
 
 **Evidence limits:** These are static v1.23 source facts, not live-game observations. No runtime or website evidence was used.
+### Part 4 phase 8 fresh independent UI review — 2026-10-17
+
+Reviewed issue #444, the accepted part 4 UI plan, current Hole UI diff, production screenshots, and recorded live-route report. Code remained read-only. No valid rendered preview exists because the user explicitly skipped mockups; the prior preview was withdrawn and was not used as evidence.
+
+**Findings for human decision**
+
+- **Redundant missing-value branch — `components/world-5/hole/part4Caverns.tsx:62-63`:** The fallback returns `"Unavailable"` for both nullable assignment and missing sediment record. Collapse it to one fallback; keep the nullable lookup only if invalid/out-of-range saved indices are a supported input. This adds needless conditional complexity without changing output.
+- **Repeated Money-wallet search — `components/world-5/hole/part4Caverns.tsx:152-154`:** The same array search runs three times, followed by non-null assertions. Store the matched wallet once and render its values from that local. This avoids repeated work and makes the presence/type guard easier to maintain.
+
+**Spec and scope:** No confirmed missing approved player outcome or scope expansion. The live screenshots show the selected Well, Bell, Harp, and Lamp views; the recorded interaction run passed all four selections and one detail hover. Existing shell, tabs, rail, and other support views remain unchanged.
+
+**Evidence limits:** One configured save and desktop viewport only. No checks were rerun. No game parity, build, tests, lint, typecheck, accessibility, mobile/tablet, or extended interaction smoke was performed. Recorded browser noise is listed above; no Hole-specific runtime error remained. User retains longer smoke testing and acceptance.
+### Part 4 selected phase 8 UI corrections — 2026-10-17
+
+Addressed only the selected review findings in `components/world-5/hole/part4Caverns.tsx`:
+
+- Well assignment now uses one `"Unavailable"` fallback while retaining the nullable saved-index lookup for missing or invalid sediment records.
+- Bell finds the character Money wallet once, then renders balances from the guarded local. Removed repeated searches and non-null assertions. Sushi/Spelunking composition and visible output remain unchanged.
+
+**Minimal verification:** `yarn ui:run .ui-verification/hole-part4-selected-fixes-20261017.cjs` passed on `https://app:3000/world-5/hole` with the configured local save. The scenario loaded the normal route, selected Caverns and Bell once, and confirmed the Bell detail and Money section rendered. Result and Bell screenshot are under [run `2026-10-17T07-01-58-020Z-48416`](../../.ui-verification/runs/2026-10-17T07-01-58-020Z-48416/), including [`result.json`](../../.ui-verification/runs/2026-10-17T07-01-58-020Z-48416/result.json) and `bell-details.png`. An initial attempt exposed a transient missing `modeRecords` declaration from the edit; restored it before the passing run.
+
+The final run recorded only the existing hydration mismatch, NitroPay `document.browsingTopics()` error, RL identity CORS denial, failed resource, and HTTP 403; no Hole-specific runtime error remained. One configured save and desktop viewport only. No tests, build, lint, typecheck, extended smoke, game parity, or save mutation. User retains longer smoke. No acceptance, publication, or commit occurred.
+### Part 4 final phase 8 UI review — 2026-10-17
+
+Fresh read-only review of issue #444, the accepted UI plan, current production UI, captured Well/Bell/Harp/Lamp views, and the recorded minimal normal-route check.
+
+**Confirmed findings: none.** Standards/maintainability: 0. Specification/scope: 0. Well assignment now has one unavailable fallback; nullable lookup remains meaningful for invalid saved indices. Bell resolves the character Money wallet once and renders its guarded values. `modeRecords` remains declared and feeds the four Bell-bank cards. No regression found in these selected fixes.
+
+The four production views match the approved read-only outcomes and use the planned Sushi/Spelunking visual language. Existing shell, summary, tabs, art, rail, and other support states remain; no extra navigation, controls, calculation, or speculative handling was introduced. Nullable guards in these views correspond to backend-unavailable states or optional image metadata.
+
+**Evidence and limits:** The prior phase-7 screenshots and one-save desktop route run are the available UI evidence; user override skipped a separate mockup preview. The selected-fix route check passed, rendering Bell detail and Money. No checks were rerun. Browser noise and remaining limits are recorded above; no full smoke, game parity, build, tests, lint, typecheck, or accessibility check was performed. User retains longer smoke and acceptance. No code, publication, or commit occurred.
+### Part 4 phase 8 UI acceptance and local commit — 2026-10-17
+
+The human accepted the demonstrated UI and its stated check limits. This local commit contains only the accepted part-4 UI layer: `app/world-5/hole/content.tsx`, `components/world-5/hole/part4Caverns.tsx`, and this handoff update. No backend, generated data, fixtures, or unrelated concurrent work is included.
+
+The production route renders four backend-fed Well, Bell, Harp, and Lamp panels. Existing shell, summary, tabs, artwork, 18-entry rail, and 14 other support states remain. Views are read-only and use the accepted Sushi/Spelunking composition.
+
+Evidence remains one configured save and desktop viewport. Four cavern selections and one Lamp detail interaction passed; no Hole-specific runtime error remained. Existing shared hydration mismatch, NitroPay `document.browsingTopics()` error, RL identity CORS denial, failed resource, and HTTP 403 remain. No UI tests, build, lint, typecheck, mobile/accessibility, game parity, or extended smoke ran. User retains longer smoke testing. No push, PR, deployment, or issue closure.
