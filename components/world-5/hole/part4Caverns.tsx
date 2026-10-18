@@ -424,8 +424,10 @@ function HarpView({ hole }: { hole: Hole }) {
                     </Box>}
                     <Box direction="row" gap="xsmall" align="center" pad={{ right: "small" }} border={{ side: "right", color: "grey-1" }}>
                         <Text size="xsmall" color="accent-2">Opal chance</Text>
-                        <TipDisplay heading="Opal chance unavailable" body={<Text size="xsmall">Domino Effect adds 20 percentage points per string plucked during the current strum. The save does not record how many strings have been plucked in that strum.</Text>} size="small">
-                            <Text size="small" tabIndex={0} style={{ textDecoration: "underline dotted", textUnderlineOffset: "3px", cursor: "help" }}>Unavailable</Text>
+                        <TipDisplay heading="Baseline Opal chance" body={<Text size="xsmall">Baseline chance uses saved power before any strings are plucked. Domino Effect increases this chance as strings are plucked.</Text>} size="small">
+                            <Text size="small" tabIndex={0} style={{ textDecoration: "underline dotted", textUnderlineOffset: "3px", cursor: "help" }}>
+                                {harp.baselineOpalChance === null ? "Unavailable" : `${(harp.baselineOpalChance * 100).toLocaleString("en-US", { maximumFractionDigits: 2 })}%`}
+                            </Text>
                         </TipDisplay>
                     </Box>
                     <Box direction="row" gap="xsmall" align="center">
