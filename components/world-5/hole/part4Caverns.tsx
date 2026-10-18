@@ -12,7 +12,7 @@ import { Item } from "../../../data/domain/items";
 import { AtomCollider } from "../../../data/domain/world-3/construction/atomCollider";
 import type { ImageData } from "../../../data/domain/imageData";
 import type { Hole } from "../../../data/domain/world-5/hole/hole";
-import { getCoinsArray, notateNumber } from "../../../data/utility";
+import { getCoinsArray, notateNumber, toTime } from "../../../data/utility";
 
 function value(amount: number | null, suffix = ""): string {
     return amount === null ? "Unavailable" : `${notateNumber(amount)}${suffix}`;
@@ -128,67 +128,125 @@ function WellView({ hole }: { hole: Hole }) {
 
 function BellView({ hole, totalMoney }: { hole: Hole; totalMoney: number }) {
     const bell = hole.bell;
-    const mode = bell.mode === null ? "Unavailable" : bell.modeNames[bell.mode] ?? "Unavailable";
-    const selectedXp = bell.mode === null ? null : bell.xpBanks[bell.mode] ?? null;
-    const modeRecords = bell.modeNames.map((name, index) => ({ name, bank: bell.xpBanks[index], rate: bell.modeRates[index], requirement: bell.modeRequirements[index] }));
+    const theme = useContext(ThemeContext);
+    const methods = bell.modeNames.map((_, index) => ({
+        name: ["Ring Bell", "Ping Bell", "Clean Bell", "Renew Bell"][index],
+        bank: bell.xpBanks[index],
+        rate: bell.modeRates[index],
+        requirement: bell.modeRequirements[index],
+        timing: bell.getMethodTiming(index),
+    }));
+    const bellOpals = hole.cavernOpalSources.find(source => source.acquisition === "Received an Opal from a Bell Ping.")!.opals;
+    const study = hole.studies.find(entry => entry.data.name === "THE BELL")!;
+    const studyOwner = hole.villagers.find(villager => villager.name === "Bolaia")!;
+    const studyRequirement = study.getRequirement();
+    const studyProgress = study.progressAvailable ? study.progress : null;
+    const upgradeSeparator = normalizeColor("grey-1", theme);
+
     return <Box gap="medium" data-testid="hole-bell-details">
-        <Section title="Saved mode">
-            <MetricStrip metrics={[
-                { label: "Mode", value: mode },
-                { label: "Rate", value: value(bell.selectedRate, " XP/hr") },
-                { label: "Current / required XP", value: `${value(selectedXp)} / ${value(bell.selectedRequirement)}` },
-                { label: "Clean odds", value: bell.cleanOdds === null ? "Unavailable" : `${(bell.cleanOdds * 100).toLocaleString("en-US", { maximumFractionDigits: 3 })}%` },
-                { label: "Clean failures", value: value(bell.cleanFailures) },
-            ]} />
-        </Section>
-        <Section title="Bell banks">
-            <Box style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 210px), 1fr))", gap: "12px", minWidth: 0 }}>
-                {modeRecords.map((record, index) => <GameCard key={record.name} title={record.name} testId={`bell-bank-${index}`}>
-                    <MetricStrip metrics={[
-                        { label: "Current / required XP", value: `${value(record.bank)} / ${value(record.requirement)}` },
-                        { label: "Rate", value: value(record.rate, " XP/hr") },
-                    ]} />
-                </GameCard>)}
+        <Section title="Overview">
+            <Box direction="row" gap="small" wrap align="center">
+                <Box flex={{ grow: 1, shrink: 0 }} pad={{ right: "medium" }} border={{ side: "right", color: "grey-1" }}>
+                    <Text size="xsmall" color="accent-2">Rings since Renew</Text>
+                    <Text size="large">{value(bell.improvementProgress[0])}</Text>
+                </Box>
+                <Box flex={{ grow: 1, shrink: 1 }} pad={{ horizontal: "small" }}>
+                    <Text size="xsmall" color="accent-2">New method chance</Text>
+                    <Text size="small">{bell.cleanOdds === null ? "Unavailable" : `${(bell.cleanOdds * 100).toLocaleString("en-US", { maximumFractionDigits: 3 })}%`}</Text>
+                </Box>
+                <Box flex={{ grow: 1, shrink: 1 }} pad={{ left: "small" }} border={{ side: "left", color: "grey-1" }}>
+                    <Text size="xsmall" color="accent-2">Opals earned</Text>
+                    <Box direction="row" gap="xsmall" align="center">
+                        <IconImage data={Item.getImageData("Opal")} scale={0.75} />
+                        <Text size="small">{value(bellOpals)}</Text>
+                    </Box>
+                </Box>
             </Box>
         </Section>
-        <Section title="Improvements">
-            <Box gap="small">
-                {bell.improvements.map(improvement => {
-                    const wallet = improvement.wallet;
-                    const currency = improvement.data.resource;
-                    const cost = improvement.cost;
-                    const balance = improvement.index === 0 ? totalMoney : wallet?.type === "account" ? wallet.balance : null;
-                    const affordabilityColor = cost === null || balance === null ? undefined : balance >= cost ? "green-1" : "critical";
-                    const image = resourceImage(hole, currency);
-                    return <GameCard key={improvement.index} title={improvement.data.bonus.replace(/[{}]/g, "").replace(/\s+/g, " ").trim()} image={image} testId={`bell-improvement-${improvement.index}`}>
-                        <Text size="xsmall" color="accent-2">{currency}</Text>
-                        <MetricStrip metrics={[
-                            { label: "Level", value: value(improvement.level) },
-                            { label: "Current quantity", value: value(improvement.quantity) },
-                        ]} />
-                        <Box direction="row" gap="small" align="center" wrap>
-                            {currency === "Coins" ? <><CoinsDisplay coinMap={getCoinsArray(balance!)} maxCoins={4} regularRow /><Text size="xsmall" color={affordabilityColor}> / </Text>{cost === null ? <Text size="xsmall">Unavailable required</Text> : <><CoinsDisplay coinMap={getCoinsArray(cost)} maxCoins={4} regularRow textColor={affordabilityColor} /><Text size="xsmall" color={affordabilityColor}> required</Text></>}</>
-                                : currency === "Bits" ? <>{balance === null ? "Unavailable" : <BitsDisplay value={balance} />}<Text size="xsmall" color={affordabilityColor}> / </Text>{cost === null ? <Text size="xsmall">Unavailable required</Text> : <><BitsDisplay value={cost} textColor={affordabilityColor} /><Text size="xsmall" color={affordabilityColor}> required</Text></>}</>
-                                    : <>{image && <IconImage data={image} scale={0.65} />}<Text size="xsmall" color={affordabilityColor}>{balance === null ? "Unavailable" : notateNumber(balance)} / {cost === null ? "Unavailable" : notateNumber(cost)} required</Text></>}
+
+        <Section title="Bonuses">
+            <Box style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", columnGap: "24px", minWidth: 0 }}>
+                {bell.bonuses.slice(0, 7).map(bonus => <Box key={bonus.index} direction="row" justify="between" align="start" gap="small" pad={{ vertical: "small" }} border={{ side: "bottom", color: "grey-1" }} data-testid={`bell-bonus-${bonus.index}`}>
+                    <Text size="small" weight={500}>{bonus.level === null ? bonus.data.description.replace("{", "Unavailable").replace("}", "") : bonus.getDescription()}</Text>
+                    <Text size="xsmall" color="accent-2">Lv. {value(bonus.level)}</Text>
+                </Box>)}
+            </Box>
+        </Section>
+
+        <Section title="Methods">
+            {bell.mode === null || !bell.modeNames[bell.mode]
+                ? <Text size="xsmall" color="accent-2">Current mode: Unavailable</Text>
+                : null}
+            <Box style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", minWidth: 0 }}>
+                {methods.map((method, index) => {
+                    const ready = method.timing.status === "ready";
+                    const topStatus = ready ? "Ready"
+                        : method.timing.status === "estimate" ? `Full in ${toTime(method.timing.hours! * 3600)} (snapshot)`
+                            : method.timing.status === "no-rate" ? "No production"
+                                : "Unavailable";
+                    return <Box key={method.name} pad="small" border={{
+                        side: index < 2 ? "bottom" : "top",
+                        color: "grey-1",
+                    }} data-testid={`bell-method-${index}`}>
+                        <Box direction="row" justify="between" gap="small" align="center">
+                            <Text size="small" weight={500}>{method.name === "Renew Bell" ? <TipDisplay heading="Renew Bell" body={<Text size="xsmall">Renew consumes Renew XP, resets Ring XP, clears Bell bonus levels, and retains improvements and Opals.</Text>} size="small">Renew Bell</TipDisplay> : method.name}</Text>
+                            {bell.mode === index && <Text size="xsmall" color="accent-2">Current mode</Text>}
+                            <Text size="xsmall" color={ready ? "status-ok" : "accent-2"}>{topStatus}</Text>
                         </Box>
-                    </GameCard>;
+                        <Box direction="row" justify="between" gap="small" pad={{ top: "xsmall" }}>
+                            <Text size="xsmall" color="accent-2">XP</Text>
+                            <Text size="xsmall">{value(method.bank)} / {value(method.requirement)}</Text>
+                        </Box>
+                        {method.bank !== null && method.requirement !== null && method.requirement > 0 && <progress aria-label={`${method.name} XP progress`} value={Math.min(100, Math.max(0, method.bank / method.requirement * 100))} max={100} style={{ width: "100%", height: "6px" }} />}
+                        <Text size="xsmall" color="accent-2">XP rate {value(method.rate, "/hr")}</Text>
+                    </Box>;
                 })}
             </Box>
         </Section>
-        <Section title="Bonuses">
-            <Box style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 240px), 1fr))", gap: "12px", minWidth: 0 }}>
-                {bell.bonuses.slice(0, 7).map(bonus => <GameCard key={bonus.index} title={`Bonus ${bonus.index + 1}`} testId={`bell-bonus-${bonus.index}`}>
-                    <Text size="small">{bonus.getDescription()}</Text>
-                    <Text size="xsmall" color="accent-2">Level {value(bonus.level)}</Text>
-                </GameCard>)}
-            </Box>
-            <RoundedShadowBox background="dark-1" pad="medium" gap="small" data-testid="bell-renew-context">
-                <Text size="small" weight={500}>Renew clears</Text>
-                <Text size="xsmall">Renew charge: {value(bell.renewEffects.renewXpConsumed)} XP · Ringing charge: {value(bell.renewEffects.resetBellXp)} XP</Text>
-                <Text size="xsmall">Bonus levels: {bell.renewEffects.clearedBonusLevels.every(level => level === null) ? "Unavailable" : `${bell.renewEffects.clearedBonusLevels.filter(level => level !== 0).length} of 12 currently nonzero; reset to 0`}</Text>
-                <Text size="xsmall">Improvements retained: {bell.renewEffects.retainedImprovementLevels.every(level => level === null) ? "Unavailable" : `${bell.renewEffects.retainedImprovementLevels.filter(level => level !== null).length} methods`}</Text>
-                <Text size="xsmall">Opals retained: {value(bell.renewEffects.retainedOpals)}</Text>
+
+        <Section title="Upgrades">
+            <RoundedShadowBox background="dark-1" pad="none" overflow="hidden" data-testid="bell-upgrades">
+                <Box style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", minWidth: 0 }}>
+                    {bell.improvements.map((improvement, index) => {
+                        const wallet = improvement.wallet;
+                        const currency = improvement.data.resource;
+                        const cost = improvement.cost;
+                        const balance = improvement.index === 0 ? totalMoney : wallet?.type === "account" ? wallet.balance : null;
+                        const affordabilityColor = cost === null || balance === null ? undefined : balance >= cost ? "green-1" : "critical";
+                        const image = resourceImage(hole, currency);
+                        return <Box key={improvement.index} gap="xsmall" pad="small" style={{
+                            borderRight: index % 3 !== 2 ? `1px solid ${upgradeSeparator}` : undefined,
+                            borderBottom: index < 3 ? `1px solid ${upgradeSeparator}` : undefined,
+                        }} data-testid={`bell-improvement-${improvement.index}`}>
+                            <Text size="xsmall" color="accent-2">Lv. {value(improvement.level)}</Text>
+                            <Text size="small" weight={500}>{improvement.quantity === null ? "Unavailable" : improvement.data.bonus.replace("{", notateNumber(improvement.quantity)).replace(/[{}]/g, "").replace(/\s+/g, " ").trim()}</Text>
+                            <Box direction="row" gap="xsmall" align="center" wrap>
+                                {currency === "Coins" ? <>{balance === null ? "Unavailable" : <CoinsDisplay coinMap={getCoinsArray(balance)} maxCoins={4} regularRow textColor={affordabilityColor} />}<Text size="xsmall" color={affordabilityColor}> / </Text>{cost === null ? "Unavailable" : <CoinsDisplay coinMap={getCoinsArray(cost)} maxCoins={4} regularRow textColor={affordabilityColor} />}</>
+                                    : currency === "Bits" ? <>{balance === null ? "Unavailable" : <BitsDisplay value={balance} textColor={affordabilityColor} />}<Text size="xsmall" color={affordabilityColor}> / </Text>{cost === null ? "Unavailable" : <BitsDisplay value={cost} textColor={affordabilityColor} />}</>
+                                        : <>{image && <IconImage data={image} scale={0.55} />}<Text size="xsmall" color={affordabilityColor}>{balance === null ? "Unavailable" : notateNumber(balance)} / {cost === null ? "Unavailable" : notateNumber(cost)}</Text></>}
+                            </Box>
+                        </Box>;
+                    })}
+                </Box>
             </RoundedShadowBox>
+        </Section>
+
+        <Section title="Study">
+            <Box gap="small" data-testid="bell-study">
+                <Box direction="row" justify="between" align="center">
+                    <Text size="small" weight={500}>Level {study.levelAvailable ? value(study.level) : "Unavailable"}</Text>
+                    <Text size="xsmall" color="accent-2">{study.participation === "target" ? "Target study" : study.participation === "neighbor" ? "Neighbor study" : study.participation === "inactive" ? "Inactive" : "Unavailable"}</Text>
+                </Box>
+                <Box gap="xxsmall">
+                    <Text size="xsmall" color="accent-2">Progress to next level</Text>
+                    <Text size="small">{value(studyProgress)} / {value(studyRequirement)}</Text>
+                    {studyProgress !== null && studyRequirement !== null && studyRequirement > 0 && <progress aria-label="Bell Study progress" value={Math.min(100, Math.max(0, studyProgress / studyRequirement * 100))} max={100} style={{ width: "100%", height: "6px" }} />}
+                </Box>
+                <Box direction="row" justify="between" gap="small" wrap>
+                    <Text size="small">{study.levelAvailable ? study.getDescription().replace(/_/g, " ") : "Effect unavailable"}</Text>
+                    <Text size="xsmall" color="accent-2">Study owner: {studyOwner.name}</Text>
+                </Box>
+            </Box>
         </Section>
     </Box>;
 }

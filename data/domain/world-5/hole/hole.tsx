@@ -1310,6 +1310,15 @@ export class Bell {
    25,
   ];
  }
+ getMethodTiming(index: number): { status: "ready" | "estimate" | "no-rate" | "unavailable"; hours: number | null } {
+  const bank = this.xpBanks[index] ?? null;
+  const rate = this.modeRates[index] ?? null;
+  const requirement = this.modeRequirements[index] ?? null;
+  if (bank === null || rate === null || requirement === null) return { status: "unavailable", hours: null };
+  if (bank >= requirement) return { status: "ready", hours: 0 };
+  if (rate <= 0) return { status: "no-rate", hours: null };
+  return { status: "estimate", hours: (requirement - bank) / rate };
+ }
  get selectedRate(): number | null {
   return this.mode === null ? null : this.modeRates[this.mode] ?? null;
  }
