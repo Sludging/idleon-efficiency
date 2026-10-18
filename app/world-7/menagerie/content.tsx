@@ -11,12 +11,17 @@ import TextAndLabel from '../../../components/base/TextAndLabel';
 import { Menagerie as MenagerieDomain, MenagerieBonus, MenagerieMission } from '../../../data/domain/menagerie';
 import { ImageData } from '../../../data/domain/imageData';
 import { DataStatus } from '../../../lib/stores/appDataStore';
-import { commaNotation, notateNumber } from '../../../data/utility';
+import { commaNotation, getCoinsArray, notateNumber } from '../../../data/utility';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
 import TipDisplay from 'components/base/TipDisplay';
+import CoinsDisplay from '../../../components/coinsDisplay';
+import { ResourceDisplay } from '../../../components/account/shared/ResourceDisplay';
+import { Item } from '../../../data/domain/items';
+import { initItemDetailRepo } from '../../../data/domain/data/ItemDetailRepo';
 
-type MenagerieTab = 'Missions' | 'Unlocks' | 'Bonuses';
+const itemDetails: Record<string, { displayName: string }> = Object.fromEntries(initItemDetailRepo().map(item => [item.id, item.data]));
+type MenagerieTab = 'Missions' | 'Unlocks' | 'Bonuses' | 'Jellies';
 type MissionFilter = 'All' | 'Available' | 'Ready';
 
 const templateText = (text: string, value: number): string =>
@@ -181,6 +186,7 @@ export default function MenagerieContent() {
                             { value: 'Missions', label: 'Missions' },
                             { value: 'Unlocks', label: 'Unlocks' },
                             { value: 'Bonuses', label: 'Bonuses' },
+                            { value: 'Jellies', label: 'Jellies' },
                         ]}
                         value={tab}
                         onChange={setTab}
@@ -291,6 +297,37 @@ export default function MenagerieContent() {
                             </RoundedShadowBox>)}
                         </Grid>
                     </Box>}
+                    {tab === 'Jellies' && <Grid columns={small ? ['flex'] : ['flex', 'flex', 'flex']} gap="medium" align="stretch">
+                        {[
+                            menagerie.purpleJellyfish,
+                            menagerie.blueJellyfish,
+                            menagerie.redJellyfish,
+                            menagerie.silverJellyfish,
+                            menagerie.yellowJellyfish,
+                            menagerie.greenJellyfish,
+                        ].map(jelly => {
+                            const unlock = unlocks[jelly.data.unlockId];
+                            return <RoundedShadowBox key={jelly.data.unlockId} pad="none" background="dark-1" overflow="hidden">
+                                <Box direction="row" gap="small" align="center" background="grey-1" pad={{ horizontal: 'medium', vertical: 'small' }}>
+                                    <Artwork data={unlock.getImageData()} size={40} />
+                                    <Box gap="xsmall">
+                                        <Text size="small" weight="bold">{jelly.data.label}</Text>
+                                        <Text size="xsmall" color={unlock.owned ? 'status-ok' : 'accent-2'}>
+                                            {unlock.owned ? 'Unlocked' : `Locked · Req. rank ${unlock.requiredRank}`}
+                                        </Text>
+                                    </Box>
+                                </Box>
+                                <Box pad="medium" gap="small">
+                                    {jelly.data.unlockId === 3 && <PurpleJellyfishDetails jelly={menagerie.purpleJellyfish} shellImage={menagerie.getShellImageData()} />}
+                                    {jelly.data.unlockId === 5 && <BlueJellyfishDetails jelly={menagerie.blueJellyfish} />}
+                                    {jelly.data.unlockId === 7 && <RedJellyfishDetails jelly={menagerie.redJellyfish} />}
+                                    {jelly.data.unlockId === 10 && <SilverJellyfishDetails jelly={menagerie.silverJellyfish} />}
+                                    {jelly.data.unlockId === 12 && <YellowJellyfishDetails jelly={menagerie.yellowJellyfish} />}
+                                    {jelly.data.unlockId === 23 && <GreenJellyfishDetails jelly={menagerie.greenJellyfish} />}
+                                </Box>
+                            </RoundedShadowBox>;
+                        })}
+                    </Grid>}
                 </Box>
             </Box>
         </Box>
@@ -308,6 +345,110 @@ function Artwork({ data, size }: { data: ImageData, size: number }) {
     const scale = Math.min(size / data.width, size / data.height);
     return <Box width={`${size}px`} height={`${size}px`} align="center" justify="center" flex={false}>
         <IconImage data={data} scale={scale} />
+    </Box>;
+}
+function DetailRow({ label, children }: { label: string, children: React.ReactNode }) {
+    return <Box direction="row" justify="between" align="center" gap="small" wrap>
+        <Text size="xsmall" color="accent-2">{label}</Text>
+        {children}
+    </Box>;
+}
+
+function PurpleJellyfishDetails({ jelly, shellImage }: { jelly: MenagerieDomain['purpleJellyfish'], shellImage: ImageData }) {
+    return <Box gap="small">
+        <Box direction="row" gap="medium" wrap>
+            <TextAndLabel label="Shell purchases" text={commaNotation(jelly.shellPurchaseCount)} textSize="small" />
+            <ComponentAndLabel label="Shell balance"><Box direction="row" gap="xsmall" align="center"><IconImage data={shellImage} scale={0.65} /><Text size="small">{commaNotation(jelly.shellBalance)}</Text></Box></ComponentAndLabel>
+        </Box>
+        <DetailRow label="Next Shell cost"><CoinsDisplay coinMap={getCoinsArray(jelly.nextShellCost)} maxCoins={3} regularRow coinScale={0.75} /></DetailRow>
+        <DetailRow label="Money balance"><CoinsDisplay coinMap={getCoinsArray(jelly.moneyBalance)} regularRow coinScale={0.75} /></DetailRow>
+        <Box border={{ side: 'top', color: 'grey-1' }} pad={{ top: 'small' }} gap="small">
+            <TextAndLabel label="Lumi level" text={commaNotation(jelly.lumiLevel)} textSize="small" />
+            <DetailRow label="Lumi contribution"><Text size="small">{commaNotation(jelly.lumiContribution)}%</Text></DetailRow>
+            <DetailRow label="Next Lumi cost"><CoinsDisplay coinMap={getCoinsArray(jelly.nextLumiCost)} maxCoins={3} regularRow coinScale={0.75} /></DetailRow>
+        </Box>
+    </Box>;
+}
+
+function BlueJellyfishDetails({ jelly }: { jelly: MenagerieDomain['blueJellyfish'] }) {
+    return <Box direction="row" gap="medium" wrap>
+        <ComponentAndLabel label="Ladles owned"><Box direction="row" gap="xsmall" align="center"><IconImage data={Item.getImageData('Ladle')} scale={0.7} /><Text size="small">{commaNotation(jelly.ownedLadles)}</Text></Box></ComponentAndLabel>
+        <ComponentAndLabel label="Ladles donated"><Box direction="row" gap="xsmall" align="center"><IconImage data={Item.getImageData('Ladle')} scale={0.7} /><Text size="small">{commaNotation(jelly.donatedLadles)}</Text></Box></ComponentAndLabel>
+    </Box>;
+}
+
+function RedJellyfishDetails({ jelly }: { jelly: MenagerieDomain['redJellyfish'] }) {
+    return <Box gap="small">
+        <Box direction="row" gap="medium" wrap>
+            <TextAndLabel label="Reading opportunities" text={commaNotation(jelly.readingOpportunities)} textSize="small" />
+            <TextAndLabel label="Reading multiplier" text={`×${commaNotation(jelly.readingMultiplier)}`} textSize="small" />
+        </Box>
+        <Text size="xsmall" color={jelly.ready ? 'status-ok' : 'accent-2'}>{jelly.ready ? 'Ready' : 'Not ready'}</Text>
+        <Box border={{ side: 'top', color: 'grey-1' }} pad={{ top: 'small' }} gap="xsmall">
+            {jelly.chapterInputs.map(chapter => <DetailRow key={chapter.index} label={chapter.name}><Text size="xsmall">{commaNotation(chapter.input)}</Text></DetailRow>)}
+        </Box>
+    </Box>;
+}
+
+function SilverJellyfishDetails({ jelly }: { jelly: MenagerieDomain['silverJellyfish'] }) {
+    return <Box gap="small">
+        <Box direction="row" gap="medium" wrap>
+            <TextAndLabel label="MISC" text={`${jelly.miscLevel}/${jelly.miscLevelCap}`} textSize="small" />
+            <TextAndLabel label="Multiplier" text={`×${notateNumber(jelly.miscMultiplier, 'Small')}`} textSize="small" />
+            <TextAndLabel label="Conversion" text={`${jelly.conversionLevel}/${jelly.conversionLevelCap}`} textSize="small" />
+        </Box>
+        <DetailRow label="Next MISC cost"><ResourceDisplay cost={jelly.nextMiscCost} resourceImageData={Item.getImageData('ObolFrag')} resourceImageScale={0.65} textSize="small" /></DetailRow>
+        <DetailRow label="Next conversion cost"><ResourceDisplay cost={jelly.nextConversionCost} resourceImageData={Item.getImageData('ObolFrag')} resourceImageScale={0.65} textSize="small" /></DetailRow>
+        <Box border={{ side: 'top', color: 'grey-1' }} pad={{ top: 'small' }} gap="xsmall">
+            <ComponentAndLabel label="Obol Fragments balance"><Box direction="row" gap="xsmall" align="center"><IconImage data={Item.getImageData('ObolFrag')} scale={0.7} /><Text size="small">{formatValue(jelly.obolFragments)}</Text></Box></ComponentAndLabel>
+            {jelly.conversionEvents.map(event => <DetailRow key={event.fragments} label={`${event.fragments} credited fragments`}><Text size="xsmall">{notateNumber(event.probability * 100, 'Small')}%</Text></DetailRow>)}
+            <DetailRow label="Expected per eligible event"><Text size="small">{notateNumber(jelly.expectedCreditedFragments, 'Small')}</Text></DetailRow>
+        </Box>
+    </Box>;
+}
+
+function YellowJellyfishDetails({ jelly }: { jelly: MenagerieDomain['yellowJellyfish'] }) {
+    return <Box gap="small">
+        <Box direction="row" justify="between" align="center" gap="small">
+            <Text size="xsmall" color="accent-2">Progress / requirement</Text>
+            <Text size="xsmall">{formatValue(jelly.progress)} / {formatValue(jelly.requirement)}</Text>
+        </Box>
+        <Meter type="bar" values={[{ value: Math.min(jelly.progress, jelly.requirement), color: 'brand' }]} max={jelly.requirement || 1} size="full" thickness="xsmall" aria-label="Yellow Jellyfish progress" />
+        <Box border={{ side: 'top', color: 'grey-1' }} pad={{ top: 'small' }} gap="xsmall">
+            {jelly.upgrades.map(upgrade => <DetailRow key={upgrade.index} label={`${upgrade.label} · Lv. ${commaNotation(upgrade.level)}`}><Text size="xsmall">{commaNotation(upgrade.effect)}</Text></DetailRow>)}
+        </Box>
+        <DetailRow label="Lumi contribution"><Text size="small">{commaNotation(jelly.lumiContribution)}%</Text></DetailRow>
+    </Box>;
+}
+
+function GreenJellyfishDetails({ jelly }: { jelly: MenagerieDomain['greenJellyfish'] }) {
+    const required = itemDetails[jelly.requiredNametag.item];
+    const reward = itemDetails[jelly.rewardNametag.item];
+    return <Box gap="small">
+        <Box direction="row" justify="between" align="center" gap="small">
+            <Text size="xsmall" color="accent-2">Gallery deposit / requirement</Text>
+            <Text size="xsmall">{commaNotation(jelly.depositedNametags)} / {commaNotation(jelly.requiredNametag.count)}</Text>
+        </Box>
+        <Meter type="bar" values={[{ value: Math.min(jelly.depositedNametags, jelly.requiredNametag.count), color: 'brand' }]} max={jelly.requiredNametag.count || 1} size="full" thickness="xsmall" aria-label="Green Jellyfish deposit progress" />
+        <GreenItemCounts label="Requirement" item={jelly.requiredNametag} name={required.displayName} />
+        <GreenItemCounts label="Reward" item={jelly.rewardNametag} name={reward.displayName} />
+    </Box>;
+}
+
+function GreenItemCounts({ label, item, name }: { label: string, item: { item: string, count: number, inStorage: number, equipped: number }, name: string }) {
+    return <Box direction="row" gap="small" align="center">
+        <IconImage data={Item.getImageData(item.item)} scale={0.7} />
+        <Box flex gap="xsmall">
+            <Text size="xsmall" weight="bold">{label}: {name} ×{commaNotation(item.count)}</Text>
+            <Text size="xsmall" color="accent-2">In storage {commaNotation(item.inStorage)} · Equipped {commaNotation(item.equipped)}</Text>
+        </Box>
+    </Box>;
+}
+
+function ComponentAndLabel({ label, children }: { label: string, children: React.ReactNode }) {
+    return <Box gap="xsmall">
+        <Text size="xsmall" color="accent-2">{label}</Text>
+        {children}
     </Box>;
 }
 
