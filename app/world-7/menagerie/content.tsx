@@ -242,11 +242,11 @@ export default function MenagerieContent() {
                                 <Box>
                                     {unlock.data.tooltip && <Text size="small">{sourceDescription(unlock.data.tooltip)}</Text>}
                                 </Box>
-                                {!unlock.owned && !unlock.available && <Text size="small" color="accent-2">Requires Lumi rank {unlock.requiredRank}</Text>}
-                                {!unlock.owned && unlock.available && <Box direction="row" gap="small" align="center">
+                                {!unlock.owned && <Box direction="row" wrap gap="small" align="center">
                                     <Text size="small" color="accent-2">Cost</Text>
                                     <IconImage data={menagerie.getLumiImageData()} scale={1} />
                                     <Text size="small" color={unlock.affordable ? 'green-1' : 'status-critical'}>{formatValue(unlock.nextCost)}</Text>
+                                    {!unlock.available && <Text size="small" color="accent-2">Req. rank {unlock.requiredRank}</Text>}
                                 </Box>}
                             </Box>
                         </RoundedShadowBox>)}
