@@ -7,11 +7,13 @@ import { initMenagerieUnlockRepo, MenagerieUnlockBase } from "./data/MenagerieUn
 import { MenagerieBonusModel } from "./model/menagerieBonusModel";
 import { MenagerieUnlockModel } from "./model/menagerieUnlockModel";
 import { Item } from "./items";
+import { ImageData } from "./imageData";
 
 export class MenagerieMission {
     progress = 0;
     claimCount = 0;
     currentRequirement = 0;
+    nextRequirement = 0;
     available = false;
     ready = false;
 
@@ -20,12 +22,17 @@ export class MenagerieMission {
     parse(claimCount: number): void {
         this.claimCount = claimCount;
         this.currentRequirement = Math.floor(this.data.initialRequirement + this.data.requirementIncrement * claimCount);
+        this.nextRequirement = Math.floor(this.data.initialRequirement + this.data.requirementIncrement * (claimCount + 1));
     }
 
     update(progress: number, available: boolean): void {
         this.progress = progress;
         this.available = available;
         this.ready = available && progress >= this.currentRequirement;
+    }
+
+    getImageData(): ImageData {
+        return { location: `MenaIconY${this.index}`, width: 38, height: 38 };
     }
 
     static fromBase(data: MenagerieMissionBase[]): MenagerieMission[] {
@@ -44,6 +51,10 @@ export class MenagerieUnlock {
 
     parse(owned: number): void {
         this.owned = owned >= 1;
+    }
+
+    getImageData(): ImageData {
+        return { location: `MenaIconO${this.index}`, width: 44, height: 55 };
     }
 
     update(available: boolean, lumi: number, requiredRank: number): void {
@@ -84,6 +95,10 @@ export class MenagerieBonus {
         this.available = available;
         this.requiredRank = requiredRank;
         this.affordable = lumi >= this.nextCost;
+    }
+
+    getImageData(): ImageData {
+        return { location: `MenaIconP${this.index}`, width: 42, height: 55 };
     }
     getPercentageMultiplier(): number {
         return getMenageriePercentageMultiplier(this.effect);
@@ -327,6 +342,14 @@ export class Menagerie extends Domain {
     savedTomeRank = 0;
     totalMenagerieBonusLevels = 0;
     private deathnoteBossPoints = 0;
+
+    getShellImageData(): ImageData {
+        return { location: "MenaShell1", width: 54, height: 52 };
+    }
+
+    getLumiImageData(): ImageData {
+        return { location: "LumiJel", width: 28, height: 53 };
+    }
 
     getMissions(): MenagerieMission[] {
         return this.missions;

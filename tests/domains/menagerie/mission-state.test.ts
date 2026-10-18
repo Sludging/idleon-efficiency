@@ -28,6 +28,8 @@ describe('Menagerie current mission task', () => {
       getExtractedValue(extractionResults, 'mission_0_requirement'),
       { tolerance: 0, context: 'Account-level mission current task' },
     );
+    expect(mission.nextRequirement).toBe(18000);
+    expect(mission.nextRequirement).toBeGreaterThan(mission.currentRequirement);
     expect(account.hasBankBundle).toBe(Boolean(getExtractedValue(extractionResults, 'mission_bank_bundle')));
   });
 });
