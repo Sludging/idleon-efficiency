@@ -1,5 +1,6 @@
 import { lavaLog } from "../../../utility";
 
+import type { ImageData } from "../../imageData";
 import { SedimentModel } from "../../model/sedimentModel";
 import { initSedimentRepo } from "../../data/SedimentRepo";
 import { Hole } from "./hole";
@@ -36,6 +37,8 @@ export class Well {
     resourceValues: number[] = [];
     buckets: WellBucket[] = [];
     ownedBucketCount: number | null = null;
+    bucketImageData: ImageData = { location: "HoleWellBucket0", width: 62, height: 128 };
+    goldBucketImageData: ImageData = { location: "HoleWellBucket1", width: 62, height: 128 };
     goldBucketCount: number | null = null;
     goldBucketMultiplier: number | null = null;
     opalCost: number | null = null;

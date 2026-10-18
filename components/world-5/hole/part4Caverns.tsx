@@ -65,17 +65,23 @@ function WellView({ hole }: { hole: Hole }) {
                 <Text size="xsmall">Bucket count increases when you unlock these Hole schematics:</Text>
                 {bucketSources.map(source => <Text key={source.index} size="xsmall" style={{ opacity: source.unlocked ? 1 : 0.6 }}>{source.data.name.replace(/_/g, " ")}</Text>)}
             </Box>} size="small">
-                <Text tabIndex={0} size="small" style={{ textDecoration: "underline dotted", textUnderlineOffset: "4px", cursor: "help" }}>
-                    Buckets: {value(well.ownedBucketCount)}
-                </Text>
+                <Box direction="row" gap="xsmall" align="center">
+                    <IconImage data={well.bucketImageData} scale={0.25} />
+                    <Text tabIndex={0} size="small" style={{ textDecoration: "underline dotted", textUnderlineOffset: "4px", cursor: "help" }}>
+                        Buckets: {value(well.ownedBucketCount)}
+                    </Text>
+                </Box>
             </TipDisplay>
             <TipDisplay heading="How to obtain gold buckets" body={<Box gap="xsmall">
                 <Text size="xsmall">Golden Bucket Boost from the Fountain increases the first gold bucket's fill rate.</Text>
                 {goldSchematic && <Text size="xsmall">{goldSchematic.data.name.replace(/_/g, " ")} unlocks another gold bucket.</Text>}
             </Box>} size="small">
-                <Text tabIndex={0} size="small" style={{ textDecoration: "underline dotted", textUnderlineOffset: "4px", cursor: "help" }}>
-                    Gold buckets: {value(well.goldBucketCount)}
-                </Text>
+                <Box direction="row" gap="xsmall" align="center">
+                    <IconImage data={well.goldBucketImageData} scale={0.25} />
+                    <Text tabIndex={0} size="small" style={{ textDecoration: "underline dotted", textUnderlineOffset: "4px", cursor: "help" }}>
+                        Gold buckets: {value(well.goldBucketCount)}
+                    </Text>
+                </Box>
             </TipDisplay>
             <TextAndLabel label="Gold multiplier" labelSize="xsmall" textSize="small" text={exact(well.goldBucketMultiplier, "×")} />
         </Box>
@@ -91,7 +97,7 @@ function WellView({ hole }: { hole: Hole }) {
                     const stocked = sediment.unavailable !== true && sediment.current !== null && sediment.currentMax !== null;
                     const progress = stocked && sediment.currentMax > 0
                         ? Math.min(100, Math.max(0, sediment.current! / sediment.currentMax * 100)) : null;
-                    return <GameCard key={sediment.index} title={sediment.data.name.replace(/_/g, " ")} image={resourceImage(hole, sediment.data.name)} testId={`well-sediment-${sediment.index}`}>
+                    return <GameCard key={sediment.index} title={sediment.data.name.replace(/_/g, " ")} image={hole.currencies.find(currency => currency.index === sediment.index)?.getImageData() ?? undefined} testId={`well-sediment-${sediment.index}`}>
                         <Box gap="xsmall">
                             <Box direction="row" justify="between" gap="small" wrap>
                                 <Text size="small">{sediment.unavailable === true ? "|" : `${value(sediment.current)} / ${value(sediment.currentMax)}`}</Text>
@@ -224,17 +230,20 @@ function HarpView({ hole }: { hole: Hole }) {
         </Section>
         <Section title="Strings">
             <Box style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 270px), 1fr))", gap: "12px", minWidth: 0 }}>
-                {harp.strings.map(string => <GameCard key={string.index} title={`String ${string.data.stringLetter}`} testId={`harp-string-${string.index}`} inactive={string.unlocked === false}>
-                    {string.unlocked === null
-                        ? <Text size="xsmall">Ownership unavailable</Text>
-                        : string.unlocked && <Text size="xsmall">{string.assignedSlots.length ? "Assigned" : "Unassigned"}</Text>}
-                    <Text size="xsmall">{string.getDescription()}</Text>
-                    <MetricStrip metrics={[
-                        { label: "Level", value: value(string.level) },
-                        { label: "Current / required EXP", value: `${value(string.experience)} / ${value(string.nextLevelExperience)}` },
-                    ]} />
-                    {string.level !== null && string.experience !== null && string.nextLevelExperience !== null && <progress aria-label={`String ${string.data.stringLetter} EXP progress`} value={string.experience} max={string.nextLevelExperience} style={{ width: "100%", height: "6px", accentColor: normalizeColor("brand", theme) }} />}
-                </GameCard>)}
+                {harp.strings.map(string => {
+                    const passiveDescription = string.getPassiveDescription();
+                    return <GameCard key={string.index} title={`String ${string.data.stringLetter}`} image={string.imageData} testId={`harp-string-${string.index}`} inactive={string.unlocked === false}>
+                        {string.unlocked === null
+                            ? <Text size="xsmall">Ownership unavailable</Text>
+                            : string.unlocked && <Text size="xsmall">{string.assignedSlots.length ? "Assigned" : "Unassigned"}</Text>}
+                        {passiveDescription !== null && <Text size="xsmall">{passiveDescription}</Text>}
+                        <MetricStrip metrics={[
+                            { label: "Level", value: value(string.level) },
+                            { label: "Current / required EXP", value: `${value(string.experience)} / ${value(string.nextLevelExperience)}` },
+                        ]} />
+                        {string.level !== null && string.experience !== null && string.nextLevelExperience !== null && <progress aria-label={`String ${string.data.stringLetter} EXP progress`} value={string.experience} max={string.nextLevelExperience} style={{ width: "100%", height: "6px", accentColor: normalizeColor("brand", theme) }} />}
+                    </GameCard>;
+                })}
             </Box>
         </Section>
         <RoundedShadowBox background="dark-1" pad="medium" gap="xsmall" data-testid="harp-assignment-order">
@@ -272,10 +281,13 @@ function LampView({ hole }: { hole: Hole }) {
     };
     return <Box gap="medium" data-testid="hole-lamp-details">
         <Section title="Wish stock">
-            <MetricStrip metrics={[
-                { label: "Wishes", value: value(lamp.wishStock) },
-                { label: "Expected daily gain", value: lamp.wishesPerDay === null ? "Unavailable" : `${lamp.wishesPerDay.toLocaleString("en-US", { maximumFractionDigits: 2 })} wishes/day` },
-            ]} />
+            <Box direction="row" gap="small" align="center" wrap>
+                <IconImage data={lamp.wishStockImageData} scale={0.8} />
+                <MetricStrip metrics={[
+                    { label: "Wishes", value: value(lamp.wishStock) },
+                    { label: "Expected daily gain", value: lamp.wishesPerDay === null ? "Unavailable" : `${lamp.wishesPerDay.toLocaleString("en-US", { maximumFractionDigits: 2 })} wishes/day` },
+                ]} />
+            </Box>
         </Section>
         <Section title="Wishes">
             <Box style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 420px), 1fr))", gap: "12px", minWidth: 0 }}>

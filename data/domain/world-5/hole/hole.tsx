@@ -66,7 +66,27 @@ export interface HoleUpgradeEffect {
  unit: "percent" | "multiplier" | "count" | "per-hour" | "rule";
 }
 
-const fountainCurrencyImages: Partial<Record<number, ImageData>> = {
+const holeCurrencyImages: Partial<Record<number, ImageData>> = {
+ 0: { location: "HoleSediment0", width: 28, height: 28 },
+ 1: { location: "HoleSediment1", width: 28, height: 28 },
+ 2: { location: "HoleSediment2", width: 28, height: 28 },
+ 3: { location: "HoleSediment3", width: 28, height: 28 },
+ 4: { location: "HoleSediment4", width: 28, height: 28 },
+ 5: { location: "HoleSediment5", width: 28, height: 28 },
+ 6: { location: "HoleSediment6", width: 28, height: 28 },
+ 7: { location: "HoleSediment7", width: 28, height: 28 },
+ 8: { location: "HoleSediment8", width: 28, height: 28 },
+ 9: { location: "HoleSediment9", width: 28, height: 28 },
+ 10: { location: "HoleHarpNote0", width: 28, height: 28 },
+ 11: { location: "HoleHarpNote1", width: 28, height: 28 },
+ 12: { location: "HoleHarpNote2", width: 28, height: 28 },
+ 13: { location: "HoleHarpNote3", width: 28, height: 28 },
+ 14: { location: "HoleHarpNote4", width: 28, height: 28 },
+ 15: { location: "HoleHarpNote5", width: 28, height: 28 },
+ 16: { location: "HoleHarpNote6", width: 28, height: 28 },
+ 17: { location: "HoleHarpNote7", width: 28, height: 28 },
+ 18: { location: "HoleHarpNote8", width: 28, height: 28 },
+ 19: { location: "HoleHarpNote9", width: 28, height: 28 },
  31: { location: "HoleSilverCoins", width: 23, height: 28 },
  32: { location: "HoleGoldenCoins", width: 23, height: 28 },
  33: { location: "HoleDollarBills", width: 35, height: 28 },
@@ -82,7 +102,7 @@ export class HoleCurrency {
  imageData: ImageData | null;
 
  constructor(public index: number, public data: HoleCurrencyModel) {
-  this.imageData = fountainCurrencyImages[index] ?? null;
+  this.imageData = holeCurrencyImages[index] ?? null;
  }
 
  static fromBase(records: HoleCurrencyBase[]): HoleCurrency[] {
@@ -1438,27 +1458,44 @@ export class ResourceCavrens {
  }
 }
 
+const harpStringImages: ImageData[] = [
+ { location: "HoleHarpString0", width: 25, height: 28 },
+ { location: "HoleHarpString1", width: 25, height: 28 },
+ { location: "HoleHarpString2", width: 25, height: 28 },
+ { location: "HoleHarpString3", width: 25, height: 28 },
+ { location: "HoleHarpString4", width: 25, height: 28 },
+ { location: "HoleHarpString5", width: 25, height: 28 },
+ { location: "HoleHarpString6", width: 25, height: 28 },
+];
 export class HarpString {
  level: number | null = null;
  experience: number | null = null;
  unlocked: boolean | null = null;
  assignedSlots: number[] = [];
+ imageData: ImageData;
  passiveBonus: number | null = null;
  nextLevelExperience: number | null = null;
 
- constructor(public index: number, public data: HarpStringModel) { }
+ constructor(public index: number, public data: HarpStringModel) {
+  this.imageData = harpStringImages[index];
+ }
 
  getBonus(): number | null {
   return this.level === null ? null : this.level * this.data.multiplier;
  }
 
- getDescription(): string {
+ getPassiveDescription(): string | null {
+  if (this.data.multiplier === 0) return null;
+
   const bonus = this.getBonus();
-  if (bonus === null) return this.data.description;
-  if (this.data.description.includes("}x")) {
-   return this.data.description.replace(/}/g, (1 + bonus / 100).toFixed(2));
+  const descriptionStart = this.data.description.indexOf("@ LV bonus:");
+  if (bonus === null || descriptionStart === -1) return null;
+
+  const passiveDescription = this.data.description.slice(descriptionStart + 2);
+  if (passiveDescription.includes("+}%")) {
+   return passiveDescription.replace("+}%", `+${bonus}%`);
   }
-  return this.data.description.replace(/[{}]/g, bonus.toFixed(2));
+  return passiveDescription.replace(/\s+x/, ` ${(1 + bonus / 100).toFixed(2)}x`);
  }
 }
 
@@ -1617,6 +1654,7 @@ export class Lamp {
  schematicCostDiscount: number | null = null;
  resetConsequences: { category: string; before: number[] | null; after: number[] | null }[] = [];
  specialBonusArray = "25,10,8;15,40,10;20,35,12;5,1,1;2,2,2".split(";");
+ wishStockImageData: ImageData = { location: "HoleLampWishStock", width: 91, height: 18 };
 
  constructor() {
   this.wishes = Wish.fromBase(initLampWishRepo());
