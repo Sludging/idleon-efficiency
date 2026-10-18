@@ -41,6 +41,7 @@ function resourceImage(hole: Hole, name: string): ImageData | undefined {
     if (name === "Atoms") return AtomCollider.getParticleImageData();
     if (name === "Bits") return Item.getImageData("Bits");
     if (name === "Coins") return Item.getImageData("Coins1");
+    if (name === "Turquoise Rupie") return hole.currencies.find(entry => entry.index === 25)!.getImageData() ?? undefined;
     return hole.currencies.find(entry => entry.data.name === name)?.getImageData() ?? undefined;
 }
 
@@ -138,7 +139,11 @@ function BellView({ hole, totalMoney }: { hole: Hole; totalMoney: number }) {
     }));
     const bellOpals = hole.cavernOpalSources.find(source => source.acquisition === "Received an Opal from a Bell Ping.")!.opals;
     const study = hole.studies.find(entry => entry.data.name === "THE BELL")!;
-    const studyOwner = hole.villagers.find(villager => villager.name === "Bolaia")!;
+    const methodsComplete = bell.methodsOwned === 6;
+    const studyStatus = study.participation === "inactive" ? "Inactive"
+        : study.participation === "target" || study.participation === "neighbor"
+            ? `Study rate: ${value(study.progressPerHour, "/hr")}`
+            : "Unavailable";
     const studyRequirement = study.getRequirement();
     const studyProgress = study.progressAvailable ? study.progress : null;
     const upgradeSeparator = normalizeColor("grey-1", theme);
@@ -146,14 +151,16 @@ function BellView({ hole, totalMoney }: { hole: Hole; totalMoney: number }) {
     return <Box gap="medium" data-testid="hole-bell-details">
         <Section title="Overview">
             <Box direction="row" gap="small" wrap align="center">
-                <Box flex={{ grow: 1, shrink: 0 }} pad={{ right: "medium" }} border={{ side: "right", color: "grey-1" }}>
-                    <Text size="xsmall" color="accent-2">Rings since Renew</Text>
-                    <Text size="large">{value(bell.improvementProgress[0])}</Text>
-                </Box>
-                <Box flex={{ grow: 1, shrink: 1 }} pad={{ horizontal: "small" }}>
-                    <Text size="xsmall" color="accent-2">New method chance</Text>
-                    <Text size="small">{bell.cleanOdds === null ? "Unavailable" : `${(bell.cleanOdds * 100).toLocaleString("en-US", { maximumFractionDigits: 3 })}%`}</Text>
-                </Box>
+                {!methodsComplete && <>
+                    <Box flex={{ grow: 1, shrink: 0 }} pad={{ right: "medium" }} border={{ side: "right", color: "grey-1" }}>
+                        <Text size="xsmall" color="accent-2">Rings since Renew</Text>
+                        <Text size="large">{value(bell.ringsSinceRenew)}</Text>
+                    </Box>
+                    <Box flex={{ grow: 1, shrink: 1 }} pad={{ horizontal: "small" }}>
+                        <Text size="xsmall" color="accent-2">New method chance</Text>
+                        <Text size="small">{bell.cleanOdds === null ? "Unavailable" : `${(bell.cleanOdds * 100).toLocaleString("en-US", { maximumFractionDigits: 3 })}%`}</Text>
+                    </Box>
+                </>}
                 <Box flex={{ grow: 1, shrink: 1 }} pad={{ left: "small" }} border={{ side: "left", color: "grey-1" }}>
                     <Text size="xsmall" color="accent-2">Opals earned</Text>
                     <Box direction="row" gap="xsmall" align="center">
@@ -181,7 +188,7 @@ function BellView({ hole, totalMoney }: { hole: Hole; totalMoney: number }) {
                 {methods.map((method, index) => {
                     const ready = method.timing.status === "ready";
                     const topStatus = ready ? "Ready"
-                        : method.timing.status === "estimate" ? `Full in ${toTime(method.timing.hours! * 3600)} (snapshot)`
+                        : method.timing.status === "estimate" ? `Full in ${toTime(method.timing.hours! * 3600)}`
                             : method.timing.status === "no-rate" ? "No production"
                                 : "Unavailable";
                     return <Box key={method.name} pad="small" border={{
@@ -221,9 +228,19 @@ function BellView({ hole, totalMoney }: { hole: Hole; totalMoney: number }) {
                             <Text size="xsmall" color="accent-2">Lv. {value(improvement.level)}</Text>
                             <Text size="small" weight={500}>{improvement.quantity === null ? "Unavailable" : improvement.data.bonus.replace("{", notateNumber(improvement.quantity)).replace(/[{}]/g, "").replace(/\s+/g, " ").trim()}</Text>
                             <Box direction="row" gap="xsmall" align="center" wrap>
-                                {currency === "Coins" ? <>{balance === null ? "Unavailable" : <CoinsDisplay coinMap={getCoinsArray(balance)} maxCoins={4} regularRow textColor={affordabilityColor} />}<Text size="xsmall" color={affordabilityColor}> / </Text>{cost === null ? "Unavailable" : <CoinsDisplay coinMap={getCoinsArray(cost)} maxCoins={4} regularRow textColor={affordabilityColor} />}</>
-                                    : currency === "Bits" ? <>{balance === null ? "Unavailable" : <BitsDisplay value={balance} textColor={affordabilityColor} />}<Text size="xsmall" color={affordabilityColor}> / </Text>{cost === null ? "Unavailable" : <BitsDisplay value={cost} textColor={affordabilityColor} />}</>
-                                        : <>{image && <IconImage data={image} scale={0.55} />}<Text size="xsmall" color={affordabilityColor}>{balance === null ? "Unavailable" : notateNumber(balance)} / {cost === null ? "Unavailable" : notateNumber(cost)}</Text></>}
+                                {currency === "Coins" ? <>
+                                    {balance === null ? "Unavailable" : <CoinsDisplay coinMap={getCoinsArray(balance)} maxCoins={3} coinScale={0.75} regularRow textColor={affordabilityColor} />}
+                                    <Text size="xsmall" color={affordabilityColor}> / </Text>
+                                    {cost === null ? "Unavailable" : <CoinsDisplay coinMap={getCoinsArray(cost)} maxCoins={3} coinScale={0.75} regularRow textColor={affordabilityColor} />}
+                                </> : currency === "Bits" ? <>
+                                    {balance === null ? "Unavailable" : <BitsDisplay value={balance} scale={0.75} textSize="xsmall" textColor={affordabilityColor} />}
+                                    <Text size="xsmall" color={affordabilityColor}> / </Text>
+                                    {cost === null ? "Unavailable" : <BitsDisplay value={cost} scale={0.75} textSize="xsmall" textColor={affordabilityColor} />}
+                                </> : <>
+                                    {balance === null ? "Unavailable" : <>{image && <IconImage data={image} scale={0.75} />}<Text size="xsmall" color={affordabilityColor}>{notateNumber(balance)}</Text></>}
+                                    <Text size="xsmall" color={affordabilityColor}> / </Text>
+                                    {cost === null ? "Unavailable" : <>{image && <IconImage data={image} scale={0.75} />}<Text size="xsmall" color={affordabilityColor}>{notateNumber(cost)}</Text></>}
+                                </>}
                             </Box>
                         </Box>;
                     })}
@@ -233,18 +250,17 @@ function BellView({ hole, totalMoney }: { hole: Hole; totalMoney: number }) {
 
         <Section title="Study">
             <Box gap="small" data-testid="bell-study">
-                <Box direction="row" justify="between" align="center">
-                    <Text size="small" weight={500}>Level {study.levelAvailable ? value(study.level) : "Unavailable"}</Text>
-                    <Text size="xsmall" color="accent-2">{study.participation === "target" ? "Target study" : study.participation === "neighbor" ? "Neighbor study" : study.participation === "inactive" ? "Inactive" : "Unavailable"}</Text>
+                <Box direction="row" justify="between" align="center" gap="small" wrap>
+                    <Box direction="row" align="center" gap="small" wrap>
+                        <Text size="small" weight={500}>Level {study.levelAvailable ? value(study.level) : "Unavailable"}</Text>
+                        <Text size="xsmall">{study.levelAvailable ? study.getDescription().replace(/_/g, " ") : "Effect unavailable"}</Text>
+                    </Box>
+                    <Text size="xsmall" color="accent-2">{studyStatus}</Text>
                 </Box>
                 <Box gap="xxsmall">
                     <Text size="xsmall" color="accent-2">Progress to next level</Text>
                     <Text size="small">{value(studyProgress)} / {value(studyRequirement)}</Text>
                     {studyProgress !== null && studyRequirement !== null && studyRequirement > 0 && <progress aria-label="Bell Study progress" value={Math.min(100, Math.max(0, studyProgress / studyRequirement * 100))} max={100} style={{ width: "100%", height: "6px" }} />}
-                </Box>
-                <Box direction="row" justify="between" gap="small" wrap>
-                    <Text size="small">{study.levelAvailable ? study.getDescription().replace(/_/g, " ") : "Effect unavailable"}</Text>
-                    <Text size="xsmall" color="accent-2">Study owner: {studyOwner.name}</Text>
                 </Box>
             </Box>
         </Section>

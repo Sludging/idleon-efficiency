@@ -86,7 +86,7 @@ const holeCurrencyImages: Partial<Record<number, ImageData>> = {
  16: { location: "HoleHarpNote6", width: 28, height: 28 },
  17: { location: "HoleHarpNote7", width: 28, height: 28 },
  18: { location: "HoleHarpNote8", width: 28, height: 28 },
- 19: { location: "HoleHarpNote9", width: 28, height: 28 },
+ 25: { location: "HoleTurquoiseRupie", width: 28, height: 28 },
  31: { location: "HoleSilverCoins", width: 23, height: 28 },
  32: { location: "HoleGoldenCoins", width: 23, height: 28 },
  33: { location: "HoleDollarBills", width: 35, height: 28 },
@@ -1187,6 +1187,12 @@ export class Bell {
  cleanMethodCount: number | null = null;
  cleanFailures: number | null = null;
  cleanOdds: number | null = null;
+ get ringsSinceRenew(): number | null {
+  return this.improvementProgress[0];
+ }
+ get methodsOwned(): number | null {
+  return this.cleanMethodCount === null ? null : Math.min(6, this.cleanMethodCount + 1);
+ }
  renewEffects: { resetBellXp: number | null; renewXpConsumed: number | null; clearedBonusLevels: (number | null)[]; retainedImprovementLevels: (number | null)[]; retainedOpals: number | null } =
   { resetBellXp: null, renewXpConsumed: null, clearedBonusLevels: [], retainedImprovementLevels: [], retainedOpals: null };
 

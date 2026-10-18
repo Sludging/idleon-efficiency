@@ -120,12 +120,17 @@ The native wish-stock mark is the font-222 `{` glyph mapped above. It is not a s
 
 ## Current integration — 2026-10-18
 
-The initial metadata/CDN conclusions above are historical. Production metadata and 28 published crops now use the existing CDN naming pattern `https://cdn2.idleonefficiency.com/images/<filename>.png`. Every listed crop was published under `s3://idleon-efficiency-images/images/`; the minimal browser result recorded nonzero natural dimensions for all selected-page images.
+The initial metadata/CDN conclusions above are historical. Production metadata and 29 published crops now use the existing CDN naming pattern `https://cdn2.idleonefficiency.com/images/<filename>.png`. Every listed crop was published under `s3://idleon-efficiency-images/images/`; the minimal browser result recorded nonzero natural dimensions for all selected-page images.
 
-- Editable currency metadata in `data/domain/world-5/hole/hole.tsx` maps HoleCurrency IDs 0–9 to `HoleSediment0.png`–`HoleSediment9.png` (28×28 each), and IDs 10–19 to `HoleHarpNote0.png`–`HoleHarpNote9.png` (28×28 each).
+- Editable currency metadata in `data/domain/world-5/hole/hole.tsx` maps HoleCurrency IDs 0–9 to `HoleSediment0.png`–`HoleSediment9.png` (28×28 each), IDs 10–19 to `HoleHarpNote0.png`–`HoleHarpNote9.png` (28×28 each), and ID 25 to `HoleTurquoiseRupie.png` (28×28).
 - Editable Harp string metadata in the same file maps string IDs 0–6 to `HoleHarpString0.png`–`HoleHarpString6.png` (25×28 each).
 - Editable Lamp stock metadata maps its native stock glyph to `HoleLampWishStock.png` (91×18).
-- Thus 28 published crops are: `HoleSediment0.png` through `HoleSediment9.png`, `HoleHarpNote0.png` through `HoleHarpNote9.png`, `HoleHarpString0.png` through `HoleHarpString6.png`, and `HoleLampWishStock.png`. Their CDN paths are the above base URL plus each exact filename.
-- `HoleWellBucket0.png` and `HoleWellBucket1.png` remain existing 62×128 CDN originals, not part of the 28 new crops. Other mappings and unresolved decisions in this report remain unchanged.
+- Thus 29 published crops are: `HoleSediment0.png` through `HoleSediment9.png`, `HoleHarpNote0.png` through `HoleHarpNote9.png`, `HoleHarpString0.png` through `HoleHarpString6.png`, `HoleLampWishStock.png`, and `HoleTurquoiseRupie.png`. Their CDN paths are the above base URL plus each exact filename.
+- `HoleWellBucket0.png` and `HoleWellBucket1.png` remain existing 62×128 CDN originals, not part of the 29 new crops. Other mappings and unresolved decisions in this report remain unchanged.
+### Bell improvement 5: Turquoise Rupie
+
+Bell improvement record 5 names **Turquoise Rupie** (`data/domain/data/BellImprovementRepo.ts:44–50`). Its wallet reads `hole.currencies` index 25 (`data/domain/world-5/hole/hole.tsx:1281`); currency parsing reads `savedHoleData[9]` at index 25 (`hole.tsx:112–114,2371`). `HoleCurrencyRepo` maps index 25 to Rupie local index 5 and native token `皮` (`data/domain/data/HoleCurrencyRepo.ts:106–110`); its font-675 frame is `(142,460,28,28)` (`apk/assets/assets/graphics/1x/font-675.fnt:159`). The native crop `HoleTurquoiseRupie.png` was visually inspected and shows a turquoise Rupie.
+
+Editable metadata maps index 25 to `HoleTurquoiseRupie` in `holeCurrencyImages`. The Bell caller now resolves its “Turquoise Rupie” cost label to currency record 25; name-based matching alone failed because the record is named “Rupie 5”. The 28×28 crop was published to `s3://idleon-efficiency-images/images/HoleTurquoiseRupie.png`; the CDN returned HTTP 200 with `image/png` and 1015 bytes. Browser natural dimensions remain unverified because the local UI stack was unhealthy.
 
 Browser evidence: [image integration result](../../.ui-verification/runs/2026-10-18T04-16-54-930Z-76167/hole-part4-artwork-result.json) records 10 sediment, 2 bucket, 15 Bell, 17 Harp, and 1 Lamp images with nonzero natural dimensions. Screenshots and per-view detail are recorded in the [current handoff](../plans/hole-research-brief.md#part-4-actual-game-artwork-integration--2026-10-18). This evidence supersedes the historical statements above that no CDN availability or crop metadata was checked.
