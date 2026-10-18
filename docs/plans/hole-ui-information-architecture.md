@@ -164,7 +164,7 @@ A future page plan can cite the relevant owner section, [shared-link rules](#sha
 This reference adds no mandatory research ceremony, new approval gate, production authorization, or current browser proof.
 ## Cross-cavern consistency workstream
 
-**Status:** Implemented under the supervisor-approved plan; the human directly accepted this UI result and its stated check limits on 2026-10-19. This separate pass does not reopen accepted part 4 or select parts 5–7.
+**Status:** Implemented under the supervisor-approved plan; the supervisor accepted this UI result and its stated check limits under the user-requested scope on 2026-10-19. Personal review of this new pass remains outstanding. This separate pass does not reopen accepted part 4 or select parts 5–7.
 
 ### Outcome and implementation seam
 

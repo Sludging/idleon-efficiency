@@ -9,9 +9,9 @@
 
 ## Current handoff
 
-- **Current acceptance:** The human directly accepted the separate cross-cavern UI consistency result and its stated check limits: “I accept this UI result and its stated check limits.” The 18-view pass remains a separate UI consistency layer; it does not reopen part 4/#444 or select parts 5–7. Parent #440 remains open.
+- **Current acceptance:** The supervisor accepted the separate cross-cavern UI consistency result and its stated check limits under the user-requested scope. This is not new direct human acceptance; personal review of this consistency pass remains outstanding. Part 4/#444 remains closed; parent #440 remains open; parts 5–7 remain unselected.
 
-### Cove local purchase-count preservation — ACCEPTED BY HUMAN — 2026-10-19
+### Cove local purchase-count preservation — ACCEPTED BY SUPERVISOR — 2026-10-19
 
 The supervisor selected the independent review's single content finding: retain Cove's distinct saved daily purchase count locally once. This decision is not direct human acceptance of the new result. `app/world-5/hole/content.tsx` now adds **Saved upgrades today** as the second compact top metric beside **Earned Opals**, only for cavern 17. It reads prepared `Study.dailyCoveUpgradesPurchased` and reuses the existing exact-number formatter and `Benefit` label/reason. Known zero displays `0`; `null` displays `Unavailable: Saved Cove purchases today are missing.` No Study-rate reason, raw-save read, formula, mechanic, footer flag, or new API was added.
 
@@ -24,9 +24,9 @@ The shared Study footer, full Studies catalogue, unsupported notice, other 13 ta
 - Save unchanged: before/after SHA-256 `aab7f516047fc5b86096350e92864faeeccf303e9c72def20b51130507416555`. Temporary scenario removed; containers remain running.
 - Limits: one configured desktop save; zero branch observed, null/missing branch preserved by code inspection only. Known shared navigation hydration, NitroPay `browsingTopics`, RL identity CORS, failed-resource, and HTTP 403 noise remained; no Hole-specific runtime error appeared. No repeat 18-view batch or Study-link check, suites, build, lint, typecheck, mobile, synthetic fixture, game extraction, issue write, staging, or commit. Prior 18-view and Study-link evidence below remains authoritative for unchanged paths.
 
-The human accepted the cross-cavern UI result and its stated check limits. Part 4/#444 remains accepted and closed; parent #440 remains open; parts 5–7 remain unselected.
+The supervisor accepted the cross-cavern UI result and its stated check limits under the user-requested scope. Personal review of this new pass remains outstanding. Part 4/#444 remains accepted and closed; parent #440 remains open; parts 5–7 remain unselected.
 
-### Shared cavern Study footer alignment and link — ACCEPTED BY HUMAN — 2026-10-19
+### Shared cavern Study footer alignment and link — ACCEPTED BY SUPERVISOR — 2026-10-19
 
 Restored the selected footer composition in `components/world-5/hole/cavernLayout.tsx`: Study level and its sourced description stay on the left, one status or Study rate stays on the right, and saved progress remains below. The compact **All Studies** text link now sits in the Study heading. Removed duplicate effect-category wording; `Benefit` remains in the full Study catalogue and its route import remains fixed.
 
