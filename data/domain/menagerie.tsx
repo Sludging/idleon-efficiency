@@ -125,7 +125,9 @@ export interface MenagerieProgression {
 
 export interface MenagerieResourceBalances {
     blackStarsOwned: number;
+    blackStarsAvailable: number;
     organicLabels: number;
+    organicLabelsAvailable: number;
     mineheadDoublersOwned: number;
     mineheadDoublers: number;
     sushiDoublersOwned: number;
@@ -221,12 +223,16 @@ export class Menagerie extends Domain {
     private sushiDoubledUpgradeIds = new Set<number>();
     private jellyOperatorDoubledUpgradeIds = new Set<number>();
     private consumedDoublerCounts: [number, number, number] = [0, 0, 0];
+    private blackStarsConsumed = 0;
+    private organicLabelsConsumed = 0;
     private purpleJellyBonus = 0;
     private yellowConstructionBonus = 0;
     private savedCrucibleWave = 0;
     private resourceBalances: MenagerieResourceBalances = {
         blackStarsOwned: 0,
+        blackStarsAvailable: 0,
         organicLabels: 0,
+        organicLabelsAvailable: 0,
         mineheadDoublersOwned: 0,
         mineheadDoublers: 0,
         sushiDoublersOwned: 0,
@@ -288,6 +294,13 @@ export class Menagerie extends Domain {
         menagerie.mineheadDoubledUpgradeIds = new Set(mineheadDoubledUpgradeIds.map(Number));
         menagerie.sushiDoubledUpgradeIds = new Set(sushiDoubledUpgradeIds.map(Number));
         menagerie.jellyOperatorDoubledUpgradeIds = new Set(jellyOperatorDoubledUpgradeIds.map(Number));
+        const blackStarSelections = spelunk[49] ?? [];
+        let blackStarsConsumed = 0;
+        for (let index = 0; index < 37; index += 1) {
+            blackStarsConsumed += Number(blackStarSelections[index] ?? 0);
+        }
+        menagerie.blackStarsConsumed = blackStarsConsumed;
+        menagerie.organicLabelsConsumed = (spelunk[50] ?? []).length;
         menagerie.consumedDoublerCounts = [
             mineheadDoubledUpgradeIds.length,
             sushiDoubledUpgradeIds.length,
@@ -485,9 +498,13 @@ export class Menagerie extends Domain {
         const mineheadDoublersOwned = Math.round(this.getBonusValue(8) + 3 * bankBundleL);
         const sushiDoublersOwned = Math.round(this.getBonusValue(10) + 3 * bankBundleL);
         const jellyOperatorDoublersOwned = Math.round(this.getBonusValue(12) + 3 * bankBundleL);
+        const blackStarsOwned = Math.round(this.getBonusValue(2) + 4 * bankBundleM);
+        const organicLabels = Math.round(this.getBonusValue(6));
         this.resourceBalances = {
-            blackStarsOwned: Math.round(this.getBonusValue(2) + 4 * bankBundleM),
-            organicLabels: Math.round(this.getBonusValue(6)),
+            blackStarsOwned,
+            blackStarsAvailable: Math.round(blackStarsOwned - this.blackStarsConsumed),
+            organicLabels,
+            organicLabelsAvailable: Math.round(organicLabels - this.organicLabelsConsumed),
             mineheadDoublersOwned,
             mineheadDoublers: Math.round(mineheadDoublersOwned - this.consumedDoublerCounts[0]),
             sushiDoublersOwned,

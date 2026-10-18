@@ -198,6 +198,43 @@ describe('Menagerie account progression', () => {
     expect(resources.sushiDoublers).toMatchLiveGameWithDetails(expected[3], { tolerance: 0, context: 'Remaining Sushi doublers' });
     expect(resources.jellyOperatorDoublers).toMatchLiveGameWithDetails(expected[4], { tolerance: 0, context: 'Remaining Jelly Operator doublers' });
   });
+  it('reports available Black Stars by use count and Organic Labels by selected upgrade count', () => {
+    const resourceMenagerie = new Menagerie();
+    resourceMenagerie.init([], 0);
+    const savedMenagerie: number[][] = [[], [], [], []];
+    savedMenagerie[3][2] = 1;
+    savedMenagerie[3][6] = 1;
+    // Native v1.23 sums 37 palette states (state 2 uses two Stars); each selected Exotic Market ID uses one Label.
+    const spelunk = Array.from({ length: 54 }, () => [] as number[]);
+    spelunk[49] = Array.from({ length: 37 }, (_, index) => index === 0 ? 1 : index === 1 ? 2 : 0);
+    spelunk[50] = [0];
+    const optionList = Array.from({ length: 629 }, () => 0);
+    const holes = Array.from({ length: 12 }, () => Array.from({ length: 8 }, () => 0));
+    const ninja = Array.from({ length: 106 }, () => [] as number[]);
+    const research = Array.from({ length: 8 }, () => [] as number[]);
+    const parseData = new Map<string, unknown>([
+      [resourceMenagerie.getDataKey(), resourceMenagerie],
+      ['Menagerie', savedMenagerie],
+      ['OptLacc', optionList],
+      ['Research', research],
+      ['Divinity', []],
+      ['Cards1', []],
+      ['GreenStacks', []],
+      ['Spelunk', spelunk],
+      ['Holes', holes],
+      ['FarmCrop', {}],
+      ['KRbest', {}],
+      ['Ninja', ninja],
+    ]);
+    resourceMenagerie.parse(parseData);
+    resourceMenagerie.prepare(new Map([['account', { hasBundleL: false, hasBundleM: true }]]));
+
+    const resources = resourceMenagerie.getResourceBalances();
+    expect(resources.blackStarsOwned).toBe(5);
+    expect(resources.blackStarsAvailable).toBe(2);
+    expect(resources.organicLabels).toBe(1);
+    expect(resources.organicLabelsAvailable).toBe(0);
+  });
   it('wires paired grants and remaining resources into their existing owners', () => {
     const gaming = accountData.get('gaming') as Gaming;
     const farming = accountData.get('farming') as Farming;

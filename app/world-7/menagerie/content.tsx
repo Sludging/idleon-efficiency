@@ -165,16 +165,16 @@ export default function MenagerieContent() {
                     {tab === 'Bonuses' && <Box gap="medium">
                         <Box border={[{ side: 'top', color: 'grey-1' }, { side: 'bottom', color: 'grey-1' }]} pad={{ vertical: 'small' }} direction="row" wrap gap="medium" align="center" aria-label="Usable Menagerie resources">
                             {([
-                                { key: 'blackStarsOwned', label: 'Black Stars', value: resources.blackStarsOwned },
-                                { key: 'organicLabels', label: 'Organic Labels', value: resources.organicLabels },
-                                { key: 'mineheadDoublers', label: 'Minehead doublers', value: resources.mineheadDoublers },
-                                { key: 'sushiDoublers', label: 'Sushi Station doublers', value: resources.sushiDoublers },
-                                { key: 'jellyOperatorDoublers', label: 'Jelly Operator doublers', value: resources.jellyOperatorDoublers },
+                                { key: 'blackStarsOwned', label: 'Black Stars', available: resources.blackStarsAvailable, total: resources.blackStarsOwned },
+                                { key: 'organicLabels', label: 'Organic Labels', available: resources.organicLabelsAvailable, total: resources.organicLabels },
+                                { key: 'mineheadDoublers', label: 'Minehead doublers', available: resources.mineheadDoublers, total: resources.mineheadDoublersOwned },
+                                { key: 'sushiDoublers', label: 'Sushi Station doublers', available: resources.sushiDoublers, total: resources.sushiDoublersOwned },
+                                { key: 'jellyOperatorDoublers', label: 'Jelly Operator doublers', available: resources.jellyOperatorDoublers, total: resources.jellyOperatorDoublersOwned },
                             ] as const).map((resource, resourceIndex) => <Box key={resource.key} direction="row" gap="medium" align="stretch" flex={{ grow: 1, shrink: 1, basis: '160px' }}>
                                 {resourceIndex > 0 && <Box width="1px" background="grey-1" flex={false} aria-hidden="true" />}
                                 <Box direction="row" gap="small" align="center">
                                     <IconImage data={menagerie.getUsableResourceImageData(resource.key)} scale={0.75} />
-                                    <TextAndLabel label={resource.label} text={commaNotation(resource.value)} textSize="small" />
+                                    <TextAndLabel label={resource.label} text={`${commaNotation(resource.available)}/${commaNotation(resource.total)}`} textSize="small" />
                                 </Box>
                             </Box>)}
                         </Box>

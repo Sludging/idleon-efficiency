@@ -236,3 +236,44 @@ Final `yarn tsc --noEmit` cleared feature-owned Menagerie (`totalMenagerieBonusL
 After the fixes, `yarn tsc --noEmit` reported only those unrelated diagnostics. Focused verification `yarn test --runInBand tests/domains/menagerie/account-state.test.ts tests/domains/world-3/construction/atomcollider-cost-and-maxlevel.test.ts` passed 2 suites/17 tests. The real `latest` save flows through production `loadGameDataFromSave`; Construction requirement records initialize and reach existing cost/cap processing, and Menagerie account-state comparisons pass. No new UI browser run was needed: the `Select` option narrowing preserves all three valid filter behaviors. Previous combined backend verification remains 15 suites/209 tests.
 
 Known limits retained: earlier resource run 133/144 (11 unpaired Gaming/Sushi assertions use v1.22 expected outputs); rate/stat run 294/320 (26 unresolved Research/Spelunking/Drop comparisons). Final backend acceptance records 15 suites/209 tests, stable production-account smoke, and 2 suites/17 tests after type repairs; it accepts the backend only. Nonzero receiver effects and uncapped Shrine maximum-cost arithmetic were not runtime-exercised. Full repo TypeScript still has unrelated working-tree diagnostics; their age is unknown. No expected values or fixtures changed. No temporary scripts remain.
+## Resource availability semantics follow-up
+
+Scope: native v1.23 source audit for `{available}/{total}` on the five existing Menagerie resources. This extends the prior summary in “Resource balances” and “Completed receiver slice”; it does not change implementation or claim personalized runtime parity.
+
+### Native owned totals and available quantities
+
+All five grants are integer-rounded **totals**. Resource-specific remaining helpers subtract allocations exactly as follows:
+
+| Resource | Native total / owned helper | Native available helper | Allocations and interpretation |
+|---|---|---|---|
+| Black Stars | `MenagerieStuff("BlackStarsOwned")` = `round(BoostQTY(2) + 4*Have_ban_m)` | `GamingStatType("BlackStarsLEFT")` sums `Spelunk[49][0..36]` numerically, then returns `round(owned - sum)` | Palette entries are per-palette saved numeric selection states. UI writes `0→1→2`; state `1` is selected once, `2` is selected twice. Palette effect uses `max(1, 1 + (state + floor(state/2)))`, so 1 means 2× and 2 means 4×. Available is total minus consumed uses, not selected-entry count. Sources `118771`, `235791-235795`, `226130-226139`, `235773`. |
+| Organic Labels | `MenagerieStuff("OrganicLabelOwned")` = `round(BoostQTY(6))` | `FarmingStuffs("ExoticOrganicsLEFT")` = `round(owned - Spelunk[50].length)` | Each entry is a selected Exotic Market upgrade ID. UI appends selected ID only when absent (`247269-247271`); market lookup uses membership (`237574-237578`). One selected upgrade consumes one label. |
+| Minehead Doublers | `MenagerieStuff("MineheadDoublersOwned")` = `round(BoostQTY(8) + 3*Have_ban_l)` | `MenagerieStuff("MineheadDoublersLEFT")` = `round(owned - Spelunk[51].length)` | Entries are selected Minehead upgrade IDs, appended only if absent. Selection doubles that upgrade's quantity (`244276-244279`). |
+| Sushi Station Doublers | `MenagerieStuff("SushiDoublersOwned")` = `round(BoostQTY(10) + 3*Have_ban_l)` | `MenagerieStuff("SushiDoublersLEFT")` = `round(owned - Spelunk[52].length)` | Entries are selected upgrade IDs, appended only if absent; callers gate selection on catalog eligibility (`292010-292021`). Membership doubles quantity (`244509-244512`). |
+| Jelly Operator Doublers | `MenagerieStuff("JellyOpDoublersOwned")` = `round(BoostQTY(12) + 3*Have_ban_l)` | `MenagerieStuff("JellyOpDoublersLEFT")` = `round(owned - Spelunk[53].length)` | Entries are selected upgrade IDs, appended only if absent and after membership in selected/buyable research lists (`293895-293909`). Membership doubles quantity (`118500-118503`). |
+
+Exact common helper source: `idleon1.23.txt:118771-118778`; totals and available are separately rounded by native source. Bundle helpers `Have_ban_m` and `Have_ban_l` are booleans (1 iff matching bundle field equals 1); therefore bank bundle contributes +4 Black Stars for bundle M, and +3 to each doubler total for bundle L. No bundle contribution enters Organic Labels. Formula source and bundle mapping: `118771-118778`, `240194-240196`.
+
+### Negative and rounding behavior
+
+Native does **not** clamp available values to zero. Each helper directly computes `Math.round(total - use)`. If allocations exceed total, output can be negative. Allocation counts are integer for Label/doubler list lengths and summed Black Star numeric states; total is already rounded. JS `Math.round` applies to the difference, including any fractional Black Star state sum; do not replace with `max(0,...)`, clamp, or round allocation separately.
+
+Useful source-regression boundaries:
+
+- Black Stars: allocated palette states `0`, `1`, `2`; compare state `1` use of one with state `2` use of two. Include mixed states, e.g. `1+2=3`; raw number of nonzero palette entries would incorrectly count this as two.
+- Each list-backed resource: empty list, one eligible selected ID, and more selections than owned total. Confirm one unique ID consumes one unit; repeated selection does not append a duplicate.
+- All resources: total zero with no allocations gives zero; allocations above total must preserve negative result. Bank bundle values 0/1 verify exact +4 or +3 grants before availability subtraction. For fractional Menagerie bonus quantities, test native `Math.round` at a half boundary if valid save/catalog state can produce it; source establishes rounding but available fractional allocation path is only relevant to Black Stars.
+
+### Evidence limits
+
+This is matching local v1.23 source, with prior captured helper body in `docs/game-snippets/menagerie/MenagerieStuff.1.23.js:8`. Source defines Black Star consumption summing all 37 palette slot states; it does not establish a behavior for malformed values outside the UI's 0/1/2 cycle. The audited native source did not show a removal path for selection arrays; available semantics follow native current save-array lengths, not inferred gameplay history. Existing paired account-state evidence is all-zero and does not exercise grants, allocations, bundle bonuses, or negative balances; do not claim nonzero runtime parity.
+
+Player-facing interpretation: total means all granted resource units, including verified bank-bundle grants; available means total minus native consumed selections. For Black Stars, consumption counts uses (state values), not palettes. For other four, each unique selected entry consumes one unit. This supports rendering native available/total in that order without changing recipient calculations, which continue to use owned totals and selection membership.
+
+### Implemented presentation and regression evidence
+
+`MenagerieProgression` now exposes `blackStarsAvailable` and `organicLabelsAvailable` alongside unchanged owned totals. Black Star use sums numeric Spelunking slots 0–36, so state `2` consumes two; Organic Label use counts selected IDs, including ID `0`. Both available values preserve native `Math.round(total - use)` behavior without a negative clamp. Minehead, Sushi Station, and Jelly Operator pair values remain unchanged.
+
+`tests/domains/menagerie/account-state.test.ts` verifies valid domain-unit inputs: Black Stars total `5`, uses `1 + 2`, available `2`; Organic Labels total `1`, selected ID `0`, available `0`. Exact command: `yarn test --runInBand tests/domains/menagerie/account-state.test.ts` — 1 suite, 12 tests passed. This controlled regression is not personalized native parity.
+
+`yarn ui:run .ui-verification/menagerie-resource-pairs-20261018.cjs` passed on the real unchanged latest profile at 1440×1000. All five pairs rendered `0/0` with existing icons and layout; the parent inspected `.ui-verification/runs/2026-10-18T04-51-46-658Z-44008/final.png`. Zero fixture grants and allocations mean nonzero consumption was not visually verified. Fresh source-only UI review found zero findings (confidence 0.94). No full suite, build, or typecheck was run.
