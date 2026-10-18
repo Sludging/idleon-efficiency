@@ -1,6 +1,6 @@
 # Menagerie artwork evidence
 
-**Scope:** v1.23 game-art identification for revised Menagerie UI. Research only; no generated data, public assets, runtime, or production files changed.
+**Scope:** v1.23 game-art identification for revised Menagerie UI. This note records source/art evidence and published asset details; no generated data, runtime, or application code changed.
 
 ## Result
 
@@ -12,13 +12,13 @@ The matching v1.23 native UI actor establishes direct, standalone artwork for ev
 | Unlock | `MenaIconO{ID}.png` | 0–24 | 44×55 | `MenaIconO{ID}` |
 | Bonus | `MenaIconP{ID}.png` | 0–24 | 42×55 | `MenaIconP{ID}` |
 | Shell meter | `MenaShell0.png` empty; `MenaShell1.png` filled | Not a catalog record | 54×52 | `MenaShell0`, `MenaShell1` |
-| Lumi art candidate | `LumiJel.png`; separate `LumiJelS.png` also exists | Not a catalog record | `LumiJel` 28×53; `LumiJelS` 28×22 | Same basename |
+| Lumi currency mark | Font 109 native glyph `纳` (U+7EB3, decimal 32435), atlas rectangle (134,166) | Not a catalog record | 14×14 | `LumiCurrency` |
 
 Mission assets `MenaIconY33.png` and `MenaIconY34.png` also exist in the APK, but generated catalog IDs stop at 32. Their record relationship is not established here; do not assign them to extra records.
 
 The native Menagerie actor names shell images explicitly and uses Y/O/P filename prefixes plus the current zero-based record index. Its scroll offsets are added to the local visible-row index before lookup. The Y/O/P images are standalone PNGs, not atlas crops. Thus application entities can expose the exact basenames through existing `ImageData` without frame fields or UI filename maps.
 
-The exact Lumi relationship is now source-backed. In v1.23 actor `scripts.ActorEvents_786`, the `LilMena` Menagerie actor creates and attaches both `LumiJel.png` and `LumiJelS.png` as personal images (lines 272317–324). The actor initializes `LilMena` among its Menagerie-related animation names (lines 272274–279). Drawing code displays a native text value when `LilTownJellyUnlocked` is set (lines 271950–954). Therefore, `LumiJel` is truthful as Lumi-related decorative summary artwork, but it is not established as the exact currency glyph. `LumiJelS` is the small companion artwork attached to that same actor.
+The v1.23 actor `scripts.ActorEvents_786` creates and attaches `LumiJel.png` and `LumiJelS.png` as personal images (lines 272317–324). These are character art, not currency marks. Native wordmark glyph `终` (font 221, atlas rectangle x=330, y=25, 47×18) is distinct from Lumi currency glyph `纳` (font 109, U+7EB3, decimal 32435; atlas rectangle (134,166), 14×14).
 
 ## Evidence
 
@@ -58,33 +58,33 @@ The requests returned decoded visual image content. This is stronger than an HTT
 
 Use verified static basenames and dimensions in the existing Menagerie record/entity `getImageData()` methods: missions map index `i` to `MenaIconYi` and 38×38; unlocks map `i` to `MenaIconOi` and 44×55; bonuses map `i` to `MenaIconPi` and 42×55. Use Shell image location `MenaShell1` and dimensions 54×52 for the summary icon; the empty-state `MenaShell0` is specifically meter state. `LumiJel`/28×53 is source-backed character art on the native `LilMena` Menagerie actor, not a currency icon.
 
-**Lumi currency mark is a font glyph, not standalone image.** Matching v1.23 font 221 maps `终` (U+7EC8, decimal 32456) to atlas rectangle x=330, y=25, 47×18. The decoded glyph is the stylized LUMI wordmark. It is not `終`; the two characters differ. The production UI uses the verified glyph crop for the main balance and costs.
+**Lumi currency mark originates as a native font glyph.** Matching v1.23 font 109 maps `纳` (U+7EB3, decimal 32435) to atlas rectangle (134,166), 14×14. The extracted asset `LumiCurrency` preserves that glyph at native size; its published URL is `https://cdn2.idleonefficiency.com/images/LumiCurrency.png`. `LumiJel` and `LumiJelS` are character artwork only.
 
 ### Lumi balance and purchase-cost rendering
 
-`ActorEvents_786:297093–297097` reads `Menagerie[0][0]`, formats it, appends `终`, and draws with font 221; nearby `~` is separate. The hourly rate uses localized `Lumi_gains_rate:` and `/hr`, then draws `纳` at `:297101–297107`. Purchase cost comes from `CustomLists.h.Research[52]`, with `{` replaced by the formatted cost at `:297128–297159`; special costs at indices 20 and 24 replace `$` with formatted amounts at `:297131–297142`.
+`ActorEvents_786:297093–297097` reads `Menagerie[0][0]`, formats it, and draws Lumi balance; nearby `~` is separate. The hourly rate uses localized `Lumi_gains_rate:` and `/hr`, then draws glyph `纳` at `:297101–297107`. Purchase cost comes from `CustomLists.h.Research[52]`, with `{` replaced by the formatted cost at `:297128–297159`; special costs at indices 20 and 24 replace `$` with formatted amounts at `:297131–297142`. Native source uses `纳` for Lumi currency; in the accepted UI, purchase-cost icons render at scale 1 and the summary icon at scale 0.75.
 
-### Verified usable-resource marks
+### Native usable-resource caller associations
 
-The five usable balance keys come from existing `getResourceBalances`. Native v1.23 display callers establish these marks and labels:
+The existing balance helper exposes five keys; source support for their visual marks differs by caller and representation:
 
 | Balance | Native caller and glyph | Exact crop or asset used |
 |---|---|---|
 | Black Stars | `ActorEvents:226955–226977`, `秤` (U+79E4, 31204) | font 259, x=487, y=125, 18×17 |
-| Organic Labels | `247904–247906`, `溜` (U+6E9C, 28316), full banner glyph | font 564, x=1, y=70, 21×20 crop |
+| Organic Labels | `247903–247906`, glyph `溜` with `ExoticOrganicsLEFT` count | `MenaOrganicLabelSeal` uses whole `準` rosette (font 564, 34,93; 29×29) as qualified count/label emblem, not proven inventory-currency art |
 | Minehead Doublers | `288079–288108`, `纷` (U+7EB7, 32439) | font 336, x=136, y=213, 32×32 |
 | Sushi Doublers | `291370–291378`, `疲` (U+75B2, 30130) | font 336, x=211, y=217, 32×22 |
 | Jelly Operator Doublers | `293036–293044`, `彩` (U+5F69, 24425) | font 746, x=889, y=84, 40×36 crop |
 
-The full Organic Labels banner (`font-564`, x=1, y=70, 180×22) and Jelly Operator banner glyph (`font-746`, x=889, y=84, 128×36) were inspected; the UI uses the smaller cropped icon illustrations above, not shrunk banners. Crop files were extracted with the existing command `node data/extract-icon.js font221 32456 LumiMark.png` (and corresponding font IDs/code points: `font259 31204 MenaBlackStar.png`, `font336 32439 Minehead.png`, `font336 30130 Sushi.png`; Organic Labels uses `font564` crop `2,71,21,20`, Jelly Operator uses `font746` crop `889,84,40,36`). `LumiJel` is native character art, not currency; neither standalone orbs nor the text “Lumi” are currency marks.
+Native caller `idleon1.23.txt:247947–247964` applies whole font-564 blue rosette `準`, atlas rectangle (34,93), 29×29, to Spelunk[50] entries as an applied/selected state; separate glyphs mark other states. Caller `247903–247906` draws `溜` with `ExoticOrganicsLEFT` when `OrganicLabelOwned > 0`; this supports a qualified Organic Labels count association, not proof that the rosette is a physical inventory-currency icon. `MenaOrganicLabelSeal.png` uses the rosette as a labeled emblem beside the numeric count, not as an entry-state badge. The rosette is source-backed applied-label art.
 
 ### CDN confirmation and limits
 
-After explicit authorization, the normal S3 sync ran with profile `idleons`. The six final asset URLs were decoded and matched the extracted dimensions: `LumiMark.png` 47×18, `MenaBlackStar.png` 18×17, `MenaOrganicLabelIcon.png` 21×20, `MenaMineheadDoubler.png` 32×32, `MenaSushiDoubler.png` 32×22, and `MenaJellyOperatorDoublerIcon.png` 40×36. This sync also uploaded pre-existing changed local assets; it performed no deletes and no app deployment.
+The executor uploaded `MenaOrganicLabelSeal.png`; source and CDN SHA-256 both equal `e9668dadaf5a159dc222d7bc0e472e08033adf8a5180b9215e04e4c0a9c36199`. CDN decoded as 29×29 RGBA PNG. Production Lumi asset sync completed; `https://cdn2.idleonefficiency.com/images/LumiCurrency.png` decoded to 14×14 and matched source SHA-256 `1ecce3ec1e09c1a99d480525c7a7969af20c3ece720b10453e7dcc9256f1612a`. In Toolbox comparisons, Black Star and Minehead are exact pixel matches after 2× downsampling; Sushi is 92.47% exact, with small differences, while IE's glyph remains source-backed native counter art. Jelly uses the native doubler-counter coin; Toolbox uses the `MenaIconP12` boost portrait, so this is not an icon-equivalence test. Organic's whole rosette is native applied-label art; its Toolbox match is visual evidence only, not proof of literal inventory currency.
 
-Evidence is matching v1.23 source, font mappings and decoded atlas crops, plus decoded CDN content. No live game or runtime was used. No generated image data, public assets, or generic crop infrastructure were added. No standalone Lumi currency PNG or atlas-frame website API is claimed.
+Evidence is matching v1.23 source, font mappings, decoded atlas crops, executor-confirmed CDN asset bytes, and observed CDN content. No live game or runtime was used. Organic rosette is a qualified applied-label emblem beside a numeric count, not a proven physical inventory-currency item. No generated data, public asset infrastructure, or generic crop infrastructure was added; the two standalone assets above are published extracted assets.
 
 
 ### Source anchors
 
-The five resource helper definitions occur at `idleon1.23.txt:118771–118778`. Their display callers are Black Stars `226955–226977`, Organic Labels `247904–247906`, Minehead `288079–288108`, Sushi `291370–291378`, and Jelly Operator `293036–293044`. These callers establish the displayed resources and marks. The production balances use the existing `getResourceBalances` output; no owned/used history was added.
+The five resource helper definitions occur at `idleon1.23.txt:118771–118778`. Display callers: Black Stars `226955–226977`; Organic Labels count/label association `247903–247906`, and applied-state rosette `247947–247964`; Minehead `288079–288108`; Sushi `291370–291378`; Jelly Operator `293036–293044`. These callers establish qualified displayed associations, not currency-mark equivalence.

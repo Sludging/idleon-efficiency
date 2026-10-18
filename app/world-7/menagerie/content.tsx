@@ -155,7 +155,7 @@ export default function MenagerieContent() {
                                 {!unlock.owned && !unlock.available && <Text size="small" color="accent-2">Requires Lumi rank {unlock.requiredRank}</Text>}
                                 {!unlock.owned && unlock.available && <Box direction="row" gap="small" align="center">
                                     <Text size="small" color="accent-2">Cost</Text>
-                                    <IconImage data={menagerie.getLumiImageData()} scale={0.6} />
+                                    <IconImage data={menagerie.getLumiImageData()} scale={1} />
                                     <Text size="small" color={unlock.affordable ? 'green-1' : 'status-critical'}>{formatValue(unlock.nextCost)}</Text>
                                 </Box>}
                             </Box>
@@ -194,7 +194,7 @@ export default function MenagerieContent() {
                                     </Box>
                                     <Box direction="row" gap="small" align="center">
                                         <Text size="small" color="accent-2">Cost</Text>
-                                        <IconImage data={menagerie.getLumiImageData()} scale={0.6} />
+                                        <IconImage data={menagerie.getLumiImageData()} scale={1} />
                                         <Text size="small" color={bonus.affordable ? 'green-1' : 'status-critical'}>{formatValue(bonus.nextCost)}</Text>
                                     </Box>
                                 </Box>

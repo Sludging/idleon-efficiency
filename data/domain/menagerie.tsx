@@ -349,7 +349,7 @@ export class Menagerie extends Domain {
     }
 
     getLumiImageData(): ImageData {
-        return { location: "LumiMark", width: 47, height: 18 };
+        return { location: "LumiCurrency", width: 14, height: 14 };
     }
 
     getMissions(): MenagerieMission[] {
@@ -398,7 +398,7 @@ export class Menagerie extends Domain {
     getUsableResourceImageData(resource: MenagerieUsableResource): ImageData {
         const imageData: Record<MenagerieUsableResource, ImageData> = {
             blackStarsOwned: { location: "MenaBlackStar", width: 18, height: 17 },
-            organicLabels: { location: "MenaOrganicLabelIcon", width: 21, height: 20 },
+            organicLabels: { location: "MenaOrganicLabelSeal", width: 29, height: 29 },
             mineheadDoublers: { location: "MenaMineheadDoubler", width: 32, height: 32 },
             sushiDoublers: { location: "MenaSushiDoubler", width: 32, height: 22 },
             jellyOperatorDoublers: { location: "MenaJellyOperatorDoublerIcon", width: 40, height: 36 },
