@@ -21,8 +21,16 @@ export class MenagerieMission {
 
     parse(claimCount: number): void {
         this.claimCount = claimCount;
-        this.currentRequirement = Math.floor(this.data.initialRequirement + this.data.requirementIncrement * claimCount);
-        this.nextRequirement = Math.floor(this.data.initialRequirement + this.data.requirementIncrement * (claimCount + 1));
+        this.currentRequirement = this.getRequirementAfterClaims(0);
+        this.nextRequirement = this.getRequirementAfterClaims(1);
+    }
+
+    getRequirementAfterClaims(additionalClaims: number): number {
+        return Math.floor(this.data.initialRequirement + this.data.requirementIncrement * (this.claimCount + additionalClaims));
+    }
+
+    get remainingProgress(): number {
+        return Math.max(0, this.currentRequirement - this.progress);
     }
 
     update(progress: number, available: boolean): void {

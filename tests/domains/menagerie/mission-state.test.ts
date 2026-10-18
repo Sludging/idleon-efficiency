@@ -30,6 +30,8 @@ describe('Menagerie current mission task', () => {
     );
     expect(mission.nextRequirement).toBe(18000);
     expect(mission.nextRequirement).toBeGreaterThan(mission.currentRequirement);
+    expect(mission.getRequirementAfterClaims(2)).toBe(20000);
+    expect(mission.remainingProgress).toBe(986);
     expect(account.hasBankBundle).toBe(Boolean(getExtractedValue(extractionResults, 'mission_bank_bundle')));
   });
 });

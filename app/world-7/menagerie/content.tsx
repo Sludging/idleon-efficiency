@@ -1,6 +1,8 @@
 'use client';
 
-import { Box, Grid, Heading, Meter, ResponsiveContext, Select, Text } from 'grommet';
+import { Box, DataTable, Grid, Heading, Meter, ResponsiveContext, Select, Text, ThemeContext } from 'grommet';
+import type { DataTableProps, ThemeType } from 'grommet';
+import { normalizeColor } from 'grommet/utils';
 import { useContext, useState } from 'react';
 import ContentTabs from '../../../components/base/ContentTabs';
 import IconImage from '../../../components/base/IconImage';
@@ -30,6 +32,64 @@ const bonusEffectText = (bonus: MenagerieBonus, effect: number): string => {
 const sourceDescription = (text: string): string =>
     text.replace(/,\s*1 in \$ chance/, '').replace(/[{}$]/g, '').replace(/膛/g, '').trim();
 const formatValue = (value: number): string => notateNumber(value, 'Big');
+
+type MissionRow = { id: number, mission: MenagerieMission };
+
+const missionColumns: NonNullable<DataTableProps<MissionRow>['columns']> = [
+    {
+        property: 'mission',
+        header: 'Mission / current goal',
+        size: '300px',
+        render: ({ mission }: MissionRow) => {
+            const status = mission.ready ? 'Ready' : mission.available ? 'In progress' : 'Locked';
+            return <Box direction="row" gap="small" align="center" style={{ minWidth: '270px', opacity: mission.available ? 1 : 0.5 }}>
+                <Artwork data={mission.getImageData()} size={34} />
+                <Box gap="xsmall">
+                    <Text size="xsmall" weight="bold">{mission.data.label}</Text>
+                    <Text size="xsmall" color={mission.ready ? 'status-ok' : mission.available ? 'text' : 'accent-2'}>{status}</Text>
+                    <Text size="xsmall">{templateText(mission.data.description, mission.currentRequirement)}</Text>
+                </Box>
+            </Box>;
+        },
+    },
+    {
+        property: 'progress',
+        header: 'Progress / to-go',
+        size: '210px',
+        render: ({ mission }: MissionRow) => <Box gap="xsmall" style={{ minWidth: '180px', opacity: mission.available ? 1 : 0.5 }}>
+            <Text size="xsmall">{commaNotation(mission.progress)} / {commaNotation(mission.currentRequirement)}</Text>
+            <Meter
+                type="bar"
+                values={[{ value: Math.min(mission.progress, mission.currentRequirement), color: 'brand' }]}
+                max={mission.currentRequirement || 1}
+                size="full"
+                thickness="xsmall"
+                aria-label={`${mission.data.label} progress`}
+            />
+            <Text size="xsmall" color="accent-2">{commaNotation(mission.remainingProgress)} to go</Text>
+        </Box>,
+    },
+    {
+        property: 'claims',
+        header: 'Saved claims',
+        size: '150px',
+        render: ({ mission }: MissionRow) => <Box gap="xsmall" style={{ minWidth: '125px', opacity: mission.available ? 1 : 0.5 }}>
+            <Text size="xsmall">{commaNotation(mission.claimCount)} claimed</Text>
+            <Text size="xsmall" color="accent-2">Current task {commaNotation(mission.claimCount + 1)}</Text>
+        </Box>,
+    },
+    {
+        property: 'upcoming',
+        header: 'Next goals',
+        size: '190px',
+        render: ({ mission }: MissionRow) => <Box gap="xsmall" style={{ minWidth: '160px', opacity: mission.available ? 1 : 0.5 }}>
+            <Text size="xsmall">Next: {commaNotation(mission.nextRequirement)}</Text>
+            <Text size="xsmall">Then: {commaNotation(mission.getRequirementAfterClaims(2))}</Text>
+            <Text size="xsmall" color="accent-2">Each goal +{commaNotation(mission.data.requirementIncrement)}</Text>
+        </Box>,
+    },
+];
+
 export default function MenagerieContent() {
     const small = useContext(ResponsiveContext) === 'small';
     const { theData, dataStatus } = useAppDataStore(useShallow(state => ({
@@ -139,9 +199,37 @@ export default function MenagerieContent() {
                                 }}
                             />
                         </Box>
-                        <Grid columns={small ? ['flex'] : ['flex', 'flex', 'flex', 'flex']} gap="medium" align="stretch">
-                            {visibleMissions.map(mission => <MissionCard key={mission.index} mission={mission} />)}
-                        </Grid>
+                        <Box style={{ overflowX: 'auto' }}>
+                            <RoundedShadowBox background="dark-1" pad="none" gap="none" width="100%" style={{ overflow: 'hidden' }}>
+                                <ThemeContext.Extend value={{
+                                    dataTable: {
+                                        body: {
+                                            extend: ({ theme }: { theme: ThemeType }) => `
+                                                tbody td {
+                                                    border-bottom: 1px solid ${normalizeColor('grey-1', theme)};
+                                                    padding: 10px 12px;
+                                                }
+                                            `,
+                                        },
+                                        header: {
+                                            border: { color: 'grey-1', side: 'bottom', size: 'xsmall' },
+                                            font: { size: '14px', weight: '400' },
+                                            pad: { horizontal: 'small', vertical: 'small' },
+                                        },
+                                    },
+                                }}>
+                                    <DataTable
+                                        aria-label="Menagerie missions"
+                                        columns={missionColumns}
+                                        data={visibleMissions.map(mission => ({ id: mission.index, mission }))}
+                                        primaryKey="id"
+                                        sortable={false}
+                                        step={visibleMissions.length || 1}
+                                        style={{ minWidth: '920px' }}
+                                    />
+                                </ThemeContext.Extend>
+                            </RoundedShadowBox>
+                        </Box>
                     </Box>}
 
                     {tab === 'Unlocks' && <Grid columns={small ? ['flex'] : ['flex', 'flex', 'flex', 'flex']} gap="medium" align="stretch">
@@ -221,28 +309,3 @@ function Artwork({ data, size }: { data: ImageData, size: number }) {
     </Box>;
 }
 
-function MissionCard({ mission }: { mission: MenagerieMission }) {
-    const status = mission.ready ? 'Ready' : mission.available ? 'In progress' : 'Locked';
-    const ratio = mission.currentRequirement > 0 ? Math.min(mission.progress, mission.currentRequirement) / mission.currentRequirement : 0;
-
-    return <RoundedShadowBox pad="none" background="dark-1" overflow="hidden" style={{ opacity: mission.available ? 1 : 0.5, display: 'flex', flexDirection: 'column' }}>
-        <Box direction="row" gap="small" align="center" background="grey-1" pad={{ horizontal: 'medium', vertical: 'small' }}>
-            <Artwork data={mission.getImageData()} size={40} />
-            <Box>
-                <Text size="small" weight="bold">{mission.data.label}</Text>
-                <Text size="small" color={mission.ready ? 'status-ok' : mission.available ? 'text' : 'accent-2'}>{status}</Text>
-            </Box>
-        </Box>
-        <Box pad="medium" gap="small" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-            <Text size="small">{templateText(mission.data.description, mission.currentRequirement)}</Text>
-            <Box direction="row" justify="between" gap="small" wrap>
-                <TextAndLabel label="Next task" text={commaNotation(mission.nextRequirement)} textSize="small" />
-                <TextAndLabel label="Account progress" text={commaNotation(mission.progress)} textSize="small" />
-            </Box>
-            <Box gap="xsmall" style={{ marginTop: 'auto' }}>
-                <Meter type="bar" values={[{ value: ratio * 100, color: 'brand' }]} max={100} size="full" thickness="xsmall" aria-label={`${mission.data.label} progress`} />
-                <Text size="xsmall" color="accent-2">{mission.claimCount} claims</Text>
-            </Box>
-        </Box>
-    </RoundedShadowBox>;
-}
