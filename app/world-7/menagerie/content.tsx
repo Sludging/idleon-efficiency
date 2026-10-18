@@ -71,11 +71,10 @@ const missionColumns: NonNullable<DataTableProps<MissionRow>['columns']> = [
     },
     {
         property: 'claims',
-        header: 'Saved claims',
+        header: 'Current task',
         size: '150px',
         render: ({ mission }: MissionRow) => <Box gap="xsmall" style={{ minWidth: '125px', opacity: mission.available ? 1 : 0.5 }}>
-            <Text size="xsmall">{commaNotation(mission.claimCount)} claimed</Text>
-            <Text size="xsmall" color="accent-2">Current task {commaNotation(mission.claimCount + 1)}</Text>
+            <Text size="xsmall" color="accent-2">{commaNotation(mission.claimCount + 1)}</Text>
         </Box>,
     },
     {
@@ -84,7 +83,6 @@ const missionColumns: NonNullable<DataTableProps<MissionRow>['columns']> = [
         size: '190px',
         render: ({ mission }: MissionRow) => <Box gap="xsmall" style={{ minWidth: '160px', opacity: mission.available ? 1 : 0.5 }}>
             <Text size="xsmall">Next: {commaNotation(mission.nextRequirement)}</Text>
-            <Text size="xsmall">Then: {commaNotation(mission.getRequirementAfterClaims(2))}</Text>
             <Text size="xsmall" color="accent-2">Each goal +{commaNotation(mission.data.requirementIncrement)}</Text>
         </Box>,
     },
