@@ -19,10 +19,13 @@ type MissionFilter = 'All' | 'Available' | 'Ready';
 const templateText = (text: string, value: number): string =>
     text.replace(/[{}]/g, commaNotation(value)).replace(/膛/g, '').trim();
 
-const bonusTemplateText = (bonus: MenagerieBonus, effect: number): string =>
-    bonus.data.description.replace(/[{}]/g, placeholder =>
-        notateNumber(bonus.getDescriptionEffect(effect, placeholder as '{' | '}'), 'Small'),
-    ).replace(/膛/g, '').trim();
+const bonusEffectText = (bonus: MenagerieBonus, effect: number): string => {
+    const description = bonus.data.description;
+    const placeholder = description.includes('}') ? '}' : '{';
+    const prefix = description.includes(`+${placeholder}`) ? '+' : '';
+    const unit = description.match(/[{}](%|x| sec\b)/)?.[1] ?? '';
+    return `${prefix}${notateNumber(bonus.getDescriptionEffect(effect, placeholder), 'Small')}${unit}`;
+};
 
 const sourceDescription = (text: string): string =>
     text.replace(/,\s*1 in \$ chance/, '').replace(/[{}$]/g, '').replace(/膛/g, '').trim();
@@ -83,8 +86,11 @@ export default function MenagerieContent() {
                             </Box>
                             <Text size="small">Shells: {commaNotation(progression.shells)} / {commaNotation(progression.shellThreshold)}</Text>
                             <Meter
+                                type="bar"
                                 values={[{ value: shellProgress, color: 'brand' }]}
                                 max={progression.shellThreshold}
+                                size="full"
+                                thickness="xsmall"
                                 aria-label="Shell progress toward next rank"
                             />
                         </SummaryGroup>
@@ -121,8 +127,7 @@ export default function MenagerieContent() {
                     />
 
                     {tab === 'Missions' && <Box gap="medium">
-                        <Box direction="row" align="center" justify="between" gap="small">
-                            <Text>{missions.length} missions · {readyCount} ready. Each in-game claim grants one Shell.</Text>
+                        <Box direction="row" align="center" justify="end" gap="small">
                             <Select
                                 aria-label="Filter missions"
                                 options={['All', 'Available', 'Ready']}
@@ -148,40 +153,53 @@ export default function MenagerieContent() {
                             <Box pad="medium" gap="small">
                                 {unlock.data.tooltip && <Text size="small">{sourceDescription(unlock.data.tooltip)}</Text>}
                                 {!unlock.owned && !unlock.available && <Text size="small" color="accent-2">Requires Lumi rank {unlock.requiredRank}</Text>}
-                                {!unlock.owned && unlock.available && <TextAndLabel label="Cost" text={`${formatValue(unlock.nextCost)} Lumi`} textColor={unlock.affordable ? 'green-1' : 'status-critical'} />}
+                                {!unlock.owned && unlock.available && <Box direction="row" gap="small" align="center">
+                                    <Text size="small" color="accent-2">Cost</Text>
+                                    <IconImage data={menagerie.getLumiImageData()} scale={0.6} />
+                                    <Text size="small" color={unlock.affordable ? 'green-1' : 'status-critical'}>{formatValue(unlock.nextCost)}</Text>
+                                </Box>}
                             </Box>
                         </RoundedShadowBox>)}
                     </Grid>}
 
                     {tab === 'Bonuses' && <Box gap="medium">
+                        <Box border={[{ side: 'top', color: 'grey-1' }, { side: 'bottom', color: 'grey-1' }]} pad={{ vertical: 'small' }} direction="row" wrap gap="medium" align="center" aria-label="Usable Menagerie resources">
+                            {([
+                                { key: 'blackStarsOwned', label: 'Black Stars', value: resources.blackStarsOwned },
+                                { key: 'organicLabels', label: 'Organic Labels', value: resources.organicLabels },
+                                { key: 'mineheadDoublers', label: 'Minehead doublers', value: resources.mineheadDoublers },
+                                { key: 'sushiDoublers', label: 'Sushi Station doublers', value: resources.sushiDoublers },
+                                { key: 'jellyOperatorDoublers', label: 'Jelly Operator doublers', value: resources.jellyOperatorDoublers },
+                            ] as const).map((resource, resourceIndex) => <Box key={resource.key} direction="row" gap="medium" align="stretch" flex={{ grow: 1, shrink: 1, basis: '160px' }}>
+                                {resourceIndex > 0 && <Box width="1px" background="grey-1" flex={false} aria-hidden="true" />}
+                                <Box direction="row" gap="small" align="center">
+                                    <IconImage data={menagerie.getUsableResourceImageData(resource.key)} scale={0.75} />
+                                    <TextAndLabel label={resource.label} text={commaNotation(resource.value)} textSize="small" />
+                                </Box>
+                            </Box>)}
+                        </Box>
                         <Grid columns={small ? ['flex'] : ['flex', 'flex', 'flex', 'flex']} gap="medium" align="stretch">
-                            {bonuses.map(bonus => <RoundedShadowBox key={bonus.index} pad="none" background="dark-1" overflow="hidden" style={{ opacity: bonus.available ? 1 : 0.5 }}>
+                            {bonuses.map(bonus => <RoundedShadowBox key={bonus.index} pad="none" background="dark-1" overflow="hidden" style={{ opacity: bonus.available ? 1 : 0.5, gridRow: 'span 2', display: 'grid', gridTemplateRows: 'subgrid', rowGap: 0 }}>
                                 <Box direction="row" gap="small" align="center" background="grey-1" pad={{ horizontal: 'medium', vertical: 'small' }}>
                                     <Artwork data={bonus.getImageData()} size={40} />
                                     <Box>
                                         <Text size="small" weight="bold">{sourceDescription(bonus.data.description)}</Text>
-                                        <Text size="small" color="accent-2">{bonus.available ? `Level ${bonus.level}` : `Requires Lumi rank ${bonus.requiredRank}`}</Text>
+                                        <Text size="small" color="accent-2">Level {bonus.level} · Lumi rank {bonus.requiredRank}</Text>
                                     </Box>
                                 </Box>
                                 <Box pad="medium" gap="small">
-                                    {bonus.available && <>
-                                        <Text size="small">Current: {bonusTemplateText(bonus, bonus.effect)}</Text>
-                                        <Text size="small">Next: {bonusTemplateText(bonus, bonus.nextEffect)}</Text>
-                                        <TextAndLabel label="Cost" text={`${formatValue(bonus.nextCost)} Lumi`} textColor={bonus.affordable ? 'green-1' : 'status-critical'} />
-                                    </>}
+                                    <Box direction="row" gap="xsmall" align="center" wrap background="dark-3" pad="small" round="xsmall">
+                                        <Text size="small" weight="bold" color="accent-1">{bonusEffectText(bonus, bonus.effect)}</Text>
+                                        <Text size="small" color="accent-2">→ {bonusEffectText(bonus, bonus.nextEffect)}</Text>
+                                    </Box>
+                                    <Box direction="row" gap="small" align="center">
+                                        <Text size="small" color="accent-2">Cost</Text>
+                                        <IconImage data={menagerie.getLumiImageData()} scale={0.6} />
+                                        <Text size="small" color={bonus.affordable ? 'green-1' : 'status-critical'}>{formatValue(bonus.nextCost)}</Text>
+                                    </Box>
                                 </Box>
                             </RoundedShadowBox>)}
                         </Grid>
-                        <Box gap="small">
-                            <Heading level="3" size="small" margin="none">Usable resources</Heading>
-                            <Grid columns={{ count: 3, size: 'auto' }} gap="small">
-                                <TextAndLabel label="Black Stars" text={commaNotation(resources.blackStarsOwned)} />
-                                <TextAndLabel label="Organic Labels" text={commaNotation(resources.organicLabels)} />
-                                <TextAndLabel label="Minehead doublers" text={commaNotation(resources.mineheadDoublers)} />
-                                <TextAndLabel label="Sushi Station doublers" text={commaNotation(resources.sushiDoublers)} />
-                                <TextAndLabel label="Jelly Operator doublers" text={commaNotation(resources.jellyOperatorDoublers)} />
-                            </Grid>
-                        </Box>
                     </Box>}
                 </Box>
             </Box>
@@ -207,7 +225,7 @@ function MissionCard({ mission }: { mission: MenagerieMission }) {
     const status = mission.ready ? 'Ready' : mission.available ? 'In progress' : 'Locked';
     const ratio = mission.currentRequirement > 0 ? Math.min(mission.progress, mission.currentRequirement) / mission.currentRequirement : 0;
 
-    return <RoundedShadowBox pad="none" background="dark-1" overflow="hidden" style={{ opacity: mission.available ? 1 : 0.5 }}>
+    return <RoundedShadowBox pad="none" background="dark-1" overflow="hidden" style={{ opacity: mission.available ? 1 : 0.5, display: 'flex', flexDirection: 'column' }}>
         <Box direction="row" gap="small" align="center" background="grey-1" pad={{ horizontal: 'medium', vertical: 'small' }}>
             <Artwork data={mission.getImageData()} size={40} />
             <Box>
@@ -215,15 +233,16 @@ function MissionCard({ mission }: { mission: MenagerieMission }) {
                 <Text size="small" color={mission.ready ? 'status-ok' : mission.available ? 'text' : 'accent-2'}>{status}</Text>
             </Box>
         </Box>
-        <Box pad="medium" gap="small">
+        <Box pad="medium" gap="small" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
             <Text size="small">{templateText(mission.data.description, mission.currentRequirement)}</Text>
             <Box direction="row" justify="between" gap="small" wrap>
-                <TextAndLabel label="Current task" text={commaNotation(mission.currentRequirement)} textSize="small" />
                 <TextAndLabel label="Next task" text={commaNotation(mission.nextRequirement)} textSize="small" />
                 <TextAndLabel label="Account progress" text={commaNotation(mission.progress)} textSize="small" />
             </Box>
-            <Meter values={[{ value: ratio * 100, color: 'brand' }]} max={100} aria-label={`${mission.data.label} progress`} />
-            <Text size="xsmall" color="accent-2">{mission.claimCount} claims</Text>
+            <Box gap="xsmall" style={{ marginTop: 'auto' }}>
+                <Meter type="bar" values={[{ value: ratio * 100, color: 'brand' }]} max={100} size="full" thickness="xsmall" aria-label={`${mission.data.label} progress`} />
+                <Text size="xsmall" color="accent-2">{mission.claimCount} claims</Text>
+            </Box>
         </Box>
     </RoundedShadowBox>;
 }

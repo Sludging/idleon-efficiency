@@ -133,6 +133,7 @@ export interface MenagerieResourceBalances {
     jellyOperatorDoublersOwned: number;
     jellyOperatorDoublers: number;
 }
+export type MenagerieUsableResource = "blackStarsOwned" | "organicLabels" | "mineheadDoublers" | "sushiDoublers" | "jellyOperatorDoublers";
 
 export interface MenagerieMissionAvailability {
     baseline: number;
@@ -348,7 +349,7 @@ export class Menagerie extends Domain {
     }
 
     getLumiImageData(): ImageData {
-        return { location: "LumiJel", width: 28, height: 53 };
+        return { location: "LumiMark", width: 47, height: 18 };
     }
 
     getMissions(): MenagerieMission[] {
@@ -394,6 +395,17 @@ export class Menagerie extends Domain {
     getResourceBalances(): MenagerieResourceBalances {
         return { ...this.resourceBalances };
     }
+    getUsableResourceImageData(resource: MenagerieUsableResource): ImageData {
+        const imageData: Record<MenagerieUsableResource, ImageData> = {
+            blackStarsOwned: { location: "MenaBlackStar", width: 18, height: 17 },
+            organicLabels: { location: "MenaOrganicLabelIcon", width: 21, height: 20 },
+            mineheadDoublers: { location: "MenaMineheadDoubler", width: 32, height: 32 },
+            sushiDoublers: { location: "MenaSushiDoubler", width: 32, height: 22 },
+            jellyOperatorDoublers: { location: "MenaJellyOperatorDoublerIcon", width: 40, height: 36 },
+        };
+        return imageData[resource];
+    }
+
     isMineheadUpgradeDoubled(index: number): boolean {
         return this.mineheadDoubledUpgradeIds.has(index);
     }
