@@ -162,3 +162,94 @@ Default tab or cavern, route shape, selection persistence, exact fields and posi
 Choose task-specific composition using existing visual patterns; simpler navigation does not approve a uniform panel or a new visual language.
 A future page plan can cite the relevant owner section, [shared-link rules](#shared-information-and-cross-links), [partial-state rules](#partial-delivery-and-missing-information), and [growth rules](#future-growth-and-consolidation).
 This reference adds no mandatory research ceremony, new approval gate, production authorization, or current browser proof.
+## Cross-cavern consistency workstream
+
+**Status:** Implemented under the supervisor-approved plan; the human directly accepted this UI result and its stated check limits on 2026-10-19. This separate pass does not reopen accepted part 4 or select parts 5–7.
+
+### Outcome and implementation seam
+
+Make the 18 existing cavern panels read as one feature family without changing their mechanics, navigation, support claims, or approved feature content. Keep the accepted Well, Bell, Harp, and Lamp panels as references; align the other 14 views with one compact metric row and the same bottom Study summary.
+
+Add `components/world-5/hole/cavernLayout.tsx` because `components/world-5/hole/` has no shared cavern-layout module. Export two focused components:
+
+- `CavernMetricStrip({ metrics })`, where each metric is `{ label: string; value: ReactNode; image?: ImageData; tooltip?: ReactNode }`. Use one wrapping desktop row with native icons when available, existing formatted values, restrained inactive styling, and existing tooltips. Extract the current `MetricStrip` from `part4Caverns.tsx`, migrate its Lamp caller unchanged, and use the same component for the 14 target views. `ReactNode` preserves existing rich values and requirement coloring without adding a view-specific formatting API.
+- `CavernStudySummary({ study, onOpenStudies })`, where `study` is the existing `hole.studies[index]` `Study` and `onOpenStudies` selects **Upgrades → Studies** in the current page state. The component owns the shared bottom layout and the existing Study effect renderer; callers pass no reconstructed save fields or guessed status.
+
+Use the prepared `Study` contract directly (`data/domain/world-5/hole/hole.tsx:707-787,2110-2143`): `levelAvailable`, `getDescription()`, `progressAvailable`, `progress`, `getRequirement()`, `access`, `participation`, `progressPerHour`, and `rateUnavailableReason`. Use `getEffects()` and `dailyCoveUpgradesPurchased` for the full catalogue's owned-effect display, preserving null reasons; do not duplicate effect-category text beside the sourced cavern bonus. Show level and sourced description on the left, one applicable status on the right, and saved progress/requirement below with a bar only when both inputs support one. Put the small **All Studies** text link in the Study heading. `inactive` displays **Inactive**; `target`/`neighbor` displays **Study rate: x/hr** using prepared `progressPerHour`; `unavailable` keeps its reason. Preserve **Locked** for `access === false` and unavailable access separately. Do not show an owner.
+
+The route owns `hole.studies[index]` and the existing selection setters; part-4 detail components receive `hole` and select their known Study index. Keep `Benefit` in the shared Hole UI module for the full Study catalogue's prepared-effect rendering. No provider, renderer schema, adapter, generic theme layer, or game calculation is needed.
+
+For the 14 target views, the footer owns Study level/effect and status/progress. Remove duplicate inline Study or benefit content when the footer renders it; preserve meaningful prepared benefit information once. Do not add duplicated `getEffects()` or daily Cove information to references, or add exports only to preserve the old duplicate. Keep genuinely distinct existing information, with each item shown once.
+
+### Coverage matrix
+
+| Cavern index | Current route view | Planned treatment |
+|---:|---|---|
+| 0 Well | Accepted part-4 detail | Preserve panel and Study footer behavior; share the footer renderer only. |
+| 1 Motherlode | Resource-cavern renderer | One row from current resource data, lifetime ore, efficiency threshold, claims, and existing owned schematics; common Study summary. |
+| 2 Dawg Den | Unsupported fallback | Keep earned Opals as compact row; retain explicit unsupported body; move owned Study information to common summary. |
+| 3 Bravery | Unsupported fallback | Same honest fallback and common Study summary. |
+| 4 Bell | Accepted part-4 detail | Preserve panel and Study footer behavior; share the footer renderer only. |
+| 5 Harp | Accepted part-4 detail | Preserve panel and Study footer behavior; share the footer renderer only. |
+| 6 Lamp | Accepted part-4 detail | Preserve panel and Study footer behavior; migrate existing metric helper without changing its look. |
+| 7 Undying Hive | Resource-cavern renderer | One row from current resource data, efficiency threshold, claims, and existing owned schematic; common Study summary. |
+| 8 Gloomie Mushroom Grotto | Unsupported fallback | Keep earned Opals as compact row; retain explicit unsupported body; move owned Study information to common summary. |
+| 9 Justice | Unsupported fallback | Same honest fallback and common Study summary. |
+| 10 Jars | Unsupported fallback | Keep earned Opals as compact row; retain explicit unsupported body; move owned Study information to common summary. |
+| 11 Evertree | Resource-cavern renderer | One row from current resource data, efficiency threshold, claims, and existing owned schematic; common Study summary. |
+| 12 Wisdom | Unsupported fallback | Same honest fallback and common Study summary. |
+| 13 Gambit | Unsupported fallback | Same honest fallback and common Study summary. |
+| 14 Temple | Unsupported fallback | Same honest fallback and common Study summary. |
+| 15 Fountain | Unsupported fallback | Keep earned Opals as compact row; retain explicit unsupported body; move owned Study information to common summary. |
+| 16 Bottomless Trench | Resource-cavern renderer | One row from current resource data, efficiency threshold, claims, and existing owned schematic; common Study summary. |
+| 17 Crystal Glunko Cove | Unsupported fallback | Keep earned Opals and the existing Saved upgrades today count once in the compact row; retain explicit unsupported body and common Study summary. |
+
+These assignments describe the current renderer, not a game-mechanic classification. In `app/world-5/hole/content.tsx:55-58,217-235,332-385`, resource route indices `[1, 7, 11, 16]` currently display Ore, Flies, Everlogs, and Fish, respectively; thus current resource-renderer cavern names are Motherlode, Undying Hive, Evertree, and Bottomless Trench. Preserve that literal code mapping; do not rename or reclassify Jars/Evertree/Bottomless Trench from their cavern names. The other ten retain their already-rendered local earned Opals and unsupported notice; Cove also retains its pre-existing Saved upgrades today count once, while the other nine add no local metrics. Add no empty metrics, fabricated Study source data, or unsupported mechanic panels.
+
+For the four accepted references, keep their existing local metrics, sections, shell, outer tabs, rail, and actions unchanged. Move only shared presentation helpers as needed. For all 18, preserve available zero, unknown, missing input, locked, unowned, and unsupported distinctions. Study indices match cavern indices 0–17.
+
+### Delivery and verification
+
+Expected code files: new `components/world-5/hole/cavernLayout.tsx`, `components/world-5/hole/part4Caverns.tsx`, and `app/world-5/hole/content.tsx`. Update both this plan and the current handoff. Keep `part4Caverns.tsx`'s four selected panels and interactions intact apart from calling the extracted summary/helper.
+
+After approval and implementation, verify one configured desktop route load and select each of the 14 changed panels in one batch. Confirm metric row ordering/icons/formatting, preserved resource and unsupported states, Study at bottom, link destination, and no Hole-specific runtime error. Capture only representative resource, unsupported, locked/unavailable or active Study cases, plus one unchanged part-4 reference. Hover one Study tooltip and follow the Study link once. Do not create 18 screenshots or run a broad suite for this visual consistency pass. Unknown/null/zero combinations not present on the configured save remain unverified.
+
+#### Earlier actual UI verification — blocked, fixed by fresh selector declaration — 2026-10-19
+
+The first configured desktop run failed before selection with `ReferenceError: part4Cavern is not defined` at `app/world-5/hole/content.tsx:312-313`. It is historical: a fresh fix restored the selector declaration. Its original artifacts remain at `.ui-verification/runs/2026-10-18T23-22-09-275Z-35097/`.
+
+#### Historical Study destination failure — fixed by the current check — 2026-10-19
+
+`yarn ui:status` reported Docker app and browser ready. `yarn ui:run .ui-verification/hole-cavern-consistency-20261019-final.cjs` reached the configured `/world-5/hole` route at 1440×1000 and selected all 18 cavern views once. Every view rendered its Study footer and status. The 14 target views retained their real resource metrics or explicit unsupported notice; the four accepted references rendered. No duplicate inline Study benefit was found. The route produced no Hole runtime error during cavern selection.
+
+| Index | Cavern | Observed |
+|---:|---|---|
+| 0 | Well | Rendered; Study footer/status present; no duplicate inline Study benefit. |
+| 1 | Motherlode | Rendered resource metric row; Study footer/status present; no duplicate inline Study benefit. |
+| 2 | Dawg Den | Rendered earned-Opal metric and unsupported notice; Study footer/status present. |
+| 3 | Bravery | Rendered unsupported notice; Study footer/status present. |
+| 4 | Bell | Rendered; Study footer/status present; no duplicate inline Study benefit. |
+| 5 | Harp | Rendered; baseline `0.85%` remained; Study footer/status present. |
+| 6 | Lamp | Rendered; Study footer/status present; no duplicate inline Study benefit. |
+| 7 | Undying Hive | Rendered resource metric row; Study footer/status present. |
+| 8 | Gloomie Mushroom Grotto | Rendered earned-Opal metric and unsupported notice; Study footer/status present. |
+| 9 | Justice | Rendered unsupported notice; Study footer/status present. |
+| 10 | Jars | Rendered earned-Opal metric and unsupported notice; Study footer/status present. |
+| 11 | Evertree | Rendered resource metric row; Study footer/status present. |
+| 12 | Wisdom | Rendered unsupported notice; Study footer/status present. |
+| 13 | Gambit | Rendered unsupported notice; Study footer/status present. |
+| 14 | Temple | Rendered unsupported notice; Study footer/status present. |
+| 15 | Fountain | Rendered earned-Opal metric and unsupported notice; Study footer/status present. |
+| 16 | Bottomless Trench | Rendered resource metric row; Study footer/status present. |
+| 17 | Crystal Glunko Cove | Rendered unsupported notice; Study footer/status present. |
+
+The completed 18-view run's final link attempt exposed `ReferenceError: Benefit is not defined` in `StudyCard` on the Upgrades → Studies destination, then timed out waiting for `upgrade-nav-Studies`. This was a current Hole-owned error, not shared navigation, advertising, or external CORS noise. The `Benefit` import has since been restored in `app/world-5/hole/content.tsx`; the current destination check below passed.
+
+Captures: `.ui-verification/runs/2026-10-18T23-27-24-995Z-44516/well-reference.png`, `motherlode-resource.png`, and `dawg-den-unsupported.png`. Runner `result.json` and `errors.json` in the same directory record the failure and diagnostics; `final.png` is last browser state. The known shared navigation hydration mismatch, NitroPay `browsingTopics`, RL identity CORS, `ERR_FAILED`, and HTTP 403 remain external noise.
+
+The configured save hash stayed `aab7f516047fc5b86096350e92864faeeccf303e9c72def20b51130507416555` before and after the 18-view batch. The UI stack remains running. Its temporary scenario was removed. No tests, build, lint, typecheck, game extraction, code/config changes, issue updates, review, or commit ran. That batch covered one configured desktop save only; unavailable/locked/null/zero branches and broad game parity remain unchecked.
+#### Current Study footer and destination verification — READY_FOR_REVIEW — 2026-10-19
+
+The earlier 18-cavern navigation evidence and captures above remain the cross-cavern coverage; that batch was not repeated. `yarn ui:status` reported the existing Docker app and browser ready. `yarn ui:run .ui-verification/hole-study-footer-followup-20261019.cjs` passed on the configured 1440×1000 `/world-5/hole` route. It selected Motherlode, confirmed level and sourced bonus on the left, `Inactive` on the right, and progress below through measured bounding boxes; it also confirmed only one bonus label. Clicking the heading's **All Studies** link loaded `upgrade-nav-Studies` and the full Study grid without the former `Benefit is not defined` error.
+
+Captures: `.ui-verification/runs/2026-10-18T23-37-02-435Z-69153/study-footer.png` and `studies-destination.png`. The existing Motherlode Study tooltip trigger was present and hovered; its content was not asserted. Current runner errors contain the known shared navigation hydration mismatch, NitroPay `browsingTopics`, RL identity CORS, failed resource, and HTTP 403; no Hole-specific error appeared on the exercised paths. The runner-created temporary scenario was removed. One configured desktop save only; unavailable/locked/null/zero branches, alternate saves, broad game parity, and extended user smoke remain unchecked. No test, build, lint, typecheck, staging, or commit ran.

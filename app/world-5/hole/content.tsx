@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { Box, CheckBox, Grid, Heading, Text, TextInput } from "grommet";
 import { CircleInformation } from "grommet-icons";
 import { useShallow } from "zustand/react/shallow";
@@ -17,6 +17,7 @@ import Schematics from "../../../components/world-5/hole/schematics";
 import Measurements from "../../../components/world-5/hole/measurements";
 import { usePreservedScroll } from "../../../components/world-5/hole/upgradeInspection";
 import Part4CavernDetails from "../../../components/world-5/hole/part4Caverns";
+import { Benefit, CavernMetricStrip, CavernStudySummary, type CavernMetric } from "../../../components/world-5/hole/cavernLayout";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import type { Companion } from "../../../data/domain/companions";
 import { Item } from "../../../data/domain/items";
@@ -127,48 +128,21 @@ function nextUnlock(villager: Villager, hole: Hole): string {
     }
 }
 
-function Benefit({ index, effects, dailyPurchases }: { index: number; effects: StudyEffect[]; dailyPurchases: number | null }) {
-    const values = new Map(effects.map(effect => [effect.key, effect]));
-    const value = (key: string, suffix = "") => {
-        const effect = values.get(key)!;
-        return typeof effect.value === "number" ? precise(effect.value, suffix) : number(null, effect.unavailableReason);
-    };
-    let main: ReactNode;
-    let detail: ReactNode = null;
-    if ([1, 7, 11, 16].includes(index)) {
-        main = "Cheaper layers in other skilling caverns";
-    } else {
-        switch (index) {
-            case 0: main = `${value("sediment-retained-after-expansion", "%")} sediment retained; +${value("bucket-fill-per-expansion", "%")} bucket fill per expansion`; break;
-            case 2: main = `${value("score-per-defeated-golden-hound", "×")} golden hound score`; break;
-            case 3: main = `Minimum damage: ${value("minimum-damage-share-of-maximum", "%")} of maximum`; break;
-            case 4: main = `+${value("random-bonus-levels-every-twentieth-ring")} random bonus levels every twentieth ring`; break;
-            case 5: main = `${value("string-experience", "×")} string EXP`; detail = `${value("exceptional-string-experience-chance", "%")} chance for ${value("exceptional-string-experience", "×")} exceptional string EXP.`; break;
-            case 6: main = `+${value("additional-daily-wishes")} daily wishes`; break;
-            case 8: main = `${value("credited-gloomie-kills", "×")} credited Gloomie kills`; break;
-            case 9: main = `+${value("additional-linear-reward-days")} reward days; ${value("opal-reward-chance", "×")} Opal reward chance`; break;
-            case 10: main = `${value("enchantment-chance", "×")} enchantment chance`; break;
-            case 12: main = `+${value("additional-starting-attempts")} starting attempts`; break;
-            case 13: main = `+${value("total-gambit-points", "%")} Gambit points`; break;
-            case 14: main = `+${value("additional-double-torch-chance", "%")} double-torch chance`; break;
-            case 15: main = `${value("marble-production", "×")} marble production`; break;
-            case 17: {
-                const cost = values.get("discounted-upgrade-cost")!;
-                const discount = typeof cost.value === "number" ? precise(100 - cost.value * 100, "%") : number(null, cost.unavailableReason);
-                main = `First ${value("daily-discounted-upgrades")} upgrades each day cost ${discount} less`;
-                detail = `Saved upgrades today: ${exact(dailyPurchases, "Saved Cove purchases today are missing.")}.`;
-                break;
-            }
-        }
-    }
-    const missing = effects.filter(effect => effect.value === null);
-    return <Box gap="xxsmall" data-testid={`benefit-${index}`}>
-        <Text size="small">{main}</Text>
-        {detail && <Text size="xsmall" color="accent-2">{detail}</Text>}
-        {missing.length > 0 && <Text size="small" data-testid={`benefit-missing-${index}`}>{[...new Set(missing.map(effect => effect.unavailableReason))].join(" ")}</Text>}
-    </Box>;
+
+function metricValue(value: number | null, reason?: string | null): string {
+    return value === null ? `Unavailable${reason ? `: ${reason}` : ""}` : notateNumber(value);
 }
 
+function cavernOpalMetrics(hole: Hole, cavern: number): CavernMetric[] {
+    return hole.cavernOpalSources
+        .filter(source => source.owner === `cavern:${cavern}`)
+        .map(source => ({
+            label: "Earned Opals",
+            value: metricValue(source.opals, source.unavailableReason),
+            image: Item.getImageData("Opal"),
+            tooltip: exact(source.opals, source.unavailableReason),
+        }));
+}
 export default function HoleContent() {
     const { ref, minHeight, preserveScroll } = usePreservedScroll();
     const { data, dataStatus } = useAppDataStore(useShallow(state => ({ data: state.data.getData(), dataStatus: state.dataStatus, lastUpdated: state.lastUpdated })));
@@ -214,11 +188,15 @@ export default function HoleContent() {
         return { study, effects, searchable: `${cavernArt[study.index].name} ${study.data.name.replace(/_/g, " ")} ${study.levelAvailable ? study.getDescription().replace(/_/g, " ") : ""} ${effectSearch} ${skillingSearch}`.toLowerCase() };
     });
     const visibleStudies = studies.filter(view => (!showUnlocked || view.study.access === true) && view.searchable.includes(search.toLowerCase()));
+    const part4Cavern = cavern === 0 || cavern === 4 || cavern === 5 || cavern === 6;
     const resourceCavernPosition = resourceCavernRailIndices.indexOf(cavern);
     const selectedResourceCavern = resourceCavernPosition < 0
         ? null
         : Object.values(hole.resourceCavrens.cavrens)[resourceCavernPosition];
-    const part4Cavern = [0, 4, 5, 6].includes(cavern);
+    const onOpenStudies = () => preserveScroll(() => {
+        setTab("Upgrades");
+        setUpgrade("Studies");
+    });
     const skilling = data.get("skilling") as Skilling;
     const resourceCharacters = selectedResourceCavern === null ? [] : characters
         .map(character => ({
@@ -333,55 +311,53 @@ export default function HoleContent() {
                 <Box pad="medium" height="100%" data-testid="cavern-rail">{cavernArt.map((image, index) => <Box direction="row" align="center" key={image.name} data-testid={`cavern-nav-${index}`}><CavernImage index={index} width={32} height={28} /><Box flex><LeftNavButton text={image.name} isActive={cavern === index} clickHandler={() => preserveScroll(() => setCavern(index))} /></Box></Box>)}</Box>
                 <Box fill background="dark-1" pad="medium" gap="medium" style={{ minWidth: 0 }} data-testid="selected-cavern">
                     <Box direction="row" gap="small" align="center"><CavernImage index={cavern} width={96} height={80} />{!part4Cavern && <Heading level="3" size="small" margin="none">{cavernArt[cavern].name}</Heading>}</Box>
-                    {part4Cavern ? <Part4CavernDetails hole={hole} cavern={cavern} totalMoney={account.totalMoney} /> : selectedResourceCavern === null ? <>
-                        {hole.cavernOpalSources.filter(source => source.owner === `cavern:${cavern}`).map(source => <TextAndLabel key={source.id} label="Earned Opals" text={number(source.opals, source.unavailableReason)} tooltip={exact(source.opals, source.unavailableReason)} />)}
-                        <Box gap="small"><Text color="accent-2" size="small">Owned Study benefit</Text><Benefit index={cavern} effects={studies[cavern].effects} dailyPurchases={hole.studies[cavern].dailyCoveUpgradesPurchased} /></Box>
+                    {part4Cavern ? <Part4CavernDetails hole={hole} cavern={cavern} totalMoney={account.totalMoney} onOpenStudies={onOpenStudies} /> : selectedResourceCavern === null ? <>
+                        <CavernMetricStrip metrics={cavern === 17 ? [
+                            ...cavernOpalMetrics(hole, cavern),
+                            { label: "Saved upgrades today", value: exact(hole.studies[cavern].dailyCoveUpgradesPurchased, "Saved Cove purchases today are missing.") },
+                        ] : cavernOpalMetrics(hole, cavern)} />
                         <Text size="small">Other cavern tools are not supported on this website yet.</Text>
+                        <CavernStudySummary study={hole.studies[cavern]} onOpenStudies={onOpenStudies} />
                     </> : <>
-                        <Box direction="row" gap={{ row: "medium", column: "small" }} align="start" wrap data-testid="resource-cavern-fields">
-                            <TextAndLabel label={cavern === 11 ? "Trunks" : cavern === 16 ? "Depth" : "Layers"} text={number(selectedResourceCavern.completedLayers)} textSize="small" labelSize="xsmall" />
-                            <TextAndLabel
-                                label={`${resourceCavernResourceNames[cavern]} current / required`}
-                                text={`${number(selectedResourceCavern.resourceCurrent)} / ${number(selectedResourceCavern.resourceRequirement)}`}
-                                textSize="small"
-                                labelSize="xsmall"
-                                textColor={selectedResourceCavern.resourceRequirementMet === true ? "status-ok" : undefined}
-                            />
-                            {selectedResourceCavern.name === "Motherload" && <TextAndLabel label="Lifetime ore" text={number(hole.resourceCavrens.lifetimeMotherlodeOre)} textSize="small" labelSize="xsmall" />}
-                            <TextAndLabel
-                                label="Efficiency required"
-                                text={number(selectedResourceCavern.efficiencyThreshold)}
-                                textSize="small"
-                                labelSize="xsmall"
-                                tooltip={<ResourceCharactersTooltip efficiencyThreshold={selectedResourceCavern.efficiencyThreshold} characters={resourceCharacters} />}
-                            />
-                            <TextAndLabel
-                                label="Claims remaining"
-                                text={number(hole.resourceCavrens.getRemainingSharedClaims())}
-                                textSize="small"
-                                labelSize="xsmall"
-                                tooltip={<Box gap="xsmall" data-testid="shared-claim-tip">
+                        <CavernMetricStrip metrics={[
+                            {
+                                label: cavern === 11 ? "Trunks" : cavern === 16 ? "Depth" : "Layers",
+                                value: metricValue(selectedResourceCavern.completedLayers),
+                            },
+                            {
+                                label: `${resourceCavernResourceNames[cavern]} current / required`,
+                                value: <Text size="small" color={selectedResourceCavern.resourceRequirementMet === true ? "status-ok" : undefined}>
+                                    {metricValue(selectedResourceCavern.resourceCurrent)} / {metricValue(selectedResourceCavern.resourceRequirement)}
+                                </Text>,
+                            },
+                            ...(selectedResourceCavern.name === "Motherload" ? [{
+                                label: "Lifetime ore",
+                                value: metricValue(hole.resourceCavrens.lifetimeMotherlodeOre),
+                            }] : []),
+                            {
+                                label: "Efficiency required",
+                                value: metricValue(selectedResourceCavern.efficiencyThreshold),
+                                tooltip: <ResourceCharactersTooltip efficiencyThreshold={selectedResourceCavern.efficiencyThreshold} characters={resourceCharacters} />,
+                            },
+                            {
+                                label: "Claims remaining",
+                                value: metricValue(hole.resourceCavrens.getRemainingSharedClaims()),
+                                tooltip: <Box gap="xsmall" data-testid="shared-claim-tip">
                                     <Text size="xsmall">Six claims per day are shared across all four resource caverns.</Text>
                                     <Text size="xsmall">Claims are made manually in game.</Text>
-                                </Box>}
-                            />
-                            {selectedSynergy.map(({ index, schematic, effect }) => {
-                                const target = ({ 58: "Bucket Fill Rate", 15: "Well bucket fill", 41: "Harp note production", 80: "Jar Rupie value", 94: "Fountain currency" } as Record<number, string>)[index];
+                                </Box>,
+                            },
+                            ...selectedSynergy.map(({ index, schematic, effect }) => {
+                                const label = ({ 58: "Bucket Fill Rate", 15: "Well bucket fill", 41: "Harp note production", 80: "Jar Rupie value", 94: "Fountain currency" } as Record<number, string>)[index];
                                 const value = effect && typeof effect.value === "number"
                                     ? index === 58 ? `${effect.value > 0 ? "+" : ""}${precise(effect.value, "/hr")}` : precise(effect.value, "×")
                                     : number(null, effect ? undefined : "Schematic effect is unavailable.");
                                 const description = schematic.getDescription().replace(/_/g, " ");
-                                return <TextAndLabel
-                                    key={index}
-                                    label={target}
-                                    text={value}
-                                    textSize="small"
-                                    labelSize="xsmall"
-                                    tooltip={description || undefined}
-                                />;
-                            })}
-                        </Box>
+                                return { label, value, tooltip: description || undefined };
+                            }),
+                        ]} />
                         {selectedSynergy.length === 0 && <Text size="small">{hole.schematics.filter(schematic => (resourceCavernSynergyIds[cavern] ?? []).includes(schematic.index)).some(schematic => !schematic.saveAvailable) ? "Unavailable: Saved schematic ownership is missing." : "No owned relevant benefits."}</Text>}
+                        <CavernStudySummary study={hole.studies[cavern]} onOpenStudies={onOpenStudies} />
                     </>}
                 </Box>
             </Grid></ShadowBox>}

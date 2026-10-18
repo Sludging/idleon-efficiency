@@ -1,4 +1,4 @@
-import { Box, Grid, Text, ThemeContext } from "grommet";
+import { Box, Text, ThemeContext } from "grommet";
 import type { ReactNode } from "react";
 import { useContext } from "react";
 import { normalizeColor } from "grommet/utils";
@@ -14,6 +14,8 @@ import type { ImageData } from "../../../data/domain/imageData";
 import type { Hole } from "../../../data/domain/world-5/hole/hole";
 import { getCoinsArray, notateNumber, toTime } from "../../../data/utility";
 
+import { CavernMetricStrip, CavernStudySummary } from "./cavernLayout";
+
 function value(amount: number | null, suffix = ""): string {
     return amount === null ? "Unavailable" : `${notateNumber(amount)}${suffix}`;
 }
@@ -22,16 +24,6 @@ function exact(amount: number | null, suffix = ""): string {
     return amount === null ? "Unavailable" : `${amount.toLocaleString("en-US", { maximumFractionDigits: 20 })}${suffix}`;
 }
 
-function MetricStrip({ metrics }: { metrics: { label: string; value: string }[] }) {
-    return <Box>
-        <Grid columns={{ size: "auto", count: metrics.length }} gap="none" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(110px, 1fr))" }}>
-            {metrics.map((metric, index) => <Box key={metric.label} gap="xxsmall" pad={{ vertical: "xsmall", right: "small", left: index ? "small" : undefined }} border={index < metrics.length - 1 ? { side: "right", color: "grey-1" } : undefined} style={{ minWidth: 0 }}>
-                <Text size="small" style={{ overflowWrap: "anywhere" }}>{metric.value}</Text>
-                <Text size="xsmall" color="accent-2">{metric.label}</Text>
-            </Box>)}
-        </Grid>
-    </Box>;
-}
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
     return <Box gap="small"><Text size="medium" weight={500}>{title}</Text>{children}</Box>;
@@ -58,7 +50,7 @@ function GameCard({ title, image, children, testId, inactive = false, headerRigh
     </RoundedShadowBox>;
 }
 
-function WellView({ hole }: { hole: Hole }) {
+function WellView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => void }) {
     const well = hole.well;
     const theme = useContext(ThemeContext);
     const bucketSources = hole.schematics.filter(schematic => schematic.index >= 3 && schematic.index <= 11);
@@ -70,12 +62,6 @@ function WellView({ hole }: { hole: Hole }) {
         ? well.sediments.reduce((total, sediment) => total + sediment.expansions!, 0)
         : null;
     const gravelImage = hole.currencies.find(currency => currency.index === 0)!.getImageData();
-    const studyStatus = study.participation === "inactive" ? "Inactive"
-        : study.participation === "target" || study.participation === "neighbor"
-            ? `Study rate: ${value(study.progressPerHour, "/hr")}`
-            : "Unavailable";
-    const studyRequirement = study.getRequirement();
-    const studyProgress = study.progressAvailable ? study.progress : null;
     const fillHelp = "Time to fill if all your buckets worked on this sediment at their current rates. Each row is independent.";
 
     return <Box gap="medium" data-testid="hole-well-details">
@@ -211,26 +197,11 @@ function WellView({ hole }: { hole: Hole }) {
             </Box>
         </Section>
 
-        <Section title="Study">
-            <Box gap="small" data-testid="well-study">
-                <Box direction="row" justify="between" align="center" gap="small" wrap>
-                    <Box direction="row" align="center" gap="small" wrap>
-                        <Text size="small" weight={500}>Level {study.levelAvailable ? value(study.level) : "Unavailable"}</Text>
-                        <Text size="xsmall">{study.levelAvailable ? study.getDescription().replace(/_/g, " ") : "Effect unavailable"}</Text>
-                    </Box>
-                    <Text size="xsmall" color="accent-2">{studyStatus}</Text>
-                </Box>
-                <Box gap="xxsmall">
-                    <Text size="xsmall" color="accent-2">Progress to next level</Text>
-                    <Text size="small">{value(studyProgress)} / {value(studyRequirement)}</Text>
-                    {studyProgress !== null && studyRequirement !== null && studyRequirement > 0 && <progress aria-label="Well Study progress" value={Math.min(100, Math.max(0, studyProgress / studyRequirement * 100))} max={100} style={{ width: "100%", height: "6px" }} />}
-                </Box>
-            </Box>
-        </Section>
+        <CavernStudySummary study={study} onOpenStudies={onOpenStudies} />
     </Box>;
 }
 
-function BellView({ hole, totalMoney }: { hole: Hole; totalMoney: number }) {
+function BellView({ hole, totalMoney, onOpenStudies }: { hole: Hole; totalMoney: number; onOpenStudies: () => void }) {
     const bell = hole.bell;
     const theme = useContext(ThemeContext);
     const methods = bell.modeNames.map((_, index) => ({
@@ -241,14 +212,8 @@ function BellView({ hole, totalMoney }: { hole: Hole; totalMoney: number }) {
         timing: bell.getMethodTiming(index),
     }));
     const bellOpals = hole.cavernOpalSources.find(source => source.acquisition === "Received an Opal from a Bell Ping.")!.opals;
-    const study = hole.studies.find(entry => entry.data.name === "THE BELL")!;
     const methodsComplete = bell.methodsOwned === 6;
-    const studyStatus = study.participation === "inactive" ? "Inactive"
-        : study.participation === "target" || study.participation === "neighbor"
-            ? `Study rate: ${value(study.progressPerHour, "/hr")}`
-            : "Unavailable";
-    const studyRequirement = study.getRequirement();
-    const studyProgress = study.progressAvailable ? study.progress : null;
+    const study = hole.studies[4];
     const upgradeSeparator = normalizeColor("grey-1", theme);
 
     return <Box gap="medium" data-testid="hole-bell-details">
@@ -351,26 +316,11 @@ function BellView({ hole, totalMoney }: { hole: Hole; totalMoney: number }) {
             </RoundedShadowBox>
         </Section>
 
-        <Section title="Study">
-            <Box gap="small" data-testid="bell-study">
-                <Box direction="row" justify="between" align="center" gap="small" wrap>
-                    <Box direction="row" align="center" gap="small" wrap>
-                        <Text size="small" weight={500}>Level {study.levelAvailable ? value(study.level) : "Unavailable"}</Text>
-                        <Text size="xsmall">{study.levelAvailable ? study.getDescription().replace(/_/g, " ") : "Effect unavailable"}</Text>
-                    </Box>
-                    <Text size="xsmall" color="accent-2">{studyStatus}</Text>
-                </Box>
-                <Box gap="xxsmall">
-                    <Text size="xsmall" color="accent-2">Progress to next level</Text>
-                    <Text size="small">{value(studyProgress)} / {value(studyRequirement)}</Text>
-                    {studyProgress !== null && studyRequirement !== null && studyRequirement > 0 && <progress aria-label="Bell Study progress" value={Math.min(100, Math.max(0, studyProgress / studyRequirement * 100))} max={100} style={{ width: "100%", height: "6px" }} />}
-                </Box>
-            </Box>
-        </Section>
+        <CavernStudySummary study={study} onOpenStudies={onOpenStudies} />
     </Box>;
 }
 
-function HarpView({ hole }: { hole: Hole }) {
+function HarpView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => void }) {
     const harp = hole.harp;
     const theme = useContext(ThemeContext);
     const showNextNoteCost = harp.highestUnlockedNoteIndex === null || harp.highestUnlockedNoteIndex < 9;
@@ -384,12 +334,6 @@ function HarpView({ hole }: { hole: Hole }) {
     const totalStringLevels = harp.strings.some(string => string.level === null) ? null
         : harp.strings.reduce((sum, string) => sum + (string.level ?? 0), 0);
     const study = hole.studies[5];
-    const studyStatus = study.participation === "inactive" ? "Inactive"
-        : study.participation === "target" || study.participation === "neighbor"
-            ? `Study rate: ${value(study.progressPerHour, "/hr")}`
-            : "Unavailable";
-    const studyRequirement = study.getRequirement();
-    const studyProgress = study.progressAvailable ? study.progress : null;
     const noteCurrencyImage = showNextNoteCost && harp.highestUnlockedNoteIndex !== null && harp.noteCost !== null
         ? hole.currencies[11 + harp.highestUnlockedNoteIndex].getImageData() : undefined;
 
@@ -515,26 +459,11 @@ function HarpView({ hole }: { hole: Hole }) {
             </Box>
         </Section>
 
-        <Section title="Study">
-            <Box gap="small" data-testid="harp-study">
-                <Box direction="row" justify="between" align="center" gap="small" wrap>
-                    <Box direction="row" align="center" gap="small" wrap>
-                        <Text size="small" weight={500}>Level {study.levelAvailable ? value(study.level) : "Unavailable"}</Text>
-                        <Text size="xsmall">{study.levelAvailable ? study.getDescription().replace(/_/g, " ") : "Effect unavailable"}</Text>
-                    </Box>
-                    <Text size="xsmall" color="accent-2">{studyStatus}</Text>
-                </Box>
-                <Box gap="xxsmall">
-                    <Text size="xsmall" color="accent-2">Progress to next level</Text>
-                    <Text size="small">{value(studyProgress)} / {value(studyRequirement)}</Text>
-                    {studyProgress !== null && studyRequirement !== null && studyRequirement > 0 && <progress aria-label="Harp Study progress" value={Math.min(100, Math.max(0, studyProgress / studyRequirement * 100))} max={100} style={{ width: "100%", height: "6px", accentColor: normalizeColor("brand", theme) }} />}
-                </Box>
-            </Box>
-        </Section>
+        <CavernStudySummary study={study} onOpenStudies={onOpenStudies} />
     </Box>;
 }
 
-function LampView({ hole }: { hole: Hole }) {
+function LampView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => void }) {
     const lamp = hole.lamp;
     const effectiveWishBonus = (wishIndex: number): string | null =>
         wishIndex === 7 && lamp.getBonus(true) !== null ? exact(lamp.getBonus(true), "%") : null;
@@ -559,13 +488,7 @@ function LampView({ hole }: { hole: Hole }) {
         if (reset.category === "Jar Collectible Enchantment LVs") return `${changed} of ${reset.before.length} enchantment levels exceed 1; reset caps them at 1`;
         return `${changed} of ${reset.before.length} doublers would be set to -1`;
     };
-    const study = hole.studies.find(entry => entry.data.name === "THE LAMP")!;
-    const studyStatus = study.participation === "inactive" ? "Inactive"
-        : study.participation === "target" || study.participation === "neighbor"
-            ? `Study rate: ${value(study.progressPerHour, "/hr")}`
-            : "Unavailable";
-    const studyRequirement = study.getRequirement();
-    const studyProgress = study.progressAvailable ? study.progress : null;
+    const study = hole.studies[6];
     return <Box gap="medium" data-testid="hole-lamp-details">
         <Section title="Wish stock">
             <Box direction="row" gap="small" align="center" wrap>
@@ -590,7 +513,7 @@ function LampView({ hole }: { hole: Hole }) {
                     ];
                     return <GameCard key={wish.index} title={wish.data.name} testId={`lamp-wish-${wish.index}`} headerRight={<Text size="xsmall" color="accent-2" style={{ flexShrink: 0 }}>Lv. {value(wish.wishCount)}</Text>}>
                         <Text size="xsmall" style={{ whiteSpace: "pre-line" }}>{wishDescription(wish)}</Text>
-                        <MetricStrip metrics={metrics} />
+                        <CavernMetricStrip metrics={metrics} />
                         {wish.index === 5 && <details>
                             <summary style={{ cursor: "pointer" }}>Discount details</summary>
                             <Box gap="small" margin={{ top: "small" }}>
@@ -608,31 +531,16 @@ function LampView({ hole }: { hole: Hole }) {
                 })}
             </Box>
         </Section>
-        <Section title="Study">
-            <Box gap="small" data-testid="lamp-study">
-                <Box direction="row" justify="between" align="center" gap="small" wrap>
-                    <Box direction="row" align="center" gap="small" wrap>
-                        <Text size="small" weight={500}>Level {study.levelAvailable ? value(study.level) : "Unavailable"}</Text>
-                        <Text size="xsmall">{study.levelAvailable ? study.getDescription().replace(/_/g, " ") : "Effect unavailable"}</Text>
-                    </Box>
-                    <Text size="xsmall" color="accent-2">{studyStatus}</Text>
-                </Box>
-                <Box gap="xxsmall">
-                    <Text size="xsmall" color="accent-2">Progress to next level</Text>
-                    <Text size="small">{value(studyProgress)} / {value(studyRequirement)}</Text>
-                    {studyProgress !== null && studyRequirement !== null && studyRequirement > 0 && <progress aria-label="Lamp Study progress" value={Math.min(100, Math.max(0, studyProgress / studyRequirement * 100))} max={100} style={{ width: "100%", height: "6px" }} />}
-                </Box>
-            </Box>
-        </Section>
+        <CavernStudySummary study={study} onOpenStudies={onOpenStudies} />
     </Box>;
 }
 
-export default function Part4CavernDetails({ hole, cavern, totalMoney }: { hole: Hole; cavern: number; totalMoney: number }) {
+export default function Part4CavernDetails({ hole, cavern, totalMoney, onOpenStudies }: { hole: Hole; cavern: number; totalMoney: number; onOpenStudies: () => void }) {
     switch (cavern) {
-        case 0: return <WellView hole={hole} />;
-        case 4: return <BellView hole={hole} totalMoney={totalMoney} />;
-        case 5: return <HarpView hole={hole} />;
-        case 6: return <LampView hole={hole} />;
+        case 0: return <WellView hole={hole} onOpenStudies={onOpenStudies} />;
+        case 4: return <BellView hole={hole} totalMoney={totalMoney} onOpenStudies={onOpenStudies} />;
+        case 5: return <HarpView hole={hole} onOpenStudies={onOpenStudies} />;
+        case 6: return <LampView hole={hole} onOpenStudies={onOpenStudies} />;
         default: return null;
     }
 }
