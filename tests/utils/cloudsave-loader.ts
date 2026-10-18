@@ -6,11 +6,13 @@
  */
 
 import fs from 'fs';
-import path from 'path';
 import { Cloudsave } from '../../data/domain/cloudsave';
 import { initAllItems } from '../../data/domain/items';
 import { initAccountDataKeys, updateIdleonData } from '../../data/domain/idleonData';
 import { normalizeCompanionStates } from '../../data/domain/companions/companionState';
+const accountDataset = require('../helpers/account-dataset.cjs') as {
+  resolveTestSavePath(saveName: string): string;
+};
 
 // Mock localStorage for Node.js environment
 if (typeof global !== 'undefined' && !global.localStorage) {
@@ -24,13 +26,10 @@ if (typeof global !== 'undefined' && !global.localStorage) {
 }
 
 export const loadTestSave = (saveName: string): Cloudsave => {
-  // Look for saves in tests/fixtures/saves/ (we'll need to create this)
-  const savePath = path.join(__dirname, '..', 'fixtures', 'saves', `${saveName}.json`);
-  
+  const savePath = accountDataset.resolveTestSavePath(saveName);
   if (!fs.existsSync(savePath)) {
     throw new Error(`Test save file not found: ${savePath}. Place save files in tests/fixtures/saves/`);
   }
-  
   const saveData = JSON.parse(fs.readFileSync(savePath, 'utf8'));
   return Cloudsave.fromJSON(saveData);
 };

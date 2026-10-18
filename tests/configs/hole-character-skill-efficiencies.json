@@ -1,0 +1,146 @@
+{
+  "description": "Native v1.23 active-player skill efficiency, card factor, Right Hand of Action, and prepared Tool bubble values compared by the Hole part 3 pipeline test.",
+  "target": "Character skill efficiencies and directly consumed bonus calculations",
+  "extractions": [
+    {
+      "label": "mining_card_factor",
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 24)",
+      "description": "Native card factor 24 used by the Mining skill calculation"
+    },
+    {
+      "label": "chopping_card_factor",
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 27)",
+      "description": "Native card factor 27 used by the Choppin skill calculation"
+    },
+    {
+      "label": "fishing_card_factor",
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 30)",
+      "description": "Native card factor 30 used by the Fishing skill calculation"
+    },
+    {
+      "label": "catching_card_factor",
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 32)",
+      "description": "Native card factor 32 used by the Catching skill calculation"
+    },
+    {
+      "label": "mining_right_hand_bonus",
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.CalcTalentMAP.h[43][0]",
+      "description": "Prepared Right Hand of Action bonus consumed by Mining efficiency"
+    },
+    {
+      "label": "chopping_right_hand_bonus",
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.CalcTalentMAP.h[43][2]",
+      "description": "Prepared Right Hand of Action bonus consumed by Choppin efficiency"
+    },
+    {
+      "label": "fishing_right_hand_bonus",
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.CalcTalentMAP.h[43][3]",
+      "description": "Prepared Right Hand of Action bonus consumed by Fishing efficiency"
+    },
+    {
+      "label": "catching_right_hand_bonus",
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.CalcTalentMAP.h[43][5]",
+      "description": "Prepared Right Hand of Action bonus consumed by Catching efficiency"
+    },
+    {
+      "label": "mining_efficiency",
+      "expression": "idleon.callFunction(\"SkillStats\", \"MiningEfficiency\")",
+      "description": "Native active-player Mining efficiency result"
+    },
+    {
+      "label": "chopping_efficiency",
+      "expression": "idleon.callFunction(\"SkillStats\", \"ChoppinEfficiency\")",
+      "description": "Native active-player Choppin efficiency result"
+    },
+    {
+      "label": "fishing_efficiency",
+      "expression": "idleon.callFunction(\"SkillStats\", \"FishingEfficiency\")",
+      "description": "Native active-player Fishing efficiency result"
+    },
+    {
+      "label": "catching_efficiency",
+      "expression": "idleon.callFunction(\"SkillStats\", \"CatchingEfficiency\")",
+      "description": "Native active-player Catching efficiency result"
+    },
+    {
+      "label": "tool_m_final_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.ToolM",
+      "description": "Prepared ToolM final Alchemy bubble bonus for the active player"
+    },
+    {
+      "label": "tool_a_final_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.ToolA",
+      "description": "Prepared ToolA final Alchemy bubble bonus for the active player"
+    },
+    {
+      "label": "fishing_skill_stats_dn",
+      "expression": "(() => { idleon.callFunction(\"SkillStats\", \"FishingEfficiency\"); return idleon.engine.getGameAttribute(\"DummyNumbersStatManager\").h.SkillStatsDN; })()",
+      "description": "Fishing SkillStatsDN cache refreshed by the native Fishing efficiency call"
+    },
+    {
+      "label": "mining_efficiency_vial",
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.AlchVials.h.MinEff",
+      "description": "Prepared Mining Efficiency vial bonus consumed by Mining efficiency"
+    },
+    {
+      "label": "mining_post_office_efficiency",
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.BoxRewards.h.MinEffPct",
+      "description": "Prepared Mining Efficiency Post Office bonus"
+    },
+    {
+      "label": "chopping_post_office_efficiency",
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.BoxRewards.h.ChopEffPct",
+      "description": "Prepared Choppin Efficiency Post Office bonus"
+    },
+    {
+      "label": "fishing_post_office_efficiency",
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.BoxRewards.h.FishEffPct",
+      "description": "Prepared Fishing Efficiency Post Office bonus"
+    },
+    {
+      "label": "catching_post_office_efficiency",
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.BoxRewards.h.CatchEffPct",
+      "description": "Prepared Catching Efficiency Post Office bonus"
+    },
+    {
+      "label": "mining_star_sign_efficiency",
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.StarSigns.h.MiningEff",
+      "description": "Prepared Mining Efficiency Star Sign bonus"
+    },
+    {
+      "label": "chopping_star_sign_efficiency",
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.StarSigns.h.ChopEff",
+      "description": "Prepared Choppin Efficiency Star Sign bonus"
+    },
+    {
+      "label": "fishing_star_sign_efficiency",
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.StarSigns.h.FishEff",
+      "description": "Prepared Fishing Efficiency Star Sign bonus"
+    },
+    {
+      "label": "catching_star_sign_efficiency",
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.StarSigns.h.CatchingEff",
+      "description": "Prepared Catching Efficiency Star Sign bonus"
+    },
+    {
+      "label": "mining_voting_bonus",
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 7, 0)",
+      "description": "Voting bonus consumed by Mining efficiency"
+    },
+    {
+      "label": "chopping_voting_bonus",
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 9, 0)",
+      "description": "Voting bonus consumed by Choppin efficiency"
+    },
+    {
+      "label": "fishing_voting_bonus",
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 8, 0)",
+      "description": "Voting bonus consumed by Fishing efficiency"
+    },
+    {
+      "label": "catching_voting_bonus",
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 10, 0)",
+      "description": "Voting bonus consumed by Catching efficiency"
+    }
+  ]
+}

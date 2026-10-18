@@ -32,4 +32,13 @@ report with collapsed references and search; JSON is machine-readable.
 
 ## Documentation
 
+## Opt-in multi-account tests
+
+`yarn test` keeps the existing developer save and results. For selected genuine
+public accounts, use `yarn test:accounts:list --accounts <ids>`, then fetch,
+extract, and test with the commands in
+[helper documentation](helpers/README.md#integration-with-tests). Cached profile
+snapshots and extraction runs stay under the ignored `.cache/test-accounts/`
+directory. Account calculation mismatches remain visible failures.
+
 See `docs/TESTING_IMPLEMENTATION.md` for comprehensive testing guide.

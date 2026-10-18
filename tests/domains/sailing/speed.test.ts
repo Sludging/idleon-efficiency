@@ -7,7 +7,6 @@ import { loadExtractionResults, validateExtractionHealth } from '../../utils/liv
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Sailing } from '../../../data/domain/world-5/sailing/sailing';
 
-// TODO: Make it possible to test multiple save / extraction results.
 const saveName = 'latest';
 const extractionResultsName = 'sailing-speed-data.json';
 

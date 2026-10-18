@@ -1,0 +1,129 @@
+{
+  "extractions": {
+    "mining_card_factor": {
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 24)",
+      "result": 77
+    },
+    "chopping_card_factor": {
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 27)",
+      "result": 151
+    },
+    "fishing_card_factor": {
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 30)",
+      "result": 175
+    },
+    "catching_card_factor": {
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 32)",
+      "result": 255
+    },
+    "mining_right_hand_bonus": {
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.CalcTalentMAP.h[43][0]",
+      "result": 103.125
+    },
+    "chopping_right_hand_bonus": {
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.CalcTalentMAP.h[43][2]",
+      "result": 103.125
+    },
+    "fishing_right_hand_bonus": {
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.CalcTalentMAP.h[43][3]",
+      "result": 103.125
+    },
+    "catching_right_hand_bonus": {
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.CalcTalentMAP.h[43][5]",
+      "result": 103.125
+    },
+    "mining_efficiency": {
+      "expression": "idleon.callFunction(\"SkillStats\", \"MiningEfficiency\")",
+      "result": {
+        "type": "large_number",
+        "value": "8.351811138782258e+26"
+      }
+    },
+    "chopping_efficiency": {
+      "expression": "idleon.callFunction(\"SkillStats\", \"ChoppinEfficiency\")",
+      "result": {
+        "type": "large_number",
+        "value": "15565022434122541000"
+      }
+    },
+    "fishing_efficiency": {
+      "expression": "idleon.callFunction(\"SkillStats\", \"FishingEfficiency\")",
+      "result": {
+        "type": "large_number",
+        "value": "1.059298803080666e+22"
+      }
+    },
+    "catching_efficiency": {
+      "expression": "idleon.callFunction(\"SkillStats\", \"CatchingEfficiency\")",
+      "result": {
+        "type": "large_number",
+        "value": "45193043436810056"
+      }
+    },
+    "tool_m_final_bonus": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.ToolM",
+      "result": 461.4679314636946
+    },
+    "tool_a_final_bonus": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.ToolA",
+      "result": 461.581743906173
+    },
+    "fishing_skill_stats_dn": {
+      "expression": "(() => { idleon.callFunction(\"SkillStats\", \"FishingEfficiency\"); return idleon.engine.getGameAttribute(\"DummyNumbersStatManager\").h.SkillStatsDN; })()",
+      "result": 42312.55624858724
+    },
+    "mining_efficiency_vial": {
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.AlchVials.h.MinEff",
+      "result": 69.16
+    },
+    "mining_post_office_efficiency": {
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.BoxRewards.h.MinEffPct",
+      "result": 33.333333333333336
+    },
+    "chopping_post_office_efficiency": {
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.BoxRewards.h.ChopEffPct",
+      "result": 33.333333333333336
+    },
+    "fishing_post_office_efficiency": {
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.BoxRewards.h.FishEffPct",
+      "result": 33.333333333333336
+    },
+    "catching_post_office_efficiency": {
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.BoxRewards.h.CatchEffPct",
+      "result": 33.333333333333336
+    },
+    "mining_star_sign_efficiency": {
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.StarSigns.h.MiningEff",
+      "result": 50
+    },
+    "chopping_star_sign_efficiency": {
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.StarSigns.h.ChopEff",
+      "result": 50
+    },
+    "fishing_star_sign_efficiency": {
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.StarSigns.h.FishEff",
+      "result": 50
+    },
+    "catching_star_sign_efficiency": {
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.StarSigns.h.CatchingEff",
+      "result": 50
+    },
+    "mining_voting_bonus": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 7, 0)",
+      "result": 0
+    },
+    "chopping_voting_bonus": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 9, 0)",
+      "result": 0
+    },
+    "fishing_voting_bonus": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 8, 0)",
+      "result": 0
+    },
+    "catching_voting_bonus": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 10, 0)",
+      "result": 0
+    }
+  },
+  "errors": {}
+}

@@ -46,7 +46,7 @@ export function assertPairedContext(results: ExtractionResults, data: Map<string
  const inputs = captured<CapturedHoleInputs>(results, 'paired_hole_inputs');
  const saved = decodedSave<number[][]>('Holes');
  expect(inputs.levels).toEqual(saved[1].slice(0, 5));
- expect(inputs.exp).toEqual(saved[2].slice(0, 5));
+ expect(inputs.exp).toEqual(saved[2].slice(0, 5).map(Number));
  expect(inputs.investments).toEqual(saved[3].slice(0, 8));
  expect(inputs.purchased).toEqual(saved[23].slice(0, 5));
  expect(inputs.studyLevels).toEqual(saved[26].slice(0, 18));

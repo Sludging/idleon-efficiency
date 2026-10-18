@@ -1,10 +1,22 @@
 import { Player } from '../../../data/domain/player';
-import { RightHandOfActionTalent } from '../../../data/domain/talents';
+import { ClassIndex, RightHandOfActionTalent } from '../../../data/domain/talents';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { getExtractedValue, loadExtractionResults } from '../../utils/live-game-data-loader';
 
-// The paired save has one eligible source: SludgeMan, player 6.
-const sourcePlayerIndex = 6;
+const getRightHandSource = (players: Player[]): Player => {
+  let source: Player | undefined;
+  for (const player of players) {
+    if ([ClassIndex.Maestro, ClassIndex.Voidwalker, ClassIndex.Infinilyte].includes(player.classId)) {
+      source = player;
+    }
+  }
+
+  if (!source) {
+    throw new Error('No eligible Right Hand of Action source');
+  }
+
+  return source;
+};
 
 describe('Talents Right Hand of Action direct parameters', () => {
   let players: Player[];
@@ -14,7 +26,7 @@ describe('Talents Right Hand of Action direct parameters', () => {
   });
 
   it('uses the source allocated-point curve for ordinary skill efficiency', () => {
-    const talent = players[sourcePlayerIndex].getTalent(43) as RightHandOfActionTalent;
+    const talent = getRightHandSource(players).getTalent(43) as RightHandOfActionTalent;
     // Right Hand uses allocated points, not the later boosted talent level.
     const actual = talent.getActionBonus();
     const results = loadExtractionResults('talents-right-hand-of-action-data.json');

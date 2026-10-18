@@ -1,9 +1,24 @@
 import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import { Player } from '../../../data/domain/player';
-import { getRightHandOfActionBonus, RightHandOfActionTalent, updateRightHandOfActionBonuses } from '../../../data/domain/talents';
+import { ClassIndex, getRightHandOfActionBonus, RightHandOfActionTalent, updateRightHandOfActionBonuses } from '../../../data/domain/talents';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { getTargetPlayer } from '../../utils/target-player';
+
+const getRightHandSource = (players: Player[]): Player => {
+  let source: Player | undefined;
+  for (const player of players) {
+    if ([ClassIndex.Maestro, ClassIndex.Voidwalker, ClassIndex.Infinilyte].includes(player.classId)) {
+      source = player;
+    }
+  }
+
+  if (!source) {
+    throw new Error('No eligible Right Hand of Action source');
+  }
+
+  return source;
+};
 
 const scenarios = [
   { description: 'grants Mining efficiency when the recipient has a lower skill level than the source', skill: SkillsIndex.Mining, key: 'recipient_mining_action_bonus' },
@@ -34,8 +49,7 @@ describe('Talents Right Hand of Action', () => {
   });
 
   it('prepares the source enhancement that allows doubled self efficiency', () => {
-    // The paired save has one eligible source: SludgeMan, player 6.
-    const talent = players[6].getTalent(43) as RightHandOfActionTalent;
+    const talent = getRightHandSource(players).getTalent(43) as RightHandOfActionTalent;
     const results = loadExtractionResults('talents-right-hand-of-action-data.json');
     validateExtractionHealth(results);
 

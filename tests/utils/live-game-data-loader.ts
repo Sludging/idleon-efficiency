@@ -1,6 +1,8 @@
 import fs from 'fs';
-import path from 'path';
 
+const accountDataset = require('../helpers/account-dataset.cjs') as {
+  resolveExtractionResultsPath(filename: string): string;
+};
 /**
  * Live Game Data Loader
  * 
@@ -19,12 +21,10 @@ export interface ExtractionResults {
 }
 
 export const loadExtractionResults = (resultsFileName: string): ExtractionResults => {
-  const resultsPath = path.join(__dirname, '..', 'results', resultsFileName);
-  
+  const resultsPath = accountDataset.resolveExtractionResultsPath(resultsFileName);
   if (!fs.existsSync(resultsPath)) {
     throw new Error(`Extraction results file not found: ${resultsPath}`);
   }
-  
   const extractedData = JSON.parse(fs.readFileSync(resultsPath, 'utf8'));
   return extractedData as ExtractionResults;
 };

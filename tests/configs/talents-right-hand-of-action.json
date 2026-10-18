@@ -1,21 +1,21 @@
 {
-  "description": "Right Hand of Action prepared target recipient results, raw source curve, and enhancement for the retained paired save",
+  "description": "Right Hand of Action prepared target recipient results, selected source curve, and enhancement for the retained paired save",
   "target": "Talents Right Hand of Action",
   "extractions": [
     {
       "label": "recipient_mining_action_bonus",
       "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.CalcTalentMAP.h[43][0]",
-      "description": "Prepared target Mining efficiency bonus after the producer; recipient level is below the sole eligible source"
+      "description": "Prepared target Mining efficiency bonus after the producer; recipient level is below the selected eligible source"
     },
     {
       "label": "recipient_worship_action_bonus",
       "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.CalcTalentMAP.h[43][8]",
-      "description": "Prepared target Worship efficiency bonus after the producer; recipient level is above the sole eligible source"
+      "description": "Prepared target Worship efficiency bonus after the producer; recipient level is above the selected eligible source"
     },
     {
       "label": "source_action_bonus",
-      "expression": "idleon.callFunction(\"ArbitraryCode5Inputs\", idleon.engine.getGameAttribute(\"CustomLists\").h.TalentDescriptions[43][1][2], Number(idleon.engine.getGameAttribute(\"CustomLists\").h.TalentDescriptions[43][1][0]), Number(idleon.engine.getGameAttribute(\"CustomLists\").h.TalentDescriptions[43][1][1]), idleon.engine.getGameAttribute(\"PlayerDATABASE\").h.SludgeMan.h.SkillLevels[43], 0, 0)",
-      "description": "Ordinary source action curve from raw allocated points; SludgeMan is the only eligible source in the retained save"
+      "expression": "(() => { const db = idleon.engine.getGameAttribute(\"PlayerDATABASE\").h; let source = \"No\"; for (const id of Object.keys(db)) if (Number(db[id].h.CharacterClass) >= 3 && Number(db[id].h.CharacterClass) < 6) source = id; const description = idleon.engine.getGameAttribute(\"CustomLists\").h.TalentDescriptions[43][1]; return idleon.callFunction(\"ArbitraryCode5Inputs\", description[2], Number(description[0]), Number(description[1]), db[source].h.SkillLevels[43], 0, 0); })()",
+      "description": "Ordinary source action curve from the last character in account order with CharacterClass 3, 4, or 5"
     },
     {
       "label": "enhancement_eclipse_bonus",

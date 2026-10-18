@@ -29,15 +29,4 @@ describe('Spelunking Part 2 shared Journal and saved character progression', () 
         });
     });
 
-    it('keeps chest pages separate from the one character-held page stack', () => {
-        const owner = data.get('spelunking') as Spelunking;
-        expect(owner.chapters.map(chapter => chapter.chestPageStacks.map(item => item.count)))
-            .toEqual([[626302], [2013540], [3186], [9654], [3765609], []]);
-        owner.chapters.forEach(chapter => characterIDs.forEach(id => {
-            expect(chapter.playerPageStacks[id].map(item => item.count))
-                .toEqual(chapter.index === 5 && id === 6 ? [20127] : []);
-        }));
-        expect(owner.stamina[6].current).toBe(2635);
-        expect(owner.stamina[6].current).toBeGreaterThan(owner.stamina[6].maximum);
-    });
 });

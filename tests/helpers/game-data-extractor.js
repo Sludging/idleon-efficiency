@@ -181,6 +181,20 @@ Use live mode only to refresh a save. See tests/helpers/README.md#game-access.`)
 
 
  readTargetPlayerIndex() {
+  const accountPlayerIndex = process.env.TEST_ACCOUNT_PLAYER_INDEX;
+  if (accountPlayerIndex !== undefined) {
+   if (!/^(0|[1-9]\d*)$/.test(accountPlayerIndex)) {
+    throw new Error('Invalid TEST_ACCOUNT_PLAYER_INDEX: expected a non-negative integer');
+   }
+
+   const parsedIndex = Number(accountPlayerIndex);
+   if (!Number.isSafeInteger(parsedIndex)) {
+    throw new Error('Invalid TEST_ACCOUNT_PLAYER_INDEX: expected a non-negative integer');
+   }
+
+   return parsedIndex;
+  }
+
   let targetPlayerConfig;
   try {
    targetPlayerConfig = JSON.parse(fs.readFileSync(TARGET_PLAYER_CONFIG_PATH, 'utf8'));
@@ -201,8 +215,10 @@ Use live mode only to refresh a save. See tests/helpers/README.md#game-access.`)
  }
 
  getRequiredActivePlayerIndex() {
+  if (process.env.TEST_ACCOUNT_PLAYER_INDEX !== undefined) {
+   this.readTargetPlayerIndex();
+  }
   const configuredIndex = this.config?.requiredActivePlayerIndex;
-
   if (configuredIndex === undefined) {
    return this.readTargetPlayerIndex();
   }

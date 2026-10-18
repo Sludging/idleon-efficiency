@@ -24,7 +24,6 @@ import { Lab } from '../../../data/domain/world-4/lab';
 import { Summoning } from '../../../data/domain/world-6/summoning';
 import { Hole } from '../../../data/domain/world-5/hole/hole';
 
-// TODO: Make it possible to test multiple save / extraction results.
 const saveName = 'latest';
 const extractionResultsName = 'cooking-speed-data.json';
 

@@ -1,5 +1,4 @@
 import fs from 'fs';
-import path from 'path';
 import { createHash } from 'crypto';
 import type { Spelunking } from '../../../data/domain/world-7/spelunking';
 import type { Player } from '../../../data/domain/player';
@@ -14,10 +13,14 @@ import type { SushiStation } from '../../../data/domain/world-7/sushi';
 import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import { getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { initSpelunkingChapterRepo } from '../../../data/domain/data/SpelunkingChapterRepo';
+const accountDataset = require('../../helpers/account-dataset.cjs') as {
+    resolveTestSavePath(saveName: string): string;
+    getSelectedAccountDataset(): { manifest: { saveSha256: string } } | undefined;
+};
 
 export const results = loadExtractionResults('spelunking-part-2-data.json');
 export const expected = (label: string): number => getExtractedValue(results, label);
-export const savedText = fs.readFileSync(path.join(__dirname, '../../fixtures/saves/latest.json'), 'utf8');
+export const savedText = fs.readFileSync(accountDataset.resolveTestSavePath('latest'), 'utf8');
 const rawSave = JSON.parse(savedText);
 export function saved(key: 'Spelunk'): number[][];
 export function saved(key: 'playerNames'): string[];
@@ -30,20 +33,26 @@ export const characterIDs = Array.from({ length: saved('playerNames').length }, 
 
 export function assertPairing(): void {
     validateExtractionHealth(results);
-    expect(createHash('sha256').update(savedText).digest('hex'))
-        .toBe('42139b34b95e9fcad751187d25a04ae760238e798410a1a397902f826261a6b0');
-    expect(createHash('sha256').update(JSON.stringify(rawSave)).digest('hex'))
-        .toBe('dcef3f9d237625c64a4f5245ef24c2ff9a762a8ca6dc78617e90e3360b33ffcc');
+    const dataset = accountDataset.getSelectedAccountDataset();
+    const activePlayerIndex = dataset?.playerIndex ?? 6;
+    const rawHash = createHash('sha256').update(savedText).digest('hex');
+    expect(rawHash).toBe(dataset?.manifest.saveSha256 ?? '42139b34b95e9fcad751187d25a04ae760238e798410a1a397902f826261a6b0');
+    if (!dataset) {
+        expect(createHash('sha256').update(JSON.stringify(rawSave)).digest('hex'))
+            .toBe('dcef3f9d237625c64a4f5245ef24c2ff9a762a8ca6dc78617e90e3360b33ffcc');
+    }
     const before = results.extractions.pairing_before.result;
     expect(results.extractions.pairing_after.result).toEqual(before);
     expect(before.chapters).toEqual(saved('Spelunk')[8].slice(0, 24));
     expect(before.upgrades).toEqual([4, 5, 61].map(index => saved('Spelunk')[5][index]));
     expect(before.trackometer).toBe(saved('Spelunk')[4][8]);
     expect(before.dailyUsed).toBe(saved('OptLacc')[410]);
-    characterIDs.filter(id => id !== 6).forEach(id => expect(before.current[id]).toBe(saved('Spelunk')[3][id]));
-    // Runtime amount differs; the website must retain the originating saved amount.
-    expect(before.current[6]).toBe(2550);
-    expect(saved('Spelunk')[3][6]).toBe(2635);
+    characterIDs.filter(id => id !== activePlayerIndex).forEach(id => expect(before.current[id]).toBe(saved('Spelunk')[3][id]));
+    if (!dataset) {
+        // Runtime amount differs; the website must retain the originating saved amount.
+        expect(before.current[6]).toBe(2550);
+        expect(saved('Spelunk')[3][6]).toBe(2635);
+    }
 }
 
 export function assertRechargeContributors(data: Map<string, unknown>): void {

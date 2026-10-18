@@ -183,7 +183,66 @@ diagnostics still run; removing persisted status does not bypass safeguards.
 
 ## Integration with Tests
 
-All test files use the `latest.json` save file from `tests/fixtures/saves/`.
+Ordinary `yarn test` keeps using `tests/fixtures/saves/latest.json`,
+`tests/results/`, and `tests/utils/target-player.json`.
+
+Opt-in public-account runs use the account runner:
+
+```bash
+yarn test:accounts:list --accounts suk69,lunaonline
+yarn test:accounts:fetch --accounts suk69,lunaonline
+yarn test:accounts:extract --accounts suk69,lunaonline
+yarn test:accounts --accounts suk69,lunaonline
+yarn test:accounts --accounts suk69 -- tests/domains/cooking/meal-speed.test.ts
+```
+
+The committed `tests/accounts/accounts.json` selects genuine public profiles.
+The current candidates are `suk69` and `lunaonline`, both at player index 3.
+Their selection evidence records observed Menagerie unlocks and other
+progression differences. `list` reports latest fetched upload dates and
+available Toolbox-derived profile metrics separately from historical selection
+evidence. Toolbox metrics are candidate-selection data, not expected game
+calculation values.
+
+The config also marks
+`tests/domains/spelunking/part-3-pipeline.test.ts` as default-only. Its saved
+progression and synthetic transition cases depend on the developer snapshot,
+not an extracted game-parity suite. Account runs print this exclusion and its
+reason. Explicitly selecting this file for an account run fails with an error.
+Ordinary `yarn test` still runs it unchanged.
+
+Fetch contacts only selected public profiles. It writes immutable local
+snapshots under `.cache/test-accounts/`; each fetch advances that account's
+`latest.json` pointer without deleting older snapshots.
+
+Extraction uses the latest fetched snapshot and starts owned offline processes
+on loopback ports beginning at 3211. It routes every configured
+`requiredActivePlayerIndex` to the same account save. It writes separate runs
+and advances account-level `latest-dataset.json` only after extraction and
+provenance hashes complete. A fetch or failed extraction never replaces the
+last successful dataset. Failed outputs remain available but do not become the
+selected dataset. Extraction does not refresh the developer save or forward
+`--refresh-save`.
+
+Testing loads stored datasets only; it does not fetch profiles or start game
+servers. It starts a fresh Jest process for each selected account and reports
+all account failures. Arguments after `--` select Jest suites. Existing
+calculation failures remain visible; this workflow does not skip mismatches,
+change tolerances, or synthesize account values. Public saves are consented
+player uploads; the importer restores required representation without adding
+resources or simulating progress.
+Account Jest runs default to one worker and a `512MB` worker idle-memory limit.
+Jest can recycle workers between test files after a worker exceeds this limit.
+Pass `--maxWorkers` or `--workerIdleMemoryLimit` after `--` to override each
+default. Pass `--runInBand` or `-i` to disable both worker defaults. Ordinary
+`yarn test` does not use these account-runner options.
+
+The runner accepts `--config PATH`, `--cache-dir PATH`, and `--port NUMBER`.
+Configuration uses `{ "accounts": [...], "defaultOnlyTests": [...] }`.
+
+Keep profile downloads and extracted results out of source control. Use only
+player-published public profiles; do not write synthetic account changes.
+The legacy five-step workflow below describes ordinary `yarn test` behavior.
 
 The test workflow:
 1. Load extraction results from `tests/results/`

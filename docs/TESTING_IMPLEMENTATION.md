@@ -34,10 +34,25 @@ When extraction is needed, use the [extraction helper guide](../tests/helpers/RE
 
 For a correctness case, follow the [plan approval step](calculation-correctness/PLAYBOOK.md#2-plan-and-obtain-approval) before changing tests or extraction configs. Use the approved scope and interface. When extraction is needed, return the request to the human or explicitly delegated supervising session under the [playbook extraction procedure](calculation-correctness/PLAYBOOK.md#extraction-when-needed).
 
-## Keep tests tied to the real save
+## Keep tests tied to genuine saves
 
-Use only the current real save and its matching extracted game values. Result-only extraction, whether offline or live, does not establish pairing with the retained save; offline and live snapshots are not presumed equivalent. A live save refresh precedes config extraction rather than taking an atomic snapshot, so establish that the results match the saved state before using them. Tests exercise that state; do not construct synthetic saves, alter inputs to simulate a branch, or calculate expected values from the implementation. This deliberately leaves unobserved permutations uncovered. State which meaningful behavior the paired save actually exercises, and raise an uncovered behavior as a coverage question rather than inventing test data.
+Use a genuine real save and its matching extracted game values. Result-only extraction, whether offline or live, does not establish pairing with a retained save; offline and live snapshots are not presumed equivalent. A live save refresh precedes config extraction rather than taking an atomic snapshot, so establish that results match the saved state before using them. Tests must not construct synthetic saves, alter inputs to simulate a branch, or calculate expected values from the implementation. This deliberately leaves unobserved permutations uncovered. State which meaningful behavior the paired save exercises, and raise uncovered behavior as a coverage question rather than inventing test data.
 
+The normal `yarn test` command continues to use the developer's current save and matching results. Opt-in account testing may use genuine, publicly shared profile uploads selected in `tests/accounts/accounts.json`. The importer changes required save representation only; it does not add resources or simulate progress. Fetched data stays local under `.cache/test-accounts/` by default. Fetching, extraction, and tests are separate commands; tests use stored paired datasets and never fetch profiles.
+
+Use `yarn test:accounts:list --accounts <ids>` to inspect configured accounts, source dates, and observed progression. Fetch explicitly with `yarn test:accounts:fetch --accounts <ids>`, extract with `yarn test:accounts:extract --accounts <ids>`, then run fresh Jest processes with `yarn test:accounts --accounts <ids>`. Pass Jest suite arguments after `--`. See [helper account testing](../tests/helpers/README.md#integration-with-tests) for options and cache behavior. Account-specific calculation failures remain failures. Do not suppress known mismatches or change comparison tolerances.
+
+Account runs explicitly exclude `tests/domains/spelunking/part-3-pipeline.test.ts`
+because its saved-progression and synthetic transition cases depend on the
+developer snapshot, not an extracted game-parity suite. The runner reports this
+reason, applies an anchored Jest ignore pattern, and rejects explicit selection.
+Ordinary `yarn test` continues to run the file unchanged. See
+[account-runner guidance](../tests/helpers/README.md#integration-with-tests).
+Account test processes default to one Jest worker with a `512MB`
+`workerIdleMemoryLimit`. Jest can recycle workers between test files when a
+worker exceeds the limit. Pass `--maxWorkers` or `--workerIdleMemoryLimit` after
+`--` to override a default; pass `--runInBand` or `-i` to disable both worker
+defaults. This does not change normal `yarn test`.
 Each extraction entry used here should support a core result or a direct parameter comparison. A parameter is a calculation the selected result directly uses, including one in the same domain; keep its comparison even when it also has a core test. Static/supporting metadata is not a calculation target.
 
 Write the completed test against the typed public API directly and assert the calculated result. For a missing implementation during the tests stage, keep an active test whose extractor reports the missing calculation and game function signature. This temporary failure scaffolding exposes the missing API; once implemented, remove `typeof`/`in` guards, `unknown` casts, and `.call` wrappers. A missing selected implementation can support implementation after tests-stage approval; a missing directly used result follows the [dependency procedure](calculation-correctness/PLAYBOOK.md#dependencies-and-wikibot).

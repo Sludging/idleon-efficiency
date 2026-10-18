@@ -16,7 +16,6 @@ import { SlabInfluencedArtifact } from '../../../data/domain/world-5/sailing/art
 import { Player } from '../../../data/domain/player';
 import { UpgradeVault } from '../../../data/domain/upgradeVault';
 
-// TODO: Make it possible to test multiple save / extraction results.
 const saveName = 'latest';
 const extractionResultsName = 'sailing-speed-data.json';
 

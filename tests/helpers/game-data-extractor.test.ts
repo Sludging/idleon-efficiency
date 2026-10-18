@@ -7,7 +7,14 @@ import GameDataExtractor from './game-data-extractor';
 import targetPlayerConfig from '../utils/target-player.json';
 
 describe('GameDataExtractor active-player policy', () => {
+  const originalAccountPlayerIndex = process.env.TEST_ACCOUNT_PLAYER_INDEX;
+
   afterEach(() => {
+    if (originalAccountPlayerIndex === undefined) {
+      delete process.env.TEST_ACCOUNT_PLAYER_INDEX;
+    } else {
+      process.env.TEST_ACCOUNT_PLAYER_INDEX = originalAccountPlayerIndex;
+    }
     jest.restoreAllMocks();
   });
 
@@ -46,6 +53,21 @@ describe('GameDataExtractor active-player policy', () => {
     mockActivePlayerIndex(2);
 
     await expect(extractor.checkActivePlayer()).resolves.toBe(2);
+  });
+  it('uses a validated account player index for the shared target', async () => {
+    process.env.TEST_ACCOUNT_PLAYER_INDEX = '3';
+    const extractor = createExtractor();
+    mockActivePlayerIndex(3);
+
+    await expect(extractor.checkActivePlayer()).resolves.toBe(3);
+  });
+
+  it('rejects malformed account player indexes even when a config selects another player', () => {
+    process.env.TEST_ACCOUNT_PLAYER_INDEX = '-1';
+
+    expect(() => createExtractor({ requiredActivePlayerIndex: 2 }).getRequiredActivePlayerIndex()).toThrow(
+      'Invalid TEST_ACCOUNT_PLAYER_INDEX: expected a non-negative integer'
+    );
   });
 
   it('substitutes the shared target player index in extraction expressions', async () => {

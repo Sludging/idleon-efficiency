@@ -1,9 +1,11 @@
-import fs from 'fs';
-import path from 'path';
-import { createHash } from 'crypto';
 import { ResearchGrid } from '../../../data/domain/world-7/research';
 import { loadTestSave } from '../../utils/cloudsave-loader';
 import { ExtractionResults, getExtractedValue, validateExtractionHealth } from '../../utils/live-game-data-loader';
+const accountDataset = require('../../helpers/account-dataset.cjs') as {
+    resolveTestSavePath(saveName: string): string;
+    hashFile(filePath: string): string;
+    getSelectedAccountDataset(): { manifest: { saveSha256: string } } | undefined;
+};
 
 export interface OriginalGridUpgrade {
     index: number;
@@ -55,9 +57,9 @@ export function saved<T>(key: string): T {
     return (typeof value === 'string' ? JSON.parse(value) : value) as T;
 }
 export const savedResearch = saved<number[][]>('Research');
-export const savePath = path.join(__dirname, '../../fixtures/saves/latest.json');
+export const savePath = accountDataset.resolveTestSavePath('latest');
 export const normalizeGameText = (value: string): string => value.replace(/_/g, ' ');
-export const saveHash = (): string => createHash('sha256').update(fs.readFileSync(savePath)).digest('hex');
+export const saveHash = (): string => accountDataset.hashFile(savePath);
 
 export function extracted<T>(results: ExtractionResults, label: string): T {
     if (results.errors[label]) throw new Error(results.errors[label].error);
@@ -72,7 +74,8 @@ export function numeric(results: ExtractionResults, label: string): number {
 
 export function assertPairing(results: ExtractionResults): void {
     validateExtractionHealth(results);
-    expect(saveHash()).toBe('42139b34b95e9fcad751187d25a04ae760238e798410a1a397902f826261a6b0');
+    const selectedDataset = accountDataset.getSelectedAccountDataset();
+    expect(saveHash()).toBe(selectedDataset?.manifest.saveSha256 ?? '42139b34b95e9fcad751187d25a04ae760238e798410a1a397902f826261a6b0');
     const before = extracted<OriginalGridInputs>(results, 'pairing_before');
     expect(extracted<OriginalGridInputs>(results, 'pairing_after')).toEqual(before);
     expect(before.levels.map(Number)).toEqual(savedResearch[0].map(Number));
