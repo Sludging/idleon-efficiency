@@ -1,6 +1,6 @@
 # The Hole part 4: UI plan
 
-- **Status:** Prior UI/artwork revisions remain accepted and committed locally. The selected Bell Overview separator and Well inner-table follow-up is accepted and committed locally after the focused check on one configured save. The reviewed Lamp UI result is accepted under the user's standing delegation and is being committed locally. User personal review and longer smoke remain outstanding.
+- **Status:** Prior UI/artwork revisions remain accepted and committed locally. The selected Bell Overview separator and Well inner-table follow-up is accepted and committed locally after the focused check on one configured save. The reviewed Lamp UI result is accepted under the user's standing delegation and committed locally as `e67145ec`. User personal review and longer smoke remain outstanding.
 - **Scope:** Issue [#444 — Well, Bell, Harp, and Lamp progression](https://github.com/Sludging/idleon-efficiency/issues/444), selected part 4 only. Use the [accepted backend plan](hole-part-4-backend-plan.md) and [selected Hole IA](hole-ui-information-architecture.md#caverns). Preserve human-accepted parts 1–3, all other 14 support states, and the existing 18-entry rail.
 
 ## Player outcome
