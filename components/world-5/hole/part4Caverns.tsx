@@ -60,69 +60,169 @@ function WellView({ hole }: { hole: Hole }) {
     const theme = useContext(ThemeContext);
     const bucketSources = hole.schematics.filter(schematic => schematic.index >= 3 && schematic.index <= 11);
     const goldSchematic = hole.schematics.find(schematic => schematic.index === 104);
+    const study = hole.studies[0];
+    const wellOpals = hole.cavernOpalSources.find(source => source.acquisition === "Purchased an Opal with Well sediment.")!.opals;
+    const gravel = well.sediments[0];
+    const totalExpansions = well.sediments.every(sediment => sediment.expansions !== null)
+        ? well.sediments.reduce((total, sediment) => total + sediment.expansions!, 0)
+        : null;
+    const gravelImage = hole.currencies.find(currency => currency.index === 0)!.getImageData();
+    const studyStatus = study.participation === "inactive" ? "Inactive"
+        : study.participation === "target" || study.participation === "neighbor"
+            ? `Study rate: ${value(study.progressPerHour, "/hr")}`
+            : "Unavailable";
+    const studyRequirement = study.getRequirement();
+    const studyProgress = study.progressAvailable ? study.progress : null;
+    const fillHelp = "Time to fill if all your buckets worked on this sediment at their current rates. Each row is independent.";
+
     return <Box gap="medium" data-testid="hole-well-details">
-        <Box direction="row" gap="small" wrap>
-            <TipDisplay heading="How to obtain more buckets" body={<Box gap="xsmall">
-                <Text size="xsmall">Bucket count increases when you unlock these Hole schematics:</Text>
-                {bucketSources.map(source => <Text key={source.index} size="xsmall" style={{ opacity: source.unlocked ? 1 : 0.6 }}>{source.data.name.replace(/_/g, " ")}</Text>)}
-            </Box>} size="small">
-                <Box direction="row" gap="xsmall" align="center">
-                    <IconImage data={well.bucketImageData} scale={0.25} />
-                    <Text tabIndex={0} size="small" style={{ textDecoration: "underline dotted", textUnderlineOffset: "4px", cursor: "help" }}>
-                        Buckets: {value(well.ownedBucketCount)}
-                    </Text>
+        <Section title="Expansion">
+            <Box style={{ display: "grid", gridTemplateColumns: "minmax(140px, 0.9fr) repeat(2, minmax(0, 1fr))", gap: "16px", alignItems: "center" }}>
+                <Box gap="xxsmall">
+                    <Text size="xsmall" color="accent-2">Total bar expansions</Text>
+                    <Text size="large" weight={500}>{value(totalExpansions)}</Text>
                 </Box>
-            </TipDisplay>
-            <TipDisplay heading="How to obtain gold buckets" body={<Box gap="xsmall">
-                <Text size="xsmall">Golden Bucket Boost from the Fountain increases the first gold bucket's fill rate.</Text>
-                {goldSchematic && <Text size="xsmall">{goldSchematic.data.name.replace(/_/g, " ")} unlocks another gold bucket.</Text>}
-            </Box>} size="small">
-                <Box direction="row" gap="xsmall" align="center">
-                    <IconImage data={well.goldBucketImageData} scale={0.25} />
-                    <Text tabIndex={0} size="small" style={{ textDecoration: "underline dotted", textUnderlineOffset: "4px", cursor: "help" }}>
-                        Gold buckets: {value(well.goldBucketCount)}
-                    </Text>
-                </Box>
-            </TipDisplay>
-            <TextAndLabel label="Gold multiplier" labelSize="xsmall" textSize="small" text={exact(well.goldBucketMultiplier, "×")} />
-        </Box>
-        <Section title="Sediments">
-            <Box style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 260px), 1fr))", gap: "12px", minWidth: 0 }}>
-                {well.sediments.map(sediment => {
-                    const timing = well.getExpansionTiming(sediment);
-                    const assignmentsKnown = well.buckets.every(bucket => bucket.unlocked !== null &&
-                        (bucket.unlocked === false || bucket.sedimentIndex !== null));
-                    const assignedBuckets = assignmentsKnown
-                        ? well.buckets.filter(bucket => bucket.unlocked === true && bucket.sedimentIndex === sediment.index).length
-                        : null;
-                    const stocked = sediment.unavailable !== true && sediment.current !== null && sediment.currentMax !== null;
-                    const progress = stocked && sediment.currentMax > 0
-                        ? Math.min(100, Math.max(0, sediment.current! / sediment.currentMax * 100)) : null;
-                    return <GameCard key={sediment.index} title={sediment.data.name.replace(/_/g, " ")} image={hole.currencies.find(currency => currency.index === sediment.index)?.getImageData() ?? undefined} testId={`well-sediment-${sediment.index}`}>
-                        <Box gap="xsmall">
-                            <Box direction="row" justify="between" gap="small" wrap>
-                                <Text size="small">{sediment.unavailable === true ? "|" : `${value(sediment.current)} / ${value(sediment.currentMax)}`}</Text>
-                                <Text size="xsmall" color="accent-2">stock / capacity</Text>
-                            </Box>
-                            {progress !== null && <progress aria-label={`${sediment.data.name} stock toward capacity`} value={progress} max={100} style={{ width: "100%", height: "6px", accentColor: normalizeColor("brand", theme) }} />}
-                        </Box>
-                        <MetricStrip metrics={[
-                            { label: "Buckets", value: assignedBuckets === null ? "Unavailable" : String(assignedBuckets) },
-                            { label: "Group rate", value: value(sediment.bucketRate, "/hr") },
-                        ]} />
-                        <Text size="xsmall" color="accent-2">
-                            {timing.status === "disabled" ? "Auto-expansion off."
-                                : timing.status === "capped" ? "Auto-expansion capped at level 14; B_UPG 13 is not owned."
-                                    : timing.status === "no-production" ? "No assigned production; no threshold time at the current rate."
-                                        : timing.status === "stock-unavailable" ? "Stock is unavailable; expansion timing cannot be estimated."
-                                            : timing.status === "unknown" ? "Expansion timing unavailable: saved stock, rate, or gate data is missing."
-                                                : timing.hours === 0 ? "Capacity threshold reached; expansion waits for the next qualifying game update."
-                                                    : `Approx. ${notateNumber(timing.hours)} hours to next capacity threshold at the current rate (snapshot estimate).`}
+                <Box gap="xxsmall">
+                    <Text size="xsmall" color="accent-2">Gravel cost per Opal</Text>
+                    <Box direction="row" gap="xsmall" align="center">
+                        {gravelImage && <IconImage data={gravelImage} scale={0.65} />}
+                        <Text size="small" color={well.opalAffordable === null ? undefined : well.opalAffordable ? "status-ok" : "critical"}>
+                            {value(gravel.current)} / {value(well.opalCost)}
                         </Text>
-                    </GameCard>;
-                })}
+                    </Box>
+                </Box>
+                <Box gap="xxsmall">
+                    <Text size="xsmall" color="accent-2">Opals found</Text>
+                    <Box direction="row" gap="xsmall" align="center">
+                        <IconImage data={Item.getImageData("Opal")} scale={0.65} />
+                        <Text size="small">{value(wellOpals)}</Text>
+                    </Box>
+                </Box>
             </Box>
-            <Text size="xsmall" color="accent-2">Times use saved stock and current production rate; future rate changes and game-update cadence are not predicted.</Text>
+        </Section>
+
+        <Section title="Sediment">
+            <Box direction="row" gap="medium" wrap align="center">
+                <TipDisplay heading="How to obtain more buckets" body={<Box gap="xsmall">
+                    <Text size="xsmall">Bucket count increases when you unlock these Hole schematics:</Text>
+                    {bucketSources.map(source => <Text key={source.index} size="xsmall" style={{ opacity: source.unlocked ? 1 : 0.6 }}>{source.data.name.replace(/_/g, " ")}</Text>)}
+                </Box>} size="small">
+                    <Box direction="row" gap="xsmall" align="center">
+                        <IconImage data={well.bucketImageData} scale={0.2} />
+                        <Text tabIndex={0} size="small" style={{ textDecoration: "underline dotted", textUnderlineOffset: "4px", cursor: "help" }}>
+                            Buckets: {value(well.ownedBucketCount)}
+                        </Text>
+                    </Box>
+                </TipDisplay>
+                <TipDisplay heading="How to obtain gold buckets" body={<Box gap="xsmall">
+                    <Text size="xsmall">Golden Bucket Boost from the Fountain increases the first gold bucket's fill rate.</Text>
+                    {goldSchematic && <Text size="xsmall">{goldSchematic.data.name.replace(/_/g, " ")} unlocks another gold bucket.</Text>}
+                </Box>} size="small">
+                    <Box direction="row" gap="xsmall" align="center">
+                        <IconImage data={well.goldBucketImageData} scale={0.2} />
+                        <Text tabIndex={0} size="small" style={{ textDecoration: "underline dotted", textUnderlineOffset: "4px", cursor: "help" }}>
+                            Gold buckets: {value(well.goldBucketCount)}
+                        </Text>
+                    </Box>
+                </TipDisplay>
+                <TextAndLabel label="Gold multiplier" labelSize="xsmall" textSize="small" text={well.goldBucketMultiplier === null ? "Unavailable" : `${notateNumber(well.goldBucketMultiplier, "MultiplierInfo").replace("#", "")}×`} />
+            </Box>
+
+            <Box style={{ overflowX: "auto" }}>
+                <table style={{ width: "100%", minWidth: "700px", borderCollapse: "collapse", tableLayout: "fixed" }}>
+                    <thead>
+                        <tr>
+                            {["Fill", "Buckets filling it", "Expansions"].map(title => <th key={title} scope="col" style={{ width: title === "Fill" ? "36%" : "21%", textAlign: "left", padding: "8px", borderBottom: "1px solid rgba(255,255,255,0.14)" }}>
+                                <Text size="xsmall" color="accent-2">{title}</Text>
+                            </th>)}
+                            <th scope="col" style={{ width: "22%", textAlign: "left", padding: "8px", borderBottom: "1px solid rgba(255,255,255,0.14)" }}>
+                                <TipDisplay heading="Full in" body={<Text size="xsmall">{fillHelp}</Text>} size="small">
+                                    <Text tabIndex={0} size="xsmall" color="accent-2" style={{ textDecoration: "underline dotted", textUnderlineOffset: "4px", cursor: "help" }}>Full in</Text>
+                                </TipDisplay>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {well.sediments.map(sediment => {
+                            const assignmentsKnown = well.buckets.every(bucket => bucket.unlocked !== null &&
+                                (bucket.unlocked === false || bucket.sedimentIndex !== null));
+                            const assignedBuckets = assignmentsKnown
+                                ? well.buckets.filter(bucket => bucket.unlocked === true && bucket.sedimentIndex === sediment.index).length
+                                : null;
+                            const stocked = sediment.unavailable !== true && sediment.current !== null && sediment.currentMax !== null;
+                            const progress = stocked && sediment.currentMax > 0
+                                ? Math.min(100, Math.max(0, sediment.current! / sediment.currentMax * 100)) : null;
+                            const sedimentImage = hole.currencies.find(currency => currency.index === sediment.index)!.getImageData();
+                            const fullIn = well.getFullInTime(sediment);
+                            const fullInText = fullIn.status === "estimate"
+                                ? fullIn.hours === 0 ? "Full" : toTime(fullIn.hours * 3600)
+                                : fullIn.status === "no-production" ? "No production" : "Unavailable";
+                            const expansionLevel = sediment.expansions;
+                            const expansionText = expansionLevel === null ? "Unavailable"
+                                : well.expansionUpgradeOwned === true ? `No cap · ${value(expansionLevel)} expansions`
+                                    : well.expansionUpgradeOwned === false ? `${value(expansionLevel)} / 14${expansionLevel >= 14 ? " (capped)" : " used"}`
+                                        : expansionLevel >= 14 ? "Unavailable" : `${value(expansionLevel)} expansions`;
+                            const inactive = assignedBuckets === 0;
+                            return <tr key={sediment.index} data-testid={`well-sediment-${sediment.index}`} style={{
+                                opacity: inactive ? 0.75 : 1,
+                                borderBottom: "1px solid rgba(255,255,255,0.1)",
+                            }}>
+                                <td style={{ padding: "8px", verticalAlign: "middle" }}>
+                                    <Box gap="xxsmall">
+                                        <Box direction="row" gap="xsmall" align="center">
+                                            {sedimentImage && <IconImage data={sedimentImage} scale={0.65} />}
+                                            <Text size="small">{sediment.data.name}</Text>
+                                        </Box>
+                                        <Text size="xsmall">{sediment.unavailable === true ? "|" : `${value(sediment.current)} / ${value(sediment.currentMax)}`}</Text>
+                                        {progress !== null && <progress aria-label={`${sediment.data.name} stock toward capacity`} value={progress} max={100} style={{ width: "100%", height: "6px", accentColor: normalizeColor("brand", theme) }} />}
+                                    </Box>
+                                </td>
+                                <td style={{ padding: "8px", verticalAlign: "middle" }}>
+                                    {assignedBuckets === null
+                                        ? <Text size="xsmall">Unavailable</Text>
+                                        : assignedBuckets === 0
+                                            ? <Text size="xsmall" color="accent-2">No buckets assigned</Text>
+                                            : <Box gap="xxsmall">
+                                                <Box direction="row" gap="xsmall" align="center">
+                                                    <IconImage data={well.bucketImageData} scale={0.12} />
+                                                    <Text size="xsmall">{assignedBuckets} {assignedBuckets === 1 ? "bucket" : "buckets"}</Text>
+                                                </Box>
+                                                <Text size="xsmall">{value(sediment.bucketRate, "/hr")}</Text>
+                                            </Box>}
+                                </td>
+                                <td style={{ padding: "8px", verticalAlign: "middle" }}>
+                                    <Box gap="xxsmall">
+                                        {expansionLevel !== null && well.expansionUpgradeOwned === false && <Box direction="row" gap="2px" aria-label={expansionText}>
+                                            {Array.from({ length: 14 }, (_, index) => <Box key={index} background={index < Math.min(expansionLevel, 14) ? "brand" : "grey-1"} height="6px" width="5px" />)}
+                                        </Box>}
+                                        <Text size="xsmall">{expansionText}</Text>
+                                    </Box>
+                                </td>
+                                <td style={{ padding: "8px", verticalAlign: "middle" }}>
+                                    <Text size="xsmall">{fullInText}</Text>
+                                </td>
+                            </tr>;
+                        })}
+                    </tbody>
+                </table>
+            </Box>
+        </Section>
+
+        <Section title="Study">
+            <Box gap="small" data-testid="well-study">
+                <Box direction="row" justify="between" align="center" gap="small" wrap>
+                    <Box direction="row" align="center" gap="small" wrap>
+                        <Text size="small" weight={500}>Level {study.levelAvailable ? value(study.level) : "Unavailable"}</Text>
+                        <Text size="xsmall">{study.levelAvailable ? study.getDescription().replace(/_/g, " ") : "Effect unavailable"}</Text>
+                    </Box>
+                    <Text size="xsmall" color="accent-2">{studyStatus}</Text>
+                </Box>
+                <Box gap="xxsmall">
+                    <Text size="xsmall" color="accent-2">Progress to next level</Text>
+                    <Text size="small">{value(studyProgress)} / {value(studyRequirement)}</Text>
+                    {studyProgress !== null && studyRequirement !== null && studyRequirement > 0 && <progress aria-label="Well Study progress" value={Math.min(100, Math.max(0, studyProgress / studyRequirement * 100))} max={100} style={{ width: "100%", height: "6px" }} />}
+                </Box>
+            </Box>
         </Section>
     </Box>;
 }
@@ -156,12 +256,12 @@ function BellView({ hole, totalMoney }: { hole: Hole; totalMoney: number }) {
                         <Text size="xsmall" color="accent-2">Rings since Renew</Text>
                         <Text size="large">{value(bell.ringsSinceRenew)}</Text>
                     </Box>
-                    <Box flex={{ grow: 1, shrink: 1 }} pad={{ horizontal: "small" }}>
+                    <Box flex={{ grow: 1, shrink: 1 }} pad={{ horizontal: "small" }} border={{ side: "right", color: "grey-1" }}>
                         <Text size="xsmall" color="accent-2">New method chance</Text>
                         <Text size="small">{bell.cleanOdds === null ? "Unavailable" : `${(bell.cleanOdds * 100).toLocaleString("en-US", { maximumFractionDigits: 3 })}%`}</Text>
                     </Box>
                 </>}
-                <Box flex={{ grow: 1, shrink: 1 }} pad={{ left: "small" }} border={{ side: "left", color: "grey-1" }}>
+                <Box flex={{ grow: 1, shrink: 1 }} pad={{ left: "small" }}>
                     <Text size="xsmall" color="accent-2">Opals earned</Text>
                     <Box direction="row" gap="xsmall" align="center">
                         <IconImage data={Item.getImageData("Opal")} scale={0.75} />

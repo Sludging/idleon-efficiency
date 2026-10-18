@@ -5,9 +5,10 @@ import { SedimentModel } from "../../model/sedimentModel";
 import { initSedimentRepo } from "../../data/SedimentRepo";
 import { Hole } from "./hole";
 
-export type WellExpansionTiming =
-    | { status: "disabled" | "capped" | "unknown" | "no-production" | "stock-unavailable"; hours: null }
-    | { status: "estimate"; hours: number };
+export type WellFullInTiming =
+    | { status: "estimate"; hours: number }
+    | { status: "no-production" | "unknown"; hours: null };
+
 
 export interface WellBucket {
     index: number;
@@ -44,11 +45,7 @@ export class Well {
     opalCost: number | null = null;
     opalAffordable: boolean | null = null;
     expansionLevel: number | null = null;
-    expansionCount: number | null = null;
-    overflowConversionEnabled: boolean | null = null;
-    overflowSchematicLevel: number | null = null;
     expansionUpgradeOwned: boolean | null = null;
-    canExpand: boolean | null = null;
 
     constructor() {
         this.sediments = initSedimentRepo().map(sediment => new WellSediment(sediment.index, sediment.data));
@@ -68,9 +65,6 @@ export class Well {
         const assignments = holeData[10];
         const expansionLevel = holeData[11]?.[9];
         const opalStock = holeData[9]?.[0];
-        const expansionCount = holeData[7]?.[0];
-        const overflowEnabled = holeData[11]?.[10];
-        const overflowSchematic = hole.schematics.find(schematic => schematic.index === 12)!;
         const expansionUpgrade = hole.schematics.find(schematic => schematic.index === 13)!;
 
         this.resourceValues = stocks?.map(Number) ?? [];
@@ -87,13 +81,9 @@ export class Well {
         });
 
         this.expansionLevel = expansionLevel == null ? null : Number(expansionLevel);
-        this.expansionCount = expansionCount == null ? null : Number(expansionCount);
-        this.overflowConversionEnabled = overflowEnabled == null ? null : Number(overflowEnabled) === 1;
-        this.overflowSchematicLevel = overflowSchematic.saveAvailable ? overflowSchematic.level : null;
         this.expansionUpgradeOwned = expansionUpgrade.saveAvailable ? expansionUpgrade.unlocked : null;
         this.opalCost = this.expansionLevel === null ? null : Well.getOpalCost(this.expansionLevel);
         this.opalAffordable = this.opalCost === null || opalStock == null ? null : Number(opalStock) >= this.opalCost;
-        this.canExpand = this.opalAffordable;
 
         const bucketSchematics = [3, 4, 5, 6, 7, 8, 9, 10, 11]
             .map(index => hole.schematics.find(schematic => schematic.index === index)!);
@@ -150,7 +140,7 @@ export class Well {
         }
 
         this.buckets.forEach(bucket => {
-            if (bucket.unlocked === null || bucket.sedimentIndex === null) {
+            if (bucket.unlocked === null) {
                 bucket.rate = null;
                 return;
             }
@@ -188,25 +178,27 @@ export class Well {
         });
     }
 
-    getExpansionTiming(sediment: WellSediment): WellExpansionTiming {
-        if (this.overflowConversionEnabled === false) return { status: "disabled", hours: null };
-        if (sediment.unavailable) return { status: "stock-unavailable", hours: null };
-        if (sediment.expansions === null || sediment.current === null ||
-            sediment.currentMax === null || this.overflowConversionEnabled === null ||
-            (sediment.expansions >= 14 && this.expansionUpgradeOwned === null)) {
+    getFullInTime(sediment: WellSediment): WellFullInTiming {
+        const current = sediment.current;
+        const capacity = sediment.currentMax;
+        if (current === null || capacity === null || current < 0 || sediment.unavailable === true) {
             return { status: "unknown", hours: null };
         }
-        if (sediment.expansions >= 14 && !this.expansionUpgradeOwned) {
-            return { status: "capped", hours: null };
+        if (current >= capacity) return { status: "estimate", hours: 0 };
+        if (this.ownedBucketCount === null || this.buckets.some(bucket => bucket.unlocked === null)) {
+            return { status: "unknown", hours: null };
         }
-        if (sediment.current >= sediment.currentMax) return { status: "estimate", hours: 0 };
-        if (sediment.bucketRate === null) return { status: "unknown", hours: null };
-        if (sediment.bucketRate <= 0) return { status: "no-production", hours: null };
-        return {
-            status: "estimate",
-            hours: (sediment.currentMax - sediment.current) / sediment.bucketRate,
-        };
+
+        let totalRate = 0;
+        for (const bucket of this.buckets) {
+            if (!bucket.unlocked) continue;
+            if (bucket.rate === null) return { status: "unknown", hours: null };
+            totalRate += bucket.rate;
+        }
+        if (totalRate <= 0) return { status: "no-production", hours: null };
+        return { status: "estimate", hours: (capacity - current) / totalRate };
     }
+
 
     getTotalResourceDigits(): number {
         return this.resourceValues.reduce((sum, value) => sum + Math.ceil(lavaLog(value ?? 0)), 0);
