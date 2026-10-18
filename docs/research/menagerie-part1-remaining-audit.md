@@ -277,3 +277,12 @@ Player-facing interpretation: total means all granted resource units, including 
 `tests/domains/menagerie/account-state.test.ts` verifies valid domain-unit inputs: Black Stars total `5`, uses `1 + 2`, available `2`; Organic Labels total `1`, selected ID `0`, available `0`. Exact command: `yarn test --runInBand tests/domains/menagerie/account-state.test.ts` — 1 suite, 12 tests passed. This controlled regression is not personalized native parity.
 
 `yarn ui:run .ui-verification/menagerie-resource-pairs-20261018.cjs` passed on the real unchanged latest profile at 1440×1000. All five pairs rendered `0/0` with existing icons and layout; the parent inspected `.ui-verification/runs/2026-10-18T04-51-46-658Z-44008/final.png`. Zero fixture grants and allocations mean nonzero consumption was not visually verified. Fresh source-only UI review found zero findings (confidence 0.94). No full suite, build, or typecheck was run.
+## Chromatic Megaflesh negative progress
+
+Mission 27 (Chromatic Megaflesh) uses native `Math.round(Bubba[1][8] - 11)` (`../IdleonWikiBot/codefiles/idleon1.23.txt:118968-118970`). A production `yarn tsx` diagnostic loaded unchanged `latest` with `loadGameDataFromSave`: upgrade 8 `level1=6`, `level2=0`, `realLevel=6`, `bonus=6`, `ownedMegaflesh=6`; mission progress was `-5`, requirement `1`, remaining `6`, and unavailable. The retained extraction in `tests/results/menagerie-mission-progress-data.json:30` also records `-5`; it is not a fresh native-runtime query.
+
+With an in-memory `level1` increase of 1 followed by `Menagerie.update`, both native-equivalent calculation and actual mission progress became `-4`. The fixture remained unchanged. These observations do not establish a mapper bug for this account state.
+
+Native source traces `MegafleshOwned` to Bubba upgrade 8 (`idleon1.23.txt:243707-243712`) and displays its rewards (`:282924-282939`): the first Chromatic reward is at counter 12, after 11 earlier rewards. The inspected sources do not explain why the offset is 11. Counter 6 is not six Chromatic rewards.
+
+No code or UI clamp changed or was approved. No fresh native-runtime extraction was performed for this diagnosis.
