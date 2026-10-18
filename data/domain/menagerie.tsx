@@ -9,6 +9,16 @@ import { MenagerieUnlockModel } from "./model/menagerieUnlockModel";
 import { Item } from "./items";
 import { ImageData } from "./imageData";
 
+import { initMenagerieJellyfishRepo } from "./data/MenagerieJellyfishRepo";
+import { initSpelunkingChapterRepo } from "./data/SpelunkingChapterRepo";
+import {
+    MenagerieBlueJellyfish,
+    MenagerieGreenJellyfish,
+    MenageriePurpleJellyfish,
+    MenagerieRedJellyfish,
+    MenagerieSilverJellyfish,
+    MenagerieYellowJellyfish,
+} from "./menagerieJellyfish";
 export class MenagerieMission {
     progress = 0;
     claimCount = 0;
@@ -189,6 +199,13 @@ export class Menagerie extends Domain {
     missions: MenagerieMission[] = [];
     unlocks: MenagerieUnlock[] = [];
     bonuses: MenagerieBonus[] = [];
+    private redChapterRecords: { index: number; name: string }[] = [];
+    purpleJellyfish!: MenageriePurpleJellyfish;
+    blueJellyfish!: MenagerieBlueJellyfish;
+    redJellyfish!: MenagerieRedJellyfish;
+    silverJellyfish!: MenagerieSilverJellyfish;
+    yellowJellyfish!: MenagerieYellowJellyfish;
+    greenJellyfish!: MenagerieGreenJellyfish;
     lumiBalance = 0;
     shellBalance = 0;
     rank = 0;
@@ -269,6 +286,16 @@ export class Menagerie extends Domain {
         this.missions = MenagerieMission.fromBase(initMenagerieMissionRepo());
         this.unlocks = MenagerieUnlock.fromBase(initMenagerieUnlockRepo());
         this.bonuses = MenagerieBonus.fromBase(initMenagerieBonusRepo());
+        const jellyfishData = initMenagerieJellyfishRepo().map(record => record.data);
+        this.purpleJellyfish = new MenageriePurpleJellyfish(jellyfishData[0]);
+        this.blueJellyfish = new MenagerieBlueJellyfish(jellyfishData[1]);
+        this.redJellyfish = new MenagerieRedJellyfish(jellyfishData[2]);
+        this.silverJellyfish = new MenagerieSilverJellyfish(jellyfishData[3]);
+        this.yellowJellyfish = new MenagerieYellowJellyfish(jellyfishData[4]);
+        this.greenJellyfish = new MenagerieGreenJellyfish(jellyfishData[5]);
+        this.redChapterRecords = initSpelunkingChapterRepo()
+            .filter(chapter => chapter.index < 6)
+            .map(chapter => ({ index: chapter.index, name: chapter.data.name }));
         this.crucibleThresholds = initRandoListRepo()[115].data.elements;
         return this;
     }
@@ -278,11 +305,15 @@ export class Menagerie extends Domain {
         const savedMenagerie = data.get("Menagerie") as (number | string)[][] | undefined;
         const savedMissionClaims = savedMenagerie?.[1] ?? [];
         menagerie.missions.forEach(mission => mission.parse(Number(savedMissionClaims[mission.index] ?? 0)));
-        menagerie.lumiBalance = Number(savedMenagerie?.[0]?.[0] ?? 0);
-        menagerie.shellBalance = Number(savedMenagerie?.[0]?.[1] ?? 0);
         menagerie.rank = Number(savedMenagerie?.[0]?.[2] ?? 0);
-        menagerie.purpleJellyBonus = Number(savedMenagerie?.[0]?.[4] ?? 0);
-        menagerie.yellowConstructionBonus = 3 * Number(savedMenagerie?.[0]?.[14] ?? 0);
+        menagerie.purpleJellyfish.parse(savedMenagerie?.[0]);
+        menagerie.blueJellyfish.parse(savedMenagerie?.[0]);
+        menagerie.redJellyfish.parse(savedMenagerie?.[0], savedMenagerie?.[4]);
+        menagerie.silverJellyfish.parse(savedMenagerie?.[0]);
+        menagerie.yellowJellyfish.parse(savedMenagerie?.[0]);
+        menagerie.shellBalance = menagerie.purpleJellyfish.shellBalance;
+        menagerie.purpleJellyBonus = menagerie.purpleJellyfish.lumiContribution;
+        menagerie.yellowConstructionBonus = menagerie.yellowJellyfish.lumiContribution;
         menagerie.savedTomeRank = menagerie.rank;
         const savedUnlocks = savedMenagerie?.[2] ?? [];
         menagerie.unlocks.forEach(unlock => unlock.parse(Number(savedUnlocks[unlock.index] ?? 0)));
@@ -296,6 +327,7 @@ export class Menagerie extends Domain {
         const cardData = data.get("Cards1") as unknown[];
         const greenStacks = data.get("GreenStacks") as unknown[];
         const spelunk = data.get("Spelunk") as (number | string)[][];
+        menagerie.greenJellyfish.parse(Number(spelunk[17]?.[28] ?? 0));
         const mineheadDoubledUpgradeIds = spelunk[51] ?? [];
         const sushiDoubledUpgradeIds = spelunk[52] ?? [];
         const jellyOperatorDoubledUpgradeIds = spelunk[53] ?? [];
@@ -522,6 +554,41 @@ export class Menagerie extends Domain {
         };
     }
 
+    private updateSideJellyfish(accountData: Map<string, unknown>): void {
+        const account = accountData.get("account") as { totalMoney: number };
+        const storage = accountData.get("storage") as { amountInStorage(itemName: string): number };
+        const players = accountData.get("players") as {
+            gear: { equipment: ({ internalName: string } | undefined)[] };
+        }[];
+        const equippedCount = (item: string): number => players.reduce(
+            (count, player) => count + player.gear.equipment.filter(equipped => equipped?.internalName === item).length,
+            0,
+        );
+
+        this.purpleJellyfish.update(
+            this.unlocks[this.purpleJellyfish.data.unlockId].owned,
+            account.totalMoney,
+        );
+        this.blueJellyfish.update(
+            this.unlocks[this.blueJellyfish.data.unlockId].owned,
+            storage.amountInStorage("Ladle"),
+        );
+        this.redJellyfish.update(
+            this.unlocks[this.redJellyfish.data.unlockId].owned,
+            this.redChapterRecords,
+        );
+        this.silverJellyfish.update(
+            this.unlocks[this.silverJellyfish.data.unlockId].owned,
+            storage.amountInStorage("ObolFrag"),
+        );
+        this.yellowJellyfish.update(this.unlocks[this.yellowJellyfish.data.unlockId].owned);
+        this.greenJellyfish.update(
+            this.unlocks[this.greenJellyfish.data.unlockId].owned,
+            item => storage.amountInStorage(item),
+            equippedCount,
+        );
+    }
+
     update(accountData: Map<string, unknown>): void {
         const tome = accountData.get("tome") as { totalAccountLevel: number; totalBestWorshipWaves: number; getHighestScore(): number };
         const spelunking = accountData.get("spelunking") as { bestDepthTotal: number; manic: { totalDepth: number } };
@@ -664,6 +731,7 @@ export class Menagerie extends Domain {
             mission.progress,
             mission.index < this.availableMissionCount,
         ));
+        this.updateSideJellyfish(accountData);
     }
 }
 

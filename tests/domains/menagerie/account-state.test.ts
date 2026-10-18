@@ -36,6 +36,15 @@ let usableResources: number[];
 let bonusLevelFactors: number[][];
 let extraBundleFlags: number[];
 let accountData: Map<string, any>;
+let sideJellyfishState: {
+  unlocks: number[];
+  purple: number[];
+  blue: [number];
+  red: [number, number, number[]];
+  silver: number[];
+  yellow: [number[], number, number, number[]];
+  green: [number];
+} | undefined;
 beforeAll(() => {
   extractionResults = loadExtractionResults(extractionResultsName);
   validateExtractionHealth(extractionResults);
@@ -47,6 +56,7 @@ beforeAll(() => {
   usableResources = extractionResults.extractions.usable_resources.result as number[];
   bonusLevelFactors = extractionResults.extractions.bonus_level_factors.result as number[][];
   extraBundleFlags = extractionResults.extractions.extra_bundle_flags.result as number[];
+  sideJellyfishState = extractionResults.extractions.side_jellyfish?.result as typeof sideJellyfishState;
   accountData = loadGameDataFromSave('latest');
   menagerie = accountData.get('menagerie') as Menagerie;
   account = accountData.get('account') as Account;
@@ -144,6 +154,114 @@ describe('Menagerie account progression', () => {
       expect(bonus.available).toBe(menagerie.getProgression().rank >= bonus.requiredRank);
     });
   });
+  it('maps and calculates all six side jellyfish when matching native outputs are available', () => {
+    const expected = sideJellyfishState;
+    const actualUnlocks = [
+      menagerie.purpleJellyfish.unlocked,
+      menagerie.blueJellyfish.unlocked,
+      menagerie.redJellyfish.unlocked,
+      menagerie.silverJellyfish.unlocked,
+      menagerie.yellowJellyfish.unlocked,
+      menagerie.greenJellyfish.unlocked,
+    ];
+    if (!expected) {
+      // The retained default result predates side-jelly extraction; opt-in account datasets include paired native outputs.
+      expect(actualUnlocks).toHaveLength(6);
+      expect(menagerie.redJellyfish.chapterInputs.map(chapter => chapter.index)).toEqual([0, 1, 2, 3, 4, 5]);
+      expect(menagerie.silverJellyfish.conversionEvents.reduce((sum, event) => sum + event.probability, 0)).toBeCloseTo(1);
+      expect(menagerie.greenJellyfish).toHaveProperty('requiredNametag');
+      expect(menagerie.greenJellyfish).toHaveProperty('rewardNametag');
+      return;
+    }
+    expect(actualUnlocks).toEqual(expected.unlocks.map(Boolean));
+
+    expect(menagerie.purpleJellyfish.shellBalance).toMatchLiveGameWithDetails(
+      expected.purple[0], { tolerance: 0, context: 'Purple saved Shell balance' },
+    );
+    expect(menagerie.purpleJellyfish.shellPurchaseCount).toMatchLiveGameWithDetails(
+      expected.purple[1], { tolerance: 0, context: 'Purple saved Shell purchase count' },
+    );
+    expect(menagerie.purpleJellyfish.lumiLevel).toMatchLiveGameWithDetails(
+      expected.purple[2], { tolerance: 0, context: 'Purple saved Lumi upgrade level' },
+    );
+    expect(menagerie.purpleJellyfish.nextShellCost).toMatchLiveGameWithDetails(
+      expected.purple[3], { tolerance: 0, context: 'Purple next Shell cost' },
+    );
+    expect(menagerie.purpleJellyfish.nextLumiCost).toMatchLiveGameWithDetails(
+      expected.purple[4], { tolerance: 0, context: 'Purple next Lumi cost' },
+    );
+    expect(menagerie.purpleJellyfish.lumiContribution).toMatchLiveGameWithDetails(
+      expected.purple[5], { tolerance: 0, context: 'Purple contribution to existing Lumi/hour calculation' },
+    );
+
+    expect(menagerie.blueJellyfish.donatedLadles).toMatchLiveGameWithDetails(
+      expected.blue[0], { tolerance: 0, context: 'Blue saved donated Ladles' },
+    );
+
+    expect(menagerie.redJellyfish.readingOpportunities).toMatchLiveGameWithDetails(
+      expected.red[0], { tolerance: 0, context: 'Red saved reading opportunities' },
+    );
+    expect(menagerie.redJellyfish.ready).toBe(expected.red[0] > 0);
+    expect(menagerie.redJellyfish.readingMultiplier).toMatchLiveGameWithDetails(
+      expected.red[1], { tolerance: 0, context: 'Red saved reading multiplier' },
+    );
+    expect(menagerie.redJellyfish.chapterInputs).toHaveLength(6);
+    expect(menagerie.redJellyfish.chapterInputs.map(chapter => chapter.index)).toEqual([0, 1, 2, 3, 4, 5]);
+    expect(menagerie.redJellyfish.chapterInputs.every(chapter => chapter.name !== 'FILLER')).toBe(true);
+    menagerie.redJellyfish.chapterInputs.forEach(chapter => {
+      expect(chapter.input).toMatchLiveGameWithDetails(
+        expected.red[2][chapter.index], { tolerance: 0, context: `Red chapter ${chapter.index} saved input` },
+      );
+    });
+
+    expect(menagerie.silverJellyfish.miscLevel).toMatchLiveGameWithDetails(
+      expected.silver[0], { tolerance: 0, context: 'Silver saved MISC level' },
+    );
+    expect(menagerie.silverJellyfish.conversionLevel).toMatchLiveGameWithDetails(
+      expected.silver[1], { tolerance: 0, context: 'Silver saved conversion level' },
+    );
+    expect(menagerie.silverJellyfish.nextMiscCost).toMatchLiveGameWithDetails(
+      expected.silver[2], { tolerance: 0, context: 'Silver next MISC cost' },
+    );
+    expect(menagerie.silverJellyfish.nextConversionCost).toMatchLiveGameWithDetails(
+      expected.silver[3], { tolerance: 0, context: 'Silver next conversion cost' },
+    );
+    expect(menagerie.silverJellyfish.miscMultiplier).toMatchLiveGameWithDetails(
+      expected.silver[4], { tolerance: 0, context: 'Silver MISC multiplier' },
+    );
+    expect(menagerie.silverJellyfish.conversionRate).toMatchLiveGameWithDetails(
+      expected.silver[5], { tolerance: 0, context: 'Silver conversion probability per eligible event' },
+    );
+    const storage = accountData.get('storage') as { amountInStorage(itemName: string): number };
+    const remainingFragments = Math.max(0, 2_000_000_000 - storage.amountInStorage('ObolFrag'));
+    const rate = expected.silver[5];
+    const expectedCredit = rate < 1
+      ? (1 - rate) * Math.min(0, remainingFragments) + rate * Math.min(1, remainingFragments)
+      : rate === 1
+        ? Math.min(1, remainingFragments)
+        : (2 - rate) * Math.min(1, remainingFragments) + (rate - 1) * Math.min(2, remainingFragments);
+    expect(menagerie.silverJellyfish.conversionEvents.reduce((sum, event) => sum + event.probability, 0))
+      .toMatchLiveGameWithDetails(1, { tolerance: 0, context: 'Silver credited event probabilities total one' });
+    expect(menagerie.silverJellyfish.expectedCreditedFragments).toMatchLiveGameWithDetails(
+      expectedCredit, { tolerance: 0, context: 'Silver expected credited fragments per eligible event' },
+    );
+
+    expect(menagerie.yellowJellyfish.upgrades.map(upgrade => upgrade.level)).toEqual(expected.yellow[0]);
+    expect(menagerie.yellowJellyfish.progress).toMatchLiveGameWithDetails(
+      expected.yellow[1], { tolerance: 0, context: 'Yellow saved construction progress' },
+    );
+    expect(menagerie.yellowJellyfish.requirement).toMatchLiveGameWithDetails(
+      expected.yellow[2], { tolerance: 0, context: 'Yellow progress requirement' },
+    );
+    expect(menagerie.yellowJellyfish.upgrades.map(upgrade => upgrade.effect)).toEqual(expected.yellow[3]);
+    expect(menagerie.yellowJellyfish.lumiContribution).toMatchLiveGameWithDetails(
+      expected.yellow[3][3], { tolerance: 0, context: 'Yellow Lumi contribution' },
+    );
+
+    expect(menagerie.greenJellyfish.depositedNametags).toMatchLiveGameWithDetails(
+      expected.green[0], { tolerance: 0, context: 'Green saved Gallery deposits' },
+    );
+  });
 
   it('converts source description placeholders using their native meanings', () => {
     const bonuses = menagerie.getBonuses();
@@ -177,6 +295,14 @@ describe('Menagerie account progression', () => {
         menagerie.availableUnlockCount,
         menagerie.availableBonusCount,
       ],
+      sideJellies: JSON.parse(JSON.stringify([
+        menagerie.purpleJellyfish,
+        menagerie.blueJellyfish,
+        menagerie.redJellyfish,
+        menagerie.silverJellyfish,
+        menagerie.yellowJellyfish,
+        menagerie.greenJellyfish,
+      ])),
     });
 
     menagerie.prepare(accountData);
@@ -186,6 +312,26 @@ describe('Menagerie account progression', () => {
     menagerie.prepare(accountData);
     menagerie.update(accountData);
     expect(snapshot()).toEqual(first);
+    const firstAccountRun = [
+      menagerie.purpleJellyfish,
+      menagerie.blueJellyfish,
+      menagerie.redJellyfish,
+      menagerie.silverJellyfish,
+      menagerie.yellowJellyfish,
+      menagerie.greenJellyfish,
+      menagerie.getProgression().lumiPerHour,
+    ];
+    const repeatedAccountData = loadGameDataFromSave('latest');
+    const repeatedMenagerie = repeatedAccountData.get('menagerie') as Menagerie;
+    expect([
+      repeatedMenagerie.purpleJellyfish,
+      repeatedMenagerie.blueJellyfish,
+      repeatedMenagerie.redJellyfish,
+      repeatedMenagerie.silverJellyfish,
+      repeatedMenagerie.yellowJellyfish,
+      repeatedMenagerie.greenJellyfish,
+      repeatedMenagerie.getProgression().lumiPerHour,
+    ]).toEqual(firstAccountRun);
   });
 
   it('reports paired Menagerie resource balances', () => {
