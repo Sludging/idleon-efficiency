@@ -1,0 +1,9 @@
+{
+  "version": "1.23",
+  "server": "http://127.0.0.1:3204",
+  "queries": [
+    {"expression":"JSON.stringify({player:idleon.getPlayer?.(),gameVersion:idleon.getGameVersion(),Holes:idleon.getPlayerData?.(\"Holes\")})","result":{"player":["0"],"gameVersion":{"title":"Luminous_Menagerie","version":"1.23"},"Holes":"Character Holes not found"}},
+    {"expression":"JSON.stringify({idleon:Object.keys(idleon),win:Object.keys(window).filter(x=>/save|player|char/i.test(x)).slice(0,50),cheat:Object.keys(window.frames[0].__idleon_cheats__||{}).slice(0,20)})","result":{"idleon":["engine","scripts","allScripts","getAttr","getDNSM","getTalent","callFunction","findFunction","getGameVersion","getPlayer","getHP","getClass","getMap","listScripts","safeGetDNSM","exploreObject","findScriptObjects","getPlayerData","help"],"win":["showSaveFilePicker","__localCapturedSaveWrites","saveAs"],"cheat":["ApplicationMain","EReg","PlayerMoveData","FirebaseMMOLogic","FirebaseStorage","HxOverrides","IntIterator","Lambda","Reflect","Std","StringBuf"]}}
+  ],
+  "interpretation": "Game runtime getPlayerData('Holes') did not expose character Hole state; its exact result was Character Holes not found. No save-write API was called. This does not prove the server loaded the latest.json fixture."
+}

@@ -1,6 +1,6 @@
 # The Hole part 4: UI plan
 
-- **Status:** Prior UI/artwork revisions remain accepted and committed locally. The selected Bell Overview separator and Well inner-table follow-up is accepted and committed locally after the focused check on one configured save. The reviewed Lamp UI result is accepted under the user's standing delegation and committed locally as `e67145ec`. Harp's reviewed UI revisions are accepted under the same delegation and committed locally; the saved-power baseline Opal chance UI is accepted by the user with its stated check limits. User personal review and longer smoke remain outstanding.
+- **Status:** Part 4 was directly accepted by the human on 2026-10-19, who reported successful smoke tests. Recorded project check limits remain in the [current handoff](hole-research-brief.md#current-handoff); no additional verification ran during closeout. The approved Harp Opal chance is the zero-plucked saved-power baseline, not exact instantaneous strum chance.
 - **Scope:** Issue [#444 — Well, Bell, Harp, and Lamp progression](https://github.com/Sludging/idleon-efficiency/issues/444), selected part 4 only. Use the [accepted backend plan](hole-part-4-backend-plan.md) and [selected Hole IA](hole-ui-information-architecture.md#caverns). Preserve human-accepted parts 1–3, all other 14 support states, and the existing 18-entry rail.
 
 ## Player outcome

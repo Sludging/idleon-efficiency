@@ -1,6 +1,6 @@
 # The Hole: approved delivery parts
 
-**Status:** APPROVED PRODUCT/DELIVERY SCOPE / PUBLISHED / PARTS 1–3 COMPLETE — Original approval recorded on 2026-10-12. Part 1 [#441](https://github.com/Sludging/idleon-efficiency/issues/441) was accepted as complete on 2026-10-14; part 2 [#442](https://github.com/Sludging/idleon-efficiency/issues/442) was accepted as complete on 2026-10-15; part 3 [#443](https://github.com/Sludging/idleon-efficiency/issues/443) was accepted as complete on 2026-10-16. Parent [#440](https://github.com/Sludging/idleon-efficiency/issues/440) remains open. Parts 4–7 remain open and unselected. Acceptance, execution evidence, and limits remain in the [current handoff](hole-research-brief.md#current-handoff).
+**Status:** APPROVED PRODUCT/DELIVERY SCOPE / PUBLISHED / PARTS 1–4 COMPLETE — Original approval recorded on 2026-10-12. Parts 1–3 were accepted on 2026-10-14 through 2026-10-16; part 4 [#444](https://github.com/Sludging/idleon-efficiency/issues/444) was directly human-accepted on 2026-10-19. Parent [#440](https://github.com/Sludging/idleon-efficiency/issues/440) remains open. Parts 5–7 remain unselected. Acceptance, execution evidence, and limits remain in the [current handoff](hole-research-brief.md#current-handoff).
 
 **Scope sources:** [Approved research brief](hole-research-brief.md) and [approved product specification](hole-spec-draft.md).
 
@@ -116,10 +116,12 @@ Every part follows these boundaries:
 
 ### Acceptance outcomes
 
-- [ ] Players can inspect Well bucket assignments/rates, obstruction, stock/capacity, expansion progression/settings/gates, gold effects, and next Opal cost without reading negative obstruction as spendable stock or assuming elapsed production.
-- [ ] Players can inspect Bell's four distinct modes, saved mode, persistent banks and current rates/requirements, all six improvement methods and costs, current Clean odds, and seven bonus families, including exactly what Renew clears and retains.
-- [ ] Players can inspect Harp saved power/layout/tune, power/hour, slots, all ten notes and their access/costs, and owned string EXP/levels/passives, including unassigned passive types. Relevant power and order-sensitive/random reward context must not imply a fixed outcome.
-- [ ] Players can inspect Lamp stock, expected daily wishes, unlock/purchase progression, effective benefits, prices, discount stacks, and category-specific reset consequences; one-Opal wording and future effects are not misrepresented.
+- [x] Players can inspect Well bucket assignments/rates, obstruction, stock/capacity, expansion progression/settings/gates, gold effects, and next Opal cost without reading negative obstruction as spendable stock or assuming elapsed production.
+- [x] Players can inspect Bell's four distinct modes, saved mode, persistent banks and current rates/requirements, all six improvement methods and costs, current Clean odds, and seven bonus families, including exactly what Renew clears and retains.
+- [x] Players can inspect Harp saved power/layout/tune, power/hour, slots, all ten notes and their access/costs, and owned string EXP/levels/passives, including unassigned passive types. Relevant power and order-sensitive/random reward context must not imply a fixed outcome.
+- [x] Players can inspect Lamp stock, expected daily wishes, unlock/purchase progression, effective benefits, prices, discount stacks, and category-specific reset consequences; one-Opal wording and future effects are not misrepresented.
+
+**Completion:** The human accepted part 4 as complete on 2026-10-19 and reported successful smoke tests. The [current handoff](hole-research-brief.md#current-handoff) records implementation references, evidence, reported smoke, and limits. Parent #440 remains open; parts 5–7 remain unselected.
 
 **Data note:** Verify Well expansion semantics, Bell's seventh bonus and linear Clean pity, Harp saved settings and relevant reward inputs, and Lamp effect scaling within this part. Fractional daily wishes are expectations; unavailable string/future descriptions are not useful released effects.
 
@@ -203,4 +205,4 @@ The original product/delivery approval changed scope documents only. It ran no b
 
 The human approved the [product specification](hole-spec-draft.md) and these seven delivery parts on 2026-10-12, and authorized publication. That approval settled product and delivery scope only. At publication, all seven parts were unselected and stopped; no ready-for-agent label or execution authorization followed from publication.
 
-The human later selected the three-tab IA on 2026-10-12 and separately authorized parts 1, 2, and 3 through completion. Part 1 was accepted on 2026-10-14; part 2 was accepted on 2026-10-15; part 3 was accepted on 2026-10-16. The [handoff](hole-research-brief.md#current-handoff) retains approvals, results, and check limits. Parts 4–7 remain open and unselected; no other part is authorized. The rejected historical rail preview remains historical, not selected-direction proof.
+The human later selected the three-tab IA on 2026-10-12 and separately authorized parts 1–4 through completion. Parts 1–3 were accepted on 2026-10-14 through 2026-10-16; part 4 was directly accepted on 2026-10-19. The [handoff](hole-research-brief.md#current-handoff) retains approvals, results, and check limits. Parts 5–7 remain open and unselected; no other part is authorized. The rejected historical rail preview remains historical, not selected-direction proof.

@@ -1,5 +1,7 @@
 # The Hole part 4: backend plan
 
+**Status:** Part 4 was directly accepted by the human on 2026-10-19, who reported successful smoke tests. Recorded project check limits remain in the [current handoff](hole-research-brief.md#current-handoff); no additional verification ran during closeout.
+
 Provide backend information for [#444 — Well, Bell, Harp, and Lamp progression](https://github.com/Sludging/idleon-efficiency/issues/444), under the [approved specification](hole-spec-draft.md).
 
 ## Outcomes
@@ -100,4 +102,4 @@ Follow the repository's [domain testing guide](../TESTING_IMPLEMENTATION.md) and
 - Add parameter comparisons for directly consumed cross-domain calculations. Use `toMatchLiveGame` for parameters and `toMatchLiveGameWithDetails` for core results, with configured tolerance `0`.
 - Exercise fresh and repeated normal imports; assert stable derived records and unchanged saved inputs. Report branches not exercised by the paired save instead of inventing test cases.
 
-Source review can establish formulas and mapping semantics, but cannot substitute for paired runtime parity. This plan claims no part-4 implementation, tests, or runtime parity.
+Recorded backend implementation and focused test evidence are summarized in the [current handoff](hole-research-brief.md#current-handoff). Source review does not substitute for paired runtime parity; the recorded results remain scoped and do not establish whole-game or all-branch parity. The human accepted part 4 as complete and reported successful smoke tests.

@@ -490,7 +490,7 @@ function HarpView({ hole }: { hole: Hole }) {
                         })}
                     </Box>}
             </RoundedShadowBox>
-            <Box style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", minWidth: 0 }}>
+            <Box style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", minWidth: 0, gap: "8px" }}>
                 {strings.map((string, index) => {
                     const passiveDescription = string.index === 6 ? null : string.getPassiveDescription();
                     const currentLevel = string.level === null ? "Unavailable" : `${string.level}`;
