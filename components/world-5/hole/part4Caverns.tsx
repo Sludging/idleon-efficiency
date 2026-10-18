@@ -373,61 +373,162 @@ function BellView({ hole, totalMoney }: { hole: Hole; totalMoney: number }) {
 function HarpView({ hole }: { hole: Hole }) {
     const harp = hole.harp;
     const theme = useContext(ThemeContext);
-    const stringsByIndex = new Map(harp.strings.map(string => [string.index, string]));
-    const assignments = !harp.layoutAvailable || harp.slotCount === null ? "Unavailable"
-        : harp.layout.slice(0, harp.slotCount).flatMap((stringIndex, slot) => {
-            const string = stringIndex === null ? undefined : stringsByIndex.get(stringIndex);
-            return string ? [`${slot + 1}. String ${string.data.stringLetter}`] : [];
-        }).join(" → ") || "No assigned strings";
-    const noteCurrency = harp.noteCost === null ? undefined : harp.highestUnlockedNoteIndex === null ? undefined : hole.currencies.find(currency => currency.index === 10 + harp.highestUnlockedNoteIndex + 1);
-    const nextNoteCost = harp.highestUnlockedNoteIndex === null ? "Unavailable" : harp.highestUnlockedNoteIndex >= 9
-        ? "No next note" : harp.noteCost === null ? "Unavailable"
-            : `${exact(harp.noteCost)} ${noteCurrency?.data.name.replace(/_/g, " ") ?? "Unavailable"}`;
+    const nextNoteCost = harp.highestUnlockedNoteIndex === null ? "Unavailable"
+        : harp.highestUnlockedNoteIndex >= 9 ? "No next note"
+            : harp.noteCost === null ? "Unavailable"
+                : `${value(harp.noteCost)} ${hole.currencies[11 + harp.highestUnlockedNoteIndex].data.name.replace(/_/g, " ")}`;
+    const opalsFound = hole.cavernOpalSources.find(source => source.id === "cavern:5")?.opals ?? null;
+    const tuneName = harp.tune === null ? "Unavailable"
+        : harp.notes.find(note => note.index === harp.tune)?.name ?? "Unavailable";
+    const strings = harp.strings.filter(string => string.index < 6 || (string.index === 6 && string.level !== null && string.level > 0));
+    const totalStringLevels = harp.strings.some(string => string.level === null) ? null
+        : harp.strings.reduce((sum, string) => sum + (string.level ?? 0), 0);
+    const study = hole.studies[5];
+    const studyStatus = study.participation === "inactive" ? "Inactive"
+        : study.participation === "target" || study.participation === "neighbor"
+            ? `Study rate: ${value(study.progressPerHour, "/hr")}`
+            : "Unavailable";
+    const studyRequirement = study.getRequirement();
+    const studyProgress = study.progressAvailable ? study.progress : null;
+    const noteCurrencyImage = harp.highestUnlockedNoteIndex !== null && harp.highestUnlockedNoteIndex < 9 && harp.noteCost !== null
+        ? hole.currencies[11 + harp.highestUnlockedNoteIndex].getImageData() : undefined;
+
+    const triggerContext = (stringIndex: number): string => {
+        const contexts = harp.assignedStringEffects.filter(effect => effect.stringIndex === stringIndex);
+        if (contexts.length === 0) return stringIndex >= 0 && harp.layoutAvailable && harp.slotCount !== null && harp.strings.find(string => string.index === stringIndex)?.assignedSlots.length === 0
+            ? "Not assigned" : "Trigger context unavailable";
+        return [...new Set(contexts.map(context => {
+            if (context.effect.type === "none") return "No trigger effect.";
+            const status = context.triggerStatus === "power-below-threshold" ? "Below power threshold"
+                : context.triggerStatus === "power-unavailable" ? "Power unavailable"
+                    : null;
+            const effect = context.effect.type === "notes" ? "Note creation; yield unavailable"
+                : context.effect.type === "opal" ? "Opal chance unavailable"
+                    : "String EXP; amount unavailable";
+            return status === null ? `${effect}.` : `${status}. ${effect}.`;
+        }))].join(" ");
+    };
     return <Box gap="medium" data-testid="hole-harp-details">
-        <Section title="Saved settings">
-            <MetricStrip metrics={[
-                { label: "Saved power", value: value(harp.power) },
-                { label: "Power per hour", value: value(harp.powerPerHour, "/hr") },
-                { label: "Tune", value: harp.tune === null ? "Unavailable" : harp.notes.find(note => note.index === harp.tune)?.name ?? "Unavailable" },
-                { label: "Active slots", value: value(harp.slotCount) },
-            ]} />
+        <Section title="Power">
+            <Box gap="small">
+                <Text size="large" style={{ fontVariantNumeric: "tabular-nums" }}>{value(harp.power)}</Text>
+                <Box direction="row" gap="small" wrap align="center">
+                    <Box direction="row" gap="xsmall" align="center" pad={{ right: "small" }} border={{ side: "right", color: "grey-1" }}>
+                        <Text size="xsmall" color="accent-2">Power rate</Text>
+                        <Text size="small">{value(harp.powerPerHour, "/hr")}</Text>
+                    </Box>
+                    <Box direction="row" gap="xsmall" align="center" pad={{ right: "small" }} border={{ side: "right", color: "grey-1" }} data-testid="harp-next-note-cost">
+                        <Text size="xsmall" color="accent-2">Next note cost</Text>
+                        {noteCurrencyImage && <IconImage data={noteCurrencyImage} scale={0.65} />}
+                        <Text size="small">{nextNoteCost}</Text>
+                    </Box>
+                    <Box direction="row" gap="xsmall" align="center" pad={{ right: "small" }} border={{ side: "right", color: "grey-1" }}>
+                        <Text size="xsmall" color="accent-2">Opal chance</Text>
+                        <TipDisplay heading="Opal chance unavailable" body={<Text size="xsmall">Current trigger chance depends on transient game state that is not saved or exposed by prepared Harp data.</Text>} size="small">
+                            <Text size="small" tabIndex={0} style={{ textDecoration: "underline dotted", textUnderlineOffset: "3px", cursor: "help" }}>Unavailable</Text>
+                        </TipDisplay>
+                    </Box>
+                    <Box direction="row" gap="xsmall" align="center">
+                        <Text size="xsmall" color="accent-2">Opals found</Text>
+                        <IconImage data={Item.getImageData("Opal")} scale={0.65} />
+                        <Text size="small">{value(opalsFound)}</Text>
+                    </Box>
+                </Box>
+            </Box>
         </Section>
+
         <Section title="Notes">
-            <Box style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 210px), 1fr))", gap: "12px", minWidth: 0 }}>
-                {harp.notes.map(note => <GameCard key={note.index} title={note.name} testId={`harp-note-${note.index}`} inactive={note.accessible === false}
-                    image={resourceImage(hole, hole.currencies.find(currency => currency.index === 10 + note.index)?.data.name ?? note.name)}>
-                    <MetricStrip metrics={[{ label: "Balance", value: value(note.current) }]} />
-                    {note.accessible === null && <Text size="xsmall">Access unavailable</Text>}
-                </GameCard>)}
+            <Box direction="row" gap="xsmall" align="center">
+                <Text size="xsmall" color="accent-2">Tune</Text>
+                <Text size="xsmall">{tuneName}</Text>
             </Box>
-            <Box direction="row" gap="xsmall" align="center" data-testid="harp-next-note-cost">
-                {noteCurrency?.getImageData() && <IconImage data={noteCurrency.getImageData()!} scale={0.7} />}
-                <Text size="xsmall" color="accent-2">Next note cost: {nextNoteCost}</Text>
-            </Box>
+            <RoundedShadowBox background="dark-1" pad="none" overflow="hidden" data-testid="harp-note-grid">
+                <Box style={{ display: "grid", gridTemplateColumns: "repeat(5, minmax(0, 1fr))", minWidth: 0 }}>
+                    {harp.notes.map((note, index) => {
+                        const currency = hole.currencies.find(entry => entry.index === 10 + note.index);
+                        const image = currency?.getImageData();
+                        return <Box key={note.index} direction="row" align="center" justify="center" gap="xsmall" pad="small"
+                            aria-label={`${note.name}: ${value(note.current)}`}
+                            title={note.name}
+                            style={{
+                                minWidth: 0,
+                                opacity: note.accessible === false ? 0.6 : 1,
+                                borderRight: index % 5 !== 4 ? `${normalizeColor("grey-1", theme)} solid 1px` : undefined,
+                                borderBottom: index < 5 ? `${normalizeColor("grey-1", theme)} solid 1px` : undefined,
+                            }}
+                            data-testid={`harp-note-${note.index}`}>
+                            {image && <IconImage data={image} scale={0.7} />}
+                            <Text size="xsmall" style={{ overflowWrap: "anywhere" }}>{value(note.current)}</Text>
+                        </Box>;
+                    })}
+                </Box>
+            </RoundedShadowBox>
         </Section>
+
         <Section title="Strings">
-            <Box style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 270px), 1fr))", gap: "12px", minWidth: 0 }}>
-                {harp.strings.map(string => {
-                    const passiveDescription = string.getPassiveDescription();
-                    return <GameCard key={string.index} title={`String ${string.data.stringLetter}`} image={string.imageData} testId={`harp-string-${string.index}`} inactive={string.unlocked === false}>
-                        {string.unlocked === null
-                            ? <Text size="xsmall">Ownership unavailable</Text>
-                            : string.unlocked && <Text size="xsmall">{string.assignedSlots.length ? "Assigned" : "Unassigned"}</Text>}
-                        {passiveDescription !== null && <Text size="xsmall">{passiveDescription}</Text>}
-                        <MetricStrip metrics={[
-                            { label: "Level", value: value(string.level) },
-                            { label: "Current / required EXP", value: `${value(string.experience)} / ${value(string.nextLevelExperience)}` },
-                        ]} />
-                        {string.level !== null && string.experience !== null && string.nextLevelExperience !== null && <progress aria-label={`String ${string.data.stringLetter} EXP progress`} value={string.experience} max={string.nextLevelExperience} style={{ width: "100%", height: "6px", accentColor: normalizeColor("brand", theme) }} />}
+            <Box direction="row" align="center" justify="between" gap="small" wrap>
+                <Text size="xsmall" color="accent-2">{harp.slotCount === null ? "Unavailable" : `${harp.slotCount} slots`}</Text>
+                <Text size="xsmall" color="accent-2">Owned string levels: {value(totalStringLevels)}</Text>
+            </Box>
+            <RoundedShadowBox background="dark-1" pad="small" data-testid="harp-assignment-order">
+                {!harp.layoutAvailable || harp.slotCount === null
+                    ? <Text size="xsmall" color="accent-2">Assignment layout unavailable</Text>
+                    : <Box direction="row" gap="small" align="center" style={{ overflowX: "auto", minWidth: 0 }}>
+                        {Array.from({ length: harp.slotCount }, (_, slot) => {
+                            const stringIndex = harp.layoutAvailable ? harp.layout[slot] : null;
+                            const string = stringIndex === null || stringIndex === undefined
+                                ? undefined : harp.strings.find(entry => entry.index === stringIndex);
+                            const slotUnavailable = slot >= harp.layout.length || (stringIndex !== null && string === undefined);
+                            return <Box key={slot} direction="row" align="center" gap="xxsmall" flex={false} aria-label={`Slot ${slot + 1}: ${slotUnavailable ? "Unavailable" : string ? `String ${string.data.stringLetter}` : "Empty"}`}>
+                                <Text size="xsmall" color="accent-2">#{slot + 1}</Text>
+                                {slotUnavailable ? <Text size="small">Unavailable</Text>
+                                    : string ? <IconImage data={string.imageData} scale={0.8} />
+                                        : <Text size="small">—</Text>}
+                            </Box>;
+                        })}
+                    </Box>}
+            </RoundedShadowBox>
+            <Box style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", minWidth: 0 }}>
+                {strings.map((string, index) => {
+                    const passiveDescription = string.index === 6 ? null : string.getPassiveDescription();
+                    const currentLevel = string.level === null ? "Unavailable" : `${string.level}`;
+                    const levelDetails = string.level === null || string.experience === null || string.nextLevelExperience === null
+                        ? "Saved level or EXP is unavailable."
+                        : `Current EXP: ${exact(string.experience)}. Next level: ${exact(string.nextLevelExperience)} EXP.`;
+                    return <GameCard key={string.index} title={`String ${string.data.stringLetter}`} image={string.imageData}
+                        testId={`harp-string-${string.index}`} inactive={string.unlocked === false}
+                        headerRight={<TipDisplay heading={`String ${string.data.stringLetter} · Lv. ${currentLevel}`} body={<Text size="xsmall">{levelDetails}</Text>} size="small">
+                            <Text size="xsmall" style={{ whiteSpace: "nowrap", cursor: "help" }} tabIndex={0}>Lv. {currentLevel}</Text>
+                        </TipDisplay>}>
+                        {string.index === 6
+                            ? <Text size="xsmall">Passive and trigger effect unavailable.</Text>
+                            : <>
+                                <Text size="xsmall">{string.unlocked === null ? "Ownership unavailable" : triggerContext(string.index)}</Text>
+                                <Box pad={{ top: "xsmall" }} border={{ side: "top", color: "grey-1" }}>
+                                    <Text size="xsmall">{passiveDescription ?? "Passive unavailable"}</Text>
+                                </Box>
+                            </>}
                     </GameCard>;
                 })}
             </Box>
         </Section>
-        <RoundedShadowBox background="dark-1" pad="medium" gap="xsmall" data-testid="harp-assignment-order">
-            <Text size="xsmall" color="accent-2">Saved assignment order</Text>
-            <Text size="small">{assignments}</Text>
-            {harp.layoutAvailable && <Text size="xsmall" color="accent-2">String effects trigger in this order when Harp power reaches its threshold; exact rewards depend on transient runtime state.</Text>}
-        </RoundedShadowBox>
+
+        <Section title="Study">
+            <Box gap="small" data-testid="harp-study">
+                <Box direction="row" justify="between" align="center" gap="small" wrap>
+                    <Box direction="row" align="center" gap="small" wrap>
+                        <Text size="small" weight={500}>Level {study.levelAvailable ? value(study.level) : "Unavailable"}</Text>
+                        <Text size="xsmall">{study.levelAvailable ? study.getDescription().replace(/_/g, " ") : "Effect unavailable"}</Text>
+                    </Box>
+                    <Text size="xsmall" color="accent-2">{studyStatus}</Text>
+                </Box>
+                <Box gap="xxsmall">
+                    <Text size="xsmall" color="accent-2">Progress to next level</Text>
+                    <Text size="small">{value(studyProgress)} / {value(studyRequirement)}</Text>
+                    {studyProgress !== null && studyRequirement !== null && studyRequirement > 0 && <progress aria-label="Harp Study progress" value={Math.min(100, Math.max(0, studyProgress / studyRequirement * 100))} max={100} style={{ width: "100%", height: "6px", accentColor: normalizeColor("brand", theme) }} />}
+                </Box>
+            </Box>
+        </Section>
     </Box>;
 }
 

@@ -86,6 +86,7 @@ const holeCurrencyImages: Partial<Record<number, ImageData>> = {
  16: { location: "HoleHarpNote6", width: 28, height: 28 },
  17: { location: "HoleHarpNote7", width: 28, height: 28 },
  18: { location: "HoleHarpNote8", width: 28, height: 28 },
+ 19: { location: "HoleHarpNote9", width: 28, height: 28 },
  25: { location: "HoleTurquoiseRupie", width: 28, height: 28 },
  31: { location: "HoleSilverCoins", width: 23, height: 28 },
  32: { location: "HoleGoldenCoins", width: 23, height: 28 },
