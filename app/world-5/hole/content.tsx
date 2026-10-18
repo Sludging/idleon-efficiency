@@ -23,6 +23,7 @@ import { Item } from "../../../data/domain/items";
 import type { Player } from "../../../data/domain/player";
 import type { Divinity } from "../../../data/domain/world-5/divinity";
 import { Hole, type Study, type StudyEffect } from "../../../data/domain/world-5/hole/hole";
+import type { Account } from "../../../data/domain/account";
 import { SkillsIndex } from "../../../data/domain/SkillsIndex";
 import type { Skilling, SkillingSkill } from "../../../data/domain/skilling";
 import type { Villager, VillagerCharacterRate } from "../../../data/domain/world-5/hole/villager";
@@ -181,6 +182,7 @@ export default function HoleContent() {
     if ((dataStatus !== DataStatus.StaticData && dataStatus !== DataStatus.LiveData) || !hole) {
         return <Box gap="small"><Heading level="2" size="medium" style={{ fontWeight: "normal" }}>The Hole</Heading><Text data-testid="hole-loading">Waiting for imported account data.</Text></Box>;
     }
+    const account = data.get("account") as Account;
 
     const characters = (data.get("players") as Player[]).map(player => ({ playerId: player.playerID, playerName: player.playerName }));
     const rates = hole.villagers.map(villager => villager.characterRates);
@@ -331,7 +333,7 @@ export default function HoleContent() {
                 <Box pad="medium" height="100%" data-testid="cavern-rail">{cavernArt.map((image, index) => <Box direction="row" align="center" key={image.name} data-testid={`cavern-nav-${index}`}><CavernImage index={index} width={32} height={28} /><Box flex><LeftNavButton text={image.name} isActive={cavern === index} clickHandler={() => preserveScroll(() => setCavern(index))} /></Box></Box>)}</Box>
                 <Box fill background="dark-1" pad="medium" gap="medium" style={{ minWidth: 0 }} data-testid="selected-cavern">
                     <Box direction="row" gap="small" align="center"><CavernImage index={cavern} width={96} height={80} />{!part4Cavern && <Heading level="3" size="small" margin="none">{cavernArt[cavern].name}</Heading>}</Box>
-                    {part4Cavern ? <Part4CavernDetails hole={hole} cavern={cavern} players={data.get("players") as Player[]} /> : selectedResourceCavern === null ? <>
+                    {part4Cavern ? <Part4CavernDetails hole={hole} cavern={cavern} totalMoney={account.totalMoney} /> : selectedResourceCavern === null ? <>
                         {hole.cavernOpalSources.filter(source => source.owner === `cavern:${cavern}`).map(source => <TextAndLabel key={source.id} label="Earned Opals" text={number(source.opals, source.unavailableReason)} tooltip={exact(source.opals, source.unavailableReason)} />)}
                         <Box gap="small"><Text color="accent-2" size="small">Owned Study benefit</Text><Benefit index={cavern} effects={studies[cavern].effects} dailyPurchases={hole.studies[cavern].dailyCoveUpgradesPurchased} /></Box>
                         <Text size="small">Other cavern tools are not supported on this website yet.</Text>
