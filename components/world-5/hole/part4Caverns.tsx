@@ -45,11 +45,14 @@ function resourceImage(hole: Hole, name: string): ImageData | undefined {
     return hole.currencies.find(entry => entry.data.name === name)?.getImageData() ?? undefined;
 }
 
-function GameCard({ title, image, children, testId, inactive = false }: { title: string; image?: ImageData; children: ReactNode; testId?: string; inactive?: boolean }) {
+function GameCard({ title, image, children, testId, inactive = false, headerRight }: { title: string; image?: ImageData; children: ReactNode; testId?: string; inactive?: boolean; headerRight?: ReactNode }) {
     return <RoundedShadowBox background="dark-1" pad="none" gap="none" overflow="hidden" data-testid={testId} style={inactive ? { opacity: 0.6 } : undefined}>
-        <Box direction="row" gap="small" align="center" background="grey-1" pad={{ horizontal: "medium", vertical: "small" }}>
-            {image && <IconImage data={image} scale={0.8} />}
-            <Text size="small" weight={500}>{title}</Text>
+        <Box direction="row" gap="small" align="center" justify="between" background="grey-1" pad={{ horizontal: "medium", vertical: "small" }} style={{ minWidth: 0 }}>
+            <Box direction="row" gap="small" align="center" style={{ minWidth: 0, flex: "1 1 auto" }}>
+                {image && <IconImage data={image} scale={0.8} />}
+                <Text size="small" weight={500} style={{ overflowWrap: "anywhere" }}>{title}</Text>
+            </Box>
+            {headerRight}
         </Box>
         <Box pad="medium" gap="small">{children}</Box>
     </RoundedShadowBox>;
@@ -453,14 +456,24 @@ function LampView({ hole }: { hole: Hole }) {
         if (reset.category === "Jar Collectible Enchantment LVs") return `${changed} of ${reset.before.length} enchantment levels exceed 1; reset caps them at 1`;
         return `${changed} of ${reset.before.length} doublers would be set to -1`;
     };
+    const study = hole.studies.find(entry => entry.data.name === "THE LAMP")!;
+    const studyStatus = study.participation === "inactive" ? "Inactive"
+        : study.participation === "target" || study.participation === "neighbor"
+            ? `Study rate: ${value(study.progressPerHour, "/hr")}`
+            : "Unavailable";
+    const studyRequirement = study.getRequirement();
+    const studyProgress = study.progressAvailable ? study.progress : null;
     return <Box gap="medium" data-testid="hole-lamp-details">
         <Section title="Wish stock">
             <Box direction="row" gap="small" align="center" wrap>
-                <IconImage data={lamp.wishStockImageData} scale={0.8} />
-                <MetricStrip metrics={[
-                    { label: "Wishes", value: value(lamp.wishStock) },
-                    { label: "Expected daily gain", value: lamp.wishesPerDay === null ? "Unavailable" : `${lamp.wishesPerDay.toLocaleString("en-US", { maximumFractionDigits: 2 })} wishes/day` },
-                ]} />
+                <Box gap="xxsmall" pad={{ right: "medium" }} border={{ side: "right", color: "grey-1" }}>
+                    <Text size="xsmall" color="accent-2">Wishes</Text>
+                    <Text size="large" weight={500}>{value(lamp.wishStock)}</Text>
+                </Box>
+                <Box gap="xxsmall">
+                    <Text size="xsmall" color="accent-2">Expected daily gain</Text>
+                    <Text size="small">{lamp.wishesPerDay === null ? "Unavailable" : `${lamp.wishesPerDay.toLocaleString("en-US", { maximumFractionDigits: 2 })} wishes/day`}</Text>
+                </Box>
             </Box>
         </Section>
         <Section title="Wishes">
@@ -469,29 +482,45 @@ function LampView({ hole }: { hole: Hole }) {
                     const benefit = effectiveWishBonus(wish.index);
                     const cost = lamp.getWishCost(wish.index);
                     const metrics = [
-                        { label: "Level", value: value(wish.wishCount) },
                         ...(benefit === null ? [] : [{ label: "Well / Harp gain", value: benefit }]),
                         { label: "Next cost", value: cost === null ? "Unavailable" : `${notateNumber(cost)} wishes` },
                     ];
-                    return <GameCard key={wish.index} title={wish.data.name} testId={`lamp-wish-${wish.index}`}>
+                    return <GameCard key={wish.index} title={wish.data.name} testId={`lamp-wish-${wish.index}`} headerRight={<Text size="xsmall" color="accent-2" style={{ flexShrink: 0 }}>Lv. {value(wish.wishCount)}</Text>}>
                         <Text size="xsmall" style={{ whiteSpace: "pre-line" }}>{wishDescription(wish)}</Text>
                         <MetricStrip metrics={metrics} />
+                        {wish.index === 5 && <details>
+                            <summary style={{ cursor: "pointer" }}>Discount details</summary>
+                            <Box gap="small" margin={{ top: "small" }}>
+                                <Text size="xsmall">Current schematic cost factor: {exact(lamp.schematicCostDiscount, "×")}</Text>
+                                <Text size="xsmall">This factor applies to current schematic costs.</Text>
+                            </Box>
+                        </details>}
+                        {wish.index === 1 && <details>
+                            <summary style={{ cursor: "pointer" }}>Reset details</summary>
+                            <Box gap="small" margin={{ top: "small" }}>
+                                {lamp.resetConsequences.map(reset => <Text key={reset.category} size="xsmall">{reset.category}: {resetSummary(reset)}</Text>)}
+                                <Text size="xsmall">One Opal is granted by the “1000000 Opals” wish. Bring Them Back adds 12 hours to a selected Monument.</Text>
+                            </Box>
+                        </details>}
                     </GameCard>;
                 })}
             </Box>
         </Section>
-        <Section title="Schematic price">
-            <GameCard title="A Moderate Discount" testId="lamp-schematic-discount">
-                <TextAndLabel label="Current schematic cost factor" text={exact(lamp.schematicCostDiscount, "×")} />
-            </GameCard>
-        </Section>
-        <Section title="Another Try">
-            <Box style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 250px), 1fr))", gap: "12px", minWidth: 0 }}>
-                {lamp.resetConsequences.map(reset => <GameCard key={reset.category} title={reset.category} testId={`lamp-reset-${reset.category}`}>
-                    <Text size="xsmall">{resetSummary(reset)}</Text>
-                </GameCard>)}
+        <Section title="Study">
+            <Box gap="small" data-testid="lamp-study">
+                <Box direction="row" justify="between" align="center" gap="small" wrap>
+                    <Box direction="row" align="center" gap="small" wrap>
+                        <Text size="small" weight={500}>Level {study.levelAvailable ? value(study.level) : "Unavailable"}</Text>
+                        <Text size="xsmall">{study.levelAvailable ? study.getDescription().replace(/_/g, " ") : "Effect unavailable"}</Text>
+                    </Box>
+                    <Text size="xsmall" color="accent-2">{studyStatus}</Text>
+                </Box>
+                <Box gap="xxsmall">
+                    <Text size="xsmall" color="accent-2">Progress to next level</Text>
+                    <Text size="small">{value(studyProgress)} / {value(studyRequirement)}</Text>
+                    {studyProgress !== null && studyRequirement !== null && studyRequirement > 0 && <progress aria-label="Lamp Study progress" value={Math.min(100, Math.max(0, studyProgress / studyRequirement * 100))} max={100} style={{ width: "100%", height: "6px" }} />}
+                </Box>
             </Box>
-            <Text size="xsmall" color="accent-2">One Opal is granted by the “1000000 Opals” wish. Bring Them Back adds 12 hours to a selected Monument.</Text>
         </Section>
     </Box>;
 }

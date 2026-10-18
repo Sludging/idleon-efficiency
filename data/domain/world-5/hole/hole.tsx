@@ -1669,7 +1669,6 @@ export class Lamp {
  schematicCostDiscount: number | null = null;
  resetConsequences: { category: string; before: number[] | null; after: number[] | null }[] = [];
  specialBonusArray = "25,10,8;15,40,10;20,35,12;5,1,1;2,2,2".split(";");
- wishStockImageData: ImageData = { location: "HoleLampWishStock", width: 91, height: 18 };
 
  constructor() {
   this.wishes = Wish.fromBase(initLampWishRepo());

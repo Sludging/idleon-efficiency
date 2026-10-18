@@ -1,6 +1,6 @@
 # The Hole: research brief
 
-- **Status:** Parts 1–3 remain human-accepted complete. Part 4 backend/UI were accepted under the user's standing delegation; prior local commits are `067577c3` and `0353a27d`. Earlier 2026-10-18 artwork and Bell revisions remain committed locally. The selected Bell separator and Well inner-table follow-up is accepted and committed locally. User personal review and longer smoke testing remain outstanding. Parts 5–7 remain unselected. Parent issue [#440](https://github.com/Sludging/idleon-efficiency/issues/440) remains open. No push, PR, deployment, or issue closure.
+- **Status:** Parts 1–3 remain human-accepted complete. Part 4 backend/UI revisions were accepted under the user's standing delegation; prior local commits are `067577c3` and `0353a27d`. The Lamp UI revision is accepted under that delegation and is being committed locally. User personal review and longer smoke testing remain outstanding. Parts 5–7 remain unselected. Parent issue [#440](https://github.com/Sludging/idleon-efficiency/issues/440) remains open. No push, PR, deployment, or issue closure.
 - **Selected part and authority:** The human selected part 4 only: [#444 — Well, Bell, Harp, and Lamp progression](https://github.com/Sludging/idleon-efficiency/issues/444). The supervisor approved its backend plan in [receipt #444](https://github.com/Sludging/idleon-efficiency/issues/issuecomment-6227478771), accepted the backend, prior UI result, artwork revision, Bell inner-panel revision, and latest Bell-only follow-up under the user's standing delegation. Backend commit is `067577c3`; prior UI commit is `0353a27d`. User personal review and longer smoke testing remain outstanding. Parts 1–3 remain human-accepted; parts 5–7 remain unselected.
 
 **Final settlement (2026-10-16):** The human said, “Ok I approve settling this part work as complete, well done. Make sure to record and update any relevant documentation and issues”. This approves recording part 3 as complete and updating relevant documentation and issues. Separately, the human had said, “Alright commit your work, if any file you touched has other changes only commit your hunk”. This is the prior commit authority; neither statement includes “I accept this UI result and its stated check limits.” Parts 1–2 remain complete; parts 4–7 remain unselected. The parent remains open.
@@ -9,7 +9,40 @@
 
 ## Current handoff
 
-- **Selected part and authority:** The human selected part 4 only: [#444 — Well, Bell, Harp, and Lamp progression](https://github.com/Sludging/idleon-efficiency/issues/444). The supervisor approved its backend plan in [receipt #444](https://github.com/Sludging/idleon-efficiency/issues/issuecomment-6227478771), accepted the backend, prior UI result, artwork revision, Bell inner-panel revision, and latest Bell-only follow-up under the user's standing delegation. The human accepted the Bell separator and Well inner-table follow-up with its stated check limits. Backend commit is `067577c3`; prior UI commit is `0353a27d`. User personal review and longer smoke testing remain outstanding. Parts 1–3 remain human-accepted; parts 5–7 remain unselected.
+- **Selected part and authority:** The human selected part 4 only: [#444 — Well, Bell, Harp, and Lamp progression](https://github.com/Sludging/idleon-efficiency/issues/444). The supervisor approved its backend plan in [receipt #444](https://github.com/Sludging/idleon-efficiency/issues/issuecomment-6227478771), accepted the backend and prior revisions under the user's standing delegation. The human accepted the Bell separator and Well inner-table follow-up with its stated check limits; the supervisor accepted the Lamp UI revision under the same delegation. Backend commit is `067577c3`; prior UI commit is `0353a27d`. User personal review and longer smoke testing remain outstanding. Parts 1–3 remain human-accepted; parts 5–7 remain unselected.
+
+### Lamp UI revision — 2026-10-18
+
+- Updated only `components/world-5/hole/part4Caverns.tsx`, `data/domain/world-5/hole/hole.tsx`, and the current UI plan. Lamp stock and expected wishes/day now share a compact horizontal row; the Wishes Left graphic and its unused `Lamp.wishStockImageData` metadata are removed. Selected Lamp cavern art remains.
+- All twelve saved wish levels sit in muted card-header top-right labels. Native Gaming-style disclosures are independent and collapsed by default: Wish 5, A Moderate Discount, contains its actual prepared schematic factor and current-price context; Wish 1, Another Try, contains all four imported reset consequences and its existing explanatory caveat. Old standalone detail sections are removed.
+- Lamp Study now appears at the bottom using the existing `THE LAMP` record (`StudyRepo` index 6), prepared effect, level, participation/rate, and progress/requirement; it adds no owner label or calculation.
+- **Focused live check:** `yarn ui:status` reported ready; `yarn ui:run .ui-verification/lamp-inline-details-20261018.cjs` passed on `/world-5/hole`, 1440×1000, using configured save. It checked the row, missing stock image, 12 header levels, removed standalone sections, both disclosure open/close behaviors and card contents, and Lamp Study. Save unchanged.
+- Captures: [Lamp overview](../../.ui-verification/runs/2026-10-18T06-46-03-456Z-70841/lamp-overview.png), [discount details](../../.ui-verification/runs/2026-10-18T06-46-03-456Z-70841/lamp-discount-expanded.png), [reset details](../../.ui-verification/runs/2026-10-18T06-46-03-456Z-70841/lamp-reset-expanded.png), [Study footer](../../.ui-verification/runs/2026-10-18T06-46-03-456Z-70841/lamp-study-footer.png), [result](../../.ui-verification/runs/2026-10-18T06-46-03-456Z-70841/result.json).
+- Browser retained shared Nav hydration mismatch, NitroPay `browsingTopics` error, RL identity CORS denial, `ERR_FAILED`, and HTTP 403. One configured desktop save only; unknown states, alternate saves, game parity, extended smoke, suite, build, lint, and typecheck remain unverified. User longer smoke remains outstanding.
+#### Fresh independent Lamp UI review — 2026-10-18
+
+Reviewed issue #444, the selected part-4 UI plan, scoped current changes, CODING_STANDARDS.md, and the supplied Lamp route captures. The current `hole-ui-preview.html` is rejected historical work, so no approved preview comparison is available. Code stayed read-only; no checks were rerun.
+
+**Finding for human decision**
+
+- **Redundant row wrapper — `components/world-5/hole/part4Caverns.tsx:468–479`:** The stock summary nests two `Box` elements with identical row, gap, alignment, and wrap props; the outer wrapper adds no layout behavior. Remove one wrapper to reduce needless structure (SIMPLE-01).
+
+No confirmed issue/scope mismatch, data or calculation error, excessive guard, or materially changed non-Lamp behavior. The generic `GameCard` header helper now accepts the planned level label; current Lamp captures and the scoped end-to-end check show requested layout, independent disclosures, content, and Study. The only rendered evidence is the implementation route, not an approved planning preview. One configured save at desktop size was exercised; unknown-state rendering, game parity, alternate saves, and extended player smoke remain unverified.
+
+No code changed, tests ran, or acceptance/commit/publication occurred.
+
+#### Selected SIMPLE-01 cleanup — 2026-10-18
+
+- Removed the redundant nested `Box` from Lamp's wish-stock summary in `components/world-5/hole/part4Caverns.tsx`. One horizontal row retains `gap="small"`, `align="center"`, wrapping, and the unchanged Wishes and Expected daily gain children.
+- Verification is limited to rereading the changed source. The focused browser pass and captures above predate this cleanup; no after-fix browser rerun or additional checks ran. Prior browser noise and check limits remain unchanged. User personal review and longer smoke testing remain outstanding.
+- Only this selected finding was fixed. No acceptance, commit, or publication occurred.
+#### Fresh independent Lamp wrapper-cleanup review — 2026-10-18
+
+- Reviewed only the selected `SIMPLE-01` cleanup in `components/world-5/hole/part4Caverns.tsx:468–477`, against the approved Lamp UI plan, scoped review guidance, coding standards, and existing Lamp browser evidence. Unrelated worktree changes were excluded.
+- **Findings: none.** Source now has one horizontal `Box` with the planned gap, alignment, and wrapping; Wishes and Expected daily gain remain once each. Removed wrapper was layout-identical, so no layout regression is indicated. No scope expansion, extra abstraction, excessive guard, or standards issue appears in this cleanup.
+- Evidence limit: source-only review. Existing captures and browser pass predate cleanup; no after-fix browser check ran. No approved planning preview is available. Existing one-save desktop, unknown-state, parity, and longer-smoke limits remain.
+- No code changed or checks ran during review. The supervisor accepted this reviewed Lamp result under the user's standing delegation. Local commit is pending; no publication occurred.
+
 
 ### Previous accepted UI baseline
 
