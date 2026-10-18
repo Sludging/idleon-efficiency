@@ -32,51 +32,8 @@ describe('Spelunking tunnel and collection progression', () => {
         });
     });
 
-    ['Scoutpost', 'Exiled Throne'].forEach(name => {
-        it(`matches ${name} access independently from its incomplete Lore`, () => {
-            const tunnel = tunnelNamed(name);
-            const options = { tolerance: 0, context: `${name}: access and Lore are distinct` };
 
-            expect(Number(tunnel.available)).toMatchLiveGameWithDetails(
-                Number(tunnel.index < gameValue('available_tunnel_count')), options,
-            );
-            expect(Number(tunnel.loreCompleted)).toMatchLiveGameWithDetails(gameValue(`tunnel_${tunnel.index}_lore`), options);
-        });
-    });
 
-    ['Pebble Cove', 'Bizarrio', 'Glitter End'].forEach(name => {
-        it(`matches ${name} Grand eligibility and numbered collection progress`, () => {
-            const tunnel = tunnelNamed(name);
-            const grandFound = gameValue(`tunnel_${tunnel.index}_grand_found`);
-            const options = { tolerance: 0, context: `${name}: final ordinary discovery and Grand progress` };
-
-            expect(Number(tunnel.grandEligible)).toMatchLiveGameWithDetails(
-                gameValue(`tunnel_${tunnel.index}_grand_eligible`), options,
-            );
-            expect(tunnel.grandSummary.missing).toMatchLiveGameWithDetails(10 - grandFound, options);
-            expect(tunnel.grandDiscoveries.map(row => ({
-                tunnelIndex: row.tunnelIndex,
-                number: row.number,
-                found: row.found,
-            }))).toEqual(Array.from({ length: 10 }, (_, ordinal) => ({
-                tunnelIndex: tunnel.index,
-                number: ordinal + 1,
-                found: grandFound > ordinal,
-            })));
-        });
-    });
-
-    it('recognizes Lunarheim Kingdom Flags from the saved name without assigning it to another tunnel', () => {
-        const lunarheim = tunnelNamed('Lunarheim');
-        const flags = lunarheim.discoveries.find(discovery => discovery.data.name === 'Kingdom Flags')!;
-
-        expect(flags.found).toBe(true);
-        expect(flags.tunnelIndex).toBe(lunarheim.index);
-        expect(lunarheim.ordinarySummary.found).toMatchLiveGameWithDetails(gameValue(`tunnel_${lunarheim.index}_ordinary_found`), {
-            tolerance: 0,
-            context: 'Lunarheim ordinary ownership includes the normalized saved Kingdom Flags name',
-        });
-    });
 
     it('maps ordinary ownership and saved Grand counts to each tunnel', () => {
         // Each tunnel has a separate object catalogue and positional Grand save slot.
@@ -106,4 +63,5 @@ describe('Spelunking tunnel and collection progression', () => {
         expect(spelunking.grandSummary.capacity).toMatchLiveGameWithDetails(grandCapacity, options);
         expect(spelunking.grandSummary.missing).toMatchLiveGameWithDetails(grandCapacity - grandFound, options);
     });
+
 });

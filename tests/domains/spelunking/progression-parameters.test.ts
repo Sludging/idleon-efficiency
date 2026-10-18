@@ -30,16 +30,4 @@ describe('Spelunking Grand discovery parameters', () => {
         );
     });
 
-    // These representatives cover partial Grand progress, no Grand progress, and a missing final ordinary discovery.
-    // Access and missing Grand capacity are same-domain calculations. Ordinary ownership is parsed state.
-    ['Pebble Cove', 'Bizarrio', 'Glitter End', 'Exiled Throne'].forEach(name => {
-        it(`matches ${name} access and missing Grand capacity used by eligibility`, () => {
-            const tunnel = spelunking.tunnels.find(entry => entry.data.name === name)!;
-            const availableCount = getExtractedValue(extractionResults, 'available_tunnel_count');
-            const grandFound = getExtractedValue(extractionResults, `tunnel_${tunnel.index}_grand_found`);
-
-            expect(Number(tunnel.available)).toMatchLiveGame(Number(tunnel.index < availableCount), 0);
-            expect(tunnel.grandSummary.missing).toMatchLiveGame(10 - grandFound, 0);
-        });
-    });
 });

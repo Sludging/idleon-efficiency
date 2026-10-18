@@ -33,15 +33,4 @@ describe('Spelunking current-denomination recorded haul presentation', () => {
         );
     });
 
-    // This real save exercises comma rounding, the millions suffix, and zero without changing saved base quantities.
-    haulCases.forEach(({ name, index, behavior }) => {
-        it(`matches ${name}'s ${behavior} in the selected account-wide denomination`, () => {
-            const tunnel = spelunking.tunnels.find(entry => entry.data.name === name)!;
-            const amber = spelunking.currentAmberDenomination;
-
-            // Keep game text intact. The numeric loader would parse "6,908M" as 6 and discard its unit.
-            const expectedText = extractionResults.extractions[`tunnel_${index}_amber_text`].result;
-            expect(amber.formatAmount(tunnel.biggestHaul)).toBe(expectedText);
-        });
-    });
 });

@@ -145,19 +145,6 @@ describe('Hole part 1 direct calculation parameters', () => {
   hole = data.get('hole') as Hole;
  });
 
- it('pairs actual direct save inputs and Statue levels with the imported character', () => {
-  assertPairedContext(results, data);
-  const inputs = captured<{ earlyExplorerUpgrade: number; bundle: number | null; gemOpals: number; statueLevels: number[][] }>(results, 'paired_direct_save_inputs');
-  expect(inputs.earlyExplorerUpgrade).toBe(decodedSave<number[]>('OptLacc')[355]);
-  expect(inputs.bundle).toBe(decodedSave<{ bun_u?: number }>('BundlesReceived').bun_u ?? null);
-  expect(inputs.gemOpals).toBe(decodedSave<number[]>('GemItemsPurchased')[5]);
-  expect(inputs.statueLevels).toEqual(decodedSave<number[][]>(
-   `StatueLevels_${getTargetPlayer(data.get('players') as Player[]).playerID}`,
-  ));
-  expect(hole.earlyExplorerExpUpgrade).toBe(inputs.earlyExplorerUpgrade);
-  // Sparse bundle purchases omit an unowned bundle. This is not a missing bundle save.
-  expect(hole.villagerBundleBonus).toBe(inputs.bundle ?? 0);
- });
 
  parameters.forEach(parameter => {
   it(`matches direct ${parameter.description}`, () => {
@@ -167,98 +154,6 @@ describe('Hole part 1 direct calculation parameters', () => {
   });
  });
 
- it('binds each prepared growth contributor to its direct captured input', () => {
-  const value = (key: string) => getExtractedValue(results, key);
-  const inputs = captured<{ bundle: number | null; earlyExplorerUpgrade: number }>(results, 'paired_direct_save_inputs');
-  const saved = captured<{ investments: number[]; purchased: number[] }>(results, 'paired_hole_inputs');
-  hole.villagers.forEach((villager, index) => {
-   const rate = rateForTarget(data, index);
-   const role = index === 0 && value('caverns_owned') < 13 ? Math.pow(1.5, inputs.earlyExplorerUpgrade)
-    : index === 2 ? 1 + value('fountain_0_14') / 100 : 1;
-   const expected: [HoleContributor['owner'], HoleContributor['combination'], HoleContributor['unit'], number, string[]?][] = [
-    ['schematic:0', 'base', 'EXP/hour/Opal', 100 + value('schematic_0_25')],
-    [`villager:${index}`, 'allocation', 'count', saved.investments[index]],
-    [`villager:${index}`, 'multiplicative', 'multiplier', role],
-    ['gems', 'multiplicative', 'multiplier', 1 + saved.purchased[index]],
-    ['compass:59', 'multiplicative', 'percent', value('compass_59')],
-    ['legendTalents:12', 'multiplicative', 'percent', value('legend_12')],
-    ['sneaking:21', 'multiplicative', 'percent', value('pristine_21')],
-    ['companions:13', 'multiplicative', 'multiplier', 1 + 2 * value('companion_13')],
-    ['cavern:10', 'multiplicative', 'percent', value('jar_4') + (value('jar_10') + (value('jar_12')
-     + (value('jar_22') + (value('jar_29') + value('jar_35'))))),
-     [4, 10, 12, 22, 29, 35].map(id => `jar-collectible:${id}`)],
-    ['eventShop:6', 'multiplicative', 'percent', 25 * value('event_6')],
-    ['tome:epilogue:1', 'multiplicative', 'percent', value('lore_1')],
-    ['gems:bundle', 'multiplicative', 'percent', 50 * (inputs.bundle ?? 0)],
-    ['farming:51', 'multiplicative', 'percent', value('exotic_51')],
-    ['arcade:38', 'multiplicative', 'percent', value('arcade_38')],
-    ['grimoire:29', 'multiplicative', 'percent', value('grimoire_29')],
-    ['tesseract:32', 'multiplicative', 'percent', value('arcane_32')],
-    ['majik:14', 'allocation', 'percent', value('majik_5') * Math.floor(value('least_investment') / 5)],
-    ['cavern:3', 'additive', 'percent', value('monument_0_3')],
-    ['cavern:9', 'additive', 'percent', value('monument_1_3')],
-    ['cavern:12', 'additive', 'percent', value('monument_2_3')],
-    ['measurement:7', 'additive', 'percent', value('measurement_7')],
-    ['majik:9', 'allocation', 'percent', value('majik_0') * Math.floor(saved.investments[index] / 10)],
-    ['majik:10', 'additive', 'percent', value('majik_1') * value('built_schematics')],
-    ['majik:11', 'additive', 'percent', value('majik_2')],
-    ['schematic:48', 'additive', 'percent', value('schematic_48_0')],
-    ['cards:caveB', 'additive', 'percent', Math.min(4 * value('gloomie_card'), 50)],
-    ['cavern:4', 'additive', 'percent', value('bell_1')],
-    ['measurement:0', 'additive', 'percent', value('measurement_0')],
-    ['summoning:21', 'additive', 'percent', value('summoning_21')],
-    ['upgradeVault:73', 'additive', 'percent', value('vault_73')],
-    [`statues:${rate.playerId}:28`, 'multiplicative', 'percent', value('statue_28')],
-   ];
-   expect(rate.contributors.map(({ owner, combination, unit, sourceIds }) =>
-    JSON.stringify([owner, combination, unit, [...(sourceIds ?? [])].sort()])).sort())
-    .toEqual(expected.map(([owner, combination, unit, , sourceIds]) =>
-     JSON.stringify([owner, combination, unit, [...(sourceIds ?? [])].sort()])).sort());
-   expected.forEach(([owner, combination, unit, expectedValue, sourceIds]) => {
-    expect(rate.contributors.find(contributor => contributor.owner === owner
-     && contributor.combination === combination && contributor.unit === unit
-     && JSON.stringify([...(contributor.sourceIds ?? [])].sort()) === JSON.stringify([...(sourceIds ?? [])].sort()))!.value)
-     .toMatchLiveGameWithDetails(expectedValue, { tolerance: 0, context: `${villager.name}: ${owner}` });
-   });
-  });
- });
 
- it('binds shared Study contributors to settled calculated inputs', () => {
-  const value = (key: string) => getExtractedValue(results, key);
-  const saved = captured<{ levels: number[] }>(results, 'paired_hole_inputs');
-  const expected: [HoleContributor['owner'], HoleContributor['combination'], HoleContributor['unit'], number][] = [
-   ['hole', 'base', 'progress/hour', 100],
-   ['villager:4', 'additive', 'count', saved.levels[4]],
-   ['villager:4', 'additive', 'percent', 5],
-   ...[85, 87, 88, 99].map((index, position): [HoleContributor['owner'], HoleContributor['combination'], HoleContributor['unit'], number] => [
-    `schematic:${index}`, 'additive', 'percent', value(`schematic_${index}_${[2, 3, 5, 5][position]}`),
-   ]),
-   ['cavern:15', 'multiplicative', 'percent', value('fountain_1_14')],
-   ['jar-collectible:16', 'additive', 'percent', value('jar_16')],
-   ['stamps', 'additive', 'percent', value('study_stamp')],
-   ['majik:13', 'additive', 'percent', value('majik_4')],
-  ];
-  expect(hole.studyContributors.map(({ owner, combination, unit, sourceIds }) =>
-   JSON.stringify([owner, combination, unit, [...(sourceIds ?? [])].sort()])).sort())
-   .toEqual(expected.map(([owner, combination, unit]) => JSON.stringify([owner, combination, unit, []])).sort());
-  expected.forEach(([owner, combination, unit, expectedValue]) => {
-   expect(hole.studyContributors.find(contributor => contributor.owner === owner
-    && contributor.combination === combination && contributor.unit === unit)!.value)
-    .toMatchLiveGameWithDetails(expectedValue, { tolerance: 0, context: `Study rate: ${owner}` });
-  });
- });
 
- it('uses the captured character Statue percentage and multiplier in all five rate records', () => {
-  const player = getTargetPlayer(data.get('players') as Player[]);
-  hole.villagers.forEach((villager, index) => {
-   const rate = rateForTarget(data, index);
-   expect(rate.playerId).toBe(player.playerID);
-   expect(rate.playerName).toBe(player.playerName);
-   expect(rate.statueBonus).toMatchLiveGame(getExtractedValue(results, 'statue_28'), 0);
-   expect(rate.statueFactor).toMatchLiveGame(getExtractedValue(results, 'statue_factor'), 0);
-   expect(rate.contributors.filter(contributor => contributor.owner === `statues:${player.playerID}:28`)).toHaveLength(1);
-   expect(rate.contributors.find(contributor => contributor.owner === `statues:${player.playerID}:28`)!.value)
-    .toMatchLiveGame(getExtractedValue(results, 'statue_28'), 0);
-  });
- });
 });

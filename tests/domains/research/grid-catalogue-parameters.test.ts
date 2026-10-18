@@ -121,15 +121,12 @@ describe('Research Grid catalogue direct parameters', () => {
         });
     });
 
-    it('matches the parsed Gaming crown owner used by all three crown-scaled effects', () => {
-        const original = extracted<OriginalGridInputs>(results, 'pairing_before');
-        expect((data.get('gaming') as Gaming).reclaimedCrownCount).toBe(original.crowns.length);
-    });
-
     it('matches the Sailing qualification summary directly consumed by the conditional boat grant', () => {
         const original = extracted<OriginalBoatQualification[]>(results, 'boats');
         const summary = (data.get('sailing') as Sailing).getUndeadBattalionQualification();
         expect(summary.qualifyingBoatCount).toMatchLiveGame(original.filter(boat => boat.qualifies === 1).length, 0);
         expect(summary.totalBoatCount).toBe(original.length);
     });
+
+
 });

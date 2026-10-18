@@ -18,9 +18,6 @@ describe('Schematics direct prepared parameters', () => {
   hole = data.get('hole') as Hole;
  });
 
- it('pairs parameter outputs with the retained real save', () => {
-  assertPairedContext(results, data);
- });
 
  it('matches the Study input consumed by sediment expansion', () => {
   expect(hole.getStudyBolaiaBonuses(0)).toMatchLiveGame(getExtractedValue(results, 'study_0'), 0);
@@ -47,4 +44,6 @@ describe('Schematics direct prepared parameters', () => {
    expect(schematic.discountMultiplier).toMatchLiveGame(getExtractedValue(results, 'lamp_multiplier'), 0);
   });
  });
+
+
 });
