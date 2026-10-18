@@ -499,7 +499,6 @@ function LampView({ hole }: { hole: Hole }) {
                             <summary style={{ cursor: "pointer" }}>Reset details</summary>
                             <Box gap="small" margin={{ top: "small" }}>
                                 {lamp.resetConsequences.map(reset => <Text key={reset.category} size="xsmall">{reset.category}: {resetSummary(reset)}</Text>)}
-                                <Text size="xsmall">One Opal is granted by the “1000000 Opals” wish. Bring Them Back adds 12 hours to a selected Monument.</Text>
                             </Box>
                         </details>}
                     </GameCard>;

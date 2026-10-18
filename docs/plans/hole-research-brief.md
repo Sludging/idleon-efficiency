@@ -9,7 +9,7 @@
 
 ## Current handoff
 
-- **Selected part and authority:** The human selected part 4 only: [#444 — Well, Bell, Harp, and Lamp progression](https://github.com/Sludging/idleon-efficiency/issues/444). The supervisor approved its backend plan in [receipt #444](https://github.com/Sludging/idleon-efficiency/issues/issuecomment-6227478771), accepted the backend and prior revisions under the user's standing delegation. The human accepted the Bell separator and Well inner-table follow-up with its stated check limits; the supervisor accepted the Lamp UI revision under the same delegation. Backend commit is `067577c3`; prior UI commit is `0353a27d`; Lamp revision commit is `e67145ec`. User personal review and longer smoke testing remain outstanding. Parts 1–3 remain human-accepted; parts 5–7 remain unselected.
+- **Selected part and authority:** The human selected part 4 only: [#444 — Well, Bell, Harp, and Lamp progression](https://github.com/Sludging/idleon-efficiency/issues/444). The supervisor approved its backend plan in [receipt #444](https://github.com/Sludging/idleon-efficiency/issues/issuecomment-6227478771), accepted the backend and prior revisions under the user's standing delegation. The human accepted the Bell separator and Well inner-table follow-up with its stated check limits; the supervisor accepted the Lamp UI revision and latest Another Try detail correction under the same delegation. Backend commit is `067577c3`; prior UI commit is `0353a27d`; Lamp revision commit is `e67145ec`. User personal review and longer smoke testing remain outstanding. Parts 1–3 remain human-accepted; parts 5–7 remain unselected.
 
 ### Lamp UI revision — 2026-10-18
 
@@ -19,6 +19,19 @@
 - **Focused live check:** `yarn ui:status` reported ready; `yarn ui:run .ui-verification/lamp-inline-details-20261018.cjs` passed on `/world-5/hole`, 1440×1000, using configured save. It checked the row, missing stock image, 12 header levels, removed standalone sections, both disclosure open/close behaviors and card contents, and Lamp Study. Save unchanged.
 - Captures: [Lamp overview](../../.ui-verification/runs/2026-10-18T06-46-03-456Z-70841/lamp-overview.png), [discount details](../../.ui-verification/runs/2026-10-18T06-46-03-456Z-70841/lamp-discount-expanded.png), [reset details](../../.ui-verification/runs/2026-10-18T06-46-03-456Z-70841/lamp-reset-expanded.png), [Study footer](../../.ui-verification/runs/2026-10-18T06-46-03-456Z-70841/lamp-study-footer.png), [result](../../.ui-verification/runs/2026-10-18T06-46-03-456Z-70841/result.json).
 - Browser retained shared Nav hydration mismatch, NitroPay `browsingTopics` error, RL identity CORS denial, `ERR_FAILED`, and HTTP 403. One configured desktop save only; unknown states, alternate saves, game parity, extended smoke, suite, build, lint, and typecheck remain unverified. User longer smoke remains outstanding.
+
+#### Selected Another Try detail correction — 2026-10-18
+
+- Removed the unrelated “One Opal” / “Bring Them Back” paragraph from Another Try's expandable reset details. All four reset categories and consequences remain; each wish keeps its own existing description.
+- **Focused live check:** `yarn ui:run .ui-verification/lamp-another-try-placement-check-20261018.cjs` passed on `/world-5/hole` with the configured save. It opened Another Try, confirmed exactly four consequences without the cross-wish paragraph, and confirmed the 1000000 Opals and Bring Them Back descriptions remain in other wish cards.
+- Check limit: one configured save and one expanded Another Try card only; no broader smoke, suite, build, lint, typecheck, or game parity ran. Existing unrelated browser noise occurred: Nav hydration mismatch, NitroPay `browsingTopics`, RL identity CORS denial, `ERR_FAILED`, and HTTP 403. The supervisor accepted this UI correction under the user's standing delegation, with stated check limits. User personal review and longer smoke testing remain outstanding. No publication or release occurred.
+
+#### Fresh independent Another Try detail review — 2026-10-18
+
+- **Findings: none.** The scoped diff removes only the “One Opal” / “Bring Them Back” paragraph from Another Try. It retains all four reset categories and consequences. The wish descriptions remain in their own cards, matching the approved plan and avoiding cross-wish duplication. No guard, abstraction, or other scope was added.
+- The available expanded-card capture predates the correction and shows the removed paragraph; the handoff records the focused post-correction check confirming exactly four consequences and the two descriptions in their respective cards. No new browser check ran. The historical planning preview is rejected, so no approved preview comparison is available.
+- Evidence remains limited to the recorded one-save, one-card check. No broader smoke, game parity, suite, build, lint, or typecheck ran. The change does not affect calculations or other player outcomes.
+- Code stayed read-only; no checks ran during this review. No acceptance, commit, or publication occurred.
 #### Fresh independent Lamp UI review — 2026-10-18
 
 Reviewed issue #444, the selected part-4 UI plan, scoped current changes, CODING_STANDARDS.md, and the supplied Lamp route captures. The current `hole-ui-preview.html` is rejected historical work, so no approved preview comparison is available. Code stayed read-only; no checks were rerun.
