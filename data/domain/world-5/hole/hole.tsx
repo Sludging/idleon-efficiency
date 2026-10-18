@@ -1543,6 +1543,9 @@ export class Harp {
  notes: { name: string; index: number; current: number | null; accessible: boolean | null }[] = [];
  strings: HarpString[] = [];
  stringCount: number | null = null;
+ slotCount: number | null = null;
+ opals: number | null = null;
+ baselineOpalChance: number | null = null;
  power: number | null = null;
  powerPerHour: number | null = null;
  tune: number | null = null;
@@ -1570,6 +1573,7 @@ export class Harp {
   const assignments = holeData[20];
   this.highestUnlockedNoteIndex = savedHarp?.[20] == null ? null : Number(savedHarp[20]);
   this.selectedNote = savedHarp?.[21] == null ? null : Number(savedHarp[21]);
+  this.opals = holeData[7]?.[5] == null ? null : Number(holeData[7][5]);
   this.tune = this.selectedNote;
   this.power = savedHarp?.[22] == null ? null : Number(savedHarp[22]);
   this.layoutAvailable = assignments != null;
@@ -1595,12 +1599,32 @@ export class Harp {
   this.noteCost = this.highestUnlockedNoteIndex === null || this.highestUnlockedNoteIndex >= 9
    ? null : Harp.getNextNoteCost(this.highestUnlockedNoteIndex);
   this.powerPerHour = null;
+  this.baselineOpalChance = null;
  }
 
  prepare(hole: Hole): void {
   const powerString = this.strings[2];
   this.powerPerHour = powerString.level === null ? null
    : 200 * (1 + powerString.level * powerString.data.multiplier / 100);
+  this.baselineOpalChance = null;
+  const opals = this.opals;
+  const savedPower = this.power;
+  const stringyEffect = hole.schematics.find(schematic => schematic.index === 39)!;
+  const varietyEffect = hole.schematics.find(schematic => schematic.index === 38)!;
+  if (opals !== null && savedPower !== null && stringyEffect.saveAvailable && varietyEffect.saveAvailable) {
+   const q = Math.pow(0.2, opals + 1);
+   let varietyContribution: number | null = 0;
+   if (varietyEffect.unlocked) {
+    const layoutComplete = this.slotCount !== null && this.layoutAvailable &&
+     this.layout.length >= this.slotCount && this.layout.slice(0, this.slotCount).every(value => value !== null);
+    varietyContribution = layoutComplete ? varietyEffect.getIntrinsicBonus() : null;
+   }
+   if (varietyContribution !== null) {
+    const bonus = 1 + (stringyEffect.getBonus(15) + varietyContribution) / 100;
+    this.baselineOpalChance = Math.min(1,
+     bonus * (1 - Math.pow(1 - q, Math.max(1, savedPower / 100))));
+   }
+  }
 
   const stringExperienceStudy = hole.studies[5];
   this.studyBonusGateActive = stringExperienceStudy.levelAvailable ? stringExperienceStudy.ownedRule : null;

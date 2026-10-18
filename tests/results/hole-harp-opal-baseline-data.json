@@ -1,0 +1,85 @@
+{
+  "extractions": {
+    "active_context": {
+      "expression": "({ playerId: idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0]), playerName: idleon.getAttr(\"UserInfo\")[0], playerNames: idleon.getAttr(\"GetPlayersUsernames\") })",
+      "result": {
+        "playerId": 3,
+        "playerName": "Sludgev4",
+        "playerNames": [
+          "Sludgadin",
+          "Sludgev2",
+          "Sludgev3",
+          "Sludgev4",
+          "Sludgev5",
+          "Sludgev6",
+          "SludgeMan",
+          "Sludgev8",
+          "Sludgev9",
+          "Sludgev10",
+          "Sludgev11"
+        ]
+      }
+    },
+    "paired_harp_inputs": {
+      "expression": "(()=>{const gen=idleon.getAttr(\"PixelHelperActor\")[25].behaviors.getBehavior(\"ActorEvents_670\")._GenINFO;const holes=idleon.getAttr(\"Holes\");const slotCount=idleon.callFunction(\"Holes\",\"StringSlots\",0,0);const distinctActiveLayoutValues=new Set(holes[20].slice(0,slotCount)).size;return {playerId:idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0]),playerName:idleon.getAttr(\"UserInfo\")[0],opals:holes[7][5],savedPower:holes[11][22],schematicOwners:holes[13].slice(37,40),layout:holes[20].slice(0,20),slotCount,genInfoPower:gen[112],naturalDistinctCount:gen[129],distinctActiveLayoutValues,activationCountBefore:gen[128]}})()",
+      "result": {
+        "playerId": 3,
+        "playerName": "Sludgev4",
+        "opals": 8,
+        "savedPower": 566312.2182902653,
+        "schematicOwners": [
+          1,
+          1,
+          1
+        ],
+        "layout": [
+          0,
+          4,
+          3,
+          4,
+          0,
+          2,
+          0,
+          3,
+          5,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "slotCount": 11,
+        "genInfoPower": 566312.2182902653,
+        "naturalDistinctCount": 0,
+        "distinctActiveLayoutValues": 6,
+        "activationCountBefore": 0
+      }
+    },
+    "baseline_opal_chance": {
+      "expression": "(()=>{const gen=idleon.getAttr(\"PixelHelperActor\")[25].behaviors.getBehavior(\"ActorEvents_670\")._GenINFO;const holes=idleon.getAttr(\"Holes\");const slotCount=idleon.callFunction(\"Holes\",\"StringSlots\",0,0);const distinct=new Set(holes[20].slice(0,slotCount)).size;const previous128=gen[128];const previous129=gen[129];try{gen[128]=0;gen[129]=distinct;return idleon.callFunction(\"Holes\",\"HarpOpalOdds\",0,0)}finally{gen[128]=previous128;gen[129]=previous129}})()",
+      "result": 0.008541193272644843
+    },
+    "stringy_effect": {
+      "expression": "idleon.callFunction(\"Holes\",\"B_UPG\",39,15)",
+      "result": 15
+    },
+    "variety_effect": {
+      "expression": "(()=>{const gen=idleon.getAttr(\"PixelHelperActor\")[25].behaviors.getBehavior(\"ActorEvents_670\")._GenINFO;const holes=idleon.getAttr(\"Holes\");const slotCount=idleon.callFunction(\"Holes\",\"StringSlots\",0,0);const distinct=new Set(holes[20].slice(0,slotCount)).size;const previous=gen[129];try{gen[129]=distinct;return idleon.callFunction(\"Holes\",\"B_UPG\",38,30)*gen[129]}finally{gen[129]=previous}})()",
+      "result": 180
+    },
+    "counters_after_controlled_calls": {
+      "expression": "(()=>{const gen=idleon.getAttr(\"PixelHelperActor\")[25].behaviors.getBehavior(\"ActorEvents_670\")._GenINFO;return {activation:gen[128],distinct:gen[129]}})()",
+      "result": {
+        "activation": 0,
+        "distinct": 0
+      }
+    }
+  },
+  "errors": {}
+}
