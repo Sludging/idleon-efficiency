@@ -373,10 +373,10 @@ function BellView({ hole, totalMoney }: { hole: Hole; totalMoney: number }) {
 function HarpView({ hole }: { hole: Hole }) {
     const harp = hole.harp;
     const theme = useContext(ThemeContext);
+    const showNextNoteCost = harp.highestUnlockedNoteIndex === null || harp.highestUnlockedNoteIndex < 9;
     const nextNoteCost = harp.highestUnlockedNoteIndex === null ? "Unavailable"
-        : harp.highestUnlockedNoteIndex >= 9 ? "No next note"
-            : harp.noteCost === null ? "Unavailable"
-                : `${value(harp.noteCost)} ${hole.currencies[11 + harp.highestUnlockedNoteIndex].data.name.replace(/_/g, " ")}`;
+        : harp.noteCost === null ? "Unavailable"
+            : `${value(harp.noteCost)} ${hole.currencies[11 + harp.highestUnlockedNoteIndex].data.name.replace(/_/g, " ")}`;
     const opalsFound = hole.cavernOpalSources.find(source => source.id === "cavern:5")?.opals ?? null;
     const tuneName = harp.tune === null ? "Unavailable"
         : harp.notes.find(note => note.index === harp.tune)?.name ?? "Unavailable";
@@ -390,7 +390,7 @@ function HarpView({ hole }: { hole: Hole }) {
             : "Unavailable";
     const studyRequirement = study.getRequirement();
     const studyProgress = study.progressAvailable ? study.progress : null;
-    const noteCurrencyImage = harp.highestUnlockedNoteIndex !== null && harp.highestUnlockedNoteIndex < 9 && harp.noteCost !== null
+    const noteCurrencyImage = showNextNoteCost && harp.highestUnlockedNoteIndex !== null && harp.noteCost !== null
         ? hole.currencies[11 + harp.highestUnlockedNoteIndex].getImageData() : undefined;
 
     const triggerContext = (stringIndex: number): string => {
@@ -402,29 +402,29 @@ function HarpView({ hole }: { hole: Hole }) {
             const status = context.triggerStatus === "power-below-threshold" ? "Below power threshold"
                 : context.triggerStatus === "power-unavailable" ? "Power unavailable"
                     : null;
-            const effect = context.effect.type === "notes" ? "Note creation; yield unavailable"
-                : context.effect.type === "opal" ? "Opal chance unavailable"
-                    : "String EXP; amount unavailable";
+            const effect = context.effect.type === "notes" ? "Creates notes"
+                : context.effect.type === "opal" ? "Finds Opals"
+                    : "Creates String EXP";
             return status === null ? `${effect}.` : `${status}. ${effect}.`;
         }))].join(" ");
     };
     return <Box gap="medium" data-testid="hole-harp-details">
         <Section title="Power">
-            <Box gap="small">
+            <Box direction="row" gap="medium" wrap align="center" data-testid="harp-power-summary">
                 <Text size="large" style={{ fontVariantNumeric: "tabular-nums" }}>{value(harp.power)}</Text>
                 <Box direction="row" gap="small" wrap align="center">
                     <Box direction="row" gap="xsmall" align="center" pad={{ right: "small" }} border={{ side: "right", color: "grey-1" }}>
                         <Text size="xsmall" color="accent-2">Power rate</Text>
                         <Text size="small">{value(harp.powerPerHour, "/hr")}</Text>
                     </Box>
-                    <Box direction="row" gap="xsmall" align="center" pad={{ right: "small" }} border={{ side: "right", color: "grey-1" }} data-testid="harp-next-note-cost">
+                    {showNextNoteCost && <Box direction="row" gap="xsmall" align="center" pad={{ right: "small" }} border={{ side: "right", color: "grey-1" }} data-testid="harp-next-note-cost">
                         <Text size="xsmall" color="accent-2">Next note cost</Text>
                         {noteCurrencyImage && <IconImage data={noteCurrencyImage} scale={0.65} />}
                         <Text size="small">{nextNoteCost}</Text>
-                    </Box>
+                    </Box>}
                     <Box direction="row" gap="xsmall" align="center" pad={{ right: "small" }} border={{ side: "right", color: "grey-1" }}>
                         <Text size="xsmall" color="accent-2">Opal chance</Text>
-                        <TipDisplay heading="Opal chance unavailable" body={<Text size="xsmall">Current trigger chance depends on transient game state that is not saved or exposed by prepared Harp data.</Text>} size="small">
+                        <TipDisplay heading="Opal chance unavailable" body={<Text size="xsmall">Domino Effect adds 20 percentage points per string plucked during the current strum. The save does not record how many strings have been plucked in that strum.</Text>} size="small">
                             <Text size="small" tabIndex={0} style={{ textDecoration: "underline dotted", textUnderlineOffset: "3px", cursor: "help" }}>Unavailable</Text>
                         </TipDisplay>
                     </Box>
@@ -479,7 +479,7 @@ function HarpView({ hole }: { hole: Hole }) {
                             const string = stringIndex === null || stringIndex === undefined
                                 ? undefined : harp.strings.find(entry => entry.index === stringIndex);
                             const slotUnavailable = slot >= harp.layout.length || (stringIndex !== null && string === undefined);
-                            return <Box key={slot} direction="row" align="center" gap="xxsmall" flex={false} aria-label={`Slot ${slot + 1}: ${slotUnavailable ? "Unavailable" : string ? `String ${string.data.stringLetter}` : "Empty"}`}>
+                            return <Box key={slot} direction="column" align="center" gap="xxsmall" flex={false} aria-label={`Slot ${slot + 1}: ${slotUnavailable ? "Unavailable" : string ? `String ${string.data.stringLetter}` : "Empty"}`}>
                                 <Text size="xsmall" color="accent-2">#{slot + 1}</Text>
                                 {slotUnavailable ? <Text size="small">Unavailable</Text>
                                     : string ? <IconImage data={string.imageData} scale={0.8} />
@@ -501,7 +501,7 @@ function HarpView({ hole }: { hole: Hole }) {
                             <Text size="xsmall" style={{ whiteSpace: "nowrap", cursor: "help" }} tabIndex={0}>Lv. {currentLevel}</Text>
                         </TipDisplay>}>
                         {string.index === 6
-                            ? <Text size="xsmall">Passive and trigger effect unavailable.</Text>
+                            ? <Text size="xsmall">Reserved string.</Text>
                             : <>
                                 <Text size="xsmall">{string.unlocked === null ? "Ownership unavailable" : triggerContext(string.index)}</Text>
                                 <Box pad={{ top: "xsmall" }} border={{ side: "top", color: "grey-1" }}>
