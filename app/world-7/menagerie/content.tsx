@@ -14,6 +14,7 @@ import { DataStatus } from '../../../lib/stores/appDataStore';
 import { commaNotation, notateNumber } from '../../../data/utility';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
+import TipDisplay from 'components/base/TipDisplay';
 
 type MenagerieTab = 'Missions' | 'Unlocks' | 'Bonuses';
 type MissionFilter = 'All' | 'Available' | 'Ready';
@@ -41,12 +42,10 @@ const missionColumns: NonNullable<DataTableProps<MissionRow>['columns']> = [
         header: 'Mission / current goal',
         size: '300px',
         render: ({ mission }: MissionRow) => {
-            const status = mission.ready ? 'Ready' : mission.available ? 'In progress' : 'Locked';
             return <Box direction="row" gap="small" align="center" style={{ minWidth: '270px', opacity: mission.available ? 1 : 0.5 }}>
                 <Artwork data={mission.getImageData()} size={34} />
                 <Box gap="xsmall">
                     <Text size="xsmall" weight="bold">{mission.data.label}</Text>
-                    <Text size="xsmall" color={mission.ready ? 'status-ok' : mission.available ? 'text' : 'accent-2'}>{status}</Text>
                     <Text size="xsmall">{templateText(mission.data.description, mission.currentRequirement)}</Text>
                 </Box>
             </Box>;
@@ -127,7 +126,9 @@ export default function MenagerieContent() {
                     <Grid columns={{ count: 3, size: 'auto' }} gap="medium">
                         <SummaryGroup label="Lumi">
                             <Box direction="row" gap="small" align="center">
-                                <IconImage data={menagerie.getLumiImageData()} scale={0.75} />
+                                <Box style={{ top: '-10px', position: 'relative' }}>
+                                    <IconImage data={menagerie.getLumiImageData()} scale={1.5} />
+                                </Box>
                                 <Box direction="row" wrap gap="medium" style={{ alignItems: 'baseline', minWidth: 0 }}>
                                     <Box>
                                         <Text weight="normal" style={{ fontSize: '40px', lineHeight: '44px' }}>{notateNumber(progression.lumi, 'Big')}</Text>
@@ -152,12 +153,9 @@ export default function MenagerieContent() {
                                 aria-label="Shell progress toward next rank"
                             />
                         </SummaryGroup>
-                        <SummaryGroup label="Available missions" separated>
-                            <Box data-testid="mission-availability-summary">
-                                <Text weight="normal" style={{ fontSize: '40px', lineHeight: '44px' }}>{menagerie.availableMissionCount} / {availability.missionLimit}</Text>
-                                <Text size="xsmall" color="accent-2">Missions available</Text>
-                                <TextAndLabel label="Missions ready" text={String(readyCount)} textSize="small" tooltip="Ready missions meet the current account-stat requirement. Claim each mission in game to receive one Shell." />
-                                <TextAndLabel label="Account contributors" text="Details" textSize="small" tooltip={
+                        <SummaryGroup label="Missions" separated>
+                            <Box data-testid="mission-availability-summary" gap="small">
+                                <TipDisplay heading="Unlock more missions" body={
                                     <Box gap="xsmall">
                                         <Text size="small">Available missions come from the mission limit and these account contributors:</Text>
                                         <Text size="small">Baseline: {commaNotation(availability.baseline)}</Text>
@@ -167,7 +165,11 @@ export default function MenagerieContent() {
                                         <Text size="small">Bank bundle: {commaNotation(availability.bankBundle)}</Text>
                                         <Text size="small">Mission catalogue: {commaNotation(availability.missionLimit)}</Text>
                                     </Box>
-                                } />
+                                }>
+                                    <Text size="large" weight="normal" style={{textDecoration: "underline dotted", textUnderlineOffset: "4px", cursor: "help" }}>{menagerie.availableMissionCount} / {availability.missionLimit}</Text>
+                                </TipDisplay>
+                                <TextAndLabel label="Missions ready" text={String(readyCount)} textSize="small" tooltip="Ready missions meet the current account-stat requirement. Claim each mission in game to receive one Shell." />
+                                
                             </Box>
                         </SummaryGroup>
                     </Grid>
@@ -236,8 +238,10 @@ export default function MenagerieContent() {
                                 <Artwork data={unlock.getImageData()} size={40} />
                                 <Text size="small" weight="bold">{sourceDescription(unlock.data.description)}</Text>
                             </Box>
-                            <Box pad="medium" gap="small">
-                                {unlock.data.tooltip && <Text size="small">{sourceDescription(unlock.data.tooltip)}</Text>}
+                            <Box pad="medium" gap="small" justify="between" fill>
+                                <Box>
+                                    {unlock.data.tooltip && <Text size="small">{sourceDescription(unlock.data.tooltip)}</Text>}
+                                </Box>
                                 {!unlock.owned && !unlock.available && <Text size="small" color="accent-2">Requires Lumi rank {unlock.requiredRank}</Text>}
                                 {!unlock.owned && unlock.available && <Box direction="row" gap="small" align="center">
                                     <Text size="small" color="accent-2">Cost</Text>
