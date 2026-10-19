@@ -17,7 +17,7 @@ Write tests and extraction config, not domain code. Read the approved plan, phas
 
 Use the [core and parameter definitions](../TESTING_IMPLEMENTATION.md#core-tests-and-parameter-tests):
 
-- Parameter tests compare every directly used cross-domain/aspect calculation, including other aspects in the same domain. Exclude static facts, trivial helpers, raw save plumbing, and dependency internals.
+- Parameter tests compare every directly used cross-domain/aspect calculation, including other aspects in the same domain. Exclude static facts, trivial helpers, raw save plumbing, and dependency internals. The raw save plumbing exclusion does not exclude user-facing saved values covered by the canonical core definition above.
 - Core tests compare the selected public result for the paired real save. Choose meaningful observed behaviors, branches, or representative inputs. Explain gameplay effect and website result checked. State actual save coverage and unobserved limits.
 
 Use real-save evidence, not synthetic saves, altered branch inputs, or expected values derived from domain code. Raise unresolved coverage questions. Record selected result, direct parameters, core coverage, and questions.

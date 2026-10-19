@@ -8,7 +8,7 @@ For a correctness case, the selected stage defines allowed work. The tests stage
 
 ## Core tests and parameter tests
 
-A **core test** compares the public result of the selected domain/aspect calculation with its extracted game value. Choose tests for distinct behaviors or branches, or a representative set of input values. Testing every value can be reasonable when the set is small, such as about ten values.
+A **core test** compares the selected domain/aspect's public result with its extracted game value, including calculated and user-facing saved values. Every distinct user-facing value must have a relevant assertion against the public domain result that supplies it. Include direct saved values even when parsing is trivial; the trivial plumbing exclusion does not exclude these public values. Choose tests for distinct behaviors or branches, or a representative set of input values. Testing every value can be reasonable when the set is small, such as about ten values.
 
 A **parameter test** compares a calculation directly used by the selected aspect with its extracted game value. Include every such calculation from another domain/aspect, including another aspect in the same domain. Keep the comparison even when that calculation has its own core test.
 
@@ -112,6 +112,8 @@ Keep required comparisons active so differences outside the allowed bound still 
 ## Verify after implementation
 
 After implementation, run the selected core and parameter tests and every test changed by the case. Record the commands and results, and report larger overrides separately. For the next stage and any new test/config needs, follow the [implementation and review workflow](calculation-correctness/PLAYBOOK.md#5-implement-and-review). For acceptance, use the [completion prerequisites](calculation-correctness/PLAYBOOK.md#6-complete-the-case).
+
+After implementation, review the actual UI values for missing assertions against the public domain results that supply them. Use this review to select domain assertions, not UI, component, or binding tests.
 
 ## Read the test results
 
