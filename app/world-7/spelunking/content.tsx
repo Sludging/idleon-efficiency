@@ -111,7 +111,7 @@ export default function SpelunkingContent() {
                                         <Text color="dark-1" size="small">Majority of lore bonuses have soft caps..</Text>
                                     </Box>
                                 }>
-                                    <Text size="12px" color="accent-2" data-spelunking-soft-cap-trigger style={{ textDecoration: 'underline dotted' }}>About soft caps</Text>
+                                    <Text size="xsmall" color="accent-2" data-spelunking-soft-cap-trigger style={{ textDecoration: 'underline dotted' }}>About soft caps</Text>
                                 </TipDisplay>
                             </Box>
                             <SpelunkingJournal spelunking={snapshot.spelunking} players={snapshot.players} />

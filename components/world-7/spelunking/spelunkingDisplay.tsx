@@ -77,12 +77,12 @@ export default function SpelunkingDisplay({
             <TunnelSummaryStrip>
                 <TunnelSummaryMetrics>
                     <TunnelSummaryMetric>
-                        <Text size="16px" weight={600}>{ordinarySummary.found} / {ordinarySummary.capacity} found</Text>
+                        <Text size="medium" weight={600}>{ordinarySummary.found} / {ordinarySummary.capacity} found</Text>
                         <Text size="xsmall" color="accent-2">Account discoveries</Text>
                     </TunnelSummaryMetric>
                     <TunnelSummaryDivider aria-hidden="true" />
                     <TunnelSummaryMetric>
-                        <Text size="16px" weight={600}>{grandSummary.found} / {grandSummary.capacity} found</Text>
+                        <Text size="medium" weight={600}>{grandSummary.found} / {grandSummary.capacity} found</Text>
                         <Text size="xsmall" color="accent-2">Account Grand Discoveries</Text>
                     </TunnelSummaryMetric>
                 </TunnelSummaryMetrics>

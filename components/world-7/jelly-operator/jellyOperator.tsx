@@ -76,14 +76,14 @@ export function JellyCells({ jelly }: { jelly: JellyOperator }) {
             {summaryGroups.map((group, groupIndex) => <CellSummaryGroup key={groupIndex}>
                 {groupIndex > 0 && <CellSummaryDivider aria-hidden="true" />}
                 {group.map(metric => <CellSummaryMetric key={metric.label}>
-                    <Text size="16px" weight={600}>{metric.value}</Text>
+                    <Text size="medium" weight={600}>{metric.value}</Text>
                     <Text size="xsmall" color="accent-2">{metric.label}</Text>
                 </CellSummaryMetric>)}
             </CellSummaryGroup>)}
             <CellSummaryGroup>
                 <CellSummaryDivider aria-hidden="true" />
                 <CellSummaryMetric>
-                    <Text size="16px" weight={600}>{jelly.selectedFever?.data.name ?? 'None'}</Text>
+                    <Text size="medium" weight={600}>{jelly.selectedFever?.data.name ?? 'None'}</Text>
                     <Text size="xsmall" color="accent-2">
                         {jelly.selectedFever?.data.description.replace(/^\{/, '') ?? 'No fever selected'}
                     </Text>
@@ -94,7 +94,7 @@ export function JellyCells({ jelly }: { jelly: JellyOperator }) {
             {cells.map(cell => <RoundedShadowBox key={cell.index} background="dark-1" pad="none" gap="none" overflow="hidden" style={cell.unlocked ? undefined : { borderStyle: 'dashed', opacity: 0.6 }}>
                 <CardHeader direction="row" gap="small" align="center" background="grey-1" pad={{ horizontal: 'medium', vertical: 'small' }}>
                     <Artwork data={cell.getImageData()} size={36} />
-                    <Box><Text size="small">{cell.data.name}</Text><Text size="small" color="accent-2">{cell.unlocked ? `LV ${cell.level}` : 'Locked'}</Text></Box>
+                    <Box><Text size="small" weight="bold">{cell.data.name}</Text><Text size="xsmall" color="accent-2">{cell.unlocked ? `LV ${cell.level}` : 'Locked'}</Text></Box>
                 </CardHeader>
                 <Box pad="medium" gap="small">
                     <Box gap="xsmall">
@@ -127,7 +127,10 @@ export function JellyObstructions({ jelly }: { jelly: JellyOperator }) {
                 return <RoundedShadowBox key={obstruction.index} background="dark-1" pad="none" gap="none" overflow="hidden" style={{ ...style, opacity: state === 'upcoming' ? 0.76 : 1 }}>
                     <CardHeader direction="row" gap="small" align="center" background="grey-1" pad={{ horizontal: 'medium', vertical: 'small' }}>
                         <Artwork data={obstruction.getImageData()} size={40} />
-                        <Text size="small">{obstruction.data.name}</Text>
+                        <Box gap="xsmall">
+                            <Text size="small" weight="bold">{obstruction.data.name}</Text>
+                            {state !== 'completed' && <Text size="xsmall" color="accent-2">{state === 'current' ? 'Current' : 'Upcoming'}</Text>}
+                        </Box>
                     </CardHeader>
                     <Box pad="medium">
                         <Text size="small">{obstruction.getBonusText()}</Text>

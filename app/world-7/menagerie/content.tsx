@@ -20,6 +20,13 @@ import { ResourceDisplay } from '../../../components/account/shared/ResourceDisp
 import { Item } from '../../../data/domain/items';
 import { initItemDetailRepo } from '../../../data/domain/data/ItemDetailRepo';
 
+import styled from 'styled-components';
+
+const GreyCardHeader = styled(Box)`
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.18);
+`;
 const itemDetails: Record<string, { displayName: string }> = Object.fromEntries(initItemDetailRepo().map(item => [item.id, item.data]));
 type MenagerieTab = 'Missions' | 'Unlocks' | 'Bonuses' | 'Jellies';
 type MissionFilter = 'All' | 'Available' | 'Ready';
@@ -171,17 +178,17 @@ export default function MenagerieContent() {
                                 </Box>
                                 <Box direction="row" wrap gap="medium" style={{ alignItems: 'baseline', minWidth: 0 }}>
                                     <Box>
-                                        <Text weight="normal" style={{ fontSize: '40px', lineHeight: '44px' }}>{notateNumber(progression.lumi, 'Big')}</Text>
+                                        <Text size="xxlarge" weight="normal">{notateNumber(progression.lumi, 'Big')}</Text>
                                         <Text size="xsmall" color="accent-2">Balance</Text>
                                     </Box>
-                                    <Text color="status-ok" weight="normal" style={{ fontSize: '22px', lineHeight: '28px' }}>{notateNumber(progression.lumiPerHour, 'Big')} / hour</Text>
+                                    <Text size="large" color="status-ok" weight="normal">{notateNumber(progression.lumiPerHour, 'Big')} / hour</Text>
                                 </Box>
                             </Box>
                         </SummaryGroup>
                         <SummaryGroup label="Lumi rank" separated>
                             <Box direction="row" gap="small" align="center">
                                 <IconImage data={menagerie.getShellImageData()} scale={0.75} />
-                                <Text weight="normal" style={{ fontSize: '40px', lineHeight: '44px' }}>{commaNotation(progression.rank)}</Text>
+                                <Text size="xxlarge" weight="normal">{commaNotation(progression.rank)}</Text>
                             </Box>
                             <Text size="small">Shells: {commaNotation(progression.shells)} / {commaNotation(progression.shellThreshold)}</Text>
                             <Meter
@@ -254,7 +261,6 @@ export default function MenagerieContent() {
                                         },
                                         header: {
                                             border: { color: 'grey-1', side: 'bottom', size: 'xsmall' },
-                                            font: { size: '14px', weight: '400' },
                                             pad: { horizontal: 'small', vertical: 'small' },
                                         },
                                     },
@@ -275,13 +281,13 @@ export default function MenagerieContent() {
 
                     {tab === 'Unlocks' && <Grid columns={small ? ['flex'] : ['flex', 'flex', 'flex', 'flex']} gap="medium" align="stretch">
                         {unlocks.map(unlock => <RoundedShadowBox key={unlock.index} pad="none" background="dark-1" overflow="hidden" style={{ opacity: unlock.owned ? 1 : unlock.available ? 0.8 : 0.5 }}>
-                            <Box direction="row" gap="small" align="center" background="grey-1" pad={{ horizontal: 'medium', vertical: 'small' }}>
+                            <GreyCardHeader direction="row" gap="small" align="center" background="grey-1" pad={{ horizontal: 'medium', vertical: 'small' }}>
                                 <Artwork data={unlock.getImageData()} size={40} />
                                 <Text size="small" weight="bold">{sourceDescription(unlock.data.description)}</Text>
-                            </Box>
+                            </GreyCardHeader>
                             <Box pad="medium" gap="small" justify="between" fill>
                                 <Box>
-                                    {unlock.data.tooltip && <Text size="small">{sourceDescription(unlock.data.tooltip)}</Text>}
+                                    {unlock.data.tooltip && <Text size="xsmall" color="accent-2">{sourceDescription(unlock.data.tooltip)}</Text>}
                                 </Box>
                                 {!unlock.owned && <Box direction="row" wrap gap="small" align="center">
                                     <Text size="small" color="accent-2">Cost</Text>
@@ -311,16 +317,16 @@ export default function MenagerieContent() {
                         </Box>
                         <Grid columns={small ? ['flex'] : ['flex', 'flex', 'flex', 'flex']} gap="medium" align="stretch">
                             {bonuses.map(bonus => <RoundedShadowBox key={bonus.index} pad="none" background="dark-1" overflow="hidden" style={{ opacity: bonus.available ? 1 : 0.5, gridRow: 'span 2', display: 'grid', gridTemplateRows: 'subgrid', rowGap: 0 }}>
-                                <Box direction="row" gap="small" align="center" background="grey-1" pad={{ horizontal: 'medium', vertical: 'small' }}>
+                                <GreyCardHeader direction="row" gap="small" align="center" background="grey-1" pad={{ horizontal: 'medium', vertical: 'small' }}>
                                     <Artwork data={bonus.getImageData()} size={40} />
                                     <Box>
                                         <Text size="small" weight="bold">{sourceDescription(bonus.data.description)}</Text>
-                                        <Text size="small" color="accent-2">Level {bonus.level} · Lumi rank {bonus.requiredRank}</Text>
+                                        <Text size="xsmall" color="accent-2">Level {bonus.level} · Lumi rank {bonus.requiredRank}</Text>
                                     </Box>
-                                </Box>
+                                </GreyCardHeader>
                                 <Box pad="medium" gap="small">
                                     <Box direction="row" gap="xsmall" align="center" wrap background="dark-3" pad="small" round="xsmall">
-                                        <Text size="small" weight="bold" color="accent-1">{bonusEffectText(bonus, bonus.effect)}</Text>
+                                        <Text size="small" weight="bold">{bonusEffectText(bonus, bonus.effect)}</Text>
                                         <Text size="small" color="accent-2">→ {bonusEffectText(bonus, bonus.nextEffect)}</Text>
                                     </Box>
                                     <Box direction="row" gap="small" align="center">
@@ -349,8 +355,8 @@ export default function MenagerieContent() {
                                     <Text>Green's unlock and Gallery deposits are tracked separately.</Text>
                                 </Box>
                                 : undefined;
-                            return <RoundedShadowBox key={jelly.data.unlockId} pad="none" background="dark-1" overflow="hidden">
-                                <Box direction="row" gap="small" align="center" background="grey-1" pad={{ horizontal: 'medium', vertical: 'small' }}>
+                            return <RoundedShadowBox key={jelly.data.unlockId} pad="none" background="dark-1" overflow="hidden" style={{ opacity: unlock.owned ? 1 : 0.6 }}>
+                                <GreyCardHeader direction="row" gap="small" align="center" background="grey-1" pad={{ horizontal: 'medium', vertical: 'small' }}>
                                     <Artwork data={unlock.getImageData()} size={40} />
                                     <Box gap="xsmall">
                                         <Box direction="row" gap="xsmall" align="center">
@@ -358,10 +364,10 @@ export default function MenagerieContent() {
                                             <JellyfishHelp color={jelly.data.color} body={helpBody} />
                                         </Box>
                                         <Text size="xsmall" color={unlock.owned ? 'status-ok' : 'accent-2'}>
-                                            {unlock.owned ? 'Unlocked' : `Locked · Req. rank ${unlock.requiredRank}`}
+                                            {!unlock.owned && `Req. rank ${unlock.requiredRank}`}
                                         </Text>
                                     </Box>
-                                </Box>
+                                </GreyCardHeader>
                                 <Box pad="medium" gap="small">
                                     {jelly.data.unlockId === 3 && <PurpleJellyfishDetails jelly={menagerie.purpleJellyfish} />}
                                     {jelly.data.unlockId === 5 && <BlueJellyfishDetails jelly={menagerie.blueJellyfish} />}
@@ -409,8 +415,8 @@ function PurpleJellyfishDetails({ jelly }: { jelly: MenagerieDomain['purpleJelly
             <Box direction="row" gap="medium" wrap>
                 <TextAndLabel label="Lumi level" text={commaNotation(jelly.lumiLevel)} textSize="small" />
                 <TextAndLabel label="Lumi contribution" text={`${commaNotation(jelly.lumiContribution)}%`} textSize="small" />
+                <ComponentAndLabel label="Cost"><CoinsDisplay coinMap={getCoinsArray(jelly.nextLumiCost)} maxCoins={3} regularRow coinScale={0.75} textColor={jelly.moneyBalance >= jelly.nextLumiCost ? 'green-1' : 'text'} /></ComponentAndLabel>
             </Box>
-            <ComponentAndLabel label="Cost"><CoinsDisplay coinMap={getCoinsArray(jelly.nextLumiCost)} maxCoins={3} regularRow coinScale={0.75} textColor={jelly.moneyBalance >= jelly.nextLumiCost ? 'green-1' : 'text'} /></ComponentAndLabel>
         </Box>
     </Box>;
 }
@@ -428,15 +434,12 @@ function RedJellyfishDetails({ jelly }: { jelly: MenagerieDomain['redJellyfish']
             <TextAndLabel label="Reading opportunities" text={commaNotation(jelly.readingOpportunities)} textSize="small" />
             <TextAndLabel label="Reading multiplier" text={`×${commaNotation(jelly.readingMultiplier)}`} textSize="small" />
         </Box>
-        <Text size="xsmall" color="accent-2">Pages recorded: use these page items after unlocking Red to record their quantities for rereads. This is separate from Journal progress.</Text>
-        {jelly.unlocked && <Text size="xsmall" color={jelly.ready ? 'status-ok' : 'accent-2'}>{jelly.ready ? 'Ready to read' : 'No reading opportunities'}</Text>}
         <Box direction="row" gap="small" wrap border={{ side: 'top', color: 'grey-1' }} pad={{ top: 'small' }}>
-            {jelly.pageItems.map(pageItem => <TipDisplay key={pageItem.index} heading={pageItem.item.displayName} body="Red records this page item when you use it after unlocking Red. This is not Journal progress." maxWidth="240px">
-                <Box tabIndex={0} aria-label={`${pageItem.item.displayName}: ${commaNotation(pageItem.quantity)} pages recorded`} align="center" gap="xsmall">
+            {jelly.pageItems.map(pageItem => 
+                <Box title={pageItem.item.displayName} tabIndex={0} aria-label={`${pageItem.item.displayName}: ${commaNotation(pageItem.quantity)} pages recorded`} align="center" gap="xsmall">
                     <IconImage data={pageItem.item.getImageData()} scale={0.8} />
                     <Text size="xsmall">{commaNotation(pageItem.quantity)}</Text>
-                </Box>
-            </TipDisplay>)}
+                </Box>)}
         </Box>
     </Box>;
 }

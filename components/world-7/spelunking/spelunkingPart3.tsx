@@ -76,9 +76,8 @@ const ElixirStatus = styled.span<{ $status: 'equipped' | 'memorized' }>`
     color: ${({ $status, theme }: { $status: 'equipped' | 'memorized'; theme: ThemeType }) => $status === 'equipped'
         ? normalizeColor('status-ok', theme)
         : '#ffe09a'};
-    font-size: 11px;
+    font-size: ${({ theme }: { theme: ThemeType }) => theme.text.xsmall.size};
     font-weight: 600;
-    line-height: 1.4;
 
     ${({ $status }) => $status === 'equipped' && `
         &::before {
@@ -274,7 +273,7 @@ function ShopCost({
             data-spelunking-cost-value={amount}
             data-spelunking-cost-affordable={canAfford}
         >
-            {label && <Text size="11px" color="accent-2">{label}</Text>}
+            {label && <Text size="xsmall" color="accent-2">{label}</Text>}
             {amount === undefined || maxed ? (
                 <Text size="xsmall" data-spelunking-cost-text={attribute}>{text}</Text>
             ) : (
@@ -479,39 +478,47 @@ export function SpelunkingPart3Summary({ spelunking }: SpelunkingPart3Props) {
     const { overstim, trackometer } = spelunking;
     return (
         <>
-            <Box gap="xsmall" data-spelunking-summary-card="amber">
-                <Text size="small" color="accent-2">Amber</Text>
-                <Box direction="row" align="center" gap="small">
+            <Box gap="small" data-spelunking-summary-card="amber">
+                <Box direction="row" align="center" gap="small" height="32px">
                     <IconImage data={spelunking.currentAmberDenomination.getImageData()} scale={0.7} />
-                    <Text size="xlarge" weight="bold" data-spelunking-amber-value>
+                    <Text size="small">Amber</Text>
+                </Box>
+                <Box gap="xxsmall">
+                    <Text size="xxlarge" data-spelunking-amber-value>
                         {spelunking.currentAmberDenomination.formatAmount(spelunking.ownedAmber)}
                     </Text>
+                    <Text size="xsmall" color="accent-2">Balance</Text>
                 </Box>
             </Box>
             <Box gap="small" data-spelunking-part3-summary>
-                <SummaryMetric label="Overstim" value={`Level ${commaNotation(overstim.level)}`} icon={overstimIcon}
-                    progress={{ fill: overstim.fill, threshold: overstim.threshold, label: 'Overstim saved progress' }}
-                    detail={<Box gap="small" data-spelunking-overstim-detail>
-                        <DetailRows rows={[
-                            ['Progress', `${commaNotation(overstim.fill)}/${commaNotation(overstim.threshold)}`],
-                            ['Amber multiplier', `${formatMultiplier(overstim.amberMultiplier)}×`],
-                        ]} />
-                    </Box>}
-                />
-                <SummaryMetric label="Trackometer" value={`Level ${commaNotation(trackometer.level)}`} icon={trackometerIcon}
-                    progress={{ fill: trackometer.fill, threshold: trackometer.threshold, label: 'Trackometer saved progress' }}
-                    detail={<Box gap="small" data-spelunking-trackometer-detail>
-                        <DetailRows rows={[
-                            ['Progress', `${commaNotation(trackometer.fill)}/${commaNotation(trackometer.threshold)}`],
-                        ]} />
-                        <Text size="xsmall" weight={500}>Total bonuses</Text>
-                        <DetailRows rows={[
-                            ['Stamina EXP bonus', `${formatSourceBonus(trackometer.staminaExpBonus)}%`],
-                            ['Amber bonus', `${formatSourceBonus(trackometer.amberBonus)}%`],
-                            ['Max stamina bonus', `${formatSourceBonus(trackometer.maxStaminaBonus)} stamina`],
-                        ]} />
-                    </Box>}
-                />
+                <Box direction="row" align="center" height="32px">
+                    <Text size="small">Progression</Text>
+                </Box>
+                <Box gap="small">
+                    <SummaryMetric label="Overstim" value={`Level ${commaNotation(overstim.level)}`} icon={overstimIcon}
+                        progress={{ fill: overstim.fill, threshold: overstim.threshold, label: 'Overstim saved progress' }}
+                        detail={<Box gap="small" data-spelunking-overstim-detail>
+                            <DetailRows rows={[
+                                ['Progress', `${commaNotation(overstim.fill)}/${commaNotation(overstim.threshold)}`],
+                                ['Amber multiplier', `${formatMultiplier(overstim.amberMultiplier)}×`],
+                            ]} />
+                        </Box>}
+                    />
+                    <SummaryMetric label="Trackometer" value={`Level ${commaNotation(trackometer.level)}`} icon={trackometerIcon}
+                        progress={{ fill: trackometer.fill, threshold: trackometer.threshold, label: 'Trackometer saved progress' }}
+                        detail={<Box gap="small" data-spelunking-trackometer-detail>
+                            <DetailRows rows={[
+                                ['Progress', `${commaNotation(trackometer.fill)}/${commaNotation(trackometer.threshold)}`],
+                            ]} />
+                            <Text size="xsmall" weight={500}>Total bonuses</Text>
+                            <DetailRows rows={[
+                                ['Stamina EXP bonus', `${formatSourceBonus(trackometer.staminaExpBonus)}%`],
+                                ['Amber bonus', `${formatSourceBonus(trackometer.amberBonus)}%`],
+                                ['Max stamina bonus', `${formatSourceBonus(trackometer.maxStaminaBonus)} stamina`],
+                            ]} />
+                        </Box>}
+                    />
+                </Box>
             </Box>
         </>
     );
@@ -526,7 +533,7 @@ function SummaryMetric({ label, value, icon, detail, progress }: {
 }) {
     const labelContent = (
         <Box direction="row" align="center" gap="xxsmall">
-            <Text size="12px" color="accent-2">{label}</Text>
+            <Text size="xsmall" color="accent-2">{label}</Text>
             {detail && (
                 <TipDisplay heading={label} size="small" maxWidth="520px" body={detail}>
                     <Box tabIndex={0} aria-label={`${label} details`}>
@@ -543,12 +550,12 @@ function SummaryMetric({ label, value, icon, detail, progress }: {
 
     return (
         <Box gap="xxsmall" data-spelunking-summary-card={label}>
-            <Box direction="row" align="center" justify="between" gap="xsmall">
+            <Box direction="row" align="center" gap="xsmall">
                 <Box direction="row" align="center" gap="xsmall">
                     {icon && <IconImage data={icon} scale={0.7} />}
                     {labelContent}
                 </Box>
-                <Text size="16px">{value}</Text>
+                <Text size="medium">{value}</Text>
             </Box>
             {progress && <Meter aria-label={progress.label}
                 values={[{ value: progressValue, color: 'brand' }]} max={100}
@@ -563,14 +570,14 @@ function ElixirSummary({ spelunking }: SpelunkingPart3Props) {
     return (
         <ElixirSummaryStrip data-spelunking-elixir-summary>
             <ElixirSummaryMetric>
-                <Text size="16px" weight={600} data-spelunking-memorization-slots>
+                <Text size="medium" weight={600} data-spelunking-memorization-slots>
                     {commaNotation(elixirs.memorizeLimit)}
                 </Text>
                 <Text size="xsmall" color="accent-2">Memorization slots</Text>
             </ElixirSummaryMetric>
             <ElixirSummaryDivider aria-hidden="true" />
             <ElixirSummaryMetric>
-                <Text size="16px" weight={600} data-spelunking-consumption-reduction>
+                <Text size="medium" weight={600} data-spelunking-consumption-reduction>
                     {`${notateNumber(elixirs.consumptionReduction * 100, 'Smaller')}%`}
                 </Text>
                 <Text size="xsmall" color="accent-2">Consumption reduction</Text>
@@ -589,7 +596,6 @@ export function SpelunkingElixirs({ spelunking }: SpelunkingPart3Props) {
             <ElixirGrid data-spelunking-elixirs>
                 {elixirs.records.map(record => {
                     const memorized = elixirs.memorizedIndices.includes(record.index);
-                    const equippedSlots = elixirs.equippedSlots.flatMap((index, slot) => index === record.index ? [slot + 1] : []);
                     const owned = record.index < elixirs.ownedCount;
                     const segments = elixirs.descriptions[record.index].split(/\s*@\s*/);
                     const lastSegment = segments[segments.length - 1];
@@ -605,17 +611,10 @@ export function SpelunkingElixirs({ spelunking }: SpelunkingPart3Props) {
                             data-spelunking-elixir={record.index}
                             data-spelunking-elixir-owned={owned}
                             data-spelunking-elixir-memorized={memorized}
-                            data-spelunking-elixir-equipped-slots={equippedSlots.join(',')}
                         >
                             <ElixirCardHeader>
                                 <IconImage data={elixirs.getImageData(record.index)} />
                                 {memorized && <ElixirStatus $status="memorized">Memorized</ElixirStatus>}
-                                {equippedSlots.map(slot => (
-                                    <Box key={slot} direction="row" align="center" gap="xsmall">
-                                        <ElixirStatus $status="equipped">Equipped</ElixirStatus>
-                                        <Text size="xsmall" color="accent-2">Slot {slot}</Text>
-                                    </Box>
-                                ))}
                                 {!owned && <TipDisplay heading="Potential Elixir benefit" size="small" body={
                                     <Text size="small" color="dark-1" style={{ whiteSpace: 'pre-line', opacity: 0.6 }}
                                         data-spelunking-elixir-benefit={record.index}>{fullDescription}</Text>

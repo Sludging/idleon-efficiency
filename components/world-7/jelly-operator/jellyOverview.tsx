@@ -111,7 +111,7 @@ export function JellyOverview({ jelly }: { jelly: JellyOperator }) {
                     <Box gap="xxsmall" style={{ minWidth: 0 }}>
                         <MetricValue>
                             <PrimaryResourceDisplay>
-                                <ResourceDisplay cost={jelly.bloodcells} resourceImageData={bloodcellImage} resourceImageScale={1} textSize="xlarge" showTooltip />
+                                <ResourceDisplay cost={jelly.bloodcells} resourceImageData={bloodcellImage} resourceImageScale={1} textSize="xxlarge" showTooltip />
                             </PrimaryResourceDisplay>
                         </MetricValue>
                         <Text size="xsmall" color="accent-2">Balance</Text>
@@ -150,7 +150,7 @@ export function JellyOverview({ jelly }: { jelly: JellyOperator }) {
                 <Text size="small" weight={500}>Damage</Text>
                 <Box gap="xxsmall">
                     <MetricValue>
-                        <Text size="xlarge" weight="bold">{nFormatter(jelly.bestDPS)}</Text>
+                        <Text size="xxlarge" weight="bold">{nFormatter(jelly.bestDPS)}</Text>
                     </MetricValue>
                     <Text size="xsmall" color="accent-2">Best recorded DPS</Text>
                 </Box>

@@ -70,11 +70,11 @@ const SushiOverview = ({ station }: { station: SushiStation }) => {
                     </Box>
                     <Box direction="row" wrap gap="medium" style={{ alignItems: "baseline", minWidth: 0 }}>
                         <Box style={{ minWidth: 0 }}>
-                            <Text weight="normal" style={{ fontSize: "40px", lineHeight: "44px", overflowWrap: "anywhere" }}>{station.bucks < 1e8 ? commaNotation(station.bucks) : notateNumber(station.bucks, "Big")}</Text>
+                            <Text size="xxlarge" weight="normal" style={{ overflowWrap: "anywhere" }}>{station.bucks < 1e8 ? commaNotation(station.bucks) : notateNumber(station.bucks, "Big")}</Text>
                             <Text size="xsmall" color="accent-2">Balance</Text>
                         </Box>
                         <Box style={{ minWidth: 0 }}>
-                            <Text color="status-ok" weight="normal" style={{ fontSize: "22px", lineHeight: "28px", overflowWrap: "anywhere" }}>{bucksPerHour >= 0 ? "+" : ""}{bucksPerHour < 1e8 ? commaNotation(bucksPerHour) : notateNumber(bucksPerHour, "Big")}/hr</Text>
+                            <Text size="large" color="status-ok" weight="normal" style={{ overflowWrap: "anywhere" }}>{bucksPerHour >= 0 ? "+" : ""}{bucksPerHour < 1e8 ? commaNotation(bucksPerHour) : notateNumber(bucksPerHour, "Big")}/hr</Text>
                             <Text size="xsmall" color="accent-2">Rate</Text>
                         </Box>
                     </Box>
@@ -86,15 +86,15 @@ const SushiOverview = ({ station }: { station: SushiStation }) => {
                     </Box>
                     <Box direction="row" wrap gap="medium" style={{ alignItems: "baseline", minWidth: 0 }}>
                         <Box style={{ minWidth: 0 }}>
-                            <Text weight="normal" style={{ fontSize: "40px", lineHeight: "44px", overflowWrap: "anywhere" }}>{formatAmount(station.fuel)}</Text>
-                            <Text size="xsmall" color="accent-2">Balance, of {formatAmount(station.getFuelCapacity())} capacity</Text>
+                            <Text size="xxlarge" weight="normal" style={{ overflowWrap: "anywhere" }}>{formatAmount(station.fuel)}</Text>
+                            <Text size="xsmall" color="accent-2" style={{ overflowWrap: "anywhere" }}>Balance, of {formatAmount(station.getFuelCapacity())} capacity</Text>
                         </Box>
                         <Box style={{ minWidth: 0 }}>
-                            <Text color="status-warning" weight="normal" style={{ fontSize: "22px", lineHeight: "28px", overflowWrap: "anywhere" }}>{fuelPerHour >= 0 ? "+" : ""}{formatAmount(fuelPerHour)}/hr</Text>
+                            <Text size="large" color="status-warning" weight="normal" style={{ overflowWrap: "anywhere" }}>{fuelPerHour >= 0 ? "+" : ""}{formatAmount(fuelPerHour)}/hr</Text>
                             <Text size="xsmall" color="accent-2">Rate</Text>
                         </Box>
                         <Box style={{ minWidth: 0 }}>
-                            <Text weight="normal" style={{ fontSize: "22px", lineHeight: "28px", overflowWrap: "anywhere" }}>{formatAmount(station.fuelOverflow)}</Text>
+                            <Text size="large" weight="normal" style={{ overflowWrap: "anywhere" }}>{formatAmount(station.fuelOverflow)}</Text>
                             <Box direction="row" gap="xxsmall" align="center">
                                 <Text size="xsmall" color="accent-2">Overflow</Text>
                                 <TipDisplay heading="Overflow" body="When Fuel is generated at capacity, 1 fuel overflow is gained. Current overflow provides a Bucks multiplier."><CircleInformation size="small" /></TipDisplay>
@@ -112,14 +112,14 @@ const SushiOverview = ({ station }: { station: SushiStation }) => {
                                 <Text size="xsmall" color="accent-2">Best combo</Text>
                                 <TipDisplay heading="Best combo" body="The best combo grants a permanent Bucks multiplier."><CircleInformation size="small" /></TipDisplay>
                             </Box>
-                            <Text weight="bold" textAlign="end" style={{ fontSize: "22px", lineHeight: "28px", overflowWrap: "anywhere", minWidth: 0 }}>{formatAmount(station.bestComboScore)}</Text>
+                            <Text size="large" weight="bold" textAlign="end" style={{ overflowWrap: "anywhere", minWidth: 0 }}>{formatAmount(station.bestComboScore)}</Text>
                         </Box>
                         <Box direction="row" align="baseline" justify="between" gap="small">
                             <Box direction="row" gap="xxsmall" align="center">
                                 <Text size="xsmall" color="accent-2">Fireplace sparks</Text>
                                 <TipDisplay heading="Fireplace sparks" body="Purple Fireplaces generate 1 Fireplace Spark per second; sparks multiply all Fireplace bonuses."><CircleInformation size="small" /></TipDisplay>
                             </Box>
-                            <Text weight="bold" textAlign="end" style={{ fontSize: "22px", lineHeight: "28px", overflowWrap: "anywhere", minWidth: 0 }}>{formatAmount(station.fireplaceSparks)}</Text>
+                            <Text size="large" weight="bold" textAlign="end" style={{ overflowWrap: "anywhere", minWidth: 0 }}>{formatAmount(station.fireplaceSparks)}</Text>
                         </Box>
                     </Box>
                 </Box>

@@ -80,12 +80,15 @@ export function SushiCollection({ sushi }: { sushi: Sushi[] }) {
                             gap="small"
                             pad="small"
                             background="dark-3"
-                            style={{ minWidth: 0, borderRadius: "8px" }}
+                            round="xsmall"
+                            style={{ minWidth: 0 }}
                         >
                             <Text size="xsmall" color="accent-2">{currentBonus?.label ?? "Bonus"}</Text>
                             <Text size="small" textAlign="end">
                                 <Text as="span" weight="bold">{currentBonus?.value ?? "—"}</Text>
-                                {currentBonus && nextBonus && " → "}
+                                {currentBonus && nextBonus && (
+                                    <Text as="span" color="accent-2"> → </Text>
+                                )}
                                 <Text as="span" color="accent-2">{nextBonus?.value ?? ""}</Text>
                             </Text>
                         </Box>
