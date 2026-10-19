@@ -37,17 +37,36 @@ const bonusEffectText = (bonus: MenagerieBonus, effect: number): string => {
 
 const sourceDescription = (text: string): string =>
     text.replace(/,\s*1 in \$ chance/, '').replace(/[{}$]/g, '').replace(/膛/g, '').trim();
-const jellyfishHelp: Record<string, string> = {
-    Purple: 'Spend Money to buy Shells. Lumi upgrades increase the hourly Lumi bonus.',
-    Blue: 'Donate Ladles to add to the total that boosts cooking at each daily reset.',
-    Red: 'Red remembers Spelunking pages you use after unlocking it. It can reread those chapters to improve random Lore bonuses. Resting builds reading opportunities; reading uses all of them.',
-    Silver: 'The MISC upgrade multiplies Obol bonuses in the MISC category. Once unlocked, Silver can recycle eligible non-Hyper drops into fragments when your Obol inventory is full. Upgrade it to improve how many fragments you can gain.',
-    Yellow: 'Construction progress unlocks upgrades. Each upgrade adds its shown bonus.',
-    Green: 'Turn in the required nametags to the Spelunking Gallery to earn the reward.',
+const jellyfishHelp: Record<string, React.ReactNode> = {
+    Purple: <Box gap="small">
+        <Text>Spend Money to buy Shells. Lumi upgrades increase the hourly Lumi bonus.</Text>
+    </Box>,
+    Blue: <Box gap="small">
+        <Text>Donate Ladles to increase the total that boosts cooking at each daily reset.</Text>
+    </Box>,
+    Red: <Box gap="small">
+        <Text>Red records Spelunking page items used after Red is unlocked. Recorded quantities can improve random Lore bonuses when Red rereads chapters; they do not show Journal progress.</Text>
+        <Text>Red gains one reading opportunity each day while unlocked. More stored opportunities increase the reading multiplier; reading uses them all.</Text>
+    </Box>,
+    Silver: <Box gap="small">
+        <Text>The MISC upgrade multiplies the MISC bonuses on Obols.</Text>
+        <Box gap="xsmall">
+            <Text>Once Silver is unlocked, it can auto-trash eligible non-Hyper drops when your Obol inventory is full.</Text>
+            <Text>Each auto-trash has a chance to grant Obol Fragments. The conversion upgrade improves those chances; it is not a timer.</Text>
+        </Box>
+    </Box>,
+    Yellow: <Box gap="small">
+        <Text>Construction adds progress while Yellow is unlocked. Reach the requirement to choose one of the four bonuses below.</Text>
+        <Text>Each level improves its bonus. Buying an upgrade keeps your progress.</Text>
+    </Box>,
+    Green: <Box gap="small">
+        <Text>Deposit the required nametags in the Spelunking Gallery to earn the reward.</Text>
+        <Text>Green's unlock and Gallery deposits are tracked separately.</Text>
+    </Box>,
 };
 
-function JellyfishHelp({ color, body }: { color: string, body?: string }) {
-    return <TipDisplay heading={`${color} Jellyfish help`} body={body ?? jellyfishHelp[color]} maxWidth="300px">
+function JellyfishHelp({ color, body }: { color: string, body?: React.ReactNode }) {
+    return <TipDisplay heading={`${color} Jellyfish help`} body={body ?? jellyfishHelp[color]} maxWidth="360px">
         <Box tabIndex={0} aria-label={`${color} Jellyfish help`} style={{ cursor: 'help' }}>
             <CircleInformation size="small" />
         </Box>
@@ -325,7 +344,10 @@ export default function MenagerieContent() {
                             const unlock = unlocks[jelly.data.unlockId];
                             const green = menagerie.greenJellyfish;
                             const helpBody = jelly.data.unlockId === 23
-                                ? `Turn in ${commaNotation(green.requiredNametag.count)} ${itemDetails[green.requiredNametag.item].displayName}${green.requiredNametag.count === 1 ? '' : 's'} to the Spelunking Gallery to earn ${itemDetails[green.rewardNametag.item].displayName}${green.rewardNametag.count === 1 ? '' : 's'}.`
+                                ? <Box gap="small">
+                                    <Text>Deposit {commaNotation(green.requiredNametag.count)} {itemDetails[green.requiredNametag.item].displayName}{green.requiredNametag.count === 1 ? '' : 's'} in the Spelunking Gallery to earn {commaNotation(green.rewardNametag.count)} {itemDetails[green.rewardNametag.item].displayName}{green.rewardNametag.count === 1 ? '' : 's'}.</Text>
+                                    <Text>Green's unlock and Gallery deposits are tracked separately.</Text>
+                                </Box>
                                 : undefined;
                             return <RoundedShadowBox key={jelly.data.unlockId} pad="none" background="dark-1" overflow="hidden">
                                 <Box direction="row" gap="small" align="center" background="grey-1" pad={{ horizontal: 'medium', vertical: 'small' }}>
@@ -405,15 +427,12 @@ function RedJellyfishDetails({ jelly }: { jelly: MenagerieDomain['redJellyfish']
         <Box direction="row" gap="medium" wrap>
             <TextAndLabel label="Reading opportunities" text={commaNotation(jelly.readingOpportunities)} textSize="small" />
             <TextAndLabel label="Reading multiplier" text={`×${commaNotation(jelly.readingMultiplier)}`} textSize="small" />
-            <TipDisplay heading="Page types tracked" body="Red has 14 tracking slots; the counter shows how many have recorded page use." maxWidth="260px">
-                <TextAndLabel label="Page types tracked" text={`${jelly.trackedPageItemCount}/${jelly.trackedPageItemSlots}`} textSize="small" />
-            </TipDisplay>
         </Box>
-        <Text size="xsmall" color="accent-2">Each icon shows how many pages Red has recorded for that chapter—not your Journal progress.</Text>
+        <Text size="xsmall" color="accent-2">Pages recorded: use these page items after unlocking Red to record their quantities for rereads. This is separate from Journal progress.</Text>
         {jelly.unlocked && <Text size="xsmall" color={jelly.ready ? 'status-ok' : 'accent-2'}>{jelly.ready ? 'Ready to read' : 'No reading opportunities'}</Text>}
         <Box direction="row" gap="small" wrap border={{ side: 'top', color: 'grey-1' }} pad={{ top: 'small' }}>
-            {jelly.pageItems.map(pageItem => <TipDisplay key={pageItem.index} heading={pageItem.item.displayName} body={`${commaNotation(pageItem.quantity)} pages used`} maxWidth="220px">
-                <Box tabIndex={0} aria-label={`${pageItem.item.displayName}: ${commaNotation(pageItem.quantity)} pages used`} align="center" gap="xsmall">
+            {jelly.pageItems.map(pageItem => <TipDisplay key={pageItem.index} heading={pageItem.item.displayName} body="Red records this page item when you use it after unlocking Red. This is not Journal progress." maxWidth="240px">
+                <Box tabIndex={0} aria-label={`${pageItem.item.displayName}: ${commaNotation(pageItem.quantity)} pages recorded`} align="center" gap="xsmall">
                     <IconImage data={pageItem.item.getImageData()} scale={0.8} />
                     <Text size="xsmall">{commaNotation(pageItem.quantity)}</Text>
                 </Box>
@@ -428,16 +447,27 @@ function SilverJellyfishDetails({ jelly }: { jelly: MenagerieDomain['silverJelly
     return <Box gap="small">
         <Box gap="xsmall">
             <TextAndLabel label="Multiply the MISC bonuses of all obols by:" text={`×${notateNumber(jelly.miscMultiplier, 'Small')}`} textSize="small" />
-            <TextAndLabel label="Level" text={`${jelly.miscLevel}/${jelly.miscLevelCap}`} textSize="small" />
-            <ComponentAndLabel label="Cost"><ResourceDisplay cost={jelly.nextMiscCost} resourceImageData={Item.getImageData('ObolFrag')} resourceImageScale={0.65} textSize="small" /></ComponentAndLabel>
+            <Box direction="row" gap="medium" wrap align="start">
+                <Box flex={{ grow: 1, shrink: 1, basis: '100px' }} style={{ minWidth: '100px' }}>
+                    <TextAndLabel label="Level" text={`${jelly.miscLevel}/${jelly.miscLevelCap}`} textSize="small" />
+                </Box>
+                <Box flex={{ grow: 1, shrink: 1, basis: '100px' }} style={{ minWidth: '100px' }}>
+                    <ComponentAndLabel label="Cost"><ResourceDisplay cost={jelly.nextMiscCost} resourceImageData={Item.getImageData('ObolFrag')} resourceImageScale={0.65} textSize="small" /></ComponentAndLabel>
+                </Box>
+            </Box>
         </Box>
         <Box border={{ side: 'top', color: 'grey-1' }} pad={{ top: 'small' }} gap="xsmall">
-            <Text size="xsmall" color="accent-2">Fragments earned per auto-trash:</Text>
-            <TextAndLabel label="Level" text={`${jelly.conversionLevel}/${jelly.conversionLevelCap}`} textSize="small" />
-            <ComponentAndLabel label="Cost"><ResourceDisplay cost={jelly.nextConversionCost} resourceImageData={Item.getImageData('ObolFrag')} resourceImageScale={0.65} textSize="small" /></ComponentAndLabel>
-            {fragmentCapacityReached
-                ? <Text size="xsmall">Fragment capacity reached</Text>
-                : positiveOutcomes.map(event => <Text key={event.fragments} size="xsmall">{notateNumber(event.probability * 100, 'Small')}% chance to gain {event.fragments} fragment{event.fragments === 1 ? '' : 's'}</Text>)}
+            <Text size="xsmall" color="accent-2">Chance to gain fragments per auto-trash:</Text>
+            {!fragmentCapacityReached && positiveOutcomes.map(event => <Text key={event.fragments} size="xsmall">{notateNumber(event.probability * 100, 'Small')}% chance to gain {event.fragments} fragment{event.fragments === 1 ? '' : 's'}</Text>)}
+            {fragmentCapacityReached && <Text size="xsmall">Fragment capacity reached</Text>}
+            <Box direction="row" gap="medium" wrap align="start">
+                <Box flex={{ grow: 1, shrink: 1, basis: '100px' }} style={{ minWidth: '100px' }}>
+                    <TextAndLabel label="Level" text={`${jelly.conversionLevel}/${jelly.conversionLevelCap}`} textSize="small" />
+                </Box>
+                <Box flex={{ grow: 1, shrink: 1, basis: '100px' }} style={{ minWidth: '100px' }}>
+                    <ComponentAndLabel label="Cost"><ResourceDisplay cost={jelly.nextConversionCost} resourceImageData={Item.getImageData('ObolFrag')} resourceImageScale={0.65} textSize="small" /></ComponentAndLabel>
+                </Box>
+            </Box>
         </Box>
     </Box>;
 }
@@ -465,20 +495,26 @@ function GreenJellyfishDetails({ jelly }: { jelly: MenagerieDomain['greenJellyfi
             <Text size="xsmall">{commaNotation(jelly.depositedNametags)} / {commaNotation(jelly.requiredNametag.count)}</Text>
         </Box>
         <Meter type="bar" values={[{ value: Math.min(jelly.depositedNametags, jelly.requiredNametag.count), color: 'brand' }]} max={jelly.requiredNametag.count || 1} size="full" thickness="xsmall" aria-label="Green Jellyfish deposit progress" />
-        <GreenItemCounts label="Requirement" item={jelly.requiredNametag} name={required.displayName} />
+        <GreenItemCounts label="Requirement" item={jelly.requiredNametag} name={required.displayName} showStorageWarning />
         <GreenItemCounts label="Reward" item={jelly.rewardNametag} name={reward.displayName} />
     </Box>;
 }
 
-function GreenItemCounts({ label, item, name }: { label: string, item: { item: string, count: number, inStorage: number, equipped: number }, name: string }) {
+function GreenItemCounts({ label, item, name, showStorageWarning = false }: { label: string, item: { item: string, count: number, inStorage: number, equipped: number }, name: string, showStorageWarning?: boolean }) {
+    const warningParts = showStorageWarning ? [
+        item.inStorage > 0 && `${commaNotation(item.inStorage)} ${name}${item.inStorage === 1 ? '' : 's'} in storage`,
+        item.equipped > 0 && `${commaNotation(item.equipped)} ${name}${item.equipped === 1 ? '' : 's'} equipped`,
+    ].filter((part): part is string => Boolean(part)) : undefined;
     return <Box direction="row" gap="small" align="center">
         <IconImage data={Item.getImageData(item.item)} scale={0.7} />
         <Box flex gap="xsmall">
             <Text size="xsmall" weight="bold">{label}: {name} ×{commaNotation(item.count)}</Text>
-            <Text size="xsmall" color="accent-2">In storage {commaNotation(item.inStorage)} · Equipped {commaNotation(item.equipped)}</Text>
+            {warningParts && warningParts.length > 0 && <Text size="xsmall" color="status-warning">You have {warningParts.join(' and ')}. Deposit them in the Spelunking Gallery.</Text>}
         </Box>
     </Box>;
 }
+
+
 
 function ComponentAndLabel({ label, children }: { label: string, children: React.ReactNode }) {
     return <Box gap="xsmall">
