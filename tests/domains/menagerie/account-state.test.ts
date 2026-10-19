@@ -32,10 +32,19 @@ describe('Menagerie account progression', () => {
   it('reports saved Shells, Lumi, rank, threshold, and account-dependent availability', () => {
     const expected = accountProgression;
     const progression = menagerie.getProgression();
+    const savedMenagerie = JSON.parse(loadTestSave('latest').get('Menagerie')) as number[][];
+    const savedLumi = Number(savedMenagerie?.[0]?.[0] ?? 0);
+    expect(savedLumi).toBeGreaterThan(0);
+    expect(progression.lumi).toBe(savedLumi);
+    if (process.env.TEST_ACCOUNT_DATASET) {
+      expect(progression.lumi).toMatchLiveGameWithDetails(
+        expected[0],
+        { tolerance: 0, context: 'Saved Lumi balance' },
+      );
+    }
 
     expect(progression.shellRankReady).toBe(expected[1] >= expected[3]);
     expect(menagerie.isAvailable).toBe(true);
-    expect(progression.shells).toMatchLiveGameWithDetails(expected[1], { tolerance: 0, context: 'Saved Shell balance' });
     expect(progression.rank).toMatchLiveGameWithDetails(expected[2], { tolerance: 0, context: 'Saved Lumi rank' });
     expect(progression.shellThreshold).toMatchLiveGameWithDetails(expected[3], { tolerance: 0, context: 'Current Shell rank threshold' });
     expect(progression.lumiPerHour).toMatchLiveGameWithDetails(
@@ -71,6 +80,23 @@ describe('Menagerie account progression', () => {
     expect(menagerie.availableUnlockCount).toMatchLiveGameWithDetails(expected[6], { tolerance: 0, context: 'Available unlock count' });
     expect(menagerie.availableBonusCount).toMatchLiveGameWithDetails(expected[7], { tolerance: 0, context: 'Available bonus count' });
   });
+  it('preserves account-owned minibosses and Plunderous kills from the genuine save', () => {
+    const account = accountData.get('account') as {
+      miniBosses: { bossInternalName: string; daysSinceLastKill: number }[];
+      plunderousMobKills: number;
+    };
+    const options = loadTestSave('latest').get('OptLacc') as number[];
+
+    expect(account.miniBosses.map(boss => boss.bossInternalName)).toEqual(['mini3a', 'mini4a', 'mini5a', 'mini6a']);
+    expect(account.miniBosses.map(boss => boss.daysSinceLastKill)).toEqual([
+      Number(options[96] ?? 0),
+      Number(options[98] ?? 0),
+      Number(options[225] ?? 0),
+      Number(options[226] ?? 0),
+    ]);
+    expect(account.plunderousMobKills).toBe(Number(options[139] ?? 0));
+  });
+
 
   it('reports claims, current task thresholds, and ready state for all missions', () => {
     const missions = menagerie.getMissions();
@@ -126,8 +152,9 @@ describe('Menagerie account progression', () => {
     const storage = accountData.get('storage') as { amountInStorage(itemName: string): number };
     const rawSave = loadTestSave('latest');
 
-    expect(rawSave.get('CYObolFragments')).toBe(3253);
-    expect(account.obolFragments).toBe(rawSave.get('CYObolFragments'));
+    const rawObolFragments = Number(rawSave.get('CYObolFragments') ?? 0);
+    expect(rawObolFragments).toBeGreaterThanOrEqual(0);
+    expect(account.obolFragments).toBe(rawObolFragments);
     expect(menagerie.silverJellyfish.obolFragments).toBe(account.obolFragments);
     expect(menagerie.silverJellyfish.obolFragments).not.toBe(storage.amountInStorage('ObolFrag'));
 

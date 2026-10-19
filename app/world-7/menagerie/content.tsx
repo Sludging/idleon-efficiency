@@ -301,7 +301,7 @@ export default function MenagerieContent() {
                                 { key: 'mineheadDoublers', label: 'Minehead doublers', available: resources.mineheadDoublers, total: resources.mineheadDoublersOwned },
                                 { key: 'sushiDoublers', label: 'Sushi Station doublers', available: resources.sushiDoublers, total: resources.sushiDoublersOwned },
                                 { key: 'jellyOperatorDoublers', label: 'Jelly Operator doublers', available: resources.jellyOperatorDoublers, total: resources.jellyOperatorDoublersOwned },
-                            ] as const).map((resource, resourceIndex) => <Box key={resource.key} direction="row" gap="medium" align="stretch" flex={{ grow: 1, shrink: 1, basis: '160px' }}>
+                            ] as const).map((resource, resourceIndex) => <Box key={resource.key} direction="row" gap="medium" align="stretch" flex={{ grow: 1, shrink: 1 }} style={{ flexBasis: '160px' }}>
                                 {resourceIndex > 0 && <Box width="1px" background="grey-1" flex={false} aria-hidden="true" />}
                                 <Box direction="row" gap="small" align="center">
                                     <IconImage data={menagerie.getUsableResourceImageData(resource.key)} scale={0.75} />
@@ -448,10 +448,10 @@ function SilverJellyfishDetails({ jelly }: { jelly: MenagerieDomain['silverJelly
         <Box gap="xsmall">
             <TextAndLabel label="Multiply the MISC bonuses of all obols by:" text={`×${notateNumber(jelly.miscMultiplier, 'Small')}`} textSize="small" />
             <Box direction="row" gap="medium" wrap align="start">
-                <Box flex={{ grow: 1, shrink: 1, basis: '100px' }} style={{ minWidth: '100px' }}>
+                <Box flex={{ grow: 1, shrink: 1 }} style={{ minWidth: '100px', flexBasis: '100px' }}>
                     <TextAndLabel label="Level" text={`${jelly.miscLevel}/${jelly.miscLevelCap}`} textSize="small" />
                 </Box>
-                <Box flex={{ grow: 1, shrink: 1, basis: '100px' }} style={{ minWidth: '100px' }}>
+                <Box flex={{ grow: 1, shrink: 1 }} style={{ minWidth: '100px', flexBasis: '100px' }}>
                     <ComponentAndLabel label="Cost"><ResourceDisplay cost={jelly.nextMiscCost} resourceImageData={Item.getImageData('ObolFrag')} resourceImageScale={0.65} textSize="small" /></ComponentAndLabel>
                 </Box>
             </Box>
@@ -461,10 +461,10 @@ function SilverJellyfishDetails({ jelly }: { jelly: MenagerieDomain['silverJelly
             {!fragmentCapacityReached && positiveOutcomes.map(event => <Text key={event.fragments} size="xsmall">{notateNumber(event.probability * 100, 'Small')}% chance to gain {event.fragments} fragment{event.fragments === 1 ? '' : 's'}</Text>)}
             {fragmentCapacityReached && <Text size="xsmall">Fragment capacity reached</Text>}
             <Box direction="row" gap="medium" wrap align="start">
-                <Box flex={{ grow: 1, shrink: 1, basis: '100px' }} style={{ minWidth: '100px' }}>
+                <Box flex={{ grow: 1, shrink: 1 }} style={{ minWidth: '100px', flexBasis: '100px' }}>
                     <TextAndLabel label="Level" text={`${jelly.conversionLevel}/${jelly.conversionLevelCap}`} textSize="small" />
                 </Box>
-                <Box flex={{ grow: 1, shrink: 1, basis: '100px' }} style={{ minWidth: '100px' }}>
+                <Box flex={{ grow: 1, shrink: 1 }} style={{ minWidth: '100px', flexBasis: '100px' }}>
                     <ComponentAndLabel label="Cost"><ResourceDisplay cost={jelly.nextConversionCost} resourceImageData={Item.getImageData('ObolFrag')} resourceImageScale={0.65} textSize="small" /></ComponentAndLabel>
                 </Box>
             </Box>

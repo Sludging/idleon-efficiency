@@ -304,6 +304,7 @@ export class Menagerie extends Domain {
         const savedMenagerie = data.get("Menagerie") as (number | string)[][] | undefined;
         const savedMissionClaims = savedMenagerie?.[1] ?? [];
         menagerie.missions.forEach(mission => mission.parse(Number(savedMissionClaims[mission.index] ?? 0)));
+        menagerie.lumiBalance = Number(savedMenagerie?.[0]?.[0] ?? 0);
         menagerie.rank = Number(savedMenagerie?.[0]?.[2] ?? 0);
         menagerie.purpleJellyfish.parse(savedMenagerie?.[0]);
         menagerie.blueJellyfish.parse(savedMenagerie?.[0]);
