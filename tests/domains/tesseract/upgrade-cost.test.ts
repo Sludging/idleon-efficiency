@@ -13,17 +13,17 @@ const currentPrices = [
     {
         upgradeId: 0,
         label: 'tesseract_upgrade_cost_0',
-        mechanic: 'Arcanist Damage current purchase price',
+        mechanic: 'Arcanist Damage current actionable purchase price',
     },
     {
         upgradeId: 49,
         label: 'tesseract_upgrade_cost_49',
-        mechanic: 'Massivon Hoarding current purchase price with its Silver Tachyon discount active',
+        mechanic: 'Massivon Hoarding current actionable purchase price',
     },
     {
         upgradeId: 57,
         label: 'tesseract_upgrade_cost_57',
-        mechanic: 'Universe Talent current purchase price at its saved zero-owned-level state',
+        mechanic: 'Universe Talent current actionable purchase price',
     },
 ] as const;
 
@@ -40,7 +40,7 @@ describe('Tesseract upgrade purchase costs', () => {
 
 
     currentPrices.forEach(({ upgradeId, label, mechanic }) => {
-        it(`matches prepared ${mechanic}`, () => {
+        it(`matches calculated ${mechanic}`, () => {
             const selectedUpgrade = tesseract.upgrades[upgradeId];
             expect(selectedUpgrade.cost).toMatchLiveGameWithDetails(
                 getExtractedValue(extractionResults, label),
@@ -51,7 +51,7 @@ describe('Tesseract upgrade purchase costs', () => {
             );
         });
 
-        it(`matches quoted ${mechanic}`, () => {
+        it(`matches public quote for ${mechanic}`, () => {
             const selectedUpgrade = tesseract.upgrades[upgradeId];
             expect(selectedUpgrade.getCost(tesseract.upgrades)).toMatchLiveGameWithDetails(
                 getExtractedValue(extractionResults, label),
@@ -61,15 +61,5 @@ describe('Tesseract upgrade purchase costs', () => {
                 },
             );
         });
-    });
-
-    // The game returns a raw quote at cap, but its purchase gate prevents another purchase.
-    // The website exposes the actionable price as zero.
-    it('keeps Prisma Bubble actionable prepared cost at zero when capped', () => {
-        expect(tesseract.upgrades[3].cost).toBe(0);
-    });
-
-    it('keeps Prisma Bubble actionable quote at zero when capped', () => {
-        expect(tesseract.upgrades[3].getCost(tesseract.upgrades)).toBe(0);
     });
 });

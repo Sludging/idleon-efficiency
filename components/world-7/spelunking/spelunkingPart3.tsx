@@ -45,7 +45,7 @@ const ElixirGrid = styled.div`
     }
 `;
 
-const ElixirCard = styled(RoundedShadowBox)<{ $memorized: boolean; $owned: boolean }>`
+const ElixirCard = styled(RoundedShadowBox) <{ $memorized: boolean; $owned: boolean }>`
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -280,11 +280,8 @@ function ShopCost({
             ) : (
                 <Box direction="row" align="center" gap="xxsmall" data-spelunking-cost-row={attribute}>
                     <IconImage data={denomination.getImageData()} scale={0.42} />
-                    <TipDisplay heading="Amber quote" size="small"
-                        body={<Text size="small">Base Amber: {notateNumber(amount, 'Big')}</Text>}>
                         <Text size="xsmall" color={canAfford ? 'green-1' : undefined}
                             data-spelunking-cost-text={attribute}>{text}</Text>
-                    </TipDisplay>
                 </Box>
             )}
         </Box>
@@ -332,18 +329,6 @@ export function SpelunkingShop({ spelunking }: SpelunkingPart3Props) {
                     style={{ opacity: row.locked ? 0.6 : 1, minWidth: '180px' }}>
                     <IconImage data={{ location: `CaveShopUpg${row.upgrade.index}`, width: 34, height: 34 }} scale={0.6} />
                     <Text size="xsmall" weight={700}>{row.upgrade.data.name}</Text>
-                    {row.locked && (
-                        <TipDisplay heading="Locked upgrade" size="small" body={
-                            <Text size="small">
-                                The description shows potential source effects. Owned bonus is 0 while locked.
-                                The first purchase unlocks level 0; it does not grant a level-1 effect.
-                            </Text>
-                        }>
-                            <Box tabIndex={0} aria-label={`Potential effect details for ${row.upgrade.data.name}`}>
-                                <CircleInformation size="small" color={normalizeColor('accent-2', theme)} />
-                            </Box>
-                        </TipDisplay>
-                    )}
                 </Box>
             ),
         },
@@ -414,13 +399,9 @@ export function SpelunkingShop({ spelunking }: SpelunkingPart3Props) {
         {
             property: 'bulkCost',
             header: (
-                <TipDisplay heading="Bulk Amber quote" size="small"
-                    body="Fixed-input projection; current discounts and account inputs stay unchanged.">
-                    <Box direction="row" align="center" gap="xxsmall">
-                        <Text size="xsmall">Bulk cost</Text>
-                        <CircleInformation size="small" color={normalizeColor('accent-2', theme)} />
-                    </Box>
-                </TipDisplay>
+                <Box direction="row" align="center" gap="xxsmall">
+                    <Text size="xsmall">Bulk cost</Text>
+                </Box>
             ),
             size: '170px',
             align: 'end',
@@ -473,46 +454,36 @@ function DetailRows({ rows }: { rows: Array<[string, string]> }) {
         </Box>
     );
 }
-function ShopEffect({ upgrade, spelunking }: { upgrade: Upgrade; spelunking: Spelunking }) {
-    return (
-        <Box style={{ opacity: upgrade.unlocked ? 1 : 0.6 }}
-            data-spelunking-benefit-disabled={!upgrade.unlocked}>
-            <Text size="xsmall" color="dark-1" style={{ whiteSpace: 'pre-line' }}>
-                {formatShopDescription(upgrade, spelunking)}
-            </Text>
-        </Box>
-    );
-}
 
 export function SpelunkingManicModeDetail({ spelunking }: SpelunkingPart3Props) {
-    const manicUpgrades = spelunking.upgrades.filter(upgrade => upgrade.index >= 54 && upgrade.index <= 56);
     return (
         <Box gap="small" data-spelunking-manic-detail>
-            <Text size="xsmall" weight={500}>Progress</Text>
             <DetailRows rows={[
                 ['Total Manic depth', commaNotation(spelunking.manic.totalDepth)],
-                ['Stamina cost', `${spelunking.manic.staminaCostMultiplier}×`],
             ]} />
             <Text size="xsmall" weight={500}>Depth by tunnel</Text>
             <DetailRows rows={spelunking.tunnels.map(tunnel =>
                 [tunnel.data.name, commaNotation(spelunking.manic.depthByTunnel[tunnel.index] ?? 0)] as [string, string]
             )} />
-            <Text size="xsmall" weight={500}>Shop effects</Text>
-            {manicUpgrades.map(upgrade => <ShopEffect key={upgrade.index} upgrade={upgrade} spelunking={spelunking} />)}
+            <Text size="xsmall" weight={500}>Total bonuses</Text>
+            <DetailRows rows={[
+                ['POW bonus', `${formatSourceBonus(spelunking.manic.powerBonus)}%`],
+                ['Grand Discovery chance bonus', `${formatSourceBonus(spelunking.manic.grandDiscoveryChanceBonus)}%`],
+                ['Efficiency bonus', `${formatSourceBonus(spelunking.manic.efficiencyBonus)}%`],
+            ]} />
         </Box>
     );
 }
 
 export function SpelunkingPart3Summary({ spelunking }: SpelunkingPart3Props) {
     const { overstim, trackometer } = spelunking;
-    const trackometerUpgrades = spelunking.upgrades.filter(upgrade => upgrade.index >= 59 && upgrade.index <= 61);
     return (
         <>
             <Box gap="xsmall" data-spelunking-summary-card="amber">
                 <Text size="small" color="accent-2">Amber</Text>
                 <Box direction="row" align="center" gap="small">
                     <IconImage data={spelunking.currentAmberDenomination.getImageData()} scale={0.7} />
-                    <Text size="40px" weight={600} data-spelunking-amber-value>
+                    <Text size="xlarge" weight="bold" data-spelunking-amber-value>
                         {spelunking.currentAmberDenomination.formatAmount(spelunking.ownedAmber)}
                     </Text>
                 </Box>
@@ -521,26 +492,24 @@ export function SpelunkingPart3Summary({ spelunking }: SpelunkingPart3Props) {
                 <SummaryMetric label="Overstim" value={`Level ${commaNotation(overstim.level)}`} icon={overstimIcon}
                     progress={{ fill: overstim.fill, threshold: overstim.threshold, label: 'Overstim saved progress' }}
                     detail={<Box gap="small" data-spelunking-overstim-detail>
-                        <Text size="xsmall" weight={500}>Progress</Text>
                         <DetailRows rows={[
-                            ['Saved fill', commaNotation(overstim.fill)],
-                            ['Next threshold', commaNotation(overstim.threshold)],
+                            ['Progress', `${commaNotation(overstim.fill)}/${commaNotation(overstim.threshold)}`],
                             ['Amber multiplier', `${formatMultiplier(overstim.amberMultiplier)}×`],
                         ]} />
-                        <Text size="xsmall" weight={500}>Shop effect</Text>
-                        <ShopEffect upgrade={spelunking.upgrades[6]} spelunking={spelunking} />
                     </Box>}
                 />
                 <SummaryMetric label="Trackometer" value={`Level ${commaNotation(trackometer.level)}`} icon={trackometerIcon}
                     progress={{ fill: trackometer.fill, threshold: trackometer.threshold, label: 'Trackometer saved progress' }}
                     detail={<Box gap="small" data-spelunking-trackometer-detail>
-                        <Text size="xsmall" weight={500}>Progress</Text>
                         <DetailRows rows={[
-                            ['Saved fill', commaNotation(trackometer.fill)],
-                            ['Next threshold', commaNotation(trackometer.threshold)],
+                            ['Progress', `${commaNotation(trackometer.fill)}/${commaNotation(trackometer.threshold)}`],
                         ]} />
-                        <Text size="xsmall" weight={500}>Shop effects</Text>
-                        {trackometerUpgrades.map(upgrade => <ShopEffect key={upgrade.index} upgrade={upgrade} spelunking={spelunking} />)}
+                        <Text size="xsmall" weight={500}>Total bonuses</Text>
+                        <DetailRows rows={[
+                            ['Stamina EXP bonus', `${formatSourceBonus(trackometer.staminaExpBonus)}%`],
+                            ['Amber bonus', `${formatSourceBonus(trackometer.amberBonus)}%`],
+                            ['Max stamina bonus', `${formatSourceBonus(trackometer.maxStaminaBonus)} stamina`],
+                        ]} />
                     </Box>}
                 />
             </Box>

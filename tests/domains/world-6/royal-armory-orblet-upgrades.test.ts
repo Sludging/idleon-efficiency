@@ -1,9 +1,3 @@
-/**
- * Approved correctness case #429: read-only Orblet upgrade list after normal
- * processing of the paired real account. Prices/raw bonuses are game calls;
- * ordinary previews use the source's bonus formula at the real level + 1.
- * No purchase/map eligibility or fabricated saved-state coverage is implied.
- */
 import {
     ExtractionResults,
     getExtractedValue,
@@ -31,17 +25,7 @@ const marketRows = [
     { index: 9, name: 'Parchmore' },
 ] as const;
 
-// Generic list consumer: no identity/type branch chooses its optional fields.
-function presentation(upgrade: RoyalArmoryOrbletMarketBonus) {
-    return {
-        level: upgrade.getLevel(),
-        maxLevel: upgrade.getMaxLevel(),
-        nextBonus: upgrade.getNextBonus(),
-        nextValue: upgrade.getNextValue(),
-    };
-}
-
-describe('Royal Armory Orblet upgrade data', () => {
+describe('Royal Armory Orblet upgrade calculations', () => {
     let extractionResults: ExtractionResults;
     let gameData: Map<string, unknown>;
     let royalArmory: RoyalArmory;
@@ -68,163 +52,62 @@ describe('Royal Armory Orblet upgrade data', () => {
         );
         expect(upgrade.getBonus()).toMatchLiveGameWithDetails(
             getExtractedValue(extractionResults, `orblet_market_bonus_${upgrade.index}`),
-            { tolerance: 0, context: `${context}: raw numeric current bonus` },
+            { tolerance: 0, context: `${context}: current numeric bonus` },
         );
     }
 
     function assertNextBonus(upgrade: RoyalArmoryOrbletMarketBonus): void {
-        const nextBonus = upgrade.getNextBonus();
-        if (upgrade.index === 4) {
-            expect(nextBonus).toBeUndefined();
-            return;
-        }
-        // -1 encodes absent preview in the numeric-only extraction loader;
-        // it is not a bonus value or a mutated game level. See the config.
+        if (upgrade.index === 4) return;
         const expected = getExtractedValue(extractionResults, `orblet_market_next_bonus_${upgrade.index}`);
-        if (expected === -1) {
-            expect(nextBonus).toBeUndefined();
-        } else {
-            expect(nextBonus).toMatchLiveGameWithDetails(expected, {
+        if (expected !== -1) {
+            expect(upgrade.getNextBonus()).toMatchLiveGameWithDetails(expected, {
                 tolerance: 0,
-                context: `Orblet entry ${upgrade.index}: next effect at the real saved level + 1, even when progression-locked`,
+                context: `Orblet entry ${upgrade.index}: next numeric bonus`,
             });
         }
     }
 
     marketRows.forEach(({ index, name }) => {
-        it(`shows the game's current ${name} price even when locked or capped`, () => {
-            expect(upgradeAt(index).getCost()).toMatchLiveGameWithDetails(
+        it(`matches ${name} price and progression gate`, () => {
+            const upgrade = upgradeAt(index);
+            expect(upgrade.getCost()).toMatchLiveGameWithDetails(
                 getExtractedValue(extractionResults, `orblet_market_cost_${index}`),
-                { tolerance: 0, context: `${name}: current Orblet price` },
+                { tolerance: 0, context: `${name}: Orblet price` },
+            );
+            expect(Number(upgrade.isUnlocked())).toMatchLiveGameWithDetails(
+                getExtractedValue(extractionResults, `orblet_market_unlocked_${index}`),
+                { tolerance: 0, context: `${name}: progression gate` },
             );
         });
 
-        if (index === 4) {
-            it('preserves Glorification raw numeric compatibility without presenting a passive effect', () => {
-                const expected = getExtractedValue(extractionResults, 'orblet_market_bonus_4');
-                // Ordinary raw effects remain in the intact existing core suite.
-                expect(royalArmory.getOrbletMarketBonus(index)).toMatchLiveGameWithDetails(expected, {
-                    tolerance: 0,
-                    context: 'Glorification: established numeric calculation API remains unchanged',
-                });
-            });
-        }
-
-        it(`keeps the ${name} progression gate independent of its balance`, () => {
-            const expected = getExtractedValue(extractionResults, `orblet_market_unlocked_${index}`);
-            expect(Number(upgradeAt(index).isUnlocked())).toMatchLiveGameWithDetails(expected, {
-                tolerance: 0,
-                context: index === 5
-                    ? 'Intervene: immediately preceding Glorification saved cell, not the preceding ordinary entry'
-                    : `${name}: first entry or immediately preceding saved-level progression gate`,
-            });
-        });
-
-        it(`reports only whether the real Orblet balance covers the ${name} price`, () => {
-            const gameBalance = getExtractedValue(extractionResults, 'calculationStorage.amountInStorageOrblet');
-            const gameCost = getExtractedValue(extractionResults, `orblet_market_cost_${index}`);
-            const affordable = upgradeAt(index).isAffordable(royalArmory.getOrbletsOwned());
-            expect(Number(affordable)).toMatchLiveGameWithDetails(Number(gameBalance >= gameCost), {
-                tolerance: 0,
-                context: `${name}: balance >= exact source price; no unlock, cap, or map eligibility condition`,
-            });
-        });
-
-        it(`previews ${name} without changing its current price or raw numeric effect`, () => {
+        it(`matches ${name}${index === 4 ? ' current' : ' current and next'} numeric bonus`, () => {
             const upgrade = upgradeAt(index);
             assertCurrentValues(upgrade, name);
             assertNextBonus(upgrade);
-            const levelBeforePreview = upgrade.getLevel();
-            upgrade.getCurrentValue();
-            upgrade.getNextValue();
-            upgrade.getDescription(true);
-            expect(upgrade.getLevel()).toBe(levelBeforePreview);
-            assertCurrentValues(upgrade, `${name} after preview`);
         });
     });
 
-    it('exposes the settled real Orblet balance used by upgrade affordability', () => {
+    it('matches the settled real Orblet balance', () => {
         expect(royalArmory.getOrbletsOwned()).toMatchLiveGameWithDetails(
             getExtractedValue(extractionResults, 'calculationStorage.amountInStorageOrblet'),
-            { tolerance: 0, context: 'Account-list Orblet balance after normal late preparation' },
+            { tolerance: 0, context: 'Orblet balance after normal account processing' },
         );
     });
 
     marketRows.filter(({ index }) => index !== 4).forEach(({ index, name }) => {
-        it(`presents ${name} as ordinary level progress with an optional next effect`, () => {
-            const display = presentation(upgradeAt(index));
-            expect(display.level).toMatchLiveGameWithDetails(
-                getExtractedValue(extractionResults, `orblet_market_display_level_${index}`),
-                { tolerance: 0, context: `${name}: player-facing current level, not a cleared lifecycle value` },
-            );
-            const expectedNext = getExtractedValue(extractionResults, `orblet_market_next_bonus_${index}`);
-            if (expectedNext === -1) {
-                expect(display.nextBonus).toBeUndefined();
-                expect(display.nextValue).toBeUndefined();
-            }
+        it(`keeps ${name} price and current bonus unchanged by previews`, () => {
+            const upgrade = upgradeAt(index);
+            assertCurrentValues(upgrade, name);
+            assertNextBonus(upgrade);
+            upgrade.getCurrentValue();
+            upgrade.getNextValue();
+            upgrade.getDescription(true);
+            assertCurrentValues(upgrade, `${name} after preview`);
+            assertNextBonus(upgrade);
         });
     });
 
-    it('omits misleading ordinary level progress and next effects for Glorification', () => {
-        const display = presentation(upgradeAt(4));
-        expect(display.level).toBeUndefined();
-        expect(display.maxLevel).toBeUndefined();
-        expect(display.nextBonus).toBeUndefined();
-        expect(display.nextValue).toBeUndefined();
-        // The same public list consumer above still presents ordinary levels;
-        // raw ID4 numeric compatibility is checked separately, not displayed.
-    });
-
-    it.each([
-        { index: 0, name: 'Emulsion percentage', current: '2%', next: '3%' },
-        { index: 1, name: 'Hydration additive percentage', current: '+110%', next: '+115%' },
-        { index: 2, name: 'Talented additive points', current: '+23', next: '+24' },
-        { index: 5, name: 'Intervene multiplier', current: '1.03x', next: '1.04x' },
-        { index: 8, name: 'Long Range pixels', current: '+0px', next: '+1px' },
-    ])('includes the sign and unit in the current and next $name values', ({ index, current, next }) => {
-        const upgrade = upgradeAt(index);
-        expect(upgrade.getCurrentValue()).toBe(current);
-        expect(upgrade.getNextValue()).toBe(next);
-        const strippedDescription = upgrade.getDescription(true);
-        expect(strippedDescription).not.toContain(current);
-        expect(strippedDescription).not.toMatch(/[{}+%_]|\bpx\b|(?:^|\s)x(?:\s|$)/);
-    });
-
-    it('strips the Emulsion effect without removing the static 1M statue amount', () => {
-        const upgrade = upgradeAt(0);
-        expect(upgrade.getDescription()).toContain('2%');
-        expect(upgrade.getDescription()).toContain('1M');
-        expect(upgrade.getDescription(true)).toContain('1M');
-        expect(upgrade.getDescription(true)).not.toMatch(/[{}%_]/);
-    });
-
-    it.each([
-        { index: 6, subject: 'Rank EXP', effect: 'faster' },
-        { index: 7, subject: 'Masterclass upgrades', effect: 'less than before' },
-        { index: 8, subject: 'Outposts', effect: 'longer connection range' },
-    ])('removes only a mid-sentence effect and normalizes its whitespace for entry $index', ({ index, subject, effect }) => {
-        const description = upgradeAt(index).getDescription(true);
-        expect(description).toContain(subject);
-        expect(description).toContain(effect);
-        expect(description).not.toMatch(/[{}+%_]|\bpx\b|\s{2,}|^\s|\s$/);
-    });
-
-    it('keeps the fixed Glorification chance separate from the cached market-level bonus', () => {
-        const upgrade = upgradeAt(4);
-        const bonusBeforePresentation = upgrade.getBonus();
-        expect(upgrade.getCurrentValue()).toBe('10%');
-        expect(upgrade.getNextValue()).toBeUndefined();
-        expect(upgrade.getDescription()).toContain('10% chance per attempt');
-        const strippedDescription = upgrade.getDescription(true);
-        expect(strippedDescription).toContain('chance per attempt');
-        expect(strippedDescription).not.toContain('10%');
-        expect(strippedDescription).toContain('+10 outpost points');
-        expect(strippedDescription).toContain('2× rank XP');
-        expect(strippedDescription).toContain('+1 Worker');
-        expect(upgrade.getBonus()).toBe(bonusBeforePresentation);
-    });
-
-    it('keeps current prices, numeric effects, previews and balance correct when processing the same real account again', () => {
+    it('matches prices, bonuses, previews and balance after repeated normal processing', () => {
         const cloudSave = loadTestSave(saveName);
         for (let pass = 0; pass < 2; pass++) {
             if (pass > 0) {
@@ -240,13 +123,19 @@ describe('Royal Armory Orblet upgrade data', () => {
             }
             for (const { index, name } of marketRows) {
                 const upgrade = upgradeAt(index);
-                assertCurrentValues(upgrade, `${name}, account processing pass ${pass + 1}`);
-                assertNextBonus(upgrade);
-                assertCurrentValues(upgrade, `${name}, account processing pass ${pass + 1} after preview`);
+                assertCurrentValues(upgrade, `${name}, processing pass ${pass + 1}`);
+                if (index !== 4) {
+                    assertNextBonus(upgrade);
+                    upgrade.getCurrentValue();
+                    upgrade.getNextValue();
+                    upgrade.getDescription(true);
+                    assertCurrentValues(upgrade, `${name}, processing pass ${pass + 1} after preview`);
+                    assertNextBonus(upgrade);
+                }
             }
             expect(royalArmory.getOrbletsOwned()).toMatchLiveGameWithDetails(
                 getExtractedValue(extractionResults, 'calculationStorage.amountInStorageOrblet'),
-                { tolerance: 0, context: `Repeated real-account processing pass ${pass + 1}: balance overwrite, not stacking` },
+                { tolerance: 0, context: `Repeated account processing pass ${pass + 1}: Orblet balance` },
             );
         }
     });

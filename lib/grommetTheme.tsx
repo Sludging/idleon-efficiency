@@ -48,7 +48,7 @@ export const customTheme = deepMerge(dark, {
             "dark-3": "#1B1C22",
             "aqua": "#c9fffd",
             "yellow-1": "#ffecc9",
-            "background": "#1B1D24",
+            "background": "#1A1D24",
             "white-1": "#30333A",
             "white-2": "#efefef",
             "placeholder": "#96979a",

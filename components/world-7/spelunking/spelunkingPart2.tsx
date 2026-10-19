@@ -95,13 +95,12 @@ export function SpelunkingSummary({ spelunking, players, children, manicDetail }
                     <Text size="16px">{commaNotation(spelunking.dailyReadsRemaining)} / {commaNotation(spelunking.dailyReadLimit)}</Text>
                     <Text size="12px" color="accent-2">Remaining / limit</Text>
                 </Box>
-                <Box direction="row" justify="between" align="center" gap="xsmall">
+                <Box gap="xxsmall">
+                    <Text size="small" weight={500}>Manic mode</Text>
                     <TipDisplay heading="Manic mode" size="small" maxWidth="520px" body={manicDetail}>
-                        <Box tabIndex={0} aria-label="Manic mode details">
-                            <Text size="12px" color="accent-2" style={{ textDecoration: 'underline dotted', textUnderlineOffset: '4px', cursor: 'help' }}>Manic mode</Text>
-                        </Box>
+                        <Text size="16px" style={{ textDecoration: 'underline dotted', textUnderlineOffset: '4px', cursor: 'help' }}>{commaNotation(spelunking.manic.totalDepth)}</Text>
                     </TipDisplay>
-                    <Text size="16px" data-spelunking-manic-mode>{spelunking.manic.enabled ? 'On' : 'Off'}</Text>
+                    <Text size="12px" color="accent-2" >Total depth</Text>
                 </Box>
             </Box>
             <Box gap="small" data-spelunking-summary-card="stamina">
@@ -141,28 +140,29 @@ export function SpelunkingSummary({ spelunking, players, children, manicDetail }
                             <Text size="16px" tabIndex={0} data-spelunking-recharge-trigger style={{ textDecoration: 'underline dotted', textUnderlineOffset: '4px', cursor: 'help' }}>{spelunking.hourlyRecharge.toFixed(2)} stamina/h</Text>
                         </TipDisplay>
                     } />
-                    <TipDisplay heading="Time to refill the team" maxWidth="520px" body={
-                        <Box gap="xsmall" data-spelunking-refill-detail>
-                            {players.map(player => {
-                                const stamina = spelunking.stamina.find(entry => entry.playerID === player.playerID)!;
-                                const hours = stamina.getHoursUntilFull(spelunking.hourlyRecharge);
+                    <ComponentAndLabel label="Team refill" labelSize="12px" component={
+                        <TipDisplay heading="Time to refill the team" maxWidth="520px" body={
+                            <Box gap="xsmall" data-spelunking-refill-detail>
+                                {players.map(player => {
+                                    const stamina = spelunking.stamina.find(entry => entry.playerID === player.playerID)!;
+                                    const hours = stamina.getHoursUntilFull(spelunking.hourlyRecharge);
 
-                                return (
-                                    <Box key={player.playerID} direction="row" justify="between" gap="small" data-spelunking-refill-player={player.playerID} data-spelunking-refill-hours={hours}>
-                                        <Text color="dark-1" size="small">{player.playerName}</Text>
-                                        <Text color="dark-1" size="small">{hours === 0 ? 'Full' : toTime(hours * 3600).trim()}</Text>
-                                    </Box>
-                                );
-                            })}
-                        </Box>
-                    }>
-                        <Box direction="row" justify="between" align="center" gap="xsmall" data-spelunking-refill-trigger>
-                            <Text size="12px" color="accent-2">Team refill</Text>
-                            <Text size="16px" data-spelunking-all-full data-spelunking-all-full-hours={allFullHours}>
-                                {allFullHours === 0 ? 'Full' : toTime(allFullHours * 3600).trim()}
-                            </Text>
-                        </Box>
-                    </TipDisplay>
+                                    return (
+                                        <Box key={player.playerID} direction="row" justify="between" gap="small" data-spelunking-refill-player={player.playerID} data-spelunking-refill-hours={hours}>
+                                            <Text color="dark-1" size="small">{player.playerName}</Text>
+                                            <Text color="dark-1" size="small">{hours === 0 ? 'Full' : toTime(hours * 3600).trim()}</Text>
+                                        </Box>
+                                    );
+                                })}
+                            </Box>
+                        }>
+                            <Box gap="xxsmall">
+                                <Text size="16px" style={{ textDecoration: 'underline dotted', textUnderlineOffset: '4px', cursor: 'help' }} data-spelunking-all-full data-spelunking-all-full-hours={allFullHours}>
+                                    {allFullHours === 0 ? 'Full' : toTime(allFullHours * 3600).trim()}
+                                </Text>
+                            </Box>
+                        </TipDisplay>
+                    } />
                 </Box>
             </Box>
         </SummaryGrid>
@@ -219,13 +219,9 @@ function ChapterCard({ chapter, players }: { chapter: Chapter; players: Player[]
         <RoundedShadowBox background="dark-1" gap="none" pad="none" style={{ overflow: 'hidden', minWidth: 0, height: '100%' }} data-spelunking-chapter={chapter.index}>
             <Box direction="row" align="center" justify="between" gap="small" pad={{ horizontal: 'medium', vertical: 'small' }} background="grey-1">
                 <Box direction="row" align="center" gap="small" flex style={{ minWidth: 0 }}>
-                    <TipDisplay heading={chapter.pageItem.displayName} maxWidth="420px" body={
-                        <Text color="dark-1" size="small" data-spelunking-page-description-detail={chapter.index}>{chapter.pageItem.description.replace(/\s*@\s*/g, ' ').trim()}</Text>
-                    }>
-                        <Box aria-label={`${chapter.pageItem.displayName} description`} data-spelunking-page-description={chapter.index} background="dark-1" pad="xsmall" round="small">
-                            <IconImage data={chapter.pageItem.getImageData()} scale={0.75} />
-                        </Box>
-                    </TipDisplay>
+                    <Box aria-label={`${chapter.pageItem.displayName} description`} data-spelunking-page-description={chapter.index} background="dark-1" pad="xsmall" round="small">
+                        <IconImage data={chapter.pageItem.getImageData()} scale={0.75} />
+                    </Box>
                     <Box gap="xxsmall" style={{ minWidth: 0 }}>
                         <Text size="14px" weight={600}>{chapter.pageItem.displayName}</Text>
                         <Text size="12px" color="accent-2">{chapter.gatheringSource.details.Name}</Text>
@@ -238,7 +234,7 @@ function ChapterCard({ chapter, players }: { chapter: Chapter; players: Player[]
                                 <Box gap="xxsmall">
                                     <Text color="dark-1" size="small" weight={500}>Storage</Text>
                                     {storageStacks.map((stack, index) => (
-                                        <Text key={index} color="dark-1" size="small" data-spelunking-storage-stack={index}>{commaNotation(stack.count)} pages</Text>
+                                        <Text key={index} color="dark-1" size="small" data-spelunking-storage-stack={index}>{notateNumber(stack.count)} pages</Text>
                                     ))}
                                 </Box>
                             )}
@@ -246,7 +242,7 @@ function ChapterCard({ chapter, players }: { chapter: Chapter; players: Player[]
                                 <Box key={player.playerID} gap="xxsmall" data-spelunking-location-player={player.playerID}>
                                     <Text color="dark-1" size="small" weight={500}>{player.playerName} inventory</Text>
                                     {stacks.map((stack, index) => (
-                                        <Text key={index} color="dark-1" size="small" data-spelunking-inventory-stack={index}>{commaNotation(stack.count)} pages</Text>
+                                        <Text key={index} color="dark-1" size="small" data-spelunking-inventory-stack={index}>{notateNumber(stack.count)} pages</Text>
                                     ))}
                                 </Box>
                             ))}
@@ -296,10 +292,10 @@ export function SpelunkingCharacters({ spelunking, players }: SpelunkingPart2Pro
                 const stamina = spelunking.stamina.find(entry => entry.playerID === player.playerID)!;
 
                 return (
-                    <RoundedShadowBox key={player.playerID} title={player.playerName} background="dark-2" pad="medium" gap="small" style={{ minHeight: '112px' }} data-spelunking-player={player.playerID}>
+                    <RoundedShadowBox key={player.playerID} title={player.playerName} background="dark-2" pad="small" gap="small" style={{ minHeight: '50px' }} data-spelunking-player={player.playerID}>
                         <Box gap="xsmall" direction="row" align="center">
-                            <IconImage data={player.getClassImageData()} scale={0.7} />
-                            <Text color="text" size="16px" weight={500} truncate>{player.playerName}</Text>
+                            <IconImage data={player.getClassImageData()} scale={0.5} />
+                            <Text color="text" size="xsmall" weight={500} truncate>{player.playerName}</Text>
                         </Box>
                         <Box direction="row" justify="between" align="center" gap="xxsmall">
                             <TipDisplay heading="Spelunking level" body={<Text color="dark-1" size="small" data-skill-detail={player.playerID}>{player.playerName}: Level {commaNotation(skill.level)}</Text>}>

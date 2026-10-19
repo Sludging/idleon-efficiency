@@ -1,6 +1,7 @@
 import {
     Box,
     Text,
+    TextProps,
 } from 'grommet'
 import { ImageData } from '../data/domain/imageData';
 
@@ -12,6 +13,7 @@ interface CoinProps {
     maxCoins?: number
     regularRow?: boolean
     coinScale?: number
+    textColor?: TextProps['color']
 }
 
 export default function CoinsDisplay(props: CoinProps) {
@@ -32,7 +34,7 @@ export default function CoinsDisplay(props: CoinProps) {
         return (
             <Box key={`coin-${coin.valueOf()}`} direction="row" gap="xsmall">
                 <IconImage data={getCoinClass(coin)} scale={props.coinScale ? props.coinScale : 1} />
-                <Text>{nFormatter(value)}</Text>
+                <Text color={props.textColor}>{nFormatter(value)}</Text>
             </Box>
         )
     }
@@ -45,7 +47,7 @@ export default function CoinsDisplay(props: CoinProps) {
                         return (
                             <Box title={Coins[coin]} key={`coin-${coin.valueOf()}`} direction="row" gap="xsmall">
                                 <IconImage data={getCoinClass(coin)} scale={props.coinScale ? props.coinScale : 1} />
-                                <Text>{value}</Text>
+                                <Text color={props.textColor}>{value}</Text>
                             </Box>
                         )
                     }

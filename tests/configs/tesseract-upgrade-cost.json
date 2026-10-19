@@ -4,18 +4,18 @@
   "extractions": [
     {
       "label": "tesseract_upgrade_cost_0",
-      "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgCost\", 0, 0)",
-      "description": "Arcanist Damage (upgrade 0): current purchase price at its observed saved level"
+      "expression": "Number(idleon.getAttr('Arcane')[0]) >= Number(idleon.getAttr('CustomLists').h.ArcaneUpg[0][4]) ? 0 : idleon.callFunction('ArcaneType', 'ArcaneUpgCost', 0, 0)",
+      "description": "Arcanist Damage (upgrade 0): actionable current purchase price; the native purchase gate returns no price at its cap"
     },
     {
       "label": "tesseract_upgrade_cost_49",
-      "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgCost\", 49, 0)",
-      "description": "Massivon Hoarding (upgrade 49): current purchase price while its Silver Tachyon discount bonus is present"
+      "expression": "Number(idleon.getAttr('Arcane')[49]) >= Number(idleon.getAttr('CustomLists').h.ArcaneUpg[49][4]) ? 0 : idleon.callFunction('ArcaneType', 'ArcaneUpgCost', 49, 0)",
+      "description": "Massivon Hoarding (upgrade 49): actionable current purchase price; the native purchase gate returns no price at its cap"
     },
     {
       "label": "tesseract_upgrade_cost_57",
-      "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgCost\", 57, 0)",
-      "description": "Universe Talent (upgrade 57): raw current purchase price for the saved zero-owned-level state"
+      "expression": "Number(idleon.getAttr('Arcane')[57]) >= Number(idleon.getAttr('CustomLists').h.ArcaneUpg[57][4]) ? 0 : idleon.callFunction('ArcaneType', 'ArcaneUpgCost', 57, 0)",
+      "description": "Universe Talent (upgrade 57): actionable current purchase price; the native purchase gate returns no price at its cap"
     },
     {
       "label": "tesseract_silver_discount_bonus_49",

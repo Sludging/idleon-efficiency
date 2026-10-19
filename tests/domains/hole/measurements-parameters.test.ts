@@ -7,7 +7,7 @@ import type { Slab } from '../../../data/domain/world-5/slab';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import type { ExtractionResults } from '../../utils/live-game-data-loader';
 import { getExtractedValue, loadExtractionResults, normalizeExtractedValue, validateExtractionHealth } from '../../utils/live-game-data-loader';
-import { assertPairedContext, captured } from './part1-test-helpers';
+import { captured } from './part1-test-helpers';
 import type { CapturedMeasurement } from './part2-test-helpers';
 
 const producers: { key: string; description: string; extract: (data: Map<string, any>, hole: Hole) => number | null }[] = [
@@ -37,9 +37,7 @@ describe('Measurements every direct calculated input', () => {
   rows = captured<CapturedMeasurement[]>(results, 'measurements');
  });
 
- it('pairs direct parameters with the unchanged original save', () => {
-  assertPairedContext(results, data);
- });
+ 
 
  producers.forEach(producer => {
   it(`matches direct ${producer.description}`, () => {

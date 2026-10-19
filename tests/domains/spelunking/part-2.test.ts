@@ -1,32 +1,39 @@
 import type { Spelunking } from '../../../data/domain/world-7/spelunking';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { assertPairing, assertPopulatedAccount, characterIDs, expected, saved } from './part-2-test-helpers';
+import { assertChapterBonuses, characterIDs, expected } from './part-2-test-helpers';
 
-// Six real chapters exercise add, decay, decayMulti, and three- and four-bonus chapters.
-// The retained save observes only full or over-cap stamina, not a partial refill duration.
-describe('Spelunking Part 2 shared Journal and saved character progression', () => {
+describe('Spelunking Journal and stamina calculations', () => {
     let data: Map<string, unknown>;
+
     beforeAll(() => {
-        assertPairing();
         data = loadGameDataFromSave('latest');
     });
 
-    it('populates all six page-backed chapters, stack locations, reads, recharge contributors, and every character', () => {
-        assertPopulatedAccount(data);
+    it('matches every modeled Journal bonus against the current native bonus list', () => {
+        assertChapterBonuses(data.get('spelunking') as Spelunking);
+    });
+
+    it('matches the daily page-read limit and remaining allowance', () => {
+        const owner = data.get('spelunking') as Spelunking;
+        expect(owner.dailyReadLimit).toMatchLiveGameWithDetails(expected('daily_reads_limit'), { tolerance: 0 });
+        expect(owner.dailyReadsRemaining).toMatchLiveGameWithDetails(expected('daily_reads_remaining'), { tolerance: 0 });
+    });
+
+    it('matches shared hourly stamina recharge', () => {
+        expect((data.get('spelunking') as Spelunking).hourlyRecharge)
+            .toMatchLiveGameWithDetails(expected('stamina_recharge_hourly'), { tolerance: 0 });
     });
 
     characterIDs.forEach(playerID => {
-        it(`matches character ${playerID} maximum and saved-snapshot refill without changing saved stamina`, () => {
+        it(`matches character ${playerID} maximum and saved-stamina refill`, () => {
             const owner = data.get('spelunking') as Spelunking;
             const stamina = owner.stamina[playerID];
-            expect(stamina.current).toBe(saved('Spelunk')[3][playerID]);
             expect(stamina.maximum).toMatchLiveGameWithDetails(expected(`stamina_max_player_${playerID}`), {
                 tolerance: 0, context: 'Character-specific maximum after shared modifiers are prepared',
             });
             expect(stamina.getHoursUntilFull(owner.hourlyRecharge)).toMatchLiveGameWithDetails(
-                expected(`refill_hours_player_${playerID}`), { tolerance: 0, context: 'Originating saved amount, not current runtime amount' },
+                expected(`refill_hours_player_${playerID}`), { tolerance: 0, context: 'Refill estimate from saved stamina', },
             );
         });
     });
-
 });

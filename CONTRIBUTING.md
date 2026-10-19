@@ -6,6 +6,13 @@ It should be as simple as running `npm install` or `yarn install` (depending on 
 
 Before writing or reviewing changes, read the mandatory [coding standards](CODING_STANDARDS.md).
 
+### TypeScript resource use
+
+`tsconfig.json` excludes auxiliary directory trees from filesystem watching without changing compiler source membership.
+The VS Code workspace disables the separate TypeScript syntax server to reduce duplicate parsing.
+Syntax features can respond more slowly while the semantic server starts or is busy.
+After changing watcher settings, restart the affected language server to release existing watches.
+
 ## AI Assistants
 
 If you're using an AI coding assistant (Cursor, Claude Code, etc.), start with [AGENTS.md](AGENTS.md) for project context, skills, and constraints. Detailed guides live in [`docs/`](docs/) and operational procedures in [`docs/runbooks/`](docs/runbooks/).

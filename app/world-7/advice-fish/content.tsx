@@ -35,7 +35,6 @@ export default function AdviceFishContent() {
                 <Text size="small">
                     Family level: <strong>{commaNotation(bigFish.familyLevel)}</strong>
                 </Text>
-                <Text size="xsmall">Combined class levels of all characters.</Text>
                 <CheckBox
                     checked={showLocked}
                     label="Show locked"
@@ -81,11 +80,13 @@ export default function AdviceFishContent() {
                                 <Text size="xsmall">Lv. {commaNotation(bonus.level)}</Text>
                             </Box>
                             <Text size="xsmall">{effect}</Text>
-                            <TextAndLabel
-                                textSize="xsmall"
-                                text={commaNotation(bonus.getUnlockLevelRequired())}
-                                label="Family level required"
-                            />
+                            {!bonus.unlocked && (
+                                <TextAndLabel
+                                    textSize="xsmall"
+                                    text={commaNotation(bonus.getUnlockLevelRequired())}
+                                    label="Family level required"
+                                />
+                            )}
                             {bonus.unlocked && (
                                 <ComponentAndLabel
                                     label="Next level cost"

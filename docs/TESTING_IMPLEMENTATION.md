@@ -40,14 +40,18 @@ Use a genuine real save and its matching extracted game values. Result-only extr
 
 The normal `yarn test` command continues to use the developer's current save and matching results. Opt-in account testing may use genuine, publicly shared profile uploads selected in `tests/accounts/accounts.json`. The importer changes required save representation only; it does not add resources or simulate progress. Fetched data stays local under `.cache/test-accounts/` by default. Fetching, extraction, and tests are separate commands; tests use stored paired datasets and never fetch profiles.
 
+All Toolbox-to-save conversion belongs in `tests/helpers/public-profile-import.cjs`.
+Its output is an ordinary IE save for both extraction and domain loading.
+Bundle ownership is restored from positive purchase flags before offline startup,
+without granting resources or replaying purchase receipts. Raw downloads remain unchanged.
+
+Extraction expressions must read account-dependent operands from the selected save.
+Do not embed balances or levels from another account.
+For actionable prices, apply the native purchase gate.
+A raw quote can remain nonzero when purchases are blocked.
+
 Use `yarn test:accounts:list --accounts <ids>` to inspect configured accounts, source dates, and observed progression. Fetch explicitly with `yarn test:accounts:fetch --accounts <ids>`, extract with `yarn test:accounts:extract --accounts <ids>`, then run fresh Jest processes with `yarn test:accounts --accounts <ids>`. Pass Jest suite arguments after `--`. See [helper account testing](../tests/helpers/README.md#integration-with-tests) for options and cache behavior. Account-specific calculation failures remain failures. Do not suppress known mismatches or change comparison tolerances.
 
-Account runs explicitly exclude `tests/domains/spelunking/part-3-pipeline.test.ts`
-because its saved-progression and synthetic transition cases depend on the
-developer snapshot, not an extracted game-parity suite. The runner reports this
-reason, applies an anchored Jest ignore pattern, and rejects explicit selection.
-Ordinary `yarn test` continues to run the file unchanged. See
-[account-runner guidance](../tests/helpers/README.md#integration-with-tests).
 Account test processes default to one Jest worker with a `512MB`
 `workerIdleMemoryLimit`. Jest can recycle workers between test files when a
 worker exceeds the limit. Pass `--maxWorkers` or `--workerIdleMemoryLimit` after

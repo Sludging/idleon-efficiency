@@ -1,4 +1,6 @@
 import { Box, CheckBox, Grid, Select, Text } from 'grommet';
+import type { ThemeType } from 'grommet';
+import { normalizeColor } from 'grommet/utils';
 import styled from 'styled-components';
 import IconImage from '../../base/IconImage';
 import RoundedShadowBox from '../../base/RoundedShadowBox';
@@ -7,7 +9,7 @@ import TipDisplay from '../../base/TipDisplay';
 import { Discovery, Spelunking, Tunnel } from '../../../data/domain/world-7/spelunking';
 import type { AmberDenomination } from '../../../data/domain/world-7/spelunking';
 import { Item } from '../../../data/domain/items';
-import { commaNotation } from '../../../data/utility';
+import { commaNotation, notateNumber } from '../../../data/utility';
 
 const TunnelMetrics = styled(Grid)`
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -15,6 +17,38 @@ const TunnelMetrics = styled(Grid)`
     @media (max-width: 600px) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+`;
+const TunnelSummaryStrip = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+    border-top: 1px solid ${({ theme }: { theme: ThemeType }) => normalizeColor('grey-1', theme)};
+    border-bottom: 1px solid ${({ theme }: { theme: ThemeType }) => normalizeColor('grey-1', theme)};
+    padding: 12px 0;
+`;
+
+const TunnelSummaryMetrics = styled.div`
+    display: flex;
+    align-items: stretch;
+    gap: 32px;
+`;
+
+const TunnelSummaryMetric = styled.div`
+    display: flex;
+    min-width: 92px;
+    flex-direction: column;
+    gap: 4px;
+`;
+
+const TunnelSummaryDivider = styled.div`
+    width: 1px;
+    background: ${({ theme }: { theme: ThemeType }) => normalizeColor('grey-1', theme)};
+`;
+const TunnelStatusSelect = styled(Select)`
+    height: 39px;
+    min-height: 39px;
 `;
 
 export type CollectionStatus = 'All' | 'Found' | 'Missing';
@@ -40,31 +74,24 @@ export default function SpelunkingDisplay({
 
     return (
         <Box gap="medium">
-            <Box
-                direction="row"
-                wrap
-                align="center"
-                justify="between"
-                gap="medium"
-                border={{ side: 'top', color: 'grey-1' }}
-                pad={{ top: 'medium' }}
-            >
-                <Box direction="row" wrap gap="large">
-                    <Box gap="xxsmall">
-                        <Text size="xlarge">{ordinarySummary.found} / {ordinarySummary.capacity} found</Text>
+            <TunnelSummaryStrip>
+                <TunnelSummaryMetrics>
+                    <TunnelSummaryMetric>
+                        <Text size="16px" weight={600}>{ordinarySummary.found} / {ordinarySummary.capacity} found</Text>
                         <Text size="xsmall" color="accent-2">Account discoveries</Text>
-                    </Box>
-                    <Box gap="xxsmall">
-                        <Text size="xlarge">{grandSummary.found} / {grandSummary.capacity} found</Text>
+                    </TunnelSummaryMetric>
+                    <TunnelSummaryDivider aria-hidden="true" />
+                    <TunnelSummaryMetric>
+                        <Text size="16px" weight={600}>{grandSummary.found} / {grandSummary.capacity} found</Text>
                         <Text size="xsmall" color="accent-2">Account Grand Discoveries</Text>
-                    </Box>
-                </Box>
+                    </TunnelSummaryMetric>
+                </TunnelSummaryMetrics>
                 <Box direction="row" wrap align="center" gap="medium">
                     <CheckBox label="Show locked" checked={showLocked} onChange={event => onShowLockedChange(event.target.checked)} />
                     <Box direction="row" align="center" gap="small">
                         <Text size="small" color="accent-2">Collection status</Text>
                         <Box width="130px" flex={false}>
-                            <Select
+                            <TunnelStatusSelect
                                 aria-label="Collection status"
                                 options={['All', 'Found', 'Missing']}
                                 value={collectionStatus}
@@ -74,8 +101,7 @@ export default function SpelunkingDisplay({
                         </Box>
                     </Box>
                 </Box>
-            </Box>
-            <Box border={{ side: 'top', color: 'grey-1' }} />
+            </TunnelSummaryStrip>
             <Grid columns={{ count: 'fit', size: 'min(100%, 500px)' }} gap="medium">
                 {spelunking.tunnels.filter(tunnel => showLocked || tunnel.available).map(tunnel => (
                     <TunnelCard key={tunnel.index} tunnel={tunnel} amber={currentAmber} collectionStatus={collectionStatus} />
@@ -100,18 +126,12 @@ function TunnelCard({ tunnel, amber, collectionStatus }: { tunnel: Tunnel; amber
             gap="medium"
             data-spelunking-tunnel={tunnel.index}
             aria-label={`${tunnel.data.name}: ${tunnel.available ? 'Available' : 'Locked'}, ${tunnel.loreCompleted ? 'Lore complete' : 'Lore incomplete'}`}
-            style={{ opacity: !tunnel.available ? 0.78 : tunnel.loreCompleted ? 1 : 0.9 }}
+            style={{ opacity: !tunnel.available ? 0.5 : tunnel.loreCompleted ? 1 : 0.75 }}
         >
             <Box direction="row" gap="medium" align="start">
-                <TipDisplay heading={tunnel.loreBoss.name} body={
-                    <Text size="small" color="dark-1">
-                        Lore boss of {tunnel.data.name}. {tunnel.loreCompleted ? 'Lore complete.' : `Complete this tunnel at depth ${commaNotation(tunnel.data.bossDepth)} to defeat the boss.`}
-                    </Text>
-                }>
-                    <Box width="80px" height="80px" flex={false} align="center" justify="center" round="small" background="dark-2" aria-label={`${tunnel.loreBoss.name}: ${tunnel.loreCompleted ? 'Lore complete' : 'Lore incomplete'}`}>
-                        <IconImage data={bossArt} scale={80 / Math.max(bossArt.width, bossArt.height)} />
-                    </Box>
-                </TipDisplay>
+                <Box width="80px" height="80px" flex={false} align="center" justify="center" round="small" background="dark-2" aria-label={`${tunnel.loreBoss.name}: ${tunnel.loreCompleted ? 'Lore complete' : 'Lore incomplete'}`}>
+                    <IconImage data={bossArt} scale={80 / Math.max(bossArt.width, bossArt.height)} />
+                </Box>
                 <Box gap="xsmall" flex style={{ minWidth: 0 }}>
                     <Box direction="row" wrap justify="between" align="start" gap="small">
                         <Text size="medium" weight={500}>{tunnel.data.name}</Text>
@@ -132,37 +152,25 @@ function TunnelCard({ tunnel, amber, collectionStatus }: { tunnel: Tunnel; amber
             </Box>
             <Box background="grey-1" pad="xsmall" round="small">
                 <TunnelMetrics gap="none">
-                <TipDisplay heading="Best depth" body={
-                    <Text size="small" color="dark-1">
-                        {tunnel.loreCompleted ? 'Lore boss defeated.' : `Defeat ${tunnel.loreBoss.name} at depth ${commaNotation(tunnel.data.bossDepth)} to complete this tunnel's Lore.`}
-                    </Text>
-                }>
-                    <Box gap="xxsmall" pad="small" border={{ side: 'right', color: 'dark-1' }}>
-                        <Text size="xlarge">{commaNotation(tunnel.bestDepth)}</Text>
+                    <Box gap="xxsmall" pad="small" border={{ side: 'right', color: 'dark-1' }} fill justify="between">
+                        <Text size="large">{commaNotation(tunnel.bestDepth)}</Text>
                         <Text size="xsmall">Best depth</Text>
                     </Box>
-                </TipDisplay>
-                <Box gap="xxsmall" pad="small" border={{ side: 'right', color: 'dark-1' }}>
-                    <Box direction="row" gap="xxsmall" align="center" aria-label={`${biggestHaulText} ${amber.name}`}>
-                        <IconImage data={amberArt} scale={24 / Math.max(amberArt.width, amberArt.height)} />
-                        <Text size="xlarge">{biggestHaulText}</Text>
+                    <Box gap="xxsmall" pad="small" border={{ side: 'right', color: 'dark-1' }} fill justify="between">
+                        <Box direction="row" gap="xxsmall" align="center" aria-label={`${biggestHaulText} ${amber.name}`}>
+                            <IconImage data={amberArt} scale={18 / Math.max(amberArt.width, amberArt.height)} />
+                            <Text size="medium">{biggestHaulText}</Text>
+                        </Box>
+                        <Text size="xsmall">Biggest haul</Text>
                     </Box>
-                    <Text size="xsmall">Biggest haul</Text>
-                </Box>
-                <Box gap="xxsmall" pad="small" border={{ side: 'right', color: 'dark-1' }}>
-                    <Text size="xlarge">{ordinarySummary.found} / {ordinarySummary.capacity}</Text>
-                    <Text size="xsmall">Discoveries</Text>
-                </Box>
-                <TipDisplay heading="Grand discoveries" body={
-                    <Text size="small" color="dark-1">
-                        {grandSummary.missing === 0 ? 'All Grand Discoveries found.' : tunnel.grandEligible ? 'Requirements met. Grand Discoveries can be found.' : 'Requirements not met yet for Grand Discoveries.'}
-                    </Text>
-                }>
-                    <Box gap="xxsmall" pad="small">
-                        <Text size="xlarge">{grandSummary.found} / {grandSummary.capacity}</Text>
+                    <Box gap="xxsmall" pad="small" border={{ side: 'right', color: 'dark-1' }} fill justify="between">
+                        <Text size="large">{ordinarySummary.found} / {ordinarySummary.capacity}</Text>
+                        <Text size="xsmall">Discoveries</Text>
+                    </Box>
+                    <Box gap="xxsmall" pad="small" fill justify="between">
+                        <Text size="large">{grandSummary.found} / {grandSummary.capacity}</Text>
                         <Text size="xsmall">Grand discoveries</Text>
                     </Box>
-                </TipDisplay>
                 </TunnelMetrics>
             </Box>
             <Box direction="row" wrap gap="xsmall" align="center">
@@ -177,8 +185,8 @@ function DiscoveryIcon({ discovery }: { discovery: Discovery }) {
     const art = discovery.getImageData();
     const image = (
         <Box
-            width="36px"
-            height="36px"
+            width="28px"
+            height="28px"
             align="center"
             justify="center"
             round="small"
@@ -187,7 +195,7 @@ function DiscoveryIcon({ discovery }: { discovery: Discovery }) {
             data-spelunking-discovery={discovery.index}
             data-discovery-found={discovery.found}
         >
-            <IconImage data={art} scale={Math.min(1, 32 / Math.max(art.width, art.height))} />
+            <IconImage data={art} scale={Math.min(1, 20 / Math.max(art.width, art.height))} />
         </Box>
     );
 

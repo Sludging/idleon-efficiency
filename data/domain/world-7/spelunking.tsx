@@ -674,6 +674,21 @@ export class SpelunkingManic {
     enabled: boolean = false;
     depthByTunnel: number[] = [];
     readonly staminaCostMultiplier: number = 30;
+    private powerBonusValue: number = 0;
+    private grandDiscoveryChanceBonusValue: number = 0;
+    private efficiencyBonusValue: number = 0;
+
+    get powerBonus(): number {
+        return this.powerBonusValue;
+    }
+
+    get grandDiscoveryChanceBonus(): number {
+        return this.grandDiscoveryChanceBonusValue;
+    }
+
+    get efficiencyBonus(): number {
+        return this.efficiencyBonusValue;
+    }
 
     get totalDepth(): number {
         return this.depthByTunnel.reduce((total, depth) => Math.round(total + depth), 0);
@@ -683,6 +698,12 @@ export class SpelunkingManic {
         this.enabled = Number(enabled ?? 0) === 1;
         this.depthByTunnel = depthByTunnel.map(depth => Number(depth));
         this.unlocked = unlocked;
+    }
+
+    prepareUpgradeBonuses(powerBonus: number, grandDiscoveryChanceBonus: number, efficiencyBonus: number): void {
+        this.powerBonusValue = powerBonus;
+        this.grandDiscoveryChanceBonusValue = grandDiscoveryChanceBonus;
+        this.efficiencyBonusValue = efficiencyBonus;
     }
 }
 
@@ -721,6 +742,21 @@ export class SpelunkingTrackometer {
     level: number = 0;
     fill: number = 0;
     unlocked: boolean = false;
+    private staminaExpBonusValue: number = 0;
+    private amberBonusValue: number = 0;
+    private maxStaminaBonusValue: number = 0;
+
+    get staminaExpBonus(): number {
+        return this.staminaExpBonusValue;
+    }
+
+    get amberBonus(): number {
+        return this.amberBonusValue;
+    }
+
+    get maxStaminaBonus(): number {
+        return this.maxStaminaBonusValue;
+    }
 
     get threshold(): number {
         return 1000 * Math.pow(1.5, this.level);
@@ -730,6 +766,12 @@ export class SpelunkingTrackometer {
         this.level = Number(level ?? 0);
         this.fill = Number(fill ?? 0);
         this.unlocked = unlocked;
+    }
+
+    prepareUpgradeBonuses(staminaExpBonus: number, amberBonus: number, maxStaminaBonus: number): void {
+        this.staminaExpBonusValue = staminaExpBonus;
+        this.amberBonusValue = amberBonus;
+        this.maxStaminaBonusValue = maxStaminaBonus;
     }
 }
 
@@ -787,10 +829,6 @@ export class Spelunking extends Domain {
         return hoursUntilAllFull;
     }
 
-    getTrackometerStaminaBonus(): number {
-        // Maxima-Track scales its raw upgrade bonus by the saved Trackometer level.
-        return this.getUpgradeBonus(61) * this.trackometerLevel;
-    }
     ownedAmber: number = 0;
     exaltedStampFragments: number = 0;
     prismaBubblesFound: number = 0;
@@ -1095,6 +1133,16 @@ export const updateSpelunkingPresentation = (data: Map<string, any>): void => {
     for (const upgrade of spelunking.upgrades) {
         upgrade.updateSourceBonus(sourceBonusInputs);
     }
+    spelunking.manic.prepareUpgradeBonuses(
+        spelunking.upgrades.find(upgrade => upgrade.index === 54)!.sourceBonus,
+        spelunking.upgrades.find(upgrade => upgrade.index === 55)!.sourceBonus,
+        spelunking.upgrades.find(upgrade => upgrade.index === 56)!.sourceBonus
+    );
+    spelunking.trackometer.prepareUpgradeBonuses(
+        spelunking.upgrades.find(upgrade => upgrade.index === 59)!.sourceBonus,
+        spelunking.upgrades.find(upgrade => upgrade.index === 60)!.sourceBonus,
+        spelunking.upgrades.find(upgrade => upgrade.index === 61)!.sourceBonus
+    );
     const savedPlayerNames = data.get("playerNames") as string[];
     const firstSavedUsernamePlayer = players.find(player => player.playerName === savedPlayerNames[0]);
     if (!firstSavedUsernamePlayer) {
@@ -1124,7 +1172,7 @@ export const updateSpelunkingPresentation = (data: Map<string, any>): void => {
     const maximumInputs: StaminaMaximumInputs = {
         upgrade4: spelunking.getUpgradeBonus(4),
         upgrade5,
-        trackometerStamina: spelunking.getTrackometerStaminaBonus(),
+        trackometerStamina: spelunking.trackometer.maxStaminaBonus,
         meritStamina: taskBoard.merits.find(merit => merit.index === 50)!.getBonus(),
         companion: getCompanionActiveBonus(companions, 148),
         chapterStamina: spelunking.chapters[2].bonuses[0].getBonus(),
