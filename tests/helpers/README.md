@@ -2,7 +2,13 @@ Tools for extracting game values to validate domain calculations.
 
 ## Game access
 
-Use offline game server by default for snippets, extraction-config testing, and value extraction. It runs original local game assets without connecting to the real game. Follow the [offline tool guide](../../sub-projects/idleon-offline/README.md#startup) to set up and start it.
+Use offline game server by default for snippets, extraction-config testing, and value extraction. It runs original local game assets without connecting to the real game.
+
+Routine development, extraction, and tests use `tests/fixtures/saves/latest.json`, matching `tests/results/`, and `tests/utils/target-player.json`. Reuse the shared default offline server at `http://127.0.0.1:3101` when it is ready; do not start another server for ordinary work.
+
+Public Toolbox account listing, fetching, extraction, and testing are opt-in ONLY when the user explicitly requests multi-account or public-profile validation. DO NOT USE PUBLIC-ACCOUNT WORKFLOWS IN NORMAL OPERATIONS. Do not use public accounts as a routine prerequisite or fallback. A necessary specific-character override for an extraction config remains valid; it does not make that work multi-account testing.
+
+For setup and start instructions, see the [offline tool guide](../../sub-projects/idleon-offline/README.md#startup).
 
 Select a server through `GAME_SERVER_URL`; default is `http://127.0.0.1:3101`. Before evaluating expressions, check `GET /status` on that same URL. Require `source: "offline"` and `cdpConnected`, `injected`, and `gameReady` to be `true`. The live server requires the same readiness fields and reports `source: "live"`; restart older live processes that do not report their source.
 
@@ -85,7 +91,9 @@ before evaluating each config and aborts if the active player does not match.
 
 Configs with a real dependency on a different specific character may set
 `requiredActivePlayerIndex` at the top level. Batch `--player-server` routing
-uses that configured index. Do not add it for ordinary fixture alignment.
+uses that configured index. This supports a necessary specific-character
+extraction, not multi-account testing. Do not add it for ordinary fixture alignment.
+
 
 ## Individual Extraction (Advanced)
 
@@ -183,11 +191,16 @@ diagnostics still run; removing persisted status does not bypass safeguards.
 
 ## Integration with Tests
 
-Ordinary `yarn test` keeps using `tests/fixtures/saves/latest.json`,
-`tests/results/`, and `tests/utils/target-player.json`.
+Routine `yarn test` and extraction use `tests/fixtures/saves/latest.json`,
+matching `tests/results/`, and `tests/utils/target-player.json`. Use the shared
+default offline server when ready; follow [Game access](#game-access). The
+public-account commands below are for multi-account or public-profile
+validation only, and run only when the user explicitly requests that work.
+DO NOT USE THIS IN NORMAL OPERATIONS. Do not start public-account processes
+for ordinary development, extraction, or testing, and do not use them as a
+fallback for a mismatch or unavailable regular-save result.
 
 Opt-in public-account runs use the account runner:
-
 ```bash
 yarn test:accounts:list --accounts suk69,lunaonline
 yarn test:accounts:fetch --accounts suk69,lunaonline

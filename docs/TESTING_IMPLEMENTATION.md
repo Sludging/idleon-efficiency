@@ -38,7 +38,7 @@ For a correctness case, follow the [plan approval step](calculation-correctness/
 
 Use a genuine real save and its matching extracted game values. Result-only extraction, whether offline or live, does not establish pairing with a retained save; offline and live snapshots are not presumed equivalent. A live save refresh precedes config extraction rather than taking an atomic snapshot, so establish that results match the saved state before using them. Tests must not construct synthetic saves, alter inputs to simulate a branch, or calculate expected values from the implementation. This deliberately leaves unobserved permutations uncovered. State which meaningful behavior the paired save exercises, and raise uncovered behavior as a coverage question rather than inventing test data.
 
-The normal `yarn test` command continues to use the developer's current save and matching results. Opt-in account testing may use genuine, publicly shared profile uploads selected in `tests/accounts/accounts.json`. The importer changes required save representation only; it does not add resources or simulate progress. Fetched data stays local under `.cache/test-accounts/` by default. Fetching, extraction, and tests are separate commands; tests use stored paired datasets and never fetch profiles.
+Routine `yarn test` and extraction use `tests/fixtures/saves/latest.json` and its matching results; reuse the shared default offline server when ready. Public-account testing is opt-in only when the user explicitly requests multi-account or public-profile validation. DO NOT USE THIS IN NORMAL OPERATIONS. It is not a routine prerequisite or fallback for regular-save mismatches or missing results. The importer changes required save representation only; it does not add resources or simulate progress. Fetched data stays local under `.cache/test-accounts/` by default. Fetching, extraction, and tests are separate commands; tests use stored paired datasets and never fetch profiles.
 
 All Toolbox-to-save conversion belongs in `tests/helpers/public-profile-import.cjs`.
 Its output is an ordinary IE save for both extraction and domain loading.
@@ -49,6 +49,8 @@ Extraction expressions must read account-dependent operands from the selected sa
 Do not embed balances or levels from another account.
 For actionable prices, apply the native purchase gate.
 A raw quote can remain nonzero when purchases are blocked.
+
+Run this sequence only when the user explicitly requests multi-account or public-profile validation. See [canonical game-access policy](../tests/helpers/README.md#game-access) for the regular-save default and gate.
 
 Use `yarn test:accounts:list --accounts <ids>` to inspect configured accounts, source dates, and observed progression. Fetch explicitly with `yarn test:accounts:fetch --accounts <ids>`, extract with `yarn test:accounts:extract --accounts <ids>`, then run fresh Jest processes with `yarn test:accounts --accounts <ids>`. Pass Jest suite arguments after `--`. See [helper account testing](../tests/helpers/README.md#integration-with-tests) for options and cache behavior. Account-specific calculation failures remain failures. Do not suppress known mismatches or change comparison tolerances.
 

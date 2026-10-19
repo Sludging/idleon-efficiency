@@ -4,7 +4,7 @@ Guidance for AI coding assistants working in this repository.
 
 Before implementing or reviewing code, you MUST read [CODING_STANDARDS.md](CODING_STANDARDS.md). When delegating implementation or review, pass its path and the relevant existing vocabulary-document paths (discovered through [domain docs](docs/agents/domain.md)); do not duplicate their rules in task prompts.
 
-For every game interaction, use the [canonical game-access policy](tests/helpers/README.md#game-access) for offline defaults, readiness and version checks, and justified live access.
+For routine work, use the regular-save workflow and reuse the shared default offline server when ready. Public-account validation is opt-in only on explicit user request; see the [canonical game-access policy](tests/helpers/README.md#game-access).
 
 ## Project Overview
 

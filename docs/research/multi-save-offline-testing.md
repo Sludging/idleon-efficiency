@@ -6,6 +6,8 @@ Research date: 2026-10-18. The investigation below preceded implementation. The 
 
 The current operational instructions are in [tests/helpers/README.md](../../tests/helpers/README.md). Account selection and historical selection evidence live in [tests/accounts/accounts.json](../../tests/accounts/accounts.json).
 
+The commands below document opt-in multi-account work, not the routine test or extraction path. Run them only when the user explicitly requests multi-account or public-profile validation; follow the [canonical game-access policy](../../tests/helpers/README.md#game-access).
+
 ```bash
 yarn test:accounts:list --accounts suk69,lunaonline
 yarn test:accounts:fetch --accounts suk69,lunaonline
