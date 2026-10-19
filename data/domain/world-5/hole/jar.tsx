@@ -1,4 +1,4 @@
-import { lavaLog } from "../../../utility";
+import { commaNotation, lavaLog, notateNumber } from "../../../utility";
 import { initHoleJarBonusRepo } from "../../data/HoleJarBonusRepo";
 import { initHoleJarRepo } from "../../data/HoleJarRepo";
 import { HoleJarBonusModel } from "../../model/holeJarBonusModel";
@@ -37,6 +37,51 @@ export class JarBonus {
 
     constructor(public index: number, public data: HoleJarBonusModel) {}
 
+    getUnit(): "percent" | "multiplier" | null {
+        if (this.data.description.includes("{")) {
+            return "percent";
+        }
+        if (this.data.description.includes("}")) {
+            return "multiplier";
+        }
+        return null;
+    }
+
+    hasReleasedEffect(): boolean {
+        return !/future cavern/i.test(this.data.description);
+    }
+
+    getDescription(): string {
+        return this.getDescriptionForBonus(this.getBonus());
+    }
+
+    getFirstDiscoveryDescription(): string {
+        return this.getDescriptionForBonus(this.getFirstDiscoveryBonus(), true);
+    }
+
+    getFirstDiscoveryBonus(): number {
+        return this.data.bonus * this.legendTalentBonus;
+    }
+
+    private getDescriptionForBonus(bonus: number | null, omitUnavailableSupplemental = false): string {
+        const percent = bonus === null ? "Unavailable" : commaNotation(Math.round(bonus));
+        const multiplier = bonus === null ? "Unavailable"
+            : notateNumber(1 + bonus / 100, "MultiplierInfo").replace(/#/g, "");
+        const description = this.data.description
+            .replace(/\{%/g, `${percent}%`)
+            .replace(/\}x/g, `${multiplier}×`)
+            .replace(/\s*\$/g, " Unavailable")
+            .replace(/_/g, " ")
+            .replace(/(?:\s*@\s*)+/g, "\n")
+            .replace(/[ \t]+/g, " ")
+            .replace(/ *\n */g, "\n")
+            .trim();
+        return omitUnavailableSupplemental
+            ? description.replace(/\nCurrent Rupie Value: Unavailable$/, "")
+            : description;
+    }
+
+
     getBonus(): number | null {
         return this.level === null ? null : this.level * this.data.bonus * this.legendTalentBonus;
     }
@@ -46,6 +91,10 @@ export class JarType {
     unlocked: boolean | null = null;
 
     constructor(public index: number, public data: HoleJarModel) {}
+
+    getDescription(): string {
+        return this.data.description.replace(/\{%/g, "").replace(/_/g, " ").replace(/\s+/g, " ");
+    }
 }
 
 export interface JarProducerAssignment {

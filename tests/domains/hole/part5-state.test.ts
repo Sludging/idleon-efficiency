@@ -2,8 +2,8 @@ import { ExtractionResults, getExtractedValue, loadExtractionResults, validateEx
 import { loadGameDataFromSave, loadTestSave } from '../../utils/cloudsave-loader';
 import { initAllItems } from '../../../data/domain/items';
 import { Hole, updateHole, updateHoleCharacterCapabilities } from '../../../data/domain/world-5/hole/hole';
-import { Cove } from '../../../data/domain/world-5/hole/cove';
-import { Fountain } from '../../../data/domain/world-5/hole/fountain';
+import { Cove, CoveUpgrade } from '../../../data/domain/world-5/hole/cove';
+import { Fountain, FountainUpgrade } from '../../../data/domain/world-5/hole/fountain';
 import { initAccountDataKeys, updateIdleonData } from '../../../data/domain/idleonData';
 import { normalizeCompanionStates } from '../../../data/domain/companions/companionState';
 import { lavaLog } from '../../../data/utility';
@@ -40,6 +40,173 @@ describe('Hole part-five imported state', () => {
         expect(Number.isFinite(hole.getFountainBonus(0, 16))).toBe(true);
         expect(Number.isFinite(getPlayerDamageTotalMultiplier(gameData, player))).toBe(true);
         expect(Number.isFinite(getClassExperienceMultiplier(gameData, player))).toBe(true);
+    });
+    it('resolves source descriptions only when required state is known', () => {
+        const jar = new Jar();
+        const percentBonus = jar.jarBonuses[5];
+        percentBonus.level = 1;
+        expect(percentBonus.getBonus()).toBe(10);
+        expect(percentBonus.getUnit()).toBe("percent");
+        expect(percentBonus.getDescription()).toBe('All skilling caverns require 10% less Resources to get opals!');
+
+        const multiplierBonus = jar.jarBonuses[2];
+        multiplierBonus.level = 1;
+        expect(multiplierBonus.getUnit()).toBe("multiplier");
+        expect(multiplierBonus.getDescription()).toBe('1.20× higher chance to find Opals in Tall Jars.');
+
+        const futureBonus = jar.jarBonuses[31];
+        expect(futureBonus.getUnit()).toBeNull();
+        expect(futureBonus.hasReleasedEffect()).toBe(false);
+        expect(futureBonus.getDescription()).toBe("Boosts a future cavern... futuuure..!");
+
+        const fountainRecord = hole.fountain.upgrades.find(upgrade => upgrade.data.waterIndex === 0 && upgrade.data.index === 1)!;
+        const fountainUpgrade = new FountainUpgrade(fountainRecord.index, fountainRecord.data);
+        fountainUpgrade.level = 1;
+        fountainUpgrade.marbleizationLevel = 0;
+        expect(fountainUpgrade.getBonus()).toBe(10);
+        expect(fountainUpgrade.getDescription(hole.fountain)).toBe('All currencies are worth +10% more.\nCurrencies are ALL money types here at the Fountain, from coins to dollars and more!');
+        fountainUpgrade.marbleizationLevel = null;
+        expect(fountainUpgrade.getDescription(hole.fountain)).toBeNull();
+
+        const coveUpgradeData = hole.cove.upgrades[7];
+        const coveUpgrade = new CoveUpgrade(
+            coveUpgradeData.index,
+            coveUpgradeData.name,
+            coveUpgradeData.label,
+            coveUpgradeData.bonusPerLevel,
+            coveUpgradeData.costBase
+        );
+        coveUpgrade.level = coveUpgradeData.level;
+        expect(coveUpgrade.name).toBe("Active Drops");
+        expect(coveUpgrade.getBonus()).toBe(162);
+        expect(coveUpgrade.getDescription()).toBe('Decrease the cost of all upgrades here by 61.83%');
+        coveUpgrade.level = null;
+        expect(coveUpgrade.getDescription()).toBeNull();
+        const futureUpgrade = hole.cove.upgrades[23];
+        futureUpgrade.level = null;
+        expect(futureUpgrade.name).toBe("IDK Broh");
+        expect(futureUpgrade.getDescription()).toBe('World 7 Skill 3 my man, not yet.');
+        expect(hole.cove.upgrades.map(upgrade => upgrade.name)).toEqual([
+            "Opal Find", "Slop Drop", "Reslime", "Droplier", "Killionaire", "Insta-Ribbon", "Big Hit Multkill", "Active Drops",
+            "Sleepy Drops", "One Big Blue", "Blue Collector", "Researchy", "Droplier+", "Sleepy Drops+", "Cavernicus",
+            "Multikill", "One Big Purp", "Slop Drop+", "Rich Get Rich", "DeEmGe", "Grandioso", "Slop Drop++",
+            "Purp Collector", "IDK Broh"
+        ]);
+    });
+    it('shows source-backed first-discovery benefits without changing owned effects', () => {
+        const jar = new Jar();
+        const percentBonus = jar.jarBonuses[5];
+        percentBonus.level = 0;
+        percentBonus.legendTalentBonus = 1.5;
+
+        expect(percentBonus.getBonus()).toBe(0);
+        expect(percentBonus.getFirstDiscoveryBonus()).toBe(15);
+        expect(percentBonus.getFirstDiscoveryDescription()).toBe('All skilling caverns require 15% less Resources to get opals!');
+        expect(percentBonus.getDescription()).toBe('All skilling caverns require 0% less Resources to get opals!');
+
+        percentBonus.level = null;
+        expect(percentBonus.getBonus()).toBeNull();
+        expect(percentBonus.getDescription()).toBe('All skilling caverns require Unavailable% less Resources to get opals!');
+
+        const futureBonus = jar.jarBonuses[31];
+        expect(futureBonus.getFirstDiscoveryDescription()).toBe('Boosts a future cavern... futuuure..!');
+    });
+    it('resolves Fountain description values from source inputs', () => {
+        const fountain = new Fountain();
+        fountain.upgrades.forEach(upgrade => {
+            upgrade.level = 0;
+            upgrade.marbleizationLevel = 0;
+        });
+        fountain.valueWallets = [0, 0, 0];
+        fountain.currencies[0].luckyCoins = 0;
+        fountain.duckCount = 0;
+        fountain.barTimerProgress = 0;
+        fountain.prepare({
+            arcadeBonus68: 0,
+            bUpgrade94Level1: 1,
+            bUpgrade95Level10: 0,
+            bUpgrade97Level3: 0,
+            coveUpgrade14: 0,
+            cosmoBonusQuantity4: 0,
+            lampBonus99: 0,
+            measurementBonus16: 0,
+            bellBonus6: 0,
+            studyBonus15: 0,
+            ownedCaverns: 0,
+            currencyValueExponent: 0,
+            duckCount: 0,
+        });
+
+        expect(fountain.getUpgrade(0, 2).getDescription(fountain)).toBe(
+            'Increases the value of Bronze Coins.\nAll bronze coins you find have a base value of 1\nYour total Currency multi:\n1x\n(Affects value of all Fountain money)'
+        );
+        expect(fountain.getUpgrade(0, 9).getDescription(fountain)).toBe(
+            'Every time the fountain fills up, it creates a new coin.\nThis will happen in 2hr 0min 0sec\nFrom empty, it takes:\n2hr 0min 0sec to fill'
+        );
+        expect(fountain.getUpgrade(0, 10).getDescription(fountain)).toBe(
+            'Coins can appear in 1 different areas on the ground.\nThis means your current max coin capacity is 3 coins'
+        );
+        expect(fountain.getUpgrade(0, 11).getDescription(fountain)).toBe(
+            'Each area can stack up to 3 coins, this upgrade increases it by +0.\nThis means your current max coin capacity is 3 coins'
+        );
+        expect(fountain.getUpgrade(2, 2).getDescription(fountain)).toBe(
+            'You can now find Moolah Stacks.\nAll moolah stacks you find have a base value of 1, but only get 鉢(Total Currency Multi) which is:\n1x'
+        );
+        for (const index of [3, 4]) {
+            const description = fountain.getUpgrade(2, index).getDescription(fountain);
+            expect(description).not.toBeNull();
+            expect(description).not.toMatch(/[$^#@]/);
+        }
+        expect(fountain.getUpgrade(2, 8).getDescription(fountain)).toBe(
+            "All currencies collected have a 1 in 1,000 of being LUCKY, multiplying the value of that currency type forever!\nEach additional one is 4x rarer"
+        );
+
+        fountain.barTimerProgress = null;
+        expect(fountain.getUpgrade(0, 9).getDescription(fountain)).toBeNull();
+    });
+    it('preserves missing and zero Fountain bar timer inputs', () => {
+        const savedTimerData: (number[] | undefined)[] = Array(34).fill(undefined);
+        savedTimerData[33] = [0];
+        const savedTimer = new Fountain();
+        savedTimer.parse(savedTimerData, []);
+        expect(savedTimer.barTimerProgress).toBe(0);
+
+        const missingTimer = new Fountain();
+        missingTimer.parse(Array(34).fill(undefined), []);
+        expect(missingTimer.barTimerProgress).toBeNull();
+    });
+
+
+    it('shows Jar source descriptions without unresolved chance markers', () => {
+        expect(hole.jar.jarTypes[1].getDescription()).toBe('Has a chance to contain an Opal');
+        expect(hole.jar.jarTypes[2].getDescription()).toBe('Has a chance to contain a new collectible');
+        expect(hole.jar.jarTypes[4].getDescription()).toBe('Has a chance to enchant a collectible doubling its bonus');
+        const bonus = new Jar().jarBonuses[5];
+        bonus.level = 1;
+        expect(bonus.getDescription()).toBe('All skilling caverns require 10% less Resources to get opals!');
+        const rupieBonus = new Jar().jarBonuses[0];
+        rupieBonus.level = 0;
+        expect(rupieBonus.getFirstDiscoveryDescription()).toBe('Rupies found are worth +20% more.');
+        expect(rupieBonus.getFirstDiscoveryDescription()).not.toContain('Current Rupie Value');
+        rupieBonus.level = 1;
+        expect(rupieBonus.getDescription()).toBe('Rupies found are worth +20% more.\nCurrent Rupie Value: Unavailable');
+    });
+    it('assigns a source-verified unit to each released Jar collectible', () => {
+        const jar = new Jar();
+        const percentageIndexes = [0, 1, 4, 5, 6, 10, 12, 13, 15, 19, 21, 22, 23, 24, 29, 30, 33, 35];
+        const multiplierIndexes = [2, 3, 7, 8, 9, 11, 14, 16, 17, 18, 20, 25, 26, 27, 28, 34, 36];
+        const futureIndexes = [31, 32, 37, 38, 39];
+
+        expect(jar.jarBonuses.filter(bonus => bonus.getUnit() === "percent").map(bonus => bonus.index))
+            .toEqual(percentageIndexes);
+        expect(jar.jarBonuses.filter(bonus => bonus.getUnit() === "multiplier").map(bonus => bonus.index))
+            .toEqual(multiplierIndexes);
+        expect(jar.jarBonuses.filter(bonus => !bonus.hasReleasedEffect()).map(bonus => bonus.index))
+            .toEqual(futureIndexes);
+        for (const bonus of jar.jarBonuses) {
+            bonus.level = 1;
+            expect(bonus.getDescription()).not.toMatch(/@|\{%/);
+        }
     });
 
     it('imports saved Jar board entries, type count, and holdings separately', () => {
@@ -218,7 +385,7 @@ describe('Hole part-five imported state', () => {
         });
     });
 
-    it('uses source-scaled camp bonuses in the Cove local-effect branch', () => {
+    it('prepares prospective Cove effects independently from current map and assignment', () => {
         const campBonuses = [
             [100, 25, 'camp_upgrade_100_25'],
             [101, 10, 'camp_upgrade_101_10'],
@@ -231,21 +398,40 @@ describe('Hole part-five imported state', () => {
         });
         expect(hole.cove.upgrades[2].getBonus())
             .toMatchLiveGame(getExtractedValue(fountainCoveResults, 'cove_respawn_upgrade'), 0);
-        // The paired runtime was on map 162; map 216 here selects the local domain branch only.
-        const localEffects = hole.cove.prepare({
-            mapId: 216,
-            cavernId: 17,
+
+        const player = (gameData.get('players') as Player[]).find(player => player.playerID === 3)!;
+        const assignment = hole.resourceCavrens.characterAssignments?.[player.playerID] ?? -1;
+        const inputs = {
             campUpgrade100Bonus: hole.getSchematicBonus(100, 25),
             campUpgrade101Bonus: hole.getSchematicBonus(101, 10),
             campUpgrade103Bonus: hole.getSchematicBonus(103, 10),
             campUpgrade105Bonus: hole.getSchematicBonus(105, 10),
             gameLog: lavaLog,
-        });
-        const campRespawnBonus = getExtractedValue(fountainCoveResults, 'camp_upgrade_100_25') as number;
-        const expectedRespawnMultiplier = 1 / (1 + (hole.cove.upgrades[2].getBonus()! + campRespawnBonus) / 100);
-        expect(localEffects.respawnTimeMultiplier).toBe(expectedRespawnMultiplier);
-        expect(localEffects.pickupRandomDoubleChance)
-            .toMatchLiveGame(getExtractedValue(fountainCoveResults, 'cove_pickup_double_chance'), 0);
+        };
+        const insideCove = hole.cove.prepare({ ...inputs, mapId: 216, cavernId: 17 });
+        const outsideCove = hole.cove.prepare({ ...inputs, mapId: player.currentMapId, cavernId: assignment });
+        const { inCoveContext: _insideContext, ...insideEffects } = insideCove;
+        const { inCoveContext: _outsideContext, ...outsideEffects } = outsideCove;
+        const importedEffects = hole.cove.localEffectsByPlayerId.get(player.playerID)!;
+        const { inCoveContext: _importedContext, ...importedCapability } = importedEffects;
+
+        expect(importedEffects.inCoveContext).toBe(false);
+        expect(insideEffects).toEqual(importedCapability);
+        expect(outsideEffects).toEqual(importedCapability);
+
+        expect(insideCove.inCoveContext).toBe(true);
+        expect(outsideCove.inCoveContext).toBe(false);
+        expect(outsideEffects).toEqual(insideEffects);
+        expect(outsideCove.dropRateMultiplier).toBeGreaterThan(1);
+        expect(outsideCove.afkGainMultiplier).toBeGreaterThan(1);
+        expect(outsideCove.multikillPerDamageTier).toBeGreaterThan(0);
+        expect(outsideCove.baseMultikill).toBeGreaterThan(0);
+        expect(outsideCove.respawnTimeMultiplier).toBeLessThan(1);
+        expect(outsideCove.bluePickupTargetId).not.toBeNull();
+        expect(outsideCove.bluePickupAmount).toBeGreaterThan(0);
+        expect(outsideCove.purplePickupTargetId).not.toBeNull();
+        expect(outsideCove.purplePickupAmount).toBeGreaterThan(0);
+        expect(outsideCove.pickupRandomDoubleChance).toBeGreaterThan(0);
     });
 
     it('repeats normal imports without mutating the saved Fountain and Jar inputs', () => {

@@ -189,6 +189,7 @@ export default function HoleContent() {
     });
     const visibleStudies = studies.filter(view => (!showUnlocked || view.study.access === true) && view.searchable.includes(search.toLowerCase()));
     const part4Cavern = cavern === 0 || cavern === 4 || cavern === 5 || cavern === 6;
+    const detailedCavern = part4Cavern || cavern === 10 || cavern === 15 || cavern === 17;
     const resourceCavernPosition = resourceCavernRailIndices.indexOf(cavern);
     const selectedResourceCavern = resourceCavernPosition < 0
         ? null
@@ -310,12 +311,9 @@ export default function HoleContent() {
             {tab === "Caverns" && <ShadowBox flex={false} data-testid="caverns-panel"><Grid rows="1" columns={["25%", "75%"]}>
                 <Box pad="medium" height="100%" data-testid="cavern-rail">{cavernArt.map((image, index) => <Box direction="row" align="center" key={image.name} data-testid={`cavern-nav-${index}`}><CavernImage index={index} width={32} height={28} /><Box flex><LeftNavButton text={image.name} isActive={cavern === index} clickHandler={() => preserveScroll(() => setCavern(index))} /></Box></Box>)}</Box>
                 <Box fill background="dark-1" pad="medium" gap="medium" style={{ minWidth: 0 }} data-testid="selected-cavern">
-                    <Box direction="row" gap="small" align="center"><CavernImage index={cavern} width={96} height={80} />{!part4Cavern && <Heading level="3" size="small" margin="none">{cavernArt[cavern].name}</Heading>}</Box>
-                    {part4Cavern ? <Part4CavernDetails hole={hole} cavern={cavern} totalMoney={account.totalMoney} onOpenStudies={onOpenStudies} /> : selectedResourceCavern === null ? <>
-                        <CavernMetricStrip metrics={cavern === 17 ? [
-                            ...cavernOpalMetrics(hole, cavern),
-                            { label: "Saved upgrades today", value: exact(hole.studies[cavern].dailyCoveUpgradesPurchased, "Saved Cove purchases today are missing.") },
-                        ] : cavernOpalMetrics(hole, cavern)} />
+                    <Box direction="row" gap="small" align="center"><CavernImage index={cavern} width={96} height={80} />{!detailedCavern && <Heading level="3" size="small" margin="none">{cavernArt[cavern].name}</Heading>}</Box>
+                    {detailedCavern ? <Part4CavernDetails hole={hole} cavern={cavern} totalMoney={account.totalMoney} onOpenStudies={onOpenStudies} characters={characters} /> : selectedResourceCavern === null ? <>
+                        <CavernMetricStrip metrics={cavernOpalMetrics(hole, cavern)} />
                         <Text size="small">Other cavern tools are not supported on this website yet.</Text>
                         <CavernStudySummary study={hole.studies[cavern]} onOpenStudies={onOpenStudies} />
                     </> : <>

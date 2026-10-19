@@ -1,6 +1,6 @@
 # The Hole: approved delivery parts
 
-**Status:** APPROVED PRODUCT/DELIVERY SCOPE / PUBLISHED / PARTS 1–4 COMPLETE — Original approval recorded on 2026-10-12. Parts 1–3 were accepted on 2026-10-14 through 2026-10-16; part 4 [#444](https://github.com/Sludging/idleon-efficiency/issues/444) was directly human-accepted on 2026-10-19. Parent [#440](https://github.com/Sludging/idleon-efficiency/issues/440) remains open. Parts 5–7 remain unselected. Acceptance, execution evidence, and limits remain in the [current handoff](hole-research-brief.md#current-handoff).
+**Status:** APPROVED PRODUCT/DELIVERY SCOPE / PUBLISHED / PARTS 1–5 COMPLETE — Original approval recorded on 2026-10-12. Parts 1–3 were accepted on 2026-10-14 through 2026-10-16; part 4 [#444](https://github.com/Sludging/idleon-efficiency/issues/444) was directly human-accepted on 2026-10-19; part 5 [#445](https://github.com/Sludging/idleon-efficiency/issues/445) was accepted under delegated supervisor authority and locally committed on 2026-10-19. Parent [#440](https://github.com/Sludging/idleon-efficiency/issues/440) remains open. Parts 6–7 remain unselected. Acceptance, execution evidence, and limits remain in the [current handoff](hole-research-brief.md#current-handoff).
 
 **Scope sources:** [Approved research brief](hole-research-brief.md) and [approved product specification](hole-spec-draft.md).
 
@@ -140,11 +140,12 @@ Every part follows these boundaries:
 
 ### Acceptance outcomes
 
-- [ ] Players can inspect Jar board quality, producer/access settings, current production, all ten types and 12 wallets, next costs/gates, and pending gilded bonus without treating production work as spendable stock or promising break-order rewards.
-- [ ] Players can inspect all 40 collectibles with discovery/enchantment levels, owned effective benefits, and preferred-target meaning; repeated enchantments and probabilistic preference remain distinct from binary flags or guaranteed outcomes.
-- [ ] Players can inspect Fountain wallets separately from pending stacks/royal state and snapshot value, desire/ignore settings, bar progress, occupancy/overflow, and effective capacity capped at 16 positions by 50 height, regardless of purchased capacity levels.
-- [ ] Players can inspect all 60 Fountain slots across three released pages, their requirements/costs/effects, and distinct marble amount, base levels, marbleization levels/eligibility, luck, ducks, and Opals without claiming a red page, tenth generated currency, or guaranteed random reward.
-- [ ] Players can inspect all 12 Cove shapes and 24 upgrade slots, saved boosted targets, costs/shortfalls, earned rewards, and verified local versus global benefits; the first-purchase discount counter is not a purchase cap, and future/unknown effects stay explicit.
+- [x] Players can inspect Jar board quality, producer/access settings, current production, all ten types and 12 wallets, next costs/gates, and pending gilded bonus without treating production work as spendable stock or promising break-order rewards.
+- [x] Players can inspect all 40 collectibles with discovery/enchantment levels, owned effective benefits, and preferred-target meaning; repeated enchantments and probabilistic preference remain distinct from binary flags or guaranteed outcomes.
+- [x] Players can inspect Fountain wallets separately from pending stacks/royal state and snapshot value, desire/ignore settings, bar progress, occupancy/overflow, and effective capacity capped at 16 positions by 50 height, regardless of purchased capacity levels.
+- [x] Players can inspect all 60 Fountain slots across three released pages, their requirements/costs/effects, and distinct marble amount, base levels, marbleization levels/eligibility, luck, ducks, and Opals without claiming a red page, tenth generated currency, or guaranteed random reward.
+- [x] Players can inspect all 12 Cove shapes and 24 upgrade slots, saved boosted targets, costs/shortfalls, earned rewards, and verified local versus global benefits; the first-purchase discount counter is not a purchase cap, and future/unknown effects stay explicit.
+**Completion:** Part 5 was accepted under delegated supervisor authority on 2026-10-19 after final independent UI review found no findings. It is locally committed with its handoff receipt. This is not new direct-human acceptance. The [current handoff](hole-research-brief.md#current-handoff) records tested behavior, proof, and limits. Issue #445 remains open; no issue status changed. Parts 6–7 remain unselected.
 
 **Data note:** Verify Jar board/wallet/enchantment semantics, Fountain wallet-versus-stack valuation and modifier/cap inputs, marble eligibility and later Opal-currency reachability, and Cove local-stat/collector/discount semantics within this part. No elapsed production bridge or roll simulation is required; consumed shared inputs belong to this part's verification.
 
@@ -205,4 +206,4 @@ The original product/delivery approval changed scope documents only. It ran no b
 
 The human approved the [product specification](hole-spec-draft.md) and these seven delivery parts on 2026-10-12, and authorized publication. That approval settled product and delivery scope only. At publication, all seven parts were unselected and stopped; no ready-for-agent label or execution authorization followed from publication.
 
-The human later selected the three-tab IA on 2026-10-12 and separately authorized parts 1–4 through completion. Parts 1–3 were accepted on 2026-10-14 through 2026-10-16; part 4 was directly accepted on 2026-10-19. The [handoff](hole-research-brief.md#current-handoff) retains approvals, results, and check limits. Parts 5–7 remain open and unselected; no other part is authorized. The rejected historical rail preview remains historical, not selected-direction proof.
+The human later selected the three-tab IA on 2026-10-12 and separately authorized parts 1–4 through completion. Parts 1–3 were accepted on 2026-10-14 through 2026-10-16; part 4 was directly accepted on 2026-10-19; part 5 was accepted under delegated supervisor authority on 2026-10-19. The [handoff](hole-research-brief.md#current-handoff) retains approvals, results, and check limits. Parts 6–7 remain open and unselected; no other part is authorized. The rejected historical rail preview remains historical, not selected-direction proof.

@@ -1,6 +1,7 @@
-import { initRandoList2Repo, RandoListBase } from "../../data/RandoList2Repo";
+import { commaNotation, notateNumber } from "../../../utility";
 import { initSpecificItemRepo } from "../../data/SpecificItemRepo";
 import { RandoListModel } from "../../model/randoListModel";
+import { initRandoList2Repo, RandoListBase } from "../../data/RandoList2Repo";
 import { BaseItemModel } from "../../model/baseItemModel";
 
 export type CoveShapeColor = "blue" | "purple";
@@ -22,10 +23,33 @@ export class CoveUpgrade {
 
     constructor(
         public index: number,
+        public name: string,
         public label: string,
         public bonusPerLevel: number,
         public costBase: number
     ) { }
+
+    getDescription(): string | null {
+        if (/[@^#鉢]/.test(this.label)) {
+            return null;
+        }
+
+        const bonus = this.getBonus();
+        if (/[{}$]/.test(this.label) && bonus === null) {
+            return null;
+        }
+        if (bonus === null) {
+            return this.label.replace(/_/g, " ").trim();
+        }
+
+        const reduction = Math.floor(10000 * (1 - 1 / (1 + bonus / 100))) / 100;
+        return this.label
+            .replace(/\{/g, commaNotation(bonus))
+            .replace(/\}/g, notateNumber(1 + bonus / 100, "MultiplierInfo").replace(/#/g, ""))
+            .replace(/\$/g, `${reduction}`)
+            .replace(/_/g, " ")
+            .trim();
+    }
 
     getBonus(): number | null {
         return this.level === null ? null : this.level * this.bonusPerLevel;
@@ -62,7 +86,7 @@ export interface CoveLocalInputs {
 }
 
 export interface CoveLocalEffects {
-    appliesInCove: boolean;
+    inCoveContext: boolean;
     dropRateMultiplier: number | null;
     afkGainMultiplier: number | null;
     multikillPerDamageTier: number | null;
@@ -111,12 +135,14 @@ const getCoveShapes = (): CoveShape[] => {
 
 const getCoveUpgrades = (): CoveUpgrade[] => {
     const records = initRandoList2Repo();
+    const names = getRandoRecord(records, 11).elements;
     const labels = getRandoRecord(records, 12).elements;
     const bonusPerLevels = getRandoRecord(records, 13).elements;
     const costBases = getRandoRecord(records, 14).elements;
 
     return Array.from({ length: coveUpgradeCount }, (_, index) => new CoveUpgrade(
         index,
+        names[index].replace(/_/g, " "),
         labels[index],
         Number(bonusPerLevels[index]),
         Number(costBases[index])
@@ -223,7 +249,7 @@ export class Cove {
     }
 
     prepare(inputs: CoveLocalInputs): CoveLocalEffects {
-        const appliesInCove = inputs.mapId === 216 && inputs.cavernId === 17;
+        const inCoveContext = inputs.mapId === 216 && inputs.cavernId === 17;
         const blueDigits = this.getBlueShapeDigits(inputs.gameLog);
         const purpleDigits = this.getPurpleShapeDigits(inputs.gameLog);
         const dropBonus1 = this.upgrades[1].getBonus();
@@ -263,8 +289,8 @@ export class Cove {
             this.purpleShapeTargetId !== null && purpleTargetBalance! >= 0.1;
 
         return {
-            appliesInCove,
-            dropRateMultiplier: !appliesInCove ? 1 : dropRateAvailable
+            inCoveContext,
+            dropRateMultiplier: dropRateAvailable
                 ? (1 + (dropBonus1! + dropBonus17! + dropBonus21!) / 100)
                     * (1 + dropBonus3! / 100)
                     * (1 + dropBonus12! / 100)
@@ -273,30 +299,22 @@ export class Cove {
                     * (1 + killBonus! * Math.ceil(inputs.gameLog(killCount!)) / 100)
                     * (1 + normalDropBonus! * Math.ceil(inputs.gameLog(normalDropRate!)) / 100)
                 : null,
-            afkGainMultiplier: !appliesInCove ? 0
-                : afkBonus8 === null || afkBonus13 === null ? null : (10 + afkBonus8 + afkBonus13) / 100,
-            multikillPerDamageTier: !appliesInCove ? 0
-                : multikillBonus === null ? null : multikillBonus / 100,
-            baseMultikill: !appliesInCove ? 0
-                : baseMultikillBonus === null ? null : baseMultikillBonus / 100,
-            respawnTimeMultiplier: !appliesInCove ? 1
-                : respawnBonus === null || inputs.campUpgrade100Bonus === null ? null
-                    : 1 / (1 + (respawnBonus + inputs.campUpgrade100Bonus) / 100),
-            bluePickupTargetId: appliesInCove && blueTargetUnlocked ? this.blueShapeTargetId : null,
-            bluePickupTargetKnown: !appliesInCove || blueTargetKnown,
-            bluePickupAmount: !appliesInCove ? 0 : !blueTargetKnown ? null
-                : blueTargetUnlocked ? blueTargetBonus : 0,
-            purplePickupTargetId: appliesInCove && purpleTargetUnlocked ? this.purpleShapeTargetId : null,
-            purplePickupTargetKnown: !appliesInCove || purpleTargetKnown,
-            purplePickupAmount: !appliesInCove ? 0 : !purpleTargetKnown ? null
-                : purpleTargetUnlocked ? purpleTargetBonus : 0,
-            pickupRandomDoubleChance: appliesInCove
-                ? inputs.campUpgrade101Bonus === null || inputs.campUpgrade103Bonus === null ||
-                    inputs.campUpgrade105Bonus === null ? null : Math.min(
-                    (inputs.campUpgrade101Bonus + inputs.campUpgrade103Bonus + inputs.campUpgrade105Bonus) / 100,
-                    3
-                )
-                : 0
+            afkGainMultiplier: afkBonus8 === null || afkBonus13 === null ? null : (10 + afkBonus8 + afkBonus13) / 100,
+            multikillPerDamageTier: multikillBonus === null ? null : multikillBonus / 100,
+            baseMultikill: baseMultikillBonus === null ? null : baseMultikillBonus / 100,
+            respawnTimeMultiplier: respawnBonus === null || inputs.campUpgrade100Bonus === null ? null
+                : 1 / (1 + (respawnBonus + inputs.campUpgrade100Bonus) / 100),
+            bluePickupTargetId: blueTargetUnlocked ? this.blueShapeTargetId : null,
+            bluePickupTargetKnown: blueTargetKnown,
+            bluePickupAmount: !blueTargetKnown ? null : blueTargetUnlocked ? blueTargetBonus : 0,
+            purplePickupTargetId: purpleTargetUnlocked ? this.purpleShapeTargetId : null,
+            purplePickupTargetKnown: purpleTargetKnown,
+            purplePickupAmount: !purpleTargetKnown ? null : purpleTargetUnlocked ? purpleTargetBonus : 0,
+            pickupRandomDoubleChance: inputs.campUpgrade101Bonus === null || inputs.campUpgrade103Bonus === null ||
+                inputs.campUpgrade105Bonus === null ? null : Math.min(
+                (inputs.campUpgrade101Bonus + inputs.campUpgrade103Bonus + inputs.campUpgrade105Bonus) / 100,
+                3
+            )
         };
     }
 

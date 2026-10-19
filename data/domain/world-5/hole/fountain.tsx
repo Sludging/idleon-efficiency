@@ -1,4 +1,4 @@
-import { lavaLog, number2letter } from "../../../utility";
+import { commaNotation, lavaLog, notateNumber, number2letter } from "../../../utility";
 import { initFountainCurrencyRepo } from "../../data/FountainCurrencyRepo";
 import { initFountainUpgradeRepo, FountainUpgradeBase } from "../../data/FountainUpgradeRepo";
 import { FountainCurrencyModel } from "../../model/fountainCurrencyModel";
@@ -10,6 +10,16 @@ const currencyBonusIndexes = [
     [[1, 2], [0, 7]], [[1, 3], [1, 5]], [[1, 4], [1, 6]],
     [[2, 2], [1, 7]], [[2, 3], [2, 5]], [[2, 4], [2, 6]],
 ] as const;
+
+function formatTimerDisplay(seconds: number): string {
+    if (!(seconds >= 0)) {
+        return "0hr_0min_0sec";
+    }
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor(seconds / 60) - 60 * hours;
+    const remainingSeconds = Math.round(seconds) - 60 * Math.floor(seconds / 60);
+    return `${hours}hr_${minutes}min_${remainingSeconds}sec`;
+}
 
 
 
@@ -71,6 +81,150 @@ export class FountainUpgrade {
         return this.marbleizationLevel === 0 ? 1 : 1.5 + 0.5 * this.marbleizationLevel;
     }
 
+    getDescription(fountain: Fountain): string | null {
+        let description = this.data.description;
+        const bonus = this.getBonus();
+        if (/[{}]/.test(description) && bonus === null) {
+            return null;
+        }
+        if (bonus !== null) {
+            description = description
+                .replace(/\{/g, commaNotation(bonus))
+                .replace(/\}/g, notateNumber(1 + bonus / 100, "MultiplierInfo").replace(/#/g, ""));
+        }
+
+        const currencyId = this.data.index - 2 + this.data.waterIndex * 3;
+        const replaceValue = (token: "$" | "^" | "#", value: number | null, format: (value: number) => string): boolean => {
+            if (value === null || !description.includes(token)) {
+                return false;
+            }
+            description = description.replace(token, format(value));
+            return true;
+        };
+        const replaceCurrencyBaseValue = (token: "$" | "^" | "#"): boolean => replaceValue(
+            token,
+            fountain.getCurrencyBaseValue(currencyId),
+            value => value < 1_000_000 ? commaNotation(value) : notateNumber(value, "Big")
+        );
+        const replaceBarTimer = (token: "$" | "^" | "#", seconds: number | null): boolean => replaceValue(
+            token,
+            seconds,
+            formatTimerDisplay
+        );
+
+        if (description.includes("$") || description.includes("^") || description.includes("#")) {
+            if (this.data.waterIndex === 0) {
+                if ([2, 3, 4].includes(this.data.index) && !replaceCurrencyBaseValue("$")) {
+                    return null;
+                }
+                if (this.data.index === 2 && !replaceValue("^", fountain.getAllCurrencyMultiplier(), value =>
+                    value > 1_000 ? `${notateNumber(value, "Big")}x` : `${Math.round(value * 100) / 100}x`)) {
+                    return null;
+                }
+                if (this.data.index === 8 && !replaceValue("$", fountain.getKeepMultiplier(), value =>
+                    String(Math.round(100 * value) / 100))) {
+                    return null;
+                }
+                if (this.data.index === 9) {
+                    const speed = fountain.getBarSpeed(0);
+                    const activeSpeed = fountain.getActiveBarSpeedMultiplier();
+                    if (speed === null || activeSpeed === null ||
+                        !replaceBarTimer("#", Math.max(0, fountain.getBarRequirement(0)) / speed)) {
+                        return null;
+                    }
+                    const remaining = fountain.barTimerProgress;
+                    if (remaining === null ||
+                        !replaceBarTimer("$", Math.max(0, fountain.getBarRequirement(0) - remaining) /
+                            (speed * Math.max(1, activeSpeed)))) {
+                        return null;
+                    }
+                }
+                if (this.data.index === 10 && !replaceValue("$", fountain.getCapacity(), value => String(Math.round(value)))) {
+                    return null;
+                }
+                if (this.data.index === 11 && !replaceValue("$", fountain.getMaximumStackSize(), value => String(Math.round(value)))) {
+                    return null;
+                }
+                if ([10, 11].includes(this.data.index) &&
+                    !replaceValue("#", fountain.getMaximumCoins(), value => String(Math.round(value)))) {
+                    return null;
+                }
+                if (this.data.index === 12) {
+                    const activeSpeed = fountain.getActiveBarSpeedMultiplier();
+                    if (activeSpeed === null || !replaceValue("$", activeSpeed, value => String(Math.round(100 * value) / 100))) {
+                        return null;
+                    }
+                    if (activeSpeed > 1) {
+                        const speed = fountain.getBarSpeed(0);
+                        if (speed === null) {
+                            return null;
+                        }
+                        description += `_@_While_you're_active_here,_@_the_fountain_fills_every_@_` +
+                            formatTimerDisplay(fountain.getBarRequirement(0) / (speed * Math.max(1, activeSpeed)));
+                    }
+                }
+                if (this.data.index === 19 && !replaceValue("$", fountain.getWalletValueMultiplier(0), value =>
+                    String(Math.round(100 * value) / 100))) {
+                    return null;
+                }
+            } else if (this.data.waterIndex === 1) {
+                if ([2, 3, 4].includes(this.data.index) && !replaceCurrencyBaseValue("$")) {
+                    return null;
+                }
+                if (this.data.index === 8 && !replaceValue("$", fountain.getRoyalChance(), value =>
+                    commaNotation(1 / value))) {
+                    return null;
+                }
+                if (this.data.index === 9 && !replaceValue("$", fountain.getRoyalMultiplier(), value =>
+                    String(Math.round(100 * value) / 100))) {
+                    return null;
+                }
+                if (this.data.index === 10 && !replaceValue("$", fountain.getMarbleYield(), commaNotation)) {
+                    return null;
+                }
+                if (this.data.index === 19 && !replaceValue("$", fountain.getWalletValueMultiplier(1), value =>
+                    String(Math.round(100 * value) / 100))) {
+                    return null;
+                }
+            } else if (this.data.waterIndex === 2) {
+                if ([2, 3, 4].includes(this.data.index) && !replaceCurrencyBaseValue("$")) {
+                    return null;
+                }
+                if ([2, 3, 4].includes(this.data.index) && !replaceValue("^", fountain.getAllCurrencyMultiplier(), value =>
+                    `${notateNumber(Math.pow(value, 0.5), "Big")}x`)) {
+                    return null;
+                }
+                if (this.data.index === 8) {
+                    const luckyCoinCount = fountain.currencies[0].luckyCoins;
+                    const luckyChance = fountain.getLuckyCoinChance(0);
+                    if (luckyCoinCount === null || luckyChance === null ||
+                        !replaceValue("$", luckyChance, value =>
+                            commaNotation(1 / (Math.max(0.001, value) / Math.pow(0.25, luckyCoinCount))))) {
+                        return null;
+                    }
+                }
+                if (this.data.index === 9 && !replaceValue("$", fountain.getLuckyCoinValuePer(), commaNotation)) {
+                    return null;
+                }
+                if (this.data.index === 11 && !replaceValue("$", fountain.getDuckMultiplier(), value =>
+                    value < 1_000 ? notateNumber(value, "MultiplierInfo").replace(/#/g, "") : commaNotation(value))) {
+                    return null;
+                }
+                if (this.data.index === 12 && !replaceValue("$", fountain.getDuckChance(), value =>
+                    commaNotation(1 / value))) {
+                    return null;
+                }
+            }
+        }
+        return description
+            .replace(/_/g, " ")
+            .replace(/(?:\s*@\s*)+/g, "\n")
+            .replace(/[ \t]+/g, " ")
+            .replace(/ *\n */g, "\n")
+            .replace(/\n{2,}/g, "\n")
+            .trim();
+    }
+
     getBonus(level = this.level): number | null {
         const marbleBonus = this.getMarbleBonus();
         return level === null || marbleBonus === null
@@ -127,6 +281,7 @@ export class Fountain {
     desireCurrencyId: number | null = null;
     excludedGenerationCurrencyIds: number[] | null = null;
     barProgress: (number | null)[] = [null, null, null];
+    barTimerProgress: number | null = null;
     opalProgress: number | null = null;
     marbleCount: number | null = null;
     duckCount: number | null = null;
@@ -178,6 +333,8 @@ export class Fountain {
             const progress = holeData[28]?.[index];
             return progress == null ? null : Number(progress);
         });
+        const barTimerProgress = holeData[33]?.[0];
+        this.barTimerProgress = barTimerProgress == null ? null : Number(barTimerProgress);
         const opalProgress = holeData[7]?.[15];
         this.opalProgress = opalProgress == null ? null : Number(opalProgress);
         const marbleCount = holeData[11]?.[81];
@@ -314,10 +471,46 @@ export class Fountain {
         return capacity === null || maximumStackSize === null ? null : Math.round(capacity * maximumStackSize);
     }
 
-    getCurrencyValue(currencyId: number): number | null {
-        const modifiers = this.requireModifiers();
+    getWalletValueMultiplier(waterIndex: number): number | null {
+        const wallet = this.valueWallets[waterIndex];
+        const bonus = this.getBonus(waterIndex, 19);
+        return wallet === null || bonus === null
+            ? null : 1 + lavaLog(wallet) * bonus / 100;
+    }
+
+    getRoyalMultiplier(): number | null {
+        const bonus = this.getBonus(1, 9);
+        return bonus === null ? null : 5 + bonus / 100;
+    }
+
+    getLuckyCoinValuePer(): number | null {
+        const bonus = this.getBonus(2, 9);
+        return bonus === null ? null : 25 + bonus;
+    }
+
+    getDuckMultiplier(): number | null {
+        const duckCount = this.duckCount;
+        const bonus = this.getBonus(2, 11);
+        return duckCount === null || bonus === null
+            ? null : Math.pow(1 + bonus / 100, duckCount);
+    }
+
+    getCurrencyBaseValue(currencyId: number): number | null {
         const currencyPage = currencyPages[currencyId];
         const baseBonuses = currencyBonusIndexes[currencyId];
+        const wallet = this.valueWallets[currencyPage];
+        const valueBonus = this.getBonus(baseBonuses[0][0], baseBonuses[0][1]);
+        const modifierBonus = this.getBonus(baseBonuses[1][0], baseBonuses[1][1]);
+        const walletBonus = this.getBonus(currencyPage, 19);
+        if (wallet === null || valueBonus === null || modifierBonus === null || walletBonus === null) {
+            return null;
+        }
+        return 1 + valueBonus * (1 + modifierBonus / 100) *
+            (1 + lavaLog(wallet) * walletBonus / 100);
+    }
+
+    getCurrencyValue(currencyId: number): number | null {
+        const currencyPage = currencyPages[currencyId];
         const luckyCoins = this.currencies[currencyId].luckyCoins;
         if (this.desireCurrencyId === null || this.duckCount === null || luckyCoins === null ||
             this.valueWallets[currencyPage] === null) {
@@ -328,11 +521,9 @@ export class Fountain {
         const desireBonus = this.getBonus(1, 11);
         const luckyBonus = this.getBonus(2, 9);
         const duckBonus = this.getBonus(2, 11);
-        const valueBonus = this.getBonus(baseBonuses[0][0], baseBonuses[0][1]);
-        const modifierBonus = this.getBonus(baseBonuses[1][0], baseBonuses[1][1]);
-        const walletBonus = this.getBonus(currencyPage, 19);
-        if (allMultiplier === null || desireBonus === null || luckyBonus === null || duckBonus === null ||
-            valueBonus === null || modifierBonus === null || walletBonus === null) {
+        const baseValue = this.getCurrencyBaseValue(currencyId);
+        if (allMultiplier === null || desireBonus === null || luckyBonus === null ||
+            duckBonus === null || baseValue === null) {
             return null;
         }
 
@@ -340,8 +531,6 @@ export class Fountain {
             ? 1 + desireBonus / 100 : 1;
         const luckyMultiplier = 1 + luckyCoins * (25 + luckyBonus) / 100;
         const duckMultiplier = Math.pow(1 + duckBonus / 100, this.duckCount);
-        const baseValue = 1 + valueBonus * (1 + modifierBonus / 100) *
-            (1 + lavaLog(this.valueWallets[currencyPage]!) * walletBonus / 100);
         const baseAndAll = currencyId >= 6
             ? Math.sqrt(desireMultiplier * baseValue * allMultiplier)
             : desireMultiplier * baseValue * allMultiplier;
