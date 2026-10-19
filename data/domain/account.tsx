@@ -122,6 +122,7 @@ export class Account extends Domain {
     coloHighscores: number[] = [];
     minigameHighscores: number[] = [];
     library: Library = new Library();
+    obolFragments: number = 0;
     miniBosses: Miniboss[] = [];
     totalMoney: number = 0;
     talentsMaxLevels: number[] = [];
@@ -180,6 +181,7 @@ export class Account extends Domain {
 
     getRawKeys(): RawData[] {
         return [
+            { key: "CYObolFragments", perPlayer: false, default: 0 },
             { key: "CYKeysAll", perPlayer: false, default: [] },
             { key: "CYColosseumTickets", perPlayer: false, default: 0 },
             { key: "FamValColosseumHighscores", perPlayer: false, default: [] },
@@ -214,10 +216,12 @@ export class Account extends Domain {
         const keyData = data.get("CYKeysAll") as number[];
         const colosseumHighscores = data.get("FamValColosseumHighscores") as number[];
         const minigamesHighscores = data.get("FamValMinigameHiscores") as number[];
+        const obolFragments = data.get("CYObolFragments") as number;
         const talentPointsOwned = data.get("CYTalentPoints") as number[];
         const charCount = data.get("charCount") as number;
 
         account.plunderousMobKills = Number(optionList?.[139] ?? 0);
+        account.obolFragments = Number(obolFragments);
         account.movementSpeedBonusPercent = Number(optionList?.[438] ?? 0);
         account.spelunkingPowerBonus = Number(optionList?.[500] ?? 0);
         account.fractalIslandProgress = Number(optionList?.[184] ?? 0);

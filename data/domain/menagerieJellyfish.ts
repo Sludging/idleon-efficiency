@@ -1,3 +1,4 @@
+import type { Item } from "./items";
 import type { MenagerieJellyfishModel } from "./model/menagerieJellyfishModel";
 
 export class MenageriePurpleJellyfish {
@@ -49,24 +50,33 @@ export class MenagerieRedJellyfish {
     readingOpportunities = 0;
     ready = false;
     readingMultiplier = 1;
-    chapterInputs: { index: number; name: string; input: number }[] = [];
+    trackedPageItemCount = 0;
+    readonly trackedPageItemSlots = 14;
+    private savedPageItemInputs: number[] = [];
+    pageItems: { index: number; item: Item; quantity: number }[] = [];
 
-    constructor(public readonly data: MenagerieJellyfishModel) {}
+    constructor(
+        public readonly data: MenagerieJellyfishModel,
+        private readonly pageItemRecords: { index: number; item: Item }[],
+    ) {}
 
-    parse(savedRow: (number | string)[] | undefined, savedChapterInputs: (number | string)[] | undefined): void {
+    parse(savedRow: (number | string)[] | undefined, savedPageItemInputs: (number | string)[] | undefined): void {
         this.readingOpportunities = Number(savedRow?.[6] ?? 0);
-        this.savedChapterInputs = Array.from({ length: 14 }, (_, index) => Number(savedChapterInputs?.[index] ?? 0));
+        this.savedPageItemInputs = Array.from(
+            { length: this.trackedPageItemSlots },
+            (_, index) => Number(savedPageItemInputs?.[index] ?? 0),
+        );
     }
 
-    private savedChapterInputs: number[] = [];
-
-    update(unlocked: boolean, chapters: { index: number; name: string }[]): void {
+    update(unlocked: boolean): void {
         this.unlocked = unlocked;
         this.ready = unlocked && this.readingOpportunities > 0;
         this.readingMultiplier = Math.floor(Math.max(1, this.readingOpportunities ** 0.74));
-        this.chapterInputs = chapters.map(chapter => ({
-            ...chapter,
-            input: this.savedChapterInputs[chapter.index] ?? 0,
+        this.trackedPageItemCount = this.savedPageItemInputs.filter(input => input > 0).length;
+        this.pageItems = this.pageItemRecords.map(({ index, item }) => ({
+            index,
+            item,
+            quantity: this.savedPageItemInputs[index] ?? 0,
         }));
     }
 }

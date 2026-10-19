@@ -38,16 +38,16 @@ const bonusEffectText = (bonus: MenagerieBonus, effect: number): string => {
 const sourceDescription = (text: string): string =>
     text.replace(/,\s*1 in \$ chance/, '').replace(/[{}$]/g, '').replace(/膛/g, '').trim();
 const jellyfishHelp: Record<string, string> = {
-    Purple: 'Each Shell purchase adds one Shell and raises the next purchase cost. Lumi levels add to your hourly Lumi bonus.',
-    Blue: 'Donated Ladles stay in the saved total. Each daily reset adds that total to cooking progress.',
-    Red: 'Each daily reset adds one reading opportunity while Red is unlocked. Reading uses and resets stored opportunities; chapter values track cumulative Spelunking item use, not completed chapters.',
-    Silver: 'The MISC level multiplies MISC Obol bonuses. Once Silver is unlocked, eligible non-Hyper drops can be auto-trashed for fragments when Obol inventory is full. Chances apply per auto-trash, not over time.',
-    Yellow: 'Construction progress builds over time. Meeting the requirement lets you buy an upgrade; its level determines the bonus.',
-    Green: 'Gallery deposits count separately from items in storage or equipped.',
+    Purple: 'Spend Money to buy Shells. Lumi upgrades increase the hourly Lumi bonus.',
+    Blue: 'Donate Ladles to add to the total that boosts cooking at each daily reset.',
+    Red: 'Red remembers Spelunking pages you use after unlocking it. It can reread those chapters to improve random Lore bonuses. Resting builds reading opportunities; reading uses all of them.',
+    Silver: 'The MISC upgrade multiplies Obol bonuses in the MISC category. Once unlocked, Silver can recycle eligible non-Hyper drops into fragments when your Obol inventory is full. Upgrade it to improve how many fragments you can gain.',
+    Yellow: 'Construction progress unlocks upgrades. Each upgrade adds its shown bonus.',
+    Green: 'Turn in the required nametags to the Spelunking Gallery to earn the reward.',
 };
 
-function JellyfishHelp({ color }: { color: string }) {
-    return <TipDisplay heading={`${color} Jellyfish help`} body={jellyfishHelp[color]} maxWidth="300px">
+function JellyfishHelp({ color, body }: { color: string, body?: string }) {
+    return <TipDisplay heading={`${color} Jellyfish help`} body={body ?? jellyfishHelp[color]} maxWidth="300px">
         <Box tabIndex={0} aria-label={`${color} Jellyfish help`} style={{ cursor: 'help' }}>
             <CircleInformation size="small" />
         </Box>
@@ -323,13 +323,17 @@ export default function MenagerieContent() {
                             menagerie.greenJellyfish,
                         ].map(jelly => {
                             const unlock = unlocks[jelly.data.unlockId];
+                            const green = menagerie.greenJellyfish;
+                            const helpBody = jelly.data.unlockId === 23
+                                ? `Turn in ${commaNotation(green.requiredNametag.count)} ${itemDetails[green.requiredNametag.item].displayName}${green.requiredNametag.count === 1 ? '' : 's'} to the Spelunking Gallery to earn ${itemDetails[green.rewardNametag.item].displayName}${green.rewardNametag.count === 1 ? '' : 's'}.`
+                                : undefined;
                             return <RoundedShadowBox key={jelly.data.unlockId} pad="none" background="dark-1" overflow="hidden">
                                 <Box direction="row" gap="small" align="center" background="grey-1" pad={{ horizontal: 'medium', vertical: 'small' }}>
                                     <Artwork data={unlock.getImageData()} size={40} />
                                     <Box gap="xsmall">
                                         <Box direction="row" gap="xsmall" align="center">
                                             <Text size="small" weight="bold">{jelly.data.color} Jellyfish</Text>
-                                            <JellyfishHelp color={jelly.data.color} />
+                                            <JellyfishHelp color={jelly.data.color} body={helpBody} />
                                         </Box>
                                         <Text size="xsmall" color={unlock.owned ? 'status-ok' : 'accent-2'}>
                                             {unlock.owned ? 'Unlocked' : `Locked · Req. rank ${unlock.requiredRank}`}
@@ -377,14 +381,14 @@ function PurpleJellyfishDetails({ jelly }: { jelly: MenagerieDomain['purpleJelly
     return <Box gap="small">
         <Box direction="row" gap="medium" wrap>
             <TextAndLabel label="Shell purchases" text={commaNotation(jelly.shellPurchaseCount)} textSize="small" />
-            <DetailRow label="Next Shell cost"><CoinsDisplay coinMap={getCoinsArray(jelly.nextShellCost)} maxCoins={3} regularRow coinScale={0.75} textColor={jelly.moneyBalance >= jelly.nextShellCost ? 'green-1' : 'text'} /></DetailRow>
+            <ComponentAndLabel label="Cost"><CoinsDisplay coinMap={getCoinsArray(jelly.nextShellCost)} maxCoins={3} regularRow coinScale={0.75} textColor={jelly.moneyBalance >= jelly.nextShellCost ? 'green-1' : 'text'} /></ComponentAndLabel>
         </Box>
         <Box border={{ side: 'top', color: 'grey-1' }} pad={{ top: 'small' }} gap="small">
             <Box direction="row" gap="medium" wrap>
                 <TextAndLabel label="Lumi level" text={commaNotation(jelly.lumiLevel)} textSize="small" />
                 <TextAndLabel label="Lumi contribution" text={`${commaNotation(jelly.lumiContribution)}%`} textSize="small" />
             </Box>
-            <DetailRow label="Next Lumi cost"><CoinsDisplay coinMap={getCoinsArray(jelly.nextLumiCost)} maxCoins={3} regularRow coinScale={0.75} textColor={jelly.moneyBalance >= jelly.nextLumiCost ? 'green-1' : 'text'} /></DetailRow>
+            <ComponentAndLabel label="Cost"><CoinsDisplay coinMap={getCoinsArray(jelly.nextLumiCost)} maxCoins={3} regularRow coinScale={0.75} textColor={jelly.moneyBalance >= jelly.nextLumiCost ? 'green-1' : 'text'} /></ComponentAndLabel>
         </Box>
     </Box>;
 }
@@ -401,33 +405,39 @@ function RedJellyfishDetails({ jelly }: { jelly: MenagerieDomain['redJellyfish']
         <Box direction="row" gap="medium" wrap>
             <TextAndLabel label="Reading opportunities" text={commaNotation(jelly.readingOpportunities)} textSize="small" />
             <TextAndLabel label="Reading multiplier" text={`×${commaNotation(jelly.readingMultiplier)}`} textSize="small" />
+            <TipDisplay heading="Page types tracked" body="Red has 14 tracking slots; the counter shows how many have recorded page use." maxWidth="260px">
+                <TextAndLabel label="Page types tracked" text={`${jelly.trackedPageItemCount}/${jelly.trackedPageItemSlots}`} textSize="small" />
+            </TipDisplay>
         </Box>
+        <Text size="xsmall" color="accent-2">Each icon shows how many pages Red has recorded for that chapter—not your Journal progress.</Text>
         {jelly.unlocked && <Text size="xsmall" color={jelly.ready ? 'status-ok' : 'accent-2'}>{jelly.ready ? 'Ready to read' : 'No reading opportunities'}</Text>}
-        <Box border={{ side: 'top', color: 'grey-1' }} pad={{ top: 'small' }} gap="xsmall">
-            {jelly.chapterInputs.map(chapter => <DetailRow key={chapter.index} label={chapter.name}><Text size="xsmall">{commaNotation(chapter.input)}</Text></DetailRow>)}
+        <Box direction="row" gap="small" wrap border={{ side: 'top', color: 'grey-1' }} pad={{ top: 'small' }}>
+            {jelly.pageItems.map(pageItem => <TipDisplay key={pageItem.index} heading={pageItem.item.displayName} body={`${commaNotation(pageItem.quantity)} pages used`} maxWidth="220px">
+                <Box tabIndex={0} aria-label={`${pageItem.item.displayName}: ${commaNotation(pageItem.quantity)} pages used`} align="center" gap="xsmall">
+                    <IconImage data={pageItem.item.getImageData()} scale={0.8} />
+                    <Text size="xsmall">{commaNotation(pageItem.quantity)}</Text>
+                </Box>
+            </TipDisplay>)}
         </Box>
     </Box>;
 }
 
 function SilverJellyfishDetails({ jelly }: { jelly: MenagerieDomain['silverJellyfish'] }) {
+    const positiveOutcomes = jelly.conversionEvents.filter(event => event.fragments > 0 && event.probability > 0);
+    const fragmentCapacityReached = jelly.obolFragments >= 2_000_000_000;
     return <Box gap="small">
         <Box gap="xsmall">
-            <Text size="xsmall" color="accent-2">MISC bonus</Text>
-            <Box direction="row" gap="medium" wrap>
-                <TextAndLabel label="Level" text={`${jelly.miscLevel}/${jelly.miscLevelCap}`} textSize="small" />
-                <TextAndLabel label="Multiplier" text={`×${notateNumber(jelly.miscMultiplier, 'Small')}`} textSize="small" />
-            </Box>
-            <DetailRow label="Next MISC cost"><ResourceDisplay cost={jelly.nextMiscCost} resourceImageData={Item.getImageData('ObolFrag')} resourceImageScale={0.65} textSize="small" /></DetailRow>
+            <TextAndLabel label="Multiply the MISC bonuses of all obols by:" text={`×${notateNumber(jelly.miscMultiplier, 'Small')}`} textSize="small" />
+            <TextAndLabel label="Level" text={`${jelly.miscLevel}/${jelly.miscLevelCap}`} textSize="small" />
+            <ComponentAndLabel label="Cost"><ResourceDisplay cost={jelly.nextMiscCost} resourceImageData={Item.getImageData('ObolFrag')} resourceImageScale={0.65} textSize="small" /></ComponentAndLabel>
         </Box>
         <Box border={{ side: 'top', color: 'grey-1' }} pad={{ top: 'small' }} gap="xsmall">
-            <Text size="xsmall" color="accent-2">Automatic fragment conversion</Text>
-            <Box direction="row" gap="medium" wrap>
-                <TextAndLabel label="Level" text={`${jelly.conversionLevel}/${jelly.conversionLevelCap}`} textSize="small" />
-            </Box>
-            <DetailRow label="Next conversion cost"><ResourceDisplay cost={jelly.nextConversionCost} resourceImageData={Item.getImageData('ObolFrag')} resourceImageScale={0.65} textSize="small" /></DetailRow>
-            <ComponentAndLabel label="Obol Fragments balance"><Box direction="row" gap="xsmall" align="center"><IconImage data={Item.getImageData('ObolFrag')} scale={0.7} /><Text size="small">{formatValue(jelly.obolFragments)}</Text></Box></ComponentAndLabel>
-            {jelly.conversionEvents.map(event => <DetailRow key={event.fragments} label={`${event.fragments} fragments per auto-trash`}><Text size="xsmall">{notateNumber(event.probability * 100, 'Small')}%</Text></DetailRow>)}
-            <DetailRow label="Expected fragments per auto-trash"><Text size="small">{notateNumber(jelly.expectedCreditedFragments, 'Small')}</Text></DetailRow>
+            <Text size="xsmall" color="accent-2">Fragments earned per auto-trash:</Text>
+            <TextAndLabel label="Level" text={`${jelly.conversionLevel}/${jelly.conversionLevelCap}`} textSize="small" />
+            <ComponentAndLabel label="Cost"><ResourceDisplay cost={jelly.nextConversionCost} resourceImageData={Item.getImageData('ObolFrag')} resourceImageScale={0.65} textSize="small" /></ComponentAndLabel>
+            {fragmentCapacityReached
+                ? <Text size="xsmall">Fragment capacity reached</Text>
+                : positiveOutcomes.map(event => <Text key={event.fragments} size="xsmall">{notateNumber(event.probability * 100, 'Small')}% chance to gain {event.fragments} fragment{event.fragments === 1 ? '' : 's'}</Text>)}
         </Box>
     </Box>;
 }

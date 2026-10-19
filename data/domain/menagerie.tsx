@@ -10,7 +10,6 @@ import { Item } from "./items";
 import { ImageData } from "./imageData";
 
 import { initMenagerieJellyfishRepo } from "./data/MenagerieJellyfishRepo";
-import { initSpelunkingChapterRepo } from "./data/SpelunkingChapterRepo";
 import {
     MenagerieBlueJellyfish,
     MenagerieGreenJellyfish,
@@ -199,7 +198,6 @@ export class Menagerie extends Domain {
     missions: MenagerieMission[] = [];
     unlocks: MenagerieUnlock[] = [];
     bonuses: MenagerieBonus[] = [];
-    private redChapterRecords: { index: number; name: string }[] = [];
     purpleJellyfish!: MenageriePurpleJellyfish;
     blueJellyfish!: MenagerieBlueJellyfish;
     redJellyfish!: MenagerieRedJellyfish;
@@ -282,20 +280,21 @@ export class Menagerie extends Domain {
         ];
     }
 
-    init(_allItems: Item[], _charCount: number): Menagerie {
+    init(allItems: Item[], _charCount: number): Menagerie {
         this.missions = MenagerieMission.fromBase(initMenagerieMissionRepo());
         this.unlocks = MenagerieUnlock.fromBase(initMenagerieUnlockRepo());
         this.bonuses = MenagerieBonus.fromBase(initMenagerieBonusRepo());
         const jellyfishData = initMenagerieJellyfishRepo().map(record => record.data);
         this.purpleJellyfish = new MenageriePurpleJellyfish(jellyfishData[0]);
         this.blueJellyfish = new MenagerieBlueJellyfish(jellyfishData[1]);
-        this.redJellyfish = new MenagerieRedJellyfish(jellyfishData[2]);
+        const redPageItems = Array.from({ length: 7 }, (_, index) => ({
+            index,
+            item: allItems.find(item => item.internalName === `Spelunking${index}`)!,
+        }));
+        this.redJellyfish = new MenagerieRedJellyfish(jellyfishData[2], redPageItems);
         this.silverJellyfish = new MenagerieSilverJellyfish(jellyfishData[3]);
         this.yellowJellyfish = new MenagerieYellowJellyfish(jellyfishData[4]);
         this.greenJellyfish = new MenagerieGreenJellyfish(jellyfishData[5]);
-        this.redChapterRecords = initSpelunkingChapterRepo()
-            .filter(chapter => chapter.index < 6)
-            .map(chapter => ({ index: chapter.index, name: chapter.data.name }));
         this.crucibleThresholds = initRandoListRepo()[115].data.elements;
         return this;
     }
@@ -555,7 +554,7 @@ export class Menagerie extends Domain {
     }
 
     private updateSideJellyfish(accountData: Map<string, unknown>): void {
-        const account = accountData.get("account") as { totalMoney: number };
+        const account = accountData.get("account") as { totalMoney: number; obolFragments: number };
         const storage = accountData.get("storage") as { amountInStorage(itemName: string): number };
         const players = accountData.get("players") as {
             gear: { equipment: ({ internalName: string } | undefined)[] };
@@ -575,11 +574,10 @@ export class Menagerie extends Domain {
         );
         this.redJellyfish.update(
             this.unlocks[this.redJellyfish.data.unlockId].owned,
-            this.redChapterRecords,
         );
         this.silverJellyfish.update(
             this.unlocks[this.silverJellyfish.data.unlockId].owned,
-            storage.amountInStorage("ObolFrag"),
+            account.obolFragments,
         );
         this.yellowJellyfish.update(this.unlocks[this.yellowJellyfish.data.unlockId].owned);
         this.greenJellyfish.update(

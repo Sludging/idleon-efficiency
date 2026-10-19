@@ -1,5 +1,5 @@
 import { loadExtractionResults, validateExtractionHealth, ExtractionResults } from '../../utils/live-game-data-loader';
-import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
+import { loadGameDataFromSave, loadTestSave } from '../../utils/cloudsave-loader';
 import { Menagerie } from '../../../data/domain/menagerie';
 
 const extractionResultsName = 'menagerie-account-state-data.json';
@@ -121,6 +121,22 @@ describe('Menagerie account progression', () => {
     });
   });
 
+  it('uses the parsed account Obol Fragment currency and exposes real Red page items', () => {
+    const account = accountData.get('account') as { obolFragments: number };
+    const storage = accountData.get('storage') as { amountInStorage(itemName: string): number };
+    const rawSave = loadTestSave('latest');
+
+    expect(rawSave.get('CYObolFragments')).toBe(3253);
+    expect(account.obolFragments).toBe(rawSave.get('CYObolFragments'));
+    expect(menagerie.silverJellyfish.obolFragments).toBe(account.obolFragments);
+    expect(menagerie.silverJellyfish.obolFragments).not.toBe(storage.amountInStorage('ObolFrag'));
+
+    expect(menagerie.redJellyfish.trackedPageItemSlots).toBe(14);
+    expect(menagerie.redJellyfish.pageItems).toHaveLength(7);
+    expect(menagerie.redJellyfish.pageItems[6].index).toBe(6);
+    expect(menagerie.redJellyfish.pageItems[6].item.displayName).toBe("Chapter Seven 'Burning Crusade'");
+    expect(menagerie.redJellyfish.pageItems[6].item.getImageData().location).toBe('Spelunking6');
+  });
 
   it('reports paired Menagerie resource balances', () => {
     const resources = menagerie.getResourceBalances();
