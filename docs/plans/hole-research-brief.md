@@ -1,7 +1,7 @@
 # The Hole: research brief
 
-- **Status:** Parts 1–4 are complete. The human directly accepted part 4 on 2026-10-19 and reported successful smoke tests. Issue #444 is closed as completed; parent #440 remains open. Parts 5–7 remain unselected. Backend and UI references remain local and unpushed; no PR or deployment.
-- **Selected part and authority:** The human selected part 4 only: [#444 — Well, Bell, Harp, and Lamp progression](https://github.com/Sludging/idleon-efficiency/issues/444). Earlier supervisor approvals under delegated authority remain historical and distinct from direct human acceptance. The backend plan approval is recorded in [receipt #444](https://github.com/Sludging/idleon-efficiency/issues/444#issuecomment-6227478771). Implementation references: backend `067577c3`; UI `0353a27d`, `e67145ec`, and `c80dd226`. Final direct human acceptance and user-reported smoke completion are recorded below. Parts 5–7 remain unselected.
+- **Status:** Parts 1–4 remain accepted and complete. Part 5 (#445) backend is accepted by delegated supervisor and locally committed; Cove map-216 and alternate-save parity remain unavailable, prior broad-suite mismatches remain unresolved, and repository typecheck has unrelated/legacy diagnostics. UI remains gated; parts 6–7 remain unselected. Issue #444 remains closed; parent #440 remains open.
+- **Selected part and authority:** The delegated supervisor may handle routine feedback, revisions, plan approvals, acceptance, publication, and local layer commits through selected part 5 only, following the serial fresh-worker process below. Earlier supervisor approvals remain historical and distinct from direct human acceptance. Part 4's backend plan approval remains recorded in [receipt #444](https://github.com/Sludging/idleon-efficiency/issues/444#issuecomment-6227478771); its implementation references are historical. Part 5's backend plan is approved by the delegated supervisor and published; phase 4 implementation was separately authorized under standing delegation. Neither approval nor authorization is direct-human acceptance.
 
 **Final settlement (2026-10-16):** The human said, “Ok I approve settling this part work as complete, well done. Make sure to record and update any relevant documentation and issues”. This approves recording part 3 as complete and updating relevant documentation and issues. Separately, the human had said, “Alright commit your work, if any file you touched has other changes only commit your hunk”. This is the prior commit authority; neither statement includes “I accept this UI result and its stated check limits.” Parts 1–2 remain complete; parts 4–7 remain unselected. The parent remains open.
 
@@ -9,7 +9,448 @@
 
 ## Current handoff
 
-- **Current acceptance:** The supervisor accepted the separate cross-cavern UI consistency result and its stated check limits under the user-requested scope. This is not new direct human acceptance; personal review of this consistency pass remains outstanding. Part 4/#444 remains closed; parent #440 remains open; parts 5–7 remain unselected.
+- **Current acceptance:** Part 4/#444 remains accepted and closed. Part 5/#445 backend is accepted by delegated supervisor with the evidence limits below and locally committed. Cove map-216 and alternate-save parity remain unavailable; prior four-suite/24-mismatch results remain unresolved; repository typecheck retains unrelated/legacy diagnostics. No broad parity or clean typecheck claim. Parts 6–7 remain unselected; parent #440 remains open.
+
+### Selected part 5 — Jars, Fountain, and Cove — 2026-10-19
+
+The human selected part 5 under the existing delegation. The delegated supervisor authorized phase 4: implement only the approved backend plan, record evidence and blockers, and stop before review or commit. Authoritative Wiki engineer evidence confirms existing coefficient availability; no new static-data work is authorized or needed. Parts 1–4 remain accepted and complete.
+
+The supervisor holds delegated authority for routine feedback, revisions, plan approvals, acceptance, publication, and local layer commits through this selected part only. Use fresh workers for every phase, revision, review, and approval or acceptance action. Keep all delegation strictly serial, including nested delegation. The process authority is [feature workflow](../human/feature-workflow.md); apply [CODING_STANDARDS.md](../../CODING_STANDARDS.md) and UI judgment from [UI direction](../insights/ui-feedback.md).
+
+Record v1.23 as the current game version for all new part-5 work. Verify or correct stale v1.22 references that inform current decisions; preserve references as historical evidence rather than relabeling them. New v1.23 features remain out of scope.
+
+WikiBot work and generated-data edits are out of scope and unnecessary. The Wiki engineer confirms all 40 `HoleJarBonusRepo` records export the required coefficients as `record.data.bonus`, at stable indices 0–39, matching v1.23 `CustomLists.HolesInfo[67][i].split('|')[1]`. Extractor `data[54]` is parser row numbering because literal arrays are skipped; it corresponds to game row 67. Use existing records through normal repository initialization.
+
+Prior approvals, accepted evidence, and historical check limits remain unchanged. Parts 6–7 remain unselected.
+
+#### Part 5 backend plan approved and published — 2026-10-19
+
+Approved by the delegated supervisor and published on [#445](https://github.com/Sludging/idleon-efficiency/issues/445#issuecomment-6257829693). The supervisor later authorized phase 4 under standing delegation; neither action is direct-human acceptance.
+
+The approved plan's claim that generated mappings are complete was correct. The subsequent false missing-coefficient assertion is superseded by the Wiki engineer's v1.23 verification recorded below; approvals remain unchanged and the plan is not reapproved or scope-reduced.
+
+**Resolved Fountain boundary:** Progress 44 uses Opal currency 8/wallet 38; purchase increments progress to 45. The next affordability/purchase selection is wallet 39, but source has no progress cap and released catalogs/generation expose only IDs 0–8. Progress 45 is reachable; its next purchase is normally unfundable, not a known missing static identity. Preserve nine-wallet scope and report next-cost currency unavailable; no WikiBot prerequisite or invented tenth record. Source: `idleon1.23.txt:241394–415,264537–543`; catalog: `data/domain/data/FountainCurrencyRepo.ts:7–18`. Existing runtime save was at progress 14, so boundary reachability is source-derived, not live-runtime exercised.
+
+**Jar persistence:** Jar type catalog has indices 0–9, but `Holes[11][37]` is an owned-type count that stops at nine; ten catalog entries do not mean ten purchases (`idleon1.23.txt:241158–173`). Saved `Jars` entries persist type, quality, x/y, and random roll; total board limit is 120. Runtime actor images are transient and excluded from imported saved state (`idleon1.23.txt:145956–961,406144–151,265631–647,269017–035`). The stored roll is updated and used for reward resolution (`265662–670,268939–947`).
+
+This earlier same-save source baseline is not personalized website parity. At the time, the comparison predated implementation and was recorded as lacking coefficient mapping; that missing-data assertion is superseded by authoritative Wiki engineer evidence below. Active scene 162 was not Cove map 216, so Cove's local map-gated application was not observed. No purchase, collection, enchantment, marbleization, reset, time advance, or fixture write occurred. The fixture hash still matched after queries. Port 3101 did not match the fixture; retained port 3204 also lacks save-load proof and its `getPlayerData("Holes")` query returned `Character Holes not found`.
+
+**Phase/check limits:** The delegated supervisor approved and published the plan; phase-4 backend execution was separately authorized under standing delegation. Neither is direct-human acceptance. Focused test passed 6/6; one paired-save Fountain currency-0 runtime comparison matched. Four of 19 Hole suites failed 24 extraction comparisons; causality relative to this change remains unresolved. Cove map-216 parity, other currencies, and Jar parity remain unresolved. No review, acceptance, publication, or commit occurred.
+
+#### Part 5 backend formula-input follow-up — 2026-10-19
+
+**Fountain Lamp input:** Historical follow-up did not resolve access to Lamp(99). Phase-4 implementation later reused existing `Lamp.getBonus(true)` for that input; see implementation record below.
+
+**Superseded Jar coefficient claim:** This follow-up incorrectly stated that the 40 coefficients were missing and proposed a new static mapping. The Wiki engineer confirms all 40 existing `HoleJarBonusRepo` records expose the v1.23 coefficient as `record.data.bonus`, indexed 0–39 and matching `CustomLists.HolesInfo[67][i].split('|')[1]`. Extractor `data[54]` is parser row numbering with literal arrays skipped; it corresponds to game row 67. No new mapping or WikiBot work is needed. The previous blocker was false; its claim that coefficient units/field position were unverified is also superseded.
+
+#### Phase 4 — approved backend implementation authority — 2026-10-19
+
+The human selected part 5 and authorized this exact phase: implement only its approved backend plan, exercise changed runtime behavior, record evidence/blockers/check limits, and stop before review or commit. The delegated execution is limited to Jars (11), Fountain (16), and Crystal Glunko Cove (18). Keep parts 1–4 unchanged; parts 6–7 remain unselected. No review, acceptance, issue publication, or commit is authorized. Nested workers are strictly serial and fresh per task.
+
+Use v1.23 evidence only. Preserve nine Fountain wallets and report post-progress-45 next currency unavailable; add no currency record or cap. Do not execute WikiBot or edit generated data. Preserve unrelated working-tree changes.
+
+#### Part 5 backend implementation — 2026-10-19
+
+Implemented the reachable approved backend scope in `data/domain/world-5/hole/{hole.tsx,jar.tsx,fountain.tsx,cove.ts}`. `Hole.parse` now registers/parses saved `Jars`; Jar exposes named board entries with saved type, quality, x/y, and random roll, type-count/holding/producer state, and numeric `gildedBonusPercent` from `Holes[11][60]`. Fountain owns nine wallets, stacks, settings, upgrade/marbleization state, current currency/stack values, and progress/cost state. Its Opal next cost is unavailable after progress 45; no wallet-39 identity was added. New Hole-owned Cove state covers 12 shape balances/targets, 24 upgrade levels/costs, rewards, daily purchase effects, and character-local prepared effects. Study retains saved daily purchase count ownership.
+
+Hole orchestration initializes and parses the aspects, prepares Fountain inputs after existing Lamp, Bell, Measurement, and Cove upgrades, and prepares Cove character outputs at the existing late character-capability stage. Fountain uses existing `Lamp.getBonus(true)` for LampBonuses(99,0). Static Fountain upgrade metadata supplies the five marble exclusions `(0,8),(0,10),(0,11),(1,8),(1,10)`. Jar catalog contains ten types and 40 bonus records; `Jars` raw data is now included in Hole registration.
+
+**Verified formula correction:** Read-only offline runtime evidence and fresh same-save operand pairing are recorded in [Fountain currency runtime parity](../research/hole-part5-currency-runtime.md). Port 3205 reported `source: offline`, all readiness flags true, character 3 (`Sludgev4`), version `Luminous_Menagerie` 1.23. Canonical JSON hashes for `/cloud-save` and `tests/fixtures/saves/latest.json` matched at `376d9681816d837d43cbe37eb5bb53b80e6da1174704be814d9a4fb649001a1f`. Runtime `Fount_CurrencyTotValue(0,0)` returned `15252139478210.553`. Source `idleon1.23.txt:103818–820` defines `_customBlock_getLOG(e)` as `Math.log(Math.max(e,1))/2.30259`. Fountain reuses existing `lavaLog`, which implements the exact source expression. Paired base bonuses `(0,2)=1005`, `(0,19)=333`, and wallet `79509637685278920000` matched. App currency-0 result now matches the game output.
+
+**Focused verification:** `yarn test tests/domains/hole/part5-state.test.ts` passed, 6 tests. It exercised actual `loadGameDataFromSave('latest')` pipeline, including 120 saved Jar entries, nine Fountain currencies, currency-0 parity, Lamp 99, five marble exclusions, numeric Gilded Jar parsing, and Cove state. Initial runs exposed an omitted `Jars` raw key, an incomplete Cove class closure, and then the Fountain log mismatch; each was corrected before the final passing run. No purchase, time advance, fixture write, or save refresh occurred.
+
+**Superseded false blocker:** The formula and source citation remain part of the approved mechanics, but the claim that `HoleJarBonusRepo` lacks the 40 coefficients and requires WikiBot work was incorrect. The Wiki engineer confirms coefficients already exist as `record.data.bonus` for indices 0–39, aligned to `CustomLists.HolesInfo[67][i].split('|')[1]`; extractor row 54 corresponds to game row 67. No generated-data change or new mapping is needed.
+
+**Limits:** Runtime evidence covers one paired v1.23 save and Fountain currency ID 0 only. Progress-45 Opal remains source-derived, not runtime-exercised. Active map was 162, not Cove map 216; local Cove effects lack game-runtime parity. `yarn test tests/domains/hole` ran: 15/19 suites and 290/314 tests passed; 4 Measurement/part1/part2-parameter suites failed 24 extraction comparisons, including direct Tome totals 14,956 vs 15,014 account level, 75,300 vs 76,375 skill level, and 44,382 vs 44,531 score. Their cause relative to this change is unestablished; no tolerance or expected data was changed. Alternate saves, other currency IDs, unknown/null branches, Jar effects/rates blocked by missing coefficients, broad parity, full repository suite, build, lint, typecheck, UI checks, review, and commit remain unverified/not run. No direct human acceptance is claimed.
+
+
+#### Historical Phase 4 disposition — superseded on 2026-10-19
+
+Phase 4 was authorized by the delegated supervisor under the existing delegation. The earlier disposition incorrectly treated Jar coefficients as missing. The Wiki engineer's authoritative evidence below supersedes that blocker; this revision preserves the prior approval and process history.
+
+The earlier focused 6/6 pass, currency-0 parity, and broader 15/19 suite results remain historical evidence. An initial focused run failed during import, but subsequent serial focused verification passed 9/9. The user barred rerunning the broader suite merely to confirm its 24 extraction mismatches; those reported counts remain historical and their causal inputs are summarized below.
+
+The worker-freshness deviation remains historical process evidence. Its statement that the coefficient prerequisite remained unchanged and should be raised for WikiBot work is superseded: no new mapping or WikiBot action is needed.
+
+#### Current backend revision — 2026-10-19
+
+Jar preparation uses existing repository coefficients through `record.data.bonus`; its production input sums Jar collectibles 1, 15, and 24 with prepared Measurement 12. Producer requirement and rate use existing camp-upgrade and saved-balance inputs. No generated data or WikiBot files changed.
+
+**Matched runtime evidence:** Offline runtime at `http://127.0.0.1:3101` reported `source: offline`, all readiness flags true, character 3 (`Sludgev4`), version `Luminous_Menagerie` 1.23. Canonical sorted JSON hashes for `/cloud-save` and `tests/fixtures/saves/latest.json` matched at `a283af02778053bb894feaa3ef54f44057a0533b8bb8e3d8cde7a7756520324d`. The fixture SHA-256 remained `aab7f516047fc5b86096350e92864faeeccf303e9c72def20b51130507416555`.
+
+`tests/configs/hole-part5-jar.json` and `tests/results/hole-part5-jar-data.json` record 12 successful v1.23 extractions. They capture assignment type 4/work `4532.518244208975`; requirement balance 459717; Jar collectible bonuses 1/15/24 at 176, 211.20000000000002, and 96; Measurement 12 at `323.63507956989247`; camp upgrades 67/74/72 at 30/5/10; game `JarProductionREQ` at `5395.485805444112`; and game `JarProductionPerHR` at `788162.8901608335`. Source formulas: `idleon1.23.txt:241161–166,241227–233,241282–287`; `_customBlock_getLOG` uses `Math.log(Math.max(x,1))/2.30259` (`103818–820`). Historical requirement `647.2796607755454` is not comparable because its producer assignment and requirement inputs were not recorded.
+
+`yarn test tests/domains/hole/part5-state.test.ts --runInBand` passed 9/9. Normal-import outputs matched direct paired game outputs for ten collectible values and producer-0 consumed inputs, requirement, and hourly rate. A repeated normal import reproduced collectible bonuses, producer state, and holdings. Existing assertions also covered 120 Jar board entries, nine Fountain wallets, Fountain currency 0, Lamp 99, marble exclusions, Gilded Jar percentage, and Cove state. Fixture remained unchanged.
+
+#### Fresh independent part-5 backend review — 2026-10-19
+
+Reviewed issue #445, approved backend plan, current implementation, focused-test record, `CODING_STANDARDS.md`, and current worktree. Review scope was `data/domain/world-5/hole/{hole.tsx,jar.tsx,fountain.tsx,cove.ts}` and `tests/domains/hole/part5-state.test.ts`; unrelated worktree changes were excluded.
+
+**Findings for human decision**
+
+- **High — only one Jar producer prepared — `data/domain/world-5/hole/hole.tsx:2493–2500`:** `producerCount` receives `hole.sourceSaveAvailable.schematics`, a boolean, instead of producer count from camp upgrades 63/66. `Jar.prepare` uses it as `slice` end, so true prepares one producer and false prepares none. This misses required producer 2/3 outputs and conflicts with the plan's producer/access gates and production rates. Focused evidence for producer 0 does not cover other producers.
+- **Medium — post-45 Opal cost is dropped — `data/domain/world-5/hole/fountain.tsx:363–372`:** At reachable progress 45, `getOpalCost()` returns `null`, discarding formula-derived amount and selected unavailable currency ID 9. The plan requires Opal progress/cost while reporting wallet-39 currency unavailable; represent unavailable currency without erasing calculable cost.
+- **Low — dead fallback / unsupported metadata assumptions — `data/domain/world-5/hole/fountain.tsx:275–285,300–308`:** Currency 9 has no initialized currency or lucky-coin record, so the preceding guard returns `null` before fallback formula runs. The plan excludes a tenth currency; remove this speculative branch. For valid IDs 0–8, direct initialized-record access would also express DATA-01 more clearly than optional lookup.
+
+The reviewed backend keeps approved scope: no generated-data changes, WikiBot work, forecasts, simulations, or authored game descriptions. Cove's local effects remain separate from ordinary stats. No frontend dependency or UI-specific shape was introduced.
+
+**Verification disposition:** No checks were rerun. The handoff's focused 9/9 pass and one-save currency-0 / Jar producer-0 evidence remain recorded historical evidence, not evidence for all producers, Opal progress 45, Cove map 216, or other currencies. Four earlier suite failures and 24 extraction mismatches remain unresolved in causal scope: Tome input differences explain three reported Measurement comparisons, while part2-parameter causes remain unestablished. They do not establish a part-5 regression or a clean broad-suite result.
+
+Code stayed read-only. No acceptance, commit, or publication occurred.
+
+#### Selected part-5 backend review corrections — 2026-10-19
+
+Addressed the three findings without expanding approved Jars/Fountain scope. `Hole.update` now derives Jar producer count as producer 1 plus unlocked camp upgrades 63 and 66; missing saved schematic inputs keep the count unknown. Fountain preserves the formula-derived Opal amount at progress 45 and exposes currency ID 9 as unavailable, while progress 44 remains wallet/currency 8. Currency valuation now requires initialized catalog records for valid IDs 0–8 and retains null checks for save-derived inputs.
+
+Extended the paired Jar extraction with producer 1 and 2 requirement/rate values. The v1.23 offline game extraction succeeded 16/16 for player 3 (`Sludgev4`); all three paired producer requirements and all three hourly rates now have normal-import assertions. Added consumer-visible Fountain assertions for progress 44, progress 45, and unknown progress, including unavailable affordability and unchanged nine-wallet/catalog lengths.
+
+**Verification:** `yarn test tests/domains/hole/part5-state.test.ts --runInBand` passed 10/10. This loads `latest` through `loadGameDataFromSave`, exercising the actual domain import and prepared public outputs. The updated game-data extraction completed with 16/16 successes; producer 1/2 requirements were `10672.569591876827` and `11529.906389085836`; all producer rates were `788162.8901608335`. Progress-44/45 cost assertions verify formula-derived amounts and currency selection, not game-runtime behavior.
+
+**Limits:** No alternate or missing-schematic save was exercised; unknown producer count is retained by the unavailable-schematic path. Opal boundary behavior is verified through imported domain consumers after setting progress in memory, not paired game-runtime extraction. Other currencies, Cove map-216 parity, broad suite, build, lint, and typecheck remain unchecked. Prior unrelated suite mismatches remain unchanged and were not rerun. No save or fixture changed. This revision is not independently reviewed or accepted; no publication or commit occurred.
+
+**Other reported suite mismatches:** No broad rerun occurred. Fresh read-only research traced the three reported Measurement comparisons to upstream Tome-derived account level, total skill level, and highest score inputs: captured values 14,956, 75,300, and 44,382 differ from current loaded Tome values 15,014, 76,375, and 44,531. The evidence does not implicate selected Jar/Fountain/Cove changes. Exact part2-parameter mismatch inputs remain unestablished from retained artifacts. No tolerance, expected data, or unrelated calculation was changed.
+
+No purchases, collections, enchantments, marbleization, fixture writes, review, acceptance, publication, or commit occurred. Cove map-216 parity, other Fountain currency IDs, progress-45 runtime behavior, missing/zero branches, alternate saves, broad parity, full repository suite, build, lint, and typecheck remain unchecked. Parts 6–7 remain unselected.
+
+The previous disposition's claim that a coefficient mapping must be requested is superseded. Its focused 6/6 pass and broader results remain historical evidence; current focused verification appears above. Broad-suite mismatch inputs remain a separate unresolved limit. Cove map-216 parity and other Fountain currencies remain open.
+
+#### Fresh independent part-5 backend review — 2026-10-19
+
+Reviewed issue #445, the approved backend plan, product specification, delivery part, current backend, focused test record, repository patterns, and `CODING_STANDARDS.md`. Scope was `data/domain/world-5/hole/{hole.tsx,jar.tsx,fountain.tsx,cove.ts}` and `tests/domains/hole/part5-state.test.ts`; unrelated worktree changes were excluded.
+
+**Findings for human decision**
+
+- **Medium — missing Cove save values become zero — `hole.tsx:2267`, `cove.ts:133–152`:** `Hole.parse` explicitly defaults missing `OptLacc` to an empty array. Cove then defaults missing upgrade levels, shape balances, and Glunko kills to zero; missing target options become no target. This conflates unavailable state with known zero, contrary to the approved unknown-versus-zero boundary and `DATA-01`.
+- **Medium — missing Fountain progression becomes zero — `fountain.tsx:116–17,157–62`:** Missing upgrade or marbleization arrays produce level zero for all upgrades, with no Fountain-owned availability state. `Hole.sourceSaveAvailable` records whether each array exists, but direct Fountain values still appear as known zero; this can understate unknown progression and effects.
+- **Low — repeated and duplicated marble eligibility work — `hole.tsx:2540–42`, `fountain.tsx:79–81`:** Each Hole update initializes the generated Fountain catalog, filters it, allocates exclusion strings, then checks those exclusions against `upgrade.data.marbleizeEligible`. That existing record field already carries the eligibility result, so the extra list duplicates data and work on every update.
+
+The approved scope remains intact: no new static records, WikiBot work, forecasts, frontend coupling, or authored game descriptions were found. The earlier boolean producer-count and Opal-cost findings are corrected; the current nine-currency behavior matches the approved boundary.
+
+**Verification limits:** No checks were rerun. The recorded 16/16 extraction and 10/10 focused tests cover all three Jar producers, currency 0, and the in-memory Opal boundary. They do not establish Cove map-216 parity, other Fountain currencies, missing/zero save branches, or broad parity. Four earlier suites and 24 extraction mismatches remain unresolved; the evidence does not establish a part-5 regression. No build, lint, or typecheck result is available.
+
+Code stayed read-only. No acceptance, commit, or publication occurred.
+
+- **Worker-freshness deviation:** The supervisor received a post-completion message from Hole5Prerequisite reporting that it sent source operands to `Hole5BackendExecution.Hole5Implementation.CoveAspect`. The supervisor instructed execution not to reactivate or reuse prior sessions and to use fresh serial specialists. Record this as historical process deviation; the observation does not establish concurrent work. Its attached direction to raise a coefficient prerequisite for WikiBot work is superseded by the Wiki engineer's confirmation that existing records supply the coefficients.
+#### Selected backend revision — missing-state and lifecycle findings — 2026-10-19
+
+Addressed only the three findings from the independent review. `Hole.parse` now passes optional `OptLacc` absence to Cove instead of replacing it with an empty list. Cove exposes missing upgrade levels, shape balances, kills, normal drop rate, and target availability as unavailable while preserving saved zero and a known empty target. Cove local effects, purchase costs, and pickup targets no longer derive known values from absent inputs.
+
+Fountain now owns upgrade-array and marbleization-array availability. Missing arrays leave levels, bonuses, costs, and dependent Fountain outputs unavailable; saved zero levels remain known zero. The Hole update no longer reinitializes Fountain catalogs or rebuilds exclusion IDs. `FountainUpgrade.data.marbleizeEligible` directly supplies marbleization eligibility. Prior Jar producer and Opal corrections remain intact.
+
+**Focused proof:** `tests/domains/hole/part5-state.test.ts` loads `latest` through `loadGameDataFromSave`, proving the normal import and preserved paired assertions. Missing-versus-zero assertions cover Cove and Fountain APIs; repeated-update assertions call `updateHole(gameData)` twice and compare prepared public values. Final command `yarn test tests/domains/hole/part5-state.test.ts --runInBand` passed 1 suite / 12 tests. An initial attempt failed only because the test-created Hole lacked its `hole` data key; the test setup was corrected before the passing run. No fixture or save changed.
+
+**Limits:** The missing-input cases use a same-save import with optional `OptLacc` removed and direct aspect parsing for saved-zero/absent Fountain arrays; these are consumer-state tests, not game-runtime parity. No new extraction ran. Cove map-216 parity, other Fountain currencies, alternate saves, broad suite, build, lint, and typecheck remain unverified. Four prior suites / 24 extraction mismatches remain unresolved and were not rerun. No review, acceptance, publication, or commit occurred.
+
+#### Fresh independent part-5 backend review — 2026-10-19
+
+Reviewed issue #445, the approved backend plan, the current handoff, the actual uncommitted backend and consumer diffs, and `CODING_STANDARDS.md`. Code remained read-only. No checks ran.
+
+**Findings for human decision**
+
+- **High — Fountain stack shape is wrong — `data/domain/world-5/hole/fountain.tsx:127–154,324–343`:** v1.23 claim logic iterates `Holes[29][space].length`, values each item at `[space][n]`, and uses the array length for the stack factor (`idleon1.23.txt:269631–269654`). Each saved stack position contains an array of currency IDs, not one ID. `Number([])` becomes zero; `Number([id1,id2])` becomes `NaN`; a one-item array loses its array shape. The importer then counts stack positions by currency instead of counting items in each position. Saved empty and multi-item stacks, occupancy, and pending values are therefore wrong. The focused test checks currency 0, not stack shape or claim values. The approved plan's singular wording at line 20 shares this source-shape error and needs human correction before acceptance.
+- **Medium — Cove camp coefficients are unscaled — `data/domain/world-5/hole/hole.tsx:2647–2650`, `data/domain/world-5/hole/cove.ts:283–296`:** `getSchematicBonus` defaults to factor 1. v1.23 respawn uses `B_UPG(100,25)` (`idleon1.23.txt:146232–146237`); pickup doubling uses `B_UPG(101,10)`, `B_UPG(103,10)`, and `B_UPG(105,10)` (`241659–241660`). The current local outputs understate those camp contributions by 25× and 10×. Existing runtime evidence used map 162, not Cove map 216; focused tests do not verify these outputs.
+- **Medium — Fountain keeps raw setting and slot state — `fountain.tsx:113–119,155–170`:** `ignoredCurrenciesEncoded` exposes the raw save encoding instead of named ignored-currency IDs. `holes11Index7` also carries a save-position name into the currency calculation. `PARSE-01` requires translating save representation at the boundary. Existing evidence describes ignored currencies as generation exclusions, but does not establish the encoding grammar or a player/domain name for slot 7; do not invent either.
+- **Low — impossible missing-object branches — `fountain.tsx:351–354,396–404`:** `getLuckyCoinChance` optional-chains the fixed currency catalogue. `canAffordOpal` checks `undefined` after `available` guarantees a valid index in the nine-wallet array, and its `getOpalCost() === null` fallback repeats the only condition that can make the cost null. `DATA-01` and `SIMPLE-01` call for direct access to initialized records and guards only for genuinely missing save values.
+
+**Scope and evidence**
+
+Part-5 implementation files and its focused test were reviewed. Changes to `player-damage-multiplier.ts`, `player-experience.ts`, `villager.tsx`, and `well.tsx` directly propagate nullable Fountain/monument results and are necessary consumer migrations. The worktree also contains unrelated World-7, account, gaming, sailing, test-helper, and planning changes. Their ownership cannot be attributed to part 5 from the recorded diffs; they were excluded and left untouched. No part-5 UI coupling, authored game descriptions, generated-data edits, or extra static records were found.
+
+The handoff records 16/16 game extractions and 12/12 focused tests. Those cover Jar producers 0–2 and one paired Fountain currency value, but not nested Fountain stacks, Cove map-216 outputs, or other currencies. The current test performs repeated updates, not repeated imports; no test asserts raw input immutability. Fixture hashes establish unchanged fixture files, not parser immutability. Four earlier suites and 24 extraction mismatches remain unresolved; the evidence does not establish a part-5 regression or broad-suite pass. No checks were rerun. No acceptance, commit, or publication occurred.
+
+#### Selected part-5 revision — Fountain stacks and Cove factors — 2026-10-19
+
+The four selected findings from the latest independent review are corrected. The approved backend plan's saved-shape description was corrected in place at line 20: each `Holes[29][space]` is a currency-ID array, including empty arrays, with its royal state held separately at `[34][space]`. This records source fact, not scope expansion.
+
+Fountain now preserves each position and its nested items, derives item count from array length, retains empty positions and the royal relationship, and calculates occupancy, capacity, overflow, per-item values, and pending stack totals with source iteration semantics. The targeted assertions cover mixed stacks, empty positions, royal flags, overflow, and every extracted item and position value.
+
+Matched v1.23 source review also corrected formulas required for accurate stack valuation: currency IDs 4/5 use modifier terms F(1,5)/F(1,6), IDs 7/8 use F(2,5)/F(2,6), and IDs 6–8 all receive the desire multiplier. Source references are `idleon1.23.txt:241539–563`. These were stale mapping errors exposed by requested stack-value parity, not added scope.
+
+The parser decodes `[11][83]` into named `excludedGenerationCurrencyIds` at the save boundary. v1.23 uses `Number2Letter` markers to filter generated currency IDs; no player-facing setting title was found. `[11][7]` now has the domain name `currencyValueExponent`, describing its `1.1^value` formula role. Source `idleon1.23.txt:241504–517` establishes that use, but provides no player-facing name. Specialist research found no named game/static-data match, so no game term is asserted.
+
+Cove now passes source-exact `B_UPG(100,25)` to respawn and `B_UPG(101/103/105,10)` to pickup doubling. The low-severity cleanup removes impossible missing-record and redundant null-cost branches while keeping genuine optional-save guards.
+
+**Focused evidence:** the offline game-data extractor ran 23/23 queries against v1.23 player 3 (`Sludgev4`). Its canonical `/cloud-save` hash matches `tests/fixtures/saves/latest.json` (`4192b0b37728606c0a1bc24c19289d665f8c0335572ba1386f559680d9e0eaf6`). Runtime output had 30 saved positions, 15 occupied, 15 empty, 615 items, 41 items per occupied position, and capacity 15. Assertions compare all currency totals, every stack item and pending position value, overflow, capacity/counts, and source camp terms. The game returned factors 25, 10, 0, and 0 for the four Cove inputs; respawn 52 and pickup doubling 0.1.
+
+`yarn test tests/domains/hole/part5-state.test.ts --runInBand` passed: 1 suite, 15 tests. It exercises actual normal imports twice, asserts save-input immutability and identical outputs, and retains the repeated-update proof. It also checks saved stacks when royal flags are missing.
+
+The paired runtime was on map 162, not Cove map 216. The map-216 domain branch regression checks local factor application only; no map-216 game output was observed. No broad suite, build, lint, or typecheck ran; known broad failures were not rerun. No commit, acceptance, or publication occurred.
+
+#### Fresh independent part-5 backend review — 2026-10-19
+
+Reviewed issue #445, the approved product specification and backend plan, current handoff, selected backend sources, focused test, repository vocabulary guidance, and `CODING_STANDARDS.md`. Code remained read-only; no checks ran.
+
+**Finding for human decision**
+
+- **Medium — missing Jar collectible levels become known zero — `data/domain/world-5/hole/jar.tsx:84–88,158–165`; `data/domain/world-5/hole/hole.tsx:2497–2505`:** When saved `Holes[24]` is absent, parsing sets `collectibleLevelsAvailable` false but initializes each bonus level to zero. `Jar.getBonus` still returns zero, and Hole preparation sums those values into the Jar rate. This turns unavailable saved inputs into known zero, contrary to the approved unknown-versus-zero boundary and `DATA-01`. Preserve unknown levels and avoid preparing dependent totals as known.
+
+- **Low — redundant stack-value seam — `data/domain/world-5/hole/fountain.tsx:35–40,405–415`; `tests/domains/hole/part5-state.test.ts:182–188`:** `getStackPositionValue` repeats the same per-item loop and delegates to the same item-value method already used by production preparation. It has no production caller; its focused assertion repeats the implementation rather than adding independent coverage. The plan proposes no new test seam. Remove the duplicate API and retain paired assertions over imported stack outputs.
+
+The revised implementation corrects the prior Fountain nested-stack, Cove camp-factor, save-encoding, and impossible-guard findings. Current focused evidence covers the reported Fountain stacks and all 40 currencies, normal imports, immutability, and repeated imports; it does not cover missing Jar collectibles or Cove map-216 game parity. Reported extraction and test results were not rerun.
+
+No scope expansion, frontend coupling, generated-data changes, invented descriptions, or other concrete maintainability/standards findings were found in the selected backend. The unrelated worktree remains excluded and untouched. Four earlier suites / 24 extraction mismatches remain unresolved; current evidence neither attributes them to part 5 nor establishes broad-suite success.
+
+No acceptance, commit, or publication occurred.
+
+#### Selected backend revision — Jar missing collectibles and stack-value seam — 2026-10-19
+
+Addressed only the two selected findings. Missing `Holes[24]` levels now remain `null` through Jar parsing and effective collectible bonuses. Hole preparation passes an unknown combined collectible input into Jar production, so producer rates remain `null`; saved zero levels still produce known zero collectible bonuses and known rates. Existing `record.data.bonus` coefficients and level × coefficient × Legend Talent scaling remain unchanged. Jar-dependent consumers preserve unavailable results.
+
+Removed the unused `FountainStackPosition` type and `getStackPositionValue` helper. Removed its implementation-echo assertion. The paired normal-import assertions retain every prepared item and position value and now also compare pending-stack total with the sum of extracted position values.
+
+**Focused verification:** `yarn test tests/domains/hole/part5-state.test.ts --runInBand` passed: 1 suite, 16 tests. The suite exercises current full-save normal-import parity, including Jar collectibles and all three producer rates, plus paired Fountain stack/item/position outputs. A new test runs the regular `updateIdleonData` import path against the same retained save with collectible row 24 absent and with saved zero levels; absent levels, bonuses, and producer rates stay unknown, while saved zeros remain known.
+
+**Limits unchanged:** No new game extraction or runtime smoke ran. Evidence remains one paired v1.23 save; Cove map-216 parity, other saves, and alternate game states remain unverified. Four earlier Hole suites and 24 extraction mismatches remain unresolved and were not rerun; no broad suite, build, lint, or typecheck ran. No fixture write, review, acceptance, publication, or commit occurred.
+
+#### Standalone part-5 backend runtime smoke — 2026-10-19
+
+Ran a temporary TypeScript smoke outside Jest through the production `updateIdleonData` import pipeline, using retained `tests/fixtures/saves/latest.json`. The script compared Jar producer values and Fountain stack positions/items/totals against existing paired v1.23 extractions in `tests/results/hole-part5-jar-data.json` and `tests/results/hole-part5-fountain-cove-data.json`; no extraction was repeated. It also exercised same-instance updates twice, a fresh import, in-memory missing-versus-zero states for Jar collectibles, Fountain upgrades, and Cove upgrades/balances, and confirmed raw save object and fixture bytes remained unchanged. Temporary script `.tmp-hole-part5-smoke.ts` was removed after the run.
+
+**Command:** `yarn tsx .tmp-hole-part5-smoke.ts`
+
+**Exact stdout:**
+
+```json
+{
+  "result": "PASS",
+  "fixture": "tests/fixtures/saves/latest.json",
+  "fixtureSha256": "aab7f516047fc5b86096350e92864faeeccf303e9c72def20b51130507416555",
+  "imports": "normal updateIdleonData pipeline; same instance updated twice; fresh import compared",
+  "jars": {
+    "producers": [
+      {
+        "requirement": 5395.485805444112,
+        "ratePerHour": 788162.8901608335
+      },
+      {
+        "requirement": 10672.569591876827,
+        "ratePerHour": 788162.8901608335
+      },
+      {
+        "requirement": 11529.906389085836,
+        "ratePerHour": 788162.8901608335
+      }
+    ],
+    "collectibles": [
+      {
+        "index": 1,
+        "value": 176
+      },
+      {
+        "index": 15,
+        "value": 211.20000000000002
+      },
+      {
+        "index": 24,
+        "value": 96
+      }
+    ],
+    "board": 120
+  },
+  "fountain": {
+    "positions": 30,
+    "occupied": 15,
+    "pendingItems": 615,
+    "pendingTotal": 2954845218529137000,
+    "wallets": 9,
+    "capacity": 15,
+    "maximumStackSize": 41,
+    "maximumCoins": 615,
+    "opal44": {
+      "amount": 2.847299915243818e+34,
+      "currencyId": 8,
+      "available": true
+    },
+    "opal45": {
+      "amount": 1.4125129216298817e+35,
+      "currencyId": 9,
+      "available": false
+    }
+  },
+  "cove": {
+    "shapes": 12,
+    "blueBalances": 6,
+    "purpleBalances": 6,
+    "upgrades": 24,
+    "glunkoKills": 3915683771,
+    "localCharacterEffects": {
+      "appliesInCove": true,
+      "dropRateMultiplier": 886052.165746176,
+      "afkGainMultiplier": 1.09,
+      "multikillPerDamageTier": 0.35,
+      "baseMultikill": 22,
+      "respawnTimeMultiplier": 0.5649717514124294,
+      "bluePickupTargetId": 5,
+      "bluePickupTargetKnown": true,
+      "bluePickupAmount": 540,
+      "purplePickupTargetId": 7,
+      "purplePickupTargetKnown": true,
+      "purplePickupAmount": 250,
+      "pickupRandomDoubleChance": 0.1
+    }
+  },
+  "disposableInputs": {
+    "collectibleMissing": null,
+    "collectibleKnownZero": 0,
+    "fountainMissingUpgrade": null,
+    "fountainKnownZeroUpgrade": 0,
+    "coveMissingUpgrade": null,
+    "coveKnownZeroUpgrade": 0,
+    "coveMissingBalance": null,
+    "coveKnownZeroBalance": 0
+  },
+  "rawSaveUnchanged": true
+}
+```
+
+**Limits:** The retained fixture was not refreshed or written. Cove local values were explicitly prepared for map 216 from imported inputs; this is domain-branch execution, not Cove game-runtime parity. Opal progress 44/45 was changed only in memory and compared with the approved formula, not a game extraction. Missing-state inputs were disposable in-memory domain inputs, not modified or alternate saves; `null` means unknown and `0` means known zero in these observed APIs. One retained v1.23 save only; no broad suite, build, lint, or typecheck ran. The prior four-suite/24-comparison mismatch remains mixed: Tome-derived account level, skill level, and score differences explain three Measurement comparisons; the remaining part2-parameter mismatch cause is undetermined. No broad pass or part-5 causality is claimed. The latest focused 16/16 pass remains test evidence, distinct from this standalone smoke. No review, acceptance, publication, or commit occurred.
+
+#### Fresh independent part-5 backend review — 2026-10-19
+
+Reviewed issue #445, the approved backend plan and product scope, the current selected backend and callers, focused test, coding standards, and recorded runtime evidence. Code stayed read-only; no checks ran. Unrelated worktree changes were excluded.
+
+**Findings for human decision**
+
+- **High — Fountain preparation contract contains stale duplicate state — `data/domain/world-5/hole/fountain.tsx:7–21,35–49`; `hole.tsx:2543–2557`:** Two same-named `FountainModifiers` interfaces merge. The earlier declaration requires `holes11Index7`, while the current preparation call supplies `currencyValueExponent` instead. The stale raw-save field also conflicts with `PARSE-01`; remove the obsolete declaration. No typecheck evidence exists.
+- **Medium — eligible marble affordability becomes known false when cost is unknown — `data/domain/world-5/hole/fountain.tsx:245–255`:** For an eligible upgrade with missing marbleization level, cost is `null` but `canAffordMarbleize` returns `false`. Preserve unknown cost as unavailable; only known ineligibility justifies `false`. This conflicts with the plan's unknown-versus-zero boundary and `DATA-01`.
+- **Medium — Cove local parity remains unverified:** The smoke prepares local effects for map 216 from the retained save's inputs; the paired game runtime was on map 162. The plan requires current outputs verified against same-save game outputs. Domain-branch assertions and source formulas do not establish personalized Cove parity.
+- **Medium — absent Fountain stack data becomes a known-empty collection — `data/domain/world-5/hole/fountain.tsx:169–175,359–369,399–407`:** When `Holes[29]` is absent, parsing creates an empty stack list but marks it unavailable. Aggregate methods ignore that state and report zero items/occupied positions, zero pending value, and available capacity. Preserve unavailable aggregates for missing stack data while retaining zero for a saved empty list.
+
+The review found no scope expansion, UI coupling, generated-data changes, authored descriptions, or unnecessary static records. The scoped APIs otherwise match approved Jar, Fountain, and Cove ownership. Focused 16/16 tests and the standalone smoke remain recorded results, not rerun; broad suites, typecheck, build, and lint remain unchecked. Four previous suites and 24 extraction mismatches remain unresolved, with no evidence attributing them to part 5. No acceptance, commit, or publication occurred.
+
+#### Selected part-5 revision — modifier contract and unavailable Fountain state — 2026-10-19
+
+Removed the stale duplicate `FountainModifiers` declaration and retained its authoritative `currencyValueExponent` field. A repository-wide reference search found only the Fountain contract, its single Hole preparation object, and its consumer; the preparation caller already used the named field. No remaining `holes11Index7` reference exists in code.
+
+`canAffordMarbleize` now returns unavailable when an eligible upgrade lacks its marbleization cost; known ineligibility still returns `false`. Fountain stack item count, occupied positions, pending total, and available capacity now return unavailable when saved stack data is missing. A saved empty stack list remains a known zero state.
+
+**Verification:** `yarn test tests/domains/hole/part5-state.test.ts --runInBand` passed 1 suite / 16 tests. Focused consumer assertions cover missing eligible marbleization level, known ineligibility, absent `Holes[29]`, and saved empty stacks. `yarn tsx .tmp-hole-gate-smoke.ts` passed through normal `updateIdleonData` import and independently checked missing versus empty stack values; the temporary script was removed after the run.
+
+`yarn tsc --noEmit` reported no Fountain modifier contract/caller diagnostic. It still exits with diagnostics in existing app/components, unrelated domains, and Hole consumers, including `hole.tsx` nullable sums / missing `MonumentUnlockModel` plus `cove.ts` nullable sums. No unrelated file was changed. Exact unrelated diagnostics include `app/world-5/hole/content.tsx` (nullable efficiency and impossible union), `components/base/RoundedShadowBox.tsx`, `components/world-5/gaming/{fertilizer,plants}.tsx`, `components/world-5/hole/part4Caverns.tsx`, `components/world-7/spelunking/*.tsx`, `data/domain/player-stats.ts`, `data/domain/weekly-boss.ts`, `data/domain/world-4/cooking.tsx`, `data/domain/world-5/{hole/cove.ts,hole/hole.tsx,sailing/sailing.tsx,gaming/garden.ts}`, and `data/domain/world-7/clamworks.tsx`. These existing diagnostics remain unmodified.
+
+**Cove runtime attempt:** Fresh game-researcher confirmed canonical offline v1.23 on port 3205 remained ready with character 3 (`Sludgev4`) in `uAquaB10`, sceneID 162. Read-only `POST http://127.0.0.1:3205/exec` queried `Holes2.Cove_CrystalGlunkoDropRate(0,0)` and scene/player accessors. The accessors returned `Character scene not found`, `Character sceneID not found`, and `Character playerName not found`; helper output `69` was invalid, not a Cove value. Readiness still showed map 162. No character switch, scene transition, save mutation, purchase, or fixture write occurred. No matched-operand Cove-local runtime comparison was reachable; map-216 parity remains unverified. Do not treat in-domain calculations as game parity.
+
+No acceptance, publication, review, or commit occurred. Previous approved fixes and recorded check limits remain unchanged.
+
+#### Fresh independent part-5 backend review — 2026-10-19
+
+Reviewed issue #445, the approved backend plan and product scope, current selected backend diff, nullable consumer changes, tests, standards, and recorded check evidence. Code stayed read-only; no checks ran.
+
+**Findings for human decision**
+
+- **Medium — missing Jar type count is reported as known locked — `data/domain/world-5/hole/jar.tsx:45–48,78–82`:** `ownedTypeCount` preserves missing save data as `null`, but every `JarType.unlocked` is non-nullable and becomes `false`. This presents unavailable access as known locked, contrary to the specification's unknown-versus-zero distinction and `DATA-01`.
+- **Medium — selected backend type errors remain unresolved:** The executor recorded failed `yarn tsc --noEmit` with diagnostics in new `cove.ts`, changed `hole.tsx`, and selected Hole consumers. The recorded summary calls these “existing,” but supplies no diagnostic text, codes, or line numbers to establish attribution. New `cove.ts` cannot be treated as pre-existing. Do not claim the selected code is type-clean; the exact diagnostics were not retained here and were not rerun.
+- **Low — repeated lookup tables allocate per stack item — `data/domain/world-5/hole/fountain.tsx:308–315`:** `getCurrencyValue` recreates both currency-index lookup arrays for every item valuation. `prepare` calls this once per saved stack item, including 615 items in recorded fixture evidence. Move fixed lookup data out of the hot method or replace it with direct indexed constants to avoid repeated allocations and improve mapping readability.
+
+**Disposition and scope**
+
+The prior review findings are corrected in current code: the duplicate `FountainModifiers` declaration is gone; unknown eligible marbleization cost stays unavailable; absent stack data keeps dependent totals unavailable while saved empty stacks remain known zero; and absent collectible levels keep Jar bonuses and rates unavailable. Jar producer-count and Opal-cost corrections also remain present.
+
+No scope expansion, frontend coupling, generated-data edits, authored game descriptions, extra static records, forecast, or simulation was found. Cove's map-216 helper result `69` was invalid because runtime character accessors failed; no Cove game parity was observed. Recorded 16/16 focused tests and standalone normal-import smoke are evidence only, not rerun. The record does not establish other-currency, alternate-save, or broad-suite parity. No acceptance, commit, or publication occurred.
+
+#### Selected part-5 revision — Jar ownership, Fountain lookup, and typecheck — 2026-10-19
+
+Addressed only the three selected findings. `JarType.unlocked` is now `boolean | null`: absent `Holes[11][37]` keeps ownership unknown, while a saved count of zero marks every initialized type locked. All ten catalog records remain initialized. `Fountain.getCurrencyValue` now reads fixed readonly module-level page and bonus mappings; it creates no lookup arrays per stack item. Nullable reductions and callers now narrow explicit known inputs. `player-stats.ts` leaves prepared drop rate unavailable when its newly nullable Wisdom Monument operand is missing.
+
+**Focused verification:** `yarn test tests/domains/hole/part5-state.test.ts --runInBand` passed 1 suite / 17 tests. New assertions distinguish absent Jar count from known zero and retain all ten initialized type records. The existing paired Fountain test still compares all nine currency values, every extracted stack item/position value, and pending total against v1.23 outputs.
+
+**Standalone smoke:** `yarn tsx .tmp-hole-part5-typed-smoke.ts` passed through `loadGameDataFromSave('latest')`. It verified ten initialized Jar types, imported known ownership count 9, all nine finite Fountain currency values, and unknown type ownership after parsing absent count. Output values were `[15252139478210.553, 56279586713536.11, 15217664417898.11, 32471900360606.527, 30738022866682.887, 28236738761373.18, 885667.4063167296, 373519.1441300422, 90145.47662391637]`. The temporary script was removed. This is normal-import/domain smoke, not new game-runtime evidence.
+
+
+The first complete diagnostic capture identified selected-code errors, all resolved in this revision: `cove.ts` TS18047 at lines 215 and 222; `hole.tsx` TS2531 at 1071 and 1307, TS2552 at 1105 and 1118, TS18047 at 1307, 2110, 2199, 2503, and 2533, and TS2322 at 2220; `player-stats.ts` TS18047 at 553. The missing `MonumentUnlockModel` import was restored. Explicit numeric reductions, nullable Monument and Bell handling, and the affected Study/Villager/drop-rate callers now typecheck.
+
+Exact selected-file diagnostics from the initial complete capture:
+
+```text
+data/domain/world-5/hole/cove.ts(215,64): error TS18047: 'sum' is possibly 'null'.
+data/domain/world-5/hole/cove.ts(222,66): error TS18047: 'sum' is possibly 'null'.
+data/domain/world-5/hole/hole.tsx(1071,26): error TS2531: Object is possibly 'null'.
+data/domain/world-5/hole/hole.tsx(1105,49): error TS2552: Cannot find name 'MonumentUnlockModel'. Did you mean 'MonumentUnlock'?
+data/domain/world-5/hole/hole.tsx(1118,23): error TS2552: Cannot find name 'MonumentUnlockModel'. Did you mean 'MonumentUnlock'?
+data/domain/world-5/hole/hole.tsx(1307,10): error TS2531: Object is possibly 'null'.
+data/domain/world-5/hole/hole.tsx(1307,48): error TS18047: 'sum' is possibly 'null'.
+data/domain/world-5/hole/hole.tsx(2110,49): error TS18047: 'fountain' is possibly 'null'.
+data/domain/world-5/hole/hole.tsx(2199,40): error TS18047: 'sum' is possibly 'null'.
+data/domain/world-5/hole/hole.tsx(2220,4): error TS2322: Type 'number | null' is not assignable to type 'number'.
+data/domain/world-5/hole/hole.tsx(2503,50): error TS18047: 'sum' is possibly 'null'.
+data/domain/world-5/hole/hole.tsx(2533,25): error TS2531: Object is possibly 'null'.
+data/domain/world-5/hole/hole.tsx(2533,59): error TS18047: 'sum' is possibly 'null'.
+data/domain/player-stats.ts(553,16): error TS18047: 'wisdomMonumentPercent' is possibly 'null'.
+```
+**Final typecheck:** `yarn tsc --noEmit` exited 1 with 28 diagnostics. It reports no diagnostic in selected `data/domain/world-5/hole/{cove.ts,fountain.tsx,hole.tsx,jar.tsx,villager.tsx}` or `data/domain/player-stats.ts` caller migration. Remaining diagnostics are outside selected part-5 contracts:
+
+| Path | Remaining diagnostics |
+|---|---|
+| `app/world-5/hole/content.tsx` | TS18047 line 207; TS2339 twice and TS7006 line 262 |
+| `components/base/RoundedShadowBox.tsx` | TS2339 line 6 |
+| `components/world-5/gaming/fertilizer.tsx` | TS2322 line 41 |
+| `components/world-5/gaming/plants.tsx` | TS2339 line 58; TS2322 line 64 |
+| `components/world-5/hole/part4Caverns.tsx` | TS18047 lines 142–143 |
+| `components/world-7/spelunking/spelunkingPart2.tsx` | TS2339 lines 39, 40, 74, 77, 81, 106 |
+| `components/world-7/spelunking/spelunkingPart3.tsx` | TS18048 line 79 twice |
+| `data/domain/weekly-boss.ts` | TS2339 lines 18, 23, 38 |
+| `data/domain/world-4/cooking.tsx` | TS2322 line 800 |
+| `data/domain/world-5/gaming/garden.ts` | TS2339 lines 137, 253; TS2531 line 324 |
+| `data/domain/world-5/sailing/sailing.tsx` | TS2322 line 472 |
+| `data/domain/world-7/clamworks.tsx` | TS2345 lines 124, 126 |
+
+These unrelated diagnostics were not changed. The typecheck output was captured at `/tmp/hole-part5-tsc-final.log`; the inventory above retains every remaining path, code, and line. No broad suite, build, or lint ran. Cove map-216 parity remains unavailable; no game-runtime claim changed. No commit, review, acceptance, or publication occurred.
+
+### Fresh independent part-5 backend review — 2026-10-19
+
+Reviewed issue #445, approved product specification and delivery outcomes, approved backend plan, selected backend implementation and caller diffs, focused tests, `CODING_STANDARDS.md`, repository vocabulary guidance, and current handoff. Selected scope was the part-5 backend and required nullable caller migrations; unrelated dirty worktree paths were excluded. Code remained read-only. No checks ran.
+
+**Finding for human decision**
+
+- **Medium — missing Schematic save data becomes known zero in Fountain and Cove inputs — `data/domain/world-5/hole/hole.tsx:2545–2559,2654–2663`; `data/domain/world-5/hole/fountain.tsx:28–42`:** The Hole parser tracks missing `Holes[13]` as `sourceSaveAvailable.schematics = false`, and Jar preparation preserves that unknown state. Fountain preparation and Cove character preparation nevertheless pass `getSchematicBonus`, which returns zero when the Schematic lookup is absent; their input contracts require numbers. Fountain then reports potentially known currency values, stack values, bar/capacity inputs, and upgrade effects; Cove reports local respawn and pickup effects as if camp contributions were known zero. This conflicts with the approved unknown-versus-zero boundary and `DATA-01`. Preserve unknown consumed Schematic inputs or establish why the raw Schematic array cannot be absent on the supported import path.
+
+**Scope and standards**
+
+At review time, the implementation remained within Jars, Fountain, and Cove. The review found no frontend-specific API, authored description, generated-data change, added static record, forecast, simulation, or unrelated feature expansion. The reviewer considered existing direct repository access and readonly Fountain mappings consistent with `DATA-01`; the review's nullable caller-migration judgment is superseded by the revision below.
+
+**Evidence and limits**
+
+No checks were rerun during that review. Its then-current handoff reported 17/17 focused tests, standalone normal-import smoke for all nine Fountain values and unknown Jar ownership, and 28 typecheck diagnostics outside the selected sources and caller migrations. That evidence did not exercise missing Schematic data, Cove map-216 game parity, other saves, broad parity, build, or lint. Earlier four-suite / 24 extraction mismatches remain unresolved in causal scope. No acceptance, commit, or publication occurred.
+
+#### Selected part-5 revision — numeric Hole contracts and Schematic availability — 2026-10-19
+
+Corrected the prior mistaken reading: the rejected Gaming change added nullable fields; it did not remove `growthCycleSeconds`. This rollback removes only nullable changes attributable to that work. The pre-existing worktree removal of `Garden.growthCycleSeconds` remains untouched.
+
+**Exact rollback:** `FertilizerEffect.harvestBits` is numeric again. `Garden.harvestBits` and `Garden.nonPlantBitsMultiplier` are numeric again; `getNonPlantBitsMultiplier` returns `number`, and `Garden.update` no longer returns unknown when a monument result is null. Removed Gaming's early-null branch around `hole.getMonumentBonus("Bravery", 4)`. Preserved unrelated Gaming edits, including the existing achievement-index change.
+
+**Root contract correction:** `MonumentBonus.getBonus`, `Hole.getMonumentBonus`, `Hole.getMonumentBonusByText`, and `Hole.getFountainBonus` retain numeric account-bonus contracts. Missing-save presentation remains inside part-5 aspect APIs: Fountain upgrades/currency values and Cove local effects retain nullable state. Hole passes `null` for absent Schematic inputs to Fountain and Cove; it does not broaden numeric account-bonus APIs.
+
+Removed nullable Monument/Fountain propagation from damage, experience, Sailing artifact chance, PlayerStats, and Villager monument inputs. These consumers use their established numeric APIs; no cast or non-null assertion hides unavailable state. Hole-owned consumers that need part-5 availability read their Fountain aspect state directly.
+
+Reviewed the stopped worker's partial Schematic changes. The focused test confirms missing Schematic inputs remain unavailable in Fountain valuation and Cove effects, while saved zero inputs remain known zero. Fixed the test to snapshot each import's outputs before the next import mutates shared domain instances.
+
+**Verification:** `yarn test tests/domains/hole/part5-state.test.ts --runInBand` passed: 1 suite, 19 tests. The suite exercised `loadGameDataFromSave('latest')`; Gaming harvest and multiplier outputs, numeric Monument/Fountain APIs, and Player damage/experience consumer outputs were finite numbers. Its missing-versus-zero Schematic case exercised normal `updateIdleonData` imports.
+
+`yarn tsc --noEmit` exited 2. It reported no diagnostics in `hole.tsx`, `villager.tsx`, `well.tsx`, `player-damage-multiplier.ts`, `player-experience.ts`, `player-stats.ts`, or `artifactChance.ts`. Existing diagnostics remain in unrelated paths and in `garden.ts`: missing `growthCycleSeconds` at lines 137/253 and nullable `Lamp.getBonus` at line 319. These pre-existing changes were outside this rollback; no unrelated diagnostics were fixed. No broad suite, build, or lint ran.
+
+No save or fixture was written. Cove map-216 game parity and alternate-save parity remain unavailable. No review, acceptance, publication, or commit occurred.
+
+#### Fresh independent part-5 backend review — 2026-10-19
+
+Reviewed issue #445, the approved specification and backend plan, current part-5 backend implementation and focused tests, `CODING_STANDARDS.md`, recorded verification, and current rollback handoff. Code remained read-only; no checks ran. Unrelated worktree paths were excluded.
+
+**Standards — no findings.** Current part-5 state stays aspect-local: missing Schematic inputs remain unavailable to Fountain and Cove without changing numeric account-bonus contracts or their unrelated consumers. This follows `DATA-01`, `MODEL-01`, and the approved ownership boundary. No impossible initialized-object guards, unnecessary abstraction, invented descriptions, or frontend-specific backend shape were found.
+
+**Specification — no code findings.** Current selected backend remains within Jars, Fountain, and Cove. It adds no generated mapping, forecast, simulation, or unrelated mechanic. Recorded 19/19 focused imports cover missing-versus-zero Schematic inputs and finite numeric Gaming/account outputs after rollback. These historical results were not rerun.
+
+**Evidence limits for human decision:** Cove map-216 game parity and alternate-save parity remain unavailable; the recorded current proof is one retained v1.23 save plus domain/import branch checks. The reported typecheck still has unrelated/legacy diagnostics, including `garden.ts`'s existing `growthCycleSeconds` and nullable Lamp diagnostics; this review does not attribute them to part 5 or claim a clean repository typecheck. No broad suite, build, or lint result is recorded. These limits prevent a broad parity or clean-repository claim, but do not establish a current part-5 defect.
+
+No scope expansion, overengineering, excessive edge-case protection, premature frontend coupling, or authored game descriptions were found. No acceptance, publication, or commit occurred.
+
+### Part 5 backend — ACCEPTED BY DELEGATED SUPERVISOR — 2026-10-19
+
+The delegated supervisor accepted the selected Jars, Fountain, and Cove backend and its recorded limits after the independent review reported no findings. This is delegated acceptance, not direct-human acceptance.
+
+The retained evidence is 19/19 focused normal-import tests, standalone normal-import smoke, and paired v1.23 Fountain currency-0 source/runtime baseline. Acceptance does not claim Cove map-216 or alternate-save parity. Earlier four-suite/24 extraction mismatches remain unresolved in causal scope. Repository typecheck retains unrelated/legacy diagnostics, including existing `garden.ts` diagnostics. No broad-suite, build, or lint result is claimed.
+
+Local acceptance commit: `a6bdd448` (`feat(hole): add part 5 backend`). No checks ran after acceptance or commit.
+
+
 
 ### Cove local purchase-count preservation — ACCEPTED BY SUPERVISOR — 2026-10-19
 

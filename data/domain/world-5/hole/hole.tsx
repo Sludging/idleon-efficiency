@@ -32,6 +32,7 @@ import { HarpStringModel } from "../../model/harpStringModel";
 import { initHarpStringsRepo } from "../../data/HarpStringsRepo";
 import { Gambit } from "./gambit";
 import { Tesseract } from "../../tesseract";
+import { Cove } from "./cove";
 import { Jar } from "./jar";
 import { LegendTalents } from "../../world-7/legendTalents";
 import { ZenithMarket } from "../../world-7/zenithShop";
@@ -1059,7 +1060,6 @@ export class MonumentBonus {
  monumentSelfBoost: number = 0;
  cosmoBonus: number = 0;
  fountainBonus: number = 0;
-
  constructor(public index: number, public data: MonumentBonusModel, public monumentIndex: number) { }
 
  getBonus(): number {
@@ -1298,9 +1298,10 @@ export class Bell {
   const measurement = hole.measurements[2].effectiveBenefit;
   const jar11 = hole.jar.getBonus(11);
   const jar36 = hole.jar.getBonus(36);
-  const ringRate = ringQuantities.some(value => value === null) || measurement === null ? null
+  const ringRate = ringQuantities.some(value => value === null) || measurement === null ||
+   jar11 === null || jar36 === null ? null
    : 10 * (1 + monument / 100) * (1 + measurement / 100) *
-    (1 + ringQuantities.reduce((sum, value) => sum + (value ?? 0), 0) / 100) *
+    (1 + ringQuantities.reduce<number>((sum, value) => sum + value!, 0) / 100) *
     (1 + jar11 / 100) * (1 + jar36 / 100);
   const pingRate = pingQuantity === null || measurement === null
    ? null : 10 * (1 + monument / 100) * (1 + measurement / 100) * (1 + pingQuantity / 100);
@@ -1428,6 +1429,7 @@ export class ResourceCavren {
    if (!player) return;
 
    const efficiency = skilling.getSkillEfficiency(player.playerID, skill);
+   if (efficiency === null) return;
    this.characterCapabilities.push({
     playerID: player.playerID,
     playerName: player.playerName,
@@ -1723,7 +1725,7 @@ export class Lamp {
   const monument = hole.getMonumentBonus("Wisdom", 7);
   const bell = hole.bell.bonuses[3]?.getBonus() ?? null;
   const study = hole.getStudyBolaiaBonuses(6);
-  this.wishesPerDay = cavernCount === null || measurement === null || !cosmo?.saveAvailable || monument === null || bell === null
+  this.wishesPerDay = cavernCount === null || measurement === null || !cosmo?.saveAvailable || bell === null
    ? null : cavernCount < 6 ? 0
     : 1 + (measurement + cosmo.getBonus() + bell + monument + 100 * study) / 100;
   this.schematicCostDiscount = this.wishes[5].wishCount === null ? null
@@ -1842,6 +1844,7 @@ export class Hole extends Domain {
  lamp: Lamp = new Lamp();
  dawgDen: DawgDen = new DawgDen();
  jar: Jar = new Jar();
+ cove: Cove = new Cove();
  gambit: Gambit = new Gambit();
  cavernEarnedOpals: number = 0;
  cavernOpalSources: OpalSource[] = [];
@@ -1892,12 +1895,13 @@ export class Hole extends Domain {
   const progressionIndices = [1, 3, 5, 7];
   const studies = studyIds.map(index => this.studies[index]);
   const caverns = Object.values(this.resourceCavrens.cavrens);
-  if (!this.sourceSaveAvailable.collectibles || studies.some(study => !study.levelAvailable) ||
+  const jarBonus = this.jar.getBonus(5);
+  if (jarBonus === null || studies.some(study => !study.levelAvailable) ||
    progressionIndices.some(index => caverns[Math.floor(index / 2)].layerState === null)) {
    return null;
   }
 
-  return this.jar.getBonus(5) + studies.reduce((sum, study, index) =>
+  return jarBonus + studies.reduce((sum, study, index) =>
    sum + study.getBonus() * caverns[index].layerState!, 0);
  }
 
@@ -1929,7 +1933,7 @@ export class Hole extends Domain {
  }
 
  getFountainBonus(waterIndex: number, upgradeIndex: number): number {
-  return this.fountain.getBonus(waterIndex, upgradeIndex);
+  return this.fountain.getBonus(waterIndex, upgradeIndex) ?? 0;
  }
 
  getMonumentBonusByText(text: string): number {
@@ -2056,7 +2060,7 @@ export class Hole extends Domain {
 
  prepareStudyProgress(superbitOwned: boolean | null, stampBonus: number): void {
   const bolaia = this.villagers[VillagerIndex.Bolaia];
-  const fountain = this.getFountainBonus(1, 14);
+  const fountain = this.fountain.getBonus(1, 14);
   const perLevel = 5 + (this.getSchematicBonus(85, 2) + (this.getSchematicBonus(87, 3)
    + (this.getSchematicBonus(88, 5) + this.getSchematicBonus(99, 5))));
   const schematicUnavailableReason = this.sourceSaveAvailable.schematics ? null : "Saved Hole schematic inputs are missing.";
@@ -2096,8 +2100,8 @@ export class Hole extends Domain {
    { source: "Study All Nighter", owner: "majik:13", value: villageMajikUnavailableReason === null ? majik : null,
     unit: "percent", combination: "additive", unavailableReason: villageMajikUnavailableReason },
   ];
-  const reason = bolaiaUnavailableReason ?? this.studyInputsUnavailableReason;
-  this.studyRate = reason === null ? 100 * (1 + fountain / 100) * (1 + perLevel * bolaia.level / 100)
+  const reason = fountainUnavailableReason ?? bolaiaUnavailableReason ?? this.studyInputsUnavailableReason;
+  this.studyRate = reason === null && fountain !== null ? 100 * (1 + fountain / 100) * (1 + perLevel * bolaia.level / 100)
    * (1 + (collectible! + (stampBonus + majik)) / 100) : null;
   this.eligibleStudyNeighbors = [];
   this.studyNeighborEligibilityUnavailableReason = null;
@@ -2153,8 +2157,6 @@ export class Hole extends Domain {
     ? "Saved Gloomie colony counter is missing." : null);
   const fountainUnavailableReason = !this.sourceSaveAvailable.fountainUpgrades ? "Saved Fountain upgrade inputs are missing."
    : !this.sourceSaveAvailable.fountainMarbleization ? "Saved Fountain marbleization inputs are missing." : null;
-  const monumentUnavailableReason = !this.sourceSaveAvailable.monumentalVibes ? "Saved Monumental Vibes input is missing."
-   : !this.sourceSaveAvailable.monumentRewards ? "Saved monument reward inputs are missing." : fountainUnavailableReason;
   const collectibleUnavailableReason = !this.sourceSaveAvailable.collectibleLegendTalent
    ? "Saved collectible Legend Talent input is missing."
    : !this.sourceSaveAvailable.collectibles ? "Saved Hole collectible inputs are missing." : null;
@@ -2184,9 +2186,9 @@ export class Hole extends Domain {
     investedTens: villager.investmentAvailable ? Math.floor(villager.opals / 10) : null,
     percent: villager.investmentAvailable && enthusiasmPerTen !== null ? enthusiasmPerTen * Math.floor(villager.opals / 10) : null,
     unavailableReason: villager.investmentAvailable ? villageMajikReason : "Saved Opal investment is missing." })) };
-  const jarPercent = collectibleUnavailableReason === null
-   ? this.jar.getBonus(4) + (this.jar.getBonus(10) + (this.jar.getBonus(12)
-    + (this.jar.getBonus(22) + (this.jar.getBonus(29) + this.jar.getBonus(35))))) : null;
+  const jarBonuses = [4, 10, 12, 22, 29, 35].map(index => this.jar.getBonus(index));
+  const jarPercent = collectibleUnavailableReason !== null || jarBonuses.some(bonus => bonus === null) ? null
+   : jarBonuses.reduce<number>((sum, bonus) => sum + bonus!, 0);
   const builtSchematics = this.schematics.filter(schematic => schematic.unlocked).length;
   const sharedInputs: VillagerSharedGrowthInputs = {
    ...inputs, unavailableReason: this.sharedGrowthUnavailableReason,
@@ -2199,10 +2201,10 @@ export class Hole extends Domain {
    equalSpreadPercent: equalSpread, equalSpreadUnavailableReason: equalSpreadReason,
    enthusiasmPerTen, villageMajikUnavailableReason: villageMajikReason,
    contentedCreator: villageMajiks[1].getBonus() * builtSchematics, enhancedMajik: villageMajiks[2].getBonus(),
-   bravery: monumentUnavailableReason === null ? this.getMonumentBonus("Bravery", 3) : null,
-   justice: monumentUnavailableReason === null ? this.getMonumentBonus("Justice", 3) : null,
-   wisdom: monumentUnavailableReason === null ? this.getMonumentBonus("Wisdom", 3) : null,
-   monumentUnavailableReason, slabItemsMeasurement: this.measurements[7].effectiveBenefit,
+   bravery: this.getMonumentBonus("Bravery", 3),
+   justice: this.getMonumentBonus("Justice", 3),
+   wisdom: this.getMonumentBonus("Wisdom", 3),
+   slabItemsMeasurement: this.measurements[7].effectiveBenefit,
    gloomieSchematic: this.getSchematicBonus(48),
    gloomieSchematicUnavailableReason,
    gloomieCardPercent: this.sourceSaveAvailable.cards ? Math.min(4 * inputs.gloomieCardLevel, 50) : null,
@@ -2223,6 +2225,7 @@ export class Hole extends Domain {
  getRawKeys(): RawData[] {
   return [
    { key: "Holes", perPlayer: false, default: [] },
+   { key: "Jars", perPlayer: false, default: null },
    { key: "DoOnceREAL", perPlayer: false, default: null },
    { key: "BundlesReceived", perPlayer: false, default: null },
    { key: "Gaming", perPlayer: false, default: null },
@@ -2258,10 +2261,11 @@ export class Hole extends Domain {
   const spelunkData = data.get("Spelunk") as number[][] | null;
   const holeData = Array.from({ length: 35 }, (_, index) => savedHoleData[index] ?? []);
   const aspectHoleData = [...holeData] as (number[] | undefined)[];
-  [3, 4, 5, 6, 20, 21, 24, 28].forEach(index => {
+  [3, 4, 5, 6, 20, 21, 24, 28, 29, 30, 31, 32, 34].forEach(index => {
    if (savedHoleData[index] == null) aspectHoleData[index] = undefined;
   });
-  const optionListAccount = (data.get("OptLacc") ?? []) as number[];
+  const rawAccountOptions = data.get("OptLacc") as number[] | undefined;
+  const optionListAccount = rawAccountOptions ?? [];
   const rawData = data.get("rawData") as Record<string, unknown>;
   const playerNames = data.get("playerNames") as string[];
   const releaseVersion = data.get("DoOnceREAL") == null ? null : Number(data.get("DoOnceREAL"));
@@ -2394,8 +2398,8 @@ export class Hole extends Domain {
   hole.schematics.forEach(schematic => schematic.parse(savedHoleData));
   hole.measurements.forEach(measurement => measurement.parse(savedHoleData));
 
-  hole.fountain.parse(holeData);
-
+  hole.fountain.parse(aspectHoleData, optionListAccount);
+  hole.cove.parse(rawAccountOptions);
   // Monument Jazz
   const braveryMonument = hole.monuments.monuments["Bravery"];
   braveryMonument.hours = holeData[14][2 * braveryMonument.index] || 0;
@@ -2418,7 +2422,7 @@ export class Hole extends Domain {
     bonus.level = holeData[15][10 * monument.index + bonus.index] || 0;
     // Monumental Vibes
     bonus.cosmoBonus = hole.majiks.HoleUpgrades.find(upgrade => upgrade.index == 0)?.getBonus() || 0;
-    bonus.fountainBonus = hole.fountain.getBonus(monument.index, 13);
+    bonus.fountainBonus = hole.fountain.getBonus(monument.index, 13) ?? 0;
    });
    monument.bonuses.forEach(bonus => {
     bonus.monumentSelfBoost = monument.bonuses[9].getBonus();
@@ -2440,15 +2444,7 @@ export class Hole extends Domain {
    challenge.maxTime = holeData[11][challenge.index + 65] || 0;
   });
 
-  // Jar
-  const ownedJars = holeData[11][37] || 0;
-  hole.jar.jarTypes.forEach(jar => {
-   jar.unlocked = ownedJars >= jar.index;
-  });
-  const jarBonusesLevels = holeData[24] as number[];
-  this.jar.jarBonuses.forEach(bonus => {
-   bonus.level = Number(jarBonusesLevels[bonus.index] ?? 0);
-  });
+  hole.jar.parse(aspectHoleData, (data.get("Jars") as number[][] | undefined) ?? null);
  }
 }
 
@@ -2463,6 +2459,7 @@ export const updateHole = (data: Map<string, any>) => {
  const legendTalents = data.get("legendTalents") as LegendTalents;
  const zenithMarket = data.get("zenithMarket") as ZenithMarket;
  const gaming = data.get("gaming") as Gaming;
+ const arcade = data.get("arcade") as Arcade;
  const players = data.get("players") as Player[];
  const divinity = data.get("divinity") as Divinity;
 
@@ -2471,7 +2468,7 @@ export const updateHole = (data: Map<string, any>) => {
   : hole.savedStudyLevelsForMeasurements.reduce((sum, level) => sum + level, 0);
  const lengthmeister = hole.majiks.VillageUpgrades.find(upgrade => upgrade.index === 12)!;
  const fountainDiscountPercent = hole.sourceSaveAvailable.fountainUpgrades && hole.sourceSaveAvailable.fountainMarbleization
-  ? hole.getFountainBonus(2, 14) : null;
+  ? hole.fountain.getBonus(2, 14) : null;
  hole.measurements.forEach(measurement => measurement.prepare({
   minau: hole.villagers[VillagerIndex.Minau], lengthmeister, fountainDiscountPercent,
   crops: hole.sourceSaveAvailable.measurementCrops ? farming.registeredCropCount : null,
@@ -2489,20 +2486,45 @@ export const updateHole = (data: Map<string, any>) => {
  hole.jar.jarBonuses.forEach(bonus => {
   bonus.legendTalentBonus = legendTalentBonus;
  });
+ const jarCavernLog = hole.jar.holdings[10] === null ? null : lavaLog(hole.jar.holdings[10]!);
+ const jarExplorer = hole.villagers[VillagerIndex.Polonai];
+ const jarMeasurementBonus = hole.measurements[12].effectiveBenefit;
+ const jarCollectibleBonuses = [1, 15, 24].map(index => hole.jar.getBonus(index));
+ const jarCollectibleBonus = jarMeasurementBonus === null ||
+  jarCollectibleBonuses.some(bonus => bonus === null) ? null
+  : jarCollectibleBonuses.reduce<number>((sum, bonus) => sum + bonus!, jarMeasurementBonus);
+ const jarProducerCount = hole.sourceSaveAvailable.schematics
+  ? 1 + Number(hole.getSchematicBonus(63) > 0) + Number(hole.getSchematicBonus(66) > 0)
+  : null;
+ hole.jar.prepare({
+  collectibleBonus: jarCollectibleBonus,
+  cavernCount: jarExplorer.saveAvailable ? Math.min(hole.studies.length, jarExplorer.level) : null,
+  producerCount: jarProducerCount,
+  productionUpgrade67: hole.sourceSaveAvailable.schematics ? hole.getSchematicBonus(67, 30) : null,
+  productionUpgrade74: hole.sourceSaveAvailable.schematics ? hole.getSchematicBonus(74, 5) : null,
+  productionUpgrade72: hole.sourceSaveAvailable.schematics ? hole.getSchematicBonus(72, 10) : null,
+  cavernLog: jarCavernLog,
+ });
 
  // Update the lamp bonuses from zenith market
  hole.lamp.zenithMarketBonus = zenithMarket.getBonusForId(2);
 
  // Update the gambit multiplier
  const measurementGambitBonus = hole.measurements[13].effectiveBenefit;
+ const wisdomMonumentBonus = hole.getMonumentBonus("Wisdom", 7);
  if (measurementGambitBonus === null) {
   hole.gambit.gambitPointsMulti = null;
  } else {
-  let gambitMultipliers = measurementGambitBonus + hole.getStudyBolaiaBonuses(13);
-  gambitMultipliers += tesseract.getUpgradeBonus(47) + (hole.monuments.monuments["Wisdom"].bonuses.find(bonus => bonus.index == 7)?.getBonus() ?? 0);
-  gambitMultipliers += hole.schematics.find(schem => schem.index == 78)?.getBonus(10) ?? 0;
-  gambitMultipliers += hole.jar.getBonus(23) + hole.jar.getBonus(30);
-  hole.gambit.gambitPointsMulti = 1 + gambitMultipliers / 100;
+  const jarBonuses = [hole.jar.getBonus(23), hole.jar.getBonus(30)];
+  if (jarBonuses.some(bonus => bonus === null)) {
+   hole.gambit.gambitPointsMulti = null;
+  } else {
+   let gambitMultipliers = measurementGambitBonus + hole.getStudyBolaiaBonuses(13);
+   gambitMultipliers += tesseract.getUpgradeBonus(47) + wisdomMonumentBonus;
+   gambitMultipliers += hole.schematics.find(schem => schem.index == 78)?.getBonus(10) ?? 0;
+   gambitMultipliers += jarBonuses.reduce<number>((sum, bonus) => sum + bonus!, 0);
+   hole.gambit.gambitPointsMulti = 1 + gambitMultipliers / 100;
+  }
  }
  hole.gambit.updateUnlockedBonuses();
  hole.bell.prepare(hole, players, gaming, divinity);
@@ -2510,6 +2532,21 @@ export const updateHole = (data: Map<string, any>) => {
  const cavernCount = explorer.saveAvailable ? Math.min(hole.studies.length, explorer.level) : null;
  hole.lamp.prepare(hole, cavernCount);
  hole.harp.prepare(hole);
+ hole.fountain.prepare({
+  arcadeBonus68: arcade.bonuses[68].getBonus(),
+  bUpgrade94Level1: hole.sourceSaveAvailable.schematics ? hole.getSchematicBonus(94, 1) : null,
+  bUpgrade95Level10: hole.sourceSaveAvailable.schematics ? hole.getSchematicBonus(95, 10) : null,
+  bUpgrade97Level3: hole.sourceSaveAvailable.schematics ? hole.getSchematicBonus(97, 3) : null,
+  coveUpgrade14: hole.cove.upgrades[14].getBonus(),
+  cosmoBonusQuantity4: hole.majiks.HoleUpgrades.find(upgrade => upgrade.index === 4)!.getBonus(),
+  lampBonus99: hole.lamp.getBonus(true),
+  measurementBonus16: hole.measurements[16].effectiveBenefit,
+  bellBonus6: hole.bell.bonuses[6]?.getBonus() ?? null,
+  studyBonus15: hole.getStudyBolaiaBonuses(15),
+  ownedCaverns: cavernCount,
+  currencyValueExponent: hole.fountain.currencyValueExponent,
+  duckCount: hole.fountain.duckCount,
+ });
  const stamps = data.get("stamps") as Stamp[][];
  const stampBonus = getStampBonusForKey(stamps, "CavernRes");
  hole.well.prepare(hole, hole.savedGemShopBucketPurchase, stampBonus, gaming.getCglunkoBonus());
@@ -2604,4 +2641,14 @@ export const updateHoleCharacterCapabilities = (data: Map<string, any>): void =>
  Object.values(resourceCavrens.cavrens).forEach(cavern => {
   cavern.prepareCharacterCapabilities(players, assignments, skilling);
  });
+ hole.cove.prepareCharacters(players.map(player => ({
+  playerId: player.playerID,
+  mapId: player.currentMapId,
+  cavernId: assignments[player.playerID] ?? -1,
+  campUpgrade100Bonus: hole.sourceSaveAvailable.schematics ? hole.getSchematicBonus(100, 25) : null,
+  campUpgrade101Bonus: hole.sourceSaveAvailable.schematics ? hole.getSchematicBonus(101, 10) : null,
+  campUpgrade103Bonus: hole.sourceSaveAvailable.schematics ? hole.getSchematicBonus(103, 10) : null,
+  campUpgrade105Bonus: hole.sourceSaveAvailable.schematics ? hole.getSchematicBonus(105, 10) : null,
+  gameLog: lavaLog,
+ })));
 };

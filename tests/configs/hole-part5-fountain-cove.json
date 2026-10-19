@@ -1,0 +1,36 @@
+{
+  "name": "Hole part-five Fountain stack and Cove camp factors",
+  "description": "Paired v1.23 Fountain position contents and values, capacity, overflow value, and Cove camp operands from the latest saved account.",
+  "requiredActivePlayerIndex": 3,
+  "extractions": [
+    {
+      "label": "active_context",
+      "expression": "({ playerId: idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0]), playerName: idleon.getAttr(\"UserInfo\")[0], version: idleon.getAttr('DoOnceREAL') })"
+    },
+    {
+      "label": "stack_positions",
+      "expression": "(() => { const holes = idleon.getAttr('Holes'); const royalMulti = idleon.callFunction('Holes2', 'Fount_RoyalMulti', 0, 0); const stackBonus = idleon.callFunction('Holes', 'B_UPG', 95, 10); const positions = holes[29].map((itemCurrencyIds, space) => { const royal = Number(holes[34][space]) >= 1; const itemValues = itemCurrencyIds.map(currencyId => { const coinValue = idleon.callFunction('Holes2', 'Fount_CurrencyTotValue', Number(currencyId), 0); const stackFactor = 1 + itemCurrencyIds.length * stackBonus / 100; const ordinaryValue = coinValue * stackFactor; const royalValue = royal ? Math.max(1, royalMulti - 1) * coinValue * stackFactor : 0; return ordinaryValue + royalValue; }); return { space, itemCurrencyIds: itemCurrencyIds.map(Number), royal, itemValues, value: itemValues.reduce((sum, value) => sum + value, 0) }; }); const occupiedSpaces = positions.filter(position => position.itemCurrencyIds.length > 0).length; const spaces = idleon.callFunction('Holes2', 'SpacesOwned', 0, 0); const maximumStackSize = idleon.callFunction('Holes2', 'MaxStackSize', 0, 0); return { spaces, maximumStackSize, maximumCoins: idleon.callFunction('Holes2', 'MaxCoinz', 0, 0), occupiedSpaces, itemCount: positions.reduce((sum, position) => sum + position.itemCurrencyIds.length, 0), positions, overflowValue0: idleon.callFunction('Holes2', 'Fount_CurrencyTotValue', 0, 0) * idleon.callFunction('Holes2', 'Fount_CurrencyKEEP', 0, 0) }; })()"
+    },
+    { "label": "camp_upgrade_100_25", "expression": "idleon.callFunction('Holes', 'B_UPG', 100, 25)" },
+    { "label": "camp_upgrade_101_10", "expression": "idleon.callFunction('Holes', 'B_UPG', 101, 10)" },
+    { "label": "camp_upgrade_103_10", "expression": "idleon.callFunction('Holes', 'B_UPG', 103, 10)" },
+    { "label": "camp_upgrade_105_10", "expression": "idleon.callFunction('Holes', 'B_UPG', 105, 10)" },
+    { "label": "cove_respawn_upgrade", "expression": "idleon.callFunction('Holes2', 'Cglunko_Respawn', 0, 0)" },
+    { "label": "cove_pickup_double_chance", "expression": "idleon.callFunction('Holes2', 'Cglunko_DoublePickup', 0, 0)" },
+    { "label": "currency_value_exponent", "expression": "idleon.getAttr('Holes')[11][7]" },
+    { "label": "excluded_generation_currency_ids", "expression": "Array.from({ length: 9 }, (_, currencyId) => currencyId).filter(currencyId => String(idleon.getAttr('Holes')[11][83]).includes(idleon.getAttr('Number2Letter')[currencyId])).join(',')" },
+    { "label": "desire_currency_id", "expression": "idleon.getAttr('Holes')[11][82]" },
+    { "label": "desire_currency_bonus", "expression": "idleon.callFunction('Holes2', 'Fountain_BonTOT', 1, 11)" },
+    { "label": "fountain_bonus_terms", "expression": "[[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[1,2],[1,3],[1,4],[1,5],[1,6],[1,7],[1,19],[2,2],[2,3],[2,4],[2,5],[2,6]].map(([page,index]) => ({ page, index, value: idleon.callFunction('Holes2', 'Fountain_BonTOT', page, index) }))" },
+    { "label": "currency_values", "expression": "Array.from({ length: 9 }, (_, currencyId) => idleon.callFunction('Holes2', 'Fount_CurrencyTotValue', currencyId, 0))" },
+    { "label": "royal_multiplier", "expression": "idleon.callFunction('Holes2', 'Fount_RoyalMulti', 0, 0)" },
+    { "label": "currency_4_base_value", "expression": "idleon.callFunction('Holes2', 'Fount_CurrencyBaseValue', 4, 0)" },
+    { "label": "all_currency_multiplier", "expression": "idleon.callFunction('Holes2', 'Fount_CurrencyALLmulti', 0, 0)" },
+    { "label": "currency_4_lucky_value", "expression": "idleon.callFunction('Holes2', 'Fount_LuckyCoinValue', 4, 0)" },
+    { "label": "duck_multiplier", "expression": "idleon.callFunction('Holes2', 'Fount_DuckMulti', 0, 0)" },
+    { "label": "desire_multiplier", "expression": "idleon.callFunction('Holes2', 'Fount_DesireMulti', 0, 0)" },
+    { "label": "currency_value_wallet_page_1", "expression": "idleon.getAttr('Holes')[9][16]" },
+    { "label": "currency_value_wallet_log_page_1", "expression": "Math.log(Math.max(idleon.getAttr('Holes')[9][16], 1)) / 2.30259" },
+    { "label": "stack_bonus_95_10", "expression": "idleon.callFunction('Holes', 'B_UPG', 95, 10)" }
+  ]
+}

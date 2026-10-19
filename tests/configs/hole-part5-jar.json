@@ -1,0 +1,23 @@
+{
+  "name": "Hole part-five Jar producer parity",
+  "description": "Paired v1.23 Jar collectible bonuses and producer inputs from the latest saved account.",
+  "requiredActivePlayerIndex": 3,
+  "extractions": [
+    { "label": "active_context", "expression": "({ playerId: idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0]), playerName: idleon.getAttr(\"UserInfo\")[0], version: idleon.getAttr('DoOnceREAL') })" },
+    { "label": "producer_assignment", "expression": "idleon.getAttr('Holes')[25].slice(0, 6)" },
+    { "label": "requirement_balance", "expression": "idleon.getAttr('Holes')[11][43]" },
+    { "label": "collectible_1", "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 1, 0)" },
+    { "label": "collectible_15", "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 15, 0)" },
+    { "label": "collectible_24", "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 24, 0)" },
+    { "label": "measurement_12", "expression": "idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 12, 0)" },
+    { "label": "production_upgrade_67", "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 67, 30)" },
+    { "label": "production_upgrade_74", "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 74, 5)" },
+    { "label": "production_upgrade_72", "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 72, 10)" },
+    { "label": "producer_requirement_0", "expression": "idleon.callFunction('Holes', 'JarProductionREQ', idleon.getAttr('Holes')[25][0], 0)" },
+    { "label": "producer_rate_0", "expression": "idleon.callFunction('Holes', 'JarProductionPerHR', 0, 0)" },
+    { "label": "producer_requirement_1", "expression": "idleon.callFunction('Holes', 'JarProductionREQ', idleon.getAttr('Holes')[25][1], 0)" },
+    { "label": "producer_rate_1", "expression": "idleon.callFunction('Holes', 'JarProductionPerHR', 1, 0)" },
+    { "label": "producer_requirement_2", "expression": "idleon.callFunction('Holes', 'JarProductionREQ', idleon.getAttr('Holes')[25][2], 0)" },
+    { "label": "producer_rate_2", "expression": "idleon.callFunction('Holes', 'JarProductionPerHR', 2, 0)" }
+  ]
+}

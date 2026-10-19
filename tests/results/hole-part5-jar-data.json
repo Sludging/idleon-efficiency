@@ -1,0 +1,80 @@
+{
+  "extractions": {
+    "active_context": {
+      "expression": "({ playerId: idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0]), playerName: idleon.getAttr(\"UserInfo\")[0], version: idleon.getAttr('DoOnceREAL') })",
+      "result": {
+        "playerId": 3,
+        "playerName": "Sludgev4",
+        "version": 395.1
+      }
+    },
+    "producer_assignment": {
+      "expression": "idleon.getAttr('Holes')[25].slice(0, 6)",
+      "result": [
+        4,
+        8,
+        9,
+        4532.518244208975,
+        10349.807397878641,
+        842.4707950379016
+      ]
+    },
+    "requirement_balance": {
+      "expression": "idleon.getAttr('Holes')[11][43]",
+      "result": 459717
+    },
+    "collectible_1": {
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 1, 0)",
+      "result": 176
+    },
+    "collectible_15": {
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 15, 0)",
+      "result": 211.20000000000002
+    },
+    "collectible_24": {
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 24, 0)",
+      "result": 96
+    },
+    "measurement_12": {
+      "expression": "idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 12, 0)",
+      "result": 323.63507956989247
+    },
+    "production_upgrade_67": {
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 67, 30)",
+      "result": 30
+    },
+    "production_upgrade_74": {
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 74, 5)",
+      "result": 5
+    },
+    "production_upgrade_72": {
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 72, 10)",
+      "result": 10
+    },
+    "producer_requirement_0": {
+      "expression": "idleon.callFunction('Holes', 'JarProductionREQ', idleon.getAttr('Holes')[25][0], 0)",
+      "result": 5395.485805444112
+    },
+    "producer_rate_0": {
+      "expression": "idleon.callFunction('Holes', 'JarProductionPerHR', 0, 0)",
+      "result": 788162.8901608335
+    },
+    "producer_requirement_1": {
+      "expression": "idleon.callFunction('Holes', 'JarProductionREQ', idleon.getAttr('Holes')[25][1], 0)",
+      "result": 10672.569591876827
+    },
+    "producer_rate_1": {
+      "expression": "idleon.callFunction('Holes', 'JarProductionPerHR', 1, 0)",
+      "result": 788162.8901608335
+    },
+    "producer_requirement_2": {
+      "expression": "idleon.callFunction('Holes', 'JarProductionREQ', idleon.getAttr('Holes')[25][2], 0)",
+      "result": 11529.906389085836
+    },
+    "producer_rate_2": {
+      "expression": "idleon.callFunction('Holes', 'JarProductionPerHR', 2, 0)",
+      "result": 788162.8901608335
+    }
+  },
+  "errors": {}
+}

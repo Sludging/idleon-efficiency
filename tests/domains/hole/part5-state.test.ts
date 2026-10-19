@@ -1,0 +1,537 @@
+import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
+import { loadGameDataFromSave, loadTestSave } from '../../utils/cloudsave-loader';
+import { initAllItems } from '../../../data/domain/items';
+import { Hole, updateHole, updateHoleCharacterCapabilities } from '../../../data/domain/world-5/hole/hole';
+import { Cove } from '../../../data/domain/world-5/hole/cove';
+import { Fountain } from '../../../data/domain/world-5/hole/fountain';
+import { initAccountDataKeys, updateIdleonData } from '../../../data/domain/idleonData';
+import { normalizeCompanionStates } from '../../../data/domain/companions/companionState';
+import { lavaLog } from '../../../data/utility';
+import { Jar } from '../../../data/domain/world-5/hole/jar';
+
+import { Gaming } from '../../../data/domain/world-5/gaming';
+import { getPlayerDamageTotalMultiplier } from '../../../data/domain/player-damage-multiplier';
+import { getClassExperienceMultiplier } from '../../../data/domain/player-experience';
+import { Player } from '../../../data/domain/player';
+const saveName = 'latest';
+
+describe('Hole part-five imported state', () => {
+    let hole: Hole;
+    let gameData: Map<string, any>;
+    let jarResults: ExtractionResults;
+    let fountainCoveResults: ExtractionResults;
+
+    beforeAll(() => {
+        jarResults = loadExtractionResults('hole-part5-jar-data.json');
+        fountainCoveResults = loadExtractionResults('hole-part5-fountain-cove-data.json');
+        validateExtractionHealth(jarResults);
+        validateExtractionHealth(fountainCoveResults);
+        gameData = loadGameDataFromSave(saveName);
+        hole = gameData.get('hole') as Hole;
+    });
+
+    it('keeps existing account-bonus and Gaming consumers numeric after normal import', () => {
+        const gaming = gameData.get('gaming') as Gaming;
+        const player = (gameData.get('players') as Player[])[0];
+
+        expect(Number.isFinite(gaming.garden.harvestBits)).toBe(true);
+        expect(Number.isFinite(gaming.garden.nonPlantBitsMultiplier)).toBe(true);
+        expect(Number.isFinite(hole.getMonumentBonus('Bravery', 4))).toBe(true);
+        expect(Number.isFinite(hole.getFountainBonus(0, 16))).toBe(true);
+        expect(Number.isFinite(getPlayerDamageTotalMultiplier(gameData, player))).toBe(true);
+        expect(Number.isFinite(getClassExperienceMultiplier(gameData, player))).toBe(true);
+    });
+
+    it('imports saved Jar board entries, type count, and holdings separately', () => {
+        expect(hole.jar.jarTypes).toHaveLength(10);
+        expect(hole.jar.ownedTypeCount).toBe(9);
+        expect(hole.jar.boardAvailable).toBe(true);
+        expect(hole.jar.board).toHaveLength(120);
+        expect(hole.jar.board[0]).toEqual({ type: 9, quality: 3, x: 672, y: 312, randomRoll: 0.8404255300769636 });
+        expect(hole.jar.holdings).toHaveLength(12);
+        expect(hole.jar.nextTypeCost).toBeNull();
+    });
+
+    it('keeps unknown Jar ownership distinct from known zero ownership', () => {
+        const jar = new Jar();
+        const holeData: (number[] | undefined)[] = [];
+        holeData[11] = Array(38).fill(0);
+
+        jar.parse([], null);
+        expect(jar.jarTypes).toHaveLength(10);
+        expect(jar.ownedTypeCount).toBeNull();
+        expect(jar.jarTypes.every(type => type.unlocked === null)).toBe(true);
+
+        jar.parse(holeData, null);
+        expect(jar.ownedTypeCount).toBe(0);
+        expect(jar.jarTypes.every(type => type.unlocked === false)).toBe(true);
+    });
+    it('matches saved collectible effects against paired game outputs', () => {
+        expect(hole.jar.getBonus(4)).toBe(288);
+        expect(hole.jar.getBonus(10)).toBe(192);
+        expect(hole.jar.getBonus(12)).toBe(240);
+        expect(hole.jar.getBonus(16)).toBe(48);
+        expect(hole.jar.getBonus(22)).toBe(204.8);
+        expect(hole.jar.getBonus(29)).toBe(243.20000000000002);
+        expect(hole.jar.getBonus(35)).toBe(192);
+        expect(hole.jar.getBonus(1)).toMatchLiveGame(getExtractedValue(jarResults, 'collectible_1'), 0);
+        expect(hole.jar.getBonus(15)).toMatchLiveGame(getExtractedValue(jarResults, 'collectible_15'), 0);
+        expect(hole.jar.getBonus(24)).toMatchLiveGame(getExtractedValue(jarResults, 'collectible_24'), 0);
+    });
+
+
+    it('matches all available Jar producer inputs and outputs against the paired game', () => {
+        expect(hole.jar.producers).toHaveLength(3);
+        const gameAssignment = jarResults.extractions.producer_assignment.result as number[];
+        hole.jar.producers.forEach((producer, index) => {
+            expect(hole.jar.producerAssignments[index].type).toBe(gameAssignment[index]);
+            expect(hole.jar.producerAssignments[index].work).toBe(gameAssignment[index + 3]);
+            expect(producer.requirement)
+                .toMatchLiveGame(getExtractedValue(jarResults, `producer_requirement_${index}`), 0);
+            expect(producer.ratePerHour)
+                .toMatchLiveGame(getExtractedValue(jarResults, `producer_rate_${index}`), 0);
+        });
+        expect(hole.jar.requirementBalances[3]).toBe(getExtractedValue(jarResults, 'requirement_balance'));
+        expect(hole.measurements[12].effectiveBenefit)
+            .toMatchLiveGame(getExtractedValue(jarResults, 'measurement_12'), 0);
+        expect(hole.getSchematicBonus(67, 30))
+            .toMatchLiveGame(getExtractedValue(jarResults, 'production_upgrade_67'), 0);
+        expect(hole.getSchematicBonus(74, 5))
+            .toMatchLiveGame(getExtractedValue(jarResults, 'production_upgrade_74'), 0);
+        expect(hole.getSchematicBonus(72, 10))
+            .toMatchLiveGame(getExtractedValue(jarResults, 'production_upgrade_72'), 0);
+    });
+
+    it('keeps part-five outputs stable on repeated updates', () => {
+        const jarBonuses = hole.jar.jarBonuses.map(bonus => bonus.getBonus());
+        const jarProducers = hole.jar.producers;
+        const jarHoldings = hole.jar.holdings;
+        const fountainUpgrades = hole.fountain.upgrades.map(upgrade => [
+            upgrade.data.waterIndex, upgrade.data.index, upgrade.level, upgrade.marbleizationLevel, upgrade.getBonus(),
+            upgrade.data.marbleizeEligible,
+        ]);
+        const coveUpgrades = hole.cove.upgrades.map(upgrade => [upgrade.level, upgrade.getBonus()]);
+        const blueShapeBalances = [...hole.cove.blueShapeBalances];
+        const purpleShapeBalances = [...hole.cove.purpleShapeBalances];
+        const currencyValue = hole.fountain.getCurrencyValue(0);
+        const marbleizeEligibility = hole.fountain.canMarbleize(0, 9);
+
+        updateHole(gameData);
+        updateHole(gameData);
+
+        expect(hole.jar.jarBonuses.map(bonus => bonus.getBonus())).toEqual(jarBonuses);
+        expect(hole.jar.producers).toEqual(jarProducers);
+        expect(hole.jar.holdings).toEqual(jarHoldings);
+        expect(hole.fountain.upgrades.map(upgrade => [
+            upgrade.data.waterIndex, upgrade.data.index, upgrade.level, upgrade.marbleizationLevel, upgrade.getBonus(),
+            upgrade.data.marbleizeEligible,
+        ])).toEqual(fountainUpgrades);
+        expect(hole.cove.upgrades.map(upgrade => [upgrade.level, upgrade.getBonus()])).toEqual(coveUpgrades);
+        expect(hole.fountain.getCurrencyValue(0)).toBe(currencyValue);
+        expect(hole.fountain.canMarbleize(0, 9)).toBe(marbleizeEligibility);
+        expect(hole.cove.blueShapeBalances).toEqual(blueShapeBalances);
+        expect(hole.cove.purpleShapeBalances).toEqual(purpleShapeBalances);
+    });
+
+    it('imports every Fountain position, including empty positions and nested mixed stacks', () => {
+        const expectedPositions = fountainCoveResults.extractions.stack_positions.result as {
+            spaces: number;
+            maximumStackSize: number;
+            maximumCoins: number;
+            occupiedSpaces: number;
+            itemCount: number;
+            positions: { space: number; itemCurrencyIds: number[]; royal: boolean; itemValues: number[]; value: number }[];
+            overflowValue0: number;
+        };
+        const stacks = hole.fountain.stacks;
+
+        expect(hole.fountain.stacksAvailable).toBe(true);
+        expect(stacks).toHaveLength(expectedPositions.positions.length);
+        expect(stacks.some(stack => new Set(stack.items.map(item => item.currencyId)).size > 1)).toBe(true);
+        expect(stacks.some(stack => stack.items.length === 0)).toBe(true);
+        expect(stacks.some(stack => stack.royal)).toBe(true);
+        expect(stacks.map(stack => stack.items.map(item => item.currencyId)))
+            .toEqual(expectedPositions.positions.map(position => position.itemCurrencyIds));
+        expect(stacks.map(stack => stack.royal))
+            .toEqual(expectedPositions.positions.map(position => position.royal));
+        expect(hole.fountain.getStackItemCount()).toBe(expectedPositions.itemCount);
+        expect(hole.fountain.getOccupiedSpaceCount()).toBe(expectedPositions.occupiedSpaces);
+        expect(hole.fountain.getCapacity()).toBe(expectedPositions.spaces);
+        expect(hole.fountain.getMaximumStackSize()).toBe(expectedPositions.maximumStackSize);
+        expect(hole.fountain.getMaximumCoins()).toBe(expectedPositions.maximumCoins);
+        expect(hole.fountain.getAvailableSpaceCount()).toBe(
+            Math.max(0, expectedPositions.spaces - expectedPositions.occupiedSpaces),
+        );
+        expect(hole.fountain.currencyValueExponent)
+            .toBe(getExtractedValue(fountainCoveResults, 'currency_value_exponent'));
+        const extractedExcludedCurrencyIds =
+            fountainCoveResults.extractions.excluded_generation_currency_ids.result as string;
+        const expectedExcludedCurrencyIds = extractedExcludedCurrencyIds === ''
+            ? []
+            : extractedExcludedCurrencyIds.split(',').map(Number);
+        expect(hole.fountain.excludedGenerationCurrencyIds).toEqual(expectedExcludedCurrencyIds);
+        const gameCurrencyValues = fountainCoveResults.extractions.currency_values.result as number[];
+        const gameFountainBonusTerms = fountainCoveResults.extractions.fountain_bonus_terms.result as {
+            page: number;
+            index: number;
+            value: number;
+        }[];
+        gameFountainBonusTerms.forEach(({ page, index, value }) => {
+            expect(hole.fountain.getBonus(page, index)).toMatchLiveGame(value, 0);
+        });
+        expect(hole.fountain.getAllCurrencyMultiplier())
+            .toMatchLiveGame(fountainCoveResults.extractions.all_currency_multiplier.result, 0);
+        const currency4BaseValue = 1 + hole.fountain.getBonus(1, 3)! *
+            (1 + hole.fountain.getBonus(1, 5)! / 100) *
+            (1 + lavaLog(hole.fountain.valueWallets[1]!) * hole.fountain.getBonus(1, 19)! / 100);
+        expect(currency4BaseValue).toMatchLiveGame(
+            fountainCoveResults.extractions.currency_4_base_value.result,
+            0,
+        );
+        const extractedValueWallet = fountainCoveResults.extractions.currency_value_wallet_page_1.result as
+            number | { type: 'large_number'; value: string };
+        const gameValueWallet = typeof extractedValueWallet === 'number'
+            ? extractedValueWallet
+            : Number(extractedValueWallet.value);
+        expect(hole.fountain.valueWallets[1]).toBe(gameValueWallet);
+        expect(lavaLog(hole.fountain.valueWallets[1]!))
+            .toBe(fountainCoveResults.extractions.currency_value_wallet_log_page_1.result);
+        expect(hole.fountain.desireCurrencyId)
+            .toBe(fountainCoveResults.extractions.desire_currency_id.result);
+        gameCurrencyValues.forEach((value, currencyId) => {
+            expect(hole.fountain.getCurrencyValue(currencyId)).toMatchLiveGame(value, 0);
+        });
+        const gameRoyalMultiplier = fountainCoveResults.extractions.royal_multiplier.result as number;
+        expect(hole.fountain.getBonus(1, 9)).toMatchLiveGame((gameRoyalMultiplier - 5) * 100, 0);
+        expect(hole.getSchematicBonus(95, 10))
+            .toMatchLiveGame(fountainCoveResults.extractions.stack_bonus_95_10.result, 0);
+        expect(hole.fountain.getPendingStackValue()).toMatchLiveGame(
+            expectedPositions.positions.reduce((total, position) => total + position.value, 0),
+            0,
+        );
+        stacks.forEach((stack, index) => {
+            const expected = expectedPositions.positions[index];
+            stack.items.forEach((item, itemIndex) => {
+                expect(item.value).toMatchLiveGame(expected.itemValues[itemIndex], 0);
+            });
+            expect(stack.value).toMatchLiveGame(expected.value, 0);
+        });
+    });
+
+    it('uses source-scaled camp bonuses in the Cove local-effect branch', () => {
+        const campBonuses = [
+            [100, 25, 'camp_upgrade_100_25'],
+            [101, 10, 'camp_upgrade_101_10'],
+            [103, 10, 'camp_upgrade_103_10'],
+            [105, 10, 'camp_upgrade_105_10'],
+        ] as const;
+        campBonuses.forEach(([upgrade, factor, label]) => {
+            expect(hole.getSchematicBonus(upgrade, factor))
+                .toMatchLiveGame(getExtractedValue(fountainCoveResults, label), 0);
+        });
+        expect(hole.cove.upgrades[2].getBonus())
+            .toMatchLiveGame(getExtractedValue(fountainCoveResults, 'cove_respawn_upgrade'), 0);
+        // The paired runtime was on map 162; map 216 here selects the local domain branch only.
+        const localEffects = hole.cove.prepare({
+            mapId: 216,
+            cavernId: 17,
+            campUpgrade100Bonus: hole.getSchematicBonus(100, 25),
+            campUpgrade101Bonus: hole.getSchematicBonus(101, 10),
+            campUpgrade103Bonus: hole.getSchematicBonus(103, 10),
+            campUpgrade105Bonus: hole.getSchematicBonus(105, 10),
+            gameLog: lavaLog,
+        });
+        const campRespawnBonus = getExtractedValue(fountainCoveResults, 'camp_upgrade_100_25') as number;
+        const expectedRespawnMultiplier = 1 / (1 + (hole.cove.upgrades[2].getBonus()! + campRespawnBonus) / 100);
+        expect(localEffects.respawnTimeMultiplier).toBe(expectedRespawnMultiplier);
+        expect(localEffects.pickupRandomDoubleChance)
+            .toMatchLiveGame(getExtractedValue(fountainCoveResults, 'cove_pickup_double_chance'), 0);
+    });
+
+    it('repeats normal imports without mutating the saved Fountain and Jar inputs', () => {
+        const save = loadTestSave(saveName);
+        const sourceSnapshot = JSON.stringify(save.toJSON());
+        const importNormally = () => updateIdleonData(
+            initAccountDataKeys(initAllItems()),
+            save,
+            save.get('playerNames'),
+            normalizeCompanionStates(save.get('companions')),
+            save.get('servervars'),
+            true,
+        ).getData();
+        const firstImport = importNormally().get('hole') as Hole;
+        const secondImport = importNormally().get('hole') as Hole;
+
+        expect(JSON.stringify(save.toJSON())).toBe(sourceSnapshot);
+        expect(secondImport.fountain.stacks).toEqual(firstImport.fountain.stacks);
+        expect(secondImport.fountain.getPendingStackValue()).toBe(firstImport.fountain.getPendingStackValue());
+        expect(secondImport.cove.localEffectsByPlayerId).toEqual(firstImport.cove.localEffectsByPlayerId);
+    });
+
+    it('keeps Fountain currencies within nine-wallet scope', () => {
+        expect(hole.fountain.currencies).toHaveLength(9);
+        expect(hole.fountain.wallets).toHaveLength(9);
+        expect(hole.fountain.upgrades).toHaveLength(60);
+        expect(hole.fountain.opalProgress).toBe(14);
+    });
+
+    it('matches Fountain currency ID 0 against the paired v1.23 game output', () => {
+        expect(hole.fountain.getCurrencyValue(0)).toBe(15252139478210.553);
+    });
+    it('keeps Opal cost at progress 44 and 45 within the nine-wallet catalog', () => {
+        const progress = hole.fountain.opalProgress;
+        hole.fountain.opalProgress = 44;
+        const finalAvailableCost = hole.fountain.getOpalCost();
+        expect(finalAvailableCost).toEqual({
+            amount: 100 * Math.pow(45, 1.5) * Math.pow(4.8, 44),
+            currencyId: 8,
+            available: true,
+        });
+
+        hole.fountain.opalProgress = 45;
+        const unavailableCurrencyCost = hole.fountain.getOpalCost();
+        expect(unavailableCurrencyCost).toEqual({
+            amount: 100 * Math.pow(46, 1.5) * Math.pow(4.8, 45),
+            currencyId: 9,
+            available: false,
+        });
+        expect(hole.fountain.canAffordOpal()).toBe(false);
+        expect(hole.fountain.currencies).toHaveLength(9);
+        expect(hole.fountain.wallets).toHaveLength(9);
+
+        hole.fountain.opalProgress = null;
+        expect(hole.fountain.getOpalCost()).toBeNull();
+        expect(hole.fountain.canAffordOpal()).toBeNull();
+        hole.fountain.opalProgress = progress;
+    });
+    it('uses Lamp 99 and static Fountain marbleize eligibility metadata', () => {
+        expect(hole.lamp.getBonus(true)).toBe(3203.5);
+        expect(hole.fountain.modifiers?.lampBonus99).toBe(3203.5);
+        expect(hole.fountain.canMarbleize(0, 8)).toBe(false);
+        expect(hole.fountain.canMarbleize(0, 9)).toBe(true);
+    });
+
+    it('imports the saved Gilded Jar bonus percentage', () => {
+        const savedHoleData = JSON.parse(loadTestSave(saveName).get('Holes') as string) as number[][];
+        expect(hole.jar.gildedBonusPercent).toBe(savedHoleData[11][60]);
+    });
+
+    it('imports Cove levels and both six-shape balances', () => {
+        expect(hole.cove.upgrades).toHaveLength(24);
+        expect(hole.cove.shapes).toHaveLength(12);
+        expect(hole.cove.blueShapeBalances).toHaveLength(6);
+        expect(hole.cove.purpleShapeBalances).toHaveLength(6);
+        expect(hole.cove.glunkoKills).toBe(3915683771);
+    });
+    it('keeps absent Cove OptLacc values unavailable and saved zeros known', () => {
+        const parsedData = loadGameDataFromSave(saveName);
+        const missingHole = new Hole('hole');
+        missingHole.init(initAllItems(), (parsedData.get('playerNames') as string[]).length);
+        const missingOptLaccData = new Map(parsedData);
+        missingOptLaccData.set('hole', missingHole);
+        missingOptLaccData.delete('OptLacc');
+        const rawData = { ...(missingOptLaccData.get('rawData') as Record<string, unknown>) };
+        delete rawData.OptLacc;
+        missingOptLaccData.set('rawData', rawData);
+        missingHole.parse(missingOptLaccData);
+
+        const missingCove = missingHole.cove;
+        expect(missingHole.sourceSaveAvailable.emperor).toBe(false);
+        expect(missingCove.upgrades[0].level).toBeNull();
+        expect(missingCove.upgrades[0].getBonus()).toBeNull();
+        expect(missingCove.getCurrencyBalance(0)).toBeNull();
+        expect(missingCove.canPurchase(0, 0, 0, 0)).toBeNull();
+        expect(missingCove.blueShapeTargetAvailable).toBe(false);
+        expect(missingCove.glunkoKills).toBeNull();
+        expect(missingCove.prepare({
+            mapId: 216, cavernId: 17, campUpgrade100Bonus: 0, campUpgrade101Bonus: 0,
+            campUpgrade103Bonus: 0, campUpgrade105Bonus: 0, gameLog: () => 0,
+        }).dropRateMultiplier).toBeNull();
+
+        const savedZeroCove = new Cove();
+        savedZeroCove.parse(Array(669).fill(0));
+        expect(savedZeroCove.upgrades[0].level).toBe(0);
+        expect(savedZeroCove.upgrades[0].getBonus()).toBe(0);
+        expect(savedZeroCove.getCurrencyBalance(0)).toBe(0);
+        expect(savedZeroCove.blueShapeBalances[0]).toBe(0);
+        expect(savedZeroCove.blueShapeTargetAvailable).toBe(true);
+        expect(savedZeroCove.blueShapeTargetId).toBeNull();
+        expect(savedZeroCove.glunkoKills).toBe(0);
+    });
+
+    it('keeps absent Fountain arrays unavailable and saved zero levels known', () => {
+        const missingHoleData: (number[] | undefined)[] = Array(35).fill(undefined);
+        missingHoleData[9] = Array(39).fill(0);
+        missingHoleData[11] = Array(84).fill(0);
+        missingHoleData[30] = Array(9).fill(0);
+        const missingFountain = new Fountain();
+        missingFountain.parse(missingHoleData, Array(602).fill(0));
+        missingFountain.prepare(hole.fountain.modifiers!);
+        expect(missingFountain.upgradeLevelsAvailable).toBe(false);
+        expect(missingFountain.marbleizationLevelsAvailable).toBe(false);
+        expect(missingFountain.upgrades[0].level).toBeNull();
+        expect(missingFountain.upgrades[0].marbleizationLevel).toBeNull();
+        expect(missingFountain.getBonus(0, 0)).toBeNull();
+        expect(missingFountain.getMarbleYield()).toBeNull();
+        expect(missingFountain.getCurrencyValue(0)).toBeNull();
+        expect(missingFountain.canAffordMarbleize(0, 9)).toBeNull();
+        expect(missingFountain.canAffordMarbleize(0, 8)).toBe(false);
+
+        const missingStacksData = [...missingHoleData];
+        missingStacksData[31] = [Array(20).fill(0), Array(20).fill(0), Array(20).fill(0)] as unknown as number[];
+        missingStacksData[32] = [Array(20).fill(0), Array(20).fill(0), Array(20).fill(0)] as unknown as number[];
+        const missingStacksFountain = new Fountain();
+        missingStacksFountain.parse(missingStacksData, []);
+        missingStacksFountain.prepare(hole.fountain.modifiers!);
+        expect(missingStacksFountain.stacksAvailable).toBe(false);
+        expect(missingStacksFountain.getStackItemCount()).toBeNull();
+        expect(missingStacksFountain.getOccupiedSpaceCount()).toBeNull();
+        expect(missingStacksFountain.getPendingStackValue()).toBeNull();
+        expect(missingStacksFountain.getAvailableSpaceCount()).toBeNull();
+
+        missingStacksData[29] = [];
+        missingStacksData[34] = [];
+        const savedEmptyFountain = new Fountain();
+        savedEmptyFountain.parse(missingStacksData, []);
+        savedEmptyFountain.prepare(hole.fountain.modifiers!);
+        expect(savedEmptyFountain.stacksAvailable).toBe(true);
+        expect(savedEmptyFountain.getStackItemCount()).toBe(0);
+        expect(savedEmptyFountain.getOccupiedSpaceCount()).toBe(0);
+        expect(savedEmptyFountain.getPendingStackValue()).toBe(0);
+        expect(savedEmptyFountain.getAvailableSpaceCount()).toBe(1);
+
+        const missingRoyalFlagsData: (number[] | undefined)[] = Array(35).fill(undefined);
+        missingRoyalFlagsData[9] = Array(39).fill(0);
+        missingRoyalFlagsData[11] = Array(84).fill(0);
+        missingRoyalFlagsData[29] = [[0, 1], []] as unknown as number[];
+        missingRoyalFlagsData[30] = Array(9).fill(0);
+        const missingRoyalFlags = new Fountain();
+        missingRoyalFlags.parse(missingRoyalFlagsData, []);
+        missingRoyalFlags.prepare(hole.fountain.modifiers!);
+        expect(missingRoyalFlags.stacksAvailable).toBe(false);
+        expect(missingRoyalFlags.stacks[0].items.map(item => item.currencyId)).toEqual([0, 1]);
+        expect(missingRoyalFlags.stacks[0].royal).toBeNull();
+        expect(missingRoyalFlags.stacks[0].items.map(item => item.value)).toEqual([null, null]);
+        expect(missingRoyalFlags.stacks[0].value).toBeNull();
+        expect(missingRoyalFlags.stacks[1]).toEqual({
+            space: 1, items: [], royal: null, value: 0,
+        });
+
+        const savedHoleData: (number[] | undefined)[] = Array(35).fill(undefined);
+        savedHoleData[31] = [Array(20).fill(0), Array(20).fill(0), Array(20).fill(0)] as unknown as number[];
+        savedHoleData[32] = [Array(20).fill(0), Array(20).fill(0), Array(20).fill(0)] as unknown as number[];
+        savedHoleData[11] = Array(82).fill(0);
+        const savedZeroFountain = new Fountain();
+        savedZeroFountain.parse(savedHoleData, []);
+        savedZeroFountain.prepare(hole.fountain.modifiers!);
+        expect(savedZeroFountain.upgradeLevelsAvailable).toBe(true);
+        expect(savedZeroFountain.marbleizationLevelsAvailable).toBe(true);
+        expect(savedZeroFountain.upgrades[0].level).toBe(0);
+        expect(savedZeroFountain.upgrades[0].marbleizationLevel).toBe(0);
+        expect(savedZeroFountain.getBonus(0, 0)).toBe(0);
+        expect(savedZeroFountain.getMarbleYield()).not.toBeNull();
+        expect(savedZeroFountain.canAffordMarbleize(0, 9)).toBe(false);
+    });
+    it('keeps absent collectible levels and dependent Jar rates unknown, unlike saved zero', () => {
+        const importedResults = [null, Array(40).fill(0)].map(collectibleLevels => {
+            const save = loadTestSave(saveName);
+            const savedHoleData = JSON.parse(save.get('Holes') as string) as number[][];
+            if (collectibleLevels === null) {
+                delete savedHoleData[24];
+            } else {
+                savedHoleData[24] = collectibleLevels;
+            }
+            save.fields.set('Holes', JSON.stringify(savedHoleData));
+
+            const importedHole = updateIdleonData(
+                initAccountDataKeys(initAllItems()),
+                save,
+                save.get('playerNames'),
+                normalizeCompanionStates(save.get('companions')),
+                save.get('servervars'),
+                true,
+            ).getData().get('hole') as Hole;
+            return {
+                collectiblesAvailable: importedHole.sourceSaveAvailable.collectibles,
+                collectibleLevel: importedHole.jar.jarBonuses[24].level,
+                effectiveCollectibleBonus: importedHole.jar.getBonus(24),
+                producerRates: importedHole.jar.producers.map(producer => producer.ratePerHour),
+            };
+        });
+        const [missing, savedZero] = importedResults;
+
+        expect(missing.collectiblesAvailable).toBe(false);
+        expect(missing.collectibleLevel).toBeNull();
+        expect(missing.effectiveCollectibleBonus).toBeNull();
+        expect(missing.producerRates).toHaveLength(3);
+        expect(missing.producerRates.every(rate => rate === null)).toBe(true);
+
+        expect(savedZero.collectiblesAvailable).toBe(true);
+        expect(savedZero.collectibleLevel).toBe(0);
+        expect(savedZero.effectiveCollectibleBonus).toBe(0);
+        expect(savedZero.producerRates).toHaveLength(3);
+        expect(savedZero.producerRates.every(rate => rate !== null)).toBe(true);
+    });
+    it('preserves absent Schematic inputs in Fountain valuation and Cove effects', () => {
+        const importWithSchematics = (schematics: number[] | null) => {
+            const save = loadTestSave(saveName);
+            const savedHole = JSON.parse(save.get('Holes') as string) as number[][];
+            if (schematics === null) {
+                delete savedHole[13];
+            } else {
+                savedHole[13] = schematics;
+            }
+            save.fields.set('Holes', JSON.stringify(savedHole));
+
+            const importedData = updateIdleonData(
+                initAccountDataKeys(initAllItems()),
+                save,
+                save.get('playerNames'),
+                normalizeCompanionStates(save.get('companions')),
+                save.get('servervars'),
+                true,
+            ).getData();
+            const importedHole = importedData.get('hole') as Hole;
+            const players = importedData.get('players') as { playerID: number; currentMapId: number }[];
+            const player = players[0];
+            player.currentMapId = 216;
+            importedHole.resourceCavrens.characterAssignments ??= [];
+            importedHole.resourceCavrens.characterAssignments[player.playerID] = 17;
+            updateHoleCharacterCapabilities(importedData);
+            const coveEffects = importedHole.cove.localEffectsByPlayerId.get(player.playerID)!;
+            return {
+                schematicsAvailable: importedHole.sourceSaveAvailable.schematics,
+                bUpgrade94Level1: importedHole.fountain.modifiers?.bUpgrade94Level1,
+                bUpgrade95Level10: importedHole.fountain.modifiers?.bUpgrade95Level10,
+                bUpgrade97Level3: importedHole.fountain.modifiers?.bUpgrade97Level3,
+                currencyValue: importedHole.fountain.getCurrencyValue(0),
+                maximumStackSize: importedHole.fountain.getMaximumStackSize(),
+                stackItemValue: importedHole.fountain.getStackItemValue(0, false, 1),
+                coveEffects,
+            };
+        };
+        const missing = importWithSchematics(null);
+        const savedZero = importWithSchematics(Array(106).fill(0));
+
+        expect(missing.schematicsAvailable).toBe(false);
+        expect(missing.bUpgrade94Level1).toBeNull();
+        expect(missing.bUpgrade95Level10).toBeNull();
+        expect(missing.bUpgrade97Level3).toBeNull();
+        expect(missing.currencyValue).toBeNull();
+        expect(missing.maximumStackSize).toBeNull();
+        expect(missing.stackItemValue).toBeNull();
+        expect(missing.coveEffects.respawnTimeMultiplier).toBeNull();
+        expect(missing.coveEffects.pickupRandomDoubleChance).toBeNull();
+
+        expect(savedZero.schematicsAvailable).toBe(true);
+        expect(savedZero.bUpgrade94Level1).toBe(0);
+        expect(savedZero.bUpgrade95Level10).toBe(0);
+        expect(savedZero.bUpgrade97Level3).toBe(0);
+        expect(savedZero.currencyValue).not.toBeNull();
+        expect(savedZero.maximumStackSize).not.toBeNull();
+        expect(savedZero.stackItemValue).not.toBeNull();
+        expect(savedZero.coveEffects.respawnTimeMultiplier).not.toBeNull();
+        expect(savedZero.coveEffects.pickupRandomDoubleChance).toBe(0);
+    });
+
+});
