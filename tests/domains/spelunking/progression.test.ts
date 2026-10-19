@@ -15,7 +15,6 @@ describe('Spelunking tunnel and collection progression', () => {
     let spelunking: Spelunking;
 
     const gameValue = (key: string): number => getExtractedValue(extractionResults, key);
-    const tunnelNamed = (name: string) => spelunking.tunnels.find(tunnel => tunnel.data.name === name)!;
 
     beforeAll(() => {
         // Original offline v1.22 outputs matched the retained save's relevant rows before and after extraction.

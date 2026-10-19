@@ -2,7 +2,6 @@ import type { Hole } from '../../../data/domain/world-5/hole/hole';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import type { ExtractionResults } from '../../utils/live-game-data-loader';
 import { getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
-import { assertPairedContext } from './part1-test-helpers';
 
 const nestedSchematics = [50, 79, 98, 32, 33, 34, 35, 36];
 

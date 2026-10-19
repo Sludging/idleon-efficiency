@@ -7,11 +7,6 @@ import {
     validateExtractionHealth,
 } from '../../utils/live-game-data-loader';
 
-const haulCases = [
-    { name: 'Pebble Cove', index: 0, behavior: 'integer-rounded small haul' },
-    { name: 'Glitter End', index: 7, behavior: 'millions-suffix large haul' },
-    { name: 'Exiled Throne', index: 9, behavior: 'zero haul in the current unit' },
-];
 
 describe('Spelunking current-denomination recorded haul presentation', () => {
     let extractionResults: ExtractionResults;

@@ -925,11 +925,6 @@ export class Spelunking extends Domain {
         const quote = cost ?? upgrade.nextCost;
         return quote !== undefined && this.ownedAmber >= quote;
     }
-    getEffectiveUpgradeBonus(index: number): number {
-        return this.upgrades.find(upgrade => upgrade.index === index)?.getEffectiveBonus(
-            this.manic.totalDepth, this.trackometerLevel
-        ) ?? 0;
-    }
 
     getTotalDiscoveries(): number {
         return this.tunnels.reduce((total, tunnel) => total + tunnel.discoveryCount, 0);

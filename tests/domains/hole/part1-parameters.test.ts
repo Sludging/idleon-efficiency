@@ -1,5 +1,4 @@
 import type { Hole } from '../../../data/domain/world-5/hole/hole';
-import type { HoleContributor } from '../../../data/domain/world-5/hole/villager';
 import type { Compass } from '../../../data/domain/compass';
 import type { Grimoire } from '../../../data/domain/grimoire';
 import type { Tesseract } from '../../../data/domain/tesseract';
@@ -24,7 +23,7 @@ import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import type { ExtractionResults } from '../../utils/live-game-data-loader';
 import { getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { getTargetPlayer } from '../../utils/target-player';
-import { assertPairedContext, captured, decodedSave, rateForTarget } from './part1-test-helpers';
+import { rateForTarget } from './part1-test-helpers';
 
 function pristinePercent(data: Map<string, any>): number {
  const charm = (data.get('sneaking') as Sneaking).pristineCharms.find(charm => charm.data.itemId === 21)!;

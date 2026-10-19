@@ -1,32 +1,11 @@
-import { loadExtractionResults, validateExtractionHealth, getExtractedValue, ExtractionResults } from '../../utils/live-game-data-loader';
+import { loadExtractionResults, validateExtractionHealth, ExtractionResults } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { Account } from '../../../data/domain/account';
-import { Cooking, updateCooking } from '../../../data/domain/world-4/cooking';
-import { Forge, updateForge } from '../../../data/domain/world-1/forge';
-import type { Player } from '../../../data/domain/player';
-import { updatePlayerDropRates } from '../../../data/domain/player-stats';
-import { Sailing, updateSailing } from '../../../data/domain/world-5/sailing/sailing';
-import { Gaming } from '../../../data/domain/world-5/gaming';
-import { Farming } from '../../../data/domain/world-6/farming';
-import { ResearchGrid, updateResearchDisplay } from '../../../data/domain/world-7/research';
-import { Minehead } from '../../../data/domain/world-7/minehead';
-import { getPersistentSpelunkingPower } from '../../../data/domain/world-7/spelunkingPower';
-import { SushiStation } from '../../../data/domain/world-7/sushi';
-import { JellyOperator } from '../../../data/domain/world-7/jellyOperator';
-import { updateGaming } from '../../../data/domain/world-5/gaming';
-import { updateFarmingLevel } from '../../../data/domain/world-6/farming';
-import { updateMinehead } from '../../../data/domain/world-7/minehead';
-import { updateSushiStation } from '../../../data/domain/world-7/sushi';
-import { updateJellyOperator } from '../../../data/domain/world-7/jellyOperator';
 import { Menagerie } from '../../../data/domain/menagerie';
-import { updateConstruction, Construction } from '../../../data/domain/world-3/construction/construction';
-import { Building } from '../../../data/domain/world-3/construction/buildings';
 
 const extractionResultsName = 'menagerie-account-state-data.json';
 
 let extractionResults: ExtractionResults;
 let menagerie: Menagerie;
-let account: Account;
 let missionAvailabilityInputs: number[];
 let accountProgression: number[];
 let missionStates: number[][];
@@ -34,17 +13,7 @@ let unlockStates: number[][];
 let bonusStates: number[][];
 let usableResources: number[];
 let bonusLevelFactors: number[][];
-let extraBundleFlags: number[];
 let accountData: Map<string, any>;
-let sideJellyfishState: {
-  unlocks: number[];
-  purple: number[];
-  blue: [number];
-  red: [number, number, number[]];
-  silver: number[];
-  yellow: [number[], number, number, number[]];
-  green: [number];
-} | undefined;
 beforeAll(() => {
   extractionResults = loadExtractionResults(extractionResultsName);
   validateExtractionHealth(extractionResults);
@@ -55,11 +24,8 @@ beforeAll(() => {
   bonusStates = extractionResults.extractions.bonus_states.result as number[][];
   usableResources = extractionResults.extractions.usable_resources.result as number[];
   bonusLevelFactors = extractionResults.extractions.bonus_level_factors.result as number[][];
-  extraBundleFlags = extractionResults.extractions.extra_bundle_flags.result as number[];
-  sideJellyfishState = extractionResults.extractions.side_jellyfish?.result as typeof sideJellyfishState;
   accountData = loadGameDataFromSave('latest');
   menagerie = accountData.get('menagerie') as Menagerie;
-  account = accountData.get('account') as Account;
 });
 
 describe('Menagerie account progression', () => {

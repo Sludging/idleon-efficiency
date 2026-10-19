@@ -3,7 +3,6 @@ import { EventShop } from '../../../data/domain/eventShop';
 import { Equinox } from '../../../data/domain/world-3/equinox';
 import { Cooking } from '../../../data/domain/world-4/cooking';
 import { Rift } from '../../../data/domain/world-4/rift';
-import { Gaming } from '../../../data/domain/world-5/gaming';
 import { Sailing } from '../../../data/domain/world-5/sailing/sailing';
 import { Glimbo } from '../../../data/domain/world-7/glimbo';
 import { JellyOperator } from '../../../data/domain/world-7/jellyOperator';
@@ -13,7 +12,7 @@ import { SushiStation } from '../../../data/domain/world-7/sushi';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ExtractionResults, loadExtractionResults } from '../../utils/live-game-data-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
-import { OriginalBoatQualification, OriginalGridInputs, OriginalGridUpgrade, assertPairing, extracted, numeric, resultName } from './grid-catalogue-test-helpers';
+import { OriginalBoatQualification, OriginalGridUpgrade, assertPairing, extracted, numeric, resultName } from './grid-catalogue-test-helpers';
 
 // All direct calculated inputs stay here, including same-domain inputs used by secondary effects and presentation.
 // Static caps, Shape percentages, saved levels/options, artifact status, merit level, and placements are supporting state.

@@ -1,22 +1,12 @@
 import { initResearchGridBonusRepo } from '../../../data/domain/data/ResearchGridBonusRepo';
-import { initResearchShapeRepo } from '../../../data/domain/data/ResearchShapeRepo';
-import { Cooking } from '../../../data/domain/world-4/cooking';
-import { Rift } from '../../../data/domain/world-4/rift';
-import { Sailing } from '../../../data/domain/world-5/sailing/sailing';
-import { Spelunking } from '../../../data/domain/world-7/spelunking';
-import { Companion } from '../../../data/domain/companions';
-import { ResearchGrid, updateResearchDisplay, updateResearchGrid } from '../../../data/domain/world-7/research';
+import { ResearchGrid } from '../../../data/domain/world-7/research';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ExtractionResults, loadExtractionResults } from '../../utils/live-game-data-loader';
 import {
-    OriginalBoatQualification, OriginalGridInputs, OriginalGridUpgrade, OriginalShapeDefinitions,
-    assertPairing, catalogueSnapshot, extracted, normalizeGameText, numeric, resultName, saveHash, savedResearch,
+    OriginalGridInputs, OriginalGridUpgrade, assertPairing, extracted, numeric, resultName,
 } from './grid-catalogue-test-helpers';
 
 const realDefinitions = initResearchGridBonusRepo().filter(square => square.data.name !== 'Name');
-const shapeDefinitions = initResearchShapeRepo();
-const dootSentence = 'Arctis_nods_in_approval..._all_Research_Grid_bonuses_are_1.05x_higher';
-const arctisSentence = 'You_are_now_permanently_linked_to_Arctis_on_all_characters.';
 
 // The retained save observes zero available Points, capped/uncapped ranks, all specialized effects, and five owned Shapes.
 // It does not observe row-edge purchases, missing placements, nonzero rotations, qualifying boats, or non-Doot text.

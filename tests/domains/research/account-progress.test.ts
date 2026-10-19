@@ -1,24 +1,9 @@
-import { ResearchGrid, updateResearchDisplay } from '../../../data/domain/world-7/research';
+import { ResearchGrid } from '../../../data/domain/world-7/research';
 import { initResearchObservationRepo } from '../../../data/domain/data/ResearchObservationRepo';
-import { initResearchPostyNoteRepo } from '../../../data/domain/data/ResearchPostyNoteRepo';
-import { initGamingSuperbitsRepo } from '../../../data/domain/data/GamingSuperbitsRepo';
-import { SkillsIndex } from '../../../data/domain/SkillsIndex';
-import { Player } from '../../../data/domain/player';
-import { EquipmentSets } from '../../../data/domain/misc/equipmentSets';
-import { Spelunking } from '../../../data/domain/world-7/spelunking';
-import { Minehead } from '../../../data/domain/world-7/minehead';
-import { Hole } from '../../../data/domain/world-5/hole/hole';
-import { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
-import { loadGameDataFromSave, loadTestSave } from '../../utils/cloudsave-loader';
+import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ExtractionResults, getExtractedValue, loadExtractionResults } from '../../utils/live-game-data-loader';
 
 const observations = initResearchObservationRepo();
-const notes = initResearchPostyNoteRepo();
-const save = loadTestSave('latest');
-const rawResearch = save.get('Research');
-const savedResearch = (typeof rawResearch === 'string' ? JSON.parse(rawResearch) : rawResearch) as number[][];
-const rawTimeAway = save.get('TimeAway');
-const savedTimeAway = typeof rawTimeAway === 'string' ? JSON.parse(rawTimeAway) : rawTimeAway;
 
 // Startup /cloud-save matched all 799 retained keys after JSON decoding.
 // Runtime EXP and partial Insight advanced. Saved progress must use the original input.
@@ -145,23 +130,6 @@ describe('Research account progress and production', () => {
 
 
 
-    const separateSources: [string, () => number][] = [
-        ['Research Grid', () => 1 + value('grid_70_0') / 100],
-        ['Equinox', () => 1 + value('equinox_research') / 100],
-        ['The Button', () => 1 + value('button_research') / 100],
-        ['Killroy', () => 1 + value('killroy_research') / 100],
-        ['Companions', () => Math.max(1, (1 + value('companion_52'))
-            * (1 + value('companion_153') + value('companion_level_two_153'))
-            * (1 + 0.15 * value('companion_level_two_54')))],
-        ['Sushi', () => 1 + value('sushi_0') / 100],
-        ['Hole Researchy', () => 1 + value('hole_upgrade') / 100],
-        ['Hole Fountain', () => 1 + value('hole_fountain') / 100],
-        ['First Jelly reward', () => 1 + value('jelly_0') / 100],
-        ['Second Jelly reward', () => 1 + value('jelly_23') / 100],
-        ['Third Jelly reward', () => 1 + value('jelly_46') / 100],
-        ['Fourth Jelly reward', () => 1 + value('jelly_54') / 100],
-        ['Selected Royal Outpost', () => Math.max(1, value('outpost_research'))],
-    ];
 
 
 

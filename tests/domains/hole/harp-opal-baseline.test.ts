@@ -1,9 +1,8 @@
 import type { Hole } from '../../../data/domain/world-5/hole/hole';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import type { ExtractionResults } from '../../utils/live-game-data-loader';
-import { getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
-import { TARGET_PLAYER_INDEX, getTargetPlayer } from '../../utils/target-player';
-import { captured, decodedSave, coreNumber } from './part1-test-helpers';
+import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
+import { captured, coreNumber } from './part1-test-helpers';
 
 type HarpGameInputs = {
  playerId: number;

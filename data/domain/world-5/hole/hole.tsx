@@ -1555,9 +1555,7 @@ export class Harp {
  highestUnlockedNoteIndex: number | null = null;
  noteCost: number | null = null;
  assignedStringEffects: HarpAssignedStringContext[] = [];
- stringEffectUnavailableReason: string | null = null;
  studyBonusGateActive: boolean | null = null;
- studyBonusGateUnavailableReason: string | null = null;
 
  constructor() {
   this.notes = initHarpNotesRepo().map(note => ({
@@ -1628,11 +1626,6 @@ export class Harp {
 
   const stringExperienceStudy = hole.studies[5];
   this.studyBonusGateActive = stringExperienceStudy.levelAvailable ? stringExperienceStudy.ownedRule : null;
-  this.studyBonusGateUnavailableReason = stringExperienceStudy.levelAvailable ? null : "Saved Study 5 level is missing.";
-  this.stringEffectUnavailableReason = !this.layoutAvailable ? "Saved Harp assignment layout is missing."
-   : this.slotCount === null ? "Prepared Harp active slot count is unavailable."
-    : this.layout.length < this.slotCount ? "Saved Harp assignment layout does not contain all active slots."
-     : "Harp trigger counters 128 and 129 and cycle flag 113 are transient runtime state, not saved or exposed by prepared owner APIs.";
   if (!this.layoutAvailable || this.slotCount === null || this.layout.length < this.slotCount) {
    this.assignedStringEffects = [];
    return;

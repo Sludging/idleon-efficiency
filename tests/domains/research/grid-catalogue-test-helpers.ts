@@ -1,4 +1,3 @@
-import { ResearchGrid } from '../../../data/domain/world-7/research';
 import { loadTestSave } from '../../utils/cloudsave-loader';
 import { ExtractionResults, getExtractedValue, validateExtractionHealth } from '../../utils/live-game-data-loader';
 const accountDataset = require('../../helpers/account-dataset.cjs') as {
@@ -43,12 +42,6 @@ export interface OriginalBoatQualification {
     frame: number;
 }
 
-export interface OriginalShapeDefinitions {
-    vertices: string[];
-    dimensions: string[];
-    names: string[];
-    modifiers: string[];
-}
 
 export const resultName = 'research-grid-catalogue-data.json';
 export const save = loadTestSave('latest');
@@ -58,7 +51,6 @@ export function saved<T>(key: string): T {
 }
 export const savedResearch = saved<number[][]>('Research');
 export const savePath = accountDataset.resolveTestSavePath('latest');
-export const normalizeGameText = (value: string): string => value.replace(/_/g, ' ');
 export const saveHash = (): string => accountDataset.hashFile(savePath);
 
 export function extracted<T>(results: ExtractionResults, label: string): T {
@@ -93,29 +85,3 @@ export function assertPairing(results: ExtractionResults): void {
     expect(before.spelunkingReduction).toBe(Number(saved<number[]>('OptLacc')[500]));
 }
 
-export function catalogueSnapshot(research: ResearchGrid): string {
-    return JSON.stringify({
-        points: research.points,
-        shapeOwnership: research.shapeOwnership,
-        sharedMultiplier: research.getGridBonusAllmulti(),
-        upgrades: research.upgrades.map(upgrade => ({
-            index: upgrade.index, level: upgrade.level, cap: upgrade.maxLevel, atCap: upgrade.atCap,
-            primary: upgrade.primaryBonus, secondary: upgrade.secondaryBonus,
-            primaryMultiplier: upgrade.primaryMultiplier, secondaryMultiplier: upgrade.secondaryMultiplier,
-            owner: upgrade.activeOwner, shapeBonusPercent: upgrade.shapeBonusPercent,
-            shapeMultiplier: upgrade.shapeMultiplier, allBonusMultiplier: upgrade.allBonusMultiplier,
-            reachable: upgrade.reachable, affordable: upgrade.affordable, prerequisites: upgrade.prerequisites,
-            linkedState: upgrade.linkedState, accumulatedReductionPercent: upgrade.accumulatedReductionPercent,
-            description: upgrade.getDescription(),
-        })),
-        shapes: research.shapes.map(shape => ({
-            index: shape.index, data: shape.data, owned: shape.owned, placement: shape.placement,
-            rotationModuloDegrees: shape.rotationModuloDegrees, rotationUnlocked: shape.rotationUnlocked,
-            rotationRequiredLevel: shape.rotationRequiredLevel, rotationStepDegrees: shape.rotationStepDegrees,
-            bonusMultiplier: shape.bonusMultiplier, description: shape.getDescription(),
-            coveredUpgradeIndexes: shape.coveredUpgrades.map(upgrade => upgrade.index),
-        })),
-        progress: research.progress,
-        production: research.production,
-    });
-}
