@@ -1,6 +1,6 @@
 # Menagerie Part 2: backend delivery plan
 
-**Status:** Human-approved backend plan — 2026-10-19; implementation complete and supervisor-accepted within the handoff's stated verification limits — 2026-10-19. Acceptance covers backend only; UI planning and delivery remain pending. **Tracking:** [Parent issue #466](https://github.com/Sludging/idleon-efficiency/issues/466); [Part 1 #467](https://github.com/Sludging/idleon-efficiency/issues/467); [Part 2 #470](https://github.com/Sludging/idleon-efficiency/issues/470). See the [current handoff](menagerie-research-brief.md#current-handoff).
+**Status:** Human-approved backend plan — 2026-10-19; implementation and six-panel UI complete, with backend supervisor acceptance and direct human UI acceptance within the handoff's stated verification limits — 2026-10-19. Acceptance does not imply new cross-system integrations, full-project verification, or acceptance of other work. **Tracking:** [Parent issue #466](https://github.com/Sludging/idleon-efficiency/issues/466); [Part 1 #467](https://github.com/Sludging/idleon-efficiency/issues/467); [Part 2 #470 remains open](https://github.com/Sludging/idleon-efficiency/issues/470). See the [current handoff](menagerie-research-brief.md#current-handoff).
 
 ## Outcomes
 
