@@ -312,11 +312,11 @@ Tracker: [#470 review](https://github.com/Sludging/idleon-efficiency/issues/470#
 
 ### Selected Jellies UI acceptance and handoff — 2026-10-19
 
-**Acceptance:** Supervisor accepted the selected UI result after the independent no-findings review, within the recorded evidence and check limits. The user also accepted this UI result and those limits. This is direct UI acceptance; it does not extend verification or imply backend changes.
+**Acceptance:** Supervisor accepted the selected UI result after the independent no-findings review, within the recorded evidence and check limits. The user approved the direction before implementation only and has not accepted this latest UI result. User review and extended smoke remain pending.
 
 **Selected outcomes:** Red's duplicate 14-slot counter is removed; seven real page-item icons, quantities, and useful name/recording hovers remain. Silver's positive fragment chance and MISC multiplier each lead into aligned Level/Cost rows, without duplicate cost, balance, expected-yield, or zero-result noise. Green removes reward-location counts and shows a Gallery-deposit warning only for positive required-item counts; lock state stays separate. All six jellyfish have clearer source-backed help, presented as explanation rather than native quotation.
 
 **Current status and limits:** Ready for the user's extended smoke; it remains pending. The positive Green warning branch was not exercised on a genuine save or with synthesized data. The genuine fixture has zero required-item counts and showed no warning. The focused 1440×1000 route run passed as recorded above; no tests, build, lint, mobile matrix, or other checks were run for acceptance. Positive Red native runtime and genuine-save Silver-cap behavior remain unverified. #470 remains open pending user extended smoke; no push, PR, deployment, or issue closure.
 
-Tracker: [#470 acceptance and ready-for-smoke status](https://github.com/Sludging/idleon-efficiency/issues/470#issuecomment-6257813191).
+Tracker: [#470 acceptance correction](https://github.com/Sludging/idleon-efficiency/issues/470#issuecomment-6257825249), superseding the inaccurate user-acceptance claim in the [previous comment](https://github.com/Sludging/idleon-efficiency/issues/470#issuecomment-6257813191).
 
