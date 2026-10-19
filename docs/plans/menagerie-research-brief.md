@@ -383,3 +383,8 @@ The confirmed committed regression cause was `b59c3923` stopping the mapping fro
 Focused Menagerie tests passed 4 suites/47 tests. Final actual-route smoke passed on the unchanged genuine save and showed Lumi `7` plus four Miniboss cards. Full `yarn tsc --noEmit` and `yarn test --runInBand` remain failing on concurrent/unrelated code; parser errors, Hole mismatches, and exact scope are recorded above. Same-save pre-change imports prove the old Lumi/hour, Minehead, and Shrine mismatches predate this restoration. The 20% Lumi/hour deficit traces to the separate Gaming Superbit 69 cutoff. No full-project green claim is made.
 
 The issue update records the same limits: [#470 restoration summary](https://github.com/Sludging/idleon-efficiency/issues/470#issuecomment-6258984536) and [Account commit-scope clarification](https://github.com/Sludging/idleon-efficiency/issues/470#issuecomment-6259004621). User full-app review remains pending; #470 remains open. No push, PR, deployment, or closure.
+### Test ownership correction — 2026-10-19
+
+Moved saved Account miniboss and Plunderous-kill regression assertions from `tests/domains/menagerie/account-state.test.ts` to `tests/domains/account/account-state.test.ts`; these assert Account parsing, not Menagerie behavior. Menagerie’s saved Lumi assertion and Silver test proving use of parsed Account Obol Fragments remain in the Menagerie suite. No Menagerie calculations changed.
+
+**Checks:** `yarn test tests/domains/account/account-state.test.ts` passed: 1 suite, 1 test. `yarn test tests/domains/menagerie` passed: 4 suites, 46 tests. [#470 ownership correction](https://github.com/Sludging/idleon-efficiency/issues/470#issuecomment-6259238037).

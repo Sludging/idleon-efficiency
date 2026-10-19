@@ -35,7 +35,7 @@ export class Superbit {
     }
 
     static fromBase(records: GamingSuperbitBase[]): Superbit[] {
-        return records.filter(record => record.data.superbitId <= 68).map(record => new Superbit(record.data));
+        return records.filter(record => record.data.superbitId <= 69).map(record => new Superbit(record.data));
     }
 
     parse(data: Map<string, any>): void {

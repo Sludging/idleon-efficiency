@@ -80,22 +80,6 @@ describe('Menagerie account progression', () => {
     expect(menagerie.availableUnlockCount).toMatchLiveGameWithDetails(expected[6], { tolerance: 0, context: 'Available unlock count' });
     expect(menagerie.availableBonusCount).toMatchLiveGameWithDetails(expected[7], { tolerance: 0, context: 'Available bonus count' });
   });
-  it('preserves account-owned minibosses and Plunderous kills from the genuine save', () => {
-    const account = accountData.get('account') as {
-      miniBosses: { bossInternalName: string; daysSinceLastKill: number }[];
-      plunderousMobKills: number;
-    };
-    const options = loadTestSave('latest').get('OptLacc') as number[];
-
-    expect(account.miniBosses.map(boss => boss.bossInternalName)).toEqual(['mini3a', 'mini4a', 'mini5a', 'mini6a']);
-    expect(account.miniBosses.map(boss => boss.daysSinceLastKill)).toEqual([
-      Number(options[96] ?? 0),
-      Number(options[98] ?? 0),
-      Number(options[225] ?? 0),
-      Number(options[226] ?? 0),
-    ]);
-    expect(account.plunderousMobKills).toBe(Number(options[139] ?? 0));
-  });
 
 
   it('reports claims, current task thresholds, and ready state for all missions', () => {
