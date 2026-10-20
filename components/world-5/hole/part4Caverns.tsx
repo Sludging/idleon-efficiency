@@ -242,13 +242,13 @@ function FountainView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () =
         sortBy: "default",
     });
     const [color, setColor] = useState<"All" | "Regular" | "Yellow" | "Green">("All");
-    const [tab, setTab] = useState<"Overview" | "Upgrades">("Overview");
+    const [tab, setTab] = useState<"Resources" | "Upgrades">("Resources");
     const pageNames = ["Regular", "Yellow", "Green"] as const;
     const study = hole.studies[15];
     const opalCost = fountain.getOpalCost();
     const opalCurrencyImage = fountainCurrencyImage(hole, opalCost.currencyId);
     const query = filters.searchText.trim().toLocaleLowerCase();
-    const upgrades = fountain.upgrades
+    const upgrades = fountain.upgradesInUnlockOrder
         .filter(upgrade => color === "All" || upgrade.data.waterIndex === pageNames.indexOf(color))
         .filter(upgrade => {
             const effect = upgrade.getDescription(fountain) ?? "";
@@ -273,51 +273,65 @@ function FountainView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () =
     ];
 
     return <Box gap="medium" data-testid="hole-fountain-details">
+        <Box gap="medium">
+            <Section title="Collection">
+                <Box direction="row" gap="small" align="center" wrap>
+                    <Box gap="xxsmall" pad={{ right: "medium" }} border={{ side: "right", color: "grey-1" }}>
+                        <Text size="xsmall" color="accent-2">Occupied / capacity</Text>
+                        <Text size="large" weight={500}>{value(fountain.getOccupiedSpaceCount())} / {value(fountain.getCapacity())}</Text>
+                    </Box>
+                    <Box direction="row" gap="medium" wrap>
+                        <Box gap="xxsmall">
+                            <Text size="xsmall" color="accent-2">Royal occupied stacks</Text>
+                            <Text size="small">{fountain.stacks.filter(stack => stack.items.length > 0 && stack.royal).length}</Text>
+                        </Box>
+                        <Box gap="xxsmall">
+                            <Text size="xsmall" color="accent-2">Royal chance</Text>
+                            <Text size="small">{percentage(fountain.getRoyalChance())}</Text>
+                        </Box>
+                        <Box gap="xxsmall">
+                            <Text size="xsmall" color="accent-2">Duck chance</Text>
+                            <Text size="small">{percentage(fountain.getDuckChance())}</Text>
+                        </Box>
+                    </Box>
+                </Box>
+            </Section>
+            <Box direction="row" gap="large" wrap>
+                <Section title="Marbles">
+                    <Box direction="row" gap="xsmall" align="center">
+                        <IconImage data={{ location: "HoleFountainMarble", width: 30, height: 23 }} scale={0.45} />
+                        <Text size="small">{value(fountain.marbleCount)}</Text>
+                        <Text size="xsmall" color="accent-2">Yield: {value(fountain.getMarbleYield())}</Text>
+                    </Box>
+                </Section>
+                <Section title="Opals">
+                    <Box direction="row" gap="xsmall" align="center">
+                        <IconImage data={Item.getImageData("Opal")} scale={0.65} />
+                        <Text size="xsmall">Earned: {value(fountain.opalProgress)}</Text>
+                        <Text size="xsmall" color="accent-2">Next cost:</Text>
+                        {opalCurrencyImage
+                            ? <IconImage data={opalCurrencyImage} scale={0.65} />
+                            : <Text size="xsmall">Currency unavailable</Text>}
+                        <Text size="xsmall">{notateNumber(opalCost.amount)}</Text>
+                    </Box>
+                </Section>
+            </Box>
+        </Box>
         <ContentTabs
-            options={[{ value: "Overview", label: "Overview" }, { value: "Upgrades", label: "Upgrades" }]}
+            options={[{ value: "Resources", label: "Resources" }, { value: "Upgrades", label: "Upgrades" }]}
             value={tab}
             onChange={setTab}
         />
-        {tab === "Overview" && <Box gap="medium">
-            <Section title="Resources">
-                <Box data-testid="fountain-wallets" style={{ overflowX: "auto" }}>
-                    <DataTable
-                        aria-label="Fountain resources"
-                        columns={currencyColumns}
-                        data={fountain.currencies}
-                        primaryKey="index"
-                        step={fountain.currencies.length}
-                    />
-                </Box>
-            </Section>
-            <Section title="Collection">
-                <Box direction="row" gap="small" wrap>
-                    <Text size="xsmall">Occupied / capacity: {value(fountain.getOccupiedSpaceCount())} / {value(fountain.getCapacity())}</Text>
-                    <Text size="xsmall">Royal occupied stacks: {fountain.stacks.filter(stack => stack.items.length > 0 && stack.royal).length}</Text>
-                    <Text size="xsmall">Royal chance: {percentage(fountain.getRoyalChance())}</Text>
-                    <Text size="xsmall">Duck chance: {percentage(fountain.getDuckChance())}</Text>
-                </Box>
-            </Section>
-            <Section title="Marbles">
-                <Box direction="row" gap="xsmall" align="center">
-                    <IconImage data={{ location: "HoleFountainMarble", width: 30, height: 23 }} scale={0.45} />
-                    <Text size="xsmall">{value(fountain.marbleCount)}</Text>
-                    <Text size="xsmall" color="accent-2">Yield: {value(fountain.getMarbleYield())}</Text>
-                </Box>
-            </Section>
-            <Section title="Opals">
-                <Box direction="row" gap="xsmall" align="center">
-                    <IconImage data={Item.getImageData("Opal")} scale={0.65} />
-                    <Text size="xsmall">Earned: {value(fountain.opalProgress)}</Text>
-                    <Text size="xsmall" color="accent-2">Next cost:</Text>
-                    {opalCurrencyImage
-                        ? <IconImage data={opalCurrencyImage} scale={0.65} />
-                        : <Text size="xsmall">Currency unavailable</Text>}
-                    <Text size="xsmall">{notateNumber(opalCost.amount)}</Text>
-                </Box>
-            </Section>
+        {tab === "Resources" && <Box data-testid="fountain-wallets" style={{ overflowX: "auto" }}>
+            <DataTable
+                aria-label="Fountain resources"
+                columns={currencyColumns}
+                data={fountain.currencies}
+                primaryKey="index"
+                step={fountain.currencies.length}
+            />
         </Box>}
-        {tab === "Upgrades" && <Section title="Upgrades">
+        {tab === "Upgrades" && <Box gap="small">
             <UpgradeTable
                 tableName="Fountain upgrades"
                 columns={[
@@ -382,7 +396,7 @@ function FountainView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () =
                 primaryKey="index"
                 filters={filters}
                 onFiltersChange={setFilters}
-                sortOptions={[{ label: "In-game order", value: "default" }]}
+                sortOptions={[]}
                 additionalFilters={<Box direction="row" gap="xsmall" align="center" data-testid="fountain-color-filter">
                     <Text size="xsmall">Color</Text>
                     <Select aria-label="Color filter" options={["All", ...pageNames]} value={color} onChange={({ option }) => setColor(option)} />
@@ -391,7 +405,7 @@ function FountainView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () =
                 showLockedAndMaxedFilters={false}
                 variant="panel"
             />
-        </Section>}
+        </Box>}
         <CavernStudySummary study={study} onOpenStudies={onOpenStudies} />
     </Box>;
 }

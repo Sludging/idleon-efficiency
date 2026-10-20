@@ -246,8 +246,10 @@ export class FountainUpgrade {
 
 export class Fountain {
     currencies: FountainCurrency[] = [];
+    upgradesInUnlockOrder: FountainUpgrade[] = [];
     upgrades: FountainUpgrade[] = [];
     wallets: number[] = Array(9).fill(0);
+
     stacks: FountainStack[] = [];
     valueWallets: number[] = [0, 0, 0];
     desireCurrencyId: number | null = null;
@@ -263,6 +265,32 @@ export class Fountain {
         this.currencies = initFountainCurrencyRepo().map(currency =>
             new FountainCurrency(currency.index, currency.data));
         this.upgrades = FountainUpgrade.fromBase(initFountainUpgradeRepo());
+
+        const upgradesByWater = [0, 1, 2].map(waterIndex =>
+            this.upgrades.filter(upgrade => upgrade.data.waterIndex === waterIndex));
+        const unlockDepths = new Map<FountainUpgrade, number>();
+        const getUnlockDepth = (upgrade: FountainUpgrade): number => {
+            const knownDepth = unlockDepths.get(upgrade);
+            if (knownDepth !== undefined) {
+                return knownDepth;
+            }
+
+            const prerequisiteIndex = upgrade.data.prerequisiteIndex;
+            const depth = prerequisiteIndex < 0
+                ? 0
+                : getUnlockDepth(upgradesByWater[upgrade.data.waterIndex]!.find(
+                    prerequisite => prerequisite.data.index === prerequisiteIndex,
+                )!) + 1;
+            unlockDepths.set(upgrade, depth);
+            return depth;
+        };
+
+        this.upgradesInUnlockOrder = upgradesByWater.flatMap(waterUpgrades =>
+            waterUpgrades
+                .sort((left, right) =>
+                    getUnlockDepth(left) - getUnlockDepth(right)
+                    || left.data.index - right.data.index)
+        );
     }
 
     parse(

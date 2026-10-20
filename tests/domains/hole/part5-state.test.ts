@@ -644,10 +644,63 @@ describe('Hole part-five imported state', () => {
     });
 
     it('keeps Fountain currencies within nine-wallet scope', () => {
+
         expect(hole.fountain.currencies).toHaveLength(9);
         expect(hole.fountain.wallets).toHaveLength(9);
         expect(hole.fountain.upgrades).toHaveLength(60);
         expect(hole.fountain.opalProgress).toBe(14);
+    });
+    it('orders all Fountain upgrades by prerequisite tier without changing catalog records', () => {
+        const { upgrades, upgradesInUnlockOrder } = hole.fountain;
+        const catalogBonuses = upgrades.map(upgrade => upgrade.getBonus());
+        const positions = new Map(upgradesInUnlockOrder.map((upgrade, position) => [upgrade, position]));
+        const getDepth = (upgrade: typeof upgrades[number]): number => {
+            if (upgrade.data.prerequisiteIndex < 0) {
+                return 0;
+            }
+            const prerequisite = upgrades.find(candidate =>
+                candidate.data.waterIndex === upgrade.data.waterIndex
+                && candidate.data.index === upgrade.data.prerequisiteIndex)!;
+            return getDepth(prerequisite) + 1;
+        };
+
+        expect(upgrades).toHaveLength(60);
+        expect(upgradesInUnlockOrder).toHaveLength(60);
+        expect(new Set(upgradesInUnlockOrder).size).toBe(60);
+        expect(upgradesInUnlockOrder.every(upgrade => upgrades.includes(upgrade))).toBe(true);
+        expect(upgrades.map(upgrade => upgrade.getBonus())).toEqual(catalogBonuses);
+
+        for (const waterIndex of [0, 1, 2]) {
+            const colorUpgrades = upgradesInUnlockOrder.filter(
+                upgrade => upgrade.data.waterIndex === waterIndex,
+            );
+            expect(colorUpgrades).toHaveLength(20);
+            expect(colorUpgrades[0]!.data.prerequisiteIndex).toBeLessThan(0);
+
+            for (let index = 1; index < colorUpgrades.length; index++) {
+                const previous = colorUpgrades[index - 1]!;
+                const current = colorUpgrades[index]!;
+                const previousDepth = getDepth(previous);
+                const currentDepth = getDepth(current);
+                expect(previousDepth).toBeLessThanOrEqual(currentDepth);
+                if (previousDepth === currentDepth) {
+                    expect(previous.data.index).toBeLessThan(current.data.index);
+                }
+            }
+
+            colorUpgrades.forEach(upgrade => {
+                if (upgrade.data.prerequisiteIndex < 0) {
+                    return;
+                }
+                const prerequisite = upgrades.find(candidate =>
+                    candidate.data.waterIndex === waterIndex
+                    && candidate.data.index === upgrade.data.prerequisiteIndex)!;
+                expect(positions.get(prerequisite)).toBeLessThan(positions.get(upgrade)!);
+            });
+        }
+        expect(upgradesInUnlockOrder.map(upgrade => upgrade.data.waterIndex)).toEqual([
+            ...Array(20).fill(0), ...Array(20).fill(1), ...Array(20).fill(2),
+        ]);
     });
 
     it('restores Villager rescue and claim readiness states', () => {

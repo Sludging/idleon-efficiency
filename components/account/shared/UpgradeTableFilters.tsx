@@ -89,7 +89,7 @@ export function UpgradeTableFilters({
             </Box>
         ) : null
     ];
-    const sortControl = (
+    const sortControl = sortOptions.length > 1 ? (
         <Box direction="row" gap="small" align="center">
             <Text size="small">Sort by:</Text>
             <Select
@@ -100,7 +100,7 @@ export function UpgradeTableFilters({
                 onChange={({ value }) => updateFilter('sortBy', value)}
             />
         </Box>
-    );
+    ) : null;
     const searchControl = (
         <Box direction="row" gap="small" align="center">
             <Text size="small">Search:</Text>
