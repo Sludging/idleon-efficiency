@@ -4,7 +4,7 @@ import { Item } from "../items";
 import { Companion, getCompanionActiveBonus, getCompanionBonus, isCompanionLevelTwo } from "../companions";
 import { Equinox } from "../world-3/equinox";
 import { SushiStation } from "./sushi";
-import { SkillsIndex } from "../SkillsIndex";
+import { selectResearchSkillProgress } from "./researchInputs";
 import { initResearchObservationRepo, ResearchObservationBase } from "../data/ResearchObservationRepo";
 import { initResearchLensRepo, ResearchLensBase } from "../data/ResearchLensRepo";
 import { initResearchMetadataRepo } from "../data/ResearchMetadataRepo";
@@ -12,7 +12,6 @@ import { initResearchPostyNoteRepo, ResearchPostyNoteBase } from "../data/Resear
 import { initResearchShapeRepo, ResearchShapeBase } from "../data/ResearchShapeRepo";
 import { MapInfo } from "../maps";
 import { MapDataBase } from "../data/MapDataRepo";
-import { Player } from "../player";
 import { Card } from "../cards";
 import { Storage } from "../storage";
 import { GemPurchase, GemStore } from "../gemPurchases";
@@ -299,13 +298,12 @@ export class CrownCountResearchGridBonus extends ResearchGridBonus {
 export class ObservationLevelResearchGridBonus extends ResearchGridBonus {
   occurrenceFoundState: number[] = [];
   observationInsightLevels: number[] = [];
-  researchSkillLevels: number[] = [];
+  researchLevel: number = 0;
   totalObservationLevels: number = 0;
-
   override updateDerivedValues(): void {
     const occurrencesToBeFound = getOccurrencesToBeFound(
       this.occurrenceFoundState,
-      this.researchSkillLevels,
+      this.researchLevel,
     );
     this.totalObservationLevels = this.observationInsightLevels
       .slice(0, occurrencesToBeFound)
@@ -320,13 +318,13 @@ export class ObservationLevelResearchGridBonus extends ResearchGridBonus {
 /** See 'Em All adds Research EXP per unlocked Observation. */
 export class OccurrenceCountResearchGridBonus extends ResearchGridBonus {
   occurrenceFoundState: number[] = [];
-  researchSkillLevels: number[] = [];
+  researchLevel: number = 0;
   totalOccurrencesFound: number = 0;
 
   override updateDerivedValues(): void {
     const occurrencesToBeFound = getOccurrencesToBeFound(
       this.occurrenceFoundState,
-      this.researchSkillLevels,
+      this.researchLevel,
     );
     this.totalOccurrencesFound = this.occurrenceFoundState
       .slice(0, occurrencesToBeFound)
@@ -445,27 +443,16 @@ export interface ResearchContributor {
   inputValue: number;
   cap?: number;
   gate?: string;
-  characterID?: number;
   components?: ResearchContributor[];
   companionGroups?: ResearchCompanionGroup[];
   reward?: ResearchContributorReward;
 }
 
-export type ResearchOfflineContributor = Omit<ResearchContributor, "value" | "inputValue"> & {
-  value: number | null;
-  inputValue: number | null;
-};
 
 export interface ResearchProgress {
   highestLevel: number;
-  savedExpCopy: {
-    characterID: number;
-    characterName: string;
-    level: number;
-    currentXP: number;
-    xpReq: number | undefined;
-    provenance: string;
-  } | undefined;
+  currentXP: number;
+  xpReq: number;
   saveGlobalTime: number | undefined;
   discoveries: number;
   totalObservationLevels: number;
@@ -519,13 +506,13 @@ export interface ResearchProduction {
 
 export interface ResearchOfflineGains {
   onlinePercent: number;
-  percent: number | null;
-  fraction: number | null;
-  unclampedPercent: number | null;
+  percent: number;
+  fraction: number;
+  unclampedPercent: number;
   baselinePercent: number;
   floorPercent: number;
   capPercent: number;
-  contributors: ResearchOfflineContributor[];
+  contributors: ResearchContributor[];
 }
 
 export interface ResearchShapeOwnership {
@@ -863,7 +850,7 @@ export class PostyNote {
 interface ResearchDisplayInputs {
   additiveExp: ResearchContributor[];
   expMultipliers: ResearchContributor[];
-  offline: ResearchOfflineContributor[];
+  offline: ResearchContributor[];
   ownership: ResearchContributor[];
   opticalMonocles: number;
   kaleidoscopes: number;
@@ -892,7 +879,7 @@ export class ResearchGrid extends Domain {
   postyNotes: PostyNote[] = [];
   metadata = initResearchMetadataRepo()[0].data;
   progress: ResearchProgress = {
-    highestLevel: 0, savedExpCopy: undefined, saveGlobalTime: undefined,
+    highestLevel: 0, currentXP: 0, xpReq: 0, saveGlobalTime: undefined,
     discoveries: 0, totalObservationLevels: 0, eligibleObservationCount: 0,
   };
   discoveryAllowance!: ResearchDiscoveryAllowance;
@@ -908,15 +895,15 @@ export class ResearchGrid extends Domain {
   private paperItem!: Item;
   private remainingAttempts: number = 0;
   private failedRollCount: number = 0;
-  private researchSkillLevels: number[] = [];
   private allBonusMultiplier: number = 1;
   private accumulatedFirstThreeUpgradeCostReduction: number = 0;
 
   getRawKeys(): RawData[] {
     return [
       { key: "Research", perPlayer: false, default: [] },
-      // Research level is stored in each character's Lv0 array at SkillsIndex.Research.
       { key: "Lv0_", perPlayer: true, default: [] },
+      { key: "Exp0_", perPlayer: true, default: [] },
+      { key: "ExpReq0_", perPlayer: true, default: [] },
       { key: "TimeAway", perPlayer: false, default: {} },
     ];
   }
@@ -945,8 +932,7 @@ export class ResearchGrid extends Domain {
     const occurrenceFoundState = research[2] || [];
     // Research[4] stores each found observation's Insight level.
     const observationInsightLevels = research[4] || [];
-    // The raw Lv0_i arrays are declared above; SkillsIndex keeps the skill slot explicit.
-    const researchSkillLevels = getResearchSkillLevels(data);
+    const skillProgress = selectResearchSkillProgress(data, data.get("charCount") as number);
     researchGrid.shapes.forEach(shape => shape.parse(research[6] || []));
     // OptionsListAccount[500] is the direct mode-2 value for square 151.
     // This saved value records Research's cumulative first-three cost reduction.
@@ -960,14 +946,13 @@ export class ResearchGrid extends Domain {
     const timeAway = data.get("TimeAway");
     const saveTime = timeAway && typeof timeAway === "object" && "GlobalTime" in timeAway
       ? Number(timeAway.GlobalTime) : undefined;
-    researchGrid.researchSkillLevels = researchSkillLevels;
     researchGrid.observations.forEach(observation => observation.parse(
       Number(occurrenceFoundState[observation.index] ?? 0),
       Number(research[3]?.[observation.index] ?? 0),
       Number(observationInsightLevels[observation.index] ?? 0),
     ));
     researchGrid.progress = {
-      highestLevel: 0, savedExpCopy: undefined, saveGlobalTime: saveTime,
+      ...skillProgress, saveGlobalTime: saveTime,
       eligibleObservationCount: 0, discoveries: 0, totalObservationLevels: 0,
     };
     const savedLenses = research[5] || [];
@@ -994,10 +979,10 @@ export class ResearchGrid extends Domain {
     const observationLevelBonus = researchGrid.bonuses[94] as ObservationLevelResearchGridBonus;
     observationLevelBonus.occurrenceFoundState = occurrenceFoundState;
     observationLevelBonus.observationInsightLevels = observationInsightLevels;
-    observationLevelBonus.researchSkillLevels = researchSkillLevels;
+    observationLevelBonus.researchLevel = skillProgress.highestLevel;
     const occurrenceCountBonus = researchGrid.bonuses[112] as OccurrenceCountResearchGridBonus;
     occurrenceCountBonus.occurrenceFoundState = occurrenceFoundState;
-    occurrenceCountBonus.researchSkillLevels = researchSkillLevels;
+    occurrenceCountBonus.researchLevel = skillProgress.highestLevel;
     (researchGrid.bonuses[151] as AccountOptionResearchGridBonus).optionValue = accountOption500;
   }
 
@@ -1051,9 +1036,8 @@ export class ResearchGrid extends Domain {
   updateCalculationState(companions: Companion[], equinox: Equinox, sushi: SushiStation): void {
     const divineDesignActiveBonus = getCompanionActiveBonus(companions, DOOT_COMPANION);
     (this.bonuses[DOOT_RESEARCH_INDEX] as DivineDesignResearchGridBonus).activeDootBonus = divineDesignActiveBonus;
-    this.progress.highestLevel = Math.max(...this.researchSkillLevels, 0);
     this.progress.eligibleObservationCount = getOccurrencesToBeFound(
-      this.observations.map(observation => observation.found ? 1 : 0), this.researchSkillLevels,
+      this.observations.map(observation => observation.found ? 1 : 0), this.progress.highestLevel,
     );
     this.progress.discoveries = this.observations.filter(observation =>
       observation.index < this.progress.eligibleObservationCount && observation.found).length;
@@ -1084,18 +1068,8 @@ export class ResearchGrid extends Domain {
       bonus.updateDerivedValues();
     });
   }
-  prepareDisplay(inputs: ResearchDisplayInputs, referencePlayer: Player | undefined): void {
+  prepareDisplay(inputs: ResearchDisplayInputs): void {
     const level = this.progress.highestLevel;
-    if (referencePlayer) {
-      const skill = referencePlayer.skills.get(SkillsIndex.Research)!;
-      this.progress.savedExpCopy = {
-        characterID: referencePlayer.playerID, characterName: referencePlayer.playerName,
-        level: skill.level, currentXP: skill.currentXP, xpReq: skill.xpReq,
-        provenance: `Saved EXP copy from ${referencePlayer.playerName} at Research level ${skill.level}. This copy is not account-authoritative EXP.`,
-      };
-    } else {
-      this.progress.savedExpCopy = undefined;
-    }
     const smartEyeLevel = this.getBonusForId(31, 1);
     const failedRollBonusCap = this.getBonusForId(31, 2);
     const currentFailedRollBonus = Math.min(this.failedRollCount * smartEyeLevel, failedRollBonusCap);
@@ -1168,18 +1142,11 @@ export class ResearchGrid extends Domain {
       this.production.gameDisplayedInsightPerHour += observation.gameDisplayedInsightPerHour;
     });
     this.production.expPerHour = this.production.expBeforeSharedMultiplierPerHour * this.production.expMultiplier;
-    let offlineBonusPercent: number | null = 0;
-    for (const contributor of inputs.offline) {
-      if (contributor.value === null) {
-        offlineBonusPercent = null;
-        break;
-      }
-      offlineBonusPercent += contributor.value;
-    }
-    const unclampedPercent = offlineBonusPercent === null ? null : 1 + offlineBonusPercent;
-    const fraction = offlineBonusPercent === null ? null : Math.max(0.01, Math.min(1, 0.01 + offlineBonusPercent / 100));
+    const offlineBonusPercent = sumContributors(inputs.offline);
+    const unclampedPercent = 1 + offlineBonusPercent;
+    const fraction = Math.max(0.01, Math.min(1, 0.01 + offlineBonusPercent / 100));
     this.offlineGains = {
-      onlinePercent: 100, percent: fraction === null ? null : 100 * fraction, fraction, unclampedPercent,
+      onlinePercent: 100, percent: 100 * fraction, fraction, unclampedPercent,
       baselinePercent: 1, floorPercent: 1, capPercent: 100, contributors: inputs.offline,
     };
     const shapeContributors = [...inputs.shapeOwnership, ...this.postyNotes
@@ -1243,12 +1210,6 @@ export class ResearchGrid extends Domain {
   }
 }
 
-/** Reads each character's Research level from the parsed per-player Lv0_i arrays. */
-const getResearchSkillLevels = (data: Map<string, any>): number[] => {
-  return [...data.entries()]
-    .filter(([key, value]) => /^Lv0_\d+$/.test(key) && Array.isArray(value))
-    .map(([, value]) => Number(value[SkillsIndex.Research]) || 0);
-};
 
 /**
  * The game reveals a level-based Observation prefix after the first discovery.
@@ -1274,12 +1235,12 @@ const getRevealedObservationCount = (
   );
 };
 
-/** Keep the highest-character-level and raw first-discovery adapter semantics. */
+/** Preserve first-discovery semantics while using shared account Research level. */
 const getOccurrencesToBeFound = (
   occurrenceFoundState: number[],
-  researchSkillLevels: number[],
+  researchLevel: number,
 ): number => getRevealedObservationCount(
-  Math.max(...researchSkillLevels, 0),
+  researchLevel,
   Number(occurrenceFoundState[0]) !== 0,
 );
 
@@ -1302,10 +1263,10 @@ export const updateResearchGrid = (data: Map<string, any>) => {
 // These records supply both displayed contributors and the actual Research totals.
 const researchContribution = (
   source: string, inputValue: number, operation: ResearchContributor["operation"],
-  cap?: number, gate?: string, characterID?: number,
+  cap?: number, gate?: string,
 ): ResearchContributor => {
   const value = cap === undefined ? inputValue : Math.min(cap, inputValue);
-  return { source, inputValue, value, operation, cap, gate, characterID };
+  return { source, inputValue, value, operation, cap, gate };
 };
 
 const researchPercentMultiplier = (
@@ -1321,7 +1282,6 @@ const researchPercentMultiplier = (
 export const updateResearchDisplay = (data: Map<string, any>): ResearchGrid => {
   const menagerie = data.get("menagerie") as Menagerie;
   const research = data.get("research") as ResearchGrid;
-  const players = data.get("players") as Player[];
   const companions = data.get("companions") as Companion[];
   const farming = data.get("farming") as Farming;
   const cooking = data.get("cooking") as Cooking;
@@ -1349,15 +1309,6 @@ export const updateResearchDisplay = (data: Map<string, any>): ResearchGrid => {
   const gems = data.get("gems") as GemStore;
   const storage = data.get("storage") as Storage;
 
-  // This selects a saved display context, not a best production rate or authoritative account EXP.
-  let referencePlayer: Player | undefined;
-  for (const player of players) {
-    const skill = player.skills.get(SkillsIndex.Research)!;
-    if (skill.level === research.progress.highestLevel
-      && (!referencePlayer || player.playerID < referencePlayer.playerID)) {
-      referencePlayer = player;
-    }
-  }
   const gridContribution = (
     index: number, mode: number = 0,
     operation: ResearchContributor["operation"] = "addPercent", unit: string = "EXP",
@@ -1470,12 +1421,12 @@ export const updateResearchDisplay = (data: Map<string, any>): ResearchGrid => {
     acquired: shopUpgrade.purchasedLevel > 0, active: shopUpgrade.purchasedLevel > 0,
   };
   const prehistoricSet = sets.equipmentSets.find(set => set.data.name === "PREHISTORIC_SET")!;
-  const prehistoricExp = researchContribution("Equipment set: Prehistoric set", sets.getSetBonus("PREHISTORIC_SET", referencePlayer, true), "addPercent", 50, "Permanent activation or reference character's equipped set", referencePlayer?.playerID);
+  const prehistoricExp = researchContribution("Equipment set: Prehistoric set", sets.getSetBonus("PREHISTORIC_SET", true), "addPercent", 50, "Permanent activation or account-wide set activation");
   prehistoricExp.reward = {
     // Research caps this set's raw EXP reward at 50%.
     value: Math.min(prehistoricExp.cap!, prehistoricSet.getBonus(true)), operation: "addPercent", unit: "EXP",
-    basis: "when active or equipped",
-    acquired: prehistoricSet.unlocked, active: prehistoricSet.isActiveFor(referencePlayer),
+    basis: "when the set is unlocked",
+    acquired: prehistoricSet.unlocked, active: prehistoricSet.unlocked,
   };
   const additiveExp = [
     researchContribution(`Farming sticker: ${sticker.name}`, farming.getStickerBonus(1), "addPercent"),
@@ -1487,7 +1438,7 @@ export const updateResearchDisplay = (data: Map<string, any>): ResearchGrid => {
     researchContribution(`Zenith Market: ${zenithBonus.data.name}`, zenith.getBonusForId(8), "addPercent"),
     researchContribution(`Gaming: ${researchSuperbit.name}`, worship.totalizer.getResearchExpBonus(), "addPercent", undefined, `Purchased ${researchSuperbit.name} Superbit and total Worship best waves`),
     researchContribution(`Sailing: ${slabSuperbit.name}`, sailing.getResearchExpSlabBonus(), "addPercent", undefined, `Purchased ${slabSuperbit.name} Superbit`),
-    researchContribution("Spelunking epilogue: Research EXP", referencePlayer ? spelunking.getResearchExpEpilogueBonus(referencePlayer, tome, grimoire, sets) : 0, "addPercent", undefined, "Owned epilogue and reference character's Tome and set inputs", referencePlayer?.playerID),
+    researchContribution("Spelunking epilogue: Research EXP", spelunking.getResearchExpEpilogueBonus(tome, grimoire, sets), "addPercent", undefined, "Owned epilogue and account Tome and set inputs"),
     ...[{ id: "w7b1", scale: 1, cap: 10 }, { id: "w7b4", scale: 2, cap: 15 }].map(({ id, scale, cap }) => {
       const card = cards.find(card => card.id === id)!;
       return researchContribution(`Owned card: ${card.displayName}`, scale * card.getLevels(), "addPercent", cap);
@@ -1568,13 +1519,12 @@ export const updateResearchDisplay = (data: Map<string, any>): ResearchGrid => {
   const artifact = sailing.artifacts.find(artifact => artifact.index === 36)!;
   const offlineCard = cards.find(card => card.id === "w7b11")!;
   const gambit = hole.gambit.bonuses.find(bonus => bonus.index === 15)!;
-  const gambitOfflineBonus = referencePlayer ? hole.gambit.getBonus(15, referencePlayer) : 0;
+  const gambitOfflineBonus = hole.gambit.getBonus(15);
   const papersOfflineBonus = researchContribution(purchase.name, 2 * purchase.pucrhased, "addPercent", undefined, "Two percentage points per permanent purchase");
-  const offline: ResearchOfflineContributor[] = [
+  const offline: ResearchContributor[] = [
     companionContribution(28, 1, "addPercent", "AFK gains"),
     { source: `The Hole Gambit: ${gambit.data.name}`, inputValue: gambitOfflineBonus, value: gambitOfflineBonus,
-      operation: "addPercent", gate: `Requires score ${gambit.getScoreThreshold()} and a non-Tutorial scene for the reference character`,
-      characterID: referencePlayer?.playerID },
+      operation: "addPercent", gate: `Requires score ${gambit.getScoreThreshold()}` },
     mineheadContribution(1, "addPercent"), mineheadContribution(10, "addPercent"),
     gridContribution(71, 0, "addPercent", "AFK gains"), gridContribution(111, 0, "addPercent", "AFK gains"),
     researchContribution(`Sailing artifact: ${artifact.data.name}`, Math.round(artifact.status), "addPercent", 6),
@@ -1639,7 +1589,7 @@ export const updateResearchDisplay = (data: Map<string, any>): ResearchGrid => {
   research.prepareDisplay({
     additiveExp, expMultipliers, offline, ownership, opticalMonocles, kaleidoscopes,
     maximumRoll, dailyAllocation, insight, kaleidoscope, shapeOwnership, papers, localInsight: gridContribution(93),
-  }, referencePlayer);
+  });
   const taskboard = data.get("taskboard") as TaskBoard;
   const rift = data.get("rift") as Rift;
   const pointMerit = taskboard.merits.find(merit => merit.index === 51)!;

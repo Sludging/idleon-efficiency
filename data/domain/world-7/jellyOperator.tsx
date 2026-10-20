@@ -231,10 +231,10 @@ export class JellyOperator extends Domain {
 
     parse(data: Map<string, any>): void {
         const jellyOperator = data.get(this.getDataKey()) as JellyOperator;
-        const research = (data.get("Research") as number[][] | undefined) || [];
+        const research = data.get("Research") as number[][];
         const progression = research[7] || [];
         const upgradeLevels = research[17] || [];
-        const player0Skills = (data.get("Lv0_0") as number[] | undefined) || [];
+        const player0Skills = data.get("Lv0_0") as number[];
         const researchLevel = Number(player0Skills[SkillsIndex.Research]) || 0;
 
         // Successful operations count cleared obstructions and identify the next obstruction.
@@ -244,7 +244,7 @@ export class JellyOperator extends Domain {
         jellyOperator.bestDPS = Number(progression[12]) || 0;
         jellyOperator.selectedFeverIndex = Number(progression[13]) || 0;
         jellyOperator.bestOperationBloodcells = Number(progression[14]) || 0;
-        const bundlesReceived = (data.get("BundlesReceived") as Record<string, unknown> | undefined) || {};
+        const bundlesReceived = data.get("BundlesReceived") as Record<string, unknown>;
         jellyOperator.jellyBundleOwned = Number(bundlesReceived.ban_j) === 1;
         const purchasedPlots = research[18] || [];
         jellyOperator.purchasedPlotCount = purchasedPlots.length;

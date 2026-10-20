@@ -695,7 +695,7 @@ export const updateCooking = (data: Map<string, any>) => {
         meal.companion162Bonus = companion162Bonus;
         meal.reducedCostToUpgrade = voidPlateAchiev;
         meal.foodLustDiscount = foodLust.getBonus();
-        meal.armorSetBonus = equipmentSets.getSetBonus("EMPEROR_SET", undefined, true);
+        meal.armorSetBonus = equipmentSets.getSetBonus("EMPEROR_SET", true);
 
         // Reset any previously calculated info, the next section should re-populate this.
         meal.cookingContribution = 0;

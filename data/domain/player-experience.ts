@@ -143,7 +143,7 @@ export const getClassExperienceMultiplier = (data: Map<string, any>, player: Pla
         + votes.getCurrentBonus(15)
         + hole.getMonumentBonus('Justice', 6)
         + expGainLuck4
-        + equipmentSets.getSetBonus('IRON_SET', undefined, true)
+        + equipmentSets.getSetBonus('IRON_SET', true)
         + farming.getExoticMarketBonusValue(50)
         + account.classExperienceBonusPoints
         + getStampBonusForKey(data.get('stamps') as Stamp[][], 'classxp')

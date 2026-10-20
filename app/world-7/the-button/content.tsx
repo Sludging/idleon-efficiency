@@ -63,17 +63,11 @@ export default function ButtonContent() {
                             {task.index === 50 && (
                                 <Text size="xsmall">Persistent normal-world power; temporary active delve-elixir effects are excluded.</Text>
                             )}
-                            {task.progress.kind === "available" ? (
-                                <>
-                                    <Text size="small" color={task.progress.isReady ? "green-2" : "status-critical"}>
-                                        {notateNumber(task.progress.currentValue, "Smaller")} / {notateNumber(task.requiredValue, "Smaller")}
-                                    </Text>
-                                    {task.progress.characterName && (
-                                        <Text size="xsmall">Best character: {task.progress.characterName}</Text>
-                                    )}
-                                </>
-                            ) : (
-                                <Text size="xsmall">Progress unavailable: {task.progress.reason}</Text>
+                            <Text size="small" color={task.progress.isReady ? "green-2" : "status-critical"}>
+                                {notateNumber(task.progress.currentValue, "Smaller")} / {notateNumber(task.requiredValue, "Smaller")}
+                            </Text>
+                            {task.progress.characterName && (
+                                <Text size="xsmall">Best character: {task.progress.characterName}</Text>
                             )}
                         </ShadowBox>
                     ))}

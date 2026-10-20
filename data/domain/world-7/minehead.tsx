@@ -108,9 +108,9 @@ export class Minehead extends Domain {
     parse(data: Map<string, any>): void {
         const minehead = data.get(this.getDataKey()) as Minehead;
         minehead.preparedTradeDropRateMultiplier = undefined;
-        const researchData = (data.get("Research") as number[][] | undefined) || [];
+        const researchData = data.get("Research") as number[][];
         const upgradeLevels = researchData[8] || [];
-        const player0Skills = (data.get("Lv0_0") as number[] | undefined) || [];
+        const player0Skills = data.get("Lv0_0") as number[];
         const researchLevel = Number(player0Skills[SkillsIndex.Research]) || 0;
         const serverVars = data.get("servervars") as Record<string, unknown> | undefined;
         minehead.serverCostScaling = Number(serverVars?.A_MineCost ?? 1);

@@ -985,7 +985,7 @@ export function updateAlchemyTomeBubbles(data: Map<string, any>) {
     const equipmentSets = data.get("equipmentSets") as EquipmentSets;
     const tomeScore = tome.getHighestScore();
     const grimoireTomeBonus = grimoire.getUpgradeBonus(17);
-    const trollSetTomeBonus = equipmentSets.getSetBonus("TROLL_SET", undefined, true);
+    const trollSetTomeBonus = equipmentSets.getSetBonus("TROLL_SET", true);
     const scoreScaledBubbleKeys = ["W10AllCharz", "W8", "A10AllCharz", "A9", "M10AllCharz", "M9"];
     const modifierBubbleKeys = ["W8", "A9", "M9"];
 

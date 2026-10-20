@@ -306,7 +306,7 @@ export const updateGoldenFood = (accountData: Map<string, any>): void => {
         const alchemyDeathBringer = Talent.getAccountTalentBonus(players, 209, beforeActiveBubbleMultiplierInputs)
             * billionKillMaps;
         goldenFood.updatePlayer(player, sneaking, accountInputs, {
-            secretSetPercent: equipmentSets.getSetBonus('SECRET_SET', player, true),
+            secretSetPercent: equipmentSets.getSetBonus('SECRET_SET', true),
             family: family.getClassBonus(ClassIndex.Shaman)!.getBonus(player),
             equipment: player.gear.getBonus(EquipmentBonus.GoldFoodEffect),
             starSign: player.starSigns.find(sign => sign.name === 'Beanbie Major')?.getBonus('Golden Food') ?? 0,

@@ -924,16 +924,15 @@ export class Spelunking extends Domain {
         return this.tunnels.reduce((total, tunnel) => total + tunnel.discoveryCount, 0);
     }
 
-    getResearchExpEpilogueBonus(player: Player, tome: Tome, grimoire: Grimoire, equipmentSets: EquipmentSets): number {
+    getResearchExpEpilogueBonus(tome: Tome, grimoire: Grimoire, equipmentSets: EquipmentSets): number {
         const epilogue = this.researchExpEpilogue;
         if (!(this.ownedEpilogueCount > epilogue.index)) {
             return 0;
         }
 
-        // Use this character's Tome score and equipped set, not the account's highest score.
-        const score = tome.getPlayerTotalScore(player.playerID);
+        const score = tome.getHighestScore();
         const grimoireBonus = grimoire.getUpgradeBonus(17);
-        const trollSetBonus = equipmentSets.getSetBonus("TROLL_SET", player, true);
+        const trollSetBonus = equipmentSets.getSetBonus("TROLL_SET", true);
         const scoreBlocks = Math.floor(Math.max(0, score - epilogue.data.x1) / 100);
         const scorePower = Math.pow(scoreBlocks, 0.7);
         return (1 + (grimoireBonus + trollSetBonus) / 100)

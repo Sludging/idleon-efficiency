@@ -45,39 +45,33 @@ const BUTTON_SKILL_INDEXES = [
 ] as const;
 
 
-const unavailable = (reason: string): Progress => ({ kind: "unavailable", reason });
-
 const available = (value: number, characterName?: string): Progress => {
     return characterName === undefined
-        ? { kind: "available", currentValue: value }
-        : { kind: "available", currentValue: value, characterName };
-};
-
-const availableOptional = (value: number | null): Progress => {
-    return value === null ? unavailable("The saved task value is not present.") : available(value);
+        ? { currentValue: value }
+        : { currentValue: value, characterName };
 };
 
 const bestCharacterProgress = (
     players: readonly Player[],
-    getValue: (player: Player) => number | null,
+    getValue: (player: Player) => number,
 ): Progress => {
-    let bestValue: number | undefined;
-    let bestCharacterName: string | undefined;
+    let bestValue = getValue(players[0]);
+    let bestCharacterName = players[0].playerName;
 
-    for (const player of players) {
+    for (let index = 1; index < players.length; index++) {
+        const player = players[index];
         const value = getValue(player);
-        if (value !== null && Number.isFinite(value) && (bestValue === undefined || value > bestValue)) {
+        if (value > bestValue) {
             bestValue = value;
             bestCharacterName = player.playerName;
         }
     }
 
-    return bestValue === undefined
-        ? unavailable("No character progress value is present in the save.")
-        : available(bestValue, bestCharacterName);
+    return available(bestValue, bestCharacterName);
 };
 
 const getPlayers = (data: Map<string, any>): Player[] => data.get("players") as Player[];
+
 
 export const getButtonTaskProgress = (data: Map<string, any>, taskIndex: number): Progress => {
     switch (taskIndex) {
@@ -183,7 +177,7 @@ export const getButtonTaskProgress = (data: Map<string, any>, taskIndex: number)
         case 34:
         case 35: {
             const skillIndex = BUTTON_SKILL_INDEXES[taskIndex - 30];
-            return bestCharacterProgress(getPlayers(data), player => player.skills.get(skillIndex)?.level ?? null);
+            return bestCharacterProgress(getPlayers(data), player => player.skills.get(skillIndex)!.level);
         }
         case 36: {
             const divinity = data.get("divinity") as Divinity;
@@ -201,7 +195,7 @@ export const getButtonTaskProgress = (data: Map<string, any>, taskIndex: number)
         }
         case 40: {
             const gaming = data.get("gaming") as Gaming;
-            return availableOptional(gaming.evolvedPlantCount);
+            return available(gaming.evolvedPlantCount);
         }
         case 41: {
             const gaming = data.get("gaming") as Gaming;
@@ -233,7 +227,7 @@ export const getButtonTaskProgress = (data: Map<string, any>, taskIndex: number)
         }
         case 48: {
             const farming = data.get("farming") as Farming;
-            return availableOptional(farming.registeredCropCount);
+            return available(farming.registeredCropCount);
         }
         case 49:
             return bestCharacterProgress(getPlayers(data), player => getMaximumDamage(data, player));

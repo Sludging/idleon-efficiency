@@ -15,27 +15,16 @@ import { sushiBucksImage } from "components/world-7/sushi/sushiImages";
 const BUTTON_TASK_CYCLE_LENGTH = 100;
 export const UPCOMING_BUTTON_TASK_COUNT = 5;
 
-export type ButtonTaskProgress =
- | { kind: "available"; currentValue: number; characterName?: string }
- | { kind: "unavailable"; reason: string };
+export type ButtonTaskProgress = { currentValue: number; characterName?: string };
 
-export type UpcomingButtonTask =
- | {
+export type UpcomingButtonTask = {
   index: number;
   description: string;
   pressCount: number;
   pressNumber: number;
   requiredValue: number;
-  progress: { kind: "available"; currentValue: number; isReady: boolean; characterName?: string };
- }
- | {
-  index: number;
-  description: string;
-  pressCount: number;
-  pressNumber: number;
-  requiredValue: number;
-  progress: { kind: "unavailable"; reason: string };
- };
+  progress: ButtonTaskProgress & { isReady: boolean };
+};
 
 // Native Button_REQ uses completed presses; only linear and step requirements round up.
 const getButtonTaskRequirement = (task: ButtonTaskModel, pressCount: number): number => {
@@ -197,10 +186,6 @@ export class Button extends Domain {
     requiredValue: getButtonTaskRequirement(task.data, pressCount),
    };
 
-   if (progress.kind === "unavailable") {
-    return { ...scheduledTask, progress };
-   }
-
    return {
     ...scheduledTask,
     progress: {
@@ -223,13 +208,9 @@ export class Button extends Domain {
 
 
 export const updateButton = (data: Map<string, any>) => {
- const button = data.get("button") as Button | undefined;
- const companions = data.get("companions") as Companion[] | undefined;
- const researchGrid = data.get("research") as ResearchGrid | undefined;
-
- if (!button || !companions || !researchGrid) {
-  throw new Error("Button calculation requires Button, companions, and Research Grid data");
- }
+ const button = data.get("button") as Button;
+ const companions = data.get("companions") as Companion[];
+ const researchGrid = data.get("research") as ResearchGrid;
 
  button.updateCalculationState(companions, researchGrid);
  return button;

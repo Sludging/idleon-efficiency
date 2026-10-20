@@ -27,26 +27,18 @@ describe('The Button - upcoming task progress', () => {
   it('matches native maximum character damage for Button task 49', () => {
     const progress = getButtonTaskProgress(gameData, 49);
     const expected = getExtractedValue(loadExtractionResults('player-combat-stats-data.json'), 'player_maximum_damage');
-    expect(progress.kind).toBe('available');
-    if (progress.kind === 'available') {
-      expect(progress.currentValue).toMatchLiveGameWithDetails(expected, {
-        tolerance: 0,
-        context: 'Maximum character damage used by Button task 49',
-      });
-    }
+    expect(progress.currentValue).toMatchLiveGameWithDetails(expected, {
+      tolerance: 0,
+      context: 'Maximum character damage used by Button task 49',
+    });
   });
   it('matches native Copper sample progress for Button task 22', () => {
     const progress = getButtonTaskProgress(gameData, 22);
     const expected = getExtractedValue(loadExtractionResults('button-copper-sample-data.json'), 'button_copper_sample_progress');
-    expect(progress.kind).toBe('available');
-    if (progress.kind === 'available') {
-      expect(typeof progress.currentValue).toBe('number');
-      expect(Number.isFinite(progress.currentValue)).toBe(true);
-      expect(progress.currentValue).toMatchLiveGameWithDetails(expected, {
-        tolerance: 0,
-        context: 'First saved Copper printer sample rate used by Button task 22',
-      });
-    }
+    expect(progress.currentValue).toMatchLiveGameWithDetails(expected, {
+      tolerance: 0,
+      context: 'First saved Copper printer sample rate used by Button task 22',
+    });
   });
 
   it('matches the active and next two tasks, requirements, progress, and readiness', () => {
@@ -74,14 +66,11 @@ describe('The Button - upcoming task progress', () => {
         context: `The requirement for Button task ${task.index}`,
       });
 
-      expect(task.progress.kind).toBe('available');
-      if (task.progress.kind === 'available') {
-        expect(task.progress.currentValue).toMatchLiveGameWithDetails(expectedHave, {
-          tolerance: 0,
-          context: `Saved progress for Button task ${task.index}`,
-        });
-        expect(task.progress.isReady).toBe(expectedHave >= expectedRequirement);
-      }
+      expect(task.progress.currentValue).toMatchLiveGameWithDetails(expectedHave, {
+        tolerance: 0,
+        context: `Saved progress for Button task ${task.index}`,
+      });
+      expect(task.progress.isReady).toBe(expectedHave >= expectedRequirement);
     });
   });
 

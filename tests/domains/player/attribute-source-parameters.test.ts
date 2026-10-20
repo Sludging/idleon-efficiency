@@ -667,7 +667,7 @@ const parameterSpecs: SourceSpec[] = [
     extractionKey: "marbiglass_all_stat",
     resultsFile: "player-attribute-sources-data.json",
     // Marbiglass supplies percentage points, not an equipment-set multiplier.
-    domainExtractor: data => (data.get('equipmentSets') as EquipmentSets).getSetBonus('MARBIGLASS_SET', target(data)),
+    domainExtractor: data => (data.get('equipmentSets') as EquipmentSets).getSetBonus('MARBIGLASS_SET'),
   },
 ];
 

@@ -24,7 +24,7 @@ export class Gaming extends Domain {
     level = 0;
     bits = 0;
     reclaimedCrownCount = 0;
-    evolvedPlantCount: number | null = null;
+    evolvedPlantCount = 0;
     cglunkoBonus: number | null = null;
     metadata: GamingMetadataModel = initGamingMetadataRepo()[0].data;
     plants: Plant[] = Plant.fromBase(initGamingSpeciesRepo());
@@ -66,7 +66,7 @@ export class Gaming extends Domain {
         this.level = 0;
         this.bits = 0;
         this.reclaimedCrownCount = 0;
-        this.evolvedPlantCount = null;
+        this.evolvedPlantCount = 0;
         this.cglunkoBonus = null;
 
         this.metadata = initGamingMetadataRepo()[0].data;
@@ -96,12 +96,9 @@ export class Gaming extends Domain {
         const cglunkoUpgradeLevel = savedAccountOptions?.[644];
         gaming.cglunkoBonus = cglunkoUpgradeLevel == null ? null
             : Number(cglunkoUpgradeLevel) * cglunkoBonusCoefficient;
-        const savedSprouts = data.get("GamingSprout") as unknown[][] | undefined;
-        // The game reads this account-wide cell directly for Button task 40.
-        const evolvedPlantCount = savedSprouts?.[28]?.[1];
-        gaming.evolvedPlantCount = typeof evolvedPlantCount === "number" && Number.isFinite(evolvedPlantCount)
-            ? evolvedPlantCount
-            : null;
+        const savedSprouts = data.get("GamingSprout") as number[][];
+        // Native migration initializes an empty GamingSprout list before reading row 28.
+        gaming.evolvedPlantCount = savedSprouts.length === 0 ? 0 : Number(savedSprouts[28][1]);
         const research = data.get("Research") as unknown[][] ?? [];
         gaming.reclaimedCrownCount = research[11]?.length ?? 0;
 

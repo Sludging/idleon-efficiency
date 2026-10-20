@@ -402,7 +402,7 @@ export class PlayerStats {
         const cardSet4 = player.cardInfo!.getBonusForId(4);
         const flurbo6 = dungeons.passives.get(PassiveType.Flurbo)![6].getBonus();
         const chipDefence = player.getChipBonus('def');
-        const amarokSetPercent = equipmentSets.getSetBonus('AMAROK_SET', player, true);
+        const amarokSetPercent = equipmentSets.getSetBonus('AMAROK_SET', true);
         const recipientSnehebatuMinor = divinity.gods[0].getMinorLinkBonus(player);
 
         // Only gear receives this inner percentage. Floor the additive base before later multipliers.
@@ -552,7 +552,7 @@ export class PlayerStats {
         const progressionDropPercent = hole.schematics.find(schematic => schematic.index === 82)!.getBonus(20)
             + (wisdomMonumentPercent
                 + (emperor.emperorBonuses.find(bonus => bonus.index === 11)!.getBonus()
-                    + (equipmentSets.getSetBonus('EFAUNT_SET', player, true)
+                    + (equipmentSets.getSetBonus('EFAUNT_SET', true)
                         + (farming.getExoticMarketBonusValue(59)
                             + (friends.getFriendBonus(3) + (legendTalents.getBonusFromIndex(1)
                                 + (spelunking.getUpgradeBonus(50) + (getCompanionActiveBonus(companions, 111)
@@ -652,7 +652,7 @@ export class PlayerStats {
                         family.getClassBonus(ClassIndex.Bubonic_Conjuror)!.getBonus(player) + (sailing.artifacts[28].getBonus() + (goldenFood.getAllStatPercent(player) + (
                             Number(achievements[309].completed) + (Talent.getDummyTargetAllStatBonus(player, islandExpeditions.dummyTargetBestDPS) + (
                                 Number(achievements[362].completed) + sneaking.getMasteryAllStatBonus() + (farming.landrankDatabase.getUpgradeBonusForPlayer(19, player) + (
-                                    votes.getCurrentBonus(2) + equipmentSets.getSetBonus('MARBIGLASS_SET', player)
+                                    votes.getCurrentBonus(2) + equipmentSets.getSetBonus('MARBIGLASS_SET')
                                 ))
                             ))
                         )))

@@ -125,8 +125,8 @@ export class Skilling extends Domain {
             const statCards = getStatCards(player);
             const cardBonus = (index: number) => Card.GetTotalBonusForId(statCards, index);
             const achievement = (index: number) => achievements.find(value => value.index === index)!;
-            const copperSet = equipmentSets.getSetBonus("COPPER_SET", player, true);
-            const platinumSet = equipmentSets.getSetBonus("PLATINUM_SET", player, true);
+            const copperSet = equipmentSets.getSetBonus("COPPER_SET", true);
+            const platinumSet = equipmentSets.getSetBonus("PLATINUM_SET", true);
             const starSignMining = getStarSignEfficiency(player, "Mining Efficiency");
             const starSignChopping = getStarSignEfficiency(player, "Chop Efficiency");
             const starSignFishing = getStarSignEfficiency(player, "Fishing Efficiency");

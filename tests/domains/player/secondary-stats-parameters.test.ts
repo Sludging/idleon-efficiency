@@ -73,7 +73,7 @@ describe('Persistent secondary stats immediate owner results', () => {
     { key: 'selectedBuff124', name: 'selected ordinary Defence buff', getValue: () => player.activeBuffs.find(talent => talent.skillIndex === 124)?.getBonus() ?? 0 },
     { key: 'cardSet4', name: 'prepared Defence card set', getValue: () => player.cardInfo!.getBonusForId(4) },
     { key: 'flurbo6', name: 'permanent Flurbo Defence purchase', getValue: () => owner<Dungeons>('dungeons').passives.get(PassiveType.Flurbo)![6].getBonus() },
-    { key: 'amarokSetPercent', name: 'Amarok set raw Defence percentage', getValue: () => owner<EquipmentSets>('equipmentSets').getSetBonus('AMAROK_SET', player, true) },
+    { key: 'amarokSetPercent', name: 'Amarok set raw Defence percentage', getValue: () => owner<EquipmentSets>('equipmentSets').getSetBonus('AMAROK_SET', true) },
     { key: 'recipientSnehebatuMinor', name: 'recipient Snehebatu minor Defence', getValue: () => owner<Divinity>('divinity').gods[0].getMinorLinkBonus(player) },
     { key: 'vote3', name: 'selected vote Defence percentage', getValue: () => owner<Votes>('votes').getCurrentBonus(3) },
     { key: 'vialBaseAccuracy', name: 'Alchemy vial flat Accuracy', getValue: () => owner<Alchemy>('alchemy').getVialBonusForKey('baseACC') },

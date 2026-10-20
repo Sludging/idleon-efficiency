@@ -56,8 +56,8 @@ The [approved delivery parts](research-delivery-parts-draft.md) retain detailed 
 
 ## Product constraints
 
-- **Account state:** Research level is account-wide. Preserve highest-level/lowest-ID reference selection internally.
-  Part 1 shows plain Research level and supported EXP progress without save timestamps, character identity, or provenance exposition. Do not show separate character progression or project beyond current state.
+- **Account state:** Research level and progress are account-wide. Select the highest saved level, then highest EXP only among copies at that level; take the requirement from that same copy.
+  Part 1 shows numeric Research progress without save timestamps, character identity, or provenance exposition. Do not show separate character progression or project beyond current state.
 - **Complete coverage:** Include all named Observations, Grid upgrades, Shape definitions, and Posty Notes.
   Placeholder Grid positions are not upgrades. Missing parsing or metadata does not reduce this scope.
 - **Browsing:** Part 1 uses shared content tabs, name/map search, and Game order, Research EXP highest, and Insight highest sorts.
@@ -80,7 +80,7 @@ The [approved delivery parts](research-delivery-parts-draft.md) retain detailed 
 
 ## Required information limits
 
-- **Account EXP:** The highest-saved-level rule does not select an account EXP copy. Establish supported EXP presentation inside Part 1.
+- **Account EXP:** Select the highest saved level, then highest EXP only among copies at that level, with the requirement from that same copy.
 - **Part 1 evidence:** Establish required Observation, lens, and milestone metadata, current EXP and Insight outputs, contributors, and displayed units.
   Resolve caller and save-age questions where a required display depends on them. Do not assert unverified claim behavior or reset timing.
 - **Part 2 evidence:** Establish complete upgrade metadata, Point calculations, current effects, requirements, and actual Shape ownership, coverage, and modifiers.
@@ -116,7 +116,7 @@ The following testing seams are a delivery proposal.
   For Part 1, check four tabs, three sorts, stable discovery counts, distinct discovery/study requirements, hidden-only reveal lines, and shared theme progress bars. Artwork tint uses approximate current-level palette-derived CSS hue, not exact in-game artwork parity. For Part 2, check full default catalogues, all State options, combined search/filters, Show maxed, clears, source and active-owner tooltips, linked conditions, actual placement/rotation, and complete saved-owner coverage.
 ## Out of Scope
 
-- Separate character Research progression or an assumed maximum-EXP account policy.
+- Separate character Research progression or an EXP policy that selects across different saved levels.
 - Unverified rate units, claim behavior, cache/save-age projections, reset timers, or UTC-midnight assumptions presented as facts.
 - Simulations, optimizers, recommendations, hypothetical placements or comparisons, discovery probabilities, away-time forecasts, or ETA planning.
 - Required spatial boards, invented upgrade families or categories, and layout changes beyond the selected Part 1 and Part 2 presentation.

@@ -79,7 +79,7 @@ const parameterSpecs = {
   extractionKey: 'godshard_set_bonus',
   domainExtractor: (gameData: Map<string, any>) => {
    const equipmentSets = gameData.get("equipmentSets") as EquipmentSets;
-   return equipmentSets.getSetBonus("GODSHARD_SET", undefined, true);
+   return equipmentSets.getSetBonus("GODSHARD_SET", true);
   }
  },
 

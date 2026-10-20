@@ -321,7 +321,7 @@
     {
       "label": "epilogue_research",
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 7, 0)",
-      "description": "Spelunking epilogue Research EXP with reference-character Tome context"
+      "description": "Native Spelunking epilogue Research EXP from the captured runtime state"
     },
     {
       "label": "card_w7b1",
@@ -356,7 +356,7 @@
     {
       "label": "prehistoric_raw",
       "expression": "idleon.callFunction(\"GetSetBonus\", \"PREHISTORIC_SET\", \"Bonus\", 0, 0)",
-      "description": "Raw Prehistoric set bonus before Research cap of 50"
+      "description": "Raw account-wide Prehistoric set bonus before Research cap of 50"
     },
     {
       "label": "spelunking_shop",
@@ -566,7 +566,7 @@
     {
       "label": "tome_reference",
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[84]",
-      "description": "Current reference-character Tome score, never account-highest score"
+      "description": "Cached native Tome total from Actor229 GenInfo[84]"
     },
     {
       "label": "grimoire_epilogue",
@@ -576,7 +576,7 @@
     {
       "label": "troll_raw",
       "expression": "idleon.callFunction(\"GetSetBonus\", \"TROLL_SET\", \"Bonus\", 0, 0)",
-      "description": "Raw Troll set bonus used by Spelunking epilogue"
+      "description": "Raw account-wide Troll set bonus used by Spelunking epilogue"
     },
     {
       "label": "gambit_score",

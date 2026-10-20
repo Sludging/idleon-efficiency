@@ -44,7 +44,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   extractionKey: 'tome_bonus_troll_set',
   domainExtractor: (gameData) => {
    const equipmentSets = gameData.get('equipmentSets') as EquipmentSets;
-   return equipmentSets.getSetBonus('TROLL_SET', undefined, true);
+   return equipmentSets.getSetBonus('TROLL_SET', true);
   },
  },
  tome_bonus_alchemy_str: {

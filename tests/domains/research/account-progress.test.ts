@@ -1,6 +1,8 @@
 import { ResearchGrid } from '../../../data/domain/world-7/research';
 import { initResearchObservationRepo } from '../../../data/domain/data/ResearchObservationRepo';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
+import { Player } from '../../../data/domain/player';
+import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import { ExtractionResults, getExtractedValue, loadExtractionResults } from '../../utils/live-game-data-loader';
 
 const observations = initResearchObservationRepo();
@@ -30,6 +32,20 @@ describe('Research account progress and production', () => {
         extracted(label);
         return getExtractedValue(results, label);
     };
+
+
+    it('reconciles shared Research progress by level before EXP', () => {
+        const players = gameData.get('players') as Player[];
+        const researchSkills = players.map(player => player.skills.get(SkillsIndex.Research)!);
+        const highestLevel = Math.max(...researchSkills.map(skill => skill.level));
+        const highestLevelSkills = researchSkills.filter(skill => skill.level === highestLevel);
+        const highestXP = Math.max(...highestLevelSkills.map(skill => skill.currentXP));
+        const highestXPRequirement = highestLevelSkills.find(skill => skill.currentXP === highestXP)!.xpReq;
+
+        expect(research.progress.highestLevel).toBe(highestLevel);
+        expect(research.progress.currentXP).toBe(highestXP);
+        expect(research.progress.xpReq).toBe(highestXPRequirement);
+    });
 
 
     it('matches eligible Observations, discoveries, and total Insight levels', () => {

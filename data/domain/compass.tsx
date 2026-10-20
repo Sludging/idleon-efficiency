@@ -1370,7 +1370,7 @@ export const updateCompassExaltedStampBonus = (accountData: Map<string, any>): v
         atomBonus: collider.atoms[12].getBonus(),
         pristineCharmBonus: pristineCharm.unlocked ? pristineCharm.data.x1 : 0,
         compassUpgradeBonus: compass.getUpgradeBonus(76),
-        emperorSetBonus: equipmentSets.getSetBonus("EMPEROR_SET", undefined, true),
+        emperorSetBonus: equipmentSets.getSetBonus("EMPEROR_SET", true),
         eventShopOwned: eventShop.isBonusOwned(18),
         paletteBonus: gaming.getPaletteBonus(23),
         exoticMarketBonus: farming.getExoticMarketBonusValue(49),

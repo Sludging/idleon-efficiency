@@ -9,7 +9,6 @@ import { initEventShopBonusRepo } from '../../../data/domain/data/EventShopBonus
 import { EnemyInfo } from '../../../data/domain/enemies';
 import { Companion, getCompanionActiveBonus, isCompanionLevelTwo } from '../../../data/domain/companions';
 import { Card } from '../../../data/domain/cards';
-import { Player } from '../../../data/domain/player';
 import { Farming, CropScientistBonusText } from '../../../data/domain/world-6/farming';
 import { Cooking } from '../../../data/domain/world-4/cooking';
 import { DancingCoral } from '../../../data/domain/world-7/dancingCoral';
@@ -39,7 +38,6 @@ import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ExtractionResults, getExtractedValue, loadExtractionResults } from '../../utils/live-game-data-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
 
-let referencePlayer: Player;
 const gridMetadata = initResearchGridBonusRepo();
 const companionMetadata = Companion.fromBase(initCompanionRepo());
 const sushiMetadata = initSushiRepo();
@@ -226,10 +224,9 @@ const parameterSpecs: (ParameterTestSpec & {owner: string})[] = [
     },
     {
         owner: "Research",
-        description: "Spelunking epilogue Research EXP with reference-character Tome context",
+        description: "Spelunking epilogue Research EXP versus the captured native result",
         extractionKey: "epilogue_research",
         domainExtractor: gameData => (gameData.get('spelunking') as Spelunking).getResearchExpEpilogueBonus(
-            referencePlayer,
             gameData.get('tome') as Tome,
             gameData.get('grimoire') as Grimoire,
             gameData.get('equipmentSets') as EquipmentSets,
@@ -275,7 +272,7 @@ const parameterSpecs: (ParameterTestSpec & {owner: string})[] = [
         owner: "Research",
         description: "Raw Prehistoric set bonus before Research cap of 50",
         extractionKey: "prehistoric_raw",
-        domainExtractor: gameData => (gameData.get('equipmentSets') as EquipmentSets).getSetBonus('PREHISTORIC_SET', referencePlayer, true),
+        domainExtractor: gameData => (gameData.get('equipmentSets') as EquipmentSets).getSetBonus('PREHISTORIC_SET', true),
     },
     {
         owner: "Research",
@@ -459,9 +456,9 @@ const parameterSpecs: (ParameterTestSpec & {owner: string})[] = [
     },
     {
         owner: "Research",
-        description: "Hole Gambit Research offline percentage points with score and scene gates",
+        description: "Hole Gambit Research offline percentage points with score gate",
         extractionKey: "hole_gambit",
-        domainExtractor: gameData => (gameData.get('hole') as Hole).gambit.getBonus(15, referencePlayer),
+        domainExtractor: gameData => (gameData.get('hole') as Hole).gambit.getBonus(15),
     },
     {
         owner: "Research",
@@ -519,9 +516,9 @@ const parameterSpecs: (ParameterTestSpec & {owner: string})[] = [
     },
     {
         owner: "Spelunking",
-        description: "Current reference-character Tome score, never account-highest score",
+        description: "Account-highest Tome score versus the captured native Tome total",
         extractionKey: "tome_reference",
-        domainExtractor: gameData => (gameData.get('tome') as Tome).getPlayerTotalScore(referencePlayer.playerID),
+        domainExtractor: gameData => (gameData.get('tome') as Tome).getHighestScore(),
     },
     {
         owner: "Spelunking",
@@ -533,7 +530,7 @@ const parameterSpecs: (ParameterTestSpec & {owner: string})[] = [
         owner: "Spelunking",
         description: "Raw Troll set bonus used by Spelunking epilogue",
         extractionKey: "troll_raw",
-        domainExtractor: gameData => (gameData.get('equipmentSets') as EquipmentSets).getSetBonus('TROLL_SET', referencePlayer, true),
+        domainExtractor: gameData => (gameData.get('equipmentSets') as EquipmentSets).getSetBonus('TROLL_SET', true),
     },
     {
         owner: "Hole",
@@ -684,7 +681,6 @@ describe('Research direct calculation parameters and producer preparation', () =
         results = loadExtractionResults('research-account-progress-data.json');
         gameData = loadGameDataFromSave('latest');
         research = gameData.get('research') as ResearchGrid;
-        referencePlayer = (gameData.get('players') as Player[]).find(player => player.playerID === research.progress.savedExpCopy!.characterID)!;
     });
 
     const extracted = <T,>(label: string): T => {

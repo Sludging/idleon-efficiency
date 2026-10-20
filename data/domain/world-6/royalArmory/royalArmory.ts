@@ -136,32 +136,32 @@ export class RoyalArmory extends Domain {
 
     parse(data: Map<string, unknown>): void {
         const armory = data.get(this.getDataKey()) as RoyalArmory;
-        const royalG = data.get("RoyalG") as readonly (readonly unknown[])[] | undefined;
-        const royalMaps = data.get("RoyalMaps") as readonly (readonly unknown[])[] | undefined;
+        const royalG = data.get("RoyalG") as readonly (readonly unknown[])[];
+        const royalMaps = data.get("RoyalMaps") as readonly (readonly unknown[] | null | undefined)[];
         armory.resetCalculatedState();
-        const statueLevels = royalG?.[0] ?? [];
+        const statueLevels = royalG[0] ?? [];
         armory.statues.forEach(statue => statue.parse(statueLevels[statue.index]));
         // Retain extra saved levels without inventing catalog definitions for them.
         armory.additionalRoyalStatueLevels = statueLevels.slice(armory.statues.length).map(level => Number(level) || 0);
         armory.mapStates = new Map();
-        royalMaps?.forEach((row, mapId) => {
+        royalMaps.forEach((row, mapId) => {
             if (row === undefined || row === null) return;
             const map = row.length < 3 ? new RoyalMapSource(mapId) : new Outpost(mapId);
             map.parse(row);
             armory.mapStates.set(mapId, map);
         });
-        armory.units.parse(royalG ?? []);
-        armory.selectedExperienceRank = royalArmoryAsNumber(royalG?.[3]?.[7]);
-        armory.selectedOutpostBonusIndex = Number(royalG?.[3]?.[2] ?? 0);
+        armory.units.parse(royalG);
+        armory.selectedExperienceRank = royalArmoryAsNumber(royalG[3]?.[7]);
+        armory.selectedOutpostBonusIndex = Number(royalG[3]?.[2] ?? 0);
         armory.resetResources();
-        royalG?.[1]?.forEach((quantity, resourceType) => {
+        royalG[1]?.forEach((quantity, resourceType) => {
             const resource = armory.resources.get(resourceType) ?? new RoyalResource(resourceType, 0);
             resource.parse(quantity);
             armory.resources.set(resourceType, resource);
         });
-        armory.resourceNodes.parse(royalG?.[5] ?? [], royalG?.[4] ?? []);
-        armory.upgrades.forEach(upgrade => upgrade.parse(royalG?.[2]?.[upgrade.index]));
-        armory.orbletMarketBonuses.forEach(bonus => bonus.parse((royalG?.[23]?.[bonus.index] ?? 0) as number));
+        armory.resourceNodes.parse(royalG[5] ?? [], royalG[4] ?? []);
+        armory.upgrades.forEach(upgrade => upgrade.parse(royalG[2]?.[upgrade.index]));
+        armory.orbletMarketBonuses.forEach(bonus => bonus.parse((royalG[23]?.[bonus.index] ?? 0) as number));
     }
 
     updateMapPurificationStates(): void {

@@ -1155,7 +1155,7 @@ const getPlayerTalentLevelInputs = (
         equinoxTalentLevels: equinox.upgrades[10].getBonus(),
         ninjaMasteryTalentLevels: sneaking.getMasteryTalentLevels(),
         grimoireTalentLevels: grimoire.getUpgradeBonus(39),
-        equipmentTalentLevels: equipmentSets.getSetBonus("KATTLEKRUK_SET", player),
+        equipmentTalentLevels: equipmentSets.getSetBonus("KATTLEKRUK_SET"),
         tesseractTalentLevels: tesseract.getUpgradeBonus(57),
         gamingTalentLevels: gaming.isSuperbitPurchased(47) ? Math.max(0, Math.floor((player.level - 500) / 100)) : 0,
         superTalentLevels,

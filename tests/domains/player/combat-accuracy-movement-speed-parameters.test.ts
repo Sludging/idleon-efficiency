@@ -71,7 +71,7 @@ describe('Combat Accuracy and movement speed direct owner parameters', () => {
     { key: 'totalAccuracyMeal', name: 'TotAcc meal', value: () => owner<Cooking>('cooking').getMealBonusForKey('TotAcc') },
     { key: 'rooAccuracy', name: 'Roo Accuracy bonus', value: () => owner<Poppy>('poppy').getGlobalBonus(3) },
     { key: 'voteAccuracy', name: 'Accuracy vote', value: () => owner<Votes>('votes').getCurrentBonus(3) },
-    { key: 'amarokSetAccuracy', name: 'Amarok set Accuracy', value: () => owner<EquipmentSets>('equipmentSets').getSetBonus('AMAROK_SET', player, true) },
+    { key: 'amarokSetAccuracy', name: 'Amarok set Accuracy', value: () => owner<EquipmentSets>('equipmentSets').getSetBonus('AMAROK_SET', true) },
     { key: 'divinityMinor', name: 'Divinity minor link Accuracy', value: () => owner<Divinity>('divinity').gods[0].getMinorLinkBonus(player) },
   ];
   accuracy.forEach(({ key, name, value }) => it(`matches ${name}`, () => expect(value()).toMatchLiveGame(terms.accuracyTerms[key], 0)));

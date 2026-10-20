@@ -4,11 +4,8 @@ import { EquipmentSetsBase, initEquipmentSetsRepo } from "../data/EquipmentSetsR
 import { ImageData } from "../imageData";
 import { Item } from "../items";
 import { EquipmentSetsModel } from "../model/equipmentSetsModel";
-import { Player } from "../player";
 
 export class EquipmentSet {
-    // Game v1.22 (lines 241267–241314) requires six Prehistoric tools; the generated boolean omits this numeric requirement.
-    static readonly prehistoricSetRequiredToolCount = 6;
 
     unlocked: boolean = false;
     constructor(public index: number, public data: EquipmentSetsModel, public imageData: ImageData) { }
@@ -29,43 +26,6 @@ export class EquipmentSet {
         return this.data.bonusValue;
     }
 
-    isActiveFor(player?: Player): boolean {
-        let active = this.unlocked;
-        if (!active && player) {
-            let matchedCount = 0;
-            for (let index = 0; index < this.data.armors.length; index++) {
-                const armorName = this.data.armors[index];
-                if (this.data.armors.indexOf(armorName) == index &&
-                    player.gear.equipment.some(item => item?.internalName == armorName)) {
-                    matchedCount++;
-                }
-            }
-
-            const toolsRequired = this.data.name === "PREHISTORIC_SET"
-                ? EquipmentSet.prehistoricSetRequiredToolCount
-                : Number(this.data.toolsRequired);
-            let matchedTools = 0;
-            for (const toolName of this.data.tools) {
-                if (matchedTools >= toolsRequired) {
-                    break;
-                }
-                if (player.gear.tools.some(item => item?.internalName == toolName)) {
-                    matchedTools++;
-                }
-            }
-            matchedCount += matchedTools;
-
-            if (this.data.weaponRequired &&
-                this.data.weapons.some(weaponName => player.gear.equipment.some(item => item?.internalName == weaponName))) {
-                matchedCount++;
-            }
-
-            const requiredCount = this.data.armors.length + toolsRequired + Number(this.data.weaponRequired);
-            active = matchedCount >= requiredCount;
-        }
-
-        return active;
-    }
 
     static fromBase = (data: EquipmentSetsBase[], allItems: Item[]) => {
         const itemsByName = new Map(allItems.map(item => [item.internalName, item]));
@@ -132,14 +92,14 @@ export class EquipmentSets extends Domain {
         }
     }
 
-    getSetBonus = (setName: string, player?: Player, raw: boolean = false) => {
+    getSetBonus = (setName: string, raw: boolean = false) => {
         const set = this.equipmentSets.find(set => set.data.name == setName);
 
         if (!set) {
             throw new Error(`Set ${setName} not found`);
         }
 
-        if (set.isActiveFor(player)) {
+        if (set.unlocked) {
             return set.getBonus(raw);
         }
 

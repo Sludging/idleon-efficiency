@@ -64,8 +64,8 @@ export class HatRack extends Domain {
 
     parse(data: Map<string, any>): void {
         const hatRack = data.get(this.getDataKey()) as HatRack;
-        const spelunk = data.get("Spelunk") as unknown[][] | undefined;
-        const depositedHats = spelunk?.[46];
+        const spelunk = data.get("Spelunk") as unknown[][];
+        const depositedHats = spelunk[46];
         hatRack.depositedHats = Array.isArray(depositedHats) ? [...depositedHats] as string[] : [];
         const storedNames = new Set(hatRack.depositedHats);
         // Reset every catalog entry without sorting or deduplicating the bonus calculation's saved sequence.
@@ -75,7 +75,7 @@ export class HatRack extends Domain {
 
         const charCount = Math.max(0, Math.trunc(Number(data.get("charCount")) || 0));
         hatRack.unlockKillsLeft = Array.from({ length: charCount }, (_, index) =>
-            (data.get(`KLA_${index}`) as number[][] | undefined)?.[50]?.[0]
+            (data.get(`KLA_${index}`) as number[][])[50]?.[0]
         );
         // Parsed saves invalidate totals from the previous account state.
         hatRack.calculatedBonuses = undefined;

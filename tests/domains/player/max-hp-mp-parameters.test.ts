@@ -174,7 +174,7 @@ const parameterSpecs: ParameterSpec[] = [
     key: 'secret_set',
     description: 'the Secret equipment-set golden-food percentage',
     // The game returns a percentage here; the default website API returns its multiplier.
-    getValue: (gameData, player) => (gameData.get('equipmentSets') as EquipmentSets).getSetBonus('SECRET_SET', player, true),
+    getValue: (gameData) => (gameData.get('equipmentSets') as EquipmentSets).getSetBonus('SECRET_SET', true),
   },
   ...[174, 48, 155].map((index): ParameterSpec => ({
     key: `companion_${index}`,
@@ -304,7 +304,7 @@ const parameterSpecs: ParameterSpec[] = [
   {
     key: 'exalted_emperor_set',
     description: 'permanently owned Emperor set percentage bonus for exalted stamps',
-    getValue: (gameData) => (gameData.get('equipmentSets') as EquipmentSets).getSetBonus('EMPEROR_SET', undefined, true),
+    getValue: (gameData) => (gameData.get('equipmentSets') as EquipmentSets).getSetBonus('EMPEROR_SET', true),
   },
   {
     key: 'exalted_event_shop_owned',
@@ -427,7 +427,7 @@ const alchemyManaParameterSpecs: ParameterSpec[] = [
   },
   {
     key: 'equipmentTalentLevels', description: 'Kattlekruk equipment-set talent-level bonus',
-    getValue: (gameData, player) => (gameData.get('equipmentSets') as EquipmentSets).getSetBonus('KATTLEKRUK_SET', player),
+    getValue: (gameData) => (gameData.get('equipmentSets') as EquipmentSets).getSetBonus('KATTLEKRUK_SET'),
   },
   {
     key: 'tesseractTalentLevels', description: 'Tesseract talent-level bonus before the game cap',

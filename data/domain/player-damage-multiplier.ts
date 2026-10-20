@@ -128,7 +128,7 @@ export const getPlayerDamageTotalMultiplier = (data: Map<string, any>, player: P
 
     const monumentDamageBonus = hole.getMonumentBonus('Bravery', 6);
     component *= 1 + (grimoire.getUpgradeBonus(35)
-        + equipmentSets.getSetBonus('LUSTRE_SET', player)
+        + equipmentSets.getSetBonus('LUSTRE_SET')
         + shrines[0].getBonus(player.currentMapId)
         + monumentDamageBonus
         + player.getPostOfficeBonus('12c')

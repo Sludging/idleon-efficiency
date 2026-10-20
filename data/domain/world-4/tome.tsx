@@ -1186,7 +1186,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
 
     // Update Tome Epilogue bonuses
     const grimoireBonus = grimoire.getUpgradeBonus(17);
-    const equipmentSetBonus = equipmentSet.getSetBonus("TROLL_SET", undefined, true);
+    const equipmentSetBonus = equipmentSet.getSetBonus("TROLL_SET", true);
     tome.epilogueBonuses.forEach(bonus => {
         bonus.boostFromBonuses = grimoireBonus + equipmentSetBonus;
     });
@@ -1200,7 +1200,7 @@ export const updateTomeBonuses = (data: Map<string, any>) => {
     const eventShop = data.get("eventShop") as EventShop;
     const optionListAccount = data.get("OptLacc") as number[];
     const tomeScore = tome.getHighestScore();
-    const boostFromBonuses = grimoire.getUpgradeBonus(17) + equipmentSet.getSetBonus("TROLL_SET", undefined, true);
+    const boostFromBonuses = grimoire.getUpgradeBonus(17) + equipmentSet.getSetBonus("TROLL_SET", true);
 
     // Several tome bonuses get unlocked by certain conditions.
     const unlockedByIndex: Record<number, boolean> = {

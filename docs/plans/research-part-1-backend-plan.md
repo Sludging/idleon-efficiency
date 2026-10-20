@@ -8,7 +8,7 @@
 
 | Player outcome | Backend information for the read-only UI |
 |---|---|
-| Account growth | Highest saved Research level, one supported saved EXP copy and same-copy requirement, discovery total, and total Observation levels. Retain character and timestamp provenance internally; the UI presents plain account Research progress. |
+| Account growth | Highest saved Research level, highest saved EXP among copies at that level, and that winning copy's requirement, plus discovery total and total Observation levels. Expose numeric account progress only; no character provenance. |
 | Discoveries | All 43 Observations with maps, hints, study levels, roll thresholds, and found state. Separate revealed-prefix, already-discovered, exhausted-attempts, and insufficient-maximum-roll conditions. Expose study eligibility and the earliest reveal level independently through the shared visibility rule. Multiple conditions can apply. |
 | Discovery allowance | Remaining attempts, daily allocation, inclusive roll bounds, failed-roll counter, current bonus, and modifiers. Allocation minus remaining is not attempts used. |
 | Actual lenses | Ownership and sources, fixed kinds, saved positions, targets, assignments, and capacity. Distinguish unplaced lenses from production. |
@@ -31,6 +31,8 @@ Extend the account domain already registered as `research` in [research.tsx](../
 - **Posty Note:** Wrap generated metadata. Determine reached state from account level and combine reward text with prepared ownership context.
 - **External producers:** Storage owns consumable inventory; Gem Store owns permanent purchases. Consume other domains' public bonuses without importing their activity progression.
 - **Contributors:** Use named value records with source, value, operation, and relevant cap/gate. Derive records and totals through the same calculation. Preserve additive percentages versus separate multipliers. Optional display rewards carry intrinsic amount, operation, units or conditional basis, and acquisition state without changing effective contributions. Reuse producer base/preview APIs, metadata, and existing Research scales. Bare Grid rewards describe one level, not an attainable total.
+
+Offline contributors and their totals are numeric. Prepare their required inputs before display calculations; do not add an unavailable state for missing initialization.
 
 Reuse repository-backed wrappers from [Friends](../../data/domain/friends.tsx) and [Cooking](../../data/domain/world-4/cooking.tsx). Use [Sushi](../../data/domain/world-7/sushi.tsx) for named placements, [Spelunking](../../data/domain/world-7/spelunking.tsx) for account summaries, and [Lab](../../data/domain/world-4/lab.tsx) for prepared inputs. These aspects do not require simulations or new generic frameworks.
 
@@ -63,7 +65,7 @@ Observation owns the index-based EXP curve and Insight requirement formula. Rese
 
 Use one owner for each shared rule. The adjacency calculation uses one named eight-column constant, not repeated literals. Formula coefficients stay in their calculation; they do not need a generic rule object. Reuse exported milestone thresholds and existing producer values where they express the required rule. Do not parse reward prose into calculation inputs.
 
-The versioned 1.22 source separates discovery visibility from study. Its revealed prefix includes Big Ol Reef at Research level 70. Actor 672 rolls against the row's discovery threshold without checking its study level. Actor 741 requires level 72 before assigning a lens. Apply this distinction to every Observation; do not special-case Reef. The account view uses its existing highest-level reference context and does not guarantee an action on every character. Source references and current-live-version limits remain in the scoped handoff.
+The versioned 1.22 source separates discovery visibility from study. Its revealed prefix includes Big Ol Reef at Research level 70. Actor 672 rolls against the row's discovery threshold without checking its study level. Actor 741 requires level 72 before assigning a lens. Apply this distinction to every Observation; do not special-case Reef. Account progress uses the shared numeric selector documented below, not a reference-character context. WikiBot v1.23 shared reconciliation at `../../../IdleonWikiBot/codefiles/idleon1.23.txt:418719-418751` supports that progress contract. Source references and current-live-version limits remain in the scoped handoff.
 
 The [source-data evidence](research-research-brief.md#source-data-and-calculation-boundary) identifies verified mechanics and metadata. A new export requires a concrete current maintenance reason, not merely a missing field or catalogue location. Do not export formula coefficients or generate per-Observation production tables merely to avoid numeric literals. No metadata migration layer is needed.
 
@@ -82,7 +84,7 @@ The [planning revision evidence](research-research-brief.md#part-1-planning-revi
 | Raw input | Named state and supported rule |
 |---|---|
 | `Lv0_<id>[20]` | Saved Research levels. Select the highest across characters once for account progression and level gates. |
-| `Exp0_<id>[20]`, `ExpReq0_<id>[20]` | One saved EXP copy and its saved requirement. Preserve the source character and that copy's level. Do not select maximum EXP. |
+| `Exp0_<id>[20]`, `ExpReq0_<id>[20]` | Select the highest EXP only among copies at the highest saved Research level; take `xpReq` from that same winning copy. |
 | `Research[2]`, `[3]`, `[4]` | Found flags, partial Insight EXP per Observation, and Insight levels. Pending effective seconds are not partial Insight EXP. |
 | `Research[5][4i..4i+3]` | Lens `x`, `y`, target Observation, and fixed kind. Kind `0` produces EXP, `1` produces Insight, and `2` supports neighbors. Target `-1` means unplaced. Preserve its coordinates but exclude it from production and support. |
 | `Research[7][2]`, `[7][3]` | Remaining account discovery attempts and pending effective progress seconds. Do not apply pending seconds to saved progress in this read-only surface. |
@@ -92,9 +94,7 @@ The [planning revision evidence](research-research-brief.md#part-1-planning-revi
 | Storage inventories | `Storage.amountInStorage("Quest115")` counts Papers across chest and characters. |
 | Gem Store purchases | Professional Papers use purchase number `45`, backed by `GemItemsPurchased[45]`. Consume the existing purchased-count field. |
 
-Use one reference-character context for saved EXP and character-dependent production inputs. Default to the lowest character ID among highest-level saved copies. This is an internal selection policy, not a game rule that selects account EXP. Retain the source character and same-copy requirement in backend results. Public UI shows plain Research progress without character identity or save-copy exposition. Do not show separate character progression or aggregate EXP copies.
-
-Reuse `Player.skills.get(SkillsIndex.Research)` for the saved level, `currentXP`, and `xpReq` after parsing. The requirement belongs to that same saved copy. Do not recompute it from a different character's level. Preserve missing save requirements as missing evidence, not zero progress.
+A raw-input selector runs after players load and returns shared numeric progress (`highestLevel`, `currentXP`, `xpReq`): highest saved level, then highest EXP among copies at that level, with the requirement from the same winning copy. Do not create reference-character context, character provenance, or per-player progress downstream.
 
 Posty Notes use level thresholds, not claimed-state flags. Their Shape context consumes active companion bonuses, Spelunking Lore, and Event Shop ownership. See [revision evidence](research-research-brief.md#part-1-planning-revision-evidence).
 
@@ -114,7 +114,7 @@ The [captured Research helper](../game-snippets/research/ResearchStuff.1.22.js):
 - **Ownership-sensitive milestones:** Reached notes follow account level. Shape milestones occur at `20/30/50/80/110`. Current Shape count adds Event Shop `36` and level-20-gated companion `54` and Spelunking Lore `7`, then caps at ten. Shapes occupy the ordered catalogue prefix up to that count. Show a Shape milestone's extra count and current external ownership context, not its illustration as a promised next reward. Do not attribute current outside rewards to an earlier note. At the cap, an upcoming Shape milestone cannot add another owned Shape.
 - **Point milestone context:** From level `60`, the current Points-per-ten-level term gains an additional Point for every reached ten-level block. Grid `50` purchased level also contributes to that term. Explain this cumulative rule beside the note; Point balances remain Part 2.
 
-Keep source-character context only where the producer uses it. Owned card levels, discoveries, Grid state, and `Dream[14]` are account inputs. Temporary equipped-set effects and the Spelunking epilogue's current-character Tome/set inputs need the reference character. Permanent set activation can remove the equipment dependence. Do not select a best character, sum character multipliers, or use the offline test target as the account's active character.
+Owned card levels, discoveries, Grid state, `Dream[14]`, set ownership, Tome highest score, and Grimoire bonus are account inputs. ArmorSmithy set bonuses apply accountwide from unlocked ownership, regardless of current character or equipped gear. The Spelunking epilogue uses account Troll-set ownership; no character context is needed.
 
 Required missing producer results belong in their owning domains within Part 1. Extend a narrow existing API when needed. Research must not read foreign raw arrays or duplicate producer formulas. Related activity panels and actions remain excluded.
 
@@ -130,9 +130,9 @@ The following selectors identify source-boundary inputs, not player-facing label
 | Dancing Coral `4`; Zenith Market `8` | `getBonusFromIndex(4)` and `getBonusForId(8)` on their current owners. | Parsed ownership and existing getter inputs. No new update solely for Research. |
 | Gaming `MSA_Bonus(10)` | Consume `worship.totalizer.getResearchExpBonus()` directly. Worship owns the calculated result from total best waves and complete ten-wave blocks above `300`. Its generated Gaming Superbit gates the result and supplies contributor attribution. Do not cache a copy on Gaming or use the Palette getter. | After existing Worship Totalizer preparation; consume during late Research preparation. |
 | Sailing `SlabboBonus(7)` | Add the source-equivalent Sailing/Slab result. It uses Superbit `34`, Lab bonus `15`, the existing Slab multiplier, and complete five-item blocks above `1300`. Do not substitute an artifact bonus. | After Lab and Sailing artifact/Slab multiplier preparation. |
-| Spelunking epilogue `7` | Calculate the Spelunking-owned result for the selected reference player only. Pass that player's Tome score, Grimoire bonus, and Troll set context explicitly. Epilogue ownership remains on Spelunking. `Tome.getEpilogueBonus` is a different producer and is not a substitute. | During late Research preparation, after Tome scores, Grimoire inputs, and parsed equipment and permanent set activation. No all-character cache or separate phase is needed. |
+| Spelunking epilogue `7` | Calculate the Spelunking-owned result from `Tome.getHighestScore()`, Grimoire bonus `17`, and account Troll-set ownership. Use `Spelunking.getResearchExpEpilogueBonus(tome, grimoire, sets)`; epilogue ownership remains on Spelunking. `Tome.getEpilogueBonus` is a different producer and is not a substitute. | During late Research preparation, after Tome highest score, Grimoire inputs, and parsed set ownership are ready. No character context or separate phase is needed. |
 | Owned card levels | Find the account `Card` by ID and call `getLevels()`. EXP uses `w7b1/w7b4/w7a11/w7b8`; offline percentage uses `w7b11`. Do not use equipped card effects or `getBonus()`. | After card metadata/progression preparation. |
-| Prehistoric set | `EquipmentSet` owns equipped armor, tool, and weapon activation. Keep `EquipmentSets.getSetBonus(name, player)` as lookup and delegation. Preserve permanent activation and the verified six-tool Prehistoric rule. | Parsed set activation and reference-player equipment; calculate on the aspect when late Research requests its bonus. |
+| Prehistoric set | `EquipmentSets.getSetBonus(name, raw = false)` reads parsed `set.unlocked` ownership only. ArmorSmithy unlocks apply accountwide, independent of character, equipment, or activation. | Parsed set ownership; calculate on the aspect when Research requests its bonus. |
 | Arcade `63` | `arcade.bonuses[63].getBonus()`. Generic AFK Arcade `6` is not a Research offline input. | After Arcade. |
 | Spelunking shop `63`; Lore `7` | `getUpgradeBonus(63)` and the tunnel record with matching index `7`'s `loreCompleted` state. Join by index, not array position. | Parsed Spelunking state. No new activity progression panel. |
 | Equinox `Dream[14]` | Existing parsing maps this to upgrade index `12`'s level. Expose the named Research contribution from Equinox using that level and the verified scale beside its calculation. Do not add another raw-save read in Research. | Parsed Equinox upgrade state. |
@@ -141,7 +141,7 @@ The following selectors identify source-boundary inputs, not player-facing label
 | Killroy `5` | Existing `killRoy.spelunkingExpMulti` matches the source value. Research applies its separate `/100` conversion exactly. Do not reinterpret the value or subtract its leading `1`. | Parsed Killroy state. |
 | Companion bonuses and level two | Reuse `getCompanionActiveBonus` and `isCompanionLevelTwo` where they match the original active helper. Companions owns any missing Pet Bonus Token activation mapping. Owned pets and currently active bonuses are different facts. | After companion preparation, with active bonus and level-two provenance. |
 | Sushi rewards `0/2/4/8/24/30` | `sushi.getBonusFromIndex(index)` supplies the source's discovered-Sushi rewards. | After Sushi; do not move Grid behind this consumer. |
-| Hole Gambit `15`; Fountain `(2,16)` | `hole.gambit.getBonus(15)` and `hole.fountain.getBonus(2,16)`. Preserve Gambit's source score gate and tutorial-scene exclusion for the reference context. Its normal-world Deathnote input uses inclusive milestone ranks and the separate Eclipse Skulls condition. Exactly one billion kills remains rank ten. Leave unrelated rank consumers unchanged. | After Hole preparation, following normal-world Deathnote rank preparation. |
+| Hole Gambit `15`; Fountain `(2,16)` | `hole.gambit.getBonus(15)` and `hole.fountain.getBonus(2,16)`. Preserve Gambit's score gate. Its website getter exposes the account-wide reward without a reference character or tutorial-scene check. Its normal-world Deathnote input uses inclusive milestone ranks and the separate Eclipse Skulls condition. Exactly one billion kills remains rank ten. Leave unrelated rank consumers unchanged. | After Hole preparation, following normal-world Deathnote rank preparation. |
 | Hole `Cglunko_upgBon(11)` | Add the account upgrade contribution on Hole's owning aspect. Source uses account option `641` multiplied by the verified named value `holeResearchExpUpgradeBasePercent = 1` beside Hole's calculation. Hole exposes its calculated public result to Research. | Parsed owner state and the supported base reward; prepare before late Research. |
 | Jelly rewards `0/7/12/23/25/46/54` | `jellyOperator.getObstructionBonus(index)` matches completed obstruction rewards. Do not substitute Jelly upgrade quantities. | After early Jelly preparation; late Research also follows Jelly presentation. |
 | Sneaking Emporium `46` | Read the Jade upgrade with matching index `46`'s `purchased` state through Sneaking. Research applies its verified Insight/Kaleidoscope conversions beside those calculations. | Parsed Jade ownership. Existing Sneaking update settles other dependent values first. |
@@ -159,11 +159,11 @@ Use the existing init → parse → calculate pipeline in [idleonData.tsx](../..
 1. **Init:** Create wrappers from generated repositories and initialize required domain objects.
 2. **Parse:** Replace saved Observation, lens, and account state. Read only declared raw inputs and shared boundary data. Do not read other domains or calculate production here.
 3. **Early calculation:** Keep existing Grid preparation in `postProcessingMap`, after Minehead, Jelly, Royal Armory, companions, and parsed Grid dependencies. It runs before Farming stickers and other consumers. Preserve this phase and the existing Grid API.
-4. **Display calculation:** Append Part 1 preparation in `postPostProcessingMap`, after all existing producer updates and late Royal Armory preparation. Prepare reference-character inputs, then ownership, rolls, support, requirements, rates, offline percentage, contributors, and note context.
+4. **Display calculation:** Append Part 1 preparation in `postPostProcessingMap`, after all existing producer updates and late Royal Armory preparation. Prepare accountwide producer inputs, then ownership, rolls, support, requirements, rates, offline percentage, contributors, and note context.
 
 The current map settles Farming stickers after Grid, cards later, then Tome/Hole/Sneaking/Crop Scientist, Arcade/Cooking/Sailing, Sushi, and players. Its later map also prepares Jelly presentation and Royal Armory late inputs. Full Part 1 rates cannot run in the early Grid updater. A new producer result needed by another domain belongs before that consumer, not in Research's UI-only preparation.
 
-Use parsed producer state directly when its getter already needs no update. Calculated producer results must wait for their owning update. The producer contract names both cases. Calculate the selected character's Spelunking epilogue and equipped-set results on their owners during late Research preparation. Consume the already prepared Worship Totalizer result directly. Do not add copy-only phases, all-character caches, repeated whole-pipeline passes, or move early Grid preparation after Sushi.
+Use parsed producer state directly when its getter already needs no update. Calculated producer results must wait for their owning update. The producer contract names both cases. Calculate the account-wide Spelunking epilogue and set results on their owners during late Research preparation. Consume the already prepared Worship Totalizer result directly. Do not add copy-only phases, all-character caches, repeated whole-pipeline passes, or move early Grid preparation after Sushi.
 
 Repeated processing replaces assignments, support counts, contributors, and totals. Required initialized objects use direct access; defaults apply only to genuinely absent save data.
 
@@ -171,9 +171,9 @@ The later World 7 UI consumes typed results through existing account data flow. 
 
 ## Delivery prerequisites
 
-- **Producer completion:** Add source-equivalent direct outputs where existing owners lack them, including temporary equipment sets and the selected Royal Outpost bonus. Use the public API and phase contract above. These are Part 1 integration responsibilities, not missing product scope.
-- **Saved EXP provenance:** The reference-copy policy supplies supported saved EXP context without inventing account EXP authority. Retain provenance in the public domain result for comparisons; omit provenance labels from rendered text.
-- **Paired evidence:** Obtain original-game values matching the retained real save and reference character. Historical warmed offline outputs and source-only queries do not establish pairing or connected live-game parity.
+- **Producer completion:** Add source-equivalent direct outputs where existing owners lack them, including ArmorSmithy set ownership and the selected Royal Outpost bonus. Use the public API and phase contract above. These are Part 1 integration responsibilities, not missing product scope.
+- **Saved progress:** Supply highest-level / highest-EXP-at-that-level numeric progress and the same-copy requirement. Do not retain character provenance or reference context downstream.
+- **Paired evidence:** Compare supported outputs against the retained real save and original-game values. Historical warmed offline outputs and source-only queries do not establish connected live-game parity.
 
 Keep prerequisites within Part 1; do not reduce scope or create prerequisite tickets. Reset-time claims and away-time simulations are unnecessary.
 
@@ -183,7 +183,7 @@ Follow [domain testing guidance](../TESTING_IMPLEMENTATION.md) and the [extracti
 
 - Load the retained real save through `loadGameDataFromSave`. Assert populated typed public results, not copied formulas.
 - Add core comparisons for progress, rolls/attempts, lens ownership/capacity/support, Insight requirements/rates, EXP, offline percentage, Papers, and milestones.
-- Verify saved EXP provenance and its same-copy requirement while the account headline remains the highest saved level. Compare character-dependent inputs with the same reference character. Do not treat the extraction tool's default player as a product-selection rule.
+- Verify shared progress selects the highest saved level, then highest EXP only among copies at that level, with `xpReq` from that same copy. Do not retain or compare character context or provenance.
 - Compare Insight partial EXP, next requirement, actual hourly accrual, and the differing game-displayed hourly figure separately. Verify that pending effective seconds do not change saved progress during website processing.
 - Check offline contributor percentage points before clamping and the final capped percentage. Match the explicit Research AFK branch, including artifact/card caps and permanent Paper purchases.
 - Check current outside Shape ownership, milestone count grants, the ten-Shape cap, and cumulative Point milestone meaning. Do not test note illustrations as guaranteed future Shape identities.

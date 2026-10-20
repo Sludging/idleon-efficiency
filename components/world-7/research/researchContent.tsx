@@ -8,7 +8,7 @@ import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 import TipDisplay from "../../base/TipDisplay";
-import type { Observation, PostyNote, ResearchOfflineContributor, ResearchContributorReward, ResearchGrid } from "../../../data/domain/world-7/research";
+import type { Observation, PostyNote, ResearchContributor, ResearchContributorReward, ResearchGrid } from "../../../data/domain/world-7/research";
 import { Skilling } from "../../../data/domain/skilling";
 import { SkillsIndex } from "../../../data/domain/SkillsIndex";
 import { commaNotation, notateNumber } from "../../../data/utility";
@@ -40,18 +40,13 @@ function sourceName(source: string) {
     return source.replace(/^(Research Grid|Sushi|Companion|Owned card|Farming sticker): /, "");
 }
 
-function Contributions({ entries, percentagePoints = false }: { entries: readonly ResearchOfflineContributor[]; percentagePoints?: boolean }) {
+function Contributions({ entries, percentagePoints = false }: { entries: readonly ResearchContributor[]; percentagePoints?: boolean }) {
     return <Box gap="xxsmall">
         {entries.flatMap((entry, index) => {
             if (entry.companionGroups) {
                 return entry.companionGroups.map(group => <Text key={group.id} size="xsmall" data-companion-group={group.id} style={{ opacity: group.reward.active ? 1 : 0.6 }}>
                     {group.name}: {group.reward.active ? `×${amount(group.factor)}` : obtainableReward(group.reward, percentagePoints)}
                 </Text>);
-            }
-            if (entry.value === null) {
-                return [<Text key={`${entry.source}-${index}`} size="xsmall" data-contributor-source={entry.source}>
-                    {sourceName(entry.source)}: Unavailable
-                </Text>];
             }
             const inactive = entry.reward ? !entry.reward.active : entry.operation === "multiply" ? entry.value === 1 : entry.value === 0;
             const value = entry.operation === "multiply" ? `×${amount(entry.value)}`
@@ -195,7 +190,7 @@ export default function ResearchContent() {
                 </Box>
                 <Box direction="row" wrap gap="medium" style={{ alignItems: "baseline", minWidth: 0 }}>
                     <SourceValue label="Level" value={commaNotation(progress.highestLevel)} valueSize="xxlarge" valueFirst />
-                    {progress.savedExpCopy && <SourceValue label="Research EXP" value={`${amount(progress.savedExpCopy.currentXP)} / ${progress.savedExpCopy.xpReq === undefined ? "Unavailable" : amount(progress.savedExpCopy.xpReq)}`} valueSize="large" valueFirst dataLabel={null} />}
+                    <SourceValue label="Research EXP" value={`${amount(progress.currentXP)} / ${amount(progress.xpReq)}`} valueSize="large" valueFirst dataLabel={null} />
                     <SourceValue label="Rate" value={rate(production.expPerHour)} valueSize="large" valueFirst dataLabel="Research EXP"><ExpBonuses research={research} /></SourceValue>
                 </Box>
             </Box>
@@ -214,7 +209,7 @@ export default function ResearchContent() {
                 <Box gap="xsmall">
                     <SourceValue label="Total Insight levels" value={commaNotation(progress.totalObservationLevels)} inline />
                     <SourceValue label="Insight rate" value={rate(production.insightAccrualPerHour)} inline dataLabel="Insight"><Contributions entries={production.insightContributors} /></SourceValue>
-                    <SourceValue label="Offline gains" value={offline.percent === null ? "Unavailable" : percent(offline.percent)} inline><Contributions entries={offline.contributors} percentagePoints /></SourceValue>
+                    <SourceValue label="Offline gains" value={percent(offline.percent)} inline><Contributions entries={offline.contributors} percentagePoints /></SourceValue>
                 </Box>
             </Box>
         </Grid>

@@ -36,7 +36,7 @@ Sources inspected: shared `ContentTabs`, `DataRow`, `TipDisplay`, `TextAndLabel`
 - Observation discovery: remaining attempts, daily attempts, and inclusive roll range. Actual found catalogue count appears once in the Observations tab.
 - Current gains: actual Research EXP per hour, actual Insight per hour, and current offline percentage.
 
-Do not label level as highest saved. Do not expose character identity, saved-copy policy, provenance, source timestamps, or cloud-save explanations. Preserve reference-character selection and calculations internally.
+Do not label level as highest saved. Do not expose character identity, saved-copy policy, provenance, source timestamps, or cloud-save explanations.
 
 Remove failed-roll count, duplicate failure bonus/cap displays, before-multiplier production, game-displayed Insight, rule paragraphs, exact precision panels, and repeated totals. These fields remain in the backend; they do not need alternative public access.
 
@@ -64,7 +64,7 @@ Keep the route wrapper and metadata in `app/world-7/research/page.tsx`. Render t
 
 Use `useShallow` with `lastUpdated` to refresh the mutable domain. Wait for completed StaticData or LiveData before displaying prepared values. Do not mutate domain data or add formulas to pass display checks.
 
-Reuse all existing prepared backend totals, parsing, reference-character selection, ownership, contexts, and producer results. Observation owns separate revealed-prefix and study state. Research contributor display metadata owns intrinsic rewards and acquisition state; current contribution arithmetic remains unchanged. Keep the source-backed Insight palette beside its narrow artwork-presentation method. Preserve the existing source progress-color metadata and numerical results. Do not edit generated data or public assets. `IconImage` resolves verified image metadata through the existing CDN.
+Reuse all existing prepared backend totals, parsing, account progress, ownership, contexts, and producer results. Observation owns separate revealed-prefix and study state. Research contributor display metadata owns intrinsic rewards and acquisition state; current contribution arithmetic remains unchanged. Keep the source-backed Insight palette beside its narrow artwork-presentation method. Preserve the existing source progress-color metadata and numerical results. Do not edit generated data or public assets. `IconImage` resolves verified image metadata through the existing CDN.
 
 Research owns the reveal requirement accessor. Reuse the same prefix calculation used by current visibility and numerical consumers; do not add UI formulas, per-entry reveal tables, or index interpolation. The narrow accessor does not change parsing, production arithmetic, or generated study metadata.
 

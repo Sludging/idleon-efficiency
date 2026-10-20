@@ -22,7 +22,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
     extractionKey: 'troll_set_bonus',
     domainExtractor: (gameData) => {
       const equipmentSets = gameData.get('equipmentSets') as EquipmentSets;
-      return equipmentSets.getSetBonus('TROLL_SET', undefined, true);
+      return equipmentSets.getSetBonus('TROLL_SET', true);
     },
   },
   epilogue_bonus_unlocked_count: {
