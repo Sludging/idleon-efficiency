@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Grid, Heading, ResponsiveContext, Select, Text, TextInput, ThemeContext } from "grommet";
+import { Box, Button, Grid, Heading, ResponsiveContext, Select, Text, TextInput } from "grommet";
 import { useContext, useState, type ReactNode } from "react";
 import { useShallow } from "zustand/react/shallow";
 import ContentTabs from "../../base/ContentTabs";
@@ -63,12 +63,23 @@ function Contributions({ entries, percentagePoints = false }: { entries: readonl
     </Box>;
 }
 
-function SourceValue({ label, value, children }: { label: string; value: string; children?: ReactNode }) {
-    return <ComponentAndLabel label={label} labelSize="xsmall" component={children
+function SourceValue({ label, value, valueSize = "small", valueFirst = false, inline = false, dataLabel = label, children }: { label: string; value: string; valueSize?: "small" | "large" | "xxlarge"; valueFirst?: boolean; inline?: boolean; dataLabel?: string | null; children?: ReactNode }) {
+    const component = children
         ? <TipDisplay heading={label} body={<Box style={{ maxHeight: "40vh", overflowY: "auto", overflowWrap: "anywhere" }}>{children}</Box>} maxWidth="620px" size="small">
-            <Text tabIndex={0} size="small" data-research-source-value={label} style={{ textDecoration: "underline dotted", textUnderlineOffset: "4px", cursor: "help" }}>{value}</Text>
+            <Text tabIndex={0} size={valueSize} data-research-source-value={dataLabel} style={{ textDecoration: "underline dotted", textUnderlineOffset: "4px", cursor: "help" }}>{value}</Text>
         </TipDisplay>
-        : <Text size="small" data-research-source-value={label}>{value}</Text>} />;
+        : <Text size={valueSize} data-research-source-value={dataLabel ?? undefined}>{value}</Text>;
+    if (inline) {
+        return <Box direction="row" align="baseline" justify="between" gap="small">
+            <Text size="xsmall" color="accent-2">{label}</Text>
+            {component}
+        </Box>;
+    }
+    return <Box gap="xxsmall">
+        {valueFirst && component}
+        <Text color="accent-2" size="xsmall">{label}</Text>
+        {!valueFirst && component}
+    </Box>;
 }
 
 function ExpBonuses({ research }: { research: ResearchGrid }) {
@@ -175,32 +186,40 @@ export default function ResearchContent() {
     });
     const nextNote = research.postyNotes.find(note => !note.reached);
     return <Box id="research" gap="medium" pad={{ vertical: "medium" }} style={{ fontVariantNumeric: "tabular-nums", overflowWrap: "anywhere" }}>
-        <Heading level="2" size="medium" margin="none" style={{ fontWeight: "normal" }}>Research</Heading>
-        <Grid id="research-top" columns={size === "small" ? ["minmax(0, 1fr)"] : ["minmax(0, 1fr)", "minmax(0, 1.3fr)", "minmax(0, 1fr)"]} gap="small">
-            <Box background="dark-1" pad="medium" gap="small" data-research-summary="skill">
-                <Box direction="row" gap="small" align="center"><IconImage data={Skilling.getSkillImageData(SkillsIndex.Research)} /><Text size="large">Level {commaNotation(progress.highestLevel)}</Text></Box>
-                {progress.savedExpCopy && <TextAndLabel label="Research EXP" text={`${amount(progress.savedExpCopy.currentXP)} / ${progress.savedExpCopy.xpReq === undefined ? "Unavailable" : amount(progress.savedExpCopy.xpReq)}`} textSize="small" labelSize="xsmall" />}
-                <TextAndLabel label="Total Insight levels" text={commaNotation(progress.totalObservationLevels)} textSize="small" labelSize="xsmall" />
+        <Heading level="2" size="medium" style={{ fontWeight: "normal" }}>Research</Heading>
+        <Grid id="research-top" columns={size === "small" ? ["minmax(0, 1fr)"] : ["minmax(0, 44fr)", "minmax(0, 34fr)", "minmax(0, 22fr)"]} pad={{ vertical: "small" }} gap={size === "small" ? "medium" : undefined} fill>
+            <Box gap="small" pad={size === "small" ? undefined : { right: "medium" }} style={{ minWidth: 0 }} data-research-summary="skill">
+                <Box direction="row" gap="xsmall" align="center" height="32px">
+                    <IconImage data={Skilling.getSkillImageData(SkillsIndex.Research)} />
+                    <Text size="small">Experience</Text>
+                </Box>
+                <Box direction="row" wrap gap="medium" style={{ alignItems: "baseline", minWidth: 0 }}>
+                    <SourceValue label="Level" value={commaNotation(progress.highestLevel)} valueSize="xxlarge" valueFirst />
+                    {progress.savedExpCopy && <SourceValue label="Research EXP" value={`${amount(progress.savedExpCopy.currentXP)} / ${progress.savedExpCopy.xpReq === undefined ? "Unavailable" : amount(progress.savedExpCopy.xpReq)}`} valueSize="large" valueFirst dataLabel={null} />}
+                    <SourceValue label="Rate" value={rate(production.expPerHour)} valueSize="large" valueFirst dataLabel="Research EXP"><ExpBonuses research={research} /></SourceValue>
+                </Box>
             </Box>
-            <Box background="dark-1" pad="medium" gap="small" data-research-summary="discovery">
-                <Text size="small" weight="bold">Observation discovery</Text>
-                <Grid columns={["minmax(0, 1fr)", "minmax(0, 1fr)"]} gap="small">
-                    <SourceValue label="Attempts remaining" value={String(discovery.remainingAttempts)} />
-                    <SourceValue label="Attempts per day" value={String(discovery.dailyAllocation)}><Contributions entries={discovery.dailyAllocationContributors} /></SourceValue>
-                    <SourceValue label="Roll range" value={`${discovery.minimumRoll}–${discovery.maximumRoll}`}><Box gap="small"><Contributions entries={discovery.minimumRollContributors} /><Contributions entries={discovery.maximumRollContributors} /></Box></SourceValue>
-                </Grid>
+            <Box gap="small" pad={size === "small" ? undefined : { horizontal: "medium" }} border={size === "small" ? undefined : { side: "left", color: "grey-1" }} style={{ minWidth: 0 }} data-research-summary="discovery">
+                <Box justify="center" height="32px"><Text size="small">Observation discovery</Text></Box>
+                <Box direction="row" wrap gap="medium" style={{ alignItems: "baseline", minWidth: 0 }}>
+                    <SourceValue label="Attempts remaining" value={String(discovery.remainingAttempts)} valueSize="xxlarge" valueFirst>
+                        <Text size="xsmall">Attempts per day: {amount(discovery.dailyAllocation)}</Text>
+                        <Contributions entries={discovery.dailyAllocationContributors} />
+                    </SourceValue>
+                    <SourceValue label="Roll range" value={`${discovery.minimumRoll}–${discovery.maximumRoll}`} valueSize="large" valueFirst><Box gap="small"><Contributions entries={discovery.minimumRollContributors} /><Contributions entries={discovery.maximumRollContributors} /></Box></SourceValue>
+                </Box>
             </Box>
-            <Box background="dark-1" pad="medium" gap="small" data-research-summary="gains">
-                <Text size="small" weight="bold">Current gains</Text>
-                <SourceValue label="Research EXP" value={rate(production.expPerHour)}><ExpBonuses research={research} /></SourceValue>
-                <SourceValue label="Insight" value={rate(production.insightAccrualPerHour)}><Contributions entries={production.insightContributors} /></SourceValue>
-                <SourceValue label="Offline gains" value={offline.percent === null ? "Unavailable" : percent(offline.percent)}><Contributions entries={offline.contributors} percentagePoints /></SourceValue>
+            <Box gap="small" pad={size === "small" ? undefined : { left: "medium" }} border={size === "small" ? undefined : { side: "left", color: "grey-1" }} style={{ minWidth: 0 }} data-research-summary="gains">
+                <Box justify="center" height="32px"><Text size="small">Other</Text></Box>
+                <Box gap="xsmall">
+                    <SourceValue label="Total Insight levels" value={commaNotation(progress.totalObservationLevels)} inline />
+                    <SourceValue label="Insight rate" value={rate(production.insightAccrualPerHour)} inline dataLabel="Insight"><Contributions entries={production.insightContributors} /></SourceValue>
+                    <SourceValue label="Offline gains" value={offline.percent === null ? "Unavailable" : percent(offline.percent)} inline><Contributions entries={offline.contributors} percentagePoints /></SourceValue>
+                </Box>
             </Box>
         </Grid>
         <Box gap="medium" style={{ overflowWrap: "normal" }}>
-            <ThemeContext.Extend value={size === "small" ? { text: { medium: { size: "12px", height: "20px" } } } : {}}>
-                <ContentTabs options={tabs.map(value => ({ value, label: value === "Observations" ? `Observations (${progress.discoveries}/${research.observations.length})` : value }))} value={tab} onChange={setTab} />
-            </ThemeContext.Extend>
+            <ContentTabs options={tabs.map(value => ({ value, label: value === "Observations" ? `Observations (${progress.discoveries}/${research.observations.length})` : value }))} value={tab} onChange={setTab} />
             {tab === "Observations" && <Box as="section" id="research-observations" gap="small" aria-label="Observations">
                 <Box direction={size === "small" ? "column" : "row"} wrap={size !== "small"} gap="small" align={size === "small" ? "start" : "end"}>
                     <Box width={size === "small" ? "100%" : "medium"}><ComponentAndLabel label={<label htmlFor="research-search"><Text size="xsmall" color="accent-2">Search</Text></label>} component={<TextInput id="research-search" aria-label="Search Observation names or maps" placeholder="Search names or maps" style={{ height: "48px" }} value={query} onChange={event => setQuery(event.target.value)} />} /></Box>
