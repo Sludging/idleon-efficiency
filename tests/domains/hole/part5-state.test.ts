@@ -650,19 +650,14 @@ describe('Hole part-five imported state', () => {
         expect(hole.fountain.upgrades).toHaveLength(60);
         expect(hole.fountain.opalProgress).toBe(14);
     });
-    it('orders all Fountain upgrades by prerequisite tier without changing catalog records', () => {
+    it('orders Fountain upgrades by contiguous prerequisite branches without changing catalog records', () => {
         const { upgrades, upgradesInUnlockOrder } = hole.fountain;
         const catalogBonuses = upgrades.map(upgrade => upgrade.getBonus());
         const positions = new Map(upgradesInUnlockOrder.map((upgrade, position) => [upgrade, position]));
-        const getDepth = (upgrade: typeof upgrades[number]): number => {
-            if (upgrade.data.prerequisiteIndex < 0) {
-                return 0;
-            }
-            const prerequisite = upgrades.find(candidate =>
+        const getChildren = (upgrade: typeof upgrades[number]) => upgrades
+            .filter(candidate =>
                 candidate.data.waterIndex === upgrade.data.waterIndex
-                && candidate.data.index === upgrade.data.prerequisiteIndex)!;
-            return getDepth(prerequisite) + 1;
-        };
+                && candidate.data.prerequisiteIndex === upgrade.data.index);
 
         expect(upgrades).toHaveLength(60);
         expect(upgradesInUnlockOrder).toHaveLength(60);
@@ -670,34 +665,54 @@ describe('Hole part-five imported state', () => {
         expect(upgradesInUnlockOrder.every(upgrade => upgrades.includes(upgrade))).toBe(true);
         expect(upgrades.map(upgrade => upgrade.getBonus())).toEqual(catalogBonuses);
 
-        for (const waterIndex of [0, 1, 2]) {
-            const colorUpgrades = upgradesInUnlockOrder.filter(
-                upgrade => upgrade.data.waterIndex === waterIndex,
-            );
-            expect(colorUpgrades).toHaveLength(20);
-            expect(colorUpgrades[0]!.data.prerequisiteIndex).toBeLessThan(0);
-
-            for (let index = 1; index < colorUpgrades.length; index++) {
-                const previous = colorUpgrades[index - 1]!;
-                const current = colorUpgrades[index]!;
-                const previousDepth = getDepth(previous);
-                const currentDepth = getDepth(current);
-                expect(previousDepth).toBeLessThanOrEqual(currentDepth);
-                if (previousDepth === currentDepth) {
-                    expect(previous.data.index).toBeLessThan(current.data.index);
-                }
+        for (const upgrade of upgrades) {
+            const position = positions.get(upgrade)!;
+            if (upgrade.data.prerequisiteIndex >= 0) {
+                const parent = upgrades.find(candidate =>
+                    candidate.data.waterIndex === upgrade.data.waterIndex
+                    && candidate.data.index === upgrade.data.prerequisiteIndex)!;
+                expect(positions.get(parent)).toBeLessThan(position);
+            }
+            const earlierRootsOrSiblings = upgrades.filter(candidate =>
+                candidate.data.waterIndex === upgrade.data.waterIndex
+                && candidate.data.index < upgrade.data.index
+                && (upgrade.data.prerequisiteIndex < 0
+                    ? candidate.data.prerequisiteIndex < 0
+                    : candidate.data.prerequisiteIndex === upgrade.data.prerequisiteIndex));
+            for (const earlier of earlierRootsOrSiblings) {
+                expect(positions.get(earlier)).toBeLessThan(position);
             }
 
-            colorUpgrades.forEach(upgrade => {
-                if (upgrade.data.prerequisiteIndex < 0) {
-                    return;
+            const branch: typeof upgrades = [];
+            const collectBranch = (current: typeof upgrades[number]): void => {
+                branch.push(current);
+                getChildren(current).forEach(collectBranch);
+            };
+            collectBranch(upgrade);
+            const branchPositions = branch.map(node => positions.get(node)!).sort((left, right) => left - right);
+            branchPositions.forEach((position, index) => {
+                if (index > 0) {
+                    expect(position).toBe(branchPositions[index - 1]! + 1);
                 }
-                const prerequisite = upgrades.find(candidate =>
-                    candidate.data.waterIndex === waterIndex
-                    && candidate.data.index === upgrade.data.prerequisiteIndex)!;
-                expect(positions.get(prerequisite)).toBeLessThan(positions.get(upgrade)!);
             });
         }
+
+        const requestedBranch = [
+            'Minaus Costs',
+            'Pen N Paper',
+            'Cook Maxxing',
+            'Enchanterest',
+            'Bubba Forever',
+            'Wisdom Boost',
+        ];
+        const requestedBranchUpgrades = upgradesInUnlockOrder.filter(
+            upgrade => requestedBranch.includes(upgrade.data.name),
+        );
+        expect(requestedBranchUpgrades.map(upgrade => upgrade.data.name)).toEqual(requestedBranch);
+        const branchStart = positions.get(requestedBranchUpgrades[0]!)!;
+        requestedBranchUpgrades.forEach((upgrade, index) => {
+            expect(positions.get(upgrade)).toBe(branchStart + index);
+        });
         expect(upgradesInUnlockOrder.map(upgrade => upgrade.data.waterIndex)).toEqual([
             ...Array(20).fill(0), ...Array(20).fill(1), ...Array(20).fill(2),
         ]);

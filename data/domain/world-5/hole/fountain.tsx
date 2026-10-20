@@ -266,31 +266,38 @@ export class Fountain {
             new FountainCurrency(currency.index, currency.data));
         this.upgrades = FountainUpgrade.fromBase(initFountainUpgradeRepo());
 
-        const upgradesByWater = [0, 1, 2].map(waterIndex =>
-            this.upgrades.filter(upgrade => upgrade.data.waterIndex === waterIndex));
-        const unlockDepths = new Map<FountainUpgrade, number>();
-        const getUnlockDepth = (upgrade: FountainUpgrade): number => {
-            const knownDepth = unlockDepths.get(upgrade);
-            if (knownDepth !== undefined) {
-                return knownDepth;
-            }
+        this.upgradesInUnlockOrder = [0, 1, 2].flatMap(waterIndex => {
+            const waterUpgrades = this.upgrades.filter(
+                upgrade => upgrade.data.waterIndex === waterIndex,
+            );
+            const childrenByPrerequisite = new Map<number, FountainUpgrade[]>();
+            const roots: FountainUpgrade[] = [];
 
-            const prerequisiteIndex = upgrade.data.prerequisiteIndex;
-            const depth = prerequisiteIndex < 0
-                ? 0
-                : getUnlockDepth(upgradesByWater[upgrade.data.waterIndex]!.find(
-                    prerequisite => prerequisite.data.index === prerequisiteIndex,
-                )!) + 1;
-            unlockDepths.set(upgrade, depth);
-            return depth;
-        };
+            waterUpgrades.forEach(upgrade => {
+                const prerequisiteIndex = upgrade.data.prerequisiteIndex;
+                if (prerequisiteIndex < 0) {
+                    roots.push(upgrade);
+                    return;
+                }
 
-        this.upgradesInUnlockOrder = upgradesByWater.flatMap(waterUpgrades =>
-            waterUpgrades
-                .sort((left, right) =>
-                    getUnlockDepth(left) - getUnlockDepth(right)
-                    || left.data.index - right.data.index)
-        );
+                const siblings = childrenByPrerequisite.get(prerequisiteIndex) ?? [];
+                siblings.push(upgrade);
+                childrenByPrerequisite.set(prerequisiteIndex, siblings);
+            });
+
+            const sortByIndex = (left: FountainUpgrade, right: FountainUpgrade) =>
+                left.data.index - right.data.index;
+            roots.sort(sortByIndex);
+            childrenByPrerequisite.forEach(siblings => siblings.sort(sortByIndex));
+
+            const orderedUpgrades: FountainUpgrade[] = [];
+            const visitBranch = (upgrade: FountainUpgrade): void => {
+                orderedUpgrades.push(upgrade);
+                childrenByPrerequisite.get(upgrade.data.index)?.forEach(visitBranch);
+            };
+            roots.forEach(visitBranch);
+            return orderedUpgrades;
+        });
     }
 
     parse(
