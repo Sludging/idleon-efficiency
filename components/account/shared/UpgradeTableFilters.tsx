@@ -25,6 +25,7 @@ interface UpgradeTableFiltersProps {
     searchPlaceholder?: string;
     additionalFilters?: ReactNode;
     layout?: "default" | "toolbar";
+    showLockedAndMaxedFilters?: boolean;
 }
 
 export function UpgradeTableFilters({
@@ -40,7 +41,8 @@ export function UpgradeTableFilters({
     ],
     searchPlaceholder = "Search name or bonus...",
     additionalFilters,
-    layout = "default"
+    layout = "default",
+    showLockedAndMaxedFilters = true
 }: UpgradeTableFiltersProps) {
     const updateFilter = <K extends keyof FilterOptions>(key: K, value: FilterOptions[K]) => {
         onFiltersChange({
@@ -50,18 +52,22 @@ export function UpgradeTableFilters({
     };
 
     const leftControls = [
-        <CheckBox
-            key="hide-locked"
-            checked={filters.hideLocked}
-            label="Hide locked"
-            onChange={(event) => updateFilter('hideLocked', event.target.checked)}
-        />,
-        <CheckBox
-            key="hide-maxed"
-            checked={filters.hideMaxed}
-            label="Hide maxed"
-            onChange={(event) => updateFilter('hideMaxed', event.target.checked)}
-        />,
+        showLockedAndMaxedFilters ? (
+            <CheckBox
+                key="hide-locked"
+                checked={filters.hideLocked}
+                label="Hide locked"
+                onChange={(event) => updateFilter('hideLocked', event.target.checked)}
+            />
+        ) : null,
+        showLockedAndMaxedFilters ? (
+            <CheckBox
+                key="hide-maxed"
+                checked={filters.hideMaxed}
+                label="Hide maxed"
+                onChange={(event) => updateFilter('hideMaxed', event.target.checked)}
+            />
+        ) : null,
         resourceFilterLabel && resourceFilterOptions.length > 0 ? (
             <Box key="resource-filter" direction="row" gap="small" align="center">
                 <Text size="small">{resourceFilterLabel}:</Text>

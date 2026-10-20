@@ -31,6 +31,20 @@ export interface JarPreparation {
     cavernLog: number;
 }
 
+export interface JarRupieValuePreparation {
+    schematicBonus62: number;
+    schematicBonus65: number;
+    schematicBonus68: number;
+    earlyExplorerExpUpgrade: number;
+    lampBonus99: number;
+    wisdomMonumentBonus: number;
+    measurementBonus10: number;
+    measurementBonus14: number;
+    evertreeMultiplier: number;
+    stampBonus: number;
+    coveUpgrade14Bonus: number;
+}
+
 export class JarBonus {
     level: number = 0;
     legendTalentBonus: number = 1;
@@ -55,24 +69,32 @@ export class JarBonus {
     }
 
 
-    getDescription(): string {
-        return this.getDescriptionForBonus(this.getBonus());
+    getDescription(rupieValue: number): string {
+        return this.getDescriptionForBonus(this.getBonus(), rupieValue);
     }
 
-    getFirstDiscoveryDescription(): string {
-        return this.getDescriptionForBonus(this.getFirstDiscoveryBonus());
+    getFirstDiscoveryDescription(rupieValue: number): string {
+        return this.getDescriptionForBonus(this.getFirstDiscoveryBonus(), rupieValue);
     }
 
     getFirstDiscoveryBonus(): number {
         return this.data.bonus * this.legendTalentBonus;
     }
 
-    private getDescriptionForBonus(bonus: number): string {
+    private getDescriptionForBonus(bonus: number, rupieValue: number): string {
         const percent = commaNotation(Math.round(bonus));
         const multiplier = notateNumber(1 + bonus / 100, "MultiplierInfo").replace(/#/g, "");
+        const formattedRupieValue = this.data.description.includes("$")
+            ? rupieValue < 1000
+                ? notateNumber(rupieValue, "Small")
+                : rupieValue < 1e9
+                    ? commaNotation(rupieValue)
+                    : notateNumber(rupieValue, "Big")
+            : "";
         return this.data.description
             .replace(/\{%/g, `${percent}%`)
             .replace(/\}x/g, `${multiplier}×`)
+            .replace(/\$/g, formattedRupieValue)
             .replace(/_/g, " ")
             .replace(/\s*@\s*/g, "\n")
             .replace(/[ \t]+/g, " ")
@@ -88,6 +110,8 @@ export class JarBonus {
 export class JarType {
     unlocked: boolean = false;
     jarsPerHour: number = 0;
+    boardCount: number = 0;
+    quantity: number = 0;
     imageData: ImageData;
 
     constructor(public index: number, public data: HoleJarModel) {
@@ -110,9 +134,13 @@ export interface JarProducerAssignment {
 }
 
 export class Jar {
+    rupieValue: number = 0;
     jarTypes: JarType[] = [];
     jarBonuses: JarBonus[] = [];
     board: JarBoardEntry[] = [];
+    readonly boardCapacity: number = 120;
+    boardCount: number = 0;
+    quantity: number = 0;
     ownedTypeCount: number = 0;
     holdings: number[] = Array(12).fill(0);
     readonly holdingImages: ImageData[] = Array.from({ length: 12 }, (_, index) => ({
@@ -144,13 +172,31 @@ export class Jar {
         const preferredTarget = Number(holeData[11]?.[62] ?? -1);
         this.preferredCollectibleTarget = preferredTarget < 0 ? null : preferredTarget;
 
-        this.board = (savedBoard ?? []).slice(0, 120).filter(entry => entry?.length >= 5).map(entry => ({
+        this.board = (savedBoard ?? []).slice(0, this.boardCapacity).filter(entry => entry?.length >= 5).map(entry => ({
             type: Number(entry[0]),
             quality: Number(entry[1]),
             x: Number(entry[2]),
             y: Number(entry[3]),
             randomRoll: Number(entry[4]),
         }));
+        this.boardCount = this.board.length;
+        this.quantity = 0;
+        this.jarTypes.forEach(jarType => {
+            jarType.boardCount = 0;
+            jarType.quantity = 0;
+        });
+        this.board.forEach(entry => {
+            const quantity = 10 ** entry.quality;
+            this.quantity += quantity;
+
+            const jarType = this.jarTypes[entry.type];
+            if (!jarType) {
+                return;
+            }
+
+            jarType.boardCount += 1;
+            jarType.quantity += quantity;
+        });
         const producerData = holeData[25] ?? [];
         this.producerAssignments = Array.from({ length: 3 }, (_, index) => ({
             index,
@@ -168,6 +214,7 @@ export class Jar {
             : 50 * Math.pow(1 + this.ownedTypeCount, 1.5) * Math.pow(4.8, this.ownedTypeCount);
         this.gildedBonusPercent = Number(holeData[11]?.[60] ?? 0);
     }
+
 
     prepare(inputs: JarPreparation): void {
         const baseRate = 36000 * (1 + inputs.collectibleBonus / 100) *
@@ -204,6 +251,25 @@ export class Jar {
             const jarType = this.jarTypes[type];
             jarType.jarsPerHour += baseRate / requirement;
         });
+    }
+
+    prepareRupieValue(inputs: JarRupieValuePreparation): void {
+        let value = 1 + inputs.schematicBonus62 + inputs.schematicBonus65 + inputs.schematicBonus68;
+        value *= Math.max(1, 1.5 ** inputs.earlyExplorerExpUpgrade);
+        value *= 1 + inputs.lampBonus99 / 400;
+        value *= 1 + inputs.wisdomMonumentBonus / 100;
+        value *= 1 + (inputs.measurementBonus10 + inputs.measurementBonus14) / 100;
+        value *= Math.max(1, inputs.evertreeMultiplier);
+        value *= 1 + this.gildedBonusPercent / 100;
+        value *= 1 + this.jarBonuses[3].getBonus() / 100;
+        value *= 1 + this.jarBonuses[17].getBonus() / 100;
+        value *= 1 + this.jarBonuses[28].getBonus() / 100;
+        value *= 1 + (this.jarBonuses[0].getBonus() + this.jarBonuses[6].getBonus() +
+            this.jarBonuses[13].getBonus() + this.jarBonuses[21].getBonus() +
+            this.jarBonuses[33].getBonus()) / 100;
+        value *= 1 + inputs.stampBonus / 100;
+        value *= 1 + inputs.coveUpgrade14Bonus / 100;
+        this.rupieValue = value;
     }
 
     getHoldingImageData(index: number): ImageData | null {

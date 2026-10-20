@@ -12,6 +12,7 @@ import { normalizeCompanionStates } from '../../../data/domain/companions/compan
 import { lavaLog } from '../../../data/utility';
 import { Jar } from '../../../data/domain/world-5/hole/jar';
 
+import { getStampBonusForKey } from '../../../data/domain/world-1/stamps';
 import { Gaming } from '../../../data/domain/world-5/gaming';
 import { getPlayerDamageTotalMultiplier } from '../../../data/domain/player-damage-multiplier';
 import { getClassExperienceMultiplier } from '../../../data/domain/player-experience';
@@ -242,16 +243,16 @@ describe('Hole part-five imported state', () => {
         percentBonus.level = 1;
         expect(percentBonus.getBonus()).toBe(10);
         expect(percentBonus.getUnit()).toBe("percent");
-        expect(percentBonus.getDescription()).toBe('All skilling caverns require 10% less Resources to get opals!');
+        expect(percentBonus.getDescription(0)).toBe('All skilling caverns require 10% less Resources to get opals!');
 
         const multiplierBonus = jar.jarBonuses[2];
         multiplierBonus.level = 1;
         expect(multiplierBonus.getUnit()).toBe("multiplier");
-        expect(multiplierBonus.getDescription()).toBe('1.20× higher chance to find Opals in Tall Jars.');
+        expect(multiplierBonus.getDescription(0)).toBe('1.20× higher chance to find Opals in Tall Jars.');
 
         const futureBonus = jar.jarBonuses[31];
         expect(futureBonus.getUnit()).toBeNull();
-        expect(futureBonus.getDescription()).toBe("Boosts a future cavern... futuuure..!");
+        expect(futureBonus.getDescription(0)).toBe("Boosts a future cavern... futuuure..!");
 
         const fountainRecord = hole.fountain.upgrades.find(upgrade => upgrade.data.waterIndex === 0 && upgrade.data.index === 1)!;
         const fountainUpgrade = new FountainUpgrade(fountainRecord.index, fountainRecord.data);
@@ -290,12 +291,12 @@ describe('Hole part-five imported state', () => {
 
         expect(percentBonus.getBonus()).toBe(0);
         expect(percentBonus.getFirstDiscoveryBonus()).toBe(15);
-        expect(percentBonus.getFirstDiscoveryDescription()).toBe('All skilling caverns require 15% less Resources to get opals!');
-        expect(percentBonus.getDescription()).toBe('All skilling caverns require 0% less Resources to get opals!');
+        expect(percentBonus.getFirstDiscoveryDescription(0)).toBe('All skilling caverns require 15% less Resources to get opals!');
+        expect(percentBonus.getDescription(0)).toBe('All skilling caverns require 0% less Resources to get opals!');
 
 
         const futureBonus = jar.jarBonuses[31];
-        expect(futureBonus.getFirstDiscoveryDescription()).toBe('Boosts a future cavern... futuuure..!');
+        expect(futureBonus.getFirstDiscoveryDescription(0)).toBe('Boosts a future cavern... futuuure..!');
     });
     it('resolves Fountain description values from source inputs', () => {
         const fountain = new Fountain();
@@ -356,7 +357,7 @@ describe('Hole part-five imported state', () => {
         expect(hole.jar.jarTypes[4].getDescription()).toBe('Has a chance to enchant a collectible doubling its bonus');
         const bonus = new Jar().jarBonuses[5];
         bonus.level = 1;
-        expect(bonus.getDescription()).toBe('All skilling caverns require 10% less Resources to get opals!');
+        expect(bonus.getDescription(0)).toBe('All skilling caverns require 10% less Resources to get opals!');
     });
     it('assigns a source-verified unit to each released Jar collectible', () => {
         const jar = new Jar();
@@ -367,16 +368,39 @@ describe('Hole part-five imported state', () => {
             .toEqual(percentageIndexes);
         expect(jar.jarBonuses.filter(bonus => bonus.getUnit() === "multiplier").map(bonus => bonus.index))
             .toEqual(multiplierIndexes);
-        for (const bonus of jar.jarBonuses) {
-            bonus.level = 1;
-            expect(bonus.getDescription()).not.toMatch(/@|\{%/);
-        }
     });
 
-    it('imports saved Jar board entries, type count, and holdings separately', () => {
+    it('summarizes saved Jar board entries by type and quality', () => {
         expect(hole.jar.jarTypes).toHaveLength(10);
         expect(hole.jar.ownedTypeCount).toBe(9);
-        expect(hole.jar.board).toHaveLength(120);
+        expect(hole.jar.boardCapacity).toBe(120);
+        const savedBoard = JSON.parse(loadTestSave(saveName).get('Jars') as string) as number[][];
+        const savedEntries = savedBoard.slice(0, hole.jar.boardCapacity).filter(entry => entry?.length >= 5);
+        const expectedByType = new Map<number, { count: number; quantity: number }>();
+        savedEntries.forEach(entry => {
+            const [type, quality] = entry;
+            const totals = expectedByType.get(type) ?? { count: 0, quantity: 0 };
+            totals.count += 1;
+            totals.quantity += 10 ** quality;
+            expectedByType.set(type, totals);
+        });
+
+        const expectedTotals = Array.from(expectedByType.values());
+        expect(hole.jar.boardCount).toBe(expectedTotals.reduce((sum, totals) => sum + totals.count, 0));
+        expect(hole.jar.quantity).toBe(expectedTotals.reduce((sum, totals) => sum + totals.quantity, 0));
+        hole.jar.jarTypes.forEach(jarType => {
+            const expected = expectedByType.get(jarType.index) ?? { count: 0, quantity: 0 };
+            expect(jarType.boardCount).toBe(expected.count);
+            expect(jarType.quantity).toBe(expected.quantity);
+        });
+        expect(hole.jar.boardCount).toBe(120);
+        expect(hole.jar.quantity).toBe(59700);
+        expect(hole.jar.jarTypes[4].boardCount).toBe(60);
+        expect(hole.jar.jarTypes[4].quantity).toBe(42000);
+        expect(hole.jar.jarTypes[8].boardCount).toBe(31);
+        expect(hole.jar.jarTypes[8].quantity).toBe(10300);
+        expect(hole.jar.jarTypes[9].boardCount).toBe(29);
+        expect(hole.jar.jarTypes[9].quantity).toBe(7400);
         expect(hole.jar.board[0]).toEqual({ type: 9, quality: 3, x: 672, y: 312, randomRoll: 0.8404255300769636 });
         expect(hole.jar.holdings).toHaveLength(12);
         expect(hole.jar.nextTypeCost).toBeNull();
@@ -424,6 +448,40 @@ describe('Hole part-five imported state', () => {
         expect(hole.jar.getBonus(1)).toMatchLiveGame(getExtractedValue(jarResults, 'collectible_1'), 0);
         expect(hole.jar.getBonus(15)).toMatchLiveGame(getExtractedValue(jarResults, 'collectible_15'), 0);
         expect(hole.jar.getBonus(24)).toMatchLiveGame(getExtractedValue(jarResults, 'collectible_24'), 0);
+    });
+    it('matches the prepared Jar Rupie Value against the native formula result', () => {
+        expect(hole.jar.rupieValue).toMatchLiveGameWithDetails(getExtractedValue(jarResults, 'jar_rupie_value'), {
+            tolerance: 0,
+            context: 'current Jar Rupie Value',
+        });
+        const abnormalRupie = hole.jar.jarBonuses[0];
+        expect(abnormalRupie.getDescription(hole.jar.rupieValue)).toContain('Current Rupie Value:31.9B');
+        expect(abnormalRupie.getDescription(hole.jar.rupieValue)).not.toContain('$');
+        expect(abnormalRupie.getFirstDiscoveryDescription(hole.jar.rupieValue)).toContain('Current Rupie Value:31.9B');
+    });
+    it('matches every prepared Jar Rupie operand against same-context native outputs', () => {
+        expect([
+            hole.getSchematicBonus(62, 1),
+            hole.getSchematicBonus(65, 2),
+            hole.getSchematicBonus(68, 4)
+        ]).toEqual(jarResults.extractions.rupie_schematics.result);
+        expect(hole.earlyExplorerExpUpgrade).toBe(getExtractedValue(jarResults, 'rupie_option_355'));
+        expect(hole.lamp.getBonus(true)).toBe(getExtractedValue(jarResults, 'rupie_lamp_99'));
+        expect(hole.getMonumentBonus('Wisdom', 1)).toBe(getExtractedValue(jarResults, 'rupie_wisdom_monument'));
+        expect([
+            hole.measurements[10].effectiveBenefit,
+            hole.measurements[14].effectiveBenefit
+        ]).toEqual(jarResults.extractions.rupie_measurements.result);
+        expect(hole.schematics[80].getIntrinsicBonus())
+            .toBe(getExtractedValue(jarResults, 'rupie_evertree_factor'));
+        expect(hole.jar.gildedBonusPercent).toBe(getExtractedValue(jarResults, 'rupie_gilded_percent'));
+        expect([3, 17, 28, 0, 6, 13, 21, 33].map(index => hole.jar.jarBonuses[index].getBonus()))
+            .toEqual(jarResults.extractions.rupie_collectibles.result);
+        const stamps = gameData.get('stamps') as Parameters<typeof getStampBonusForKey>[0];
+        expect(getStampBonusForKey(stamps, 'CavernRes'))
+            .toBe(getExtractedValue(jarResults, 'rupie_stamp_cavern_res'));
+        expect(hole.cove.upgrades[14].getBonus())
+            .toBe(getExtractedValue(jarResults, 'rupie_cove_upgrade_14'));
     });
 
 

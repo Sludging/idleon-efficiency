@@ -1,9 +1,19 @@
 {
-  "name": "Hole part-five Jar producer parity",
-  "description": "Paired v1.23 Jar collectible bonuses and producer inputs from the latest saved account.",
+  "name": "Hole part-five Jar producer and Rupie value",
+  "description": "Paired v1.23 Jar collectible, producer, and native Rupie value outputs from the latest saved account.",
   "requiredActivePlayerIndex": 3,
   "extractions": [
     { "label": "active_context", "expression": "({ playerId: idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0]), playerName: idleon.getAttr(\"UserInfo\")[0], version: idleon.getAttr('DoOnceREAL') })" },
+    { "label": "rupie_schematics", "expression": "[idleon.callFunction(\"Holes\", \"B_UPG\", 62, 1), idleon.callFunction(\"Holes\", \"B_UPG\", 65, 2), idleon.callFunction(\"Holes\", \"B_UPG\", 68, 4)]" },
+    { "label": "rupie_option_355", "expression": "idleon.getAttr(\"OptionsListAccount\")[355]" },
+    { "label": "rupie_lamp_99", "expression": "idleon.callFunction(\"Holes\", \"LampBonuses\", 99, 0)" },
+    { "label": "rupie_wisdom_monument", "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 2, 1)" },
+    { "label": "rupie_measurements", "expression": "[idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 10, 0), idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 14, 0)]" },
+    { "label": "rupie_evertree_factor", "expression": "Math.max(1, idleon.callFunction(\"Holes\", \"B_UPG\", 80, 1) * Math.pow(1.1, idleon.getAttr(\"Holes\")[11][5]))" },
+    { "label": "rupie_gilded_percent", "expression": "idleon.getAttr(\"Holes\")[11][60]" },
+    { "label": "rupie_collectibles", "expression": "[idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 3, 0), idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 17, 0), idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 28, 0), idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 0, 0), idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 6, 0), idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 13, 0), idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 21, 0), idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 33, 0)]" },
+    { "label": "rupie_stamp_cavern_res", "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"CavernRes\")" },
+    { "label": "rupie_cove_upgrade_14", "expression": "idleon.callFunction(\"Holes\", \"Cglunko_upgBon\", 14, 0)" },
     { "label": "producer_assignment", "expression": "idleon.getAttr('Holes')[25].slice(0, 6)" },
     { "label": "requirement_balance", "expression": "idleon.getAttr('Holes')[11][43]" },
     { "label": "collectible_1", "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 1, 0)" },
@@ -18,6 +28,7 @@
     { "label": "producer_requirement_1", "expression": "idleon.callFunction('Holes', 'JarProductionREQ', idleon.getAttr('Holes')[25][1], 0)" },
     { "label": "producer_rate_1", "expression": "idleon.callFunction('Holes', 'JarProductionPerHR', 1, 0)" },
     { "label": "producer_requirement_2", "expression": "idleon.callFunction('Holes', 'JarProductionREQ', idleon.getAttr('Holes')[25][2], 0)" },
-    { "label": "producer_rate_2", "expression": "idleon.callFunction('Holes', 'JarProductionPerHR', 2, 0)" }
+    { "label": "producer_rate_2", "expression": "idleon.callFunction('Holes', 'JarProductionPerHR', 2, 0)" },
+    { "label": "jar_rupie_value", "expression": "idleon.callFunction('Holes', 'JarRupieValue', 0, 0)" }
   ]
 }

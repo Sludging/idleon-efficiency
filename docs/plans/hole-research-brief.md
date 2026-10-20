@@ -5195,3 +5195,203 @@ The local commit contains only the reviewed and accepted priority-2 Hole cleanup
 **Limits accepted:** Evidence covers one configured save, desktop UI, and in-memory boundaries. Actual save has all ten Jar types unlocked, so full-route UI does not show a locked next-type cost; that row is covered by in-memory model proof. No UI rate calculation, game action, forecast, or save write occurred. No build, lint, or test suite ran for final Jar verification. Shared hydration mismatch, NitroPay `browsingTopics`, RL identity CORS, failed-resource, and third-party HTTP 403 diagnostics were unrelated to asserted Jar output. Broader suite, responsive behavior, alternate saves, and broad repository status are not claimed.
 
 **Commit receipt:** Local commit subject: `fix(hole): accept Hole cleanup and Jar UI`. This commit contains its own handoff receipt.
+
+#### Jar-only UI revision authorized — 2026-10-20
+
+The human approved the Jar-only revision with: “ok that sounds good, do that and all other feedback I gave earlier”. This authorizes the eight selected Jar feedback items below. It does not reopen or alter accepted priority 2, the earlier accepted Jar work, or other Hole domains. Use fresh serial workers for remaining work. No replacement plan or preview phase is required.
+
+**Approved Jar outcomes:**
+
+1. Keep the production section compact and show current board occupancy against its 120-jar capacity; do not render a per-slot board.
+2. Show one card per Jar type, with saved count and Quantity equal to the sum of its quality factors `10^q`. Retain combined jars/hour, the Producing highlight, and unchecked-by-default Show all: active types by default, all ten including Heirloom when checked. Global totals include every stored type, even when hidden. Do not add quality tiers, averages, progress bars, or a capped-production flag.
+3. Match actual `SushiUpgradeTable` panel format, typography, and row spacing; reuse its common implementation where compatible. Do not add fake upgrade-purchase fields.
+4. Put game image and name together in the Collectible column.
+5. Show collectible level only; no enhancement count.
+6. Calculate current `JarRupieValue` and resolve its `$` description placeholder; do not hide the value or replace it with “Unavailable”.
+7. Support ascending and descending Level sorting. Initially preserve game order unless existing reference establishes a clearer order. Add no filters.
+8. Remove Owned, Potential, and other ownership-status words. Use opacity for unowned rows. At level zero, show first-discovery benefit rather than `+0%` owned value; preserve current owned benefit. Future effects remain their actual static-source descriptions, without a new release-policy rule.
+
+**Source-backed mechanic boundary:** v1.23 source stores at most 120 Jars (`idleon1.23.txt:265631–265647`), but production at capacity targets matching-type jars for quality upgrades (`265649–265694`). Quality `q` scales reward by `10^q` (`268905–268918`); producer work accumulates from elapsed time and retains excess after threshold events (`265623–265630,265696–265708`). The AFK server-time path can pass a larger elapsed batch to this producer (`116086–116087,320933–320995`). Thus board count has a finite 120-entry limit; source shows no fixed quality ceiling, and a full board is not equivalent to capped production. Do not claim mathematical infinity, a finite maximum, exact AFK/runtime parity, or an unsupported one-time quality ceiling. These facts come from prior read-only v1.23 research receipts; no new queries or game actions occurred for this handoff update.
+
+**Required pre-edit research and gates:** Before editing, fresh serial research must verify the new `JarRupieValue` formula and native inputs against the current v1.23 game and matched base fixture, then inspect the actual `SushiUpgradeTable` implementation and compatible shared patterns. The existing Abnormal Rupie `$` is a substitution for game `JarRupieValue`, not a literal currency symbol; the current owned renderer leaks a missing calculation. Do not mask the leak with a fake unavailable value or hidden row. Preserve existing unknown/save-input behavior without adding broad null gates or release-version rules.
+
+The existing handoff remains authoritative for unrelated constraints: preserve the early 12 resource images, amount/search behavior, other caverns, shared shell, and Study footer; preserve confirmed Garden index 296. Do not change Gaming, WikiBot, generated data, release-version behavior, or unrelated user work.
+
+Proceed through fresh strictly serial research, scoped execution, actual changed-behavior verification, fresh independent review, delegated acceptance, and local commit only after acceptance and explicit permission. Record evidence, blockers, and check limits at each stage. This action only records approval and requirements: no plan, preview, code change, verification check, review, acceptance, publication, or commit occurred.
+
+#### Jar board quantity and Rupie-value prerequisites — 2026-10-20
+
+**Board contract:** v1.23 persists board entries in `Jars`; accepted parsing maps entry `[0]` to type and `[1]` to quality and limits the board to 120 entries (`jar.tsx:135–153`; game source `idleon1.23.txt:265631–647`). Existing static owner is `HoleJarRepo` / `JarType`; no separate board-capacity static data is needed. Implement per-type physical count as count of valid board entries by type, and Quantity as sum of `10 ** quality` for those entries. Global count is all parsed entries; global Quantity is sum across every type, including hidden types and zero-count types. Empty types have count 0 and Quantity 0. Mixed qualities, e.g. q0 + q2 + q2, mean count 3 and Quantity 201. These are board summaries, not forecast or reward-payout claims. Preserve existing producer rates and `Show all=false`.
+
+**Rupie formula:** v1.23 `idleon1.23.txt:241234–251` defines `JarRupieValue` as an ordered product:
+`(1 + B_UPG(62,1) + B_UPG(65,2) + B_UPG(68,4)) × max(1,1.5^OptionsListAccount[355]) × (1+LampBonuses(99,0)/400) × (1+MonumentROGbonuses(2,1)/100) × (1+(MeasurementBonusTOTAL(10,0)+MeasurementBonusTOTAL(14,0))/100) × max(1,B_UPG(80,1)×1.1^Holes[11][5]) × (1+Holes[11][60]/100) × (1+JarCollectibleBonus(3,0)/100) × (1+JarCollectibleBonus(17,0)/100) × (1+JarCollectibleBonus(28,0)/100) × (1+(JarCollectibleBonus(0,0)+JarCollectibleBonus(6,0)+JarCollectibleBonus(13,0)+JarCollectibleBonus(21,0)+JarCollectibleBonus(33,0))/100) × (1+StampBonusOfTypeX("CavernRes")/100) × (1+Cglunko_upgBon(14,0)/100)`.
+The formula returns a numeric base Rupie value, not total reward. Native reward resolution multiplies by `10^quality` (`268905–918`). The inspected source exposes no rounding in formula; display formatting rounds only the sub-1000 `Small` path, uses comma notation below 1e9, and `Big` notation otherwise (`262605–620`). Player-facing unit is Rupies per Rupie; no guaranteed board payout follows from this base value.
+
+**Original API note superseded by matched-runtime continuation below.** The model already exposes the typed owners listed in the continuation. `updateHole` currently runs before `updateStamps`; calculate Jar Rupie Value only after stamp bonuses are prepared.
+
+**Description:** Only `ABNORMAL RUPIE` has `$` in existing `HoleJarBonusRepo` descriptions (`HoleJarBonusRepo.ts:9–13`). Native collectible-description code substitutes `$` only for collectible index 0. It uses `JarRupieValue`: `<1000` via `NotateNumber(...,"Small")`; `<1e9` via `CommaNotation`; otherwise `NotateNumber(...,"Big")` (`idleon1.23.txt:262605–620`). `$` means current Jar Rupie Value, not literal currency symbol. Native description first substitutes collectible `%` separately.
+
+**Runtime mismatch claim corrected:** The cited SHA-256 values represented different data encodings: canonical runtime JSON versus raw fixture-file bytes. Comparing them did not establish a save mismatch. The continuation below deep-compares parsed runtime and fixture JSON and records native parity; no save restoration or user action was warranted.
+
+**Existing regression seam:** Reuse `updateIdleonData`, `tests/domains/hole/part5-state.test.ts`, and native extraction config/result `tests/configs/hole-part5-jar.json` / `tests/results/hole-part5-jar-data.json`. Do not modify them during research. Use the confirmed native dispatcher `idleon.callFunction("Holes", "JarRupieValue", 0, 0)` for formula parity; `"Holes2"` is the wrong formula dispatcher.
+
+**Research status:** No missing static-data prerequisite. Detailed API, exact parsed boundary, phase dependency, matched native formula values, and board snapshot follow. No source, tests, configs, results, fixtures, or game state changed.
+
+#### Jar Rupie matched evidence — 2026-10-20
+
+**Matched input and readiness:** Read-only `GET /status`, `/game-version`, and `/cloud-save` on `http://127.0.0.1:3101` reported `source:"offline"`, `cdpConnected/injected/gameReady:true`, character index 3 `Sludgev4`, title `Luminous_Menagerie`, version `1.23`. Deep recursive JSON normalization (sort object keys; retain array order; compare parsed values) found fixture JSON and `/cloud-save` equal. Both canonical JSON SHA-256 hashes were `a283af02778053bb894feaa3ef54f44057a0533b8bb8e3d8cde7a7756520324d`. The fixture's raw-file-byte hash remains `aab7f516047fc5b86096350e92864faeeccf303e9c72def20b51130507416555`; that different representation cannot prove mismatch. No restart or recovery was needed.
+
+**Native formula result and ordered inputs:** Query `idleon.callFunction("Holes","JarRupieValue",0,0)` returned `31894698959.317028`. The invalid earlier query `idleon.callFunction("Holes2","JarRupieValue",0,0)` returned sentinel `69`; do not use it. v1.23 source `idleon1.23.txt:241234–251` establishes exact ordered product:
+`(1+B_UPG(62,1)+B_UPG(65,2)+B_UPG(68,4)) × max(1,1.5^OptLacc[355]) × (1+LampBonuses(99,0)/400) × (1+MonumentROGbonuses(2,1)/100) × (1+(MeasurementBonusTOTAL(10,0)+MeasurementBonusTOTAL(14,0))/100) × max(1,B_UPG(80,1)×1.1^Holes[11][5]) × (1+Holes[11][60]/100) × (1+JarCollectibleBonus(3,0)/100) × (1+JarCollectibleBonus(17,0)/100) × (1+JarCollectibleBonus(28,0)/100) × (1+(JarCollectibleBonus(0,0)+JarCollectibleBonus(6,0)+JarCollectibleBonus(13,0)+JarCollectibleBonus(21,0)+JarCollectibleBonus(33,0))/100) × (1+StampBonusOfTypeX("CavernRes")/100) × (1+Cglunko_upgBon(14,0)/100)`.
+
+Matched runtime query values, in that order:
+- Schematic bonuses 62, 65, 68: `1`, `2`, `4`; additive first factor `8`.
+- `OptLacc[355]`: `0`; exponent factor `1`.
+- Lamp 99: `3203.5`; factor `9.00875`.
+- Monument `(2,1)`: `3870`; factor `39.7`.
+- Measurement 10 / 14: `26580.666666666664` / `27383.624854065238`; combined factor `540.642915207319`.
+- Schematic bonus 80: `1`; raw `Holes[11][5]`: `19`; combined max factor `6.115909044841464`.
+- Raw `Holes[11][60]`: `0`; factor `1`.
+- Jar collectible bonuses 3 / 17 / 28: `320` / `128` / `480`; factors `4.2` / `2.28` / `5.8`.
+- Jar collectible bonuses 0 / 6 / 13 / 21 / 33: `224` / `200` / `576` / `392` / `256`; combined factor `17.48`.
+- `StampBonusOfTypeX("CavernRes")`: `50.98039215686274`; factor `1.5098039215686274`.
+- Cove upgrade 14 bonus: `130`; factor `2.3`.
+
+Multiplying these exact factors produces `31894698959.317028`, matching native result. No formula rounding occurs in source. The base value is Rupies per Rupie; quality scales reward by `10^q` (`idleon1.23.txt:268905–918`). It is not board total reward or guaranteed payout.
+
+**Existing typed APIs and parse boundary:**
+- `Hole.getSchematicBonus(index, baseMultiplier)` delegates to `schematics[index].getBonus(baseMultiplier)` (`data/domain/world-5/hole/hole.tsx:566–591,1722–1725`). Use this for schematic 62/65/68 and use `hole.earlyExplorerExpUpgrade` for the option exponent. Do not use `getSchematicBonus(80,1)`: schematic 80's `getBonus` returns its default base multiplier. Its `getIntrinsicBonus()` matches native `max(1, B_UPG(80,1) × 1.1^Holes[11][5])` using parsed `resourceLayers.evertree` (`hole.tsx:525–535`).
+- `Hole.parse` reads account-wide `OptLacc` from `data.get("OptLacc")`, defaults absent array to `[]`, converts option 355 with `Number(... ?? 0)`, and stores it as `Hole.earlyExplorerExpUpgrade` (`hole.tsx:1963–1973`). This existing field is a named typed value, not obfuscated data downstream. Its current caller uses `1.5 ** earlyExplorerExpUpgrade` as Polonai's early-level role multiplier (`hole.tsx:1910–1913`; `villager.tsx:186–188`). Native Hole source also writes that multiplier to `DNSM.h.HoleozDxp` for the early Polonai branch (`idleon1.23.txt:240456–465`). No new invented option name is needed.
+- Lamp API is exactly `hole.lamp.getBonus(true)` (`hole.tsx:1573–1583`); it matches native `LampBonuses(99,0)` at `3203.5`. Existing `updateHole` uses that same API for Fountain preparation (`hole.tsx:2151–2154`).
+- Native Monument index 2 maps to player-facing **Wisdom** in `MonumentRepo` (`data/domain/data/MonumentRepo.ts:71–73`). Bonus index 1 uses `hole.getMonumentBonus("Wisdom",1)` (`hole.tsx:1739–1741`); native ROG bonus returned `3870`.
+- Measurement inputs are `hole.measurements[10/14].effectiveBenefit`; the current domain computes them before dependent Hole formulas (`hole.tsx:2093–2105`).
+- Gilded percentage is parsed at `hole.jar.gildedBonusPercent` and Jar collectible API is `hole.jar.jarBonuses[index].getBonus()` (`jar.tsx:83–85`; parser in `hole.tsx`). Bonus 0 is current owned level bonus; its first-discovery static value is separate, not a substitute in this native formula.
+- Native `StampBonusOfTypeX("CavernRes")` maps to `getStampBonusForKey(stamps,"CavernRes")` (`world-1/stamps.tsx:293–295`, called by `hole.tsx:2161–2163`). This helper sums each stamp's `getBonus()`, which includes prepared Lab, exalted, vault, and pristine multipliers (`stamps.tsx:213–222`). Do not use the earlier invalid `69` sentinel.
+- Cove upgrade 14 is `hole.cove.upgrades[14].getBonus()`; `Cove.parse` reads `OptLacc[630 + index]`, while `CoveUpgrade.getBonus()` multiplies parsed level by static bonus-per-level (`cove.ts:20–48,118–131,134–149`). It returned `130`.
+- `Holes[11][5]` and `[11][60]` are parsed save values. Schematic 80 already stores the former as `resourceLayers.evertree`; Jar stores the latter as `gildedBonusPercent` (`jar.tsx:191`). The Rupie formula uses those named domain values, not raw save arrays.
+
+**Required update dependency:** `postProcessingMap` runs `hole` before `stamps` (`data/domain/idleonData.tsx:353,361–362`). `updateHole` prepares measurements, Jar bonus Legend multipliers, Lamp, and Fountain/Cove-dependent values; it also consumes stamp bonus before stamp update (`hole.tsx:2097–2126,2141–2163`). `updateStamps` then sets effective stamp multipliers (`world-1/stamps.tsx:306–350`). The existing late `holePresentation` hook runs afterward in `postPostProcessingMap` (`idleonData.tsx:451–452`), so prepare Jar Rupie Value there. At that point parsed Hole state and all listed dependencies are prepared. Do not calculate it inside early Jar producer preparation or add a new processing stage.
+
+**Board snapshot:** Native `Jars` length was `120`, at accepted board capacity. Quality histogram and per-type count/Quantity (`sum(10^q)`) were:
+
+| Jar type | Count | Quality histogram | Quantity |
+| --- | ---: | --- | ---: |
+| Enchanted Jar (ID 4) | 60 | q2: 40, q3: 18, q4: 2 | 42,000 |
+| Ceremony Jar (ID 8) | 31 | q2: 23, q3: 8 | 10,300 |
+| Heirloom Jar (ID 9) | 29 | q2: 24, q3: 5 | 7,400 |
+| **Global** | **120** | **q2: 87, q3: 31, q4: 2** | **59,700** |
+
+No other type occurred. Global count and Quantity include all board entries; quantities summarize stored quality only, not forecast production or a guaranteed reward.
+
+**Player-facing meaning and limits:** `$` in `ABNORMAL RUPIE` means current base Jar Rupie Value, not literal currency (`HoleJarBonusRepo.ts:9–13`; native description source `idleon1.23.txt:262605–620`). Native display uses Small below 1,000, comma notation below 1e9, Big otherwise. Wiki describes the Hole as its Camp and Caverns, with villagers and cavern systems; it is player-context evidence, not formula authority: https://idleon.wiki/wiki/The_Caverns. No Wiki formula source was used. All observations are offline v1.23 matched-fixture results; no live server, game action, save write, fixture edit, extraction config/result edit, test, build, or production change occurred.
+
+**Static input evidence:** Cove's `Cavernicus` upgrade is static index 14, bonus per level 10 (`RandoList2Repo.ts:192–218,220–246,248–274`; `cove.ts:118–131`). Native bonus 130 therefore corresponds to 13 purchased levels. The existing `HoleJarBonusRepo` owns all 40 Jar collectible coefficients; no additional static records are needed.
+#### Jar refinement implementation — 2026-10-20
+
+**Status:** The eight approved Jar refinements are implemented. Work remains within Part 5. No commit, independent review, version-policy change, or unrelated Hole change occurred.
+
+**Board parity verified:** The offline runtime reported `source:"offline"`, `gameReady:true`, character 3 `Sludgev4`, title `Luminous_Menagerie`, version `1.23`. A read-only `POST /exec` query for `idleon.getAttr("Jars")` returned 120 ordered entries. The fixture stores `Jars` as a JSON string at `tests/fixtures/saves/latest.json`. Parsing both values and comparing `JSON.stringify(liveJars) === JSON.stringify(fixtureJars)` returned `true`; first and last entries also matched. Thus the fixture board summary matches this live runtime, not only the parsed cloud-save identity.
+
+Native live summary from the matched board: Enchanted Jar count 60 / Quantity 42,000; Ceremony Jar 31 / 10,300; Heirloom Jar 29 / 7,400; global count 120 / Quantity 59,700. Histogram: q2 87, q3 31, q4 2. No other type occurred. Quantity is stored `sum(10^quality)`, not a production forecast or guaranteed reward.
+
+**Native Jar Rupie Value and operands:** Read-only v1.23 runtime query used `idleon.callFunction("Holes", "JarRupieValue", 0, 0)` and returned `31894698959.317028`. A single same-context native expression returned:
+- Schematic bonuses 62/65/68: `1`, `2`, `4`.
+- OptionsListAccount[355]: `0`; Lamp 99: `3203.5`; Wisdom Monument `(2,1)`: `3870`.
+- Measurements 10/14: `26580.666666666664`, `27383.624854065238`.
+- Evertree factor: `6.115909044841464`; Gilded percent: `0`.
+- Jar collectible bonuses 3/17/28/0/6/13/21/33: `320`, `128`, `480`, `224`, `200`, `576`, `392`, `256`.
+- `StampBonusOfTypeX("CavernRes")`: `50.98039215686274`; Cove upgrade 14: `130`.
+
+The exact native extraction expressions and outputs are stored in `tests/configs/hole-part5-jar.json` and `tests/results/hole-part5-jar-data.json`. Domain tests compare every prepared operand and the final value with zero tolerance. `Holes2` remains invalid and returns sentinel `69`; it is not used.
+
+**Implementation:** `Jar` owns its 120 capacity, global board count/Quantity, and per-type board count/Quantity. Summaries include all parsed board entries, regardless of whether production cards are filtered by Show all. Production cards retain rates, Producing highlight, wallet, unlock-cost rules, and default-off Show all. No board slots, tiers, averages, progress bar, or capped-production flag were added.
+
+`Hole.jarRupieValue` is calculated in existing late `holePresentation` preparation after stamps. Jar collectible descriptions resolve `$` through that prepared value and source display rule: Small below 1,000, comma notation below 1e9, Big otherwise. The collectible table reuses actual `UpgradeTable` panel. It has Collectible (image and name), Level, and Effect columns; default game order; ascending and descending level options; and search. Level-zero rows use `getFirstDiscoveryDescription()`, with restrained identity/level opacity and readable effect text. The shared optional `showLockedAndMaxedFilters` presentation setting defaults to `true`, preserving Sushi and all existing consumers.
+
+Changed paths:
+- `data/domain/world-5/hole/jar.tsx`
+- `data/domain/world-5/hole/hole.tsx`
+- `data/domain/idleonData.tsx`
+- `components/world-5/hole/part4Caverns.tsx`
+- `components/account/shared/UpgradeTable.tsx`
+- `components/account/shared/UpgradeTableFilters.tsx`
+- `tests/configs/hole-part5-jar.json`
+- `tests/results/hole-part5-jar-data.json`
+- `tests/domains/hole/part5-state.test.ts`
+- `docs/plans/hole-research-brief.md`
+
+**Checks:** `yarn test tests/domains/hole/part5-state.test.ts` initially passed 35 tests, with one unrelated `gates Research Gambit reward while its reference player is in Tutorial maps` failure (`Expected: 0`, `Received: 3`). Further spaced reruns passed 34 tests and reproduced two unrelated assertions: that Gambit expectation, and `retains all five complete next-unlock previews after normal Hole import`, an existing old-Spelunking expectation. The final retry had the same 34/36 result. All in-scope Jar tests passed. Two earlier Jar-test failures exposed fixture access and array-normalization mistakes; both were corrected.
+
+`yarn ui:run .ui-verification/jar-approved-proof.cjs` passed on `latest.json`. It exercised 12 wallet images, default active production cards, 120/120 occupancy, per-type counts and exact quantities, Show all from three to ten cards without changing global occupancy, all 40 decoded collectible images, three columns, source-formatted Rupie placeholder, search and clear, both sort directions, restored game order, and Sushi's unchanged default Hide locked/Hide maxed controls. Screenshot artifacts:
+- `.ui-verification/runs/2026-10-20T05-33-50-011Z-7604/jar-production-default.png`
+- `.ui-verification/runs/2026-10-20T05-33-50-011Z-7604/jar-production-show-all.png`
+- `.ui-verification/runs/2026-10-20T05-33-50-011Z-7604/jar-collectibles-default.png`
+- `.ui-verification/runs/2026-10-20T05-33-50-011Z-7604/jar-abnormal-rupie.png`
+- `.ui-verification/runs/2026-10-20T05-33-50-011Z-7604/sushi-upgrades-default.png`
+
+Screenshots were inspected. The Rupie row showed `Current Rupie Value:31.9B`. The Sushi panel retained its existing shell, row spacing, table typography, in-game-order default, and two unchecked controls.
+
+**Verification limit:** `latest.json` has positive levels for all 40 collectibles, so it cannot show a level-zero row. An existing real save, `live-game-2026-01-11.json`, has level-zero collectibles, but its Part 5 page cannot load: the existing Menagerie parser throws `TypeError: spelunk[47] is not iterable` before Hole data appears. This is the unrelated old-Spelunking compatibility limit; it was not changed. No fake state, save edits, or simulated game actions were used. Therefore first-discovery opacity was not visually verified in an actual page, although the domain's first-discovery calculation remains covered by tests.
+
+The passing UI run also recorded unrelated existing browser errors: a hydration-attribute mismatch, removed NitroPay `document.browsingTopics()`, blocked identity-provider CORS, failed external resources, and one 403. No Jar-specific runtime error appeared.
+
+The LSP reference device was unavailable in this worker session: both `read xd://lsp` and `write xd://lsp` reported no such tool. Symbol search enumerated all `UpgradeTable` consumers before adding the optional default-on control: Royal Armory, Jelly Operator, Spelunking, Sushi, and direct `UpgradeTableFilters` use in `EfficiencyUpgradeTable`. No LSP-reference result is claimed.
+
+No build, lint, formatter, or commit was run. The UI verification stack was restored to `latest.json` and left running. Temporary scenario files were removed; screenshot artifacts remain. Independent review remains next.
+
+#### Jar level-zero visual verification attempt — 2026-10-20
+
+**Result:** The requested controlled-state rendering proof remains blocked. The UI runtime was healthy and configured for default `latest.json`; no save, fixture, game, or domain state was edited. Two temporary Playwright attempts navigated to `/world-5/hole` but could not reach `hole-ready` or the Jar UI. Both captured screenshots show the Next.js error overlay, not the Jar page:
+- `.ui-verification/runs/2026-10-20T05-43-33-213Z-23454/final.png`
+- `.ui-verification/runs/2026-10-20T05-45-59-190Z-28163/final.png`
+
+Those attempts exposed two unintended declaration removals in the Jar refinement: `updateHolePresentation` lost its `players` binding but still used it, and `Jar` lost `ownedTypeCount` while its parser and consumers still required it. The `players` loss caused the default Villagers render to fail; calling this a separate or unrelated Hole-page blocker was unsupported. Both declarations were restored below. The earlier `spelunk[47] is not iterable` report concerned another save; this revision does not establish that failure as unrelated after normal Hole preparation.
+
+**Focused tests at that earlier point:** `yarn test tests/domains/hole/part5-state.test.ts` produced 34 passed and two failed of 36. Later verification below supersedes those results.
+
+The failed attempts did not establish level-zero UI behavior. No controlled values, save edits, or simulated game actions were applied then.
+
+#### Jar selected regression fixes and verification — 2026-10-20
+
+**Review findings corrected:** Restored `const players = data.get("players") as Player[]` in `updateHolePresentation` alongside `updateJarRupieValue(data)`. Restored distinct `ownedTypeCount: number = 0` beside Jar board summaries. Audited the selected five-file refinement diff: these were the only unintentionally removed declarations; other removals replace the old collectible table/filter presentation or unused imports. No unrelated edits were made.
+
+**Full normal processing and visual proof:** `yarn ui:run .ui-verification/jar-level-zero-retry.cjs` passed on default `latest.json`. The actual `/world-5/hole` page rendered the Villagers view and Jar data, including late-prepared `ABNORMAL RUPIE` value, without ReferenceError or `undefined.percent`. The scenario cloned Hole/Jar/collectible objects in memory, set collectible 0 to level zero, rendered and inspected the real page, then restored original store data before further interaction. Screenshot `.ui-verification/runs/2026-10-20T06-03-37-134Z-67493/jar-level-zero-controlled.png` shows level 0, its first-discovery benefit, current Rupie value `31.9B`, no `+0%`, and dimmed identity/level. This is controlled rendering proof, not game or save evidence. The same run exercised Show all and inspected `.ui-verification/runs/2026-10-20T06-03-37-134Z-67493/jar-production-show-all.png`, including 120/120 occupancy and ten Jar cards. No fixture or game data changed. The stack remained on `latest.json`.
+
+`yarn ui:run .ui-verification/sushi-refinement-retry.cjs` passed. It opened Sushi upgrades, confirmed both default filters were unchecked, toggled each on and off, and inspected `.ui-verification/runs/2026-10-20T06-04-09-720Z-68653/sushi-upgrades-default.png`. Browser output contained previously recorded hydration, NitroPay `document.browsingTopics()`, identity-provider CORS, failed-resource, and 403 noise. One intermediate combined run recorded an app compile error at `app/world-7/minehead/content.tsx:195:15` (`Expected '</', got '}'`) during Sushi navigation. The independent Sushi-only rerun passed; no Minehead edit was made.
+
+**Domain tests:** `yarn test tests/domains/hole/part5-state.test.ts -t Jar` passed all 11 selected Jar tests (25 skipped). Full `yarn test tests/domains/hole/part5-state.test.ts` had 35 passed and one failed. The sole failure was `gates Research Gambit reward while its reference player is in Tutorial maps`: its test calls `hole.gambit.getBonus(15, player)`, but `Gambit.getBonus` accepts only `index` and uses `GambitBonus.getBonus` without a player argument (`gambit.tsx:79-81,111-117`; test `part5-state.test.ts:116-128`). The received `3` therefore comes from the normal bonus calculation; changing `player.currentMapId` cannot affect this API. This is outside the Jar diff. The earlier next-unlock assertion did not fail in this run, so it is not reported as a current failure.
+
+**Type and lint diagnostics:** `yarn tsc --noEmit --pretty false` reported no diagnostics in the changed Hole, Jar, or shared table files. It failed on `app/world-7/minehead/content.tsx`, shared theme typing, Spelunking theme typing, and Clamworks. Focused ESLint over the five refinement files reported `data-testid` restrictions in `part4Caverns.tsx` and `prefer-const` at line 850. No lint cleanup was made within this selected declaration-fix scope. No build, formatter, or commit was run.
+
+Temporary `.ui-verification/jar-level-zero-retry.cjs` and `.ui-verification/sushi-refinement-retry.cjs` harnesses were removed after runs. Controlled store state and Sushi filters were restored; no save, fixture, or game writes/actions occurred. Independent review remains next.
+
+
+#### Jar MODEL-01 ownership correction — 2026-10-20
+
+**Review decision:** Fresh independent review `agent://JarFreshFinalReview` reported one actionable finding: the Hole-level `updateJarRupieValue` helper calculated Jar-owned behavior, stored duplicate result state on `Hole`, and prepared collectible-local value state. The reviewer otherwise found no functional regression in the selected eight Jar refinements. Address only this finding; preserve accepted behavior and late after-stamps timing.
+
+**Correction:** `Jar.prepareRupieValue` now owns the ordered formula, calculates all Jar collectible contributions, and stores one calculated result at `Jar.rupieValue`. The late `updateHolePresentation` hook only gathers named numeric dependencies and calls the Jar method. Removed `Hole.jarRupieValue`, the external formula helper, and duplicate `JarBonus.rupieValue`. Description methods receive the current Jar value as a required numeric input; the page and tests read `Jar.rupieValue`. Formula operand order, display formatting, static descriptions, players binding, and `ownedTypeCount` remain unchanged.
+
+**LSP limitation and consumer map:** `read xd://lsp` reported `No such tool: xd://lsp`; mounted devices were `ast_edit`, `debug`, `github`, and `generate_image`. `grep` exhaustively mapped result/helper usage across `data`, `components`, and `tests`: the Hole field/helper had only the late hook and Rupie-value test; descriptions were rendered only in `components/world-5/hole/part4Caverns.tsx`, with direct Jar description tests in `tests/domains/hole/part5-state.test.ts`. All mapped consumers now use the Jar-owned result or required numeric description argument. No stale alias or duplicate result remains.
+
+**Changed-behavior checks:** `yarn test tests/domains/hole/part5-state.test.ts -t Jar` passed all 11 selected Jar tests (25 skipped), including the native Rupie result with configured tolerance `0` and exact prepared-operand comparisons. `yarn ui:run .ui-verification/jar-rupie-ownership.cjs` passed on normal `latest.json` account processing. The actual `/world-5/hole` page rendered Jar production cards with `120/120` occupancy, saved counts and quantities, and the Collectibles table showed `Current Rupie Value:31.9B`. Inspected screenshots `.ui-verification/runs/2026-10-20T06-15-58-321Z-92837/jar-production-cards.png` and `jar-collectible-value.png`. Browser output retained previously observed hydration, NitroPay `document.browsingTopics()`, identity-provider CORS, failed-resource, and 403 errors; no Jar-specific error appeared. An earlier scenario attempt timed out because it omitted navigation through Caverns to Jars; corrected scenario passed. Its temporary harness was removed. No game action or save write occurred. No build, lint, formatter, or commit was run.
+
+**Keeper audit:** Changed only `jar.tsx`, `hole.tsx`, the Jar collectible rendering call, its domain tests, and this handoff. Preserved `updateHolePresentation`'s `players` binding and `Jar.ownedTypeCount`; no keeper declaration was removed. Remaining selected outcomes, test extraction/config/result evidence, and prior accepted work remain unchanged.
+
+#### Required Jar description argument — 2026-10-20
+
+**Fresh review finding:** `agent://JarFinalOwnershipReview` found the test loop at `tests/domains/hole/part5-state.test.ts:373` calling `JarBonus.getDescription()` without required `Jar.rupieValue`. This could format the Abnormal Rupie value from `undefined` and produced TS2554. No production or UI defect was reported.
+
+**Decision:** Removed only that loop assertion. It checked marker absence for every collectible, not a consumer-visible contract; supplying an arbitrary value would repin an incidental assertion. The existing tests retain source descriptions and numeric descriptions, and assert Abnormal Rupie's owned and first-discovery descriptions contain prepared `Current Rupie Value:31.9B` and omit the `$` marker. The actual UI still passes `jar.rupieValue` to both description methods.
+
+**Caller audit:** LSP remained unavailable (`No such tool: xd://lsp`). Repository search confirmed all Jar description consumers: the UI uses `jar.rupieValue` for owned and first-discovery descriptions; the prepared-state test passes `hole.jar.rupieValue`; other direct Jar description tests pass numeric `0`. No required Jar description call omits its numeric argument.
+
+**Verification:** `yarn test tests/domains/hole/part5-state.test.ts -t Jar` passed 1 suite / 11 tests (25 skipped). `yarn tsc --noEmit --pretty false` reported no diagnostics in the changed test file or selected Hole/Jar files. It exited 2 on existing diagnostics in `app/world-7/minehead/content.tsx` (`MineheadSection` missing, lines 236/251), `components/base/RoundedShadowBox.tsx` (theme `global`), `components/world-7/spelunking/spelunkingPart2.tsx` (theme `text`/`global`), `spelunkingPart3.tsx` (possibly undefined theme fields), and `data/domain/world-7/clamworks.tsx` (possibly undefined numeric arguments). These are unrelated limits; no UI behavior changed, so prior actual-page proof remains applicable. No commit occurred.
+
+#### Jar final independent review and acceptance — 2026-10-20
+
+**Independent review:** `agent://JarAcceptanceGateReview` returned `correct` with no findings (`findings: []`). The reviewer checked the eight approved outcomes against the implementation, domain tests and native extraction evidence, shared-table consumers, actual Sushi reference, and retained Jar production and controlled level-zero screenshots. No concrete regression, scope expansion, invented description, or unnecessary safeguard remained.
+
+**Acceptance:** The supervisor accepted the end-to-end Jar result and its stated check limits. This authorizes a local commit of only the accepted Part 5 Jar refinements. Prior accepted Part 5 work remains the baseline; unrelated concurrent changes are excluded.
+
+**Review limits:** The independent reviewer did not rerun browser checks or tests. Fresh runtime/browser checks were not part of this acceptance step. Direct Jar-specific IdleonToolbox content comparison remains unavailable; review used the approved player-facing direction and actual Sushi panel comparison. Retained screenshots provide the recorded production and controlled level-zero rendering evidence. The previously recorded focused Jar tests passed 11/11; the full Part 5 suite remains 35/36 due solely to the Gambit boundary assertion outside the Jar diff. Existing unrelated Minehead, theme, Clamworks, and browser-console issues, plus unavailable LSP references, remain outside this accepted Jar scope. No acceptance-stage tests, build, lint, formatter, or browser checks were run.

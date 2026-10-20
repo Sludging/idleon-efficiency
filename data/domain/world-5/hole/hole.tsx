@@ -2162,8 +2162,8 @@ export const updateHole = (data: Map<string, any>) => {
  const stampBonus = getStampBonusForKey(stamps, "CavernRes");
  hole.well.prepare(hole, hole.savedGemShopBucketPurchase, stampBonus, gaming.getCglunkoBonus());
  hole.resourceCavrens.prepare(hole.getResourceRequirementReduction());
-
 }
+
 
 export const updateHoleStudyEffects = (data: Map<string, any>): void => {
  const hole = data.get("hole") as Hole;
@@ -2177,6 +2177,20 @@ export const updateHoleUpgradeEffects = (data: Map<string, any>): void => {
 
 export const updateHolePresentation = (data: Map<string, any>): void => {
  const hole = data.get("hole") as Hole;
+ const stampGroups = data.get("stamps") as Stamp[][];
+ hole.jar.prepareRupieValue({
+  schematicBonus62: hole.getSchematicBonus(62, 1),
+  schematicBonus65: hole.getSchematicBonus(65, 2),
+  schematicBonus68: hole.getSchematicBonus(68, 4),
+  earlyExplorerExpUpgrade: hole.earlyExplorerExpUpgrade,
+  lampBonus99: hole.lamp.getBonus(true),
+  wisdomMonumentBonus: hole.getMonumentBonus("Wisdom", 1),
+  measurementBonus10: hole.measurements[10].effectiveBenefit,
+  measurementBonus14: hole.measurements[14].effectiveBenefit,
+  evertreeMultiplier: hole.schematics[80].getIntrinsicBonus()!,
+  stampBonus: getStampBonusForKey(stampGroups, "CavernRes"),
+  coveUpgrade14Bonus: hole.cove.upgrades[14].getBonus(),
+ });
  const players = data.get("players") as Player[];
  const statues = data.get("statues") as PlayerStatues[];
  const storage = data.get("storage") as Storage;

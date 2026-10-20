@@ -1,4 +1,4 @@
-import { Box, CheckBox, DataTable, Text, TextInput, ThemeContext, Toolbar } from "grommet";
+import { Box, CheckBox, Text, ThemeContext } from "grommet";
 import type { ReactNode } from "react";
 import { useContext, useState } from "react";
 import { normalizeColor } from "grommet/utils";
@@ -13,8 +13,10 @@ import { Item } from "../../../data/domain/items";
 import { AtomCollider } from "../../../data/domain/world-3/construction/atomCollider";
 import type { ImageData } from "../../../data/domain/imageData";
 import type { Hole } from "../../../data/domain/world-5/hole/hole";
-import { getCoinsArray, notateNumber, toTime } from "../../../data/utility";
+import { commaNotation, getCoinsArray, notateNumber, toTime } from "../../../data/utility";
 
+import { UpgradeTable } from "../../account/shared/UpgradeTable";
+import type { FilterOptions } from "../../account/shared/UpgradeTableFilters";
 import { CavernMetricStrip, CavernStudySummary } from "./cavernLayout";
 
 function value(amount: number | null, suffix = ""): string {
@@ -54,7 +56,12 @@ function JarView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => voi
     const jar = hole.jar;
     const study = hole.studies[10];
     const theme = useContext(ThemeContext);
-    const [collectibleSearch, setCollectibleSearch] = useState("");
+    const [collectibleFilters, setCollectibleFilters] = useState<FilterOptions>({
+        hideLocked: false,
+        hideMaxed: false,
+        searchText: "",
+        sortBy: "default"
+    });
     const [selectedTab, setSelectedTab] = useState<"Jar types" | "Collectibles">("Jar types");
     const [showAll, setShowAll] = useState(false);
     const nextTypeCostImage = jar.ownedTypeCount < jar.holdings.length
@@ -70,23 +77,26 @@ function JarView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => voi
                 : null;
             return { type, producing, cost };
         });
-    const collectibleData = jar.jarBonuses.map(bonus => {
-        const level = bonus.level;
-        const effectText = level === 0
-            ? `First-discovery effect · ${bonus.getFirstDiscoveryDescription()}`
-            : bonus.getDescription();
-        return {
-            image: bonus.getImageData(),
-            name: bonus.data.name.replace(/_/g, " "),
-            level: level === 0 ? "Potential" : `Owned · Lv. ${level} · ${level - 1} enchants`,
-            effect: effectText,
-        };
-    });
-    const collectibleQuery = collectibleSearch.trim().toLowerCase();
-    const visibleCollectibles = collectibleQuery === ""
-        ? collectibleData
-        : collectibleData.filter(({ name, effect }) => `${name} ${effect}`.toLowerCase().includes(collectibleQuery));
-
+    const collectibleData = jar.jarBonuses.map((bonus, index) => ({
+        id: index,
+        bonus,
+        level: bonus.level,
+        effect: bonus.level === 0
+            ? bonus.getFirstDiscoveryDescription(jar.rupieValue)
+            : bonus.getDescription(jar.rupieValue),
+        name: bonus.data.name.replace(/_/g, " ")
+    }));
+    const collectibleQuery = collectibleFilters.searchText.trim().toLocaleLowerCase();
+    const visibleCollectibles = collectibleData
+        .filter(({ name, effect }) => !collectibleQuery || `${name} ${effect}`.toLocaleLowerCase().includes(collectibleQuery))
+        .sort((left, right) => {
+            const comparison = collectibleFilters.sortBy === "level-asc"
+                ? left.level - right.level
+                : collectibleFilters.sortBy === "level-desc"
+                    ? right.level - left.level
+                    : 0;
+            return comparison || left.id - right.id;
+        });
     return <Box gap="medium" data-testid="hole-jars-details">
         <Section title="Jar holdings">
             <Box direction="row" gap="small" wrap data-testid="jar-wallets">
@@ -124,6 +134,9 @@ function JarView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => voi
                         label={<Text size="small">Show all</Text>}
                         onChange={event => setShowAll(event.target.checked)}
                     />
+                    <Text size="xsmall">
+                        Board occupancy: {jar.boardCount}/{jar.boardCapacity} jars
+                    </Text>
                     {jarTypeCards.length === 0
                         ? <Text size="small" color="accent-2">No Jar types producing.</Text>
                         : <Box style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: "12px" }}>
@@ -144,6 +157,8 @@ function JarView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => voi
                                         <Box gap="xxsmall" style={{ minWidth: 0 }}>
                                             <Text size="small" weight={500}>{type.data.name.replace(/_/g, " ")}</Text>
                                             <Text size="xsmall">{`${notateNumber(type.jarsPerHour)} jars/hr`}</Text>
+                                            <Text size="xsmall">On board: {type.boardCount}</Text>
+                                            <Text size="xsmall">Quantity: {commaNotation(type.quantity)}</Text>
                                             {producing && <Text size="xsmall" color="brand">Producing</Text>}
                                         </Box>
                                     </Box>
@@ -159,34 +174,50 @@ function JarView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => voi
                         </Box>}
                 </Section>
                 : <Section title="Collectibles">
-                    <Toolbar>
-                        <TextInput
-                            aria-label="Search collectibles"
-                            placeholder="Search name or effect"
-                            value={collectibleSearch}
-                            onChange={event => setCollectibleSearch(event.target.value)}
-                        />
-                    </Toolbar>
-                    <DataTable data={visibleCollectibles} primaryKey="name" columns={[
-                        {
-                            property: "image",
-                            header: "Image",
-                            render: (data: typeof collectibleData[number]) => <IconImage data={data.image} scale={0.7} />,
-                        },
-                        {
-                            property: "name",
-                            header: "Collectible",
-                        },
-                        {
-                            property: "level",
-                            header: "Level / enchantment",
-                        },
-                        {
-                            property: "effect",
-                            header: "Effect",
-                            render: (data: typeof collectibleData[number]) => <Text size="xsmall" style={{ whiteSpace: "pre-line" }}>{data.effect}</Text>,
-                        },
-                    ]} />
+                    <UpgradeTable
+                        tableName="Jar collectibles"
+                        columns={[
+                            {
+                                property: "name",
+                                header: "Collectible",
+                                render: (row: typeof collectibleData[number]) => (
+                                    <Box direction="row" gap="small" align="center" style={{ opacity: row.level === 0 ? 0.65 : 1, minWidth: "180px" }}>
+                                        <IconImage data={row.bonus.getImageData()} scale={0.5} />
+                                        <Text size="xsmall">{row.name}</Text>
+                                    </Box>
+                                )
+                            },
+                            {
+                                property: "level",
+                                header: "Level",
+                                render: (row: typeof collectibleData[number]) => (
+                                    <Text size="xsmall" style={{ opacity: row.level === 0 ? 0.65 : 1 }}>
+                                        {row.level}
+                                    </Text>
+                                )
+                            },
+                            {
+                                property: "effect",
+                                header: "Effect",
+                                render: (row: typeof collectibleData[number]) => (
+                                    <Text size="xsmall" style={{ whiteSpace: "pre-line" }}>{row.effect}</Text>
+                                )
+                            }
+                        ]}
+                        data={visibleCollectibles}
+                        primaryKey="id"
+                        filters={collectibleFilters}
+                        onFiltersChange={setCollectibleFilters}
+                        sortOptions={[
+                            { label: "In-game order", value: "default" },
+                            { label: "Level ascending", value: "level-asc" },
+                            { label: "Level descending", value: "level-desc" }
+                        ]}
+                        searchPlaceholder="Search collectible or effect..."
+                        emptyMessage="No collectibles match this search."
+                        showLockedAndMaxedFilters={false}
+                        variant="panel"
+                    />
                 </Section>}
         </Box>
         <CavernStudySummary study={study} onOpenStudies={onOpenStudies} />
