@@ -1,7 +1,8 @@
-import { Box, CheckBox, Text, ThemeContext } from "grommet";
+import { Box, CheckBox, DataTable, Select, Text, ThemeContext } from "grommet";
 import type { ReactNode } from "react";
 import { useContext, useState } from "react";
 import { normalizeColor } from "grommet/utils";
+import DataRow from "../../base/DataRow";
 import IconImage from "../../base/IconImage";
 import RoundedShadowBox from "../../base/RoundedShadowBox";
 import TextAndLabel from "../../base/TextAndLabel";
@@ -26,6 +27,9 @@ function value(amount: number | null, suffix = ""): string {
 function exact(amount: number | null, suffix = ""): string {
     return amount === null ? "Unavailable" : `${amount.toLocaleString("en-US", { maximumFractionDigits: 20 })}${suffix}`;
 }
+function percentage(amount: number): string {
+    return `${new Intl.NumberFormat("en-US", { maximumFractionDigits: 3 }).format(amount * 100)}%`;
+}
 
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
@@ -38,6 +42,10 @@ function resourceImage(hole: Hole, name: string): ImageData | undefined {
     if (name === "Coins") return Item.getImageData("Coins1");
     if (name === "Turquoise Rupie") return hole.currencies[25].getImageData() ?? undefined;
     return hole.currencies.find(entry => entry.data.name === name)?.getImageData() ?? undefined;
+}
+function fountainCurrencyImage(hole: Hole, index: number): ImageData | undefined {
+    if (index === 0) return { location: "HoleFountainCoin0", width: 39, height: 32 };
+    return hole.currencies[30 + index]?.getImageData() ?? undefined;
 }
 
 function GameCard({ title, image, children, testId, inactive = false, headerRight }: { title: string; image?: ImageData; children: ReactNode; testId?: string; inactive?: boolean; headerRight?: ReactNode }) {
@@ -227,133 +235,163 @@ function JarView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => voi
 
 function FountainView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => void }) {
     const fountain = hole.fountain;
-    const [page, setPage] = useState<"Regular" | "Yellow" | "Green">("Regular");
-    const pageIndex = ["Regular", "Yellow", "Green"].indexOf(page);
+    const [filters, setFilters] = useState<FilterOptions>({
+        hideLocked: false,
+        hideMaxed: false,
+        searchText: "",
+        sortBy: "default",
+    });
+    const [color, setColor] = useState<"All" | "Regular" | "Yellow" | "Green">("All");
+    const [tab, setTab] = useState<"Overview" | "Upgrades">("Overview");
     const pageNames = ["Regular", "Yellow", "Green"] as const;
     const study = hole.studies[15];
     const opalCost = fountain.getOpalCost();
-    const opalAffordable = fountain.canAffordOpal();
-    const royalChance = fountain.getRoyalChance();
-    const duckChance = fountain.getDuckChance();
-    const currencyName = (id: number) => {
-        const currency = fountain.findCurrency(id);
-        return currency === undefined ? `Currency ${id} unavailable` : currency.data.name.replace(/_/g, " ");
-    };
+    const opalCurrencyImage = fountainCurrencyImage(hole, opalCost.currencyId);
+    const query = filters.searchText.trim().toLocaleLowerCase();
+    const upgrades = fountain.upgrades
+        .filter(upgrade => color === "All" || upgrade.data.waterIndex === pageNames.indexOf(color))
+        .filter(upgrade => {
+            const effect = upgrade.getDescription(fountain) ?? "";
+            return !query || `${upgrade.data.name} ${effect}`.toLocaleLowerCase().includes(query);
+        });
+    const currencyColumns = [
+        {
+            property: "currency",
+            header: "Resource",
+            render: (currency: typeof fountain.currencies[number]) => {
+                const desire = fountain.desireCurrencyId === currency.index;
+                return <Box direction="row" gap="small" align="center"
+                    data-desire={String(desire)}
+                    style={desire ? { border: "1px solid #0376E3", padding: "4px" } : { padding: "4px" }}>
+                    <IconImage data={fountainCurrencyImage(hole, currency.index)} scale={0.7} />
+                    <Text size="xsmall" weight={desire ? 700 : undefined}>{currency.data.name.replace(/_/g, " ")}</Text>
+                </Box>;
+            }
+        },
+        { property: "balance", header: "Balance", render: (currency: typeof fountain.currencies[number]) => <Text size="xsmall">{value(currency.wallet)}</Text> },
+        { property: "collection", header: "On collection", render: (currency: typeof fountain.currencies[number]) => <Text size="xsmall">{value(fountain.getCollectionValue(currency.index))}</Text> }
+    ];
 
     return <Box gap="medium" data-testid="hole-fountain-details">
-        <Section title="Wallets and pending stacks">
-            <CavernMetricStrip metrics={[
-                { label: "Pending items", value: value(fountain.getStackItemCount()) },
-                { label: "Occupied / capacity", value: `${value(fountain.getOccupiedSpaceCount())} / ${value(fountain.getCapacity())}` },
-                { label: "Open positions", value: value(fountain.getAvailableSpaceCount()) },
-                { label: "Effective capacity", value: `${value(fountain.getCapacity())} positions · ${value(fountain.getMaximumStackSize())} items each` },
-                { label: "Pending value", value: value(fountain.getPendingStackValue()) },
-            ]} />
-            <Box direction="row" gap="small" wrap data-testid="fountain-wallets">
-                {fountain.currencies.map(currency => {
-                    const luckyCoinChance = fountain.getLuckyCoinChance(currency.index);
-                    return <Box key={currency.index} gap="xxsmall" pad="xsmall" background="dark-1" data-testid={`fountain-wallet-${currency.index}`}>
-                        <Box direction="row" gap="xsmall" align="center">
-                            <IconImage data={Item.getImageData(currency.data.icon)} scale={0.7} />
-                            <Text size="xsmall">{currency.data.name.replace(/_/g, " ")}: {value(currency.wallet)}</Text>
-                        </Box>
-                        <Text size="xsmall" color="accent-2">Lucky coins {value(currency.luckyCoins)}</Text>
-                        <Text size="xsmall" color="accent-2">Value {value(fountain.getCurrencyValue(currency.index))}</Text>
-                        <Text size="xsmall" color="accent-2">Overflow {value(fountain.getOverflowValue(currency.index))}</Text>
-                        <Text size="xsmall" color="accent-2">Lucky chance {value(luckyCoinChance * 100, "%")}</Text>
-                    </Box>;
-                })}
-            </Box>
-            <Box direction="row" gap="small" wrap align="center">
-                <Text size="xsmall">Desire: {fountain.desireCurrencyId === null ? "None selected" : currencyName(fountain.desireCurrencyId)}</Text>
-                <Text size="xsmall">Excluded from generation: {fountain.excludedGenerationCurrencyIds === null ? "No list saved" : fountain.excludedGenerationCurrencyIds.map(currencyName).join(", ") || "None"}</Text>
-                <Text size="xsmall">Value exponent: {value(fountain.currencyValueExponent)}</Text>
-            </Box>
-            <Box gap="xsmall" data-testid="fountain-stacks">
-                {fountain.stacks.map(stack => {
-                    const groupedItems = new Map<string, { currencyId: number; value: number | null; count: number }>();
-                    stack.items.forEach(item => {
-                        const key = JSON.stringify([item.currencyId, item.value]);
-                        const group = groupedItems.get(key);
-                        if (group) {
-                            group.count += 1;
-                        } else {
-                            groupedItems.set(key, { ...item, count: 1 });
+        <ContentTabs
+            options={[{ value: "Overview", label: "Overview" }, { value: "Upgrades", label: "Upgrades" }]}
+            value={tab}
+            onChange={setTab}
+        />
+        {tab === "Overview" && <Box gap="medium">
+            <Section title="Resources">
+                <Box data-testid="fountain-wallets" style={{ overflowX: "auto" }}>
+                    <DataTable
+                        aria-label="Fountain resources"
+                        columns={currencyColumns}
+                        data={fountain.currencies}
+                        primaryKey="index"
+                        step={fountain.currencies.length}
+                    />
+                </Box>
+            </Section>
+            <Section title="Collection">
+                <Box direction="row" gap="small" wrap>
+                    <Text size="xsmall">Occupied / capacity: {value(fountain.getOccupiedSpaceCount())} / {value(fountain.getCapacity())}</Text>
+                    <Text size="xsmall">Royal occupied stacks: {fountain.stacks.filter(stack => stack.items.length > 0 && stack.royal).length}</Text>
+                    <Text size="xsmall">Royal chance: {percentage(fountain.getRoyalChance())}</Text>
+                    <Text size="xsmall">Duck chance: {percentage(fountain.getDuckChance())}</Text>
+                </Box>
+            </Section>
+            <Section title="Marbles">
+                <Box direction="row" gap="xsmall" align="center">
+                    <IconImage data={{ location: "HoleFountainMarble", width: 30, height: 23 }} scale={0.45} />
+                    <Text size="xsmall">{value(fountain.marbleCount)}</Text>
+                    <Text size="xsmall" color="accent-2">Yield: {value(fountain.getMarbleYield())}</Text>
+                </Box>
+            </Section>
+            <Section title="Opals">
+                <Box direction="row" gap="xsmall" align="center">
+                    <IconImage data={Item.getImageData("Opal")} scale={0.65} />
+                    <Text size="xsmall">Earned: {value(fountain.opalProgress)}</Text>
+                    <Text size="xsmall" color="accent-2">Next cost:</Text>
+                    {opalCurrencyImage
+                        ? <IconImage data={opalCurrencyImage} scale={0.65} />
+                        : <Text size="xsmall">Currency unavailable</Text>}
+                    <Text size="xsmall">{notateNumber(opalCost.amount)}</Text>
+                </Box>
+            </Section>
+        </Box>}
+        {tab === "Upgrades" && <Section title="Upgrades">
+            <UpgradeTable
+                tableName="Fountain upgrades"
+                columns={[
+                    {
+                        property: "name",
+                        header: "Upgrade",
+                        render: (row: typeof upgrades[number]) => {
+                            const unlocked = row.isUnlocked(fountain.upgrades);
+                            const prerequisite = row.data.prerequisiteIndex < 0 ? undefined
+                                : fountain.upgrades.find(upgrade => upgrade.data.waterIndex === row.data.waterIndex
+                                    && upgrade.data.index === row.data.prerequisiteIndex);
+                            return <Box gap="xxsmall" style={{ opacity: unlocked ? 1 : 0.6, minWidth: "190px" }}>
+                                <Box direction="row" gap="small" align="center">
+                                    <IconImage data={{ location: `HoleFountainUpg${row.data.waterIndex}_${row.data.index}`, width: 53, height: 53 }} scale={0.55} />
+                                    <Text size="xsmall">{row.data.name.replace(/_/g, " ")}</Text>
+                                </Box>
+                                {!unlocked && prerequisite && <Text size="xsmall">{prerequisite.data.name.replace(/_/g, " ")}</Text>}
+                            </Box>;
                         }
-                    });
-                    return <Box key={stack.space} direction="row" gap="small" align="center" wrap pad="xsmall" background="dark-1" data-testid={`fountain-stack-${stack.space}`}>
-                        <Text size="xsmall" weight={500}>Position {stack.space + 1}</Text>
-                        <Text size="xsmall">{stack.items.length} items</Text>
-                        <Text size="xsmall">Royal: {stack.royal ? "Yes" : "No"}</Text>
-                        <Text size="xsmall">Snapshot value: {value(stack.value)}</Text>
-                        <Box direction="row" gap="xsmall" wrap>{Array.from(groupedItems.values(), (item, index) =>
-                            <Text key={index} size="xsmall" data-testid={`fountain-stack-${stack.space}-group-${index}`} data-currency-id={item.currencyId} data-value={item.value === null ? "unavailable" : item.value} data-count={item.count}>{item.count} × {currencyName(item.currencyId)}: {value(item.value)} each</Text>)}</Box>
-                    </Box>;
-                })}
-            </Box>
-        </Section>
-
-        <Section title="Fountain bars and Opals">
-            <Box direction="row" gap="small" wrap>
-                {([0, 1, 2] as const).map(barIndex => {
-                    const progress = fountain.barProgress[barIndex];
-                    return <Box key={barIndex} gap="xxsmall" pad="small" background="dark-1" data-testid={`fountain-bar-${barIndex}`}>
-                        <Text size="small" weight={500}>Bar {barIndex + 1}</Text>
-                        <Text size="xsmall">Progress: {toTime(progress)}</Text>
-                        <Text size="xsmall">Required: {toTime(fountain.getBarRequirement(barIndex))}</Text>
-                        <Text size="xsmall">Rate: {value(fountain.getEffectiveBarSpeed(barIndex), "×")}</Text>
-                        <Text size="xsmall">Access: {fountain.getBarUnlocked(barIndex) ? "Unlocked" : "Locked"}</Text>
-                    </Box>;
-                })}
-            </Box>
-            <Box direction="row" gap="small" wrap align="center">
-                <Text size="small">Marbles: {value(fountain.marbleCount)}</Text>
-                <Text size="small">Marble yield: {value(fountain.getMarbleYield())}</Text>
-                <Text size="small">Opals earned: {value(fountain.opalProgress)}</Text>
-                <Text size="small">Next Opal: {`${notateNumber(opalCost.amount)} ${currencyName(opalCost.currencyId)}`}</Text>
-                <Text size="xsmall" color={opalAffordable ? "status-ok" : "critical"}>{opalAffordable ? "Affordable" : "Not affordable"}</Text>
-            </Box>
-            <Box direction="row" gap="small" wrap>
-                <Text size="xsmall">Royal chance: {value(royalChance * 100, "%")}</Text>
-                <Text size="xsmall">Duck chance: {value(duckChance * 100, "%")}</Text>
-                <Text size="xsmall">Ducks: {value(fountain.duckCount)}</Text>
-            </Box>
-            <Text size="xsmall" color="accent-2">Pending value is a saved snapshot. Wallets are spendable balances; current values do not predict future generation or rewards.</Text>
-        </Section>
-
-        <Section title="Upgrades and marbleization">
-            <ContentTabs<typeof page> options={pageNames.map(name => ({ value: name, label: name }))} value={page} onChange={setPage} />
-            <Box style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: "8px" }} data-testid={`fountain-upgrades-${page.toLowerCase()}`}>
-                {fountain.upgrades.filter(upgrade => upgrade.data.waterIndex === pageIndex).map(upgrade => {
-                    const cost = upgrade.getCost();
-                    const wallet = fountain.wallets[upgrade.data.costCurrencyIndex];
-                    const affordable = fountain.canAffordUpgrade(upgrade.data.waterIndex, upgrade.data.index);
-                    const shortfall = Math.max(0, cost - wallet);
-                    const unlocked = upgrade.isUnlocked(fountain.upgrades);
-                    const description = upgrade.getDescription(fountain);
-                    const prerequisite = upgrade.data.prerequisiteIndex < 0 ? "None"
-                        : `Upgrade ${upgrade.data.prerequisiteIndex + 1}: ${unlocked ? "Met" : "Not met"}`;
-                    const marbleCost = fountain.getMarbleizeCost(upgrade.data.waterIndex, upgrade.data.index);
-                    const currencyImage = resourceImage(hole, currencyName(upgrade.data.costCurrencyIndex));
-                    return <GameCard key={upgrade.index} title={`${upgrade.data.index + 1}. ${upgrade.data.name.replace(/_/g, " ")}`} testId={`fountain-upgrade-${pageIndex}-${upgrade.data.index}`}
-                        inactive={upgrade.level === 0 || unlocked === false}
-                        headerRight={<Text size="xsmall">Lv. {value(upgrade.level)}</Text>}>
-                        {description !== null && <Text size="xsmall" style={{ whiteSpace: "pre-line" }}>{description}</Text>}
-                        <Text size="xsmall">Prerequisite: {prerequisite}</Text>
-                        <Box direction="row" gap="xsmall" align="center" wrap>
-                            {currencyImage && <IconImage data={currencyImage} scale={0.65} />}
-                            <Text size="xsmall" color={affordable ? "status-ok" : "critical"}>Cost / wallet: {value(cost)} / {value(wallet)}</Text>
-                            <Text size="xsmall">Shortfall: {value(shortfall)}</Text>
-                        </Box>
-                        <Box direction="row" gap="xsmall" align="center" wrap>
-                            <Text size="xsmall">Marbleization: {upgrade.data.marbleizeEligible ? `Lv. ${value(upgrade.marbleizationLevel)} · cost ${value(marbleCost)}` : "Not eligible"}</Text>
-                            <Text size="xsmall">Base level {value(upgrade.level)} · marbleized level {value(upgrade.marbleizationLevel)}</Text>
-                        </Box>
-                    </GameCard>;
-                })}
-            </Box>
-            <Text size="xsmall" color="accent-2">Effective capacity is capped at 16 positions and 50 items per position. Purchased capacity levels do not raise those caps.</Text>
-        </Section>
+                    },
+                    {
+                        property: "level",
+                        header: "Level",
+                        render: (row: typeof upgrades[number]) => <Text size="xsmall">{value(row.level)}</Text>
+                    },
+                    {
+                        property: "effect",
+                        header: "Effect",
+                        render: (row: typeof upgrades[number]) => {
+                            const description = row.getDescription(fountain);
+                            return <Text size="xsmall" style={{ whiteSpace: "pre-line" }}>{description ?? ""}</Text>;
+                        }
+                    },
+                    {
+                        property: "cost",
+                        header: "Cost",
+                        render: (row: typeof upgrades[number]) => {
+                            const currencyImage = fountainCurrencyImage(hole, row.data.costCurrencyIndex);
+                            return <Box direction="row" gap="xsmall" align="center" style={{ minWidth: "100px" }}>
+                                {currencyImage && <IconImage data={currencyImage} scale={0.65} />}
+                                <Text size="xsmall" color={fountain.canAffordUpgrade(row.data.waterIndex, row.data.index) ? "green-1" : undefined}>
+                                    {value(row.getCost())}
+                                </Text>
+                            </Box>;
+                        }
+                    },
+                    {
+                        property: "marbleization",
+                        header: "Marbleization",
+                        render: (row: typeof upgrades[number]) => row.data.marbleizeEligible
+                            ? <Box direction="row" gap="xsmall" align="center">
+                                <Text size="xsmall">Lv. {value(row.marbleizationLevel)}</Text>
+                                <IconImage data={{ location: "HoleFountainMarble", width: 30, height: 23 }} scale={0.4} />
+                                <Text size="xsmall" color={fountain.canAffordMarbleize(row.data.waterIndex, row.data.index) ? "green-1" : undefined}>
+                                    {value(fountain.getMarbleizeCost(row.data.waterIndex, row.data.index))}
+                                </Text>
+                            </Box>
+                            : <Text size="xsmall">—</Text>
+                    }
+                ]}
+                data={upgrades}
+                primaryKey="index"
+                filters={filters}
+                onFiltersChange={setFilters}
+                sortOptions={[{ label: "In-game order", value: "default" }]}
+                additionalFilters={<Box direction="row" gap="xsmall" align="center" data-testid="fountain-color-filter">
+                    <Text size="xsmall">Color</Text>
+                    <Select aria-label="Color filter" options={["All", ...pageNames]} value={color} onChange={({ option }) => setColor(option)} />
+                </Box>}
+                searchPlaceholder="Search Fountain upgrades..."
+                showLockedAndMaxedFilters={false}
+                variant="panel"
+            />
+        </Section>}
         <CavernStudySummary study={study} onOpenStudies={onOpenStudies} />
     </Box>;
 }

@@ -33,7 +33,6 @@ export interface FountainStack {
     space: number;
     items: FountainStackItem[];
     royal: boolean;
-    value: number | null;
 }
 
 export interface FountainModifiers {
@@ -286,7 +285,6 @@ export class Fountain {
             space,
             items: (currencyIds ?? []).map(currencyId => ({ currencyId: Number(currencyId), value: null })),
             royal: Number(royalFlags[space] ?? 0) !== 0,
-            value: null,
         }));
         const desireCurrencyId = holeData[11]?.[82];
         this.desireCurrencyId = desireCurrencyId == null ? null : Number(desireCurrencyId);
@@ -314,16 +312,9 @@ export class Fountain {
         this.modifiers = modifiers;
         this.duckCount = modifiers.duckCount;
         this.stacks.forEach(stack => {
-            let stackValue: number | null = 0;
             stack.items.forEach(item => {
                 item.value = this.getStackItemValue(item.currencyId, stack.royal, stack.items.length);
-                if (item.value === null) {
-                    stackValue = null;
-                } else if (stackValue !== null) {
-                    stackValue += item.value;
-                }
             });
-            stack.value = stackValue;
         });
     }
 
@@ -505,16 +496,22 @@ export class Fountain {
         return standardValue + royalValue;
     }
 
-    getPendingStackValue(): number | null {
+    getCollectionValue(currencyId: number): number | null {
         let total = 0;
         for (const stack of this.stacks) {
-            if (stack.value === null) {
-                return null;
+            for (const item of stack.items) {
+                if (item.currencyId !== currencyId) {
+                    continue;
+                }
+                if (item.value === null) {
+                    return null;
+                }
+                total += item.value;
             }
-            total += stack.value;
         }
         return total;
     }
+
 
     getRoyalChance(): number {
         return 0.0033333333333333335 * (1 + this.getBonus(1, 8) / 100);

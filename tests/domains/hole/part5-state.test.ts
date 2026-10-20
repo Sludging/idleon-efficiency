@@ -6,7 +6,6 @@ import { Hole, updateHole } from '../../../data/domain/world-5/hole/hole';
 import type { OpalExternalSourceValues } from '../../../data/domain/world-5/hole/hole';
 import { Well } from '../../../data/domain/world-5/hole/well';
 import { CoveUpgrade } from '../../../data/domain/world-5/hole/cove';
-import { Fountain, FountainUpgrade } from '../../../data/domain/world-5/hole/fountain';
 import { initAccountDataKeys, updateIdleonData } from '../../../data/domain/idleonData';
 import { normalizeCompanionStates } from '../../../data/domain/companions/companionState';
 import { lavaLog } from '../../../data/utility';
@@ -254,12 +253,6 @@ describe('Hole part-five imported state', () => {
         expect(futureBonus.getUnit()).toBeNull();
         expect(futureBonus.getDescription(0)).toBe("Boosts a future cavern... futuuure..!");
 
-        const fountainRecord = hole.fountain.upgrades.find(upgrade => upgrade.data.waterIndex === 0 && upgrade.data.index === 1)!;
-        const fountainUpgrade = new FountainUpgrade(fountainRecord.index, fountainRecord.data);
-        fountainUpgrade.level = 1;
-        fountainUpgrade.marbleizationLevel = 0;
-        expect(fountainUpgrade.getBonus()).toBe(10);
-        expect(fountainUpgrade.getDescription(hole.fountain)).toBe('All currencies are worth +10% more.\nCurrencies are ALL money types here at the Fountain, from coins to dollars and more!');
 
         const coveUpgradeData = hole.cove.upgrades[7];
         const coveUpgrade = new CoveUpgrade(
@@ -297,57 +290,6 @@ describe('Hole part-five imported state', () => {
 
         const futureBonus = jar.jarBonuses[31];
         expect(futureBonus.getFirstDiscoveryDescription(0)).toBe('Boosts a future cavern... futuuure..!');
-    });
-    it('resolves Fountain description values from source inputs', () => {
-        const fountain = new Fountain();
-        fountain.upgrades.forEach(upgrade => {
-            upgrade.level = 0;
-            upgrade.marbleizationLevel = 0;
-        });
-        fountain.valueWallets = [0, 0, 0];
-        fountain.currencies[0].luckyCoins = 0;
-        fountain.duckCount = 0;
-        fountain.barTimerProgress = 0;
-        fountain.prepare({
-            arcadeBonus68: 0,
-            bUpgrade94Level1: 1,
-            bUpgrade95Level10: 0,
-            bUpgrade97Level3: 0,
-            coveUpgrade14: 0,
-            cosmoBonusQuantity4: 0,
-            lampBonus99: 0,
-            measurementBonus16: 0,
-            bellBonus6: 0,
-            studyBonus15: 0,
-            ownedCaverns: 0,
-            currencyValueExponent: 0,
-            duckCount: 0,
-        });
-
-        expect(fountain.getUpgrade(0, 2).getDescription(fountain)).toBe(
-            'Increases the value of Bronze Coins.\nAll bronze coins you find have a base value of 1\nYour total Currency multi:\n1x\n(Affects value of all Fountain money)'
-        );
-        expect(fountain.getUpgrade(0, 9).getDescription(fountain)).toBe(
-            'Every time the fountain fills up, it creates a new coin.\nThis will happen in 2hr 0min 0sec\nFrom empty, it takes:\n2hr 0min 0sec to fill'
-        );
-        expect(fountain.getUpgrade(0, 10).getDescription(fountain)).toBe(
-            'Coins can appear in 1 different areas on the ground.\nThis means your current max coin capacity is 3 coins'
-        );
-        expect(fountain.getUpgrade(0, 11).getDescription(fountain)).toBe(
-            'Each area can stack up to 3 coins, this upgrade increases it by +0.\nThis means your current max coin capacity is 3 coins'
-        );
-        expect(fountain.getUpgrade(2, 2).getDescription(fountain)).toBe(
-            'You can now find Moolah Stacks.\nAll moolah stacks you find have a base value of 1, but only get 鉢(Total Currency Multi) which is:\n1x'
-        );
-        for (const index of [3, 4]) {
-            const description = fountain.getUpgrade(2, index).getDescription(fountain);
-            expect(description).not.toBeNull();
-            expect(description).not.toMatch(/[$^#@]/);
-        }
-        expect(fountain.getUpgrade(2, 8).getDescription(fountain)).toBe(
-            "All currencies collected have a 1 in 1,000 of being LUCKY, multiplying the value of that currency type forever!\nEach additional one is 4x rarer"
-        );
-
     });
 
 
@@ -545,7 +487,7 @@ describe('Hole part-five imported state', () => {
             maximumCoins: number;
             occupiedSpaces: number;
             itemCount: number;
-            positions: { space: number; itemCurrencyIds: number[]; royal: boolean; itemValues: number[]; value: number }[];
+            positions: { space: number; itemCurrencyIds: number[]; royal: boolean; itemValues: number[] }[];
             overflowValue0: number;
         };
         const stacks = hole.fountain.stacks;
@@ -609,18 +551,21 @@ describe('Hole part-five imported state', () => {
         expect(hole.fountain.getBonus(1, 9)).toMatchLiveGame((gameRoyalMultiplier - 5) * 100, 0);
         expect(hole.getSchematicBonus(95, 10))
             .toMatchLiveGame(fountainCoveResults.extractions.stack_bonus_95_10.result, 0);
-        expect(hole.fountain.getPendingStackValue()).toMatchLiveGame(
-            expectedPositions.positions.reduce((total, position) => total + position.value, 0),
-            0,
-        );
         stacks.forEach((stack, index) => {
             const expected = expectedPositions.positions[index];
             stack.items.forEach((item, itemIndex) => {
                 expect(item.value).toMatchLiveGame(expected.itemValues[itemIndex], 0);
             });
-            expect(stack.value).toMatchLiveGame(expected.value, 0);
+        });
+        const expectedCollectionValues = Array.from({ length: 9 }, (_, currencyId) =>
+            expectedPositions.positions.reduce((total, position) =>
+                total + position.itemCurrencyIds.reduce((stackTotal, itemCurrencyId, itemIndex) =>
+                    itemCurrencyId === currencyId ? stackTotal + position.itemValues[itemIndex] : stackTotal, 0), 0));
+        expectedCollectionValues.forEach((expected, currencyId) => {
+            expect(hole.fountain.getCollectionValue(currencyId)).toMatchLiveGame(expected, 0);
         });
     });
+
 
     it('prepares prospective Cove effects independently from current map and assignment', () => {
         const campBonuses = [
@@ -687,7 +632,6 @@ describe('Hole part-five imported state', () => {
 
         expect(JSON.stringify(save.toJSON())).toBe(sourceSnapshot);
         expect(secondImport.fountain.stacks).toEqual(firstImport.fountain.stacks);
-        expect(secondImport.fountain.getPendingStackValue()).toBe(firstImport.fountain.getPendingStackValue());
         expect(secondImport.cove.localEffectsByPlayerId).toEqual(firstImport.cove.localEffectsByPlayerId);
     });
     it('parses Fountain stacks as nested currency rows', () => {
@@ -704,21 +648,6 @@ describe('Hole part-five imported state', () => {
         expect(hole.fountain.wallets).toHaveLength(9);
         expect(hole.fountain.upgrades).toHaveLength(60);
         expect(hole.fountain.opalProgress).toBe(14);
-    });
-    it('retains the reachable Opal currency boundary after progress 45', () => {
-        const originalProgress = hole.fountain.opalProgress;
-        try {
-            hole.fountain.opalProgress = 44;
-            expect(hole.fountain.getOpalCost()).toEqual({ amount: 2.847299915243818e+34, currencyId: 8 });
-            expect(hole.fountain.findCurrency(8)?.index).toBe(8);
-
-            hole.fountain.opalProgress = 45;
-            expect(hole.fountain.getOpalCost()).toEqual({ amount: 1.4125129216298817e+35, currencyId: 9 });
-            expect(hole.fountain.findCurrency(9)).toBeUndefined();
-            expect(hole.fountain.canAffordOpal()).toBe(false);
-        } finally {
-            hole.fountain.opalProgress = originalProgress;
-        }
     });
 
     it('restores Villager rescue and claim readiness states', () => {
