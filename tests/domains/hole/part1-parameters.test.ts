@@ -36,7 +36,7 @@ function statueBonus(data: Map<string, any>): number {
  return statues.statues.find(statue => statue.index === 28)!.getBonus(player);
 }
 
-const parameters: { key: string; description: string; extract: (data: Map<string, any>, hole: Hole) => number }[] = [
+const parameters: { key: string; description: string; extract: (data: Map<string, any>, hole: Hole) => number | null }[] = [
  { key: 'compass_59', description: 'Compass Villager EXP', extract: (data, hole) => (data.get('compass') as Compass).getUpgradeBonus(59) },
  { key: 'legend_12', description: 'Legend talent Villager EXP', extract: (data, hole) => (data.get('legendTalents') as LegendTalents).getBonusFromIndex(12) },
  { key: 'pristine_21', description: 'Pristine Charm Villager EXP percentage', extract: (data, hole) => pristinePercent(data) },
@@ -84,7 +84,7 @@ const parameters: { key: string; description: string; extract: (data: Map<string
  { key: 'vault_73', description: 'Vault Villager EXP', extract: (data, hole) => (data.get('upgradeVault') as UpgradeVault).getBonusForId(73) },
  { key: 'study_stamp', description: 'Settled Study stamp', extract: (data, hole) => getStampBonusForKey(data.get('stamps') as Stamp[][], 'VillageStudy') },
  { key: 'compass_52', description: 'Compass Opal grant', extract: (data, hole) => (data.get('compass') as Compass).getUpgradeBonus(52) },
- { key: 'emperor_3', description: 'Emperor Opal input before refresh floor', extract: (data, hole) => (data.get('emperor') as Emperor).emperorBonuses[3].getBonus() },
+ { key: 'emperor_3', description: 'Emperor Opal input before refresh floor', extract: (data, hole) => (data.get('emperor') as Emperor).getEffectiveBonus(3) },
  { key: 'sushi_56', description: 'Settled Sushi Opal grant', extract: (data, hole) => (data.get('sushi') as SushiStation).getBonusFromIndex(56) },
  { key: 'least_investment', description: 'Least rescued-villager investment used by Equal Spread', extract: (data, hole) => hole.allocationEffects.leastUnlockedInvestment! },
  { key: 'caverns_owned', description: 'Released cavern count used by Study access, reset and role branch', extract: (data, hole) => Math.min(hole.studies.length, hole.villagers[0].level) },

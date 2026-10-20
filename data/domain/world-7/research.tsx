@@ -1548,7 +1548,7 @@ export const updateResearchDisplay = (data: Map<string, any>): ResearchGrid => {
       ] },
     researchPercentMultiplier(sushiExp.source, sushiExp.value, sushiExp.gate, sushiExp.reward),
     researchPercentMultiplier("The Hole: Researchy", hole.getResearchExpUpgradeBonus()),
-    researchPercentMultiplier(`The Hole Fountain: ${fountain.data.name}`, hole.fountain.getBonus(2, 16), undefined, {
+    researchPercentMultiplier(`The Hole Fountain: ${fountain.data.name}`, fountainResearchBonus, undefined, {
       value: fountain.data.bonusPerLevel, operation: "addPercent", unit: "EXP", basis: "per Fountain level before Marbleization",
       acquired: fountain.level > 0, active: fountain.level > 0,
     }),

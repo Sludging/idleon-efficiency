@@ -10,6 +10,7 @@ const currencyBonusIndexes = [
     [[1, 2], [0, 7]], [[1, 3], [1, 5]], [[1, 4], [1, 6]],
     [[2, 2], [1, 7]], [[2, 3], [2, 5]], [[2, 4], [2, 6]],
 ] as const;
+type FountainBarIndex = 0 | 1 | 2;
 
 function formatTimerDisplay(seconds: number): string {
     if (!(seconds >= 0)) {
@@ -31,42 +32,41 @@ export interface FountainStackItem {
 export interface FountainStack {
     space: number;
     items: FountainStackItem[];
-    royal: boolean | null;
+    royal: boolean;
     value: number | null;
 }
 
 export interface FountainModifiers {
     arcadeBonus68: number;
-    bUpgrade94Level1: number | null;
-    bUpgrade95Level10: number | null;
-    bUpgrade97Level3: number | null;
-    coveUpgrade14: number | null;
+    bUpgrade94Level1: number;
+    bUpgrade95Level10: number;
+    bUpgrade97Level3: number;
+    coveUpgrade14: number;
     cosmoBonusQuantity4: number;
-    lampBonus99: number | null;
-    measurementBonus16: number | null;
-    bellBonus6: number | null;
+    lampBonus99: number;
+    measurementBonus16: number;
+    bellBonus6: number;
     studyBonus15: number;
-    ownedCaverns: number | null;
-    currencyValueExponent: number | null;
-    duckCount: number | null;
+    ownedCaverns: number;
+    currencyValueExponent: number;
+    duckCount: number;
 }
 
 export interface FountainOpalCost {
     amount: number;
     currencyId: number;
-    available: boolean;
 }
 
 export class FountainCurrency {
-    wallet: number | null = null;
-    luckyCoins: number | null = null;
+    wallet: number = 0;
+    luckyCoins: number = 0;
 
     constructor(public index: number, public data: FountainCurrencyModel) { }
 }
 
 export class FountainUpgrade {
-    level: number | null = null;
-    marbleizationLevel: number | null = null;
+    level: number = 0;
+    marbleizationLevel: number = 0;
 
     constructor(public index: number, public data: FountainUpgradeModel) { }
 
@@ -74,28 +74,20 @@ export class FountainUpgrade {
         return data.map(d => new FountainUpgrade(d.index, d.data));
     }
 
-    getMarbleBonus(): number | null {
-        if (this.marbleizationLevel === null) {
-            return null;
-        }
+    getMarbleBonus(): number {
         return this.marbleizationLevel === 0 ? 1 : 1.5 + 0.5 * this.marbleizationLevel;
     }
 
     getDescription(fountain: Fountain): string | null {
         let description = this.data.description;
         const bonus = this.getBonus();
-        if (/[{}]/.test(description) && bonus === null) {
-            return null;
-        }
-        if (bonus !== null) {
-            description = description
-                .replace(/\{/g, commaNotation(bonus))
-                .replace(/\}/g, notateNumber(1 + bonus / 100, "MultiplierInfo").replace(/#/g, ""));
-        }
+        description = description
+            .replace(/\{/g, commaNotation(bonus))
+            .replace(/\}/g, notateNumber(1 + bonus / 100, "MultiplierInfo").replace(/#/g, ""));
 
         const currencyId = this.data.index - 2 + this.data.waterIndex * 3;
-        const replaceValue = (token: "$" | "^" | "#", value: number | null, format: (value: number) => string): boolean => {
-            if (value === null || !description.includes(token)) {
+        const replaceValue = (token: "$" | "^" | "#", value: number, format: (value: number) => string): boolean => {
+            if (!description.includes(token)) {
                 return false;
             }
             description = description.replace(token, format(value));
@@ -106,7 +98,7 @@ export class FountainUpgrade {
             fountain.getCurrencyBaseValue(currencyId),
             value => value < 1_000_000 ? commaNotation(value) : notateNumber(value, "Big")
         );
-        const replaceBarTimer = (token: "$" | "^" | "#", seconds: number | null): boolean => replaceValue(
+        const replaceBarTimer = (token: "$" | "^" | "#", seconds: number): boolean => replaceValue(
             token,
             seconds,
             formatTimerDisplay
@@ -128,14 +120,12 @@ export class FountainUpgrade {
                 if (this.data.index === 9) {
                     const speed = fountain.getBarSpeed(0);
                     const activeSpeed = fountain.getActiveBarSpeedMultiplier();
-                    if (speed === null || activeSpeed === null ||
-                        !replaceBarTimer("#", Math.max(0, fountain.getBarRequirement(0)) / speed)) {
+                    if (!replaceBarTimer("#", Math.max(0, fountain.getBarRequirement(0)) / speed)) {
                         return null;
                     }
                     const remaining = fountain.barTimerProgress;
-                    if (remaining === null ||
-                        !replaceBarTimer("$", Math.max(0, fountain.getBarRequirement(0) - remaining) /
-                            (speed * Math.max(1, activeSpeed)))) {
+                    if (!replaceBarTimer("$", Math.max(0, fountain.getBarRequirement(0) - remaining) /
+                        (speed * Math.max(1, activeSpeed)))) {
                         return null;
                     }
                 }
@@ -151,14 +141,11 @@ export class FountainUpgrade {
                 }
                 if (this.data.index === 12) {
                     const activeSpeed = fountain.getActiveBarSpeedMultiplier();
-                    if (activeSpeed === null || !replaceValue("$", activeSpeed, value => String(Math.round(100 * value) / 100))) {
+                    if (!replaceValue("$", activeSpeed, value => String(Math.round(100 * value) / 100))) {
                         return null;
                     }
                     if (activeSpeed > 1) {
                         const speed = fountain.getBarSpeed(0);
-                        if (speed === null) {
-                            return null;
-                        }
                         description += `_@_While_you're_active_here,_@_the_fountain_fills_every_@_` +
                             formatTimerDisplay(fountain.getBarRequirement(0) / (speed * Math.max(1, activeSpeed)));
                     }
@@ -197,9 +184,8 @@ export class FountainUpgrade {
                 if (this.data.index === 8) {
                     const luckyCoinCount = fountain.currencies[0].luckyCoins;
                     const luckyChance = fountain.getLuckyCoinChance(0);
-                    if (luckyCoinCount === null || luckyChance === null ||
-                        !replaceValue("$", luckyChance, value =>
-                            commaNotation(1 / (Math.max(0.001, value) / Math.pow(0.25, luckyCoinCount))))) {
+                    if (!replaceValue("$", luckyChance, value =>
+                        commaNotation(1 / (Math.max(0.001, value) / Math.pow(0.25, luckyCoinCount))))) {
                         return null;
                     }
                 }
@@ -225,21 +211,17 @@ export class FountainUpgrade {
             .trim();
     }
 
-    getBonus(level = this.level): number | null {
+    getBonus(level = this.level): number {
         const marbleBonus = this.getMarbleBonus();
-        return level === null || marbleBonus === null
-            ? null : Math.round(marbleBonus * level * this.data.bonusPerLevel);
+        return Math.round(marbleBonus * level * this.data.bonusPerLevel);
     }
 
-    getCost(level = this.level): number | null {
-        if (level === null) {
-            return null;
-        }
+    getCost(level = this.level): number {
         const levelCost = this.data.baseCost === 1 ? level + this.data.baseCost : this.data.baseCost;
         return levelCost * Math.pow(this.data.costMultiplier, level);
     }
 
-    isUnlocked(upgrades: FountainUpgrade[]): boolean | null {
+    isUnlocked(upgrades: FountainUpgrade[]): boolean {
         const prerequisite = this.data.prerequisiteIndex;
         if (prerequisite < 0) {
             return true;
@@ -247,18 +229,12 @@ export class FountainUpgrade {
 
         const prerequisiteUpgrade = upgrades.find(upgrade =>
             upgrade.data.waterIndex === this.data.waterIndex && upgrade.data.index === prerequisite)!;
-        if (prerequisiteUpgrade.level === null) {
-            return null;
-        }
         const minimumLevel = this.data.waterIndex === 0 && (this.data.index === 2 || this.data.index === 14) ? 1 : 10;
         return prerequisiteUpgrade.level >= minimumLevel;
     }
 
-    getMarbleizeCost(): number | null {
+    getMarbleizeCost(): number {
         const marbleizationLevel = this.marbleizationLevel;
-        if (marbleizationLevel === null) {
-            return null;
-        }
         if (this.data.waterIndex >= 2) {
             return 250_000 * Math.pow(2 * (5 + marbleizationLevel), marbleizationLevel);
         }
@@ -272,53 +248,44 @@ export class FountainUpgrade {
 export class Fountain {
     currencies: FountainCurrency[] = [];
     upgrades: FountainUpgrade[] = [];
-    wallets: (number | null)[] = Array(9).fill(null);
+    wallets: number[] = Array(9).fill(0);
     stacks: FountainStack[] = [];
-    stacksAvailable: boolean = false;
-    upgradeLevelsAvailable: boolean = false;
-    marbleizationLevelsAvailable: boolean = false;
-    valueWallets: (number | null)[] = [null, null, null];
+    valueWallets: number[] = [0, 0, 0];
     desireCurrencyId: number | null = null;
     excludedGenerationCurrencyIds: number[] | null = null;
-    barProgress: (number | null)[] = [null, null, null];
-    barTimerProgress: number | null = null;
-    opalProgress: number | null = null;
-    marbleCount: number | null = null;
-    duckCount: number | null = null;
-    currencyValueExponent: number | null = null;
-    modifiers: FountainModifiers | null = null;
+    barProgress: number[] = [0, 0, 0];
+    barTimerProgress: number = 0;
+    opalProgress: number = 0;
+    marbleCount: number = 0;
+    duckCount: number = 0;
+    currencyValueExponent: number = 0;
+    modifiers!: FountainModifiers;
     constructor() {
         this.currencies = initFountainCurrencyRepo().map(currency =>
             new FountainCurrency(currency.index, currency.data));
         this.upgrades = FountainUpgrade.fromBase(initFountainUpgradeRepo());
     }
 
-    parse(holeData: (number[] | undefined)[], accountOptions: number[]): void {
-        const upgradeLevels = holeData[31] as number[][] | undefined;
-        const marbleizationLevels = holeData[32] as number[][] | undefined;
-        const royalFlags = holeData[34];
-        const savedStacks = holeData[29] as number[][] | undefined;
-        this.upgradeLevelsAvailable = upgradeLevels !== undefined;
-        this.marbleizationLevelsAvailable = marbleizationLevels !== undefined;
+    parse(
+        holeData: number[][],
+        accountOptions: number[],
+        upgradeLevels: number[][] | undefined,
+        marbleizationLevels: number[][] | undefined,
+        savedStacks: number[][] | undefined,
+    ): void {
+        const royalFlags = holeData[34] ?? [];
 
-        this.wallets = Array.from({ length: 9 }, (_, index) => {
-            const wallet = holeData[9]?.[30 + index];
-            return wallet == null ? null : Number(wallet);
-        });
-        this.valueWallets = [3, 16, 20].map(index => {
-            const wallet = holeData[9]?.[index];
-            return wallet == null ? null : Number(wallet);
-        });
+        this.wallets = Array.from({ length: 9 }, (_, index) =>
+            Number(holeData[9]?.[30 + index] ?? 0));
+        this.valueWallets = [3, 16, 20].map(index => Number(holeData[9]?.[index] ?? 0));
         this.currencies.forEach(currency => {
             currency.wallet = this.wallets[currency.index];
-            const luckyCoins = holeData[30]?.[currency.index];
-            currency.luckyCoins = luckyCoins == null ? null : Number(luckyCoins);
+            currency.luckyCoins = Number(holeData[30]?.[currency.index] ?? 0);
         });
-        this.stacksAvailable = savedStacks !== undefined && royalFlags !== undefined;
         this.stacks = (savedStacks ?? []).map((currencyIds, space) => ({
             space,
             items: (currencyIds ?? []).map(currencyId => ({ currencyId: Number(currencyId), value: null })),
-            royal: royalFlags?.[space] == null ? null : Number(royalFlags[space]) !== 0,
+            royal: Number(royalFlags[space] ?? 0) !== 0,
             value: null,
         }));
         const desireCurrencyId = holeData[11]?.[82];
@@ -329,25 +296,17 @@ export class Fountain {
             : this.currencies
                 .filter(currency => String(excludedCurrencyEncoding).includes(number2letter(currency.index)))
                 .map(currency => currency.index);
-        this.barProgress = Array.from({ length: 3 }, (_, index) => {
-            const progress = holeData[28]?.[index];
-            return progress == null ? null : Number(progress);
-        });
-        const barTimerProgress = holeData[33]?.[0];
-        this.barTimerProgress = barTimerProgress == null ? null : Number(barTimerProgress);
-        const opalProgress = holeData[7]?.[15];
-        this.opalProgress = opalProgress == null ? null : Number(opalProgress);
-        const marbleCount = holeData[11]?.[81];
-        this.marbleCount = marbleCount == null ? null : Number(marbleCount);
-        const duckCount = accountOptions[601];
-        this.duckCount = duckCount == null ? null : Number(duckCount);
-
-        this.currencyValueExponent = holeData[11]?.[7] == null ? null : Number(holeData[11][7]);
+        this.barProgress = Array.from({ length: 3 }, (_, index) => Number(holeData[28]?.[index] ?? 0));
+        this.barTimerProgress = Number(holeData[33]?.[0] ?? 0);
+        this.opalProgress = Number(holeData[7]?.[15] ?? 0);
+        this.marbleCount = Number(holeData[11]?.[81] ?? 0);
+        this.duckCount = Number(accountOptions[601] ?? 0);
+        this.currencyValueExponent = Number(holeData[11]?.[7] ?? 0);
         this.upgrades.forEach(upgrade => {
             const waterIndex = upgrade.data.waterIndex;
             const upgradeIndex = upgrade.data.index;
-            upgrade.level = upgradeLevels?.[waterIndex]?.[upgradeIndex] ?? null;
-            upgrade.marbleizationLevel = marbleizationLevels?.[waterIndex]?.[upgradeIndex] ?? null;
+            upgrade.level = Number(upgradeLevels?.[waterIndex]?.[upgradeIndex] ?? 0);
+            upgrade.marbleizationLevel = Number(marbleizationLevels?.[waterIndex]?.[upgradeIndex] ?? 0);
         });
     }
 
@@ -368,7 +327,7 @@ export class Fountain {
         });
     }
 
-    getBonus(waterIndex: number, upgradeIndex: number): number | null {
+    getBonus(waterIndex: number, upgradeIndex: number): number {
         return this.getUpgrade(waterIndex, upgradeIndex).getBonus();
     }
 
@@ -377,18 +336,20 @@ export class Fountain {
             upgrade.data.waterIndex === waterIndex && upgrade.data.index === upgradeIndex)!;
     }
 
-    getUpgradeCost(waterIndex: number, upgradeIndex: number, level?: number): number | null {
+    findCurrency(currencyId: number): FountainCurrency | undefined {
+        return this.currencies.find(currency => currency.index === currencyId);
+    }
+
+    getUpgradeCost(waterIndex: number, upgradeIndex: number, level?: number): number {
         return this.getUpgrade(waterIndex, upgradeIndex).getCost(level);
     }
 
-    canAffordUpgrade(waterIndex: number, upgradeIndex: number): boolean | null {
+    canAffordUpgrade(waterIndex: number, upgradeIndex: number): boolean {
         const upgrade = this.getUpgrade(waterIndex, upgradeIndex);
-        const wallet = this.wallets[upgrade.data.costCurrencyIndex];
-        const cost = upgrade.getCost();
-        return wallet === null || cost === null ? null : wallet >= cost;
+        return this.wallets[upgrade.data.costCurrencyIndex] >= upgrade.getCost();
     }
 
-    getMarbleizeCost(waterIndex: number, upgradeIndex: number): number | null {
+    getMarbleizeCost(waterIndex: number, upgradeIndex: number): number {
         return this.getUpgrade(waterIndex, upgradeIndex).getMarbleizeCost();
     }
 
@@ -396,115 +357,96 @@ export class Fountain {
         return this.getUpgrade(waterIndex, upgradeIndex).data.marbleizeEligible;
     }
 
-    canAffordMarbleize(waterIndex: number, upgradeIndex: number): boolean | null {
-        if (!this.canMarbleize(waterIndex, upgradeIndex)) {
-            return false;
-        }
-        const cost = this.getMarbleizeCost(waterIndex, upgradeIndex);
-        if (cost === null) {
-            return null;
-        }
-        return this.marbleCount === null ? null : this.marbleCount >= cost;
+    canAffordMarbleize(waterIndex: number, upgradeIndex: number): boolean {
+        return !this.canMarbleize(waterIndex, upgradeIndex)
+            ? false
+            : this.marbleCount >= this.getMarbleizeCost(waterIndex, upgradeIndex);
     }
 
-    getMarbleYield(): number | null {
-        const modifiers = this.requireModifiers();
+    getMarbleYield(): number {
+        const modifiers = this.modifiers;
         const bonus = this.getBonus(1, 10);
-        if (bonus === null) {
-            return null;
-        }
         return 100 * (1 + bonus / 100) *
             (1 + modifiers.studyBonus15 / 100) *
             (1 + 10 * modifiers.cosmoBonusQuantity4 / 100);
     }
 
 
-    getBarRequirement(barIndex: number): number {
-        return [7_200, 36_000, 90_000][barIndex] ?? 0;
+
+    getBarRequirement(barIndex: FountainBarIndex): number {
+        return [7_200, 36_000, 90_000][barIndex];
     }
 
-    getBarUnlocked(barIndex: number): boolean | null {
+    getBarUnlocked(barIndex: FountainBarIndex): boolean {
         if (barIndex === 0) {
-            const ownedCaverns = this.requireModifiers().ownedCaverns;
-            return ownedCaverns === null ? null : ownedCaverns >= 15;
+            return this.modifiers.ownedCaverns >= 15;
         }
-        const bonus = barIndex === 1 ? this.getBonus(1, 10)
-            : barIndex === 2 ? this.getBonus(2, 12) : null;
-        return bonus === null ? null : bonus >= 1;
+        const bonus = barIndex === 1 ? this.getBonus(1, 10) : this.getBonus(2, 12);
+        return bonus >= 1;
     }
 
-    getBarSpeed(barIndex: number): number | null {
-        const modifiers = this.requireModifiers();
+    getBarSpeed(barIndex: FountainBarIndex): number {
+        const modifiers = this.modifiers;
         if (barIndex !== 0) {
             return 1;
         }
         const bonus = this.getBonus(0, 9);
-        return bonus === null ? null : (1 + bonus / 100) * (1 + modifiers.arcadeBonus68 / 100);
+        return (1 + bonus / 100) * (1 + modifiers.arcadeBonus68 / 100);
     }
 
-    getEffectiveBarSpeed(barIndex: number): number | null {
-        const barSpeed = this.getBarSpeed(barIndex);
-        const activeMultiplier = this.getActiveBarSpeedMultiplier();
-        return barSpeed === null || activeMultiplier === null ? null : barSpeed * activeMultiplier;
+    getEffectiveBarSpeed(barIndex: FountainBarIndex): number {
+        return this.getBarSpeed(barIndex) * this.getActiveBarSpeedMultiplier();
     }
 
-    getActiveBarSpeedMultiplier(): number | null {
+    getActiveBarSpeedMultiplier(): number {
         const speedBonus = this.getBonus(0, 12);
-        return speedBonus === null ? null : 1 + Math.min(4, 4 * speedBonus) + speedBonus / 100;
+        return 1 + Math.min(4, 4 * speedBonus) + speedBonus / 100;
     }
 
-    getCapacity(): number | null {
+    getCapacity(): number {
         const bonus = this.getBonus(0, 10);
-        return bonus === null ? null : Math.min(16, 1 + bonus);
+        return Math.min(16, 1 + bonus);
     }
 
-    getMaximumStackSize(): number | null {
-        const modifiers = this.requireModifiers();
+    getMaximumStackSize(): number {
+        const modifiers = this.modifiers;
         const bonus = this.getBonus(0, 11);
-        return bonus === null || modifiers.bUpgrade97Level3 === null
-            ? null : Math.min(50, 3 + modifiers.bUpgrade97Level3 + bonus + modifiers.cosmoBonusQuantity4);
+        return Math.min(50, 3 + modifiers.bUpgrade97Level3 + bonus + modifiers.cosmoBonusQuantity4);
     }
 
-    getMaximumCoins(): number | null {
-        const capacity = this.getCapacity();
-        const maximumStackSize = this.getMaximumStackSize();
-        return capacity === null || maximumStackSize === null ? null : Math.round(capacity * maximumStackSize);
+    getMaximumCoins(): number {
+        return Math.round(this.getCapacity() * this.getMaximumStackSize());
     }
 
-    getWalletValueMultiplier(waterIndex: number): number | null {
+    getWalletValueMultiplier(waterIndex: number): number {
         const wallet = this.valueWallets[waterIndex];
         const bonus = this.getBonus(waterIndex, 19);
-        return wallet === null || bonus === null
-            ? null : 1 + lavaLog(wallet) * bonus / 100;
+        return 1 + lavaLog(wallet) * bonus / 100;
     }
 
-    getRoyalMultiplier(): number | null {
+    getRoyalMultiplier(): number {
         const bonus = this.getBonus(1, 9);
-        return bonus === null ? null : 5 + bonus / 100;
+        return 5 + bonus / 100;
     }
 
-    getLuckyCoinValuePer(): number | null {
+    getLuckyCoinValuePer(): number {
         const bonus = this.getBonus(2, 9);
-        return bonus === null ? null : 25 + bonus;
+        return 25 + bonus;
     }
 
-    getDuckMultiplier(): number | null {
-        const duckCount = this.duckCount;
+    getDuckMultiplier(): number {
         const bonus = this.getBonus(2, 11);
-        return duckCount === null || bonus === null
-            ? null : Math.pow(1 + bonus / 100, duckCount);
+        return Math.pow(1 + bonus / 100, this.duckCount);
     }
 
-    getCurrencyBaseValue(currencyId: number): number | null {
+
+    getCurrencyBaseValue(currencyId: number): number {
         const currencyPage = currencyPages[currencyId];
         const baseBonuses = currencyBonusIndexes[currencyId];
         const wallet = this.valueWallets[currencyPage];
         const valueBonus = this.getBonus(baseBonuses[0][0], baseBonuses[0][1]);
         const modifierBonus = this.getBonus(baseBonuses[1][0], baseBonuses[1][1]);
         const walletBonus = this.getBonus(currencyPage, 19);
-        if (wallet === null || valueBonus === null || modifierBonus === null || walletBonus === null) {
-            return null;
-        }
         return 1 + valueBonus * (1 + modifierBonus / 100) *
             (1 + lavaLog(wallet) * walletBonus / 100);
     }
@@ -512,8 +454,7 @@ export class Fountain {
     getCurrencyValue(currencyId: number): number | null {
         const currencyPage = currencyPages[currencyId];
         const luckyCoins = this.currencies[currencyId].luckyCoins;
-        if (this.desireCurrencyId === null || this.duckCount === null || luckyCoins === null ||
-            this.valueWallets[currencyPage] === null) {
+        if (this.desireCurrencyId === null) {
             return null;
         }
 
@@ -522,11 +463,6 @@ export class Fountain {
         const luckyBonus = this.getBonus(2, 9);
         const duckBonus = this.getBonus(2, 11);
         const baseValue = this.getCurrencyBaseValue(currencyId);
-        if (allMultiplier === null || desireBonus === null || luckyBonus === null ||
-            duckBonus === null || baseValue === null) {
-            return null;
-        }
-
         const desireMultiplier = currencyId >= 6 || currencyId === this.desireCurrencyId
             ? 1 + desireBonus / 100 : 1;
         const luckyMultiplier = 1 + luckyCoins * (25 + luckyBonus) / 100;
@@ -537,58 +473,39 @@ export class Fountain {
         return baseAndAll * luckyMultiplier * duckMultiplier;
     }
 
-    getStackItemCount(): number | null {
-        return this.stacksAvailable
-            ? this.stacks.reduce((count, stack) => count + stack.items.length, 0)
-            : null;
+    getStackItemCount(): number {
+        return this.stacks.reduce((count, stack) => count + stack.items.length, 0);
     }
 
-    getOccupiedSpaceCount(): number | null {
-        return this.stacksAvailable
-            ? this.stacks.filter(stack => stack.items.length > 0).length
-            : null;
+    getOccupiedSpaceCount(): number {
+        return this.stacks.filter(stack => stack.items.length > 0).length;
     }
 
-    getAvailableSpaceCount(): number | null {
-        const capacity = this.getCapacity();
-        const occupiedSpaceCount = this.getOccupiedSpaceCount();
-        return capacity === null || occupiedSpaceCount === null
-            ? null
-            : Math.max(0, capacity - occupiedSpaceCount);
+    getAvailableSpaceCount(): number {
+        return Math.max(0, this.getCapacity() - this.getOccupiedSpaceCount());
     }
 
     getOverflowValue(currencyId: number): number | null {
         const currencyValue = this.getCurrencyValue(currencyId);
-        const keepMultiplier = this.getKeepMultiplier();
-        return currencyValue === null || keepMultiplier === null ? null : currencyValue * keepMultiplier;
+        return currencyValue === null ? null : currencyValue * this.getKeepMultiplier();
     }
 
-    getStackItemValue(currencyId: number, royal: boolean | null, stackLength: number): number | null {
-        if (royal === null) {
-            return null;
-        }
+    getStackItemValue(currencyId: number, royal: boolean, stackLength: number): number | null {
         const coinValue = this.getCurrencyValue(currencyId);
-        const bUpgrade95Level10 = this.requireModifiers().bUpgrade95Level10;
-        if (coinValue === null || bUpgrade95Level10 === null) {
+        if (coinValue === null) {
             return null;
         }
+        const bUpgrade95Level10 = this.modifiers.bUpgrade95Level10;
         const royalBonus = this.getBonus(1, 9);
-        if (royal && royalBonus === null) {
-            return null;
-        }
         const stackFactor = 1 + stackLength * bUpgrade95Level10 / 100;
         const standardValue = coinValue * stackFactor;
         const royalValue = royal
-            ? Math.max(1, 5 + royalBonus! / 100 - 1) * coinValue * stackFactor
+            ? Math.max(1, 5 + royalBonus / 100 - 1) * coinValue * stackFactor
             : 0;
         return standardValue + royalValue;
     }
 
-
     getPendingStackValue(): number | null {
-        if (!this.stacksAvailable) {
-            return null;
-        }
         let total = 0;
         for (const stack of this.stacks) {
             if (stack.value === null) {
@@ -599,77 +516,48 @@ export class Fountain {
         return total;
     }
 
-    getRoyalChance(): number | null {
-        const bonus = this.getBonus(1, 8);
-        return bonus === null ? null : 0.0033333333333333335 * (1 + bonus / 100);
+    getRoyalChance(): number {
+        return 0.0033333333333333335 * (1 + this.getBonus(1, 8) / 100);
     }
 
-    getLuckyCoinChance(currencyId: number): number | null {
+    getLuckyCoinChance(currencyId: number): number {
         const luckyCoins = this.currencies[currencyId].luckyCoins;
-        if (luckyCoins === null) {
-            return null;
-        }
         const bonus = this.getBonus(2, 8);
         const additionalBonus = this.getBonus(2, 10);
-        if (bonus === null || additionalBonus === null) {
-            return null;
-        }
         if (bonus === 0) {
             return 0;
         }
         return 0.001 * (1 + (bonus + additionalBonus) / 100) * Math.pow(0.25, luckyCoins);
     }
 
-    getDuckChance(): number | null {
-        const modifiers = this.requireModifiers();
-        if (modifiers.duckCount === null) {
-            return null;
-        }
+    getDuckChance(): number {
+        const modifiers = this.modifiers;
         const bonus = this.getBonus(2, 12);
         const additionalBonus = this.getBonus(2, 10);
-        if (bonus === null || additionalBonus === null) {
-            return null;
-        }
         return (1 / 3) * (1 + (bonus + additionalBonus) / 100) * Math.pow(0.2, modifiers.duckCount);
     }
 
-    getKeepMultiplier(): number | null {
+    getKeepMultiplier(): number {
         const fountainBonus = this.getBonus(0, 8);
-        return fountainBonus === null ? null : 0.1 + fountainBonus / (100 + fountainBonus) * 0.5;
+        return 0.1 + fountainBonus / (100 + fountainBonus) * 0.5;
     }
 
-    getOpalCost(): FountainOpalCost | null {
-        if (this.opalProgress === null) {
-            return null;
-        }
+    getOpalCost(): FountainOpalCost {
         const currencyId = Math.min(9, Math.floor(this.opalProgress / 5));
         return {
             amount: 100 * Math.pow(1 + this.opalProgress, 1.5) * Math.pow(4.8, this.opalProgress),
             currencyId,
-            available: currencyId < this.wallets.length,
         };
     }
 
-    canAffordOpal(): boolean | null {
+    canAffordOpal(): boolean {
         const cost = this.getOpalCost();
-        if (cost === null) {
-            return null;
-        }
-        if (!cost.available) {
-            return false;
-        }
-        const wallet = this.wallets[cost.currencyId];
-        return wallet === null ? null : wallet >= cost.amount;
-
+        const currency = this.findCurrency(cost.currencyId);
+        return currency !== undefined && this.wallets[currency.index] >= cost.amount;
     }
 
-    getAllCurrencyMultiplier(): number | null {
-        const modifiers = this.requireModifiers();
-        if (modifiers.currencyValueExponent === null || modifiers.bUpgrade94Level1 === null ||
-            modifiers.lampBonus99 === null || modifiers.measurementBonus16 === null ||
-            modifiers.bellBonus6 === null || modifiers.coveUpgrade14 === null) {
-            return null;
-        }
+    getAllCurrencyMultiplier(): number {
+        const modifiers = this.modifiers;
         const bonus00 = this.getBonus(0, 0);
         const bonus01 = this.getBonus(0, 1);
         const bonus11 = this.getBonus(1, 1);
@@ -677,10 +565,6 @@ export class Fountain {
         const bonus112 = this.getBonus(1, 12);
         const bonus10 = this.getBonus(1, 0);
         const bonus20 = this.getBonus(2, 0);
-        if (bonus00 === null || bonus01 === null || bonus11 === null || bonus21 === null ||
-            bonus112 === null || bonus10 === null || bonus20 === null) {
-            return null;
-        }
         return (1 + bonus00 / 100) *
             (1 + modifiers.coveUpgrade14 / 100) *
             (1 + (bonus01 + bonus11 + bonus21 + bonus112) / 100) *
@@ -694,10 +578,5 @@ export class Fountain {
     }
 
 
-    private requireModifiers(): FountainModifiers {
-        if (this.modifiers === null) {
-            throw new Error("Fountain modifiers are not prepared.");
-        }
-        return this.modifiers;
-    }
+
 }

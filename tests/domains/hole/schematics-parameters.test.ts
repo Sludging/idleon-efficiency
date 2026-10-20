@@ -36,8 +36,9 @@ describe('Schematics direct prepared parameters', () => {
   expect(strings).toMatchLiveGame(getExtractedValue(results, 'harp_string_count'), 0);
  });
 
- it('matches availability and the active Lamp discount without consuming saved stacks', () => {
-  expect(hole.schematicAvailabilityCount).toMatchLiveGame(getExtractedValue(results, 'availability'), 0);
+ it('matches unlocked Kaipu slots and the active Lamp discount without consuming saved stacks', () => {
+  expect(hole.schematics.filter(schematic => schematic.available).length)
+   .toMatchLiveGame(getExtractedValue(results, 'availability'), 0);
   hole.schematics.forEach(schematic => {
    expect(schematic.discountStacks).toMatchLiveGame(getExtractedValue(results, 'lamp_stacks'), 0);
    expect(schematic.discountMultiplier).toMatchLiveGame(getExtractedValue(results, 'lamp_multiplier'), 0);

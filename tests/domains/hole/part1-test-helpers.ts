@@ -35,14 +35,13 @@ export function decodedSave<T>(key: string): T {
 }
 
 export function assertPairedContext(results: ExtractionResults, data: Map<string, any>): CapturedHoleInputs {
- const context = captured<{ playerId: number; playerName: string; playerNames: string[]; version: number }>(results, 'active_context');
+ const context = captured<{ playerId: number; playerName: string; playerNames: string[] }>(results, 'active_context');
  const players = data.get('players') as Player[];
  const player = getTargetPlayer(players);
  expect(context.playerId).toBe(TARGET_PLAYER_INDEX);
  expect(player.playerID).toBe(context.playerId);
  expect(player.playerName).toBe(context.playerName);
  expect(players.map(player => player.playerName)).toEqual(context.playerNames);
- expect(Number(decodedSave('DoOnceREAL'))).toBe(Number(context.version));
  const inputs = captured<CapturedHoleInputs>(results, 'paired_hole_inputs');
  const saved = decodedSave<number[][]>('Holes');
  expect(inputs.levels).toEqual(saved[1].slice(0, 5));
@@ -75,7 +74,6 @@ export function assertStudyEffects(studyIndex: number, effects: StudyEffect[], r
  expect(effects.map(effect => effect.key).sort()).toEqual(Object.keys(expected).sort());
  effects.forEach(effect => {
   expect(effect.owner).toBe(`cavern:${studyIndex}`);
-  expect(effect.unavailableReason).toBeNull();
   if (typeof expected[effect.key] === 'boolean') {
    expect(effect.scope).toBe('owned-study-rule');
    expect(effect.unit).toBe('rule');

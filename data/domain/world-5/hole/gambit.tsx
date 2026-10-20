@@ -1,7 +1,6 @@
 import { lavaLog, lavaLog2, toTime } from "../../../utility";
 import { initGambitBonusRepo, GambitBonusBase } from "../../data/GambitBonusRepo";
 import { GambitBonusModel } from "../../model/gambitBonusModel";
-import type { Player } from "../../player";
 
 export enum GambitChallengeIndex {
     King = 0,
@@ -69,7 +68,7 @@ export class GambitChallenges {
 }
 
 export class GambitBonus {
-    unlocked: boolean | null = false;
+    unlocked: boolean = false;
 
     constructor(public index: number, public data: GambitBonusModel) {}
 
@@ -77,13 +76,10 @@ export class GambitBonus {
         return data.map(d => new GambitBonus(d.index, d.data));
     }
 
-    getBonus(gambitTotalScore: number | null): number | null {
-        if (this.unlocked === null) return null;
-        if(!this.unlocked)
-        {
+    getBonus(gambitTotalScore: number): number {
+        if (!this.unlocked) {
             return 0;
         }
-        if (gambitTotalScore === null) return null;
 
         // Special case
         if (this.index == 0) {
@@ -103,17 +99,16 @@ export class GambitBonus {
 }
 
 export class Gambit {
+    challenges: GambitChallenge[] = [];
     bonuses: GambitBonus[] = [];
-    challenges: GambitChallenge[] = GambitChallenges.getChallenges();
-    gambitPointsMulti: number | null = 1;
+    gambitPointsMulti: number = 1;
 
     constructor() {
+        this.challenges = GambitChallenges.getChallenges();
         this.bonuses = GambitBonus.fromBase(initGambitBonusRepo());
     }
 
-    getBonus(index: number, player?: Player): number | null {
-        if (player?.currentMap.includes("Tutorial")) return 0;
-
+    getBonus(index: number): number {
         const bonus = this.bonuses.find(bonus => bonus.index == index);
 
         if (bonus)
@@ -131,7 +126,6 @@ export class Gambit {
             // Bonuses increasing with Gambit Score
             if (bonus.data.x1 == 1) {
                 const value = bonus.getBonus(this.getGambitTotalTime());
-                if (value === null) return "Unavailable";
                 return bonus.data.name.replace('{', value.toString()).replace('}', (1 + value / 100).toString()+"x");
             } else {
                 return bonus.data.name.replace('{', bonus.data.x0.toString()).replace('}', bonus.data.x0.toString()+"x");
@@ -145,17 +139,16 @@ export class Gambit {
         return this.challenges.reduce((sum, challenge) => sum + challenge.maxTime, 0);
     }
 
-    getGambitTotalScore(): number | null {
+    getGambitTotalScore(): number {
         const baseScore = this.challenges.reduce((sum, challenge) => sum + challenge.getScoreValue(), 0);
-        if (baseScore === 0) return 0;
-        return this.gambitPointsMulti === null ? null : baseScore * this.gambitPointsMulti;
+        return baseScore * this.gambitPointsMulti;
     }
 
     updateUnlockedBonuses() {
         const totalGambitScore = this.getGambitTotalScore();
 
         this.bonuses.forEach(bonus => {
-            bonus.unlocked = totalGambitScore === null ? null : totalGambitScore >= bonus.getScoreThreshold();
+            bonus.unlocked = totalGambitScore >= bonus.getScoreThreshold();
         });
     }
 }

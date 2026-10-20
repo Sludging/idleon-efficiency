@@ -32,11 +32,11 @@
           151
         ],
         "exp": [
-          2363201389368159.5,
-          134040130449709.69,
-          1229267586379241,
-          367807733715546.3,
-          126341118529132.05
+          2362967883615147,
+          133982482920435.08,
+          1228761691456072.2,
+          367750086186271.3,
+          126283470999857.44
         ],
         "investments": [
           114,
@@ -87,9 +87,9 @@
           645050.2468780265,
           214429.636600765,
           221428.0462261185,
-          37401978.81707617,
-          37246449.36162575,
-          38128505.04677769,
+          37398250.2720197,
+          37242720.81656928,
+          38124776.50172122,
           840302.5741329693,
           1076598.0439762478,
           1076614.8450074797,
@@ -335,7 +335,7 @@
     },
     "lore_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 1, 0)",
-      "result": 232.1676213243579
+      "result": 232.3644090355622
     },
     "exotic_51": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 51, 0)",
@@ -411,7 +411,7 @@
     },
     "measurement_0": {
       "expression": "idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 0, 0)",
-      "result": 310.2916149152543
+      "result": 311.2134955932204
     },
     "measurement_7": {
       "expression": "idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 7, 0)",
@@ -594,7 +594,7 @@
     },
     "study_requirement_3": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 3, 0)",
-      "result": 1323488.9800848442
+      "result": 1323488.9800848444
     },
     "study_requirement_4": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 4, 0)",
@@ -626,27 +626,27 @@
     },
     "study_requirement_11": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 11, 0)",
-      "result": 27733391.199176196
+      "result": 27733391.1991762
     },
     "study_requirement_12": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 12, 0)",
-      "result": 27733391.199176196
+      "result": 27733391.1991762
     },
     "study_requirement_13": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 13, 0)",
-      "result": 27733391.199176196
+      "result": 27733391.1991762
     },
     "study_requirement_14": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 14, 0)",
-      "result": 2977850.2051908993
+      "result": 2977850.2051909
     },
     "study_requirement_15": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 15, 0)",
-      "result": 41600086.79876429
+      "result": 41600086.798764296
     },
     "study_requirement_16": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 16, 0)",
-      "result": 41600086.79876429
+      "result": 41600086.798764296
     },
     "study_requirement_17": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 17, 0)",

@@ -1,7 +1,6 @@
 import { commaNotation, notateNumber } from "../../../utility";
 import { initSpecificItemRepo } from "../../data/SpecificItemRepo";
-import { RandoListModel } from "../../model/randoListModel";
-import { initRandoList2Repo, RandoListBase } from "../../data/RandoList2Repo";
+import { initRandoList2Repo } from "../../data/RandoList2Repo";
 import { BaseItemModel } from "../../model/baseItemModel";
 
 export type CoveShapeColor = "blue" | "purple";
@@ -14,12 +13,12 @@ export class CoveShape {
     ) { }
 
     get name(): string {
-        return this.data.displayName ?? this.data.internalName;
+        return this.data.displayName;
     }
 }
 
 export class CoveUpgrade {
-    level: number | null = null;
+    level: number = 0;
 
     constructor(
         public index: number,
@@ -35,13 +34,6 @@ export class CoveUpgrade {
         }
 
         const bonus = this.getBonus();
-        if (/[{}$]/.test(this.label) && bonus === null) {
-            return null;
-        }
-        if (bonus === null) {
-            return this.label.replace(/_/g, " ").trim();
-        }
-
         const reduction = Math.floor(10000 * (1 - 1 / (1 + bonus / 100))) / 100;
         return this.label
             .replace(/\{/g, commaNotation(bonus))
@@ -51,14 +43,11 @@ export class CoveUpgrade {
             .trim();
     }
 
-    getBonus(): number | null {
-        return this.level === null ? null : this.level * this.bonusPerLevel;
+    getBonus(): number {
+        return this.level * this.bonusPerLevel;
     }
 
-    getCost(costReductionBonus: number | null, studyDiscountActive: boolean): number | null {
-        if (this.level === null || costReductionBonus === null) {
-            return null;
-        }
+    getCost(costReductionBonus: number, studyDiscountActive: boolean): number {
         let cost = (Math.pow(this.costBase, this.level) + this.level) / (1 + costReductionBonus / 100);
 
         if (this.index % 2 === 1) {
@@ -78,27 +67,25 @@ export class CoveUpgrade {
 export interface CoveLocalInputs {
     mapId: number;
     cavernId: number;
-    campUpgrade100Bonus: number | null;
-    campUpgrade101Bonus: number | null;
-    campUpgrade103Bonus: number | null;
-    campUpgrade105Bonus: number | null;
+    campUpgrade100Bonus: number;
+    campUpgrade101Bonus: number;
+    campUpgrade103Bonus: number;
+    campUpgrade105Bonus: number;
     gameLog: (value: number) => number;
 }
 
 export interface CoveLocalEffects {
     inCoveContext: boolean;
-    dropRateMultiplier: number | null;
-    afkGainMultiplier: number | null;
-    multikillPerDamageTier: number | null;
-    baseMultikill: number | null;
-    respawnTimeMultiplier: number | null;
+    dropRateMultiplier: number;
+    afkGainMultiplier: number;
+    multikillPerDamageTier: number;
+    baseMultikill: number;
+    respawnTimeMultiplier: number;
     bluePickupTargetId: number | null;
-    bluePickupTargetKnown: boolean;
-    bluePickupAmount: number | null;
+    bluePickupAmount: number;
     purplePickupTargetId: number | null;
-    purplePickupTargetKnown: boolean;
-    purplePickupAmount: number | null;
-    pickupRandomDoubleChance: number | null;
+    purplePickupAmount: number;
+    pickupRandomDoubleChance: number;
 }
 
 export interface CoveCharacterInputs extends CoveLocalInputs {
@@ -106,39 +93,34 @@ export interface CoveCharacterInputs extends CoveLocalInputs {
 }
 
 export interface CoveRewardState {
-    opalsEarned: number | null;
-    ribbonRewardEarned: boolean | null;
+    opalsEarned: number;
+    ribbonRewardEarned: boolean;
 }
 
 export interface CovePurchaseEffects {
-    incrementsStudyDailyCounter: boolean | null;
+    incrementsStudyDailyCounter: boolean;
     opalsEarned: number;
     resetsMonsterRespawnTime: boolean;
-    ribbonRewardEarned: boolean | null;
+    ribbonRewardEarned: boolean;
 }
 
 const coveUpgradeCount = 24;
 const coveShapeNames = Array.from({ length: 12 }, (_, index) => `HoleGshape${index}`);
 
-const getRandoRecord = (records: RandoListBase[], index: number): RandoListModel => {
-    return records.find(record => record.index === index)!.data;
-};
-
 const getCoveShapes = (): CoveShape[] => {
     const repository = initSpecificItemRepo();
-    const shapes = coveShapeNames.map((internalName, index) => {
+    return coveShapeNames.map((internalName, index) => {
         const shape = repository.find(item => item.id === internalName)!;
         return new CoveShape(index, index < 6 ? "blue" : "purple", shape.data);
     });
-    return shapes;
 };
 
 const getCoveUpgrades = (): CoveUpgrade[] => {
     const records = initRandoList2Repo();
-    const names = getRandoRecord(records, 11).elements;
-    const labels = getRandoRecord(records, 12).elements;
-    const bonusPerLevels = getRandoRecord(records, 13).elements;
-    const costBases = getRandoRecord(records, 14).elements;
+    const names = records[11].data.elements;
+    const labels = records[12].data.elements;
+    const bonusPerLevels = records[13].data.elements;
+    const costBases = records[14].data.elements;
 
     return Array.from({ length: coveUpgradeCount }, (_, index) => new CoveUpgrade(
         index,
@@ -152,63 +134,54 @@ const getCoveUpgrades = (): CoveUpgrade[] => {
 export class Cove {
     readonly shapes: CoveShape[] = getCoveShapes();
     readonly upgrades: CoveUpgrade[] = getCoveUpgrades();
-    readonly blueShapeBalances: (number | null)[] = Array(6).fill(null);
-    readonly purpleShapeBalances: (number | null)[] = Array(6).fill(null);
+    readonly blueShapeBalances: number[] = Array(6).fill(0);
+    readonly purpleShapeBalances: number[] = Array(6).fill(0);
     blueShapeTargetId: number | null = null;
-    blueShapeTargetAvailable: boolean = false;
     purpleShapeTargetId: number | null = null;
-    purpleShapeTargetAvailable: boolean = false;
-    glunkoKills: number | null = null;
-    normalDropRate: number | null = null;
-    rewards: CoveRewardState = { opalsEarned: null, ribbonRewardEarned: null };
+    glunkoKills: number = 0;
+    normalDropRate: number = 0;
+    rewards: CoveRewardState = { opalsEarned: 0, ribbonRewardEarned: false };
     localEffectsByPlayerId: ReadonlyMap<number, CoveLocalEffects> = new Map();
 
     parse(optionsListAccount: number[] | undefined): void {
         this.upgrades.forEach(upgrade => {
-            const level = optionsListAccount?.[630 + upgrade.index];
-            upgrade.level = level == null ? null : Number(level);
+            upgrade.level = Number(optionsListAccount?.[630 + upgrade.index] ?? 0);
         });
 
         this.shapes.forEach(shape => {
-            const balance = optionsListAccount?.[654 + shape.id];
+            const balance = Number(optionsListAccount?.[654 + shape.id] ?? 0);
             if (shape.color === "blue") {
-                this.blueShapeBalances[shape.id] = balance == null ? null : Number(balance);
+                this.blueShapeBalances[shape.id] = balance;
             } else {
-                this.purpleShapeBalances[shape.id - 6] = balance == null ? null : Number(balance);
+                this.purpleShapeBalances[shape.id - 6] = balance;
             }
         });
 
-        const blueTarget = optionsListAccount?.[666];
-        const purpleTarget = optionsListAccount?.[667];
-        this.blueShapeTargetAvailable = blueTarget != null;
-        this.purpleShapeTargetAvailable = purpleTarget != null;
-        this.blueShapeTargetId = blueTarget != null && blueTarget > 0 ? Number(blueTarget) - 1 : null;
-        this.purpleShapeTargetId = purpleTarget != null && purpleTarget > 0 ? Number(purpleTarget) + 5 : null;
-        const glunkoKills = optionsListAccount?.[668];
-        const normalDropRate = optionsListAccount?.[200];
-        this.glunkoKills = glunkoKills == null ? null : Number(glunkoKills);
-        this.normalDropRate = normalDropRate == null ? null : Number(normalDropRate);
+        const blueTarget = Number(optionsListAccount?.[666] ?? 0);
+        const purpleTarget = Number(optionsListAccount?.[667] ?? 0);
+        this.blueShapeTargetId = blueTarget > 0 ? blueTarget - 1 : null;
+        this.purpleShapeTargetId = purpleTarget > 0 ? purpleTarget + 5 : null;
+        this.glunkoKills = Number(optionsListAccount?.[668] ?? 0);
+        this.normalDropRate = Number(optionsListAccount?.[200] ?? 0);
 
         this.rewards = {
             opalsEarned: this.upgrades[0].level,
-            ribbonRewardEarned: this.upgrades[5].level === null ? null : this.upgrades[5].level > 0
+            ribbonRewardEarned: this.upgrades[5].level > 0
         };
         this.localEffectsByPlayerId = new Map();
     }
 
     getPurchaseEffects(upgradeIndex: number): CovePurchaseEffects {
-        const ribbonRewardEarned = this.rewards.ribbonRewardEarned;
-        const rewardKnown = upgradeIndex !== 5 || ribbonRewardEarned !== null;
-        const grantsRibbon = upgradeIndex === 5 && ribbonRewardEarned === false;
+        const grantsRibbon = upgradeIndex === 5 && !this.rewards.ribbonRewardEarned;
         return {
-            incrementsStudyDailyCounter: rewardKnown ? !grantsRibbon : null,
+            incrementsStudyDailyCounter: !grantsRibbon,
             opalsEarned: upgradeIndex === 0 ? 1 : 0,
             resetsMonsterRespawnTime: upgradeIndex === 2,
-            ribbonRewardEarned: rewardKnown ? grantsRibbon : null
+            ribbonRewardEarned: grantsRibbon
         };
     }
 
-    getCurrencyBalance(upgradeIndex: number): number | null {
+    getCurrencyBalance(upgradeIndex: number): number {
         const page = Math.floor(upgradeIndex / 12);
         const pageSlot = upgradeIndex % 12;
         const currencyIndex = 654 + Math.floor(pageSlot / 2) + 6 * page;
@@ -217,35 +190,29 @@ export class Cove {
             : this.purpleShapeBalances[currencyIndex - 660];
     }
 
-    getUpgradeCost(upgradeIndex: number, studyDailyCount: number, studyBonus: number): number | null {
+    getUpgradeCost(upgradeIndex: number, studyDailyCount: number, studyBonus: number): number {
         const upgrade = this.upgrades[upgradeIndex];
         const costReductionBonus = this.upgrades[7].getBonus();
         const studyDiscountActive = studyDailyCount < studyBonus;
         return upgrade.getCost(costReductionBonus, studyDiscountActive);
     }
 
-    canPurchase(upgradeIndex: number, activePage: number, studyDailyCount: number, studyBonus: number): boolean | null {
+    canPurchase(upgradeIndex: number, activePage: number, studyDailyCount: number, studyBonus: number): boolean {
         const page = Math.floor(upgradeIndex / 12);
         if (activePage !== page) {
             return false;
         }
         const balance = this.getCurrencyBalance(upgradeIndex);
         const cost = this.getUpgradeCost(upgradeIndex, studyDailyCount, studyBonus);
-        return balance === null || cost === null ? null : balance >= cost;
+        return balance >= cost;
     }
 
-    getBlueShapeDigits(gameLog: (value: number) => number): number | null {
-        if (this.blueShapeBalances.some(balance => balance === null)) {
-            return null;
-        }
-        return this.blueShapeBalances.reduce<number>((sum, balance) => sum + Math.ceil(gameLog(balance!)), 0);
+    getBlueShapeDigits(gameLog: (value: number) => number): number {
+        return this.blueShapeBalances.reduce((sum, balance) => sum + Math.ceil(gameLog(balance)), 0);
     }
 
-    getPurpleShapeDigits(gameLog: (value: number) => number): number | null {
-        if (this.purpleShapeBalances.some(balance => balance === null)) {
-            return null;
-        }
-        return this.purpleShapeBalances.reduce<number>((sum, balance) => sum + Math.ceil(gameLog(balance!)), 0);
+    getPurpleShapeDigits(gameLog: (value: number) => number): number {
+        return this.purpleShapeBalances.reduce((sum, balance) => sum + Math.ceil(gameLog(balance)), 0);
     }
 
     prepare(inputs: CoveLocalInputs): CoveLocalEffects {
@@ -260,13 +227,6 @@ export class Cove {
         const blueShapeBonus = this.upgrades[10].getBonus();
         const purpleShapeBonus = this.upgrades[22].getBonus();
         const killBonus = this.upgrades[4].getBonus();
-        const killCount = this.glunkoKills;
-        const normalDropBonus = this.upgrades[18].getBonus();
-        const normalDropRate = this.normalDropRate;
-        const dropRateAvailable = blueDigits !== null && purpleDigits !== null && killCount !== null &&
-            normalDropRate !== null && dropBonus1 !== null && dropBonus17 !== null && dropBonus21 !== null &&
-            dropBonus3 !== null && dropBonus12 !== null && blueShapeBonus !== null && purpleShapeBonus !== null &&
-            killBonus !== null && normalDropBonus !== null;
         const afkBonus8 = this.upgrades[8].getBonus();
         const afkBonus13 = this.upgrades[13].getBonus();
         const multikillBonus = this.upgrades[6].getBonus();
@@ -276,42 +236,32 @@ export class Cove {
         const blueTargetBalance = this.blueShapeTargetId === null ? 0
             : this.blueShapeBalances[this.blueShapeTargetId];
         const blueTargetBonus = this.upgrades[9].getBonus();
-        const blueTargetKnown = this.blueShapeTargetAvailable && blueTargetBonus !== null &&
-            (this.blueShapeTargetId === null || blueTargetBalance !== null);
-        const blueTargetUnlocked = blueTargetKnown && blueTargetBonus! > 0 &&
-            this.blueShapeTargetId !== null && blueTargetBalance! >= 0.1;
+        const blueTargetUnlocked = blueTargetBonus > 0 && this.blueShapeTargetId !== null &&
+            blueTargetBalance >= 0.1;
         const purpleTargetBalance = this.purpleShapeTargetId === null ? 0
             : this.purpleShapeBalances[this.purpleShapeTargetId - 6];
         const purpleTargetBonus = this.upgrades[16].getBonus();
-        const purpleTargetKnown = this.purpleShapeTargetAvailable && purpleTargetBonus !== null &&
-            (this.purpleShapeTargetId === null || purpleTargetBalance !== null);
-        const purpleTargetUnlocked = purpleTargetKnown && purpleTargetBonus! > 0 &&
-            this.purpleShapeTargetId !== null && purpleTargetBalance! >= 0.1;
+        const purpleTargetUnlocked = purpleTargetBonus > 0 && this.purpleShapeTargetId !== null &&
+            purpleTargetBalance >= 0.1;
 
         return {
             inCoveContext,
-            dropRateMultiplier: dropRateAvailable
-                ? (1 + (dropBonus1! + dropBonus17! + dropBonus21!) / 100)
-                    * (1 + dropBonus3! / 100)
-                    * (1 + dropBonus12! / 100)
-                    * (1 + blueShapeBonus! * blueDigits! / 100)
-                    * (1 + purpleShapeBonus! * purpleDigits! / 100)
-                    * (1 + killBonus! * Math.ceil(inputs.gameLog(killCount!)) / 100)
-                    * (1 + normalDropBonus! * Math.ceil(inputs.gameLog(normalDropRate!)) / 100)
-                : null,
-            afkGainMultiplier: afkBonus8 === null || afkBonus13 === null ? null : (10 + afkBonus8 + afkBonus13) / 100,
-            multikillPerDamageTier: multikillBonus === null ? null : multikillBonus / 100,
-            baseMultikill: baseMultikillBonus === null ? null : baseMultikillBonus / 100,
-            respawnTimeMultiplier: respawnBonus === null || inputs.campUpgrade100Bonus === null ? null
-                : 1 / (1 + (respawnBonus + inputs.campUpgrade100Bonus) / 100),
+            dropRateMultiplier: (1 + (dropBonus1 + dropBonus17 + dropBonus21) / 100)
+                * (1 + dropBonus3 / 100)
+                * (1 + dropBonus12 / 100)
+                * (1 + blueShapeBonus * blueDigits / 100)
+                * (1 + purpleShapeBonus * purpleDigits / 100)
+                * (1 + this.upgrades[4].getBonus() * Math.ceil(inputs.gameLog(this.glunkoKills)) / 100)
+                * (1 + this.upgrades[18].getBonus() * Math.ceil(inputs.gameLog(this.normalDropRate)) / 100),
+            afkGainMultiplier: (10 + afkBonus8 + afkBonus13) / 100,
+            multikillPerDamageTier: multikillBonus / 100,
+            baseMultikill: baseMultikillBonus / 100,
+            respawnTimeMultiplier: 1 / (1 + (respawnBonus + inputs.campUpgrade100Bonus) / 100),
             bluePickupTargetId: blueTargetUnlocked ? this.blueShapeTargetId : null,
-            bluePickupTargetKnown: blueTargetKnown,
-            bluePickupAmount: !blueTargetKnown ? null : blueTargetUnlocked ? blueTargetBonus : 0,
+            bluePickupAmount: blueTargetUnlocked ? blueTargetBonus : 0,
             purplePickupTargetId: purpleTargetUnlocked ? this.purpleShapeTargetId : null,
-            purplePickupTargetKnown: purpleTargetKnown,
-            purplePickupAmount: !purpleTargetKnown ? null : purpleTargetUnlocked ? purpleTargetBonus : 0,
-            pickupRandomDoubleChance: inputs.campUpgrade101Bonus === null || inputs.campUpgrade103Bonus === null ||
-                inputs.campUpgrade105Bonus === null ? null : Math.min(
+            purplePickupAmount: purpleTargetUnlocked ? purpleTargetBonus : 0,
+            pickupRandomDoubleChance: Math.min(
                 (inputs.campUpgrade101Bonus + inputs.campUpgrade103Bonus + inputs.campUpgrade105Bonus) / 100,
                 3
             )
@@ -327,3 +277,4 @@ export class Cove {
         return effectsByPlayerId;
     }
 }
+

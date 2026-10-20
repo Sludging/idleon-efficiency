@@ -30,18 +30,17 @@ export function CavernMetricStrip({ metrics }: { metrics: CavernMetric[] }) {
     </Box>;
 }
 
-function formatEffect(value: number | null, suffix = "", reason?: string | null): string {
-    if (value === null) return `Unavailable${reason ? `: ${reason}` : ""}`;
+function formatEffect(value: number, suffix = ""): string {
     if (suffix === "") return value.toLocaleString("en-US", { maximumFractionDigits: 20 });
     return `${Number.isInteger(value) ? commaNotation(value) : nFormatter(value, "MultiplierInfo")}${suffix}`;
 }
 
-export function Benefit({ index, effects, dailyPurchases }: { index: number; effects: StudyEffect[]; dailyPurchases: number | null }) {
-    const values = new Map(effects.map(effect => [effect.key, effect]));
-    const value = (key: string, suffix = "") => {
-        const effect = values.get(key)!;
-        return typeof effect.value === "number" ? formatEffect(effect.value, suffix) : formatEffect(null, "", effect.unavailableReason);
-    };
+export function Benefit({ index, effects, dailyPurchases }: { index: number; effects: StudyEffect[]; dailyPurchases: number }) {
+    const values: Record<string, number> = {};
+    for (const effect of effects) {
+        if (effect.unit !== "rule") values[effect.key] = effect.value;
+    }
+    const value = (key: string, suffix = "") => formatEffect(values[key], suffix);
     let main: ReactNode;
     let detail: ReactNode = null;
     if ([1, 7, 11, 16].includes(index)) {
@@ -62,40 +61,34 @@ export function Benefit({ index, effects, dailyPurchases }: { index: number; eff
             case 14: main = `+${value("additional-double-torch-chance", "%")} double-torch chance`; break;
             case 15: main = `${value("marble-production", "×")} marble production`; break;
             case 17: {
-                const cost = values.get("discounted-upgrade-cost")!;
-                const discount = typeof cost.value === "number" ? formatEffect(100 - cost.value * 100, "%") : formatEffect(null, "", cost.unavailableReason);
+                const discount = formatEffect(100 - values["discounted-upgrade-cost"] * 100, "%");
                 main = `First ${value("daily-discounted-upgrades")} upgrades each day cost ${discount} less`;
-                detail = `Saved upgrades today: ${formatEffect(dailyPurchases, "", "Saved Cove purchases today are missing.")}.`;
+                detail = `Saved upgrades today: ${formatEffect(dailyPurchases)}.`;
                 break;
             }
         }
     }
-    const missing = effects.filter(effect => effect.value === null);
     return <Box gap="xxsmall" data-testid={`benefit-${index}`}>
         <Text size="small">{main}</Text>
         {detail && <Text size="xsmall" color="accent-2">{detail}</Text>}
-        {missing.length > 0 && <Text size="small" data-testid={`benefit-missing-${index}`}>{[...new Set(missing.map(effect => effect.unavailableReason))].join(" ")}</Text>}
     </Box>;
 }
 
-function Progress({ study, requirement }: { study: Study; requirement: number | null }) {
-    const current = study.progressAvailable ? study.progress : null;
+function Progress({ study, requirement }: { study: Study; requirement: number }) {
+    const current = study.progress;
     return <Box gap="xxsmall" data-testid={`study-progress-${study.index}`}>
         <Text size="xsmall" color="accent-2">Progress to next level</Text>
-        <Text size="small">{current === null ? "Unavailable: Saved Study progress is missing." : notateNumber(current)} / {requirement === null ? "Unavailable: Saved Study level or requirement is missing." : notateNumber(requirement)}</Text>
-        {current !== null && requirement !== null && requirement > 0 && <Box background="grey-1" height="8px" overflow="hidden" role="progressbar" aria-label="Study progress to next level" aria-valuemin={0} aria-valuemax={requirement} aria-valuenow={current}>
+        <Text size="small">{notateNumber(current)} / {notateNumber(requirement)}</Text>
+        {requirement > 0 && <Box background="grey-1" height="8px" overflow="hidden" role="progressbar" aria-label="Study progress to next level" aria-valuemin={0} aria-valuemax={requirement} aria-valuenow={current}>
             <Box background="brand" height="8px" flex={false} style={{ width: `${100 * Math.min(1, Math.max(0, current / requirement))}%` }} />
         </Box>}
     </Box>;
 }
 
 export function CavernStudySummary({ study, onOpenStudies }: { study: Study; onOpenStudies: () => void }) {
-    const status = study.access === false ? "Locked"
-        : study.access === null ? "Unavailable: Saved cavern access is missing."
-            : study.participation === "inactive" ? "Inactive"
-                : study.participation === "target" || study.participation === "neighbor"
-                    ? `Study rate: ${study.progressPerHour === null ? `Unavailable${study.rateUnavailableReason ? `: ${study.rateUnavailableReason}` : ""}` : `${notateNumber(study.progressPerHour)}/hr`}`
-                    : `Unavailable: ${study.rateUnavailableReason ?? "Saved Study participation is missing."}`;
+    const status = !study.access ? "Locked"
+        : study.participation === "inactive" ? "Inactive"
+            : `Study rate: ${notateNumber(study.progressPerHour)}/hr`;
     return <Box gap="small" pad={{ top: "small" }} border={{ side: "top", color: "grey-1" }} data-testid={`cavern-study-${study.index}`}>
         <Box direction="row" justify="between" align="center">
             <Text size="medium" weight={500}>Study</Text>
@@ -103,8 +96,8 @@ export function CavernStudySummary({ study, onOpenStudies }: { study: Study; onO
         </Box>
         <Box direction="row" justify="between" align="center" gap="small" wrap>
             <Box direction="row" align="center" gap="small" wrap style={{ minWidth: 0, flex: "1 1 auto" }}>
-                <Text size="small" weight={500}>Level {study.levelAvailable ? notateNumber(study.level) : "Unavailable: Saved Study level is missing."}</Text>
-                <Text size="xsmall">{study.levelAvailable ? study.getDescription().replace(/_/g, " ") : "Effect unavailable"}</Text>
+                <Text size="small" weight={500}>Level {notateNumber(study.level)}</Text>
+                <Text size="xsmall">{study.getDescription().replace(/_/g, " ")}</Text>
             </Box>
             <Text size="xsmall" color="accent-2" data-testid={`study-status-${study.index}`} style={{ flexShrink: 0, marginLeft: "auto" }}>{status}</Text>
         </Box>

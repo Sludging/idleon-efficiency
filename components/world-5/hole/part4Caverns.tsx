@@ -1,4 +1,4 @@
-import { Box, Text, ThemeContext } from "grommet";
+import { Box, CheckBox, DataTable, Text, TextInput, ThemeContext, Toolbar } from "grommet";
 import type { ReactNode } from "react";
 import { useContext, useState } from "react";
 import { normalizeColor } from "grommet/utils";
@@ -34,7 +34,7 @@ function resourceImage(hole: Hole, name: string): ImageData | undefined {
     if (name === "Atoms") return AtomCollider.getParticleImageData();
     if (name === "Bits") return Item.getImageData("Bits");
     if (name === "Coins") return Item.getImageData("Coins1");
-    if (name === "Turquoise Rupie") return hole.currencies.find(entry => entry.index === 25)!.getImageData() ?? undefined;
+    if (name === "Turquoise Rupie") return hole.currencies[25].getImageData() ?? undefined;
     return hole.currencies.find(entry => entry.data.name === name)?.getImageData() ?? undefined;
 }
 
@@ -53,123 +53,142 @@ function GameCard({ title, image, children, testId, inactive = false, headerRigh
 function JarView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => void }) {
     const jar = hole.jar;
     const study = hole.studies[10];
-    const ownedTypeCount = jar.ownedTypeCount;
-    const nextTypeCost = jar.nextTypeCost;
-    const nextTypeCurrency = ownedTypeCount === null || nextTypeCost === null ? null
-        : hole.currencies.find(currency => currency.index === 20 + ownedTypeCount)!;
-    const nextTypeCurrencyImage = nextTypeCurrency?.getImageData();
-    const boardTypes = jar.jarTypes.map(type => ({
-        type,
-        entries: jar.board.filter(entry => entry.type === type.index),
-    }));
+    const theme = useContext(ThemeContext);
+    const [collectibleSearch, setCollectibleSearch] = useState("");
+    const [selectedTab, setSelectedTab] = useState<"Jar types" | "Collectibles">("Jar types");
+    const [showAll, setShowAll] = useState(false);
+    const nextTypeCostImage = jar.ownedTypeCount < jar.holdings.length
+        ? jar.getHoldingImageData(jar.ownedTypeCount)
+        : undefined;
+    const jarTypeCards = jar.jarTypes
+        .filter(type => showAll || type.jarsPerHour > 0)
+        .map(type => {
+            const producing = type.jarsPerHour > 0;
+            const nextType = type.index === jar.ownedTypeCount + 1;
+            const cost = !type.unlocked && nextType && jar.nextTypeCost !== null
+                ? jar.nextTypeCost
+                : null;
+            return { type, producing, cost };
+        });
+    const collectibleData = jar.jarBonuses.map(bonus => {
+        const level = bonus.level;
+        const effectText = level === 0
+            ? `First-discovery effect · ${bonus.getFirstDiscoveryDescription()}`
+            : bonus.getDescription();
+        return {
+            image: bonus.getImageData(),
+            name: bonus.data.name.replace(/_/g, " "),
+            level: level === 0 ? "Potential" : `Owned · Lv. ${level} · ${level - 1} enchants`,
+            effect: effectText,
+        };
+    });
+    const collectibleQuery = collectibleSearch.trim().toLowerCase();
+    const visibleCollectibles = collectibleQuery === ""
+        ? collectibleData
+        : collectibleData.filter(({ name, effect }) => `${name} ${effect}`.toLowerCase().includes(collectibleQuery));
 
     return <Box gap="medium" data-testid="hole-jars-details">
-        <Section title="Production">
-            <CavernMetricStrip metrics={[
-                { label: "Board", value: jar.boardAvailable ? `${jar.board.length} / 120 jars` : "Unavailable" },
-                { label: "Gilded bonus", value: value(jar.gildedBonusPercent, "%") },
-                { label: "Owned types", value: value(jar.ownedTypeCount, " / 9") },
-                {
-                    label: "Next type cost",
-                    value: nextTypeCost === null || nextTypeCurrency === null ? "Unavailable"
-                        : `${notateNumber(nextTypeCost)} ${nextTypeCurrency.data.name.replace(/_/g, " ")}`,
-                    image: nextTypeCurrencyImage,
-                },
-            ]} />
-            <Box direction="row" gap="medium" wrap>
-                {jar.producerAssignments.map(assignment => {
-                    const producer = jar.producers.find(entry => entry.index === assignment.index);
-                    const type = assignment.type === null ? null : jar.jarTypes[assignment.type];
-                    return <Box key={assignment.index} gap="xxsmall" pad="small" background="dark-1" data-testid={`jar-producer-${assignment.index}`}>
-                        <Text size="small" weight={500}>Producer {assignment.index + 1}</Text>
-                        <Text size="xsmall">Assignment: {type ? type.data.name.replace(/_/g, " ") : assignment.type === null ? "Unavailable" : "Unassigned"}</Text>
-                        <Text size="xsmall">Work: {value(assignment.work)}</Text>
-                        <Text size="xsmall">Requirement: {value(producer?.requirement ?? null)}</Text>
-                        <Text size="xsmall">Quality: {value(producer?.quality ?? null)}</Text>
-                        <Text size="xsmall">Current rate: {value(producer?.ratePerHour ?? null, "/hr")}</Text>
-                    </Box>;
-                })}
-                {jar.producerAssignments.length === 0 && <Text size="small">Producer assignments unavailable.</Text>}
-            </Box>
-            <Text size="xsmall" color="accent-2">Production opens at 11 owned caverns. Work is production progress, not spendable stock. Jar rewards depend on the in-game break order.</Text>
-        </Section>
-
-        <Section title="Jar types and holdings">
-            <Box style={{ overflowX: "auto" }}>
-                <table style={{ width: "100%", minWidth: "760px", borderCollapse: "collapse" }} data-testid="jar-type-table">
-                    <thead><tr>{["Type", "Access", "Saved jars", "Requirement balance", "Next cost"].map(label =>
-                        <th key={label} scope="col" style={{ textAlign: "left", padding: "8px", borderBottom: "1px solid rgba(255,255,255,0.14)" }}><Text size="xsmall" color="accent-2">{label}</Text></th>)}</tr></thead>
-                    <tbody>{boardTypes.map(({ type, entries }) => <tr key={type.index} data-testid={`jar-type-${type.index}`} style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-                        <td style={{ padding: "8px" }}><Box gap="xxsmall"><Text size="small" weight={500}>{type.data.name.replace(/_/g, " ")}</Text><Text size="xsmall" color="accent-2">{type.getDescription()}</Text></Box></td>
-                        <td style={{ padding: "8px" }}><Text size="xsmall">{type.unlocked === null ? "Unavailable" : type.unlocked ? "Unlocked" : "Locked"}</Text></td>
-                        <td style={{ padding: "8px" }}><Text size="xsmall">{jar.boardAvailable ? entries.length : "Unavailable"}</Text></td>
-                        <td style={{ padding: "8px" }}><Text size="xsmall">{value(jar.requirementBalances[type.index])}</Text></td>
-                        <td style={{ padding: "8px" }}>
-                            {type.index === ownedTypeCount && nextTypeCost !== null && nextTypeCurrency !== null
-                                ? <Box direction="row" gap="xsmall" align="center">
-                                    {nextTypeCurrencyImage && <IconImage data={nextTypeCurrencyImage} scale={0.65} />}
-                                    <Text size="xsmall">{notateNumber(nextTypeCost)} {nextTypeCurrency.data.name.replace(/_/g, " ")}</Text>
-                                </Box>
-                                : "—"}
-                        </td>
-                    </tr>)}</tbody>
-                </table>
-            </Box>
+        <Section title="Jar holdings">
             <Box direction="row" gap="small" wrap data-testid="jar-wallets">
                 {jar.holdings.map((balance, index) => {
-                    const currency = hole.currencies.find(entry => entry.index === index + 20);
-                    const specialName = index === 10 ? "Golden Plop" : index === 11 ? "Turquoise Rupie" : null;
-                    const image = specialName === null ? currency?.getImageData() : resourceImage(hole, specialName);
-                    return <Box key={index} data-testid={`jar-wallet-${index}`} direction="row" gap="xsmall" align="center" pad="xsmall" background="dark-1">
+                    const image = jar.getHoldingImageData(index);
+                    return <Box
+                        key={index}
+                        data-testid={`jar-wallet-${index}`}
+                        direction="row"
+                        gap="xsmall"
+                        align="center"
+                        pad="xsmall"
+                        background="dark-1"
+                    >
                         {image && <IconImage data={image} scale={0.7} />}
-                        <Text size="xsmall">{currency?.data.name.replace(/_/g, " ") ?? specialName}: {value(balance)}</Text>
+                        <Text size="xsmall">{value(balance)}</Text>
                     </Box>;
                 })}
             </Box>
         </Section>
 
-        <Section title="Saved board">
-            {jar.boardAvailable && jar.board.length > 0
-                ? <Box style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))", gap: "8px" }} data-testid="jar-board">
-                    {jar.board.map((entry, index) => <Box key={index} pad="small" background="dark-1" data-testid={`jar-board-entry-${index}`}>
-                        <Text size="xsmall" weight={500}>{jar.jarTypes[entry.type]?.data.name.replace(/_/g, " ") ?? "Unknown type"}</Text>
-                        <Text size="xsmall">Quality {entry.quality} · Position {entry.x}, {entry.y}</Text>
-                    </Box>)}
-                </Box>
-                : <Text size="small">{jar.boardAvailable ? "No saved jars on the board." : "Saved Jar board is unavailable."}</Text>}
-        </Section>
-        <Section title="Collectibles">
-            <Box direction="row" gap="small" align="center" wrap>
-                <Text size="small">Preferred enchantment target: {jar.preferredCollectibleTarget === null
-                    ? "Unavailable" : jar.jarBonuses[jar.preferredCollectibleTarget]?.data.name.replace(/_/g, " ") ?? "Unavailable"}</Text>
-                <Text size="xsmall" color="accent-2">Preferred target is probabilistic, not guaranteed.</Text>
-            </Box>
-            <Box style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))", gap: "8px" }} data-testid="jar-collectibles">
-                {jar.jarBonuses.map(bonus => {
-                    const level = bonus.level;
-                    const effect = bonus.getBonus();
-                    const unit = bonus.getUnit();
-                    const undiscovered = level === 0;
-                    const futurePlaceholder = !bonus.hasReleasedEffect();
-                    const description = undiscovered && !futurePlaceholder
-                        ? bonus.getFirstDiscoveryDescription()
-                        : bonus.getDescription();
-                    return <Box key={bonus.index} pad="small" gap="xsmall" background="dark-1" data-testid={`jar-collectible-${bonus.index}`}>
-                        <Box direction="row" justify="between" gap="xsmall">
-                            <Text size="xsmall" weight={500}>{bonus.data.name.replace(/_/g, " ")}</Text>
-                            <Text size="xsmall" color="accent-2">Lv. {value(level)}</Text>
-                        </Box>
-                        <Text size="xsmall" style={{ whiteSpace: "pre-line" }}>{futurePlaceholder
-                            ? `Future-cavern effect not released · ${description}`
-                            : undiscovered && effect !== null && unit !== null
-                                ? `First-discovery effect · ${description}`
-                                : effect === null || unit === null ? `Effective benefit unavailable · ${description}` : description}</Text>
-                        <Text size="xsmall" color="accent-2">{level === null ? "Saved discovery level unavailable" : level === 0 ? "Undiscovered" : level === 1 ? "Discovered" : `Enchanted ${level - 1} times`}</Text>
-                    </Box>;
-                })}
-            </Box>
-            {!jar.collectibleLevelsAvailable && <Text size="xsmall">Saved collectible levels are missing; effects that depend on them remain unavailable.</Text>}
-        </Section>
+        <Box gap="medium">
+            <ContentTabs
+                options={[
+                    { value: "Jar types", label: "Jar types" },
+                    { value: "Collectibles", label: "Collectibles" },
+                ]}
+                value={selectedTab}
+                onChange={setSelectedTab}
+            />
+            {selectedTab === "Jar types"
+                ? <Section title="Production">
+                    <CheckBox
+                        checked={showAll}
+                        label={<Text size="small">Show all</Text>}
+                        onChange={event => setShowAll(event.target.checked)}
+                    />
+                    {jarTypeCards.length === 0
+                        ? <Text size="small" color="accent-2">No Jar types producing.</Text>
+                        : <Box style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: "12px" }}>
+                            {jarTypeCards.map(({ type, producing, cost }) => (
+                                <RoundedShadowBox
+                                    key={type.index}
+                                    background="dark-1"
+                                    pad="medium"
+                                    gap="small"
+                                    data-testid={`jar-type-${type.index}`}
+                                    style={{
+                                        border: `1px solid ${producing ? normalizeColor("brand", theme) : normalizeColor("grey-1", theme)}`,
+                                        minWidth: 0,
+                                    }}
+                                >
+                                    <Box direction="row" gap="small" align="center">
+                                        <IconImage data={type.getImageData()} scale={0.8} />
+                                        <Box gap="xxsmall" style={{ minWidth: 0 }}>
+                                            <Text size="small" weight={500}>{type.data.name.replace(/_/g, " ")}</Text>
+                                            <Text size="xsmall">{`${notateNumber(type.jarsPerHour)} jars/hr`}</Text>
+                                            {producing && <Text size="xsmall" color="brand">Producing</Text>}
+                                        </Box>
+                                    </Box>
+                                    {type.unlocked === false && <Box gap="xxsmall">
+                                        <Text size="xsmall" color="accent-2">Locked</Text>
+                                        {cost !== null && <Box direction="row" gap="xsmall" align="center">
+                                            {nextTypeCostImage && <IconImage data={nextTypeCostImage} scale={0.65} />}
+                                            <Text size="xsmall">Unlock cost: {notateNumber(cost)}</Text>
+                                        </Box>}
+                                    </Box>}
+                                </RoundedShadowBox>
+                            ))}
+                        </Box>}
+                </Section>
+                : <Section title="Collectibles">
+                    <Toolbar>
+                        <TextInput
+                            aria-label="Search collectibles"
+                            placeholder="Search name or effect"
+                            value={collectibleSearch}
+                            onChange={event => setCollectibleSearch(event.target.value)}
+                        />
+                    </Toolbar>
+                    <DataTable data={visibleCollectibles} primaryKey="name" columns={[
+                        {
+                            property: "image",
+                            header: "Image",
+                            render: (data: typeof collectibleData[number]) => <IconImage data={data.image} scale={0.7} />,
+                        },
+                        {
+                            property: "name",
+                            header: "Collectible",
+                        },
+                        {
+                            property: "level",
+                            header: "Level / enchantment",
+                        },
+                        {
+                            property: "effect",
+                            header: "Effect",
+                            render: (data: typeof collectibleData[number]) => <Text size="xsmall" style={{ whiteSpace: "pre-line" }}>{data.effect}</Text>,
+                        },
+                    ]} />
+                </Section>}
+        </Box>
         <CavernStudySummary study={study} onOpenStudies={onOpenStudies} />
     </Box>;
 }
@@ -185,7 +204,10 @@ function FountainView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () =
     const opalAffordable = fountain.canAffordOpal();
     const royalChance = fountain.getRoyalChance();
     const duckChance = fountain.getDuckChance();
-    const currencyName = (id: number) => fountain.currencies[id]?.data.name.replace(/_/g, " ") ?? "Unavailable currency";
+    const currencyName = (id: number) => {
+        const currency = fountain.findCurrency(id);
+        return currency === undefined ? `Currency ${id} unavailable` : currency.data.name.replace(/_/g, " ");
+    };
 
     return <Box gap="medium" data-testid="hole-fountain-details">
         <Section title="Wallets and pending stacks">
@@ -207,17 +229,17 @@ function FountainView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () =
                         <Text size="xsmall" color="accent-2">Lucky coins {value(currency.luckyCoins)}</Text>
                         <Text size="xsmall" color="accent-2">Value {value(fountain.getCurrencyValue(currency.index))}</Text>
                         <Text size="xsmall" color="accent-2">Overflow {value(fountain.getOverflowValue(currency.index))}</Text>
-                        <Text size="xsmall" color="accent-2">Lucky chance {value(luckyCoinChance === null ? null : luckyCoinChance * 100, "%")}</Text>
+                        <Text size="xsmall" color="accent-2">Lucky chance {value(luckyCoinChance * 100, "%")}</Text>
                     </Box>;
                 })}
             </Box>
             <Box direction="row" gap="small" wrap align="center">
-                <Text size="xsmall">Desire: {fountain.desireCurrencyId === null ? "Unavailable" : currencyName(fountain.desireCurrencyId)}</Text>
-                <Text size="xsmall">Excluded from generation: {fountain.excludedGenerationCurrencyIds === null ? "Unavailable" : fountain.excludedGenerationCurrencyIds.map(currencyName).join(", ") || "None"}</Text>
+                <Text size="xsmall">Desire: {fountain.desireCurrencyId === null ? "None selected" : currencyName(fountain.desireCurrencyId)}</Text>
+                <Text size="xsmall">Excluded from generation: {fountain.excludedGenerationCurrencyIds === null ? "No list saved" : fountain.excludedGenerationCurrencyIds.map(currencyName).join(", ") || "None"}</Text>
                 <Text size="xsmall">Value exponent: {value(fountain.currencyValueExponent)}</Text>
             </Box>
             <Box gap="xsmall" data-testid="fountain-stacks">
-                {fountain.stacksAvailable ? fountain.stacks.map(stack => {
+                {fountain.stacks.map(stack => {
                     const groupedItems = new Map<string, { currencyId: number; value: number | null; count: number }>();
                     stack.items.forEach(item => {
                         const key = JSON.stringify([item.currencyId, item.value]);
@@ -231,35 +253,38 @@ function FountainView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () =
                     return <Box key={stack.space} direction="row" gap="small" align="center" wrap pad="xsmall" background="dark-1" data-testid={`fountain-stack-${stack.space}`}>
                         <Text size="xsmall" weight={500}>Position {stack.space + 1}</Text>
                         <Text size="xsmall">{stack.items.length} items</Text>
-                        <Text size="xsmall">Royal: {stack.royal === null ? "Unavailable" : stack.royal ? "Yes" : "No"}</Text>
+                        <Text size="xsmall">Royal: {stack.royal ? "Yes" : "No"}</Text>
                         <Text size="xsmall">Snapshot value: {value(stack.value)}</Text>
                         <Box direction="row" gap="xsmall" wrap>{Array.from(groupedItems.values(), (item, index) =>
                             <Text key={index} size="xsmall" data-testid={`fountain-stack-${stack.space}-group-${index}`} data-currency-id={item.currencyId} data-value={item.value === null ? "unavailable" : item.value} data-count={item.count}>{item.count} × {currencyName(item.currencyId)}: {value(item.value)} each</Text>)}</Box>
                     </Box>;
-                }) : <Text size="small">Saved pending stacks or royal flags are unavailable.</Text>}
+                })}
             </Box>
         </Section>
 
         <Section title="Fountain bars and Opals">
             <Box direction="row" gap="small" wrap>
-                {fountain.barProgress.map((progress, index) => <Box key={index} gap="xxsmall" pad="small" background="dark-1" data-testid={`fountain-bar-${index}`}>
-                    <Text size="small" weight={500}>Bar {index + 1}</Text>
-                    <Text size="xsmall">Progress: {progress === null ? "Unavailable" : toTime(progress)}</Text>
-                    <Text size="xsmall">Required: {toTime(fountain.getBarRequirement(index))}</Text>
-                    <Text size="xsmall">Rate: {value(fountain.getEffectiveBarSpeed(index), "×")}</Text>
-                    <Text size="xsmall">Access: {fountain.getBarUnlocked(index) === null ? "Unavailable" : fountain.getBarUnlocked(index) ? "Unlocked" : "Locked"}</Text>
-                </Box>)}
+                {([0, 1, 2] as const).map(barIndex => {
+                    const progress = fountain.barProgress[barIndex];
+                    return <Box key={barIndex} gap="xxsmall" pad="small" background="dark-1" data-testid={`fountain-bar-${barIndex}`}>
+                        <Text size="small" weight={500}>Bar {barIndex + 1}</Text>
+                        <Text size="xsmall">Progress: {toTime(progress)}</Text>
+                        <Text size="xsmall">Required: {toTime(fountain.getBarRequirement(barIndex))}</Text>
+                        <Text size="xsmall">Rate: {value(fountain.getEffectiveBarSpeed(barIndex), "×")}</Text>
+                        <Text size="xsmall">Access: {fountain.getBarUnlocked(barIndex) ? "Unlocked" : "Locked"}</Text>
+                    </Box>;
+                })}
             </Box>
             <Box direction="row" gap="small" wrap align="center">
                 <Text size="small">Marbles: {value(fountain.marbleCount)}</Text>
                 <Text size="small">Marble yield: {value(fountain.getMarbleYield())}</Text>
                 <Text size="small">Opals earned: {value(fountain.opalProgress)}</Text>
-                <Text size="small">Next Opal: {opalCost === null ? "Unavailable" : `${notateNumber(opalCost.amount)} ${currencyName(opalCost.currencyId)}${opalCost.available ? "" : " · currency unavailable"}`}</Text>
-                <Text size="xsmall" color={opalAffordable === null ? "accent-2" : opalAffordable ? "status-ok" : "critical"}>{opalAffordable === null ? "Affordability unavailable" : opalAffordable ? "Affordable" : "Not affordable"}</Text>
+                <Text size="small">Next Opal: {`${notateNumber(opalCost.amount)} ${currencyName(opalCost.currencyId)}`}</Text>
+                <Text size="xsmall" color={opalAffordable ? "status-ok" : "critical"}>{opalAffordable ? "Affordable" : "Not affordable"}</Text>
             </Box>
             <Box direction="row" gap="small" wrap>
-                <Text size="xsmall">Royal chance: {value(royalChance === null ? null : royalChance * 100, "%")}</Text>
-                <Text size="xsmall">Duck chance: {value(duckChance === null ? null : duckChance * 100, "%")}</Text>
+                <Text size="xsmall">Royal chance: {value(royalChance * 100, "%")}</Text>
+                <Text size="xsmall">Duck chance: {value(duckChance * 100, "%")}</Text>
                 <Text size="xsmall">Ducks: {value(fountain.duckCount)}</Text>
             </Box>
             <Text size="xsmall" color="accent-2">Pending value is a saved snapshot. Wallets are spendable balances; current values do not predict future generation or rewards.</Text>
@@ -272,11 +297,11 @@ function FountainView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () =
                     const cost = upgrade.getCost();
                     const wallet = fountain.wallets[upgrade.data.costCurrencyIndex];
                     const affordable = fountain.canAffordUpgrade(upgrade.data.waterIndex, upgrade.data.index);
-                    const shortfall = cost === null || wallet === null ? null : Math.max(0, cost - wallet);
+                    const shortfall = Math.max(0, cost - wallet);
                     const unlocked = upgrade.isUnlocked(fountain.upgrades);
                     const description = upgrade.getDescription(fountain);
                     const prerequisite = upgrade.data.prerequisiteIndex < 0 ? "None"
-                        : `Upgrade ${upgrade.data.prerequisiteIndex + 1}: ${unlocked === null ? "Unavailable" : unlocked ? "Met" : "Not met"}`;
+                        : `Upgrade ${upgrade.data.prerequisiteIndex + 1}: ${unlocked ? "Met" : "Not met"}`;
                     const marbleCost = fountain.getMarbleizeCost(upgrade.data.waterIndex, upgrade.data.index);
                     const currencyImage = resourceImage(hole, currencyName(upgrade.data.costCurrencyIndex));
                     return <GameCard key={upgrade.index} title={`${upgrade.data.index + 1}. ${upgrade.data.name.replace(/_/g, " ")}`} testId={`fountain-upgrade-${pageIndex}-${upgrade.data.index}`}
@@ -286,7 +311,7 @@ function FountainView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () =
                         <Text size="xsmall">Prerequisite: {prerequisite}</Text>
                         <Box direction="row" gap="xsmall" align="center" wrap>
                             {currencyImage && <IconImage data={currencyImage} scale={0.65} />}
-                            <Text size="xsmall" color={affordable === null ? undefined : affordable ? "status-ok" : "critical"}>Cost / wallet: {value(cost)} / {value(wallet)}</Text>
+                            <Text size="xsmall" color={affordable ? "status-ok" : "critical"}>Cost / wallet: {value(cost)} / {value(wallet)}</Text>
                             <Text size="xsmall">Shortfall: {value(shortfall)}</Text>
                         </Box>
                         <Box direction="row" gap="xsmall" align="center" wrap>
@@ -306,30 +331,29 @@ function CoveView({ hole, onOpenStudies, characters }: { hole: Hole; onOpenStudi
     const cove = hole.cove;
     const study = hole.studies[17];
     const dailyPurchases = study.dailyCoveUpgradesPurchased;
-    const studyBonus = study.getEffects().find(effect => effect.key === "daily-discounted-upgrades")!.value as number | null;
+    const studyBonus = study.getBonus();
 
     return <Box gap="medium" data-testid="hole-cove-details">
         <Section title="Shapes and Cove state">
             <CavernMetricStrip metrics={[
                 { label: "Glunko kills", value: value(cove.glunkoKills) },
                 { label: "Opals earned", value: value(cove.rewards.opalsEarned) },
-                { label: "Ribbon reward", value: cove.rewards.ribbonRewardEarned === null ? "Unavailable" : cove.rewards.ribbonRewardEarned ? "Earned" : "Not earned" },
-                { label: "Study purchases today", value: dailyPurchases === null ? "Unavailable: Saved daily purchases are missing." : exact(dailyPurchases) },
-                { label: "Study discount level", value: studyBonus === null ? "Unavailable" : value(studyBonus) },
+                { label: "Ribbon reward", value: cove.rewards.ribbonRewardEarned ? "Earned" : "Not earned" },
+                { label: "Study purchases today", value: exact(dailyPurchases) },
+                { label: "Study discount level", value: value(studyBonus) },
             ]} />
             <Box direction="row" gap="small" wrap>
-                <Text size="xsmall">Blue target: {cove.blueShapeTargetAvailable ? cove.blueShapeTargetId === null ? "None saved" : cove.shapes[cove.blueShapeTargetId]?.name ?? "Unavailable" : "Unavailable"}</Text>
-                <Text size="xsmall">Purple target: {cove.purpleShapeTargetAvailable ? cove.purpleShapeTargetId === null ? "None saved" : cove.shapes[cove.purpleShapeTargetId]?.name ?? "Unavailable" : "Unavailable"}</Text>
+                <Text size="xsmall">Blue target: {cove.blueShapeTargetId === null ? "None saved" : cove.shapes[cove.blueShapeTargetId].name}</Text>
+                <Text size="xsmall">Purple target: {cove.purpleShapeTargetId === null ? "None saved" : cove.shapes[cove.purpleShapeTargetId].name}</Text>
             </Box>
             <Box style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: "8px" }} data-testid="cove-shapes">
                 {cove.shapes.map(shape => {
                     const balance = shape.color === "blue" ? cove.blueShapeBalances[shape.id] : cove.purpleShapeBalances[shape.id - 6];
                     const targetId = shape.color === "blue" ? cove.blueShapeTargetId : cove.purpleShapeTargetId;
-                    const targetKnown = shape.color === "blue" ? cove.blueShapeTargetAvailable : cove.purpleShapeTargetAvailable;
                     return <Box key={shape.id} direction="row" gap="small" align="center" pad="small" background="dark-1" data-testid={`cove-shape-${shape.id}`}>
                         <IconImage data={Item.getImageData(shape.data.internalName)} scale={0.8} />
                         <Box flex><Text size="xsmall" weight={500}>{shape.name}</Text><Text size="xsmall">{value(balance)}</Text></Box>
-                        <Text size="xsmall" color="accent-2">{targetKnown ? targetId === shape.id ? "Boosted target" : "" : "Target unavailable"}</Text>
+                        <Text size="xsmall" color="accent-2">{targetId === shape.id ? "Boosted target" : ""}</Text>
                     </Box>;
                 })}
             </Box>
@@ -339,9 +363,8 @@ function CoveView({ hole, onOpenStudies, characters }: { hole: Hole; onOpenStudi
             <Box style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: "8px" }} data-testid="cove-upgrades">
                 {cove.upgrades.map(upgrade => {
                     const balance = cove.getCurrencyBalance(upgrade.index);
-                    const cost = dailyPurchases === null || studyBonus === null
-                        ? null : cove.getUpgradeCost(upgrade.index, dailyPurchases, studyBonus);
-                    const shortfall = cost === null || balance === null ? null : Math.max(0, cost - balance);
+                    const cost = cove.getUpgradeCost(upgrade.index, dailyPurchases, studyBonus);
+                    const shortfall = Math.max(0, cost - balance);
                     const description = upgrade.getDescription();
                     const purchaseEffects = cove.getPurchaseEffects(upgrade.index);
                     const shapeId = Math.floor(upgrade.index % 12 / 2) + (Math.floor(upgrade.index / 12) === 0 ? 0 : 6);
@@ -368,18 +391,18 @@ function CoveView({ hole, onOpenStudies, characters }: { hole: Hole; onOpenStudi
                         <th key={label} scope="col" style={{ textAlign: "left", padding: "8px", borderBottom: "1px solid rgba(255,255,255,0.14)" }}><Text size="xsmall" color="accent-2">{label}</Text></th>)}</tr></thead>
                     <tbody>{characters.map(character => {
                         const effects = cove.localEffectsByPlayerId.get(character.playerId);
-                        const blueTarget = effects?.bluePickupTargetId === null || effects?.bluePickupTargetId === undefined ? "None" : cove.shapes[effects.bluePickupTargetId]?.name ?? "Unavailable";
-                        const purpleTarget = effects?.purplePickupTargetId === null || effects?.purplePickupTargetId === undefined ? "None" : cove.shapes[effects.purplePickupTargetId]?.name ?? "Unavailable";
+                        const blueTarget = effects?.bluePickupTargetId === null || effects?.bluePickupTargetId === undefined ? "None" : cove.shapes[effects.bluePickupTargetId].name;
+                        const purpleTarget = effects?.purplePickupTargetId === null || effects?.purplePickupTargetId === undefined ? "None" : cove.shapes[effects.purplePickupTargetId].name;
                         return <tr key={character.playerId} data-testid={`cove-character-${character.playerId}`} style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
                             <td style={{ padding: "8px" }}><Text size="xsmall">{character.playerName}</Text></td>
                             <td style={{ padding: "8px" }}><Text size="xsmall">{effects ? effects.inCoveContext ? "Yes" : "No" : "Unavailable"}</Text></td>
-                            <td style={{ padding: "8px" }}><Text size="xsmall">{value(effects?.dropRateMultiplier ?? null, "×")}</Text></td>
-                            <td style={{ padding: "8px" }}><Text size="xsmall">{exact(effects?.afkGainMultiplier ?? null, "×")}</Text></td>
-                            <td style={{ padding: "8px" }}><Text size="xsmall">{exact(effects?.multikillPerDamageTier ?? null)} / {exact(effects?.baseMultikill ?? null)}</Text></td>
-                            <td style={{ padding: "8px" }}><Text size="xsmall">{exact(effects?.respawnTimeMultiplier ?? null, "×")}</Text></td>
-                            <td style={{ padding: "8px" }}><Text size="xsmall">{blueTarget} · {value(effects?.bluePickupAmount ?? null)}</Text></td>
-                            <td style={{ padding: "8px" }}><Text size="xsmall">{purpleTarget} · {value(effects?.purplePickupAmount ?? null)}</Text></td>
-                            <td style={{ padding: "8px" }}><Text size="xsmall">{value(effects?.pickupRandomDoubleChance === null || effects?.pickupRandomDoubleChance === undefined ? null : effects.pickupRandomDoubleChance * 100, "%")}</Text></td>
+                            <td style={{ padding: "8px" }}><Text size="xsmall">{effects ? value(effects.dropRateMultiplier, "×") : "Unavailable"}</Text></td>
+                            <td style={{ padding: "8px" }}><Text size="xsmall">{effects ? exact(effects.afkGainMultiplier, "×") : "Unavailable"}</Text></td>
+                            <td style={{ padding: "8px" }}><Text size="xsmall">{effects ? `${exact(effects.multikillPerDamageTier)} / ${exact(effects.baseMultikill)}` : "Unavailable"}</Text></td>
+                            <td style={{ padding: "8px" }}><Text size="xsmall">{effects ? exact(effects.respawnTimeMultiplier, "×") : "Unavailable"}</Text></td>
+                            <td style={{ padding: "8px" }}><Text size="xsmall">{blueTarget} · {effects ? value(effects.bluePickupAmount) : "Unavailable"}</Text></td>
+                            <td style={{ padding: "8px" }}><Text size="xsmall">{purpleTarget} · {effects ? value(effects.purplePickupAmount) : "Unavailable"}</Text></td>
+                            <td style={{ padding: "8px" }}><Text size="xsmall">{effects ? value(effects.pickupRandomDoubleChance * 100, "%") : "Unavailable"}</Text></td>
                         </tr>;
                     })}</tbody>
                 </table>
@@ -398,9 +421,7 @@ function WellView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
     const study = hole.studies[0];
     const wellOpals = hole.cavernOpalSources.find(source => source.acquisition === "Purchased an Opal with Well sediment.")!.opals;
     const gravel = well.sediments[0];
-    const totalExpansions = well.sediments.every(sediment => sediment.expansions !== null)
-        ? well.sediments.reduce((total, sediment) => total + sediment.expansions!, 0)
-        : null;
+    const totalExpansions = well.sediments.reduce((total, sediment) => total + sediment.expansions, 0);
     const gravelImage = hole.currencies.find(currency => currency.index === 0)!.getImageData();
     const fillHelp = "Time to fill if all your buckets worked on this sediment at their current rates. Each row is independent.";
 
@@ -415,7 +436,7 @@ function WellView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
                     <Text size="xsmall" color="accent-2">Gravel cost per Opal</Text>
                     <Box direction="row" gap="xsmall" align="center">
                         {gravelImage && <IconImage data={gravelImage} scale={0.65} />}
-                        <Text size="small" color={well.opalAffordable === null ? undefined : well.opalAffordable ? "status-ok" : "critical"}>
+                        <Text size="small" color={well.opalAffordable ? "status-ok" : "critical"}>
                             {value(gravel.current)} / {value(well.opalCost)}
                         </Text>
                     </Box>
@@ -454,7 +475,7 @@ function WellView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
                         </Text>
                     </Box>
                 </TipDisplay>
-                <TextAndLabel label="Gold multiplier" labelSize="xsmall" textSize="small" text={well.goldBucketMultiplier === null ? "Unavailable" : `${notateNumber(well.goldBucketMultiplier, "MultiplierInfo").replace("#", "")}×`} />
+                <TextAndLabel label="Gold multiplier" labelSize="xsmall" textSize="small" text={`${notateNumber(well.goldBucketMultiplier, "MultiplierInfo").replace("#", "")}×`} />
             </Box>
 
             <Box style={{ overflowX: "auto" }}>
@@ -473,24 +494,20 @@ function WellView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
                     </thead>
                     <tbody>
                         {well.sediments.map(sediment => {
-                            const assignmentsKnown = well.buckets.every(bucket => bucket.unlocked !== null &&
-                                (bucket.unlocked === false || bucket.sedimentIndex !== null));
-                            const assignedBuckets = assignmentsKnown
-                                ? well.buckets.filter(bucket => bucket.unlocked === true && bucket.sedimentIndex === sediment.index).length
-                                : null;
-                            const stocked = sediment.unavailable !== true && sediment.current !== null && sediment.currentMax !== null;
-                            const progress = stocked && sediment.currentMax > 0
-                                ? Math.min(100, Math.max(0, sediment.current! / sediment.currentMax * 100)) : null;
-                            const sedimentImage = hole.currencies.find(currency => currency.index === sediment.index)!.getImageData();
+                            const assignedBuckets = well.buckets.filter(bucket => bucket.unlocked && bucket.sedimentIndex === sediment.index).length;
+                            const progress = sediment.current < 0
+                                ? 0
+                                : Math.min(100, Math.max(0, sediment.current / sediment.currentMax * 100));
+                            const sedimentImage = hole.currencies[sediment.index].getImageData();
                             const fullIn = well.getFullInTime(sediment);
                             const fullInText = fullIn.status === "estimate"
                                 ? fullIn.hours === 0 ? "Full" : toTime(fullIn.hours * 3600)
-                                : fullIn.status === "no-production" ? "No production" : "Unavailable";
+                                : fullIn.status === "blocked" ? "Blocked"
+                                    : fullIn.status === "no-production" ? "No production" : "Unavailable";
                             const expansionLevel = sediment.expansions;
-                            const expansionText = expansionLevel === null ? "Unavailable"
-                                : well.expansionUpgradeOwned === true ? `No cap · ${value(expansionLevel)} expansions`
-                                    : well.expansionUpgradeOwned === false ? `${value(expansionLevel)} / 14${expansionLevel >= 14 ? " (capped)" : " used"}`
-                                        : expansionLevel >= 14 ? "Unavailable" : `${value(expansionLevel)} expansions`;
+                            const expansionText = well.expansionUpgradeOwned
+                                ? `No cap · ${value(expansionLevel)} expansions`
+                                : `${value(expansionLevel)} / 14${expansionLevel >= 14 ? " (capped)" : " used"}`;
                             const inactive = assignedBuckets === 0;
                             return <tr key={sediment.index} data-testid={`well-sediment-${sediment.index}`} style={{
                                 opacity: inactive ? 0.75 : 1,
@@ -502,26 +519,24 @@ function WellView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
                                             {sedimentImage && <IconImage data={sedimentImage} scale={0.65} />}
                                             <Text size="small">{sediment.data.name}</Text>
                                         </Box>
-                                        <Text size="xsmall">{sediment.unavailable === true ? "|" : `${value(sediment.current)} / ${value(sediment.currentMax)}`}</Text>
-                                        {progress !== null && <progress aria-label={`${sediment.data.name} stock toward capacity`} value={progress} max={100} style={{ width: "100%", height: "6px", accentColor: normalizeColor("brand", theme) }} />}
+                                        <Text size="xsmall">{sediment.current < 0 ? "|" : notateNumber(sediment.current)} / {notateNumber(sediment.currentMax)}</Text>
+                                        <progress aria-label={`${sediment.data.name} stock toward capacity`} value={progress} max={100} style={{ width: "100%", height: "6px", accentColor: normalizeColor("brand", theme) }} />
                                     </Box>
                                 </td>
                                 <td style={{ padding: "8px", verticalAlign: "middle" }}>
-                                    {assignedBuckets === null
-                                        ? <Text size="xsmall">Unavailable</Text>
-                                        : assignedBuckets === 0
-                                            ? <Text size="xsmall" color="accent-2">No buckets assigned</Text>
-                                            : <Box gap="xxsmall">
-                                                <Box direction="row" gap="xsmall" align="center">
-                                                    <IconImage data={well.bucketImageData} scale={0.12} />
-                                                    <Text size="xsmall">{assignedBuckets} {assignedBuckets === 1 ? "bucket" : "buckets"}</Text>
-                                                </Box>
-                                                <Text size="xsmall">{value(sediment.bucketRate, "/hr")}</Text>
-                                            </Box>}
+                                    {assignedBuckets === 0
+                                        ? <Text size="xsmall" color="accent-2">No buckets assigned</Text>
+                                        : <Box gap="xxsmall">
+                                            <Box direction="row" gap="xsmall" align="center">
+                                                <IconImage data={well.bucketImageData} scale={0.12} />
+                                                <Text size="xsmall">{assignedBuckets} {assignedBuckets === 1 ? "bucket" : "buckets"}</Text>
+                                            </Box>
+                                            <Text size="xsmall">{value(sediment.bucketRate, "/hr")}</Text>
+                                        </Box>}
                                 </td>
                                 <td style={{ padding: "8px", verticalAlign: "middle" }}>
                                     <Box gap="xxsmall">
-                                        {expansionLevel !== null && well.expansionUpgradeOwned === false && <Box direction="row" gap="2px" aria-label={expansionText}>
+                                        {!well.expansionUpgradeOwned && <Box direction="row" gap="2px" aria-label={expansionText}>
                                             {Array.from({ length: 14 }, (_, index) => <Box key={index} background={index < Math.min(expansionLevel, 14) ? "brand" : "grey-1"} height="6px" width="5px" />)}
                                         </Box>}
                                         <Text size="xsmall">{expansionText}</Text>
@@ -551,7 +566,7 @@ function BellView({ hole, totalMoney, onOpenStudies }: { hole: Hole; totalMoney:
         requirement: bell.modeRequirements[index],
         timing: bell.getMethodTiming(index),
     }));
-    const bellOpals = hole.cavernOpalSources.find(source => source.acquisition === "Received an Opal from a Bell Ping.")!.opals;
+    const bellOpals = hole.cavernOpalSources[4].opals;
     const methodsComplete = bell.methodsOwned === 6;
     const study = hole.studies[4];
     const upgradeSeparator = normalizeColor("grey-1", theme);
@@ -566,7 +581,7 @@ function BellView({ hole, totalMoney, onOpenStudies }: { hole: Hole; totalMoney:
                     </Box>
                     <Box flex={{ grow: 1, shrink: 1 }} pad={{ horizontal: "small" }} border={{ side: "right", color: "grey-1" }}>
                         <Text size="xsmall" color="accent-2">New method chance</Text>
-                        <Text size="small">{bell.cleanOdds === null ? "Unavailable" : `${(bell.cleanOdds * 100).toLocaleString("en-US", { maximumFractionDigits: 3 })}%`}</Text>
+                        <Text size="small">{(bell.cleanOdds * 100).toLocaleString("en-US", { maximumFractionDigits: 3 })}%</Text>
                     </Box>
                 </>}
                 <Box flex={{ grow: 1, shrink: 1 }} pad={{ left: "small" }}>
@@ -582,23 +597,24 @@ function BellView({ hole, totalMoney, onOpenStudies }: { hole: Hole; totalMoney:
         <Section title="Bonuses">
             <Box style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", columnGap: "24px", minWidth: 0 }}>
                 {bell.bonuses.slice(0, 7).map(bonus => <Box key={bonus.index} direction="row" justify="between" align="start" gap="small" pad={{ vertical: "small" }} border={{ side: "bottom", color: "grey-1" }} data-testid={`bell-bonus-${bonus.index}`}>
-                    <Text size="small" weight={500}>{bonus.level === null ? bonus.data.description.replace("{", "Unavailable").replace("}", "") : bonus.getDescription()}</Text>
+                    <Text size="small" weight={500}>{bonus.getDescription()}</Text>
                     <Text size="xsmall" color="accent-2">Lv. {value(bonus.level)}</Text>
                 </Box>)}
             </Box>
         </Section>
 
         <Section title="Methods">
-            {bell.mode === null || !bell.modeNames[bell.mode]
-                ? <Text size="xsmall" color="accent-2">Current mode: Unavailable</Text>
-                : null}
+            {bell.mode === null
+                ? <Text size="xsmall" color="accent-2">Current mode: None selected</Text>
+                : !bell.modeNames[bell.mode]
+                    ? <Text size="xsmall" color="accent-2">Current mode: Unavailable</Text>
+                    : null}
             <Box style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", minWidth: 0 }}>
                 {methods.map((method, index) => {
                     const ready = method.timing.status === "ready";
-                    const topStatus = ready ? "Ready"
-                        : method.timing.status === "estimate" ? `Full in ${toTime(method.timing.hours! * 3600)}`
-                            : method.timing.status === "no-rate" ? "No production"
-                                : "Unavailable";
+                    const topStatus = method.timing.status === "ready" ? "Ready"
+                        : method.timing.status === "estimate" ? `Full in ${toTime(method.timing.hours * 3600)}`
+                            : "No production";
                     return <Box key={method.name} pad="small" border={{
                         side: index < 2 ? "bottom" : "top",
                         color: "grey-1",
@@ -612,7 +628,7 @@ function BellView({ hole, totalMoney, onOpenStudies }: { hole: Hole; totalMoney:
                             <Text size="xsmall" color="accent-2">XP</Text>
                             <Text size="xsmall">{value(method.bank)} / {value(method.requirement)}</Text>
                         </Box>
-                        {method.bank !== null && method.requirement !== null && method.requirement > 0 && <progress aria-label={`${method.name} XP progress`} value={Math.min(100, Math.max(0, method.bank / method.requirement * 100))} max={100} style={{ width: "100%", height: "6px" }} />}
+                        {method.requirement > 0 && <progress aria-label={`${method.name} XP progress`} value={Math.min(100, Math.max(0, method.bank / method.requirement * 100))} max={100} style={{ width: "100%", height: "6px" }} />}
                         <Text size="xsmall" color="accent-2">XP rate {value(method.rate, "/hr")}</Text>
                     </Box>;
                 })}
@@ -626,28 +642,28 @@ function BellView({ hole, totalMoney, onOpenStudies }: { hole: Hole; totalMoney:
                         const wallet = improvement.wallet;
                         const currency = improvement.data.resource;
                         const cost = improvement.cost;
-                        const balance = improvement.index === 0 ? totalMoney : wallet?.type === "account" ? wallet.balance : null;
-                        const affordabilityColor = cost === null || balance === null ? undefined : balance >= cost ? "green-1" : "critical";
+                        const balance = wallet.type === "account" ? wallet.balance : totalMoney;
+                        const affordabilityColor = balance === null ? undefined : balance >= cost ? "green-1" : "critical";
                         const image = resourceImage(hole, currency);
                         return <Box key={improvement.index} gap="xsmall" pad="small" style={{
                             borderRight: index % 3 !== 2 ? `1px solid ${upgradeSeparator}` : undefined,
                             borderBottom: index < 3 ? `1px solid ${upgradeSeparator}` : undefined,
                         }} data-testid={`bell-improvement-${improvement.index}`}>
                             <Text size="xsmall" color="accent-2">Lv. {value(improvement.level)}</Text>
-                            <Text size="small" weight={500}>{improvement.quantity === null ? "Unavailable" : improvement.data.bonus.replace("{", notateNumber(improvement.quantity)).replace(/[{}]/g, "").replace(/\s+/g, " ").trim()}</Text>
+                            <Text size="small" weight={500}>{improvement.data.bonus.replace("{", notateNumber(improvement.quantity)).replace(/[{}]/g, "").replace(/\s+/g, " ").trim()}</Text>
                             <Box direction="row" gap="xsmall" align="center" wrap>
                                 {currency === "Coins" ? <>
                                     {balance === null ? "Unavailable" : <CoinsDisplay coinMap={getCoinsArray(balance)} maxCoins={3} coinScale={0.75} regularRow textColor={affordabilityColor} />}
                                     <Text size="xsmall" color={affordabilityColor}> / </Text>
-                                    {cost === null ? "Unavailable" : <CoinsDisplay coinMap={getCoinsArray(cost)} maxCoins={3} coinScale={0.75} regularRow textColor={affordabilityColor} />}
+                                    <CoinsDisplay coinMap={getCoinsArray(cost)} maxCoins={3} coinScale={0.75} regularRow textColor={affordabilityColor} />
                                 </> : currency === "Bits" ? <>
                                     {balance === null ? "Unavailable" : <BitsDisplay value={balance} scale={0.75} textSize="xsmall" textColor={affordabilityColor} />}
                                     <Text size="xsmall" color={affordabilityColor}> / </Text>
-                                    {cost === null ? "Unavailable" : <BitsDisplay value={cost} scale={0.75} textSize="xsmall" textColor={affordabilityColor} />}
+                                    <BitsDisplay value={cost} scale={0.75} textSize="xsmall" textColor={affordabilityColor} />
                                 </> : <>
                                     {balance === null ? "Unavailable" : <>{image && <IconImage data={image} scale={0.75} />}<Text size="xsmall" color={affordabilityColor}>{notateNumber(balance)}</Text></>}
                                     <Text size="xsmall" color={affordabilityColor}> / </Text>
-                                    {cost === null ? "Unavailable" : <>{image && <IconImage data={image} scale={0.75} />}<Text size="xsmall" color={affordabilityColor}>{notateNumber(cost)}</Text></>}
+                                    {image && <IconImage data={image} scale={0.75} />}<Text size="xsmall" color={affordabilityColor}>{notateNumber(cost)}</Text>
                                 </>}
                             </Box>
                         </Box>;
@@ -663,33 +679,30 @@ function BellView({ hole, totalMoney, onOpenStudies }: { hole: Hole; totalMoney:
 function HarpView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => void }) {
     const harp = hole.harp;
     const theme = useContext(ThemeContext);
-    const showNextNoteCost = harp.highestUnlockedNoteIndex === null || harp.highestUnlockedNoteIndex < 9;
-    const nextNoteCost = harp.highestUnlockedNoteIndex === null ? "Unavailable"
-        : harp.noteCost === null ? "Unavailable"
-            : `${value(harp.noteCost)} ${hole.currencies[11 + harp.highestUnlockedNoteIndex].data.name.replace(/_/g, " ")}`;
-    const opalsFound = hole.cavernOpalSources.find(source => source.id === "cavern:5")?.opals ?? null;
-    const tuneName = harp.tune === null ? "Unavailable"
+    const nextNoteCost = harp.noteCost === null ? null : {
+        amount: harp.noteCost,
+        currency: hole.currencies[11 + harp.highestUnlockedNoteIndex],
+    };
+    const opalsFound = hole.cavernOpalSources[5].opals;
+    const tuneName = harp.tune === null
+        ? "Unavailable"
         : harp.notes.find(note => note.index === harp.tune)?.name ?? "Unavailable";
-    const strings = harp.strings.filter(string => string.index < 6 || (string.index === 6 && string.level !== null && string.level > 0));
-    const totalStringLevels = harp.strings.some(string => string.level === null) ? null
-        : harp.strings.reduce((sum, string) => sum + (string.level ?? 0), 0);
+    const strings = harp.strings.filter(string => string.index < 6 || (string.index === 6 && string.level > 0));
+    const totalStringLevels = harp.strings.reduce((sum, string) => sum + string.level, 0);
     const study = hole.studies[5];
-    const noteCurrencyImage = showNextNoteCost && harp.highestUnlockedNoteIndex !== null && harp.noteCost !== null
-        ? hole.currencies[11 + harp.highestUnlockedNoteIndex].getImageData() : undefined;
-
+    const noteCurrencyImage = nextNoteCost?.currency.getImageData();
     const triggerContext = (stringIndex: number): string => {
         const contexts = harp.assignedStringEffects.filter(effect => effect.stringIndex === stringIndex);
-        if (contexts.length === 0) return stringIndex >= 0 && harp.layoutAvailable && harp.slotCount !== null && harp.strings.find(string => string.index === stringIndex)?.assignedSlots.length === 0
+        if (contexts.length === 0) return harp.strings[stringIndex].assignedSlots.length === 0
             ? "Not assigned" : "Trigger context unavailable";
         return [...new Set(contexts.map(context => {
             if (context.effect.type === "none") return "No trigger effect.";
             const status = context.triggerStatus === "power-below-threshold" ? "Below power threshold"
-                : context.triggerStatus === "power-unavailable" ? "Power unavailable"
-                    : null;
+                : "Runtime cycle state unavailable";
             const effect = context.effect.type === "notes" ? "Creates notes"
                 : context.effect.type === "opal" ? "Finds Opals"
                     : "Creates String EXP";
-            return status === null ? `${effect}.` : `${status}. ${effect}.`;
+            return `${status}. ${effect}.`;
         }))].join(" ");
     };
     return <Box gap="medium" data-testid="hole-harp-details">
@@ -701,16 +714,16 @@ function HarpView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
                         <Text size="xsmall" color="accent-2">Power rate</Text>
                         <Text size="small">{value(harp.powerPerHour, "/hr")}</Text>
                     </Box>
-                    {showNextNoteCost && <Box direction="row" gap="xsmall" align="center" pad={{ right: "small" }} border={{ side: "right", color: "grey-1" }} data-testid="harp-next-note-cost">
+                    {nextNoteCost !== null && <Box direction="row" gap="xsmall" align="center" pad={{ right: "small" }} border={{ side: "right", color: "grey-1" }} data-testid="harp-next-note-cost">
                         <Text size="xsmall" color="accent-2">Next note cost</Text>
                         {noteCurrencyImage && <IconImage data={noteCurrencyImage} scale={0.65} />}
-                        <Text size="small">{nextNoteCost}</Text>
+                        <Text size="small">{`${notateNumber(nextNoteCost.amount)} ${nextNoteCost.currency.data.name.replace(/_/g, " ")}`}</Text>
                     </Box>}
                     <Box direction="row" gap="xsmall" align="center" pad={{ right: "small" }} border={{ side: "right", color: "grey-1" }}>
                         <Text size="xsmall" color="accent-2">Opal chance</Text>
                         <TipDisplay heading="Baseline Opal chance" body={<Text size="xsmall">Baseline chance uses saved power before any strings are plucked. Domino Effect increases this chance as strings are plucked.</Text>} size="small">
                             <Text size="small" tabIndex={0} style={{ textDecoration: "underline dotted", textUnderlineOffset: "3px", cursor: "help" }}>
-                                {harp.baselineOpalChance === null ? "Unavailable" : `${(harp.baselineOpalChance * 100).toLocaleString("en-US", { maximumFractionDigits: 2 })}%`}
+                                {(harp.baselineOpalChance * 100).toLocaleString("en-US", { maximumFractionDigits: 2 })}%
                             </Text>
                         </TipDisplay>
                     </Box>
@@ -753,34 +766,29 @@ function HarpView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
 
         <Section title="Strings">
             <Box direction="row" align="center" justify="between" gap="small" wrap>
-                <Text size="xsmall" color="accent-2">{harp.slotCount === null ? "Unavailable" : `${harp.slotCount} slots`}</Text>
+                <Text size="xsmall" color="accent-2">{harp.slotCount} slots</Text>
                 <Text size="xsmall" color="accent-2">Owned string levels: {value(totalStringLevels)}</Text>
             </Box>
             <RoundedShadowBox background="dark-1" pad="small" data-testid="harp-assignment-order">
-                {!harp.layoutAvailable || harp.slotCount === null
-                    ? <Text size="xsmall" color="accent-2">Assignment layout unavailable</Text>
-                    : <Box direction="row" gap="small" align="center" style={{ overflowX: "auto", minWidth: 0 }}>
-                        {Array.from({ length: harp.slotCount }, (_, slot) => {
-                            const stringIndex = harp.layoutAvailable ? harp.layout[slot] : null;
-                            const string = stringIndex === null || stringIndex === undefined
-                                ? undefined : harp.strings.find(entry => entry.index === stringIndex);
-                            const slotUnavailable = slot >= harp.layout.length || (stringIndex !== null && string === undefined);
-                            return <Box key={slot} direction="column" align="center" gap="xxsmall" flex={false} aria-label={`Slot ${slot + 1}: ${slotUnavailable ? "Unavailable" : string ? `String ${string.data.stringLetter}` : "Empty"}`}>
-                                <Text size="xsmall" color="accent-2">#{slot + 1}</Text>
-                                {slotUnavailable ? <Text size="small">Unavailable</Text>
-                                    : string ? <IconImage data={string.imageData} scale={0.8} />
-                                        : <Text size="small">—</Text>}
-                            </Box>;
-                        })}
-                    </Box>}
+                <Box direction="row" gap="small" align="center" style={{ overflowX: "auto", minWidth: 0 }}>
+                    {Array.from({ length: harp.slotCount }, (_, slot) => {
+                        const stringIndex = harp.layout[slot];
+                        const string = stringIndex == null ? undefined : harp.strings[stringIndex];
+                        const slotUnavailable = stringIndex != null && string === undefined;
+                        return <Box key={slot} direction="column" align="center" gap="xxsmall" flex={false} aria-label={`Slot ${slot + 1}: ${slotUnavailable ? "Unavailable" : string ? `String ${string.data.stringLetter}` : "Empty"}`}>
+                            <Text size="xsmall" color="accent-2">#{slot + 1}</Text>
+                            {slotUnavailable ? <Text size="small">Unavailable</Text>
+                                : string ? <IconImage data={string.imageData} scale={0.8} />
+                                    : <Text size="small">—</Text>}
+                        </Box>;
+                    })}
+                </Box>
             </RoundedShadowBox>
             <Box style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", minWidth: 0, gap: "8px" }}>
-                {strings.map((string, index) => {
+                {strings.map(string => {
                     const passiveDescription = string.index === 6 ? null : string.getPassiveDescription();
-                    const currentLevel = string.level === null ? "Unavailable" : `${string.level}`;
-                    const levelDetails = string.level === null || string.experience === null || string.nextLevelExperience === null
-                        ? "Saved level or EXP is unavailable."
-                        : `Current EXP: ${exact(string.experience)}. Next level: ${exact(string.nextLevelExperience)} EXP.`;
+                    const currentLevel = `${string.level}`;
+                    const levelDetails = `Current EXP: ${exact(string.experience)}. Next level: ${exact(string.nextLevelExperience)} EXP.`;
                     return <GameCard key={string.index} title={`String ${string.data.stringLetter}`} image={string.imageData}
                         testId={`harp-string-${string.index}`} inactive={string.unlocked === false}
                         headerRight={<TipDisplay heading={`String ${string.data.stringLetter} · Lv. ${currentLevel}`} body={<Text size="xsmall">{levelDetails}</Text>} size="small">
@@ -789,9 +797,9 @@ function HarpView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
                         {string.index === 6
                             ? <Text size="xsmall">Reserved string.</Text>
                             : <>
-                                <Text size="xsmall">{string.unlocked === null ? "Ownership unavailable" : triggerContext(string.index)}</Text>
+                                <Text size="xsmall">{triggerContext(string.index)}</Text>
                                 <Box pad={{ top: "xsmall" }} border={{ side: "top", color: "grey-1" }}>
-                                    <Text size="xsmall">{passiveDescription ?? "Passive unavailable"}</Text>
+                                    <Text size="xsmall">{passiveDescription ?? "No passive effect."}</Text>
                                 </Box>
                             </>}
                     </GameCard>;
@@ -806,13 +814,12 @@ function HarpView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
 function LampView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => void }) {
     const lamp = hole.lamp;
     const effectiveWishBonus = (wishIndex: number): string | null =>
-        wishIndex === 7 && lamp.getBonus(true) !== null ? exact(lamp.getBonus(true), "%") : null;
+        wishIndex === 7 ? exact(lamp.getBonus(true), "%") : null;
     const wishDescription = (wish: typeof lamp.wishes[number]): string => {
         let description = wish.data.desc;
         if ([4, 6, 8, 10].includes(wish.index)) {
             const specialIndex = (wish.index - 4) / 2;
             const effects = [0, 1, 2].map(inlineIndex => lamp.getBonus(false, specialIndex, inlineIndex));
-            if (effects.some(effect => effect === null)) return description.replaceAll(" @ ", "\n");
             return description.replaceAll(" @ ", "\n")
                 .replace("+~%", `+${exact(effects[2])}%`)
                 .replace("+{%", `+${exact(effects[0])}%`)
@@ -821,8 +828,7 @@ function LampView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
         return description.replaceAll(" @ ", "\n");
     };
     const resetSummary = (reset: typeof lamp.resetConsequences[number]): string => {
-        if (reset.before === null || reset.after === null) return "Imported target values unavailable";
-        const changed = reset.before.filter((before, index) => before !== reset.after![index]).length;
+        const changed = reset.before.filter((before, index) => before !== reset.after[index]).length;
         if (reset.category === "All Opals Invested") return `${changed} of ${reset.before.length} Opal slots would clear to 0`;
         if (reset.category === "Conjuror PTS Invested") return `${changed} of ${reset.before.length} point entries would clear to 0`;
         if (reset.category === "Jar Collectible Enchantment LVs") return `${changed} of ${reset.before.length} enchantment levels exceed 1; reset caps them at 1`;
@@ -838,7 +844,7 @@ function LampView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
                 </Box>
                 <Box gap="xxsmall">
                     <Text size="xsmall" color="accent-2">Expected daily gain</Text>
-                    <Text size="small">{lamp.wishesPerDay === null ? "Unavailable" : `${lamp.wishesPerDay.toLocaleString("en-US", { maximumFractionDigits: 2 })} wishes/day`}</Text>
+                    <Text size="small">{`${lamp.wishesPerDay.toLocaleString("en-US", { maximumFractionDigits: 2 })} wishes/day`}</Text>
                 </Box>
             </Box>
         </Section>

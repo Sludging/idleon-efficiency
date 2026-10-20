@@ -23,7 +23,6 @@ describe('Hole earned Opals, allocation effects and Another Try facts', () => {
   it(`includes the current ${id} external contribution once`, () => {
    const sources = hole.opalLedger.sources.filter(source => source.id === id);
    expect(sources).toHaveLength(1);
-   expect(sources[0].unavailableReason).toBeNull();
    coreNumber(sources[0].opals, results, `source_${id}`, `${id} external Opals`);
   });
  });
