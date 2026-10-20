@@ -46,18 +46,14 @@ export class Emperor extends Domain {
     }
 
     parse(data: Map<string, any>): void {
-        const optionList = data.get("OptLacc") as number[];
+        const optionList = (data.get("OptLacc") as number[] | undefined) ?? [];
         const emperor = data.get("emperor") as Emperor;
         // Parse emperor kills from OptionsListAccount[369]
 
-        // Exit early when we don't have the data we need.
-        if (optionList.length < 382) {
-            return;
-        }
-        emperor.emperorKills = optionList?.[369] || 0;
+        emperor.emperorKills = optionList[369] ?? 0;
 
         // Parse max attempts from OptionsListAccount[382]
-        emperor.maxEmperorAttempts = optionList?.[382] || 0;
+        emperor.maxEmperorAttempts = optionList[382] ?? 0;
 
         // Calculate derived values
         emperor.bossHP = emperor.calculateBossHP();

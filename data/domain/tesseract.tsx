@@ -992,35 +992,31 @@ export const updateTesseractEfficiency = (accountData: Map<string, any>) => {
     const lab = accountData.get("lab") as Lab;
     const emperor = accountData.get("emperor") as Emperor;
 
-    if (tesseract && players) {
-        try {
-            // Find best Arcane Cultist
-            const arcaneCultist = players.slice().sort((a, b) => b.level - a.level).find(p => p.classId === 40);
-            if (arcaneCultist) {
-                tesseract.bestArcaneCultist = arcaneCultist;
-                
-                // Set ETC bonuses from Arcane Cultist equipment
-                tesseract.etcBonus93 = arcaneCultist.gear.getBonus(EquipmentBonus.ArcanistDamage);
-                tesseract.etcBonus94 = arcaneCultist.gear.getBonus(EquipmentBonus.ArcanistAccuracy);
-                tesseract.etcBonus95 = arcaneCultist.gear.getBonus(EquipmentBonus.ExtraTachyons);
-            }
-
-            // Set pristine bonus 22 from sneaking
-            tesseract.pristineBonus22 = sneaking.pristineCharms?.find(c => c.index === 22)?.unlocked ? sneaking.pristineCharms.find(c => c.index === 22)?.getBonus() ?? 0 : 0;
-            // Set arcade bonus 50
-            tesseract.arcadeBonus50 = arcade.bonuses[50]?.getBonus() ?? 0;
-            // Set lab bonus 123
-            tesseract.labBonus123 = lab.bonuses?.find(b => b.index === 123)?.getBonus() ?? 0;
+    try {
+        // Find best Arcane Cultist
+        const arcaneCultist = players.slice().sort((a, b) => b.level - a.level).find(p => p.classId === 40);
+        if (arcaneCultist) {
+            tesseract.bestArcaneCultist = arcaneCultist;
             
-            // Set emperor bonus 6 (Arcane Cultist Extra Tachyons)
-            tesseract.emperorBonus6 = emperor?.emperorBonuses?.find((b: any) => b.index === 6)?.getBonus() ?? 0;
-
-            tesseract.calculateAllEfficiencies();
-        } catch (error) {
-            console.error("Failed to calculate tesseract efficiency:", error);
+            // Set ETC bonuses from Arcane Cultist equipment
+            tesseract.etcBonus93 = arcaneCultist.gear.getBonus(EquipmentBonus.ArcanistDamage);
+            tesseract.etcBonus94 = arcaneCultist.gear.getBonus(EquipmentBonus.ArcanistAccuracy);
+            tesseract.etcBonus95 = arcaneCultist.gear.getBonus(EquipmentBonus.ExtraTachyons);
         }
-    } else {
-        console.error("Failed to calculate tesseract efficiency: tesseract or players is undefined");
+
+        // Set pristine bonus 22 from sneaking
+        tesseract.pristineBonus22 = sneaking.pristineCharms.find(c => c.index === 22)?.unlocked ? sneaking.pristineCharms.find(c => c.index === 22)?.getBonus() ?? 0 : 0;
+        // Set arcade bonus 50
+        tesseract.arcadeBonus50 = arcade.bonuses[50]?.getBonus() ?? 0;
+        // Set lab bonus 123
+        tesseract.labBonus123 = lab.bonuses.find(b => b.index === 123)?.getBonus() ?? 0;
+        
+        // Set emperor bonus 6 (Arcane Cultist Extra Tachyons)
+        tesseract.emperorBonus6 = emperor.emperorBonuses.find((b: any) => b.index === 6)?.getBonus() ?? 0;
+
+        tesseract.calculateAllEfficiencies();
+    } catch (error) {
+        console.error("Failed to calculate tesseract efficiency:", error);
     }
     return tesseract;
 }

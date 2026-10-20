@@ -63,7 +63,7 @@ export class LegendTalents extends Domain {
 
     getRawKeys(): RawData[] {
         return [
-            { key: "Spelunk", perPlayer: false, default: 0 }
+            { key: "Spelunk", perPlayer: false, default: [] }
         ]
     }
 
@@ -75,18 +75,11 @@ export class LegendTalents extends Domain {
 
     parse(data: Map<string, any>): void {
         const legendTalents = data.get(this.getDataKey()) as LegendTalents;
-        const spelunkingData = data.get("Spelunk") as any[][];
+        const spelunkingData = data.get("Spelunk") as number[][];
 
-        // Safe guard for old accounts / missing data.
-        if (!spelunkingData || spelunkingData.length == 0) {
-            return;
-        }
-
-        const legendTalentsLevels = spelunkingData[18] as number[];
+        const legendTalentsLevels = spelunkingData[18] ?? [];
         legendTalents.talents.forEach(talent => {
-            if (talent.index < legendTalentsLevels.length) {
-                talent.level = legendTalentsLevels[talent.index];
-            }
+            talent.level = legendTalentsLevels[talent.index] ?? 0;
         });
     }
     

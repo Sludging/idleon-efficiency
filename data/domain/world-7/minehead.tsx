@@ -80,7 +80,7 @@ export class Minehead extends Domain {
     serverCostScaling: number = 1;
     mineheadDoublersOwned = 0;
     mineheadDoublersRemaining = 0;
-    private preparedTradeDropRateMultiplier: number | undefined;
+    private preparedTradeDropRateMultiplier = 1;
     prepareMenagerieDoublerSelections(menagerie: { isMineheadUpgradeDoubled(index: number): boolean }): void {
         this.upgrades.forEach(upgrade => {
             upgrade.menagerieDoubled = menagerie.isMineheadUpgradeDoubled(upgrade.index);
@@ -107,7 +107,7 @@ export class Minehead extends Domain {
 
     parse(data: Map<string, any>): void {
         const minehead = data.get(this.getDataKey()) as Minehead;
-        minehead.preparedTradeDropRateMultiplier = undefined;
+        minehead.preparedTradeDropRateMultiplier = 1;
         const researchData = data.get("Research") as number[][];
         const upgradeLevels = researchData[8] || [];
         const player0Skills = data.get("Lv0_0") as number[];
@@ -130,9 +130,6 @@ export class Minehead extends Domain {
     }
 
     getTradeDropRateMultiplier(): number {
-        if (this.preparedTradeDropRateMultiplier === undefined) {
-            throw new Error("Minehead trade drop-rate multiplier has not been calculated");
-        }
         return this.preparedTradeDropRateMultiplier;
     }
 

@@ -917,54 +917,44 @@ export const updateGrimoireEfficiency = (accountData: Map<string, any>) => {
     const lab = accountData.get("lab") as Lab;
     const emperor = accountData.get("emperor") as Emperor;
 
-    if (grimoire && players) {
-        try {
-            // Find Death Bringer player (classId 11)
-            const deathBringer = players.slice().sort((player1, player2) => player1.level > player2.level ? -1 : 1).find((player: any) => player.classId === ClassIndex.Death_Bringer);
-            if (deathBringer) {
-                grimoire.bestDeathBringer = deathBringer;
+    try {
+        // Find Death Bringer player (classId 11)
+        const deathBringer = players.slice().sort((player1, player2) => player1.level > player2.level ? -1 : 1).find((player: any) => player.classId === ClassIndex.Death_Bringer);
+        if (deathBringer) {
+            grimoire.bestDeathBringer = deathBringer;
 
-                // Set ETC bonus 76 from Death Bringer equipment (EXTRA_BONES)
-                grimoire.etcBonus76 = deathBringer.gear.getBonus(EquipmentBonus.ExtraBones);
-            }
-
-            // Set pristine bonus 18 from sneaking
-            grimoire.pristineBonus18 = 0;
-            if (sneaking?.pristineCharms) {
-                const charm18 = sneaking.pristineCharms.find((charm: any) => charm.index === 18);
-                if (charm18?.unlocked) {
-                    grimoire.pristineBonus18 = charm18.getBonus();
-                }
-            }
-
-            // Set arcade bonus 40
-            grimoire.arcadeBonus40 = 0;
-            if (arcade?.bonuses && arcade.bonuses.length > 40) {
-                grimoire.arcadeBonus40 = arcade.bonuses[40]?.getBonus() || 0;
-            }
-
-            // Set mainframe bonus 121 from lab domain (Jewel 21 - Deadly Wrath Jewel)
-            grimoire.mainframeBonus121 = 0;
-            if (lab?.jewels && lab.jewels[21]) {
-                grimoire.mainframeBonus121 = lab.jewels[21].getBonus();
-            }
-
-            // Set emperor bonus 1 from emperor domain (Death Bringer Extra Bones)
-            grimoire.emperorBonus1 = 0;
-            if (emperor) {
-                const emperorDustBonus = emperor.emperorBonuses.find(bonus => bonus.index == 1)?.getBonus() ?? 0;
-                grimoire.emperorBonus1 = emperorDustBonus;
-            }
-
-            // PLACEHOLDER - need to implement later
-            grimoire.gambitBonus12 = 0; // From holes system
-
-            grimoire.calculateAllEfficiencies();
-        } catch (error) {
-            console.error("Failed to calculate grimoire efficiency:", error);
+            // Set ETC bonus 76 from Death Bringer equipment (EXTRA_BONES)
+            grimoire.etcBonus76 = deathBringer.gear.getBonus(EquipmentBonus.ExtraBones);
         }
-    } else {
-        console.error("Failed to calculate grimoire efficiency: grimoire or players is undefined");
+
+        // Set pristine bonus 18 from sneaking
+        grimoire.pristineBonus18 = 0;
+        const charm18 = sneaking.pristineCharms.find((charm: any) => charm.index === 18);
+        if (charm18?.unlocked) {
+            grimoire.pristineBonus18 = charm18.getBonus();
+        }
+
+        // Set arcade bonus 40
+        grimoire.arcadeBonus40 = 0;
+        if (arcade.bonuses.length > 40) {
+            grimoire.arcadeBonus40 = arcade.bonuses[40]?.getBonus() || 0;
+        }
+
+        // Set mainframe bonus 121 from lab domain (Jewel 21 - Deadly Wrath Jewel)
+        grimoire.mainframeBonus121 = 0;
+        if (lab.jewels[21]) {
+            grimoire.mainframeBonus121 = lab.jewels[21].getBonus();
+        }
+
+        // Set emperor bonus 1 from emperor domain (Death Bringer Extra Bones)
+        grimoire.emperorBonus1 = emperor.emperorBonuses.find(bonus => bonus.index == 1)?.getBonus() ?? 0;
+
+        // PLACEHOLDER - need to implement later
+        grimoire.gambitBonus12 = 0; // From holes system
+
+        grimoire.calculateAllEfficiencies();
+    } catch (error) {
+        console.error("Failed to calculate grimoire efficiency:", error);
     }
 
     return grimoire;

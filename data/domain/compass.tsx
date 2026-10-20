@@ -1396,61 +1396,50 @@ export const updateCompassDamageEfficiency = (accountData: Map<string, any>) => 
     // Keep a prepared count so upgrade simulations use the same mastery progression.
     compass.completedMasteries = sneaking.completedMasteries;
 
-    if (compass && players) {
-        try {
+    try {
 
-            // Find Wind Walker player
-            const windWalker = players.slice().sort((player1, player2) => player1.level > player2.level ? -1 : 1).find((player: any) => player.classId === 29);
-            if (windWalker) {
-                compass.bestWindWalker = windWalker;
+        // Find Wind Walker player
+        const windWalker = players.slice().sort((player1, player2) => player1.level > player2.level ? -1 : 1).find((player: any) => player.classId === 29);
+        if (windWalker) {
+            compass.bestWindWalker = windWalker;
 
-                // Set ETC bonuses from Wind Walker equipment
-                compass.etcBonus85 = windWalker.gear.getBonus(EquipmentBonus.DustMulti);
-                compass.etcBonus79 = windWalker.gear.getBonus(EquipmentBonus.ExtraDust);
-            }
-
-            // Set pristine bonus 19 from sneaking
-            compass.pristineBonus19 = 0;
-            if (sneaking?.pristineCharms) {
-                const charm19 = sneaking.pristineCharms.find((charm: any) => charm.index === 19);
-                if (charm19?.unlocked) {
-                    compass.pristineBonus19 = charm19.getBonus();
-                }
-            }
-
-
-            // Set talent 421 from Wind Walker
-            compass.talent421 = 0;
-            if (windWalker?.talents) {
-                const talent = windWalker.talents.find((t: any) => t.skillIndex === 421);
-                compass.talent421 = talent?.getBonus() || 0;
-            }
-
-            // Set arcade bonus 47
-            compass.arcadeBonus47 = 0;
-            if (arcade?.bonuses && arcade.bonuses.length > 47) {
-                compass.arcadeBonus47 = arcade.bonuses[47]?.getBonus() || 0;
-            }
-
-            // Set emperor bonus 4 from emperor domain (Windwalker Extra Dust)
-            compass.emperorBonus4 = 0;
-            if (emperor) {
-                const emperorDustBonus = emperor.emperorBonuses.find(bonus => bonus.index == 4)?.getBonus() ?? 0;
-                compass.emperorBonus4 = emperorDustBonus;
-            }
-
-            // Set mainframe bonus 122 from lab domain (Jewel 22)
-            compass.mainframeBonus122 = 0;
-            if (lab?.jewels && lab.jewels[22]) {
-                compass.mainframeBonus122 = lab.jewels[22].getBonus();
-            }
-
-            compass.calculateAllEfficiencies();
-        } catch (error) {
-            console.error("Failed to calculate compass efficiency:", error);
+            // Set ETC bonuses from Wind Walker equipment
+            compass.etcBonus85 = windWalker.gear.getBonus(EquipmentBonus.DustMulti);
+            compass.etcBonus79 = windWalker.gear.getBonus(EquipmentBonus.ExtraDust);
         }
-    } else {
-        console.error("Failed to calculate compass efficiency: compass or players is undefined");
+
+        // Set pristine bonus 19 from sneaking
+        compass.pristineBonus19 = 0;
+        const charm19 = sneaking.pristineCharms.find((charm: any) => charm.index === 19);
+        if (charm19?.unlocked) {
+            compass.pristineBonus19 = charm19.getBonus();
+        }
+
+        // Set talent 421 from Wind Walker
+        compass.talent421 = 0;
+        if (windWalker?.talents) {
+            const talent = windWalker.talents.find((t: any) => t.skillIndex === 421);
+            compass.talent421 = talent?.getBonus() || 0;
+        }
+
+        // Set arcade bonus 47
+        compass.arcadeBonus47 = 0;
+        if (arcade.bonuses.length > 47) {
+            compass.arcadeBonus47 = arcade.bonuses[47]?.getBonus() || 0;
+        }
+
+        // Set emperor bonus 4 from emperor domain (Windwalker Extra Dust)
+        compass.emperorBonus4 = emperor.emperorBonuses.find(bonus => bonus.index == 4)?.getBonus() ?? 0;
+
+        // Set mainframe bonus 122 from lab domain (Jewel 22)
+        compass.mainframeBonus122 = 0;
+        if (lab.jewels[22]) {
+            compass.mainframeBonus122 = lab.jewels[22].getBonus();
+        }
+
+        compass.calculateAllEfficiencies();
+    } catch (error) {
+        console.error("Failed to calculate compass efficiency:", error);
     }
 
     return compass;
