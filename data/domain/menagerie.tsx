@@ -208,7 +208,6 @@ export class Menagerie extends Domain {
     shellBalance = 0;
     rank = 0;
     lumiPerHour = 0;
-    isAvailable = true;
     availableMissionCount = 0;
     availableUnlockCount = 0;
     availableBonusCount = 0;
@@ -301,23 +300,23 @@ export class Menagerie extends Domain {
 
     parse(data: Map<string, unknown>): void {
         const menagerie = data.get(this.getDataKey()) as Menagerie;
-        const savedMenagerie = data.get("Menagerie") as (number | string)[][] | undefined;
-        const savedMissionClaims = savedMenagerie?.[1] ?? [];
+        const savedMenagerie = data.get("Menagerie") as (number | string)[][];
+        const savedMissionClaims = savedMenagerie[1] ?? [];
         menagerie.missions.forEach(mission => mission.parse(Number(savedMissionClaims[mission.index] ?? 0)));
-        menagerie.lumiBalance = Number(savedMenagerie?.[0]?.[0] ?? 0);
-        menagerie.rank = Number(savedMenagerie?.[0]?.[2] ?? 0);
-        menagerie.purpleJellyfish.parse(savedMenagerie?.[0]);
-        menagerie.blueJellyfish.parse(savedMenagerie?.[0]);
-        menagerie.redJellyfish.parse(savedMenagerie?.[0], savedMenagerie?.[4]);
-        menagerie.silverJellyfish.parse(savedMenagerie?.[0]);
-        menagerie.yellowJellyfish.parse(savedMenagerie?.[0]);
+        menagerie.lumiBalance = Number(savedMenagerie[0]?.[0] ?? 0);
+        menagerie.rank = Number(savedMenagerie[0]?.[2] ?? 0);
+        menagerie.purpleJellyfish.parse(savedMenagerie[0]);
+        menagerie.blueJellyfish.parse(savedMenagerie[0]);
+        menagerie.redJellyfish.parse(savedMenagerie[0], savedMenagerie[4]);
+        menagerie.silverJellyfish.parse(savedMenagerie[0]);
+        menagerie.yellowJellyfish.parse(savedMenagerie[0]);
         menagerie.shellBalance = menagerie.purpleJellyfish.shellBalance;
         menagerie.purpleJellyBonus = menagerie.purpleJellyfish.lumiContribution;
         menagerie.yellowConstructionBonus = menagerie.yellowJellyfish.lumiContribution;
         menagerie.savedTomeRank = menagerie.rank;
-        const savedUnlocks = savedMenagerie?.[2] ?? [];
+        const savedUnlocks = savedMenagerie[2] ?? [];
         menagerie.unlocks.forEach(unlock => unlock.parse(Number(savedUnlocks[unlock.index] ?? 0)));
-        const savedBonusLevels = savedMenagerie?.[3] ?? [];
+        const savedBonusLevels = savedMenagerie[3] ?? [];
         menagerie.totalMenagerieBonusLevels = savedBonusLevels.reduce<number>((total, level) => total + Number(level), 0);
         menagerie.bonuses.forEach(bonus => bonus.parse(Number(savedBonusLevels[bonus.index] ?? 0)));
         const options = data.get("OptLacc") as number[];
@@ -385,10 +384,10 @@ export class Menagerie extends Domain {
             }
         });
 
-        menagerie.cropCount = crops == null ? null : Object.keys(crops).length;
+        menagerie.cropCount = Object.keys(crops).length;
     }
 
-    private cropCount: number | null = null;
+    private cropCount = 0;
     private crucibleThresholds: string[] = [];
     private greenStackCount = 0;
     private depthProgress = 0;
@@ -702,7 +701,7 @@ export class Menagerie extends Domain {
             switch (mission.index) {
                 case 0: mission.progress = tome.totalAccountLevel; break;
                 case 2: mission.progress = this.depthProgress; break;
-                case 3: mission.progress = this.cropCount as number; break;
+                case 3: mission.progress = this.cropCount; break;
                 case 5: mission.progress = worship.totemInfo.reduce((total, totem) => total + totem.maxWave, 0); break;
                 case 7: mission.progress = cooking.meals[0].level; break;
                 case 10: mission.progress = sushi.getUniqueSushi(); break;

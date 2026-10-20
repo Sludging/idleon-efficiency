@@ -255,7 +255,7 @@ function ShopCost({
     maxed,
     attribute,
 }: {
-    amount: number | undefined;
+    amount: number;
     label?: string;
     spelunking: Spelunking;
     upgrade: Upgrade;
@@ -264,8 +264,8 @@ function ShopCost({
     attribute: 'next' | 'bulk';
 }) {
     const denomination = spelunking.currentAmberDenomination;
-    const canAfford = amount !== undefined && !locked && !maxed && spelunking.canAffordUpgrade(upgrade, amount);
-    const text = maxed ? 'Maxed' : amount === undefined ? '—' : denomination.formatAmount(amount);
+    const canAfford = !locked && !maxed && spelunking.canAffordUpgrade(upgrade, amount);
+    const text = maxed ? 'Maxed' : denomination.formatAmount(amount);
 
     return (
         <Box gap="xxsmall" align="end" style={{ opacity: locked ? 0.6 : 1, minWidth: '116px' }}
@@ -274,7 +274,7 @@ function ShopCost({
             data-spelunking-cost-affordable={canAfford}
         >
             {label && <Text size="xsmall" color="accent-2">{label}</Text>}
-            {amount === undefined || maxed ? (
+            {maxed ? (
                 <Text size="xsmall" data-spelunking-cost-text={attribute}>{text}</Text>
             ) : (
                 <Box direction="row" align="center" gap="xxsmall" data-spelunking-cost-row={attribute}>
@@ -406,7 +406,7 @@ export function SpelunkingShop({ spelunking }: SpelunkingPart3Props) {
             align: 'end',
             render: (row: ShopRow) => {
                 const remaining = row.upgrade.remainingCap;
-                const amount = remaining === undefined ? row.upgrade.costNext10 : row.upgrade.costToMax;
+                const amount = remaining === undefined ? row.upgrade.costNext10 : row.upgrade.costToMax!;
                 const label = remaining === undefined
                     ? 'Next 10'
                     : `To max · ${remaining} purchases remain`;
