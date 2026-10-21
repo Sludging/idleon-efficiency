@@ -89,16 +89,6 @@
       "description": "Talent level bonus from divinity - Bear"
     },
     {
-      "label": "talent_max_level_equinox_12_bonus",
-      "expression": "idleon.getAttr(\"Dream\")[12]",
-      "description": "Talent level bonus from equinox 12"
-    },
-    {
-      "label": "talent_max_level_ninja_mastery_bonus",
-      "expression": "5 * Math.floor((97 + idleon.getAttr(\"OptionsListAccount\")[232]) / 100)",
-      "description": "Talent level bonus from ninja mastery"
-    },
-    {
       "label": "talent_max_level_grimoire_39_bonus",
       "expression": "idleon.callFunction(\"Summoning\",\"GrimoireUpgBonus\", 39, 0)",
       "description": "Talent level bonus from grimoire 39"
@@ -112,11 +102,6 @@
       "label": "talent_max_level_tesseract_57_bonus",
       "expression": "idleon.callFunction(\"ArcaneType\",\"ArcaneUpgBonus\", 57, 0)",
       "description": "Talent level bonus from tesseract 57"
-    },
-    {
-      "label": "talent_max_level_timmy_talented_bonus",
-      "expression": "Math.max(0, Math.floor(((idleon.getAttr(\"Lv0\")[0] - 500) / 100) * idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 47, 0)))",
-      "description": "Talent max level bonus from Timmy Talented SuperBit 47"
     },
     {
       "label": "all_talent_level_149",

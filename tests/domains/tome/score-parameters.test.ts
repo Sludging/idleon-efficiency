@@ -14,7 +14,6 @@ import {
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Farming } from '../../../data/domain/world-6/farming';
 import { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
-import { Minehead } from '../../../data/domain/world-7/minehead';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
 
 const saveName = 'latest';
@@ -25,11 +24,6 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   description: 'Farming sticker collection total used for Tome score',
   extractionKey: 'tome_producer_112_total_stickers',
   domainExtractor: (gameData) => (gameData.get('farming') as Farming).getTotalStickers(),
- },
- mineheadOpponentsDefeated: {
-  description: 'Minehead opponents defeated contribution to Tome score line 110',
-  extractionKey: 'tome_producer_110_research_7_4',
-  domainExtractor: (gameData) => (gameData.get('minehead') as Minehead).getOpponentsDefeated(),
  },
  royalStatueLevels: {
   description: 'Total Royal Guardian Statue levels used in Tome score',

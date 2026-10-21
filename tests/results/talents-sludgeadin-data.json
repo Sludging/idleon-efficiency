@@ -71,14 +71,6 @@
       "expression": "Math.ceil(idleon.callFunction(\"Divinity\", \"Bonus_Minor\", 0, 2))",
       "result": 36
     },
-    "talent_max_level_equinox_12_bonus": {
-      "expression": "idleon.getAttr(\"Dream\")[12]",
-      "result": 33
-    },
-    "talent_max_level_ninja_mastery_bonus": {
-      "expression": "5 * Math.floor((97 + idleon.getAttr(\"OptionsListAccount\")[232]) / 100)",
-      "result": 5
-    },
     "talent_max_level_grimoire_39_bonus": {
       "expression": "idleon.callFunction(\"Summoning\",\"GrimoireUpgBonus\", 39, 0)",
       "result": 30
@@ -90,10 +82,6 @@
     "talent_max_level_tesseract_57_bonus": {
       "expression": "idleon.callFunction(\"ArcaneType\",\"ArcaneUpgBonus\", 57, 0)",
       "result": 5
-    },
-    "talent_max_level_timmy_talented_bonus": {
-      "expression": "Math.max(0, Math.floor(((idleon.getAttr(\"Lv0\")[0] - 500) / 100) * idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 47, 0)))",
-      "result": 8
     },
     "all_talent_level_149": {
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLV\", \"149\")",

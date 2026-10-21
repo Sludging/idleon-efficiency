@@ -3,11 +3,6 @@
   "target": "Tome score",
   "extractions": [
     {
-      "label": "tome_line_count",
-      "expression": "idleon.getAttr(\"CustomLists\").h.Tome.length",
-      "description": "Number of Tome lines calculated by the game."
-    },
-    {
       "label": "tome_pts_0",
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 0, 0)",
       "description": "Total level of all stamps."
@@ -641,11 +636,6 @@
       "label": "tome_producer_109_spelunk_46_count",
       "expression": "idleon.getAttr(\"Spelunk\")[46].length",
       "description": "Game source for Tome line 109: length of Spelunk[46], representing Premium Hats found."
-    },
-    {
-      "label": "tome_producer_110_research_7_4",
-      "expression": "idleon.getAttr(\"Research\")[7][4]",
-      "description": "Minehead opponents defeated used for Tome score line 110"
     },
     {
       "label": "tome_producer_111_research_11_count",

@@ -49,24 +49,6 @@ const talentMaxLevelParameterSpecs = {
       return sludgadin?.extraLevelsFromBear ?? 0;
     }
   },
-  talent_max_level_equinox_12_bonus: {
-    description: 'Max level bonus - Equinox 12 - Sludgadin',
-    extractionKey: 'talent_max_level_equinox_12_bonus',
-    domainExtractor: (gameData: Map<string, any>) => {
-      const players = gameData.get("players") as Player[];
-      const sludgadin = players.find(player => player.playerID == 0) ?? undefined;
-      return sludgadin?.extraLevelsFromEquinox ?? 0;
-    }
-  },
-  talent_max_level_ninja_mastery_bonus: {
-    description: 'Max level bonus - Ninja Mastery - Sludgadin',
-    extractionKey: 'talent_max_level_ninja_mastery_bonus',
-    domainExtractor: (gameData: Map<string, any>) => {
-      const players = gameData.get("players") as Player[];
-      const sludgadin = players.find(player => player.playerID == 0) ?? undefined;
-      return sludgadin?.extraLevelsFromNinjaMastery ?? 0;
-    }
-  },
   talent_max_level_grimoire_39_bonus: {
     description: 'Max level bonus - Grimoire 39 - Sludgadin',
     extractionKey: 'talent_max_level_grimoire_39_bonus',
@@ -92,15 +74,6 @@ const talentMaxLevelParameterSpecs = {
       const players = gameData.get("players") as Player[];
       const sludgadin = players.find(player => player.playerID == 0) ?? undefined;
       return sludgadin?.extraLevelsFromTesseract ?? 0;
-    }
-  },
-  talent_max_level_timmy_talented_bonus: {
-    description: 'Max level bonus - Timmy Talented SuperBit 47 - Sludgadin',
-    extractionKey: 'talent_max_level_timmy_talented_bonus',
-    domainExtractor: (gameData: Map<string, any>) => {
-      const players = gameData.get("players") as Player[];
-      const sludgadin = players.find(player => player.playerID == 0) ?? undefined;
-      return sludgadin?.extraLevelsFromSuperBit ?? 0;
     }
   },
   talent_max_level_final_bonus: {

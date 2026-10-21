@@ -1,9 +1,5 @@
 {
   "extractions": {
-    "tome_line_count": {
-      "expression": "idleon.getAttr(\"CustomLists\").h.Tome.length",
-      "result": 124
-    },
     "tome_pts_0": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 0, 0)",
       "result": 1059
@@ -514,10 +510,6 @@
     "tome_producer_109_spelunk_46_count": {
       "expression": "idleon.getAttr(\"Spelunk\")[46].length",
       "result": 47
-    },
-    "tome_producer_110_research_7_4": {
-      "expression": "idleon.getAttr(\"Research\")[7][4]",
-      "result": 13
     },
     "tome_producer_111_research_11_count": {
       "expression": "idleon.getAttr(\"Research\")[11].length",

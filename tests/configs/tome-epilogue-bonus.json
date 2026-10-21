@@ -66,11 +66,6 @@
       "label": "troll_set_bonus",
       "expression": "idleon.callFunction(\"GetSetBonus\", \"TROLL_SET\", \"Bonus\", 0, 0)",
       "description": "Troll equipment set contribution to Tome epilogue bonuses"
-    },
-    {
-      "label": "epilogue_bonus_unlocked_count",
-      "expression": "idleon.getAttr(\"Spelunk\")[13][2]",
-      "description": "Spelunk unlock count controlling availability of Tome epilogue effects"
     }
   ]
 }
