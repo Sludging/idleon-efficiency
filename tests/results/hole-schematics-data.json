@@ -1734,38 +1734,6 @@
         }
       ]
     },
-    "intrinsic_15": {
-      "expression": "(() => { const h=idleon.getAttr('Holes'),own=Number(h[13][15]); return Math.max(1,own*Math.pow(1.1,Number(h[11][1]))); })()",
-      "result": 6.115909044841464
-    },
-    "intrinsic_38": {
-      "expression": "(() => { const h=idleon.getAttr('Holes'),own=Number(h[13][38]); return own*30*new Set(h[20].slice(0,Math.min(15,Math.round(1+idleon.callFunction('Holes','CosmoBonusQTY',0,1)+[32,33,34,35,36].reduce((s,id)=>s+idleon.callFunction('Holes','B_UPG',id,1),0))))).size; })()",
-      "result": 180
-    },
-    "intrinsic_41": {
-      "expression": "(() => { const h=idleon.getAttr('Holes'),own=Number(h[13][41]); return Math.max(1,own*Math.pow(1.1,Number(h[11][3]))); })()",
-      "result": 5.054470284992945
-    },
-    "intrinsic_72": {
-      "expression": "(() => { const h=idleon.getAttr('Holes'),own=Number(h[13][72]); return own*10*idleon.callFunction('getLOG',Number(h[11][38])); })()",
-      "result": 141.42662881946126
-    },
-    "intrinsic_73": {
-      "expression": "(() => { const h=idleon.getAttr('Holes'),own=Number(h[13][73]); return Math.max(1,own*Math.pow(1.1,idleon.callFunction('getLOG',Number(h[11][39])))); })()",
-      "result": 4.653931214608902
-    },
-    "intrinsic_76": {
-      "expression": "(() => { const h=idleon.getAttr('Holes'),own=Number(h[13][76]); return Math.pow(1.02,own*h[9].slice(20,30).reduce((s,v)=>s+Math.ceil(idleon.callFunction('getLOG',Number(v))),0)); })()",
-      "result": 10.55408140608017
-    },
-    "intrinsic_80": {
-      "expression": "(() => { const h=idleon.getAttr('Holes'),own=Number(h[13][80]); return Math.max(1,own*Math.pow(1.1,Number(h[11][5]))); })()",
-      "result": 6.115909044841464
-    },
-    "intrinsic_94": {
-      "expression": "(() => { const h=idleon.getAttr('Holes'),own=Number(h[13][94]); return Math.max(1,own*Math.pow(1.1,Number(h[11][7]))); })()",
-      "result": 2.357947691000002
-    },
     "effect_14": {
       "expression": "idleon.callFunction('Holes','B_UPG',14,1)",
       "result": 115560

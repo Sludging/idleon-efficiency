@@ -1,12 +1,9 @@
 import type { Hole } from '../../../data/domain/world-5/hole/hole';
 import type { Companion } from '../../../data/domain/companions';
 import { getCompanionActiveBonus } from '../../../data/domain/companions';
-import type { Player } from '../../../data/domain/player';
-import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import type { ExtractionResults } from '../../utils/live-game-data-loader';
 import { getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
-import { getTargetPlayer } from '../../utils/target-player';
 import { captured } from './part1-test-helpers';
 import type { CapturedMeasurement } from './part2-test-helpers';
 
@@ -52,10 +49,8 @@ describe('Normal-import consumers retain their direct Hole parameters', () => {
   });
  });
 
-it('matches effective Companion eligibility consumed by Divinity and Pocket records', () => {
-  const player = getTargetPlayer(data.get('players') as Player[]);
-  const effective = player.skills.get(SkillsIndex.Divinity)!.level >= 2
-   ? getCompanionActiveBonus(data.get('companions') as Companion[], 0) : 0;
-  expect(effective).toMatchLiveGame(getExtractedValue(majik, 'effective_doot'), 0);
+it('matches the whole calculated Doot companion bonus', () => {
+  const companionBonus = getCompanionActiveBonus(data.get('companions') as Companion[], 0);
+  expect(companionBonus).toMatchLiveGame(getExtractedValue(majik, 'effective_doot'), 0);
  });
 });

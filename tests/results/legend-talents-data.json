@@ -8,118 +8,21 @@
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_spent\", 0, 0)",
       "result": 122
     },
-    "companion_37_owned": {
+    "points_available": {
+      "expression": "Math.round(idleon.callFunction(\"Thingies\", \"LegendPTS_owned\", 0, 0) - idleon.callFunction(\"Thingies\", \"LegendPTS_spent\", 0, 0))",
+      "result": 7
+    },
+    "companion_37_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 37, 0)",
       "result": 1.5
     },
-    "gem_shop_42": {
-      "expression": "idleon.getAttr(\"GemItemsPurchased\")[42]",
+    "sailing_artifact_34_bonus": {
+      "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 34, 0)",
       "result": 5
-    },
-    "sailing_artifact_34_raw": {
-      "expression": "idleon.getAttr(\"Sailing\")[3][34]",
-      "result": 5
-    },
-    "sailing_artifact_34_processed": {
-      "expression": "Math.min(5, Math.round(idleon.getAttr(\"Sailing\")[3][34]))",
-      "result": 5
-    },
-    "clam_work_bonus_1": {
-      "expression": "idleon.callFunction(\"Thingies\", \"ClamWorkBonus\", 1, 0)",
-      "result": 1
-    },
-    "clam_work_bonus_4": {
-      "expression": "idleon.callFunction(\"Thingies\", \"ClamWorkBonus\", 4, 0)",
-      "result": 1
-    },
-    "event_shop_32": {
-      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 32, 0)",
-      "result": 0
     },
     "zenith_market_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 5, 0)",
       "result": 17
-    },
-    "sushi_19": {
-      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 19, 0)",
-      "result": 1
-    },
-    "spelunk_18_array": {
-      "expression": "idleon.getAttr(\"Spelunk\")[18]",
-      "result": [
-        2,
-        5,
-        4,
-        4,
-        2,
-        6,
-        3,
-        5,
-        3,
-        3,
-        5,
-        4,
-        3,
-        5,
-        1,
-        2,
-        3,
-        2,
-        3,
-        3,
-        5,
-        5,
-        1,
-        4,
-        1,
-        3,
-        3,
-        4,
-        2,
-        3,
-        3,
-        4,
-        1,
-        3,
-        3,
-        1,
-        5,
-        1,
-        1,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ]
-    },
-    "talent_7_data": {
-      "expression": "idleon.getAttr(\"CustomLists\").h.LegendTalents[7]",
-      "result": [
-        "Super_Duper_Talents",
-        "5",
-        "10",
-        "filler",
-        "+{_LVs",
-        "Super_Talent_PTS_give_+{_more_LVs_to_talents_than_they_normally_do"
-      ]
-    },
-    "talent_19_data": {
-      "expression": "idleon.getAttr(\"CustomLists\").h.LegendTalents[19]",
-      "result": [
-        "More_Soot_More_Salt",
-        "2",
-        "75",
-        "filler",
-        "}x_faster_Refinery_cycles",
-        "Refinery_cycles_are_}x_faster"
-      ]
     },
     "talent_0_level": {
       "expression": "idleon.getAttr(\"Spelunk\")[18][0]",
@@ -157,10 +60,6 @@
       "expression": "idleon.getAttr(\"Spelunk\")[18][22]",
       "result": 1
     },
-    "talent_25_level": {
-      "expression": "idleon.getAttr(\"Spelunk\")[18][25]",
-      "result": 3
-    },
     "talent_30_level": {
       "expression": "idleon.getAttr(\"Spelunk\")[18][30]",
       "result": 3
@@ -173,13 +72,13 @@
       "expression": "idleon.getAttr(\"Spelunk\")[18][38]",
       "result": 1
     },
+    "talent_25_level": {
+      "expression": "idleon.getAttr(\"Spelunk\")[18][25]",
+      "result": 3
+    },
     "talent_39_level": {
       "expression": "idleon.getAttr(\"Spelunk\")[18][39]",
       "result": 1
-    },
-    "talent_40_level": {
-      "expression": "idleon.getAttr(\"Spelunk\")[18][40]",
-      "result": 0
     },
     "talent_0_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 0, 0)",
@@ -236,10 +135,6 @@
     "talent_39_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 39, 0)",
       "result": 1
-    },
-    "talent_40_bonus": {
-      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 40, 0)",
-      "result": 0
     },
     "super_talent_unlocked": {
       "expression": "idleon.callFunction(\"Thingies\", \"SuperTalentPTS_unlockedstatus\", 0, 0)",

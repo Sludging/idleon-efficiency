@@ -15,7 +15,7 @@
     {
       "label": "jewel_1_bonus",
       "expression": "idleon.callFunction(\"MainframeBonus\", 101)",
-      "description": "Purple Navette effect used by the Amethyst Rhinestone doubling gate"
+      "description": "Purple Navette Jewel 1 input used by Lab Mainframe 0"
     },
     {
       "label": "jewel_2_bonus",
@@ -86,6 +86,11 @@
       "label": "jewel_15_bonus",
       "expression": "idleon.callFunction(\"MainframeBonus\", 115)",
       "description": "Emerald Ulthurite effect used by the Emerald Navette doubling gate"
+    },
+    {
+      "label": "jewel_17_bonus",
+      "expression": "idleon.callFunction(\"MainframeBonus\", 117)",
+      "description": "Native Lab Jewel 17 calculation used by Mainframe 11"
     },
     {
       "label": "jewel_19_bonus",

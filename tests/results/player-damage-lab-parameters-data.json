@@ -6,7 +6,7 @@
     },
     "player_damage_lab_mainframe_11": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 11)",
-      "result": 982.8000000000001
+      "result": 986.4
     },
     "player_damage_lab_mainframe_110": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 110)",

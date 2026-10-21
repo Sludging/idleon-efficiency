@@ -53,11 +53,6 @@
       "description": "Original major god activation union for the captured character."
     },
     {
-      "label": "fountain_effects",
-      "expression": "(() => {const level=Number(idleon.getAttr('Holes')[4][4]);return {capacity:level,coin:1+0.25*level,marble:1+0.1*level};})()",
-      "description": "Three original Profoun-tain caller effects."
-    },
-    {
       "label": "village_schematic_effect",
       "expression": "idleon.callFunction('Holes','CosmoBonusQTY',1,1)*idleon.callFunction('Holes','CosSchBlt',0,0)",
       "description": "Schematic-driven Villager EXP effect."
@@ -81,11 +76,6 @@
       "label": "least_investment",
       "expression": "idleon.callFunction('Holes','LeastOpalsInVillager',0,0)",
       "description": "Direct least rescued-villager investment used by Equal Spread."
-    },
-    {
-      "label": "built_schematics",
-      "expression": "idleon.callFunction('Holes','CosSchBlt',0,0)",
-      "description": "Direct built-schematic count consumed by Contented Creator."
     },
     {
       "label": "cosmo_level",

@@ -18,46 +18,6 @@
       "description": "All source catalogue identities, availability slots and current wallet costs. Built records have no next purchase."
     },
     {
-      "label": "intrinsic_15",
-      "expression": "(() => { const h=idleon.getAttr('Holes'),own=Number(h[13][15]); return Math.max(1,own*Math.pow(1.1,Number(h[11][1]))); })()",
-      "description": "Owned intrinsic value from the original schematic description and consuming caller; not full cavern output."
-    },
-    {
-      "label": "intrinsic_38",
-      "expression": "(() => { const h=idleon.getAttr('Holes'),own=Number(h[13][38]); return own*30*new Set(h[20].slice(0,Math.min(15,Math.round(1+idleon.callFunction('Holes','CosmoBonusQTY',0,1)+[32,33,34,35,36].reduce((s,id)=>s+idleon.callFunction('Holes','B_UPG',id,1),0))))).size; })()",
-      "description": "Owned intrinsic value from the original schematic description and consuming caller; not full cavern output."
-    },
-    {
-      "label": "intrinsic_41",
-      "expression": "(() => { const h=idleon.getAttr('Holes'),own=Number(h[13][41]); return Math.max(1,own*Math.pow(1.1,Number(h[11][3]))); })()",
-      "description": "Owned intrinsic value from the original schematic description and consuming caller; not full cavern output."
-    },
-    {
-      "label": "intrinsic_72",
-      "expression": "(() => { const h=idleon.getAttr('Holes'),own=Number(h[13][72]); return own*10*idleon.callFunction('getLOG',Number(h[11][38])); })()",
-      "description": "Owned intrinsic value from the original schematic description and consuming caller; not full cavern output."
-    },
-    {
-      "label": "intrinsic_73",
-      "expression": "(() => { const h=idleon.getAttr('Holes'),own=Number(h[13][73]); return Math.max(1,own*Math.pow(1.1,idleon.callFunction('getLOG',Number(h[11][39])))); })()",
-      "description": "Owned intrinsic value from the original schematic description and consuming caller; not full cavern output."
-    },
-    {
-      "label": "intrinsic_76",
-      "expression": "(() => { const h=idleon.getAttr('Holes'),own=Number(h[13][76]); return Math.pow(1.02,own*h[9].slice(20,30).reduce((s,v)=>s+Math.ceil(idleon.callFunction('getLOG',Number(v))),0)); })()",
-      "description": "Owned intrinsic value from the original schematic description and consuming caller; not full cavern output."
-    },
-    {
-      "label": "intrinsic_80",
-      "expression": "(() => { const h=idleon.getAttr('Holes'),own=Number(h[13][80]); return Math.max(1,own*Math.pow(1.1,Number(h[11][5]))); })()",
-      "description": "Owned intrinsic value from the original schematic description and consuming caller; not full cavern output."
-    },
-    {
-      "label": "intrinsic_94",
-      "expression": "(() => { const h=idleon.getAttr('Holes'),own=Number(h[13][94]); return Math.max(1,own*Math.pow(1.1,Number(h[11][7]))); })()",
-      "description": "Owned intrinsic value from the original schematic description and consuming caller; not full cavern output."
-    },
-    {
       "label": "effect_14",
       "expression": "idleon.callFunction('Holes','B_UPG',14,1)",
       "description": "Owned numeric schematic effect with the original description factor."

@@ -437,10 +437,6 @@
       "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 5)",
       "result": 8
     },
-    "built_schematics": {
-      "expression": "idleon.callFunction(\"Holes\", \"CosSchBlt\", 0, 0)",
-      "result": 101
-    },
     "gloomie_card": {
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"caveB\")",
       "result": 4
@@ -476,10 +472,6 @@
     "least_investment": {
       "expression": "idleon.callFunction(\"Holes2\", \"LeastOpalsInVillager\", 0, 0)",
       "result": 30
-    },
-    "caverns_owned": {
-      "expression": "idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0)",
-      "result": 18
     },
     "study_rate": {
       "expression": "idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0)",

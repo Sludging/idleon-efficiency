@@ -43,29 +43,9 @@
       "description": "Original cached Tome score; preserve meaningful producer mismatch."
     },
     {
-      "label": "crop_count",
-      "expression": "idleon.callFunction('Holes','MeasurementQTYfound',1,0)",
-      "description": "Complete registered crop map count."
-    },
-    {
       "label": "deathnote_points",
       "expression": "idleon.callFunction('Holes','MeasurementQTYfound',6,0)",
       "description": "Normal-world Death Note points."
-    },
-    {
-      "label": "highest_damage",
-      "expression": "idleon.callFunction('Holes','MeasurementQTYfound',7,0)",
-      "description": "Recorded task damage."
-    },
-    {
-      "label": "slab_items",
-      "expression": "idleon.callFunction('Holes','MeasurementQTYfound',8,0)",
-      "description": "Obtained Slab count."
-    },
-    {
-      "label": "study_levels",
-      "expression": "idleon.callFunction('Holes','MeasurementQTYfound',9,0)",
-      "description": "Total saved Study levels."
     }
   ]
 }

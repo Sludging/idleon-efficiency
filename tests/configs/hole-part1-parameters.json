@@ -218,11 +218,6 @@
       "description": "Equal Spread Majik bonus to all villager EXP per five Opals in the least-invested rescued villager"
     },
     {
-      "label": "built_schematics",
-      "expression": "idleon.callFunction(\"Holes\", \"CosSchBlt\", 0, 0)",
-      "description": "Built schematic count used by Contented Creator"
-    },
-    {
       "label": "gloomie_card",
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"caveB\")",
       "description": "Gloomie card level before growth cap"
@@ -266,11 +261,6 @@
       "label": "least_investment",
       "expression": "idleon.callFunction(\"Holes2\", \"LeastOpalsInVillager\", 0, 0)",
       "description": "Least rescued-villager investment used by Equal Spread"
-    },
-    {
-      "label": "caverns_owned",
-      "expression": "idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0)",
-      "description": "Released cavern count used by Study access, reset and role branch"
     },
     {
       "label": "study_rate",

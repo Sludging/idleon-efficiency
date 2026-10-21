@@ -8,13 +8,29 @@
         "version": 395.1
       }
     },
+    "native_jar_types_owned": {
+      "expression": "idleon.callFunction('Holes', 'JarTypesOwned', 0, 0)",
+      "result": 9
+    },
+    "native_jar_board_count": {
+      "expression": "idleon.getAttr('Jars').length",
+      "result": 120
+    },
+    "native_jar_gilded_percent": {
+      "expression": "idleon.getAttr('Holes')[11][60]",
+      "result": 0
+    },
+    "native_harp_selected_note": {
+      "expression": "idleon.getAttr('Holes')[11][21]",
+      "result": 5
+    },
     "rupie_schematics": {
       "expression": "[idleon.callFunction(\"Holes\", \"B_UPG\", 62, 1), idleon.callFunction(\"Holes\", \"B_UPG\", 65, 2), idleon.callFunction(\"Holes\", \"B_UPG\", 68, 4)]",
-      "result": [1, 2, 4]
-    },
-    "rupie_option_355": {
-      "expression": "idleon.getAttr(\"OptionsListAccount\")[355]",
-      "result": 0
+      "result": [
+        1,
+        2,
+        4
+      ]
     },
     "rupie_lamp_99": {
       "expression": "idleon.callFunction(\"Holes\", \"LampBonuses\", 99, 0)",
@@ -26,19 +42,23 @@
     },
     "rupie_measurements": {
       "expression": "[idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 10, 0), idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 14, 0)]",
-      "result": [26580.666666666664, 27383.624854065238]
-    },
-    "rupie_evertree_factor": {
-      "expression": "Math.max(1, idleon.callFunction(\"Holes\", \"B_UPG\", 80, 1) * Math.pow(1.1, idleon.getAttr(\"Holes\")[11][5]))",
-      "result": 6.115909044841464
-    },
-    "rupie_gilded_percent": {
-      "expression": "idleon.getAttr(\"Holes\")[11][60]",
-      "result": 0
+      "result": [
+        26580.666666666664,
+        27383.624854065238
+      ]
     },
     "rupie_collectibles": {
       "expression": "[idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 3, 0), idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 17, 0), idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 28, 0), idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 0, 0), idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 6, 0), idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 13, 0), idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 21, 0), idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 33, 0)]",
-      "result": [320, 128, 480, 224, 200, 576, 392, 256]
+      "result": [
+        320,
+        128,
+        480,
+        224,
+        200,
+        576,
+        392,
+        256
+      ]
     },
     "rupie_stamp_cavern_res": {
       "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"CavernRes\")",
@@ -62,6 +82,34 @@
     "requirement_balance": {
       "expression": "idleon.getAttr('Holes')[11][43]",
       "result": 459717
+    },
+    "collectible_4": {
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 4, 0)",
+      "result": 288
+    },
+    "collectible_10": {
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 10, 0)",
+      "result": 192
+    },
+    "collectible_12": {
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 12, 0)",
+      "result": 240
+    },
+    "collectible_16": {
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 16, 0)",
+      "result": 48
+    },
+    "collectible_22": {
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 22, 0)",
+      "result": 204.8
+    },
+    "collectible_29": {
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 29, 0)",
+      "result": 243.20000000000002
+    },
+    "collectible_35": {
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 35, 0)",
+      "result": 192
     },
     "collectible_1": {
       "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 1, 0)",

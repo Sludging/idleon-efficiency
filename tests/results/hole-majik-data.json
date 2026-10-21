@@ -587,14 +587,6 @@
         }
       ]
     },
-    "fountain_effects": {
-      "expression": "(() => {const level=Number(idleon.getAttr('Holes')[4][4]);return {capacity:level,coin:1+0.25*level,marble:1+0.1*level};})()",
-      "result": {
-        "capacity": 5,
-        "coin": 2.25,
-        "marble": 1.5
-      }
-    },
     "village_schematic_effect": {
       "expression": "idleon.callFunction('Holes','CosmoBonusQTY',1,1)*idleon.callFunction('Holes','CosSchBlt',0,0)",
       "result": 404
@@ -681,10 +673,6 @@
     "least_investment": {
       "expression": "idleon.callFunction('Holes','LeastOpalsInVillager',0,0)",
       "result": 30
-    },
-    "built_schematics": {
-      "expression": "idleon.callFunction('Holes','CosSchBlt',0,0)",
-      "result": 101
     },
     "cosmo_level": {
       "expression": "idleon.callFunction('Holes','VillagerLV',2,0)",

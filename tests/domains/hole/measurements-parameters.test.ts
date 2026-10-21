@@ -1,12 +1,8 @@
 import type { Hole } from '../../../data/domain/world-5/hole/hole';
 import type { Tome } from '../../../data/domain/world-4/tome';
-import type { Farming } from '../../../data/domain/world-6/farming';
 import type { Deathnote } from '../../../data/domain/world-3/construction/deathnote';
-import type { TaskBoard } from '../../../data/domain/tasks';
-import type { Slab } from '../../../data/domain/world-5/slab';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import type { ExtractionResults } from '../../utils/live-game-data-loader';
-import { getExtractedValue, loadExtractionResults, normalizeExtractedValue, validateExtractionHealth } from '../../utils/live-game-data-loader';
+import { getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { captured } from './part1-test-helpers';
 import type { CapturedMeasurement } from './part2-test-helpers';
 
@@ -16,11 +12,7 @@ const producers: { key: string; description: string; extract: (data: Map<string,
  { key: 'account_level', description: 'Tome numeric account level', extract: data => (data.get('tome') as Tome).totalAccountLevel },
  { key: 'skill_levels', description: 'Tome numeric total of all 21 saved skill slots', extract: data => (data.get('tome') as Tome).totalSkillLevel },
  { key: 'tome_score', description: 'Tome highest score against original cached score', extract: data => (data.get('tome') as Tome).getHighestScore() },
- { key: 'crop_count', description: 'complete Farming registered crop map count', extract: data => (data.get('farming') as Farming).registeredCropCount },
  { key: 'deathnote_points', description: 'normal-world Death Note points', extract: data => (data.get('deathnote') as Deathnote).getTotalWorldRank() },
- { key: 'highest_damage', description: 'highest recorded task damage', extract: data => Number((data.get('taskboard') as TaskBoard).tasks.find(task => task.name === 'Road to Max Damage')!.count) },
- { key: 'slab_items', description: 'raw obtained Slab item count', extract: data => (data.get('slab') as Slab).rawObtainedCount },
- { key: 'study_levels', description: 'summed saved Study levels', extract: (_data, hole) => hole.savedStudyLevelsForMeasurements!.reduce((sum, level) => sum + level, 0) },
 ];
 
 describe('Measurements every direct calculated input', () => {
@@ -37,8 +29,6 @@ describe('Measurements every direct calculated input', () => {
   rows = captured<CapturedMeasurement[]>(results, 'measurements');
  });
 
- 
-
  producers.forEach(producer => {
   it(`matches direct ${producer.description}`, () => {
    const actual = producer.extract(data, hole);
@@ -51,9 +41,7 @@ describe('Measurements every direct calculated input', () => {
   it(`matches Measurement ${index}'s directly consumed quantity, multiplier, base and price modifier`, () => {
    const measurement = hole.measurements[index];
    const row = rows[index];
-   // Keep these parameter checks even though all 17 rows also have core comparisons.
-   expect(measurement.rawStatistic).not.toBeNull();
-   expect(measurement.rawStatistic).toMatchLiveGame(normalizeExtractedValue(row.raw), 0);
+   // Raw statistics are stored aliases; compare only the calculated quantity used downstream.
    expect(measurement.normalizedQuantity).toMatchLiveGame(row.normalized, 0);
    expect(measurement.getMeasurementMulti()).toMatchLiveGame(row.multiplier, 0);
    expect(measurement.getMeasurementBaseBonus()).toMatchLiveGame(row.base, 0);

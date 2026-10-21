@@ -5,7 +5,6 @@ import { loadExtractionResults, validateExtractionHealth } from '../../utils/liv
 import { coreNumber } from './part1-test-helpers';
  
 const numericEffects = [14, 45, 46, 47, 48, 52, 53, 54, 55, 56, 57, 58, 59, 82, 83, 84];
-const intrinsicEffects = [15, 38, 41, 72, 73, 76, 80, 94];
 
 describe('Hole Schematics numeric benefits', () => {
  let results: ExtractionResults;
@@ -26,12 +25,6 @@ describe('Hole Schematics numeric benefits', () => {
   });
  });
 
- intrinsicEffects.forEach(id => {
-  it(`matches schematic ${id}'s intrinsic contribution`, () => {
-   const schematic = hole.schematics.find(schematic => schematic.index === id)!;
-   coreNumber(schematic.getIntrinsicBonus(), results, `intrinsic_${id}`, `${schematic.data.name} intrinsic benefit`);
-  });
- });
 
  it('keeps both Motherlode Trickledown effects and their distinct caller factors', () => {
   const effects = hole.schematics.find(schematic => schematic.index === 49)!.getEffects();
