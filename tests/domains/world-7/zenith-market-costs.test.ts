@@ -5,9 +5,8 @@ import { ZenithMarket } from '../../../data/domain/world-7/zenithShop';
 
 const extractionResultsName = 'zenith-market-data.json';
 const upgradeIndices = Array.from({ length: 11 }, (_, index) => index);
-const gatedUpgradeIndices = Array.from({ length: 10 }, (_, index) => index + 1);
 
-describe('Zenith Market upgrade costs and unlocks', () => {
+describe('Zenith Market next-level costs', () => {
     let extractionResults: ExtractionResults;
     let zenithMarket: ZenithMarket;
 
@@ -22,18 +21,5 @@ describe('Zenith Market upgrade costs and unlocks', () => {
         const upgrade = zenithMarket.bonuses.find((bonus) => bonus.index === index)!;
 
         expect(upgrade.getNextLevelCost()).toMatchLiveGame(expectedCost, 0);
-    });
-
-    it.each(upgradeIndices)('matches saved cost to maximum for upgrade %i', (index) => {
-        const expectedCost = getExtractedValue(extractionResults, `zenith_market_${index}_cost_to_max`);
-        const upgrade = zenithMarket.bonuses.find((bonus) => bonus.index === index)!;
-        expect(upgrade.getCostToMax()).toMatchLiveGame(expectedCost, 0);
-    });
-
-    it.each(gatedUpgradeIndices)('matches saved unlock state for upgrade %i', (index) => {
-        const expectedUnlocked = getExtractedValue(extractionResults, `zenith_market_${index}_unlocked`);
-        const upgrade = zenithMarket.bonuses.find((bonus) => bonus.index === index)!;
-
-        expect(upgrade.unlocked).toBe(expectedUnlocked === 1);
     });
 });

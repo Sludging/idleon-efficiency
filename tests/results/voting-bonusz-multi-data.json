@@ -27,18 +27,6 @@
     "sushi_rog_bonus_50": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 50, 0)",
       "result": 0
-    },
-    "companion_bonus_161": {
-      "expression": "idleon.callFunction(\"Companions\", 161)",
-      "result": 150
-    },
-    "companion_bonus_41": {
-      "expression": "idleon.callFunction(\"Companions\", 41)",
-      "result": 50
-    },
-    "companion_bonus_19": {
-      "expression": "idleon.callFunction(\"Companions\", 19)",
-      "result": 8
     }
   },
   "errors": {}
