@@ -8,14 +8,6 @@
       "expression": "idleon.callFunction(\"Companions\", 40)",
       "result": 1
     },
-    "param_event_shop_25_owned": {
-      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 25, 0)",
-      "result": 0
-    },
-    "param_gem_purchase_41": {
-      "expression": "idleon.engine.getGameAttribute(\"GemItemsPurchased\")[41]",
-      "result": 10
-    },
     "param_coral_kid_bonus_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 5, 0)",
       "result": 2.4390243902439024
@@ -47,10 +39,6 @@
     "param_arcade_bonus_57": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 57)",
       "result": 0
-    },
-    "param_emporium_bonus_43": {
-      "expression": "idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 43, 0)",
-      "result": 1
     },
     "param_card_w7a9_level": {
       "expression": "Math.min(2 * idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7a9\"), 15)",

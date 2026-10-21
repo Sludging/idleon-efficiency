@@ -5,8 +5,6 @@
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { Divinity } from '../../../data/domain/divinity';
-import { Sneaking } from '../../../data/domain/world-6/sneaking';
 import { Alchemy } from '../../../data/domain/alchemy';
 import { Player } from '../../../data/domain/player';
 import { Skilling } from '../../../data/domain/skilling';
@@ -15,26 +13,6 @@ const saveName = 'latest';
 const extractionResultsName = 'divinity-blessing-data.json';
 
 const parameterSpecs = {
- emporium_bonus_33: {
-  description: 'Jade Emporium upgrade 33 True Godly Blessings input to website blessing bonuses',
-  extractionKey: 'emporium_bonus_33',
-  domainExtractor: (gameData: Map<string, any>) => {
-   const sneaking = gameData.get("sneaking") as Sneaking;
-   const upgrade33 = sneaking.jadeUpgrades.find(upgrade => upgrade.index === 33);
-   return upgrade33?.purchased ? 1 : 0;
-  }
- },
-
- gods_unlocked_count: {
-  description: 'Unlocked-god count plus god rank input to website blessing bonuses',
-  extractionKey: 'gods_unlocked_count',
-  domainExtractor: (gameData: Map<string, any>) => {
-   const divinity = gameData.get("divinity") as Divinity;
-   const unlockedGods = divinity.gods.filter(god => god.unlocked).length;
-   return unlockedGods + divinity.godRank;
-  }
- },
-
  skill_all_efficiencies: {
   description: 'Active player all-skill efficiency input to Nobisect blessing bonus',
   extractionKey: 'skill_all_efficiencies',

@@ -1,36 +1,28 @@
 {
   "extractions": {
-    "emporium_bonus_33": {
-      "expression": "idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 33, 0)",
-      "result": 1
-    },
-    "gods_unlocked_count": {
-      "expression": "idleon.engine.getGameAttribute(\"Divinity\")[25]",
-      "result": 20
-    },
     "skill_all_efficiencies": {
       "expression": "idleon.callFunction(\"SkillStats\", \"AllEfficiencies\")",
-      "result": 29307.12700377226
+      "result": 29454.453801863714
     },
     "alchemy_bubble_mineff": {
       "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.MinEff",
-      "result": 40618.697382325874
+      "result": 40626.89435759935
     },
     "alchemy_bubble_chopeff": {
       "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.ChopEff",
-      "result": 2360.2524782121905
+      "result": 2360.5381203721304
     },
     "total_stats_str": {
       "expression": "idleon.callFunction(\"TotalStats\", \"STR\")",
-      "result": 6760555
+      "result": 6796531
     },
     "total_stats_agi": {
       "expression": "idleon.callFunction(\"TotalStats\", \"AGI\")",
-      "result": 2393641
+      "result": 2398610
     },
     "total_stats_wis": {
       "expression": "idleon.callFunction(\"TotalStats\", \"WIS\")",
-      "result": 2391932
+      "result": 2396300
     },
     "divinity_blessing_2": {
       "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 2, 0)",

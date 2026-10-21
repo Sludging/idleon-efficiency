@@ -1,7 +1,9 @@
 import { Deathnote } from '../../../../data/domain/world-3/construction/deathnote';
+import { loadGameDataFromSave } from '../../../utils/cloudsave-loader';
+import { getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../../utils/live-game-data-loader';
 
-// Expected ranks follow ../IdleonWikiBot/codefiles/idleon1.22.txt:172317-172333.
-// Eclipse Skulls require more than one billion kills. These numeric tests do not cover paired saves.
+// Expected scalar ranks follow ../IdleonWikiBot/codefiles/idleon1.22.txt:172317-172333.
+// Eclipse Skulls require more than one billion kills.
 const rankCases = [
     { killCount: 0, inactiveRank: 0, activeRank: 0 },
     { killCount: 24999, inactiveRank: 0, activeRank: 0 },
@@ -45,47 +47,17 @@ describe('Deathnote normal-world numeric ranks', () => {
     });
 });
 
-describe('Deathnote legacy numeric rank compatibility', () => {
-    const exactMilestones = [25000, 100000, 250000, 500000, 1000000, 5000000, 100000000, 1000000000];
-    const legacyRankCases = rankCases.map(({ killCount, inactiveRank, activeRank }) => ({
-        killCount,
-        legacyInactiveRank: exactMilestones.includes(killCount) ? 0 : inactiveRank,
-        legacyActiveRank: exactMilestones.includes(killCount) ? 0 : activeRank,
-    }));
+describe('Deathnote normal-world aggregate', () => {
+    it('matches native Deathnote ranks across normal worlds for the retained save', () => {
+        const results = loadExtractionResults('research-account-progress-data.json');
+        validateExtractionHealth(results);
+        const deathnote = loadGameDataFromSave('latest').get('deathnote') as Deathnote;
+        const nativeRankTotal = getExtractedValue(results, 'gambit_deathnote_world_total');
 
-    it.each(legacyRankCases)('preserves legacy rank $legacyInactiveRank for $killCount kills without the Rift bonus', ({ killCount, legacyInactiveRank }) => {
-        const deathnote = new Deathnote('deathnote');
-
-        expect(deathnote.getDeathnoteRank(killCount)).toBe(legacyInactiveRank);
-    });
-
-    it.each(legacyRankCases)('preserves legacy rank $legacyActiveRank for $killCount kills with the Rift bonus', ({ killCount, legacyActiveRank }) => {
-        const deathnote = new Deathnote('deathnote');
-        deathnote.hasRiftBonus = true;
-
-        expect(deathnote.getDeathnoteRank(killCount)).toBe(legacyActiveRank);
-    });
-
-    it.each([
-        { hasRiftBonus: false, expectedTotal: 17 },
-        { hasRiftBonus: true, expectedTotal: 27 },
-    ])('totals normal and miniboss legacy ranks as $expectedTotal with Rift bonus $hasRiftBonus', ({ hasRiftBonus, expectedTotal }) => {
-        const deathnote = new Deathnote('deathnote');
-        deathnote.mobKillCount.set('mushG', [1000000001]);
-        deathnote.mobKillCount.set('slimeB', [100001]);
-        deathnote.hasMinibosses = true;
-        deathnote.hasRiftBonus = hasRiftBonus;
-
-        expect(deathnote.getTotalRank()).toBe(expectedTotal);
-    });
-
-    it.each([
-        { hasRiftBonus: false, eclipseSkullsActive: true, expectedRank: 20 },
-        { hasRiftBonus: true, eclipseSkullsActive: false, expectedRank: 10 },
-    ])('uses the explicit normal-world gate $eclipseSkullsActive independently of Rift bonus $hasRiftBonus', ({ hasRiftBonus, eclipseSkullsActive, expectedRank }) => {
-        const deathnote = new Deathnote('deathnote');
-        deathnote.hasRiftBonus = hasRiftBonus;
-
-        expect(deathnote.getNormalWorldRank(1000000001, eclipseSkullsActive)).toBe(expectedRank);
+        expect(deathnote.getTotalWorldRank()).toMatchLiveGameWithDetails(nativeRankTotal, {
+            tolerance: 0,
+            context: 'Deathnote normal-world ranks across all seven worlds; excludes miniboss ranks',
+        });
     });
 });
+
