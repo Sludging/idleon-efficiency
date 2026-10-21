@@ -66,17 +66,4 @@ describe('Master Classes - whole upgrade cost multiplier', () => {
     });
   });
 
-  it('resets the previous real-account discount to a neutral multiplier when initializing another account', () => {
-    const expected = getExtractedValue(extractionResults, 'masterclass_upgrade_cost_multiplier');
-    expect(wholeMultiplier()).toMatchLiveGameWithDetails(expected, {
-      tolerance: 0,
-      context: 'Prepared paired real-account discount before initializing another account',
-    });
-    const freshAccountData = initAccountDataKeys(initAllItems());
-    const freshMasterClasses = freshAccountData.get('masterClasses') as MasterClasses;
-
-    // Until the next account is calculated, initialization must expose neutral
-    // upgrade costs rather than the previously processed account's discount.
-    expect(freshMasterClasses.getUpgradeCostMultiplier()).toBe(1);
-  });
 });

@@ -276,14 +276,6 @@
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 147, 0)",
       "result": 32.5
     },
-    "minehead_research_147_mode_1": {
-      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 147, 1)",
-      "result": 1
-    },
-    "minehead_currency_log_scaling": {
-      "expression": "idleon.getAttr(\"Research\")[7][6]",
-      "result": 2717163.0508749997
-    },
     "minehead_currency_log_factor": {
       "expression": "Math.log(Math.max(idleon.getAttr(\"Research\")[7][6], 1)) / 2.30259",
       "result": 6.434101988617822
@@ -363,34 +355,6 @@
     "minehead_upgrade_quantity_6": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 6, 0)",
       "result": 2
-    },
-    "minehead_sailing_damage_level": {
-      "expression": "idleon.getAttr(\"Sailing\")[3][38]",
-      "result": 5
-    },
-    "minehead_gaming_superbit_66": {
-      "expression": "idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 66, 0)",
-      "result": 1
-    },
-    "minehead_sneaking_jade_45": {
-      "expression": "idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 45, 0)",
-      "result": 1
-    },
-    "minehead_spelunking_depth_charge_cell": {
-      "expression": "idleon.getAttr(\"Spelunk\")[18][40]",
-      "result": 0
-    },
-    "minehead_event_shop_44": {
-      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 44, 0)",
-      "result": 0
-    },
-    "minehead_task_board_merit_52": {
-      "expression": "idleon.getAttr(\"Tasks\")[2][6][4]",
-      "result": 0
-    },
-    "remaining_daily_attempts": {
-      "expression": "idleon.getAttr(\"Research\")[7][8]",
-      "result": 4
     },
     "minehead_upgrade_quantity_12": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 12, 0)",

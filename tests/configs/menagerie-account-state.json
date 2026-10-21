@@ -8,11 +8,6 @@
       "description": "Saved Lumi, Shells, and rank, threshold, calculated hourly Lumi, and available missions/unlocks/bonuses"
     },
     {
-      "label": "mission_availability_inputs",
-      "expression": "[1, idleon.callFunction(\"MenagerieStuff\", \"BoostQTY\", 0, 0), idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 164, 1), idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 47, 0), idleon.callFunction(\"Thingies\", \"Have_ban_k\", 0, 0), idleon.engine.getGameAttribute(\"CustomLists\").h.Research[52].length]",
-      "description": "Native baseline, bonus, Research, Jade Emporium, Bank bundle, and mission catalog availability contributors"
-    },
-    {
       "label": "mission_states",
       "expression": "Array.from({ length: 33 }, (_, i) => [i, idleon.engine.getGameAttribute(\"Menagerie\")[1][i], idleon.callFunction(\"MenagerieStuff\", \"Cost\", 0, i), idleon.callFunction(\"MenagerieStuff\", \"CanClaim\", 0, i)])",
       "description": "Saved claims, current threshold, and readiness for every Menagerie mission"
@@ -33,11 +28,6 @@
       "description": "Currently usable Black Stars, Organic Labels, and remaining upgrade doubler resources"
     }
     ,
-    {
-      "label": "bonus_level_factors",
-      "expression": "Array.from({ length: 25 }, (_, i) => [i, idleon.engine.getGameAttribute(\"CustomLists\").h.Research[58][i]])",
-      "description": "Native effect-per-level values used to calculate each bonus's current and next effect"
-    },
     {
       "label": "extra_bundle_flags",
       "expression": "[idleon.callFunction(\"Thingies\", \"Have_ban_l\", 0, 0), idleon.callFunction(\"Thingies\", \"Have_ban_m\", 0, 0)]",

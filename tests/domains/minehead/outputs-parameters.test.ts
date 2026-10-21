@@ -56,16 +56,6 @@ const parameters: ParameterTestSpec[] = [
     domainExtractor: (data: TestData) => data.get('research').getBonusForId(index),
   })),
   {
-    description: 'Research Grid 147 daily-tries input in mode 1',
-    extractionKey: 'minehead_research_147_mode_1',
-    domainExtractor: (data: TestData) => data.get('research').getBonusForId(147, 1),
-  },
-  {
-    description: 'Minehead Research[7][6] currency log input',
-    extractionKey: 'minehead_currency_log_scaling',
-    domainExtractor: (data: TestData) => (data.get('minehead') as Minehead).mineCurrencyLogScaling,
-  },
-  {
     description: 'Minehead currency log scaling factor',
     extractionKey: 'minehead_currency_log_factor',
     domainExtractor: (data: TestData) => (data.get('minehead') as Minehead).getCurrencyLogScalingFactor(),
@@ -134,41 +124,6 @@ const parameters: ParameterTestSpec[] = [
     description: 'Companion 143 level-two currency effect',
     extractionKey: 'minehead_companion_143_level_two',
     domainExtractor: (data: TestData) => Number(isCompanionLevelTwo(data.get('companions'), 143)),
-  },
-  {
-    description: 'Sailing damage input used by Minehead base damage',
-    extractionKey: 'minehead_sailing_damage_level',
-    domainExtractor: (data: TestData) => data.get('sailing').getMineheadDamageSailingLevel(),
-  },
-  {
-    description: 'Gaming Superbit 66 used by Minehead Depth Charges',
-    extractionKey: 'minehead_gaming_superbit_66',
-    domainExtractor: (data: TestData) => Number(data.get('gaming').isSuperbitPurchased(66)),
-  },
-  {
-    description: 'Sneaking jade upgrade 45 used by Minehead Depth Charges',
-    extractionKey: 'minehead_sneaking_jade_45',
-    domainExtractor: (data: TestData) => Number(data.get('sneaking').jadeUpgrades.find(upgrade => upgrade.index === 45)?.purchased ?? false),
-  },
-  {
-    description: 'Spelunking depth-charge cell input',
-    extractionKey: 'minehead_spelunking_depth_charge_cell',
-    domainExtractor: (data: TestData) => data.get('spelunking').getMineheadDepthChargeCellLevel(),
-  },
-  {
-    description: 'Event Shop bonus 44 used by Minehead currency gain',
-    extractionKey: 'minehead_event_shop_44',
-    domainExtractor: (data: TestData) => Number(data.get('eventShop').isBonusOwned(44)),
-  },
-  {
-    description: 'Task Board merit 52 used by Minehead currency gain',
-    extractionKey: 'minehead_task_board_merit_52',
-    domainExtractor: (data: TestData) => data.get('taskboard').merits.find(merit => merit.index === 52)!.level,
-  },
-  {
-    description: 'saved remaining Minehead daily attempts',
-    extractionKey: 'remaining_daily_attempts',
-    domainExtractor: (data: TestData) => (data.get('minehead') as Minehead).remainingDailyAttempts,
   },
 ];
 

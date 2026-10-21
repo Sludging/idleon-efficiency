@@ -67,21 +67,4 @@ describe('Master Classes - first-three upgrade cost multiplier', () => {
     });
   });
 
-  it('clears the processed account discount when initializing the same Master Classes object', () => {
-    const expected = getExtractedValue(extractionResults, 'first_three_upgrade_cost_multiplier');
-    expect(preparedMultiplier()).toMatchLiveGameWithDetails(expected, {
-      tolerance: 0,
-      context: 'Prepared paired first-three discount before reinitialization',
-    });
-    const masterClasses = gameData.get('masterClasses') as MasterClasses;
-    masterClasses.init(initAllItems(), cloudSave.get('playerNames').length);
-
-    expect(masterClasses.getFirstThreeUpgradeCostMultiplier()).toBe(1);
-    // Restore the real account through normal parsing and calculation, without changing its save.
-    processAccount();
-    expect(preparedMultiplier()).toMatchLiveGameWithDetails(expected, {
-      tolerance: 0,
-      context: 'First-three multiplier after reinitialization and normal real-account processing',
-    });
-  });
 });

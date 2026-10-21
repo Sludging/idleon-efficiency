@@ -13,17 +13,6 @@
         6
       ]
     },
-    "mission_availability_inputs": {
-      "expression": "[1, idleon.callFunction(\"MenagerieStuff\", \"BoostQTY\", 0, 0), idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 164, 1), idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 47, 0), idleon.callFunction(\"Thingies\", \"Have_ban_k\", 0, 0), idleon.engine.getGameAttribute(\"CustomLists\").h.Research[52].length]",
-      "result": [
-        1,
-        1,
-        0,
-        1,
-        0,
-        33
-      ]
-    },
     "mission_states": {
       "expression": "Array.from({ length: 33 }, (_, i) => [i, idleon.engine.getGameAttribute(\"Menagerie\")[1][i], idleon.callFunction(\"MenagerieStuff\", \"Cost\", 0, i), idleon.callFunction(\"MenagerieStuff\", \"CanClaim\", 0, i)])",
       "result": [
@@ -570,111 +559,6 @@
         0,
         0,
         0
-      ]
-    },
-    "bonus_level_factors": {
-      "expression": "Array.from({ length: 25 }, (_, i) => [i, idleon.engine.getGameAttribute(\"CustomLists\").h.Research[58][i]])",
-      "result": [
-        [
-          0,
-          "1"
-        ],
-        [
-          1,
-          "25"
-        ],
-        [
-          2,
-          "1"
-        ],
-        [
-          3,
-          "10"
-        ],
-        [
-          4,
-          "500"
-        ],
-        [
-          5,
-          "10"
-        ],
-        [
-          6,
-          "1"
-        ],
-        [
-          7,
-          "100"
-        ],
-        [
-          8,
-          "1"
-        ],
-        [
-          9,
-          "20"
-        ],
-        [
-          10,
-          "1"
-        ],
-        [
-          11,
-          "75"
-        ],
-        [
-          12,
-          "1"
-        ],
-        [
-          13,
-          "100"
-        ],
-        [
-          14,
-          "25"
-        ],
-        [
-          15,
-          "600"
-        ],
-        [
-          16,
-          "500"
-        ],
-        [
-          17,
-          "1"
-        ],
-        [
-          18,
-          "400"
-        ],
-        [
-          19,
-          "50"
-        ],
-        [
-          20,
-          "300"
-        ],
-        [
-          21,
-          "1"
-        ],
-        [
-          22,
-          "25"
-        ],
-        [
-          23,
-          "5"
-        ],
-        [
-          24,
-          "1"
-        ]
       ]
     },
     "extra_bundle_flags": {

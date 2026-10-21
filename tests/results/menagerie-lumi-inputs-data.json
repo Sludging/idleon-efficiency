@@ -16,10 +16,6 @@
       "expression": "idleon.callFunction(\"ArcadeBonus\", 73)",
       "result": 0
     },
-    "ninja_47": {
-      "expression": "idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 47, 0)",
-      "result": 1
-    },
     "menagerie_bonus_1": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"BoostQTY\", 1, 0)",
       "result": 0
@@ -28,24 +24,8 @@
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 165, 0)",
       "result": 6.5
     },
-    "bank_k": {
-      "expression": "idleon.callFunction(\"Thingies\", \"Have_ban_k\", 0, 0)",
-      "result": 0
-    },
-    "bank_l": {
-      "expression": "idleon.callFunction(\"Thingies\", \"Have_ban_l\", 0, 0)",
-      "result": 0
-    },
-    "bank_m": {
-      "expression": "idleon.callFunction(\"Thingies\", \"Have_ban_m\", 0, 0)",
-      "result": 0
-    },
     "purple_jelly_0": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"PinkJellyBonus\", 0, 0)",
-      "result": 0
-    },
-    "clamwork_8": {
-      "expression": "idleon.callFunction(\"Thingies\", \"ClamWorkBonus\", 8, 0)",
       "result": 0
     },
     "crucible_4": {

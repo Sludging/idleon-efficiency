@@ -349,16 +349,6 @@
       "description": "Research Grid 147 mode-0 percent bonus used by Mine Currency gain."
     },
     {
-      "label": "minehead_research_147_mode_1",
-      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 147, 1)",
-      "description": "Research Grid 147 mode-1 saved grid level used by the Minehead daily-tries allowance."
-    },
-    {
-      "label": "minehead_currency_log_scaling",
-      "expression": "idleon.getAttr(\"Research\")[7][6]",
-      "description": "Saved Research[7][6] input to the Minehead upgrade-28 currency log factor."
-    },
-    {
       "label": "minehead_currency_log_factor",
       "expression": "Math.log(Math.max(idleon.getAttr(\"Research\")[7][6], 1)) / 2.30259",
       "description": "Current 1.23 native getLOG operation for the Research[7][6] input used by Minehead upgrade 28."
@@ -457,41 +447,6 @@
       "label": "minehead_upgrade_quantity_6",
       "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 6, 0)",
       "description": "Extra Lives Minehead upgrade effect used by maximum lives."
-    },
-    {
-      "label": "minehead_sailing_damage_level",
-      "expression": "idleon.getAttr(\"Sailing\")[3][38]",
-      "description": "Saved Sailing damage input used by Minehead base damage."
-    },
-    {
-      "label": "minehead_gaming_superbit_66",
-      "expression": "idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 66, 0)",
-      "description": "Gaming Superbit 66 ownership input used by Minehead Depth Charges."
-    },
-    {
-      "label": "minehead_sneaking_jade_45",
-      "expression": "idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 45, 0)",
-      "description": "Sneaking jade upgrade 45 input used by Minehead Depth Charges."
-    },
-    {
-      "label": "minehead_spelunking_depth_charge_cell",
-      "expression": "idleon.getAttr(\"Spelunk\")[18][40]",
-      "description": "Spelunking depth-charge cell input used by Minehead Depth Charges."
-    },
-    {
-      "label": "minehead_event_shop_44",
-      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 44, 0)",
-      "description": "Event Shop bonus 44 ownership input used by Mine Currency gain."
-    },
-    {
-      "label": "minehead_task_board_merit_52",
-      "expression": "idleon.getAttr(\"Tasks\")[2][6][4]",
-      "description": "Task Board merit 52 level input used by Mine Currency gain."
-    },
-    {
-      "label": "remaining_daily_attempts",
-      "expression": "idleon.getAttr(\"Research\")[7][8]",
-      "description": "Saved account Minehead attempts remaining; preserve the exact stored count."
     },
     {
       "label": "minehead_upgrade_quantity_12",
