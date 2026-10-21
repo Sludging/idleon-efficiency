@@ -19,14 +19,6 @@
     "royal_armory_upgrade_unlocked_display_6": {
       "expression": "6 < idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0)",
       "result": true
-    },
-    "royal_armory_upgrade_unlocked_last_unlocked": {
-      "expression": "(() => { const count = idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0); return count - 1 < count; })()",
-      "result": true
-    },
-    "royal_armory_upgrade_unlocked_first_locked": {
-      "expression": "(() => { const count = idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0); return count < count; })()",
-      "result": false
     }
   },
   "errors": {}

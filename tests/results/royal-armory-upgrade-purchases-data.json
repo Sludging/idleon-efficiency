@@ -1,21 +1,5 @@
 {
   "extractions": {
-    "royal_armory_can_purchase_display_1": {
-      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const d = 1; const lists = idleon.getAttr(\"CustomLists\").h; const royalG = idleon.getAttr(\"RoyalG\"); const k = 0 | asNumber(lists.Research[43][d]); const r = Math.round(asNumber(lists.ArmoryUpg[d][3])); return d < idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0) && asNumber(royalG[1][r]) >= idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", d, 0) && asNumber(royalG[2][k]) < asNumber(lists.ArmoryUpg[k][4]); })()",
-      "result": true
-    },
-    "royal_armory_can_purchase_display_0": {
-      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const d = 0; const lists = idleon.getAttr(\"CustomLists\").h; const royalG = idleon.getAttr(\"RoyalG\"); const k = 0 | asNumber(lists.Research[43][d]); const r = Math.round(asNumber(lists.ArmoryUpg[d][3])); return d < idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0) && asNumber(royalG[1][r]) >= idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", d, 0) && asNumber(royalG[2][k]) < asNumber(lists.ArmoryUpg[k][4]); })()",
-      "result": false
-    },
-    "royal_armory_can_purchase_display_24": {
-      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const d = 24; const lists = idleon.getAttr(\"CustomLists\").h; const royalG = idleon.getAttr(\"RoyalG\"); const k = 0 | asNumber(lists.Research[43][d]); const r = Math.round(asNumber(lists.ArmoryUpg[d][3])); return d < idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0) && asNumber(royalG[1][r]) >= idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", d, 0) && asNumber(royalG[2][k]) < asNumber(lists.ArmoryUpg[k][4]); })()",
-      "result": false
-    },
-    "royal_armory_can_purchase_display_30": {
-      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const d = 30; const lists = idleon.getAttr(\"CustomLists\").h; const royalG = idleon.getAttr(\"RoyalG\"); const k = 0 | asNumber(lists.Research[43][d]); const r = Math.round(asNumber(lists.ArmoryUpg[d][3])); return d < idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0) && asNumber(royalG[1][r]) >= idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", d, 0) && asNumber(royalG[2][k]) < asNumber(lists.ArmoryUpg[k][4]); })()",
-      "result": false
-    },
     "royal_armory_purchase_price_display_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 1, 0)",
       "result": 55923417.940763004
@@ -47,50 +31,6 @@
     "royal_armory_purchase_unlocked_display_30": {
       "expression": "30 < idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0)",
       "result": true
-    },
-    "royal_armory_purchase_context": {
-      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const lists = idleon.getAttr(\"CustomLists\").h; const royalG = idleon.getAttr(\"RoyalG\"); return { unlockedCount: idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0), rows: [1, 0, 24, 30].map(d => { const k = 0 | asNumber(lists.Research[43][d]); const r = Math.round(asNumber(lists.ArmoryUpg[d][3])); return { displayIndex: d, catalogIndex: k, purchaseResourceType: r, catalogResourceType: asNumber(lists.ArmoryUpg[k][3]), rawQuantity: asNumber(royalG[1][r]), level: asNumber(royalG[2][k]), maxLevel: asNumber(lists.ArmoryUpg[k][4]) }; }) }; })()",
-      "result": {
-        "unlockedCount": 37,
-        "rows": [
-          {
-            "displayIndex": 1,
-            "catalogIndex": 46,
-            "purchaseResourceType": 0,
-            "catalogResourceType": 22,
-            "rawQuantity": 128680827.17637691,
-            "level": 132,
-            "maxLevel": 200
-          },
-          {
-            "displayIndex": 0,
-            "catalogIndex": 30,
-            "purchaseResourceType": 0,
-            "catalogResourceType": 14,
-            "rawQuantity": 128680827.17637691,
-            "level": 1,
-            "maxLevel": 1
-          },
-          {
-            "displayIndex": 24,
-            "catalogIndex": 80,
-            "purchaseResourceType": 11,
-            "catalogResourceType": 9,
-            "rawQuantity": 13442398.336422728,
-            "level": 7,
-            "maxLevel": 100
-          },
-          {
-            "displayIndex": 30,
-            "catalogIndex": 50,
-            "purchaseResourceType": 14,
-            "catalogResourceType": 24,
-            "rawQuantity": 29113589.639797878,
-            "level": 8,
-            "maxLevel": 100
-          }
-        ]
-      }
     }
   },
   "errors": {}

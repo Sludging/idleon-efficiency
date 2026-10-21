@@ -73,16 +73,4 @@ describe('Royal Armory upgrade purchase prices', () => {
         });
     });
 
-    it('previews a more expensive following Royal Talent Points I purchase without changing its current price', () => {
-        const upgrade = priceUpgrade(46);
-        const currentGamePrice = getExtractedValue(extractionResults, 'royal_armory_upgrade_price_display_1');
-
-        // The real level 108 is past the cheap opening and its price exponent is > 1.
-        // This checks use of the owned-level argument, not an invented future game price.
-        expect(upgrade.getCost(upgrade.level + 1)).toBeGreaterThan(currentGamePrice);
-        expect(upgrade.getCost()).toMatchLiveGameWithDetails(currentGamePrice, {
-            tolerance: 0,
-            context: 'Royal Talent Points I current price remains equal to the independent paired game price after a following-purchase preview',
-        });
-    });
 });

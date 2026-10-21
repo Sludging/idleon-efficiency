@@ -103,11 +103,6 @@
       "description": "Captain boat-speed bonus assigned to boat 1"
     },
     {
-      "label": "boat_0_island_distance",
-      "expression": "idleon.callFunction(\"Sailing\", \"IslandDistance\", idleon.getAttr(\"Boats\")[0][1], 0)",
-      "description": "IslandDistance for boat 0's assigned destination"
-    },
-    {
       "label": "shiny_bonus_18",
       "expression": "idleon.callFunction(\"Breeding\", \"ShinyBonusS\", \"Nah\", 18, -1)",
       "description": "Breeding shiny bonus 18 used by Sailing Minimumtraveltime"

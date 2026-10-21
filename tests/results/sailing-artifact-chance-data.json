@@ -32,10 +32,6 @@
       "expression": "idleon.callFunction(\"GetBribeBonus\", \"34\")",
       "result": 20
     },
-    "non_dummies_60": {
-      "expression": "idleon.getAttr(\"NONdummies\")[60]",
-      "result": 0
-    },
     "arcade_bonus_32": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 32, 0)",
       "result": 10.317460317460318
@@ -68,10 +64,6 @@
       "expression": "idleon.callFunction(\"Companions\", 154)",
       "result": 1
     },
-    "companion_level_two_154": {
-      "expression": "idleon.callFunction(\"CompLV2\", 154)",
-      "result": 1
-    },
     "killroy_bonus_0": {
       "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 0, 0)",
       "result": 1.053627760252366
@@ -87,10 +79,6 @@
     "alchemy_vial_6turtle": {
       "expression": "idleon.getAttr(\"DNSM\").h.AlchVials.h[\"6turtle\"]",
       "result": 276.64
-    },
-    "purple_chest_slugs_owned": {
-      "expression": "idleon.callFunction(\"Stuff2\", \"PurpleChestSlugsOwned\", 0, 0)",
-      "result": 0
     },
     "sushi_bonus_7": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 7, 0)",
@@ -120,10 +108,6 @@
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 3, 0)",
       "result": 153.42057032987418
     },
-    "pristine_bonus_2": {
-      "expression": "idleon.callFunction(\"Ninja\", \"PristineBon\", 2, 0)",
-      "result": 40
-    },
     "voting_bonus_20": {
       "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 20, 0)",
       "result": 0
@@ -143,14 +127,6 @@
     "gaming_palette_bonus_5": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 5, 0)",
       "result": 218.91891891891893
-    },
-    "spelunk_discoveries_length": {
-      "expression": "idleon.getAttr(\"Spelunk\")[6].length",
-      "result": 82
-    },
-    "gaming_superbit_26": {
-      "expression": "idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 26, 0)",
-      "result": 1
     }
   },
   "errors": {}

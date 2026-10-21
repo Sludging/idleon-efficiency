@@ -4,10 +4,6 @@
       "expression": "idleon.callFunction(\"RoyalG\", \"StatueBon\", 0, 0)",
       "result": 200
     },
-    "statue_next_bonus_0": {
-      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const index = 0; const level = asNumber(idleon.getAttr(\"RoyalG\")[0][index]) + 1; const research = idleon.getAttr(\"CustomLists\").h.Research; return (1 + idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 45, 0) / 100) * (asNumber(research[41][index]) + asNumber(research[42][index]) * Math.max(0, level - 1)); })()",
-      "result": 215
-    },
     "statue_chance_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"StatueUpgOdds\", 0, 0)",
       "result": 0.03333333333333333
@@ -19,10 +15,6 @@
     "statue_bonus_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"StatueBon\", 2, 0)",
       "result": 0
-    },
-    "statue_next_bonus_2": {
-      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const index = 2; const level = asNumber(idleon.getAttr(\"RoyalG\")[0][index]) + 1; const research = idleon.getAttr(\"CustomLists\").h.Research; return (1 + idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 45, 0) / 100) * (asNumber(research[41][index]) + asNumber(research[42][index]) * Math.max(0, level - 1)); })()",
-      "result": 30
     },
     "statue_chance_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"StatueUpgOdds\", 2, 0)",

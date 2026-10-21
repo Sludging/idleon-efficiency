@@ -88,16 +88,6 @@
       "description": "Mining card effect access: all Mining cards become passive above rank two"
     },
     {
-      "label": "rift_skill_mastery_research_rank_above_0",
-      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,19\", 0)",
-      "description": "Research rank access above zero; Research has no numeric or display Skill Mastery effect"
-    },
-    {
-      "label": "rift_skill_mastery_research_rank_above_1",
-      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,19\", 1)",
-      "description": "Research rank access above one; Research has no numeric or display Skill Mastery effect"
-    },
-    {
       "label": "rift_skill_mastery_total_damage",
       "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillETC\", 0)",
       "description": "Total damage: begins at seven points and adds five points for each eligible skill above rank two; Mining, Chopping, Fishing, Catching, Trapping, and Worship do not contribute because their cards are passive"

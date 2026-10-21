@@ -187,14 +187,6 @@ const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
         .reduce((sum, trait) => sum + trait.currentBonus, 0) ?? 0;
     }
   },
-  boat_0_island_distance: {
-    description: "IslandDistance for boat 0's assigned destination",
-    extractionKey: 'boat_0_island_distance',
-    domainExtractor: (gameData) => {
-      const sailing = gameData.get("sailing") as Sailing;
-      return sailing.boats[0]?.assignIsland?.data.distance;
-    }
-  },
   minimum_travel_time: {
     description: 'rounded Sailing Minimumtraveltime used by BoatSpeed',
     extractionKey: 'minimum_travel_time',

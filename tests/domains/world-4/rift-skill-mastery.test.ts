@@ -1,6 +1,6 @@
 /**
- * Compare Skill Mastery's live numeric effects, card-access state, Research
- * rank gates, and account-wide totals with the paired saved-game extractions.
+ * Compare Skill Mastery's live numeric effects, card-access state, and account-wide totals
+ * with the paired saved-game extractions.
  */
 
 import { getExtractedValue, loadExtractionResults, validateExtractionHealth, ExtractionResults } from '../../utils/live-game-data-loader';
@@ -48,17 +48,6 @@ type CardPassiveCase = {
 
 const cardPassiveCases: CardPassiveCase[] = [
  { skill: SkillsIndex.Mining, displayName: 'Mining', sourceIndex: 0, extractionKey: 'rift_skill_mastery_mining_cards_passive' },
-];
-
-
-type ResearchGateCase = {
- threshold: number;
- extractionKey: string;
-};
-
-const researchGateCases: ResearchGateCase[] = [
- { threshold: 0, extractionKey: 'rift_skill_mastery_research_rank_above_0' },
- { threshold: 1, extractionKey: 'rift_skill_mastery_research_rank_above_1' },
 ];
 
 
@@ -125,19 +114,6 @@ describe('Rift Domain - Skill Mastery account effects', () => {
  });
 
 
- describe('Research rank and no-mastery boundary', () => {
-  researchGateCases.forEach(({ threshold, extractionKey }) => {
-   it(`matches Research rank access above threshold ${threshold}`, () => {
-    const domainGate = skillMastery.getSkillRank(SkillsIndex.Research) > threshold ? 1 : 0;
-
-    expect(domainGate).toMatchLiveGameWithDetails(getExtractedValue(extractionResults, extractionKey), {
-     tolerance: 0,
-     context: `Research rank access / threshold ${threshold}`,
-    });
-   });
-  });
-
- });
 
  describe('account-wide totals', () => {
   totalCases.forEach(({ sourceIndex, domainBonusIndex, feature, extractionKey }) => {

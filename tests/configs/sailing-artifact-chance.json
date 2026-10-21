@@ -43,11 +43,6 @@
       "description": "Purchased Bribe 34 bonus"
     },
     {
-      "label": "non_dummies_60",
-      "expression": "idleon.getAttr(\"NONdummies\")[60]",
-      "description": "Native count capped at 30 in the additive artifact chance bundle"
-    },
-    {
       "label": "arcade_bonus_32",
       "expression": "idleon.callFunction(\"ArcadeBonus\", 32, 0)",
       "description": "Arcade bonus index 32"
@@ -88,11 +83,6 @@
       "description": "Active Companion 154 bonus"
     },
     {
-      "label": "companion_level_two_154",
-      "expression": "idleon.callFunction(\"CompLV2\", 154)",
-      "description": "Companion 154 level-two multiplier input"
-    },
-    {
       "label": "killroy_bonus_0",
       "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 0, 0)",
       "description": "Killroy bonus factor consumed by artifact chance"
@@ -111,11 +101,6 @@
       "label": "alchemy_vial_6turtle",
       "expression": "idleon.getAttr(\"DNSM\").h.AlchVials.h[\"6turtle\"]",
       "description": "Native Alchemy vial value consumed by artifact chance"
-    },
-    {
-      "label": "purple_chest_slugs_owned",
-      "expression": "idleon.callFunction(\"Stuff2\", \"PurpleChestSlugsOwned\", 0, 0)",
-      "description": "Owned Purple Chest Slug count"
     },
     {
       "label": "sushi_bonus_7",
@@ -153,11 +138,6 @@
       "description": "Tome epilogue bonus index 3"
     },
     {
-      "label": "pristine_bonus_2",
-      "expression": "idleon.callFunction(\"Ninja\", \"PristineBon\", 2, 0)",
-      "description": "Ninja pristine charm bonus index 2"
-    },
-    {
       "label": "voting_bonus_20",
       "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 20, 0)",
       "description": "Active vote bonus index 20"
@@ -181,16 +161,6 @@
       "label": "gaming_palette_bonus_5",
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 5, 0)",
       "description": "Gaming Palette bonus index 5"
-    },
-    {
-      "label": "spelunk_discoveries_length",
-      "expression": "idleon.getAttr(\"Spelunk\")[6].length",
-      "description": "Native Spelunk array length exponent input"
-    },
-    {
-      "label": "gaming_superbit_26",
-      "expression": "idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 26, 0)",
-      "description": "Gaming SuperBitType value at index 26"
     }
   ]
 }

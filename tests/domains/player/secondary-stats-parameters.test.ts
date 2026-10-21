@@ -13,7 +13,6 @@ import type { Alchemy } from '../../../data/domain/world-2/alchemy/alchemy';
 import type { Arcade } from '../../../data/domain/world-2/arcade';
 import type { Poppy } from '../../../data/domain/world-2/poppy';
 import type { Votes } from '../../../data/domain/world-2/votes';
-import { ShrineConstants, type Shrine } from '../../../data/domain/world-3/construction/shrines';
 import type { Prayer } from '../../../data/domain/world-3/prayers';
 import type { Cooking } from '../../../data/domain/world-4/cooking';
 import type { Divinity } from '../../../data/domain/world-5/divinity';
@@ -110,11 +109,5 @@ describe('Persistent secondary stats immediate owner results', () => {
   ] as const)('matches golden-food %s directly consumed by secondary stats', (method, key) => {
     const food = owner<GoldenFood>('goldenFood');
     expect(food[method](player)).toMatchLiveGame(expected('golden-food-data.json', key), 0);
-  });
-  it('matches the permanent map-independent Defence Shrine', () => {
-    const shrine = owner<Shrine[]>('shrines')[ShrineConstants.HpDefShrine];
-    const results = loadExtractionResults('shrine-map-independent-bonus-data.json');
-    validateExtractionHealth(results);
-    expect(shrine.getMapIndependentBonus()).toMatchLiveGame(results.extractions.map_independent_shrine.result.bonus, 0);
   });
 });

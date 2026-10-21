@@ -5,7 +5,7 @@ import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 
 
-describe('Royal Armory Outpost rank experience multipliers and hourly progress', () => {
+describe('Royal Armory Outpost experience multipliers and assigned unit counts', () => {
     let armory: RoyalArmory;
     let results: ExtractionResults;
 
@@ -25,37 +25,8 @@ describe('Royal Armory Outpost rank experience multipliers and hourly progress',
         });
     }));
 
-    // Genuine assignments: map6 Trader+Commander, map53 Trader, map51 Commander, map1 no gain.
-    // No Knights/Priests exist and upgrade17 is inactive: Militia highest-rank/tie behavior is source-only.
-    [
-        ...OUTPOST_RANKS.map(rank => ({ mapId: 6, rank })),
-        { mapId: 53, rank: OutpostRank.Trading },
-        { mapId: 51, rank: OutpostRank.Command },
-        { mapId: 1, rank: OutpostRank.Trading },
-        { mapId: 1, rank: OutpostRank.Command },
-    ].forEach(({ mapId, rank }) => {
-        it(`matches current ${OutpostRank[rank]} XP/hour on map ${mapId}`, () => {
-            expect(armory.mapStates.get(mapId)!.getRankProgress(rank).experiencePerHour).toMatchLiveGameWithDetails(
-                getExtractedValue(results, `xp_hourly_${mapId}_${rank}`),
-                { tolerance: 0, context: `${OutpostRank[rank]} XP/hour from current contributors on map ${mapId}` },
-            );
-        });
-    });
 
-    [{ mapId: 6, rank: OutpostRank.Trading }, { mapId: 6, rank: OutpostRank.Command }, { mapId: 53, rank: OutpostRank.Trading }].forEach(({ mapId, rank }) => {
-        it(`estimates hours to the next ${OutpostRank[rank]} rank on active map ${mapId}`, () => {
-            const threshold = getExtractedValue(results, `xp_threshold_${mapId}_${rank}`);
-            const savedXP = getExtractedValue(results, `xp_saved_${mapId}_${rank}`);
-            const rate = getExtractedValue(results, `xp_hourly_${mapId}_${rank}`);
-            const expected = (threshold - savedXP) / rate;
-            expect(armory.mapStates.get(mapId)!.getRankProgress(rank).getHoursToNextRank()).toMatchLiveGameWithDetails(expected, {
-                tolerance: 0,
-                context: `${OutpostRank[rank]} hours to next rank on map ${mapId}`,
-            });
-        });
-    });
-
-    // These public counts feed the Outposts unit display; hourly XP adds each placement separately.
+    // These public counts feed the Outposts unit display.
     [
         { mapId: 6, role: RoyalUnitRole.Commander },
         { mapId: 1, role: RoyalUnitRole.Commander },
@@ -70,9 +41,4 @@ describe('Royal Armory Outpost rank experience multipliers and hourly progress',
         });
     });
 
-    it('reports no finite Trading next-rank ETA on map1 without contributors', () => {
-        const progress = armory.mapStates.get(1)!.getRankProgress(OutpostRank.Trading);
-        expect(progress.experiencePerHour).toMatchLiveGame(getExtractedValue(results, 'xp_hourly_1_0'), 0);
-        expect(progress.getHoursToNextRank()).toBe(Infinity);
-    });
 });

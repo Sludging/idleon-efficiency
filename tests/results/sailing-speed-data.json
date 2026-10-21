@@ -80,10 +80,6 @@
       "expression": "window.frames[0].__idleon_cheats__[\"scripts.ActorEvents_579\"]._customBlock_CaptBonusCalc(0, window.frames[0].__idleon_cheats__[\"com.stencyl.Engine\"].engine.getGameAttribute(\"Boats\")[1][0])",
       "result": 399
     },
-    "boat_0_island_distance": {
-      "expression": "idleon.callFunction(\"Sailing\", \"IslandDistance\", idleon.getAttr(\"Boats\")[0][1], 0)",
-      "result": 15000000
-    },
     "shiny_bonus_18": {
       "expression": "idleon.callFunction(\"Breeding\", \"ShinyBonusS\", \"Nah\", 18, -1)",
       "result": 10

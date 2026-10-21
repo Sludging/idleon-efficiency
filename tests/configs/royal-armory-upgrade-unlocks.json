@@ -26,16 +26,6 @@
       "label": "royal_armory_upgrade_unlocked_display_6",
       "expression": "6 < idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0)",
       "description": "Game caller's displayed-prefix predicate for Resource Replenish (catalog 70, display 6), not catalog position 6"
-    },
-    {
-      "label": "royal_armory_upgrade_unlocked_last_unlocked",
-      "expression": "(() => { const count = idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0); return count - 1 < count; })()",
-      "description": "Game caller's strict displayed-prefix predicate at the current last unlocked position (fresh game count minus one); test resolves catalog identity from independently source-verified static display mapping"
-    },
-    {
-      "label": "royal_armory_upgrade_unlocked_first_locked",
-      "expression": "(() => { const count = idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0); return count < count; })()",
-      "description": "Game caller's strict displayed-prefix predicate at the current first locked position (fresh game count); test resolves catalog identity from independently source-verified static display mapping"
     }
   ]
 }

@@ -9,7 +9,7 @@ import { Hole } from '../../../data/domain/world-5/hole/hole';
 import { Farming } from '../../../data/domain/world-6/farming';
 import { ResearchGrid } from '../../../data/domain/world-7/research';
 import { UpgradeVault } from '../../../data/domain/upgradeVault';
-import { Companion, getCompanionActiveBonus, isCompanionLevelTwo } from '../../../data/domain/companions';
+import { Companion, getCompanionActiveBonus } from '../../../data/domain/companions';
 import { KillRoy } from '../../../data/domain/world-2/killroy';
 import { Button } from '../../../data/domain/world-7/button';
 import { Alchemy } from '../../../data/domain/world-2/alchemy/alchemy';
@@ -18,12 +18,9 @@ import { Summoning } from '../../../data/domain/world-6/summoning';
 import { JellyOperator } from '../../../data/domain/world-7/jellyOperator';
 import { Lab } from '../../../data/domain/world-4/lab';
 import { Tome } from '../../../data/domain/world-4/tome';
-import { Sneaking } from '../../../data/domain/world-6/sneaking';
 import { Votes } from '../../../data/domain/world-2/votes';
 import { Gaming } from '../../../data/domain/world-5/gaming';
 import { Player } from '../../../data/domain/player';
-import { EventShop } from '../../../data/domain/eventShop';
-import { Spelunking } from '../../../data/domain/world-7/spelunking';
 import type { Account } from '../../../data/domain/account';
 
 const saveName = 'latest';
@@ -34,14 +31,6 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
     description: 'Fractal Island artifact-find bonus index 3',
     extractionKey: 'fractal_island_bonus_3',
     domainExtractor: (data) => (data.get('account') as Account).getFractalIslandArtifactBonus(),
-  },
-  non_dummies_60: {
-    description: 'Count of tier-six captains used as an additive artifact-find bonus',
-    extractionKey: 'non_dummies_60',
-    domainExtractor: (data) => {
-      const sailing = data.get('sailing') as Sailing;
-      return sailing.captains.filter(captain => captain.tier === 6).length;
-    },
   },
   sailing_artifact_bonus_3: {
     description: 'Sailing ArtifactBonus index 3 used in the additive artifact-find bonus',
@@ -105,11 +94,6 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
     extractionKey: 'companion_bonus_154',
     domainExtractor: (data) => getCompanionActiveBonus(data.get('companions') as Companion[], 154),
   },
-  companion_level_two_154: {
-    description: 'Companion 154 level-two state used in its dedicated multiplier',
-    extractionKey: 'companion_level_two_154',
-    domainExtractor: (data) => isCompanionLevelTwo(data.get('companions') as Companion[], 154),
-  },
   killroy_bonus_0: {
     description: 'Killroy artifact-find multiplier input',
     extractionKey: 'killroy_bonus_0',
@@ -165,14 +149,6 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
     extractionKey: 'tome_epilogue_bonus_3',
     domainExtractor: (data) => (data.get('tome') as Tome).getEpilogueBonus(3),
   },
-  pristine_bonus_2: {
-    description: 'Unlocked Ninja pristine charm bonus index 2 used as a multiplier',
-    extractionKey: 'pristine_bonus_2',
-    domainExtractor: (data) => {
-      const charm = (data.get('sneaking') as Sneaking).pristineCharms.find(charm => charm.data.itemId === 2);
-      return charm?.unlocked ? charm.data.x1 : 0;
-    },
-  },
   voting_bonus_20: {
     description: 'Current vote bonus index 20 used as a multiplier',
     extractionKey: 'voting_bonus_20',
@@ -184,16 +160,6 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
     domainExtractor: (data) => (data.get('players') as Player[])
       .find(player => player.playerID === 3)?.starSigns.find(sign => sign.name === 'Artifosho')
       ?.getBonus('Artifact Find Chance') ?? 0,
-  },
-  purple_chest_slugs_owned: {
-    description: 'Owned Purple Chest Slug event-shop purchase count',
-    extractionKey: 'purple_chest_slugs_owned',
-    domainExtractor: (data) => Number((data.get('eventShop') as EventShop).isBonusOwned(48)),
-  },
-  spelunk_discoveries_length: {
-    description: 'Account Spelunking discovery count used by artifact chance',
-    extractionKey: 'spelunk_discoveries_length',
-    domainExtractor: (data) => (data.get('spelunking') as Spelunking).getTotalDiscoveries(),
   },
   companion_bonus_43: {
     description: 'Active Companion 43 multiplier input',
@@ -214,11 +180,6 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
     description: 'Gaming Palette bonus index 5 used as a multiplier',
     extractionKey: 'gaming_palette_bonus_5',
     domainExtractor: (data) => (data.get('gaming') as Gaming).getPaletteBonus(5),
-  },
-  gaming_superbit_26: {
-    description: 'Gaming SuperBitType index 26 availability factor',
-    extractionKey: 'gaming_superbit_26',
-    domainExtractor: (data) => Number((data.get('gaming') as Gaming).isSuperbitPurchased(26)),
   },
 };
 

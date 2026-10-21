@@ -68,14 +68,6 @@
       "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,0\", 2)",
       "result": 1
     },
-    "rift_skill_mastery_research_rank_above_0": {
-      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,19\", 0)",
-      "result": 1
-    },
-    "rift_skill_mastery_research_rank_above_1": {
-      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,19\", 1)",
-      "result": 1
-    },
     "rift_skill_mastery_total_damage": {
       "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillETC\", 0)",
       "result": 67

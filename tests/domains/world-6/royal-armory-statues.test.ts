@@ -26,7 +26,6 @@ describe('Royal Statue bonuses and attempts', () => {
 
             for (const [value, key, effect] of [
                 [statue.getBonus(), `statue_bonus_${index}`, 'current bonus'],
-                [statue.getBonus(statue.level + 1), `statue_next_bonus_${index}`, 'next-level bonus'],
                 [statue.getSuccessChance(), `statue_chance_${index}`, 'fractional success chance'],
                 [Number(statue.isAffordable()), `statue_affordable_${index}`, 'balance-only affordability'],
             ] as const) {

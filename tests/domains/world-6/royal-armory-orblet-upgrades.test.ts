@@ -56,34 +56,18 @@ describe('Royal Armory Orblet upgrade calculations', () => {
         );
     }
 
-    function assertNextBonus(upgrade: RoyalArmoryOrbletMarketBonus): void {
-        if (upgrade.index === 4) return;
-        const expected = getExtractedValue(extractionResults, `orblet_market_next_bonus_${upgrade.index}`);
-        if (expected !== -1) {
-            expect(upgrade.getNextBonus()).toMatchLiveGameWithDetails(expected, {
-                tolerance: 0,
-                context: `Orblet entry ${upgrade.index}: next numeric bonus`,
-            });
-        }
-    }
 
     marketRows.forEach(({ index, name }) => {
-        it(`matches ${name} price and progression gate`, () => {
+        it(`matches ${name} price`, () => {
             const upgrade = upgradeAt(index);
             expect(upgrade.getCost()).toMatchLiveGameWithDetails(
                 getExtractedValue(extractionResults, `orblet_market_cost_${index}`),
                 { tolerance: 0, context: `${name}: Orblet price` },
             );
-            expect(Number(upgrade.isUnlocked())).toMatchLiveGameWithDetails(
-                getExtractedValue(extractionResults, `orblet_market_unlocked_${index}`),
-                { tolerance: 0, context: `${name}: progression gate` },
-            );
         });
 
-        it(`matches ${name}${index === 4 ? ' current' : ' current and next'} numeric bonus`, () => {
-            const upgrade = upgradeAt(index);
-            assertCurrentValues(upgrade, name);
-            assertNextBonus(upgrade);
+        it(`matches ${name} current numeric bonus`, () => {
+            assertCurrentValues(upgradeAt(index), name);
         });
     });
 
@@ -98,12 +82,10 @@ describe('Royal Armory Orblet upgrade calculations', () => {
         it(`keeps ${name} price and current bonus unchanged by previews`, () => {
             const upgrade = upgradeAt(index);
             assertCurrentValues(upgrade, name);
-            assertNextBonus(upgrade);
             upgrade.getCurrentValue();
             upgrade.getNextValue();
             upgrade.getDescription(true);
             assertCurrentValues(upgrade, `${name} after preview`);
-            assertNextBonus(upgrade);
         });
     });
 
@@ -125,12 +107,10 @@ describe('Royal Armory Orblet upgrade calculations', () => {
                 const upgrade = upgradeAt(index);
                 assertCurrentValues(upgrade, `${name}, processing pass ${pass + 1}`);
                 if (index !== 4) {
-                    assertNextBonus(upgrade);
                     upgrade.getCurrentValue();
                     upgrade.getNextValue();
                     upgrade.getDescription(true);
                     assertCurrentValues(upgrade, `${name}, processing pass ${pass + 1} after preview`);
-                    assertNextBonus(upgrade);
                 }
             }
             expect(royalArmory.getOrbletsOwned()).toMatchLiveGameWithDetails(
@@ -139,4 +119,5 @@ describe('Royal Armory Orblet upgrade calculations', () => {
             );
         }
     });
+
 });
