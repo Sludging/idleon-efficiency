@@ -13,7 +13,7 @@ import { Skilling } from "../../../data/domain/skilling";
 import { SkillsIndex } from "../../../data/domain/SkillsIndex";
 import { commaNotation, notateNumber } from "../../../data/utility";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
-import { DataStatus } from "../../../lib/stores/appDataStore";
+import useHydrated from "../../../lib/hooks/useHydrated";
 import ResearchGridDisplay from "./researchGrid";
 import ResearchShapes from "./researchShapes";
 
@@ -151,6 +151,7 @@ function ObservationCard({ observation, research }: { observation: Observation; 
 
 function NoteReward({ note }: { note: PostyNote }) {
     const context = note.context;
+    if (!context) return <Text size="small">{note.data.description}</Text>;
     switch (context.kind) {
         case "lens": return <Text size="small">+{context.additionalLenses} Magnifying Glass</Text>;
         case "capacity": return <Text size="small">{context.capacity} lenses per Observation</Text>;
@@ -162,12 +163,13 @@ function NoteReward({ note }: { note: PostyNote }) {
 
 export default function ResearchContent() {
     const size = useContext(ResponsiveContext);
-    const { theData, dataStatus } = useAppDataStore(useShallow(state => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated, dataStatus: state.dataStatus })));
+    const hydrated = useHydrated();
+    const { theData } = useAppDataStore(useShallow(state => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })));
     const [query, setQuery] = useState("");
     const [tab, setTab] = useState<ResearchTab>("Observations");
     const [sort, setSort] = useState<typeof sorts[number]>("Game order");
     const research = theData.get("research") as ResearchGrid | undefined;
-    if ((dataStatus !== DataStatus.StaticData && dataStatus !== DataStatus.LiveData) || !research) {
+    if (!hydrated || !research) {
         return <Box pad={{ vertical: "medium" }}><Text>Loading Research data…</Text></Box>;
     }
     const { progress, discoveryAllowance: discovery, production, lensOwnership: ownership, offlineGains: offline, papers } = research;

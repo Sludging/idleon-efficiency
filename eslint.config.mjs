@@ -35,7 +35,9 @@ const eslintConfig = defineConfig([
         },
     },
     {
-        files: ['app/**/content.tsx'],
+        files: ['app/**/*.{ts,tsx}', 'components/**/*.{ts,tsx}'],
+        // Exceptions own account entry, authentication, status, or profile mode.
+        ignores: ['components/header/dataStatus.tsx', 'components/header/profile.tsx', 'components/home.tsx', 'components/welcome.tsx', 'components/dashboard/dashboard.tsx'],
         rules: {
             'no-restricted-imports': [
                 'error',
@@ -44,7 +46,7 @@ const eslintConfig = defineConfig([
                         {
                             group: ['**/stores/appDataStore', '**/stores/appDataStore.tsx'],
                             importNames: ['DataStatus'],
-                            message: 'Use shared account loading. Do not import DataStatus in content pages.',
+                            message: 'Use shared account loading. Do not import DataStatus in feature UI.',
                         },
                     ],
                 },
