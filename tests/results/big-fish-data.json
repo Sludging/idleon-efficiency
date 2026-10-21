@@ -104,6 +104,38 @@
     "big_fish_unlock_req_6": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 6)",
       "result": 7000
+    },
+    "big_fish_family_level": {
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").reduce((sum, name) => sum + Number(idleon.getAttr(\"PlayerDATABASE\").h[name].h.Lv0[0]), 0)",
+      "result": 15014
+    },
+    "big_fish_bonus_level_0": {
+      "expression": "idleon.getAttr(\"Spelunk\")[11][0]",
+      "result": 144
+    },
+    "big_fish_bonus_level_1": {
+      "expression": "idleon.getAttr(\"Spelunk\")[11][1]",
+      "result": 111
+    },
+    "big_fish_bonus_level_2": {
+      "expression": "idleon.getAttr(\"Spelunk\")[11][2]",
+      "result": 93
+    },
+    "big_fish_bonus_level_3": {
+      "expression": "idleon.getAttr(\"Spelunk\")[11][3]",
+      "result": 86
+    },
+    "big_fish_bonus_level_4": {
+      "expression": "idleon.getAttr(\"Spelunk\")[11][4]",
+      "result": 70
+    },
+    "big_fish_bonus_level_5": {
+      "expression": "idleon.getAttr(\"Spelunk\")[11][5]",
+      "result": 43
+    },
+    "big_fish_bonus_level_6": {
+      "expression": "idleon.getAttr(\"Spelunk\")[11][6]",
+      "result": 10
     }
   },
   "errors": {}

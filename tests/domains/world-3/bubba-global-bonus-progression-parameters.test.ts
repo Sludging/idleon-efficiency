@@ -27,6 +27,13 @@ describe('Bubba permanent bonus upgrade cost parameters', () => {
     );
   });
 
+  it('matches Bubba Boon upgrade 3 used to choose the next ordered bonus', () => {
+    expect(bubba.getUpgradeBonus(3)).toMatchLiveGame(
+      getExtractedValue(extractionResults, 'bonus_upgrade_3'),
+      0
+    );
+  });
+
   it('matches Minehead progression reward 5 used by the game cost formula', () => {
     expect(minehead.getBonusFromIndex(5)).toMatchLiveGame(
       getExtractedValue(extractionResults, 'minehead_bonus_5'),

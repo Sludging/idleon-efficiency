@@ -114,6 +114,80 @@ describe('Big Fish Domain - Calculations', () => {
    });
   });
  });
+ describe('Displayed Levels', () => {
+  it('matches the family level shown above Advice Fish bonuses', () => {
+   const extractedFamilyLevel = getExtractedValue(extractionResults, 'big_fish_family_level');
+
+   expect(bigFish.familyLevel).toMatchLiveGameWithDetails(extractedFamilyLevel, {
+    tolerance: 0,
+    context: 'Advice Fish family level shown on the website',
+   });
+  });
+
+  it('matches the displayed level for the W7 mob respawn-rate bonus', () => {
+   const extractedLevel = getExtractedValue(extractionResults, 'big_fish_bonus_level_0');
+
+   expect(bigFish.bonuses[0].level).toMatchLiveGameWithDetails(extractedLevel, {
+    tolerance: 0,
+    context: 'Advice Fish level for the W7 mob respawn-rate bonus',
+   });
+  });
+
+  it('matches the displayed level for increased Spelunking Stamina', () => {
+   const extractedLevel = getExtractedValue(extractionResults, 'big_fish_bonus_level_1');
+
+   expect(bigFish.bonuses[1].level).toMatchLiveGameWithDetails(extractedLevel, {
+    tolerance: 0,
+    context: 'Advice Fish level for increased Spelunking Stamina',
+   });
+  });
+
+  it('matches the displayed level for Spelunking AFK Gains', () => {
+   const extractedLevel = getExtractedValue(extractionResults, 'big_fish_bonus_level_2');
+
+   expect(bigFish.bonuses[2].level).toMatchLiveGameWithDetails(extractedLevel, {
+    tolerance: 0,
+    context: 'Advice Fish level for Spelunking AFK Gains',
+   });
+  });
+
+  it('matches the displayed level for the W7 Kill per Kill bonus', () => {
+   const extractedLevel = getExtractedValue(extractionResults, 'big_fish_bonus_level_3');
+
+   expect(bigFish.bonuses[3].level).toMatchLiveGameWithDetails(extractedLevel, {
+    tolerance: 0,
+    context: 'Advice Fish level for the W7 Kill per Kill bonus',
+   });
+  });
+
+  it('matches the displayed level for the Class EXP bonus', () => {
+   const extractedLevel = getExtractedValue(extractionResults, 'big_fish_bonus_level_4');
+
+   expect(bigFish.bonuses[4].level).toMatchLiveGameWithDetails(extractedLevel, {
+    tolerance: 0,
+    context: 'Advice Fish level for the Class EXP bonus',
+   });
+  });
+
+  it('matches the displayed level for Double Gold Food drop chance', () => {
+   const extractedLevel = getExtractedValue(extractionResults, 'big_fish_bonus_level_5');
+
+   expect(bigFish.bonuses[5].level).toMatchLiveGameWithDetails(extractedLevel, {
+    tolerance: 0,
+    context: 'Advice Fish level for Double Gold Food drop chance',
+   });
+  });
+
+  it('matches the displayed level for Advice on Settlement', () => {
+   const extractedLevel = getExtractedValue(extractionResults, 'big_fish_bonus_level_6');
+
+   expect(bigFish.bonuses[6].level).toMatchLiveGameWithDetails(extractedLevel, {
+    tolerance: 0,
+    context: 'Advice Fish level for Advice on Settlement',
+   });
+  });
+ });
+
 
  describe('Cost Calculations', () => {
   it('matches next cost for the W7 mob respawn-rate increase', () => {

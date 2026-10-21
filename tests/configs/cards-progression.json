@@ -1,11 +1,36 @@
 {
-  "description": "Extract the target player's equipped-card crystal monster spawn chance for card progression regression coverage",
-  "target": "Card.GetTotalBonusForId equipped crystal monster spawn chance",
+  "description": "Extract target player's equipped-card progression for representative owned cards",
+  "target": "Native individual card levels and displayed stars",
   "extractions": [
     {
       "label": "equipped_crystal_spawn_chance",
       "expression": "idleon.callFunction(\"CardBonusREAL\", 14)",
       "description": "Prepared crystal monster spawn chance percentage from equipped cards, including Legend Talent and slot-chip effects"
+    },
+    {
+      "label": "poop_level",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"poopSmall\")",
+      "description": "Native effect level for equipped Poop card"
+    },
+    {
+      "label": "poop_stars",
+      "expression": "Math.max(idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"poopSmall\") - 1, 0)",
+      "description": "Displayed Poop card stars; native 1.23 card UI uses CardLv minus one (line 165760)"
+    },
+    {
+      "label": "demon_genie_level",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"demonP\")",
+      "description": "Native effect level for equipped Demon Genie card"
+    },
+    {
+      "label": "demon_genie_stars",
+      "expression": "Math.max(idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"demonP\") - 1, 0)",
+      "description": "Displayed Demon Genie card stars; native 1.23 card UI uses CardLv minus one (line 165760)"
+    },
+    {
+      "label": "w7a5_next_level_card_requirement",
+      "expression": "(() => { idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardsTillNextLV\", \"w7a5\"); return Math.floor(idleon.getAttr(\"DNSM\").h.cardLvCalco2 + Number(idleon.getAttr(\"Cards\")[0].h.w7a5)) + 1; })()",
+      "description": "Absolute saved-card requirement for the next level of owned w7a5; native 1.23 stores raw threshold-minus-count in cardLvCalco2, and strict count > threshold requires floor(raw + count) + 1"
     },
     {
       "label": "card_ruby_unlock",
