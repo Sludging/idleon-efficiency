@@ -803,6 +803,11 @@ export class Spelunking extends Domain {
     additiveRechargeContributors: RechargeContributor[] = [];
     rechargeMultiplierContributors: RechargeContributor[] = [];
     hourlyRecharge: number = this.baseHourlyRecharge;
+    private mineheadDepthChargeCellLevel = 0;
+
+    getMineheadDepthChargeCellLevel(): number {
+        return this.mineheadDepthChargeCellLevel;
+    }
     get trackometerLevel(): number {
         return this.trackometer.level;
     }
@@ -1007,6 +1012,7 @@ export class Spelunking extends Domain {
             spelunking.stamina.find(stamina => stamina.playerID === playerID) ?? new SpelunkingStamina(playerID)
         );
         const spelunkingData = (data.get("Spelunk") ?? []) as unknown[][];
+        spelunking.mineheadDepthChargeCellLevel = Number((spelunkingData[18] as unknown[] | undefined)?.[40] ?? 0);
         const savedStamina = (spelunkingData[3] ?? []) as (number | string)[];
         const currencies = (spelunkingData[4] ?? []) as (number | string)[];
         const shopUpgradeLevels = (spelunkingData[5] ?? []) as (number | string)[];

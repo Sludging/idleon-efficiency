@@ -1473,7 +1473,8 @@ export const updateResearchDisplay = (data: Map<string, any>): ResearchGrid => {
       reward: companionReward(companion, intrinsicFactor, "multiply", "EXP", requiredLevel),
     };
   };
-  const fountain = hole.fountain.upgrades.find(upgrade => upgrade.data.waterIndex === 2 && upgrade.data.index === 16)!;
+  const fountain = hole.fountain.getUpgrade(2, 16);
+  const fountainResearchBonus = fountain.getBonus();
   const buttonBonus = button.bonuses.find(bonus => bonus.index === 0)!;
   const sushiExp = sushiContribution(0);
   const gridExp = gridContribution(70);

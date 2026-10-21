@@ -62,4 +62,13 @@ describe('Tesseract upgrade purchase costs', () => {
             );
         });
     });
+
+    it('matches saved affordability for the Arcanist Damage upgrade', () => {
+        const { upgradeId, label } = currentPrices[0];
+        const selectedUpgrade = tesseract.upgrades[upgradeId];
+        const expectedCost = Number(getExtractedValue(extractionResults, label));
+        const expectedAffordability = tesseract.getResourceCount(selectedUpgrade.getCostType()) >= expectedCost;
+
+        expect(tesseract.canAffordUpgrade(selectedUpgrade)).toBe(expectedAffordability);
+    });
 });

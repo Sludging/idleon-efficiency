@@ -181,6 +181,12 @@ export class RoyalArmory extends Domain {
 
     getSelectedOutpostBonusIndex(): number { return this.selectedOutpostBonusIndex; }
 
+    getMineheadCurrencyOutpostMultiplier(): number {
+        if (this.selectedOutpostBonusIndex !== 3) return 1;
+        const outpostCount = Math.max(1, this.builtOutpostCount - 6);
+        return 1 + 4 * outpostCount / (40 + outpostCount);
+    }
+
     getResearchExpOutpostReward(): {
         multiplier: number; available: boolean; selected: boolean; builtOutpostCount: number; selectorName: string;
     } {

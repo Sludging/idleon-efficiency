@@ -153,7 +153,7 @@ export class SushiStation extends Domain {
     nextDailyResetSeconds: number = 0;
     dailyKnowledgeEnabled: boolean = false;
     private bundleBonus: number = 0;
-    private bundleBanJ: number = 0;
+    bundleBanJ: number = 0;
     private research188: number = 0;
     private research189: number = 0;
     private jellyObstruction18: number = 0;

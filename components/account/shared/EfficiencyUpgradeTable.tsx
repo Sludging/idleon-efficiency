@@ -129,7 +129,7 @@ export function EfficiencyUpgradeTable<T extends UpgradeTableData>({
                 return (
                     <ResourceDisplay
                         cost={data.nextCost}
-                        canAfford={canAffordUpgrade(data.upgrade)}
+                        canAfford={canAffordUpgrade(data.upgrade, data.nextCost)}
                         resourceImageData={getResourceImageData(data.upgrade)}
                         tooltipHeading={tooltipHeading}
                     />

@@ -287,6 +287,11 @@ export class Sailing extends Domain {
 
     enderCaptainUnlocked: boolean = false;
     private researchExpSlabBonus: number = 0;
+    private mineheadDamageSailingLevel = 0;
+
+    getMineheadDamageSailingLevel(): number {
+        return this.mineheadDamageSailingLevel;
+    }
 
     // Return percentage points after Slab and Lab prepare their bonuses.
     getResearchExpSlabBonus(): number {
@@ -355,6 +360,7 @@ export class Sailing extends Domain {
         const sailing = data.get(this.getDataKey()) as Sailing;
         sailing.researchExpSlabBonus = 0;
         const sailingData = data.get("Sailing") as number[][];
+        sailing.mineheadDamageSailingLevel = Number(sailingData[3]?.[38] ?? 0);
         const boatData = data.get("Boats") as number[][];
         const captainData = data.get("Captains") as number[][];
 

@@ -245,9 +245,9 @@ function FountainView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () =
         searchText: "",
         sortBy: "default",
     });
-    const [color, setColor] = useState<"All" | "Regular" | "Yellow" | "Green">("All");
+    const [color, setColor] = useState<"All" | "Blue" | "Yellow" | "Green">("All");
     const [tab, setTab] = useState<"Resources" | "Upgrades">("Resources");
-    const pageNames = ["Regular", "Yellow", "Green"] as const;
+    const pageNames = ["Blue", "Yellow", "Green"] as const;
     const study = hole.studies[15];
     const opalCost = fountain.getOpalCost();
     const opalCurrencyImage = fountainCurrencyImage(hole, opalCost.currencyId);
@@ -277,9 +277,9 @@ function FountainView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () =
     ];
 
     return <Box gap="medium" data-testid="hole-fountain-details">
-        <Box gap="medium">
+        <Box gap="medium" direction="row">
             <Section title="Collection">
-                <Box direction="row" gap="small" align="center" wrap>
+                <Box direction="row" gap="small" align="center" wrap pad={{ right: "medium" }} border={{ side: "right", color: "grey-1" }} fill>
                     <Box gap="xxsmall" pad={{ right: "medium" }} border={{ side: "right", color: "grey-1" }}>
                         <Text size="xsmall" color="accent-2">Occupied / capacity</Text>
                         <Text size="large" weight={500}>{value(fountain.getOccupiedSpaceCount())} / {value(fountain.getCapacity())}</Text>
@@ -302,14 +302,14 @@ function FountainView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () =
             </Section>
             <Box direction="row" gap="large" wrap>
                 <Section title="Marbles">
-                    <Box direction="row" gap="xsmall" align="center">
+                    <Box direction="row" gap="xsmall" align="center" pad={{ right: "medium" }} border={{ side: "right", color: "grey-1" }} fill>
                         <IconImage data={{ location: "HoleFountainMarble", width: 30, height: 23 }} scale={0.45} />
                         <Text size="small">{value(fountain.marbleCount)}</Text>
                         <Text size="xsmall" color="accent-2">Yield: {value(fountain.getMarbleYield())}</Text>
                     </Box>
                 </Section>
                 <Section title="Opals">
-                    <Box direction="row" gap="xsmall" align="center">
+                    <Box direction="row" gap="xsmall" align="center" fill>
                         <IconImage data={Item.getImageData("Opal")} scale={0.65} />
                         <Text size="xsmall">Earned: {value(fountain.opalProgress)}</Text>
                         <Text size="xsmall" color="accent-2">Next cost:</Text>
@@ -445,18 +445,6 @@ function CoveView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
             { label: "Multikill per damage tier", value: percentage(effects.multikillPerDamageTier) },
             { label: "Base multikill", value: percentage(effects.baseMultikill) },
             { label: "Respawn time factor", value: factor(effects.respawnTimeMultiplier) },
-            {
-                label: "Blue pickup target",
-                value: effects.bluePickupTargetId === null
-                    ? "None"
-                    : `${cove.shapes[effects.bluePickupTargetId].name} · ${value(effects.bluePickupAmount)}`
-            },
-            {
-                label: "Purple pickup target",
-                value: effects.purplePickupTargetId === null
-                    ? "None"
-                    : `${cove.shapes[effects.purplePickupTargetId].name} · ${value(effects.purplePickupAmount)}`
-            },
             { label: "Random pickup double chance", value: percentage(effects.pickupRandomDoubleChance) }
         ]} />
         <Box direction="row" gap="small" wrap data-testid="cove-shapes">
