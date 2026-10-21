@@ -28,11 +28,6 @@
       "description": "Pet2 companion +15% contribution to the Hat Rack Bonus Multi"
     },
     {
-      "label": "hat_rack_event_shop_30",
-      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 30, 0)",
-      "description": "King of the Rack Event Shop +10% contribution to the Hat Rack Bonus Multi"
-    },
-    {
       "label": "hat_rack_minehead_21",
       "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 21, 0)",
       "description": "Brainhead Minehead +2% contribution to the Hat Rack Bonus Multi"

@@ -15,15 +15,39 @@ it('reinitialization, reparsing and repeated Gaming updates preserve consumer-vi
     const data = loadGameDataFromSave('latest');
     const gaming = data.get('gaming') as Gaming;
     const assertAccountResults = () => {
-        expect(gaming.palette.bonusLuck).toMatchLiveGame(getExtractedValue(results, 'PaletteLuck'), 0);
-        expect(gaming.garden.growthCycleSeconds).toMatchLiveGame(getExtractedValue(results, 'SproutGrowthTime'), 0);
-        expect(gaming.garden.nonPlantBitsMultiplier).toMatchLiveGame(getExtractedValue(results, 'SproutValueNonPlantMulti'), 0);
-        expect(gaming.logbook.bitsMultiplier).toMatchLiveGame(getExtractedValue(results, 'logbook_bits_multiplier'), 0);
-        expect((gaming.getImport(0) as SprinklerImport).waterCharges).toMatchLiveGame(getExtractedValue(results, 'water_charges'), 0);
-        expect((gaming.getImport(1) as ShovelImport).digs).toMatchLiveGame(getExtractedValue(results, 'shovel_digs'), 0);
-        expect((data.get('construction') as Construction).library.gamingCheckoutBoost).toMatchLiveGame(getExtractedValue(results, 'library_gaming_contribution'), 0);
+        expect(gaming.palette.bonusLuck).toMatchLiveGameWithDetails(getExtractedValue(results, 'PaletteLuck'), {
+            tolerance: 0,
+            context: 'Gaming Palette Luck after saved-state initialization',
+        });
+        expect(gaming.garden.growthCycleSeconds).toMatchLiveGameWithDetails(getExtractedValue(results, 'SproutGrowthTime'), {
+            tolerance: 0,
+            context: 'Gaming sprout growth cycle after saved-state initialization',
+        });
+        expect(gaming.garden.nonPlantBitsMultiplier).toMatchLiveGameWithDetails(getExtractedValue(results, 'SproutValueNonPlantMulti'), {
+            tolerance: 0,
+            context: 'Non-plant sprout Bits multiplier after saved-state initialization',
+        });
+        expect(gaming.logbook.bitsMultiplier).toMatchLiveGameWithDetails(getExtractedValue(results, 'logbook_bits_multiplier'), {
+            tolerance: 0,
+            context: 'Historical Gaming Logbook Bits multiplier after saved-state initialization',
+        });
+        expect((gaming.getImport(0) as SprinklerImport).waterCharges).toMatchLiveGameWithDetails(getExtractedValue(results, 'water_charges'), {
+            tolerance: 0,
+            context: 'Saved Sprinkler water charges after Gaming reprocessing',
+        });
+        expect((gaming.getImport(1) as ShovelImport).digs).toMatchLiveGameWithDetails(getExtractedValue(results, 'shovel_digs'), {
+            tolerance: 0,
+            context: 'Saved Shovel digs after Gaming reprocessing',
+        });
+        expect((data.get('construction') as Construction).library.gamingCheckoutBoost).toMatchLiveGameWithDetails(getExtractedValue(results, 'library_gaming_contribution'), {
+            tolerance: 0,
+            context: 'Library Gaming checkout contribution after Gaming reprocessing',
+        });
         // Projected harvest income must never alter the saved Bits balance.
-        expect(gaming.bits).toMatchLiveGame(getExtractedValue(results, 'native_bits'), 0);
+        expect(gaming.bits).toMatchLiveGameWithDetails(getExtractedValue(results, 'native_bits'), {
+            tolerance: 0,
+            context: 'Saved Gaming Bits balance after Gaming reprocessing',
+        });
     };
     assertAccountResults();
     const parsed = new Map(data);

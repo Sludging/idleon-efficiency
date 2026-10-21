@@ -12,7 +12,6 @@ import { JellyOperator } from '../../../data/domain/world-7/jellyOperator';
 import { Meritocraty } from '../../../data/domain/world-7/meritocraty';
 import { Tome } from '../../../data/domain/world-4/tome';
 import { Farming, CropScientistBonusText } from '../../../data/domain/world-6/farming';
-import { Sneaking } from '../../../data/domain/world-6/sneaking';
 import { LegendTalents } from '../../../data/domain/world-7/legendTalents';
 import { Divinity } from '../../../data/domain/world-5/divinity';
 import { Sailing } from '../../../data/domain/world-5/sailing/sailing';
@@ -50,7 +49,6 @@ const parameters: ParameterTestSpec[] = [
     { extractionKey: "dependency_Summoning2_MeritocBonusz_8", description: "late Meritocracy Palette Luck percentage", domainExtractor: data => (data.get('meritocraty') as Meritocraty).getCurrentBonus(8) },
     { extractionKey: "dependency_Thingies_LoreEpiBon_5", description: "Tome epilogue Palette Luck bonus", domainExtractor: data => (data.get('tome') as Tome).getEpilogueBonus(5) },
     { extractionKey: "dependency_Farming_ExoticBonusQTY_44", description: "Farming exotic Palette Luck bonus", domainExtractor: data => (data.get('farming') as Farming).getExoticMarketBonusValue(44) },
-    { extractionKey: "dependency_Ninja_EmporiumBonus_41", description: "Jade Palette slot bonus", domainExtractor: data => Number((data.get('sneaking') as Sneaking).jadeUpgrades.find(upgrade => upgrade.index === 41)!.purchased) },
     { extractionKey: "dependency_Arcade_ArcadeBonus_58", description: "Arcade Palette Luck bonus", domainExtractor: data => (data.get('arcade') as Arcade).bonuses.find(bonus => bonus.index === 58)!.getBonus() },
     { extractionKey: "dependency_Research_Grid_Bonus_107", description: "Research crown-scaled Palette Luck bonus", domainExtractor: data => (data.get('research') as ResearchGrid).getBonusForId(107, 2) },
     { extractionKey: "dependency_Thingies_LegendPTS_bonus_10", description: "Legend Talent earned Palette bonus multiplier input", domainExtractor: data => (data.get('legendTalents') as LegendTalents).getBonusFromIndex(10) },

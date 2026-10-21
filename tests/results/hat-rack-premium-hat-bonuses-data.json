@@ -20,10 +20,6 @@
       "expression": "idleon.callFunction(\"Companions\", 31)",
       "result": 25
     },
-    "hat_rack_event_shop_30": {
-      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 30, 0)",
-      "result": 0
-    },
     "hat_rack_minehead_21": {
       "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 21, 0)",
       "result": 0

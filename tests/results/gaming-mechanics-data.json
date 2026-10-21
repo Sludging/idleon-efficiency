@@ -195,7 +195,7 @@
     },
     "acorn_shop_bonus_2": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"AcornShopBonus\",2,0)",
-      "result": 96.63937282979165
+      "result": 96.63937282979164
     },
     "rat_shop_cost_2": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"RatShopCost\",2,0)",
@@ -258,7 +258,7 @@
       "expression": "idleon.callFunction(\"GamingStatType\",\"SproutValueNonPlantMulti\",0,0)",
       "result": {
         "type": "large_number",
-        "value": "1.4667210244374236e+55"
+        "value": "1.4702467961307823e+55"
       }
     },
     "NewMutantChanceDEC": {
@@ -275,7 +275,7 @@
     },
     "PaletteLuck": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteLuck\",0,0)",
-      "result": 157.72453197848367
+      "result": 157.74788461077495
     },
     "TotalSelectorSlots": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"TotalSelectorSlots\",0,0)",
@@ -299,7 +299,7 @@
     },
     "snail_stuff_0": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"SnailStuff\",0,0)",
-      "result": 0.02253449577396493
+      "result": 0.022534495773964377
     },
     "snail_stuff_1": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"SnailStuff\",1,0)",
@@ -319,23 +319,23 @@
     },
     "palette_level_chance_0": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"LVupChance\",0,0)",
-      "result": 0.03154490639569674
+      "result": 0.031549576922154994
     },
     "palette_unlock_chance_0": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PalUnlockChance\",0,0)",
-      "result": 0.00007510691998975412
+      "result": 0.00007511804029084521
     },
     "palette_level_chance_3": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"LVupChance\",3,0)",
-      "result": 0.0059194011953790406
+      "result": 0.0059202776195964165
     },
     "palette_unlock_chance_3": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PalUnlockChance\",3,0)",
-      "result": 0.0026287421996413944
+      "result": 0.0026291314101795824
     },
     "palette_level_chance_18": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"LVupChance\",18,0)",
-      "result": 0.00618118709053144
+      "result": 0.006182102274665691
     },
     "palette_unlock_chance_18": {
       "expression": "Math.min(1,idleon.callFunction(\"GamingStatType\",\"PalUnlockChance\",18,0))",
@@ -396,7 +396,7 @@
       "expression": "idleon.callFunction(\"GamingStatType\",\"SuperbitCost\",48,0)",
       "result": {
         "type": "large_number",
-        "value": "9.999999999999999e+69"
+        "value": "1e+70"
       }
     },
     "superbit_cost_68": {
@@ -460,15 +460,11 @@
     },
     "dependency_Thingies_LoreEpiBon_5": {
       "expression": "idleon.callFunction(\"Thingies\",\"LoreEpiBon\",5,0)",
-      "result": 292.06737923343155
+      "result": 292.4514685803277
     },
     "dependency_Farming_ExoticBonusQTY_44": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"ExoticBonusQTY\",44,0)",
       "result": 31.422924901185773
-    },
-    "dependency_Ninja_EmporiumBonus_41": {
-      "expression": "idleon.callFunction(\"Ninja\",\"EmporiumBonus\",41,0)",
-      "result": 1
     },
     "dependency_Arcade_ArcadeBonus_58": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 58, 0)",
@@ -516,7 +512,7 @@
     },
     "harvest_artifact23": {
       "expression": "idleon.callFunction(\"Sailing\",\"ArtifactBonus\",23,0)",
-      "result": 20700
+      "result": 20750
     },
     "harvest_monument": {
       "expression": "idleon.callFunction(\"Holes\",\"MonumentROGbonuses\",0,4)",
@@ -588,11 +584,11 @@
     },
     "squirrel_acorns_ready": {
       "expression": "Math.floor(Math.pow(idleon.getAttr(\"GamingSprout\")[27][1]*(1+idleon.callFunction(\"GamingStatType\",\"ImportItemBonus\",2,0)/100)/3600,0.85))",
-      "result": 8
+      "result": 7
     },
     "shell_next_threshold": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"ShellRankREQ\",idleon.getAttr(\"GamingSprout\")[28][2]+1,0)",
-      "result": 411579.5789901508
+      "result": 411579.5789901509
     },
     "shovel_island_bonus": {
       "expression": "25*idleon.callFunction(\"RandomEvent\",\"FractalIslandBonus\",4,999)",
@@ -626,7 +622,7 @@
       "expression": "idleon.callFunction(\"GamingStatType\",\"SproutValueBase\",0,0)*idleon.callFunction(\"GamingStatType\",\"SproutValueNonPlantMulti\",0,0)*(1/(1+2*idleon.getAttr(\"GamingSprout\")[29][1]))",
       "result": {
         "type": "large_number",
-        "value": "1.3424263976083607e+79"
+        "value": "1.3456533841410727e+79"
       }
     },
     "shell_earned_multiplier": {

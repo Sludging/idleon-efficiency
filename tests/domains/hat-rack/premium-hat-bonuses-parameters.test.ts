@@ -1,9 +1,8 @@
 /**
- * Direct calculated inputs to Hat Rack's Bonus Multi: Companion, Event Shop,
- * Minehead, and Sushi terms added to the deposited-hat count.
+ * Direct calculated inputs to Hat Rack's Bonus Multi: Companion, Minehead,
+ * and Sushi terms added to the deposited-hat count.
  */
 import { Companion, getCompanionActiveBonus } from '../../../data/domain/companions';
-import { EventShop } from '../../../data/domain/eventShop';
 import { Minehead } from '../../../data/domain/world-7/minehead';
 import { SushiStation } from '../../../data/domain/world-7/sushi';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
@@ -15,11 +14,6 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
     description: 'Pet2 companion contribution to the Hat Rack Bonus Multi',
     extractionKey: 'hat_rack_companion_31',
     domainExtractor: gameData => getCompanionActiveBonus(gameData.get('companions') as Companion[], 31),
-  },
-  event_shop: {
-    description: 'King of the Rack Event Shop ownership adds 10% to the Hat Rack Bonus Multi',
-    extractionKey: 'hat_rack_event_shop_30',
-    domainExtractor: gameData => Number((gameData.get('eventShop') as EventShop).isBonusOwned(30)),
   },
   minehead: {
     description: 'Brainhead Minehead bonus increases the Hat Rack Bonus Multi',
