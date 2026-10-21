@@ -1,18 +1,32 @@
 import { Account } from '../../../data/domain/account';
-import { loadGameDataFromSave, loadTestSave } from '../../utils/cloudsave-loader';
+import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
+import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 
 describe('Account saved miniboss and Plunderous progression', () => {
-  it('preserves account-owned minibosses and Plunderous kills from the genuine save', () => {
+  it('matches miniboss progression counters and Pirate Plunder Monster kills from the genuine save', () => {
+    const extractionResults = loadExtractionResults('account-state-data.json');
+    validateExtractionHealth(extractionResults);
     const account = loadGameDataFromSave('latest').get('account') as Account;
-    const options = loadTestSave('latest').get('OptLacc') as number[];
 
-    expect(account.miniBosses.map(boss => boss.bossInternalName)).toEqual(['mini3a', 'mini4a', 'mini5a', 'mini6a']);
-    expect(account.miniBosses.map(boss => boss.daysSinceLastKill)).toEqual([
-      Number(options[96] ?? 0),
-      Number(options[98] ?? 0),
-      Number(options[225] ?? 0),
-      Number(options[226] ?? 0),
-    ]);
-    expect(account.plunderousMobKills).toBe(Number(options[139] ?? 0));
+    expect(account.miniBosses[0].daysSinceLastKill).toMatchLiveGameWithDetails(
+      getExtractedValue(extractionResults, 'world_3_miniboss_counter'),
+      { tolerance: 0, context: 'World 3 miniboss days since last kill' },
+    );
+    expect(account.miniBosses[1].daysSinceLastKill).toMatchLiveGameWithDetails(
+      getExtractedValue(extractionResults, 'world_4_miniboss_counter'),
+      { tolerance: 0, context: 'World 4 miniboss days since last kill' },
+    );
+    expect(account.miniBosses[2].daysSinceLastKill).toMatchLiveGameWithDetails(
+      getExtractedValue(extractionResults, 'world_5_miniboss_counter'),
+      { tolerance: 0, context: 'World 5 miniboss days since last kill' },
+    );
+    expect(account.miniBosses[3].daysSinceLastKill).toMatchLiveGameWithDetails(
+      getExtractedValue(extractionResults, 'world_6_miniboss_counter'),
+      { tolerance: 0, context: 'World 6 miniboss days since last kill' },
+    );
+    expect(account.plunderousMobKills).toMatchLiveGameWithDetails(
+      getExtractedValue(extractionResults, 'plunderous_mob_kills'),
+      { tolerance: 0, context: 'Pirate Plunder Monster kills counted by Account' },
+    );
   });
 });

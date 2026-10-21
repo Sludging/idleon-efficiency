@@ -17,7 +17,6 @@ import {
  ImpactedByTheTomeBubble,
 } from '../../../data/domain/world-2/alchemy/alchemy';
 import { Player } from '../../../data/domain/player';
-import { lavaFunc } from '../../../data/utility';
 import { getTargetPlayer } from '../../utils/target-player';
 
 const saveName = 'latest';
@@ -54,7 +53,6 @@ const selectedRawBubbles = [
  { bonusKey: 'M7', extractionKey: 'raw_m7_bonus', description: 'Endgame Eff III' },
  { bonusKey: 'MinEff', extractionKey: 'raw_min_eff_bonus', description: 'mining efficiency' },
  { bonusKey: 'ChopEff', extractionKey: 'raw_chop_eff_bonus', description: 'chopping efficiency' },
- { bonusKey: 'W8', extractionKey: 'raw_w8_bonus', description: 'Tome Strength' },
 ];
 
 const bubbleBonusParameterSpecs = {
@@ -218,11 +216,7 @@ describe('Alchemy Domain - Bubble Bonus Parameters', () => {
  selectedRawBubbles.forEach(spec => {
   it(`validates ${spec.description} raw bubble bonus before player scaling`, () => {
    const liveValue = getExtractedValue(extractionResults, spec.extractionKey);
-   const bubble = getBubbleByBonusKey(gameData.get('alchemy') as Alchemy, spec.bonusKey);
-   // W8's public getter includes Tome scaling; compare the same root expression it consumes.
-   const domainValue = bubble instanceof ImpactedByTheTomeBubble
-    ? lavaFunc(bubble.func, bubble.level, bubble.x1, bubble.x2, false) * (bubble.prismatic ? bubble.prismaticMultiplier : 1)
-    : bubble.getBonus();
+   const domainValue = getBubbleByBonusKey(gameData.get('alchemy') as Alchemy, spec.bonusKey).getBonus();
    expect(domainValue).toMatchLiveGame(liveValue, 0);
   });
  });

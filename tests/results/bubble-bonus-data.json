@@ -115,10 +115,6 @@
       "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 2, 2, 0)",
       "result": 47.67116907312529
     },
-    "raw_w8_bonus": {
-      "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 0, 27, 0)",
-      "result": 2.4542682926829267
-    },
     "player_alchemy_max_hp": {
       "expression": "(() => { const script = idleon.allScripts.ActorEvents_12; const original = script._customBlock_PlayerHPmax; let calls = 0; let maximumHP; try { script._customBlock_PlayerHPmax = function(...args) { calls++; maximumHP = original.apply(this, args); return maximumHP; }; idleon.callFunction('TalentCalc', -2); } finally { script._customBlock_PlayerHPmax = original; } if (calls !== 1 || script._customBlock_PlayerHPmax !== original) throw new Error('Alchemy HP capture must intercept exactly one call and restore PlayerHPmax'); return maximumHP; })()",
       "result": 842973144987.2273

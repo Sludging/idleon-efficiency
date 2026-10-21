@@ -1,0 +1,31 @@
+{
+  "description": "Extract Account miniboss daily counters and Pirate Plunder Monster kills from the regular save",
+  "target": "Account miniboss progression and Plunderous Mob kills",
+  "extractions": [
+    {
+      "label": "world_3_miniboss_counter",
+      "expression": "idleon.getAttr(\"OptionsListAccount\")[96]",
+      "description": "World 3 miniboss daily counter before its next spawn"
+    },
+    {
+      "label": "world_4_miniboss_counter",
+      "expression": "idleon.getAttr(\"OptionsListAccount\")[98]",
+      "description": "World 4 miniboss daily counter before its next spawn"
+    },
+    {
+      "label": "world_5_miniboss_counter",
+      "expression": "idleon.getAttr(\"OptionsListAccount\")[225]",
+      "description": "World 5 miniboss daily counter before its next spawn"
+    },
+    {
+      "label": "world_6_miniboss_counter",
+      "expression": "idleon.getAttr(\"OptionsListAccount\")[226]",
+      "description": "World 6 miniboss daily counter before its next spawn"
+    },
+    {
+      "label": "plunderous_mob_kills",
+      "expression": "idleon.getAttr(\"OptionsListAccount\")[139]",
+      "description": "Pirate Plunder Monster kills counted toward Plunderous Mob progression"
+    }
+  ]
+}
