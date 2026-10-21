@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Box, Grid, Heading, ResponsiveContext, Text } from 'grommet';
 import { useContext } from 'react';
 import ContentTabs from '../../../components/base/ContentTabs';
@@ -14,6 +14,7 @@ import type { ImageData } from '../../../data/domain/imageData';
 import { commaNotation, notateNumber } from '../../../data/utility';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
+import useHydrated from '../../../lib/hooks/useHydrated';
 
 type UpgradeRow = { id: number; upgrade: MineheadUpgrade; description: string; capped: boolean; maxed: boolean; locked: boolean; nextCost: number; bulkCost: number };
 type MineheadSection = 'upgrades' | 'opponents';
@@ -245,18 +246,14 @@ function MineheadOpponents({ minehead }: { minehead: MineheadDomain }) {
 }
 
 export default function MineheadContent() {
+    const hydrated = useHydrated();
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
     const [section, setSection] = useState<MineheadSection>('upgrades');
-    const [mounted, setMounted] = useState(false);
     const minehead = theData.get('minehead') as MineheadDomain | undefined;
 
-    useEffect(() => {
-        setMounted(true);
-    }, []);
-
-    if (!mounted || !minehead) {
+    if (!hydrated || !minehead) {
         return <>Loading...</>;
     }
 

@@ -1,10 +1,10 @@
-const fs = require('node:fs/promises');
-const path = require('node:path');
-const { chromium } = require('playwright');
-
 async function main() {
   const [scenarioPath, artifactsDir, ...args] = process.argv.slice(2);
   if (!scenarioPath || !artifactsDir) throw new Error('Runner requires scenario path and artifacts directory');
+  const fs = await import('node:fs/promises');
+  const path = await import('node:path');
+  const { chromium } = await import('playwright');
+  const { pathToFileURL } = await import('node:url');
   await fs.mkdir(artifactsDir, { recursive: true, mode: 0o700 });
   const baseURL = 'https://app:3000';
   const errors = [];
@@ -14,7 +14,7 @@ async function main() {
   let page;
   let scenarioError;
   try {
-    const scenario = require(scenarioPath);
+    const scenario = (await import(pathToFileURL(scenarioPath).href)).default;
     if (typeof scenario !== 'function') throw new TypeError('Scenario module must export an async function');
     browser = await chromium.launch({ headless: true });
     context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, ignoreHTTPSErrors: true });

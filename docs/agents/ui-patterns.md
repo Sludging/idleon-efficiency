@@ -137,6 +137,11 @@ Shared primitives alone do not establish a new composition convention.
   The header's [DataStatusDisplay](../../components/header/dataStatus.tsx) shows account
   loading and status. Normal content reads feature data and guards missing domain data
   locally, as in [Breeding](../../app/world-4/breeding/content.tsx).
+  When account data differs between server rendering and initial browser hydration, use
+  [useHydrated](../../lib/hooks/useHydrated.ts) to preserve the same loading fallback for
+  both renders. This snapshot gate does not establish account-data readiness; keep local
+  readiness checks. Read store-derived values directly instead of copying them into state
+  from an effect.
 - Filtering and sorting are view work. Keep game formulas in the backend.
   Verify new or changed calculations through the selected workflow's game-evidence and testing requirements; previews are not evidence.
   Use the [calculation-correctness workflow](../../skills/calculation-correctness/SKILL.md) when checking or correcting an existing calculation.

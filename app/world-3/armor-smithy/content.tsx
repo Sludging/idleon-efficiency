@@ -1,31 +1,26 @@
 "use client"
 
 import { Box, CheckBox, Grid, Heading, Text } from 'grommet';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import IconImage from '../../../components/base/IconImage';
 import ShadowBox from '../../../components/base/ShadowBox';
 import TextAndLabel from '../../../components/base/TextAndLabel';
 import { EquipmentSets as EquipmentSetsDomain } from '../../../data/domain/misc/equipmentSets';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
-import { DataStatus } from '../../../lib/stores/appDataStore';
 import { useShallow } from 'zustand/react/shallow';
+import useHydrated from '../../../lib/hooks/useHydrated';
 
 function ArmorSmithy() {
-    const [hydrated, setHydrated] = useState(false);
+    const hydrated = useHydrated();
     const [showOwned, setShowOwned] = useState(true);
-    const { equipmentSets, dataStatus } = useAppDataStore(useShallow(
+    const { equipmentSets } = useAppDataStore(useShallow(
         (state) => ({
             equipmentSets: state.data.getData().get("equipmentSets") as EquipmentSetsDomain | undefined,
             lastUpdated: state.lastUpdated,
-            dataStatus: state.dataStatus,
         })
     ));
 
-    useEffect(() => {
-        setHydrated(true);
-    }, []);
-
-    if (!hydrated || (dataStatus !== DataStatus.StaticData && dataStatus !== DataStatus.LiveData) || !equipmentSets) {
+    if (!hydrated || !equipmentSets) {
         return <Box>Loading</Box>;
     }
 

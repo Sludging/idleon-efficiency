@@ -11,20 +11,18 @@ import { ZenithMarket } from '../../../data/domain/world-7/zenithShop';
 import { commaNotation } from '../../../data/utility';
 import { Item } from '../../../data/domain/items';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
-import { DataStatus } from '../../../lib/stores/appDataStore';
 
 const clusterImageData = Item.getImageData('Quest110');
 
 export default function ZenithMarketContent() {
     const [showMaxed, setShowMaxed] = useState(true);
-    const { theData, dataStatus } = useAppDataStore(useShallow((state) => ({
+    const { theData } = useAppDataStore(useShallow((state) => ({
         theData: state.data.getData(),
         lastUpdated: state.lastUpdated,
-        dataStatus: state.dataStatus,
     })));
     const market = theData.get('zenithMarket') as ZenithMarket | undefined;
 
-    if ((dataStatus !== DataStatus.StaticData && dataStatus !== DataStatus.LiveData) || !market) {
+    if (!market) {
         return <Text>Loading...</Text>;
     }
 

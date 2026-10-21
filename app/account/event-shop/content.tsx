@@ -4,24 +4,19 @@ import { Box, CheckBox, Grid, Text } from "grommet";
 import ShadowBox from "../../../components/base/ShadowBox";
 import { EventShop } from "../../../data/domain/eventShop";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
-import { DataStatus } from "../../../lib/stores/appDataStore";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useShallow } from "zustand/react/shallow";
+import useHydrated from "../../../lib/hooks/useHydrated";
 
 export default function EventShopContent() {
     const [showBought, setShowBought] = useState(true);
-    const [hydrated, setHydrated] = useState(false);
-    const { eventShop, dataStatus } = useAppDataStore(useShallow((state) => ({
+    const hydrated = useHydrated();
+    const { eventShop } = useAppDataStore(useShallow((state) => ({
         eventShop: state.data.getData().get("eventShop") as EventShop | undefined,
         lastUpdated: state.lastUpdated,
-        dataStatus: state.dataStatus,
     })));
 
-    useEffect(() => {
-        setHydrated(true);
-    }, []);
-
-    if (!hydrated || (dataStatus !== DataStatus.StaticData && dataStatus !== DataStatus.LiveData) || !eventShop) {
+    if (!hydrated || !eventShop) {
         return <Box><Text>Waiting for imported account data.</Text></Box>;
     }
     const ownedCount = eventShop.bonuses.filter((bonus) => bonus.owned).length;

@@ -10,10 +10,10 @@ import RoundedShadowBox from '../../../components/base/RoundedShadowBox';
 import TextAndLabel from '../../../components/base/TextAndLabel';
 import { Menagerie as MenagerieDomain, MenagerieBonus, MenagerieMission } from '../../../data/domain/menagerie';
 import { ImageData } from '../../../data/domain/imageData';
-import { DataStatus } from '../../../lib/stores/appDataStore';
 import { commaNotation, getCoinsArray, notateNumber } from '../../../data/utility';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
+import useHydrated from '../../../lib/hooks/useHydrated';
 import TipDisplay from 'components/base/TipDisplay';
 import CoinsDisplay from '../../../components/coinsDisplay';
 import { ResourceDisplay } from '../../../components/account/shared/ResourceDisplay';
@@ -135,18 +135,16 @@ const missionColumns: NonNullable<DataTableProps<MissionRow>['columns']> = [
 ];
 
 export default function MenagerieContent() {
+    const hydrated = useHydrated();
     const small = useContext(ResponsiveContext) === 'small';
-    const { theData, dataStatus } = useAppDataStore(useShallow(state => ({
+    const { theData } = useAppDataStore(useShallow(state => ({
         theData: state.data.getData(),
-        dataStatus: state.dataStatus,
         lastUpdated: state.lastUpdated,
     })));
     const [tab, setTab] = useState<MenagerieTab>('Missions');
     const [missionFilter, setMissionFilter] = useState<MissionFilter>('All');
     const menagerie = theData.get('menagerie') as MenagerieDomain | undefined;
-    if ([DataStatus.Init, DataStatus.Loading].includes(dataStatus)) return <>Loading Menagerie data</>;
-    if ([DataStatus.NoData, DataStatus.MissingData].includes(dataStatus)) return <>Menagerie account data is unavailable.</>;
-    if (!menagerie) return <>Menagerie data is unavailable.</>;
+    if (!hydrated || !menagerie) return <>Loading Menagerie data</>;
 
     const progression = menagerie.getProgression();
     const availability = menagerie.getMissionAvailability();
@@ -201,7 +199,7 @@ export default function MenagerieContent() {
                             />
                         </SummaryGroup>
                         <SummaryGroup label="Missions" separated>
-                            <Box data-testid="mission-availability-summary" gap="small">
+                            <Box gap="small">
                                 <TipDisplay heading="Unlock more missions" body={
                                     <Box gap="xsmall">
                                         <Text size="small">Available missions come from the mission limit and these account contributors:</Text>
@@ -435,8 +433,8 @@ function RedJellyfishDetails({ jelly }: { jelly: MenagerieDomain['redJellyfish']
             <TextAndLabel label="Reading multiplier" text={`×${commaNotation(jelly.readingMultiplier)}`} textSize="small" />
         </Box>
         <Box direction="row" gap="small" wrap border={{ side: 'top', color: 'grey-1' }} pad={{ top: 'small' }}>
-            {jelly.pageItems.map(pageItem => 
-                <Box title={pageItem.item.displayName} tabIndex={0} aria-label={`${pageItem.item.displayName}: ${commaNotation(pageItem.quantity)} pages recorded`} align="center" gap="xsmall">
+            {jelly.pageItems.map(pageItem =>
+                <Box key={pageItem.index} title={pageItem.item.displayName} tabIndex={0} aria-label={`${pageItem.item.displayName}: ${commaNotation(pageItem.quantity)} pages recorded`} align="center" gap="xsmall">
                     <IconImage data={pageItem.item.getImageData()} scale={0.8} />
                     <Text size="xsmall">{commaNotation(pageItem.quantity)}</Text>
                 </Box>)}

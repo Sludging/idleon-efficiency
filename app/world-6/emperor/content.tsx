@@ -1,11 +1,10 @@
 'use client'
 
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Box, Grid, Heading, ResponsiveContext, Text } from 'grommet';
 import { CircleInformation } from 'grommet-icons';
 import { UpgradeVault } from '../../../data/domain/upgradeVault';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
-import { DataStatus } from '../../../lib/stores/appDataStore';
 import { useShallow } from 'zustand/react/shallow';
 import { Emperor as EmperorDomain } from '../../../data/domain/world-6/emperor';
 import { nFormatter } from '../../../data/utility';
@@ -20,9 +19,10 @@ import { EnemyInfo } from '../../../data/domain/enemies';
 import { Item } from '../../../data/domain/items';
 import type { ImageData } from '../../../data/domain/imageData';
 import { Equinox as EquinoxDomain } from '../../../data/domain/world-3/equinox';
+import useHydrated from '../../../lib/hooks/useHydrated';
 
 function EmperorContent() {
-    const [hydrated, setHydrated] = useState(false);
+    const hydrated = useHydrated();
     const [filters, setFilters] = useState<FilterOptions>({
         hideLocked: false,
         hideMaxed: false,
@@ -30,16 +30,13 @@ function EmperorContent() {
         sortBy: 'nextBonus'
     });
     const size = useContext(ResponsiveContext);
-    const { theData, dataStatus } = useAppDataStore(useShallow(
-        (state) => ({ theData: state.data.getData(), dataStatus: state.dataStatus, lastUpdated: state.lastUpdated })
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
     const emperor = theData.get('emperor') as EmperorDomain | undefined;
     const upgradeVault = theData.get('upgradeVault') as UpgradeVault;
-    useEffect(() => {
-        setHydrated(true);
-    }, []);
 
-    if (!hydrated || (dataStatus !== DataStatus.StaticData && dataStatus !== DataStatus.LiveData) || !emperor) {
+    if (!hydrated || !emperor) {
         return <>Loading...</>;
     }
 

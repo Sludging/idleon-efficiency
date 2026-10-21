@@ -19,6 +19,7 @@ import { usePreservedScroll } from "../../../components/world-5/hole/upgradeInsp
 import Part4CavernDetails from "../../../components/world-5/hole/part4Caverns";
 import { Benefit, CavernMetricStrip, CavernStudySummary, type CavernMetric } from "../../../components/world-5/hole/cavernLayout";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import useHydrated from "../../../lib/hooks/useHydrated";
 import type { Companion } from "../../../data/domain/companions";
 import { Item } from "../../../data/domain/items";
 import type { Player } from "../../../data/domain/player";
@@ -29,7 +30,7 @@ import { SkillsIndex } from "../../../data/domain/SkillsIndex";
 import type { Skilling, SkillingSkill } from "../../../data/domain/skilling";
 import type { Villager, VillagerCharacterRate } from "../../../data/domain/world-5/hole/villager";
 import { commaNotation, nFormatter, notateNumber } from "../../../data/utility";
-import { DataStatus } from "../../../lib/stores/appDataStore";
+
 
 // Dimensions come from the inspected HolePOI art map. Jars uses neutral art, not the saved aesthetic.
 const cavernArt = [
@@ -72,7 +73,7 @@ function precise(value: number, suffix: string): string {
 }
 
 function Portrait({ index }: { index: number }) {
-    return <Box width="56px" height="64px" flex={false} style={{ overflow: "hidden" }} data-testid={`portrait-${index}`}>
+    return <Box width="56px" height="64px" flex={false} style={{ overflow: "hidden" }}>
         <IconImage data={{ location: `HoleUIvillager${index}`, width: 303, height: 64 }} />
     </Box>;
 }
@@ -85,10 +86,10 @@ function CavernImage({ index, width = 64, height = 56 }: { index: number; width?
     </Box>;
 }
 
-function Progress({ current, required, label, testId }: {
-    current: number; required: number; label: string; testId: string;
+function Progress({ current, required, label }: {
+    current: number; required: number; label: string;
 }) {
-    return <Box gap="xxsmall" data-testid={testId}>
+    return <Box gap="xxsmall">
         <Text size="xsmall" color="accent-2">{label}</Text>
         <Text size="small">{notateNumber(current)} / {notateNumber(required)}</Text>
         {required > 0 && <Box background="grey-1" height="8px" overflow="hidden" role="progressbar" aria-label={label} aria-valuemin={0} aria-valuemax={required} aria-valuenow={current}>
@@ -146,7 +147,8 @@ function cavernOpalMetrics(hole: Hole, cavern: number): CavernMetric[] {
 }
 export default function HoleContent() {
     const { ref, minHeight, preserveScroll } = usePreservedScroll();
-    const { data, dataStatus } = useAppDataStore(useShallow(state => ({ data: state.data.getData(), dataStatus: state.dataStatus, lastUpdated: state.lastUpdated })));
+    const hydrated = useHydrated();
+    const { data } = useAppDataStore(useShallow(state => ({ data: state.data.getData(), lastUpdated: state.lastUpdated })));
     const [tab, setTab] = useState<Tab>("Villagers");
     const [upgrade, setUpgrade] = useState<typeof upgradeNames[number]>("Studies");
     const [characterId, setCharacterId] = useState<number | null>(null);
@@ -154,8 +156,9 @@ export default function HoleContent() {
     const [search, setSearch] = useState("");
     const [showUnlocked, setShowUnlocked] = useState(false);
     const hole = data.get("hole") as Hole;
-    if ((dataStatus !== DataStatus.StaticData && dataStatus !== DataStatus.LiveData) || !hole) {
-        return <Box gap="small"><Heading level="2" size="medium" style={{ fontWeight: "normal" }}>The Hole</Heading><Text data-testid="hole-loading">Waiting for imported account data.</Text></Box>;
+
+    if (!hydrated || !hole || hole.allocationEffects.opalEnthusiasm.length !== hole.villagers.length) {
+        return <Box gap="small"><Heading level="2" size="medium" style={{ fontWeight: "normal" }}>The Hole</Heading><Text>Waiting for imported account data.</Text></Box>;
     }
     const account = data.get("account") as Account;
 
@@ -212,54 +215,54 @@ export default function HoleContent() {
     });
     const requirementStudies = [1, 7, 11, 16].map(index => hole.studies[index]);
 
-    return <Box gap="small" data-testid="hole-ready" ref={ref} style={{ minWidth: 0, minHeight, fontVariantNumeric: "tabular-nums" }}>
+    return <Box gap="small" ref={ref} style={{ minWidth: 0, minHeight, fontVariantNumeric: "tabular-nums" }}>
         <Heading level="2" size="medium" style={{ fontWeight: "normal" }}>The Hole</Heading>
-        <Box direction="row" gap="large" wrap align="center" data-testid="resource-summary">
-            <TipDisplay heading="Opal sources and allocation" size="small" maxWidth="560px" body={<Box gap="small" data-testid="opal-tip-body" style={{ maxHeight: "40vh", overflowY: "auto", overflowWrap: "anywhere" }}>
+        <Box direction="row" gap="large" wrap align="center">
+            <TipDisplay heading="Opal sources and allocation" size="small" maxWidth="560px" body={<Box gap="small" style={{ maxHeight: "40vh", overflowY: "auto", overflowWrap: "anywhere" }}>
                 {["Caverns", "Other sources"].map(group => <Box key={group} gap="xxsmall" flex={false}>
                     <Text size="xsmall" weight="bold">{group}</Text>
-                    {usefulOpalSources.filter(source => source.owner.startsWith("cavern:") === (group === "Caverns")).map(source => <Grid columns={["minmax(0, 1fr)", "auto"]} gap="small" key={source.id} data-testid={`opal-source-${source.id}`}>
+                    {usefulOpalSources.filter(source => source.owner.startsWith("cavern:") === (group === "Caverns")).map(source => <Grid columns={["minmax(0, 1fr)", "auto"]} gap="small" key={source.id}>
                         <Text size="xsmall">{source.owner.startsWith("cavern:") && cavernArt[Number(source.owner.split(":")[1])] ? cavernArt[Number(source.owner.split(":")[1])].name : source.name.replace(/_/g, " ").replace(/\b[A-Z][A-Z]+\b/g, word => word[0] + word.slice(1).toLowerCase())}</Text>
                         <Text size="xsmall">{exact(source.opals)}</Text>
                     </Grid>)}
                 </Box>)}
-                {ledger.emperorSchematicFloorAdjustment !== null && ledger.emperorSchematicFloorAdjustment !== 0 && <Text size="xsmall" data-testid="opal-floor-adjustment">Emperor + schematic floor adjustment: {exact(ledger.emperorSchematicFloorAdjustment)}</Text>}
-                {ledger.externalRoundingAdjustment !== null && ledger.externalRoundingAdjustment !== 0 && <Text size="xsmall" data-testid="opal-rounding-adjustment">External subtotal rounding adjustment: {exact(ledger.externalRoundingAdjustment)}</Text>}
-                <Text size="xsmall" data-testid="equal-spread">Equal Spread: {precise(hole.allocationEffects.equalSpreadPercent, "%")}. Minimum unlocked-villager investment: {hole.allocationEffects.leastUnlockedInvestment.toLocaleString("en-US", { maximumFractionDigits: 20 })} Opals.</Text>
+                {ledger.emperorSchematicFloorAdjustment !== null && ledger.emperorSchematicFloorAdjustment !== 0 && <Text size="xsmall">Emperor + schematic floor adjustment: {exact(ledger.emperorSchematicFloorAdjustment)}</Text>}
+                {ledger.externalRoundingAdjustment !== null && ledger.externalRoundingAdjustment !== 0 && <Text size="xsmall">External subtotal rounding adjustment: {exact(ledger.externalRoundingAdjustment)}</Text>}
+                <Text size="xsmall">Equal Spread: {precise(hole.allocationEffects.equalSpreadPercent, "%")}. Minimum unlocked-villager investment: {hole.allocationEffects.leastUnlockedInvestment.toLocaleString("en-US", { maximumFractionDigits: 20 })} Opals.</Text>
             </Box>}>
-                <Box direction="row" gap="xsmall" align="center" data-testid="opal-tip"><IconImage data={Item.getImageData("Opal")} scale={0.75} /><Text size="small">Opals</Text><Text size="small" data-testid="opal-ratio">{ledger.uninvested === null || ledger.earned === null ? number(null) : `${number(ledger.uninvested)} / ${number(ledger.earned)} available`}</Text><CircleInformation size="12px" /></Box>
+                <Box direction="row" gap="xsmall" align="center"><IconImage data={Item.getImageData("Opal")} scale={0.75} /><Text size="small">Opals</Text><Text size="small">{ledger.uninvested === null || ledger.earned === null ? number(null) : `${number(ledger.uninvested)} / ${number(ledger.earned)} available`}</Text><CircleInformation size="12px" /></Box>
             </TipDisplay>
             <Box direction="row" gap="xsmall" align="center">
                 <IconImage data={Item.getImageData("Quest90")} scale={0.75} />
                 <Text size="small">Lanterns</Text>
-                <TipDisplay heading="Lantern stock" size="small" maxWidth="420px" body={<Box gap="xxsmall" data-testid="lantern-tip-body">
-                    {usefulLocations.map(location => <Text size="xsmall" key={location.kind === "storage" ? "storage" : location.playerId} data-testid="lantern-location">{location.kind === "storage" ? "Storage" : `${location.playerName} inventory`}: {exact(location.quantity)}</Text>)}
+                <TipDisplay heading="Lantern stock" size="small" maxWidth="420px" body={<Box gap="xxsmall">
+                    {usefulLocations.map(location => <Text size="xsmall" key={location.kind === "storage" ? "storage" : location.playerId}>{location.kind === "storage" ? "Storage" : `${location.playerName} inventory`}: {exact(location.quantity)}</Text>)}
                     {usefulLocations.length === 0 && <Text size="xsmall">Total stock: {exact(hole.lanterns.totalStock)}.</Text>}
                 </Box>}>
-                    <Box direction="row" gap="xsmall" align="center" data-testid="lantern-tip">
+                    <Box direction="row" gap="xsmall" align="center">
                         <Text size="small">{number(hole.lanterns.totalStock)}</Text>
                         <CircleInformation size="12px" />
                     </Box>
                 </TipDisplay>
-                <Text size="small" data-testid="lantern-uses">{number(hole.lanterns.usesToday)} / {hole.lanterns.dailyLimit} today</Text>
+                <Text size="small">{number(hole.lanterns.usesToday)} / {hole.lanterns.dailyLimit} today</Text>
             </Box>
         </Box>
-        <Box data-testid="hole-feature" gap="small">
-            <Box data-testid="hole-tabs"><ContentTabs<Tab> options={[{ value: "Villagers", label: "Villagers" }, { value: "Upgrades", label: "Upgrades" }, { value: "Caverns", label: "Caverns" }]} value={tab} onChange={value => preserveScroll(() => setTab(value))} /></Box>
-            {tab === "Villagers" && <Box gap="small" data-testid="villagers-panel">
+        <Box gap="small">
+            <Box><ContentTabs<Tab> options={[{ value: "Villagers", label: "Villagers" }, { value: "Upgrades", label: "Upgrades" }, { value: "Caverns", label: "Caverns" }]} value={tab} onChange={value => preserveScroll(() => setTab(value))} /></Box>
+            {tab === "Villagers" && <Box gap="small">
                 <Box direction="row" gap="medium" align="center" wrap>
-                    <TipDisplay heading="Shared growth bonuses" size="small" body={<Box gap="xxsmall" data-testid="shared-growth-tip-body" style={{ maxHeight: "40vh", overflowY: "auto", overflowWrap: "anywhere" }}>
+                    <TipDisplay heading="Shared growth bonuses" size="small" body={<Box gap="xxsmall" style={{ maxHeight: "40vh", overflowY: "auto", overflowWrap: "anywhere" }}>
                         {sharedGrowthRows.map(row => <Grid columns={["minmax(0, 1fr)", "auto"]} gap="small" key={row.name}><Text size="xsmall">{row.name}</Text><Text size="xsmall">{row.value}</Text></Grid>)}
                         {sharedGrowthRows.length === 0 && <Text size="xsmall">No nonzero shared bonuses available.</Text>}
                     </Box>} maxWidth="420px">
-                        <Box direction="row" gap="xsmall" align="center" data-testid="shared-growth-tip"><Text size="small">Shared growth bonuses</Text><CircleInformation size="12px" /></Box>
+                        <Box direction="row" gap="xsmall" align="center"><Text size="small">Shared growth bonuses</Text><CircleInformation size="12px" /></Box>
                     </TipDisplay>
-                    <TipDisplay heading="Another Try" size="small" maxWidth="460px" body={<Box gap="small" data-testid="another-try-tip-body" style={{ maxHeight: "40vh", overflowY: "auto", overflowWrap: "anywhere" }}>
+                    <TipDisplay heading="Another Try" size="small" maxWidth="460px" body={<Box gap="small" style={{ maxHeight: "40vh", overflowY: "auto", overflowWrap: "anywhere" }}>
                         {hole.anotherTry.resets.map(reset => <Box key={reset.category} gap="xxsmall"><Text size="xsmall" weight="bold">{reset.category}</Text><Text size="xsmall">Clears: {reset.clears.join("; ")}.</Text><Text size="xsmall">Retains: {reset.retains.join("; ")}.</Text></Box>)}
-                    </Box>}><Box direction="row" gap="xsmall" align="center" data-testid="another-try-tip"><Text size="small">Another Try: {exact(hole.anotherTry.wishCost)} wishes{anotherTryState ? ` · ${anotherTryState}` : ""}</Text><CircleInformation size="12px" /></Box></TipDisplay>
+                    </Box>}><Box direction="row" gap="xsmall" align="center"><Text size="small">Another Try: {exact(hole.anotherTry.wishCost)} wishes{anotherTryState ? ` · ${anotherTryState}` : ""}</Text><CircleInformation size="12px" /></Box></TipDisplay>
                 </Box>
-                {!equal && characters.length > 0 && <Box direction="row" gap="small" align="center"><Text size="small">Character rates differ</Text><select data-testid="inspect-character" aria-label="Inspect character rates" value={characterId ?? ""} onChange={event => setCharacterId(event.target.value === "" ? null : Number(event.target.value))} style={{ font: "inherit", color: "inherit", background: "#1E2127", padding: "8px" }}><option value="">Choose a character (optional)</option>{characters.map(character => <option key={character.playerId} value={character.playerId}>{character.playerName}</option>)}</select></Box>}
-                <Grid columns={["minmax(0, 1fr)", "minmax(0, 1fr)", "minmax(0, 1fr)"]} gap="small" data-testid="villager-grid">{hole.villagers.map(villager => {
+                {!equal && characters.length > 0 && <Box direction="row" gap="small" align="center"><Text size="small">Character rates differ</Text><select aria-label="Inspect character rates" value={characterId ?? ""} onChange={event => setCharacterId(event.target.value === "" ? null : Number(event.target.value))} style={{ font: "inherit", color: "inherit", background: "#1E2127", padding: "8px" }}><option value="">Choose a character (optional)</option>{characters.map(character => <option key={character.playerId} value={character.playerId}>{character.playerName}</option>)}</select></Box>}
+                <Grid columns={["minmax(0, 1fr)", "minmax(0, 1fr)", "minmax(0, 1fr)"]} gap="small">{hole.villagers.map(villager => {
                     const rows = rates[villager.index];
                     const matched = equal ? rows[0] : characterId === null ? null : rows.find(rate => rate.playerId === characterId);
                     const rateText = matched
@@ -270,41 +273,41 @@ export default function HoleContent() {
                                 ? `${notateNumber(Math.min(...rows.map(rate => rate.expPerHour)))}–${notateNumber(Math.max(...rows.map(rate => rate.expPerHour)))}`
                                 : number(null, "No character rates are available.");
                     const enthusiasm = hole.allocationEffects.opalEnthusiasm[villager.index];
-                    const rateTip = matched ? <Box gap="xsmall" data-testid={`rate-tip-body-${villager.index}`}>
+                    const rateTip = matched ? <Box gap="xsmall">
                         <Text>Villager Statue: {precise(matched.statueBonus, "%")}; {precise(matched.statueFactor, "×")} EXP.</Text>
                         {matched.contributors.filter(row => ["Purchased EXP multiplier", "Role multiplier"].includes(row.source) && row.value !== 1).map(row =>
                             <Text key={row.source}>{row.source}: {precise(row.value, "×")}</Text>)}
                     </Box> : null;
-                    return <ShadowBox key={villager.index} background="dark-1" pad="medium" gap="small" data-testid={`villager-card-${villager.index}`} style={{ minWidth: 0 }}>
+                    return <ShadowBox key={villager.index} background="dark-1" pad="medium" gap="small" style={{ minWidth: 0 }}>
                         <Box gap="small">
                             <Box direction="row" gap="small" align="center"><Portrait index={villager.index} /><Box flex><Text>{villager.name}</Text><Text size="xsmall" color="accent-2">{villager.title}</Text></Box><TextAndLabel label="Level" text={notateNumber(villager.level)} textSize="large" /></Box>
                             <Box direction="row" gap="medium"><TextAndLabel label="Invested Opals" text={notateNumber(villager.opals)} tooltip={`Opal Enthusiasm: ${precise(enthusiasm.percent, "%")} from ${notateNumber(enthusiasm.investedTens)} invested tens.`} /><TextAndLabel label="EXP/hour" text={rateText} tooltip={rateTip ?? undefined} /></Box>
-                            <Progress current={villager.currentExp} required={villager.getExpRequirement()} label="EXP progress" testId={`villager-progress-${villager.index}`} />
-                            <Text size="xsmall" data-testid={`villager-next-unlock-${villager.index}`}>{nextUnlock(villager, hole)}</Text>
-                            {!villager.rescued && <Text size="xsmall" data-testid={`villager-rescue-${villager.index}`}>Not rescued</Text>}
-                            {villager.claimReady && <Text size="xsmall" data-testid={`villager-readiness-${villager.index}`}>Ready to claim in game</Text>}
+                            <Progress current={villager.currentExp} required={villager.getExpRequirement()} label="EXP progress" />
+                            <Text size="xsmall">{nextUnlock(villager, hole)}</Text>
+                            {!villager.rescued && <Text size="xsmall">Not rescued</Text>}
+                            {villager.claimReady && <Text size="xsmall">Ready to claim in game</Text>}
                         </Box>
                     </ShadowBox>;
                 })}</Grid>
             </Box>}
-            {tab === "Upgrades" && <ShadowBox flex={false} data-testid="upgrades-panel"><Grid rows="1" columns={["25%", "75%"]}>
-                <Box pad="medium" height="100%" data-testid="upgrade-rail">{upgradeNames.map(name => <Box key={name} data-testid={`upgrade-nav-${name}`}><LeftNavButton text={name} isActive={upgrade === name} clickHandler={() => preserveScroll(() => setUpgrade(name))} /></Box>)}</Box>
+            {tab === "Upgrades" && <ShadowBox flex={false}><Grid rows="1" columns={["25%", "75%"]}>
+                <Box pad="medium" height="100%">{upgradeNames.map(name => <Box key={name}><LeftNavButton text={name} isActive={upgrade === name} clickHandler={() => preserveScroll(() => setUpgrade(name))} /></Box>)}</Box>
                 <Box fill background="dark-1" pad="medium" gap="small" style={{ minWidth: 0 }}>
-                    <Box direction="row" gap="small" align="center"><Portrait index={upgrade === "Majik" ? 2 : upgrade === "Schematics" ? 1 : upgrade === "Measurements" ? 3 : 4} /><Heading level="3" size="small" margin="none">{upgrade}</Heading>{upgrade === "Studies" && <Text size="small" data-testid="study-speed">Study speed: {number(hole.studyRate)} progress/hour</Text>}</Box>
+                    <Box direction="row" gap="small" align="center"><Portrait index={upgrade === "Majik" ? 2 : upgrade === "Schematics" ? 1 : upgrade === "Measurements" ? 3 : 4} /><Heading level="3" size="small" margin="none">{upgrade}</Heading>{upgrade === "Studies" && <Text size="small">Study speed: {number(hole.studyRate)} progress/hour</Text>}</Box>
                     {upgrade === "Majik" && <Majik hole={hole} divinity={data.get("divinity") as Divinity} companions={data.get("companions") as Companion[]} />}
                     {upgrade === "Schematics" && <Schematics hole={hole} />}
                     {upgrade === "Measurements" && <Measurements hole={hole} />}
                     {upgrade === "Studies" && <>
-                        <Box direction="row" gap="small" align="center"><TextInput data-testid="study-search" aria-label="Search Studies" placeholder="Search Studies" value={search} onChange={event => setSearch(event.target.value)} /><CheckBox data-testid="study-unlocked" label="Show unlocked" checked={showUnlocked} onChange={event => setShowUnlocked(event.target.checked)} />{search !== "" && <SmallButton data-testid="clear-study-search" label="Clear search" onClick={() => setSearch("")} style={{ whiteSpace: "nowrap", minWidth: "88px", flexShrink: 0 }} />}</Box>
-                        <Text size="small" color="accent-2" data-testid="study-count">{visibleStudies.length} of {hole.studies.length} Studies</Text>
-                        {visibleStudies.length === 0 && <Text data-testid="study-no-results">No Studies match. Clear search or turn off Show unlocked.</Text>}
-                        <Grid columns={["minmax(0, 1fr)", "minmax(0, 1fr)"]} gap="small" data-testid="study-grid">{visibleStudies.map(({ study, effects }) => <StudyCard key={study.index} study={study} effects={effects} />)}</Grid>
+                        <Box direction="row" gap="small" align="center"><TextInput aria-label="Search Studies" placeholder="Search Studies" value={search} onChange={event => setSearch(event.target.value)} /><CheckBox label="Show unlocked" checked={showUnlocked} onChange={event => setShowUnlocked(event.target.checked)} />{search !== "" && <SmallButton label="Clear search" onClick={() => setSearch("")} style={{ whiteSpace: "nowrap", minWidth: "88px", flexShrink: 0 }} />}</Box>
+                        <Text size="small" color="accent-2">{visibleStudies.length} of {hole.studies.length} Studies</Text>
+                        {visibleStudies.length === 0 && <Text>No Studies match. Clear search or turn off Show unlocked.</Text>}
+                        <Grid columns={["minmax(0, 1fr)", "minmax(0, 1fr)"]} gap="small">{visibleStudies.map(({ study, effects }) => <StudyCard key={study.index} study={study} effects={effects} />)}</Grid>
                     </>}
                 </Box>
             </Grid></ShadowBox>}
-            {tab === "Caverns" && <ShadowBox flex={false} data-testid="caverns-panel"><Grid rows="1" columns={["25%", "75%"]}>
-                <Box pad="medium" height="100%" data-testid="cavern-rail">{cavernArt.map((image, index) => <Box direction="row" align="center" key={image.name} data-testid={`cavern-nav-${index}`}><CavernImage index={index} width={32} height={28} /><Box flex><LeftNavButton text={image.name} isActive={cavern === index} clickHandler={() => preserveScroll(() => setCavern(index))} /></Box></Box>)}</Box>
-                <Box fill background="dark-1" pad="medium" gap="medium" style={{ minWidth: 0 }} data-testid="selected-cavern">
+            {tab === "Caverns" && <ShadowBox flex={false}><Grid rows="1" columns={["25%", "75%"]}>
+                <Box pad="medium" height="100%">{cavernArt.map((image, index) => <Box direction="row" align="center" key={image.name}><CavernImage index={index} width={32} height={28} /><Box flex><LeftNavButton text={image.name} isActive={cavern === index} clickHandler={() => preserveScroll(() => setCavern(index))} /></Box></Box>)}</Box>
+                <Box fill background="dark-1" pad="medium" gap="medium" style={{ minWidth: 0 }}>
                     <Box direction="row" gap="small" align="center"><CavernImage index={cavern} width={96} height={80} />{!detailedCavern && <Heading level="3" size="small" margin="none">{cavernArt[cavern].name}</Heading>}</Box>
                     {detailedCavern ? <Part4CavernDetails hole={hole} cavern={cavern} totalMoney={account.totalMoney} onOpenStudies={onOpenStudies} characters={characters} /> : selectedResourceCavern === null ? <>
                         <CavernMetricStrip metrics={cavernOpalMetrics(hole, cavern)} />
@@ -334,7 +337,7 @@ export default function HoleContent() {
                             {
                                 label: "Claims remaining",
                                 value: metricValue(hole.resourceCavrens.getRemainingSharedClaims()),
-                                tooltip: <Box gap="xsmall" data-testid="shared-claim-tip">
+                                tooltip: <Box gap="xsmall">
                                     <Text size="xsmall">Six claims per day are shared across all four resource caverns.</Text>
                                     <Text size="xsmall">Claims are made manually in game.</Text>
                                 </Box>,
@@ -360,14 +363,14 @@ export default function HoleContent() {
 function StudyCard({ study, effects }: { study: Study; effects: StudyEffect[] }) {
     const active = study.access && (study.participation === "target" || study.participation === "neighbor");
     const description = study.level >= 1 && genuineTips.has(study.index) ? study.getDescription().replace(/_/g, " ") : null;
-    const art = <Box direction="row" gap="xxsmall" align="center" data-testid={`study-art-${study.index}`}><CavernImage index={study.index} />{description !== null && <CircleInformation size="small" />}</Box>;
-    return <ShadowBox background="dark-1" pad="medium" gap="small" border={active ? { color: "green-1", size: "1px" } : undefined} data-testid={`study-card-${study.index}`} data-participation={study.participation} data-access={String(study.access)} style={{ minWidth: 0 }}>
-        <Box gap="small" style={{ opacity: 1 }} data-testid={`study-body-${study.index}`}>
-            <Box direction="row" gap="small" align="center">{description !== null ? <TipDisplay heading={`${cavernArt[study.index].name} Study`} body={<Text data-testid={`study-tip-body-${study.index}`}>{description}</Text>} maxWidth="420px"><Box data-testid={`study-tip-${study.index}`}>{art}</Box></TipDisplay> : art}<Box flex><Text>{cavernArt[study.index].name}</Text><Text size="large" data-testid={`study-level-${study.index}`}>Level {number(study.level)}</Text></Box></Box>
+    const art = <Box direction="row" gap="xxsmall" align="center"><CavernImage index={study.index} />{description !== null && <CircleInformation size="small" />}</Box>;
+    return <ShadowBox background="dark-1" pad="medium" gap="small" border={active ? { color: "green-1", size: "1px" } : undefined} data-participation={study.participation} data-access={String(study.access)} style={{ minWidth: 0 }}>
+        <Box gap="small" style={{ opacity: 1 }}>
+            <Box direction="row" gap="small" align="center">{description !== null ? <TipDisplay heading={`${cavernArt[study.index].name} Study`} body={<Text>{description}</Text>} maxWidth="420px"><Box>{art}</Box></TipDisplay> : art}<Box flex><Text>{cavernArt[study.index].name}</Text><Text size="large">Level {number(study.level)}</Text></Box></Box>
             <Benefit index={study.index} effects={effects} dailyPurchases={study.dailyCoveUpgradesPurchased} />
-            <Progress current={study.progress} required={study.getRequirement()} label="Progress to next level" testId={`study-progress-${study.index}`} />
+            <Progress current={study.progress} required={study.getRequirement()} label="Progress to next level" />
         </Box>
-        {study.access === false && <Text size="small" data-testid={`study-locked-${study.index}`}>Locked</Text>}
-        {study.claimReady && <Text size="small" data-testid={`study-readiness-${study.index}`}>Ready to claim in game</Text>}
+        {study.access === false && <Text size="small">Locked</Text>}
+        {study.claimReady && <Text size="small">Ready to claim in game</Text>}
     </ShadowBox>;
 }

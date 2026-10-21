@@ -1,7 +1,7 @@
 "use client"
 
 import { Box, Heading } from 'grommet';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ContentTabs from '../../../components/base/ContentTabs';
 import { GamingPalette } from '../../../components/world-5/gaming/palette';
 import { GamingPlants } from '../../../components/world-5/gaming/plants';
@@ -11,6 +11,7 @@ import { GamingUpgrades } from '../../../components/world-5/gaming/upgrades';
 import { Gaming as GamingDomain } from '../../../data/domain/world-5/gaming';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
+import useHydrated from '../../../lib/hooks/useHydrated';
 
 type GamingTab = 'Plants' | 'Upgrades' | 'Superbits' | 'Palette';
 
@@ -22,17 +23,14 @@ const gamingTabs = [
 ] as const;
 
 function Gaming() {
-    const [gaming, setGaming] = useState<GamingDomain>();
+    const hydrated = useHydrated();
     const [activeTab, setActiveTab] = useState<GamingTab>('Plants');
-    const { theData, lastUpdated } = useAppDataStore(useShallow(
+    const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
+    const gaming = theData.get('gaming') as GamingDomain | undefined;
 
-    useEffect(() => {
-        setGaming(theData.get('gaming'));
-    }, [theData, lastUpdated]);
-
-    if (!gaming) {
+    if (!hydrated || !gaming) {
         return (
             <Box>
                 Gaming data is not available. Load an account to view Gaming.

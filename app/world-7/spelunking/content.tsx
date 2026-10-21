@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { Box, Heading, Text } from 'grommet';
 import ContentTabs from '../../../components/base/ContentTabs';
 import TipDisplay from '../../../components/base/TipDisplay';
@@ -8,9 +8,10 @@ import { useShallow } from 'zustand/react/shallow';
 import SpelunkingDisplay, { CollectionStatus } from '../../../components/world-7/spelunking/spelunkingDisplay';
 import { SpelunkingCharacters, SpelunkingJournal, SpelunkingSummary } from '../../../components/world-7/spelunking/spelunkingPart2';
 import { SpelunkingElixirs, SpelunkingManicModeDetail, SpelunkingPart3Summary, SpelunkingShop } from '../../../components/world-7/spelunking/spelunkingPart3';
-import type { Player } from '../../../data/domain/player';
 import { Spelunking } from '../../../data/domain/world-7/spelunking';
+import type { Player } from '../../../data/domain/player';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import useHydrated from '../../../lib/hooks/useHydrated';
 
 type SpelunkingTab = 'Tunnels' | 'Journal & Pages' | 'Shop' | 'Elixirs';
 function scrollOwner(element: HTMLElement | null): HTMLElement {
@@ -23,12 +24,13 @@ function scrollOwner(element: HTMLElement | null): HTMLElement {
 }
 
 export default function SpelunkingContent() {
-    const { theData, lastUpdated } = useAppDataStore(useShallow(state => ({
+    const hydrated = useHydrated();
+    const { theData } = useAppDataStore(useShallow(state => ({
         theData: state.data.getData(),
         lastUpdated: state.lastUpdated,
     })));
-    const [snapshot, setSnapshot] = useState<{ spelunking: Spelunking; players: Player[] }>();
-    const [hydrated, setHydrated] = useState(false);
+    const spelunking = theData.get('spelunking') as Spelunking | undefined;
+    const players = theData.get('players') as Player[] | undefined;
     const [tab, setTab] = useState<SpelunkingTab>('Tunnels');
     const contentRef = useRef<HTMLDivElement>(null);
     const pendingScroll = useRef<{ owner: HTMLElement; top: number } | null>(null);
@@ -43,12 +45,6 @@ export default function SpelunkingContent() {
         }
     }, [tab]);
 
-    useEffect(() => {
-        const spelunking = theData.get('spelunking') as Spelunking;
-        const players = theData.get('players') as Player[];
-        setSnapshot(players.length > 0 ? { spelunking, players } : undefined);
-        setHydrated(true);
-    }, [theData, lastUpdated]);
     const [showLocked, setShowLocked] = useState(true);
     const [collectionStatus, setCollectionStatus] = useState<CollectionStatus>('All');
 
@@ -56,25 +52,27 @@ export default function SpelunkingContent() {
         return <>Loading Spelunking data</>;
     }
 
+
+
     return (
         <Box gap="large" data-spelunking-content>
             <Box direction="row" align="center" justify="between">
                 <Heading level="2" size="medium" margin={{ top: 'medium', bottom: 'small' }} style={{ fontWeight: 'normal' }}>Spelunking</Heading>
             </Box>
-            {!snapshot ? (
+            {!spelunking || !players || players.length === 0 ? (
                 <Box gap="small">
                     <Text>Spelunking account data is not available.</Text>
                     <Text size="small">Load an account save to view Spelunking data.</Text>
                 </Box>
             ) : <Box ref={contentRef} gap="large" data-spelunking-tab-content>
                 <SpelunkingSummary
-                    spelunking={snapshot.spelunking}
-                    players={snapshot.players}
-                    manicDetail={<SpelunkingManicModeDetail spelunking={snapshot.spelunking} />}
+                    spelunking={spelunking}
+                    players={players}
+                    manicDetail={<SpelunkingManicModeDetail spelunking={spelunking} />}
                 >
-                    <SpelunkingPart3Summary spelunking={snapshot.spelunking} />
+                    <SpelunkingPart3Summary spelunking={spelunking} />
                 </SpelunkingSummary>
-                <SpelunkingCharacters spelunking={snapshot.spelunking} players={snapshot.players} />
+                <SpelunkingCharacters spelunking={spelunking} players={players} />
                 <Box gap="medium" data-spelunking-tab-group>
                     <Box align="center" data-spelunking-tab-region>
                         <ContentTabs
@@ -97,7 +95,7 @@ export default function SpelunkingContent() {
                     <Box data-spelunking-panels>
                         <Box style={{ display: tab === 'Tunnels' ? undefined : 'none' }} data-spelunking-tab-panel="Tunnels">
                             <SpelunkingDisplay
-                                spelunking={snapshot.spelunking}
+                                spelunking={spelunking}
                                 showLocked={showLocked}
                                 collectionStatus={collectionStatus}
                                 onShowLockedChange={setShowLocked}
@@ -114,13 +112,13 @@ export default function SpelunkingContent() {
                                     <Text size="xsmall" color="accent-2" data-spelunking-soft-cap-trigger style={{ textDecoration: 'underline dotted' }}>About soft caps</Text>
                                 </TipDisplay>
                             </Box>
-                            <SpelunkingJournal spelunking={snapshot.spelunking} players={snapshot.players} />
+                            <SpelunkingJournal spelunking={spelunking} players={players} />
                         </Box>
                         <Box style={{ display: tab === 'Shop' ? undefined : 'none' }} data-spelunking-tab-panel="Shop">
-                            <SpelunkingShop spelunking={snapshot.spelunking} />
+                            <SpelunkingShop spelunking={spelunking} />
                         </Box>
                         <Box style={{ display: tab === 'Elixirs' ? undefined : 'none' }} data-spelunking-tab-panel="Elixirs">
-                            <SpelunkingElixirs spelunking={snapshot.spelunking} />
+                            <SpelunkingElixirs spelunking={spelunking} />
                         </Box>
                     </Box>
                 </Box>

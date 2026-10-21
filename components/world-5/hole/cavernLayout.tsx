@@ -68,7 +68,7 @@ export function Benefit({ index, effects, dailyPurchases }: { index: number; eff
             }
         }
     }
-    return <Box gap="xxsmall" data-testid={`benefit-${index}`}>
+    return <Box gap="xxsmall">
         <Text size="small">{main}</Text>
         {detail && <Text size="xsmall" color="accent-2">{detail}</Text>}
     </Box>;
@@ -76,7 +76,7 @@ export function Benefit({ index, effects, dailyPurchases }: { index: number; eff
 
 function Progress({ study, requirement }: { study: Study; requirement: number }) {
     const current = study.progress;
-    return <Box gap="xxsmall" data-testid={`study-progress-${study.index}`}>
+    return <Box gap="xxsmall">
         <Text size="xsmall" color="accent-2">Progress to next level</Text>
         <Text size="small">{notateNumber(current)} / {notateNumber(requirement)}</Text>
         {requirement > 0 && <Box background="grey-1" height="8px" overflow="hidden" role="progressbar" aria-label="Study progress to next level" aria-valuemin={0} aria-valuemax={requirement} aria-valuenow={current}>
@@ -89,17 +89,17 @@ export function CavernStudySummary({ study, onOpenStudies }: { study: Study; onO
     const status = !study.access ? "Locked"
         : study.participation === "inactive" ? "Inactive"
             : `Study rate: ${notateNumber(study.progressPerHour)}/hr`;
-    return <Box gap="small" pad={{ top: "small" }} border={{ side: "top", color: "grey-1" }} data-testid={`cavern-study-${study.index}`}>
+    return <Box gap="small" pad={{ top: "small" }} border={{ side: "top", color: "grey-1" }}>
         <Box direction="row" justify="between" align="center">
             <Text size="medium" weight={500}>Study</Text>
-            <Button plain label="All Studies" size="small" onClick={onOpenStudies} data-testid="open-studies" />
+            <Button plain label="All Studies" size="small" onClick={onOpenStudies} />
         </Box>
         <Box direction="row" justify="between" align="center" gap="small" wrap>
             <Box direction="row" align="center" gap="small" wrap style={{ minWidth: 0, flex: "1 1 auto" }}>
                 <Text size="small" weight={500}>Level {notateNumber(study.level)}</Text>
                 <Text size="xsmall">{study.getDescription().replace(/_/g, " ")}</Text>
             </Box>
-            <Text size="xsmall" color="accent-2" data-testid={`study-status-${study.index}`} style={{ flexShrink: 0, marginLeft: "auto" }}>{status}</Text>
+            <Text size="xsmall" color="accent-2" style={{ flexShrink: 0, marginLeft: "auto" }}>{status}</Text>
         </Box>
         <Progress study={study} requirement={study.getRequirement()} />
     </Box>;
