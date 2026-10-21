@@ -91,6 +91,11 @@ sub-projects/game-parser
 .patch_notes
 docs/GAME_CODE*
 
+## Private implementation artifacts
+/docs/plans/
+/docs/research/
+/docs/audits/
+/docs/human/
 ## Trash things to hide
 coverage-report.md
 coverage-report.html
