@@ -1014,6 +1014,14 @@ export const initCardRepo = () => {
                 "bonus": 15,
                 "order": 35
             }),
+        new CardDataBase("SpelunkingCard6", <CardDataModel>{
+                "cardID": "F51",
+                "category": "Hard Resources",
+                "perTier": 4e+06,
+                "effect": "+{% Spelunking EXP",
+                "bonus": 30,
+                "order": 36
+            }),
         new CardDataBase("mushP", <CardDataModel>{
                 "cardID": "G1",
                 "category": "Hyperion Nebula",
@@ -1554,8 +1562,8 @@ export const initCardRepo = () => {
                 "cardID": "J22",
                 "category": "Shimmerfin Deep",
                 "perTier": 3e+07,
-                "effect": "+{% Drop Rate Multi",
-                "bonus": 1,
+                "effect": "+{% Lumi Hourly Gains (Passive)",
+                "bonus": 5,
                 "order": 22
             }),
         new CardDataBase("w7b11", <CardDataModel>{

@@ -38,7 +38,7 @@
     },
     "unlocked_world_count": {
       "expression": "idleon.callFunction('RoyalG', 'MapWorldsUnlocked', 0, 0)",
-      "result": 2
+      "result": 3
     },
     "expansion_bonus_2": {
       "expression": "idleon.callFunction('RoyalG', 'ArmoryUpgBonus', 2, 0)",
@@ -46,7 +46,7 @@
     },
     "expansion_bonus_3": {
       "expression": "idleon.callFunction('RoyalG', 'ArmoryUpgBonus', 3, 0)",
-      "result": 0
+      "result": 1
     },
     "expansion_bonus_4": {
       "expression": "idleon.callFunction('RoyalG', 'ArmoryUpgBonus', 4, 0)",

@@ -8,7 +8,8 @@ For new UI pages or changes to visual composition, use the `impeccable` skill fo
 task. Critiques and audits stay within supported behavior; they are not permission for broad
 redesign or repeated polish passes.
 The [product context](../../PRODUCT.md) and [visual context](../../DESIGN.md) record project
-facts and visual references. Use the [UI verification guide](ui-verification.md) for private
+facts and visual references. Apply the [UI direction](../insights/ui-feedback.md) when choosing or reviewing composition and content.
+Use the [UI verification guide](ui-verification.md) for private
 Docker Playwright feature checks and screenshots during mockup planning.
 
 ## Workflow
@@ -52,6 +53,7 @@ feature family's pattern where applicable.
   keeps identity and details together on a dark-1 surface with medium padding and small
   gaps. Its image beside the name and level is a useful composition reference, not a
   requirement for every card's fields.
+- **Simple bonus collections:** prefer a grid of dense cards when entries contain only an identity, effect, and a few related values. Use aligned rows or tables when comparing fields across entries benefits from shared columns. Do not stretch sparse entries into full-width rows by default.
 - **Tables:** Reuse [EfficiencyUpgradeTable](../../components/account/shared/EfficiencyUpgradeTable.tsx)
   for a compatible elite-class feature and preserve that family's controls. Its columns
   and filters remain feature-specific. [StampsTableView](../../components/world-1/stampTableView.tsx)
@@ -135,10 +137,9 @@ Shared primitives alone do not establish a new composition convention.
   The header's [DataStatusDisplay](../../components/header/dataStatus.tsx) shows account
   loading and status. Normal content reads feature data and guards missing domain data
   locally, as in [Breeding](../../app/world-4/breeding/content.tsx).
-- Filtering and sorting are view work. Keep game formulas in the backend. For a changed
-  calculation, use the existing
-  [calculation-correctness workflow](../../skills/calculation-correctness/SKILL.md); previews
-  are not evidence.
+- Filtering and sorting are view work. Keep game formulas in the backend.
+  Verify new or changed calculations through the selected workflow's game-evidence and testing requirements; previews are not evidence.
+  Use the [calculation-correctness workflow](../../skills/calculation-correctness/SKILL.md) when checking or correcting an existing calculation.
 - When UI work needs missing static game data, read [External data source requirements](../NEW_FEATURE_IMPLEMENTATION_GUIDE.md#2-external-data-source-requirements).
 
 ## Desktop verification and review

@@ -4,7 +4,7 @@
       "expression": "idleon.callFunction(\"CookingR\", \"CookingSPEED\", 0, 0)",
       "result": {
         "type": "large_number",
-        "value": "3.21765756376294e+147"
+        "value": "3.9884956123870965e+149"
       }
     },
     "starsign_58_bonus": {
@@ -15,12 +15,12 @@
       "expression": "idleon.callFunction(\"TalentCalc\", 59)",
       "result": {
         "type": "large_number",
-        "value": "1.6425293287437326e+45"
+        "value": "3.241920388431345e+45"
       }
     },
     "crop_sc_3_bonus": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 3, 0)",
-      "result": 1813534878.2405362
+      "result": 1994888366.06459
     },
     "talent_enh_146_bonus": {
       "expression": "idleon.callFunction(\"TalentEnh\", 146)",
@@ -42,7 +42,7 @@
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.MealSpdz",
       "result": {
         "type": "large_number",
-        "value": "1.31346802776602e+44"
+        "value": "4.8432347966637514e+45"
       }
     },
     "atom_bonuses_8_bonus": {
@@ -55,11 +55,11 @@
     },
     "artifact_13_bonus": {
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 13, 0)",
-      "result": 13382.217621498341
+      "result": 13398.266709511368
     },
     "button_bonus_7": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 7, 0)",
-      "result": 415.625
+      "result": 418.25
     },
     "arcade_28_bonus": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 28)",
@@ -79,11 +79,11 @@
     },
     "mainframe_114_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 114)",
-      "result": 920
+      "result": 921.6
     },
     "meal_bonus_Mcook": {
       "expression": "idleon.callFunction(\"MealBonus\", \"Mcook\")",
-      "result": 291946.5236043144
+      "result": 319664.6057159226
     },
     "summoning_win_bonus_15": {
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 15, 0)",
@@ -99,7 +99,7 @@
     },
     "lamp_bonuses_0": {
       "expression": "idleon.callFunction(\"Holes\", \"LampBonuses\", 0, 0)",
-      "result": 2493.75
+      "result": 2793.75
     },
     "alch_vials_6cookspd_bonus": {
       "expression": "idleon.getDNSM(\"AlchVials\").h[\"6CookSpd\"]",
@@ -111,7 +111,19 @@
     },
     "meal_bonus_KitchenEff": {
       "expression": "idleon.callFunction(\"MealBonus\", \"KitchenEff\")",
-      "result": 26831.9584983912
+      "result": 33778.950128615994
+    },
+    "ceramic_card_cooking_speed_bonus": {
+      "expression": "5 * idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w6c1\")",
+      "result": 30
+    },
+    "troll_card_cooking_speed_bonus": {
+      "expression": "6 * idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"Boss4A\")",
+      "result": 36
+    },
+    "menagerie_cooking_multiplier": {
+      "expression": "1 + idleon.callFunction(\"MenagerieStuff\", \"BoostQTY\", 4, 0) / 100",
+      "result": 1
     }
   },
   "errors": {}

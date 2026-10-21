@@ -1,0 +1,133 @@
+{
+  "extractions": {
+    "boat_0_artifact_find_multiplier": {
+      "expression": "idleon.callFunction(\"Sailing\", \"BoatArtiMulti\", 0, 0)",
+      "result": 10868678787.940706
+    },
+    "boat_1_artifact_find_multiplier": {
+      "expression": "idleon.callFunction(\"Sailing\", \"BoatArtiMulti\", 1, 0)",
+      "result": 11957954765.282421
+    },
+    "sailing_artifact_bonus_3": {
+      "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 3, 0)",
+      "result": 1116
+    },
+    "boat_0_captain_artifact_bonus": {
+      "expression": "window.frames[0].__idleon_cheats__[\"scripts.ActorEvents_579\"]._customBlock_CaptBonusCalc(3, window.frames[0].__idleon_cheats__[\"com.stencyl.Engine\"].engine.getGameAttribute(\"Boats\")[0][0])",
+      "result": 0
+    },
+    "boat_1_captain_artifact_bonus": {
+      "expression": "window.frames[0].__idleon_cheats__[\"scripts.ActorEvents_579\"]._customBlock_CaptBonusCalc(3, window.frames[0].__idleon_cheats__[\"com.stencyl.Engine\"].engine.getGameAttribute(\"Boats\")[1][0])",
+      "result": 210
+    },
+    "breeding_shiny_bonus_21": {
+      "expression": "idleon.callFunction(\"Breeding\", \"ShinyBonusS\", \"Nah\", 21, -1)",
+      "result": 82
+    },
+    "fractal_island_bonus_3": {
+      "expression": "idleon.callFunction(\"RandomEvent\", \"FractalIslandBonus\", 3, 999)",
+      "result": 0
+    },
+    "bribe_bonus_34": {
+      "expression": "idleon.callFunction(\"GetBribeBonus\", \"34\")",
+      "result": 20
+    },
+    "arcade_bonus_32": {
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 32, 0)",
+      "result": 10.317460317460318
+    },
+    "arcade_bonus_66": {
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 66, 0)",
+      "result": 0
+    },
+    "hole_b_upg_55": {
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 55, 0)",
+      "result": 190
+    },
+    "farming_sticker_bonus_2": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"StickerBonus\", 2, 0)",
+      "result": 208.50000000000003
+    },
+    "research_grid_bonus_109": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 109, 0)",
+      "result": 32.5
+    },
+    "upgrade_vault_bonus_63": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 63, 0)",
+      "result": 336.04
+    },
+    "starsign_bonus_61": {
+      "expression": "idleon.getAttr(\"DNSM\").h.StarSigns.h[61]",
+      "result": 150
+    },
+    "companion_bonus_154": {
+      "expression": "idleon.callFunction(\"Companions\", 154)",
+      "result": 1
+    },
+    "killroy_bonus_0": {
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 0, 0)",
+      "result": 1.053627760252366
+    },
+    "button_bonus_3": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 3, 0)",
+      "result": 41.824999999999996
+    },
+    "research_grid_bonus_106": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 106, 0)",
+      "result": 130
+    },
+    "alchemy_vial_6turtle": {
+      "expression": "idleon.getAttr(\"DNSM\").h.AlchVials.h[\"6turtle\"]",
+      "result": 276.64
+    },
+    "sushi_bonus_7": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 7, 0)",
+      "result": 30
+    },
+    "summoning_winner_bonus_3": {
+      "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 3, 0)",
+      "result": 3065.9947500000003
+    },
+    "jelly_bonus_19": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 19, 0)",
+      "result": 0
+    },
+    "boat_0_davey_jones_bonus": {
+      "expression": "idleon.callFunction(\"Sailing\", \"DaveyJonesBonus\", 0, 0)",
+      "result": 5.6
+    },
+    "boat_1_davey_jones_bonus": {
+      "expression": "idleon.callFunction(\"Sailing\", \"DaveyJonesBonus\", 1, 0)",
+      "result": 5.6
+    },
+    "mainframe_bonus_14": {
+      "expression": "idleon.callFunction(\"MainframeBonus\", 14, 0)",
+      "result": 50
+    },
+    "tome_epilogue_bonus_3": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 3, 0)",
+      "result": 153.42057032987418
+    },
+    "voting_bonus_20": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 20, 0)",
+      "result": 0
+    },
+    "companion_bonus_43": {
+      "expression": "idleon.callFunction(\"Companions\", 43)",
+      "result": 0.5
+    },
+    "hole_monument_1_2": {
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 1, 2)",
+      "result": 758.6
+    },
+    "farming_exotic_bonus_45": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 45, 0)",
+      "result": 4.533106960950764
+    },
+    "gaming_palette_bonus_5": {
+      "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 5, 0)",
+      "result": 218.91891891891893
+    }
+  },
+  "errors": {}
+}

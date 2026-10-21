@@ -8,6 +8,7 @@ import { Item } from "./items";
 import { Player } from "./player";
 import { Quests } from "./quests";
 import { Storage } from "./storage";
+import { WeeklyBoss } from "./weekly-boss";
 
 // Option List Indexes:
 // 15 = Colo1 Tix
@@ -121,9 +122,36 @@ export class Account extends Domain {
     coloHighscores: number[] = [];
     minigameHighscores: number[] = [];
     library: Library = new Library();
+    obolFragments: number = 0;
     miniBosses: Miniboss[] = [];
     totalMoney: number = 0;
     talentsMaxLevels: number[] = [];
+    plunderousMobKills: number = 0;
+    hasDeathBringerBundle: boolean = false;
+    hasExplorerBundle: boolean = false;
+    hasBankBundle: boolean = false;
+    hasBundleL: boolean = false;
+    hasBundleM: boolean = false;
+    weeklyBoss: WeeklyBoss = new WeeklyBoss();
+    movementSpeedBonusPercent: number = 0;
+    spelunkingPowerBonus: number = 0;
+    fractalIslandProgress: number = 0;
+    island0Currency: number = 0;
+    randomizerMonsterTargetsCompleted: number = 0;
+    classExperienceShimmerCount: number = 0;
+    classExperienceBonusPoints: number = 0;
+    lifetimeFishCaught: number = 0;
+    hasEquinoxBundle: boolean = false;
+    wormholeEmperorProgress: number = 0;
+    wraithOverlordProgress: number = 0;
+    damageShimmerCount: number = 0;
+    damageVaultProgress: number = 0;
+    damageBonusPoints: number = 0;
+    lateDamageBonusPoints: number = 0;
+    damageMultiplierFloorInput: number = 0;
+    damageExponentInput: number = 0;
+    hasDamageMultiplierBundle: boolean = false;
+    cavernDamageUpgradeLevel: number = 0;
 
     // corresponds to a.engine.getGameAttribute("CurrenciesOwned").h.TalentPoints
     talentPointsOwned: number[] = [];
@@ -146,15 +174,21 @@ export class Account extends Domain {
         [AFKTypeEnum.PayingRespect]: 0,
         [AFKTypeEnum.Spelunking]: 0,
     };
+    getFractalIslandArtifactBonus(): number {
+        return this.fractalIslandProgress >= 2500 ? 1 : 0;
+    }
+
 
     getRawKeys(): RawData[] {
         return [
-            {key: "CYKeysAll", perPlayer: false, default: []},
-            {key: "CYColosseumTickets", perPlayer: false, default: 0},
-            {key: "FamValColosseumHighscores", perPlayer: false, default: []},
-            {key: "FamValMinigameHiscores", perPlayer: false, default: []},
-            {key: "CYTalentPoints", perPlayer: false, default: []},
-            {key: "SM_", perPlayer: true, default: {}},
+            { key: "CYObolFragments", perPlayer: false, default: 0 },
+            { key: "CYKeysAll", perPlayer: false, default: [] },
+            { key: "CYColosseumTickets", perPlayer: false, default: 0 },
+            { key: "FamValColosseumHighscores", perPlayer: false, default: [] },
+            { key: "FamValMinigameHiscores", perPlayer: false, default: [] },
+            { key: "CYTalentPoints", perPlayer: false, default: [] },
+            { key: "WeeklyBoss", perPlayer: false, default: {} },
+            { key: "SM_", perPlayer: true, default: {} },
         ]
     }
 
@@ -182,8 +216,41 @@ export class Account extends Domain {
         const keyData = data.get("CYKeysAll") as number[];
         const colosseumHighscores = data.get("FamValColosseumHighscores") as number[];
         const minigamesHighscores = data.get("FamValMinigameHiscores") as number[];
+        const obolFragments = data.get("CYObolFragments") as number;
         const talentPointsOwned = data.get("CYTalentPoints") as number[];
         const charCount = data.get("charCount") as number;
+
+        account.plunderousMobKills = Number(optionList?.[139] ?? 0);
+        account.obolFragments = Number(obolFragments);
+        account.movementSpeedBonusPercent = Number(optionList?.[438] ?? 0);
+        account.spelunkingPowerBonus = Number(optionList?.[500] ?? 0);
+        account.fractalIslandProgress = Number(optionList?.[184] ?? 0);
+        account.island0Currency = Number(optionList?.[161] ?? 0);
+        account.randomizerMonsterTargetsCompleted = Number(optionList?.[338] ?? 0);
+        account.classExperienceShimmerCount = Number(optionList?.[179] ?? 0);
+        account.classExperienceBonusPoints = Number(optionList?.[421] ?? 0);
+        account.lifetimeFishCaught = Number(optionList?.[345] ?? 0);
+        account.wormholeEmperorProgress = Number(optionList?.[152] ?? 0);
+        account.wraithOverlordProgress = Number(optionList?.[329] ?? 0);
+        account.damageShimmerCount = Number(optionList?.[178] ?? 0);
+        account.damageVaultProgress = Number(optionList?.[346] ?? 0);
+        account.damageBonusPoints = Number(optionList?.[419] ?? 0);
+        account.lateDamageBonusPoints = Number(optionList?.[435] ?? 0);
+        account.damageMultiplierFloorInput = Number(optionList?.[232] ?? 0);
+        account.damageExponentInput = Number(optionList?.[473] ?? 0);
+        account.cavernDamageUpgradeLevel = Number(optionList?.[649] ?? 0);
+        account.weeklyBoss.parse(optionList, data.get("WeeklyBoss") as Record<string, unknown>);
+        const rawData = data.get("rawData") as Record<string, string | undefined>;
+        const bundles: Record<string, string | number> = rawData.BundlesReceived === undefined
+            ? {}
+            : JSON.parse(rawData.BundlesReceived);
+        account.hasDeathBringerBundle = Number(bundles.bun_v) === 1;
+        account.hasExplorerBundle = Number(bundles.bun_p) === 1;
+        account.hasEquinoxBundle = Number(bundles.bun_q) === 1;
+        account.hasDamageMultiplierBundle = Number(bundles.bon_a) === 1;
+        account.hasBankBundle = Number(bundles.ban_k) === 1;
+        account.hasBundleL = Number(bundles.ban_l) === 1;
+        account.hasBundleM = Number(bundles.ban_m) === 1;
 
         account.talentPointsOwned = [];
         talentPointsOwned.forEach((points) => {
@@ -270,9 +337,9 @@ export const updateAccount = (data: Map<string, any>) => {
     for (const key of enumKeys) {
         account.activity[key as keyof typeof AFKTypeEnum] = 0;
     }
-    
+
     // Check how many players are in each activity type.
-    GroupByFunction(players, function (player: Player) { return player.currentMonster && player.currentMonster.details ? player.currentMonster.details.AFKtype : undefined })
+    GroupByFunction(players, function(player: Player) { return player.currentMonster && player.currentMonster.details ? player.currentMonster.details.AFKtype : undefined })
         .forEach(players => {
             const firstPlayer = players[0] ?? undefined;
             if (firstPlayer && firstPlayer.currentMonster && firstPlayer.currentMonster.details) {

@@ -1,0 +1,236 @@
+{
+  "description": "Spelunking Part 2 Journal, daily page reads, stamina, and direct producer comparisons.",
+  "target": "ChapterBonus, MaxDailyPageReads, StaminaMax, StaminaRegenRate and every direct producer",
+  "extractions": [
+    {
+      "label": "chapter_bonus_matrix",
+      "expression": "(() => { const chapters = idleon.getAttr(\"CustomLists\").h.SpelunkChapters; return chapters.map((row, chapter) => row.map((_, bonus) => idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\", chapter, bonus))); })()",
+      "description": "Current Journal bonus effects for every native chapter and bonus."
+    },
+    {
+      "label": "daily_reads_limit",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"MaxDailyPageReads\",0,0)",
+      "description": "Account-wide daily page-read limit"
+    },
+    {
+      "label": "stamina_recharge_hourly",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
+      "description": "Shared source-derived stamina recharge per hour"
+    },
+    {
+      "label": "stamina_max_player_0",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",0,0)",
+      "description": "Player 0 maximum stamina"
+    },
+    {
+      "label": "stamina_max_player_1",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",1,0)",
+      "description": "Player 1 maximum stamina"
+    },
+    {
+      "label": "stamina_max_player_2",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",2,0)",
+      "description": "Player 2 maximum stamina"
+    },
+    {
+      "label": "stamina_max_player_3",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",3,0)",
+      "description": "Player 3 maximum stamina"
+    },
+    {
+      "label": "stamina_max_player_4",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",4,0)",
+      "description": "Player 4 maximum stamina"
+    },
+    {
+      "label": "stamina_max_player_5",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",5,0)",
+      "description": "Player 5 maximum stamina"
+    },
+    {
+      "label": "stamina_max_player_6",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",6,0)",
+      "description": "Player 6 maximum stamina"
+    },
+    {
+      "label": "stamina_max_player_7",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",7,0)",
+      "description": "Player 7 maximum stamina"
+    },
+    {
+      "label": "stamina_max_player_8",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",8,0)",
+      "description": "Player 8 maximum stamina"
+    },
+    {
+      "label": "stamina_max_player_9",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",9,0)",
+      "description": "Player 9 maximum stamina"
+    },
+    {
+      "label": "stamina_max_player_10",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",10,0)",
+      "description": "Player 10 maximum stamina"
+    },
+    {
+      "label": "artifact_35",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Sailing(\"ArtifactBonus\",35,0)",
+      "description": "Sailing artifact 35 producer"
+    },
+    {
+      "label": "upgrade_4_raw",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ShopUpgBonus\",4,1)",
+      "description": "Raw Spelunking upgrade 4 bonus"
+    },
+    {
+      "label": "upgrade_5_raw",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ShopUpgBonus\",5,1)",
+      "description": "Raw Spelunking upgrade 5 bonus"
+    },
+    {
+      "label": "upgrade_61_raw",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ShopUpgBonus\",61,1)",
+      "description": "Raw Spelunking upgrade 61 bonus"
+    },
+    {
+      "label": "upgrade_61_effective",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ShopUpgBonus\",61,0)",
+      "description": "Trackometer-scaled effective upgrade 61 bonus"
+    },
+    {
+      "label": "merit_50_stamina_additive",
+      "expression": "20*idleon.getAttr(\"Tasks\")[2][6][2]",
+      "description": "Source-derived additive stamina from World 7 merit 50"
+    },
+    {
+      "label": "companion_148",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Companions(148)",
+      "description": "Active companion 148 bonus"
+    },
+    {
+      "label": "mastery_stamina_indicator",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_RiftStuff(\"RiftSkillBonus,18\",3)",
+      "description": "Rift Spelunking mastery maximum-stamina reward indicator"
+    },
+    {
+      "label": "mastery_daily_reads_indicator",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_RiftStuff(\"RiftSkillBonus,18\",4)",
+      "description": "Rift Spelunking mastery daily-read reward indicator"
+    },
+    {
+      "label": "mastery_recharge_indicator",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_RiftStuff(\"RiftSkillBonus,18\",5)",
+      "description": "Rift Spelunking mastery recharge reward indicator"
+    },
+    {
+      "label": "mastery_stamina_effect",
+      "expression": "15*idleon.allScripts.ActorEvents_579._customBlock_RiftStuff(\"RiftSkillBonus,18\",3)",
+      "description": "Full source stamina mastery contribution"
+    },
+    {
+      "label": "mastery_daily_reads_effect",
+      "expression": "3*idleon.allScripts.ActorEvents_579._customBlock_RiftStuff(\"RiftSkillBonus,18\",4)",
+      "description": "Full source daily-read mastery contribution"
+    },
+    {
+      "label": "mastery_recharge_effect",
+      "expression": "10*idleon.allScripts.ActorEvents_579._customBlock_RiftStuff(\"RiftSkillBonus,18\",5)",
+      "description": "Full source recharge mastery contribution"
+    },
+    {
+      "label": "talent_236_player_0",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,0)",
+      "description": "Spelunking Specialty first-effect output for player 0"
+    },
+    {
+      "label": "talent_236_player_3",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,3)",
+      "description": "Spelunking Specialty first-effect output for player 3"
+    },
+    {
+      "label": "talent_236_player_1",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,1)",
+      "description": "Spelunking Specialty first-effect output for player 1"
+    },
+    {
+      "label": "talent_236_player_2",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,2)",
+      "description": "Spelunking Specialty first-effect output for player 2"
+    },
+    {
+      "label": "talent_236_player_4",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,4)",
+      "description": "Spelunking Specialty first-effect output for player 4"
+    },
+    {
+      "label": "talent_236_player_5",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,5)",
+      "description": "Spelunking Specialty first-effect output for player 5"
+    },
+    {
+      "label": "talent_236_player_6",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,6)",
+      "description": "Spelunking Specialty first-effect output for player 6"
+    },
+    {
+      "label": "talent_236_player_7",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,7)",
+      "description": "Spelunking Specialty first-effect output for player 7"
+    },
+    {
+      "label": "talent_236_player_8",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,8)",
+      "description": "Spelunking Specialty first-effect output for player 8"
+    },
+    {
+      "label": "talent_236_player_9",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,9)",
+      "description": "Spelunking Specialty first-effect output for player 9"
+    },
+    {
+      "label": "talent_236_player_10",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,10)",
+      "description": "Spelunking Specialty first-effect output for player 10"
+    },
+    {
+      "label": "talent_236_best",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,-1)",
+      "description": "Highest account Spelunking Specialty first effect"
+    },
+    {
+      "label": "big_fish_advice_1",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"BigFishBonuses\",1,0)",
+      "description": "Big Fish Advice on Being Tired output"
+    },
+    {
+      "label": "meritocracy_17",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Summoning2(\"MeritocBonusz\",17,0)",
+      "description": "Meritocracy bonus 17 recharge percentage. Compare the applied stamina recharge multiplier using 1 + percent / 100."
+    },
+    {
+      "label": "legend_talent_30",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Thingies(\"LegendPTS_bonus\",30,0)",
+      "description": "Legend Talent 30 recharge percentage. Compare the applied stamina recharge multiplier using 1 + percent / 100."
+    },
+    {
+      "label": "royal_outpost_category_2",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_RoyalG(\"OutpostROGbon\",2,0)",
+      "description": "Royal Outpost category 2 recharge multiplier"
+    },
+    {
+      "label": "sushi_11",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_SushiStuff(\"RoG_BonusQTY\",11,0)",
+      "description": "Sushi bonus 11 recharge percentage. Compare the applied stamina recharge multiplier using 1 + percent / 100."
+    },
+    {
+      "label": "bubble_Y11",
+      "expression": "idleon.getAttr(\"DNSM\").h.AlchBubbles.h.Y11",
+      "description": "Alchemy bubble Y11 recharge value"
+    },
+    {
+      "label": "native_card_w7a10",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"CardLv\",\"w7a10\")",
+      "description": "Native card level for w7a10. Compare the additive stamina recharge percentage using min(2 * nativeLevel, 20)."
+    }
+  ]
+}

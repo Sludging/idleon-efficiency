@@ -15,6 +15,7 @@ export class Companion {
     owned: boolean = false;
     real: boolean = false;
     level: CompanionLevel = 1;
+    bonusTokenActive: boolean = false;
     constructor(public id: number, public name: string, public data: CompanionModel, public imageData: ImageData) { }
 
     getBonus = () => {
@@ -45,9 +46,12 @@ export const getCompanionBonus = (companions: Companion[], index: number, level:
     return companion?.owned ? getCompanionBonusAtLevel(companion, level) : 0;
 };
 
-/** Returns the metadata bonus for an owned companion at its active level. */
+/** Returns the active bonus. Pet Bonus Tokens use the level-one bonus. */
 export const getCompanionActiveBonus = (companions: Companion[], index: number): number => {
     const companion = companions.find(companion => companion.id === index);
+    if (companion?.bonusTokenActive) {
+        return companion.data.bonus;
+    }
     return companion?.owned ? getCompanionBonusAtLevel(companion, companion.level) : 0;
 };
 
@@ -78,14 +82,22 @@ export class Companions extends Domain {
         }
 
         const sourceCompanions = new Map(ownedCompanions.map(companion => [companion.id, companion]));
+        const optionList = data.get("OptLacc") as (string | number)[];
+        const bonusTokenIds = new Set(
+            String(optionList[606] ?? "").split(",")
+                .filter(token => token.trim() !== "")
+                .map(token => Number(token))
+        );
         companions.forEach(companion => {
             const sourceCompanion = sourceCompanions.get(companion.id);
             const editedCompanion = editedCompanions.find(c => c.id === companion.id);
-            // Source levels stay authoritative; enabled fakes are level two, disabled fakes keep their saved level.
-            companion.level = sourceCompanion?.level ?? (editedCompanion?.owned ? 2 : editedCompanion?.level ?? 1);
+
+            // Take the max between the source and edited companion levels, defaulting to 1 if neither exists.
+            companion.level = Math.max(sourceCompanion?.level ?? 1, editedCompanion?.level ?? 1) as CompanionLevel;
             companion.real = sourceCompanion !== undefined;
             // Local edits can only override ownership for companions without a source record.
             companion.owned = companion.real || (editedCompanion?.owned ?? false);
+            companion.bonusTokenActive = bonusTokenIds.has(companion.id);
         });
     }
 
@@ -101,23 +113,17 @@ export const updateCompanionImpact = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const alchemy = data.get("alchemy") as Alchemy;
     const arcade = data.get("arcade") as Arcade;
-    // Doot
-    if (companions.find(c => c.id === 0)?.owned) {
-
-        // If we have Doot, all gods are unlocked.
+    const dootOwned = getCompanionActiveBonus(companions, 0) > 0;
+    if (dootOwned) {
         divinity.gods.forEach(god => {
             god.unlocked = true;
-        })
-
-        // And all players are linked to all gods.
-        divinity.playerInfo.forEach(player => {
-            // Doot is activated only for characters that are level 2 or above in divinity
-            const divLevel = players.find(playerFind => playerFind.playerID == player.playerIndex)?.skills.get(SkillsIndex.Divinity)?.level ?? 0;
-            if (divLevel >= 2) {
-                player.gods = divinity.gods;
-            }
-        })
+        });
     }
+    divinity.playerInfo.forEach(info => {
+        const player = players.find(player => player.playerID === info.playerIndex)!;
+        info.dootActive = dootOwned && (player.skills.get(SkillsIndex.Divinity)?.level ?? 0) >= 2;
+        info.gods = info.dootActive ? [...divinity.gods] : info.primaryGod ? [info.primaryGod] : [];
+    });
 
     // Rift Slug
     const slugBonus = getCompanionActiveBonus(companions, 1);

@@ -48,11 +48,6 @@
       "description": "Buildie Sheepie upgrade build-speed bonus"
     },
     {
-      "label": "sheepies_killed",
-      "expression": "idleon.callFunction(\"Summoning\", \"VaultKillzTotal\", 11, 0)",
-      "description": "Log-scaled total Sheepie kills supplied to the Buildie Sheepie build-speed multiplier"
-    },
-    {
       "label": "bubba_bonus_1",
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 1, 0)",
       "description": "Bubba Rizz global cost reduction contribution"

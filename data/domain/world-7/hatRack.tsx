@@ -8,6 +8,7 @@ import type { Minehead } from "./minehead";
 import type { SushiStation } from "./sushi";
 import { TypeGenEnum } from "../enum/typeGenEnum";
 import type { ArmourItemModel } from "../model/armourItemModel";
+import type { ItemProperty } from "../equipment-effects";
 
 type ItemEffect = { effect: string; value: number };
 
@@ -63,8 +64,8 @@ export class HatRack extends Domain {
 
     parse(data: Map<string, any>): void {
         const hatRack = data.get(this.getDataKey()) as HatRack;
-        const spelunk = data.get("Spelunk") as unknown[][] | undefined;
-        const depositedHats = spelunk?.[46];
+        const spelunk = data.get("Spelunk") as unknown[][];
+        const depositedHats = spelunk[46];
         hatRack.depositedHats = Array.isArray(depositedHats) ? [...depositedHats] as string[] : [];
         const storedNames = new Set(hatRack.depositedHats);
         // Reset every catalog entry without sorting or deduplicating the bonus calculation's saved sequence.
@@ -74,10 +75,14 @@ export class HatRack extends Domain {
 
         const charCount = Math.max(0, Math.trunc(Number(data.get("charCount")) || 0));
         hatRack.unlockKillsLeft = Array.from({ length: charCount }, (_, index) =>
-            (data.get(`KLA_${index}`) as number[][] | undefined)?.[50]?.[0]
+            (data.get(`KLA_${index}`) as number[][])[50]?.[0]
         );
         // Parsed saves invalidate totals from the previous account state.
         hatRack.calculatedBonuses = undefined;
+    }
+
+    getDepositedHatCount(): number {
+        return this.depositedHats.length;
     }
 
     isUnlocked(player: Player): boolean {
@@ -93,6 +98,11 @@ export class HatRack extends Domain {
         if (!this.isUnlocked(player)) return 0;
         return this.calculatedBonuses.get(effect) ?? 0;
     }
+    getProperty(property: ItemProperty, player: Player): number {
+        // Keep the existing display key for the prepared weapon-power channel.
+        return this.getBonus(property === "Weapon_Power" ? "Weapon Power" : property, player);
+    }
+
 
     updateContributions(data: Map<string, any>): void {
         const companions = data.get("companions") as Companion[];

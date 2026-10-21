@@ -1,16 +1,12 @@
 {
   "extractions": {
-    "tome_line_count": {
-      "expression": "idleon.getAttr(\"CustomLists\").h.Tome.length",
-      "result": 122
-    },
     "tome_pts_0": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 0, 0)",
-      "result": 1056
+      "result": 1059
     },
     "tome_pts_1": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 1, 0)",
-      "result": 750
+      "result": 767
     },
     "tome_pts_2": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 2, 0)",
@@ -26,7 +22,7 @@
     },
     "tome_pts_5": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 5, 0)",
-      "result": 1659
+      "result": 1663
     },
     "tome_pts_6": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 6, 0)",
@@ -50,7 +46,7 @@
     },
     "tome_pts_11": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 11, 0)",
-      "result": 1489
+      "result": 1498
     },
     "tome_pts_12": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 12, 0)",
@@ -58,7 +54,7 @@
     },
     "tome_pts_13": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 13, 0)",
-      "result": 153
+      "result": 154
     },
     "tome_pts_14": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 14, 0)",
@@ -66,7 +62,7 @@
     },
     "tome_pts_15": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 15, 0)",
-      "result": 237
+      "result": 224
     },
     "tome_pts_16": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 16, 0)",
@@ -74,7 +70,7 @@
     },
     "tome_pts_17": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 17, 0)",
-      "result": 260
+      "result": 263
     },
     "tome_pts_18": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 18, 0)",
@@ -94,7 +90,7 @@
     },
     "tome_pts_22": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 22, 0)",
-      "result": 1299
+      "result": 1335
     },
     "tome_pts_23": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 23, 0)",
@@ -114,7 +110,7 @@
     },
     "tome_pts_27": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 27, 0)",
-      "result": 127
+      "result": 149
     },
     "tome_pts_28": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 28, 0)",
@@ -158,7 +154,7 @@
     },
     "tome_pts_38": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 38, 0)",
-      "result": 620
+      "result": 622
     },
     "tome_pts_39": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 39, 0)",
@@ -166,15 +162,15 @@
     },
     "tome_pts_40": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 40, 0)",
-      "result": 579
+      "result": 581
     },
     "tome_pts_41": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 41, 0)",
-      "result": 495
+      "result": 497
     },
     "tome_pts_42": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 42, 0)",
-      "result": 830
+      "result": 832
     },
     "tome_pts_43": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 43, 0)",
@@ -182,7 +178,7 @@
     },
     "tome_pts_44": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 44, 0)",
-      "result": 638
+      "result": 641
     },
     "tome_pts_45": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 45, 0)",
@@ -206,7 +202,7 @@
     },
     "tome_pts_50": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 50, 0)",
-      "result": 777
+      "result": 778
     },
     "tome_pts_51": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 51, 0)",
@@ -250,11 +246,11 @@
     },
     "tome_pts_61": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 61, 0)",
-      "result": 159
+      "result": 162
     },
     "tome_pts_62": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 62, 0)",
-      "result": 126
+      "result": 128
     },
     "tome_pts_63": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 63, 0)",
@@ -266,11 +262,11 @@
     },
     "tome_pts_65": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 65, 0)",
-      "result": 1186
+      "result": 1187
     },
     "tome_pts_66": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 66, 0)",
-      "result": 327
+      "result": 328
     },
     "tome_pts_67": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 67, 0)",
@@ -298,7 +294,7 @@
     },
     "tome_pts_73": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 73, 0)",
-      "result": 199
+      "result": 203
     },
     "tome_pts_74": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 74, 0)",
@@ -338,7 +334,7 @@
     },
     "tome_pts_83": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 83, 0)",
-      "result": 720
+      "result": 721
     },
     "tome_pts_84": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 84, 0)",
@@ -410,7 +406,7 @@
     },
     "tome_pts_101": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 101, 0)",
-      "result": 310
+      "result": 314
     },
     "tome_pts_102": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 102, 0)",
@@ -418,7 +414,7 @@
     },
     "tome_pts_103": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 103, 0)",
-      "result": 613
+      "result": 617
     },
     "tome_pts_104": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 104, 0)",
@@ -426,7 +422,7 @@
     },
     "tome_pts_105": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 105, 0)",
-      "result": 193
+      "result": 201
     },
     "tome_pts_106": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 106, 0)",
@@ -454,7 +450,7 @@
     },
     "tome_pts_112": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 112, 0)",
-      "result": 172
+      "result": 178
     },
     "tome_pts_113": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 113, 0)",
@@ -482,15 +478,15 @@
     },
     "tome_pts_119": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 119, 0)",
-      "result": 380
+      "result": 390
     },
     "tome_pts_120": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 120, 0)",
-      "result": 259
+      "result": 349
     },
     "tome_pts_121": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 121, 0)",
-      "result": 178
+      "result": 200
     },
     "tome_producer_98_spelunk_1_max": {
       "expression": "Math.max(...idleon.getAttr(\"Spelunk\")[1])",
@@ -505,7 +501,7 @@
     },
     "tome_producer_103_spelunk_5_sum": {
       "expression": "idleon.getAttr(\"Spelunk\")[5].reduce((sum, value) => sum + Math.max(0, value), 0)",
-      "result": 7355
+      "result": 7684
     },
     "tome_producer_104_spelunk_6_count": {
       "expression": "idleon.getAttr(\"Spelunk\")[6].length",
@@ -515,17 +511,13 @@
       "expression": "idleon.getAttr(\"Spelunk\")[46].length",
       "result": 47
     },
-    "tome_producer_110_research_7_4": {
-      "expression": "idleon.getAttr(\"Research\")[7][4]",
-      "result": 13
-    },
     "tome_producer_111_research_11_count": {
       "expression": "idleon.getAttr(\"Research\")[11].length",
       "result": 25
     },
     "tome_producer_112_total_stickers": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"TotalStickers\", 0, 0)",
-      "result": 54
+      "result": 58
     },
     "tome_producer_113_optlacc_498": {
       "expression": "idleon.getAttr(\"OptionsListAccount\")[498]",
@@ -533,7 +525,7 @@
     },
     "tome_producer_114_grid_pts_spent": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_PTSspent\", 0, 0)",
-      "result": 115
+      "result": 116
     },
     "tome_producer_115_research_12_sum": {
       "expression": "idleon.getAttr(\"Research\")[12].reduce((sum, value) => sum + Math.round(Math.max(0, value)), 0)",
@@ -553,11 +545,11 @@
     },
     "tome_producer_119_royalg_total_stats_4": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalStatz\", 4, 0)",
-      "result": 38
+      "result": 39
     },
     "tome_producer_120_royalg_total_stats_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalStatz\", 0, 0)",
-      "result": 214
+      "result": 371
     }
   },
   "errors": {}

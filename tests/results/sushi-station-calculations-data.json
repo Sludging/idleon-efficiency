@@ -2,7 +2,7 @@
   "extractions": {
     "sushi_fuel_per_hour": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"FuelGen\",0,0)",
-      "result": 375018017.9106877
+      "result": 112811756.56534709
     },
     "sushi_fuel_capacity": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"FuelCap\",0,0)",
@@ -12,7 +12,7 @@
       "expression": "idleon.callFunction(\"SushiStuff\",\"CurrencyperHR\",0,0)",
       "result": {
         "type": "large_number",
-        "value": "1.700746018044843e+23"
+        "value": "1.8074925731331244e+23"
       }
     },
     "sushi_upgrade_qty_0": {
@@ -50,13 +50,13 @@
     },
     "sushi_upgrade_qty_21": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",21,0)",
-      "result": 7
+      "result": 9
     },
     "sushi_upgrade_cost_display_29": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgCost\",29,0)",
       "result": {
         "type": "large_number",
-        "value": "1.7922529462759185e+23"
+        "value": "2.580844242637323e+25"
       }
     },
     "sushi_upgrade_qty_22": {
@@ -67,31 +67,16 @@
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgCost\",36,0)",
       "result": {
         "type": "large_number",
-        "value": "1.1326747356425023e+24"
+        "value": "1.1326747356425027e+24"
       }
     },
     "sushi_free_shaker_chance": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"FreeShaker\",0,0)",
-      "result": 0.14
+      "result": 0.161
     },
     "sushi_perfecto_chance_occupied_tier": {
       "expression": "(()=>{const tiers=idleon.getAttr(\"Sushi\")[0];const tier=tiers.find(value=>value>=0);return idleon.callFunction(\"SushiStuff\",\"PerfectOdds\",tier,0)})()",
       "result": 0.00022699077472603383
-    },
-    "sushi_saffron_bucks_per_use": {
-      "expression": "idleon.callFunction(\"SushiStuff\",\"SaffronHRS\",0,0)*idleon.callFunction(\"SushiStuff\",\"CurrencyGain\",0,0)",
-      "result": {
-        "type": "large_number",
-        "value": "5.102238054134529e+23"
-      }
-    },
-    "sushi_shaker_fuel_per_use": {
-      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",20,0)>0?idleon.callFunction(\"SushiStuff\",\"FuelGen\",0,0):0",
-      "result": 375018017.9106877
-    },
-    "sushi_salt_tier_up_chance_occupied_tier": {
-      "expression": "(()=>{const tiers=idleon.getAttr(\"Sushi\")[0];const tier=tiers.find(value=>value>=0);return Math.pow(0.5,Math.max(0,tier-(Math.min(idleon.callFunction(\"SushiStuff\",\"UniqueSushi\",0,0),idleon.callFunction(\"SushiStuff\",\"MaxTier\",0,0)-10)-8)))})()",
-      "result": 1
     },
     "sushi_knowledge_total_0": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",0,0)",
@@ -127,7 +112,7 @@
     },
     "sushi_knowledge_specific_36": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusSpecific\",36,0)",
-      "result": 26.400000000000002
+      "result": 30.800000000000004
     },
     "sushi_knowledge_specific_45": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusSpecific\",45,0)",
@@ -267,15 +252,15 @@
     },
     "sushi_orange_fire_sum": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"OrangeFireSum\",0,0)",
-      "result": 244
+      "result": 173
     },
     "sushi_dependency_research_188": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",188,0)",
-      "result": 2.5
+      "result": 2.6
     },
     "sushi_dependency_research_189": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",189,0)",
-      "result": 75
+      "result": 78
     },
     "sushi_dependency_jelly_obstruction_18": {
       "expression": "idleon.callFunction(\"JellyOperation\",\"RoG_BonusQTY\",18,0)",
@@ -291,7 +276,7 @@
     },
     "sushi_dependency_button_2": {
       "expression": "idleon.callFunction(\"Minehead\",\"Button_Bonuses\",2,0)",
-      "result": 41.5625
+      "result": 41.824999999999996
     },
     "sushi_dependency_minehead_11": {
       "expression": "idleon.callFunction(\"Minehead\",\"BonusQTY\",11,0)",
@@ -312,10 +297,6 @@
     "sushi_bundle_flag_bon_v": {
       "expression": "idleon.getAttr(\"BundlesReceived\").h.bon_v",
       "result": null
-    },
-    "sushi_shaker_bonus_fuel_chance": {
-      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",20,0)>0?idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",20,0)/100:0",
-      "result": 0.08
     }
   },
   "errors": {}

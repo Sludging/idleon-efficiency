@@ -34,6 +34,8 @@ export class Slab extends Domain {
     obtainableItems: Item[] = [];
     // Keeping track of the raw number from cloudsave because it has fake items and therefore doesn't match up with our "realistic" obtainableItems array.
     rawObtainedCount: number = 0;
+    // Count every saved registration, including entries excluded from the displayed Slab.
+    registeredItemCount: number = 0;
     // Keeping track of the max possible slab items to make it easy to display.
     obtainableCount: number = 0;
 
@@ -44,6 +46,15 @@ export class Slab extends Domain {
     getSlabBonusMultiplier(): number {
         return this.slabBonusMultiplier;
     }
+    getSpelunkingPowerBonus(mainframeBonusPercent: number, unlocked: boolean): number {
+        if (!unlocked) {
+            return 0;
+        }
+
+        const bonusLevels = Math.floor(Math.max(0, this.registeredItemCount - 1300) / 5);
+        return 3 * (1 + mainframeBonusPercent / 100) * this.getSlabBonusMultiplier() * bonusLevels;
+    }
+
 
     updateCalculationState(meritocraty: Meritocraty, legendTalents: LegendTalents, upgradeVault: UpgradeVault): void {
         // Multi Meritocracy, Legend Talents, and Super Slab multiply every Slab bonus.
@@ -54,11 +65,12 @@ export class Slab extends Domain {
 
     getRawKeys(): RawData[] {
         return [
-            {key: "Cards1", perPlayer: false, default: []}
+            { key: "Cards1", perPlayer: false, default: [] }
         ]
     }
 
     init(allItems: Item[], _charCount: number) {
+        this.registeredItemCount = 0;
         this.obtainableItems = allItems.filter(item => item.data.slabSort != undefined);
 
         // Sort all items based on slab sort to match up the game better.
@@ -74,6 +86,7 @@ export class Slab extends Domain {
     parse(data: Map<string, any>): void {
         const slab = data.get(this.getDataKey()) as Slab;
         const rawItems = data.get("Cards1") as string[];
+        slab.registeredItemCount = rawItems.length;
 
         // Clean up items that shouldn't be here, happens on older profiles.
         const lootedInfo = rawItems.filter(item => item && typeof item === 'string').filter(item =>

@@ -131,6 +131,21 @@
       "label": "meal_bonus_KitchenEff",
       "expression": "idleon.callFunction(\"MealBonus\", \"KitchenEff\")",
       "description": "Cabbage meal bonus used as kitchen efficiency in meal speed"
+    },
+    {
+      "label": "ceramic_card_cooking_speed_bonus",
+      "expression": "5 * idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w6c1\")",
+      "description": "Ceramic Spirit passive card percent contribution; v1.23 CookingR.1.23 CookingSPEED uses 5 * CardLv(w6c1) at idleon1.23.txt:174585"
+    },
+    {
+      "label": "troll_card_cooking_speed_bonus",
+      "expression": "6 * idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"Boss4A\")",
+      "description": "Massive Troll passive card percent contribution before achievement bonuses and cap; v1.23 CookingSPEED uses 6 * CardLv(Boss4A) at idleon1.23.txt:174589"
+    },
+    {
+      "label": "menagerie_cooking_multiplier",
+      "expression": "1 + idleon.callFunction(\"MenagerieStuff\", \"BoostQTY\", 4, 0) / 100",
+      "description": "Menagerie bonus 4 multiplier; v1.23 CookingSPEED converts BoostQTY(4) percent to a factor at idleon1.23.txt:174582"
     }
   ]
 }

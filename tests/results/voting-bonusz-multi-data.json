@@ -2,7 +2,7 @@
   "extractions": {
     "voting_bonusz_multi": {
       "expression": "idleon.callFunction(\"Summoning2\", \"VotingBonuszMulti\", 0, 0)",
-      "result": 6.116666666666667
+      "result": 6.25
     },
     "meritocracy_bonus_9": {
       "expression": "idleon.callFunction(\"Summoning2\", \"MeritocBonusz\", 9, 0)",
@@ -18,7 +18,7 @@
     },
     "gaming_palette_bonus_32": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 32, 0)",
-      "result": 6.666666666666667
+      "result": 10
     },
     "legend_talent_bonus_22": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 22, 0)",
@@ -27,18 +27,6 @@
     "sushi_rog_bonus_50": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 50, 0)",
       "result": 0
-    },
-    "companion_bonus_161": {
-      "expression": "idleon.callFunction(\"Companions\", 161)",
-      "result": 150
-    },
-    "companion_bonus_41": {
-      "expression": "idleon.callFunction(\"Companions\", 41)",
-      "result": 50
-    },
-    "companion_bonus_19": {
-      "expression": "idleon.callFunction(\"Companions\", 19)",
-      "result": 8
     }
   },
   "errors": {}

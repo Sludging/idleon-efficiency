@@ -1,0 +1,56 @@
+{
+  "description": "Compare equipped-food EXP points, persistent Dream completion, and a Compass artifact source with native calculations",
+  "target": "Player class EXP parameters",
+  "extractions": [
+    {
+      "label": "class_experience_food",
+      "expression": "idleon.callFunction('Minehead','TotalFoodBonuses','ClassEXP')",
+      "description": "Equipped ordinary food additive class EXP percentage points for the retained player"
+    },
+    {
+      "label": "shim_lantern_bonus",
+      "expression": "idleon.callFunction('Sailing','ArtifactBonus',31)",
+      "description": "Shim Lantern's saved bonus used by AllShimmerBonuses(0)"
+    },
+    {
+      "label": "dream_cloud_bonus_70",
+      "expression": "idleon.callFunction('Dreamstuff','CloudBonus',70)",
+      "description": "Binary completion reward for Dream Cloud challenge 70"
+    },
+    {
+      "label": "experience_totalizer_bonus_4",
+      "expression": "idleon.callFunction('GamingStatType','MSA_Bonus',4,0)",
+      "description": "Native totalizer mastery EXP additive percentage points"
+    },
+    {
+      "label": "experience_sigil_bonus_8",
+      "expression": "idleon.callFunction('Labb','SigilBonus','Blank',8,0)",
+      "description": "Native Sigil 8 additive percentage points"
+    },
+    {
+      "label": "experience_total_titan_kills",
+      "expression": "idleon.callFunction('Windwalker','TotalTitanKills',0,0)",
+      "description": "Saved defeated titan count used as Talent 434 exponent"
+    },
+    {
+      "label": "experience_shiny_bonus_1",
+      "expression": "idleon.callFunction('Breeding','ShinyBonusS','Nah',1,-1)",
+      "description": "Native ShinyBonusS index 1 additive class EXP percentage points"
+    },
+    {
+      "label": "native_farming_exotic_50",
+      "expression": "idleon.callFunction('FarmingStuffs','ExoticBonusQTY',50,0)",
+      "description": "Native Farming Exotic Market bonus 50 used in ExpGainLUK6"
+    },
+    {
+      "label": "native_box_monster_exp",
+      "expression": "(() => { idleon.callFunction('Minehead','Button_uHave',15,0); return idleon.engine.getGameAttribute('DNSM').h.BoxRewards.h.monsterExp; })()",
+      "description": "Native prepared BoxRewards monster EXP additive"
+    },
+    {
+      "label": "native_active_exp_bubble",
+      "expression": "(() => { idleon.callFunction('Minehead','Button_uHave',15,0); return idleon.engine.getGameAttribute('DNSM').h.AlchBubbles.h.expACTIVE; })()",
+      "description": "Native prepared active EXP bubble additive"
+    }
+  ]
+}

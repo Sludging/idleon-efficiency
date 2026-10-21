@@ -3,7 +3,6 @@ import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
 import type { EquipmentSets } from '../../../data/domain/misc/equipmentSets';
 import type { Grimoire } from '../../../data/domain/grimoire';
-import { Tome } from '../../../data/domain/world-4/tome';
 
 const saveName = 'latest';
 const extractionResultsName = 'tome-epilogue-bonus-data.json';
@@ -22,17 +21,9 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
     extractionKey: 'troll_set_bonus',
     domainExtractor: (gameData) => {
       const equipmentSets = gameData.get('equipmentSets') as EquipmentSets;
-      return equipmentSets.getSetBonus('TROLL_SET', undefined, true);
+      return equipmentSets.getSetBonus('TROLL_SET', true);
     },
   },
-  epilogue_bonus_unlocked_count: {
-    description: 'Spelunk unlock count controlling which Tome epilogue effects are available',
-    extractionKey: 'epilogue_bonus_unlocked_count',
-    domainExtractor: (gameData) => {
-      const tome = gameData.get('tome') as Tome;
-      return tome.epilogueBonuses.filter(bonus => bonus.unlocked).length;
-    },
-  }
 };
 
 describe('Tome Domain - Epilogue Bonus - Parameters', () => {

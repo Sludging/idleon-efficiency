@@ -104,6 +104,15 @@ export const initZenithMarketRepo = () => {
                 "bonusPerLevel": 1,
                 "x1": 1,
                 "description": "}x Resource gains for Royal Guardian"
+            }),
+        new ZenithMarketBase(11, <ZenithMarketModel>{
+                "name": "LUMILICIOUS",
+                "unlockCost": 10000000,
+                "costExponent": 1.25,
+                "maxLevel": 50,
+                "bonusPerLevel": 2,
+                "x1": 1,
+                "description": "+{% Lumi/hr gains for the Menagerie"
             })    
 ]
 }

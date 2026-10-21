@@ -1,0 +1,101 @@
+{
+  "description": "Extract displayed Guild bonus effects for the saved account",
+  "target": "Guild bonus effects",
+  "extractions": [
+    {
+      "label": "guild_bonus_0",
+      "expression": "idleon.callFunction(\"GuildBonuses\", 0)",
+      "description": "Current Guild Gifts effect displayed by the website"
+    },
+    {
+      "label": "guild_bonus_1",
+      "expression": "idleon.callFunction(\"GuildBonuses\", 1)",
+      "description": "Current Guild bonus 1 effect displayed by the website"
+    },
+    {
+      "label": "guild_bonus_2",
+      "expression": "idleon.callFunction(\"GuildBonuses\", 2)",
+      "description": "Current Guild bonus 2 effect displayed by the website"
+    },
+    {
+      "label": "guild_bonus_3",
+      "expression": "idleon.callFunction(\"GuildBonuses\", 3)",
+      "description": "Current Guild bonus 3 effect displayed by the website"
+    },
+    {
+      "label": "guild_bonus_4",
+      "expression": "idleon.callFunction(\"GuildBonuses\", 4)",
+      "description": "Current Guild bonus 4 effect displayed by the website"
+    },
+    {
+      "label": "guild_bonus_5",
+      "expression": "idleon.callFunction(\"GuildBonuses\", 5)",
+      "description": "Current Guild bonus 5 effect displayed by the website"
+    },
+    {
+      "label": "guild_bonus_6",
+      "expression": "idleon.callFunction(\"GuildBonuses\", 6)",
+      "description": "Current Guild bonus 6 effect displayed by the website"
+    },
+    {
+      "label": "guild_bonus_7",
+      "expression": "idleon.callFunction(\"GuildBonuses\", 7)",
+      "description": "Current Guild bonus 7 effect displayed by the website"
+    },
+    {
+      "label": "guild_bonus_8",
+      "expression": "idleon.callFunction(\"GuildBonuses\", 8)",
+      "description": "Current Guild bonus 8 effect displayed by the website"
+    },
+    {
+      "label": "guild_bonus_9",
+      "expression": "idleon.callFunction(\"GuildBonuses\", 9)",
+      "description": "Current Guild bonus 9 effect displayed by the website"
+    },
+    {
+      "label": "guild_bonus_10",
+      "expression": "idleon.callFunction(\"GuildBonuses\", 10)",
+      "description": "Current Guild bonus 10 effect displayed by the website"
+    },
+    {
+      "label": "guild_bonus_11",
+      "expression": "idleon.callFunction(\"GuildBonuses\", 11)",
+      "description": "Current Guild bonus 11 effect displayed by the website"
+    },
+    {
+      "label": "guild_bonus_12",
+      "expression": "idleon.callFunction(\"GuildBonuses\", 12)",
+      "description": "Current Guild bonus 12 effect displayed by the website"
+    },
+    {
+      "label": "guild_bonus_13",
+      "expression": "idleon.callFunction(\"GuildBonuses\", 13)",
+      "description": "Current Guild bonus 13 effect displayed by the website"
+    },
+    {
+      "label": "guild_bonus_14",
+      "expression": "idleon.callFunction(\"GuildBonuses\", 14)",
+      "description": "Current Guild bonus 14 effect displayed by the website"
+    },
+    {
+      "label": "guild_bonus_15",
+      "expression": "idleon.callFunction(\"GuildBonuses\", 15)",
+      "description": "Current Guild bonus 15 effect displayed by the website"
+    },
+    {
+      "label": "guild_bonus_16",
+      "expression": "idleon.callFunction(\"GuildBonuses\", 16)",
+      "description": "Current Guild bonus 16 effect displayed by the website"
+    },
+    {
+      "label": "guild_bonus_9_display_percentage",
+      "expression": "100 - idleon.callFunction(\"GuildBonuses\", 9)",
+      "description": "Bonus 9 Guild Point percentage shown in the Guild description, matching the renderer's complement of its raw bonus"
+    },
+    {
+      "label": "guild_member_limit",
+      "expression": "Math.round(Number(idleon.getAttr(\"GuildTasks\")[0][9]) + 10)",
+      "description": "Member limit used for Guild Point rewards, matching delivered Guild source's rounded level threshold"
+    }
+  ]
+}

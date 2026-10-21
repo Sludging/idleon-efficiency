@@ -503,11 +503,6 @@
       "description": "dependency_Farming_ExoticBonusQTY_44"
     },
     {
-      "label": "dependency_Ninja_EmporiumBonus_41",
-      "expression": "idleon.callFunction(\"Ninja\",\"EmporiumBonus\",41,0)",
-      "description": "dependency_Ninja_EmporiumBonus_41"
-    },
-    {
       "label": "dependency_Arcade_ArcadeBonus_58",
       "expression": "idleon.callFunction(\"ArcadeBonus\", 58, 0)",
       "description": "dependency_Arcade_ArcadeBonus_58"

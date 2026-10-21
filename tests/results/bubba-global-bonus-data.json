@@ -24,6 +24,14 @@
       "expression": "idleon.callFunction(\"Bubbastuff\", \"MegafleshOwned\", 11, 0)",
       "result": 0
     },
+    "global_bonus_multi": {
+      "expression": "20 * (idleon.callFunction(\"Bubbastuff\", \"MegafleshOwned\", 1, 0) + idleon.callFunction(\"Bubbastuff\", \"MegafleshOwned\", 3, 0) + idleon.callFunction(\"Bubbastuff\", \"MegafleshOwned\", 6, 0) + idleon.callFunction(\"Bubbastuff\", \"MegafleshOwned\", 9, 0) + idleon.callFunction(\"Bubbastuff\", \"MegafleshOwned\", 11, 0))",
+      "result": 40
+    },
+    "bonus_upgrade_3": {
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"TotUpgBonus\", 3, 0)",
+      "result": 13
+    },
     "global_bonus_1": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 1, 0)",
       "result": 140

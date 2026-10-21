@@ -1,5 +1,7 @@
 # Idleon Game Debug Tool - Complete Solution
 
+This guide documents the opt-in live debug server. Use the [canonical game-access policy](../../tests/helpers/README.md#game-access) for the offline default, server readiness and version checks, and reasons that justify live access. The live API examples below apply only after selecting the live server.
+
 ## 🎯 **Mission Accomplished**
 Successfully created a Node.js tool to attach to running Electron game process, execute functions, and extract exact values for testing reverse-engineered game code.
 
@@ -262,26 +264,22 @@ The `DNSM` object contains 200+ game data categories. Key discovered categories 
 
 ## 🎮 **Complete Workflow**
 
-### **Setup (One-time)**
-1. Install dependencies: `cd sub-projects/game-debug-tool && yarn install`
-2. Start the debug server: `node idleon-debug-server.js`
+### Explicit live-session setup
 
-### **Game Session**
-1. **Launch Game** (PowerShell):
+Use this workflow only when the [canonical game-access policy](../../tests/helpers/README.md#game-access) identifies a reason for live access.
+
+1. Install dependencies: `cd sub-projects/game-debug-tool && yarn install`.
+2. Launch the real game with its debug port enabled (PowerShell):
+
    ```powershell
    Start-Process -FilePath "D:\Program Files\Steam\steamapps\common\Legends of Idleon\LegendsOfIdleon.exe" -ArgumentList "--remote-debugging-port=9223"
    ```
 
-2. **Auto-Connect**: Server automatically detects the running game and existing injection.
+3. Start the live debug server: `node idleon-debug-server.js`.
+4. Check `/status` and `/game-version` on the live server before evaluating expressions.
+5. Extract only for the approved live observation or requested fixture refresh. Use the guarded refresh command in the [canonical game-access policy](../../tests/helpers/README.md#game-access).
 
-3. **Extract Data**: Run `node tests/helpers/extract-all-game-data.js`. This refreshes
-   `tests/fixtures/saves/latest.json` from the authenticated Firestore save document
-   returned by `GET /cloud-save` and then extracts live values.
-
-### **Integration with Testing**
-- Use the HTTP API from your test scripts
-- Compare live game values with reverse-engineered calculations
-- Validate that your formulas match the actual game behavior
+For routine extraction and offline game interaction, use the [offline tool](../idleon-offline/README.md#startup), not this live workflow.
 
 ## ✅ **Success Criteria Met**
 - ✅ Attach to running Electron game process

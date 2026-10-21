@@ -1,0 +1,683 @@
+{
+  "extractions": {
+    "active_context": {
+      "expression": "({ playerId: idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0]), playerName: idleon.getAttr('UserInfo')[0], playerNames: idleon.getAttr('GetPlayersUsernames'), version: idleon.getAttr('DoOnceREAL') })",
+      "result": {
+        "playerId": 3,
+        "playerName": "Sludgev4",
+        "playerNames": [
+          "Sludgadin",
+          "Sludgev2",
+          "Sludgev3",
+          "Sludgev4",
+          "Sludgev5",
+          "Sludgev6",
+          "SludgeMan",
+          "Sludgev8",
+          "Sludgev9",
+          "Sludgev10",
+          "Sludgev11"
+        ],
+        "version": 395.1
+      }
+    },
+    "paired_hole_inputs": {
+      "expression": "({ levels: idleon.getAttr(\"Holes\")[1].slice(0,5), exp: idleon.getAttr(\"Holes\")[2].slice(0,5), investments: idleon.getAttr(\"Holes\")[3].slice(0,8), purchased: idleon.getAttr(\"Holes\")[23].slice(0,5), studyLevels: idleon.getAttr(\"Holes\")[26].slice(0,18), studyProgress: idleon.getAttr(\"Holes\")[27].slice(0,18), target: idleon.getAttr(\"Holes\")[11][61], cavernOpals: idleon.getAttr(\"Holes\")[7], lanternUses: idleon.getAttr(\"Holes\")[11][84], wishes: idleon.getAttr(\"Holes\")[11][25], layers: [idleon.getAttr(\"Holes\")[11][1],idleon.getAttr(\"Holes\")[11][3],idleon.getAttr(\"Holes\")[11][5],idleon.getAttr(\"Holes\")[11][7]], covePurchases: idleon.getAttr('OptionsListAccount')[604] })",
+      "result": {
+        "levels": [
+          20,
+          49,
+          69,
+          30,
+          151
+        ],
+        "exp": [
+          2362967883615147,
+          133982482920435.08,
+          1228761691456072.2,
+          367750086186271.3,
+          126283470999857.44
+        ],
+        "investments": [
+          114,
+          30,
+          50,
+          30,
+          30,
+          0,
+          0,
+          0
+        ],
+        "purchased": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "studyLevels": [
+          16,
+          15,
+          22,
+          26,
+          21,
+          18,
+          22,
+          22,
+          21,
+          18,
+          16,
+          36,
+          36,
+          36,
+          26,
+          36,
+          36,
+          35
+        ],
+        "studyProgress": [
+          72953.12089583318,
+          57619.70706045802,
+          153151.24217304398,
+          13248.171722550194,
+          126144.93953988569,
+          25026.784486555378,
+          663226.7005584541,
+          686473.5915335849,
+          645050.2468780265,
+          214429.636600765,
+          221428.0462261185,
+          37398250.2720197,
+          37242720.81656928,
+          38124776.50172122,
+          840302.5741329693,
+          1076598.0439762478,
+          1076614.8450074797,
+          20312931.911190987
+        ],
+        "target": 12,
+        "cavernOpals": [
+          19,
+          19,
+          14,
+          12,
+          20,
+          8,
+          9,
+          17,
+          12,
+          10,
+          6,
+          19,
+          7,
+          6,
+          18,
+          14,
+          9,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "lanternUses": 0,
+        "wishes": 3457,
+        "layers": [
+          19,
+          17,
+          19,
+          9
+        ],
+        "covePurchases": 0
+      }
+    },
+    "upgrades": {
+      "expression": "(() => { const h=idleon.getAttr('Holes'),lists=idleon.getAttr('CustomLists').h, gate=!!idleon.callFunction('Holes','CanWeEnhanceCosmo',0,0), remaining=idleon.callFunction('Holes','CosmoPtsLeft',0,0); let id=-1; return lists.CosmoUpgrades.flatMap((rows,tree)=>rows.flatMap((row,position)=>{ id++; if(row[2]==='Confused_Bonus')return []; const level=Number(h[4+tree][position]),cap=1+(gate?idleon.callFunction('Holes','EnhanceMaxLV',tree,position):0),prerequisiteMet=position===0||Number(h[4+tree][position-1])>0; return {id,tree,position,name:row[2],level,initial:Math.min(1,level),enhancement:Math.max(0,level-1),gate,cap,prerequisiteId:position===0?null:id-1,prerequisiteMet,access:Number(h[1][2])>=1,canPurchase:Number(h[1][2])>=1&&prerequisiteMet&&level<cap&&remaining>=1,bonus:idleon.callFunction('Holes','CosmoBonusQTY',tree,position)}; })); })()",
+      "result": [
+        {
+          "id": 0,
+          "tree": 0,
+          "position": 0,
+          "name": "Monumental_Vibes",
+          "level": 4,
+          "initial": 1,
+          "enhancement": 3,
+          "gate": true,
+          "cap": 4,
+          "prerequisiteId": null,
+          "prerequisiteMet": true,
+          "access": true,
+          "canPurchase": false,
+          "bonus": 100
+        },
+        {
+          "id": 1,
+          "tree": 0,
+          "position": 1,
+          "name": "String_is_Strung",
+          "level": 5,
+          "initial": 1,
+          "enhancement": 4,
+          "gate": true,
+          "cap": 5,
+          "prerequisiteId": 0,
+          "prerequisiteMet": true,
+          "access": true,
+          "canPurchase": false,
+          "bonus": 5
+        },
+        {
+          "id": 2,
+          "tree": 0,
+          "position": 2,
+          "name": "Wishy_Washy",
+          "level": 3,
+          "initial": 1,
+          "enhancement": 2,
+          "gate": true,
+          "cap": 3,
+          "prerequisiteId": 1,
+          "prerequisiteMet": true,
+          "access": true,
+          "canPurchase": false,
+          "bonus": 90
+        },
+        {
+          "id": 3,
+          "tree": 0,
+          "position": 3,
+          "name": "Rupies_Everywhere",
+          "level": 5,
+          "initial": 1,
+          "enhancement": 4,
+          "gate": true,
+          "cap": 5,
+          "prerequisiteId": 2,
+          "prerequisiteMet": true,
+          "access": true,
+          "canPurchase": false,
+          "bonus": 175
+        },
+        {
+          "id": 4,
+          "tree": 0,
+          "position": 4,
+          "name": "Profoun-tain",
+          "level": 5,
+          "initial": 1,
+          "enhancement": 4,
+          "gate": true,
+          "cap": 5,
+          "prerequisiteId": 3,
+          "prerequisiteMet": true,
+          "access": true,
+          "canPurchase": false,
+          "bonus": 5
+        },
+        {
+          "id": 9,
+          "tree": 1,
+          "position": 0,
+          "name": "Opal_Enthusiasm",
+          "level": 5,
+          "initial": 1,
+          "enhancement": 4,
+          "gate": true,
+          "cap": 5,
+          "prerequisiteId": null,
+          "prerequisiteMet": true,
+          "access": true,
+          "canPurchase": false,
+          "bonus": 150
+        },
+        {
+          "id": 10,
+          "tree": 1,
+          "position": 1,
+          "name": "Contented_Creator",
+          "level": 4,
+          "initial": 1,
+          "enhancement": 3,
+          "gate": true,
+          "cap": 4,
+          "prerequisiteId": 9,
+          "prerequisiteMet": true,
+          "access": true,
+          "canPurchase": false,
+          "bonus": 4
+        },
+        {
+          "id": 11,
+          "tree": 1,
+          "position": 2,
+          "name": "Cosmo,_Enhance!",
+          "level": 3,
+          "initial": 1,
+          "enhancement": 2,
+          "gate": true,
+          "cap": 3,
+          "prerequisiteId": 10,
+          "prerequisiteMet": true,
+          "access": true,
+          "canPurchase": false,
+          "bonus": 30
+        },
+        {
+          "id": 12,
+          "tree": 1,
+          "position": 3,
+          "name": "Lengthmeister",
+          "level": 4,
+          "initial": 1,
+          "enhancement": 3,
+          "gate": true,
+          "cap": 4,
+          "prerequisiteId": 11,
+          "prerequisiteMet": true,
+          "access": true,
+          "canPurchase": false,
+          "bonus": 100
+        },
+        {
+          "id": 13,
+          "tree": 1,
+          "position": 4,
+          "name": "Study_All_Nighter",
+          "level": 5,
+          "initial": 1,
+          "enhancement": 4,
+          "gate": true,
+          "cap": 5,
+          "prerequisiteId": 12,
+          "prerequisiteMet": true,
+          "access": true,
+          "canPurchase": false,
+          "bonus": 100
+        },
+        {
+          "id": 14,
+          "tree": 1,
+          "position": 5,
+          "name": "Equal_Spread",
+          "level": 4,
+          "initial": 1,
+          "enhancement": 3,
+          "gate": true,
+          "cap": 4,
+          "prerequisiteId": 13,
+          "prerequisiteMet": true,
+          "access": true,
+          "canPurchase": false,
+          "bonus": 8
+        },
+        {
+          "id": 21,
+          "tree": 2,
+          "position": 0,
+          "name": "Pocket_Divinity",
+          "level": 2,
+          "initial": 1,
+          "enhancement": 1,
+          "gate": true,
+          "cap": 2,
+          "prerequisiteId": null,
+          "prerequisiteMet": true,
+          "access": true,
+          "canPurchase": false,
+          "bonus": 2
+        },
+        {
+          "id": 22,
+          "tree": 2,
+          "position": 1,
+          "name": "Beeg_Beeg_Forge",
+          "level": 5,
+          "initial": 1,
+          "enhancement": 4,
+          "gate": true,
+          "cap": 5,
+          "prerequisiteId": 21,
+          "prerequisiteMet": true,
+          "access": true,
+          "canPurchase": false,
+          "bonus": 243
+        },
+        {
+          "id": 23,
+          "tree": 2,
+          "position": 2,
+          "name": "Resource_Bursting",
+          "level": 3,
+          "initial": 1,
+          "enhancement": 2,
+          "gate": true,
+          "cap": 3,
+          "prerequisiteId": 22,
+          "prerequisiteMet": true,
+          "access": true,
+          "canPurchase": false,
+          "bonus": 300
+        },
+        {
+          "id": 24,
+          "tree": 2,
+          "position": 3,
+          "name": "Voter_Integrity",
+          "level": 5,
+          "initial": 1,
+          "enhancement": 4,
+          "gate": true,
+          "cap": 5,
+          "prerequisiteId": 23,
+          "prerequisiteMet": true,
+          "access": true,
+          "canPurchase": false,
+          "bonus": 30
+        },
+        {
+          "id": 25,
+          "tree": 2,
+          "position": 4,
+          "name": "Weapon_Relevancy",
+          "level": 4,
+          "initial": 1,
+          "enhancement": 3,
+          "gate": true,
+          "cap": 4,
+          "prerequisiteId": 24,
+          "prerequisiteMet": true,
+          "access": true,
+          "canPurchase": false,
+          "bonus": 300
+        },
+        {
+          "id": 26,
+          "tree": 2,
+          "position": 5,
+          "name": "Equinox_Maxim",
+          "level": 5,
+          "initial": 1,
+          "enhancement": 4,
+          "gate": true,
+          "cap": 5,
+          "prerequisiteId": 25,
+          "prerequisiteMet": true,
+          "access": true,
+          "canPurchase": false,
+          "bonus": 60
+        }
+      ]
+    },
+    "pool": {
+      "expression": "(() => {const h=idleon.getAttr('Holes'),purchased=Number(idleon.getAttr('GemItemsPurchased')[4]),earned=Math.round(idleon.callFunction('Holes','VillagerLV',2,0)+purchased);return {purchased,earned,invested:[4,5,6].reduce((s,t)=>s+h[t].reduce((a,v)=>a+Number(v),0),0),remaining:idleon.callFunction('Holes','CosmoPtsLeft',0,0),rawInvestments:h.slice(4,7),rawNames:idleon.getAttr('CustomLists').h.CosmoUpgrades.map(rows=>rows.map(row=>row[2]))};})()",
+      "result": {
+        "purchased": 12,
+        "earned": 81,
+        "invested": 71,
+        "remaining": 10,
+        "rawInvestments": [
+          [
+            4,
+            5,
+            3,
+            5,
+            5,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            5,
+            4,
+            3,
+            4,
+            5,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            5,
+            3,
+            5,
+            4,
+            5,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "rawNames": [
+          [
+            "Monumental_Vibes",
+            "String_is_Strung",
+            "Wishy_Washy",
+            "Rupies_Everywhere",
+            "Profoun-tain",
+            "Confused_Bonus",
+            "Confused_Bonus",
+            "Confused_Bonus",
+            "Confused_Bonus"
+          ],
+          [
+            "Opal_Enthusiasm",
+            "Contented_Creator",
+            "Cosmo,_Enhance!",
+            "Lengthmeister",
+            "Study_All_Nighter",
+            "Equal_Spread",
+            "Confused_Bonus",
+            "Confused_Bonus",
+            "Confused_Bonus",
+            "Confused_Bonus",
+            "Confused_Bonus",
+            "Confused_Bonus"
+          ],
+          [
+            "Pocket_Divinity",
+            "Beeg_Beeg_Forge",
+            "Resource_Bursting",
+            "Voter_Integrity",
+            "Weapon_Relevancy",
+            "Equinox_Maxim",
+            "Confused_Bonus",
+            "Confused_Bonus",
+            "Confused_Bonus",
+            "Confused_Bonus",
+            "Confused_Bonus",
+            "Confused_Bonus"
+          ]
+        ]
+      }
+    },
+    "pocket_selections": {
+      "expression": "(() => {const h=idleon.getAttr('Holes'),gods=idleon.getAttr('CustomLists').h.GodsInfo,level=idleon.callFunction('Holes','CosmoBonusQTY',2,0);return [29,30].map((index,slot)=>{const godId=Number(h[11][index]);return {slot,godId,bonusId:Number(gods[godId][13]),name:gods[godId][0],active:level>slot};});})()",
+      "result": [
+        {
+          "slot": 0,
+          "godId": 1,
+          "bonusId": 2,
+          "name": "Arctis",
+          "active": true
+        },
+        {
+          "slot": 1,
+          "godId": 0,
+          "bonusId": 0,
+          "name": "Snehebatu",
+          "active": true
+        }
+      ]
+    },
+    "effective_doot": {
+      "expression": "idleon.callFunction('Companions',0)",
+      "result": 1
+    },
+    "active_divinity_level": {
+      "expression": "Number(idleon.getAttr('Lv0')[14])",
+      "result": 431
+    },
+    "active_primary_god": {
+      "expression": "Number(idleon.getAttr('Divinity')[3+12])",
+      "result": 8
+    },
+    "pocket_all_stat": {
+      "expression": "15*idleon.callFunction('Companions',0)*idleon.callFunction('Holes','CosmoBonusQTY',2,0)",
+      "result": 30
+    },
+    "active_gods": {
+      "expression": "idleon.getAttr('CustomLists').h.GodsInfo.map((row,id)=>({id,active:!!idleon.callFunction('Divinity','Bonus_MAJOR',3,Number(row[13]))}))",
+      "result": [
+        {
+          "id": 0,
+          "active": true
+        },
+        {
+          "id": 1,
+          "active": true
+        },
+        {
+          "id": 2,
+          "active": true
+        },
+        {
+          "id": 3,
+          "active": true
+        },
+        {
+          "id": 4,
+          "active": true
+        },
+        {
+          "id": 5,
+          "active": true
+        },
+        {
+          "id": 6,
+          "active": true
+        },
+        {
+          "id": 7,
+          "active": true
+        },
+        {
+          "id": 8,
+          "active": true
+        },
+        {
+          "id": 9,
+          "active": true
+        }
+      ]
+    },
+    "village_schematic_effect": {
+      "expression": "idleon.callFunction('Holes','CosmoBonusQTY',1,1)*idleon.callFunction('Holes','CosSchBlt',0,0)",
+      "result": 404
+    },
+    "equal_spread_effect": {
+      "expression": "idleon.callFunction('Holes','CosmoBonusQTY',1,5)*Math.floor(idleon.callFunction('Holes','LeastOpalsInVillager',0,0)/5)",
+      "result": 48
+    },
+    "ordinary_links": {
+      "expression": "(() => {const links=idleon.getAttr('Divinity'),database=idleon.getAttr('PlayerDATABASE').h;return idleon.getAttr('GetPlayersUsernames').map((playerName,playerId)=>{const talent=Number(database[playerName].h.SkillLevels[505]||0),primary=Number(links[playerId+12]);return {playerId,playerName,primaryGodId:primary<0?null:primary,secondaryGodId:talent>0?talent%10:null};});})()",
+      "result": [
+        {
+          "playerId": 0,
+          "playerName": "Sludgadin",
+          "primaryGodId": 6,
+          "secondaryGodId": null
+        },
+        {
+          "playerId": 1,
+          "playerName": "Sludgev2",
+          "primaryGodId": 3,
+          "secondaryGodId": null
+        },
+        {
+          "playerId": 2,
+          "playerName": "Sludgev3",
+          "primaryGodId": 5,
+          "secondaryGodId": null
+        },
+        {
+          "playerId": 3,
+          "playerName": "Sludgev4",
+          "primaryGodId": 8,
+          "secondaryGodId": null
+        },
+        {
+          "playerId": 4,
+          "playerName": "Sludgev5",
+          "primaryGodId": 5,
+          "secondaryGodId": 2
+        },
+        {
+          "playerId": 5,
+          "playerName": "Sludgev6",
+          "primaryGodId": 5,
+          "secondaryGodId": null
+        },
+        {
+          "playerId": 6,
+          "playerName": "SludgeMan",
+          "primaryGodId": 0,
+          "secondaryGodId": null
+        },
+        {
+          "playerId": 7,
+          "playerName": "Sludgev8",
+          "primaryGodId": 5,
+          "secondaryGodId": null
+        },
+        {
+          "playerId": 8,
+          "playerName": "Sludgev9",
+          "primaryGodId": 5,
+          "secondaryGodId": null
+        },
+        {
+          "playerId": 9,
+          "playerName": "Sludgev10",
+          "primaryGodId": 5,
+          "secondaryGodId": null
+        },
+        {
+          "playerId": 10,
+          "playerName": "Sludgev11",
+          "primaryGodId": null,
+          "secondaryGodId": null
+        }
+      ]
+    },
+    "string_slots_bonus": {
+      "expression": "idleon.callFunction('Holes','CosmoBonusQTY',0,1)",
+      "result": 5
+    },
+    "least_investment": {
+      "expression": "idleon.callFunction('Holes','LeastOpalsInVillager',0,0)",
+      "result": 30
+    },
+    "cosmo_level": {
+      "expression": "idleon.callFunction('Holes','VillagerLV',2,0)",
+      "result": 69
+    }
+  },
+  "errors": {}
+}

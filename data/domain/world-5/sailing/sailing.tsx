@@ -31,6 +31,10 @@ import { Hole } from "../hole/hole";
 import { Votes } from "../../world-2/votes";
 import { UpgradeVault } from "../../upgradeVault";
 import { LegendTalents } from "../../world-7/legendTalents";
+import type { Gaming } from "../gaming";
+import type { Slab } from "../slab";
+import type { Lab } from "../../world-4/lab";
+import type { Menagerie } from "../../menagerie";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -129,6 +133,7 @@ export class Boat {
     daveyJonesBonus: number = 1;
     arcadeBonus: number = 0;
     activeEnderCaptains: number = 0;
+    menagerieMultiplier: number = 1;
 
     speed: number = 0;
 
@@ -139,6 +144,10 @@ export class Boat {
     minTravelTime = 120;
 
     constructor(public index: number, public assignIsland: Island | undefined, public distanceTravelled: number, public lootUpgrades: number, public speedUpgrades: number, public captain: Captain | undefined, public routeState: number = 0) { }
+    isUndeadBattalionQualified(): boolean {
+        return this.lootUpgrades + this.speedUpgrades >= 400;
+    }
+
 
     getSpeedUpgradeType = () => {
         if (this.index < 2) {
@@ -191,7 +200,7 @@ export class Boat {
 
         const firstMath = (5 + (2 + Math.pow(Math.floor(lootUpgrades / 8), 2) * lootUpgrades));
         const secondMath = (1 + (this.sigilBonus + (captainBonus + (this.genieLampBonus + (25 * Math.min(30, this.activeEnderCaptains) + this.arcadeBonus)))) / 100);
-        return firstMath * secondMath * (1 + this.unendingSearchBonus / 100) * this.daveyJonesBonus * (1 + this.holeLampBonus / 100);
+        return firstMath * secondMath * (1 + this.unendingSearchBonus / 100) * this.daveyJonesBonus * (1 + this.holeLampBonus / 100) * this.menagerieMultiplier;
     }
 
     getSpeedValue = (
@@ -277,6 +286,35 @@ export class Sailing extends Domain {
     starSignUnlocked: boolean = false;
 
     enderCaptainUnlocked: boolean = false;
+    private researchExpSlabBonus: number = 0;
+    private mineheadDamageSailingLevel = 0;
+
+    getMineheadDamageSailingLevel(): number {
+        return this.mineheadDamageSailingLevel;
+    }
+
+    // Return percentage points after Slab and Lab prepare their bonuses.
+    getResearchExpSlabBonus(): number {
+        return this.researchExpSlabBonus;
+    }
+
+    updateResearchInputs(slab: Slab, gaming: Gaming, lab: Lab): void {
+        if (!gaming.isSuperbitPurchased(34)) {
+            this.researchExpSlabBonus = 0;
+            return;
+        }
+
+        const itemMilestones = Math.floor(Math.max(0, slab.registeredItemCount - 1300) / 5);
+        this.researchExpSlabBonus = 0.1 * (1 + lab.bonuses[15].getBonus() / 100)
+            * slab.getSlabBonusMultiplier() * itemMilestones;
+    }
+    getUndeadBattalionQualification(): { qualifyingBoatCount: number; totalBoatCount: number } {
+        return {
+            qualifyingBoatCount: this.boats.reduce((count, boat) => count + Number(boat.isUndeadBattalionQualified()), 0),
+            totalBoatCount: this.boats.length,
+        };
+    }
+
 
     nextCaptainCost = () => {
         return (60 * this.captainsUnlocked + 15 * Math.pow(this.captainsUnlocked, 2.2)) * Math.pow(1.52, this.captainsUnlocked) * .6;
@@ -304,6 +342,8 @@ export class Sailing extends Domain {
     }
 
     init(_allItems: Item[], _charCount: number) {
+        this.researchExpSlabBonus = 0;
+
         // Map artifacts to islands to make display easier.
         let artifactIndex = 0;
         this.islands.forEach(island => {
@@ -318,7 +358,9 @@ export class Sailing extends Domain {
 
     parse(data: Map<string, any>): void {
         const sailing = data.get(this.getDataKey()) as Sailing;
+        sailing.researchExpSlabBonus = 0;
         const sailingData = data.get("Sailing") as number[][];
+        sailing.mineheadDamageSailingLevel = Number(sailingData[3]?.[38] ?? 0);
         const boatData = data.get("Boats") as number[][];
         const captainData = data.get("Captains") as number[][];
 
@@ -394,6 +436,13 @@ export const updateSailing = (data: Map<string, any>) => {
     const arcade = data.get("arcade") as Arcade;
     const hole = data.get("hole") as Hole;
     const legendTalents = data.get("legendTalents") as LegendTalents;
+    const slab = data.get("slab") as Slab;
+    const gaming = data.get("gaming") as Gaming;
+    const lab = data.get("lab") as Lab;
+    const menagerie = data.get("menagerie") as Menagerie;
+
+    // Slab's multiplier and Lab's mainframe bonuses are ready before Sailing.
+    sailing.updateResearchInputs(slab, gaming, lab);
 
     const chestPurchases = gemStore.purchases.find(upgrade => upgrade.no == 129)?.pucrhased ?? 0;
     const artifactBoost = sailing.artifacts[19].getBonus();
@@ -429,6 +478,7 @@ export const updateSailing = (data: Map<string, any>) => {
         boat.holeLampBonus = holeLampLootBonus;
         boat.arcadeBonus = arcadeBonus;
         boat.activeEnderCaptains = activeEnderCaptains;
+        boat.menagerieMultiplier = menagerie.getBonusMultiplier(9);
     });
 
     // Nice info to have for the UI

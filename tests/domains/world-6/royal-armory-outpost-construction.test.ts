@@ -1,10 +1,8 @@
-import fs from 'fs';
-import path from 'path';
-import { Cloudsave } from '../../../data/domain/cloudsave';
 import { HandleRawDataKey } from '../../../data/domain/base/domain';
 import { RoyalMapSource } from '../../../data/domain/world-6/royalArmory/outposts';
 import { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
+import { loadTestSave } from '../../utils/cloudsave-loader';
 
 const requirementCases = [
     { mapId: 1, description: 'Spore Meadows default' },
@@ -25,9 +23,7 @@ describe('Royal Armory outpost construction and availability', () => {
         results = loadExtractionResults('royal-armory-outpost-construction-data.json');
         validateExtractionHealth(results);
         // Requirements and expansions use only the owning domain's real parsed save and static data.
-        const save = Cloudsave.fromJSON(JSON.parse(fs.readFileSync(
-            path.join(__dirname, '../../fixtures/saves/latest.json'), 'utf8',
-        )));
+        const save = loadTestSave('latest');
         const characterCount = (save.get('playerNames') as string[]).length;
         armory = new RoyalArmory('royalArmory').init([], characterCount);
         const parseData = new Map<string, unknown>([['royalArmory', armory]]);

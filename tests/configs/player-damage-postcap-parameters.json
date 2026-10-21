@@ -1,0 +1,71 @@
+{
+  "description": "Compare component D post-softcap native damage inputs with typed owner values",
+  "target": "Player maximum damage postcap parameters",
+  "extractions": [
+    {
+      "label": "player_damage_postcap_crystal6_card_level",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"Crystal6\")",
+      "description": "Native Crystal6 card level used by component D"
+    },
+    {
+      "label": "player_damage_postcap_meritocracy_5",
+      "expression": "idleon.callFunction(\"Summoning2\", \"MeritocBonusz\", 5, 0)",
+      "description": "Native Meritocracy bonus index 5 used by component D"
+    },
+    {
+      "label": "player_damage_postcap_tome_6",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 6, 0)",
+      "description": "Native TomeBonus(6) used by component D"
+    },
+    {
+      "label": "player_damage_postcap_achievement_371",
+      "expression": "idleon.callFunction(\"AchieveStatus\", 371)",
+      "description": "Native completion status for achievement 371"
+    },
+    {
+      "label": "player_damage_postcap_achievement_384",
+      "expression": "idleon.callFunction(\"AchieveStatus\", 384)",
+      "description": "Native completion status for achievement 384"
+    },
+    {
+      "label": "player_damage_postcap_card_96",
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 96)",
+      "description": "Native CardBonusREAL(96) used by component D"
+    },
+    {
+      "label": "player_damage_postcap_companion_12",
+      "expression": "idleon.callFunction(\"Companions\", 12)",
+      "description": "Native active companion bonus index 12"
+    },
+    {
+      "label": "player_damage_postcap_companion_33",
+      "expression": "idleon.callFunction(\"Companions\", 33)",
+      "description": "Native active companion bonus index 33"
+    },
+    {
+      "label": "player_damage_postcap_companion_160",
+      "expression": "idleon.callFunction(\"Companions\", 160)",
+      "description": "Native active companion bonus index 160"
+    },
+    {
+      "label": "player_damage_postcap_companion_168",
+      "expression": "idleon.callFunction(\"Companions\", 168)",
+      "description": "Native active companion bonus index 168"
+    },
+    {
+      "label": "player_damage_postcap_companion_170",
+      "expression": "idleon.callFunction(\"Companions\", 170)",
+      "description": "Native active companion bonus index 170"
+    },
+    {
+      "label": "player_damage_postcap_superbit_64",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 64, 0)",
+      "description": "Native SuperBitType(64) result used by component D"
+    },
+    {
+      "label": "player_damage_postcap_option_232",
+      "expression": "Number(idleon.engine.getGameAttribute(\"OptionsListAccount\")[232])",
+      "description": "Raw account option 232 used by the component D damage floor"
+    }
+  ]
+}

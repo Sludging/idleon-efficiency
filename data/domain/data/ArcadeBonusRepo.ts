@@ -214,21 +214,21 @@ export const initArcadeBonusRepo = () => {
                 "barType": -1
             }),
         new ArcadeBonusBase(23, <ArcadeBonusModel>{
-                "effect": "+{% Trapping Critters",
+                "effect": "}x Trapping Critters",
                 "x1": 30,
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Critters",
+                "lvlUpText": "}x Critters",
                 "barType": -1
             }),
         new ArcadeBonusBase(24, <ArcadeBonusModel>{
-                "effect": "+{% Worship Souls",
+                "effect": "}x Worship Souls",
                 "x1": 30,
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Souls",
+                "lvlUpText": "}x Souls",
                 "barType": -1
             }),
         new ArcadeBonusBase(25, <ArcadeBonusModel>{
@@ -259,12 +259,12 @@ export const initArcadeBonusRepo = () => {
                 "barType": -1
             }),
         new ArcadeBonusBase(28, <ArcadeBonusModel>{
-                "effect": "+{% Cook SPD multi",
+                "effect": "}x Cooking Speed",
                 "x1": 40,
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% SPD",
+                "lvlUpText": "}x Cook SPD",
                 "barType": -1
             }),
         new ArcadeBonusBase(29, <ArcadeBonusModel>{
@@ -349,12 +349,12 @@ export const initArcadeBonusRepo = () => {
                 "barType": -1
             }),
         new ArcadeBonusBase(38, <ArcadeBonusModel>{
-                "effect": "+{% Villager XP multi",
+                "effect": "}x Villager XP multi",
                 "x1": 40,
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% XP multi",
+                "lvlUpText": "}x XP multi",
                 "barType": -1
             }),
         new ArcadeBonusBase(39, <ArcadeBonusModel>{
@@ -394,12 +394,12 @@ export const initArcadeBonusRepo = () => {
                 "barType": -1
             }),
         new ArcadeBonusBase(43, <ArcadeBonusModel>{
-                "effect": "+{% Sigil Speed",
+                "effect": "}x Sigil EXP gains",
                 "x1": 1,
                 "x2": 0,
                 "func": "add",
                 "type": "%",
-                "lvlUpText": "+{% Speed",
+                "lvlUpText": "}x Sigil EXP",
                 "barType": -1
             }),
         new ArcadeBonusBase(44, <ArcadeBonusModel>{
@@ -439,21 +439,21 @@ export const initArcadeBonusRepo = () => {
                 "barType": -1
             }),
         new ArcadeBonusBase(48, <ArcadeBonusModel>{
-                "effect": "+{% Medallion Chance",
+                "effect": "}x Medallion Chance",
                 "x1": 0.5,
                 "x2": 0,
                 "func": "add",
                 "type": "%",
-                "lvlUpText": "+{% Chance",
+                "lvlUpText": "}x Chance",
                 "barType": -1
             }),
         new ArcadeBonusBase(49, <ArcadeBonusModel>{
-                "effect": "+{% Breedability Rate",
+                "effect": "}x Breedability Rate",
                 "x1": 100,
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Breed Rate",
+                "lvlUpText": "}x Breed Rate",
                 "barType": -1
             }),
         new ArcadeBonusBase(50, <ArcadeBonusModel>{
@@ -484,12 +484,12 @@ export const initArcadeBonusRepo = () => {
                 "barType": 29
             }),
         new ArcadeBonusBase(53, <ArcadeBonusModel>{
-                "effect": "+{% Summon XP multi",
+                "effect": "}x Summon XP multi",
                 "x1": 100,
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% XP multi",
+                "lvlUpText": "}x XP multi",
                 "barType": 23
             }),
         new ArcadeBonusBase(54, <ArcadeBonusModel>{
@@ -502,12 +502,12 @@ export const initArcadeBonusRepo = () => {
                 "barType": 21
             }),
         new ArcadeBonusBase(55, <ArcadeBonusModel>{
-                "effect": "+{% Spelunking Amber",
+                "effect": "}x Spelunking Amber",
                 "x1": 50,
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Amber",
+                "lvlUpText": "}x Amber",
                 "barType": 28
             }),
         new ArcadeBonusBase(56, <ArcadeBonusModel>{
@@ -565,21 +565,21 @@ export const initArcadeBonusRepo = () => {
                 "barType": 22
             }),
         new ArcadeBonusBase(62, <ArcadeBonusModel>{
-                "effect": "+{% Minehead Currency",
+                "effect": "}x Minehead Currency",
                 "x1": 25,
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Currency",
+                "lvlUpText": "}x Currency",
                 "barType": 9
             }),
         new ArcadeBonusBase(63, <ArcadeBonusModel>{
-                "effect": "+{% Research XP",
+                "effect": "}x Research XP",
                 "x1": 20,
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% XP",
+                "lvlUpText": "}x XP",
                 "barType": 37
             }),
         new ArcadeBonusBase(64, <ArcadeBonusModel>{
@@ -610,21 +610,21 @@ export const initArcadeBonusRepo = () => {
                 "barType": 31
             }),
         new ArcadeBonusBase(67, <ArcadeBonusModel>{
-                "effect": "+{% Sushi Bucks",
+                "effect": "}x Sushi Bucks",
                 "x1": 25,
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Bucks",
+                "lvlUpText": "}x Bucks",
                 "barType": 35
             }),
         new ArcadeBonusBase(68, <ArcadeBonusModel>{
-                "effect": "+{% Fountain Speed",
+                "effect": "}x Fountain Speed",
                 "x1": 30,
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Fill Spd",
+                "lvlUpText": "}x Fill Spd",
                 "barType": 35
             }),
         new ArcadeBonusBase(69, <ArcadeBonusModel>{
@@ -655,12 +655,75 @@ export const initArcadeBonusRepo = () => {
                 "barType": 35
             }),
         new ArcadeBonusBase(72, <ArcadeBonusModel>{
-                "effect": "+{% Jelly Bloodcells",
+                "effect": "}x Jelly Bloodcells",
                 "x1": 5,
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Bloodcells",
+                "lvlUpText": "}x Bloodcells",
+                "barType": 42
+            }),
+        new ArcadeBonusBase(73, <ArcadeBonusModel>{
+                "effect": "}x hourly Lumi Gain",
+                "x1": 40,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "}x Lumi Gains",
+                "barType": 49
+            }),
+        new ArcadeBonusBase(74, <ArcadeBonusModel>{
+                "effect": "+{% who knows",
+                "x1": 5,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% who knows",
+                "barType": 42
+            }),
+        new ArcadeBonusBase(75, <ArcadeBonusModel>{
+                "effect": "+{% who knows",
+                "x1": 5,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% who knows",
+                "barType": 42
+            }),
+        new ArcadeBonusBase(76, <ArcadeBonusModel>{
+                "effect": "+{% who knows",
+                "x1": 5,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% who knows",
+                "barType": 42
+            }),
+        new ArcadeBonusBase(77, <ArcadeBonusModel>{
+                "effect": "+{% who knows",
+                "x1": 5,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% who knows",
+                "barType": 42
+            }),
+        new ArcadeBonusBase(78, <ArcadeBonusModel>{
+                "effect": "+{% who knows",
+                "x1": 5,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% who knows",
+                "barType": 42
+            }),
+        new ArcadeBonusBase(79, <ArcadeBonusModel>{
+                "effect": "+{% who knows",
+                "x1": 5,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% who knows",
                 "barType": 42
             })    
 ]

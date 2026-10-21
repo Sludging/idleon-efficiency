@@ -91,6 +91,91 @@
       "label": "slab_raw_obtained_count",
       "expression": "idleon.getAttr(\"Cards\")[1].length",
       "description": "Raw Slab item count used to scale W2/A2/M2 bubbles (TalentCalc source 1.21 lines 104314-104324)"
+    },
+    {
+      "label": "endgame_w7_final_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.W7",
+      "description": "Endgame Eff I prepared final bonus for target player"
+    },
+    {
+      "label": "endgame_a8_final_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.A8",
+      "description": "Endgame Eff II prepared final bonus for target player"
+    },
+    {
+      "label": "endgame_m7_final_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.M7",
+      "description": "Endgame Eff III prepared final bonus for target player"
+    },
+    {
+      "label": "min_eff_final_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.MinEff",
+      "description": "Mining efficiency prepared final bonus for the target player"
+    },
+    {
+      "label": "chop_eff_final_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.ChopEff",
+      "description": "Chopping efficiency prepared final bonus for the target player"
+    },
+    {
+      "label": "raw_w7_bonus",
+      "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 0, 26, 0)",
+      "description": "Unscaled W7 raw BubbleBonus at Power cauldron bubble 26"
+    },
+    {
+      "label": "raw_a8_bonus",
+      "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 1, 27, 0)",
+      "description": "Unscaled Endgame Eff II raw BubbleBonus at Quicc cauldron bubble 27"
+    },
+    {
+      "label": "raw_m7_bonus",
+      "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 2, 26, 0)",
+      "description": "Unscaled Endgame Eff III raw BubbleBonus at High IQ cauldron bubble 26"
+    },
+    {
+      "label": "raw_min_eff_bonus",
+      "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 0, 2, 0)",
+      "description": "Unscaled mining efficiency raw BubbleBonus at Power cauldron bubble 2"
+    },
+    {
+      "label": "raw_chop_eff_bonus",
+      "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 2, 2, 0)",
+      "description": "Unscaled chopping efficiency raw BubbleBonus at High IQ cauldron bubble 2"
+    },
+    {
+      "label": "player_alchemy_max_hp",
+      "expression": "(() => { const script = idleon.allScripts.ActorEvents_12; const original = script._customBlock_PlayerHPmax; let calls = 0; let maximumHP; try { script._customBlock_PlayerHPmax = function(...args) { calls++; maximumHP = original.apply(this, args); return maximumHP; }; idleon.callFunction('TalentCalc', -2); } finally { script._customBlock_PlayerHPmax = original; } if (calls !== 1 || script._customBlock_PlayerHPmax !== original) throw new Error('Alchemy HP capture must intercept exactly one call and restore PlayerHPmax'); return maximumHP; })()",
+      "description": "Normal HP actually sampled by MinEff inside target TalentCalc(-2); restore recorder in finally"
+    },
+    {
+      "label": "player_max_mp",
+      "expression": "idleon.callFunction(\"PlayerMPmax\")",
+      "description": "Target player's normal-path maximum MP"
+    },
+    {
+      "label": "player_alchemy_max_mp",
+      "expression": "(() => { const script = idleon.allScripts.ActorEvents_12; const original = script._customBlock_PlayerMPmax; let calls = 0; let maximumMP; try { script._customBlock_PlayerMPmax = function(...args) { calls++; maximumMP = original.apply(this, args); return maximumMP; }; idleon.callFunction('TalentCalc', -2); } finally { script._customBlock_PlayerMPmax = original; } if (calls !== 1 || script._customBlock_PlayerMPmax !== original) throw new Error('Alchemy MP capture must intercept exactly one call and restore PlayerMPmax'); return maximumMP; })()",
+      "description": "Normal MP actually sampled by ChopEff inside target TalentCalc(-2); restore the recorder in finally"
+    },
+    {
+      "label": "w8_tome_score",
+      "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[84]",
+      "description": "W8 helper-slot 84 score input before its floor and scaling (TalentCalc 1.22)"
+    },
+    {
+      "label": "w8_grimoire_bonus",
+      "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 17, 0)",
+      "description": "Grimoire upgrade 17 bonus consumed by W8"
+    },
+    {
+      "label": "w8_troll_set_bonus",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"TROLL_SET\", \"Bonus\", 0, 0)",
+      "description": "Troll set bonus consumed by W8"
+    },
+    {
+      "label": "high_iq_sixteenth_bonus",
+      "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 2, 16, 0)",
+      "description": "High IQ cauldron 16th-bubble bonus used by chopping efficiency"
     }
   ]
 }

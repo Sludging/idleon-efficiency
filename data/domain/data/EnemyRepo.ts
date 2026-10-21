@@ -7360,7 +7360,7 @@ export const initEnemyRepo = () => {
                         <CoinDropModel>{"item": "COIN", "quantity": 3.5e+09, "chance": 0.5, "questLink": "N/A"},
                         <ItemDropModel>{"item": "w7B9", "quantity": 1, "chance": 0.0002, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsJ21", "quantity": 1, "chance": 1.5e-07, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Coral5", "quantity": 1, "chance": 2e-09, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Coral5", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
                         <RecipeDropModel>{"item": "SmithingRecipes7", "quantity": 0, "chance": 8e-07, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable34", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
                     ]
@@ -7394,10 +7394,10 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 10,
                     "RespawnTime": 45,
                     "DeathFrame": 23,
-                    "MonsterHPTotal": 2.5e+35,
+                    "MonsterHPTotal": 2e+36,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
-                    "ExpGiven": 1,
+                    "ExpGiven": 3.5e+13,
                     "ExpType": 0,
                     "Defence": 2500000,
                     "MoveSPEED": 3,
@@ -7407,8 +7407,9 @@ export const initEnemyRepo = () => {
                 "drops": <EnemyTableModel>{
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 5e+09, "chance": 0.5, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "w7B10", "quantity": 1, "chance": 0.0001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "w7B10", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsJ22", "quantity": 1, "chance": 1e-07, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Coral6", "quantity": 1, "chance": 4e-09, "questLink": "N/A"},
                         <RecipeDropModel>{"item": "SmithingRecipes7", "quantity": 0, "chance": 8e-07, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable34", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
                     ]
@@ -7416,7 +7417,7 @@ export const initEnemyRepo = () => {
                 "mapData": <MapDataModel>{
                     "enemy": "w7b10",
                     "world": "Shimmerfin Deep",
-                    "map": <MapNameModel>{"intName": "uAquaB10", "name": "fillername", "id": 324},
+                    "map": <MapNameModel>{"intName": "uAquaB10", "name": "Molten Edge", "id": 324},
                     "portalRequirements": [1000000000],
                     "x": 729,
                     "y": 213
@@ -14232,6 +14233,39 @@ export const initEnemyRepo = () => {
                 "navigation": undefined,
                 "bossData": undefined
             }),
+        new EnemyBase("Spelunking6", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Burned Tunnel",
+                    "AFKtype": AFKTypeEnum.Spelunking,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 22,
+                    "MonsterOffsetY": 38,
+                    "HeightOfMonster": 30,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 0,
+                    "RespawnTime": 120,
+                    "DeathFrame": 1,
+                    "MonsterHPTotal": 5,
+                    "Type": EnemyTypeEnum.oreType,
+                    "SpecialType": "",
+                    "ExpGiven": 10000,
+                    "ExpType": 19,
+                    "Defence": 1e+11,
+                    "MoveSPEED": 0,
+                    "Damages": [0, 1],
+                    "DefFor0": 0.22
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsF51", "quantity": 1, "chance": 2e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable4", "quantity": 1, "chance": 0, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
         new EnemyBase("SpelunkingCard0", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
                     "Name": "Fearful Tunnel",
@@ -14424,6 +14458,39 @@ export const initEnemyRepo = () => {
                         <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsD10", "quantity": 1, "chance": 0, "questLink": "N/A"},
                         <ItemDropModel>{"item": "Spelunking5", "quantity": 1, "chance": 1, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("SpelunkingCard6", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Burned Tunnel",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 4,
+                    "MonsterOffsetX": 42,
+                    "MonsterOffsetY": 28,
+                    "HeightOfMonster": 85,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 4,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 420,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 12000,
+                    "ExpType": 0,
+                    "Defence": 600,
+                    "MoveSPEED": 3,
+                    "Damages": [1000, 1],
+                    "DefFor0": 1223.26
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsD10", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Spelunking6", "quantity": 1, "chance": 1, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,

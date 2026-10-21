@@ -7,7 +7,6 @@ import { loadExtractionResults, getExtractedValue, validateExtractionHealth } fr
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Cooking } from '../../../data/domain/world-4/cooking';
 
-// TODO: Make it possible to test multiple save / extraction results.
 const saveName = 'latest';
 const extractionResultsName = 'cooking-speed-data.json';
 

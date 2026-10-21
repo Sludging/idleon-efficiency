@@ -1,0 +1,21 @@
+{
+  "description": "Extract Orion's next permanent bonus upgrade from the current account state",
+  "target": "Orion Next Permanent Bonus Upgrade",
+  "extractions": [
+    {
+      "label": "next_bonus_index",
+      "expression": "idleon.engine.getGameAttribute(\"OptionsListAccount\")[255] % 6",
+      "description": "Next Bonuses of Orion index: the current permanent upgrade level cycles through six ordered bonuses"
+    },
+    {
+      "label": "next_bonus_cost",
+      "expression": "idleon.callFunction(\"Summoning\", \"OwlCost\", 1, 0)",
+      "description": "Current cost of the permanent Bonuses of Orion upgrade in feathers"
+    },
+    {
+      "label": "can_afford_next_bonus",
+      "expression": "idleon.engine.getGameAttribute(\"OptionsListAccount\")[253] >= idleon.callFunction(\"Summoning\", \"OwlCost\", 1, 0) ? 1 : 0",
+      "description": "Whether current feathers meet the game price for the next permanent Bonuses of Orion upgrade"
+    }
+  ]
+}

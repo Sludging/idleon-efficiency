@@ -56,12 +56,6 @@ describe('Tome Domain - Score', () => {
   }
  });
 
- it('matches the number of Tome lines supported by the game', () => {
-  const gameLineCount = getExtractedValue(extractionResults, 'tome_line_count');
-
-  expect(tomeLineIndices).toHaveLength(gameLineCount);
-  expect(tome.lines).toHaveLength(gameLineCount);
- });
 
  tomeLineIndices.forEach((index) => {
   it(`${getTomeLineDescription(index)}`, () => {

@@ -109,7 +109,8 @@ export const initAlchemyVialRepo = () => {
                     "Bug15",
                     "w7A12",
                     "w7B12b",
-                    "Spelunking5"
+                    "Spelunking5",
+                    "w7B10"
                 ],
                 "percentages": [
                     99,
@@ -151,6 +152,7 @@ export const initAlchemyVialRepo = () => {
                     3,
                     2,
                     2,
+                    1,
                     1,
                     1,
                     1,

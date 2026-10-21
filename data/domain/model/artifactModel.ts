@@ -15,5 +15,7 @@ export interface ArtifactModel {
     omnipotentBonus?: string,
     omnipotentBonusQty?: number,
     transcendentBonus?: string,
-    transcendentBonusQty?: number
+    transcendentBonusQty?: number,
+    verisimilitudeBonus?: string,
+    verisimilitudeBonusQty?: number
 }

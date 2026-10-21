@@ -2,19 +2,91 @@
   "extractions": {
     "zenith_market_0_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 0, 0)",
-      "result": 70
+      "result": 134
     },
     "zenith_market_2_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 2, 0)",
-      "result": 33
+      "result": 49
     },
     "zenith_market_5_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 5, 0)",
-      "result": 10
+      "result": 17
     },
     "zenith_market_9_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 9, 0)",
       "result": 1
+    },
+    "zenith_market_1_bonus": {
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 1, 0)",
+      "result": 5
+    },
+    "zenith_market_3_bonus": {
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 3, 0)",
+      "result": 210
+    },
+    "zenith_market_4_bonus": {
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 4, 0)",
+      "result": 20
+    },
+    "zenith_market_6_bonus": {
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 6, 0)",
+      "result": 12
+    },
+    "zenith_market_7_bonus": {
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 7, 0)",
+      "result": 1
+    },
+    "zenith_market_8_bonus": {
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 8, 0)",
+      "result": 1
+    },
+    "zenith_market_10_bonus": {
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 10, 0)",
+      "result": 2
+    },
+    "zenith_market_0_cost": {
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 0, 0)",
+      "result": 6562
+    },
+    "zenith_market_1_cost": {
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 1, 0)",
+      "result": 15557
+    },
+    "zenith_market_2_cost": {
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 2, 0)",
+      "result": 390
+    },
+    "zenith_market_3_cost": {
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 3, 0)",
+      "result": 5888
+    },
+    "zenith_market_4_cost": {
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 4, 0)",
+      "result": 874
+    },
+    "zenith_market_5_cost": {
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 5, 0)",
+      "result": 413637
+    },
+    "zenith_market_6_cost": {
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 6, 0)",
+      "result": 491
+    },
+    "zenith_market_7_cost": {
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 7, 0)",
+      "result": 1151
+    },
+    "zenith_market_8_cost": {
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 8, 0)",
+      "result": 5626
+    },
+    "zenith_market_9_cost": {
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 9, 0)",
+      "result": 11151
+    },
+    "zenith_market_10_cost": {
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 10, 0)",
+      "result": 49704
     }
   },
   "errors": {}

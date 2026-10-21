@@ -181,4 +181,24 @@ describe('Minehead Domain - Upgrade Shop', () => {
    });
   });
  });
+ it('matches Numbahs cost across its next ten saved progression levels or cap', () => {
+  const upgrade = getUpgrade(minehead, 1);
+  const targetLevel = Math.min(upgrade.level + 10, upgrade.data.maxLevel);
+  const nativeValue = getExtractedValue(extractionResults, 'minehead_upgrade_cost_to_max_1');
+
+  expect(upgrade.getCostToLevel(targetLevel)).toMatchLiveGameWithDetails(nativeValue, {
+   tolerance: 0,
+   context: 'Numbahs cost across genuine saved progression to next ten levels or listed cap',
+  });
+ });
+
+ it('matches Base Damage I cost across its next ten saved progression levels', () => {
+  const upgrade = getUpgrade(minehead, 0);
+  const nativeValue = getExtractedValue(extractionResults, 'minehead_upgrade_next10_cost_0');
+
+  expect(upgrade.getCostToLevel(upgrade.level + 10)).toMatchLiveGameWithDetails(nativeValue, {
+   tolerance: 0,
+   context: 'Base Damage I cost across ten genuine saved progression levels',
+  });
+ });
 });

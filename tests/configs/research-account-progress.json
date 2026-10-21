@@ -1,0 +1,672 @@
+{
+  "description": "Research Part 1 public outcomes and direct producer inputs. Original offline v1.22 character 3 is the saved highest-level reference. Saved EXP, partial Insight EXP, and save time use retained original startup input, not warmed runtime values. Getter refreshes use original supported arguments. Extraction alone does not prove relevant-state pairing.",
+  "target": "Research account progress, discoveries, lenses, Insight, hourly production, offline gains, Papers, and Posty Notes",
+  "requiredActivePlayerIndex": 3,
+  "pairingEvidence": {
+    "source": "Original Jelly_Operator v1.22, isolated offline port 3101, character 3 Sludgev4.",
+    "originalInput": "GET /cloud-save matched all 799 retained latest.json keys after JSON decoding. No offline fixture export occurred.",
+    "savedProgress": "Use the original input for EXP, partial Insight EXP, and TimeAway.GlobalTime. Current runtime EXP and partial Insight advanced.",
+    "progressAndAllowance": "Reference level 70, requirement 13333054299.729195, name, Research found flags, Insight levels, remaining attempts, pending seconds, Grid levels/Shapes, and failed-roll option 514 match.",
+    "lensesAndRates": "All saved lens tuples match. Original MagnifiersOwned is 14. All 14 lenses in the owned prefix are placed; later saved slots are reserved, not unplaced owned lenses. Original allocation and drawing callers use this owned prefix. Research Grid inputs, Emporium ownership, and Jelly obstruction ownership match. Partial Insight EXP does not feed rate or requirement helpers.",
+    "ownedCardsAndEquipment": "All Cards[0].h counts match Cards0. Cards[1] matches Cards1. Reference equipped Cards[2] matches CardEquip_3. EquipmentOrder matches EquipOrder_3 after original array-object normalization.",
+    "companions": "Current CompanionBon and CompanionLVz entries match retained companion ownership and level-two context. Option 606 is empty. No token-active branch is observed.",
+    "gamingAndSailing": "TotemInfo, Gaming, Lab, Sailing, and Cards1 match. Actor481._GenINFO[114] and raw best-wave sum both equal 1170. Raw Slab registrations equal 1642.",
+    "externalExpAndRewards": "Grimoire, Dream, FarmRank, FarmUpg, FarmCrop, Cooking, Meals, ArcadeUpg, Summon, Ninja, Jars, Arcane, and relevant Holes inputs match after original numeric-string normalization. Spelunk shop/ownership/Lore/epilogue rows and Sushi discovery rows match. Royal Outpost selection is unchanged and not Research.",
+    "tomeConsumedInputs": "Original Actor229 TomeQTY consumes unchanged Spelunk rows 1/2/5/6/13/46, Bubba[1][8], Refinery rank rows 3..8[1], and Research[7][4/9]. It does not consume the observed drift in active delve progress, Bubba Currency, Refinery timers, or partial Insight.",
+    "tomePlayerAndAccountInputs": "All 38 directly referenced account options match. All six Tasks rows, reference statues, stars, prayers, inventory, kills, Currency and family inputs match. All-player levels and quests match. Seven characters differ at talent 625, but every account-wide talent maximum consumed by Tome matches.",
+    "tomeCacheConsistency": "Current Actor229._GenInfo[84] and DNSM.TomeQTYtot equal 44060. The sum of all 122 original Summoning TomePTS helper results also equals 44060. No cache value was fabricated or replaced.",
+    "GambitDeathnoteInputs": "All 12 KLA_i keys and Rift match the retained save after JSON decoding. Original cached and fresh Deathnote ranks for worlds 0..6 both equal [300,220,280,260,260,280,460], totaling 2060. No save inputs were modified.",
+    "refreshArguments": "Refresh discoveries and total Insight levels with argument -1. Refresh Kaleidoscope support with argument 999 before rates. Refresh epilogues with index -1 before shared EXP.",
+    "observedBranches": "Found and missing Observations, unmet Research levels, zero and positive Insight levels, placed EXP/Insight/support lenses, reserved lens slots, no support including diagonal candidates, multiple support, reached/upcoming notes, inactive Prehistoric set, permanent Troll set, non-Research selected Outpost, unlocked and locked outside rewards, and capped offline gains.",
+    "unobservedBranches": "Owned unplaced lenses, exhausted attempts, insufficient maximum roll, simultaneous discovery blockers, Kaleidoscopes placed at row edges, nonzero pending seconds, a tie for highest saved Research level, a missing saved EXP requirement, token-active companions, equipped-only complete sets, selected Research Outpost, saturated lens/Shape/card/artifact caps, capped failed-roll pity, disabled Research Superbits, and Research Superbit 44 enabled without general Totalizer Superbit 7. Current Superbits 7, 44, and 34 are enabled.",
+    "exactRuntimeDrift": "EXP 986717522.1121395 versus saved 986707491.1282617. Partial Insight indices 17 and 22 each advanced by 0.0055951875001. Research[7][5], active Spelunk[3][6] and [4][2], Sushi[4], CookMaster EXP, Bubba Currency, Refinery timers, and unrelated account options differ. Saved-state comparisons do not use those warmed values.",
+    "limits": "Input pairing and original helper extraction alone do not prove website parity. At extraction, no website tests, builds, lint, formatters, live parity, reset, time advance, gameplay action, or fixture refresh ran. The current handoff records subsequent integrated checks.",
+    "exploratoryExpressionFailures": [
+      "Object.keys(idleon): sandbox Object was undefined. Reflect.ownKeys on the source prototype worked.",
+      "ActorEvents_579._customBlock_Thingies.toString(): direct global was undefined. The original scripts registry path worked.",
+      "idleon.listFunctions(): TypeError, helper does not exist. idleon.listScripts() worked.",
+      "idleon.findFunction(\"Inventory\") and idleon.findFunction(\"ItemQuantity\"): Function not found. Paper inventory comparisons use the matched original saved inventory input.",
+      "Holes/GambitTotalScore was not a source selector and returned the generic fallback 69. Source inspection found GambitPts with argument 777. Correct extraction returned 4104954.3765447172.",
+      "Final individual extraction: 128 successful results, zero request or expression errors."
+    ],
+    "sourceReferences": [
+      "docs/game-snippets/research/ResearchStuff.1.22.js",
+      "docs/plans/research-part-1-backend-plan.md",
+      "Original scripts.ActorEvents_229.prototype._customEvent_TomeQTY",
+      "Original scripts.ActorEvents_579 helper source bodies",
+      "Original scripts.ActorEvents_124._customBlock_AFKgainrates"
+    ]
+  },
+  "extractions": [
+    {
+      "label": "research_state",
+      "expression": "({found:idleon.getAttr(\"Research\")[2],levels:idleon.getAttr(\"Research\")[4],lenses:idleon.getAttr(\"Research\")[5],attempts:idleon.getAttr(\"Research\")[7][2],pendingSeconds:idleon.getAttr(\"Research\")[7][3]})",
+      "description": "Paired saved Research ownership and placement state. Exclude warmed partial Insight EXP and Currency."
+    },
+    {
+      "label": "reference_state",
+      "expression": "({level:idleon.getAttr(\"Lv0\")[20],requirement:idleon.getAttr(\"ExpReq0\")[20],name:idleon.getAttr(\"UserInfo\")[0],failedRolls:idleon.getAttr(\"OptionsListAccount\")[514]})",
+      "description": "Paired reference level, requirement, identity, and failed rolls. Saved EXP uses retained original startup input."
+    },
+    {
+      "label": "eligible_count",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"OccurrencesToBeFound\", 0, 0)",
+      "description": "Source result for eligible count."
+    },
+    {
+      "label": "discoveries",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"TotalOccurrencesFound\", -1, 0)",
+      "description": "Source result for discoveries."
+    },
+    {
+      "label": "observation_levels",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"TotalObsLVs\", -1, 0)",
+      "description": "Source result for observation levels."
+    },
+    {
+      "label": "minimum_roll",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"MinRoll\", 0, 0)",
+      "description": "Source result for minimum roll."
+    },
+    {
+      "label": "maximum_roll",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"MaxRoll\", 0, 0)",
+      "description": "Source result for maximum roll."
+    },
+    {
+      "label": "daily_attempts",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"RollsPerDay\", 0, 0)",
+      "description": "Source result for daily attempts."
+    },
+    {
+      "label": "owned_monocles",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"OpticalMonocleOwned\", 0, 0)",
+      "description": "Source result for owned monocles."
+    },
+    {
+      "label": "owned_kaleidoscopes",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"KaleidoscopeOwned\", 0, 0)",
+      "description": "Source result for owned kaleidoscopes."
+    },
+    {
+      "label": "owned_lenses",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"MagnifiersOwned\", 0, 0)",
+      "description": "Source result for owned lenses."
+    },
+    {
+      "label": "lens_capacity",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"MagnifiersPerSlot\", 0, 0)",
+      "description": "Source result for lens capacity."
+    },
+    {
+      "label": "support_refresh",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Kalei_MultiTot\", 0, 999)",
+      "description": "Refresh original Kaleidoscope support cache through supported argument."
+    },
+    {
+      "label": "epilogue_refresh",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", -1, 0)",
+      "description": "Refresh original epilogue cache through supported argument before Research EXP comparisons."
+    },
+    {
+      "label": "exp_multiplier",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"ResearchEXPmulti\", 0, 0)",
+      "description": "Source result for exp multiplier."
+    },
+    {
+      "label": "exp_total",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"ResearchEXPrateTOT\", 0, 0)",
+      "description": "Source result for exp total."
+    },
+    {
+      "label": "kaleidoscope_base",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Kalei_MultiBase\", 0, 0)",
+      "description": "Source result for kaleidoscope base."
+    },
+    {
+      "label": "offline_percent",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"AFKgainsRatePCT\", 0, 0)",
+      "description": "Source result for offline percent."
+    },
+    {
+      "label": "shape_count",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"ShapesOwned\", 0, 0)",
+      "description": "Source result for shape count."
+    },
+    {
+      "label": "notes_reached",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"PostyNotesOwned\", 0, 0)",
+      "description": "Source result for notes reached."
+    },
+    {
+      "label": "rotation_unlocked",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"CanRotateShapes\", 0, 0)",
+      "description": "Source result for rotation unlocked."
+    },
+    {
+      "label": "observation_subtotals",
+      "expression": "Array.from({length:43},(_,index)=>idleon.callFunction(\"ResearchStuff\",\"ResearchEXPrateObj\",index,0))",
+      "description": "All 43 Observations; one small complete set includes placed and unused entries."
+    },
+    {
+      "label": "observation_insight_rates",
+      "expression": "Array.from({length:43},(_,index)=>idleon.callFunction(\"ResearchStuff\",\"ObservationInsightExpRate\",index,0))",
+      "description": "All 43 Observations; one small complete set includes placed and unused entries."
+    },
+    {
+      "label": "observation_requirements",
+      "expression": "Array.from({length:43},(_,index)=>idleon.callFunction(\"ResearchStuff\",\"ObservationInsightExpREQ\",index,0))",
+      "description": "All 43 Observations; one small complete set includes placed and unused entries."
+    },
+    {
+      "label": "observation_support",
+      "expression": "Array.from({length:43},(_,index)=>idleon.callFunction(\"ResearchStuff\",\"Kalei_MultiTot\",index,0))",
+      "description": "All 43 Observations; one small complete set includes placed and unused entries."
+    },
+    {
+      "label": "exp_subtotal",
+      "expression": "Array.from({length:idleon.callFunction(\"ResearchStuff\",\"OccurrencesToBeFound\",0,0)},(_,index)=>idleon.callFunction(\"ResearchStuff\",\"ResearchEXPrateObj\",index,0)).reduce((sum,value)=>sum+value,0)",
+      "description": "Sum the original eligible EXP outputs before shared Research EXP multiplier."
+    },
+    {
+      "label": "point_term",
+      "expression": "Math.round(1+Math.min(1,Math.floor(idleon.getAttr(\"Lv0\")[20]/60))+idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",50,1))",
+      "description": "Source Points-per-ten-level term, not Point balance."
+    },
+    {
+      "label": "grid_31_0",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 31, 0)",
+      "description": "Research Grid 31 effective effect"
+    },
+    {
+      "label": "grid_31_1",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 31, 1)",
+      "description": "Research Grid 31 purchased level"
+    },
+    {
+      "label": "grid_31_2",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 31, 2)",
+      "description": "Research Grid 31 secondary effect"
+    },
+    {
+      "label": "grid_50_0",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 50, 0)",
+      "description": "Research Grid 50 effective effect"
+    },
+    {
+      "label": "grid_50_1",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 50, 1)",
+      "description": "Research Grid 50 purchased level"
+    },
+    {
+      "label": "grid_51_0",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 51, 0)",
+      "description": "Research Grid 51 effective effect"
+    },
+    {
+      "label": "grid_51_1",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 51, 1)",
+      "description": "Research Grid 51 purchased level"
+    },
+    {
+      "label": "grid_52_0",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 52, 0)",
+      "description": "Research Grid 52 effective effect"
+    },
+    {
+      "label": "grid_70_0",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 70, 0)",
+      "description": "Research Grid 70 effective effect"
+    },
+    {
+      "label": "grid_71_0",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 71, 0)",
+      "description": "Research Grid 71 effective effect"
+    },
+    {
+      "label": "grid_72_0",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 72, 0)",
+      "description": "Research Grid 72 effective effect"
+    },
+    {
+      "label": "grid_72_1",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 72, 1)",
+      "description": "Research Grid 72 purchased level"
+    },
+    {
+      "label": "grid_90_0",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 90, 0)",
+      "description": "Research Grid 90 effective effect"
+    },
+    {
+      "label": "grid_90_1",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 90, 1)",
+      "description": "Research Grid 90 purchased level"
+    },
+    {
+      "label": "grid_91_0",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 91, 0)",
+      "description": "Research Grid 91 effective effect"
+    },
+    {
+      "label": "grid_91_1",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 91, 1)",
+      "description": "Research Grid 91 purchased level"
+    },
+    {
+      "label": "grid_92_0",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 92, 0)",
+      "description": "Research Grid 92 effective effect"
+    },
+    {
+      "label": "grid_93_0",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 93, 0)",
+      "description": "Research Grid 93 effective effect"
+    },
+    {
+      "label": "grid_94_2",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 94, 2)",
+      "description": "Research Grid 94 secondary effect"
+    },
+    {
+      "label": "grid_110_0",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 110, 0)",
+      "description": "Research Grid 110 effective effect"
+    },
+    {
+      "label": "grid_111_0",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 111, 0)",
+      "description": "Research Grid 111 effective effect"
+    },
+    {
+      "label": "grid_112_2",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 112, 2)",
+      "description": "Research Grid 112 secondary effect"
+    },
+    {
+      "label": "farming_sticker",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"StickerBonus\", 1, 0)",
+      "description": "Farming sticker Research EXP percentage points"
+    },
+    {
+      "label": "crop_scientist",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 9, 0)",
+      "description": "Crop Scientist Research EXP percentage points"
+    },
+    {
+      "label": "cooking_research",
+      "expression": "idleon.getAttr(\"DNSM\").h.MealBonusesS.h.ResearchXP",
+      "description": "Cooking meal Research EXP percentage points"
+    },
+    {
+      "label": "coral_research",
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 4, 0)",
+      "description": "Dancing Coral Research EXP percentage points"
+    },
+    {
+      "label": "zenith_research",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 8, 0)",
+      "description": "Zenith Market Research EXP percentage points"
+    },
+    {
+      "label": "gaming_research",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 10, 0)",
+      "description": "Gaming Superbit Research EXP from Worship best waves"
+    },
+    {
+      "label": "sailing_research",
+      "expression": "idleon.callFunction(\"Sailing\", \"SlabboBonus\", 7, 0)",
+      "description": "Sailing Research EXP from raw Slab registrations"
+    },
+    {
+      "label": "epilogue_research",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 7, 0)",
+      "description": "Native Spelunking epilogue Research EXP from the captured runtime state"
+    },
+    {
+      "label": "card_w7b1",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7b1\")",
+      "description": "Owned Research card level, not equipped card effect"
+    },
+    {
+      "label": "card_w7b4",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7b4\")",
+      "description": "Owned Research card level, not equipped card effect"
+    },
+    {
+      "label": "card_w7a11",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7a11\")",
+      "description": "Owned Research card level, not equipped card effect"
+    },
+    {
+      "label": "card_w7b8",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7b8\")",
+      "description": "Owned Research card level, not equipped card effect"
+    },
+    {
+      "label": "card_w7b11",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7b11\")",
+      "description": "Owned Research card level, not equipped card effect"
+    },
+    {
+      "label": "arcade_research",
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 63)",
+      "description": "Arcade Research EXP percentage points"
+    },
+    {
+      "label": "prehistoric_raw",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"PREHISTORIC_SET\", \"Bonus\", 0, 0)",
+      "description": "Raw account-wide Prehistoric set bonus before Research cap of 50"
+    },
+    {
+      "label": "spelunking_shop",
+      "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 63, 0)",
+      "description": "Spelunking shop Research EXP percentage points"
+    },
+    {
+      "label": "equinox_research",
+      "expression": "3 * idleon.getAttr(\"Dream\")[14]",
+      "description": "Equinox Research EXP percentage points from source upgrade scale"
+    },
+    {
+      "label": "button_research",
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 0, 0)",
+      "description": "The Button Research EXP percentage points"
+    },
+    {
+      "label": "killroy_research",
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 5, 0)",
+      "description": "Killroy source output before Research division by 100"
+    },
+    {
+      "label": "companion_28",
+      "expression": "idleon.callFunction(\"Companions\", 28)",
+      "description": "Active companion Research reward, including Pet Bonus Token activation"
+    },
+    {
+      "label": "companion_52",
+      "expression": "idleon.callFunction(\"Companions\", 52)",
+      "description": "Active companion Research reward, including Pet Bonus Token activation"
+    },
+    {
+      "label": "companion_54",
+      "expression": "idleon.callFunction(\"Companions\", 54)",
+      "description": "Active companion Research reward, including Pet Bonus Token activation"
+    },
+    {
+      "label": "companion_153",
+      "expression": "idleon.callFunction(\"Companions\", 153)",
+      "description": "Active companion Research reward, including Pet Bonus Token activation"
+    },
+    {
+      "label": "companion_level_two_54",
+      "expression": "idleon.callFunction(\"CompLV2\", 54)",
+      "description": "Owned companion level-two Research gate, separate from active token reward"
+    },
+    {
+      "label": "companion_level_two_153",
+      "expression": "idleon.callFunction(\"CompLV2\", 153)",
+      "description": "Owned companion level-two Research gate, separate from active token reward"
+    },
+    {
+      "label": "sushi_0",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 0, 0)",
+      "description": "Discovered Sushi reward consumed by Research"
+    },
+    {
+      "label": "sushi_2",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 2, 0)",
+      "description": "Discovered Sushi reward consumed by Research"
+    },
+    {
+      "label": "sushi_4",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 4, 0)",
+      "description": "Discovered Sushi reward consumed by Research"
+    },
+    {
+      "label": "sushi_8",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 8, 0)",
+      "description": "Discovered Sushi reward consumed by Research"
+    },
+    {
+      "label": "sushi_24",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 24, 0)",
+      "description": "Discovered Sushi reward consumed by Research"
+    },
+    {
+      "label": "sushi_30",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 30, 0)",
+      "description": "Discovered Sushi reward consumed by Research"
+    },
+    {
+      "label": "jelly_0",
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 0, 0)",
+      "description": "Completed Jelly obstruction reward consumed by Research"
+    },
+    {
+      "label": "jelly_7",
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 7, 0)",
+      "description": "Completed Jelly obstruction reward consumed by Research"
+    },
+    {
+      "label": "jelly_12",
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 12, 0)",
+      "description": "Completed Jelly obstruction reward consumed by Research"
+    },
+    {
+      "label": "jelly_23",
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 23, 0)",
+      "description": "Completed Jelly obstruction reward consumed by Research"
+    },
+    {
+      "label": "jelly_25",
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 25, 0)",
+      "description": "Completed Jelly obstruction reward consumed by Research"
+    },
+    {
+      "label": "jelly_46",
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 46, 0)",
+      "description": "Completed Jelly obstruction reward consumed by Research"
+    },
+    {
+      "label": "jelly_54",
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 54, 0)",
+      "description": "Completed Jelly obstruction reward consumed by Research"
+    },
+    {
+      "label": "minehead_1",
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 1, 0)",
+      "description": "Defeated Minehead opponent reward consumed by Research"
+    },
+    {
+      "label": "minehead_2",
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 2, 0)",
+      "description": "Defeated Minehead opponent reward consumed by Research"
+    },
+    {
+      "label": "minehead_10",
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 10, 0)",
+      "description": "Defeated Minehead opponent reward consumed by Research"
+    },
+    {
+      "label": "minehead_12",
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 12, 0)",
+      "description": "Defeated Minehead opponent reward consumed by Research"
+    },
+    {
+      "label": "minehead_20",
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 20, 0)",
+      "description": "Defeated Minehead opponent reward consumed by Research"
+    },
+    {
+      "label": "hole_upgrade",
+      "expression": "idleon.callFunction(\"Holes2\", \"Cglunko_upgBon\", 11, 0)",
+      "description": "Hole Researchy upgrade percentage points"
+    },
+    {
+      "label": "hole_fountain",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 16)",
+      "description": "Hole Fountain Research EXP percentage points"
+    },
+    {
+      "label": "hole_gambit",
+      "expression": "idleon.callFunction(\"Holes\", \"GambitBonuses\", 15, 0)",
+      "description": "Hole Gambit Research offline percentage points with score and scene gates"
+    },
+    {
+      "label": "em_production",
+      "expression": "idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 46, 0)",
+      "description": "Sneaking Emporium ownership used by Insight and Kaleidoscopes"
+    },
+    {
+      "label": "event_33",
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 33, 0)",
+      "description": "Owned Event Shop reward consumed by Research"
+    },
+    {
+      "label": "event_34",
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 34, 0)",
+      "description": "Owned Event Shop reward consumed by Research"
+    },
+    {
+      "label": "event_35",
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 35, 0)",
+      "description": "Owned Event Shop reward consumed by Research"
+    },
+    {
+      "label": "event_36",
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 36, 0)",
+      "description": "Owned Event Shop reward consumed by Research"
+    },
+    {
+      "label": "outpost_research",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostROGbon\", 1, 0)",
+      "description": "Selected Research Royal Outpost multiplier"
+    },
+    {
+      "label": "lore_shape",
+      "expression": "idleon.callFunction(\"Spelunk\", \"DoWeHaveLoreN1\", 7, 0)",
+      "description": "Completed Spelunking Lore used by Shape ownership"
+    },
+    {
+      "label": "worship_research",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 10, 0)",
+      "description": "Worship Totalizer Research output prepared for Gaming"
+    },
+    {
+      "label": "slab_multiplier",
+      "expression": "idleon.callFunction(\"Sailing\", \"SlabboBonus_AllMulti\", 0, 0)",
+      "description": "Slab multiplier prepared for Sailing Research reward"
+    },
+    {
+      "label": "lab_slab",
+      "expression": "idleon.callFunction(\"MainframeBonus\", 15)",
+      "description": "Lab Slab multiplier input for Sailing Research reward"
+    },
+    {
+      "label": "tome_reference",
+      "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[84]",
+      "description": "Cached native Tome total from Actor229 GenInfo[84]"
+    },
+    {
+      "label": "grimoire_epilogue",
+      "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 17, 0)",
+      "description": "Grimoire epilogue bonus used by Spelunking Research reward"
+    },
+    {
+      "label": "troll_raw",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"TROLL_SET\", \"Bonus\", 0, 0)",
+      "description": "Raw account-wide Troll set bonus used by Spelunking epilogue"
+    },
+    {
+      "label": "gambit_score",
+      "expression": "idleon.callFunction(\"Holes\", \"GambitPts\", 777, 0)",
+      "description": "Calculated Gambit total score used by Research offline reward"
+    },
+    {
+      "label": "paper_purchase",
+      "expression": "idleon.getAttr(\"GemItemsPurchased\")[45]",
+      "description": "Permanent Professional Papers purchased count."
+    },
+    {
+      "label": "artifact_status",
+      "expression": "idleon.getAttr(\"Sailing\")[3][36]",
+      "description": "Raw Sailing artifact status before Research rounding and cap."
+    },
+    {
+      "label": "worship_waves",
+      "expression": "idleon.getAttr(\"TotemInfo\")[0].reduce((total,waves)=>total+Number(waves),0)",
+      "description": "Original Worship best-wave total prepared for Gaming Research reward."
+    },
+    {
+      "label": "shared_insight_multiplier",
+      "expression": "idleon.callFunction(\"ResearchStuff\",\"ObservationInsightExpRate\",17,0)/(3*idleon.getAttr(\"Research\")[5].filter((kind,index)=>index%4===3&&kind===1&&idleon.getAttr(\"Research\")[5][index-1]===17).length*idleon.callFunction(\"ResearchStuff\",\"Kalei_MultiTot\",17,0))",
+      "description": "Recover the shared Insight multiplier from the original rate, actual Monocle count, and support. This real state has Monocles on Observation 17."
+    },
+    {
+      "label": "gambit_points_multiplier",
+      "expression": "idleon.callFunction(\"Holes\",\"GambitPTSmulti\",0,0)",
+      "description": "Calculated Gambit score multiplier prepared before the Research offline reward."
+    },
+    {
+      "label": "gambit_score_requirement",
+      "expression": "idleon.callFunction(\"Holes\",\"GambitPtsREQ\",15,0)",
+      "description": "Calculated score requirement used by the Gambit Research offline reward gate."
+    },
+    {
+      "label": "gambit_measurement_13",
+      "expression": "idleon.callFunction(\"Holes\",\"MeasurementBonusTOTAL\",13,0)",
+      "description": "Measurement Gambit score percentage points."
+    },
+    {
+      "label": "gambit_study_13",
+      "expression": "idleon.callFunction(\"Holes\",\"StudyBolaiaBonuses\",13,0)",
+      "description": "Bolaia study Gambit score percentage points."
+    },
+    {
+      "label": "gambit_schematic_78",
+      "expression": "idleon.callFunction(\"Holes\",\"B_UPG\",78,10)",
+      "description": "Schematic Gambit score percentage points."
+    },
+    {
+      "label": "gambit_wisdom_7",
+      "expression": "idleon.callFunction(\"Holes\",\"MonumentROGbonuses\",2,7)",
+      "description": "Wisdom monument Gambit score percentage points."
+    },
+    {
+      "label": "gambit_jar_23",
+      "expression": "idleon.callFunction(\"Holes\",\"JarCollectibleBonus\",23,0)",
+      "description": "First jar collectible Gambit score percentage points."
+    },
+    {
+      "label": "gambit_jar_30",
+      "expression": "idleon.callFunction(\"Holes\",\"JarCollectibleBonus\",30,0)",
+      "description": "Second jar collectible Gambit score percentage points."
+    },
+    {
+      "label": "gambit_tesseract_47",
+      "expression": "idleon.callFunction(\"ArcaneType\",\"ArcaneUpgBonus\",47,0)",
+      "description": "Tesseract upgrade Gambit score percentage points."
+    },
+    {
+      "label": "gambit_measurement_base_13",
+      "expression": "idleon.callFunction(\"Holes\",\"MeasurementBaseBonus\",13,0)",
+      "description": "Gambit measurement base bonus before the Deathnote multiplier."
+    },
+    {
+      "label": "gambit_measurement_multi_6",
+      "expression": "idleon.callFunction(\"Holes\",\"MeasurementMulti\",6,0)",
+      "description": "Deathnote multiplier used by the Gambit measurement. Source type 6 maps to measurement 13."
+    },
+    {
+      "label": "gambit_deathnote_world_total",
+      "expression": "[0,1,2,3,4,5,6].reduce((total,world)=>total+idleon.callFunction(\"WorkbenchStuff\",\"OverkillQTY\",world,0),0)",
+      "description": "Deathnote rank total across all seven worlds used by the Gambit measurement."
+    },
+    {
+      "label": "gambit_measurement_cosmos",
+      "expression": "idleon.callFunction(\"Holes\",\"CosmoBonusQTY\",1,3)",
+      "description": "Lengthmeister measurement bonus percentage points used by the Gambit measurement base. Village position 3 maps to upgrade 12."
+    }
+  ]
+}

@@ -1,0 +1,231 @@
+{
+  "description": "Extract Complete Opal ledger, allocations and reset facts from the genuine active character and paired save.",
+  "target": "Complete Opal ledger, allocations and reset facts",
+  "extractions": [
+    {
+      "label": "active_context",
+      "expression": "({ playerId: idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0]), playerName: idleon.getAttr('UserInfo')[0], playerNames: idleon.getAttr('GetPlayersUsernames'), version: idleon.getAttr('DoOnceREAL') })",
+      "description": "Capture real active character identity and version; do not switch or synthesize a context."
+    },
+    {
+      "label": "paired_hole_inputs",
+      "expression": "({ levels: idleon.getAttr(\"Holes\")[1].slice(0,5), exp: idleon.getAttr(\"Holes\")[2].slice(0,5), investments: idleon.getAttr(\"Holes\")[3].slice(0,8), purchased: idleon.getAttr(\"Holes\")[23].slice(0,5), studyLevels: idleon.getAttr(\"Holes\")[26].slice(0,18), studyProgress: idleon.getAttr(\"Holes\")[27].slice(0,18), target: idleon.getAttr(\"Holes\")[11][61], cavernOpals: idleon.getAttr(\"Holes\")[7], lanternUses: idleon.getAttr(\"Holes\")[11][84], wishes: idleon.getAttr(\"Holes\")[11][25], layers: [idleon.getAttr(\"Holes\")[11][1],idleon.getAttr(\"Holes\")[11][3],idleon.getAttr(\"Holes\")[11][5],idleon.getAttr(\"Holes\")[11][7]], covePurchases: idleon.getAttr('OptionsListAccount')[604] })",
+      "description": "Saved inputs directly used by part 1; runtime counter mismatches remain failures."
+    },
+    {
+      "label": "external_total",
+      "expression": "Math.round(Number(idleon.getAttr(\"GemItemsPurchased\")[5]) + idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 11, 0) + (25 * idleon.callFunction(\"Companions\", 13) + (idleon.callFunction(\"Windwalker\", \"CompassBonus\", 52, 0) + (Math.floor(idleon.callFunction(\"Thingies\", \"EmperorBon\", 3, 0) + idleon.callFunction(\"Holes\", \"B_UPG\", 102, 1)) + (idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 25, 0) + idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 56, 0))))))",
+      "description": "Exact refresh subtotal, including floor of Emperor plus schematic."
+    },
+    {
+      "label": "emperor_schematic_floor_adjustment",
+      "expression": "Math.floor(idleon.callFunction(\"Thingies\", \"EmperorBon\", 3, 0) + idleon.callFunction(\"Holes\", \"B_UPG\", 102, 1)) - (idleon.callFunction(\"Thingies\", \"EmperorBon\", 3, 0) + idleon.callFunction(\"Holes\", \"B_UPG\", 102, 1))",
+      "description": "Joint floor adjustment relative to raw Emperor and schematic contributions."
+    },
+    {
+      "label": "external_rounding_adjustment",
+      "expression": "Math.round(Number(idleon.getAttr(\"GemItemsPurchased\")[5]) + idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 11, 0) + (25 * idleon.callFunction(\"Companions\", 13) + (idleon.callFunction(\"Windwalker\", \"CompassBonus\", 52, 0) + (Math.floor(idleon.callFunction(\"Thingies\", \"EmperorBon\", 3, 0) + idleon.callFunction(\"Holes\", \"B_UPG\", 102, 1)) + (idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 25, 0) + idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 56, 0)))))) - (Number(idleon.getAttr(\"GemItemsPurchased\")[5]) + idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 11, 0) + (25 * idleon.callFunction(\"Companions\", 13) + (idleon.callFunction(\"Windwalker\", \"CompassBonus\", 52, 0) + (Math.floor(idleon.callFunction(\"Thingies\", \"EmperorBon\", 3, 0) + idleon.callFunction(\"Holes\", \"B_UPG\", 102, 1)) + (idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 25, 0) + idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 56, 0))))))",
+      "description": "Final refresh rounding after Emperor and schematic contributions are floored together."
+    },
+    {
+      "label": "cavern_total",
+      "expression": "idleon.getAttr(\"Holes\")[7].reduce((sum,value)=>Math.round(sum+Number(value)),0)",
+      "description": "All saved cavern rows as credited by refresh caller."
+    },
+    {
+      "label": "earned",
+      "expression": "Math.round(Number(idleon.getAttr(\"GemItemsPurchased\")[5]) + idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 11, 0) + (25 * idleon.callFunction(\"Companions\", 13) + (idleon.callFunction(\"Windwalker\", \"CompassBonus\", 52, 0) + (Math.floor(idleon.callFunction(\"Thingies\", \"EmperorBon\", 3, 0) + idleon.callFunction(\"Holes\", \"B_UPG\", 102, 1)) + (idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 25, 0) + idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 56, 0)))))) + (idleon.getAttr(\"Holes\")[7].reduce((sum,value)=>Math.round(sum+Number(value)),0))",
+      "description": "Exact fresh earned balance; never cached actor balance."
+    },
+    {
+      "label": "invested",
+      "expression": "idleon.getAttr(\"Holes\")[3].slice(0,8).reduce((sum,value)=>sum+Number(value),0)",
+      "description": "All eight investment slots subtracted by original refresh."
+    },
+    {
+      "label": "uninvested",
+      "expression": "(() => { let balance=Math.round(Number(idleon.getAttr(\"GemItemsPurchased\")[5]) + idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 11, 0) + (25 * idleon.callFunction(\"Companions\", 13) + (idleon.callFunction(\"Windwalker\", \"CompassBonus\", 52, 0) + (Math.floor(idleon.callFunction(\"Thingies\", \"EmperorBon\", 3, 0) + idleon.callFunction(\"Holes\", \"B_UPG\", 102, 1)) + (idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 25, 0) + idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 56, 0)))))); for(const value of idleon.getAttr(\"Holes\")[7]) balance=Math.round(balance+Number(value)); for(const value of idleon.getAttr(\"Holes\")[3].slice(0,8)) balance=Math.round(balance-Number(value)); return balance; })()",
+      "description": "Exact original refresh computation, without invoking reset or changing actor cache."
+    },
+    {
+      "label": "least_investment",
+      "expression": "idleon.callFunction(\"Holes2\", \"LeastOpalsInVillager\", 0, 0)",
+      "description": "Least invested rescued villager."
+    },
+    {
+      "label": "equal_spread",
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 5) * Math.floor(idleon.callFunction(\"Holes2\", \"LeastOpalsInVillager\", 0, 0)/5)",
+      "description": "Current Equal Spread blocks of five."
+    },
+    {
+      "label": "another_try_cost",
+      "expression": "idleon.callFunction(\"Holes\", \"LampWishCost\", 1, 0)",
+      "description": "Current Another Try wish cost without purchase."
+    },
+    {
+      "label": "another_try_access",
+      "expression": "idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0) > 6",
+      "description": "Lamp access from current released cavern count."
+    },
+    {
+      "label": "another_try_affordable",
+      "expression": "idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0) > 6 && Number(idleon.getAttr(\"Holes\")[11][25]) >= idleon.callFunction(\"Holes\", \"LampWishCost\", 1, 0)",
+      "description": "Recorded wish stock pays current reset cost."
+    },
+    {
+      "label": "source_gem-shop",
+      "expression": "Number(idleon.getAttr(\"GemItemsPurchased\")[5])",
+      "description": "Current gem-shop credited Opal contribution."
+    },
+    {
+      "label": "source_grimoire",
+      "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 11, 0)",
+      "description": "Current grimoire credited Opal contribution."
+    },
+    {
+      "label": "source_companion",
+      "expression": "25 * idleon.callFunction(\"Companions\", 13)",
+      "description": "Current companion credited Opal contribution."
+    },
+    {
+      "label": "source_compass",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 52, 0)",
+      "description": "Current compass credited Opal contribution."
+    },
+    {
+      "label": "source_emperor",
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 3, 0)",
+      "description": "Raw Emperor contribution before the joint floor with the schematic."
+    },
+    {
+      "label": "source_schematic",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 102, 1)",
+      "description": "Current schematic credited Opal contribution."
+    },
+    {
+      "label": "source_arcane",
+      "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 25, 0)",
+      "description": "Current arcane credited Opal contribution."
+    },
+    {
+      "label": "source_sushi",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 56, 0)",
+      "description": "Current sushi credited Opal contribution."
+    },
+    {
+      "label": "cavern_0",
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][0])",
+      "description": "Earned cavern 0 Opals, not unlock potential."
+    },
+    {
+      "label": "cavern_1",
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][1])",
+      "description": "Earned cavern 1 Opals, not unlock potential."
+    },
+    {
+      "label": "cavern_2",
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][2])",
+      "description": "Earned cavern 2 Opals, not unlock potential."
+    },
+    {
+      "label": "cavern_3",
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][3])",
+      "description": "Earned cavern 3 Opals, not unlock potential."
+    },
+    {
+      "label": "cavern_4",
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][4])",
+      "description": "Earned cavern 4 Opals, not unlock potential."
+    },
+    {
+      "label": "cavern_5",
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][5])",
+      "description": "Earned cavern 5 Opals, not unlock potential."
+    },
+    {
+      "label": "cavern_6",
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][6])",
+      "description": "Earned cavern 6 Opals, not unlock potential."
+    },
+    {
+      "label": "cavern_7",
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][7])",
+      "description": "Earned cavern 7 Opals, not unlock potential."
+    },
+    {
+      "label": "cavern_8",
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][8])",
+      "description": "Earned cavern 8 Opals, not unlock potential."
+    },
+    {
+      "label": "cavern_9",
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][9])",
+      "description": "Earned cavern 9 Opals, not unlock potential."
+    },
+    {
+      "label": "cavern_10",
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][10])",
+      "description": "Earned cavern 10 Opals, not unlock potential."
+    },
+    {
+      "label": "cavern_11",
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][11])",
+      "description": "Earned cavern 11 Opals, not unlock potential."
+    },
+    {
+      "label": "cavern_12",
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][12])",
+      "description": "Earned cavern 12 Opals, not unlock potential."
+    },
+    {
+      "label": "cavern_13",
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][13])",
+      "description": "Earned cavern 13 Opals, not unlock potential."
+    },
+    {
+      "label": "cavern_14",
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][14])",
+      "description": "Earned cavern 14 Opals, not unlock potential."
+    },
+    {
+      "label": "cavern_15",
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][15])",
+      "description": "Earned cavern 15 Opals, not unlock potential."
+    },
+    {
+      "label": "cavern_16",
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][16])",
+      "description": "Earned cavern 16 Opals, not unlock potential."
+    },
+    {
+      "label": "cavern_17",
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][17])",
+      "description": "Earned cavern 17 Opals, not unlock potential."
+    },
+    {
+      "label": "enthusiasm_0",
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 0)*Math.floor(Number(idleon.getAttr(\"Holes\")[3][0])/10)",
+      "description": "Current villager 0 Opal Enthusiasm."
+    },
+    {
+      "label": "enthusiasm_1",
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 0)*Math.floor(Number(idleon.getAttr(\"Holes\")[3][1])/10)",
+      "description": "Current villager 1 Opal Enthusiasm."
+    },
+    {
+      "label": "enthusiasm_2",
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 0)*Math.floor(Number(idleon.getAttr(\"Holes\")[3][2])/10)",
+      "description": "Current villager 2 Opal Enthusiasm."
+    },
+    {
+      "label": "enthusiasm_3",
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 0)*Math.floor(Number(idleon.getAttr(\"Holes\")[3][3])/10)",
+      "description": "Current villager 3 Opal Enthusiasm."
+    },
+    {
+      "label": "enthusiasm_4",
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 0)*Math.floor(Number(idleon.getAttr(\"Holes\")[3][4])/10)",
+      "description": "Current villager 4 Opal Enthusiasm."
+    }
+  ]
+}

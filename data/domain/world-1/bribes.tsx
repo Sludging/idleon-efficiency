@@ -1,6 +1,7 @@
 import { Domain, RawData } from "../base/domain";
 import { BribeBase, initBribeRepo } from "../data/BribeRepo";
-import { Item } from "../items";
+import { ImageData } from "../imageData";
+import type { Item } from "../items";
 
 export const BribeConst = {
     StampBribe: 0
@@ -31,6 +32,12 @@ export class Bribe {
 }
 
 export class Bribes extends Domain {
+    static getImageData = (): ImageData => ({
+        location: "mr_pigibank",
+        width: 50,
+        height: 50,
+    });
+
     getRawKeys(): RawData[] {
         return [
             { key: "BribeStatus", perPlayer: false, default: [] }

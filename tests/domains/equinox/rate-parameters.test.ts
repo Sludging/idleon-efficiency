@@ -12,7 +12,6 @@ import { Tome } from '../../../data/domain/tome';
 import { ResearchGrid } from '../../../data/domain/world-7/research';
 import { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
 
-// TODO: Make it possible to test multiple save / extraction results.
 const saveName = 'latest';
 const extractionResultsName = 'equinox-rate-data.json';
 
@@ -79,7 +78,7 @@ const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     extractionKey: 'emperor_bonus_5',
     domainExtractor: (gameData) => {
       const emperor = gameData.get("emperor") as Emperor;
-      return emperor.emperorBonuses.find(bonus => bonus.index == 5)?.getBonus() ?? 0;
+      return emperor.getEffectiveBonus(5);
     }
   },
   tesseract_bonus_37: {

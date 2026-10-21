@@ -2,7 +2,7 @@
   "extractions": {
     "jelly_successful_operations": {
       "expression": "idleon.getAttr(\"Research\")[7][9]",
-      "result": 16
+      "result": 18
     },
     "jelly_upgrade_quantity_0": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"UpgradeQTY\", 0, 0)",
@@ -54,7 +54,7 @@
     },
     "jelly_upgrade_cost_1": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"UpgCost\", 1, 0)",
-      "result": 2047664.6732133257
+      "result": 43233934.75957156
     },
     "jelly_upgrade_cost_3": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"UpgCost\", 3, 0)",

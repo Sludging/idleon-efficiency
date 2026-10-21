@@ -1,9 +1,7 @@
-import fs from 'fs';
-import path from 'path';
-import { Cloudsave } from '../../../data/domain/cloudsave';
 import { HandleRawDataKey } from '../../../data/domain/base/domain';
 import { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
+import { loadTestSave } from '../../utils/cloudsave-loader';
 
 describe('Outpost world availability direct parameters', () => {
     let armory: RoyalArmory;
@@ -12,9 +10,7 @@ describe('Outpost world availability direct parameters', () => {
     beforeAll(() => {
         results = loadExtractionResults('royal-armory-outpost-construction-data.json');
         validateExtractionHealth(results);
-        const save = Cloudsave.fromJSON(JSON.parse(fs.readFileSync(
-            path.join(__dirname, '../../fixtures/saves/latest.json'), 'utf8',
-        )));
+        const save = loadTestSave('latest');
         const characterCount = (save.get('playerNames') as string[]).length;
         armory = new RoyalArmory('royalArmory').init([], characterCount);
         const parseData = new Map<string, unknown>([['royalArmory', armory]]);

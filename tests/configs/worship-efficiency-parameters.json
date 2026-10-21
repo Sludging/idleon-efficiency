@@ -1,0 +1,51 @@
+{
+  "description": "Direct calculated inputs used by the target character Worship efficiency formula",
+  "target": "Worship efficiency direct parameters",
+  "extractions": [
+    {
+      "label": "worship_efficiency",
+      "expression": "idleon.callFunction(\"skillstats2\", \"WorshipEfficiency\")",
+      "description": "Selected target character Worship efficiency core result"
+    },
+    {
+      "label": "worship_talent_532",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 532)",
+      "description": "Character Skill Wiz talent bonus used by Worship efficiency"
+    },
+    {
+      "label": "worship_stamp_efficiency",
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"WorshipEff\")",
+      "description": "Worship efficiency stamp bonus"
+    },
+    {
+      "label": "worship_statue_16",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven16\")",
+      "description": "Twosoul statue bonus used by Worship efficiency"
+    },
+    {
+      "label": "worship_talent_445",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 445)",
+      "description": "Character Smart Efficiency talent value used by Worship efficiency"
+    },
+    {
+      "label": "worship_rift_skill_bonus_8",
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,8\", 1)",
+      "description": "Worship Skill Mastery multiplier used by Worship efficiency"
+    },
+    {
+      "label": "worship_post_office_18a",
+      "expression": "idleon.getDNSM(\"BoxRewards\").h[\"18a\"]",
+      "description": "Crate of the Creator post office bonus used by Worship efficiency"
+    },
+    {
+      "label": "worship_star_sign_efficiency",
+      "expression": "idleon.getDNSM(\"StarSigns\").h.WorshEff",
+      "description": "Character Worship efficiency star sign bonus"
+    },
+    {
+      "label": "worship_talent_476",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 476)",
+      "description": "Character Sooouls talent bonus used by Worship efficiency"
+    }
+  ]
+}

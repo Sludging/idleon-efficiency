@@ -1,0 +1,65 @@
+{
+  "extractions": {
+    "player_build_speed_bubble_12": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.Construction",
+      "result": 4.926900584795321
+    },
+    "player_build_speed_build_prod_stamp": {
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BuildProd\")",
+      "result": 0
+    },
+    "player_build_speed_guild_bonus_5": {
+      "expression": "idleon.callFunction(\"GuildBonuses\", 5)",
+      "result": 0
+    },
+    "player_build_speed_gear_build_speed": {
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"30\")",
+      "result": 98
+    },
+    "player_build_speed_construction_mastery_4": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ConstMasteryBonus\", 2, 0)",
+      "result": 1585
+    },
+    "player_build_speed_shinyfin_vial": {
+      "expression": "idleon.getDNSM(\"AlchVials\").h.Contspd",
+      "result": 484.12
+    },
+    "player_build_speed_turtle_vial": {
+      "expression": "idleon.getDNSM(\"AlchVials\").h[\"6turtle\"]",
+      "result": 276.64
+    },
+    "player_build_speed_arcade_44": {
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 44, 0)",
+      "result": 50
+    },
+    "player_build_speed_voting_18": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 18, 0)",
+      "result": 0
+    },
+    "player_build_speed_bubba_1": {
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 1, 0)",
+      "result": 140
+    },
+    "player_build_speed_vault_48": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 48, 0)",
+      "result": 60
+    },
+    "player_build_speed_winner_13": {
+      "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 13, 0)",
+      "result": 8628.8475
+    },
+    "player_build_speed_palette_25": {
+      "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 25, 0)",
+      "result": 130.5
+    },
+    "player_build_speed_atom_1": {
+      "expression": "idleon.callFunction(\"AtomCollider\", \"AtomBonuses\", 1, 0)",
+      "result": 11
+    },
+    "player_build_speed_talent_131": {
+      "expression": "(() => { const i = 3, username = idleon.getAttr(\"GetPlayersUsernames\")[i], description = idleon.getAttr(\"CustomLists\").h.TalentDescriptions[131][1], level = idleon.getAttr(\"PlayerDATABASE\").h[username].h.SkillLevels[131]; return idleon.callFunction(\"ArbitraryCode5Inputs\", description[2], Number(description[0]), Number(description[1]), level, 0, 0); })()",
+      "result": 33.13725490196079
+    }
+  },
+  "errors": {}
+}

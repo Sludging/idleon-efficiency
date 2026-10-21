@@ -1,0 +1,181 @@
+{
+  "description": "Schematic catalogue, source currency families and owned effects for the paired paused save.",
+  "target": "Schematic catalogue, source currency families and owned effects for the paired paused save.",
+  "extractions": [
+    {
+      "label": "active_context",
+      "expression": "({ playerId: idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0]), playerName: idleon.getAttr('UserInfo')[0], playerNames: idleon.getAttr('GetPlayersUsernames'), version: idleon.getAttr('DoOnceREAL') })",
+      "description": "Capture real active character identity and version; do not switch or synthesize a context."
+    },
+    {
+      "label": "paired_hole_inputs",
+      "expression": "({ levels: idleon.getAttr(\"Holes\")[1].slice(0,5), exp: idleon.getAttr(\"Holes\")[2].slice(0,5), investments: idleon.getAttr(\"Holes\")[3].slice(0,8), purchased: idleon.getAttr(\"Holes\")[23].slice(0,5), studyLevels: idleon.getAttr(\"Holes\")[26].slice(0,18), studyProgress: idleon.getAttr(\"Holes\")[27].slice(0,18), target: idleon.getAttr(\"Holes\")[11][61], cavernOpals: idleon.getAttr(\"Holes\")[7], lanternUses: idleon.getAttr(\"Holes\")[11][84], wishes: idleon.getAttr(\"Holes\")[11][25], layers: [idleon.getAttr(\"Holes\")[11][1],idleon.getAttr(\"Holes\")[11][3],idleon.getAttr(\"Holes\")[11][5],idleon.getAttr(\"Holes\")[11][7]], covePurchases: idleon.getAttr('OptionsListAccount')[604] })",
+      "description": "Saved inputs directly used by part 1; runtime counter mismatches remain failures."
+    },
+    {
+      "label": "schematics",
+      "expression": "(() => { const h = idleon.getAttr('Holes'), lists = idleon.getAttr('CustomLists').h; return lists.HolesInfo[40].map((value, slot) => { const id = Number(value), row = lists.HolesBuildings[id], currency = Number(row[2]), price = idleon.callFunction('Holes','BuildCost',slot,0), stock = Number(h[9][currency]), built = Number(h[13][id]) === 1; let requiredLevel = 1; while (Math.min(105,Math.round(1+3*requiredLevel+Math.floor(requiredLevel/5))) <= slot && slot < 105) requiredLevel++; return { id, slot, name: row[0], currency, built, released: slot < 105, available: slot < idleon.callFunction('Holes','SchematicsAvailable',0,0), requiredLevel: slot < 105 ? requiredLevel : null, price, stock, currentCost: built ? null : price, shortfall: built ? null : Math.max(0,price-stock), affordable: built ? null : !!idleon.callFunction('Holes','CanWeAffordCreate',slot,0) }; }); })()",
+      "description": "All source catalogue identities, availability slots and current wallet costs. Built records have no next purchase."
+    },
+    {
+      "label": "effect_14",
+      "expression": "idleon.callFunction('Holes','B_UPG',14,1)",
+      "description": "Owned numeric schematic effect with the original description factor."
+    },
+    {
+      "label": "effect_45",
+      "expression": "idleon.callFunction('Holes','B_UPG',45,1)",
+      "description": "Owned numeric schematic effect with the original description factor."
+    },
+    {
+      "label": "effect_46",
+      "expression": "idleon.callFunction('Holes','B_UPG',46,1)",
+      "description": "Owned numeric schematic effect with the original description factor."
+    },
+    {
+      "label": "effect_47",
+      "expression": "idleon.callFunction('Holes','B_UPG',47,1)",
+      "description": "Owned numeric schematic effect with the original description factor."
+    },
+    {
+      "label": "effect_48",
+      "expression": "idleon.callFunction('Holes','B_UPG',48,1)",
+      "description": "Owned numeric schematic effect with the original description factor."
+    },
+    {
+      "label": "effect_52",
+      "expression": "idleon.callFunction('Holes','B_UPG',52,1)",
+      "description": "Owned numeric schematic effect with the original description factor."
+    },
+    {
+      "label": "effect_53",
+      "expression": "1+(idleon.callFunction('Holes','B_UPG',53,1))/100",
+      "description": "Owned numeric schematic effect with the original description factor."
+    },
+    {
+      "label": "effect_54",
+      "expression": "idleon.callFunction('Holes','B_UPG',54,1)",
+      "description": "Owned numeric schematic effect with the original description factor."
+    },
+    {
+      "label": "effect_55",
+      "expression": "idleon.callFunction('Holes','B_UPG',55,1)",
+      "description": "Owned numeric schematic effect with the original description factor."
+    },
+    {
+      "label": "effect_56",
+      "expression": "idleon.callFunction('Holes','B_UPG',56,1)",
+      "description": "Owned numeric schematic effect with the original description factor."
+    },
+    {
+      "label": "effect_57",
+      "expression": "idleon.callFunction('Holes','B_UPG',57,1)",
+      "description": "Owned numeric schematic effect with the original description factor."
+    },
+    {
+      "label": "effect_58",
+      "expression": "idleon.callFunction('Holes','B_UPG',58,1)",
+      "description": "Owned numeric schematic effect with the original description factor."
+    },
+    {
+      "label": "effect_59",
+      "expression": "idleon.callFunction('Holes','B_UPG',59,1)",
+      "description": "Owned numeric schematic effect with the original description factor."
+    },
+    {
+      "label": "effect_82",
+      "expression": "idleon.callFunction('Holes','B_UPG',82,20)",
+      "description": "Owned numeric schematic effect with the original description factor."
+    },
+    {
+      "label": "effect_83",
+      "expression": "idleon.callFunction('Holes','B_UPG',83,40)",
+      "description": "Owned numeric schematic effect with the original description factor."
+    },
+    {
+      "label": "effect_84",
+      "expression": "idleon.callFunction('Holes','B_UPG',84,100)",
+      "description": "Owned numeric schematic effect with the original description factor."
+    },
+    {
+      "label": "effect_49_10",
+      "expression": "idleon.callFunction('Holes','B_UPG',49,10)",
+      "description": "Motherlode Trickledown owned EXP or efficiency effect."
+    },
+    {
+      "label": "effect_49_15",
+      "expression": "idleon.callFunction('Holes','B_UPG',49,15)",
+      "description": "Motherlode Trickledown owned EXP or efficiency effect."
+    },
+    {
+      "label": "availability",
+      "expression": "idleon.callFunction('Holes','SchematicsAvailable',0,0)",
+      "description": "Kaipu availability count."
+    },
+    {
+      "label": "lamp_stacks",
+      "expression": "Number(idleon.getAttr('Holes')[21][5])",
+      "description": "Saved next-construction Lamp discount."
+    },
+    {
+      "label": "lamp_multiplier",
+      "expression": "Math.max(0.01,Math.pow(0.85,Number(idleon.getAttr('Holes')[21][5])))",
+      "description": "Source construction discount multiplier."
+    },
+    {
+      "label": "study_0",
+      "expression": "idleon.callFunction('Holes2','StudyBolaiaBonuses',0,0)",
+      "description": "Direct Study input to sediment expansion."
+    },
+    {
+      "label": "schematic_parameter_50",
+      "expression": "idleon.callFunction('Holes','B_UPG',50,1)",
+      "description": "Direct schematic or string-slot input to owned effects."
+    },
+    {
+      "label": "schematic_parameter_79",
+      "expression": "idleon.callFunction('Holes','B_UPG',79,1)",
+      "description": "Direct schematic or string-slot input to owned effects."
+    },
+    {
+      "label": "schematic_parameter_98",
+      "expression": "idleon.callFunction('Holes','B_UPG',98,1)",
+      "description": "Direct schematic or string-slot input to owned effects."
+    },
+    {
+      "label": "schematic_parameter_32",
+      "expression": "idleon.callFunction('Holes','B_UPG',32,1)",
+      "description": "Direct schematic or string-slot input to owned effects."
+    },
+    {
+      "label": "schematic_parameter_33",
+      "expression": "idleon.callFunction('Holes','B_UPG',33,1)",
+      "description": "Direct schematic or string-slot input to owned effects."
+    },
+    {
+      "label": "schematic_parameter_34",
+      "expression": "idleon.callFunction('Holes','B_UPG',34,1)",
+      "description": "Direct schematic or string-slot input to owned effects."
+    },
+    {
+      "label": "schematic_parameter_35",
+      "expression": "idleon.callFunction('Holes','B_UPG',35,1)",
+      "description": "Direct schematic or string-slot input to owned effects."
+    },
+    {
+      "label": "schematic_parameter_36",
+      "expression": "idleon.callFunction('Holes','B_UPG',36,1)",
+      "description": "Direct schematic or string-slot input to owned effects."
+    },
+    {
+      "label": "string_slots_bonus",
+      "expression": "idleon.callFunction('Holes','CosmoBonusQTY',0,1)",
+      "description": "Direct String is Strung input to Harp string slots."
+    },
+    {
+      "label": "harp_string_count",
+      "expression": "(() => {const h=idleon.getAttr('Holes');return new Set(h[20].slice(0,Math.min(15,Math.round(1+idleon.callFunction('Holes','CosmoBonusQTY',0,1)+[32,33,34,35,36].reduce((s,id)=>s+idleon.callFunction('Holes','B_UPG',id,1),0))))).size;})()",
+      "description": "Distinct strings within the original caller's available slots."
+    }
+  ]
+}

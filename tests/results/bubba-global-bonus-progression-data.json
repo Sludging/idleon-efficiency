@@ -1,0 +1,32 @@
+{
+  "extractions": {
+    "next_bonus_index": {
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"RealLV\", 3, 0) % 7 + 1",
+      "result": 7
+    },
+    "next_bonus_cost": {
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"UpgCost\", 3, 0)",
+      "result": 32685540920682.508
+    },
+    "bonus_upgrade_3": {
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"TotUpgBonus\", 3, 0)",
+      "result": 13
+    },
+    "meat_balance": {
+      "expression": "idleon.engine.getGameAttribute(\"Bubba\")[0][0]",
+      "result": {
+        "type": "large_number",
+        "value": "10081291219523368"
+      }
+    },
+    "can_afford_next_bonus": {
+      "expression": "idleon.engine.getGameAttribute(\"Bubba\")[0][0] >= idleon.callFunction(\"Bubbastuff\", \"UpgCost\", 3, 0) ? 1 : 0",
+      "result": 1
+    },
+    "minehead_bonus_5": {
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 5, 0)",
+      "result": 100
+    }
+  },
+  "errors": {}
+}

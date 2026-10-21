@@ -1,0 +1,65 @@
+{
+  "extractions": {
+    "available_tunnel_count": {
+      "expression": "idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0)",
+      "result": 9
+    },
+    "grand_total": {
+      "expression": "idleon.callFunction(\"Spelunk\", \"GrandDiscoveries_Total\", 0, 0)",
+      "result": 22
+    },
+    "tunnel_0_grand_found": {
+      "expression": "Number(idleon.getAttr(\"Spelunk\")[44][0])",
+      "result": 4
+    },
+    "tunnel_1_grand_found": {
+      "expression": "Number(idleon.getAttr(\"Spelunk\")[44][1])",
+      "result": 5
+    },
+    "tunnel_2_grand_found": {
+      "expression": "Number(idleon.getAttr(\"Spelunk\")[44][2])",
+      "result": 3
+    },
+    "tunnel_3_grand_found": {
+      "expression": "Number(idleon.getAttr(\"Spelunk\")[44][3])",
+      "result": 4
+    },
+    "tunnel_4_grand_found": {
+      "expression": "Number(idleon.getAttr(\"Spelunk\")[44][4])",
+      "result": 4
+    },
+    "tunnel_5_grand_found": {
+      "expression": "Number(idleon.getAttr(\"Spelunk\")[44][5])",
+      "result": 2
+    },
+    "tunnel_6_grand_found": {
+      "expression": "Number(idleon.getAttr(\"Spelunk\")[44][6])",
+      "result": 0
+    },
+    "tunnel_7_grand_found": {
+      "expression": "Number(idleon.getAttr(\"Spelunk\")[44][7])",
+      "result": 0
+    },
+    "tunnel_8_lore": {
+      "expression": "idleon.callFunction(\"Spelunk\", \"DoWeHaveLoreN1\", 8, 0)",
+      "result": 0
+    },
+    "tunnel_8_grand_found": {
+      "expression": "Number(idleon.getAttr(\"Spelunk\")[44][8])",
+      "result": 0
+    },
+    "tunnel_9_lore": {
+      "expression": "idleon.callFunction(\"Spelunk\", \"DoWeHaveLoreN1\", 9, 0)",
+      "result": 0
+    },
+    "tunnel_9_grand_found": {
+      "expression": "Number(idleon.getAttr(\"Spelunk\")[44][9])",
+      "result": 0
+    },
+    "grand_upgrade_bonus": {
+      "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0)",
+      "result": 223
+    }
+  },
+  "errors": {}
+}

@@ -13,16 +13,17 @@ const fs = require('fs');
 const path = require('path');
 const GameDataExtractor = require('./game-data-extractor');
 
-const DEBUG_SERVER_URL = process.env.GAME_SERVER_URL || 'http://127.0.0.1:3101';
+const DEFAULT_DEBUG_SERVER_URL = process.env.GAME_SERVER_URL || 'http://127.0.0.1:3101';
 const CONFIGS_DIR = path.join(__dirname, '../configs');
 const SAVE_PATH = path.join(__dirname, '../fixtures/saves/latest.json');
 const RESULTS_DIR = path.join(__dirname, '../results');
 
 class BatchExtractor {
- constructor({ verbose = false, skipSaveRefresh = true, outputDir = RESULTS_DIR } = {}) {
+ constructor({ verbose = false, skipSaveRefresh = true, outputDir = RESULTS_DIR, playerServers = {} } = {}) {
   this.verbose = verbose;
   this.skipSaveRefresh = skipSaveRefresh;
   this.outputDir = path.resolve(outputDir);
+  this.playerServers = playerServers;
   this.configFiles = [];
   this.results = {
    successful: [],
@@ -61,7 +62,7 @@ class BatchExtractor {
 
  async checkServerStatus() {
   try {
-   const response = await fetch(`${DEBUG_SERVER_URL}/status`);
+   const response = await fetch(`${DEFAULT_DEBUG_SERVER_URL}/status`);
    const status = await response.json();
 
    if (!response.ok) {
@@ -73,10 +74,8 @@ class BatchExtractor {
    this.log(`✅ Game injection: ${status.injected ? 'Active' : 'Not detected'}`);
 
    if (!status.injected) {
-    console.warn(`\n⚠️  WARNING: Game not detected. Extractions will likely fail.`);
-    console.warn(`   Make sure:`);
-    console.warn(`   1. Game is running with --remote-debugging-port=9223`);
-    console.warn(`   2. Debug server auto-injection completed successfully\n`);
+    console.warn(`\n⚠️  WARNING: Game not detected. Start offline server and wait for IDLEON_OFFLINE_READY.`);
+    console.warn(`   Use live mode only to refresh a save. See tests/helpers/README.md#game-access.\n`);
    }
 
    return status.injected;
@@ -86,7 +85,7 @@ class BatchExtractor {
  }
 
  async fetchCloudSave() {
-  const statusResponse = await fetch(`${DEBUG_SERVER_URL}/status`);
+  const statusResponse = await fetch(`${DEFAULT_DEBUG_SERVER_URL}/status`);
   if (!statusResponse.ok) {
    throw new Error(`Cannot update latest.json: live source verification failed (HTTP ${statusResponse.status}). Use an updated live debug server.`);
   }
@@ -95,7 +94,7 @@ class BatchExtractor {
    throw new Error(`Cannot update latest.json from ${status?.source || 'unknown'} source; only source='live' is allowed. Set GAME_SERVER_URL to an updated live debug server and restart its HTTP process.`);
   }
 
-  const response = await fetch(`${DEBUG_SERVER_URL}/cloud-save`);
+  const response = await fetch(`${DEFAULT_DEBUG_SERVER_URL}/cloud-save`);
   const cloudSave = await response.json();
 
   if (!response.ok) {
@@ -117,10 +116,18 @@ class BatchExtractor {
 
    this.log(`[${num}/${this.configFiles.length}] Processing: ${config.name}`);
    this.log(`${'─'.repeat(80)}`);
-
    try {
+    const configContents = JSON.parse(fs.readFileSync(config.configPath, 'utf8'));
+    const configuredIndex = configContents.requiredActivePlayerIndex;
+    const serverURL = configuredIndex === undefined
+     ? DEFAULT_DEBUG_SERVER_URL
+     : this.playerServers[configuredIndex] || DEFAULT_DEBUG_SERVER_URL;
+    if (configuredIndex !== undefined && this.playerServers[configuredIndex]) {
+     console.log(`Using explicit player ${configuredIndex} server for ${config.name}: ${serverURL}`);
+    }
     const extractor = new GameDataExtractor(config.configPath, config.resultPath, {
-     verbose: this.verbose
+     verbose: this.verbose,
+     serverURL
     });
     const extractionResults = await extractor.run({ exitOnError: false });
     const extractionCount = Object.keys(extractionResults.extractions).length;
@@ -208,6 +215,10 @@ class BatchExtractor {
    const startTime = Date.now();
    this.log('🚀 Batch Game Data Extractor Starting...\n');
    this.log(`${'='.repeat(80)}\n`);
+   console.log(`Primary extraction and save server: ${DEFAULT_DEBUG_SERVER_URL}`);
+   Object.entries(this.playerServers).forEach(([index, serverURL]) => {
+    console.log(`Explicit player ${index} extraction server: ${serverURL}`);
+   });
 
    const gameConnected = await this.checkServerStatus();
 
@@ -250,21 +261,69 @@ class BatchExtractor {
  }
 }
 
+function parsePlayerServer(value) {
+ const separator = value.indexOf('=');
+ if (separator < 1) {
+  throw new Error(`Invalid --player-server "${value}": expected <player-index>=<http(s) URL>`);
+ }
+
+ const playerIndexText = value.slice(0, separator);
+ if (!/^(0|[1-9]\d*)$/.test(playerIndexText) || !Number.isSafeInteger(Number(playerIndexText))) {
+  throw new Error(`Invalid --player-server "${value}": player index must be a non-negative integer`);
+ }
+
+ let serverURL;
+ try {
+  const parsedURL = new URL(value.slice(separator + 1));
+  if (!['http:', 'https:'].includes(parsedURL.protocol) || parsedURL.username || parsedURL.password ||
+      parsedURL.search || parsedURL.hash) {
+   throw new Error('expected an http(s) URL without credentials, query, or fragment');
+  }
+  serverURL = parsedURL.toString().replace(/\/$/, '');
+ } catch (error) {
+  throw new Error(`Invalid --player-server "${value}": ${error.message}`);
+ }
+
+ return [Number(playerIndexText), serverURL];
+}
+
+function parsePlayerServers(args) {
+ const playerServers = {};
+ for (let index = 0; index < args.length; index++) {
+  if (args[index] !== '--player-server') continue;
+
+  const value = args[index + 1];
+  if (!value || value.startsWith('--')) {
+   throw new Error('--player-server requires <player-index>=<http(s) URL>');
+  }
+  const [playerIndex, serverURL] = parsePlayerServer(value);
+  playerServers[playerIndex] = serverURL;
+  index++;
+ }
+ return playerServers;
+}
+
 // CLI usage
 if (require.main === module) {
  const args = process.argv.slice(2);
  const outputDirIndex = args.indexOf('--output-dir');
  const outputDir = outputDirIndex === -1 ? RESULTS_DIR : args[outputDirIndex + 1];
- if (!outputDir || outputDir.startsWith('--')) {
-  console.error('Usage: node extract-all-game-data.js [--verbose] [--refresh-save] [--output-dir <directory>]');
+ try {
+  if (!outputDir || outputDir.startsWith('--')) {
+   throw new Error('--output-dir requires a directory');
+  }
+  const playerServers = parsePlayerServers(args);
+  const batchExtractor = new BatchExtractor({
+   verbose: args.includes('--verbose'),
+   skipSaveRefresh: !args.includes('--refresh-save'),
+   outputDir,
+   playerServers
+  });
+  batchExtractor.run();
+ } catch (error) {
+  console.error(`${error.message}\nUsage: node extract-all-game-data.js [--verbose] [--refresh-save] [--output-dir <directory>] [--player-server <player-index>=<http(s) URL>]`);
   process.exit(1);
  }
- const batchExtractor = new BatchExtractor({
-  verbose: args.includes('--verbose'),
-  skipSaveRefresh: !args.includes('--refresh-save'),
-  outputDir
- });
- batchExtractor.run();
 }
 
 module.exports = BatchExtractor;

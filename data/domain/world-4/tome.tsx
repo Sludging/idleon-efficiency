@@ -52,10 +52,13 @@ import { Grimoire } from '../grimoire';
 import { Bubba } from '../world-3/bubba';
 import { CoralReef } from '../world-7/coralReef';
 import { Spelunking } from '../world-7/spelunking';
+import { HatRack } from '../world-7/hatRack';
 import type { CrownCountResearchGridBonus, GlimboTradesResearchGridBonus, ResearchGrid } from '../world-7/research';
 import { Minehead } from '../world-7/minehead';
 import { JellyOperator } from '../world-7/jellyOperator';
 import { EventShop } from '../eventShop';
+import { IslandExpeditions } from '../world-2/islandExpedition';
+import { Menagerie } from '../menagerie';
 
 export enum TomeScoreColors {
     Platinum = "#6EE3FF",
@@ -300,12 +303,15 @@ export class Tome extends Domain {
     unlocked: boolean = false;
     charCount: number = 0;
     totalAccountLevel: number = 0;
+    totalSkillLevel: number = 0;
+    accountSkillLevels: number[][] = [];
 
     bonuses: TomeBonus[] = [];
     getRawKeys(): RawData[] {
         return [
             { key: "OptLacc", perPlayer: false, default: [] },
-            { key: "Spelunk", perPlayer: false, default: [] }
+            { key: "Spelunk", perPlayer: false, default: [] },
+            { key: "Lv0_", perPlayer: true, default: [] }
         ]
     }
 
@@ -325,6 +331,8 @@ export class Tome extends Domain {
         const serverVars = data.get("servervars") as Record<string, any>;
         const charCount = data.get("charCount") as number;
         const spelunk = data.get("Spelunk") as any[];
+        tome.accountSkillLevels = Array.from({ length: charCount }, (_, playerIndex) =>
+            ((data.get(`Lv0_${playerIndex}`) ?? []) as number[]).slice(1, 22).map(Number));
 
         tome.charCount = charCount;
 
@@ -438,6 +446,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const farming = data.get("farming") as Farming;
     const royalArmory = data.get("royalArmory") as RoyalArmory;
     const sneaking = data.get("sneaking") as Sneaking;
+    const islandExpeditions = data.get("islandExpeditions") as IslandExpeditions;
     const summoning = data.get("summoning") as Summoning;
     const arcade = data.get("arcade") as Arcade;
     const prayers = data.get("prayers") as Prayer[];
@@ -448,6 +457,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const bubba = data.get("bubba") as Bubba;
     const coralReef = data.get("coralReef") as CoralReef;
     const spelunking = data.get("spelunking") as Spelunking;
+    const hatRack = data.get("hatRack") as HatRack;
     const researchGrid = data.get("research") as ResearchGrid;
     const minehead = data.get("minehead") as Minehead;
     const jellyOperator = data.get("jellyOperator") as JellyOperator;
@@ -470,16 +480,16 @@ export const updateTomeScores = (data: Map<string, any>) => {
         }
     });
 
-    // Sum all skill levels across players.
-    const sumOfSkillsLevels = players.reduce((sum, player) =>
-        sum + [...player.skills.values()].reduce((skillSum, skill) => skillSum + skill.level, 0),
-        0);
+    // Tome counts all 21 saved skill slots, including slots without a released skill.
+    tome.totalSkillLevel = tome.accountSkillLevels.reduce((total, levels) =>
+        total + levels.reduce((sum, level) => sum + Math.max(0, level), 0), 0);
+    const sumOfSkillsLevels = tome.totalSkillLevel;
 
     // Total level of all stamps
     const stampsTotalLevels = stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + stamp.level, 0);
 
-    // Total star levels across all cards.
-    const cardsTotalLevels = cards.reduce((sum, card) => sum + (card.count > 0 ? card.getLevels() + 1 : 0), 0);
+    // Sum native levels of owned cards, including owned zero-star cards.
+    const cardsTotalLevels = cards.reduce((sum, card) => sum + (card.count > 0 ? card.getLevels() : 0), 0);
 
     // Sum of the highest level for each talent; shared talents count once.
     const talentsSumHighestLevel = account.talentsMaxLevels.reduce((sum, talentMaxLevel) => sum + Math.round(talentMaxLevel), 0);
@@ -593,10 +603,10 @@ export const updateTomeScores = (data: Map<string, any>) => {
     // Total Summoning victories.
     const summoningVictories = summoning.summonBattles.getTotalVictories();
 
-    // Number of Ninja floors unlocked
+    // Each completed mastery contributes all twelve floors; otherwise use current floor progress.
     let ninjaFloorsUnlocked = 0;
-    if (0 < (optionListAccount[232] ?? 0)) {
-        ninjaFloorsUnlocked = 12 * optionListAccount[232];
+    if (0 < sneaking.completedMasteries) {
+        ninjaFloorsUnlocked = 12 * sneaking.completedMasteries;
     } else {
         ninjaFloorsUnlocked = Math.min(12, sneaking.getUnlockedFloors());
     }
@@ -721,8 +731,8 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.updateAllPlayersCurrentValue(totalAFKTime);
                 break;
             case 14:
-                // DPS record on Shimmer Island on dummy in W2
-                line.updateAllPlayersCurrentValue((optionListAccount[172] ?? 0));
+                // Best Dummy Target DPS recorded on Shimmer Island.
+                line.updateAllPlayersCurrentValue(islandExpeditions.dummyTargetBestDPS);
                 break;
             case 15:
                 // Star Talent points are character-specific.
@@ -1042,8 +1052,8 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.updateAllPlayersCurrentValue(totalDestroyedResourceLayers);
                 break;
             case 93:
-                // Total Opals found in the Hole.
-                line.updateAllPlayersCurrentValue(hole.ownedOpals);
+                // Cavern-earned Opals exclude external grants.
+                line.updateAllPlayersCurrentValue(hole.cavernEarnedOpals);
                 break;
             case 94:
                 // Best Pure Memory round reached.
@@ -1107,7 +1117,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 109:
                 // Premium Hats found.
-                line.updateAllPlayersCurrentValue(spelunking.premiumHatsFound);
+                line.updateAllPlayersCurrentValue(hatRack.getDepositedHatCount());
                 break;
             case 110:
                 // Number of Minehead opponents defeated.
@@ -1158,6 +1168,12 @@ export const updateTomeScores = (data: Map<string, any>) => {
             case 121:
                 line.updateAllPlayersCurrentValue(jellyOperator.getSuccessfulOperations());
                 break;
+            case 122:
+                line.updateAllPlayersCurrentValue((data.get("menagerie") as Menagerie).savedTomeRank);
+                break;
+            case 123:
+                line.updateAllPlayersCurrentValue((data.get("menagerie") as Menagerie).totalMenagerieBonusLevels);
+                break;
             default:
                 line.updateAllPlayersCurrentValue(0);
                 break;
@@ -1170,7 +1186,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
 
     // Update Tome Epilogue bonuses
     const grimoireBonus = grimoire.getUpgradeBonus(17);
-    const equipmentSetBonus = equipmentSet.getSetBonus("TROLL_SET", undefined, true);
+    const equipmentSetBonus = equipmentSet.getSetBonus("TROLL_SET", true);
     tome.epilogueBonuses.forEach(bonus => {
         bonus.boostFromBonuses = grimoireBonus + equipmentSetBonus;
     });
@@ -1184,7 +1200,7 @@ export const updateTomeBonuses = (data: Map<string, any>) => {
     const eventShop = data.get("eventShop") as EventShop;
     const optionListAccount = data.get("OptLacc") as number[];
     const tomeScore = tome.getHighestScore();
-    const boostFromBonuses = grimoire.getUpgradeBonus(17) + equipmentSet.getSetBonus("TROLL_SET", undefined, true);
+    const boostFromBonuses = grimoire.getUpgradeBonus(17) + equipmentSet.getSetBonus("TROLL_SET", true);
 
     // Several tome bonuses get unlocked by certain conditions.
     const unlockedByIndex: Record<number, boolean> = {

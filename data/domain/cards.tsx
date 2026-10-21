@@ -21,9 +21,8 @@ export class Card {
 
     chipBoost: number = 1;
     legendTalentBoost: number = 0;
-    baseMaxCardLevel: number = 5;
-    bonusMaxCardLevelFromSpelunking: number = 0;
-    bonusMaxCardLevelFromRift: number = 0;
+    gameThresholdCount: number = 4;
+    cardifiedLevel: number = 0;
     passive: boolean = false;
 
     baseDropChance: number;
@@ -45,8 +44,9 @@ export class Card {
         }
     }
 
+    // This maximum is a display-star count, not the native effect level.
     getMaxCardLevel = (): number => {
-        return this.baseMaxCardLevel + this.bonusMaxCardLevelFromRift + this.bonusMaxCardLevelFromSpelunking;
+        return Math.max(this.gameThresholdCount, this.cardifiedLevel - 1);
     }
 
     getImageData = (): ImageData => {
@@ -66,29 +66,34 @@ export class Card {
     }
 
     getLevels = (): number => {
-        const maxStarLevel = Math.round(this.getMaxCardLevel());
-        switch (true) {
-            case maxStarLevel >= 7 && this.count >= this.getCardsForLevel(7): return 7;
-            case maxStarLevel >= 6 && this.count >= this.getCardsForLevel(6): return 6;
-            case maxStarLevel >= 5 && this.count >= this.getCardsForLevel(5): return 5;
-            case this.count >= this.getCardsForLevel(4): return 4;
-            case this.count >= this.getCardsForLevel(3): return 3;
-            case this.count >= this.getCardsForLevel(2): return 2;
-            case this.count >= this.getCardsForLevel(1): return 1;
-            default: return 0;
+        // Owned zero-star cards contribute native level 1 to card effects.
+        let level = this.count > 0 ? 1 : 0;
+        for (let thresholdIndex = 0; thresholdIndex < this.gameThresholdCount; thresholdIndex++) {
+            if (this.count >= this.getCardsForLevel(thresholdIndex + 1)) {
+                level = thresholdIndex + 2;
+            }
         }
+
+        // Cardifiers set native minimums even for unowned cards; bonuses still require ownership.
+        return Math.max(level, this.cardifiedLevel);
+    }
+
+    getStarCount = (): number => {
+        return Math.max(this.getLevels() - 1, 0);
     }
 
     getBaseDropRateText = (): string => {
         return (this.baseDropChance > 0) ? "1 in " + nFormatter(Math.round(1 / this.baseDropChance)) : "Not Found";
     }
 
+    // The target is display stars. Saved integer counts must strictly exceed the game threshold.
     getCardsForLevel = (level: number): number => {
         if (level <= 0) {
             return 1;
         }
 
         const thresholdLevel = level - 1;
+        // Chaotic Chizoar uses its own threshold curve instead of the normal high-star scaling.
         const threshold = this.id == "Boss3B"
             ? 1.5 * Math.pow(thresholdLevel + 1 + Math.floor(thresholdLevel / 3), 2)
             : this.data.perTier * Math.pow(thresholdLevel + 1 + (Math.floor(thresholdLevel / 3) + (16 * Math.floor(thresholdLevel / 4) + 100 * Math.floor(thresholdLevel / 5))), 2);
@@ -96,27 +101,29 @@ export class Card {
         return Math.floor(threshold) + 1;
     }
 
-    getBonus = (level: number = this.getLevels()): number => {
+    getBonus = (previewStars?: number): number => {
         if (this.count == 0) {
             return 0;
         }
-        return this.data.bonus * (level + 1) * (1 + (this.passive ? 0 : this.legendTalentBoost) / 100) * this.chipBoost;
+        // Current effects use native progression; an explicit preview uses proposed display stars.
+        const level = previewStars === undefined ? this.getLevels() : previewStars + 1;
+        return this.data.bonus * level * (1 + (this.passive ? 0 : this.legendTalentBoost) / 100) * this.chipBoost;
     }
 
-    getBonusText = (level: number = this.getLevels()): string => {
-        return this.data.effect.replace(/{/, this.getBonus(level).toString());
+    getBonusText = (previewStars?: number): string => {
+        return this.data.effect.replace(/{/, this.getBonus(previewStars).toString());
     }
 
     getBorderImageData = (): ImageData => {
         return {
-            location: `CardsBorder${this.getLevels() + 1}`,
+            location: `CardsBorder${this.getStarCount() + 1}`,
             width: 31,
             height: 43
         }
     }
 
     getLargeBorderImageData = (): ImageData => {
-        const stars = this.getLevels();
+        const stars = this.getStarCount();
         if (stars <= 0) {
             // There is no big border image for 0 star cards, so aas the small border is just no image we use it here too
             return {
@@ -146,7 +153,7 @@ export class Card {
     }
 
     static GetTotalBonusForId = (cards: Card[], id: number) => {
-        return cards.filter(card => card.data.effect == IDforCardBonus[id].replace(/_/g, ' ')).reduce((sum, card) => sum += card.getBonus(card.getLevels()), 0);
+        return cards.filter(card => card.data.effect == IDforCardBonus[id].replace(/_/g, ' ')).reduce((sum, card) => sum += card.getBonus(), 0);
     }
 
     static getStarImageForLevel = (level: number): ImageData => {
@@ -196,7 +203,7 @@ export class CardInfo {
         }
 
         this.cards.forEach((card, _) => {
-            card.count = cardData[card.id];
+            card.count = cardData[card.id] ?? 0;
         });
     }
 
@@ -220,7 +227,8 @@ export class CardInfo {
 export class Cards extends Domain {
     getRawKeys(): RawData[] {
         return [
-            { key: "Cards0", default: {}, perPlayer: false }
+            { key: "Cards0", default: {}, perPlayer: false },
+            { key: "OptLacc", default: [], perPlayer: false },
         ]
     }
 
@@ -231,9 +239,13 @@ export class Cards extends Domain {
     parse(data: Map<string, any>): void {
         const cardData = data.get("Cards0") as Record<string, number>;
         const cards = data.get(this.getDataKey()) as Card[];
+        const optionList = data.get("OptLacc") as (number | string)[];
+        const fiveStarCardifiers = String(optionList[155] ?? "").split(",");
+        const sixStarCardifiers = String(optionList[603] ?? "").split(",");
 
         cards.forEach(card => {
             card.count = cardData[card.id] ?? 0;
+            card.cardifiedLevel = sixStarCardifiers.includes(card.id) ? 7 : fiveStarCardifiers.includes(card.id) ? 6 : 0;
         })
     }
 }
@@ -246,50 +258,45 @@ export const updateCards = (data: Map<string, any>) => {
     const cards = data.get("cards") as Card[];
     const rift = data.get("rift") as Rift;
     const players = data.get("players") as Player[];
-    const optLacc = data.get("OptLacc");
     const spelunking = data.get("spelunking") as Spelunking;
     const legendTalents = data.get("legendTalents") as LegendTalents;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
-
-    if (skillMastery?.active) {
-        Object.entries(skillMastery.skillLevels).map(([skillAsString, _], _index) => {
-            const skillName = SkillsIndex[parseInt(skillAsString)];
-            const skillIndex = SkillsIndex[skillName as keyof typeof SkillsIndex];
-
-            if (SkillsforIDCardPassiveBonus[skillIndex].length > 0 && skillMastery.getSkillRank(skillIndex) >= 3) {
-
-                SkillsforIDCardPassiveBonus[skillIndex].forEach(bonusID => {
-                    ((cards) ? cards.filter(card => card.bonusID == bonusID) : []).forEach(card => {
-                        card.passive = true;
-                    })
-                    players.flatMap(player => player.cardInfo?.cards ?? []).filter(card => card.bonusID == bonusID).forEach(card => {
-                        card.passive = true;
-                    })
-                })
-            }
-        })
-    }
-
     const bonusEffectFromLegendTalents = legendTalents.getBonusFromIndex(21);
     const rubyCardsUnlocked = rift.bonuses.find(bonus => bonus.name == "Ruby Cards")?.active || false;
-    const sixStarCardsUnlocked = spelunking.tunnels.find(tunnel => tunnel.index == 2)?.unlocked ?? false;
-    const cardifiedFiveStarCards = (optLacc[155] ?? "" as string).split(",") as string[];
+    const sixStarCardsUnlocked = spelunking.tunnels[2].loreCompleted;
 
-    // Ensure there's a need to parse cards
-    if (bonusEffectFromLegendTalents > 0 || rubyCardsUnlocked || sixStarCardsUnlocked || cardifiedFiveStarCards.length > 0) {
-        const cardsToParse = rubyCardsUnlocked || sixStarCardsUnlocked ? cards : cards.filter(card => cardifiedFiveStarCards.indexOf(card.id) >= 0);
-        cardsToParse.forEach(card => {
-            card.bonusMaxCardLevelFromRift = (rubyCardsUnlocked || cardifiedFiveStarCards.indexOf(card.id) >= 0) ? 1 : 0;
-            card.bonusMaxCardLevelFromSpelunking = sixStarCardsUnlocked ? 1 : 0;
-        });
-        // I should probably not duplicate cards at some point, but for now ...
-        players.flatMap(player => player.cardInfo?.cards ?? []).forEach(card => {
-            card.bonusMaxCardLevelFromRift = (rubyCardsUnlocked || cardifiedFiveStarCards.indexOf(card.id) >= 0) ? 1 : 0;
-            card.bonusMaxCardLevelFromSpelunking = sixStarCardsUnlocked ? 1 : 0;
-            card.legendTalentBoost = bonusEffectFromLegendTalents;
+    // Rift and Spelunking unlock count thresholds; cardifiers only set native minimums.
+    const gameThresholdCount = Math.round(4 + Number(rubyCardsUnlocked) + Number(sixStarCardsUnlocked));
+    cards.forEach(card => {
+        card.gameThresholdCount = gameThresholdCount;
+        // Rebuild Skill Mastery state without removing cards that are inherently passive.
+        card.passive = card.data.effect.endsWith("(Passive)");
+    });
+
+    if (skillMastery?.active) {
+        Object.entries(skillMastery.skillLevels).forEach(([skillAsString]) => {
+            const skillIndex = parseInt(skillAsString) as SkillsIndex;
+            if (skillMastery.getSkillRank(skillIndex) >= 3) {
+                cards.forEach(card => {
+                    if (SkillsforIDCardPassiveBonus[skillIndex].includes(card.bonusID)) {
+                        card.passive = true;
+                    }
+                });
+            }
         });
     }
+
+    const cardsById = new Map(cards.map(card => [card.id, card]));
+    // Update existing player objects so equipped references and slot-chip boosts remain intact.
+    players.forEach(player => player.cardInfo?.cards.forEach(card => {
+        const accountCard = cardsById.get(card.id)!;
+        card.count = accountCard.count;
+        card.gameThresholdCount = accountCard.gameThresholdCount;
+        card.cardifiedLevel = accountCard.cardifiedLevel;
+        card.passive = accountCard.passive;
+        card.legendTalentBoost = bonusEffectFromLegendTalents;
+    }));
 }
 
 export const SkillsforIDCardPassiveBonus: Record<SkillsIndex, number[]> = {

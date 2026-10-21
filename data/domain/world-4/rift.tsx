@@ -1,3 +1,5 @@
+import { deathNoteMobOrder } from "../world-3/construction/deathnote";
+
 import { range } from "../../utility";
 import { SkillsIndex } from "../SkillsIndex";
 import { Domain, RawData } from "../base/domain";
@@ -347,11 +349,19 @@ export class ConstructionMastery extends RiftBonus {
 export class KillroyPrime extends RiftBonus {
     totalKills: number = 0;
     KRBest: Record<string, number> = {}
+    getDamageBonus = (): number => {
+        let totalDeathNoteKills = 0;
+        for (const worldMobs of deathNoteMobOrder) {
+            for (const mobId of worldMobs) {
+                totalDeathNoteKills += this.KRBest[mobId] ?? 0;
+            }
+        }
+        return Math.floor(Math.pow(totalDeathNoteKills, 0.4));
+    }
 
     override getBonus = () => {
         return Math.floor(Math.pow(this.totalKills, 0.4));
     }
-
     getBonusText = () => {
         return `1.${this.getBonus()}x`
     }
@@ -472,8 +482,12 @@ export class Rift extends Domain {
         if (optionList.length > 232) {
             const sneakMastery = rift.bonuses.find(bonus => bonus.name == "Sneak Mastery") as SneakMastery;
             sneakMastery.currentMastery = optionList[231];
-            sneakMastery.highestMastery = optionList[232];
         }
+    }
+
+    updateHighestSneakMastery(completedMasteries: number): void {
+        const sneakMastery = this.bonuses.find(bonus => bonus.name == "Sneak Mastery") as SneakMastery;
+        sneakMastery.highestMastery = completedMasteries;
     }
 }
 

@@ -1,0 +1,136 @@
+{
+  "description": "Compare component D's typed damage and prayer inputs with native results",
+  "target": "Player maximum damage parameters",
+  "extractions": [
+    {
+      "label": "player_damage_etc_bonus_72",
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"72\")",
+      "description": "Native ETC Damage Multi percentage points (index 72) used by component D"
+    },
+    {
+      "label": "player_damage_etc_bonus_75",
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"75\")",
+      "description": "Native ETC Damage Bonus percentage points (index 75) used by component D"
+    },
+    {
+      "label": "player_damage_etc_bonus_104",
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"104\")",
+      "description": "Native ETC Bigger Damage percentage points (index 104) used by component D"
+    },
+    {
+      "label": "player_damage_voting_bonus_1",
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 1, 0)",
+      "description": "Native Summoning voting bonus 1 used by component D"
+    },
+    {
+      "label": "player_damage_prayer_curse_6",
+      "expression": "idleon.callFunction(\"prayersReal\", 6, 1)",
+      "description": "Native CURSE value from prayersReal(6, 1) used as a component D penalty"
+    },
+    {
+      "label": "player_damage_prayer_curse_13",
+      "expression": "idleon.callFunction(\"prayersReal\", 13, 1)",
+      "description": "Native CURSE value from prayersReal(13, 1) used as a component D penalty"
+    },
+    {
+      "label": "player_damage_prayer_benefit_15",
+      "expression": "idleon.callFunction(\"prayersReal\", 15, 0)",
+      "description": "Native benefit from prayersReal(15, 0) used by component D"
+    },
+    {
+      "label": "player_damage_divinity_blessing_7",
+      "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 7, 0)",
+      "description": "Native Divinity blessing 7 used by component D"
+    },
+    {
+      "label": "player_damage_divinity_blessing_8",
+      "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 8, 0)",
+      "description": "Native Divinity blessing 8 used by component D"
+    },
+    {
+      "label": "player_damage_chip_bonus_dmg",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"dmg\")",
+      "description": "Native damage chip bonus used by component D"
+    },
+    {
+      "label": "player_damage_meal_total_damage",
+      "expression": "idleon.callFunction(\"MealBonus\", \"TotDmg\")",
+      "description": "Native TotDmg meal bonus used by component D"
+    },
+    {
+      "label": "player_damage_card_set_5",
+      "expression": "idleon.callFunction(\"CardSetBonuses\", 0, \"5\")",
+      "description": "Native card set 5 bonus used by component D"
+    },
+    {
+      "label": "player_damage_buff_108_mode_2",
+      "expression": "idleon.callFunction(\"GetBuffBonuses\", 108, 2)",
+      "description": "Native active buff 108 contribution used by component D"
+    },
+    {
+      "label": "player_damage_buff_124_mode_2",
+      "expression": "idleon.callFunction(\"GetBuffBonuses\", 124, 2)",
+      "description": "Native active buff 124 penalty used by component D"
+    },
+    {
+      "label": "player_damage_native_component_d",
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DummyNumbersStatManager\").h.DamageDealtLIST[2]; })()",
+      "description": "Native component D from DamageDealed(\"Max\") for target player 3"
+    },
+    {
+      "label": "player_damage_native_maximum",
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0)",
+      "description": "Native maximum damage from Button task 49 for target player 3"
+    },
+    {
+      "label": "player_damage_pristine_charm_0",
+      "expression": "idleon.callFunction(\"Ninja\", \"PristineBon\", 0, 0)",
+      "description": "Native pristine charm 0 percentage used by component D"
+    },
+    {
+      "label": "player_damage_friend_bonus_0",
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 0, 0)",
+      "description": "Native Friend Bonus 0 used by component D"
+    },
+    {
+      "label": "player_damage_star_sign_total_damage",
+      "expression": "Number(idleon.engine.getGameAttribute(\"DNSM\").h.StarSigns.h.PctDmg)",
+      "description": "Native prepared Total Damage star-sign bonus used by component D"
+    },
+    {
+      "label": "player_damage_divinity_god_rank",
+      "expression": "Math.max(0, Number(idleon.engine.getGameAttribute(\"Divinity\")[25]) - 10)",
+      "description": "Native god-rank multiplier input used by component D"
+    },
+    {
+      "label": "player_damage_vial_7dmg",
+      "expression": "Number(idleon.engine.getGameAttribute(\"DNSM\").h.AlchVials.h[\"7dmg\"])",
+      "description": "Native 7dmg vial percentage used by component D"
+    },
+    {
+      "label": "player_damage_palette_34",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 34, 0)",
+      "description": "Native Gaming palette bonus 34 used by component D"
+    },
+    {
+      "label": "player_damage_summoning_upgrade_79",
+      "expression": "idleon.callFunction(\"Summoning\", \"SummUpgBonus\", 79, 0)",
+      "description": "Native Summoning upgrade 79 used by component D"
+    },
+    {
+      "label": "player_damage_artifact_25_effective",
+      "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 25, 0)",
+      "description": "Native effective Crystal Steak artifact bonus for the selected player"
+    },
+    {
+      "label": "player_damage_artifact_8_contextual",
+      "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 8, 0)",
+      "description": "Native account Fun Hippoete bonus from Sailing's prepared artifact cache"
+    },
+    {
+      "label": "player_damage_exotic_market_41",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 41, 0)",
+      "description": "Native Exotic Market bonus 41 used by component D"
+    }
+  ]
+}

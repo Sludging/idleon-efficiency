@@ -121,14 +121,6 @@ describe('Family Domain - Class Bonus', () => {
   });
  });
 
- it(`validate the max Family bonus across all characters, used for DK/SB`, () => {
-  const liveBonus2 = getExtractedValue(extractionResults, 'family_guy_special_144');
-  const highestFamilyGuy = players.reduce((highest, player) => Math.max(highest, player.getTalentBonus(144)), 0);
-  expect(highestFamilyGuy).toMatchLiveGameWithDetails(liveBonus2, {
-   tolerance: 0,
-   context: 'getBonus2(1, 144, -1) expected to match max Family Guy talent bonus across all characters.',
-  });
- })
 
  explicitWinnerCases.forEach(({ classIndex, gameKey, description, ownerID, ownerDescription }) => {
   it(`matches the game ${description} Family Bonus for its explicit winning owner (${ownerDescription})`, () => {

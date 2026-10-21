@@ -19,6 +19,32 @@ import { EquipmentBonus } from "./equipment-effects";
 import { Sneaking } from "./world-6/sneaking";
 import { Emperor } from "./world-6/emperor";
 import { Lab } from "./world-4/lab";
+import type { AtomCollider } from "./world-3/construction/atomCollider";
+import type { EquipmentSets } from "./misc/equipmentSets";
+import type { EventShop } from "./eventShop";
+import type { Gaming } from "./world-5/gaming";
+import type { Farming } from "./world-6/farming";
+import type { Spelunking } from "./world-7/spelunking";
+import type { LegendTalents } from "./world-7/legendTalents";
+import type { SushiStation } from "./world-7/sushi";
+import type { JellyOperator } from "./world-7/jellyOperator";
+import type { MasterClasses } from "./masterClasses";
+
+const compassCostPaths = ["Elemental", "Fighter", "Survival", "Nomadic", "Abomination"] as const;
+
+interface ExaltedStampBonusInputs {
+    atomBonus: number;
+    pristineCharmBonus: number;
+    compassUpgradeBonus: number;
+    emperorSetBonus: number;
+    eventShopOwned: boolean;
+    paletteBonus: number;
+    exoticMarketBonus: number;
+    stampFragments: number;
+    legendTalentBonus: number;
+    sushiBonus: number;
+    jellyBonus: number;
+}
 
 export enum WeaknessType {
     Fire = 0,
@@ -247,6 +273,8 @@ export class CompassUpgrade implements EfficiencyUpgrade {
     public indexInPath: number = 0;
 
     public dustServerVarMultiplier: number = 1;
+    public firstThreeUpgradeCostMultiplier: number = 1;
+    public sharedUpgradeCostMultiplier: number = 1;
 
     constructor(
         public id: number,
@@ -304,14 +332,12 @@ export class CompassUpgrade implements EfficiencyUpgrade {
         const compassUpgrades = allUpgrades as unknown as CompassUpgrade[];
         const upgradeMetadata = args[0] as Record<string, { pathLevel: number, pathUpgrades: number[] }>;
         
+        // Capped upgrades have no actionable next-level price on the website.
         if (this.level >= this.data.maxLevel) {
             return 0;
         }
 
-
-
-        // Base dust cost from server variable
-        const baseDustCost = Math.max(this.dustServerVarMultiplier, 1);
+        const baseDustCost = Math.max(this.dustServerVarMultiplier, 6.2);
 
         // Special cost reductions for specific upgrade IDs
         let costReduction = 1;
@@ -369,22 +395,22 @@ export class CompassUpgrade implements EfficiencyUpgrade {
         // Base cost from upgrade data
         const baseCost = this.data.baseCost / 2;
 
-        // Get the path length for scaling factor calculation
-        let pathLength = 0;
-        if (this.data.upgradeType && Object.keys(upgradeMetadata).includes(this.data.upgradeType)) {
-            pathLength = upgradeMetadata[this.data.upgradeType].pathUpgrades.length;
-        }
+        // Prices use the source group, which can differ from the displayed path.
+        const costPath = upgradeMetadata[compassCostPaths[this.data.x6]];
+        const pathLength = costPath?.pathUpgrades.length ?? 0;
+        const costIndexInPath = costPath?.pathUpgrades.indexOf(this.id) ?? -1;
+        const scalingFactor = Math.max(1, Math.pow(3.69 - pathLength / 27, costIndexInPath));
 
-        // Scaling factor based on upgrade position in path
-        const scalingFactor = Math.pow(3.2 - pathLength / 60, this.indexInPath);
-
-        // Final cost calculation
-        const cost = baseDustCost * 
-            (1 / Math.max(1, costReduction)) * 
-            generalCostReduction * 
-            baseCost * 
-            scalingFactor * 
-            Math.pow(this.data.costMult, this.level);
+        // Numeric source groups do not activate the game's additive Path-upgrade surplus.
+        // Both Master Classes discounts apply to every Compass upgrade.
+        const cost = this.firstThreeUpgradeCostMultiplier *
+            this.sharedUpgradeCostMultiplier *
+            (baseDustCost *
+                generalCostReduction *
+                (1 / Math.max(1, costReduction)) *
+                baseCost *
+                scalingFactor *
+                Math.pow(this.data.costMult, this.level));
 
         return cost;
     }
@@ -536,12 +562,18 @@ export class CompassUpgrade implements EfficiencyUpgrade {
         copy.costToUnlock = this.costToUnlock;
         copy.indexInPath = this.indexInPath;
         copy.dustServerVarMultiplier = this.dustServerVarMultiplier;
+        copy.firstThreeUpgradeCostMultiplier = this.firstThreeUpgradeCostMultiplier;
+        copy.sharedUpgradeCostMultiplier = this.sharedUpgradeCostMultiplier;
         return copy;
     }
 }
 
 export class Compass extends Domain implements EfficiencyDomain {
     upgrades: CompassUpgrade[] = [];
+    exaltedStampNames: Set<string> = new Set();
+    private exaltedStampBonus: number = 0;
+    private firstThreeUpgradeCostMultiplier: number = 1;
+    private sharedUpgradeCostMultiplier: number = 1;
 
     totalCompassLevel: number = 0;
     totalDustsCollected: number = 0;
@@ -587,6 +619,8 @@ export class Compass extends Domain implements EfficiencyDomain {
     }
 
     init(_allItems: Item[], _charCount: number) {
+        this.firstThreeUpgradeCostMultiplier = 1;
+        this.sharedUpgradeCostMultiplier = 1;
         this.upgrades = CompassUpgrade.fromBase(initCompassUpgradeRepo());
         return this;
     }
@@ -596,6 +630,9 @@ export class Compass extends Domain implements EfficiencyDomain {
         const compassData = data.get("Compass") as any[][];
         const optionList = data.get("OptLacc") as number[];
         const serverVars = data.get("servervars") as Record<string, any>;
+        compass.exaltedStampNames.clear();
+        compass.firstThreeUpgradeCostMultiplier = 1;
+        compass.sharedUpgradeCostMultiplier = 1;
 
         // Exit early for older accounts that don't have a compass data array.
         if (!compassData || compassData.length == 0) {
@@ -607,7 +644,15 @@ export class Compass extends Domain implements EfficiencyDomain {
 
         const dustCostServerVar = serverVars["DustCost"] || 1;
 
-        const [upgradesLevels, abominationsRaw, portalsRaw, medallionsRaw,] = compassData;
+        const [upgradesLevels, abominationsRaw, portalsRaw, medallionsRaw, exaltedStamps = []] = compassData;
+        // Saved exalted stamp groups use _, a and b; item names use A, B and C.
+        for (const stampIdentifier of exaltedStamps as string[]) {
+            const stampTab = "_ab".indexOf(stampIdentifier[0]);
+            if (stampTab >= 0) {
+                const stampNumber = Number(stampIdentifier.slice(1)) + 1;
+                compass.exaltedStampNames.add(`Stamp${"ABC"[stampTab]}${stampNumber}`);
+            }
+        }
 
         compass.totalCompassLevel = upgradesLevels?.reduce((sum, level) => sum + level, 0);
     
@@ -618,9 +663,6 @@ export class Compass extends Domain implements EfficiencyDomain {
         compass.availableDust[DustType.Cooldust] = optionList[360];
         compass.availableDust[DustType.Novadust] = optionList[361];
         compass.totalDustsCollected = optionList[362];
-
-        // Game state
-        compass.completedMasteries = optionList[232] || 0; // Number of completed masteries
 
         // Store raw compass data for calculations
         compass.medallionsCollected = medallionsRaw || [];
@@ -665,6 +707,8 @@ export class Compass extends Domain implements EfficiencyDomain {
             }
 
             upgrade.dustServerVarMultiplier = dustCostServerVar;
+            upgrade.firstThreeUpgradeCostMultiplier = compass.firstThreeUpgradeCostMultiplier;
+            upgrade.sharedUpgradeCostMultiplier = compass.sharedUpgradeCostMultiplier;
         });
 
         // Before we can calculate the costs / bonus etc. for upgrades we need to 
@@ -792,8 +836,24 @@ export class Compass extends Domain implements EfficiencyDomain {
 
         // Then recalculate all bonuses and costs
         compassUpgrades.forEach(upgrade => {
+            // Replace account discounts instead of compounding them during simulation.
+            upgrade.firstThreeUpgradeCostMultiplier = this.firstThreeUpgradeCostMultiplier;
+            upgrade.sharedUpgradeCostMultiplier = this.sharedUpgradeCostMultiplier;
             upgrade.bonus = upgrade.getBonus(compassUpgrades);
             upgrade.cost = upgrade.getCost(upgrades, this.upgradeMetadata);
+        });
+    }
+
+    updateUpgradeCosts(firstThreeMultiplier: number, sharedMultiplier: number): void {
+        this.firstThreeUpgradeCostMultiplier = firstThreeMultiplier;
+        this.sharedUpgradeCostMultiplier = sharedMultiplier;
+        this.recalculateUpgrades(this.upgrades);
+
+        this.upgrades.forEach(upgrade => {
+            upgrade.costToMax = upgrade.data.maxLevel >= 999999
+                ? 0
+                : upgrade.getCostToMax(this.upgrades, this.upgradeMetadata);
+            upgrade.costToUnlock = upgrade.getCostToUnlock(this.upgrades, this.upgradeMetadata);
         });
     }
 
@@ -867,7 +927,7 @@ export class Compass extends Domain implements EfficiencyDomain {
         // Step 3: ETC bonus multiplier - specifically for ETC bonus 86 "Tempest Damage"
         let etcBonusMultiplier = 1;
         if (includeEquipment && this.bestWindWalker.gear?.equipment) {
-            etcBonusMultiplier += this.bestWindWalker.getEquipmentBonus(EquipmentBonus.TempestDamage);
+            etcBonusMultiplier += this.bestWindWalker.gear.getBonus(EquipmentBonus.TempestDamage);
         }
         damage *= etcBonusMultiplier;
 
@@ -935,6 +995,8 @@ export class Compass extends Domain implements EfficiencyDomain {
         // Callers pass upgrades after applying any simulated level changes and recalculating bonuses/costs.
         tempCompass.upgrades = upgrades;
         tempCompass.upgradeMetadata = this.upgradeMetadata;
+        tempCompass.firstThreeUpgradeCostMultiplier = this.firstThreeUpgradeCostMultiplier;
+        tempCompass.sharedUpgradeCostMultiplier = this.sharedUpgradeCostMultiplier;
         
         // Copy resources
         tempCompass.availableDust = availableDust;
@@ -1130,7 +1192,7 @@ export class Compass extends Domain implements EfficiencyDomain {
         // Step 4: ETC bonus 87 multiplier (1 + EtcBonuses(87) / 100)
         let etcBonus87 = 0;
         if (this.bestWindWalker.gear?.equipment) {
-            etcBonus87 = this.bestWindWalker.getEquipmentBonus(EquipmentBonus.TempestDefence);
+            etcBonus87 = this.bestWindWalker.gear.getBonus(EquipmentBonus.TempestDefence);
         }
         defense *= (1 + etcBonus87 / 100);
 
@@ -1200,6 +1262,26 @@ export class Compass extends Domain implements EfficiencyDomain {
         });
     }
 
+    prepareExaltedStampBonus(inputs: ExaltedStampBonusInputs): void {
+        // Exalted stamps start with a 100% bonus; these account bonuses increase that bonus.
+        this.exaltedStampBonus = 100
+            + inputs.atomBonus
+            + inputs.pristineCharmBonus
+            + inputs.compassUpgradeBonus
+            + inputs.emperorSetBonus
+            + 20 * Number(inputs.eventShopOwned)
+            + inputs.paletteBonus
+            + inputs.exoticMarketBonus
+            + Math.round(inputs.stampFragments)
+            + inputs.legendTalentBonus
+            + inputs.sushiBonus
+            + inputs.jellyBonus / 100;
+    }
+
+    getExaltedStampBonus(): number {
+        return this.exaltedStampBonus;
+    }
+
     /**
      * Get the bonus value for a specific compass upgrade ID
      */
@@ -1260,6 +1342,45 @@ export class Compass extends Domain implements EfficiencyDomain {
     }
 }
 
+export const updateCompassUpgradeCosts = (accountData: Map<string, unknown>): void => {
+    const compass = accountData.get("compass") as Compass;
+    const masterClasses = accountData.get("masterClasses") as MasterClasses;
+
+    compass.updateUpgradeCosts(
+        masterClasses.getFirstThreeUpgradeCostMultiplier(),
+        masterClasses.getUpgradeCostMultiplier(),
+    );
+};
+
+export const updateCompassExaltedStampBonus = (accountData: Map<string, any>): void => {
+    const compass = accountData.get("compass") as Compass;
+    const collider = accountData.get("collider") as AtomCollider;
+    const sneaking = accountData.get("sneaking") as Sneaking;
+    const equipmentSets = accountData.get("equipmentSets") as EquipmentSets;
+    const eventShop = accountData.get("eventShop") as EventShop;
+    const gaming = accountData.get("gaming") as Gaming;
+    const farming = accountData.get("farming") as Farming;
+    const spelunking = accountData.get("spelunking") as Spelunking;
+    const legendTalents = accountData.get("legendTalents") as LegendTalents;
+    const sushi = accountData.get("sushi") as SushiStation;
+    const jelly = accountData.get("jellyOperator") as JellyOperator;
+    const pristineCharm = sneaking.pristineCharms.find(charm => charm.data.itemId === 20)!;
+
+    compass.prepareExaltedStampBonus({
+        atomBonus: collider.atoms[12].getBonus(),
+        pristineCharmBonus: pristineCharm.unlocked ? pristineCharm.data.x1 : 0,
+        compassUpgradeBonus: compass.getUpgradeBonus(76),
+        emperorSetBonus: equipmentSets.getSetBonus("EMPEROR_SET", true),
+        eventShopOwned: eventShop.isBonusOwned(18),
+        paletteBonus: gaming.getPaletteBonus(23),
+        exoticMarketBonus: farming.getExoticMarketBonusValue(49),
+        stampFragments: spelunking.exaltedStampFragments,
+        legendTalentBonus: legendTalents.getBonusFromIndex(36),
+        sushiBonus: sushi.getBonusFromIndex(17),
+        jellyBonus: jelly.getObstructionBonus(50),
+    });
+};
+
 /**
  * Update function for compass efficiency calculations
  * This should be called in post-processing after players data is available
@@ -1272,61 +1393,53 @@ export const updateCompassDamageEfficiency = (accountData: Map<string, any>) => 
     const emperor = accountData.get("emperor") as Emperor;
     const lab = accountData.get("lab") as Lab;
 
-    if (compass && players) {
-        try {
+    // Keep a prepared count so upgrade simulations use the same mastery progression.
+    compass.completedMasteries = sneaking.completedMasteries;
 
-            // Find Wind Walker player
-            const windWalker = players.slice().sort((player1, player2) => player1.level > player2.level ? -1 : 1).find((player: any) => player.classId === 29);
-            if (windWalker) {
-                compass.bestWindWalker = windWalker;
+    try {
 
-                // Set ETC bonuses from Wind Walker equipment
-                compass.etcBonus85 = windWalker.getEquipmentBonus(EquipmentBonus.DustMulti);
-                compass.etcBonus79 = windWalker.getEquipmentBonus(EquipmentBonus.ExtraDust);
-            }
+        // Find Wind Walker player
+        const windWalker = players.slice().sort((player1, player2) => player1.level > player2.level ? -1 : 1).find((player: any) => player.classId === 29);
+        if (windWalker) {
+            compass.bestWindWalker = windWalker;
 
-            // Set pristine bonus 19 from sneaking
-            compass.pristineBonus19 = 0;
-            if (sneaking?.pristineCharms) {
-                const charm19 = sneaking.pristineCharms.find((charm: any) => charm.index === 19);
-                if (charm19?.unlocked) {
-                    compass.pristineBonus19 = charm19.getBonus();
-                }
-            }
-
-
-            // Set talent 421 from Wind Walker
-            compass.talent421 = 0;
-            if (windWalker?.talents) {
-                const talent = windWalker.talents.find((t: any) => t.skillIndex === 421);
-                compass.talent421 = talent?.getBonus() || 0;
-            }
-
-            // Set arcade bonus 47
-            compass.arcadeBonus47 = 0;
-            if (arcade?.bonuses && arcade.bonuses.length > 47) {
-                compass.arcadeBonus47 = arcade.bonuses[47]?.getBonus() || 0;
-            }
-
-            // Set emperor bonus 4 from emperor domain (Windwalker Extra Dust)
-            compass.emperorBonus4 = 0;
-            if (emperor) {
-                const emperorDustBonus = emperor.emperorBonuses.find(bonus => bonus.index == 4)?.getBonus() ?? 0;
-                compass.emperorBonus4 = emperorDustBonus;
-            }
-
-            // Set mainframe bonus 122 from lab domain (Jewel 22)
-            compass.mainframeBonus122 = 0;
-            if (lab?.jewels && lab.jewels[22]) {
-                compass.mainframeBonus122 = lab.jewels[22].getBonus();
-            }
-
-            compass.calculateAllEfficiencies();
-        } catch (error) {
-            console.error("Failed to calculate compass efficiency:", error);
+            // Set ETC bonuses from Wind Walker equipment
+            compass.etcBonus85 = windWalker.gear.getBonus(EquipmentBonus.DustMulti);
+            compass.etcBonus79 = windWalker.gear.getBonus(EquipmentBonus.ExtraDust);
         }
-    } else {
-        console.error("Failed to calculate compass efficiency: compass or players is undefined");
+
+        // Set pristine bonus 19 from sneaking
+        compass.pristineBonus19 = 0;
+        const charm19 = sneaking.pristineCharms.find((charm: any) => charm.index === 19);
+        if (charm19?.unlocked) {
+            compass.pristineBonus19 = charm19.getBonus();
+        }
+
+        // Set talent 421 from Wind Walker
+        compass.talent421 = 0;
+        if (windWalker?.talents) {
+            const talent = windWalker.talents.find((t: any) => t.skillIndex === 421);
+            compass.talent421 = talent?.getBonus() || 0;
+        }
+
+        // Set arcade bonus 47
+        compass.arcadeBonus47 = 0;
+        if (arcade.bonuses.length > 47) {
+            compass.arcadeBonus47 = arcade.bonuses[47]?.getBonus() || 0;
+        }
+
+        // Set emperor bonus 4 from emperor domain (Windwalker Extra Dust)
+        compass.emperorBonus4 = emperor.getEffectiveBonus(4);
+
+        // Set mainframe bonus 122 from lab domain (Jewel 22)
+        compass.mainframeBonus122 = 0;
+        if (lab.jewels[22]) {
+            compass.mainframeBonus122 = lab.jewels[22].getBonus();
+        }
+
+        compass.calculateAllEfficiencies();
+    } catch (error) {
+        console.error("Failed to calculate compass efficiency:", error);
     }
 
     return compass;

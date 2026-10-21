@@ -63,6 +63,8 @@ export class ArcadeBonus {
 
         if (level === 101) {
             multiplier *= 2;
+        } else if (level === 102) {
+            multiplier *= 6;
         }
 
         // The game requires an active bonus exactly equal to 1; evolved 1.5 is deliberately excluded.

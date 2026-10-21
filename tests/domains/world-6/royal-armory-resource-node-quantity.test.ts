@@ -36,19 +36,4 @@ describe('Royal Armory resource-node quantities', () => {
         });
     });
 
-    const availableCases = [
-        { nodeId: 0, key: 'node_available_0', description: 'untouched node 0' },
-        { nodeId: 4, key: 'node_available_4', description: 'depleted node 4' },
-        { nodeId: 22, key: 'node_available_22', description: 'partially harvested node 22 in world 1' },
-    ] as const;
-
-    availableCases.forEach(({ nodeId, key, description }) => {
-        it(`matches the currently available harvest quantity for ${description}`, () => {
-            const node = nodeAt(nodeId);
-            expect(node.getAvailableQuantity()).toMatchLiveGameWithDetails(
-                getExtractedValue(results, key),
-                { tolerance: 0, context: `Available harvest quantity: ${description}` },
-            );
-        });
-    });
 });

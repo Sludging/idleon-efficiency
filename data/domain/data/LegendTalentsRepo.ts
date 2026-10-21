@@ -289,10 +289,10 @@ export const initLegendTalentsRepo = () => {
         new LegendTalentBase(35, <LegendTalentModel>{
                 "name": "Obsolete No More",
                 "maxLevel": 1,
-                "bonusValue": 1,
+                "bonusValue": 25,
                 "x3": "filler",
-                "bonus": "All them big words above will become true",
-                "description": "The Metal Detector bonus from Equinox Valley no longer resets when you find a new best nugget"
+                "bonus": "Perma Metal Detector, and }x Equinox Bar Fill Rate",
+                "description": "The Metal Detector bonus from Equinox Valley no longer resets when you find a new best nugget. Also, }x Equinox Bar Fill Rate"
             }),
         new LegendTalentBase(36, <LegendTalentModel>{
                 "name": "Wowa Woowa",
@@ -328,19 +328,19 @@ export const initLegendTalentsRepo = () => {
             }),
         new LegendTalentBase(40, <LegendTalentModel>{
                 "name": "filler",
-                "maxLevel": 1,
-                "bonusValue": -1,
+                "maxLevel": 6,
+                "bonusValue": 50,
                 "x3": "filler",
-                "bonus": "filler",
-                "description": "I have not yet considered this talent..."
+                "bonus": "}x Minehead Currency and DMG",
+                "description": "}x Minehead Currency Gain and Damage. Also, opponent gets -1 Depth Charge the 1st, 3rd, and 5th time you upgrade this!"
             }),
         new LegendTalentBase(41, <LegendTalentModel>{
                 "name": "filler",
-                "maxLevel": 1,
-                "bonusValue": -1,
+                "maxLevel": 6,
+                "bonusValue": 50,
                 "x3": "filler",
-                "bonus": "filler",
-                "description": "I have not yet considered this talent..."
+                "bonus": "}x Jelly Operator DMG",
+                "description": "}x Jelly Operator Damage. Also, you get +1 Slot Unlock to use the 1st, 3rd, and 5th time you upgrade this!"
             }),
         new LegendTalentBase(42, <LegendTalentModel>{
                 "name": "filler",

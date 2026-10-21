@@ -1,0 +1,42 @@
+{
+  "description": "Compare Menagerie mission, rank, unlock, bonus, and resource states with matching offline v1.23 outputs for the retained account save",
+  "target": "Menagerie account state",
+  "extractions": [
+    {
+      "label": "account_progression",
+      "expression": "[idleon.engine.getGameAttribute(\"Menagerie\")[0][0], idleon.engine.getGameAttribute(\"Menagerie\")[0][1], idleon.engine.getGameAttribute(\"Menagerie\")[0][2], idleon.callFunction(\"MenagerieStuff\", \"ShellEXPreq\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"LumiGainRate\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"UpgUnlocked\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"UpgUnlocked\", 1, 0), idleon.callFunction(\"MenagerieStuff\", \"UpgUnlocked\", 2, 0)]",
+      "description": "Saved Lumi, Shells, and rank, threshold, calculated hourly Lumi, and available missions/unlocks/bonuses"
+    },
+    {
+      "label": "mission_states",
+      "expression": "Array.from({ length: 33 }, (_, i) => [i, idleon.engine.getGameAttribute(\"Menagerie\")[1][i], idleon.callFunction(\"MenagerieStuff\", \"Cost\", 0, i), idleon.callFunction(\"MenagerieStuff\", \"CanClaim\", 0, i)])",
+      "description": "Saved claims, current threshold, and readiness for every Menagerie mission"
+    },
+    {
+      "label": "unlock_states",
+      "expression": "Array.from({ length: 25 }, (_, i) => [i, idleon.callFunction(\"MenagerieStuff\", \"UnlockOwned\", i, 0), idleon.callFunction(\"MenagerieStuff\", \"Cost\", 1, i), idleon.callFunction(\"MenagerieStuff\", \"CanClaim\", 1, i)])",
+      "description": "Ownership, next Lumi cost, and affordability for every Menagerie unlock"
+    },
+    {
+      "label": "bonus_states",
+      "expression": "Array.from({ length: 25 }, (_, i) => [i, idleon.engine.getGameAttribute(\"Menagerie\")[3][i], idleon.callFunction(\"MenagerieStuff\", \"BoostQTY\", i, 0), idleon.callFunction(\"MenagerieStuff\", \"Cost\", 2, i), idleon.callFunction(\"MenagerieStuff\", \"CanClaim\", 2, i)])",
+      "description": "Current levels and effects, next costs, and affordability for all repeatable Menagerie bonuses"
+    },
+    {
+      "label": "usable_resources",
+      "expression": "[idleon.callFunction(\"MenagerieStuff\", \"BlackStarsOwned\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"OrganicLabelOwned\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"MineheadDoublersLEFT\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"SushiDoublersLEFT\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"JellyOpDoublersLEFT\", 0, 0)]",
+      "description": "Currently usable Black Stars, Organic Labels, and remaining upgrade doubler resources"
+    }
+    ,
+    {
+      "label": "extra_bundle_flags",
+      "expression": "[idleon.callFunction(\"Thingies\", \"Have_ban_l\", 0, 0), idleon.callFunction(\"Thingies\", \"Have_ban_m\", 0, 0)]",
+      "description": "Native Menagerie resource bundle factors"
+    },
+    {
+      "label": "side_jellyfish",
+      "expression": "({ unlocks: Array.from({ length: 6 }, (_, i) => idleon.callFunction(\"MenagerieStuff\", \"SideJellyUnlocked\", i, 0)), purple: [idleon.engine.getGameAttribute(\"Menagerie\")[0][1], idleon.engine.getGameAttribute(\"Menagerie\")[0][3], idleon.engine.getGameAttribute(\"Menagerie\")[0][4], idleon.callFunction(\"MenagerieStuff\", \"PinkJellyCosts\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"PinkJellyCosts\", 1, 0), idleon.callFunction(\"MenagerieStuff\", \"PinkJellyBonus\", 0, 0)], blue: [idleon.engine.getGameAttribute(\"Menagerie\")[0][5]], red: [idleon.engine.getGameAttribute(\"Menagerie\")[0][6], idleon.callFunction(\"MenagerieStuff\", \"RedJellyReadingMulti\", 0, 0), idleon.engine.getGameAttribute(\"Menagerie\")[4]], silver: [idleon.engine.getGameAttribute(\"Menagerie\")[0][9], idleon.engine.getGameAttribute(\"Menagerie\")[0][10], idleon.callFunction(\"MenagerieStuff\", \"SilverJellyCosts\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"SilverJellyCosts\", 1, 0), idleon.callFunction(\"MenagerieStuff\", \"ObolMISCmulti\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"ObolAutoTrashRate\", 0, 0)], yellow: [idleon.engine.getGameAttribute(\"Menagerie\")[0].slice(11, 15), idleon.engine.getGameAttribute(\"Menagerie\")[0][15], idleon.callFunction(\"MenagerieStuff\", \"ConstBuildREQ\", 0, 0), Array.from({ length: 4 }, (_, i) => idleon.callFunction(\"MenagerieStuff\", \"ConstBuildBONUSES\", i, 0))], green: [idleon.engine.getGameAttribute(\"Spelunk\")[17][28]] })",
+      "description": "Matching-save native unlocks, saved inputs, and calculated six-panel outputs without invoking any mutating Menagerie action"
+    }
+  ]
+}

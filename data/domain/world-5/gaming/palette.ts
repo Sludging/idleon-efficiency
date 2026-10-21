@@ -35,7 +35,7 @@ export class Superbit {
     }
 
     static fromBase(records: GamingSuperbitBase[]): Superbit[] {
-        return records.filter(record => record.data.superbitId <= 68).map(record => new Superbit(record.data));
+        return records.filter(record => record.data.superbitId <= 69).map(record => new Superbit(record.data));
     }
 
     parse(data: Map<string, any>): void {
@@ -225,6 +225,7 @@ export class PaletteProgress {
     stageLuckMultipliers: PaletteStageLuck[] = [];
     loreBonusUnlocked = false;
     duperBitsUnlocked = false;
+    blackStarsAvailable = 0;
 
     parse(data: Map<string, any>): void {
         const gaming = data.get("gaming") as Gaming;
@@ -243,6 +244,9 @@ export class PaletteProgress {
     updateBonuses(data: Map<string, any>): void {
         const gaming = data.get("gaming") as Gaming;
         const legendTalents = data.get("legendTalents") as LegendTalents;
+        const menagerie = data.get("menagerie") as { getResourceBalances(): { blackStarsOwned: number } };
+
+        this.blackStarsAvailable = menagerie.getResourceBalances().blackStarsOwned;
 
         // The total-level bonus is an aggregate, not another color record.
         this.totalLevels = gaming.paletteColors.reduce((total, color) => total + color.level, 0);

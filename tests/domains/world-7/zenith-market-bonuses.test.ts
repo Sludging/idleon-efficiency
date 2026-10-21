@@ -18,33 +18,10 @@ describe('ZenithMarket Bonus Calculations', () => {
   zenithMarket = gameData.get("zenithMarket") as ZenithMarket;
  });
 
- describe('Key Market Bonuses (used in cross-domain calculations)', () => {
-  it('validates bonus 0 (True Zen) - used in zenith statue multiplier', () => {
-   const liveBonus = getExtractedValue(extractionResults, 'zenith_market_0_bonus');
-   const domainBonus = zenithMarket.getBonusForId(0);
-
-   expect(domainBonus).toMatchLiveGame(liveBonus, 0);
-  });
-
-  it('validates bonus 2 (Lamp Boost) - used in hole domain Lamp calculation', () => {
-   const liveBonus = getExtractedValue(extractionResults, 'zenith_market_2_bonus');
-   const domainBonus = zenithMarket.getBonusForId(2);
-
-   expect(domainBonus).toMatchLiveGame(liveBonus, 0);
-  });
-
-  it('validates bonus 5 (Super Dupers) - used in legend talent superTalentBonusLevels', () => {
-   const liveBonus = getExtractedValue(extractionResults, 'zenith_market_5_bonus');
-   const domainBonus = zenithMarket.getBonusForId(5);
-
-   expect(domainBonus).toMatchLiveGame(liveBonus, 0);
-  });
- });
-
- describe('Sample Bonus', () => {
-  it('validates bonus 9 (Classy Gogo) - upper index sample', () => {
-   const liveBonus = getExtractedValue(extractionResults, 'zenith_market_9_bonus');
-   const domainBonus = zenithMarket.getBonusForId(9);
+ describe('Market bonuses', () => {
+  it.each(Array.from({ length: 11 }, (_, index) => index))('validates upgrade %i current bonus', (index) => {
+   const liveBonus = getExtractedValue(extractionResults, `zenith_market_${index}_bonus`);
+   const domainBonus = zenithMarket.getBonusForId(index);
 
    expect(domainBonus).toMatchLiveGame(liveBonus, 0);
   });

@@ -1,0 +1,471 @@
+
+// idleon1.22.txt:96235-96445
+96235:                         (x._customBlock_RunCodeOfTypeXforThingY = function (e, t) {
+96236:                             if ("BuyPrice" == e) return 4 * c.asNumber(a.engine.getGameAttribute("ItemDefinitionsGET").h[t].h.sellPrice) * (1 - q._customBlock_GetBribeBonus("2") / 100);
+96237:                             if ("JusticeAccept" == e) {
+96238:                                 if (
+96239:                                     -1 !=
+96240:                                     (
+96241:                                         "" +
+96242:                                         (
+96243:                                             "" +
+96244:                                             h.string(
+96245:                                                 a.engine.getGameAttribute("CustomLists").h.HolesInfo[62][0 | c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ea)._GenINFO[141])]
+96246:                                             )
+96247:                                         ).split("|")[2]
+96248:                                     ).indexOf(t)
+96249:                                 ) {
+96250:                                     e = a.engine.getGameAttribute("DNSM").h.JusticeAcceptzDN = 0;
+96251:                                     for (
+96252:                                         var i = (
+96253:                                             "" +
+96254:                                             (
+96255:                                                 "" +
+96256:                                                 h.string(
+96257:                                                     a.engine.getGameAttribute("CustomLists").h.HolesInfo[62][
+96258:                                                         0 | c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ea)._GenINFO[141])
+96259:                                                     ]
+96260:                                                 )
+96261:                                             ).split("|")[2]
+96262:                                         ).split(".").length;
+96263:                                         e < i;
+96264:                                     ) {
+96265:                                         var s = e++;
+96266:                                         if (
+96267:                                             -1 !=
+96268:                                             (
+96269:                                                 "" +
+96270:                                                 (
+96271:                                                     "" +
+96272:                                                     (
+96273:                                                         "" +
+96274:                                                         h.string(
+96275:                                                             a.engine.getGameAttribute("CustomLists").h.HolesInfo[62][
+96276:                                                                 0 | c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ea)._GenINFO[141])
+96277:                                                             ]
+96278:                                                         )
+96279:                                                     ).split("|")[2]
+96280:                                                 ).split(".")[s]
+96281:                                             ).indexOf(t)
+96282:                                         ) {
+96283:                                             var r = a.engine.getGameAttribute("DNSM");
+96284:                                             if (
+96285:                                                 ((s = c.asNumber(
+96286:                                                     y.replace(
+96287:                                                         "" +
+96288:                                                             (
+96289:                                                                 "" +
+96290:                                                                 (
+96291:                                                                     "" +
+96292:                                                                     h.string(
+96293:                                                                         a.engine.getGameAttribute("CustomLists").h.HolesInfo[62][
+96294:                                                                             0 | c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ea)._GenINFO[141])
+96295:                                                                         ]
+96296:                                                                     )
+96297:                                                                 ).split("|")[2]
+96298:                                                             ).split(".")[s],
+96299:                                                         t,
+96300:                                                         ""
+96301:                                                     )
+96302:                                                 )),
+96303:                                                 (r.h.JusticeAcceptzDN = s),
+96304:                                                 -1 !=
+96305:                                                     (
+96306:                                                         "" +
+96307:                                                         (
+96308:                                                             "" +
+96309:                                                             h.string(
+96310:                                                                 a.engine.getGameAttribute("CustomLists").h.HolesInfo[62][
+96311:                                                                     0 | c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ea)._GenINFO[141])
+96312:                                                                 ]
+96313:                                                             )
+96314:                                                         ).split("|")[4]
+96315:                                                     ).indexOf(t))
+96316:                                             ) {
+96317:                                                 var _ = a.engine.getGameAttribute("DNSM");
+96318:                                                 ((s = Math.round(
+96319:                                                     c.asNumber(a.engine.getGameAttribute("DNSM").h.JusticeAcceptzDN) *
+96320:                                                         Math.ceil((c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ea)._GenINFO[131]) + 1) / 5)
+96321:                                                 )),
+96322:                                                     (_.h.JusticeAcceptzDN = s));
+96323:                                             }
+96324:                                             "THE_HARBINGER" == "" + x._customBlock_RunCodeOfType("Justice_EnemyName") &&
+96325:                                                 "c" == t &&
+96326:                                                 ((r = a.engine.getGameAttribute("DNSM")),
+96327:                                                 (s = Math.round(
+96328:                                                     c.asNumber(a.engine.getGameAttribute("DNSM").h.JusticeAcceptzDN) *
+96329:                                                         (1 + 0.25 * Math.floor(c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ea)._GenINFO[131]) / 13))
+96330:                                                 )),
+96331:                                                 (r.h.JusticeAcceptzDN = s));
+96332:                                         }
+96333:                                     }
+96334:                                     return a.engine.getGameAttribute("DNSM").h.JusticeAcceptzDN;
+96335:                                 }
+96336:                                 return 0;
+96337:                             }
+96338:                             if ("JusticeReject" == e) {
+96339:                                 if (
+96340:                                     -1 !=
+96341:                                     (
+96342:                                         "" +
+96343:                                         (
+96344:                                             "" +
+96345:                                             h.string(
+96346:                                                 a.engine.getGameAttribute("CustomLists").h.HolesInfo[62][0 | c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ea)._GenINFO[141])]
+96347:                                             )
+96348:                                         ).split("|")[3]
+96349:                                     ).indexOf(t)
+96350:                                 ) {
+96351:                                     for (
+96352:                                         e = a.engine.getGameAttribute("DNSM").h.JusticeAcceptzDN = 0,
+96353:                                             i = (
+96354:                                                 "" +
+96355:                                                 (
+96356:                                                     "" +
+96357:                                                     h.string(
+96358:                                                         a.engine.getGameAttribute("CustomLists").h.HolesInfo[62][
+96359:                                                             0 | c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ea)._GenINFO[141])
+96360:                                                         ]
+96361:                                                     )
+96362:                                                 ).split("|")[3]
+96363:                                             ).split(".").length;
+96364:                                         e < i;
+96365:                                     )
+96366:                                         ((s = e++),
+96367:                                             -1 !=
+96368:                                                 (
+96369:                                                     "" +
+96370:                                                     (
+96371:                                                         "" +
+96372:                                                         (
+96373:                                                             "" +
+96374:                                                             h.string(
+96375:                                                                 a.engine.getGameAttribute("CustomLists").h.HolesInfo[62][
+96376:                                                                     0 | c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ea)._GenINFO[141])
+96377:                                                                 ]
+96378:                                                             )
+96379:                                                         ).split("|")[3]
+96380:                                                     ).split(".")[s]
+96381:                                                 ).indexOf(t) &&
+96382:                                                 ((r = a.engine.getGameAttribute("DNSM")),
+96383:                                                 (s = c.asNumber(
+96384:                                                     y.replace(
+96385:                                                         "" +
+96386:                                                             (
+96387:                                                                 "" +
+96388:                                                                 (
+96389:                                                                     "" +
+96390:                                                                     h.string(
+96391:                                                                         a.engine.getGameAttribute("CustomLists").h.HolesInfo[62][
+96392:                                                                             0 | c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ea)._GenINFO[141])
+96393:                                                                         ]
+96394:                                                                     )
+96395:                                                                 ).split("|")[3]
+96396:                                                             ).split(".")[s],
+96397:                                                         t,
+96398:                                                         ""
+96399:                                                     )
+96400:                                                 )),
+96401:                                                 (r.h.JusticeAcceptzDN = s),
+96402:                                                 -1 !=
+96403:                                                     (
+96404:                                                         "" +
+96405:                                                         (
+96406:                                                             "" +
+96407:                                                             h.string(
+96408:                                                                 a.engine.getGameAttribute("CustomLists").h.HolesInfo[62][
+96409:                                                                     0 | c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ea)._GenINFO[141])
+96410:                                                                 ]
+96411:                                                             )
+96412:                                                         ).split("|")[4]
+96413:                                                     ).indexOf(t) &&
+96414:                                                     ((_ = a.engine.getGameAttribute("DNSM")),
+96415:                                                     (s = Math.round(
+96416:                                                         c.asNumber(a.engine.getGameAttribute("DNSM").h.JusticeAcceptzDN) *
+96417:                                                             Math.ceil((c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ea)._GenINFO[131]) + 1) / 5)
+96418:                                                     )),
+96419:                                                     (_.h.JusticeAcceptzDN = s))));
+96420:                                     return a.engine.getGameAttribute("DNSM").h.JusticeAcceptzDN;
+96421:                                 }
+96422:                                 return 0;
+96423:                             }
+96424:                             if ("CardLv" == e) {
+96425:                                 for (
+96426:                                     a.engine.getGameAttribute("DNSM").h.cardLvCalco = 0,
+96427:                                         0 < c.asNumber(a.engine.getGameAttribute("Cards")[0].h[t]) && (a.engine.getGameAttribute("DNSM").h.cardLvCalco = 1),
+96428:                                         e = 0,
+96429:                                         i = Math.round(4 + (m._customBlock_RiftStuff("5starCards", 0) + m._customBlock_Spelunk("6starCards", 0, 0)));
+96430:                                     e < i;
+96431:                                 )
+96432:                                     ((s = e++),
+96433:                                         "Boss3B" == t
+96434:                                             ? c.asNumber(a.engine.getGameAttribute("Cards")[0].h[t]) > 1.5 * Math.pow(s + 1 + Math.floor(s / 3), 2) && (a.engine.getGameAttribute("DNSM").h.cardLvCalco = s + 2)
+96435:                                             : 46 > n.__cast(a.engine.getGameAttribute("PixelHelperActor")[6].behaviors.getBehavior("ActorEvents_312"), hb)._GenINFO.length
+96436:                                               ? (a.engine.getGameAttribute("DNSM").h.cardLvCalco = 0)
+96437:                                               : c.asNumber(a.engine.getGameAttribute("Cards")[0].h[t]) >
+96438:                                                     c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[6].behaviors.getBehavior("ActorEvents_312"), hb)._GenINFO[45].h[t][2]) *
+96439:                                                         Math.pow(s + 1 + (Math.floor(s / 3) + (16 * Math.floor(s / 4) + 100 * Math.floor(s / 5))), 2) && (a.engine.getGameAttribute("DNSM").h.cardLvCalco = s + 2));
+96440:                                 return D.contains(("" + h.string(a.engine.getGameAttribute("OptionsListAccount")[603])).split(","), t) && 7 > c.asNumber(a.engine.getGameAttribute("DNSM").h.cardLvCalco)
+96441:                                     ? 7
+96442:                                     : D.contains(("" + h.string(a.engine.getGameAttribute("OptionsListAccount")[155])).split(","), t) && 6 > c.asNumber(a.engine.getGameAttribute("DNSM").h.cardLvCalco)
+96443:                                       ? 6
+96444:                                       : a.engine.getGameAttribute("DNSM").h.cardLvCalco;
+96445:                             }
+
+// idleon1.22.txt:96502-96516
+96502:                             if ("CardsTillNextLV" == e)
+96503:                                 return (
+96504:                                     (r = a.engine.getGameAttribute("DNSM")),
+96505:                                     (s =
+96506:                                         c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[6].behaviors.getBehavior("ActorEvents_312"), hb)._GenINFO[45].h[t][2]) *
+96507:                                             Math.pow(
+96508:                                                 x._customBlock_RunCodeOfTypeXforThingY("CardLv", t) +
+96509:                                                     (Math.floor(x._customBlock_RunCodeOfTypeXforThingY("CardLv", t) / 4) +
+96510:                                                         (16 * Math.floor(x._customBlock_RunCodeOfTypeXforThingY("CardLv", t) / 5) + 100 * Math.floor(x._customBlock_RunCodeOfTypeXforThingY("CardLv", t) / 6))),
+96511:                                                 2
+96512:                                             ) -
+96513:                                         c.asNumber(a.engine.getGameAttribute("Cards")[0].h[t])),
+96514:                                     (r.h.cardLvCalco2 = s),
+96515:                                     1e6 > c.asNumber(a.engine.getGameAttribute("DNSM").h.cardLvCalco2) ? Math.ceil(c.asNumber(a.engine.getGameAttribute("DNSM").h.cardLvCalco2)) : a.engine.getGameAttribute("DNSM").h.cardLvCalco2
+96516:                                 );
+
+// idleon1.22.txt:104533-104573
+104533:                                         if (
+104534:                                             -4 == e &&
+104535:                                             ((t = a.engine.getGameAttribute("DNSM")),
+104536:                                             (i = new l()),
+104537:                                             (t.h.CardBonusS = i),
+104538:                                             (i = []),
+104539:                                             ((t = a.engine.getGameAttribute("DNSM")).h.CardBonusSdl = i),
+104540:                                             null != a.engine.getGameAttribute("Cards")[2] && null != n.__cast(a.engine.getGameAttribute("PixelHelperActor")[6].behaviors.getBehavior("ActorEvents_312"), hb)._GenINFO[45])
+104541:                                         ) {
+104542:                                             for (s = 0; 10 > s;)
+104543:                                                 ((r = s++),
+104544:                                                     "B" != a.engine.getGameAttribute("Cards")[2][r] &&
+104545:                                                         ((t = a.engine.getGameAttribute("DNSM")),
+104546:                                                         (y = n.__cast(a.engine.getGameAttribute("PixelHelperActor")[6].behaviors.getBehavior("ActorEvents_312"), hb)._GenINFO[45]),
+104547:                                                         (R = "" + h.string(a.engine.getGameAttribute("Cards")[2][r])),
+104548:                                                         (t.h.CardBonusSdl = y.h[R]),
+104549:                                                         (0 == r && 1 == q._customBlock_chipBonuses("card1")) || (7 == r && 1 == q._customBlock_chipBonuses("card2"))
+104550:                                                             ? ((t = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104551:                                                               (b = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104552:                                                               (i =
+104553:                                                                   2 *
+104554:                                                                   (1 + m._customBlock_Thingies("LegendPTS_bonus", 21, 0) / 100) *
+104555:                                                                   x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + h.string(a.engine.getGameAttribute("Cards")[2][r])) *
+104556:                                                                   c.asNumber(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[4])),
+104557:                                                               (y = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104558:                                                               (R = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104559:                                                               (A = i + c.asNumber(y.h[R])),
+104560:                                                               (t.h[b] = A))
+104561:                                                             : ((G = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104562:                                                               (A = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104563:                                                               (i =
+104564:                                                                   (1 + m._customBlock_Thingies("LegendPTS_bonus", 21, 0) / 100) *
+104565:                                                                   x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + h.string(a.engine.getGameAttribute("Cards")[2][r])) *
+104566:                                                                   c.asNumber(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[4])),
+104567:                                                               (y = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104568:                                                               (t = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104569:                                                               (b = i + c.asNumber(y.h[t])),
+104570:                                                               (G.h[A] = b))));
+104571:                                             for (
+104572:                                                 t = a.engine.getGameAttribute("DNSM"),
+104573:                                                     i = u.deepCopyMap(a.engine.getGameAttribute("DNSM").h.CardBonusS),
+
+// idleon1.22.txt:104640-104738
+104640:                                                         (t.h[R] = 0),
+104641:                                                         (t = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104642:                                                         (R = "" + h.string(a.engine.getGameAttribute("CustomMaps").h.IDforCardBonus.h[55])),
+104643:                                                         (t.h[R] = 0),
+104644:                                                         (t = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104645:                                                         (R = "" + h.string(a.engine.getGameAttribute("CustomMaps").h.IDforCardBonus.h[52])),
+104646:                                                         (t.h[R] = 0)),
+104647:                                                     0.1 < m._customBlock_RiftStuff("RiftSkillBonus,18", 2) &&
+104648:                                                         ((t = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104649:                                                         (R = "" + h.string(a.engine.getGameAttribute("CustomMaps").h.IDforCardBonus.h[97])),
+104650:                                                         (t.h[R] = 0),
+104651:                                                         (t = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104652:                                                         (R = "" + h.string(a.engine.getGameAttribute("CustomMaps").h.IDforCardBonus.h[98])),
+104653:                                                         (t.h[R] = 0),
+104654:                                                         (t = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104655:                                                         (R = "" + h.string(a.engine.getGameAttribute("CustomMaps").h.IDforCardBonus.h[99])),
+104656:                                                         (t.h[R] = 0)),
+104657:                                                     0.1 < m._customBlock_Summoning("VaultUpgBonus", 44, 0) &&
+104658:                                                         ((t = a.engine.getGameAttribute("DNSM").h.CardBonusS), (R = "" + h.string(a.engine.getGameAttribute("CustomMaps").h.IDforCardBonus.h[12])), (t.h[R] = 0)),
+104659:                                                     _ = n.__cast(a.engine.getGameAttribute("PixelHelperActor")[6].behaviors.getBehavior("ActorEvents_312"), hb)._GenINFO[45].h,
+104660:                                                     o = (_ = Object.keys(_)).length,
+104661:                                                     g = 0;
+104662:                                                 g < o;
+104663:                                             )
+104664:                                                 ((d = _[g++]),
+104665:                                                     (t = a.engine.getGameAttribute("DNSM")),
+104666:                                                     (i = n.__cast(a.engine.getGameAttribute("PixelHelperActor")[6].behaviors.getBehavior("ActorEvents_312"), hb)._GenINFO[45].h["" + d]),
+104667:                                                     (t.h.CardBonusSdl = i),
+104668:                                                     -1 != ("" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])).indexOf("Mining") && 0.1 < m._customBlock_RiftStuff("RiftSkillBonus,0", 2)
+104669:                                                         ? ((y = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104670:                                                           (R = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104671:                                                           (A = x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + d) * c.asNumber(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[4])),
+104672:                                                           (t = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104673:                                                           (b = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104674:                                                           (i = A + c.asNumber(t.h[b])),
+104675:                                                           (y.h[R] = i))
+104676:                                                         : -1 != ("" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])).indexOf("Choppin") && 0.1 < m._customBlock_RiftStuff("RiftSkillBonus,2", 2)
+104677:                                                           ? ((y = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104678:                                                             (R = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104679:                                                             (b = x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + d) * c.asNumber(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[4])),
+104680:                                                             (G = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104681:                                                             (A = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104682:                                                             (G = b + c.asNumber(G.h[A])),
+104683:                                                             (y.h[R] = G))
+104684:                                                           : -1 != ("" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])).indexOf("Fishing") && 0.1 < m._customBlock_RiftStuff("RiftSkillBonus,3", 2)
+104685:                                                             ? ((y = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104686:                                                               (t = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104687:                                                               (i = x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + d) * c.asNumber(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[4])),
+104688:                                                               (R = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104689:                                                               (b = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104690:                                                               (I = i + c.asNumber(R.h[b])),
+104691:                                                               (y.h[t] = I))
+104692:                                                             : -1 != ("" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])).indexOf("Catching") && 0.1 < m._customBlock_RiftStuff("RiftSkillBonus,5", 2)
+104693:                                                               ? ((y = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104694:                                                                 (I = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104695:                                                                 (i = x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + d) * c.asNumber(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[4])),
+104696:                                                                 (b = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104697:                                                                 (t = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104698:                                                                 (b = i + c.asNumber(b.h[t])),
+104699:                                                                 (y.h[I] = b))
+104700:                                                               : (-1 != ("" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])).indexOf("Trapping") ||
+104701:                                                                       "+{%_Shiny_Critter_Chance" == a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3]) &&
+104702:                                                                   0.1 < m._customBlock_RiftStuff("RiftSkillBonus,6", 2)
+104703:                                                                 ? ((y = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104704:                                                                   (I = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104705:                                                                   (s = x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + d) * c.asNumber(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[4])),
+104706:                                                                   (t = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104707:                                                                   (b = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104708:                                                                   (s += c.asNumber(t.h[b])),
+104709:                                                                   (y.h[I] = s))
+104710:                                                                 : ("+{%_Charge_Rate" == a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3] ||
+104711:                                                                         "+{_Starting_Pts_in_Worship" == a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3] ||
+104712:                                                                         "+{%_Max_Charge" == a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3]) &&
+104713:                                                                     0.1 < m._customBlock_RiftStuff("RiftSkillBonus,8", 2)
+104714:                                                                   ? ((b = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104715:                                                                     (I = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104716:                                                                     (s = x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + d) * c.asNumber(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[4])),
+104717:                                                                     (t = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104718:                                                                     (R = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104719:                                                                     (s += c.asNumber(t.h[R])),
+104720:                                                                     (b.h[I] = s))
+104721:                                                                   : -1 != ("" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])).indexOf("Spelunking") && 0.1 < m._customBlock_RiftStuff("RiftSkillBonus,18", 2)
+104722:                                                                     ? ((s = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104723:                                                                       (y = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104724:                                                                       (d = x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + d) * c.asNumber(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[4])),
+104725:                                                                       (r = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104726:                                                                       (I = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104727:                                                                       (d += c.asNumber(r.h[I])),
+104728:                                                                       (s.h[y] = d))
+104729:                                                                     : "+{%_Card_Drop_Chance" == a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3] &&
+104730:                                                                       0.1 < m._customBlock_Summoning("VaultUpgBonus", 44, 0) &&
+104731:                                                                       ((s = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104732:                                                                       (r = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104733:                                                                       (d = x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + d) * c.asNumber(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[4])),
+104734:                                                                       (y = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104735:                                                                       (I = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104736:                                                                       (d += c.asNumber(y.h[I])),
+104737:                                                                       (s.h[r] = d)));
+104738:                                         }
+
+// idleon1.22.txt:116451-116458
+116451:                                                                                                     (Math.min(4 * x._customBlock_RunCodeOfTypeXforThingY("CardLv", "cropfallEvent1"), 50) +
+116452:                                                                                                         Math.min(5 * x._customBlock_RunCodeOfTypeXforThingY("CardLv", "anni5Event1"), 50) +
+116453:                                                                                                         (m._customBlock_Companions(155) +
+116454:                                                                                                             1e4 * m._customBlock_Companions(174) +
+116455:                                                                                                             (m._customBlock_Summoning("VaultUpgBonus", 86, 0) +
+116456:                                                                                                                 (q._customBlock_JellyOperation("RoG_BonusQTY", 10, 0) +
+116457:                                                                                                                     q._customBlock_JellyOperation("RoG_BonusQTY", 51, 0)))))))))))))))))))) /
+116458:                                             100);
+
+// idleon1.22.txt:172758-172761
+172758:                                         (a.engine.getGameAttribute("DNSM").h.ShrineStuffz723[t] =
+172759:                                             (1 + (5 * x._customBlock_RunCodeOfTypeXforThingY("CardLv", "Boss3B")) / 100) *
+172760:                                             ((c.asNumber(a.engine.getGameAttribute("ShrineInfo")[t][3]) - 1) * c.asNumber(a.engine.getGameAttribute("CustomLists").h.ShrineInfo[t][3]) +
+172761:                                                 c.asNumber(a.engine.getGameAttribute("CustomLists").h.ShrineInfo[t][2]))));
+
+// idleon1.22.txt:165847-165887
+165847:                                                 _ = a.engine.getGameAttribute("CustomLists").h.CardStuff[0 | this._DummyRepeatIndex].length;
+165848:                                             r < _;
+165849:                                         )
+165850:                                             ((o = r++),
+165851:                                                 "Blank" != a.engine.getGameAttribute("CustomLists").h.CardStuff[0 | this._DummyRepeatIndex][o][0] &&
+165852:                                                     ((this._DummyList[0] = c.asNumber(this._DummyList[0]) + 1),
+165853:                                                     (this._DummyNumber = x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + h.string(a.engine.getGameAttribute("CustomLists").h.CardStuff[0 | this._DummyRepeatIndex][o][0]))),
+165854:                                                     0 != this._DummyNumber && (this._DummyList[0 | this._DummyNumber] = c.asNumber(this._DummyList[0 | this._DummyNumber]) + 1),
+165855:                                                     (this._DummyNumber4 = Math.min(this._DummyNumber, this._DummyNumber4))));
+165856:                                         for (
+165857:                                             this._GenINFO[113][0 | this._DummyRepeatIndex].push(this._DummyNumber4),
+165858:                                                 0 == this._DummyNumber4
+165859:                                                     ? this._GenINFO[113][0 | this._DummyRepeatIndex].push(
+165860:                                                           Math.round(
+165861:                                                               c.asNumber(this._DummyList[0]) -
+165862:                                                                   (c.asNumber(this._DummyList[1]) + (c.asNumber(this._DummyList[2]) + (c.asNumber(this._DummyList[3]) + (c.asNumber(this._DummyList[4]) + c.asNumber(this._DummyList[5])))))
+165863:                                                           )
+165864:                                                       )
+165865:                                                     : this._GenINFO[113][0 | this._DummyRepeatIndex].push(this._DummyList[0 | this._DummyNumber4]),
+165866:                                                 this._GenINFO[113][0 | this._DummyRepeatIndex].push(this._DummyList[0]),
+165867:                                                 this._DummyList = [],
+165868:                                                 this._DummyList.push(0),
+165869:                                                 this._DummyList.push(0),
+165870:                                                 g = this._DummyNumber4 = 0,
+165871:                                                 s = a.engine.getGameAttribute("CustomLists").h.CardStuff[0 | this._DummyRepeatIndex].length;
+165872:                                             g < s;
+165873:                                         )
+165874:                                             ((r = g++),
+165875:                                                 "Blank" != a.engine.getGameAttribute("CustomLists").h.CardStuff[0 | this._DummyRepeatIndex][r][0] &&
+165876:                                                     ((this._DummyList[0] = Math.round(
+165877:                                                         c.asNumber(this._DummyList[0]) + x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + h.string(a.engine.getGameAttribute("CustomLists").h.CardStuff[0 | this._DummyRepeatIndex][r][0]))
+165878:                                                     )),
+165879:                                                     (this._DummyList[1] = Math.round(c.asNumber(this._DummyList[1]) + 1))));
+165880:                                         (this._GenINFO[113][0 | this._DummyRepeatIndex].push(Math.floor(c.asNumber(this._DummyList[0]) / Math.max(c.asNumber(this._DummyList[1]), 1))),
+165881:                                             this._GenINFO[113][0 | this._DummyRepeatIndex].push(Math.floor(c.asNumber(this._DummyList[0]))),
+165882:                                             this._GenINFO[113][0 | this._DummyRepeatIndex].push(
+165883:                                                 Math.floor(
+165884:                                                     c.asNumber(this._DummyList[1]) *
+165885:                                                         (Math.min(Math.round(5 + m._customBlock_Spelunk("6starCards", 0, 0)), Math.floor(c.asNumber(this._DummyList[0]) / Math.max(c.asNumber(this._DummyList[1]), 1))) + 1)
+165886:                                                 )
+165887:                                             ));
+
+// idleon1.22.txt:171365-171368
+171365:                         (p._customBlock_CardSetBonuses = function (e, t) {
+171366:                             e = a.engine.getGameAttribute("Cards")[3];
+171367:                             var i = "" + h.string(a.engine.getGameAttribute("CustomMaps").h.IDforCardSETbonus.h[t]);
+171368:                             return Object.prototype.hasOwnProperty.call(e.h, i) ? ((e = a.engine.getGameAttribute("Cards")[3]), (i = "" + h.string(a.engine.getGameAttribute("CustomMaps").h.IDforCardSETbonus.h[t])), e.h[i]) : 0;
+
+// idleon1.22.txt:313881-313910
+313881:                         (Ia.IDforCardBonus = function () {
+313882:                             var e = new l();
+313883:                             return (
+313884:                                 (e.h[1] = "+{_Base_HP"),
+313885:                                 (e.h[2] = "+{_Base_LUK"),
+313886:                                 (e.h[3] = "+{_Base_MP"),
+313887:                                 (e.h[4] = "+{_Base_Damage"),
+313888:                                 (e.h[5] = "+{_Base_WIS"),
+313889:                                 (e.h[6] = "+{_Move_Spd"),
+313890:                                 (e.h[7] = "+{_Base_AGI"),
+313891:                                 (e.h[8] = "+{%_Total_HP"),
+313892:                                 (e.h[9] = "+{_Base_STR"),
+313893:                                 (e.h[10] = "+{%_Total_Drop_Rate"),
+313894:                                 (e.h[11] = "+{%_Money_from_Monsters"),
+313895:                                 (e.h[12] = "+{%_Card_Drop_Chance"),
+313896:                                 (e.h[13] = "+{%_Critical_Chance"),
+313897:                                 (e.h[14] = "+{%_Crystal_Mob_Spawn_Chance"),
+313898:                                 (e.h[15] = "+{%_Defence_from_Equipment"),
+313899:                                 (e.h[16] = "+{%_To_not_consume_Food"),
+313900:                                 (e.h[17] = "+{%_Total_Accuracy"),
+313901:                                 (e.h[18] = "+{_Weapon_Power"),
+313902:                                 (e.h[19] = "+{%_Critical_Damage"),
+313903:                                 (e.h[20] = "+{%_Monster_EXP_While_Active"),
+313904:                                 (e.h[21] = "+{%_Minimum_Damage"),
+313905:                                 (e.h[22] = "+{%_EXP_Conversion_from_Talent"),
+313906:                                 (e.h[23] = "+{_Base_accuracy"),
+313907:                                 (e.h[24] = "+{%_Total_Mining_Efficiency"),
+313908:                                 (e.h[25] = "+{%_Mining_EXP"),
+313909:                                 (e.h[26] = "+{_Base_Defence"),
+313910:                                 (e.h[27] = "+{%_Total_Choppin_Efficiency"),

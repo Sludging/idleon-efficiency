@@ -1,0 +1,21 @@
+{
+  "description": "Compare selected character golden-food base damage, total damage multiplier, and class EXP percentage with their native game calculations",
+  "target": "Golden Food player task bonuses",
+  "extractions": [
+    {
+      "label": "golden_food_base_damage",
+      "expression": "idleon.callFunction('GoldFoodBonuses','BaseDamage')",
+      "description": "Golden-food addition to raw base-damage points for the retained player"
+    },
+    {
+      "label": "golden_food_damage_multiplier",
+      "expression": "idleon.callFunction('GoldFoodBonuses','Damage')",
+      "description": "Golden-food total-damage multiplier, including its base 1, for the retained player"
+    },
+    {
+      "label": "golden_food_class_experience_percent",
+      "expression": "idleon.callFunction('GoldFoodBonuses','ClassEXPz')",
+      "description": "Golden-food additive class EXP percentage points for the retained player"
+    }
+  ]
+}

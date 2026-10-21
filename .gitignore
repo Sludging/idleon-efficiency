@@ -9,6 +9,7 @@ node_modules/
 /coverage
 /tests/.cache
 /tests/fixtures/data-snapshot.json
+.cache/test-accounts/
 
 # next.js
 /.next/

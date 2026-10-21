@@ -8,11 +8,6 @@
       "description": "Current Damage statue bonus at the saved level"
     },
     {
-      "label": "statue_next_bonus_0",
-      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const index = 0; const level = asNumber(idleon.getAttr(\"RoyalG\")[0][index]) + 1; const research = idleon.getAttr(\"CustomLists\").h.Research; return (1 + idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 45, 0) / 100) * (asNumber(research[41][index]) + asNumber(research[42][index]) * Math.max(0, level - 1)); })()",
-      "description": "Read-only Damage statue bonus at the saved level plus one; the game has no target-level preview API"
-    },
-    {
       "label": "statue_chance_0",
       "expression": "idleon.callFunction(\"RoyalG\", \"StatueUpgOdds\", 0, 0)",
       "description": "Damage statue upgrade success chance as a fraction"
@@ -26,11 +21,6 @@
       "label": "statue_bonus_2",
       "expression": "idleon.callFunction(\"RoyalG\", \"StatueBon\", 2, 0)",
       "description": "Current Frosty statue bonus while covered"
-    },
-    {
-      "label": "statue_next_bonus_2",
-      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const index = 2; const level = asNumber(idleon.getAttr(\"RoyalG\")[0][index]) + 1; const research = idleon.getAttr(\"CustomLists\").h.Research; return (1 + idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 45, 0) / 100) * (asNumber(research[41][index]) + asNumber(research[42][index]) * Math.max(0, level - 1)); })()",
-      "description": "Read-only Frosty statue bonus at the saved level plus one; the game has no target-level preview API"
     },
     {
       "label": "statue_chance_2",
@@ -50,7 +40,7 @@
     {
       "label": "royal_reverence_bonus",
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 45, 0)",
-      "description": "Royal Reverence bonus used by current and next-level statue bonuses"
+      "description": "Royal Reverence bonus used by current statue bonuses"
     },
     {
       "label": "storage_parchment",

@@ -31,8 +31,8 @@
     "sushi_game_version": {
       "expression": "idleon.getGameVersion()",
       "result": {
-        "title": "Jelly_Operator",
-        "version": "1.22"
+        "title": "Luminous_Menagerie",
+        "version": "1.23"
       }
     }
   },

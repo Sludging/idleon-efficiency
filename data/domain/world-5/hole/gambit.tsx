@@ -77,8 +77,7 @@ export class GambitBonus {
     }
 
     getBonus(gambitTotalScore: number): number {
-        if(!this.unlocked)
-        {
+        if (!this.unlocked) {
             return 0;
         }
 
@@ -100,11 +99,12 @@ export class GambitBonus {
 }
 
 export class Gambit {
+    challenges: GambitChallenge[] = [];
     bonuses: GambitBonus[] = [];
-    challenges: GambitChallenge[] = GambitChallenges.getChallenges();
     gambitPointsMulti: number = 1;
 
     constructor() {
+        this.challenges = GambitChallenges.getChallenges();
         this.bonuses = GambitBonus.fromBase(initGambitBonusRepo());
     }
 
@@ -113,7 +113,7 @@ export class Gambit {
 
         if (bonus)
         {
-            return bonus.getBonus(this.getGambitTotalTime());
+            return bonus.getBonus(this.getGambitTotalScore());
         }
 
         return 0;
@@ -140,7 +140,8 @@ export class Gambit {
     }
 
     getGambitTotalScore(): number {
-        return this.challenges.reduce((sum, challenge) => sum += challenge.getScoreValue(), 0) * this.gambitPointsMulti;
+        const baseScore = this.challenges.reduce((sum, challenge) => sum + challenge.getScoreValue(), 0);
+        return baseScore * this.gambitPointsMulti;
     }
 
     updateUnlockedBonuses() {

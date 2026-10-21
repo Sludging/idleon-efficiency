@@ -1,28 +1,8 @@
 {
-  "description": "Royal Armory purchase requirements for four distinct real-account rows: available, capped, insufficient currency, and locked despite enough currency. Read-only caller predicates; no purchases or state changes.",
-  "target": "RoyalArmory.canPurchaseUpgrade(upgrade), with direct RoyalArmoryUpgrade.getCost() and isUnlocked() comparisons",
+  "description": "Royal Armory purchase direct price and displayed unlock parameters for four representative saved upgrades.",
+  "target": "RoyalArmoryUpgrade.getCost() and RoyalArmoryUpgrade.isUnlocked()",
   "source": "Delivered idleon1.22.txt click caller near byte 26790109, rendering near 26862904, confirmed debit near 27200522. Display d maps catalog k = CustomLists.Research[43][d]; level/cap use k, currency uses round(CustomLists.ArmoryUpg[d][3]). No standalone purchase-eligibility game function exists.",
   "extractions": [
-    {
-      "label": "royal_armory_can_purchase_display_1",
-      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const d = 1; const lists = idleon.getAttr(\"CustomLists\").h; const royalG = idleon.getAttr(\"RoyalG\"); const k = 0 | asNumber(lists.Research[43][d]); const r = Math.round(asNumber(lists.ArmoryUpg[d][3])); return d < idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0) && asNumber(royalG[1][r]) >= idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", d, 0) && asNumber(royalG[2][k]) < asNumber(lists.ArmoryUpg[k][4]); })()",
-      "description": "Royal Talent Points I (catalog 46/display 1): source purchase requirements, observed unlocked and uncapped with enough actual resource 0; catalog resource 22 is not the purchase currency. Boolean retained."
-    },
-    {
-      "label": "royal_armory_can_purchase_display_0",
-      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const d = 0; const lists = idleon.getAttr(\"CustomLists\").h; const royalG = idleon.getAttr(\"RoyalG\"); const k = 0 | asNumber(lists.Research[43][d]); const r = Math.round(asNumber(lists.ArmoryUpg[d][3])); return d < idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0) && asNumber(royalG[1][r]) >= idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", d, 0) && asNumber(royalG[2][k]) < asNumber(lists.ArmoryUpg[k][4]); })()",
-      "description": "Collect Resources Tool (catalog 30/display 0): source purchase requirements, observed at its literal cap despite zero price and enough currency. Boolean retained."
-    },
-    {
-      "label": "royal_armory_can_purchase_display_24",
-      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const d = 24; const lists = idleon.getAttr(\"CustomLists\").h; const royalG = idleon.getAttr(\"RoyalG\"); const k = 0 | asNumber(lists.Research[43][d]); const r = Math.round(asNumber(lists.ArmoryUpg[d][3])); return d < idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0) && asNumber(royalG[1][r]) >= idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", d, 0) && asNumber(royalG[2][k]) < asNumber(lists.ArmoryUpg[k][4]); })()",
-      "description": "Catalog 80/display 24: source purchase requirements, observed unlocked and uncapped but unable to afford the raw fractional price from resource 11. Boolean retained."
-    },
-    {
-      "label": "royal_armory_can_purchase_display_30",
-      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const d = 30; const lists = idleon.getAttr(\"CustomLists\").h; const royalG = idleon.getAttr(\"RoyalG\"); const k = 0 | asNumber(lists.Research[43][d]); const r = Math.round(asNumber(lists.ArmoryUpg[d][3])); return d < idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0) && asNumber(royalG[1][r]) >= idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", d, 0) && asNumber(royalG[2][k]) < asNumber(lists.ArmoryUpg[k][4]); })()",
-      "description": "Global Decree - OL (catalog 50/display 30): source purchase requirements, observed locked at the progression frontier despite being uncapped and affordable from resource 14. Boolean retained."
-    },
     {
       "label": "royal_armory_purchase_price_display_1",
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 1, 0)",
@@ -62,11 +42,6 @@
       "label": "royal_armory_purchase_unlocked_display_30",
       "expression": "30 < idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0)",
       "description": "Direct count-derived displayed unlock boolean for Global Decree - OL at the current locked frontier"
-    },
-    {
-      "label": "royal_armory_purchase_context",
-      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const lists = idleon.getAttr(\"CustomLists\").h; const royalG = idleon.getAttr(\"RoyalG\"); return { unlockedCount: idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0), rows: [1, 0, 24, 30].map(d => { const k = 0 | asNumber(lists.Research[43][d]); const r = Math.round(asNumber(lists.ArmoryUpg[d][3])); return { displayIndex: d, catalogIndex: k, purchaseResourceType: r, catalogResourceType: asNumber(lists.ArmoryUpg[k][3]), rawQuantity: asNumber(royalG[1][r]), level: asNumber(royalG[2][k]), maxLevel: asNumber(lists.ArmoryUpg[k][4]) }; }) }; })()",
-      "description": "Capture-only diagnostic context for the four real rows: independent display/catalog/currency mappings, raw saved quantities, mapped owned levels and literal caps. Supporting metadata, not a permanent static/copy test or calculated dependency."
     }
   ]
 }

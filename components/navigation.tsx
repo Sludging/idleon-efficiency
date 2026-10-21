@@ -24,12 +24,15 @@ const navItems: NavItem[] = [
             { subLink: "/stamps", label: "Stamps" },
             { subLink: "/forge", label: "Forge" },
             { subLink: "/anvil", label: "Anvil" },
+            { subLink: "/bribes", label: "Bribes" },
+            { subLink: "/owl", label: "Owl" },
         ]
     },
     {
         link: "/world-2", label: "W2", subLinks: [
             { subLink: "/alchemy", label: "Alchemy" },
             { subLink: "/arcade", label: "Arcade" },
+            { subLink: "/kangaroo", label: "Kangaroo" },
         ]
     },
     {
@@ -38,6 +41,8 @@ const navItems: NavItem[] = [
             { subLink: "/worship", label: "Worship" },
             { subLink: "/trapping", label: "Trapping" },
             { subLink: "/equinox", label: "Equinox" },
+            { subLink: "/armor-smithy", label: "Armor Smithy" },
+            { subLink: "/bubba", label: "Bubba" },
         ]
     },
     {
@@ -53,24 +58,31 @@ const navItems: NavItem[] = [
             { subLink: "/divinity", label: "Divinity" },
             { subLink: "/sailing", label: "Sailing" },
             { subLink: "/gaming", label: "Gaming" },
-            // TODO: Add this back later when we work on the UI.
-            //{ subLink: "/hole", label: "Hole" },
+            { subLink: "/hole", label: "Hole" },
         ]
     },
     {
         link: "/world-6", label: "W6", subLinks: [
             { subLink: "/sneaking", label: "Sneaking" },
             { subLink: "/summoning", label: "Summoning" },
+            { subLink: "/emperor", label: "Emperor" },
             { subLink: "/farming", label: "Farming" },
         ]
     },
     {
         link: "/world-7", label: "W7", subLinks: [
-            { subLink: "/spelunking", label: "Spelunking (Coming Soon)" },
+            { subLink: "/spelunking", label: "Spelunking" },
+            { subLink: "/research", label: "Research" },
             { subLink: "/legendTalents", label: "Legend Talents" },
             { subLink: "/coral", label: "Coral Reef" },
             { subLink: "/sushi", label: "Sushi Station" },
+            { subLink: "/minehead", label: "Minehead" },
             { subLink: "/jelly-operator", label: "Jelly Operator" },
+            { subLink: "/clam-work", label: "Clam Work" },
+            { subLink: "/advice-fish", label: "Advice Fish" },
+            { subLink: "/zenith-market", label: "Zenith Market" },
+            { subLink: "/menagerie", label: "Menagerie" },
+            { subLink: "/the-button", label: "The Button" },
         ]
     },
     { link: "/players", label: "Players" },
@@ -95,6 +107,8 @@ const navItems: NavItem[] = [
             { subLink: "/cards", label: "Cards" },
             { subLink: "/tome", label: "The Tome" },
             { subLink: "/upgrade-vault", label: "Upgrade Vault" },
+            { subLink: "/guild", label: "Guild" },
+            { subLink: "/event-shop", label: "Event Shop" },
         ]
     },
     { link: "/raw-data", label: "Raw Data" },

@@ -12,7 +12,6 @@ import { JellyOperator } from '../../../data/domain/world-7/jellyOperator';
 import { Meritocraty } from '../../../data/domain/world-7/meritocraty';
 import { Tome } from '../../../data/domain/world-4/tome';
 import { Farming, CropScientistBonusText } from '../../../data/domain/world-6/farming';
-import { Sneaking } from '../../../data/domain/world-6/sneaking';
 import { LegendTalents } from '../../../data/domain/world-7/legendTalents';
 import { Divinity } from '../../../data/domain/world-5/divinity';
 import { Sailing } from '../../../data/domain/world-5/sailing/sailing';
@@ -50,7 +49,6 @@ const parameters: ParameterTestSpec[] = [
     { extractionKey: "dependency_Summoning2_MeritocBonusz_8", description: "late Meritocracy Palette Luck percentage", domainExtractor: data => (data.get('meritocraty') as Meritocraty).getCurrentBonus(8) },
     { extractionKey: "dependency_Thingies_LoreEpiBon_5", description: "Tome epilogue Palette Luck bonus", domainExtractor: data => (data.get('tome') as Tome).getEpilogueBonus(5) },
     { extractionKey: "dependency_Farming_ExoticBonusQTY_44", description: "Farming exotic Palette Luck bonus", domainExtractor: data => (data.get('farming') as Farming).getExoticMarketBonusValue(44) },
-    { extractionKey: "dependency_Ninja_EmporiumBonus_41", description: "Jade Palette slot bonus", domainExtractor: data => Number((data.get('sneaking') as Sneaking).jadeUpgrades.find(upgrade => upgrade.index === 41)!.purchased) },
     { extractionKey: "dependency_Arcade_ArcadeBonus_58", description: "Arcade Palette Luck bonus", domainExtractor: data => (data.get('arcade') as Arcade).bonuses.find(bonus => bonus.index === 58)!.getBonus() },
     { extractionKey: "dependency_Research_Grid_Bonus_107", description: "Research crown-scaled Palette Luck bonus", domainExtractor: data => (data.get('research') as ResearchGrid).getBonusForId(107, 2) },
     { extractionKey: "dependency_Thingies_LegendPTS_bonus_10", description: "Legend Talent earned Palette bonus multiplier input", domainExtractor: data => (data.get('legendTalents') as LegendTalents).getBonusFromIndex(10) },
@@ -66,7 +64,7 @@ const parameters: ParameterTestSpec[] = [
     { extractionKey: "harvest_msa", description: "Worship Totalizer Bits percentage", domainExtractor: data => (data.get('worship') as Worship).totalizer.getBonus(TotalizerBonus.BitValue) },
     { extractionKey: "harvest_wins", description: "Summoning winner Bits percentage", domainExtractor: data => (data.get('summoning') as Summoning).getSummoningWinnerBonusFromIndex(16) },
     { extractionKey: "harvest_lamp", description: "Hole lamp Bits percentage", domainExtractor: data => (data.get('hole') as Hole).lamp.getBonus(false, 1, 1) },
-    { extractionKey: "harvest_emperor", description: "Emperor Bits percentage", domainExtractor: data => (data.get('emperor') as Emperor).emperorBonuses[7].getBonus() },
+    { extractionKey: "harvest_emperor", description: "Emperor Bits percentage", domainExtractor: data => (data.get('emperor') as Emperor).getEffectiveBonus(7) },
     { extractionKey: "harvest_merit", description: "Meritocracy Bits percentage", domainExtractor: data => (data.get('meritocraty') as Meritocraty).getCurrentBonus(1) },
     { extractionKey: "harvest_sticker", description: "Farming Gaming sticker percentage", domainExtractor: data => (data.get('farming') as Farming).getStickerBonus(3) },
     { extractionKey: "harvest_vault", description: "Upgrade Vault Bits percentage", domainExtractor: data => (data.get('upgradeVault') as UpgradeVault).getBonusForId(68) },
@@ -75,8 +73,7 @@ const parameters: ParameterTestSpec[] = [
     { extractionKey: "harvest_meal", description: "Cooking Bits percentage", domainExtractor: data => (data.get('cooking') as Cooking).getMealBonusForKey('GamingBits') },
     { extractionKey: "harvest_talent", description: "prepared Bits talent percentage", domainExtractor: data => (data.get('players') as Player[]).reduce((best, player) => Math.max(best, player.getTalentBonus(177)), 0) },
     { extractionKey: "harvest_companion", description: "Bits companion effect", domainExtractor: data => getCompanionActiveBonus(data.get('companions') as Companion[], 53) },
-    // Native CardLv is a one-based earned level consumed as 20 * CardLv percentage.
-    // Card.getLevels() is the star tier, not this native unit.
+    // The card grants 20 percent Bits per native progression level.
     { extractionKey: "harvest_card", description: "Bits card percentage", domainExtractor: data => (data.get('cards') as Card[]).find(card => card.id === 'w7b2')!.getBonus() },
     { extractionKey: "logbook_bubble", description: "Bit By Bit calculated bubble bonus", domainExtractor: data => (data.get('alchemy') as Alchemy).getBubbleBonusForKey('Y3') },
     { extractionKey: "acorn_shop_bonus_0", description: "same-domain Squirrel Bits multiplier", domainExtractor: data => ((data.get('gaming') as Gaming).getImport(2) as SquirrelImport).shop[0].multiplier },
@@ -105,10 +102,6 @@ const parameters: ParameterTestSpec[] = [
     { extractionKey: "import_bonus_8", description: "same-domain King Rat crown percentage", domainExtractor: data => (data.get('gaming') as Gaming).getImport(8)!.getBonus() },
 ];
 
-// Native Math.pow(288, 0.8) differs from Node by 1.4210854715202004e-14
-// percentage points. Bound only Squirrel shop 2 by 2e-14; all other rows stay exact.
-const acornShopBonus2AbsoluteError = 2e-14;
-
 describe('Gaming direct calculation parameters', () => {
     let data: Map<string, any>;
     let results: ExtractionResults;
@@ -120,10 +113,7 @@ describe('Gaming direct calculation parameters', () => {
     it.each(parameters)('$description', ({ extractionKey, domainExtractor }) => {
         const expected = getExtractedValue(results, extractionKey);
         const liveValue = extractionKey === 'harvest_card' ? expected * 20 : expected;
-        // The matcher divides by max(abs(expected), 1); convert the absolute bound.
-        const absoluteError = extractionKey === 'acorn_shop_bonus_2' ? acornShopBonus2AbsoluteError : 0;
-        const tolerance = absoluteError / Math.max(Math.abs(liveValue), 1);
-        expect(domainExtractor(data)).toMatchLiveGame(liveValue, tolerance);
+        expect(domainExtractor(data)).toMatchLiveGame(liveValue, 0);
     });
 });
 

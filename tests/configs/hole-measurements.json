@@ -1,0 +1,51 @@
+{
+  "description": "All 17 Measurements and every directly consumed calculated account statistic.",
+  "target": "All 17 Measurements and every directly consumed calculated account statistic.",
+  "extractions": [
+    {
+      "label": "active_context",
+      "expression": "({ playerId: idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0]), playerName: idleon.getAttr('UserInfo')[0], playerNames: idleon.getAttr('GetPlayersUsernames'), version: idleon.getAttr('DoOnceREAL') })",
+      "description": "Capture real active character identity and version; do not switch or synthesize a context."
+    },
+    {
+      "label": "paired_hole_inputs",
+      "expression": "({ levels: idleon.getAttr(\"Holes\")[1].slice(0,5), exp: idleon.getAttr(\"Holes\")[2].slice(0,5), investments: idleon.getAttr(\"Holes\")[3].slice(0,8), purchased: idleon.getAttr(\"Holes\")[23].slice(0,5), studyLevels: idleon.getAttr(\"Holes\")[26].slice(0,18), studyProgress: idleon.getAttr(\"Holes\")[27].slice(0,18), target: idleon.getAttr(\"Holes\")[11][61], cavernOpals: idleon.getAttr(\"Holes\")[7], lanternUses: idleon.getAttr(\"Holes\")[11][84], wishes: idleon.getAttr(\"Holes\")[11][25], layers: [idleon.getAttr(\"Holes\")[11][1],idleon.getAttr(\"Holes\")[11][3],idleon.getAttr(\"Holes\")[11][5],idleon.getAttr(\"Holes\")[11][7]], covePurchases: idleon.getAttr('OptionsListAccount')[604] })",
+      "description": "Saved inputs directly used by part 1; runtime counter mismatches remain failures."
+    },
+    {
+      "label": "measurements",
+      "expression": "(() => {const h=idleon.getAttr('Holes'),lists=idleon.getAttr('CustomLists').h; return h[22].slice(0,17).map((v,id)=>{const type=Number(lists.HolesInfo[52][id]),currency=Number(lists.HolesInfo[50][id]),stock=Number(h[9][currency]),price=idleon.callFunction('Holes','MeasurementCost',id,0);return {id,type,level:Number(v),access:id<idleon.callFunction('Holes','MeasurementsOwned',0,0),raw:idleon.callFunction('Holes','MeasurementQTYfound',type,0),normalized:idleon.callFunction('Holes','MeasurementQTYfound',type,99),multiplier:idleon.callFunction('Holes','MeasurementMulti',type,0),base:idleon.callFunction('Holes','MeasurementBaseBonus',id,0),benefit:idleon.callFunction('Holes','MeasurementBonusTOTAL',id,0),price,currency,stock,shortfall:Math.max(0,price-stock),affordable:!!idleon.callFunction('Holes','CanWeAffordMeasurement',id,0)};});})()",
+      "description": "All 17 row-to-type mappings, account quantities, benefits and wallet inspection."
+    },
+    {
+      "label": "lengthmeister",
+      "expression": "idleon.callFunction('Holes','CosmoBonusQTY',1,3)",
+      "description": "Direct benefit percentage."
+    },
+    {
+      "label": "fountain_discount",
+      "expression": "idleon.callFunction('Holes2','Fountain_BonTOT',2,14)",
+      "description": "Direct Measurement price discount."
+    },
+    {
+      "label": "account_level",
+      "expression": "idleon.callFunction('Holes','MeasurementQTYfound',2,0)",
+      "description": "Numeric account level producer."
+    },
+    {
+      "label": "skill_levels",
+      "expression": "idleon.callFunction('Holes','MeasurementQTYfound',4,0)",
+      "description": "Numeric skill total including all 21 original skill slots."
+    },
+    {
+      "label": "tome_score",
+      "expression": "idleon.callFunction('Holes','MeasurementQTYfound',3,0)",
+      "description": "Original cached Tome score; preserve meaningful producer mismatch."
+    },
+    {
+      "label": "deathnote_points",
+      "expression": "idleon.callFunction('Holes','MeasurementQTYfound',6,0)",
+      "description": "Normal-world Death Note points."
+    }
+  ]
+}

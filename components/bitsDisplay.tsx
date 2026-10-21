@@ -9,6 +9,7 @@ interface BitsDisplayProps {
     value: number | string;
     scale?: number;
     textSize?: TextProps['size'];
+    textColor?: TextProps['color'];
 }
 
 const bitsTierImages: Readonly<Record<string, ImageData>> = {
@@ -20,7 +21,7 @@ const bitsTierImages: Readonly<Record<string, ImageData>> = {
     [CoinStrings[10]]: { location: 'GamingBitsGold', height: 24, width: 26 },
 };
 
-export default function BitsDisplay({ value, scale = 1, textSize = 'small' }: BitsDisplayProps) {
+export default function BitsDisplay({ value, scale = 1, textSize = 'small', textColor }: BitsDisplayProps) {
     if (value === '') {
         return null;
     }
@@ -32,7 +33,7 @@ export default function BitsDisplay({ value, scale = 1, textSize = 'small' }: Bi
     return (
         <Box direction="row" align="center" gap="xsmall" flex={false} style={{ whiteSpace: 'nowrap' }}>
             <IconImage data={imageData} scale={scale} />
-            <Text size={textSize}>{formattedValue.slice(0, -1)}</Text>
+            <Text size={textSize} color={textColor}>{formattedValue.slice(0, -1)}</Text>
         </Box>
     );
 }

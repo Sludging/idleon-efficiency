@@ -1,0 +1,4365 @@
+{
+  "gaps": [
+    {
+      "level": "information",
+      "domain": "Account overview",
+      "aspect": "Account resources",
+      "title": "Account resource totals",
+      "missing": [
+        "World teleport, obol fragment and silver pen balances",
+        "Remaining minigame plays",
+        "Guaranteed candy hours and variable candy-duration range"
+      ],
+      "ours": [
+        "Account boss keys, colosseum tickets, arcade claim/max and total money"
+      ],
+      "group": "Account",
+      "toolboxUrl": "https://idleontoolbox.com/account/misc/general?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/dashboard/dashboard.tsx:217-254",
+        "local://audit-misc-baseline.md:5-30,53-55",
+        "local://live-misc-evidence.md:5-20"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Account overview",
+      "aspect": "Account activity records",
+      "title": "Account scores and lifetime records",
+      "missing": [
+        "Colosseum and minigame high scores",
+        "Highest damage and lifetime monsters killed",
+        "Lifetime refined salts, materials printed, trashed cogs and plants picked"
+      ],
+      "ours": [
+        "Current account activity, currencies and selected domain level totals"
+      ],
+      "group": "Account",
+      "toolboxUrl": "https://idleontoolbox.com/account/misc/general?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/dashboard/dashboard.tsx:217-304",
+        "local://audit-misc-baseline.md:17-30,53-55",
+        "local://live-misc-evidence.md:5-20"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Account overview",
+      "aspect": "Giant mob spawning",
+      "title": "Giant mob spawn chance",
+      "missing": [
+        "Current giant mob spawn odds",
+        "Crescent shrine and Shaved Ice vial contributions"
+      ],
+      "ours": [
+        "Shrine and alchemy information on their own pages"
+      ],
+      "group": "Account",
+      "toolboxUrl": "https://idleontoolbox.com/account/misc/general?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "local://audit-misc-baseline.md:16,53-55",
+        "local://live-misc-evidence.md:5-20"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Storage",
+      "aspect": "Storage capacity",
+      "title": "Storage slots and chest upgrades",
+      "missing": [
+        "Owned storage slot total",
+        "Named and numbered storage chest upgrades with slot contributions"
+      ],
+      "ours": [
+        "Stored items, quantities and type filters"
+      ],
+      "group": "Account",
+      "toolboxUrl": "https://idleontoolbox.com/account/misc/storage?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/account/storage/content.tsx:57-132",
+        "local://live-misc-evidence.md:21-29"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Storage",
+      "aspect": "Stored item details",
+      "title": "Stored item details and storage money",
+      "missing": [
+        "Stored item names, types and descriptions",
+        "Exact stored item quantities",
+        "Storage money balance"
+      ],
+      "ours": [
+        "Item images and formatted counts",
+        "Total account money on dashboard"
+      ],
+      "group": "Account",
+      "toolboxUrl": "https://idleontoolbox.com/account/misc/storage?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/account/storage/content.tsx:95-105,114-125",
+        "components/base/IconImage.tsx:9-29",
+        "local://live-misc-evidence.md:21-29"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Quests",
+      "aspect": "World 7 quests",
+      "title": "World 7 quest progress",
+      "missing": [
+        "Shimmerfin Deep NPC quests and completion progress"
+      ],
+      "ours": [
+        "World 1–6 and event quests with per-character progress, requirements and rewards"
+      ],
+      "group": "Account",
+      "toolboxUrl": "https://idleontoolbox.com/account/misc/quests?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/account/quests/content.tsx:176-207",
+        "local://live-misc-evidence.md:31-41"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Quests",
+      "aspect": "Account completion summary",
+      "title": "Unique quest completion count",
+      "missing": [
+        "Account-wide count of distinct completed quests",
+        "Connection to QUEST KAPOW! and QUEST CHUNGUS scaling"
+      ],
+      "ours": [
+        "Per-character status for each quest"
+      ],
+      "group": "Account",
+      "toolboxUrl": "https://idleontoolbox.com/account/misc/quests?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/account/quests/content.tsx:98-150,191-232",
+        "local://live-misc-evidence.md:31-41"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Dungeons",
+      "aspect": "Passive upgrade costs",
+      "title": "Separate dungeon passive Cost field",
+      "missing": [
+        "Per-passive Cost alongside Cost To Max for Dungeon and Flurbo upgrades"
+      ],
+      "ours": [
+        "Passive current/max level, effect and cost to max"
+      ],
+      "group": "Account",
+      "toolboxUrl": "https://idleontoolbox.com/account/misc/dungeons?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/account/dungeons/content.tsx:86-109",
+        "local://toolbox-pilot-evidence.md:32-58"
+      ],
+      "supplemental": false,
+      "uncertainty": "All observed passives were maxed. The Cost label does not establish non-maxed or next-level semantics."
+    },
+    {
+      "level": "domain",
+      "domain": "Friends Stats",
+      "aspect": "Friend bonuses",
+      "title": "Friend bonus overview",
+      "missing": [
+        "Friend bonus slots and multiplier",
+        "Current bonus types and values",
+        "Contributing friend names and levels"
+      ],
+      "ours": [],
+      "group": "Account",
+      "toolboxUrl": "https://idleontoolbox.com/account/misc/friends-stats?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/navigation.tsx:79-100",
+        "local://audit-misc-baseline.md:39,53-55",
+        "local://live-misc-evidence.md:53-59"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Constellations",
+      "aspect": "Star chart overview",
+      "title": "Star sign unlock boards",
+      "missing": [
+        "Chronus, Hydron and Seraph sign catalogues with unlocked status",
+        "Sign bonus descriptions and unlock costs",
+        "Total constellation points earned and available"
+      ],
+      "ours": [
+        "Per-constellation location, requirement, points and character completion",
+        "Aligned signs per character"
+      ],
+      "group": "Account",
+      "toolboxUrl": "https://idleontoolbox.com/account/misc/constellations?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/account/constellations/content.tsx:23-95",
+        "app/players/content.tsx:292-294",
+        "local://live-misc-evidence.md:61-69"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Upgrade Vault",
+      "aspect": "Upgrade cost summary",
+      "title": "Vault cost-reduction multiplier",
+      "missing": [
+        "Combined vault upgrade cost-reduction multiplier"
+      ],
+      "ours": [
+        "Total levels, upgrade effects, unlock progress, individual costs and cost to max"
+      ],
+      "group": "Account",
+      "toolboxUrl": "https://idleontoolbox.com/account/misc/upgrade-vault?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/account/upgradeVaultDisplay.tsx:50-114",
+        "local://live-misc-evidence.md:71-77"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Random Events",
+      "aspect": "Upcoming spawns",
+      "title": "Random event spawn schedule",
+      "missing": [
+        "Upcoming event types, maps and local spawn times"
+      ],
+      "ours": [
+        "Event quest progress only"
+      ],
+      "group": "Account",
+      "toolboxUrl": "https://idleontoolbox.com/account/misc/random-events?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/account/quests/content.tsx:176-182,202-205",
+        "local://efficiency-pilot-evidence.md:7-9,28-33",
+        "local://toolbox-pilot-evidence.md:111-134"
+      ],
+      "supplemental": false,
+      "uncertainty": "The page does not establish whether schedule computation is profile-specific."
+    },
+    {
+      "level": "domain",
+      "domain": "Event Shop",
+      "aspect": "Event bonuses",
+      "title": "Event shop bonus progress",
+      "missing": [
+        "Event star balance and owned/total bonus count",
+        "Bonus names, effects, ownership and star prices"
+      ],
+      "ours": [],
+      "group": "Account",
+      "toolboxUrl": "https://idleontoolbox.com/account/misc/event-shop?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/navigation.tsx:79-100",
+        "local://audit-misc-baseline.md:43,53-55",
+        "local://live-misc-evidence.md:87-93"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Guild",
+      "aspect": "Account guild state",
+      "title": "Account guild progress and bonuses",
+      "missing": [
+        "Guild identity, member capacity and EXP progress",
+        "Member ranks, levels, earned GP and wanted bonuses",
+        "Guild bonus levels, effects and upgrade costs"
+      ],
+      "ours": [],
+      "group": "Account",
+      "toolboxUrl": "https://idleontoolbox.com/account/misc/guild?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/navigation.tsx:18-100",
+        "local://efficiency-pilot-evidence.md:7-9,28-33",
+        "local://toolbox-pilot-evidence.md:136-197"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Tournament",
+      "aspect": "Tournament state, Pet Mart and matches",
+      "title": "Grand Tournament progress",
+      "missing": [
+        "Division, match day, tournament day and registration count",
+        "Owned/unowned tournament companions and power",
+        "Pet Crystals, shop rotation, bonus effects, prices and discounts",
+        "Recorded match opponents, stages, results, teams and power",
+        "Battle sequences with round-by-round deaths"
+      ],
+      "ours": [
+        "Generic companion ownership and bonus descriptions"
+      ],
+      "group": "Account",
+      "toolboxUrl": "https://idleontoolbox.com/account/misc/tournament?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/account/companions/content.tsx:20-42",
+        "local://audit-misc-baseline.md:45-55",
+        "local://live-misc-evidence.md:103-117"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Armor Smithy",
+      "aspect": "Armor sets",
+      "title": "Armor Smithy",
+      "missing": [
+        "Armor set completion count, per-set unlock state and account bonuses"
+      ],
+      "ours": [
+        "Dementia Set effect input in Worship"
+      ],
+      "group": "World 3",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-3/armor-smithy?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/navigation.tsx:36-48,86-98",
+        "components/world-3/worship/totem.tsx:78-95"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Hat Rack",
+      "aspect": "Premium helmet collection",
+      "title": "Hat Rack",
+      "missing": [
+        "Acquired and missing premium helmets, collected hat count, bonus multiplier and combined bonuses"
+      ],
+      "ours": [
+        "Slab item discovery and character equipment views"
+      ],
+      "group": "World 3",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-3/hat-rack?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/navigation.tsx:36-48,76-98",
+        "local://audit-world34-evidence.md:7-8"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Construction",
+      "aspect": "Cog board",
+      "title": "Cog board",
+      "missing": [
+        "Placed cog/player layout, cog stats, small cog inventory and effects, flaggy rate and player XP rate/bonus"
+      ],
+      "ours": [
+        "Building levels, building progress and total build rate"
+      ],
+      "group": "World 3",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-3/construction?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-3/construction/content.tsx:684-716",
+        "components/world-3/construction/buildings.tsx:50-113",
+        "local://audit-world34-evidence.md:9"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Cooking",
+      "aspect": "Ribbons",
+      "title": "Cooking ribbons",
+      "missing": [
+        "Meal ribbon ranks and multipliers, ribbon shelf, total ranks and daily ribbon gain distribution"
+      ],
+      "ours": [
+        "Meal levels, bonuses, costs and progression estimates"
+      ],
+      "group": "World 4",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-4/cooking?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-4/cooking/content.tsx:271-339,431-535",
+        "local://audit-world34-evidence.md:10"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Cooking",
+      "aspect": "Mastery",
+      "title": "Cooking Mastery",
+      "missing": [
+        "Mastery level, XP/rate/rank, purple/yellow point pools and mastery upgrade levels/effects"
+      ],
+      "ours": [
+        "Meal and kitchen progression"
+      ],
+      "group": "World 4",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-4/cooking?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-4/cooking/content.tsx:271-339,431-535",
+        "local://audit-world34-evidence.md:10"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Laboratory",
+      "aspect": "Chip and jewel rotation",
+      "title": "Chip and jewel rotation",
+      "missing": [
+        "Dated current/future weekly chips and jewels, purchase costs and sold-out state"
+      ],
+      "ours": [
+        "Active bonuses/jewels, equipped chips and owned chip counts"
+      ],
+      "group": "World 4",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-4/laboratory?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-4/lab/content.tsx:89-107,118-203,237-246"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Rift",
+      "aspect": "Tasks",
+      "title": "Rift tasks",
+      "missing": [
+        "Stage-by-stage monster names and task objectives"
+      ],
+      "ours": [
+        "Rift bonuses, Skill Mastery and Construct Mastery"
+      ],
+      "group": "World 4",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-4/rift?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-4/rift/content.tsx:224-239"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Construction",
+      "aspect": "3D Printer",
+      "title": "Printer output and particle summaries",
+      "missing": [
+        "Combined per-item hourly output, daily particle output and nested output multiplier sources"
+      ],
+      "ours": [
+        "Character samples and active print quantities, Gold Relic boost and best Divine Knight"
+      ],
+      "group": "World 3",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-3/printer?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-3/construction/content.tsx:354-383,426-534"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Construction",
+      "aspect": "Refinery",
+      "title": "Salt balance and sustainable ranks",
+      "missing": [
+        "Per-salt output/consumption/net balance and maximum rank without a salt deficit"
+      ],
+      "ours": [
+        "Salt ranks, rank-up/fuel timers, fuel cost per hour and storage quantities"
+      ],
+      "group": "World 3",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-3/refinery?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-3/construction/content.tsx:198-335"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Construction",
+      "aspect": "Buildings",
+      "title": "Building completion times",
+      "missing": [
+        "Trimmed build speed and per-building trimmed/non-trimmed completion times"
+      ],
+      "ours": [
+        "Total build rate, level/max, build progress and material costs"
+      ],
+      "group": "World 3",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-3/buildings?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/world-3/construction/buildings.tsx:50-59,87-168"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Equinox",
+      "aspect": "Challenges",
+      "title": "Equinox challenge history and progress",
+      "missing": [
+        "Completed challenge descriptions/rewards and numerical active-challenge progress"
+      ],
+      "ours": [
+        "Active challenge descriptions/rewards, bar and upgrade details"
+      ],
+      "group": "World 3",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-3/equinox?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-3/equinox/content.tsx:74-89"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Tome",
+      "aspect": "Bonuses and reward timing",
+      "title": "Tome bonus summary and reward timer",
+      "missing": [
+        "Combined Tome bonus values and nametag reward reset countdown"
+      ],
+      "ours": [
+        "Total score/rank, per-line quantities, points, progress and unlock requirements"
+      ],
+      "group": "World 4",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-4/tome?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/account/tome/content.tsx:18-68,90-109"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Sailing",
+      "aspect": "Trades",
+      "title": "Sailing trade schedule",
+      "missing": [
+        "Dated treasure-to-gold-bar trades with exchanged resource quantities"
+      ],
+      "ours": [
+        "Boats, captains, islands, artifacts and loot resource totals"
+      ],
+      "group": "World 5",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-5/sailing?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-5/sailing/content.tsx:523-588",
+        "app/world-5/sailing/content.tsx:648-655"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Divinity",
+      "aspect": "Coral Kid upgrades",
+      "title": "Coral Kid upgrades",
+      "missing": [
+        "Upgrade levels, next costs and current effects"
+      ],
+      "ours": [
+        "God blessing levels and bonuses; character alignment"
+      ],
+      "group": "World 5",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-5/divinity?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-5/divinity/content.tsx:93-190"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Divinity",
+      "aspect": "God Rank and styles",
+      "title": "God Rank and meditation-style reference",
+      "missing": [
+        "Current God Rank",
+        "Full meditation-style descriptions and base Divinity/EXP rates"
+      ],
+      "ours": [
+        "God links/blessings; each character’s current style and level"
+      ],
+      "group": "World 5",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-5/divinity?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-5/divinity/content.tsx:23-91",
+        "app/world-5/divinity/content.tsx:93-190"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Hole",
+      "aspect": "Villagers and upgrades",
+      "title": "Villager and upgrade progress",
+      "missing": [
+        "Villager level, EXP, hourly rate, time to level and invested opals",
+        "Unlocked-cavern and total monument-AFK summaries",
+        "Study level, active target, progress, study rate and next-level time",
+        "Measurement level, current scaling-input quantity and purchase cost; schematic creation cost/state"
+      ],
+      "ours": [
+        "Study/schematic descriptions and bonuses",
+        "Measurement source, base, multiplier and bonus",
+        "Majik levels and descriptions"
+      ],
+      "group": "World 5",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-5/hole?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-5/hole/content.tsx:18-154",
+        "app/world-5/hole/content.tsx:324-367"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Hole",
+      "aspect": "Skilling caverns",
+      "title": "Skilling cavern progression",
+      "missing": [
+        "Motherlode, Hive, Evertree and Trench layers/depths",
+        "Current resources versus requirements, required skill efficiency and found opals"
+      ],
+      "ours": [
+        "Well sediment progress and bucket assignments"
+      ],
+      "group": "World 5",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-5/hole?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-5/hole/content.tsx:257-322",
+        "app/world-5/hole/content.tsx:428-450"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Hole",
+      "aspect": "Den and Grotto",
+      "title": "Den and Grotto progression",
+      "missing": [
+        "Den best score, next-opal threshold, multiplier and amplifier levels/effects",
+        "Grotto layer, Monarch HP, mushroom-kill progress/remaining kills and bonuses"
+      ],
+      "ours": [
+        "Monument bonuses and unlocks"
+      ],
+      "group": "World 5",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-5/hole?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-5/hole/content.tsx:156-223",
+        "app/world-5/hole/content.tsx:428-450"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Hole",
+      "aspect": "Monuments",
+      "title": "Monument attempt and reward status",
+      "missing": [
+        "Bravery damage, swords/rethrows and enemy HP",
+        "Justice mental health, coins, popularity and dismissals",
+        "Wisdom attempts, match duration and instant matches",
+        "Fight readiness, reward multipliers and opal odds"
+      ],
+      "ours": [
+        "Monument bonus levels/descriptions, invested hours and hour-based unlocks"
+      ],
+      "group": "World 5",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-5/hole?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-5/hole/content.tsx:156-223"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Hole",
+      "aspect": "Well, Bell, and Harp",
+      "title": "Well, Bell and Harp production progress",
+      "missing": [
+        "Well sediment gain rates and time to full",
+        "Bell method progress, gain rates, readiness and new-method chance",
+        "Harp power, gain rate, note-unlock cost and opal chance",
+        "Found opals for these caverns"
+      ],
+      "ours": [
+        "Well sediment quantity/capacity and expansions",
+        "Bell bonus descriptions/values",
+        "Harp string levels/descriptions and held notes"
+      ],
+      "group": "World 5",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-5/hole?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-5/hole/content.tsx:225-322",
+        "app/world-5/hole/content.tsx:369-425"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Hole",
+      "aspect": "Lamp",
+      "title": "Lamp wishes",
+      "missing": [
+        "Held wishes, daily wish rate, found opals",
+        "Wish choices, effects and costs"
+      ],
+      "ours": [
+        "Majik descriptions can mention Lamp bonuses"
+      ],
+      "group": "World 5",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-5/hole?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-5/hole/content.tsx:324-367",
+        "app/world-5/hole/content.tsx:428-450"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Hole",
+      "aspect": "Jars and collectibles",
+      "title": "Jars and collectibles",
+      "missing": [
+        "Jar production rates, progress, held quantity/capacity and destroyed counts",
+        "Rupie balances/value, extra-rupie odds and found opals",
+        "Collectible enchantment levels and effects"
+      ],
+      "ours": [
+        "No Jars or collectible display in Hole tabs"
+      ],
+      "group": "World 5",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-5/hole?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-5/hole/content.tsx:428-450"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Hole",
+      "aspect": "Gambit",
+      "title": "Gambit progress and rewards",
+      "missing": [
+        "Points, base points and multiplier",
+        "Summoning doubler progress, reward requirements/effects and found opals"
+      ],
+      "ours": [
+        "No Gambit display in Hole tabs"
+      ],
+      "group": "World 5",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-5/hole?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-5/hole/content.tsx:428-450"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Hole",
+      "aspect": "Temple",
+      "title": "Temple progression",
+      "missing": [
+        "Torches, layer, extra-torch chance and found opals",
+        "Illuminate, Search and Amplify effects, chances and costs"
+      ],
+      "ours": [
+        "No Temple display in Hole tabs"
+      ],
+      "group": "World 5",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-5/hole?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-5/hole/content.tsx:428-450"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Hole",
+      "aspect": "Fountain",
+      "title": "Fountain resources and upgrades",
+      "missing": [
+        "Currencies, marble balance and coin cap",
+        "Coin/marble/ducky fill progress, durations and duck chance",
+        "Blue/Yellow/Green Water upgrade levels, Marble state, effects and costs"
+      ],
+      "ours": [
+        "No Fountain display in Hole tabs"
+      ],
+      "group": "World 5",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-5/hole?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-5/hole/content.tsx:428-450"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Hole",
+      "aspect": "Cove",
+      "title": "Cove resources and upgrades",
+      "missing": [
+        "Gooey Shape balances and found opals",
+        "Cove drop rate, AFK gains, multikill, respawn and pickup stats",
+        "Crystal and Jeweled upgrade levels, effects and costs"
+      ],
+      "ours": [
+        "No Cove display in Hole tabs"
+      ],
+      "group": "World 5",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-5/hole?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-5/hole/content.tsx:428-450"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Slab",
+      "aspect": "Item availability and greenstacks",
+      "title": "Slab item availability and greenstacks",
+      "missing": [
+        "Greenstack count and eligible-item total",
+        "Dedicated eligible, missing and unrealistic greenstack lists",
+        "Gem Shop rotation and unobtainable-item catalogues"
+      ],
+      "ours": [
+        "Slab bonuses, found/missing item counts and item-source tooltips",
+        "Storage quantities with greenstack-sized stacks highlighted"
+      ],
+      "group": "World 5",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-5/slab?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/account/slab/content.tsx:55-164",
+        "app/account/storage/content.tsx:22-132"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Farming",
+      "aspect": "Exotic Market",
+      "title": "Exotic Market and rotations",
+      "missing": [
+        "Exotic upgrade levels, effects/caps and effect-cap progress",
+        "Current rotation, next change, upcoming dated rotations and return weeks"
+      ],
+      "ours": [
+        "Day/Night Market upgrades, costs and bonuses"
+      ],
+      "group": "World 6",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-6/farming?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/world-6/farming/marketUpgrades.tsx:14-364",
+        "app/world-6/farming/content.tsx:207-223"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Farming",
+      "aspect": "Stickers",
+      "title": "Farming Stickers",
+      "missing": [
+        "Total stickers and damage multiplier",
+        "Per-sticker found count, effect and find chance"
+      ],
+      "ours": [
+        "Crop Depot collection and scientist bonuses"
+      ],
+      "group": "World 6",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-6/farming?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-6/farming/content.tsx:25-91",
+        "app/world-6/farming/content.tsx:207-223"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Sneaking",
+      "aspect": "Mastery",
+      "title": "Sneaking Mastery rewards",
+      "missing": [
+        "Mastery milestone rewards and unlock bonuses"
+      ],
+      "ours": [
+        "Ninja Knowledge upgrade levels and bonuses"
+      ],
+      "group": "World 6",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-6/sneaking?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-6/sneaking/content.tsx:25-75",
+        "components/world-6/sneaking/sneakingUpgrades.tsx:12-35"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Sneaking",
+      "aspect": "Gemstones",
+      "title": "Sneaking Gemstones",
+      "missing": [
+        "Gemstone quantities, current effects and progress toward bonus caps"
+      ],
+      "ours": [
+        "Pristine Charm bonuses and inventory item tooltips"
+      ],
+      "group": "World 6",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-6/sneaking?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-6/sneaking/content.tsx:25-75",
+        "components/world-6/sneaking/pristineCharmsSection.tsx:10-25"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Sneaking",
+      "aspect": "Ninja progression and rolls",
+      "title": "Ninja progression and roll allowances",
+      "missing": [
+        "Current detection and floor Funeral Flowers by ninja",
+        "Door progress and equipped-item levels",
+        "Used daily charm rolls and remaining pristine/symbol rolls"
+      ],
+      "ours": [
+        "Ninja name, level, activity and floor",
+        "Inventory items and levels"
+      ],
+      "group": "World 6",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-6/sneaking?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/world-6/sneaking/playerActivitySection.tsx:32-63",
+        "components/world-6/sneaking/sneakingInventory.tsx:13-50",
+        "app/world-6/sneaking/content.tsx:49-75"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Summoning",
+      "aspect": "Essences and Stones",
+      "title": "Essence production and stone-boss progression",
+      "missing": [
+        "Hourly essence generation",
+        "Next stone-boss HP and current colour bonus multiplier"
+      ],
+      "ours": [
+        "Essence balances, stone kills and boss/map tooltip"
+      ],
+      "group": "World 6",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-6/summoning?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-6/summoning/content.tsx:39-70"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Emperor",
+      "aspect": "Showdowns and bonuses",
+      "title": "Emperor",
+      "missing": [
+        "Highest showdown, daily visits and stored/max visits",
+        "Boss HP, bonus multiplier and next-showdown bonus",
+        "Effective/base reward values, increments and unlock levels"
+      ],
+      "ours": [
+        "Parsed Emperor domain and backend bonus use; no account-facing Emperor view"
+      ],
+      "group": "World 6",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-6/emperor?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "data/domain/world-6/emperor.tsx:9-107",
+        "data/domain/compass.tsx:1355-1398",
+        "local://audit-world56-details.md:28-30"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Anvil",
+      "aspect": "Production",
+      "title": "Production EXP",
+      "missing": [
+        "EXP available from each character’s stored anvil products"
+      ],
+      "ours": [
+        "Production speed, stored output, capacity and time until full",
+        "Character XP bonus and point allocation"
+      ],
+      "group": "World 1",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-1/anvil?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-1/anvil/content.tsx:174-255",
+        "app/players/content.tsx:707-764"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Bribes",
+      "aspect": "Bribe catalog",
+      "title": "Bribes",
+      "missing": [
+        "Bribe catalog with effects, purchase status and coin costs"
+      ],
+      "ours": [
+        "Bribe bonuses are used in calculations"
+      ],
+      "group": "World 1",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-1/bribes?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/navigation.tsx:23-27",
+        "data/domain/world-1/bribes.tsx:15-50"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Stamps",
+      "aspect": "Exalted stamps",
+      "title": "Exalted stamps",
+      "missing": [
+        "Exalted stamp identification",
+        "Exalted bonus multiplier and available exalted-stamp count"
+      ],
+      "ours": [
+        "Stamp levels, effects, upgrade costs and carry-capacity limits"
+      ],
+      "group": "World 1",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-1/stamps?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-1/stamps/content.tsx:195-214",
+        "app/world-1/stamps/content.tsx:258-274",
+        "components/world-1/stampTableView.tsx:62-125"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Stamps",
+      "aspect": "Automatic progression",
+      "title": "Automatic stamp progression",
+      "missing": [
+        "Gilded stamp gain chance",
+        "No Stamp Left Behind count"
+      ],
+      "ours": [
+        "Gilded stamp balance",
+        "Atom discount and daily discount gain"
+      ],
+      "group": "World 1",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-1/stamps?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-1/stamps/content.tsx:258-274"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Alchemy",
+      "aspect": "Bubble progression",
+      "title": "Bubble progression",
+      "missing": [
+        "Daily eligible bubbles, upgrade count and level-gain range",
+        "Kruk-eligible bubbles",
+        "Per-bubble progress toward maximum bonus",
+        "Prisma Fragments and Prisma multiplier"
+      ],
+      "ours": [
+        "Bubble levels and effects",
+        "Material/atom costs and discounts",
+        "No Bubble Left Behind indicators"
+      ],
+      "group": "World 2",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-2/bubbles?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-2/alchemy/content.tsx:57-175",
+        "app/world-2/alchemy/content.tsx:299-380"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Alchemy",
+      "aspect": "Brewing cauldrons",
+      "title": "Brewing cauldrons",
+      "missing": [
+        "Brewing progress and speed",
+        "New-bubble probability",
+        "Ready attempts and estimated bubble unlocks",
+        "Speed/Luck/Cost/Extra upgrade levels and progress"
+      ],
+      "ours": [
+        "Bubble lists and current upgrade costs",
+        "P2W cauldron upgrade levels and costs"
+      ],
+      "group": "World 2",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-2/cauldrons?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-2/alchemy/content.tsx:299-404",
+        "components/world-2/alchemy/p2w.tsx:24-50"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Alchemy",
+      "aspect": "Liquid cauldrons",
+      "title": "Liquid cauldrons",
+      "missing": [
+        "Current liquid amounts and capacity",
+        "Liquid rate/capacity upgrade levels and progress",
+        "Assigned characters and Dragonic cauldron state"
+      ],
+      "ours": [
+        "P2W liquid Regen/Capacity levels and costs"
+      ],
+      "group": "World 2",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-2/cauldrons?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/world-2/alchemy/p2w.tsx:53-76",
+        "app/world-2/alchemy/content.tsx:382-404"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Alchemy",
+      "aspect": "Progression resources and upgrades",
+      "title": "Alchemy progression status",
+      "missing": [
+        "Overall vial bonus multiplier",
+        "Sigil Syrup balance",
+        "Player P2W Alch speed and Extra Exp levels"
+      ],
+      "ours": [
+        "Vial effects and material costs",
+        "Sigil charge speed, effects and charging progress",
+        "Cauldron/liquid/vial P2W levels and costs"
+      ],
+      "group": "World 2",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-2/cauldrons?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-2/alchemy/content.tsx:159-285",
+        "components/world-2/alchemy/p2w.tsx:24-90"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Arcade",
+      "aspect": "Gold-ball gain",
+      "title": "Gold-ball gain multiplier",
+      "missing": [
+        "Overall gold-ball gain multiplier"
+      ],
+      "ours": [
+        "Ball balances and claim timers",
+        "Shop bonuses, rotation, levels and upgrade costs"
+      ],
+      "group": "World 2",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-2/arcade-shop?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-2/arcade/content.tsx:49-95",
+        "components/world-2/arcade/ArcadeBonusTable.tsx:79-140"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Island Expeditions",
+      "aspect": "Islands and shops",
+      "title": "Island Expeditions",
+      "missing": [
+        "Bottles, garbage and daily collection progress",
+        "Trash and Rando shop unlocks and upgrade costs",
+        "Crystal-island mobs and unclaimed days",
+        "Shimmer trial, best result and upgrades",
+        "Fractal AFK hours and unlock costs",
+        "Seasalt island information"
+      ],
+      "ours": [
+        "Island expedition state exists in the data layer",
+        "W5 Sailing Islands is a different feature"
+      ],
+      "group": "World 2",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-2/islands?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/navigation.tsx:30-34",
+        "data/domain/world-2/islandExpedition.tsx:24-47",
+        "app/world-5/sailing/content.tsx:448-490"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Killroy",
+      "aspect": "Runs and permanent upgrades",
+      "title": "Killroy",
+      "missing": [
+        "Skulls, total kills and damage multiplier",
+        "Fight schedule and monster kill records",
+        "Run upgrade levels and effects",
+        "Permanent upgrade bonuses, progress and next breakpoints"
+      ],
+      "ours": [
+        "Killroy state exists in the data layer",
+        "Rift displays the separate Killroy Prime unlock"
+      ],
+      "group": "World 2",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-2/killroy?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/navigation.tsx:30-34",
+        "data/domain/world-2/killroy.tsx:4-39",
+        "app/world-4/rift/content.tsx:163-198"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Weekly Bosses",
+      "aspect": "Boss schedule, shop and actions",
+      "title": "Weekly Bosses",
+      "missing": [
+        "Trophy balance and dated boss schedule",
+        "Weekly shop items and prices",
+        "Current turn, character order and relevant character stats",
+        "Available action descriptions for each character"
+      ],
+      "ours": [],
+      "group": "World 2",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-2/weekly-bosses?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/navigation.tsx:30-34"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Vote Ballot",
+      "aspect": "Bonus Ballot and Meritocracy",
+      "title": "Vote Ballot",
+      "missing": [
+        "Selected Bonus Ballot and Meritocracy bonuses",
+        "Bonus multipliers and rotation countdowns",
+        "Available bonus effects and candidate voting percentages"
+      ],
+      "ours": [
+        "Vote state exists in the data layer"
+      ],
+      "group": "World 2",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-2/vote-ballot?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/navigation.tsx:30-34",
+        "data/domain/world-2/votes.tsx:13-60"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Characters",
+      "aspect": "Combat and AFK stats",
+      "title": "Character combat, AFK, and drop statistics",
+      "missing": [
+        "HP and MP; defence, accuracy, movement speed, critical chance and critical damage",
+        "Damage range; kills per hour and kill-per-kill multiplier",
+        "Drop rate, respawn rate, AFK gains, golden-food multiplier, non-consume chance, and class EXP multiplier",
+        "Bonus-source breakdowns for additional character stats"
+      ],
+      "ours": [
+        "Class level and XP; activity, map and portal progress; STR, AGI, WIS, LUK",
+        "Crystal chance, double-claim chance, Monster Cash multiplier, build speed, and their source tooltips",
+        "Money, away time, worship charge, equipped cards, bubbles, buffs, prayers, chips, and shrines"
+      ],
+      "group": "Characters",
+      "toolboxUrl": "https://idleontoolbox.com/characters?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/players/content.tsx:242-338",
+        "components/base/Stat.tsx:7-30"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Characters",
+      "aspect": "Skills",
+      "title": "Skill efficiency and EXP multipliers",
+      "missing": [
+        "Per-character skill efficiency and EXP multipliers",
+        "Bonus-source breakdowns for skill efficiency and EXP multipliers"
+      ],
+      "ours": [
+        "Skill level, XP progress, account rank, and Maestro/Voidwalker crystal-countdown reductions"
+      ],
+      "group": "Characters",
+      "toolboxUrl": "https://idleontoolbox.com/characters?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/players/content.tsx:98-188"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Characters",
+      "aspect": "Talents",
+      "title": "Saved talent allocations and Super Talent state",
+      "missing": [
+        "Both saved talent presets",
+        "Points spent on each talent page",
+        "Active or passive Super Talent state"
+      ],
+      "ours": [
+        "Current talent levels, maximum/book levels, bonus text, and added-level sources"
+      ],
+      "group": "Characters",
+      "toolboxUrl": "https://idleontoolbox.com/characters?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/players/content.tsx:802-878"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Characters",
+      "aspect": "Cards",
+      "title": "Saved card presets",
+      "missing": [
+        "Cards in each saved card preset"
+      ],
+      "ours": [
+        "Currently equipped cards, card bonuses, and current card-set bonus",
+        "Account card collection and set bonuses"
+      ],
+      "group": "Characters",
+      "toolboxUrl": "https://idleontoolbox.com/characters?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/players/content.tsx:364-405",
+        "app/account/cards/content.tsx:115-186"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Anvil",
+      "aspect": "Character point acquisition",
+      "title": "Anvil point sources and lifetime spending",
+      "missing": [
+        "Smithing and acme point-source breakdown",
+        "Lifetime materials and money spent on Anvil points"
+      ],
+      "ours": [
+        "Available points, coin/material point counts, upgrade costs, costs to max",
+        "XP, speed and capacity points, resulting bonuses, and production status"
+      ],
+      "group": "World 1",
+      "toolboxUrl": "https://idleontoolbox.com/characters?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/players/content.tsx:674-764"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Dashboard",
+      "aspect": "Daily reminders and reset timers",
+      "title": "Daily reminders and game-reset timers",
+      "missing": [
+        "Daily task, shop-stock, guild-task, and Picnic Stowaway reminders",
+        "Free-companion availability and remaining boss-gem, Arcanist-drop, and Top of the Mornin daily allowances",
+        "Unused Bargain Tag, Alchemy gem-purchase, and Post Office shipment reminders",
+        "Daily, weekly, server-weekly reset, and random-event timers"
+      ],
+      "ours": [
+        "Boss keys and pickup status, colosseum tickets, arcade-ball balances, money, and activity counts",
+        "Existing account/character alerts; Dungeon Happy Hour timer on Dungeons page"
+      ],
+      "group": "Dashboard",
+      "toolboxUrl": "https://idleontoolbox.com/dashboard?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/dashboard/dashboard.tsx:217-235,290-334",
+        "data/domain/alerts.tsx:24-46,306-425,428-515",
+        "app/account/dungeons/content.tsx:261-265"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Dashboard",
+      "aspect": "Resource and capacity warnings",
+      "title": "Resource shortages and capacity warnings",
+      "missing": [
+        "Printer storage-cap warnings",
+        "Refinery missing-material warnings and salt deficits with maximum sustainable rank",
+        "Breeding egg, Gaming sprout/sprinkler, and Sailing chest-cap warnings",
+        "Gaming squirrel and shovel readiness reminders"
+      ],
+      "ours": [
+        "Anvil capacity, worship capacity/overflow, ready traps, arcade capacity, and refinery rank-up alerts"
+      ],
+      "group": "Dashboard",
+      "toolboxUrl": "https://idleontoolbox.com/dashboard?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "data/domain/alerts.tsx:383-405,428-485",
+        "components/dashboard/dashboard.tsx:305-334"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Dashboard",
+      "aspect": "Progression and readiness",
+      "title": "Progression and upgrade-readiness information",
+      "missing": [
+        "Equip-ready tools and below-max talent reminders",
+        "Gilded Stamp and shiny threshold reminders",
+        "Dr Defecaus and Baba Yaga spawn/kill state",
+        "Ready cavern activities, Renew Bell uses, Harp threshold, and jar-break reminders",
+        "Pristine Charm and Symbol rolls remaining, and Summoning battle attempts",
+        "Library checkout-time breakpoints for 40, 60, 80, and 100 books"
+      ],
+      "ours": [
+        "Selected talent cooldowns, completed Construction upgrades, Food Lust, Equinox, Farming, familiar-purchase, and Ender Captain alerts",
+        "Miniboss count and days to next spawn",
+        "Library book count, next checkout, and time to 20 books"
+      ],
+      "group": "Dashboard",
+      "toolboxUrl": "https://idleontoolbox.com/dashboard?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "data/domain/alerts.tsx:408-418,457-511",
+        "components/dashboard/dashboard.tsx:241-288,305-334"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Research",
+      "aspect": "Research",
+      "title": "Research",
+      "missing": [
+        "Research progression, EXP sources and timers",
+        "Research Grid upgrades, shapes and placements",
+        "Observation collection, locations, Insight progression and rates",
+        "Posty Note rewards and level gates"
+      ],
+      "ours": [
+        "Research domain calculations feed other systems; no player-facing Research view found"
+      ],
+      "group": "World 7",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-7/research?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/navigation.tsx:68-74",
+        "data/domain/idleonData.tsx:171"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Gallery",
+      "aspect": "Gallery",
+      "title": "Gallery",
+      "missing": [
+        "Podium trophy placement and grade counts",
+        "Owned/missing trophies and nametags with nametag levels",
+        "Account and character Gallery multipliers and combined bonuses"
+      ],
+      "ours": [
+        "Gallery domain exists; no player-facing Gallery view found"
+      ],
+      "group": "World 7",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-7/gallery?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/navigation.tsx:68-74",
+        "data/domain/idleonData.tsx:205"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Zenith Market",
+      "aspect": "Market",
+      "title": "Zenith Market",
+      "missing": [
+        "Cluster balance",
+        "Upgrade levels, effects, next costs and cost to max"
+      ],
+      "ours": [
+        "Zenith Market bonuses feed existing systems; no Market view found"
+      ],
+      "group": "World 7",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-7/zenith-market?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/navigation.tsx:68-74",
+        "data/domain/idleonData.tsx:204"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Clam Work",
+      "aspect": "Clam Work",
+      "title": "Clam Work",
+      "missing": [
+        "Pearls, worker class, promotion chance and cost",
+        "Pearl values, clam count/HP/respawn and character Multikill context",
+        "Upgrade levels/effects/costs",
+        "Compensation rewards and unlock state"
+      ],
+      "ours": [
+        "Clamworks supplies Coral and Legend Talent calculations; no Clam Work view found"
+      ],
+      "group": "World 7",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-7/clam-work?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/navigation.tsx:68-74",
+        "data/domain/idleonData.tsx:191"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Advice Fish",
+      "aspect": "Advice",
+      "title": "Advice Fish",
+      "missing": [
+        "Advice levels, current effects and next coin costs"
+      ],
+      "ours": [
+        "No player-facing Advice Fish view found"
+      ],
+      "group": "World 7",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-7/advice-fish?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/navigation.tsx:68-74",
+        "data/domain/idleonData.tsx:197"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Minehead",
+      "aspect": "Minehead",
+      "title": "Minehead",
+      "missing": [
+        "Mine Currency, daily tries, damage, lives and currency gain rate",
+        "Upgrade levels/effects/costs and Research requirements",
+        "Opponent progress, HP, depth charges and rewards"
+      ],
+      "ours": [
+        "Minehead rewards feed other domains; no Minehead view found"
+      ],
+      "group": "World 7",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-7/minehead?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/navigation.tsx:68-74",
+        "data/domain/idleonData.tsx:172"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Glimbo",
+      "aspect": "Trading",
+      "title": "Glimbo",
+      "missing": [
+        "Total trades and Drop Rate bonus",
+        "Trade material costs and trade counts",
+        "Target talent maximum and next trade level gain"
+      ],
+      "ours": [
+        "No player-facing Glimbo trade view found"
+      ],
+      "group": "World 7",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-7/glimbo?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/navigation.tsx:68-74"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "The Button",
+      "aspect": "Demands and bonuses",
+      "title": "The Button",
+      "missing": [
+        "Presses, skips, cycle and bonus rotation",
+        "Current demand progress, ready demands, character context and next requirements"
+      ],
+      "ours": [
+        "Button bonuses feed Sushi and Research calculations; no Button view found"
+      ],
+      "group": "World 7",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-7/the-button?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/navigation.tsx:68-74",
+        "data/domain/idleonData.tsx:175"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Spelunking",
+      "aspect": "Upgrades",
+      "title": "Spelunking upgrades",
+      "missing": [
+        "Upgrade levels/maxima, effects, next costs and cost to max",
+        "Upgrade groups and unlock path"
+      ],
+      "ours": [
+        "Tunnel collection, lore rewards and limited Grand Discovery upgrade state"
+      ],
+      "group": "World 7",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-7/spelunking?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/world-7/spelunking/spelunkingDisplay.tsx:31-55",
+        "components/world-7/spelunking/spelunkingDisplay.tsx:58-170"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Spelunking",
+      "aspect": "Lore chapters",
+      "title": "Spelunking Lore chapters",
+      "missing": [
+        "Chapter bonus levels and current effects",
+        "Required page counts and chapter progression"
+      ],
+      "ours": [
+        "Lore boss rewards and completion state"
+      ],
+      "group": "World 7",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-7/spelunking?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/world-7/spelunking/spelunkingDisplay.tsx:31-55",
+        "components/world-7/spelunking/spelunkingDisplay.tsx:58-170"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Spelunking",
+      "aspect": "Elixirs",
+      "title": "Spelunking elixirs",
+      "missing": [
+        "Elixir effects",
+        "Unlocked elixir count, slots and duplicates"
+      ],
+      "ours": [
+        "No elixir view in existing Spelunking UI"
+      ],
+      "group": "World 7",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-7/spelunking?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/world-7/spelunking/spelunkingDisplay.tsx:31-55",
+        "components/world-7/spelunking/spelunkingDisplay.tsx:58-170"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Spelunking",
+      "aspect": "Account metrics",
+      "title": "Spelunking account metrics",
+      "missing": [
+        "POW and source-factor breakdown",
+        "Amber held and gain, page reads, efficiency",
+        "Stamina regen and Overstim amount/rate/stack",
+        "Current Manic Mode state"
+      ],
+      "ours": [
+        "Ordinary and Grand Discovery collection totals"
+      ],
+      "group": "World 7",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-7/spelunking?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/world-7/spelunking/spelunkingDisplay.tsx:31-55",
+        "components/world-7/spelunking/spelunkingDisplay.tsx:58-170"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Spelunking",
+      "aspect": "Tunnel records",
+      "title": "Spelunking tunnel progression",
+      "missing": [
+        "Best Manic depth",
+        "Next Grand Discovery chance"
+      ],
+      "ours": [
+        "Best depth, boss depth, biggest haul, ordinary/Grand counts and eligibility"
+      ],
+      "group": "World 7",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-7/spelunking?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/world-7/spelunking/spelunkingDisplay.tsx:90-131",
+        "components/world-7/spelunking/spelunkingDisplay.tsx:149-170"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Legend Talents",
+      "aspect": "Fever bonuses",
+      "title": "Legend Talent Fever levels",
+      "missing": [
+        "Fever color and bonus-level contribution to each affected talent maximum"
+      ],
+      "ours": [
+        "Talent current/base-max level and descriptions; owned/available points"
+      ],
+      "group": "World 7",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-7/legend-talents?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-7/legendTalents/content.tsx:32-89"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Coral Reef",
+      "aspect": "Dancing Coral acquisition",
+      "title": "Dancing Coral sources",
+      "missing": [
+        "Source locations or drop monsters for each coral type"
+      ],
+      "ours": [
+        "Bonus effect, shrine level/max, purchased bonus and unpurchased cost"
+      ],
+      "group": "World 7",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-7/coral-reef?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-7/coral/content.tsx:168-210"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Sushi Station",
+      "aspect": "Station board",
+      "title": "Sushi Station board",
+      "missing": [
+        "Placed sushi tiers and per-slot Bucks/hr",
+        "Slot types, Fireplace assignments and effects",
+        "Filled and total slots"
+      ],
+      "ours": [
+        "Sushi collection knowledge cards and account production totals"
+      ],
+      "group": "World 7",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-7/sushi-station?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/world-7/sushi/content.tsx:13-44",
+        "components/world-7/sushi/sushiOverview.tsx:64-123",
+        "components/world-7/sushi/sushiCollection.tsx:25-101"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Sushi Station",
+      "aspect": "Bonus totals and progression",
+      "title": "Sushi bonus totals and multipliers",
+      "missing": [
+        "Grouped Knowledge bonus totals and each sushi contribution",
+        "Effective Combo, Spark and Overtuned multipliers",
+        "Spark generation and next multiplier breakpoints"
+      ],
+      "ours": [
+        "Per-sushi current/next Knowledge bonus; raw best combo, sparks and fuel overflow"
+      ],
+      "group": "World 7",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-7/sushi-station?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/world-7/sushi/sushiOverview.tsx:64-79",
+        "components/world-7/sushi/sushiCollection.tsx:25-101",
+        "app/world-7/sushi/content.tsx:34-44"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Jelly Operator",
+      "aspect": "Board layout",
+      "title": "Jelly Operator layout",
+      "missing": [
+        "Placed cell footprints and unlocked/occupied board arrangement",
+        "Adjacency speed effects and board passive damage/speed totals"
+      ],
+      "ours": [
+        "Placed-copy counts, unlocked tile count and per-cell passive text"
+      ],
+      "group": "World 7",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-7/jelly-operator?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/world-7/jelly-operator/jellyOperator.tsx:19-166"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Jelly Operator",
+      "aspect": "Cell combat",
+      "title": "Jelly Operator cell combat stats",
+      "missing": [
+        "Current DPS for each cell type"
+      ],
+      "ours": [
+        "Cell level/XP, passive, placement count and tile size"
+      ],
+      "group": "World 7",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-7/jelly-operator?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/world-7/jelly-operator/jellyOperator.tsx:82-115"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Jelly Operator",
+      "aspect": "Obstruction targets",
+      "title": "Jelly Operator obstruction targets",
+      "missing": [
+        "HP and time limit for all obstruction targets"
+      ],
+      "ours": [
+        "Current target HP/time, upcoming reward and all target reward/progress states"
+      ],
+      "group": "World 7",
+      "toolboxUrl": "https://idleontoolbox.com/account/world-7/jelly-operator?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/world-7/jelly-operator/jellyOperator.tsx:40-53",
+        "components/world-7/jelly-operator/jellyOperator.tsx:148-166"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Gem Shop",
+      "aspect": "Gem Shop",
+      "title": "Gem Shop purchase catalog",
+      "missing": [
+        "Gem balance; item effects, gem prices, purchased quantities and purchase caps; current and past-special catalog"
+      ],
+      "ours": [
+        "Indirect capacity bonuses and upload privacy disclosure"
+      ],
+      "group": "Account",
+      "toolboxUrl": "https://idleontoolbox.com/account/prem-currency/gem-shop?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/profile/upload/content.tsx:111-120",
+        "local://audit-class-baseline.md:7"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Companions",
+      "aspect": "Acquisition and tradability",
+      "title": "Companion acquisition and tradability",
+      "missing": [
+        "Pet Crystal balance, boxes opened, free-companion availability, bonus tokens",
+        "Per-companion tradable inventory and Pet Mart+ ownership/prices"
+      ],
+      "ours": [
+        "Companion ownership, current bonus and owned level-2 bonus"
+      ],
+      "group": "Account",
+      "toolboxUrl": "https://idleontoolbox.com/account/prem-currency/pets?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/account/companions/content.tsx:20-43,84-123"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Bundles",
+      "aspect": "Bundles",
+      "title": "Bundle and pack ownership",
+      "missing": [
+        "Owned bundle/pack totals and individual ownership",
+        "Bundle, Pet Mart and Starter Pack contents, cash prices and included currencies/pets"
+      ],
+      "ours": [
+        "Premium items remain visible; bundle purchase state has no viewer"
+      ],
+      "group": "Account",
+      "toolboxUrl": "https://idleontoolbox.com/account/prem-currency/bundles?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/profile/upload/content.tsx:111-120",
+        "local://audit-class-baseline.md:9"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Grimoire",
+      "aspect": "Monsters",
+      "title": "Monster bone drops",
+      "missing": [
+        "Bone types and quantities by monster"
+      ],
+      "ours": [
+        "Bone balances, upgrades and Bone Drop Rate analysis"
+      ],
+      "group": "Master Classes",
+      "toolboxUrl": "https://idleontoolbox.com/account/class-specific/grimoire?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/account/grimoireDisplay.tsx:244-310"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Grimoire",
+      "aspect": "Wraith Form",
+      "title": "Wraith Form combat information",
+      "missing": [
+        "Maximum HP, critical-hit chance and critical damage"
+      ],
+      "ours": [
+        "Wraith damage, accuracy, defence and Bone Drop Rate"
+      ],
+      "group": "Master Classes",
+      "toolboxUrl": "https://idleontoolbox.com/account/class-specific/grimoire?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/account/grimoireDisplay.tsx:38-99,244-310"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Compass",
+      "aspect": "Abominations",
+      "title": "Abomination progression",
+      "missing": [
+        "Abomination catalog, killed/future state, elemental weakness, HP and map location"
+      ],
+      "ours": [
+        "Compass paths, upgrades, dust balances and combat efficiency"
+      ],
+      "group": "Master Classes",
+      "toolboxUrl": "https://idleontoolbox.com/account/class-specific/compass?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/account/compassDisplay.tsx:329-349"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Compass",
+      "aspect": "Medallions and Tempest drops",
+      "title": "Medallions and Tempest drops",
+      "missing": [
+        "Collected medallion total and missing per-monster collection state",
+        "Monster-specific Tempest equipment drops and dust quantities"
+      ],
+      "ours": [
+        "Compass upgrades and dust balances"
+      ],
+      "group": "Master Classes",
+      "toolboxUrl": "https://idleontoolbox.com/account/class-specific/compass?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/account/compassDisplay.tsx:329-349"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Compass",
+      "aspect": "Portals",
+      "title": "Tempest portal progression",
+      "missing": [
+        "Per-map portal dust requirements and unlocked state"
+      ],
+      "ours": [
+        "Compass path upgrades; character current-map kill-based portal progress"
+      ],
+      "group": "Master Classes",
+      "toolboxUrl": "https://idleontoolbox.com/account/class-specific/compass?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/account/compassDisplay.tsx:329-349",
+        "app/players/content.tsx:285-288"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Compass",
+      "aspect": "Tempest Form",
+      "title": "Tempest Form combat and daily-drop information",
+      "missing": [
+        "HP, mastery, critical-hit chance/damage, attack speed, invulnerability time, range, movement speed and multishot",
+        "Current Top of the Mornin' kills used/available"
+      ],
+      "ours": [
+        "Tempest damage, accuracy, defence and dust multiplier"
+      ],
+      "group": "Master Classes",
+      "toolboxUrl": "https://idleontoolbox.com/account/class-specific/compass?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/account/compassDisplay.tsx:192-233,329-349"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Tesseract",
+      "aspect": "Maps",
+      "title": "Arcane Crystal map progression",
+      "missing": [
+        "Per-map Tachyon types/quantities, charge kills, time limit and map unlock state",
+        "Map-specific drop-rate, EXP and AFK bonuses",
+        "Arcanist weapon/ring drop chance and quality"
+      ],
+      "ours": [
+        "Tachyon balances, Prisma information, upgrades and combat efficiency"
+      ],
+      "group": "Master Classes",
+      "toolboxUrl": "https://idleontoolbox.com/account/class-specific/tesseract?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/account/tesseractDisplay.tsx:166-259",
+        "app/players/content.tsx:285-288"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Tesseract",
+      "aspect": "Arcanist Form",
+      "title": "Arcanist Form combat information",
+      "missing": [
+        "Mastery, critical-hit chance, critical damage and attack speed"
+      ],
+      "ours": [
+        "Arcane damage, accuracy, defence and Tachyon Drop Rate"
+      ],
+      "group": "Master Classes",
+      "toolboxUrl": "https://idleontoolbox.com/account/class-specific/tesseract?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/account/tesseractDisplay.tsx:43-105,166-259"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Royal Armory",
+      "aspect": "Resources",
+      "title": "Resource-node catalog",
+      "missing": [
+        "All resource nodes including unconnected nodes, grade, remaining capacity and collector links",
+        "Empty/unconnected node totals and total node levels"
+      ],
+      "ours": [
+        "Connected node grade, remaining capacity, exhausted state and alternatives within Outposts"
+      ],
+      "group": "Master Classes",
+      "toolboxUrl": "https://idleontoolbox.com/account/class-specific/royal-armory?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/account/royalArmoryDisplay.tsx:407-468,538-616"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Royal Armory",
+      "aspect": "Statue Flair",
+      "title": "Statue Flair progression",
+      "missing": [
+        "Per-statue Flair tier, EXP multiplier and marble cost",
+        "Total marble needed for each target Flair tier"
+      ],
+      "ours": [
+        "Royal Statue levels, bonuses, restoration/upgrade odds and material balances"
+      ],
+      "group": "Master Classes",
+      "toolboxUrl": "https://idleontoolbox.com/account/class-specific/royal-armory?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/account/royalArmoryDisplay.tsx:226-319",
+        "app/players/content.tsx:639-652"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Royal Armory",
+      "aspect": "Outposts",
+      "title": "Outpost upgrade and clearing information",
+      "missing": [
+        "Expanded Barracks, Advanced Logistics and Greater Education point costs and effects",
+        "Clearing production rate and time until an unbuilt outpost clears"
+      ],
+      "ours": [
+        "Outpost upgrade levels, unused points, production/range, ranks/ETA, units and connections; cleared/required kills"
+      ],
+      "group": "Master Classes",
+      "toolboxUrl": "https://idleontoolbox.com/account/class-specific/royal-armory?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/account/royalArmoryDisplay.tsx:475-534"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Speedrun",
+      "aspect": "Speedrun",
+      "title": "Voidwalker speedruns",
+      "missing": [
+        "Run highscore/duration, talent points per run, portal step, Void Radius and Equinox goal",
+        "Run damage/multikill/kill-per-kill and boss portal contribution",
+        "Per-map portal progress, required kills and clear times with/without Void Radius"
+      ],
+      "ours": [
+        "General character stats and current-map portal kill requirements"
+      ],
+      "group": "Master Classes",
+      "toolboxUrl": "https://idleontoolbox.com/account/class-specific/speedrun?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/players/content.tsx:276-305",
+        "local://audit-class-baseline.md:18"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Task Board",
+      "aspect": "Daily tasks",
+      "title": "Daily Task Board tasks",
+      "missing": [
+        "Current daily task, requirement and progress for each world"
+      ],
+      "ours": [
+        "Non-daily task levels, description and current value"
+      ],
+      "group": "Account",
+      "toolboxUrl": "https://idleontoolbox.com/account/task-board/tasks?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/account/task-board/tasks.tsx:17-21,28-41"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "information",
+      "domain": "Task Board",
+      "aspect": "Spending information",
+      "title": "Merit balance and upgrade costs",
+      "missing": [
+        "Unspent merits for each world and merit price for the next purchase"
+      ],
+      "ours": [
+        "Merit upgrade effect and current/max levels"
+      ],
+      "group": "Account",
+      "toolboxUrl": "https://idleontoolbox.com/account/task-board/merits?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "components/account/task-board/merits.tsx:27-43"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "aspect",
+      "domain": "Task Board",
+      "aspect": "Task unlock rewards",
+      "title": "Task unlock rewards",
+      "missing": [
+        "Available unlocks, next-unlock progression and unlocked recipe total",
+        "Recipe, Gem and Time Candy rewards with unlock costs and status"
+      ],
+      "ours": [
+        "Task Board Tasks/Merits/Achievements; Anvil production management"
+      ],
+      "group": "Account",
+      "toolboxUrl": "https://idleontoolbox.com/account/task-board/unlocks?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/account/task-board/content.tsx:35-47",
+        "local://audit-class-baseline.md:22-25"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Owl",
+      "aspect": "Owl",
+      "title": "Owl clicker",
+      "missing": [
+        "Feather balances/rates, upgrade levels/effects/costs, shiny feathers, reset progression and Mega Feather milestones",
+        "Permanent IdleOn bonus totals"
+      ],
+      "ours": [
+        "No clicker progression surface located"
+      ],
+      "group": "Clickers",
+      "toolboxUrl": "https://idleontoolbox.com/account/clickers/owl?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/players/content.tsx:1046-1048",
+        "local://audit-class-baseline.md:29"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Kangaroo",
+      "aspect": "Kangaroo",
+      "title": "Kangaroo clicker",
+      "missing": [
+        "Fish/tar balances and rates, fish/tar upgrades, shiny catches, reset points and Mega Fish milestones",
+        "Permanent bonuses, multiplier breakdown and reset-bonus levels"
+      ],
+      "ours": [
+        "No clicker progression surface located"
+      ],
+      "group": "Clickers",
+      "toolboxUrl": "https://idleontoolbox.com/account/clickers/kangaroo?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/players/content.tsx:1046-1048",
+        "local://audit-class-baseline.md:29"
+      ],
+      "supplemental": false
+    },
+    {
+      "level": "domain",
+      "domain": "Bubba",
+      "aspect": "Bubba",
+      "title": "Bubba clicker",
+      "missing": [
+        "Meat balance/rate, upgrades, permanent bonuses and Megaflesh milestones",
+        "Happiness/pat timing, dice-reset timing and smoker progress"
+      ],
+      "ours": [
+        "No clicker progression surface located"
+      ],
+      "group": "Clickers",
+      "toolboxUrl": "https://idleontoolbox.com/account/clickers/bubba?profile=liiiiiiiiiiiig",
+      "evidence": [
+        "app/players/content.tsx:1046-1048",
+        "local://audit-class-baseline.md:29"
+      ],
+      "supplemental": false
+    }
+  ],
+  "pages": [
+    {
+      "name": "General",
+      "url": "https://idleontoolbox.com/account/misc/general?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Family obols",
+        "Total Money",
+        "Currencies",
+        "Shrines",
+        "Statues",
+        "Colosseum scores",
+        "Minigame scores",
+        "Totals",
+        "Giant Mob Chance"
+      ],
+      "observed": [
+        "Currency balances",
+        "Guaranteed and variable candy duration",
+        "Six colosseum scores",
+        "Nine minigame scores",
+        "Lifetime damage, kill and production totals",
+        "Giant mob chance and shrine/vial contributions",
+        "Bubble, stamp, statue, shrine and PO totals"
+      ],
+      "mappedTo": [
+        "components/dashboard/dashboard.tsx",
+        "app/world-1/stamps/content.tsx",
+        "app/world-2/alchemy/content.tsx",
+        "app/world-3/construction/content.tsx",
+        "app/players/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Existing obol/shrine/statue summaries are not duplicate gaps. Dashboard coverage belongs to LiveCharacters. Candy and giant chance tooltips sampled.",
+      "slice": "misc"
+    },
+    {
+      "name": "Storage",
+      "url": "https://idleontoolbox.com/account/misc/storage?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Storage Money",
+        "Items",
+        "Slots"
+      ],
+      "observed": [
+        "Stored item images and quantities",
+        "Item identity, type, description and exact amount on hover",
+        "Greenstack markers",
+        "Slots Owned 571",
+        "Numbered and named storage chests with added-slot counts",
+        "Storage money"
+      ],
+      "mappedTo": [
+        "app/account/storage/content.tsx",
+        "components/base/IconImage.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Both tabs reviewed. Chest acquisition sources and unlock-state semantics not established.",
+      "slice": "misc"
+    },
+    {
+      "name": "Quests",
+      "url": "https://idleontoolbox.com/account/misc/quests?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Unique quests completed",
+        "Character selection",
+        "Completion filters",
+        "Blunder Hills",
+        "Yum Yum Desert",
+        "Frostbite Tundra",
+        "Hyperion Nebula",
+        "Smolderin' Plateau",
+        "Spirited Valley",
+        "Shimmerfin Deep"
+      ],
+      "observed": [
+        "Unique quest count 317 and star-talent scaling guidance",
+        "NPC quest sequences and completion indicators",
+        "World 7 NPC groups",
+        "Missable greenstacks view and guidance"
+      ],
+      "mappedTo": [
+        "app/account/quests/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Scripticus and Sad Urie expanded. Missable greenstacks produced an empty list for this account.",
+      "slice": "misc"
+    },
+    {
+      "name": "Dungeons",
+      "url": "https://idleontoolbox.com/account/misc/dungeons?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Summary",
+        "Passives",
+        "Rng Items",
+        "Traits",
+        "Happy Hour"
+      ],
+      "observed": [
+        "Rank and EXP",
+        "Boosted runs, credits, flurbos",
+        "Passive effects and current/max levels",
+        "Cost and Cost To Max",
+        "RNG item effects and current/max levels",
+        "Trait groups, rank gates and effects"
+      ],
+      "mappedTo": [
+        "app/account/dungeons/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Reuses local://toolbox-pilot-evidence.md:17-109. All passive upgrades were maxed; Happy Hour schedule unavailable.",
+      "slice": "misc"
+    },
+    {
+      "name": "Friends Stats",
+      "url": "https://idleontoolbox.com/account/misc/friends-stats?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Slots",
+        "Multiplier",
+        "Friend bonuses"
+      ],
+      "observed": [
+        "Seven slots",
+        "2.50x multiplier",
+        "Seven bonus types and current values",
+        "Contributing friend name and level per bonus"
+      ],
+      "mappedTo": [],
+      "status": "reviewed",
+      "notes": "Populated friend bonuses cover damage, EXP, efficiency, drop rate, coins and extra kills.",
+      "slice": "misc"
+    },
+    {
+      "name": "Constellations",
+      "url": "https://idleontoolbox.com/account/misc/constellations?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Constellations",
+        "Star Signs",
+        "chronus",
+        "hydron",
+        "seraph"
+      ],
+      "observed": [
+        "Total points 229 / 229",
+        "Constellation location, requirement, points and completing characters",
+        "Star sign board names and entries",
+        "Bonuses, costs and unlocked check markers"
+      ],
+      "mappedTo": [
+        "app/account/constellations/content.tsx",
+        "app/players/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "All three Star Signs boards inspected. Aligned signs already appear locally per character.",
+      "slice": "misc"
+    },
+    {
+      "name": "Upgrade Vault",
+      "url": "https://idleontoolbox.com/account/misc/upgrade-vault?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Total Levels",
+        "Vault cost reduction",
+        "Upgrade cards"
+      ],
+      "observed": [
+        "Total levels 18264",
+        "Vault cost reduction 29.80x",
+        "Upgrade effects",
+        "Current/max levels",
+        "Cost and cost to max",
+        "Unlock level"
+      ],
+      "mappedTo": [
+        "components/account/upgradeVaultDisplay.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Whole upgrade list reviewed at high level; maxed and non-maxed entries populated.",
+      "slice": "misc"
+    },
+    {
+      "name": "Random Events",
+      "url": "https://idleontoolbox.com/account/misc/random-events?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Timezone guidance",
+        "Upcoming events"
+      ],
+      "observed": [
+        "Event type",
+        "Map",
+        "Absolute local spawn time",
+        "Twelve event cards"
+      ],
+      "mappedTo": [
+        "app/account/quests/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Reuses local://toolbox-pilot-evidence.md:111-134. Existing Events quest tab is not a spawn schedule.",
+      "slice": "misc"
+    },
+    {
+      "name": "Event Shop",
+      "url": "https://idleontoolbox.com/account/misc/event-shop?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Stars",
+        "Total bonuses",
+        "Bonus catalogue"
+      ],
+      "observed": [
+        "Stars 61",
+        "Bonuses 55 / 56",
+        "Bonus names, effects and star prices",
+        "Owned/unowned progress"
+      ],
+      "mappedTo": [],
+      "status": "reviewed",
+      "notes": "Hide owned leaves only Fishmaxxing, price 275. No purchase action used.",
+      "slice": "misc"
+    },
+    {
+      "name": "Guild",
+      "url": "https://idleontoolbox.com/account/misc/guild?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Guild summary",
+        "Members",
+        "Bonuses",
+        "Saved snapshots controls"
+      ],
+      "observed": [
+        "Guild identity, member count and capacity",
+        "Guild EXP progress",
+        "Roster names, ranks, levels, earned GP and wanted bonuses",
+        "Bonus current/max levels, effects, Cost and Cost To Max"
+      ],
+      "mappedTo": [],
+      "status": "reviewed",
+      "notes": "Reuses local://toolbox-pilot-evidence.md:136-197. Account guild state reviewed; Save/Export/Clear not used. Global guild directory excluded.",
+      "slice": "misc"
+    },
+    {
+      "name": "Tournament",
+      "url": "https://idleontoolbox.com/account/misc/tournament?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Tournament summary",
+        "Companions",
+        "Pet Mart",
+        "Matches",
+        "Internal Leaderboard",
+        "Bronze",
+        "Silver",
+        "Gold",
+        "Diamond",
+        "Master"
+      ],
+      "observed": [
+        "Division, match day, tournament day and registrations",
+        "Owned/unowned companion list and power",
+        "Pet Crystals and shop day",
+        "Rotation upgrades and pets with effects, prices and discounts",
+        "Off-rotation prices",
+        "Opponent, stage, win/loss, hearts and both teams/power",
+        "Recorded battle rounds and deaths"
+      ],
+      "mappedTo": [
+        "app/account/companions/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "All four main tabs inspected. Ten matches populated; first battle sequence expanded. Gold internal standings unavailable; other divisions showed loading. No top-level Leaderboards opened.",
+      "slice": "misc"
+    },
+    {
+      "name": "Printer",
+      "url": "https://idleontoolbox.com/account/world-3/printer?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Totals",
+        "Character samples",
+        "Printer output breakdown"
+      ],
+      "observed": [
+        "Per-item hourly output and particle output",
+        "Atom threshold",
+        "Per-character sample percentage, stored samples and active prints",
+        "Boosted output tooltip with daily and Printer go brr quantities",
+        "Nested output multiplier sources"
+      ],
+      "mappedTo": [
+        "app/world-3/construction/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "world34"
+    },
+    {
+      "name": "Refinery",
+      "url": "https://idleontoolbox.com/account/world-3/refinery?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Cycles",
+        "Salt balance table",
+        "Salt rank and fuel cards"
+      ],
+      "observed": [
+        "Cycle times and cycles/hour",
+        "Squire readiness",
+        "Salt rank, produced/hour, consumed/hour, net balance/hour, maximum no-deficit rank and action",
+        "Auto-refine, progress, rank-up time, time from empty and fuel time",
+        "Fuel cost per cycle/hour/rank-up and owned quantity"
+      ],
+      "mappedTo": [
+        "app/world-3/construction/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "world34"
+    },
+    {
+      "name": "Atom Collider",
+      "url": "https://idleontoolbox.com/account/world-3/atom-collider?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Particles",
+        "Atom upgrades"
+      ],
+      "observed": [
+        "Particle balance and stamp reduction",
+        "Atom level/max, effect, current/next/max cost and time to next level",
+        "Carbon and Fluoride total bonuses"
+      ],
+      "mappedTo": [
+        "components/world-3/construction/atomCollider.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "world34"
+    },
+    {
+      "name": "Equinox",
+      "url": "https://idleontoolbox.com/account/world-3/equinox?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Upgrades",
+        "Challenges"
+      ],
+      "observed": [
+        "Fill rate, bar progress and time to full",
+        "Upgrade level/max, effect and total bonus",
+        "Active challenge progress",
+        "Completed challenge descriptions and rewards"
+      ],
+      "mappedTo": [
+        "app/world-3/equinox/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "world34"
+    },
+    {
+      "name": "Buildings",
+      "url": "https://idleontoolbox.com/account/world-3/buildings?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Build speeds",
+        "Building cards"
+      ],
+      "observed": [
+        "Base and trimmed build speeds",
+        "Building level/max and construction progress",
+        "Trimmed and non-trimmed completion times",
+        "Next and max material costs"
+      ],
+      "mappedTo": [
+        "components/world-3/construction/buildings.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "world34"
+    },
+    {
+      "name": "Death Note",
+      "url": "https://idleontoolbox.com/account/world-3/death-note?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Normal monsters",
+        "Minibosses",
+        "World groups"
+      ],
+      "observed": [
+        "World multikill bonus",
+        "Monster kill counts and skull ranks",
+        "Miniboss kill counts and multikill bonus"
+      ],
+      "mappedTo": [
+        "app/world-3/construction/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "world34"
+    },
+    {
+      "name": "Worship",
+      "url": "https://idleontoolbox.com/account/world-3/worship?profile=liiiiiiiiiiiig",
+      "sections": [
+        "MSA Totalizer",
+        "Charge",
+        "Totems"
+      ],
+      "observed": [
+        "Totalizer bonus values",
+        "Aggregate and character charge/cap/rate/full times",
+        "Best wizard and charge with syphon",
+        "Totem map, maximum wave, XP/wave, XP/charge, efficiency threshold and souls"
+      ],
+      "mappedTo": [
+        "app/world-3/worship/content.tsx",
+        "components/world-3/worship/charge.tsx",
+        "components/world-3/worship/totem.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "world34"
+    },
+    {
+      "name": "Prayers",
+      "url": "https://idleontoolbox.com/account/world-3/prayers?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Prayer cards"
+      ],
+      "observed": [
+        "Prayer level, bonus, curse, unlock wave/map and capped status"
+      ],
+      "mappedTo": [
+        "components/world-3/worship/prayers.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "world34"
+    },
+    {
+      "name": "Traps",
+      "url": "https://idleontoolbox.com/account/world-3/traps?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Collector",
+        "Totals",
+        "Character traps"
+      ],
+      "observed": [
+        "Collector rates, XP modifier and shiny chance/quantity",
+        "Account and character critter totals",
+        "Character level, equipped trap and remaining timer",
+        "Trap tooltip quantity/shiny multipliers, trap XP and critter quantity"
+      ],
+      "mappedTo": [
+        "app/world-3/trapping/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "world34"
+    },
+    {
+      "name": "Salt Lick",
+      "url": "https://idleontoolbox.com/account/world-3/salt-lick?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Upgrade cards"
+      ],
+      "observed": [
+        "Upgrade effect, level/max, current cost, owned resources and max status"
+      ],
+      "mappedTo": [
+        "components/world-3/construction/saltLick.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "world34"
+    },
+    {
+      "name": "Construction",
+      "url": "https://idleontoolbox.com/account/world-3/construction?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Main",
+        "Cog stat calculator"
+      ],
+      "observed": [
+        "Cog board, player placements and selected statistic values",
+        "Build, build percentage, XP, player XP boost and flaggy board modes",
+        "Build rate, player XP rate, flaggy rate and player XP bonus",
+        "Small cog placements and inventory count",
+        "Cog tooltip type/tier and XP multiplier",
+        "Embedded optimizer controls and calculator ranges"
+      ],
+      "mappedTo": [
+        "app/world-3/construction/content.tsx",
+        "components/world-3/construction/buildings.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Local Construction covers other systems through tabs; Toolbox page here is cog board. Optimizer was not run.",
+      "slice": "world34"
+    },
+    {
+      "name": "Armor Smithy",
+      "url": "https://idleontoolbox.com/account/world-3/armor-smithy?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Completed sets",
+        "Armor set cards"
+      ],
+      "observed": [
+        "Completed-set count",
+        "Per-set unlocked status and account bonus"
+      ],
+      "mappedTo": [
+        "components/world-3/worship/totem.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Local Worship uses Dementia Set effect, not set collection.",
+      "slice": "world34"
+    },
+    {
+      "name": "Hat Rack",
+      "url": "https://idleontoolbox.com/account/world-3/hat-rack?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Totals",
+        "Premium helmets",
+        "Bonuses"
+      ],
+      "observed": [
+        "Hat count and bonus multiplier",
+        "Acquired and not-acquired premium helmets",
+        "Aggregated hat stat and multiplier bonuses"
+      ],
+      "mappedTo": [],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "world34"
+    },
+    {
+      "name": "Cooking",
+      "url": "https://idleontoolbox.com/account/world-4/cooking?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Meals",
+        "Kitchens",
+        "Ribbons",
+        "Mastery"
+      ],
+      "observed": [
+        "Meal level, current/next bonus, progress, milestone time and ladles",
+        "Best meal speed contribution",
+        "Kitchen spice quantities/claims, total/per-kitchen speed, fire/luck levels and costs",
+        "Ribbon totals, highest/lowest/max rank, coverage, daily gain distribution, shelf and rank multipliers",
+        "Cooking mastery level/XP/rate/time/rank, point pools and upgrade levels/effects"
+      ],
+      "mappedTo": [
+        "app/world-4/cooking/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "world34"
+    },
+    {
+      "name": "Breeding",
+      "url": "https://idleontoolbox.com/account/world-4/breeding?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Mobs: Shinies",
+        "Mobs: Breedability",
+        "Mobs: All",
+        "Territory",
+        "Upgrades",
+        "Arena"
+      ],
+      "observed": [
+        "Egg timing and power range",
+        "Shiny level/passive and aggregate speed/levels",
+        "Breedability level/chance and aggregate speed/levels",
+        "World pet gene levels",
+        "Territory spice stock/forage progress/rates/pet power",
+        "Upgrade level/effect/resource costs",
+        "Arena maximum wave and milestone bonuses"
+      ],
+      "mappedTo": [
+        "app/world-4/breeding/content.tsx",
+        "components/world-4/breeding/pets.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "world34"
+    },
+    {
+      "name": "Laboratory",
+      "url": "https://idleontoolbox.com/account/world-4/laboratory?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Main frame",
+        "Console",
+        "Chips And Jewels Rotation"
+      ],
+      "observed": [
+        "Connected player pixel range and positions",
+        "Bonus and jewel active status with effect tooltip",
+        "Character level and equipped chips, repository counts",
+        "Dated current/future weekly chip/jewel stock, sold-out status and material costs"
+      ],
+      "mappedTo": [
+        "app/world-4/lab/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "world34"
+    },
+    {
+      "name": "Rift",
+      "url": "https://idleontoolbox.com/account/world-4/rift?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Tasks",
+        "Bonuses",
+        "Skill Mastery",
+        "Construct Mastery"
+      ],
+      "observed": [
+        "Rift stage monster and objective list",
+        "Unlocked bonus descriptions and total bonus values",
+        "Skill totals and milestone benefits",
+        "Construction mastery total level, multipliers and milestone unlocks"
+      ],
+      "mappedTo": [
+        "app/world-4/rift/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "world34"
+    },
+    {
+      "name": "Tome",
+      "url": "https://idleontoolbox.com/account/world-4/tome?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Overview",
+        "Rankings"
+      ],
+      "observed": [
+        "Total points and rank",
+        "Nametag reward reset timer",
+        "Aggregated Tome bonus values",
+        "Per-line current quantity and points",
+        "Rankings peer percentiles and capped counts"
+      ],
+      "mappedTo": [
+        "app/account/tome/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Rankings inspected as embedded page section; treated separately from account information gaps.",
+      "slice": "world34"
+    },
+    {
+      "name": "Sailing",
+      "url": "https://idleontoolbox.com/account/world-5/sailing?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Artifacts",
+        "Trades",
+        "Boats and Captains",
+        "Loot Pile",
+        "Chests"
+      ],
+      "observed": [
+        "Chest count/capacity",
+        "captain and boat counts",
+        "artifact tier and bonuses",
+        "dated resource-for-gold-bar trades",
+        "boat/captain assignment and travel times",
+        "loot/speed upgrade breakpoints and costs",
+        "captain shop and experience",
+        "loot resource quantities",
+        "no chests in this profile"
+      ],
+      "mappedTo": [
+        "app/world-5/sailing/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Chests displayed “You have no chests!”; no hypothetical populated chest contents were audited.",
+      "slice": "world56"
+    },
+    {
+      "name": "Divinity",
+      "url": "https://idleontoolbox.com/account/world-5/divinity?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Gods",
+        "Coral Kid Upgrades",
+        "Styles"
+      ],
+      "observed": [
+        "God Rank",
+        "blessing level/cap and bonus",
+        "major links",
+        "Coral Kid upgrade levels, costs and effects",
+        "all style descriptions and base point/EXP rates",
+        "character divinity levels"
+      ],
+      "mappedTo": [
+        "app/world-5/divinity/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "world56"
+    },
+    {
+      "name": "Gaming",
+      "url": "https://idleontoolbox.com/account/world-5/gaming?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Imports",
+        "Superbits",
+        "Mutations",
+        "Log book",
+        "Palette"
+      ],
+      "observed": [
+        "bits multiplier",
+        "sprout value/speed/capacity upgrades",
+        "nugget and resource balances",
+        "import levels, cooldowns and costs",
+        "snail success/reset data",
+        "King Rat shop and crown odds",
+        "Super/Duper/Zuperbits bonuses and costs",
+        "DNA and mutation chance/cost",
+        "plant effects",
+        "logbook completion and image grid",
+        "palette active colours, levels, odds and bonuses"
+      ],
+      "mappedTo": [
+        "app/world-5/gaming/content.tsx",
+        "components/world-5/gaming/summary.tsx",
+        "components/world-5/gaming/plants.tsx",
+        "components/world-5/gaming/upgrades.tsx",
+        "components/world-5/gaming/superbits.tsx",
+        "components/world-5/gaming/palette.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "No gap row for already-covered plant, logbook, snail and palette systems.",
+      "slice": "world56"
+    },
+    {
+      "name": "Hole",
+      "url": "https://idleontoolbox.com/account/world-5/hole?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Explore",
+        "Engineer",
+        "Bonuses",
+        "Measure",
+        "Study",
+        "The Well",
+        "Motherlode",
+        "The Den",
+        "Bravery",
+        "The Bell",
+        "The Harp",
+        "The Lamp",
+        "The Hive",
+        "Grotto",
+        "Justice",
+        "The Jars: Jars",
+        "The Jars: Collectibles",
+        "Evertree",
+        "Wisdom",
+        "Gambit",
+        "Temple",
+        "Fountain",
+        "Trench",
+        "The Cove"
+      ],
+      "observed": [
+        "villager levels, EXP/rate, time to level, invested opals",
+        "unlocked caverns and total monument AFK",
+        "all schematic creation states and costs",
+        "three Majik groups",
+        "measurement levels, input quantities, bonuses and costs",
+        "study levels, active studies, progress/rate and next-level times",
+        "sediment rates, fill times and opals",
+        "skilling efficiency and layer/resource requirements",
+        "Den score, multiplier and amplifiers",
+        "monument minigame stats, readiness, reward multipliers and opal odds",
+        "Bell methods, progress/rates and readiness",
+        "Harp power/rate, strings and opal chance",
+        "Lamp wishes, daily rate, choices and costs",
+        "Grotto monarch HP and kill progression",
+        "jar rates, quantities, capacity, rupies and enchanted collectible bonuses",
+        "Gambit points, multipliers, doublers and rewards",
+        "Temple torches, layer and action chances/costs",
+        "Fountain currencies, bars, fill times, upgrade/marble state and effects",
+        "Cove shapes, drop/AFK/multikill stats and both upgrade groups"
+      ],
+      "mappedTo": [
+        "app/world-5/hole/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "All 18 real cavern icon tabs opened. Engineer “Show all schematics” opened. Fountain tooltip sampled: Luck fo’ REAL level 79, Marble ×2, lucky currency effect, 816Q cost and level-10 unlocks.",
+      "slice": "world56"
+    },
+    {
+      "name": "Slab",
+      "url": "https://idleontoolbox.com/account/world-5/slab?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Missing items",
+        "Looted items",
+        "All items",
+        "GemShop rotation",
+        "Unobtainable",
+        "Greenstacks",
+        "Missing greenstacks",
+        "Unrealistic greenstacks"
+      ],
+      "observed": [
+        "looted/missing item totals",
+        "Slab bonuses",
+        "greenstack total/eligible total",
+        "item icons and greenstack markers",
+        "gem-shop and unobtainable item classifications",
+        "unrealistic-greenstack criteria"
+      ],
+      "mappedTo": [
+        "app/account/slab/content.tsx",
+        "app/account/storage/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "All display families inspected; sampled Poison Froge item-name tooltip.",
+      "slice": "world56"
+    },
+    {
+      "name": "Farming",
+      "url": "https://idleontoolbox.com/account/world-6/farming?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Plot",
+        "Market",
+        "Exotic Market",
+        "Exotic Rotation",
+        "Rank database",
+        "Rank Optimizer",
+        "Crop",
+        "Stickers"
+      ],
+      "observed": [
+        "bean trade amount",
+        "instagrows and rank points",
+        "crop scientist bonuses",
+        "plot crop quantity, rank EXP, OG level/chance and time",
+        "day/night upgrade levels, effects and future costs",
+        "Exotic upgrade levels/caps, effect progress, return weeks and rotation dates",
+        "rank database bonuses",
+        "rank optimizer category/budget and upgrade sequence benefits/costs",
+        "crop stock and growth times",
+        "sticker count, damage multiplier, per-sticker effects and find chances"
+      ],
+      "mappedTo": [
+        "app/world-6/farming/content.tsx",
+        "components/world-6/farming/plots.tsx",
+        "components/world-6/farming/marketUpgrades.tsx",
+        "components/world-6/farming/landRank.tsx",
+        "components/world-6/farming/cropDepot.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "world56"
+    },
+    {
+      "name": "Sneaking",
+      "url": "https://idleontoolbox.com/account/world-6/sneaking?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Inventory",
+        "Jade Emporium",
+        "Upgrades",
+        "Charms",
+        "Mastery",
+        "Gemstones",
+        "Detection"
+      ],
+      "observed": [
+        "Jade balance",
+        "used charm rolls and remaining pristine/symbol rolls",
+        "ninja level/floor/activity/detection and door progress",
+        "equipped items and inventory",
+        "Jade Emporium bonuses/costs",
+        "Ninja Knowledge levels and prerequisites",
+        "pristine charm bonuses",
+        "Mastery rewards",
+        "gemstone quantities, bonuses and completion percentages",
+        "current Mastery/floor Funeral Flowers and detection",
+        "what-if grouped/solo detection and target-flowers table"
+      ],
+      "mappedTo": [
+        "app/world-6/sneaking/content.tsx",
+        "components/world-6/sneaking/playerActivitySection.tsx",
+        "components/world-6/sneaking/sneakingInventory.tsx",
+        "components/world-6/sneaking/sneakingUpgrades.tsx",
+        "components/world-6/sneaking/jadeUpgrades.tsx",
+        "components/world-6/sneaking/pristineCharmsSection.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "world56"
+    },
+    {
+      "name": "Summoning",
+      "url": "https://idleontoolbox.com/account/world-6/summoning?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Upgrades",
+        "Winner Bonuses",
+        "Battles: Teal",
+        "Battles: Endless",
+        "Stones"
+      ],
+      "observed": [
+        "essence quantity and hourly gain",
+        "upgrade total, level/cap, effects and costs",
+        "winner bonuses",
+        "unit attack/HP",
+        "normal and Endless opponents, victory counts, rewards and modifiers",
+        "stone boss kills, HP, multiplier and location"
+      ],
+      "mappedTo": [
+        "app/world-6/summoning/content.tsx",
+        "components/world-6/summoning/summoningBattles.tsx",
+        "components/world-6/summoning/summoningUpgrades.tsx",
+        "components/world-6/summoning/summoningBonuses.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "world56"
+    },
+    {
+      "name": "Beanstalk",
+      "url": "https://idleontoolbox.com/account/world-6/beanstalk?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Golden foods"
+      ],
+      "observed": [
+        "total golden food bonus",
+        "per-food deposited/maxed state and 10K requirement"
+      ],
+      "mappedTo": [
+        "components/world-6/sneaking/beanstacking.tsx",
+        "app/world-6/sneaking/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Maps to Sneaking Beanstalk tab; not a missing domain.",
+      "slice": "world56"
+    },
+    {
+      "name": "Emperor",
+      "url": "https://idleontoolbox.com/account/world-6/emperor?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Showdown status",
+        "Bonuses"
+      ],
+      "observed": [
+        "highest showdown",
+        "daily attempts and stored/max attempts",
+        "boss HP",
+        "bonus multiplier and next level bonus",
+        "per-bonus effective/base value, per-level increment and unlock levels"
+      ],
+      "mappedTo": [
+        "data/domain/world-6/emperor.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Backend domain exists; no rendered account-facing Emperor UI found.",
+      "slice": "world56"
+    },
+    {
+      "name": "Anvil",
+      "url": "https://idleontoolbox.com/account/world-1/anvil?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Account production summary",
+        "Character production cards"
+      ],
+      "observed": [
+        "Production per hour/day by item",
+        "Smithing level",
+        "Spent/total points",
+        "Assigned products",
+        "Time until full",
+        "Stored output/capacity",
+        "EXP per product"
+      ],
+      "mappedTo": [
+        "app/world-1/anvil/content.tsx",
+        "app/players/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "All 11 character cards read. Daily production is a derived presentation, not a separate gap. Character point-source and lifetime-cost detail belongs to character slice.",
+      "slice": "world12"
+    },
+    {
+      "name": "Forge",
+      "url": "https://idleontoolbox.com/account/world-1/forge?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Slots",
+        "Upgrades"
+      ],
+      "observed": [
+        "Maximum ore capacity",
+        "Ore/oil/bar amounts",
+        "Time until empty",
+        "Upgrade level/max",
+        "Description",
+        "Next cost/maxed",
+        "Total upgrade cost"
+      ],
+      "mappedTo": [
+        "app/world-1/forge/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Both tabs inspected. No meaningful gap identified.",
+      "slice": "world12"
+    },
+    {
+      "name": "Bribes",
+      "url": "https://idleontoolbox.com/account/world-1/bribes?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Bribe catalog"
+      ],
+      "observed": [
+        "Bribe name",
+        "Effect",
+        "Purchased status",
+        "Coin cost for unpurchased bribe"
+      ],
+      "mappedTo": [
+        "data/domain/world-1/bribes.tsx",
+        "components/navigation.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Full catalog read, including The Art of the Flail cost.",
+      "slice": "world12"
+    },
+    {
+      "name": "Stamps",
+      "url": "https://idleontoolbox.com/account/world-1/stamps?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Progression summaries",
+        "Combat",
+        "Skills",
+        "Misc",
+        "Stamp cost tooltip"
+      ],
+      "observed": [
+        "Gilded count/chance",
+        "No Stamp Left Behind count",
+        "Exalted multiplier",
+        "Exalted stamps 0/20",
+        "Individual exalted frames",
+        "Reducer discount",
+        "Stamp levels",
+        "Bonus",
+        "Material/coin costs",
+        "Capacity leaders",
+        "Storage amount"
+      ],
+      "mappedTo": [
+        "app/world-1/stamps/content.tsx",
+        "components/world-1/stampTableView.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Refinery Stamp tooltip sampled: bonus 854.67%, carry-cap warning, cost, discount, capacity leaders, storage. Save snapshot not used.",
+      "slice": "world12"
+    },
+    {
+      "name": "Bubbles",
+      "url": "https://idleontoolbox.com/account/world-2/bubbles?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Daily bubble gain",
+        "Discount",
+        "Efficiency",
+        "Level",
+        "Misc",
+        "Bubble list",
+        "Batch view",
+        "Bubble tooltip"
+      ],
+      "observed": [
+        "Eligible daily bubbles",
+        "Upgrade count and level range",
+        "Kruk-eligible bubbles",
+        "Levels",
+        "Hard-cap efficiency",
+        "Material/atom cost",
+        "Prisma Fragments",
+        "Prisma multiplier",
+        "Particle upgrades",
+        "Future Bubbles label"
+      ],
+      "mappedTo": [
+        "app/world-2/alchemy/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "List and Batch views inspected. Spear Powah full tooltip shows effect 39.070, 97% of hard cap 40, material/atom costs. No future forecasting tool inferred from Future Bubbles label.",
+      "slice": "world12"
+    },
+    {
+      "name": "Cauldrons",
+      "url": "https://idleontoolbox.com/account/world-2/cauldrons?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Brewing",
+        "Pay 2 Win: Liquids",
+        "Pay 2 Win: Cauldrons",
+        "Pay 2 Win: Player",
+        "Pay 2 Win: Vials"
+      ],
+      "observed": [
+        "Brewing progress/current capacity",
+        "Brew speed",
+        "New bubble probability",
+        "Attempts ready and estimated bubbles",
+        "Speed/Luck/Cost/Extra level and progress",
+        "Liquid current/capacity",
+        "Liquid rate/cap levels and upgrade progress",
+        "Assigned characters",
+        "Dragonic cauldron indicator",
+        "P2W levels/max",
+        "Player Alch speed and Extra Exp levels"
+      ],
+      "mappedTo": [
+        "app/world-2/alchemy/content.tsx",
+        "components/world-2/alchemy/p2w.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "All populated sections read. Zero brew speed is actual profile state, not an inferred inactive-state forecast.",
+      "slice": "world12"
+    },
+    {
+      "name": "Vials",
+      "url": "https://idleontoolbox.com/account/world-2/vials?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Vial bonus summary",
+        "Vial grid",
+        "Vial tooltip"
+      ],
+      "observed": [
+        "Overall vial multiplier",
+        "Vial level via bottle appearance",
+        "Vial bonus",
+        "Material costs"
+      ],
+      "mappedTo": [
+        "app/world-2/alchemy/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Shipinabottle non-maxed tooltip sampled: 7.88% Drop Rate multiplier and costs shown as 25M and 30 beside resource icons. Hide-maxed filter not changed.",
+      "slice": "world12"
+    },
+    {
+      "name": "Sigils",
+      "url": "https://idleontoolbox.com/account/world-2/sigils?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Sigil summary",
+        "Sigil cards"
+      ],
+      "observed": [
+        "Sigil speed",
+        "Sigil Syrup balance",
+        "Names",
+        "Effects",
+        "Maxed status"
+      ],
+      "mappedTo": [
+        "app/world-2/alchemy/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "All 24 cards read. All maxed in this profile; no uncharged state simulated.",
+      "slice": "world12"
+    },
+    {
+      "name": "Arcade Shop",
+      "url": "https://idleontoolbox.com/account/world-2/arcade-shop?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Currency summary",
+        "Current Rotation",
+        "Off rotation"
+      ],
+      "observed": [
+        "Balls",
+        "Gold balls",
+        "Gold-ball multiplier",
+        "Royal balls",
+        "Total cost to max all",
+        "Bonus effects",
+        "Maxed/Super status",
+        "Level/max",
+        "Next cost",
+        "Cost to max"
+      ],
+      "mappedTo": [
+        "app/world-2/arcade/content.tsx",
+        "components/world-2/arcade/ArcadeBonusTable.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Both rotation groups read. Royal-ball naming versus our cosmic balls remains unclassified; no duplicate-currency gap asserted.",
+      "slice": "world12"
+    },
+    {
+      "name": "Islands",
+      "url": "https://idleontoolbox.com/account/world-2/islands?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Expedition summary",
+        "Trash",
+        "Rando",
+        "Crystal",
+        "Seasalt",
+        "Shimmer",
+        "Fractal",
+        "Trash shop",
+        "Rando shop",
+        "Shimmer shop",
+        "Fractal shop"
+      ],
+      "observed": [
+        "Bottles and daily gain",
+        "Trash daily gain",
+        "Unclaimed days and garbage",
+        "Garbage balance",
+        "Crystal mobs waiting and days",
+        "Current Shimmer trial and best result",
+        "Shimmer currency",
+        "Fractal AFK hours",
+        "Shop unlocks/acquired status",
+        "Upgrade effects and costs"
+      ],
+      "mappedTo": [
+        "data/domain/world-2/islandExpedition.tsx",
+        "components/navigation.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "All four Learn More shops opened. Crystal and Seasalt show cards only; no extra page tabs exposed.",
+      "slice": "world12"
+    },
+    {
+      "name": "Killroy",
+      "url": "https://idleontoolbox.com/account/world-2/killroy?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Schedule",
+        "Upgrades",
+        "Permanent Upgrades",
+        "Monsters"
+      ],
+      "observed": [
+        "Skulls",
+        "Total kills",
+        "Damage multiplier",
+        "Dated class/monster fight schedule",
+        "Monster best kill counts",
+        "Run upgrade levels/effects",
+        "Permanent upgrade levels/bonuses",
+        "Hard-cap progress and next breakpoint"
+      ],
+      "mappedTo": [
+        "data/domain/world-2/killroy.tsx",
+        "app/world-4/rift/content.tsx",
+        "components/navigation.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "All four tabs read. Permanent cards include rendered applied multipliers. W4 Killroy Prime does not replace this W2 capability.",
+      "slice": "world12"
+    },
+    {
+      "name": "Weekly Bosses",
+      "url": "https://idleontoolbox.com/account/world-2/weekly-bosses?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Trophies",
+        "Boss schedule",
+        "Eclectic Lazlo 08/10/2026 11:00:00",
+        "Unit T-31 15/10/2026 11:00:00",
+        "Fat Eggplonk 22/10/2026 11:00:00",
+        "Decibop Box 29/10/2026 11:00:00",
+        "Unit T-31 05/11/2026 11:00:00",
+        "Eclectic Lazlo 12/11/2026 11:00:00",
+        "Decibop Box 19/11/2026 11:00:00",
+        "Unit T-31 26/11/2026 11:00:00",
+        "Unit T-31 03/12/2026 11:00:00",
+        "SWR Containment 10/12/2026 11:00:00",
+        "Shop Items",
+        "Actions"
+      ],
+      "observed": [
+        "Trophy balance",
+        "Dated boss identity",
+        "Weekly shop items/prices",
+        "Current turn",
+        "Per-character turn order",
+        "Relevant character stat",
+        "Three action descriptions each turn"
+      ],
+      "mappedTo": [
+        "components/navigation.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "All ten initial boss/date tabs opened. Add more bosses was not used; existing forecast range inspected.",
+      "slice": "world12"
+    },
+    {
+      "name": "Vote Ballot",
+      "url": "https://idleontoolbox.com/account/world-2/vote-ballot?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Bonus",
+        "Meritocracy"
+      ],
+      "observed": [
+        "Selected bonus",
+        "Overall multipliers",
+        "Next-week timer",
+        "All bonus effects",
+        "Voting percentages for candidates"
+      ],
+      "mappedTo": [
+        "data/domain/world-2/votes.tsx",
+        "components/navigation.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Both tabs read. No voting action offered or performed.",
+      "slice": "world12"
+    },
+    {
+      "name": "Characters",
+      "url": "https://idleontoolbox.com/characters?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Stats",
+        "Talents",
+        "Cards",
+        "Prayers",
+        "Equipment",
+        "Inventory",
+        "Bags",
+        "Obols",
+        "Obols Stats",
+        "Skills",
+        "Star Signs",
+        "Post Office",
+        "Anvil Details",
+        "Chips",
+        "Equipped Bubbles"
+      ],
+      "observed": [
+        "Representative: liiiiiiiiiiiig, Death Bringer, level 1886; alternate: bon_frank, Arcane Cultist, level 1906",
+        "All 15 section filters",
+        "All six representative talent families; Specials 1-4; both talent presets",
+        "All seven populated card presets",
+        "All 20 skill families and their real tooltips",
+        "Combat stat and skill source drawers; equipment, card, prayer, chip, bubble, and Post Office tooltips",
+        "Equipment/tools/food, inventory occupancy and item counts, consumed inventory bags and carry bags, equipped Obols, personal/family Obol totals, aligned Star Signs, Post Office boxes, Anvil point/cost details"
+      ],
+      "mappedTo": [
+        "app/players/content.tsx",
+        "app/account/cards/content.tsx",
+        "components/account/task-board/obolsInfo.tsx",
+        "components/base/Stat.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Filters, presets, talent pages, and detail drawers keep the Characters URL. No separate character tab/subpage URLs surfaced. Alternate character inspected only for distinct class talents.",
+      "slice": "characters"
+    },
+    {
+      "name": "Dashboard",
+      "url": "https://idleontoolbox.com/dashboard?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Account alerts: General and Worlds 1-7",
+        "Character alerts and activities",
+        "Timers: General, Clickers, Vote, World 3, World 5, World 7",
+        "Bosses",
+        "Library"
+      ],
+      "observed": [
+        "Rendered public-profile account alerts across every visible world group",
+        "Per-character class, activity, away time, and alert groups",
+        "Live daily/weekly/server reset, companion, worship, happy-hour, random-event, Sailing, clicker, voting, Construction/Refinery/Equinox, Hole, and World 7 timers",
+        "Dr Defecaus/Baba Yaga and four miniboss spawn states",
+        "Library count, next checkout, and 20/40/60/80/100-book checkout breakpoints"
+      ],
+      "mappedTo": [
+        "components/dashboard/dashboard.tsx",
+        "data/domain/alerts.tsx",
+        "app/account/dungeons/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Default Account, Characters, and Timers groups were all enabled. Alert settings and dashboard customization were not changed. Dashboard alerts for absent domains stay documented as live evidence, not repeated domain feature lists.",
+      "slice": "characters"
+    },
+    {
+      "name": "Spelunking",
+      "url": "https://idleontoolbox.com/account/world-7/spelunking?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Overview and Power source breakdown",
+        "Upgrades / Group and Path views",
+        "Lore / Chapters",
+        "Lore / Bosses",
+        "Elixirs",
+        "Upgrade Optimizer"
+      ],
+      "observed": [
+        "POW, Amber held and gain, daily page reads",
+        "Stamina regeneration, Overstim amount/rate/stack, efficiency, Manic Mode status",
+        "Power source factors",
+        "Upgrade levels/effects/costs and cost to max",
+        "Chapter levels, bonuses and page requirements",
+        "Tunnel best depth, biggest haul, Best Manic depth, discoveries, Grand Discovery next chance",
+        "Elixir effects, unlocked types, slots and duplicates",
+        "Ordered upgrade gains and costs"
+      ],
+      "mappedTo": [
+        "components/world-7/spelunking/spelunkingDisplay.tsx",
+        "components/world-7/spelunking/spelunkingDisplay.tsx"
+      ],
+      "status": "reviewed",
+      "slice": "world7"
+    },
+    {
+      "name": "Research",
+      "url": "https://idleontoolbox.com/account/world-7/research?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Overview",
+        "Grid / Card and Grid views",
+        "Observations",
+        "Posty Notes"
+      ],
+      "observed": [
+        "Research level/progress and time to level, Registrant time, next Posty time",
+        "Observation count, roll maximum and daily rolls",
+        "Online/offline EXP rate, multiplier and AFK gains",
+        "Grid points, shape count, lens counts",
+        "Grid upgrade level/max, bonus and shape multiplier; board placement",
+        "Observation found status, location clue/map/mob, level requirement, Insight level/XP, displayed and real Insight/hr, Research EXP rate",
+        "Posty Note unlock level and reward"
+      ],
+      "mappedTo": [
+        "components/navigation.tsx",
+        "data/domain/idleonData.tsx"
+      ],
+      "status": "reviewed",
+      "slice": "world7"
+    },
+    {
+      "name": "Gallery",
+      "url": "https://idleontoolbox.com/account/world-7/gallery?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Overview",
+        "Trophies / Inventory, Podium and All Trophies",
+        "Nametags",
+        "Account and character bonus views"
+      ],
+      "observed": [
+        "Podium count and grades",
+        "Account/character gallery multiplier",
+        "Inventory and podium trophies, acquired/missing collection",
+        "Nametag knowledge levels and acquired/missing collection",
+        "Combined trophy and nametag stat bonuses"
+      ],
+      "mappedTo": [
+        "components/navigation.tsx",
+        "data/domain/idleonData.tsx"
+      ],
+      "status": "reviewed",
+      "slice": "world7"
+    },
+    {
+      "name": "Legend Talents",
+      "url": "https://idleontoolbox.com/account/world-7/legend-talents?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Legend Points",
+        "Talents",
+        "Yellow, Red, Brown and Green Fever groups"
+      ],
+      "observed": [
+        "Spent/owned Legend Points",
+        "Current talent level/effect",
+        "Base maximum plus Fever color increment and effective maximum"
+      ],
+      "mappedTo": [
+        "app/world-7/legendTalents/content.tsx"
+      ],
+      "status": "reviewed",
+      "slice": "world7"
+    },
+    {
+      "name": "Coral Reef",
+      "url": "https://idleontoolbox.com/account/world-7/coral-reef?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Overview",
+        "Reef Upgrades",
+        "Dancing Coral"
+      ],
+      "observed": [
+        "Coral held and daily gain",
+        "Upgrade levels/max/effects/costs",
+        "Dancing coral effect, normal shrine effect, shrine level, item source, cost and current bonus"
+      ],
+      "mappedTo": [
+        "app/world-7/coral/content.tsx",
+        "app/world-7/coral/content.tsx"
+      ],
+      "status": "reviewed",
+      "slice": "world7"
+    },
+    {
+      "name": "Zenith Market",
+      "url": "https://idleontoolbox.com/account/world-7/zenith-market?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Zenith Clusters",
+        "Market upgrades"
+      ],
+      "observed": [
+        "Zenith Clusters",
+        "Upgrade level/max, current effect, next cost and cost to max"
+      ],
+      "mappedTo": [
+        "components/navigation.tsx",
+        "data/domain/idleonData.tsx"
+      ],
+      "status": "reviewed",
+      "slice": "world7"
+    },
+    {
+      "name": "Clam Work",
+      "url": "https://idleontoolbox.com/account/world-7/clam-work?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Overview and character selector",
+        "Upgrades",
+        "Upgrade Optimizer",
+        "Compensations"
+      ],
+      "observed": [
+        "Worker class, pearls, promotion chance/cost",
+        "Pearl/black pearl value, clam count/HP/respawn",
+        "Character and Multikill context",
+        "Upgrade level/effect/cost",
+        "Ordered pearl gain upgrades with gains and costs",
+        "Unlocked/locked compensation rewards"
+      ],
+      "mappedTo": [
+        "components/navigation.tsx",
+        "data/domain/idleonData.tsx"
+      ],
+      "status": "reviewed",
+      "slice": "world7"
+    },
+    {
+      "name": "Advice Fish",
+      "url": "https://idleontoolbox.com/account/world-7/advice-fish?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Seven Advice upgrades"
+      ],
+      "observed": [
+        "Advice name, level, current effect and next coin cost"
+      ],
+      "mappedTo": [
+        "components/navigation.tsx",
+        "data/domain/idleonData.tsx"
+      ],
+      "status": "reviewed",
+      "slice": "world7"
+    },
+    {
+      "name": "Minehead",
+      "url": "https://idleontoolbox.com/account/world-7/minehead?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Overview",
+        "Upgrades",
+        "Opponents"
+      ],
+      "observed": [
+        "Mine Currency, daily tries, opponents beaten, max lives, base damage, currency/hr",
+        "Upgrade level/max/effect/cost and Research requirement",
+        "Opponent name, beat status, max HP, depth charges and reward"
+      ],
+      "mappedTo": [
+        "components/navigation.tsx",
+        "data/domain/idleonData.tsx"
+      ],
+      "status": "reviewed",
+      "slice": "world7"
+    },
+    {
+      "name": "Glimbo",
+      "url": "https://idleontoolbox.com/account/world-7/glimbo?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Trade totals",
+        "Material trades"
+      ],
+      "observed": [
+        "Total trades and Drop Rate bonus",
+        "Required trade item/amount, traded count, target talent maximum and next maximum-level gain"
+      ],
+      "mappedTo": [
+        "components/navigation.tsx"
+      ],
+      "status": "reviewed",
+      "slice": "world7"
+    },
+    {
+      "name": "Sushi Station",
+      "url": "https://idleontoolbox.com/account/world-7/sushi-station?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Overview",
+        "Sushi board and tier tooltip",
+        "Upgrades",
+        "Bonuses",
+        "Sushi Bonuses",
+        "Spark multiplier breakdown"
+      ],
+      "observed": [
+        "Unique sushi, bucks/rate, fuel/capacity/rate, best combo and multiplier",
+        "Spark multiplier, Overtuned multiplier, Perfecto chance, shaker uses",
+        "Board slots filled/total, placed sushi tiers, slot type and Fireplace assignment",
+        "Sushi hover name/tier, per-slot Bucks/hr and slot/fireplace effects",
+        "Upgrade level/max/effect/cost and Research requirement",
+        "Sushi unlock rewards, Knowledge level/XP and current bonus",
+        "Grouped knowledge bonus totals with per-sushi contributions",
+        "Spark generation rate, fireplace count and next multiplier thresholds"
+      ],
+      "mappedTo": [
+        "app/world-7/sushi/content.tsx",
+        "components/world-7/sushi/sushiOverview.tsx",
+        "components/world-7/sushi/sushiCollection.tsx"
+      ],
+      "status": "reviewed",
+      "slice": "world7"
+    },
+    {
+      "name": "Jelly Operator",
+      "url": "https://idleontoolbox.com/account/world-7/jelly-operator?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Overview",
+        "Layout and cell hover",
+        "Obstructions",
+        "Upgrades",
+        "Upgrade Optimizer",
+        "Cells"
+      ],
+      "observed": [
+        "Removed obstructions, operations left/daily, bloodcells/multiplier, unlocked cell types/total levels, slots",
+        "Occupied/unlocked board tiles and cell footprints",
+        "Adjacent Organelle speed arrows and current obstruction HP",
+        "Total board passive damage/speed and viral boost",
+        "Cell level/locked state, DPS, passive and next XP",
+        "Upgrade level/max/effect/cost and prerequisites",
+        "Ordered upgrade sequence with board DPS gains and costs",
+        "All obstruction reward/HP/time limits"
+      ],
+      "mappedTo": [
+        "components/world-7/jelly-operator/jellyOperator.tsx"
+      ],
+      "status": "reviewed",
+      "slice": "world7"
+    },
+    {
+      "name": "The Button",
+      "url": "https://idleontoolbox.com/account/world-7/the-button?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Overview",
+        "Bonus rotation",
+        "Current cycle demands"
+      ],
+      "observed": [
+        "Total presses, Insta Skips left/week, bonus multiplier and cycle",
+        "Bonus rotation values and gain per press, next boost and progress",
+        "Demand text, character, current/required amount, Ready state and next requirement"
+      ],
+      "mappedTo": [
+        "components/navigation.tsx",
+        "data/domain/idleonData.tsx"
+      ],
+      "status": "reviewed",
+      "slice": "world7"
+    },
+    {
+      "name": "Gem Shop",
+      "url": "https://idleontoolbox.com/account/prem-currency/gem-shop?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Usables",
+        "Inventory & Storage",
+        "Dailies N Resets",
+        "Cards",
+        "Goods & Services",
+        "Limited Specials",
+        "World 1 & 2",
+        "World 3",
+        "World 4",
+        "World 5",
+        "World 6",
+        "World 7",
+        "Caverns",
+        "Premium Stones",
+        "Time Skips",
+        "Mtx",
+        "Past limited specials"
+      ],
+      "observed": [
+        "Gem balance",
+        "Per-item purchase count/cap, gem price and effect",
+        "Past-special catalog with unknown purchase count"
+      ],
+      "mappedTo": [
+        "app/profile/upload/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "class"
+    },
+    {
+      "name": "Pets",
+      "url": "https://idleontoolbox.com/account/prem-currency/pets?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Legacy Pets",
+        "Fallen Spirits",
+        "Shallow Waters",
+        "Exclusive Pets",
+        "Special Pets",
+        "Not in a set",
+        "Not yet released"
+      ],
+      "observed": [
+        "Pet Crystals, total boxes opened, tokens available/active, next free companion",
+        "Pet ownership/bonus, tradable owned/total counts, Pet Mart+ state/prices",
+        "Token-active Imperial Ogre bonus"
+      ],
+      "mappedTo": [
+        "app/account/companions/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "class"
+    },
+    {
+      "name": "Bundles",
+      "url": "https://idleontoolbox.com/account/prem-currency/bundles?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Bundles",
+        "Pet Mart",
+        "Starter Pack"
+      ],
+      "observed": [
+        "Owned bundles 0/57, packs 0/18, starter offer 0/1",
+        "Image-based bundle ownership and contents",
+        "Pet Mart cash prices, included gems/pet crystals/companion",
+        "Starter packs include pet, Auto Loot, cape, and carry-capacity note"
+      ],
+      "mappedTo": [
+        "app/profile/upload/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Inspected image cards visually; observed public-profile ownership counts are zero.",
+      "slice": "class"
+    },
+    {
+      "name": "Apocalypses",
+      "url": "https://idleontoolbox.com/account/class-specific/apocalypses?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Zow",
+        "Chow",
+        "Super Chow",
+        "Wow"
+      ],
+      "observed": [
+        "Two populated character summaries",
+        "Remaining monsters and formatted kills",
+        "Monster tooltip map name and exact kills"
+      ],
+      "mappedTo": [
+        "app/players/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Compared with character Kills Summary. No meaningful missing kill-progression information observed.",
+      "slice": "class"
+    },
+    {
+      "name": "Grimoire",
+      "url": "https://idleontoolbox.com/account/class-specific/grimoire?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Upgrades",
+        "Upgrade Optimizer",
+        "Monsters"
+      ],
+      "observed": [
+        "Bone balances and total levels",
+        "Wraith HP/damage/accuracy/defence/crit chance/crit damage/base extra bones",
+        "Upgrade level/cap/effect/cost/unlock",
+        "Per-monster bone type and quantity",
+        "Upgrade sequence and holding-resource comparison"
+      ],
+      "mappedTo": [
+        "components/account/grimoireDisplay.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "class"
+    },
+    {
+      "name": "Compass",
+      "url": "https://idleontoolbox.com/account/class-specific/compass?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Upgrades",
+        "Upgrade Optimizer",
+        "Abominations",
+        "Medallions",
+        "Portals"
+      ],
+      "observed": [
+        "Dust balances, collected total, total levels, exalted stamp count, daily TOTM kills",
+        "Tempest HP/damage/accuracy/defence/mastery/crit/attack speed/invulnerability/range/move speed/multishot",
+        "Abomination name/weakness/HP/map/world and killed/future status",
+        "128/132 medallions and per-monster collection state",
+        "Tempest drops by monster, dust quantities and item-stat tooltip",
+        "Portal dust requirements and unlocked state",
+        "Upgrade sequence and holding-resource comparison"
+      ],
+      "mappedTo": [
+        "components/account/compassDisplay.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "class"
+    },
+    {
+      "name": "Tesseract",
+      "url": "https://idleontoolbox.com/account/class-specific/tesseract?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Upgrades",
+        "Upgrade Optimizer",
+        "Maps"
+      ],
+      "observed": [
+        "Tachyon balances, total levels, Prisma chance, extra tachyon",
+        "Arcane damage/accuracy/defence/mastery/crit chance/crit damage/attack speed",
+        "Per-map tachyon type/amount, charge kills, time limit, DR/EXP/AFK bonuses, map unlock conditions",
+        "Weapon/ring drop chance and quality",
+        "Upgrade sequence and holding-resource comparison"
+      ],
+      "mappedTo": [
+        "components/account/tesseractDisplay.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "class"
+    },
+    {
+      "name": "Royal Armory",
+      "url": "https://idleontoolbox.com/account/class-specific/royal-armory?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Armory",
+        "Outposts: Cards",
+        "Outposts: Map (Worlds 1–4)",
+        "Resources",
+        "Upgrade Optimizer",
+        "Royal Statues",
+        "Statue Flair",
+        "Orblet Market"
+      ],
+      "observed": [
+        "Shelves, total levels, outposts, Compounding Outposting bonus",
+        "Upgrade effect/level/cost/production rate/affordability ETA",
+        "Outpost types/units/PTS/range/production/ranks/XP/next-rank ETA/support links",
+        "Outpost upgrade levels, point costs and effects; clearing rate/ETA",
+        "Node catalog with grade, remaining/capacity, stored balance and collector links; empty/unconnected totals",
+        "Royal Statue levels/bonus/upgrade odds",
+        "Flair tier, EXP multiplier, marble cost and total marble to tier",
+        "Orblet levels/bonus/cost/balance"
+      ],
+      "mappedTo": [
+        "components/account/royalArmoryDisplay.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "class"
+    },
+    {
+      "name": "Speedrun",
+      "url": "https://idleontoolbox.com/account/class-specific/speedrun?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Run summary",
+        "Bosses",
+        "Worlds 1–7",
+        "Detailed view"
+      ],
+      "observed": [
+        "Highscore, run duration, talent points per run, next portal step, Void Radius, Equinox goal",
+        "Damage/multikill/KPK/portal progress",
+        "Boss difficulty and portal contribution",
+        "Per-map portal progress/sec, kills needed, door destination, clear time with/without Void Radius"
+      ],
+      "mappedTo": [
+        "app/players/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "class"
+    },
+    {
+      "name": "Achievements",
+      "url": "https://idleontoolbox.com/account/task-board/achievements?profile=liiiiiiiiiiiig",
+      "sections": [
+        "World 1",
+        "World 2",
+        "World 3",
+        "World 4",
+        "World 5",
+        "World 6",
+        "World 7"
+      ],
+      "observed": [
+        "Completed/total per world and overall",
+        "Achievement owned state and incomplete numeric progress",
+        "Tooltip name, requirement and reward",
+        "World 7: No achievements yet"
+      ],
+      "mappedTo": [
+        "components/account/task-board/achievements.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "Existing achievement requirement/reward/progress coverage overlaps. No gap row.",
+      "slice": "class"
+    },
+    {
+      "name": "Tasks",
+      "url": "https://idleontoolbox.com/account/task-board/tasks?profile=liiiiiiiiiiiig",
+      "sections": [
+        "World 1",
+        "World 2",
+        "World 3",
+        "World 4",
+        "World 5",
+        "World 6",
+        "World 7"
+      ],
+      "observed": [
+        "Task levels/total, description, current/required count, merit-icon count and progress",
+        "Daily task per world, including Cant stop my Chop E and Cracked Crystals"
+      ],
+      "mappedTo": [
+        "components/account/task-board/tasks.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "class"
+    },
+    {
+      "name": "Merits",
+      "url": "https://idleontoolbox.com/account/task-board/merits?profile=liiiiiiiiiiiig",
+      "sections": [
+        "World 1",
+        "World 2",
+        "World 3",
+        "World 4",
+        "World 5",
+        "World 6",
+        "World 7"
+      ],
+      "observed": [
+        "Unspent merit balance per world",
+        "Upgrade effect, purchases/cap and next price"
+      ],
+      "mappedTo": [
+        "components/account/task-board/merits.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "class"
+    },
+    {
+      "name": "Unlocks",
+      "url": "https://idleontoolbox.com/account/task-board/unlocks?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Tab 1",
+        "Tab 2",
+        "Tab 3",
+        "Tab 4",
+        "Tab 5",
+        "Tab 6",
+        "Tab 7"
+      ],
+      "observed": [
+        "Available unlocks, next unlock progression, unlocked recipe total",
+        "Recipe, gem and Time Candy rewards with unlock costs/status"
+      ],
+      "mappedTo": [
+        "app/account/task-board/content.tsx",
+        "app/world-1/anvil/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "class"
+    },
+    {
+      "name": "Owl",
+      "url": "https://idleontoolbox.com/account/clickers/owl?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Summary",
+        "Mega Feather milestones",
+        "Upgrades"
+      ],
+      "observed": [
+        "Feather balance, generation/sec/hour, shiny feathers and next bonus level",
+        "Permanent IdleOn bonuses",
+        "Upgrade level/effect/cost and reset progression",
+        "Mega Feather milestone tooltip"
+      ],
+      "mappedTo": [
+        "app/players/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "class"
+    },
+    {
+      "name": "Kangaroo",
+      "url": "https://idleontoolbox.com/account/clickers/kangaroo?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Summary",
+        "Mega Fish milestones",
+        "Upgrades",
+        "Tar Upgrades",
+        "Bonuses"
+      ],
+      "observed": [
+        "Fish/tar balances and rates, shiny rate, reset points/progression",
+        "Permanent IdleOn bonuses",
+        "Fish and tar upgrade levels/effects/costs",
+        "Total and component multipliers plus reset-bonus levels"
+      ],
+      "mappedTo": [
+        "app/players/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "class"
+    },
+    {
+      "name": "Bubba",
+      "url": "https://idleontoolbox.com/account/clickers/bubba?profile=liiiiiiiiiiiig",
+      "sections": [
+        "Summary",
+        "Megaflesh milestones",
+        "Upgrades"
+      ],
+      "observed": [
+        "Meat balance, production, bonus progression and permanent IdleOn bonuses",
+        "Upgrade levels/effects/costs",
+        "Happiness pat/reset timers, dice reset timer, smoker elapsed time",
+        "Megaflesh milestone tooltip"
+      ],
+      "mappedTo": [
+        "app/players/content.tsx"
+      ],
+      "status": "reviewed",
+      "notes": "",
+      "slice": "class"
+    }
+  ],
+  "supplemental": [
+    {
+      "title": "Missable quest-item tracking",
+      "description": "Quests exposes a view for item drops that stop after quest completion and are not yet greenstacked. The inspected profile returned no entries. Tooltip explains its purpose; populated per-item information was not observed.",
+      "url": "https://idleontoolbox.com/account/misc/quests?profile=liiiiiiiiiiiig"
+    },
+    {
+      "title": "Guild saved snapshots",
+      "description": "Save, Export and Clear all controls appear beside current account guild state. No action was exercised.",
+      "url": "https://idleontoolbox.com/account/misc/guild?profile=liiiiiiiiiiiig"
+    },
+    {
+      "title": "Random-event schedule audience",
+      "description": "Upcoming event times appear on the account page. Live page does not establish whether this schedule is account-specific or globally useful.",
+      "url": "https://idleontoolbox.com/account/misc/random-events?profile=liiiiiiiiiiiig"
+    },
+    {
+      "title": "Construction optimizer and cog stat calculator",
+      "description": "Embedded controls offer build/XP/flaggy optimization and cog stat ranges. Calculator default values inspected; optimizer not run.",
+      "url": "https://idleontoolbox.com/account/world-3/construction?profile=liiiiiiiiiiiig"
+    },
+    {
+      "title": "Tome peer rankings",
+      "description": "Embedded Rankings tab compares Tome line percentiles across 713 players. Recorded separately from personal account coverage.",
+      "url": "https://idleontoolbox.com/account/world-4/tome?profile=liiiiiiiiiiiig"
+    },
+    {
+      "title": "Sneaking detection what-if view",
+      "description": "Detection tab also exposes Mastery/floor/flower/target inputs and grouped-versus-alone ninja stealth, detection and required-flower results. Controls were observed at defaults; no hypothetical state was run.",
+      "url": "https://idleontoolbox.com/account/world-6/sneaking?profile=liiiiiiiiiiiig"
+    },
+    {
+      "title": "Farming: Land Rank allocation",
+      "description": "Category/budget-based upgrade sequence with points, level changes and total benefits",
+      "url": "https://idleontoolbox.com/account/world-6/farming?profile=liiiiiiiiiiiig"
+    },
+    {
+      "title": "Spelunking: Upgrade Optimizer",
+      "description": "Ordered upgrade choices with POW gain, percent gain and cost",
+      "url": "https://idleontoolbox.com/account/world-7/spelunking?profile=liiiiiiiiiiiig"
+    },
+    {
+      "title": "Jelly Operator: Upgrade Optimizer",
+      "description": "Ordered upgrade choices with board DPS gain, percent gain and cost",
+      "url": "https://idleontoolbox.com/account/world-7/jelly-operator?profile=liiiiiiiiiiiig"
+    },
+    {
+      "title": "Master-class upgrade sequence optimizers",
+      "description": "Grimoire, Compass and Tesseract show repriced upgrade sequences, resource-per-hour affordability times, resource-holding comparisons and configurable grouping. Existing local efficiency analysis overlaps; sequence simulation remains separate supplemental functionality.",
+      "url": "https://idleontoolbox.com/account/class-specific/grimoire?profile=liiiiiiiiiiiig"
+    },
+    {
+      "title": "Royal Armory production-rate optimizer",
+      "description": "Royal Armory shows an upgrade sequence using current material production rates, resource totals and affordability times.",
+      "url": "https://idleontoolbox.com/account/class-specific/royal-armory?profile=liiiiiiiiiiiig"
+    },
+    {
+      "title": "Clam Work upgrade sequence",
+      "description": "Ordered upgrade choices with their resource costs and effects.",
+      "url": "https://idleontoolbox.com/account/world-7/clam-work?profile=liiiiiiiiiiiig"
+    }
+  ],
+  "limits": [
+    "Observed Toolbox public profile liiiiiiiiiiiig on 13 October 2026. Efficiency comparison uses this checkout's rendered UI source.",
+    "Tournament internal Gold standings returned no data. Other division selections showed loading; no populated standings are claimed.",
+    "Missable greenstack quest view was empty; unseen per-item output is not assumed.",
+    "Extra General balances have negative targeted UI searches but no positively named local counterpart. Search evidence is not backend absence.",
+    "Public profile had no sailing chests. Populated chest contents were not simulated.",
+    "Tooltips sampled, not exhaustively enumerated.",
+    "Excluded Tools, Statistics, Leaderboards, Wiki and global guild directory.",
+    "Royal balls versus cosmic balls naming equivalence was not resolved; no missing-currency claim made.",
+    "Meaningful tooltips sampled, not every minor interaction.",
+    "No explicit named cross-route UI found for eight missing domains; backend dependencies were traced separately.",
+    "The Button current populated cycle reviewed; alternative future-cycle simulation not performed.",
+    "Some bundle information is image-based. Starter Pack cards received visual inspection.",
+    "Public-profile gem and bundle counts displayed zero; purchase-history validity was not inferred.",
+    "Read-only UI mapping searched app/components; backend-only fields did not count as visible coverage."
+  ]
+}

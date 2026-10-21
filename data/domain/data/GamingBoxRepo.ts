@@ -149,7 +149,7 @@ export const initGamingBoxRepo = () => {
                 "drawX": 409,
                 "drawY": 328,
                 "clickWidth": 91,
-                "clickHeight": 58,
+                "clickHeight": 98,
                 "clipboardWidth": 114,
                 "clipboardHeight": 243,
                 "desc": "Contains the one and only rodent to rule them all.",

@@ -91,12 +91,13 @@ export class MainframeBonus {
 
 export class AnimalFarmBonus extends MainframeBonus {
     totalSpecies: number = 0;
+    jewelBoost: number = 0;
     override getBonusText = () => {
         return this.description.replace(/{/g, this.getBonus().toString());
     }
 
     override getBonus = () => {
-        return this.bonusOn * this.totalSpecies;
+        return this.active ? (this.bonusOn + this.jewelBoost) * this.totalSpecies : this.bonusOff;
     }
 }
 
@@ -114,12 +115,13 @@ export class FungiFingerBonus extends MainframeBonus {
 
 export class UnadulteratedBankingBonus extends MainframeBonus {
     greenStacks: number = 0;
+    jewelBoost: number = 0;
     override getBonusText = () => {
         return this.description.replace(/{/g, this.getBonus().toString());
     }
 
     override getBonus = () => {
-        return this.bonusOn * this.greenStacks;
+        return this.active ? (this.bonusOn + this.jewelBoost) * this.greenStacks : this.bonusOff;
     }
 }
 
@@ -352,6 +354,7 @@ export class Lab extends Domain {
     playersInChain: Player[] = [];
 
     bestBuboPlayerID: number = -1;
+
 
     getDistance = (x1: number, y1: number, x2: number, y2: number) => {
         return 0.9604339 * Math.max(Math.abs(x1 - x2), Math.abs(y1 - y2)) + 0.397824735 * Math.min(Math.abs(x1 - x2), Math.abs(y1 - y2));
@@ -638,8 +641,9 @@ export const updateLab = (data: Map<string, any>) => {
     (lab.jewels[12] as EmeraldNavetteJewel).numberOfActiveGreen = lab.jewels.filter(jewel => jewel.data.name.includes("Emerald") && jewel.active).length;
     (lab.jewels[14] as EmeraldPyramiteJewel).numberOfKitchenLevels = cooking.kitchens.reduce((sum, kitchen) => sum += kitchen.recipeLevels + kitchen.mealLevels + kitchen.luckLevels, 0);
 
-    // Special Bonus handling
-    (lab.bonuses[0] as AnimalFarmBonus).totalSpecies = breeding.speciesUnlocks.reduce((sum, world) => sum += world, 0);
+    const animalFarmBonus = lab.bonuses[0] as AnimalFarmBonus;
+    animalFarmBonus.totalSpecies = breeding.getTotalPetsFound();
+    animalFarmBonus.jewelBoost = lab.jewels.find(jewel => jewel.index === 1)!.getBonus();
 
     (lab.bonuses[9] as FungiFingerBonus).greenMushroomKilled = deathnote.mobKillCount.get("mushG")?.reduce((sum, killCount) => sum += Math.round(killCount), 0) ?? 0;
     // Emerald Rhombol
@@ -647,6 +651,7 @@ export const updateLab = (data: Map<string, any>) => {
         (lab.bonuses[9] as FungiFingerBonus).jewelBoost = lab.jewels[13].getBonus();
     }
     (lab.bonuses[11] as UnadulteratedBankingBonus).greenStacks = [...new Set(storage.chest.filter(item => item.count >= 1e7).map(item => item.internalName))].length;
+    (lab.bonuses[11] as UnadulteratedBankingBonus).jewelBoost = lab.jewels.find(jewel => jewel.index === 17)!.getBonus();
 
     // Pure Opal Rhinestone
     if (lab.jewels[18].active) {

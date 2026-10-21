@@ -22,7 +22,7 @@
     },
     "dancing_coral_bonus_4": {
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 4, 0)",
-      "result": 279
+      "result": 300
     },
     "dancing_coral_bonus_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 5, 0)",

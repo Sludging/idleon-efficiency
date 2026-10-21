@@ -35,6 +35,7 @@ export class IslandExpeditions extends Domain {
     reductionToKitchenCosts: number = 0;
     bonusStarTalentPoints: number = 0;
     shimmerBonuses: ShimmerBonus[] = [];
+    dummyTargetBestDPS: number = 0;
 
     getRawKeys(): RawData[] {
         return [
@@ -50,6 +51,9 @@ export class IslandExpeditions extends Domain {
     parse(data: Map<string, any>): void {
         const expeditions = data.get(this.getDataKey()) as IslandExpeditions;
         const optionList = data.get("OptLacc") as number[];
+
+        // Shimmer Island keeps the Dummy Target's best DPS across all characters.
+        expeditions.dummyTargetBestDPS = Number(optionList[172] ?? 0);
 
         // Points invested into shimmer bonuses are stored in option account list starting from index 174.
         expeditions.shimmerBonuses.forEach(bonus => {

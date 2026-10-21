@@ -1,0 +1,9 @@
+{
+  "extractions": {
+    "button_copper_sample_progress": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 22, 0)",
+      "result": "1.0101132105699354E10"
+    }
+  },
+  "errors": {}
+}

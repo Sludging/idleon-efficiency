@@ -1,0 +1,8 @@
+/**
+ * Game formula snippet — idleon-efficiency formula research.
+ * Function: _customBlock_FoodBonuses (from scripts.ActorEvents_12)
+ * Game version: 1.22 ("Jelly_Operator")
+ * Captured: 2026-10-12 via offline game-debug-tool (findFunction + toString)
+ * Case reference: #450
+ */
+function(e){return"HealthEffectBonus"==e?-1!=p._customBlock_Dungon()?p._customBlock_DungeonStat("FOODHP"):q._customBlock_GoldFoodBonuses("HealthFoods")+(c.asNumber(a.engine.getGameAttribute("DNSM").h.BoxRewards.h.HealthFoodEffect)+(x._customBlock_ArbitraryCode("StatueBonusGiven3")+(w._customBlock_EtcBonuses("9")+(k._customBlock_StampBonusOfTypeX("HFood")+(c.asNumber(a.engine.getGameAttribute("DNSM").h.StarSigns.h.FoodEffect)+p._customBlock_CardSetBonuses(0,"1"))))))/100:"HealthCooldownBonus"==e||-1!=e.indexOf("ForgeEffectBonus")?1:-1!=e.indexOf("ForgeCooldownBonus")?1-q._customBlock_GetBribeBonus("9")/100:-1!=e.indexOf("BoostsEffectBonus")?-1!=p._customBlock_Dungon()?p._customBlock_DungeonStat("FOODBOOST"):1+(c.asNumber(a.engine.getGameAttribute("DNSM").h.BoxRewards.h.PowerFoodEffect)+(x._customBlock_ArbitraryCode("StatueBonusGiven3")+(w._customBlock_EtcBonuses("9")+(k._customBlock_StampBonusOfTypeX("BFood")+(c.asNumber(a.engine.getGameAttribute("DNSM").h.StarSigns.h.FoodEffect)+(w._customBlock_CardBonusREAL(48)+(p._customBlock_CardSetBonuses(0,"1")+k._customBlock_GetTalentNumber(1,631))))))))/100:-1!=e.indexOf("BoostsCooldownBonus")?1:-1!=e.indexOf("OreRedux")?0:(e.indexOf("OreSmithTime"),1)}

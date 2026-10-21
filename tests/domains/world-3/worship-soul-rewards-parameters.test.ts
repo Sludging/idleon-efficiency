@@ -1,44 +1,58 @@
-import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
+import { SkillsIndex } from '../../../data/domain/SkillsIndex';
+import { Skilling } from '../../../data/domain/skilling';
+import { Food } from '../../../data/domain/items';
+import type { Player } from '../../../data/domain/player';
+import { getTalentCalculationBonus } from '../../../data/domain/player-talent-calculations';
+import type { PlayerStatues } from '../../../data/domain/world-1/statues';
+import { getStampBonusForKey, type Stamp } from '../../../data/domain/world-1/stamps';
+import {
+  ExtractionResults,
+  getExtractedValue,
+  loadExtractionResults,
+  validateExtractionHealth,
+} from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
+import { getTargetPlayer } from '../../utils/target-player';
 import type { Bubba } from '../../../data/domain/world-3/bubba';
 import type { EquipmentSets } from '../../../data/domain/misc/equipmentSets';
 import type { Arcade } from '../../../data/domain/world-2/arcade';
 import type { UpgradeVault } from '../../../data/domain/upgradeVault';
-
 const saveName = 'latest';
 const extractionResultsName = 'worship-soul-rewards-data.json';
 
 const parameterSpecs = {
   worship_efficiency: {
-    description: 'Worship efficiency (TODO: not yet implemented)',
+    description: 'Target character Worship efficiency used by Worship soul rewards',
     extractionKey: 'worship_efficiency',
-    domainExtractor: (_gameData: Map<string, any>) => {
-      // TODO: This feature is not yet implemented in the domain
-      // Game function: skillstats2("WorshipEfficiency")
-      // This test will fail until worship efficiency calculation is added to the domain
-      throw new Error("worship_efficiency: NOT IMPLEMENTED - skillstats2('WorshipEfficiency') calculation missing from domain");
-    }
+    domainExtractor: (gameData: Map<string, any>) => {
+      const player = getTargetPlayer(gameData.get('players') as Player[]);
+      const skilling = gameData.get('skilling') as Skilling;
+      return skilling.getSkillEfficiency(player.playerID, SkillsIndex.Worship);
+    },
   },
 
   food_bonus_worship_soul_boosts: {
-    description: 'Food bonus for worship soul boosts (TODO: not yet implemented)',
+    description: 'Equipped Worship Soul Gain food contribution',
     extractionKey: 'food_bonus_worship_soul_boosts',
-    domainExtractor: (_gameData: Map<string, any>) => {
-      // TODO: This feature is not yet implemented in the domain
-      // Game function: TotalFoodBonuses("WorshipSoulBoosts")
-      // This test will fail until food bonus calculation is added to the cooking domain
-      throw new Error("food_bonus_worship_soul_boosts: NOT IMPLEMENTED - TotalFoodBonuses('WorshipSoulBoosts') missing from Cooking domain");
-    }
+    domainExtractor: (gameData: Map<string, any>) => {
+      const player = getTargetPlayer(gameData.get('players') as Player[]);
+      const foodStatue = (gameData.get('statues') as PlayerStatues[])[player.playerID]
+        .statues.find(statue => statue.index === 3)!;
+      const inputs = {
+        boostFoodStamp: getStampBonusForKey(gameData.get('stamps') as Stamp[][], 'BFood'),
+        foodStatue: foodStatue.getBonus(player),
+      };
+
+      return Food.getWorshipSoulContribution(player, inputs);
+    },
   },
 
   talent_57: {
-    description: 'Talent 57 bonus (TODO: not yet implemented)',
+    description: 'Species Epoch soul bonus',
     extractionKey: 'talent_57',
-    domainExtractor: (_gameData: Map<string, any>) => {
-      // TODO: This feature is not yet implemented in the domain
-      // Game function: TalentCalc(57)
-      // This test will fail until talent calculation context is properly implemented
-      throw new Error("talent_57: NOT IMPLEMENTED - TalentCalc(57) context-aware calculation missing from domain");
+    domainExtractor: (gameData: Map<string, any>) => {
+      const player = getTargetPlayer(gameData.get('players') as Player[]);
+      return getTalentCalculationBonus(gameData, player, 57);
     }
   },
 
@@ -81,18 +95,22 @@ const parameterSpecs = {
 };
 
 describe('Worship Domain - Soul Rewards - Parameters', () => {
-  let extractionResults: any;
+  let extractionResults: ExtractionResults;
+  let efficiencyResults: ExtractionResults;
   let gameData: Map<string, any>;
 
   beforeAll(() => {
     extractionResults = loadExtractionResults(extractionResultsName);
     validateExtractionHealth(extractionResults);
+    efficiencyResults = loadExtractionResults('worship-efficiency-parameters-data.json');
+    validateExtractionHealth(efficiencyResults);
     gameData = loadGameDataFromSave(saveName);
   });
 
   Object.entries(parameterSpecs).forEach(([_, spec]) => {
     it(`validates ${spec.description}`, () => {
-      const liveValue = getExtractedValue(extractionResults, spec.extractionKey);
+      const results = spec.extractionKey === 'worship_efficiency' ? efficiencyResults : extractionResults;
+      const liveValue = getExtractedValue(results, spec.extractionKey);
       const domainValue = spec.domainExtractor(gameData);
       expect(domainValue).toMatchLiveGame(liveValue, 0);
     });

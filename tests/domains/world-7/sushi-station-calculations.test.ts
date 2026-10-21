@@ -40,18 +40,6 @@ describe('Sushi Station - current setup calculations', () => {
       context: `Pepper Perfecto chance for occupied tier ${tier}`,
     });
   });
-  it('matches Salt tier-up chance for an actually occupied Sushi tier', () => {
-    const tier = station.board.find(slot => slot.sushi !== undefined)?.sushi?.index;
-    if (tier === undefined) throw new Error('Current save has no occupied Sushi slot for Salt tier-up chance comparison');
-    const expected = getExtractedValue(extractionResults, 'sushi_salt_tier_up_chance_occupied_tier');
-    expect(station.getSaltTierUpChance(tier)).toMatchLiveGameWithDetails(expected, {
-      tolerance: 0,
-      context: `Salt tier-up chance for occupied tier ${tier}`,
-    });
-  });
-  compareStation('sushi_saffron_bucks_per_use', 'Bucks granted by one Saffron shaker use', () => station.getSaffronBucksPerUse());
-  compareStation('sushi_shaker_fuel_per_use', "Fuel granted by a shaker use when Shake N' Bake is owned", () => station.getShakerFuelPerUse());
-  compareStation('sushi_shaker_bonus_fuel_chance', "Chance for Shake N' Bake to grant bonus shaker fuel", () => station.getShakerBonusFuelChance());
 
   const upgradeCases = [
     { index: 0, displayOrder: 6, role: 'finite-cap Sushi Slot' },

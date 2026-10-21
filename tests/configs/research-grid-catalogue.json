@@ -1,0 +1,180 @@
+{
+  "description": "Research Part2 paired Points, full60 Grid catalogue, linked state, and saved Shape coverage. All calculations use original source selectors. Supporting state is distinct from direct parameters.",
+  "target": "Research Grid catalogue, Points, linked prerequisites/grants, and Shapes",
+  "requiredActivePlayerIndex": 3,
+  "pairingEvidence": {
+    "fixtureSHA256": "42139b34b95e9fcad751187d25a04ae760238e798410a1a397902f826261a6b0",
+    "source": "Original Jelly_Operator1.22 offline port3101, character3, paused callbacks. Original startup matched all799 retained fixture keys. No fixture refresh.",
+    "privateEvidence": [
+      ".ui-verification/research-p2-backend/pairing.json",
+      ".ui-verification/research-p2-backend/original-part2-results.json",
+      ".ui-verification/research-p2-backend/original-inputs.json",
+      ".ui-verification/research-p2-backend/original-linked-inputs.json",
+      ".ui-verification/research-p2-backend/original-shape-static.json"
+    ],
+    "observedBranches": "Points115/115/0; all60 reachable; upgrade170 alone unpurchased; capped and uncapped upgrades; covered and uncovered effects; all specialized secondary rules; crowns25; Glimbo498 gives four complete blocks; Lore6/7 complete; Cooking Mastery unlocked; rawRift65 and companion87 active; all20 boats below400 despite purchased grant; five owned Shapes with zero rotation and 2/9/3/9/13 covered real upgrades;24 real upgrades uncovered; all20 saved placement tuples present, only ten static definitions apply; Doot description branch only. Original templates contain all six tokens { } $ ^ & |. Sixteen original templates use purchased-level token |. Earlier generated exports omitted those suffixes; the human restored them through the external WikiBot export on 2026-10-14.",
+    "unobservedBranches": "Positive or negative available Points; negative or fractional purchased ranks; affordability with free Points; inaccessible real upgrades; purchased Grid positions at columns0/19; adjacency transition across a twenty-column row boundary; missing Shape placements; no owned Shapes; nonzero or negative rotations; rotation unlocked; maximum Shape ownership; geometric overlaps and all-source Shape obtainability; absent Sigil Lore; locked Cooking Mastery; individual Rift-only and companion-only unlocks; qualifying level400 boats; Doot token-only numerical branch and non-Doot runtime sentence. Both Divine sentences retain exact documentary checks; only Doot selection is runtime-observed. Purchased-level substitutions are observed in original descriptions. All60 static templates and populated descriptions passed paired original1.22 comparisons after the human-restored export on 2026-10-14.",
+    "numericBoundary": "Configured tolerance0 with shared5e-7 baseline. Preserve getCompanionBonus(0) numeric Grid dependency. Description uses getCompanionActiveBonus(0)===1. Original helper0=1 observes only Doot branch.",
+    "descriptionParityGapIndices": [50, 51, 72, 90, 91, 126, 130, 131, 132, 147, 152, 166, 169, 186, 188, 190],
+    "descriptionParityGapStatus": "Resolved historical gap: earlier generated descriptions omitted purchased-level suffixes at these sixteen indices. The human fixed the external WikiBot export and updated the repository on 2026-10-14. Passing resumed evidence in .ui-verification/research-p2-backend/resumed-verification.json and .ui-verification/runs/2026-10-14T08-37-32-341Z-2448/ confirms paired original1.22 comparisons for all60 static templates and populated descriptions. The retained indices identify the historical gap, not an active external prerequisite. Core tests retain separate parity assertions for every upgrade. The runtime scenario repeats these comparisons, retains exact original/website templates and descriptions for each failure, completes remaining backend/navigation checks, and fails at the end if any mismatch remains. No backend restoration or generated edit is needed. This evidence does not establish connected-release parity.",
+    "sourceReferences": [
+      "docs/game-snippets/research/ResearchStuff.1.22.js:204-274,318-347",
+      "../IdleonWikiBot/codefiles/idleon1.22.txt:285040-285057,238384",
+      "docs/game-snippets/sailing/Sailing.1.22.js:9-26,249-261",
+      ".ui-verification/research-p2-backend/Minehead-original-1.22.js"
+    ],
+    "limits": "Parent executes extraction and checks. Config author ran none. This pairing does not establish connected-release parity or rendered Part2 acceptance."
+  },
+  "extractions": [
+    {
+      "label": "pairing_before",
+      "expression": "(() => { const research = idleon.getAttr(\"Research\"); return { levels: research[0], owners: research[1], placements: research[6], found: research[2], insightLevels: research[4], crowns: research[11], trades: research[12], researchLevel: Number(idleon.getAttr(\"Lv0\")[20]), artifactStatus: Number(idleon.getAttr(\"Sailing\")[3][37]), researchMerit: Number(idleon.getAttr(\"Tasks\")[2][6][3]), rift: idleon.getAttr(\"Rift\"), accumulatedReduction: Number(idleon.getAttr(\"OptionsListAccount\")[499]), spelunkingReduction: Number(idleon.getAttr(\"OptionsListAccount\")[500]) }; })()",
+      "description": "Supporting original input snapshot before helper reads. Compare with retained save and after snapshot."
+    },
+    {
+      "label": "points_earned",
+      "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_PTSearned\",0,0)",
+      "description": "Core Research points earned; spending refreshes only the original helper cache."
+    },
+    {
+      "label": "points_spent",
+      "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_PTSspent\",-1,0)",
+      "description": "Core Research points spent; spending refreshes only the original helper cache."
+    },
+    {
+      "label": "points_available",
+      "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_PTSavailable\",0,0)",
+      "description": "Core Research points available; spending refreshes only the original helper cache."
+    },
+    {
+      "label": "catalogue",
+      "expression": "idleon.getAttr(\"CustomLists\").h.ResGridSquares.map((square, index) => ({ index, name: square[0], template: square[5], cap: idleon.callFunction(\"ResearchStuff\",\"Grid_MaxLV\",index,0), level: idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",index,1), primary: idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",index,0), secondary: idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",index,2), reachable: idleon.callFunction(\"ResearchStuff\",\"Grid_CanWeSelect\",index,0), canUpgrade: idleon.callFunction(\"ResearchStuff\",\"Grid_CanWeUpgrade\",index,0) })).filter(square => square.name !== \"Name\")",
+      "description": "All 60 real Grid entries in original order. Helpers supply core effects, rounded levels, caps, selection, and current purchase predicate. Templates are supporting metadata."
+    },
+    {
+      "label": "selection_mask",
+      "expression": "idleon.getAttr(\"Research\")[0].map((level, index) => idleon.callFunction(\"ResearchStuff\",\"Grid_CanWeSelect\",index,0))",
+      "description": "Supporting full 240-position original selection mask. Real save contains no purchased row-edge positions."
+    },
+    {
+      "label": "grid_shared_multiplier",
+      "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus_Allmulti\",0,0)",
+      "description": "Core shared modifier and direct parameter used by every primary effect."
+    },
+    {
+      "label": "cloud_71",
+      "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\",71)",
+      "description": "Direct Equinox shared Grid contribution."
+    },
+    {
+      "label": "cloud_72",
+      "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\",72)",
+      "description": "Direct Equinox shared Grid contribution."
+    },
+    {
+      "label": "cloud_76",
+      "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\",76)",
+      "description": "Direct Equinox shared Grid contribution."
+    },
+    {
+      "label": "sushi_3",
+      "expression": "idleon.callFunction(\"SushiStuff\",\"RoG_BonusQTY\",3)",
+      "description": "Direct discovered Sushi reward used by Points or shared Grid effects."
+    },
+    {
+      "label": "sushi_13",
+      "expression": "idleon.callFunction(\"SushiStuff\",\"RoG_BonusQTY\",13)",
+      "description": "Direct discovered Sushi reward used by Points or shared Grid effects."
+    },
+    {
+      "label": "sushi_53",
+      "expression": "idleon.callFunction(\"SushiStuff\",\"RoG_BonusQTY\",53)",
+      "description": "Direct discovered Sushi reward used by Points or shared Grid effects."
+    },
+    {
+      "label": "jelly_4",
+      "expression": "idleon.callFunction(\"JellyOperation\",\"RoG_BonusQTY\",4)",
+      "description": "Direct completed Jelly obstruction reward used by Points."
+    },
+    {
+      "label": "jelly_57",
+      "expression": "idleon.callFunction(\"JellyOperation\",\"RoG_BonusQTY\",57)",
+      "description": "Direct completed Jelly obstruction reward used by Points."
+    },
+    {
+      "label": "point_milestone",
+      "expression": "Math.floor(Number(idleon.getAttr(\"Lv0\")[20])/10)*Math.round(1+Math.min(1,Math.floor(Number(idleon.getAttr(\"Lv0\")[20])/60))+idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",50,1))",
+      "description": "Direct same-domain cumulative ten-level reward. Exact expression from ResearchStuff:229-230; no effect multiplier applies to purchased Grid level 50."
+    },
+    {
+      "label": "observation_levels",
+      "expression": "idleon.callFunction(\"ResearchStuff\",\"TotalObsLVs\",-1,0)",
+      "description": "Direct total Insight levels used by Game Design 102 secondary effect; original refresh argument."
+    },
+    {
+      "label": "discoveries",
+      "expression": "idleon.callFunction(\"ResearchStuff\",\"TotalOccurrencesFound\",-1,0)",
+      "description": "Direct discovered Observation count used by See Em All secondary effect; original refresh argument."
+    },
+    {
+      "label": "glimbo_trades",
+      "expression": "idleon.callFunction(\"Minehead\",\"GlimboTotalTrades\",0,0)",
+      "description": "Direct Glimbo total used by complete 100-trade blocks. Source accessor: scripts.ActorEvents_579._customBlock_Minehead."
+    },
+    {
+      "label": "cooking_mastery",
+      "expression": "idleon.callFunction(\"Summoning2\",\"isMasteryUnlocked\",0,0)",
+      "description": "Direct Cooking owner predicate. Original raw Rift progress >58 or active companion87 >0.1, not prose Rift61."
+    },
+    {
+      "label": "boats",
+      "expression": "idleon.getAttr(\"Boats\").map((boat, index) => ({ index, lootUpgrades: Number(boat[3]), speedUpgrades: Number(boat[5]), qualifies: Number(boat[3])+Number(boat[5])>=400 ? 1 : 0, frame: idleon.callFunction(\"Sailing\",\"BoatFrame\",index,0) }))",
+      "description": "Direct per-boat qualification and supporting original frame. Sailing source:9-26,249-261. Qualification keeps grant separate; all20 observed boats are below400."
+    },
+    {
+      "label": "green_sigils",
+      "expression": "idleon.callFunction(\"ResearchStuff\",\"GreenSigilsUnlocked\",0,0)",
+      "description": "Core effective Eclectic Sigils grant after Lore condition."
+    },
+    {
+      "label": "divine_shared_contribution",
+      "expression": "5*Math.min(1,idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",173,1)*idleon.callFunction(\"Companions\",0))",
+      "description": "Direct same-domain conditional Divine contribution used by shared Grid modifier. Keep existing numerical Doot owner input per approved plan."
+    },
+    {
+      "label": "shape_count",
+      "expression": "idleon.callFunction(\"ResearchStuff\",\"ShapesOwned\",0,0)",
+      "description": "Core Shape ownership and direct parameter used by owned-prefix presentation."
+    },
+    {
+      "label": "shape_static",
+      "expression": "(() => { const definitions = idleon.getAttr(\"CustomLists\").h.Research; return { vertices: definitions[0], dimensions: definitions[1], names: definitions[3], modifiers: definitions[5] }; })()",
+      "description": "Supporting all ten original Shape definitions. No static field is a parameter-calculation target."
+    },
+    {
+      "label": "shape_multiplier_texts",
+      "expression": "idleon.getAttr(\"CustomLists\").h.Research[5].map(percent => (\"\"+idleon.callFunction(\"NotateNumber\",1+Number(percent)/100,\"MultiplierInfo\")).replace(\"#\",\"\"))",
+      "description": "Supporting original number formatting for all ten Shape description substitutions. Source idleon1.22.txt:285122-285125. Static modifiers and trivial formatting are not parameter-calculation targets."
+    },
+    {
+      "label": "descriptions",
+      "expression": "(() => { const squares=idleon.getAttr(\"CustomLists\").h.ResGridSquares; return squares.map((square,index) => { let text=\"\"+square[5]; const primary=Math.round(100*idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",index,0))/100; const secondary=idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",index,2); text=text.replace(/{/g,primary>100 ? idleon.callFunction(\"CommaNotation\",primary) : idleon.callFunction(\"NotateNumber\",primary,\"Small\")); text=text.replace(/}/g,(\"\"+idleon.callFunction(\"NotateNumber\",1+primary/100,\"MultiplierInfo\")).replace(\"#\",\"\")); text=text.replace(/\\$/g,idleon.callFunction(\"CommaNotation\",secondary)); text=text.replace(/\\^/g,(\"\"+idleon.callFunction(\"NotateNumber\",1+secondary/100,\"MultiplierInfo\")).replace(\"#\",\"\")); text=text.replace(/&/g,\"\"+(Math.floor(1e4*(1-1/(1+Number(idleon.getAttr(\"OptionsListAccount\")[499])/100)))/100)); text=text.replace(/\\|/g,\"\"+Math.round(idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",index,1))); if(index===173)text=text.replace(\"<\",idleon.callFunction(\"Companions\",0)===1 ? \"Arctis_nods_in_approval..._all_Research_Grid_bonuses_are_1.05x_higher\" : \"You_are_now_permanently_linked_to_Arctis_on_all_characters.\"); return {index,text}; }).filter(entry=>squares[entry.index][0]!==\"Name\"); })()",
+      "description": "Core original caller substitutions with original CommaNotation/NotateNumber helpers. Source idleon1.22.txt:285040-285057. Normalize underscore spacing only in comparisons. Sixteen original templates use purchased-level token |. Paired description parity now passes after the external export restored purchased-level | suffixes. Their omission was a historical export gap."
+    },
+    {
+      "label": "accumulated_reduction_percent",
+      "expression": "Math.floor(1e4*(1-1/(1+Number(idleon.getAttr(\"OptionsListAccount\")[499])/100)))/100",
+      "description": "Core Masterclass accumulated reduction display. Original description caller:idleon1.22.txt:285052."
+    },
+    {
+      "label": "masterclass_cost_multiplier",
+      "expression": "1/(1+Number(idleon.getAttr(\"OptionsListAccount\")[499])/100)",
+      "description": "Core accumulated first-three Masterclass upgrade cost multiplier. Exact reciprocal conversion of original saved percentage; no extra class grants."
+    },
+    {
+      "label": "pairing_after",
+      "expression": "(() => { const research = idleon.getAttr(\"Research\"); return { levels: research[0], owners: research[1], placements: research[6], found: research[2], insightLevels: research[4], crowns: research[11], trades: research[12], researchLevel: Number(idleon.getAttr(\"Lv0\")[20]), artifactStatus: Number(idleon.getAttr(\"Sailing\")[3][37]), researchMerit: Number(idleon.getAttr(\"Tasks\")[2][6][3]), rift: idleon.getAttr(\"Rift\"), accumulatedReduction: Number(idleon.getAttr(\"OptionsListAccount\")[499]), spelunkingReduction: Number(idleon.getAttr(\"OptionsListAccount\")[500]) }; })()",
+      "description": "Supporting original input snapshot after reads. Must equal before; cache refreshes cannot mutate source save inputs."
+    }
+  ]
+}

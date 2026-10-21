@@ -785,24 +785,24 @@ export const initCompanionRepo = () => {
                 "x3": -28,
                 "x4": 1,
                 "x5": 200,
-                "x6": 4900,
+                "x6": 4100,
                 "x7": 300,
-                "desc2": "Multiplies ALL Research Grid bonuses by 1.20x (World 7 feature)",
-                "bonus2": 20
+                "desc2": "Multiplies ALL Research Grid bonuses by 1.25x (World 7 feature)",
+                "bonus2": 25
             }),
         new CompanionBase(56, <CompanionModel>{
                 "id": "w7b10",
-                "desc": "Not officially in the game and may never be",
-                "bonus": 1,
+                "desc": "25x Sailing Loot, 100x Captain EXP, and 5x Artifact Find Chance",
+                "bonus": 25,
                 "x1": -43,
                 "x2": 0,
                 "x3": -30,
                 "x4": 1,
                 "x5": 260,
-                "x6": 5400,
-                "x7": 370,
-                "desc2": "Not officially in the game and may never be",
-                "bonus2": 1
+                "x6": 4750,
+                "x7": 400,
+                "desc2": "100x Sailing Loot, 400x Captain EXP, and 20x Artifact Find Chance",
+                "bonus2": 100
             }),
         new CompanionBase(57, <CompanionModel>{
                 "id": "w7b12",
@@ -2082,15 +2082,15 @@ export const initCompanionRepo = () => {
                 "id": "w7b8",
                 "desc": "Both +200 and 1.20x Max Stamina for Spelunking!",
                 "bonus": 20,
-                "x1": 0,
+                "x1": -32,
                 "x2": 0,
-                "x3": 0,
+                "x3": -23,
                 "x4": 1,
                 "x5": 185,
                 "x6": 3500,
                 "x7": 280,
-                "desc2": "Both +350 and 1.35x Max Stamina for Spelunking!",
-                "bonus2": 35
+                "desc2": "Both +500 and 1.50x Max Stamina for Spelunking!",
+                "bonus2": 50
             }),
         new CompanionBase(149, <CompanionModel>{
                 "id": "w7b9",

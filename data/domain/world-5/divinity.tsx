@@ -8,8 +8,10 @@ import { Item } from "../items";
 import { DivinityStyleModel } from "../model/divinityStyleModel";
 import { GodInfoModel } from "../model/godInfoModel";
 import { Activity, Player } from "../player";
+import { getCompanionActiveBonus, type Companion } from "../companions";
 import { SkillsIndex } from "../SkillsIndex";
-import { Hole, PocketDivinityUpgrade } from "./hole/hole";
+import type { Skilling } from "../skilling";
+import { Hole } from "./hole/hole";
 import { Sneaking } from "../world-6/sneaking";
 import { CoralKid } from "../world-7/coralKid";
 
@@ -28,7 +30,9 @@ export class DivinityGod {
 
 
     static fromBase = (data: GodInfoBase[]): DivinityGod[] => {
-        const godData = data.map(god => new DivinityGod(god.index, god.data));
+        const godData = data.map(god => god.index == 2
+            ? new NobisectGod(god.index, god.data)
+            : new DivinityGod(god.index, god.data));
         const godCopy = JSON.parse(JSON.stringify(godData));
 
         // Fix up the bonus texts based on bonus index, because ... Lava.
@@ -49,8 +53,11 @@ export class DivinityGod {
         if (!this.linkedPlayers.find(linked => linked.playerID == player.playerID)) {
             return 0;
         }
-        const divinityLevel = player.skills.get(SkillsIndex.Divinity)?.level ?? 0
+        return this.getMinorBonusForPlayer(player);
+    }
 
+    getMinorBonusForPlayer = (player: Player): number => {
+        const divinityLevel = player.skills.get(SkillsIndex.Divinity)?.level ?? 0;
         return Math.max(1, this.activeBubblePassiveBonus)
             * ((1 + this.coralKidUpgrade3 / 100) * divinityLevel / (60 + divinityLevel))
             * this.data.passiveMax;
@@ -60,12 +67,7 @@ export class DivinityGod {
         return this.data.blessingBonus.replace("{", this.getBlessingBonus().toString());
     }
 
-    getBlessingBonus = () => {
-        if (this.index == 2) {
-            // TODO: Fix this properly, bit weird with skilling eff
-            return 0;
-        }
-
+    getBlessingBonus = (_player?: Player): number => {
         return this.blessLevel *
             this.data.blessingPerLevel *
             (1 + (this.jadeUpgradeBlessingBonus / 100) * this.godRank);
@@ -80,29 +82,76 @@ export class DivinityGod {
     }
 }
 
+export class NobisectGod extends DivinityGod {
+    private alchemy!: Alchemy;
+    private skilling!: Skilling;
+
+    updateBlessingInputs(alchemy: Alchemy, skilling: Skilling): void {
+        this.alchemy = alchemy;
+        this.skilling = skilling;
+    }
+
+    override getBlessingBonusText = (): string => {
+        return "Base skill efficiency bonus varies by character.";
+    }
+
+    override getBlessingBonus = (player?: Player): number => {
+        if (!player) {
+            throw new Error("Nobisect's blessing bonus requires an explicit player.");
+        }
+
+        const allEfficiencies = this.skilling.getAllEfficiencies(player);
+        const miningEfficiency = this.alchemy.getBubbleBonusForKey("MinEff", player);
+        const choppingEfficiency = this.alchemy.getBubbleBonusForKey("ChopEff", player);
+
+        // Nobisect adds base efficiency; independent all-skill efficiency, bubbles and attributes set its scaling input.
+        // Source: docs/game-snippets/divinity/Divinity.1.22.js:50-55.
+        const efficiencyBase = Math.max(
+            1,
+            allEfficiencies
+            + Math.pow((miningEfficiency + choppingEfficiency) / 100, 2)
+            + Math.pow((player.stats.strength + (player.stats.agility + player.stats.wisdom)) / 3, 0.5) / 7,
+        );
+        // Higher efficiency damps the blessing multiplier, clamped from 0.1 to 1.8.
+        // Source: docs/game-snippets/divinity/Divinity.1.22.js:57-65.
+        const efficiencyFactor = Math.min(
+            1.8,
+            Math.max(
+                0.1,
+                4 * Math.pow(((efficiencyBase + 10000) / Math.max(10 * efficiencyBase + 10, 1)) * 0.01, 2),
+            ),
+        );
+        return this.blessLevel * this.data.blessingPerLevel * efficiencyFactor;
+    }
+}
+
 export class PlayerDivinityInfo {
     // Saved primary link, independent of account-wide and ES effective links.
     primaryGod: DivinityGod | undefined = undefined;
 
     // es has a second god, jam it in here.
     esGod: DivinityGod | undefined = undefined;
+    dootActive: boolean = false;
+    dootOwned: boolean = false;
+    pocketDivinityActive: boolean = false;
+    player: Player | undefined;
 
     constructor(public playerIndex: number, public style: DivinityStyleModel, public gods: DivinityGod[], public active: boolean = false) { }
+
+    get ordinaryGods(): DivinityGod[] {
+        if (!this.primaryGod) return [];
+        if (this.esGod?.unlocked && this.esGod.index !== this.primaryGod.index) {
+            return [this.primaryGod, this.esGod];
+        }
+        return [this.primaryGod];
+    }
 
     divinityPerHour = (): number => {
         return 0;
     }
 
     isLinkedToGod = (godIndex: number): boolean => {
-        if (!this.esGod && this.gods.length == 0) {
-            return false;
-        }
-
-        if (this.gods.find(god => god.index == godIndex)) {
-            return true;
-        }
-
-        return this.esGod?.index == godIndex;
+        return this.gods.some(god => god.index === godIndex);
     }
 }
 
@@ -113,12 +162,39 @@ export class GodOffering {
 export class Divinity extends Domain {
     playerInfo: PlayerDivinityInfo[] = [];
     currentDivinity: number = 0;
+    atomsBalance: number | null = null;
     gods: DivinityGod[] = DivinityGod.fromBase(initGodInfoRepo());
     offerings: GodOffering[] = [];
     godRank: number = 0;
     gamingGrowthMinorLinkBonus: number = 0;
 
     getGamingGrowthMinorLinkBonus = (): number => this.gamingGrowthMinorLinkBonus;
+
+    // The current source-backed callers require categories 4 and 7; other Bonus_Minor categories have additional branches.
+    getMinorBonus(playerIndex: number, category: 4 | 7): number {
+        const playerInfo = this.playerInfo[playerIndex];
+        if (!playerInfo) {
+            return 0;
+        }
+
+        const currentPlayer = playerInfo.player;
+        if (!currentPlayer) {
+            return 0;
+        }
+
+        if (playerInfo.dootOwned || playerInfo.pocketDivinityActive) {
+            const god = this.gods.find(candidate => candidate.data.bonusIndex === category);
+            return god?.getMinorBonusForPlayer(currentPlayer) ?? 0;
+        }
+
+        if (playerInfo.primaryGod?.data.bonusIndex === category) {
+            return playerInfo.primaryGod.getMinorLinkBonus(currentPlayer);
+        }
+        if (playerInfo.esGod?.unlocked && playerInfo.esGod.data.bonusIndex === category) {
+            return playerInfo.esGod.getMinorLinkBonus(currentPlayer);
+        }
+        return 0;
+    }
 
     getRawKeys(): RawData[] {
         return [
@@ -139,13 +215,15 @@ export class Divinity extends Domain {
         const afkTarget = range(0, charCount).map((_, index) => data.get(`AFKtarget_${index}`)) as string[];
         const talentLevels = range(0, charCount).map((_, index) => data.get(`SL_${index}`)) as Record<number, number>[];
 
-        if (divinityData.length == 0) {
-            return;
-        }
-
-        // Some divinity data has no "persistence", so we reset the previous data.
         divinity.playerInfo = [];
         divinity.offerings = [];
+        divinity.atomsBalance = divinityData[39] == null ? null : Number(divinityData[39]);
+        divinity.gods.forEach(god => {
+            god.linkedPlayers = [];
+        });
+        if (divinityData.length === 0) {
+            return;
+        }
 
         // Index 25 = Number of gods unlocked?
         const numberOfUnlockedGods = divinityData[25];
@@ -197,6 +275,8 @@ export const updateDivinity = (data: Map<string, any>) => {
     const sneaking = data.get("sneaking") as Sneaking;
     const hole = data.get("hole") as Hole;
     const coralKid = data.get("coralKid") as CoralKid;
+    const companions = data.get("companions") as Companion[];
+    const dootOwned = getCompanionActiveBonus(companions, 0) > 0;
 
     // God related math values;
     const activeBubblePassiveDivinityBonus = alchemy.getBubbleBonusForKey("Y2ACTIVE")
@@ -210,43 +290,25 @@ export const updateDivinity = (data: Map<string, any>) => {
         god.coralKidUpgrade3 = coralKidBonus3;
         // Reset previous info as it will be calculated again in the next section.
         god.linkedPlayers = [];
-        god.blessMaxLevel += coralKidBonus1;
+        god.blessMaxLevel = 100 + coralKidBonus1;
     })
 
     divinity.gamingGrowthMinorLinkBonus = 0;
 
     // Update the linked player to each god by iterating on each player's data.
     divinity.playerInfo.forEach(player => {
+        player.player = players[player.playerIndex];
+        player.dootOwned = dootOwned;
+        const pocketGodIds = hole.majiks.pocketDivinity.linkedGods;
+        player.pocketDivinityActive = pocketGodIds.length > 0;
+        const effectiveGods = player.dootActive ? divinity.gods
+            : [...player.ordinaryGods, ...pocketGodIds.map(id => divinity.gods[id])];
+        player.gods = [...new Map(effectiveGods.map(god => [god.index, god])).values()];
         player.gods.forEach(god => {
-            god.coralKidUpgrade3 = coralKidBonus3;
-            god.blessMaxLevel += coralKidBonus1;
-            // Due to Doot double linking can happen, so avoid that.
-            if (!god.linkedPlayers.find(p => p.playerID == player.playerIndex)) {
+            if (!god.linkedPlayers.some(linked => linked.playerID === player.playerIndex)) {
                 god.linkedPlayers.push(players[player.playerIndex]);
             }
         });
-
-        // Get Pocket Divinity linked gods
-        const pocketDivinity = hole.majiks.IdleonUpgrades.find(upgrade => upgrade.index == 21) as PocketDivinityUpgrade;
-        if (pocketDivinity) {
-            // Each linked god in the pocket divinity upgrade applies to all players.
-            pocketDivinity.linkedGods.forEach(godIndex => {
-                // Make sure this is reflected in the divinity gods linked players.
-                if (!divinity.gods[godIndex].linkedPlayers.find(p => p.playerID == player.playerIndex)) {
-                    divinity.gods[godIndex].linkedPlayers.push(players[player.playerIndex]);
-                }
-                // And also add it to the player's gods.
-                if (!player.gods.find(g => g.index == godIndex)) {
-                    player.gods.push(divinity.gods[godIndex]);
-                }
-            });
-
-
-        }
-
-        if (player.esGod && !player.esGod.linkedPlayers.find(p => p.playerID == player.playerIndex)) {
-            player.esGod.linkedPlayers.push(players[player.playerIndex]);
-        };
 
         // Update being active or not based on linked god(s) (could have changed since parse due to owning Doot or other bonuses like that) and ES secondary god
         player.active = (players[player.playerIndex].getActivityType() == Activity.Divinity || players[player.playerIndex].getActivityType() == Activity.Lab && player.isLinkedToGod(4));
@@ -258,4 +320,12 @@ export const updateDivinity = (data: Map<string, any>) => {
     })
 
     return divinity;
+}
+
+export const updateDivinityBlessings = (data: Map<string, any>): void => {
+    const divinity = data.get("divinity") as Divinity;
+    const alchemy = data.get("alchemy") as Alchemy;
+    const skilling = data.get("skilling") as Skilling;
+
+    (divinity.gods[2] as NobisectGod).updateBlessingInputs(alchemy, skilling);
 }

@@ -1,0 +1,9 @@
+{
+  "extractions": [
+    {
+      "label": "button_copper_sample_progress",
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 22, 0)",
+      "description": "Native Button task 22 value immediately after the first saved Copper entry in the account Printer array"
+    }
+  ]
+}

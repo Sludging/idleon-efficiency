@@ -1,0 +1,47 @@
+{
+  "accounts": [
+    {
+      "id": "suk69",
+      "profileName": "suk69",
+      "playerIndex": 3,
+      "reason": "Public profile uploaded 2026-10-17. Its Menagerie save has 13 owned-unlock flags and 82 bonus levels; the developer save has 0 owned flags and 1 bonus level. It also has 514 breedability levels and 55 outposts.",
+      "progression": {
+        "sourceUpdatedAt": "2026-10-17T12:40:12.401Z",
+        "currentWorld": 7,
+        "characterCount": 11,
+        "playerName": "Ctptn_Shoe",
+        "slab": 1885,
+        "tomePoints": 53509,
+        "totalOutposts": 55,
+        "totalBreedabilityLevels": 514,
+        "menagerieOwnedUnlocks": 13,
+        "menagerieBonusLevels": 82
+      }
+    },
+    {
+      "id": "lunaonline",
+      "profileName": "lunaonline",
+      "playerIndex": 3,
+      "reason": "Public profile uploaded 2026-10-17. Its Menagerie save has 14 owned-unlock flags and 107 bonus levels, versus suk69's 13 and 82 and the developer save's 0 and 1. It has 1,387 shiny levels, 612 breedability levels, 56 outposts, and 54,248 Tome points.",
+      "progression": {
+        "sourceUpdatedAt": "2026-10-17T19:48:54.816Z",
+        "currentWorld": 7,
+        "characterCount": 11,
+        "playerName": "rawrlunav3",
+        "slab": 1863,
+        "tomePoints": 54248,
+        "totalOutposts": 56,
+        "totalShinyLevels": 1387,
+        "totalBreedabilityLevels": 612,
+        "menagerieOwnedUnlocks": 14,
+        "menagerieBonusLevels": 107
+      }
+    }
+  ],
+  "defaultOnlyTests": [
+    {
+      "path": "tests/domains/spelunking/part-3-pipeline.test.ts",
+      "reason": "Saved-progression and synthetic transition cases depend on the developer snapshot; this is not an extracted game-parity suite."
+    }
+  ]
+}

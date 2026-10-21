@@ -1,0 +1,9 @@
+{
+  "extractions": {
+    "player_killroy_damage_bonus": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"KillroyDMG\", 0)",
+      "result": 65
+    }
+  },
+  "errors": {}
+}

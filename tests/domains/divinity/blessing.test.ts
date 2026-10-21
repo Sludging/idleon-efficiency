@@ -5,6 +5,8 @@
 import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Divinity } from '../../../data/domain/divinity';
+import { Player } from '../../../data/domain/player';
+import { getTargetPlayer } from '../../utils/target-player';
 const saveName = 'latest';
 const extractionResultsName = 'divinity-blessing-data.json';
 
@@ -39,7 +41,8 @@ describe('Divinity Domain - Blessing Bonus', () => {
    if (!god) throw new Error('God 2 (Nobisect) not found');
 
    const extractedBonus = extractionResults.extractions.divinity_blessing_2.result;
-   const calculatedBonus = god.getBlessingBonus();
+   const players = gameData.get('players') as Player[];
+   const calculatedBonus = god.getBlessingBonus(getTargetPlayer(players));
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
     tolerance: 0,

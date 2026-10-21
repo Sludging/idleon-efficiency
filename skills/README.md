@@ -10,11 +10,11 @@ See [AGENTS.md](../AGENTS.md) for the full project bootstrap.
 
 **Auto-triggers (Claude Code):** Files in `tests/` or `*.test.ts` / `*.test.tsx`
 
-**When to use:** Writing tests for domain logic, live game extraction, validation
+**When to use:** Writing tests for domain logic, offline-first game extraction, validation
 
 **Covers:** Extraction configs, parameter/calculation tests, debugging failures, test patterns
 
-**Points to:** [docs/TESTING_IMPLEMENTATION.md](../docs/TESTING_IMPLEMENTATION.md)
+**Points to:** [docs/TESTING_IMPLEMENTATION.md](../docs/TESTING_IMPLEMENTATION.md) and the [canonical game-access policy](../tests/helpers/README.md#game-access)
 
 ### feature-implementation
 
@@ -40,9 +40,9 @@ See [AGENTS.md](../AGENTS.md) for the full project bootstrap.
 
 **Auto-triggers:** None (load manually when needed)
 
-**When to use:** A backend main calculation is wrong or confirmed missing and one correctness aspect has been selected
+**When to use:** Check or correct one selected backend calculation, including a confirmed missing calculation; use feature implementation for new features outside a selected correctness case
 
-**Covers:** Checking the selected calculation and its parameters against the game, testing before implementation, handling dependencies, independent review, and recording pilot outcomes
+**Covers:** Comparing selected calculations and direct parameters with the game, tests before domain edits, dependencies, independent review, and case closure
 
 **Points to:** [docs/calculation-correctness/PLAYBOOK.md](../docs/calculation-correctness/PLAYBOOK.md)
 

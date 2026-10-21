@@ -2,7 +2,7 @@
   "extractions": {
     "legend_talent_26_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 26, 0)",
-      "result": 400
+      "result": 600
     },
     "companion_51_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 51, 0)",
@@ -10,31 +10,35 @@
     },
     "global_bonus_0": {
       "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 0, 0)",
-      "result": 3206.25
+      "result": 4488.75
     },
     "global_bonus_1": {
       "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 1, 0)",
-      "result": 3206.25
+      "result": 4488.75
     },
     "global_bonus_2": {
       "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 2, 0)",
-      "result": 4750
+      "result": 6650
     },
     "global_bonus_3": {
       "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 3, 0)",
-      "result": 1900
+      "result": 2660
     },
     "global_bonus_4": {
       "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 4, 0)",
-      "result": 1900
+      "result": 2660
     },
     "global_bonus_5": {
       "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 5, 0)",
-      "result": 475
+      "result": 665
     },
     "global_bonus_6": {
       "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 6, 0)",
-      "result": 2850
+      "result": 3990
+    },
+    "global_bonus_multi": {
+      "expression": "50*idleon.callFunction(\"Summoning\", \"RooMegafeather\", 1, 0)+50*idleon.callFunction(\"Summoning\", \"RooMegafeather\", 3, 0)+50*idleon.callFunction(\"Summoning\", \"RooMegafeather\", 6, 0)+50*idleon.callFunction(\"Summoning\", \"RooMegafeather\", 8, 0)+50*Math.min(1,idleon.callFunction(\"Summoning\", \"RooMegafeather\", 11, 0))+25*Math.max(0,idleon.callFunction(\"Summoning\", \"RooMegafeather\", 11, 0)-1)",
+      "result": 375
     }
   },
   "errors": {}

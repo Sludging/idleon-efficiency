@@ -2,7 +2,7 @@
   "extractions": {
     "royal_armory_outpost_experience_rank_row_1_type_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 0)",
-      "result": 11
+      "result": 15
     },
     "royal_armory_outpost_experience_rank_row_1_type_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 1)",
@@ -10,7 +10,7 @@
     },
     "royal_armory_outpost_experience_rank_row_1_type_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 2)",
-      "result": 0
+      "result": 3
     },
     "royal_armory_outpost_experience_rank_row_1_type_3": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 3)",
@@ -50,7 +50,7 @@
     },
     "royal_armory_outpost_experience_formula_rank_7_type_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 7, 0)",
-      "result": 282.3683265000001
+      "result": 282.3683265
     },
     "royal_armory_outpost_experience_formula_rank_8_type_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 8, 0)",

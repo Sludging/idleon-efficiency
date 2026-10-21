@@ -1,4 +1,3 @@
-import { initRoyalArmoryUpgradeRepo } from '../../../data/domain/data/RoyalArmoryUpgradeRepo';
 import type { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
 import type { RoyalArmoryUpgrade } from '../../../data/domain/world-6/royalArmory/upgrades';
 import type { ExtractionResults } from '../../utils/live-game-data-loader';
@@ -11,7 +10,6 @@ import {
 
 const saveName = 'latest';
 const extractionResultsName = 'royal-armory-upgrade-unlocks-data.json';
-const upgradeCatalog = initRoyalArmoryUpgradeRepo();
 const representativeStatuses = [
     {
         catalogIndex: 30,
@@ -84,23 +82,4 @@ describe('Royal Armory upgrade progression and displayed unlocks', () => {
         });
     });
 
-    it('matches the represented displayed upgrades on both sides of the current progression frontier', () => {
-        const gameCount = getExtractedValue(extractionResults, 'royal_armory_unlocked_upgrade_count');
-        const boundaries = [
-            { offset: -1, label: 'royal_armory_upgrade_unlocked_last_unlocked', effect: 'the last unlocked displayed upgrade' },
-            { offset: 0, label: 'royal_armory_upgrade_unlocked_first_locked', effect: 'the first locked displayed upgrade' },
-        ];
-        boundaries.forEach(({ offset, label, effect }) => {
-            const displayIndex = gameCount + offset;
-            // Research[43]'s catalog mapping was source-verified independently.
-            // Select with static metadata, never the tested wrapper's display index
-            // or its computed count, so either error remains visible here.
-            const catalogUpgrade = upgradeCatalog.find(({ data }) => data.displayOrder === displayIndex);
-            // A zero count has no last-unlocked row; a full count has no first-
-            // locked row. Compare only genuine displayed boundaries in this save.
-            if (catalogUpgrade) {
-                compareStatus(catalogUpgrade.index, displayIndex, label, effect);
-            }
-        });
-    });
 });

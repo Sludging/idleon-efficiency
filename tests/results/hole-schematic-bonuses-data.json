@@ -10,7 +10,7 @@
     },
     "hole_b_upg_14_0": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 14, 0)",
-      "result": 115380
+      "result": 115560
     },
     "hole_b_upg_45_0": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 45, 0)",

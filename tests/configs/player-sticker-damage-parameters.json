@@ -1,0 +1,11 @@
+{
+  "description": "Compare the Farming sticker damage multiplier with the native helper for the retained save",
+  "target": "Player sticker damage parameter",
+  "extractions": [
+    {
+      "label": "sticker_damage_multiplier",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"StickerDMGmulti\", 0, 0)",
+      "description": "Native Farming StickerDMGmulti(0,0) factor used by component D"
+    }
+  ]
+}

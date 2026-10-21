@@ -11,7 +11,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const DEBUG_SERVER_URL = process.env.GAME_SERVER_URL || 'http://127.0.0.1:3101';
+const DEFAULT_DEBUG_SERVER_URL = process.env.GAME_SERVER_URL || 'http://127.0.0.1:3101';
 const TARGET_PLAYER_CONFIG_PATH = path.resolve(__dirname, '../utils/target-player.json');
 const TARGET_PLAYER_PLACEHOLDER = '__TARGET_PLAYER__';
 
@@ -20,6 +20,7 @@ class GameDataExtractor {
   this.configPath = configPath;
   this.outputPath = outputPath;
   this.verbose = options.verbose !== false;
+  this.serverURL = options.serverURL || DEFAULT_DEBUG_SERVER_URL;
   this.config = null;
   this.results = {
    extractions: {},
@@ -45,7 +46,7 @@ class GameDataExtractor {
 
  async checkServerStatus() {
   try {
-   const response = await fetch(`${DEBUG_SERVER_URL}/status`);
+   const response = await fetch(`${this.serverURL}/status`);
    const status = await response.json();
 
    if (!response.ok) {
@@ -56,9 +57,8 @@ class GameDataExtractor {
    this.log(`✅ Game injection: ${status.injected ? 'Active' : 'Not detected'}`);
 
    if (!status.injected) {
-    console.warn(`⚠️  Game not detected. Make sure:
-1. Game is running with --remote-debugging-port=9223
-2. Debug server auto-injection completed successfully`);
+    console.warn(`⚠️  Game not detected. Start the offline server and wait for IDLEON_OFFLINE_READY.
+Use live mode only to refresh a save. See tests/helpers/README.md#game-access.`);
    }
 
    return status.injected;
@@ -181,6 +181,20 @@ class GameDataExtractor {
 
 
  readTargetPlayerIndex() {
+  const accountPlayerIndex = process.env.TEST_ACCOUNT_PLAYER_INDEX;
+  if (accountPlayerIndex !== undefined) {
+   if (!/^(0|[1-9]\d*)$/.test(accountPlayerIndex)) {
+    throw new Error('Invalid TEST_ACCOUNT_PLAYER_INDEX: expected a non-negative integer');
+   }
+
+   const parsedIndex = Number(accountPlayerIndex);
+   if (!Number.isSafeInteger(parsedIndex)) {
+    throw new Error('Invalid TEST_ACCOUNT_PLAYER_INDEX: expected a non-negative integer');
+   }
+
+   return parsedIndex;
+  }
+
   let targetPlayerConfig;
   try {
    targetPlayerConfig = JSON.parse(fs.readFileSync(TARGET_PLAYER_CONFIG_PATH, 'utf8'));
@@ -201,8 +215,10 @@ class GameDataExtractor {
  }
 
  getRequiredActivePlayerIndex() {
+  if (process.env.TEST_ACCOUNT_PLAYER_INDEX !== undefined) {
+   this.readTargetPlayerIndex();
+  }
   const configuredIndex = this.config?.requiredActivePlayerIndex;
-
   if (configuredIndex === undefined) {
    return this.readTargetPlayerIndex();
   }
@@ -227,21 +243,34 @@ class GameDataExtractor {
   const executedExpression = this.resolveExpression(expression);
 
   try {
-   const response = await fetch(`${DEBUG_SERVER_URL}/exec`, {
-    method: 'POST',
-    headers: {
-     'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ expression: executedExpression })
-   });
+   let busyDeadline;
+   while (true) {
+    if (busyDeadline !== undefined && Date.now() >= busyDeadline) {
+     throw new Error('Offline runtime remained busy for 30000ms; expression was not executed');
+    }
 
-   const result = await response.json();
+    const response = await fetch(`${this.serverURL}/exec`, {
+     method: 'POST',
+     headers: {
+      'Content-Type': 'application/json'
+     },
+     body: JSON.stringify({ expression: executedExpression })
+    });
+    const result = await response.json();
 
-   if (!response.ok) {
-    throw new Error(`Execution failed: ${result.error || 'Unknown error'}`);
+    // This response rejects the request before evaluation. Other failures may follow execution.
+    if (response.status === 409 && result.error === 'Offline runtime is busy; send requests serially') {
+     busyDeadline ??= Date.now() + 30000;
+     await new Promise(resolve => setTimeout(resolve, Math.min(250, Math.max(0, busyDeadline - Date.now()))));
+     continue;
+    }
+
+    if (!response.ok) {
+     throw new Error(`Execution failed: ${result.error || 'Unknown error'}`);
+    }
+
+    return this.normalizeResult(result.result);
    }
-
-   return this.normalizeResult(result.result);
   } catch (error) {
    throw new Error(`Failed to execute "${executedExpression}": ${error.message}`);
   }

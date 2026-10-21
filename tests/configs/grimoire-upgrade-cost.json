@@ -1,0 +1,31 @@
+{
+  "description": "Grimoire current purchase prices and both direct account cost discounts for the paired real account",
+  "target": "GrimoireUpgrade current purchase cost",
+  "extractions": [
+    {
+      "label": "grimoire_upgrade_cost_0",
+      "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgCost\", 0, 0)",
+      "description": "Wraith Damage (upgrade 0): current Femur purchase price at observed owned level 217"
+    },
+    {
+      "label": "grimoire_upgrade_cost_25",
+      "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgCost\", 25, 0)",
+      "description": "Wraith Accuracy III (upgrade 25): current Cranium purchase price at observed owned level 227; both account discounts still apply"
+    },
+    {
+      "label": "grimoire_upgrade_cost_49",
+      "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgCost\", 49, 0)",
+      "description": "Wraith Defence V (upgrade 49): current Bovinae purchase price at observed owned level 93; both account discounts still apply"
+    },
+    {
+      "label": "grimoire_masterclass_cost_multiplier",
+      "expression": "idleon.callFunction(\"Summoning\", \"AllMasterclassCostRedux\", 0, 0)",
+      "description": "Whole shared Master Classes cost multiplier directly used by every Grimoire purchase price"
+    },
+    {
+      "label": "grimoire_first_three_cost_multiplier",
+      "expression": "idleon.callFunction(\"Summoning\", \"First3MC_CostRedux\", 0, 0)",
+      "description": "Whole first-three Master Classes cost multiplier directly used by every Grimoire purchase price, not only upgrades 0 to 2"
+    }
+  ]
+}

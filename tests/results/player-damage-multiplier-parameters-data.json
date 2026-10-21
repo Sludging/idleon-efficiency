@@ -1,0 +1,65 @@
+{
+  "extractions": {
+    "damage_tome_bonus_0": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 0, 0)",
+      "result": 1495.2090020486505
+    },
+    "damage_construction_mastery_1": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ConstMasteryBonus\", 1, 0)",
+      "result": 734
+    },
+    "damage_killroy_multiplier": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"KillroyDMG\", 0)",
+      "result": 65
+    },
+    "damage_minehead_bonus_0": {
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 0, 0)",
+      "result": 10
+    },
+    "damage_minehead_bonus_4": {
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 4, 0)",
+      "result": 1
+    },
+    "damage_jelly_obstruction_37": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 37, 0)",
+      "result": 0
+    },
+    "damage_royal_statue_0": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"StatueBon\", 0, 0)",
+      "result": 200
+    },
+    "damage_hole_fountain_1_16": {
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 16)",
+      "result": 615
+    },
+    "damage_sushi_49": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 49, 0)",
+      "result": 0
+    },
+    "damage_family_bonus_20": {
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.FamBonusQTYs.h[20]; })()",
+      "result": 17.606382978723403
+    },
+    "damage_family_bonus_80": {
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.FamBonusQTYs.h[80]; })()",
+      "result": 7.4066985645933014
+    },
+    "damage_eclipse_skulls": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"eclipseSkulls\", 0)",
+      "result": 400
+    },
+    "damage_rift_skill_etc_0": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillETC\", 0)",
+      "result": 67
+    },
+    "damage_msa_bonus": {
+      "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 0, 0)",
+      "result": 117
+    },
+    "damage_weapon_power_bonus": {
+      "expression": "idleon.callFunction(\"Minehead\", \"WepPowDmgPCT\", 0, 0)",
+      "result": 196
+    }
+  },
+  "errors": {}
+}

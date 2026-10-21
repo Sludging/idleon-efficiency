@@ -1,14 +1,14 @@
 'use client';
 
-import { Box, Grid, ResponsiveContext, Text } from "grommet";
+import { Box, Grid, Heading, ResponsiveContext, Text } from "grommet";
 import { CircleInformation } from "grommet-icons";
 import { useContext } from "react";
 import IconImage from "../../base/IconImage";
-import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 import TipDisplay from "../../base/TipDisplay";
 import { commaNotation, notateNumber } from "../../../data/utility";
 import type { SushiStation, SushiShaker } from "../../../data/domain/world-7/sushi";
+import RoundedShadowBox from "../../base/RoundedShadowBox";
 import { sushiBucksImage, sushiFuelBalanceImage, sushiFuelCostImage } from "./sushiImages";
 
 const formatPercent = (value: number): string => `${(value * 100).toLocaleString(undefined, { maximumSignificantDigits: 3 })}%`;
@@ -34,9 +34,8 @@ const SushiOverview = ({ station }: { station: SushiStation }) => {
     };
     const shakerFuel = station.getShakerFuelPerUse();
     const bucksPerHour = station.getBucksPerHour();
+    const fuelPerHour = station.getFuelPerHour();
     const bonusFuelChance = station.getShakerBonusFuelChance();
-    const groupColumns = { size: "auto" as const, count: size === "small" ? 1 : 3 };
-    const shakerColumns = { size: "auto" as const, count: size === "small" ? 1 : 3 };
 
     const shakerEffect = (shaker: SushiShaker): { label: string; value: string; tooltip?: string } => {
         switch (shaker.kind) {
@@ -62,62 +61,109 @@ const SushiOverview = ({ station }: { station: SushiStation }) => {
     };
 
     return (
-        <Box gap="small">
-            <Grid columns={groupColumns} gap="small" fill>
-                <MetricGroup title="Bucks">
-                    <MetricCard label="Balance" value={station.bucks < 1e8 ? commaNotation(station.bucks) : notateNumber(station.bucks, "Big")} icon={sushiBucksImage} />
-                    <MetricCard label="Rate" value={`${bucksPerHour < 1e8 ? commaNotation(bucksPerHour) : notateNumber(bucksPerHour, "Big")}/hr`} icon={sushiBucksImage} />
-                </MetricGroup>
-                <MetricGroup title="Fuel">
-                    <MetricCard label="Balance / capacity" value={`${formatAmount(station.fuel)} / ${formatAmount(station.getFuelCapacity())}`} icon={sushiFuelBalanceImage} />
-                    <MetricCard label="Rate" value={`${formatAmount(station.getFuelPerHour())}/hr`} icon={sushiFuelBalanceImage} />
-                    <MetricCard label="Overflow" value={formatAmount(station.fuelOverflow)} icon={sushiFuelBalanceImage} tooltip="When Fuel is generated at capacity, 1 fuel overflow is gained. Current overflow provides a Bucks multiplier." />
-                </MetricGroup>
-                <MetricGroup title="Other">
-                    <MetricCard label="Fireplace Sparks" value={formatAmount(station.fireplaceSparks)} tooltip="Purple Fireplaces generate 1 Fireplace Spark per second; sparks multiply all Fireplace bonuses." />
-                    <MetricCard label="Best combo" value={formatAmount(station.bestComboScore)} tooltip="The best combo grants a permanent Bucks multiplier." />
-                </MetricGroup>
+        <Box gap="medium">
+            <Grid columns={size === "small" ? ["minmax(0, 1fr)"] : ["minmax(0, 34fr)", "minmax(0, 44fr)", "minmax(0, 22fr)"]} pad={{ vertical: "small" }} gap={size === "small" ? "medium" : undefined} fill>
+                <Box gap="small" pad={size === "small" ? undefined : { right: "medium" }} style={{ minWidth: 0 }}>
+                    <Box direction="row" gap="xsmall" align="center" height="32px">
+                        <IconImage data={sushiBucksImage} scale={0.75} />
+                        <Text size="small">Bucks</Text>
+                    </Box>
+                    <Box direction="row" wrap gap="medium" style={{ alignItems: "baseline", minWidth: 0 }}>
+                        <Box style={{ minWidth: 0 }}>
+                            <Text size="xxlarge" weight="normal" style={{ overflowWrap: "anywhere" }}>{station.bucks < 1e8 ? commaNotation(station.bucks) : notateNumber(station.bucks, "Big")}</Text>
+                            <Text size="xsmall" color="accent-2">Balance</Text>
+                        </Box>
+                        <Box style={{ minWidth: 0 }}>
+                            <Text size="large" color="status-ok" weight="normal" style={{ overflowWrap: "anywhere" }}>{bucksPerHour >= 0 ? "+" : ""}{bucksPerHour < 1e8 ? commaNotation(bucksPerHour) : notateNumber(bucksPerHour, "Big")}/hr</Text>
+                            <Text size="xsmall" color="accent-2">Rate</Text>
+                        </Box>
+                    </Box>
+                </Box>
+                <Box gap="small" pad={size === "small" ? undefined : { horizontal: "medium" }} border={size === "small" ? undefined : { side: "left", color: "grey-1" }} style={{ minWidth: 0 }}>
+                    <Box direction="row" gap="xsmall" align="center" height="32px">
+                        <IconImage data={sushiFuelBalanceImage} scale={1.5} />
+                        <Text size="small">Fuel</Text>
+                    </Box>
+                    <Box direction="row" wrap gap="medium" style={{ alignItems: "baseline", minWidth: 0 }}>
+                        <Box style={{ minWidth: 0 }}>
+                            <Text size="xxlarge" weight="normal" style={{ overflowWrap: "anywhere" }}>{formatAmount(station.fuel)}</Text>
+                            <Text size="xsmall" color="accent-2" style={{ overflowWrap: "anywhere" }}>Balance, of {formatAmount(station.getFuelCapacity())} capacity</Text>
+                        </Box>
+                        <Box style={{ minWidth: 0 }}>
+                            <Text size="large" color="status-warning" weight="normal" style={{ overflowWrap: "anywhere" }}>{fuelPerHour >= 0 ? "+" : ""}{formatAmount(fuelPerHour)}/hr</Text>
+                            <Text size="xsmall" color="accent-2">Rate</Text>
+                        </Box>
+                        <Box style={{ minWidth: 0 }}>
+                            <Text size="large" weight="normal" style={{ overflowWrap: "anywhere" }}>{formatAmount(station.fuelOverflow)}</Text>
+                            <Box direction="row" gap="xxsmall" align="center">
+                                <Text size="xsmall" color="accent-2">Overflow</Text>
+                                <TipDisplay heading="Overflow" body="When Fuel is generated at capacity, 1 fuel overflow is gained. Current overflow provides a Bucks multiplier."><CircleInformation size="small" /></TipDisplay>
+                            </Box>
+                        </Box>
+                    </Box>
+                </Box>
+                <Box gap="small" pad={size === "small" ? undefined : { left: "medium" }} border={size === "small" ? undefined : { side: "left", color: "grey-1" }} style={{ minWidth: 0 }}>
+                    <Box justify="center" height="32px">
+                        <Text size="small">Other</Text>
+                    </Box>
+                    <Box gap="xsmall">
+                        <Box direction="row" align="baseline" justify="between" gap="small">
+                            <Box direction="row" gap="xxsmall" align="center">
+                                <Text size="xsmall" color="accent-2">Best combo</Text>
+                                <TipDisplay heading="Best combo" body="The best combo grants a permanent Bucks multiplier."><CircleInformation size="small" /></TipDisplay>
+                            </Box>
+                            <Text size="large" weight="bold" textAlign="end" style={{ overflowWrap: "anywhere", minWidth: 0 }}>{formatAmount(station.bestComboScore)}</Text>
+                        </Box>
+                        <Box direction="row" align="baseline" justify="between" gap="small">
+                            <Box direction="row" gap="xxsmall" align="center">
+                                <Text size="xsmall" color="accent-2">Fireplace sparks</Text>
+                                <TipDisplay heading="Fireplace sparks" body="Purple Fireplaces generate 1 Fireplace Spark per second; sparks multiply all Fireplace bonuses."><CircleInformation size="small" /></TipDisplay>
+                            </Box>
+                            <Text size="large" weight="bold" textAlign="end" style={{ overflowWrap: "anywhere", minWidth: 0 }}>{formatAmount(station.fireplaceSparks)}</Text>
+                        </Box>
+                    </Box>
+                </Box>
             </Grid>
             {!station.dailyKnowledgeEnabled && <Text size="xsmall">Daily Knowledge gains are not active.</Text>}
 
-            <Grid columns={shakerColumns} gap="small" fill>
+            <Heading level="3" size="small" margin={{ top: "small", bottom: "none" }}>Shakers</Heading>
+            <Grid columns={{ size: "auto", count: size === "small" ? 1 : 3 }} gap="medium" fill>
                 {station.shakers.map(shaker => {
                     const effect = shakerEffect(shaker);
                     return (
-                        <ShadowBox
-                            key={shaker.kind}
-                            background="dark-1"
-                            pad="xsmall"
-                            gap="xsmall"
-                            style={{ opacity: shaker.unlocked ? 1 : 0.55, minWidth: 0 }}
-                        >
+                        <RoundedShadowBox key={shaker.kind} background="dark-1" pad="medium" gap="small" style={{ opacity: shaker.unlocked ? 1 : 0.55 }}>
                             <Box direction="row" wrap gap="small" align="center" justify="between">
-                                <Box direction="row" wrap gap="xsmall" align="center" style={{ minWidth: 0 }}>
-                                    <Box direction="row" gap="xsmall" align="center" style={{ minWidth: 0 }}>
-                                        <IconImage data={station.getShakerImageData(shaker.kind)} scale={0.6} />
-                                        <Text size="xsmall">{shakerNames[shaker.kind]}</Text>
+                                <Box direction="row" wrap gap="small" align="center" style={{ minWidth: 0 }}>
+                                    <IconImage data={station.getShakerImageData(shaker.kind)} scale={0.8} />
+                                    <Box gap="xxsmall">
+                                        <Text size="small" weight="bold">{shakerNames[shaker.kind]}</Text>
+                                        <Text size="xsmall">{formatAmount(shaker.remainingUses)} uses{!shaker.unlocked ? " · Locked" : ""}</Text>
                                     </Box>
-                                    <Text size="xsmall">{formatAmount(shaker.remainingUses)} uses{!shaker.unlocked ? " · Locked" : ""}</Text>
                                 </Box>
                                 <TextAndLabel
                                     label={effect.label}
                                     text={effect.value}
-                                    textSize="xsmall"
+                                    textSize="small"
                                     labelSize="xsmall"
                                     tooltip={effect.tooltip}
                                 />
                             </Box>
-                            <Box direction="row" wrap gap={{ column: "small", row: "xsmall" }}>
-                                <Text size="xsmall">Free-use: {formatPercent(station.getFreeShakerChance())}</Text>
-                                {shakerFuel > 0 && (
-                                    <Box direction="row" gap="xxsmall" align="center">
-                                        <IconImage data={sushiFuelCostImage} scale={0.75} />
-                                        <Text size="xsmall">Fuel/use: {formatAmount(shakerFuel)}</Text>
-                                    </Box>
-                                )}
-                                {bonusFuelChance > 0 && <Text size="xsmall">Bonus fuel: {formatPercent(bonusFuelChance)}</Text>}
-                            </Box>
-                        </ShadowBox>
+                            <Box height="1px" background="grey-1" />
+                            <Grid columns={{ size: "auto", count: 3 }} gap="small">
+                                <TextAndLabel label="Free use" text={formatPercent(station.getFreeShakerChance())} textSize="xsmall" labelSize="xsmall" />
+                                <ComponentAndLabel
+                                    label="Fuel per use"
+                                    labelSize="xsmall"
+                                    component={shakerFuel > 0 ? (
+                                        <Box direction="row" gap="xxsmall" align="center">
+                                            <IconImage data={sushiFuelCostImage} scale={0.75} />
+                                            <Text size="xsmall">{formatAmount(shakerFuel)}</Text>
+                                        </Box>
+                                    ) : <Text size="xsmall">—</Text>}
+                                />
+                                <TextAndLabel label="Bonus fuel" text={bonusFuelChance > 0 ? formatPercent(bonusFuelChance) : "—"} textSize="xsmall" labelSize="xsmall" />
+                            </Grid>
+                        </RoundedShadowBox>
                     );
                 })}
             </Grid>
@@ -125,32 +171,5 @@ const SushiOverview = ({ station }: { station: SushiStation }) => {
     );
 };
 
-const MetricGroup = ({ title, children }: { title: string; children: React.ReactNode }) => (
-    <ShadowBox background="dark-1" pad="xsmall" gap="xsmall" style={{ minWidth: 0 }}>
-        <Text size="xsmall" color="accent-2">{title}</Text>
-        <Grid columns={{ size: "auto", count: 2 }} gap="xsmall">
-            {children}
-        </Grid>
-    </ShadowBox>
-);
-
-const MetricCard = ({ label, value, icon, tooltip }: { label: string; value: string; icon?: typeof sushiBucksImage; tooltip?: string }) => (
-    <ShadowBox background="dark-2" pad="xsmall" gap="xxsmall" style={{ minWidth: 0 }}>
-        <ComponentAndLabel
-            label={tooltip ? (
-                <Box direction="row" gap="xxsmall" align="center">
-                    <Text size="xsmall" color="accent-2">{label}</Text>
-                    <TipDisplay heading={label} body={tooltip}><CircleInformation size="small" /></TipDisplay>
-                </Box>
-            ) : (
-                <Text size="xsmall" color="accent-2">{label}</Text>
-            )}
-            component={<Box direction="row" gap="xxsmall" align="center" style={{ minWidth: 0 }}>
-                {icon && <IconImage data={icon} scale={icon === sushiFuelBalanceImage ? 1.5 : 0.75} />}
-                <Text size="xsmall">{value}</Text>
-            </Box>}
-        />
-    </ShadowBox>
-);
 
 export { SushiOverview };

@@ -1,0 +1,81 @@
+{
+  "description": "Direct calculated inputs used by Construction cog player build speed in active context 3",
+  "target": "Construction cog player build speed parameters",
+  "extractions": [
+    {
+      "label": "player_build_speed_bubble_12",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.Construction",
+      "description": "Prepared native Construction bubble value directly read by WorkbenchStuff.PlayerBuildSpd (v1.23 chunk 173087–173089)"
+    },
+    {
+      "label": "player_build_speed_build_prod_stamp",
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BuildProd\")",
+      "description": "Native BuildProd stamp contribution (v1.23 WorkbenchStuff chunk 173090)"
+    },
+    {
+      "label": "player_build_speed_guild_bonus_5",
+      "expression": "idleon.callFunction(\"GuildBonuses\", 5)",
+      "description": "Native guild bonus 5 contribution (v1.23 WorkbenchStuff chunk 173097)"
+    },
+    {
+      "label": "player_build_speed_gear_build_speed",
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"30\")",
+      "description": "Native EtcBonuses 30 maps to %_BUILD_SPD (v1.23 CustomMaps.IDforETCbonus 316693–316725; WorkbenchStuff chunk 173098)"
+    },
+    {
+      "label": "player_build_speed_construction_mastery_4",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ConstMasteryBonus\", 2, 0)",
+      "description": "Native Construction Mastery build-speed selector 2 (v1.23 WorkbenchStuff chunk 172845–172885 and 173100); IE public index 4 mapping is tested"
+    },
+    {
+      "label": "player_build_speed_shinyfin_vial",
+      "expression": "idleon.getDNSM(\"AlchVials\").h.Contspd",
+      "description": "Native Shinyfin Stew vial value (v1.23 vial definition at 307435; WorkbenchStuff chunk 173101)"
+    },
+    {
+      "label": "player_build_speed_turtle_vial",
+      "expression": "idleon.getDNSM(\"AlchVials\").h[\"6turtle\"]",
+      "description": "Native Turtle Tisane vial value (v1.23 vial definition at 307449; WorkbenchStuff chunk 173110)"
+    },
+    {
+      "label": "player_build_speed_arcade_44",
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 44, 0)",
+      "description": "Native Arcade bonus 44 contribution (v1.23 WorkbenchStuff chunk 173102)"
+    },
+    {
+      "label": "player_build_speed_voting_18",
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 18, 0)",
+      "description": "Native voting bonus 18 contribution (v1.23 WorkbenchStuff chunk 173103)"
+    },
+    {
+      "label": "player_build_speed_bubba_1",
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 1, 0)",
+      "description": "Native Bubba global bonus 1 contribution (v1.23 WorkbenchStuff chunk 173105)"
+    },
+    {
+      "label": "player_build_speed_vault_48",
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 48, 0)",
+      "description": "Native Upgrade Vault bonus 48 before its native VaultKillzTotal(11) scaling (v1.23 WorkbenchStuff chunk 173104)"
+    },
+    {
+      "label": "player_build_speed_winner_13",
+      "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 13, 0)",
+      "description": "Native Summoning winner bonus 13 contribution (v1.23 WorkbenchStuff chunk 173107–173108)"
+    },
+    {
+      "label": "player_build_speed_palette_25",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 25, 0)",
+      "description": "Native Gaming palette bonus 25 contribution (v1.23 WorkbenchStuff chunk 173109)"
+    },
+    {
+      "label": "player_build_speed_atom_1",
+      "expression": "idleon.callFunction(\"AtomCollider\", \"AtomBonuses\", 1, 0)",
+      "description": "Native Atom Collider bonus 1 contribution (v1.23 WorkbenchStuff chunk 173123)"
+    },
+    {
+      "label": "player_build_speed_talent_131",
+      "expression": "(() => { const i = 3, username = idleon.getAttr(\"GetPlayersUsernames\")[i], description = idleon.getAttr(\"CustomLists\").h.TalentDescriptions[131][1], level = idleon.getAttr(\"PlayerDATABASE\").h[username].h.SkillLevels[131]; return idleon.callFunction(\"ArbitraryCode5Inputs\", description[2], Number(description[0]), Number(description[1]), level, 0, 0); })()",
+      "description": "Native target character 3 talent 131 calculated contribution (v1.23 WorkbenchStuff chunk 173111–173122)"
+    }
+  ]
+}

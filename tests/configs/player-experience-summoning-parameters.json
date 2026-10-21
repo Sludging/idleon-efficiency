@@ -1,0 +1,41 @@
+{
+  "description": "Compare native Summoning inputs used by class EXP against typed domain APIs",
+  "target": "Player class EXP Summoning inputs",
+  "extractions": [
+    {
+      "label": "vault_upgrade_12_bonus",
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 12, 0)",
+      "description": "Native VaultUpgBonus(12,0) contribution to class EXP"
+    },
+    {
+      "label": "vault_upgrade_3_bonus",
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 3, 0)",
+      "description": "Native VaultUpgBonus(3,0) contribution to class EXP"
+    },
+    {
+      "label": "vault_upgrade_35_bonus",
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 35, 0)",
+      "description": "Native VaultUpgBonus(35,0) contribution to class EXP"
+    },
+    {
+      "label": "grimoire_upgrade_24_bonus",
+      "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 24, 0)",
+      "description": "Native GrimoireUpgBonus(24,0) contribution to class EXP"
+    },
+    {
+      "label": "owl_bonus_0",
+      "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 0, 0)",
+      "description": "Native OwlBonuses(0,0) contribution to class EXP"
+    },
+    {
+      "label": "voting_bonus_15",
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 15, 0)",
+      "description": "Native VotingBonusz(15,0) contribution to class EXP"
+    },
+    {
+      "label": "win_bonus_23",
+      "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 23, 0)",
+      "description": "Native WinBonus(23,0) contribution to class EXP"
+    }
+  ]
+}

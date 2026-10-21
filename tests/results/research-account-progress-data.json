@@ -1,0 +1,1179 @@
+{
+  "extractions": {
+    "research_state": {
+      "expression": "({found:idleon.getAttr(\"Research\")[2],levels:idleon.getAttr(\"Research\")[4],lenses:idleon.getAttr(\"Research\")[5],attempts:idleon.getAttr(\"Research\")[7][2],pendingSeconds:idleon.getAttr(\"Research\")[7][3]})",
+      "result": {
+        "found": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "levels": [
+          9,
+          9,
+          11,
+          9,
+          9,
+          6,
+          6,
+          6,
+          6,
+          6,
+          5,
+          4,
+          14,
+          6,
+          10,
+          7,
+          7,
+          8,
+          7,
+          8,
+          3,
+          7,
+          6,
+          4,
+          3,
+          3,
+          8,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "lenses": [
+          784,
+          113,
+          20,
+          0,
+          710,
+          151,
+          26,
+          1,
+          860,
+          113,
+          22,
+          0,
+          799,
+          111,
+          20,
+          0,
+          822,
+          113,
+          21,
+          2,
+          875,
+          111,
+          22,
+          0,
+          874,
+          124,
+          22,
+          0,
+          868,
+          77,
+          14,
+          2,
+          748,
+          151,
+          27,
+          1,
+          837,
+          111,
+          21,
+          2,
+          760,
+          163,
+          27,
+          1,
+          722,
+          163,
+          26,
+          1,
+          836,
+          124,
+          21,
+          2,
+          798,
+          124,
+          20,
+          0,
+          875,
+          310,
+          -1,
+          0,
+          856,
+          301,
+          -1,
+          0,
+          856,
+          306,
+          -1,
+          0,
+          778,
+          283,
+          -1,
+          0,
+          808,
+          322,
+          -1,
+          0,
+          867,
+          309,
+          -1,
+          0,
+          783,
+          293,
+          -1,
+          0,
+          752,
+          305,
+          -1,
+          0,
+          720,
+          325,
+          -1,
+          0,
+          839,
+          297,
+          -1,
+          0,
+          662,
+          295,
+          -1,
+          0,
+          836,
+          310,
+          -1,
+          0,
+          732,
+          305,
+          -1,
+          0,
+          834,
+          303,
+          -1,
+          0,
+          671,
+          297,
+          -1,
+          0,
+          899,
+          306,
+          -1,
+          0,
+          882,
+          287,
+          -1,
+          0,
+          701,
+          322,
+          -1,
+          0,
+          758,
+          314,
+          -1,
+          0,
+          686,
+          294,
+          -1,
+          0,
+          818,
+          320,
+          -1,
+          0,
+          757,
+          292,
+          -1,
+          0,
+          827,
+          292,
+          -1,
+          0,
+          759,
+          308,
+          -1,
+          0,
+          743,
+          289,
+          -1,
+          0,
+          728,
+          316,
+          -1,
+          0,
+          667,
+          325,
+          -1,
+          0,
+          679,
+          308,
+          -1,
+          0,
+          842,
+          313,
+          -1,
+          0,
+          683,
+          323,
+          -1,
+          0,
+          659,
+          323,
+          -1,
+          0,
+          702,
+          307,
+          -1,
+          0,
+          726,
+          318,
+          -1,
+          0,
+          730,
+          292,
+          -1,
+          0,
+          691,
+          321,
+          -1,
+          0,
+          704,
+          316,
+          -1,
+          0,
+          866,
+          305,
+          -1,
+          0,
+          693,
+          285,
+          -1,
+          0,
+          863,
+          283,
+          -1,
+          0,
+          880,
+          281,
+          -1,
+          0,
+          781,
+          293,
+          -1,
+          0,
+          806,
+          295,
+          -1,
+          0,
+          661,
+          323,
+          -1,
+          0,
+          672,
+          310,
+          -1,
+          0,
+          729,
+          303,
+          -1,
+          0,
+          897,
+          282,
+          -1,
+          0,
+          661,
+          322,
+          -1,
+          0,
+          718,
+          284,
+          -1,
+          0,
+          892,
+          305,
+          -1,
+          0,
+          829,
+          303,
+          -1,
+          0,
+          697,
+          288,
+          -1,
+          0,
+          781,
+          312,
+          -1,
+          0,
+          808,
+          294,
+          -1,
+          0,
+          686,
+          309,
+          -1,
+          0,
+          810,
+          296,
+          -1,
+          0,
+          687,
+          304,
+          -1,
+          0,
+          819,
+          285,
+          -1,
+          0,
+          710,
+          325,
+          -1,
+          0,
+          688,
+          294,
+          -1,
+          0,
+          760,
+          280,
+          -1,
+          0,
+          752,
+          295,
+          -1,
+          0,
+          737,
+          296,
+          -1,
+          0,
+          846,
+          321,
+          -1,
+          0,
+          773,
+          314,
+          -1,
+          0,
+          858,
+          288,
+          -1,
+          0,
+          886,
+          307,
+          -1,
+          0
+        ],
+        "attempts": 9,
+        "pendingSeconds": 0
+      }
+    },
+    "reference_state": {
+      "expression": "({level:idleon.getAttr(\"Lv0\")[20],requirement:idleon.getAttr(\"ExpReq0\")[20],name:idleon.getAttr(\"UserInfo\")[0],failedRolls:idleon.getAttr(\"OptionsListAccount\")[514]})",
+      "result": {
+        "level": 71,
+        "requirement": 18539717943.246014,
+        "name": "Sludgev4",
+        "failedRolls": 0
+      }
+    },
+    "eligible_count": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"OccurrencesToBeFound\", 0, 0)",
+      "result": 34
+    },
+    "discoveries": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"TotalOccurrencesFound\", -1, 0)",
+      "result": 30
+    },
+    "observation_levels": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"TotalObsLVs\", -1, 0)",
+      "result": 189
+    },
+    "minimum_roll": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"MinRoll\", 0, 0)",
+      "result": 1
+    },
+    "maximum_roll": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"MaxRoll\", 0, 0)",
+      "result": 106
+    },
+    "daily_attempts": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"RollsPerDay\", 0, 0)",
+      "result": 9
+    },
+    "owned_monocles": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"OpticalMonocleOwned\", 0, 0)",
+      "result": 4
+    },
+    "owned_kaleidoscopes": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"KaleidoscopeOwned\", 0, 0)",
+      "result": 4
+    },
+    "owned_lenses": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"MagnifiersOwned\", 0, 0)",
+      "result": 14
+    },
+    "lens_capacity": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"MagnifiersPerSlot\", 0, 0)",
+      "result": 3
+    },
+    "support_refresh": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Kalei_MultiTot\", 0, 999)",
+      "result": 1
+    },
+    "epilogue_refresh": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", -1, 0)",
+      "result": 631.7850843751136
+    },
+    "exp_multiplier": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"ResearchEXPmulti\", 0, 0)",
+      "result": 3745.3440264312276
+    },
+    "exp_total": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"ResearchEXPrateTOT\", 0, 0)",
+      "result": 89559167.41845876
+    },
+    "kaleidoscope_base": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Kalei_MultiBase\", 0, 0)",
+      "result": 1.244
+    },
+    "offline_percent": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"AFKgainsRatePCT\", 0, 0)",
+      "result": 100
+    },
+    "shape_count": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"ShapesOwned\", 0, 0)",
+      "result": 5
+    },
+    "notes_reached": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"PostyNotesOwned\", 0, 0)",
+      "result": 7
+    },
+    "rotation_unlocked": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"CanRotateShapes\", 0, 0)",
+      "result": 0
+    },
+    "observation_subtotals": {
+      "expression": "Array.from({length:43},(_,index)=>idleon.callFunction(\"ResearchStuff\",\"ResearchEXPrateObj\",index,0))",
+      "result": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        7340.391162409591,
+        0,
+        16571.742619275537,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observation_insight_rates": {
+      "expression": "Array.from({length:43},(_,index)=>idleon.callFunction(\"ResearchStuff\",\"ObservationInsightExpRate\",index,0))",
+      "result": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        20.494782000000004,
+        20.494782000000004,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observation_requirements": {
+      "expression": "Array.from({length:43},(_,index)=>idleon.callFunction(\"ResearchStuff\",\"ObservationInsightExpREQ\",index,0))",
+      "result": [
+        316.8735885620117,
+        439.7043173859382,
+        1785.8089180752618,
+        751.86986655227,
+        958.4205416177222,
+        221.01207323165886,
+        274.1949597045217,
+        338.5559188506553,
+        415.9922299774954,
+        508.5084680950768,
+        345.12224000000003,
+        231.54790056869805,
+        102797.45539778138,
+        1073.4192606948982,
+        13937.962801796362,
+        2746.2612599994845,
+        3236.8440794310363,
+        6959.09061882295,
+        4427.2158083767135,
+        9478.290914977402,
+        509.5300000000001,
+        6835.434279953429,
+        4213.651486806631,
+        1381.3507977495055,
+        834.054230864,
+        934.915283203125,
+        24469.09446507304,
+        617.6353167249998,
+        190.944,
+        209.843,
+        230,
+        251.45699999999997,
+        274.256,
+        298.43899999999996,
+        324.048,
+        351.125,
+        379.712,
+        409.85099999999994,
+        441.58399999999995,
+        474.953,
+        510,
+        546.7669999999999,
+        585.2959999999999
+      ]
+    },
+    "observation_support": {
+      "expression": "Array.from({length:43},(_,index)=>idleon.callFunction(\"ResearchStuff\",\"Kalei_MultiTot\",index,0))",
+      "result": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2.2439999999999998,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        5.976,
+        1,
+        2.2439999999999998,
+        1,
+        1,
+        1,
+        1,
+        4.732,
+        1,
+        5.976,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        4.732,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "exp_subtotal": {
+      "expression": "Array.from({length:idleon.callFunction(\"ResearchStuff\",\"OccurrencesToBeFound\",0,0)},(_,index)=>idleon.callFunction(\"ResearchStuff\",\"ResearchEXPrateObj\",index,0)).reduce((sum,value)=>sum+value,0)",
+      "result": 23912.13378168513
+    },
+    "point_term": {
+      "expression": "Math.round(1+Math.min(1,Math.floor(idleon.getAttr(\"Lv0\")[20]/60))+idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",50,1))",
+      "result": 3
+    },
+    "grid_31_0": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 31, 0)",
+      "result": 29.25
+    },
+    "grid_31_1": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 31, 1)",
+      "result": 3
+    },
+    "grid_31_2": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 31, 2)",
+      "result": 75
+    },
+    "grid_50_0": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 50, 0)",
+      "result": 6.5
+    },
+    "grid_50_1": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 50, 1)",
+      "result": 1
+    },
+    "grid_51_0": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 51, 0)",
+      "result": 39
+    },
+    "grid_51_1": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 51, 1)",
+      "result": 4
+    },
+    "grid_52_0": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 52, 0)",
+      "result": 58.5
+    },
+    "grid_70_0": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 70, 0)",
+      "result": 71.75999999999999
+    },
+    "grid_71_0": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 71, 0)",
+      "result": 2.9899999999999998
+    },
+    "grid_72_0": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 72, 0)",
+      "result": 29.900000000000002
+    },
+    "grid_72_1": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 72, 1)",
+      "result": 4
+    },
+    "grid_90_0": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 90, 0)",
+      "result": 5.9799999999999995
+    },
+    "grid_90_1": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 90, 1)",
+      "result": 4
+    },
+    "grid_91_0": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 91, 0)",
+      "result": 5.9799999999999995
+    },
+    "grid_91_1": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 91, 1)",
+      "result": 4
+    },
+    "grid_92_0": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 92, 0)",
+      "result": 74.75
+    },
+    "grid_93_0": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 93, 0)",
+      "result": 19.5
+    },
+    "grid_94_2": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 94, 2)",
+      "result": 1228.5
+    },
+    "grid_110_0": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 110, 0)",
+      "result": 149.5
+    },
+    "grid_111_0": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 111, 0)",
+      "result": 14.950000000000001
+    },
+    "grid_112_2": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 112, 2)",
+      "result": 224.25000000000003
+    },
+    "farming_sticker": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"StickerBonus\", 1, 0)",
+      "result": 76.45
+    },
+    "crop_scientist": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 9, 0)",
+      "result": 3.3471050576752432
+    },
+    "cooking_research": {
+      "expression": "idleon.getAttr(\"DNSM\").h.MealBonusesS.h.ResearchXP",
+      "result": 20.475602494928
+    },
+    "coral_research": {
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 4, 0)",
+      "result": 300
+    },
+    "zenith_research": {
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 8, 0)",
+      "result": 1
+    },
+    "gaming_research": {
+      "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 10, 0)",
+      "result": 26.099999999999998
+    },
+    "sailing_research": {
+      "expression": "idleon.callFunction(\"Sailing\", \"SlabboBonus\", 7, 0)",
+      "result": 16.758651
+    },
+    "epilogue_research": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 7, 0)",
+      "result": 28.368876757021038
+    },
+    "card_w7b1": {
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7b1\")",
+      "result": 5
+    },
+    "card_w7b4": {
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7b4\")",
+      "result": 4
+    },
+    "card_w7a11": {
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7a11\")",
+      "result": 4
+    },
+    "card_w7b8": {
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7b8\")",
+      "result": 1
+    },
+    "card_w7b11": {
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7b11\")",
+      "result": 1
+    },
+    "arcade_research": {
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 63)",
+      "result": 3.3333333333333335
+    },
+    "prehistoric_raw": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"PREHISTORIC_SET\", \"Bonus\", 0, 0)",
+      "result": 0
+    },
+    "spelunking_shop": {
+      "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 63, 0)",
+      "result": 0
+    },
+    "equinox_research": {
+      "expression": "3 * idleon.getAttr(\"Dream\")[14]",
+      "result": 102
+    },
+    "button_research": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 0, 0)",
+      "result": 41.824999999999996
+    },
+    "killroy_research": {
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 5, 0)",
+      "result": 1.0207792207792208
+    },
+    "companion_28": {
+      "expression": "idleon.callFunction(\"Companions\", 28)",
+      "result": 40
+    },
+    "companion_52": {
+      "expression": "idleon.callFunction(\"Companions\", 52)",
+      "result": 0.8
+    },
+    "companion_54": {
+      "expression": "idleon.callFunction(\"Companions\", 54)",
+      "result": 1
+    },
+    "companion_153": {
+      "expression": "idleon.callFunction(\"Companions\", 153)",
+      "result": 1
+    },
+    "companion_level_two_54": {
+      "expression": "idleon.callFunction(\"CompLV2\", 54)",
+      "result": 1
+    },
+    "companion_level_two_153": {
+      "expression": "idleon.callFunction(\"CompLV2\", 153)",
+      "result": 1
+    },
+    "sushi_0": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 0, 0)",
+      "result": 100
+    },
+    "sushi_2": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 2, 0)",
+      "result": 2
+    },
+    "sushi_4": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 4, 0)",
+      "result": 2
+    },
+    "sushi_8": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 8, 0)",
+      "result": 1
+    },
+    "sushi_24": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 24, 0)",
+      "result": 2
+    },
+    "sushi_30": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 30, 0)",
+      "result": 1
+    },
+    "jelly_0": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 0, 0)",
+      "result": 50
+    },
+    "jelly_7": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 7, 0)",
+      "result": 40
+    },
+    "jelly_12": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 12, 0)",
+      "result": 1
+    },
+    "jelly_23": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 23, 0)",
+      "result": 0
+    },
+    "jelly_25": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 25, 0)",
+      "result": 0
+    },
+    "jelly_46": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 46, 0)",
+      "result": 0
+    },
+    "jelly_54": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 54, 0)",
+      "result": 0
+    },
+    "minehead_1": {
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 1, 0)",
+      "result": 2
+    },
+    "minehead_2": {
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 2, 0)",
+      "result": 1
+    },
+    "minehead_10": {
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 10, 0)",
+      "result": 3
+    },
+    "minehead_12": {
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 12, 0)",
+      "result": 1
+    },
+    "minehead_20": {
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 20, 0)",
+      "result": 0
+    },
+    "hole_upgrade": {
+      "expression": "idleon.callFunction(\"Holes2\", \"Cglunko_upgBon\", 11, 0)",
+      "result": 72
+    },
+    "hole_fountain": {
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 16)",
+      "result": 0
+    },
+    "hole_gambit": {
+      "expression": "idleon.callFunction(\"Holes\", \"GambitBonuses\", 15, 0)",
+      "result": 3
+    },
+    "em_production": {
+      "expression": "idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 46, 0)",
+      "result": 1
+    },
+    "event_33": {
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 33, 0)",
+      "result": 0
+    },
+    "event_34": {
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 34, 0)",
+      "result": 0
+    },
+    "event_35": {
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 35, 0)",
+      "result": 0
+    },
+    "event_36": {
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 36, 0)",
+      "result": 0
+    },
+    "outpost_research": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostROGbon\", 1, 0)",
+      "result": 1
+    },
+    "lore_shape": {
+      "expression": "idleon.callFunction(\"Spelunk\", \"DoWeHaveLoreN1\", 7, 0)",
+      "result": 1
+    },
+    "worship_research": {
+      "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 10, 0)",
+      "result": 26.099999999999998
+    },
+    "slab_multiplier": {
+      "expression": "idleon.callFunction(\"Sailing\", \"SlabboBonus_AllMulti\", 0, 0)",
+      "result": 1.547
+    },
+    "lab_slab": {
+      "expression": "idleon.callFunction(\"MainframeBonus\", 15)",
+      "result": 57
+    },
+    "tome_reference": {
+      "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[84]",
+      "result": 44382
+    },
+    "grimoire_epilogue": {
+      "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 17, 0)",
+      "result": 85
+    },
+    "troll_raw": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"TROLL_SET\", \"Bonus\", 0, 0)",
+      "result": 25
+    },
+    "gambit_score": {
+      "expression": "idleon.callFunction(\"Holes\", \"GambitPts\", 777, 0)",
+      "result": 4320560.222590943
+    },
+    "paper_purchase": {
+      "expression": "idleon.getAttr(\"GemItemsPurchased\")[45]",
+      "result": 10
+    },
+    "artifact_status": {
+      "expression": "idleon.getAttr(\"Sailing\")[3][36]",
+      "result": 5
+    },
+    "worship_waves": {
+      "expression": "idleon.getAttr(\"TotemInfo\")[0].reduce((total,waves)=>total+Number(waves),0)",
+      "result": 1170
+    },
+    "shared_insight_multiplier": {
+      "expression": "idleon.callFunction(\"ResearchStuff\",\"ObservationInsightExpRate\",17,0)/(3*idleon.getAttr(\"Research\")[5].filter((kind,index)=>index%4===3&&kind===1&&idleon.getAttr(\"Research\")[5][index-1]===17).length*idleon.callFunction(\"ResearchStuff\",\"Kalei_MultiTot\",17,0))",
+      "result": null
+    },
+    "gambit_points_multiplier": {
+      "expression": "idleon.callFunction(\"Holes\",\"GambitPTSmulti\",0,0)",
+      "result": 4.994925054151624
+    },
+    "gambit_score_requirement": {
+      "expression": "idleon.callFunction(\"Holes\",\"GambitPtsREQ\",15,0)",
+      "result": 2051925.843981216
+    },
+    "gambit_measurement_13": {
+      "expression": "idleon.callFunction(\"Holes\",\"MeasurementBonusTOTAL\",13,0)",
+      "result": 62.69250541516245
+    },
+    "gambit_study_13": {
+      "expression": "idleon.callFunction(\"Holes\",\"StudyBolaiaBonuses\",13,0)",
+      "result": 180
+    },
+    "gambit_schematic_78": {
+      "expression": "idleon.callFunction(\"Holes\",\"B_UPG\",78,10)",
+      "result": 10
+    },
+    "gambit_wisdom_7": {
+      "expression": "idleon.callFunction(\"Holes\",\"MonumentROGbonuses\",2,7)",
+      "result": 0
+    },
+    "gambit_jar_23": {
+      "expression": "idleon.callFunction(\"Holes\",\"JarCollectibleBonus\",23,0)",
+      "result": 9.600000000000001
+    },
+    "gambit_jar_30": {
+      "expression": "idleon.callFunction(\"Holes\",\"JarCollectibleBonus\",30,0)",
+      "result": 3.2
+    },
+    "gambit_tesseract_47": {
+      "expression": "idleon.callFunction(\"ArcaneType\",\"ArcaneUpgBonus\",47,0)",
+      "result": 134
+    },
+    "gambit_measurement_base_13": {
+      "expression": "idleon.callFunction(\"Holes\",\"MeasurementBaseBonus\",13,0)",
+      "result": 12.779783393501805
+    },
+    "gambit_measurement_multi_6": {
+      "expression": "idleon.callFunction(\"Holes\",\"MeasurementMulti\",6,0)",
+      "result": 4.9056
+    },
+    "gambit_deathnote_world_total": {
+      "expression": "[0,1,2,3,4,5,6].reduce((total,world)=>total+idleon.callFunction(\"WorkbenchStuff\",\"OverkillQTY\",world,0),0)",
+      "result": 2070
+    },
+    "gambit_measurement_cosmos": {
+      "expression": "idleon.callFunction(\"Holes\",\"CosmoBonusQTY\",1,3)",
+      "result": 100
+    }
+  },
+  "errors": {}
+}

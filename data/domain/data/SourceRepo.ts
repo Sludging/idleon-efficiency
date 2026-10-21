@@ -4298,12 +4298,14 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[One Way Opening]]", "txtName": "One Way Opening"},
                     <SourceModel>{"wikiName": "[[Plunder Cranny]]", "txtName": "Plunder Cranny"},
                     <SourceModel>{"wikiName": "[[Kelp Forest]]", "txtName": "Kelp Forest"},
+                    <SourceModel>{"wikiName": "[[Burned Tunnel]]", "txtName": "Burned Tunnel"},
                     <SourceModel>{"wikiName": "[[Fearful Tunnel]]", "txtName": "Fearful Tunnel"},
                     <SourceModel>{"wikiName": "[[Decaying Crevasse]]", "txtName": "Decaying Crevasse"},
                     <SourceModel>{"wikiName": "[[Buried Church]]", "txtName": "Buried Church"},
                     <SourceModel>{"wikiName": "[[One Way Opening]]", "txtName": "One Way Opening"},
                     <SourceModel>{"wikiName": "[[Plunder Cranny]]", "txtName": "Plunder Cranny"},
                     <SourceModel>{"wikiName": "[[Kelp Forest]]", "txtName": "Kelp Forest"},
+                    <SourceModel>{"wikiName": "[[Burned Tunnel]]", "txtName": "Burned Tunnel"},
                     <SourceModel>{"wikiName": "[[DropTable1]]", "txtName": "DropTable1"},
                     <SourceModel>{"wikiName": "[[DropTable2]]", "txtName": "DropTable2"},
                     <SourceModel>{"wikiName": "[[DropTable3]]", "txtName": "DropTable3"},
@@ -4585,7 +4587,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Buried Church]]", "txtName": "Buried Church"},
                     <SourceModel>{"wikiName": "[[One Way Opening]]", "txtName": "One Way Opening"},
                     <SourceModel>{"wikiName": "[[Plunder Cranny]]", "txtName": "Plunder Cranny"},
-                    <SourceModel>{"wikiName": "[[Kelp Forest]]", "txtName": "Kelp Forest"}
+                    <SourceModel>{"wikiName": "[[Kelp Forest]]", "txtName": "Kelp Forest"},
+                    <SourceModel>{"wikiName": "[[Burned Tunnel]]", "txtName": "Burned Tunnel"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -8229,6 +8232,11 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("Coral6", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Magni Pufferfin]]", "txtName": "Magni Pufferfin"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("w7B11", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Pirate Deckhand]]", "txtName": "Pirate Deckhand"}],
                 "recipeFrom": [],
@@ -10320,7 +10328,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Buried Church]]", "txtName": "Buried Church"},
                     <SourceModel>{"wikiName": "[[One Way Opening]]", "txtName": "One Way Opening"},
                     <SourceModel>{"wikiName": "[[Plunder Cranny]]", "txtName": "Plunder Cranny"},
-                    <SourceModel>{"wikiName": "[[Kelp Forest]]", "txtName": "Kelp Forest"}
+                    <SourceModel>{"wikiName": "[[Kelp Forest]]", "txtName": "Kelp Forest"},
+                    <SourceModel>{"wikiName": "[[Burned Tunnel]]", "txtName": "Burned Tunnel"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -10464,6 +10473,11 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("CardsF51", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Burned Tunnel]]", "txtName": "Burned Tunnel"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("Spelunking0", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Fearful Tunnel]]", "txtName": "Fearful Tunnel"}],
                 "recipeFrom": [],
@@ -10491,6 +10505,11 @@ export const initSourceRepo = () => {
             }),
         new SourcesBase("Spelunking5", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Kelp Forest]]", "txtName": "Kelp Forest"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Spelunking6", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Burned Tunnel]]", "txtName": "Burned Tunnel"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -15274,7 +15293,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Toobus Goobus#RESEARCH STUDIES|RESEARCH STUDIES]]",
                         "txtName": "Toobus Goobus: RESEARCH STUDIES"
-                    }
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -15667,29 +15687,32 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentPendant33", <SourcesModel>{
+        new SourcesBase("EquipmentNametag13", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentHats122", <SourcesModel>{
+        new SourcesBase("EquipmentHats35", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentKeychain11", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"},
-                    <SourceModel>{"wikiName": "[[Dungeons#Flurbo Shop|Flurbo Shop]]", "txtName": "Dungeons: Flurbo Shop"},
-                    <SourceModel>{
-                        "wikiName": "[[Dungeons#Loot Rolls|Dungeon Loot Rolls]]",
-                        "txtName": "Dungeons: Flurbo Shop"
-                    }
-                ],
+        new SourcesBase("EquipmentRings31", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("GemP35", <SourcesModel>{
+        new SourcesBase("EquipmentRings32", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentRings34", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentRings37", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -16303,6 +16326,17 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("EquipmentKeychain10", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Dungeons#Flurbo Shop|Flurbo Shop]]", "txtName": "Dungeons: Flurbo Shop"},
+                    <SourceModel>{
+                        "wikiName": "[[Dungeons#Loot Rolls|Dungeon Loot Rolls]]",
+                        "txtName": "Dungeons: Flurbo Shop"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentKeychain11", <SourcesModel>{
                 "sources": [
                     <SourceModel>{"wikiName": "[[Dungeons#Flurbo Shop|Flurbo Shop]]", "txtName": "Dungeons: Flurbo Shop"},
                     <SourceModel>{

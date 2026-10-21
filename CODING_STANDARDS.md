@@ -1,6 +1,6 @@
 # Coding standards
 
-These rules are mandatory for new or changed handwritten code, developer comments, and user-facing text, and for reviewing those changes. They do not require rewriting generated code or migrating unrelated legacy code.
+These rules are mandatory for new or changed handwritten code, developer comments, user-facing text, and technical plans, and for reviewing those changes. They do not require rewriting generated code or migrating unrelated legacy code.
 
 ## LANG-01 — Simplified Technical English (STE)
 
@@ -8,11 +8,11 @@ Apply [STE principles](https://asd-ste100.org/about_STE.html) in developer comme
 
 ## VOCAB-01 — Game vocabulary
 
-Use game terminology, informed by the Wiki and established repository/domain vocabulary. Keep obfuscated identifiers only in raw-data mappings or source-boundary references. Research meaning first; ask the developer before choosing when meaning remains unresolved or game, Wiki, and repository terms meaningfully conflict.
+Use game terminology, informed by the Wiki and established repository/domain vocabulary. Keep obfuscated identifiers only in raw-data mappings, never in comments. Research meaning first; ask the developer before choosing when meaning remains unresolved or game, Wiki, and repository terms meaningfully conflict.
 
 ## RESEARCH-01 — Understand the player and mechanic
 
-Before implementation, learn how the mechanic works, how players interact with it, and what information the website should provide. Reading repository code alone is not enough; use game evidence and player-facing sources as appropriate.
+Before planning or implementation, learn how the mechanic works, how players interact with it, and what information the website should provide. Reading repository code alone is not enough; use game evidence and player-facing sources as appropriate.
 
 ## MODEL-01 — Model responsible concepts
 
@@ -36,9 +36,20 @@ Research broadly across relevant domains and shared utilities. Examine multiple 
 
 ## UPDATE-01 — Calculate values before they are needed
 
-Run each calculation after the values it uses are ready. Distinguish values read during parsing from values calculated by an update. Reading another domain’s parsed state does not require that domain’s update to run first. Put bonuses that other domains can use in `postProcessingMap`, after their required updates. Keep UI-only calculations in `postPostProcessingMap`.
+Run each calculation after the values it uses are ready. Distinguish values read during parsing from values calculated by an update. Put bonuses that other domains can use in `postProcessingMap`, after their required updates. Keep UI-only calculations in `postPostProcessingMap`.
 
 ## DATA-01 — Treat required objects as required
 
 Use direct access for domains and objects that initialization always creates. Do not add `| undefined`, optional chaining or default values to handle objects that cannot be missing. Keep checks and defaults for data that can actually be missing, such as optional save fields.
 
+## PLAN-01 — Feature delivery plans
+
+Write plans as standalone descriptions of the feature and its delivery. Include outcomes, responsibilities, required data, integration, and verification. Keep approval history, progress, and agent instructions in the handoff. Include design details and scope boundaries only when they resolve a concrete delivery question.
+
+## SIMPLE-01 — Solve the current problem
+
+Implement the agreed requirements and the changes needed to make them work. Get approval before expanding those requirements. Design for current uses, not possible future features.
+
+Prefer clear code and established repository patterns. Add extra layers, options, dependencies, or process only when they solve an identified problem in the current work. Explain that problem rather than appealing to “best practice” or “future-proofing.” Simplicity means fewer concepts to understand and maintain, not fewer lines or avoiding object-oriented design.
+
+Match error handling and operational safeguards to expected inputs and the consequences of failure. Treat this as a hobby project, not a regulated financial system. Verify changed behavior, without importing processes designed for risks this project does not face.

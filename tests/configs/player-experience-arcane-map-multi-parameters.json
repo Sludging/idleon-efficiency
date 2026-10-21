@@ -1,0 +1,11 @@
+{
+  "description": "Compare Arcane map-multiplier bonus index 1 used by class EXP with the native game calculation",
+  "target": "Player class EXP parameters",
+  "extractions": [
+    {
+      "label": "arcane_map_multi_bonus_1",
+      "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneMapMulti_bon\", 1, 0)",
+      "description": "Arcane map-multiplier bonus at index 1 for the active map"
+    }
+  ]
+}

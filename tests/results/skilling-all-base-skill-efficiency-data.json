@@ -1,0 +1,37 @@
+{
+  "extractions": {
+    "all_base_skill_efficiency": {
+      "expression": "idleon.callFunction(\"SkillStats\", \"AllBaseSkillEff\")",
+      "result": 19917.110368453137
+    },
+    "breeding_base_efficiency": {
+      "expression": "idleon.callFunction(\"Breeding\", \"ShinyBonusS\", \"Nah\", 22, -1)",
+      "result": 1120
+    },
+    "stamps_base_efficiency": {
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseAllEff\")",
+      "result": 16326.686217008795
+    },
+    "nobisect_base_efficiency": {
+      "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 2, 0)",
+      "result": 1160
+    },
+    "post_office_base_efficiency": {
+      "expression": "idleon.getDNSM(\"BoxRewards\").h[\"20b\"]",
+      "result": 550.6324847776755
+    },
+    "chips_base_efficiency": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"eff\")",
+      "result": 0
+    },
+    "talent_base_efficiency": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 636)",
+      "result": 119.79166666666667
+    },
+    "emerald_navette_base_efficiency": {
+      "expression": "idleon.callFunction(\"MainframeBonus\", 112)",
+      "result": 640
+    }
+  },
+  "errors": {}
+}

@@ -2,7 +2,7 @@
   "extractions": {
     "arcane_upgrade_45_bonus": {
       "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 45, 0)",
-      "result": 7
+      "result": 8
     },
     "arcade_bonus_54": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 54, 0)",
@@ -18,7 +18,7 @@
     },
     "palette_bonus_28": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 28, 0)",
-      "result": 3.6428571428571432
+      "result": 5.829545454545454
     },
     "total_purple_sigils": {
       "expression": "idleon.callFunction(\"Labb\", \"TotalPurpleSigils\", \"0\", 0, 0)",
@@ -30,7 +30,7 @@
     },
     "legend_talent_36_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 36, 0)",
-      "result": 3
+      "result": 15
     },
     "companion_88_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 88, 0)",
@@ -38,7 +38,7 @@
     },
     "prismatic_multiplier": {
       "expression": "idleon.callFunction(\"ArcaneType\", \"PrismaBonusMult\", 0, 0)",
-      "result": 3.0399042431787526
+      "result": 3.1917711262956363
     }
   },
   "errors": {}

@@ -2,15 +2,15 @@
   "extractions": {
     "skill_all_efficiencies": {
       "expression": "idleon.callFunction(\"SkillStats\", \"AllEfficiencies\")",
-      "result": 29194.060225114976
+      "result": 29454.453801863714
     },
     "all_eff_family_bonus_42": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[42]",
-      "result": 27.8708303761533
+      "result": 27.991967871485944
     },
     "all_eff_etc_bonus_48": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"48\")",
-      "result": 80.26755532011438
+      "result": 81.04927952733921
     },
     "all_eff_vial_6_skill_eff": {
       "expression": "idleon.getDNSM(\"AlchVials\").h[\"6SkillEff\"]",
@@ -38,11 +38,11 @@
     },
     "all_eff_tome_bonus_1": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 1, 0)",
-      "result": 556.8282749131176
+      "result": 561.6914359857285
     },
     "all_eff_palette_10": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 10, 0)",
-      "result": 270
+      "result": 405
     },
     "all_eff_chip_toteff": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"toteff\")",

@@ -164,7 +164,7 @@ export const initJellyOperatorUpgradeRepo = () => {
                 "costExponent": 10000,
                 "bonusPerLevel": 1,
                 "costMultiplier": 0,
-                "description": "Increases the total number of Virus Cells you can place in the Jelly, letting you place up to $"
+                "description": "Increases the total number of Virus Cells you can place in the Jelly! Currently, you can only place $ Virus Cells."
             }),
         new JellyOperatorUpgradeBase(16, <JellyOperatorUpgradeModel>{
                 "index": 16,
@@ -314,7 +314,7 @@ export const initJellyOperatorUpgradeRepo = () => {
                 "costExponent": 1.12,
                 "bonusPerLevel": 3,
                 "costMultiplier": 0,
-                "description": "Boost the EXP gain of all cells by +{% when dealing damage"
+                "description": "Boost the EXP gain of all cells by +{%"
             }),
         new JellyOperatorUpgradeBase(31, <JellyOperatorUpgradeModel>{
                 "index": 31,
@@ -324,7 +324,7 @@ export const initJellyOperatorUpgradeRepo = () => {
                 "costExponent": 1.18,
                 "bonusPerLevel": 5,
                 "costMultiplier": 0,
-                "description": "Boost the EXP gain of all cells by +{% when dealing damage"
+                "description": "Boost the EXP gain of all cells by +{%"
             }),
         new JellyOperatorUpgradeBase(32, <JellyOperatorUpgradeModel>{
                 "index": 32,

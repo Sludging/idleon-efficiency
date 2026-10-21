@@ -67,7 +67,7 @@ For a page backed by existing calculations, start with its
 
 ### **Testing Strategy**
 
-- **Live Game Extraction Tests**: Jest suite in `tests/` validates domain calculations against values extracted from the running game client via a debug server
+- **Game Extraction Tests**: Jest suite in `tests/` validates domain calculations against extracted game values. Use the [canonical game-access policy](../tests/helpers/README.md#game-access) for offline defaults and justified live access.
 - **Parameter-First**: Individual calculation inputs are tested before final composite calculations
 - **Visual Comparison**: Still required for UI and features not covered by automated tests
 - **Class Reference Inventory**: `scripts/domain-class-references.ts` inventories class declarations in editable `data/domain/**` and symbol references from `app/**`, `components/**`, and test files. A class counts when its class symbol or a declared member symbol is referenced; it does not classify core or parameter calculations.

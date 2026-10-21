@@ -1,0 +1,44 @@
+{
+  "extractions": {
+    "amber_tier": {
+      "expression": "idleon.callFunction(\"Spelunk\", \"AmberIndex\", 0, 0)",
+      "result": 3
+    },
+    "amber_denominator": {
+      "expression": "idleon.callFunction(\"Spelunk\", \"AmberDenominator\", 0, 0)",
+      "result": {
+        "type": "large_number",
+        "value": "1e+21"
+      }
+    },
+    "amber_gate_bonus_20": {
+      "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 20, 0)",
+      "result": 822
+    },
+    "amber_gate_bonus_41": {
+      "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 41, 0)",
+      "result": 1356
+    },
+    "amber_gate_bonus_51": {
+      "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 51, 0)",
+      "result": 585
+    },
+    "amber_gate_bonus_66": {
+      "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 66, 0)",
+      "result": 0
+    },
+    "tunnel_0_amber_text": {
+      "expression": "(() => { const amount = Number(idleon.getAttr(\"Spelunk\")[2][0]) / idleon.callFunction(\"Spelunk\", \"AmberDenominator\", 0, 0); return amount > 1e14 ? idleon.callFunction(\"NotateNumber\", amount, \"Big\") : idleon.callFunction(\"CommaNotation\", amount); })()",
+      "result": "200,125"
+    },
+    "tunnel_7_amber_text": {
+      "expression": "(() => { const amount = Number(idleon.getAttr(\"Spelunk\")[2][7]) / idleon.callFunction(\"Spelunk\", \"AmberDenominator\", 0, 0); return amount > 1e14 ? idleon.callFunction(\"NotateNumber\", amount, \"Big\") : idleon.callFunction(\"CommaNotation\", amount); })()",
+      "result": "6,908M"
+    },
+    "tunnel_9_amber_text": {
+      "expression": "(() => { const amount = Number(idleon.getAttr(\"Spelunk\")[2][9]) / idleon.callFunction(\"Spelunk\", \"AmberDenominator\", 0, 0); return amount > 1e14 ? idleon.callFunction(\"NotateNumber\", amount, \"Big\") : idleon.callFunction(\"CommaNotation\", amount); })()",
+      "result": "0"
+    }
+  },
+  "errors": {}
+}

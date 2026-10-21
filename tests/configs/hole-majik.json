@@ -1,0 +1,86 @@
+{
+  "description": "All released Majik nodes, one investment pool and active-character Pocket activation.",
+  "target": "All released Majik nodes, one investment pool and active-character Pocket activation.",
+  "extractions": [
+    {
+      "label": "active_context",
+      "expression": "({ playerId: idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0]), playerName: idleon.getAttr('UserInfo')[0], playerNames: idleon.getAttr('GetPlayersUsernames'), version: idleon.getAttr('DoOnceREAL') })",
+      "description": "Capture real active character identity and version; do not switch or synthesize a context."
+    },
+    {
+      "label": "paired_hole_inputs",
+      "expression": "({ levels: idleon.getAttr(\"Holes\")[1].slice(0,5), exp: idleon.getAttr(\"Holes\")[2].slice(0,5), investments: idleon.getAttr(\"Holes\")[3].slice(0,8), purchased: idleon.getAttr(\"Holes\")[23].slice(0,5), studyLevels: idleon.getAttr(\"Holes\")[26].slice(0,18), studyProgress: idleon.getAttr(\"Holes\")[27].slice(0,18), target: idleon.getAttr(\"Holes\")[11][61], cavernOpals: idleon.getAttr(\"Holes\")[7], lanternUses: idleon.getAttr(\"Holes\")[11][84], wishes: idleon.getAttr(\"Holes\")[11][25], layers: [idleon.getAttr(\"Holes\")[11][1],idleon.getAttr(\"Holes\")[11][3],idleon.getAttr(\"Holes\")[11][5],idleon.getAttr(\"Holes\")[11][7]], covePurchases: idleon.getAttr('OptionsListAccount')[604] })",
+      "description": "Saved inputs directly used by part 1; runtime counter mismatches remain failures."
+    },
+    {
+      "label": "upgrades",
+      "expression": "(() => { const h=idleon.getAttr('Holes'),lists=idleon.getAttr('CustomLists').h, gate=!!idleon.callFunction('Holes','CanWeEnhanceCosmo',0,0), remaining=idleon.callFunction('Holes','CosmoPtsLeft',0,0); let id=-1; return lists.CosmoUpgrades.flatMap((rows,tree)=>rows.flatMap((row,position)=>{ id++; if(row[2]==='Confused_Bonus')return []; const level=Number(h[4+tree][position]),cap=1+(gate?idleon.callFunction('Holes','EnhanceMaxLV',tree,position):0),prerequisiteMet=position===0||Number(h[4+tree][position-1])>0; return {id,tree,position,name:row[2],level,initial:Math.min(1,level),enhancement:Math.max(0,level-1),gate,cap,prerequisiteId:position===0?null:id-1,prerequisiteMet,access:Number(h[1][2])>=1,canPurchase:Number(h[1][2])>=1&&prerequisiteMet&&level<cap&&remaining>=1,bonus:idleon.callFunction('Holes','CosmoBonusQTY',tree,position)}; })); })()",
+      "description": "Original tree positions preserve placeholder gaps; caps and predecessor rules follow the purchase caller."
+    },
+    {
+      "label": "pool",
+      "expression": "(() => {const h=idleon.getAttr('Holes'),purchased=Number(idleon.getAttr('GemItemsPurchased')[4]),earned=Math.round(idleon.callFunction('Holes','VillagerLV',2,0)+purchased);return {purchased,earned,invested:[4,5,6].reduce((s,t)=>s+h[t].reduce((a,v)=>a+Number(v),0),0),remaining:idleon.callFunction('Holes','CosmoPtsLeft',0,0),rawInvestments:h.slice(4,7),rawNames:idleon.getAttr('CustomLists').h.CosmoUpgrades.map(rows=>rows.map(row=>row[2]))};})()",
+      "description": "Count all investments, including undisplayed placeholders."
+    },
+    {
+      "label": "pocket_selections",
+      "expression": "(() => {const h=idleon.getAttr('Holes'),gods=idleon.getAttr('CustomLists').h.GodsInfo,level=idleon.callFunction('Holes','CosmoBonusQTY',2,0);return [29,30].map((index,slot)=>{const godId=Number(h[11][index]);return {slot,godId,bonusId:Number(gods[godId][13]),name:gods[godId][0],active:level>slot};});})()",
+      "description": "Saved canonical god and bonus identities."
+    },
+    {
+      "label": "effective_doot",
+      "expression": "idleon.callFunction('Companions',0)",
+      "description": "Actual active-character companion eligibility."
+    },
+    {
+      "label": "active_divinity_level",
+      "expression": "Number(idleon.getAttr('Lv0')[14])",
+      "description": "Actual active-character Divinity level."
+    },
+    {
+      "label": "active_primary_god",
+      "expression": "Number(idleon.getAttr('Divinity')[__TARGET_PLAYER__+12])",
+      "description": "Saved primary link stays separate from effective activation."
+    },
+    {
+      "label": "pocket_all_stat",
+      "expression": "15*idleon.callFunction('Companions',0)*idleon.callFunction('Holes','CosmoBonusQTY',2,0)",
+      "description": "Pocket All Stat term from original AllStatPCT, not the full stat result."
+    },
+    {
+      "label": "active_gods",
+      "expression": "idleon.getAttr('CustomLists').h.GodsInfo.map((row,id)=>({id,active:!!idleon.callFunction('Divinity','Bonus_MAJOR',__TARGET_PLAYER__,Number(row[13]))}))",
+      "description": "Original major god activation union for the captured character."
+    },
+    {
+      "label": "village_schematic_effect",
+      "expression": "idleon.callFunction('Holes','CosmoBonusQTY',1,1)*idleon.callFunction('Holes','CosSchBlt',0,0)",
+      "description": "Schematic-driven Villager EXP effect."
+    },
+    {
+      "label": "equal_spread_effect",
+      "expression": "idleon.callFunction('Holes','CosmoBonusQTY',1,5)*Math.floor(idleon.callFunction('Holes','LeastOpalsInVillager',0,0)/5)",
+      "description": "Equal Spread percentage from the original Villager EXP caller."
+    },
+    {
+      "label": "ordinary_links",
+      "expression": "(() => {const links=idleon.getAttr('Divinity'),database=idleon.getAttr('PlayerDATABASE').h;return idleon.getAttr('GetPlayersUsernames').map((playerName,playerId)=>{const talent=Number(database[playerName].h.SkillLevels[505]||0),primary=Number(links[playerId+12]);return {playerId,playerName,primaryGodId:primary<0?null:primary,secondaryGodId:talent>0?talent%10:null};});})()",
+      "description": "Real named primary and Elemental Sorcerer secondary links, before Pocket or Doot activation. Only Player 3 has runtime activation parity."
+    },
+    {
+      "label": "string_slots_bonus",
+      "expression": "idleon.callFunction('Holes','CosmoBonusQTY',0,1)",
+      "description": "Direct String is Strung parameter consumed by intrinsic schematic string effects."
+    },
+    {
+      "label": "least_investment",
+      "expression": "idleon.callFunction('Holes','LeastOpalsInVillager',0,0)",
+      "description": "Direct least rescued-villager investment used by Equal Spread."
+    },
+    {
+      "label": "cosmo_level",
+      "expression": "idleon.callFunction('Holes','VillagerLV',2,0)",
+      "description": "Direct saved Cosmo level consumed by the shared Majik pool."
+    }
+  ]
+}

@@ -7,6 +7,28 @@ export interface ChangelogEntryData {
 
 export const changelogData: ChangelogEntryData[] = [
   {
+    version: "1.6.0",
+    title: "We are cooking!",
+    date: "October 19, 2026",
+    changes: [
+      "Added Menagerie page to track missions, rank, Lumi, Shells, unlocks, and bonuses. Menagerie's impact on other systems is not complete yet.",
+      "--- Older Content ---",
+      "Added Research page to track Observations, lenses, Papers, Research EXP, Grid upgrades, and Shapes.",
+      "Added Spelunking page to track tunnels, discoveries, Journal pages, character progression, Amber, Shop upgrades, and Elixirs.",
+      "Added Emperor, Minehead, and Clam Work pages.",
+      "Expanded The Hole with villager growth, Opals, Studies, Schematics, Majik, and Measurements.",
+      "Added cavern resource, production, collectible, and upgrade tracking to The Hole.",
+      "Detailed progression remains limited for Bravery, Justice, Wisdom, Dawg Den, Gloomie Mushroom Grotto, Gambit, and Temple.",
+      "Added Advice Fish, Zenith Market, and The Button pages to track bonuses, upgrades, costs, and task progress.",
+      "Added Bribes, Guild Bonuses, Event Shop, and Armor Smithy pages, plus bonus summaries for Owl, Kangaroo, and Bubba.",
+      "Expanded character stats with defence, accuracy, movement speed, weapon power, and drop rate.",
+      "Fixed upgrade costs for Compass, Grimoire, and Tesseract.",
+      "Fixed card-star progress and card bonus calculations, including Cardifiers.",
+      "Added passive Prayer bonus and per-character Nobisect blessing displays.",
+      "Refreshed Sushi Station and Jelly Operator layouts.",
+    ]
+  },
+  {
     version: "1.5.0",
     title: "World 7, Royal Armory, and Gaming",
     date: "October 11, 2026",

@@ -6,7 +6,6 @@ import { loadExtractionResults, getExtractedValue, validateExtractionHealth } fr
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Equinox } from '../../../data/domain/equinox';
 
-// TODO: Make it possible to test multiple save / extraction results.
 const saveName = 'latest';
 const extractionResultsName = 'equinox-rate-data.json';
 

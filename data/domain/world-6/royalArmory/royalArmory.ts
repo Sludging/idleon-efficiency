@@ -71,6 +71,8 @@ export class RoyalArmory extends Domain {
     readonly totalResourceProduction = new Map<number, number>();
     private selectedExperienceRank = OutpostRank.Trading;
     selectedRoyalGuardian: RoyalGuardianContribution | undefined;
+    // The saved Outpost category weights cost reduction for the first three Master Classes.
+    private selectedOutpostBonusIndex = 0;
     private totalUpgradeLevels = 0;
     private unlockedUpgradeCount = 0;
     private orbletsOwned = 0;
@@ -104,6 +106,7 @@ export class RoyalArmory extends Domain {
         this.totalResourceProduction.clear();
         this.selectedExperienceRank = OutpostRank.Trading;
         this.selectedRoyalGuardian = undefined;
+        this.selectedOutpostBonusIndex = 0;
         this.totalUpgradeLevels = this.unlockedUpgradeCount = this.orbletsOwned = 0;
         this.extraClearKills = 1;
         this.companionParchmentBonus = this.jellyParchmentBonus = 0;
@@ -133,31 +136,32 @@ export class RoyalArmory extends Domain {
 
     parse(data: Map<string, unknown>): void {
         const armory = data.get(this.getDataKey()) as RoyalArmory;
-        const royalG = data.get("RoyalG") as readonly (readonly unknown[])[] | undefined;
-        const royalMaps = data.get("RoyalMaps") as readonly (readonly unknown[])[] | undefined;
+        const royalG = data.get("RoyalG") as readonly (readonly unknown[])[];
+        const royalMaps = data.get("RoyalMaps") as readonly (readonly unknown[] | null | undefined)[];
         armory.resetCalculatedState();
-        const statueLevels = royalG?.[0] ?? [];
+        const statueLevels = royalG[0] ?? [];
         armory.statues.forEach(statue => statue.parse(statueLevels[statue.index]));
         // Retain extra saved levels without inventing catalog definitions for them.
         armory.additionalRoyalStatueLevels = statueLevels.slice(armory.statues.length).map(level => Number(level) || 0);
         armory.mapStates = new Map();
-        royalMaps?.forEach((row, mapId) => {
+        royalMaps.forEach((row, mapId) => {
             if (row === undefined || row === null) return;
             const map = row.length < 3 ? new RoyalMapSource(mapId) : new Outpost(mapId);
             map.parse(row);
             armory.mapStates.set(mapId, map);
         });
-        armory.units.parse(royalG ?? []);
-        armory.selectedExperienceRank = royalArmoryAsNumber(royalG?.[3]?.[7]);
-        armory.resourceNodes.parse(royalG?.[5] ?? [], royalG?.[4] ?? []);
+        armory.units.parse(royalG);
+        armory.selectedExperienceRank = royalArmoryAsNumber(royalG[3]?.[7]);
+        armory.selectedOutpostBonusIndex = Number(royalG[3]?.[2] ?? 0);
         armory.resetResources();
-        royalG?.[1]?.forEach((quantity, resourceType) => {
+        royalG[1]?.forEach((quantity, resourceType) => {
             const resource = armory.resources.get(resourceType) ?? new RoyalResource(resourceType, 0);
             resource.parse(quantity);
             armory.resources.set(resourceType, resource);
         });
-        armory.upgrades.forEach(upgrade => upgrade.parse(royalG?.[2]?.[upgrade.index]));
-        armory.orbletMarketBonuses.forEach(bonus => bonus.parse((royalG?.[23]?.[bonus.index] ?? 0) as number));
+        armory.resourceNodes.parse(royalG[5] ?? [], royalG[4] ?? []);
+        armory.upgrades.forEach(upgrade => upgrade.parse(royalG[2]?.[upgrade.index]));
+        armory.orbletMarketBonuses.forEach(bonus => bonus.parse((royalG[23]?.[bonus.index] ?? 0) as number));
     }
 
     updateMapPurificationStates(): void {
@@ -175,6 +179,45 @@ export class RoyalArmory extends Domain {
         for (const unit of this.units.roster) this.mapStates.get(unit.stationedMapId)?.units.addMovableUnit(unit.role);
     }
 
+    getSelectedOutpostBonusIndex(): number { return this.selectedOutpostBonusIndex; }
+
+    getMineheadCurrencyOutpostMultiplier(): number {
+        if (this.selectedOutpostBonusIndex !== 3) return 1;
+        const outpostCount = Math.max(1, this.builtOutpostCount - 6);
+        return 1 + 4 * outpostCount / (40 + outpostCount);
+    }
+
+    getResearchExpOutpostReward(): {
+        multiplier: number; available: boolean; selected: boolean; builtOutpostCount: number; selectorName: string;
+    } {
+        const selector = this.upgrades.find(upgrade => upgrade.index === 79)!;
+        return {
+            multiplier: this.getResearchExpOutpostPreviewMultiplier(),
+            available: selector.isUnlocked(),
+            selected: this.selectedOutpostBonusIndex === 1,
+            builtOutpostCount: this.builtOutpostCount,
+            selectorName: selector.data.name,
+        };
+    }
+
+    private getResearchExpOutpostPreviewMultiplier(): number {
+        const additionalOutposts = Math.max(1, this.builtOutpostCount - 6);
+        return 1 + (additionalOutposts / (40 + additionalOutposts)) * 2;
+    }
+
+    getResearchExpOutpostMultiplier(): number {
+        if (this.selectedOutpostBonusIndex !== 1) return 1;
+
+        return this.getResearchExpOutpostPreviewMultiplier();
+    }
+
+    getSpelunkingRechargeOutpostMultiplier(): number {
+        if (this.selectedOutpostBonusIndex !== 2) return 1;
+
+        // The selected recharge Outpost uses the built-count scale without Research's doubled effect.
+        const additionalOutposts = Math.max(1, this.builtOutpostCount - 6);
+        return 1 + additionalOutposts / (40 + additionalOutposts);
+    }
     getTotalUpgradeLevels(): number { return this.totalUpgradeLevels; }
     getUnlockedUpgradeCount(): number { return this.unlockedUpgradeCount; }
 

@@ -1,4 +1,4 @@
-import { lavaFunc, nFormatter, number2letter, range, round } from '../../../utility'
+import { lavaFunc, lavaLog, nFormatter, number2letter, range, round } from '../../../utility'
 import { Cooking } from '../../world-4/cooking';
 import { CauldronBase, initBubbleRepo } from '../../data/BubbleRepo';
 import { ImageData } from '../../imageData';
@@ -602,7 +602,8 @@ export class Alchemy extends Domain {
     _shouldBoostPlayer = (player: Player, cauldron: CauldronIndex, bubble: number) => {
         const bonusKey = this.cauldrons[cauldron].bubbles[bubble].data.bonusKey;
         // Class boosts exclude multiplier, active, all-character, and late bubbles; the 16th-bubble pass is independent.
-        if (bubble === 16 || bubble >= 30 || bonusKey.includes("passz") || bonusKey.includes("ACTIVE") || bonusKey.includes("AllCharz")) {
+        // The game calculates the first stat bubble before it prepares the class multiplier.
+        if (bubble === 0 || bubble === 16 || bubble >= 30 || bonusKey.includes("passz") || bonusKey.includes("ACTIVE") || bonusKey.includes("AllCharz")) {
             return false;
         }
 
@@ -642,6 +643,7 @@ export class Alchemy extends Domain {
         return false
     }
 
+    // Account bonuses include the 16th bubble, but exclude recipient class, level, and mana scaling.
     getBonusForBubble = (cauldron: CauldronIndex, bubble: number) => {
         let extraBonus = 1;
 
@@ -673,7 +675,36 @@ export class Alchemy extends Domain {
         return this.cauldrons[cauldron].bubbles[bubble].getBonusText(this.getBonusForBubble(cauldron, bubble));
     }
 
+    // Class-bound bonuses retain Beginner exceptions (game source 104416–104440).
+    private isBubbleAllowedForClass(bonusKey: string, classId: number): boolean {
+        switch (bonusKey) {
+            case 'W1':
+                return classId >= 7 && classId < 18;
+            case 'W5':
+            case 'W6':
+                return classId < 18;
+            case 'A1':
+            case 'A5':
+                return classId >= 18 && classId < 30;
+            case 'A6':
+                return classId < 7 || (classId >= 18 && classId < 30);
+            case 'M1':
+            case 'M6':
+                return classId < 7 || classId >= 30;
+            case 'M5':
+                return classId >= 30;
+            default:
+                return true;
+        }
+    }
+
     getBonusForPlayer = (player: Player, cauldron: CauldronIndex, bubble: number) => {
+        const selectedBubble = this.cauldrons[cauldron].bubbles[bubble];
+        const bonusKey = selectedBubble.data.bonusKey;
+        if (!this.isBubbleAllowedForClass(bonusKey, player.classId)) {
+            return 0;
+        }
+
         let extraBonus = 1;
 
         // If player is right class, boost by the 2nd bubble
@@ -681,7 +712,25 @@ export class Alchemy extends Domain {
             extraBonus *= this.cauldrons[cauldron].bubbles[1].getBonus();
         }
 
-        return this.getBonusForBubble(cauldron, bubble) * extraBonus;
+        if (bonusKey === 'MinEff' || bonusKey === 'ChopEff') {
+            // health or mana scales the raw bonus before class and 16th-bubble multipliers.
+            const preparationMaximum = bonusKey === 'MinEff'
+                ? player.health.getAlchemyMaxHP()
+                : player.health.getAlchemyMaxMP();
+            let bonus = selectedBubble.getBonus() * lavaLog(preparationMaximum);
+            bonus *= extraBonus;
+            if (this._shouldBoostBubble(bubble, cauldron)) {
+                bonus *= this.cauldrons[cauldron].bubbles[16].getBonus();
+            }
+            return bonus;
+        }
+
+        let bonus = this.getBonusForBubble(cauldron, bubble) * extraBonus;
+        if (bonusKey === 'W7' || bonusKey === 'A8' || bonusKey === 'M7') {
+            // Endgame efficiency keeps factor 1 below level 520, then gains 1 per ten class levels.
+            bonus *= Math.max(1, Math.floor((player.level - 500) / 10));
+        }
+        return bonus;
     }
 
     hasAchievement = (): boolean => {
@@ -936,7 +985,7 @@ export function updateAlchemyTomeBubbles(data: Map<string, any>) {
     const equipmentSets = data.get("equipmentSets") as EquipmentSets;
     const tomeScore = tome.getHighestScore();
     const grimoireTomeBonus = grimoire.getUpgradeBonus(17);
-    const trollSetTomeBonus = equipmentSets.getSetBonus("TROLL_SET", undefined, true);
+    const trollSetTomeBonus = equipmentSets.getSetBonus("TROLL_SET", true);
     const scoreScaledBubbleKeys = ["W10AllCharz", "W8", "A10AllCharz", "A9", "M10AllCharz", "M9"];
     const modifierBubbleKeys = ["W8", "A9", "M9"];
 

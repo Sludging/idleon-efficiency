@@ -32,6 +32,13 @@ export class StarSign {
         }
         return 0;
     }
+    getClassExperienceBonus = (playerLevel: number): number => {
+        if (this.name === 'Big Brain Major' && playerLevel < 80) {
+            return 0;
+        }
+
+        return this.getBonus('Class EXP Gain');
+    }
 
     duplicate(noDownside: boolean = false) {
         let bonuses = this.bonuses;

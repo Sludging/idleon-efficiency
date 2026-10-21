@@ -6,6 +6,7 @@ import type { Companion } from '../companions';
 import type { EventShop } from '../eventShop';
 import type { GemStore } from '../gemPurchases';
 import type { Item } from '../items';
+import type { ItemProperty } from '../equipment-effects';
 import type { Player } from '../player';
 import type { Alchemy } from '../world-2/alchemy/alchemy';
 import type { KillRoy } from '../world-2/killroy';
@@ -91,6 +92,15 @@ export class Gallery extends Domain {
                 if (stat.extra && stat.extra !== '0') effects.push({ effect: stat.extra.toUpperCase(), value: stat.getValue() });
             }
             this.itemEffects.set(item.internalName, effects);
+            // Raw replacement properties use the same deposit scaling as unique effects.
+            effects.push(
+                { effect: 'Weapon_Power', value: item.weaponPower },
+                { effect: 'STR', value: item.str },
+                { effect: 'AGI', value: item.agi },
+                { effect: 'WIS', value: item.wis },
+                { effect: 'LUK', value: item.luk },
+                { effect: 'Defence', value: item.defence },
+            );
         }
         this.trophies.sort((a, b) => a.index - b.index);
         this.nametags.sort((a, b) => a.index - b.index);
@@ -143,6 +153,18 @@ export class Gallery extends Domain {
         if (!bonuses) throw new Error(`Gallery contributions have not been calculated for player ${player.playerID}`);
         return bonuses.get(bonus) ?? 0;
     }
+    getTrophyProperty(property: ItemProperty, player: Player): number {
+        const bonuses = this.trophyBonuses.get(player.playerID);
+        if (!bonuses) throw new Error(`Gallery contributions have not been calculated for player ${player.playerID}`);
+        return this.isUnlocked(player) ? bonuses.get(property) ?? 0 : 0;
+    }
+
+    getNametagProperty(property: ItemProperty, player: Player): number {
+        const bonuses = this.nametagBonuses.get(player.playerID);
+        if (!bonuses) throw new Error(`Gallery contributions have not been calculated for player ${player.playerID}`);
+        return this.isUnlocked(player) ? bonuses.get(property) ?? 0 : 0;
+    }
+
 
     updateContributions(data: Map<string, any>): void {
         const players = data.get('players') as Player[];
@@ -157,10 +179,10 @@ export class Gallery extends Domain {
         const alchemy = (data.get('alchemy') as Alchemy).getBubbleBonusForKey('Y13');
         const card = (data.get('cards') as Card[]).find(card => card.id === 'w7a11');
         // Gallery consumes card level, which includes the owned zero-star level.
-        const cardLevel = card && card.count > 0 ? card.getLevels() + 1 : 0;
+        const cardLevel = card && card.count > 0 ? card.getLevels() : 0;
         const sushi = (data.get('sushi') as SushiStation).getBonusFromIndex(54);
         const jadePodium = (data.get('sneaking') as Sneaking).jadeUpgrades.find(upgrade => upgrade.index === 42)?.purchased ?? false;
-        const tunnelLore = (data.get('spelunking') as Spelunking).tunnels.find(tunnel => tunnel.index === 5)?.unlocked ?? false;
+        const tunnelLore = (data.get('spelunking') as Spelunking).tunnels[5].loreCompleted;
 
         const grade4 = Math.round(
             Math.min(1, getCompanionActiveBonus(companions, 28)) + Math.min(1, isCompanionLevelTwo(companions, 28))

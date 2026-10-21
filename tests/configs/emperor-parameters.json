@@ -1,0 +1,127 @@
+{
+  "description": "Emperor public outputs and direct producer values",
+  "target": "Emperor account results",
+  "requiredActivePlayerIndex": 3,
+  "extractions": [
+    {
+      "label": "ninja_emporium_bonus_39",
+      "expression": "idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 39, 0)",
+      "description": "Ninja Emporium bonus used by Emperor maximum attempts"
+    },
+    {
+      "label": "arcane_bonus_48",
+      "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 48, 0)",
+      "description": "Arcane upgrade bonus 48 used by Emperor rewards"
+    },
+    {
+      "label": "arcade_bonus_51",
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 51)",
+      "description": "Arcade bonus 51 used by Emperor rewards"
+    },
+    {
+      "label": "jelly_bonus_28",
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 28, 0)",
+      "description": "Jelly RoG bonus 28 used by Emperor rewards"
+    },
+    {
+      "label": "emperor_showdown",
+      "expression": "idleon.engine.getGameAttribute(\"OptionsListAccount\")[369] + 1",
+      "description": "Current Showdown displayed by the Emperor menu"
+    },
+    {
+      "label": "emperor_attempts_left",
+      "expression": "Math.round(1 - idleon.engine.getGameAttribute(\"OptionsListAccount\")[370])",
+      "description": "Emperor attempts left displayed by the game menu"
+    },
+    {
+      "label": "emperor_max_attempts",
+      "expression": "idleon.callFunction(\"Thingies\", \"MaxEmperorAttemptStack\") + 1",
+      "description": "Maximum Emperor attempts displayed by the game menu"
+    },
+    {
+      "label": "emperor_daily_tries",
+      "expression": "idleon.callFunction(\"Thingies\", \"DailyEmperorTries\")",
+      "description": "Daily Emperor attempts displayed by the game menu"
+    },
+    {
+      "label": "emperor_boss_hp",
+      "expression": "idleon.callFunction(\"Thingies\", \"Boss6HP\")",
+      "description": "Emperor boss HP shown in game"
+    },
+    {
+      "label": "emperor_combined_bonus_multiplier",
+      "expression": "1 + (idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 48, 0) + idleon.callFunction(\"ArcadeBonus\", 51) + idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 28, 0)) / 100",
+      "description": "Combined Emperor account multiplier from native Arcane, Arcade, and Jelly rewards"
+    },
+    {
+      "label": "emperor_bonus_0",
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 0, 0, 0)",
+      "description": "Effective Ninja Stealth bonus on Emperor screen"
+    },
+    {
+      "label": "emperor_bonus_1",
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 1, 0, 0)",
+      "description": "Effective Emperor reward bonus 1"
+    },
+    {
+      "label": "emperor_bonus_2",
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 2, 0, 0)",
+      "description": "Effective Emperor reward bonus 2"
+    },
+    {
+      "label": "emperor_bonus_3",
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 3, 0, 0)",
+      "description": "Effective Emperor reward bonus 3"
+    },
+    {
+      "label": "emperor_bonus_4",
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 4, 0, 0)",
+      "description": "Effective Emperor reward bonus 4"
+    },
+    {
+      "label": "emperor_bonus_5",
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 5, 0, 0)",
+      "description": "Effective Emperor reward bonus 5"
+    },
+    {
+      "label": "emperor_bonus_6",
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 6, 0, 0)",
+      "description": "Effective Emperor reward bonus 6"
+    },
+    {
+      "label": "emperor_bonus_7",
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 7, 0, 0)",
+      "description": "Effective Emperor reward bonus 7"
+    },
+    {
+      "label": "emperor_bonus_8",
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 8, 0, 0)",
+      "description": "Effective Emperor reward bonus 8"
+    },
+    {
+      "label": "emperor_bonus_9",
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 9, 0, 0)",
+      "description": "Effective Emperor reward bonus 9"
+    },
+    {
+      "label": "emperor_bonus_10",
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 10, 0, 0)",
+      "description": "Effective Emperor reward bonus 10"
+    },
+    {
+      "label": "emperor_bonus_11",
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 11, 0, 0)",
+      "description": "Effective Emperor reward bonus 11"
+    },
+    {
+      "label": "emperor_next_award_showdowns",
+      "expression": "(()=>{const kills=Number(idleon.engine.getGameAttribute(\"OptionsListAccount\")[369]);const schedule=idleon.engine.getGameAttribute(\"CustomLists\").h.EmperorBon[2];return Array.from({length:12},(_,i)=>kills+Array.from({length:48},(_,offset)=>offset).find(offset=>Number(schedule[(kills+offset)%48])===i)+1)})()",
+      "description": "Version 1.23 source-derived next eligible displayed Showdown for each bonus, using native schedule and saved kill count; future output, not an observed transition"
+    },
+    {
+      "label": "emperor_next_award_effective_totals",
+      "expression": "(()=>{const base=idleon.engine.getGameAttribute(\"DNSM\").h.EmperorBon;const values=idleon.engine.getGameAttribute(\"CustomLists\").h.EmperorBon[1];const multiplier=1+(idleon.callFunction(\"ArcaneType\",\"ArcaneUpgBonus\",48,0)+idleon.callFunction(\"ArcadeBonus\",51)+idleon.callFunction(\"JellyOperation\",\"RoG_BonusQTY\",28,0))/100;return Array.from({length:12},(_,i)=>Math.floor((Number(base[i])+Number(values[i]))*multiplier))})()",
+      "description": "Version 1.23 source-derived cumulative effective total after each bonus next award, using native cached base totals and native bonus inputs; future output, not an observed transition"
+    }
+  ]
+}

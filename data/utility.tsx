@@ -20,6 +20,13 @@ export const lavaFunc = (func: string, level: number, x1: number, x2: number, ro
                 result = level * x1;
             }
             break;
+        case 'addDECAY':
+            if (level < 50001) {
+                result = x1 * level;
+            } else {
+                result = x1 * Math.min(50000, level) + ((level - 50000) / (level - 50000 + 150000)) * x1 * 50000;
+            }
+            break;
         case 'decay':
             result = (level * x1) / (level + x2);
             break;
@@ -375,7 +382,7 @@ export const parseFormattedNumber = (formattedNumber: string | number): number =
 export const number2letterArray = ['_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
     's',
     't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
-    'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '肥', '肢', '肖', '肋', '肉', '職', '耐', '者', '箱', '管', '算', '箔', '策', '答', '筒', '筍'];
+    'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '肥', '肢', '肖', '肋', '肉', '職', '耐', '者', '箱', '管', '算', '箔', '策', '答', '筒', '筍', '白'];
 
 export const number2letter = (number: number) => {
     if (number < number2letterArray.length) {

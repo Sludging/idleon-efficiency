@@ -4,16 +4,16 @@
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.MealSpdz",
       "result": {
         "type": "large_number",
-        "value": "1.31346802776602e+44"
+        "value": "4.8432347966637514e+45"
       }
     },
     "alchemy_prismatic_bonus": {
       "expression": "idleon.callFunction(\"ArcaneType\", \"PrismaBonusMult\", 0, 0)",
-      "result": 3.0399042431787526
+      "result": 3.1917711262956363
     },
     "daily_drip_final_bonus": {
       "expression": "(() => { const raw = Number(idleon.getDNSM(\"AlchBubbles\").h.LqdCap); const alchemyLevel = Number(idleon.getAttr(\"PixelHelperActor\")[5].behaviors.getBehavior(\"ActorEvents_232\")._GenINFO[87]); return raw * Math.max(Math.pow(alchemyLevel / 25, 0.3), 0); })()",
-      "result": 92.0365564090126
+      "result": 94.99322209607708
     },
     "cropius_mapper_final_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.Y6",
@@ -21,11 +21,11 @@
     },
     "slab_w2_final_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.W2",
-      "result": 391.4835062409146
+      "result": 411.04115514314043
     },
     "tome_w8_final_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.W8",
-      "result": 878.5365807022079
+      "result": 922.4263224645649
     },
     "tome_a9_final_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.A9",
@@ -37,7 +37,7 @@
     },
     "ordinary_tool_w_final_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.ToolW",
-      "result": 3996.225373424353
+      "result": 4405.484211371604
     },
     "ordinary_tool_w_base_bonus": {
       "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 0, 7, 0)",
@@ -45,19 +45,19 @@
     },
     "y13_final_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.Y13",
-      "result": 12.12518440038127
+      "result": 12.73093175779732
     },
     "y13_direct_bubble_bonus": {
       "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 3, 32, 0)",
-      "result": 12.12518440038127
+      "result": 12.73093175779732
     },
     "ordinary_tool_w_second_bonus": {
       "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 0, 1, 0)",
-      "result": 8.97149701802096
+      "result": 9.41969313869697
     },
     "ordinary_tool_w_sixteenth_bonus": {
       "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 0, 16, 0)",
-      "result": 7.232968423563336
+      "result": 7.594311506206223
     },
     "diamond_chef_meal_count": {
       "expression": "(() => { const meals = idleon.getAttr(\"Meals\")[0]; return meals.reduce((count, level) => count + (Number(level) >= 11 ? 1 : 0), 0); })()",
@@ -65,7 +65,7 @@
     },
     "daily_drip_total_alchemy_level": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[5].behaviors.getBehavior(\"ActorEvents_232\")._GenINFO[87]",
-      "result": 1587
+      "result": 1758
     },
     "cropius_mapper_portal_count": {
       "expression": "(() => { const players = idleon.getAttr(\"PlayerDATABASE\").h; let opened = 0; Object.keys(players).forEach(id => { for (let i = 0; i < 13; i++) opened += Number(players[id].h.KillsLeft2Advance[251 + i][0]) < 1 ? 1 : 0; }); return opened; })()",
@@ -73,7 +73,75 @@
     },
     "slab_raw_obtained_count": {
       "expression": "idleon.getAttr(\"Cards\")[1].length",
-      "result": 1642
+      "result": 1645
+    },
+    "endgame_w7_final_bonus": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.W7",
+      "result": 2415.064402405923
+    },
+    "endgame_a8_final_bonus": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.A8",
+      "result": 238.97630331753555
+    },
+    "endgame_m7_final_bonus": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.M7",
+      "result": 256.4607329842932
+    },
+    "min_eff_final_bonus": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.MinEff",
+      "result": 40626.89435759935
+    },
+    "chop_eff_final_bonus": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.ChopEff",
+      "result": 2360.5381203721304
+    },
+    "raw_w7_bonus": {
+      "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 0, 26, 0)",
+      "result": 2.9134615384615383
+    },
+    "raw_a8_bonus": {
+      "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 1, 27, 0)",
+      "result": 2.7156398104265405
+    },
+    "raw_m7_bonus": {
+      "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 2, 26, 0)",
+      "result": 2.9143265111851497
+    },
+    "raw_min_eff_bonus": {
+      "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 0, 2, 0)",
+      "result": 47.621313035204565
+    },
+    "raw_chop_eff_bonus": {
+      "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 2, 2, 0)",
+      "result": 47.67116907312529
+    },
+    "player_alchemy_max_hp": {
+      "expression": "(() => { const script = idleon.allScripts.ActorEvents_12; const original = script._customBlock_PlayerHPmax; let calls = 0; let maximumHP; try { script._customBlock_PlayerHPmax = function(...args) { calls++; maximumHP = original.apply(this, args); return maximumHP; }; idleon.callFunction('TalentCalc', -2); } finally { script._customBlock_PlayerHPmax = original; } if (calls !== 1 || script._customBlock_PlayerHPmax !== original) throw new Error('Alchemy HP capture must intercept exactly one call and restore PlayerHPmax'); return maximumHP; })()",
+      "result": 842973144987.2273
+    },
+    "player_max_mp": {
+      "expression": "idleon.callFunction(\"PlayerMPmax\")",
+      "result": 3309932.7249999996
+    },
+    "player_alchemy_max_mp": {
+      "expression": "(() => { const script = idleon.allScripts.ActorEvents_12; const original = script._customBlock_PlayerMPmax; let calls = 0; let maximumMP; try { script._customBlock_PlayerMPmax = function(...args) { calls++; maximumMP = original.apply(this, args); return maximumMP; }; idleon.callFunction('TalentCalc', -2); } finally { script._customBlock_PlayerMPmax = original; } if (calls !== 1 || script._customBlock_PlayerMPmax !== original) throw new Error('Alchemy MP capture must intercept exactly one call and restore PlayerMPmax'); return maximumMP; })()",
+      "result": 3309204.25
+    },
+    "w8_tome_score": {
+      "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[84]",
+      "result": 44531
+    },
+    "w8_grimoire_bonus": {
+      "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 17, 0)",
+      "result": 85
+    },
+    "w8_troll_set_bonus": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"TROLL_SET\", \"Bonus\", 0, 0)",
+      "result": 25
+    },
+    "high_iq_sixteenth_bonus": {
+      "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 2, 16, 0)",
+      "result": 7.594985665473492
     }
   },
   "errors": {}

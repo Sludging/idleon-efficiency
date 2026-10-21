@@ -4,7 +4,9 @@ import { Box, Heading } from "grommet";
 import { useState } from "react";
 import { useShallow } from "zustand/react/shallow";
 import ContentTabs from "../../../components/base/ContentTabs";
-import { JellyCells, JellyObstructions, JellyOverview, JellyUpgrades } from "../../../components/world-7/jelly-operator/jellyOperator";
+import { JellyCells, JellyObstructions } from "../../../components/world-7/jelly-operator/jellyOperator";
+import { JellyOverview } from "../../../components/world-7/jelly-operator/jellyOverview";
+import { JellyUpgrades } from "../../../components/world-7/jelly-operator/jellyUpgrades";
 import { JellyOperator } from "../../../data/domain/world-7/jellyOperator";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 

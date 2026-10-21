@@ -16,7 +16,6 @@ import { SlabInfluencedArtifact } from '../../../data/domain/world-5/sailing/art
 import { Player } from '../../../data/domain/player';
 import { UpgradeVault } from '../../../data/domain/upgradeVault';
 
-// TODO: Make it possible to test multiple save / extraction results.
 const saveName = 'latest';
 const extractionResultsName = 'sailing-speed-data.json';
 
@@ -186,14 +185,6 @@ const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
       return sailing.boats[1]?.captain?.traits
         .filter(trait => trait.bonus.bonus.includes("Boat Speed"))
         .reduce((sum, trait) => sum + trait.currentBonus, 0) ?? 0;
-    }
-  },
-  boat_0_island_distance: {
-    description: "IslandDistance for boat 0's assigned destination",
-    extractionKey: 'boat_0_island_distance',
-    domainExtractor: (gameData) => {
-      const sailing = gameData.get("sailing") as Sailing;
-      return sailing.boats[0]?.assignIsland?.data.distance;
     }
   },
   minimum_travel_time: {

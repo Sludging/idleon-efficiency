@@ -10,32 +10,43 @@ export const initBellImprovementRepo = () => {
                 "index": 0,
                 "baseValue": "15000000000",
                 "bonus": "+{% Bell Ring/hr",
-                "resource": "Coins"
+                "resource": "Coins",
+                "quantityCoefficient": 5
             }),
         new BellImprovementBase(1, <BellImprovementModel>{
                 "index": 1,
                 "baseValue": "100",
                 "bonus": "+{% Bell Clean/hr",
-                "resource": "Mythril"
+                "resource": "Mythril",
+                "quantityCoefficient": 10
             }),
         new BellImprovementBase(2, <BellImprovementModel>{
                 "index": 2,
                 "baseValue": "1000000",
                 "bonus": "+{% Bell Ring/hr",
-                "resource": "Bits"
+                "resource": "Bits",
+                "quantityCoefficient": 8
             }),
         new BellImprovementBase(3, <BellImprovementModel>{
                 "index": 3,
                 "baseValue": "300",
                 "bonus": "+{% Bell Ping/hr",
-                "resource": "Eighth Note"
+                "resource": "Eighth Note",
+                "quantityCoefficient": 13
             }),
-        new BellImprovementBase(4, <BellImprovementModel>{"index": 4, "baseValue": "150", "bonus": "+{% Bell Ring/hr", "resource": "Atoms"}),
+        new BellImprovementBase(4, <BellImprovementModel>{
+                "index": 4,
+                "baseValue": "150",
+                "bonus": "+{% Bell Ring/hr",
+                "resource": "Atoms",
+                "quantityCoefficient": 12
+            }),
         new BellImprovementBase(5, <BellImprovementModel>{
                 "index": 5,
                 "baseValue": "1500",
                 "bonus": "+{% Bell Ring/hr",
-                "resource": "Turquoise Rupie"
+                "resource": "Turquoise Rupie",
+                "quantityCoefficient": 15
             })    
 ]
 }

@@ -1,0 +1,37 @@
+{
+  "extractions": {
+    "farming_market_upgrade_6_bonus": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"BasketUpgQTY\", 0, 6)",
+      "result": 352
+    },
+    "farming_exotic_bonus_16": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 16, 0)",
+      "result": 42.70315091210614
+    },
+    "farming_exotic_bonus_17": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 17, 0)",
+      "result": 77.83825816485226
+    },
+    "farming_exotic_bonus_18": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 18, 0)",
+      "result": 87.72151898734177
+    },
+    "farming_exotic_bonus_19": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 19, 0)",
+      "result": 23.333333333333332
+    },
+    "farming_exotic_bonus_20": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 20, 0)",
+      "result": 21.846921797004992
+    },
+    "farming_vault_upgrade_85_bonus": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 85, 0)",
+      "result": 82
+    },
+    "farming_magic_beans_from_depot": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"BeanTradeQTY\", 0, 0)",
+      "result": 9713959971.153898
+    }
+  },
+  "errors": {}
+}

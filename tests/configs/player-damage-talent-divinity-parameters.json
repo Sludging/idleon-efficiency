@@ -1,0 +1,51 @@
+{
+  "description": "Compare direct player talent-calculation bonuses and minor divinity link bonuses with native game calculations",
+  "target": "Player damage talent and divinity parameters",
+  "extractions": [
+    {
+      "label": "talent_calculation_31",
+      "expression": "idleon.callFunction('TalentCalc', 31)",
+      "description": "Talent bonus scaled by five-level bands of the player's lowest tracked skill level"
+    },
+    {
+      "label": "talent_calculation_110",
+      "expression": "idleon.callFunction('TalentCalc', 110)",
+      "description": "Talent bonus capped by the count of fighting maps with at least 100,000 portal kills remaining"
+    },
+    {
+      "label": "talent_calculation_125",
+      "expression": "idleon.callFunction('TalentCalc', 125)",
+      "description": "Talent calculation bonus from refinery ranks when player accuracy meets the current enemy's defence"
+    },
+    {
+      "label": "talent_calculation_305",
+      "expression": "idleon.callFunction('TalentCalc', 305)",
+      "description": "Talent calculation bonus scaled by eligible cards"
+    },
+    {
+      "label": "talent_calculation_470",
+      "expression": "idleon.callFunction('TalentCalc', 470)",
+      "description": "Talent calculation bonus scaled by stamps with an available maximum level"
+    },
+    {
+      "label": "talent_calculation_485",
+      "expression": "idleon.callFunction('TalentCalc', 485)",
+      "description": "Talent calculation bonus scaled by alchemy vials above level three"
+    },
+    {
+      "label": "talent_calculation_656",
+      "expression": "idleon.callFunction('TalentCalc', 656)",
+      "description": "Talent calculation bonus scaled by completed weekly dream challenges"
+    },
+    {
+      "label": "divinity_minor_bonus_4",
+      "expression": "idleon.callFunction('Divinity', 'Bonus_Minor', 3, 4)",
+      "description": "Native minor divinity bonus for the target player and bonus category 4"
+    },
+    {
+      "label": "divinity_minor_bonus_7",
+      "expression": "idleon.callFunction('Divinity', 'Bonus_Minor', 3, 7)",
+      "description": "Native minor divinity bonus for the target player and bonus category 7"
+    }
+  ]
+}

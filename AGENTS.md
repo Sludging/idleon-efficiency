@@ -4,6 +4,8 @@ Guidance for AI coding assistants working in this repository.
 
 Before implementing or reviewing code, you MUST read [CODING_STANDARDS.md](CODING_STANDARDS.md). When delegating implementation or review, pass its path and the relevant existing vocabulary-document paths (discovered through [domain docs](docs/agents/domain.md)); do not duplicate their rules in task prompts.
 
+For routine work, use the regular-save workflow and reuse the shared default offline server when ready. Public-account validation is opt-in only on explicit user request; see the [canonical game-access policy](tests/helpers/README.md#game-access).
+
 ## Project Overview
 
 IdleOn Efficiency (https://www.idleonefficiency.com) is a companion website for the idle MMO "Legends of Idleon". This Next.js app reverse-engineers game mechanics to provide efficiency calculators and optimization tools for players.
@@ -19,8 +21,8 @@ Context-specific guidance lives in [`skills/`](skills/). Read the relevant skill
 | Skill | When to use |
 |-------|-------------|
 | [architecture](skills/architecture/SKILL.md) | Data flow, domain patterns, cross-domain dependencies |
-| [calculation-correctness](skills/calculation-correctness/SKILL.md) | A backend main calculation is wrong or missing — supervised canonical-case workflow with demand-driven live/game-code evidence |
-| [testing](skills/testing/SKILL.md) | Live game extraction testing, domain test writing, validation |
+| [calculation-correctness](skills/calculation-correctness/SKILL.md) | A backend main calculation is wrong or missing — canonical-case workflow with demand-driven live/game-code evidence |
+| [testing](skills/testing/SKILL.md) | Offline-first game extraction, domain test writing, validation |
 | [feature-implementation](skills/feature-implementation/SKILL.md) | Implementing new game features and domain logic |
 | [update-game-version](skills/update-game-version/SKILL.md) | New Idleon version released — extract from Steam, process via WikiBot, sync data |
 | [sync-game-assets](skills/sync-game-assets/SKILL.md) | Sync new/changed game images from Android APK to S3 CDN |
@@ -108,11 +110,11 @@ yarn test
   /utils                     # Utility functions
 /reference-repos             # Competitor codebases for implementation reference (domain/parser logic only)
 /tests                       # Jest test suite
-  /configs                   # Live game extraction configurations
+  /configs                   # Game extraction configurations
   /domains                   # Domain calculation tests
   /fixtures                  # Test data and cloud save snapshots
   /helpers                   # Test utilities and data extraction tools
-  /results                   # Extracted live game data
+  /results                   # Extracted game values
   /utils                     # Test helpers
 ```
 
@@ -123,7 +125,7 @@ yarn test
 Read the [testing skill](skills/testing/SKILL.md) for:
 
 - Creating extraction configurations
-- Running live game data extraction
+- Running game data extraction (offline by default; see [game-access policy](tests/helpers/README.md#game-access))
 - Writing parameter and calculation tests
 - Debugging test failures
 
@@ -142,6 +144,20 @@ Read the [feature-implementation skill](skills/feature-implementation/SKILL.md) 
 - Data pipeline integration
 - Navigation integration
 - Testing requirements
+
+### Research specialists
+
+- Read the existing handoff and findings first. Reuse sufficient research; request specialists only when further research is needed.
+- You MUST delegate exploratory game-source, caller, runtime, player-meaning, and WikiBot static-data research directly to [game-researcher](.omp/agents/game-researcher.md).
+- You MUST delegate repository backend/UI pattern discovery and comparison directly to [pattern-researcher](.omp/agents/pattern-researcher.md) before choosing patterns.
+
+Delegate before broad searches of your own. Routine code inspection and formula-only changes with unchanged structure need no new pattern research.
+Give specialists the scope, open questions, and existing findings from the current handoff.
+The selected workflow controls research scope, phase boundaries, session freshness, concurrency, and decision authority.
+Specialists provide findings; they do not approve decisions or advance phases.
+Consumers MUST inspect focused sources and code for implementation and independent verification of relevant interfaces and behavior.
+Distinguish mandatory rules, observed patterns, recommendations, and unresolved choices. Applicable standards constrain approved plans and specialist recommendations; approval is not an exemption.
+Support departures from observed patterns with evidence. Get approval before changing the affected scope or approved decisions.
 
 ## Key Technical Considerations
 

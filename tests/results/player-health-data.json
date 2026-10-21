@@ -1,0 +1,485 @@
+{
+  "extractions": {
+    "alchemy_health_context": {
+      "expression": "(() => { const script=idleon.allScripts.ActorEvents_12, original=script._customBlock_PlayerHPmax; let calls=0,early,preparationResult; const snapshot=()=>{const boxes=idleon.getDNSM('BoxRewards').h;const fam=idleon.getDNSM('FamBonusQTYs').h;const signs=idleon.getDNSM('StarSigns').h;const talentIds=[0,642,95,92,272,99];return {str:idleon.callFunction('TotalStats','STR'),card1:idleon.callFunction('CardBonusREAL',1),card8:idleon.callFunction('CardBonusREAL',8),baseHP:Number(idleon.getDNSM('AlchBubbles').h.BaseHP??0),stampBaseHP:idleon.callFunction('StampBonusOfTypeX','BaseHP'),foodHP:idleon.callFunction('TotalFoodBonuses','HpBaseBoosts'),statue:idleon.callFunction('ArbitraryCode','StatueBonusGiven4'),talents:talentIds.map(id=>{const all=idleon.callFunction('RunCodeOfTypeXforThingY','AllTalentLV',String(id));const skill=Number(idleon.getAttr('SkillLevels')[id]);return {id,allTalentLV:all,skillLevel:skill,effectiveLevel:all+skill,bonus:idleon.callFunction('GetTalentNumber',1,id)}}),etc15:idleon.callFunction('EtcBonuses','15'),shrine:idleon.callFunction('Shrine',1),goldFood:idleon.callFunction('GoldFoodBonuses','MaxHPpct'),boxBaseHP:Number(boxes.baseHP),boxPctHP:Number(boxes.pctHP),buff108:idleon.callFunction('GetBuffBonuses',108,1),family18:Number(fam[18]??0),starHP:Number(signs.TotalHP??0),goldFoodBubble:Number(idleon.getDNSM('AlchBubbles').h.GFoodz??0),accountDeathBringer:idleon.callFunction('getbonus2',1,209,-1),deathBringerMapCount:Number(idleon.getDNSM('CalcTalentMAP').h[209])};};try{script._customBlock_PlayerHPmax=function(...args){calls++;const maximumHP=original.apply(this,args);early={...snapshot(),maximumHP};return maximumHP;};preparationResult=idleon.callFunction('TalentCalc',-2);}finally{script._customBlock_PlayerHPmax=original;}if(calls!==1||!early||script._customBlock_PlayerHPmax!==original)throw new Error('HP capture must intercept exactly one call and restore PlayerHPmax');const final=snapshot();final.maximumHP=idleon.callFunction('PlayerHPmax');return {early,final,calls,preparationResult,restored:script._customBlock_PlayerHPmax===original};})()",
+      "result": {
+        "early": {
+          "str": 6796531,
+          "card1": 0,
+          "card8": 0,
+          "baseHP": 0,
+          "stampBaseHP": 30069.6,
+          "foodHP": 0,
+          "statue": 430460.6793983998,
+          "talents": [
+            {
+              "id": 0,
+              "allTalentLV": 180,
+              "skillLevel": 245,
+              "effectiveLevel": 425,
+              "bonus": 14003.749999999998
+            },
+            {
+              "id": 642,
+              "allTalentLV": 0,
+              "skillLevel": 116,
+              "effectiveLevel": 116,
+              "bonus": 1589.1999999999998
+            },
+            {
+              "id": 95,
+              "allTalentLV": 297,
+              "skillLevel": 245,
+              "effectiveLevel": 542,
+              "bonus": 406.5
+            },
+            {
+              "id": 92,
+              "allTalentLV": 180,
+              "skillLevel": 198,
+              "effectiveLevel": 378,
+              "bonus": 1621.6200000000001
+            },
+            {
+              "id": 272,
+              "allTalentLV": 0,
+              "skillLevel": 0,
+              "effectiveLevel": 0,
+              "bonus": 0
+            },
+            {
+              "id": 99,
+              "allTalentLV": 180,
+              "skillLevel": 203,
+              "effectiveLevel": 383,
+              "bonus": 45.49676025917927
+            }
+          ],
+          "etc15": 0,
+          "shrine": 137.70000000000002,
+          "goldFood": 121.42611276783852,
+          "boxBaseHP": 201,
+          "boxPctHP": 37.5,
+          "buff108": 0,
+          "family18": 49.62572077581689,
+          "starHP": 0,
+          "goldFoodBubble": 0,
+          "accountDeathBringer": 1.4428969359331476,
+          "deathBringerMapCount": 68,
+          "maximumHP": 842973144987.2273
+        },
+        "final": {
+          "str": 6796531,
+          "card1": 0,
+          "card8": 0,
+          "baseHP": 0,
+          "stampBaseHP": 30069.6,
+          "foodHP": 0,
+          "statue": 430460.6793983998,
+          "talents": [
+            {
+              "id": 0,
+              "allTalentLV": 192,
+              "skillLevel": 245,
+              "effectiveLevel": 437,
+              "bonus": 14792.449999999997
+            },
+            {
+              "id": 642,
+              "allTalentLV": 0,
+              "skillLevel": 116,
+              "effectiveLevel": 116,
+              "bonus": 1589.1999999999998
+            },
+            {
+              "id": 95,
+              "allTalentLV": 309,
+              "skillLevel": 245,
+              "effectiveLevel": 554,
+              "bonus": 415.5
+            },
+            {
+              "id": 92,
+              "allTalentLV": 192,
+              "skillLevel": 198,
+              "effectiveLevel": 390,
+              "bonus": 1719.9
+            },
+            {
+              "id": 272,
+              "allTalentLV": 0,
+              "skillLevel": 0,
+              "effectiveLevel": 0,
+              "bonus": 0
+            },
+            {
+              "id": 99,
+              "allTalentLV": 192,
+              "skillLevel": 203,
+              "effectiveLevel": 395,
+              "bonus": 45.73684210526316
+            }
+          ],
+          "etc15": 0,
+          "shrine": 137.70000000000002,
+          "goldFood": 130.14874970560683,
+          "boxBaseHP": 201,
+          "boxPctHP": 37.5,
+          "buff108": 0,
+          "family18": 49.62572077581689,
+          "starHP": 0,
+          "goldFoodBubble": 2251.058291530299,
+          "accountDeathBringer": 1.452054794520548,
+          "deathBringerMapCount": 68,
+          "maximumHP": 972840537123.3342
+        },
+        "calls": 1,
+        "preparationResult": 1,
+        "restored": true
+      }
+    },
+    "gold_food_achievement_37": {
+      "expression": "idleon.callFunction(\"AchieveStatus\", 37)",
+      "result": 5
+    },
+    "gold_food_achievement_380": {
+      "expression": "idleon.callFunction(\"AchieveStatus\", 380)",
+      "result": 1
+    },
+    "gold_food_achievement_383": {
+      "expression": "idleon.callFunction(\"AchieveStatus\", 383)",
+      "result": 1
+    },
+    "card_ruby_unlock": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"5starCards\", 0)",
+      "result": 1
+    },
+    "card_six_star_unlock": {
+      "expression": "idleon.callFunction(\"Spelunk\", \"6starCards\", 0, 0)",
+      "result": 1
+    },
+    "food_hp": {
+      "expression": "idleon.callFunction(\"TotalFoodBonuses\", \"HpBaseBoosts\")",
+      "result": 0
+    },
+    "misc_hp": {
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"15\")",
+      "result": 0
+    },
+    "golden_hp": {
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"MaxHPpct\")",
+      "result": 130.14874970560683
+    },
+    "shrine_card_level": {
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"Boss3B\")",
+      "result": 7
+    },
+    "vault_base_hp": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 16, 0)",
+      "result": 308
+    },
+    "alchemy_mana_context": {
+      "expression": "(() => { const script = idleon.allScripts.ActorEvents_12; const original = script._customBlock_PlayerMPmax; const snapshot = () => { const bubbles = idleon.getDNSM('AlchBubbles').h; const boxes = idleon.getDNSM('BoxRewards').h; return { wisdom: idleon.callFunction('TotalStats', 'WIS'), card3: idleon.callFunction('CardBonusREAL', 3), card29: idleon.callFunction('CardBonusREAL', 29), baseMP: Number(bubbles.BaseMP ?? 0), stampBaseMP: idleon.callFunction('StampBonusOfTypeX', 'BaseMP'), talent1: idleon.callFunction('GetTalentNumber', 1, 1), talent272: idleon.callFunction('GetTalentNumber', 1, 272), talent452: idleon.callFunction('GetTalentNumber', 1, 452), boxBaseMP: Number(boxes.baseMP), boxPercentMP: Number(boxes.pctMP), allTalentLevels: idleon.callFunction('RunCodeOfTypeXforThingY', 'AllTalentLV', '1'), allocatedTalent1: Number(idleon.getAttr('SkillLevels')[1]), talent149: idleon.callFunction('GetTalentNumber', 1, 149), talent374: idleon.callFunction('GetTalentNumber', 1, 374), talent539: idleon.callFunction('GetTalentNumber', 1, 539), achievement291: idleon.callFunction('AchieveStatus', 291), familyTalentLevels: Number(idleon.getDNSM('FamBonusQTYs').h[68]), companionTalentLevels: idleon.callFunction('Companions', 1), divinityTalentLevels: idleon.callFunction('Divinity', 'Bonus_Minor', 3, 2), coralKidMinorLinkPercent: idleon.callFunction('Thingies', 'CoralKidUpgBonus', 3, 0), equinoxTalentLevels: Number(idleon.getAttr('Dream')[12]), ninjaMastery: Number(idleon.getAttr('OptionsListAccount')[232]), grimoireTalentLevels: idleon.callFunction('Summoning', 'GrimoireUpgBonus', 39, 0), equipmentTalentLevels: idleon.callFunction('GetSetBonus', 'KATTLEKRUK_SET', 'Bonus', 0, 0), tesseractTalentLevels: idleon.callFunction('ArcaneType', 'ArcaneUpgBonus', 57, 0), gamingTalentLevelsUnlocked: idleon.callFunction('GamingStatType', 'SuperBitType', 47, 0), superTalentLevels: idleon.callFunction('Thingies', 'SuperTalentPTS_LVgiven', 0, 0), divinityBubbleMultiplier: Number(bubbles.Y2ACTIVE ?? 0) }; }; let calls = 0; let early; let preparationResult; try { script._customBlock_PlayerMPmax = function(...args) { calls++; const inputs = snapshot(); const maximumMP = original.apply(this, args); early = { ...inputs, maximumMP }; return maximumMP; }; preparationResult = idleon.callFunction('TalentCalc', -2); } finally { script._customBlock_PlayerMPmax = original; } if (calls !== 1 || !early || script._customBlock_PlayerMPmax !== original) throw new Error('Alchemy MP capture must intercept exactly one call and restore PlayerMPmax'); const final = snapshot(); final.maximumMP = idleon.callFunction('PlayerMPmax'); return { early, final, calls, preparationResult, restored: script._customBlock_PlayerMPmax === original }; })()",
+      "result": {
+        "early": {
+          "wisdom": 2396300,
+          "card3": 0,
+          "card29": 0,
+          "baseMP": 0,
+          "stampBaseMP": 772.5,
+          "talent1": 9477.5,
+          "talent272": 0,
+          "talent452": 0,
+          "boxBaseMP": 134,
+          "boxPercentMP": 37.5,
+          "allTalentLevels": 180,
+          "allocatedTalent1": 245,
+          "talent149": 19,
+          "talent374": 0,
+          "talent539": 0,
+          "achievement291": 1,
+          "familyTalentLevels": 15.64134495641345,
+          "companionTalentLevels": 35,
+          "divinityTalentLevels": 23.70061099796334,
+          "coralKidMinorLinkPercent": 80,
+          "equinoxTalentLevels": 33,
+          "ninjaMastery": 6,
+          "grimoireTalentLevels": 30,
+          "equipmentTalentLevels": 5,
+          "tesseractTalentLevels": 5,
+          "gamingTalentLevelsUnlocked": 1,
+          "superTalentLevels": 117,
+          "divinityBubbleMultiplier": 0,
+          "maximumMP": 3309204.25
+        },
+        "final": {
+          "wisdom": 2396300,
+          "card3": 0,
+          "card29": 0,
+          "baseMP": 0,
+          "stampBaseMP": 772.5,
+          "talent1": 10007.3,
+          "talent272": 0,
+          "talent452": 0,
+          "boxBaseMP": 134,
+          "boxPercentMP": 37.5,
+          "allTalentLevels": 192,
+          "allocatedTalent1": 245,
+          "talent149": 19,
+          "talent374": 0,
+          "talent539": 0,
+          "achievement291": 1,
+          "familyTalentLevels": 15.64134495641345,
+          "companionTalentLevels": 35,
+          "divinityTalentLevels": 35.445015643513536,
+          "coralKidMinorLinkPercent": 80,
+          "equinoxTalentLevels": 33,
+          "ninjaMastery": 6,
+          "grimoireTalentLevels": 30,
+          "equipmentTalentLevels": 5,
+          "tesseractTalentLevels": 5,
+          "gamingTalentLevelsUnlocked": 1,
+          "superTalentLevels": 117,
+          "divinityBubbleMultiplier": 1.4955317247542448,
+          "maximumMP": 3309932.7249999996
+        },
+        "calls": 1,
+        "preparationResult": 1,
+        "restored": true
+      }
+    },
+    "maximum_hp": {
+      "expression": "idleon.callFunction(\"PlayerHPmax\")",
+      "result": 972840537123.3342
+    },
+    "maximum_mp": {
+      "expression": "idleon.callFunction(\"PlayerMPmax\")",
+      "result": 3309932.7249999996
+    },
+    "total_strength": {
+      "expression": "idleon.callFunction(\"TotalStats\", \"STR\")",
+      "result": 6796531
+    },
+    "total_wisdom": {
+      "expression": "idleon.callFunction(\"TotalStats\", \"WIS\")",
+      "result": 2396300
+    },
+    "talent_0": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 0)",
+      "result": 14792.449999999997
+    },
+    "talent_1": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 1)",
+      "result": 10007.3
+    },
+    "talent_642": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 642)",
+      "result": 1589.1999999999998
+    },
+    "talent_95": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 95)",
+      "result": 415.5
+    },
+    "talent_92": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 92)",
+      "result": 1719.9
+    },
+    "talent_272": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 272)",
+      "result": 0
+    },
+    "talent_452": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 452)",
+      "result": 0
+    },
+    "card_1": {
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 1)",
+      "result": 0
+    },
+    "card_3": {
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 3)",
+      "result": 0
+    },
+    "card_8": {
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 8)",
+      "result": 0
+    },
+    "card_29": {
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 29)",
+      "result": 0
+    },
+    "stamp_base_hp": {
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseHP\")",
+      "result": 30069.6
+    },
+    "stamp_base_mp": {
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseMP\")",
+      "result": 772.5
+    },
+    "health_statue": {
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven4\")",
+      "result": 430460.6793983998
+    },
+    "hp_shrine": {
+      "expression": "idleon.callFunction(\"Shrine\", 1)",
+      "result": 137.70000000000002
+    },
+    "equipment_hp": {
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"15\")",
+      "result": 0
+    },
+    "active_hp_penalty": {
+      "expression": "idleon.callFunction(\"GetBuffBonuses\", 108, 1)",
+      "result": 0
+    },
+    "family_hp": {
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[18]",
+      "result": 49.62572077581689
+    },
+    "post_office_baseHP": {
+      "expression": "idleon.getDNSM(\"BoxRewards\").h.baseHP",
+      "result": 201
+    },
+    "post_office_pctHP": {
+      "expression": "idleon.getDNSM(\"BoxRewards\").h.pctHP",
+      "result": 37.5
+    },
+    "post_office_baseMP": {
+      "expression": "idleon.getDNSM(\"BoxRewards\").h.baseMP",
+      "result": 134
+    },
+    "post_office_pctMP": {
+      "expression": "idleon.getDNSM(\"BoxRewards\").h.pctMP",
+      "result": 37.5
+    },
+    "star_sign_hp": {
+      "expression": "(() => { const value = idleon.getDNSM(\"StarSigns\").h.TotalHP; return value == null ? 0 : value; })()",
+      "result": 0
+    },
+    "secret_set": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"SECRET_SET\", \"Bonus\", 0, 0)",
+      "result": 25
+    },
+    "companion_174": {
+      "expression": "idleon.callFunction(\"Companions\", 174)",
+      "result": 2
+    },
+    "companion_48": {
+      "expression": "idleon.callFunction(\"Companions\", 48)",
+      "result": 7
+    },
+    "companion_155": {
+      "expression": "idleon.callFunction(\"Companions\", 155)",
+      "result": 4000
+    },
+    "family_gold_food": {
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[66]",
+      "result": 1.3731543624161073
+    },
+    "equipment_gold_food": {
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"8\")",
+      "result": 0
+    },
+    "talent_99": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 99)",
+      "result": 45.73684210526316
+    },
+    "stamp_gold_food": {
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"GFood\")",
+      "result": 496.33126099706743
+    },
+    "bubble_gold_food": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.GFoodz",
+      "result": 2251.058291530299
+    },
+    "sigil_gold_food": {
+      "expression": "idleon.callFunction(\"Labb\", \"SigilBonus\", \"Blank\", 14, 0)",
+      "result": 280
+    },
+    "meal_gold_food": {
+      "expression": "idleon.callFunction(\"MealBonus\", \"zGoldFood\")",
+      "result": 4095.1204989856
+    },
+    "star_sign_gold_food": {
+      "expression": "(() => { const value = idleon.getDNSM(\"StarSigns\").h[69]; return value == null ? 0 : value; })()",
+      "result": 200
+    },
+    "bribe_gold_food": {
+      "expression": "idleon.callFunction(\"GetBribeBonus\", \"36\")",
+      "result": 10
+    },
+    "pristine_gold_food": {
+      "expression": "idleon.callFunction(\"Ninja\", \"PristineBon\", 14, 0)",
+      "result": 50
+    },
+    "vote_gold_food": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 26, 0)",
+      "result": 0
+    },
+    "deathbringer_gold_food": {
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 209, -1) * idleon.getDNSM(\"CalcTalentMAP\").h[209]",
+      "result": 98.73972602739727
+    },
+    "legend_gold_food": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 25, 0)",
+      "result": 1500
+    },
+    "card_level_cropfallEvent1": {
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"cropfallEvent1\")",
+      "result": 4
+    },
+    "card_level_anni5Event1": {
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"anni5Event1\")",
+      "result": 4
+    },
+    "vault_gold_food": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 86, 0)",
+      "result": 25
+    },
+    "exalted_stamp_bonus": {
+      "expression": "idleon.callFunction(\"Windwalker\", \"StampDoubler\", 0, 0)",
+      "result": 226.53372434017595
+    },
+    "exalted_atom_bonus": {
+      "expression": "idleon.callFunction(\"AtomCollider\", \"AtomBonuses\", 12, 0)",
+      "result": 30
+    },
+    "exalted_pristine_bonus": {
+      "expression": "idleon.callFunction(\"Ninja\", \"PristineBon\", 20, 0)",
+      "result": 20
+    },
+    "exalted_compass_bonus": {
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 76, 0)",
+      "result": 6
+    },
+    "exalted_emperor_set": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"EMPEROR_SET\", \"Bonus\", 0, 0)",
+      "result": 20
+    },
+    "exalted_event_shop_owned": {
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 18, 0)",
+      "result": 1
+    },
+    "exalted_palette_bonus": {
+      "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 23, 0)",
+      "result": 8
+    },
+    "exalted_exotic_market_bonus": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 49, 0)",
+      "result": 0.533724340175953
+    },
+    "exalted_legend_bonus": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 36, 0)",
+      "result": 15
+    },
+    "exalted_sushi_bonus": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 17, 0)",
+      "result": 1
+    },
+    "exalted_jelly_bonus": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 50, 0)",
+      "result": 0
+    }
+  },
+  "errors": {}
+}

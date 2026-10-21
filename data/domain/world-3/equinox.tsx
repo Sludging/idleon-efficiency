@@ -186,6 +186,8 @@ class Upgrade {
         return 1 * this.level; // talent levels
       case 11:
         return 1 * this.level; // Votes bonuses boost
+      case 12:
+        return this.data.x2 * this.level;
       default:
         return -1;
     }
@@ -268,6 +270,10 @@ export class Equinox extends Domain {
   numberOfActiveChallenges: number = 0;
   activeChallenges: Challenge[] = [];
 
+  getResearchExpBonus = (): number => {
+    return this.upgrades.find(upgrade => upgrade.index === 12)!.getBonus();
+  };
+
   getRawKeys(): RawData[] {
     return [
       { key: "WeeklyBoss", perPlayer: false, default: {} },
@@ -317,7 +323,7 @@ export class Equinox extends Domain {
 
     equinox.upgrades.forEach((upgrade) => {
       upgrade.unlocked = upgrade.index < upgradesUnlocked;
-      upgrade.level = dreamData[upgrade.index + 2];
+      upgrade.level = Number(dreamData[upgrade.index + 2] ?? 0);
       upgrade.setMaxLevel(equinox.challenges);
     });
 
@@ -385,7 +391,7 @@ export function updateEquinoxBar(data: Map<string, any>) {
   const eventShop3Bonus = eventShop.isBonusOwned(3) ? 1 : 0;
   const option320Bonus = Number(optionList[320] ?? 0);
   const arcade41Bonus = arcade.bonuses.find((bonus) => bonus.index == 41)?.getBonus() ?? 0;
-  const emperor5Bonus = emperor.emperorBonuses.find((bonus) => bonus.index == 5)?.getBonus() ?? 0;
+  const emperor5Bonus = emperor.getEffectiveBonus(5);
   const tesseract37Bonus = tesseract.getUpgradeBonus(37) ?? 0;
   const researchGrid86Bonus = researchGrid.getBonusForId(86);
   const royalArmory76Bonus = royalArmory.getUpgradeBonus(76);

@@ -1,6 +1,17 @@
 import { range } from "../../utility";
 import { Domain, RawData } from "../base/domain";
 import { Item, ItemStat, StoneProps } from "../items";
+import { EquipmentBonus, getEquipmentEffect } from "../equipment-effects";
+import type { EquipmentProperty, PrimaryAttribute } from "../equipment-effects";
+import type { Player } from "../player";
+import { initEquipmentMetadataRepo } from "../data/EquipmentMetadataRepo";
+
+const powerSuffixes = initEquipmentMetadataRepo()[0].data.powerSuffixes;
+
+export interface AttributeObolModifier {
+    talentPercent: number;
+    superbitBonus: number;
+}
 
 
 export const obolExtraData: number[][][] = [
@@ -104,19 +115,51 @@ export class Obol {
 
 export class ObolStats {
     stats: ItemStat[] = [];
+    private properties: Map<string, number> | undefined;
+    private effects = new Map<string, number>();
 
     addStat = (newStat: ItemStat) => {
-        // ignore negative values.
-        if (newStat.getValue() < 0) {
-            return;
-        }
-        const existing = this.stats.find(stat => newStat.extra == '' ? newStat.displayName == stat.displayName : newStat.extra.toLowerCase() == stat.extra.toLowerCase());
+        const value = newStat.getValue();
+        // Obols accept only positive complete item contributions, including upgrades.
+        if (value <= 0) return;
+        this.properties = undefined;
+        const effect = newStat.extra.replace(/_/g, " ").toUpperCase();
+        const existing = this.stats.find(stat => newStat.extra === ''
+            ? stat.extra === '' && stat.stoneName === newStat.stoneName
+            : stat.extra.replace(/_/g, " ").toUpperCase() === effect);
         if (existing) {
-            existing.value += newStat.getValue();
+            existing.value += value;
+        } else {
+            // Display rows hold the complete collection total, not a base/stone split.
+            this.stats.push(new ItemStat(newStat.displayName, newStat.stoneName, value, newStat.extra));
         }
-        else {
-            this.stats.push(newStat.duplicate());
+        if (newStat.extra !== '') this.effects.set(effect, (this.effects.get(effect) ?? 0) + value);
+    }
+
+    updateAttributeProperties(modifiers: Readonly<Record<PrimaryAttribute, AttributeObolModifier>>): void {
+        const properties = new Map<string, number>();
+        for (const stat of this.stats) {
+            if (stat.extra !== '') continue;
+            let value = stat.getValue();
+            const property = stat.stoneName;
+            if (property === 'STR' || property === 'AGI' || property === 'WIS' || property === 'LUK') {
+                const modifier = modifiers[property];
+                // Obol attributes use their own talent and the 40% Superbit bonus, not equipment stamps.
+                value *= 1 + (modifier.talentPercent + 40 * modifier.superbitBonus) / 100;
+            }
+            properties.set(property, value);
         }
+        this.properties = properties;
+    }
+
+    getProperty(property: EquipmentProperty): number {
+        if (!this.properties) throw new Error('Obol attribute properties have not been calculated');
+        return this.properties.get(property) ?? 0;
+    }
+
+    getBonus(bonus: EquipmentBonus): number {
+        const effect = getEquipmentEffect(bonus);
+        return effect === undefined ? 0 : this.effects.get(effect) ?? 0;
     }
 }
 
@@ -127,6 +170,58 @@ export class ObolsData extends Domain {
     familyStats: ObolStats = new ObolStats();
     upgradeTab: Obol[] = [];
     inventory: Map<ObolType, Obol[]> = new Map();
+    private combinedStats = new Map<number, ObolStats>();
+
+    getStats(playerID: number): ObolStats {
+        const stats = this.combinedStats.get(playerID);
+        if (!stats) throw new Error(`Obol contributions have not been calculated for player ${playerID}`);
+        return stats;
+    }
+
+    updateCombinedStats(players: readonly Player[]): void {
+        this.playerStats = this.playerObols.map(obols => this.calculateCollection(obols));
+        this.familyStats = this.calculateCollection(this.familyObols);
+        this.combinedStats.clear();
+        for (const player of players) {
+            const combined = new ObolStats();
+            // Personal collection comes first. Each row then adds the complete family collection total.
+            for (const stat of this.playerStats[player.playerID].stats) combined.addStat(stat);
+            for (const stat of this.familyStats.stats) combined.addStat(stat);
+            this.combinedStats.set(player.playerID, combined);
+        }
+    }
+
+    private calculateCollection(obols: readonly Obol[]): ObolStats {
+        const result = new ObolStats();
+        for (const obol of obols) {
+            if (obol.locked || obol.item.internalName === 'Blank') continue;
+            for (const stat of obol.item.itemStats) {
+                if (stat.stoneName === 'Upgrade_Slots_Left' || stat.stoneName === 'Speed') continue;
+                if (stat.stoneName !== 'Weapon_Power' || stat.extra !== '') {
+                    result.addStat(stat);
+                    continue;
+                }
+                // Named tool Obols retain their power family; ordinary Obols supply weapon power.
+                let property = 'Weapon_Power';
+                for (const family of powerSuffixes) {
+                    if (family !== 'Dung' && obol.item.internalName.includes(family)) {
+                        property = `${family}_Power`;
+                        break;
+                    }
+                }
+                if (property === 'Weapon_Power') {
+                    if (obol.item.type === 'PICKAXE') property = 'Mining_Power';
+                    else if (obol.item.type === 'HATCHET') property = 'Choppin_Power';
+                }
+                if (property === stat.stoneName) {
+                    result.addStat(stat);
+                } else {
+                    result.addStat(new ItemStat(property.replace('_', ' '), property, stat.getValue()));
+                }
+            }
+        }
+        return result;
+    }
 
     getRawKeys(): RawData[] {
         return [
@@ -153,25 +248,20 @@ export class ObolsData extends Domain {
         obols.playerStats = [];
         obols.familyObols = [];
         obols.familyStats = new ObolStats();
+        obols.combinedStats.clear();
 
         range(0, charCount).forEach((_, playerIndex) => {
             const playerObols = data.get(`ObolEqO0_${playerIndex}`) as string[];
             const playerObolsMods = data.get(`ObolEqMAP_${playerIndex}`) as Record<number, StoneProps>;
             const playerObolArray: Obol[] = [];
-            const playerStats = new ObolStats();
             playerObols.forEach((obol, obolIndex) => {
                 const itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? Item.emptyItem(obol);
                 if (!obol.includes("Locked") && obol != "Blank" && Object.keys(playerObolsMods).includes(obolIndex.toString())) {
                     itemInfo.addStone(playerObolsMods[obolIndex]);
                 }
                 playerObolArray.push(new Obol(itemInfo, obolIndex, true));
-                itemInfo.itemStats.forEach(stat => {
-                    playerStats.addStat(stat);
-                })
-
             });
             obols.playerObols.push(playerObolArray);
-            obols.playerStats.push(playerStats);
         })
 
         const familyObols = data.get(`ObolEqO1`) as string[];
@@ -182,9 +272,6 @@ export class ObolsData extends Domain {
                 itemInfo.addStone(familyObolsMods[obolIndex]);
             }
             obols.familyObols.push(new Obol(itemInfo, obolIndex, false))
-            itemInfo.itemStats.forEach(stat => {
-                obols.familyStats.addStat(stat);
-            })
         });
 
         const inventory = data.get(`ObolInvOr`) as Record<string, string>[];
@@ -204,3 +291,4 @@ export class ObolsData extends Domain {
         });
     }
 }
+

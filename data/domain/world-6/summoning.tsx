@@ -21,6 +21,7 @@ import { Emperor } from "./emperor";
 import { EquipmentSets } from "../misc/equipmentSets";
 import { Tesseract } from "../tesseract";
 import { GemStore } from "../gemPurchases";
+import { Menagerie } from "../menagerie";
 
 const WhiteBattleOrder = [
     "Pet1", "Pet2", "Pet3", "Pet0", "Pet4", "Pet6", "Pet5", "Pet10", "Pet11"
@@ -162,7 +163,7 @@ export class SummonBonus {
         this.bonusValue = bonusValue;
     }
 
-    getBonus = (): number => {
+    getBonusWithArtifactBonus = (artifactBonus: number): number => {
         switch (true)
         {
             case this.index == 20:
@@ -171,13 +172,15 @@ export class SummonBonus {
             case this.index == 31:
                 return this.bonusValue;
             case this.index == 19:
-                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.godshardSetBonus) / 100);
+                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.godshardSetBonus) / 100);
             case 20 <= this.index && 33 >= this.index:
-                return this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning31Bonus + this.godshardSetBonus + this.emperorBonus) / 100);
+                return this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning31Bonus + this.godshardSetBonus + this.emperorBonus) / 100);
             default:
-                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning31Bonus + this.godshardSetBonus + this.emperorBonus) / 100);
+                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning31Bonus + this.godshardSetBonus + this.emperorBonus) / 100);
         }
     }
+
+    getBonus = (): number => this.getBonusWithArtifactBonus(this.artifactBonus);
 
     static getBonusValueForDisplay = (bonusId: number, bonusValue: number): number => {
         switch (true)
@@ -672,8 +675,8 @@ export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
     const achiev379 = achievements[379].completed ? 1 : 0; // x1.01
     const achiev373 = achievements[373].completed ? 1 : 0; // x1.01
     const taskBonus = taskboard.merits[44].getBonus();
-    const emperorBonus = emperor.emperorBonuses[8].getBonus();
-    const godshardSetBonus = equipmentSets.getSetBonus("GODSHARD_SET", undefined, true);
+    const emperorBonus = emperor.getEffectiveBonus(8);
+    const godshardSetBonus = equipmentSets.getSetBonus("GODSHARD_SET", true);
     const gemItemPurchased = gemStore.purchases.find(purchase => purchase.no == 11)?.pucrhased || 0;
     
     // this bonus isn't affected by any boost, so we can already calculate it here
@@ -724,6 +727,7 @@ export const updateSummoningUpgrades= (data: Map<string, any>) => {
     const summoning = data.get("summoning") as Summoning;
     const players = data.get("players") as Player[];
     const tesseract = data.get("tesseract") as Tesseract;
+    const menagerie = data.get("menagerie") as Menagerie;
     
     // Update upgrade bonuses
     const levels: number[] = [];
@@ -768,12 +772,15 @@ export const updateSummoningUpgrades= (data: Map<string, any>) => {
     const costReductionFromUpgrade72 = 1 / (1 + summoning.getUpgradeBonusFromIndex(72) / 100);
     const costReductionFromUpgrade75 = 1 / (1 + summoning.getUpgradeBonusFromIndex(75) / 100);
     
-    const totalCostReduction = costReductionFromTalent595 * costReductionFromTesseract54 * costReductionFromUpgrade49 * costReductionFromUpgrade57 
-        * costReductionFromUpgrade72 * costReductionFromUpgrade75;
-
+    const totalCostReductionBeforeMenagerie = costReductionFromTalent595 * costReductionFromTesseract54 * costReductionFromUpgrade49 * costReductionFromUpgrade57 
+        * costReductionFromUpgrade72;
+    
     summoning.summonUpgrades.forEach(upgrade => {
-        upgrade.totalCostReduction = totalCostReduction;
+        const boostQuantity = menagerie.getBonusValue(7);
+        const menagerieCostReduction = 1 / Math.max(1, Math.pow(Math.min(50, 1 + boostQuantity / 100), Math.floor(upgrade.level / 50)));
+        upgrade.totalCostReduction = totalCostReductionBeforeMenagerie * menagerieCostReduction * costReductionFromUpgrade75;
     });
+
 
     return summoning;
 }

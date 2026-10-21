@@ -56,7 +56,7 @@ export const initSpelunkingChapterRepo = () => {
                         "x5": 0
                     },
                     <ChapterBonusModel>{
-                        "bonus": "+{% Spelunking EXP gain",
+                        "bonus": "+% Spelunking EXP gain",
                         "x1": 30,
                         "x2": 500,
                         "func": "decay",
@@ -136,7 +136,7 @@ export const initSpelunkingChapterRepo = () => {
                         "x5": 0
                     },
                     <ChapterBonusModel>{
-                        "bonus": "+{% Spelunking EXP gain",
+                        "bonus": "+% Spelunking EXP gain",
                         "x1": 50,
                         "x2": 600,
                         "func": "decay",
@@ -161,7 +161,7 @@ export const initSpelunkingChapterRepo = () => {
                         "x2": 2000,
                         "func": "decay",
                         "x3": 1,
-                        "requiredPages": 2500000,
+                        "requiredPages": 500000,
                         "x4": 0,
                         "x5": 0
                     }
@@ -196,7 +196,7 @@ export const initSpelunkingChapterRepo = () => {
                         "x2": 3500,
                         "func": "decay",
                         "x3": 1,
-                        "requiredPages": 5000000,
+                        "requiredPages": 1000000,
                         "x4": 0,
                         "x5": 0
                     }
@@ -231,7 +231,7 @@ export const initSpelunkingChapterRepo = () => {
                         "x2": 6000,
                         "func": "decay",
                         "x3": 1,
-                        "requiredPages": 1000000,
+                        "requiredPages": 1500000,
                         "x4": 0,
                         "x5": 0
                     }
@@ -241,8 +241,8 @@ export const initSpelunkingChapterRepo = () => {
                 "name": "FILLER",
                 "bonuses": [
                     <ChapterBonusModel>{
-                        "bonus": "+{% Filler",
-                        "x1": 25,
+                        "bonus": "+% Spelunking EXP gain",
+                        "x1": 80,
                         "x2": 1000,
                         "func": "decay",
                         "x3": 1,
@@ -251,22 +251,22 @@ export const initSpelunkingChapterRepo = () => {
                         "x5": 0
                     },
                     <ChapterBonusModel>{
-                        "bonus": "x Filler",
-                        "x1": 3,
-                        "x2": 3500,
+                        "bonus": "x Grand Discovery Chance",
+                        "x1": 2,
+                        "x2": 3000,
                         "func": "decay",
                         "x3": 1,
-                        "requiredPages": 80000,
+                        "requiredPages": 50000,
                         "x4": 0,
                         "x5": 0
                     },
                     <ChapterBonusModel>{
-                        "bonus": "x Filler",
-                        "x1": 3,
+                        "bonus": "x Total Spelunking POW",
+                        "x1": 12,
                         "x2": 3500,
                         "func": "decay",
                         "x3": 1,
-                        "requiredPages": 5000000,
+                        "requiredPages": 2000000,
                         "x4": 0,
                         "x5": 0
                     }

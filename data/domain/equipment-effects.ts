@@ -1,3 +1,8 @@
+export type PrimaryAttribute = 'STR' | 'AGI' | 'WIS' | 'LUK';
+export type ItemProperty = PrimaryAttribute | 'Defence' | 'Accuracy' | 'Weapon_Power';
+export type SkillPowerFamily = 'Mining' | 'Choppin' | 'Fishing' | 'Catching' | 'Trapping' | 'Worship';
+export type EquipmentProperty = ItemProperty | `${SkillPowerFamily}_Power`;
+
 /**
  * Equipment effects use exact labels; trailing spaces keep dungeon effects distinct.
  * Match item labels by replacing underscores with spaces, without trimming.

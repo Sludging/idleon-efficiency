@@ -1,0 +1,391 @@
+{
+  "description": "Extract All 18 Studies and owned effects from the genuine active character and paired save.",
+  "target": "All 18 Studies and owned effects",
+  "extractions": [
+    {
+      "label": "active_context",
+      "expression": "({ playerId: idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0]), playerName: idleon.getAttr('UserInfo')[0], playerNames: idleon.getAttr('GetPlayersUsernames'), version: idleon.getAttr('DoOnceREAL') })",
+      "description": "Capture real active character identity and version; do not switch or synthesize a context."
+    },
+    {
+      "label": "paired_hole_inputs",
+      "expression": "({ levels: idleon.getAttr(\"Holes\")[1].slice(0,5), exp: idleon.getAttr(\"Holes\")[2].slice(0,5), investments: idleon.getAttr(\"Holes\")[3].slice(0,8), purchased: idleon.getAttr(\"Holes\")[23].slice(0,5), studyLevels: idleon.getAttr(\"Holes\")[26].slice(0,18), studyProgress: idleon.getAttr(\"Holes\")[27].slice(0,18), target: idleon.getAttr(\"Holes\")[11][61], cavernOpals: idleon.getAttr(\"Holes\")[7], lanternUses: idleon.getAttr(\"Holes\")[11][84], wishes: idleon.getAttr(\"Holes\")[11][25], layers: [idleon.getAttr(\"Holes\")[11][1],idleon.getAttr(\"Holes\")[11][3],idleon.getAttr(\"Holes\")[11][5],idleon.getAttr(\"Holes\")[11][7]], covePurchases: idleon.getAttr('OptionsListAccount')[604] })",
+      "description": "Saved inputs directly used by part 1; runtime counter mismatches remain failures."
+    },
+    {
+      "label": "study_rate",
+      "expression": "idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0)",
+      "description": "Current shared Study progress/hour."
+    },
+    {
+      "label": "superbit_43",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 43, 0)",
+      "description": "Actual neighbor-accrual unlock."
+    },
+    {
+      "label": "study_names",
+      "expression": "idleon.getAttr(\"CustomLists\").h.HolesInfo[68].slice(0,18)",
+      "description": "All 18 delivered Study identities."
+    },
+    {
+      "label": "study_requirement_0",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 0, 0)",
+      "description": "Study 0 next requirement."
+    },
+    {
+      "label": "study_ready_0",
+      "expression": "0 < idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0) && Number(idleon.getAttr(\"Holes\")[27][0]) >= idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 0, 0)",
+      "description": "Study 0 claim readiness without changing saved progress."
+    },
+    {
+      "label": "study_effects_0",
+      "expression": "({\"sediment-retained-after-expansion\": ((idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 0, 99) === 1) ? 75 : 50),\"bucket-fill-per-expansion\": (idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 0, 0))})",
+      "description": "The Well Study bucket fill rate bonus per bar expansion and sediment retained after expansion (75% when owned, otherwise 50%). Owned effects only; not complete cavern permission."
+    },
+    {
+      "label": "study_progress_rate_0",
+      "expression": "(() => { const target=Number(idleon.getAttr(\"Holes\")[11][61]); const owned=Number(idleon.getAttr(\"Holes\")[1][4])>=1; const accessible=0<idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0); const neighbor=idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 43, 0)===1 && Math.abs(0-target)===1; return owned && accessible && (0===target || neighbor) ? idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0) : 0; })()",
+      "description": "Study 0 target, immediate neighbor, or inactive progress/hour."
+    },
+    {
+      "label": "study_requirement_1",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 1, 0)",
+      "description": "Study 1 next requirement."
+    },
+    {
+      "label": "study_ready_1",
+      "expression": "1 < idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0) && Number(idleon.getAttr(\"Holes\")[27][1]) >= idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 1, 0)",
+      "description": "Study 1 claim readiness without changing saved progress."
+    },
+    {
+      "label": "study_effects_1",
+      "expression": "({\"skilling-requirement-divisor-contribution-per-layer\": (idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 1, 0)),\"skilling-requirement-divisor-contribution\": (idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 1, 0) * Number(idleon.getAttr(\"Holes\")[11][1]))})",
+      "description": "Motherlode Study contribution per destroyed layer and total contribution to other skilling cavern resource requirement divisors. Study and collectible contributions form denominator 1 + sum / 100, not a literal percentage reduction. Owned effects only; not complete cavern permission."
+    },
+    {
+      "label": "study_progress_rate_1",
+      "expression": "(() => { const target=Number(idleon.getAttr(\"Holes\")[11][61]); const owned=Number(idleon.getAttr(\"Holes\")[1][4])>=1; const accessible=1<idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0); const neighbor=idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 43, 0)===1 && Math.abs(1-target)===1; return owned && accessible && (1===target || neighbor) ? idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0) : 0; })()",
+      "description": "Study 1 target, immediate neighbor, or inactive progress/hour."
+    },
+    {
+      "label": "study_requirement_2",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 2, 0)",
+      "description": "Study 2 next requirement."
+    },
+    {
+      "label": "study_ready_2",
+      "expression": "2 < idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0) && Number(idleon.getAttr(\"Holes\")[27][2]) >= idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 2, 0)",
+      "description": "Study 2 claim readiness without changing saved progress."
+    },
+    {
+      "label": "study_effects_2",
+      "expression": "({\"score-per-defeated-golden-hound\": (1 + idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 2, 0) / 100),\"golden-hound-respawns\": ((idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 2, 99) === 1))})",
+      "description": "The Den Study score multiplier per defeated Golden Hound and owned Golden Hound respawn rule. Owned effects only; not complete cavern permission."
+    },
+    {
+      "label": "study_progress_rate_2",
+      "expression": "(() => { const target=Number(idleon.getAttr(\"Holes\")[11][61]); const owned=Number(idleon.getAttr(\"Holes\")[1][4])>=1; const accessible=2<idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0); const neighbor=idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 43, 0)===1 && Math.abs(2-target)===1; return owned && accessible && (2===target || neighbor) ? idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0) : 0; })()",
+      "description": "Study 2 target, immediate neighbor, or inactive progress/hour."
+    },
+    {
+      "label": "study_requirement_3",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 3, 0)",
+      "description": "Study 3 next requirement."
+    },
+    {
+      "label": "study_ready_3",
+      "expression": "3 < idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0) && Number(idleon.getAttr(\"Holes\")[27][3]) >= idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 3, 0)",
+      "description": "Study 3 claim readiness without changing saved progress."
+    },
+    {
+      "label": "study_effects_3",
+      "expression": "({\"minimum-damage-share-of-maximum\": (idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 3, 0)),\"skip-guaranteed-one-hit-fights\": ((idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 3, 99) === 1))})",
+      "description": "Bravery Study minimum damage as a percentage of maximum damage and owned rule to skip guaranteed one-hit fights. Owned effects only; not complete cavern permission."
+    },
+    {
+      "label": "study_progress_rate_3",
+      "expression": "(() => { const target=Number(idleon.getAttr(\"Holes\")[11][61]); const owned=Number(idleon.getAttr(\"Holes\")[1][4])>=1; const accessible=3<idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0); const neighbor=idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 43, 0)===1 && Math.abs(3-target)===1; return owned && accessible && (3===target || neighbor) ? idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0) : 0; })()",
+      "description": "Study 3 target, immediate neighbor, or inactive progress/hour."
+    },
+    {
+      "label": "study_requirement_4",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 4, 0)",
+      "description": "Study 4 next requirement."
+    },
+    {
+      "label": "study_ready_4",
+      "expression": "4 < idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0) && Number(idleon.getAttr(\"Holes\")[27][4]) >= idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 4, 0)",
+      "description": "Study 4 claim readiness without changing saved progress."
+    },
+    {
+      "label": "study_effects_4",
+      "expression": "({\"random-bonus-levels-every-twentieth-ring\": (idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 4, 0))})",
+      "description": "The Bell Study extra levels for a random bonus every twentieth ring. Owned effects only; not complete cavern permission."
+    },
+    {
+      "label": "study_progress_rate_4",
+      "expression": "(() => { const target=Number(idleon.getAttr(\"Holes\")[11][61]); const owned=Number(idleon.getAttr(\"Holes\")[1][4])>=1; const accessible=4<idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0); const neighbor=idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 43, 0)===1 && Math.abs(4-target)===1; return owned && accessible && (4===target || neighbor) ? idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0) : 0; })()",
+      "description": "Study 4 target, immediate neighbor, or inactive progress/hour."
+    },
+    {
+      "label": "study_requirement_5",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 5, 0)",
+      "description": "Study 5 next requirement."
+    },
+    {
+      "label": "study_ready_5",
+      "expression": "5 < idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0) && Number(idleon.getAttr(\"Holes\")[27][5]) >= idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 5, 0)",
+      "description": "Study 5 claim readiness without changing saved progress."
+    },
+    {
+      "label": "study_effects_5",
+      "expression": "({\"string-experience\": (1 + Number((idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 5, 99) === 1))),\"exceptional-string-experience-chance\": ((idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 5, 99) === 1) ? 1 : 0),\"exceptional-string-experience\": ((idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 5, 99) === 1) ? 1 + idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 5, 0) : 1)})",
+      "description": "The Harp Study string EXP multiplier (2 when owned, otherwise 1), exceptional EXP chance, and exceptional EXP multiplier. Exceptional EXP chance is 1% when owned, otherwise 0%. Owned effects only; not complete cavern permission."
+    },
+    {
+      "label": "study_progress_rate_5",
+      "expression": "(() => { const target=Number(idleon.getAttr(\"Holes\")[11][61]); const owned=Number(idleon.getAttr(\"Holes\")[1][4])>=1; const accessible=5<idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0); const neighbor=idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 43, 0)===1 && Math.abs(5-target)===1; return owned && accessible && (5===target || neighbor) ? idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0) : 0; })()",
+      "description": "Study 5 target, immediate neighbor, or inactive progress/hour."
+    },
+    {
+      "label": "study_requirement_6",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 6, 0)",
+      "description": "Study 6 next requirement."
+    },
+    {
+      "label": "study_ready_6",
+      "expression": "6 < idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0) && Number(idleon.getAttr(\"Holes\")[27][6]) >= idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 6, 0)",
+      "description": "Study 6 claim readiness without changing saved progress."
+    },
+    {
+      "label": "study_effects_6",
+      "expression": "({\"additional-daily-wishes\": (idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 6, 0))})",
+      "description": "The Lamp Study additional daily wishes. Owned effects only; not complete cavern permission."
+    },
+    {
+      "label": "study_progress_rate_6",
+      "expression": "(() => { const target=Number(idleon.getAttr(\"Holes\")[11][61]); const owned=Number(idleon.getAttr(\"Holes\")[1][4])>=1; const accessible=6<idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0); const neighbor=idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 43, 0)===1 && Math.abs(6-target)===1; return owned && accessible && (6===target || neighbor) ? idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0) : 0; })()",
+      "description": "Study 6 target, immediate neighbor, or inactive progress/hour."
+    },
+    {
+      "label": "study_requirement_7",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 7, 0)",
+      "description": "Study 7 next requirement."
+    },
+    {
+      "label": "study_ready_7",
+      "expression": "7 < idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0) && Number(idleon.getAttr(\"Holes\")[27][7]) >= idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 7, 0)",
+      "description": "Study 7 claim readiness without changing saved progress."
+    },
+    {
+      "label": "study_effects_7",
+      "expression": "({\"skilling-requirement-divisor-contribution-per-layer\": (idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 7, 0)),\"skilling-requirement-divisor-contribution\": (idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 7, 0) * Number(idleon.getAttr(\"Holes\")[11][3]))})",
+      "description": "The Hive Study contribution per harvested layer and total contribution to other skilling cavern resource requirement divisors. Study and collectible contributions form denominator 1 + sum / 100, not a literal percentage reduction. Owned effects only; not complete cavern permission."
+    },
+    {
+      "label": "study_progress_rate_7",
+      "expression": "(() => { const target=Number(idleon.getAttr(\"Holes\")[11][61]); const owned=Number(idleon.getAttr(\"Holes\")[1][4])>=1; const accessible=7<idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0); const neighbor=idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 43, 0)===1 && Math.abs(7-target)===1; return owned && accessible && (7===target || neighbor) ? idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0) : 0; })()",
+      "description": "Study 7 target, immediate neighbor, or inactive progress/hour."
+    },
+    {
+      "label": "study_requirement_8",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 8, 0)",
+      "description": "Study 8 next requirement."
+    },
+    {
+      "label": "study_ready_8",
+      "expression": "8 < idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0) && Number(idleon.getAttr(\"Holes\")[27][8]) >= idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 8, 0)",
+      "description": "Study 8 claim readiness without changing saved progress."
+    },
+    {
+      "label": "study_effects_8",
+      "expression": "({\"credited-gloomie-kills\": (1 + idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 8, 0) / 100)})",
+      "description": "Grotto Study multiplier for credited Gloomie kills toward challenging the Monarch. Owned effects only; not complete cavern permission."
+    },
+    {
+      "label": "study_progress_rate_8",
+      "expression": "(() => { const target=Number(idleon.getAttr(\"Holes\")[11][61]); const owned=Number(idleon.getAttr(\"Holes\")[1][4])>=1; const accessible=8<idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0); const neighbor=idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 43, 0)===1 && Math.abs(8-target)===1; return owned && accessible && (8===target || neighbor) ? idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0) : 0; })()",
+      "description": "Study 8 target, immediate neighbor, or inactive progress/hour."
+    },
+    {
+      "label": "study_requirement_9",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 9, 0)",
+      "description": "Study 9 next requirement."
+    },
+    {
+      "label": "study_ready_9",
+      "expression": "9 < idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0) && Number(idleon.getAttr(\"Holes\")[27][9]) >= idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 9, 0)",
+      "description": "Study 9 claim readiness without changing saved progress."
+    },
+    {
+      "label": "study_effects_9",
+      "expression": "({\"additional-linear-reward-days\": ((idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 9, 99) === 1) ? 14 : 0),\"opal-reward-chance\": (1 + idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 9, 0) / 100)})",
+      "description": "Justice Study additional linear reward-growth days (14 when owned, otherwise 0) and Opal reward chance multiplier. Owned effects only; not complete cavern permission."
+    },
+    {
+      "label": "study_progress_rate_9",
+      "expression": "(() => { const target=Number(idleon.getAttr(\"Holes\")[11][61]); const owned=Number(idleon.getAttr(\"Holes\")[1][4])>=1; const accessible=9<idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0); const neighbor=idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 43, 0)===1 && Math.abs(9-target)===1; return owned && accessible && (9===target || neighbor) ? idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0) : 0; })()",
+      "description": "Study 9 target, immediate neighbor, or inactive progress/hour."
+    },
+    {
+      "label": "study_requirement_10",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 10, 0)",
+      "description": "Study 10 next requirement."
+    },
+    {
+      "label": "study_ready_10",
+      "expression": "10 < idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0) && Number(idleon.getAttr(\"Holes\")[27][10]) >= idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 10, 0)",
+      "description": "Study 10 claim readiness without changing saved progress."
+    },
+    {
+      "label": "study_effects_10",
+      "expression": "({\"choose-enchantment-target\": ((idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 10, 99) === 1)),\"enchantment-chance\": (1 + idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 10, 0) / 100)})",
+      "description": "The Jars Study owned rule to choose a preferred collectible enchantment target and enchantment chance multiplier. Target preference does not guarantee selection. Owned effects only; not complete cavern permission."
+    },
+    {
+      "label": "study_progress_rate_10",
+      "expression": "(() => { const target=Number(idleon.getAttr(\"Holes\")[11][61]); const owned=Number(idleon.getAttr(\"Holes\")[1][4])>=1; const accessible=10<idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0); const neighbor=idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 43, 0)===1 && Math.abs(10-target)===1; return owned && accessible && (10===target || neighbor) ? idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0) : 0; })()",
+      "description": "Study 10 target, immediate neighbor, or inactive progress/hour."
+    },
+    {
+      "label": "study_requirement_11",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 11, 0)",
+      "description": "Study 11 next requirement."
+    },
+    {
+      "label": "study_ready_11",
+      "expression": "11 < idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0) && Number(idleon.getAttr(\"Holes\")[27][11]) >= idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 11, 0)",
+      "description": "Study 11 claim readiness without changing saved progress."
+    },
+    {
+      "label": "study_effects_11",
+      "expression": "({\"skilling-requirement-divisor-contribution-per-layer\": (idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 11, 0)),\"skilling-requirement-divisor-contribution\": (idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 11, 0) * Number(idleon.getAttr(\"Holes\")[11][5]))})",
+      "description": "Evertree Study contribution per whittled trunk and total contribution to other skilling cavern resource requirement divisors. Study and collectible contributions form denominator 1 + sum / 100, not a literal percentage reduction. Owned effects only; not complete cavern permission."
+    },
+    {
+      "label": "study_progress_rate_11",
+      "expression": "(() => { const target=Number(idleon.getAttr(\"Holes\")[11][61]); const owned=Number(idleon.getAttr(\"Holes\")[1][4])>=1; const accessible=11<idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0); const neighbor=idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 43, 0)===1 && Math.abs(11-target)===1; return owned && accessible && (11===target || neighbor) ? idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0) : 0; })()",
+      "description": "Study 11 target, immediate neighbor, or inactive progress/hour."
+    },
+    {
+      "label": "study_requirement_12",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 12, 0)",
+      "description": "Study 12 next requirement."
+    },
+    {
+      "label": "study_ready_12",
+      "expression": "12 < idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0) && Number(idleon.getAttr(\"Holes\")[27][12]) >= idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 12, 0)",
+      "description": "Study 12 claim readiness without changing saved progress."
+    },
+    {
+      "label": "study_effects_12",
+      "expression": "({\"instamatch-when-round-ends-with-none\": ((idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 12, 99) === 1)),\"additional-starting-attempts\": (idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 12, 0))})",
+      "description": "Wisdom Study additional normal-story starting attempts and owned rule to grant an instamatch when a round ends with none. The caller also requires normal-story instamatch capacity of at least one. Owned effects only; not complete cavern permission."
+    },
+    {
+      "label": "study_progress_rate_12",
+      "expression": "(() => { const target=Number(idleon.getAttr(\"Holes\")[11][61]); const owned=Number(idleon.getAttr(\"Holes\")[1][4])>=1; const accessible=12<idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0); const neighbor=idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 43, 0)===1 && Math.abs(12-target)===1; return owned && accessible && (12===target || neighbor) ? idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0) : 0; })()",
+      "description": "Study 12 target, immediate neighbor, or inactive progress/hour."
+    },
+    {
+      "label": "study_requirement_13",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 13, 0)",
+      "description": "Study 13 next requirement."
+    },
+    {
+      "label": "study_ready_13",
+      "expression": "13 < idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0) && Number(idleon.getAttr(\"Holes\")[27][13]) >= idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 13, 0)",
+      "description": "Study 13 claim readiness without changing saved progress."
+    },
+    {
+      "label": "study_effects_13",
+      "expression": "({\"total-gambit-points\": (idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 13, 0)),\"preserve-daily-attempt-chance\": ((idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 13, 99) === 1) ? 50 : 0)})",
+      "description": "Gambit Study percentage bonus to total points and chance to preserve the daily attempt when starting (50% when owned, otherwise 0%). Owned effects only; not complete cavern permission."
+    },
+    {
+      "label": "study_progress_rate_13",
+      "expression": "(() => { const target=Number(idleon.getAttr(\"Holes\")[11][61]); const owned=Number(idleon.getAttr(\"Holes\")[1][4])>=1; const accessible=13<idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0); const neighbor=idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 43, 0)===1 && Math.abs(13-target)===1; return owned && accessible && (13===target || neighbor) ? idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0) : 0; })()",
+      "description": "Study 13 target, immediate neighbor, or inactive progress/hour."
+    },
+    {
+      "label": "study_requirement_14",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 14, 0)",
+      "description": "Study 14 next requirement."
+    },
+    {
+      "label": "study_ready_14",
+      "expression": "14 < idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0) && Number(idleon.getAttr(\"Holes\")[27][14]) >= idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 14, 0)",
+      "description": "Study 14 claim readiness without changing saved progress."
+    },
+    {
+      "label": "study_effects_14",
+      "expression": "({\"additional-double-torch-chance\": (idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 14, 0))})",
+      "description": "Temple Study additional chance to receive double torches on pickup. Owned effects only; not complete cavern permission."
+    },
+    {
+      "label": "study_progress_rate_14",
+      "expression": "(() => { const target=Number(idleon.getAttr(\"Holes\")[11][61]); const owned=Number(idleon.getAttr(\"Holes\")[1][4])>=1; const accessible=14<idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0); const neighbor=idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 43, 0)===1 && Math.abs(14-target)===1; return owned && accessible && (14===target || neighbor) ? idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0) : 0; })()",
+      "description": "Study 14 target, immediate neighbor, or inactive progress/hour."
+    },
+    {
+      "label": "study_requirement_15",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 15, 0)",
+      "description": "Study 15 next requirement."
+    },
+    {
+      "label": "study_ready_15",
+      "expression": "15 < idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0) && Number(idleon.getAttr(\"Holes\")[27][15]) >= idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 15, 0)",
+      "description": "Study 15 claim readiness without changing saved progress."
+    },
+    {
+      "label": "study_effects_15",
+      "expression": "({\"owned-repeat-marbleization-rule\": ((idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 15, 99) === 1)),\"marble-production\": (1 + idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 15, 0) / 100)})",
+      "description": "Fountain Study marble production multiplier and owned repeat-marbleization rule. This rule does not establish cavern permission; the delivered permission caller checks upgrade exclusions without a Study gate."
+    },
+    {
+      "label": "study_progress_rate_15",
+      "expression": "(() => { const target=Number(idleon.getAttr(\"Holes\")[11][61]); const owned=Number(idleon.getAttr(\"Holes\")[1][4])>=1; const accessible=15<idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0); const neighbor=idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 43, 0)===1 && Math.abs(15-target)===1; return owned && accessible && (15===target || neighbor) ? idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0) : 0; })()",
+      "description": "Study 15 target, immediate neighbor, or inactive progress/hour."
+    },
+    {
+      "label": "study_requirement_16",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 16, 0)",
+      "description": "Study 16 next requirement."
+    },
+    {
+      "label": "study_ready_16",
+      "expression": "16 < idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0) && Number(idleon.getAttr(\"Holes\")[27][16]) >= idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 16, 0)",
+      "description": "Study 16 claim readiness without changing saved progress."
+    },
+    {
+      "label": "study_effects_16",
+      "expression": "({\"skilling-requirement-divisor-contribution-per-layer\": (idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 16, 0)),\"skilling-requirement-divisor-contribution\": (idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 16, 0) * Number(idleon.getAttr(\"Holes\")[11][7]))})",
+      "description": "Trench Study contribution per completed depth and total contribution to other skilling cavern resource requirement divisors. Study and collectible contributions form denominator 1 + sum / 100, not a literal percentage reduction. Owned effects only; not complete cavern permission."
+    },
+    {
+      "label": "study_progress_rate_16",
+      "expression": "(() => { const target=Number(idleon.getAttr(\"Holes\")[11][61]); const owned=Number(idleon.getAttr(\"Holes\")[1][4])>=1; const accessible=16<idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0); const neighbor=idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 43, 0)===1 && Math.abs(16-target)===1; return owned && accessible && (16===target || neighbor) ? idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0) : 0; })()",
+      "description": "Study 16 target, immediate neighbor, or inactive progress/hour."
+    },
+    {
+      "label": "study_requirement_17",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 17, 0)",
+      "description": "Study 17 next requirement."
+    },
+    {
+      "label": "study_ready_17",
+      "expression": "17 < idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0) && Number(idleon.getAttr(\"Holes\")[27][17]) >= idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 17, 0)",
+      "description": "Study 17 claim readiness without changing saved progress."
+    },
+    {
+      "label": "study_effects_17",
+      "expression": "({\"daily-discounted-upgrades\": (idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 17, 0)),\"discounted-upgrade-cost\": ((idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 17, 99) === 1) ? 0.85 : 1),\"current-upgrade-cost\": (Number(idleon.getAttr(\"OptionsListAccount\")[604]) < idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 17, 0) ? 0.85 : 1)})",
+      "description": "The Cove Study daily discounted upgrade count, owned discount cost multiplier (0.85, otherwise 1), and current cost multiplier. Current cost uses 0.85 while purchases today remain below the discounted count, otherwise 1. The counter limits discounts, not daily purchases. Owned effects only; not complete cavern permission."
+    },
+    {
+      "label": "study_progress_rate_17",
+      "expression": "(() => { const target=Number(idleon.getAttr(\"Holes\")[11][61]); const owned=Number(idleon.getAttr(\"Holes\")[1][4])>=1; const accessible=17<idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0); const neighbor=idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 43, 0)===1 && Math.abs(17-target)===1; return owned && accessible && (17===target || neighbor) ? idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0) : 0; })()",
+      "description": "Study 17 target, immediate neighbor, or inactive progress/hour."
+    }
+  ]
+}

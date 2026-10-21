@@ -1,3 +1,5 @@
+import { ImageData } from "../imageData";
+import { notateNumber } from "../../utility";
 import { Domain, RawData } from "../base/domain";
 import { BigFishBonusBase, initBigFishBonusRepo } from "../data/BigFishBonusRepo";
 import { Item } from "../items";
@@ -9,6 +11,19 @@ export class BigFishBonus {
     unlocked: boolean = false;
 
     constructor(public index: number, public data: BigFishBonusModel) {}
+
+    getImageData(): ImageData {
+        return { location: "W7_fishUI", width: 311, height: 278 };
+    }
+
+    getImageCrop(): { x: number; y: number; width: number; height: number } {
+        return {
+            x: 14 + 57 * (this.index % 5),
+            y: 30 + 54 * Math.floor(this.index / 5),
+            width: 53,
+            height: 52
+        };
+    }
     
     static fromBase(data : BigFishBonusBase[]) {
         return data.map(d => new BigFishBonus(d.index, d.data));
@@ -27,7 +42,7 @@ export class BigFishBonus {
     getBonusText(): string {
         const bonus = this.getBonus();
 
-        return this.data.desc.replace("{", bonus.toString()).replace("}", (1 + bonus / 100).toString());
+        return this.data.desc.replace("{", notateNumber(bonus, "MultiplierInfo").replace("#", "")).replace("}", notateNumber(1 + bonus / 100, "MultiplierInfo").replace("#", ""));
     }
 
     getUnlockLevelRequired(): number {
@@ -37,6 +52,7 @@ export class BigFishBonus {
 
 export class BigFish extends Domain {
     bonuses: BigFishBonus[] = [];
+    familyLevel: number = 0;
 
     getRawKeys(): RawData[] {
         return [
@@ -78,6 +94,7 @@ export const updateBigFishUnlocked = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
 
     const totalPlayersLevels = players.reduce((sum, player) => sum + player.level, 0);
+    bigFish.familyLevel = totalPlayersLevels;
 
     bigFish.bonuses.forEach(bonus => {
         bonus.unlocked = totalPlayersLevels > bonus.getUnlockLevelRequired();

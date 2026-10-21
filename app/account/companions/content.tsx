@@ -93,8 +93,9 @@ function CompanionDisplay() {
                         .forEach((companion) => {
                             if (!companion.real) {
                                 companion.owned = true;
-                                companion.level = 2;
                             }
+                            // Set all companions to level 2 regardless of whether they are owned or not.
+                            companion.level = 2;
                         });
                     setCompanionRevision((revision) => revision + 1);
                 }} />}

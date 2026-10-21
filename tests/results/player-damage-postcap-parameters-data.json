@@ -1,0 +1,57 @@
+{
+  "extractions": {
+    "player_damage_postcap_crystal6_card_level": {
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"Crystal6\")",
+      "result": 1
+    },
+    "player_damage_postcap_meritocracy_5": {
+      "expression": "idleon.callFunction(\"Summoning2\", \"MeritocBonusz\", 5, 0)",
+      "result": 0
+    },
+    "player_damage_postcap_tome_6": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 6, 0)",
+      "result": 0
+    },
+    "player_damage_postcap_achievement_371": {
+      "expression": "idleon.callFunction(\"AchieveStatus\", 371)",
+      "result": 1
+    },
+    "player_damage_postcap_achievement_384": {
+      "expression": "idleon.callFunction(\"AchieveStatus\", 384)",
+      "result": 1
+    },
+    "player_damage_postcap_card_96": {
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 96)",
+      "result": 0
+    },
+    "player_damage_postcap_companion_12": {
+      "expression": "idleon.callFunction(\"Companions\", 12)",
+      "result": 14
+    },
+    "player_damage_postcap_companion_33": {
+      "expression": "idleon.callFunction(\"Companions\", 33)",
+      "result": 1.5
+    },
+    "player_damage_postcap_companion_160": {
+      "expression": "idleon.callFunction(\"Companions\", 160)",
+      "result": 1
+    },
+    "player_damage_postcap_companion_168": {
+      "expression": "idleon.callFunction(\"Companions\", 168)",
+      "result": 1.5
+    },
+    "player_damage_postcap_companion_170": {
+      "expression": "idleon.callFunction(\"Companions\", 170)",
+      "result": 0.35
+    },
+    "player_damage_postcap_superbit_64": {
+      "expression": "idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 64, 0)",
+      "result": 0
+    },
+    "player_damage_postcap_option_232": {
+      "expression": "Number(idleon.engine.getGameAttribute(\"OptionsListAccount\")[232])",
+      "result": 6
+    }
+  },
+  "errors": {}
+}

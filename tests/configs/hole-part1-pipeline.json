@@ -1,0 +1,61 @@
+{
+  "description": "Extract Normal fresh and repeated Hole pipeline consumers from the genuine active character and paired save.",
+  "target": "Normal fresh and repeated Hole pipeline consumers",
+  "extractions": [
+    {
+      "label": "active_context",
+      "expression": "({ playerId: idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0]), playerName: idleon.getAttr('UserInfo')[0], playerNames: idleon.getAttr('GetPlayersUsernames'), version: idleon.getAttr('DoOnceREAL') })",
+      "description": "Capture real active character identity and version; do not switch or synthesize a context."
+    },
+    {
+      "label": "paired_hole_inputs",
+      "expression": "({ levels: idleon.getAttr(\"Holes\")[1].slice(0,5), exp: idleon.getAttr(\"Holes\")[2].slice(0,5), investments: idleon.getAttr(\"Holes\")[3].slice(0,8), purchased: idleon.getAttr(\"Holes\")[23].slice(0,5), studyLevels: idleon.getAttr(\"Holes\")[26].slice(0,18), studyProgress: idleon.getAttr(\"Holes\")[27].slice(0,18), target: idleon.getAttr(\"Holes\")[11][61], cavernOpals: idleon.getAttr(\"Holes\")[7], lanternUses: idleon.getAttr(\"Holes\")[11][84], wishes: idleon.getAttr(\"Holes\")[11][25], layers: [idleon.getAttr(\"Holes\")[11][1],idleon.getAttr(\"Holes\")[11][3],idleon.getAttr(\"Holes\")[11][5],idleon.getAttr(\"Holes\")[11][7]], covePurchases: idleon.getAttr('OptionsListAccount')[604] })",
+      "description": "Saved inputs directly used by part 1; runtime counter mismatches remain failures."
+    },
+    {
+      "label": "pipeline_schematic_14",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 14, 0)",
+      "description": "Sediment expansion schematic with early Study 0 contribution."
+    },
+    {
+      "label": "pipeline_gambit_multiplier",
+      "expression": "idleon.callFunction(\"Holes2\", \"GambitPTSmulti\", 0, 0)",
+      "description": "Gambit multiplier with prepared Study 13 contribution."
+    },
+    {
+      "label": "pipeline_gambit_points",
+      "expression": "idleon.callFunction(\"Holes2\", \"GambitPts\", 777, 0)",
+      "description": "Current total Gambit points after Study integration."
+    },
+    {
+      "label": "pipeline_tome_93",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 93, 0)",
+      "description": "Tome Hole Opal line score; consumes cavern-only credited total."
+    },
+    {
+      "label": "growth_0",
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 0, 0)",
+      "description": "Current villager 0 EXP/hour in the captured character context."
+    },
+    {
+      "label": "growth_1",
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 1, 0)",
+      "description": "Current villager 1 EXP/hour in the captured character context."
+    },
+    {
+      "label": "growth_2",
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 2, 0)",
+      "description": "Current villager 2 EXP/hour in the captured character context."
+    },
+    {
+      "label": "growth_3",
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 3, 0)",
+      "description": "Current villager 3 EXP/hour in the captured character context."
+    },
+    {
+      "label": "growth_4",
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 4, 0)",
+      "description": "Current villager 4 EXP/hour in the captured character context."
+    }
+  ]
+}

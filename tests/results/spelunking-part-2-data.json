@@ -1,0 +1,227 @@
+{
+  "extractions": {
+    "chapter_bonus_matrix": {
+      "expression": "(() => { const chapters = idleon.getAttr(\"CustomLists\").h.SpelunkChapters; return chapters.map((row, chapter) => row.map((_, bonus) => idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\", chapter, bonus))); })()",
+      "result": [
+        [
+          3262.5,
+          79.86447241045498,
+          2.0428015564202333
+        ],
+        [
+          2675,
+          20.095168374816982,
+          3.499099909990999,
+          2.5
+        ],
+        [
+          4.522263450834879,
+          10.670731707317074,
+          0
+        ],
+        [
+          6.481481481481481,
+          18.917963224893917,
+          0.16144814090019569,
+          0
+        ],
+        [
+          9.172354948805461,
+          0,
+          0
+        ],
+        [
+          0.4144422590615341,
+          0.14910536779324055,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    "daily_reads_limit": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"MaxDailyPageReads\",0,0)",
+      "result": 8
+    },
+    "stamina_recharge_hourly": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
+      "result": 285.2017063389306
+    },
+    "stamina_max_player_0": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",0,0)",
+      "result": 2240
+    },
+    "stamina_max_player_1": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",1,0)",
+      "result": 2986
+    },
+    "stamina_max_player_2": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",2,0)",
+      "result": 3453
+    },
+    "stamina_max_player_3": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",3,0)",
+      "result": 2801
+    },
+    "stamina_max_player_4": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",4,0)",
+      "result": 3370
+    },
+    "stamina_max_player_5": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",5,0)",
+      "result": 2992
+    },
+    "stamina_max_player_6": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",6,0)",
+      "result": 3549
+    },
+    "stamina_max_player_7": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",7,0)",
+      "result": 2889
+    },
+    "stamina_max_player_8": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",8,0)",
+      "result": 2989
+    },
+    "stamina_max_player_9": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",9,0)",
+      "result": 3275
+    },
+    "stamina_max_player_10": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",10,0)",
+      "result": 2701
+    },
+    "artifact_35": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Sailing(\"ArtifactBonus\",35,0)",
+      "result": 150
+    },
+    "upgrade_4_raw": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ShopUpgBonus\",4,1)",
+      "result": 50
+    },
+    "upgrade_5_raw": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ShopUpgBonus\",5,1)",
+      "result": 95
+    },
+    "upgrade_61_raw": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ShopUpgBonus\",61,1)",
+      "result": 0
+    },
+    "upgrade_61_effective": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ShopUpgBonus\",61,0)",
+      "result": 0
+    },
+    "merit_50_stamina_additive": {
+      "expression": "20*idleon.getAttr(\"Tasks\")[2][6][2]",
+      "result": 20
+    },
+    "companion_148": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Companions(148)",
+      "result": 50
+    },
+    "mastery_stamina_indicator": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_RiftStuff(\"RiftSkillBonus,18\",3)",
+      "result": 1
+    },
+    "mastery_daily_reads_indicator": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_RiftStuff(\"RiftSkillBonus,18\",4)",
+      "result": 1
+    },
+    "mastery_recharge_indicator": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_RiftStuff(\"RiftSkillBonus,18\",5)",
+      "result": 1
+    },
+    "mastery_stamina_effect": {
+      "expression": "15*idleon.allScripts.ActorEvents_579._customBlock_RiftStuff(\"RiftSkillBonus,18\",3)",
+      "result": 15
+    },
+    "mastery_daily_reads_effect": {
+      "expression": "3*idleon.allScripts.ActorEvents_579._customBlock_RiftStuff(\"RiftSkillBonus,18\",4)",
+      "result": 3
+    },
+    "mastery_recharge_effect": {
+      "expression": "10*idleon.allScripts.ActorEvents_579._customBlock_RiftStuff(\"RiftSkillBonus,18\",5)",
+      "result": 10
+    },
+    "talent_236_player_0": {
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,0)",
+      "result": 0
+    },
+    "talent_236_player_3": {
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,3)",
+      "result": 0.796812749003984
+    },
+    "talent_236_player_1": {
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,1)",
+      "result": 0
+    },
+    "talent_236_player_2": {
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,2)",
+      "result": 0
+    },
+    "talent_236_player_4": {
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,4)",
+      "result": 0
+    },
+    "talent_236_player_5": {
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,5)",
+      "result": 0
+    },
+    "talent_236_player_6": {
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,6)",
+      "result": 0
+    },
+    "talent_236_player_7": {
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,7)",
+      "result": 0
+    },
+    "talent_236_player_8": {
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,8)",
+      "result": 0
+    },
+    "talent_236_player_9": {
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,9)",
+      "result": 0
+    },
+    "talent_236_player_10": {
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,10)",
+      "result": 0
+    },
+    "talent_236_best": {
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,-1)",
+      "result": 0.796812749003984
+    },
+    "big_fish_advice_1": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"BigFishBonuses\",1,0)",
+      "result": 4.208530805687204
+    },
+    "meritocracy_17": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Summoning2(\"MeritocBonusz\",17,0)",
+      "result": 1000
+    },
+    "legend_talent_30": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Thingies(\"LegendPTS_bonus\",30,0)",
+      "result": 75
+    },
+    "royal_outpost_category_2": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_RoyalG(\"OutpostROGbon\",2,0)",
+      "result": 1
+    },
+    "sushi_11": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_SushiStuff(\"RoG_BonusQTY\",11,0)",
+      "result": 25
+    },
+    "bubble_Y11": {
+      "expression": "idleon.getAttr(\"DNSM\").h.AlchBubbles.h.Y11",
+      "result": 19.380037197768132
+    },
+    "native_card_w7a10": {
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"CardLv\",\"w7a10\")",
+      "result": 1
+    }
+  },
+  "errors": {}
+}

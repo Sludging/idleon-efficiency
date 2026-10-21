@@ -1,17 +1,20 @@
 import { nFormatter } from "../../utility";
 import { Domain, RawData } from "../base/domain";
 import { EquipmentSetsBase, initEquipmentSetsRepo } from "../data/EquipmentSetsRepo";
+import { ImageData } from "../imageData";
 import { Item } from "../items";
 import { EquipmentSetsModel } from "../model/equipmentSetsModel";
-import { Player } from "../player";
 
 export class EquipmentSet {
+
     unlocked: boolean = false;
-    constructor(public index: number, public data: EquipmentSetsModel) { }
+    constructor(public index: number, public data: EquipmentSetsModel, public imageData: ImageData) { }
+
+    getImageData = () => this.imageData;
 
     getDescription = () => {
         if (this.data.description.includes("x ")) {
-            return this.data.description.replace("x ", nFormatter(this.getBonus(), "MultiplierInfo"));
+            return this.data.description.replace("x ", `${nFormatter(this.getBonus(), "MultiplierInfo")}x `);
         }
         return this.data.description.replace("{", this.getBonus().toFixed(2));
     }
@@ -23,8 +26,23 @@ export class EquipmentSet {
         return this.data.bonusValue;
     }
 
-    static fromBase = (data: EquipmentSetsBase[]) => {
-        return data.map((equipmentSet, index) => new EquipmentSet(index, equipmentSet.data));
+
+    static fromBase = (data: EquipmentSetsBase[], allItems: Item[]) => {
+        const itemsByName = new Map(allItems.map(item => [item.internalName, item]));
+        return data.map((equipmentSet, index) => {
+            const itemName = [
+                ...equipmentSet.data.armors,
+                ...equipmentSet.data.weapons,
+                ...equipmentSet.data.tools,
+            ].find(name => name !== "none" && itemsByName.has(name));
+            const item = itemName ? itemsByName.get(itemName) : undefined;
+
+            if (!item) {
+                throw new Error(`No equipment image item found for ${equipmentSet.data.name}`);
+            }
+
+            return new EquipmentSet(index, equipmentSet.data, item.getImageData());
+        });
     }
 }
 
@@ -38,8 +56,8 @@ export class EquipmentSets extends Domain {
         return [];
     }
 
-    init(_allItems: Item[], _charCount: number) {
-        this.equipmentSets = EquipmentSet.fromBase(initEquipmentSetsRepo());
+    init(allItems: Item[], _charCount: number) {
+        this.equipmentSets = EquipmentSet.fromBase(initEquipmentSetsRepo(), allItems);
         return this;
     }
 
@@ -74,21 +92,14 @@ export class EquipmentSets extends Domain {
         }
     }
 
-    getSetBonus = (setName: string, player?: Player, raw: boolean = false) => {
+    getSetBonus = (setName: string, raw: boolean = false) => {
         const set = this.equipmentSets.find(set => set.data.name == setName);
 
         if (!set) {
             throw new Error(`Set ${setName} not found`);
         }
 
-        let active = false;
-        if (this.permanentlyActive && set.unlocked) {
-            active = true;
-        } else {
-            // TODO: Check if individual player has the set equipped.
-        }
-
-        if (active) {
+        if (set.unlocked) {
             return set.getBonus(raw);
         }
 

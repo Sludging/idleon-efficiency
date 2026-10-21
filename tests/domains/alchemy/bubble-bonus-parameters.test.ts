@@ -14,7 +14,10 @@ import {
  DailyDripBubble,
  DiamonChefBubble,
  ImpactedBySlabBubble,
+ ImpactedByTheTomeBubble,
 } from '../../../data/domain/world-2/alchemy/alchemy';
+import { Player } from '../../../data/domain/player';
+import { getTargetPlayer } from '../../utils/target-player';
 
 const saveName = 'latest';
 const extractionResultsName = 'bubble-bonus-data.json';
@@ -34,6 +37,23 @@ const getBubbleByName = (alchemy: Alchemy, name: string) => {
  }
  return bubble;
 };
+
+const getTomeBubble = (gameData: Map<string, any>): ImpactedByTheTomeBubble => {
+ const bubble = getBubbleByBonusKey(gameData.get('alchemy') as Alchemy, 'W8');
+ if (!(bubble instanceof ImpactedByTheTomeBubble)) {
+  throw new Error('Tome Strength bubble has the wrong domain type');
+ }
+ return bubble;
+};
+
+// These roots precede class, health, mana, and Tome scaling in the prepared bonuses.
+const selectedRawBubbles = [
+ { bonusKey: 'W7', extractionKey: 'raw_w7_bonus', description: 'Endgame Eff I' },
+ { bonusKey: 'A8', extractionKey: 'raw_a8_bonus', description: 'Endgame Eff II' },
+ { bonusKey: 'M7', extractionKey: 'raw_m7_bonus', description: 'Endgame Eff III' },
+ { bonusKey: 'MinEff', extractionKey: 'raw_min_eff_bonus', description: 'mining efficiency' },
+ { bonusKey: 'ChopEff', extractionKey: 'raw_chop_eff_bonus', description: 'chopping efficiency' },
+];
 
 const bubbleBonusParameterSpecs = {
  y13DirectBubbleBonus: {
@@ -131,6 +151,48 @@ const bubbleBonusParameterSpecs = {
    return slabBubble.lootyCount;
   }
  },
+
+ playerMaximumMP: {
+  description: 'Alchemy-preparation maximum MP consumed by chopping efficiency',
+  extractionKey: 'player_alchemy_max_mp',
+  domainExtractor: (gameData: Map<string, any>) => {
+   const player: Player = getTargetPlayer(gameData.get('players'));
+   return player.health.getAlchemyMaxMP();
+  },
+ },
+
+ playerMaximumHP: {
+  description: 'Alchemy-preparation maximum HP consumed by mining efficiency',
+  extractionKey: 'player_alchemy_max_hp',
+  domainExtractor: (gameData: Map<string, any>) => {
+   const player: Player = getTargetPlayer(gameData.get('players'));
+   return player.health.getAlchemyMaxHP();
+  },
+ },
+
+ highIQSixteenthBonus: {
+  description: 'High IQ cauldron 16th-bubble multiplier consumed by chopping efficiency',
+  extractionKey: 'high_iq_sixteenth_bonus',
+  domainExtractor: (gameData: Map<string, any>) => (gameData.get('alchemy') as Alchemy).cauldrons[CauldronIndex.HighIQ].bubbles[16].getBonus(),
+ },
+
+ tomeScore: {
+  description: 'prepared Tome completion score consumed by the Strength bubble',
+  extractionKey: 'w8_tome_score',
+  domainExtractor: (gameData: Map<string, any>) => getTomeBubble(gameData).theTomeTotalScore,
+ },
+
+ tomeGrimoireBonus: {
+  description: 'prepared Grimoire Tome percentage consumed by the Strength bubble',
+  extractionKey: 'w8_grimoire_bonus',
+  domainExtractor: (gameData: Map<string, any>) => getTomeBubble(gameData).grimoireTomeBonus,
+ },
+
+ tomeTrollSetBonus: {
+  description: 'prepared Troll set Tome percentage consumed by the Strength bubble',
+  extractionKey: 'w8_troll_set_bonus',
+  domainExtractor: (gameData: Map<string, any>) => getTomeBubble(gameData).trollSetTomeBonus,
+ },
 };
 
 describe('Alchemy Domain - Bubble Bonus Parameters', () => {
@@ -147,6 +209,14 @@ describe('Alchemy Domain - Bubble Bonus Parameters', () => {
   it(`validates ${spec.description}`, () => {
    const liveValue = getExtractedValue(extractionResults, spec.extractionKey);
    const domainValue = spec.domainExtractor(gameData);
+   expect(domainValue).toMatchLiveGame(liveValue, 0);
+  });
+ });
+
+ selectedRawBubbles.forEach(spec => {
+  it(`validates ${spec.description} raw bubble bonus before player scaling`, () => {
+   const liveValue = getExtractedValue(extractionResults, spec.extractionKey);
+   const domainValue = getBubbleByBonusKey(gameData.get('alchemy') as Alchemy, spec.bonusKey).getBonus();
    expect(domainValue).toMatchLiveGame(liveValue, 0);
   });
  });

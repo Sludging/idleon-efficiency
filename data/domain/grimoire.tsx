@@ -13,6 +13,7 @@ import { Arcade } from "./world-2/arcade";
 import { Lab } from "./world-4/lab";
 import { Emperor } from "./world-6/emperor";
 import { ClassIndex } from "./talents";
+import { MasterClasses } from "./masterClasses";
 
 // Damage efficiency calculator implementation
 class DamageEfficiencyCalculator implements EfficiencyCalculator<Grimoire> {
@@ -177,6 +178,8 @@ export class GrimoireUpgrade implements EfficiencyUpgrade {
     public bonus: number = 0;
     public cost: number = 0;
     public costToMax: number = 0;
+    public firstThreeUpgradeCostMultiplier: number = 1;
+    public sharedUpgradeCostMultiplier: number = 1;
 
     constructor(
         public id: number,
@@ -222,12 +225,14 @@ export class GrimoireUpgrade implements EfficiencyUpgrade {
 
     getCost = (_allUpgrades: EfficiencyUpgrade[]): number => {
         if (this.level >= this.data.max_level) {
+            // Capped upgrades have no actionable purchase price on the website.
             return 0;
         }
 
-        // Based on the game code: GrimoireUpgCost
-        // 3 * Math.pow(1.05, t) * (Grimoire[t] + (CustomLists.GrimoireUpg[t][1] + Grimoire[t]) * Math.pow(CustomLists.GrimoireUpg[t][2] + 0.01, Grimoire[t]))
+        // Both Master Classes discounts apply to every Grimoire upgrade, including rows after the first three.
         const baseCost = 3 * Math.pow(1.05, this.id) *
+            this.firstThreeUpgradeCostMultiplier *
+            this.sharedUpgradeCostMultiplier *
             (this.level + (this.data.base_cost + this.level) *
                 Math.pow(this.data.scaling_factor + 0.01, this.level));
 
@@ -298,6 +303,9 @@ export class GrimoireUpgrade implements EfficiencyUpgrade {
         copy.bonus = this.bonus;
         copy.cost = this.cost;
         copy.costToMax = this.costToMax;
+        // Engine quotes retain the prepared account discounts.
+        copy.firstThreeUpgradeCostMultiplier = this.firstThreeUpgradeCostMultiplier;
+        copy.sharedUpgradeCostMultiplier = this.sharedUpgradeCostMultiplier;
         return copy;
     }
 
@@ -341,6 +349,8 @@ export enum BoneType {
 export class Grimoire extends Domain implements EfficiencyDomain {
     upgrades: GrimoireUpgrade[] = [];
     totalGrimoireLevel: number = 0;
+    private firstThreeUpgradeCostMultiplier: number = 1;
+    private sharedUpgradeCostMultiplier: number = 1;
 
     // Bone counts
     resources: Record<BoneType, number> = {
@@ -435,8 +445,21 @@ export class Grimoire extends Domain implements EfficiencyDomain {
 
         // Then calculate all bonuses and costs
         grimoireUpgrades.forEach(upgrade => {
+            // Replace account inputs so repeated preparation cannot compound discounts.
+            upgrade.firstThreeUpgradeCostMultiplier = this.firstThreeUpgradeCostMultiplier;
+            upgrade.sharedUpgradeCostMultiplier = this.sharedUpgradeCostMultiplier;
             upgrade.bonus = upgrade.getBonus(grimoireUpgrades);
             upgrade.cost = upgrade.getCost(grimoireUpgrades);
+        });
+    }
+
+    updateUpgradeCosts(firstThreeMultiplier: number, sharedMultiplier: number): void {
+        this.firstThreeUpgradeCostMultiplier = firstThreeMultiplier;
+        this.sharedUpgradeCostMultiplier = sharedMultiplier;
+        this.recalculateUpgrades(this.upgrades);
+
+        this.upgrades.forEach(upgrade => {
+            upgrade.costToMax = upgrade.getCostToMax(this.upgrades);
         });
     }
 
@@ -582,6 +605,9 @@ export class Grimoire extends Domain implements EfficiencyDomain {
         tempGrimoire.emperorBonus1 = this.emperorBonus1;
         tempGrimoire.mainframeBonus121 = this.mainframeBonus121;
         tempGrimoire.etcBonus76 = this.etcBonus76;
+        // Copy account discounts before recalculation prepares the supplied upgrades.
+        tempGrimoire.firstThreeUpgradeCostMultiplier = this.firstThreeUpgradeCostMultiplier;
+        tempGrimoire.sharedUpgradeCostMultiplier = this.sharedUpgradeCostMultiplier;
         
         // Calculate total grimoire level for the temporary grimoire
         tempGrimoire.totalGrimoireLevel = upgrades.reduce((sum, upgrade) => sum + upgrade.level, 0);
@@ -855,23 +881,29 @@ export class Grimoire extends Domain implements EfficiencyDomain {
             grimoire.targetCounts[336] = optionList[336] || 0; // Annihilation target count
         }
 
-        // Pre-calculate bonus, cost and cost to max for each upgrade
+        // Prepare bonuses that depend only on parsed Grimoire levels.
         // We first need the bonuses for special upgrades that impact other upgrades (Writhing Grimoire)
         const writingGrimoireUpgrade = grimoire.upgrades[36];
         if (writingGrimoireUpgrade) {
             writingGrimoireUpgrade.bonus = writingGrimoireUpgrade.getBonus(grimoire.upgrades);
-            writingGrimoireUpgrade.cost = writingGrimoireUpgrade.getCost(grimoire.upgrades);
-            writingGrimoireUpgrade.costToMax = writingGrimoireUpgrade.getCostToMax(grimoire.upgrades);
         }
 
         // Then we can calculate the bonuses for the other upgrades
         grimoire.upgrades.forEach(upgrade => {
             upgrade.bonus = upgrade.getBonus(grimoire.upgrades);
-            upgrade.cost = upgrade.getCost(grimoire.upgrades);
-            upgrade.costToMax = upgrade.getCostToMax(grimoire.upgrades);
         });
     }
 } 
+
+export const updateGrimoireUpgradeCosts = (accountData: Map<string, unknown>): void => {
+    const grimoire = accountData.get("grimoire") as Grimoire;
+    const masterClasses = accountData.get("masterClasses") as MasterClasses;
+
+    grimoire.updateUpgradeCosts(
+        masterClasses.getFirstThreeUpgradeCostMultiplier(),
+        masterClasses.getUpgradeCostMultiplier(),
+    );
+};
 
 /**
  * Update function for grimoire efficiency calculations
@@ -885,54 +917,44 @@ export const updateGrimoireEfficiency = (accountData: Map<string, any>) => {
     const lab = accountData.get("lab") as Lab;
     const emperor = accountData.get("emperor") as Emperor;
 
-    if (grimoire && players) {
-        try {
-            // Find Death Bringer player (classId 11)
-            const deathBringer = players.slice().sort((player1, player2) => player1.level > player2.level ? -1 : 1).find((player: any) => player.classId === ClassIndex.Death_Bringer);
-            if (deathBringer) {
-                grimoire.bestDeathBringer = deathBringer;
+    try {
+        // Find Death Bringer player (classId 11)
+        const deathBringer = players.slice().sort((player1, player2) => player1.level > player2.level ? -1 : 1).find((player: any) => player.classId === ClassIndex.Death_Bringer);
+        if (deathBringer) {
+            grimoire.bestDeathBringer = deathBringer;
 
-                // Set ETC bonus 76 from Death Bringer equipment (EXTRA_BONES)
-                grimoire.etcBonus76 = deathBringer.getEquipmentBonus(EquipmentBonus.ExtraBones);
-            }
-
-            // Set pristine bonus 18 from sneaking
-            grimoire.pristineBonus18 = 0;
-            if (sneaking?.pristineCharms) {
-                const charm18 = sneaking.pristineCharms.find((charm: any) => charm.index === 18);
-                if (charm18?.unlocked) {
-                    grimoire.pristineBonus18 = charm18.getBonus();
-                }
-            }
-
-            // Set arcade bonus 40
-            grimoire.arcadeBonus40 = 0;
-            if (arcade?.bonuses && arcade.bonuses.length > 40) {
-                grimoire.arcadeBonus40 = arcade.bonuses[40]?.getBonus() || 0;
-            }
-
-            // Set mainframe bonus 121 from lab domain (Jewel 21 - Deadly Wrath Jewel)
-            grimoire.mainframeBonus121 = 0;
-            if (lab?.jewels && lab.jewels[21]) {
-                grimoire.mainframeBonus121 = lab.jewels[21].getBonus();
-            }
-
-            // Set emperor bonus 1 from emperor domain (Death Bringer Extra Bones)
-            grimoire.emperorBonus1 = 0;
-            if (emperor) {
-                const emperorDustBonus = emperor.emperorBonuses.find(bonus => bonus.index == 1)?.getBonus() ?? 0;
-                grimoire.emperorBonus1 = emperorDustBonus;
-            }
-
-            // PLACEHOLDER - need to implement later
-            grimoire.gambitBonus12 = 0; // From holes system
-
-            grimoire.calculateAllEfficiencies();
-        } catch (error) {
-            console.error("Failed to calculate grimoire efficiency:", error);
+            // Set ETC bonus 76 from Death Bringer equipment (EXTRA_BONES)
+            grimoire.etcBonus76 = deathBringer.gear.getBonus(EquipmentBonus.ExtraBones);
         }
-    } else {
-        console.error("Failed to calculate grimoire efficiency: grimoire or players is undefined");
+
+        // Set pristine bonus 18 from sneaking
+        grimoire.pristineBonus18 = 0;
+        const charm18 = sneaking.pristineCharms.find((charm: any) => charm.index === 18);
+        if (charm18?.unlocked) {
+            grimoire.pristineBonus18 = charm18.getBonus();
+        }
+
+        // Set arcade bonus 40
+        grimoire.arcadeBonus40 = 0;
+        if (arcade.bonuses.length > 40) {
+            grimoire.arcadeBonus40 = arcade.bonuses[40]?.getBonus() || 0;
+        }
+
+        // Set mainframe bonus 121 from lab domain (Jewel 21 - Deadly Wrath Jewel)
+        grimoire.mainframeBonus121 = 0;
+        if (lab.jewels[21]) {
+            grimoire.mainframeBonus121 = lab.jewels[21].getBonus();
+        }
+
+        // Set emperor bonus 1 from emperor domain (Death Bringer Extra Bones)
+        grimoire.emperorBonus1 = emperor.getEffectiveBonus(1);
+
+        // PLACEHOLDER - need to implement later
+        grimoire.gambitBonus12 = 0; // From holes system
+
+        grimoire.calculateAllEfficiencies();
+    } catch (error) {
+        console.error("Failed to calculate grimoire efficiency:", error);
     }
 
     return grimoire;

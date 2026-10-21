@@ -1,0 +1,16 @@
+{
+  "description": "Direct M2/M7 Alchemy Worship Power contributions for the retained target. Authoritative core oracle moved to player-powers.json bounded native replay.",
+  "target": "Worship Power direct Alchemy inputs",
+  "extractions": [
+    {
+      "label": "alchemy_worship_power_m2",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.M2",
+      "description": "Slabe Logsoul contribution used directly by the target character Worship Power"
+    },
+    {
+      "label": "alchemy_worship_power_m7",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.M7",
+      "description": "Endgame Eff Iii contribution used directly by the target character Worship Power"
+    }
+  ]
+}

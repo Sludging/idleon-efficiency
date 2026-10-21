@@ -1,6 +1,6 @@
-# Live Game Testing Infrastructure
+# Game Testing Infrastructure
 
-Testing approach that validates domain calculations against live game data extracted from running game.
+Testing approach that validates domain calculations against extracted game values. Use the [canonical game-access policy](helpers/README.md#game-access) to select the default offline server or justify live access.
 
 ## Automatic Domain Class Reference Report
 
@@ -31,5 +31,17 @@ The command also accepts the space-separated form, for example
 report with collapsed references and search; JSON is machine-readable.
 
 ## Documentation
+
+## Opt-in multi-account tests
+
+Routine `yarn test` and extraction use the regular save and matching results.
+Reuse the shared default offline server when ready. Public-account workflows
+are opt-in only when the user explicitly requests multi-account or
+public-profile validation; they are not routine prerequisites or fallbacks.
+See the [canonical game-access policy](helpers/README.md#game-access) and
+[helper documentation](helpers/README.md#integration-with-tests).
+Cached account snapshots and extraction runs stay under the ignored
+`.cache/test-accounts/` directory. Account calculation mismatches remain
+visible failures.
 
 See `docs/TESTING_IMPLEMENTATION.md` for comprehensive testing guide.

@@ -13,6 +13,8 @@ desktop smoke expectations; its linked product and visual context are sufficient
 - **Adding calculations for a page:** read both. A calculation used only by the UI still
   belongs with the relevant game feature's calculations.
 
+Before pattern discovery or comparison, follow the shared [research specialists rule](../../AGENTS.md#research-specialists).
+
 ## Choose before implementing
 
 1. Identify the relevant pattern and example. State which aspects apply, such as calculation

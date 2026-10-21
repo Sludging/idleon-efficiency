@@ -153,7 +153,7 @@ export class SushiStation extends Domain {
     nextDailyResetSeconds: number = 0;
     dailyKnowledgeEnabled: boolean = false;
     private bundleBonus: number = 0;
-    private bundleBanJ: number = 0;
+    bundleBanJ: number = 0;
     private research188: number = 0;
     private research189: number = 0;
     private jellyObstruction18: number = 0;
@@ -165,6 +165,8 @@ export class SushiStation extends Domain {
     private sailingArtifact39: number = 0;
     private upgradeLevels: number[] = [];
     private eventShop45: number = 0;
+    sushiDoublersOwned = 0;
+    sushiDoublersRemaining = 0;
 
     getRawKeys(): RawData[] {
         return [
@@ -479,10 +481,21 @@ export class SushiStation extends Domain {
         });
         this.sushi.forEach(sushi => { sushi.nextDailyResetSeconds = this.nextDailyResetSeconds; });
     }
+    prepareMenagerieDoublerSelections(menagerie: { isSushiUpgradeDoubled(index: number): boolean }): void {
+        this.upgrades.forEach(upgrade => {
+            upgrade.menagerieDoubled = menagerie.isSushiUpgradeDoubled(upgrade.index);
+        });
+    }
 }
 
 export const updateSushiStation = (data: Map<string, any>): SushiStation => {
     const station = data.get("sushi") as SushiStation;
+    const menagerie = data.get("menagerie") as {
+        getResourceBalances(): { sushiDoublersOwned: number; sushiDoublers: number };
+    };
+    const resources = menagerie.getResourceBalances();
+    station.sushiDoublersOwned = resources.sushiDoublersOwned;
+    station.sushiDoublersRemaining = resources.sushiDoublers;
     station.prepareCalculationInputs(data);
     return station;
 };

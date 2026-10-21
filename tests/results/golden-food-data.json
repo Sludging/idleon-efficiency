@@ -1,0 +1,45 @@
+{
+  "extractions": {
+    "golden_drop_rate_percent": {
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"DropRatez\")",
+      "result": 0
+    },
+    "golden_hp": {
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"MaxHPpct\")",
+      "result": 130.14874970560683
+    },
+    "golden_monster_cash": {
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"MonsterCash\")",
+      "result": 0
+    },
+    "golden_skill_exp": {
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"SkillExp\")",
+      "result": 15409.230013630004
+    },
+    "golden_all_stat_percent": {
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"AllStatz\")",
+      "result": 15856.25174669279
+    },
+    "golden_defence_percent": {
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"Defence\")",
+      "result": 25682.05002271667
+    },
+    "golden_base_accuracy": {
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"BaseAcc\")",
+      "result": 51364.10004543334
+    },
+    "golden_effectivity": {
+      "expression": "(function(){idleon.callFunction(\"GoldFoodBonuses\", \"MaxHPpct\");return idleon.getDNSM(\"GfoodBonusMULTI\")})()",
+      "result": 750.2017962574629
+    },
+    "death_bringer_candidate_0": {
+      "expression": "(() => { const i=0,p=idleon.getAttr(\"GetPlayersUsernames\")[i],d=idleon.getAttr(\"CustomLists\").h.TalentDescriptions[209][1],lv=idleon.getAttr(\"PlayerDATABASE\").h[p].h.SkillLevels[209]+idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLVz\",\"209|\"+i); return idleon.callFunction(\"ArbitraryCode5Inputs\",d[2],Number(d[0]),Number(d[1]),lv,0,0); })()",
+      "result": 1.452054794520548
+    },
+    "death_bringer_candidate_7": {
+      "expression": "(() => { const i=7,p=idleon.getAttr(\"GetPlayersUsernames\")[i],d=idleon.getAttr(\"CustomLists\").h.TalentDescriptions[209][1],lv=idleon.getAttr(\"PlayerDATABASE\").h[p].h.SkillLevels[209]+idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLVz\",\"209|\"+i); return idleon.callFunction(\"ArbitraryCode5Inputs\",d[2],Number(d[0]),Number(d[1]),lv,0,0); })()",
+      "result": 1.4211287988422576
+    }
+  },
+  "errors": {}
+}

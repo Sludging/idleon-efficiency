@@ -978,7 +978,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("Spelunking6", <DescItemModel>{
                 "internalName": "Spelunking6",
-                "displayName": "Chapter Seven 'FILLER'",
+                "displayName": "Chapter Seven 'Burning Crusade'",
                 "sellPrice": 70,
                 "typeGen": TypeGenEnum.bCraft,
                 "Type": "Spelunky Page",
@@ -19766,6 +19766,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentGown9", <ArmourItemModel>{
+                "internalName": "EquipmentGown9",
+                "displayName": "Celebration Gown",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aGown,
+                "Type": "Attire",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 25,
+                "STR": 15,
+                "AGI": 15,
+                "WIS": 15,
+                "LUK": 20,
+                "Defence": 20,
+                "miscUp1": "200% Bonus Drop Rate",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentKeychain0", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain0",
                 "displayName": "Simple Key Chain",
@@ -24067,6 +24088,14 @@ export const initSpecificItemRepo = () => {
                 "Type": "Currency",
                 "description": "Spend these in the Lil' Orblet Shop, opened by using the Royal Guardian talent! "
             }),
+        new BaseItemBase("CKsing", <DescItemModel>{
+                "internalName": "CKsing",
+                "displayName": "Singularity Spiral",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Currency",
+                "description": "Give these to the Coral Kid, he wants them real bad... "
+            }),
         new BaseItemBase("EquipmentSmithingTabs2", <DescItemModel>{
                 "internalName": "EquipmentSmithingTabs2",
                 "displayName": "Anvil Tab 2",
@@ -24621,7 +24650,15 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("WWcoin", <DescItemModel>{
                 "internalName": "WWcoin",
-                "displayName": "Commemorative Coin",
+                "displayName": "Medallion",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "You shouldnt be reading this... "
+            }),
+        new BaseItemBase("ArcBallOmega", <DescItemModel>{
+                "internalName": "ArcBallOmega",
+                "displayName": "Omega Arcade Ball",
                 "sellPrice": 50,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Dungeon Evaporate",
@@ -31303,6 +31340,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentNametagReplica43", <ArmourItemModel>{
+                "internalName": "EquipmentNametagReplica43",
+                "displayName": "Tome Immortal Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Replica Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "100% Best Ever",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentHats31", <ArmourItemModel>{
                 "internalName": "EquipmentHats31",
                 "displayName": "Smitty's Bubble Blowing Hat",
@@ -35051,12 +35109,19 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("CardsF51", <CardItemModel>{
                 "internalName": "CardsF51",
-                "displayName": "FILLER",
+                "displayName": "Burned Tunnel Card",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dCard,
                 "Type": "Card",
-                "cardData": undefined,
-                "dropChance": 1
+                "cardData": <CardDataModel>{
+                    "cardID": "F51",
+                    "category": "Hard Resources",
+                    "perTier": 4e+06,
+                    "effect": "+{% Spelunking EXP",
+                    "bonus": 30,
+                    "order": 36
+                },
+                "dropChance": 2e-07
             }),
         new BaseItemBase("CardsG1", <CardItemModel>{
                 "internalName": "CardsG1",
@@ -36140,8 +36205,8 @@ export const initSpecificItemRepo = () => {
                     "cardID": "J22",
                     "category": "Shimmerfin Deep",
                     "perTier": 3e+07,
-                    "effect": "+{% Drop Rate Multi",
-                    "bonus": 1,
+                    "effect": "+{% Lumi Hourly Gains (Passive)",
+                    "bonus": 5,
                     "order": 22
                 },
                 "dropChance": 1e-07

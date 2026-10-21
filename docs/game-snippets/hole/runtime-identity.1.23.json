@@ -1,0 +1,10 @@
+{
+  "server": "http://127.0.0.1:3204",
+  "source": "offline",
+  "status": {"server":"running","source":"offline","cdpConnected":true,"injected":true,"gameReady":true,"busy":false,"stage":"ready","character":3,"playerName":"Sludgev4","scene":"uAquaB10","sceneID":162},
+  "gameVersion": {"title":"Luminous_Menagerie","version":"1.23"},
+  "checkedAt": "2026-10-17",
+  "fixture": "tests/fixtures/saves/latest.json",
+  "fixtureSha256": "aab7f516047fc5b86096350e92864faeeccf303e9c72def20b51130507416555",
+  "loadedSameSaveProof": "unavailable: server status exposes character identity but no save hash or fixture provenance; startup handoff states server was started with latest.json and character 3"
+}

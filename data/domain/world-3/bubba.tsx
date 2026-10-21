@@ -1,4 +1,5 @@
 import { lavaLog, lavaLog2, range } from "../../utility";
+import { ImageData } from "../imageData";
 import { Domain, RawData } from "../base/domain";
 import { BubbaUpgradeBase, initBubbaUpgradeRepo } from "../data/BubbaUpgradeRepo";
 import { Item } from "../items";
@@ -9,11 +10,17 @@ import { BubbaGiftModel } from "../model/bubbaGiftModel";
 import { BubbaGiftBase, initBubbaGiftRepo } from "../data/BubbaGiftRepo";
 import { BubbaMegafleshBase, initBubbaMegafleshRepo } from "../data/BubbaMegafleshRepo";
 import { Companion, getCompanionActiveBonus } from "../companions";
+import { Minehead } from "../world-7/minehead";
+import { Menagerie } from "../menagerie";
 
 const SmokedMeatValues = [ 2, 3, 4, 6, 10 ];
 
 export class BubbaGlobalBonus {
     constructor(public index: number, public desc: string, public value: number) {}
+
+    getImageData(): ImageData {
+        return { location: `ClickerBubbaBonus${this.index}`, width: 24, height: 24 };
+    }
 
     static fromBase() {
         return [
@@ -102,7 +109,13 @@ export class Bubba extends Domain {
     // Not sure what it is, but is used for calculations
     someValue: number = 0;
 
+    mineheadBonus5: number = 0;
     companionBonus51: number = 0;
+    menagerieCostReduction: number = 1;
+
+    getCurrencyImageData(): ImageData {
+        return { location: "ClickerMeatCurrency", width: 72, height: 72 };
+    }
 
     getRawKeys(): RawData[] {
         return [
@@ -199,8 +212,26 @@ export class Bubba extends Domain {
             return 0;
         }
 
-        return 1 / (1 + this.getUpgradeBonus(4) / 100) * (1 / (1 + this.getUpgradeBonus(18) / 100)) * (1 / (1 + this.getUpgradeBonus(26) / 100)) * (1 / (1 + this.getCharismaBonus(1) / 100)) * 
+        const menagerieCostReduction = index == 0 ? this.menagerieCostReduction : 1;
+        return 1 / (1 + this.mineheadBonus5 / 100) * 1 / (1 + this.getUpgradeBonus(4) / 100) * (1 / (1 + this.getUpgradeBonus(18) / 100)) * menagerieCostReduction * (1 / (1 + this.getUpgradeBonus(26) / 100)) * (1 / (1 + this.getCharismaBonus(1) / 100)) * 
             (Math.pow(upgrade.index + 1, 2) * upgrade.level1 + Math.pow(2.4 + upgrade.index / 3.65, upgrade.index) * Math.pow(upgrade.data.costExponent, upgrade.level1)) * upgrade.data.x0;
+    }
+
+    getNextGlobalBonusUpgrade(): {
+        bonusIndex: number;
+        cost: number;
+        resourceBalance: number;
+        canAfford: boolean;
+    } {
+        const bonusIndex = this.getUpgradeBonus(3) % this.bonuses.length + 1;
+        const cost = this.getUpgradeCost(3);
+
+        return {
+            bonusIndex,
+            cost,
+            resourceBalance: this.ownedFlesh,
+            canAfford: this.ownedFlesh >= cost,
+        };
     }
 
     getCharismaBonus(index: number): number {
@@ -282,9 +313,12 @@ export class Bubba extends Domain {
 export const updateBubba = (data: Map<string, any>) => {
     const bubba = data.get("bubba") as Bubba;
     const companions = data.get("companions") as Companion[];
+    const menagerie = data.get("menagerie") as Menagerie;
 
     // The clicker multiplier uses companion 51's evolved bonus while that level is active.
     bubba.companionBonus51 = getCompanionActiveBonus(companions, 51);
+    bubba.mineheadBonus5 = (data.get("minehead") as Minehead).getBonusFromIndex(5);
+    bubba.menagerieCostReduction = 1 / (1 + menagerie.getBonusValue(20) / 100);
 
     return bubba;
 }

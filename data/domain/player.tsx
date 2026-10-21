@@ -1,9 +1,11 @@
 import { StarSignMap, StarSign, StarSigns } from './starsigns';
 import { Box, initPostOffice, PostOfficeConst } from './world-2/postoffice';
-import { ClassIndex, Talent, ClassTalentMap, GetTalentArray, TalentConst, ApocalypseChowTalent, EnhancedTalent, BloodMarrowTalent } from './talents';
+import { ClassIndex, Talent, ClassTalentMap, GetTalentArray, TalentConst, ApocalypseChowTalent, EnhancedTalent, BloodMarrowTalent, type TalentLevelInputs } from './talents';
 import { Card, CardInfo } from "./cards";
-import { Item, Food, Tool, StoneProps } from "./items";
-import { EquipmentBonus, getEquipmentEffect } from './equipment-effects';
+import { Item } from "./items";
+import { EquipmentBonus } from './equipment-effects';
+import { PlayerEquipment } from './equipment';
+import type { GoldenFood } from './golden-food';
 import { lavaLog, notUndefined, range } from '../utility';
 import { Cloudsave } from "./cloudsave";
 import { EnemyData, EnemyInfo } from "./enemies";
@@ -22,7 +24,7 @@ import { Stamp, StampConsts, StampTab } from "./world-1/stamps";
 import { Achievement } from "./achievements";
 import { safeJsonParse } from "./idleonData";
 import { Arcade } from "./world-2/arcade";
-import { ObolsData, ObolStats } from "./world-2/obols";
+import { ObolsData } from "./world-2/obols";
 import { ImageData } from "./imageData";
 import { Sigils } from "./world-2/alchemy/sigils";
 import { SkillsIndex } from './SkillsIndex';
@@ -32,7 +34,7 @@ import { Divinity } from './world-5/divinity';
 import { Deathnote } from './world-3/construction/deathnote';
 import { Domain, RawData } from './base/domain';
 import { Equinox } from './world-3/equinox';
-import { BeanstalkingBonusType, Sneaking } from './world-6/sneaking';
+import { Sneaking } from './world-6/sneaking';
 import { Account } from './account';
 import { IslandExpeditions } from './world-2/islandExpedition';
 import { TaskBoard } from './tasks';
@@ -40,7 +42,7 @@ import { Grimoire } from './grimoire';
 import { Tesseract } from './tesseract';
 import { EquipmentSets } from './misc/equipmentSets';
 import { LegendTalents } from './world-7/legendTalents';
-import { Companion, getCompanionBonus } from './companions';
+import { Companion, getCompanionBonus, getCompanionActiveBonus } from './companions';
 import { Votes } from './world-2/votes';
 import { Storage } from './storage';
 import { ConstructionMastery, Rift, SkillMastery } from './world-4/rift';
@@ -54,35 +56,14 @@ import type { Gallery } from './world-7/gallery';
 import type { HatRack } from './world-7/hatRack';
 import type { ResearchGrid } from './world-7/research';
 import { RoyalArmory } from './world-6/royalArmory/royalArmory';
-const normalizeEquipmentEffect = (effect: string): string => effect.toUpperCase().replace(/_/g, ' ');
+import { PlayerHealth } from './player-health';
+import { PlayerStats } from './player-stats';
+import { initFishingToolkitRepo } from './data/FishingToolkitRepo';
+import type { CoralKid } from './world-7/coralKid';
+export type { TalentLevelInputs } from './talents';
+const fishingToolkitRepo = initFishingToolkitRepo();
 
-export class PlayerStats {
-    strength: number = 0;
-    agility: number = 0;
-    wisdom: number = 0;
-    luck: number = 0;
 
-    constructor() { }
-
-    setStats(statsArray: Array<number>) {
-        this.strength = statsArray[0];
-        this.agility = statsArray[1];
-        this.wisdom = statsArray[2];
-        this.luck = statsArray[3];
-    }
-}
-
-export class PlayerEquipment {
-    equipment: Array<Item | undefined>;
-    tools: Array<Tool | undefined>;
-    food: Array<Food | undefined>;
-
-    constructor() {
-        this.equipment = [];
-        this.tools = [];
-        this.food = [];
-    }
-}
 
 export class SkillData {
     constructor(public level: number, public currentXP: number, public xpReq: number) { }
@@ -125,7 +106,10 @@ export class Player {
     playerID: number;
     playerName: string;
     gear: PlayerEquipment = new PlayerEquipment();
+    foodSlotsOwned: number = 0;
     stats: PlayerStats = new PlayerStats();
+    fishingToolkitPower: number = 0;
+    readonly health: PlayerHealth = new PlayerHealth();
     level: number = 0; // combine to one "class" class
     class: string = "Blank"; // combine to one "class" class
     classId: ClassIndex = ClassIndex.Beginner; // combine to one "class" class
@@ -139,6 +123,10 @@ export class Player {
     skills: Map<SkillsIndex, SkillData>;
     skillsRank: Map<SkillsIndex, number>;
     talents: Talent[] = [];
+    activeSuperTalentIndexes: Set<number> = new Set();
+    allPresetSuperTalentIndexes: Set<number> = new Set();
+    finalTalentInputs!: TalentLevelInputs;
+    beforeActiveBubbleMultiplierTalentInputs!: TalentLevelInputs;
     talentPoints: TalentPoints[] = [];
     postOffice: Box[] = initPostOffice();
     activeBubblesString: string[] = [];
@@ -148,6 +136,7 @@ export class Player {
     cardInfo: CardInfo | undefined = undefined; // TODO: Do BETTER!
     activeBuffs: Talent[] = [];
     activePrayers: number[] = [];
+    savedPrayerSlotCount: number = 0;
     cooldown: Map<Talent, number> = new Map();
     invBagsUsed: Record<string, number> = {};
     labInfo: LabInfo = {
@@ -156,10 +145,6 @@ export class Player {
         chips: [...Array(chipSlotReq.length)].map((_, index) => new ChipSlot(undefined, chipSlotReq[index])),
     };
     killInfo: Map<number, number> = new Map();
-    obolStats: ObolStats[] = [];
-    private equipmentBonusGallery!: Gallery;
-    private equipmentBonusHatRack!: HatRack;
-    private equipmentBonusResearch!: ResearchGrid;
     // Stats
     doubleClaimChance: Stat = new Stat("Double XP Chance", "%");
     monsterCash: Stat = new Stat("Monster Cash", "x");
@@ -307,12 +292,54 @@ export class Player {
         }
     }
 
+    // Return normal-character health, not temporary dungeon, Wraith, or Tempest health.
+    getMaxHP(): number {
+        return this.health.getMaxHP();
+    }
+
+    // Return persistent normal-character mana, not temporary dungeon mana.
+    getMaxMP(): number {
+        return this.health.getMaxMP();
+    }
+
+    getPostOfficeBonus(bonusKey: string): number {
+        let total = 0;
+        for (const box of this.postOffice) {
+            for (let index = 0; index < box.bonuses.length; index++) {
+                const bonus = box.bonuses[index];
+                if (bonus.data.bonusKey === bonusKey) {
+                    total += bonus.getBonus(box.level, index);
+                }
+            }
+        }
+        return total;
+    }
+
     getTalentBonus = (skillIndex: number) => {
         return this.talents.find(talent => talent.skillIndex == skillIndex)?.getBonus() ?? 0;
     }
 
     getTalent = (skillIndex: number) => {
         return this.talents.find(talent => talent.skillIndex == skillIndex);
+    }
+
+
+    getTalentBonusAtInputs(skillIndex: number, inputs: TalentLevelInputs): number {
+        const talent = this.getTalent(skillIndex);
+        if (!talent || talent.pointsSpent <= 0.5) {
+            return 0;
+        }
+        const extraLevels = talent.getExtraLevels(inputs,
+            this.activeSuperTalentIndexes.has(skillIndex));
+        return talent.getBonusAtLevel(talent.pointsSpent + extraLevels);
+    }
+
+    applyTalentLevelInputs(inputs: TalentLevelInputs): void {
+        for (const talent of this.talents) {
+            const extraLevels = talent.getExtraLevels(inputs, this.activeSuperTalentIndexes.has(talent.skillIndex));
+            talent.level = talent.pointsSpent + (talent.pointsSpent > 0.5 ? extraLevels : 0);
+            talent.maxLevel = talent.bookMaxLevel + extraLevels;
+        }
     }
 
 
@@ -339,12 +366,6 @@ export class Player {
         return 0;
     }
 
-    getGoldFoodMulti = (familyBonus: number = 0, goldFoodStampBonus: number = 0, achievement37: boolean, achievement380: boolean, achievement383: boolean, sigilBonus: number, bubbleBonus: number, zGoldFoodMealBonus: number, starSign69: number, bribeBonus36: number, pristineBonus14: number, equipmentSetBonus: number, votingBonus26: number, apocalypseWoW: number, companion48: number, legendTalentBonus25: number, cropfallEvent1Card: number) => {
-        const gearBonus = this.getEquipmentBonus(EquipmentBonus.GoldFoodEffect);
-
-        const setBonus = (1 + equipmentSetBonus / 100);
-        return setBonus * ((Math.max(familyBonus, 1) + gearBonus + (this.talents.find(skill => skill.skillIndex == 99)?.getBonus() ?? 0) + goldFoodStampBonus + (achievement37 ? 5 : 0) + bubbleBonus + sigilBonus + zGoldFoodMealBonus + starSign69 + bribeBonus36 + pristineBonus14 + (achievement380 ? 2 : 0) + (achievement383 ? 3 : 0) + votingBonus26 + apocalypseWoW + companion48 + legendTalentBonus25 + Math.min(cropfallEvent1Card, 50)) / 100);
-    }
 
     getChipBonus = (stat: string): number => {
         let bonus = 0;
@@ -356,106 +377,14 @@ export class Player {
         return bonus;
     }
 
-    bindEquipmentBonusDependencies = (gallery: Gallery, hatRack: HatRack, research: ResearchGrid): void => {
-        this.equipmentBonusGallery = gallery;
-        this.equipmentBonusHatRack = hatRack;
-        this.equipmentBonusResearch = research;
-    }
-
-    getEquipmentBonus = (bonus: EquipmentBonus, inDungeon: boolean = false): number => {
-        const gallery = this.equipmentBonusGallery;
-        const hatRack = this.equipmentBonusHatRack;
-        const research = this.equipmentBonusResearch;
-
-        const effect = getEquipmentEffect(bonus);
-        if (effect === undefined) {
-            return 0;
-        }
-
-        const galleryUnlocked = gallery.isUnlocked(this);
-        const hatRackUnlocked = hatRack.isUnlocked(this);
-        // Research boosts only the final equipment slot.
-        const researchBonus = research.getBonusForId(172);
-        let equipmentBonus = 0;
-        const addItemBonus = (item: Item | undefined, slot: number, row: 0 | 1): void => {
-            if (!item || item.internalName == "Blank" || (inDungeon && !item.internalName.includes("Dung"))) {
-                return;
-            }
-            // Gallery replaces the trophy and nametag slots after this character unlocks its portal.
-            if (row == 0 && galleryUnlocked && (slot == 10 || slot == 14)) {
-                return;
-            }
-            // Hat Rack replaces the premium-hat slot after this character unlocks its portal.
-            if (row == 0 && hatRackUnlocked && slot == 8) {
-                return;
-            }
-
-            // Pendant, upper-keychain and trophy chips double bonuses in their matching slot.
-            const chipDoubles = row == 0 && (
-                (slot == 3 && this.getChipBonus("pend") == 1) ||
-                (slot == 9 && this.getChipBonus("key1") == 1) ||
-                (slot == 10 && this.getChipBonus("troph") == 1)
-            );
-            const multiplier = chipDoubles
-                ? 2
-                : row == 0 && slot == 15 && researchBonus >= 1
-                    ? 1 + researchBonus / 100
-                    : 1;
-
-            // Include both item bonuses and upgrade-stone bonuses.
-            for (const stat of item.itemStats) {
-                if ((stat.stoneName != "UQ1val" && stat.stoneName != "UQ2val" && stat.stoneName != "Nothing") || !stat.extra || stat.extra == "0") {
-                    continue;
-                }
-                if (normalizeEquipmentEffect(stat.extra) == effect) {
-                    // Add bonuses separately to preserve the game's arithmetic order.
-                    equipmentBonus += stat.getValue() * multiplier;
-                }
-            }
-        };
-
-        for (let slot = 0; slot < Math.min(16, this.gear.equipment.length); slot++) {
-            addItemBonus(this.gear.equipment[slot], slot, 0);
-        }
-        for (let slot = 0; slot < Math.min(8, this.gear.tools.length); slot++) {
-            addItemBonus(this.gear.tools[slot], slot, 1);
-        }
-
-        // Game order is equipment/tools, Gallery trophy, Gallery nametag, then Hat Rack.
-        if (galleryUnlocked) {
-            equipmentBonus += gallery.getTrophyBonus(effect, this);
-            equipmentBonus += gallery.getNametagBonus(effect, this);
-        }
-        if (hatRackUnlocked) {
-            equipmentBonus += hatRack.getBonus(effect, this);
-        }
-
-        if (!inDungeon) {
-            // Personal and family obol bonuses are already combined; add them only outside dungeons.
-            for (const group of this.obolStats) {
-                for (const stat of group.stats) {
-                    if (normalizeEquipmentEffect(stat.extra) == effect) {
-                        equipmentBonus += stat.getValue();
-                    }
-                }
-            }
-        }
-
-        return equipmentBonus;
-    }
 
 
 
     setMonsterCash = (strBubbleBonus: number, wisBubbleBonus: number, agiBubbleBonus: number, mealBonus: number,
         petArenaBonus1: number, petArenaBonus2: number, labBonus: number, pristineBonus: number, vialBonus: number, dungeonBonus: number, guildBonus: number,
-        family: Family, goldFoodStampBonus: number, goldFoodAchievement37: boolean, goldFoodAchievement380: boolean, goldFoodAchievement383: boolean, prayers: Prayer[],
-        arcadeBonus: number, sigilBonus: number, bubbleBonus: number, zGoldFoodMealBonus: number, bribeBonus36: number, pristineBonus14: number, beanstalkingStack: number,
-        beanstalkingItem: Food | undefined, equipmentSetBonus: number, votingBonus26: number, apocalypseWoW: number, companion48: number, legenTalent25: number, cropFallEventCard: number) => {
-        const gearBonus = this.getEquipmentBonus(EquipmentBonus.Money);
-        const goldFoodBoost = this.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(this) ?? 0, goldFoodStampBonus, goldFoodAchievement37, goldFoodAchievement380, goldFoodAchievement383, sigilBonus, bubbleBonus, zGoldFoodMealBonus, this.starSigns.find(sign => sign.name == "Beanbie Major")?.getBonus("Golden Food") ?? 0, bribeBonus36, pristineBonus14, equipmentSetBonus, votingBonus26, apocalypseWoW, companion48, legenTalent25, cropFallEventCard);
-        const goldenFoodBonus = this.gear.food.filter(food => food && food.goldenFood != undefined && food.description.includes("Boosts coins dropped"))
-            .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, goldFoodBoost), 0);
-        const beanstalkingBonus = beanstalkingItem?.goldFoodBonus(beanstalkingStack, goldFoodBoost) ?? 0;
+        prayers: Prayer[], arcadeBonus: number, goldenFood: GoldenFood) => {
+        const gearBonus = this.gear.getBonus(EquipmentBonus.Money);
+        const goldenFoodBonus = goldenFood.getMonsterCash(this);
         const cardBonus = Card.GetTotalBonusForId(this.cardInfo?.equippedCards ?? [], 11);
         const poBox = this.postOffice.find(box => box.index == 13);
         const boxBonus = poBox?.bonuses[2].getBonus(poBox.level, 2) ?? 0;
@@ -478,7 +407,7 @@ export class Player {
                 + dungeonBonus + arcadeBonus + boxBonus + (guildBonus * currentWorldBonus) +
                 (this.talents.find(talent => talent.skillIndex == 643)?.getBonus() ?? 0) +
                 americaTipper +
-                goldenFoodBonus + beanstalkingBonus) / 100);
+                goldenFoodBonus) / 100);
 
         // Reset any existing data, since next section should include all the required info.
         this.monsterCash.sources = [];
@@ -501,7 +430,6 @@ export class Player {
                 americaTipper + (this.talents.find(talent => talent.skillIndex == 22)?.getBonus() ?? 0)
         });
         this.monsterCash.sources.push({ name: "Pristine Charm (*)", value: pristineBonus });
-        this.monsterCash.sources.push({ name: "Beanstalking (*)", value: beanstalkingBonus });
     }
 
     setDoubleClaimChance = (bubbleBonus: number, bribeBonus: number, guildBonus: number) => {
@@ -719,8 +647,10 @@ export class Player {
 }
 
 const keyFunctionMap: Record<string, Function> = {
-    "equipment": (doc: Cloudsave, player: Player, allItems: Item[]) => parseEquipment(doc.get(`EquipOrder_${player.playerID}`), doc.get(`EquipQTY_${player.playerID}`), JSON.parse(doc.get(`EMm0_${player.playerID}`)), JSON.parse(doc.get(`EMm1_${player.playerID}`)), player, allItems),
-    "stats": (doc: Cloudsave, player: Player) => parseStats(doc.get(`PVStatList_${player.playerID}`), doc.get(`Lv0_${player.playerID}`), doc.get(`Exp0_${player.playerID}`), doc.get(`ExpReq0_${player.playerID}`), player),
+    "equipment": (doc: Cloudsave, player: Player, allItems: Item[]) => {
+        player.gear = PlayerEquipment.parse(doc.get(`EquipOrder_${player.playerID}`), doc.get(`EquipQTY_${player.playerID}`), JSON.parse(doc.get(`EMm0_${player.playerID}`)), JSON.parse(doc.get(`EMm1_${player.playerID}`)), allItems);
+    },
+    "classProgress": (doc: Cloudsave, player: Player) => parseClassProgress(doc.get(`Lv0_${player.playerID}`), doc.get(`Exp0_${player.playerID}`), doc.get(`ExpReq0_${player.playerID}`), player),
     "class": (doc: Cloudsave, player: Player) => {
         player.class = ClassIndex[doc.get(`CharacterClass_${player.playerID}`)]?.replace(/_/g, " ") || "New Class?";
         player.classId = doc.get(`CharacterClass_${player.playerID}`) as ClassIndex;
@@ -729,11 +659,14 @@ const keyFunctionMap: Record<string, Function> = {
     "map": (doc: Cloudsave, player: Player) => parseMap(doc.get(`CurrentMap_${player.playerID}`), player),
     "starsigns": (doc: Cloudsave, player: Player) => parseStarSigns(doc.get(`PVtStarSign_${player.playerID}`), player),
     "money": (doc: Cloudsave, player: Player) => { player.money = doc.get(`Money_${player.playerID}`) },
+    "foodSlots": (doc: Cloudsave, player: Player) => { player.foodSlotsOwned = doc.get(`FoodSlO_${player.playerID}`); },
     "skills": (doc: Cloudsave, player: Player) => parseSkills(doc.get(`Lv0_${player.playerID}`), doc.get(`Exp0_${player.playerID}`), doc.get(`ExpReq0_${player.playerID}`), player),
+    "fishingToolkit": (doc: Cloudsave, player: Player) => parseFishingToolkit(doc.get(`PVFishingToolkit_${player.playerID}`), player),
     "talents": (doc: Cloudsave, player: Player) => parseTalents(
         doc.get(`SL_${player.playerID}`),
         doc.get(`SM_${player.playerID}`),
         safeJsonParse(doc, "Spelunk", []) as number[][],
+        safeJsonParse(doc, `PlayerStuff_${player.playerID}`, [0, 0])[1],
         player
     ),
     "postoffice": (doc: Cloudsave, player: Player) => parsePostOffice(doc.get(`POu_${player.playerID}`), player),
@@ -772,6 +705,7 @@ const keyFunctionMap: Record<string, Function> = {
     },
     "activePrayers": (doc: Cloudsave, player: Player) => {
         const activePrayers = safeJsonParse(doc, `Prayers_${player.playerID}`, []) as number[];
+        player.savedPrayerSlotCount = activePrayers.length;
         player.activePrayers = activePrayers.filter((prayer) => prayer != -1);
     },
     "cooldowns": (doc: Cloudsave, player: Player) => {
@@ -796,7 +730,7 @@ const parsePostOffice = (postOffice: string, player: Player) => {
     });
 }
 
-const parseTalents = (talentLevels: string, talentMaxLevels: string, spelunkData: number[][], player: Player) => {
+const parseTalents = (talentLevels: string, talentMaxLevels: string, spelunkData: number[][], activePreset: number, player: Player) => {
     const jsonTalents = JSON.parse(talentLevels);
     const jsonMaxTalents = JSON.parse(talentMaxLevels);
 
@@ -807,16 +741,18 @@ const parseTalents = (talentLevels: string, talentMaxLevels: string, spelunkData
         })
     }
 
-    const superedTalentIndexes = new Set([
+    player.allPresetSuperTalentIndexes = new Set([
         ...spelunkData[20 + player.playerID],
         ...spelunkData[32 + player.playerID],
     ]);
+    // Ordinary talent projection uses the active preset; account talent maxima use both presets.
+    player.activeSuperTalentIndexes = new Set(spelunkData[Math.round(20 + player.playerID + 12 * activePreset)]);
     player.talents.forEach((talent) => {
         talent.level = jsonTalents[talent.skillIndex] ?? 0;
         talent.pointsSpent = jsonTalents[talent.skillIndex] ?? 0;
         talent.maxLevel = jsonMaxTalents[talent.skillIndex] ?? 0;
         talent.bookMaxLevel = jsonMaxTalents[talent.skillIndex] ?? 0;
-        talent.isSupered = superedTalentIndexes.has(talent.skillIndex);
+        talent.isSupered = player.activeSuperTalentIndexes.has(talent.skillIndex);
     })
     player.extraLevelsFromBear = 0;
     player.extraLevelsFromES = 0;
@@ -847,6 +783,21 @@ const parseSkills = (skills: Array<number>, skillXP: Array<number>, skillXPReqs:
     })
 }
 
+const parseFishingToolkit = (savedSelections: unknown, player: Player): void => {
+    if (savedSelections === undefined) {
+        player.fishingToolkitPower = 0;
+        return;
+    }
+
+    const selections = typeof savedSelections === 'string'
+        ? JSON.parse(savedSelections) as number[]
+        : savedSelections as number[];
+    const [weightIndex, lineIndex] = selections;
+    const weight = fishingToolkitRepo.find(toolkit => toolkit.id === `Weight${weightIndex}`)!;
+    const line = fishingToolkitRepo.find(toolkit => toolkit.id === `Line${lineIndex}`)!;
+    player.fishingToolkitPower = weight.data.fishingPower + line.data.fishingPower;
+};
+
 const parseStarSigns = (starSigns: string, player: Player) => {
     if (starSigns == undefined) {
         return;
@@ -867,64 +818,12 @@ const parseMap = (currentMap: number, player: Player) => {
     }
 }
 
-const parseStats = (stats: number[], lvZero: number[], skillXP: Array<number>, skillXPReqs: Array<number>, player: Player) => {
-    player.stats.setStats(stats);
+const parseClassProgress = (lvZero: number[], skillXP: Array<number>, skillXPReqs: Array<number>, player: Player) => {
     player.level = lvZero[0];
     player.classExp = skillXP[0];
     player.classExpReq = skillXPReqs[0];
 }
 
-const parseEquipment = (
-    equipment: Array<Record<number, string>>,
-    equipCount: Array<Record<number, number>>,
-    equipStones: Record<number, StoneProps>,
-    toolStones: Record<number, StoneProps>,
-    player: Player,
-    allItems: Item[]
-) => {
-    const playerEquipment = new PlayerEquipment();
-    equipment?.forEach((data, equipIndex) => {
-        if (equipIndex == 0) { // armor 
-            Object.entries(data).filter(([location, _]) => location != "length").forEach(([location, name], _) => {
-                const theItem = allItems.find((item) => item.internalName == name)?.duplicate();
-                if (theItem) {
-                    theItem.addStone(equipStones[Number(location)])
-                }
-                else if (name != "Blank") {
-                    console.log("Armor not found", name, location);
-                }
-                playerEquipment.equipment.push(theItem);
-            })
-        }
-        if (equipIndex == 1) { // tools
-            Object.entries(data).filter(([location, _]) => location != "length").forEach(([location, name], _) => {
-                const theItem = allItems.find((item) => item.internalName == name)?.duplicate();
-                if (theItem) {
-                    theItem.addStone(toolStones[Number(location)])
-                }
-                else if (name != "Blank") {
-                    console.log("Tool not found", name, location);
-                }
-                playerEquipment.tools.push(theItem);
-
-            })
-        }
-        if (equipIndex == 2) { // food
-            Object.entries(data).filter(([location, _]) => location != "length").forEach(([location, name], _) => {
-                const item = allItems.find(item => item.internalName == name)?.duplicate() as Food | undefined;
-                if (item) {
-                    item.count = equipCount[equipIndex][Number(location)];
-                }
-                else if (name != "Blank") {
-                    console.log("Food not found", name, location);
-                }
-                playerEquipment.food.push(item);
-            })
-        }
-    });
-
-    player.gear = playerEquipment;
-}
 
 export class Players extends Domain {
     getRawKeys(): RawData[] {
@@ -1235,206 +1134,98 @@ export const updatePlayerDeathnote = (data: Map<string, any>) => {
     });
 }
 
-// This is the ES talent-level pass: Family has already calculated and cached
-// its Elemental Sorcerer result, which this function consumes with the caller's context.
-export const updatePlayerTalentLevelESBonus = (data: Map<string, any>) => {
-    const players = data.get("players") as Player[];
-    const family = data.get("family") as Family;
-    const legendTalents = data.get("legendTalents") as LegendTalents;
-    const royalArmory = data.get("royalArmory") as RoyalArmory;
+const getPlayerTalentLevelInputs = (
+    data: Map<string, any>, player: Player, familyTalentLevels: number,
+    minorLinkTalentLevels: number, superTalentLevels: number, allTalentCap: number,
+): TalentLevelInputs => {
+    const achievements = data.get("achievements") as Achievement[];
+    const companions = data.get("companions") as Companion[];
+    const equinox = data.get("equinox") as Equinox;
+    const grimoire = data.get("grimoire") as Grimoire;
+    const equipmentSets = data.get("equipmentSets") as EquipmentSets;
+    const tesseract = data.get("tesseract") as Tesseract;
+    const gaming = data.get("gaming") as Gaming;
+    const sneaking = data.get("sneaking") as Sneaking;
+    return {
+        eliteTalentLevels: player.getTalentBonus(149) + player.getTalentBonus(374) + player.getTalentBonus(539),
+        achievementTalentLevels: achievements[291].completed ? 1 : 0,
+        familyTalentLevels,
+        companionTalentLevels: getCompanionActiveBonus(companions, 1),
+        minorLinkTalentLevels,
+        equinoxTalentLevels: equinox.upgrades[10].getBonus(),
+        ninjaMasteryTalentLevels: sneaking.getMasteryTalentLevels(),
+        grimoireTalentLevels: grimoire.getUpgradeBonus(39),
+        equipmentTalentLevels: equipmentSets.getSetBonus("KATTLEKRUK_SET"),
+        tesseractTalentLevels: tesseract.getUpgradeBonus(57),
+        gamingTalentLevels: gaming.isSuperbitPurchased(47) ? Math.max(0, Math.floor((player.level - 500) / 100)) : 0,
+        superTalentLevels,
+        allTalentCap,
+    };
+};
 
-    // Read the cached Elemental Sorcerer Family result only after Family calculation has completed.
-    // ES can also raise Family Guy, so these cached Family results must remain the source for this pass.
-    players.forEach(player => {
-        const esBonus = Math.floor(family.classBonus.get(ClassIndex.Elemental_Sorcerer)?.getBonus(player) ?? 0);
-        // Only update if different.
-        if (player.extraLevelsFromES == 0 || player.extraLevelsFromES != esBonus) {
-            player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
-                .forEach(talent => {
-                    talent.level += talent.level > 0 ? esBonus : 0;
-                    talent.maxLevel += esBonus;
-                });
-            player.extraLevelsFromES = esBonus;
-        }
-    })
-
-    
-    // Max talent level from Royal Guardian All Talent Cap
-    // This must happen after all other talent level adjustments, but before super talents.
-    const royalGuardianAllTalentCap = royalArmory.getUpgradeBonus(55);
-    players.forEach(player => {
-        const allTalentCap = royalGuardianAllTalentCap;
-        player.talents
-            .filter(talent => 225 <= talent.skillIndex && talent.skillIndex <= 239)
-            .forEach(talent => {
-                const currentAllTalentLevels = talent.maxLevel - talent.bookMaxLevel;
-                const cappedAllTalentLevels = Math.min(allTalentCap, currentAllTalentLevels);
-                const adjustment = cappedAllTalentLevels - currentAllTalentLevels;
-                talent.maxLevel += adjustment;
-                if (talent.level > 0) {
-                    talent.level += adjustment;
-                }
-            });
-        player.royalGuardianAllTalentCap = royalGuardianAllTalentCap;
-    });
-
-    // Super-talent levels are added after the capped all-talent aggregate.
-    const superTalentBonusLevels = legendTalents.superTalentBonusLevels;
-    if (superTalentBonusLevels > 0) {
-        players.forEach(player => {
-            player.talents.filter(talent =>
-                ![149, 374, 539, 505].includes(talent.skillIndex) &&
-                talent.skillIndex <= 614 &&
-                !(49 <= talent.skillIndex && talent.skillIndex <= 59) &&
-                talent.isSupered
-            ).forEach(talent => {
-                talent.level += talent.level > 0 ? superTalentBonusLevels : 0;
-                talent.maxLevel += superTalentBonusLevels;
-            });
-        });
-    }
-
-    return players;
-}
-
-// This pass must run before Family calculation so ordinary Family Guy snapshots use non-ES talent levels.
+// Family captures Family Guy before the Elemental Sorcerer and Super Talent additions.
 export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const divinity = data.get("divinity") as Divinity;
-    const equinox = data.get("equinox") as Equinox;
-    const achievementsInfo = data.get("achievements") as Achievement[];
-    const grimoire = data.get("grimoire") as Grimoire;
-    const tesseract = data.get("tesseract") as Tesseract;
-    const optLacc = data.get("OptLacc") as (number | string)[];
-    const equipmentSets = data.get("equipmentSets") as EquipmentSets;
-    const gaming = data.get("gaming") as Gaming;
-
-    // Update max talent level due to bear.
-    const bearGod = divinity.gods[1];
-    bearGod.linkedPlayers.forEach(linkedPlayer => {
-        const bearBonus = Math.ceil(bearGod.getMinorLinkBonus(linkedPlayer));
-        // Only update if different.
-        if (linkedPlayer.extraLevelsFromBear == 0 || linkedPlayer.extraLevelsFromBear != bearBonus) {
-            linkedPlayer.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
-                .forEach(talent => {
-                    talent.level += talent.level > 0 ? bearBonus : 0;
-                    talent.maxLevel += bearBonus;
-                });
-            linkedPlayer.extraLevelsFromBear = bearBonus;
-        }
-    })
-
-    // Max talent level from Equinox
-    players.forEach(player => {
-        // TODO: Double check Equinox code, in-game says 12 but we get 10 here.
-        const equinoxBonus = equinox.upgrades[10].getBonus();
-        // Only update if different.
-        if (player.extraLevelsFromEquinox == 0 || player.extraLevelsFromEquinox != equinoxBonus) {
-            player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
-                .forEach(talent => {
-                    talent.level += talent.level > 0 ? equinoxBonus : 0;
-                    talent.maxLevel += equinoxBonus;
-                });
-            player.extraLevelsFromEquinox = equinoxBonus;
-        }
-    })
-
-
-    // Bonus talent level from achievement
-    const totalTalentFromAchievments = [achievementsInfo[291]].reduce((sum, achiev) => sum += achiev.completed ? 1 : 0, 0);
-    if (totalTalentFromAchievments > 0) {
-        players.forEach(player => {
-            if (player.extraLevelsFromAchievements == 0 || player.extraLevelsFromAchievements != totalTalentFromAchievments) {
-                player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
-                    .forEach(talent => {
-                        talent.level += talent.level > 0 ? totalTalentFromAchievments : 0;
-                        talent.maxLevel += totalTalentFromAchievments;
-                    });
-                player.extraLevelsFromAchievements = totalTalentFromAchievments;
-            }
-        })
+    for (const player of players) {
+        const inputs = getPlayerTalentLevelInputs(data, player, 0, divinity.gods[1].getMinorLinkBonus(player), 0, 9999);
+        player.extraLevelsFromTalent = Math.floor(inputs.eliteTalentLevels);
+        player.extraLevelsFromAchievements = inputs.achievementTalentLevels;
+        player.extraLevelsFromBear = Math.ceil(inputs.minorLinkTalentLevels);
+        player.extraLevelsFromSlug = inputs.companionTalentLevels;
+        player.extraLevelsFromEquinox = inputs.equinoxTalentLevels;
+        player.extraLevelsFromNinjaMastery = inputs.ninjaMasteryTalentLevels;
+        player.extraLevelsFromGrimoire = inputs.grimoireTalentLevels;
+        player.extraLevelsFromKattlekrukSet = inputs.equipmentTalentLevels;
+        player.extraLevelsFromTesseract = inputs.tesseractTalentLevels;
+        player.extraLevelsFromSuperBit = inputs.gamingTalentLevels;
+        player.applyTalentLevelInputs(inputs);
     }
-
-    const skullOfMajorTalentLevel = grimoire.getUpgradeBonus(39);
-    if (skullOfMajorTalentLevel > 0) {
-        players.forEach(player => {
-            player.talents
-                .filter(talent =>
-                    ![149, 374, 539, 505].includes(talent.skillIndex) &&
-                    talent.skillIndex <= 614 &&
-                    !(49 <= talent.skillIndex && 59 >= talent.skillIndex)
-                )
-                .forEach(talent => {
-                    talent.level += talent.level > 0 ? skullOfMajorTalentLevel : 0;
-                    talent.maxLevel += skullOfMajorTalentLevel;
-                });
-            player.extraLevelsFromGrimoire = skullOfMajorTalentLevel;
-        });
-    }
-
-    const universeTalentLevel = tesseract?.getUpgradeBonus(57) ?? 0;
-    if (universeTalentLevel > 0) {
-        players.forEach(player => {
-            player.talents
-                .filter(talent =>
-                    ![149, 374, 539, 505].includes(talent.skillIndex) &&
-                    talent.skillIndex <= 614 &&
-                    !(49 <= talent.skillIndex && 59 >= talent.skillIndex)
-                )
-                .forEach(talent => {
-                    talent.level += talent.level > 0 ? universeTalentLevel : 0;
-                    talent.maxLevel += universeTalentLevel;
-                });
-            player.extraLevelsFromTesseract = universeTalentLevel;
-        });
-    }
-
-    const sneakingMasteryLevel = optLacc[232] as number;
-    if (sneakingMasteryLevel > 0) {
-        const sneakyingMasteryBonus = 5 * Math.floor((97 + sneakingMasteryLevel) / 100);
-        players.forEach(player => {
-            player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
-                .forEach(talent => {
-                    talent.level += talent.level > 0 ? sneakyingMasteryBonus : 0;
-                    talent.maxLevel += sneakyingMasteryBonus
-                });
-            player.extraLevelsFromNinjaMastery = sneakyingMasteryBonus;
-        });
-    }
-
-    const kattlekrukSetBonus = equipmentSets.getSetBonus("KATTLEKRUK_SET");
-    if (kattlekrukSetBonus > 0) {
-        players.forEach(player => {
-            player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
-                .forEach(talent => {
-                    talent.level += talent.level > 0 ? kattlekrukSetBonus : 0;
-                    talent.maxLevel += kattlekrukSetBonus;
-                });
-            player.extraLevelsFromKattlekrukSet = kattlekrukSetBonus;
-        })
-    }
-
-    // Timmy/Super Bit is a non-ES increase, so it is included before Family captures Family Guy.
-    players.forEach(player => {
-        const timmyTalentedBonus = gaming.isSuperbitPurchased(47)
-            ? Math.max(0, Math.floor((player.level - 500) / 100))
-            : 0;
-        if (player.extraLevelsFromSuperBit == 0 || player.extraLevelsFromSuperBit != timmyTalentedBonus) {
-            player.talents.filter(talent =>
-                ![149, 374, 539, 505].includes(talent.skillIndex) &&
-                talent.skillIndex <= 614 &&
-                !(49 <= talent.skillIndex && 59 >= talent.skillIndex)
-            ).forEach(talent => {
-                talent.level += talent.level > 0 ? timmyTalentedBonus : 0;
-                talent.maxLevel += timmyTalentedBonus;
-            });
-            player.extraLevelsFromSuperBit = timmyTalentedBonus;
-        }
-    });
-
-
     return players;
-}
+};
+
+// Consume Family's cached pre-ES result; never calculate Family from the later talent projection.
+export const updatePlayerTalentLevelESBonus = (data: Map<string, any>) => {
+    const players = data.get("players") as Player[];
+    const family = data.get("family") as Family;
+    const divinity = data.get("divinity") as Divinity;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
+    const royalArmory = data.get("royalArmory") as RoyalArmory;
+    for (const player of players) {
+        const familyLevels = family.getClassBonus(ClassIndex.Elemental_Sorcerer)?.getBonus(player) ?? 0;
+        const inputs = getPlayerTalentLevelInputs(data, player, familyLevels, divinity.gods[1].getMinorLinkBonus(player),
+            legendTalents.superTalentBonusLevels, royalArmory.getUpgradeBonus(55));
+        player.extraLevelsFromES = Math.floor(familyLevels);
+        player.royalGuardianAllTalentCap = inputs.allTalentCap;
+        player.finalTalentInputs = inputs;
+        player.applyTalentLevelInputs(inputs);
+    }
+    return players;
+};
+
+// Run after the shared producers and equipment bindings, before health and golden-food consumers.
+export const updatePlayerTalentContexts = (data: Map<string, any>): void => {
+    const players = data.get("players") as Player[];
+    const family = data.get("family") as Family;
+    const divinity = data.get("divinity") as Divinity;
+    const coralKid = data.get("coralKid") as CoralKid;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
+    const royalArmory = data.get("royalArmory") as RoyalArmory;
+    const bearGod = divinity.gods[1];
+    for (const player of players) {
+        const finalInputs = getPlayerTalentLevelInputs(data, player,
+            family.getClassBonus(ClassIndex.Elemental_Sorcerer)?.getBonus(player) ?? 0,
+            bearGod.getMinorLinkBonus(player), legendTalents.superTalentBonusLevels, royalArmory.getUpgradeBonus(55));
+        const divinityLevel = player.skills.get(SkillsIndex.Divinity)!.level;
+        // Both health and mana sample the same talent state before the active Divinity bubble exists.
+        const earlyMinorLink = bearGod.linkedPlayers.some(linked => linked.playerID === player.playerID)
+            ? ((1 + coralKid.getBonusFromIndex(3) / 100) * divinityLevel / (60 + divinityLevel)) * bearGod.data.passiveMax
+            : 0;
+        player.finalTalentInputs = finalInputs;
+        player.beforeActiveBubbleMultiplierTalentInputs = { ...finalInputs, minorLinkTalentLevels: earlyMinorLink };
+        player.applyTalentLevelInputs(finalInputs);
+    }
+};
 
 // Handles enhanced talents and talents such as blood marrow.
 // This is not the same as "Special Talents" page.
@@ -1471,11 +1262,6 @@ export const updatePlayerSpecialTalents = (data: Map<string, any>) => {
             });
         case enhancementLevel >= 150:
         // Whale Wallop - Gameplay only, I don't care.
-        case enhancementLevel >= 175:
-            // Right hand of action - Enhanced Bonus is double skill eff for mman only. 
-            players.forEach(player => {
-                player.markTalentAsEnhanced(43);
-            });
         case enhancementLevel >= 200:
             // Green Tube - All Skill Exp for everyone.
             players.forEach(player => {
@@ -1521,32 +1307,19 @@ export const updatePlayers = (data: Map<string, any>) => {
         }
     })
 
-    // Reset data, next section will calculate it.
-    players.forEach(player => player.obolStats = []);
-
-    // Update player obols info so we can use it in maths
-    players.forEach(player => {
-        obols.playerStats[player.playerID]?.stats.filter(stat => stat.getValue() > 0).forEach(stat => {
-            const matchingFamilyStat = obols.familyStats.stats.find(famStat => stat.extra == '' ? famStat.displayName == stat.displayName : stat.extra == famStat.extra && famStat.getValue() > 0);
-            const newObolStat = new ObolStats();
-            newObolStat.addStat(stat);
-            if (matchingFamilyStat) {
-                newObolStat.addStat(matchingFamilyStat);
-            }
-            player.obolStats.push(newObolStat);
-        })
-        obols.familyStats.stats.filter(stat => obols.playerStats[player.playerID].stats.find(playerStat => stat.extra == '' ? playerStat.displayName == stat.displayName : stat.extra == playerStat.extra) == undefined)
-            .filter(stat => stat.shouldDisplay() && stat.getValue() > 0)
-            .forEach(stat => {
-                const newObolStat = new ObolStats();
-                newObolStat.addStat(stat);
-                player.obolStats.push(newObolStat);
-            });
-    })
+    obols.updateCombinedStats(players);
     const gallery = data.get("gallery") as Gallery;
     const hatRack = data.get("hatRack") as HatRack;
     const research = data.get("research") as ResearchGrid;
-    players.forEach(player => player.bindEquipmentBonusDependencies(gallery, hatRack, research));
+    const finalSlotResearchPercent = research.getBonusForId(172);
+    for (const player of players) {
+        player.gear.updateUniqueEffects(player, { gallery, hatRack, obols: obols.getStats(player.playerID) }, {
+            pendantChip: player.getChipBonus("pend"),
+            upperKeychainChip: player.getChipBonus("key1"),
+            trophyChip: player.getChipBonus("troph"),
+            finalSlotResearchPercent,
+        });
+    }
 
     // I dunno why I have to sort it now, I never had to before. Need to think about it further.
     return players;
@@ -1564,15 +1337,10 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     const stamps = data.get("stamps") as Stamp[][];
     const achievementsInfo = data.get("achievements") as Achievement[];
     const arcade = data.get("arcade") as Arcade;
-    const sigils = data.get("sigils") as Sigils;
     const shrines = data.get("shrines") as Shrine[];
     const sneaking = data.get("sneaking") as Sneaking;
-    const family = data.get("family") as Family;
     const prayers = data.get("prayers") as Prayer[];
-    const cards = data.get("cards") as Card[];
-    const equipmentSets = data.get("equipmentSets") as EquipmentSets;
-    const legendTalents = data.get("legendTalents") as LegendTalents;
-    const companions = data.get("companions") as Companion[];
+    const goldenFood = data.get("goldenFood") as GoldenFood;
     const votes = data.get("votes") as Votes;
     const deathnote = data.get("deathnote") as Deathnote;
     const storage = data.get("storage") as Storage;
@@ -1598,29 +1366,8 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     const vialBonus = alchemy.vials.find(vial => vial.name == "Dieter Drink")?.getBonus() ?? 0;
     const dungeonBonus = dungeons.passives.get(PassiveType.Flurbo)?.find(bonus => bonus.effect == "Monster Cash")?.getBonus() ?? 0;
     const guildBonus8 = guild.guildBonuses.find(bonus => bonus.index == 8)?.getBonus() ?? 0;
-    const goldFoodStampBonus = stamps.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
-    const goldFoodAchievement37 = achievementsInfo[37].completed;
-    const goldFoodAchievement380 = achievementsInfo[380].completed;
-    const goldFoodAchievement383 = achievementsInfo[383].completed;
     const arcadeBonus = arcade.bonuses.filter(bonus => [10, 11].includes(bonus.index)).reduce((sum, bonus) => sum += bonus.getBonus(), 0);
     const pristineCharm16 = sneaking.pristineCharms.find(charm => charm.data.itemId == 16);
-    const pristineCharm14 = sneaking.pristineCharms.find(charm => charm.data.itemId == 14);
-    const zGoldFoodMealBonus = cooking.meals.filter(meal => meal.bonusKey == "zGoldFood").reduce((sum, meal) => sum += meal.getBonus() ?? 0, 0);
-    const bribeBonus36 = bribes.find(bribe => bribe.bribeIndex == 36)?.value ?? 0;
-    const beanstalkingBonus = sneaking.beanstalking.bonuses.find(bonus => bonus.type == BeanstalkingBonusType.GoldenBread);
-    const votingBonus26 = votes.getCurrentBonus(26);
-    const companion48 = companions.find(c => c.id === 48)?.owned || false ? 5 : 0;
-    const legenTalent25 = legendTalents.getBonusFromIndex(25);
-    const cropFallEventCard = cards.filter(card => card.data.cardID == "cropfallEvent1").reduce((sum, card) => sum += card.getBonus(), 0);;
-
-    let apocalypseWoW = 0;
-    const bestDeathBringer = players.filter(player => player.classId == ClassIndex.Death_Bringer).sort((player1, player2) => player1.getTalentBonus(209) > player2.getTalentBonus(209) ? 1 : -1).pop();
-    const deathBringerForKills = players.filter(player => [ClassIndex.Blood_Berserker, ClassIndex.Death_Bringer].indexOf(player.classId) >= 0).sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1).pop();
-    if (bestDeathBringer && deathBringerForKills) {
-        const deathbringeWoWStacks = Array.from(deathBringerForKills.killInfo.entries()).filter(([_, count]) => count >= 1000000000).length;;
-        const skillBonus = bestDeathBringer.getTalentBonus(209);
-        apocalypseWoW = skillBonus * deathbringeWoWStacks;
-    }
 
     // Crystal Spawn Chance
     const crystalSpawnStamp = stamps[StampTab.Misc][StampConsts.CrystallinIndex].getBonus();
@@ -1653,20 +1400,17 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
         const strBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 15);
         const wisBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.HighIQ, 15);
         const agiBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Quicc, 15);
-        const goldFoodBubble = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 18);
-        const equipmentSetBonus = equipmentSets.getSetBonus("SECRET_SET", player);
 
         player.setMonsterCash(strBubbleBonus, wisBubbleBonus, agiBubbleBonus, mealBonus,
             petArenaBonus1, petArenaBonus2, labBonus, ((pristineCharm16 && pristineCharm16.unlocked) ? pristineCharm16.data.x1 : 0), vialBonus,
-            dungeonBonus, guildBonus8, family, goldFoodStampBonus, goldFoodAchievement37, goldFoodAchievement380, goldFoodAchievement383, prayers, arcadeBonus, sigils.sigils[14].getBonus(), goldFoodBubble,
-            zGoldFoodMealBonus, bribeBonus36, ((pristineCharm14 && pristineCharm14.unlocked) ? pristineCharm14.data.x1 : 0), beanstalkingBonus?.getStackSize() ?? 0, beanstalkingBonus?.item, equipmentSetBonus, votingBonus26, apocalypseWoW, companion48, legenTalent25, cropFallEventCard);
+            dungeonBonus, guildBonus8, prayers, arcadeBonus, goldenFood);
 
         // Crystal spawn chance
         player.setCrystalChance(crystalSpawnStamp, crysalShrine);
 
         // Build Speed
         const constructionBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 12);
-        player.setBuildSpeed(buildSpeedStampBonus, constructionBubbleBonus, guildBonus5, player.getEquipmentBonus(EquipmentBonus.BuildSpeed), achievement153, constructionMasteryBonus, vialEquinoxFishBonus, vialTurtleBonus,
+        player.setBuildSpeed(buildSpeedStampBonus, constructionBubbleBonus, guildBonus5, player.gear.getBonus(EquipmentBonus.BuildSpeed), achievement153, constructionMasteryBonus, vialEquinoxFishBonus, vialTurtleBonus,
             arcadeBonus44, votingBonus18, vaultUpgrade48, sheepiesKilled, bubbaBonus1, atomCollider1, redoxSaltsOwned, winnerBonus13, paletteBonus25);
     });
 

@@ -1104,6 +1104,24 @@ export const initTomeRepo = () => {
                 "decimalDisplay": undefined,
                 "desc": "This is the number of obstructions you've defeated at the Jelly Operator research game in World 7!",
                 "uiPositionIndex": 121
+            }),
+        new TomeBase(122, <TomeModel>{
+                "name": "Luminous Menagerie Rank 膛",
+                "keyQty": 50,
+                "scalingType": TomeScalingEnum.linearToMax,
+                "totalVal": 1200,
+                "decimalDisplay": undefined,
+                "desc": "The Luminous Menagerie is a mastery mechanic found in the 15th map away from town in World 7!",
+                "uiPositionIndex": 122
+            }),
+        new TomeBase(123, <TomeModel>{
+                "name": "Total Menagerie Boosts Upg LV 膛",
+                "keyQty": 700,
+                "scalingType": TomeScalingEnum.decay,
+                "totalVal": 750,
+                "decimalDisplay": undefined,
+                "desc": "This is the total number of purple BOOSTS upgrades you've bought!",
+                "uiPositionIndex": 123
             })    
 ]
 }

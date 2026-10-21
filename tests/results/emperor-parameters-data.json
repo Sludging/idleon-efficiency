@@ -1,0 +1,104 @@
+{
+  "extractions": {
+    "ninja_emporium_bonus_39": {
+      "expression": "idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 39, 0)",
+      "result": 1
+    },
+    "arcane_bonus_48": {
+      "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 48, 0)",
+      "result": 18
+    },
+    "arcade_bonus_51": {
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 51)",
+      "result": 15.600000000000001
+    },
+    "jelly_bonus_28": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 28, 0)",
+      "result": 0
+    },
+    "emperor_showdown": {
+      "expression": "idleon.engine.getGameAttribute(\"OptionsListAccount\")[369] + 1",
+      "result": 106
+    },
+    "emperor_attempts_left": {
+      "expression": "Math.round(1 - idleon.engine.getGameAttribute(\"OptionsListAccount\")[370])",
+      "result": 10
+    },
+    "emperor_max_attempts": {
+      "expression": "idleon.callFunction(\"Thingies\", \"MaxEmperorAttemptStack\") + 1",
+      "result": 11
+    },
+    "emperor_daily_tries": {
+      "expression": "idleon.callFunction(\"Thingies\", \"DailyEmperorTries\")",
+      "result": 1
+    },
+    "emperor_boss_hp": {
+      "expression": "idleon.callFunction(\"Thingies\", \"Boss6HP\")",
+      "result": {
+        "type": "large_number",
+        "value": "1.6745977474714404e+33"
+      }
+    },
+    "emperor_combined_bonus_multiplier": {
+      "expression": "1 + (idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 48, 0) + idleon.callFunction(\"ArcadeBonus\", 51) + idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 28, 0)) / 100",
+      "result": 1.336
+    },
+    "emperor_bonus_0": {
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 0, 0, 0)",
+      "result": 841
+    },
+    "emperor_bonus_1": {
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 1, 0, 0)",
+      "result": 106
+    },
+    "emperor_bonus_2": {
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 2, 0, 0)",
+      "result": 427
+    },
+    "emperor_bonus_3": {
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 3, 0, 0)",
+      "result": 5
+    },
+    "emperor_bonus_4": {
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 4, 0, 0)",
+      "result": 106
+    },
+    "emperor_bonus_5": {
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 5, 0, 0)",
+      "result": 160
+    },
+    "emperor_bonus_6": {
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 6, 0, 0)",
+      "result": 40
+    },
+    "emperor_bonus_7": {
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 7, 0, 0)",
+      "result": 534
+    },
+    "emperor_bonus_8": {
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 8, 0, 0)",
+      "result": 2
+    },
+    "emperor_bonus_9": {
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 9, 0, 0)",
+      "result": 13
+    },
+    "emperor_bonus_10": {
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 10, 0, 0)",
+      "result": 13
+    },
+    "emperor_bonus_11": {
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 11, 0, 0)",
+      "result": 53
+    },
+    "emperor_next_award_showdowns": {
+      "expression": "(()=>{const kills=Number(idleon.engine.getGameAttribute(\"OptionsListAccount\")[369]);const schedule=idleon.engine.getGameAttribute(\"CustomLists\").h.EmperorBon[2];return Array.from({length:12},(_,i)=>kills+Array.from({length:48},(_,offset)=>offset).find(offset=>Number(schedule[(kills+offset)%48])===i)+1)})()",
+      "result": [108, 107, 109, 106, 110, 111, 117, 121, 128, 132, 136, 127]
+    },
+    "emperor_next_award_effective_totals": {
+      "expression": "(()=>{const base=idleon.engine.getGameAttribute(\"DNSM\").h.EmperorBon;const values=idleon.engine.getGameAttribute(\"CustomLists\").h.EmperorBon[1];const multiplier=1+(idleon.callFunction(\"ArcaneType\",\"ArcaneUpgBonus\",48,0)+idleon.callFunction(\"ArcadeBonus\",51)+idleon.callFunction(\"JellyOperation\",\"RoG_BonusQTY\",28,0))/100;return Array.from({length:12},(_,i)=>Math.floor((Number(base[i])+Number(values[i]))*multiplier))})()",
+      "result": [881, 113, 454, 6, 113, 180, 46, 601, 4, 20, 20, 66]
+    }
+  },
+  "errors": {}
+}

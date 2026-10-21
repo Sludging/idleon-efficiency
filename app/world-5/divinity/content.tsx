@@ -12,13 +12,14 @@ import ShadowBox from '../../../components/base/ShadowBox';
 import ContentTabs from '../../../components/base/ContentTabs';
 import DataRow from '../../../components/base/DataRow';
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
-import { Divinity as DivinityDomain } from '../../../data/domain/world-5/divinity';
+import { Divinity as DivinityDomain, NobisectGod } from '../../../data/domain/world-5/divinity';
 import { Player } from '../../../data/domain/player';
 import { Skilling } from '../../../data/domain/skilling';
 import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
 import { CharacterBox } from '../../../components/base/CharacterBox';
+import { commaNotation } from '../../../data/utility';
 
 function AlignmentDisplay() {
     const [divinity, setDivinity] = useState<DivinityDomain>();
@@ -92,18 +93,24 @@ function AlignmentDisplay() {
 
 function GodDisplay() {
     const [divinity, setDivinity] = useState<DivinityDomain>();
-    const { theData } = useAppDataStore(useShallow(
+    const { theData, lastUpdated } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
 
+    const players: Player[] = theData.get("players");
+
     useEffect(() => {
         setDivinity(theData.get("divinity"));
-    }, [theData]);
+    }, [theData, lastUpdated]);
 
     return (
         <Box margin={{ top: 'small' }} gap="small">
             {
                 divinity && divinity.gods.map((god, index) => {
+                    const unlinkedBlessingPlayers = god instanceof NobisectGod
+                        ? players.filter(player => !god.linkedPlayers.some(linkedPlayer => linkedPlayer.playerID === player.playerID))
+                        : [];
+
                     return (
                         <DataRow
                             key={index}
@@ -147,22 +154,53 @@ function GodDisplay() {
                                     role: 'description',
                                 },
                             ]}
-                            details={god.linkedPlayers.length > 0 ? [
-                                {
-                                    key: 'linked-characters',
-                                    label: 'Linked Characters',
-                                    content: (
-                                        <Box direction="row" wrap gap="xsmall" pad="small">
-                                            {god.linkedPlayers.map((player, index) => (
-                                                <CharacterBox
-                                                    key={index}
-                                                    player={player}
-                                                />
-                                            ))}
-                                        </Box>
-                                    ),
-                                },
-                            ] : undefined}
+                            details={[
+                                ...(god.linkedPlayers.length > 0 ? [
+                                    {
+                                        key: 'linked-characters',
+                                        label: god instanceof NobisectGod
+                                            ? 'Linked Characters (base skill efficiency)'
+                                            : 'Linked Characters',
+                                        content: (
+                                            <Box direction="row" wrap gap="xsmall" pad="small" data-nobisect-blessings={god instanceof NobisectGod ? true : undefined}>
+                                                {god.linkedPlayers.map((player, index) => (
+                                                    <CharacterBox
+                                                        key={index}
+                                                        player={player}
+                                                    >
+                                                        {god instanceof NobisectGod && (
+                                                            <Box align="end">
+                                                                <Text size="small" data-nobisect-blessing={player.playerID}>
+                                                                    +{commaNotation(god.getBlessingBonus(player))}
+                                                                </Text>
+                                                            </Box>
+                                                        )}
+                                                    </CharacterBox>
+                                                ))}
+                                            </Box>
+                                        ),
+                                    },
+                                ] : []),
+                                ...(god instanceof NobisectGod && unlinkedBlessingPlayers.length > 0 ? [
+                                    {
+                                        key: 'unlinked-character-blessings',
+                                        label: 'Blessing for unlinked characters (base skill efficiency)',
+                                        content: (
+                                            <Box direction="row" wrap gap="xsmall" pad="small" data-nobisect-blessings>
+                                                {unlinkedBlessingPlayers.map(player => (
+                                                    <CharacterBox key={player.playerID} player={player}>
+                                                        <Box align="end">
+                                                            <Text size="small" data-nobisect-blessing={player.playerID}>
+                                                                +{commaNotation(god.getBlessingBonus(player))}
+                                                            </Text>
+                                                        </Box>
+                                                    </CharacterBox>
+                                                ))}
+                                            </Box>
+                                        ),
+                                    },
+                                ] : []),
+                            ]}
                         />
                     )
                 })

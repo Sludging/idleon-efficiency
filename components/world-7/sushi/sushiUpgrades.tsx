@@ -131,7 +131,7 @@ export const SushiUpgrades = ({ upgrades, bucks }: { upgrades: SushiUpgrade[]; b
                     <Box gap="xsmall" style={{ opacity: row.locked ? 0.5 : 1, whiteSpace: "nowrap" }}>
                         <Box direction="row" gap="xsmall" align="center">
                             <IconImage data={sushiBucksImage} scale={0.5} />
-                            <Text style={{ fontSize: "14px" }} color={row.locked ? undefined : canAfford ? "green-1" : "red"}>
+                            <Text size="small" color={row.locked ? undefined : canAfford ? "green-1" : "red"}>
                                 {notateNumber(row.nextCost, "Big")} Bucks
                             </Text>
                         </Box>
@@ -152,6 +152,7 @@ export const SushiUpgrades = ({ upgrades, bucks }: { upgrades: SushiUpgrade[]; b
             columns={columns}
             data={displayedRows}
             primaryKey="id"
+            variant="panel"
         />
     );
 };

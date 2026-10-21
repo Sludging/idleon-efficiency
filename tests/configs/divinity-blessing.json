@@ -3,16 +3,6 @@
   "target": "Divinity blessing bonuses",
   "extractions": [
     {
-      "label": "emporium_bonus_33",
-      "expression": "idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 33, 0)",
-      "description": "True Godly Blessings Jade Emporium upgrade input"
-    },
-    {
-      "label": "gods_unlocked_count",
-      "expression": "idleon.engine.getGameAttribute(\"Divinity\")[25]",
-      "description": "Unlocked-god count used to calculate blessing god rank"
-    },
-    {
       "label": "skill_all_efficiencies",
       "expression": "idleon.callFunction(\"SkillStats\", \"AllEfficiencies\")",
       "description": "Active player's all-skill efficiency for Nobisect's BlessyBun blessing"

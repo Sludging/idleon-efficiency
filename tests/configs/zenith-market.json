@@ -20,7 +20,97 @@
     {
       "label": "zenith_market_9_bonus",
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 9, 0)",
-      "description": "ZenithMarket bonus 9 (Classy Gogo) computed bonus - sample upper index"
+      "description": "Classy Gogo current bonus value"
+    },
+    {
+      "label": "zenith_market_1_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 1, 0)",
+      "description": "Kruk Bubbles current bonus value"
+    },
+    {
+      "label": "zenith_market_3_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 3, 0)",
+      "description": "Double Cluster current bonus value"
+    },
+    {
+      "label": "zenith_market_4_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 4, 0)",
+      "description": "Bubble Boost current bonus value"
+    },
+    {
+      "label": "zenith_market_6_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 6, 0)",
+      "description": "Most Grandiose current bonus value"
+    },
+    {
+      "label": "zenith_market_7_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 7, 0)",
+      "description": "Giga Symbols current bonus value"
+    },
+    {
+      "label": "zenith_market_8_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 8, 0)",
+      "description": "Woozle Wuzzle current bonus value"
+    },
+    {
+      "label": "zenith_market_10_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 10, 0)",
+      "description": "Kingdomercial current bonus value"
+    },
+    {
+      "label": "zenith_market_0_cost",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 0, 0)",
+      "description": "True Zen next-level Zenith Cluster cost"
+    },
+    {
+      "label": "zenith_market_1_cost",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 1, 0)",
+      "description": "Kruk Bubbles next-level Zenith Cluster cost"
+    },
+    {
+      "label": "zenith_market_2_cost",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 2, 0)",
+      "description": "Lamp Boost next-level Zenith Cluster cost"
+    },
+    {
+      "label": "zenith_market_3_cost",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 3, 0)",
+      "description": "Double Cluster next-level Zenith Cluster cost"
+    },
+    {
+      "label": "zenith_market_4_cost",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 4, 0)",
+      "description": "Bubble Boost next-level Zenith Cluster cost"
+    },
+    {
+      "label": "zenith_market_5_cost",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 5, 0)",
+      "description": "Super Dupers next-level Zenith Cluster cost"
+    },
+    {
+      "label": "zenith_market_6_cost",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 6, 0)",
+      "description": "Most Grandiose next-level Zenith Cluster cost"
+    },
+    {
+      "label": "zenith_market_7_cost",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 7, 0)",
+      "description": "Giga Symbols next-level Zenith Cluster cost"
+    },
+    {
+      "label": "zenith_market_8_cost",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 8, 0)",
+      "description": "Woozle Wuzzle next-level Zenith Cluster cost"
+    },
+    {
+      "label": "zenith_market_9_cost",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 9, 0)",
+      "description": "Classy Gogo next-level Zenith Cluster cost"
+    },
+    {
+      "label": "zenith_market_10_cost",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketCost\", 10, 0)",
+      "description": "Kingdomercial next-level Zenith Cluster cost"
     }
   ]
 }

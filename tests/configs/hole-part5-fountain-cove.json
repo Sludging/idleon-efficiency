@@ -1,0 +1,29 @@
+{
+  "name": "Hole part-five Fountain stack and Cove camp factors",
+  "description": "Paired v1.23 Fountain currency and royal values, saved stack inputs, and Cove calculation outputs from the latest saved account.",
+  "requiredActivePlayerIndex": 3,
+  "extractions": [
+    {
+      "label": "active_context",
+      "expression": "({ playerId: idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0]), playerName: idleon.getAttr(\"UserInfo\")[0], version: idleon.getAttr('DoOnceREAL') })"
+    },
+    { "label": "camp_upgrade_100_25", "expression": "idleon.callFunction('Holes', 'B_UPG', 100, 25)" },
+    { "label": "camp_upgrade_101_10", "expression": "idleon.callFunction('Holes', 'B_UPG', 101, 10)" },
+    { "label": "camp_upgrade_103_10", "expression": "idleon.callFunction('Holes', 'B_UPG', 103, 10)" },
+    { "label": "camp_upgrade_105_10", "expression": "idleon.callFunction('Holes', 'B_UPG', 105, 10)" },
+    { "label": "cove_respawn_upgrade", "expression": "idleon.callFunction('Holes2', 'Cglunko_Respawn', 0, 0)" },
+    { "label": "cove_pickup_double_chance", "expression": "idleon.callFunction('Holes2', 'Cglunko_DoublePickup', 0, 0)" },
+    { "label": "desire_currency_id", "expression": "idleon.getAttr('Holes')[11][82]" },
+    { "label": "native_cove_glunko_kills", "expression": "idleon.getAttr('OptionsListAccount')[668]" },
+    { "label": "native_fountain_opal_progress", "expression": "idleon.getAttr('Holes')[7][15]" },
+    { "label": "desire_currency_bonus", "expression": "idleon.callFunction('Holes2', 'Fountain_BonTOT', 1, 11)" },
+    { "label": "fountain_bonus_terms", "expression": "[[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[1,2],[1,3],[1,4],[1,5],[1,6],[1,7],[1,19],[2,2],[2,3],[2,4],[2,5],[2,6]].map(([page,index]) => ({ page, index, value: idleon.callFunction('Holes2', 'Fountain_BonTOT', page, index) }))" },
+    { "label": "currency_values", "expression": "Array.from({ length: 9 }, (_, currencyId) => idleon.callFunction('Holes2', 'Fount_CurrencyTotValue', currencyId, 0))" },
+    { "label": "all_currency_multiplier", "expression": "idleon.callFunction('Holes2', 'Fount_CurrencyALLmulti', 0, 0)" },
+    { "label": "royal_multiplier", "expression": "idleon.callFunction('Holes2', 'Fount_RoyalMulti', 0, 0)" },
+    { "label": "currency_4_base_value", "expression": "idleon.callFunction('Holes2', 'Fount_CurrencyBaseValue', 4, 0)" },
+    { "label": "duck_multiplier", "expression": "idleon.callFunction('Holes2', 'Fount_DuckMulti', 0, 0)" },
+    { "label": "stack_currency_ids", "expression": "idleon.getAttr('Holes')[29]" },
+    { "label": "stack_royal_flags", "expression": "idleon.getAttr('Holes')[34]" }
+  ]
+}

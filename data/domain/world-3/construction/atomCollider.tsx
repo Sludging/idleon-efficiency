@@ -14,6 +14,7 @@ import { Compass } from '../../compass';
 import { Bubba } from '../bubba';
 import { EventShop } from '../../eventShop';
 import { Gaming } from '../../world-5/gaming';
+import { Menagerie } from '../../menagerie';
 
 export class Atom {
     level: number = 0;
@@ -31,13 +32,14 @@ export class Atom {
     superbit23MaxLevelBoost: number = 0;
     compass53MaxLevelBoost: number = 0;
     eventShop28MaxLevelBoost: number = 0;
+    menagerie17MaxLevelBoost: number = 0;
     superbit21Discount: number = 0;
     stampDiscount: number = 0;
 
     constructor(public index: number, public data: AtomColliderModel) { }
 
     getMaxLevel = () => {
-        return 20 + this.superbit23MaxLevelBoost + this.compass53MaxLevelBoost + this.eventShop28MaxLevelBoost;
+        return Math.round(20 + this.superbit23MaxLevelBoost + this.compass53MaxLevelBoost + this.eventShop28MaxLevelBoost + this.menagerie17MaxLevelBoost);
     }
 
     getBonus = (): number => {
@@ -190,6 +192,7 @@ export function updateAtomCollider(data: Map<string, any>) {
     const compass = data.get("compass") as Compass;
     const bubba = data.get("bubba") as Bubba;
     const eventShop = data.get("eventShop") as EventShop;
+    const menagerie = data.get("menagerie") as Menagerie;
     const gaming = data.get("gaming") as Gaming;
 
     (collider.atoms[0] as HydrogenAtom).daysSinceUpgrade = optLacc[134];
@@ -208,6 +211,7 @@ export function updateAtomCollider(data: Map<string, any>) {
     const bubbaBonus7 = bubba.getGlobalBonus(7);
     const compass53MaxLevelBoost = compass.getUpgradeBonus(53);
     const eventShop28MaxLevelBoost = eventShop.isBonusOwned(28) ? 20 : 0;
+    const menagerie17MaxLevelBoost = menagerie.getBonusValue(17);
 
     collider.atoms.forEach(atom => {
         atom.bubbleBonus = bubbleBonusY5;
@@ -221,6 +225,7 @@ export function updateAtomCollider(data: Map<string, any>) {
         atom.bubbaBonus7 = bubbaBonus7;
         atom.compass53MaxLevelBoost = compass53MaxLevelBoost;
         atom.eventShop28MaxLevelBoost = eventShop28MaxLevelBoost;
+        atom.menagerie17MaxLevelBoost = menagerie17MaxLevelBoost;
     })
 
     return collider;

@@ -6,7 +6,7 @@
     },
     "royal_armory_bonus_19": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 19, 0)",
-      "result": 110
+      "result": 150
     }
   },
   "errors": {}

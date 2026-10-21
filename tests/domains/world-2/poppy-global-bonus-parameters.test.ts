@@ -3,6 +3,8 @@ import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Companion, getCompanionActiveBonus } from '../../../data/domain/companions';
 import { LegendTalents } from '../../../data/domain/world-7/legendTalents';
 
+import { Poppy } from '../../../data/domain/world-2/poppy';
+
 const saveName = 'latest';
 const extractionResultsName = 'poppy-global-bonus-data.json';
 
@@ -21,6 +23,12 @@ const parameterSpecs = {
     extractionKey: 'companion_51_bonus',
     domainExtractor: (gameData: Map<string, any>) =>
       getCompanionActiveBonus(gameData.get('companions') as Companion[], 51),
+  },
+  global_bonus_multi: {
+    description: 'Poppy global bonus multiplier from Roo Megafeathers',
+    extractionKey: 'global_bonus_multi',
+    domainExtractor: (gameData: Map<string, any>) =>
+      (gameData.get('poppy') as Poppy).getGlobalBonusMulti(),
   },
 };
 
@@ -42,3 +50,5 @@ describe('Poppy Domain - Global Bonus - Parameters', () => {
     });
   });
 });
+
+

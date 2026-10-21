@@ -53,6 +53,7 @@ const getDescriptionForUnlock = (upgrade: SushiUpgrade, level: number): string |
 export class SushiUpgrade {
     level: number = 0;
     unlocked: boolean = false;
+    menagerieDoubled = false;
     costModifiers: SushiUpgradeCostModifiers = {
         wholesaleQuantity: 0,
         unlockDiscountPercent: 0,
@@ -83,7 +84,7 @@ export class SushiUpgrade {
     }
 
     getBonus(level: number = this.level): number {
-        return this.data.bonusPerLevel * level;
+        return this.data.bonusPerLevel * level * (this.menagerieDoubled ? 2 : 1);
     }
 
     /** Returns the game's cost for purchasing this upgrade at the given level. */

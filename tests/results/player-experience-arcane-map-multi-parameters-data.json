@@ -1,0 +1,9 @@
+{
+  "extractions": {
+    "arcane_map_multi_bonus_1": {
+      "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneMapMulti_bon\", 1, 0)",
+      "result": 0
+    }
+  },
+  "errors": {}
+}

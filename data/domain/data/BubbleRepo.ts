@@ -2315,6 +2315,16 @@ export const initBubbleRepo = () => {
                         "description": "+{% extra Cooking Mastery EXP gain!",
                         "requirements": [<ComponentModel>{"item": "Spelunking5", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
                         "bonusKey": "7cookmastery"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Vials",
+                        "name": "Spiked Drink",
+                        "x1": 0.2,
+                        "x2": 0,
+                        "func": "add",
+                        "description": "+{% Hourly Lumi Gains at the Menagerie!",
+                        "requirements": [<ComponentModel>{"item": "w7B10", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
+                        "bonusKey": "7lumiadd"
                     }
                 ]
             }),
@@ -2482,13 +2492,13 @@ export const initBubbleRepo = () => {
                     },
                     <BubbleModel>{
                         "cauldron": "Liquid Shop",
-                        "name": "Empty Space",
+                        "name": "Luminous Shell",
                         "x1": 1,
                         "x2": 0,
                         "func": "0",
-                        "description": "There's nothing here buddy, but that ain't gon stop me from selling it to ya!",
-                        "requirements": [<LiquidComponentModel>{"liquidNo": "3", "quantity": 1}],
-                        "bonusKey": "1"
+                        "description": "Gives +1 Shell for the Luminous Menagerie. That cost isn't a glitch, this is some late game stuff... this item's cost will never reset!",
+                        "requirements": [<LiquidComponentModel>{"liquidNo": "4", "quantity": 100000}],
+                        "bonusKey": "0"
                     },
                     <BubbleModel>{
                         "cauldron": "Liquid Shop",

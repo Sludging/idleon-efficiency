@@ -1,0 +1,25 @@
+{
+  "extractions": {
+    "recipient_mining_action_bonus": {
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.CalcTalentMAP.h[43][0]",
+      "result": 103.125
+    },
+    "recipient_worship_action_bonus": {
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.CalcTalentMAP.h[43][8]",
+      "result": 0
+    },
+    "source_action_bonus": {
+      "expression": "idleon.callFunction(\"ArbitraryCode5Inputs\", idleon.engine.getGameAttribute(\"CustomLists\").h.TalentDescriptions[43][1][2], Number(idleon.engine.getGameAttribute(\"CustomLists\").h.TalentDescriptions[43][1][0]), Number(idleon.engine.getGameAttribute(\"CustomLists\").h.TalentDescriptions[43][1][1]), idleon.engine.getGameAttribute(\"PlayerDATABASE\").h.SludgeMan.h.SkillLevels[43], 0, 0)",
+      "result": 103.125
+    },
+    "enhancement_eclipse_bonus": {
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 49, -1)",
+      "result": 250
+    },
+    "right_hand_enhancement": {
+      "expression": "idleon.callFunction(\"TalentEnh\", 43)",
+      "result": 1
+    }
+  },
+  "errors": {}
+}

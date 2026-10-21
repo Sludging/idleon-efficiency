@@ -1,0 +1,46 @@
+{
+  "description": "Additive all-base skill efficiency and its seven direct contributions for the retained target character",
+  "target": "Skilling all-base skill efficiency",
+  "extractions": [
+    {
+      "label": "all_base_skill_efficiency",
+      "expression": "idleon.callFunction(\"SkillStats\", \"AllBaseSkillEff\")",
+      "description": "Target character additive base efficiency for every skill"
+    },
+    {
+      "label": "breeding_base_efficiency",
+      "expression": "idleon.callFunction(\"Breeding\", \"ShinyBonusS\", \"Nah\", 22, -1)",
+      "description": "Breeding shiny bonus 22 adds base efficiency"
+    },
+    {
+      "label": "stamps_base_efficiency",
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseAllEff\")",
+      "description": "Combined stamp contribution to base efficiency"
+    },
+    {
+      "label": "nobisect_base_efficiency",
+      "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 2, 0)",
+      "description": "Nobisect blessing contribution for the target character"
+    },
+    {
+      "label": "post_office_base_efficiency",
+      "expression": "idleon.getDNSM(\"BoxRewards\").h[\"20b\"]",
+      "description": "Prepared Myriad Crate second reward for the target character"
+    },
+    {
+      "label": "chips_base_efficiency",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"eff\")",
+      "description": "Recipient equipped Lab chip contribution to base efficiency"
+    },
+    {
+      "label": "talent_base_efficiency",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 636)",
+      "description": "Supersource talent contribution for the target character"
+    },
+    {
+      "label": "emerald_navette_base_efficiency",
+      "expression": "idleon.callFunction(\"MainframeBonus\", 112)",
+      "description": "Emerald Navette jewel 12 contribution after Lab preparation"
+    }
+  ]
+}

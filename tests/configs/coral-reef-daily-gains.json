@@ -13,16 +13,6 @@
       "description": "Companion 40 bonus (multiplicative)"
     },
     {
-      "label": "param_event_shop_25_owned",
-      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 25, 0)",
-      "description": "Event shop bonus 25 owned"
-    },
-    {
-      "label": "param_gem_purchase_41",
-      "expression": "idleon.engine.getGameAttribute(\"GemItemsPurchased\")[41]",
-      "description": "Gem purchase 41 count"
-    },
-    {
       "label": "param_coral_kid_bonus_5",
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 5, 0)",
       "description": "Coral Kid bonus 5 (daily coral generation)"
@@ -61,11 +51,6 @@
       "label": "param_arcade_bonus_57",
       "expression": "idleon.callFunction(\"ArcadeBonus\", 57)",
       "description": "Arcade bonus 57"
-    },
-    {
-      "label": "param_emporium_bonus_43",
-      "expression": "idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 43, 0)",
-      "description": "Sneaking emporium bonus 43"
     },
     {
       "label": "param_card_w7a9_level",

@@ -51,7 +51,7 @@ export const initDancingCoralBonusRepo = () => {
         new DancingCoralBonusBase(6, <DancingCoralBonusModel>{
                 "name": "Gilded Coral",
                 "itemSource": "Dropped by RIPtide",
-                "desc": "+{% who knows",
+                "desc": "+{% Lumi Gains",
                 "cost": 500000,
                 "bonus": 1
             }),

@@ -1,0 +1,13 @@
+{
+  "extractions": {
+    "jelly_class_exp_30": {
+      "expression": "idleon.allScripts.ActorEvents_189._customBlock_JellyOperation(\"RoG_BonusQTY\", 30, 0)",
+      "result": 0
+    },
+    "jelly_class_exp_62": {
+      "expression": "idleon.allScripts.ActorEvents_189._customBlock_JellyOperation(\"RoG_BonusQTY\", 62, 0)",
+      "result": 0
+    }
+  },
+  "errors": {}
+}

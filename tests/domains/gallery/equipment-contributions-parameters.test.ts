@@ -33,8 +33,8 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
     domainExtractor: gameData => {
       const card = (gameData.get('cards') as Card[]).find(card => card.id === 'w7a11');
       if (!card) throw new Error('Missing w7a11 card definition for Gallery dependency RunCodeOfTypeXforThingY("CardLv", "w7a11")');
-      // CardLv counts an owned zero-star card as level one.
-      return card.count > 0 ? card.getLevels() + 1 : 0;
+      // Native progression includes level one for an owned zero-star card.
+      return card.count > 0 ? card.getLevels() : 0;
     },
   },
   companion_28: {

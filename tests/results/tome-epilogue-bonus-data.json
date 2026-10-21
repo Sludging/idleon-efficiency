@@ -2,43 +2,43 @@
   "extractions": {
     "lore_epic_bonus_0": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 0, 0)",
-      "result": 630.7706895687219
+      "result": 631.7850843751136
     },
     "lore_epic_bonus_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 1, 0)",
-      "result": 231.87015903498067
+      "result": 232.1676213243579
     },
     "lore_epic_bonus_2": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 2, 0)",
-      "result": 1132.3414213056824
+      "result": 1134.091141127495
     },
     "lore_epic_bonus_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 3, 0)",
-      "result": 153.20937484491682
+      "result": 153.42057032987418
     },
     "lore_epic_bonus_4": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 4, 0)",
-      "result": 570.5175788335048
+      "result": 571.8344479390266
     },
     "lore_epic_bonus_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 5, 0)",
-      "result": 291.4855311079834
+      "result": 292.06737923343155
     },
     "lore_epic_bonus_6": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 6, 0)",
-      "result": 910.4839764052625
+      "result": 911.8371054014087
     },
     "lore_epic_bonus_7": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 7, 0)",
-      "result": 28.300100855504606
+      "result": 28.368876757021038
     },
     "lore_epic_bonus_8": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 8, 0)",
-      "result": 333.8441246819296
+      "result": 334.34027198051655
     },
     "lore_epic_bonus_9": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 9, 0)",
-      "result": 140.32034222833695
+      "result": 140.6800041330984
     },
     "lore_epic_bonus_10": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 10, 0)",
@@ -51,10 +51,6 @@
     "troll_set_bonus": {
       "expression": "idleon.callFunction(\"GetSetBonus\", \"TROLL_SET\", \"Bonus\", 0, 0)",
       "result": 25
-    },
-    "epilogue_bonus_unlocked_count": {
-      "expression": "idleon.getAttr(\"Spelunk\")[13][2]",
-      "result": 10
     }
   },
   "errors": {}

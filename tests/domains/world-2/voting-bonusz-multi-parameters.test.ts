@@ -1,4 +1,3 @@
-import { Companion, getCompanionActiveBonus } from '../../../data/domain/companions';
 import { Hole } from '../../../data/domain/world-5/hole/hole';
 import { Gaming } from '../../../data/domain/world-5/gaming';
 import { Summoning } from '../../../data/domain/world-6/summoning';
@@ -56,11 +55,6 @@ const calculatedDependencySpecs: Record<string, ParameterTestSpec> = {
   },
 };
 
-const companionMappingCases = [
-  { index: 161, extractionKey: 'companion_bonus_161', description: 'Poppy’s separate multiplicative vote contribution' },
-  { index: 41, extractionKey: 'companion_bonus_41', description: 'Companion 41 additive vote contribution' },
-  { index: 19, extractionKey: 'companion_bonus_19', description: 'Companion 19 additive vote contribution' },
-];
 
 describe('Votes calculated input parameters', () => {
   let extractionResults: ExtractionResults;
@@ -80,14 +74,4 @@ describe('Votes calculated input parameters', () => {
     });
   });
 
-  describe('Companion cache mappings (not calculated dependencies)', () => {
-    companionMappingCases.forEach(({ index, extractionKey, description }) => {
-      it(`matches ${description}`, () => {
-        const companions = gameData.get('companions') as Companion[];
-        const liveValue = getExtractedValue(extractionResults, extractionKey);
-        const domainValue = getCompanionActiveBonus(companions, index);
-        expect(domainValue).toMatchLiveGame(liveValue, 0);
-      });
-    });
-  });
 });

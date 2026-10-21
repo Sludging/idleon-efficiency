@@ -71,11 +71,12 @@ The [.impeccable/design.json](.impeccable/design.json) sidecar carries tooling p
 
 ## Typography
 
-Rubik is loaded through `next/font` in weights 400, 500, and 700. The frontmatter family reflects the rendered app-root stack, including its generated fallback, rather than a literal family string set in `customTheme`.
+Rubik loads locally from the full-coverage variable font at weights 300–900; use 400, 500, and 700 for the established regular, medium, and bold text roles. The font comes from the [official Google Fonts Rubik directory](https://github.com/google/fonts/tree/main/ofl/rubik), specifically [`Rubik[wght].ttf`](https://github.com/google/fonts/blob/main/ofl/rubik/Rubik%5Bwght%5D.ttf), and is licensed under the SIL Open Font License 1.1; see [`lib/fonts/OFL.txt`](lib/fonts/OFL.txt). The frontmatter family reflects the rendered app-root stack, including its generated fallback, rather than a literal family string set in `customTheme`.
 
 - **Body:** observed themed app-root default. The custom theme sets the base size; inherited typography supplies the line height. This is not a rule that every value or control uses body sizing.
 - **Ordinary feature heading:** use `<Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>`, as specified by the [UI work guide](docs/agents/ui-patterns.md) and shown in [Legend Talents](app/world-7/legendTalents/content.tsx). The frontmatter records its observed desktop rendering. Subsections, documents, authentication, and intentionally different hierarchies are exceptions, not additional display roles defined here.
 - **Component-specific text:** desktop navigation labels use medium weight (500); `TextAndLabel` supplies small labels by default and accepts value sizes suited to their role. Welcome primary actions use larger text (16px); `SmallButton` uses compact text (12px). Preserve each component's own hierarchy.
+- **New World 7 page typography:** Spelunking, Research, Sushi Station, Menagerie, and Jelly Operator use the existing named Grommet text sizes instead of local pixel font sizes. Use `xxlarge` for prominent account balances and DPS, `large` for supporting rates, and smaller named sizes for compact values and labels. Let the selected size supply line height. Native table text and status spans read the same named theme entries.
 
 At the sampled mobile viewport, ordinary feature headings rendered at 26px/32px. This is descriptive only. The unthemed HTML body is not the typography authority; inspect the Grommet app root or the actual component.
 
@@ -91,8 +92,13 @@ At the sampled mobile viewport, ordinary feature headings rendered at 26px/32px.
 - **Atom Collider rows:** dark-1 surface, `medium` padding, `small` field gaps, and related values grouped with `TextAndLabel`. Its fields, widths, and percentage tracks are feature-specific. The rendered construction section also adds a `large` inset; that is not an ordinary page-wrapper rule. [Source](components/world-3/construction/atomCollider.tsx).
 - **Sneaking upgrade cards:** keep identity and details together; put the game image beside the name/level, on dark-1 with `medium` padding and `small` inner gaps. The outer card gap is `medium`, not universally small. Three columns at the sampled 1440px desktop viewport describe this feature, not a universal grid. [Source](components/world-6/sneaking/sneakingUpgrades.tsx).
 - **Tables and icon grids:** choose the named patterns in the [UI work guide](docs/agents/ui-patterns.md) for the player task. Their columns, controls, image inset, and disclosure behavior remain feature-specific.
+- **Spelunking account summary:** retain four groups and the character strip above tabs. Match group-heading placement and medium separator spacing; keep Amber prominent with normal weight. Keep progression bars and operational metrics compact, with intrinsic-width wrapping rows rather than equal-width metric columns.
+- **World 7 upgrade-table panels:** Sushi Station, Spelunking Shop, and Jelly Operator use `UpgradeTable`'s `panel` variant for a separate toolbar, rounded frame, solid rows, and horizontal dividers. Preserve each feature's columns, filters, and formatting.
+- **Current → next bonus insets:** Sushi Collection and Menagerie Bonuses use a `dark-3` surface, small padding, and `xsmall` rounding. Current values are neutral and bold; arrows and next values use `accent-2`. Keep each feature's identity labels and formatting.
 
 Tome's 12px-padded score cards and Stamps' compact tiles are observed local compositions, not approved site-wide density standards. Named references approve specific traits, not entire pages or one universal card/row schema.
+
+**Research summary trial:** Research keeps its standard page title above one open summary and its tabs. The Experience group places the large numeric level, smaller current/required EXP, and neutral EXP rate in a compact wrapping flex row with labels below. Observation discovery shows remaining attempts and roll range; daily allowance and its contributors appear in the remaining-attempts tooltip. A compact Other group contains total Insight levels, Insight rate, and offline gains. Desktop groups have vertical `grey-1` dividers and medium horizontal insets. Research and Sushi Station keep intrinsic-width metric groups with medium gaps rather than equal-width columns. Values use named typography and retain contributor tooltips. Small screens retain stacked groups without vertical dividers. This trial does not change Spelunking or establish a mandatory summary layout for other pages.
 
 ## Elevation & Depth
 
@@ -100,6 +106,7 @@ Tonal surfaces with supporting shadows. Dark surfaces provide the foundation; sh
 
 - **Shared container/navigation shadow:** `-7px 8px 16px 0 rgba(0,0,0,0.17)`. Used by [`ShadowBox`](components/base/ShadowBox.tsx), the theme's dark `navigation` elevation, and the `CustomTabs` header.
 - **Dropdown shadow:** `rgb(1, 4, 9) 0px 8px 24px 0px`. Defined separately by the theme's dark `dropdown` elevation.
+- **Grey card headers:** use Jelly Operator's `0 3px 6px rgba(0, 0, 0, 0.18)` shadow with `position: relative` and `z-index: 1` on full-width `grey-1` card headers. Spelunking chapter cards and Menagerie cards follow this treatment. Use medium horizontal and small vertical padding, small bold identity text, and xsmall `accent-2` secondary identity or state text. Preserve feature-specific artwork. This does not require adding grey headers to cards that do not have them.
 
 A `ShadowBox` supplies a shadow, not a complete card style: its background, padding, and other composition choices come from its caller.
 

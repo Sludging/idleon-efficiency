@@ -1,0 +1,16 @@
+{
+  "description": "Native PlayerBuildSpd rates for Cog-assigned characters",
+  "target": "Construction Cog Player Build Speed",
+  "extractions": [
+    {
+      "label": "player_build_speed_player_3",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 3, 0)",
+      "description": "Native PlayerBuildSpd for username index 3 (Sludgev4)"
+    },
+    {
+      "label": "player_build_speed_player_7",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 7, 0)",
+      "description": "Native PlayerBuildSpd for username index 7 (Sludgev8)"
+    }
+  ]
+}

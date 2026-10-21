@@ -46,11 +46,6 @@
       "label": "sticker_event_shop_bonus",
       "expression": "idleon.callFunction(\"Summoning\",\"EventShopOwned\",37,0)",
       "description": "Event Shop sticker enhancement ownership directly used by Farming sticker bonuses"
-    },
-    {
-      "label": "sticker_superbit_bonus",
-      "expression": "idleon.callFunction(\"GamingStatType\",\"SuperBitType\",62,0)",
-      "description": "Superbit sticker enhancement ownership directly used by Farming sticker bonuses"
     }
   ]
 }

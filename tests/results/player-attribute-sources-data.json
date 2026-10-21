@@ -1,0 +1,385 @@
+{
+  "extractions": {
+    "bubble_TotalSTR": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.TotalSTR",
+      "result": 398644.83088573493
+    },
+    "bubble_TotalAGI": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.TotalAGI",
+      "result": 405672.2062401491
+    },
+    "bubble_TotalWIS": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.TotalWIS",
+      "result": 408386.022376268
+    },
+    "bubble_TotalLUK": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.TotalLUK",
+      "result": 51065.467879373115
+    },
+    "bubble_W4": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.W4",
+      "result": 3418.9997318233445
+    },
+    "bubble_A4": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.A4",
+      "result": 377.3156899810964
+    },
+    "bubble_M4": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.M4",
+      "result": 382.8937990021383
+    },
+    "talent_10": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 10)",
+      "result": 1715
+    },
+    "talent_11": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 11)",
+      "result": 686
+    },
+    "talent_12": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 12)",
+      "result": 600
+    },
+    "talent_13": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 13)",
+      "result": 292
+    },
+    "talent_98": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 98)",
+      "result": 411
+    },
+    "talent_203": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 203)",
+      "result": 965
+    },
+    "talent_278": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 278)",
+      "result": 0
+    },
+    "talent_428": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 428)",
+      "result": 0
+    },
+    "talent_459": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 459)",
+      "result": 0
+    },
+    "talent_593": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 593)",
+      "result": 0
+    },
+    "talent_23": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 23)",
+      "result": 0
+    },
+    "talent_652": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 652)",
+      "result": 300
+    },
+    "talent_618": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 618)",
+      "result": 400
+    },
+    "talent_143": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 143)",
+      "result": 12.520661157024794
+    },
+    "talent_368": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 368)",
+      "result": 0
+    },
+    "talent_533": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 533)",
+      "result": 0
+    },
+    "talent_653": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 653)",
+      "result": 0
+    },
+    "talent_142_second": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 2, 142)",
+      "result": 253
+    },
+    "talent_367_second": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 2, 367)",
+      "result": 0
+    },
+    "talent_532_second": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 2, 532)",
+      "result": 0
+    },
+    "stamp_BaseSTR": {
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseSTR\")",
+      "result": 1977.5
+    },
+    "stamp_BaseAGI": {
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseAGI\")",
+      "result": 1307.5
+    },
+    "stamp_BaseWIS": {
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseWIS\")",
+      "result": 1637.5
+    },
+    "stamp_BaseLUK": {
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseLUK\")",
+      "result": 2090
+    },
+    "stamp_BaseAllStat": {
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseAllStat\")",
+      "result": 870
+    },
+    "stamp_AllStatPct": {
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"AllStatPct\")",
+      "result": 8.035714285714286
+    },
+    "sign_STR": {
+      "expression": "idleon.getDNSM(\"StarSigns\").h.STR",
+      "result": 650
+    },
+    "sign_pctSTR": {
+      "expression": "idleon.getDNSM(\"StarSigns\").h.pctSTR",
+      "result": 40
+    },
+    "sign_AGI": {
+      "expression": "idleon.getDNSM(\"StarSigns\").h.AGI",
+      "result": 650
+    },
+    "sign_pctAGI": {
+      "expression": "idleon.getDNSM(\"StarSigns\").h.pctAGI",
+      "result": 40
+    },
+    "sign_WIS": {
+      "expression": "idleon.getDNSM(\"StarSigns\").h.WIS",
+      "result": 650
+    },
+    "sign_pctWIS": {
+      "expression": "idleon.getDNSM(\"StarSigns\").h.pctWIS",
+      "result": 40
+    },
+    "sign_LUK": {
+      "expression": "idleon.getDNSM(\"StarSigns\").h.LUK",
+      "result": 650
+    },
+    "sign_pctLUK": {
+      "expression": "idleon.getDNSM(\"StarSigns\").h.pctLUK",
+      "result": 40
+    },
+    "post_office_23b": {
+      "expression": "idleon.getDNSM(\"BoxRewards\").h[\"23b\"]",
+      "result": 150
+    },
+    "post_office_21b": {
+      "expression": "idleon.getDNSM(\"BoxRewards\").h[\"21b\"]",
+      "result": 150
+    },
+    "post_office_22b": {
+      "expression": "idleon.getDNSM(\"BoxRewards\").h[\"22b\"]",
+      "result": 150
+    },
+    "post_office_15c": {
+      "expression": "idleon.getDNSM(\"BoxRewards\").h[\"15c\"]",
+      "result": 18
+    },
+    "post_office_LUK": {
+      "expression": "idleon.getDNSM(\"BoxRewards\").h[\"LUK\"]",
+      "result": 93.75
+    },
+    "post_office_20a": {
+      "expression": "idleon.getDNSM(\"BoxRewards\").h[\"20a\"]",
+      "result": 220.65595085973052
+    },
+    "card_9": {
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 9)",
+      "result": 0
+    },
+    "card_7": {
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 7)",
+      "result": 0
+    },
+    "card_5": {
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 5)",
+      "result": 0
+    },
+    "card_2": {
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 2)",
+      "result": 0
+    },
+    "card_82": {
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 82)",
+      "result": 0
+    },
+    "sigil_0": {
+      "expression": "idleon.callFunction(\"Labb\", \"SigilBonus\", \"Blank\", 0, 0)",
+      "result": 1400
+    },
+    "shiny_6": {
+      "expression": "idleon.callFunction(\"Breeding\", \"ShinyBonusS\", \"Nah\", 6, -1)",
+      "result": 86
+    },
+    "arcade_19": {
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 19)",
+      "result": 50
+    },
+    "sigil_1": {
+      "expression": "idleon.callFunction(\"Labb\", \"SigilBonus\", \"Blank\", 1, 0)",
+      "result": 1400
+    },
+    "shiny_7": {
+      "expression": "idleon.callFunction(\"Breeding\", \"ShinyBonusS\", \"Nah\", 7, -1)",
+      "result": 62
+    },
+    "arcade_20": {
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 20)",
+      "result": 0
+    },
+    "sigil_2": {
+      "expression": "idleon.callFunction(\"Labb\", \"SigilBonus\", \"Blank\", 2, 0)",
+      "result": 1400
+    },
+    "shiny_8": {
+      "expression": "idleon.callFunction(\"Breeding\", \"ShinyBonusS\", \"Nah\", 8, -1)",
+      "result": 16
+    },
+    "arcade_21": {
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 21)",
+      "result": 0
+    },
+    "sigil_3": {
+      "expression": "idleon.callFunction(\"Labb\", \"SigilBonus\", \"Blank\", 3, 0)",
+      "result": 1400
+    },
+    "shiny_9": {
+      "expression": "idleon.callFunction(\"Breeding\", \"ShinyBonusS\", \"Nah\", 9, -1)",
+      "result": 72
+    },
+    "arcade_22": {
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 22)",
+      "result": 15
+    },
+    "companion_8": {
+      "expression": "idleon.callFunction(\"Companions\", 8)",
+      "result": 20
+    },
+    "pristine_4": {
+      "expression": "idleon.callFunction(\"Ninja\", \"PristineBon\", 4, 0)",
+      "result": 20
+    },
+    "pristine_1": {
+      "expression": "idleon.callFunction(\"Ninja\", \"PristineBon\", 1, 0)",
+      "result": 20
+    },
+    "pristine_10": {
+      "expression": "idleon.callFunction(\"Ninja\", \"PristineBon\", 10, 0)",
+      "result": 20
+    },
+    "pristine_5": {
+      "expression": "idleon.callFunction(\"Ninja\", \"PristineBon\", 5, 0)",
+      "result": 20
+    },
+    "buff_94": {
+      "expression": "idleon.callFunction(\"GetBuffBonuses\", 94, 1)",
+      "result": 452
+    },
+    "quest_count": {
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"TotalQuestsComplete\")",
+      "result": 317
+    },
+    "meal_stat": {
+      "expression": "idleon.callFunction(\"MealBonus\", \"Stat\")",
+      "result": 0
+    },
+    "guild_stat": {
+      "expression": "idleon.callFunction(\"GuildBonuses\", 1)",
+      "result": 2.962962962962963
+    },
+    "vial_all_stat": {
+      "expression": "idleon.getDNSM(\"AlchVials\").h.AllStatPCT",
+      "result": 10.64
+    },
+    "hole_pocket_divinity": {
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 2, 0)",
+      "result": 2
+    },
+    "summoning_all_stat": {
+      "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 18, 0)",
+      "result": 55.07775
+    },
+    "sailing_all_stat": {
+      "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 28, 0)",
+      "result": 50
+    },
+    "jelly_10": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 10, 0)",
+      "result": 100
+    },
+    "jelly_51": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 51, 0)",
+      "result": 0
+    },
+    "equipment_51": {
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"51\")",
+      "result": 0
+    },
+    "equipment_52": {
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"52\")",
+      "result": 0
+    },
+    "equipment_53": {
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"53\")",
+      "result": 0
+    },
+    "equipment_54": {
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"54\")",
+      "result": 0
+    },
+    "equipment_57": {
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"57\")",
+      "result": 0
+    },
+    "equipment_58": {
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"58\")",
+      "result": 0
+    },
+    "farming_all_stat": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"LankRankUpgBonus\", 19, 0)",
+      "result": 622.123582719807
+    },
+    "votes_all_stat": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 2, 0)",
+      "result": 0
+    },
+    "marbiglass_all_stat": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"MARBIGLASS_SET\", \"Bonus\", 0, 0)",
+      "result": 10
+    },
+    "eternal_strength": {
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 51, -1)",
+      "result": 398
+    },
+    "eternal_agility": {
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 52, -1)",
+      "result": 394
+    },
+    "eternal_wisdom": {
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 53, -1)",
+      "result": 308
+    },
+    "eternal_luck": {
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 54, -1)",
+      "result": 320
+    },
+    "will_of_the_eldest_attributes": {
+      "expression": "idleon.callFunction(\"TalentCalc\", 620)",
+      "result": 50
+    },
+    "talent_620": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 620)",
+      "result": 50
+    },
+    "dummy_target_all_stat_bonus": {
+      "expression": "Math.min(15,idleon.callFunction(\"getLOG\",Number(idleon.engine.getGameAttribute(\"OptionsListAccount\")[172]))*idleon.callFunction(\"GetTalentNumber\",1,653))",
+      "result": 0
+    }
+  },
+  "errors": {}
+}

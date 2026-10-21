@@ -1,0 +1,88 @@
+{
+  "extractions": {
+    "account_outputs": {
+      "expression": "[(1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 0, 0)) * (1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 7, 0) / 100) * (1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 1, 1) / 100) * (1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 8, 1) * idleon.engine.getGameAttribute(\"Menagerie\")[0][8] / 100), idleon.callFunction(\"Thingies\", \"Clam_BlackPearlValue\", 0, 0), idleon.callFunction(\"Thingies\", \"Clam_Mobs\", 0, 0), idleon.callFunction(\"Thingies\", \"Clamz_HP\", 0, 0), idleon.callFunction(\"Thingies\", \"Clam_Respawn\", 0, 0)]",
+      "result": [
+        412.5,
+        1050,
+        17,
+        2.43e+23,
+        60
+      ]
+    },
+    "scurge_state": {
+      "expression": "[idleon.engine.getGameAttribute(\"Menagerie\")[0][7], idleon.engine.getGameAttribute(\"Menagerie\")[0][8], idleon.callFunction(\"MenagerieStuff\", \"ScurgeUnlocked\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"ScurgeEXP_Req\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"ScurgePTS_Left\", 0, 0), (1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 0, 1)) * (1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 4, 1) / 100) * (1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 2, 1) / 100), idleon.engine.getGameAttribute(\"Menagerie\")[5]]",
+      "result": [
+        0,
+        0,
+        0,
+        50,
+        0,
+        1,
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    "scurge_bonus_inputs": {
+      "expression": "[idleon.callFunction(\"Thingies\", \"ClamBonuses\", 0, 1), idleon.callFunction(\"Thingies\", \"ClamBonuses\", 4, 1), idleon.callFunction(\"Thingies\", \"ClamBonuses\", 2, 1)]",
+      "result": [
+        0,
+        0,
+        0
+      ]
+    },
+    "clamwork_parameters": {
+      "expression": "[idleon.callFunction(\"Thingies\", \"ClamBonuses\", 0, 0), idleon.callFunction(\"Thingies\", \"ClamBonuses\", 7, 0), idleon.callFunction(\"Thingies\", \"ClamPromochance\", 0, 0), idleon.callFunction(\"Thingies\", \"Clam_Cost\", 9, 0), idleon.engine.getGameAttribute(\"OptionsListAccount\")[454], idleon.engine.getGameAttribute(\"OptionsListAccount\")[464]]",
+      "result": [
+        124,
+        230,
+        0.07142857142857142,
+        10000000000,
+        577093307.3126311,
+        5
+      ]
+    },
+    "clam_count_bonus_parameter": {
+      "expression": "idleon.callFunction(\"Thingies\", \"ClamBonuses\", 1, 0)",
+      "result": 15
+    },
+    "scurge_pearl_bonus_inputs": {
+      "expression": "[idleon.callFunction(\"Thingies\", \"ClamBonuses\", 1, 1), idleon.callFunction(\"Thingies\", \"ClamBonuses\", 8, 1)]",
+      "result": [
+        0,
+        0
+      ]
+    },
+    "compensation_progression": {
+      "expression": "[idleon.getAttr(\"CustomLists\").h.Spelunky[30].map((_, index) => idleon.callFunction(\"Thingies\", \"ClamWorkBonus\", index, 0) === 1), idleon.getAttr(\"CustomLists\").h.Spelunky[30].findIndex((_, index) => idleon.callFunction(\"Thingies\", \"ClamWorkBonus\", index, 0) !== 1), idleon.getAttr(\"CustomLists\").h.Spelunky[30].findIndex((_, index) => idleon.callFunction(\"Thingies\", \"ClamWorkBonus\", index, 0) !== 1) + 1]",
+      "result": [
+        [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        5,
+        6
+      ]
+    }
+  },
+  "errors": {}
+}

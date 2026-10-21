@@ -1,0 +1,21 @@
+{
+  "description": "Compare the direct multipliers used by refreshed construction cog build rate",
+  "target": "Construction cog build rate inputs",
+  "extractions": [
+    {
+      "label": "construction_small_cog_build_speed_bonus",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"SmallCogBonusTOTAL\", 1, 0)",
+      "description": "Category 1 Small Cog build-speed bonus from inventory slots 228–251"
+    },
+    {
+      "label": "construction_companion_157_bonus",
+      "expression": "idleon.callFunction(\"Companions\", 157, 0)",
+      "description": "Active companion 157 construction build-speed bonus"
+    },
+    {
+      "label": "construction_royal_outpost_build_speed_multiplier",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostROGbon\", 0, 0)",
+      "description": "Construction category Royal Guardian Outpost multiplier"
+    }
+  ]
+}

@@ -1,48 +1,30 @@
-/**
- * Validates the cross-domain inputs used by The Button bonus multiplier.
- */
-
-import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
+import { getCompanionActiveBonus } from '../../../data/domain/companions';
+import type { Companion } from '../../../data/domain/companions';
+import type { ResearchGrid } from '../../../data/domain/world-7/research';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { ParameterTestSpec } from '../../utils/parameter-test-config';
-import { Companion, getCompanionActiveBonus } from '../../../data/domain/companions';
-import { ResearchGrid } from '../../../data/domain/world-7/research';
+import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 
-const saveName = 'latest';
-const extractionResultsName = 'button-bonus-data.json';
+describe('The Button calculated inputs', () => {
+  let data: Map<string, unknown>;
+  let results: ExtractionResults;
 
-const parameterSpecs: Record<string, ParameterTestSpec> = {
- companion_bonus_147: {
-  description: 'Companion 147 bonus that increases The Button multiplier',
-  extractionKey: 'companion_bonus_147',
-  domainExtractor: (gameData) => {
-   return getCompanionActiveBonus(gameData.get('companions') as Companion[], 147);
-  }
- },
- grid_bonus_125: {
-  description: 'Research Grid Better Button bonus at index 125',
-  extractionKey: 'grid_bonus_125',
-  domainExtractor: (gameData) => {
-   return (gameData.get('research') as ResearchGrid).getBonusForId(125);
-  }
- }
-};
-
-describe('The Button - Bonus Parameters', () => {
- let extractionResults: any;
- let gameData: Map<string, any>;
-
- beforeAll(() => {
-  extractionResults = loadExtractionResults(extractionResultsName);
-  validateExtractionHealth(extractionResults);
-  gameData = loadGameDataFromSave(saveName);
- });
-
- Object.entries(parameterSpecs).forEach(([_, spec]) => {
-  it(`validates ${spec.description}`, () => {
-   const liveValue = getExtractedValue(extractionResults, spec.extractionKey);
-   const domainValue = spec.domainExtractor(gameData);
-   expect(domainValue).toMatchLiveGame(liveValue, 0);
+  beforeAll(() => {
+    data = loadGameDataFromSave('latest');
+    results = loadExtractionResults('button-bonus-data.json');
+    validateExtractionHealth(results);
   });
- });
+
+  it('matches the active Button companion bonus', () => {
+    const companions = data.get('companions') as Companion[];
+    const expected = getExtractedValue(results, 'companion_bonus_147');
+
+    expect(getCompanionActiveBonus(companions, 147)).toMatchLiveGame(expected, 0);
+  });
+
+  it('matches the Better Button Research Grid bonus', () => {
+    const research = data.get('research') as ResearchGrid;
+    const expected = getExtractedValue(results, 'grid_bonus_125');
+
+    expect(research.getBonusForId(125)).toMatchLiveGame(expected, 0);
+  });
 });

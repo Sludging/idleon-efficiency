@@ -1,6 +1,6 @@
 {
-  "description": "Extract data for Big Fish bonus, cost, and unlock requirement calculations",
-  "target": "Big Fish bonuses, costs, and unlock requirements",
+  "description": "Extract Advice Fish saved levels and family level, plus Big Fish bonus, cost, and unlock requirement calculations",
+  "target": "Advice Fish displayed family and upgrade levels, bonuses, costs, and unlock requirements",
   "extractions": [
     {
       "label": "big_fish_bonus_0",
@@ -91,6 +91,61 @@
       "label": "big_fish_unlock_req_5",
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 5)",
       "description": "Total player-level unlock requirement for increased Double Gold Food drop chance"
+    },
+    {
+      "label": "big_fish_bonus_6",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 6)",
+      "description": "Big Fish Advice on Settlement bonus for extra mob clears credited toward Royal Guardian"
+    },
+    {
+      "label": "big_fish_cost_6",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 6)",
+      "description": "Next purchase cost for the Advice on Settlement bonus"
+    },
+    {
+      "label": "big_fish_unlock_req_6",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 6)",
+      "description": "Total player-level unlock requirement for Advice on Settlement"
+    },
+    {
+      "label": "big_fish_family_level",
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").reduce((sum, name) => sum + Number(idleon.getAttr(\"PlayerDATABASE\").h[name].h.Lv0[0]), 0)",
+      "description": "Sum of saved player levels shown as the Advice Fish family level"
+    },
+    {
+      "label": "big_fish_bonus_level_0",
+      "expression": "idleon.getAttr(\"Spelunk\")[11][0]",
+      "description": "Saved Advice Fish level for the W7 mob respawn-rate bonus"
+    },
+    {
+      "label": "big_fish_bonus_level_1",
+      "expression": "idleon.getAttr(\"Spelunk\")[11][1]",
+      "description": "Saved Advice Fish level for increased Spelunking Stamina"
+    },
+    {
+      "label": "big_fish_bonus_level_2",
+      "expression": "idleon.getAttr(\"Spelunk\")[11][2]",
+      "description": "Saved Advice Fish level for Spelunking AFK Gains"
+    },
+    {
+      "label": "big_fish_bonus_level_3",
+      "expression": "idleon.getAttr(\"Spelunk\")[11][3]",
+      "description": "Saved Advice Fish level for the W7 Kill per Kill bonus"
+    },
+    {
+      "label": "big_fish_bonus_level_4",
+      "expression": "idleon.getAttr(\"Spelunk\")[11][4]",
+      "description": "Saved Advice Fish level for the Class EXP bonus"
+    },
+    {
+      "label": "big_fish_bonus_level_5",
+      "expression": "idleon.getAttr(\"Spelunk\")[11][5]",
+      "description": "Saved Advice Fish level for Double Gold Food drop chance"
+    },
+    {
+      "label": "big_fish_bonus_level_6",
+      "expression": "idleon.getAttr(\"Spelunk\")[11][6]",
+      "description": "Saved Advice Fish level for Advice on Settlement"
     }
   ]
 }

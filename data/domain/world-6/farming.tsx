@@ -31,10 +31,11 @@ import { FarmingStickerModel } from "../model/farmingStickerModel";
 import { EventShop } from "../eventShop";
 import { Gaming } from "../world-5/gaming";
 import { ResearchGrid } from "../world-7/research";
+import { Talent } from "../talents";
 
 // Only the Exotic Market bonuses consumed by implemented features are supported.
 const exoticMarketBonusData = initExoticMarketRepo().reduce<Record<number, { bonusPerLevel: number, diminishing: boolean }>>((bonuses, upgrade) => {
-    if (upgrade.index === 40 || upgrade.index === 44 || upgrade.index === 48) {
+    if (upgrade.index === 14 || (upgrade.index >= 16 && upgrade.index <= 20) || upgrade.index === 40 || upgrade.index === 41 || upgrade.index === 42 || upgrade.index === 44 || upgrade.index === 45 || upgrade.index === 48 || upgrade.index === 49 || upgrade.index === 50 || upgrade.index === 51 || upgrade.index === 59) {
         bonuses[upgrade.index] = {
             bonusPerLevel: upgrade.data.effect,
             diminishing: upgrade.data.x4 === 1,
@@ -48,6 +49,7 @@ export class LandRankDataBase {
     upgrades: LandRankUpgrade[] = [];
     totalLandRanks: number = 0;
     spentLandRanksPoints: number = 0;
+    private recipientDankRanksBonuses: Map<number, number> = new Map();
 
     constructor() {
         // Do this until the wiki bot can send us those data
@@ -74,6 +76,42 @@ export class LandRankDataBase {
         this.upgrades.push(new LandRankUpgrade(19, "Seed of Stats", "Gives a +{% All Stat bonus to your characters", 5, 3500, true));
     }
 
+    resetBonusInputs(): void {
+        this.recipientDankRanksBonuses.clear();
+        for (const upgrade of this.upgrades) {
+            upgrade.resetBonusInputs();
+        }
+    }
+
+    updateBonusInputs(players: readonly Player[], plumpDatabaseBonus: number): void {
+        this.resetBonusInputs();
+        let bestDankRanksBonus: number | undefined;
+        for (const player of players) {
+            // Candidates supply allocations and presets; each recipient supplies the final talent modifiers.
+            const dankRanksBonus = Talent.getAccountTalentBonus(players, 207, player.finalTalentInputs);
+            this.recipientDankRanksBonuses.set(player.playerID, dankRanksBonus);
+            bestDankRanksBonus = bestDankRanksBonus === undefined
+                ? dankRanksBonus
+                : Math.max(bestDankRanksBonus, dankRanksBonus);
+        }
+        if (bestDankRanksBonus === undefined) {
+            throw new Error("Land Rank bonuses require prepared player talent contexts.");
+        }
+
+        // Account Farming displays project the strongest recipient, not a selected character.
+        for (const upgrade of this.upgrades) {
+            upgrade.updateBonusInputs(bestDankRanksBonus, plumpDatabaseBonus);
+        }
+    }
+
+    getUpgradeBonusForPlayer(index: number, player: Player): number {
+        const dankRanksBonus = this.recipientDankRanksBonuses.get(player.playerID);
+        if (dankRanksBonus === undefined) {
+            throw new Error(`Land Rank bonuses are not prepared for player ${player.playerID}.`);
+        }
+        return this.upgrades[index].getUpgradeBonus(dankRanksBonus);
+    }
+
     // This function send the sum of all bonus from a same type, Lava use this in his code so having it here helps to "translate" his code into IE code
     getTotalUpgradeBonusForBonus = (bonusType: LandRankBonusType): number => {
         switch (bonusType) {
@@ -91,6 +129,7 @@ export class LandRankDataBase {
         }
     }
 
+    /** Return the prepared best-recipient projection for account Farming displays. */
     getUpgradeBonusByIndex = (index: number): number => {
         const upgrade = this.upgrades.find(upgrade => upgrade.index == index);
         if (upgrade) {
@@ -104,22 +143,38 @@ export class LandRankUpgrade {
     level: number = 0;
     unlocked: boolean = false;
     maxLevel: number = 1;
+    private dankRanksBonus: number | undefined;
+    private plumpDatabaseBonus: number | undefined;
 
     constructor(public index: number, public name: string, public bonusText: string, public bonus: number, public unlockThreshold: number, public fifthColumnBonus: boolean) { }
 
-    getUpgradeBonus = () => {
-        if (!this.unlocked) {
-            return 0;
-        }
+    resetBonusInputs(): void {
+        this.dankRanksBonus = undefined;
+        this.plumpDatabaseBonus = undefined;
+    }
 
+    updateBonusInputs(dankRanksBonus: number, plumpDatabaseBonus: number): void {
+        this.dankRanksBonus = dankRanksBonus;
+        this.plumpDatabaseBonus = plumpDatabaseBonus;
+    }
+
+    getUpgradeBonus = (dankRanksBonus?: number): number => {
+        if (this.dankRanksBonus === undefined || this.plumpDatabaseBonus === undefined) {
+            throw new Error("Land Rank bonus inputs are not prepared.");
+        }
+        // Dank Ranks cannot reduce bonuses. An explicit recipient replaces only the display projection.
+        const talentMultiplier = Math.max(1, dankRanksBonus === undefined ? this.dankRanksBonus : dankRanksBonus);
+        const exoticMultiplier = 1 + this.plumpDatabaseBonus / 100;
+
+        // Allocated ranks determine the bonus; purchase availability affects only UI labels.
         switch (this.index) {
             case 4:
             case 9:
             case 14:
             case 19:
-                return this.bonus * this.level;
+                return talentMultiplier * exoticMultiplier * this.bonus * this.level;
             default:
-                return 1.7 * this.bonus * this.level / (this.level + 80);
+                return talentMultiplier * exoticMultiplier * ((1.7 * this.bonus * this.level) / (this.level + 80));
         }
     }
 
@@ -568,10 +623,12 @@ export class Farming extends Domain {
     growthRate: number = 0;
     magicBeansFromDepot: number = 0;
     discoveredCrops: number = 0;
+    registeredCropCount: number = 0;
     stickers: FarmingSticker[] = FarmingSticker.fromBase(initFarmingStickerRepo());
     totalStickers: number = 0;
     exoticMarketLevels: number[] = [];
     marketCostMultiplier: number = 1;
+    organicLabelsAvailable: number = 0;
 
     cropNames = ["Apple", "Orange", "Lemon", "Pear", "Strawberry", "Bananas", "Blueberry", "Red Grapes", "Red Pear", "Pineapple", "Lime", "Raspberry", "Fig", "Peach", "Purple Grapes", "Yellow Pear", "Watermelon", "Green Grapes", "Dragon Fruit", "Mango", "Gold Blueberry",
         "Carrot", "Potato", "Beat", "Tomato", "Artichoke", "Roma Tomato", "Butternut Squash", "Avocado", "Red Pepper", "Broccoli", "Beatroot", "Coconut", "Sliced Tomato", "Cashew", "Turnip", "Coffee Bean", "Pumpkin", "Sliced Cucumber", "Eggplant", "Lettuce", "Garlic", "Green Beans", "Bell Pepper", "Corn", "Gold Sliced Tomato",
@@ -601,10 +658,17 @@ export class Farming extends Domain {
     parse(data: Map<string, any>): void {
         const farming = data.get(this.dataKey) as Farming;
         const cropsData = data.get("FarmCrop") as object;
+        farming.registeredCropCount = Object.keys(cropsData).length;
         const plotsData = data.get("FarmPlot") as number[][];
         const landRankData = data.get("FarmRank") as number[][];
         const upgradesData = data.get("FarmUpg") as number[];
         const researchData = data.get("Research") as number[][] | undefined;
+        // Clear touched inputs before an old account can exit parsing without Farming data.
+        farming.exoticMarketLevels = [];
+        farming.landrankDatabase.resetBonusInputs();
+        for (const upgrade of farming.landrankDatabase.upgrades) {
+            upgrade.level = 0;
+        }
         farming.stickers.forEach(sticker => {
             sticker.count = Number(researchData?.[9]?.[sticker.index]) || 0;
             sticker.bonusValue = 0;
@@ -693,6 +757,14 @@ export class Farming extends Domain {
         return this.totalStickers;
     }
 
+    getStickerDamageMultiplier(researchGrid: ResearchGrid): number {
+        if (researchGrid.getBonusForId(47, 1) <= 0) {
+            return 1;
+        }
+
+        return 1 + researchGrid.getBonusForId(47) * this.getTotalStickers() / 100;
+    }
+
     getStickerBonus(index: number): number {
         return this.stickers.find(sticker => sticker.index === index)?.getBonus() ?? 0;
     }
@@ -739,14 +811,22 @@ export class Farming extends Domain {
         this.cropsToCollect.sort((collect1, collect2) => { return collect1.crop.index > collect2.crop.index ? 1 : -1 });
     }
 
-    updateBeansFromConvertinCurrentDepot = (jadeUpgradeBonus15: number) => {
+    updateBeansFromConvertinCurrentDepot = (emporiumBonus15: number, achievementBonus363: number, vaultBonus85: number) => {
         let fromCrops = 0;
 
         this.cropDepot.filter(crop => crop.quantityOwned > 0).forEach(crop => {
-            fromCrops += (crop.quantityOwned * Math.pow(2.5, crop.seed.index) * Math.pow(1.08, crop.index - crop.seed.data.cropIdMin));
+            fromCrops += crop.quantityOwned * Math.pow(2.5, crop.seed.index) * Math.pow(1.08, crop.index - crop.seed.data.cropIdMin);
         });
 
-        this.magicBeansFromDepot = Math.pow(fromCrops, 0.5) * (1 + this.getMarketUpgradeBonusValue(6) / 100) * Math.max(1, jadeUpgradeBonus15);
+        // BeanTradeQTY applies additive bean bonuses before its two separate multiplicative Exotic upgrades.
+        const additiveBonus = 25 * emporiumBonus15 + 5 * achievementBonus363
+            + this.getExoticMarketBonusValue(16) + this.getExoticMarketBonusValue(17) + this.getExoticMarketBonusValue(18)
+            + vaultBonus85;
+        this.magicBeansFromDepot = Math.sqrt(fromCrops)
+            * (1 + this.getMarketUpgradeBonusValue(6) / 100)
+            * (1 + additiveBonus / 100)
+            * (1 + this.getExoticMarketBonusValue(19) / 100)
+            * (1 + this.getExoticMarketBonusValue(20) / 100);
     }
 
     updatePlotsOGChance = (bonusFromMarketUpgrade11: number, bonusFromPristineCharm11: number, bonusFromStarSign67: number, bonusFromTaskBoard: number, bonusFromAchievement365: number) => {
@@ -920,7 +1000,10 @@ export const updateFarmingStickerBonuses = (data: Map<string, any>): Farming => 
 
 export const updateFarmingLevel = (data: Map<string, any>) => {
     const farming = data.get("farming") as Farming;
+    const menagerie = data.get("menagerie") as { getResourceBalances(): { organicLabels: number } };
     const players = data.get("players") as Player[];
+
+    farming.organicLabelsAvailable = menagerie.getResourceBalances().organicLabels;
 
     const levels: number[] = [];
     players.forEach(player => {
@@ -948,6 +1031,12 @@ export const updateFarmingCropScientistBonuses = (data: Map<string, any>) => {
     farming.cropScientist.updateCropScientistBonusValues(farming.discoveredCrops, labBonusCropScientist, grimoire22Bonus, exoticMarket40Bonus, vault79Bonus);
 }
 
+export const updateFarmingLandRankBonuses = (data: Map<string, any>): void => {
+    const farming = data.get("farming") as Farming;
+    const players = data.get("players") as Player[];
+    farming.landrankDatabase.updateBonusInputs(players, farming.getExoticMarketBonusValue(14));
+}
+
 export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const farming = data.get("farming") as Farming;
     const gemStore = data.get("gems") as GemStore;
@@ -969,7 +1058,7 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
-    const emperorFarmingDiscount = emperor?.emperorBonuses[2]?.getBonus() ?? 0;
+    const emperorFarmingDiscount = emperor.getEffectiveBonus(2);
     farming.updateMarketCostDiscount(emperorFarmingDiscount);
 
     // Update Min and Max possible quantity to collect from one fully grown crop 
@@ -982,8 +1071,10 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     farming.updateGrowthRate(vialGrowthSpeedBonus, summoningWinnerBonus2);
 
     // Update Magic beans collected if collecting now
-    const jadeUpgrade15 = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 15)?.purchased ? 1.25 : 1;
-    farming.updateBeansFromConvertinCurrentDepot(jadeUpgrade15);
+    const emporiumBonus15 = Number(sneaking.jadeUpgrades.find(upgrade => upgrade.index === 15)?.purchased ?? false);
+    const achievementBonus363 = achievements[363].completed ? 1 : 0;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+    farming.updateBeansFromConvertinCurrentDepot(emporiumBonus15, achievementBonus363, upgradeVault.getBonusForId(85));
 
     // Update each Crops Evolution chance in plots
     const summoningWinnerBonus10 = summoning.summonBonuses.find(bonus => bonus.index == 10)?.getBonus() ?? 0;

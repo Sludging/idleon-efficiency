@@ -1,0 +1,166 @@
+{
+  "description": "Compare boat artifact find chance and each calculated native input with the retained game save",
+  "target": "Sailing boat artifact chance",
+  "extractions": [
+    {
+      "label": "boat_0_artifact_find_multiplier",
+      "expression": "idleon.callFunction(\"Sailing\", \"BoatArtiMulti\", 0, 0)",
+      "description": "Complete artifact find multiplier for Sailing boat 0"
+    },
+    {
+      "label": "boat_1_artifact_find_multiplier",
+      "expression": "idleon.callFunction(\"Sailing\", \"BoatArtiMulti\", 1, 0)",
+      "description": "Complete artifact find multiplier for Sailing boat 1 with its own captain and boat inputs"
+    },
+    {
+      "label": "sailing_artifact_bonus_3",
+      "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 3, 0)",
+      "description": "ArtifactBonus calculation at native index 3"
+    },
+    {
+      "label": "boat_0_captain_artifact_bonus",
+      "expression": "window.frames[0].__idleon_cheats__[\"scripts.ActorEvents_579\"]._customBlock_CaptBonusCalc(3, window.frames[0].__idleon_cheats__[\"com.stencyl.Engine\"].engine.getGameAttribute(\"Boats\")[0][0])",
+      "description": "Captain artifact-find trait assigned to boat 0"
+    },
+    {
+      "label": "boat_1_captain_artifact_bonus",
+      "expression": "window.frames[0].__idleon_cheats__[\"scripts.ActorEvents_579\"]._customBlock_CaptBonusCalc(3, window.frames[0].__idleon_cheats__[\"com.stencyl.Engine\"].engine.getGameAttribute(\"Boats\")[1][0])",
+      "description": "Captain artifact-find trait assigned to boat 1"
+    },
+    {
+      "label": "breeding_shiny_bonus_21",
+      "expression": "idleon.callFunction(\"Breeding\", \"ShinyBonusS\", \"Nah\", 21, -1)",
+      "description": "Breeding shiny bonus index 21"
+    },
+    {
+      "label": "fractal_island_bonus_3",
+      "expression": "idleon.callFunction(\"RandomEvent\", \"FractalIslandBonus\", 3, 999)",
+      "description": "Fractal Island bonus index 3"
+    },
+    {
+      "label": "bribe_bonus_34",
+      "expression": "idleon.callFunction(\"GetBribeBonus\", \"34\")",
+      "description": "Purchased Bribe 34 bonus"
+    },
+    {
+      "label": "arcade_bonus_32",
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 32, 0)",
+      "description": "Arcade bonus index 32"
+    },
+    {
+      "label": "arcade_bonus_66",
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 66, 0)",
+      "description": "Arcade bonus index 66"
+    },
+    {
+      "label": "hole_b_upg_55",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 55, 0)",
+      "description": "Hole B_UPG bonus index 55"
+    },
+    {
+      "label": "farming_sticker_bonus_2",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"StickerBonus\", 2, 0)",
+      "description": "Farming sticker bonus index 2"
+    },
+    {
+      "label": "research_grid_bonus_109",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 109, 0)",
+      "description": "Research Grid bonus index 109"
+    },
+    {
+      "label": "upgrade_vault_bonus_63",
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 63, 0)",
+      "description": "Upgrade Vault bonus index 63"
+    },
+    {
+      "label": "starsign_bonus_61",
+      "expression": "idleon.getAttr(\"DNSM\").h.StarSigns.h[61]",
+      "description": "Native StarSigns cache value consumed by BoatArtiMulti"
+    },
+    {
+      "label": "companion_bonus_154",
+      "expression": "idleon.callFunction(\"Companions\", 154)",
+      "description": "Active Companion 154 bonus"
+    },
+    {
+      "label": "killroy_bonus_0",
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 0, 0)",
+      "description": "Killroy bonus factor consumed by artifact chance"
+    },
+    {
+      "label": "button_bonus_3",
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 3, 0)",
+      "description": "Button bonus index 3"
+    },
+    {
+      "label": "research_grid_bonus_106",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 106, 0)",
+      "description": "Research Grid bonus index 106"
+    },
+    {
+      "label": "alchemy_vial_6turtle",
+      "expression": "idleon.getAttr(\"DNSM\").h.AlchVials.h[\"6turtle\"]",
+      "description": "Native Alchemy vial value consumed by artifact chance"
+    },
+    {
+      "label": "sushi_bonus_7",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 7, 0)",
+      "description": "Sushi bonus index 7"
+    },
+    {
+      "label": "summoning_winner_bonus_3",
+      "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 3, 0)",
+      "description": "Summoning winner bonus index 3"
+    },
+    {
+      "label": "jelly_bonus_19",
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 19, 0)",
+      "description": "Jelly Operation quantity bonus index 19"
+    },
+    {
+      "label": "boat_0_davey_jones_bonus",
+      "expression": "idleon.callFunction(\"Sailing\", \"DaveyJonesBonus\", 0, 0)",
+      "description": "Davey Jones multiplier for boat 0"
+    },
+    {
+      "label": "boat_1_davey_jones_bonus",
+      "expression": "idleon.callFunction(\"Sailing\", \"DaveyJonesBonus\", 1, 0)",
+      "description": "Davey Jones multiplier for boat 1"
+    },
+    {
+      "label": "mainframe_bonus_14",
+      "expression": "idleon.callFunction(\"MainframeBonus\", 14, 0)",
+      "description": "Mainframe bonus index 14"
+    },
+    {
+      "label": "tome_epilogue_bonus_3",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 3, 0)",
+      "description": "Tome epilogue bonus index 3"
+    },
+    {
+      "label": "voting_bonus_20",
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 20, 0)",
+      "description": "Active vote bonus index 20"
+    },
+    {
+      "label": "companion_bonus_43",
+      "expression": "idleon.callFunction(\"Companions\", 43)",
+      "description": "Active Companion 43 bonus"
+    },
+    {
+      "label": "hole_monument_1_2",
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 1, 2)",
+      "description": "Justice monument bonus index 2"
+    },
+    {
+      "label": "farming_exotic_bonus_45",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 45, 0)",
+      "description": "Farming Exotic Market bonus index 45"
+    },
+    {
+      "label": "gaming_palette_bonus_5",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 5, 0)",
+      "description": "Gaming Palette bonus index 5"
+    }
+  ]
+}

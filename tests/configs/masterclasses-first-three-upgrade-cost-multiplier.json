@@ -1,0 +1,16 @@
+{
+  "description": "First-three Master Classes upgrade cost multiplier and its direct calculated input for the paired real account",
+  "target": "MasterClasses.getFirstThreeUpgradeCostMultiplier()",
+  "extractions": [
+    {
+      "label": "first_three_upgrade_cost_multiplier",
+      "expression": "idleon.callFunction(\"Summoning\", \"First3MC_CostRedux\", 0, 0)",
+      "description": "Account-wide multiplier reducing upgrade costs for the first three Master Classes"
+    },
+    {
+      "label": "armory_upgrade_79_bonus",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 79, 0)",
+      "description": "Compounding Outposting bonus used in the first-three Master Classes cost reduction"
+    }
+  ]
+}

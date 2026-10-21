@@ -1,0 +1,21 @@
+{
+  "description": "Extract Poppy's next permanent bonus upgrade from the current account state",
+  "target": "Poppy Next Permanent Bonus Upgrade",
+  "extractions": [
+    {
+      "label": "next_bonus_index",
+      "expression": "idleon.engine.getGameAttribute(\"OptionsListAccount\")[271] % 7",
+      "description": "Next Bonuses from Poppy index: the current permanent upgrade level cycles through seven ordered bonuses"
+    },
+    {
+      "label": "next_bonus_cost",
+      "expression": "idleon.callFunction(\"Summoning\", \"RooCost\", 3, 0)",
+      "description": "Current cost of the permanent Bonuses from Poppy upgrade in fish"
+    },
+    {
+      "label": "can_afford_next_bonus",
+      "expression": "idleon.engine.getGameAttribute(\"OptionsListAccount\")[267] >= idleon.callFunction(\"Summoning\", \"RooCost\", 3, 0) ? 1 : 0",
+      "description": "Whether current fish meet the game price for the next permanent Bonuses from Poppy upgrade"
+    }
+  ]
+}

@@ -35,7 +35,7 @@ Pretty much a mess but in general:
 * `components/` — Shared React components between UI pages
 * `data/` — The meat and potatoes of this project. Worthy of its own section.
 * `lib/` — Efficiency engine, Zustand stores, utilities
-* `tests/` — Jest test suite with live game extraction configs
+* `tests/` — Jest suite with offline-first game extraction configs
 * `reference-repos/` — Competitor codebases for domain/parser reference only
 
 ## Data Flow

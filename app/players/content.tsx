@@ -17,15 +17,15 @@ import {
 import { useState, useContext, useMemo } from 'react';
 
 import { Activity, Player, SkillData } from '../../data/domain/player';
+import type { GoldenFood } from '../../data/domain/golden-food';
 import { SkillsIndex } from "../../data/domain/SkillsIndex";
 import { ClassIndex, ClassTalentMap, GetTalentArray } from '../../data/domain/talents';
 import { Capacity, playerInventoryBagMapping } from '../../data/domain/capacity';
-import { Alchemy, Bubble, CauldronIndex } from "../../data/domain/world-2/alchemy/alchemy";
-import { Stamp } from '../../data/domain/world-1/stamps';
+import { Alchemy, Bubble } from "../../data/domain/world-2/alchemy/alchemy";
 import { Shrine } from '../../data/domain/world-3/construction/shrines';
 import { PlayerStatues } from '../../data/domain/world-1/statues';
 
-import { getCoinsArray, nFormatter } from '../../data/utility';
+import { commaNotation, getCoinsArray, nFormatter, notateNumber } from '../../data/utility';
 import CoinsDisplay from '../../components/coinsDisplay';
 import ShadowBox from '../../components/base/ShadowBox';
 import LeftNavButton from '../../components/base/LeftNavButton';
@@ -40,29 +40,18 @@ import { Worship } from '../../data/domain/world-3/worship';
 import ObolsInfo from '../../components/account/task-board/obolsInfo';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { Skilling } from '../../data/domain/skilling';
-import { Family } from '../../data/domain/family';
-import { Achievement } from '../../data/domain/achievements';
 import { MapInfo } from '../../data/domain/maps';
 import { EnemyInfo } from '../../data/domain/enemies';
 import Stat from '../../components/base/Stat';
 import IconImage from '../../components/base/IconImage';
 import { SourcesModel } from '../../data/domain/model/sourcesModel';
-import { Sigils } from '../../data/domain/world-2/alchemy/sigils';
 import { Chip } from '../../data/domain/world-4/lab';
 import { AnvilWrapper } from '../../data/domain/world-1/anvil';
 import { Alerts, CardSetAlert } from '../../data/domain/alerts';
 import { POExtra } from '../../data/domain/world-2/postoffice';
-import { Cooking } from '../../data/domain/world-4/cooking';
-import { Sneaking } from '../../data/domain/world-6/sneaking';
 
 import { useShallow } from 'zustand/react/shallow'
 import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
-import { Bribe } from '../../data/domain/world-1/bribes';
-import { Card } from '../../data/domain/cards';
-import { EquipmentSets } from '../../data/domain/misc/equipmentSets';
-import { LegendTalents } from '../../data/domain/world-7/legendTalents';
-import { Companion } from '../../data/domain/companions';
-import { Votes } from '../../data/domain/world-2/votes';
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: SourcesModel, dropInfo: DropSource[] }) {
 
@@ -116,30 +105,32 @@ function ShowSkills(props: SkillProps) {
         <Box pad={{ left: "large", top: "medium" }} gap="medium">
             <Text size='medium'>Skills</Text>
             <Grid
-                columns={['25%', '25%', '25%', '25%']}
+                columns={['minmax(0, 1fr)', 'minmax(0, 1fr)', 'minmax(0, 1fr)', 'minmax(0, 1fr)']}
+                gap={{ column: 'small', row: 'medium' }}
                 areas={[
                     ['mining', 'fishing', 'trapping', 'cooking'],
                     ['smithing', 'alchemy', 'construction', 'breeding'],
                     ['chopping', 'catching', 'worship', 'intellect'],
-                    ['sailing', 'farming', 'empty', 'empty'],
-                    ['divinity', 'sneaking', 'empty', 'empty'],
-                    ['gaming', 'summoning', 'empty', 'empty'],
+                    ['sailing', 'farming', 'spelunking', '.'],
+                    ['divinity', 'sneaking', 'research', '.'],
+                    ['gaming', 'summoning', '.', '.'],
                 ]}
             >
                 {
                     Array.from(props.skillsMap).map(([skillIndex, skill]) => {
                         const skillRank = props.skillsRank.get(skillIndex);
                         return (
-                            <Box key={`skill_${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} gridArea={`${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} direction="row" gap="medium" margin={{ right: 'small', bottom: 'medium' }}>
-                                <Box direction="row" align="center" gap="small" border={{ color: 'grey-1' }} pad="small">
-                                    <IconImage data={Skilling.getSkillImageData(skillIndex)} scale={size == "small" ? 0.5 : 0.75} />
-                                    <Box gap="small">
-                                        <Box direction="row" gap="small">
+                            <Box key={`skill_${skillIndex}`} gridArea={SkillsIndex[skillIndex].toLowerCase()} style={{ minWidth: 0 }}>
+                                <Box direction="row" align="center" gap="small" border={{ color: 'grey-1' }} pad="small" fill="horizontal" style={{ minWidth: 0 }}>
+                                    <IconImage data={Skilling.getSkillImageData(skillIndex)} scale={size == "small" ? 0.5 : 0.75} style={{ flexShrink: 0 }} />
+                                    <Box gap="small" style={{ flex: '1 1 0', minWidth: 0 }}>
+                                        <Text size="small">{SkillsIndex[skillIndex]}</Text>
+                                        <Box direction="row" gap="small" wrap>
                                             <Text size="small">{skill.level}</Text>
                                             {skillRank != undefined && size != "small" && <Text size="xsmall">(Ranked {nth(skillRank + 1)})</Text>}
                                         </Box>
                                         <Meter
-                                            size="small"
+                                            size="full"
                                             thickness='2px'
                                             type="bar"
                                             background="grey-1"
@@ -152,7 +143,7 @@ function ShowSkills(props: SkillProps) {
                                                 }
                                             ]}
                                             max={skill.xpReq} />
-                                        <Box direction="row" justify="between">
+                                        <Box direction="row" justify="between" gap="small" wrap>
                                             <Text size="xsmall">{nFormatter(skill.currentXP)}</Text>
                                             <Text size="xsmall">{nFormatter(skill.xpReq)}</Text>
                                         </Box>
@@ -228,6 +219,13 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
         }
         return [];
     }, [theData, player]);
+
+    const passivePrayers = player.activePrayers.length === 0
+        ? (theData.get("prayers") as Prayer[])
+            .map(prayer => ({ prayer, bonus: prayer.getBonusForPlayer(player) }))
+            // Vacuous Tissue only affects Dungeons, which are outside this summary.
+            .filter(({ prayer, bonus }) => bonus !== 0 && prayer.index !== 14)
+        : [];
 
     const playerWorshipInfo = useMemo(() => {
         const chargeRate = worship?.playerData[player.playerID]?.chargeRate ?? 0;
@@ -309,10 +307,31 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                         <Text size="small">Away Since =</Text>
                         {player.afkFor < 100 ? "Active" : <TimeUp addSeconds={player.afkFor + secondsSinceUpdate} />}
                     </Box>
-                    <Text size="small">STR = {player.stats.strength}</Text>
-                    <Text size="small">AGI = {player.stats.agility}</Text>
-                    <Text size="small">WIS = {player.stats.wisdom}</Text>
-                    <Text size="small">LUK = {player.stats.luck}</Text>
+                    <Box role="region" aria-label="Persistent stats" gap="small" margin={{ top: "small" }}>
+                        <Text>Persistent stats</Text>
+                        <Text size="xsmall" color="accent-2">
+                            Excludes dungeon stats, temporary forms, and map-dependent effects.
+                        </Text>
+                        <Grid columns={["minmax(0, 1fr)", "minmax(0, 1fr)"]} gap="small">
+                            <TextAndLabel label="STR" text={commaNotation(player.stats.strength)} textSize="small" />
+                            <TextAndLabel label="AGI" text={commaNotation(player.stats.agility)} textSize="small" />
+                            <TextAndLabel label="WIS" text={commaNotation(player.stats.wisdom)} textSize="small" />
+                            <TextAndLabel label="LUK" text={commaNotation(player.stats.luck)} textSize="small" />
+                            <TextAndLabel label="Defence" text={notateNumber(player.stats.defence)} textSize="small" />
+                            <TextAndLabel label="Accuracy" text={notateNumber(player.stats.accuracy)} textSize="small" />
+                            <TextAndLabel
+                                label="Movement speed"
+                                text={`${commaNotation(player.stats.movementSpeed * 100)}%`}
+                                textSize="small"
+                            />
+                            <TextAndLabel label="Weapon power" text={notateNumber(player.stats.weaponPower)} textSize="small" />
+                            <TextAndLabel
+                                label="Drop rate"
+                                text={`${notateNumber(player.stats.dropRateMultiplier, "MultiplierInfo").replace("#", "")}x`}
+                                textSize="small"
+                            />
+                        </Grid>
+                    </Box>
                     <Stat stat={player.crystalChance} />
                     <Stat stat={player.doubleClaimChance} />
                     <Stat stat={player.monsterCash} />
@@ -436,7 +455,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                 )}
                             </Box>
                         </Box>
-                    }                    
+                    }
                     {
                         activePrayers.length > 0 &&
                         <Box gap="small">
@@ -470,6 +489,24 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                         </Box>
                     }
                     {
+                        passivePrayers.length > 0 &&
+                        <Box role="region" aria-label="Passive Prayers" gap="small">
+                            <Text>Passive Prayers</Text>
+                            <Text size="xsmall" color="accent-2">
+                                Unlocked Prayer bonuses apply without curses when no Prayers are equipped. Dungeon bonuses are excluded.
+                            </Text>
+                            {passivePrayers.map(({ prayer, bonus }) => (
+                                <Box key={prayer.index} direction="row" gap="small" align="center">
+                                    <IconImage data={prayer.getImageData()} scale={0.6} />
+                                    <Box gap="xxsmall">
+                                        <Text size="xsmall" color="accent-2">{prayer.data.name} (Lv. {prayer.level})</Text>
+                                        <Text size="small">{prayer.data.bonus.replace("{", bonus.toString())}</Text>
+                                    </Box>
+                                </Box>
+                            ))}
+                        </Box>
+                    }
+                    {
                         player.labInfo.chips.length > 0 &&
                         <Box gap="small">
                             <Text>Chips:</Text>
@@ -485,13 +522,13 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                                         direction={TipDirection.Down}
                                                         size='small'>
                                                         <IconImage data={(slot.chip as Chip).getImageData()} />
-                                                    </TipDisplay> 
+                                                    </TipDisplay>
                                                     :
                                                     <Box width={{ max: '42px', min: '42px' }} height={{ max: '42px', min: '42px' }} align="center">
                                                         {
                                                             (player.skills.get(SkillsIndex.Intellect)?.level ?? 0) < slot.lvlReq && <Text size="xsmall">Lv {slot.lvlReq}</Text>
                                                         }
-                
+
                                                     </Box>
                                             }
                                         </Box>
@@ -582,45 +619,8 @@ function EquipmentDisplay({ player }: { player: Player }) {
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
-    const family = theData.get("family") as Family;
-    const players = theData.get("players") as Player[];
-    const stampData = theData.get("stamps") as Stamp[][];
-    const achievementsInfo = theData.get("achievements") as Achievement[];
-    const sigils = theData.get("sigils") as Sigils;
-    const alchemy = theData.get("alchemy") as Alchemy;
-    const cooking = theData.get("cooking") as Cooking;
-    const sneaking = theData.get("sneaking") as Sneaking;
-    const bribes = theData.get("bribes") as Bribe[];
-    const cards = theData.get("cards") as Card[];
-    const equipmentSets = theData.get("equipmentSets") as EquipmentSets;
-    const legendTalents = theData.get("legendTalents") as LegendTalents;
-    const companions = theData.get("companions") as Companion[];
-    const votes = theData.get("votes") as Votes;
-
-    const pristineCharm14 = sneaking.pristineCharms.find(charm => charm.data.itemId == 14);
-    const goldFoodStampBonus = stampData.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
-    const goldFoodAchievement37 = achievementsInfo[37].completed;
-    const goldFoodAchievement380 = achievementsInfo[380].completed;
-    const goldFoodAchievement383 = achievementsInfo[383].completed;
-    const goldFoodBubble = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 18);
-    const zGoldFoodMealBonus = cooking.meals.filter(meal => meal.bonusKey == "zGoldFood").reduce((sum, meal) => sum += meal.getBonus() ?? 0, 0);
-    const bribeBonus36 = bribes.find(bribe => bribe.bribeIndex == 36)?.value ?? 0;
-    const equipmentSetBonus = equipmentSets.getSetBonus("SECRET_SET", player);
-    const votingBonus26 = votes.getCurrentBonus(26);
-    const companion48 = companions.find(c => c.id === 48)?.owned || false ? 5 : 0;
-    const legenTalent25 = legendTalents.getBonusFromIndex(25);
-    const cropFallEventCard = cards.filter(card => card.data.cardID == "cropfallEvent1").reduce((sum, card) => sum += card.getBonus(), 0);
-    
-    let apocalypseWoW = 0;
-    const bestDeathBringer = players.filter(player => player.classId == ClassIndex.Death_Bringer).sort((player1, player2) => player1.getTalentBonus(209) > player2.getTalentBonus(209) ? 1 : -1).pop();
-    const deathBringerForKills = players.filter(player => [ClassIndex.Blood_Berserker, ClassIndex.Death_Bringer].indexOf(player.classId) >= 0).sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1).pop();
-    if (bestDeathBringer && deathBringerForKills) {
-        const deathbringeWoWStacks = Array.from(deathBringerForKills.killInfo.entries()).filter(([_, count]) => count >= 1000000000).length;;
-        const skillBonus = bestDeathBringer.getTalentBonus(209);
-        apocalypseWoW = skillBonus * deathbringeWoWStacks;
-    }
-
-    const goldFoodMulti = player.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(player) ?? 0, goldFoodStampBonus, goldFoodAchievement37, goldFoodAchievement380, goldFoodAchievement383, sigils.sigils[14].getBonus(), goldFoodBubble, zGoldFoodMealBonus, player.starSigns.find(sign => sign.name == "Beanbie Major")?.getBonus("Golden Food") ?? 0, bribeBonus36, ((pristineCharm14 && pristineCharm14.unlocked) ? pristineCharm14.data.x1 : 0), equipmentSetBonus, votingBonus26, apocalypseWoW, companion48, legenTalent25, cropFallEventCard);
+    const goldenFood = theData.get("goldenFood") as GoldenFood;
+    const goldFoodMulti = goldenFood.getEffectivity(player);
 
 
     return (
@@ -860,7 +860,7 @@ function TalentDisplay({ player }: { player: Player }) {
                 {player.extraLevelsFromAchievements > 0 && <TextAndLabel label="Achievements" text={`+${player.extraLevelsFromAchievements}`} />}
                 {player.extraLevelsFromEquinox > 0 && <TextAndLabel label="Equinox" text={`+${player.extraLevelsFromEquinox}`} />}
                 {player.extraLevelsFromSlug > 0 && <TextAndLabel label="Slug companion" text={`+${player.extraLevelsFromSlug}`} />}
-                {(player.extraLevelsFromBear > 0 || player.extraLevelsFromTalent > 0 || player.extraLevelsFromES > 0 || player.extraLevelsFromSlug > 0 || player.extraLevelsFromEquinox > 0 || player.extraLevelsFromAchievements > 0) && 
+                {(player.extraLevelsFromBear > 0 || player.extraLevelsFromTalent > 0 || player.extraLevelsFromES > 0 || player.extraLevelsFromSlug > 0 || player.extraLevelsFromEquinox > 0 || player.extraLevelsFromAchievements > 0) &&
                     <CheckBox
                         checked={bookMaxLevel}
                         label={<Box direction="row" align="center">
@@ -1300,12 +1300,12 @@ function PlayerTab({ player }: PlayerTabProps) {
 
 function Players() {
     const [index, setIndex] = useState<number>(0);
-    
+
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
     const playerData = theData.get("players") as Player[];
-    
+
     const onActive = (nextIndex: number) => setIndex(nextIndex);
 
 

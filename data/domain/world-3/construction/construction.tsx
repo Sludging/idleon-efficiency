@@ -2,6 +2,8 @@ import { range } from "../../../utility";
 import { Achievement } from "../../achievements";
 import { Alchemy } from "../../world-2/alchemy/alchemy";
 import { AtomCollider, CarbonAtom } from "./atomCollider";
+import { getCompanionActiveBonus } from "../../companions";
+import type { Companion } from "../../companions";
 import { Domain, RawData } from "../../base/domain";
 import { Building } from "./buildings";
 import { Cooking } from "../../world-4/cooking";
@@ -12,7 +14,10 @@ import { ConstructionMastery, Rift } from "../../world-4/rift";
 import { Stamp } from "../../world-1/stamps";
 import { Storage } from "../../storage";
 import { DancingCoral } from "../../world-7/dancingCoral";
+import { Menagerie } from "../../menagerie";
 import { Player } from "../../player";
+import { CogBoard, getRoyalOutpostCogBuildSpeedMultiplier } from "./cog";
+import type { RoyalArmory } from "../../world-6/royalArmory/royalArmory";
 
 const BOOKS_FOR_MAX_CHECKOUT = 20;
 
@@ -60,10 +65,14 @@ export class Construction extends Domain {
         { name: "Ultimate", progress: 0 },
     ];
     library: Library = new Library();
+    cogBoard: CogBoard = new CogBoard();
+
 
     getRawKeys(): RawData[] {
         return [
             { key: "Tower", perPlayer: false, default: [] },
+            { key: "CogM", perPlayer: false, default: [] },
+            { key: "CogO", perPlayer: false, default: [] },
         ]
     }
 
@@ -78,6 +87,7 @@ export class Construction extends Domain {
         // init again to reset the data set;
         // TODO: This is very ugly, need to do better.
         construction.init([], 0);
+        construction.cogBoard.parse(data.get("CogM"), data.get("CogO"));
 
         const towerData = data.get("Tower") as number[];
         const optionsList = data.get("OptLacc") as number[];
@@ -131,11 +141,13 @@ export const updateConstruction = (data: Map<string, any>) => {
     const rift = data.get("rift") as Rift;
     const storage = data.get("storage") as Storage;
     const dancingCoral = data.get("dancingCoral") as DancingCoral;
+    const menagerie = data.get("menagerie") as Menagerie;
     const costCruncher = construction?.buildings.find(building => building.index == 5) as Building;
 
     // Figure out max building levels
     const constMastery = rift.bonuses.find(bonus => bonus.name == "Construct Mastery") as ConstructionMastery;
     construction.buildings.forEach(building => {
+        building.maxLvl = building.baseMaxLvl;
         switch (building.index) {
             // Library
             case 1:
@@ -168,7 +180,12 @@ export const updateConstruction = (data: Map<string, any>) => {
             case 24:
             case 25:
             case 26:
-                building.maxLvl += constMastery.getBonusByIndex(5) + (dancingCoral.isDancingCoralPurchased(building.index - 18) ? 100 : 0);
+                building.maxLvl = Math.round(
+                    building.baseMaxLvl
+                    + constMastery.getBonusByIndex(5)
+                    + (dancingCoral.isDancingCoralPurchased(building.index - 18) ? 100 : 0)
+                    + menagerie.getBonusValue(5),
+                );
                 break;
         }
 
@@ -221,4 +238,40 @@ export const updateConstruction = (data: Map<string, any>) => {
     construction.library.secondsToMaxCheckout = construction.library.getTimeTillMaxCheckout() - timeSinceCheck;
 
     return construction;
+}
+export interface CogBuildRateResult {
+    rate: number;
+    characterName: string;
+}
+
+const getCogExtraBuildSpeedMultiplier = (data: Map<string, any>, construction: Construction): number => {
+    const companions = data.get("companions") as Companion[];
+    const royalArmory = data.get("royalArmory") as RoyalArmory;
+    const smallCogBuildSpeedBonus = construction.cogBoard.getSmallCogBuildSpeedBonus();
+    const companionBuildSpeedBonus = getCompanionActiveBonus(companions, 157);
+    const royalOutpostMultiplier = getRoyalOutpostCogBuildSpeedMultiplier(
+        royalArmory.getSelectedOutpostBonusIndex(),
+        royalArmory.builtOutpostCount,
+    );
+    return (1 + smallCogBuildSpeedBonus / 100) *
+        (1 + companionBuildSpeedBonus / 100) * Math.max(1, royalOutpostMultiplier);
+}
+
+export const getCogBuildRateForContext = (data: Map<string, any>, contextPlayer: Player): number => {
+    const construction = data.get("construction") as Construction;
+    const players = data.get("players") as Player[];
+    return construction.cogBoard.getBuildRateForContext(
+        players,
+        getCogExtraBuildSpeedMultiplier(data, construction),
+        data,
+        contextPlayer,
+    );
+}
+
+export const getBestCogBuildRate = (data: Map<string, any>): CogBuildRateResult => {
+    const players = data.get("players") as Player[];
+    return players.map(contextPlayer => ({
+        rate: getCogBuildRateForContext(data, contextPlayer),
+        characterName: contextPlayer.playerName,
+    })).reduce((best, current) => current.rate > best.rate ? current : best);
 }

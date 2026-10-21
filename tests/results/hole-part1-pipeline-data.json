@@ -1,0 +1,180 @@
+{
+  "extractions": {
+    "active_context": {
+      "expression": "({ playerId: idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0]), playerName: idleon.getAttr('UserInfo')[0], playerNames: idleon.getAttr('GetPlayersUsernames'), version: idleon.getAttr('DoOnceREAL') })",
+      "result": {
+        "playerId": 3,
+        "playerName": "Sludgev4",
+        "playerNames": [
+          "Sludgadin",
+          "Sludgev2",
+          "Sludgev3",
+          "Sludgev4",
+          "Sludgev5",
+          "Sludgev6",
+          "SludgeMan",
+          "Sludgev8",
+          "Sludgev9",
+          "Sludgev10",
+          "Sludgev11"
+        ],
+        "version": 395.1
+      }
+    },
+    "paired_hole_inputs": {
+      "expression": "({ levels: idleon.getAttr(\"Holes\")[1].slice(0,5), exp: idleon.getAttr(\"Holes\")[2].slice(0,5), investments: idleon.getAttr(\"Holes\")[3].slice(0,8), purchased: idleon.getAttr(\"Holes\")[23].slice(0,5), studyLevels: idleon.getAttr(\"Holes\")[26].slice(0,18), studyProgress: idleon.getAttr(\"Holes\")[27].slice(0,18), target: idleon.getAttr(\"Holes\")[11][61], cavernOpals: idleon.getAttr(\"Holes\")[7], lanternUses: idleon.getAttr(\"Holes\")[11][84], wishes: idleon.getAttr(\"Holes\")[11][25], layers: [idleon.getAttr(\"Holes\")[11][1],idleon.getAttr(\"Holes\")[11][3],idleon.getAttr(\"Holes\")[11][5],idleon.getAttr(\"Holes\")[11][7]], covePurchases: idleon.getAttr('OptionsListAccount')[604] })",
+      "result": {
+        "levels": [
+          20,
+          49,
+          69,
+          30,
+          151
+        ],
+        "exp": [
+          2362967883615147,
+          133982482920435.08,
+          1228761691456072.2,
+          367750086186271.3,
+          126283470999857.44
+        ],
+        "investments": [
+          114,
+          30,
+          50,
+          30,
+          30,
+          0,
+          0,
+          0
+        ],
+        "purchased": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "studyLevels": [
+          16,
+          15,
+          22,
+          26,
+          21,
+          18,
+          22,
+          22,
+          21,
+          18,
+          16,
+          36,
+          36,
+          36,
+          26,
+          36,
+          36,
+          35
+        ],
+        "studyProgress": [
+          72953.12089583318,
+          57619.70706045802,
+          153151.24217304398,
+          13248.171722550194,
+          126144.93953988569,
+          25026.784486555378,
+          663226.7005584541,
+          686473.5915335849,
+          645050.2468780265,
+          214429.636600765,
+          221428.0462261185,
+          37398250.2720197,
+          37242720.81656928,
+          38124776.50172122,
+          840302.5741329693,
+          1076598.0439762478,
+          1076614.8450074797,
+          20312931.911190987
+        ],
+        "target": 12,
+        "cavernOpals": [
+          19,
+          19,
+          14,
+          12,
+          20,
+          8,
+          9,
+          17,
+          12,
+          10,
+          6,
+          19,
+          7,
+          6,
+          18,
+          14,
+          9,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "lanternUses": 0,
+        "wishes": 3457,
+        "layers": [
+          19,
+          17,
+          19,
+          9
+        ],
+        "covePurchases": 0
+      }
+    },
+    "pipeline_schematic_14": {
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 14, 0)",
+      "result": 115560
+    },
+    "pipeline_gambit_multiplier": {
+      "expression": "idleon.callFunction(\"Holes2\", \"GambitPTSmulti\", 0, 0)",
+      "result": 4.994925054151624
+    },
+    "pipeline_gambit_points": {
+      "expression": "idleon.callFunction(\"Holes2\", \"GambitPts\", 777, 0)",
+      "result": 4320560.222590943
+    },
+    "pipeline_tome_93": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 93, 0)",
+      "result": 259
+    },
+    "growth_0": {
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 0, 0)",
+      "result": 6729269581446.607
+    },
+    "growth_1": {
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 1, 0)",
+      "result": 1661316587844.4045
+    },
+    "growth_2": {
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 2, 0)",
+      "result": 14579131971193.117
+    },
+    "growth_3": {
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 3, 0)",
+      "result": 1661316587844.4045
+    },
+    "growth_4": {
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 4, 0)",
+      "result": 1661316587844.4045
+    }
+  },
+  "errors": {}
+}

@@ -4,10 +4,6 @@
       "expression": "idleon.callFunction(\"Ninja\", \"PristineBon\", 8, 0)",
       "result": 30
     },
-    "gem_item_purchased_11": {
-      "expression": "idleon.engine.getGameAttribute(\"GemItemsPurchased\")[11]",
-      "result": 5
-    },
     "artifact_bonus_32": {
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 32, 0)",
       "result": 125

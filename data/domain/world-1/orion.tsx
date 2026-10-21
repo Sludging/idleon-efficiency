@@ -1,4 +1,5 @@
 import { Domain, RawData } from "../base/domain";
+import { ImageData } from "../imageData";
 import { Companion, getCompanionActiveBonus } from "../companions";
 import { initOrionUpgradeRepo, OrionUpgradeBase } from "../data/OrionUpgradeRepo";
 import { Item } from "../items";
@@ -7,9 +8,14 @@ import { UpgradeVault } from "../upgradeVault";
 import { Hole } from "../world-5/hole/hole";
 import { LegendTalents } from "../world-7/legendTalents";
 import { Meritocraty } from "../world-7/meritocraty";
+import { Menagerie } from "../menagerie";
 
 export class OrionGlobalBonus {
     constructor(public index: number, public desc: string, public value: number) { }
+
+    getImageData(): ImageData {
+        return { location: `ClickerOwlBonus${this.index}`, width: 24, height: 24 };
+    }
 
     static fromBase() {
         return [
@@ -50,8 +56,13 @@ export class Orion extends Domain {
     // Feather rate boost
     vaultUpgrade21: number = 0;
     meritoBonus12: number = 0;
-    gambitBonus8: number = 0;
+    gambitBonus8: number | null = 0;
+    menagerieCostReduction: number = 1;
     
+    getCurrencyImageData(): ImageData {
+        return { location: "ClickerFeatherCurrency", width: 72, height: 72 };
+    }
+
     getRawKeys(): RawData[] {
         return [];
     }
@@ -77,10 +88,15 @@ export class Orion extends Domain {
     }
 
     // This rate is per second
-    getFeatherRate(): number {
-        return (1 + 9 * this.getMegafeatherQuantity(0)) 
-            * (1 + this.vaultUpgrade21 / 100) * (1 + this.meritoBonus12 / 100) * (1 + this.gambitBonus8 / 100) 
-            * (this.getUpgradeLevel(0) + 5 * this.getUpgradeLevel(5) + 2 * this.getMegafeatherQuantity(4) * this.getUpgradeLevel(3) + 4 * this.getMegafeatherQuantity(4) * this.getUpgradeLevel(7))
+    getFeatherRate(): number | null {
+        const baseRate = this.getUpgradeLevel(0) + 5 * this.getUpgradeLevel(5)
+            + 2 * this.getMegafeatherQuantity(4) * this.getUpgradeLevel(3)
+            + 4 * this.getMegafeatherQuantity(4) * this.getUpgradeLevel(7);
+        if (baseRate === 0) return 0;
+        if (this.gambitBonus8 === null) return null;
+        return (1 + 9 * this.getMegafeatherQuantity(0))
+            * (1 + this.vaultUpgrade21 / 100) * (1 + this.meritoBonus12 / 100) * (1 + this.gambitBonus8 / 100)
+            * baseRate
             * (1 + 5 * this.getUpgradeLevel(2) / 100) * Math.pow(3 + 2 * this.getMegafeatherQuantity(6), this.getUpgradeLevel(4)) 
             * (1 + this.ownedShinyFeather * this.getUpgradeLevel(6) / 100)
     }
@@ -92,11 +108,30 @@ export class Orion extends Domain {
             return 0;
         }
 
+        const menagerieCostReduction = index == 0 ? this.menagerieCostReduction : 1;
+
         if (index == 0) {
-            return 1 / (1 + 10 * this.getUpgradeLevel(3) / 100) * (1 / (1 + 20 * this.getUpgradeLevel(7) / 100)) * (1 / (1 + this.getMegafeatherQuantity(2) * this.getUpgradeLevel(0) / 100)) * upgrade.data.x0 * upgrade.level * Math.pow(Math.max(1.05, upgrade.data.x1 - .025 * this.getMegafeatherQuantity(8)), upgrade.level);
+            return 1 / (1 + 10 * this.getUpgradeLevel(3) / 100) * (1 / (1 + 20 * this.getUpgradeLevel(7) / 100)) * (1 / (1 + this.getMegafeatherQuantity(2) * this.getUpgradeLevel(0) / 100)) * menagerieCostReduction * upgrade.data.x0 * upgrade.level * Math.pow(Math.max(1.05, upgrade.data.x1 - .025 * this.getMegafeatherQuantity(8)), upgrade.level);
         } else {
             return 1 / (1 + 10 * this.getUpgradeLevel(3) / 100) * (1 / (1 + 20 * this.getUpgradeLevel(7) / 100)) * (1 / (1 + this.getMegafeatherQuantity(2) * this.getUpgradeLevel(0) / 100)) * upgrade.data.x0 * Math.pow(upgrade.data.x1, upgrade.level);
         }
+    }
+
+    getNextGlobalBonusUpgrade(): {
+        bonusIndex: number;
+        cost: number;
+        resourceBalance: number;
+        canAfford: boolean;
+    } {
+        const bonusIndex = this.getUpgradeLevel(1) % this.bonuses.length;
+        const cost = this.getUpgradeCost(1);
+
+        return {
+            bonusIndex,
+            cost,
+            resourceBalance: this.ownedFeather,
+            canAfford: this.ownedFeather >= cost,
+        };
     }
 
     getUpgradeLevel(index: number): number {
@@ -137,9 +172,11 @@ export const updateOrionGlobalBonus = (data: Map<string, any>) => {
     const orion = data.get("orion") as Orion;
     const companions = data.get("companions") as Companion[];
     const legendTalents = data.get("legendTalents") as LegendTalents;
+    const menagerie = data.get("menagerie") as Menagerie;
 
     orion.companionBonus51 = getCompanionActiveBonus(companions, 51);
     orion.legendTalent26 = legendTalents.getBonusFromIndex(26);
+    orion.menagerieCostReduction = 1 / (1 + menagerie.getBonusValue(16) / 100);
 
     return orion;
 }

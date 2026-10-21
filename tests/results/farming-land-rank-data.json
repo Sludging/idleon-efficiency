@@ -1,0 +1,25 @@
+{
+  "extractions": {
+    "land_rank_0_bonus": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"LankRankUpgBonus\", 0, 0)",
+      "result": 625.8047873512852
+    },
+    "land_rank_19_bonus": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"LankRankUpgBonus\", 19, 0)",
+      "result": 622.123582719807
+    },
+    "account_dank_ranks_bonus": {
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 207, -1)",
+      "result": 2.186991869918699
+    },
+    "plump_database_bonus": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 14, 0)",
+      "result": 9.409780775716694
+    },
+    "dank_ranks_candidate_0_bonus": {
+      "expression": "idleon.callFunction(\"ArbitraryCode5Inputs\", \"decayMulti\", 2, 200, Number(idleon.engine.getGameAttribute(\"PlayerDATABASE\").h[idleon.engine.getGameAttribute(\"GetPlayersUsernames\")[0]].h.SkillLevels[207]) + idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"AllTalentLVz\", \"207|0\", 0), 0, 0)",
+      "result": 2.186991869918699
+    }
+  },
+  "errors": {}
+}

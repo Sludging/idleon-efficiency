@@ -1,0 +1,56 @@
+{
+  "description": "Shared golden-food results for the paired normal character.",
+  "target": "Golden food",
+  "extractions": [
+    {
+      "label": "golden_drop_rate_percent",
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"DropRatez\")",
+      "description": "Golden-food drop-rate contribution in raw percentage points, with equipped and Beanstalk effects."
+    },
+    {
+      "label": "golden_hp",
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"MaxHPpct\")",
+      "description": "Golden-food maximum-HP multiplier."
+    },
+    {
+      "label": "golden_monster_cash",
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"MonsterCash\")",
+      "description": "Golden-food coin percentage."
+    },
+    {
+      "label": "golden_skill_exp",
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"SkillExp\")",
+      "description": "Golden-food skill experience percentage."
+    },
+    {
+      "label": "golden_all_stat_percent",
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"AllStatz\")",
+      "description": "Golden-food all-stat contribution in raw percentage points, without rounding or division by 100."
+    },
+    {
+      "label": "golden_defence_percent",
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"Defence\")",
+      "description": "Golden-food Defence in raw percentage points; no division or multiplier conversion."
+    },
+    {
+      "label": "golden_base_accuracy",
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"BaseAcc\")",
+      "description": "Golden-food flat base Accuracy."
+    },
+    {
+      "label": "golden_effectivity",
+      "expression": "(function(){idleon.callFunction(\"GoldFoodBonuses\", \"MaxHPpct\");return idleon.getDNSM(\"GfoodBonusMULTI\")})()",
+      "description": "Complete shared golden-food effectiveness."
+    },
+    {
+      "label": "death_bringer_candidate_0",
+      "expression": "(() => { const i=0,p=idleon.getAttr(\"GetPlayersUsernames\")[i],d=idleon.getAttr(\"CustomLists\").h.TalentDescriptions[209][1],lv=idleon.getAttr(\"PlayerDATABASE\").h[p].h.SkillLevels[209]+idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLVz\",\"209|\"+i); return idleon.callFunction(\"ArbitraryCode5Inputs\",d[2],Number(d[0]),Number(d[1]),lv,0,0); })()",
+      "description": "Account talent candidate from owner 0, with active recipient modifiers and both saved presets."
+    },
+    {
+      "label": "death_bringer_candidate_7",
+      "expression": "(() => { const i=7,p=idleon.getAttr(\"GetPlayersUsernames\")[i],d=idleon.getAttr(\"CustomLists\").h.TalentDescriptions[209][1],lv=idleon.getAttr(\"PlayerDATABASE\").h[p].h.SkillLevels[209]+idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLVz\",\"209|\"+i); return idleon.callFunction(\"ArbitraryCode5Inputs\",d[2],Number(d[0]),Number(d[1]),lv,0,0); })()",
+      "description": "Account talent candidate from owner 7, separate from the account maximum."
+    }
+  ]
+}

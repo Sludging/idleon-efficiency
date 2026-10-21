@@ -46,6 +46,11 @@
       "label": "global_bonus_6",
       "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 6, 0)",
       "description": "Global bonus 6: +{% Cash (base 3)"
+    },
+    {
+      "label": "global_bonus_multi",
+      "expression": "50*idleon.callFunction(\"Summoning\", \"RooMegafeather\", 1, 0)+50*idleon.callFunction(\"Summoning\", \"RooMegafeather\", 3, 0)+50*idleon.callFunction(\"Summoning\", \"RooMegafeather\", 6, 0)+50*idleon.callFunction(\"Summoning\", \"RooMegafeather\", 8, 0)+50*Math.min(1,idleon.callFunction(\"Summoning\", \"RooMegafeather\", 11, 0))+25*Math.max(0,idleon.callFunction(\"Summoning\", \"RooMegafeather\", 11, 0)-1)",
+      "description": "Poppy global bonus multiplier from Roo Megafeathers"
     }
   ]
 }

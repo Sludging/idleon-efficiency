@@ -6,23 +6,51 @@
     },
     "grid_bonus_125": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 125, 0)",
-      "result": 18.75
+      "result": 19.5
     },
     "button_bonus_multi": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_BonusMULTI\", 0, 0)",
-      "result": 2.078125
+      "result": 2.09125
     },
     "button_bonus_0": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 0, 0)",
-      "result": 41.5625
+      "result": 41.824999999999996
+    },
+    "button_bonus_1": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 1, 0)",
+      "result": 62.7375
+    },
+    "button_bonus_2": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 2, 0)",
+      "result": 41.824999999999996
+    },
+    "button_bonus_3": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 3, 0)",
+      "result": 41.824999999999996
+    },
+    "button_bonus_4": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 4, 0)",
+      "result": 83.64999999999999
+    },
+    "button_bonus_5": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 5, 0)",
+      "result": 104.56249999999999
+    },
+    "button_bonus_6": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 6, 0)",
+      "result": 83.64999999999999
     },
     "button_bonus_7": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 7, 0)",
-      "result": 415.625
+      "result": 418.25
     },
     "button_bonus_8": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 8, 0)",
-      "result": 51.953125
+      "result": 52.28125
+    },
+    "button_next_bonus_index": {
+      "expression": "Math.floor(idleon.engine.getGameAttribute('OptionsListAccount')[594]/5)%9",
+      "result": 7
     }
   },
   "errors": {}

@@ -1,18 +1,20 @@
 ---
 name: update-game-version
-description: Update game data when a new Legends of Idleon version is released. Extracts game code from Steam, processes it through WikiBot, and syncs updated data back.
+description: Update game-version assets or generated domain data. Read the runbook and select either offline asset refresh without WikiBot or full WikiBot generation.
 disable-model-invocation: true
 user-invocable: true
 ---
 
 # Update Game Version
 
-For the full procedure, read [docs/runbooks/update-game-version.md](../../docs/runbooks/update-game-version.md).
+For either asset-only refresh or full WikiBot generation, follow [the canonical procedure](../../docs/runbooks/update-game-version.md).
 
 ## Key Reminders
 
-- Requires `$WIKIBOT_ROOT` sibling repo (typically `../IdleonWikiBot/`) — see [local-paths.example.md](../../docs/runbooks/local-paths.example.md)
-- Execute steps sequentially; verify each step before proceeding
-- Human checkpoint at step 7b: user must review `git diff --stat data/domain/` before continuing
-- Flag upstream WikiBot issues in `.claude/UPSTREAM_FIXES.md`
-- After completion, prompt user to run [sync-game-assets](sync-game-assets/SKILL.md) for new/changed images
+- Choose scope first. Asset-only refresh requires no WikiBot checkout or access.
+- Follow offline setup, readiness, version, and game-access rules in [the offline guide](../../sub-projects/idleon-offline/README.md#startup) and [canonical game-access policy](../../tests/helpers/README.md#game-access).
+- Keep offline-required active assets available. Validate complete staged extraction and patch version, then cut over while preserving previous assets outside the repository.
+- Full WikiBot generation alone requires `$WIKIBOT_ROOT`, generated-data review, and upstream issue reporting.
+- Correctness-triggered work must preserve the accepted-pair, worktree, and provenance gates in the canonical correctness playbook.
+- Treat `/game-version` as asset-release provenance, not a config or calculation-test gate. Preserve native input/context checks and substantive formula tests across releases.
+- Never refresh save fixtures or stored extraction results by default. Use only the canonical human-requested live-only save-refresh path.

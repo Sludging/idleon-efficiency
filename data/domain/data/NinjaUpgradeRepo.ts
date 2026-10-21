@@ -39,7 +39,7 @@ export const initNinjaUpgradeRepo = () => {
                 "screenY": 47,
                 "width": 35,
                 "height": 70,
-                "name": "Respect for the Art",
+                "name": "Respectful Minded",
                 "bonusPerLvl": 3,
                 "bonus": "+{% bonus Sneaking EXP gain.",
                 "costBase": 8500,
@@ -325,8 +325,8 @@ export const initNinjaUpgradeRepo = () => {
                 "costBase": 1e+18,
                 "costExponent": 9,
                 "unlockId": 0,
-                "iconX": 195,
-                "iconY": 135
+                "iconX": 169,
+                "iconY": 126
             }),
         new NinjaUpgradeBase(23, <NinjaUpgradeModel>{
                 "screenX": 0,
@@ -411,6 +411,48 @@ export const initNinjaUpgradeRepo = () => {
                 "unlockId": 0,
                 "iconX": 566,
                 "iconY": 147
+            }),
+        new NinjaUpgradeBase(29, <NinjaUpgradeModel>{
+                "screenX": 0,
+                "screenY": 0,
+                "width": 0,
+                "height": 0,
+                "name": "Successful Symbols",
+                "bonusPerLvl": 5,
+                "bonus": "There is now a 4th symbol type, and all symbols are successful }x more often.",
+                "costBase": 1e+24,
+                "costExponent": 6.3,
+                "unlockId": 0,
+                "iconX": 220,
+                "iconY": 142
+            }),
+        new NinjaUpgradeBase(30, <NinjaUpgradeModel>{
+                "screenX": 0,
+                "screenY": 0,
+                "width": 0,
+                "height": 0,
+                "name": "Grievance Garlands",
+                "bonusPerLvl": 25,
+                "bonus": "Get }x more Funeral Flowers whenever a Ninja gets KO'd.",
+                "costBase": 1e+28,
+                "costExponent": 323.5,
+                "unlockId": 0,
+                "iconX": 902,
+                "iconY": 105
+            }),
+        new NinjaUpgradeBase(31, <NinjaUpgradeModel>{
+                "screenX": 0,
+                "screenY": 0,
+                "width": 0,
+                "height": 0,
+                "name": "Omnijade Usable",
+                "bonusPerLvl": 1,
+                "bonus": "Get +{ Omnijade, apply to upgrades to get +1 LV/day without raising cost.",
+                "costBase": 1e+20,
+                "costExponent": 1e+15,
+                "unlockId": 0,
+                "iconX": 668,
+                "iconY": 69
             })    
 ]
 }

@@ -1,0 +1,476 @@
+{
+  "description": "Every direct calculated growth, Study, ledger and reset input in the genuine active character context.",
+  "target": "Hole part 1 direct parameters",
+  "extractions": [
+    {
+      "label": "active_context",
+      "expression": "({ playerId: idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0]), playerName: idleon.getAttr('UserInfo')[0], playerNames: idleon.getAttr('GetPlayersUsernames'), version: idleon.getAttr('DoOnceREAL') })",
+      "description": "Capture real active character identity and version; do not switch or synthesize a context."
+    },
+    {
+      "label": "paired_hole_inputs",
+      "expression": "({ levels: idleon.getAttr(\"Holes\")[1].slice(0,5), exp: idleon.getAttr(\"Holes\")[2].slice(0,5), investments: idleon.getAttr(\"Holes\")[3].slice(0,8), purchased: idleon.getAttr(\"Holes\")[23].slice(0,5), studyLevels: idleon.getAttr(\"Holes\")[26].slice(0,18), studyProgress: idleon.getAttr(\"Holes\")[27].slice(0,18), target: idleon.getAttr(\"Holes\")[11][61], cavernOpals: idleon.getAttr(\"Holes\")[7], lanternUses: idleon.getAttr(\"Holes\")[11][84], wishes: idleon.getAttr(\"Holes\")[11][25], layers: [idleon.getAttr(\"Holes\")[11][1],idleon.getAttr(\"Holes\")[11][3],idleon.getAttr(\"Holes\")[11][5],idleon.getAttr(\"Holes\")[11][7]], covePurchases: idleon.getAttr('OptionsListAccount')[604] })",
+      "description": "Saved inputs directly used by part 1; runtime counter mismatches remain failures."
+    },
+    {
+      "label": "paired_direct_save_inputs",
+      "expression": "({ earlyExplorerUpgrade: idleon.getAttr('OptionsListAccount')[355], bundle: idleon.getAttr('BundlesReceived').h.bun_u ?? null, gemOpals: idleon.getAttr('GemItemsPurchased')[5], statueLevels: idleon.getAttr('StatueLevels') })",
+      "description": "Direct saved growth/ledger inputs and genuine active character Statue levels. Preserve absent sparse bundle ownership as null; do not normalize account-counter drift."
+    },
+    {
+      "label": "compass_59",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 59, 0)",
+      "description": "Compass Villager EXP"
+    },
+    {
+      "label": "legend_12",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 12, 0)",
+      "description": "Legend talent Villager EXP"
+    },
+    {
+      "label": "pristine_21",
+      "expression": "idleon.callFunction(\"Ninja\", \"PristineBon\", 21, 0)",
+      "description": "Pristine Charm Villager EXP percentage"
+    },
+    {
+      "label": "companion_13",
+      "expression": "idleon.callFunction(\"Companions\", 13)",
+      "description": "Active companion input to growth and Opals"
+    },
+    {
+      "label": "statue_28",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven28\")",
+      "description": "Captured character Villager Statue percentage"
+    },
+    {
+      "label": "statue_factor",
+      "expression": "1 + idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven28\") / 100",
+      "description": "Captured character Villager Statue multiplier"
+    },
+    {
+      "label": "jar_4",
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 4, 0)",
+      "description": "Natural Pearl collectible bonus to all villager EXP"
+    },
+    {
+      "label": "jar_10",
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 10, 0)",
+      "description": "Shadow Prism collectible bonus to all villager EXP"
+    },
+    {
+      "label": "jar_12",
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 12, 0)",
+      "description": "Emerald Ore collectible bonus to all villager EXP"
+    },
+    {
+      "label": "jar_16",
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 16, 0)",
+      "description": "Rosemerald collectible bonus to Bolaia Study rate"
+    },
+    {
+      "label": "jar_22",
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 22, 0)",
+      "description": "Tabula Rasastone collectible bonus to all villager EXP"
+    },
+    {
+      "label": "jar_29",
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 29, 0)",
+      "description": "Arcane Prism collectible bonus to all villager EXP"
+    },
+    {
+      "label": "jar_35",
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 35, 0)",
+      "description": "Sunroot Splinters collectible bonus to all villager EXP"
+    },
+    {
+      "label": "event_6",
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 6, 0)",
+      "description": "Event Shop Villager EXP ownership"
+    },
+    {
+      "label": "lore_1",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 1, 0)",
+      "description": "Tome epilogue Villager EXP"
+    },
+    {
+      "label": "exotic_51",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 51, 0)",
+      "description": "Exotic Market Villager EXP"
+    },
+    {
+      "label": "arcade_38",
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 38)",
+      "description": "Arcade Villager EXP"
+    },
+    {
+      "label": "grimoire_11",
+      "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 11, 0)",
+      "description": "Pure Opals Grimoire grant included in total earned Opals"
+    },
+    {
+      "label": "grimoire_29",
+      "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 29, 0)",
+      "description": "Villager Extraciricular Grimoire multiplier to all villager EXP"
+    },
+    {
+      "label": "arcane_25",
+      "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 25, 0)",
+      "description": "Ethereal Opals Arcane grant included in total earned Opals"
+    },
+    {
+      "label": "arcane_32",
+      "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 32, 0)",
+      "description": "Villager Indoctrination Arcane multiplier to all villager EXP"
+    },
+    {
+      "label": "schematic_0_25",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 0, 25)",
+      "description": "Opal Dividends schematic bonus to hourly EXP per invested Opal"
+    },
+    {
+      "label": "schematic_48_0",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 48, 0)",
+      "description": "Gloomie Opie schematic bonus to all villager EXP from Gloomie colonies"
+    },
+    {
+      "label": "schematic_85_2",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 85, 2)",
+      "description": "Peer Reviewed Books schematic bonus to Study rate per Bolaia level"
+    },
+    {
+      "label": "schematic_87_3",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 87, 3)",
+      "description": "Cutting Edge Research schematic bonus to Study rate per Bolaia level"
+    },
+    {
+      "label": "schematic_88_5",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 88, 5)",
+      "description": "Billion Dollar Grant schematic bonus to Study rate per Bolaia level"
+    },
+    {
+      "label": "schematic_99_5",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 99, 5)",
+      "description": "2nd Billion Dollar Grant schematic bonus to Study rate per Bolaia level"
+    },
+    {
+      "label": "schematic_102_1",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 102, 1)",
+      "description": "Justin Opal schematic grant included in total earned Opals"
+    },
+    {
+      "label": "fountain_0_14",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 14)",
+      "description": "Cosmological Boost Fountain bonus to Cosmo EXP"
+    },
+    {
+      "label": "fountain_1_14",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 14)",
+      "description": "Skim Reading Fountain bonus to Bolaia Study rate"
+    },
+    {
+      "label": "monument_0_3",
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 0, 3)",
+      "description": "Bravery Villager EXP"
+    },
+    {
+      "label": "monument_1_3",
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 1, 3)",
+      "description": "Justice Villager EXP"
+    },
+    {
+      "label": "monument_2_3",
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 2, 3)",
+      "description": "Wisdom Villager EXP"
+    },
+    {
+      "label": "measurement_0",
+      "expression": "idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 0, 0)",
+      "description": "Measurement 0 Villager EXP"
+    },
+    {
+      "label": "measurement_7",
+      "expression": "idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 7, 0)",
+      "description": "Measurement 7 Villager EXP"
+    },
+    {
+      "label": "majik_0",
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 0)",
+      "description": "Opal Enthusiasm Majik bonus to villager EXP per ten invested Opals"
+    },
+    {
+      "label": "majik_1",
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 1)",
+      "description": "Contented Creator Majik bonus to all villager EXP per built schematic"
+    },
+    {
+      "label": "majik_2",
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 2)",
+      "description": "Cosmo, Enhance! Majik bonus to all villager EXP"
+    },
+    {
+      "label": "majik_4",
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 4)",
+      "description": "Study All Nighter Majik bonus to Bolaia Study rate"
+    },
+    {
+      "label": "majik_5",
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 5)",
+      "description": "Equal Spread Majik bonus to all villager EXP per five Opals in the least-invested rescued villager"
+    },
+    {
+      "label": "gloomie_card",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"caveB\")",
+      "description": "Gloomie card level before growth cap"
+    },
+    {
+      "label": "bell_1",
+      "expression": "idleon.callFunction(\"Holes\", \"BellBonuss\", 1, 0)",
+      "description": "Bell Villager EXP"
+    },
+    {
+      "label": "summoning_21",
+      "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 21, 0)",
+      "description": "Summoning Villager EXP"
+    },
+    {
+      "label": "vault_73",
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 73, 0)",
+      "description": "Vault Villager EXP"
+    },
+    {
+      "label": "study_stamp",
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"VillageStudy\")",
+      "description": "Settled Study stamp"
+    },
+    {
+      "label": "compass_52",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 52, 0)",
+      "description": "Compass Opal grant"
+    },
+    {
+      "label": "emperor_3",
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 3, 0)",
+      "description": "Emperor Opal input before refresh floor"
+    },
+    {
+      "label": "sushi_56",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 56, 0)",
+      "description": "Settled Sushi Opal grant"
+    },
+    {
+      "label": "least_investment",
+      "expression": "idleon.callFunction(\"Holes2\", \"LeastOpalsInVillager\", 0, 0)",
+      "description": "Least rescued-villager investment used by Equal Spread"
+    },
+    {
+      "label": "study_rate",
+      "expression": "idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0)",
+      "description": "Shared Study rate used by target and eligible neighbors"
+    },
+    {
+      "label": "study_bonus_0",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 0, 0)",
+      "description": "The Well Study bonus to bucket fill rate per bar expansion"
+    },
+    {
+      "label": "study_bonus_1",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 1, 0)",
+      "description": "Motherlode Study contribution to other skilling cavern resource requirement divisors per destroyed layer"
+    },
+    {
+      "label": "study_bonus_2",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 2, 0)",
+      "description": "The Den Study bonus to score per defeated Golden Hound"
+    },
+    {
+      "label": "study_bonus_3",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 3, 0)",
+      "description": "Bravery Study minimum damage as a percentage of maximum damage"
+    },
+    {
+      "label": "study_bonus_4",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 4, 0)",
+      "description": "The Bell Study extra levels for a random bonus every twentieth ring"
+    },
+    {
+      "label": "study_bonus_5",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 5, 0)",
+      "description": "The Harp Study bonus to the exceptional string EXP multiplier"
+    },
+    {
+      "label": "study_bonus_6",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 6, 0)",
+      "description": "The Lamp Study additional daily wishes"
+    },
+    {
+      "label": "study_bonus_7",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 7, 0)",
+      "description": "The Hive Study contribution to other skilling cavern resource requirement divisors per harvested layer"
+    },
+    {
+      "label": "study_bonus_8",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 8, 0)",
+      "description": "Grotto Study bonus to credited Gloomie kills toward challenging the Monarch"
+    },
+    {
+      "label": "study_bonus_9",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 9, 0)",
+      "description": "Justice Study bonus to Opal reward chance"
+    },
+    {
+      "label": "study_bonus_10",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 10, 0)",
+      "description": "The Jars Study bonus to collectible enchantment chance"
+    },
+    {
+      "label": "study_bonus_11",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 11, 0)",
+      "description": "Evertree Study contribution to other skilling cavern resource requirement divisors per whittled trunk"
+    },
+    {
+      "label": "study_bonus_12",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 12, 0)",
+      "description": "Wisdom Study additional starting attempts in normal story mode"
+    },
+    {
+      "label": "study_bonus_13",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 13, 0)",
+      "description": "Gambit Study percentage bonus to total Gambit points"
+    },
+    {
+      "label": "study_bonus_14",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 14, 0)",
+      "description": "Temple Study additional chance to receive double torches on pickup"
+    },
+    {
+      "label": "study_bonus_15",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 15, 0)",
+      "description": "Fountain Study bonus to marble production"
+    },
+    {
+      "label": "study_bonus_16",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 16, 0)",
+      "description": "Trench Study contribution to other skilling cavern resource requirement divisors per completed depth"
+    },
+    {
+      "label": "study_bonus_17",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 17, 0)",
+      "description": "The Cove Study count of daily discounted upgrades"
+    },
+    {
+      "label": "villager_requirement_0",
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 0, 0)",
+      "description": "Villager 0 next requirement used by claim readiness"
+    },
+    {
+      "label": "villager_requirement_1",
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 1, 0)",
+      "description": "Villager 1 next requirement used by claim readiness"
+    },
+    {
+      "label": "villager_requirement_2",
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 2, 0)",
+      "description": "Villager 2 next requirement used by claim readiness"
+    },
+    {
+      "label": "villager_requirement_3",
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 3, 0)",
+      "description": "Villager 3 next requirement used by claim readiness"
+    },
+    {
+      "label": "villager_requirement_4",
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 4, 0)",
+      "description": "Villager 4 next requirement used by claim readiness"
+    },
+    {
+      "label": "study_requirement_0",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 0, 0)",
+      "description": "Study 0 next requirement used by claim readiness"
+    },
+    {
+      "label": "study_requirement_1",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 1, 0)",
+      "description": "Study 1 next requirement used by claim readiness"
+    },
+    {
+      "label": "study_requirement_2",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 2, 0)",
+      "description": "Study 2 next requirement used by claim readiness"
+    },
+    {
+      "label": "study_requirement_3",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 3, 0)",
+      "description": "Study 3 next requirement used by claim readiness"
+    },
+    {
+      "label": "study_requirement_4",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 4, 0)",
+      "description": "Study 4 next requirement used by claim readiness"
+    },
+    {
+      "label": "study_requirement_5",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 5, 0)",
+      "description": "Study 5 next requirement used by claim readiness"
+    },
+    {
+      "label": "study_requirement_6",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 6, 0)",
+      "description": "Study 6 next requirement used by claim readiness"
+    },
+    {
+      "label": "study_requirement_7",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 7, 0)",
+      "description": "Study 7 next requirement used by claim readiness"
+    },
+    {
+      "label": "study_requirement_8",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 8, 0)",
+      "description": "Study 8 next requirement used by claim readiness"
+    },
+    {
+      "label": "study_requirement_9",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 9, 0)",
+      "description": "Study 9 next requirement used by claim readiness"
+    },
+    {
+      "label": "study_requirement_10",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 10, 0)",
+      "description": "Study 10 next requirement used by claim readiness"
+    },
+    {
+      "label": "study_requirement_11",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 11, 0)",
+      "description": "Study 11 next requirement used by claim readiness"
+    },
+    {
+      "label": "study_requirement_12",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 12, 0)",
+      "description": "Study 12 next requirement used by claim readiness"
+    },
+    {
+      "label": "study_requirement_13",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 13, 0)",
+      "description": "Study 13 next requirement used by claim readiness"
+    },
+    {
+      "label": "study_requirement_14",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 14, 0)",
+      "description": "Study 14 next requirement used by claim readiness"
+    },
+    {
+      "label": "study_requirement_15",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 15, 0)",
+      "description": "Study 15 next requirement used by claim readiness"
+    },
+    {
+      "label": "study_requirement_16",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 16, 0)",
+      "description": "Study 16 next requirement used by claim readiness"
+    },
+    {
+      "label": "study_requirement_17",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 17, 0)",
+      "description": "Study 17 next requirement used by claim readiness"
+    }
+  ]
+}
