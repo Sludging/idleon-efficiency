@@ -64,9 +64,7 @@ export class CoveUpgrade {
     }
 }
 
-export interface CoveLocalInputs {
-    mapId: number;
-    cavernId: number;
+export interface CoveInputs {
     campUpgrade100Bonus: number;
     campUpgrade101Bonus: number;
     campUpgrade103Bonus: number;
@@ -74,8 +72,7 @@ export interface CoveLocalInputs {
     gameLog: (value: number) => number;
 }
 
-export interface CoveLocalEffects {
-    inCoveContext: boolean;
+export interface CoveAccountEffects {
     dropRateMultiplier: number;
     afkGainMultiplier: number;
     multikillPerDamageTier: number;
@@ -88,9 +85,6 @@ export interface CoveLocalEffects {
     pickupRandomDoubleChance: number;
 }
 
-export interface CoveCharacterInputs extends CoveLocalInputs {
-    playerId: number;
-}
 
 export interface CoveRewardState {
     opalsEarned: number;
@@ -140,8 +134,8 @@ export class Cove {
     purpleShapeTargetId: number | null = null;
     glunkoKills: number = 0;
     normalDropRate: number = 0;
-    rewards: CoveRewardState = { opalsEarned: 0, ribbonRewardEarned: false };
-    localEffectsByPlayerId: ReadonlyMap<number, CoveLocalEffects> = new Map();
+    accountEffects!: CoveAccountEffects;
+    rewards!: CoveRewardState;
 
     parse(optionsListAccount: number[] | undefined): void {
         this.upgrades.forEach(upgrade => {
@@ -168,7 +162,6 @@ export class Cove {
             opalsEarned: this.upgrades[0].level,
             ribbonRewardEarned: this.upgrades[5].level > 0
         };
-        this.localEffectsByPlayerId = new Map();
     }
 
     getPurchaseEffects(upgradeIndex: number): CovePurchaseEffects {
@@ -215,8 +208,7 @@ export class Cove {
         return this.purpleShapeBalances.reduce((sum, balance) => sum + Math.ceil(gameLog(balance)), 0);
     }
 
-    prepare(inputs: CoveLocalInputs): CoveLocalEffects {
-        const inCoveContext = inputs.mapId === 216 && inputs.cavernId === 17;
+    prepareAccountEffects(inputs: CoveInputs): CoveAccountEffects {
         const blueDigits = this.getBlueShapeDigits(inputs.gameLog);
         const purpleDigits = this.getPurpleShapeDigits(inputs.gameLog);
         const dropBonus1 = this.upgrades[1].getBonus();
@@ -245,7 +237,6 @@ export class Cove {
             purpleTargetBalance >= 0.1;
 
         return {
-            inCoveContext,
             dropRateMultiplier: (1 + (dropBonus1 + dropBonus17 + dropBonus21) / 100)
                 * (1 + dropBonus3 / 100)
                 * (1 + dropBonus12 / 100)
@@ -268,13 +259,5 @@ export class Cove {
         };
     }
 
-    prepareCharacters(inputs: CoveCharacterInputs[]): ReadonlyMap<number, CoveLocalEffects> {
-        const effectsByPlayerId = new Map<number, CoveLocalEffects>();
-        inputs.forEach(character => {
-            effectsByPlayerId.set(character.playerId, this.prepare(character));
-        });
-        this.localEffectsByPlayerId = effectsByPlayerId;
-        return effectsByPlayerId;
-    }
 }
 

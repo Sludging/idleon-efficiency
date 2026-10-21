@@ -16,6 +16,7 @@ import type { ImageData } from "../../../data/domain/imageData";
 import type { Hole } from "../../../data/domain/world-5/hole/hole";
 import { commaNotation, getCoinsArray, notateNumber, toTime } from "../../../data/utility";
 
+import { ResourceDisplay } from "../../account/shared/ResourceDisplay";
 import { UpgradeTable } from "../../account/shared/UpgradeTable";
 import type { FilterOptions } from "../../account/shared/UpgradeTableFilters";
 import { CavernMetricStrip, CavernStudySummary } from "./cavernLayout";
@@ -29,6 +30,9 @@ function exact(amount: number | null, suffix = ""): string {
 }
 function percentage(amount: number): string {
     return `${new Intl.NumberFormat("en-US", { maximumFractionDigits: 3 }).format(amount * 100)}%`;
+}
+function factor(amount: number): string {
+    return `${notateNumber(amount, "MultiplierInfo").replace("#", "")}×`;
 }
 
 
@@ -410,87 +414,138 @@ function FountainView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () =
     </Box>;
 }
 
-function CoveView({ hole, onOpenStudies, characters }: { hole: Hole; onOpenStudies: () => void; characters: { playerId: number; playerName: string }[] }) {
+function CoveView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => void }) {
     const cove = hole.cove;
     const study = hole.studies[17];
-    const dailyPurchases = study.dailyCoveUpgradesPurchased;
-    const studyBonus = study.getBonus();
+    const effects = cove.accountEffects;
+    const [tab, setTab] = useState<"Resources" | "Upgrades">("Resources");
+    const [filters, setFilters] = useState<FilterOptions>({
+        hideLocked: false,
+        hideMaxed: false,
+        searchText: "",
+        sortBy: "default"
+    });
+    const upgrades = cove.upgrades.map(upgrade => ({
+        index: upgrade.index,
+        upgrade,
+        level: upgrade.level,
+        effect: upgrade.getDescription(),
+        cost: cove.getUpgradeCost(upgrade.index, study.dailyCoveUpgradesPurchased, study.getBonus())
+    }));
+    const search = filters.searchText.trim().toLocaleLowerCase();
+    const visibleUpgrades = upgrades.filter(({ upgrade, effect }) =>
+        !search || `${upgrade.name} ${effect ?? ""}`.toLocaleLowerCase().includes(search)
+    );
 
     return <Box gap="medium" data-testid="hole-cove-details">
-        <Section title="Shapes and Cove state">
-            <CavernMetricStrip metrics={[
-                { label: "Glunko kills", value: value(cove.glunkoKills) },
-                { label: "Opals earned", value: value(cove.rewards.opalsEarned) },
-                { label: "Ribbon reward", value: cove.rewards.ribbonRewardEarned ? "Earned" : "Not earned" },
-                { label: "Study purchases today", value: exact(dailyPurchases) },
-                { label: "Study discount level", value: value(studyBonus) },
-            ]} />
-            <Box direction="row" gap="small" wrap>
-                <Text size="xsmall">Blue target: {cove.blueShapeTargetId === null ? "None saved" : cove.shapes[cove.blueShapeTargetId].name}</Text>
-                <Text size="xsmall">Purple target: {cove.purpleShapeTargetId === null ? "None saved" : cove.shapes[cove.purpleShapeTargetId].name}</Text>
-            </Box>
-            <Box style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: "8px" }} data-testid="cove-shapes">
+        <CavernMetricStrip metrics={[
+            { label: "Glunko kills", value: value(cove.glunkoKills) },
+            { label: "Opals earned", value: value(cove.rewards.opalsEarned) },
+            { label: "Drop rate factor", value: factor(effects.dropRateMultiplier) },
+            { label: "AFK gain factor", value: factor(effects.afkGainMultiplier) },
+            { label: "Multikill per damage tier", value: percentage(effects.multikillPerDamageTier) },
+            { label: "Base multikill", value: percentage(effects.baseMultikill) },
+            { label: "Respawn time factor", value: factor(effects.respawnTimeMultiplier) },
+            {
+                label: "Blue pickup target",
+                value: effects.bluePickupTargetId === null
+                    ? "None"
+                    : `${cove.shapes[effects.bluePickupTargetId].name} · ${value(effects.bluePickupAmount)}`
+            },
+            {
+                label: "Purple pickup target",
+                value: effects.purplePickupTargetId === null
+                    ? "None"
+                    : `${cove.shapes[effects.purplePickupTargetId].name} · ${value(effects.purplePickupAmount)}`
+            },
+            { label: "Random pickup double chance", value: percentage(effects.pickupRandomDoubleChance) }
+        ]} />
+        <ContentTabs
+            options={[{ value: "Resources", label: "Resources" }, { value: "Upgrades", label: "Upgrades" }]}
+            value={tab}
+            onChange={setTab}
+        />
+        {tab === "Resources"
+            ? <Box direction="row" gap="small" wrap data-testid="cove-shapes">
                 {cove.shapes.map(shape => {
-                    const balance = shape.color === "blue" ? cove.blueShapeBalances[shape.id] : cove.purpleShapeBalances[shape.id - 6];
-                    const targetId = shape.color === "blue" ? cove.blueShapeTargetId : cove.purpleShapeTargetId;
-                    return <Box key={shape.id} direction="row" gap="small" align="center" pad="small" background="dark-1" data-testid={`cove-shape-${shape.id}`}>
-                        <IconImage data={Item.getImageData(shape.data.internalName)} scale={0.8} />
-                        <Box flex><Text size="xsmall" weight={500}>{shape.name}</Text><Text size="xsmall">{value(balance)}</Text></Box>
-                        <Text size="xsmall" color="accent-2">{targetId === shape.id ? "Boosted target" : ""}</Text>
+                    const balance = shape.color === "blue"
+                        ? cove.blueShapeBalances[shape.id]
+                        : cove.purpleShapeBalances[shape.id - 6];
+                    const activeTargetId = shape.color === "blue"
+                        ? effects.bluePickupTargetId
+                        : effects.purplePickupTargetId;
+                    const isActiveTarget = activeTargetId === shape.id;
+                    return <Box
+                        key={shape.id}
+                        direction="row"
+                        gap="xsmall"
+                        align="center"
+                        pad="xsmall"
+                        background="dark-1"
+                        data-testid={`cove-shape-${shape.id}`}
+                        style={{
+                            outline: isActiveTarget
+                                ? `1px solid ${shape.color === "blue" ? "rgba(3, 118, 227, 0.7)" : "rgba(159, 93, 220, 0.7)"}`
+                                : undefined
+                        }}
+                    >
+                        <IconImage data={Item.getImageData(shape.data.internalName)} scale={0.7} />
+                        <Text size="xsmall">{value(balance)}</Text>
                     </Box>;
                 })}
             </Box>
-        </Section>
-
-        <Section title="Upgrades">
-            <Box style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: "8px" }} data-testid="cove-upgrades">
-                {cove.upgrades.map(upgrade => {
-                    const balance = cove.getCurrencyBalance(upgrade.index);
-                    const cost = cove.getUpgradeCost(upgrade.index, dailyPurchases, studyBonus);
-                    const shortfall = Math.max(0, cost - balance);
-                    const description = upgrade.getDescription();
-                    const purchaseEffects = cove.getPurchaseEffects(upgrade.index);
-                    const shapeId = Math.floor(upgrade.index % 12 / 2) + (Math.floor(upgrade.index / 12) === 0 ? 0 : 6);
-                    return <GameCard key={upgrade.index} title={upgrade.name} testId={`cove-upgrade-${upgrade.index}`}
-                        inactive={upgrade.level === 0} headerRight={<Text size="xsmall">Lv. {value(upgrade.level)}</Text>}>
-                        {description !== null && <Text size="xsmall">{description}</Text>}
-                        <Box direction="row" gap="xsmall" align="center">
-                            <IconImage data={Item.getImageData(cove.shapes[shapeId].data.internalName)} scale={0.65} />
-                            <Text size="xsmall">Cost / balance: {value(cost)} / {value(balance)}</Text>
-                            <Text size="xsmall">Shortfall: {value(shortfall)}</Text>
-                        </Box>
-                        <Text size="xsmall">{purchaseEffects.opalsEarned > 0 ? "Earns an Opal when purchased. " : ""}{purchaseEffects.resetsMonsterRespawnTime ? "Resets monster respawn time when purchased. " : ""}{purchaseEffects.incrementsStudyDailyCounter === false ? "Ribbon purchase does not increment the Study counter." : ""}</Text>
-                    </GameCard>;
-                })}
-            </Box>
-            <Text size="xsmall" color="accent-2">The Study discount applies while its daily use count is below the saved Study amount. It is not a purchase limit.</Text>
-        </Section>
-
-        <Section title="Prospective character-local effects">
-            <Text size="xsmall" color="accent-2">Current map or cavern assignment does not change these saved-input values. Context shows whether the character is on map 216 and assigned to cavern 17.</Text>
-            <Box style={{ overflowX: "auto" }}>
-                <table style={{ width: "100%", minWidth: "820px", borderCollapse: "collapse" }} data-testid="cove-character-effects">
-                    <thead><tr>{["Character", "Cove context", "Drop rate", "AFK gain", "Per damage tier / base multikill", "Respawn", "Blue pickup", "Purple pickup", "Random double"].map(label =>
-                        <th key={label} scope="col" style={{ textAlign: "left", padding: "8px", borderBottom: "1px solid rgba(255,255,255,0.14)" }}><Text size="xsmall" color="accent-2">{label}</Text></th>)}</tr></thead>
-                    <tbody>{characters.map(character => {
-                        const effects = cove.localEffectsByPlayerId.get(character.playerId);
-                        const blueTarget = effects?.bluePickupTargetId === null || effects?.bluePickupTargetId === undefined ? "None" : cove.shapes[effects.bluePickupTargetId].name;
-                        const purpleTarget = effects?.purplePickupTargetId === null || effects?.purplePickupTargetId === undefined ? "None" : cove.shapes[effects.purplePickupTargetId].name;
-                        return <tr key={character.playerId} data-testid={`cove-character-${character.playerId}`} style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-                            <td style={{ padding: "8px" }}><Text size="xsmall">{character.playerName}</Text></td>
-                            <td style={{ padding: "8px" }}><Text size="xsmall">{effects ? effects.inCoveContext ? "Yes" : "No" : "Unavailable"}</Text></td>
-                            <td style={{ padding: "8px" }}><Text size="xsmall">{effects ? value(effects.dropRateMultiplier, "×") : "Unavailable"}</Text></td>
-                            <td style={{ padding: "8px" }}><Text size="xsmall">{effects ? exact(effects.afkGainMultiplier, "×") : "Unavailable"}</Text></td>
-                            <td style={{ padding: "8px" }}><Text size="xsmall">{effects ? `${exact(effects.multikillPerDamageTier)} / ${exact(effects.baseMultikill)}` : "Unavailable"}</Text></td>
-                            <td style={{ padding: "8px" }}><Text size="xsmall">{effects ? exact(effects.respawnTimeMultiplier, "×") : "Unavailable"}</Text></td>
-                            <td style={{ padding: "8px" }}><Text size="xsmall">{blueTarget} · {effects ? value(effects.bluePickupAmount) : "Unavailable"}</Text></td>
-                            <td style={{ padding: "8px" }}><Text size="xsmall">{purpleTarget} · {effects ? value(effects.purplePickupAmount) : "Unavailable"}</Text></td>
-                            <td style={{ padding: "8px" }}><Text size="xsmall">{effects ? value(effects.pickupRandomDoubleChance * 100, "%") : "Unavailable"}</Text></td>
-                        </tr>;
-                    })}</tbody>
-                </table>
-            </Box>
-        </Section>
+            : <UpgradeTable
+                tableName="Cove upgrades"
+                columns={[
+                    {
+                        property: "upgrade",
+                        header: "Upgrade",
+                        render: (row: typeof upgrades[number]) => {
+                            const shapeId = Math.floor(row.upgrade.index % 12 / 2)
+                                + (Math.floor(row.upgrade.index / 12) === 0 ? 0 : 6);
+                            return <Box direction="row" gap="small" align="center" style={{ minWidth: "180px" }}>
+                                <IconImage data={Item.getImageData(cove.shapes[shapeId].data.internalName)} scale={0.65} />
+                                <Text size="xsmall">{row.upgrade.name}</Text>
+                            </Box>;
+                        }
+                    },
+                    {
+                        property: "level",
+                        header: "Level",
+                        render: (row: typeof upgrades[number]) => <Text size="xsmall">{value(row.level)}</Text>
+                    },
+                    {
+                        property: "effect",
+                        header: "Effect",
+                        render: (row: typeof upgrades[number]) => <Text size="xsmall">{row.effect ?? ""}</Text>
+                    },
+                    {
+                        property: "cost",
+                        header: "Cost",
+                        render: (row: typeof upgrades[number]) => {
+                            const shapeId = Math.floor(row.upgrade.index % 12 / 2)
+                                + (Math.floor(row.upgrade.index / 12) === 0 ? 0 : 6);
+                            const canAfford = cove.getCurrencyBalance(row.upgrade.index) >= row.cost;
+                            return <ResourceDisplay
+                                cost={row.cost}
+                                canAfford={canAfford}
+                                resourceImageData={Item.getImageData(cove.shapes[shapeId].data.internalName)}
+                                resourceImageScale={0.65}
+                                showTooltip={false}
+                            />;
+                        }
+                    }
+                ]}
+                data={visibleUpgrades}
+                primaryKey="index"
+                filters={filters}
+                onFiltersChange={setFilters}
+                sortOptions={[]}
+                searchPlaceholder="Search Cove upgrades..."
+                showLockedAndMaxedFilters={false}
+                variant="panel"
+                minWidth="620px"
+            />}
         <CavernStudySummary study={study} onOpenStudies={onOpenStudies} />
     </Box>;
 }
@@ -978,7 +1033,7 @@ export default function Part4CavernDetails({ hole, cavern, totalMoney, onOpenStu
         case 6: return <LampView hole={hole} onOpenStudies={onOpenStudies} />;
         case 10: return <JarView hole={hole} onOpenStudies={onOpenStudies} />;
         case 15: return <FountainView hole={hole} onOpenStudies={onOpenStudies} />;
-        case 17: return <CoveView hole={hole} onOpenStudies={onOpenStudies} characters={characters} />;
+        case 17: return <CoveView hole={hole} onOpenStudies={onOpenStudies} />;
         default: return null;
     }
 }

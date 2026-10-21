@@ -567,7 +567,7 @@ describe('Hole part-five imported state', () => {
     });
 
 
-    it('prepares prospective Cove effects independently from current map and assignment', () => {
+    it('prepares prospective Cove effects from account-shared saved inputs', () => {
         const campBonuses = [
             [100, 25, 'camp_upgrade_100_25'],
             [101, 10, 'camp_upgrade_101_10'],
@@ -581,39 +581,18 @@ describe('Hole part-five imported state', () => {
         expect(hole.cove.upgrades[2].getBonus())
             .toMatchLiveGame(getExtractedValue(fountainCoveResults, 'cove_respawn_upgrade'), 0);
 
-        const player = (gameData.get('players') as Player[]).find(player => player.playerID === 3)!;
-        const assignment = hole.resourceCavrens.characterAssignments?.[player.playerID] ?? -1;
-        const inputs = {
-            campUpgrade100Bonus: hole.getSchematicBonus(100, 25),
-            campUpgrade101Bonus: hole.getSchematicBonus(101, 10),
-            campUpgrade103Bonus: hole.getSchematicBonus(103, 10),
-            campUpgrade105Bonus: hole.getSchematicBonus(105, 10),
-            gameLog: lavaLog,
-        };
-        const insideCove = hole.cove.prepare({ ...inputs, mapId: 216, cavernId: 17 });
-        const outsideCove = hole.cove.prepare({ ...inputs, mapId: player.currentMapId, cavernId: assignment });
-        const { inCoveContext: _insideContext, ...insideEffects } = insideCove;
-        const { inCoveContext: _outsideContext, ...outsideEffects } = outsideCove;
-        const importedEffects = hole.cove.localEffectsByPlayerId.get(player.playerID)!;
-        const { inCoveContext: _importedContext, ...importedCapability } = importedEffects;
+        const effects = hole.cove.accountEffects;
 
-        expect(importedEffects.inCoveContext).toBe(false);
-        expect(insideEffects).toEqual(importedCapability);
-        expect(outsideEffects).toEqual(importedCapability);
-
-        expect(insideCove.inCoveContext).toBe(true);
-        expect(outsideCove.inCoveContext).toBe(false);
-        expect(outsideEffects).toEqual(insideEffects);
-        expect(outsideCove.dropRateMultiplier).toBeGreaterThan(1);
-        expect(outsideCove.afkGainMultiplier).toBeGreaterThan(1);
-        expect(outsideCove.multikillPerDamageTier).toBeGreaterThan(0);
-        expect(outsideCove.baseMultikill).toBeGreaterThan(0);
-        expect(outsideCove.respawnTimeMultiplier).toBeLessThan(1);
-        expect(outsideCove.bluePickupTargetId).not.toBeNull();
-        expect(outsideCove.bluePickupAmount).toBeGreaterThan(0);
-        expect(outsideCove.purplePickupTargetId).not.toBeNull();
-        expect(outsideCove.purplePickupAmount).toBeGreaterThan(0);
-        expect(outsideCove.pickupRandomDoubleChance).toBeGreaterThan(0);
+        expect(effects.dropRateMultiplier).toBeGreaterThan(1);
+        expect(effects.afkGainMultiplier).toBeGreaterThan(1);
+        expect(effects.multikillPerDamageTier).toBeGreaterThan(0);
+        expect(effects.baseMultikill).toBeGreaterThan(0);
+        expect(effects.respawnTimeMultiplier).toBeLessThan(1);
+        expect(effects.bluePickupTargetId).not.toBeNull();
+        expect(effects.bluePickupAmount).toBeGreaterThan(0);
+        expect(effects.purplePickupTargetId).not.toBeNull();
+        expect(effects.purplePickupAmount).toBeGreaterThan(0);
+        expect(effects.pickupRandomDoubleChance).toBeGreaterThan(0);
     });
 
     it('repeats normal imports without mutating the saved Fountain and Jar inputs', () => {
@@ -632,7 +611,7 @@ describe('Hole part-five imported state', () => {
 
         expect(JSON.stringify(save.toJSON())).toBe(sourceSnapshot);
         expect(secondImport.fountain.stacks).toEqual(firstImport.fountain.stacks);
-        expect(secondImport.cove.localEffectsByPlayerId).toEqual(firstImport.cove.localEffectsByPlayerId);
+        expect(secondImport.cove.accountEffects).toEqual(firstImport.cove.accountEffects);
     });
     it('parses Fountain stacks as nested currency rows', () => {
         const savedHoleData = JSON.parse(loadTestSave(saveName).get('Holes') as string) as number[][];

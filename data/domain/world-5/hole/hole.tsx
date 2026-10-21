@@ -2269,14 +2269,11 @@ export const updateHoleCharacterCapabilities = (data: Map<string, any>): void =>
  Object.values(resourceCavrens.cavrens).forEach(cavern => {
   cavern.prepareCharacterCapabilities(players, assignments, skilling);
  });
- hole.cove.prepareCharacters(players.map(player => ({
-  playerId: player.playerID,
-  mapId: player.currentMapId,
-  cavernId: assignments[player.playerID] ?? -1,
+ hole.cove.accountEffects = hole.cove.prepareAccountEffects({
   campUpgrade100Bonus: hole.getSchematicBonus(100, 25),
   campUpgrade101Bonus: hole.getSchematicBonus(101, 10),
   campUpgrade103Bonus: hole.getSchematicBonus(103, 10),
   campUpgrade105Bonus: hole.getSchematicBonus(105, 10),
   gameLog: lavaLog,
- })));
+ });
 };
