@@ -200,6 +200,7 @@ export class Minehead extends Domain {
     opponentsDefeated: number = 0;
     currency: number = 0;
     remainingDailyAttempts = 0;
+    dailyTries = 0;
     maxLives = 0;
     baseDamage = 0;
     currencyGain = 0;

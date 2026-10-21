@@ -10,7 +10,7 @@ import { ClamworksRewardModel } from "../model/clamworksRewardModel";
 export class ClamworksBonus {
     level: number = 0;
 
-    constructor(public index: number, public data: ClamworksBonusModel) {}
+    constructor(public index: number, public data: ClamworksBonusModel) { }
 
     static fromBase(data: ClamworksBonusBase[]) {
         return data.map(bonus => new ClamworksBonus(bonus.index, bonus.data));
@@ -33,7 +33,7 @@ export class ClamworksBonus {
 export class ClamworksReward {
     earned: boolean = false;
 
-    constructor(public index: number, public data: ClamworksRewardModel) {}
+    constructor(public index: number, public data: ClamworksRewardModel) { }
 
     static fromBase(data: ClamworksRewardBase[]): ClamworksReward[] {
         return data.map(reward => new ClamworksReward(reward.index, reward.data));
@@ -145,13 +145,13 @@ export class Clamworks extends Domain {
     getClamCost = (index: number): number => {
         const bonus = this.workBonuses.find(bonus => bonus.index == index);
 
-        if (!bonus) {
+        if (!bonus || bonus.data.cost === undefined) {
             return 0;
         }
 
         switch (index) {
             case 0:
-                return 1 / (1 + this.getClamBonus(4) / 100) * (1 / (1 + this.getClamBonus(8) / 100)) * (Math.pow(bonus.data.cost, bonus.level) + (3 * bonus.level + Math.pow(bonus.level, 2.5))) ;
+                return 1 / (1 + this.getClamBonus(4) / 100) * (1 / (1 + this.getClamBonus(8) / 100)) * (Math.pow(bonus.data.cost, bonus.level) + (3 * bonus.level + Math.pow(bonus.level, 2.5)));
             default:
                 return 1 / (1 + this.getClamBonus(4) / 100) * (1 / (1 + this.getClamBonus(8) / 100)) * (this.getPearlRequirement(index) / 5 * Math.pow(bonus.data.cost, bonus.level) + (2 * bonus.level + Math.pow(bonus.level, 1.5)));
         }

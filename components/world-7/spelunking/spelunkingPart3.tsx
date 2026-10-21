@@ -65,7 +65,7 @@ const ElixirCardHeader = styled.div`
     flex-wrap: wrap;
 `;
 
-const ElixirStatus = styled.span<{ $status: 'equipped' | 'memorized' }>`
+const ElixirStatus = styled(Text).attrs({ size: 'xsmall', weight: 600 }) <{ $status: 'equipped' | 'memorized' }>`
     display: inline-flex;
     align-items: center;
     border-radius: 999px;
@@ -76,8 +76,6 @@ const ElixirStatus = styled.span<{ $status: 'equipped' | 'memorized' }>`
     color: ${({ $status, theme }: { $status: 'equipped' | 'memorized'; theme: ThemeType }) => $status === 'equipped'
         ? normalizeColor('status-ok', theme)
         : '#ffe09a'};
-    font-size: ${({ theme }: { theme: ThemeType }) => theme.text.xsmall.size};
-    font-weight: 600;
 
     ${({ $status }) => $status === 'equipped' && `
         &::before {
@@ -279,8 +277,8 @@ function ShopCost({
             ) : (
                 <Box direction="row" align="center" gap="xxsmall" data-spelunking-cost-row={attribute}>
                     <IconImage data={denomination.getImageData()} scale={0.42} />
-                        <Text size="xsmall" color={canAfford ? 'green-1' : undefined}
-                            data-spelunking-cost-text={attribute}>{text}</Text>
+                    <Text size="xsmall" color={canAfford ? 'green-1' : undefined}
+                        data-spelunking-cost-text={attribute}>{text}</Text>
                 </Box>
             )}
         </Box>

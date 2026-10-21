@@ -16,6 +16,7 @@ import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
 
 type UpgradeRow = { id: number; upgrade: MineheadUpgrade; description: string; capped: boolean; maxed: boolean; locked: boolean; nextCost: number; bulkCost: number };
+type MineheadSection = 'upgrades' | 'opponents';
 
 const mineheadCurrencyImage: ImageData = { location: 'MineheadCurrency', width: 20, height: 26 };
 const mineheadLivesImage: ImageData = { location: 'MineheadLives', width: 20, height: 26 };

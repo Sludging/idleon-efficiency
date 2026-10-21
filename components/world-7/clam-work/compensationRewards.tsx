@@ -1,6 +1,8 @@
 'use client';
 
 import { Text } from 'grommet';
+import type { ThemeType } from 'grommet';
+import { normalizeColor } from 'grommet/utils';
 import styled from 'styled-components';
 import { Clamworks } from '../../../data/domain/world-7/clamworks';
 
@@ -12,15 +14,15 @@ const RewardGrid = styled.div`
 
 const RewardCard = styled.div<{ $earned: boolean; $pending: boolean }>`
     min-width: 0;
-    border: 1px solid ${({ theme, $pending }) => theme.global.colors[$pending ? 'status-warning' : 'grey-1']};
+    border: 1px solid ${({ theme, $pending }: { theme: ThemeType; $pending: boolean }) => normalizeColor($pending ? 'status-warning' : 'grey-1', theme)};
     border-radius: 4px;
-    background: ${({ theme }) => theme.global.colors['background-back']};
+    background: ${({ theme }: { theme: ThemeType }) => normalizeColor('background-back', theme)};
     opacity: ${({ $earned, $pending }) => $earned || $pending ? 1 : 0.5};
 `;
 
 const RewardHeader = styled.div`
     padding: 8px 12px;
-    background: ${({ theme }) => theme.global.colors['grey-1']};
+    background: ${({ theme }: { theme: ThemeType }) => normalizeColor('grey-1', theme)};
 `;
 
 const RewardDetails = styled.div`

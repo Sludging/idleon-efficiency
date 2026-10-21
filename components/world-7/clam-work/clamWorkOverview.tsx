@@ -1,6 +1,8 @@
 'use client';
 
 import { Box, Text } from 'grommet';
+import type { ThemeType } from 'grommet';
+import { normalizeColor } from 'grommet/utils';
 import styled from 'styled-components';
 import IconImage from '../../base/IconImage';
 import { Clamworks } from '../../../data/domain/world-7/clamworks';
@@ -14,7 +16,7 @@ const SummaryGroups = styled.div`
     min-width: 0;
 
     > *:not(:first-child) {
-        border-left: 1px solid ${({ theme }) => theme.global.colors['grey-1']};
+        border-left: 1px solid ${({ theme }: { theme: ThemeType }) => normalizeColor('grey-1', theme)};
         padding-left: 16px;
     }
 
@@ -24,7 +26,7 @@ const SummaryGroups = styled.div`
         > *:not(:first-child) {
             border-left: 0;
             padding-left: 0;
-            border-top: 1px solid ${({ theme }) => theme.global.colors['grey-1']};
+            border-top: 1px solid ${({ theme }: { theme: ThemeType }) => normalizeColor('grey-1', theme)};
             padding-top: 12px;
         }
     }

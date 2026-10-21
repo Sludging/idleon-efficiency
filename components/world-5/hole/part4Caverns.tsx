@@ -264,10 +264,13 @@ function FountainView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () =
             header: "Resource",
             render: (currency: typeof fountain.currencies[number]) => {
                 const desire = fountain.desireCurrencyId === currency.index;
+                const currencyImage = fountainCurrencyImage(hole, currency.index);
                 return <Box direction="row" gap="small" align="center"
                     data-desire={String(desire)}
                     style={desire ? { border: "1px solid #0376E3", padding: "4px" } : { padding: "4px" }}>
-                    <IconImage data={fountainCurrencyImage(hole, currency.index)} scale={0.7} />
+                    {currencyImage
+                        ? <IconImage data={currencyImage} scale={0.7} />
+                        : <Text size="xsmall">Currency unavailable</Text>}
                     <Text size="xsmall" weight={desire ? 700 : undefined}>{currency.data.name.replace(/_/g, " ")}</Text>
                 </Box>;
             }

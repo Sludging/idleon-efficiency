@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import type { ReactNode } from 'react';
 import { Box, Grid, Meter, Text, ThemeContext } from 'grommet';
+import type { ThemeType } from 'grommet';
 import { normalizeColor } from 'grommet/utils';
 import styled from 'styled-components';
 import IconImage from '../../base/IconImage';
@@ -36,8 +37,8 @@ const JournalTable = styled.table<{ $muted: string; $divider: string }>`
     border-collapse: collapse;
     table-layout: fixed;
     font-variant-numeric: tabular-nums;
-    font-size: ${({ theme }) => theme.text.xsmall.size};
-    line-height: ${({ theme }) => theme.text.xsmall.height};
+    font-size: ${({ theme }: { theme: ThemeType }) => theme.text?.xsmall?.size ?? '12px'};
+    line-height: ${({ theme }: { theme: ThemeType }) => theme.text?.xsmall?.height ?? '18px'};
     th { font-weight: 400; color: ${({ $muted }) => $muted}; text-align: left; }
     th, td { padding: 8px 6px 8px 0; vertical-align: middle; }
     thead th { padding-top: 0; padding-bottom: 8px; white-space: nowrap; }
@@ -71,14 +72,14 @@ function earnedEffect(bonus: ChapterBonus): string {
 const SummaryGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: ${({ theme }) => theme.global.edgeSize.medium};
+    gap: ${({ theme }: { theme: ThemeType }) => theme.global?.edgeSize?.medium};
     min-width: 0;
     > * {
-        padding: ${({ theme }) => `${theme.global.edgeSize.small} 0`};
+        padding: ${({ theme }: { theme: ThemeType }) => `${theme.global?.edgeSize?.small ?? '0px'} 0`};
     }
     > *:not(:first-child) {
-        border-left: 1px solid ${({ theme }) => normalizeColor('grey-1', theme)};
-        padding-left: ${({ theme }) => theme.global.edgeSize.medium};
+        border-left: 1px solid ${({ theme }: { theme: ThemeType }) => normalizeColor('grey-1', theme)};
+        padding-left: ${({ theme }: { theme: ThemeType }) => theme.global?.edgeSize?.medium};
     }
     @media (max-width: 900px) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -103,7 +104,7 @@ const SummaryMetricRow = styled.div`
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
-    gap: ${({ theme }) => theme.global.edgeSize.medium};
+    gap: ${({ theme }: { theme: ThemeType }) => theme.global?.edgeSize?.medium};
 `;
 
 const SummaryMetricColumn = styled.div`
@@ -113,7 +114,7 @@ const SummaryMetricColumn = styled.div`
 `;
 
 const SummaryMetricLabel = styled(Text)`
-    color: ${({ theme }) => normalizeColor('accent-2', theme)};
+    color: ${({ theme }: { theme: ThemeType }) => normalizeColor('accent-2', theme)};
 `;
 
 export function SpelunkingSummary({ spelunking, players, children, manicDetail }: SpelunkingPart2Props & { children?: ReactNode; manicDetail: ReactNode }) {
