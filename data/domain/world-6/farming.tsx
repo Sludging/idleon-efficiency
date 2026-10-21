@@ -1058,7 +1058,7 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
-    const emperorFarmingDiscount = emperor.emperorBonuses[2]?.getBonus() ?? 0;
+    const emperorFarmingDiscount = emperor.getEffectiveBonus(2);
     farming.updateMarketCostDiscount(emperorFarmingDiscount);
 
     // Update Min and Max possible quantity to collect from one fully grown crop 

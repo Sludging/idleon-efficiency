@@ -65,6 +65,7 @@ const navItems: NavItem[] = [
         link: "/world-6", label: "W6", subLinks: [
             { subLink: "/sneaking", label: "Sneaking" },
             { subLink: "/summoning", label: "Summoning" },
+            { subLink: "/emperor", label: "Emperor" },
             { subLink: "/farming", label: "Farming" },
         ]
     },
@@ -75,7 +76,9 @@ const navItems: NavItem[] = [
             { subLink: "/legendTalents", label: "Legend Talents" },
             { subLink: "/coral", label: "Coral Reef" },
             { subLink: "/sushi", label: "Sushi Station" },
+            { subLink: "/minehead", label: "Minehead" },
             { subLink: "/jelly-operator", label: "Jelly Operator" },
+            { subLink: "/clam-work", label: "Clam Work" },
             { subLink: "/advice-fish", label: "Advice Fish" },
             { subLink: "/zenith-market", label: "Zenith Market" },
             { subLink: "/menagerie", label: "Menagerie" },

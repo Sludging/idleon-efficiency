@@ -1012,7 +1012,7 @@ export const updateTesseractEfficiency = (accountData: Map<string, any>) => {
         tesseract.labBonus123 = lab.bonuses.find(b => b.index === 123)?.getBonus() ?? 0;
         
         // Set emperor bonus 6 (Arcane Cultist Extra Tachyons)
-        tesseract.emperorBonus6 = emperor.emperorBonuses.find((b: any) => b.index === 6)?.getBonus() ?? 0;
+  tesseract.emperorBonus6 = emperor.getEffectiveBonus(6);
 
         tesseract.calculateAllEfficiencies();
     } catch (error) {

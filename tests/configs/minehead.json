@@ -1,5 +1,5 @@
 {
-  "description": "Minehead opponent rewards and persistent upgrade shop; exact game scalars, no mutation or synthetic state. Sources: Minehead.1.21.js and shop caller evidence in correctness-390 research. Research and currency are account-wide; default extraction player 0 supplies the Research level.",
+  "description": "Minehead compares current 1.23 outputs using Minehead.1.23.js and idleon1.23.txt, while retaining historical 1.21 opponent/shop coverage from Minehead.1.21.js and correctness-390 research. Exact game scalars; no mutation or synthetic state. Research and currency are account-wide; player 0 supplies the Research skill level.",
   "target": "Minehead opponent bonuses and upgrades",
   "extractions": [
     {
@@ -216,6 +216,302 @@
       "label": "minehead_sushi_16",
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 16, 0)",
       "description": "Tobiko Cluster Sushi discount on all Minehead upgrade prices before the shop max-combines its two Sushi discounts."
+    },
+    {
+      "label": "daily_tries",
+      "expression": "idleon.callFunction(\"Minehead\", \"DailyTries\", 0, 0)",
+      "description": "Account Minehead daily try allowance."
+    },
+    {
+      "label": "base_damage",
+      "expression": "idleon.callFunction(\"Minehead\", \"BaseDMG\", 0, 0)",
+      "description": "Minehead base damage multiplier."
+    },
+    {
+      "label": "currency_gain",
+      "expression": "idleon.callFunction(\"Minehead\", \"CurrencyGain\", 0, 0)",
+      "description": "Native Mine Currency gain rate per hour."
+    },
+    {
+      "label": "opponent_0_max_hp",
+      "expression": "idleon.callFunction(\"Minehead\", \"MaxHP_Opp\", 0, 0)",
+      "description": "Maximum HP for the first Minehead opponent."
+    },
+    {
+      "label": "opponent_0_depth_charges",
+      "expression": "idleon.callFunction(\"Minehead\", \"Mines_Opp\", 0, 0)",
+      "description": "Depth Charges for the first Minehead opponent."
+    },
+    {
+      "label": "opponent_9_max_hp",
+      "expression": "idleon.callFunction(\"Minehead\", \"MaxHP_Opp\", 9, 0)",
+      "description": "Maximum HP for a later Minehead opponent."
+    },
+    {
+      "label": "opponent_9_depth_charges",
+      "expression": "idleon.callFunction(\"Minehead\", \"Mines_Opp\", 9, 0)",
+      "description": "Depth Charges for a later Minehead opponent."
+    },
+    {
+      "label": "opponent_17_max_hp",
+      "expression": "idleon.callFunction(\"Minehead\", \"MaxHP_Opp\", 17, 0)",
+      "description": "Maximum HP for a deep Minehead opponent."
+    },
+    {
+      "label": "opponent_17_depth_charges",
+      "expression": "idleon.callFunction(\"Minehead\", \"Mines_Opp\", 17, 0)",
+      "description": "Depth Charges for a deep Minehead opponent."
+    },
+
+    {
+      "label": "minehead_upgrade_quantity_4",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 4, 0)",
+      "description": "Minehead upgrade 4 effect used by base damage."
+    },
+    {
+      "label": "minehead_upgrade_quantity_5",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 5, 0)",
+      "description": "Minehead upgrade 5 effect used by Mine Currency gain."
+    },
+    {
+      "label": "minehead_upgrade_quantity_7",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 7, 0)",
+      "description": "Minehead upgrade 7 effect used by base damage."
+    },
+    {
+      "label": "minehead_upgrade_quantity_21",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 21, 0)",
+      "description": "Minehead upgrade 21 effect used by base damage."
+    },
+    {
+      "label": "minehead_upgrade_quantity_22",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 22, 0)",
+      "description": "Minehead upgrade 22 effect used by Mine Currency gain."
+    },
+    {
+      "label": "minehead_upgrade_quantity_25",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 25, 0)",
+      "description": "Minehead upgrade 25 effect used by base damage."
+    },
+    {
+      "label": "minehead_upgrade_quantity_27",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 27, 0)",
+      "description": "Minehead upgrade 27 effect used by base damage."
+    },
+    {
+      "label": "minehead_upgrade_quantity_28",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 28, 0)",
+      "description": "Minehead upgrade 28 effect used by Mine Currency gain."
+    },
+    {
+      "label": "minehead_description_max_tile_number",
+      "expression": "Math.round(1 + (idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 1, 0) + 1 + Math.min(1, Math.floor((idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 1, 0) + 1) / 9))))",
+      "description": "Native upgrade 1 maximum Tile Number shown in its source description."
+    },
+    {
+      "label": "minehead_description_bluecrown_multiplier",
+      "expression": "idleon.callFunction(\"Minehead\", \"BluecrownMulti\", 0, 0)",
+      "description": "Native Blue Crown multiplier shown in upgrade 14's source description."
+    },
+    {
+      "label": "minehead_description_jackpot_tiles",
+      "expression": "idleon.callFunction(\"Minehead\", \"JackpotTiles\", 0, 0)",
+      "description": "Native Jackpot Tiles count shown in upgrade 24's source description."
+    },
+    {
+      "label": "minehead_description_cost_reduction_percent",
+      "expression": "Math.round(10000 * (1 - 1 / (1 + idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 26, 0) / 100))) / 100",
+      "description": "Native upgrade 26 cost reduction percent shown in its source description."
+    },
+    {
+      "label": "minehead_description_currency_log_bonus",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 28, 0) * Math.log(Math.max(idleon.getAttr(\"Research\")[7][6], 1)) / 2.30259",
+      "description": "Native upgrade 28 current Mine Currency bonus from the Research[7][6] getLOG factor."
+    },
+    {
+      "label": "minehead_bonus_6",
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 6, 0)",
+      "description": "Earned Minehead reward multiplier used by Mine Currency gain."
+    },
+    {
+      "label": "minehead_research_167",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 167, 0)",
+      "description": "Research Grid 167 percent bonus used by base damage."
+    },
+    {
+      "label": "minehead_research_129",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 129, 0)",
+      "description": "Research Grid 129 base rate used by Mine Currency gain."
+    },
+    {
+      "label": "minehead_research_147",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 147, 0)",
+      "description": "Research Grid 147 mode-0 percent bonus used by Mine Currency gain."
+    },
+    {
+      "label": "minehead_research_147_mode_1",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 147, 1)",
+      "description": "Research Grid 147 mode-1 saved grid level used by the Minehead daily-tries allowance."
+    },
+    {
+      "label": "minehead_currency_log_scaling",
+      "expression": "idleon.getAttr(\"Research\")[7][6]",
+      "description": "Saved Research[7][6] input to the Minehead upgrade-28 currency log factor."
+    },
+    {
+      "label": "minehead_currency_log_factor",
+      "expression": "Math.log(Math.max(idleon.getAttr(\"Research\")[7][6], 1)) / 2.30259",
+      "description": "Current 1.23 native getLOG operation for the Research[7][6] input used by Minehead upgrade 28."
+    },
+    {
+      "label": "minehead_research_148",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 148, 0)",
+      "description": "Research Grid 148 percent bonus used by Mine Currency gain."
+    },
+    {
+      "label": "minehead_research_166",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 166, 0)",
+      "description": "Research Grid 166 percent bonus used by Mine Currency gain."
+    },
+    {
+      "label": "minehead_dancing_coral_5",
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 5, 0)",
+      "description": "Dancing Coral 5 bonus used by base damage and Mine Currency gain."
+    },
+    {
+      "label": "minehead_legend_talent_40",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 40, 0)",
+      "description": "Legend Talent 40 percent bonus used by base damage and Mine Currency gain."
+    },
+    {
+      "label": "minehead_jelly_obstruction_9",
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 9, 0)",
+      "description": "Jelly obstruction 9 percent bonus used by base damage."
+    },
+    {
+      "label": "minehead_jelly_obstruction_8",
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 8, 0)",
+      "description": "Jelly obstruction 8 percent bonus used by Mine Currency gain."
+    },
+    {
+      "label": "minehead_equinox_challenge_41",
+      "expression": "idleon.callFunction(\"Dreamstuff\", \"CloudBonus\", 41)",
+      "description": "Equinox challenge 41 bonus reducing Minehead Depth Charges."
+    },
+    {
+      "label": "minehead_sushi_12",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 12, 0)",
+      "description": "Sushi 12 percent bonus used by Mine Currency gain."
+    },
+    {
+      "label": "minehead_armory_outpost_multiplier",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostROGbon\", 3, 0)",
+      "description": "Royal G Outpost 3 multiplier used by Mine Currency gain."
+    },
+    {
+      "label": "minehead_button_1",
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 1, 0)",
+      "description": "The Button 1 percent bonus used by Mine Currency gain."
+    },
+    {
+      "label": "minehead_arcade_62",
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 62)",
+      "description": "Arcade bonus 62 percent bonus used by Mine Currency gain."
+    },
+    {
+      "label": "minehead_collider_atom_13",
+      "expression": "idleon.callFunction(\"AtomCollider\", \"AtomBonuses\", 13, 0)",
+      "description": "Atom Collider atom 13 percent bonus used by Mine Currency gain."
+    },
+    {
+      "label": "minehead_cooking_mine_currency",
+      "expression": "idleon.getAttr(\"DNSM\").h.MealBonusesS.h.MineCurr",
+      "description": "Saved Cooking Mine Currency meal bonus used by Mine Currency gain."
+    },
+    {
+      "label": "minehead_companion_143_active_bonus",
+      "expression": "idleon.callFunction(\"Companions\", 143)",
+      "description": "Active Companion 143 bonus used by Mine Currency gain."
+    },
+    {
+      "label": "minehead_companion_143_level_two",
+      "expression": "idleon.callFunction(\"CompLV2\", 143)",
+      "description": "Companion 143 level-two effect used by Mine Currency gain."
+    },
+    {
+      "label": "mine_currency",
+      "expression": "idleon.getAttr(\"Research\")[7][5]",
+      "description": "Current runtime Mine Currency counter; accrual can differ from the original saved fixture and this value is not its core-test expectation."
+    },
+    {
+      "label": "max_lives",
+      "expression": "idleon.callFunction(\"Minehead\", \"MaxHP_You\", 0, 0)",
+      "description": "Maximum Minehead lives from the current game state."
+    },
+    {
+      "label": "opponents_beaten",
+      "expression": "idleon.getAttr(\"Research\")[7][4]",
+      "description": "Saved account-wide Minehead opponents defeated count."
+    },
+    {
+      "label": "minehead_upgrade_quantity_6",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 6, 0)",
+      "description": "Extra Lives Minehead upgrade effect used by maximum lives."
+    },
+    {
+      "label": "minehead_sailing_damage_level",
+      "expression": "idleon.getAttr(\"Sailing\")[3][38]",
+      "description": "Saved Sailing damage input used by Minehead base damage."
+    },
+    {
+      "label": "minehead_gaming_superbit_66",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 66, 0)",
+      "description": "Gaming Superbit 66 ownership input used by Minehead Depth Charges."
+    },
+    {
+      "label": "minehead_sneaking_jade_45",
+      "expression": "idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 45, 0)",
+      "description": "Sneaking jade upgrade 45 input used by Minehead Depth Charges."
+    },
+    {
+      "label": "minehead_spelunking_depth_charge_cell",
+      "expression": "idleon.getAttr(\"Spelunk\")[18][40]",
+      "description": "Spelunking depth-charge cell input used by Minehead Depth Charges."
+    },
+    {
+      "label": "minehead_event_shop_44",
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 44, 0)",
+      "description": "Event Shop bonus 44 ownership input used by Mine Currency gain."
+    },
+    {
+      "label": "minehead_task_board_merit_52",
+      "expression": "idleon.getAttr(\"Tasks\")[2][6][4]",
+      "description": "Task Board merit 52 level input used by Mine Currency gain."
+    },
+    {
+      "label": "remaining_daily_attempts",
+      "expression": "idleon.getAttr(\"Research\")[7][8]",
+      "description": "Saved account Minehead attempts remaining; preserve the exact stored count."
+    },
+    {
+      "label": "minehead_upgrade_quantity_12",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 12, 0)",
+      "description": "Saved Multiplier Madness quantity used to select its native description value."
+    },
+    {
+      "label": "minehead_upgrade_cost_to_max_1",
+      "expression": "Array.from({length: Math.max(0, Math.min(idleon.getAttr(\"CustomLists\").h.MineheadUPG[1][1], idleon.getAttr(\"Research\")[8][1] + 10) - idleon.getAttr(\"Research\")[8][1])}, (_, offset) => 6 * (1 / (1 + idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 26, 0) / 100)) * Math.max(.1, 1 - Math.max(idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 1, 0), idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 16, 0)) / 100) * Math.pow(idleon.getAttr(\"CustomLists\").h.MineheadUPG[1][2], idleon.getAttr(\"Research\")[8][1] + offset)).reduce((sum, cost) => sum + cost, 0)",
+      "description": "Native-source sum for the genuine saved Numbahs progression to its next ten levels or listed cap, whichever comes first; source formula at idleon1.23.txt:244124-132."
+    },
+    {
+      "label": "minehead_upgrade_next10_cost_0",
+      "expression": "Array.from({length: 10}, (_, offset) => 5 * (1 / (1 + idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 26, 0) / 100)) * Math.max(.1, 1 - Math.max(idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 1, 0), idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 16, 0)) / 100) * Math.pow(idleon.getAttr(\"CustomLists\").h.MineheadUPG[0][2], idleon.getAttr(\"Research\")[8][0] + offset)).reduce((sum, cost) => sum + cost, 0)",
+      "description": "Native-source sum for Base Damage I's next ten levels from the genuine saved level; source formula at idleon1.23.txt:244124-132."
+    },
+    {
+      "label": "minehead_description_multiplier_tile",
+      "expression": "Number([\"1.0\", \"1.2\", \"1.4\", \"1.6\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"8\", \"8\", \"8\"][idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 12, 0)])",
+      "description": "Native multiplier-tile damage value for the genuine saved quantity; source schedule at idleon1.23.txt:287956-958."
     }
   ]
 }

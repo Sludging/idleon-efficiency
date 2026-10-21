@@ -60,7 +60,7 @@ import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, u
 import { SushiStation, updateSushiStation } from './world-7/sushi';
 import { Spelunking, updateSpelunkingChapterBonuses, updateSpelunkingPresentation } from './world-7/spelunking';
 import { ResearchGrid, updateResearchGrid, updateResearchDisplay } from './world-7/research';
-import { Minehead, updateMinehead, updateMineheadDropRate } from './world-7/minehead';
+import { Minehead, updateMinehead, updateMineheadDropRate, updateMineheadDailyTries, updateMineheadBaseDamage, updateMineheadDepthCharges, updateMineheadCurrencyGain } from './world-7/minehead';
 import { Glimbo } from './world-7/glimbo';
 import { JellyOperator, updateJellyOperator, updateJellyOperatorPresentation } from './world-7/jellyOperator';
 import { Button, updateButton } from './world-7/button';
@@ -79,7 +79,7 @@ import { RoyalArmory, updateRoyalArmory, updateRoyalArmoryLateInputs } from './w
 import { EquipmentSets } from './misc/equipmentSets';
 import { EventShop } from './eventShop';
 import { Friends, updateFriends } from './friends';
-import { Clamworks } from './world-7/clamworks';
+import { Clamworks, updateClamWorkOutputs } from './world-7/clamworks';
 import { Meritocraty, updateMeritocratyBonus, updateMeritocratyLate } from './world-7/meritocraty';
 import { LegendTalents, updateLegendTalents } from './world-7/legendTalents';
 import { MasterClasses, updateMasterClasses } from './masterClasses';
@@ -282,6 +282,8 @@ const postProcessingMap: Record<string, Function> = {
     "holeUpgradeEffects": (_doc: Cloudsave, accountData: Map<string, any>) => updateHoleUpgradeEffects(accountData),
     // Parse-owned Menagerie effects must be ready before the earliest recipient calculation.
     "menageriePrepared": (_doc: Cloudsave, accountData: Map<string, any>) => prepareMenagerie(accountData),
+    // Clam Work uses parsed Menagerie state and must settle before post-post-processing consumers.
+    "clamWorkOutputs": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateClamWorkOutputs(accountData),
     // Minehead rewards are account-wide inputs to downstream bonus consumers.
     "minehead": (doc: Cloudsave, accountData: Map<string, any>) => updateMinehead(accountData),
     "jellyOperator": (doc: Cloudsave, accountData: Map<string, any>) => updateJellyOperator(accountData),
@@ -293,6 +295,7 @@ const postProcessingMap: Record<string, Function> = {
     "gamingSuperbitImpacts": (doc: Cloudsave, accountData: Map<string, any>) => updateSuperbitImpacts(accountData),
     // Research consumes parsed companion, Equinox, and Sushi state before downstream consumers calculate.
     "researchGrid": (doc: Cloudsave, accountData: Map<string, any>) => updateResearchGrid(accountData),
+    "mineheadDailyTries": (_doc: Cloudsave, accountData: Map<string, any>) => updateMineheadDailyTries(accountData),
     // Minehead's trade multiplier consumes prepared Research without delaying early opponent rewards.
     "mineheadDropRate": (_doc: Cloudsave, accountData: Map<string, any>) => updateMineheadDropRate(accountData),
     // Stickers need calculated Research; Event Shop, Superbit ownership and sticker counts are parsed inputs.
@@ -304,8 +307,10 @@ const postProcessingMap: Record<string, Function> = {
     "updateBigFish": (doc: Cloudsave, accountData: Map<string, any>) => updateBigFishUnlocked(accountData),
     "updateMeritocraty": (doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyBonus(accountData),
     "updateLegendTalents": (doc: Cloudsave, accountData: Map<string, string>) => updateLegendTalents(accountData),
+    "mineheadBaseDamage": (_doc: Cloudsave, accountData: Map<string, any>) => updateMineheadBaseDamage(accountData),
     // Earned Palette bonuses consume Legend Talents, not the later equipped-color Luck calculation.
     "gaming": (doc: Cloudsave, accountData: Map<string, any>) => updateGaming(accountData),
+    "mineheadDepthCharges": (_doc: Cloudsave, accountData: Map<string, any>) => updateMineheadDepthCharges(accountData),
     // Daily Shopping Spree and early Royal Armory Bargain inputs are ready before shared upgrade costs.
     // Parsed Research accumulation and Outpost selection combine with Compounding Outposting bonus before first-three costs.
     "updateMasterClasses": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateMasterClasses(accountData),
@@ -370,6 +375,7 @@ const postProcessingMap: Record<string, Function> = {
     "hatRack": (doc: Cloudsave, accountData: Map<string, any>) => updateHatRack(accountData),
     // Sushi consumes settled Arcade, Gaming, Collider, Sailing, Research, Button, Jelly and Minehead state.
     "sushiStation": (doc: Cloudsave, accountData: Map<string, any>) => updateSushiStation(accountData),
+    "mineheadCurrencyGain": (_doc: Cloudsave, accountData: Map<string, any>) => updateMineheadCurrencyGain(accountData),
     "players": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayers(accountData),
     "capacity": (doc: Cloudsave, accountData: Map<string, any>) => updateCapacity(accountData),
     "votes": (doc: Cloudsave, accountData: Map<string, any>) => updateVotesBonus(accountData),

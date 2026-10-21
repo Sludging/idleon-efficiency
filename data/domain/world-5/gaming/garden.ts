@@ -319,7 +319,7 @@ export class Garden {
                 + Number(achievements.find(achievement => achievement.index === 307)!.completed)) / 20)
             * (1 + summoning.getSummoningWinnerBonusFromIndex(16) / 100)
             * (1 + hole.lamp.getBonus(false, 1, 1) / 100)
-            * (1 + emperor.emperorBonuses[7].getBonus() / 100)
+            * (1 + emperor.getEffectiveBonus(7) / 100)
             * (1 + gaming.getPaletteBonus(7) / 100)
             * (1 + gaming.getPaletteBonus(18) / 100)
             * (1 + meritocraty.getCurrentBonus(1) / 100)

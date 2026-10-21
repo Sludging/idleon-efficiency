@@ -5,20 +5,52 @@ import { EmperorBonusModel } from "../model/emperorBonusModel";
 import { Sneaking } from "./sneaking";
 import { Tesseract } from "../tesseract";
 import { Arcade } from "../world-2/arcade";
+import { JellyOperator } from "../world-7/jellyOperator";
+import { commaNotation } from "../../utility";
 
 export class EmperorBonus {
-    // Level in this case means number of times we got this bonus from killing the emperor.
     level: number = 0;
-    arcaneBonus48: number = 0;
-    arcadeBonus51: number = 0;
 
     constructor(public index: number, public data: EmperorBonusModel) { }
 
-    getBonus(): number {
+    getBonus(totalBonusPercent: number): number {
         const baseBonus = this.data.bonusValue * this.level;
-        // Apply arcane and arcade bonuses as multipliers (like in game code)
-        return Math.floor(baseBonus * (1 + (this.arcaneBonus48 + this.arcadeBonus51) / 100));
+        return Math.floor(baseBonus * (1 + totalBonusPercent / 100));
     }
+
+    getNextAwardValue(totalBonusPercent: number): number {
+        return Math.floor(this.data.bonusValue * (1 + totalBonusPercent / 100));
+    }
+
+    getDisplayName(): string {
+        return this.data.bonusName.replace(/^(?:\}x|\$%|\+\{%|\+\{)\s*/, '');
+    }
+
+    getFormattedValue(effectiveAmount: number): string {
+        const bonusName = this.data.bonusName;
+        const formattedAmount = commaNotation(effectiveAmount);
+        const percentReduction = Math.floor(100 * effectiveAmount / (100 + effectiveAmount));
+
+        if (bonusName.startsWith('}x')) {
+            return `${(1 + effectiveAmount / 100).toFixed(2)}x`;
+        }
+        if (bonusName.startsWith('$%')) {
+            return `${percentReduction}%`;
+        }
+        if (bonusName.startsWith('+{%')) {
+            return `+${formattedAmount}%`;
+        }
+        if (bonusName.startsWith('+{')) {
+            return `+${formattedAmount}`;
+        }
+
+        return formattedAmount;
+    }
+
+    getDescription(effectiveBonus: number): string {
+        return `${this.getFormattedValue(effectiveBonus)} ${this.getDisplayName()}`;
+    }
+
 
     static fromBase(data: EmperorBonusBase[]): EmperorBonus[] {
         return data.map((base, index) => new EmperorBonus(index, base.data));
@@ -27,9 +59,14 @@ export class EmperorBonus {
 
 export class Emperor extends Domain {
     public emperorKills: number = 0;
+    public attemptsOffset: number = 0;
+    public attemptsContribution: number = 0;
     public maxEmperorAttempts: number = 0;
     public dailyEmperorTries: number = 0;
     public bossHP: number = 0;
+    public arcaneBonus48: number = 0;
+    public arcadeBonus51: number = 0;
+    public jellyBonus28: number = 0;
     public emperorBonuses: EmperorBonus[] = [];
 
     constructor(name: string) {
@@ -48,62 +85,97 @@ export class Emperor extends Domain {
     parse(data: Map<string, any>): void {
         const optionList = (data.get("OptLacc") as number[] | undefined) ?? [];
         const emperor = data.get("emperor") as Emperor;
-        // Parse emperor kills from OptionsListAccount[369]
 
         emperor.emperorKills = optionList[369] ?? 0;
-
-        // Parse max attempts from OptionsListAccount[382]
-        emperor.maxEmperorAttempts = optionList[382] ?? 0;
-
-        // Calculate derived values
+        emperor.attemptsOffset = optionList[370] ?? 0;
+        emperor.attemptsContribution = optionList[382] ?? 0;
+        emperor.maxEmperorAttempts = emperor.attemptsContribution;
         emperor.bossHP = emperor.calculateBossHP();
         emperor.dailyEmperorTries = emperor.calculateDailyTries();
-
-        // Calculate emperor bonuses
         emperor.calculateEmperorBonuses();
     }
 
+    getCurrentShowdown(): number {
+        return this.emperorKills + 1;
+    }
+
+    getAttemptsLeft(): number {
+        return Math.round(1 - this.attemptsOffset);
+    }
+
+    getDisplayedMaxAttempts(): number {
+        return this.maxEmperorAttempts + 1;
+    }
+
+    getScheduledAward(showdown: number): EmperorBonus {
+        const scheduleIndex = showdown % 48;
+        return this.emperorBonuses.find(bonus => bonus.data.levelMappings.includes(scheduleIndex)) as EmperorBonus;
+    }
+
+    getCombinedBonusPercent(): number {
+        return this.arcaneBonus48 + this.arcadeBonus51 + this.jellyBonus28;
+    }
+
+    getEffectiveBonus(index: number): number {
+        return this.emperorBonuses[index].getBonus(this.getCombinedBonusPercent());
+    }
+    getNextAwardShowdown(index: number): number {
+        const bonus = this.emperorBonuses[index];
+        for (let offset = 0; offset < 48; offset++) {
+            const showdown = this.emperorKills + offset;
+            if (bonus.data.levelMappings.includes(showdown % 48)) {
+                return showdown + 1;
+            }
+        }
+
+        throw new Error(`Emperor bonus ${index} has no scheduled award in the 48-showdown cycle.`);
+    }
+
+    getNextEffectiveBonus(index: number): number {
+        const bonus = this.emperorBonuses[index];
+        const cumulativeBase = bonus.data.bonusValue * (bonus.level + 1);
+        return Math.floor(cumulativeBase * this.getCombinedBonusMultiplier());
+    }
+
+
+    getCombinedBonusMultiplier(): number {
+        return 1 + this.getCombinedBonusPercent() / 100;
+    }
+
+    getNextAwardBonus(): EmperorBonus {
+        return this.getScheduledAward(this.emperorKills);
+    }
+
     /**
-     * Calculate boss HP based on emperor kills
+     * Calculate boss HP using the account's Emperor progress.
      */
     public calculateBossHP(): number {
-        return 135e13 * Math.pow(1.7, this.emperorKills);
+        return 135e12 * Math.pow(1.52, this.emperorKills);
     }
 
     /**
-     * Calculate daily emperor tries
+     * Calculate daily Emperor attempts from the saved contribution.
      */
     public calculateDailyTries(): number {
-        return Math.round(1 + this.maxEmperorAttempts);
+        return Math.round(1 + this.attemptsContribution);
     }
 
     /**
-     * Update max emperor attempts with cross-system bonuses
+     * Update the stored attempt stack from Ninja Emporium and the saved contribution.
      */
-    public updateMaxAttempts(ninjaBonus: number): void {
-        // Based on game code: 5 * ninjaBonus + 6 * emperorKills + 5
-        this.maxEmperorAttempts = Math.round(5 * ninjaBonus + 6 * this.emperorKills + 5);
+    public updateMaxAttempts(ninjaBonus: number, savedContribution: number): void {
+        this.maxEmperorAttempts = Math.round(5 * ninjaBonus + 6 * savedContribution + 5);
     }
 
-    /**
-     * Calculate emperor bonuses based on kills
-     */
     public calculateEmperorBonuses(): void {
         const emperorBonusRepo = initEmperorBonusRepo();
+        this.emperorBonuses = EmperorBonus.fromBase(emperorBonusRepo);
 
-        // Reset bonuses
-        this.emperorBonuses = EmperorBonus.fromBase(initEmperorBonusRepo());
-
-        // Calculate bonuses based on emperor kills
-        // Game code loops from 0 to emperorKills-1 (exclusive)
-        for (let kill = 0; kill < this.emperorKills; kill++) {
-            const stuff6q = kill - 48 * Math.floor(kill / 48);
-
-            // Find which bonus this kill unlocks
-            for (const bonus of emperorBonusRepo) {
-                if (bonus.data.levelMappings.includes(stuff6q)) {
-                    // Add bonus value to the appropriate slot
-                    this.emperorBonuses[bonus.index].level += 1;
+        for (let showdown = 0; showdown < this.emperorKills; showdown++) {
+            const scheduleIndex = showdown % 48;
+            for (const bonus of this.emperorBonuses) {
+                if (bonus.data.levelMappings.includes(scheduleIndex)) {
+                    bonus.level += 1;
                     break;
                 }
             }
@@ -112,48 +184,28 @@ export class Emperor extends Domain {
 }
 
 /**
- * Update emperor max attempts with cross-system bonuses
+ * Update Emperor max attempts with the Ninja Emporium bonus.
  */
 export const updateEmperorMaxAttempts = (accountData: Map<string, any>) => {
     const emperor = accountData.get("emperor") as Emperor;
     const sneaking = accountData.get("sneaking") as Sneaking;
+    const ninjaBonus = Number(sneaking.jadeUpgrades.some(upgrade => upgrade.index === 39 && upgrade.purchased));
 
-    if (emperor && sneaking) {
-        try {
-            // Get ninja bonus from sneaking domain (EmporiumBonus, 39)
-            // Jade upgrade 39 is "Emperor Season Pass" which gives +2 visits and increases max from 6 to 11
-            const emperorSeasonPass = sneaking.jadeUpgrades.find(upgrade => upgrade.index === 39);
-            const ninjaBonus = emperorSeasonPass?.purchased ? 1 : 0;
-
-            // Update max attempts with cross-system bonuses
-            emperor.updateMaxAttempts(ninjaBonus);
-        } catch (error) {
-            console.error("Failed to update emperor max attempts:", error);
-        }
-    }
+    emperor.updateMaxAttempts(ninjaBonus, emperor.attemptsContribution);
+    emperor.dailyEmperorTries = emperor.calculateDailyTries();
 };
 
 /**
- * Update emperor bonuses with cross-system bonuses
+ * Update Emperor bonuses with Arcane, Arcade, and Jelly multipliers.
  */
 export const updateEmperorBonuses = (accountData: Map<string, any>) => {
     const emperor = accountData.get("emperor") as Emperor;
     const tesseract = accountData.get("tesseract") as Tesseract;
     const arcade = accountData.get("arcade") as Arcade;
+    const jellyOperator = accountData.get("jellyOperator") as JellyOperator;
 
-    if (emperor && tesseract && arcade) {
-        try {
-            // Get arcane bonus 48 from tesseract domain and arcade bonus 51
-            const arcaneBonus48 = tesseract.upgrades[48] ? tesseract.upgrades[48].getBonus(tesseract.upgrades) : 0;
-            const arcadeBonus51 = arcade.bonuses[51] ? arcade.bonuses[51].getBonus() : 0;
 
-            // Update all emperor bonuses with cross-system bonuses
-            emperor.emperorBonuses.forEach(bonus => {
-                bonus.arcaneBonus48 = arcaneBonus48;
-                bonus.arcadeBonus51 = arcadeBonus51;
-            });
-        } catch (error) {
-            console.error("Failed to update emperor bonuses:", error);
-        }
-    }
+    emperor.arcaneBonus48 = tesseract.upgrades[48].getBonus(tesseract.upgrades);
+    emperor.arcadeBonus51 = arcade.bonuses[51].getBonus();
+    emperor.jellyBonus28 = jellyOperator.getObstructionBonus(28);
 };

@@ -23,6 +23,7 @@ export interface UpgradeTableProps<T> {
     minWidth?: string;
     variant?: "default" | "panel";
     showLockedAndMaxedFilters?: boolean;
+    showSearch?: boolean;
 }
 
 export function UpgradeTable<T>({
@@ -38,7 +39,8 @@ export function UpgradeTable<T>({
     emptyMessage = "No upgrades match these filters. Try changing the filters or search.",
     minWidth = "1100px",
     variant = "default",
-    showLockedAndMaxedFilters = true
+    showLockedAndMaxedFilters = true,
+    showSearch = true
 }: UpgradeTableProps<T>) {
     const filterControls = (
         <UpgradeTableFilters
@@ -48,6 +50,7 @@ export function UpgradeTable<T>({
             searchPlaceholder={searchPlaceholder}
             additionalFilters={additionalFilters}
             showLockedAndMaxedFilters={showLockedAndMaxedFilters}
+            showSearch={showSearch}
             layout={variant === "panel" ? "toolbar" : "default"}
         />
     );

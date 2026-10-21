@@ -391,7 +391,7 @@ export function updateEquinoxBar(data: Map<string, any>) {
   const eventShop3Bonus = eventShop.isBonusOwned(3) ? 1 : 0;
   const option320Bonus = Number(optionList[320] ?? 0);
   const arcade41Bonus = arcade.bonuses.find((bonus) => bonus.index == 41)?.getBonus() ?? 0;
-  const emperor5Bonus = emperor.emperorBonuses.find((bonus) => bonus.index == 5)?.getBonus() ?? 0;
+  const emperor5Bonus = emperor.getEffectiveBonus(5);
   const tesseract37Bonus = tesseract.getUpgradeBonus(37) ?? 0;
   const researchGrid86Bonus = researchGrid.getBonusForId(86);
   const royalArmory76Bonus = royalArmory.getUpgradeBonus(76);

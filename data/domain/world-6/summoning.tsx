@@ -675,7 +675,7 @@ export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
     const achiev379 = achievements[379].completed ? 1 : 0; // x1.01
     const achiev373 = achievements[373].completed ? 1 : 0; // x1.01
     const taskBonus = taskboard.merits[44].getBonus();
-    const emperorBonus = emperor.emperorBonuses[8].getBonus();
+    const emperorBonus = emperor.getEffectiveBonus(8);
     const godshardSetBonus = equipmentSets.getSetBonus("GODSHARD_SET", true);
     const gemItemPurchased = gemStore.purchases.find(purchase => purchase.no == 11)?.pucrhased || 0;
     

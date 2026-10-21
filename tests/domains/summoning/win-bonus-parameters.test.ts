@@ -88,7 +88,7 @@ const parameterSpecs = {
   extractionKey: 'emperor_bonus_8',
   domainExtractor: (gameData: Map<string, any>) => {
    const emperor = gameData.get("emperor") as Emperor;
-   return emperor.emperorBonuses[8]?.getBonus() ?? 0;
+   return emperor.getEffectiveBonus(8);
   }
  }
 };

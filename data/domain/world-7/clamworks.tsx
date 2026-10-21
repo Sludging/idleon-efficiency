@@ -1,19 +1,11 @@
 import { Domain, RawData } from "../base/domain"
 import { ClamworksBonusBase, initClamworksBonusRepo } from "../data/ClamworksBonusRepo";
+import { ClamworksRewardBase, initClamworksRewardRepo } from "../data/ClamworksRewardRepo";
 import { Item } from "../items";
 import { ClamworksBonusModel } from "../model/clamworksBonusModel";
+import { Menagerie } from "../menagerie";
+import { ClamworksRewardModel } from "../model/clamworksRewardModel";
 
-export const promoBonuses = [
-    "+1 Grade for 2 Gallery Slots",
-    "+1 Legend Talent PTS",
-    "+10 LV/day for Kattlekruk bubbles",
-    "+5% Meritocracy Multi bonus",
-    "+1 Legend Talent PTS",
-    "+20% extra Daily Coral",
-    "+15 LV/day from Brain Coral",
-    "+3% Gallery Bonus Multi",
-    "}x Class EXP multi"
-]
 
 export class ClamworksBonus {
     level: number = 0;
@@ -38,29 +30,36 @@ export class ClamworksBonus {
         return this.data.description;
     }
 }
+export class ClamworksReward {
+    earned: boolean = false;
 
-export class ClamPromoBonus {
-    active: boolean = false;
+    constructor(public index: number, public data: ClamworksRewardModel) {}
 
-    constructor(public index: number, public bonus: string) {}
-
-    static fromBase() {
-        return promoBonuses.map((bonus, index) => new ClamPromoBonus(index, bonus));
+    static fromBase(data: ClamworksRewardBase[]): ClamworksReward[] {
+        return data.map(reward => new ClamworksReward(reward.index, reward.data));
     }
 }
+
 
 export class Clamworks extends Domain {
     promoLevel: number = 0;
     pearlsOwned: number = 0;
     workBonuses: ClamworksBonus[] = [];
-    promoBonuses: ClamPromoBonus[] = [];
+    compensationRewards: ClamworksReward[] = [];
+    basePearlValue: number = 0;
+    blackPearlValue: number = 0;
+    clamCount: number = 0;
+    clamHP: number = 0;
+    clamRespawnSeconds: number = 0;
+    scurgePointsRemaining: number = 0;
+    scurgeExpPerKill: number = 0;
 
     getRawKeys(): RawData[] {
         return [];
     }
 
     init(_allItems: Item[], _charCount: number) {
-        this.promoBonuses = ClamPromoBonus.fromBase();
+        this.compensationRewards = ClamworksReward.fromBase(initClamworksRewardRepo());
         this.workBonuses = ClamworksBonus.fromBase(initClamworksBonusRepo());
         return this;
     }
@@ -70,16 +69,47 @@ export class Clamworks extends Domain {
         const optionList = data.get("OptLacc") as number[];
 
         clamWork.promoLevel = optionList[464] || 0;
-
         clamWork.pearlsOwned = optionList[454] || 0;
 
         clamWork.workBonuses.forEach(bonus => {
             bonus.level = optionList[455 + bonus.index] || 0;
         });
 
-        clamWork.promoBonuses.forEach(bonus => {
-            bonus.active = bonus.index < clamWork.promoLevel;
+        clamWork.compensationRewards.forEach(reward => {
+            reward.earned = reward.data.requiredWorkerClassLevel <= clamWork.promoLevel;
         });
+    }
+
+    getFirstPendingCompensationReward(): ClamworksReward | undefined {
+        return this.compensationRewards.find(reward => !reward.earned);
+    }
+
+    getScurgeBonus(index: number, spentLevels: number[]): number {
+        const bonus = this.workBonuses.find(workBonus => workBonus.index === index + 9);
+        return bonus ? spentLevels[index] * bonus.data.value : 0;
+    }
+
+    updateClamWorkOutputs(scurgeLevel: number, scurgeSpentLevels: number[], _scurgeUnlocked: boolean): void {
+        const scurgeBonuses = {
+            pearlMultiplier: this.getScurgeBonus(1, scurgeSpentLevels),
+            pearlValueMultiplier: this.getScurgeBonus(8, scurgeSpentLevels),
+            experienceBase: this.getScurgeBonus(0, scurgeSpentLevels),
+            experiencePercent: this.getScurgeBonus(4, scurgeSpentLevels),
+            experienceChance: this.getScurgeBonus(2, scurgeSpentLevels),
+        };
+        this.basePearlValue = (1 + this.getClamBonus(0))
+            * (1 + this.getClamBonus(7) / 100)
+            * (1 + scurgeBonuses.pearlMultiplier / 100)
+            * (1 + scurgeBonuses.pearlValueMultiplier * scurgeLevel / 100);
+        this.blackPearlValue = this.getClamBonus(5);
+        this.clamCount = Math.min(25, 2 + this.getClamBonus(1));
+        this.clamHP = 1e16 * Math.pow(30, this.promoLevel);
+        this.clamRespawnSeconds = 60;
+        // Native Clam_Cost(index, 1) is 1 for all nine Scurge upgrades.
+        this.scurgePointsRemaining = scurgeLevel - scurgeSpentLevels.reduce((total, spent) => total + spent, 0);
+        this.scurgeExpPerKill = (1 + scurgeBonuses.experienceBase)
+            * (1 + scurgeBonuses.experiencePercent / 100)
+            * (1 + scurgeBonuses.experienceChance / 100);
     }
 
     getPromoChance = (): number => {
@@ -132,10 +162,17 @@ export class Clamworks extends Domain {
     }
 
     isBonusUnlocked = (index: number): boolean => {
-        return this.promoBonuses.find(bonus => bonus.index == index)?.active || false;
+        return this.compensationRewards.find(reward => reward.index === index)?.earned || false;
     }
 
     getPromoBonusText = (index: number): string => {
-        return this.promoBonuses.find(bonus => bonus.index == index)?.bonus || "";
+        return this.compensationRewards.find(reward => reward.index === index)?.data.description || "";
     }
 }
+
+export const updateClamWorkOutputs = (accountData: Map<string, unknown>): void => {
+    const clamworks = accountData.get("clamworks") as Clamworks;
+    const menagerie = accountData.get("menagerie") as Pick<Menagerie, 'scurgeLevel' | 'scurgeSpentLevels' | 'scurgeUnlocked'>;
+
+    clamworks.updateClamWorkOutputs(menagerie.scurgeLevel, menagerie.scurgeSpentLevels, menagerie.scurgeUnlocked);
+};

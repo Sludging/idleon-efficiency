@@ -74,7 +74,7 @@ describe('Persistent drop-rate immediate owner results', () => {
     { key: "exotic59", name: "Pommelion Seed exotic drop rate", getValue: () => owner<Farming>('farming').getExoticMarketBonusValue(59) },
     { key: "grimoire44", name: "Grimoire upgrade drop rate", getValue: () => owner<Grimoire>('grimoire').getUpgradeBonus(44) },
     { key: "vault18", name: "Vault upgrade drop rate", getValue: () => owner<UpgradeVault>('upgradeVault').getBonusForId(18) },
-    { key: "emperor11", name: "Emperor drop rate", getValue: () => owner<Emperor>('emperor').emperorBonuses.find(bonus => bonus.index === 11)!.getBonus() },
+    { key: "emperor11", name: "Emperor drop rate", getValue: () => owner<Emperor>('emperor').getEffectiveBonus(11) },
     { key: "efaunt", name: "active Efaunt set raw drop rate", getValue: () => owner<EquipmentSets>('equipmentSets').getSetBonus('EFAUNT_SET', true) },
     { key: "friend3", name: "active Friend drop rate", getValue: () => owner<Friends>('friends').getFriendBonus(3) },
     { key: "legend1", name: "Legend talent drop rate", getValue: () => owner<LegendTalents>('legendTalents').getBonusFromIndex(1) },

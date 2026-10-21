@@ -551,7 +551,7 @@ export class PlayerStats {
         // Preserve these nested progression additions before the ordinary percentage sum.
         const progressionDropPercent = hole.schematics.find(schematic => schematic.index === 82)!.getBonus(20)
             + (wisdomMonumentPercent
-                + (emperor.emperorBonuses.find(bonus => bonus.index === 11)!.getBonus()
+                + (emperor.getEffectiveBonus(11)
                     + (equipmentSets.getSetBonus('EFAUNT_SET', true)
                         + (farming.getExoticMarketBonusValue(59)
                             + (friends.getFriendBonus(3) + (legendTalents.getBonusFromIndex(1)

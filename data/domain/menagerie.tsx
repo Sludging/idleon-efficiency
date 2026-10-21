@@ -205,6 +205,10 @@ export class Menagerie extends Domain {
     yellowJellyfish!: MenagerieYellowJellyfish;
     greenJellyfish!: MenagerieGreenJellyfish;
     lumiBalance = 0;
+    scurgeExp = 0;
+    scurgeLevel = 0;
+    scurgeSpentLevels: number[] = [];
+    scurgeUnlocked = false;
     shellBalance = 0;
     rank = 0;
     lumiPerHour = 0;
@@ -316,6 +320,10 @@ export class Menagerie extends Domain {
         menagerie.savedTomeRank = menagerie.rank;
         const savedUnlocks = savedMenagerie[2] ?? [];
         menagerie.unlocks.forEach(unlock => unlock.parse(Number(savedUnlocks[unlock.index] ?? 0)));
+        menagerie.scurgeExp = Number(savedMenagerie[0]?.[7] ?? 0);
+        menagerie.scurgeLevel = Number(savedMenagerie[0]?.[8] ?? 0);
+        menagerie.scurgeSpentLevels = Array.from({ length: 9 }, (_, index) => Number((savedMenagerie[5] ?? [])[index] ?? 0));
+        menagerie.scurgeUnlocked = menagerie.unlocks.find(unlock => unlock.index === 4)!.owned;
         const savedBonusLevels = savedMenagerie[3] ?? [];
         menagerie.totalMenagerieBonusLevels = savedBonusLevels.reduce<number>((total, level) => total + Number(level), 0);
         menagerie.bonuses.forEach(bonus => bonus.parse(Number(savedBonusLevels[bonus.index] ?? 0)));
@@ -423,6 +431,9 @@ export class Menagerie extends Domain {
         return this.bonuses[index].getPercentageMultiplier();
     }
 
+    getScurgeNextExpRequirement(): number {
+        return (50 + 15 * this.scurgeLevel) * Math.pow(1.08, this.scurgeLevel);
+    }
 
     getProgression(): MenagerieProgression {
         const shellThreshold = Math.round(Math.min(

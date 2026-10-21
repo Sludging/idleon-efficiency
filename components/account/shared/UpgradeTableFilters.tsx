@@ -26,6 +26,7 @@ interface UpgradeTableFiltersProps {
     additionalFilters?: ReactNode;
     layout?: "default" | "toolbar";
     showLockedAndMaxedFilters?: boolean;
+    showSearch?: boolean;
 }
 
 export function UpgradeTableFilters({
@@ -42,7 +43,8 @@ export function UpgradeTableFilters({
     searchPlaceholder = "Search name or bonus...",
     additionalFilters,
     layout = "default",
-    showLockedAndMaxedFilters = true
+    showLockedAndMaxedFilters = true,
+    showSearch = true
 }: UpgradeTableFiltersProps) {
     const updateFilter = <K extends keyof FilterOptions>(key: K, value: FilterOptions[K]) => {
         onFiltersChange({
@@ -131,7 +133,7 @@ export function UpgradeTableFilters({
                     {additionalFilters}
                 </Box>
                 <Box direction="row" gap="medium" wrap align="center">
-                    {searchControl}
+                    {showSearch && searchControl}
                     {sortControl}
                 </Box>
             </Box>
@@ -147,10 +149,12 @@ export function UpgradeTableFilters({
                 {sortControl}
             </Box>
 
-            {/* Search input */}
-            <Box>
-                {searchControl}
-            </Box>
+            {showSearch && (
+                <Box>
+                    {/* Search input */}
+                    {searchControl}
+                </Box>
+            )}
         </>
     );
 }

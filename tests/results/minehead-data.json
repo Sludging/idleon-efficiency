@@ -171,6 +171,242 @@
     "minehead_sushi_16": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 16, 0)",
       "result": 50
+    },
+    "daily_tries": {
+      "expression": "idleon.callFunction(\"Minehead\", \"DailyTries\", 0, 0)",
+      "result": 4
+    },
+    "base_damage": {
+      "expression": "idleon.callFunction(\"Minehead\", \"BaseDMG\", 0, 0)",
+      "result": 9135.123725000001
+    },
+    "currency_gain": {
+      "expression": "idleon.callFunction(\"Minehead\", \"CurrencyGain\", 0, 0)",
+      "result": 7980.438938137625
+    },
+    "opponent_0_max_hp": {
+      "expression": "idleon.callFunction(\"Minehead\", \"MaxHP_Opp\", 0, 0)",
+      "result": 5
+    },
+    "opponent_0_depth_charges": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Mines_Opp\", 0, 0)",
+      "result": 1
+    },
+    "opponent_9_max_hp": {
+      "expression": "idleon.callFunction(\"Minehead\", \"MaxHP_Opp\", 9, 0)",
+      "result": 38164.32746680321
+    },
+    "opponent_9_depth_charges": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Mines_Opp\", 9, 0)",
+      "result": 2
+    },
+    "opponent_17_max_hp": {
+      "expression": "idleon.callFunction(\"Minehead\", \"MaxHP_Opp\", 17, 0)",
+      "result": 363767860.4093668
+    },
+    "opponent_17_depth_charges": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Mines_Opp\", 17, 0)",
+      "result": 8
+    },
+    "minehead_upgrade_quantity_4": {
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 4, 0)",
+      "result": 430
+    },
+    "minehead_upgrade_quantity_5": {
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 5, 0)",
+      "result": 970
+    },
+    "minehead_upgrade_quantity_7": {
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 7, 0)",
+      "result": 207
+    },
+    "minehead_upgrade_quantity_21": {
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 21, 0)",
+      "result": 0
+    },
+    "minehead_upgrade_quantity_22": {
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 22, 0)",
+      "result": 0
+    },
+    "minehead_upgrade_quantity_25": {
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 25, 0)",
+      "result": 0
+    },
+    "minehead_upgrade_quantity_27": {
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 27, 0)",
+      "result": 0
+    },
+    "minehead_upgrade_quantity_28": {
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 28, 0)",
+      "result": 0
+    },
+    "minehead_description_max_tile_number": {
+      "expression": "Math.round(1 + (idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 1, 0) + 1 + Math.min(1, Math.floor((idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 1, 0) + 1) / 9))))",
+      "result": 11
+    },
+    "minehead_description_bluecrown_multiplier": {
+      "expression": "idleon.callFunction(\"Minehead\", \"BluecrownMulti\", 0, 0)",
+      "result": 1.52
+    },
+    "minehead_description_jackpot_tiles": {
+      "expression": "idleon.callFunction(\"Minehead\", \"JackpotTiles\", 0, 0)",
+      "result": 3
+    },
+    "minehead_description_cost_reduction_percent": {
+      "expression": "Math.round(10000 * (1 - 1 / (1 + idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 26, 0) / 100))) / 100",
+      "result": 0
+    },
+    "minehead_description_currency_log_bonus": {
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 28, 0) * Math.log(Math.max(idleon.getAttr(\"Research\")[7][6], 1)) / 2.30259",
+      "result": 0
+    },
+    "minehead_bonus_6": {
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 6, 0)",
+      "result": 50
+    },
+    "minehead_research_167": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 167, 0)",
+      "result": 19.5
+    },
+    "minehead_research_129": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 129, 0)",
+      "result": 15.600000000000001
+    },
+    "minehead_research_147": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 147, 0)",
+      "result": 32.5
+    },
+    "minehead_research_147_mode_1": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 147, 1)",
+      "result": 1
+    },
+    "minehead_currency_log_scaling": {
+      "expression": "idleon.getAttr(\"Research\")[7][6]",
+      "result": 2717163.0508749997
+    },
+    "minehead_currency_log_factor": {
+      "expression": "Math.log(Math.max(idleon.getAttr(\"Research\")[7][6], 1)) / 2.30259",
+      "result": 6.434101988617822
+    },
+    "minehead_research_148": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 148, 0)",
+      "result": 32.5
+    },
+    "minehead_research_166": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 166, 0)",
+      "result": 19.5
+    },
+    "minehead_dancing_coral_5": {
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 5, 0)",
+      "result": 0
+    },
+    "minehead_legend_talent_40": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 40, 0)",
+      "result": 0
+    },
+    "minehead_jelly_obstruction_9": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 9, 0)",
+      "result": 30
+    },
+    "minehead_jelly_obstruction_8": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 8, 0)",
+      "result": 25
+    },
+    "minehead_equinox_challenge_41": {
+      "expression": "idleon.callFunction(\"Dreamstuff\", \"CloudBonus\", 41)",
+      "result": 1
+    },
+    "minehead_sushi_12": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 12, 0)",
+      "result": 50
+    },
+    "minehead_armory_outpost_multiplier": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostROGbon\", 3, 0)",
+      "result": 1
+    },
+    "minehead_button_1": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 1, 0)",
+      "result": 62.7375
+    },
+    "minehead_arcade_62": {
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 62)",
+      "result": 0.9615384615384616
+    },
+    "minehead_collider_atom_13": {
+      "expression": "idleon.callFunction(\"AtomCollider\", \"AtomBonuses\", 13, 0)",
+      "result": 31
+    },
+    "minehead_cooking_mine_currency": {
+      "expression": "idleon.getAttr(\"DNSM\").h.MealBonusesS.h.MineCurr",
+      "result": 46.689008878848
+    },
+    "minehead_companion_143_active_bonus": {
+      "expression": "idleon.callFunction(\"Companions\", 143)",
+      "result": 30
+    },
+    "minehead_companion_143_level_two": {
+      "expression": "idleon.callFunction(\"CompLV2\", 143)",
+      "result": 1
+    },
+    "mine_currency": {
+      "expression": "idleon.getAttr(\"Research\")[7][5]",
+      "result": 3118138.5089678895
+    },
+    "max_lives": {
+      "expression": "idleon.callFunction(\"Minehead\", \"MaxHP_You\", 0, 0)",
+      "result": 5
+    },
+    "opponents_beaten": {
+      "expression": "idleon.getAttr(\"Research\")[7][4]",
+      "result": 13
+    },
+    "minehead_upgrade_quantity_6": {
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 6, 0)",
+      "result": 2
+    },
+    "minehead_sailing_damage_level": {
+      "expression": "idleon.getAttr(\"Sailing\")[3][38]",
+      "result": 5
+    },
+    "minehead_gaming_superbit_66": {
+      "expression": "idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 66, 0)",
+      "result": 1
+    },
+    "minehead_sneaking_jade_45": {
+      "expression": "idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 45, 0)",
+      "result": 1
+    },
+    "minehead_spelunking_depth_charge_cell": {
+      "expression": "idleon.getAttr(\"Spelunk\")[18][40]",
+      "result": 0
+    },
+    "minehead_event_shop_44": {
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 44, 0)",
+      "result": 0
+    },
+    "minehead_task_board_merit_52": {
+      "expression": "idleon.getAttr(\"Tasks\")[2][6][4]",
+      "result": 0
+    },
+    "remaining_daily_attempts": {
+      "expression": "idleon.getAttr(\"Research\")[7][8]",
+      "result": 4
+    },
+    "minehead_upgrade_quantity_12": {
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 12, 0)",
+      "result": 2
+    },
+    "minehead_upgrade_cost_to_max_1": {
+      "expression": "Array.from({length: Math.max(0, Math.min(idleon.getAttr(\"CustomLists\").h.MineheadUPG[1][1], idleon.getAttr(\"Research\")[8][1] + 10) - idleon.getAttr(\"Research\")[8][1])}, (_, offset) => 6 * (1 / (1 + idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 26, 0) / 100)) * Math.max(.1, 1 - Math.max(idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 1, 0), idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 16, 0)) / 100) * Math.pow(idleon.getAttr(\"CustomLists\").h.MineheadUPG[1][2], idleon.getAttr(\"Research\")[8][1] + offset)).reduce((sum, cost) => sum + cost, 0)",
+      "result": 10155994659072
+    },
+    "minehead_upgrade_next10_cost_0": {
+      "expression": "Array.from({length: 10}, (_, offset) => 5 * (1 / (1 + idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 26, 0) / 100)) * Math.max(.1, 1 - Math.max(idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 1, 0), idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 16, 0)) / 100) * Math.pow(idleon.getAttr(\"CustomLists\").h.MineheadUPG[0][2], idleon.getAttr(\"Research\")[8][0] + offset)).reduce((sum, cost) => sum + cost, 0)",
+      "result": 1294675.2151330807
+    },
+    "minehead_description_multiplier_tile": {
+      "expression": "Number([\"1.0\", \"1.2\", \"1.4\", \"1.6\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"8\", \"8\", \"8\"][idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 12, 0)])",
+      "result": 1.4
     }
   },
   "errors": {}

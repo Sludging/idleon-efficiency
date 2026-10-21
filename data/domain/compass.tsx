@@ -1429,7 +1429,7 @@ export const updateCompassDamageEfficiency = (accountData: Map<string, any>) => 
         }
 
         // Set emperor bonus 4 from emperor domain (Windwalker Extra Dust)
-        compass.emperorBonus4 = emperor.emperorBonuses.find(bonus => bonus.index == 4)?.getBonus() ?? 0;
+        compass.emperorBonus4 = emperor.getEffectiveBonus(4);
 
         // Set mainframe bonus 122 from lab domain (Jewel 22)
         compass.mainframeBonus122 = 0;

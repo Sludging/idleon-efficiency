@@ -1,0 +1,41 @@
+{
+  "description": "Compare Clam Work account outputs and solo Scurge inputs against the matching v1.23 save",
+  "target": "Clam Work account outputs",
+  "extractions": [
+    {
+      "label": "account_outputs",
+      "expression": "[(1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 0, 0)) * (1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 7, 0) / 100) * (1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 1, 1) / 100) * (1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 8, 1) * idleon.engine.getGameAttribute(\"Menagerie\")[0][8] / 100), idleon.callFunction(\"Thingies\", \"Clam_BlackPearlValue\", 0, 0), idleon.callFunction(\"Thingies\", \"Clam_Mobs\", 0, 0), idleon.callFunction(\"Thingies\", \"Clamz_HP\", 0, 0), idleon.callFunction(\"Thingies\", \"Clam_Respawn\", 0, 0)]",
+      "description": "Base pearl formula omitting only Multikill, Black Pearl multiplier, and Clam count, HP, and respawn"
+    },
+    {
+      "label": "scurge_state",
+      "expression": "[idleon.engine.getGameAttribute(\"Menagerie\")[0][7], idleon.engine.getGameAttribute(\"Menagerie\")[0][8], idleon.callFunction(\"MenagerieStuff\", \"ScurgeUnlocked\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"ScurgeEXP_Req\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"ScurgePTS_Left\", 0, 0), (1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 0, 1)) * (1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 4, 1) / 100) * (1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 2, 1) / 100), idleon.engine.getGameAttribute(\"Menagerie\")[5]]",
+      "description": "Saved Scurge EXP, level and upgrade levels, native unlock and next requirement, remaining points, and solo/base EXP output without OtherPlayers"
+    },
+    {
+      "label": "scurge_bonus_inputs",
+      "expression": "[idleon.callFunction(\"Thingies\", \"ClamBonuses\", 0, 1), idleon.callFunction(\"Thingies\", \"ClamBonuses\", 4, 1), idleon.callFunction(\"Thingies\", \"ClamBonuses\", 2, 1)]",
+      "description": "Native Scurge bonus inputs directly used by solo/base EXP per Clam kill"
+    },
+    {
+      "label": "clamwork_parameters",
+      "expression": "[idleon.callFunction(\"Thingies\", \"ClamBonuses\", 0, 0), idleon.callFunction(\"Thingies\", \"ClamBonuses\", 7, 0), idleon.callFunction(\"Thingies\", \"ClamPromochance\", 0, 0), idleon.callFunction(\"Thingies\", \"Clam_Cost\", 9, 0), idleon.engine.getGameAttribute(\"OptionsListAccount\")[454], idleon.engine.getGameAttribute(\"OptionsListAccount\")[464]]",
+      "description": "Base pearl direct bonus factors, native promotion chance and cost, and saved Clam Work pearl balance and promotion level"
+    },
+    {
+      "label": "clam_count_bonus_parameter",
+      "expression": "idleon.callFunction(\"Thingies\", \"ClamBonuses\", 1, 0)",
+      "description": "Native Clam bonus directly used by Clam count"
+    },
+    {
+      "label": "scurge_pearl_bonus_inputs",
+      "expression": "[idleon.callFunction(\"Thingies\", \"ClamBonuses\", 1, 1), idleon.callFunction(\"Thingies\", \"ClamBonuses\", 8, 1)]",
+      "description": "Native Scurge bonus inputs for the first and final pearl multipliers"
+    },
+    {
+      "label": "compensation_progression",
+      "expression": "[idleon.getAttr(\"CustomLists\").h.Spelunky[30].map((_, index) => idleon.callFunction(\"Thingies\", \"ClamWorkBonus\", index, 0) === 1), idleon.getAttr(\"CustomLists\").h.Spelunky[30].findIndex((_, index) => idleon.callFunction(\"Thingies\", \"ClamWorkBonus\", index, 0) !== 1), idleon.getAttr(\"CustomLists\").h.Spelunky[30].findIndex((_, index) => idleon.callFunction(\"Thingies\", \"ClamWorkBonus\", index, 0) !== 1) + 1]",
+      "description": "Native earned state for each runtime compensation index, first pending reward index, and its required Worker Class level"
+    }
+  ]
+}

@@ -947,7 +947,7 @@ export const updateGrimoireEfficiency = (accountData: Map<string, any>) => {
         }
 
         // Set emperor bonus 1 from emperor domain (Death Bringer Extra Bones)
-        grimoire.emperorBonus1 = emperor.emperorBonuses.find(bonus => bonus.index == 1)?.getBonus() ?? 0;
+        grimoire.emperorBonus1 = emperor.getEffectiveBonus(1);
 
         // PLACEHOLDER - need to implement later
         grimoire.gambitBonus12 = 0; // From holes system

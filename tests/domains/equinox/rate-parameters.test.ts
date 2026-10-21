@@ -78,7 +78,7 @@ const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     extractionKey: 'emperor_bonus_5',
     domainExtractor: (gameData) => {
       const emperor = gameData.get("emperor") as Emperor;
-      return emperor.emperorBonuses.find(bonus => bonus.index == 5)?.getBonus() ?? 0;
+      return emperor.getEffectiveBonus(5);
     }
   },
   tesseract_bonus_37: {
