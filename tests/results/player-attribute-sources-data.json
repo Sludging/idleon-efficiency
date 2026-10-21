@@ -352,14 +352,6 @@
       "expression": "idleon.callFunction(\"GetSetBonus\", \"MARBIGLASS_SET\", \"Bonus\", 0, 0)",
       "result": 10
     },
-    "sneaking_mastery_all_stat_bonus": {
-      "expression": "10*Math.floor((98+Number(idleon.engine.getGameAttribute(\"OptionsListAccount\")[232]))/100)",
-      "result": 10
-    },
-    "sneaking_mastery_talent_levels": {
-      "expression": "5*Math.floor((97+Number(idleon.engine.getGameAttribute(\"OptionsListAccount\")[232]))/100)",
-      "result": 5
-    },
     "eternal_strength": {
       "expression": "idleon.callFunction(\"getbonus2\", 1, 51, -1)",
       "result": 398

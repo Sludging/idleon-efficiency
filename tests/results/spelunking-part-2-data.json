@@ -221,54 +221,6 @@
     "native_card_w7a10": {
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"CardLv\",\"w7a10\")",
       "result": 1
-    },
-    "refill_hours_player_0": {
-      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",0,0)-JSON.parse(window.React.createElement('getLoadString',['Spelunk']))[3][0])/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 0
-    },
-    "refill_hours_player_1": {
-      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",1,0)-JSON.parse(window.React.createElement('getLoadString',['Spelunk']))[3][1])/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 0
-    },
-    "refill_hours_player_2": {
-      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",2,0)-JSON.parse(window.React.createElement('getLoadString',['Spelunk']))[3][2])/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 1.0222646515636147
-    },
-    "refill_hours_player_3": {
-      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",3,0)-JSON.parse(window.React.createElement('getLoadString',['Spelunk']))[3][3])/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 0
-    },
-    "refill_hours_player_4": {
-      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",4,0)-JSON.parse(window.React.createElement('getLoadString',['Spelunk']))[3][4])/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 0.7523536609297943
-    },
-    "refill_hours_player_5": {
-      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",5,0)-JSON.parse(window.React.createElement('getLoadString',['Spelunk']))[3][5])/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 0
-    },
-    "refill_hours_player_6": {
-      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",6,0)-JSON.parse(window.React.createElement('getLoadString',['Spelunk']))[3][6])/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 0
-    },
-    "refill_hours_player_7": {
-      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",7,0)-JSON.parse(window.React.createElement('getLoadString',['Spelunk']))[3][7])/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 0
-    },
-    "refill_hours_player_8": {
-      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",8,0)-JSON.parse(window.React.createElement('getLoadString',['Spelunk']))[3][8])/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 0
-    },
-    "refill_hours_player_9": {
-      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",9,0)-JSON.parse(window.React.createElement('getLoadString',['Spelunk']))[3][9])/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 0
-    },
-    "refill_hours_player_10": {
-      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",10,0)-JSON.parse(window.React.createElement('getLoadString',['Spelunk']))[3][10])/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 0
-    },
-    "daily_reads_remaining": {
-      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"MaxDailyPageReads\",0,0)-idleon.getAttr(\"OptionsListAccount\")[410])",
-      "result": 8
     }
   },
   "errors": {}

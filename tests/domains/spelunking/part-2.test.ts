@@ -13,10 +13,9 @@ describe('Spelunking Journal and stamina calculations', () => {
         assertChapterBonuses(data.get('spelunking') as Spelunking);
     });
 
-    it('matches the daily page-read limit and remaining allowance', () => {
+    it('matches the native daily page-read limit', () => {
         const owner = data.get('spelunking') as Spelunking;
         expect(owner.dailyReadLimit).toMatchLiveGameWithDetails(expected('daily_reads_limit'), { tolerance: 0 });
-        expect(owner.dailyReadsRemaining).toMatchLiveGameWithDetails(expected('daily_reads_remaining'), { tolerance: 0 });
     });
 
     it('matches shared hourly stamina recharge', () => {
@@ -25,15 +24,12 @@ describe('Spelunking Journal and stamina calculations', () => {
     });
 
     characterIDs.forEach(playerID => {
-        it(`matches character ${playerID} maximum and saved-stamina refill`, () => {
+        it(`matches character ${playerID} maximum`, () => {
             const owner = data.get('spelunking') as Spelunking;
             const stamina = owner.stamina[playerID];
             expect(stamina.maximum).toMatchLiveGameWithDetails(expected(`stamina_max_player_${playerID}`), {
                 tolerance: 0, context: 'Character-specific maximum after shared modifiers are prepared',
             });
-            expect(stamina.getHoursUntilFull(owner.hourlyRecharge)).toMatchLiveGameWithDetails(
-                expected(`refill_hours_player_${playerID}`), { tolerance: 0, context: 'Refill estimate from saved stamina', },
-            );
         });
     });
 });

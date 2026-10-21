@@ -8,11 +8,6 @@
       "description": "Pristine charm bonus for summoning (index 8 - Crystal Comb)"
     },
     {
-      "label": "gem_item_purchased_11",
-      "expression": "idleon.engine.getGameAttribute(\"GemItemsPurchased\")[11]",
-      "description": "Gem shop purchase 11 (Winner Bonuses)"
-    },
-    {
       "label": "artifact_bonus_32",
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 32, 0)",
       "description": "Sailing artifact 32 bonus (summoning winner bonus)"

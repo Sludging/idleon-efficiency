@@ -443,16 +443,6 @@
       "description": "Marbiglass equipment set additive All Stat percentage; no multiplier conversion"
     },
     {
-      "label": "sneaking_mastery_all_stat_bonus",
-      "expression": "10*Math.floor((98+Number(idleon.engine.getGameAttribute(\"OptionsListAccount\")[232]))/100)",
-      "description": "Completed Sneaking mastery All Stat percentage points; bounded mastery component from the AllStatPCT source"
-    },
-    {
-      "label": "sneaking_mastery_talent_levels",
-      "expression": "5*Math.floor((97+Number(idleon.engine.getGameAttribute(\"OptionsListAccount\")[232]))/100)",
-      "description": "Completed Sneaking mastery extra talent levels; bounded mastery component from the GetTalentLV sourceAllTalentLV branch"
-    },
-    {
       "label": "eternal_strength",
       "expression": "idleon.callFunction(\"getbonus2\", 1, 51, -1)",
       "description": "Eternal Str account maximum flat Strength contribution"

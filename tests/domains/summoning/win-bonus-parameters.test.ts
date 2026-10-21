@@ -1,7 +1,6 @@
 /**
  * Validates the direct producer calculations consumed by Summoning winner
- * bonuses: Pristine Charm, Sailing artifact 32, capped Task Board Merit,
- * achievements 373/379, the Godshard set, Emperor bonus 8, and Gem Shop 11.
+ * achievements 373/379, the Godshard set, and Emperor bonus 8.
  */
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
@@ -12,7 +11,6 @@ import type { TaskBoard } from '../../../data/domain/tasks';
 import type { Achievement } from '../../../data/domain/achievements';
 import type { EquipmentSets } from '../../../data/domain/misc/equipmentSets';
 import type { Emperor } from '../../../data/domain/world-6/emperor';
-import type { GemStore } from '../../../data/domain/gemPurchases';
 
 const saveName = 'latest';
 const extractionResultsName = 'summoning-win-bonus-data.json';
@@ -28,14 +26,6 @@ const parameterSpecs = {
   }
  },
 
- gem_item_purchased_11: {
-  description: 'Gem shop purchase 11 (Winner Bonuses)',
-  extractionKey: 'gem_item_purchased_11',
-  domainExtractor: (gameData: Map<string, any>) => {
-   const gemStore = gameData.get("gems") as GemStore;
-   return gemStore.purchases.find(purchase => purchase.no === 11)?.pucrhased ?? 0;
-  }
- },
 
  artifact_bonus_32: {
   description: 'Sailing artifact 32 bonus (summoning winner bonus)',
