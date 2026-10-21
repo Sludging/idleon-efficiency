@@ -79,16 +79,16 @@ function KitchenDisplay({ kitchen, cooking, silkRodeChip, starSignEquipped }: { 
             <Box align='center'>
                 {
                     kitchen.status == KitchenStatus.Meal && kitchen.activeMeal < cooking.meals.length ?
-                    <Box direction="row" gap="small" align="end">
-                        <Box>
-                            <IconImage data={cooking.meals[kitchen.activeMeal].getImageData()} />
+                        <Box direction="row" gap="small" align="end">
+                            <Box>
+                                <IconImage data={cooking.meals[kitchen.activeMeal].getImageData()} />
+                            </Box>
+                            <Text size="small">{nFormatter(kitchen.getUpdatedMealSpeed(starSignEquipped, silkRodeChip) / cooking.meals[kitchen.activeMeal].cookReq, "Smaller")} per hour.</Text>
                         </Box>
-                        <Text size="small">{nFormatter(kitchen.getUpdatedMealSpeed(starSignEquipped, silkRodeChip) / cooking.meals[kitchen.activeMeal].cookReq, "Smaller")} per hour.</Text>
-                    </Box>
-                    :
-                    <Box direction="row" gap="small" align="end">
-                        <Text size="small">Unknown Meal</Text>
-                    </Box>
+                        :
+                        <Box direction="row" gap="small" align="end">
+                            <Text size="small">Unknown Meal</Text>
+                        </Box>
                 }
                 {
                     kitchen.status == KitchenStatus.Recipe &&
@@ -136,7 +136,7 @@ function KitchenDisplay({ kitchen, cooking, silkRodeChip, starSignEquipped }: { 
 function KitchensDisplay({ silkRodeChip, starSignEquipped }: { silkRodeChip: boolean, starSignEquipped: boolean }) {
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
-    ));    
+    ));
     const cooking = theData.get("cooking") as CookingDomain;
 
     return (
@@ -194,7 +194,7 @@ function Cooking() {
     }
 
     const mealsToShow = useMemo(() => {
-        return cooking.meals
+        return [...cooking.meals]
             // TODO: Removing this filter for now until I remember why it here in the first place
             // .filter(meal => meal.timeOptimalSpices.length > 0)
             .sort((meal1, meal2) => {
