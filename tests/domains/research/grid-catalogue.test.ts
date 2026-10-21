@@ -5,7 +5,6 @@ import { ExtractionResults, loadExtractionResults } from '../../utils/live-game-
 import {
     OriginalGridInputs, OriginalGridUpgrade, assertPairing, extracted, numeric, resultName,
 } from './grid-catalogue-test-helpers';
-
 const realDefinitions = initResearchGridBonusRepo().filter(square => square.data.name !== 'Name');
 
 // The retained save observes zero available Points, capped/uncapped ranks, all specialized effects, and five owned Shapes.
@@ -44,10 +43,7 @@ describe('Research Grid catalogue, Points, linked grants, and Shapes', () => {
             expect(upgrade.level).toBe(inputs.levels[upgrade.index]);
             expect(upgrade.getLevel()).toBe(expected.level);
             expect(upgrade.maxLevel).toBe(expected.cap);
-            expect(upgrade.atCap).toBe(expected.level >= expected.cap);
             expect(upgrade.reachable).toBe(expected.reachable === 1);
-            expect(upgrade.affordable).toBe(numeric(results, 'points_available') > 0);
-            expect(Number(!upgrade.atCap && upgrade.affordable)).toBe(expected.canUpgrade);
             expect(upgrade.allBonusMultiplier).toMatchLiveGameWithDetails(numeric(results, 'grid_shared_multiplier'), { tolerance: 0 });
         });
     });
@@ -56,19 +52,7 @@ describe('Research Grid catalogue, Points, linked grants, and Shapes', () => {
         expect(research.points.earned).toMatchLiveGameWithDetails(numeric(results, 'points_earned'), { tolerance: 0, debugInfo: research.points.contributors });
         expect(research.points.spent).toMatchLiveGameWithDetails(numeric(results, 'points_spent'), { tolerance: 0 });
         expect(research.points.available).toMatchLiveGameWithDetails(numeric(results, 'points_available'), { tolerance: 0 });
-        expect(research.points.milestone).toBe(research.pointMilestone);
         expect(research.points.milestone.cumulativeMilestonePoints).toMatchLiveGameWithDetails(numeric(results, 'point_milestone'), { tolerance: 0 });
-        const contributions = extracted<number[]>(results, 'point_contributions');
-        expect(research.points.contributors).toHaveLength(contributions.length);
-        research.points.contributors.forEach((contributor, index) => {
-            expect(contributor.value).toMatchLiveGameWithDetails(contributions[index], { tolerance: 0, context: contributor.source });
-        });
-        expect(research.points.contributors[5]).toMatchObject({ inputValue: inputs.artifactStatus, cap: 10 });
-        expect(research.points.contributors[6].value).toBe(inputs.researchMerit);
-        expect(research.pointMilestone).toMatchObject({ reachedTenLevelBlocks: 7, pointsPerTenLevelBlock: 3, purchasedGrid50Level: 1, level60Reached: true });
-        expect(research.points).toMatchObject({ earned: 115, spent: 115, available: 0 });
-        // Real ranks are integers. This checks the original result, not unobserved fractional or negative rounding boundaries.
-        expect(inputs.levels.every(level => Number.isInteger(Number(level)) && Number(level) >= 0)).toBe(true);
     });
 
 

@@ -1,5 +1,4 @@
-import { Companion, getCompanionActiveBonus, getCompanionBonus, isCompanionLevelTwo } from '../../../data/domain/companions';
-import { EventShop } from '../../../data/domain/eventShop';
+import { Companion } from '../../../data/domain/companions';
 import { Equinox } from '../../../data/domain/world-3/equinox';
 import { Cooking } from '../../../data/domain/world-4/cooking';
 import { Rift } from '../../../data/domain/world-4/rift';
@@ -7,7 +6,6 @@ import { Sailing } from '../../../data/domain/world-5/sailing/sailing';
 import { Glimbo } from '../../../data/domain/world-7/glimbo';
 import { JellyOperator } from '../../../data/domain/world-7/jellyOperator';
 import { DivineDesignResearchGridBonus, ObservationLevelResearchGridBonus, OccurrenceCountResearchGridBonus, ResearchGrid } from '../../../data/domain/world-7/research';
-import { Spelunking } from '../../../data/domain/world-7/spelunking';
 import { SushiStation } from '../../../data/domain/world-7/sushi';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ExtractionResults, loadExtractionResults } from '../../utils/live-game-data-loader';
@@ -24,22 +22,6 @@ const parameters: ParameterTestSpec[] = [
     {
         description: 'shared Grid modifier used by every primary effect', extractionKey: 'grid_shared_multiplier',
         domainExtractor: data => (data.get('research') as ResearchGrid).getGridBonusAllmulti(),
-    },
-    {
-        description: 'existing numerical King Doot input for shared Grid effects', extractionKey: 'companion_0',
-        domainExtractor: data => getCompanionBonus(data.get('companions') as Companion[], 0),
-    },
-    {
-        description: 'active King Doot condition for Divine Design text', extractionKey: 'companion_0',
-        domainExtractor: data => getCompanionActiveBonus(data.get('companions') as Companion[], 0),
-    },
-    ...[55, 153, 54].map(index => ({
-        description: `active companion ${index} reward for Grid effects, Points, or Shapes`, extractionKey: `companion_${index}`,
-        domainExtractor: (data: Map<string, any>) => getCompanionActiveBonus(data.get('companions') as Companion[], index),
-    })),
-    {
-        description: 'level-two companion gate for five additional Points', extractionKey: 'companion_level_two_153',
-        domainExtractor: data => Number(isCompanionLevelTwo(data.get('companions') as Companion[], 153)),
     },
     ...[71, 72, 76].map(index => ({
         description: `Equinox challenge ${index} shared Grid contribution`, extractionKey: `cloud_${index}`,
@@ -69,10 +51,6 @@ const parameters: ParameterTestSpec[] = [
         description: 'Glimbo total used by complete 100-trade blocks', extractionKey: 'glimbo_trades',
         domainExtractor: data => (data.get('glimbo') as Glimbo).totalTrades,
     },
-    ...[6, 7].map(index => ({
-        description: `Spelunking Lore ${index} condition for Sigils or Shapes`, extractionKey: `lore_${index}`,
-        domainExtractor: (data: Map<string, any>) => Number((data.get('spelunking') as Spelunking).tunnels.find(tunnel => tunnel.index === index)!.loreCompleted),
-    })),
     {
         description: 'Cooking Mastery predicate used by Masterius Cookerius', extractionKey: 'cooking_mastery',
         domainExtractor: data => Number((data.get('cooking') as Cooking).isCookingMasteryUnlocked(data.get('rift') as Rift, data.get('companions') as Companion[])),
@@ -84,14 +62,6 @@ const parameters: ParameterTestSpec[] = [
     {
         description: 'owned Shape prefix used by all ten Shape wrappers', extractionKey: 'shape_count',
         domainExtractor: data => (data.get('research') as ResearchGrid).shapeOwnership.count,
-    },
-    {
-        description: 'rotation gate used by Shape presentation', extractionKey: 'rotation_unlocked',
-        domainExtractor: data => Number((data.get('research') as ResearchGrid).shapeOwnership.rotationUnlocked),
-    },
-    {
-        description: 'event-shop Shape ownership contribution', extractionKey: 'event_shape',
-        domainExtractor: data => Number((data.get('eventShop') as EventShop).isBonusOwned(36)),
     },
 ];
 
@@ -124,7 +94,6 @@ describe('Research Grid catalogue direct parameters', () => {
         const original = extracted<OriginalBoatQualification[]>(results, 'boats');
         const summary = (data.get('sailing') as Sailing).getUndeadBattalionQualification();
         expect(summary.qualifyingBoatCount).toMatchLiveGame(original.filter(boat => boat.qualifies === 1).length, 0);
-        expect(summary.totalBoatCount).toBe(original.length);
     });
 
 

@@ -73,11 +73,6 @@
       "description": "Native active buff 124 penalty used by component D"
     },
     {
-      "label": "player_damage_dream_index_6",
-      "expression": "Number(idleon.engine.getGameAttribute(\"Dream\")[6])",
-      "description": "Native Dream attribute 6 used by component D's first multiplier"
-    },
-    {
       "label": "player_damage_native_component_d",
       "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DummyNumbersStatManager\").h.DamageDealtLIST[2]; })()",
       "description": "Native component D from DamageDealed(\"Max\") for target player 3"
@@ -108,11 +103,6 @@
       "description": "Native god-rank multiplier input used by component D"
     },
     {
-      "label": "player_damage_addition_extra",
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"AdditionExtraDMG\", 0, 0)",
-      "description": "Native initial AdditionExtraDMG factor used by component D"
-    },
-    {
       "label": "player_damage_vial_7dmg",
       "expression": "Number(idleon.engine.getGameAttribute(\"DNSM\").h.AlchVials.h[\"7dmg\"])",
       "description": "Native 7dmg vial percentage used by component D"
@@ -126,26 +116,6 @@
       "label": "player_damage_summoning_upgrade_79",
       "expression": "idleon.callFunction(\"Summoning\", \"SummUpgBonus\", 79, 0)",
       "description": "Native Summoning upgrade 79 used by component D"
-    },
-    {
-      "label": "player_damage_cavern_upgrade_19",
-      "expression": "idleon.callFunction(\"Holes2\", \"Cglunko_upgBon\", 19, 0)",
-      "description": "Native Cavern upgrade 19 percentage used by component D"
-    },
-    {
-      "label": "player_damage_bundle_flag",
-      "expression": "Number(idleon.engine.getGameAttribute(\"BundlesReceived\").h.bon_a == 1)",
-      "description": "Native damage multiplier bundle ownership flag used by component D"
-    },
-    {
-      "label": "player_damage_reliquarium_possession",
-      "expression": "idleon.callFunction(\"Thingies\", \"ReliquariumInPosession\", 0, 0)",
-      "description": "Native Reliquarium possession gate for the component D exponent"
-    },
-    {
-      "label": "player_damage_reliquarium_exponent_input",
-      "expression": "Number(idleon.engine.getGameAttribute(\"OptionsListAccount\")[473])",
-      "description": "Native account exponent input used when Reliquarium is possessed"
     },
     {
       "label": "player_damage_artifact_25_effective",

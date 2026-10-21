@@ -1,8 +1,6 @@
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import type { Player } from '../../../data/domain/player';
-import type { Achievement } from '../../../data/domain/achievements';
-import type { Deathnote } from '../../../data/domain/world-3/construction/deathnote';
 import { EquipmentBonus } from '../../../data/domain/equipment-effects';
 import { getTargetPlayer, TARGET_PLAYER_INDEX } from '../../utils/target-player';
 import type { Guild } from '../../../data/domain/guild';
@@ -15,7 +13,6 @@ import type { Bubba } from '../../../data/domain/world-3/bubba';
 import type { AtomCollider } from '../../../data/domain/world-3/construction/atomCollider';
 import type { Summoning } from '../../../data/domain/world-6/summoning';
 import type { Gaming } from '../../../data/domain/world-5/gaming';
-import { lavaLog } from '../../../data/utility';
 
 const saveName = 'latest';
 const extractionResultsName = 'player-build-speed-data.json';
@@ -92,15 +89,6 @@ const parameterSpecs = {
     domainExtractor: (gameData: Map<string, any>) => {
       const upgradeVault = gameData.get("upgradeVault") as UpgradeVault;
       return upgradeVault.getBonusForId(48);
-    }
-  },
-  sheepies_killed: {
-    description: 'Log-scaled total Sheepie kills used by the Buildie Sheepie upgrade',
-    extractionKey: 'sheepies_killed',
-    domainExtractor: (gameData: Map<string, any>) => {
-      const deathnote = gameData.get("deathnote") as Deathnote;
-      const totalSheepie = deathnote.mobKillCount.get("sheep")?.reduce((sum, killCount) => sum += Math.round(killCount), 0) ?? 0;
-      return Math.floor(lavaLog(totalSheepie));
     }
   },
   bubba_bonus_1: {

@@ -56,10 +56,6 @@
       "expression": "idleon.callFunction(\"GetBuffBonuses\", 124, 2)",
       "result": 0
     },
-    "player_damage_dream_index_6": {
-      "expression": "Number(idleon.engine.getGameAttribute(\"Dream\")[6])",
-      "result": 28
-    },
     "player_damage_native_component_d": {
       "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DummyNumbersStatManager\").h.DamageDealtLIST[2]; })()",
       "result": 932368538619105.8
@@ -87,10 +83,6 @@
       "expression": "Math.max(0, Number(idleon.engine.getGameAttribute(\"Divinity\")[25]) - 10)",
       "result": 10
     },
-    "player_damage_addition_extra": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"AdditionExtraDMG\", 0, 0)",
-      "result": 1.2948567917045428
-    },
     "player_damage_vial_7dmg": {
       "expression": "Number(idleon.engine.getGameAttribute(\"DNSM\").h.AlchVials.h[\"7dmg\"])",
       "result": 26.6
@@ -102,22 +94,6 @@
     "player_damage_summoning_upgrade_79": {
       "expression": "idleon.callFunction(\"Summoning\", \"SummUpgBonus\", 79, 0)",
       "result": 26
-    },
-    "player_damage_cavern_upgrade_19": {
-      "expression": "idleon.callFunction(\"Holes2\", \"Cglunko_upgBon\", 19, 0)",
-      "result": 13
-    },
-    "player_damage_bundle_flag": {
-      "expression": "Number(idleon.engine.getGameAttribute(\"BundlesReceived\").h.bon_a == 1)",
-      "result": 0
-    },
-    "player_damage_reliquarium_possession": {
-      "expression": "idleon.callFunction(\"Thingies\", \"ReliquariumInPosession\", 0, 0)",
-      "result": 0
-    },
-    "player_damage_reliquarium_exponent_input": {
-      "expression": "Number(idleon.engine.getGameAttribute(\"OptionsListAccount\")[473])",
-      "result": 1
     },
     "player_damage_artifact_25_effective": {
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 25, 0)",

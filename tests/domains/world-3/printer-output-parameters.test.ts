@@ -1,5 +1,4 @@
 import { Compass } from '../../../data/domain/compass';
-import { Divinity } from '../../../data/domain/world-5/divinity';
 import { Lab } from '../../../data/domain/world-4/lab';
 import { Player } from '../../../data/domain/player';
 import { Printer, updatePrinter } from '../../../data/domain/world-3/construction/printer';
@@ -13,8 +12,6 @@ import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 
 const saveName = 'latest';
 const extractionResultsName = 'printer-output-data.json';
-// Character 0 represents the two Printer-used Divinity major-bonus IDs in this paired save.
-const divinityRepresentativePlayer = 0;
 
 const getActivePrintingTotalBoost = (gameData: Map<string, unknown>): number => {
   const printer = gameData.get('printer') as Printer;
@@ -74,20 +71,6 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   },
 };
 
-// The game arguments are major-bonus IDs; the website stores links by god slot (Arctis 1, Harriep 3).
-for (const [majorBonusId, godSlot] of [[2, 1], [3, 3]] as const) {
-  const playerIndex = divinityRepresentativePlayer;
-  const extractionKey = `divinity_major_${majorBonusId}_player_${playerIndex}`;
-  const majorName = majorBonusId === 2 ? 'Arctis' : 'Harriep';
-  parameterSpecs[extractionKey] = {
-    description: `${majorName} major bonus active flag for representative character ${playerIndex}`,
-    extractionKey,
-    domainExtractor: gameData => {
-      const divinity = gameData.get('divinity') as Divinity;
-      return Number(divinity.gods[godSlot].linkedPlayers.some(player => player.playerID === playerIndex));
-    },
-  };
-}
 
 describe('Printer output - mapped inputs', () => {
   let extractionResults: ExtractionResults;

@@ -4,46 +4,6 @@
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"AdditionExtraPrinting\", 0, 0)",
       "result": 632.3413413958257
     },
-    "printer_extra_printing_player_0": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 0, 0)",
-      "result": 3794.0480483749543
-    },
-    "printer_extra_printing_player_1": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 1, 0)",
-      "result": 3794.0480483749543
-    },
-    "printer_extra_printing_player_2": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 2, 0)",
-      "result": 3794.0480483749543
-    },
-    "printer_extra_printing_player_3": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 3, 0)",
-      "result": 3794.0480483749543
-    },
-    "printer_extra_printing_player_4": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 4, 0)",
-      "result": 3794.0480483749543
-    },
-    "printer_extra_printing_player_5": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 5, 0)",
-      "result": 3794.0480483749543
-    },
-    "printer_extra_printing_player_6": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 6, 0)",
-      "result": 3794.0480483749543
-    },
-    "printer_extra_printing_player_7": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 7, 0)",
-      "result": 3794.0480483749543
-    },
-    "printer_extra_printing_player_8": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 8, 0)",
-      "result": 3794.0480483749543
-    },
-    "printer_extra_printing_player_9": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 9, 0)",
-      "result": 3794.0480483749543
-    },
     "sailing_gold_relic_tier_increment": {
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 4, 1)",
       "result": 5
@@ -67,14 +27,6 @@
     "mainframe_bonus_1": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 1)",
       "result": 2
-    },
-    "divinity_major_2_player_0": {
-      "expression": "idleon.callFunction(\"Divinity\", \"Bonus_MAJOR\", 0, 2)",
-      "result": 1
-    },
-    "divinity_major_3_player_0": {
-      "expression": "idleon.callFunction(\"Divinity\", \"Bonus_MAJOR\", 0, 3)",
-      "result": 1
     },
     "printer_companion_17_effect": {
       "expression": "idleon.callFunction(\"Companions\", 17)",

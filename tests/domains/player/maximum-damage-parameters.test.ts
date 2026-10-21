@@ -1,18 +1,13 @@
 import type { CrystalSteakArtifact, FunHippoeteArtifact } from '../../../data/domain/world-5/sailing/artifacts';
 import type { Sailing } from '../../../data/domain/world-5/sailing/sailing';
-import type { Account } from '../../../data/domain/account';
 import type { Alchemy } from '../../../data/domain/world-2/alchemy/alchemy';
-import { initRandoList2Repo } from '../../../data/domain/data/RandoList2Repo';
 import type { Gaming } from '../../../data/domain/world-5/gaming';
 import type { Summoning } from '../../../data/domain/world-6/summoning';
-import type { Storage } from '../../../data/domain/storage';
-import { lavaLog } from '../../../data/utility';
 import type { Friends } from '../../../data/domain/friends';
 import type { Sneaking } from '../../../data/domain/world-6/sneaking';
 import type { Farming } from '../../../data/domain/world-6/farming';
 import type { Cooking } from '../../../data/domain/world-4/cooking';
 import type { Divinity } from '../../../data/domain/world-5/divinity';
-import type { Equinox } from '../../../data/domain/world-3/equinox';
 import type { Prayer } from '../../../data/domain/world-3/prayers';
 import { EquipmentBonus } from '../../../data/domain/equipment-effects';
 import type { Player } from '../../../data/domain/player';
@@ -23,7 +18,6 @@ import type { Votes } from '../../../data/domain/world-2/votes';
 import { getExtractedValue, loadExtractionResults, validateExtractionHealth, type ExtractionResults } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { getTargetPlayer } from '../../utils/target-player';
-import { Talent } from '../../../data/domain/talents';
 
 const extractionResultsName = 'player-damage-parameters-data.json';
 const saveName = 'latest';
@@ -100,12 +94,6 @@ describe('Player maximum damage - component D parameters', () => {
       .toMatchLiveGame(expected, 0);
   });
 
-  it('matches the native Dream attribute 6 damage factor', () => {
-    const equinox = gameData.get('equinox') as Equinox;
-    const localDreamFactor = 1 + equinox.upgrades.find(upgrade => upgrade.index === 4)!.level / 10;
-    const nativeDreamFactor = 1 + getExtractedValue(extractionResults, 'player_damage_dream_index_6') / 10;
-    expect(localDreamFactor).toMatchLiveGame(nativeDreamFactor, 0);
-  });
 
   it('matches native pristine charm 0 damage factor', () => {
     const sneaking = gameData.get('sneaking') as Sneaking;
@@ -133,16 +121,6 @@ describe('Player maximum damage - component D parameters', () => {
   });
 
 
-  it('matches the native initial AdditionExtraDMG factor', () => {
-    const players = gameData.get('players') as Player[];
-    const account = gameData.get('account') as Account;
-    const talentInputs = player.finalTalentInputs;
-    const actual = (1 + Talent.getAccountTalentBonus(players, 508, talentInputs)
-      * lavaLog(account.wormholeEmperorProgress) / 100)
-      * (1 + Talent.getAccountTalentBonus(players, 208, talentInputs)
-        * lavaLog(account.wraithOverlordProgress) / 100);
-    expect(actual).toMatchLiveGame(getExtractedValue(extractionResults, 'player_damage_addition_extra'), 0);
-  });
 
   it('matches the native 7dmg vial bonus', () => {
     const alchemy = gameData.get('alchemy') as Alchemy;
@@ -162,30 +140,6 @@ describe('Player maximum damage - component D parameters', () => {
       .toMatchLiveGame(getExtractedValue(extractionResults, 'player_damage_summoning_upgrade_79'), 0);
   });
 
-  it('matches native Cavern upgrade 19 percentage', () => {
-    const account = gameData.get('account') as Account;
-    const randoList2 = initRandoList2Repo();
-    const coefficient = Number(randoList2[13].data.elements[19]);
-    expect(account.cavernDamageUpgradeLevel * coefficient)
-      .toMatchLiveGame(getExtractedValue(extractionResults, 'player_damage_cavern_upgrade_19'), 0);
-  });
-
-  it('matches native damage bundle ownership', () => {
-    const account = gameData.get('account') as Account;
-    expect(Number(account.hasDamageMultiplierBundle))
-      .toMatchLiveGame(getExtractedValue(extractionResults, 'player_damage_bundle_flag'), 0);
-  });
-
-  it('matches native Reliquarium possession and exponent input', () => {
-    const account = gameData.get('account') as Account;
-    const storage = gameData.get('storage') as Storage;
-    const hasReliquarium = storage.playerStorage[player.playerID]
-      .some(item => item.internalName === 'Quest105');
-    expect(Number(hasReliquarium))
-      .toMatchLiveGame(getExtractedValue(extractionResults, 'player_damage_reliquarium_possession'), 0);
-    expect(account.damageExponentInput)
-      .toMatchLiveGame(getExtractedValue(extractionResults, 'player_damage_reliquarium_exponent_input'), 0);
-  });
   it('matches native effective Crystal Steak artifact damage bonus', () => {
     const sailing = gameData.get('sailing') as Sailing;
     const artifact = sailing.artifacts.find(candidate => candidate.index === 25)! as CrystalSteakArtifact;

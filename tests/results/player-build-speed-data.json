@@ -36,10 +36,6 @@
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 48, 0)",
       "result": 60
     },
-    "sheepies_killed": {
-      "expression": "idleon.callFunction(\"Summoning\", \"VaultKillzTotal\", 11, 0)",
-      "result": 12
-    },
     "bubba_bonus_1": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 1, 0)",
       "result": 140

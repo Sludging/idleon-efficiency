@@ -62,31 +62,6 @@
       "description": "Core shared modifier and direct parameter used by every primary effect."
     },
     {
-      "label": "companion_0",
-      "expression": "idleon.callFunction(\"Companions\",0)",
-      "description": "Direct active companion helper consumed by Grid, Points, descriptions, or Shape ownership. Numeric Doot uses the existing owner getter separately."
-    },
-    {
-      "label": "companion_55",
-      "expression": "idleon.callFunction(\"Companions\",55)",
-      "description": "Direct active companion helper consumed by Grid, Points, descriptions, or Shape ownership. Numeric Doot uses the existing owner getter separately."
-    },
-    {
-      "label": "companion_153",
-      "expression": "idleon.callFunction(\"Companions\",153)",
-      "description": "Direct active companion helper consumed by Grid, Points, descriptions, or Shape ownership. Numeric Doot uses the existing owner getter separately."
-    },
-    {
-      "label": "companion_54",
-      "expression": "idleon.callFunction(\"Companions\",54)",
-      "description": "Direct active companion helper consumed by Grid, Points, descriptions, or Shape ownership. Numeric Doot uses the existing owner getter separately."
-    },
-    {
-      "label": "companion_level_two_153",
-      "expression": "idleon.callFunction(\"CompLV2\",153)",
-      "description": "Direct level-two companion gate for the five-Point reward."
-    },
-    {
       "label": "cloud_71",
       "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\",71)",
       "description": "Direct Equinox shared Grid contribution."
@@ -132,11 +107,6 @@
       "description": "Direct same-domain cumulative ten-level reward. Exact expression from ResearchStuff:229-230; no effect multiplier applies to purchased Grid level 50."
     },
     {
-      "label": "point_contributions",
-      "expression": "[Number(idleon.getAttr(\"Lv0\")[20]),10*idleon.callFunction(\"Companions\",153),5*idleon.callFunction(\"CompLV2\",153),idleon.callFunction(\"SushiStuff\",\"RoG_BonusQTY\",3,0),idleon.callFunction(\"SushiStuff\",\"RoG_BonusQTY\",13,0),Math.min(10,Math.round(Number(idleon.getAttr(\"Sailing\")[3][37]))),Number(idleon.getAttr(\"Tasks\")[2][6][3]),idleon.callFunction(\"JellyOperation\",\"RoG_BonusQTY\",4,0),idleon.callFunction(\"JellyOperation\",\"RoG_BonusQTY\",57,0),Math.floor(Number(idleon.getAttr(\"Lv0\")[20])/10)*Math.round(1+Math.min(1,Math.floor(Number(idleon.getAttr(\"Lv0\")[20])/60))+idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",50,1))]",
-      "description": "Core contributor amounts in public order. Artifact status and merit level are saved supporting inputs, not parameter calculations."
-    },
-    {
       "label": "observation_levels",
       "expression": "idleon.callFunction(\"ResearchStuff\",\"TotalObsLVs\",-1,0)",
       "description": "Direct total Insight levels used by Game Design 102 secondary effect; original refresh argument."
@@ -150,16 +120,6 @@
       "label": "glimbo_trades",
       "expression": "idleon.callFunction(\"Minehead\",\"GlimboTotalTrades\",0,0)",
       "description": "Direct Glimbo total used by complete 100-trade blocks. Source accessor: scripts.ActorEvents_579._customBlock_Minehead."
-    },
-    {
-      "label": "lore_6",
-      "expression": "idleon.callFunction(\"Spelunk\",\"DoWeHaveLoreN1\",6,0)",
-      "description": "Direct Mister Jazzie Lore condition for Eclectic Sigils."
-    },
-    {
-      "label": "lore_7",
-      "expression": "idleon.callFunction(\"Spelunk\",\"DoWeHaveLoreN1\",7,0)",
-      "description": "Direct Bah Dazzul Lore contribution to Shape ownership, separate from Sigils."
     },
     {
       "label": "cooking_mastery",
@@ -185,16 +145,6 @@
       "label": "shape_count",
       "expression": "idleon.callFunction(\"ResearchStuff\",\"ShapesOwned\",0,0)",
       "description": "Core Shape ownership and direct parameter used by owned-prefix presentation."
-    },
-    {
-      "label": "rotation_unlocked",
-      "expression": "idleon.callFunction(\"ResearchStuff\",\"CanRotateShapes\",0,0)",
-      "description": "Core rotation unlock and direct parameter used by Shape rotation presentation."
-    },
-    {
-      "label": "event_shape",
-      "expression": "idleon.callFunction(\"Summoning\",\"EventShopOwned\",36,0)",
-      "description": "Direct event-shop Shape ownership contribution."
     },
     {
       "label": "shape_static",

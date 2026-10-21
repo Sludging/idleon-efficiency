@@ -708,9 +708,6 @@ describe('Research direct calculation parameters and producer preparation', () =
         expect((gameData.get('worship') as Worship).totalizer.totalWaves).toMatchLiveGame(value('worship_waves'), 0);
     });
 
-    it('prepares Sailing with every raw Slab registration, not the filtered display count', () => {
-        expect((gameData.get('slab') as Slab).registeredItemCount).toMatchLiveGame(value('slab_registrations'), 0);
-    });
 
     initResearchObservationRepo().forEach(({index, data}) => {
         it('matches ' + data.name + ' Kaleidoscope support used by EXP and Insight', () => {

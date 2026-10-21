@@ -1106,24 +1106,6 @@
       "expression": "idleon.callFunction(\"Holes\", \"GambitPts\", 777, 0)",
       "result": 4320560.222590943
     },
-    "offline_contributions": {
-      "expression": "[idleon.callFunction(\"Companions\", 28),idleon.callFunction(\"Holes\", \"GambitBonuses\", 15, 0),idleon.callFunction(\"Minehead\", \"BonusQTY\", 1, 0),idleon.callFunction(\"Minehead\", \"BonusQTY\", 10, 0),idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 71, 0),idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 111, 0),Math.min(6,Math.round(idleon.getAttr(\"Sailing\")[3][36])),Math.min(idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7b11\"),10),20*idleon.callFunction(\"Companions\", 153),10*idleon.callFunction(\"CompLV2\", 153),2*idleon.getAttr(\"GemItemsPurchased\")[45],idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 4, 0),idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 24, 0)]",
-      "result": [
-        40,
-        3,
-        2,
-        3,
-        2.9899999999999998,
-        14.950000000000001,
-        5,
-        1,
-        20,
-        10,
-        20,
-        2,
-        2
-      ]
-    },
     "paper_purchase": {
       "expression": "idleon.getAttr(\"GemItemsPurchased\")[45]",
       "result": 10
@@ -1131,10 +1113,6 @@
     "artifact_status": {
       "expression": "idleon.getAttr(\"Sailing\")[3][36]",
       "result": 5
-    },
-    "slab_registrations": {
-      "expression": "idleon.getAttr(\"Cards\")[1].length",
-      "result": 1645
     },
     "worship_waves": {
       "expression": "idleon.getAttr(\"TotemInfo\")[0].reduce((total,waves)=>total+Number(waves),0)",

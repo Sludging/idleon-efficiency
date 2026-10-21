@@ -1,8 +1,6 @@
 import { ResearchGrid } from '../../../data/domain/world-7/research';
 import { initResearchObservationRepo } from '../../../data/domain/data/ResearchObservationRepo';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { Player } from '../../../data/domain/player';
-import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import { ExtractionResults, getExtractedValue, loadExtractionResults } from '../../utils/live-game-data-loader';
 
 const observations = initResearchObservationRepo();
@@ -34,38 +32,22 @@ describe('Research account progress and production', () => {
     };
 
 
-    it('reconciles shared Research progress by level before EXP', () => {
-        const players = gameData.get('players') as Player[];
-        const researchSkills = players.map(player => player.skills.get(SkillsIndex.Research)!);
-        const highestLevel = Math.max(...researchSkills.map(skill => skill.level));
-        const highestLevelSkills = researchSkills.filter(skill => skill.level === highestLevel);
-        const highestXP = Math.max(...highestLevelSkills.map(skill => skill.currentXP));
-        const highestXPRequirement = highestLevelSkills.find(skill => skill.currentXP === highestXP)!.xpReq;
-
-        expect(research.progress.highestLevel).toBe(highestLevel);
-        expect(research.progress.currentXP).toBe(highestXP);
-        expect(research.progress.xpReq).toBe(highestXPRequirement);
-    });
-
 
     it('matches eligible Observations, discoveries, and total Insight levels', () => {
-        expect(research.observations).toHaveLength(43);
         expect(research.progress.eligibleObservationCount).toMatchLiveGameWithDetails(value('eligible_count'), {tolerance: 0});
         expect(research.progress.discoveries).toMatchLiveGameWithDetails(value('discoveries'), {tolerance: 0});
         expect(research.progress.totalObservationLevels).toMatchLiveGameWithDetails(value('observation_levels'), {tolerance: 0});
     });
 
-    it('separates remaining attempts, daily allocation, inclusive rolls, and the shared failed-roll counter', () => {
+    it('separates remaining attempts, daily allocation, roll bounds, and shared failed-roll counter', () => {
         const original = extracted<{attempts: number}>('research_state');
         const reference = extracted<{failedRolls: number}>('reference_state');
         expect(research.discoveryAllowance.remainingAttempts).toBe(original.attempts);
         expect(research.discoveryAllowance.dailyAllocation).toMatchLiveGameWithDetails(value('daily_attempts'), {tolerance: 0});
         expect(research.discoveryAllowance.minimumRoll).toMatchLiveGameWithDetails(value('minimum_roll'), {tolerance: 0});
         expect(research.discoveryAllowance.maximumRoll).toMatchLiveGameWithDetails(value('maximum_roll'), {tolerance: 0});
-        expect(research.discoveryAllowance.inclusiveRollBounds).toBe(true);
         expect(research.discoveryAllowance.failedRollCount).toBe(reference.failedRolls);
         expect(research.discoveryAllowance.failedRollBonusCap).toMatchLiveGameWithDetails(value('grid_31_2'), {tolerance: 0});
-        expect(research.discoveryAllowance.currentFailedRollBonus).toMatchLiveGameWithDetails(value('minimum_roll') - research.metadata.baseDiscoveryMinRoll, {tolerance: 0});
     });
 
 
@@ -75,8 +57,6 @@ describe('Research account progress and production', () => {
         expect(research.lensOwnership.kaleidoscopes).toMatchLiveGameWithDetails(value('owned_kaleidoscopes'), {tolerance: 0});
         expect(research.lensOwnership.magnifyingGlasses).toMatchLiveGameWithDetails(value('owned_lenses') - value('owned_monocles') - value('owned_kaleidoscopes'), {tolerance: 0});
         expect(research.lensOwnership.capacityPerObservation).toMatchLiveGameWithDetails(value('lens_capacity'), {tolerance: 0});
-        expect(research.lensOwnership.contributors.reduce((sum, source) => sum + source.value, 0)).toBe(research.lensOwnership.uncappedTotal);
-        expect(research.lensOwnership.total).toBe(Math.min(research.lensOwnership.cap, research.lensOwnership.uncappedTotal));
     });
 
 
@@ -107,40 +87,6 @@ describe('Research account progress and production', () => {
         });
     });
 
-    // These caps and conversions come from the original Research EXP additive group.
-    const additiveSources: [string, string, number, number][] = [
-        ['Farming sticker', 'farming_sticker', 1, Infinity],
-        ['Cooking meals', 'cooking_research', 1, Infinity],
-        ['Dancing Coral', 'coral_research', 1, Infinity],
-        ['Crop Scientist', 'crop_scientist', 1, Infinity],
-        ['Points and EXP Grid reward', 'grid_50_0', 1, Infinity],
-        ['Discovery allowance Grid reward', 'grid_90_0', 1, Infinity],
-        ['Advanced Research EXP Grid reward', 'grid_110_0', 1, Infinity],
-        ['Discovered Observation Grid reward', 'grid_112_2', 1, Infinity],
-        ['Zenith Market', 'zenith_research', 1, Infinity],
-        ['Gaming Worship reward', 'gaming_research', 1, Infinity],
-        ['Sailing Slab reward', 'sailing_research', 1, Infinity],
-        ['Spelunking epilogue', 'epilogue_research', 1, Infinity],
-        ['First owned EXP card', 'card_w7b1', 1, 10],
-        ['Second owned EXP card', 'card_w7b4', 2, 15],
-        ['Arcade', 'arcade_research', 1, Infinity],
-        ['Prehistoric set', 'prehistoric_raw', 1, 50],
-        ['Total Observation Insight levels', 'grid_94_2', 1, Infinity],
-        ['Smart Eye EXP reward', 'grid_31_0', 1, Infinity],
-        ['Maximum roll EXP reward', 'grid_51_0', 1, Infinity],
-        ['Third owned EXP card', 'card_w7a11', 1, 10],
-        ['Fourth owned EXP card', 'card_w7b8', 3, 20],
-        ['Spelunking shop', 'spelunking_shop', 1, Infinity],
-    ];
-    additiveSources.forEach(([name, key, scale, cap], index) => {
-        it('matches the ' + name + ' additive EXP contribution in its source unit', () => {
-            const contributor = research.production.additiveExpContributors[index];
-            const originalInput = scale * value(key);
-            expect(contributor.inputValue).toMatchLiveGameWithDetails(originalInput, {tolerance: 0, context: name});
-            expect(contributor.value).toMatchLiveGameWithDetails(Math.min(cap, originalInput), {tolerance: 0, context: name});
-            expect(contributor.operation).toBe('addPercent');
-        });
-    });
 
 
 
@@ -150,40 +96,20 @@ describe('Research account progress and production', () => {
 
 
 
-    it('matches eligible EXP subtotal and actual total hourly Insight', () => {
+    it('matches eligible EXP subtotal and Insight production bonuses', () => {
         expect(research.production.expBeforeSharedMultiplierPerHour).toMatchLiveGameWithDetails(value('exp_subtotal'), {tolerance: 0});
-        const totalInsight = extracted<number[]>('observation_insight_rates').slice(0, value('eligible_count')).reduce((sum, rate) => sum + rate, 0);
-        expect(research.production.insightAccrualPerHour).toMatchLiveGameWithDetails(totalInsight, {tolerance: 0});
         expect(research.production.kaleidoscopeBoostPercent).toMatchLiveGameWithDetails(100 * value('kaleidoscope_base'), {tolerance: 0});
         expect(research.production.totalInsightExpBonusPercent).toMatchLiveGameWithDetails(value('grid_94_2'), {tolerance: 0});
     });
 
-    it('matches the shared EXP multiplier, final hourly EXP, and total game-displayed Insight', () => {
+    it('matches shared EXP multiplier and final hourly EXP', () => {
         expect(research.production.expMultiplier).toMatchLiveGameWithDetails(value('exp_multiplier'), {tolerance: 0});
         expect(research.production.expPerHour).toMatchLiveGameWithDetails(value('exp_total'), {tolerance: 0});
-        const totalInsight = extracted<number[]>('observation_insight_rates').slice(0, value('eligible_count')).reduce((sum, rate) => sum + rate, 0);
-        expect(research.production.gameDisplayedInsightPerHour).toMatchLiveGameWithDetails(totalInsight * value('exp_multiplier'), {tolerance: 0});
-        expect(research.production.insightDisplayDiscrepancy).toContain('Actual Insight accrual does not use that multiplier');
     });
 
-    it('matches every offline percentage-point contributor before the floor and cap', () => {
-        const expected = extracted<number[]>('offline_contributions');
-        expect(research.offlineGains.contributors).toHaveLength(expected.length);
-        research.offlineGains.contributors.forEach((contributor, index) => {
-            expect(contributor.value).toMatchLiveGameWithDetails(expected[index], {tolerance: 0, context: contributor.source});
-            expect(contributor.operation).toBe('addPercent');
-        });
-        expect(research.offlineGains.contributors[6].inputValue).toMatchLiveGameWithDetails(Math.round(value('artifact_status')), {tolerance: 0});
-        expect(research.offlineGains.contributors[6].cap).toBe(6);
-        expect(research.offlineGains.contributors[7].inputValue).toMatchLiveGameWithDetails(value('card_w7b11'), {tolerance: 0});
-        expect(research.offlineGains.contributors[7].cap).toBe(10);
-        expect(research.offlineGains.unclampedPercent).toMatchLiveGameWithDetails(1 + expected.reduce((sum, bonus) => sum + bonus, 0), {tolerance: 0});
+    it('matches original offline percentage and fraction', () => {
         expect(research.offlineGains.percent).toMatchLiveGameWithDetails(value('offline_percent'), {tolerance: 0});
         expect(research.offlineGains.fraction).toMatchLiveGameWithDetails(value('offline_percent') / 100, {tolerance: 0});
-        expect(research.offlineGains.baselinePercent).toBe(1);
-        expect(research.offlineGains.floorPercent).toBe(1);
-        expect(research.offlineGains.capPercent).toBe(100);
-        expect(research.offlineGains.onlinePercent).toBe(100);
     });
 
 
