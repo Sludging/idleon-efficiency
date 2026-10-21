@@ -3,9 +3,8 @@
  *
  * Tests our AtomCollider cost and max level calculations against live game data.
  *
- * Max Level Formula:
- *   20 + (10 * superbit23) + compass53 + (20 * eventShop28_owned)
- *
+ * Maximum level: round the sum of 20 base levels, 10 times the Superbit cap bonus,
+ * the Compass cap bonus, 20 levels when the Event Shop item is owned, and the Menagerie cap bonus.
  * Cost Formula:
  *   costReduction = 1 / (1 + totalBonus / 100)
  *   where totalBonus = paletteBonus35 + stampDiscount + nenoBonus + (10 * superbit21) + grimoireBonus51
@@ -40,7 +39,10 @@ describe('AtomCollider Domain - Cost and Max Level Calculations', () => {
       const liveMaxLevel = getExtractedValue(extractionResults, 'atom_max_level');
       const domainMaxLevel = collider.atoms[0].getMaxLevel();
 
-      expect(domainMaxLevel).toMatchLiveGame(liveMaxLevel, 0);
+      expect(domainMaxLevel).toMatchLiveGameWithDetails(liveMaxLevel, {
+        tolerance: 0,
+        context: 'Atom Collider maximum upgrade level for Hydrogen',
+      });
     });
   });
 

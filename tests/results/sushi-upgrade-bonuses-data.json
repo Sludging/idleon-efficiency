@@ -1,0 +1,35 @@
+{
+  "extractions": {
+    "sushi_upgrade_bonuses": {
+      "expression": "(()=>{const selected=idleon.getAttr(\"Spelunk\")[52]||[];const indexes=Array.from(new Set([0,1,20,21,22,...selected]));return indexes.map(index=>({index,selected:selected.includes(index),quantity:idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",index,0)}))})()",
+      "result": [
+        {
+          "index": 0,
+          "selected": false,
+          "quantity": 40
+        },
+        {
+          "index": 1,
+          "selected": false,
+          "quantity": 28700
+        },
+        {
+          "index": 20,
+          "selected": false,
+          "quantity": 8
+        },
+        {
+          "index": 21,
+          "selected": false,
+          "quantity": 9
+        },
+        {
+          "index": 22,
+          "selected": false,
+          "quantity": 2
+        }
+      ]
+    }
+  },
+  "errors": {}
+}

@@ -1,0 +1,11 @@
+{
+  "description": "Effective Sushi Station upgrade bonuses, including Menagerie doubling.",
+  "target": "Sushi Station upgrade bonuses",
+  "extractions": [
+    {
+      "label": "sushi_upgrade_bonuses",
+      "expression": "(()=>{const selected=idleon.getAttr(\"Spelunk\")[52]||[];const indexes=Array.from(new Set([0,1,20,21,22,...selected]));return indexes.map(index=>({index,selected:selected.includes(index),quantity:idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",index,0)}))})()",
+      "description": "Effective Sushi Station upgrade bonuses, including any Menagerie doubling."
+    }
+  ]
+}
