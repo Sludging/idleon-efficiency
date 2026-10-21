@@ -1,6 +1,7 @@
 /**
  * The Family Guy talent (144) boosts the winning character's Family Class
- * Bonus; this comparison isolates that player-specific website input.
+ * Bonus. These comparisons isolate its player-specific value and the account-wide
+ * highestFamilyGuy input used by Divine Knight and Siege Breaker.
  */
 import {
   ExtractionResults,
@@ -11,8 +12,8 @@ import {
 import { loadGameDataFromSave } from "../../utils/cloudsave-loader";
 import { ParameterTestSpec } from "../../utils/parameter-test-config";
 import { getTargetPlayer } from '../../utils/target-player';
-import { Player } from "../../../data/domain/player";
-
+import { Family } from "../../../data/domain/family";
+import { ClassIndex } from "../../../data/domain/talents";
 
 const saveName = "latest";
 const extractionResultsName = "family-class-bonus-data.json";
@@ -37,6 +38,12 @@ describe("Family Domain - Class Bonus - Parameters", () => {
   it(`validates ${parameterSpecs.description}`, () => {
     const liveValue = getExtractedValue(extractionResults, parameterSpecs.extractionKey);
     const domainValue = parameterSpecs.domainExtractor(gameData);
+    expect(domainValue).toMatchLiveGame(liveValue, 0);
+  });
+  it("validates account-wide highest Family Guy bonus used by Divine Knight and Siege Breaker", () => {
+    const liveValue = getExtractedValue(extractionResults, "family_guy_special_144");
+    const family = gameData.get("family") as Family;
+    const domainValue = family.getClassBonus(ClassIndex.Divine_Knight)!.highestFamilyGuy;
     expect(domainValue).toMatchLiveGame(liveValue, 0);
   });
 });

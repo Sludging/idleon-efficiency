@@ -35,10 +35,6 @@
     "sticker_event_shop_bonus": {
       "expression": "idleon.callFunction(\"Summoning\",\"EventShopOwned\",37,0)",
       "result": 0
-    },
-    "sticker_superbit_bonus": {
-      "expression": "idleon.callFunction(\"GamingStatType\",\"SuperBitType\",62,0)",
-      "result": 0
     }
   },
   "errors": {}

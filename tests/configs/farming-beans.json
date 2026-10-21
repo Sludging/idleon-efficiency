@@ -8,11 +8,6 @@
       "description": "BeanTradeQTY market upgrade multiplier input"
     },
     {
-      "label": "farming_ninja_emporium_15_bonus",
-      "expression": "idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 15, 0)",
-      "description": "BeanTradeQTY Sneaking Emporium multiplier input"
-    },
-    {
       "label": "farming_exotic_bonus_16",
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 16, 0)",
       "description": "BeanTradeQTY Legumioso I multiplier input"

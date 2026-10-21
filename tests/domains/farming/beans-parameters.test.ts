@@ -1,5 +1,4 @@
 import { Farming } from '../../../data/domain/world-6/farming';
-import { Sneaking } from '../../../data/domain/world-6/sneaking';
 import { UpgradeVault } from '../../../data/domain/upgradeVault';
 import { getExtractedValue, loadExtractionResults, validateExtractionHealth, type ExtractionResults } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
@@ -13,11 +12,6 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
     description: 'Basket market upgrade 6 bonus percentage',
     extractionKey: 'farming_market_upgrade_6_bonus',
     domainExtractor: gameData => (gameData.get('farming') as Farming).getMarketUpgradeBonusValue(6),
-  },
-  emporiumUpgrade15: {
-    description: 'Sneaking Emporium upgrade 15 ownership',
-    extractionKey: 'farming_ninja_emporium_15_bonus',
-    domainExtractor: gameData => Number((gameData.get('sneaking') as Sneaking).jadeUpgrades.find(upgrade => upgrade.index === 15)?.purchased ?? false),
   },
   exoticBonus16: {
     description: 'Legumioso I bean bonus percentage',

@@ -4,10 +4,6 @@
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"BasketUpgQTY\", 0, 6)",
       "result": 352
     },
-    "farming_ninja_emporium_15_bonus": {
-      "expression": "idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 15, 0)",
-      "result": 1
-    },
     "farming_exotic_bonus_16": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 16, 0)",
       "result": 42.70315091210614
