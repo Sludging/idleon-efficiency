@@ -23,6 +23,8 @@ import { Stamp } from '../../../data/domain/world-1/stamps';
 import { Lab } from '../../../data/domain/world-4/lab';
 import { Summoning } from '../../../data/domain/world-6/summoning';
 import { Hole } from '../../../data/domain/world-5/hole/hole';
+import { Card } from '../../../data/domain/cards';
+import { Menagerie } from '../../../data/domain/menagerie';
 
 const saveName = 'latest';
 const extractionResultsName = 'cooking-speed-data.json';
@@ -265,6 +267,33 @@ const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
     domainExtractor: (gameData) => {
       const cooking = gameData.get("cooking") as Cooking;
       return cooking.getMealBonusForKey("KitchenEff");
+    }
+  },
+
+  ceramicCardBonus: {
+    description: 'Ceramic Spirit passive card contribution to kitchen speed',
+    extractionKey: 'ceramic_card_cooking_speed_bonus',
+    domainExtractor: (gameData) => {
+      const cards = gameData.get('cards') as Card[];
+      return cards.find(card => card.id === 'w6c1')?.getBonus() ?? 0;
+    }
+  },
+
+  trollCardBonus: {
+    description: 'Massive Troll passive card contribution to kitchen speed',
+    extractionKey: 'troll_card_cooking_speed_bonus',
+    domainExtractor: (gameData) => {
+      const cards = gameData.get('cards') as Card[];
+      return cards.find(card => card.id === 'Boss4A')?.getBonus() ?? 0;
+    }
+  },
+
+  menagerieCookingMultiplier: {
+    description: 'Menagerie bonus multiplier used in kitchen speed',
+    extractionKey: 'menagerie_cooking_multiplier',
+    domainExtractor: (gameData) => {
+      const menagerie = gameData.get('menagerie') as Menagerie;
+      return menagerie.getBonusMultiplier(4);
     }
   }
 };

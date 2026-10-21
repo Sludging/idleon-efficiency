@@ -112,6 +112,18 @@
     "meal_bonus_KitchenEff": {
       "expression": "idleon.callFunction(\"MealBonus\", \"KitchenEff\")",
       "result": 33778.950128615994
+    },
+    "ceramic_card_cooking_speed_bonus": {
+      "expression": "5 * idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w6c1\")",
+      "result": 30
+    },
+    "troll_card_cooking_speed_bonus": {
+      "expression": "6 * idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"Boss4A\")",
+      "result": 36
+    },
+    "menagerie_cooking_multiplier": {
+      "expression": "1 + idleon.callFunction(\"MenagerieStuff\", \"BoostQTY\", 4, 0) / 100",
+      "result": 1
     }
   },
   "errors": {}

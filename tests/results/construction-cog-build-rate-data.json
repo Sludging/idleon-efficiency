@@ -4,7 +4,7 @@
       "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 21, 0)",
       "result": {
         "type": "large_number",
-        "value": "1694739184535304400"
+        "value": "1634983912317483500"
       }
     }
   },

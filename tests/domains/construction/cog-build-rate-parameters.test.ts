@@ -1,3 +1,5 @@
+import type { Player } from '../../../data/domain/player';
+import { getCogPlayerBuildSpeed } from '../../../data/domain/world-3/construction/playerBuildSpeed';
 import { getCompanionActiveBonus, type Companion } from '../../../data/domain/companions';
 import type { Construction } from '../../../data/domain/world-3/construction/construction';
 import { getRoyalOutpostCogBuildSpeedMultiplier } from '../../../data/domain/world-3/construction/cog';
@@ -8,6 +10,7 @@ import type { ParameterTestSpec } from '../../utils/parameter-test-config';
 
 const saveName = 'latest';
 const extractionResultsName = 'construction-cog-build-rate-parameters-data.json';
+const playerBuildSpeedResultsName = 'construction-cog-player-build-speed-data.json';
 
 const parameterSpecs: Record<string, ParameterTestSpec> = {
   small_cog_build_speed_bonus: {
@@ -38,19 +41,33 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
 
 describe('Construction cog build rate parameters', () => {
   let extractionResults: ExtractionResults;
+  let playerBuildSpeedResults: ExtractionResults;
   let gameData: Map<string, any>;
 
   beforeAll(() => {
     extractionResults = loadExtractionResults(extractionResultsName);
     validateExtractionHealth(extractionResults);
+    playerBuildSpeedResults = loadExtractionResults(playerBuildSpeedResultsName);
+    validateExtractionHealth(playerBuildSpeedResults);
     gameData = loadGameDataFromSave(saveName);
   });
 
-  Object.entries(parameterSpecs).forEach(([, spec]) => {
+  Object.values(parameterSpecs).forEach(spec => {
     it(`matches ${spec.description}`, () => {
       const expected = getExtractedValue(extractionResults, spec.extractionKey);
       const actual = spec.domainExtractor(gameData);
       expect(actual).toMatchLiveGame(expected, 0);
     });
+  });
+
+  it.each([
+    { playerIndex: 3, extractionKey: 'player_build_speed_player_3' },
+    { playerIndex: 7, extractionKey: 'player_build_speed_player_7' },
+  ])('matches placed character $playerIndex build speed in active context 3', ({ playerIndex, extractionKey }) => {
+    const players = gameData.get('players') as Player[];
+    const expected = getExtractedValue(playerBuildSpeedResults, extractionKey);
+    const actual = getCogPlayerBuildSpeed(players[playerIndex], players[3], gameData);
+
+    expect(actual).toMatchLiveGame(expected, 0);
   });
 });
