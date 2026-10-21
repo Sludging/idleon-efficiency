@@ -418,7 +418,6 @@ function CoveView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
     const cove = hole.cove;
     const study = hole.studies[17];
     const effects = cove.accountEffects;
-    const [tab, setTab] = useState<"Resources" | "Upgrades">("Resources");
     const [filters, setFilters] = useState<FilterOptions>({
         hideLocked: false,
         hideMaxed: false,
@@ -460,13 +459,7 @@ function CoveView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
             },
             { label: "Random pickup double chance", value: percentage(effects.pickupRandomDoubleChance) }
         ]} />
-        <ContentTabs
-            options={[{ value: "Resources", label: "Resources" }, { value: "Upgrades", label: "Upgrades" }]}
-            value={tab}
-            onChange={setTab}
-        />
-        {tab === "Resources"
-            ? <Box direction="row" gap="small" wrap data-testid="cove-shapes">
+        <Box direction="row" gap="small" wrap data-testid="cove-shapes">
                 {cove.shapes.map(shape => {
                     const balance = shape.color === "blue"
                         ? cove.blueShapeBalances[shape.id]
@@ -493,8 +486,8 @@ function CoveView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
                         <Text size="xsmall">{value(balance)}</Text>
                     </Box>;
                 })}
-            </Box>
-            : <UpgradeTable
+        </Box>
+        <UpgradeTable
                 tableName="Cove upgrades"
                 columns={[
                     {
@@ -545,7 +538,7 @@ function CoveView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
                 showLockedAndMaxedFilters={false}
                 variant="panel"
                 minWidth="620px"
-            />}
+        />
         <CavernStudySummary study={study} onOpenStudies={onOpenStudies} />
     </Box>;
 }

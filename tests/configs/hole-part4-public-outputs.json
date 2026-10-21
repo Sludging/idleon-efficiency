@@ -1,0 +1,27 @@
+{
+  "name": "Hole part-four native public outputs",
+  "description": "Paired v1.23 Well bucket fill rate, Lamp wishes per day, and Harp power per hour from the regular latest save.",
+  "requiredActivePlayerIndex": 3,
+  "extractions": [
+    {
+      "label": "active_context",
+      "expression": "({ playerId: idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0]), playerName: idleon.getAttr(\"UserInfo\")[0], version: idleon.getGameVersion() })",
+      "description": "Active player and game version for the paired native outputs"
+    },
+    {
+      "label": "well_bucket_0_rate",
+      "expression": "idleon.callFunction(\"Holes\", \"BucketFillRate\", 0, 0)",
+      "description": "Hourly fill rate for the first Well bucket"
+    },
+    {
+      "label": "lamp_wishes_per_day",
+      "expression": "idleon.callFunction(\"Holes\", \"LampWishPerDay\", 0, 0)",
+      "description": "Average Wishes generated per day by the Lamp"
+    },
+    {
+      "label": "harp_power_per_hour",
+      "expression": "idleon.callFunction(\"Holes\", \"HarpPOWperHR\", 0, 0)",
+      "description": "Harp power generated per hour"
+    }
+  ]
+}

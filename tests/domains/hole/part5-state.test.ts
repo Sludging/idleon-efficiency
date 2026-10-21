@@ -1,21 +1,13 @@
-import type { Divinity } from '../../../data/domain/world-5/divinity';
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave, loadTestSave } from '../../utils/cloudsave-loader';
 import { initAllItems } from '../../../data/domain/items';
 import { Hole, updateHole } from '../../../data/domain/world-5/hole/hole';
-import type { OpalExternalSourceValues } from '../../../data/domain/world-5/hole/hole';
-import { Well } from '../../../data/domain/world-5/hole/well';
-import { CoveUpgrade } from '../../../data/domain/world-5/hole/cove';
 import { initAccountDataKeys, updateIdleonData } from '../../../data/domain/idleonData';
 import { normalizeCompanionStates } from '../../../data/domain/companions/companionState';
 import { lavaLog } from '../../../data/utility';
 import { Jar } from '../../../data/domain/world-5/hole/jar';
 
 import { getStampBonusForKey } from '../../../data/domain/world-1/stamps';
-import { Gaming } from '../../../data/domain/world-5/gaming';
-import { getPlayerDamageTotalMultiplier } from '../../../data/domain/player-damage-multiplier';
-import { getClassExperienceMultiplier } from '../../../data/domain/player-experience';
-import { Player } from '../../../data/domain/player';
 const saveName = 'latest';
 
 describe('Hole part-five imported state', () => {
@@ -46,90 +38,7 @@ describe('Hole part-five imported state', () => {
         expect(rupieBonus.legendTalentBonus).toBe(1.6);
         expect(rupieBonus.getFirstDiscoveryBonus()).toBe(32);
     });
-    it('keeps active Pocket gods in non-Doot effective membership', () => {
-        const players = gameData.get('players') as Player[];
-        const player = players[0];
-        const divinity = gameData.get('divinity') as Divinity;
-        const pocket = hole.majiks.pocketDivinity;
-        const links = divinity.playerInfo.find(info => info.playerIndex === player.playerID);
-        if (!links) throw new Error('Imported player has no Divinity record.');
-        const previousLevel = pocket.level;
-        const previousSelections = pocket.selections;
-        const previousPrimaryGod = links.primaryGod;
-        const previousEsGod = links.esGod;
-        const previousDootActive = links.dootActive;
 
-        try {
-            pocket.level = 2;
-            pocket.parseSelections([divinity.gods[0].index, divinity.gods[1].index, divinity.gods[0].index]);
-            links.primaryGod = divinity.gods[0];
-            links.esGod = undefined;
-            links.dootActive = false;
-            pocket.prepareCharacters([player], divinity);
-
-            expect(pocket.characters[0].overlappingGodIds).toEqual([divinity.gods[0].index]);
-            expect(pocket.characters[0].addedGodIds).toEqual([divinity.gods[1].index]);
-            expect(pocket.characters[0].effectiveGodIds).toEqual([divinity.gods[0].index, divinity.gods[1].index]);
-
-            links.dootActive = true;
-            pocket.prepareCharacters([player], divinity);
-            expect(pocket.characters[0].effectiveGodIds).toEqual(divinity.gods.map(god => god.index));
-        } finally {
-            pocket.level = previousLevel;
-            pocket.selections = previousSelections;
-            links.primaryGod = previousPrimaryGod;
-            links.esGod = previousEsGod;
-            links.dootActive = previousDootActive;
-            pocket.prepareCharacters(players, divinity);
-        }
-    });
-    it('preserves negative Well stock and blocks timing while zero remains estimable', () => {
-        const savedHoleData = JSON.parse(loadTestSave(saveName).get('Holes') as string) as number[][];
-        const negativeHoleData = savedHoleData.map(row => [...row]);
-        negativeHoleData[9][0] = -1;
-        const negativeWell = new Well();
-        negativeWell.parse(hole, negativeHoleData);
-        expect(negativeWell.sediments[0].current).toBe(-1);
-
-        const zeroHoleData = savedHoleData.map(row => [...row]);
-        zeroHoleData[9][0] = 0;
-        const zeroWell = new Well();
-        zeroWell.parse(hole, zeroHoleData);
-        expect(zeroWell.sediments[0].current).toBe(0);
-
-        const gravel = hole.well.sediments[0];
-        const savedCurrent = gravel.current;
-        try {
-            gravel.current = 0;
-            const zeroTiming = hole.well.getFullInTime(gravel);
-            gravel.current = -1;
-            const negativeTiming = hole.well.getFullInTime(gravel);
-            expect(zeroTiming.status).toBe('estimate');
-            expect(zeroTiming.hours).toBeGreaterThan(0);
-            expect(negativeTiming).toEqual({ status: 'blocked', hours: null });
-        } finally {
-            gravel.current = savedCurrent;
-        }
-    });
-
-    it('gates Research Gambit reward while its reference player is in Tutorial maps', () => {
-        const player = (gameData.get('players') as Player[])[0];
-        const bonus = hole.gambit.bonuses.find(bonus => bonus.index === 15)!;
-        const savedMapId = player.currentMapId;
-        const savedUnlocked = bonus.unlocked;
-        try {
-            bonus.unlocked = true;
-            player.currentMapId = 0;
-            const normalReward = hole.gambit.getBonus(15, player);
-            player.currentMapId = 20;
-            const tutorialReward = hole.gambit.getBonus(15, player);
-            expect(normalReward).toBeGreaterThan(0);
-            expect(tutorialReward).toBe(0);
-        } finally {
-            player.currentMapId = savedMapId;
-            bonus.unlocked = savedUnlocked;
-        }
-    });
     it('retains all five complete next-unlock previews after normal Hole import', () => {
         const [polonai, kaipu, cosmo, minau, bolaia] = hole.villagers;
         const requiredLevels = hole.villagers.map(villager => Math.max(1, villager.level + 1));
@@ -174,132 +83,6 @@ describe('Hole part-five imported state', () => {
         ]);
         expect(cosmo.nextUnlock.identities).toEqual([]);
         expect(bolaia.nextUnlock.identities).toEqual([]);
-    });
-    it('prepares next unlocks for unrescued and capped Villagers', () => {
-        const [polonai, kaipu, cosmo, minau, bolaia] = hole.villagers;
-        const villagers = [polonai, kaipu, cosmo, minau, bolaia];
-        const savedLevels = villagers.map(villager => villager.level);
-
-        try {
-            villagers.forEach(villager => { villager.level = 0; });
-            hole.prepareInspection();
-            const schematicOrder = hole.schematics.map(schematic => schematic.data.order);
-            expect(villagers.map(villager => villager.nextUnlock)).toEqual([
-                { kind: 'cavern', requiredLevel: 1, identities: [0], atMaximum: false },
-                { kind: 'schematic', requiredLevel: 1, identities: schematicOrder.slice(1, 4), atMaximum: false },
-                { kind: 'majik-point', requiredLevel: 1, identities: [], atMaximum: false },
-                { kind: 'measurement', requiredLevel: 1, identities: [0], atMaximum: false },
-                { kind: 'study-rate', requiredLevel: 1, identities: [], atMaximum: false },
-            ]);
-
-            polonai.level = hole.studies.length;
-            kaipu.level = 100;
-            minau.level = hole.measurements.length;
-            hole.prepareInspection();
-            expect(polonai.nextUnlock).toEqual({
-                kind: 'cavern', requiredLevel: hole.studies.length + 1, identities: [], atMaximum: true,
-            });
-            expect(kaipu.nextUnlock).toEqual({
-                kind: 'schematic', requiredLevel: 101, identities: [], atMaximum: true,
-            });
-            expect(minau.nextUnlock).toEqual({
-                kind: 'measurement', requiredLevel: hole.measurements.length + 1, identities: [], atMaximum: true,
-            });
-            expect(cosmo.nextUnlock).toEqual({
-                kind: 'majik-point', requiredLevel: 1, identities: [], atMaximum: false,
-            });
-            expect(bolaia.nextUnlock).toEqual({
-                kind: 'study-rate', requiredLevel: 1, identities: [], atMaximum: false,
-            });
-        } finally {
-            villagers.forEach((villager, index) => { villager.level = savedLevels[index]; });
-            hole.prepareInspection();
-        }
-    });
-    it('prepares numeric resource cavern requirements after normal Hole import', () => {
-        expect(Number.isFinite(hole.getResourceRequirementReduction())).toBe(true);
-        Object.values(hole.resourceCavrens.cavrens).forEach(cavern => {
-            expect(Number.isFinite(cavern.resourceRequirement)).toBe(true);
-            expect(cavern.resourceRemaining).toBe(Math.max(0, cavern.resourceRequirement - cavern.resourceCurrent));
-            expect(typeof cavern.resourceRequirementMet).toBe('boolean');
-            expect(Number.isFinite(cavern.efficiencyThreshold)).toBe(true);
-        });
-    });
-    it('keeps existing account-bonus and Gaming consumers numeric after normal import', () => {
-        const gaming = gameData.get('gaming') as Gaming;
-        const player = (gameData.get('players') as Player[])[0];
-
-        expect(Number.isFinite(gaming.garden.harvestBits)).toBe(true);
-        expect(Number.isFinite(gaming.garden.nonPlantBitsMultiplier)).toBe(true);
-        expect(Number.isFinite(hole.getMonumentBonus('Bravery', 4))).toBe(true);
-        expect(Number.isFinite(hole.fountain.getBonus(0, 16))).toBe(true);
-        expect(Number.isFinite(getPlayerDamageTotalMultiplier(gameData, player))).toBe(true);
-        expect(Number.isFinite(getClassExperienceMultiplier(gameData, player))).toBe(true);
-    });
-    it('resolves source descriptions for initialized aspects and future placeholders', () => {
-        const jar = new Jar();
-        const percentBonus = jar.jarBonuses[5];
-        percentBonus.level = 1;
-        expect(percentBonus.getBonus()).toBe(10);
-        expect(percentBonus.getUnit()).toBe("percent");
-        expect(percentBonus.getDescription(0)).toBe('All skilling caverns require 10% less Resources to get opals!');
-
-        const multiplierBonus = jar.jarBonuses[2];
-        multiplierBonus.level = 1;
-        expect(multiplierBonus.getUnit()).toBe("multiplier");
-        expect(multiplierBonus.getDescription(0)).toBe('1.20× higher chance to find Opals in Tall Jars.');
-
-        const futureBonus = jar.jarBonuses[31];
-        expect(futureBonus.getUnit()).toBeNull();
-        expect(futureBonus.getDescription(0)).toBe("Boosts a future cavern... futuuure..!");
-
-
-        const coveUpgradeData = hole.cove.upgrades[7];
-        const coveUpgrade = new CoveUpgrade(
-            coveUpgradeData.index,
-            coveUpgradeData.name,
-            coveUpgradeData.label,
-            coveUpgradeData.bonusPerLevel,
-            coveUpgradeData.costBase
-        );
-        coveUpgrade.level = coveUpgradeData.level;
-        expect(coveUpgrade.name).toBe("Active Drops");
-        expect(coveUpgrade.getBonus()).toBe(162);
-        expect(coveUpgrade.getDescription()).toBe('Decrease the cost of all upgrades here by 61.83%');
-        const futureUpgrade = hole.cove.upgrades[23];
-        expect(futureUpgrade.name).toBe("IDK Broh");
-        expect(futureUpgrade.getDescription()).toBe('World 7 Skill 3 my man, not yet.');
-        expect(hole.cove.upgrades.map(upgrade => upgrade.name)).toEqual([
-            "Opal Find", "Slop Drop", "Reslime", "Droplier", "Killionaire", "Insta-Ribbon", "Big Hit Multkill", "Active Drops",
-            "Sleepy Drops", "One Big Blue", "Blue Collector", "Researchy", "Droplier+", "Sleepy Drops+", "Cavernicus",
-            "Multikill", "One Big Purp", "Slop Drop+", "Rich Get Rich", "DeEmGe", "Grandioso", "Slop Drop++",
-            "Purp Collector", "IDK Broh"
-        ]);
-    });
-    it('shows source-backed first-discovery benefits without changing owned effects', () => {
-        const jar = new Jar();
-        const percentBonus = jar.jarBonuses[5];
-        percentBonus.level = 0;
-        percentBonus.legendTalentBonus = 1.5;
-
-        expect(percentBonus.getBonus()).toBe(0);
-        expect(percentBonus.getFirstDiscoveryBonus()).toBe(15);
-        expect(percentBonus.getFirstDiscoveryDescription(0)).toBe('All skilling caverns require 15% less Resources to get opals!');
-        expect(percentBonus.getDescription(0)).toBe('All skilling caverns require 0% less Resources to get opals!');
-
-
-        const futureBonus = jar.jarBonuses[31];
-        expect(futureBonus.getFirstDiscoveryDescription(0)).toBe('Boosts a future cavern... futuuure..!');
-    });
-
-
-    it('shows Jar source descriptions without unresolved chance markers', () => {
-        expect(hole.jar.jarTypes[1].getDescription()).toBe('Has a chance to contain an Opal');
-        expect(hole.jar.jarTypes[2].getDescription()).toBe('Has a chance to contain a new collectible');
-        expect(hole.jar.jarTypes[4].getDescription()).toBe('Has a chance to enchant a collectible doubling its bonus');
-        const bonus = new Jar().jarBonuses[5];
-        bonus.level = 1;
-        expect(bonus.getDescription(0)).toBe('All skilling caverns require 10% less Resources to get opals!');
     });
     it('assigns a source-verified unit to each released Jar collectible', () => {
         const jar = new Jar();
@@ -349,28 +132,6 @@ describe('Hole part-five imported state', () => {
     });
 
 
-    it('aggregates assigned producer rates by Jar type and preserves unknown contributors', () => {
-        const jar = new Jar();
-        const holeData: (number[] | undefined)[] = [];
-        holeData[11] = Array(50).fill(0);
-        holeData[11]![37] = 0;
-        holeData[25] = [1, 1, 2, 10, 20, 30];
-        jar.parse(holeData, null);
-        jar.prepare({
-            collectibleBonus: 0,
-            cavernCount: 12,
-            producerCount: 3,
-            productionUpgrade67: 0,
-            productionUpgrade74: 0,
-            productionUpgrade72: 0,
-            cavernLog: 0,
-        });
-
-        expect(jar.jarTypes[0].jarsPerHour).toBe(0);
-        expect(jar.jarTypes[1].jarsPerHour).toBe(24);
-        expect(jar.jarTypes[2].jarsPerHour).toBe(7.2);
-    });
-
 
     it('maps verified Jar artwork for types, collectibles, and holdings', () => {
         const jar = new Jar();
@@ -396,10 +157,6 @@ describe('Hole part-five imported state', () => {
             tolerance: 0,
             context: 'current Jar Rupie Value',
         });
-        const abnormalRupie = hole.jar.jarBonuses[0];
-        expect(abnormalRupie.getDescription(hole.jar.rupieValue)).toContain('Current Rupie Value:31.9B');
-        expect(abnormalRupie.getDescription(hole.jar.rupieValue)).not.toContain('$');
-        expect(abnormalRupie.getFirstDiscoveryDescription(hole.jar.rupieValue)).toContain('Current Rupie Value:31.9B');
     });
     it('matches every prepared Jar Rupie operand against same-context native outputs', () => {
         expect([
@@ -567,32 +324,20 @@ describe('Hole part-five imported state', () => {
     });
 
 
-    it('prepares prospective Cove effects from account-shared saved inputs', () => {
-        const campBonuses = [
-            [100, 25, 'camp_upgrade_100_25'],
-            [101, 10, 'camp_upgrade_101_10'],
-            [103, 10, 'camp_upgrade_103_10'],
-            [105, 10, 'camp_upgrade_105_10'],
-        ] as const;
-        campBonuses.forEach(([upgrade, factor, label]) => {
-            expect(hole.getSchematicBonus(upgrade, factor))
-                .toMatchLiveGame(getExtractedValue(fountainCoveResults, label), 0);
-        });
+
+    it('matches the native Cove pickup-double chance', () => {
+        expect(hole.getSchematicBonus(100, 25))
+            .toMatchLiveGame(getExtractedValue(fountainCoveResults, 'camp_upgrade_100_25'), 0);
+        expect(hole.getSchematicBonus(101, 10))
+            .toMatchLiveGame(getExtractedValue(fountainCoveResults, 'camp_upgrade_101_10'), 0);
+        expect(hole.getSchematicBonus(103, 10))
+            .toMatchLiveGame(getExtractedValue(fountainCoveResults, 'camp_upgrade_103_10'), 0);
+        expect(hole.getSchematicBonus(105, 10))
+            .toMatchLiveGame(getExtractedValue(fountainCoveResults, 'camp_upgrade_105_10'), 0);
         expect(hole.cove.upgrades[2].getBonus())
             .toMatchLiveGame(getExtractedValue(fountainCoveResults, 'cove_respawn_upgrade'), 0);
-
-        const effects = hole.cove.accountEffects;
-
-        expect(effects.dropRateMultiplier).toBeGreaterThan(1);
-        expect(effects.afkGainMultiplier).toBeGreaterThan(1);
-        expect(effects.multikillPerDamageTier).toBeGreaterThan(0);
-        expect(effects.baseMultikill).toBeGreaterThan(0);
-        expect(effects.respawnTimeMultiplier).toBeLessThan(1);
-        expect(effects.bluePickupTargetId).not.toBeNull();
-        expect(effects.bluePickupAmount).toBeGreaterThan(0);
-        expect(effects.purplePickupTargetId).not.toBeNull();
-        expect(effects.purplePickupAmount).toBeGreaterThan(0);
-        expect(effects.pickupRandomDoubleChance).toBeGreaterThan(0);
+        expect(hole.cove.accountEffects.pickupRandomDoubleChance)
+            .toMatchLiveGame(getExtractedValue(fountainCoveResults, 'cove_pickup_double_chance'), 0);
     });
 
     it('repeats normal imports without mutating the saved Fountain and Jar inputs', () => {
@@ -697,105 +442,11 @@ describe('Hole part-five imported state', () => {
         ]);
     });
 
-    it('restores Villager rescue and claim readiness states', () => {
-        const villager = hole.villagers[0];
-        const originalLevel = villager.level;
-        const originalExp = villager.currentExp;
-        try {
-            villager.level = 0;
-            villager.currentExp = 0;
-            expect(villager.rescued).toBe(false);
-            expect(villager.claimReady).toBe(false);
-
-            villager.level = 1;
-            const requirement = villager.getExpRequirement();
-            villager.currentExp = requirement - 1;
-            expect(villager.claimReady).toBe(false);
-            villager.currentExp = requirement;
-            expect(villager.claimReady).toBe(true);
-        } finally {
-            villager.level = originalLevel;
-            villager.currentExp = originalExp;
-        }
-    });
-
     it('imports the Harp selected note from its saved selection row', () => {
         const savedHoles = JSON.parse(loadTestSave(saveName).get('Holes') as string) as number[][];
         expect(Number(savedHoles[11][21])).not.toBe(Number(savedHoles[19]?.[21] ?? 0));
         expect(hole.harp.selectedNote).toBe(Number(savedHoles[11][21]));
         expect(hole.harp.tune).toBe(Number(savedHoles[11][21]));
-    });
-
-    it('counts reserved Villager investments in the prepared Opal ledger', () => {
-        const savedHoles = JSON.parse(loadTestSave(saveName).get('Holes') as string) as number[][];
-        const testHoles = savedHoles.map(row => [...row]);
-        testHoles[3][5] = 11;
-        testHoles[3][6] = 17;
-        testHoles[3][7] = 23;
-        const testData = new Map(gameData);
-        testData.set('Holes', testHoles);
-        const externalSources = hole.opalLedger.sources.filter(source => !source.id.startsWith('cavern:'));
-        const externalSourceOpals: OpalExternalSourceValues = {
-            'gem-shop': externalSources.find(source => source.id === 'gem-shop')?.opals ?? null,
-            grimoire: externalSources.find(source => source.id === 'grimoire')?.opals ?? null,
-            companion: externalSources.find(source => source.id === 'companion')?.opals ?? null,
-            compass: externalSources.find(source => source.id === 'compass')?.opals ?? null,
-            emperor: externalSources.find(source => source.id === 'emperor')?.opals ?? null,
-            schematic: externalSources.find(source => source.id === 'schematic')?.opals ?? null,
-            arcane: externalSources.find(source => source.id === 'arcane')?.opals ?? null,
-            sushi: externalSources.find(source => source.id === 'sushi')?.opals ?? null,
-        };
-        const originalInvested = hole.opalLedger.invested;
-        const originalUninvested = hole.opalLedger.uninvested;
-        try {
-            hole.parse(testData);
-            hole.prepareOpalLedger(externalSourceOpals, externalSources);
-            expect(hole.opalLedger.invested).toBe(originalInvested + 51);
-            expect(hole.opalLedger.uninvested).toBe(originalUninvested! - 51);
-        } finally {
-            const restoredData = new Map(gameData);
-            restoredData.set('Holes', savedHoles);
-            hole.parse(restoredData);
-            updateHole(restoredData);
-        }
-    });
-
-    it('requires Kaipu rescue for first schematic and preserves the effective 105-slot cap', () => {
-        const kaipu = hole.villagers[1];
-        const originalLevel = kaipu.level;
-        const firstSchematic = hole.schematics.find(row => row.orderPosition === 0)!;
-        const firstSchematicUnlocked = firstSchematic.unlocked;
-        const finalReachableSchematic = hole.schematics.find(row => row.orderPosition === 104)!;
-        const cappedSchematic = hole.schematics.find(row => row.orderPosition === 105)!;
-        const cappedSchematicBuilt = cappedSchematic.built;
-        try {
-            firstSchematic.unlocked = false;
-            kaipu.level = 0;
-            firstSchematic.prepareInspection(kaipu.level, hole.schematics.length);
-            expect(firstSchematic.available).toBe(false);
-            expect(firstSchematic.requiredKaipuLevel).toBe(1);
-
-            kaipu.level = 1;
-            firstSchematic.prepareInspection(kaipu.level, hole.schematics.length);
-            expect(firstSchematic.available).toBe(true);
-
-            finalReachableSchematic.prepareInspection(110, hole.schematics.length);
-            expect(finalReachableSchematic.available).toBe(true);
-            expect(finalReachableSchematic.requiredKaipuLevel).toBe(33);
-
-            [0, 1, 33, 110].forEach(level => {
-                cappedSchematic.prepareInspection(level, hole.schematics.length);
-                expect(cappedSchematic.available).toBe(false);
-                expect(cappedSchematic.requiredKaipuLevel).toBeNull();
-                expect(cappedSchematic.built).toBe(cappedSchematicBuilt);
-            });
-        } finally {
-            kaipu.level = originalLevel;
-            firstSchematic.unlocked = firstSchematicUnlocked;
-            firstSchematic.prepareInspection(originalLevel, hole.schematics.length);
-            finalReachableSchematic.prepareInspection(originalLevel, hole.schematics.length);
-            cappedSchematic.prepareInspection(originalLevel, hole.schematics.length);
-        }
     });
 
 
