@@ -8,6 +8,7 @@ import {
     Meter} from 'grommet'
 import ShadowBox from '../../../components/base/ShadowBox';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import useHydrated from '../../../lib/hooks/useHydrated';
 import { useShallow } from 'zustand/react/shallow';
 import { TomeLine, Tome as TomeDomain, TomeScoreColors } from '../../../data/domain/world-4/tome';
 import { CircleInformation } from 'grommet-icons';
@@ -73,17 +74,19 @@ const LineDisplay = ({ line, playerIndex, totalAccountLevel }: { line: TomeLine,
 }
 
 function TomeDisplay() {
+    const hydrated = useHydrated();
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
     const tome = theData.get("tome") as TomeDomain;
     const players = theData.get("players") as Player[];
 
-    if (!tome || !players || players.length == 0) {
-        return null;
+    if (!hydrated) {
+        return <>Loading...</>;
     }
 
     const rank = tome.getScoreRankingDisplay();
+    const highestScorePlayer = players[tome.highestScoreIndex];
 
     return (
         <Box gap='medium'>
@@ -91,25 +94,17 @@ function TomeDisplay() {
                 <Heading level='2' size='medium' style={{ fontWeight: 'normal' }}>The Tome</Heading>
                 <Text size="xsmall">* Score displayed (and used across the site for calculations based on The Tome) is the highest score across all your characters for simplicity's sake as some values are calculated per character</Text>
             </Box>
-            {
-            tome.unlocked ?
+            <Box>
                 <Box>
-                    <Box>
-                        <Text>Total score (using {players[tome.highestScoreIndex].playerName}) : {tome.getHighestScore()}{rank != '' ? ` (${rank})` : ''}</Text>
-                    </Box>
-                    <Grid columns={{ size: 'auto', count: 2 }} gap='small'>
-                        {
-                            tome.lines.map((line, index) => <LineDisplay key={index} line={line} playerIndex={tome.highestScoreIndex} totalAccountLevel={tome.totalAccountLevel} />)
-                        }
-                    </Grid>
+                    <Text>Total score{highestScorePlayer ? ` (using ${highestScorePlayer.playerName})` : ''} : {tome.getHighestScore()}{rank != '' ? ` (${rank})` : ''}</Text>
                 </Box>
-                :
-                <Box>
-                    <Box>
-                        <Text>The Tome isn't unlocked yet</Text>
-                    </Box>
-                </Box>
-            }
+                {!tome.unlocked && <Text>The Tome isn't unlocked yet</Text>}
+                <Grid columns={{ size: 'auto', count: 2 }} gap='small'>
+                    {
+                        tome.lines.map((line, index) => <LineDisplay key={index} line={line} playerIndex={tome.highestScoreIndex} totalAccountLevel={tome.totalAccountLevel} />)
+                    }
+                </Grid>
+            </Box>
         </Box>
     )
 }
