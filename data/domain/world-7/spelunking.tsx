@@ -27,7 +27,8 @@ import { Companion, getCompanionActiveBonus } from "../companions";
 import type { Storage } from "../storage";
 import type { TaskBoard } from "../tasks";
 import type { Sailing } from "../world-5/sailing/sailing";
-import type { Rift, SkillMastery } from "../world-4/rift";
+import type { StaticRepositories } from "../repositories";
+import { SkillMastery, type Rift } from "../world-4/rift";
 import type { RoyalArmory } from "../world-6/royalArmory/royalArmory";
 import type { Card } from "../cards";
 import type { Alchemy } from "../world-2/alchemy/alchemy";
@@ -617,7 +618,7 @@ export class SpelunkingElixirs {
     equippedSlots: number[] = [];
     memorizedIndices: number[] = [];
     ownedCount: number = 0;
-    slotLimit: number = 0;
+    slotLimit: number = 1;
     duplicateLimit: number = 0;
     memorizeLimit: number = 0;
     private upgradeConsumptionReduction: number = 0;
@@ -639,7 +640,7 @@ export class SpelunkingElixirs {
         this.equippedSlots = [];
         this.memorizedIndices = [];
         this.ownedCount = 0;
-        this.slotLimit = 0;
+        this.slotLimit = 1;
         this.duplicateLimit = 0;
         this.memorizeLimit = 0;
         this.upgradeConsumptionReduction = 0;
@@ -802,6 +803,22 @@ export class Spelunking extends Domain {
     readonly baseHourlyRecharge: number = 5;
     additiveRechargeContributors: RechargeContributor[] = [];
     rechargeMultiplierContributors: RechargeContributor[] = [];
+    private rechargeSourceContributors!: {
+        additive: {
+            upgrade: RechargeContributor;
+            alchemyBubble: RechargeContributor;
+            chapterThree: RechargeContributor;
+            chapterSix: RechargeContributor;
+            skillMastery: RechargeContributor;
+            card: RechargeContributor;
+        };
+        multiplier: {
+            meritocracy: RechargeContributor;
+            legendTalent: RechargeContributor;
+            royalArmory: RechargeContributor;
+            sushi: RechargeContributor;
+        };
+    };
     hourlyRecharge: number = this.baseHourlyRecharge;
     private mineheadDepthChargeCellLevel = 0;
 
@@ -954,7 +971,8 @@ export class Spelunking extends Domain {
     }
 
 
-    init(allItems: Item[], charCount: number) {
+    /** Prepare neutral catalogue state before save parsing; account-derived values are replaced during presentation processing. */
+    init(allItems: Item[], charCount: number, repositories: StaticRepositories) {
         this.chapters = Chapter.fromBase(initSpelunkingChapterRepo(), allItems);
         this.upgrades = Upgrade.fromBase(initSpelunkingUpgradeRepo());
         this.tools = SpelunkingTool.fromBase(initSpelunkingToolRepo());
@@ -985,8 +1003,58 @@ export class Spelunking extends Domain {
         this.stamina = Array.from({ length: charCount }, (_, playerID) => new SpelunkingStamina(playerID));
         this.dailyReadLimit = 5;
         this.dailyReadsUsed = 0;
-        this.additiveRechargeContributors = [];
-        this.rechargeMultiplierContributors = [];
+        const bubble = repositories.get("Bubble")
+            .flatMap(cauldron => cauldron.data.bubbles)
+            .find(entry => entry.bonusKey === "Y11")!;
+        const upgradeFiveName = repositories.get("SpelunkingUpgrade")
+            .find(upgrade => upgrade.index === 5)!.data.name;
+        const chapterThreePage = this.chapters[2].pageItem.displayName;
+        const chapterSixPage = this.chapters[5].pageItem.displayName;
+        const rechargeCard = repositories.get("EnemyDetails")
+            .find(enemy => enemy.id === "w7a10")!.data.Name;
+        const contributors = {
+            additive: {
+                upgrade: { source: upgradeFiveName, value: 0 },
+                alchemyBubble: { source: bubble.name, value: 0 },
+                chapterThree: { source: chapterThreePage, value: 0 },
+                chapterSix: { source: chapterSixPage, value: 0 },
+                skillMastery: { source: SkillMastery.displayName, value: 0 },
+                card: { source: rechargeCard, value: 0 },
+            },
+            multiplier: {
+                meritocracy: {
+                    source: repositories.get("MeritocratyBonus").find(bonus => bonus.index === 17)!.data.text,
+                    value: 1,
+                },
+                legendTalent: {
+                    source: repositories.get("LegendTalents").find(talent => talent.index === 30)!.data.name,
+                    value: 1,
+                },
+                royalArmory: {
+                    source: repositories.get("RoyalArmoryUpgrade").find(upgrade => upgrade.index === 79)!.data.name,
+                    value: 1,
+                },
+                sushi: {
+                    source: repositories.get("Sushi").find(entry => entry.index === 11)!.data.name,
+                    value: 1,
+                },
+            },
+        };
+        this.rechargeSourceContributors = contributors;
+        this.additiveRechargeContributors = [
+            contributors.additive.upgrade,
+            contributors.additive.alchemyBubble,
+            contributors.additive.chapterThree,
+            contributors.additive.chapterSix,
+            contributors.additive.skillMastery,
+            contributors.additive.card,
+        ];
+        this.rechargeMultiplierContributors = [
+            contributors.multiplier.meritocracy,
+            contributors.multiplier.legendTalent,
+            contributors.multiplier.royalArmory,
+            contributors.multiplier.sushi,
+        ];
         this.hourlyRecharge = this.baseHourlyRecharge;
         this.trackometerLevel = 0;
         this.trackometer.fill = 0;
@@ -1002,6 +1070,8 @@ export class Spelunking extends Domain {
         this.biggestHaulDigitTotal = 0;
         this.grandDiscoveryCount = 0;
         this.ownedEpilogueCount = 0;
+        this.prepareUpgradeBonuses();
+        this.prepareUpgradePrices({ talentDiscount: 1, mealDiscount: 1, retention: 1 });
         return this;
     }
 
@@ -1064,7 +1134,68 @@ export class Spelunking extends Domain {
         spelunking.prismaDropChanceDenominator = 100 * Math.pow(1.5, spelunking.prismaBubblesFound)
             / (1 + spelunking.getUpgradeBonus(28) / 100);
     }
+
+    prepareUpgradeBonuses(): void {
+        const sourceBonusInputs: UpgradeSourceBonusInputs = {
+            spelunkingSkillLevelTotal: this.spelunkingSkillLevelTotal,
+            ordinaryDiscoveryCount: this.getTotalDiscoveries(),
+            bestDepthTotal: this.bestDepthTotal,
+            biggestHaulDigitTotal: this.biggestHaulDigitTotal,
+            grandDiscoveryCount: this.grandDiscoveryCount,
+            manicTotalDepth: this.manic.totalDepth,
+            trackometerLevel: this.trackometerLevel,
+        };
+        for (const upgrade of this.upgrades) {
+            upgrade.updateSourceBonus(sourceBonusInputs);
+        }
+        this.manic.prepareUpgradeBonuses(
+            this.upgrades.find(upgrade => upgrade.index === 54)!.sourceBonus,
+            this.upgrades.find(upgrade => upgrade.index === 55)!.sourceBonus,
+            this.upgrades.find(upgrade => upgrade.index === 56)!.sourceBonus
+        );
+        this.trackometer.prepareUpgradeBonuses(
+            this.upgrades.find(upgrade => upgrade.index === 59)!.sourceBonus,
+            this.upgrades.find(upgrade => upgrade.index === 60)!.sourceBonus,
+            this.upgrades.find(upgrade => upgrade.index === 61)!.sourceBonus
+        );
+    }
+    updateRechargeContributors(values: {
+        additive: {
+            upgrade: number;
+            alchemyBubble: number;
+            chapterThree: number;
+            chapterSix: number;
+            skillMastery: number;
+            card: number;
+        };
+        multiplier: {
+            meritocracy: number;
+            legendTalent: number;
+            royalArmory: number;
+            sushi: number;
+        };
+    }): void {
+        const { additive, multiplier } = this.rechargeSourceContributors;
+        additive.upgrade.value = values.additive.upgrade;
+        additive.alchemyBubble.value = values.additive.alchemyBubble;
+        additive.chapterThree.value = values.additive.chapterThree;
+        additive.chapterSix.value = values.additive.chapterSix;
+        additive.skillMastery.value = values.additive.skillMastery;
+        additive.card.value = values.additive.card;
+        multiplier.meritocracy.value = values.multiplier.meritocracy;
+        multiplier.legendTalent.value = values.multiplier.legendTalent;
+        multiplier.royalArmory.value = values.multiplier.royalArmory;
+        multiplier.sushi.value = values.multiplier.sushi;
+        const additiveRecharge = this.additiveRechargeContributors
+            .reduce((total, contributor) => total + contributor.value, 0);
+        // Multiply from the base to preserve the existing left-to-right operation order.
+        this.hourlyRecharge = this.rechargeMultiplierContributors.reduce(
+            (rate, contributor) => rate * contributor.value, this.baseHourlyRecharge
+        ) * (1 + additiveRecharge / 100);
+    }
 }
+
+
 
 export const updateSpelunkingChapterBonuses = (data: Map<string, any>): void => {
     const spelunking = data.get("spelunking") as Spelunking;
@@ -1081,7 +1212,7 @@ export const updateSpelunkingPresentation = (data: Map<string, any>): void => {
     const taskBoard = data.get("taskboard") as TaskBoard;
     const companions = data.get("companions") as Companion[];
     const rift = data.get("rift") as Rift;
-    const mastery = rift.bonuses.find(bonus => bonus.name === "Skill Mastery") as SkillMastery;
+    const mastery = rift.bonuses.find(bonus => bonus.name === SkillMastery.displayName) as SkillMastery;
     const bigFish = data.get("bigFish") as BigFish;
     const meritocracy = data.get("meritocraty") as Meritocraty;
     const legendTalents = data.get("legendTalents") as LegendTalents;
@@ -1111,32 +1242,10 @@ export const updateSpelunkingPresentation = (data: Map<string, any>): void => {
     }
     spelunking.bestDepthTotal = bestDepthTotal;
     spelunking.biggestHaulDigitTotal = biggestHaulDigitTotal;
-    const ordinaryDiscoveryCount = spelunking.getTotalDiscoveries();
     spelunking.grandDiscoveryCount = spelunking.grandSummary.found;
     spelunking.deepPocketsMultiplier = 1 + 7 * spelunking.getUpgradeBonus(21) / 100;
 
-    const sourceBonusInputs: UpgradeSourceBonusInputs = {
-        spelunkingSkillLevelTotal: skillLevelTotal,
-        ordinaryDiscoveryCount,
-        bestDepthTotal,
-        biggestHaulDigitTotal,
-        grandDiscoveryCount: spelunking.grandDiscoveryCount,
-        manicTotalDepth: spelunking.manic.totalDepth,
-        trackometerLevel: spelunking.trackometerLevel,
-    };
-    for (const upgrade of spelunking.upgrades) {
-        upgrade.updateSourceBonus(sourceBonusInputs);
-    }
-    spelunking.manic.prepareUpgradeBonuses(
-        spelunking.upgrades.find(upgrade => upgrade.index === 54)!.sourceBonus,
-        spelunking.upgrades.find(upgrade => upgrade.index === 55)!.sourceBonus,
-        spelunking.upgrades.find(upgrade => upgrade.index === 56)!.sourceBonus
-    );
-    spelunking.trackometer.prepareUpgradeBonuses(
-        spelunking.upgrades.find(upgrade => upgrade.index === 59)!.sourceBonus,
-        spelunking.upgrades.find(upgrade => upgrade.index === 60)!.sourceBonus,
-        spelunking.upgrades.find(upgrade => upgrade.index === 61)!.sourceBonus
-    );
+    spelunking.prepareUpgradeBonuses();
     const savedPlayerNames = data.get("playerNames") as string[];
     const firstSavedUsernamePlayer = players.find(player => player.playerName === savedPlayerNames[0])!;
     const cooking = data.get("cooking") as Cooking;
@@ -1172,29 +1281,23 @@ export const updateSpelunkingPresentation = (data: Map<string, any>): void => {
     };
     // Mastery already returns the full reward amounts, not unlock indicators.
     spelunking.dailyReadLimit = 5 + mastery.getSkillBonus(SkillsIndex.Spelunking, 4);
-    const rechargeBubble = alchemy.cauldrons
-        .find(cauldron => cauldron.bubbles.some(bubble => bubble.data.bonusKey === "Y11"))!
-        .bubbles.find(bubble => bubble.data.bonusKey === "Y11")!;
     // Recharge uses the native card level; equipped card boosts do not apply.
-    spelunking.additiveRechargeContributors = [
-        { source: spelunking.upgrades.find(upgrade => upgrade.index === 5)!.data.name, value: upgrade5 },
-        { source: rechargeBubble.data.name, value: alchemy.getBubbleBonusForKey("Y11") },
-        { source: spelunking.chapters[2].pageItem.displayName, value: spelunking.chapters[2].bonuses[1].getBonus() },
-        { source: spelunking.chapters[5].pageItem.displayName, value: spelunking.chapters[5].bonuses[2].getBonus() },
-        { source: mastery.name, value: mastery.getSkillBonus(SkillsIndex.Spelunking, 5) },
-        { source: rechargeCard.displayName, value: Math.min(2 * nativeCardLevel, 20) },
-    ];
-    spelunking.rechargeMultiplierContributors = [
-        { source: meritocracy.bonuses.find(bonus => bonus.index === 17)!.data.text, value: 1 + meritocracy.getCurrentBonus(17) / 100 },
-        { source: legendTalents.talents.find(talent => talent.index === 30)!.data.name, value: 1 + legendTalents.getBonusFromIndex(30) / 100 },
-        { source: royalArmory.upgrades.find(upgrade => upgrade.index === 79)!.data.name, value: Math.max(1, royalArmory.getSpelunkingRechargeOutpostMultiplier()) },
-        { source: sushi.sushi.find(entry => entry.index === 11)!.data.name, value: 1 + sushi.getBonusFromIndex(11) / 100 },
-    ];
-    const additiveRecharge = spelunking.additiveRechargeContributors.reduce((total, contributor) => total + contributor.value, 0);
-    // Multiply from the base to preserve the existing left-to-right operation order.
-    spelunking.hourlyRecharge = spelunking.rechargeMultiplierContributors.reduce(
-        (rate, contributor) => rate * contributor.value, spelunking.baseHourlyRecharge
-    ) * (1 + additiveRecharge / 100);
+    spelunking.updateRechargeContributors({
+        additive: {
+            upgrade: upgrade5,
+            alchemyBubble: alchemy.getBubbleBonusForKey("Y11"),
+            chapterThree: spelunking.chapters[2].bonuses[1].getBonus(),
+            chapterSix: spelunking.chapters[5].bonuses[2].getBonus(),
+            skillMastery: mastery.getSkillBonus(SkillsIndex.Spelunking, 5),
+            card: Math.min(2 * nativeCardLevel, 20),
+        },
+        multiplier: {
+            meritocracy: 1 + meritocracy.getCurrentBonus(17) / 100,
+            legendTalent: 1 + legendTalents.getBonusFromIndex(30) / 100,
+            royalArmory: Math.max(1, royalArmory.getSpelunkingRechargeOutpostMultiplier()),
+            sushi: 1 + sushi.getBonusFromIndex(11) / 100,
+        },
+    });
 
     players.forEach(player => {
         spelunking.stamina[player.playerID].prepareMaximum(

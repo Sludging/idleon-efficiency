@@ -29,8 +29,8 @@ export default function SpelunkingContent() {
         theData: state.data.getData(),
         lastUpdated: state.lastUpdated,
     })));
-    const spelunking = theData.get('spelunking') as Spelunking | undefined;
-    const players = theData.get('players') as Player[] | undefined;
+    const spelunking = theData.get('spelunking') as Spelunking;
+    const players = theData.get('players') as Player[];
     const [tab, setTab] = useState<SpelunkingTab>('Tunnels');
     const contentRef = useRef<HTMLDivElement>(null);
     const pendingScroll = useRef<{ owner: HTMLElement; top: number } | null>(null);
@@ -59,12 +59,7 @@ export default function SpelunkingContent() {
             <Box direction="row" align="center" justify="between">
                 <Heading level="2" size="medium" margin={{ top: 'medium', bottom: 'small' }} style={{ fontWeight: 'normal' }}>Spelunking</Heading>
             </Box>
-            {!spelunking || !players || players.length === 0 ? (
-                <Box gap="small">
-                    <Text>Spelunking account data is not available.</Text>
-                    <Text size="small">Load an account save to view Spelunking data.</Text>
-                </Box>
-            ) : <Box ref={contentRef} gap="large" data-spelunking-tab-content>
+            <Box ref={contentRef} gap="large" data-spelunking-tab-content>
                 <SpelunkingSummary
                     spelunking={spelunking}
                     players={players}
@@ -122,7 +117,7 @@ export default function SpelunkingContent() {
                         </Box>
                     </Box>
                 </Box>
-            </Box>}
+            </Box>
         </Box>
     );
 }

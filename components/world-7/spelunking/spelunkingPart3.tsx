@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState } from 'react';
+import { useContext, useState } from 'react';
 import type { ReactNode } from 'react';
 import { Box, Meter, Text, ThemeContext } from 'grommet';
 import type { DataTableProps, ThemeType } from 'grommet';
@@ -293,28 +293,27 @@ export function SpelunkingShop({ spelunking }: SpelunkingPart3Props) {
         sortBy: 'default',
     });
     const theme = useContext(ThemeContext);
-    const rows = useMemo(() => {
-        const search = filters.searchText.trim().toLocaleLowerCase();
-        return spelunking.upgrades
-            .map((upgrade): ShopRow => ({
-                id: upgrade.index,
-                upgrade,
-                description: formatShopDescription(upgrade, spelunking),
-                totalBonus: formatShopTotalBonus(upgrade, spelunking),
-                locked: upgrade.level === -1,
-                maxed: upgrade.data.maxLevel !== 99999 && upgrade.level >= upgrade.data.maxLevel,
-            }))
-            .filter(row => !filters.hideLocked || !row.locked)
-            .filter(row => !filters.hideMaxed || !row.maxed)
-            .filter(row => search.length === 0
-                || row.upgrade.data.name.toLocaleLowerCase().includes(search)
-                || row.description.toLocaleLowerCase().includes(search))
-            .sort((left, right) => {
-                if (filters.sortBy === 'name') return left.upgrade.data.name.localeCompare(right.upgrade.data.name);
-                if (filters.sortBy === 'level') return right.upgrade.level - left.upgrade.level;
-                return left.upgrade.index - right.upgrade.index;
-            });
-    }, [filters, spelunking]);
+    const search = filters.searchText.trim().toLocaleLowerCase();
+    // Account imports mutate this domain, so cached rows can retain locked states.
+    const rows = spelunking.upgrades
+        .map((upgrade): ShopRow => ({
+            id: upgrade.index,
+            upgrade,
+            description: formatShopDescription(upgrade, spelunking),
+            totalBonus: formatShopTotalBonus(upgrade, spelunking),
+            locked: upgrade.level === -1,
+            maxed: upgrade.data.maxLevel !== 99999 && upgrade.level >= upgrade.data.maxLevel,
+        }))
+        .filter(row => !filters.hideLocked || !row.locked)
+        .filter(row => !filters.hideMaxed || !row.maxed)
+        .filter(row => search.length === 0
+            || row.upgrade.data.name.toLocaleLowerCase().includes(search)
+            || row.description.toLocaleLowerCase().includes(search))
+        .sort((left, right) => {
+            if (filters.sortBy === 'name') return left.upgrade.data.name.localeCompare(right.upgrade.data.name);
+            if (filters.sortBy === 'level') return right.upgrade.level - left.upgrade.level;
+            return left.upgrade.index - right.upgrade.index;
+        });
 
     const columns: NonNullable<DataTableProps<ShopRow>['columns']> = [
         {
