@@ -1,0 +1,11 @@
+{
+  "description": "Jelly Operator upgrade quantities, including Menagerie doubling.",
+  "target": "Jelly Operator upgrade quantities",
+  "extractions": [
+    {
+      "label": "jelly_upgrade_quantities",
+      "expression": "(()=>{const records=idleon.engine.getGameAttribute(\"CustomLists\").h.JellyUPG;return records.map((record,index)=>({index,quantity:idleon.callFunction(\"JellyOperation\",\"UpgradeQTY\",index,0)}))})()",
+      "description": "Jelly Operator upgrade quantities, including Menagerie doubling."
+    }
+  ]
+}

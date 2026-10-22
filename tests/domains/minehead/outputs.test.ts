@@ -1,5 +1,6 @@
 import { Minehead, MineheadOpponent } from '../../../data/domain/world-7/minehead';
 import {
+ normalizeExtractedValue,
  ExtractionResults,
  getExtractedValue,
  loadExtractionResults,
@@ -86,11 +87,17 @@ it('matches the multiplier-tile damage value shown in upgrade description', () =
 
  it.each([0, 9, 17])('matches opponent %i maximum HP and Depth Charges', (index) => {
   const opponent = getOpponent(minehead, index);
-  expect(opponent.maximumHp).toMatchLiveGameWithDetails(getExtractedValue(extractionResults, `opponent_${index}_max_hp`), {
+  const nativeMaximumHp = normalizeExtractedValue(
+   extractionResults.extractions.minehead_opponent_maximum_hp.result[index],
+  );
+  const nativeDepthCharges = normalizeExtractedValue(
+   extractionResults.extractions.minehead_opponent_depth_charges.result[index],
+  );
+  expect(opponent.maximumHp).toMatchLiveGameWithDetails(nativeMaximumHp, {
    tolerance: 0,
    context: `Minehead opponent ${index} maximum HP`,
   });
-  expect(opponent.depthCharges).toMatchLiveGameWithDetails(getExtractedValue(extractionResults, `opponent_${index}_depth_charges`), {
+  expect(opponent.depthCharges).toMatchLiveGameWithDetails(nativeDepthCharges, {
    tolerance: 0,
    context: `Minehead opponent ${index} Depth Charges`,
   });

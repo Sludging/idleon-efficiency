@@ -87,7 +87,7 @@ import { MasterClasses, updateMasterClasses } from './masterClasses';
 import { Bubba, updateBubba } from './world-3/bubba';
 import { CoralKid } from './world-7/coralKid';
 import { BigFish, updateBigFishUnlocked } from './world-7/bigFish';
-import { CoralReef, updateCoralReefDailyGain } from './world-7/coralReef';
+import { CoralReef, updateCoralReefDailyGain, updateCoralReefMaximumLevels } from './world-7/coralReef';
 import { DancingCoral } from './world-7/dancingCoral';
 import { Hoops } from './world-1/hoops';
 import { Darts } from './world-1/darts';
@@ -283,6 +283,8 @@ const postProcessingMap: Record<string, Function> = {
     "holeUpgradeEffects": (_doc: Cloudsave, accountData: Map<string, any>) => updateHoleUpgradeEffects(accountData),
     // Parse-owned Menagerie effects must be ready before the earliest recipient calculation.
     "menageriePrepared": (_doc: Cloudsave, accountData: Map<string, any>) => prepareMenagerie(accountData),
+    // Coral Reef maximum levels use parsed Menagerie unlocks before cap consumers run.
+    "coralReefMaximumLevels": (_doc: Cloudsave, accountData: Map<string, any>) => updateCoralReefMaximumLevels(accountData),
     // Clam Work uses parsed Menagerie state and must settle before post-post-processing consumers.
     "clamWorkOutputs": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateClamWorkOutputs(accountData),
     // Minehead rewards are account-wide inputs to downstream bonus consumers.

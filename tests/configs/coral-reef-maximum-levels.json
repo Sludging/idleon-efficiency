@@ -1,0 +1,11 @@
+{
+  "description": "Pillar Coral maximum-level unlock ownership.",
+  "target": "Pillar Coral maximum-level unlock",
+  "extractions": [
+    {
+      "label": "pillar_coral_maximum_level_unlock_owned",
+      "expression": "Number(idleon.callFunction(\"MenagerieStuff\", \"UnlockOwned\", 9, 0))",
+      "description": "Whether the account owns the Pillar Coral maximum-level unlock."
+    }
+  ]
+}

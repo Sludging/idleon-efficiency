@@ -2,7 +2,7 @@
 import { Minehead } from '../../../data/domain/world-7/minehead';
 import { SushiStation } from '../../../data/domain/world-7/sushi';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
+import { ExtractionResults, getExtractedValue, loadExtractionResults, normalizeExtractedValue, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
 
 const getUpgrade = (gameData: Map<string, any>, index: number) => {
@@ -22,21 +22,6 @@ const parameterSpecs: ParameterTestSpec[] = [
     extractionKey: `minehead_sushi_${index}`,
     domainExtractor: (gameData: Map<string, any>) => (gameData.get('sushi') as SushiStation).getBonusFromIndex(index),
   })),
-  {
-    description: "El' Cheapo Upgrado reduction to next-level Minehead shop costs",
-    extractionKey: 'minehead_upgrade_quantity_26',
-    domainExtractor: gameData => (gameData.get('minehead') as Minehead).getUpgradeBonus(26),
-  },
-  ...[0, 1, 29].map(index => ({
-    description: `Minehead upgrade ${index === 0 ? 'Base Damage I' : index === 1 ? 'Numbahs' : "Rift Guy's Upgrade"} calculated shop price`,
-    extractionKey: `minehead_upgrade_cost_${index}`,
-    domainExtractor: (gameData: Map<string, any>) => getUpgrade(gameData, index).nextLevelCost(),
-  })),
-  ...[20, 21].map(index => ({
-    description: `Research level requirement for Minehead ${index === 20 ? 'Classic Flags' : 'Mega Damage II'} account-wide shop unlock`,
-    extractionKey: `minehead_upgrade_requirement_${index}`,
-    domainExtractor: (gameData: Map<string, any>) => getUpgrade(gameData, index).getRequiredLevel(),
-  })),
 ];
 
 
@@ -54,6 +39,30 @@ describe('Minehead upgrades - direct parameters', () => {
     it(`validates ${spec.description}`, () => {
       const liveValue = getExtractedValue(extractionResults, spec.extractionKey);
       expect(spec.domainExtractor(gameData)).toMatchLiveGame(liveValue, 0);
+    });
+  });
+  it("validates El' Cheapo Upgrado reduction to next-level Minehead shop costs", () => {
+    const nativeValue = normalizeExtractedValue(
+      extractionResults.extractions.minehead_upgrade_quantities.result[26],
+    );
+    const domainValue = (gameData.get('minehead') as Minehead).getUpgradeBonus(26);
+    expect(domainValue).toMatchLiveGame(nativeValue, 0);
+  });
+  [0, 1, 29].forEach(index => {
+    it(`validates Minehead upgrade ${index} calculated shop price`, () => {
+      const nativeValue = normalizeExtractedValue(
+        extractionResults.extractions.minehead_upgrade_current_prices.result[index],
+      );
+      expect(getUpgrade(gameData, index).nextLevelCost()).toMatchLiveGame(nativeValue, 0);
+    });
+  });
+
+  [20, 21].forEach(index => {
+    it(`validates Minehead upgrade ${index} Research level requirement`, () => {
+      const nativeValue = normalizeExtractedValue(
+        extractionResults.extractions.minehead_upgrade_requirements.result[index],
+      );
+      expect(getUpgrade(gameData, index).getRequiredLevel()).toMatchLiveGame(nativeValue, 0);
     });
   });
 });
