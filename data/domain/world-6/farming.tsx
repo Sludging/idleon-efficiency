@@ -85,17 +85,12 @@ export class LandRankDataBase {
 
     updateBonusInputs(players: readonly Player[], plumpDatabaseBonus: number): void {
         this.resetBonusInputs();
-        let bestDankRanksBonus: number | undefined;
+        let bestDankRanksBonus = 1;
         for (const player of players) {
             // Candidates supply allocations and presets; each recipient supplies the final talent modifiers.
             const dankRanksBonus = Talent.getAccountTalentBonus(players, 207, player.finalTalentInputs);
             this.recipientDankRanksBonuses.set(player.playerID, dankRanksBonus);
-            bestDankRanksBonus = bestDankRanksBonus === undefined
-                ? dankRanksBonus
-                : Math.max(bestDankRanksBonus, dankRanksBonus);
-        }
-        if (bestDankRanksBonus === undefined) {
-            throw new Error("Land Rank bonuses require prepared player talent contexts.");
+            bestDankRanksBonus = Math.max(bestDankRanksBonus, dankRanksBonus);
         }
 
         // Account Farming displays project the strongest recipient, not a selected character.
@@ -143,14 +138,14 @@ export class LandRankUpgrade {
     level: number = 0;
     unlocked: boolean = false;
     maxLevel: number = 1;
-    private dankRanksBonus: number | undefined;
-    private plumpDatabaseBonus: number | undefined;
+    private dankRanksBonus: number = 1;
+    private plumpDatabaseBonus: number = 0;
 
     constructor(public index: number, public name: string, public bonusText: string, public bonus: number, public unlockThreshold: number, public fifthColumnBonus: boolean) { }
 
     resetBonusInputs(): void {
-        this.dankRanksBonus = undefined;
-        this.plumpDatabaseBonus = undefined;
+        this.dankRanksBonus = 1;
+        this.plumpDatabaseBonus = 0;
     }
 
     updateBonusInputs(dankRanksBonus: number, plumpDatabaseBonus: number): void {
@@ -159,9 +154,6 @@ export class LandRankUpgrade {
     }
 
     getUpgradeBonus = (dankRanksBonus?: number): number => {
-        if (this.dankRanksBonus === undefined || this.plumpDatabaseBonus === undefined) {
-            throw new Error("Land Rank bonus inputs are not prepared.");
-        }
         // Dank Ranks cannot reduce bonuses. An explicit recipient replaces only the display projection.
         const talentMultiplier = Math.max(1, dankRanksBonus === undefined ? this.dankRanksBonus : dankRanksBonus);
         const exoticMultiplier = 1 + this.plumpDatabaseBonus / 100;

@@ -59,7 +59,7 @@ export class PoppyUpgrade {
 
     constructor(public index: number, public data: ClickerUpgradeModel) { }
 
-    static fromBase(data : PoppyUpgradeBase[]) {
+    static fromBase(data: PoppyUpgradeBase[]) {
         return data.map(d => new PoppyUpgrade(d.index, d.data));
     }
 }
@@ -70,7 +70,7 @@ export class TarpitUpgrade {
 
     constructor(public index: number, public data: ClickerUpgradeModel) { }
 
-    static fromBase(data : PoppyUpgradeBase[]) {
+    static fromBase(data: PoppyUpgradeBase[]) {
         return data.map(d => new TarpitUpgrade(d.index, d.data));
     }
 }
@@ -80,7 +80,7 @@ export class Poppy extends Domain {
     tarpitUpgrades: TarpitUpgrade[] = [];
     bonuses: PoppyGlobalBonus[] = PoppyGlobalBonus.fromBase();
     fisherooBonuses: PoppyFisherooBonus[] = PoppyFisherooBonus.fromBase();
-    
+
     ownedFishes: number = 0;
     ownedTartarFishes: number = 0;
     totalProducedFishes: number = 0;
@@ -96,7 +96,7 @@ export class Poppy extends Domain {
     // Fish rate boost
     vaultUpgrade21: number = 0;
     meritoBonus12: number = 0;
-    gambitBonus8: number | null = 0;
+    gambitBonus8: number = 0;
     eventShopBonus52 = 0;
 
     // Fish-per-catch inputs
@@ -104,8 +104,7 @@ export class Poppy extends Domain {
     petArenaCrucBonus7 = 0;
     jellyBonus20 = 0;
     fountainWater1Upgrade18 = 0;
-    fishPerCatchInputsPrepared = false;
-    
+
     getCurrencyImageData(): ImageData {
         return { location: "ClickerFishCurrency", width: 72, height: 72 };
     }
@@ -126,7 +125,17 @@ export class Poppy extends Domain {
     parse(data: Map<string, any>): void {
         const poppy = data.get(this.getDataKey()) as Poppy;
         const optionList = data.get("OptLacc") as number[];
-        poppy.fishPerCatchInputsPrepared = false;
+
+        // Start this save with neutral account contributions.
+        poppy.companionBonus51 = 0;
+        poppy.legendTalent26 = 0;
+        poppy.meritoBonus12 = 0;
+        poppy.gambitBonus8 = 0;
+        poppy.eventShopBonus52 = 0;
+        poppy.vaultUpgrade45 = 0;
+        poppy.petArenaCrucBonus7 = 0;
+        poppy.jellyBonus20 = 0;
+        poppy.fountainWater1Upgrade18 = 0;
 
         poppy.ownedFishes = optionList[267] || 0;
         poppy.ownedTartarFishes = optionList[296] || 0;
@@ -177,9 +186,6 @@ export class Poppy extends Domain {
     }
 
     getFishPerCatch(): number {
-        if (!this.fishPerCatchInputsPrepared || this.gambitBonus8 === null) {
-            throw new Error("Poppy fish-per-catch inputs are not prepared");
-        }
 
         const fishLevel = this.getUpgradeLevel(7);
         let shinyMultiplier = 1;
@@ -257,7 +263,7 @@ export class Poppy extends Domain {
     }
 
     getGlobalBonusMulti(): number {
-        return 50 * this.getMegafishQuantity(1) + 50 * this.getMegafishQuantity(3) + 50 * this.getMegafishQuantity(6) + 50 * this.getMegafishQuantity(8) 
+        return 50 * this.getMegafishQuantity(1) + 50 * this.getMegafishQuantity(3) + 50 * this.getMegafishQuantity(6) + 50 * this.getMegafishQuantity(8)
             + 50 * Math.min(1, this.getMegafishQuantity(11)) + 25 * Math.max(0, this.getMegafishQuantity(11) - 1);
     }
 
@@ -266,7 +272,7 @@ export class Poppy extends Domain {
 
         if (!bonus) return 0;
 
-        return bonus.value * (1 + this.legendTalent26 / 100) * (1 + this.companionBonus51) * (1 + this.getGlobalBonusMulti() / 100) 
+        return bonus.value * (1 + this.legendTalent26 / 100) * (1 + this.companionBonus51) * (1 + this.getGlobalBonusMulti() / 100)
             * Math.max(0, Math.ceil((this.getUpgradeLevel(3) - bonus.index) / 7));
     }
 
@@ -327,7 +333,6 @@ export const updatePoppyFishPerCatch = (data: Map<string, any>) => {
     poppy.jellyBonus20 = jellyOperator.getObstructionBonus(20);
     poppy.fountainWater1Upgrade18 = hole.getFountainBonus(1, 18);
     poppy.meritoBonus12 = meritocraty.getCurrentBonus(12);
-    poppy.fishPerCatchInputsPrepared = true;
 
     return poppy;
 }
