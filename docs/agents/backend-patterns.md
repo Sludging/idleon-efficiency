@@ -27,6 +27,14 @@ For repository-backed concepts selected under [MODEL-01](../../CODING_STANDARDS.
 
 [`FriendBonus`](../../data/domain/friends.tsx) wraps generated `FriendBonusBase` data and owns active/account-level state and its bonus calculation. [`Meal`](../../data/domain/world-4/cooking.tsx) and [`MainframeBonus`](../../data/domain/world-4/lab.tsx) show other uses of website wrappers and `fromBase`. Keep generated repositories and models as game data sources; put website state and behavior in handwritten domain code.
 
+### Raw static repository catalogue
+
+Use `repositories.get('Item')` to read raw `ItemRepo` records as `DeepReadonly` data. The catalogue returns raw records, not website-owned wrappers; use wrappers only when a concept needs website state or behavior.
+
+The catalogue loads each repository lazily and freezes its records and nested data. Each `StaticRepositories` instance caches its own loaded records. Callers may migrate incrementally and do not need to preserve repository initialization order.
+
+Run `yarn repo:registry` to regenerate the typed registry. The `dev` and `build` scripts run this generator automatically, so new `*Repo.ts` files register before those commands start.
+
 ### Save-defined entities and relationships
 
 `Kitchen` holds kitchen state and behavior, and `Player` represents a character with its own state; neither needs repository inheritance merely to be a class. Sushi's `SushiBoardSlot` and `SushiFireplace` illustrate data-only relationships as typed records with named fields instead of untyped tuples in [`sushi.tsx`](../../data/domain/world-7/sushi.tsx).

@@ -1,3 +1,4 @@
+import type { StaticRepositories } from './repositories';
 import { Traps, updateTrapDisplayData } from './world-3/traps';
 import { Stamps, updateStampMaxCarry, updateStamps } from './world-1/stamps';
 import { Statues, updateStatueBonuses } from './world-1/statues';
@@ -252,13 +253,13 @@ export class IdleonData {
     }
 }
 
-export const initAccountDataKeys = (allItems: Item[]) => {
+export const initAccountDataKeys = (allItems: Item[], repositories: StaticRepositories) => {
     const accountData: Map<string, any> = new Map();
     accountData.set("itemsData", allItems);
     domainList.forEach(dataDomain => {
         if (!dataDomain.initialized) {
             const key = dataDomain.getDataKey();
-            const domainData = dataDomain.init(allItems, 0);
+            const domainData = dataDomain.init(allItems, 0, repositories);
             // This is to protect from mistakes of forgetting to return a value from init.
             if (!domainData) {
                 console.error("forgot to return data for init, key:", key);

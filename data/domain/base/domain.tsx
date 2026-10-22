@@ -1,6 +1,7 @@
 import { range } from "../../utility";
 import { Cloudsave } from "../cloudsave";
 import { Item } from "../items";
+import type { StaticRepositories } from "../repositories";
 
 const regex = /\{|\[/gm;
 
@@ -41,7 +42,7 @@ export abstract class Domain {
     }
 
     abstract getRawKeys(): RawData[];
-    abstract init(allItems: Item[], charCount: number): any;
+    abstract init(allItems: Item[], charCount: number, repositories: StaticRepositories): any;
     abstract parse(data: Map<string, any>): void;
   }
 

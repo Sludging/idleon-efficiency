@@ -1,5 +1,6 @@
 'use client'
 
+import { StaticRepositories } from '../../data/domain/repositories'
 import { type ReactNode, createContext, useState, useContext } from 'react'
 import { type StoreApi, useStore } from 'zustand'
 
@@ -24,7 +25,8 @@ export const AppDataStoreProvider = ({
 }: AppDataStoreProviderProps) => {
   const [store] = useState(() => {
     const allItems = initAllItems();
-    const initData = initAccountDataKeys(allItems)
+    const repositories = new StaticRepositories()
+    const initData = initAccountDataKeys(allItems, repositories)
     return createAppDataStore(initAppDataStore(initData))
   })
 

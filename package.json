@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --experimental-https",
-    "build": "next build && ./upload-static-assets.sh",
+    "repo:registry": "node scripts/generate-repositories.cjs",
+    "dev": "yarn repo:registry && next dev --experimental-https",
+    "build": "yarn repo:registry && next build && ./upload-static-assets.sh",
     "start": "next start",
     "lint": "eslint .",
     "ssl:setup": "node scripts/create-ssl-certs.js",
