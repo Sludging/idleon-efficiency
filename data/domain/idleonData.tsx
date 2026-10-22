@@ -62,7 +62,7 @@ import { SushiStation, updateSushiStation } from './world-7/sushi';
 import { Spelunking, updateSpelunkingChapterBonuses, updateSpelunkingPresentation } from './world-7/spelunking';
 import { ResearchGrid, updateResearchGrid, updateResearchDisplay } from './world-7/research';
 import { Minehead, updateMinehead, updateMineheadDropRate, updateMineheadDailyTries, updateMineheadBaseDamage, updateMineheadDepthCharges, updateMineheadCurrencyGain } from './world-7/minehead';
-import { Glimbo } from './world-7/glimbo';
+import { Glimbo, updateGlimbo } from './world-7/glimbo';
 import { JellyOperator, updateJellyOperator, updateJellyOperatorPresentation } from './world-7/jellyOperator';
 import { Button, updateButton } from './world-7/button';
 import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './starsigns';
@@ -300,6 +300,7 @@ const postProcessingMap: Record<string, Function> = {
     "gamingSuperbitImpacts": (doc: Cloudsave, accountData: Map<string, any>) => updateSuperbitImpacts(accountData),
     // Research consumes parsed companion, Equinox, and Sushi state before downstream consumers calculate.
     "researchGrid": (doc: Cloudsave, accountData: Map<string, any>) => updateResearchGrid(accountData),
+    "glimbo": (_doc: Cloudsave, accountData: Map<string, any>) => updateGlimbo(accountData),
     "mineheadDailyTries": (_doc: Cloudsave, accountData: Map<string, any>) => updateMineheadDailyTries(accountData),
     // Minehead's trade multiplier consumes prepared Research without delaying early opponent rewards.
     "mineheadDropRate": (_doc: Cloudsave, accountData: Map<string, any>) => updateMineheadDropRate(accountData),

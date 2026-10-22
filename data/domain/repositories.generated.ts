@@ -86,6 +86,7 @@ import { initGamingSpeciesRepo } from "./data/GamingSpeciesRepo";
 import { initGamingSuperbitsRepo } from "./data/GamingSuperbitsRepo";
 import { initGamingUpgradeRepo } from "./data/GamingUpgradeRepo";
 import { initGemShopRepo } from "./data/GemShopRepo";
+import { initGlimboTradeRepo } from "./data/GlimboTradeRepo";
 import { initGodInfoRepo } from "./data/GodInfoRepo";
 import { initGrimoireUpgradeRepo } from "./data/GrimoireUpgradeRepo";
 import { initGuildBonusRepo } from "./data/GuildBonusRepo";
@@ -302,6 +303,7 @@ export const repositoryFactories = {
     "GamingSuperbits": initGamingSuperbitsRepo,
     "GamingUpgrade": initGamingUpgradeRepo,
     "GemShop": initGemShopRepo,
+    "GlimboTrade": initGlimboTradeRepo,
     "GodInfo": initGodInfoRepo,
     "GrimoireUpgrade": initGrimoireUpgradeRepo,
     "GuildBonus": initGuildBonusRepo,
