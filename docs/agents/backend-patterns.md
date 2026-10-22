@@ -65,6 +65,8 @@ For calculations currently called only by UI code, apply [MODEL-01](../../CODING
 
 Initialization, parsing, and recalculation have been called more than once. Processing the same inputs again should not duplicate records or stack a bonus simply because a phase reran. Reset or replace derived collections and flags before rebuilding them, or otherwise ensure the operation overwrites its prior result. For example, `updateWorshipTotalizer` rebuilds unlocked bonuses, and Lab resets derived flags before applying current assignments. Treat these as techniques, not proof that every phase is safe: inspect the full lifecycle you change and preserve character-specific state where required.
 
+Button resets queue progress during parsing so a new save cannot inherit the previous save's task readiness.
+
 ## Reuse existing helpers
 
 For [CONSIST-01](../../CODING_STANDARDS.md#consist-01--research-and-reuse-patterns), include [`data/utility.tsx`](../../data/utility.tsx) in helper discovery; check that a candidate matches the game rule. Keep display formatting details in the UI guide and existing display components rather than reimplementing them in a domain calculation.

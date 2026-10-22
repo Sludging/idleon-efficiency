@@ -141,6 +141,8 @@ export class Button extends Domain {
   const optionList = data.get("OptLacc") as number[] | undefined;
   const pressCount = Math.max(0, Math.trunc(Number(optionList?.[BUTTON_PRESS_COUNT_OPTION]) || 0));
   button.pressCount = pressCount;
+  // Reset cached progress before calculating tasks for this save.
+  button.upcomingTaskProgress = Array.from({ length: UPCOMING_BUTTON_TASK_COUNT }, () => ({ currentValue: 0 }));
 
   button.bonuses.forEach(bonus => {
    bonus.categoryPresses = calculateCategoryPresses(bonus.index, pressCount);
@@ -176,10 +178,6 @@ export class Button extends Domain {
     throw new Error(`Button task cycle has no task at position ${pressCount % BUTTON_TASK_CYCLE_LENGTH}`);
    }
    const progress = this.upcomingTaskProgress[offset];
-
-   if (!progress) {
-    throw new Error(`Button task progress is missing for queue position ${offset}`);
-   }
 
    const scheduledTask = {
     index: task.index,
