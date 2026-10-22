@@ -55,6 +55,8 @@ Account-level getters must also work before a save loads. Initialize owned contr
 
 When parsing reuses character-owned objects, reset their prepared inputs before replacing saved values. The Talent reset hook clears class-level caps without rebuilding every talent. Prayer passive fractions and Crucible progress also reset to zero until their calculation runs.
 
+Equipment and Obols cache contributions, not final character stats. Their empty property channels start at zero; final stats still require actor-specific calculation.
+
 For account-wide mechanics that use a selected or best character contribution, select and prepare it once, then expose the result to consumers. Lab stores `bestBuboPlayerID` and prepares the connection bonus in [`lab.tsx`](../../data/domain/world-4/lab.tsx). This illustrates where selection belongs, not endorsement of Lab's specific player-selection expression for other calculations. Preserve explicit player context when a result is genuinely per-character; do not replace it with an account-wide value. Skilling's player-specific cache and callers are useful references in [`skilling.tsx`](../../data/domain/skilling.tsx).
 
 For calculations currently called only by UI code, apply [MODEL-01](../../CODING_STANDARDS.md#model-01--model-responsible-concepts) with the preparation workflow above. Follow the UI guide for presentation, not calculation ownership.

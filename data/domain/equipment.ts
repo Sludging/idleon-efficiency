@@ -56,8 +56,14 @@ export class PlayerEquipment {
  equipment: (Item | undefined)[] = [];
  tools: (Tool | undefined)[] = [];
  food: (Food | undefined)[] = [];
- private effects: Map<string, number> | undefined;
- private propertyResults: Record<EquipmentProperty, number> | undefined;
+ private effects: Map<string, number> = new Map();
+ private propertyResults: Record<EquipmentProperty, number> = {} as Record<EquipmentProperty, number>;
+
+ constructor() {
+  for (const property of properties) {
+   this.propertyResults[property] = 0;
+  }
+ }
 
  static parse(
   equipment: Array<Record<number, string>>,
@@ -197,12 +203,10 @@ export class PlayerEquipment {
  getBonus(bonus: EquipmentBonus): number {
   const effect = getEquipmentEffect(bonus);
   if (effect === undefined) return 0;
-  if (!this.effects) throw new Error('Equipment unique effects have not been calculated');
   return this.effects.get(effect) ?? 0;
  }
 
  getProperty(property: EquipmentProperty): number {
-  if (!this.propertyResults) throw new Error('Equipment properties have not been calculated');
   return this.propertyResults[property];
  }
 

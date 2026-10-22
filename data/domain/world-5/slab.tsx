@@ -129,14 +129,10 @@ export const slabItems = initSlabItemSortRepo().map(slabItem => {
 });
 
 export const updateSlabBonusMultiplier = (data: Map<string, any>) => {
-    const slab = data.get("slab") as Slab | undefined;
-    const meritocraty = data.get("meritocraty") as Meritocraty | undefined;
-    const legendTalents = data.get("legendTalents") as LegendTalents | undefined;
-    const upgradeVault = data.get("upgradeVault") as UpgradeVault | undefined;
-
-    if (!slab || !meritocraty || !legendTalents || !upgradeVault) {
-        throw new Error("Slab bonus calculation requires Slab, Meritocraty, Legend Talents, and Upgrade Vault data");
-    }
+    const slab = data.get("slab") as Slab;
+    const meritocraty = data.get("meritocraty") as Meritocraty;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
 
     slab.updateCalculationState(meritocraty, legendTalents, upgradeVault);
     return slab;
