@@ -82,6 +82,8 @@ const navItems: NavItem[] = [
             { subLink: "/advice-fish", label: "Advice Fish" },
             { subLink: "/zenith-market", label: "Zenith Market" },
             { subLink: "/menagerie", label: "Menagerie" },
+            { subLink: "/glimbo", label: "Glimbo" },
+            { subLink: "/gallery", label: "Gallery" },
             { subLink: "/the-button", label: "The Button" },
         ]
     },
@@ -260,4 +262,3 @@ export const Navigation = () => {
         </Box>
     )
 }
-            { subLink: "/glimbo", label: "Glimbo" },
