@@ -22,7 +22,7 @@ export const initTournamentRaidRepo = () => {
                 "mapNames": [
                     "Blunder Hills Meadow",
                     "Smolderin' Plateau Ridge",
-                    "Mysterious Unknown Land",
+                    "Shimmerfin Shallow Shores",
                     "Mysterious Unknown Land",
                     "Mysterious Unknown Land",
                     "Mysterious Unknown Land",
@@ -32,7 +32,7 @@ export const initTournamentRaidRepo = () => {
                 "mapLimits": [
                     6,
                     24,
-                    6,
+                    32,
                     6,
                     6,
                     6,
@@ -51,7 +51,8 @@ export const initTournamentRaidRepo = () => {
                         "tier": 3,
                         "itemIds": ["EquipmentRingsChat13", "EquipmentRingsChat14", "EquipmentRingsChat15"]
                     },
-                    <TournamentRewardTierModel>{"tier": 4, "itemIds": ["EquipmentHats142", "EquipmentHats143", "EquipmentHats144"]}
+                    <TournamentRewardTierModel>{"tier": 4, "itemIds": ["EquipmentHats142", "EquipmentHats143", "EquipmentHats144"]},
+                    <TournamentRewardTierModel>{"tier": 5, "itemIds": ["EquipmentHats148", "EquipmentHats149", "EquipmentHats150"]}
                 ]
             })    
 ]

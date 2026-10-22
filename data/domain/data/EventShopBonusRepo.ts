@@ -201,7 +201,7 @@ export const initEventShopBonusRepo = () => {
         new EventShopBonusBase(40, <EventShopBonusModel>{
                 "name": "Glimbo VIP Pass",
                 "desc": "Each Glimbo Trade boosts Vault Max LV by +2 not +1",
-                "price": 199
+                "price": 210
             }),
         new EventShopBonusBase(41, <EventShopBonusModel>{
                 "name": "Golden Registrant",
@@ -269,6 +269,58 @@ export const initEventShopBonusRepo = () => {
                 "name": "Boat Discount",
                 "desc": "All sailing boat upgrades are 30% cheaper",
                 "price": 100
+            }),
+        new EventShopBonusBase(56, <EventShopBonusModel>{
+                "name": "Big Clot",
+                "desc": "Earn 2x more currency from World 7's Jelly Operator",
+                "price": 30
+            }),
+        new EventShopBonusBase(57, <EventShopBonusModel>{"name": "Ivory Locket", "desc": "+3 Slot Unlocks for Jelly Operator", "price": 100}),
+        new EventShopBonusBase(58, <EventShopBonusModel>{
+                "name": "Meatmaxxing",
+                "desc": "3x Fish and 50% cheaper upgrades for Bubba!",
+                "price": 250
+            }),
+        new EventShopBonusBase(59, <EventShopBonusModel>{
+                "name": "Smol Pouch",
+                "desc": "Get +2 Inventory slots for your Items Backpack",
+                "price": 25
+            }),
+        new EventShopBonusBase(60, <EventShopBonusModel>{
+                "name": "A North Star",
+                "desc": "+1 Black Star to use in the Gaming Palette",
+                "price": 60
+            }),
+        new EventShopBonusBase(61, <EventShopBonusModel>{
+                "name": "Organic Label",
+                "desc": "+5 uses, doubles your choice of Exotic Market upgrade!",
+                "price": 90
+            }),
+        new EventShopBonusBase(62, <EventShopBonusModel>{
+                "name": "Extra Lumi",
+                "desc": "+50% Lumi Gains for the Menagerie in World 7",
+                "price": 50
+            }),
+        new EventShopBonusBase(63, <EventShopBonusModel>{
+                "name": "Menagerie Shell",
+                "desc": "Instantly get +5 Shells for the Luminous Menagerie",
+                "price": 250
+            }),
+        new EventShopBonusBase(64, <EventShopBonusModel>{"name": "Graduate Thesis", "desc": "Get +1 Research PTS", "price": 15}),
+        new EventShopBonusBase(65, <EventShopBonusModel>{
+                "name": "Gilded Awnings",
+                "desc": "+25 Max LV for most of the Upgrade Vault",
+                "price": 120
+            }),
+        new EventShopBonusBase(66, <EventShopBonusModel>{
+                "name": "Full Kitchen Simmer",
+                "desc": "10x Max Fuel Capacity for the Sushi Station",
+                "price": 190
+            }),
+        new EventShopBonusBase(67, <EventShopBonusModel>{
+                "name": "Slot of Friendship",
+                "desc": "Adds +1 more slot for your Friend Bonuses",
+                "price": 200
             })    
 ]
 }

@@ -11,9 +11,9 @@ export const initMenagerieJellyfishRepo = () => {
     return [    
         new MenagerieJellyfishBase(0, <MenagerieJellyfishModel>{
                 "index": 0,
-                "color": "Purple",
+                "color": "Pink",
                 "unlockId": 3,
-                "description": "Unlock the Purple Jellyfish within the Menagerie 膛",
+                "description": "Unlock the Pink Jellyfish within the Menagerie 膛",
                 "label": "Purple Shell/Lumi purchases",
                 "currency": <MenagerieJellyfishCurrencyModel>{"kind": "account", "id": "Money"},
                 "upgrades": [

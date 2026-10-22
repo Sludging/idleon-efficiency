@@ -70,7 +70,7 @@ export const initSushiStationUpgradeRepo = () => {
                 "index": 6,
                 "displayOrder": 7,
                 "name": "Superior Sushi Skillz",
-                "maxLevel": 35,
+                "maxLevel": 45,
                 "costExponent": 3.8,
                 "bonusPerLevel": 1,
                 "costMultiplier": 0.2,

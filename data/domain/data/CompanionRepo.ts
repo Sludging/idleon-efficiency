@@ -759,8 +759,8 @@ export const initCompanionRepo = () => {
                 "x5": 140,
                 "x6": 2800,
                 "x7": 220,
-                "desc2": "200x Gaming Bits gained (World 5 feature)",
-                "bonus2": 199
+                "desc2": "500x Gaming Bits gained (World 5 feature)",
+                "bonus2": 499
             }),
         new CompanionBase(54, <CompanionModel>{
                 "id": "w7b6b",
@@ -771,9 +771,9 @@ export const initCompanionRepo = () => {
                 "x3": -26,
                 "x4": 1,
                 "x5": 165,
-                "x6": 3900,
+                "x6": 3100,
                 "x7": 250,
-                "desc2": "{1 new Research Shape, and a new 1.15x Research EXP multi",
+                "desc2": "{1 Research Shape, and a new 1.50x Research EXP multi",
                 "bonus2": 1
             }),
         new CompanionBase(55, <CompanionModel>{
@@ -785,7 +785,7 @@ export const initCompanionRepo = () => {
                 "x3": -28,
                 "x4": 1,
                 "x5": 200,
-                "x6": 4100,
+                "x6": 3750,
                 "x7": 300,
                 "desc2": "Multiplies ALL Research Grid bonuses by 1.25x (World 7 feature)",
                 "bonus2": 25
@@ -1632,17 +1632,17 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(116, <CompanionModel>{
                 "id": "w5a2",
-                "desc": "Not officially in the game and may never be",
-                "bonus": 1,
+                "desc": "{30% Lumi Hourly Gains for the Luminous Menagerie",
+                "bonus": 30,
                 "x1": 0,
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100,
-                "x6": 9999,
-                "x7": 99,
-                "desc2": "Not officially in the game and may never be",
-                "bonus2": 1
+                "x5": 160,
+                "x6": 4250,
+                "x7": 250,
+                "desc2": "+80% Lumi Hourly Gains for the Luminous Menagerie",
+                "bonus2": 80
             }),
         new CompanionBase(117, <CompanionModel>{
                 "id": "w5a3",
@@ -2080,7 +2080,7 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(148, <CompanionModel>{
                 "id": "w7b8",
-                "desc": "Both +200 and 1.20x Max Stamina for Spelunking!",
+                "desc": "Both {200 and 1.20x Max Stamina for Spelunking!",
                 "bonus": 20,
                 "x1": -32,
                 "x2": 0,
@@ -2094,17 +2094,17 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(149, <CompanionModel>{
                 "id": "w7b9",
-                "desc": "Not officially in the game and may never be",
+                "desc": "{1 Minehead Doubler, {1 Sushi Doubler, and {1 Jelly Operator Doubler",
                 "bonus": 1,
-                "x1": 0,
+                "x1": -35,
                 "x2": 0,
-                "x3": 0,
+                "x3": -35,
                 "x4": 1,
                 "x5": 220,
                 "x6": 4150,
                 "x7": 320,
-                "desc2": "Not officially in the game and may never be",
-                "bonus2": 1
+                "desc2": "{2 Minehead Doublers, {2 Sushi Doublers, and {2 Jelly Operator Doublers",
+                "bonus2": 2
             }),
         new CompanionBase(150, <CompanionModel>{
                 "id": "T1a",
@@ -2430,8 +2430,8 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(173, <CompanionModel>{
                 "id": "r0d",
-                "desc": "The lord of amber herself is keeping her bonus a secret... for now...",
-                "bonus": 1,
+                "desc": "Get +2 Omnijade. Each one now gives +2 LVs daily without raising cost.",
+                "bonus": 2,
                 "x1": -100,
                 "x2": 0,
                 "x3": -60,
@@ -2439,8 +2439,8 @@ export const initCompanionRepo = () => {
                 "x5": 480,
                 "x6": 7200,
                 "x7": 650,
-                "desc2": "Bonus still unknown... for now...",
-                "bonus2": 1
+                "desc2": "Get +3 Omnijade. Each now gives +3 LVs daily without raising cost.",
+                "bonus2": 3
             }),
         new CompanionBase(174, <CompanionModel>{
                 "id": "fm rat",
@@ -2496,6 +2496,20 @@ export const initCompanionRepo = () => {
                 "x6": 9999,
                 "x7": 12,
                 "desc2": "Congratulations on winning the Tournament!",
+                "bonus2": 1
+            }),
+        new CompanionBase(178, <CompanionModel>{
+                "id": "w7c3",
+                "desc": "Guppy got memory of goldfish... Guppy forgot what his bonus is, for now...",
+                "bonus": 1,
+                "x1": -40,
+                "x2": 0,
+                "x3": -42,
+                "x4": 1,
+                "x5": 480,
+                "x6": 7200,
+                "x7": 650,
+                "desc2": "Bonus still unknown... for now...",
                 "bonus2": 1
             })    
 ]

@@ -7529,6 +7529,42 @@ export const initEnemyRepo = () => {
                 },
                 "bossData": undefined
             }),
+        new EnemyBase("w7c3", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Guppy",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 113,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 94,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 9,
+                    "RespawnTime": 45,
+                    "DeathFrame": 19,
+                    "MonsterHPTotal": 2e+36,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 3.5e+13,
+                    "ExpType": 0,
+                    "Defence": 2500000,
+                    "MoveSPEED": 3,
+                    "Damages": [600000, 1],
+                    "DefFor0": 333313
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 5e+09, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Grasslands2", "quantity": 1, "chance": 0.01, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsJ22", "quantity": 1, "chance": 1e-07, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Coral6", "quantity": 1, "chance": 4e-09, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes7", "quantity": 0, "chance": 8e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable34", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
         new EnemyBase("w7e1", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
                     "Name": "Whallamus",
@@ -9714,7 +9750,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("fallEvent1", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Falloween Pumpkin",
+                    "Name": "Halloween Pumpkin",
                     "AFKtype": AFKTypeEnum.Fighting,
                     "MonsterFace": 4,
                     "MonsterOffsetX": 42,
@@ -9938,6 +9974,46 @@ export const initEnemyRepo = () => {
                         <ItemDropModel>{"item": "EquipmentHats115", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
                         <ItemDropModel>{"item": "EquipmentHats109", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
                         <ItemDropModel>{"item": "EquipmentHats80", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("fallEvent2", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Halloween Grave",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 4,
+                    "MonsterOffsetX": 42,
+                    "MonsterOffsetY": 28,
+                    "HeightOfMonster": 85,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 4,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 750000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 12000,
+                    "ExpType": 0,
+                    "Defence": 600,
+                    "MoveSPEED": 3,
+                    "Damages": [1000, 1],
+                    "DefFor0": 1223.26
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsY2", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.2, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats145", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats146", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats85", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats87", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats88", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats86", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats36", "quantity": 1, "chance": 0.0005, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,

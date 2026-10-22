@@ -391,6 +391,7 @@ export const initSubTableRepo = () => {
                     <SubTableModel>{"name": "w7b10", "chance": 0.001, "quantity": 1},
                     <SubTableModel>{"name": "w7b11", "chance": 0.001, "quantity": 1},
                     <SubTableModel>{"name": "w7b12", "chance": 0.001, "quantity": 1},
+                    <SubTableModel>{"name": "w7c3", "chance": 0.001, "quantity": 1},
                     <SubTableModel>{"name": "w7d1", "chance": 0.0025, "quantity": 1}
                 ]
             }),
@@ -744,6 +745,7 @@ export const initSubTableRepo = () => {
                     <SubTableModel>{"name": "w7b10", "chance": 5e-06, "quantity": 1},
                     <SubTableModel>{"name": "w7b11", "chance": 5e-06, "quantity": 1},
                     <SubTableModel>{"name": "w7b12", "chance": 5e-06, "quantity": 1},
+                    <SubTableModel>{"name": "w7c3", "chance": 5e-06, "quantity": 1},
                     <SubTableModel>{"name": "w7d1", "chance": 1.25e-05, "quantity": 1}
                 ]
             })    
