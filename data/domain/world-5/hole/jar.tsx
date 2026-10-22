@@ -149,15 +149,43 @@ export class Jar {
         height: 25,
     }));
     preferredCollectibleTarget: number | null = null;
-    producerAssignments: JarProducerAssignment[] = [];
+    producerAssignments: JarProducerAssignment[] = Array.from({ length: 3 }, (_, index) => ({
+        index,
+        type: null,
+        work: 0,
+    }));
     producers: JarProducer[] = [];
     requirementBalances: number[] = Array(10).fill(0);
     gildedBonusPercent: number = 0;
-    nextTypeCost: number | null = null;
+    nextTypeCost!: number | null;
 
     constructor() {
         this.jarTypes = initHoleJarRepo().map(jar => new JarType(jar.index, jar.data));
         this.jarBonuses = initHoleJarBonusRepo().map(bonus => new JarBonus(bonus.index, bonus.data));
+        this.updateNextTypeCost();
+        // Prepare neutral production and value before the detailed UI reads Jar state.
+        this.prepare({
+            collectibleBonus: 0,
+            cavernCount: 0,
+            producerCount: 0,
+            productionUpgrade67: 0,
+            productionUpgrade74: 0,
+            productionUpgrade72: 0,
+            cavernLog: 0,
+        });
+        this.prepareRupieValue({
+            schematicBonus62: 0,
+            schematicBonus65: 0,
+            schematicBonus68: 0,
+            earlyExplorerExpUpgrade: 0,
+            lampBonus99: 0,
+            wisdomMonumentBonus: 0,
+            measurementBonus10: 0,
+            measurementBonus14: 0,
+            evertreeMultiplier: 1,
+            stampBonus: 0,
+            coveUpgrade14Bonus: 0,
+        });
     }
 
     parse(holeData: (number[] | undefined)[], savedBoard: number[][] | null): void {
@@ -210,9 +238,13 @@ export class Jar {
             return Number(value ?? 0);
         });
         this.producers = [];
+        this.updateNextTypeCost();
+        this.gildedBonusPercent = Number(holeData[11]?.[60] ?? 0);
+    }
+
+    private updateNextTypeCost(): void {
         this.nextTypeCost = this.ownedTypeCount >= 9 ? null
             : 50 * Math.pow(1 + this.ownedTypeCount, 1.5) * Math.pow(4.8, this.ownedTypeCount);
-        this.gildedBonusPercent = Number(holeData[11]?.[60] ?? 0);
     }
 
 

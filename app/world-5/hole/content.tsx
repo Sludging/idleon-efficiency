@@ -157,7 +157,7 @@ export default function HoleContent() {
     const [showUnlocked, setShowUnlocked] = useState(false);
     const hole = data.get("hole") as Hole;
 
-    if (!hydrated || !hole || hole.allocationEffects.opalEnthusiasm.length !== hole.villagers.length) {
+    if (!hydrated) {
         return <Box gap="small"><Heading level="2" size="medium" style={{ fontWeight: "normal" }}>The Hole</Heading><Text>Waiting for imported account data.</Text></Box>;
     }
     const account = data.get("account") as Account;

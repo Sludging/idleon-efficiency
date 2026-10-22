@@ -1,4 +1,4 @@
-import { commaNotation, notateNumber } from "../../../utility";
+import { commaNotation, lavaLog, notateNumber } from "../../../utility";
 import { initSpecificItemRepo } from "../../data/SpecificItemRepo";
 import { initRandoList2Repo } from "../../data/RandoList2Repo";
 import { BaseItemModel } from "../../model/baseItemModel";
@@ -134,9 +134,19 @@ export class Cove {
     purpleShapeTargetId: number | null = null;
     glunkoKills: number = 0;
     normalDropRate: number = 0;
-    accountEffects!: CoveAccountEffects;
-    rewards!: CoveRewardState;
+    rewards: CoveRewardState = { opalsEarned: 0, ribbonRewardEarned: false };
+    accountEffects: CoveAccountEffects;
 
+    constructor() {
+        // Prepare neutral bonuses before the detailed UI reads account effects.
+        this.accountEffects = this.prepareAccountEffects({
+            campUpgrade100Bonus: 0,
+            campUpgrade101Bonus: 0,
+            campUpgrade103Bonus: 0,
+            campUpgrade105Bonus: 0,
+            gameLog: lavaLog,
+        });
+    }
     parse(optionsListAccount: number[] | undefined): void {
         this.upgrades.forEach(upgrade => {
             upgrade.level = Number(optionsListAccount?.[630 + upgrade.index] ?? 0);

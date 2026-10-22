@@ -298,6 +298,22 @@ export class Fountain {
             roots.forEach(visitBranch);
             return orderedUpgrades;
         });
+        // Prepare neutral modifiers before the detailed UI reads fountain values.
+        this.prepare({
+            arcadeBonus68: 0,
+            bUpgrade94Level1: 0,
+            bUpgrade95Level10: 0,
+            bUpgrade97Level3: 0,
+            coveUpgrade14: 0,
+            cosmoBonusQuantity4: 0,
+            lampBonus99: 0,
+            measurementBonus16: 0,
+            bellBonus6: 0,
+            studyBonus15: 0,
+            ownedCaverns: 0,
+            currencyValueExponent: this.currencyValueExponent,
+            duckCount: this.duckCount,
+        });
     }
 
     parse(
