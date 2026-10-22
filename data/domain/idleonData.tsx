@@ -32,13 +32,13 @@ import { Dungeons } from './dungeons';
 import { Forge, updateForge } from './world-1/forge';
 import { Cooking, updateCooking } from './world-4/cooking';
 import { Lab, updateLab } from './world-4/lab';
-import { Breeding, updateAllShinyEffects, updateBeastMasterImpact, updateBreeding, updateBreedingDisplayData, prepareBreedingCrucibleLevel } from './world-4/breeding';
+import { Breeding, updateAllShinyEffects, updateBeastMasterImpact, updateBreeding, updateBreedingDisplayData, prepareBreedingCrucibleLevel, prepareBreedingShinyLevels } from './world-4/breeding';
 import { notUndefined } from '../utility';
 import { Sigils, updateSigils, updateSigilsChargeSpeed } from './world-2/alchemy/sigils';
 import { AnvilWrapper, updateAnvil } from './world-1/anvil';
 import { Alerts, updateAlerts } from './alerts';
 import { Account, updateAccount } from './account';
-import { Divinity, updateDivinity, updateDivinityBlessings } from './world-5/divinity';
+import { Divinity, updateDivinity, updateDivinityBlessings, updateDivinityRates } from './world-5/divinity';
 import { Sailing, updateSailing, updateMinTravelTimeAndSpeed } from './world-5/sailing/sailing';
 import { Gaming, updateGaming, updateGamingDisplay, updateSuperbitImpacts } from './world-5/gaming';
 import { AtomCollider, updateAtomCollider } from './world-3/construction/atomCollider';
@@ -96,7 +96,7 @@ import { Poppy, updatePoppyFishRate, updatePoppyFishPerCatch, updatePoppyGlobalB
 import { updateNonDepositedZenithClusters, ZenithMarket } from './world-7/zenithShop';
 import { Gallery, updateGallery } from './world-7/gallery';
 import { HatRack, updateHatRack } from './world-7/hatRack';
-import { Skilling, updateAllEfficiencies, updateSkillEfficiencies } from './skilling';
+import { Skilling, updateAllEfficiencies, updateAllSkillExperienceMultiplier, updateSkillEfficiencies } from './skilling';
 import { updateAttributeTalents, updatePowerTalents, updateRightHandOfActionBonuses } from './talents';
 import { updatePlayerHealth } from './player-health';
 import { Menagerie, prepareMenagerie, updateMenagerieMissions } from "./menagerie";
@@ -283,6 +283,8 @@ const postProcessingMap: Record<string, Function> = {
     "holeUpgradeEffects": (_doc: Cloudsave, accountData: Map<string, any>) => updateHoleUpgradeEffects(accountData),
     // Pet Arena Crucible rewards need parsed Menagerie unlocks before Menagerie prepares Lumi inputs.
     "breedingCrucibleLevel": (_doc: Cloudsave, accountData: Map<string, any>) => prepareBreedingCrucibleLevel(accountData),
+    // Shiny levels need their Menagerie cap before account-wide shiny effects are distributed.
+    "breedingShinyLevels": (_doc: Cloudsave, accountData: Map<string, unknown>) => prepareBreedingShinyLevels(accountData),
     // Parse-owned Menagerie effects must be ready before the earliest recipient calculation.
     "menageriePrepared": (_doc: Cloudsave, accountData: Map<string, any>) => prepareMenagerie(accountData),
     // Coral Reef maximum levels use parsed Menagerie unlocks before cap consumers run.
@@ -463,6 +465,8 @@ const postPostProcessingMap: Record<string, Function> = {
     "menagerieMissions": (_doc: Cloudsave, accountData: Map<string, any>) => updateMenagerieMissions(accountData),
     // Button task progress uses settled account and character results.
     "buttonTaskProgress": (_doc: Cloudsave, accountData: Map<string, any>) => updateButtonTaskProgress(accountData),
+    "allSkillExperienceMultiplier": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateAllSkillExperienceMultiplier(accountData),
+    "divinityRates": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateDivinityRates(accountData),
 }
 
 export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: CompanionState[], serverVars: Record<string, any>, isStatic: boolean = false) => {

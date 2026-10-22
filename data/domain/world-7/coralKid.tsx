@@ -54,6 +54,8 @@ export class CoralKidBonus {
 export class CoralKid extends Domain {
     coralKidBonuses: CoralKidBonus[] = CoralKidBonus.fromBase();
     private lumiUpgradeLevel = 0;
+    private divinityPointsUpgradeLevel = 0;
+    private divinityExpUpgradeLevel = 0;
 
     getRawKeys(): RawData[] {
         return [];
@@ -68,12 +70,22 @@ export class CoralKid extends Domain {
         const optionList = data.get("OptLacc") as number[];
 
         coralKid.lumiUpgradeLevel = Number(optionList[620] ?? 0);
+        coralKid.divinityPointsUpgradeLevel = Number(optionList[616] ?? 0);
+        coralKid.divinityExpUpgradeLevel = Number(optionList[618] ?? 0);
         coralKid.coralKidBonuses.forEach(upgrade => {
             upgrade.level = optionList[427 + upgrade.index] || 0;
         });
     }
 
     getBonusFromIndex(index: number): number {
+        // Second-page Divinity bonuses return rounded percentage points, not multipliers.
+        if (index === 6) {
+            return Math.round(100 * this.divinityPointsUpgradeLevel);
+        }
+        if (index === 8) {
+            return Math.round(50 * this.divinityExpUpgradeLevel);
+        }
+
         return this.coralKidBonuses.find(bonus => bonus.index == index)?.getBonus() || 0;
     }
 

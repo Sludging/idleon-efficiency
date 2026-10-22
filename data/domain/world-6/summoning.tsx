@@ -159,6 +159,7 @@ export class SummonBonus {
     godshardSetBonus: number = 0;
     emperorBonus: number = 0;
     gemItemPurchased: number = 0;
+    hasDreamPack: boolean = false;
 
     constructor(public index: number, public data: SummonEnemyBonusModel, bonusValue: number = 0) {
         this.bonusValue = bonusValue;
@@ -173,11 +174,11 @@ export class SummonBonus {
             case this.index == 31:
                 return this.bonusValue;
             case this.index == 19:
-                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.godshardSetBonus) / 100);
+                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.godshardSetBonus + 50 * Number(this.hasDreamPack)) / 100);
             case 20 <= this.index && 33 >= this.index:
-                return this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning31Bonus + this.godshardSetBonus + this.emperorBonus) / 100);
+                return this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning31Bonus + this.godshardSetBonus + this.emperorBonus + 50 * Number(this.hasDreamPack)) / 100);
             default:
-                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning31Bonus + this.godshardSetBonus + this.emperorBonus) / 100);
+                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning31Bonus + this.godshardSetBonus + this.emperorBonus + 50 * Number(this.hasDreamPack)) / 100);
         }
     }
 
@@ -469,6 +470,7 @@ export class Summoning extends Domain {
             { key: "OptLacc", perPlayer: false, default: [] },
             { key: "Holes", perPlayer: false, default:[] },
             { key: "KRbest", perPlayer: false, default:[] },
+            { key: "BundlesReceived", perPlayer: false, default: {} },
         ]
     }
 
@@ -525,6 +527,11 @@ export class Summoning extends Domain {
         const optionList = (data.get("OptLacc") as number[] | undefined) ?? [];
         const holeData = (data.get("Holes") as unknown[] | undefined) ?? [];
         const killroyKillsData = (data.get("KRbest") as Record<string, number> | undefined) ?? {};
+        const bundlesReceived: unknown = data.get("BundlesReceived");
+        const hasDreamPack = typeof bundlesReceived === "object"
+            && bundlesReceived !== null
+            && "ban_i" in bundlesReceived
+            && Number(bundlesReceived.ban_i) === 1;
         const upgradeLevels = (summoningData[0] ?? []) as number[];
         const doublerData = (holeData[28] || []) as number[];
 
@@ -547,6 +554,7 @@ export class Summoning extends Domain {
             bonus.godshardSetBonus = 0;
             bonus.emperorBonus = 0;
             bonus.gemItemPurchased = 0;
+            bonus.hasDreamPack = hasDreamPack;
         });
         this.summonBattles.allVictories.fill(0);
         this.summonEssences.forEach(essence => {

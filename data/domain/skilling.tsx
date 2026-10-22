@@ -40,6 +40,8 @@ import { Bribe } from "./world-1/bribes";
 import { getStatCards, type SkillStatsDNSkill } from "./player-stats";
 import { lavaLog } from "../utility";
 import type { Sneaking } from "./world-6/sneaking";
+import { Meritocraty } from "./world-7/meritocraty";
+import { LegendTalents } from "./world-7/legendTalents";
 export type SkillingSkill = SkillStatsDNSkill | SkillsIndex.Worship;
 
 
@@ -52,6 +54,23 @@ export class Skilling extends Domain {
     private allEfficiencies = new Map<number, number>();
     private skillEfficiencies = new Map<number, Record<SkillingSkill, number>>();
     private allBaseSkillEfficiencies = new Map<number, number>();
+
+    private allSkillExperienceMultiplier = 1;
+
+    updateAllSkillExperienceMultiplier(
+        meritocracyBonus: number,
+        legendPointsBonus: number,
+        companionBonus: number,
+    ): void {
+        this.allSkillExperienceMultiplier =
+            (1 + meritocracyBonus / 100)
+            * (1 + legendPointsBonus / 100)
+            * (1 + companionBonus);
+    }
+
+    getAllSkillExperienceMultiplier(): number {
+        return this.allSkillExperienceMultiplier;
+    }
 
     getSkillEfficiency(playerID: number, skill: SkillingSkill): number {
         const result = this.skillEfficiencies.get(playerID)?.[skill];
@@ -503,4 +522,16 @@ export const updateAllEfficiencies = (data: Map<string, any>): void => {
 };
 export const updateSkillEfficiencies = (data: Map<string, any>): void => {
     (data.get("skilling") as Skilling).updateSkillEfficiencies(data);
+};
+export const updateAllSkillExperienceMultiplier = (data: Map<string, unknown>): void => {
+    const skilling = data.get("skilling") as Skilling;
+    const meritocraty = data.get("meritocraty") as Meritocraty;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
+    const companions = data.get("companions") as Companion[];
+
+    skilling.updateAllSkillExperienceMultiplier(
+        meritocraty.getCurrentBonus(10),
+        legendTalents.getBonusFromIndex(20),
+        getCompanionActiveBonus(companions, 32),
+    );
 };

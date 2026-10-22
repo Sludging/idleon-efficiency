@@ -128,6 +128,10 @@ export class CoralReef extends Domain {
         this.upgrades.forEach(upgrade => upgrade.updateMaximumLevelBonus(pillarCoralUnlockOwned));
     }
 
+    getTotalUpgradeLevels(): number {
+        return this.upgrades.reduce((total, upgrade) => total + upgrade.level, 0);
+    }
+
     canAffordUpgrade(index: number): boolean {
         const upgrade = this.upgrades.find(upgrade => upgrade.index === index);
 

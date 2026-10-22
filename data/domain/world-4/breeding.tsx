@@ -151,6 +151,7 @@ interface ShinyBonusData {
 export class Pet {
     shinyProgress: number = 0;
     shinyLevel: number = 0;
+    private shinyLevelCap: number = 20;
     geneLevel: number = 0;
     breedingProgress: number = 0;
     breedingLevel: number = 0;
@@ -230,20 +231,25 @@ export class Pet {
         }
     }
 
+    prepareShinyLevel(extendedShinyLevelsUnlocked: boolean): void {
+        this.shinyLevelCap = extendedShinyLevelsUnlocked ? 30 : 20;
+        this.shinyLevel = this.calculateShinyLevel();
+    }
+
     calculateShinyLevel = () => {
         if (this.shinyProgress == 0) {
             return 0;
         }
 
-        for (let shinyLevel = 0; shinyLevel < 19; shinyLevel++) {
+        for (let shinyLevel = 0; shinyLevel < this.shinyLevelCap - 1; shinyLevel++) {
             const levelReq = Math.floor((1 + Math.pow(shinyLevel + 1, 1.6)) * Math.pow(1.7, shinyLevel + 1));
-            if (this.shinyProgress < levelReq) {
+            // Shiny pets advance only after their progress exceeds the level requirement.
+            if (this.shinyProgress <= levelReq) {
                 return shinyLevel + 1;
             }
         }
 
-        // Should never get there but, better safe then sorry. I believe 20 is max level for shiny pets.
-        return 20;
+        return this.shinyLevelCap;
     }
 
     calculateBreedingLevel = () => {
@@ -448,6 +454,11 @@ export class Breeding extends Domain {
             }
         }
         this.crucibleArenaLevel = crucibleArenaLevel;
+    }
+
+    prepareShinyLevels(extendedShinyLevelsUnlocked: boolean): void {
+        this.basePets.forEach(pet => pet.prepareShinyLevel(extendedShinyLevelsUnlocked));
+        this.shinyBonuses.forEach(bonus => bonus.updateTotalLevels());
     }
 
     getCrucibleBonus(index: number): number {
@@ -773,6 +784,15 @@ export const prepareBreedingCrucibleLevel = (data: Map<string, any>) => {
     const menagerie = data.get("menagerie") as Menagerie;
 
     breeding.prepareCrucibleArenaLevel(menagerie.getUnlocks()[8].owned);
+
+    return breeding;
+};
+
+export const prepareBreedingShinyLevels = (data: Map<string, unknown>): Breeding => {
+    const breeding = data.get("breeding") as Breeding;
+    const menagerie = data.get("menagerie") as Menagerie;
+
+    breeding.prepareShinyLevels(menagerie.getUnlocks()[11].owned);
 
     return breeding;
 };

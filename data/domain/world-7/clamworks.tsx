@@ -53,6 +53,8 @@ export class Clamworks extends Domain {
     clamRespawnSeconds: number = 0;
     scurgePointsRemaining: number = 0;
     scurgeExpPerKill: number = 0;
+    private scurgeGlobalPearlCostDiscount: number = 0;
+    private scurgePearlCostDiscountByUpgrade: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
     getRawKeys(): RawData[] {
         return [];
@@ -90,6 +92,13 @@ export class Clamworks extends Domain {
     }
 
     updateClamWorkOutputs(scurgeLevel: number, scurgeSpentLevels: number[], _scurgeUnlocked: boolean): void {
+        // Scurge upgrades apply one global pearl discount and one per-upgrade discount.
+        this.scurgeGlobalPearlCostDiscount = this.getScurgeBonus(3, scurgeSpentLevels);
+        const scurgeDiscountPerUpgradeLevel = this.getScurgeBonus(5, scurgeSpentLevels);
+        for (let index = 0; index < this.scurgePearlCostDiscountByUpgrade.length; index += 1) {
+            this.scurgePearlCostDiscountByUpgrade[index] =
+                scurgeSpentLevels[index] * scurgeDiscountPerUpgradeLevel;
+        }
         const scurgeBonuses = {
             pearlMultiplier: this.getScurgeBonus(1, scurgeSpentLevels),
             pearlValueMultiplier: this.getScurgeBonus(8, scurgeSpentLevels),
@@ -136,25 +145,33 @@ export class Clamworks extends Domain {
         const bonus = this.workBonuses.find(bonus => bonus.index == index);
 
         if (bonus) {
-            return 20 * Math.pow(10 + 3 * bonus.level, index - 1);
+            return 20 * Math.pow(10 + 3 * this.promoLevel, index - 1);
         }
 
         return 0;
     }
 
     getClamCost = (index: number): number => {
-        const bonus = this.workBonuses.find(bonus => bonus.index == index);
+        const bonus = this.workBonuses.find(bonus => bonus.index === index);
 
         if (!bonus || bonus.data.cost === undefined) {
             return 0;
         }
 
-        switch (index) {
-            case 0:
-                return 1 / (1 + this.getClamBonus(4) / 100) * (1 / (1 + this.getClamBonus(8) / 100)) * (Math.pow(bonus.data.cost, bonus.level) + (3 * bonus.level + Math.pow(bonus.level, 2.5)));
-            default:
-                return 1 / (1 + this.getClamBonus(4) / 100) * (1 / (1 + this.getClamBonus(8) / 100)) * (this.getPearlRequirement(index) / 5 * Math.pow(bonus.data.cost, bonus.level) + (2 * bonus.level + Math.pow(bonus.level, 1.5)));
-        }
+        const level = bonus.level;
+        const upgradeBaseCost = Math.pow(bonus.data.cost, level);
+        const upgradeLevelCost = index === 0
+            ? 3 * level + Math.pow(level, 2.5)
+            : 2 * level + Math.pow(level, 1.5);
+        const priceBeforeDiscounts = index === 0
+            ? upgradeBaseCost + upgradeLevelCost
+            : this.getPearlRequirement(index) / 5 * upgradeBaseCost + upgradeLevelCost;
+
+        return 1 / (1 + this.getClamBonus(4) / 100)
+            * (1 / (1 + this.scurgeGlobalPearlCostDiscount / 100))
+            * (1 / (1 + this.scurgePearlCostDiscountByUpgrade[index] / 100))
+            * (1 / (1 + this.getClamBonus(8) / 100))
+            * priceBeforeDiscounts;
     }
 
     getPromoTryCost = (): number => {

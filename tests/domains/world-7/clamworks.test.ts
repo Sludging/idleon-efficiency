@@ -71,7 +71,7 @@ describe('Clam Work account outputs', () => {
     const [basePearlValue, blackPearlValue, clamCount, clamHP, clamRespawnSeconds] = results.extractions.account_outputs.result;
     expect(clamworks.basePearlValue).toMatchLiveGameWithDetails(basePearlValue, {
       tolerance: 0,
-      context: 'Base pearl value per Clam kill',
+      context: 'Account-base ordinary pearl value per drop before current-player Multikill and separate 10× factor',
     });
     expect(clamworks.blackPearlValue).toMatchLiveGameWithDetails(blackPearlValue, {
       tolerance: 0,
@@ -89,6 +89,21 @@ describe('Clam Work account outputs', () => {
       tolerance: 0,
       context: 'Clam respawn time',
     });
+  });
+
+  it('matches individual pearl upgrade costs for cost-bearing Clam Work upgrades', () => {
+    const nativeCosts = results.extractions.clam_upgrade_costs.result;
+
+    for (const bonus of clamworks.workBonuses) {
+      if (bonus.data.cost === undefined) {
+        continue;
+      }
+
+      expect(clamworks.getClamCost(bonus.index)).toMatchLiveGameWithDetails(nativeCosts[bonus.index], {
+        tolerance: 0,
+        context: `Pearl quote for Clam Work upgrade ${bonus.index}`,
+      });
+    }
   });
 
   it('matches saved Menagerie Scurge progress, level, requirement, and Clam outputs', () => {
@@ -115,7 +130,7 @@ describe('Clam Work account outputs', () => {
     });
     expect(clamworks.scurgeExpPerKill).toMatchLiveGameWithDetails(expPerKill, {
       tolerance: 0,
-      context: 'Solo base Scurge experience per Clam kill',
+      context: 'Scurge EXP amount per eligible World 7A6 kill added to account progress',
     });
     for (let index = 0; index < menagerie.scurgeSpentLevels.length; index += 1) {
       expect(menagerie.scurgeSpentLevels[index]).toMatchLiveGameWithDetails(spentLevels[index], {

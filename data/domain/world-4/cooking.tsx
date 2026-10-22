@@ -23,6 +23,7 @@ import { Summoning } from "../world-6/summoning";
 import { Arcade } from "../world-2/arcade";
 import { Sneaking } from "../world-6/sneaking";
 import { Button } from "../world-7/button";
+import type { JellyOperator } from "../world-7/jellyOperator";
 import { EventShop } from "../eventShop";
 import { StarSigns } from "../starsigns";
 import { IslandExpeditions } from '../world-2/islandExpedition';
@@ -85,6 +86,8 @@ export class Meal {
     companion162Bonus: number = 0;
     cookMasterLevel: number = 0;
     armorSetBonus: number = 0;
+    ribbonCloudBonus: number = 0;
+    ribbonJellyBonus: number = 0;
 
     // Active cooking values
     cookingContribution: number = 0;
@@ -125,7 +128,7 @@ export class Meal {
     }
 
     getRibbonBonus = (ribbonLevel: number = this.ribbonLevel) => {
-        return 1 + (Math.floor(5 * ribbonLevel + Math.floor(ribbonLevel / 2) * (4 + 6.5 * Math.floor(ribbonLevel / 5))) + Math.floor(ribbonLevel / 4) * (this.armorSetBonus / 4)) / 100;
+        return 1 + (Math.floor(5 * ribbonLevel + Math.floor(ribbonLevel / 2) * (4 + 6.5 * Math.floor(ribbonLevel / 5))) + Math.floor(ribbonLevel / 4) * (this.armorSetBonus / 4) + Math.floor(ribbonLevel / 10) * this.ribbonCloudBonus + Math.floor(ribbonLevel / 20) * this.ribbonJellyBonus) / 100;
     }
 
     // Cooking Mastery multiplier for this meal's bonus.
@@ -674,6 +677,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const equipmentSets = data.get("equipmentSets") as EquipmentSets;
     const companions = data.get("companions") as Companion[];
     const button = data.get("button") as Button;
+    const jellyOperator = data.get("jellyOperator") as JellyOperator;
     const eventShop = data.get("eventShop") as EventShop;
     const menagerie = data.get("menagerie") as Menagerie;
     const companion162Bonus = getCompanionActiveBonus(companions, 162);
@@ -690,12 +694,16 @@ export const updateCooking = (data: Map<string, any>) => {
     const jewelMealBonus = mainframe.jewels[16].active ? mainframe.jewels[16].getBonus() : 0;
     const voidPlateAchiev = achievements[233].completed;
     const foodLust = (equinox.upgrades[9] as FoodLust);
+    const ribbonCloudBonus = equinox.getChallengeBonus(73);
+    const ribbonJellyBonus = jellyOperator.getObstructionBonus(60);
     cooking.meals.forEach(meal => {
         meal.mainframeBonus = jewelMealBonus;
         meal.companion162Bonus = companion162Bonus;
         meal.reducedCostToUpgrade = voidPlateAchiev;
         meal.foodLustDiscount = foodLust.getBonus();
         meal.armorSetBonus = equipmentSets.getSetBonus("EMPEROR_SET", true);
+        meal.ribbonCloudBonus = ribbonCloudBonus;
+        meal.ribbonJellyBonus = ribbonJellyBonus;
 
         // Reset any previously calculated info, the next section should re-populate this.
         meal.cookingContribution = 0;
