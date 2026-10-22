@@ -382,6 +382,10 @@ export class Egg {
 export class ShinyBonus {
     constructor(public data: ShinyBonusData, public totalLevels: number, public pets: Pet[]) { }
 
+    updateTotalLevels = () => {
+        this.totalLevels = this.pets.reduce((sum, pet) => sum + pet.shinyLevel, 0);
+    }
+
     getBonus = () => {
         // Potentially add a switch case based on index.
         return this.data.bonusPerLevel * this.totalLevels;
@@ -501,6 +505,41 @@ export class Breeding extends Domain {
         this.basePets = Pet.fromBase(initPetStatRepo(), this.genes);
         this.crucibleThresholds = initRandoListRepo()[115].data.elements;
 
+        const worldCount = new Set(this.basePets.map(pet => pet.data.world)).size;
+        // Gene and species wallets exist before save parsing so consumers can read every catalog world.
+        this.worldGenes = Array(worldCount).fill(0);
+        this.speciesUnlocks = Array(worldCount).fill(0);
+        this.petWorldCount = 3;
+
+        this.eggs = [];
+        this.eggCapacity = 0;
+        this.eggsUnclaimed = 0;
+        this.timeTillEgg = 0;
+        this.setTimeForEgg(0, 0, 0, 0, 0);
+        this.fenceyardPets = [];
+        this.storedPets = [];
+        this.firstStoredPetPower = 0;
+        this.skillLevel = 0;
+        this.deadCells = 0;
+        this.arenaWave = 0;
+        this.savedCrucibleWave = 0;
+        this.prepareCrucibleArenaLevel(false);
+        this.starSignUnlocked = false;
+        this.starSignInfinity = false;
+        this.shinySpeedMulti = 1;
+        this.shinySpeedMultiWithSilkrode = 1;
+        this.shinySpeedMultiWithoutStarSign = 1;
+        this.breedingSpeedMulti = 1;
+        this.breedingSpeedMultiWithSilkrode = 1;
+        this.breedingSpeedMultiWithoutStarSign = 1;
+        this.petPowerFromTalent = 1;
+
+        this.shinyBonuses = Array.from(
+            GroupByFunction(this.basePets, (pet: Pet) => pet.shinyBonus.index),
+            ([, pets]) => new ShinyBonus(pets[0].shinyBonus, 0, pets)
+        );
+        this.shinyBonuses.forEach(bonus => bonus.updateTotalLevels());
+
         return this;
     }
 
@@ -528,7 +567,6 @@ export class Breeding extends Domain {
         breeding.territory.forEach(territory => territory.pets = []);
         breeding.fenceyardPets = [];
         breeding.storedPets = [];
-        breeding.shinyBonuses = [];
 
         breeding.timeTillEgg = optionList[87];
         breeding.arenaWave = optionList[89];
@@ -623,11 +661,8 @@ export class Breeding extends Domain {
             });
         });
 
-        // Calculate shiny total bonuses.
-        GroupByFunction(breeding.basePets, (pet: Pet) => pet.shinyBonus.index).forEach((shinyPets, _) => {
-            const totalLevels = shinyPets.reduce((sum, pet) => sum += pet.shinyLevel, 0);
-            breeding.shinyBonuses.push(new ShinyBonus(shinyPets[0].shinyBonus, totalLevels, shinyPets));
-        });
+        // Recompute levels on the catalog records after pet progress is parsed.
+        breeding.shinyBonuses.forEach(bonus => bonus.updateTotalLevels());
     }
 
     getTotalPetsFound(): number {

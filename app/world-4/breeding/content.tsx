@@ -18,6 +18,7 @@ import { StaticTime, TimeDown } from '../../../components/base/TimeDisplay';
 import { Breeding as BreedingDomain } from '../../../data/domain/world-4/breeding';
 import { nFormatter } from '../../../data/utility';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import useHydrated from '../../../lib/hooks/useHydrated';
 import { useShallow } from 'zustand/react/shallow';
 
 function EggDisplay() {
@@ -27,18 +28,6 @@ function EggDisplay() {
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));    
     const breeding = theData.get("breeding") as BreedingDomain;
-
-    if (!breeding) {
-        return (
-            <Box>
-                Still loading
-            </Box>
-        )
-    }
-
-    if (breeding.territory.filter(territory => territory.unlocked).length == 0) {
-        return null;
-    }
 
     return (
         <Box gap="small">
@@ -86,7 +75,13 @@ function EggDisplay() {
 }
 
 function Breeding() {
+    const hydrated = useHydrated();
     const [activeTab, setActiveTab] = useState<string>("Territory");
+
+    if (!hydrated) {
+        return <>Loading...</>;
+    }
+
     return (
         <Box>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Breeding</Heading>
