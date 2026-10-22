@@ -74,7 +74,7 @@ export function ClamWorkOverview({ clamworks }: { clamworks: Clamworks }) {
                     <Text size="small">Pearls</Text>
                 </Box>
                 <MetricGrid>
-                    <Metric value={commaNotation(clamworks.pearlsOwned)} label={<Box direction="row" align="center" gap="xxsmall"><IconImage data={Item.getImageData("Clam_Pearl")} scale={0.55} /><Text size="xsmall" color="accent-2">Owned</Text></Box>} size="xxlarge" />
+                    <Metric value={notateNumber(clamworks.pearlsOwned)} label={<Box direction="row" align="center" gap="xxsmall"><IconImage data={Item.getImageData("Clam_Pearl")} scale={0.55} /><Text size="xsmall" color="accent-2">Owned</Text></Box>} size="xxlarge" />
                 </MetricGrid>
             </Box>
         </SummaryGroups>

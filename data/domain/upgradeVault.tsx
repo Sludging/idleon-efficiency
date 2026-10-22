@@ -33,8 +33,12 @@ export class VaultUpgBonus {
     }
 
     getImageData = (): ImageData => {
+        return VaultUpgBonus.imageDataForId(this.id);
+    }
+
+    static imageDataForId = (id: number): ImageData => {
         return {
-            location: `VaultUpg${this.id}`,
+            location: `VaultUpg${id}`,
             height: 56,
             width: 51,
         }
