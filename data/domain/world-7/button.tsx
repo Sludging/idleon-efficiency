@@ -18,12 +18,12 @@ export const UPCOMING_BUTTON_TASK_COUNT = 5;
 export type ButtonTaskProgress = { currentValue: number; characterName?: string };
 
 export type UpcomingButtonTask = {
-  index: number;
-  description: string;
-  pressCount: number;
-  pressNumber: number;
-  requiredValue: number;
-  progress: ButtonTaskProgress & { isReady: boolean };
+ index: number;
+ description: string;
+ pressCount: number;
+ pressNumber: number;
+ requiredValue: number;
+ progress: ButtonTaskProgress & { isReady: boolean };
 };
 
 // Native Button_REQ uses completed presses; only linear and step requirements round up.
@@ -114,7 +114,10 @@ export class Button extends Domain {
  init(_allItems: Item[], _charCount: number) {
   this.bonuses = ButtonBonus.fromBase(initButtonBonusRepo());
   this.tasks = initButtonTaskRepo();
-  this.upcomingTaskProgress = [];
+  this.pressCount = 0;
+  this.bonusMultiplier = 1;
+  // Account processing replaces neutral progress after the task producers update.
+  this.upcomingTaskProgress = Array.from({ length: UPCOMING_BUTTON_TASK_COUNT }, () => ({ currentValue: 0 }));
   this.taskByPosition = Array.from({ length: BUTTON_TASK_CYCLE_LENGTH });
 
   this.tasks.forEach(task => {
