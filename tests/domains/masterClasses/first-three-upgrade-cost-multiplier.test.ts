@@ -10,6 +10,7 @@ import { loadTestSave, validateGameDataStructure } from '../../utils/cloudsave-l
 import { initAccountDataKeys, updateIdleonData } from '../../../data/domain/idleonData';
 import { initAllItems } from '../../../data/domain/items';
 import { normalizeCompanionStates } from '../../../data/domain/companions/companionState';
+import { StaticRepositories } from '../../../data/domain/repositories';
 
 const saveName = 'latest';
 const extractionResultsName = 'masterclasses-first-three-upgrade-cost-multiplier-data.json';
@@ -38,7 +39,7 @@ describe('Master Classes - first-three upgrade cost multiplier', () => {
     extractionResults = loadExtractionResults(extractionResultsName);
     validateExtractionHealth(extractionResults);
     cloudSave = loadTestSave(saveName);
-    gameData = initAccountDataKeys(initAllItems());
+    gameData = initAccountDataKeys(initAllItems(), new StaticRepositories());
     processAccount();
     validateGameDataStructure(gameData);
   });

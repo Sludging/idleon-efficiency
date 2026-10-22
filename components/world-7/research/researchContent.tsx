@@ -243,7 +243,7 @@ export default function ResearchContent() {
                         <Text size="small">{lens.targetObservationIndex === undefined ? "Unplaced" : research.observations.find(observation => observation.index === lens.targetObservationIndex)!.data.name}</Text>
                     </ShadowBox>)}
                 </Grid>
-                {research.lenses.length === 0 && <Text size="small">No owned lenses.</Text>}
+                {research.lenses.length === 0 && <Text size="small">No saved lens data.</Text>}
             </Box>}
             {tab === "Posty Notes" && <Box as="section" id="research-posty-notes" gap="medium" aria-label="Posty Notes">
                 <Box direction="row" wrap gap="medium">

@@ -9,6 +9,7 @@ import fs from 'fs';
 import { Cloudsave } from '../../data/domain/cloudsave';
 import { initAllItems } from '../../data/domain/items';
 import { initAccountDataKeys, updateIdleonData } from '../../data/domain/idleonData';
+import { StaticRepositories } from '../../data/domain/repositories';
 import { normalizeCompanionStates } from '../../data/domain/companions/companionState';
 const accountDataset = require('../helpers/account-dataset.cjs') as {
   resolveTestSavePath(saveName: string): string;
@@ -41,7 +42,7 @@ export const loadGameDataFromSave = (saveName: string): Map<string, any> => {
   const allItems = initAllItems();
   
   // Initialize account data structure
-  const accountData = initAccountDataKeys(allItems);
+  const accountData = initAccountDataKeys(allItems, new StaticRepositories());
   
   // Parse player names and other required data
   const charNames = cloudSave.get("playerNames");

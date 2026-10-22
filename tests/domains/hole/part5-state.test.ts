@@ -3,6 +3,7 @@ import { loadGameDataFromSave, loadTestSave } from '../../utils/cloudsave-loader
 import { initAllItems } from '../../../data/domain/items';
 import { Hole, updateHole } from '../../../data/domain/world-5/hole/hole';
 import { initAccountDataKeys, updateIdleonData } from '../../../data/domain/idleonData';
+import { StaticRepositories } from '../../../data/domain/repositories';
 import { normalizeCompanionStates } from '../../../data/domain/companions/companionState';
 
 import { getStampBonusForKey } from '../../../data/domain/world-1/stamps';
@@ -202,7 +203,7 @@ describe('Hole part-five imported state', () => {
         const save = loadTestSave(saveName);
         const sourceSnapshot = JSON.stringify(save.toJSON());
         const importNormally = () => updateIdleonData(
-            initAccountDataKeys(initAllItems()),
+            initAccountDataKeys(initAllItems(), new StaticRepositories()),
             save,
             save.get('playerNames'),
             normalizeCompanionStates(save.get('companions')),
