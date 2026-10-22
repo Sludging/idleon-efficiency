@@ -9,6 +9,9 @@ import { Hole } from "../world-5/hole/hole";
 import { LegendTalents } from "../world-7/legendTalents";
 import { Meritocraty } from "../world-7/meritocraty";
 import { Menagerie } from "../menagerie";
+import { EventShop } from "../eventShop";
+import type { Breeding } from "../world-4/breeding";
+import { JellyOperator } from "../world-7/jellyOperator";
 
 const FisherooBonuses = [
     "{x bluefin fish caught",
@@ -17,6 +20,8 @@ const FisherooBonuses = [
     "Other Reset bonuses are {x higher",
     "{x Tartar fish caught"
 ];
+
+const PoppyShinyFishMultipliers = [30, 50, 100, 150, 250, 500];
 
 export class PoppyFisherooBonus {
     level: number = 0;
@@ -92,6 +97,14 @@ export class Poppy extends Domain {
     vaultUpgrade21: number = 0;
     meritoBonus12: number = 0;
     gambitBonus8: number | null = 0;
+    eventShopBonus52 = 0;
+
+    // Fish-per-catch inputs
+    vaultUpgrade45 = 0;
+    petArenaCrucBonus7 = 0;
+    jellyBonus20 = 0;
+    fountainWater1Upgrade18 = 0;
+    fishPerCatchInputsPrepared = false;
     
     getCurrencyImageData(): ImageData {
         return { location: "ClickerFishCurrency", width: 72, height: 72 };
@@ -113,6 +126,7 @@ export class Poppy extends Domain {
     parse(data: Map<string, any>): void {
         const poppy = data.get(this.getDataKey()) as Poppy;
         const optionList = data.get("OptLacc") as number[];
+        poppy.fishPerCatchInputsPrepared = false;
 
         poppy.ownedFishes = optionList[267] || 0;
         poppy.ownedTartarFishes = optionList[296] || 0;
@@ -152,13 +166,41 @@ export class Poppy extends Domain {
         if (!upgrade) {
             return 0;
         }
-
         const reductionBase = upgrade.index == 0 ? 1 + upgrade.level : 1;
-        const reduction = reductionBase * (1 / (1 + 10 * this.getUpgradeLevel(4) / 100)) * (1 / (1 + 15 * this.getTarpitUpgradeLevel(3) / 100)) 
+        const reduction = reductionBase * (1 / (1 + 10 * this.getUpgradeLevel(4) / 100))
+            * (1 / (1 + 3 * this.eventShopBonus52))
+            * (1 / (1 + 15 * this.getTarpitUpgradeLevel(3) / 100))
             * (1 / (1 + 5 * this.getMegafishQuantity(10) * this.getTarpitUpgradeLevel(7) / 100));
         const menagerieCostReduction = index == 0 ? this.menagerieCostReduction : 1;
 
         return reduction * (1 / Math.max(1, this.getFisherooBonus(2))) * menagerieCostReduction * upgrade.data.x0 * Math.pow(upgrade.data.x1, upgrade.level);
+    }
+
+    getFishPerCatch(): number {
+        if (!this.fishPerCatchInputsPrepared || this.gambitBonus8 === null) {
+            throw new Error("Poppy fish-per-catch inputs are not prepared");
+        }
+
+        const fishLevel = this.getUpgradeLevel(7);
+        let shinyMultiplier = 1;
+        for (let index = 0; index < this.shinyFishes.length; index += 1) {
+            shinyMultiplier *= 1 + PoppyShinyFishMultipliers[index] * Math.log(Math.max(1, this.shinyFishes[index])) / 100;
+        }
+
+        return (1 + Math.min(5, fishLevel))
+            * Math.max(1, 1 + 0.5 * (fishLevel - 5) * this.getMegafishQuantity(5))
+            * this.getFisherooBonus(0)
+            * (1 + this.vaultUpgrade45 / 100)
+            * (1 + 3 * this.petArenaCrucBonus7)
+            * (1 + this.gambitBonus8 / 100)
+            * (1 + this.jellyBonus20 / 100)
+            * (1 + this.fountainWater1Upgrade18 / 100)
+            * (1 + this.meritoBonus12 / 100)
+            * (1 + 4 * this.eventShopBonus52)
+            * (10 * this.getUpgradeLevel(0) + 100 * this.getTarpitUpgradeLevel(0) + 1000 * this.getTarpitUpgradeLevel(7)
+                + 50 * this.getUpgradeLevel(5) + 200 * this.getUpgradeLevel(10))
+            * shinyMultiplier
+            * (1 + 8 * this.getTarpitUpgradeLevel(2) / 100);
     }
 
     getNextGlobalBonusUpgrade(): {
@@ -193,21 +235,19 @@ export class Poppy extends Domain {
     getFisherooBonus(index: number): number {
         const bonus = this.fisherooBonuses.find(bonus => bonus.index == index);
 
-        if (!bonus) {
-            return 0;
-        }
+        if (!bonus) return 0;
 
+        const otherResetBonus = index !== 3 && bonus.level > 0 ? this.getFisherooBonus(3) : 1;
         switch (index) {
-            case 0: return (1 + .4 * bonus.level) * this.getFisherooBonus(3);
-            case 1: return (1 + .3 * bonus.level) * this.getFisherooBonus(3);
-            case 2: return (1 + .15 * bonus.level) * this.getFisherooBonus(3);
-            case 3: return 1 + .04 * bonus.level;
-            case 4: return (1 + .2 * bonus.level) * this.getFisherooBonus(3);
+            case 0: return (1 + 0.4 * bonus.level) * otherResetBonus;
+            case 1: return (1 + 0.3 * bonus.level) * otherResetBonus;
+            case 2: return (1 + 0.15 * bonus.level) * otherResetBonus;
+            case 3: return 1 + 0.04 * bonus.level;
+            case 4: return (1 + 0.2 * bonus.level) * otherResetBonus;
         }
 
         return 0;
     }
-
     getUpgradeLevel(index: number): number {
         return this.upgrades.find(upgrade => upgrade.index == index)?.level || 0;
     }
@@ -232,7 +272,7 @@ export class Poppy extends Domain {
 
     getMegafishQuantity(index: number): number {
         // If we don't own this megafish yet, return 0
-        if (index > this.ownedMegafishes) {
+        if (index >= this.ownedMegafishes) {
             return 0;
         }
 
@@ -251,10 +291,12 @@ export const updatePoppyGlobalBonus = (data: Map<string, any>) => {
     const companions = data.get("companions") as Companion[];
     const legendTalents = data.get("legendTalents") as LegendTalents;
     const menagerie = data.get("menagerie") as Menagerie;
+    const eventShop = data.get("eventShop") as EventShop;
 
     poppy.companionBonus51 = getCompanionActiveBonus(companions, 51);
     poppy.legendTalent26 = legendTalents.getBonusFromIndex(26);
     poppy.menagerieCostReduction = 1 / (1 + menagerie.getBonusValue(18) / 100);
+    poppy.eventShopBonus52 = Number(eventShop.isBonusOwned(52));
 
     return poppy;
 }
@@ -268,6 +310,24 @@ export const updatePoppyFishRate = (data: Map<string, any>) => {
     poppy.vaultUpgrade21 = upgradeVault.getBonusForId(21);
     poppy.meritoBonus12 = meritocraty.getCurrentBonus(12);
     poppy.gambitBonus8 = hole.gambit.getBonus(8);
+
+    return poppy;
+}
+export const updatePoppyFishPerCatch = (data: Map<string, any>) => {
+    const poppy = data.get("poppy") as Poppy;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+    const meritocraty = data.get("meritocraty") as Meritocraty;
+    const hole = data.get("hole") as Hole;
+    const breeding = data.get("breeding") as Breeding;
+    const jellyOperator = data.get("jellyOperator") as JellyOperator;
+
+    poppy.vaultUpgrade45 = upgradeVault.getBonusForId(45);
+    poppy.petArenaCrucBonus7 = breeding.getCrucibleBonus(7);
+    poppy.gambitBonus8 = hole.gambit.getBonus(8);
+    poppy.jellyBonus20 = jellyOperator.getObstructionBonus(20);
+    poppy.fountainWater1Upgrade18 = hole.getFountainBonus(1, 18);
+    poppy.meritoBonus12 = meritocraty.getCurrentBonus(12);
+    poppy.fishPerCatchInputsPrepared = true;
 
     return poppy;
 }

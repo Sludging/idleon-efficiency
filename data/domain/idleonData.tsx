@@ -32,7 +32,7 @@ import { Dungeons } from './dungeons';
 import { Forge, updateForge } from './world-1/forge';
 import { Cooking, updateCooking } from './world-4/cooking';
 import { Lab, updateLab } from './world-4/lab';
-import { Breeding, updateAllShinyEffects, updateBeastMasterImpact, updateBreeding, updateBreedingDisplayData } from './world-4/breeding';
+import { Breeding, updateAllShinyEffects, updateBeastMasterImpact, updateBreeding, updateBreedingDisplayData, prepareBreedingCrucibleLevel } from './world-4/breeding';
 import { notUndefined } from '../utility';
 import { Sigils, updateSigils, updateSigilsChargeSpeed } from './world-2/alchemy/sigils';
 import { AnvilWrapper, updateAnvil } from './world-1/anvil';
@@ -84,15 +84,15 @@ import { Clamworks, updateClamWorkOutputs } from './world-7/clamworks';
 import { Meritocraty, updateMeritocratyBonus, updateMeritocratyLate } from './world-7/meritocraty';
 import { LegendTalents, updateLegendTalents } from './world-7/legendTalents';
 import { MasterClasses, updateMasterClasses } from './masterClasses';
-import { Bubba, updateBubba } from './world-3/bubba';
 import { CoralKid } from './world-7/coralKid';
+import { Bubba, updateBubba, updateBubbaMeatRate } from './world-3/bubba';
 import { BigFish, updateBigFishUnlocked } from './world-7/bigFish';
 import { CoralReef, updateCoralReefDailyGain, updateCoralReefMaximumLevels } from './world-7/coralReef';
 import { DancingCoral } from './world-7/dancingCoral';
 import { Hoops } from './world-1/hoops';
 import { Darts } from './world-1/darts';
 import { Orion, updateOrionFeatherRate, updateOrionGlobalBonus } from './world-1/orion';
-import { Poppy, updatePoppyFishRate, updatePoppyGlobalBonus } from './world-2/poppy';
+import { Poppy, updatePoppyFishRate, updatePoppyFishPerCatch, updatePoppyGlobalBonus } from './world-2/poppy';
 import { updateNonDepositedZenithClusters, ZenithMarket } from './world-7/zenithShop';
 import { Gallery, updateGallery } from './world-7/gallery';
 import { HatRack, updateHatRack } from './world-7/hatRack';
@@ -281,6 +281,8 @@ const postProcessingMap: Record<string, Function> = {
     "holeStudyEffects": (_doc: Cloudsave, accountData: Map<string, any>) => updateHoleStudyEffects(accountData),
     // Camp effects use parsed Majik and Harp state before their shared consumers.
     "holeUpgradeEffects": (_doc: Cloudsave, accountData: Map<string, any>) => updateHoleUpgradeEffects(accountData),
+    // Pet Arena Crucible rewards need parsed Menagerie unlocks before Menagerie prepares Lumi inputs.
+    "breedingCrucibleLevel": (_doc: Cloudsave, accountData: Map<string, any>) => prepareBreedingCrucibleLevel(accountData),
     // Parse-owned Menagerie effects must be ready before the earliest recipient calculation.
     "menageriePrepared": (_doc: Cloudsave, accountData: Map<string, any>) => prepareMenagerie(accountData),
     // Coral Reef maximum levels use parsed Menagerie unlocks before cap consumers run.
@@ -378,6 +380,8 @@ const postProcessingMap: Record<string, Function> = {
     "hatRack": (doc: Cloudsave, accountData: Map<string, any>) => updateHatRack(accountData),
     // Sushi consumes settled Arcade, Gaming, Collider, Sailing, Research, Button, Jelly and Minehead state.
     "sushiStation": (doc: Cloudsave, accountData: Map<string, any>) => updateSushiStation(accountData),
+    "updatePoppyFishPerCatch": (_doc: Cloudsave, accountData: Map<string, any>) => updatePoppyFishPerCatch(accountData),
+    "updateBubbaMeatRate": (_doc: Cloudsave, accountData: Map<string, any>) => updateBubbaMeatRate(accountData),
     "mineheadCurrencyGain": (_doc: Cloudsave, accountData: Map<string, any>) => updateMineheadCurrencyGain(accountData),
     "players": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayers(accountData),
     "capacity": (doc: Cloudsave, accountData: Map<string, any>) => updateCapacity(accountData),

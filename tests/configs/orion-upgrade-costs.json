@@ -1,0 +1,11 @@
+{
+  "description": "Direct native current price for every Orion upgrade catalog row",
+  "target": "Orion current individual upgrade prices",
+  "extractions": [
+    {
+      "label": "upgrade_prices",
+      "expression": "idleon.getAttr(\"CustomLists\").h.Owlz.slice(0,9).map((_,index)=>idleon.callFunction(\"Summoning\",\"OwlCost\",index,0))",
+      "description": "Current individual feather price for each Orion upgrade, in canonical catalog order 0-8"
+    }
+  ]
+}

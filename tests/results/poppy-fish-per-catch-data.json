@@ -1,0 +1,12 @@
+{
+  "extractions": {
+    "fish_per_catch": {
+      "expression": "idleon.callFunction(\"Summoning\",\"RooCatchFishQTY\",0,0)",
+      "result": {
+        "type": "large_number",
+        "value": "1.4734042332389455e+21"
+      }
+    }
+  },
+  "errors": {}
+}

@@ -1,11 +1,13 @@
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue, ExtractionResults } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
+import { Breeding } from '../../../data/domain/world-4/breeding';
 import { Menagerie } from '../../../data/domain/menagerie';
 
 const extractionResultsName = 'menagerie-lumi-inputs-data.json';
 
 let extractionResults: ExtractionResults;
 let menagerie: Menagerie;
+let breeding: Breeding;
 let expectedLumiRate: number;
 
 beforeAll(() => {
@@ -14,17 +16,16 @@ beforeAll(() => {
   expectedLumiRate = getExtractedValue(extractionResults, 'lumi_rate') as number;
   const accountData = loadGameDataFromSave('latest');
   menagerie = accountData.get('menagerie') as Menagerie;
+  breeding = accountData.get('breeding') as Breeding;
 });
 
 describe('Menagerie Lumi saved inputs', () => {
   it('uses saved Crucible unlock progression for native bonus branches', () => {
-    const lumiInputs = menagerie.getLumiSaveInputs();
-
-    expect(lumiInputs.crucibleBonus4).toMatchLiveGameWithDetails(
+    expect(breeding.getCrucibleBonus(4)).toMatchLiveGameWithDetails(
       getExtractedValue(extractionResults, 'crucible_4'),
       { tolerance: 0, context: 'Crucible bonus 4 contribution' },
     );
-    expect(lumiInputs.crucibleBonus14).toMatchLiveGameWithDetails(
+    expect(breeding.getCrucibleBonus(14)).toMatchLiveGameWithDetails(
       getExtractedValue(extractionResults, 'crucible_14'),
       { tolerance: 0, context: 'Crucible bonus 14 contribution' },
     );

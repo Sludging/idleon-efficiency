@@ -12,6 +12,12 @@ import { BubbaMegafleshBase, initBubbaMegafleshRepo } from "../data/BubbaMegafle
 import { Companion, getCompanionActiveBonus } from "../companions";
 import { Minehead } from "../world-7/minehead";
 import { Menagerie } from "../menagerie";
+import type { Breeding } from "../world-4/breeding";
+
+import { UpgradeVault } from "../upgradeVault";
+import { Hole } from "../world-5/hole/hole";
+import { SushiStation } from "../world-7/sushi";
+import { JellyOperator } from "../world-7/jellyOperator";
 
 const SmokedMeatValues = [ 2, 3, 4, 6, 10 ];
 
@@ -112,6 +118,11 @@ export class Bubba extends Domain {
     mineheadBonus5: number = 0;
     companionBonus51: number = 0;
     menagerieCostReduction: number = 1;
+    petArenaCrucBonus10 = 0;
+    sushiBonus39 = 0;
+    jellyBonus58 = 0;
+    vaultUpgrade65 = 0;
+    fountainWater2Upgrade18 = 0;
 
     getCurrencyImageData(): ImageData {
         return { location: "ClickerMeatCurrency", width: 72, height: 72 };
@@ -184,15 +195,16 @@ export class Bubba extends Domain {
         return Math.max(0, happiness);
     }
 
-    getMeatSliceRate(happinessRank: number = 0): number {
-        const happiness = this.getHappinessForRank(happinessRank);
+    getMeatSliceRate(happinessRank?: number): number {
+        const happiness = happinessRank === undefined ? this.happiness : this.getHappinessForRank(happinessRank);
 
         return (this.getUpgradeBonus(0) + (this.getUpgradeBonus(7) + this.getUpgradeBonus(23))) *
             (1 + (this.getUpgradeBonus(2) + (this.getUpgradeBonus(11) + (this.getUpgradeBonus(19) + this.getUpgradeBonus(24) * lavaLog(this.someValue)))) / 100) *
             this.getHappinessBonus(happiness) * this.getDicesMulti() * this.getSmokedMeatMulti() * (1 + this.getCharismaBonus(0) / 100) *
-            (1 + this.getMegafleshQuantity(0) * this.getTotalUpgradeLevel() / 100) * (1 + this.getGiftPassiveBonus(0) / 100) * this.getSpareCoinsMulti();
+            (1 + this.getMegafleshQuantity(0) * this.getTotalUpgradeLevel() / 100) * (1 + this.getGiftPassiveBonus(0) / 100)
+            * this.getSpareCoinsMulti() * (1 + 2 * this.petArenaCrucBonus10) * (1 + this.sushiBonus39 / 100)
+            * (1 + this.jellyBonus58 / 100) * (1 + this.vaultUpgrade65 / 100) * (1 + this.fountainWater2Upgrade18 / 100);
     }
-
     getTotalUpgradeLevel(): number {
         return this.upgrades.reduce((sum, upgrade) => sum += upgrade.getRealLevel(), 0);
     }
@@ -263,7 +275,7 @@ export class Bubba extends Domain {
     }
 
     getGiftPassiveBonus(index: number): number {
-        const gift = this.gifts.find(gift => gift.index = index);
+        const gift = this.gifts.find(gift => gift.index === index);
 
         if (gift && ((index + 1) == this.equipedGift1 || (index + 1) == this.equipedGift2)) {
             return gift.data.value * Math.min(5, 1 + this.getUpgradeBonus(17) / 100);
@@ -308,6 +320,22 @@ export class Bubba extends Domain {
 
         return megafleshUpgrade > index ? 11 == index ? megafleshUpgrade - 11 : 1 : 0
     }
+}
+export const updateBubbaMeatRate = (data: Map<string, any>) => {
+    const bubba = data.get("bubba") as Bubba;
+    const breeding = data.get("breeding") as Breeding;
+    const sushi = data.get("sushi") as SushiStation;
+    const jellyOperator = data.get("jellyOperator") as JellyOperator;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+    const hole = data.get("hole") as Hole;
+
+    bubba.petArenaCrucBonus10 = breeding.getCrucibleBonus(10);
+    bubba.sushiBonus39 = sushi.getBonusFromIndex(39);
+    bubba.jellyBonus58 = jellyOperator.getObstructionBonus(58);
+    bubba.vaultUpgrade65 = upgradeVault.getBonusForId(65);
+    bubba.fountainWater2Upgrade18 = hole.getFountainBonus(2, 18);
+
+    return bubba;
 }
 
 export const updateBubba = (data: Map<string, any>) => {

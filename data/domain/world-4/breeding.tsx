@@ -26,6 +26,7 @@ import { Item } from "../items";
 import { StarSigns } from "../starsigns";
 import { CropScientistBonusText, Farming } from "../world-6/farming";
 import { Summoning } from "../world-6/summoning";
+import type { Menagerie } from "../menagerie";
 
 export const waveReqs = "2 5 8 12 15 20 25 35 50 65 80 100 125 150 175 200".split(" ").map(value => parseInt(value));
 
@@ -389,6 +390,9 @@ export class ShinyBonus {
 
 export class Breeding extends Domain {
     arenaWave: number = 0;
+    private savedCrucibleWave = 0;
+    private crucibleArenaLevel: number | null = null;
+    private crucibleThresholds: string[] = [];
     territory: Territory[] = [];
     upgrade: PetUpgrade[] = [];
     genes: PetGene[] = [];
@@ -430,6 +434,27 @@ export class Breeding extends Domain {
             return false;
         }
         return this.arenaWave >= waveReqs[bonusNumber];
+    }
+
+    prepareCrucibleArenaLevel(crucibleUnlocked: boolean): void {
+        let crucibleArenaLevel = 0;
+        if (crucibleUnlocked) {
+            while (crucibleArenaLevel < 16 && this.savedCrucibleWave >= Number(this.crucibleThresholds[crucibleArenaLevel])) {
+                crucibleArenaLevel++;
+            }
+        }
+        this.crucibleArenaLevel = crucibleArenaLevel;
+    }
+
+    private getCrucibleArenaLevel(): number {
+        if (this.crucibleArenaLevel === null) {
+            throw new Error("Crucible progress must be prepared before reading rewards");
+        }
+        return this.crucibleArenaLevel;
+    }
+
+    getCrucibleBonus(index: number): number {
+        return Number(this.getCrucibleArenaLevel() > index);
     }
 
     setTimeForEgg = (labBonus: number, mealBonus: number, alchemyBonus: number, achivementBonus: number, skillMasteryBonus: number) => {
@@ -474,6 +499,7 @@ export class Breeding extends Domain {
         this.upgrade = PetUpgrade.fromBase(initPetUpgradeRepo());
         this.genes = PetGene.fromBase(initPetGeneRepo());
         this.basePets = Pet.fromBase(initPetStatRepo(), this.genes);
+        this.crucibleThresholds = initRandoListRepo()[115].data.elements;
 
         return this;
     }
@@ -481,6 +507,8 @@ export class Breeding extends Domain {
     parse(data: Map<string, any>): void {
         const breeding = data.get(this.getDataKey()) as Breeding;
         const optionList = data.get("OptLacc") as number[];
+        breeding.savedCrucibleWave = Number(optionList[628] ?? 0);
+        breeding.crucibleArenaLevel = null;
 
         const petsStored = (data.get("PetsStored") ?? []) as [string, number | string, number, number][];
         // Animalistic Ferocity uses the first raw slot, even when its species is filtered from the display list.
@@ -712,6 +740,14 @@ export const updateBreeding = (data: Map<string, any>) => {
 
     return breeding;
 }
+export const prepareBreedingCrucibleLevel = (data: Map<string, any>) => {
+    const breeding = data.get("breeding") as Breeding;
+    const menagerie = data.get("menagerie") as Menagerie;
+
+    breeding.prepareCrucibleArenaLevel(menagerie.getUnlocks()[8].owned);
+
+    return breeding;
+};
 
 export const updateAllShinyEffects = (data: Map<string, any>) => {
     const breeding = data.get("breeding") as Breeding;

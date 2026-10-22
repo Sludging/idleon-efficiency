@@ -1,0 +1,16 @@
+{
+  "description": "Direct native current prices for all Poppy upgrade catalog rows",
+  "target": "Poppy Bluefin and Tarpit individual upgrade prices",
+  "extractions": [
+    {
+      "label": "bluefin_upgrade_prices",
+      "expression": "idleon.getAttr(\"CustomLists\").h.Owlz.slice(9,21).map((_,index)=>idleon.callFunction(\"Summoning\",\"RooCost\",index,0))",
+      "description": "Current individual fish price for each Bluefin upgrade, in canonical catalog order 0-11"
+    },
+    {
+      "label": "tarpit_upgrade_prices",
+      "expression": "idleon.getAttr(\"CustomLists\").h.Owlz.slice(21,29).map((_,index)=>idleon.callFunction(\"Summoning\",\"RooCost_T\",index,0))",
+      "description": "Current individual fish price for each Tarpit upgrade, in canonical local catalog order 0-7"
+    }
+  ]
+}

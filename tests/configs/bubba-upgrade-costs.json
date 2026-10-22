@@ -1,0 +1,11 @@
+{
+  "description": "Direct native current price for every Bubba upgrade catalog row",
+  "target": "Bubba current individual upgrade prices",
+  "extractions": [
+    {
+      "label": "upgrade_prices",
+      "expression": "idleon.getAttr(\"CustomLists\").h.BubbaUpg.map((_,index)=>idleon.callFunction(\"Bubbastuff\",\"UpgCost\",index,0))",
+      "description": "Current individual meat-slice price for each Bubba upgrade, in canonical catalog order 0-27"
+    }
+  ]
+}
