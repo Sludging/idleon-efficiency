@@ -748,6 +748,7 @@ const parseTalents = (talentLevels: string, talentMaxLevels: string, spelunkData
     // Ordinary talent projection uses the active preset; account talent maxima use both presets.
     player.activeSuperTalentIndexes = new Set(spelunkData[Math.round(20 + player.playerID + 12 * activePreset)]);
     player.talents.forEach((talent) => {
+        talent.resetAccountBonusInputs();
         talent.level = jsonTalents[talent.skillIndex] ?? 0;
         talent.pointsSpent = jsonTalents[talent.skillIndex] ?? 0;
         talent.maxLevel = jsonMaxTalents[talent.skillIndex] ?? 0;

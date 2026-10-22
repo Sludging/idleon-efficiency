@@ -10,7 +10,7 @@ import type { Gaming } from "../world-5/gaming";
 export class Prayer {
     level: number = 0;
     totalPrayersOwned: number = 0; // PrayOwned
-    private passiveBonusFraction: number | undefined;
+    private passiveBonusFraction: number = 0;
     constructor(public index: number, public data: PrayerModel) { }
 
     getLevelCosts = (level: number = this.level): number => {
@@ -43,7 +43,7 @@ export class Prayer {
     }
 
     resetPlayerBonusInputs(): void {
-        this.passiveBonusFraction = undefined;
+        this.passiveBonusFraction = 0;
     }
 
     preparePassiveBonusFraction(fraction: number): void {
@@ -51,9 +51,6 @@ export class Prayer {
     }
 
     getBonusForPlayer(player: Player): number {
-        if (this.passiveBonusFraction === undefined) {
-            throw new Error("Character Prayer bonus inputs have not been prepared");
-        }
         if (player.activePrayers.includes(this.index)) {
             return this.getBonus();
         }

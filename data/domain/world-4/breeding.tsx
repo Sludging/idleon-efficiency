@@ -395,7 +395,7 @@ export class ShinyBonus {
 export class Breeding extends Domain {
     arenaWave: number = 0;
     private savedCrucibleWave = 0;
-    private crucibleArenaLevel: number | null = null;
+    private crucibleArenaLevel = 0;
     private crucibleThresholds: string[] = [];
     territory: Territory[] = [];
     upgrade: PetUpgrade[] = [];
@@ -450,15 +450,8 @@ export class Breeding extends Domain {
         this.crucibleArenaLevel = crucibleArenaLevel;
     }
 
-    private getCrucibleArenaLevel(): number {
-        if (this.crucibleArenaLevel === null) {
-            throw new Error("Crucible progress must be prepared before reading rewards");
-        }
-        return this.crucibleArenaLevel;
-    }
-
     getCrucibleBonus(index: number): number {
-        return Number(this.getCrucibleArenaLevel() > index);
+        return Number(this.crucibleArenaLevel > index);
     }
 
     setTimeForEgg = (labBonus: number, mealBonus: number, alchemyBonus: number, achivementBonus: number, skillMasteryBonus: number) => {
@@ -523,7 +516,7 @@ export class Breeding extends Domain {
         this.deadCells = 0;
         this.arenaWave = 0;
         this.savedCrucibleWave = 0;
-        this.prepareCrucibleArenaLevel(false);
+        this.crucibleArenaLevel = 0;
         this.starSignUnlocked = false;
         this.starSignInfinity = false;
         this.shinySpeedMulti = 1;
@@ -547,7 +540,7 @@ export class Breeding extends Domain {
         const breeding = data.get(this.getDataKey()) as Breeding;
         const optionList = data.get("OptLacc") as number[];
         breeding.savedCrucibleWave = Number(optionList[628] ?? 0);
-        breeding.crucibleArenaLevel = null;
+        breeding.crucibleArenaLevel = 0;
 
         const petsStored = (data.get("PetsStored") ?? []) as [string, number | string, number, number][];
         // Animalistic Ferocity uses the first raw slot, even when its species is filtered from the display list.
