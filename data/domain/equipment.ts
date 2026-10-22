@@ -7,6 +7,7 @@ import type { Gallery } from './world-7/gallery';
 import type { HatRack } from './world-7/hatRack';
 import type { ObolsData, ObolStats } from './world-2/obols';
 import type { Gaming } from './world-5/gaming';
+import type { Menagerie } from './menagerie';
 import { getStampBonusForKey, type Stamp } from './world-1/stamps';
 
 const powerSuffixes = initEquipmentMetadataRepo()[0].data.powerSuffixes;
@@ -213,6 +214,7 @@ export const updateEquipmentProperties = (data: Map<string, any>): void => {
  const hatRack = data.get('hatRack') as HatRack;
  const obols = data.get('obols') as ObolsData;
  const gaming = data.get('gaming') as Gaming;
+ const menagerie = data.get('menagerie') as Menagerie;
  const stamps = data.get('stamps') as Stamp[][];
  const stampPercent = {
   STR: getStampBonusForKey(stamps, 'PctSTR'),
@@ -223,12 +225,12 @@ export const updateEquipmentProperties = (data: Map<string, any>): void => {
  const superbitBonus = Number(gaming.isSuperbitPurchased(2));
  for (const player of players) {
   const combinedObols = obols.getStats(player.playerID);
-  combinedObols.updateAttributeProperties({
+  combinedObols.updateProperties({
    STR: { talentPercent: player.getTalentBonus(111), superbitBonus },
    AGI: { talentPercent: player.getTalentBonus(291), superbitBonus },
    WIS: { talentPercent: player.getTalentBonus(486), superbitBonus },
    LUK: { talentPercent: player.getTalentBonus(36), superbitBonus },
-  });
+  }, menagerie.silverJellyfish.miscMultiplier);
   player.gear.updateProperties(player, { gallery, hatRack, obols: combinedObols }, {
    STR: { talentPercent: player.getTalentBonus(96), stampPercent: stampPercent.STR },
    AGI: { talentPercent: player.getTalentBonus(276), stampPercent: stampPercent.AGI },

@@ -1,3 +1,4 @@
+import type { Menagerie } from '../../../data/domain/menagerie';
 import { Player } from '../../../data/domain/player';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
@@ -13,12 +14,14 @@ const primaryTalents = {"STR": 96, "AGI": 276, "WIS": 456, "LUK": 21};
 describe('Equipment - direct property producers', () => {
   let results: ExtractionResults;
   let data: Map<string, any>;
+  let silverMultiplier: number;
   let player: Player;
   beforeAll(() => {
     results = loadExtractionResults('player-equipment-properties-data.json');
     validateExtractionHealth(results);
     data = loadGameDataFromSave('latest');
     player = getTargetPlayer(data.get('players') as Player[]);
+    silverMultiplier = (data.get('menagerie') as Menagerie).silverJellyfish.miscMultiplier;
   });
   Object.entries(primaryTalents).forEach(([property, talent]) => {
     it(`matches the primary ${property} equipment talent`, () => {
@@ -44,11 +47,16 @@ describe('Equipment - direct property producers', () => {
       expect(rack.getProperty(property, player)).toMatchLiveGame(getExtractedValue(results, `hat_${property}`), 0);
     });
   });
+  // Silver MISC expectations use captured raw Obol rows and the loaded provider; this checks the source-backed input rule, not native gear parity.
   properties.forEach(property => {
-    it(`matches the complete adjusted Obol ${property} input`, () => {
+    it(`matches the ${property} Obol contribution`, () => {
       const obols = data.get('obols') as ObolsData;
       const stats: ObolStats = obols.getStats(player.playerID);
-      expect(stats.getProperty(property)).toMatchLiveGame(getExtractedValue(results, `obol_adjusted_${property}`), 0);
+      const isSilverAffected = property === 'Defence' || property.endsWith('_Power');
+      const expected = isSilverAffected
+        ? getExtractedValue(results, `obol_raw_${property}`) * silverMultiplier
+        : getExtractedValue(results, `obol_adjusted_${property}`);
+      expect(stats.getProperty(property)).toMatchLiveGame(expected, 0);
     });
   });
 });

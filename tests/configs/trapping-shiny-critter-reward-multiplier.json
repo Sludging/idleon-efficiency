@@ -1,0 +1,11 @@
+{
+  "description": "Extract the Trapping shiny-critter reward multiplier",
+  "target": "Trapping shiny-critter reward multiplier",
+  "extractions": [
+    {
+      "label": "shiny_critter_reward_multiplier",
+      "expression": "idleon.callFunction(\"TrappingStuffs\", \"RareBonusOnOpenMULTI\", 0)",
+      "description": "Dimensionless multiplier applied to shiny-critter reward quantity, not the final prayer-adjusted rounded item count or shiny chance"
+    }
+  ]
+}

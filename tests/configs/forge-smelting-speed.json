@@ -1,0 +1,11 @@
+{
+  "description": "Compare every Forge slot's website smelting-speed progress multiplier with the native game result",
+  "target": "Forge slot smelting-speed progress multiplier used by refill timing",
+  "extractions": [
+    {
+      "label": "forge_smelting_speed",
+      "expression": "Array.from({ length: idleon.getAttr(\"ForgeItemOrder\").length / 3 }, (_, slotIndex) => idleon.callFunction(\"ForgeSpeeed\", slotIndex))",
+      "description": "Native quarter-scaled smelting-speed progress multiplier for each Forge slot in ForgeItemOrder"
+    }
+  ]
+}

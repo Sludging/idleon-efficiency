@@ -1,5 +1,5 @@
 import type { StaticRepositories } from './repositories';
-import { Traps, updateTrapDisplayData } from './world-3/traps';
+import { Traps, updateShinyCritterRewardMultiplier, updateTrapDisplayData } from './world-3/traps';
 import { Stamps, updateStampMaxCarry, updateStamps } from './world-1/stamps';
 import { Statues, updateStatueBonuses } from './world-1/statues';
 import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus, updatePlayerTalentPoints, Player, updatePlayerSpecialTalents } from './player';
@@ -366,7 +366,7 @@ const postProcessingMap: Record<string, Function> = {
     // Prepare exalted stamp scaling after its account inputs and before stamp bonuses.
     "compassExaltedStampBonus": (_doc: Cloudsave, accountData: Map<string, any>) => updateCompassExaltedStampBonus(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStamps(accountData),
-    "forge": (doc: Cloudsave, accountData: Map<string, any>) => updateForge(accountData.get("forge"), accountData.get("gems"), accountData.get("menagerie")),
+    "forge": (doc: Cloudsave, accountData: Map<string, any>) => updateForge(accountData.get("forge"), accountData.get("gems"), accountData.get("menagerie"), accountData.get("cards")),
     "worshipTotalizer": (doc: Cloudsave, accountData: Map<string, any>) => updateWorshipTotalizer(accountData),
     "arcade": (doc: Cloudsave, accountData: Map<string, any>) => updateArcade(accountData),
     "cooking": (doc: Cloudsave, accountData: Map<string, any>) => updateCooking(accountData),
@@ -450,6 +450,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
     "royalArmoryLate": (doc: Cloudsave, accountData: Map<string, any>) => updateRoyalArmoryLateInputs(accountData),
     "meritocraty": (doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyLate(accountData),
+    "shinyCritterRewardMultiplier": (_doc: Cloudsave, accountData: Map<string, any>) => updateShinyCritterRewardMultiplier(accountData),
     // Saved-snapshot stamina and page locations need late Meritocracy and final character talent contexts.
     "spelunkingPresentation": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingPresentation(accountData),
     // These Gaming results are UI-only; Imports, Garden and Palette chances need the settled account inputs above.

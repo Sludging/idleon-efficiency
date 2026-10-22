@@ -11,6 +11,7 @@ import type { Arcade } from '../../../data/domain/world-2/arcade';
 import type { Breeding } from '../../../data/domain/world-4/breeding';
 import { getStampBonusForKey, type Stamp } from '../../../data/domain/world-1/stamps';
 import type { PlayerStatues } from '../../../data/domain/world-1/statues';
+import type { Menagerie } from '../../../data/domain/menagerie';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { getTargetPlayer } from '../../utils/target-player';
@@ -19,12 +20,14 @@ describe('Persistent powers direct owner results', () => {
   let data: Map<string, unknown>;
   let player: Player;
   let replay: { terms: Record<string, number>; bubbles: Record<string, number>; statues: Record<number, number> };
+  let silverMultiplier: number;
   beforeAll(() => {
     const results = loadExtractionResults('player-powers-data.json');
     validateExtractionHealth(results);
     replay = results.extractions.powers.result;
     data = loadGameDataFromSave('latest');
     player = getTargetPlayer(data.get('players') as Player[]);
+    silverMultiplier = (data.get('menagerie') as Menagerie).silverJellyfish.miscMultiplier;
   });
 
   const parameters: { key: string; name: string; getValue: () => number }[] = [
@@ -63,12 +66,16 @@ describe('Persistent powers direct owner results', () => {
     });
   });
 
+  // The captured gear aggregate is a legacy unscaled replay; add only its raw Obol MISC delta. This is source-backed, not native gear parity.
   const gearProperties = ['Weapon_Power', 'Mining_Power', 'Choppin_Power', 'Fishing_Power', 'Catching_Power', 'Trapping_Power', 'Worship_Power'] as const;
   gearProperties.forEach(property => {
-    it(`matches complete ${property} gear input using the accepted M1 oracle`, () => {
+    it(`matches complete ${property} gear input with the source-backed Silver MISC adjustment`, () => {
       const results = loadExtractionResults('player-equipment-properties-data.json');
       validateExtractionHealth(results);
-      expect(player.gear.getProperty(property)).toMatchLiveGame(results.extractions.gear_properties.result[property], 0);
+      const legacyExpected = results.extractions.gear_properties.result[property];
+      const rawObolSubtotal = getExtractedValue(results, `obol_raw_${property}`);
+      const expected = legacyExpected + rawObolSubtotal * (silverMultiplier - 1);
+      expect(player.gear.getProperty(property)).toMatchLiveGame(expected, 0);
     });
   });
   it('matches equipped-chip Weapon Power using its existing direct oracle', () => {

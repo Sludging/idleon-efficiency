@@ -136,7 +136,10 @@ export class ObolStats {
         if (newStat.extra !== '') this.effects.set(effect, (this.effects.get(effect) ?? 0) + value);
     }
 
-    updateAttributeProperties(modifiers: Readonly<Record<PrimaryAttribute, AttributeObolModifier>>): void {
+    updateProperties(
+        modifiers: Readonly<Record<PrimaryAttribute, AttributeObolModifier>>,
+        miscMultiplier: number,
+    ): void {
         const properties = new Map<string, number>();
         for (const stat of this.stats) {
             if (stat.extra !== '') continue;
@@ -146,6 +149,9 @@ export class ObolStats {
                 const modifier = modifiers[property];
                 // Obol attributes use their own talent and the 40% Superbit bonus, not equipment stamps.
                 value *= 1 + (modifier.talentPercent + 40 * modifier.superbitBonus) / 100;
+            } else if (property !== 'Accuracy') {
+                // Native TotalStats applies Silver to non-attribute Obol stats; Accuracy is not an Obol stat key.
+                value *= miscMultiplier;
             }
             properties.set(property, value);
         }
