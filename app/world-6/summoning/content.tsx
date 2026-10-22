@@ -16,11 +16,13 @@ import { SummoningBonuses } from '../../../components/world-6/summoning/summonin
 import { SummoningUpgrades } from '../../../components/world-6/summoning/summoningUpgrades';
 import { SummoningBattles } from '../../../components/world-6/summoning/summoningBattles';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import useHydrated from '../../../lib/hooks/useHydrated';
 import { useShallow } from 'zustand/react/shallow';
 import TipDisplay from '../../../components/base/TipDisplay';
 import { CircleInformation } from 'grommet-icons';
 
 function Summoning() {
+    const hydrated = useHydrated();
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
@@ -29,58 +31,58 @@ function Summoning() {
 
     const summoning = theData.get("summoning") as SummoningDomain;
 
-    if (!summoning) {
-        return <>Loading...</>
-    } else {
-        return (
-            <Box>
-                <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Summoning</Heading>
-                <Text size="xsmall">* This is a work in progress, there could some bugs and minor inaccuracies. THE UI ISN&apos;T FINAL!</Text>
-                <Text>Summoning Lv: {summoning.summoningLevel}</Text>
-                <Box justify="start" direction='row' gap="small">
-                    {
-                        summoning.summonEssences.filter(essence => essence.displayEssence == true).map((essence) => (
-                            <ShadowBox width={"small"} key={essence.color.toString()} background="dark-1" gap="xsmall" pad="small" align="left">
-                                <ComponentAndLabel
-                                    label={SummoningDomain.getEssenceColorName(essence.color)}
-                                    component={
-                                        <Box gap="small" direction="row" align="center">
-                                            <IconImage data={SummoningDomain.getEssenceIcon(essence.color)} />
-                                            <Text size="small">{nFormatter(essence.quantity)}</Text>
+    if (!hydrated) {
+        return <>Loading...</>;
+    }
+
+    return (
+        <Box>
+            <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Summoning</Heading>
+            <Text size="xsmall">* This is a work in progress, there could some bugs and minor inaccuracies. THE UI ISN&apos;T FINAL!</Text>
+            <Text>Summoning Lv: {summoning.summoningLevel}</Text>
+            <Box justify="start" direction='row' gap="small">
+                {
+                    summoning.summonEssences.filter(essence => essence.displayEssence == true).map((essence) => (
+                        <ShadowBox width={"small"} key={essence.color.toString()} background="dark-1" gap="xsmall" pad="small" align="left">
+                            <ComponentAndLabel
+                                label={SummoningDomain.getEssenceColorName(essence.color)}
+                                component={
+                                    <Box gap="small" direction="row" align="center">
+                                        <IconImage data={SummoningDomain.getEssenceIcon(essence.color)} />
+                                        <Text size="small">{nFormatter(essence.quantity)}</Text>
+                                    </Box>
+                                }
+                            />
+                            <Box direction='row' gap="xsmall">
+                                {essence.stoneBossVictories} Stone kills
+                                <TipDisplay
+                                    heading={summoning.getEssenceSummoningStoneBossName(essence.color)}
+                                    size='small'
+                                    maxWidth='medium'
+                                    body={
+                                        <Box>
+                                            <Text size='small'>You can find the stone to start the boss battle here :</Text>
+                                            <Text size='small'>{summoning.getEssenceSummoningStoneBossmap(essence.color)}</Text>
                                         </Box>
                                     }
-                                />
-                                <Box direction='row' gap="xsmall">
-                                    {essence.stoneBossVictories} Stone kills
-                                    <TipDisplay
-                                        heading={summoning.getEssenceSummoningStoneBossName(essence.color)}
-                                        size='small'
-                                        maxWidth='medium'
-                                        body={
-                                            <Box>
-                                                <Text size='small'>You can find the stone to start the boss battle here :</Text>
-                                                <Text size='small'>{summoning.getEssenceSummoningStoneBossmap(essence.color)}</Text>
-                                            </Box>
-                                        }
-                                    >
-                                        <CircleInformation size="small" />
-                                    </TipDisplay>
-                                </Box>
-                            </ShadowBox>
-                        ))
-                    }
-                </Box>
-                <ContentTabs
-                    options={["Winner bonuses", "Summoning Upgrades", "Battles"].map(tabName => ({ value: tabName, label: tabName }))}
-                    value={activeTab}
-                    onChange={setActiveTab}
-                />
-                {activeTab == "Winner bonuses" && <SummoningBonuses bonuses={ summoning.summonBonuses } />}
-                {activeTab == "Summoning Upgrades" && <SummoningUpgrades essences={ summoning.summonEssences } upgrades={ summoning.summonUpgrades } />}
-                {activeTab == "Battles" && <SummoningBattles battlesInfos={ summoning.summonBattles } essences={ summoning.summonEssences } />}
+                                >
+                                    <CircleInformation size="small" />
+                                </TipDisplay>
+                            </Box>
+                        </ShadowBox>
+                    ))
+                }
             </Box>
-        )
-    }
+            <ContentTabs
+                options={["Winner bonuses", "Summoning Upgrades", "Battles"].map(tabName => ({ value: tabName, label: tabName }))}
+                value={activeTab}
+                onChange={setActiveTab}
+            />
+            {activeTab == "Winner bonuses" && <SummoningBonuses bonuses={summoning.summonBonuses} />}
+            {activeTab == "Summoning Upgrades" && <SummoningUpgrades essences={summoning.summonEssences} upgrades={summoning.summonUpgrades} />}
+            {activeTab == "Battles" && <SummoningBattles battlesInfos={summoning.summonBattles} essences={summoning.summonEssences} />}
+        </Box>
+    )
 }
 
 export default Summoning;

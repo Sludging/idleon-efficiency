@@ -9,80 +9,73 @@ import ContentTabs from "../../base/ContentTabs";
 import { useState } from "react";
 import TipDisplay from "../../base/TipDisplay";
 
-const ColorSection = ({ colorUpgrades, allUpgrades, essence }: { colorUpgrades: SummonUpgrade[], allUpgrades: SummonUpgrade[], essence: SummonEssence | undefined }) => {
-    if (!essence || colorUpgrades.length == 0) {
-        return (
-            <Text>Loading...</Text>
-        )
-    } else {
-        return (
-            <Grid columns={{ size: 'small', count: 'fill' }} pad="small" fill>
-                {
-                    colorUpgrades
-                        .map((upgrade, index) => {
-                            const canAfford = essence.quantity > upgrade.nextLevelCost();
-                            const maxed = upgrade.level >= upgrade.data.maxLvl;
-                            let label: string = "";
-                            if (upgrade.unlocked) {
-                                label = (upgrade.level > 0 ? "Next level cost" : "Unlock Cost");
-                            } else {
-                                label = "Require a level in " + (allUpgrades.find(findUpgrade => findUpgrade.index == upgrade.data.idReq)?.data.name ?? "");
-                            }
-                            return (
-                                <ShadowBox style={{ opacity: upgrade.level > 0 ? 1 : 0.6 }} key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
-                                    <Box gap="small" justify="between" fill>
-                                        <Box gap="small">
-                                            <Box direction="row" gap="small" align="center">
-                                                <Stack>
-                                                    <Box>
-                                                        <IconImage data={upgrade.getBorderImageData()} scale={0.8} />
-                                                    </Box>
-                                                    <Box>
-                                                        <IconImage data={upgrade.getImageData()} scale={0.8} />
-                                                    </Box>
-                                                </Stack>
-                                                <Box>
-                                                    <Text size="xsmall">{upgrade.data.name}</Text>
-                                                    <Text size="xsmall">{upgrade.getLevelDisplay()}</Text>
-                                                </Box>
-                                                {upgrade.isDoubled && 
-                                                    <TipDisplay
-                                                        heading="Summoning doubler"
-                                                        size='small'
-                                                        maxWidth='small'
-                                                    >
-                                                        <Star size="small" color="yellow" />
-                                                    </TipDisplay>}
+const ColorSection = ({ colorUpgrades, allUpgrades, essence }: { colorUpgrades: SummonUpgrade[], allUpgrades: SummonUpgrade[], essence: SummonEssence }) => {
+    return (
+        <Grid columns={{ size: 'small', count: 'fill' }} pad="small" fill>
+            {
+                colorUpgrades.map((upgrade, index) => {
+                    const canAfford = essence.quantity > upgrade.nextLevelCost();
+                    const maxed = upgrade.level >= upgrade.data.maxLvl;
+                    let label: string = "";
+                    if (upgrade.unlocked) {
+                        label = (upgrade.level > 0 ? "Next level cost" : "Unlock Cost");
+                    } else {
+                        label = "Require a level in " + (allUpgrades.find(findUpgrade => findUpgrade.index == upgrade.data.idReq)?.data.name ?? "");
+                    }
+                    return (
+                        <ShadowBox style={{ opacity: upgrade.level > 0 ? 1 : 0.6 }} key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
+                            <Box gap="small" justify="between" fill>
+                                <Box gap="small">
+                                    <Box direction="row" gap="small" align="center">
+                                        <Stack>
+                                            <Box>
+                                                <IconImage data={upgrade.getBorderImageData()} scale={0.8} />
                                             </Box>
-                                            <TextAndLabel textSize='xsmall' text={upgrade.getBonusText()} label={"Bonus"} />
+                                            <Box>
+                                                <IconImage data={upgrade.getImageData()} scale={0.8} />
+                                            </Box>
+                                        </Stack>
+                                        <Box>
+                                            <Text size="xsmall">{upgrade.data.name}</Text>
+                                            <Text size="xsmall">{upgrade.getLevelDisplay()}</Text>
                                         </Box>
-                                        <Box style={{ opacity: !maxed ? 1 : 0.6 }}>
-                                            <ComponentAndLabel
-                                                label={label}
-                                                component={
-                                                    upgrade.unlocked ?
-                                                        !maxed ?
-                                                            <Box gap="xsmall" direction="row" align="center">
-                                                                <IconImage data={SummoningDomain.getEssenceIcon(essence.color)} />
-                                                                <Text color={canAfford ? 'green-1' : ''} size="small">{nFormatter(upgrade.nextLevelCost())}</Text>
-                                                            </Box>
-                                                            :
-                                                            <Box gap="xsmall" direction="row" align="center">
-                                                                <Text size="small">MAXED</Text>
-                                                            </Box>
-                                                        :
-                                                        <Box></Box>
-                                                }
-                                            />
-                                        </Box>
+                                        {upgrade.isDoubled &&
+                                            <TipDisplay
+                                                heading="Summoning doubler"
+                                                size='small'
+                                                maxWidth='small'
+                                            >
+                                                <Star size="small" color="yellow" />
+                                            </TipDisplay>}
                                     </Box>
-                                </ShadowBox>
-                            )
-                        })
-                }
-            </Grid>
-        )
-    }
+                                    <TextAndLabel textSize='xsmall' text={upgrade.getBonusText()} label={"Bonus"} />
+                                </Box>
+                                <Box style={{ opacity: !maxed ? 1 : 0.6 }}>
+                                    <ComponentAndLabel
+                                        label={label}
+                                        component={
+                                            upgrade.unlocked ?
+                                                !maxed ?
+                                                    <Box gap="xsmall" direction="row" align="center">
+                                                        <IconImage data={SummoningDomain.getEssenceIcon(essence.color)} />
+                                                        <Text color={canAfford ? 'green-1' : ''} size="small">{nFormatter(upgrade.nextLevelCost())}</Text>
+                                                    </Box>
+                                                    :
+                                                    <Box gap="xsmall" direction="row" align="center">
+                                                        <Text size="small">MAXED</Text>
+                                                    </Box>
+                                                :
+                                                <Box></Box>
+                                        }
+                                    />
+                                </Box>
+                            </Box>
+                        </ShadowBox>
+                    )
+                })
+            }
+        </Grid>
+    )
 }
 
 export const SummoningUpgrades = ({ upgrades, essences }: { upgrades: SummonUpgrade[], essences: SummonEssence[] }) => {
@@ -97,24 +90,18 @@ export const SummoningUpgrades = ({ upgrades, essences }: { upgrades: SummonUpgr
     });
 
 
-    if (upgradesToDisplay.length == 0) {
-        return <Text>Loading...</Text>
-    } else {
-        return (
-            <Box>
-                <Box margin={{ top: 'small' }}>
-                    <ContentTabs
-                        options={tabsName.filter(name => name != '').map(value => ({ value, label: value }))}
-                        value={activeTab}
-                        onChange={setActiveTab}
-                    />
-                </Box>
-                <Box margin={{ top: 'small' }}>
-                    {
-                        <ColorSection colorUpgrades={upgradesToDisplay.filter(upgrade => SummoningDomain.getEssenceColorName(upgrade.data.colour) == activeTab)} allUpgrades={upgradesToDisplay} essence={essences.find(essence => SummoningDomain.getEssenceColorName(essence.color) == activeTab)} />
-                    }
-                </Box>
+    return (
+        <Box>
+            <Box margin={{ top: 'small' }}>
+                <ContentTabs
+                    options={tabsName.filter(name => name != '').map(value => ({ value, label: value }))}
+                    value={activeTab}
+                    onChange={setActiveTab}
+                />
             </Box>
-        )
-    }
+            <Box margin={{ top: 'small' }}>
+                <ColorSection colorUpgrades={upgradesToDisplay.filter(upgrade => SummoningDomain.getEssenceColorName(upgrade.data.colour) == activeTab)} allUpgrades={upgradesToDisplay} essence={essences.find(essence => SummoningDomain.getEssenceColorName(essence.color) == activeTab)!} />
+            </Box>
+        </Box>
+    )
 }
