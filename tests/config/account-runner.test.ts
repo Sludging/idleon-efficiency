@@ -4,16 +4,9 @@ const path = require('node:path');
 const {
   latestDatasetPath,
   parseArgs,
-  prepareJestArgs,
   readSnapshotManifest,
   selectedAccounts
 } = require('../helpers/test-accounts.cjs');
-
-const excludedTest = {
-  path: 'tests/domains/spelunking/part-3-pipeline.test.ts',
-  absolutePath: `${process.cwd()}/tests/domains/spelunking/part-3-pipeline.test.ts`,
-  reason: 'Saved-progression tests use developer state.'
-};
 
 describe('account runner CLI contract', () => {
   it('rejects unknown commands and flags', () => {
@@ -31,12 +24,6 @@ describe('account runner CLI contract', () => {
     const options = parseArgs(['list', '--accounts', 'unknown-account']);
 
     expect(() => selectedAccounts(options)).toThrow('Unknown account ID: unknown-account');
-  });
-
-  it('blocks explicit default-only suite selection', () => {
-    const options = { jestArgs: [excludedTest.path] };
-
-    expect(() => prepareJestArgs(options, [excludedTest])).toThrow('Cannot select default-only test for account run');
   });
 
   it('keeps last successful dataset selected after a newer snapshot fetch', () => {

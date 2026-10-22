@@ -217,16 +217,19 @@ available Toolbox-derived profile metrics separately from historical selection
 evidence. Toolbox metrics are candidate-selection data, not expected game
 calculation values.
 
-The config also marks
-`tests/domains/spelunking/part-3-pipeline.test.ts` as default-only. Its saved
-progression and synthetic transition cases depend on the developer snapshot,
-not an extracted game-parity suite. Account runs print this exclusion and its
-reason. Explicitly selecting this file for an account run fails with an error.
-Ordinary `yarn test` still runs it unchanged.
-
 Fetch contacts only selected public profiles. It writes immutable local
 snapshots under `.cache/test-accounts/`; each fetch advances that account's
 `latest.json` pointer without deleting older snapshots.
+
+`public-profile-import.cjs` owns all Toolbox-to-save conversion. Downstream
+tools consume its ordinary IE save, without Toolbox-specific rules. The
+importer restores the bundle ownership map from positive purchase flags before
+offline startup. This prevents the game from replaying bundle rewards.
+The downloaded `raw-profile.json` remains unchanged.
+
+After importer changes, fetch again and extract again. After extraction-config
+changes, extract again. Stored datasets reject mismatched importer versions,
+configs, and game assets rather than mixing old and new results.
 
 Extraction uses the latest fetched snapshot and starts owned offline processes
 on loopback ports beginning at 3211. It routes every configured
@@ -251,7 +254,8 @@ default. Pass `--runInBand` or `-i` to disable both worker defaults. Ordinary
 `yarn test` does not use these account-runner options.
 
 The runner accepts `--config PATH`, `--cache-dir PATH`, and `--port NUMBER`.
-Configuration uses `{ "accounts": [...], "defaultOnlyTests": [...] }`.
+Configuration uses `{ "accounts": [...] }`. All selected suites run against
+each account; there are no developer-account-only exclusions.
 
 Keep profile downloads and extracted results out of source control. Use only
 player-published public profiles; do not write synthetic account changes.
