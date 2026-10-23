@@ -9,7 +9,7 @@ import { ObolsData, ObolStats } from '../../../data/domain/world-2/obols';
 import { Stamp, getStampBonusForKey } from '../../../data/domain/world-1/stamps';
 const properties = ["STR", "AGI", "WIS", "LUK", "Defence", "Accuracy", "Weapon_Power", "Mining_Power", "Choppin_Power", "Fishing_Power", "Catching_Power", "Trapping_Power", "Worship_Power"] as const;
 const replacementProperties = ["STR", "AGI", "WIS", "LUK", "Defence", "Weapon_Power"] as const;
-const primaryTalents = {"STR": 96, "AGI": 276, "WIS": 456, "LUK": 21};
+const primaryTalents = { "STR": 96, "AGI": 276, "WIS": 456, "LUK": 21 };
 
 describe('Equipment - direct property producers', () => {
   let results: ExtractionResults;

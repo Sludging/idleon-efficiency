@@ -33,15 +33,19 @@ describe('Persistent powers direct owner results', () => {
   const parameters: { key: string; name: string; getValue: () => number }[] = [
     { key: 'postOffice', name: 'Post Office weapon reward', getValue: () => player.postOffice.reduce((total, box) => total + box.bonuses.reduce((subtotal, bonus, index) => subtotal + (bonus.data.bonusKey === '12a' ? bonus.getBonus(box.level, index) : 0), 0), 0) },
     { key: 'flurbo', name: 'permanent Flurbo Weapon Power purchase', getValue: () => (data.get('dungeons') as Dungeons).passives.get(PassiveType.Flurbo)![0].getBonus() },
-    { key: 'card18', name: 'equipped-card Weapon Power effect', getValue: () => {
-      const cards = [...new Set([...player.cardInfo!.equippedCards, ...player.cardInfo!.cards.filter(card => card.passive)])];
-      return Card.GetTotalBonusForId(cards, 18);
-    } },
-    { key: 'cardLevel', name: "Smolderin' Plateau passive-card level", getValue: () => {
-      const card = player.cardInfo!.cards.find(card => card.id === 'w5b2');
-      if (!card) throw new Error('Missing static Smolderin\' Plateau card w5b2; ownership zero is not missing metadata.');
-      return card.getLevels();
-    } },
+    {
+      key: 'card18', name: 'equipped-card Weapon Power effect', getValue: () => {
+        const cards = [...new Set([...player.cardInfo!.equippedCards, ...player.cardInfo!.cards.filter(card => card.passive)])];
+        return Card.GetTotalBonusForId(cards, 18);
+      }
+    },
+    {
+      key: 'cardLevel', name: "Smolderin' Plateau passive-card level", getValue: () => {
+        const card = player.cardInfo!.cards.find(card => card.id === 'w5b2');
+        if (!card) throw new Error('Missing static Smolderin\' Plateau card w5b2; ownership zero is not missing metadata.');
+        return card.getLevels();
+      }
+    },
     { key: 'guild', name: 'Guild Weapon Power bonus', getValue: () => (data.get('guild') as Guild).guildBonuses[3].getBonus() },
     { key: 'sigil', name: 'Alchemy Sigil Weapon Power bonus', getValue: () => (data.get('sigils') as Sigils).sigils[17].getBonus() },
     { key: 'vial', name: 'Weapon Power vial bonus', getValue: () => (data.get('alchemy') as Alchemy).getVialBonusForKey('WeaponPOW') },
