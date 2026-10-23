@@ -38,6 +38,8 @@ import { initColosseumRepo } from "./data/ColosseumRepo";
 import { initCompanionRepo } from "./data/CompanionRepo";
 import { initCompassUpgradeRepo } from "./data/CompassUpgradeRepo";
 import { initConstellationsRepo } from "./data/ConstellationsRepo";
+import { initCookingMasteryRepo } from "./data/CookingMasteryRepo";
+import { initCookingMetadataRepo } from "./data/CookingMetadataRepo";
 import { initCoralKidUpgradeRepo } from "./data/CoralKidUpgradeRepo";
 import { initCoralReefFishRepo } from "./data/CoralReefFishRepo";
 import { initCoralReefUpgradeRepo } from "./data/CoralReefUpgradeRepo";
@@ -112,6 +114,7 @@ import { initJewelRepo } from "./data/JewelRepo";
 import { initKeychainBonusRepo } from "./data/KeychainBonusRepo";
 import { initLabBonusRepo } from "./data/LabBonusRepo";
 import { initLampWishRepo } from "./data/LampWishRepo";
+import { initLegendTalentMetadataRepo } from "./data/LegendTalentMetadataRepo";
 import { initLegendTalentsRepo } from "./data/LegendTalentsRepo";
 import { initMapDataRepo } from "./data/MapDataRepo";
 import { initMapMetadataRepo } from "./data/MapMetadataRepo";
@@ -129,6 +132,7 @@ import { initMineheadMetadataRepo } from "./data/MineheadMetadataRepo";
 import { initMineheadOpponentRepo } from "./data/MineheadOpponentRepo";
 import { initMineheadUpgradeRepo } from "./data/MineheadUpgradeRepo";
 import { initMonumentRepo } from "./data/MonumentRepo";
+import { initNinjaFloorRepo } from "./data/NinjaFloorRepo";
 import { initNinjaItemRepo } from "./data/NinjaItemRepo";
 import { initNinjaUpgradeRepo } from "./data/NinjaUpgradeRepo";
 import { initNpcRepo } from "./data/NpcRepo";
@@ -187,6 +191,8 @@ import { initStudyRepo } from "./data/StudyRepo";
 import { initSubTableRepo } from "./data/SubTableRepo";
 import { initSummonEnemyRepo } from "./data/SummonEnemyRepo";
 import { initSummonEnemyBonusRepo } from "./data/SummonEnemyBonusRepo";
+import { initSummonEssenceRepo } from "./data/SummonEssenceRepo";
+import { initSummonStoneBossMetadataRepo } from "./data/SummonStoneBossMetadataRepo";
 import { initSummonUnitRepo } from "./data/SummonUnitRepo";
 import { initSummonUpgradeRepo } from "./data/SummonUpgradeRepo";
 import { initSushiRepo } from "./data/SushiRepo";
@@ -255,6 +261,8 @@ export const repositoryFactories = {
     "Companion": initCompanionRepo,
     "CompassUpgrade": initCompassUpgradeRepo,
     "Constellations": initConstellationsRepo,
+    "CookingMastery": initCookingMasteryRepo,
+    "CookingMetadata": initCookingMetadataRepo,
     "CoralKidUpgrade": initCoralKidUpgradeRepo,
     "CoralReefFish": initCoralReefFishRepo,
     "CoralReefUpgrade": initCoralReefUpgradeRepo,
@@ -329,6 +337,7 @@ export const repositoryFactories = {
     "KeychainBonus": initKeychainBonusRepo,
     "LabBonus": initLabBonusRepo,
     "LampWish": initLampWishRepo,
+    "LegendTalentMetadata": initLegendTalentMetadataRepo,
     "LegendTalents": initLegendTalentsRepo,
     "MapData": initMapDataRepo,
     "MapMetadata": initMapMetadataRepo,
@@ -346,6 +355,7 @@ export const repositoryFactories = {
     "MineheadOpponent": initMineheadOpponentRepo,
     "MineheadUpgrade": initMineheadUpgradeRepo,
     "Monument": initMonumentRepo,
+    "NinjaFloor": initNinjaFloorRepo,
     "NinjaItem": initNinjaItemRepo,
     "NinjaUpgrade": initNinjaUpgradeRepo,
     "Npc": initNpcRepo,
@@ -404,6 +414,8 @@ export const repositoryFactories = {
     "SubTable": initSubTableRepo,
     "SummonEnemy": initSummonEnemyRepo,
     "SummonEnemyBonus": initSummonEnemyBonusRepo,
+    "SummonEssence": initSummonEssenceRepo,
+    "SummonStoneBossMetadata": initSummonStoneBossMetadataRepo,
     "SummonUnit": initSummonUnitRepo,
     "SummonUpgrade": initSummonUpgradeRepo,
     "Sushi": initSushiRepo,

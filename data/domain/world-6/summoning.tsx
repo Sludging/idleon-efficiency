@@ -25,6 +25,8 @@ import { Menagerie } from "../menagerie";
 import type { Spelunking } from "../world-7/spelunking";
 import { initSummonEssenceRepo } from "../data/SummonEssenceRepo";
 import { SummonEssenceModel } from "../model/summonEssenceModel";
+import { initSummonStoneBossMetadataRepo } from "../data/SummonStoneBossMetadataRepo";
+import { SummonStoneBossModel } from "../model/summonStoneBossModel";
 import { Talent } from "../talents";
 import { Hole } from "../world-5/hole/hole";
 import { Alchemy } from "../world-2/alchemy/alchemy";
@@ -237,7 +239,24 @@ export class SummonEssence {
         public color: SummonEssenceColor,
         public battles: SummonEnemyModel[],
         private readonly data?: SummonEssenceModel,
+        private readonly stoneBoss?: {
+            readonly data: Readonly<SummonStoneBossModel>;
+            readonly trialWinScalingBase: number;
+        },
     ) {}
+
+    get nextStoneBossHp(): number | undefined {
+        if (!this.stoneBoss) {
+            return undefined;
+        }
+
+        // The exported base HP already includes the stone trial's factor of two.
+        return this.stoneBoss.data.baseHp * Math.pow(this.stoneBoss.trialWinScalingBase, this.stoneBossVictories);
+    }
+
+    get stoneBonusMultiplier(): number {
+        return 1 + this.stoneBossVictories;
+    }
 
     updateUpgradeUnlock(upgrades: readonly SummonUpgrade[]): void {
         if (this.data?.unlockUpgradeId !== undefined) {
@@ -545,11 +564,19 @@ export class Summoning extends Domain {
         });
 
         const essenceData = initSummonEssenceRepo();
-        this.summonEssences = Array.from({ length: essenceCount }, (_, color) => new SummonEssence(
-            color,
-            this.summonBattles.allBattles[color],
-            essenceData.find(essence => essence.data.colour === color)?.data,
-        ));
+        const stoneBossMetadata = initSummonStoneBossMetadataRepo()[0].data;
+        this.summonEssences = Array.from({ length: essenceCount }, (_, color) => {
+            // Later metadata rows are future boss placeholders, not Teal stones.
+            const stoneBoss = color <= SummonEssenceColor.Cyan
+                ? stoneBossMetadata.bosses.find(boss => boss.stoneIndex === color)
+                : undefined;
+            return new SummonEssence(
+                color,
+                this.summonBattles.allBattles[color],
+                essenceData.find(essence => essence.data.colour === color)?.data,
+                stoneBoss ? { data: stoneBoss, trialWinScalingBase: stoneBossMetadata.trialWinScalingBase } : undefined,
+            );
+        });
         this.updateEssenceUnlocks();
         this.updateUnlockedUpgrades();
         this.updateSecondaryBonus();
@@ -813,7 +840,9 @@ export const updateSummoningUpgrades= (data: Map<string, any>) => {
 
     summoning.summonUpgrades.forEach(upgrade => {
         upgrade.doublerBonus = upgrade.isDoubled ? doublerBonus : 1;
-        upgrade.stoneBossBonus = 1 + (parseInt(upgrade.data.filler) == 1 ? summoning.summonEssences.find(essence => essence.color == upgrade.data.colour)?.stoneBossVictories || 0 : 0);
+        upgrade.stoneBossBonus = parseInt(upgrade.data.filler) == 1
+            ? summoning.summonEssences[upgrade.data.colour].stoneBonusMultiplier
+            : 1;
     });
     summoning.updateSecondaryBonus();
     summoning.updatePlayersUnitStats();

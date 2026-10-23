@@ -1,0 +1,24 @@
+{
+  "extractions": {
+    "stone_wins": {
+      "expression": "Array.from({length:7},(_,colour)=>({colour,wins:idleon.callFunction(\"Thingies\",\"SumStoneTrialz\",colour,0)}))",
+      "result": [
+        { "colour": 0, "wins": 4 },
+        { "colour": 1, "wins": 4 },
+        { "colour": 2, "wins": 3 },
+        { "colour": 3, "wins": 4 },
+        { "colour": 4, "wins": 1 },
+        { "colour": 5, "wins": 0 },
+        { "colour": 6, "wins": 3 }
+      ]
+    },
+    "marked_upgrade_consumers": {
+      "expression": "[0,46].map(index=>({index,colour:Number(idleon.getAttr(\"CustomLists\").h.SummonUPG[index][2]),stoneAffected:Number(idleon.getAttr(\"CustomLists\").h.SummonUPG[index][10]),bonus:idleon.callFunction(\"Summoning\",\"SummUpgBonus\",index,0)}))",
+      "result": [
+        { "index": 0, "colour": 0, "stoneAffected": 1, "bonus": 11075 },
+        { "index": 46, "colour": 5, "stoneAffected": 1, "bonus": 1750 }
+      ]
+    }
+  },
+  "errors": {}
+}
