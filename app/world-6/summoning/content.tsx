@@ -53,6 +53,7 @@ function Summoning() {
                                     </Box>
                                 }
                             />
+                            <Text size="small">{nFormatter(essence.generationPerHour)} Essence/hour</Text>
                             <Box direction='row' gap="xsmall">
                                 {essence.stoneBossVictories} Stone kills
                                 <TipDisplay

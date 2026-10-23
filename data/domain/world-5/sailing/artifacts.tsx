@@ -443,7 +443,8 @@ export const updateArtifacts = (data: Map<string, any>) => {
     // Skills related (parse data)
     (sailing.artifacts[5] as GenieLampArtifact).sailingLevel = players[0].skills.get(SkillsIndex.Sailing)?.level ?? 0;
     (sailing.artifacts[3] as FauxoryTuskArtifact).sailingLevel = players[0].skills.get(SkillsIndex.Sailing)?.level ?? 0;
-    (sailing.artifacts[23] as WeatherbookArtifact).gamingLevel = players[0].skills.get(SkillsIndex.Gaming)?.level ?? 0;
+    (sailing.artifacts[23] as WeatherbookArtifact).gamingLevel = players.reduce(
+        (highestLevel, player) => Math.max(highestLevel, player.skills.get(SkillsIndex.Gaming)?.level ?? 0), 0);
 
     // Slab related (parse data)
     (sailing.artifacts[2] as SlabInfluencedArtifact).lootyCount = slab.rawObtainedCount;

@@ -136,6 +136,12 @@ export function SpelunkingSummary({ spelunking, players, children, manicDetail }
                         </TipDisplay>
                         <SummaryMetricLabel size="xsmall">Manic mode depth</SummaryMetricLabel>
                     </SummaryMetricColumn>
+                    <SummaryMetricColumn>
+                        <TipDisplay heading="Persistent POW" size="small" body="Persistent account POW excludes active delve elixirs.">
+                            <Text size="large" tabIndex={0} style={{ textDecoration: 'underline dotted', textUnderlineOffset: '4px', cursor: 'help' }}>{notateNumber(spelunking.persistentPower, 'Smaller')}</Text>
+                        </TipDisplay>
+                        <SummaryMetricLabel size="xsmall">Persistent POW</SummaryMetricLabel>
+                    </SummaryMetricColumn>
                 </SummaryMetricRow>
             </Box>
             <Box gap="small" data-spelunking-summary-card="stamina">

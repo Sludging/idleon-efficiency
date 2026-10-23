@@ -1,0 +1,16 @@
+{
+  "description": "Current main bonuses for the complete Sailing artifact catalog in genuine target player 3 context. Read public outputs without rebuilding or priming the artifact cache.",
+  "target": "Sailing artifact main bonuses and Gold Relic tier increment",
+  "extractions": [
+    {
+      "label": "artifact_main_bonuses",
+      "expression": "(()=>{const records=idleon.engine.getGameAttribute(\"CustomLists\").h.ArtifactInfo;return records.map((record,index)=>({index,bonus:idleon.callFunction(\"Sailing\",\"ArtifactBonus\",index,0)}))})()",
+      "description": "Every current catalog artifact's native main bonus. Crystal Steak and Fun Hippoete use the existing player-aware domain APIs; other artifacts retain account projections."
+    },
+    {
+      "label": "gold_relic_tier_increment",
+      "expression": "idleon.callFunction(\"Sailing\",\"ArtifactBonus\",4,1)",
+      "description": "Gold Relic's existing tier increment used by Printer. Native selector 1 returns the tier quantity directly; Printer adds its separate fixed 2 to this increment."
+    }
+  ]
+}

@@ -666,6 +666,26 @@ export class Alchemy extends Domain {
         }, 0)
     }
 
+    getAllCharacterBubbleBonusForKey = (key: 'A7AllCharz' | 'M8AllCharz' | 'W9AllCharz', players: readonly Player[]): number => {
+        const bubble = this.cauldrons
+            .find(cauldron => cauldron.bubbles.some(candidate => candidate.data.bonusKey === key))!
+            .bubbles.find(candidate => candidate.data.bonusKey === key)!;
+        let totalLevels = 0;
+
+        for (const player of players) {
+            const baseClass = player.getBaseClass();
+            if (
+                (baseClass === ClassIndex.Warrior && bubble.cauldronIndex === CauldronIndex.Power) ||
+                (baseClass === ClassIndex.Archer && bubble.cauldronIndex === CauldronIndex.Quicc) ||
+                (baseClass === ClassIndex.Mage && bubble.cauldronIndex === CauldronIndex.HighIQ)
+            ) {
+                totalLevels += player.level;
+            }
+        }
+
+        return this.getBubbleBonusForKey(key) * (1 + 4 * totalLevels / (totalLevels + 1000));
+    }
+
     getVialBonusForKey = (bonusKey: string) => {
         const matchingVials = this.vials.filter(vial => vial.data.bonusKey == bonusKey);
         return matchingVials.reduce((sum, vial) => sum += vial.getBonus(), 0)

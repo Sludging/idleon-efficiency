@@ -1,0 +1,179 @@
+{
+  "extractions": {
+    "captain_exp_requirements": {
+      "expression": "(()=>{const captains=idleon.engine.getGameAttribute(\"Captains\");const sailing=idleon.engine.getGameAttribute(\"Sailing\");const ownedCount=Math.round(Number(sailing[2][0])+1);return captains.map((record,index)=>({record,index})).filter(({record,index})=>(index<ownedCount&&Number(record[0])!==-1)||index>=captains.length-4).map(({index})=>({index,requirement:idleon.callFunction(\"Sailing\",\"CaptainExpReq\",index,0)}))})()",
+      "result": [
+        {
+          "index": 0,
+          "requirement": 3999447717.9498796
+        },
+        {
+          "index": 1,
+          "requirement": 3999447717.9498796
+        },
+        {
+          "index": 2,
+          "requirement": 3999447717.9498796
+        },
+        {
+          "index": 3,
+          "requirement": 3999447717.9498796
+        },
+        {
+          "index": 4,
+          "requirement": 3999447717.9498796
+        },
+        {
+          "index": 5,
+          "requirement": 3999447717.9498796
+        },
+        {
+          "index": 6,
+          "requirement": 3999447717.9498796
+        },
+        {
+          "index": 7,
+          "requirement": 3999447717.9498796
+        },
+        {
+          "index": 8,
+          "requirement": 10345173381.11453
+        },
+        {
+          "index": 9,
+          "requirement": 3999447717.9498796
+        },
+        {
+          "index": 10,
+          "requirement": 3999447717.9498796
+        },
+        {
+          "index": 11,
+          "requirement": 3999447717.9498796
+        },
+        {
+          "index": 12,
+          "requirement": 3999447717.9498796
+        },
+        {
+          "index": 13,
+          "requirement": 3999447717.9498796
+        },
+        {
+          "index": 14,
+          "requirement": 3999447717.9498796
+        },
+        {
+          "index": 15,
+          "requirement": 3999447717.9498796
+        },
+        {
+          "index": 16,
+          "requirement": 3999447717.9498796
+        },
+        {
+          "index": 17,
+          "requirement": 3999447717.9498796
+        },
+        {
+          "index": 18,
+          "requirement": 3999447717.9498796
+        },
+        {
+          "index": 19,
+          "requirement": 3999447717.9498796
+        },
+        {
+          "index": 30,
+          "requirement": 15
+        },
+        {
+          "index": 31,
+          "requirement": 15
+        },
+        {
+          "index": 32,
+          "requirement": 15
+        },
+        {
+          "index": 33,
+          "requirement": 15
+        }
+      ]
+    },
+    "island_captain_exp_per_trip": {
+      "expression": "(()=>{const islands=idleon.engine.getGameAttribute(\"CustomLists\").h.IslandInfo;return islands.map((record,index)=>({index,expPerTrip:idleon.callFunction(\"Sailing\",\"CaptainEXPgain\",index,0)}))})()",
+      "result": [
+        {
+          "index": 0,
+          "expPerTrip": 17899.51655605381
+        },
+        {
+          "index": 1,
+          "expPerTrip": 53698.54966816143
+        },
+        {
+          "index": 2,
+          "expPerTrip": 89497.58278026906
+        },
+        {
+          "index": 3,
+          "expPerTrip": 178995.16556053812
+        },
+        {
+          "index": 4,
+          "expPerTrip": 268492.74834080716
+        },
+        {
+          "index": 5,
+          "expPerTrip": 492236.7052914798
+        },
+        {
+          "index": 6,
+          "expPerTrip": 760729.453632287
+        },
+        {
+          "index": 7,
+          "expPerTrip": 1342463.7417040358
+        },
+        {
+          "index": 8,
+          "expPerTrip": 2684927.4834080716
+        },
+        {
+          "index": 9,
+          "expPerTrip": 5369854.966816143
+        },
+        {
+          "index": 10,
+          "expPerTrip": 8054782.450224215
+        },
+        {
+          "index": 11,
+          "expPerTrip": 13424637.41704036
+        },
+        {
+          "index": 12,
+          "expPerTrip": 26849274.83408072
+        },
+        {
+          "index": 13,
+          "expPerTrip": 44748791.39013453
+        },
+        {
+          "index": 14,
+          "expPerTrip": 89497582.78026906
+        },
+        {
+          "index": 15,
+          "expPerTrip": 894975827.8026906
+        },
+        {
+          "index": 16,
+          "expPerTrip": 2237439569.5067263
+        }
+      ]
+    }
+  },
+  "errors": {}
+}

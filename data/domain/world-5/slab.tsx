@@ -55,6 +55,15 @@ export class Slab extends Domain {
         return 3 * (1 + mainframeBonusPercent / 100) * this.getSlabBonusMultiplier() * bonusLevels;
     }
 
+    getAllEssenceGainBonus(mainframeBonusPercent: number, unlocked: boolean): number {
+        if (!unlocked) {
+            return 0;
+        }
+
+        const bonusLevels = Math.floor(Math.max(0, this.registeredItemCount - 1000) / 10);
+        return 3 * (1 + mainframeBonusPercent / 100) * this.getSlabBonusMultiplier() * bonusLevels;
+    }
+
 
     updateCalculationState(meritocraty: Meritocraty, legendTalents: LegendTalents, upgradeVault: UpgradeVault): void {
         // Multi Meritocracy, Legend Talents, and Super Slab multiply every Slab bonus.
@@ -149,7 +158,7 @@ export const updateSlabBonusDisplay = (data: Map<string, any>) => {
     slab.bonuses.forEach(bonus => {
         switch (bonus.type) {
             case SlabBonusesText.AllEssenceGain:
-                bonus.bonus = (sneaking.jadeUpgrades.find(upgrade => upgrade.data.name = "Essence Confetti")?.purchased ?? false) ? (Math.floor(Math.max(0, slab.rawObtainedCount - 1000) / 10) * 3 * slabSoverignBonus) : 0;
+                bonus.bonus = slab.getAllEssenceGainBonus(lab.bonuses[15].getBonus(), sneaking.jadeUpgrades.find(upgrade => upgrade.index === 18)!.purchased);
                 bonus.icon = {
                     location: 'Slab5',
                     width: 22,

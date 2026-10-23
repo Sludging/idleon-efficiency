@@ -1,0 +1,110 @@
+{
+  "extractions": {
+    "boat_treasure_values": {
+      "expression": "(()=>{const boats=idleon.engine.getGameAttribute(\"Boats\");const sailing=idleon.engine.getGameAttribute(\"Sailing\");return boats.flatMap((boat,index)=>index<Math.round(Number(sailing[2][1])+1)&&Number(boat[3])+Number(boat[5])!==0?[{index,current:idleon.callFunction(\"Sailing\",\"BoatValue\",index,0),next:idleon.callFunction(\"Sailing\",\"BoatValue\",index,6)}]:[])})()",
+      "result": [
+        {
+          "index": 0,
+          "current": 518147558758.6702,
+          "next": 520804607855.61835
+        },
+        {
+          "index": 1,
+          "current": 461370372951.7382,
+          "next": 463811364423.15607
+        },
+        {
+          "index": 2,
+          "current": 408868369947.8544,
+          "next": 449165415594.6494
+        },
+        {
+          "index": 3,
+          "current": 3307612030574.756,
+          "next": 3327182392386.176
+        },
+        {
+          "index": 4,
+          "current": 191316728921.77914,
+          "next": 215823180021.8321
+        },
+        {
+          "index": 5,
+          "current": 2271012731502.4937,
+          "next": 2286673231776.842
+        },
+        {
+          "index": 6,
+          "current": 2516434656979.3,
+          "next": 2533668700343.415
+        },
+        {
+          "index": 7,
+          "current": 1802621543024.292,
+          "next": 1814102201669.0708
+        },
+        {
+          "index": 8,
+          "current": 633258372731.089,
+          "next": 714374725872.2644
+        },
+        {
+          "index": 9,
+          "current": 221817629887.61136,
+          "next": 223316242354.05615
+        },
+        {
+          "index": 10,
+          "current": 2047131107715.1614,
+          "next": 2059845225553.181
+        },
+        {
+          "index": 11,
+          "current": 2615412402083.6567,
+          "next": 2630706202000.8022
+        },
+        {
+          "index": 12,
+          "current": 1257832102340.3,
+          "next": 1265501228652.4775
+        },
+        {
+          "index": 13,
+          "current": 354366684665.12537,
+          "next": 356403142710.0182
+        },
+        {
+          "index": 14,
+          "current": 1938092156596.0525,
+          "next": 1951549696544.7268
+        },
+        {
+          "index": 15,
+          "current": 2485610818817.8613,
+          "next": 2499574117489.107
+        },
+        {
+          "index": 16,
+          "current": 183290417981.8631,
+          "next": 184628136471.8491
+        },
+        {
+          "index": 17,
+          "current": 1682606129012.9182,
+          "next": 1692991789223.6262
+        },
+        {
+          "index": 18,
+          "current": 2187774692478.6099,
+          "next": 2201708340688.48
+        },
+        {
+          "index": 19,
+          "current": 1280525186386.2473,
+          "next": 1291374772885.6472
+        }
+      ]
+    }
+  },
+  "errors": {}
+}

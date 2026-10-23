@@ -1,0 +1,11 @@
+{
+  "description": "Persistent account Spelunking POW outside active delve effects, paired with the retained save. Requires genuinely observed neutral active elixirs 9 and 10; equipped elixir slots alone do not establish neutrality.",
+  "target": "Spelunking.persistentPower: Minehead Button_uHave task 50",
+  "extractions": [
+    {
+      "label": "spelunking_persistent_power",
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 50, 0)",
+      "description": "Persistent account POW when active delve elixirs 9 and 10 are genuinely neutral. The website excludes these active effects; the native result includes them."
+    }
+  ]
+}

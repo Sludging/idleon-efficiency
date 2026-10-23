@@ -1,0 +1,11 @@
+{
+  "description": "Native hourly generation for all eight Summoning Essence resources, including zero rates when locked.",
+  "target": "Summoning Essence generation per hour",
+  "extractions": [
+    {
+      "label": "essence_generation",
+      "expression": "Array.from({length:8},(_,colour)=>({colour,generationPerHour:idleon.callFunction(\"Summoning2\",\"SummRockEssGen\",colour,0)}))",
+      "description": "Final Essence per hour for resource colors 0–7. Hidden future content and Endless battles are not Essence resources. The public getter prepares its own shared generation cache; no other cache is primed."
+    }
+  ]
+}

@@ -23,6 +23,22 @@ import { Tesseract } from "../tesseract";
 import { GemStore } from "../gemPurchases";
 import { Menagerie } from "../menagerie";
 import type { Spelunking } from "../world-7/spelunking";
+import { initSummonEssenceRepo } from "../data/SummonEssenceRepo";
+import { SummonEssenceModel } from "../model/summonEssenceModel";
+import { Talent } from "../talents";
+import { Hole } from "../world-5/hole/hole";
+import { Alchemy } from "../world-2/alchemy/alchemy";
+import { Stamp, getStampBonusForKey } from "../world-1/stamps";
+import { Rift, SkillMastery } from "../world-4/rift";
+import { JellyOperator } from "../world-7/jellyOperator";
+import { SushiStation } from "../world-7/sushi";
+import { PlayerStatues } from "../world-1/statues";
+import { Arcade } from "../world-2/arcade";
+import { UpgradeVault } from "../upgradeVault";
+import { Votes } from "../world-2/votes";
+import { Slab } from "../world-5/slab";
+import { Lab } from "../world-4/lab";
+import { Worship, TotalizerBonus } from "../world-3/worship";
 
 const WhiteBattleOrder = [
     "Pet1", "Pet2", "Pet3", "Pet0", "Pet4", "Pet6", "Pet5", "Pet10", "Pet11"
@@ -96,7 +112,7 @@ export class SummonUpgrade {
     }
 
     getBaseBonus = (level: number = this.level): number => {
-        return level * this.data.bonusQty * this.stoneBossBonus * this.doublerBonus;
+        return this.doublerBonus * this.stoneBossBonus * level * this.data.bonusQty;
     }
 
     getFullBonus = (level: number = this.level): number => {
@@ -208,15 +224,58 @@ export class SummonBonus {
     }
 }
 
-export interface SummonEssence {
-    color: SummonEssenceColor,
-    quantity: number,
-    displayBattles: boolean,
-    displayEssence: boolean,
-    unlocked: boolean,
-    victories: number,
-    stoneBossVictories: number,
-    battles: SummonEnemyModel[]
+export class SummonEssence {
+    quantity: number = 0;
+    generationPerHour: number = 0;
+    displayBattles: boolean = false;
+    displayEssence: boolean = false;
+    unlocked: boolean = false;
+    victories: number = 0;
+    stoneBossVictories: number = 0;
+
+    constructor(
+        public color: SummonEssenceColor,
+        public battles: SummonEnemyModel[],
+        private readonly data?: SummonEssenceModel,
+    ) {}
+
+    updateUpgradeUnlock(upgrades: readonly SummonUpgrade[]): void {
+        if (this.data?.unlockUpgradeId !== undefined) {
+            this.unlocked = upgrades[this.data.unlockUpgradeId].level > 0;
+        }
+    }
+
+    updateGeneration(
+        summoning: Summoning,
+        allEssenceMultiplier: number,
+        alchemyBonus: number,
+        additiveBonus: number,
+        stampBonus: number,
+    ): void {
+        this.generationPerHour = 0;
+        if (!this.unlocked || !this.data) {
+            return;
+        }
+
+        const knowledgeUpgrade = summoning.summonUpgrades[this.data.knowledgeUpgradeId];
+        const victoryUpgrade = summoning.summonUpgrades[this.data.victoryUpgradeId];
+        // White counts every victory, including Endless battles. Other colors count their own victories.
+        const victories = this.color === SummonEssenceColor.White
+            ? summoning.summonBattles.getTotalVictories()
+            : this.victories;
+
+        let generation = 10 * allEssenceMultiplier
+            * (1 + knowledgeUpgrade.getBaseBonus() * summoning.summoningLevel / 100);
+        generation *= 1 + alchemyBonus / 100;
+        generation *= 1 + victories * victoryUpgrade.getBaseBonus() / 100;
+        if (this.data.unlockUpgradeId !== undefined) {
+            generation *= 1 + summoning.summonUpgrades[this.data.unlockUpgradeId].getBaseBonus() / 100;
+        }
+        generation *= 1 + additiveBonus / 100;
+        // White's stamp is a separate multiplier. The other colors group stamps with the Vault bonus.
+        generation *= 1 + stampBonus / 100;
+        this.generationPerHour = generation;
+    }
 }
 
 export interface EndlessFight {
@@ -413,32 +472,12 @@ export class Summoning extends Domain {
                     essence.displayEssence = true;
                     break;
                 case SummonEssenceColor.Green:
-                    essence.unlocked = (this.summonUpgrades.find(upgrade => upgrade.index == 4)?.level ?? 0) > 0;
-                    essence.displayBattles = true;
-                    essence.displayEssence = true;
-                    break;
                 case SummonEssenceColor.Yellow:
-                    essence.unlocked = (this.summonUpgrades.find(upgrade => upgrade.index == 13)?.level ?? 0) > 0;
-                    essence.displayBattles = true;
-                    essence.displayEssence = true;
-                    break;
                 case SummonEssenceColor.Blue:
-                    essence.unlocked = (this.summonUpgrades.find(upgrade => upgrade.index == 23)?.level ?? 0) > 0;
-                    essence.displayBattles = true;
-                    essence.displayEssence = true;
-                    break;
                 case SummonEssenceColor.Purple:
-                    essence.unlocked = (this.summonUpgrades.find(upgrade => upgrade.index == 33)?.level ?? 0) > 0;
-                    essence.displayBattles = true;
-                    essence.displayEssence = true;
-                    break;
                 case SummonEssenceColor.Red:
-                    essence.unlocked = (this.summonUpgrades.find(upgrade => upgrade.index == 44)?.level ?? 0) > 0;
-                    essence.displayBattles = true;
-                    essence.displayEssence = true;
-                    break;
                 case SummonEssenceColor.Cyan:
-                    essence.unlocked = (this.summonUpgrades.find(upgrade => upgrade.index == 53)?.level ?? 0) > 0;
+                    essence.updateUpgradeUnlock(this.summonUpgrades);
                     essence.displayBattles = true;
                     essence.displayEssence = true;
                     break;
@@ -505,16 +544,12 @@ export class Summoning extends Domain {
             }
         });
 
-        this.summonEssences = Array.from({ length: essenceCount }, (_, color) => ({
+        const essenceData = initSummonEssenceRepo();
+        this.summonEssences = Array.from({ length: essenceCount }, (_, color) => new SummonEssence(
             color,
-            quantity: 0,
-            unlocked: false,
-            displayBattles: false,
-            displayEssence: false,
-            victories: 0,
-            battles: this.summonBattles.allBattles[color],
-            stoneBossVictories: 0
-        }));
+            this.summonBattles.allBattles[color],
+            essenceData.find(essence => essence.data.colour === color)?.data,
+        ));
         this.updateEssenceUnlocks();
         this.updateUnlockedUpgrades();
         this.updateSecondaryBonus();
@@ -559,6 +594,7 @@ export class Summoning extends Domain {
         this.summonBattles.allVictories.fill(0);
         this.summonEssences.forEach(essence => {
             essence.quantity = 0;
+            essence.generationPerHour = 0;
             essence.victories = 0;
             essence.stoneBossVictories = 0;
         });
@@ -761,24 +797,19 @@ export const updateSummoningUpgrades= (data: Map<string, any>) => {
     const tesseract = data.get("tesseract") as Tesseract;
     const menagerie = data.get("menagerie") as Menagerie;
     const spelunking = data.get("spelunking") as Spelunking;
+    const jellyOperator = data.get("jellyOperator") as JellyOperator;
+    const sushi = data.get("sushi") as SushiStation;
     
-    // Update upgrade bonuses
-    const levels: number[] = [];
-    players.forEach(player => {
-        levels.push(player.skills.get(SkillsIndex.Summoning)?.level ?? 0);
-    })
-    summoning.summoningLevel = Math.max(...levels);
-
-    const talentBonus597 = players.reduce((value, player) => {
-        const talentBonus = player.getTalentBonus(597);
-
-        if (talentBonus > value) {
-            return talentBonus;
-        } else {
-            return value;
-        }
-    }, 0);
-    const doublerBonus = 2 + Math.max(0, talentBonus597 / 100 - 1) + summoning.getUpgradeBonusFromIndex(78) / 100;
+    // Account projections use the strongest recipient context, not the currently selected character.
+    summoning.summoningLevel = players.reduce(
+        (highest, player) => Math.max(highest, player.skills.get(SkillsIndex.Summoning)?.level ?? 0),
+        0,
+    );
+    const talentBonus597 = players.reduce(
+        (highest, recipient) => Math.max(highest, Talent.getAccountTalentBonus(players, 597, recipient.finalTalentInputs)),
+        0,
+    );
+    const doublerBonus = 2 + (Math.max(0, talentBonus597 / 100 - 1) + summoning.getUpgradeBonusFromIndex(78) / 100);
 
     summoning.summonUpgrades.forEach(upgrade => {
         upgrade.doublerBonus = upgrade.isDoubled ? doublerBonus : 1;
@@ -788,25 +819,24 @@ export const updateSummoningUpgrades= (data: Map<string, any>) => {
     summoning.updatePlayersUnitStats();
 
     // Update cost reduction for upgrades
-    const talentBonus595 = players.reduce((value, player) => {
-        const talentBonus = player.getTalentBonus(595);
-
-        if (talentBonus > value) {
-            return talentBonus;
-        } else {
-            return value;
-        }
-    }, 0);
-
-    const costReductionFromTalent595 = 1 / (1 + Math.max(0, Math.floor(summoning.summonUpgrades.reduce((sum, upgrade) => sum + upgrade.level, 0)/100)) * talentBonus595 / 100);
+    const talentBonus595 = players.reduce(
+        (highest, recipient) => Math.max(highest, Talent.getAccountTalentBonus(players, 595, recipient.finalTalentInputs)),
+        0,
+    );
+    // Initialized native prices count each complete group of 100 purchased levels.
+    const purchasedUpgradeGroups = Math.max(0, Math.floor(summoning.summonUpgrades.reduce((sum, upgrade) => sum + upgrade.level, 0) / 100));
+    const costReductionFromTalent595 = 1 / (1 + talentBonus595 * purchasedUpgradeGroups / 100);
     const costReductionFromTesseract54 = 1 / (1 + tesseract.getUpgradeBonus(54) * (summoning.summonEssences?.find(essence => essence.color == SummonEssenceColor.Endless)?.victories ?? 0) / 100);
     const costReductionFromUpgrade49 = 1 / (1 + summoning.getUpgradeBonusFromIndex(49) / 100);
+    const costReductionFromJelly = 1 / (1 + jellyOperator.getObstructionBonus(27) / 100);
+    const costReductionFromSushi = Math.max(0.1, 1 - Math.max(sushi.getBonusFromIndex(9), sushi.getBonusFromIndex(34)) / 100);
     const costReductionFromUpgrade57 = 1 / (1 + summoning.getUpgradeBonusFromIndex(57) / 100);
     const costReductionFromUpgrade72 = 1 / (1 + summoning.getUpgradeBonusFromIndex(72) / 100);
     const costReductionFromUpgrade75 = 1 / (1 + summoning.getUpgradeBonusFromIndex(75) / 100);
     
-    const totalCostReductionBeforeMenagerie = costReductionFromTalent595 * costReductionFromTesseract54 * costReductionFromUpgrade49 * costReductionFromUpgrade57 
-        * costReductionFromUpgrade72;
+    const totalCostReductionBeforeMenagerie = costReductionFromTalent595 * costReductionFromUpgrade49
+        * costReductionFromJelly * costReductionFromSushi * costReductionFromTesseract54
+        * costReductionFromUpgrade57 * costReductionFromUpgrade72;
     
     summoning.summonUpgrades.forEach(upgrade => {
         const boostQuantity = menagerie.getBonusValue(7);
@@ -815,5 +845,98 @@ export const updateSummoningUpgrades= (data: Map<string, any>) => {
     });
 
     summoning.updateTealEssenceUnlock(spelunking);
+    updateSummoningEssenceGeneration(data);
     return summoning;
 }
+
+const updateSummoningEssenceGeneration = (data: Map<string, any>): void => {
+    const summoning = data.get("summoning") as Summoning;
+    const players = data.get("players") as Player[];
+    const hole = data.get("hole") as Hole;
+    const menagerie = data.get("menagerie") as Menagerie;
+    const gems = data.get("gems") as GemStore;
+    const sneaking = data.get("sneaking") as Sneaking;
+    const rift = data.get("rift") as Rift;
+    const alchemy = data.get("alchemy") as Alchemy;
+    const cooking = data.get("cooking") as Cooking;
+    const worship = data.get("worship") as Worship;
+    const slab = data.get("slab") as Slab;
+    const lab = data.get("lab") as Lab;
+    const achievements = data.get("achievements") as Achievement[];
+    const votes = data.get("votes") as Votes;
+    const statues = data.get("statues") as PlayerStatues[];
+    const arcade = data.get("arcade") as Arcade;
+    const vault = data.get("upgradeVault") as UpgradeVault;
+    const stamps = data.get("stamps") as Stamp[][];
+
+    const pristineCharm = sneaking.pristineCharms.find(charm => charm.data.itemId === 12)!;
+    const pristineMultiplier = pristineCharm.unlocked ? pristineCharm.getBonus() : 1;
+    const essencePurchases = gems.purchases.find(purchase => purchase.no === 137)!.pucrhased;
+    const skillMastery = rift.bonuses.find(bonus => bonus.name === SkillMastery.displayName) as SkillMastery;
+    const essenceConfetti = sneaking.jadeUpgrades.find(upgrade => upgrade.index === 18)!;
+    const slabEssenceBonus = slab.getAllEssenceGainBonus(lab.bonuses[15].getBonus(), essenceConfetti.purchased);
+    const endlessVictories = summoning.summonEssences[SummonEssenceColor.Endless].victories;
+
+    // Alchemy, meals, Worship Totalizer, and Slab share one additive group.
+    const additiveBonus = alchemy.getBubbleBonusForKey("M10AllCharz")
+        + (cooking.getMealBonusForKey("zSumEss") + (worship.totalizer.getBonus(TotalizerBonus.EssenceGain) + slabEssenceBonus));
+    const allEssenceMultiplier = (1 + summoning.getSummoningWinnerBonusFromIndex(5) / 100)
+        * (1 + hole.lamp.getBonus(false, 2, 2) / 100)
+        * (1 + hole.gambit.getBonus(5) / 100)
+        * (1 + menagerie.getBonusValue(14) / 100)
+        * Math.pow(1.4, essencePurchases)
+        * pristineMultiplier
+        * (1 + hole.getFountainBonus(1, 17) / 100)
+        * (1 + hole.getMonumentBonus("Justice", 4) / 100)
+        * (1 + skillMastery.getSkillBonus(SkillsIndex.Summoning, 1) / 100)
+        * (1 + summoning.summonUpgrades[62].getBaseBonus() * endlessVictories / 100)
+        * (1 + additiveBonus / 100)
+        * (1 + (5 * Number(achievements[372].completed) + 5 * Number(achievements[374].completed)) / 100)
+        * (1 + votes.getCurrentBonus(28) / 100);
+
+    const whiteStatueBonus = players.reduce((highest, player) => Math.max(
+        highest,
+        statues.find(record => record.playerID === player.playerID)!.statues.find(statue => statue.index === 27)!.getBonus(player),
+    ), 0);
+    const whiteEssenceBonus = alchemy.getVialBonusForKey("6WhiteEss")
+        + (whiteStatueBonus + (arcade.bonuses.find(bonus => bonus.index === 34)!.getBonus() + vault.getBonusForId(83)));
+    const vaultEssenceBonus = vault.getBonusForId(87);
+    const earlyEssenceBonus = getStampBonusForKey(stamps, "123Ess") + vaultEssenceBonus;
+    const lateEssenceBonus = getStampBonusForKey(stamps, "456Ess") + vaultEssenceBonus;
+    const whiteStampBonus = getStampBonusForKey(stamps, "WhiteEss");
+
+    for (const essence of summoning.summonEssences) {
+        let alchemyBonus = 0;
+        let colorBonus = vaultEssenceBonus;
+        let stampBonus = 0;
+        switch (essence.color) {
+            case SummonEssenceColor.White:
+                colorBonus = whiteEssenceBonus;
+                stampBonus = whiteStampBonus;
+                break;
+            case SummonEssenceColor.Green:
+                alchemyBonus = alchemy.getAllCharacterBubbleBonusForKey("A7AllCharz", players);
+                colorBonus = earlyEssenceBonus;
+                break;
+            case SummonEssenceColor.Yellow:
+                alchemyBonus = alchemy.getBubbleBonusForKey("Y7");
+                colorBonus = earlyEssenceBonus;
+                break;
+            case SummonEssenceColor.Blue:
+                colorBonus = earlyEssenceBonus;
+                break;
+            case SummonEssenceColor.Purple:
+                alchemyBonus = alchemy.getAllCharacterBubbleBonusForKey("M8AllCharz", players);
+                colorBonus = lateEssenceBonus;
+                break;
+            case SummonEssenceColor.Red:
+                alchemyBonus = alchemy.getAllCharacterBubbleBonusForKey("W9AllCharz", players);
+                colorBonus = lateEssenceBonus;
+                break;
+            case SummonEssenceColor.Cyan:
+                colorBonus = lateEssenceBonus;
+                break;
+        }
+        essence.updateGeneration(summoning, allEssenceMultiplier, alchemyBonus, colorBonus, stampBonus);
+    }
+};

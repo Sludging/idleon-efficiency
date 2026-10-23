@@ -161,6 +161,11 @@
       "label": "gaming_palette_bonus_5",
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 5, 0)",
       "description": "Gaming Palette bonus index 5"
+    },
+    {
+      "label": "boat_artifact_find_multipliers",
+      "expression": "(()=>{const boats=idleon.engine.getGameAttribute(\"Boats\");const sailing=idleon.engine.getGameAttribute(\"Sailing\");return boats.flatMap((boat,index)=>index<Math.round(Number(sailing[2][1])+1)&&Number(boat[3])+Number(boat[5])!==0?[{index,multiplier:idleon.callFunction(\"Sailing\",\"BoatArtiMulti\",index,0)}]:[])})()",
+      "description": "Artifact-find multiplier for every owned boat, evaluated for the genuine active character."
     }
   ]
 }

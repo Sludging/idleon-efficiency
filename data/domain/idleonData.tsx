@@ -39,7 +39,7 @@ import { AnvilWrapper, updateAnvil } from './world-1/anvil';
 import { Alerts, updateAlerts } from './alerts';
 import { Account, updateAccount } from './account';
 import { Divinity, updateDivinity, updateDivinityBlessings, updateDivinityRates } from './world-5/divinity';
-import { Sailing, updateSailing, updateMinTravelTimeAndSpeed } from './world-5/sailing/sailing';
+import { Sailing, updateSailing, updateMinTravelTimeAndSpeed, updateSailingCaptainExperience } from './world-5/sailing/sailing';
 import { Gaming, updateGaming, updateGamingDisplay, updateSuperbitImpacts } from './world-5/gaming';
 import { AtomCollider, updateAtomCollider } from './world-3/construction/atomCollider';
 import { updateArtifactBuildSpeed, updateArtifacts, updateSailingArtifactSlabBoost } from './world-5/sailing/artifacts';
@@ -59,7 +59,7 @@ import { Sneaking, updateSneaking, updateSneakingGemstones, updateSneakingNinjas
 import { Summoning, updateSummoningUpgrades, updateSummoningWinnerBonusBoost, updateSummoningWinnerImpact } from './world-6/summoning';
 import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLandRankBonuses, updateFarmingLevel, updateFarmingStickerBonuses } from './world-6/farming';
 import { SushiStation, updateSushiStation } from './world-7/sushi';
-import { Spelunking, updateSpelunkingChapterBonuses, updateSpelunkingPresentation } from './world-7/spelunking';
+import { Spelunking, updateSpelunkingChapterBonuses, updateSpelunkingUpgradeBonuses, updateSpelunkingPower, updateSpelunkingPresentation } from './world-7/spelunking';
 import { ResearchGrid, updateResearchGrid, updateResearchDisplay } from './world-7/research';
 import { Minehead, updateMinehead, updateMineheadDropRate, updateMineheadDailyTries, updateMineheadBaseDamage, updateMineheadDepthCharges, updateMineheadCurrencyGain } from './world-7/minehead';
 import { Glimbo, updateGlimbo } from './world-7/glimbo';
@@ -428,6 +428,9 @@ const postProcessingMap: Record<string, Function> = {
     "rightHandOfActionBonuses": (_doc: Cloudsave, accountData: Map<string, any>) => updateRightHandOfActionBonuses(accountData),
     "updateSkillEfficiencies": (_doc: Cloudsave, accountData: Map<string, any>) => updateSkillEfficiencies(accountData),
     "updateHoleCharacterCapabilities": (_doc: Cloudsave, accountData: Map<string, any>) => updateHoleCharacterCapabilities(accountData),
+    // Persistent POW consumes settled producers and effective account upgrade bonuses.
+    "spelunkingUpgradeBonuses": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingUpgradeBonuses(accountData),
+    "spelunkingPower": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingPower(accountData),
 }
 
 // I really really hate this.
@@ -445,6 +448,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
     "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
     "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateMinTravelTimeAndSpeed(accountData),
+    "sailingCaptainExperience": (doc: Cloudsave, accountData: Map<string, any>) => updateSailingCaptainExperience(accountData),
     "farming": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingDisplayData(accountData),
     "sigilsChargeSpeed": (doc: Cloudsave, accountData: Map<string, any>) => updateSigilsChargeSpeed(accountData),
     "breedingShinyAndBreedingSpeed": (doc: Cloudsave, accountData: Map<string, any>) => updateBreedingDisplayData(accountData),

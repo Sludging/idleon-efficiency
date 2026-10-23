@@ -1,0 +1,42 @@
+{
+  "extractions": {
+    "essence_generation": {
+      "expression": "Array.from({length:8},(_,colour)=>({colour,generationPerHour:idleon.callFunction(\"Summoning2\",\"SummRockEssGen\",colour,0)}))",
+      "result": [
+        {
+          "colour": 0,
+          "generationPerHour": 4.211775965211496e+24
+        },
+        {
+          "colour": 1,
+          "generationPerHour": 2.3958130091450356e+23
+        },
+        {
+          "colour": 2,
+          "generationPerHour": 1.1720478176312203e+23
+        },
+        {
+          "colour": 3,
+          "generationPerHour": 1.4395635752802943e+23
+        },
+        {
+          "colour": 4,
+          "generationPerHour": 4.9717539127197635e+22
+        },
+        {
+          "colour": 5,
+          "generationPerHour": 1.7145905434116882e+21
+        },
+        {
+          "colour": 6,
+          "generationPerHour": 2.571675365298366e+21
+        },
+        {
+          "colour": 7,
+          "generationPerHour": 6370559859865533000
+        }
+      ]
+    }
+  },
+  "errors": {}
+}
