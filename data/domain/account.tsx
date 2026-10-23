@@ -9,6 +9,7 @@ import { Player } from "./player";
 import { Quests } from "./quests";
 import { Storage } from "./storage";
 import { WeeklyBoss } from "./weekly-boss";
+import { FractIslandBonusesThresholds } from "./world-2/islandExpedition";
 
 // Option List Indexes:
 // 15 = Colo1 Tix
@@ -176,6 +177,10 @@ export class Account extends Domain {
     };
     getFractalIslandArtifactBonus(): number {
         return this.fractalIslandProgress >= 2500 ? 1 : 0;
+    }
+
+    isFractalStealthUnlocked(): boolean {
+        return this.fractalIslandProgress >= FractIslandBonusesThresholds[6];
     }
 
 

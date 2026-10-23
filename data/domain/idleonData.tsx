@@ -55,7 +55,7 @@ import { Guild } from './guild';
 import { Rift } from "./world-4/rift";
 import { Equinox, updateEquinoxBar } from './world-3/equinox';
 import { POExtra } from './world-2/postoffice';
-import { Sneaking, updateSneaking } from './world-6/sneaking';
+import { Sneaking, updateSneaking, updateSneakingGemstones, updateSneakingNinjas, updateSneakingProgression } from './world-6/sneaking';
 import { Summoning, updateSummoningUpgrades, updateSummoningWinnerBonusBoost, updateSummoningWinnerImpact } from './world-6/summoning';
 import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLandRankBonuses, updateFarmingLevel, updateFarmingStickerBonuses } from './world-6/farming';
 import { SushiStation, updateSushiStation } from './world-7/sushi';
@@ -277,6 +277,8 @@ export const initAccountDataKeys = (allItems: Item[], repositories: StaticReposi
 // ORDER IS IMPORTANT, the keys are not relevant as data doesn't get persisted.
 // This allows for multiple calls that touch the same data to happen in the same map (artifacts + sailing for example)
 const postProcessingMap: Record<string, Function> = {
+    // Tome reads mastery-scaled open floors before the existing Sneaking update.
+    "sneakingProgression": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateSneakingProgression(accountData),
     // Study effects use saved state and must be ready before schematic consumers.
     "holeStudyEffects": (_doc: Cloudsave, accountData: Map<string, any>) => updateHoleStudyEffects(accountData),
     // Camp effects use parsed Majik and Harp state before their shared consumers.
@@ -391,6 +393,8 @@ const postProcessingMap: Record<string, Function> = {
     "capacity": (doc: Cloudsave, accountData: Map<string, any>) => updateCapacity(accountData),
     "votes": (doc: Cloudsave, accountData: Map<string, any>) => updateVotesBonus(accountData),
     "playerTalentContexts": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentContexts(accountData),
+    // Gemstone effects use each character's final actual talent level.
+    "sneakingGemstones": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateSneakingGemstones(accountData),
     // Prepare Will Of The Eldest's account-wide level cap before attribute source consumers.
     "attributeTalents": (_doc: Cloudsave, accountData: Map<string, any>) => updateAttributeTalents(accountData),
     // Beginner Best Class uses its own beginner-line level cap before weapon-power consumers.
@@ -456,6 +460,8 @@ const postPostProcessingMap: Record<string, Function> = {
     "meritocraty": (doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyLate(accountData),
     // Construction rates read Star Sign bonuses after Meritocracy settles.
     "starSignMeritocracyBonus": (_doc: Cloudsave, accountData: Map<string, any>) => updateStarSignMeritocracyBonus(accountData),
+    // Shared ninja inputs need settled account Star Signs and final talent, statue, ballot, and Land Rank bonuses.
+    "sneakingNinjas": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateSneakingNinjas(accountData),
     "shinyCritterRewardMultiplier": (_doc: Cloudsave, accountData: Map<string, any>) => updateShinyCritterRewardMultiplier(accountData),
     // Saved-snapshot stamina and page locations need late Meritocracy and final character talent contexts.
     "spelunkingPresentation": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingPresentation(accountData),

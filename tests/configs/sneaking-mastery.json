@@ -1,0 +1,11 @@
+{
+  "description": "Native 1.24 retained account. Reward earned boundary is the native render consumer count; game draws seven rows, website exposes eight. See local sneaking-native-evidence.",
+  "target": "Sneak Mastery reward progression",
+  "extractions": [
+    {
+      "label": "mastery_progression",
+      "expression": "({selectedMastery:Number(idleon.getAttr(\"OptionsListAccount\")[231]),completedMasteries:Number(idleon.getAttr(\"OptionsListAccount\")[232]),earnedRewardCount:Number(idleon.getAttr(\"OptionsListAccount\")[232])})",
+      "description": "Source-backed native reward render boundary, not a cloned per-reward threshold loop"
+    }
+  ]
+}

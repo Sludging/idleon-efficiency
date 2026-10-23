@@ -250,6 +250,7 @@ export class Menagerie extends Domain {
     private organicLabelsConsumed = 0;
     private purpleJellyBonus = 0;
     private yellowConstructionBonus = 0;
+    private sneakingUpgradeBonusLevels: number[] = [];
     private resourceBalances: MenagerieResourceBalances = {
         blackStarsOwned: 0,
         blackStarsAvailable: 0,
@@ -300,6 +301,11 @@ export class Menagerie extends Domain {
     parse(data: Map<string, unknown>): void {
         const menagerie = data.get(this.getDataKey()) as Menagerie;
         const savedMenagerie = data.get("Menagerie") as (number | string)[][];
+        menagerie.sneakingUpgradeBonusLevels = [];
+        if (!savedMenagerie || savedMenagerie.length === 0) {
+            return;
+        }
+        menagerie.sneakingUpgradeBonusLevels = (savedMenagerie[7] ?? []).map(level => Number(level ?? 0));
         const savedMissionClaims = savedMenagerie[1] ?? [];
         menagerie.missions.forEach(mission => mission.parse(Number(savedMissionClaims[mission.index] ?? 0)));
         menagerie.lumiBalance = Number(savedMenagerie[0]?.[0] ?? 0);
@@ -415,6 +421,10 @@ export class Menagerie extends Domain {
 
     getBonuses(): MenagerieBonus[] {
         return this.bonuses;
+    }
+
+    getSneakingUpgradeBonusLevels(index: number): number {
+        return this.sneakingUpgradeBonusLevels[index] ?? 0;
     }
 
     getBonusValue(index: number): number {
