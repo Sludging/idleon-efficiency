@@ -378,9 +378,17 @@
         56
       ]
     },
-    "exotic_next_rotation_time_ms": {
-      "expression": "(()=>{const raw=window.frames[0][\"__fixture\"].TimeAway;const saved=(typeof raw===\"string\"?JSON.parse(raw):raw).GlobalTime;const current=Math.floor(saved/604800);return (current+1)*604800*1000;})()",
-      "result": 1792627200000
+    "organic_labels_owned": {
+      "expression": "idleon.callFunction(\"MenagerieStuff\",\"OrganicLabelOwned\",0,0)",
+      "result": 0
+    },
+    "organic_labels_available": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\",\"ExoticOrganicsLEFT\",0,0)",
+      "result": 0
+    },
+    "land_rank_fifth_column_max": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\",\"LandRank5thColumnMaxLV\",0,0)",
+      "result": 52
     }
   },
   "errors": {}

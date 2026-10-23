@@ -1,0 +1,51 @@
+{
+  "description": "Public native Shrine construction maximum-level increases for all nine Shrines. Each generated base maximum is 100.",
+  "target": "Construction Shrine maximum-level increases",
+  "extractions": [
+    {
+      "label": "shrine_maximum_level_increase_18",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraMaxLvAtom\", 100, 18)",
+      "description": "Woodular Shrine construction maximum-level increase above its generated base maximum."
+    },
+    {
+      "label": "shrine_maximum_level_increase_19",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraMaxLvAtom\", 100, 19)",
+      "description": "Isaccian Shrine construction maximum-level increase above its generated base maximum."
+    },
+    {
+      "label": "shrine_maximum_level_increase_20",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraMaxLvAtom\", 100, 20)",
+      "description": "Crystal Shrine construction maximum-level increase above its generated base maximum."
+    },
+    {
+      "label": "shrine_maximum_level_increase_21",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraMaxLvAtom\", 100, 21)",
+      "description": "Pantheon Shrine construction maximum-level increase above its generated base maximum."
+    },
+    {
+      "label": "shrine_maximum_level_increase_22",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraMaxLvAtom\", 100, 22)",
+      "description": "Clover Shrine construction maximum-level increase above its generated base maximum."
+    },
+    {
+      "label": "shrine_maximum_level_increase_23",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraMaxLvAtom\", 100, 23)",
+      "description": "Summereading Shrine construction maximum-level increase above its generated base maximum."
+    },
+    {
+      "label": "shrine_maximum_level_increase_24",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraMaxLvAtom\", 100, 24)",
+      "description": "Crescent Shrine construction maximum-level increase above its generated base maximum."
+    },
+    {
+      "label": "shrine_maximum_level_increase_25",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraMaxLvAtom\", 100, 25)",
+      "description": "Undead Shrine construction maximum-level increase above its generated base maximum."
+    },
+    {
+      "label": "shrine_maximum_level_increase_26",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraMaxLvAtom\", 100, 26)",
+      "description": "Primordial Shrine construction maximum-level increase above its generated base maximum."
+    }
+  ]
+}

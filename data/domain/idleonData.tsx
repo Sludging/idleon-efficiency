@@ -65,7 +65,7 @@ import { Minehead, updateMinehead, updateMineheadDropRate, updateMineheadDailyTr
 import { Glimbo, updateGlimbo } from './world-7/glimbo';
 import { JellyOperator, updateJellyOperator, updateJellyOperatorPresentation } from './world-7/jellyOperator';
 import { Button, updateButton } from './world-7/button';
-import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './starsigns';
+import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked, updateStarSignMeritocracyBonus } from './starsigns';
 import { IslandExpeditions, updateIslandExpeditions } from './world-2/islandExpedition';
 import { Tome, updateTomeBonuses, updateTomeScores } from './world-4/tome';
 import { KillRoy } from './world-2/killroy';
@@ -454,6 +454,8 @@ const postPostProcessingMap: Record<string, Function> = {
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
     "royalArmoryLate": (doc: Cloudsave, accountData: Map<string, any>) => updateRoyalArmoryLateInputs(accountData),
     "meritocraty": (doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyLate(accountData),
+    // Construction rates read Star Sign bonuses after Meritocracy settles.
+    "starSignMeritocracyBonus": (_doc: Cloudsave, accountData: Map<string, any>) => updateStarSignMeritocracyBonus(accountData),
     "shinyCritterRewardMultiplier": (_doc: Cloudsave, accountData: Map<string, any>) => updateShinyCritterRewardMultiplier(accountData),
     // Saved-snapshot stamina and page locations need late Meritocracy and final character talent contexts.
     "spelunkingPresentation": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingPresentation(accountData),

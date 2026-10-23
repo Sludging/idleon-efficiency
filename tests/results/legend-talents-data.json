@@ -1,5 +1,346 @@
 {
   "extractions": {
+    "legend_talent_catalog": {
+      "expression": "(()=>{const records=idleon.engine.getGameAttribute(\"CustomLists\").h.LegendTalents;const levels=idleon.getAttr(\"Spelunk\")[18];return records.flatMap((record,index)=>record[4]===\"filler\"?[]:[{index,name:record[0],effect:record[4],level:Number(levels[index]),bonus:idleon.callFunction(\"Thingies\",\"LegendPTS_bonus\",index,0),maxLevel:idleon.callFunction(\"Thingies\",\"LegendTalent_MaxLV\",index,0)}])})()",
+      "result": [
+        {
+          "index": 0,
+          "name": "Coral_Restoration",
+          "effect": "+{%_Daily_Coral_gain",
+          "level": 2,
+          "bonus": 60,
+          "maxLevel": 2
+        },
+        {
+          "index": 1,
+          "name": "Greatest_Drop_Party_Ever",
+          "effect": "+{%_Drop_Rate",
+          "level": 5,
+          "bonus": 2500,
+          "maxLevel": 5
+        },
+        {
+          "index": 2,
+          "name": "Double_Aint_Enough",
+          "effect": "$x_Statue_and_Gold_Food_drops",
+          "level": 4,
+          "bonus": 400,
+          "maxLevel": 4
+        },
+        {
+          "index": 3,
+          "name": "Extended_Database",
+          "effect": "+{_Max_LV_for_5th_column",
+          "level": 4,
+          "bonus": 40,
+          "maxLevel": 4
+        },
+        {
+          "index": 4,
+          "name": "Familiar_Firesale",
+          "effect": "{%_chance_for_no_Familiar_cost_increase",
+          "level": 2,
+          "bonus": 80,
+          "maxLevel": 2
+        },
+        {
+          "index": 5,
+          "name": "Kruk_be_Bubblin'",
+          "effect": "+{_LVs_per_day_from_Kattlekruk",
+          "level": 6,
+          "bonus": 60,
+          "maxLevel": 6
+        },
+        {
+          "index": 6,
+          "name": "The_Charms_got_Rizz",
+          "effect": "}x_higher_bonuses",
+          "level": 3,
+          "bonus": 75,
+          "maxLevel": 3
+        },
+        {
+          "index": 7,
+          "name": "Super_Duper_Talents",
+          "effect": "+{_LVs",
+          "level": 5,
+          "bonus": 50,
+          "maxLevel": 5
+        },
+        {
+          "index": 8,
+          "name": "Buy_One_Get_One_Free",
+          "effect": "}x_more_LVs",
+          "level": 3,
+          "bonus": 300,
+          "maxLevel": 3
+        },
+        {
+          "index": 9,
+          "name": "Superb_Gallerium",
+          "effect": "{_showcase_slots_are_1_grade_higher",
+          "level": 3,
+          "bonus": 6,
+          "maxLevel": 3
+        },
+        {
+          "index": 10,
+          "name": "Picasso_Gaming",
+          "effect": "}x_higher_Palette_bonuses",
+          "level": 5,
+          "bonus": 125,
+          "maxLevel": 5
+        },
+        {
+          "index": 11,
+          "name": "Davey_Jones_Returns",
+          "effect": "}x_higher_bonuses,_and_{%_less_minimum_time",
+          "level": 4,
+          "bonus": 60,
+          "maxLevel": 4
+        },
+        {
+          "index": 12,
+          "name": "Opa_Opal_Style",
+          "effect": "}x_Villager_EXP_gains",
+          "level": 3,
+          "bonus": 300,
+          "maxLevel": 3
+        },
+        {
+          "index": 13,
+          "name": "Blue_Ribbon_Certification",
+          "effect": "+{_more_daily_Ribbons",
+          "level": 5,
+          "bonus": 5,
+          "maxLevel": 5
+        },
+        {
+          "index": 14,
+          "name": "Recycled_Particle_Upgrades",
+          "effect": "{%_of_unspent_upgrades_are_spent",
+          "level": 1,
+          "bonus": 100,
+          "maxLevel": 1
+        },
+        {
+          "index": 15,
+          "name": "Reduced_Jail_Sentence",
+          "effect": "}x_Lab_and_Divinity_EXP_gain",
+          "level": 2,
+          "bonus": 300,
+          "maxLevel": 2
+        },
+        {
+          "index": 16,
+          "name": "Thanatos's_Teachings",
+          "effect": "+{%_extra_kills",
+          "level": 3,
+          "bonus": 600,
+          "maxLevel": 3
+        },
+        {
+          "index": 17,
+          "name": "Yet_Another_Printer_Multi",
+          "effect": "+{%_daily_printer_output,_maxed_out_at_20_days",
+          "level": 2,
+          "bonus": 10,
+          "maxLevel": 2
+        },
+        {
+          "index": 18,
+          "name": "Cog_Lover",
+          "effect": "+{_daily_Jeweled_Cog_claims",
+          "level": 3,
+          "bonus": 6,
+          "maxLevel": 3
+        },
+        {
+          "index": 19,
+          "name": "More_Soot_More_Salt",
+          "effect": "}x_faster_Refinery_cycles",
+          "level": 3,
+          "bonus": 225,
+          "maxLevel": 3
+        },
+        {
+          "index": 20,
+          "name": "Skillium_Fancyson",
+          "effect": "}x_Skill_EXP_gain",
+          "level": 5,
+          "bonus": 375,
+          "maxLevel": 5
+        },
+        {
+          "index": 21,
+          "name": "Flopping_a_Full_House",
+          "effect": "}x_Active_Card_bonuses",
+          "level": 5,
+          "bonus": 75,
+          "maxLevel": 5
+        },
+        {
+          "index": 22,
+          "name": "Democracy_FTW",
+          "effect": "+{%_higher_Ballot_Bonus",
+          "level": 1,
+          "bonus": 25,
+          "maxLevel": 1
+        },
+        {
+          "index": 23,
+          "name": "Daily_Shopping_Spree",
+          "effect": "+{_daily_cheap_upgrades",
+          "level": 4,
+          "bonus": 32,
+          "maxLevel": 4
+        },
+        {
+          "index": 24,
+          "name": "May_the_Best_Man_Win",
+          "effect": "+{%_higher_Meritocracy_Multi",
+          "level": 1,
+          "bonus": 20,
+          "maxLevel": 1
+        },
+        {
+          "index": 25,
+          "name": "Midusian_Appetite",
+          "effect": "+{%_Golden_Food_bonus",
+          "level": 3,
+          "bonus": 1500,
+          "maxLevel": 3
+        },
+        {
+          "index": 26,
+          "name": "Furry_Friends_Forever",
+          "effect": "}x_bigger_'rest-of-the-game'_bonuses",
+          "level": 3,
+          "bonus": 600,
+          "maxLevel": 3
+        },
+        {
+          "index": 27,
+          "name": "Best_Story_Ever_Told",
+          "effect": "}x_higher_Reward_Multi",
+          "level": 4,
+          "bonus": 200,
+          "maxLevel": 4
+        },
+        {
+          "index": 28,
+          "name": "+1_Slab",
+          "effect": "}x_bigger_Slab_bonuses",
+          "level": 2,
+          "bonus": 30,
+          "maxLevel": 2
+        },
+        {
+          "index": 29,
+          "name": "Whats_in_your_Jar?",
+          "effect": "}x_collectible_bonuses",
+          "level": 3,
+          "bonus": 60,
+          "maxLevel": 3
+        },
+        {
+          "index": 30,
+          "name": "Lightning_Fast_Naps",
+          "effect": "}x_faster_Stamina_Regen",
+          "level": 3,
+          "bonus": 75,
+          "maxLevel": 3
+        },
+        {
+          "index": 31,
+          "name": "Big_Sig_Fig",
+          "effect": "}x_Sigil_level_up_speed",
+          "level": 4,
+          "bonus": 600,
+          "maxLevel": 4
+        },
+        {
+          "index": 32,
+          "name": "Purebred_Eggs",
+          "effect": "}x_Breeding_Egg_luck",
+          "level": 1,
+          "bonus": 900,
+          "maxLevel": 1
+        },
+        {
+          "index": 33,
+          "name": "Inevitable_Builder",
+          "effect": "}x_Trimmed_slot_build_speed",
+          "level": 3,
+          "bonus": 225,
+          "maxLevel": 3
+        },
+        {
+          "index": 34,
+          "name": "Blessed_Be_Thy_Luck",
+          "effect": "}x_better_Blessing_luck",
+          "level": 3,
+          "bonus": 300,
+          "maxLevel": 3
+        },
+        {
+          "index": 35,
+          "name": "Obsolete_No_More",
+          "effect": "Perma_Metal_Detector,_and_}x_Equinox_Bar_Fill_Rate",
+          "level": 1,
+          "bonus": 25,
+          "maxLevel": 1
+        },
+        {
+          "index": 36,
+          "name": "Wowa_Woowa",
+          "effect": "+{%_higher_Prisma_and_Exalted_bonuses",
+          "level": 5,
+          "bonus": 15,
+          "maxLevel": 5
+        },
+        {
+          "index": 37,
+          "name": "6_O'Clock_Crystals",
+          "effect": "}x_more_Daily_Guaranteed_Crystal_Mobs",
+          "level": 1,
+          "bonus": 300,
+          "maxLevel": 1
+        },
+        {
+          "index": 38,
+          "name": "Shrine_World_Order_Bill",
+          "effect": "All_7_Worlds_will_ratify_this_bill_into_the_IdleOn_constitution",
+          "level": 1,
+          "bonus": 1,
+          "maxLevel": 1
+        },
+        {
+          "index": 39,
+          "name": "Super_Talent_Points",
+          "effect": "Unlocks_this_system_for_all_characters!",
+          "level": 1,
+          "bonus": 1,
+          "maxLevel": 1
+        },
+        {
+          "index": 40,
+          "name": "filler",
+          "effect": "}x_Minehead_Currency_and_DMG",
+          "level": 0,
+          "bonus": 0,
+          "maxLevel": 6
+        },
+        {
+          "index": 41,
+          "name": "filler",
+          "effect": "}x_Jelly_Operator_DMG",
+          "level": 0,
+          "bonus": 0,
+          "maxLevel": 6
+        }
+      ]
+    },
     "points_owned": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_owned\", 0, 0)",
       "result": 129

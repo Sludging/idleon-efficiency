@@ -3,6 +3,11 @@
   "target": "Legend Talents",
   "extractions": [
     {
+      "label": "legend_talent_catalog",
+      "expression": "(()=>{const records=idleon.engine.getGameAttribute(\"CustomLists\").h.LegendTalents;const levels=idleon.getAttr(\"Spelunk\")[18];return records.flatMap((record,index)=>record[4]===\"filler\"?[]:[{index,name:record[0],effect:record[4],level:Number(levels[index]),bonus:idleon.callFunction(\"Thingies\",\"LegendPTS_bonus\",index,0),maxLevel:idleon.callFunction(\"Thingies\",\"LegendTalent_MaxLV\",index,0)}])})()",
+      "description": "Current bonus, effective maximum level, and saved level for every defined Legend Talent effect. Include conditional talents with filler names; exclude only filler effects. Do not open the Legend menu."
+    },
+    {
       "label": "points_owned",
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_owned\", 0, 0)",
       "description": "Native total legend talent points owned"

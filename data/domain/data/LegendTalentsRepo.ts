@@ -7,6 +7,7 @@ export class LegendTalentBase { constructor(public index: number, public data: L
 export const initLegendTalentsRepo = () => {
     return [    
         new LegendTalentBase(0, <LegendTalentModel>{
+                "talentIndex": 0,
                 "name": "Coral Restoration",
                 "maxLevel": 2,
                 "bonusValue": 30,
@@ -15,6 +16,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "+{% more Daily Coral gained each and every day!"
             }),
         new LegendTalentBase(1, <LegendTalentModel>{
+                "talentIndex": 1,
                 "name": "Greatest Drop Party Ever",
                 "maxLevel": 4,
                 "bonusValue": 500,
@@ -23,6 +25,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "+{% Drop Rate for all players! @ This bonus is additive, not a multiplier."
             }),
         new LegendTalentBase(2, <LegendTalentModel>{
+                "talentIndex": 2,
                 "name": "Double Aint Enough",
                 "maxLevel": 3,
                 "bonusValue": 100,
@@ -31,6 +34,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "''2x Statue and Gold Food drops'' now drop in bundles of $x instead!"
             }),
         new LegendTalentBase(3, <LegendTalentModel>{
+                "talentIndex": 3,
                 "name": "Extended Database",
                 "maxLevel": 3,
                 "bonusValue": 10,
@@ -39,6 +43,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "+{ Max LV for 5th column of Farming Land Rank Database"
             }),
         new LegendTalentBase(4, <LegendTalentModel>{
+                "talentIndex": 4,
                 "name": "Familiar Firesale",
                 "maxLevel": 2,
                 "bonusValue": 40,
@@ -47,6 +52,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "Whenever you buy a Summoning Familiar, there's a {% chance for the cost to not go up at all... almost like it's free!)"
             }),
         new LegendTalentBase(5, <LegendTalentModel>{
+                "talentIndex": 5,
                 "name": "Kruk be Bubblin'",
                 "maxLevel": 5,
                 "bonusValue": 10,
@@ -55,6 +61,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "Kattlekruk gives +{ more Bubble LVs per day for each of his bubbles"
             }),
         new LegendTalentBase(6, <LegendTalentModel>{
+                "talentIndex": 6,
                 "name": "The Charms got Rizz",
                 "maxLevel": 2,
                 "bonusValue": 25,
@@ -63,6 +70,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "All of your Gold Charms in Sneaking give }x higher bonuses"
             }),
         new LegendTalentBase(7, <LegendTalentModel>{
+                "talentIndex": 7,
                 "name": "Super Duper Talents",
                 "maxLevel": 5,
                 "bonusValue": 10,
@@ -71,6 +79,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "Super Talent PTS give +{ more LVs to talents than they normally do"
             }),
         new LegendTalentBase(8, <LegendTalentModel>{
+                "talentIndex": 8,
                 "name": "Buy One Get One Free",
                 "maxLevel": 2,
                 "bonusValue": 100,
@@ -79,6 +88,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "Get }x more LVs when buying Exotic Market upgrades"
             }),
         new LegendTalentBase(9, <LegendTalentModel>{
+                "talentIndex": 9,
                 "name": "Superb Gallerium",
                 "maxLevel": 2,
                 "bonusValue": 2,
@@ -87,6 +97,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "The first { normal showcase slots in your Gallery are 1 grade higher (i.e. they become Featured, and give 150% bonuses)"
             }),
         new LegendTalentBase(10, <LegendTalentModel>{
+                "talentIndex": 10,
                 "name": "Picasso Gaming",
                 "maxLevel": 5,
                 "bonusValue": 25,
@@ -95,6 +106,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "All the bonuses from your Gaming Palette colours are }x higher"
             }),
         new LegendTalentBase(11, <LegendTalentModel>{
+                "talentIndex": 11,
                 "name": "Davey Jones Returns",
                 "maxLevel": 4,
                 "bonusValue": 15,
@@ -103,6 +115,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "}x bonus to all the same stats that 'Davey Jones Training' gives, check it in W5 Gemshop. Also, -{% Minimum Travel Time"
             }),
         new LegendTalentBase(12, <LegendTalentModel>{
+                "talentIndex": 12,
                 "name": "Opa Opal Style",
                 "maxLevel": 3,
                 "bonusValue": 100,
@@ -111,6 +124,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "Villagers at the Hole in World 5 gain }x more EXP"
             }),
         new LegendTalentBase(13, <LegendTalentModel>{
+                "talentIndex": 13,
                 "name": "Blue Ribbon Certification",
                 "maxLevel": 4,
                 "bonusValue": 1,
@@ -119,6 +133,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "Get +{ more Ribbons every day for your Ribbon Shelf in Cooking"
             }),
         new LegendTalentBase(14, <LegendTalentModel>{
+                "talentIndex": 14,
                 "name": "Recycled Particle Upgrades",
                 "maxLevel": 1,
                 "bonusValue": 100,
@@ -127,6 +142,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "{% of Unspent 'Alternate Particle Upgrades' each day are spent equally across the 1st bubbles of each colour, for free!"
             }),
         new LegendTalentBase(15, <LegendTalentModel>{
+                "talentIndex": 15,
                 "name": "Reduced Jail Sentence",
                 "maxLevel": 2,
                 "bonusValue": 150,
@@ -135,6 +151,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "}x higher EXP gain for both Laboratory and Divinity"
             }),
         new LegendTalentBase(16, <LegendTalentModel>{
+                "talentIndex": 16,
                 "name": "Thanatos's Teachings",
                 "maxLevel": 2,
                 "bonusValue": 200,
@@ -143,6 +160,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "+{% extra kills, for opening portals and Deathnote. @ This bonus is additive, not a multiplier."
             }),
         new LegendTalentBase(17, <LegendTalentModel>{
+                "talentIndex": 17,
                 "name": "Yet Another Printer Multi",
                 "maxLevel": 2,
                 "bonusValue": 5,
@@ -151,6 +169,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "+{% printer output every day for 20 days, resets when taking a new sample!"
             }),
         new LegendTalentBase(18, <LegendTalentModel>{
+                "talentIndex": 18,
                 "name": "Cog Lover",
                 "maxLevel": 2,
                 "bonusValue": 2,
@@ -159,6 +178,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "You can claim +{ more Jeweled Cogs every day, if you have them unlocked..."
             }),
         new LegendTalentBase(19, <LegendTalentModel>{
+                "talentIndex": 19,
                 "name": "More Soot More Salt",
                 "maxLevel": 2,
                 "bonusValue": 75,
@@ -167,6 +187,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "Refinery cycles are }x faster"
             }),
         new LegendTalentBase(20, <LegendTalentModel>{
+                "talentIndex": 20,
                 "name": "Skillium Fancyson",
                 "maxLevel": 4,
                 "bonusValue": 75,
@@ -175,6 +196,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "}x higher EXP gain for all skills, except Research and W7 Skill 3!"
             }),
         new LegendTalentBase(21, <LegendTalentModel>{
+                "talentIndex": 21,
                 "name": "Flopping a Full House",
                 "maxLevel": 5,
                 "bonusValue": 15,
@@ -183,6 +205,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "Actively equipped cards give }x higher bonuses, and this stacks with Lab chips!"
             }),
         new LegendTalentBase(22, <LegendTalentModel>{
+                "talentIndex": 22,
                 "name": "Democracy FTW",
                 "maxLevel": 1,
                 "bonusValue": 25,
@@ -191,6 +214,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "The Bonus Ballot gives a +{% higher bonus for the winning bonus of the week"
             }),
         new LegendTalentBase(23, <LegendTalentModel>{
+                "talentIndex": 23,
                 "name": "Daily Shopping Spree",
                 "maxLevel": 3,
                 "bonusValue": 8,
@@ -199,6 +223,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "The first { upgrades you buy each day for Masterclasses are 80% cheaper"
             }),
         new LegendTalentBase(24, <LegendTalentModel>{
+                "talentIndex": 24,
                 "name": "May the Best Man Win",
                 "maxLevel": 1,
                 "bonusValue": 20,
@@ -207,6 +232,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "The Multi Meritocracy gives a +{% higher multiplier for the winning bonus of the week"
             }),
         new LegendTalentBase(25, <LegendTalentModel>{
+                "talentIndex": 25,
                 "name": "Midusian Appetite",
                 "maxLevel": 3,
                 "bonusValue": 500,
@@ -215,6 +241,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "+{% total Golden Food bonus. @ This bonus is additive, not a multiplier."
             }),
         new LegendTalentBase(26, <LegendTalentModel>{
+                "talentIndex": 26,
                 "name": "Furry Friends Forever",
                 "maxLevel": 2,
                 "bonusValue": 200,
@@ -223,6 +250,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "The 'rest-of-the-game' bonuses from your friends Orion and Poppy are all }x bigger"
             }),
         new LegendTalentBase(27, <LegendTalentModel>{
+                "talentIndex": 27,
                 "name": "Best Story Ever Told",
                 "maxLevel": 3,
                 "bonusValue": 50,
@@ -231,6 +259,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "}x higher Reward Multi for all Monument Stories in the W5 caverns. Also, reward multi's build up for an extra +{ hours!"
             }),
         new LegendTalentBase(28, <LegendTalentModel>{
+                "talentIndex": 28,
                 "name": "+1 Slab",
                 "maxLevel": 2,
                 "bonusValue": 15,
@@ -239,6 +268,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "The Slab in World 5 gives }x bigger bonuses"
             }),
         new LegendTalentBase(29, <LegendTalentModel>{
+                "talentIndex": 29,
                 "name": "Whats in your Jar?",
                 "maxLevel": 2,
                 "bonusValue": 20,
@@ -247,6 +277,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "}x higher bonuses from all of your Jar Collectibles in Cavern 11"
             }),
         new LegendTalentBase(30, <LegendTalentModel>{
+                "talentIndex": 30,
                 "name": "Lightning Fast Naps",
                 "maxLevel": 2,
                 "bonusValue": 25,
@@ -255,6 +286,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "}x faster Stamina regeneration for Spelunking"
             }),
         new LegendTalentBase(31, <LegendTalentModel>{
+                "talentIndex": 31,
                 "name": "Big Sig Fig",
                 "maxLevel": 3,
                 "bonusValue": 150,
@@ -263,6 +295,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "All your Sigils in Alchemy level up }x faster than normal"
             }),
         new LegendTalentBase(32, <LegendTalentModel>{
+                "talentIndex": 32,
                 "name": "Purebred Eggs",
                 "maxLevel": 1,
                 "bonusValue": 900,
@@ -271,6 +304,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "The chance for eggs in Breeding to rank up, which remember gives higher Mob Power, is }x higher than normal!"
             }),
         new LegendTalentBase(33, <LegendTalentModel>{
+                "talentIndex": 33,
                 "name": "Inevitable Builder",
                 "maxLevel": 2,
                 "bonusValue": 75,
@@ -279,6 +313,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "Gives 1 additional Trimmed Construction Slot, and makes them }x faster for a total bonus speed of $x!"
             }),
         new LegendTalentBase(34, <LegendTalentModel>{
+                "talentIndex": 34,
                 "name": "Blessed Be Thy Luck",
                 "maxLevel": 2,
                 "bonusValue": 100,
@@ -287,6 +322,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "}x better luck when using Blessings in your Sneaking inventory"
             }),
         new LegendTalentBase(35, <LegendTalentModel>{
+                "talentIndex": 35,
                 "name": "Obsolete No More",
                 "maxLevel": 1,
                 "bonusValue": 25,
@@ -295,6 +331,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "The Metal Detector bonus from Equinox Valley no longer resets when you find a new best nugget. Also, }x Equinox Bar Fill Rate"
             }),
         new LegendTalentBase(36, <LegendTalentModel>{
+                "talentIndex": 36,
                 "name": "Wowa Woowa",
                 "maxLevel": 5,
                 "bonusValue": 3,
@@ -303,6 +340,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "The bonus from Prisma Bubbles and Exalted Stamps is +{% higher"
             }),
         new LegendTalentBase(37, <LegendTalentModel>{
+                "talentIndex": 37,
                 "name": "6 O'Clock Crystals",
                 "maxLevel": 1,
                 "bonusValue": 300,
@@ -311,6 +349,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "}x more Guaranteed Crystal Mobs every day. You currently get $ daily guaranteed."
             }),
         new LegendTalentBase(38, <LegendTalentModel>{
+                "talentIndex": 38,
                 "name": "Shrine World Order Bill",
                 "maxLevel": 1,
                 "bonusValue": 1,
@@ -319,6 +358,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "Introduces a bill to congress that will make Shrines gain EXP from AFK gains no matter what world you're in!"
             }),
         new LegendTalentBase(39, <LegendTalentModel>{
+                "talentIndex": 39,
                 "name": "Super Talent Points",
                 "maxLevel": 1,
                 "bonusValue": 1,
@@ -327,6 +367,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "You get +1 Super Talent Point at Class LV 500, LV 600, LV 700 and so on. Spend these on Talents to give them +$ LV!"
             }),
         new LegendTalentBase(40, <LegendTalentModel>{
+                "talentIndex": 40,
                 "name": "filler",
                 "maxLevel": 6,
                 "bonusValue": 50,
@@ -335,6 +376,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "}x Minehead Currency Gain and Damage. Also, opponent gets -1 Depth Charge the 1st, 3rd, and 5th time you upgrade this!"
             }),
         new LegendTalentBase(41, <LegendTalentModel>{
+                "talentIndex": 41,
                 "name": "filler",
                 "maxLevel": 6,
                 "bonusValue": 50,
@@ -343,6 +385,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "}x Jelly Operator Damage. Also, you get +1 Slot Unlock to use the 1st, 3rd, and 5th time you upgrade this!"
             }),
         new LegendTalentBase(42, <LegendTalentModel>{
+                "talentIndex": 42,
                 "name": "filler",
                 "maxLevel": 1,
                 "bonusValue": -1,
@@ -351,6 +394,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "I have not yet considered this talent..."
             }),
         new LegendTalentBase(43, <LegendTalentModel>{
+                "talentIndex": 43,
                 "name": "filler",
                 "maxLevel": 1,
                 "bonusValue": -1,
@@ -359,6 +403,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "I have not yet considered this talent..."
             }),
         new LegendTalentBase(44, <LegendTalentModel>{
+                "talentIndex": 44,
                 "name": "filler",
                 "maxLevel": 1,
                 "bonusValue": -1,
@@ -367,6 +412,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "I have not yet considered this talent..."
             }),
         new LegendTalentBase(45, <LegendTalentModel>{
+                "talentIndex": 45,
                 "name": "filler",
                 "maxLevel": 1,
                 "bonusValue": -1,
@@ -375,6 +421,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "I have not yet considered this talent..."
             }),
         new LegendTalentBase(46, <LegendTalentModel>{
+                "talentIndex": 46,
                 "name": "filler",
                 "maxLevel": 1,
                 "bonusValue": -1,
@@ -383,6 +430,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "I have not yet considered this talent..."
             }),
         new LegendTalentBase(47, <LegendTalentModel>{
+                "talentIndex": 47,
                 "name": "filler",
                 "maxLevel": 1,
                 "bonusValue": -1,
@@ -391,6 +439,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "I have not yet considered this talent..."
             }),
         new LegendTalentBase(48, <LegendTalentModel>{
+                "talentIndex": 48,
                 "name": "filler",
                 "maxLevel": 1,
                 "bonusValue": -1,
@@ -399,6 +448,7 @@ export const initLegendTalentsRepo = () => {
                 "description": "I have not yet considered this talent..."
             }),
         new LegendTalentBase(49, <LegendTalentModel>{
+                "talentIndex": 49,
                 "name": "filler",
                 "maxLevel": 1,
                 "bonusValue": -1,

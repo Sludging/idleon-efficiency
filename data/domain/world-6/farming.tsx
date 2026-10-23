@@ -695,6 +695,8 @@ export class Farming extends Domain {
     private exoticMarketRotations: ExoticMarketRotation[] = [];
     private stickerOddsResetCount: number = 0;
     private stickerDamagePercent: number = 0;
+    private landRankExpMenagerieBonus: number = 0;
+    private landRankExpTalentBonus: number = 0;
     marketCostMultiplier: number = 1;
     organicLabelsOwned: number = 0;
     organicLabelsAvailable: number = 0;
@@ -750,6 +752,8 @@ export class Farming extends Domain {
         farming.stickerDamagePercent = 0;
         farming.organicLabelsOwned = 0;
         farming.organicLabelsAvailable = 0;
+        farming.landRankExpMenagerieBonus = 0;
+        farming.landRankExpTalentBonus = 0;
         farming.landrankDatabase.resetBonusInputs();
         for (const upgrade of farming.landrankDatabase.upgrades) {
             upgrade.level = 0;
@@ -847,10 +851,32 @@ export class Farming extends Domain {
         return 1 + this.stickerDamagePercent * this.getTotalStickers() / 100;
     }
 
-    /** Return the full sticker bonus in percentage points. */
+    /** Return the raw sticker bonus in percentage points. */
     getStickerBonus(index: number): number {
         const sticker = this.stickers.find(sticker => sticker.index === index);
         return sticker?.getBonus() ?? 0;
+    }
+
+    updateLandRankExpInputs(players: readonly Player[], menagerieBonus: number): void {
+        this.landRankExpMenagerieBonus = menagerieBonus;
+        this.landRankExpTalentBonus = 0;
+
+        // Account Farming displays project the strongest recipient's first talent effect.
+        for (const player of players) {
+            const talentBonus = Talent.getAccountTalentBonus(players, 206, player.finalTalentInputs);
+            this.landRankExpTalentBonus = Math.max(this.landRankExpTalentBonus, talentBonus);
+        }
+    }
+
+    /** Return the global Rank EXP multiplier, separate from Land Rank Database Soil EXP bonuses. */
+    getLandRankExpMultiplier(): number {
+        return (1 + this.landRankExpMenagerieBonus / 100)
+            * (1 + this.landRankExpTalentBonus / 100)
+            * (1 + (this.getMarketUpgradeBonusValue(7)
+                + (this.getExoticMarketBonusValue(9) + this.getExoticMarketBonusValue(10))
+                + this.getExoticMarketBonusValue(11)) / 100)
+            * (1 + this.getExoticMarketBonusValue(12) / 100)
+            * (1 + this.getExoticMarketBonusValue(13) / 100);
     }
 
     updateUnlockedMarketBonuses = () => {
@@ -1223,6 +1249,10 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const legendTalents = data.get("legendTalents") as LegendTalents;
     const grimoire = data.get("grimoire") as Grimoire;
     const emperor = data.get("emperor") as Emperor;
+    const players = data.get("players") as Player[];
+    const menagerie = data.get("menagerie") as Menagerie;
+
+    farming.updateLandRankExpInputs(players, menagerie.getBonusValue(19));
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
@@ -1275,11 +1305,10 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
 
     // Fifth land ranks column bonuses max level
     const grimoireBonus = grimoire.getUpgradeBonus(9);
-    // TODO : add the exotic market value here (bonus 15) once implemented
-    const exoticMarketBonus = 0;
+    const exoticMarketBonus = farming.getExoticMarketBonusValue(15);
     const legendTalentsBonus = legendTalents.getBonusFromIndex(3);
     farming.landrankDatabase.upgrades.filter(upgrade => upgrade.fifthColumnBonus).forEach(upgrade => {
-        upgrade.maxLevel = Math.round(1 + grimoireBonus + Math.ceil(exoticMarketBonus) + legendTalentsBonus);
+        upgrade.maxLevel = Math.round(1 + (grimoireBonus + Math.ceil(exoticMarketBonus)) + legendTalentsBonus);
     });
 
     // Nice info to have for the UI

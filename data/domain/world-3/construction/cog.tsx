@@ -46,17 +46,37 @@ const getCogZaPart = (order: string): CogZaPart | undefined => {
 };
 
 class SmallCog {
-    constructor(readonly level: number) {}
+    constructor(readonly bonusType: "flaggyRate" | "buildSpeed" | "exp", readonly level: number) {}
 
     static fromOrder(order: unknown): SmallCog | undefined {
-        if (typeof order !== "string" || !order.includes("CogSm") || letterToNumber(order.charAt(5)) !== 1) {
+        if (typeof order !== "string" || !order.includes("CogSm")) {
             return undefined;
         }
-        return new SmallCog(Math.round(getNumber(order.substring(6))));
+        const level = Math.round(getNumber(order.substring(6)));
+        switch (letterToNumber(order.charAt(5))) {
+            case 0: return new SmallCog("flaggyRate", level);
+            case 1: return new SmallCog("buildSpeed", level);
+            case 2: return new SmallCog("exp", level);
+            default: return undefined;
+        }
     }
 
     getBuildSpeedBonus(): number {
-        return Math.round(4 * (25 + 25 * Math.pow(this.level, 2)) * (1 + this.level / 5));
+        return this.bonusType === "buildSpeed"
+            ? Math.round(4 * (25 + 25 * Math.pow(this.level, 2)) * (1 + this.level / 5))
+            : 0;
+    }
+
+    getFlaggyRateBonus(): number {
+        return this.bonusType === "flaggyRate"
+            ? Math.round(2 * (25 + 25 * Math.pow(this.level, 2)) * (1 + this.level / 5))
+            : 0;
+    }
+
+    getExpBonus(): number {
+        return this.bonusType === "exp"
+            ? Math.round((25 + 25 * Math.pow(this.level, 2)) * (1 + this.level / 5))
+            : 0;
     }
 }
 
@@ -66,6 +86,10 @@ export class Cog {
     buildRateSupport: number = 0;
     buildRateSupportType: CogSupportType | undefined;
     buildRateSupportTarget: number = 0;
+    flaggyRate: number = 0;
+    savedFlaggyRate: number = 0;
+    flaggyRateSupport: number = 0;
+    flaggyRateSupportTarget: number = 0;
     position: number = 0;
     playerName: string | undefined;
     cogZaPart: CogZaPart | undefined;
@@ -84,6 +108,9 @@ export class Cog {
         cog.buildRate = cog.savedBuildRate;
         cog.buildRateSupport = getNumber(savedStats.e);
         cog.buildRateSupportType = isCogSupportType(supportType) ? supportType : undefined;
+        cog.savedFlaggyRate = getNumber(savedStats.c);
+        cog.flaggyRate = cog.savedFlaggyRate;
+        cog.flaggyRateSupport = getNumber(savedStats.g);
         return cog;
     }
 }
@@ -106,11 +133,25 @@ export class CogBoard {
         return this.smallCogs.reduce((total, cog) => total + cog.getBuildSpeedBonus(), 0);
     }
 
+    getSmallCogFlaggyRateBonus(): number {
+        return this.smallCogs.reduce((total, cog) => total + cog.getFlaggyRateBonus(), 0);
+    }
+
+    getSmallCogExpBonus(): number {
+        return this.smallCogs.reduce((total, cog) => total + cog.getExpBonus(), 0);
+    }
+
     getBuildRateForContext(players: Player[], extraBuildSpeedMultiplier: number, calculationData: Map<string, any>, contextPlayer: Player): number {
         const board = new CogBoard();
         board.slots = this.slots.map(cog => Object.assign(new Cog(), cog));
         board.smallCogs = this.smallCogs.slice();
         return board.updateBuildRate(players, extraBuildSpeedMultiplier, calculationData, contextPlayer);
+    }
+
+    getFlaggyRateForContext(players: Player[], extraFlaggyRateMultiplier: number, gemShopFlaggyMultiplier: number, calculationData: Map<string, any>, contextPlayer: Player): number {
+        const board = new CogBoard();
+        board.slots = this.slots.map(cog => Object.assign(new Cog(), cog));
+        return board.updateFlaggyRate(players, extraFlaggyRateMultiplier, gemShopFlaggyMultiplier, calculationData, contextPlayer);
     }
 
     private updateBuildRate(players: Player[], extraBuildSpeedMultiplier: number, calculationData: Map<string, any>, contextPlayer: Player): number {
@@ -128,11 +169,37 @@ export class CogBoard {
         });
 
         this.applyCogZaBonuses();
-        this.slots.forEach(source => this.applyBuildRateSupport(source));
+        this.slots.forEach(source => this.applySupport(source));
         this.slots.forEach(cog => {
             cog.buildRate *= 1 + cog.buildRateSupportTarget / 100;
         });
         return this.slots.reduce((total, cog) => total + cog.buildRate, 0);
+    }
+
+    private updateFlaggyRate(players: Player[], extraFlaggyRateMultiplier: number, gemShopFlaggyMultiplier: number, calculationData: Map<string, any>, contextPlayer: Player): number {
+        this.slots.forEach((cog, index) => {
+            if (cog.playerName !== undefined) {
+                const player = players.find(candidate => candidate.playerName === cog.playerName);
+                const baseBuildRate = player ? getCogPlayerBuildSpeed(player, contextPlayer, calculationData) : 1;
+                cog.flaggyRate = Math.pow(baseBuildRate, 0.85) / 1.5 * extraFlaggyRateMultiplier;
+                cog.buildRateSupport = 0;
+                cog.buildRateSupportType = undefined;
+                cog.flaggyRateSupport = 0;
+            } else {
+                cog.flaggyRate = cog.savedFlaggyRate;
+            }
+            cog.flaggyRateSupportTarget = 0;
+            cog.position = index;
+        });
+
+        // Cog-ZA changes support geometry but preserves its saved Flaggy rate support.
+        this.applyCogZaBonuses();
+        this.slots.forEach(source => this.applySupport(source));
+        const totalFlaggyRate = this.slots.reduce((total, cog) => {
+            const flaggyRate = cog.flaggyRate * (1 + cog.flaggyRateSupportTarget / 100);
+            return total + Math.max(0, flaggyRate);
+        }, 0);
+        return totalFlaggyRate * gemShopFlaggyMultiplier;
     }
 
     private applyCogZaBonuses(): void {
@@ -160,7 +227,7 @@ export class CogBoard {
         });
     }
 
-    private applyBuildRateSupport(source: Cog): void {
+    private applySupport(source: Cog): void {
         const sourceIndex = source.position;
         const column = sourceIndex % COG_BOARD_WIDTH;
         const row = Math.floor(sourceIndex / COG_BOARD_WIDTH);
@@ -171,7 +238,7 @@ export class CogBoard {
         if (source.buildRateSupportType === "row") {
             for (let targetColumn = 0; targetColumn < COG_BOARD_WIDTH; targetColumn++) {
                 const targetIndex = row * COG_BOARD_WIDTH + targetColumn;
-                if (targetIndex !== sourceIndex) this.addSupport(targetIndex, source.buildRateSupport);
+                if (targetIndex !== sourceIndex) this.addSupport(targetIndex, source);
             }
             return;
         }
@@ -179,14 +246,14 @@ export class CogBoard {
         if (source.buildRateSupportType === "column") {
             for (let targetRow = 0; targetRow < COG_BOARD_HEIGHT; targetRow++) {
                 const targetIndex = targetRow * COG_BOARD_WIDTH + column;
-                if (targetIndex !== sourceIndex) this.addSupport(targetIndex, source.buildRateSupport);
+                if (targetIndex !== sourceIndex) this.addSupport(targetIndex, source);
             }
             return;
         }
 
         if (source.buildRateSupportType === "everything") {
             for (let targetIndex = 0; targetIndex < COG_BOARD_SLOT_COUNT; targetIndex++) {
-                if (targetIndex !== sourceIndex) this.addSupport(targetIndex, source.buildRateSupport);
+                if (targetIndex !== sourceIndex) this.addSupport(targetIndex, source);
             }
             return;
         }
@@ -196,13 +263,14 @@ export class CogBoard {
             const targetRow = row + offsetY;
             if (targetColumn >= 0 && targetColumn < COG_BOARD_WIDTH && targetRow >= 0 && targetRow < COG_BOARD_HEIGHT) {
                 const targetIndex = targetColumn + COG_BOARD_WIDTH * targetRow;
-                this.addSupport(targetIndex, source.buildRateSupport);
+                this.addSupport(targetIndex, source);
             }
         });
     }
 
-    private addSupport(targetIndex: number, value: number): void {
-        this.slots[targetIndex].buildRateSupportTarget += value;
+    private addSupport(targetIndex: number, source: Cog): void {
+        this.slots[targetIndex].buildRateSupportTarget += source.buildRateSupport;
+        this.slots[targetIndex].flaggyRateSupportTarget += source.flaggyRateSupport;
     }
 
     private getMatrixIndex(supportType: CogSupportType): number {

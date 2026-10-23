@@ -5,6 +5,7 @@ import { InfiniteStarsBonus, Rift } from "./world-4/rift";
 import { Tesseract } from './tesseract';
 import type { Player } from './player';
 import { SkillsIndex } from './SkillsIndex';
+import { Meritocraty } from './world-7/meritocraty';
 
 interface StarBonus {
     text: string,
@@ -28,7 +29,8 @@ export class StarSign {
     getBonus = (bonusType: string) => {
         const bonus = this.bonuses.find((bonus) => bonus.text.toLowerCase().includes(bonusType.toLowerCase()));
         if (bonus) {
-            return this.hasChip ? bonus.bonus * (1 + this.meritocratyBonus / 100) * this.seraphCosmosBonus * 2 : bonus.bonus * this.seraphCosmosBonus * (1 + this.meritocratyBonus / 100);
+            const meritocratyMultiplier = bonus.bonus > 0 ? 1 + this.meritocratyBonus / 100 : 1;
+            return this.hasChip ? bonus.bonus * meritocratyMultiplier * this.seraphCosmosBonus * 2 : bonus.bonus * this.seraphCosmosBonus * meritocratyMultiplier;
         }
         return 0;
     }
@@ -154,6 +156,20 @@ export const updateInfinityStarSigns = (data: Map<string, any>) =>  {
             sign.seraphCosmosBonus = seraphCosmosBonus
         }
     })
+}
+
+export const updateStarSignMeritocracyBonus = (data: Map<string, any>) => {
+    const starSigns = data.get("starsigns") as StarSigns;
+    const players = data.get("players") as Player[];
+    const meritocraty = data.get("meritocraty") as Meritocraty;
+    const currentBonus = meritocraty.getCurrentBonus(22);
+    const meritocratyBonus = starSigns.isStarSignUnlocked("Seraph Cosmos") ? currentBonus : 0;
+
+    for (const player of players) {
+        for (const sign of player.starSigns) {
+            sign.meritocratyBonus = meritocratyBonus;
+        }
+    }
 }
 
 export const StarSignMap: Record<number, StarSign> = {

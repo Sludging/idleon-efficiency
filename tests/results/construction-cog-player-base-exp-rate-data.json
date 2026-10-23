@@ -1,0 +1,49 @@
+{
+  "extractions": {
+    "player_base_exp_rate_player_0": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 0, 0)",
+      "result": 31998572299626.145
+    },
+    "player_base_exp_rate_player_1": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 1, 0)",
+      "result": 2365725961656.657
+    },
+    "player_base_exp_rate_player_2": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 2, 0)",
+      "result": 2280517257478.2
+    },
+    "player_base_exp_rate_player_3": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 3, 0)",
+      "result": 33615895466399.297
+    },
+    "player_base_exp_rate_player_4": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 4, 0)",
+      "result": 2278456599294.809
+    },
+    "player_base_exp_rate_player_5": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 5, 0)",
+      "result": 2338556139910.46
+    },
+    "player_base_exp_rate_player_6": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 6, 0)",
+      "result": 42647082072642.71
+    },
+    "player_base_exp_rate_player_7": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 7, 0)",
+      "result": 39265719420027.75
+    },
+    "player_base_exp_rate_player_8": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 8, 0)",
+      "result": 2319829130870.2827
+    },
+    "player_base_exp_rate_player_9": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 9, 0)",
+      "result": 2309454556850.6333
+    },
+    "player_base_exp_rate_player_10": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 10, 0)",
+      "result": 31598130955503.375
+    }
+  },
+  "errors": {}
+}
