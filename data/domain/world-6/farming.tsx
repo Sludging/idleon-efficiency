@@ -1,7 +1,7 @@
 import { SkillsIndex } from "../SkillsIndex";
 import { Domain, RawData } from "../base/domain";
 import { initMarketInfoRepo } from "../data/MarketInfoRepo";
-import { initExoticMarketRepo } from "../data/ExoticMarketRepo";
+import { ExoticMarketUpgradeBase, initExoticMarketRepo } from "../data/ExoticMarketRepo";
 import { initSeedInfoRepo } from "../data/SeedInfoRepo";
 import { Item } from "../items";
 import { MarketInfoModel } from "../model/marketInfoModel";
@@ -32,17 +32,64 @@ import { EventShop } from "../eventShop";
 import { Gaming } from "../world-5/gaming";
 import { ResearchGrid } from "../world-7/research";
 import { Talent } from "../talents";
+import { ExoticMarketUpgradeModel } from "../model/exoticMarketUpgradeModel";
+import LavaRand from "../base/lavaRand";
+import { Arcade } from "../world-2/arcade";
+import { Companion, getCompanionActiveBonus } from "../companions";
+import { Menagerie } from "../menagerie";
+import { SushiStation } from "../world-7/sushi";
 
-// Only the Exotic Market bonuses consumed by implemented features are supported.
-const exoticMarketBonusData = initExoticMarketRepo().reduce<Record<number, { bonusPerLevel: number, diminishing: boolean }>>((bonuses, upgrade) => {
-    if (upgrade.index === 14 || (upgrade.index >= 16 && upgrade.index <= 20) || upgrade.index === 40 || upgrade.index === 41 || upgrade.index === 42 || upgrade.index === 44 || upgrade.index === 45 || upgrade.index === 48 || upgrade.index === 49 || upgrade.index === 50 || upgrade.index === 51 || upgrade.index === 59) {
-        bonuses[upgrade.index] = {
-            bonusPerLevel: upgrade.data.effect,
-            diminishing: upgrade.data.x4 === 1,
-        };
+export interface ExoticMarketRotation {
+    upgradeIds: number[];
+}
+
+export class ExoticMarketUpgrade {
+    level: number = 0;
+    isOrganic: boolean = false;
+    isDiminishing: boolean;
+
+    constructor(public index: number, public data: ExoticMarketUpgradeModel) {
+        this.isDiminishing = data.x4 === 1;
     }
-    return bonuses;
-}, {});
+
+    static fromBase(base: ExoticMarketUpgradeBase[]): ExoticMarketUpgrade[] {
+        return base.map(upgrade => new ExoticMarketUpgrade(upgrade.index, upgrade.data));
+    }
+
+    getImageData(): ImageData {
+        return Crop.getCropIconData(this.data.cropId);
+    }
+
+    parse(level: number, isOrganic: boolean): void {
+        this.level = level;
+        this.isOrganic = isOrganic;
+    }
+
+    getBonus(): number {
+        let bonus = this.isDiminishing
+            ? this.data.effect * this.level / (1000 + this.level)
+            : this.data.effect * this.level;
+        if (this.isOrganic) {
+            bonus *= 2;
+        }
+        return this.index === 39 ? Math.min(50, bonus) : bonus;
+    }
+
+    /** Return the effect limit, or null when the effect scales without a finite limit. */
+    getEffectCap(): number | null {
+        if (!this.isDiminishing) {
+            return null;
+        }
+        const cap = this.data.effect * (this.isOrganic ? 2 : 1);
+        return this.index === 39 ? Math.min(50, cap) : cap;
+    }
+
+    /** Return 0–100 percent of the effect limit, or null when no limit applies. */
+    getCapProgress(): number | null {
+        const cap = this.getEffectCap();
+        return cap === null ? null : Math.min(100, Math.max(0, 100 * this.getBonus() / cap));
+    }
+}
 
 export class LandRankDataBase {
     unlocked: boolean = false;
@@ -570,16 +617,40 @@ export class FarmingSticker {
 
     count: number = 0;
     bonusValue: number = 0;
+    isMultiplicative: boolean;
+    private findOddsMultiplier: number = 0;
 
     constructor(data: FarmingStickerModel) {
         this.index = data.index;
         this.name = data.name;
         this.description = data.description;
         this.bonusPerSticker = data.bonusPerSticker;
+        this.isMultiplicative = this.index !== 1 && this.index !== 2;
     }
 
     static fromBase(data: FarmingStickerBase[]): FarmingSticker[] {
         return data.map(sticker => new FarmingSticker(sticker.data));
+    }
+
+    getImageData(): ImageData {
+        return { location: `FarmStickerB${this.index}`, width: 80, height: 80 };
+    }
+
+    parse(count: number): void {
+        this.count = count;
+        this.bonusValue = 0;
+        this.findOddsMultiplier = 0;
+        this.isMultiplicative = this.index !== 1 && this.index !== 2;
+    }
+
+    updateFindInputs(oddsMultiplier: number, multiplicativeResearchAndArtifact: boolean): void {
+        this.findOddsMultiplier = oddsMultiplier;
+        this.isMultiplicative = (this.index !== 1 && this.index !== 2) || multiplicativeResearchAndArtifact;
+    }
+
+    getFindProbability(): number {
+        return this.findOddsMultiplier
+            / (5000 * Math.pow(7, this.index) * Math.pow(Math.max(10 - this.count, 5), this.count));
     }
 
     updateBonus(researchAndEventMultiplier: number, superbitMultiplier: number): void {
@@ -618,8 +689,14 @@ export class Farming extends Domain {
     registeredCropCount: number = 0;
     stickers: FarmingSticker[] = FarmingSticker.fromBase(initFarmingStickerRepo());
     totalStickers: number = 0;
-    exoticMarketLevels: number[] = [];
+    exoticMarketUpgrades: ExoticMarketUpgrade[] = ExoticMarketUpgrade.fromBase(
+        initExoticMarketRepo().filter(upgrade => upgrade.index < 60));
+    private exoticMarketWeek: number = 0;
+    private exoticMarketRotations: ExoticMarketRotation[] = [];
+    private stickerOddsResetCount: number = 0;
+    private stickerDamagePercent: number = 0;
     marketCostMultiplier: number = 1;
+    organicLabelsOwned: number = 0;
     organicLabelsAvailable: number = 0;
 
     cropNames = ["Apple", "Orange", "Lemon", "Pear", "Strawberry", "Bananas", "Blueberry", "Red Grapes", "Red Pear", "Pineapple", "Lime", "Raspberry", "Fig", "Peach", "Purple Grapes", "Yellow Pear", "Watermelon", "Green Grapes", "Dragon Fruit", "Mango", "Gold Blueberry",
@@ -640,6 +717,9 @@ export class Farming extends Domain {
             { key: "FarmUpg", perPlayer: false, default: [] },
             { key: "FarmRank", perPlayer: false, default: [] },
             { key: "Research", perPlayer: false, default: [] },
+            { key: "Spelunk", perPlayer: false, default: [] },
+            { key: "TimeAway", perPlayer: false, default: {} },
+            { key: "OptLacc", perPlayer: false, default: [] },
         ]
     }
 
@@ -656,14 +736,26 @@ export class Farming extends Domain {
         const upgradesData = data.get("FarmUpg") as number[];
         const researchData = data.get("Research") as number[][] | undefined;
         // Clear touched inputs before an old account can exit parsing without Farming data.
-        farming.exoticMarketLevels = [];
+        const organicUpgradeIds = (data.get("Spelunk") as number[][])?.[50] ?? [];
+        farming.exoticMarketUpgrades.forEach(upgrade => {
+            upgrade.parse(Number(upgradesData?.[20 + upgrade.index]) || 0, organicUpgradeIds.includes(upgrade.index));
+        });
+        const savedGlobalTime = Number(data.get("TimeAway")?.GlobalTime) || 0;
+        const savedWeek = Math.floor(savedGlobalTime / 604800);
+        if (savedWeek !== farming.exoticMarketWeek) {
+            farming.exoticMarketWeek = savedWeek;
+            farming.exoticMarketRotations = [];
+        }
+        farming.stickerOddsResetCount = Number((data.get("OptLacc") as number[])?.[607]) || 0;
+        farming.stickerDamagePercent = 0;
+        farming.organicLabelsOwned = 0;
+        farming.organicLabelsAvailable = 0;
         farming.landrankDatabase.resetBonusInputs();
         for (const upgrade of farming.landrankDatabase.upgrades) {
             upgrade.level = 0;
         }
         farming.stickers.forEach(sticker => {
-            sticker.count = Number(researchData?.[9]?.[sticker.index]) || 0;
-            sticker.bonusValue = 0;
+            sticker.parse(Number(researchData?.[9]?.[sticker.index]) || 0);
         });
         farming.totalStickers = (researchData?.[9] ?? []).reduce(
             (total, stickers) => Math.round(total + (Number(stickers) || 0)),
@@ -676,8 +768,6 @@ export class Farming extends Domain {
         }
 
         const upgradesLevels = upgradesData.slice(2, -2);
-        // Exotic effect i reads FarmUpg[20 + i], including Palette Luck 44 at slot 64.
-        farming.exoticMarketLevels = upgradesData.slice(20, 100);
 
         farming.magicBeansOwned = upgradesData[1];
         farming.instaGrowToolLeft = upgradesData[19];
@@ -749,16 +839,18 @@ export class Farming extends Domain {
         return this.totalStickers;
     }
 
-    getStickerDamageMultiplier(researchGrid: ResearchGrid): number {
-        if (researchGrid.getBonusForId(47, 1) <= 0) {
-            return 1;
-        }
-
-        return 1 + researchGrid.getBonusForId(47) * this.getTotalStickers() / 100;
+    updateStickerDamageInput(researchDamagePercent: number): void {
+        this.stickerDamagePercent = researchDamagePercent >= 1 ? researchDamagePercent : 0;
     }
 
+    getStickerDamageMultiplier(): number {
+        return 1 + this.stickerDamagePercent * this.getTotalStickers() / 100;
+    }
+
+    /** Return the full sticker bonus in percentage points. */
     getStickerBonus(index: number): number {
-        return this.stickers.find(sticker => sticker.index === index)?.getBonus() ?? 0;
+        const sticker = this.stickers.find(sticker => sticker.index === index);
+        return sticker?.getBonus() ?? 0;
     }
 
     updateUnlockedMarketBonuses = () => {
@@ -898,17 +990,77 @@ export class Farming extends Domain {
     }
 
     getExoticMarketBonusValue = (bonusId: number): number => {
-        const bonusData = exoticMarketBonusData[bonusId];
-        if (!bonusData) {
-            return 0;
-        }
+        return this.exoticMarketUpgrades[bonusId]?.getBonus() ?? 0;
+    }
 
-        const level = this.exoticMarketLevels[bonusId] ?? 0;
-        if (bonusData.diminishing) {
-            return bonusData.bonusPerLevel * (level / (1000 + level));
+    private prepareExoticMarketRotations(weekCount: number): void {
+        for (let weekOffset = this.exoticMarketRotations.length; weekOffset < weekCount; weekOffset++) {
+            const weekNumber = this.exoticMarketWeek + weekOffset;
+            const upgradeIds: number[] = [];
+            for (let slot = 0; slot < 8; slot++) {
+                let seed = Math.round(100 * weekNumber + slot);
+                let upgradeId: number;
+                do {
+                    upgradeId = Math.floor(Math.max(0, Math.min(59, 60 * new LavaRand(seed).rand())));
+                    seed += 1000;
+                } while (upgradeIds.includes(upgradeId));
+                upgradeIds.push(upgradeId);
+            }
+            this.exoticMarketRotations.push({ upgradeIds });
         }
+    }
 
-        return bonusData.bonusPerLevel * level;
+    getCurrentExoticMarketRotation(): ExoticMarketRotation {
+        this.prepareExoticMarketRotations(1);
+        return this.exoticMarketRotations[0];
+    }
+
+    getNextExoticMarketRotationTime(): number {
+        return (this.exoticMarketWeek + 1) * 604800 * 1000;
+    }
+
+    getExoticMarketReturnSearchEndTime(): number {
+        return (this.exoticMarketWeek + 104) * 604800 * 1000;
+    }
+
+    getExoticMarketReturnWeeks(upgradeId: number): number | null {
+        this.prepareExoticMarketRotations(105);
+        for (let weekOffset = 1; weekOffset <= 104; weekOffset++) {
+            if (this.exoticMarketRotations[weekOffset].upgradeIds.includes(upgradeId)) {
+                return weekOffset;
+            }
+        }
+        return null;
+    }
+
+    getExoticMarketCapMilestones(): { percentage: number; level: number }[] {
+        // These milestones describe the normal curve, not Freexotic's clipped effect cap.
+        return [50, 75, 90, 95, 99].map(percentage => ({
+            percentage,
+            level: Math.ceil(1000 * percentage / (100 - percentage)),
+        }));
+    }
+
+    updateStickerFindInputs(
+        researchOddsMultiplier: number,
+        researchUnlockMultiplier: number,
+        arcadeMultiplier: number,
+        farmingLevelMultiplier: number,
+        sushiMultiplier: number,
+        companionMultiplier: number,
+        multiplicativeResearchAndArtifact: boolean,
+    ): void {
+        const resetMultiplier = Math.max(1, Math.pow(2, Math.min(12, this.stickerOddsResetCount))
+            + 1500 * Math.max(0, this.stickerOddsResetCount - 11));
+        const oddsMultiplier = resetMultiplier
+            * researchOddsMultiplier
+            * researchUnlockMultiplier
+            * (1 + this.getStickerBonus(5) / 100)
+            * arcadeMultiplier
+            * farmingLevelMultiplier
+            * sushiMultiplier
+            * companionMultiplier;
+        this.stickers.forEach(sticker => sticker.updateFindInputs(oddsMultiplier, multiplicativeResearchAndArtifact));
     }
 
     getMarketUpgradeBonusText = (upgradeId: number): string => {
@@ -980,29 +1132,53 @@ export const updateFarmingStickerBonuses = (data: Map<string, any>): Farming => 
     const research = data.get("research") as ResearchGrid;
     const eventShop = data.get("eventShop") as EventShop;
     const gaming = data.get("gaming") as Gaming;
+    const arcade = data.get("arcade") as Arcade;
+    const sushi = data.get("sushi") as SushiStation;
+    const companions = data.get("companions") as Companion[];
+    const menagerie = data.get("menagerie") as Menagerie;
 
     const researchAndEventMultiplier = 1 + (research.getBonusForId(68, 2) + 30 * (eventShop.isBonusOwned(37) ? 1 : 0)) / 100;
     const superbitMultiplier = 1 + 20 * (gaming.isSuperbitPurchased(62) ? 1 : 0) / 100;
     farming.stickers.forEach(sticker => {
         sticker.updateBonus(researchAndEventMultiplier, superbitMultiplier);
     });
+    farming.updateStickerDamageInput(research.getBonusForId(47, 0));
+
+    farming.updateStickerFindInputs(
+        1 + research.getBonusForId(67, 2) / 100,
+        1 + research.getBonusForId(88) / 100,
+        1 + arcade.bonuses[64].getBonus() / 100,
+        1 + 0.02 * Number(gaming.isSuperbitPurchased(55)) * Math.max(0, farming.farmingLevel - 300),
+        1 + sushi.getBonusFromIndex(55) / 100,
+        1 + getCompanionActiveBonus(companions, 109),
+        menagerie.getUnlocks()[22].owned,
+    );
 
     return farming;
 }
 
 export const updateFarmingLevel = (data: Map<string, any>) => {
     const farming = data.get("farming") as Farming;
-    const menagerie = data.get("menagerie") as { getResourceBalances(): { organicLabels: number } };
+    const menagerie = data.get("menagerie") as Menagerie;
     const players = data.get("players") as Player[];
 
-    farming.organicLabelsAvailable = menagerie.getResourceBalances().organicLabels;
+    const resources = menagerie.getResourceBalances();
+    farming.organicLabelsOwned = resources.organicLabels;
+    farming.organicLabelsAvailable = resources.organicLabelsAvailable;
 
-    const levels: number[] = [];
-    players.forEach(player => {
-        levels.push(player.skills.get(SkillsIndex.Farming)?.level ?? 0);
-    })
+    let farmingLevel = 0;
+    let farmingEXP = 0;
+    for (const player of players) {
+        const farmingSkill = player.skills.get(SkillsIndex.Farming);
+        const level = farmingSkill?.level ?? 0;
+        const currentXP = farmingSkill?.currentXP ?? 0;
+        if (level > farmingLevel || (level === farmingLevel && currentXP > farmingEXP)) {
+            farmingLevel = level;
+            farmingEXP = currentXP;
+        }
+    }
 
-    farming.farmingLevel = Math.max(...levels);
+    farming.farmingLevel = farmingLevel;
 }
 
 export const updateFarmingCropScientistBonuses = (data: Map<string, any>) => {

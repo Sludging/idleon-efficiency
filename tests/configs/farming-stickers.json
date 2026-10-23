@@ -1,5 +1,5 @@
 {
-  "description": "Farming sticker bonuses and direct producer parameters observed serially in the same paused offline Jelly_Operator1.22 character3 session as Gaming. Read-only GET/cloud-save exactly equals retained latest799keys; runtime Research[0], Research[9], Gaming match decoded fixture. Seven effects cover six earned stickers and zero Threepeat Champ stickers. No fixture refresh, game mutation or recapture.",
+  "description": "Native 1.24 regular retained fixture. Core outputs captured read-only on paused offline character 3. Historical parameter labels retained unchanged; see local farming-native-evidence artifact for provenance.",
   "target": "Farming earned sticker bonuses and directly used enhancements",
   "extractions": [
     {
@@ -46,6 +46,86 @@
       "label": "sticker_event_shop_bonus",
       "expression": "idleon.callFunction(\"Summoning\",\"EventShopOwned\",37,0)",
       "description": "Event Shop sticker enhancement ownership directly used by Farming sticker bonuses"
+    },
+    {
+      "label": "farming_sticker_count_0",
+      "expression": "idleon.getAttr(\"Research\")[9][0]",
+      "description": "Owned sticker copies in native account state"
+    },
+    {
+      "label": "farming_sticker_denominator_0",
+      "expression": "1 / idleon.callFunction(\"FarmingStuffs\",\"StickerOdds\",0,0)",
+      "description": "Native panel denominator, reciprocal of base probability"
+    },
+    {
+      "label": "farming_sticker_count_1",
+      "expression": "idleon.getAttr(\"Research\")[9][1]",
+      "description": "Owned sticker copies in native account state"
+    },
+    {
+      "label": "farming_sticker_denominator_1",
+      "expression": "1 / idleon.callFunction(\"FarmingStuffs\",\"StickerOdds\",1,0)",
+      "description": "Native panel denominator, reciprocal of base probability"
+    },
+    {
+      "label": "farming_sticker_count_2",
+      "expression": "idleon.getAttr(\"Research\")[9][2]",
+      "description": "Owned sticker copies in native account state"
+    },
+    {
+      "label": "farming_sticker_denominator_2",
+      "expression": "1 / idleon.callFunction(\"FarmingStuffs\",\"StickerOdds\",2,0)",
+      "description": "Native panel denominator, reciprocal of base probability"
+    },
+    {
+      "label": "farming_sticker_count_3",
+      "expression": "idleon.getAttr(\"Research\")[9][3]",
+      "description": "Owned sticker copies in native account state"
+    },
+    {
+      "label": "farming_sticker_denominator_3",
+      "expression": "1 / idleon.callFunction(\"FarmingStuffs\",\"StickerOdds\",3,0)",
+      "description": "Native panel denominator, reciprocal of base probability"
+    },
+    {
+      "label": "farming_sticker_count_4",
+      "expression": "idleon.getAttr(\"Research\")[9][4]",
+      "description": "Owned sticker copies in native account state"
+    },
+    {
+      "label": "farming_sticker_denominator_4",
+      "expression": "1 / idleon.callFunction(\"FarmingStuffs\",\"StickerOdds\",4,0)",
+      "description": "Native panel denominator, reciprocal of base probability"
+    },
+    {
+      "label": "farming_sticker_count_5",
+      "expression": "idleon.getAttr(\"Research\")[9][5]",
+      "description": "Owned sticker copies in native account state"
+    },
+    {
+      "label": "farming_sticker_denominator_5",
+      "expression": "1 / idleon.callFunction(\"FarmingStuffs\",\"StickerOdds\",5,0)",
+      "description": "Native panel denominator, reciprocal of base probability"
+    },
+    {
+      "label": "farming_sticker_count_6",
+      "expression": "idleon.getAttr(\"Research\")[9][6]",
+      "description": "Owned sticker copies in native account state"
+    },
+    {
+      "label": "farming_sticker_denominator_6",
+      "expression": "1 / idleon.callFunction(\"FarmingStuffs\",\"StickerOdds\",6,0)",
+      "description": "Native panel denominator, reciprocal of base probability"
+    },
+    {
+      "label": "farming_sticker_total",
+      "expression": "idleon.callFunction(\"FarmingStuffs\",\"TotalStickers\",0,0)",
+      "description": "Total owned copies including saved placeholder slots"
+    },
+    {
+      "label": "farming_sticker_damage_multiplier",
+      "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerDMGmulti\",0,0)",
+      "description": "Direct account damage multiplier"
     }
   ]
 }

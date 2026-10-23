@@ -451,7 +451,7 @@ export class Menagerie extends Domain {
     getResourceBalances(): MenagerieResourceBalances {
         return { ...this.resourceBalances };
     }
-    getUsableResourceImageData(resource: MenagerieUsableResource): ImageData {
+    static getUsableResourceImageData(resource: MenagerieUsableResource): ImageData {
         const imageData: Record<MenagerieUsableResource, ImageData> = {
             blackStarsOwned: { location: "MenaBlackStar", width: 18, height: 17 },
             organicLabels: { location: "MenaOrganicLabelSeal", width: 29, height: 29 },

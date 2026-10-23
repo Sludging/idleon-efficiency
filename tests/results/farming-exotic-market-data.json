@@ -1,0 +1,387 @@
+{
+  "extractions": {
+    "exotic_upgrade_state": {
+      "expression": "(()=>{const rows=idleon.getAttr(\"CustomLists\").h.MarketExoticInfo;const levels=idleon.getAttr(\"FarmUpg\");const organic=idleon.getAttr(\"Spelunk\")[50];return rows.slice(0,60).map((row,index)=>({index,level:levels[20+index],isOrganic:organic.includes(index),bonus:idleon.callFunction(\"FarmingStuffs\",\"ExoticBonusQTY\",index,0)}));})()",
+      "result": [
+        {
+          "index": 0,
+          "level": 206,
+          "isOrganic": false,
+          "bonus": 85.40630182421228
+        },
+        {
+          "index": 1,
+          "level": 285,
+          "isOrganic": false,
+          "bonus": 133.07392996108948
+        },
+        {
+          "index": 2,
+          "level": 300,
+          "isOrganic": false,
+          "bonus": 161.53846153846155
+        },
+        {
+          "index": 3,
+          "level": 100,
+          "isOrganic": false,
+          "bonus": 72.72727272727273
+        },
+        {
+          "index": 4,
+          "level": 275,
+          "isOrganic": false,
+          "bonus": 1.2941176470588236
+        },
+        {
+          "index": 5,
+          "level": 306,
+          "isOrganic": false,
+          "bonus": 2.8116385911179176
+        },
+        {
+          "index": 6,
+          "level": 0,
+          "isOrganic": false,
+          "bonus": 0
+        },
+        {
+          "index": 7,
+          "level": 380,
+          "isOrganic": false,
+          "bonus": 7.710144927536232
+        },
+        {
+          "index": 8,
+          "level": 374,
+          "isOrganic": false,
+          "bonus": 13.609898107714702
+        },
+        {
+          "index": 9,
+          "level": 96,
+          "isOrganic": false,
+          "bonus": 30.656934306569344
+        },
+        {
+          "index": 10,
+          "level": 189,
+          "isOrganic": false,
+          "bonus": 39.739276703111855
+        },
+        {
+          "index": 11,
+          "level": 364,
+          "isOrganic": false,
+          "bonus": 106.7448680351906
+        },
+        {
+          "index": 12,
+          "level": 97,
+          "isOrganic": false,
+          "bonus": 8.842297174111211
+        },
+        {
+          "index": 13,
+          "level": 93,
+          "isOrganic": false,
+          "bonus": 11.061299176578226
+        },
+        {
+          "index": 14,
+          "level": 186,
+          "isOrganic": false,
+          "bonus": 9.409780775716694
+        },
+        {
+          "index": 15,
+          "level": 93,
+          "isOrganic": false,
+          "bonus": 0.4254345837145471
+        },
+        {
+          "index": 16,
+          "level": 206,
+          "isOrganic": false,
+          "bonus": 42.70315091210614
+        },
+        {
+          "index": 17,
+          "level": 286,
+          "isOrganic": false,
+          "bonus": 77.83825816485226
+        },
+        {
+          "index": 18,
+          "level": 264,
+          "isOrganic": false,
+          "bonus": 87.72151898734177
+        },
+        {
+          "index": 19,
+          "level": 350,
+          "isOrganic": false,
+          "bonus": 23.333333333333332
+        },
+        {
+          "index": 20,
+          "level": 202,
+          "isOrganic": false,
+          "bonus": 21.846921797004992
+        },
+        {
+          "index": 21,
+          "level": 500,
+          "isOrganic": false,
+          "bonus": 100
+        },
+        {
+          "index": 22,
+          "level": 103,
+          "isOrganic": false,
+          "bonus": 11.205802357207617
+        },
+        {
+          "index": 23,
+          "level": 290,
+          "isOrganic": false,
+          "bonus": 11.24031007751938
+        },
+        {
+          "index": 24,
+          "level": 192,
+          "isOrganic": false,
+          "bonus": 11.275167785234899
+        },
+        {
+          "index": 25,
+          "level": 176,
+          "isOrganic": false,
+          "bonus": 17.959183673469386
+        },
+        {
+          "index": 26,
+          "level": 214,
+          "isOrganic": false,
+          "bonus": 17.627677100494235
+        },
+        {
+          "index": 27,
+          "level": 103,
+          "isOrganic": false,
+          "bonus": 14.00725294650952
+        },
+        {
+          "index": 28,
+          "level": 122,
+          "isOrganic": false,
+          "bonus": 5.436720142602495
+        },
+        {
+          "index": 29,
+          "level": 367,
+          "isOrganic": false,
+          "bonus": 18.792977322604244
+        },
+        {
+          "index": 30,
+          "level": 0,
+          "isOrganic": false,
+          "bonus": 0
+        },
+        {
+          "index": 31,
+          "level": 0,
+          "isOrganic": false,
+          "bonus": 0
+        },
+        {
+          "index": 32,
+          "level": 118,
+          "isOrganic": false,
+          "bonus": 6.332737030411449
+        },
+        {
+          "index": 33,
+          "level": 79,
+          "isOrganic": false,
+          "bonus": 5.125115848007414
+        },
+        {
+          "index": 34,
+          "level": 183,
+          "isOrganic": false,
+          "bonus": 6.187658495350803
+        },
+        {
+          "index": 35,
+          "level": 309,
+          "isOrganic": false,
+          "bonus": 12.983193277310924
+        },
+        {
+          "index": 36,
+          "level": 168,
+          "isOrganic": false,
+          "bonus": 5.7534246575342465
+        },
+        {
+          "index": 37,
+          "level": 188,
+          "isOrganic": false,
+          "bonus": 8.703703703703704
+        },
+        {
+          "index": 38,
+          "level": 182,
+          "isOrganic": false,
+          "bonus": 10.77834179357022
+        },
+        {
+          "index": 39,
+          "level": 330,
+          "isOrganic": false,
+          "bonus": 7.443609022556391
+        },
+        {
+          "index": 40,
+          "level": 127,
+          "isOrganic": false,
+          "bonus": 2.25377107364685
+        },
+        {
+          "index": 41,
+          "level": 280,
+          "isOrganic": false,
+          "bonus": 280
+        },
+        {
+          "index": 42,
+          "level": 99,
+          "isOrganic": false,
+          "bonus": 27.024567788899
+        },
+        {
+          "index": 43,
+          "level": 173,
+          "isOrganic": false,
+          "bonus": 73.74254049445865
+        },
+        {
+          "index": 44,
+          "level": 265,
+          "isOrganic": false,
+          "bonus": 31.422924901185773
+        },
+        {
+          "index": 45,
+          "level": 178,
+          "isOrganic": false,
+          "bonus": 4.533106960950764
+        },
+        {
+          "index": 46,
+          "level": 102,
+          "isOrganic": false,
+          "bonus": 3.2395644283121596
+        },
+        {
+          "index": 47,
+          "level": 85,
+          "isOrganic": false,
+          "bonus": 15.668202764976957
+        },
+        {
+          "index": 48,
+          "level": 377,
+          "isOrganic": false,
+          "bonus": 0.5475671750181554
+        },
+        {
+          "index": 49,
+          "level": 364,
+          "isOrganic": false,
+          "bonus": 0.533724340175953
+        },
+        {
+          "index": 50,
+          "level": 178,
+          "isOrganic": false,
+          "bonus": 45.331069609507644
+        },
+        {
+          "index": 51,
+          "level": 576,
+          "isOrganic": false,
+          "bonus": 25.583756345177665
+        },
+        {
+          "index": 52,
+          "level": 240,
+          "isOrganic": false,
+          "bonus": 38.70967741935484
+        },
+        {
+          "index": 53,
+          "level": 154,
+          "isOrganic": false,
+          "bonus": 21.351819757365686
+        },
+        {
+          "index": 54,
+          "level": 97,
+          "isOrganic": false,
+          "bonus": 14.14767547857794
+        },
+        {
+          "index": 55,
+          "level": 477,
+          "isOrganic": false,
+          "bonus": 51.67230873392011
+        },
+        {
+          "index": 56,
+          "level": 281,
+          "isOrganic": false,
+          "bonus": 7.6775956284153
+        },
+        {
+          "index": 57,
+          "level": 191,
+          "isOrganic": false,
+          "bonus": 1.6036943744752308
+        },
+        {
+          "index": 58,
+          "level": 227,
+          "isOrganic": false,
+          "bonus": 277.50611246943765
+        },
+        {
+          "index": 59,
+          "level": 294,
+          "isOrganic": false,
+          "bonus": 5.6800618238021645
+        }
+      ]
+    },
+    "exotic_native_current_ids": {
+      "expression": "idleon.getAttr(\"PixelHelperActor\")[24].getValue(\"ActorEvents_623\",\"_GenINFO\")[181]",
+      "result": [
+        20,
+        12,
+        10,
+        18,
+        55,
+        51,
+        21,
+        56
+      ]
+    },
+    "exotic_next_rotation_time_ms": {
+      "expression": "(()=>{const raw=window.frames[0][\"__fixture\"].TimeAway;const saved=(typeof raw===\"string\"?JSON.parse(raw):raw).GlobalTime;const current=Math.floor(saved/604800);return (current+1)*604800*1000;})()",
+      "result": 1792627200000
+    }
+  },
+  "errors": {}
+}

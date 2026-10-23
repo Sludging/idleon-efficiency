@@ -1,0 +1,21 @@
+{
+  "description": "Native 1.24 regular fixture core evidence. Current effects and ordered IDs come from native game state; schedule time uses saved GlobalTime.",
+  "target": "Exotic Market public numeric state and ordered weekly rotation",
+  "extractions": [
+    {
+      "label": "exotic_upgrade_state",
+      "expression": "(()=>{const rows=idleon.getAttr(\"CustomLists\").h.MarketExoticInfo;const levels=idleon.getAttr(\"FarmUpg\");const organic=idleon.getAttr(\"Spelunk\")[50];return rows.slice(0,60).map((row,index)=>({index,level:levels[20+index],isOrganic:organic.includes(index),bonus:idleon.callFunction(\"FarmingStuffs\",\"ExoticBonusQTY\",index,0)}));})()",
+      "description": "Native levels, organic state and exotic bonuses"
+    },
+    {
+      "label": "exotic_native_current_ids",
+      "expression": "idleon.getAttr(\"PixelHelperActor\")[24].getValue(\"ActorEvents_623\",\"_GenINFO\")[181]",
+      "description": "Observed ordered current roll, no UI entry or reroll"
+    },
+    {
+      "label": "exotic_next_rotation_time_ms",
+      "expression": "(()=>{const raw=window.frames[0][\"__fixture\"].TimeAway;const saved=(typeof raw===\"string\"?JSON.parse(raw):raw).GlobalTime;const current=Math.floor(saved/604800);return (current+1)*604800*1000;})()",
+      "description": "Next saved-week boundary in Unix milliseconds"
+    }
+  ]
+}

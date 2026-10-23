@@ -308,7 +308,7 @@ export default function MenagerieContent() {
                             ] as const).map((resource, resourceIndex) => <Box key={resource.key} direction="row" gap="medium" align="stretch" flex={{ grow: 1, shrink: 1 }} style={{ flexBasis: '160px' }}>
                                 {resourceIndex > 0 && <Box width="1px" background="grey-1" flex={false} aria-hidden="true" />}
                                 <Box direction="row" gap="small" align="center">
-                                    <IconImage data={menagerie.getUsableResourceImageData(resource.key)} scale={0.75} />
+                                    <IconImage data={MenagerieDomain.getUsableResourceImageData(resource.key)} scale={0.75} />
                                     <TextAndLabel label={resource.label} text={`${commaNotation(resource.available)}/${commaNotation(resource.total)}`} textSize="small" />
                                 </Box>
                             </Box>)}

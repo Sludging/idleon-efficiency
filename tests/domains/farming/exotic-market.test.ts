@@ -24,3 +24,65 @@ describe('Farming Domain - Exotic Market Plump Database', () => {
     });
   });
 });
+
+type NativeUpgradeState = {
+  index: number;
+  level: number;
+  isOrganic: boolean;
+  bonus: number;
+};
+
+describe('Farming Exotic Market account results', () => {
+  let farming: Farming;
+  let results: ExtractionResults;
+  let nativeUpgrades: NativeUpgradeState[];
+
+  beforeAll(() => {
+    results = loadExtractionResults('farming-exotic-market-data.json');
+    validateExtractionHealth(results);
+    farming = loadGameDataFromSave('latest').get('farming') as Farming;
+    nativeUpgrades = results.extractions.exotic_upgrade_state.result;
+  });
+
+  // These retained rows cover purchased and unpurchased diminishing effects,
+  // a positive linear effect, and Freexotic without Organic Labels.
+  it.each([
+    [0, 'purchased diminishing effect'],
+    [6, 'zero-level diminishing effect'],
+    [41, 'positive linear effect'],
+    [39, 'Freexotic effect'],
+  ] as const)('%i: matches the native %s', (index, description) => {
+    const native = nativeUpgrades.find(upgrade => upgrade.index === index)!;
+    expect(farming.getExoticMarketBonusValue(index)).toMatchLiveGameWithDetails(native.bonus, {
+      tolerance: 0,
+      context: `Exotic Market upgrade ${index}: ${description}`,
+      debugInfo: { level: native.level, isOrganic: native.isOrganic },
+    });
+  });
+
+  it('matches every displayed upgrade level from the retained account', () => {
+    expect(farming.exoticMarketUpgrades.map(upgrade => ({ index: upgrade.index, level: upgrade.level }))).toEqual(
+      nativeUpgrades.map(upgrade => ({ index: upgrade.index, level: upgrade.level }))
+    );
+  });
+
+  it('matches Organic Label membership for every displayed upgrade', () => {
+    expect(farming.exoticMarketUpgrades.map(upgrade => ({ index: upgrade.index, isOrganic: upgrade.isOrganic }))).toEqual(
+      nativeUpgrades.map(upgrade => ({ index: upgrade.index, isOrganic: upgrade.isOrganic }))
+    );
+  });
+
+  it('matches native current weekly IDs in rolled order using saved account time', () => {
+    const current = farming.getCurrentExoticMarketRotation();
+    expect(current.upgradeIds).toEqual(results.extractions.exotic_native_current_ids.result);
+  });
+
+  it('matches the next saved-week change timestamp in Unix milliseconds', () => {
+    expect(farming.getNextExoticMarketRotationTime()).toMatchLiveGameWithDetails(
+      getExtractedValue(results, 'exotic_next_rotation_time_ms'), {
+        tolerance: 0,
+        context: 'Next Exotic Market rotation timestamp from saved GlobalTime',
+      }
+    );
+  });
+});

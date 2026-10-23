@@ -1312,6 +1312,7 @@ class ResearchSource implements ResearchContributor {
 class ResearchSourceCatalogue {
  private readonly records: ResearchSource[] = [];
  private data!: Map<string, any>;
+ private readonly farmingStickerExp: ResearchContributor;
  readonly inputs: ResearchDisplayInputs;
  readonly minimumRoll: ResearchSource[];
  readonly failedRoll: ResearchSource;
@@ -1328,6 +1329,7 @@ class ResearchSourceCatalogue {
   private readonly repositories: StaticRepositories,
  ) {
   const farmingSticker = this.repositories.get("FarmingSticker").find(entry => entry.index === 1)!;
+  this.farmingStickerExp = researchContribution(`Farming sticker: ${farmingSticker.data.name}`, 0, "addPercent");
   const coralBonus = this.repositories.get("DancingCoralBonus").find(entry => entry.index === 4)!;
   const zenithBonus = this.repositories.get("ZenithMarket").find(entry => entry.index === 8)!;
   const researchSuperbit = this.repositories.get("GamingSuperbits").find(entry => entry.data.superbitId === 44)!;
@@ -1352,7 +1354,7 @@ class ResearchSourceCatalogue {
     () => scale * this.get<Card[]>("cards").find(entry => entry.id === id)!.getLevels(), "addPercent", cap);
   };
   const additiveExp = [
-   this.add(`Farming sticker: ${farmingSticker.data.name}`, () => this.get<Farming>("farming").getStickerBonus(1)),
+   this.farmingStickerExp,
    this.add("Cooking meals: Research EXP", () => this.get<Cooking>("cooking").getMealBonusForKey("ResearchXP")),
    this.add(`Dancing Coral: ${coralBonus.data.name}`, () => this.get<DancingCoral>("dancingCoral").getBonusFromIndex(4)),
    this.add("Crop Scientist: Research EXP", () => this.get<Farming>("farming").cropScientist.getBonus(CropScientistBonusText.ResearchExp)),
@@ -1733,6 +1735,19 @@ class ResearchSourceCatalogue {
 
  update(data: Map<string, any>): void {
   this.data = data;
+  const farmingStickerExpPercent = this.get<Farming>("farming").getStickerBonus(1);
+  const farmingStickerExpConverted = this.get<Menagerie>("menagerie").getUnlocks()[22].owned;
+  const previousStickerSources = this.farmingStickerExp.operation === "multiply"
+   ? this.inputs.expMultipliers : this.inputs.additiveExp;
+  previousStickerSources.splice(previousStickerSources.indexOf(this.farmingStickerExp), 1);
+  Object.assign(this.farmingStickerExp, farmingStickerExpConverted
+   ? researchPercentMultiplier(this.farmingStickerExp.source, farmingStickerExpPercent)
+   : researchContribution(this.farmingStickerExp.source, farmingStickerExpPercent, "addPercent"));
+  if (farmingStickerExpConverted) {
+   this.inputs.expMultipliers.splice(2, 0, this.farmingStickerExp);
+  } else {
+   this.inputs.additiveExp.unshift(this.farmingStickerExp);
+  }
   for (const source of this.records) source.update();
   this.inputs.opticalMonocles = Math.round(this.monocles.value);
   this.inputs.kaleidoscopes = Math.round(sumContributors(this.kaleidoscopeSources));

@@ -244,7 +244,7 @@ export const getPlayerDamageTotalMultiplier = (data: Map<string, any>, player: P
         }
     }
 
-    const stickerMultiplier = farming.getStickerDamageMultiplier(researchGrid);
+    const stickerMultiplier = farming.getStickerDamageMultiplier();
     component *= (1 + player.gear.getBonus(EquipmentBonus.DamageMulti) / 100)
         * (1 + player.gear.getBonus(EquipmentBonus.DamageBonus) / 100)
         * (1 + player.gear.getBonus(EquipmentBonus.BiggerDamage) / 100)

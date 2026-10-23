@@ -306,7 +306,9 @@ const postProcessingMap: Record<string, Function> = {
     "mineheadDailyTries": (_doc: Cloudsave, accountData: Map<string, any>) => updateMineheadDailyTries(accountData),
     // Minehead's trade multiplier consumes prepared Research without delaying early opponent rewards.
     "mineheadDropRate": (_doc: Cloudsave, accountData: Map<string, any>) => updateMineheadDropRate(accountData),
-    // Stickers need calculated Research; Event Shop, Superbit ownership and sticker counts are parsed inputs.
+    // Prepare the canonical account Farming level before sticker odds.
+    "farmingLevel": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingLevel(accountData),
+    // Stickers need prepared Research and companion effects; Arcade levels, Sushi unlocks and Menagerie ownership are parsed inputs.
     "farmingStickerBonuses": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingStickerBonuses(accountData),
     "button": (doc: Cloudsave, accountData: Map<string, any>) => updateButton(accountData),
     "updateOrionGlobalBonus": (doc: Cloudsave, accountData: Map<string, any>) => updateOrionGlobalBonus(accountData),
@@ -335,7 +337,6 @@ const postProcessingMap: Record<string, Function> = {
     "summoningWinnerBonus": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningWinnerBonusBoost(accountData),
     "summoningWinnerImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningWinnerImpact(accountData),
     "starSignsUnlocked": (doc: Cloudsave, accountData: Map<string, any>) => updateStarSignsUnlocked(accountData),
-    "farmingLevel": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingLevel(accountData),
     "divinity": (doc: Cloudsave, accountData: Map<string, any>) => updateDivinity(accountData),
     "updatePlayerTalentLevelWithoutESBonus": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentLevelExceptESBonus(accountData),
     "family": (doc: Cloudsave, accountData: Map<string, any>) => calculateFamily(accountData),
