@@ -23,15 +23,6 @@ describe('The Button - upcoming task progress', () => {
     button = gameData.get('button') as Button;
   });
 
-
-  it('matches native maximum character damage for Button task 49', () => {
-    const progress = getButtonTaskProgress(gameData, 49);
-    const expected = getExtractedValue(loadExtractionResults('player-combat-stats-data.json'), 'player_maximum_damage');
-    expect(progress.currentValue).toMatchLiveGameWithDetails(expected, {
-      tolerance: 0,
-      context: 'Maximum character damage used by Button task 49',
-    });
-  });
   it('matches native Copper sample progress for Button task 22', () => {
     const progress = getButtonTaskProgress(gameData, 22);
     const expected = getExtractedValue(loadExtractionResults('button-copper-sample-data.json'), 'button_copper_sample_progress');

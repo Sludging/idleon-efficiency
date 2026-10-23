@@ -1,0 +1,550 @@
+{
+  "extractions": {
+    "vault_upgrade_costs": {
+      "expression": "idleon.getAttr(\"CustomLists\").h.UpgradeVault.map((upgrade, index) => ({ index, level: Number(idleon.getAttr(\"UpgVault\")[index]), maxLevel: idleon.callFunction(\"Summoning\", \"VaultUpgMaxLV\", index, 0), cost: idleon.callFunction(\"Summoning\", \"VaultUpgCost\", index, 0) }))",
+      "result": [
+        {
+          "index": 0,
+          "level": 500,
+          "maxLevel": 500,
+          "cost": 3727539.1351908916
+        },
+        {
+          "index": 1,
+          "level": 200,
+          "maxLevel": 200,
+          "cost": 9410350294204.652
+        },
+        {
+          "index": 2,
+          "level": 540,
+          "maxLevel": 540,
+          "cost": 4855211277541.072
+        },
+        {
+          "index": 3,
+          "level": 422,
+          "maxLevel": 600,
+          "cost": 3.6190219322308555e+34
+        },
+        {
+          "index": 4,
+          "level": 500,
+          "maxLevel": 500,
+          "cost": 3.738552004449963e+31
+        },
+        {
+          "index": 5,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 1106846031684.4304
+        },
+        {
+          "index": 6,
+          "level": 200,
+          "maxLevel": 200,
+          "cost": 2200003669026721.2
+        },
+        {
+          "index": 7,
+          "level": 1,
+          "maxLevel": 1,
+          "cost": 27.321428571428573
+        },
+        {
+          "index": 8,
+          "level": 1,
+          "maxLevel": 1,
+          "cost": 27.321428571428573
+        },
+        {
+          "index": 9,
+          "level": 1,
+          "maxLevel": 1,
+          "cost": 27.321428571428573
+        },
+        {
+          "index": 10,
+          "level": 5,
+          "maxLevel": 5,
+          "cost": 132424.6502311862
+        },
+        {
+          "index": 11,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 103305168450770.33
+        },
+        {
+          "index": 12,
+          "level": 50,
+          "maxLevel": 50,
+          "cost": 450.2705278689224
+        },
+        {
+          "index": 13,
+          "level": 122,
+          "maxLevel": 122,
+          "cost": 1071581922248397.5
+        },
+        {
+          "index": 14,
+          "level": 10,
+          "maxLevel": 10,
+          "cost": 33659741.9131532
+        },
+        {
+          "index": 15,
+          "level": 5,
+          "maxLevel": 5,
+          "cost": 249199.13903061225
+        },
+        {
+          "index": 16,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 1584527576.9518032
+        },
+        {
+          "index": 17,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 1258004440743.3955
+        },
+        {
+          "index": 18,
+          "level": 50,
+          "maxLevel": 50,
+          "cost": 61374.727783561524
+        },
+        {
+          "index": 19,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 140885973178.18732
+        },
+        {
+          "index": 20,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 439435.980223928
+        },
+        {
+          "index": 21,
+          "level": 180,
+          "maxLevel": 180,
+          "cost": 522077855.8331203
+        },
+        {
+          "index": 22,
+          "level": 25,
+          "maxLevel": 25,
+          "cost": 637.7575152361352
+        },
+        {
+          "index": 23,
+          "level": 20,
+          "maxLevel": 20,
+          "cost": 249240.63631201303
+        },
+        {
+          "index": 24,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 52424710.8093237
+        },
+        {
+          "index": 25,
+          "level": 50,
+          "maxLevel": 50,
+          "cost": 11335852.534389714
+        },
+        {
+          "index": 26,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 63658576.72801259
+        },
+        {
+          "index": 27,
+          "level": 50,
+          "maxLevel": 50,
+          "cost": 26591.56446247
+        },
+        {
+          "index": 28,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 22724.310439426758
+        },
+        {
+          "index": 29,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 23806.268613898977
+        },
+        {
+          "index": 30,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 24888.22678837119
+        },
+        {
+          "index": 31,
+          "level": 25,
+          "maxLevel": 25,
+          "cost": 1045.9179042968715
+        },
+        {
+          "index": 32,
+          "level": 54,
+          "maxLevel": 54,
+          "cost": 177867177888730.8
+        },
+        {
+          "index": 33,
+          "level": 24,
+          "maxLevel": 24,
+          "cost": 265149428061437950
+        },
+        {
+          "index": 34,
+          "level": 50,
+          "maxLevel": 50,
+          "cost": 4960044558.681067
+        },
+        {
+          "index": 35,
+          "level": 20,
+          "maxLevel": 20,
+          "cost": 9364758.016086817
+        },
+        {
+          "index": 36,
+          "level": 1,
+          "maxLevel": 1,
+          "cost": 1040625.534375
+        },
+        {
+          "index": 37,
+          "level": 10,
+          "maxLevel": 10,
+          "cost": 1361175.7566594088
+        },
+        {
+          "index": 38,
+          "level": 20,
+          "maxLevel": 20,
+          "cost": 4170591.1614675494
+        },
+        {
+          "index": 39,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 219886914.39729086
+        },
+        {
+          "index": 40,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 11041533993.56026
+        },
+        {
+          "index": 41,
+          "level": 20,
+          "maxLevel": 20,
+          "cost": 106005031.73402667
+        },
+        {
+          "index": 42,
+          "level": 3,
+          "maxLevel": 3,
+          "cost": 717782227.125
+        },
+        {
+          "index": 43,
+          "level": 125,
+          "maxLevel": 125,
+          "cost": 1.4686490242758916e+21
+        },
+        {
+          "index": 44,
+          "level": 1,
+          "maxLevel": 1,
+          "cost": 9375000.375
+        },
+        {
+          "index": 45,
+          "level": 416,
+          "maxLevel": 416,
+          "cost": 1.8034232890452993e+22
+        },
+        {
+          "index": 46,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 154150658800.36227
+        },
+        {
+          "index": 47,
+          "level": 10,
+          "maxLevel": 10,
+          "cost": 1966971160.8563232
+        },
+        {
+          "index": 48,
+          "level": 20,
+          "maxLevel": 20,
+          "cost": 6291833279.615215
+        },
+        {
+          "index": 49,
+          "level": 200,
+          "maxLevel": 200,
+          "cost": 1996248164418.288
+        },
+        {
+          "index": 50,
+          "level": 320,
+          "maxLevel": 320,
+          "cost": 82221596691297.11
+        },
+        {
+          "index": 51,
+          "level": 20,
+          "maxLevel": 20,
+          "cost": 2869137986866.5444
+        },
+        {
+          "index": 52,
+          "level": 1,
+          "maxLevel": 1,
+          "cost": 18750000.375
+        },
+        {
+          "index": 53,
+          "level": 150,
+          "maxLevel": 150,
+          "cost": 290175136312.6105
+        },
+        {
+          "index": 54,
+          "level": 342,
+          "maxLevel": 540,
+          "cost": 5.635511886387713e+33
+        },
+        {
+          "index": 55,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 103354850953.89923
+        },
+        {
+          "index": 56,
+          "level": 310,
+          "maxLevel": 310,
+          "cost": 8.598679168892825e+25
+        },
+        {
+          "index": 57,
+          "level": 262,
+          "maxLevel": 505,
+          "cost": 5.159928916281628e+32
+        },
+        {
+          "index": 58,
+          "level": 260,
+          "maxLevel": 260,
+          "cost": 2.072217188190293e+21
+        },
+        {
+          "index": 59,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 775159702520.2402
+        },
+        {
+          "index": 60,
+          "level": 423,
+          "maxLevel": 500,
+          "cost": 1.3240517021411439e+32
+        },
+        {
+          "index": 61,
+          "level": 50,
+          "maxLevel": 50,
+          "cost": 3.166593593547996e+23
+        },
+        {
+          "index": 62,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 5.006774806810416e+21
+        },
+        {
+          "index": 63,
+          "level": 271,
+          "maxLevel": 300,
+          "cost": 1.628712144349902e+31
+        },
+        {
+          "index": 64,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 2.7261888611045817e+22
+        },
+        {
+          "index": 65,
+          "level": 243,
+          "maxLevel": 500,
+          "cost": 1.7368271648449747e+32
+        },
+        {
+          "index": 66,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 1.0995628389350834e+23
+        },
+        {
+          "index": 67,
+          "level": 200,
+          "maxLevel": 200,
+          "cost": 2.4014925275556067e+30
+        },
+        {
+          "index": 68,
+          "level": 255,
+          "maxLevel": 314,
+          "cost": 2.1128544473631544e+33
+        },
+        {
+          "index": 69,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 8.293269447641547e+23
+        },
+        {
+          "index": 70,
+          "level": 20,
+          "maxLevel": 20,
+          "cost": 5.833329533966886e+23
+        },
+        {
+          "index": 71,
+          "level": 140,
+          "maxLevel": 140,
+          "cost": 4.8855750682812604e+29
+        },
+        {
+          "index": 72,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 4.332703018493327e+25
+        },
+        {
+          "index": 73,
+          "level": 44,
+          "maxLevel": 50,
+          "cost": 4.462933032103067e+34
+        },
+        {
+          "index": 74,
+          "level": 19,
+          "maxLevel": 20,
+          "cost": 2.1524415168253986e+35
+        },
+        {
+          "index": 75,
+          "level": 127,
+          "maxLevel": 140,
+          "cost": 6.350785898922291e+29
+        },
+        {
+          "index": 76,
+          "level": 30,
+          "maxLevel": 30,
+          "cost": 7.398529226100729e+29
+        },
+        {
+          "index": 77,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 2.0914540687300746e+26
+        },
+        {
+          "index": 78,
+          "level": 189,
+          "maxLevel": 250,
+          "cost": 2.04722540661061e+31
+        },
+        {
+          "index": 79,
+          "level": 10,
+          "maxLevel": 10,
+          "cost": 4.91905900426998e+30
+        },
+        {
+          "index": 80,
+          "level": 92,
+          "maxLevel": 500,
+          "cost": 3.638212979195805e+31
+        },
+        {
+          "index": 81,
+          "level": 183,
+          "maxLevel": 370,
+          "cost": 5.219361111008908e+31
+        },
+        {
+          "index": 82,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 5.160290489078472e+27
+        },
+        {
+          "index": 83,
+          "level": 197,
+          "maxLevel": 200,
+          "cost": 3.9378500411077586e+32
+        },
+        {
+          "index": 84,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 1.2487902983569827e+29
+        },
+        {
+          "index": 85,
+          "level": 41,
+          "maxLevel": 64,
+          "cost": 9.547860829989993e+34
+        },
+        {
+          "index": 86,
+          "level": 25,
+          "maxLevel": 50,
+          "cost": 9.149095809246165e+34
+        },
+        {
+          "index": 87,
+          "level": 173,
+          "maxLevel": 250,
+          "cost": 2.231498750920543e+34
+        },
+        {
+          "index": 88,
+          "level": 100,
+          "maxLevel": 100,
+          "cost": 3.04725645970743e+33
+        },
+        {
+          "index": 89,
+          "level": 24,
+          "maxLevel": 50,
+          "cost": 7.821469913163131e+34
+        }
+      ]
+    }
+  },
+  "errors": {}
+}

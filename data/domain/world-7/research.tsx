@@ -1524,7 +1524,7 @@ class ResearchSourceCatalogue {
    this.add(`Sailing artifact: ${pointArtifact.data.name}`,
     () => Math.round(this.get<Sailing>("sailing").artifacts.find(entry => entry.index === 37)!.status), "add", 10),
    this.add(`World 7 merit: ${pointMerit.data.descLine1}`, () => this.get<TaskBoard>("taskboard").merits[51]!.level, "add"),
-   this.jelly(4, "add", "Points"), this.jelly(57, "add", "Points"), this.pointMilestone,
+   this.jelly(4, "add", "Points"), this.jelly(57, "add", "Points"), this.event(64), this.pointMilestone,
   ];
   const sigilLore = this.repositories.get("SpelunkingTunnel").find(entry => entry.index === 6)!;
   this.linked = {
@@ -1650,7 +1650,7 @@ class ResearchSourceCatalogue {
 
  private event(index: number, scale = 1): ResearchSource {
   const bonus = this.repositories.get("EventShopBonus").find(entry => entry.index === index)!;
-  const units: Record<number, string> = { 33: "Kaleidoscopes", 34: "Magnifying Glasses", 35: "attempts/day", 36: "Shapes" };
+  const units: Record<number, string> = { 33: "Kaleidoscopes", 34: "Magnifying Glasses", 35: "attempts/day", 36: "Shapes", 64: "Points" };
   const entry = this.add(`Event Shop: ${bonus.data.name}`,
    () => Number(this.get<EventShop>("eventShop").isBonusOwned(index)) * scale, "add", undefined, "Owned Event Shop bonus");
   entry.reward = this.reward(scale, "add", units[index], "unlock");

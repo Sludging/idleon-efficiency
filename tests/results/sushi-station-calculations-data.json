@@ -1,8 +1,12 @@
 {
   "extractions": {
+    "sushi_orange_fire_sum": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"OrangeFireSum\",0,0)",
+      "result": 173
+    },
     "sushi_fuel_per_hour": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"FuelGen\",0,0)",
-      "result": 112811756.56534709
+      "result": 307976095.4233975
     },
     "sushi_fuel_capacity": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"FuelCap\",0,0)",
@@ -67,7 +71,7 @@
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgCost\",36,0)",
       "result": {
         "type": "large_number",
-        "value": "1.1326747356425027e+24"
+        "value": "1.1326747356425023e+24"
       }
     },
     "sushi_free_shaker_chance": {
@@ -249,10 +253,6 @@
     "sushi_combo_multiplier": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"ComboMulti\",0,0)",
       "result": 10.1839850063498
-    },
-    "sushi_orange_fire_sum": {
-      "expression": "idleon.callFunction(\"SushiStuff\",\"OrangeFireSum\",0,0)",
-      "result": 173
     },
     "sushi_dependency_research_188": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",188,0)",

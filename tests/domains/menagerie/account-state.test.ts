@@ -38,6 +38,7 @@ describe('Menagerie account progression', () => {
       );
     }
 
+    expect(progression.shells).toMatchLiveGameWithDetails(expected[1], { tolerance: 0, context: 'Saved Shell balance' });
     expect(progression.rank).toMatchLiveGameWithDetails(expected[2], { tolerance: 0, context: 'Saved Lumi rank' });
     expect(progression.shellThreshold).toMatchLiveGameWithDetails(expected[3], { tolerance: 0, context: 'Current Shell rank threshold' });
     expect(progression.lumiPerHour).toMatchLiveGameWithDetails(

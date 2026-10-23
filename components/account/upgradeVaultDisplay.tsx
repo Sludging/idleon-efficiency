@@ -35,7 +35,7 @@ export function UpgradeVaultDisplay() {
 
         if (hideMaxed) {
             filteredUpgrades = filteredUpgrades.filter(upgrade =>
-                upgrade.level < upgrade.data.max_level
+                upgrade.level < upgrade.getMaxLevel()
             );
         }
 
@@ -80,7 +80,7 @@ export function UpgradeVaultDisplay() {
                             label: null,
                             content: <Text size="xsmall">Unlock in {upgrade.data.unlock_req - upgradeVault.totalVaultLevel}</Text>
                         }
-                    ] : upgrade.level >= upgrade.data.max_level ? [
+                    ] : upgrade.level >= upgrade.getMaxLevel() ? [
                         { key: 'maxed', kind: 'content', label: null, content: <Text size="small">Maxed</Text> }
                     ] : [
                         {
@@ -109,7 +109,7 @@ export function UpgradeVaultDisplay() {
                                     artwork: <IconImage data={upgrade.getImageData()} scale={0.7} />
                                 },
                                 { key: 'bonus', kind: 'text', label: 'Bonus', value: upgrade.getDescription(), role: 'description' },
-                                { key: 'level', kind: 'text', label: 'Level', value: `${upgrade.level} / ${upgrade.data.max_level}` },
+                                { key: 'level', kind: 'text', label: 'Level', value: `${upgrade.level} / ${upgrade.getMaxLevel()}` },
                                 ...costFields
                             ]}
                         />

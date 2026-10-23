@@ -22,6 +22,15 @@ describe('Bubba individual upgrade prices', () => {
     validateExtractionHealth(extractionResults);
     const extractedPrices = extractionResults.extractions.upgrade_prices.result;
     if (!Array.isArray(extractedPrices)) throw new Error('Bubba upgrade price extraction is not a numeric array');
+    for (const { index } of upgradeCases) {
+      const price = extractedPrices[index];
+      const isLargeNumber = price !== null && typeof price === 'object'
+        && price.type === 'large_number' && typeof price.value === 'string'
+        && price.value.trim() !== '' && !Number.isNaN(Number(price.value));
+      if (typeof price !== 'number' && !isLargeNumber) {
+        throw new Error(`Bubba upgrade price extraction is missing a numeric value at index ${index}`);
+      }
+    }
     prices = extractedPrices.map(normalizeExtractedValue);
     bubba = loadGameDataFromSave(saveName).get('bubba') as Bubba;
   });

@@ -1,0 +1,11 @@
+{
+  "description": "Extract ownership for every Event Shop reward from the native paired description and price catalog.",
+  "target": "Event Shop ownership",
+  "extractions": [
+    {
+      "label": "event_shop_ownership",
+      "expression": "Array.from({ length: idleon.engine.getGameAttribute(\"CustomLists\").h.NinjaInfo[39].length / 2 }, (_, index) => ({ index, owned: idleon.callFunction(\"Summoning\", \"EventShopOwned\", index, 0) }))",
+      "description": "Native ownership for each reward. The catalog stores paired description and price entries (idleon1.24.txt:256874–256886)."
+    }
+  ]
+}

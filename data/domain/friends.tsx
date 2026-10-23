@@ -55,6 +55,7 @@ const parseAssignment = (record: string): FriendBonusAssignment => {
 export class Friends extends Domain {
   bonuses: FriendBonus[] = [];
   friendBonusSlots: number = 0;
+  friendshipSlotBonus: number = 0;
 
   getRawKeys(): RawData[] {
     return [
@@ -69,6 +70,7 @@ export class Friends extends Domain {
 
   parse(data: Map<string, unknown>): void {
     const friends = data.get(this.getDataKey()) as Friends;
+    friends.friendshipSlotBonus = 0;
     const optionList = data.get("OptLacc") as (number | string)[];
     const rawAssignments = (optionList[FRIEND_BONUS_ASSIGNMENTS_OPTION] as string) || "";
     const assignments = rawAssignments ? rawAssignments.split(";").map(parseAssignment) : [];
@@ -97,13 +99,12 @@ export const updateFriends = (data: Map<string, unknown>) => {
   const mrPigBonus = getCompanionActiveBonus(companions, 30);
   const spearfishLevelTwo = isCompanionLevelTwo(companions, 44);
   const friendlySlotBonus = eventShop.isBonusOwned(22) ? 1 : 0;
+  friends.friendshipSlotBonus = Number(eventShop.isBonusOwned(67));
 
-  // The current max attainable number of slots is 7 (base 2 + Companion44 one +
-  // Companion 30 level 2 three + Event Shop 22 one). 
   friends.friendBonusSlots = Math.round(
     Math.min(
       FRIEND_BONUS_SLOT_LIMIT,
-      2 + spearfishBonus + (2 * mrPigBonus + friendlySlotBonus),
+      2 + spearfishBonus + (2 * mrPigBonus + friendlySlotBonus + friends.friendshipSlotBonus),
     ),
   );
 

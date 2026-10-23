@@ -52,7 +52,10 @@ describe('Farming Exotic Market account results', () => {
   });
 
   it.each(upgradeIndices)('matches the native effect for Exotic Market upgrade %i', (index) => {
-    const native = nativeUpgrades.find(upgrade => upgrade.index === index)!;
+    const native = nativeUpgrades.find(upgrade => upgrade.index === index);
+    if (!native) {
+      throw new Error(`Missing native Exotic Market effect for upgrade ${index}`);
+    }
     expect(farming.getExoticMarketBonusValue(index)).toMatchLiveGameWithDetails(native.bonus, {
       tolerance: 0,
       context: `Exotic Market upgrade ${index} effect`,

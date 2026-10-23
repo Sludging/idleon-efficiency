@@ -1,7 +1,8 @@
 {
-  "description": "Current real-save Sushi Station outputs, representative upgrade formulas, and shaker effects for Idleon 1.22.",
+  "description": "Current real-save Sushi Station outputs, representative upgrade formulas, and shaker effects for Idleon 1.24. Read the orange-fire board bonus before fuel generation, which consumes that bonus from the native cache.",
   "target": "SushiStation rates, upgrades, and shaker effects",
   "extractions": [
+    { "label": "sushi_orange_fire_sum", "expression": "idleon.callFunction(\"SushiStuff\",\"OrangeFireSum\",0,0)", "description": "Board-computed orange-fire sum directly used by Fuel/hour." },
     { "label": "sushi_fuel_per_hour", "expression": "idleon.callFunction(\"SushiStuff\",\"FuelGen\",0,0)", "description": "Fuel generated per hour by the current Sushi Station setup." },
     { "label": "sushi_fuel_capacity", "expression": "idleon.callFunction(\"SushiStuff\",\"FuelCap\",0,0)", "description": "Current Sushi Station fuel capacity." },
     { "label": "sushi_bucks_per_hour", "expression": "idleon.callFunction(\"SushiStuff\",\"CurrencyperHR\",0,0)", "description": "Bucks generated per hour by the current Sushi Station setup." },
@@ -60,7 +61,6 @@
     { "label": "sushi_fireplace_effect_1", "expression": "idleon.callFunction(\"SushiStuff\",\"FireplaceEffect\",1,0)", "description": "Fireplace effect kind 1 directly used by Bucks/hour." },
     { "label": "sushi_fireplace_effect_3", "expression": "idleon.callFunction(\"SushiStuff\",\"FireplaceEffect\",3,0)", "description": "Fireplace effect kind 3 directly used by Knowledge XP multiplier." },
     { "label": "sushi_combo_multiplier", "expression": "idleon.callFunction(\"SushiStuff\",\"ComboMulti\",0,0)", "description": "Current combo multiplier directly used by Bucks/hour." },
-    { "label": "sushi_orange_fire_sum", "expression": "idleon.callFunction(\"SushiStuff\",\"OrangeFireSum\",0,0)", "description": "Board-computed orange-fire sum directly used by Fuel/hour." },
     { "label": "sushi_dependency_research_188", "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",188,0)", "description": "Research Grid 188 Shakin' It value used by free shaker chance." },
     { "label": "sushi_dependency_research_189", "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",189,0)", "description": "Research Grid 189 daily Sushi grant and Bucks/hour input." },
     { "label": "sushi_dependency_jelly_obstruction_18", "expression": "idleon.callFunction(\"JellyOperation\",\"RoG_BonusQTY\",18,0)", "description": "Jelly obstruction 18 reduction directly used by Sushi upgrade costs." },

@@ -7,6 +7,7 @@ import { MenagerieBonusModel } from "./model/menagerieBonusModel";
 import { MenagerieUnlockModel } from "./model/menagerieUnlockModel";
 import { Item } from "./items";
 import { ImageData } from "./imageData";
+import { EventShop } from "./eventShop";
 
 import { initMenagerieJellyfishRepo } from "./data/MenagerieJellyfishRepo";
 import {
@@ -183,6 +184,7 @@ export interface MenagerieLumiInputs {
     lumiVialBonus: number;
     researchBonus164: number;
     cardLevel: number;
+    eventShopLumiBonus: number;
 }
 
 export interface MenagerieLumiSaveInputs {
@@ -241,6 +243,7 @@ export class Menagerie extends Domain {
         lumiVialBonus: 0,
         researchBonus164: 0,
         cardLevel: 0,
+        eventShopLumiBonus: 0,
     };
     private mineheadDoubledUpgradeIds = new Set<number>();
     private sushiDoubledUpgradeIds = new Set<number>();
@@ -302,6 +305,7 @@ export class Menagerie extends Domain {
         const menagerie = data.get(this.getDataKey()) as Menagerie;
         const savedMenagerie = data.get("Menagerie") as (number | string)[][];
         menagerie.sneakingUpgradeBonusLevels = [];
+        menagerie.lumiInputs.eventShopLumiBonus = 0;
         if (!savedMenagerie || savedMenagerie.length === 0) {
             return;
         }
@@ -507,6 +511,9 @@ export class Menagerie extends Domain {
         };
         const bankBundleL = Number(account.hasBundleL);
         const bankBundleM = Number(account.hasBundleM);
+        const eventShop = accountData.get("eventShop") as EventShop;
+        const eventShopBlackStars = Number(eventShop.isBonusOwned(60));
+        const eventShopOrganicLabels = 5 * Number(eventShop.isBonusOwned(61));
 
         this.availableUnlockCount = Math.round(
             Math.min(7, this.rank) + Math.floor(Math.max(0, this.rank - 7) / 2),
@@ -543,8 +550,8 @@ export class Menagerie extends Domain {
         const mineheadDoublersOwned = Math.round(this.getBonusValue(8) + 3 * bankBundleL);
         const sushiDoublersOwned = Math.round(this.getBonusValue(10) + 3 * bankBundleL);
         const jellyOperatorDoublersOwned = Math.round(this.getBonusValue(12) + 3 * bankBundleL);
-        const blackStarsOwned = Math.round(this.getBonusValue(2) + 4 * bankBundleM);
-        const organicLabels = Math.round(this.getBonusValue(6));
+        const blackStarsOwned = Math.round(this.getBonusValue(2) + (4 * bankBundleM + eventShopBlackStars));
+        const organicLabels = Math.round(this.getBonusValue(6) + eventShopOrganicLabels);
         this.resourceBalances = {
             blackStarsOwned,
             blackStarsAvailable: Math.round(blackStarsOwned - this.blackStarsConsumed),
@@ -632,6 +639,7 @@ export class Menagerie extends Domain {
         const alchemy = accountData.get("alchemy") as { getVialBonusForKey(bonusKey: string): number };
         const cards = accountData.get("cards") as { id: string; getLevels(): number }[];
         const breeding = accountData.get("breeding") as { getCrucibleBonus(index: number): number };
+        const eventShop = accountData.get("eventShop") as EventShop;
         const bankBundleK = Number(account.hasBankBundle);
         const bankBundleL = Number(account.hasBundleL);
         const bankBundleM = Number(account.hasBundleM);
@@ -675,6 +683,8 @@ export class Menagerie extends Domain {
             lumiVialBonus: alchemy.getVialBonusForKey("7lumiadd"),
             researchBonus164: research.getBonusForId(164),
             cardLevel: cards.find(card => card.id === "w7b10")!.getLevels(),
+            // Extra Lumi adds percentage points to the existing additive rate pool.
+            eventShopLumiBonus: 50 * Number(eventShop.isBonusOwned(62)),
         };
 
         if (this.rank === 0) {
@@ -690,7 +700,8 @@ export class Menagerie extends Domain {
                                     + (lumiInputs.zenithMarketBonus11
                                         + (lumiInputs.dancingCoralBonus6
                                             + (lumiInputs.lumiVialBonus
-                                                + (lumiInputs.researchBonus164 + Math.min(5 * lumiInputs.cardLevel, 50))))))))));
+                                                + (lumiInputs.researchBonus164 + (Math.min(5 * lumiInputs.cardLevel, 50)
+                                                    + lumiInputs.eventShopLumiBonus))))))))));
             this.lumiPerHour = 10
                 * (1 + lumiInputs.coralKidBonus10 / 100)
                 * (1 + Math.min(0.25, lumiInputs.superbitType69))

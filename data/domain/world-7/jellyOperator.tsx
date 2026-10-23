@@ -11,6 +11,7 @@ import { JellyObstructionModel } from "../model/jellyObstructionModel";
 import { JellyOperatorUpgradeModel } from "../model/jellyOperatorUpgradeModel";
 import { lavaLog, lavaLog2, nFormatter } from "../../utility";
 import type { ImageData } from "../imageData";
+import type { EventShop } from "../eventShop";
 import type { Arcade } from "../world-2/arcade";
 import type { AtomCollider } from "../world-3/construction/atomCollider";
 import type { ResearchGrid } from "./research";
@@ -319,7 +320,10 @@ export class JellyOperator extends Domain {
     // These two static fever bonuses are the save-backed inputs to currency and XP.
     // Cold damage depends on transient operation time and is intentionally not projected.
     getFeverBonus(index: 2 | 3): number {
-        return this.selectedFeverIndex === index && this.getUpgradeQuantity(16) >= 1 ? 100 : 0;
+        if (this.selectedFeverIndex !== index || this.getUpgradeQuantity(16) < 1) {
+            return 0;
+        }
+        return index === 2 ? 300 : 100;
     }
 
     getDPSBloodcellMultiplier(): number {
@@ -406,6 +410,9 @@ export const updateJellyOperatorPresentation = (data: Map<string, any>) => {
     const researchGrid = data.get("research") as ResearchGrid;
     const arcade = data.get("arcade") as Arcade;
     const collider = data.get("collider") as AtomCollider;
+    const eventShop = data.get("eventShop") as EventShop;
+    const eventShopBloodcellMultiplier = 1 + Number(eventShop.isBonusOwned(56));
+    const eventShopPlotCapacity = 3 * Number(eventShop.isBonusOwned(57));
     const arcadeBonus72 = arcade.bonuses.find(bonus => bonus.index === 72)!.getBonus();
     const atomBonus15 = collider.atoms.find(atom => atom.index === 15)!.getBonus();
     const totalCellLevels = jellyOperator.getTotalCellLevels();
@@ -415,9 +422,10 @@ export const updateJellyOperatorPresentation = (data: Map<string, any>) => {
         ? jellyOperator.fevers.find(fever => fever.index === jellyOperator.selectedFeverIndex) ?? null
         : null;
 
+    // The fixed 11 percentage points belong in the initial additive gain pool.
     jellyOperator.bloodcellGainPerDamage = (1 + (jellyOperator.getUpgradeQuantity(23)
         + (jellyOperator.getUpgradeQuantity(24)
-            + (jellyOperator.getUpgradeQuantity(25) + jellyOperator.getUpgradeQuantity(33) * totalCellLevels))) / 100)
+            + (jellyOperator.getUpgradeQuantity(25) + (jellyOperator.getUpgradeQuantity(33) * totalCellLevels + 11)))) / 100)
         * (1 + arcadeBonus72 / 100)
         * (1 + researchGrid.getBonusForId(187, 0) / 100)
         * (1 + jellyOperator.getFeverBonus(2) / 100)
@@ -426,6 +434,7 @@ export const updateJellyOperatorPresentation = (data: Map<string, any>) => {
         * jellyOperator.getDPSBloodcellMultiplier()
         * (1 + jellyOperator.getUpgradeQuantity(26) / 100)
         * (1 + jellyOperator.getUpgradeQuantity(27) / 100)
+        * eventShopBloodcellMultiplier
         * (1 + atomBonus15 / 100);
 
     // EXPMulti has a base value before Biology is unlocked, but landed hits award no XP then.
@@ -438,7 +447,7 @@ export const updateJellyOperatorPresentation = (data: Map<string, any>) => {
 
     jellyOperator.plotPurchasesLeft = Math.round(jellyOperator.getUpgradeQuantity(9)
         + (jellyOperator.getUpgradeQuantity(8)
-            + (jellyOperator.obstructions[44].getBonus() + Number(jellyOperator.jellyBundleOwned)))
+            + (jellyOperator.obstructions[44].getBonus() + (Number(jellyOperator.jellyBundleOwned) + eventShopPlotCapacity)))
         - jellyOperator.purchasedPlotCount);
     jellyOperator.unlockedTileCount = jellyOperator.calculateUnlockedTileCount();
 

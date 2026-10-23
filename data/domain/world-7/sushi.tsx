@@ -165,6 +165,7 @@ export class SushiStation extends Domain {
     private sailingArtifact39: number = 0;
     private upgradeLevels: number[] = [];
     private eventShop45: number = 0;
+    private fullKitchenSimmerOwned: number = 0;
     sushiDoublersOwned = 0;
     sushiDoublersRemaining = 0;
 
@@ -193,12 +194,14 @@ export class SushiStation extends Domain {
         this.upgradeLevels = [];
         this.bundleBonus = this.bundleBanJ = this.research188 = this.research189 = 0;
         this.jellyObstruction18 = this.arcade67 = this.eventShop45 = this.button2 = this.minehead11 = 0;
+        this.fullKitchenSimmerOwned = 0;
         this.gaming67 = this.atom14 = this.sailingArtifact39 = 0;
         return this;
     }
 
     parse(data: Map<string, any>): void {
         const station = data.get(this.getDataKey()) as SushiStation;
+        station.fullKitchenSimmerOwned = 0;
         const sushiData = data.get("Sushi") as number[][] || [];
         const sushiLevels = sushiData[7] || [];
         const sushiExperience = sushiData[6] || [];
@@ -293,6 +296,7 @@ export class SushiStation extends Domain {
         this.jellyObstruction18 = jelly.obstructions[18].getBonus();
         this.arcade67 = arcade.bonuses[67].getBonus();
         this.eventShop45 = Number(eventShop.isBonusOwned(45));
+        this.fullKitchenSimmerOwned = Number(eventShop.isBonusOwned(66));
         this.button2 = button.getBonusForIndex(2);
         this.minehead11 = minehead.getBonusFromIndex(11);
         this.gaming67 = Number(gaming.isSuperbitPurchased(67));
@@ -388,6 +392,7 @@ export class SushiStation extends Domain {
     getFuelCapacity(): number {
         return (200 + this.getKnowledgeBonusTotal(3))
             * (1 + Math.min(1, this.bundleBonus))
+            * (1 + 9 * this.fullKitchenSimmerOwned)
             * (1 + (this.getUpgradeBonus(1) + (this.getUpgradeBonus(2) + (this.getUpgradeBonus(3) + (this.getUpgradeBonus(4) + this.getUpgradeBonus(5))))) / 100)
             * (1 + Number(this.upgradeLevels[2] ?? 0) / 100)
             * (1 + Number(this.upgradeLevels[3] ?? 0) / 100)

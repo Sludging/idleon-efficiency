@@ -9,6 +9,7 @@ import { ResearchGrid } from "./research";
 import { StaticRepositories } from "../repositories";
 import { ImageData } from "../imageData";
 import { Storage } from "../storage";
+import type { SushiStation } from "./sushi";
 
 export const greenstackThreshold = 10_000_000;
 
@@ -168,10 +169,21 @@ export class Glimbo extends Domain {
 
 export const updateGlimbo = (data: Map<string, any>): void => {
     const glimbo = data.get("glimbo") as Glimbo;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+    const research = data.get("research") as ResearchGrid;
+    const eventShop = data.get("eventShop") as EventShop;
+    // Vault prices use parsed discount inputs and effective caps before raw-base trade previews.
+    upgradeVault.updateMaximumLevels(
+        eventShop,
+        research,
+        glimbo,
+        data.get("companions") as Companion[],
+        data.get("sushi") as SushiStation,
+    );
     glimbo.update(
-        data.get("upgradeVault") as UpgradeVault,
-        data.get("research") as ResearchGrid,
-        data.get("eventShop") as EventShop,
+        upgradeVault,
+        research,
+        eventShop,
         data.get("companions") as Companion[],
         data.get("storage") as Storage,
     );

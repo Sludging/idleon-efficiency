@@ -101,7 +101,8 @@ export const getPlayerDamageBaseComponent = (
         + alchemy.getBubbleBonusForKey('bdmgSPD', player) * (Math.log2(Math.max(player.stats.movementSpeed - 0.1, 0)) / 0.25)
         + alchemy.getBubbleBonusForKey('bdmgMP', player) * lavaLog(Math.max(player.health.getMaxMP() - 150, 1))
         + Card.GetTotalBonusForId(getStatCards(player), 4)
-        + sigils.sigils[4].getBonus() * (1 + meritocraty.getCurrentBonus(21) / 100);
+        + sigils.sigils[4].getBonus() * (1 + meritocraty.getCurrentBonus(21) / 100)
+        + player.cardInfo!.cards.find(card => card.id === 'fallEvent2')!.getLevels();
     const foodInputs: BoostFoodEffectivenessInputs = {
         boostFoodStamp: getStampBonusForKey(stamps, 'BFood'),
         foodStatue: statues[player.playerID].statues.find(statue => statue.index === 3)!.getBonus(player),

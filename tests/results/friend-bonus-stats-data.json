@@ -1,5 +1,9 @@
 {
   "extractions": {
+    "friend_bonus_slots": {
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusSlots\", 0, 0)",
+      "result": 7
+    },
     "friend_bonus_stat_0": {
       "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 0, 0)",
       "result": 283.6688719913783

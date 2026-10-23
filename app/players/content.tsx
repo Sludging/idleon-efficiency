@@ -17,6 +17,8 @@ import {
 import { useState, useContext, useMemo } from 'react';
 
 import { Activity, Player, SkillData } from '../../data/domain/player';
+import { getClassExperienceMultiplier } from '../../data/domain/player-experience';
+import { getMaximumDamage } from '../../data/domain/player-damage';
 import type { GoldenFood } from '../../data/domain/golden-food';
 import { SkillsIndex } from "../../data/domain/SkillsIndex";
 import { ClassIndex, ClassTalentMap, GetTalentArray } from '../../data/domain/talents';
@@ -309,9 +311,6 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     </Box>
                     <Box role="region" aria-label="Persistent stats" gap="small" margin={{ top: "small" }}>
                         <Text>Persistent stats</Text>
-                        <Text size="xsmall" color="accent-2">
-                            Excludes dungeon stats, temporary forms, and map-dependent effects.
-                        </Text>
                         <Grid columns={["minmax(0, 1fr)", "minmax(0, 1fr)"]} gap="small">
                             <TextAndLabel label="STR" text={commaNotation(player.stats.strength)} textSize="small" />
                             <TextAndLabel label="AGI" text={commaNotation(player.stats.agility)} textSize="small" />
@@ -330,6 +329,12 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                 text={`${notateNumber(player.stats.dropRateMultiplier, "MultiplierInfo").replace("#", "")}x`}
                                 textSize="small"
                             />
+                            <TextAndLabel
+                                label="Class EXP"
+                                text={`${notateNumber(getClassExperienceMultiplier(theData, player), "MultiplierInfo").replace("#", "")}x`}
+                                textSize="small"
+                            />
+                            <TextAndLabel label="Maximum damage" text={notateNumber(getMaximumDamage(theData, player))} textSize="small" />
                         </Grid>
                     </Box>
                     <Stat stat={player.crystalChance} />

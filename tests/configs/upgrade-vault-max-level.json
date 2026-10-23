@@ -1,0 +1,11 @@
+{
+  "description": "Extract every Upgrade Vault effective maximum level from the native catalog",
+  "target": "Upgrade Vault effective maximum levels",
+  "extractions": [
+    {
+      "label": "vault_max_levels",
+      "expression": "idleon.getAttr(\"CustomLists\").h.UpgradeVault.map((upgrade, index) => ({ index, maxLevel: idleon.callFunction(\"Summoning\", \"VaultUpgMaxLV\", index, 0) }))",
+      "description": "Complete native Upgrade Vault catalog with each effective maximum level, including current account increases"
+    }
+  ]
+}

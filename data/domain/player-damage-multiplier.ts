@@ -47,6 +47,7 @@ import type { Cooking } from './world-4/cooking';
 import type { Tome } from './world-4/tome';
 import type { Votes } from './world-2/votes';
 import type { JellyOperator } from './world-7/jellyOperator';
+import type { CoralKid } from './world-7/coralKid';
 
 
 const randoList2 = initRandoList2Repo();
@@ -66,6 +67,7 @@ export const getPlayerDamageTotalMultiplier = (data: Map<string, any>, player: P
     const arcade = data.get('arcade') as Arcade;
     const breeding = data.get('breeding') as Breeding;
     const companions = data.get('companions') as Companion[];
+    const coralKid = data.get('coralKid') as CoralKid;
     const divinity = data.get('divinity') as Divinity;
     const deathnote = data.get('deathnote') as Deathnote;
     const equinox = data.get('equinox') as Equinox;
@@ -218,6 +220,14 @@ export const getPlayerDamageTotalMultiplier = (data: Map<string, any>, player: P
         0.05,
     );
 
+    const weaponPower = player.gear.equipment[1]?.getProperty('Weapon_Power');
+    const weaponPowerValue = weaponPower ? weaponPower.value + weaponPower.stone : 0;
+    const wepPowDamage = minehead.getBonusFromIndex(4) * weaponPowerValue;
+    component *= (1 + minehead.getBonusFromIndex(0) / 100)
+        * (1 + wepPowDamage / 100)
+        * (1 + jellyOperator.getObstructionBonus(37) / 100)
+        * (1 + royalArmory.statues.find(statue => statue.index === 0)!.getBonus() / 100)
+        * Math.pow(1 + coralKid.getBonusFromIndex(11) / 100, Math.max(0, divinity.godRank - 25));
     const damageBonusPoints = account.weeklyBoss.getDamageBonusPoints();
     if (damageBonusPoints !== undefined) {
         component *= 1 + Math.min(150, damageBonusPoints) / 100;
@@ -227,13 +237,6 @@ export const getPlayerDamageTotalMultiplier = (data: Map<string, any>, player: P
         && storage.playerStorage[player.playerID].some(item => item.internalName === 'Quest47')) {
         component *= 0.5;
     }
-    const weaponPower = player.gear.equipment[1]?.getProperty('Weapon_Power');
-    const weaponPowerValue = weaponPower ? weaponPower.value + weaponPower.stone : 0;
-    const wepPowDamage = minehead.getBonusFromIndex(4) * weaponPowerValue;
-    component *= (1 + minehead.getBonusFromIndex(0) / 100)
-        * (1 + wepPowDamage / 100)
-        * (1 + jellyOperator.getObstructionBonus(37) / 100)
-        * (1 + royalArmory.statues.find(statue => statue.index === 0)!.getBonus() / 100);
 
     if (component > 100) {
         component = 100 + Math.max(Math.pow(component - 100, 0.86), 0);

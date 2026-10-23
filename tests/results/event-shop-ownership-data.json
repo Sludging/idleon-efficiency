@@ -1,0 +1,282 @@
+{
+  "extractions": {
+    "event_shop_ownership": {
+      "expression": "Array.from({ length: idleon.engine.getGameAttribute(\"CustomLists\").h.NinjaInfo[39].length / 2 }, (_, index) => ({ index, owned: idleon.callFunction(\"Summoning\", \"EventShopOwned\", index, 0) }))",
+      "result": [
+        {
+          "index": 0,
+          "owned": 0
+        },
+        {
+          "index": 1,
+          "owned": 0
+        },
+        {
+          "index": 2,
+          "owned": 0
+        },
+        {
+          "index": 3,
+          "owned": 1
+        },
+        {
+          "index": 4,
+          "owned": 1
+        },
+        {
+          "index": 5,
+          "owned": 1
+        },
+        {
+          "index": 6,
+          "owned": 0
+        },
+        {
+          "index": 7,
+          "owned": 0
+        },
+        {
+          "index": 8,
+          "owned": 0
+        },
+        {
+          "index": 9,
+          "owned": 1
+        },
+        {
+          "index": 10,
+          "owned": 0
+        },
+        {
+          "index": 11,
+          "owned": 0
+        },
+        {
+          "index": 12,
+          "owned": 1
+        },
+        {
+          "index": 13,
+          "owned": 1
+        },
+        {
+          "index": 14,
+          "owned": 1
+        },
+        {
+          "index": 15,
+          "owned": 0
+        },
+        {
+          "index": 16,
+          "owned": 0
+        },
+        {
+          "index": 17,
+          "owned": 0
+        },
+        {
+          "index": 18,
+          "owned": 1
+        },
+        {
+          "index": 19,
+          "owned": 0
+        },
+        {
+          "index": 20,
+          "owned": 0
+        },
+        {
+          "index": 21,
+          "owned": 0
+        },
+        {
+          "index": 22,
+          "owned": 1
+        },
+        {
+          "index": 23,
+          "owned": 0
+        },
+        {
+          "index": 24,
+          "owned": 1
+        },
+        {
+          "index": 25,
+          "owned": 0
+        },
+        {
+          "index": 26,
+          "owned": 0
+        },
+        {
+          "index": 27,
+          "owned": 0
+        },
+        {
+          "index": 28,
+          "owned": 0
+        },
+        {
+          "index": 29,
+          "owned": 0
+        },
+        {
+          "index": 30,
+          "owned": 0
+        },
+        {
+          "index": 31,
+          "owned": 0
+        },
+        {
+          "index": 32,
+          "owned": 0
+        },
+        {
+          "index": 33,
+          "owned": 0
+        },
+        {
+          "index": 34,
+          "owned": 0
+        },
+        {
+          "index": 35,
+          "owned": 0
+        },
+        {
+          "index": 36,
+          "owned": 0
+        },
+        {
+          "index": 37,
+          "owned": 0
+        },
+        {
+          "index": 38,
+          "owned": 0
+        },
+        {
+          "index": 39,
+          "owned": 0
+        },
+        {
+          "index": 40,
+          "owned": 0
+        },
+        {
+          "index": 41,
+          "owned": 0
+        },
+        {
+          "index": 42,
+          "owned": 0
+        },
+        {
+          "index": 43,
+          "owned": 0
+        },
+        {
+          "index": 44,
+          "owned": 0
+        },
+        {
+          "index": 45,
+          "owned": 1
+        },
+        {
+          "index": 46,
+          "owned": 0
+        },
+        {
+          "index": 47,
+          "owned": 0
+        },
+        {
+          "index": 48,
+          "owned": 0
+        },
+        {
+          "index": 49,
+          "owned": 0
+        },
+        {
+          "index": 50,
+          "owned": 0
+        },
+        {
+          "index": 51,
+          "owned": 0
+        },
+        {
+          "index": 52,
+          "owned": 0
+        },
+        {
+          "index": 53,
+          "owned": 0
+        },
+        {
+          "index": 54,
+          "owned": 0
+        },
+        {
+          "index": 55,
+          "owned": 0
+        },
+        {
+          "index": 56,
+          "owned": 0
+        },
+        {
+          "index": 57,
+          "owned": 0
+        },
+        {
+          "index": 58,
+          "owned": 0
+        },
+        {
+          "index": 59,
+          "owned": 0
+        },
+        {
+          "index": 60,
+          "owned": 0
+        },
+        {
+          "index": 61,
+          "owned": 0
+        },
+        {
+          "index": 62,
+          "owned": 0
+        },
+        {
+          "index": 63,
+          "owned": 0
+        },
+        {
+          "index": 64,
+          "owned": 0
+        },
+        {
+          "index": 65,
+          "owned": 0
+        },
+        {
+          "index": 66,
+          "owned": 0
+        },
+        {
+          "index": 67,
+          "owned": 0
+        }
+      ]
+    }
+  },
+  "errors": {}
+}

@@ -1,5 +1,5 @@
 {
-  "description": "Compare persistent character EXP multiplier and maximum damage directly with the original Button task helper results",
+  "description": "Compare active-character Class EXP and normal-world maximum damage with public native Button helpers; retain existing damage parameter entries.",
   "target": "Player combat stats",
   "extractions": [
     {
@@ -11,26 +11,6 @@
       "label": "player_maximum_damage",
       "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0)",
       "description": "Normal-world persistent maximum damage from original DamageDealed(\"Max\") helper for the retained active character"
-    },
-    {
-      "label": "player_maximum_damage_base_component",
-      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DummyNumbersStatManager\").h.DamageDealtLIST[0]; })()",
-      "description": "First normal-world maximum damage component B after the native DamageDealed(\"Max\") call"
-    },
-    {
-      "label": "player_damage_attribute_contribution",
-      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DummyNumbersStatManager\").h.DamageDealtSTATtype; })()",
-      "description": "Native scaled primary damage attribute contribution used by DamageDealed(\"Max\") B and C"
-    },
-    {
-      "label": "player_maximum_damage_percent_component",
-      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DummyNumbersStatManager\").h.DamageDealtLIST[1]; })()",
-      "description": "Second normal-world maximum damage component C after the native DamageDealed(\"Max\") call"
-    },
-    {
-      "label": "player_maximum_damage_total_multiplier",
-      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DummyNumbersStatManager\").h.DamageDealtLIST[2]; })()",
-      "description": "Third normal-world maximum damage component D after the native DamageDealed(\"Max\") call"
     },
     {
       "label": "player_maximum_damage_sigil_lab_bonus",

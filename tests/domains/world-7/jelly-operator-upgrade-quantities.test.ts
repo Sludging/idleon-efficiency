@@ -24,7 +24,13 @@ describe('Jelly Operator upgrade quantities', () => {
   });
 
   it('matches Jelly Operator upgrade quantities with the game', () => {
-    const expected = extractionResults.extractions['jelly_upgrade_quantities'].result as UpgradeQuantity[];
+    const expected = extractionResults.extractions['jelly_upgrade_quantities']?.result as UpgradeQuantity[] | undefined;
+    if (!expected) throw new Error('Jelly Operator expected upgrade quantity records not found');
+
+    const nativeUpgradeIds = expected.map(({ index }) => index).sort((left, right) => left - right);
+    const domainUpgradeIds = jellyOperator.upgrades.map(({ index }) => index).sort((left, right) => left - right);
+    expect(nativeUpgradeIds).toHaveLength(40);
+    expect(domainUpgradeIds).toEqual(nativeUpgradeIds);
 
     for (const { index, quantity } of expected) {
       const upgrade = jellyOperator.upgrades.find(candidate => candidate.index === index);

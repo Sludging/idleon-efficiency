@@ -18,6 +18,7 @@ import { UpgradeVault } from "../upgradeVault";
 import { Hole } from "../world-5/hole/hole";
 import { SushiStation } from "../world-7/sushi";
 import { JellyOperator } from "../world-7/jellyOperator";
+import { EventShop } from "../eventShop";
 
 const SmokedMeatValues = [ 2, 3, 4, 6, 10 ];
 
@@ -118,6 +119,7 @@ export class Bubba extends Domain {
     mineheadBonus5: number = 0;
     companionBonus51: number = 0;
     menagerieCostReduction: number = 1;
+    meatmaxxingOwned: number = 0;
     petArenaCrucBonus10 = 0;
     sushiBonus39 = 0;
     jellyBonus58 = 0;
@@ -143,6 +145,7 @@ export class Bubba extends Domain {
 
     parse(data: Map<string, any>): void {
         const bubba = data.get(this.getDataKey()) as Bubba;
+        bubba.meatmaxxingOwned = 0;
         const bubbaData = data.get("Bubba") as number[][];
         const charCount = data.get("charCount") as number;
         const optionList = data.get("OptLacc") as number[];
@@ -200,10 +203,11 @@ export class Bubba extends Domain {
 
         return (this.getUpgradeBonus(0) + (this.getUpgradeBonus(7) + this.getUpgradeBonus(23))) *
             (1 + (this.getUpgradeBonus(2) + (this.getUpgradeBonus(11) + (this.getUpgradeBonus(19) + this.getUpgradeBonus(24) * lavaLog(this.someValue)))) / 100) *
-            this.getHappinessBonus(happiness) * this.getDicesMulti() * this.getSmokedMeatMulti() * (1 + this.getCharismaBonus(0) / 100) *
-            (1 + this.getMegafleshQuantity(0) * this.getTotalUpgradeLevel() / 100) * (1 + this.getGiftPassiveBonus(0) / 100)
-            * this.getSpareCoinsMulti() * (1 + 2 * this.petArenaCrucBonus10) * (1 + this.sushiBonus39 / 100)
-            * (1 + this.jellyBonus58 / 100) * (1 + this.vaultUpgrade65 / 100) * (1 + this.fountainWater2Upgrade18 / 100);
+            this.getHappinessBonus(happiness) * (1 + 2 * this.meatmaxxingOwned) *
+            this.getDicesMulti() * this.getSmokedMeatMulti() * (1 + this.getCharismaBonus(0) / 100) *
+            (1 + 2 * this.petArenaCrucBonus10) * (1 + this.sushiBonus39 / 100) * (1 + this.jellyBonus58 / 100) *
+            (1 + this.getMegafleshQuantity(0) * this.getTotalUpgradeLevel() / 100) * (1 + this.getGiftPassiveBonus(0) / 100) *
+            this.getSpareCoinsMulti() * (1 + this.vaultUpgrade65 / 100) * (1 + this.fountainWater2Upgrade18 / 100);
     }
     getTotalUpgradeLevel(): number {
         return this.upgrades.reduce((sum, upgrade) => sum += upgrade.getRealLevel(), 0);
@@ -225,7 +229,7 @@ export class Bubba extends Domain {
         }
 
         const menagerieCostReduction = index == 0 ? this.menagerieCostReduction : 1;
-        return 1 / (1 + this.mineheadBonus5 / 100) * 1 / (1 + this.getUpgradeBonus(4) / 100) * (1 / (1 + this.getUpgradeBonus(18) / 100)) * menagerieCostReduction * (1 / (1 + this.getUpgradeBonus(26) / 100)) * (1 / (1 + this.getCharismaBonus(1) / 100)) * 
+        return 1 / (1 + this.mineheadBonus5 / 100) * 1 / (1 + this.getUpgradeBonus(4) / 100) * (1 / (1 + this.getUpgradeBonus(18) / 100)) * (1 / (1 + this.meatmaxxingOwned)) * menagerieCostReduction * (1 / (1 + this.getUpgradeBonus(26) / 100)) * (1 / (1 + this.getCharismaBonus(1) / 100)) * 
             (Math.pow(upgrade.index + 1, 2) * upgrade.level1 + Math.pow(2.4 + upgrade.index / 3.65, upgrade.index) * Math.pow(upgrade.data.costExponent, upgrade.level1)) * upgrade.data.x0;
     }
 
@@ -342,11 +346,13 @@ export const updateBubba = (data: Map<string, any>) => {
     const bubba = data.get("bubba") as Bubba;
     const companions = data.get("companions") as Companion[];
     const menagerie = data.get("menagerie") as Menagerie;
+    const eventShop = data.get("eventShop") as EventShop;
 
     // The clicker multiplier uses companion 51's evolved bonus while that level is active.
     bubba.companionBonus51 = getCompanionActiveBonus(companions, 51);
     bubba.mineheadBonus5 = (data.get("minehead") as Minehead).getBonusFromIndex(5);
     bubba.menagerieCostReduction = 1 / (1 + menagerie.getBonusValue(20) / 100);
+    bubba.meatmaxxingOwned = Number(eventShop.isBonusOwned(58));
 
     return bubba;
 }

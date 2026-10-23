@@ -12,7 +12,7 @@ const extractionResultsName = 'jelly-operator-presentation-data.json';
 
 // These comparisons use the unchanged real save. It has an obstruction beyond
 // the twelve introductory targets, unlocked Cell Biology, four unlocked cell
-// types, and five purchased plots. No inputs are changed to invent other states.
+// types, and five purchased plots. COLD with Feverizer 1 does not cover positive SEPSIS.
 const coreComparisons: Array<{
   description: string;
   extractionKey: string;
@@ -72,6 +72,11 @@ const coreComparisons: Array<{
     description: 'Bloodcells gained per damage with all direct calculated factors',
     extractionKey: 'jelly_bloodcells_per_damage',
     domainValue: jellyOperator => jellyOperator.bloodcellGainPerDamage,
+  },
+  {
+    description: 'SEPSIS Bloodcell percentage while the saved COLD selection leaves SEPSIS inactive',
+    extractionKey: 'jelly_fever_bloodcell_bonus',
+    domainValue: jellyOperator => jellyOperator.getFeverBonus(2),
   },
 ];
 
