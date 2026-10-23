@@ -1,6 +1,9 @@
 import { loadExtractionResults, validateExtractionHealth, ExtractionResults } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave, loadTestSave } from '../../utils/cloudsave-loader';
 import { Menagerie } from '../../../data/domain/menagerie';
+import { Minehead } from '../../../data/domain/world-7/minehead';
+import { SushiStation } from '../../../data/domain/world-7/sushi';
+import { JellyOperator } from '../../../data/domain/world-7/jellyOperator';
 
 const extractionResultsName = 'menagerie-account-state-data.json';
 
@@ -12,6 +15,7 @@ let unlockStates: number[][];
 let bonusStates: number[][];
 let usableResources: number[];
 let accountData: Map<string, any>;
+let doublerBalances: Record<'minehead' | 'sushi' | 'jellyOperator', [number, number]>;
 beforeAll(() => {
   extractionResults = loadExtractionResults(extractionResultsName);
   validateExtractionHealth(extractionResults);
@@ -20,6 +24,7 @@ beforeAll(() => {
   unlockStates = extractionResults.extractions.unlock_states.result as number[][];
   bonusStates = extractionResults.extractions.bonus_states.result as number[][];
   usableResources = extractionResults.extractions.usable_resources.result as number[];
+  doublerBalances = extractionResults.extractions.doubler_balances.result as typeof doublerBalances;
   accountData = loadGameDataFromSave('latest');
   menagerie = accountData.get('menagerie') as Menagerie;
 });
@@ -104,6 +109,55 @@ describe('Menagerie account progression', () => {
     expect(resources.mineheadDoublers).toMatchLiveGameWithDetails(expected[2], { tolerance: 0, context: 'Remaining Minehead doublers' });
     expect(resources.sushiDoublers).toMatchLiveGameWithDetails(expected[3], { tolerance: 0, context: 'Remaining Sushi doublers' });
     expect(resources.jellyOperatorDoublers).toMatchLiveGameWithDetails(expected[4], { tolerance: 0, context: 'Remaining Jelly Operator doublers' });
+  });
+
+  const doublerSystems = [
+    {
+      name: 'Minehead',
+      key: 'minehead',
+      resourceFields: ['mineheadDoublersOwned', 'mineheadDoublers'],
+      receiverBalances: () => {
+        const minehead = accountData.get('minehead') as Minehead;
+        return [minehead.mineheadDoublersOwned, minehead.mineheadDoublersRemaining];
+      },
+    },
+    {
+      name: 'Sushi Station',
+      key: 'sushi',
+      resourceFields: ['sushiDoublersOwned', 'sushiDoublers'],
+      receiverBalances: () => {
+        const sushi = accountData.get('sushi') as SushiStation;
+        return [sushi.sushiDoublersOwned, sushi.sushiDoublersRemaining];
+      },
+    },
+    {
+      name: 'Jelly Operator',
+      key: 'jellyOperator',
+      resourceFields: ['jellyOperatorDoublersOwned', 'jellyOperatorDoublers'],
+      receiverBalances: () => {
+        const jellyOperator = accountData.get('jellyOperator') as JellyOperator;
+        return [jellyOperator.jellyOperatorDoublersOwned, jellyOperator.jellyOperatorDoublersRemaining];
+      },
+    },
+  ] as const;
+
+  doublerSystems.forEach(({ name, key, resourceFields, receiverBalances }) => {
+    (['earned', 'remaining'] as const).forEach((balance, index) => {
+      it(`reports native ${name} ${balance} doublers in Menagerie`, () => {
+        const resources = menagerie.getResourceBalances();
+        expect(resources[resourceFields[index]]).toMatchLiveGameWithDetails(doublerBalances[key][index], {
+          tolerance: 0,
+          context: `${name} ${balance} doublers in Menagerie`,
+        });
+      });
+
+      it(`reports native ${name} ${balance} doublers in the receiver`, () => {
+        expect(receiverBalances()[index]).toMatchLiveGameWithDetails(doublerBalances[key][index], {
+          tolerance: 0,
+          context: `${name} ${balance} doublers in the receiver`,
+        });
+      });
+    });
   });
 
 });

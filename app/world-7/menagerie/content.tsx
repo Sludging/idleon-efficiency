@@ -45,7 +45,7 @@ const bonusEffectText = (bonus: MenagerieBonus, effect: number): string => {
 const sourceDescription = (text: string): string =>
     text.replace(/,\s*1 in \$ chance/, '').replace(/[{}$]/g, '').replace(/膛/g, '').trim();
 const jellyfishHelp: Record<string, React.ReactNode> = {
-    Purple: <Box gap="small">
+    Pink: <Box gap="small">
         <Text>Spend Money to buy Shells. Lumi upgrades increase the hourly Lumi bonus.</Text>
     </Box>,
     Blue: <Box gap="small">

@@ -24,7 +24,6 @@ import { Achievement } from "../achievements";
 import { Card } from "../cards";
 import { Companion, getCompanionActiveBonus } from "../companions";
 import { Compass } from "../compass";
-import { Menagerie } from "../menagerie";
 import { Player } from "../player";
 import { PlayerStatues } from "../world-1/statues";
 import { Votes } from "../world-2/votes";
@@ -36,6 +35,9 @@ import { LegendTalents } from "../world-7/legendTalents";
 import { SushiStation } from "../world-7/sushi";
 import { StarSigns } from "../starsigns";
 import { Talent } from "../talents";
+import type { Gaming } from "../world-5/gaming";
+import type { UpgradeVault } from "../upgradeVault";
+import type { Equinox } from "../world-3/equinox";
 
 export enum SneakingActivity {
     Sneaking = "Sneaking",
@@ -456,9 +458,79 @@ export class JadeUpgrade {
     }
 }
 
+export interface SneakingOmnijadeAllocation {
+    upgradeIndex: number;
+    allocated: boolean;
+    consumedCount: number;
+}
+
+export class SneakingOmnijade {
+    allocations: SneakingOmnijadeAllocation[] = [];
+    private available = false;
+    private knowledge = 0;
+    private pipsqueak = 0;
+
+    parse(savedAllocations: (number | string)[] | undefined, available: boolean): void {
+        this.available = available;
+        this.knowledge = 0;
+        this.pipsqueak = 0;
+        this.allocations = [];
+        if (!available) {
+            return;
+        }
+        this.allocations = Array.from({ length: 17 }, (_, upgradeIndex) => {
+            const savedFlag = Number(savedAllocations?.[upgradeIndex] ?? 0);
+            return { upgradeIndex, allocated: savedFlag >= 1, consumedCount: Math.min(1, savedFlag) };
+        });
+    }
+
+    update(knowledgeOmnijade: number, companionBonus: number): void {
+        this.knowledge = this.available ? knowledgeOmnijade : 0;
+        this.pipsqueak = this.available ? companionBonus : 0;
+    }
+
+    getSources(): { knowledge: number; pipsqueak: number } {
+        return { knowledge: this.knowledge, pipsqueak: this.pipsqueak };
+    }
+
+    getOwnedCount(): number {
+        return this.available ? Math.round(this.knowledge + this.pipsqueak) : 0;
+    }
+
+    getAllocatedCount(): number {
+        return this.allocations.reduce((total, allocation) => total + allocation.consumedCount, 0);
+    }
+
+    getAvailableCount(): number {
+        let remaining = this.getOwnedCount();
+        for (const allocation of this.allocations) {
+            remaining -= allocation.consumedCount;
+        }
+        // Saved allocations remain intact even when they exceed the current sources.
+        return Math.round(remaining);
+    }
+
+    isAllocated(upgradeIndex: number): boolean {
+        return this.allocations.find(allocation => allocation.upgradeIndex == upgradeIndex)?.allocated ?? false;
+    }
+
+    getDailyLevelsPerAllocation(): number {
+        return this.available ? Math.max(1, Math.min(5, Math.round(1 + Math.ceil(this.pipsqueak / 2)))) : 0;
+    }
+
+    getDailyLevels(upgradeIndex: number): number {
+        return this.isAllocated(upgradeIndex) ? this.getDailyLevelsPerAllocation() : 0;
+    }
+}
+
 export class SneakingUpgrade {
     unlocked: boolean = false;
     level: number = 0;
+    bonusLevels: number = 0;
+    private paidMasteryLevel = 0;
+    private selectedMastery = 0;
+    private charmCollectorBonus = 0;
+    private goldStarBonus = 0;
     bonusPerLvl: number = 0;
     shouldBeDisplayed: boolean = true;
     bubbleDiscount: number = 0;
@@ -472,6 +544,36 @@ export class SneakingUpgrade {
         this.shouldBeDisplayed = (data.name != "Name");
     }
 
+    parse(paidLevel: number | string = 0, bonusLevels: number | string = 0): void {
+        this.level = Number(paidLevel);
+        this.bonusLevels = this.index < 17 ? Number(bonusLevels) : 0;
+        this.paidMasteryLevel = 0;
+        this.selectedMastery = 0;
+        this.charmCollectorBonus = 0;
+        this.goldStarBonus = 0;
+        this.unlocked = false;
+        this.bubbleDiscount = 0;
+        this.itemDiscount = 0;
+    }
+
+    getEffectiveLevel(paidLevel: number = this.level): number {
+        return paidLevel + this.bonusLevels;
+    }
+
+    updateMastery(paidMasteryLevel: number, selectedMastery: number): void {
+        this.paidMasteryLevel = paidMasteryLevel;
+        this.selectedMastery = selectedMastery;
+    }
+
+    updateGoldStarBonus(goldStarBonus: number): void {
+        this.goldStarBonus = goldStarBonus;
+    }
+
+    updateCharmCollector(gemstoneBonus: number, paletteBonus: number, vaultBonus: number, cloudBonus: number): void {
+        // Preserve the native grouping before the final Knowledge effect rounds.
+        this.charmCollectorBonus = Math.ceil(gemstoneBonus) + Math.floor(paletteBonus + (vaultBonus + 100 * cloudBonus));
+    }
+
     nextLevelCost = (): number => {
         if (this.index == 8) {
             return (1 / (1 + this.itemDiscount / 100)) * (1 / (1 + this.bubbleDiscount / 100)) * this.data.costBase * Math.pow(this.data.costExponent, this.level);
@@ -481,7 +583,15 @@ export class SneakingUpgrade {
     }
 
     getBonus = (level: number = this.level): number => {
-        return level * this.bonusPerLvl;
+        const baseBonus = this.getEffectiveLevel(level) * this.bonusPerLvl;
+        if (this.index == 11) {
+            return Math.round(baseBonus + (this.paidMasteryLevel * this.selectedMastery + (this.goldStarBonus + this.charmCollectorBonus)));
+        }
+        if (this.index == 6 || this.index == 7 || this.index == 10 || this.index == 12) {
+            // These effects use this upgrade's free levels, not free mastery levels.
+            return baseBonus + (this.paidMasteryLevel + this.bonusLevels) * this.selectedMastery;
+        }
+        return baseBonus;
     }
 
     getImageData = (): ImageData => {
@@ -601,6 +711,7 @@ export class Sneaking extends Domain {
     masteryRewards: SneakingMasteryReward[] = [];
     gemstones: SneakingGemstone[] = [];
     dailyCharmRolls: SneakingDailyCharmRolls = new SneakingDailyCharmRolls();
+    omnijade: SneakingOmnijade = new SneakingOmnijade();
     jade: number = 0;
     completedMasteries: number = 0;
     selectedMastery: number = 0;
@@ -638,6 +749,7 @@ export class Sneaking extends Domain {
             { key: "Ninja", perPlayer: false, default: [] },
             { key: "OptLacc", perPlayer: false, default: [] },
             { key: "Spelunk", perPlayer: false, default: [] },
+            { key: "Menagerie", perPlayer: false, default: [] },
             { key: "Lv0_", perPlayer: true, default: [] },
         ]
     }
@@ -661,6 +773,8 @@ export class Sneaking extends Domain {
         const serverVars = data.get("servervars");
         const charCount = data.get("charCount") as number;
         const optionList = data.get("OptLacc") as (number | string)[];
+        const menagerie = data.get("Menagerie") as (number | string)[][];
+        sneaking.omnijade.parse(menagerie?.[6], Boolean(menagerie?.length));
         sneaking.completedMasteries = Number(optionList[232] ?? 0);
         sneaking.selectedMastery = Number(optionList[231] ?? 0);
         sneaking.players = [];
@@ -669,10 +783,7 @@ export class Sneaking extends Domain {
         sneaking.minibossKills = [];
         sneaking.beanstalking = new Beanstalking();
         sneaking.sneakingUpgrades.forEach(upgrade => {
-            upgrade.level = 0;
-            upgrade.unlocked = false;
-            upgrade.bubbleDiscount = 0;
-            upgrade.itemDiscount = 0;
+            upgrade.parse();
         });
         sneaking.jadeUpgrades.forEach(upgrade => {
             upgrade.purchased = false;
@@ -727,11 +838,9 @@ export class Sneaking extends Domain {
             sneaking.inventory.push(item);
         });
 
-        const sneakingUpgradesLevels: number[] = ninjaData[103];
+        const sneakingUpgradesLevels = ninjaData[103] as (number | string)[];
         sneaking.sneakingUpgrades.forEach(upgrade => {
-            if (upgrade.index < sneakingUpgradesLevels.length) {
-                upgrade.level = sneakingUpgradesLevels[upgrade.index];
-            }
+            upgrade.parse(sneakingUpgradesLevels[upgrade.index], menagerie?.[7]?.[upgrade.index]);
         });
         sneaking.updateUnlockedUpgrades();
 
@@ -795,6 +904,8 @@ export class Sneaking extends Domain {
     }
 
     updateProgression(): void {
+        const paidMasteryLevel = this.sneakingUpgrades.find(upgrade => upgrade.index == 3)!.level;
+        this.sneakingUpgrades.forEach(upgrade => upgrade.updateMastery(paidMasteryLevel, this.selectedMastery));
         this.masteryRewards.forEach(reward => reward.update(this.completedMasteries));
         this.dailyCharmRolls.update(this.sneakingUpgrades.find(upgrade => upgrade.index == 17)!.getBonus());
 
@@ -830,28 +941,31 @@ export class Sneaking extends Domain {
         }
     }
 
-    preparePermanentCharmBonuses(legendCharmBonus: number): { goldBeadsBonus: number; goldScrollBonus: number } {
+    preparePermanentCharmBonuses(legendCharmBonus: number): { goldBeadsBonus: number; goldScrollBonus: number; goldStarBonus: number } {
         let goldBeadsBonus = 0;
         let goldScrollBonus = 0;
+        let goldStarBonus = 0;
         const stariteMultiplier = 1 + this.gemstones.find(gemstone => gemstone.gemstoneIndex == 3)!.getBonus() / 100;
         for (const item of this.inventory) {
             if (!(item instanceof SneakingTrinket)) {
                 continue;
             }
             const rawBonus = item.getBonus();
-            const currentBonus = item.data.itemId == 12 ? goldScrollBonus : goldBeadsBonus;
-            if ((item.data.itemId != 12 && item.data.itemId != 20) || rawBonus <= currentBonus) {
+            const currentBonus = item.data.itemId == 12 ? goldScrollBonus : item.data.itemId == 21 ? goldStarBonus : goldBeadsBonus;
+            if ((item.data.itemId != 12 && item.data.itemId != 20 && item.data.itemId != 21) || rawBonus <= currentBonus) {
                 continue;
             }
             // Native compares raw strength with the previously stored boosted bonus.
             const bonus = rawBonus * stariteMultiplier * (1 + legendCharmBonus / 100) * item.getSymbolMultiplier();
             if (item.data.itemId == 12) {
                 goldScrollBonus = bonus;
+            } else if (item.data.itemId == 21) {
+                goldStarBonus = bonus;
             } else {
                 goldBeadsBonus = bonus;
             }
         }
-        return { goldBeadsBonus, goldScrollBonus };
+        return { goldBeadsBonus, goldScrollBonus, goldStarBonus };
     }
 
     updateNinjas(inputs: SneakingStealthInputs, goldScrollBonus: number): void {
@@ -951,7 +1065,6 @@ export const updateSneakingNinjas = (data: Map<string, unknown>): void => {
     const hole = data.get("hole") as Hole;
     const jellyOperator = data.get("jellyOperator") as JellyOperator;
     const legendTalents = data.get("legendTalents") as LegendTalents;
-    const menagerie = data.get("menagerie") as Menagerie;
     const starSigns = data.get("starsigns") as StarSigns;
     const statues = data.get("statues") as PlayerStatues[];
     const sushi = data.get("sushi") as SushiStation;
@@ -974,7 +1087,8 @@ export const updateSneakingNinjas = (data: Map<string, unknown>): void => {
 
     const landRankBonus = farming.landrankDatabase.getUpgradeBonusByIndex(4);
     const wayOfStealth = sneaking.sneakingUpgrades.find(upgrade => upgrade.index == 13)!;
-    const { goldBeadsBonus, goldScrollBonus } = sneaking.preparePermanentCharmBonuses(legendTalents.getBonusFromIndex(6));
+    const { goldBeadsBonus, goldScrollBonus, goldStarBonus } = sneaking.preparePermanentCharmBonuses(legendTalents.getBonusFromIndex(6));
+    sneaking.sneakingUpgrades.find(upgrade => upgrade.index == 11)!.updateGoldStarBonus(goldStarBonus);
     // Shared sign and statue inputs project actual account snapshots, not an inferred active character.
     const inputs: SneakingStealthInputs = {
         farmingMultiplier: 1 + landRankBonus * farming.farmingLevel / 100,
@@ -989,7 +1103,7 @@ export const updateSneakingNinjas = (data: Map<string, unknown>): void => {
         ballotBonus: votes.getCurrentBonus(25),
         lampBonus: hole.lamp.getBonus(false, 2, 1),
         wellMultiplier: Math.max(1, hole.getSchematicBonus(54)),
-        wayOfStealthBonus: wayOfStealth.getBonus(wayOfStealth.level + menagerie.getSneakingUpgradeBonusLevels(13)),
+        wayOfStealthBonus: wayOfStealth.getBonus(),
         funeralFlowerBonus: sneaking.sneakingUpgrades.find(upgrade => upgrade.index == 21)!.getBonus(),
         fractalStealthUnlocked: account.isFractalStealthUnlocked(),
         emperorBonus: emperor.getEffectiveBonus(0),
@@ -999,4 +1113,24 @@ export const updateSneakingNinjas = (data: Map<string, unknown>): void => {
         companionBonus: getCompanionActiveBonus(companions, 163),
     };
     sneaking.updateNinjas(inputs, goldScrollBonus);
+}
+
+export const updateSneakingOmnijade = (data: Map<string, unknown>): void => {
+    const sneaking = data.get("sneaking") as Sneaking;
+    const companions = data.get("companions") as Companion[];
+    const gaming = data.get("gaming") as Gaming;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+    const equinox = data.get("equinox") as Equinox;
+
+    sneaking.omnijade.update(
+        sneaking.sneakingUpgrades.find(upgrade => upgrade.index == 31)!.getBonus(),
+        getCompanionActiveBonus(companions, 173),
+    );
+    // Gold Star was prepared with the ninja inputs; the remaining providers are now settled.
+    sneaking.sneakingUpgrades.find(upgrade => upgrade.index == 11)!.updateCharmCollector(
+        sneaking.gemstones.find(gemstone => gemstone.gemstoneIndex == 7)!.getBonus(),
+        gaming.getPaletteBonus(30),
+        upgradeVault.getBonusForId(88),
+        equinox.getChallengeBonus(53),
+    );
 }

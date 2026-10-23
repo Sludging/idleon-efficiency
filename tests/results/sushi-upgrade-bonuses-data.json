@@ -1,7 +1,7 @@
 {
   "extractions": {
     "sushi_upgrade_bonuses": {
-      "expression": "(()=>{const selected=idleon.getAttr(\"Spelunk\")[52]||[];const indexes=Array.from(new Set([0,1,20,21,22,...selected]));return indexes.map(index=>({index,selected:selected.includes(index),quantity:idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",index,0)}))})()",
+      "expression": "(()=>{const selected=idleon.getAttr(\"Spelunk\")[52];return idleon.engine.getGameAttribute(\"CustomLists\").h.SushiUPG.map((_,index)=>({index,selected:selected.includes(index),quantity:idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",index,0)}))})()",
       "result": [
         {
           "index": 0,
@@ -12,6 +12,96 @@
           "index": 1,
           "selected": false,
           "quantity": 28700
+        },
+        {
+          "index": 2,
+          "selected": false,
+          "quantity": 67800
+        },
+        {
+          "index": 3,
+          "selected": false,
+          "quantity": 310500
+        },
+        {
+          "index": 4,
+          "selected": false,
+          "quantity": 870000
+        },
+        {
+          "index": 5,
+          "selected": false,
+          "quantity": 0
+        },
+        {
+          "index": 6,
+          "selected": false,
+          "quantity": 35
+        },
+        {
+          "index": 7,
+          "selected": false,
+          "quantity": 19
+        },
+        {
+          "index": 8,
+          "selected": false,
+          "quantity": 7545
+        },
+        {
+          "index": 9,
+          "selected": false,
+          "quantity": 32700
+        },
+        {
+          "index": 10,
+          "selected": false,
+          "quantity": 138750
+        },
+        {
+          "index": 11,
+          "selected": false,
+          "quantity": 385000
+        },
+        {
+          "index": 12,
+          "selected": false,
+          "quantity": 825000
+        },
+        {
+          "index": 13,
+          "selected": false,
+          "quantity": 1
+        },
+        {
+          "index": 14,
+          "selected": false,
+          "quantity": 15
+        },
+        {
+          "index": 15,
+          "selected": false,
+          "quantity": 3
+        },
+        {
+          "index": 16,
+          "selected": false,
+          "quantity": 8
+        },
+        {
+          "index": 17,
+          "selected": false,
+          "quantity": 1
+        },
+        {
+          "index": 18,
+          "selected": false,
+          "quantity": 1
+        },
+        {
+          "index": 19,
+          "selected": false,
+          "quantity": 1
         },
         {
           "index": 20,
@@ -27,6 +117,121 @@
           "index": 22,
           "selected": false,
           "quantity": 2
+        },
+        {
+          "index": 23,
+          "selected": false,
+          "quantity": 11
+        },
+        {
+          "index": 24,
+          "selected": false,
+          "quantity": 1
+        },
+        {
+          "index": 25,
+          "selected": false,
+          "quantity": 0
+        },
+        {
+          "index": 26,
+          "selected": false,
+          "quantity": 0
+        },
+        {
+          "index": 27,
+          "selected": false,
+          "quantity": 1
+        },
+        {
+          "index": 28,
+          "selected": false,
+          "quantity": 1
+        },
+        {
+          "index": 29,
+          "selected": false,
+          "quantity": 1
+        },
+        {
+          "index": 30,
+          "selected": false,
+          "quantity": 588
+        },
+        {
+          "index": 31,
+          "selected": false,
+          "quantity": 807
+        },
+        {
+          "index": 32,
+          "selected": false,
+          "quantity": 620
+        },
+        {
+          "index": 33,
+          "selected": false,
+          "quantity": 10
+        },
+        {
+          "index": 34,
+          "selected": false,
+          "quantity": 0
+        },
+        {
+          "index": 35,
+          "selected": false,
+          "quantity": 55
+        },
+        {
+          "index": 36,
+          "selected": false,
+          "quantity": 91
+        },
+        {
+          "index": 37,
+          "selected": false,
+          "quantity": 36
+        },
+        {
+          "index": 38,
+          "selected": false,
+          "quantity": 0
+        },
+        {
+          "index": 39,
+          "selected": false,
+          "quantity": 1
+        },
+        {
+          "index": 40,
+          "selected": false,
+          "quantity": 0
+        },
+        {
+          "index": 41,
+          "selected": false,
+          "quantity": 663
+        },
+        {
+          "index": 42,
+          "selected": false,
+          "quantity": 1
+        },
+        {
+          "index": 43,
+          "selected": false,
+          "quantity": 434
+        },
+        {
+          "index": 44,
+          "selected": false,
+          "quantity": 1
+        },
+        {
+          "index": 45,
+          "selected": false,
+          "quantity": 0
         }
       ]
     }

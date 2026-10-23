@@ -79,6 +79,18 @@ function Sneaking() {
                             ? `Only the first ${sneaking.dailyCharmRolls.symbolRollLimit} normal charm drops each day can become Symbols.`
                             : `Unlock Strange Symbols to let normal charm drops become Symbols. Only the first ${sneaking.dailyCharmRolls.symbolRollLimit} normal charm drops each day get this chance.`}
                     />
+                    <TextAndLabel
+                        label="Omnijade"
+                        text={`${commaNotation(sneaking.omnijade.getAvailableCount())} / ${commaNotation(sneaking.omnijade.getOwnedCount())}`}
+                        textSize="large"
+                        labelSize="xsmall"
+                        tooltip={
+                            <Box>
+                                <Text size="xsmall">Knowledge: {commaNotation(sneaking.omnijade.getSources().knowledge)}</Text>
+                                <Text size="xsmall">Pipsqueak: {commaNotation(sneaking.omnijade.getSources().pipsqueak)}</Text>
+                            </Box>   
+                        }
+                    />
                 </Box>
             </Box>
             <Box gap="small">
@@ -96,7 +108,7 @@ function Sneaking() {
                     />
                 )}
                 {activeTab == "The Jade Emporium" && <JadeUpgrades currentJade={sneaking.jade} jadeUpgrades={jadeUpgrades} />}
-                {activeTab == "Sneaking Upgrades" && <SneakingUpgrades currentJade={sneaking.jade} upgrades={sneaking.sneakingUpgrades} />}
+                {activeTab == "Sneaking Upgrades" && <SneakingUpgrades currentJade={sneaking.jade} upgrades={sneaking.sneakingUpgrades} omnijade={sneaking.omnijade} />}
                 {activeTab == "Inventory" && <SneakingInventory inventory={sneaking.inventory} />}
                 {activeTab == "Pristine Charms" && <PristineCharmSection charms={sneaking.pristineCharms} />}
                 {activeTab == "Mastery" && <MasteryDisplay rewards={sneaking.masteryRewards} />}

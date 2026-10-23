@@ -55,7 +55,7 @@ import { Guild } from './guild';
 import { Rift } from "./world-4/rift";
 import { Equinox, updateEquinoxBar } from './world-3/equinox';
 import { POExtra } from './world-2/postoffice';
-import { Sneaking, updateSneaking, updateSneakingGemstones, updateSneakingNinjas, updateSneakingProgression } from './world-6/sneaking';
+import { Sneaking, updateSneaking, updateSneakingGemstones, updateSneakingNinjas, updateSneakingOmnijade, updateSneakingProgression } from './world-6/sneaking';
 import { Summoning, updateSummoningUpgrades, updateSummoningWinnerBonusBoost, updateSummoningWinnerImpact } from './world-6/summoning';
 import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLandRankBonuses, updateFarmingLevel, updateFarmingStickerBonuses } from './world-6/farming';
 import { SushiStation, updateSushiStation } from './world-7/sushi';
@@ -466,6 +466,8 @@ const postPostProcessingMap: Record<string, Function> = {
     "starSignMeritocracyBonus": (_doc: Cloudsave, accountData: Map<string, any>) => updateStarSignMeritocracyBonus(accountData),
     // Shared ninja inputs need settled account Star Signs and final talent, statue, ballot, and Land Rank bonuses.
     "sneakingNinjas": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateSneakingNinjas(accountData),
+    // Omnijade summaries and Charm Collector need the prepared permanent charms and settled account providers.
+    "sneakingOmnijade": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateSneakingOmnijade(accountData),
     "shinyCritterRewardMultiplier": (_doc: Cloudsave, accountData: Map<string, any>) => updateShinyCritterRewardMultiplier(accountData),
     // Saved-snapshot stamina and page locations need late Meritocracy and final character talent contexts.
     "spelunkingPresentation": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingPresentation(accountData),

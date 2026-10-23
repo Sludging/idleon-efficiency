@@ -567,6 +567,94 @@
         0,
         0
       ]
+    },
+    "doubler_balances": {
+      "expression": "({ minehead: [idleon.callFunction(\"MenagerieStuff\", \"MineheadDoublersOwned\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"MineheadDoublersLEFT\", 0, 0)], sushi: [idleon.callFunction(\"MenagerieStuff\", \"SushiDoublersOwned\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"SushiDoublersLEFT\", 0, 0)], jellyOperator: [idleon.callFunction(\"MenagerieStuff\", \"JellyOpDoublersOwned\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"JellyOpDoublersLEFT\", 0, 0)] })",
+      "result": {
+        "minehead": [
+          0,
+          0
+        ],
+        "sushi": [
+          0,
+          0
+        ],
+        "jellyOperator": [
+          0,
+          0
+        ]
+      }
+    },
+    "side_jellyfish": {
+      "expression": "({ unlocks: Array.from({ length: 6 }, (_, i) => idleon.callFunction(\"MenagerieStuff\", \"SideJellyUnlocked\", i, 0)), purple: [idleon.engine.getGameAttribute(\"Menagerie\")[0][1], idleon.engine.getGameAttribute(\"Menagerie\")[0][3], idleon.engine.getGameAttribute(\"Menagerie\")[0][4], idleon.callFunction(\"MenagerieStuff\", \"PinkJellyCosts\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"PinkJellyCosts\", 1, 0), idleon.callFunction(\"MenagerieStuff\", \"PinkJellyBonus\", 0, 0)], blue: [idleon.engine.getGameAttribute(\"Menagerie\")[0][5]], red: [idleon.engine.getGameAttribute(\"Menagerie\")[0][6], idleon.callFunction(\"MenagerieStuff\", \"RedJellyReadingMulti\", 0, 0), idleon.engine.getGameAttribute(\"Menagerie\")[4]], silver: [idleon.engine.getGameAttribute(\"Menagerie\")[0][9], idleon.engine.getGameAttribute(\"Menagerie\")[0][10], idleon.callFunction(\"MenagerieStuff\", \"SilverJellyCosts\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"SilverJellyCosts\", 1, 0), idleon.callFunction(\"MenagerieStuff\", \"ObolMISCmulti\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"ObolAutoTrashRate\", 0, 0)], yellow: [idleon.engine.getGameAttribute(\"Menagerie\")[0].slice(11, 15), idleon.engine.getGameAttribute(\"Menagerie\")[0][15], idleon.callFunction(\"MenagerieStuff\", \"ConstBuildREQ\", 0, 0), Array.from({ length: 4 }, (_, i) => idleon.callFunction(\"MenagerieStuff\", \"ConstBuildBONUSES\", i, 0))], green: [idleon.engine.getGameAttribute(\"Spelunk\")[17][28]] })",
+      "result": {
+        "unlocks": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "purple": [
+          0,
+          0,
+          0,
+          1e+35,
+          1e+30,
+          0
+        ],
+        "blue": [
+          0
+        ],
+        "red": [
+          1,
+          1,
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "silver": [
+          0,
+          0,
+          200,
+          25,
+          1,
+          0.1
+        ],
+        "yellow": [
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          0,
+          100000,
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "green": [
+          0
+        ]
+      }
     }
   },
   "errors": {}
