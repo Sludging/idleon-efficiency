@@ -27,6 +27,12 @@ import { StarSigns } from "../starsigns";
 import { CropScientistBonusText, Farming } from "../world-6/farming";
 import { Summoning } from "../world-6/summoning";
 import type { Menagerie } from "../menagerie";
+import type { Hole } from "../world-5/hole/hole";
+import type { Gaming } from "../world-5/gaming";
+import type { SushiStation } from "../world-7/sushi";
+import type { Arcade } from "../world-2/arcade";
+import type { UpgradeVault } from "../upgradeVault";
+import { Talent, TalentConst } from "../talents";
 
 export const waveReqs = "2 5 8 12 15 20 25 35 50 65 80 100 125 150 175 200".split(" ").map(value => parseInt(value));
 
@@ -122,6 +128,8 @@ export class PetUpgrade {
                 return this.level * 10;
             case 11:
                 return Math.ceil(Math.pow(this.level, 0.698) * 12);
+            case 12:
+                return this.data.bonusQty * this.level;
             default: return 0;
         }
     }
@@ -403,6 +411,7 @@ export class Breeding extends Domain {
     private savedCrucibleWave = 0;
     private crucibleArenaLevel = 0;
     private crucibleThresholds: string[] = [];
+    private totalShinyOverlevels = 0;
     territory: Territory[] = [];
     upgrade: PetUpgrade[] = [];
     genes: PetGene[] = [];
@@ -422,6 +431,7 @@ export class Breeding extends Domain {
     petWorldCount: number = 3;
     skillLevel: number = 0;
     deadCells: number = 0;
+    greyDnaFromHole: number = 0;
 
     worldGenes: number[] = [];
 
@@ -438,6 +448,9 @@ export class Breeding extends Domain {
 
     // Calculated
     petPowerFromTalent: number = 1;
+    petDamageFromPalette: number = 0;
+    petDamageFromSushi: number = 0;
+    petDamageAdditiveBonus: number = 0;
 
     hasBonus = (bonusNumber: number) => {
         if (bonusNumber > waveReqs.length) {
@@ -457,12 +470,48 @@ export class Breeding extends Domain {
     }
 
     prepareShinyLevels(extendedShinyLevelsUnlocked: boolean): void {
-        this.basePets.forEach(pet => pet.prepareShinyLevel(extendedShinyLevelsUnlocked));
+        this.totalShinyOverlevels = 0;
+        this.basePets.forEach(pet => {
+            pet.prepareShinyLevel(extendedShinyLevelsUnlocked);
+            // OverLV counts Shiny levels above 20 in the first four pet worlds.
+            if (pet.data.world >= 0 && pet.data.world < 4) {
+                this.totalShinyOverlevels += Math.max(0, pet.shinyLevel - 20);
+            }
+        });
         this.shinyBonuses.forEach(bonus => bonus.updateTotalLevels());
+    }
+
+    getTotalShinyOverlevels(): number {
+        return this.totalShinyOverlevels;
+    }
+
+    getPetDamageMultiplier(): number {
+        // OverLV multiplies pet combat damage separately from the shared percentage bonuses.
+        return (1 + this.upgrade[6].getBonus() / 100)
+            * (1 + this.petDamageFromPalette / 100)
+            * (1 + 10 * this.totalShinyOverlevels / 100)
+            * (1 + this.petDamageFromSushi / 100)
+            * (1 + this.petDamageAdditiveBonus / 100);
     }
 
     getCrucibleBonus(index: number): number {
         return Number(this.crucibleArenaLevel > index);
+    }
+
+    getEstimatedGreyDnaPerTrash(): number {
+        const crucibleMultiplier = 1 + (this.getCrucibleBonus(0) + this.getCrucibleBonus(6)
+            + this.getCrucibleBonus(11) + this.getCrucibleBonus(13)) / 4;
+
+        // Independent uniform rolls model the base reward on [3, 6).
+        // Add the Hole reward before multiplying, then average the native final floor.
+        const intervalStart = crucibleMultiplier * (3 + this.greyDnaFromHole);
+        const intervalWidth = 3 * crucibleMultiplier;
+        const wholeStart = Math.floor(intervalStart);
+        const shiftedEnd = intervalStart - wholeStart + intervalWidth;
+        const wholeEnd = Math.floor(shiftedEnd);
+
+        return wholeStart + (wholeEnd * (wholeEnd - 1) / 2
+            + wholeEnd * (shiftedEnd - wholeEnd)) / intervalWidth;
     }
 
     setTimeForEgg = (labBonus: number, mealBonus: number, alchemyBonus: number, achivementBonus: number, skillMasteryBonus: number) => {
@@ -525,9 +574,11 @@ export class Breeding extends Domain {
         this.firstStoredPetPower = 0;
         this.skillLevel = 0;
         this.deadCells = 0;
+        this.greyDnaFromHole = 0;
         this.arenaWave = 0;
         this.savedCrucibleWave = 0;
         this.crucibleArenaLevel = 0;
+        this.totalShinyOverlevels = 0;
         this.starSignUnlocked = false;
         this.starSignInfinity = false;
         this.shinySpeedMulti = 1;
@@ -537,6 +588,9 @@ export class Breeding extends Domain {
         this.breedingSpeedMultiWithSilkrode = 1;
         this.breedingSpeedMultiWithoutStarSign = 1;
         this.petPowerFromTalent = 1;
+        this.petDamageFromPalette = 0;
+        this.petDamageFromSushi = 0;
+        this.petDamageAdditiveBonus = 0;
 
         this.shinyBonuses = Array.from(
             GroupByFunction(this.basePets, (pet: Pet) => pet.shinyBonus.index),
@@ -552,6 +606,11 @@ export class Breeding extends Domain {
         const optionList = data.get("OptLacc") as number[];
         breeding.savedCrucibleWave = Number(optionList[628] ?? 0);
         breeding.crucibleArenaLevel = 0;
+        breeding.totalShinyOverlevels = 0;
+        breeding.greyDnaFromHole = 0;
+        breeding.petDamageFromPalette = 0;
+        breeding.petDamageFromSushi = 0;
+        breeding.petDamageAdditiveBonus = 0;
 
         const petsStored = (data.get("PetsStored") ?? []) as [string, number | string, number, number][];
         // Animalistic Ferocity uses the first raw slot, even when its species is filtered from the display list.
@@ -830,16 +889,46 @@ export const updateBreedingDisplayData = (data: Map<string, any>) => {
     const summoning = data.get("summoning") as Summoning;
     const cooking = data.get("cooking") as Cooking;
     const achievements = data.get("achievements") as Achievement[];
+    const hole = data.get("hole") as Hole;
+    const gaming = data.get("gaming") as Gaming;
+    const sushi = data.get("sushi") as SushiStation;
+    const alchemy = data.get("alchemy") as Alchemy;
+    const arcade = data.get("arcade") as Arcade;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+    const players = data.get("players") as Player[];
+
+    let arenaSpiritBonus = 0;
+    for (const recipient of players) {
+        // Use the best account recipient context and Arena Spirit's passive curve.
+        arenaSpiritBonus = Math.max(arenaSpiritBonus,
+            Talent.getAccountTalentBonus(players, TalentConst.ArenaSpiritIndex, recipient.finalTalentInputs, true));
+    }
+
+    const achievementPetDamage = achievements[222].completed ? 5 : 0;
+    const starSignPetDamage = starSigns.infinityStarSigns.find(sign => sign.name === "Power Bowower")
+        ?.getBonus("Pet DMG for Breeding Skill") ?? 0;
+    breeding.petDamageFromPalette = gaming.getPaletteBonus(26);
+    breeding.petDamageFromSushi = sushi.getBonusFromIndex(10);
+    // Arena Spirit joins the common percentage subtotal; it is not a separate multiplier.
+    breeding.petDamageAdditiveBonus = alchemy.getVialBonusForKey("PetDmg")
+        + (achievementPetDamage + cooking.getMealBonusForKey("PetDmg") + arenaSpiritBonus)
+        + (starSignPetDamage + (arcade.bonuses[30].getBonus() + upgradeVault.getBonusForId(58)));
+
+    breeding.greyDnaFromHole = hole.getSchematicBonus(52) / 100;
 
     // Calculate Shiny speed multiplier
-    const labEmeraldUlthuriteBonus = mainframe.jewels[16].active ? mainframe.jewels[16].getBonus() : 0;
+    const labEmeraldUlthuriteBonus = mainframe.jewels[15].getBonus();
     const shinyBonusSpeedFromShiny = breeding.shinyBonuses.find(bonus => bonus.data.index == 16)?.getBonus() ?? 0;
     const cropScientistBonus = farming.cropScientist.getBonus(CropScientistBonusText.ShinyPetLvlUpRate);
     const winnerBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == 18)?.getBonus() ?? 0;
     const starsign57b = starSigns.unlockedStarSigns.find(sign => sign.name == "Breedabilli")?.getBonus("Shiny Pet LV spd") ?? 0;
-    breeding.shinySpeedMulti = (1 + (labEmeraldUlthuriteBonus + (shinyBonusSpeedFromShiny + (cropScientistBonus + starsign57b))) / 100) * (1 + winnerBonus / 100);
-    breeding.shinySpeedMultiWithSilkrode = (1 + (labEmeraldUlthuriteBonus + (shinyBonusSpeedFromShiny + (cropScientistBonus + (starsign57b * 2)))) / 100) * (1 + winnerBonus / 100);
-    breeding.shinySpeedMultiWithoutStarSign = (1 + (labEmeraldUlthuriteBonus + (shinyBonusSpeedFromShiny + (cropScientistBonus + 0))) / 100) * (1 + winnerBonus / 100);
+    const shinyUpgradeBonus = breeding.upgrade[12].getBonus();
+    const overlevelMultiplier = 1 + 10 * breeding.getTotalShinyOverlevels() / 100;
+    const lampMultiplier = 1 + hole.lamp.getBonus(false, 0, 1) / 100;
+    // Upgrade speed joins the additive bonuses; OverLV and Lamp each multiply the result.
+    breeding.shinySpeedMulti = (1 + (labEmeraldUlthuriteBonus + (shinyBonusSpeedFromShiny + (cropScientistBonus + (starsign57b + shinyUpgradeBonus)))) / 100) * (1 + winnerBonus / 100) * overlevelMultiplier * lampMultiplier;
+    breeding.shinySpeedMultiWithSilkrode = (1 + (labEmeraldUlthuriteBonus + (shinyBonusSpeedFromShiny + (cropScientistBonus + (starsign57b * 2 + shinyUpgradeBonus)))) / 100) * (1 + winnerBonus / 100) * overlevelMultiplier * lampMultiplier;
+    breeding.shinySpeedMultiWithoutStarSign = (1 + (labEmeraldUlthuriteBonus + (shinyBonusSpeedFromShiny + (cropScientistBonus + shinyUpgradeBonus))) / 100) * (1 + winnerBonus / 100) * overlevelMultiplier * lampMultiplier;
 
     // Calculate Breeding speed multiplier
     const starsign57a = starSigns.unlockedStarSigns.find(sign => sign.name == "Breedabilli")?.getBonus("Breedable Spd") ?? 0;

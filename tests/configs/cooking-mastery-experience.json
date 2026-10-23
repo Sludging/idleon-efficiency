@@ -1,0 +1,11 @@
+{
+  "description": "Account Cooking Mastery EXP per hour for the unchanged saved account.",
+  "target": "Cooking Mastery EXP per hour",
+  "extractions": [
+    {
+      "label": "cooking_mastery_experience_rate",
+      "expression": "idleon.callFunction(\"Summoning2\", \"ExpRateCook\", 0, 0)",
+      "description": "Raw account Cooking Mastery EXP per hour. The native rate does not apply the Mastery unlock gate."
+    }
+  ]
+}

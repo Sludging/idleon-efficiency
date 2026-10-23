@@ -1,0 +1,11 @@
+{
+  "description": "Account maximum meal level shared by every applicable Cooking meal.",
+  "target": "Cooking maximum meal level",
+  "extractions": [
+    {
+      "label": "cooking_maximum_meal_level",
+      "expression": "idleon.callFunction(\"CookingR\", \"CookingMealMaxLVlol\", 0, 0)",
+      "description": "Native account-wide meal level cap. Compare this single value with every meal in the real meal catalog, not unused allocated save slots."
+    }
+  ]
+}

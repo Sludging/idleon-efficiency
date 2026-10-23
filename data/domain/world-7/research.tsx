@@ -43,6 +43,9 @@ import { TaskBoard } from "../tasks";
 import { Rift } from "../world-4/rift";
 import { commaNotation, nFormatter, notateNumber } from "../../utility";
 import type { Menagerie } from "../menagerie";
+import type { Gallery } from "./gallery";
+import type { Clamworks } from "./clamworks";
+import type { Breeding } from "../world-4/breeding";
 
 const RESEARCH_GRID_ALL_MULTI_CHALLENGES = [71, 72, 76];
 const RESEARCH_GRID_ALL_MULTI_COMPANION = 55;
@@ -1369,17 +1372,18 @@ class ResearchSourceCatalogue {
     this.get<Tome>("tome"), this.get<Grimoire>("grimoire"), this.get<EquipmentSets>("equipmentSets")),
     "addPercent", undefined, "Owned epilogue and account Tome and set inputs"),
    cardSource("w7b1", 1, 10), cardSource("w7b4", 2, 15),
-   this.add(`Arcade: ${this.repositories.get("ArcadeBonus")[63].data.effect}`, () => this.get<Arcade>("arcade").bonuses[63].getBonus()),
    prehistoricExp,
    this.grid(94, 2), this.grid(31), this.grid(51),
    cardSource("w7a11", 1, 10), cardSource("w7b8", 3, 20),
    shopExp,
+   this.add("Crucible: Research EXP", () => 25 * this.get<Breeding>("breeding").getCrucibleBonus(2)
+    + 35 * this.get<Breeding>("breeding").getCrucibleBonus(8)),
   ];
 
   const companion52 = this.companion(52, 1, "add");
   const companion153 = this.companion(153, 1, "add");
   const companion153LevelTwo = this.companionTwo(153, 1, "add");
-  const companion54LevelTwo = this.companionTwo(54, 0.15, "add");
+  const companion54LevelTwo = this.companionTwo(54, 0.5, "add");
   const jellofishFactor = () => 1 + companion52.value;
   const riftStalkerFactor = () => 1 + companion153.value + companion153LevelTwo.value;
   const neonscaleFactor = () => 1 + companion54LevelTwo.value;
@@ -1412,10 +1416,17 @@ class ResearchSourceCatalogue {
   const buttonBonus = this.repositories.get("ButtonBonus").find(entry => entry.index === 0)!;
   const expMultipliers = [
    this.asMultiplier(this.grid(70)),
+   // Gallery owns deposited nametag scaling, including the assumed Silkrode Motherboard.
+   this.add("Gallery: deposited Spooky Scary Nametags",
+    () => Math.max(1, 1 + this.get<Gallery>("gallery").getCombinedBonusForChip("% RESEARCH EXP", true) / 100),
+    "multiply", 15, "Assumes Gallery access and Silkrode Motherboard; equipped nametags are excluded"),
+   this.add("Clam Work: Research EXP",
+    () => 1 + 0.25 * Number(this.get<Clamworks>("clamworks").isBonusUnlocked(9)), "multiply"),
    this.percent(`Equinox: ${this.repositories.get("DreamUpgrade").find(entry => entry.index === 12)!.data.name}`,
     () => this.get<Equinox>("equinox").getResearchExpBonus()),
    this.percent(`The Button: ${buttonBonus.data.name}`, () => this.get<Button>("button").getBonusForIndex(0)),
-   this.percent("Killroy: Research EXP", () => this.get<KillRoy>("killroy").spelunkingExpMulti),
+   this.percent(`Arcade: ${this.repositories.get("ArcadeBonus")[63].data.effect}`, () => this.get<Arcade>("arcade").bonuses[63].getBonus()),
+   this.add("Killroy: Research EXP", () => Math.max(1, this.get<KillRoy>("killroy").spelunkingExpMulti), "multiply"),
    companionFactor,
    this.asMultiplier(this.sushi(0)),
    this.percent("The Hole: Researchy", () => this.get<Hole>("hole").getResearchExpUpgradeBonus()),

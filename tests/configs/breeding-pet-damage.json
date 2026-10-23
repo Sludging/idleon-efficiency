@@ -1,0 +1,11 @@
+{
+  "description": "Complete pet combat damage multiplier for the unchanged genuine save and effective account Infinite Stars context.",
+  "target": "Breeding.getPetDamageMultiplier",
+  "extractions": [
+    {
+      "label": "pet_damage_multiplier",
+      "expression": "idleon.callFunction(\"PetStuff\",\"PetBonusDMG\",\"0\",0,0)",
+      "description": "Native complete deterministic pet-damage multiplier, not hatch power or random combat damage. Actor 3 matches effective account Infinite Stars with Silkrode. The paired save has no positive OverLV."
+    }
+  ]
+}

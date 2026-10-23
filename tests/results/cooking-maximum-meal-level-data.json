@@ -1,0 +1,9 @@
+{
+  "extractions": {
+    "cooking_maximum_meal_level": {
+      "expression": "idleon.callFunction(\"CookingR\", \"CookingMealMaxLVlol\", 0, 0)",
+      "result": 160
+    }
+  },
+  "errors": {}
+}

@@ -68,7 +68,7 @@ export class Talent {
 
 
     /** Select the highest candidate bonus using candidate allocations and presets with the recipient's shared modifiers. */
-    static getAccountTalentBonus(players: readonly Player[], skillIndex: number, recipientInputs: TalentLevelInputs): number {
+    static getAccountTalentBonus(players: readonly Player[], skillIndex: number, recipientInputs: TalentLevelInputs, yBonus: boolean = false): number {
         let maximum = 0;
         for (const owner of players) {
             const talent = owner.getTalent(skillIndex);
@@ -79,7 +79,7 @@ export class Talent {
             const extraLevels = talent.pointsSpent > 0.5
                 ? talent.getExtraLevels(recipientInputs, owner.allPresetSuperTalentIndexes.has(skillIndex))
                 : 0;
-            maximum = Math.max(maximum, talent.getBonusAtLevel(talent.pointsSpent + extraLevels));
+            maximum = Math.max(maximum, talent.getBonusAtLevel(talent.pointsSpent + extraLevels, false, yBonus));
         }
         return maximum;
     }

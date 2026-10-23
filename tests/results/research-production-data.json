@@ -1,0 +1,354 @@
+{
+  "extractions": {
+    "discoveries_refresh": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"TotalOccurrencesFound\", -1, 0)",
+      "result": 30
+    },
+    "observation_levels_refresh": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"TotalObsLVs\", -1, 0)",
+      "result": 189
+    },
+    "support_refresh": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Kalei_MultiTot\", 0, 999)",
+      "result": 1
+    },
+    "epilogue_refresh": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", -1, 0)",
+      "result": 632.4554618707631
+    },
+    "exp_multiplier": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"ResearchEXPmulti\", 0, 0)",
+      "result": 4936.451746735838
+    },
+    "exp_total": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"ResearchEXPrateTOT\", 0, 0)",
+      "result": 118041094.5747806
+    },
+    "observation_subtotals": {
+      "expression": "idleon.getAttr(\"CustomLists\").h.Occurrences.map((entry,index)=>({index,subtotal:idleon.callFunction(\"ResearchStuff\",\"ResearchEXPrateObj\",index,0)}))",
+      "result": [
+        {
+          "index": 0,
+          "subtotal": 0
+        },
+        {
+          "index": 1,
+          "subtotal": 0
+        },
+        {
+          "index": 2,
+          "subtotal": 0
+        },
+        {
+          "index": 3,
+          "subtotal": 0
+        },
+        {
+          "index": 4,
+          "subtotal": 0
+        },
+        {
+          "index": 5,
+          "subtotal": 0
+        },
+        {
+          "index": 6,
+          "subtotal": 0
+        },
+        {
+          "index": 7,
+          "subtotal": 0
+        },
+        {
+          "index": 8,
+          "subtotal": 0
+        },
+        {
+          "index": 9,
+          "subtotal": 0
+        },
+        {
+          "index": 10,
+          "subtotal": 0
+        },
+        {
+          "index": 11,
+          "subtotal": 0
+        },
+        {
+          "index": 12,
+          "subtotal": 0
+        },
+        {
+          "index": 13,
+          "subtotal": 0
+        },
+        {
+          "index": 14,
+          "subtotal": 0
+        },
+        {
+          "index": 15,
+          "subtotal": 0
+        },
+        {
+          "index": 16,
+          "subtotal": 0
+        },
+        {
+          "index": 17,
+          "subtotal": 0
+        },
+        {
+          "index": 18,
+          "subtotal": 0
+        },
+        {
+          "index": 19,
+          "subtotal": 0
+        },
+        {
+          "index": 20,
+          "subtotal": 7340.391162409591
+        },
+        {
+          "index": 21,
+          "subtotal": 0
+        },
+        {
+          "index": 22,
+          "subtotal": 16571.742619275537
+        },
+        {
+          "index": 23,
+          "subtotal": 0
+        },
+        {
+          "index": 24,
+          "subtotal": 0
+        },
+        {
+          "index": 25,
+          "subtotal": 0
+        },
+        {
+          "index": 26,
+          "subtotal": 0
+        },
+        {
+          "index": 27,
+          "subtotal": 0
+        },
+        {
+          "index": 28,
+          "subtotal": 0
+        },
+        {
+          "index": 29,
+          "subtotal": 0
+        },
+        {
+          "index": 30,
+          "subtotal": 0
+        },
+        {
+          "index": 31,
+          "subtotal": 0
+        },
+        {
+          "index": 32,
+          "subtotal": 0
+        },
+        {
+          "index": 33,
+          "subtotal": 0
+        },
+        {
+          "index": 34,
+          "subtotal": 0
+        },
+        {
+          "index": 35,
+          "subtotal": 0
+        },
+        {
+          "index": 36,
+          "subtotal": 0
+        },
+        {
+          "index": 37,
+          "subtotal": 0
+        },
+        {
+          "index": 38,
+          "subtotal": 0
+        },
+        {
+          "index": 39,
+          "subtotal": 0
+        },
+        {
+          "index": 40,
+          "subtotal": 0
+        },
+        {
+          "index": 41,
+          "subtotal": 0
+        },
+        {
+          "index": 42,
+          "subtotal": 0
+        },
+        {
+          "index": 43,
+          "subtotal": 0
+        },
+        {
+          "index": 44,
+          "subtotal": 0
+        },
+        {
+          "index": 45,
+          "subtotal": 0
+        },
+        {
+          "index": 46,
+          "subtotal": 0
+        },
+        {
+          "index": 47,
+          "subtotal": 0
+        },
+        {
+          "index": 48,
+          "subtotal": 0
+        },
+        {
+          "index": 49,
+          "subtotal": 0
+        },
+        {
+          "index": 50,
+          "subtotal": 0
+        },
+        {
+          "index": 51,
+          "subtotal": 0
+        },
+        {
+          "index": 52,
+          "subtotal": 0
+        },
+        {
+          "index": 53,
+          "subtotal": 0
+        },
+        {
+          "index": 54,
+          "subtotal": 0
+        },
+        {
+          "index": 55,
+          "subtotal": 0
+        },
+        {
+          "index": 56,
+          "subtotal": 0
+        },
+        {
+          "index": 57,
+          "subtotal": 0
+        },
+        {
+          "index": 58,
+          "subtotal": 0
+        },
+        {
+          "index": 59,
+          "subtotal": 0
+        },
+        {
+          "index": 60,
+          "subtotal": 0
+        },
+        {
+          "index": 61,
+          "subtotal": 0
+        },
+        {
+          "index": 62,
+          "subtotal": 0
+        },
+        {
+          "index": 63,
+          "subtotal": 0
+        },
+        {
+          "index": 64,
+          "subtotal": 0
+        },
+        {
+          "index": 65,
+          "subtotal": 0
+        },
+        {
+          "index": 66,
+          "subtotal": 0
+        },
+        {
+          "index": 67,
+          "subtotal": 0
+        },
+        {
+          "index": 68,
+          "subtotal": 0
+        },
+        {
+          "index": 69,
+          "subtotal": 0
+        },
+        {
+          "index": 70,
+          "subtotal": 0
+        },
+        {
+          "index": 71,
+          "subtotal": 0
+        },
+        {
+          "index": 72,
+          "subtotal": 0
+        },
+        {
+          "index": 73,
+          "subtotal": 0
+        },
+        {
+          "index": 74,
+          "subtotal": 0
+        },
+        {
+          "index": 75,
+          "subtotal": 0
+        },
+        {
+          "index": 76,
+          "subtotal": 0
+        },
+        {
+          "index": 77,
+          "subtotal": 0
+        },
+        {
+          "index": 78,
+          "subtotal": 0
+        },
+        {
+          "index": 79,
+          "subtotal": 0
+        }
+      ]
+    }
+  },
+  "errors": {}
+}

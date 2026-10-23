@@ -78,10 +78,16 @@ function SourceValue({ label, value, valueSize = "small", valueFirst = false, in
 }
 
 function ExpBonuses({ research }: { research: ResearchGrid }) {
-    return <Grid columns={["minmax(0, 1fr)", "minmax(0, 1fr)"]} gap="medium">
-        <Box gap="xsmall"><Text size="xsmall" weight="bold">Additive bonuses</Text><Contributions entries={research.production.additiveExpContributors} /></Box>
-        <Box gap="xsmall"><Text size="xsmall" weight="bold">Multipliers</Text><Contributions entries={research.production.expMultiplierContributors} /></Box>
-    </Grid>;
+    return (
+        <Box>
+            <Grid columns={["minmax(0, 1fr)", "minmax(0, 1fr)"]} gap="medium">
+                <Box gap="xsmall"><Text size="xsmall" weight="bold">Additive bonuses</Text><Contributions entries={research.production.additiveExpContributors} /></Box>
+                <Box gap="xsmall"><Text size="xsmall" weight="bold">Multipliers</Text><Contributions entries={research.production.expMultiplierContributors} /></Box>
+            </Grid>
+            <Box margin={{ top: "small" }}>
+                <Text size="xsmall">* This estimate uses deposited Spooky Scary Nametags. It assumes Gallery access and Silkrode Motherboard.</Text>
+            </Box>
+        </Box>);
 }
 
 function ObservationContext({ observation, research }: { observation: Observation; research: ResearchGrid }) {

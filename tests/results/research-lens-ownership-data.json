@@ -1,0 +1,21 @@
+{
+  "extractions": {
+    "owned_lenses": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"MagnifiersOwned\", 0, 0)",
+      "result": 14
+    },
+    "owned_monocles": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"OpticalMonocleOwned\", 0, 0)",
+      "result": 4
+    },
+    "owned_kaleidoscopes": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"KaleidoscopeOwned\", 0, 0)",
+      "result": 4
+    },
+    "lens_capacity": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"MagnifiersPerSlot\", 0, 0)",
+      "result": 3
+    }
+  },
+  "errors": {}
+}

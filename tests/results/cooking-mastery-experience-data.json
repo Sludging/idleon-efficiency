@@ -1,0 +1,9 @@
+{
+  "extractions": {
+    "cooking_mastery_experience_rate": {
+      "expression": "idleon.callFunction(\"Summoning2\", \"ExpRateCook\", 0, 0)",
+      "result": 8645054.141416693
+    }
+  },
+  "errors": {}
+}
