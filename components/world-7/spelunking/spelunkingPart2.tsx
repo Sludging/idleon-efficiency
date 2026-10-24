@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { Box, Grid, Meter, Text, ThemeContext } from 'grommet';
 import type { ThemeType } from 'grommet';
 import { normalizeColor } from 'grommet/utils';
+import { CircleInformation } from 'grommet-icons';
 import styled from 'styled-components';
 import IconImage from '../../base/IconImage';
 import RoundedShadowBox from '../../base/RoundedShadowBox';
@@ -241,8 +242,13 @@ function ChapterBonusRow({ chapterIndex, bonus }: { chapterIndex: number; bonus:
     );
 }
 
-function ChapterCard({ chapter, players }: { chapter: Chapter; players: Player[] }) {
+function ChapterCard({ chapter, spelunking, players }: SpelunkingPart2Props & { chapter: Chapter }) {
     const theme = useContext(ThemeContext);
+    const harvests = players.map(player => ({
+        player,
+        outcome: spelunking.getCaveNodeHarvest(chapter.index, player.playerID),
+    }));
+    const eligibleCount = harvests.filter(({ outcome }) => outcome.eligible).length;
     const storageStacks = chapter.chestPageStacks.filter(stack => stack.count > 0);
     const inventories = players.map(player => ({
         player,
@@ -294,7 +300,31 @@ function ChapterCard({ chapter, players }: { chapter: Chapter; players: Player[]
                     </TipDisplay>
                 ) : ownedPagesDisplay}
             </ChapterHeader>
-            <Box pad="16px" style={{ minWidth: 0 }}>
+            <Box pad="16px" gap="small" style={{ minWidth: 0 }}>
+                <Box direction="row" align="center" gap="xxsmall" data-spelunking-harvest-count={chapter.index}>
+                    <Text size="xsmall" color="accent-2">{eligibleCount} / {players.length} characters can harvest</Text>
+                    <TipDisplay heading={`${chapter.gatheringSource.details.Name} harvesting`} maxWidth="620px" body={
+                        <Box gap="small" data-spelunking-harvest-detail={chapter.index}>
+                            <Box style={{ display: 'grid', gridTemplateColumns: 'minmax(100px, 1fr) auto auto', columnGap: '16px', rowGap: '8px' }}>
+                                <Text size="xsmall" color="dark-1" weight={500}>Character</Text>
+                                <Text size="xsmall" color="dark-1" weight={500}>Harvest chance</Text>
+                                <Text size="xsmall" color="dark-1" weight={500}>Pages per drop</Text>
+                                {harvests.flatMap(({ player, outcome }) => [
+                                    <Text key={`${player.playerID}-name`} size="xsmall" color="dark-1">{player.playerName}</Text>,
+                                    <Text key={`${player.playerID}-chance`} size="xsmall" color="dark-1">{(outcome.harvestChance * 100).toFixed(2)}%</Text>,
+                                    <Text key={`${player.playerID}-pages`} size="xsmall" color="dark-1">
+                                        {outcome.eligible ? commaNotation(outcome.pagesPerDrop!) : 'Unavailable · Below minimum'}
+                                    </Text>,
+                                ])}
+                            </Box>
+                            <Text size="xsmall" color="dark-1">Characters must reach this Cave Node's map. Pages per drop does not include extra drops or EXP.</Text>
+                        </Box>
+                    }>
+                        <Box tabIndex={0} aria-label={`${chapter.pageItem.displayName} character harvest details`}>
+                            <CircleInformation size="small" />
+                        </Box>
+                    </TipDisplay>
+                </Box>
                 <JournalTableFrame>
                     <JournalTable $muted={normalizeColor('accent-2', theme)} $divider={normalizeColor('grey-1', theme)} aria-label={`${chapter.pageItem.displayName} bonuses`}>
                         <colgroup><col /><col /><col /><col /><col /></colgroup>
@@ -312,7 +342,7 @@ function ChapterCard({ chapter, players }: { chapter: Chapter; players: Player[]
 export function SpelunkingJournal({ spelunking, players }: SpelunkingPart2Props) {
     return (
         <JournalGrid>
-            {spelunking.chapters.map(chapter => <ChapterCard key={chapter.index} chapter={chapter} players={players} />)}
+            {spelunking.chapters.map(chapter => <ChapterCard key={chapter.index} chapter={chapter} spelunking={spelunking} players={players} />)}
         </JournalGrid>
     );
 }

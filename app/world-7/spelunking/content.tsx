@@ -91,6 +91,7 @@ export default function SpelunkingContent() {
                         <Box style={{ display: tab === 'Tunnels' ? undefined : 'none' }} data-spelunking-tab-panel="Tunnels">
                             <SpelunkingDisplay
                                 spelunking={spelunking}
+                                players={players}
                                 showLocked={showLocked}
                                 collectionStatus={collectionStatus}
                                 onShowLockedChange={setShowLocked}

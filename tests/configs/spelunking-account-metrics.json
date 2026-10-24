@@ -1,0 +1,127 @@
+{
+  "description": "Spelunking saved-preview and character 3 CORE comparisons for the retained regular save against native game 1.24. Original cloud-save source equality is established separately. Direct input evidence excludes warmed stamina and Overstim fill. It does not establish every transitive producer input. Amber uses the full native depth-zero preview, including upgrade 21 / 150, without conversion.",
+  "target": "Saved Amber gain multiplier, character efficiency, saved Overstim state, potential pooled fill, saved Manic toggle, and available next Grand Discovery chances",
+  "requiredActivePlayerIndex": 3,
+  "extractions": [
+    {
+      "label": "amber_preview_context",
+      "expression": "(() => { const g = idleon.getAttr(\"PixelHelperActor\")[26].behaviors.getBehavior(\"ActorEvents_713\")._GenINFO; if (g[70] == null || g[90] == null || Number(g[70]) !== 0 || Number(g[90]) !== 0 || !Array.isArray(g[107]) || g[107].length !== 13 || Array.from(g[107]).some(effect => effect == null || Number(effect) !== 0)) throw new Error(\"Saved Amber preview requires native depth zero, zero destroyed objects, and all 13 active effects zero\"); return { rawDepth: Number(g[70]), destroyedObjects: Number(g[90]), activeEffects: g[107].map(Number) }; })()",
+      "description": "Read-only native actor context required by the saved Amber preview. Missing actor data or nonneutral values fail extraction. ActorEvents_713 _GenINFO indices 70, 90, and 107 supply depth, destroyed objects, and active effects. Source: docs/game-snippets/spelunking/Spelunk.1.24.js:8, AmberGain."
+    },
+    {
+      "label": "account_metric_source_inputs",
+      "expression": "(() => { const s = idleon.getAttr(\"Spelunk\"); return { lore: s[0].map(Number), upgradeLevels: s[5].map(Number), discoveries: s[6].map(String), chapterLevels: s[8].map(Number), grandCounts: s[44].slice(0, 10).map(Number), manicDepths: s[47].slice(0, 10).map(Number), overstimLevel: Number(s[4][1]), trackometerLevel: Number(s[4][8]), savedManicToggle: Number(s[4][10]), spelunkingLevelPlayer3: Number(idleon.getAttr(\"Lv0\")[19]) }; })()",
+      "description": "Bounded direct runtime inputs for pairing with the retained save: Lore, shop levels, discoveries, chapter levels, ten Grand counts and Manic depths, Overstim level, Trackometer level, saved toggle, and active character skill level. These are source evidence, not parameter tests. Deliberately excludes warmed stamina row 3 and fill [4][2]. Native branches are in docs/game-snippets/spelunking/Spelunk.1.24.js:8. This evidence does not prove transitive producer equality."
+    },
+    {
+      "label": "saved_amber_gain_multiplier",
+      "expression": "(() => { const g = idleon.getAttr(\"PixelHelperActor\")[26].behaviors.getBehavior(\"ActorEvents_713\")._GenINFO; if (g[70] == null || g[90] == null || Number(g[70]) !== 0 || Number(g[90]) !== 0 || !Array.isArray(g[107]) || g[107].length !== 13 || Array.from(g[107]).some(effect => effect == null || Number(effect) !== 0)) throw new Error(\"Saved Amber preview requires native depth zero, zero destroyed objects, and all 13 active effects zero\"); return idleon.callFunction(\"Spelunk\", \"AmberGain\", 0, 0); })()",
+      "description": "Full native dimensionless Amber multiplier at actual neutral actor context. Includes the upgrade 21 depth-zero baseline. No actor mutation, removed factor, or expected-value transformation. Source: docs/game-snippets/spelunking/Spelunk.1.24.js:8, AmberGain. This is not Amber per hour or current-run income."
+    },
+    {
+      "label": "spelunking_efficiency_player_3",
+      "expression": "idleon.callFunction(\"Spelunk\", \"SpelunkingEfficiency\", 0, 0)",
+      "description": "Character 3 Cave Node page-harvesting efficiency from the native final helper. Active player 3 is required because native character attributes, cards, and talents use active context. Source: docs/game-snippets/spelunking/Spelunk.1.24.js:8, SpelunkingEfficiency."
+    },
+    {
+      "label": "overstim_level",
+      "expression": "Number(idleon.getAttr(\"Spelunk\")[4][1])",
+      "description": "Stable saved Overstim level, paired separately to retained Spelunk[4][1]. Native threshold and bonus branches read this level. Source: docs/game-snippets/spelunking/Spelunk.1.24.js:8, OverstimQtyREQ and OverstimBonus. Does not extract warmed fill."
+    },
+    {
+      "label": "overstim_threshold",
+      "expression": "idleon.callFunction(\"Spelunk\", \"OverstimQtyREQ\", 0, 0)",
+      "description": "Native fill required for the next Overstim level. Pair this threshold with retained-save fill, not warmed runtime fill, when testing remaining fill. Source: docs/game-snippets/spelunking/Spelunk.1.24.js:8, OverstimQtyREQ."
+    },
+    {
+      "label": "overstim_bonus_per_level",
+      "expression": "idleon.callFunction(\"Spelunk\", \"OverstimBonus_PerLV\", 0, 0)",
+      "description": "Native Overstim percentage bonus per saved level. Source: docs/game-snippets/spelunking/Spelunk.1.24.js:8, OverstimBonus_PerLV."
+    },
+    {
+      "label": "overstim_bonus",
+      "expression": "idleon.callFunction(\"Spelunk\", \"OverstimBonus\", 0, 0)",
+      "description": "Native total percentage bonus at the saved Overstim level. Source: docs/game-snippets/spelunking/Spelunk.1.24.js:8, OverstimBonus."
+    },
+    {
+      "label": "overstim_fill_bonus_percent",
+      "expression": "idleon.callFunction(\"Spelunk\", \"OverstimFillRate\", 0, 0)",
+      "description": "Extra percentage applied to excess stamina that feeds Overstim. This helper is not a units-per-hour result. Source: docs/game-snippets/spelunking/Spelunk.1.24.js:8, OverstimFillRate; idleon1.24.txt:284511-284522."
+    },
+    {
+      "label": "real_character_count",
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length",
+      "description": "Actual character count used by the native stamina-overflow loop, not padded Spelunk stamina-row length. Direct input evidence only. Source: idleon1.24.txt:284511-284522."
+    },
+    {
+      "label": "native_stamina_regen_per_hour_by_player",
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").map((_, player) => idleon.callFunction(\"Spelunk\", \"StaminaRegenRate\", player, 0))",
+      "description": "Native hourly stamina regeneration for each actual character. Captures aggregate-rate input evidence without using warmed stamina amounts. StaminaRegenRate currently ignores its character argument. Source: idleon1.24.txt:242772-242787; overflow caller 284511-284522."
+    },
+    {
+      "label": "overstim_unlocked",
+      "expression": "idleon.callFunction(\"Spelunk\", \"OverstimUnlocked\", 0, 0)",
+      "description": "Native numeric unlock gate for potential pooled fill. OverstimUnlocked requires ShopUpgBonus(6,0) >= 1, matching the overflow caller. Source: docs/game-snippets/spelunking/Spelunk.1.24.js:8, OverstimUnlocked; idleon1.24.txt:284511-284522."
+    },
+    {
+      "label": "overstim_potential_fill_per_hour",
+      "expression": "(() => { if (idleon.callFunction(\"Spelunk\", \"OverstimUnlocked\", 0, 0) !== 1) return 0; return idleon.getAttr(\"GetPlayersUsernames\").reduce((sum, _, player) => sum + idleon.callFunction(\"Spelunk\", \"StaminaRegenRate\", player, 0), 0) * (1 + idleon.callFunction(\"Spelunk\", \"OverstimFillRate\", 0, 0) / 100); })()",
+      "description": "Potential account-wide Overstim units per hour when all actual characters have full stamina, with the native unlock gate. Sums native hourly regeneration, then applies the native fill bonus. Does not claim current production or simulate elapsed time. Source: idleon1.24.txt:242772-242787 and 284511-284522; docs/game-snippets/spelunking/Spelunk.1.24.js:8, OverstimUnlocked and OverstimFillRate."
+    },
+    {
+      "label": "saved_manic_enabled",
+      "expression": "Number(Number(idleon.getAttr(\"Spelunk\")[4][10]) >= 1)",
+      "description": "Saved Manic toggle as numeric 0 or 1. Runtime toggle is stable and source-paired to retained Spelunk[4][10]. Does not claim an active tunnel run. Native toggle rendering and writes: idleon1.24.txt:278463-278469 and 279282-279283."
+    },
+    {
+      "label": "tunnel_0_next_grand_chance",
+      "expression": "(() => { const t = 0; const s = idleon.getAttr(\"Spelunk\"); const rocks = idleon.getAttr(\"CustomLists\").h.SpelunkRocks[t]; const effects = idleon.getAttr(\"PixelHelperActor\")[26].behaviors.getBehavior(\"ActorEvents_713\")._GenINFO[107]; if (!Array.isArray(effects) || effects.length !== 13 || Number(effects[9]) !== 0) throw new Error(\"Saved Grand chance requires native Grand elixir effect zero\"); if (t >= idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0) || !s[6].includes(String(rocks[rocks.length - 2][0])) || idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0) < 1 || Number(s[44][t]) >= 10) return null; return idleon.callFunction(\"Spelunk\", \"GrandDiscoveries_FindChance\", t, 0); })()",
+      "description": "Tunnel 0 raw uncapped next Grand chance for character 3, or null when unavailable. Native final-object caller requires its exact ordinary-discovery name, upgrade 43, and count below 10 (idleon1.24.txt:277985-277992). Selecting rocks[length-2] projects the eligible final-object roll. CavesUnlocked adds the saved tunnel-access projection gate; it is not a separate condition in the destruction caller. Active Grand elixir must be zero. Helper source: docs/game-snippets/spelunking/Spelunk.1.24.js:8, GrandDiscoveries_FindChance."
+    },
+    {
+      "label": "tunnel_1_next_grand_chance",
+      "expression": "(() => { const t = 1; const s = idleon.getAttr(\"Spelunk\"); const rocks = idleon.getAttr(\"CustomLists\").h.SpelunkRocks[t]; const effects = idleon.getAttr(\"PixelHelperActor\")[26].behaviors.getBehavior(\"ActorEvents_713\")._GenINFO[107]; if (!Array.isArray(effects) || effects.length !== 13 || Number(effects[9]) !== 0) throw new Error(\"Saved Grand chance requires native Grand elixir effect zero\"); if (t >= idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0) || !s[6].includes(String(rocks[rocks.length - 2][0])) || idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0) < 1 || Number(s[44][t]) >= 10) return null; return idleon.callFunction(\"Spelunk\", \"GrandDiscoveries_FindChance\", t, 0); })()",
+      "description": "Tunnel 1 native final-object Grand chance for character 3, or null. Applies exact ordinary-discovery membership, upgrade 43, count below 10, and the additional saved tunnel-access projection gate. Native caller: idleon1.24.txt:277985-277992. Helper: docs/game-snippets/spelunking/Spelunk.1.24.js:8, GrandDiscoveries_FindChance. Requires zero active Grand elixir; no clamping."
+    },
+    {
+      "label": "tunnel_2_next_grand_chance",
+      "expression": "(() => { const t = 2; const s = idleon.getAttr(\"Spelunk\"); const rocks = idleon.getAttr(\"CustomLists\").h.SpelunkRocks[t]; const effects = idleon.getAttr(\"PixelHelperActor\")[26].behaviors.getBehavior(\"ActorEvents_713\")._GenINFO[107]; if (!Array.isArray(effects) || effects.length !== 13 || Number(effects[9]) !== 0) throw new Error(\"Saved Grand chance requires native Grand elixir effect zero\"); if (t >= idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0) || !s[6].includes(String(rocks[rocks.length - 2][0])) || idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0) < 1 || Number(s[44][t]) >= 10) return null; return idleon.callFunction(\"Spelunk\", \"GrandDiscoveries_FindChance\", t, 0); })()",
+      "description": "Tunnel 2 native final-object Grand chance for character 3, or null. Applies exact ordinary-discovery membership, upgrade 43, count below 10, and the additional saved tunnel-access projection gate. Native caller: idleon1.24.txt:277985-277992. Helper: docs/game-snippets/spelunking/Spelunk.1.24.js:8, GrandDiscoveries_FindChance. Requires zero active Grand elixir; no clamping."
+    },
+    {
+      "label": "tunnel_3_next_grand_chance",
+      "expression": "(() => { const t = 3; const s = idleon.getAttr(\"Spelunk\"); const rocks = idleon.getAttr(\"CustomLists\").h.SpelunkRocks[t]; const effects = idleon.getAttr(\"PixelHelperActor\")[26].behaviors.getBehavior(\"ActorEvents_713\")._GenINFO[107]; if (!Array.isArray(effects) || effects.length !== 13 || Number(effects[9]) !== 0) throw new Error(\"Saved Grand chance requires native Grand elixir effect zero\"); if (t >= idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0) || !s[6].includes(String(rocks[rocks.length - 2][0])) || idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0) < 1 || Number(s[44][t]) >= 10) return null; return idleon.callFunction(\"Spelunk\", \"GrandDiscoveries_FindChance\", t, 0); })()",
+      "description": "Tunnel 3 native final-object Grand chance for character 3, or null. Applies exact ordinary-discovery membership, upgrade 43, count below 10, and the additional saved tunnel-access projection gate. Native caller: idleon1.24.txt:277985-277992. Helper: docs/game-snippets/spelunking/Spelunk.1.24.js:8, GrandDiscoveries_FindChance. Requires zero active Grand elixir; no clamping."
+    },
+    {
+      "label": "tunnel_4_next_grand_chance",
+      "expression": "(() => { const t = 4; const s = idleon.getAttr(\"Spelunk\"); const rocks = idleon.getAttr(\"CustomLists\").h.SpelunkRocks[t]; const effects = idleon.getAttr(\"PixelHelperActor\")[26].behaviors.getBehavior(\"ActorEvents_713\")._GenINFO[107]; if (!Array.isArray(effects) || effects.length !== 13 || Number(effects[9]) !== 0) throw new Error(\"Saved Grand chance requires native Grand elixir effect zero\"); if (t >= idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0) || !s[6].includes(String(rocks[rocks.length - 2][0])) || idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0) < 1 || Number(s[44][t]) >= 10) return null; return idleon.callFunction(\"Spelunk\", \"GrandDiscoveries_FindChance\", t, 0); })()",
+      "description": "Tunnel 4 native final-object Grand chance for character 3, or null. Applies exact ordinary-discovery membership, upgrade 43, count below 10, and the additional saved tunnel-access projection gate. Native caller: idleon1.24.txt:277985-277992. Helper: docs/game-snippets/spelunking/Spelunk.1.24.js:8, GrandDiscoveries_FindChance. Requires zero active Grand elixir; no clamping."
+    },
+    {
+      "label": "tunnel_5_next_grand_chance",
+      "expression": "(() => { const t = 5; const s = idleon.getAttr(\"Spelunk\"); const rocks = idleon.getAttr(\"CustomLists\").h.SpelunkRocks[t]; const effects = idleon.getAttr(\"PixelHelperActor\")[26].behaviors.getBehavior(\"ActorEvents_713\")._GenINFO[107]; if (!Array.isArray(effects) || effects.length !== 13 || Number(effects[9]) !== 0) throw new Error(\"Saved Grand chance requires native Grand elixir effect zero\"); if (t >= idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0) || !s[6].includes(String(rocks[rocks.length - 2][0])) || idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0) < 1 || Number(s[44][t]) >= 10) return null; return idleon.callFunction(\"Spelunk\", \"GrandDiscoveries_FindChance\", t, 0); })()",
+      "description": "Tunnel 5 native final-object Grand chance for character 3, or null. Applies exact ordinary-discovery membership, upgrade 43, count below 10, and the additional saved tunnel-access projection gate. Native caller: idleon1.24.txt:277985-277992. Helper: docs/game-snippets/spelunking/Spelunk.1.24.js:8, GrandDiscoveries_FindChance. Requires zero active Grand elixir; no clamping."
+    },
+    {
+      "label": "tunnel_6_next_grand_chance",
+      "expression": "(() => { const t = 6; const s = idleon.getAttr(\"Spelunk\"); const rocks = idleon.getAttr(\"CustomLists\").h.SpelunkRocks[t]; const effects = idleon.getAttr(\"PixelHelperActor\")[26].behaviors.getBehavior(\"ActorEvents_713\")._GenINFO[107]; if (!Array.isArray(effects) || effects.length !== 13 || Number(effects[9]) !== 0) throw new Error(\"Saved Grand chance requires native Grand elixir effect zero\"); if (t >= idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0) || !s[6].includes(String(rocks[rocks.length - 2][0])) || idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0) < 1 || Number(s[44][t]) >= 10) return null; return idleon.callFunction(\"Spelunk\", \"GrandDiscoveries_FindChance\", t, 0); })()",
+      "description": "Tunnel 6 native final-object Grand chance for character 3, or null. Applies exact ordinary-discovery membership, upgrade 43, count below 10, and the additional saved tunnel-access projection gate. Native caller: idleon1.24.txt:277985-277992. Helper: docs/game-snippets/spelunking/Spelunk.1.24.js:8, GrandDiscoveries_FindChance. Requires zero active Grand elixir; no clamping."
+    },
+    {
+      "label": "tunnel_7_next_grand_chance",
+      "expression": "(() => { const t = 7; const s = idleon.getAttr(\"Spelunk\"); const rocks = idleon.getAttr(\"CustomLists\").h.SpelunkRocks[t]; const effects = idleon.getAttr(\"PixelHelperActor\")[26].behaviors.getBehavior(\"ActorEvents_713\")._GenINFO[107]; if (!Array.isArray(effects) || effects.length !== 13 || Number(effects[9]) !== 0) throw new Error(\"Saved Grand chance requires native Grand elixir effect zero\"); if (t >= idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0) || !s[6].includes(String(rocks[rocks.length - 2][0])) || idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0) < 1 || Number(s[44][t]) >= 10) return null; return idleon.callFunction(\"Spelunk\", \"GrandDiscoveries_FindChance\", t, 0); })()",
+      "description": "Tunnel 7 native final-object Grand chance for character 3, or null. Applies exact ordinary-discovery membership, upgrade 43, count below 10, and the additional saved tunnel-access projection gate. Native caller: idleon1.24.txt:277985-277992. Helper: docs/game-snippets/spelunking/Spelunk.1.24.js:8, GrandDiscoveries_FindChance. Requires zero active Grand elixir; no clamping."
+    },
+    {
+      "label": "tunnel_8_next_grand_chance",
+      "expression": "(() => { const t = 8; const s = idleon.getAttr(\"Spelunk\"); const rocks = idleon.getAttr(\"CustomLists\").h.SpelunkRocks[t]; const effects = idleon.getAttr(\"PixelHelperActor\")[26].behaviors.getBehavior(\"ActorEvents_713\")._GenINFO[107]; if (!Array.isArray(effects) || effects.length !== 13 || Number(effects[9]) !== 0) throw new Error(\"Saved Grand chance requires native Grand elixir effect zero\"); if (t >= idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0) || !s[6].includes(String(rocks[rocks.length - 2][0])) || idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0) < 1 || Number(s[44][t]) >= 10) return null; return idleon.callFunction(\"Spelunk\", \"GrandDiscoveries_FindChance\", t, 0); })()",
+      "description": "Tunnel 8 native final-object Grand chance for character 3, or null. Applies exact ordinary-discovery membership, upgrade 43, count below 10, and the additional saved tunnel-access projection gate. Native caller: idleon1.24.txt:277985-277992. Helper: docs/game-snippets/spelunking/Spelunk.1.24.js:8, GrandDiscoveries_FindChance. Requires zero active Grand elixir; no clamping."
+    },
+    {
+      "label": "tunnel_9_next_grand_chance",
+      "expression": "(() => { const t = 9; const s = idleon.getAttr(\"Spelunk\"); const rocks = idleon.getAttr(\"CustomLists\").h.SpelunkRocks[t]; const effects = idleon.getAttr(\"PixelHelperActor\")[26].behaviors.getBehavior(\"ActorEvents_713\")._GenINFO[107]; if (!Array.isArray(effects) || effects.length !== 13 || Number(effects[9]) !== 0) throw new Error(\"Saved Grand chance requires native Grand elixir effect zero\"); if (t >= idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0) || !s[6].includes(String(rocks[rocks.length - 2][0])) || idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0) < 1 || Number(s[44][t]) >= 10) return null; return idleon.callFunction(\"Spelunk\", \"GrandDiscoveries_FindChance\", t, 0); })()",
+      "description": "Tunnel 9 native final-object Grand chance for character 3, or null. Applies exact ordinary-discovery membership, upgrade 43, count below 10, and the additional saved tunnel-access projection gate. Native caller: idleon1.24.txt:277985-277992. Helper: docs/game-snippets/spelunking/Spelunk.1.24.js:8, GrandDiscoveries_FindChance. Requires zero active Grand elixir; no clamping."
+    }
+  ]
+}

@@ -37,6 +37,29 @@ describe('Sushi Station - current Knowledge bonuses and XP threshold', () => {
     }
   });
 
+  // These four Sushi share the separate faster-fuel category.
+  // Leviathan Roll belongs to the category even though the native fuel-rate formula omits it.
+  const fasterFuelContributors = [
+    { tier: 27, name: 'King Beef Sashimi', state: 'progressed' },
+    { tier: 36, name: 'Abalone Sashimi', state: 'progressed' },
+    { tier: 45, name: 'Imaginei Dragonroll', state: 'unleveled' },
+    { tier: 57, name: 'Leviathan Roll', state: 'unleveled' },
+  ];
+
+  for (const { tier, name, state } of fasterFuelContributors) {
+    it(`matches ${state} ${name}'s separate faster-fuel Knowledge contribution`, () => {
+      const expected = extractionResults.extractions.sushi_knowledge_bonus_specific.result[tier];
+      expect(station.sushi[tier].getKnowledgeBonus()).toMatchLiveGameWithDetails(expected, {
+        tolerance: 0,
+        context: `${name} raw Knowledge contribution to the separate faster-fuel category`,
+        calculationDetails: { tier, level: sushiLevels[tier] },
+      });
+    });
+  }
+
+  // Generated category/base mappings are missing for tiers 59–63.
+  // Their zero Knowledge levels do not verify progressed contributions in this paired save.
+
 
 
   it('matches the XP threshold for a real Sushi level', () => {

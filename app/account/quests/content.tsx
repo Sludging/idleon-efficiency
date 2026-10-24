@@ -200,6 +200,7 @@ function Quests() {
                         { value: "Hyperion Nebula", label: "World 4" },
                         { value: "Smolderin' Plateau", label: "World 5" },
                         { value: "Spirited Valley", label: "World 6" },
+                        { value: "Shimmerfin Deep", label: "World 7" },
                         { value: "Events", label: "Events" },
                     ]}
                     value={activeWorld}

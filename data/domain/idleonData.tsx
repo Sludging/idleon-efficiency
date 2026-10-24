@@ -59,7 +59,7 @@ import { Sneaking, updateSneaking, updateSneakingGemstones, updateSneakingNinjas
 import { Summoning, updateSummoningUpgrades, updateSummoningWinnerBonusBoost, updateSummoningWinnerImpact } from './world-6/summoning';
 import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLandRankBonuses, updateFarmingLevel, updateFarmingStickerBonuses } from './world-6/farming';
 import { SushiStation, updateSushiStation } from './world-7/sushi';
-import { Spelunking, updateSpelunkingChapterBonuses, updateSpelunkingUpgradeBonuses, updateSpelunkingPower, updateSpelunkingPresentation } from './world-7/spelunking';
+import { Spelunking, updateSpelunkingChapterBonuses, updateSpelunkingUpgradeBonuses, updateSpelunkingPower, updateSpelunkingAccountMetrics, updateSpelunkingLateCalculations, updateSpelunkingPresentation } from './world-7/spelunking';
 import { ResearchGrid, updateResearchGrid, updateResearchDisplay } from './world-7/research';
 import { Minehead, updateMinehead, updateMineheadDropRate, updateMineheadDailyTries, updateMineheadBaseDamage, updateMineheadDepthCharges, updateMineheadCurrencyGain } from './world-7/minehead';
 import { Glimbo, updateGlimbo } from './world-7/glimbo';
@@ -431,6 +431,8 @@ const postProcessingMap: Record<string, Function> = {
     // Persistent POW consumes settled producers and effective account upgrade bonuses.
     "spelunkingUpgradeBonuses": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingUpgradeBonuses(accountData),
     "spelunkingPower": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingPower(accountData),
+    // Saved metrics use final character inputs and effective account upgrade bonuses.
+    "spelunkingAccountMetrics": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingAccountMetrics(accountData),
 }
 
 // I really really hate this.
@@ -469,7 +471,8 @@ const postPostProcessingMap: Record<string, Function> = {
     // Omnijade summaries and Charm Collector need the prepared permanent charms and settled account providers.
     "sneakingOmnijade": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateSneakingOmnijade(accountData),
     "shinyCritterRewardMultiplier": (_doc: Cloudsave, accountData: Map<string, any>) => updateShinyCritterRewardMultiplier(accountData),
-    // Saved-snapshot stamina and page locations need late Meritocracy and final character talent contexts.
+    // Numerical stamina inputs need late Royal Armory and Meritocracy before page-stack preparation.
+    "spelunkingLateCalculations": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingLateCalculations(accountData),
     "spelunkingPresentation": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingPresentation(accountData),
     // These Gaming results are UI-only; Imports, Garden and Palette chances need the settled account inputs above.
     "gaming": (doc: Cloudsave, accountData: Map<string, any>) => updateGamingDisplay(accountData),

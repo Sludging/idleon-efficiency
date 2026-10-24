@@ -30,7 +30,7 @@ import type { Sailing } from "../world-5/sailing/sailing";
 import type { StaticRepositories } from "../repositories";
 import { SkillMastery, type Rift } from "../world-4/rift";
 import type { RoyalArmory } from "../world-6/royalArmory/royalArmory";
-import type { Card } from "../cards";
+import { Card } from "../cards";
 import type { Alchemy } from "../world-2/alchemy/alchemy";
 import type { BigFish } from "./bigFish";
 import type { LegendTalents } from "./legendTalents";
@@ -51,6 +51,12 @@ import type { Summoning } from "../world-6/summoning";
 import type { Button } from "./button";
 import type { Clamworks } from "./clamworks";
 import type { DancingCoral } from "./dancingCoral";
+import { getStampBonusForKey, type Stamp } from "../world-1/stamps";
+import type { Arcade } from "../world-2/arcade";
+import type { Hole } from "../world-5/hole/hole";
+import type { Skilling } from "../skilling";
+import type { Minehead } from "./minehead";
+import type { ZenithMarket } from "./zenithShop";
 
 const ELIXIR_EFFECT_QUANTITIES = [25, 1, 30, 1, 20, 60, 25, 30, 1, 1, 1, 0];
 const GRAND_DISCOVERIES_PER_TUNNEL = 10;
@@ -86,6 +92,59 @@ export interface SpelunkingPowerInputs {
     paletteBonus: number;
     exoticMarketBonus: number;
     cardLevel: number;
+}
+
+export interface SpelunkingAmberInputs {
+    arcadeBonus: number;
+    sushiBonus: number;
+    cropScientistBonus: number;
+    lampBonus: number;
+    stampBonus: number;
+    vialBonus: number;
+    mealBonus: number;
+    dancingCoralBonus: number;
+    cardLevel: number;
+    summoningWinnerBonus: number;
+    masteryAmberPercent: number;
+    loreEpilogueBonus: number;
+    exoticMarketBonus: number;
+}
+
+export interface SpelunkingCharacterMetricInputs {
+    masteryEfficiencyPercent: number;
+    efficiencyStampBonus: number;
+    efficiencyVialBonus: number;
+    efficiencyBubbleBonus: number;
+    zenithMarketBonus: number;
+    jellyObstructionBonus: number;
+    mineheadBonus: number;
+    sushiBonus: number;
+    coveBonus: number;
+    grandTalentMultiplier: number;
+}
+
+export interface SpelunkingPlayerMetricInputs {
+    playerID: number;
+    skillLevel: number;
+    allEfficiencyMultiplier: number;
+    efficiencyTalentMultiplier: number;
+    efficiencyCardBonus: number;
+}
+
+export interface CaveNodeHarvestOutcome {
+    eligible: boolean;
+    harvestChance: number;
+    pagesPerDrop: number | undefined;
+}
+
+interface SpelunkingCaveNodeInputs {
+    bubbleProwessMultiplier: number;
+    mealProwessPercent: number;
+}
+
+interface SpelunkingPlayerCaveNodeInputs {
+    playerID: number;
+    starSignProwess: number;
 }
 
 const getLevelSquareSum = (start: number, count: number): number => {
@@ -740,10 +799,21 @@ export class SpelunkingManic {
     }
 }
 
+export type OverstimNextLevelEstimate =
+    | { status: 'estimated'; hours: number }
+    | { status: 'locked' | 'unavailable' | 'ready' | 'pending-update' };
+
 export class SpelunkingOverstim {
     unlocked: boolean = false;
     level: number = 0;
     fill: number = 0;
+    fillBonusPercent: number = 0;
+    potentialFillPerHour: number = 0;
+    nextLevelEstimate: OverstimNextLevelEstimate = { status: 'unavailable' };
+
+    get remainingFill(): number {
+        return Math.max(0, this.threshold - this.fill);
+    }
 
     get threshold(): number {
         return 100 * Math.pow(1.3, this.level);
@@ -768,6 +838,67 @@ export class SpelunkingOverstim {
         this.fill = Number(fill ?? 0);
         this.upgradeBonus = upgradeBonus;
         this.unlocked = upgradeBonus >= 1;
+        this.fillBonusPercent = 0;
+        this.potentialFillPerHour = 0;
+        this.nextLevelEstimate = { status: 'unavailable' };
+    }
+
+    preparePotentialFillRate(fillBonusPercent: number, totalHourlyRecharge: number): void {
+        this.fillBonusPercent = fillBonusPercent;
+        this.potentialFillPerHour = this.unlocked
+            ? totalHourlyRecharge * (1 + fillBonusPercent / 100)
+            : 0;
+    }
+
+    prepareNextLevelEstimate(stamina: readonly SpelunkingStamina[], hourlyRecharge: number): void {
+        this.nextLevelEstimate = { status: 'unavailable' };
+        if (!this.unlocked) {
+            this.nextLevelEstimate = { status: 'locked' };
+            return;
+        }
+
+        let remainingFill = this.remainingFill;
+        if (remainingFill <= 0) {
+            this.nextLevelEstimate = { status: 'ready' };
+            return;
+        }
+
+        const fillMultiplier = 1 + this.fillBonusPercent / 100;
+        // Saved excess transfers once on a qualifying game update, even without more recharge.
+        for (const characterStamina of stamina) {
+            remainingFill -= fillMultiplier * Math.max(0, characterStamina.current - characterStamina.maximum);
+        }
+        if (remainingFill <= 0) {
+            this.nextLevelEstimate = { status: 'pending-update' };
+            return;
+        }
+        if (stamina.length === 0 || hourlyRecharge <= 0) {
+            return;
+        }
+
+        const fullStaminaTimes = stamina
+            .map(characterStamina => characterStamina.getHoursUntilFull(hourlyRecharge))
+            .sort((left, right) => left - right);
+        let elapsedHours = 0;
+        let activeFillPerHour = 0;
+        for (const fullStaminaTime of fullStaminaTimes) {
+            const intervalFill = activeFillPerHour * (fullStaminaTime - elapsedHours);
+            if (activeFillPerHour > 0 && remainingFill <= intervalFill) {
+                this.nextLevelEstimate = {
+                    status: 'estimated',
+                    hours: elapsedHours + remainingFill / activeFillPerHour,
+                };
+                return;
+            }
+            remainingFill -= intervalFill;
+            elapsedHours = fullStaminaTime;
+            activeFillPerHour += fillMultiplier * hourlyRecharge;
+        }
+
+        this.nextLevelEstimate = {
+            status: 'estimated',
+            hours: elapsedHours + remainingFill / activeFillPerHour,
+        };
     }
 }
 
@@ -837,6 +968,11 @@ export class Spelunking extends Domain {
     automaticToolUse: SpelunkingAutomaticToolUse = new SpelunkingAutomaticToolUse();
     stamina: SpelunkingStamina[] = []
     persistentPower: number = 1;
+    savedAmberGainMultiplier: number = 1;
+    private readonly efficiencies = new Map<number, number>();
+    private readonly grandDiscoveryBases = new Map<number, number>();
+    grandDiscoveryPlayerID: number | undefined;
+    private readonly caveNodeHarvests = new Map<number, Map<number, Readonly<CaveNodeHarvestOutcome>>>();
     dailyReadLimit: number = 5;
     dailyReadsUsed: number = 0;
     readonly baseHourlyRecharge: number = 5;
@@ -943,6 +1079,38 @@ export class Spelunking extends Domain {
         return this.grandDiscoveryUpgrade.data.bonusPerLevel * this.grandDiscoveryUpgrade.purchasedLevel;
     }
 
+    getEfficiency(playerID: number): number {
+        const efficiency = this.efficiencies.get(playerID);
+        if (efficiency === undefined) {
+            throw new Error(`Spelunking efficiency has not been calculated for player ${playerID}`);
+        }
+        return efficiency;
+    }
+
+    getCaveNodeHarvest(chapterIndex: number, playerID: number): Readonly<CaveNodeHarvestOutcome> {
+        const harvests = this.caveNodeHarvests.get(playerID);
+        if (harvests === undefined) {
+            throw new Error(`Spelunking Cave Node harvests have not been calculated for player ${playerID}`);
+        }
+        const harvest = harvests.get(chapterIndex);
+        if (harvest === undefined) {
+            throw new Error(`Spelunking Cave Node chapter ${chapterIndex} does not exist`);
+        }
+        return harvest;
+    }
+
+    getNextGrandDiscoveryChance(tunnelIndex: number, playerID: number): number | undefined {
+        const tunnel = this.tunnels[tunnelIndex];
+        if (!tunnel.grandEligible) {
+            return undefined;
+        }
+        const base = this.grandDiscoveryBases.get(playerID);
+        if (base === undefined) {
+            throw new Error(`Spelunking Grand chance has not been calculated for player ${playerID}`);
+        }
+        return base * Math.pow(2, -tunnel.grandSummary.found);
+    }
+
     get ordinarySummary(): CollectionSummary {
         const found = this.getTotalDiscoveries();
         const capacity = this.tunnels.reduce((total, tunnel) => total + tunnel.discoveries.length, 0);
@@ -1013,6 +1181,11 @@ export class Spelunking extends Domain {
     /** Prepare neutral catalogue state before save parsing; calculation updates replace account-derived values. */
     init(allItems: Item[], charCount: number, repositories: StaticRepositories) {
         this.persistentPower = 1;
+        this.savedAmberGainMultiplier = 1;
+        this.efficiencies.clear();
+        this.grandDiscoveryBases.clear();
+        this.grandDiscoveryPlayerID = undefined;
+        this.caveNodeHarvests.clear();
         this.chapters = Chapter.fromBase(initSpelunkingChapterRepo(), allItems);
         this.upgrades = Upgrade.fromBase(initSpelunkingUpgradeRepo());
         this.tools = SpelunkingTool.fromBase(initSpelunkingToolRepo());
@@ -1118,6 +1291,11 @@ export class Spelunking extends Domain {
     parse(data: Map<string, any>): void {
         const spelunking = data.get(this.getDataKey()) as Spelunking;
         spelunking.persistentPower = 1;
+        spelunking.savedAmberGainMultiplier = 1;
+        spelunking.efficiencies.clear();
+        spelunking.grandDiscoveryBases.clear();
+        spelunking.grandDiscoveryPlayerID = undefined;
+        spelunking.caveNodeHarvests.clear();
         const charCount = data.get("charCount") as number;
         spelunking.stamina = Array.from({ length: charCount }, (_, playerID) =>
             spelunking.stamina.find(stamina => stamina.playerID === playerID) ?? new SpelunkingStamina(playerID)
@@ -1224,6 +1402,103 @@ export class Spelunking extends Domain {
             * (1 + (upgrade14 + (upgrade15 + (upgrade16 + upgrade17))) / 100);
 
         this.persistentPower = (1 + upgrade0) * multiplier;
+    }
+
+    prepareSavedAmberGain(inputs: SpelunkingAmberInputs): void {
+        // Saved preview uses depth zero and no destroyed objects or active elixir effects.
+        // Preserve native multiplication order and nested sums.
+        this.savedAmberGainMultiplier = (1 + 14 * this.upgrades[67].sourceBonus)
+            * (1 + inputs.arcadeBonus / 100)
+            * (1 + inputs.sushiBonus / 100)
+            * (1 + (inputs.cropScientistBonus
+                + (inputs.lampBonus + inputs.stampBonus + inputs.vialBonus + inputs.mealBonus)) / 100)
+            * (1 + inputs.dancingCoralBonus / 100)
+            * (1 + (Math.min(5 * inputs.cardLevel, 40) + Math.min(10 * inputs.cardLevel, 100)) / 100)
+            * (1 + inputs.summoningWinnerBonus / 100)
+            * (1 + (this.upgrades[7].getBonus()
+                + (this.upgrades[20].sourceBonus
+                    + (this.upgrades[41].sourceBonus + this.upgrades[51].sourceBonus))) / 100)
+            * this.overstim.amberMultiplier
+            * (1 + inputs.masteryAmberPercent / 100)
+            * (1 + this.upgrades[44].sourceBonus / 100)
+            * (1 + this.upgrades[8].sourceBonus / 100)
+            * (1 + this.upgrades[60].sourceBonus / 100)
+            * (1 + inputs.loreEpilogueBonus / 100)
+            * Math.max(1, this.chapters[1].bonuses[3].getBonus())
+            * Math.max(1, this.chapters[5].bonuses[1].getBonus())
+            * Math.max(1, this.chapters[4].bonuses[1].getBonus())
+            * (1 + inputs.exoticMarketBonus / 100)
+            * (1 + this.upgrades[9].sourceBonus / 100)
+            * (1 + this.upgrades[10].sourceBonus / 100)
+            * (1 + this.upgrades[21].sourceBonus / 150);
+    }
+
+    prepareCharacterMetrics(
+        inputs: SpelunkingCharacterMetricInputs,
+        players: readonly SpelunkingPlayerMetricInputs[]
+    ): void {
+        this.efficiencies.clear();
+        this.grandDiscoveryBases.clear();
+        this.grandDiscoveryPlayerID = undefined;
+        this.caveNodeHarvests.clear();
+        let highestSpelunkingLevel: number | undefined;
+        for (const player of players) {
+            if (highestSpelunkingLevel === undefined || player.skillLevel > highestSpelunkingLevel) {
+                highestSpelunkingLevel = player.skillLevel;
+                this.grandDiscoveryPlayerID = player.playerID;
+            }
+            const efficiency = (10 + (this.chapters[0].bonuses[0].getBonus()
+                + this.chapters[1].bonuses[0].getBonus()))
+                * Math.max(1, 1 + (player.allEfficiencyMultiplier - 1) / 20)
+                * (1 + inputs.masteryEfficiencyPercent / 100)
+                * (1 + this.upgrades[56].sourceBonus / 100)
+                * (1 + this.chapters[0].bonuses[1].getBonus() / 100)
+                * Math.max(1, player.efficiencyTalentMultiplier)
+                * (1 + (inputs.efficiencyStampBonus
+                    + (player.efficiencyCardBonus
+                        + (inputs.efficiencyVialBonus + inputs.efficiencyBubbleBonus))) / 100);
+            this.efficiencies.set(player.playerID, efficiency);
+
+            const grandBase = 0.00004
+                * (1 + this.upgrades[43].sourceBonus / 100)
+                * (1 + inputs.zenithMarketBonus / 100)
+                * (1 + this.chapters[4].bonuses[0].getBonus() / 100)
+                * (1 + inputs.jellyObstructionBonus / 100)
+                * (1 + player.skillLevel * (inputs.mineheadBonus + inputs.sushiBonus) / 100)
+                * (1 + inputs.coveBonus / 100)
+                * Math.max(1, inputs.grandTalentMultiplier)
+                * (1 + this.upgrades[55].sourceBonus / 100)
+                * Math.max(1, this.chapters[6].bonuses[1].getBonus());
+            this.grandDiscoveryBases.set(player.playerID, grandBase);
+        }
+    }
+
+    prepareCaveNodeHarvests(
+        inputs: SpelunkingCaveNodeInputs,
+        players: readonly SpelunkingPlayerCaveNodeInputs[]
+    ): void {
+        this.caveNodeHarvests.clear();
+        for (const player of players) {
+            const efficiency = this.getEfficiency(player.playerID);
+            const prowess = Math.max(0, Math.min(0.1,
+                (inputs.bubbleProwessMultiplier - 1) / 10
+                + (0.001 * player.starSignProwess + 0.0005 * inputs.mealProwessPercent)
+            ));
+            const harvests = new Map<number, Readonly<CaveNodeHarvestOutcome>>();
+            for (const chapter of this.chapters) {
+                const difficulty = chapter.gatheringSource.details.Defence;
+                const ratio = efficiency / difficulty;
+                const harvestChance = ratio >= 0.25
+                    ? Math.min(1.512 * (ratio - 0.0763) / (ratio + 5), 1)
+                    : 0;
+                const eligible = harvestChance > 0.05;
+                const pagesPerDrop = eligible
+                    ? Math.floor(Math.max(Math.pow(efficiency / (10 * difficulty), 0.25 + prowess), 1))
+                    : undefined;
+                harvests.set(chapter.index, { eligible, harvestChance, pagesPerDrop });
+            }
+            this.caveNodeHarvests.set(player.playerID, harvests);
+        }
     }
 
     prepareUpgradeBonuses(): void {
@@ -1366,10 +1641,73 @@ export const updateSpelunkingPower = (data: Map<string, any>): void => {
     });
 };
 
-export const updateSpelunkingPresentation = (data: Map<string, any>): void => {
+export const updateSpelunkingAccountMetrics = (data: Map<string, any>): void => {
     const spelunking = data.get("spelunking") as Spelunking;
     const players = data.get("players") as Player[];
-    const storage = data.get("storage") as Storage;
+    const cards = data.get("cards") as Card[];
+    const stamps = data.get("stamps") as Stamp[][];
+    const arcade = data.get("arcade") as Arcade;
+    const sushi = data.get("sushi") as SushiStation;
+    const farming = data.get("farming") as Farming;
+    const hole = data.get("hole") as Hole;
+    const alchemy = data.get("alchemy") as Alchemy;
+    const cooking = data.get("cooking") as Cooking;
+    const dancingCoral = data.get("dancingCoral") as DancingCoral;
+    const summoning = data.get("summoning") as Summoning;
+    const tome = data.get("tome") as Tome;
+    const rift = data.get("rift") as Rift;
+    const mastery = rift.bonuses.find(bonus => bonus.name === SkillMastery.displayName) as SkillMastery;
+    const skilling = data.get("skilling") as Skilling;
+    const zenithMarket = data.get("zenithMarket") as ZenithMarket;
+    const jellyOperator = data.get("jellyOperator") as JellyOperator;
+    const minehead = data.get("minehead") as Minehead;
+
+    spelunking.prepareSavedAmberGain({
+        arcadeBonus: arcade.bonuses.find(bonus => bonus.index === 55)!.getBonus(),
+        sushiBonus: sushi.getBonusFromIndex(28),
+        cropScientistBonus: farming.cropScientist.getBonus(CropScientistBonusText.Spelunky),
+        lampBonus: hole.lamp.getBonus(false, 3, 0),
+        stampBonus: getStampBonusForKey(stamps, "spelunkamb"),
+        vialBonus: alchemy.getVialBonusForKey("7amber"),
+        mealBonus: cooking.getMealBonusForKey("SplkAmb"),
+        dancingCoralBonus: dancingCoral.getBonusFromIndex(2),
+        cardLevel: cards.find(card => card.id === "w7a7")!.getLevels(),
+        summoningWinnerBonus: summoning.getSummoningWinnerBonusFromIndex(28),
+        masteryAmberPercent: mastery.getSkillBonus(SkillsIndex.Spelunking, 6),
+        loreEpilogueBonus: tome.getEpilogueBonus(4),
+        exoticMarketBonus: farming.getExoticMarketBonusValue(43),
+    });
+
+    let grandTalentMultiplier = 0;
+    for (const player of players) {
+        grandTalentMultiplier = Math.max(grandTalentMultiplier,
+            player.getTalentBonusAtInputs(238, player.finalTalentInputs));
+    }
+    spelunking.prepareCharacterMetrics({
+        masteryEfficiencyPercent: mastery.getSkillBonus(SkillsIndex.Spelunking, 1),
+        efficiencyStampBonus: getStampBonusForKey(stamps, "spelunkeff"),
+        efficiencyVialBonus: alchemy.getVialBonusForKey("7spelunkeff"),
+        efficiencyBubbleBonus: alchemy.getBubbleBonusForKey("A11"),
+        zenithMarketBonus: zenithMarket.getBonusForId(6),
+        jellyObstructionBonus: jellyOperator.getObstructionBonus(31),
+        mineheadBonus: minehead.getBonusFromIndex(14),
+        sushiBonus: sushi.getBonusFromIndex(21),
+        coveBonus: hole.cove.upgrades[20].getBonus(),
+        grandTalentMultiplier,
+    }, players.map(player => ({
+        playerID: player.playerID,
+        skillLevel: player.skills.get(SkillsIndex.Spelunking)!.level,
+        allEfficiencyMultiplier: skilling.getAllEfficiencies(player),
+        efficiencyTalentMultiplier: player.getTalentBonusAtInputs(237, player.finalTalentInputs),
+        efficiencyCardBonus: Card.GetTotalBonusForId(
+            player.cardInfo!.cards.filter(card => card.passive || player.cardInfo!.equippedCards.includes(card)), 98
+        ),
+    })));
+};
+
+export const updateSpelunkingLateCalculations = (data: Map<string, any>): void => {
+    const spelunking = data.get("spelunking") as Spelunking;
+    const players = data.get("players") as Player[];
     const taskBoard = data.get("taskboard") as TaskBoard;
     const companions = data.get("companions") as Companion[];
     const rift = data.get("rift") as Rift;
@@ -1394,6 +1732,16 @@ export const updateSpelunkingPresentation = (data: Map<string, any>): void => {
     const savedPlayerNames = data.get("playerNames") as string[];
     const firstSavedUsernamePlayer = players.find(player => player.playerName === savedPlayerNames[0])!;
     const cooking = data.get("cooking") as Cooking;
+    // Cave Node prowess needs each player's final Star Sign bonuses after late Meritocracy.
+    spelunking.prepareCaveNodeHarvests({
+        bubbleProwessMultiplier: alchemy.getBubbleBonusForKey("ProwessMulti"),
+        mealProwessPercent: cooking.getMealBonusForKey("Sprow"),
+    }, players.map(player => ({
+        playerID: player.playerID,
+        starSignProwess: player.starSigns.reduce(
+            (sum, sign) => sum + sign.getBonus("All Skill Prowess"), 0
+        ),
+    })));
     const jellyOperator = data.get("jellyOperator") as JellyOperator;
     let maximumTalentBonus = 0;
     for (const player of players) {
@@ -1449,5 +1797,21 @@ export const updateSpelunkingPresentation = (data: Map<string, any>): void => {
             player.skills.get(SkillsIndex.Spelunking)!.level, maximumInputs
         );
     });
+    // Native overflow pools recharge from actual characters, not padded saved stamina slots.
+    let totalHourlyRecharge = 0;
+    for (let playerIndex = 0; playerIndex < players.length; playerIndex++) {
+        totalHourlyRecharge += spelunking.hourlyRecharge;
+    }
+    spelunking.overstim.preparePotentialFillRate(
+        spelunking.chapters[2].bonuses[2].getBonus(), totalHourlyRecharge
+    );
+    spelunking.overstim.prepareNextLevelEstimate(
+        players.map(player => spelunking.stamina[player.playerID]), spelunking.hourlyRecharge
+    );
+};
+
+export const updateSpelunkingPresentation = (data: Map<string, any>): void => {
+    const spelunking = data.get("spelunking") as Spelunking;
+    const storage = data.get("storage") as Storage;
     spelunking.chapters.forEach(chapter => chapter.preparePageStacks(storage));
 };

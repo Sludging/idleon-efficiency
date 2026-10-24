@@ -1,0 +1,31 @@
+{
+  "description": "Collection-only Knowledge effects and the cooked-tier outcome for the retained owner save. Native arithmetic comes from Idleon 1.24; no cooking action or random draw is executed.",
+  "target": "SushiStation collection XP factor, cooked-tier outcome, Knowledge upgrade-cost factor, faster-Fuel factor, and collection Perfecto factor",
+  "extractions": [
+    {
+      "label": "sushi_effects_knowledge_experience_percent",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"KnowledgeBonusTOT\", 1, 0)",
+      "description": "Collection Knowledge XP bonus in percent. Convert to 1 + percent / 100 for the collection factor only, not the full slot XP multiplier. Source: idleon1.24.txt:244728-244733."
+    },
+    {
+      "label": "sushi_effects_cooked_tier_percent",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"BonusCookTierPCT\", 0, 0)",
+      "description": "Combined cooking upgrade 7 and Knowledge category 2 bonus. Native cooking adds floor(percent / 100 + a uniform random value in [0, 1)). Therefore floor(percent / 100) tiers are guaranteed; the fractional remainder is the chance for one more tier. Do not cap the combined input at 100%. Sources: idleon1.24.txt:244667,295763-295766."
+    },
+    {
+      "label": "sushi_effects_knowledge_upgrade_cost_factor",
+      "expression": "1 / (1 + idleon.callFunction(\"SushiStuff\", \"KnowledgeBonusTOT\", 6, 0) / 100)",
+      "description": "The reciprocal Knowledge factor applied to upgrade costs, not the raw percentage or a final upgrade price. Source: idleon1.24.txt:244599-244611."
+    },
+    {
+      "label": "sushi_effects_faster_fuel_knowledge_factor",
+      "expression": "(1 + idleon.callFunction(\"SushiStuff\", \"KnowledgeBonusSpecific\", 27, 0) / 100) * (1 + idleon.callFunction(\"SushiStuff\", \"KnowledgeBonusSpecific\", 36, 0) / 100) * (1 + idleon.callFunction(\"SushiStuff\", \"KnowledgeBonusSpecific\", 45, 0) / 100)",
+      "description": "The three separate Knowledge factors multiplied by native Fuel generation. Only King Beef Sashimi, Abalone Sashimi, and Imaginei Dragonroll contribute here. Leviathan Roll at index 57 is not part of this native product. Source: idleon1.24.txt:244632-244649."
+    },
+    {
+      "label": "sushi_effects_knowledge_perfecto_percent",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"KnowledgeBonusTOT\", 10, 0)",
+      "description": "Collection Perfecto bonus in percent. Convert to 1 + percent / 100 for the collection chance factor, not a tier-specific probability. Source: idleon1.24.txt:244755."
+    }
+  ]
+}

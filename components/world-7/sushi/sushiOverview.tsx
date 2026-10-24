@@ -36,6 +36,8 @@ const SushiOverview = ({ station }: { station: SushiStation }) => {
     const bucksPerHour = station.getBucksPerHour();
     const fuelPerHour = station.getFuelPerHour();
     const bonusFuelChance = station.getShakerBonusFuelChance();
+    const sparksPerHour = station.getSparksPerHour();
+    const nextSparkThresholds = station.getNextSparkThresholds();
 
     const shakerEffect = (shaker: SushiShaker): { label: string; value: string; tooltip?: string } => {
         switch (shaker.kind) {
@@ -94,10 +96,13 @@ const SushiOverview = ({ station }: { station: SushiStation }) => {
                             <Text size="xsmall" color="accent-2">Rate</Text>
                         </Box>
                         <Box style={{ minWidth: 0 }}>
-                            <Text size="large" weight="normal" style={{ overflowWrap: "anywhere" }}>{formatAmount(station.fuelOverflow)}</Text>
+                            <Box direction="row" wrap align="baseline" gap="xsmall">
+                                <Text size="large" weight="normal" style={{ overflowWrap: "anywhere" }}>{formatAmount(station.fuelOverflow)}</Text>
+                                <Text size="small" color="accent-2">{station.getOvertunedBucksFactor().toFixed(2)}x Bucks</Text>
+                            </Box>
                             <Box direction="row" gap="xxsmall" align="center">
                                 <Text size="xsmall" color="accent-2">Overflow</Text>
-                                <TipDisplay heading="Overflow" body="When Fuel is generated at capacity, 1 fuel overflow is gained. Current overflow provides a Bucks multiplier."><CircleInformation size="small" /></TipDisplay>
+                                <TipDisplay heading="Overtuned" body="Overtuned banks Fuel generated above capacity when its upgrade is owned. Stored overflow multiplies Bucks gained."><CircleInformation size="small" /></TipDisplay>
                             </Box>
                         </Box>
                     </Box>
@@ -110,16 +115,61 @@ const SushiOverview = ({ station }: { station: SushiStation }) => {
                         <Box direction="row" align="baseline" justify="between" gap="small">
                             <Box direction="row" gap="xxsmall" align="center">
                                 <Text size="xsmall" color="accent-2">Best combo</Text>
-                                <TipDisplay heading="Best combo" body="The best combo grants a permanent Bucks multiplier."><CircleInformation size="small" /></TipDisplay>
+                                <TipDisplay heading="Best combo" body={
+                                    <Box gap="small">
+                                        <Text size="small">The best combo grants a permanent Bucks multiplier.</Text>
+                                        <Box direction="row" align="baseline" justify="between" gap="small">
+                                            <Text size="small">Current multiplier</Text>
+                                            <Text size="small" weight="bold">{station.getComboMultiplier().toFixed(2)}x Bucks</Text>
+                                        </Box>
+                                    </Box>
+                                }><CircleInformation size="small" /></TipDisplay>
                             </Box>
-                            <Text size="large" weight="bold" textAlign="end" style={{ overflowWrap: "anywhere", minWidth: 0 }}>{formatAmount(station.bestComboScore)}</Text>
+                            <Box align="end" style={{ minWidth: 0 }}>
+                                <Text size="large" weight="bold" textAlign="end" style={{ overflowWrap: "anywhere" }}>{formatAmount(station.bestComboScore)}</Text>
+                            </Box>
                         </Box>
                         <Box direction="row" align="baseline" justify="between" gap="small">
                             <Box direction="row" gap="xxsmall" align="center">
                                 <Text size="xsmall" color="accent-2">Fireplace sparks</Text>
-                                <TipDisplay heading="Fireplace sparks" body="Purple Fireplaces generate 1 Fireplace Spark per second; sparks multiply all Fireplace bonuses."><CircleInformation size="small" /></TipDisplay>
+                                <TipDisplay heading="Fireplace sparks" body={
+                                    <Box gap="small">
+                                        <Text size="small">Each Potassium Fireplace generates 1 Spark per second.</Text>
+                                        <Text size="small">Total Sparks multiply all Fireplace bonuses.</Text>
+                                        <Box direction="row" align="baseline" justify="between" gap="small">
+                                            <Text size="small">Current multiplier</Text>
+                                            <Text size="small" weight="bold">{station.getFireplaceSparkFactor().toFixed(2)}x Fireplace effects</Text>
+                                        </Box>
+                                    </Box>
+                                }><CircleInformation size="small" /></TipDisplay>
                             </Box>
-                            <Text size="large" weight="bold" textAlign="end" style={{ overflowWrap: "anywhere", minWidth: 0 }}>{formatAmount(station.fireplaceSparks)}</Text>
+                            <Box align="end" style={{ minWidth: 0 }}>
+                                <Text size="large" weight="bold" textAlign="end" style={{ overflowWrap: "anywhere" }}>{formatAmount(station.fireplaceSparks)}</Text>
+                            </Box>
+                        </Box>
+                        <Box direction="row" align="baseline" justify="between" gap="small">
+                            <Box direction="row" gap="xxsmall" align="center">
+                                <Text size="xsmall" color="accent-2">Sparks/hour</Text>
+                                <TipDisplay
+                                    heading="Next Spark goals"
+                                    body={
+                                        <Box gap="xxsmall">
+                                            <Text size="small">Total Sparks needed for the next three multiplier goals.</Text>
+                                            {nextSparkThresholds.map(threshold => (
+                                                <Box key={threshold.targetFactor} direction="row" align="baseline" justify="between" gap="small">
+                                                    <Text size="xsmall">{threshold.targetFactor.toFixed(2)}x</Text>
+                                                    <Text size="xsmall" textAlign="end">{notateNumber(threshold.totalSparksRequired, "Smaller")} total Sparks</Text>
+                                                </Box>
+                                            ))}
+                                        </Box>
+                                    }
+                                >
+                                    <CircleInformation size="small" />
+                                </TipDisplay>
+                            </Box>
+                            <Text size="xsmall" textAlign="end">
+                                {formatAmount(sparksPerHour)}{sparksPerHour === 0 ? " · Not generating" : ""}
+                            </Text>
                         </Box>
                     </Box>
                 </Box>

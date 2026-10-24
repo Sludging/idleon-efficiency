@@ -19,6 +19,10 @@
         "value": "1.8074925731331244e+23"
       }
     },
+    "sushi_sparks_per_hour": {
+      "expression": "Array.from({length:15},(_,i)=>Number(idleon.getAttr(\"Sushi\")[3][i])===4?3600:0).reduce((total,rate)=>total+rate,0)",
+      "result": 0
+    },
     "sushi_upgrade_qty_0": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",0,0)",
       "result": 40
@@ -90,6 +94,10 @@
       "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",1,0)",
       "result": 188.93333333333334
     },
+    "sushi_knowledge_total_2": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",2,0)",
+      "result": 12.823333333333336
+    },
     "sushi_knowledge_total_3": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",3,0)",
       "result": 971.0000000000001
@@ -105,6 +113,18 @@
     "sushi_knowledge_total_6": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",6,0)",
       "result": 60.099999999999994
+    },
+    "sushi_knowledge_total_7": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",7,0)",
+      "result": 68.80000000000001
+    },
+    "sushi_knowledge_total_8": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",8,0)",
+      "result": 3.4133333333333336
+    },
+    "sushi_knowledge_total_9": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",9,0)",
+      "result": 0
     },
     "sushi_knowledge_total_10": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",10,0)",
@@ -254,6 +274,34 @@
       "expression": "idleon.callFunction(\"SushiStuff\",\"ComboMulti\",0,0)",
       "result": 10.1839850063498
     },
+    "sushi_fireplace_spark_percent": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"FireplaceSparkMulti\",0,0)",
+      "result": 0
+    },
+    "sushi_overtuned_percent": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"OvertunedMulti\",0,0)",
+      "result": 147.5988526091157
+    },
+    "sushi_next_spark_thresholds": {
+      "expression": "(()=>{const container=window.frames[0].__idleon_cheats__[\"scripts.ActorEvents_124\"];const currentFactor=1+idleon.callFunction(\"SushiStuff\",\"FireplaceSparkMulti\",0,0)/100;const factorAtSparks=sparks=>1+(0.2*container._customBlock_Log2(sparks)+container._customBlock_getLOG(sparks))/100;return Array.from({length:3},(_,index)=>{const offset=index+1;const targetFactor=(Math.floor(currentFactor*100)+offset)/100;let lower=1;let upper=2;while(factorAtSparks(upper)<targetFactor){upper*=2;}for(let iteration=0;iteration<100;iteration++){const midpoint=(lower+upper)/2;if(factorAtSparks(midpoint)<targetFactor){lower=midpoint;}else{upper=midpoint;}}return {targetFactor,totalSparksRequired:upper,nativeFactorAtThreshold:factorAtSparks(upper)};});})()",
+      "result": [
+        {
+          "targetFactor": 1.01,
+          "totalSparksRequired": 3.9886237590543083,
+          "nativeFactorAtThreshold": 1.01
+        },
+        {
+          "targetFactor": 1.02,
+          "totalSparksRequired": 15.909119491292753,
+          "nativeFactorAtThreshold": 1.02
+        },
+        {
+          "targetFactor": 1.03,
+          "totalSparksRequired": 63.45549198860526,
+          "nativeFactorAtThreshold": 1.03
+        }
+      ]
+    },
     "sushi_dependency_research_188": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",188,0)",
       "result": 2.6
@@ -293,10 +341,6 @@
     "sushi_dependency_sailing_status_39": {
       "expression": "idleon.getAttr(\"Sailing\")[3][39]",
       "result": 5
-    },
-    "sushi_bundle_flag_bon_v": {
-      "expression": "idleon.getAttr(\"BundlesReceived\").h.bon_v",
-      "result": null
     }
   },
   "errors": {}

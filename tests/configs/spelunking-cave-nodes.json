@@ -1,0 +1,42 @@
+{
+  "description": "Cave Node CORE outcomes for actual character 3 and all seven native nodes in the retained regular save. Native ChanceToHarvest and SpelunkingOreValue bind the current target; neither accepts an explicit node. These read-only expressions use their exact source arithmetic with native SpelunkingEfficiency, SpelunkingProwess, and each actual MonsterDefinitionsGET node. No target or game source changes. Efficiency eligibility does not bypass normal map access.",
+  "target": "Per-node harvest eligibility, harvest chance fraction, and integer pages per drop; no extra-drop or EXP multiplier",
+  "requiredActivePlayerIndex": 3,
+  "extractions": [
+    {
+      "label": "cave_node_0_player_3",
+      "expression": "(() => { const efficiency = idleon.callFunction(\"Spelunk\", \"SpelunkingEfficiency\", 0, 0); const prowess = idleon.callFunction(\"ArbitraryCode\", \"SpelunkingProwess\"); const difficulty = Number(idleon.getAttr(\"MonsterDefinitionsGET\").h.Spelunking0.h.Defence); const ratio = efficiency / difficulty; const harvestChance = ratio >= 0.25 ? Math.min(1.512 * (ratio - 0.0763) / (ratio + 5), 1) : 0; const eligible = harvestChance > 0.05; return { eligible, harvestChance, pagesPerDrop: eligible ? Math.floor(Math.max(Math.pow(efficiency / (10 * difficulty), 0.25 + prowess), 1)) : null, efficiency, prowess, difficulty }; })()",
+      "description": "Fearful Tunnel, chapter 1. Source: ../IdleonWikiBot/codefiles/idleon1.24.txt:96596-96662 (target-bound chance), 277184-277187 (strict 5% caller gate), 243110-243119 (target-bound integer pages). Efficiency 243085-243097 and prowess 95867-95891 run as native helpers. Null quantity means ineligible, not a hypothetical one-page harvest. Evidence operands are not parameter-test outputs."
+    },
+    {
+      "label": "cave_node_1_player_3",
+      "expression": "(() => { const efficiency = idleon.callFunction(\"Spelunk\", \"SpelunkingEfficiency\", 0, 0); const prowess = idleon.callFunction(\"ArbitraryCode\", \"SpelunkingProwess\"); const difficulty = Number(idleon.getAttr(\"MonsterDefinitionsGET\").h.Spelunking1.h.Defence); const ratio = efficiency / difficulty; const harvestChance = ratio >= 0.25 ? Math.min(1.512 * (ratio - 0.0763) / (ratio + 5), 1) : 0; const eligible = harvestChance > 0.05; return { eligible, harvestChance, pagesPerDrop: eligible ? Math.floor(Math.max(Math.pow(efficiency / (10 * difficulty), 0.25 + prowess), 1)) : null, efficiency, prowess, difficulty }; })()",
+      "description": "Decaying Crevasse, chapter 2. Exact native chance arithmetic: idleon1.24.txt:96649-96662; eligibility caller:277184-277187; integer pages:243110-243119. Uses native character efficiency and prowess, not domain results. Null quantity preserves below-minimum unavailability."
+    },
+    {
+      "label": "cave_node_2_player_3",
+      "expression": "(() => { const efficiency = idleon.callFunction(\"Spelunk\", \"SpelunkingEfficiency\", 0, 0); const prowess = idleon.callFunction(\"ArbitraryCode\", \"SpelunkingProwess\"); const difficulty = Number(idleon.getAttr(\"MonsterDefinitionsGET\").h.Spelunking2.h.Defence); const ratio = efficiency / difficulty; const harvestChance = ratio >= 0.25 ? Math.min(1.512 * (ratio - 0.0763) / (ratio + 5), 1) : 0; const eligible = harvestChance > 0.05; return { eligible, harvestChance, pagesPerDrop: eligible ? Math.floor(Math.max(Math.pow(efficiency / (10 * difficulty), 0.25 + prowess), 1)) : null, efficiency, prowess, difficulty }; })()",
+      "description": "Buried Church, chapter 3. Exact native chance arithmetic: idleon1.24.txt:96649-96662; eligibility caller:277184-277187; integer pages:243110-243119. Uses native character efficiency and prowess, not domain results. Null quantity preserves below-minimum unavailability."
+    },
+    {
+      "label": "cave_node_3_player_3",
+      "expression": "(() => { const efficiency = idleon.callFunction(\"Spelunk\", \"SpelunkingEfficiency\", 0, 0); const prowess = idleon.callFunction(\"ArbitraryCode\", \"SpelunkingProwess\"); const difficulty = Number(idleon.getAttr(\"MonsterDefinitionsGET\").h.Spelunking3.h.Defence); const ratio = efficiency / difficulty; const harvestChance = ratio >= 0.25 ? Math.min(1.512 * (ratio - 0.0763) / (ratio + 5), 1) : 0; const eligible = harvestChance > 0.05; return { eligible, harvestChance, pagesPerDrop: eligible ? Math.floor(Math.max(Math.pow(efficiency / (10 * difficulty), 0.25 + prowess), 1)) : null, efficiency, prowess, difficulty }; })()",
+      "description": "One Way Opening, chapter 4. Exact native chance arithmetic: idleon1.24.txt:96649-96662; eligibility caller:277184-277187; integer pages:243110-243119. Uses native character efficiency and prowess, not domain results. Null quantity preserves below-minimum unavailability."
+    },
+    {
+      "label": "cave_node_4_player_3",
+      "expression": "(() => { const efficiency = idleon.callFunction(\"Spelunk\", \"SpelunkingEfficiency\", 0, 0); const prowess = idleon.callFunction(\"ArbitraryCode\", \"SpelunkingProwess\"); const difficulty = Number(idleon.getAttr(\"MonsterDefinitionsGET\").h.Spelunking4.h.Defence); const ratio = efficiency / difficulty; const harvestChance = ratio >= 0.25 ? Math.min(1.512 * (ratio - 0.0763) / (ratio + 5), 1) : 0; const eligible = harvestChance > 0.05; return { eligible, harvestChance, pagesPerDrop: eligible ? Math.floor(Math.max(Math.pow(efficiency / (10 * difficulty), 0.25 + prowess), 1)) : null, efficiency, prowess, difficulty }; })()",
+      "description": "Plunder Cranny, chapter 5. Exact native chance arithmetic: idleon1.24.txt:96649-96662; eligibility caller:277184-277187; integer pages:243110-243119. Uses native character efficiency and prowess, not domain results. Null quantity preserves below-minimum unavailability."
+    },
+    {
+      "label": "cave_node_5_player_3",
+      "expression": "(() => { const efficiency = idleon.callFunction(\"Spelunk\", \"SpelunkingEfficiency\", 0, 0); const prowess = idleon.callFunction(\"ArbitraryCode\", \"SpelunkingProwess\"); const difficulty = Number(idleon.getAttr(\"MonsterDefinitionsGET\").h.Spelunking5.h.Defence); const ratio = efficiency / difficulty; const harvestChance = ratio >= 0.25 ? Math.min(1.512 * (ratio - 0.0763) / (ratio + 5), 1) : 0; const eligible = harvestChance > 0.05; return { eligible, harvestChance, pagesPerDrop: eligible ? Math.floor(Math.max(Math.pow(efficiency / (10 * difficulty), 0.25 + prowess), 1)) : null, efficiency, prowess, difficulty }; })()",
+      "description": "Kelp Forest, chapter 6. Exact native chance arithmetic: idleon1.24.txt:96649-96662; eligibility caller:277184-277187; integer pages:243110-243119. Uses native character efficiency and prowess, not domain results. Null quantity preserves below-minimum unavailability."
+    },
+    {
+      "label": "cave_node_6_player_3",
+      "expression": "(() => { const efficiency = idleon.callFunction(\"Spelunk\", \"SpelunkingEfficiency\", 0, 0); const prowess = idleon.callFunction(\"ArbitraryCode\", \"SpelunkingProwess\"); const difficulty = Number(idleon.getAttr(\"MonsterDefinitionsGET\").h.Spelunking6.h.Defence); const ratio = efficiency / difficulty; const harvestChance = ratio >= 0.25 ? Math.min(1.512 * (ratio - 0.0763) / (ratio + 5), 1) : 0; const eligible = harvestChance > 0.05; return { eligible, harvestChance, pagesPerDrop: eligible ? Math.floor(Math.max(Math.pow(efficiency / (10 * difficulty), 0.25 + prowess), 1)) : null, efficiency, prowess, difficulty }; })()",
+      "description": "Burned Tunnel, chapter 7. Exact native chance arithmetic: idleon1.24.txt:96649-96662; eligibility caller:277184-277187; integer pages:243110-243119. Uses native character efficiency and prowess, not domain results. Null quantity preserves below-minimum unavailability."
+    }
+  ]
+}

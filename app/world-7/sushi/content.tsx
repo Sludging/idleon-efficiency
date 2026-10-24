@@ -6,20 +6,24 @@ import { SushiStation as SushiStationDomain } from '../../../data/domain/world-7
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
 import { SushiCollection } from '../../../components/world-7/sushi/sushiCollection';
+import type { SushiKnowledgeCategory } from '../../../components/world-7/sushi/sushiCollection';
 import { SushiUpgrades } from '../../../components/world-7/sushi/sushiUpgrades';
 import { SushiOverview } from '../../../components/world-7/sushi/sushiOverview';
 import ContentTabs from '../../../components/base/ContentTabs';
+import useHydrated from '../../../lib/hooks/useHydrated';
 
 type SushiSection = 'collection' | 'upgrades';
 
 export default function SushiContent() {
+    const hydrated = useHydrated();
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
     const [section, setSection] = useState<SushiSection>('collection');
+    const [knowledgeCategory, setKnowledgeCategory] = useState<SushiKnowledgeCategory>('all');
     const station = theData.get("sushi") as SushiStationDomain | undefined;
 
-    if (!station) {
+    if (!hydrated || !station) {
         return <>Loading...</>
     }
 
@@ -38,7 +42,9 @@ export default function SushiContent() {
                     value={section}
                     onChange={setSection}
                 />
-                {section === 'collection' && <SushiCollection sushi={station.sushi} />}
+                {section === 'collection' && (
+                    <SushiCollection station={station} category={knowledgeCategory} onCategoryChange={setKnowledgeCategory} />
+                )}
                 {section === 'upgrades' && <SushiUpgrades upgrades={station.upgrades} bucks={station.bucks} />}
             </Box>
         </Box>
