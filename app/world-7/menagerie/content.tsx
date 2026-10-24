@@ -6,6 +6,7 @@ import { normalizeColor } from 'grommet/utils';
 import { useContext, useState } from 'react';
 import ContentTabs from '../../../components/base/ContentTabs';
 import IconImage from '../../../components/base/IconImage';
+import { DoublerSummary } from '../../../components/base/DoublerStatus';
 import RoundedShadowBox from '../../../components/base/RoundedShadowBox';
 import TextAndLabel from '../../../components/base/TextAndLabel';
 import { Menagerie as MenagerieDomain, MenagerieBonus, MenagerieMission } from '../../../data/domain/menagerie';
@@ -300,17 +301,20 @@ export default function MenagerieContent() {
                     {tab === 'Bonuses' && <Box gap="medium">
                         <Box border={[{ side: 'top', color: 'grey-1' }, { side: 'bottom', color: 'grey-1' }]} pad={{ vertical: 'small' }} direction="row" wrap gap="medium" align="center" aria-label="Usable Menagerie resources">
                             {([
-                                { key: 'blackStarsOwned', label: 'Black Stars', available: resources.blackStarsAvailable, total: resources.blackStarsOwned },
-                                { key: 'organicLabels', label: 'Organic Labels', available: resources.organicLabelsAvailable, total: resources.organicLabels },
-                                { key: 'mineheadDoublers', label: 'Minehead doublers', available: resources.mineheadDoublers, total: resources.mineheadDoublersOwned },
-                                { key: 'sushiDoublers', label: 'Sushi Station doublers', available: resources.sushiDoublers, total: resources.sushiDoublersOwned },
-                                { key: 'jellyOperatorDoublers', label: 'Jelly Operator doublers', available: resources.jellyOperatorDoublers, total: resources.jellyOperatorDoublersOwned },
+                                { key: 'blackStarsOwned', label: 'Black Stars', available: resources.blackStarsAvailable, total: resources.blackStarsOwned, description: 'One Black Star doubles a Star Sign or Palette color bonus (2x). Two Black Stars quadruple it (4x).' },
+                                { key: 'organicLabels', label: 'Organic Labels', available: resources.organicLabelsAvailable, total: resources.organicLabels, description: 'An Organic Label doubles an Exotic Market bonus and multiplies level gains from purchases by 1.5 before rounding up.' },
+                                { key: 'mineheadDoublers', label: 'Minehead doublers', available: resources.mineheadDoublers, total: resources.mineheadDoublersOwned, description: "Each doubler doubles a Minehead upgrade's quantity." },
+                                { key: 'sushiDoublers', label: 'Sushi Station doublers', available: resources.sushiDoublers, total: resources.sushiDoublersOwned, description: "Each doubler doubles a Sushi Station upgrade's quantity." },
+                                { key: 'jellyOperatorDoublers', label: 'Jelly Operator doublers', available: resources.jellyOperatorDoublers, total: resources.jellyOperatorDoublersOwned, description: "Each doubler doubles a Jelly Operator upgrade's quantity." },
                             ] as const).map((resource, resourceIndex) => <Box key={resource.key} direction="row" gap="medium" align="stretch" flex={{ grow: 1, shrink: 1 }} style={{ flexBasis: '160px' }}>
                                 {resourceIndex > 0 && <Box width="1px" background="grey-1" flex={false} aria-hidden="true" />}
-                                <Box direction="row" gap="small" align="center">
-                                    <IconImage data={MenagerieDomain.getUsableResourceImageData(resource.key)} scale={0.75} />
-                                    <TextAndLabel label={resource.label} text={`${commaNotation(resource.available)}/${commaNotation(resource.total)}`} textSize="small" />
-                                </Box>
+                                <DoublerSummary
+                                    label={resource.label}
+                                    owned={resource.total}
+                                    available={resource.available}
+                                    image={MenagerieDomain.getUsableResourceImageData(resource.key)}
+                                    description={resource.description}
+                                />
                             </Box>)}
                         </Box>
                         <Grid columns={small ? ['flex'] : ['flex', 'flex', 'flex', 'flex']} gap="medium" align="stretch">

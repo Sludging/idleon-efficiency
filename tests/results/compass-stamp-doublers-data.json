@@ -1,0 +1,21 @@
+{
+  "extractions": {
+    "stamp_doublers_owned": {
+      "expression": "idleon.callFunction(\"Windwalker\", \"StampDoublersLeft\", 999, 0)",
+      "result": 18
+    },
+    "stamp_doublers_available": {
+      "expression": "idleon.callFunction(\"Windwalker\", \"StampDoublersLeft\", 0, 0)",
+      "result": 2
+    },
+    "compass_bonus_44": {
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 44, 0)",
+      "result": 10
+    },
+    "event_shop_owned_18": {
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 18, 0)",
+      "result": 1
+    }
+  },
+  "errors": {}
+}

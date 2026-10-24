@@ -9,6 +9,7 @@ import { GamingSummary } from '../../../components/world-5/gaming/summary';
 import { GamingSuperbits } from '../../../components/world-5/gaming/superbits';
 import { GamingUpgrades } from '../../../components/world-5/gaming/upgrades';
 import { Gaming as GamingDomain } from '../../../data/domain/world-5/gaming';
+import { Menagerie } from '../../../data/domain/menagerie';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
 import useHydrated from '../../../lib/hooks/useHydrated';
@@ -29,6 +30,7 @@ function Gaming() {
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
     const gaming = theData.get('gaming') as GamingDomain | undefined;
+    const menagerie = theData.get('menagerie') as Menagerie;
 
     if (!hydrated || !gaming) {
         return (
@@ -48,7 +50,7 @@ function Gaming() {
                     {activeTab === 'Plants' && <GamingPlants gaming={gaming} />}
                     {activeTab === 'Upgrades' && <GamingUpgrades gaming={gaming} />}
                     {activeTab === 'Superbits' && <GamingSuperbits gaming={gaming} />}
-                    {activeTab === 'Palette' && <GamingPalette gaming={gaming} />}
+                    {activeTab === 'Palette' && <GamingPalette gaming={gaming} menagerie={menagerie} />}
                 </Box>
             </Box>
         </Box>

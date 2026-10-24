@@ -1,4 +1,5 @@
 import { letterToNumber } from "../../../utility";
+import type { ImageData } from "../../imageData";
 import type { Gaming } from "../gaming";
 import type { GamingSuperbitBase } from "../../data/GamingSuperbitsRepo";
 import type { GamingPaletteBase } from "../../data/GamingPaletteRepo";
@@ -191,6 +192,14 @@ export class PaletteColor {
             gaming.palette.bonusLuck *
             (1 / (this.levelUpBase * Math.pow(Math.max(1.2, this.levelUpExponent - 0.05), this.level)))
         );
+    }
+
+    getBlackStarState(): number { return this.blackStarState; }
+
+    getBlackStarImageData(): ImageData {
+        return this.blackStarState === 2
+            ? { location: "MenaBlackStarDouble", width: 18, height: 60 }
+            : { location: "MenaBlackStar", width: 18, height: 17 };
     }
 
     getBonus(): number { return this.bonus; }

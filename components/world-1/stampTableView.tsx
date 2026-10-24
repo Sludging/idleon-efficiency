@@ -27,6 +27,8 @@ import CoinsDisplay from "../coinsDisplay";
 import { Item } from "../../data/domain/items";
 import { Storage } from "../../data/domain/storage";
 import { AtomCollider } from "../../data/domain/world-3/construction/atomCollider";
+import { Compass } from "../../data/domain/compass";
+import { DoublerBadge } from "../base/DoublerStatus";
 
 enum StampStatus {
     NoCalculator = 'Unknown',
@@ -67,6 +69,7 @@ function StampsTableView({ stamps }: { stamps: Stamp[] }) {
     const storage = theData.get("storage") as Storage;
     const collider = theData.get("collider") as AtomCollider;
     const allItems = theData.get("itemsData") as Item[];
+    const compass = theData.get("compass") as Compass;
 
     const gildedUnlocked = stamps[0]?.gildedAvailable ?? false;
     // Initialize state with current values from the first stamp
@@ -99,6 +102,10 @@ function StampsTableView({ stamps }: { stamps: Stamp[] }) {
                     <Box direction="row" gap="small" align="center">
                         <IconImage data={stamp.getImageData()} scale={0.4} />
                         <Text size="small">{data.name}</Text>
+                        {compass.exaltedStampNames.has(stamp.raw_name) && <DoublerBadge
+                            label="Exalted"
+                            image={Compass.getExaltedStampImageData()}
+                        />}
                     </Box>
                 );
             }

@@ -1,0 +1,25 @@
+{
+  "extractions": {
+    "summoning_doublers_owned": {
+      "expression": "idleon.callFunction('Holes','GambitBonuses',0,0)+10*idleon.callFunction('Summoning','EventShopOwned',15,0)",
+      "result": 20
+    },
+    "summoning_doublers_available": {
+      "expression": "idleon.callFunction('Holes','Gambit_SummoningDoublersLeft',0,0)",
+      "result": 2
+    },
+    "summoning_doublers_used": {
+      "expression": "idleon.engine.getGameAttribute('Holes')[28].filter(function(id){return id != -1}).length",
+      "result": 18
+    },
+    "gambit_summoning_doublers": {
+      "expression": "idleon.callFunction('Holes','GambitBonuses',0,0)",
+      "result": 20
+    },
+    "summoning_star_owned": {
+      "expression": "Number(idleon.callFunction('Summoning','EventShopOwned',15,0))",
+      "result": 0
+    }
+  },
+  "errors": {}
+}

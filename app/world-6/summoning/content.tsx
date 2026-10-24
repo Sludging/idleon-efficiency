@@ -147,7 +147,16 @@ function Summoning() {
                     onChange={setActiveTab}
                 />
                 {activeTab == "Winner bonuses" && <SummoningBonuses bonuses={summoning.summonBonuses} />}
-                {activeTab == "Summoning Upgrades" && <SummoningUpgrades essences={summoning.summonEssences} upgrades={summoning.summonUpgrades} />}
+                {activeTab == "Summoning Upgrades" && (
+                    <SummoningUpgrades
+                        essences={summoning.summonEssences}
+                        upgrades={summoning.summonUpgrades}
+                        doublersOwned={summoning.summoningDoublersOwned}
+                        doublersAvailable={summoning.summoningDoublersAvailable}
+                        doublerImage={SummoningDomain.getDoublerImageData()}
+                        doublerMultiplier={summoning.summoningDoublerMultiplier}
+                    />
+                )}
                 {activeTab == "Battles" && <SummoningBattles battlesInfos={summoning.summonBattles} essences={summoning.summonEssences} />}
                 {activeTab == "Essences & Stones" && (
                     <UpgradeTable

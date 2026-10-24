@@ -7,9 +7,8 @@ import { ExoticMarketUpgrade, Farming } from '../../../data/domain/world-6/farmi
 import { Menagerie } from '../../../data/domain/menagerie';
 import { commaNotation } from '../../../data/utility';
 import IconImage from '../../base/IconImage';
-import ShadowBox from '../../base/ShadowBox';
-import { ComponentAndLabel } from '../../base/TextAndLabel';
 import TipDisplay from '../../base/TipDisplay';
+import { DoublerBadge, DoublerSummary } from '../../base/DoublerStatus';
 import { UpgradeTable } from '../../account/shared/UpgradeTable';
 import type { FilterOptions } from '../../account/shared/UpgradeTableFilters';
 
@@ -66,12 +65,14 @@ function MarketTable({ farming, upgrades, current }: { farming: Farming; upgrade
             header: 'Upgrade',
             render: (upgrade: ExoticMarketUpgrade) => <Box direction="row" gap="small" align="center" style={{ minWidth: '185px' }}>
                 <IconImage data={upgrade.getImageData()} />
-                <Box gap="xxsmall">
+                <Box direction="row" gap="small" align="center">
                     <Text size="small">{upgradeName(upgrade)}</Text>
-                    {upgrade.isOrganic && <Box direction="row" gap="xxsmall" align="center">
-                        <IconImage data={Menagerie.getUsableResourceImageData('organicLabels')} scale={18 / 29} />
-                        <Text size="xsmall" color="status-ok">Organic label: x2</Text>
-                    </Box>}
+                    {upgrade.isOrganic && (
+                        <DoublerBadge
+                            image={Menagerie.getUsableResourceImageData('organicLabels')}
+                            label="Organic Label applied"
+                        />
+                    )}
                 </Box>
             </Box>,
         },
@@ -144,6 +145,15 @@ function MarketTable({ farming, upgrades, current }: { farming: Farming; upgrade
         additionalFilters={<Box direction="row" gap="medium" align="baseline" wrap>
             <Heading level="3" size="small" margin="none" style={{ fontWeight: 'normal' }}>{title}</Heading>
             {current && <NextChange timestamp={farming.getNextExoticMarketRotationTime()} />}
+            {current && (
+                <DoublerSummary
+                    label="Organic Labels"
+                    owned={farming.organicLabelsOwned}
+                    available={farming.organicLabelsAvailable}
+                    image={Menagerie.getUsableResourceImageData('organicLabels')}
+                    description="Organic Labels double the bonus and increase levels gained per purchase by 50% before rounding up."
+                />
+            )}
         </Box>}
     />;
 }
@@ -154,15 +164,8 @@ export function ExoticMarketDisplay({ farming }: { farming: Farming }) {
     const offRotation = farming.exoticMarketUpgrades.filter(upgrade => !currentIds.includes(upgrade.index));
     const returns = new Map(offRotation.map(upgrade => [upgrade.index, farming.getExoticMarketReturnWeeks(upgrade.index)]));
     offRotation.sort((left, right) => (returns.get(left.index) ?? Infinity) - (returns.get(right.index) ?? Infinity));
-    const labelsUsed = farming.organicLabelsOwned - Math.max(0, farming.organicLabelsAvailable);
 
     return <Box fill="horizontal" gap="medium">
-        {farming.organicLabelsOwned > 0 && <ShadowBox background="dark-1" pad="small" alignSelf="start">
-            <ComponentAndLabel label="Organic Labels" labelSize="small" component={<Box direction="row" gap="small" align="center">
-                <IconImage data={Menagerie.getUsableResourceImageData('organicLabels')} scale={20 / 29} />
-                <Text size="large">{commaNotation(labelsUsed)} / {commaNotation(farming.organicLabelsOwned)}</Text>
-            </Box>} />
-        </ShadowBox>}
         <MarketTable farming={farming} upgrades={current} current />
         <MarketTable farming={farming} upgrades={offRotation} current={false} />
     </Box>;

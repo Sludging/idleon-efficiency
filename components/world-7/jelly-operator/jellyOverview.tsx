@@ -107,7 +107,7 @@ export function JellyOverview({ jelly }: { jelly: JellyOperator }) {
         <SummaryGrid>
             <Box gap="small">
                 <Text size="small" weight={500}>Bloodcells</Text>
-                <Box direction="row" gap="medium">
+                <Box direction="row" gap="medium" wrap>
                     <Box gap="xxsmall" style={{ minWidth: 0 }}>
                         <MetricValue>
                             <PrimaryResourceDisplay>

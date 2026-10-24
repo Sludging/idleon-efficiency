@@ -45,7 +45,12 @@ export default function SushiContent() {
                 {section === 'collection' && (
                     <SushiCollection station={station} category={knowledgeCategory} onCategoryChange={setKnowledgeCategory} />
                 )}
-                {section === 'upgrades' && <SushiUpgrades upgrades={station.upgrades} bucks={station.bucks} />}
+                {section === 'upgrades' && <SushiUpgrades
+                    upgrades={station.upgrades}
+                    bucks={station.bucks}
+                    sushiDoublersOwned={station.sushiDoublersOwned}
+                    sushiDoublersRemaining={station.sushiDoublersRemaining}
+                />}
             </Box>
         </Box>
     )

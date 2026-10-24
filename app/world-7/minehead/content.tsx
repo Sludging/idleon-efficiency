@@ -5,11 +5,13 @@ import { Box, Grid, Heading, ResponsiveContext, Text } from 'grommet';
 import { useContext } from 'react';
 import ContentTabs from '../../../components/base/ContentTabs';
 import IconImage from '../../../components/base/IconImage';
+import { DoublerBadge, DoublerSummary } from '../../../components/base/DoublerStatus';
 import RoundedShadowBox from '../../../components/base/RoundedShadowBox';
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { UpgradeTable } from '../../../components/account/shared/UpgradeTable';
 import type { FilterOptions } from '../../../components/account/shared/UpgradeTableFilters';
 import { Minehead as MineheadDomain, MineheadUpgrade } from '../../../data/domain/world-7/minehead';
+import { Menagerie } from '../../../data/domain/menagerie';
 import type { ImageData } from '../../../data/domain/imageData';
 import { commaNotation, notateNumber } from '../../../data/utility';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
@@ -110,7 +112,10 @@ function MineheadUpgrades({ minehead }: { minehead: MineheadDomain }) {
             header: 'Upgrade',
             render: (row: UpgradeRow) => <Box direction="row" gap="small" align="center" style={{ minWidth: '180px', opacity: row.locked ? 0.5 : 1 }}>
                 <IconImage data={row.upgrade.getImageData()} scale={0.75} />
-                <Text size="xsmall">{row.upgrade.data.name}</Text>
+                <Box direction="row" gap="xsmall" align="center">
+                    <Text size="xsmall">{row.upgrade.data.name}</Text>
+                    {row.upgrade.menagerieDoubled && <DoublerBadge image={Menagerie.getUsableResourceImageData('mineheadDoublers')} label="Minehead doubler applied" />}
+                </Box>
             </Box>,
         },
         {
@@ -161,6 +166,13 @@ function MineheadUpgrades({ minehead }: { minehead: MineheadDomain }) {
         searchPlaceholder="Search name or effect..."
         sortOptions={[{ label: 'In-game order', value: 'default' }]}
         variant="panel"
+        additionalFilters={<DoublerSummary
+            label="Doublers"
+            owned={minehead.mineheadDoublersOwned}
+            available={minehead.mineheadDoublersRemaining}
+            image={Menagerie.getUsableResourceImageData('mineheadDoublers')}
+            description="Each doubler doubles an upgrade's quantity."
+        />}
     />;
 }
 

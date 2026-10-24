@@ -41,6 +41,7 @@ import { Votes } from "../world-2/votes";
 import { Slab } from "../world-5/slab";
 import { Lab } from "../world-4/lab";
 import { Worship, TotalizerBonus } from "../world-3/worship";
+import { EventShop } from "../eventShop";
 
 const WhiteBattleOrder = [
     "Pet1", "Pet2", "Pet3", "Pet0", "Pet4", "Pet6", "Pet5", "Pet10", "Pet11"
@@ -367,6 +368,10 @@ export class Summoning extends Domain {
     summoningLevel: number = 0;
     summonBattles: BattlesInfo = new BattlesInfo();
     summonFamiliarRaw: number[] = [];
+    summoningDoublersOwned: number = 0;
+    summoningDoublersAvailable: number = 0;
+    summoningDoublersUsed: number = 0;
+    summoningDoublerMultiplier: number = 1;
     private summonEnemyLookup: SummonEnemyModel[] = [];
 
     updateUnlockedUpgrades = () => {
@@ -472,6 +477,11 @@ export class Summoning extends Domain {
         if (sharpenedSpikeUpgrade) {
             sharpenedSpikeUpgrade.bonusMultiplyer = this.summonBattles.playerUnitsAtk;
         }
+    }
+
+    updateDoublerCapacity(gambitBonus: number, hasSummoningStar: boolean): void {
+        this.summoningDoublersOwned = gambitBonus + 10 * Number(hasSummoningStar);
+        this.summoningDoublersAvailable = Math.max(0, Math.round(this.summoningDoublersOwned - this.summoningDoublersUsed));
     }
 
     public updateTealEssenceUnlock(spelunking: Spelunking): void {
@@ -596,6 +606,11 @@ export class Summoning extends Domain {
             && Number(bundlesReceived.ban_i) === 1;
         const upgradeLevels = (summoningData[0] ?? []) as number[];
         const doublerData = (holeData[28] || []) as number[];
+        this.summoningDoublersOwned = 0;
+        this.summoningDoublersAvailable = 0;
+        this.summoningDoublerMultiplier = 1;
+        // Empty allocation slots do not consume Summoning Doublers.
+        this.summoningDoublersUsed = doublerData.reduce((used, upgradeId) => used + Number(upgradeId !== -1), 0);
 
         this.summonUpgrades.forEach(upgrade => {
             upgrade.level = upgradeLevels[upgrade.index] ?? 0;
@@ -707,6 +722,10 @@ export class Summoning extends Domain {
             case SummonEssenceColor.Cyan: return "The Zephyeror";
             default: return "No boss yet";
         }
+    }
+
+    static getDoublerImageData(): ImageData {
+        return { location: "SummoningDoubler", width: 26, height: 21 };
     }
 
     static getSummoningStoneIcon(color: SummonEssenceColor): ImageData {
@@ -826,6 +845,10 @@ export const updateSummoningUpgrades= (data: Map<string, any>) => {
     const spelunking = data.get("spelunking") as Spelunking;
     const jellyOperator = data.get("jellyOperator") as JellyOperator;
     const sushi = data.get("sushi") as SushiStation;
+    const hole = data.get("hole") as Hole;
+    const eventShop = data.get("eventShop") as EventShop;
+
+    summoning.updateDoublerCapacity(hole.gambit.getBonus(0), eventShop.isBonusOwned(15));
     
     // Account projections use the strongest recipient context, not the currently selected character.
     summoning.summoningLevel = players.reduce(
@@ -837,6 +860,7 @@ export const updateSummoningUpgrades= (data: Map<string, any>) => {
         0,
     );
     const doublerBonus = 2 + (Math.max(0, talentBonus597 / 100 - 1) + summoning.getUpgradeBonusFromIndex(78) / 100);
+    summoning.summoningDoublerMultiplier = doublerBonus;
 
     summoning.summonUpgrades.forEach(upgrade => {
         upgrade.doublerBonus = upgrade.isDoubled ? doublerBonus : 1;

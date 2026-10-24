@@ -1,0 +1,26 @@
+{
+  "description": "Total granted Exalted Stamp uses and available uses for the retained real save",
+  "target": "Compass stamp doublers",
+  "extractions": [
+    {
+      "label": "stamp_doublers_owned",
+      "expression": "idleon.callFunction(\"Windwalker\", \"StampDoublersLeft\", 999, 0)",
+      "description": "Total granted Exalted Stamp uses, including assigned uses"
+    },
+    {
+      "label": "stamp_doublers_available",
+      "expression": "idleon.callFunction(\"Windwalker\", \"StampDoublersLeft\", 0, 0)",
+      "description": "Unassigned available uses after raw assignment count"
+    },
+    {
+      "label": "compass_bonus_44",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 44, 0)",
+      "description": "Compass Exalted Stamps capacity contribution"
+    },
+    {
+      "label": "event_shop_owned_18",
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 18, 0)",
+      "description": "Extra Exaltedness owned-use contribution"
+    }
+  ]
+}

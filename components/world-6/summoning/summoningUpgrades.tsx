@@ -1,5 +1,4 @@
 import { Box, Grid, Stack, Text } from "grommet";
-import { Star } from 'grommet-icons';
 import ShadowBox from "../../base/ShadowBox";
 import IconImage from "../../base/IconImage";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
@@ -7,7 +6,8 @@ import { nFormatter } from "../../../data/utility";
 import { Summoning as SummoningDomain, SummonUpgrade, SummonEssence } from '../../../data/domain/world-6/summoning';
 import ContentTabs from "../../base/ContentTabs";
 import { useState } from "react";
-import TipDisplay from "../../base/TipDisplay";
+import { DoublerBadge, DoublerSummary } from "../../base/DoublerStatus";
+import type { ImageData } from "../../../data/domain/imageData";
 
 const ColorSection = ({ colorUpgrades, allUpgrades, essence }: { colorUpgrades: SummonUpgrade[], allUpgrades: SummonUpgrade[], essence: SummonEssence }) => {
     return (
@@ -36,17 +36,14 @@ const ColorSection = ({ colorUpgrades, allUpgrades, essence }: { colorUpgrades: 
                                             </Box>
                                         </Stack>
                                         <Box>
-                                            <Text size="xsmall">{upgrade.data.name}</Text>
+                                            <Box direction="row" gap="xsmall" align="center">
+                                                <Text size="xsmall">{upgrade.data.name}</Text>
+                                                {upgrade.isDoubled && (
+                                                    <DoublerBadge image={SummoningDomain.getDoublerImageData()} label="Summoning Doubler applied" />
+                                                )}
+                                            </Box>
                                             <Text size="xsmall">{upgrade.getLevelDisplay()}</Text>
                                         </Box>
-                                        {upgrade.isDoubled &&
-                                            <TipDisplay
-                                                heading="Summoning doubler"
-                                                size='small'
-                                                maxWidth='small'
-                                            >
-                                                <Star size="small" color="yellow" />
-                                            </TipDisplay>}
                                     </Box>
                                     <TextAndLabel textSize='xsmall' text={upgrade.getBonusText()} label={"Bonus"} />
                                 </Box>
@@ -78,7 +75,14 @@ const ColorSection = ({ colorUpgrades, allUpgrades, essence }: { colorUpgrades: 
     )
 }
 
-export const SummoningUpgrades = ({ upgrades, essences }: { upgrades: SummonUpgrade[], essences: SummonEssence[] }) => {
+export const SummoningUpgrades = ({ upgrades, essences, doublersOwned, doublersAvailable, doublerImage, doublerMultiplier }: {
+    upgrades: SummonUpgrade[];
+    essences: SummonEssence[];
+    doublersOwned: number;
+    doublersAvailable: number;
+    doublerImage: ImageData;
+    doublerMultiplier: number;
+}) => {
     const [activeTab, setActiveTab] = useState<string>("White");
     const upgradesToDisplay = upgrades.filter(upgrade => upgrade.shouldBeDisplayed == true);
     const tabsName = essences.filter(essence => essence.displayEssence == true).map(essence => {
@@ -92,11 +96,18 @@ export const SummoningUpgrades = ({ upgrades, essences }: { upgrades: SummonUpgr
 
     return (
         <Box>
-            <Box margin={{ top: 'small' }}>
+            <Box direction="row" gap="medium" align="center" wrap margin={{ top: 'small' }}>
                 <ContentTabs
                     options={tabsName.filter(name => name != '').map(value => ({ value, label: value }))}
                     value={activeTab}
                     onChange={setActiveTab}
+                />
+                <DoublerSummary
+                    label="Doublers"
+                    owned={doublersOwned}
+                    available={doublersAvailable}
+                    image={doublerImage}
+                    description={`Doublers multiply assigned upgrade bonuses by ${nFormatter(doublerMultiplier)}×.`}
                 />
             </Box>
             <Box margin={{ top: 'small' }}>

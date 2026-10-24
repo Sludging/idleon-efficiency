@@ -4,9 +4,11 @@ import { Box, CheckBox, Heading, Select, Table, TableBody, TableCell, TableHeade
 import { useState } from "react";
 import type { Gaming } from "../../../data/domain/world-5/gaming";
 import type { PaletteColor } from "../../../data/domain/world-5/gaming/palette";
+import { Menagerie } from "../../../data/domain/menagerie";
 import { commaNotation, notateNumber } from "../../../data/utility";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 import TipDisplay from "../../base/TipDisplay";
+import { DoublerBadge, DoublerSummary } from "../../base/DoublerStatus";
 
 const colorFilters = ["All colors", "Unlocked colors", "Locked colors"];
 const colorSorts = ["Game order", "Name A–Z", "Name Z–A", "Level high–low", "Level low–high"];
@@ -23,6 +25,8 @@ function formatChance(probability: number): string {
 }
 
 function ColorName({ color }: { color: PaletteColor }) {
+    const blackStarState = color.getBlackStarState();
+
     return (
         <Box direction="row" gap="small" align="center">
             <Box
@@ -32,17 +36,26 @@ function ColorName({ color }: { color: PaletteColor }) {
                 background={`rgb(${color.red}, ${color.green}, ${color.blue})`}
                 aria-hidden="true"
             />
-            <Text size="small">{color.name}</Text>
+            <Box gap="small" direction="row" align="center">
+                <Text size="small">{color.name}</Text>
+                {blackStarState > 0 && (
+                    <DoublerBadge
+                        image={color.getBlackStarImageData()}
+                        label={blackStarState === 2 ? "Two Black Stars applied" : "Black Star applied"}
+                    />
+                )}
+            </Box>
         </Box>
     );
 }
 
-export function GamingPalette({ gaming }: { gaming: Gaming }) {
+export function GamingPalette({ gaming, menagerie }: { gaming: Gaming; menagerie: Menagerie }) {
     const [colorFilter, setColorFilter] = useState("All colors");
     const [equippedOnly, setEquippedOnly] = useState(false);
     const [sort, setSort] = useState("Game order");
     const [plantStage, setPlantStage] = useState(1);
     const palette = gaming.palette;
+    const balances = menagerie.getResourceBalances();
     const equippedColors = gaming.paletteColors
         .filter(color => color.equipped)
         .sort((left, right) => left.equippedSlot! - right.equippedSlot!);
@@ -78,6 +91,13 @@ export function GamingPalette({ gaming }: { gaming: Gaming }) {
                     textSize="small"
                 />
                 <TextAndLabel label="Total color levels" text={commaNotation(palette.totalLevels)} textSize="small" />
+                <DoublerSummary
+                    label="Black Stars"
+                    owned={balances.blackStarsOwned}
+                    available={balances.blackStarsAvailable}
+                    image={Menagerie.getUsableResourceImageData("blackStarsOwned")}
+                    description="Black Stars double a color's bonus. A second Black Star doubles it again."
+                />
             </Box>
             <Box as="section" aria-label="Equipped colors" background="dark-1" pad="medium" gap="small">
                 <Box direction="row" align="center" gap="medium" wrap>
@@ -173,7 +193,7 @@ export function GamingPalette({ gaming }: { gaming: Gaming }) {
                                 style={{ opacity: color.unlocked ? 1 : 0.7 }}
                             >
                                 <TableCell background={color.unlocked ? "dark-1" : "dark-2"}>
-                                    <Box gap="xxsmall">
+                                    <Box gap="small" direction="row" align="center">
                                         <ColorName color={color} />
                                         {color.equipped && <Text size="xsmall" color="accent-2">Equipped</Text>}
                                     </Box>

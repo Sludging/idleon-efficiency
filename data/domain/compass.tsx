@@ -571,6 +571,10 @@ export class CompassUpgrade implements EfficiencyUpgrade {
 export class Compass extends Domain implements EfficiencyDomain {
     upgrades: CompassUpgrade[] = [];
     exaltedStampNames: Set<string> = new Set();
+    stampDoublersOwned: number = 0;
+    stampDoublersAvailable: number = 0;
+    private savedAdditionalStampDoublers: number = 0;
+    private usedStampDoublers: number = 0;
     private exaltedStampBonus: number = 0;
     private firstThreeUpgradeCostMultiplier: number = 1;
     private sharedUpgradeCostMultiplier: number = 1;
@@ -612,6 +616,22 @@ export class Compass extends Domain implements EfficiencyDomain {
     emperorBonus4: number = 0; // From emperor domain (Windwalker Extra Dust)
     mainframeBonus122: number = 0; // From lab domain (Jewel 22)
 
+    static getExaltedStampImageData(): ImageData {
+        return {
+            location: "ExaltedStampIconTransparent",
+            width: 47,
+            height: 43
+        };
+    }
+
+    static getExaltedStampFrameImageData(): ImageData {
+        return {
+            location: "ExaltedStampFrame",
+            width: 80,
+            height: 70
+        };
+    }
+
     getRawKeys(): RawData[] {   
         return [
             { key: "Compass", perPlayer: false, default: [] }
@@ -631,6 +651,10 @@ export class Compass extends Domain implements EfficiencyDomain {
         const optionList = data.get("OptLacc") as number[];
         const serverVars = data.get("servervars") as Record<string, any>;
         compass.exaltedStampNames.clear();
+        compass.savedAdditionalStampDoublers = Number(optionList[366] ?? 0);
+        compass.usedStampDoublers = 0;
+        compass.stampDoublersOwned = 0;
+        compass.stampDoublersAvailable = 0;
         compass.firstThreeUpgradeCostMultiplier = 1;
         compass.sharedUpgradeCostMultiplier = 1;
 
@@ -645,6 +669,7 @@ export class Compass extends Domain implements EfficiencyDomain {
         const dustCostServerVar = serverVars["DustCost"] || 1;
 
         const [upgradesLevels, abominationsRaw, portalsRaw, medallionsRaw, exaltedStamps = []] = compassData;
+        compass.usedStampDoublers = exaltedStamps.length;
         // Saved exalted stamp groups use _, a and b; item names use A, B and C.
         for (const stampIdentifier of exaltedStamps as string[]) {
             const stampTab = "_ab".indexOf(stampIdentifier[0]);
@@ -1262,6 +1287,13 @@ export class Compass extends Domain implements EfficiencyDomain {
         });
     }
 
+    prepareStampDoublers(eventShopOwned: boolean): void {
+        this.stampDoublersOwned = this.getUpgradeBonus(44)
+            + this.savedAdditionalStampDoublers
+            + Number(eventShopOwned);
+        this.stampDoublersAvailable = Math.round(this.stampDoublersOwned - this.usedStampDoublers);
+    }
+
     prepareExaltedStampBonus(inputs: ExaltedStampBonusInputs): void {
         // Exalted stamps start with a 100% bonus; these account bonuses increase that bonus.
         this.exaltedStampBonus = 100
@@ -1365,6 +1397,8 @@ export const updateCompassExaltedStampBonus = (accountData: Map<string, any>): v
     const sushi = accountData.get("sushi") as SushiStation;
     const jelly = accountData.get("jellyOperator") as JellyOperator;
     const pristineCharm = sneaking.pristineCharms.find(charm => charm.data.itemId === 20)!;
+
+    compass.prepareStampDoublers(eventShop.isBonusOwned(18));
 
     compass.prepareExaltedStampBonus({
         atomBonus: collider.atoms[12].getBonus(),
