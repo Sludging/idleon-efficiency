@@ -1,0 +1,11 @@
+{
+  "description": "Direct native Bubba meat-slice production rate",
+  "target": "Bubba meat-slice production rate",
+  "extractions": [
+    {
+      "label": "meat_slice_rate",
+      "expression": "idleon.callFunction(\"Bubbastuff\",\"MeatsliceRate\",0,0)",
+      "description": "Native Bubba meat-slice production rate for the current saved state"
+    }
+  ]
+}

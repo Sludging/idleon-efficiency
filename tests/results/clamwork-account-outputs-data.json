@@ -1,7 +1,7 @@
 {
   "extractions": {
     "account_outputs": {
-      "expression": "[(1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 0, 0)) * (1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 7, 0) / 100) * (1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 1, 1) / 100) * (1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 8, 1) * idleon.engine.getGameAttribute(\"Menagerie\")[0][8] / 100), idleon.callFunction(\"Thingies\", \"Clam_BlackPearlValue\", 0, 0), idleon.callFunction(\"Thingies\", \"Clam_Mobs\", 0, 0), idleon.callFunction(\"Thingies\", \"Clamz_HP\", 0, 0), idleon.callFunction(\"Thingies\", \"Clam_Respawn\", 0, 0)]",
+      "expression": "[(idleon.callFunction(\"Thingies\", \"ClamPearlValue\", 0, 0) / (1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 3, 0) / 100)), idleon.callFunction(\"Thingies\", \"Clam_BlackPearlValue\", 0, 0), idleon.callFunction(\"Thingies\", \"Clam_Mobs\", 0, 0), idleon.callFunction(\"Thingies\", \"Clamz_HP\", 0, 0), idleon.callFunction(\"Thingies\", \"Clam_Respawn\", 0, 0)]",
       "result": [
         412.5,
         1050,
@@ -11,7 +11,7 @@
       ]
     },
     "scurge_state": {
-      "expression": "[idleon.engine.getGameAttribute(\"Menagerie\")[0][7], idleon.engine.getGameAttribute(\"Menagerie\")[0][8], idleon.callFunction(\"MenagerieStuff\", \"ScurgeUnlocked\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"ScurgeEXP_Req\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"ScurgePTS_Left\", 0, 0), (1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 0, 1)) * (1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 4, 1) / 100) * (1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 2, 1) / 100), idleon.engine.getGameAttribute(\"Menagerie\")[5]]",
+      "expression": "[idleon.engine.getGameAttribute(\"Menagerie\")[0][7], idleon.engine.getGameAttribute(\"Menagerie\")[0][8], idleon.callFunction(\"MenagerieStuff\", \"ScurgeUnlocked\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"ScurgeEXP_Req\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"ScurgePTS_Left\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"ScurgeEXPgain\", 0, 0), idleon.engine.getGameAttribute(\"Menagerie\")[5]]",
       "result": [
         0,
         0,
@@ -81,6 +81,20 @@
         ],
         5,
         6
+      ]
+    },
+    "clam_upgrade_costs": {
+      "expression": "Array.from({ length: 9 }, (_, index) => idleon.callFunction(\"Thingies\", \"Clam_Cost\", index, 0))",
+      "result": [
+        600724403.1168395,
+        11137802243.439302,
+        766118806.8506385,
+        858798106.3096753,
+        622286345.0291203,
+        474061475.3824976,
+        2625985898.7739234,
+        15094536739.681541,
+        2227560447.0802917
       ]
     }
   },

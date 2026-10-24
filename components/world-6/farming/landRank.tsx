@@ -23,6 +23,12 @@ export const LandRankDisplay = () => {
                 <Box direction="row" gap="medium">
                     <TextAndLabel label="Total Land Ranks :" text={farming.landRankPointsTotal.toString()} margin={{ bottom: 'small' }} />
                     <TextAndLabel label="Points Left to Spend :" text={(farming.landRankPointsTotal-farming.landRankPointsSpent).toString()} margin={{ bottom: 'small' }} />
+                    <TextAndLabel
+                        label="Global Rank EXP Multiplier :"
+                        text={`${farming.getLandRankExpMultiplier().toFixed(2)}x`}
+                        margin={{ bottom: 'small' }}
+                        tooltip="Global Rank EXP multiplier using the account's best talent contribution."
+                    />
                 </Box>
                 <Grid columns={{ size: 'auto', count: (size == "small" ? 2 : 5) }} fill>
                     {

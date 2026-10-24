@@ -2,6 +2,7 @@ import { getExtractedValue, loadExtractionResults, validateExtractionHealth, typ
 import { getCogBuildRateForContext } from '../../../data/domain/world-3/construction/construction';
 import type { Player } from '../../../data/domain/player';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
+import { getTargetPlayer } from '../../utils/target-player';
 
 const saveName = 'latest';
 const extractionResultsName = 'construction-cog-build-rate-data.json';
@@ -16,13 +17,17 @@ describe('Construction cog build rate', () => {
     gameData = loadGameDataFromSave(saveName);
   });
 
-  it('matches the refreshed 96-slot board for the native current-character context', () => {
+  it('matches the prepared board in the native current-character context with a finite positive native rate', () => {
     const expected = getExtractedValue(extractionResults, 'construction_cog_build_rate');
     const players = gameData.get('players') as Player[];
+    const contextPlayer = getTargetPlayer(players);
 
-    expect(getCogBuildRateForContext(gameData, players[3])).toMatchLiveGameWithDetails(expected, {
+    expect(Number.isFinite(expected)).toBe(true);
+    expect(expected).toBeGreaterThan(0);
+
+    expect(getCogBuildRateForContext(gameData, contextPlayer)).toMatchLiveGameWithDetails(expected, {
       tolerance: 0,
-      context: 'Refreshed placed-board cog build rate for context player index 3',
+      context: `Prepared placed-board cog build rate for context player index ${contextPlayer.playerID}`,
     });
   });
 });

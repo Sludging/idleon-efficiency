@@ -15,7 +15,7 @@ import { PlayerStatues } from "../../world-1/statues";
 import { GemStore } from "../../gemPurchases";
 import { Player } from "../../player";
 import { Family } from "../../family";
-import { ClassIndex } from "../../talents";
+import { ClassIndex, Talent } from "../../talents";
 import { range } from "../../../utility";
 import { TaskBoard } from "../../tasks";
 import { Achievement } from "../../achievements";
@@ -35,6 +35,10 @@ import type { Gaming } from "../gaming";
 import type { Slab } from "../slab";
 import type { Lab } from "../../world-4/lab";
 import type { Menagerie } from "../../menagerie";
+import { Companion, getCompanionActiveBonus } from "../../companions";
+import type { ResearchGrid } from "../../world-7/research";
+import type { SushiStation } from "../../world-7/sushi";
+import type { Breeding } from "../../world-4/breeding";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -134,6 +138,10 @@ export class Boat {
     arcadeBonus: number = 0;
     activeEnderCaptains: number = 0;
     menagerieMultiplier: number = 1;
+    vaultLootBonus: number = 0;
+    companionLootMultiplier: number = 1;
+    sushiLootBonus: number = 0;
+    fountainLootBonus: number = 0;
 
     speed: number = 0;
 
@@ -198,9 +206,17 @@ export class Boat {
             this.captain?.traits.filter(trait => trait.bonus.bonus.includes("Loot Value")).reduce((sum, trait) => sum += trait.currentBonus, 0) ?? 0
             : 0;
 
-        const firstMath = (5 + (2 + Math.pow(Math.floor(lootUpgrades / 8), 2) * lootUpgrades));
-        const secondMath = (1 + (this.sigilBonus + (captainBonus + (this.genieLampBonus + (25 * Math.min(30, this.activeEnderCaptains) + this.arcadeBonus)))) / 100);
-        return firstMath * secondMath * (1 + this.unendingSearchBonus / 100) * this.daveyJonesBonus * (1 + this.holeLampBonus / 100) * this.menagerieMultiplier;
+        const baseLoot = 5 + (2 + Math.pow(Math.floor(lootUpgrades / 8), 2)) * lootUpgrades;
+        const additiveLootBonus = this.sigilBonus + (this.genieLampBonus
+            + (25 * Math.min(30, this.activeEnderCaptains) + (this.arcadeBonus + this.vaultLootBonus)));
+        const lootMultiplier = (1 + additiveLootBonus / 100)
+            * (1 + this.unendingSearchBonus / 100)
+            * (1 + this.holeLampBonus / 100)
+            * this.companionLootMultiplier
+            * (1 + this.sushiLootBonus / 100)
+            * (1 + this.fountainLootBonus / 100)
+            * this.menagerieMultiplier;
+        return baseLoot * (1 + captainBonus / 100) * this.daveyJonesBonus * lootMultiplier;
     }
 
     getSpeedValue = (
@@ -228,9 +244,14 @@ export class Island {
     status: IslandStatus = IslandStatus.Hidden;
     discoverProgress: number = -1;
     unlocked: boolean = true;
+    captainExpMultiplier: number = 1;
 
     constructor(public index: number, public data: IslandInfoModel) {
         if (this.index == 15) this.unlocked = false;
+    }
+
+    getCaptainExpPerTrip(): number {
+        return this.data.expPerTrip * this.captainExpMultiplier;
     }
 
     getImageData = (): ImageData => {
@@ -288,6 +309,28 @@ export class Sailing extends Domain {
     enderCaptainUnlocked: boolean = false;
     private researchExpSlabBonus: number = 0;
     private mineheadDamageSailingLevel = 0;
+    private nightmarinerExcessLevels: number = 0;
+    private nightmarinerUnlocked: boolean = false;
+
+    updateNightmarinerInputs(menagerie: Menagerie): void {
+        this.nightmarinerUnlocked = menagerie.getUnlocks()[13].owned;
+        this.nightmarinerExcessLevels = 0;
+        // Nightmariner counts only the first 20 boats and levels above 600.
+        for (let index = 0; index < Math.min(20, this.boats.length); index++) {
+            const boat = this.boats[index];
+            this.nightmarinerExcessLevels += Math.max(0, boat.lootUpgrades + boat.speedUpgrades - 600);
+        }
+    }
+
+    getNightmarinerArtifactFindMultiplier(): number {
+        if (!this.nightmarinerUnlocked) return 1;
+        return Math.max(1, 1 + this.nightmarinerExcessLevels / (this.nightmarinerExcessLevels + 10000) * 1999);
+    }
+
+    getNightmarinerCaptainExpMultiplier(): number {
+        if (!this.nightmarinerUnlocked) return 1;
+        return Math.max(1, 1 + this.nightmarinerExcessLevels / (this.nightmarinerExcessLevels + 10000) * 499);
+    }
 
     getMineheadDamageSailingLevel(): number {
         return this.mineheadDamageSailingLevel;
@@ -440,9 +483,14 @@ export const updateSailing = (data: Map<string, any>) => {
     const gaming = data.get("gaming") as Gaming;
     const lab = data.get("lab") as Lab;
     const menagerie = data.get("menagerie") as Menagerie;
+    const research = data.get("research") as ResearchGrid;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+    const companions = data.get("companions") as Companion[];
+    const sushi = data.get("sushi") as SushiStation;
 
     // Slab's multiplier and Lab's mainframe bonuses are ready before Sailing.
     sailing.updateResearchInputs(slab, gaming, lab);
+    sailing.updateNightmarinerInputs(menagerie);
 
     const chestPurchases = gemStore.purchases.find(upgrade => upgrade.no == 129)?.pucrhased ?? 0;
     const artifactBoost = sailing.artifacts[19].getBonus();
@@ -456,29 +504,35 @@ export const updateSailing = (data: Map<string, any>) => {
         )
         , 34);
 
-    // DaveyJonesBonus (used for both speed and loot values)
+    // Each boat qualifies for the Research bonus through its combined upgrade levels.
     const gemShopDaveyPurchases = gemStore.purchases.find(upgrade => upgrade.no == 8)?.pucrhased ?? 0;
     const legendTalentBonus = legendTalents.getBonusFromIndex(11);
     const daveyJonesBonus = 1 + (50 * gemShopDaveyPurchases + legendTalentBonus) / 100;
-
-    //Unending Loot Search
-    const highestLevelUnendingSearch = players.slice().sort((player1, player2) => player1.getTalentBonus(325) > player2.getTalentBonus(325) ? -1 : 1)[0];
+    const researchUnlock = research.bonuses[105].getLevel();
 
     // Various loot bonuses
     const holeLampLootBonus = hole.lamp.getBonus(false, 1, 0);
     const arcadeBonus = arcade.bonuses.find(bonus => bonus.index == 33)?.getBonus() ?? 0;
     const activeEnderCaptains = sailing.captains.reduce((enderCount, captain) => enderCount += (captain.tier == 6) ? 1 : 0, 0);
+    const vaultLootBonus = upgradeVault.getBonusForId(67);
+    const companionLootMultiplier = Math.max(1, getCompanionActiveBonus(companions, 56));
+    const sushiLootBonus = sushi.getBonusFromIndex(57);
+    const fountainLootBonus = hole.getFountainBonus(0, 17);
 
     // Update boat impacts
     sailing.boats.forEach(boat => {
         boat.genieLampBonus = sailing.artifacts[5].getBonus()
         boat.sigilBonus = sigils.sigils[21].getBonus();
-        boat.unendingSearchBonus = highestLevelUnendingSearch.getTalentBonus(325);
-        boat.daveyJonesBonus = daveyJonesBonus;
+        boat.daveyJonesBonus = daveyJonesBonus * (1 + 2 * Math.max(0, Math.min(1,
+            Math.floor((boat.lootUpgrades + boat.speedUpgrades + 99600) / 100000) * researchUnlock)));
         boat.holeLampBonus = holeLampLootBonus;
         boat.arcadeBonus = arcadeBonus;
         boat.activeEnderCaptains = activeEnderCaptains;
         boat.menagerieMultiplier = menagerie.getBonusMultiplier(9);
+        boat.vaultLootBonus = vaultLootBonus;
+        boat.companionLootMultiplier = companionLootMultiplier;
+        boat.sushiLootBonus = sushiLootBonus;
+        boat.fountainLootBonus = fountainLootBonus;
     });
 
     // Nice info to have for the UI
@@ -553,12 +607,11 @@ export const updateMinTravelTimeAndSpeed = (data: Map<string, any>) => {
     const starsignBonus = starSigns.unlockedStarSigns.find(sign => sign.name == "C. Shanti Minor")?.getBonus("Sailing SPD") ?? 0;
     const vaultUpgradeBonus = upgradeVault.getBonusForId(62);
 
-    // Boat speed uses the same multiplier order as the game, including DaveyJonesBonus.
-    const firstMath = (1 + (divinityMinorBonus + (cardBonus + alchemy.getBubbleBonusForKey("Y1"))) / 125)
-        * (sailing.boats[0]?.daveyJonesBonus ?? 1)
-        * (1 + divinity.gods[4].getBlessingBonus() / 100)
-        * (1 + divinity.gods[6].getBlessingBonus() / 100)
-        * (1 + votes.getCurrentBonus(24) / 100);
+    // Each boat applies its own prepared Davey Jones multiplier before the shared speed factors.
+    const firstMath = 1 + (divinityMinorBonus + (cardBonus + alchemy.getBubbleBonusForKey("Y1"))) / 125;
+    const divinityBlessing4Multiplier = 1 + divinity.gods[4].getBlessingBonus() / 100;
+    const divinityBlessing6Multiplier = 1 + divinity.gods[6].getBlessingBonus() / 100;
+    const voteMultiplier = 1 + votes.getCurrentBonus(24) / 100;
     const secondMath = (starsignValue: number) => 1 + (
         divinity.gods[9].getBlessingBonus() + (
             (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + (
@@ -576,9 +629,9 @@ export const updateMinTravelTimeAndSpeed = (data: Map<string, any>) => {
             )
         )
     ) / 125;
-    const speedBaseMath = firstMath * secondMath(starsignBonus);
-    const speedBaseMathWithSilkrode = firstMath * secondMath(starsignBonus * 2);
-    const speedBaseMathWithoutStarSign = firstMath * secondMath(0);
+    const speedBonusMultiplier = secondMath(starsignBonus);
+    const silkrodeSpeedBonusMultiplier = secondMath(starsignBonus * 2);
+    const speedBonusWithoutStarSignMultiplier = secondMath(0);
 
     // Minimum travel time
     const siegeBonus = family.classBonus.get(ClassIndex.Siege_Breaker)?.getBonus() ?? 0;
@@ -590,9 +643,50 @@ export const updateMinTravelTimeAndSpeed = (data: Map<string, any>) => {
     // Update boat impacts
     sailing.boats.forEach(boat => {
         boat.minTravelTime = minTravelTime;
-        boat.speedBaseMath = speedBaseMath;
-        boat.speedBaseMathWithoutStarSign = speedBaseMathWithoutStarSign;
-        boat.speedBaseMathWithSilkrode = speedBaseMathWithSilkrode;
+        const boatSpeedMultiplier = firstMath * boat.daveyJonesBonus
+            * divinityBlessing4Multiplier * divinityBlessing6Multiplier * voteMultiplier;
+        boat.speedBaseMath = boatSpeedMultiplier * speedBonusMultiplier;
+        boat.speedBaseMathWithoutStarSign = boatSpeedMultiplier * speedBonusWithoutStarSignMultiplier;
+        boat.speedBaseMathWithSilkrode = boatSpeedMultiplier * silkrodeSpeedBonusMultiplier;
+    });
+
+    return sailing;
+}
+
+export const updateSailingCaptainExperience = (data: Map<string, any>) => {
+    const sailing = data.get("sailing") as Sailing;
+    const votes = data.get("votes") as Votes;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+
+    const companions = data.get("companions") as Companion[];
+    const sushi = data.get("sushi") as SushiStation;
+    const breeding = data.get("breeding") as Breeding;
+    const achievements = data.get("achievements") as Achievement[];
+    const players = data.get("players") as Player[];
+    let unendingSearchBonus = 0;
+    let captainExpTalentBonus = 0;
+    // Account candidates retain their allocations and presets while final recipient modifiers apply.
+    // The account display uses the best recipient bonus.
+    for (const player of players) {
+        unendingSearchBonus = Math.max(unendingSearchBonus, Talent.getAccountTalentBonus(players, 325, player.finalTalentInputs));
+        captainExpTalentBonus = Math.max(captainExpTalentBonus, Talent.getAccountTalentBonus(players, 327, player.finalTalentInputs));
+    }
+    sailing.boats.forEach(boat => {
+        boat.unendingSearchBonus = unendingSearchBonus;
+    });
+    const shinyCaptainExpBonus = breeding.shinyBonuses.find(bonus => bonus.data.index === 17)?.getBonus() ?? 0;
+    const additiveCaptainExpBonus = captainExpTalentBonus + (20 * Number(achievements[301].completed)
+        + (3 * Number(achievements[310].completed) + (shinyCaptainExpBonus + upgradeVault.getBonusForId(75))));
+    // Trip EXP uses boat 0's bonus, regardless of which boat visits the island.
+    // Votes and character talent contexts are ready in this late calculation step.
+    const captainExpMultiplier = (sailing.boats[0]?.daveyJonesBonus ?? 1)
+        * (1 + votes.getCurrentBonus(24) / 100)
+        * Math.max(1, 4 * getCompanionActiveBonus(companions, 56))
+        * (1 + sushi.getBonusFromIndex(45) / 100)
+        * sailing.getNightmarinerCaptainExpMultiplier()
+        * (1 + additiveCaptainExpBonus / 100);
+    sailing.islands.forEach(island => {
+        island.captainExpMultiplier = captainExpMultiplier;
     });
 
     return sailing;

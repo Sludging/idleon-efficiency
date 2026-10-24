@@ -1,0 +1,12 @@
+{
+  "extractions": {
+    "spelunking_persistent_power": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 50, 0)",
+      "result": {
+        "type": "large_number",
+        "value": "3.8732577116131e+25"
+      }
+    }
+  },
+  "errors": {}
+}

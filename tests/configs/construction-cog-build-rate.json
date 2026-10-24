@@ -5,7 +5,7 @@
     {
       "label": "construction_cog_build_rate",
       "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 21, 0)",
-      "description": "Native Button task 21 value: refreshed cog build rate summed across the 96 placed board slots"
+      "description": "Native Button task 21 value: prepared cog build rate summed across the 96 placed board slots"
     }
   ]
 }

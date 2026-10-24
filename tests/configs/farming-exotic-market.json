@@ -1,0 +1,31 @@
+{
+  "description": "Native 1.24 regular fixture core evidence. Current effects and ordered IDs come from native game state.",
+  "target": "Exotic Market public numeric state and ordered weekly rotation",
+  "extractions": [
+    {
+      "label": "exotic_upgrade_state",
+      "expression": "(()=>{const rows=idleon.getAttr(\"CustomLists\").h.MarketExoticInfo;const levels=idleon.getAttr(\"FarmUpg\");const organic=idleon.getAttr(\"Spelunk\")[50];return rows.slice(0,60).map((row,index)=>({index,level:levels[20+index],isOrganic:organic.includes(index),bonus:idleon.callFunction(\"FarmingStuffs\",\"ExoticBonusQTY\",index,0)}));})()",
+      "description": "Native levels, organic state and exotic bonuses"
+    },
+    {
+      "label": "exotic_native_current_ids",
+      "expression": "idleon.getAttr(\"PixelHelperActor\")[24].getValue(\"ActorEvents_623\",\"_GenINFO\")[181]",
+      "description": "Observed ordered current roll, no UI entry or reroll"
+    },
+    {
+      "label": "organic_labels_owned",
+      "expression": "idleon.callFunction(\"MenagerieStuff\",\"OrganicLabelOwned\",0,0)",
+      "description": "Owned Organic Labels available to Farming"
+    },
+    {
+      "label": "organic_labels_available",
+      "expression": "idleon.callFunction(\"FarmingStuffs\",\"ExoticOrganicsLEFT\",0,0)",
+      "description": "Organic Labels remaining after assigned Exotic Market upgrades"
+    },
+    {
+      "label": "land_rank_fifth_column_max",
+      "expression": "idleon.callFunction(\"FarmingStuffs\",\"LandRank5thColumnMaxLV\",0,0)",
+      "description": "Maximum level of each fifth-column Land Rank Database upgrade"
+    }
+  ]
+}

@@ -52,8 +52,8 @@ function fountainCurrencyImage(hole: Hole, index: number): ImageData | undefined
     return hole.currencies[30 + index]?.getImageData() ?? undefined;
 }
 
-function GameCard({ title, image, children, testId, inactive = false, headerRight }: { title: string; image?: ImageData; children: ReactNode; testId?: string; inactive?: boolean; headerRight?: ReactNode }) {
-    return <RoundedShadowBox background="dark-1" pad="none" gap="none" overflow="hidden" data-testid={testId} style={inactive ? { opacity: 0.6 } : undefined}>
+function GameCard({ title, image, children, inactive = false, headerRight }: { title: string; image?: ImageData; children: ReactNode; inactive?: boolean; headerRight?: ReactNode }) {
+    return <RoundedShadowBox background="dark-1" pad="none" gap="none" overflow="hidden" style={inactive ? { opacity: 0.6 } : undefined}>
         <Box direction="row" gap="small" align="center" justify="between" background="grey-1" pad={{ horizontal: "medium", vertical: "small" }} style={{ minWidth: 0 }}>
             <Box direction="row" gap="small" align="center" style={{ minWidth: 0, flex: "1 1 auto" }}>
                 {image && <IconImage data={image} scale={0.8} />}
@@ -109,14 +109,13 @@ function JarView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => voi
                     : 0;
             return comparison || left.id - right.id;
         });
-    return <Box gap="medium" data-testid="hole-jars-details">
+    return <Box gap="medium">
         <Section title="Jar holdings">
-            <Box direction="row" gap="small" wrap data-testid="jar-wallets">
+            <Box direction="row" gap="small" wrap>
                 {jar.holdings.map((balance, index) => {
                     const image = jar.getHoldingImageData(index);
                     return <Box
                         key={index}
-                        data-testid={`jar-wallet-${index}`}
                         direction="row"
                         gap="xsmall"
                         align="center"
@@ -158,7 +157,6 @@ function JarView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => voi
                                     background="dark-1"
                                     pad="medium"
                                     gap="small"
-                                    data-testid={`jar-type-${type.index}`}
                                     style={{
                                         border: `1px solid ${producing ? normalizeColor("brand", theme) : normalizeColor("grey-1", theme)}`,
                                         minWidth: 0,
@@ -279,7 +277,7 @@ function FountainView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () =
         { property: "collection", header: "On collection", render: (currency: typeof fountain.currencies[number]) => <Text size="xsmall">{value(fountain.getCollectionValue(currency.index))}</Text> }
     ];
 
-    return <Box gap="medium" data-testid="hole-fountain-details">
+    return <Box gap="medium">
         <Box gap="medium" direction="row">
             <Section title="Collection">
                 <Box direction="row" gap="small" align="center" wrap pad={{ right: "medium" }} border={{ side: "right", color: "grey-1" }} fill>
@@ -329,7 +327,7 @@ function FountainView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () =
             value={tab}
             onChange={setTab}
         />
-        {tab === "Resources" && <Box data-testid="fountain-wallets" style={{ overflowX: "auto" }}>
+        {tab === "Resources" && <Box style={{ overflowX: "auto" }}>
             <DataTable
                 aria-label="Fountain resources"
                 columns={currencyColumns}
@@ -404,7 +402,7 @@ function FountainView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () =
                 filters={filters}
                 onFiltersChange={setFilters}
                 sortOptions={[]}
-                additionalFilters={<Box direction="row" gap="xsmall" align="center" data-testid="fountain-color-filter">
+                additionalFilters={<Box direction="row" gap="xsmall" align="center">
                     <Text size="xsmall">Color</Text>
                     <Select aria-label="Color filter" options={["All", ...pageNames]} value={color} onChange={({ option }) => setColor(option)} />
                 </Box>}
@@ -439,7 +437,7 @@ function CoveView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
         !search || `${upgrade.name} ${effect ?? ""}`.toLocaleLowerCase().includes(search)
     );
 
-    return <Box gap="medium" data-testid="hole-cove-details">
+    return <Box gap="medium">
         <CavernMetricStrip metrics={[
             { label: "Glunko kills", value: value(cove.glunkoKills) },
             { label: "Opals earned", value: value(cove.rewards.opalsEarned) },
@@ -450,7 +448,7 @@ function CoveView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
             { label: "Respawn time factor", value: factor(effects.respawnTimeMultiplier) },
             { label: "Random pickup double chance", value: percentage(effects.pickupRandomDoubleChance) }
         ]} />
-        <Box direction="row" gap="small" wrap data-testid="cove-shapes">
+        <Box direction="row" gap="small" wrap>
                 {cove.shapes.map(shape => {
                     const balance = shape.color === "blue"
                         ? cove.blueShapeBalances[shape.id]
@@ -466,7 +464,6 @@ function CoveView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
                         align="center"
                         pad="xsmall"
                         background="dark-1"
-                        data-testid={`cove-shape-${shape.id}`}
                         style={{
                             outline: isActiveTarget
                                 ? `1px solid ${shape.color === "blue" ? "rgba(3, 118, 227, 0.7)" : "rgba(159, 93, 220, 0.7)"}`
@@ -547,7 +544,7 @@ function WellView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
     const gravelImage = hole.currencies.find(currency => currency.index === 0)!.getImageData();
     const fillHelp = "Time to fill if all your buckets worked on this sediment at their current rates. Each row is independent.";
 
-    return <Box gap="medium" data-testid="hole-well-details">
+    return <Box gap="medium">
         <Section title="Expansion">
             <Box style={{ display: "grid", gridTemplateColumns: "minmax(140px, 0.9fr) repeat(2, minmax(0, 1fr))", gap: "16px", alignItems: "center" }}>
                 <Box gap="xxsmall">
@@ -631,7 +628,7 @@ function WellView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
                                 ? `No cap · ${value(expansionLevel)} expansions`
                                 : `${value(expansionLevel)} / 14${expansionLevel >= 14 ? " (capped)" : " used"}`;
                             const inactive = assignedBuckets === 0;
-                            return <tr key={sediment.index} data-testid={`well-sediment-${sediment.index}`} style={{
+                            return <tr key={sediment.index} style={{
                                 opacity: inactive ? 0.75 : 1,
                                 borderBottom: "1px solid rgba(255,255,255,0.1)",
                             }}>
@@ -693,7 +690,7 @@ function BellView({ hole, totalMoney, onOpenStudies }: { hole: Hole; totalMoney:
     const study = hole.studies[4];
     const upgradeSeparator = normalizeColor("grey-1", theme);
 
-    return <Box gap="medium" data-testid="hole-bell-details">
+    return <Box gap="medium">
         <Section title="Overview">
             <Box direction="row" gap="small" wrap align="center">
                 {!methodsComplete && <>
@@ -718,7 +715,7 @@ function BellView({ hole, totalMoney, onOpenStudies }: { hole: Hole; totalMoney:
 
         <Section title="Bonuses">
             <Box style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", columnGap: "24px", minWidth: 0 }}>
-                {bell.bonuses.slice(0, 7).map(bonus => <Box key={bonus.index} direction="row" justify="between" align="start" gap="small" pad={{ vertical: "small" }} border={{ side: "bottom", color: "grey-1" }} data-testid={`bell-bonus-${bonus.index}`}>
+                {bell.bonuses.slice(0, 7).map(bonus => <Box key={bonus.index} direction="row" justify="between" align="start" gap="small" pad={{ vertical: "small" }} border={{ side: "bottom", color: "grey-1" }}>
                     <Text size="small" weight={500}>{bonus.getDescription()}</Text>
                     <Text size="xsmall" color="accent-2">Lv. {value(bonus.level)}</Text>
                 </Box>)}
@@ -740,7 +737,7 @@ function BellView({ hole, totalMoney, onOpenStudies }: { hole: Hole; totalMoney:
                     return <Box key={method.name} pad="small" border={{
                         side: index < 2 ? "bottom" : "top",
                         color: "grey-1",
-                    }} data-testid={`bell-method-${index}`}>
+                    }}>
                         <Box direction="row" justify="between" gap="small" align="center">
                             <Text size="small" weight={500}>{method.name === "Renew Bell" ? <TipDisplay heading="Renew Bell" body={<Text size="xsmall">Renew consumes Renew XP, resets Ring XP, clears Bell bonus levels, and retains improvements and Opals.</Text>} size="small">Renew Bell</TipDisplay> : method.name}</Text>
                             {bell.mode === index && <Text size="xsmall" color="accent-2">Current mode</Text>}
@@ -758,7 +755,7 @@ function BellView({ hole, totalMoney, onOpenStudies }: { hole: Hole; totalMoney:
         </Section>
 
         <Section title="Upgrades">
-            <RoundedShadowBox background="dark-1" pad="none" overflow="hidden" data-testid="bell-upgrades">
+            <RoundedShadowBox background="dark-1" pad="none" overflow="hidden">
                 <Box style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", minWidth: 0 }}>
                     {bell.improvements.map((improvement, index) => {
                         const wallet = improvement.wallet;
@@ -770,7 +767,7 @@ function BellView({ hole, totalMoney, onOpenStudies }: { hole: Hole; totalMoney:
                         return <Box key={improvement.index} gap="xsmall" pad="small" style={{
                             borderRight: index % 3 !== 2 ? `1px solid ${upgradeSeparator}` : undefined,
                             borderBottom: index < 3 ? `1px solid ${upgradeSeparator}` : undefined,
-                        }} data-testid={`bell-improvement-${improvement.index}`}>
+                        }}>
                             <Text size="xsmall" color="accent-2">Lv. {value(improvement.level)}</Text>
                             <Text size="small" weight={500}>{improvement.data.bonus.replace("{", notateNumber(improvement.quantity)).replace(/[{}]/g, "").replace(/\s+/g, " ").trim()}</Text>
                             <Box direction="row" gap="xsmall" align="center" wrap>
@@ -827,16 +824,16 @@ function HarpView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
             return `${status}. ${effect}.`;
         }))].join(" ");
     };
-    return <Box gap="medium" data-testid="hole-harp-details">
+    return <Box gap="medium">
         <Section title="Power">
-            <Box direction="row" gap="medium" wrap align="center" data-testid="harp-power-summary">
+            <Box direction="row" gap="medium" wrap align="center">
                 <Text size="large" style={{ fontVariantNumeric: "tabular-nums" }}>{value(harp.power)}</Text>
                 <Box direction="row" gap="small" wrap align="center">
                     <Box direction="row" gap="xsmall" align="center" pad={{ right: "small" }} border={{ side: "right", color: "grey-1" }}>
                         <Text size="xsmall" color="accent-2">Power rate</Text>
                         <Text size="small">{value(harp.powerPerHour, "/hr")}</Text>
                     </Box>
-                    {nextNoteCost !== null && <Box direction="row" gap="xsmall" align="center" pad={{ right: "small" }} border={{ side: "right", color: "grey-1" }} data-testid="harp-next-note-cost">
+                    {nextNoteCost !== null && <Box direction="row" gap="xsmall" align="center" pad={{ right: "small" }} border={{ side: "right", color: "grey-1" }}>
                         <Text size="xsmall" color="accent-2">Next note cost</Text>
                         {noteCurrencyImage && <IconImage data={noteCurrencyImage} scale={0.65} />}
                         <Text size="small">{`${notateNumber(nextNoteCost.amount)} ${nextNoteCost.currency.data.name.replace(/_/g, " ")}`}</Text>
@@ -863,7 +860,7 @@ function HarpView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
                 <Text size="xsmall" color="accent-2">Tune</Text>
                 <Text size="xsmall">{tuneName}</Text>
             </Box>
-            <RoundedShadowBox background="dark-1" pad="none" overflow="hidden" data-testid="harp-note-grid">
+            <RoundedShadowBox background="dark-1" pad="none" overflow="hidden">
                 <Box style={{ display: "grid", gridTemplateColumns: "repeat(5, minmax(0, 1fr))", minWidth: 0 }}>
                     {harp.notes.map((note, index) => {
                         const currency = hole.currencies.find(entry => entry.index === 10 + note.index);
@@ -876,8 +873,7 @@ function HarpView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
                                 opacity: note.accessible === false ? 0.6 : 1,
                                 borderRight: index % 5 !== 4 ? `${normalizeColor("grey-1", theme)} solid 1px` : undefined,
                                 borderBottom: index < 5 ? `${normalizeColor("grey-1", theme)} solid 1px` : undefined,
-                            }}
-                            data-testid={`harp-note-${note.index}`}>
+                            }}>
                             {image && <IconImage data={image} scale={0.7} />}
                             <Text size="xsmall" style={{ overflowWrap: "anywhere" }}>{value(note.current)}</Text>
                         </Box>;
@@ -891,7 +887,7 @@ function HarpView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
                 <Text size="xsmall" color="accent-2">{harp.slotCount} slots</Text>
                 <Text size="xsmall" color="accent-2">Owned string levels: {value(totalStringLevels)}</Text>
             </Box>
-            <RoundedShadowBox background="dark-1" pad="small" data-testid="harp-assignment-order">
+            <RoundedShadowBox background="dark-1" pad="small">
                 <Box direction="row" gap="small" align="center" style={{ overflowX: "auto", minWidth: 0 }}>
                     {Array.from({ length: harp.slotCount }, (_, slot) => {
                         const stringIndex = harp.layout[slot];
@@ -912,7 +908,7 @@ function HarpView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
                     const currentLevel = `${string.level}`;
                     const levelDetails = `Current EXP: ${exact(string.experience)}. Next level: ${exact(string.nextLevelExperience)} EXP.`;
                     return <GameCard key={string.index} title={`String ${string.data.stringLetter}`} image={string.imageData}
-                        testId={`harp-string-${string.index}`} inactive={string.unlocked === false}
+                        inactive={string.unlocked === false}
                         headerRight={<TipDisplay heading={`String ${string.data.stringLetter} · Lv. ${currentLevel}`} body={<Text size="xsmall">{levelDetails}</Text>} size="small">
                             <Text size="xsmall" style={{ whiteSpace: "nowrap", cursor: "help" }} tabIndex={0}>Lv. {currentLevel}</Text>
                         </TipDisplay>}>
@@ -938,7 +934,7 @@ function LampView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
     const effectiveWishBonus = (wishIndex: number): string | null =>
         wishIndex === 7 ? exact(lamp.getBonus(true), "%") : null;
     const wishDescription = (wish: typeof lamp.wishes[number]): string => {
-        let description = wish.data.desc;
+        const description = wish.data.desc;
         if ([4, 6, 8, 10].includes(wish.index)) {
             const specialIndex = (wish.index - 4) / 2;
             const effects = [0, 1, 2].map(inlineIndex => lamp.getBonus(false, specialIndex, inlineIndex));
@@ -957,7 +953,7 @@ function LampView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
         return `${changed} of ${reset.before.length} doublers would be set to -1`;
     };
     const study = hole.studies[6];
-    return <Box gap="medium" data-testid="hole-lamp-details">
+    return <Box gap="medium">
         <Section title="Wish stock">
             <Box direction="row" gap="small" align="center" wrap>
                 <Box gap="xxsmall" pad={{ right: "medium" }} border={{ side: "right", color: "grey-1" }}>
@@ -979,7 +975,7 @@ function LampView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
                         ...(benefit === null ? [] : [{ label: "Well / Harp gain", value: benefit }]),
                         { label: "Next cost", value: cost === null ? "Unavailable" : `${notateNumber(cost)} wishes` },
                     ];
-                    return <GameCard key={wish.index} title={wish.data.name} testId={`lamp-wish-${wish.index}`} headerRight={<Text size="xsmall" color="accent-2" style={{ flexShrink: 0 }}>Lv. {value(wish.wishCount)}</Text>}>
+                    return <GameCard key={wish.index} title={wish.data.name} headerRight={<Text size="xsmall" color="accent-2" style={{ flexShrink: 0 }}>Lv. {value(wish.wishCount)}</Text>}>
                         <Text size="xsmall" style={{ whiteSpace: "pre-line" }}>{wishDescription(wish)}</Text>
                         <CavernMetricStrip metrics={metrics} />
                         {wish.index === 5 && <details>

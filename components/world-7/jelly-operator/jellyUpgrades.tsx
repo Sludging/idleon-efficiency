@@ -2,10 +2,12 @@ import { useState } from "react";
 import { Box, Text } from "grommet";
 import type { DataTableProps } from "grommet";
 import IconImage from "../../base/IconImage";
+import { DoublerBadge, DoublerSummary } from "../../base/DoublerStatus";
 import { UpgradeTable } from "../../account/shared/UpgradeTable";
 import type { FilterOptions } from "../../account/shared/UpgradeTableFilters";
 import { ResourceDisplay } from "../../account/shared/ResourceDisplay";
 import { JellyOperator, JellyOperatorUpgrade } from "../../../data/domain/world-7/jellyOperator";
+import { Menagerie } from "../../../data/domain/menagerie";
 import { commaNotation } from "../../../data/utility";
 
 type JellyUpgradeRow = {
@@ -71,7 +73,10 @@ export function JellyUpgrades({ jelly }: { jelly: JellyOperator }) {
             render: (row: JellyUpgradeRow) => (
                 <Box direction="row" gap="small" align="center" style={{ opacity: row.locked || row.flavor ? 0.6 : 1, minWidth: "180px" }}>
                     <IconImage data={row.upgrade.getImageData()} scale={0.6} />
-                    <Text size="xsmall" weight={700}>{row.upgrade.data.name}</Text>
+                    <Box direction="row" gap="xsmall" align="center">
+                        <Text size="xsmall" weight={700}>{row.upgrade.data.name}</Text>
+                        {row.upgrade.menagerieDoubled && <DoublerBadge image={Menagerie.getUsableResourceImageData('jellyOperatorDoublers')} label="Jelly Operator doubler applied" />}
+                    </Box>
                 </Box>
             )
         },
@@ -126,17 +131,26 @@ export function JellyUpgrades({ jelly }: { jelly: JellyOperator }) {
     ];
 
     return (
-        <UpgradeTable
-            tableName="Jelly Operator upgrades"
-            columns={columns}
-            data={rows}
-            primaryKey="id"
-            filters={filters}
-            onFiltersChange={setFilters}
-            sortOptions={sortOptions}
-            searchPlaceholder="Search upgrades or effects..."
-            minWidth="850px"
-            variant="panel"
-        />
+            <UpgradeTable
+                tableName="Jelly Operator upgrades"
+                columns={columns}
+                data={rows}
+                primaryKey="id"
+                filters={filters}
+                onFiltersChange={setFilters}
+                additionalFilters={
+                    <DoublerSummary
+                        label="Doublers"
+                        owned={jelly.jellyOperatorDoublersOwned}
+                        available={jelly.jellyOperatorDoublersRemaining}
+                        image={Menagerie.getUsableResourceImageData('jellyOperatorDoublers')}
+                        description="Each doubler doubles an upgrade's quantity."
+                    />
+                }
+                sortOptions={sortOptions}
+                searchPlaceholder="Search upgrades or effects..."
+                minWidth="850px"
+                variant="panel"
+            />
     );
 }

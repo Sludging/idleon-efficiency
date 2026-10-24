@@ -1,0 +1,73 @@
+{
+  "extractions": {
+    "gemstone_0_bonus": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",0,0)",
+      "result": 95033.85077480476
+    },
+    "gemstone_0_quantity": {
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[233])",
+      "result": 48223
+    },
+    "gemstone_1_bonus": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",1,0)",
+      "result": 45619.81836235164
+    },
+    "gemstone_1_quantity": {
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[234])",
+      "result": 16068
+    },
+    "gemstone_2_bonus": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",2,0)",
+      "result": 21858.02842041217
+    },
+    "gemstone_2_quantity": {
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[235])",
+      "result": 9020
+    },
+    "gemstone_3_bonus": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",3,0)",
+      "result": 1885.8981862428318
+    },
+    "gemstone_3_quantity": {
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[236])",
+      "result": 19423
+    },
+    "gemstone_4_bonus": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",4,0)",
+      "result": 9668.12534081553
+    },
+    "gemstone_4_quantity": {
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[237])",
+      "result": 106949
+    },
+    "gemstone_5_bonus": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",5,0)",
+      "result": 289.59936570330996
+    },
+    "gemstone_5_quantity": {
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[238])",
+      "result": 21387
+    },
+    "gemstone_6_bonus": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",6,0)",
+      "result": 23602.09166746455
+    },
+    "gemstone_6_quantity": {
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[239])",
+      "result": 42122
+    },
+    "gemstone_7_bonus": {
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",7,0)",
+      "result": 297.21685101318786
+    },
+    "gemstone_7_quantity": {
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[240])",
+      "result": 126426
+    },
+    "emerald_discount_percent": {
+      "expression": "100*(1-1/(1+idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",6,0)/100))",
+      "result": 99.57809630726697
+    }
+  },
+  "errors": {}
+}

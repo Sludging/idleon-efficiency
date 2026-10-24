@@ -1,0 +1,11 @@
+{
+  "description": "Direct native Poppy fish quantity per completed catch",
+  "target": "Poppy fish quantity per catch",
+  "extractions": [
+    {
+      "label": "fish_per_catch",
+      "expression": "idleon.callFunction(\"Summoning\",\"RooCatchFishQTY\",0,0)",
+      "description": "Native fish quantity added to stock by each completed catch"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "description": "Current Summoning stone bonus factors and affected upgrade amounts for the paired retained account. Full stone HP is not extracted outside an existing stone-trial context.",
+  "target": "Summoning current stone bonus multiplier and affected upgrades",
+  "extractions": [
+    {
+      "label": "stone_wins",
+      "expression": "Array.from({length:7},(_,colour)=>({colour,wins:idleon.callFunction(\"Thingies\",\"SumStoneTrialz\",colour,0)}))",
+      "description": "Native current stone wins. The current full colour multiplier is 1 + wins, as applied by Summoning/SummUpgBonus. CORE compares positive-win White and zero-win Red; zero wins does not grant the 2x reward preview."
+    },
+    {
+      "label": "marked_upgrade_consumers",
+      "expression": "[0,46].map(index=>({index,colour:Number(idleon.getAttr(\"CustomLists\").h.SummonUPG[index][2]),stoneAffected:Number(idleon.getAttr(\"CustomLists\").h.SummonUPG[index][10]),bonus:idleon.callFunction(\"Summoning\",\"SummUpgBonus\",index,0)}))",
+      "description": "Native current amounts for White Essence Champ and Red Essence Ragin'. Both upgrades receive stone bonuses. These values match getBaseBonus(), before secondary battle-win scaling."
+    }
+  ]
+}

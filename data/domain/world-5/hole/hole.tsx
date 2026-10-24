@@ -231,8 +231,10 @@ export class CosmoUpgrade {
   if (this.index === 14) {
    return [{ key: "villager-exp", value: this.equalSpreadPercent, unit: "percent" }];
   }
-  return [{ key: `majik:${this.index}`, value: this.getBonus(),
-   unit: this.index === 22 ? "multiplier" : this.index === 1 || this.index === 21 ? "count" : "percent" }];
+  return [{
+   key: `majik:${this.index}`, value: this.getBonus(),
+   unit: this.index === 22 ? "multiplier" : this.index === 1 || this.index === 21 ? "count" : "percent"
+  }];
  }
 
  getDescription(): string {
@@ -278,8 +280,10 @@ export class PocketDivinityUpgrade extends CosmoUpgrade {
   const gods = initGodInfoRepo();
   this.selections = savedSelections.flatMap((value, slot) => {
    const god = gods.find(god => god.index === Number(value));
-   return value == null || !god ? [] : [{ slot, godId: god.index, bonusId: god.data.bonusIndex,
-    name: god.data.name, active: this.level > slot }];
+   return value == null || !god ? [] : [{
+    slot, godId: god.index, bonusId: god.data.bonusIndex,
+    name: god.data.name, active: this.level > slot
+   }];
   });
   this.characters = [];
  }
@@ -345,7 +349,7 @@ export class Majiks {
    this.VillageUpgrades.map(upgrade => [upgrade.index, upgrade]),
   );
  }
- 
+
 
 
  get upgrades(): CosmoUpgrade[] {
@@ -363,6 +367,7 @@ export class Majiks {
    case CosmoTypeEnum.Idleon: return { location: "HoleUIcosmoUpgC1", width: 45, height: 45 };
   }
  }
+
 
  parse(savedHole: number[][], purchasedPoints: number, pocketSelections: (number | null | undefined)[]): void {
   const trees = [savedHole[4], savedHole[5], savedHole[6]];
@@ -388,7 +393,7 @@ export class Majiks {
    createdSchematics,
   };
   this.upgrades.forEach(upgrade => upgrade.prepare(inputs));
-}
+ }
 }
 
 type SchematicBonusLookup = (schematicIndex: number, baseMultiplier: number) => number;
@@ -486,15 +491,21 @@ export class Schematic {
    effects.push({ key: "all-skill-efficiency", value: this.getBonus(15), unit: "percent" },
     { key: "all-skill-exp", value: this.getBonus(10), unit: "percent" });
   } else if ([82, 83, 84].includes(this.index)) {
-   effects.push({ key: `schematic:${this.index}:bonus`,
-    value: this.getBonus(this.index === 82 ? 20 : this.index === 83 ? 40 : 100), unit: "percent" });
+   effects.push({
+    key: `schematic:${this.index}:bonus`,
+    value: this.getBonus(this.index === 82 ? 20 : this.index === 83 ? 40 : 100), unit: "percent"
+   });
   } else if ([14, 45, 46, 47, 48, 52, 53, 54, 55, 56, 57, 58, 59].includes(this.index)) {
-   effects.push({ key: `schematic:${this.index}:bonus`,
+   effects.push({
+    key: `schematic:${this.index}:bonus`,
     value: this.index === 53 ? 1 + this.getBonus() / 100 : this.getBonus(),
-    unit: [45, 53, 54, 56].includes(this.index) ? "multiplier" : [58, 59].includes(this.index) ? "per-hour" : "percent" });
+    unit: [45, 53, 54, 56].includes(this.index) ? "multiplier" : [58, 59].includes(this.index) ? "per-hour" : "percent"
+   });
   } else if ([15, 38, 41, 72, 73, 76, 80, 94].includes(this.index)) {
-   effects.push({ key: `schematic:${this.index}:intrinsic`, value: this.getIntrinsicBonus(),
-    unit: [38, 72].includes(this.index) ? "percent" : "multiplier" });
+   effects.push({
+    key: `schematic:${this.index}:intrinsic`, value: this.getIntrinsicBonus(),
+    unit: [38, 72].includes(this.index) ? "percent" : "multiplier"
+   });
   }
   return effects;
  }
@@ -556,6 +567,7 @@ export class Schematic {
  static fromBase(data: HoleBuildingBase[], getSchematicBonus: SchematicBonusLookup = () => 0) {
   return data.map(d => new Schematic(d.index, d.data, getSchematicBonus));
  }
+
 
  prepareStudyBonus(bonus: number): void {
   this.studyBolaiaBonuses = bonus;
@@ -891,9 +903,11 @@ export class Measurement {
   this.cosmosBonus = lengthmeister.getBonus();
  }
 
- prepare(inputs: { minau: Villager; lengthmeister: CosmoUpgrade; fountainDiscountPercent: number;
+ prepare(inputs: {
+  minau: Villager; lengthmeister: CosmoUpgrade; fountainDiscountPercent: number;
   crops: number; accountLevel: number; tomeScore: number; skillLevel: number;
-  deathnotePoints: number; highestDamage: number; slabItems: number; studyLevels: number }): void {
+  deathnotePoints: number; highestDamage: number; slabItems: number; studyLevels: number
+ }): void {
   this.prepareCampEffects(inputs.minau, inputs.lengthmeister);
   this.fountainDiscountPercent = inputs.fountainDiscountPercent;
   this.cropsCount = inputs.crops;
@@ -1080,8 +1094,8 @@ export class Bell {
  // Game's BellTypesOwned is 3, the maximum mode index; modes 0 through 3 are available.
  maximumModeIndex = 3;
  unlockedModeCount = this.maximumModeIndex + 1;
- xpBanks: number[] = [];
- improvementProgress: number[] = [];
+ xpBanks: number[] = Array(this.modeNames.length).fill(0);
+ improvementProgress: number[] = Array(this.modeNames.length).fill(0);
  modeRates: number[] = [];
  modeRequirements: number[] = [];
  cleanMethodCount: number = 0;
@@ -1130,7 +1144,7 @@ export class Bell {
   };
  }
 
- prepare(hole: Hole, players: Player[], gaming: Gaming, divinity: Divinity): void {
+ prepare(hole: Hole, players: Player[], gamingBits: number | null, atomsBalance: number | null): void {
   const methodCount = this.cleanMethodCount;
   const failures = this.cleanFailures;
   const cleanUpgrade = hole.schematics[43];
@@ -1149,20 +1163,22 @@ export class Bell {
    const cost = improvement.cost;
 
    if (improvement.index === 0) {
-    improvement.wallet = { type: "character", currency: improvement.data.resource, values: players.map(player => ({
-     playerID: player.playerID,
-     balance: player.money,
-     affordable: player.money >= cost,
-    })) };
+    improvement.wallet = {
+     type: "character", currency: improvement.data.resource, values: players.map(player => ({
+      playerID: player.playerID,
+      balance: player.money,
+      affordable: player.money >= cost,
+     }))
+    };
     return;
    }
 
    let walletBalance: number | null;
    switch (improvement.index) {
     case 1: walletBalance = hole.currencies[3].stock; break;
-    case 2: walletBalance = gaming.bits; break;
+    case 2: walletBalance = gamingBits; break;
     case 3: walletBalance = hole.currencies[14].stock; break;
-    case 4: walletBalance = divinity.atomsBalance; break;
+    case 4: walletBalance = atomsBalance; break;
     case 5: walletBalance = hole.currencies[25].stock; break;
     default: walletBalance = null;
    }
@@ -1175,7 +1191,7 @@ export class Bell {
   });
 
   const ringQuantities = [this.improvements[0].quantity, this.improvements[2].quantity,
-   this.improvements[4].quantity, this.improvements[5].quantity];
+  this.improvements[4].quantity, this.improvements[5].quantity];
   const pingQuantity = this.improvements[3].quantity;
   const cleanQuantity = this.improvements[1].quantity;
   const monument = hole.getMonumentBonus("Bravery", 7);
@@ -1504,8 +1520,10 @@ export class Harp {
    } else {
     effect = { type: "none" };
    }
-   assignedEffects.push({ slot, stringIndex, sequenceOrder: assignedEffects.length,
-    passiveBonus: string.passiveBonus, triggerStatus, effect, experience });
+   assignedEffects.push({
+    slot, stringIndex, sequenceOrder: assignedEffects.length,
+    passiveBonus: string.passiveBonus, triggerStatus, effect, experience
+   });
   }
   this.assignedStringEffects = assignedEffects;
  }
@@ -1514,6 +1532,17 @@ export class Harp {
   return 150 * Math.pow(1 + highestUnlockedNoteIndex, 1.5) * Math.pow(4.5, highestUnlockedNoteIndex);
  }
 }
+
+const createLampResetConsequences = (values: number[][]): Lamp["resetConsequences"] => {
+ const categories = ["All Opals Invested", "Conjuror PTS Invested",
+  "Jar Collectible Enchantment LVs", "All Summoning Doublers"];
+ return categories.map((category, index) => ({
+  category,
+  before: (values[index] ?? []).map(Number),
+  after: (values[index] ?? []).map(value => category === "Jar Collectible Enchantment LVs"
+   ? Math.min(Number(value), 1) : category === "All Summoning Doublers" ? -1 : 0),
+ }));
+};
 
 export class Lamp {
  zenithMarketBonus: number = 0;
@@ -1536,18 +1565,9 @@ export class Lamp {
   });
   this.wishesPerDay = 0;
   this.schematicCostDiscount = Math.max(0.01, Math.pow(0.85, this.wishes[5].wishCount));
-  const resetSources = [
-   ["All Opals Invested", holeData[3]],
-   ["Conjuror PTS Invested", [...holeData[4], ...holeData[5], ...holeData[6]]],
-   ["Jar Collectible Enchantment LVs", holeData[24]],
-   ["All Summoning Doublers", holeData[28]],
-  ] as const;
-  this.resetConsequences = resetSources.map(([category, values]) => ({
-   category,
-   before: values.map(Number),
-   after: values.map(value => category === "Jar Collectible Enchantment LVs"
-    ? Math.min(Number(value), 1) : category === "All Summoning Doublers" ? -1 : 0),
-  }));
+  this.resetConsequences = createLampResetConsequences([
+   holeData[3], [...holeData[4], ...holeData[5], ...holeData[6]], holeData[24], holeData[28],
+  ]);
  }
 
  prepare(hole: Hole, cavernCount: number): void {
@@ -1625,6 +1645,11 @@ export interface LanternLocation {
  quantity: number;
 }
 
+const lanternAdvances = ["Rescued villager EXP", "Selected and eligible adjacent Study progress",
+ "Supported passive cavern accrual", "Monument lifetime hours"];
+const lanternExclusions = ["Skilling layers and resource extraction", "Active challenges",
+ "Other daily claim allowances"];
+
 export interface LanternSummary {
  itemId: "Quest90";
  name: string;
@@ -1644,37 +1669,90 @@ export interface AnotherTryReset {
 }
 
 
+const cavernOpalAcquisitions = [
+ "Purchased an Opal with Well sediment.",
+ "Destroyed a Motherlode layer.",
+ "Reached a Den score milestone.",
+ "Collected an Opal reward from a Bravery run.",
+ "Received an Opal from a Bell Ping.",
+ "Plucked an Opal reward from a Harp string.",
+ "Received an Opal from a Lamp wish.",
+ "Harvested a Hive layer.",
+ "Defeated a Gloomie colony.",
+ "Collected an Opal reward from a Justice run.",
+ "Broke a Tall Jar that contained an Opal.",
+ "Whittled an Evertree trunk.",
+ "Collected an Opal reward from a Wisdom run.",
+ "Reached a Gambit points milestone.",
+ "Defeated the Temple challenge golem.",
+ "Purchased an Opal with Fountain currency.",
+ "Completed a Trench depth.",
+ "Purchased an Opal upgrade in the Cove.",
+];
+
+const createExternalOpalSources = (values: OpalExternalSourceValues): OpalSource[] => [
+ {
+  id: "gem-shop", owner: "gems", name: "Gem Shop", acquisition: "Purchased Opals.",
+  opals: values["gem-shop"], unit: "Opals"
+ },
+ {
+  id: "grimoire", owner: "grimoire", name: "Grimoire", acquisition: "Earned the Opal upgrade bonus.",
+  opals: values.grimoire, unit: "Opals"
+ },
+ {
+  id: "companion", owner: "companions", name: "Companion", acquisition: "Current active Opal companion bonus.",
+  opals: values.companion, unit: "Opals"
+ },
+ {
+  id: "compass", owner: "compass", name: "Compass", acquisition: "Earned the Opal upgrade bonus.",
+  opals: values.compass, unit: "Opals"
+ },
+ {
+  id: "emperor", owner: "emperor", name: "Emperor", acquisition: "Unrounded Opal contribution from Emperor victories.",
+  opals: values.emperor, unit: "Opals"
+ },
+ {
+  id: "schematic", owner: "schematics", name: "Schematic", acquisition: "Unrounded Opal contribution from the built reward schematic.",
+  opals: values.schematic, unit: "Opals"
+ },
+ {
+  id: "arcane", owner: "tesseract", name: "Arcane", acquisition: "Earned the Opal upgrade bonus.",
+  opals: values.arcane, unit: "Opals"
+ },
+ {
+  id: "sushi", owner: "sushi", name: "Sushi", acquisition: "Unlocked the Opal Sushi reward.",
+  opals: values.sushi, unit: "Opals"
+ },
+];
+
 export class Hole extends Domain {
  // Raw
  playerLocationData: number[] = []
 
  // Processed
- villagers: Villager[] = Villagers.getVillagers();
- majiks = new Majiks();
- schematics: Schematic[] = Schematic.fromBase(
-  initHoleBuildingRepo(),
-  (schematicIndex, baseMultiplier) => this.getSchematicBonus(schematicIndex, baseMultiplier),
- );
- studies: Study[] = Study.fromBase(initStudyRepo());
- measurements: Measurement[] = Measurement.fromBase(initMeasurementRepo());
- currencies: HoleCurrency[] = HoleCurrency.fromBase(initHoleCurrencyRepo());
+ villagers!: Villager[];
+ majiks!: Majiks;
+ schematics!: Schematic[];
+ studies!: Study[];
+ measurements!: Measurement[];
+ currencies!: HoleCurrency[];
  savedGemShopBucketPurchase: number = 0;
  wellExpansionLevel: number = 0;
 
  get schematicCatalogue(): Schematic[] {
   return [...this.schematics].sort((left, right) => left.orderPosition - right.orderPosition);
  }
- monuments: Monuments = new Monuments();
- bell: Bell = new Bell();
- well: Well = new Well();
- fountain: Fountain = new Fountain();
- resourceCavrens = new ResourceCavrens();
- harp: Harp = new Harp();
- lamp: Lamp = new Lamp();
- dawgDen: DawgDen = new DawgDen();
- jar: Jar = new Jar();
- cove: Cove = new Cove();
- gambit: Gambit = new Gambit();
+ monuments!: Monuments;
+ bell!: Bell;
+ well!: Well;
+ fountain!: Fountain;
+ resourceCavrens!: ResourceCavrens;
+ harp!: Harp;
+ lamp!: Lamp;
+ dawgDen!: DawgDen;
+ jar!: Jar;
+ cove!: Cove;
+ gambit!: Gambit;
  cavernEarnedOpals: number = 0;
  cavernOpalSources: (Omit<OpalSource, "opals"> & { opals: number })[] = [];
  declare opalLedger: OpalLedger;
@@ -1685,16 +1763,20 @@ export class Hole extends Domain {
  declare studyRate: number;
  studyContributors: HoleContributor[] = [];
  dailyLanternUses: number = 0;
- lanterns: LanternSummary = { itemId: "Quest90", name: "Blinding Lantern", locations: [],
+ lanterns: LanternSummary = {
+  itemId: "Quest90", name: "Blinding Lantern", locations: [],
   totalStock: 0, usesToday: 0,
-  dailyLimit: 12, hoursPerUse: 2, advances: [], excludes: [] };
+  dailyLimit: 12, hoursPerUse: 2, advances: [], excludes: []
+ };
  earlyExplorerExpUpgrade: number = 0;
  villagerBundleBonus: number = 0;
  wishesAvailable: number = 0;
  anotherTry: { access: boolean; wishCost: number; availableWishes: number; affordable: boolean; resets: AnotherTryReset[] } =
   { access: false, wishCost: 0, availableWishes: 0, affordable: false, resets: [] };
- allocationEffects: { leastUnlockedInvestment: number; equalSpreadPercent: number;
-  opalEnthusiasm: { villagerId: number; investedTens: number; percent: number }[] } =
+ allocationEffects: {
+  leastUnlockedInvestment: number; equalSpreadPercent: number;
+  opalEnthusiasm: { villagerId: number; investedTens: number; percent: number }[]
+ } =
   { leastUnlockedInvestment: 0, equalSpreadPercent: 0, opalEnthusiasm: [] };
  researchExpUpgradeLevel: number = 0;
 
@@ -1779,18 +1861,28 @@ export class Hole extends Domain {
   const wish = this.lamp.wishes[1];
   const wishCost = Math.floor(wish.wishCount * wish.data.x2 + wish.data.x1);
   const access = cavernCount > 6;
-  this.anotherTry = { access, wishCost, availableWishes: this.wishesAvailable,
+  this.anotherTry = {
+   access, wishCost, availableWishes: this.wishesAvailable,
    affordable: access && this.wishesAvailable >= wishCost,
    resets: [
-    { category: "Opals", clears: ["All villager Opal investments"],
-     retains: ["Earned Opals", "Villager levels", "Stored villager EXP"] },
-    { category: "Majik", clears: ["All three Majik investment categories"],
-     retains: ["Cosmo's saved level", "Purchased Majik points"] },
-    { category: "Jar enchantments", clears: ["Collectible enchantment levels above one"],
-     retains: ["Discovered collectibles at level one", "Undiscovered collectibles at level zero"] },
-    { category: "Summoning doublers", clears: ["All doubler assignments"],
-     retains: ["Earned Summoning doublers", "Summoning victories"] },
-   ] };
+    {
+     category: "Opals", clears: ["All villager Opal investments"],
+     retains: ["Earned Opals", "Villager levels", "Stored villager EXP"]
+    },
+    {
+     category: "Majik", clears: ["All three Majik investment categories"],
+     retains: ["Cosmo's saved level", "Purchased Majik points"]
+    },
+    {
+     category: "Jar enchantments", clears: ["Collectible enchantment levels above one"],
+     retains: ["Discovered collectibles at level one", "Undiscovered collectibles at level zero"]
+    },
+    {
+     category: "Summoning doublers", clears: ["All doubler assignments"],
+     retains: ["Earned Summoning doublers", "Summoning victories"]
+    },
+   ]
+  };
  }
 
  prepareUpgradeInspection(players: Player[], divinity: Divinity): void {
@@ -1823,9 +1915,11 @@ export class Hole extends Domain {
    externalRoundingAdjustment = externalEarned - externalUnrounded;
   }
   const earned = externalEarned === null ? null : this.cavernEarnedOpals + externalEarned;
-  this.opalLedger = { sources, cavernEarned: this.cavernEarnedOpals, externalEarned, emperorSchematicFloorAdjustment,
+  this.opalLedger = {
+   sources, cavernEarned: this.cavernEarnedOpals, externalEarned, emperorSchematicFloorAdjustment,
    externalRoundingAdjustment,
-   earned, invested, uninvested: earned === null ? null : earned - invested };
+   earned, invested, uninvested: earned === null ? null : earned - invested
+  };
  }
 
  prepareLanternSummary(storage: Storage, players: Player[]): void {
@@ -1836,12 +1930,13 @@ export class Hole extends Domain {
    kind: "character", playerId: player.playerID, playerName: player.playerName,
    quantity: storage.playerStorage[player.playerID].reduce((sum, item) => sum + (item.internalName === "Quest90" ? item.count : 0), 0),
   }))];
-  this.lanterns = { itemId: "Quest90", name: "Blinding Lantern", locations,
+  this.lanterns = {
+   itemId: "Quest90", name: "Blinding Lantern", locations,
    totalStock: locations.reduce((sum, location) => sum + location.quantity, 0),
    usesToday: this.dailyLanternUses,
    dailyLimit: 12, hoursPerUse: 2,
-   advances: ["Rescued villager EXP", "Selected and eligible adjacent Study progress", "Supported passive cavern accrual", "Monument lifetime hours"],
-   excludes: ["Skilling layers and resource extraction", "Active challenges", "Other daily claim allowances"],
+   advances: lanternAdvances,
+   excludes: lanternExclusions,
   };
  }
 
@@ -1856,18 +1951,30 @@ export class Hole extends Domain {
    { source: "Base Study rate", owner: "hole", value: 100, unit: "progress/hour", combination: "base" },
    { source: "Bolaia level", owner: "villager:4", value: bolaia.level, unit: "count", combination: "additive" },
    { source: "Base progress per Bolaia level", owner: "villager:4", value: 5, unit: "percent", combination: "additive" },
-   { source: this.schematics[85].data.name, owner: "schematic:85", value: this.getSchematicBonus(85, 2),
-    unit: "percent", combination: "additive" },
-   { source: this.schematics[87].data.name, owner: "schematic:87", value: this.getSchematicBonus(87, 3),
-    unit: "percent", combination: "additive" },
-   { source: this.schematics[88].data.name, owner: "schematic:88", value: this.getSchematicBonus(88, 5),
-    unit: "percent", combination: "additive" },
-   { source: this.schematics[99].data.name, owner: "schematic:99", value: this.getSchematicBonus(99, 5),
-    unit: "percent", combination: "additive" },
-   { source: "Fountain Study rate", owner: "cavern:15", value: fountain,
-    unit: "percent", combination: "multiplicative" },
-   { source: this.jar.jarBonuses[16].data.name, owner: "jar-collectible:16", value: collectible,
-    unit: "percent", combination: "additive" },
+   {
+    source: this.schematics[85].data.name, owner: "schematic:85", value: this.getSchematicBonus(85, 2),
+    unit: "percent", combination: "additive"
+   },
+   {
+    source: this.schematics[87].data.name, owner: "schematic:87", value: this.getSchematicBonus(87, 3),
+    unit: "percent", combination: "additive"
+   },
+   {
+    source: this.schematics[88].data.name, owner: "schematic:88", value: this.getSchematicBonus(88, 5),
+    unit: "percent", combination: "additive"
+   },
+   {
+    source: this.schematics[99].data.name, owner: "schematic:99", value: this.getSchematicBonus(99, 5),
+    unit: "percent", combination: "additive"
+   },
+   {
+    source: "Fountain Study rate", owner: "cavern:15", value: fountain,
+    unit: "percent", combination: "multiplicative"
+   },
+   {
+    source: this.jar.jarBonuses[16].data.name, owner: "jar-collectible:16", value: collectible,
+    unit: "percent", combination: "additive"
+   },
    { source: "Study stamp", owner: "stamps", value: stampBonus, unit: "percent", combination: "additive" },
    { source: "Study All Nighter", owner: "majik:13", value: majik, unit: "percent", combination: "additive" },
   ];
@@ -1888,7 +1995,7 @@ export class Hole extends Domain {
     study.prepareRate("neighbor", this.studyRate, [...this.studyContributors]);
    } else {
     study.prepareRate("inactive", 0, []);
-  }
+   }
   });
  }
 
@@ -1899,10 +2006,14 @@ export class Hole extends Domain {
    ? Math.min(...unlockedVillagers.map(villager => villager.opals)) : this.villagers[0].opals;
   const equalSpread = villageMajiks[5].getBonus() * Math.floor(leastInvestment / 5);
   const enthusiasmPerTen = villageMajiks[0].getBonus();
-  this.allocationEffects = { leastUnlockedInvestment: leastInvestment, equalSpreadPercent: equalSpread,
-   opalEnthusiasm: this.villagers.map(villager => ({ villagerId: villager.index,
+  this.allocationEffects = {
+   leastUnlockedInvestment: leastInvestment, equalSpreadPercent: equalSpread,
+   opalEnthusiasm: this.villagers.map(villager => ({
+    villagerId: villager.index,
     investedTens: Math.floor(villager.opals / 10),
-    percent: enthusiasmPerTen * Math.floor(villager.opals / 10) })) };
+    percent: enthusiasmPerTen * Math.floor(villager.opals / 10)
+   }))
+  };
   const jarPercent = [4, 10, 12, 22, 29, 35].reduce(
    (sum, index) => sum + this.jar.jarBonuses[index].getBonus(), 0);
   const fountainBonus = this.fountain.getBonus(0, 14);
@@ -1940,6 +2051,25 @@ export class Hole extends Domain {
  }
 
  init(_allItems: Item[], _charCount: number) {
+  this.playerLocationData = [];
+  this.villagers = Villagers.getVillagers();
+  this.majiks = new Majiks();
+  this.schematics = Schematic.fromBase(initHoleBuildingRepo(),
+   (schematicIndex, baseMultiplier) => this.getSchematicBonus(schematicIndex, baseMultiplier));
+  this.studies = Study.fromBase(initStudyRepo());
+  this.measurements = Measurement.fromBase(initMeasurementRepo());
+  this.currencies = HoleCurrency.fromBase(initHoleCurrencyRepo());
+  this.monuments = new Monuments();
+  this.bell = new Bell();
+  this.well = new Well();
+  this.fountain = new Fountain();
+  this.resourceCavrens = new ResourceCavrens();
+  this.harp = new Harp();
+  this.lamp = new Lamp();
+  this.dawgDen = new DawgDen();
+  this.jar = new Jar();
+  this.cove = new Cove();
+  this.gambit = new Gambit();
   // The generated order maps a catalogue position to a stable building ID.
   const buildingOrder = this.schematics.map(schematic => schematic.data.order);
   this.schematics.forEach(schematic => {
@@ -1957,6 +2087,73 @@ export class Hole extends Domain {
     currency.imageData = Item.getImageData(requirement.name);
    }
   });
+  // Reset saved state before rebuilding every derived view in dependency order.
+  this.lamp.resetConsequences = createLampResetConsequences([[], [], [], []]);
+  this.reservedVillagerInvestments = [0, 0, 0];
+  this.savedStudyTarget = null;
+  this.savedStudyLevelsForMeasurements = Array(this.studies.length).fill(0);
+  this.eligibleStudyNeighbors = [];
+  this.studyContributors = [];
+  this.dailyLanternUses = 0;
+  this.earlyExplorerExpUpgrade = 0;
+  this.villagerBundleBonus = 0;
+  this.wishesAvailable = 0;
+  this.researchExpUpgradeLevel = 0;
+  this.savedGemShopBucketPurchase = 0;
+  this.wellExpansionLevel = 0;
+  this.cavernEarnedOpals = 0;
+  this.cavernOpalSources = [];
+  this.opalLedger = {
+   sources: [], cavernEarned: 0, externalEarned: null,
+   emperorSchematicFloorAdjustment: null, externalRoundingAdjustment: null,
+   earned: null, invested: 0, uninvested: null
+  };
+  this.prepareSharedStudyEffects();
+  this.prepareSharedUpgradeEffects();
+  this.majiks.prepare(this.villagers[VillagerIndex.Cosmo],
+   this.schematics.filter(schematic => schematic.built).length);
+  this.majiks.pocketDivinity.characters = [];
+  this.schematics.forEach(schematic =>
+   schematic.prepareInspection(this.villagers[VillagerIndex.Kaipu].level, this.schematics.length));
+  this.measurements.forEach(measurement => {
+   measurement.prepare({
+    minau: this.villagers[VillagerIndex.Minau],
+    lengthmeister: this.majiks.villageUpgradesByIndex[12],
+    fountainDiscountPercent: 0, crops: 0, accountLevel: 0, tomeScore: 0, skillLevel: 0,
+    deathnotePoints: 0, highestDamage: 0, slabItems: 0, studyLevels: 0,
+   });
+   measurement.currency = this.currencies[Number(measurement.data.itemRequirement.id)];
+   measurement.prepareInspection();
+  });
+  this.studies.forEach(study => study.prepareRate("inactive", 0, []));
+  this.prepareInspection();
+  this.prepareStudyProgress(false, 0);
+  this.prepareVillagerGrowth([], [], {
+   compassPercent: 0, legendPercent: 0, pristinePercent: 0, companionBonus: 0, eventShopOwned: false,
+   lorePercent: 0, exoticPercent: 0, arcadePercent: 0, grimoirePercent: 0, arcanePercent: 0,
+   gloomieCardLevel: 0, summoningPercent: 0, vaultPercent: 0,
+  });
+  this.bell.prepare(this, [], 0, 0);
+  this.harp.prepare(this);
+  this.lamp.prepare(this, 0);
+  this.cavernOpalSources = this.studies.map(study => ({
+   id: `cavern:${study.index}`, owner: `cavern:${study.index}`, name: study.data.name,
+   acquisition: cavernOpalAcquisitions[study.index], opals: 0, unit: "Opals",
+  }));
+  const externalOpalValues: OpalExternalSourceValues = {
+   "gem-shop": 0, grimoire: 0, companion: 0, compass: 0,
+   emperor: 0, schematic: 0, arcane: 0, sushi: 0,
+  };
+  this.prepareOpalLedger(externalOpalValues, createExternalOpalSources(externalOpalValues));
+  this.lanterns = {
+   itemId: "Quest90", name: "Blinding Lantern", locations: [], totalStock: 0, usesToday: 0,
+   dailyLimit: 12, hoursPerUse: 2,
+   advances: lanternAdvances,
+   excludes: lanternExclusions,
+  };
+  this.resourceCavrens.prepare(this.getResourceRequirementReduction());
+  this.well.prepare(this, 0, 0, 0);
+  this.gambit.updateUnlockedBonuses();
   return this;
  }
 
@@ -1985,33 +2182,15 @@ export class Hole extends Domain {
   hole.wishesAvailable = Number(holeData[11][25] ?? 0);
   hole.reservedVillagerInvestments = holeData[3].slice(5, 8);
   hole.cavernEarnedOpals = holeData[7].reduce((sum, opals) => sum + opals, 0);
-  const cavernAcquisitions = [
-   "Purchased an Opal with Well sediment.",
-   "Destroyed a Motherlode layer.",
-   "Reached a Den score milestone.",
-   "Collected an Opal reward from a Bravery run.",
-   "Received an Opal from a Bell Ping.",
-   "Plucked an Opal reward from a Harp string.",
-   "Received an Opal from a Lamp wish.",
-   "Harvested a Hive layer.",
-   "Defeated a Gloomie colony.",
-   "Collected an Opal reward from a Justice run.",
-   "Broke a Tall Jar that contained an Opal.",
-   "Whittled an Evertree trunk.",
-   "Collected an Opal reward from a Wisdom run.",
-   "Reached a Gambit points milestone.",
-   "Defeated the Temple challenge golem.",
-   "Purchased an Opal with Fountain currency.",
-   "Completed a Trench depth.",
-   "Purchased an Opal upgrade in the Cove.",
-  ];
   hole.cavernOpalSources = hole.studies.map(study => ({
    id: `cavern:${study.index}`, owner: `cavern:${study.index}`, name: study.data.name,
-   acquisition: cavernAcquisitions[study.index], opals: Number(holeData[7][study.index] ?? 0), unit: "Opals",
+   acquisition: cavernOpalAcquisitions[study.index], opals: Number(holeData[7][study.index] ?? 0), unit: "Opals",
   }));
-  hole.lanterns = { itemId: "Quest90", name: "Blinding Lantern", locations: [],
+  hole.lanterns = {
+   itemId: "Quest90", name: "Blinding Lantern", locations: [],
    totalStock: 0, usesToday: hole.dailyLanternUses,
-   dailyLimit: 12, hoursPerUse: 2, advances: [], excludes: [] };
+   dailyLimit: 12, hoursPerUse: 2, advances: [], excludes: []
+  };
   const gemPurchases = (data.get("GemItemsPurchased") as number[] | null) ?? [];
   hole.savedGemShopBucketPurchase = Number(gemPurchases[2] ?? 0);
   hole.wellExpansionLevel = Number(holeData[11][1] ?? 0);
@@ -2138,7 +2317,7 @@ export const updateHole = (data: Map<string, any>) => {
  gambitMultipliers += jarBonuses.reduce((sum, bonus) => sum + bonus, 0);
  hole.gambit.gambitPointsMulti = 1 + gambitMultipliers / 100;
  hole.gambit.updateUnlockedBonuses();
- hole.bell.prepare(hole, players, gaming, divinity);
+ hole.bell.prepare(hole, players, gaming.bits, divinity.atomsBalance);
  const explorer = hole.villagers[VillagerIndex.Polonai];
  const cavernCount = Math.min(hole.studies.length, explorer.level);
  hole.lamp.prepare(hole, cavernCount);
@@ -2224,25 +2403,7 @@ export const updateHolePresentation = (data: Map<string, any>): void => {
   arcane: tesseract.getUpgradeBonus(25),
   sushi: sushi.getBonusFromIndex(56),
  };
- const externalSources: OpalSource[] = [
-  { id: "gem-shop", owner: "gems", name: "Gem Shop", acquisition: "Purchased Opals.",
-   opals: externalSourceOpals["gem-shop"], unit: "Opals" },
-  { id: "grimoire", owner: "grimoire", name: "Grimoire", acquisition: "Earned the Opal upgrade bonus.",
-   opals: externalSourceOpals.grimoire, unit: "Opals" },
-  { id: "companion", owner: "companions", name: "Companion", acquisition: "Current active Opal companion bonus.",
-   opals: externalSourceOpals.companion, unit: "Opals" },
-  { id: "compass", owner: "compass", name: "Compass", acquisition: "Earned the Opal upgrade bonus.",
-   opals: externalSourceOpals.compass, unit: "Opals" },
-  { id: "emperor", owner: "emperor", name: "Emperor", acquisition: "Unrounded Opal contribution from Emperor victories.",
-   opals: externalSourceOpals.emperor, unit: "Opals" },
-  { id: "schematic", owner: "schematics", name: "Schematic", acquisition: "Unrounded Opal contribution from the built reward schematic.",
-   opals: externalSourceOpals.schematic, unit: "Opals" },
-  { id: "arcane", owner: "tesseract", name: "Arcane", acquisition: "Earned the Opal upgrade bonus.",
-   opals: externalSourceOpals.arcane, unit: "Opals" },
-  { id: "sushi", owner: "sushi", name: "Sushi", acquisition: "Unlocked the Opal Sushi reward.",
-   opals: externalSourceOpals.sushi, unit: "Opals" },
- ];
- hole.prepareOpalLedger(externalSourceOpals, externalSources);
+ hole.prepareOpalLedger(externalSourceOpals, createExternalOpalSources(externalSourceOpals));
  hole.prepareLanternSummary(storage, players);
  hole.prepareStudyProgress(gaming.isSuperbitPurchased(43), getStampBonusForKey(stamps, "VillageStudy"));
  hole.prepareVillagerGrowth(players, statues, {

@@ -24,70 +24,13 @@ function cleanEnv(overrides = {}) {
 }
 
 function fail(message) { throw new Error(message); }
-function escapedRegExp(value) { return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
-function accountOnlyTestPaths(configPath) {
-  const config = readJson(configPath);
-  return (config.defaultOnlyTests || []).map(entry => {
-    if (!entry || typeof entry.path !== 'string' || typeof entry.reason !== 'string') {
-      fail('Invalid defaultOnlyTests entry in account configuration');
-    }
-    const absolutePath = path.resolve(root, entry.path);
-    const relativePath = path.relative(root, absolutePath);
-    if (relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
-      fail(`Default-only test path escapes repository: ${entry.path}`);
-    }
-    return { path: entry.path, absolutePath, reason: entry.reason };
-  });
-}
-
-function prepareJestArgs(options, exclusions) {
-  const selectors = new Set();
-  for (let index = 0; index < options.jestArgs.length; index += 1) {
-    const argument = options.jestArgs[index];
-    if (!argument.startsWith('-')) selectors.add(path.resolve(root, argument));
-    if (argument.startsWith('--runTestsByPath=')) {
-      selectors.add(path.resolve(root, argument.slice('--runTestsByPath='.length)));
-    }
-    for (const option of ['--testPathPattern', '--testPathPatterns']) {
-      let pattern;
-      if (argument === option) pattern = options.jestArgs[index + 1];
-      else if (argument.startsWith(`${option}=`)) pattern = argument.slice(option.length + 1);
-      if (pattern) {
-        for (const exclusion of exclusions) {
-          try {
-            if (new RegExp(pattern).test(exclusion.absolutePath) || new RegExp(pattern).test(exclusion.path)) {
-              fail(`Cannot select default-only test for account run: ${exclusion.path}. ${exclusion.reason}`);
-            }
-          } catch (error) {
-            if (error.message.startsWith('Cannot select default-only test')) throw error;
-          }
-        }
-      }
-    }
-  }
-  for (const exclusion of exclusions) {
-    if (selectors.has(exclusion.absolutePath)) {
-      fail(`Cannot select default-only test for account run: ${exclusion.path}. ${exclusion.reason}`);
-    }
-  }
-  const retainedArgs = [];
-  const ignorePatterns = [];
-  for (let index = 0; index < options.jestArgs.length; index += 1) {
-    const argument = options.jestArgs[index];
-    if (argument === '--testPathIgnorePatterns') {
-      if (options.jestArgs[index + 1]) ignorePatterns.push(options.jestArgs[++index]);
-    } else if (argument.startsWith('--testPathIgnorePatterns=')) {
-      ignorePatterns.push(argument.slice('--testPathIgnorePatterns='.length));
-    } else retainedArgs.push(argument);
-  }
-  ignorePatterns.push(...exclusions.map(({ absolutePath }) => `^${escapedRegExp(absolutePath)}$`));
-  if (ignorePatterns.length) retainedArgs.push(`--testPathIgnorePatterns=${ignorePatterns.join('|')}`);
-
-  const explicitRunInBand = options.jestArgs.some(argument => argument === '--runInBand' || argument === '-i');
+function prepareJestArgs(options) {
+  const retainedArgs = options.jestArgs;
+  const explicitRunInBand = retainedArgs.some(argument => argument === '--runInBand' || argument === '-i');
   if (explicitRunInBand) return retainedArgs;
   const workerArgs = [];
-  const hasMaxWorkers = options.jestArgs.some(argument => argument === '--maxWorkers' || argument.startsWith('--maxWorkers=') || argument === '-w' || argument.startsWith('-w='));
-  const hasMemoryLimit = options.jestArgs.some(argument => argument === '--workerIdleMemoryLimit' || argument.startsWith('--workerIdleMemoryLimit='));
+  const hasMaxWorkers = retainedArgs.some(argument => argument === '--maxWorkers' || argument.startsWith('--maxWorkers=') || argument === '-w' || argument.startsWith('-w='));
+  const hasMemoryLimit = retainedArgs.some(argument => argument === '--workerIdleMemoryLimit' || argument.startsWith('--workerIdleMemoryLimit='));
   if (!hasMaxWorkers) workerArgs.push('--maxWorkers=1');
   if (!hasMemoryLimit) workerArgs.push('--workerIdleMemoryLimit=512MB');
   return [...workerArgs, ...retainedArgs];
@@ -387,9 +330,7 @@ async function extractAccount(options, account) {
   }
 }
 async function runTests(options, accounts) {
-  const exclusions = accountOnlyTestPaths(options.configPath);
-  for (const exclusion of exclusions) console.log(`Default-only test excluded: ${exclusion.path} — ${exclusion.reason}`);
-  const jestArgs = prepareJestArgs(options, exclusions);
+  const jestArgs = prepareJestArgs(options);
   let failures = 0;
   for (const account of accounts) {
     try {
@@ -431,4 +372,4 @@ async function main() {
 }
 
 if (require.main === module) main().catch(async error => { console.error(error.stack || error.message); await cleanup(); process.exitCode = 1; });
-module.exports = { latestDatasetPath, parseArgs, prepareJestArgs, readSnapshotManifest, safePointer, selectedAccounts };
+module.exports = { latestDatasetPath, parseArgs, readSnapshotManifest, safePointer, selectedAccounts };

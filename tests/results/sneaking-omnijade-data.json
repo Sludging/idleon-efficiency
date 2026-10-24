@@ -1,0 +1,85 @@
+{
+  "extractions": {
+    "omnijade_remaining": {
+      "expression": "idleon.callFunction(\"MenagerieStuff\", \"OmniJadeLeft\", 0, 0)",
+      "result": 0
+    },
+    "omnijade_daily_levels": {
+      "expression": "idleon.callFunction(\"MenagerieStuff\", \"OmniJadeDailyLVs\", 0, 0)",
+      "result": 1
+    },
+    "knowledge_bonus_0": {
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 0, 0)",
+      "result": 2085
+    },
+    "knowledge_bonus_1": {
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 1, 0)",
+      "result": 2267
+    },
+    "knowledge_bonus_2": {
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 2, 0)",
+      "result": 7116
+    },
+    "knowledge_bonus_3": {
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 3, 0)",
+      "result": 353
+    },
+    "knowledge_bonus_4": {
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 4, 0)",
+      "result": 738
+    },
+    "knowledge_bonus_5": {
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 5, 0)",
+      "result": 3872
+    },
+    "knowledge_bonus_6": {
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 6, 0)",
+      "result": 2799
+    },
+    "knowledge_bonus_7": {
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 7, 0)",
+      "result": 2551
+    },
+    "knowledge_bonus_8": {
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 8, 0)",
+      "result": 3090
+    },
+    "knowledge_bonus_10": {
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 10, 0)",
+      "result": 2567
+    },
+    "knowledge_bonus_11": {
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 11, 0)",
+      "result": 7051
+    },
+    "knowledge_bonus_12": {
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 12, 0)",
+      "result": 2626
+    },
+    "knowledge_bonus_13": {
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 13, 0)",
+      "result": 5279
+    },
+    "knowledge_bonus_14": {
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 14, 0)",
+      "result": 832
+    },
+    "knowledge_bonus_15": {
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 15, 0)",
+      "result": 986
+    },
+    "knowledge_bonus_16": {
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 16, 0)",
+      "result": 59
+    },
+    "knowledge_bonus_31": {
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 31, 0)",
+      "result": 0
+    },
+    "pipsqueak_bonus": {
+      "expression": "idleon.callFunction(\"Companions\", 173)",
+      "result": 0
+    }
+  },
+  "errors": {}
+}

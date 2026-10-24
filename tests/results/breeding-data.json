@@ -1,0 +1,766 @@
+{
+  "extractions": {
+    "shiny_speed_equipment": {
+      "expression": "(()=>{const e=idleon.engine;const h=e.getGameAttribute(\"DNSM\").h;const name=e.getGameAttribute(\"UserInfo\")[0];const activeIndex=e.getGameAttribute(\"GetPlayersUsernames\").indexOf(name);return {activeIndex,manualStarSigns:String(e.getGameAttribute(\"PersonalValuesMap\").h.StarSign).split(\",\"),activeChipIds:e.getGameAttribute(\"Lab\")[1+activeIndex].slice(0,7),preparedBreedabilliShinyBonus:h.StarSigns.h[\"57b\"],preparedChipOwner:h.ChipBbonusz?.h.PlayerNAME,preparedStarChipBonus:h.ChipBbonusz?.h.star,seraphCosmosUnlocked:Object.prototype.hasOwnProperty.call(e.getGameAttribute(\"StarSignsUnlocked\").h,\"Seraph_Cosmos\")}})()",
+      "result": {
+        "activeIndex": 3,
+        "manualStarSigns": [
+          "69",
+          "55",
+          "4",
+          ""
+        ],
+        "activeChipIds": [
+          21,
+          20,
+          18,
+          17,
+          16,
+          15,
+          9
+        ],
+        "preparedBreedabilliShinyBonus": 150,
+        "preparedChipOwner": "Sludgev4",
+        "preparedStarChipBonus": 1,
+        "seraphCosmosUnlocked": true
+      }
+    },
+    "arena_bonuses": {
+      "expression": "idleon.engine.getGameAttribute(\"CustomLists\").h.RANDOlist[53].map((_,index)=>({index,unlocked:idleon.callFunction(\"Breeding\",\"PetArenaBonus\",\"0\",index,0)}))",
+      "result": [
+        {
+          "index": 0,
+          "unlocked": 1
+        },
+        {
+          "index": 1,
+          "unlocked": 1
+        },
+        {
+          "index": 2,
+          "unlocked": 1
+        },
+        {
+          "index": 3,
+          "unlocked": 1
+        },
+        {
+          "index": 4,
+          "unlocked": 1
+        },
+        {
+          "index": 5,
+          "unlocked": 1
+        },
+        {
+          "index": 6,
+          "unlocked": 1
+        },
+        {
+          "index": 7,
+          "unlocked": 1
+        },
+        {
+          "index": 8,
+          "unlocked": 1
+        },
+        {
+          "index": 9,
+          "unlocked": 1
+        },
+        {
+          "index": 10,
+          "unlocked": 1
+        },
+        {
+          "index": 11,
+          "unlocked": 1
+        },
+        {
+          "index": 12,
+          "unlocked": 1
+        },
+        {
+          "index": 13,
+          "unlocked": 1
+        },
+        {
+          "index": 14,
+          "unlocked": 1
+        },
+        {
+          "index": 15,
+          "unlocked": 1
+        }
+      ]
+    },
+    "crucible_bonuses": {
+      "expression": "idleon.engine.getGameAttribute(\"CustomLists\").h.RANDOlist[115].map((_,index)=>({index,unlocked:idleon.callFunction(\"Breeding\",\"PetArenaCrucBonus\",\"0\",index,0)}))",
+      "result": [
+        {
+          "index": 0,
+          "unlocked": 0
+        },
+        {
+          "index": 1,
+          "unlocked": 0
+        },
+        {
+          "index": 2,
+          "unlocked": 0
+        },
+        {
+          "index": 3,
+          "unlocked": 0
+        },
+        {
+          "index": 4,
+          "unlocked": 0
+        },
+        {
+          "index": 5,
+          "unlocked": 0
+        },
+        {
+          "index": 6,
+          "unlocked": 0
+        },
+        {
+          "index": 7,
+          "unlocked": 0
+        },
+        {
+          "index": 8,
+          "unlocked": 0
+        },
+        {
+          "index": 9,
+          "unlocked": 0
+        },
+        {
+          "index": 10,
+          "unlocked": 0
+        },
+        {
+          "index": 11,
+          "unlocked": 0
+        },
+        {
+          "index": 12,
+          "unlocked": 0
+        },
+        {
+          "index": 13,
+          "unlocked": 0
+        },
+        {
+          "index": 14,
+          "unlocked": 0
+        },
+        {
+          "index": 15,
+          "unlocked": 0
+        }
+      ]
+    },
+    "shiny_bonuses": {
+      "expression": "idleon.engine.getGameAttribute(\"CustomLists\").h.RANDOlist[91].map((_,index)=>({index,bonus:idleon.callFunction(\"Breeding\",\"ShinyBonusS\",\"Nah\",index,-1)}))",
+      "result": [
+        {
+          "index": 0,
+          "bonus": 29
+        },
+        {
+          "index": 1,
+          "bonus": 29
+        },
+        {
+          "index": 2,
+          "bonus": 26
+        },
+        {
+          "index": 3,
+          "bonus": 82
+        },
+        {
+          "index": 4,
+          "bonus": 48
+        },
+        {
+          "index": 5,
+          "bonus": 44
+        },
+        {
+          "index": 6,
+          "bonus": 86
+        },
+        {
+          "index": 7,
+          "bonus": 62
+        },
+        {
+          "index": 8,
+          "bonus": 16
+        },
+        {
+          "index": 9,
+          "bonus": 72
+        },
+        {
+          "index": 10,
+          "bonus": 38
+        },
+        {
+          "index": 11,
+          "bonus": 38
+        },
+        {
+          "index": 12,
+          "bonus": 24
+        },
+        {
+          "index": 13,
+          "bonus": 38
+        },
+        {
+          "index": 14,
+          "bonus": 38
+        },
+        {
+          "index": 15,
+          "bonus": 38
+        },
+        {
+          "index": 16,
+          "bonus": 81
+        },
+        {
+          "index": 17,
+          "bonus": 57
+        },
+        {
+          "index": 18,
+          "bonus": 10
+        },
+        {
+          "index": 19,
+          "bonus": 1
+        },
+        {
+          "index": 20,
+          "bonus": 17
+        },
+        {
+          "index": 21,
+          "bonus": 82
+        },
+        {
+          "index": 22,
+          "bonus": 1120
+        },
+        {
+          "index": 23,
+          "bonus": 19
+        },
+        {
+          "index": 24,
+          "bonus": 62
+        },
+        {
+          "index": 25,
+          "bonus": 29
+        }
+      ]
+    },
+    "shiny_species": {
+      "expression": "idleon.engine.getGameAttribute(\"CustomLists\").h.PetStats.slice(0,4).flatMap((pets,world)=>pets.map((pet,petIndex)=>({world,petIndex,petId:pet[0],level:idleon.callFunction(\"Breeding\",\"SpecialPassives\",\"Lv\",world,petIndex),requirement:idleon.callFunction(\"Breeding\",\"SpecialPassives\",\"REQ\",world,petIndex)})))",
+      "result": [
+        {
+          "world": 0,
+          "petIndex": 0,
+          "petId": "mushG",
+          "level": 5,
+          "requirement": 200
+        },
+        {
+          "world": 0,
+          "petIndex": 1,
+          "petId": "Pet0",
+          "level": 5,
+          "requirement": 200
+        },
+        {
+          "world": 0,
+          "petIndex": 2,
+          "petId": "frogG",
+          "level": 19,
+          "requirement": 2681786
+        },
+        {
+          "world": 0,
+          "petIndex": 3,
+          "petId": "beanG",
+          "level": 5,
+          "requirement": 200
+        },
+        {
+          "world": 0,
+          "petIndex": 4,
+          "petId": "mushR",
+          "level": 5,
+          "requirement": 200
+        },
+        {
+          "world": 0,
+          "petIndex": 5,
+          "petId": "slimeG",
+          "level": 7,
+          "requirement": 964
+        },
+        {
+          "world": 0,
+          "petIndex": 6,
+          "petId": "Pet1",
+          "level": 7,
+          "requirement": 964
+        },
+        {
+          "world": 0,
+          "petIndex": 7,
+          "petId": "snakeG",
+          "level": 7,
+          "requirement": 964
+        },
+        {
+          "world": 0,
+          "petIndex": 8,
+          "petId": "carrotO",
+          "level": 14,
+          "requirement": 116522
+        },
+        {
+          "world": 0,
+          "petIndex": 9,
+          "petId": "goblinG",
+          "level": 7,
+          "requirement": 964
+        },
+        {
+          "world": 0,
+          "petIndex": 10,
+          "petId": "plank",
+          "level": 7,
+          "requirement": 964
+        },
+        {
+          "world": 0,
+          "petIndex": 11,
+          "petId": "frogBIG",
+          "level": 14,
+          "requirement": 116522
+        },
+        {
+          "world": 0,
+          "petIndex": 12,
+          "petId": "Pet2",
+          "level": 19,
+          "requirement": 2681786
+        },
+        {
+          "world": 0,
+          "petIndex": 13,
+          "petId": "branch",
+          "level": 14,
+          "requirement": 116522
+        },
+        {
+          "world": 0,
+          "petIndex": 14,
+          "petId": "acorn",
+          "level": 1,
+          "requirement": 3
+        },
+        {
+          "world": 0,
+          "petIndex": 15,
+          "petId": "poopSmall",
+          "level": 19,
+          "requirement": 2681786
+        },
+        {
+          "world": 0,
+          "petIndex": 16,
+          "petId": "ratB",
+          "level": 19,
+          "requirement": 2681786
+        },
+        {
+          "world": 1,
+          "petIndex": 0,
+          "petId": "jarSand",
+          "level": 7,
+          "requirement": 964
+        },
+        {
+          "world": 1,
+          "petIndex": 1,
+          "petId": "mimicA",
+          "level": 19,
+          "requirement": 2681786
+        },
+        {
+          "world": 1,
+          "petIndex": 2,
+          "petId": "crabcake",
+          "level": 4,
+          "requirement": 85
+        },
+        {
+          "world": 1,
+          "petIndex": 3,
+          "petId": "coconut",
+          "level": 19,
+          "requirement": 2681786
+        },
+        {
+          "world": 1,
+          "petIndex": 4,
+          "petId": "Pet3",
+          "level": 1,
+          "requirement": 3
+        },
+        {
+          "world": 1,
+          "petIndex": 5,
+          "petId": "sandcastle",
+          "level": 19,
+          "requirement": 2681786
+        },
+        {
+          "world": 1,
+          "petIndex": 6,
+          "petId": "pincermin",
+          "level": 4,
+          "requirement": 85
+        },
+        {
+          "world": 1,
+          "petIndex": 7,
+          "petId": "potato",
+          "level": 14,
+          "requirement": 116522
+        },
+        {
+          "world": 1,
+          "petIndex": 8,
+          "petId": "steak",
+          "level": 19,
+          "requirement": 2681786
+        },
+        {
+          "world": 1,
+          "petIndex": 9,
+          "petId": "Pet4",
+          "level": 7,
+          "requirement": 964
+        },
+        {
+          "world": 1,
+          "petIndex": 10,
+          "petId": "moonman",
+          "level": 3,
+          "requirement": 33
+        },
+        {
+          "world": 1,
+          "petIndex": 11,
+          "petId": "sandgiant",
+          "level": 14,
+          "requirement": 116522
+        },
+        {
+          "world": 1,
+          "petIndex": 12,
+          "petId": "snailZ",
+          "level": 19,
+          "requirement": 2681786
+        },
+        {
+          "world": 1,
+          "petIndex": 13,
+          "petId": "shovelR",
+          "level": 19,
+          "requirement": 2681786
+        },
+        {
+          "world": 1,
+          "petIndex": 14,
+          "petId": "steakR",
+          "level": 19,
+          "requirement": 2681786
+        },
+        {
+          "world": 1,
+          "petIndex": 15,
+          "petId": "potatoB",
+          "level": 10,
+          "requirement": 8227
+        },
+        {
+          "world": 1,
+          "petIndex": 16,
+          "petId": "Pet5",
+          "level": 10,
+          "requirement": 8227
+        },
+        {
+          "world": 2,
+          "petIndex": 0,
+          "petId": "sheep",
+          "level": 12,
+          "requirement": 31633
+        },
+        {
+          "world": 2,
+          "petIndex": 1,
+          "petId": "flake",
+          "level": 12,
+          "requirement": 31633
+        },
+        {
+          "world": 2,
+          "petIndex": 2,
+          "petId": "stache",
+          "level": 8,
+          "requirement": 2013
+        },
+        {
+          "world": 2,
+          "petIndex": 3,
+          "petId": "skele",
+          "level": 12,
+          "requirement": 31633
+        },
+        {
+          "world": 2,
+          "petIndex": 4,
+          "petId": "Pet6",
+          "level": 12,
+          "requirement": 31633
+        },
+        {
+          "world": 2,
+          "petIndex": 5,
+          "petId": "bloque",
+          "level": 12,
+          "requirement": 31633
+        },
+        {
+          "world": 2,
+          "petIndex": 6,
+          "petId": "mamoth",
+          "level": 12,
+          "requirement": 31633
+        },
+        {
+          "world": 2,
+          "petIndex": 7,
+          "petId": "snowball",
+          "level": 12,
+          "requirement": 31633
+        },
+        {
+          "world": 2,
+          "petIndex": 8,
+          "petId": "penguin",
+          "level": 7,
+          "requirement": 964
+        },
+        {
+          "world": 2,
+          "petIndex": 9,
+          "petId": "thermostat",
+          "level": 4,
+          "requirement": 85
+        },
+        {
+          "world": 2,
+          "petIndex": 10,
+          "petId": "glass",
+          "level": 5,
+          "requirement": 200
+        },
+        {
+          "world": 2,
+          "petIndex": 11,
+          "petId": "snakeB",
+          "level": 19,
+          "requirement": 2681786
+        },
+        {
+          "world": 2,
+          "petIndex": 12,
+          "petId": "Pet7",
+          "level": 19,
+          "requirement": 2681786
+        },
+        {
+          "world": 2,
+          "petIndex": 13,
+          "petId": "speaker",
+          "level": 7,
+          "requirement": 964
+        },
+        {
+          "world": 2,
+          "petIndex": 14,
+          "petId": "eye",
+          "level": 10,
+          "requirement": 8227
+        },
+        {
+          "world": 2,
+          "petIndex": 15,
+          "petId": "ram",
+          "level": 10,
+          "requirement": 8227
+        },
+        {
+          "world": 2,
+          "petIndex": 16,
+          "petId": "skele2",
+          "level": 10,
+          "requirement": 8227
+        },
+        {
+          "world": 2,
+          "petIndex": 17,
+          "petId": "Pet8",
+          "level": 10,
+          "requirement": 8227
+        },
+        {
+          "world": 3,
+          "petIndex": 0,
+          "petId": "mushP",
+          "level": 4,
+          "requirement": 85
+        },
+        {
+          "world": 3,
+          "petIndex": 1,
+          "petId": "w4a2",
+          "level": 19,
+          "requirement": 2681786
+        },
+        {
+          "world": 3,
+          "petIndex": 2,
+          "petId": "w4a3",
+          "level": 19,
+          "requirement": 2681786
+        },
+        {
+          "world": 3,
+          "petIndex": 3,
+          "petId": "demonP",
+          "level": 7,
+          "requirement": 964
+        },
+        {
+          "world": 3,
+          "petIndex": 4,
+          "petId": "w4b1",
+          "level": 7,
+          "requirement": 964
+        },
+        {
+          "world": 3,
+          "petIndex": 5,
+          "petId": "Pet9",
+          "level": 10,
+          "requirement": 8227
+        },
+        {
+          "world": 3,
+          "petIndex": 6,
+          "petId": "w4b2",
+          "level": 10,
+          "requirement": 8227
+        },
+        {
+          "world": 3,
+          "petIndex": 7,
+          "petId": "w4b3",
+          "level": 10,
+          "requirement": 8227
+        },
+        {
+          "world": 3,
+          "petIndex": 8,
+          "petId": "w4b4",
+          "level": 10,
+          "requirement": 8227
+        },
+        {
+          "world": 3,
+          "petIndex": 9,
+          "petId": "w4b5",
+          "level": 10,
+          "requirement": 8227
+        },
+        {
+          "world": 3,
+          "petIndex": 10,
+          "petId": "Pet10",
+          "level": 5,
+          "requirement": 200
+        },
+        {
+          "world": 3,
+          "petIndex": 11,
+          "petId": "w4c1",
+          "level": 5,
+          "requirement": 200
+        },
+        {
+          "world": 3,
+          "petIndex": 12,
+          "petId": "w4c2",
+          "level": 5,
+          "requirement": 200
+        },
+        {
+          "world": 3,
+          "petIndex": 13,
+          "petId": "w4c3",
+          "level": 5,
+          "requirement": 200
+        },
+        {
+          "world": 3,
+          "petIndex": 14,
+          "petId": "w4c4",
+          "level": 5,
+          "requirement": 200
+        },
+        {
+          "world": 3,
+          "petIndex": 15,
+          "petId": "Pet11",
+          "level": 5,
+          "requirement": 200
+        }
+      ]
+    },
+    "total_shiny_overlevels": {
+      "expression": "idleon.callFunction(\"Breeding\",\"SpecialzOverLVL\",\"0\",0,0)",
+      "result": 0
+    },
+    "shiny_speed": {
+      "expression": "idleon.callFunction(\"Breeding\",\"ShinySpdMulti\",\"0\",0,0)",
+      "result": 12631.879004691855
+    }
+  },
+  "errors": {}
+}

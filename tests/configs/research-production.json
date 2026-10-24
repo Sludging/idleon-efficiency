@@ -1,0 +1,41 @@
+{
+  "description": "Research v1.24 account-wide EXP CORE results. Website policy uses actual Gallery deposits, assumes Gallery access and Silkrode Motherboard, ignores equipped nametags, and preserves unlocked account-wide sets. The unchanged save has zero Research nametags and inactive Prehistoric set, matching active character 3 for those inputs. This capture cannot verify positive assumed-chip behavior or final per-Observation EXP.",
+  "target": "Research EXP multiplier, final aggregate EXP per hour, and every native Observation EXP subtotal",
+  "extractions": [
+    {
+      "label": "discoveries_refresh",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"TotalOccurrencesFound\", -1, 0)",
+      "description": "Refresh discoveries through the supported native getter before production. Supporting cache preparation only."
+    },
+    {
+      "label": "observation_levels_refresh",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"TotalObsLVs\", -1, 0)",
+      "description": "Refresh total Insight levels through the supported native getter. Supporting cache preparation only."
+    },
+    {
+      "label": "support_refresh",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Kalei_MultiTot\", 0, 999)",
+      "description": "Refresh Kaleidoscope support through the supported native getter. Supporting cache preparation only."
+    },
+    {
+      "label": "epilogue_refresh",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", -1, 0)",
+      "description": "Refresh epilogue bonuses through the supported native getter. Supporting cache preparation only."
+    },
+    {
+      "label": "exp_multiplier",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"ResearchEXPmulti\", 0, 0)",
+      "description": "Native active-character EXP multiplier. Compare only where real context matches the approved account-wide estimate policy."
+    },
+    {
+      "label": "exp_total",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"ResearchEXPrateTOT\", 0, 0)",
+      "description": "Native final aggregate Research EXP per hour, not a per-Observation rate."
+    },
+    {
+      "label": "observation_subtotals",
+      "expression": "idleon.getAttr(\"CustomLists\").h.Occurrences.map((entry,index)=>({index,subtotal:idleon.callFunction(\"ResearchStuff\",\"ResearchEXPrateObj\",index,0)}))",
+      "description": "Every native catalog entry with explicit index, including zero subtotals. Subtotals exclude the shared EXP multiplier and are not final per-Observation rates."
+    }
+  ]
+}

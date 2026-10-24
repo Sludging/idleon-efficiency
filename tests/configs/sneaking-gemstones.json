@@ -1,0 +1,91 @@
+{
+  "description": "Native 1.24 full retained gemstone effects. No 10M projection.",
+  "target": "GemstoneBonus and native Emerald displayed discount",
+  "extractions": [
+    {
+      "label": "gemstone_0_bonus",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",0,0)",
+      "description": "Full native gemstone effect"
+    },
+    {
+      "label": "gemstone_0_quantity",
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[233])",
+      "description": "Native displayed collected quantity"
+    },
+    {
+      "label": "gemstone_1_bonus",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",1,0)",
+      "description": "Full native gemstone effect"
+    },
+    {
+      "label": "gemstone_1_quantity",
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[234])",
+      "description": "Native displayed collected quantity"
+    },
+    {
+      "label": "gemstone_2_bonus",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",2,0)",
+      "description": "Full native gemstone effect"
+    },
+    {
+      "label": "gemstone_2_quantity",
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[235])",
+      "description": "Native displayed collected quantity"
+    },
+    {
+      "label": "gemstone_3_bonus",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",3,0)",
+      "description": "Full native gemstone effect"
+    },
+    {
+      "label": "gemstone_3_quantity",
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[236])",
+      "description": "Native displayed collected quantity"
+    },
+    {
+      "label": "gemstone_4_bonus",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",4,0)",
+      "description": "Full native gemstone effect"
+    },
+    {
+      "label": "gemstone_4_quantity",
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[237])",
+      "description": "Native displayed collected quantity"
+    },
+    {
+      "label": "gemstone_5_bonus",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",5,0)",
+      "description": "Full native gemstone effect"
+    },
+    {
+      "label": "gemstone_5_quantity",
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[238])",
+      "description": "Native displayed collected quantity"
+    },
+    {
+      "label": "gemstone_6_bonus",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",6,0)",
+      "description": "Full native gemstone effect"
+    },
+    {
+      "label": "gemstone_6_quantity",
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[239])",
+      "description": "Native displayed collected quantity"
+    },
+    {
+      "label": "gemstone_7_bonus",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",7,0)",
+      "description": "Full native gemstone effect"
+    },
+    {
+      "label": "gemstone_7_quantity",
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[240])",
+      "description": "Native displayed collected quantity"
+    },
+    {
+      "label": "emerald_discount_percent",
+      "expression": "100*(1-1/(1+idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",6,0)/100))",
+      "description": "Native gem description dollar placeholder conversion, source 249934"
+    }
+  ]
+}

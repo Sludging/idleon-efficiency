@@ -4,6 +4,11 @@ import { UpgradeVaultBase, initUpgradeVaultRepo } from "./data/UpgradeVaultRepo"
 import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { UpgradeVaultModel } from "./model/upgradeVaultModel";
+import { EventShop } from "./eventShop";
+import { ResearchGrid } from "./world-7/research";
+import type { Glimbo, GlimboTrade } from "./world-7/glimbo";
+import { getCompanionActiveBonus, type Companion } from "./companions";
+import type { SushiStation } from "./world-7/sushi";
 
 export class VaultUpgBonus {
     public level: number = 0;
@@ -12,6 +17,12 @@ export class VaultUpgBonus {
     public cost: number = 0;
     public costToMax: number = 0;
     public reductionFromDarts: number = 0;
+    private companionDiscountPercent: number = 0;
+    private sushiDiscountPercent: number = 0;
+    private gildedAwningsOwned: boolean = false;
+    private bundleUpgradeCount: number = 0;
+    private glimboTrade: GlimboTrade | undefined;
+    private enhancedMaximumIncrease: number = 1;
 
     constructor(
         public id: number,
@@ -33,8 +44,12 @@ export class VaultUpgBonus {
     }
 
     getImageData = (): ImageData => {
+        return VaultUpgBonus.imageDataForId(this.id);
+    }
+
+    static imageDataForId = (id: number): ImageData => {
         return {
-            location: `VaultUpg${this.id}`,
+            location: `VaultUpg${id}`,
             height: 56,
             width: 51,
         }
@@ -102,33 +117,84 @@ export class VaultUpgBonus {
         return 0;
     }
 
+    prepareMaximumLevelInputs(
+        gildedAwningsOwned: boolean,
+        bundleUpgradeCount: number,
+        glimboTrade: GlimboTrade | undefined,
+        enhancedMaximumIncrease: number,
+    ): void {
+        this.gildedAwningsOwned = gildedAwningsOwned;
+        this.bundleUpgradeCount = bundleUpgradeCount;
+        this.glimboTrade = glimboTrade;
+        this.enhancedMaximumIncrease = enhancedMaximumIncrease;
+    }
+
+    getMaxLevel = (): number => {
+        const eventShopIncrease = this.data.eventShopMaxLevelEligible
+            ? 25 * Number(this.gildedAwningsOwned) : 0;
+        const bundleIncrease = Math.max(0, Math.min(10, 10 * this.bundleUpgradeCount));
+
+        if (this.glimboTrade !== undefined) {
+            const tradeIncrease = this.glimboTrade.data.enhancedMaxLevelEligible
+                ? this.enhancedMaximumIncrease : 1;
+            return Math.round(
+                this.data.max_level + (eventShopIncrease + bundleIncrease)
+                + tradeIncrease * this.glimboTrade.count,
+            );
+        }
+
+        // One-level upgrades receive the event increase, but not the bundle increase.
+        if (this.data.max_level >= 2) {
+            return Math.round(this.data.max_level + (eventShopIncrease + bundleIncrease));
+        }
+        return Math.round(this.data.max_level + eventShopIncrease);
+    }
+
+    preparePriceInputs(companionDiscountPercent: number, sushiDiscountPercent: number): void {
+        this.companionDiscountPercent = companionDiscountPercent;
+        this.sushiDiscountPercent = sushiDiscountPercent;
+    }
+
     getCost = (allUpgrades: VaultUpgBonus[]): number => {
-        if (this.level >= this.data.max_level) {
+        if (this.level >= this.getMaxLevel()) {
             return 0;
         }
 
+        return this.getRawCost(allUpgrades);
+    }
+
+    // Native quotes remain available when the effective cap blocks a purchase.
+    getRawCost = (allUpgrades: VaultUpgBonus[]): number => {
+        const dartsFactor = 1 / (1 + this.reductionFromDarts / 100);
+        // Major Discount applies only to the first color band, before its lower floor.
+        let costMultiplier = this.id < 33
+            ? Math.max(0.001, (1 / (1 + allUpgrades[13].getBonus(allUpgrades) / 100)) * dartsFactor)
+            : Math.max(0.01, dartsFactor);
+        costMultiplier *= Math.max(0.1, 1 - this.companionDiscountPercent / 100);
+        costMultiplier *= Math.max(0.1, 1 - this.sushiDiscountPercent / 100);
+        if (this.id >= 33) {
+            costMultiplier *= Math.pow(1.1, Math.max(0, this.id - 61));
+        }
+
         const baseCost = this.level + (this.data.base_cost + this.level) * Math.pow(this.data.scaling_factor, this.level);
-        
-        let costReduction = 1;
-
-        // First 33 upgrades can have cost reduction from upgrade 13.
-        if (this.id < 33) {
-            const summoningBonus: number = allUpgrades[13]?.getBonus(allUpgrades) || 0;
-            costReduction = Math.max(0.1, (1 - summoningBonus / 100) * (1 / (1 + this.reductionFromDarts / 100)));
-        }
-        else {
-            costReduction = Math.max(0.1, 1 / (1 + this.reductionFromDarts / 100));
-        }
-
-        return baseCost * costReduction;
+        return costMultiplier * baseCost;
     }
 
     getCostToMax = (allUpgrades: VaultUpgBonus[]): number => {
         let totalCost = 0;
         const tempUpgrade = new VaultUpgBonus(this.id, this.data);
         tempUpgrade.level = this.level;
+        tempUpgrade.reductionFromDarts = this.reductionFromDarts;
+        tempUpgrade.preparePriceInputs(this.companionDiscountPercent, this.sushiDiscountPercent);
+        tempUpgrade.prepareMaximumLevelInputs(
+            this.gildedAwningsOwned,
+            this.bundleUpgradeCount,
+            this.glimboTrade,
+            this.enhancedMaximumIncrease,
+        );
+        const maximumLevel = this.getMaxLevel();
 
-        for (let i = this.level; i < this.data.max_level; i++) {
+        for (let i = this.level; i < maximumLevel; i++) {
             totalCost += tempUpgrade.getCost(allUpgrades);
             tempUpgrade.level++;
         }
@@ -175,6 +241,13 @@ export class UpgradeVault extends Domain {
         const upgradeVault = data.get(this.getDataKey()) as UpgradeVault;
         const upgradesData = data.get("UpgVault") as number[];
         const optionList = data.get("OptLacc") as number[];
+
+        upgradeVault.bonuses.forEach(upgrade => {
+            upgrade.prepareMaximumLevelInputs(false, 0, undefined, 1);
+            upgrade.preparePriceInputs(0, 0);
+            upgrade.cost = 0;
+            upgrade.costToMax = 0;
+        });
     
         // Calculate total vault level first
         upgradeVault.totalVaultLevel = upgradesData.reduce((sum, level) => sum + level, 0);
@@ -193,22 +266,42 @@ export class UpgradeVault extends Domain {
             }
         });
 
-        // Pre-calculate bonus, cost and cost to max for each upgrade
+        // Mastery-aware bonuses remain available during parsing.
         // Mastery rows must be available before their color bands are cached.
         const specialUpgrades = [13, 32, 61, 89];
         const specialUpgradesBonuses = upgradeVault.bonuses.filter(bonus => specialUpgrades.includes(bonus.id));
 
         specialUpgradesBonuses.forEach(bonus => {
             bonus.bonus = bonus.getBonus(upgradeVault.bonuses);
-            bonus.cost = bonus.getCost(upgradeVault.bonuses);
-            bonus.costToMax = bonus.getCostToMax(upgradeVault.bonuses);
         });
 
         // Then we can calculate the bonuses for the other upgrades
         upgradeVault.bonuses.forEach(bonus => {
             bonus.bonus = bonus.getBonus(upgradeVault.bonuses);
-            bonus.cost = bonus.getCost(upgradeVault.bonuses);
-            bonus.costToMax = bonus.getCostToMax(upgradeVault.bonuses);
+        });
+    }
+
+    updateMaximumLevels(
+        eventShop: EventShop,
+        research: ResearchGrid,
+        glimbo: Glimbo,
+        companions: Companion[],
+        sushi: SushiStation,
+    ): void {
+        const gildedAwningsOwned = eventShop.isBonusOwned(65);
+        const enhancedMaximumIncrease = 1
+            + (research.bonuses[169].getLevel() + Number(eventShop.isBonusOwned(40)));
+        const companionDiscountPercent = getCompanionActiveBonus(companions, 99);
+        const sushiDiscountPercent = Math.max(sushi.getBonusFromIndex(38), sushi.getBonusFromIndex(47));
+
+        this.bonuses.forEach(upgrade => {
+            const trade = glimbo.trades.find(trade => trade.data.vaultUpgradeIndex === upgrade.id);
+            upgrade.prepareMaximumLevelInputs(
+                gildedAwningsOwned, glimbo.bundleUpgradeCount, trade, enhancedMaximumIncrease,
+            );
+            upgrade.preparePriceInputs(companionDiscountPercent, sushiDiscountPercent);
+            upgrade.cost = upgrade.getCost(this.bonuses);
+            upgrade.costToMax = upgrade.getCostToMax(this.bonuses);
         });
     }
 

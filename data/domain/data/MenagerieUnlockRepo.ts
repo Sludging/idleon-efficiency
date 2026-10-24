@@ -23,7 +23,7 @@ export const initMenagerieUnlockRepo = () => {
             }),
         new MenagerieUnlockBase(3, <MenagerieUnlockModel>{
                 "index": 3,
-                "description": "Unlock the Purple Jellyfish within the Menagerie 膛",
+                "description": "Unlock the Pink Jellyfish within the Menagerie 膛",
                 "tooltip": "The Menagerie is located in the Molten Edge map, 15 maps away from town!"
             }),
         new MenagerieUnlockBase(4, <MenagerieUnlockModel>{"index": 4, "description": "New Musselini Upgrades at The Clamworks", "tooltip": ""}),

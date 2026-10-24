@@ -1,5 +1,6 @@
-import { commaNotation, round } from "../../utility"
+import { commaNotation, lavaLog, round } from "../../utility"
 import { Achievement } from "../achievements";
+import { Account } from "../account";
 import { Companion, getCompanionActiveBonus } from "../companions";
 import { Alchemy } from "../world-2/alchemy/alchemy";
 import { AtomCollider } from "../world-3/construction/atomCollider";
@@ -23,6 +24,7 @@ import { Summoning } from "../world-6/summoning";
 import { Arcade } from "../world-2/arcade";
 import { Sneaking } from "../world-6/sneaking";
 import { Button } from "../world-7/button";
+import type { JellyOperator } from "../world-7/jellyOperator";
 import { EventShop } from "../eventShop";
 import { StarSigns } from "../starsigns";
 import { IslandExpeditions } from '../world-2/islandExpedition';
@@ -33,6 +35,15 @@ import { EquipmentSets } from "../misc/equipmentSets";
 import { Stat } from "../base/stat";
 import type { Rift } from "./rift";
 import type { Menagerie } from "../menagerie";
+import { CookingMasteryUpgradeBase, initCookingMasteryRepo } from "../data/CookingMasteryRepo";
+import { CookingMasteryUpgradeModel } from "../model/cookingMasteryUpgradeModel";
+import { SkillsIndex } from "../SkillsIndex";
+import type { Gaming } from "../world-5/gaming";
+import type { ResearchGrid } from "../world-7/research";
+import type { SaltLick } from "../world-3/construction/saltLick";
+import type { Spelunking } from "../world-7/spelunking";
+import type { Grimoire } from "../grimoire";
+import type { Clamworks } from "../world-7/clamworks";
 
 const spiceValues: number[] = "0 3 5 8 10 13 15 19 20 23 27 31 33 37 41 45 48 50 53 56 58 60 63 66 70 73".split(" ").map(value => parseInt(value));
 const mealLuckValues: number[] = "1 .20 .10 .05 .02 .01 .004 .001 .0005 .0003".split(" ").map(value => parseFloat(value));
@@ -85,6 +96,8 @@ export class Meal {
     companion162Bonus: number = 0;
     cookMasterLevel: number = 0;
     armorSetBonus: number = 0;
+    ribbonCloudBonus: number = 0;
+    ribbonJellyBonus: number = 0;
 
     // Active cooking values
     cookingContribution: number = 0;
@@ -125,7 +138,7 @@ export class Meal {
     }
 
     getRibbonBonus = (ribbonLevel: number = this.ribbonLevel) => {
-        return 1 + (Math.floor(5 * ribbonLevel + Math.floor(ribbonLevel / 2) * (4 + 6.5 * Math.floor(ribbonLevel / 5))) + Math.floor(ribbonLevel / 4) * (this.armorSetBonus / 4)) / 100;
+        return 1 + (Math.floor(5 * ribbonLevel + Math.floor(ribbonLevel / 2) * (4 + 6.5 * Math.floor(ribbonLevel / 5))) + Math.floor(ribbonLevel / 4) * (this.armorSetBonus / 4) + Math.floor(ribbonLevel / 10) * this.ribbonCloudBonus + Math.floor(ribbonLevel / 20) * this.ribbonJellyBonus) / 100;
     }
 
     // Cooking Mastery multiplier for this meal's bonus.
@@ -266,10 +279,13 @@ type KitchenSpeedParameters = {
     achieve224: boolean,
     atom8Bonus: number,
     artifact13Bonus: number,
+    crucible5Bonus: number,
+    crucible12Bonus: number,
     totalizerBonus: number,
     bloodMarrowBonus: number,
     superChowBonus: number,
     eventShopDoughRollerBonus: number,
+    clamPromotion10Bonus: number,
     cropScientistBonus: number,
     buttonBonus7: number,
     farmingLevel: number,
@@ -313,12 +329,15 @@ export class Kitchen {
             cropScientistBonus,
             superChowBonus,
             eventShopDoughRollerBonus,
+            clamPromotion10Bonus,
             meal63Bonus,
             farmingLevel,
             diamonChef,
             atom8Bonus,
             totalizerBonus,
             artifact13Bonus,
+            crucible5Bonus,
+            crucible12Bonus,
             buttonBonus7,
             arcadeBonus,
             turtleVialBonus,
@@ -348,6 +367,7 @@ export class Kitchen {
             Math.max(1, cropScientistBonus) *
             Math.max(1, superChowBonus) *
             (1 + eventShopDoughRollerBonus) *
+            (1 + 9 * clamPromotion10Bonus) *
             (1 + (this.richelin ? 2 : 0)) *
             (1 + votingBonus13 / 100) *
             (1 + vaultBonus54 / 100) *
@@ -357,6 +377,7 @@ export class Kitchen {
             (1 + totalizerBonus / 100) *
             (1 + this.mealLevels / 10) *
             (1 + artifact13Bonus / 100) *
+            (1 + 9 * crucible5Bonus + 20 * crucible12Bonus) *
             (1 + buttonBonus7 / 100) *
             (1 + arcadeBonus / 100) *
             (1 + turtleVialBonus / 100) *
@@ -427,10 +448,88 @@ export class Kitchen {
     }
 }
 
+export class CookingMasteryUpgrade {
+    level: number = 0;
+
+    constructor(public index: number, public data: CookingMasteryUpgradeModel) { }
+
+    getBonus(): number {
+        return this.level * this.data.bonusPerLevel;
+    }
+
+    static fromBase(data: CookingMasteryUpgradeBase[]): CookingMasteryUpgrade[] {
+        return data.map(upgrade => new CookingMasteryUpgrade(upgrade.index, upgrade.data));
+    }
+}
+
+interface CookingMasteryInputs {
+    totalCookingLevels: number;
+    divorceCakeLevel: number;
+    menagerieBonus: number;
+    researchBonus: number;
+    superbitPurchased: boolean;
+    companionBonus: number;
+    fountainBonus: number;
+    vialBonus: number;
+    arcadeBonus: number;
+    saltLickBonus: number;
+}
+
+export class CookingMastery {
+    readonly upgrades: CookingMasteryUpgrade[];
+    rank: number = 0;
+    totalLadles: number = 0;
+    ribbonRanks: number[] = [];
+    private experienceRate: number = 2;
+
+    constructor() {
+        this.upgrades = CookingMasteryUpgrade.fromBase(initCookingMasteryRepo());
+    }
+
+    parse(masteryData: number[][], ribbonData: number[]): void {
+        this.rank = masteryData?.[1]?.[0] ?? 0;
+        this.totalLadles = masteryData?.[1]?.[3] ?? 0;
+        this.ribbonRanks = ribbonData.slice(28);
+        this.upgrades.forEach(upgrade => {
+            upgrade.level = masteryData?.[2]?.[upgrade.index] ?? 0;
+        });
+    }
+
+    updateExperienceRate(inputs: CookingMasteryInputs): void {
+        const ladleBonus = lavaLog(this.totalLadles) * this.upgrades[0].getBonus();
+        const cookingLevelBonus = Math.max(0, inputs.totalCookingLevels - 1000) * this.upgrades[1].getBonus();
+        const divorceCakeBonus = Math.max(0, inputs.divorceCakeLevel - 75) * this.upgrades[2].getBonus();
+        const totalRibbonRanks = this.ribbonRanks.reduce((total, rank) => total + rank, 0);
+        const ribbonRankBonus = totalRibbonRanks * this.upgrades[4].getBonus();
+        const masteryRankBonus = (this.rank + 1) * this.upgrades[5].getBonus();
+
+        // SMOKY increases daily ribbon gains, not Mastery EXP.
+        // Keep the account EXP factors in the game's multiplication order.
+        this.experienceRate = 2
+            * (1 + ladleBonus / 100)
+            * (1 + cookingLevelBonus / 100)
+            * (1 + divorceCakeBonus / 100)
+            * (1 + inputs.menagerieBonus / 100)
+            * (1 + ribbonRankBonus / 100)
+            * (1 + inputs.researchBonus / 100)
+            * (1 + 40 * Number(inputs.superbitPurchased) / 100)
+            * (1 + masteryRankBonus / 100)
+            * (1 + 2 * inputs.companionBonus)
+            * (1 + inputs.fountainBonus / 100)
+            * (1 + (inputs.vialBonus + (inputs.arcadeBonus + inputs.saltLickBonus)) / 100);
+    }
+
+    getExperienceRate(): number {
+        // Availability is separate from the native raw EXP rate.
+        return this.experienceRate;
+    }
+}
+
 export class Cooking extends Domain {
     meals: Meal[] = [];
     spices: number[] = [];
     kitchens: Kitchen[] = [...Array(10)].map((_, index) => { return new Kitchen(index) });
+    readonly mastery: CookingMastery = new CookingMastery();
 
     bestBerserker: Player | undefined;
     totalCookingSpeed: Stat = new Stat("Total Cooking Speed");
@@ -448,6 +547,10 @@ export class Cooking extends Domain {
 
     isCookingMasteryUnlocked(rift: Rift, companions: Companion[]): boolean {
         return rift.level > 58 || getCompanionActiveBonus(companions, 87) > 0.1;
+    }
+
+    getMasteryExperienceRate(): number {
+        return this.mastery.getExperienceRate();
     }
 
     getMaxMeals = () => {
@@ -532,16 +635,18 @@ export class Cooking extends Domain {
     updateNoMealLeftBehind = (bonusActivated: boolean) => {
         this.meals.forEach(meal => meal.noMealLeftBehindAffected = false);
         if (bonusActivated) {
-            const mealToUpgrade = 1;
-
-            const sortedMeals = this.meals.filter(meal => meal.level > 5 && meal.level < meal.maxLevel).sort((meal1, meal2) => {
+            const sortedMeals = this.meals.filter(meal => meal.level >= 2 && meal.level < meal.maxLevel).sort((meal1, meal2) => {
                 // If same level, then go with higher meal index.
                 if (meal1.level == meal2.level) {
                     return meal1.mealIndex > meal2.mealIndex ? -1 : 1
                 }
                 return meal1.level < meal2.level ? -1 : 1
             });
-            sortedMeals.slice(0, mealToUpgrade).forEach(meal => meal.noMealLeftBehindAffected = true);
+            const selectedMeal = sortedMeals[0];
+            // The daily-award ceiling is separate from the actual meal level cap.
+            if (selectedMeal && selectedMeal.level < 150) {
+                selectedMeal.noMealLeftBehindAffected = true;
+            }
         }
     }
 
@@ -568,6 +673,8 @@ export class Cooking extends Domain {
         const mealsData = data.get("Meals") as number[][];
         const ribbonData = data.get("Ribbon") as number[];
         const cookMasterData = data.get("CookMaster") as number[][];
+
+        cooking.mastery.parse(cookMasterData, ribbonData);
 
         if (cookingData.length == 0 || mealsData.length == 0) {
             return;
@@ -649,6 +756,7 @@ const populateDiscovery = (cooking: Cooking) => {
 
 export const updateCooking = (data: Map<string, any>) => {
     const cooking = data.get("cooking") as Cooking;
+    const account = data.get("account") as Account;
     const gemStore = data.get("gems") as GemStore;
     const alchemy = data.get("alchemy") as Alchemy;
     const stamps = data.get("stamps") as Stamp[][];
@@ -674,8 +782,15 @@ export const updateCooking = (data: Map<string, any>) => {
     const equipmentSets = data.get("equipmentSets") as EquipmentSets;
     const companions = data.get("companions") as Companion[];
     const button = data.get("button") as Button;
+    const jellyOperator = data.get("jellyOperator") as JellyOperator;
     const eventShop = data.get("eventShop") as EventShop;
     const menagerie = data.get("menagerie") as Menagerie;
+    const gaming = data.get("gaming") as Gaming;
+    const research = data.get("research") as ResearchGrid;
+    const saltLick = data.get("saltLick") as SaltLick;
+    const spelunking = data.get("spelunking") as Spelunking;
+    const grimoire = data.get("grimoire") as Grimoire;
+    const clamworks = data.get("clamworks") as Clamworks;
     const companion162Bonus = getCompanionActiveBonus(companions, 162);
 
     const bestLadleSkillLevel = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 148)?.maxLevel ?? 0)));
@@ -690,12 +805,16 @@ export const updateCooking = (data: Map<string, any>) => {
     const jewelMealBonus = mainframe.jewels[16].active ? mainframe.jewels[16].getBonus() : 0;
     const voidPlateAchiev = achievements[233].completed;
     const foodLust = (equinox.upgrades[9] as FoodLust);
+    const ribbonCloudBonus = equinox.getChallengeBonus(73);
+    const ribbonJellyBonus = jellyOperator.getObstructionBonus(60);
     cooking.meals.forEach(meal => {
         meal.mainframeBonus = jewelMealBonus;
         meal.companion162Bonus = companion162Bonus;
         meal.reducedCostToUpgrade = voidPlateAchiev;
         meal.foodLustDiscount = foodLust.getBonus();
         meal.armorSetBonus = equipmentSets.getSetBonus("EMPEROR_SET", true);
+        meal.ribbonCloudBonus = ribbonCloudBonus;
+        meal.ribbonJellyBonus = ribbonJellyBonus;
 
         // Reset any previously calculated info, the next section should re-populate this.
         meal.cookingContribution = 0;
@@ -704,10 +823,22 @@ export const updateCooking = (data: Map<string, any>) => {
         meal.cookingTotalSpeed = 0;
         meal.cookingTotalSpeedWithoutStarSign = 0;
         meal.cookingTotalSpeedWithSilkrode = 0;
-        meal.maxLevel = 30;
     });
 
     cooking.foodLustDiscountCapped = foodLust.isCapped();
+
+    cooking.mastery.updateExperienceRate({
+        totalCookingLevels: players.reduce((total, player) => total + (player.skills.get(SkillsIndex.Cooking)?.level ?? 0), 0),
+        divorceCakeLevel: cooking.meals[73].level,
+        menagerieBonus: menagerie.getBonusValue(21),
+        researchBonus: research.getBonusForId(190),
+        superbitPurchased: gaming.isSuperbitPurchased(68),
+        companionBonus: getCompanionActiveBonus(companions, 87),
+        fountainBonus: hole.getFountainBonus(2, 17),
+        vialBonus: alchemy.getVialBonusForKey("7cookmastery"),
+        arcadeBonus: arcade.bonuses[69].getBonus(),
+        saltLickBonus: saltLick.getBonus(10),
+    });
 
     // Meal speed
     const mealCookVialBonus = alchemy.getVialBonusForKey("MealCook");
@@ -723,6 +854,8 @@ export const updateCooking = (data: Map<string, any>) => {
     const trollCardBonus = cards.find(card => card.id == "Boss4A")?.getBonus() ?? 0;
     const ceramicCardBonus = cards.find(card => card.id == "w6c1")?.getBonus() ?? 0;
     const artifactBonus = sailing.artifacts[13].getBonus();
+    const crucible5Bonus = breeding.getCrucibleBonus(5);
+    const crucible12Bonus = breeding.getCrucibleBonus(12);
     const buttonBonus7 = button.getBonusForIndex(7);
     const atomBonus = collider.atoms[8].getBonus();
     const worshipBonus = worship.totalizer.getBonus(TotalizerBonus.Cooking);
@@ -732,6 +865,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const summonBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == 16);
     const winnerBonus = summonBonus?.getBonus() ?? 0;
     const eventShopDoughRollerBonus = eventShop.isBonusOwned(53) ? 1 : 0;
+    const clamPromotion10Bonus = Number(clamworks.isBonusUnlocked(10));
 
     const bestBloodMarrowTalent = players
         .map(player => player.talents.find(talent => talent.skillIndex === 59))
@@ -785,11 +919,14 @@ export const updateCooking = (data: Map<string, any>) => {
         achieve224: achievements[224].completed,
         atom8Bonus: atomBonus,
         artifact13Bonus: artifactBonus,
+        crucible5Bonus: crucible5Bonus,
+        crucible12Bonus: crucible12Bonus,
         buttonBonus7: buttonBonus7,
         totalizerBonus: worshipBonus,
         bloodMarrowBonus: bestbloodMarrowBonus,
         superChowBonus: bestapocalypseChowBonus,
         eventShopDoughRollerBonus: eventShopDoughRollerBonus,
+        clamPromotion10Bonus: clamPromotion10Bonus,
         cropScientistBonus: cropScientistBonus,
         farmingLevel: farming.farmingLevel,
         arcadeBonus: arcadeBonus,
@@ -826,12 +963,17 @@ export const updateCooking = (data: Map<string, any>) => {
         }
     })
 
-    // Max Level
+    // Every meal shares one account-wide level cap.
     const artifactMaxMealLevel = sailing.artifacts[17].getBonus();
     const jadeUpgradeMaxMealLevel = (sneaking.jadeUpgrades.find(upgrade => upgrade.index == 20)?.purchased ? 10 : 0) + (sneaking.jadeUpgrades.find(upgrade => upgrade.index == 21)?.purchased ? 10 : 0)
+    const maximumMealLevel = Math.round(
+        30 + artifactMaxMealLevel + jadeUpgradeMaxMealLevel
+        + 30 * Number(spelunking.tunnels[5].loreCompleted)
+        + Math.min(20, grimoire.upgrades[26].getBonus(grimoire.upgrades))
+        + 10 * Number(menagerie.getUnlocks()[20].owned)
+    );
     cooking.meals.forEach(meal => {
-        meal.maxLevel += artifactMaxMealLevel;
-        meal.maxLevel += jadeUpgradeMaxMealLevel;
+        meal.maxLevel = maximumMealLevel;
 
         meal.cookingTotalSpeed = totalCookingSpeed;
         meal.cookingTotalSpeedWithoutStarSign = totalCookingSpeedWithoutStarSign;
@@ -843,7 +985,10 @@ export const updateCooking = (data: Map<string, any>) => {
         }
     });
 
-    cooking.updateNoMealLeftBehind(sneaking.jadeUpgrades.find(upgrade => upgrade.data.name == "No Meal Left Behind")?.purchased ?? false);
+    cooking.updateNoMealLeftBehind(
+        (sneaking.jadeUpgrades.find(upgrade => upgrade.data.name == "No Meal Left Behind")?.purchased ?? false)
+        || account.hasNoMealLeftBehindBundle
+    );
 
     populateDiscovery(cooking);
 

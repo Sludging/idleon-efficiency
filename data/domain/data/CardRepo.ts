@@ -2205,6 +2205,14 @@ export const initCardRepo = () => {
                 "effect": "+{% Gold Food Effect (Passive)",
                 "bonus": 5,
                 "order": 25
+            }),
+        new CardDataBase("fallEvent2", <CardDataModel>{
+                "cardID": "Y25",
+                "category": "Event",
+                "perTier": 5,
+                "effect": "+{% Total Damage (Passive)",
+                "bonus": 1,
+                "order": 26
             })    
 ]
 }

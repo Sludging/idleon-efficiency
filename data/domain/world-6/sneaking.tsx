@@ -5,6 +5,9 @@ import { Domain, RawData } from "../base/domain";
 import { initJadeUpgradeRepo } from "../data/JadeUpgradeRepo";
 import { BaseNinjaItemBase, initNinjaItemRepo } from "../data/NinjaItemRepo";
 import { NinjaUpgradeBase, initNinjaUpgradeRepo } from "../data/NinjaUpgradeRepo";
+import { initNinjaFloorRepo, NinjaFloorBase } from "../data/NinjaFloorRepo";
+import { initRandoListRepo, RandoListBase } from "../data/RandoListRepo";
+import { NinjaFloorModel } from "../model/ninjaFloorModel";
 import { NinjaItemTypeEnum } from "../enum/ninjaItemTypeEnum";
 import { ImageData } from "../imageData";
 import { Food, Item, initAllItems } from "../items";
@@ -16,6 +19,25 @@ import { NinjaWeaponModel } from '../model/ninjaWeaponModel';
 import { NinjaTrinketModel } from '../model/ninjaTrinketModel';
 import { BaseNinjaItemModel } from "../model/baseNinjaItemModel";
 import type { Rift } from "../world-4/rift";
+import { Account } from "../account";
+import { Achievement } from "../achievements";
+import { Card } from "../cards";
+import { Companion, getCompanionActiveBonus } from "../companions";
+import { Compass } from "../compass";
+import { Player } from "../player";
+import { PlayerStatues } from "../world-1/statues";
+import { Votes } from "../world-2/votes";
+import { Hole } from "../world-5/hole/hole";
+import { Emperor } from "./emperor";
+import { Farming } from "./farming";
+import { JellyOperator } from "../world-7/jellyOperator";
+import { LegendTalents } from "../world-7/legendTalents";
+import { SushiStation } from "../world-7/sushi";
+import { StarSigns } from "../starsigns";
+import { Talent } from "../talents";
+import type { Gaming } from "../world-5/gaming";
+import type { UpgradeVault } from "../upgradeVault";
+import type { Equinox } from "../world-3/equinox";
 
 export enum SneakingActivity {
     Sneaking = "Sneaking",
@@ -31,20 +53,7 @@ export enum SneakinWeaponType {
     Kunai = 2
 }
 
-export const DoorsMaxHP = [
-    1,
-    150,
-    1000,
-    8000,
-    45000,
-    350000,
-    5000000,
-    80000000,
-    1000000000,
-    25000000000.0,
-    800000000000.0,
-    45000000000000.0
-]
+const sneakingStaticLists = initRandoListRepo().filter(base => base.index == 101 || base.index == 102);
 
 export const TiedPlayersHP = [
     0,
@@ -61,10 +70,6 @@ export const TiedPlayersHP = [
     200000000
 ]
 
-export interface SneakingDoor {
-    damageDone: number,
-    maxHP: number
-}
 
 export interface SneakingTie {
     damageDone: number,
@@ -72,7 +77,7 @@ export interface SneakingTie {
 }
 
 export class SneakingItem {
-    constructor(public index: number, public data: BaseNinjaItemModel) { }
+    constructor(public index: number, public data: BaseNinjaItemModel, public level: number = 0) { }
 
     getImageData = (): ImageData => {
         return {
@@ -93,13 +98,15 @@ export class SneakingItem {
             }
             switch (baseItem.data.itemType) {
                 case NinjaItemTypeEnum.Item:
-                    return new SneakingHat(baseItem.index, baseItem.data as NinjaItemModel);
+                    return new SneakingHat(baseItem.index, baseItem.data as NinjaItemModel, level);
                 case NinjaItemTypeEnum.Weapon:
                     return new SneakingWeapon(baseItem.index, baseItem.data as NinjaWeaponModel, level);
                 case NinjaItemTypeEnum.Trinket:
                     return new SneakingTrinket(baseItem.index, baseItem.data as NinjaTrinketModel, level);
                 case NinjaItemTypeEnum.PristineCharm:
-                    return new SneakingPristineCharm(baseItem.index, baseItem.data as NinjaPristineCharmModel);
+                    return new SneakingPristineCharm(baseItem.index, baseItem.data as NinjaPristineCharmModel, level);
+                case NinjaItemTypeEnum.Gemstone:
+                    return SneakingGemstone.fromBase(baseItem);
                 default:
                     return undefined;
             }
@@ -110,8 +117,8 @@ export class SneakingItem {
 }
 
 export class SneakingHat extends SneakingItem {
-    constructor(public index: number, public data: NinjaItemModel) {
-        super(index, data);
+    constructor(public index: number, public data: NinjaItemModel, level: number = 0) {
+        super(index, data, level);
     }
 
     override getDisplayText = (): string => {
@@ -120,8 +127,8 @@ export class SneakingHat extends SneakingItem {
 }
 
 export class SneakingWeapon extends SneakingItem {
-    constructor(public index: number, public data: NinjaWeaponModel, public level: number) {
-        super(index, data);
+    constructor(public index: number, public data: NinjaWeaponModel, level: number) {
+        super(index, data, level);
     }
 
     override getDisplayText = (): string => {
@@ -134,8 +141,12 @@ export class SneakingWeapon extends SneakingItem {
 }
 
 export class SneakingTrinket extends SneakingItem {
-    constructor(public index: number, public data: NinjaTrinketModel, public level: number) {
-        super(index, data);
+    symbolLevel: number = 0;
+    // Each symbol slot level adds 50 percentage points to its charm bonus.
+
+    getSymbolMultiplier = (): number => 1 + 50 * this.symbolLevel / 100;
+    constructor(public index: number, public data: NinjaTrinketModel, level: number) {
+        super(index, data, level);
     }
 
     override getDisplayText = (): string => {
@@ -147,13 +158,15 @@ export class SneakingTrinket extends SneakingItem {
     }
 
     getBonus = (): number => {
-        return Math.min(this.data.x1 + this.data.x3 * (this.level / (this.level + 50)), this.data.x3)
+        const initialBonus = Math.min(this.data.x1 + this.data.x3 * (this.level / (this.level + 50)), this.data.x3);
+        const highLevelBonus = Math.min(this.data.x3 * (this.level / (this.level + 900)), this.data.x3);
+        return initialBonus + highLevelBonus;
     }
 }
 
 export class SneakingPristineCharm extends SneakingItem {
-    constructor(public index: number, public data: NinjaPristineCharmModel) {
-        super(index, data);
+    constructor(public index: number, public data: NinjaPristineCharmModel, level: number = 0) {
+        super(index, data, level);
     }
 
     override getDisplayText = (): string => {
@@ -165,8 +178,164 @@ export class SneakingPristineCharm extends SneakingItem {
     }
 }
 
+export class SneakingMasteryReward {
+    earned: boolean = false;
+
+    constructor(
+        public index: number,
+        public requiredMastery: number,
+        public description: string,
+        public bonusDescription: string | undefined
+    ) { }
+
+    update(completedMasteries: number): void {
+        this.earned = completedMasteries >= this.requiredMastery;
+    }
+
+    static fromBase(base: RandoListBase, index: number): SneakingMasteryReward {
+        const [description, bonusDescription] = base.data.elements[index].split("{");
+        return new SneakingMasteryReward(index, index + 1, description, bonusDescription);
+    }
+}
+
+export class SneakingGemstone extends SneakingItem {
+    quantity: number = 0;
+    discovered: boolean = false;
+    private moissaniteBonus: number = 0;
+    private talentMultiplier: number = 1;
+    readonly gemstoneIndex: number;
+    readonly description: string;
+
+    constructor(index: number, public data: NinjaTrinketModel) {
+        super(index, data);
+        this.gemstoneIndex = Number(data.internalId.slice("NjGem".length));
+        this.description = sneakingStaticLists.find(base => base.index == 102)!.data.elements[this.gemstoneIndex];
+    }
+
+    override getImageData = (): ImageData => ({
+        location: this.data.internalId,
+        width: 56,
+        height: 56
+    });
+
+    parse(quantity: number | string | undefined, discoveries: readonly string[]): void {
+        this.quantity = Number(quantity ?? 0);
+        this.discovered = discoveries.includes(this.data.internalId);
+        this.moissaniteBonus = 0;
+        this.talentMultiplier = 1;
+    }
+
+    update(moissaniteBonus: number, talentEffect: number): void {
+        this.moissaniteBonus = moissaniteBonus;
+        this.talentMultiplier = Math.max(1, talentEffect);
+    }
+
+    private calculateBonus(saturation: number): number {
+        const bonus = this.data.x1 + this.data.x3 * saturation;
+        if (this.gemstoneIndex == 5) {
+            return bonus;
+        }
+        return bonus * (1 + this.moissaniteBonus / 100) * this.talentMultiplier;
+    }
+
+    getBonus = (): number => {
+        if (this.quantity <= 0.5) {
+            return 0;
+        }
+        return this.calculateBonus(this.quantity / (1000 + this.quantity));
+    }
+
+    // The limit keeps the current Moissanite and talent inputs fixed.
+    getBonusLimit = (): number => this.calculateBonus(1);
+
+    private calculateUpgradeDiscountPercent(bonus: number): number {
+        return 100 * (1 - 1 / (1 + bonus / 100));
+    }
+
+    getUpgradeDiscountPercent = (): number => this.calculateUpgradeDiscountPercent(this.getBonus());
+
+    getUpgradeDiscountLimitPercent = (): number => this.calculateUpgradeDiscountPercent(this.getBonusLimit());
+
+    static fromBase(base: BaseNinjaItemBase): SneakingGemstone {
+        return new SneakingGemstone(base.index, base.data as NinjaTrinketModel);
+    }
+}
+
+export class SneakingFloor {
+    damageDone: number = 0;
+    maxHP: number = 0;
+    remainingHP: number = 0;
+    flowerStacks: number = 0;
+    detectionThreshold: number = 0;
+
+    constructor(public index: number, public data: NinjaFloorModel) { }
+
+    parse(damageDone: number | string | undefined, flowerStacks: number | string | undefined): void {
+        this.damageDone = Number(damageDone ?? 0);
+        this.flowerStacks = Number(flowerStacks ?? 0);
+        this.maxHP = 0;
+        this.remainingHP = 0;
+        this.detectionThreshold = 0;
+    }
+
+    update(maxHP: number, detectionThreshold: number): void {
+        this.maxHP = maxHP;
+        this.remainingHP = Math.max(0, maxHP - this.damageDone);
+        this.detectionThreshold = detectionThreshold;
+    }
+
+    static fromBase(base: NinjaFloorBase): SneakingFloor {
+        return new SneakingFloor(base.data.floorIndex, base.data);
+    }
+}
+
+export class SneakingDailyCharmRolls {
+    readonly pristineRollLimit: number = 120;
+    readonly symbolRollLimit: number = 75;
+    used: number = 0;
+    pristineRemaining: number = this.pristineRollLimit;
+    symbolRemaining: number = this.symbolRollLimit;
+    symbolsUnlocked: boolean = false;
+
+    parse(used: number | string | undefined): void {
+        this.used = Number(used ?? 0);
+        this.pristineRemaining = this.pristineRollLimit;
+        this.symbolRemaining = this.symbolRollLimit;
+        this.symbolsUnlocked = false;
+    }
+
+    update(symbolKnowledgeBonus: number): void {
+        this.pristineRemaining = Math.max(0, this.pristineRollLimit - this.used);
+        this.symbolRemaining = Math.max(0, this.symbolRollLimit - this.used);
+        this.symbolsUnlocked = symbolKnowledgeBonus > 0;
+    }
+}
+
 export class PlayerEquipment {
     constructor(public hat: SneakingItem | undefined, public weapon: SneakingWeapon | undefined, public Trinket1: SneakingTrinket | undefined, public Trinket2: SneakingTrinket | undefined) { }
+}
+
+interface SneakingStealthInputs {
+    farmingMultiplier: number;
+    compassBonus: number;
+    gambitBonus: number;
+    goldBeadsBonus: number;
+    alchemyAndStarSignBonus: number;
+    statueBonus: number;
+    cardBonus: number;
+    achievementBonus: number;
+    aquamarineBonus: number;
+    ballotBonus: number;
+    lampBonus: number;
+    wellMultiplier: number;
+    wayOfStealthBonus: number;
+    funeralFlowerBonus: number;
+    fractalStealthUnlocked: boolean;
+    emperorBonus: number;
+    sushiBonus: number;
+    jellyBonus: number;
+    sneakierStealthBonus: number;
+    companionBonus: number;
 }
 
 export class SneakingPlayer {
@@ -174,14 +343,19 @@ export class SneakingPlayer {
     equipment: PlayerEquipment = new PlayerEquipment(undefined, undefined, undefined, undefined);
     // The action timer is based on this, action time - time past will tell you how long till next action calculation.
     timePast: number = 0;
+    stealth: number = 0;
+    detectionChance: number = 0;
+    private silkVeilBonus: number = 0;
+    private scrollOfPowerBonus: number = 0;
+    private rosariesBonus: number = 0;
+    smokeBombBonus: number = 0;
+    lotusFlowerBonus: number = 0;
 
     tie: SneakingTie = { damageDone: 0, maxHP: 0 };
 
     floor: number = 9;
-    // Temp holding of raw info so it's easier to map.
-    rawData: number[];
     constructor(public index: number, public level: number, activityInfo: number[], equipment: PlayerEquipment) {
-        this.rawData = activityInfo;
+        this.timePast = Number(activityInfo[1]);
         this.floor = activityInfo[0];
         // activityInfo[1] can be one of two things:
         // Positive -> Seconds spent actively doing a task (could be sneaking, untying or breaching)
@@ -191,6 +365,67 @@ export class SneakingPlayer {
         if (this.index < TiedPlayersHP.length) {
             this.tie.maxHP = TiedPlayersHP[this.index];
         }
+    }
+
+    updateCharmBonuses(goldScrollBonus: number): void {
+        this.silkVeilBonus = 0;
+        this.scrollOfPowerBonus = 0;
+        this.rosariesBonus = 0;
+        this.smokeBombBonus = 0;
+        this.lotusFlowerBonus = 0;
+        for (let slot = 0; slot < 2; slot++) {
+            const charm = slot == 0 ? this.equipment.Trinket1 : this.equipment.Trinket2;
+            if (!charm) {
+                continue;
+            }
+            const bonus = charm.getBonus() * (1 + goldScrollBonus / 100) * charm.getSymbolMultiplier();
+            switch (charm.data.itemId) {
+                case 4:
+                    this.silkVeilBonus += bonus;
+                    break;
+                case 7:
+                    this.scrollOfPowerBonus += bonus;
+                    break;
+                case 8:
+                    this.smokeBombBonus += bonus;
+                    break;
+                case 16:
+                    this.lotusFlowerBonus += bonus;
+                    break;
+                case 17:
+                    this.rosariesBonus += bonus;
+                    break;
+            }
+        }
+    }
+
+    updateDetection(inputs: SneakingStealthInputs, floorMateMultiplier: number, flowerStacks: number, difficulty: number): void {
+        // Keep native multiplier order. The two floor-mate bonuses add before these factors.
+        const multiplier = floorMateMultiplier
+            * inputs.farmingMultiplier
+            * (1 + this.scrollOfPowerBonus / 100)
+            * (1 + inputs.compassBonus / 100)
+            * (1 + inputs.gambitBonus / 100)
+            * (1 + this.silkVeilBonus / 100)
+            * (1 + this.rosariesBonus / 100)
+            * (1 + inputs.goldBeadsBonus / 100)
+            * (1 + inputs.alchemyAndStarSignBonus / 100)
+            * (1 + inputs.statueBonus / 100)
+            * (1 + inputs.cardBonus / 100)
+            * (1 + inputs.achievementBonus / 100)
+            * (1 + inputs.aquamarineBonus / 100)
+            * (1 + inputs.ballotBonus / 100)
+            * (1 + inputs.lampBonus / 100)
+            * inputs.wellMultiplier;
+        this.stealth = (10 + inputs.wayOfStealthBonus * this.level) * multiplier
+            * (1 + flowerStacks * inputs.funeralFlowerBonus / 100)
+            * (1 + 2 * Number(inputs.fractalStealthUnlocked) * this.level / 100)
+            * (1 + inputs.emperorBonus / 100)
+            * (1 + inputs.sushiBonus / 100)
+            * (1 + inputs.jellyBonus / 100)
+            * (1 + inputs.sneakierStealthBonus / 100)
+            * (1 + 39 * inputs.companionBonus);
+        this.detectionChance = Math.max(0, Math.min(1, 1 - 1.1 * this.stealth / (this.stealth + difficulty)));
     }
 }
 
@@ -223,9 +458,79 @@ export class JadeUpgrade {
     }
 }
 
+export interface SneakingOmnijadeAllocation {
+    upgradeIndex: number;
+    allocated: boolean;
+    consumedCount: number;
+}
+
+export class SneakingOmnijade {
+    allocations: SneakingOmnijadeAllocation[] = [];
+    private available = false;
+    private knowledge = 0;
+    private pipsqueak = 0;
+
+    parse(savedAllocations: (number | string)[] | undefined, available: boolean): void {
+        this.available = available;
+        this.knowledge = 0;
+        this.pipsqueak = 0;
+        this.allocations = [];
+        if (!available) {
+            return;
+        }
+        this.allocations = Array.from({ length: 17 }, (_, upgradeIndex) => {
+            const savedFlag = Number(savedAllocations?.[upgradeIndex] ?? 0);
+            return { upgradeIndex, allocated: savedFlag >= 1, consumedCount: Math.min(1, savedFlag) };
+        });
+    }
+
+    update(knowledgeOmnijade: number, companionBonus: number): void {
+        this.knowledge = this.available ? knowledgeOmnijade : 0;
+        this.pipsqueak = this.available ? companionBonus : 0;
+    }
+
+    getSources(): { knowledge: number; pipsqueak: number } {
+        return { knowledge: this.knowledge, pipsqueak: this.pipsqueak };
+    }
+
+    getOwnedCount(): number {
+        return this.available ? Math.round(this.knowledge + this.pipsqueak) : 0;
+    }
+
+    getAllocatedCount(): number {
+        return this.allocations.reduce((total, allocation) => total + allocation.consumedCount, 0);
+    }
+
+    getAvailableCount(): number {
+        let remaining = this.getOwnedCount();
+        for (const allocation of this.allocations) {
+            remaining -= allocation.consumedCount;
+        }
+        // Saved allocations remain intact even when they exceed the current sources.
+        return Math.round(remaining);
+    }
+
+    isAllocated(upgradeIndex: number): boolean {
+        return this.allocations.find(allocation => allocation.upgradeIndex == upgradeIndex)?.allocated ?? false;
+    }
+
+    getDailyLevelsPerAllocation(): number {
+        return this.available ? Math.max(1, Math.min(5, Math.round(1 + Math.ceil(this.pipsqueak / 2)))) : 0;
+    }
+
+    getDailyLevels(upgradeIndex: number): number {
+        return this.isAllocated(upgradeIndex) ? this.getDailyLevelsPerAllocation() : 0;
+    }
+}
+
 export class SneakingUpgrade {
     unlocked: boolean = false;
     level: number = 0;
+    bonusLevels: number = 0;
+    private paidMasteryLevel = 0;
+    private selectedMastery = 0;
+    private charmCollectorBonus = 0;
+    private goldStarBonus = 0;
     bonusPerLvl: number = 0;
     shouldBeDisplayed: boolean = true;
     bubbleDiscount: number = 0;
@@ -239,6 +544,36 @@ export class SneakingUpgrade {
         this.shouldBeDisplayed = (data.name != "Name");
     }
 
+    parse(paidLevel: number | string = 0, bonusLevels: number | string = 0): void {
+        this.level = Number(paidLevel);
+        this.bonusLevels = this.index < 17 ? Number(bonusLevels) : 0;
+        this.paidMasteryLevel = 0;
+        this.selectedMastery = 0;
+        this.charmCollectorBonus = 0;
+        this.goldStarBonus = 0;
+        this.unlocked = false;
+        this.bubbleDiscount = 0;
+        this.itemDiscount = 0;
+    }
+
+    getEffectiveLevel(paidLevel: number = this.level): number {
+        return paidLevel + this.bonusLevels;
+    }
+
+    updateMastery(paidMasteryLevel: number, selectedMastery: number): void {
+        this.paidMasteryLevel = paidMasteryLevel;
+        this.selectedMastery = selectedMastery;
+    }
+
+    updateGoldStarBonus(goldStarBonus: number): void {
+        this.goldStarBonus = goldStarBonus;
+    }
+
+    updateCharmCollector(gemstoneBonus: number, paletteBonus: number, vaultBonus: number, cloudBonus: number): void {
+        // Preserve the native grouping before the final Knowledge effect rounds.
+        this.charmCollectorBonus = Math.ceil(gemstoneBonus) + Math.floor(paletteBonus + (vaultBonus + 100 * cloudBonus));
+    }
+
     nextLevelCost = (): number => {
         if (this.index == 8) {
             return (1 / (1 + this.itemDiscount / 100)) * (1 / (1 + this.bubbleDiscount / 100)) * this.data.costBase * Math.pow(this.data.costExponent, this.level);
@@ -248,7 +583,15 @@ export class SneakingUpgrade {
     }
 
     getBonus = (level: number = this.level): number => {
-        return level * this.bonusPerLvl;
+        const baseBonus = this.getEffectiveLevel(level) * this.bonusPerLvl;
+        if (this.index == 11) {
+            return Math.round(baseBonus + (this.paidMasteryLevel * this.selectedMastery + (this.goldStarBonus + this.charmCollectorBonus)));
+        }
+        if (this.index == 6 || this.index == 7 || this.index == 10 || this.index == 12) {
+            // These effects use this upgrade's free levels, not free mastery levels.
+            return baseBonus + (this.paidMasteryLevel + this.bonusLevels) * this.selectedMastery;
+        }
+        return baseBonus;
     }
 
     getImageData = (): ImageData => {
@@ -364,9 +707,14 @@ export class Sneaking extends Domain {
     inventory: (SneakingItem | undefined)[] = [];
     players: SneakingPlayer[] = [];
     pristineCharms: PristineCharm[] = [];
-    doors: SneakingDoor[] = [];
+    floors: SneakingFloor[] = initNinjaFloorRepo().map(SneakingFloor.fromBase);
+    masteryRewards: SneakingMasteryReward[] = [];
+    gemstones: SneakingGemstone[] = [];
+    dailyCharmRolls: SneakingDailyCharmRolls = new SneakingDailyCharmRolls();
+    omnijade: SneakingOmnijade = new SneakingOmnijade();
     jade: number = 0;
     completedMasteries: number = 0;
+    selectedMastery: number = 0;
     beanstalking: Beanstalking = new Beanstalking();
 
     minibossKills: number[] = [];
@@ -400,6 +748,8 @@ export class Sneaking extends Domain {
         return [
             { key: "Ninja", perPlayer: false, default: [] },
             { key: "OptLacc", perPlayer: false, default: [] },
+            { key: "Spelunk", perPlayer: false, default: [] },
+            { key: "Menagerie", perPlayer: false, default: [] },
             { key: "Lv0_", perPlayer: true, default: [] },
         ]
     }
@@ -409,6 +759,11 @@ export class Sneaking extends Domain {
             .filter(item => item.data.itemType === NinjaItemTypeEnum.PristineCharm)
             .slice().sort((first, second) => first.data.itemId - second.data.itemId)
             .map(item => new PristineCharm(item.index, item.data as NinjaPristineCharmModel, false));
+        const masteryBase = sneakingStaticLists.find(base => base.index == 101)!;
+        this.masteryRewards = masteryBase.data.elements.map((_, index) => SneakingMasteryReward.fromBase(masteryBase, index));
+        this.gemstones = this.baseItems
+            .filter(item => item.data.itemType == NinjaItemTypeEnum.Gemstone)
+            .map(SneakingGemstone.fromBase);
         return this;
     }
 
@@ -418,7 +773,29 @@ export class Sneaking extends Domain {
         const serverVars = data.get("servervars");
         const charCount = data.get("charCount") as number;
         const optionList = data.get("OptLacc") as (number | string)[];
+        const menagerie = data.get("Menagerie") as (number | string)[][];
+        sneaking.omnijade.parse(menagerie?.[6], Boolean(menagerie?.length));
         sneaking.completedMasteries = Number(optionList[232] ?? 0);
+        sneaking.selectedMastery = Number(optionList[231] ?? 0);
+        sneaking.players = [];
+        sneaking.inventory = [];
+        sneaking.jade = 0;
+        sneaking.minibossKills = [];
+        sneaking.beanstalking = new Beanstalking();
+        sneaking.sneakingUpgrades.forEach(upgrade => {
+            upgrade.parse();
+        });
+        sneaking.jadeUpgrades.forEach(upgrade => {
+            upgrade.purchased = false;
+        });
+        sneaking.masteryRewards.forEach(reward => {
+            reward.earned = false;
+        });
+        const discoveries = (ninjaData?.[106] ?? []) as string[];
+        sneaking.gemstones.forEach(gemstone => gemstone.parse(optionList[233 + gemstone.gemstoneIndex], discoveries));
+        const spelunking = data.get("Spelunk") as (number | string)[][];
+        sneaking.floors.forEach(floor => floor.parse(ninjaData?.[100]?.[floor.index], spelunking[15]?.[floor.index]));
+        sneaking.dailyCharmRolls.parse(optionList[402]);
         sneaking.pristineCharms.forEach(charm => {
             charm.unlocked = false;
         });
@@ -427,9 +804,6 @@ export class Sneaking extends Domain {
         if (!ninjaData || ninjaData.length == 0) {
             return;
         }
-
-        // reset old data
-        sneaking.players = [];
 
         sneaking.jade = ninjaData[102][1];
 
@@ -445,24 +819,28 @@ export class Sneaking extends Domain {
             const weapon: SneakingWeapon | undefined = SneakingItem.fromBase(sneaking.baseItems.find(item => item.data.internalId == playerEquipment[1][0]), playerEquipment[1][1]) as SneakingWeapon | undefined;
             const trinket1: SneakingTrinket | undefined = SneakingItem.fromBase(sneaking.baseItems.find(item => item.data.internalId == playerEquipment[2][0]), playerEquipment[2][1]) as SneakingTrinket | undefined;
             const trinket2: SneakingTrinket | undefined = SneakingItem.fromBase(sneaking.baseItems.find(item => item.data.internalId == playerEquipment[3][0]), playerEquipment[3][1]) as SneakingTrinket | undefined;
+            if (trinket1) {
+                trinket1.symbolLevel = Number(spelunking[14]?.[2 * index] ?? 0);
+            }
+            if (trinket2) {
+                trinket2.symbolLevel = Number(spelunking[14]?.[2 * index + 1] ?? 0);
+            }
 
             sneaking.players.push(new SneakingPlayer(index, sneakingLevel, playerInfo, new PlayerEquipment(hat, weapon, trinket1, trinket2)));
         })
 
         sneaking.inventory = [];
-        ninjaData.slice(60, 99).forEach((equipment: [name: string, level: number]) => {
-            if (equipment[0] != "Blank") {
-                sneaking.inventory.push(SneakingItem.fromBase(sneaking.baseItems.find(item => item.data.internalId == equipment[0]), equipment[1]));
-            } else {
-                sneaking.inventory.push(undefined);
+        ninjaData.slice(60, 100).forEach((equipment: [name: string, level: number], index: number) => {
+            const item = SneakingItem.fromBase(sneaking.baseItems.find(base => base.data.internalId == equipment[0]), equipment[1]);
+            if (item instanceof SneakingTrinket) {
+                item.symbolLevel = Number(spelunking[14]?.[24 + index] ?? 0);
             }
+            sneaking.inventory.push(item);
         });
 
-        const sneakingUpgradesLevels: number[] = ninjaData[103];
+        const sneakingUpgradesLevels = ninjaData[103] as (number | string)[];
         sneaking.sneakingUpgrades.forEach(upgrade => {
-            if (upgrade.index < sneakingUpgradesLevels.length) {
-                upgrade.level = sneakingUpgradesLevels[upgrade.index];
-            }
+            upgrade.parse(sneakingUpgradesLevels[upgrade.index], menagerie?.[7]?.[upgrade.index]);
         });
         sneaking.updateUnlockedUpgrades();
 
@@ -482,11 +860,6 @@ export class Sneaking extends Domain {
             upgrade.costExponent = serverVars["A_empoExpon"];
         })
 
-        sneaking.doors = [];
-        const doorsDamage = ninjaData[100] as number[];
-        doorsDamage.forEach((damageDone, index) => {
-            sneaking.doors.push({ damageDone: damageDone, maxHP: ((index < DoorsMaxHP.length) ? DoorsMaxHP[index] : 1E9999999999) });
-        });
 
         sneaking.minibossKills = [];
         sneaking.minibossKills = ninjaData[105] as number[];
@@ -518,7 +891,6 @@ export class Sneaking extends Domain {
         sneaking.beanstalking.unlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 1)?.purchased ?? false;
         sneaking.beanstalking.supersizedUnlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 2)?.purchased ?? false;
 
-        sneaking.updatePlayersActivity();
     }
 
     getMasteryAllStatBonus(): number {
@@ -531,12 +903,94 @@ export class Sneaking extends Domain {
         return 5 * Math.floor((97 + this.completedMasteries) / 100);
     }
 
+    updateProgression(): void {
+        const paidMasteryLevel = this.sneakingUpgrades.find(upgrade => upgrade.index == 3)!.level;
+        this.sneakingUpgrades.forEach(upgrade => upgrade.updateMastery(paidMasteryLevel, this.selectedMastery));
+        this.masteryRewards.forEach(reward => reward.update(this.completedMasteries));
+        this.dailyCharmRolls.update(this.sneakingUpgrades.find(upgrade => upgrade.index == 17)!.getBonus());
+
+        this.floors.forEach(floor => {
+            floor.maxHP = floor.data.baseDoorHp;
+            floor.detectionThreshold = floor.data.baseDetectionThreshold;
+        });
+        if (this.selectedMastery > 0) {
+            // Native scaling changes floor 10 before the final door reads its factor.
+            for (const floor of this.floors) {
+                floor.maxHP = 0.01 * floor.maxHP * Math.pow(this.floors[10].maxHP, this.selectedMastery);
+            }
+            this.floors[0].maxHP = 1;
+            for (const floor of this.floors) {
+                floor.detectionThreshold = 0.1 * floor.detectionThreshold * Math.pow(this.floors[11].detectionThreshold, this.selectedMastery);
+            }
+            this.floors[0].detectionThreshold = 0.01;
+        }
+        for (const floor of this.floors) {
+            floor.update(this.selectedMastery < this.completedMasteries ? 0 : floor.maxHP, floor.detectionThreshold);
+        }
+        this.updatePlayersActivity();
+    }
+
+    updateGemstones(talentEffect: number): void {
+        const moissanite = this.gemstones.find(gemstone => gemstone.gemstoneIndex == 5)!;
+        moissanite.update(0, 1);
+        const moissaniteBonus = moissanite.getBonus();
+        for (const gemstone of this.gemstones) {
+            if (gemstone != moissanite) {
+                gemstone.update(moissaniteBonus, talentEffect);
+            }
+        }
+    }
+
+    preparePermanentCharmBonuses(legendCharmBonus: number): { goldBeadsBonus: number; goldScrollBonus: number; goldStarBonus: number } {
+        let goldBeadsBonus = 0;
+        let goldScrollBonus = 0;
+        let goldStarBonus = 0;
+        const stariteMultiplier = 1 + this.gemstones.find(gemstone => gemstone.gemstoneIndex == 3)!.getBonus() / 100;
+        for (const item of this.inventory) {
+            if (!(item instanceof SneakingTrinket)) {
+                continue;
+            }
+            const rawBonus = item.getBonus();
+            const currentBonus = item.data.itemId == 12 ? goldScrollBonus : item.data.itemId == 21 ? goldStarBonus : goldBeadsBonus;
+            if ((item.data.itemId != 12 && item.data.itemId != 20 && item.data.itemId != 21) || rawBonus <= currentBonus) {
+                continue;
+            }
+            // Native compares raw strength with the previously stored boosted bonus.
+            const bonus = rawBonus * stariteMultiplier * (1 + legendCharmBonus / 100) * item.getSymbolMultiplier();
+            if (item.data.itemId == 12) {
+                goldScrollBonus = bonus;
+            } else if (item.data.itemId == 21) {
+                goldStarBonus = bonus;
+            } else {
+                goldBeadsBonus = bonus;
+            }
+        }
+        return { goldBeadsBonus, goldScrollBonus, goldStarBonus };
+    }
+
+    updateNinjas(inputs: SneakingStealthInputs, goldScrollBonus: number): void {
+        for (const player of this.players) {
+            player.updateCharmBonuses(goldScrollBonus);
+        }
+        for (const player of this.players) {
+            let floorMateMultiplier = 1;
+            for (const other of this.players) {
+                if (other != player && other.floor == player.floor) {
+                    floorMateMultiplier += other.smokeBombBonus / 100;
+                    floorMateMultiplier += other.lotusFlowerBonus / 100;
+                }
+            }
+            const floor = this.floors[player.floor];
+            player.updateDetection(inputs, floorMateMultiplier, floor.flowerStacks, floor.detectionThreshold);
+        }
+    }
+
     getUnlockedFloors = (): number => {
         let floorUnlocked: number = 0;
         let i: number = 0;
-        for (i = 0; i < this.doors.length; i++) {
-            if (0 >= this.doors[i].maxHP - this.doors[i].damageDone) {
-                floorUnlocked = Math.min(12, i + 2);
+        for (i = 0; i < this.floors.length; i++) {
+            if (this.floors[i].remainingHP <= 0) {
+                floorUnlocked = Math.min(this.floors.length, i + 2);
             }
         }
 
@@ -545,15 +999,15 @@ export class Sneaking extends Domain {
 
     updatePlayersActivity = () => {
         this.players.forEach((player, _) => {
-            const currentFloorDoor = (player.floor < this.doors.length) ? this.doors[player.floor] : undefined;
+            const currentFloorDoor = this.floors[player.floor];
 
-            if (player.tie.damageDone < player.tie.maxHP || player.rawData[1] == 0) {
+            if (player.tie.damageDone < player.tie.maxHP || player.timePast == 0) {
                 player.activity = SneakingActivity.Tied
-            } else if (player.rawData[1] < 0) {
+            } else if (player.timePast < 0) {
                 player.activity = SneakingActivity.KnockedOut;
-            } else if (player.rawData[1] > 0) {
+            } else if (player.timePast > 0) {
                 switch (true) {
-                    case ((currentFloorDoor?.maxHP ?? 0) - (currentFloorDoor?.damageDone ?? 0)) > 0 && (player.equipment.weapon?.data.itemId ?? -1) == SneakinWeaponType.Nunchaku:
+                    case currentFloorDoor.remainingHP > 0 && (player.equipment.weapon?.data.itemId ?? -1) == SneakinWeaponType.Nunchaku:
                         player.activity = SneakingActivity.Breaching;
                         break;
                     case this.players.filter(filterPlayer => filterPlayer.floor == player.floor && (filterPlayer.tie.maxHP - filterPlayer.tie.damageDone) > 0).length > 0 && (player.equipment.weapon?.data.itemId ?? -1) == SneakinWeaponType.Kunai:
@@ -568,6 +1022,11 @@ export class Sneaking extends Domain {
     }
 }
 
+export const updateSneakingProgression = (data: Map<string, unknown>) => {
+    const sneaking = data.get("sneaking") as Sneaking;
+    sneaking.updateProgression();
+}
+
 export const updateSneaking = (data: Map<string, any>) => {
     const alchemy = data.get("alchemy") as Alchemy;
     const sneaking = data.get("sneaking") as Sneaking;
@@ -580,4 +1039,98 @@ export const updateSneaking = (data: Map<string, any>) => {
     if (currencyConduitUpgrade) {
         currencyConduitUpgrade.bubbleDiscount = alchemy.getBonusForBubble(CauldronIndex.Kazam, AlchemyConst.LoCostMoJade);
     }
+}
+
+export const updateSneakingGemstones = (data: Map<string, unknown>): void => {
+    const sneaking = data.get("sneaking") as Sneaking;
+    const players = data.get("players") as Player[];
+    let talentEffect = 1;
+    for (const player of players) {
+        talentEffect = Math.max(talentEffect, Talent.getAccountTalentBonus(players, 432, player.finalTalentInputs));
+    }
+    sneaking.updateGemstones(talentEffect);
+}
+
+export const updateSneakingNinjas = (data: Map<string, unknown>): void => {
+    const sneaking = data.get("sneaking") as Sneaking;
+    const players = data.get("players") as Player[];
+    const account = data.get("account") as Account;
+    const alchemy = data.get("alchemy") as Alchemy;
+    const cards = data.get("cards") as Card[];
+    const achievements = data.get("achievements") as Achievement[];
+    const companions = data.get("companions") as Companion[];
+    const compass = data.get("compass") as Compass;
+    const emperor = data.get("emperor") as Emperor;
+    const farming = data.get("farming") as Farming;
+    const hole = data.get("hole") as Hole;
+    const jellyOperator = data.get("jellyOperator") as JellyOperator;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
+    const starSigns = data.get("starsigns") as StarSigns;
+    const statues = data.get("statues") as PlayerStatues[];
+    const sushi = data.get("sushi") as SushiStation;
+    const votes = data.get("votes") as Votes;
+
+    let statueBonus = 0;
+    const infiniteStarBonus = players.length > 0
+        ? starSigns.infinityStarSigns.reduce((sum, sign) => sum + sign.getBonus("Ninja Twin Stealth"), 0)
+        : 0;
+    let starSignBonus = infiniteStarBonus;
+    for (const player of players) {
+        const playerStatues = statues.find(record => record.playerID == player.playerID)!;
+        statueBonus = Math.max(statueBonus, playerStatues.statues.find(statue => statue.index == 26)!.getBonus());
+        if (infiniteStarBonus == 0) {
+            // Without an Infinite Star, project only the strongest actual aligned sign.
+            const equippedStarBonus = player.starSigns.reduce((sum, sign) => sum + sign.getBonus("Ninja Twin Stealth"), 0);
+            starSignBonus = Math.max(starSignBonus, equippedStarBonus);
+        }
+    }
+
+    const landRankBonus = farming.landrankDatabase.getUpgradeBonusByIndex(4);
+    const wayOfStealth = sneaking.sneakingUpgrades.find(upgrade => upgrade.index == 13)!;
+    const { goldBeadsBonus, goldScrollBonus, goldStarBonus } = sneaking.preparePermanentCharmBonuses(legendTalents.getBonusFromIndex(6));
+    sneaking.sneakingUpgrades.find(upgrade => upgrade.index == 11)!.updateGoldStarBonus(goldStarBonus);
+    // Shared sign and statue inputs project actual account snapshots, not an inferred active character.
+    const inputs: SneakingStealthInputs = {
+        farmingMultiplier: 1 + landRankBonus * farming.farmingLevel / 100,
+        compassBonus: compass.getUpgradeBonus(45),
+        gambitBonus: hole.gambit.getBonus(11),
+        goldBeadsBonus,
+        alchemyAndStarSignBonus: alchemy.getBubbleBonusForKey("A10AllCharz") + starSignBonus,
+        statueBonus,
+        cardBonus: 4 * cards.find(card => card.id == "Crystal5")!.getLevels(),
+        achievementBonus: 5 * Number(achievements.find(achievement => achievement.index == 368)!.completed),
+        aquamarineBonus: sneaking.gemstones.find(gemstone => gemstone.gemstoneIndex == 0)!.getBonus(),
+        ballotBonus: votes.getCurrentBonus(25),
+        lampBonus: hole.lamp.getBonus(false, 2, 1),
+        wellMultiplier: Math.max(1, hole.getSchematicBonus(54)),
+        wayOfStealthBonus: wayOfStealth.getBonus(),
+        funeralFlowerBonus: sneaking.sneakingUpgrades.find(upgrade => upgrade.index == 21)!.getBonus(),
+        fractalStealthUnlocked: account.isFractalStealthUnlocked(),
+        emperorBonus: emperor.getEffectiveBonus(0),
+        sushiBonus: sushi.getBonusFromIndex(32),
+        jellyBonus: jellyOperator.getObstructionBonus(16),
+        sneakierStealthBonus: sneaking.sneakingUpgrades.find(upgrade => upgrade.index == 23)!.getBonus(),
+        companionBonus: getCompanionActiveBonus(companions, 163),
+    };
+    sneaking.updateNinjas(inputs, goldScrollBonus);
+}
+
+export const updateSneakingOmnijade = (data: Map<string, unknown>): void => {
+    const sneaking = data.get("sneaking") as Sneaking;
+    const companions = data.get("companions") as Companion[];
+    const gaming = data.get("gaming") as Gaming;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+    const equinox = data.get("equinox") as Equinox;
+
+    sneaking.omnijade.update(
+        sneaking.sneakingUpgrades.find(upgrade => upgrade.index == 31)!.getBonus(),
+        getCompanionActiveBonus(companions, 173),
+    );
+    // Gold Star was prepared with the ninja inputs; the remaining providers are now settled.
+    sneaking.sneakingUpgrades.find(upgrade => upgrade.index == 11)!.updateCharmCollector(
+        sneaking.gemstones.find(gemstone => gemstone.gemstoneIndex == 7)!.getBonus(),
+        gaming.getPaletteBonus(30),
+        upgradeVault.getBonusForId(88),
+        equinox.getChallengeBonus(53),
+    );
 }

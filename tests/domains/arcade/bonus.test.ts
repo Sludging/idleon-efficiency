@@ -1,9 +1,6 @@
 /**
- * Arcade bonuses are checked against the saved account: Prisma Bonuses index
- * 54 exercises the evolved Companion 27 value (1.5, which does not activate
- * the exact-1 doubling gate), and Multikill per Tier index 8 is a real
- * max-level entry. The game doubles only at level 101, not for all levels
- * above that threshold.
+ * Compare Prisma and Multikill per Tier upgrades with native saved-account results.
+ * Paired saves cover ordinary, doubled, and Omega upgrade states.
  */
 
 import {
@@ -22,12 +19,12 @@ const liveBonusCases = [
  {
   index: 54,
   extractionKey: 'arcade_bonus_54',
-  description: 'unmaxed Prisma Bonuses bonus with evolved companion 27',
+  description: 'Prisma Bonuses upgrade bonus',
  },
  {
   index: 8,
   extractionKey: 'arcade_bonus_8',
-  description: 'real max-level Multikill per Tier bonus',
+  description: 'Multikill per Tier upgrade bonus',
  },
 ] as const;
 
@@ -47,7 +44,7 @@ describe('Arcade Domain - Bonus Calculations', () => {
  });
 
  liveBonusCases.forEach(({ index, extractionKey, description }) => {
-  it(`matches the game ${description} at index ${index}`, () => {
+  it(`matches the game ${description}`, () => {
    const bonus = arcade.bonuses.find(candidate => candidate.index === index);
    if (!bonus) {
     throw new Error(`Arcade bonus ${index} is missing from save data`);

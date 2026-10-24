@@ -1,0 +1,106 @@
+{
+  "description": "CORE native outputs for Omnijade remaining count, daily levels per allocation, main Knowledge effects, and displayed Knowledge and Pipsqueak sources. No projected values or save mutations.",
+  "target": "Sneaking Omnijade counts, daily levels, Knowledge effects and sources",
+  "extractions": [
+    {
+      "label": "omnijade_remaining",
+      "expression": "idleon.callFunction(\"MenagerieStuff\", \"OmniJadeLeft\", 0, 0)",
+      "description": "Omnijade remaining count after saved allocations."
+    },
+    {
+      "label": "omnijade_daily_levels",
+      "expression": "idleon.callFunction(\"MenagerieStuff\", \"OmniJadeDailyLVs\", 0, 0)",
+      "description": "Daily free levels for each allocated Knowledge upgrade."
+    },
+    {
+      "label": "knowledge_bonus_0",
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 0, 0)",
+      "description": "Centurion Lineage Knowledge effect."
+    },
+    {
+      "label": "knowledge_bonus_1",
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 1, 0)",
+      "description": "Way of Bargain Knowledge effect."
+    },
+    {
+      "label": "knowledge_bonus_2",
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 2, 0)",
+      "description": "Respectful Minded Knowledge effect."
+    },
+    {
+      "label": "knowledge_bonus_3",
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 3, 0)",
+      "description": "Mastery Loot Knowledge effect."
+    },
+    {
+      "label": "knowledge_bonus_4",
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 4, 0)",
+      "description": "Way of Haste Knowledge effect."
+    },
+    {
+      "label": "knowledge_bonus_5",
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 5, 0)",
+      "description": "Mahjong Boosters Knowledge effect."
+    },
+    {
+      "label": "knowledge_bonus_6",
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 6, 0)",
+      "description": "Gemstone Pilfer Knowledge effect."
+    },
+    {
+      "label": "knowledge_bonus_7",
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 7, 0)",
+      "description": "Kunai Knowledge effect."
+    },
+    {
+      "label": "knowledge_bonus_8",
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 8, 0)",
+      "description": "Currency Conduit Knowledge effect."
+    },
+    {
+      "label": "knowledge_bonus_10",
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 10, 0)",
+      "description": "Glove Ingenuity Knowledge effect."
+    },
+    {
+      "label": "knowledge_bonus_11",
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 11, 0)",
+      "description": "Charm Collector Knowledge effect."
+    },
+    {
+      "label": "knowledge_bonus_12",
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 12, 0)",
+      "description": "Nunchaku Grip Knowledge effect."
+    },
+    {
+      "label": "knowledge_bonus_13",
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 13, 0)",
+      "description": "Way of Stealth Knowledge effect."
+    },
+    {
+      "label": "knowledge_bonus_14",
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 14, 0)",
+      "description": "Looting Ambition Knowledge effect."
+    },
+    {
+      "label": "knowledge_bonus_15",
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 15, 0)",
+      "description": "Thick Skin Knowledge effect."
+    },
+    {
+      "label": "knowledge_bonus_16",
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 16, 0)",
+      "description": "Star Sweeping Knowledge effect."
+    },
+    {
+      "label": "knowledge_bonus_31",
+      "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 31, 0)",
+      "description": "Omnijade Usable Knowledge source shown in Omnijade source details."
+    },
+    {
+      "label": "pipsqueak_bonus",
+      "expression": "idleon.callFunction(\"Companions\", 173)",
+      "description": "Pipsqueak companion source shown in Omnijade source details."
+    }
+  ]
+}

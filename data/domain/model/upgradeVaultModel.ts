@@ -8,6 +8,7 @@ export interface UpgradeVaultModel {
     unlock_req: number,
     value: number,
     max_level: number,
+    eventShopMaxLevelEligible: boolean,
     description_line1: string,
     description_line2?: string,
     has_tooltip: boolean,

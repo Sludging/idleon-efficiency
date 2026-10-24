@@ -1,36 +1,39 @@
-import { getExtractedValue, loadExtractionResults, validateExtractionHealth, type ExtractionResults } from '../../utils/live-game-data-loader';
+import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
+import { getTargetPlayer } from '../../utils/target-player';
 import { getBoatArtifactFindMultiplier } from '../../../data/domain/world-5/sailing/artifactChance';
+import type { Sailing } from '../../../data/domain/world-5/sailing/sailing';
 import type { Player } from '../../../data/domain/player';
- 
 
-const saveName = 'latest';
-const extractionResultsName = 'sailing-artifact-chance-data.json';
+type BoatArtifactFindMultiplier = {
+  index: number;
+  multiplier: number;
+};
+
+const extractionResults = loadExtractionResults('sailing-artifact-chance-data.json');
+validateExtractionHealth(extractionResults);
+const multipliers = extractionResults.extractions.boat_artifact_find_multipliers.result as BoatArtifactFindMultiplier[];
 
 describe('Sailing boat artifact find multiplier', () => {
   let gameData: Map<string, any>;
-  let extractionResults: ExtractionResults;
-
+  let sailing: Sailing;
   let player: Player;
+
   beforeAll(() => {
-    extractionResults = loadExtractionResults(extractionResultsName);
-    validateExtractionHealth(extractionResults);
-    gameData = loadGameDataFromSave(saveName);
-    player = (gameData.get('players') as Player[]).find(candidate => candidate.playerID === 3)!;
-
+    gameData = loadGameDataFromSave('latest');
+    sailing = gameData.get('sailing') as Sailing;
+    player = getTargetPlayer(gameData.get('players') as Player[]);
   });
 
-  it('matches native artifact find multiplier for boat 0', () => {
-    expect(getBoatArtifactFindMultiplier(gameData, 0, player)).toMatchLiveGameWithDetails(
-      getExtractedValue(extractionResults, 'boat_0_artifact_find_multiplier'),
-      { tolerance: 0, context: 'Artifact find multiplier for Sailing boat 0' },
-    );
-  });
- 
-  it('matches the multiplier for a second owned boat with different real inputs', () => {
-    expect(getBoatArtifactFindMultiplier(gameData, 1, player)).toMatchLiveGameWithDetails(
-      getExtractedValue(extractionResults, 'boat_1_artifact_find_multiplier'),
-      { tolerance: 0, context: 'Artifact find multiplier for Sailing boat 1' },
-    );
+  it.each(multipliers)('matches artifact find multiplier for owned boat $index', ({ index, multiplier }) => {
+    const boat = sailing.boats.find(candidate => candidate.index === index);
+    if (!boat) throw new Error(`Owned Sailing boat ${index} not found`);
+    if (typeof multiplier !== 'number') throw new Error(`Artifact find multiplier missing for boat ${index}`);
+
+    expect(getBoatArtifactFindMultiplier(gameData, index, player)).toMatchLiveGameWithDetails(multiplier, {
+      tolerance: 0,
+      context: `Artifact find multiplier for Sailing boat ${index}`,
+      debugInfo: { playerID: player.playerID, captainIndex: boat.captain?.index },
+    });
   });
 });

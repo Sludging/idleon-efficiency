@@ -6,7 +6,7 @@ import {
     Heading,
     Text,
 } from 'grommet'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import IconImage from '../../../components/base/IconImage';
 import ShadowBox from '../../../components/base/ShadowBox';
 import ContentTabs from '../../../components/base/ContentTabs';
@@ -18,22 +18,19 @@ import { Skilling } from '../../../data/domain/skilling';
 import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
+import useHydrated from '../../../lib/hooks/useHydrated';
 import { CharacterBox } from '../../../components/base/CharacterBox';
 import { commaNotation } from '../../../data/utility';
 
 function AlignmentDisplay() {
-    const [divinity, setDivinity] = useState<DivinityDomain>();
-    const [playerData, setPlayers] = useState<Player[]>([]);
+    const hydrated = useHydrated();
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
+    const divinity = theData.get("divinity") as DivinityDomain | undefined;
+    const playerData: Player[] = theData.get("players");
 
-    useEffect(() => {
-        setDivinity(theData.get("divinity"));
-        setPlayers(theData.get("players"));
-    }, [theData]);
-
-    if (!divinity) {
+    if (!hydrated || !divinity) {
         return (
             <Box>Still loading or error occured.</Box>
         )
@@ -92,21 +89,18 @@ function AlignmentDisplay() {
 };
 
 function GodDisplay() {
-    const [divinity, setDivinity] = useState<DivinityDomain>();
-    const { theData, lastUpdated } = useAppDataStore(useShallow(
+    const hydrated = useHydrated();
+    const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
 
+    const divinity = theData.get("divinity") as DivinityDomain | undefined;
     const players: Player[] = theData.get("players");
-
-    useEffect(() => {
-        setDivinity(theData.get("divinity"));
-    }, [theData, lastUpdated]);
 
     return (
         <Box margin={{ top: 'small' }} gap="small">
             {
-                divinity && divinity.gods.map((god, index) => {
+                hydrated && divinity && divinity.gods.map((god, index) => {
                     const unlinkedBlessingPlayers = god instanceof NobisectGod
                         ? players.filter(player => !god.linkedPlayers.some(linkedPlayer => linkedPlayer.playerID === player.playerID))
                         : [];

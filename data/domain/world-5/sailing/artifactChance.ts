@@ -23,6 +23,7 @@ import type { JellyOperator } from "../../world-7/jellyOperator";
 import type { ResearchGrid } from "../../world-7/research";
 import type { Spelunking } from "../../world-7/spelunking";
 import type { SushiStation } from "../../world-7/sushi";
+import type { Menagerie } from "../../menagerie";
 
 /** Native Sailing BoatArtiMulti: artifact-find chance for the selected boat and character. */
 export const getBoatArtifactFindMultiplier = (
@@ -54,6 +55,10 @@ export const getBoatArtifactFindMultiplier = (
     const votes = data.get('votes') as Votes;
     const gaming = data.get('gaming') as Gaming;
     const spelunking = data.get('spelunking') as Spelunking;
+    const menagerie = data.get('menagerie') as Menagerie;
+    // Menagerie moves the raw sticker bonus out of the additive group when unlocked.
+    const stickerIsMultiplicative = menagerie.getUnlocks()[22].owned;
+    const stickerBonus = farming.getStickerBonus(2);
 
     let tierSixCaptainCount = 0;
     for (const captain of sailing.captains) {
@@ -71,7 +76,7 @@ export const getBoatArtifactFindMultiplier = (
         + (arcade.bonuses.find(bonus => bonus.index === 32)?.getBonus() ?? 0)
         + (arcade.bonuses.find(bonus => bonus.index === 66)?.getBonus() ?? 0)
         + hole.getSchematicBonus(55, 0)
-        + farming.getStickerBonus(2)
+        + (stickerIsMultiplicative ? 0 : stickerBonus)
         + research.getBonusForId(109)
         + vault.getBonusForId(63);
 
@@ -84,6 +89,8 @@ export const getBoatArtifactFindMultiplier = (
     return Math.max(1,
         (1 + additiveBonus / 100)
         * (1 + artifactFindStarSign / 100)
+        * (1 + (stickerIsMultiplicative ? stickerBonus : 0) / 100)
+        * sailing.getNightmarinerArtifactFindMultiplier()
         * Math.max(1, Math.min(2, 1 + 2 * companion154) + companion154LevelTwo)
         * Math.max(1, killroy.artifactFindChanceBonus)
         * (1 + button.getBonusForIndex(3) / 100)
@@ -99,6 +106,7 @@ export const getBoatArtifactFindMultiplier = (
         * (1 + (pristineCharm2?.unlocked ? pristineCharm2.data.x1 : 0) / 100)
         * (1 + votes.getCurrentBonus(20) / 100)
         * (1 + getCompanionActiveBonus(companions, 43))
+        * Math.max(1, getCompanionActiveBonus(companions, 56) / 5)
         * (1 + hole.getMonumentBonus('Justice', 2) / 100)
         * (1 + farming.getExoticMarketBonusValue(45) / 100)
         * (1 + gaming.getPaletteBonus(5) / 100)

@@ -198,7 +198,7 @@ export const initMineheadOpponentRepo = () => {
         new MineheadOpponentBase(21, <MineheadOpponentModel>{
                 "progressionIndex": 21,
                 "displayId": 6,
-                "name": "Brainhead",
+                "name": "Raspberryhead",
                 "ordinalLabel": "twenty second",
                 "titleLabel": "the honorable",
                 "bonusDescription": "+{% Hat Rack bonus multi",

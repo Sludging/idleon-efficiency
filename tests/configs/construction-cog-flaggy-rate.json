@@ -1,0 +1,11 @@
+{
+  "description": "Prepared board Flaggy/hour in the unchanged current-character context; require a finite positive public native result",
+  "target": "Construction Cog Flaggy Rate",
+  "extractions": [
+    {
+      "label": "construction_cog_flaggy_rate",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"FlagSpeed\", 0, 0)",
+      "description": "Public prepared-board Flaggy/hour without initialization or board refresh. A zero or missing result does not cover the selected positive board."
+    }
+  ]
+}

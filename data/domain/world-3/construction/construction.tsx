@@ -18,6 +18,12 @@ import { Menagerie } from "../../menagerie";
 import { Player } from "../../player";
 import { CogBoard, getRoyalOutpostCogBuildSpeedMultiplier } from "./cog";
 import type { RoyalArmory } from "../../world-6/royalArmory/royalArmory";
+import { SushiStation } from "../../world-7/sushi";
+import type { ResearchGrid } from "../../world-7/research";
+import type { Card } from "../../cards";
+import type { GemStore } from "../../gemPurchases";
+
+export { getCogPlayerBaseExpRate } from "./playerBuildSpeed";
 
 const BOOKS_FOR_MAX_CHECKOUT = 20;
 
@@ -142,6 +148,7 @@ export const updateConstruction = (data: Map<string, any>) => {
     const storage = data.get("storage") as Storage;
     const dancingCoral = data.get("dancingCoral") as DancingCoral;
     const menagerie = data.get("menagerie") as Menagerie;
+    const sushi = data.get("sushi") as SushiStation;
     const costCruncher = construction?.buildings.find(building => building.index == 5) as Building;
 
     // Figure out max building levels
@@ -184,6 +191,7 @@ export const updateConstruction = (data: Map<string, any>) => {
                     building.baseMaxLvl
                     + constMastery.getBonusByIndex(5)
                     + (dancingCoral.isDancingCoralPurchased(building.index - 18) ? 100 : 0)
+                    + sushi.getBonusFromIndex(58)
                     + menagerie.getBonusValue(5),
                 );
                 break;
@@ -247,6 +255,7 @@ export interface CogBuildRateResult {
 const getCogExtraBuildSpeedMultiplier = (data: Map<string, any>, construction: Construction): number => {
     const companions = data.get("companions") as Companion[];
     const royalArmory = data.get("royalArmory") as RoyalArmory;
+    const menagerie = data.get("menagerie") as Menagerie;
     const smallCogBuildSpeedBonus = construction.cogBoard.getSmallCogBuildSpeedBonus();
     const companionBuildSpeedBonus = getCompanionActiveBonus(companions, 157);
     const royalOutpostMultiplier = getRoyalOutpostCogBuildSpeedMultiplier(
@@ -254,7 +263,9 @@ const getCogExtraBuildSpeedMultiplier = (data: Map<string, any>, construction: C
         royalArmory.builtOutpostCount,
     );
     return (1 + smallCogBuildSpeedBonus / 100) *
-        (1 + companionBuildSpeedBonus / 100) * Math.max(1, royalOutpostMultiplier);
+        (1 + companionBuildSpeedBonus / 100) *
+        (1 + menagerie.yellowJellyfish.upgrades[0].effect / 100) *
+        Math.max(1, royalOutpostMultiplier);
 }
 
 export const getCogBuildRateForContext = (data: Map<string, any>, contextPlayer: Player): number => {
@@ -274,4 +285,48 @@ export const getBestCogBuildRate = (data: Map<string, any>): CogBuildRateResult 
         rate: getCogBuildRateForContext(data, contextPlayer),
         characterName: contextPlayer.playerName,
     })).reduce((best, current) => current.rate > best.rate ? current : best);
+}
+
+export const getCogFlaggyRateForContext = (data: Map<string, any>, contextPlayer: Player): number => {
+    const construction = data.get("construction") as Construction;
+    const players = data.get("players") as Player[];
+    const research = data.get("research") as ResearchGrid;
+    const menagerie = data.get("menagerie") as Menagerie;
+    const cards = data.get("cards") as Card[];
+    const gems = data.get("gems") as GemStore;
+    const smallCogBonus = construction.cogBoard.getSmallCogFlaggyRateBonus();
+    const researchBonus = research.getBonusForId(89);
+    const yellowJellyfishBonus = menagerie.yellowJellyfish.upgrades[2].effect;
+    const cardLevel = cards.find(card => card.id === "w7b3")!.getLevels();
+    const extraFlaggyRateMultiplier = (1 + smallCogBonus / 100) *
+        (1 + researchBonus / 100) *
+        (1 + yellowJellyfishBonus / 100) *
+        (1 + 10 * cardLevel / 100);
+    const flaggyPurchase = gems.purchases.find(purchase => purchase.no === 118)!;
+    const gemShopFlaggyMultiplier = 1 + 50 * flaggyPurchase.pucrhased / 100;
+
+    return construction.cogBoard.getFlaggyRateForContext(
+        players,
+        extraFlaggyRateMultiplier,
+        gemShopFlaggyMultiplier,
+        data,
+        contextPlayer,
+    );
+}
+
+export interface CogFlaggyRateResult {
+    rate: number;
+    characterName: string;
+}
+
+export const getBestCogFlaggyRate = (data: Map<string, any>): CogFlaggyRateResult => {
+    const players = data.get("players") as Player[];
+    let best = { rate: 0, characterName: "" };
+    for (const contextPlayer of players) {
+        const rate = getCogFlaggyRateForContext(data, contextPlayer);
+        if (best.characterName === "" || rate > best.rate) {
+            best = { rate, characterName: contextPlayer.playerName };
+        }
+    }
+    return best;
 }

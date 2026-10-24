@@ -1,0 +1,170 @@
+{
+  "extractions": {
+    "jelly_upgrade_quantities": {
+      "expression": "(()=>{const records=idleon.engine.getGameAttribute(\"CustomLists\").h.JellyUPG;return records.map((record,index)=>({index,quantity:idleon.callFunction(\"JellyOperation\",\"UpgradeQTY\",index,0)}))})()",
+      "result": [
+        {
+          "index": 0,
+          "quantity": 1
+        },
+        {
+          "index": 1,
+          "quantity": 1
+        },
+        {
+          "index": 2,
+          "quantity": 1
+        },
+        {
+          "index": 3,
+          "quantity": 1
+        },
+        {
+          "index": 4,
+          "quantity": 0
+        },
+        {
+          "index": 5,
+          "quantity": 0
+        },
+        {
+          "index": 6,
+          "quantity": 0
+        },
+        {
+          "index": 7,
+          "quantity": 0
+        },
+        {
+          "index": 8,
+          "quantity": 5
+        },
+        {
+          "index": 9,
+          "quantity": 1
+        },
+        {
+          "index": 10,
+          "quantity": 700
+        },
+        {
+          "index": 11,
+          "quantity": 0
+        },
+        {
+          "index": 12,
+          "quantity": 1
+        },
+        {
+          "index": 13,
+          "quantity": 0
+        },
+        {
+          "index": 14,
+          "quantity": 0
+        },
+        {
+          "index": 15,
+          "quantity": 0
+        },
+        {
+          "index": 16,
+          "quantity": 1
+        },
+        {
+          "index": 17,
+          "quantity": 3
+        },
+        {
+          "index": 18,
+          "quantity": 485
+        },
+        {
+          "index": 19,
+          "quantity": 480
+        },
+        {
+          "index": 20,
+          "quantity": 0
+        },
+        {
+          "index": 21,
+          "quantity": 0
+        },
+        {
+          "index": 22,
+          "quantity": 0
+        },
+        {
+          "index": 23,
+          "quantity": 785
+        },
+        {
+          "index": 24,
+          "quantity": 650
+        },
+        {
+          "index": 25,
+          "quantity": 25
+        },
+        {
+          "index": 26,
+          "quantity": 0
+        },
+        {
+          "index": 27,
+          "quantity": 0
+        },
+        {
+          "index": 28,
+          "quantity": 1
+        },
+        {
+          "index": 29,
+          "quantity": 0
+        },
+        {
+          "index": 30,
+          "quantity": 0
+        },
+        {
+          "index": 31,
+          "quantity": 0
+        },
+        {
+          "index": 32,
+          "quantity": 0
+        },
+        {
+          "index": 33,
+          "quantity": 4
+        },
+        {
+          "index": 34,
+          "quantity": 0
+        },
+        {
+          "index": 35,
+          "quantity": 0
+        },
+        {
+          "index": 36,
+          "quantity": 1
+        },
+        {
+          "index": 37,
+          "quantity": 0
+        },
+        {
+          "index": 38,
+          "quantity": 100
+        },
+        {
+          "index": 39,
+          "quantity": 1
+        }
+      ]
+    }
+  },
+  "errors": {}
+}

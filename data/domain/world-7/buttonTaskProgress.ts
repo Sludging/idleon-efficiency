@@ -30,7 +30,6 @@ import type { GoldenFood } from "../golden-food";
 import type { Spelunking } from "./spelunking";
 import type { SushiStation } from "./sushi";
 import { getBoatArtifactFindMultiplier } from "../world-5/sailing/artifactChance";
-import { getPersistentSpelunkingPower } from "./spelunkingPower";
 
 type Progress = ButtonTaskProgress;
 
@@ -231,8 +230,10 @@ export const getButtonTaskProgress = (data: Map<string, any>, taskIndex: number)
         }
         case 49:
             return bestCharacterProgress(getPlayers(data), player => getMaximumDamage(data, player));
-        case 50:
-            return available(getPersistentSpelunkingPower(data));
+        case 50: {
+            const spelunking = data.get("spelunking") as Spelunking;
+            return available(spelunking.persistentPower);
+        }
         case 51: {
             const spelunking = data.get("spelunking") as Spelunking;
             return available(spelunking.tunnels[4].bestDepth);

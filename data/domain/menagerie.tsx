@@ -1,4 +1,3 @@
-import { initRandoListRepo } from "./data/RandoListRepo";
 import { Domain, RawData } from "./base/domain";
 import { initMenagerieMissionRepo, MenagerieMissionBase } from "./data/MenagerieMissionRepo";
 import { MenagerieMissionModel } from "./model/menagerieMissionModel";
@@ -8,6 +7,8 @@ import { MenagerieBonusModel } from "./model/menagerieBonusModel";
 import { MenagerieUnlockModel } from "./model/menagerieUnlockModel";
 import { Item } from "./items";
 import { ImageData } from "./imageData";
+import { EventShop } from "./eventShop";
+import { Companion, getCompanionActiveBonus } from "./companions";
 
 import { initMenagerieJellyfishRepo } from "./data/MenagerieJellyfishRepo";
 import {
@@ -184,13 +185,13 @@ export interface MenagerieLumiInputs {
     lumiVialBonus: number;
     researchBonus164: number;
     cardLevel: number;
+    eventShopLumiBonus: number;
+    maccieLumiPercent: number;
 }
 
 export interface MenagerieLumiSaveInputs {
     purpleJellyBonus: number;
     yellowConstructionBonus: number;
-    crucibleBonus4: number;
-    crucibleBonus14: number;
 }
 
 
@@ -244,6 +245,8 @@ export class Menagerie extends Domain {
         lumiVialBonus: 0,
         researchBonus164: 0,
         cardLevel: 0,
+        eventShopLumiBonus: 0,
+        maccieLumiPercent: 0,
     };
     private mineheadDoubledUpgradeIds = new Set<number>();
     private sushiDoubledUpgradeIds = new Set<number>();
@@ -253,7 +256,6 @@ export class Menagerie extends Domain {
     private organicLabelsConsumed = 0;
     private purpleJellyBonus = 0;
     private yellowConstructionBonus = 0;
-    private savedCrucibleWave = 0;
     private resourceBalances: MenagerieResourceBalances = {
         blackStarsOwned: 0,
         blackStarsAvailable: 0,
@@ -298,13 +300,17 @@ export class Menagerie extends Domain {
         this.silverJellyfish = new MenagerieSilverJellyfish(jellyfishData[3]);
         this.yellowJellyfish = new MenagerieYellowJellyfish(jellyfishData[4]);
         this.greenJellyfish = new MenagerieGreenJellyfish(jellyfishData[5]);
-        this.crucibleThresholds = initRandoListRepo()[115].data.elements;
         return this;
     }
 
     parse(data: Map<string, unknown>): void {
         const menagerie = data.get(this.getDataKey()) as Menagerie;
         const savedMenagerie = data.get("Menagerie") as (number | string)[][];
+        menagerie.lumiInputs.eventShopLumiBonus = 0;
+        menagerie.lumiInputs.maccieLumiPercent = 0;
+        if (!savedMenagerie || savedMenagerie.length === 0) {
+            return;
+        }
         const savedMissionClaims = savedMenagerie[1] ?? [];
         menagerie.missions.forEach(mission => mission.parse(Number(savedMissionClaims[mission.index] ?? 0)));
         menagerie.lumiBalance = Number(savedMenagerie[0]?.[0] ?? 0);
@@ -328,7 +334,6 @@ export class Menagerie extends Domain {
         menagerie.totalMenagerieBonusLevels = savedBonusLevels.reduce<number>((total, level) => total + Number(level), 0);
         menagerie.bonuses.forEach(bonus => bonus.parse(Number(savedBonusLevels[bonus.index] ?? 0)));
         const options = data.get("OptLacc") as number[];
-        menagerie.savedCrucibleWave = Number(options[628]);
         const research = data.get("Research") as number[][];
         const divinity = data.get("Divinity") as number[];
         const cardData = data.get("Cards1") as unknown[];
@@ -396,7 +401,6 @@ export class Menagerie extends Domain {
     }
 
     private cropCount = 0;
-    private crucibleThresholds: string[] = [];
     private greenStackCount = 0;
     private depthProgress = 0;
     private summoningBossKills = 0;
@@ -458,7 +462,7 @@ export class Menagerie extends Domain {
     getResourceBalances(): MenagerieResourceBalances {
         return { ...this.resourceBalances };
     }
-    getUsableResourceImageData(resource: MenagerieUsableResource): ImageData {
+    static getUsableResourceImageData(resource: MenagerieUsableResource): ImageData {
         const imageData: Record<MenagerieUsableResource, ImageData> = {
             blackStarsOwned: { location: "MenaBlackStar", width: 18, height: 17 },
             organicLabels: { location: "MenaOrganicLabelSeal", width: 29, height: 29 },
@@ -489,19 +493,11 @@ export class Menagerie extends Domain {
         return { ...this.lumiInputs };
     }
 
-    getLumiSaveInputs(): MenagerieLumiSaveInputs {
-        let crucibleArenaLevel = 0;
-        if (this.unlocks[8].owned) {
-            while (crucibleArenaLevel < 16 && this.savedCrucibleWave >= Number(this.crucibleThresholds[crucibleArenaLevel])) {
-                crucibleArenaLevel++;
-            }
-        }
 
+    getLumiSaveInputs(): MenagerieLumiSaveInputs {
         return {
             purpleJellyBonus: this.purpleJellyBonus,
             yellowConstructionBonus: this.yellowConstructionBonus,
-            crucibleBonus4: Number(crucibleArenaLevel > 4),
-            crucibleBonus14: Number(crucibleArenaLevel > 14),
         };
     }
 
@@ -512,6 +508,11 @@ export class Menagerie extends Domain {
         };
         const bankBundleL = Number(account.hasBundleL);
         const bankBundleM = Number(account.hasBundleM);
+        const eventShop = accountData.get("eventShop") as EventShop;
+        const eventShopBlackStars = Number(eventShop.isBonusOwned(60));
+        const eventShopOrganicLabels = 5 * Number(eventShop.isBonusOwned(61));
+        const companions = accountData.get("companions") as Companion[];
+        const ancientfishDoublers = getCompanionActiveBonus(companions, 149);
 
         this.availableUnlockCount = Math.round(
             Math.min(7, this.rank) + Math.floor(Math.max(0, this.rank - 7) / 2),
@@ -545,11 +546,12 @@ export class Menagerie extends Domain {
             );
         });
 
-        const mineheadDoublersOwned = Math.round(this.getBonusValue(8) + 3 * bankBundleL);
-        const sushiDoublersOwned = Math.round(this.getBonusValue(10) + 3 * bankBundleL);
-        const jellyOperatorDoublersOwned = Math.round(this.getBonusValue(12) + 3 * bankBundleL);
-        const blackStarsOwned = Math.round(this.getBonusValue(2) + 4 * bankBundleM);
-        const organicLabels = Math.round(this.getBonusValue(6));
+        // Ancientfish adds selection capacity without selecting upgrades.
+        const mineheadDoublersOwned = Math.round(this.getBonusValue(8) + (3 * bankBundleL + ancientfishDoublers));
+        const sushiDoublersOwned = Math.round(this.getBonusValue(10) + (3 * bankBundleL + ancientfishDoublers));
+        const jellyOperatorDoublersOwned = Math.round(this.getBonusValue(12) + (3 * bankBundleL + ancientfishDoublers));
+        const blackStarsOwned = Math.round(this.getBonusValue(2) + (4 * bankBundleM + eventShopBlackStars));
+        const organicLabels = Math.round(this.getBonusValue(6) + eventShopOrganicLabels);
         this.resourceBalances = {
             blackStarsOwned,
             blackStarsAvailable: Math.round(blackStarsOwned - this.blackStarsConsumed),
@@ -636,6 +638,9 @@ export class Menagerie extends Domain {
         };
         const alchemy = accountData.get("alchemy") as { getVialBonusForKey(bonusKey: string): number };
         const cards = accountData.get("cards") as { id: string; getLevels(): number }[];
+        const breeding = accountData.get("breeding") as { getCrucibleBonus(index: number): number };
+        const eventShop = accountData.get("eventShop") as EventShop;
+        const companions = accountData.get("companions") as Companion[];
         const bankBundleK = Number(account.hasBankBundle);
         const bankBundleL = Number(account.hasBundleL);
         const bankBundleM = Number(account.hasBundleM);
@@ -670,8 +675,8 @@ export class Menagerie extends Domain {
             bankBundleM,
             purpleJellyBonus: savedLumiInputs.purpleJellyBonus,
             clamWorkBonus8: Number(clamworks.isBonusUnlocked(8)),
-            crucibleBonus4: savedLumiInputs.crucibleBonus4,
-            crucibleBonus14: savedLumiInputs.crucibleBonus14,
+            crucibleBonus4: breeding.getCrucibleBonus(4),
+            crucibleBonus14: breeding.getCrucibleBonus(14),
             yellowConstructionBonus: savedLumiInputs.yellowConstructionBonus,
             atomBonus16: collider.atoms[16].getBonus(),
             zenithMarketBonus11: zenithMarket.getBonusForId(11),
@@ -679,6 +684,9 @@ export class Menagerie extends Domain {
             lumiVialBonus: alchemy.getVialBonusForKey("7lumiadd"),
             researchBonus164: research.getBonusForId(164),
             cardLevel: cards.find(card => card.id === "w7b10")!.getLevels(),
+            // Extra Lumi adds percentage points to the existing additive rate pool.
+            eventShopLumiBonus: 50 * Number(eventShop.isBonusOwned(62)),
+            maccieLumiPercent: getCompanionActiveBonus(companions, 116),
         };
 
         if (this.rank === 0) {
@@ -694,7 +702,8 @@ export class Menagerie extends Domain {
                                     + (lumiInputs.zenithMarketBonus11
                                         + (lumiInputs.dancingCoralBonus6
                                             + (lumiInputs.lumiVialBonus
-                                                + (lumiInputs.researchBonus164 + Math.min(5 * lumiInputs.cardLevel, 50))))))))));
+                                                + (lumiInputs.researchBonus164 + (Math.min(5 * lumiInputs.cardLevel, 50)
+                                                    + (lumiInputs.eventShopLumiBonus + lumiInputs.maccieLumiPercent)))))))))));
             this.lumiPerHour = 10
                 * (1 + lumiInputs.coralKidBonus10 / 100)
                 * (1 + Math.min(0.25, lumiInputs.superbitType69))

@@ -35,6 +35,50 @@ describe('public profile import', () => {
     expect(result.servervars).toEqual({ GameVERSION: 141 });
   });
 
+  test('reconstructs owned bundle summaries for save consumers', () => {
+    const data = {
+      bun_u: 1,
+      bon_a: '1',
+      ban_l: 0,
+      bin_a: '0',
+      bunWrong: 1,
+      unrelated_u: 1,
+    };
+    const originalData = structuredClone(data);
+    const result = importPublicProfile(profile({ data }));
+
+    expect(JSON.parse(result.BundlesReceived)).toEqual({ bun_u: 1, bon_a: 1 });
+    expect(data).toEqual(originalData);
+  });
+
+  test('merges paid bundle leaves into existing ownership', () => {
+    const data = {
+      BundlesReceived: '{"bun_u":1,"ban_m":1}',
+      bun_u: 1,
+      bin_a: '1',
+    };
+    const originalData = structuredClone(data);
+    const result = importPublicProfile(profile({ data }));
+
+    expect(JSON.parse(result.BundlesReceived)).toEqual({ bun_u: 1, ban_m: 1, bin_a: 1 });
+    expect(data).toEqual(originalData);
+  });
+
+  test('returns an encoded empty bundle map when ownership is absent', () => {
+    const result = importPublicProfile(profile());
+
+    expect(JSON.parse(result.BundlesReceived)).toEqual({});
+  });
+
+  test('merges paid bundle leaves into a native ownership map', () => {
+    const result = importPublicProfile(profile({ data: {
+      BundlesReceived: { bun_u: 1, ban_m: 1 },
+      bin_a: 1,
+    } }));
+
+    expect(JSON.parse(result.BundlesReceived)).toEqual({ bun_u: 1, ban_m: 1, bin_a: 1 });
+  });
+
   test('matches only exact keys and numeric suffixes', () => {
     const result = importPublicProfile(profile({ data: {
       AttackLoadout_backup: [1],
@@ -79,5 +123,6 @@ describe('public profile import', () => {
     expect(() => importPublicProfile(profile({ data: { playerNames: ['Other'] } }))).toThrow(/conflicts/);
     expect(() => importPublicProfile(profile({ data: { AttackLoadout_3: '{bad json' } }))).toThrow(/malformed JSON/);
     expect(() => importPublicProfile(profile({ data: { AttackLoadout_3: 17 } }))).toThrow(/AttackLoadout_3/);
+    expect(() => importPublicProfile(profile({ data: { BundlesReceived: '{bad json' } }))).toThrow(/BundlesReceived.*malformed JSON/);
   });
 });

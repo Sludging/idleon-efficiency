@@ -1,5 +1,5 @@
 {
-  "description": "Compare Menagerie mission, rank, unlock, bonus, and resource states with matching offline v1.23 outputs for the retained account save",
+  "description": "Compare Menagerie mission, rank, unlock, bonus, and resource states with matching offline v1.24 outputs for the retained account save",
   "target": "Menagerie account state",
   "extractions": [
     {
@@ -32,6 +32,11 @@
       "label": "extra_bundle_flags",
       "expression": "[idleon.callFunction(\"Thingies\", \"Have_ban_l\", 0, 0), idleon.callFunction(\"Thingies\", \"Have_ban_m\", 0, 0)]",
       "description": "Native Menagerie resource bundle factors"
+    },
+    {
+      "label": "doubler_balances",
+      "expression": "({ minehead: [idleon.callFunction(\"MenagerieStuff\", \"MineheadDoublersOwned\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"MineheadDoublersLEFT\", 0, 0)], sushi: [idleon.callFunction(\"MenagerieStuff\", \"SushiDoublersOwned\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"SushiDoublersLEFT\", 0, 0)], jellyOperator: [idleon.callFunction(\"MenagerieStuff\", \"JellyOpDoublersOwned\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"JellyOpDoublersLEFT\", 0, 0)] })",
+      "description": "Earned and remaining upgrade doublers for Minehead, Sushi Station, and Jelly Operator"
     },
     {
       "label": "side_jellyfish",

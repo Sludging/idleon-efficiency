@@ -3,9 +3,11 @@
 import { useState } from "react";
 import { Box, Text } from "grommet";
 import IconImage from "../../base/IconImage";
+import { DoublerBadge, DoublerSummary } from "../../base/DoublerStatus";
 import { UpgradeTable } from "../../account/shared/UpgradeTable";
 import type { FilterOptions } from "../../account/shared/UpgradeTableFilters";
 import { SushiUpgrade } from "../../../data/domain/world-7/sushiUpgrade";
+import { Menagerie } from "../../../data/domain/menagerie";
 import { notateNumber } from "../../../data/utility";
 import { sushiBucksImage } from "./sushiImages";
 
@@ -28,7 +30,12 @@ const sortOptions = [
     { label: "Next cost", value: "nextCost" }
 ];
 
-export const SushiUpgrades = ({ upgrades, bucks }: { upgrades: SushiUpgrade[]; bucks: number }) => {
+export const SushiUpgrades = ({ upgrades, bucks, sushiDoublersOwned, sushiDoublersRemaining }: {
+    upgrades: SushiUpgrade[];
+    bucks: number;
+    sushiDoublersOwned: number;
+    sushiDoublersRemaining: number;
+}) => {
     const [filters, setFilters] = useState<FilterOptions>({
         hideLocked: false,
         hideMaxed: false,
@@ -90,7 +97,13 @@ export const SushiUpgrades = ({ upgrades, bucks }: { upgrades: SushiUpgrade[]; b
             render: (row: SushiUpgradeRow) => (
                 <Box direction="row" gap="small" align="center" style={{ opacity: row.locked ? 0.5 : 1, minWidth: "180px" }}>
                     <IconImage data={row.upgrade.getImageData()} scale={0.5} />
-                    <Text size="xsmall">{row.upgrade.data.name}</Text>
+                    <Box direction="row" gap="xsmall" align="center">
+                        <Text size="xsmall">{row.upgrade.data.name}</Text>
+                        {row.upgrade.menagerieDoubled && <DoublerBadge
+                            image={Menagerie.getUsableResourceImageData("sushiDoublers")}
+                            label="Sushi Station doubler applied"
+                        />}
+                    </Box>
                 </Box>
             )
         },
@@ -149,6 +162,15 @@ export const SushiUpgrades = ({ upgrades, bucks }: { upgrades: SushiUpgrade[]; b
             onFiltersChange={setFilters}
             sortOptions={sortOptions}
             searchPlaceholder="Search upgrade or effect..."
+            additionalFilters={
+                <DoublerSummary
+                    label="Doublers"
+                    owned={sushiDoublersOwned}
+                    available={sushiDoublersRemaining}
+                    image={Menagerie.getUsableResourceImageData("sushiDoublers")}
+                    description="Each doubler doubles an upgrade's quantity."
+                />
+            }
             columns={columns}
             data={displayedRows}
             primaryKey="id"

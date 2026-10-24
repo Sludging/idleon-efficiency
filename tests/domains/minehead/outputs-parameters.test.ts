@@ -1,7 +1,7 @@
 import { getCompanionActiveBonus, isCompanionLevelTwo } from '../../../data/domain/companions';
 import { Minehead } from '../../../data/domain/world-7/minehead';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
+import { ExtractionResults, getExtractedValue, loadExtractionResults, normalizeExtractedValue, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
 
 const saveName = 'latest';
@@ -25,21 +25,11 @@ const descriptionValueExtractionKeys: Record<number, string> = {
 };
 
 const parameters: ParameterTestSpec[] = [
-  ...[0, 4, 5, 6, 7, 12, 21, 22, 25, 27, 28].map(index => ({
-    description: `Minehead upgrade ${index} effect`,
-    extractionKey: `minehead_upgrade_quantity_${index}`,
-    domainExtractor: (data: TestData) => (data.get('minehead') as Minehead).getUpgradeBonus(index),
-  })),
   ...[1, 14, 24, 26, 28].map(index => ({
     description: `Minehead upgrade ${index} native description value`,
     extractionKey: descriptionValueExtractionKeys[index],
     domainExtractor: (data: TestData) => getUpgradeDescriptionValue(data, index),
   })),
-  {
-    description: 'Minehead opponent reward 6 used by currency gain',
-    extractionKey: 'minehead_bonus_6',
-    domainExtractor: (data: TestData) => (data.get('minehead') as Minehead).getBonusFromIndex(6),
-  },
   {
     description: 'Research Grid 167 base damage bonus',
     extractionKey: 'minehead_research_167',
@@ -141,5 +131,21 @@ describe('Minehead direct calculated input parameters', () => {
     it(`matches ${spec.description}`, () => {
       expect(spec.domainExtractor(gameData)).toMatchLiveGame(getExtractedValue(extractionResults, spec.extractionKey), 0);
     });
+  });
+  [0, 4, 5, 6, 7, 12, 21, 22, 25, 27, 28].forEach(index => {
+    it(`matches Minehead upgrade ${index} effect`, () => {
+      const nativeValue = normalizeExtractedValue(
+        extractionResults.extractions.minehead_upgrade_quantities.result[index],
+      );
+      const domainValue = (gameData.get('minehead') as Minehead).getUpgradeBonus(index);
+      expect(domainValue).toMatchLiveGame(nativeValue, 0);
+    });
+  });
+  it('matches Minehead opponent reward 6 used by currency gain', () => {
+    const nativeValue = normalizeExtractedValue(
+      extractionResults.extractions.minehead_opponent_bonuses.result[6],
+    );
+    const domainValue = (gameData.get('minehead') as Minehead).getBonusFromIndex(6);
+    expect(domainValue).toMatchLiveGame(nativeValue, 0);
   });
 });

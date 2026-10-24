@@ -21,8 +21,12 @@ import { CircleInformation } from 'grommet-icons';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
 import { LandRankDisplay } from '../../../components/world-6/farming/landRank';
+import { ExoticMarketDisplay } from '../../../components/world-6/farming/exoticMarket';
+import { StickersDisplay } from '../../../components/world-6/farming/stickers';
+import useHydrated from '../../../lib/hooks/useHydrated';
 
 function Farming() {
+    const hydrated = useHydrated();
     const [activeTab, setActiveTab] = useState<string>("Plots");
     const [silkRodeChip, setSilkrode] = useState(false);
     const [starSignEvoEquipped, setStarSignEvoEquipped] = useState(false);
@@ -41,14 +45,15 @@ function Farming() {
     const isStarSignOGActive = starSignOGInfinity || starSignOGEquipped;
     const isStarSignEvoActive = starSignEvoInfinity || starSignEvoEquipped;
 
-    const tabsToShow = ["Plots", "Market Upgrades", "Crop Depot"];
-    if (farming.canLevelLandRank) {
-        tabsToShow.push("Land Rank");
-    }
-
-    if (!farming) {
+    if (!hydrated || !farming) {
         return <>Loading...</>
     } else {
+        const tabsToShow = ["Plots", "Market Upgrades", "Crop Depot"];
+        if (farming.canLevelLandRank) {
+            tabsToShow.push("Land Rank");
+        }
+        tabsToShow.push("Exotic Market", "Stickers");
+
         return (
             <Box>
                 <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Farming</Heading>
@@ -214,6 +219,8 @@ function Farming() {
                     {activeTab == "Market Upgrades" && <MarketUpgradesDisplay/>}
                     {activeTab == "Crop Depot" && <CropDepotDisplay/>}
                     {activeTab == "Land Rank" && <LandRankDisplay/>}
+                    {activeTab == "Exotic Market" && <ExoticMarketDisplay farming={farming} />}
+                    {activeTab == "Stickers" && <StickersDisplay farming={farming} />}
                 </Box>
             </Box>
         )

@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState } from 'react';
+import { useContext, useState } from 'react';
 import type { ReactNode } from 'react';
 import { Box, Meter, Text, ThemeContext } from 'grommet';
 import type { DataTableProps, ThemeType } from 'grommet';
@@ -12,7 +12,7 @@ import { UpgradeTable } from '../../account/shared/UpgradeTable';
 import type { FilterOptions } from '../../account/shared/UpgradeTableFilters';
 import type { ImageData } from '../../../data/domain/imageData';
 import type { Spelunking, Upgrade } from '../../../data/domain/world-7/spelunking';
-import { commaNotation, notateNumber } from '../../../data/utility';
+import { commaNotation, notateNumber, toTime } from '../../../data/utility';
 
 interface SpelunkingPart3Props {
     spelunking: Spelunking;
@@ -30,6 +30,12 @@ interface ShopRow {
 
 const overstimIcon: ImageData = { location: 'CaveShopUpg7', width: 34, height: 34 };
 const trackometerIcon: ImageData = { location: 'CaveShopUpg60', width: 34, height: 34 };
+const overstimEstimateLabels = {
+    locked: 'Locked',
+    unavailable: 'Unavailable',
+    ready: 'Ready',
+    'pending-update': 'Pending game update',
+};
 
 const ElixirGrid = styled.div`
     display: grid;
@@ -293,28 +299,27 @@ export function SpelunkingShop({ spelunking }: SpelunkingPart3Props) {
         sortBy: 'default',
     });
     const theme = useContext(ThemeContext);
-    const rows = useMemo(() => {
-        const search = filters.searchText.trim().toLocaleLowerCase();
-        return spelunking.upgrades
-            .map((upgrade): ShopRow => ({
-                id: upgrade.index,
-                upgrade,
-                description: formatShopDescription(upgrade, spelunking),
-                totalBonus: formatShopTotalBonus(upgrade, spelunking),
-                locked: upgrade.level === -1,
-                maxed: upgrade.data.maxLevel !== 99999 && upgrade.level >= upgrade.data.maxLevel,
-            }))
-            .filter(row => !filters.hideLocked || !row.locked)
-            .filter(row => !filters.hideMaxed || !row.maxed)
-            .filter(row => search.length === 0
-                || row.upgrade.data.name.toLocaleLowerCase().includes(search)
-                || row.description.toLocaleLowerCase().includes(search))
-            .sort((left, right) => {
-                if (filters.sortBy === 'name') return left.upgrade.data.name.localeCompare(right.upgrade.data.name);
-                if (filters.sortBy === 'level') return right.upgrade.level - left.upgrade.level;
-                return left.upgrade.index - right.upgrade.index;
-            });
-    }, [filters, spelunking]);
+    const search = filters.searchText.trim().toLocaleLowerCase();
+    // Account imports mutate this domain, so cached rows can retain locked states.
+    const rows = spelunking.upgrades
+        .map((upgrade): ShopRow => ({
+            id: upgrade.index,
+            upgrade,
+            description: formatShopDescription(upgrade, spelunking),
+            totalBonus: formatShopTotalBonus(upgrade, spelunking),
+            locked: upgrade.level === -1,
+            maxed: upgrade.data.maxLevel !== 99999 && upgrade.level >= upgrade.data.maxLevel,
+        }))
+        .filter(row => !filters.hideLocked || !row.locked)
+        .filter(row => !filters.hideMaxed || !row.maxed)
+        .filter(row => search.length === 0
+            || row.upgrade.data.name.toLocaleLowerCase().includes(search)
+            || row.description.toLocaleLowerCase().includes(search))
+        .sort((left, right) => {
+            if (filters.sortBy === 'name') return left.upgrade.data.name.localeCompare(right.upgrade.data.name);
+            if (filters.sortBy === 'level') return right.upgrade.level - left.upgrade.level;
+            return left.upgrade.index - right.upgrade.index;
+        });
 
     const columns: NonNullable<DataTableProps<ShopRow>['columns']> = [
         {
@@ -474,6 +479,10 @@ export function SpelunkingManicModeDetail({ spelunking }: SpelunkingPart3Props) 
 
 export function SpelunkingPart3Summary({ spelunking }: SpelunkingPart3Props) {
     const { overstim, trackometer } = spelunking;
+    const nextLevelEstimate = overstim.nextLevelEstimate;
+    const nextLevelEstimateText = nextLevelEstimate.status === 'estimated'
+        ? `~${toTime(nextLevelEstimate.hours * 3600).trim()}`
+        : overstimEstimateLabels[nextLevelEstimate.status];
     return (
         <>
             <Box gap="small" data-spelunking-summary-card="amber">
@@ -487,21 +496,37 @@ export function SpelunkingPart3Summary({ spelunking }: SpelunkingPart3Props) {
                     </Text>
                     <Text size="xsmall" color="accent-2">Balance</Text>
                 </Box>
+                <SummaryMetric label="Multiplier" value={`${notateNumber(spelunking.savedAmberGainMultiplier, 'Big')}×`}
+                    detail={<Text size="small" color="dark-1" data-spelunking-amber-preview-detail>
+                        Saved-data Amber multiplier at base depth. Excludes active elixir and destroyed-object effects.
+                    </Text>}
+                />
             </Box>
             <Box gap="small" data-spelunking-part3-summary>
                 <Box direction="row" align="center" height="32px">
                     <Text size="small">Progression</Text>
                 </Box>
                 <Box gap="small">
-                    <SummaryMetric label="Overstim" value={`Level ${commaNotation(overstim.level)}`} icon={overstimIcon}
-                        progress={{ fill: overstim.fill, threshold: overstim.threshold, label: 'Overstim saved progress' }}
-                        detail={<Box gap="small" data-spelunking-overstim-detail>
-                            <DetailRows rows={[
-                                ['Progress', `${commaNotation(overstim.fill)}/${commaNotation(overstim.threshold)}`],
-                                ['Amber multiplier', `${formatMultiplier(overstim.amberMultiplier)}×`],
-                            ]} />
-                        </Box>}
-                    />
+                    <Box gap="xxsmall">
+                        <SummaryMetric label="Overstim" value={`Level ${commaNotation(overstim.level)}`} icon={overstimIcon}
+                            progress={{ fill: overstim.fill, threshold: overstim.threshold, label: 'Overstim saved progress' }}
+                            detail={<Box gap="small" data-spelunking-overstim-detail>
+                                <DetailRows rows={[
+                                    ['Progress', `${commaNotation(overstim.fill)}/${commaNotation(overstim.threshold)}`],
+                                    ['Remaining fill', notateNumber(overstim.remainingFill)],
+                                    ['Potential fill/hour', notateNumber(overstim.potentialFillPerHour)],
+                                    ['Fill bonus', `${formatSourceBonus(overstim.fillBonusPercent)}%`],
+                                    ['Amber multiplier', `${formatMultiplier(overstim.amberMultiplier)}×`],
+                                ]} />
+                                <Text size="small" color="dark-1">Potential fill/hour uses all characters' stamina recharge once they are full. Missing stamina fills before excess stamina fills Overstim.</Text>
+                                <Text size="small" color="dark-1">The next-level estimate assumes no further stamina is spent and current bonuses stay fixed.</Text>
+                            </Box>}
+                        />
+                        <Box direction="row" justify="between" align="start" gap="small">
+                            <Text size="xsmall" color="accent-2" data-spelunking-overstim-remaining>{notateNumber(overstim.remainingFill)} fill remaining</Text>
+                            <Text size="xsmall" color="accent-2" textAlign="end" data-spelunking-overstim-next-level>Next level: {nextLevelEstimateText}</Text>
+                        </Box>
+                    </Box>
                     <SummaryMetric label="Trackometer" value={`Level ${commaNotation(trackometer.level)}`} icon={trackometerIcon}
                         progress={{ fill: trackometer.fill, threshold: trackometer.threshold, label: 'Trackometer saved progress' }}
                         detail={<Box gap="small" data-spelunking-trackometer-detail>

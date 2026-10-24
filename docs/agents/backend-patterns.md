@@ -27,6 +27,14 @@ For repository-backed concepts selected under [MODEL-01](../../CODING_STANDARDS.
 
 [`FriendBonus`](../../data/domain/friends.tsx) wraps generated `FriendBonusBase` data and owns active/account-level state and its bonus calculation. [`Meal`](../../data/domain/world-4/cooking.tsx) and [`MainframeBonus`](../../data/domain/world-4/lab.tsx) show other uses of website wrappers and `fromBase`. Keep generated repositories and models as game data sources; put website state and behavior in handwritten domain code.
 
+### Raw static repository catalogue
+
+Use `repositories.get('Item')` to read raw `ItemRepo` records as `DeepReadonly` data. The catalogue returns raw records, not website-owned wrappers; use wrappers only when a concept needs website state or behavior.
+
+The catalogue loads each repository lazily and freezes its records and nested data. Each `StaticRepositories` instance caches its own loaded records. Callers may migrate incrementally and do not need to preserve repository initialization order.
+
+Run `yarn repo:registry` to regenerate the typed registry. The `dev` and `build` scripts run this generator automatically, so new `*Repo.ts` files register before those commands start.
+
 ### Save-defined entities and relationships
 
 `Kitchen` holds kitchen state and behavior, and `Player` represents a character with its own state; neither needs repository inheritance merely to be a class. Sushi's `SushiBoardSlot` and `SushiFireplace` illustrate data-only relationships as typed records with named fields instead of untyped tuples in [`sushi.tsx`](../../data/domain/world-7/sushi.tsx).
@@ -43,6 +51,12 @@ For example, Lab's ordinary mainframe bonuses share `MainframeBonus` behavior. `
 
 Keep the established `init` → `parse` → `calculate` boundaries: initialize domain structures, parse the save into state, then calculate derived values in the registered dependency order. Updaters prepare cross-domain inputs on their owning object; consumer-facing getters may perform the final formula from that prepared state. `Totalizer` is one example. Read the [architecture skill](../../skills/architecture/SKILL.md) when changing pipeline dependencies rather than duplicating its ordering tutorial here.
 
+Account-level getters must also work before a save loads. Initialize owned contribution inputs with neutral values, then replace them during calculation. Poppy's bonus inputs, Farming's Land Rank multipliers, and Hat Rack's empty contribution map illustrate this pattern. Use neutral values when resetting these inputs, and accept an empty roster for account projections. Keep validation for requests that require an actual player.
+
+When parsing reuses character-owned objects, reset their prepared inputs before replacing saved values. The Talent reset hook clears class-level caps without rebuilding every talent. Prayer passive fractions and Crucible progress also reset to zero until their calculation runs.
+
+Equipment and Obols cache contributions, not final character stats. Their empty property channels start at zero; final stats still require actor-specific calculation.
+
 For account-wide mechanics that use a selected or best character contribution, select and prepare it once, then expose the result to consumers. Lab stores `bestBuboPlayerID` and prepares the connection bonus in [`lab.tsx`](../../data/domain/world-4/lab.tsx). This illustrates where selection belongs, not endorsement of Lab's specific player-selection expression for other calculations. Preserve explicit player context when a result is genuinely per-character; do not replace it with an account-wide value. Skilling's player-specific cache and callers are useful references in [`skilling.tsx`](../../data/domain/skilling.tsx).
 
 For calculations currently called only by UI code, apply [MODEL-01](../../CODING_STANDARDS.md#model-01--model-responsible-concepts) with the preparation workflow above. Follow the UI guide for presentation, not calculation ownership.
@@ -50,6 +64,8 @@ For calculations currently called only by UI code, apply [MODEL-01](../../CODING
 ## Make repeated processing safe
 
 Initialization, parsing, and recalculation have been called more than once. Processing the same inputs again should not duplicate records or stack a bonus simply because a phase reran. Reset or replace derived collections and flags before rebuilding them, or otherwise ensure the operation overwrites its prior result. For example, `updateWorshipTotalizer` rebuilds unlocked bonuses, and Lab resets derived flags before applying current assignments. Treat these as techniques, not proof that every phase is safe: inspect the full lifecycle you change and preserve character-specific state where required.
+
+Button resets queue progress during parsing so a new save cannot inherit the previous save's task readiness.
 
 ## Reuse existing helpers
 

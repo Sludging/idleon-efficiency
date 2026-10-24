@@ -14,7 +14,7 @@ import { Alchemy } from '../world-2/alchemy/alchemy';
 import { Sigils } from '../world-2/alchemy/sigils';
 import { Dungeons } from '../dungeons';
 import { POExtra } from '../world-2/postoffice';
-import { initTomeRepo } from '../data/TomeRepo';
+import type { DeepReadonly, StaticRepositories } from '../repositories';
 import { TomeModel } from '../model/tomeModel';
 import { TomeScalingEnum } from '../enum/tomeScalingEnum';
 import { Worship } from '../world-3/worship';
@@ -140,12 +140,18 @@ export class TomeLine {
     private lineScores: number[] = [];
     unlocked: boolean = false;
 
-    constructor(public index: number, public data: TomeModel, charCount: number) {
-        for (let i = 0; i < charCount; i++) {
-            // 1000 is the default value for lines that are supposed to be "the lowest the better"
-            this.currentValues.push(data.scalingType == TomeScalingEnum.inverseDecay ? 1000 : 0);
-            this.lineScores.push(0);
-        }
+    private getDefaultCurrentValue = (): number => {
+        return this.data.scalingType == TomeScalingEnum.inverseDecay ? 1000 : 0;
+    }
+
+    constructor(public index: number, public data: DeepReadonly<TomeModel>, charCount: number) {
+        this.resetPlayerValues(charCount);
+    }
+
+    resetPlayerValues(charCount: number): void {
+        this.currentValues = Array.from({ length: charCount }, () => this.getDefaultCurrentValue());
+        this.lineScores = Array.from({ length: charCount }, () => 0);
+        this.unlocked = false;
     }
 
     getLineMultiplyer = (playerIndex: number): number => {
@@ -207,10 +213,7 @@ export class TomeLine {
     }
 
     getPlayerCurrentValueDisplay = (playerIndex: number): string => {
-        // Just to be safe
-        if (playerIndex >= this.currentValues.length) {
-            return '';
-        }
+        const currentValue = this.currentValues[playerIndex] ?? this.getDefaultCurrentValue();
 
         switch (this.index) {
             // Big values
@@ -225,10 +228,10 @@ export class TomeLine {
             case 64:
             case 78:
             case 102:
-                return nFormatter(this.currentValues[playerIndex]);
+                return nFormatter(currentValue);
             // Not so big values but with lots of decimals and wanna keep a bit of it
             case 18:
-                return nFormatter(Math.round(100 * this.currentValues[playerIndex]) / 100, "CommaNotation");
+                return nFormatter(Math.round(100 * currentValue) / 100, "CommaNotation");
             // Not so big values with lots of decimals and wanna round it to match in-game display
             case 13:
             case 16:
@@ -237,11 +240,11 @@ export class TomeLine {
             case 47:
             case 53:
             case 91:
-                return nFormatter(Math.round(this.currentValues[playerIndex]), "CommaNotation");
+                return nFormatter(Math.round(currentValue), "CommaNotation");
             case 66:
-                return nFormatter(this.currentValues[playerIndex], "Bits");
+                return nFormatter(currentValue, "Bits");
             default:
-                return nFormatter(this.currentValues[playerIndex], "CommaNotation");
+                return nFormatter(currentValue, "CommaNotation");
         }
     }
 
@@ -315,7 +318,13 @@ export class Tome extends Domain {
         ]
     }
 
-    init(_allItems: Item[], _charCount: number) {
+    // Keep static lines available before parsing attaches real per-player values.
+    init(_allItems: Item[], charCount: number, repositories: StaticRepositories) {
+        const tomeModels = repositories.get("Tome");
+        this.lines = tomeModels
+            .map(lineInfo => new TomeLine(lineInfo.index, lineInfo.data, charCount))
+            .sort((line1, line2) => line1.getDisplayOrder() - line2.getDisplayOrder());
+
         const bonusModels = [
             ...initTomeBonusRepo().map(bonus => bonus.data),
             ...localTomeBonusModels,
@@ -323,6 +332,14 @@ export class Tome extends Domain {
 
         this.epilogueBonuses = TomeEpilogueBonus.fromBase(initTomeEpilogueBonusRepo());
         this.bonuses = bonusModels.map(bonus => new TomeBonus(bonus.index, bonus));
+        this.charCount = charCount;
+        this.highestScore = 0;
+        this.highestScoreIndex = 0;
+        this.scoreThresholds = [];
+        this.unlocked = false;
+        this.totalAccountLevel = 0;
+        this.totalSkillLevel = 0;
+        this.accountSkillLevels = [];
         return this;
     }
 
@@ -335,15 +352,21 @@ export class Tome extends Domain {
             ((data.get(`Lv0_${playerIndex}`) ?? []) as number[]).slice(1, 22).map(Number));
 
         tome.charCount = charCount;
+        tome.totalAccountLevel = 0;
+        tome.totalSkillLevel = 0;
+        tome.highestScore = 0;
+        tome.highestScoreIndex = 0;
+        tome.unlocked = false;
 
         tome.scoreThresholds = [];
         if (serverVars && Object.keys(serverVars).includes("TomePct")) {
             tome.scoreThresholds = serverVars["TomePct"] as number[];
         }
 
-        tome.lines = initTomeRepo()
-            .map(lineInfo => new TomeLine(lineInfo.index, lineInfo.data, tome.charCount))
-            .sort((line1, line2) => line1.getDisplayOrder() - line2.getDisplayOrder());
+        tome.lines.forEach(line => line.resetPlayerValues(charCount));
+        tome.epilogueBonuses.forEach(bonus => {
+            bonus.unlocked = false;
+        });
 
         // Protect against old accounts.
         if (!spelunk || spelunk.length == 0) {
@@ -356,6 +379,7 @@ export class Tome extends Domain {
             bonus.unlocked = spelunkEpilogUnlocks > bonus.index;
         });
     }
+
 
     updateHighestScore = () => {
         this.highestScore = 0;

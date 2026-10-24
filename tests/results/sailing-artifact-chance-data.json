@@ -2,11 +2,11 @@
   "extractions": {
     "boat_0_artifact_find_multiplier": {
       "expression": "idleon.callFunction(\"Sailing\", \"BoatArtiMulti\", 0, 0)",
-      "result": 10868678787.940706
+      "result": 10874669071.52262
     },
     "boat_1_artifact_find_multiplier": {
       "expression": "idleon.callFunction(\"Sailing\", \"BoatArtiMulti\", 1, 0)",
-      "result": 11957954765.282421
+      "result": 11964545404.448538
     },
     "sailing_artifact_bonus_3": {
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 3, 0)",
@@ -106,7 +106,7 @@
     },
     "tome_epilogue_bonus_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 3, 0)",
-      "result": 153.42057032987418
+      "result": 153.56024333994154
     },
     "voting_bonus_20": {
       "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 20, 0)",
@@ -127,6 +127,91 @@
     "gaming_palette_bonus_5": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 5, 0)",
       "result": 218.91891891891893
+    },
+    "boat_artifact_find_multipliers": {
+      "expression": "(()=>{const boats=idleon.engine.getGameAttribute(\"Boats\");const sailing=idleon.engine.getGameAttribute(\"Sailing\");return boats.flatMap((boat,index)=>index<Math.round(Number(sailing[2][1])+1)&&Number(boat[3])+Number(boat[5])!==0?[{index,multiplier:idleon.callFunction(\"Sailing\",\"BoatArtiMulti\",index,0)}]:[])})()",
+      "result": [
+        {
+          "index": 0,
+          "multiplier": 10874669071.52262
+        },
+        {
+          "index": 1,
+          "multiplier": 11964545404.448538
+        },
+        {
+          "index": 2,
+          "multiplier": 10874669071.52262
+        },
+        {
+          "index": 3,
+          "multiplier": 13054421737.374449
+        },
+        {
+          "index": 4,
+          "multiplier": 10874669071.52262
+        },
+        {
+          "index": 5,
+          "multiplier": 10874669071.52262
+        },
+        {
+          "index": 6,
+          "multiplier": 10874669071.52262
+        },
+        {
+          "index": 7,
+          "multiplier": 11855557771.155943
+        },
+        {
+          "index": 8,
+          "multiplier": 10874669071.52262
+        },
+        {
+          "index": 9,
+          "multiplier": 12945434104.081858
+        },
+        {
+          "index": 10,
+          "multiplier": 10874669071.52262
+        },
+        {
+          "index": 11,
+          "multiplier": 10874669071.52262
+        },
+        {
+          "index": 12,
+          "multiplier": 10874669071.52262
+        },
+        {
+          "index": 13,
+          "multiplier": 10874669071.52262
+        },
+        {
+          "index": 14,
+          "multiplier": 10874669071.52262
+        },
+        {
+          "index": 15,
+          "multiplier": 10874669071.52262
+        },
+        {
+          "index": 16,
+          "multiplier": 11637582504.57076
+        },
+        {
+          "index": 17,
+          "multiplier": 10874669071.52262
+        },
+        {
+          "index": 18,
+          "multiplier": 10874669071.52262
+        },
+        {
+          "index": 19,
+          "multiplier": 10874669071.52262
+        }
+      ]
     }
   },
   "errors": {}

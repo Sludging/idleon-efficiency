@@ -1,0 +1,382 @@
+{
+  "extractions": {
+    "ninja_progression": {
+      "expression": "(()=>{var A=k=>idleon.getAttr(k),N=idleon.allScripts.ActorEvents_579._customBlock_Ninja;return A(\"GetPlayersUsernames\").map((name,index)=>{var row=A(\"Ninja\")[index],floor=Number(row[0]),slots=A(\"Ninja\").slice(12+4*index,16+4*index),weapon=slots[1][0],level=Number(A(\"PlayerDATABASE\").h[name].h.Lv0[17]),timer=Number(row[1]);return {index,floor,level,activity:!N(\"PlayerUntied\",index,0)||timer===0?\"Tied\":timer<0?\"KnockedOut\":N(\"DoorMaxHP\",floor,0)>Number(A(\"Ninja\")[100][floor])&&weapon===\"NjWep0\"?\"Breaching\":A(\"GetPlayersUsernames\").some((_,j)=>Number(A(\"Ninja\")[j][0])===floor&&!N(\"PlayerUntied\",j,0))&&weapon===\"NjWep1\"?\"Untying\":\"Sneaking\",stealth:N(\"Stealth\",index,0),detectionPercent:100*N(\"DetectionDEC\",index,0),equipment:slots.map(slot=>slot[0]===\"Blank\"||slot[0]===\"\"||slot[0]===\"_\"?null:({id:slot[0],level:Number(slot[1])}))}})})()",
+      "result": [
+        {
+          "index": 0,
+          "floor": 6,
+          "level": 1058,
+          "activity": "Sneaking",
+          "stealth": 2.6337412442702267e+44,
+          "detectionPercent": 99.88694773966058,
+          "equipment": [
+            {
+              "id": "NjItem11",
+              "level": 0
+            },
+            {
+              "id": "NjGl2",
+              "level": 331
+            },
+            {
+              "id": "NjTr17",
+              "level": 4822
+            },
+            {
+              "id": "NjTr4",
+              "level": 4234
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "floor": 6,
+          "level": 1058,
+          "activity": "Sneaking",
+          "stealth": 2.6204505935226694e+44,
+          "detectionPercent": 99.88751765201096,
+          "equipment": [
+            {
+              "id": "NjItem5",
+              "level": 0
+            },
+            {
+              "id": "NjGl2",
+              "level": 402
+            },
+            {
+              "id": "NjTr17",
+              "level": 4779
+            },
+            {
+              "id": "NjTr4",
+              "level": 4009
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "floor": 6,
+          "level": 1058,
+          "activity": "KnockedOut",
+          "stealth": 2.6044163262142675e+44,
+          "detectionPercent": 99.88820522041624,
+          "equipment": [
+            {
+              "id": "NjItem12",
+              "level": 0
+            },
+            {
+              "id": "NjGl2",
+              "level": 127
+            },
+            {
+              "id": "NjTr17",
+              "level": 4525
+            },
+            {
+              "id": "NjTr4",
+              "level": 3909
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "floor": 6,
+          "level": 1057,
+          "activity": "Sneaking",
+          "stealth": 2.629434809646502e+44,
+          "detectionPercent": 99.88713240192584,
+          "equipment": [
+            {
+              "id": "NjItem9",
+              "level": 0
+            },
+            {
+              "id": "NjGl2",
+              "level": 1377
+            },
+            {
+              "id": "NjTr17",
+              "level": 4724
+            },
+            {
+              "id": "NjTr4",
+              "level": 4277
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "floor": 6,
+          "level": 1059,
+          "activity": "Breaching",
+          "stealth": 2.071503326389449e+44,
+          "detectionPercent": 99.9110620583356,
+          "equipment": [
+            {
+              "id": "NjItem1",
+              "level": 0
+            },
+            {
+              "id": "NjWep0",
+              "level": 2458
+            },
+            {
+              "id": "NjTr17",
+              "level": 3953
+            },
+            {
+              "id": "NjTr4",
+              "level": 4101
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "floor": 6,
+          "level": 1057,
+          "activity": "Sneaking",
+          "stealth": 2.1109422145918424e+44,
+          "detectionPercent": 99.90937018386707,
+          "equipment": [
+            {
+              "id": "NjItem4",
+              "level": 0
+            },
+            {
+              "id": "NjGl1",
+              "level": 1468
+            },
+            {
+              "id": "NjTr17",
+              "level": 4823
+            },
+            {
+              "id": "NjTr4",
+              "level": 4387
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "floor": 6,
+          "level": 997,
+          "activity": "Sneaking",
+          "stealth": 1.2826364248384352e+36,
+          "detectionPercent": 99.99999999944886,
+          "equipment": [
+            {
+              "id": "NjItem6",
+              "level": 0
+            },
+            {
+              "id": "NjGl1",
+              "level": 416
+            },
+            {
+              "id": "NjTr16",
+              "level": 4568
+            },
+            {
+              "id": "NjTr16",
+              "level": 4940
+            }
+          ]
+        },
+        {
+          "index": 7,
+          "floor": 6,
+          "level": 997,
+          "activity": "Sneaking",
+          "stealth": 1.2835158245949953e+36,
+          "detectionPercent": 99.99999999944849,
+          "equipment": [
+            {
+              "id": "NjItem5",
+              "level": 0
+            },
+            {
+              "id": "NjGl1",
+              "level": 1353
+            },
+            {
+              "id": "NjTr16",
+              "level": 4489
+            },
+            {
+              "id": "NjTr16",
+              "level": 4750
+            }
+          ]
+        },
+        {
+          "index": 8,
+          "floor": 6,
+          "level": 997,
+          "activity": "Sneaking",
+          "stealth": 1.2821189710542292e+36,
+          "detectionPercent": 99.99999999944909,
+          "equipment": [
+            {
+              "id": "NjItem5",
+              "level": 0
+            },
+            {
+              "id": "NjGl1",
+              "level": 1430
+            },
+            {
+              "id": "NjTr16",
+              "level": 4765
+            },
+            {
+              "id": "NjTr16",
+              "level": 4853
+            }
+          ]
+        },
+        {
+          "index": 9,
+          "floor": 6,
+          "level": 997,
+          "activity": "Sneaking",
+          "stealth": 1.3319320880834323e+36,
+          "detectionPercent": 99.99999999942769,
+          "equipment": [
+            {
+              "id": "NjItem13",
+              "level": 0
+            },
+            {
+              "id": "NjGl1",
+              "level": 381
+            },
+            {
+              "id": "NjTr16",
+              "level": 4907
+            },
+            {
+              "id": "NjTr16",
+              "level": 4573
+            }
+          ]
+        },
+        {
+          "index": 10,
+          "floor": 8,
+          "level": 1,
+          "activity": "Tied",
+          "stealth": 3.7183183362174626e+26,
+          "detectionPercent": 100,
+          "equipment": [
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    "floor_progression": {
+      "expression": "(()=>{var A=k=>idleon.getAttr(k),N=idleon.allScripts.ActorEvents_579._customBlock_Ninja;return A(\"CustomLists\").h.NinjaInfo[3].map((_,index)=>{var maxHP=N(\"DoorMaxHP\",index,0),damageDone=Number(A(\"Ninja\")[100][index]??0),remainingHP=Math.max(0,maxHP-damageDone);return {index,damageDone,maxHP:Number.isFinite(maxHP)?maxHP:String(maxHP),remainingHP:Number.isFinite(remainingHP)?remainingHP:String(remainingHP),flowerStacks:Number(A(\"Spelunk\")[15][index])}})})()",
+      "result": [
+        {
+          "index": 0,
+          "damageDone": 1000,
+          "maxHP": 1,
+          "remainingHP": 0,
+          "flowerStacks": 0
+        },
+        {
+          "index": 1,
+          "damageDone": 2.7363874629068767e+76,
+          "maxHP": 6.144e+63,
+          "remainingHP": 0,
+          "flowerStacks": 7407
+        },
+        {
+          "index": 2,
+          "damageDone": 7.999677699273779e+83,
+          "maxHP": 3.2768e+64,
+          "remainingHP": 0,
+          "flowerStacks": 26053
+        },
+        {
+          "index": 3,
+          "damageDone": 1.2910716460042805e+84,
+          "maxHP": 2.0479999999999998e+65,
+          "remainingHP": 0,
+          "flowerStacks": 723
+        },
+        {
+          "index": 4,
+          "damageDone": 1.3107647950031135e+84,
+          "maxHP": 1.0239999999999999e+66,
+          "remainingHP": 0,
+          "flowerStacks": 118
+        },
+        {
+          "index": 5,
+          "damageDone": 1.3107647950031135e+84,
+          "maxHP": 8.191999999999999e+66,
+          "remainingHP": 0,
+          "flowerStacks": 1587
+        },
+        {
+          "index": 6,
+          "damageDone": 0,
+          "maxHP": 6.143999999999999e+67,
+          "remainingHP": 6.143999999999999e+67,
+          "flowerStacks": 568
+        },
+        {
+          "index": 7,
+          "damageDone": 0,
+          "maxHP": 8.192e+68,
+          "remainingHP": 8.192e+68,
+          "flowerStacks": 0
+        },
+        {
+          "index": 8,
+          "damageDone": 0,
+          "maxHP": 4.096e+69,
+          "remainingHP": 4.096e+69,
+          "flowerStacks": 0
+        },
+        {
+          "index": 9,
+          "damageDone": 0,
+          "maxHP": 8.192e+70,
+          "remainingHP": 8.192e+70,
+          "flowerStacks": 0
+        },
+        {
+          "index": 10,
+          "damageDone": 0,
+          "maxHP": 1.6384e+72,
+          "remainingHP": 1.6384e+72,
+          "flowerStacks": 0
+        },
+        {
+          "index": 11,
+          "damageDone": 0,
+          "maxHP": "Infinity",
+          "remainingHP": "Infinity",
+          "flowerStacks": 0
+        }
+      ]
+    },
+    "daily_charm_rolls": {
+      "expression": "(()=>{var A=k=>idleon.getAttr(k),N=idleon.allScripts.ActorEvents_579._customBlock_Ninja;var used=Number(A(\"OptionsListAccount\")[402]);return {used,pristineRemaining:Math.max(0,120-used),symbolRemaining:Math.max(0,75-used),symbolsUnlocked:N(\"NLbonuses\",17,0)>0}})()",
+      "result": {
+        "used": 1,
+        "pristineRemaining": 119,
+        "symbolRemaining": 74,
+        "symbolsUnlocked": true
+      }
+    }
+  },
+  "errors": {}
+}

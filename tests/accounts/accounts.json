@@ -37,11 +37,5 @@
         "menagerieBonusLevels": 107
       }
     }
-  ],
-  "defaultOnlyTests": [
-    {
-      "path": "tests/domains/spelunking/part-3-pipeline.test.ts",
-      "reason": "Saved-progression and synthetic transition cases depend on the developer snapshot; this is not an extracted game-parity suite."
-    }
   ]
 }

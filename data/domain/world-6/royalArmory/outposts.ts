@@ -144,14 +144,18 @@ export class RoyalMapSource {
         return this.isOutpost() ? 0 : this.mapLevel;
     }
 
-    get outpostEligible(): boolean {
-        const metadata = MapInfo[this.mapId]?.data;
-        return metadata !== undefined && this.mapId % 50 !== 0
-            && this.mapId !== 120 && this.mapId !== 216 && this.mapId !== 306
-            && this.mapId !== 41 && this.mapId !== 39 && this.mapId !== 43
-            && this.mapId !== 8 && this.mapId !== 9
-            && !Object.prototype.hasOwnProperty.call(nonAfkScreenDestinations, String(this.mapId))
+    static isOutpostEligible(mapId: number): boolean {
+        const metadata = MapInfo[mapId]?.data;
+        return metadata !== undefined && mapId % 50 !== 0
+            && mapId !== 120 && mapId !== 216 && mapId !== 306
+            && mapId !== 41 && mapId !== 39 && mapId !== 43
+            && mapId !== 8 && mapId !== 9
+            && !Object.prototype.hasOwnProperty.call(nonAfkScreenDestinations, String(mapId))
             && metadata.x !== 9999;
+    }
+
+    get outpostEligible(): boolean {
+        return RoyalMapSource.isOutpostEligible(this.mapId);
     }
 
     parse(savedRow: readonly unknown[]): void {

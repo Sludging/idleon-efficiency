@@ -7,38 +7,19 @@
 
 import {
     ExtractionResults,
-    getExtractedValue,
     loadExtractionResults,
     validateExtractionHealth,
 } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { EventShop } from '../../../data/domain/eventShop';
+import { initEventShopBonusRepo } from '../../../data/domain/data/EventShopBonusRepo';
 
 const saveName = 'latest';
 
-const ownershipCases = [
-    {
-        index: 22,
-        label: 'friend_bonus_event_shop_22',
-        resultsName: 'friend-bonus-stats-data.json',
-        description: 'owned Friendly Slot',
-    },
-    {
-        index: 37,
-        label: 'sticker_event_shop_bonus',
-        resultsName: 'farming-stickers-data.json',
-        description: 'unowned Event Shop bonus',
-    },
-    {
-        index: 27,
-        label: 'tome_bonus_event_shop_27',
-        resultsName: 'tome-bonus-data.json',
-        description: 'unowned first uppercase-encoded bonus',
-    },
-] as const;
+const ownershipCases = initEventShopBonusRepo();
 
 describe('Event Shop - Ownership', () => {
-    const extractionResults: Record<string, ExtractionResults> = {};
+    let nativeOwnership: { index: number; owned: number }[];
     let gameData: Map<string, any>;
     let eventShop: EventShop;
 
@@ -46,21 +27,28 @@ describe('Event Shop - Ownership', () => {
         gameData = loadGameDataFromSave(saveName);
         eventShop = gameData.get('eventShop') as EventShop;
 
-        ownershipCases.forEach(({ resultsName }) => {
-            const results = loadExtractionResults(resultsName);
-            validateExtractionHealth(results);
-            extractionResults[resultsName] = results;
-        });
+        const results: ExtractionResults = loadExtractionResults('event-shop-ownership-data.json');
+        validateExtractionHealth(results);
+        const extraction = results.extractions.event_shop_ownership;
+        if (!extraction || !Array.isArray(extraction.result)) {
+            throw new Error('Missing native Event Shop ownership catalog');
+        }
+        nativeOwnership = extraction.result;
     });
 
-    ownershipCases.forEach(({ index, label, resultsName, description }) => {
-        it(`matches game ownership for ${description}`, () => {
-            const liveValue = getExtractedValue(extractionResults[resultsName], label);
-            const domainValue = eventShop.isBonusOwned(index) ? 1 : 0;
+    ownershipCases.forEach(({ index, data }) => {
+        it(`matches game ownership for ${data.name} (${index})`, () => {
+            const nativeRow = nativeOwnership.find(row => row.index === index);
+            if (!nativeRow) {
+                throw new Error(`Missing native Event Shop ownership row for ${data.name} (${index})`);
+            }
+            if (nativeOwnership.length !== ownershipCases.length) {
+                throw new Error(`Event Shop ownership catalog mismatch: native ${nativeOwnership.length}, generated ${ownershipCases.length}`);
+            }
 
-            expect(domainValue).toMatchLiveGameWithDetails(liveValue, {
+            expect(Number(eventShop.isBonusOwned(index))).toMatchLiveGameWithDetails(nativeRow.owned, {
                 tolerance: 0,
-                context: `Event Shop ownership for bonus ${index} (${description})`,
+                context: `Event Shop ownership for ${data.name} (${index})`,
                 debugInfo: { saveName, gameDataLoaded: gameData.has('eventShop') },
             });
         });

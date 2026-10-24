@@ -6,6 +6,8 @@ import { initTrapBoxRepo } from "../data/TrapBoxRepo";
 import { TrapBoxTimeModel } from "../model/trapBoxTimeModel";
 import { initCritterRepo } from "../data/CritterRepo";
 import { Storage } from "../storage";
+import type { Menagerie } from "../menagerie";
+import type { Meritocraty } from "../world-7/meritocraty";
 
 
 export interface OwnedCritters {
@@ -100,6 +102,8 @@ export class Traps extends Domain {
     shinyCritterCounts: OwnedCritters[] = [];
     trapRewards: TrapRewards[] = [];
 
+    shinyCritterRewardMultiplier: number = 1;
+
     getRawKeys(): RawData[] {
         return [
             { key: "PldTraps_", default: [], perPlayer: true }
@@ -111,7 +115,18 @@ export class Traps extends Domain {
         this.regularCritterCounts = [];
         this.shinyCritterCounts = [];
         this.trapRewards = [];
+        this.shinyCritterRewardMultiplier = 1;
         return this;
+    }
+
+    getShinyCritterRewardMultiplier(): number {
+        return this.shinyCritterRewardMultiplier;
+    }
+
+    updateShinyCritterRewardMultiplier(meritocracyBonusPercent: number, menagerieBonusPercent: number): void {
+        // The native formula multiplies these independent percentage bonuses.
+        this.shinyCritterRewardMultiplier = (1 + meritocracyBonusPercent / 100)
+            * (1 + menagerieBonusPercent / 100);
     }
 
     parse(data: Map<string, any>): void {
@@ -125,6 +140,19 @@ export class Traps extends Domain {
         })
     }
 }
+
+export const updateShinyCritterRewardMultiplier = (data: Map<string, any>): Traps => {
+    const traps = data.get("traps") as Traps;
+    const menagerie = data.get("menagerie") as Menagerie;
+    const meritocraty = data.get("meritocraty") as Meritocraty;
+
+    traps.updateShinyCritterRewardMultiplier(
+        meritocraty.getCurrentBonus(4),
+        menagerie.getBonusValue(13),
+    );
+
+    return traps;
+};
 
 export const updateTrapDisplayData = (data: Map<string, any>): Traps => {
     const traps = data.get("traps") as Traps;

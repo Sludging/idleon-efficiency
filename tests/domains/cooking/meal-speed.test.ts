@@ -1,17 +1,23 @@
 /**
- * Compares kitchen 0's calculated meal-cooking speed, shown by the website,
- * with the game's CookingSPEED result for this saved account.
+ * Compares all ten kitchens' populated meal-cooking speeds with the game's results.
+ * This fixture's account-best selections align with native actor 3.
+ * Other actors and star-sign/Silkrode variants remain unobserved.
  */
 
-import { loadExtractionResults, getExtractedValue, validateExtractionHealth } from '../../utils/live-game-data-loader';
+import { ExtractionResults, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Cooking } from '../../../data/domain/world-4/cooking';
+
+type KitchenMealSpeed = {
+ index: number;
+ speed: number;
+};
 
 const saveName = 'latest';
 const extractionResultsName = 'cooking-speed-data.json';
 
 describe('Cooking Domain - Meal Speed', () => {
- let extractionResults: any;
+ let extractionResults: ExtractionResults;
  let gameData: Map<string, any>;
  let cooking: Cooking;
 
@@ -36,21 +42,24 @@ describe('Cooking Domain - Meal Speed', () => {
  });
 
  describe('Kitchen meal-cooking speed', () => {
-  it('matches the displayed meal speed for kitchen 0', () => {
-   const liveFinalSpeed = getExtractedValue(extractionResults, 'final_cooking_speed');
-   const domainResult = cooking.kitchens[0].mealSpeed;
-   const ratio = domainResult / liveFinalSpeed;
+  it.each(Array.from({ length: 10 }, (_, index) => index))('matches the displayed meal speed for kitchen %i', (index) => {
+   const expectedSpeeds = extractionResults.extractions['kitchen_meal_speeds'].result as KitchenMealSpeed[];
+   const expected = expectedSpeeds.find(candidate => candidate.index === index);
+   if (!expected) {
+    throw new Error(`Native meal-cooking speed record for kitchen ${index} not found`);
+   }
 
-   expect(domainResult).toMatchLiveGameWithDetails(liveFinalSpeed, {
+   const kitchen = cooking.kitchens[index];
+   expect(kitchen.mealSpeed).toMatchLiveGameWithDetails(expected.speed, {
     tolerance: 0,
-    context: 'Kitchen 0 meal-cooking speed shown by the website',
+    context: `Kitchen ${index} meal-cooking speed`,
     debugInfo: {
-     ratio: ratio.toExponential(3),
-     possibleCauses: ratio < 0.1 ? [
-      'Missing parameters in domain calculation',
-      'Incorrect bonus calculations',
-      'Save data vs live game state mismatch'
-     ] : ['Minor calculation differences']
+     kitchenIndex: index,
+     status: kitchen.status,
+     activeMeal: kitchen.activeMeal,
+     mealLevels: kitchen.mealLevels,
+     recipeLevels: kitchen.recipeLevels,
+     luckLevels: kitchen.luckLevels,
     }
    });
   });

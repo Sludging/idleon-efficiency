@@ -33,6 +33,8 @@ import { useShallow } from "zustand/react/shallow";
 import ShadowBox, { HoverBox } from "../../../components/base/ShadowBox";
 import StampsTableView from "../../../components/world-1/stampTableView";
 import { Capacity } from "../../../data/domain/capacity";
+import { Compass } from "../../../data/domain/compass";
+import { DoublerSummary } from "../../../components/base/DoublerStatus";
 
 function CarryCapacitySummary() {
     const { theData } = useAppDataStore(useShallow(
@@ -72,6 +74,8 @@ function StampDisplay({ stamp, index, highlight, storageAmount = 0 }: { stamp: S
 
     const allItems = theData.get("itemsData") as Item[];
     const stampItem = allItems.find(item => item.internalName == stamp.raw_name);
+    const compass = theData.get("compass") as Compass;
+    const isExalted = compass.exaltedStampNames.has(stamp.raw_name);
     const theme = useContext(ThemeContext);
 
     function TipContent({ stamp }: { stamp: Stamp }) {
@@ -207,7 +211,19 @@ function StampDisplay({ stamp, index, highlight, storageAmount = 0 }: { stamp: S
                 <Box direction="row" align="center" gap="xsmall" style={{
                     opacity: stamp.maxLevel > 0 ? 1 : 0.2,
                 }}>
-                    <IconImage data={stamp.getImageData()} scale={0.4} />
+                    <Box flex={false} style={{ position: 'relative' }}>
+                        <IconImage data={stamp.getImageData()} scale={0.4} />
+                        {isExalted && <IconImage
+                            data={Compass.getExaltedStampFrameImageData()}
+                            scale={0.4}
+                            style={{
+                                position: 'absolute',
+                                left: '-2px',
+                                pointerEvents: 'none',
+                                imageRendering: 'pixelated',
+                            }}
+                        />}
+                    </Box>
                     <Text size="small">{stamp.level}</Text>
                 </Box>
             </TipDisplay>
@@ -257,10 +273,12 @@ function Stamps() {
 
     const stampData = theData.get("stamps") as Stamp[][];
     const collider = theData.get("collider") as AtomCollider;
+    const compass = theData.get("compass") as Compass;
 
     const hydrogen = collider.atoms[0];
     const gildedCount = stampData[0][0].gildedCount
     const totalLevels = stampData.flatMap(tab => tab).reduce((sum, stamp) => sum += stamp.level, 0);
+    const exaltedStampBonus = compass.getExaltedStampBonus();
 
     return (
         <Box>
@@ -271,6 +289,17 @@ function Stamps() {
                         <TextAndLabel label="Total Levels" text={totalLevels.toString()} />
                         {hydrogen && hydrogen.level > 0 && <TextAndLabel label="Atom Discount" text={`${stampData[0][0].atomDiscount}% (+${hydrogen.level * hydrogen.data.bonusPerLv}%/day)`} />}
                         {stampData[0][0].gildedAvailable && <TextAndLabel label="Gilded Stamps" text={`${gildedCount}`} />}
+                        <DoublerSummary
+                            label="Exalted Stamps"
+                            owned={compass.stampDoublersOwned}
+                            available={compass.stampDoublersAvailable}
+                            image={Compass.getExaltedStampImageData()}
+                            description={
+                                <Text size="small">
+                                    Exalted Stamps gain +{nFormatter(exaltedStampBonus)}% bonus ({nFormatter(1 + exaltedStampBonus / 100, "MultiplierInfo")}x total).
+                                </Text>
+                            }
+                        />
                     </Box>
                     <Box direction="row" gap="medium">
                         <Box direction="row" align="center" gap="xsmall">
@@ -300,6 +329,7 @@ function Stamps() {
                     <Text size="small">View:</Text>
                     <Box direction="row" align="center" background="dark-2" round="small" pad="xsmall" gap="xsmall">
                         <Box
+                            aria-label="Grid view"
                             pad="xsmall"
                             round="xsmall"
                             background={viewMode === 'grid' ? 'brand' : 'transparent'}
@@ -310,6 +340,7 @@ function Stamps() {
                         </Box>
                         <Box
                             pad="xsmall"
+                            aria-label="Table view"
                             round="xsmall"
                             background={viewMode === 'table' ? 'brand' : 'transparent'}
                             onClick={() => setViewMode('table')}

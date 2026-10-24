@@ -1,0 +1,11 @@
+{
+  "description": "Current and next-upgrade treasure value for every owned Sailing boat.",
+  "target": "Sailing boat treasure value",
+  "extractions": [
+    {
+      "label": "boat_treasure_values",
+      "expression": "(()=>{const boats=idleon.engine.getGameAttribute(\"Boats\");const sailing=idleon.engine.getGameAttribute(\"Sailing\");return boats.flatMap((boat,index)=>index<Math.round(Number(sailing[2][1])+1)&&Number(boat[3])+Number(boat[5])!==0?[{index,current:idleon.callFunction(\"Sailing\",\"BoatValue\",index,0),next:idleon.callFunction(\"Sailing\",\"BoatValue\",index,6)}]:[])})()",
+      "description": "Owned boats at their saved loot level and next loot level. Native options 0 and 6 return full treasure value."
+    }
+  ]
+}

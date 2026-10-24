@@ -1,27 +1,23 @@
 "use client"
 
 import { Box, CheckBox, Grid, Heading, Text } from "grommet";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import IconImage from "../../../components/base/IconImage";
 import ShadowBox from "../../../components/base/ShadowBox";
 import { Guild as GuildDomain } from "../../../data/domain/guild";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
-import { DataStatus } from "../../../lib/stores/appDataStore";
 import { useShallow } from "zustand/react/shallow";
+import useHydrated from "../../../lib/hooks/useHydrated";
 
 function GuildDisplay() {
-    const [hydrated, setHydrated] = useState(false);
+    const hydrated = useHydrated();
     const [showMaxed, setShowMaxed] = useState(true);
-    const { theData, dataStatus } = useAppDataStore(useShallow(
-        (state) => ({ theData: state.data.getData(), dataStatus: state.dataStatus, lastUpdated: state.lastUpdated })
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
     const guild = theData.get("guild") as GuildDomain;
 
-    useEffect(() => {
-        setHydrated(true);
-    }, []);
-
-    if (!hydrated || (dataStatus !== DataStatus.StaticData && dataStatus !== DataStatus.LiveData) || !guild) {
+    if (!hydrated || !guild) {
         return <Box>Loading...</Box>;
     }
 

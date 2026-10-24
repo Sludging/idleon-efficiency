@@ -1,11 +1,11 @@
 {
-  "description": "Compare kitchen 0 meal-cooking speed with the game's result",
-  "target": "Kitchen 0 meal-cooking speed shown by the website",
+  "description": "Compare all ten kitchens' meal-cooking speeds with the game's results",
+  "target": "Meal-cooking speeds for all ten kitchens shown by the website",
   "extractions": [
     {
-      "label": "final_cooking_speed",
-      "expression": "idleon.callFunction(\"CookingR\", \"CookingSPEED\", 0, 0)",
-      "description": "Final cooking speed result for kitchen 0"
+      "label": "kitchen_meal_speeds",
+      "expression": "Array.from({length:10},(_,index)=>({index,speed:idleon.callFunction(\"CookingR\",\"CookingSPEED\",index,0)}))",
+      "description": "Final cooking speed results for all ten kitchens, indices 0–9"
     },
     {
       "label": "starsign_58_bonus",

@@ -1,11 +1,49 @@
 {
   "extractions": {
-    "final_cooking_speed": {
-      "expression": "idleon.callFunction(\"CookingR\", \"CookingSPEED\", 0, 0)",
-      "result": {
-        "type": "large_number",
-        "value": "3.9884956123870965e+149"
-      }
+    "kitchen_meal_speeds": {
+      "expression": "Array.from({length:10},(_,index)=>({index,speed:idleon.callFunction(\"CookingR\",\"CookingSPEED\",index,0)}))",
+      "result": [
+        {
+          "index": 0,
+          "speed": 3.9884956123870965e+149
+        },
+        {
+          "index": 1,
+          "speed": 3.1352192376084548e+149
+        },
+        {
+          "index": 2,
+          "speed": 3.3319646299132716e+149
+        },
+        {
+          "index": 3,
+          "speed": 3.151672809329282e+149
+        },
+        {
+          "index": 4,
+          "speed": 3.0755975146236304e+149
+        },
+        {
+          "index": 5,
+          "speed": 2.92599473070051e+149
+        },
+        {
+          "index": 6,
+          "speed": 2.728583513421238e+149
+        },
+        {
+          "index": 7,
+          "speed": 2.5737190949023534e+149
+        },
+        {
+          "index": 8,
+          "speed": 2.4912139435261878e+149
+        },
+        {
+          "index": 9,
+          "speed": 2.496725478799475e+149
+        }
+      ]
     },
     "starsign_58_bonus": {
       "expression": "idleon.getDNSM(\"StarSigns\").h[58]",

@@ -1,0 +1,53 @@
+{
+  "extractions": {
+    "quest_sad_urie_1": {
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Sad_Urie1\"]",
+      "result": 1
+    },
+    "quest_snootie_1": {
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Snootie1\"]",
+      "result": 1
+    },
+    "quest_snootie_2": {
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Snootie2\"]",
+      "result": -1
+    },
+    "quest_snootie_3": {
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Snootie3\"]",
+      "result": -1
+    },
+    "quest_bloo_radley_1": {
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Bloo_Radley1\"]",
+      "result": 1
+    },
+    "quest_bloo_radley_2": {
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Bloo_Radley2\"]",
+      "result": 1
+    },
+    "quest_toobus_goobus_1": {
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Toobus_Goobus1\"]",
+      "result": 1
+    },
+    "quest_toobus_goobus_2": {
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Toobus_Goobus2\"]",
+      "result": 1
+    },
+    "quest_toobus_goobus_3": {
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Toobus_Goobus3\"]",
+      "result": 1
+    },
+    "quest_toobus_goobus_4": {
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Toobus_Goobus4\"]",
+      "result": 1
+    },
+    "quest_zenelith_1": {
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Zenelith1\"]",
+      "result": 1
+    },
+    "quest_wavey_wayne_1": {
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Wavey_Wayne1\"]",
+      "result": 1
+    }
+  },
+  "errors": {}
+}

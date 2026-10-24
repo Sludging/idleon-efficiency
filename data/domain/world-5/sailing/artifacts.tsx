@@ -21,6 +21,7 @@ export enum ArtifactStatus {
     Sovereign,
     Omnipotent,
     Transcendent,
+    Verisimilitude,
 }
 
 export class Artifact {
@@ -87,6 +88,13 @@ export class Artifact {
                 break;
             case 6:
                 this.status = ArtifactStatus.Transcendent;
+                break;
+            case 7:
+                this.status = ArtifactStatus.Verisimilitude;
+                break;
+            default:
+                // Account reloads must clear tiers that the new save does not own.
+                this.status = ArtifactStatus.Unobtained;
                 break;
         }
     }
@@ -166,6 +174,8 @@ export class Artifact {
                 return this.data.omnipotentBonus == "The artifact's main bonus is quintupled!" ? 5 : 1;
             case ArtifactStatus.Transcendent:
                 return this.data.transcendentBonus == "The artifact's main bonus is sixtupled!" ? 6 : 1;
+            case ArtifactStatus.Verisimilitude:
+                return this.data.verisimilitudeBonus == "The artifact's main bonus is seventupled!" ? 7 : 1;
             default:
                 return 1;
         }
@@ -197,6 +207,8 @@ export class GoldRelicArtifact extends Artifact {
                 return this.data.omnipotentBonusQty ?? 0;
             case ArtifactStatus.Transcendent:
                 return this.data.transcendentBonusQty ?? 0;
+            case ArtifactStatus.Verisimilitude:
+                return this.data.verisimilitudeBonusQty ?? 0;
             default:
                 return 0;
         }
@@ -272,6 +284,9 @@ export class AshenUrnArtifact extends Artifact {
         }
         if (this.status == ArtifactStatus.Transcendent) {
             return 1200;
+        }
+        if (this.status == ArtifactStatus.Verisimilitude) {
+            return 1400;
         }
 
         return 200;
@@ -428,7 +443,8 @@ export const updateArtifacts = (data: Map<string, any>) => {
     // Skills related (parse data)
     (sailing.artifacts[5] as GenieLampArtifact).sailingLevel = players[0].skills.get(SkillsIndex.Sailing)?.level ?? 0;
     (sailing.artifacts[3] as FauxoryTuskArtifact).sailingLevel = players[0].skills.get(SkillsIndex.Sailing)?.level ?? 0;
-    (sailing.artifacts[23] as WeatherbookArtifact).gamingLevel = players[0].skills.get(SkillsIndex.Gaming)?.level ?? 0;
+    (sailing.artifacts[23] as WeatherbookArtifact).gamingLevel = players.reduce(
+        (highestLevel, player) => Math.max(highestLevel, player.skills.get(SkillsIndex.Gaming)?.level ?? 0), 0);
 
     // Slab related (parse data)
     (sailing.artifacts[2] as SlabInfluencedArtifact).lootyCount = slab.rawObtainedCount;

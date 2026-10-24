@@ -1,0 +1,19 @@
+{
+  "extractions": {
+    "upgrade_prices": {
+      "expression": "idleon.getAttr(\"CustomLists\").h.Owlz.slice(0,9).map((_,index)=>idleon.callFunction(\"Summoning\",\"OwlCost\",index,0))",
+      "result": [
+        5.544414210857352e+29,
+        2.7558524318086864e+41,
+        4.6541668542646755e+29,
+        6.076167835080416e+29,
+        3.2026140805825555e+32,
+        5.857286873512206e+29,
+        2.0682379369697463e+30,
+        1.393738757979538e+30,
+        9.518917599603672e+32
+      ]
+    }
+  },
+  "errors": {}
+}

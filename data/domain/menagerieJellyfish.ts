@@ -87,7 +87,6 @@ export class MenagerieSilverJellyfish {
     miscLevel = 0;
     miscLevelCap = 0;
     nextMiscCost = 0;
-    miscMultiplier = 1;
     conversionLevel = 0;
     conversionLevelCap = 0;
     nextConversionCost = 0;
@@ -96,6 +95,10 @@ export class MenagerieSilverJellyfish {
     expectedCreditedFragments = 0;
 
     constructor(public readonly data: MenagerieJellyfishModel) {}
+    get miscMultiplier(): number {
+        return 1 + this.miscLevel / 100;
+    }
+
 
     parse(savedRow: (number | string)[] | undefined): void {
         this.miscLevel = Number(savedRow?.[9] ?? 0);
@@ -109,7 +112,6 @@ export class MenagerieSilverJellyfish {
         this.miscLevelCap = miscUpgrade.maxLevel!;
         this.conversionLevelCap = conversionUpgrade.maxLevel!;
         this.nextMiscCost = 2 * (100 + 25 * this.miscLevel + this.miscLevel ** 3) * 1.065 ** this.miscLevel;
-        this.miscMultiplier = 1 + this.miscLevel / 100;
         this.nextConversionCost = (25 + 10 * this.conversionLevel + this.conversionLevel ** 2) * 1.056 ** this.conversionLevel;
         this.conversionRate = (10 + this.conversionLevel) / 100;
 

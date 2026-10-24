@@ -1,0 +1,35 @@
+{
+  "extractions": {
+    "bluefin_upgrade_prices": {
+      "expression": "idleon.getAttr(\"CustomLists\").h.Owlz.slice(9,21).map((_,index)=>idleon.callFunction(\"Summoning\",\"RooCost\",index,0))",
+      "result": [
+        104393613137989570000,
+        3.9898791708362544e+21,
+        44350476933576065000,
+        2.061442595099866e+26,
+        914338828756750300,
+        2.96566660035983e+22,
+        5.736518494343887e+21,
+        2.9642345573462885e+26,
+        126444523596454000,
+        7.48012974604322e+23,
+        5.984551429518177e+24,
+        6.468165666552531e+26
+      ]
+    },
+    "tarpit_upgrade_prices": {
+      "expression": "idleon.getAttr(\"CustomLists\").h.Owlz.slice(21,29).map((_,index)=>idleon.callFunction(\"Summoning\",\"RooCost_T\",index,0))",
+      "result": [
+        7430.230510429814,
+        394.31822667794603,
+        12.531976022037114,
+        10.522905453640462,
+        104175.89384358683,
+        45.58762886597938,
+        71.32539219685223,
+        1288873.0946510483
+      ]
+    }
+  },
+  "errors": {}
+}

@@ -9,6 +9,7 @@ import { Hole } from "../world-5/hole/hole";
 import { LegendTalents } from "../world-7/legendTalents";
 import { Meritocraty } from "../world-7/meritocraty";
 import { Menagerie } from "../menagerie";
+import type { Breeding } from "../world-4/breeding";
 
 export class OrionGlobalBonus {
     constructor(public index: number, public desc: string, public value: number) { }
@@ -57,6 +58,8 @@ export class Orion extends Domain {
     vaultUpgrade21: number = 0;
     meritoBonus12: number = 0;
     gambitBonus8: number | null = 0;
+    fountainWater0Upgrade18 = 0;
+    petArenaCrucBonus1 = 0;
     menagerieCostReduction: number = 1;
     
     getCurrencyImageData(): ImageData {
@@ -95,10 +98,11 @@ export class Orion extends Domain {
         if (baseRate === 0) return 0;
         if (this.gambitBonus8 === null) return null;
         return (1 + 9 * this.getMegafeatherQuantity(0))
+            * (1 + this.fountainWater0Upgrade18 / 100) * (1 + 4 * this.petArenaCrucBonus1)
             * (1 + this.vaultUpgrade21 / 100) * (1 + this.meritoBonus12 / 100) * (1 + this.gambitBonus8 / 100)
             * baseRate
-            * (1 + 5 * this.getUpgradeLevel(2) / 100) * Math.pow(3 + 2 * this.getMegafeatherQuantity(6), this.getUpgradeLevel(4)) 
-            * (1 + this.ownedShinyFeather * this.getUpgradeLevel(6) / 100)
+            * (1 + 5 * this.getUpgradeLevel(2) / 100) * Math.pow(3 + 2 * this.getMegafeatherQuantity(6), this.getUpgradeLevel(4))
+            * (1 + this.ownedShinyFeather * this.getUpgradeLevel(6) / 100);
     }
 
     getUpgradeCost(index: number): number {
@@ -186,10 +190,13 @@ export const updateOrionFeatherRate = (data: Map<string, any>) => {
     const upgradeVault = data.get("upgradeVault") as UpgradeVault;
     const meritocraty = data.get("meritocraty") as Meritocraty;
     const hole = data.get("hole") as Hole;
+    const breeding = data.get("breeding") as Breeding;
 
     orion.vaultUpgrade21 = upgradeVault.getBonusForId(21);
     orion.meritoBonus12 = meritocraty.getCurrentBonus(12);
     orion.gambitBonus8 = hole.gambit.getBonus(8);
+    orion.fountainWater0Upgrade18 = hole.getFountainBonus(0, 18);
+    orion.petArenaCrucBonus1 = breeding.getCrucibleBonus(1);
 
     return orion;
 }

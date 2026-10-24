@@ -1,212 +1,7 @@
 {
-  "description": "Minehead compares current 1.23 outputs using Minehead.1.23.js and idleon1.23.txt, while retaining historical 1.21 opponent/shop coverage from Minehead.1.21.js and correctness-390 research. Exact game scalars; no mutation or synthetic state. Research and currency are account-wide; player 0 supplies the Research skill level.",
-  "target": "Minehead opponent bonuses and upgrades",
+  "description": "Native Minehead upgrade and opponent outputs indexed by their game catalogs.",
+  "target": "Minehead upgrade and opponent outputs",
   "extractions": [
-    {
-      "label": "minehead_bonus_0",
-      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 0, 0)",
-      "description": "Bronzehead Total Damage and Drop Rate reward; game gate requires defeating progression index 0."
-    },
-    {
-      "label": "minehead_bonus_12",
-      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 12, 0)",
-      "description": "Maizehead Research Magnifier reward; game gate requires defeating progression index 12."
-    },
-    {
-      "label": "minehead_bonus_13",
-      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 13, 0)",
-      "description": "Ironhead Grind Time bubble-level reward; remains locked until the strict defeated-count gate passes progression index 13."
-    },
-    {
-      "label": "minehead_bonus_21",
-      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 21, 0)",
-      "description": "Brainhead Hat Rack bonus-multiplier reward; remains locked until its progression index is defeated."
-    },
-    {
-      "label": "minehead_bonus_31",
-      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 31, 0)",
-      "description": "Boghead has no earned reward before its late progression defeat."
-    },
-    {
-      "label": "minehead_preview_21",
-      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 21, 99)",
-      "description": "Brainhead Hat Rack bonus-multiplier preview, available before its defeated-count gate."
-    },
-    {
-      "label": "minehead_preview_31",
-      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 31, 99)",
-      "description": "Boghead opponent preview reward before its defeated-count gate."
-    },
-    {
-      "label": "minehead_upgrade_quantity_0",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 0, 0)",
-      "description": "Base Damage I saved quantity before downstream transformations; affects player base damage in Depth Charge."
-    },
-    {
-      "label": "minehead_upgrade_quantity_3",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 3, 0)",
-      "description": "Bettah Numbahs saved quantity before downstream transformations; increases the odds of rolling bigger tile numbers in Depth Charge."
-    },
-    {
-      "label": "minehead_upgrade_quantity_16",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 16, 0)",
-      "description": "Legal Cheating Button's current Minehead shop quantity"
-    },
-    {
-      "label": "minehead_upgrade_quantity_26",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 26, 0)",
-      "description": "El' Cheapo Upgrado saved quantity used by the Minehead next-level cost discount."
-    },
-    {
-      "label": "minehead_upgrade_quantity_29",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 29, 0)",
-      "description": "Rift Guy's Upgrade quantity in its zero-max shop listing"
-    },
-    {
-      "label": "minehead_upgrade_requirement_2",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 2, 0)",
-      "description": "Grid Expansion's required Minehead Research level"
-    },
-    {
-      "label": "minehead_upgrade_requirement_3",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 3, 0)",
-      "description": "Bettah Numbahs' required Minehead Research level"
-    },
-    {
-      "label": "minehead_upgrade_requirement_10",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 10, 0)",
-      "description": "Boom Blocker's required Minehead Research level"
-    },
-    {
-      "label": "minehead_upgrade_requirement_11",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 11, 0)",
-      "description": "Final Round Fury's required Minehead Research level"
-    },
-    {
-      "label": "minehead_upgrade_requirement_20",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 20, 0)",
-      "description": "Research level requirement to unlock Classic Flags, which place flags showing nearby Depth Charges."
-    },
-    {
-      "label": "minehead_upgrade_requirement_21",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 21, 0)",
-      "description": "Research level requirement to unlock Mega Damage II, which permanently increases Depth Charge damage."
-    },
-    {
-      "label": "minehead_upgrade_cost_0",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 0, 0)",
-      "description": "Next-level Base Damage I price used by Depth Charge shop affordability, including server scaling and Minehead/Sushi discounts."
-    },
-    {
-      "label": "minehead_upgrade_cost_1",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 1, 0)",
-      "description": "Next-level Numbahs price used by Depth Charge shop affordability, including server scaling and Minehead/Sushi discounts."
-    },
-    {
-      "label": "minehead_upgrade_cost_2",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 2, 0)",
-      "description": "Grid Expansion's next-level Minehead shop price"
-    },
-    {
-      "label": "minehead_upgrade_cost_3",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 3, 0)",
-      "description": "Bettah Numbahs' next-level Minehead shop price"
-    },
-    {
-      "label": "minehead_upgrade_cost_4",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 4, 0)",
-      "description": "Mega Damage I's next-level Minehead shop price"
-    },
-    {
-      "label": "minehead_upgrade_cost_5",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 5, 0)",
-      "description": "Miney Farmey I's next-level Minehead shop price"
-    },
-    {
-      "label": "minehead_upgrade_cost_9",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 9, 0)",
-      "description": "Big Hit Combos' next-level Minehead shop price"
-    },
-    {
-      "label": "minehead_upgrade_cost_10",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 10, 0)",
-      "description": "Boom Blocker's next-level Minehead shop price"
-    },
-    {
-      "label": "minehead_upgrade_cost_26",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 26, 0)",
-      "description": "El' Cheapo Upgrado's next-level Minehead shop price"
-    },
-    {
-      "label": "minehead_upgrade_cost_29",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 29, 0)",
-      "description": "Computed shop price for Rift Guy's Upgrade, whose max level is 0 and therefore cannot be purchased."
-    },
-    {
-      "label": "minehead_upgrade_affordable_0",
-      "expression": "idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 0, 0)",
-      "description": "Base Damage I's Minehead affordability state"
-    },
-    {
-      "label": "minehead_upgrade_affordable_1",
-      "expression": "idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 1, 0)",
-      "description": "Numbahs' Minehead affordability state"
-    },
-    {
-      "label": "minehead_upgrade_affordable_29",
-      "expression": "idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 29, 0)",
-      "description": "Rift Guy's Upgrade Minehead affordability state at its zero maximum"
-    },
-    {
-      "label": "minehead_upgrade_unlocked_20",
-      "expression": "Number(idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 20, 0))",
-      "description": "Classic Flags Research unlock state from the Minehead shop caller"
-    },
-    {
-      "label": "minehead_upgrade_unlocked_21",
-      "expression": "Number(idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 21, 0))",
-      "description": "Mega Damage II Research unlock state from the Minehead shop caller"
-    },
-    {
-      "label": "minehead_upgrade_buyable_0",
-      "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 0, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 0, 0))",
-      "description": "Base Damage I purchase eligibility, combining affordability/cap and Research unlock"
-    },
-    {
-      "label": "minehead_upgrade_buyable_1",
-      "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 1, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 1, 0))",
-      "description": "Numbahs purchase eligibility, combining affordability/cap and Research unlock"
-    },
-    {
-      "label": "minehead_upgrade_buyable_20",
-      "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 20, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 20, 0))",
-      "description": "Classic Flags purchase eligibility, combining affordability/cap and Research unlock"
-    },
-    {
-      "label": "minehead_upgrade_buyable_21",
-      "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 21, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 21, 0))",
-      "description": "Mega Damage II purchase eligibility, combining affordability/cap and Research unlock"
-    },
-    {
-      "label": "minehead_upgrade_buyable_29",
-      "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 29, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 29, 0))",
-      "description": "Rift Guy's Upgrade purchase eligibility with its zero maximum"
-    },
-    {
-      "label": "minehead_upgrade_maxed_0",
-      "expression": "Number(Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[0][1]) <= 998 && Number(idleon.getAttr(\"Research\")[8][0]) >= Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[0][1]))",
-      "description": "Base Damage I maxed state from its saved shop level and maximum"
-    },
-    {
-      "label": "minehead_upgrade_maxed_1",
-      "expression": "Number(Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[1][1]) <= 998 && Number(idleon.getAttr(\"Research\")[8][1]) >= Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[1][1]))",
-      "description": "Numbahs maxed state from its saved shop level and maximum"
-    },
-    {
-      "label": "minehead_upgrade_maxed_29",
-      "expression": "Number(Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[29][1]) <= 998 && Number(idleon.getAttr(\"Research\")[8][29]) >= Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[29][1]))",
-      "description": "Rift Guy's Upgrade maxed state with its zero maximum"
-    },
     {
       "label": "minehead_sushi_1",
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 1, 0)",
@@ -233,77 +28,6 @@
       "description": "Native Mine Currency gain rate per hour."
     },
     {
-      "label": "opponent_0_max_hp",
-      "expression": "idleon.callFunction(\"Minehead\", \"MaxHP_Opp\", 0, 0)",
-      "description": "Maximum HP for the first Minehead opponent."
-    },
-    {
-      "label": "opponent_0_depth_charges",
-      "expression": "idleon.callFunction(\"Minehead\", \"Mines_Opp\", 0, 0)",
-      "description": "Depth Charges for the first Minehead opponent."
-    },
-    {
-      "label": "opponent_9_max_hp",
-      "expression": "idleon.callFunction(\"Minehead\", \"MaxHP_Opp\", 9, 0)",
-      "description": "Maximum HP for a later Minehead opponent."
-    },
-    {
-      "label": "opponent_9_depth_charges",
-      "expression": "idleon.callFunction(\"Minehead\", \"Mines_Opp\", 9, 0)",
-      "description": "Depth Charges for a later Minehead opponent."
-    },
-    {
-      "label": "opponent_17_max_hp",
-      "expression": "idleon.callFunction(\"Minehead\", \"MaxHP_Opp\", 17, 0)",
-      "description": "Maximum HP for a deep Minehead opponent."
-    },
-    {
-      "label": "opponent_17_depth_charges",
-      "expression": "idleon.callFunction(\"Minehead\", \"Mines_Opp\", 17, 0)",
-      "description": "Depth Charges for a deep Minehead opponent."
-    },
-
-    {
-      "label": "minehead_upgrade_quantity_4",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 4, 0)",
-      "description": "Minehead upgrade 4 effect used by base damage."
-    },
-    {
-      "label": "minehead_upgrade_quantity_5",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 5, 0)",
-      "description": "Minehead upgrade 5 effect used by Mine Currency gain."
-    },
-    {
-      "label": "minehead_upgrade_quantity_7",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 7, 0)",
-      "description": "Minehead upgrade 7 effect used by base damage."
-    },
-    {
-      "label": "minehead_upgrade_quantity_21",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 21, 0)",
-      "description": "Minehead upgrade 21 effect used by base damage."
-    },
-    {
-      "label": "minehead_upgrade_quantity_22",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 22, 0)",
-      "description": "Minehead upgrade 22 effect used by Mine Currency gain."
-    },
-    {
-      "label": "minehead_upgrade_quantity_25",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 25, 0)",
-      "description": "Minehead upgrade 25 effect used by base damage."
-    },
-    {
-      "label": "minehead_upgrade_quantity_27",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 27, 0)",
-      "description": "Minehead upgrade 27 effect used by base damage."
-    },
-    {
-      "label": "minehead_upgrade_quantity_28",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 28, 0)",
-      "description": "Minehead upgrade 28 effect used by Mine Currency gain."
-    },
-    {
       "label": "minehead_description_max_tile_number",
       "expression": "Math.round(1 + (idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 1, 0) + 1 + Math.min(1, Math.floor((idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 1, 0) + 1) / 9))))",
       "description": "Native upgrade 1 maximum Tile Number shown in its source description."
@@ -327,11 +51,6 @@
       "label": "minehead_description_currency_log_bonus",
       "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 28, 0) * Math.log(Math.max(idleon.getAttr(\"Research\")[7][6], 1)) / 2.30259",
       "description": "Native upgrade 28 current Mine Currency bonus from the Research[7][6] getLOG factor."
-    },
-    {
-      "label": "minehead_bonus_6",
-      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 6, 0)",
-      "description": "Earned Minehead reward multiplier used by Mine Currency gain."
     },
     {
       "label": "minehead_research_167",
@@ -444,29 +163,44 @@
       "description": "Saved account-wide Minehead opponents defeated count."
     },
     {
-      "label": "minehead_upgrade_quantity_6",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 6, 0)",
-      "description": "Extra Lives Minehead upgrade effect used by maximum lives."
-    },
-    {
-      "label": "minehead_upgrade_quantity_12",
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 12, 0)",
-      "description": "Saved Multiplier Madness quantity used to select its native description value."
-    },
-    {
-      "label": "minehead_upgrade_cost_to_max_1",
-      "expression": "Array.from({length: Math.max(0, Math.min(idleon.getAttr(\"CustomLists\").h.MineheadUPG[1][1], idleon.getAttr(\"Research\")[8][1] + 10) - idleon.getAttr(\"Research\")[8][1])}, (_, offset) => 6 * (1 / (1 + idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 26, 0) / 100)) * Math.max(.1, 1 - Math.max(idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 1, 0), idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 16, 0)) / 100) * Math.pow(idleon.getAttr(\"CustomLists\").h.MineheadUPG[1][2], idleon.getAttr(\"Research\")[8][1] + offset)).reduce((sum, cost) => sum + cost, 0)",
-      "description": "Native-source sum for the genuine saved Numbahs progression to its next ten levels or listed cap, whichever comes first; source formula at idleon1.23.txt:244124-132."
-    },
-    {
-      "label": "minehead_upgrade_next10_cost_0",
-      "expression": "Array.from({length: 10}, (_, offset) => 5 * (1 / (1 + idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 26, 0) / 100)) * Math.max(.1, 1 - Math.max(idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 1, 0), idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 16, 0)) / 100) * Math.pow(idleon.getAttr(\"CustomLists\").h.MineheadUPG[0][2], idleon.getAttr(\"Research\")[8][0] + offset)).reduce((sum, cost) => sum + cost, 0)",
-      "description": "Native-source sum for Base Damage I's next ten levels from the genuine saved level; source formula at idleon1.23.txt:244124-132."
-    },
-    {
       "label": "minehead_description_multiplier_tile",
       "expression": "Number([\"1.0\", \"1.2\", \"1.4\", \"1.6\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"8\", \"8\", \"8\"][idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 12, 0)])",
       "description": "Native multiplier-tile damage value for the genuine saved quantity; source schedule at idleon1.23.txt:287956-958."
+    },
+    {
+      "label": "minehead_upgrade_quantities",
+      "expression": "idleon.getAttr(\"CustomLists\").h.MineheadUPG.map((_, index) => idleon.callFunction(\"Minehead\", \"UpgradeQTY\", index, 0))",
+      "description": "Native saved quantity or bonus for every valid Minehead upgrade, including saved Menagerie doubling."
+    },
+    {
+      "label": "minehead_upgrade_current_prices",
+      "expression": "idleon.getAttr(\"CustomLists\").h.MineheadUPG.map((_, index) => idleon.callFunction(\"Minehead\", \"UpgCost\", index, 0))",
+      "description": "Native next-level Mine Currency price for every valid Minehead upgrade at its saved level and current modifiers."
+    },
+    {
+      "label": "minehead_upgrade_requirements",
+      "expression": "idleon.getAttr(\"CustomLists\").h.MineheadUPG.map((_, index) => idleon.callFunction(\"Minehead\", \"UpgLvREQ\", index, 0))",
+      "description": "Native Research level requirement for every valid Minehead upgrade."
+    },
+    {
+      "label": "minehead_opponent_bonuses",
+      "expression": "idleon.getAttr(\"CustomLists\").h.Research[20].map((_, index) => idleon.callFunction(\"Minehead\", \"BonusQTY\", index, 0))",
+      "description": "Native earned Minehead opponent reward for every valid progression index."
+    },
+    {
+      "label": "minehead_opponent_preview_bonuses",
+      "expression": "idleon.getAttr(\"CustomLists\").h.Research[20].map((_, index) => idleon.callFunction(\"Minehead\", \"BonusQTY\", index, 99))",
+      "description": "Native preview Minehead opponent reward for every valid progression index, bypassing the earned-reward gate."
+    },
+    {
+      "label": "minehead_opponent_maximum_hp",
+      "expression": "idleon.getAttr(\"CustomLists\").h.Research[20].map((_, index) => idleon.callFunction(\"Minehead\", \"MaxHP_Opp\", index, 0))",
+      "description": "Native maximum HP for every valid Minehead opponent progression index."
+    },
+    {
+      "label": "minehead_opponent_depth_charges",
+      "expression": "idleon.getAttr(\"CustomLists\").h.Research[20].map((_, index) => idleon.callFunction(\"Minehead\", \"Mines_Opp\", index, 0))",
+      "description": "Native Depth Charge count for every valid Minehead opponent progression index."
     }
   ]
 }

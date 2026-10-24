@@ -1,7 +1,7 @@
 'use client';
 
 import { Box, Grid, Heading, Text } from 'grommet';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import ShadowBox from '../../base/ShadowBox';
 import IconImage from '../../base/IconImage';
@@ -11,7 +11,7 @@ import { Orion } from '../../../data/domain/world-1/orion';
 import { Poppy } from '../../../data/domain/world-2/poppy';
 import { Bubba } from '../../../data/domain/world-3/bubba';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
-import { DataStatus } from '../../../lib/stores/appDataStore';
+import useHydrated from '../../../lib/hooks/useHydrated';
 
 type ClickerKind = 'owl' | 'kangaroo' | 'bubba';
 
@@ -128,24 +128,20 @@ function getNextBonusUpgrade(theData: Map<string, any>, clicker: ClickerKind): C
 
 
 export default function ClickerBonusSummary({ clicker, title }: { clicker: ClickerKind; title: string }) {
-    const [hydrated, setHydrated] = useState(false);
-    const { theData, dataStatus, lastUpdated } = useAppDataStore(useShallow(state => ({
-        dataStatus: state.dataStatus,
+    const hydrated = useHydrated();
+    const { theData, lastUpdated } = useAppDataStore(useShallow(state => ({
         lastUpdated: state.lastUpdated,
         theData: state.data.getData(),
     })));
-
-    useEffect(() => {
-        setHydrated(true);
-    }, []);
 
     const bonuses = useMemo(() => getBonusRows(theData, clicker), [theData, clicker, lastUpdated]);
     const nextUpgrade = useMemo(() => getNextBonusUpgrade(theData, clicker), [theData, clicker, lastUpdated]);
     const nextBonus = bonuses?.find(bonus => bonus.index === nextUpgrade?.bonusIndex);
 
-    if (!hydrated || (dataStatus !== DataStatus.StaticData && dataStatus !== DataStatus.LiveData) || !bonuses || !nextUpgrade || !nextBonus) {
+    if (!hydrated || !bonuses || !nextUpgrade || !nextBonus) {
         return <Box><Text>Loading...</Text></Box>;
     }
+
 
     const activeCount = bonuses.filter(bonus => bonus.value > 0).length;
     return (

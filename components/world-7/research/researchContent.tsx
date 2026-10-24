@@ -13,7 +13,7 @@ import { Skilling } from "../../../data/domain/skilling";
 import { SkillsIndex } from "../../../data/domain/SkillsIndex";
 import { commaNotation, notateNumber } from "../../../data/utility";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
-import { DataStatus } from "../../../lib/stores/appDataStore";
+import useHydrated from "../../../lib/hooks/useHydrated";
 import ResearchGridDisplay from "./researchGrid";
 import ResearchShapes from "./researchShapes";
 
@@ -78,10 +78,16 @@ function SourceValue({ label, value, valueSize = "small", valueFirst = false, in
 }
 
 function ExpBonuses({ research }: { research: ResearchGrid }) {
-    return <Grid columns={["minmax(0, 1fr)", "minmax(0, 1fr)"]} gap="medium">
-        <Box gap="xsmall"><Text size="xsmall" weight="bold">Additive bonuses</Text><Contributions entries={research.production.additiveExpContributors} /></Box>
-        <Box gap="xsmall"><Text size="xsmall" weight="bold">Multipliers</Text><Contributions entries={research.production.expMultiplierContributors} /></Box>
-    </Grid>;
+    return (
+        <Box>
+            <Grid columns={["minmax(0, 1fr)", "minmax(0, 1fr)"]} gap="medium">
+                <Box gap="xsmall"><Text size="xsmall" weight="bold">Additive bonuses</Text><Contributions entries={research.production.additiveExpContributors} /></Box>
+                <Box gap="xsmall"><Text size="xsmall" weight="bold">Multipliers</Text><Contributions entries={research.production.expMultiplierContributors} /></Box>
+            </Grid>
+            <Box margin={{ top: "small" }}>
+                <Text size="xsmall">* This estimate uses deposited Spooky Scary Nametags. It assumes Gallery access and Silkrode Motherboard.</Text>
+            </Box>
+        </Box>);
 }
 
 function ObservationContext({ observation, research }: { observation: Observation; research: ResearchGrid }) {
@@ -151,6 +157,7 @@ function ObservationCard({ observation, research }: { observation: Observation; 
 
 function NoteReward({ note }: { note: PostyNote }) {
     const context = note.context;
+    if (!context) return <Text size="small">{note.data.description}</Text>;
     switch (context.kind) {
         case "lens": return <Text size="small">+{context.additionalLenses} Magnifying Glass</Text>;
         case "capacity": return <Text size="small">{context.capacity} lenses per Observation</Text>;
@@ -162,12 +169,13 @@ function NoteReward({ note }: { note: PostyNote }) {
 
 export default function ResearchContent() {
     const size = useContext(ResponsiveContext);
-    const { theData, dataStatus } = useAppDataStore(useShallow(state => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated, dataStatus: state.dataStatus })));
+    const hydrated = useHydrated();
+    const { theData } = useAppDataStore(useShallow(state => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })));
     const [query, setQuery] = useState("");
     const [tab, setTab] = useState<ResearchTab>("Observations");
     const [sort, setSort] = useState<typeof sorts[number]>("Game order");
     const research = theData.get("research") as ResearchGrid | undefined;
-    if ((dataStatus !== DataStatus.StaticData && dataStatus !== DataStatus.LiveData) || !research) {
+    if (!hydrated || !research) {
         return <Box pad={{ vertical: "medium" }}><Text>Loading Research data…</Text></Box>;
     }
     const { progress, discoveryAllowance: discovery, production, lensOwnership: ownership, offlineGains: offline, papers } = research;
@@ -241,7 +249,7 @@ export default function ResearchContent() {
                         <Text size="small">{lens.targetObservationIndex === undefined ? "Unplaced" : research.observations.find(observation => observation.index === lens.targetObservationIndex)!.data.name}</Text>
                     </ShadowBox>)}
                 </Grid>
-                {research.lenses.length === 0 && <Text size="small">No owned lenses.</Text>}
+                {research.lenses.length === 0 && <Text size="small">No saved lens data.</Text>}
             </Box>}
             {tab === "Posty Notes" && <Box as="section" id="research-posty-notes" gap="medium" aria-label="Posty Notes">
                 <Box direction="row" wrap gap="medium">

@@ -1,7 +1,7 @@
 "use client"
 
 import { Box, CheckBox, Grid, Heading, Text } from "grommet";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
 import ShadowBox from "../../../components/base/ShadowBox";
@@ -9,21 +9,17 @@ import IconImage from "../../../components/base/IconImage";
 import CoinsDisplay from "../../../components/coinsDisplay";
 import { getCoinsArray } from "../../../data/utility";
 import { Bribe, Bribes as BribesDomain, BribeStatus } from "../../../data/domain/world-1/bribes";
-import { DataStatus } from "../../../lib/stores/appDataStore";
+import useHydrated from "../../../lib/hooks/useHydrated";
 
 function Bribes() {
-    const [hydrated, setHydrated] = useState(false);
+    const hydrated = useHydrated();
     const [showBought, setShowBought] = useState(true);
-    const { theData, dataStatus } = useAppDataStore(useShallow(
-        (state) => ({ theData: state.data.getData(), dataStatus: state.dataStatus, lastUpdated: state.lastUpdated })
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
     const bribes = theData.get("bribes") as Bribe[] | undefined;
 
-    useEffect(() => {
-        setHydrated(true);
-    }, []);
-
-    if (!hydrated || (dataStatus !== DataStatus.StaticData && dataStatus !== DataStatus.LiveData) || !bribes) {
+    if (!hydrated || !bribes) {
         return <Box><Text>Loading...</Text></Box>;
     }
 

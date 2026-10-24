@@ -1,0 +1,9 @@
+{
+  "extractions": {
+    "pet_damage_multiplier": {
+      "expression": "idleon.callFunction(\"PetStuff\",\"PetBonusDMG\",\"0\",0,0)",
+      "result": 482.9953282638254
+    }
+  },
+  "errors": {}
+}

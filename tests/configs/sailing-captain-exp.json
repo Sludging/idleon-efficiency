@@ -1,0 +1,16 @@
+{
+  "description": "Sailing captain EXP requirements for all owned and shop captains, and raw captain EXP per trip for every island.",
+  "target": "Sailing captain EXP requirements and island captain EXP per trip",
+  "extractions": [
+    {
+      "label": "captain_exp_requirements",
+      "expression": "(()=>{const captains=idleon.engine.getGameAttribute(\"Captains\");const sailing=idleon.engine.getGameAttribute(\"Sailing\");const ownedCount=Math.round(Number(sailing[2][0])+1);return captains.map((record,index)=>({record,index})).filter(({record,index})=>(index<ownedCount&&Number(record[0])!==-1)||index>=captains.length-4).map(({index})=>({index,requirement:idleon.callFunction(\"Sailing\",\"CaptainExpReq\",index,0)}))})()",
+      "description": "Native next-level EXP requirements for owned captain indices 0–19 and displayed shop captain indices 30–33 in the genuine save. Each index maps to Captain.getExpForNextLevel()."
+    },
+    {
+      "label": "island_captain_exp_per_trip",
+      "expression": "(()=>{const islands=idleon.engine.getGameAttribute(\"CustomLists\").h.IslandInfo;return islands.map((record,index)=>({index,expPerTrip:idleon.callFunction(\"Sailing\",\"CaptainEXPgain\",index,0)}))})()",
+      "description": "Raw captain EXP per trip for all 17 island indices. The native getter multiplies IslandInfo[index][8] by the account captain EXP multiplier. Compare Island.getCaptainExpPerTrip() without rounding or display conversion."
+    }
+  ]
+}

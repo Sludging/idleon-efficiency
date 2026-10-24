@@ -1,0 +1,66 @@
+{
+  "description": "World 7 per-character quest completion states compared with the matching retained save.",
+  "target": "World 7 quest completion states",
+  "extractions": [
+    {
+      "label": "quest_sad_urie_1",
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Sad_Urie1\"]",
+      "description": "Urie Wants to be a Millionaire saved completion state: 1 means completed, 0 means started, and -1 means not started."
+    },
+    {
+      "label": "quest_snootie_1",
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Snootie1\"]",
+      "description": "Lost Possum saved completion state: 1 means completed, 0 means started, and -1 means not started."
+    },
+    {
+      "label": "quest_snootie_2",
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Snootie2\"]",
+      "description": "Lost Amber saved completion state: 1 means completed, 0 means started, and -1 means not started."
+    },
+    {
+      "label": "quest_snootie_3",
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Snootie3\"]",
+      "description": "Lost Doll saved completion state: 1 means completed, 0 means started, and -1 means not started."
+    },
+    {
+      "label": "quest_bloo_radley_1",
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Bloo_Radley1\"]",
+      "description": "To Guide a Shypig saved completion state: 1 means completed, 0 means started, and -1 means not started."
+    },
+    {
+      "label": "quest_bloo_radley_2",
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Bloo_Radley2\"]",
+      "description": "The Hero's Journey saved completion state: 1 means completed, 0 means started, and -1 means not started."
+    },
+    {
+      "label": "quest_toobus_goobus_1",
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Toobus_Goobus1\"]",
+      "description": "TUNNEL EXPLORING saved completion state: 1 means completed, 0 means started, and -1 means not started."
+    },
+    {
+      "label": "quest_toobus_goobus_2",
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Toobus_Goobus2\"]",
+      "description": "FEAR HOLE! FEAR HOLE! saved completion state: 1 means completed, 0 means started, and -1 means not started."
+    },
+    {
+      "label": "quest_toobus_goobus_3",
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Toobus_Goobus3\"]",
+      "description": "READING CHALLENGE saved completion state: 1 means completed, 0 means started, and -1 means not started."
+    },
+    {
+      "label": "quest_toobus_goobus_4",
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Toobus_Goobus4\"]",
+      "description": "RESEARCH STUDIES saved completion state: 1 means completed, 0 means started, and -1 means not started."
+    },
+    {
+      "label": "quest_zenelith_1",
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Zenelith1\"]",
+      "description": "1 Million Statues saved completion state: 1 means completed, 0 means started, and -1 means not started."
+    },
+    {
+      "label": "quest_wavey_wayne_1",
+      "expression": "idleon.getAttr(\"QuestComplete\").h[\"Wavey_Wayne1\"]",
+      "description": "Briny Tasks saved completion state: 1 means completed, 0 means started, and -1 means not started."
+    }
+  ]
+}

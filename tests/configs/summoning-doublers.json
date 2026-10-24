@@ -1,0 +1,31 @@
+{
+  "description": "Extract Summoning Doubler capacity, available doublers, and assigned doublers. Native game 1.24 counts each Holes[28] slot whose upgrade ID is not -1 as one used doubler.",
+  "target": "Summoning Doublers",
+  "extractions": [
+    {
+      "label": "summoning_doublers_owned",
+      "expression": "idleon.callFunction('Holes','GambitBonuses',0,0)+10*idleon.callFunction('Summoning','EventShopOwned',15,0)",
+      "description": "Total Summoning Doubler capacity from Gambit rewards and the Summoning Star purchase"
+    },
+    {
+      "label": "summoning_doublers_available",
+      "expression": "idleon.callFunction('Holes','Gambit_SummoningDoublersLeft',0,0)",
+      "description": "Summoning Doublers still available to assign to upgrades"
+    },
+    {
+      "label": "summoning_doublers_used",
+      "expression": "idleon.engine.getGameAttribute('Holes')[28].filter(function(id){return id != -1}).length",
+      "description": "Assigned Summoning Doublers count every nonempty allocation slot, not the sum of assigned upgrade IDs. Native game 1.24 uses -1 for an empty slot."
+    },
+    {
+      "label": "gambit_summoning_doublers",
+      "expression": "idleon.callFunction('Holes','GambitBonuses',0,0)",
+      "description": "Gambit reward contribution to Summoning Doubler capacity"
+    },
+    {
+      "label": "summoning_star_owned",
+      "expression": "Number(idleon.callFunction('Summoning','EventShopOwned',15,0))",
+      "description": "Summoning Star ownership as 0 or 1; this event-shop purchase adds ten Summoning Doublers"
+    }
+  ]
+}

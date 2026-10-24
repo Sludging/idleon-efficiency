@@ -3,6 +3,7 @@ import { initRoyalArmoryUpgradeRepo } from "../../data/RoyalArmoryUpgradeRepo";
 import { initOrbletMarketBonusRepo } from "../../data/OrbletMarketBonusRepo";
 import { initRoyalResourceRepo } from "../../data/RoyalResourceRepo";
 import { initRoyalStatueRepo } from "../../data/RoyalStatueRepo";
+import { MapInfo } from "../../maps";
 import type { Item } from "../../items";
 import type { Player } from "../../player";
 import { ClassIndex } from "../../talents";
@@ -112,9 +113,21 @@ export class RoyalArmory extends Domain {
         this.companionParchmentBonus = this.jellyParchmentBonus = 0;
     }
 
+    private appendMissingEligibleMapSources(): void {
+        // Static map metadata keeps the eligible catalogue available without saved RoyalMaps rows.
+        for (let mapId = 0; mapId < MapInfo.length; mapId++) {
+            if (this.mapStates.has(mapId) || !RoyalMapSource.isOutpostEligible(mapId)) continue;
+
+            const map = new RoyalMapSource(mapId);
+            map.updateRanks();
+            this.mapStates.set(mapId, map);
+        }
+    }
+
     init(allItems: Item[], _charCount: number) {
         this.resetCalculatedState();
         this.mapStates = new Map();
+        this.appendMissingEligibleMapSources();
         this.units.reset();
         this.resourceNodes.parse([]);
         this.additionalRoyalStatueLevels = [];
@@ -150,6 +163,7 @@ export class RoyalArmory extends Domain {
             map.parse(row);
             armory.mapStates.set(mapId, map);
         });
+        armory.appendMissingEligibleMapSources();
         armory.units.parse(royalG);
         armory.selectedExperienceRank = royalArmoryAsNumber(royalG[3]?.[7]);
         armory.selectedOutpostBonusIndex = Number(royalG[3]?.[2] ?? 0);

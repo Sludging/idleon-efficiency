@@ -2,6 +2,7 @@ import { lavaFunc, range } from "../../utility";
 import { Domain, RawData } from "../base/domain";
 import { GemStore } from "../gemPurchases";
 import type { Menagerie } from "../menagerie";
+import type { Card } from "../cards";
 import { Item } from "../items";
 
 const getDescRegex = () => { return /Smelt down (\d+) Ores into 1 Bar at the Forge. Smelting will take (\d+) Seconds per Bar using Forge Slot 1./g; };
@@ -10,6 +11,7 @@ const getOilRegex = () => { return /Increases (.*) by (\d+)% for (.*) it's in. (
 export class ForgeSlot {
     brimestone: boolean = false
     menagerieMultiplier: number = 1;
+    godshardCardBonus: number = 0;
 
     constructor(public ores: Item, public oils: Item, public bars: Item, public progress: number) { }
 
@@ -35,20 +37,19 @@ export class ForgeSlot {
 
     getOilSpeed = () => {
         const match = getOilRegex().exec(this.oils.description);
-        if (match && match.length > 4) {
-            if (match[1] === "Forging Speed") {
-                return parseInt(match[2])
-            }
+        if (match && match.length > 4 && match[1] === "Forging Speed") {
+            return parseInt(match[2]);
         }
-        return 1;
+        return 0;
     }
 
     getSpeed = (upgradeBonus: number) => {
-        let speed = Math.round(upgradeBonus * this.menagerieMultiplier) / 100;
-        speed *= this.getOilSpeed();
+        let speed = Math.round((upgradeBonus + this.godshardCardBonus) * this.menagerieMultiplier) / 100;
+        speed *= 1 + this.getOilSpeed() / 100;
         if (this.brimestone) {
             speed *= 1.5;
         }
+        // The native Forge loop applies four times this quarter-scaled progress multiplier.
         return speed * 0.25;
     }
 }
@@ -203,12 +204,15 @@ export class Forge extends Domain {
     }
 }
 
-export const updateForge = (forge: Forge, gemStore: GemStore, menagerie: Menagerie) => {
+export const updateForge = (forge: Forge, gemStore: GemStore, menagerie: Menagerie, cards: Card[]) => {
     const brimeStoneBought = gemStore.purchases.find(purchase => purchase.no == 104)?.pucrhased ?? 0;
+    const godshardCardBonus = 30 * cards.find(card => card.id === "Godshard")!.getLevels();
+    const menagerieMultiplier = menagerie.getBonusMultiplier(11);
+
     forge.slots.forEach((slot, index) => {
-        if (index < brimeStoneBought)
-            slot.brimestone = true;
-        slot.menagerieMultiplier = menagerie.getBonusMultiplier(11);
+        slot.brimestone = index < brimeStoneBought;
+        slot.godshardCardBonus = godshardCardBonus;
+        slot.menagerieMultiplier = menagerieMultiplier;
     });
 
     return forge;

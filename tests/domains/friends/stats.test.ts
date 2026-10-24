@@ -1,5 +1,5 @@
 /**
- * Account-wide Friend Bonus stat checks.
+ * Account-wide Friend Bonus stat and slot checks.
  *
  * The saved account assigns six bonuses at level 13,053 and leaves the seventh
  * stat unassigned. The assertions cover those seven visible stat values,
@@ -39,6 +39,19 @@ describe('Friends Domain - Stats', () => {
   validateExtractionHealth(extractionResults);
   gameData = loadGameDataFromSave(saveName);
   friends = gameData.get('friends') as Friends;
+ });
+
+ it('matches the available Friend Bonus slots', () => {
+  const liveValue = getExtractedValue(extractionResults, 'friend_bonus_slots');
+  if (liveValue === undefined || liveValue === null) {
+   throw new Error('Missing native Friend Bonus slots result: friend_bonus_slots');
+  }
+
+  expect(friends.friendBonusSlots).toMatchLiveGameWithDetails(liveValue, {
+   tolerance: 0,
+   context: 'Available Friend Bonus slots',
+   debugInfo: { saveName, gameDataLoaded: gameData.has('friends') },
+  });
  });
 
  friendBonusStats.forEach(({ index, label, description }) => {

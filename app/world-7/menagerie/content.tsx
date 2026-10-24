@@ -6,14 +6,15 @@ import { normalizeColor } from 'grommet/utils';
 import { useContext, useState } from 'react';
 import ContentTabs from '../../../components/base/ContentTabs';
 import IconImage from '../../../components/base/IconImage';
+import { DoublerSummary } from '../../../components/base/DoublerStatus';
 import RoundedShadowBox from '../../../components/base/RoundedShadowBox';
 import TextAndLabel from '../../../components/base/TextAndLabel';
 import { Menagerie as MenagerieDomain, MenagerieBonus, MenagerieMission } from '../../../data/domain/menagerie';
 import { ImageData } from '../../../data/domain/imageData';
-import { DataStatus } from '../../../lib/stores/appDataStore';
 import { commaNotation, getCoinsArray, notateNumber } from '../../../data/utility';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
+import useHydrated from '../../../lib/hooks/useHydrated';
 import TipDisplay from 'components/base/TipDisplay';
 import CoinsDisplay from '../../../components/coinsDisplay';
 import { ResourceDisplay } from '../../../components/account/shared/ResourceDisplay';
@@ -45,7 +46,7 @@ const bonusEffectText = (bonus: MenagerieBonus, effect: number): string => {
 const sourceDescription = (text: string): string =>
     text.replace(/,\s*1 in \$ chance/, '').replace(/[{}$]/g, '').replace(/膛/g, '').trim();
 const jellyfishHelp: Record<string, React.ReactNode> = {
-    Purple: <Box gap="small">
+    Pink: <Box gap="small">
         <Text>Spend Money to buy Shells. Lumi upgrades increase the hourly Lumi bonus.</Text>
     </Box>,
     Blue: <Box gap="small">
@@ -135,18 +136,16 @@ const missionColumns: NonNullable<DataTableProps<MissionRow>['columns']> = [
 ];
 
 export default function MenagerieContent() {
+    const hydrated = useHydrated();
     const small = useContext(ResponsiveContext) === 'small';
-    const { theData, dataStatus } = useAppDataStore(useShallow(state => ({
+    const { theData } = useAppDataStore(useShallow(state => ({
         theData: state.data.getData(),
-        dataStatus: state.dataStatus,
         lastUpdated: state.lastUpdated,
     })));
     const [tab, setTab] = useState<MenagerieTab>('Missions');
     const [missionFilter, setMissionFilter] = useState<MissionFilter>('All');
     const menagerie = theData.get('menagerie') as MenagerieDomain | undefined;
-    if ([DataStatus.Init, DataStatus.Loading].includes(dataStatus)) return <>Loading Menagerie data</>;
-    if ([DataStatus.NoData, DataStatus.MissingData].includes(dataStatus)) return <>Menagerie account data is unavailable.</>;
-    if (!menagerie) return <>Menagerie data is unavailable.</>;
+    if (!hydrated || !menagerie) return <>Loading Menagerie data</>;
 
     const progression = menagerie.getProgression();
     const availability = menagerie.getMissionAvailability();
@@ -201,7 +200,7 @@ export default function MenagerieContent() {
                             />
                         </SummaryGroup>
                         <SummaryGroup label="Missions" separated>
-                            <Box data-testid="mission-availability-summary" gap="small">
+                            <Box gap="small">
                                 <TipDisplay heading="Unlock more missions" body={
                                     <Box gap="xsmall">
                                         <Text size="small">Available missions come from the mission limit and these account contributors:</Text>
@@ -302,17 +301,20 @@ export default function MenagerieContent() {
                     {tab === 'Bonuses' && <Box gap="medium">
                         <Box border={[{ side: 'top', color: 'grey-1' }, { side: 'bottom', color: 'grey-1' }]} pad={{ vertical: 'small' }} direction="row" wrap gap="medium" align="center" aria-label="Usable Menagerie resources">
                             {([
-                                { key: 'blackStarsOwned', label: 'Black Stars', available: resources.blackStarsAvailable, total: resources.blackStarsOwned },
-                                { key: 'organicLabels', label: 'Organic Labels', available: resources.organicLabelsAvailable, total: resources.organicLabels },
-                                { key: 'mineheadDoublers', label: 'Minehead doublers', available: resources.mineheadDoublers, total: resources.mineheadDoublersOwned },
-                                { key: 'sushiDoublers', label: 'Sushi Station doublers', available: resources.sushiDoublers, total: resources.sushiDoublersOwned },
-                                { key: 'jellyOperatorDoublers', label: 'Jelly Operator doublers', available: resources.jellyOperatorDoublers, total: resources.jellyOperatorDoublersOwned },
+                                { key: 'blackStarsOwned', label: 'Black Stars', available: resources.blackStarsAvailable, total: resources.blackStarsOwned, description: 'One Black Star doubles a Star Sign or Palette color bonus (2x). Two Black Stars quadruple it (4x).' },
+                                { key: 'organicLabels', label: 'Organic Labels', available: resources.organicLabelsAvailable, total: resources.organicLabels, description: 'An Organic Label doubles an Exotic Market bonus and multiplies level gains from purchases by 1.5 before rounding up.' },
+                                { key: 'mineheadDoublers', label: 'Minehead doublers', available: resources.mineheadDoublers, total: resources.mineheadDoublersOwned, description: "Each doubler doubles a Minehead upgrade's quantity." },
+                                { key: 'sushiDoublers', label: 'Sushi Station doublers', available: resources.sushiDoublers, total: resources.sushiDoublersOwned, description: "Each doubler doubles a Sushi Station upgrade's quantity." },
+                                { key: 'jellyOperatorDoublers', label: 'Jelly Operator doublers', available: resources.jellyOperatorDoublers, total: resources.jellyOperatorDoublersOwned, description: "Each doubler doubles a Jelly Operator upgrade's quantity." },
                             ] as const).map((resource, resourceIndex) => <Box key={resource.key} direction="row" gap="medium" align="stretch" flex={{ grow: 1, shrink: 1 }} style={{ flexBasis: '160px' }}>
                                 {resourceIndex > 0 && <Box width="1px" background="grey-1" flex={false} aria-hidden="true" />}
-                                <Box direction="row" gap="small" align="center">
-                                    <IconImage data={menagerie.getUsableResourceImageData(resource.key)} scale={0.75} />
-                                    <TextAndLabel label={resource.label} text={`${commaNotation(resource.available)}/${commaNotation(resource.total)}`} textSize="small" />
-                                </Box>
+                                <DoublerSummary
+                                    label={resource.label}
+                                    owned={resource.total}
+                                    available={resource.available}
+                                    image={MenagerieDomain.getUsableResourceImageData(resource.key)}
+                                    description={resource.description}
+                                />
                             </Box>)}
                         </Box>
                         <Grid columns={small ? ['flex'] : ['flex', 'flex', 'flex', 'flex']} gap="medium" align="stretch">
@@ -435,8 +437,8 @@ function RedJellyfishDetails({ jelly }: { jelly: MenagerieDomain['redJellyfish']
             <TextAndLabel label="Reading multiplier" text={`×${commaNotation(jelly.readingMultiplier)}`} textSize="small" />
         </Box>
         <Box direction="row" gap="small" wrap border={{ side: 'top', color: 'grey-1' }} pad={{ top: 'small' }}>
-            {jelly.pageItems.map(pageItem => 
-                <Box title={pageItem.item.displayName} tabIndex={0} aria-label={`${pageItem.item.displayName}: ${commaNotation(pageItem.quantity)} pages recorded`} align="center" gap="xsmall">
+            {jelly.pageItems.map(pageItem =>
+                <Box key={pageItem.index} title={pageItem.item.displayName} tabIndex={0} aria-label={`${pageItem.item.displayName}: ${commaNotation(pageItem.quantity)} pages recorded`} align="center" gap="xsmall">
                     <IconImage data={pageItem.item.getImageData()} scale={0.8} />
                     <Text size="xsmall">{commaNotation(pageItem.quantity)}</Text>
                 </Box>)}

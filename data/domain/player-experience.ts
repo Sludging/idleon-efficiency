@@ -51,6 +51,7 @@ import type { Clamworks } from './world-7/clamworks';
 import type { Meritocraty } from './world-7/meritocraty';
 import type { RoyalArmory } from './world-6/royalArmory/royalArmory';
 import type { Tesseract } from './tesseract';
+import type { Menagerie } from './menagerie';
 
 /** Reproduces native ExpMulti(0) for the selected persistent player. */
 export const getClassExperienceMultiplier = (data: Map<string, any>, player: Player): number => {
@@ -233,6 +234,8 @@ const getClassExperienceMultiplierFactors = (
     royalArmory: RoyalArmory,
 ): number => {
     const companions = data.get('companions') as Companion[];
+    const breeding = data.get('breeding') as Breeding;
+    const menagerie = data.get('menagerie') as Menagerie;
     const gatedTalent = hasCompassMedallion
         ? Math.max(1, Talent.getAccountTalentBonus(players, 429, player.finalTalentInputs))
         : 1;
@@ -241,6 +244,8 @@ const getClassExperienceMultiplierFactors = (
         * (1 + getCompanionActiveBonus(companions, 33))
         * (1 + 4 * getCompanionActiveBonus(companions, 160))
         * (1 + getCompanionActiveBonus(companions, 32))
+        * (1 + 0.2 * breeding.getCrucibleBonus(15))
+        * (1 + menagerie.getBonusValue(23) / 100)
         * (1 + 0.4 * getCompanionActiveBonus(companions, 168))
         * (1 + getCompanionActiveBonus(companions, 34))
         * (1 + getCompanionActiveBonus(companions, 145))

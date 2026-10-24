@@ -1,0 +1,9 @@
+{
+  "extractions": {
+    "meat_slice_rate": {
+      "expression": "idleon.callFunction(\"Bubbastuff\",\"MeatsliceRate\",0,0)",
+      "result": 1580709685.945866
+    }
+  },
+  "errors": {}
+}

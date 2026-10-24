@@ -18,12 +18,12 @@ export const UPCOMING_BUTTON_TASK_COUNT = 5;
 export type ButtonTaskProgress = { currentValue: number; characterName?: string };
 
 export type UpcomingButtonTask = {
-  index: number;
-  description: string;
-  pressCount: number;
-  pressNumber: number;
-  requiredValue: number;
-  progress: ButtonTaskProgress & { isReady: boolean };
+ index: number;
+ description: string;
+ pressCount: number;
+ pressNumber: number;
+ requiredValue: number;
+ progress: ButtonTaskProgress & { isReady: boolean };
 };
 
 // Native Button_REQ uses completed presses; only linear and step requirements round up.
@@ -114,7 +114,10 @@ export class Button extends Domain {
  init(_allItems: Item[], _charCount: number) {
   this.bonuses = ButtonBonus.fromBase(initButtonBonusRepo());
   this.tasks = initButtonTaskRepo();
-  this.upcomingTaskProgress = [];
+  this.pressCount = 0;
+  this.bonusMultiplier = 1;
+  // Account processing replaces neutral progress after the task producers update.
+  this.upcomingTaskProgress = Array.from({ length: UPCOMING_BUTTON_TASK_COUNT }, () => ({ currentValue: 0 }));
   this.taskByPosition = Array.from({ length: BUTTON_TASK_CYCLE_LENGTH });
 
   this.tasks.forEach(task => {
@@ -138,6 +141,8 @@ export class Button extends Domain {
   const optionList = data.get("OptLacc") as number[] | undefined;
   const pressCount = Math.max(0, Math.trunc(Number(optionList?.[BUTTON_PRESS_COUNT_OPTION]) || 0));
   button.pressCount = pressCount;
+  // Reset cached progress before calculating tasks for this save.
+  button.upcomingTaskProgress = Array.from({ length: UPCOMING_BUTTON_TASK_COUNT }, () => ({ currentValue: 0 }));
 
   button.bonuses.forEach(bonus => {
    bonus.categoryPresses = calculateCategoryPresses(bonus.index, pressCount);
@@ -173,10 +178,6 @@ export class Button extends Domain {
     throw new Error(`Button task cycle has no task at position ${pressCount % BUTTON_TASK_CYCLE_LENGTH}`);
    }
    const progress = this.upcomingTaskProgress[offset];
-
-   if (!progress) {
-    throw new Error(`Button task progress is missing for queue position ${offset}`);
-   }
 
    const scheduledTask = {
     index: task.index,

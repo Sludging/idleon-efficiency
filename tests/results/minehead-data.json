@@ -1,169 +1,5 @@
 {
   "extractions": {
-    "minehead_bonus_0": {
-      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 0, 0)",
-      "result": 10
-    },
-    "minehead_bonus_12": {
-      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 12, 0)",
-      "result": 1
-    },
-    "minehead_bonus_13": {
-      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 13, 0)",
-      "result": 0
-    },
-    "minehead_bonus_21": {
-      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 21, 0)",
-      "result": 0
-    },
-    "minehead_bonus_31": {
-      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 31, 0)",
-      "result": 0
-    },
-    "minehead_preview_21": {
-      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 21, 99)",
-      "result": 2
-    },
-    "minehead_preview_31": {
-      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 31, 99)",
-      "result": 31
-    },
-    "minehead_upgrade_quantity_0": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 0, 0)",
-      "result": 109
-    },
-    "minehead_upgrade_quantity_3": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 3, 0)",
-      "result": 680
-    },
-    "minehead_upgrade_quantity_16": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 16, 0)",
-      "result": 1
-    },
-    "minehead_upgrade_quantity_26": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 26, 0)",
-      "result": 0
-    },
-    "minehead_upgrade_quantity_29": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 29, 0)",
-      "result": 0
-    },
-    "minehead_upgrade_requirement_2": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 2, 0)",
-      "result": 7
-    },
-    "minehead_upgrade_requirement_3": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 3, 0)",
-      "result": 11
-    },
-    "minehead_upgrade_requirement_10": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 10, 0)",
-      "result": 34
-    },
-    "minehead_upgrade_requirement_11": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 11, 0)",
-      "result": 38
-    },
-    "minehead_upgrade_requirement_20": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 20, 0)",
-      "result": 68
-    },
-    "minehead_upgrade_requirement_21": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 21, 0)",
-      "result": 72
-    },
-    "minehead_upgrade_cost_0": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 0, 0)",
-      "result": 81234.90761812578
-    },
-    "minehead_upgrade_cost_1": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 1, 0)",
-      "result": 5038848
-    },
-    "minehead_upgrade_cost_2": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 2, 0)",
-      "result": 35039520.263671875
-    },
-    "minehead_upgrade_cost_3": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 3, 0)",
-      "result": 60348.385765388506
-    },
-    "minehead_upgrade_cost_4": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 4, 0)",
-      "result": 97947.03675476456
-    },
-    "minehead_upgrade_cost_5": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 5, 0)",
-      "result": 146722.2884080062
-    },
-    "minehead_upgrade_cost_9": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 9, 0)",
-      "result": 136436.49888446913
-    },
-    "minehead_upgrade_cost_10": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 10, 0)",
-      "result": 1254603888083.5676
-    },
-    "minehead_upgrade_cost_26": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 26, 0)",
-      "result": 19274409133.936085
-    },
-    "minehead_upgrade_cost_29": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 29, 0)",
-      "result": 396087843839.4885
-    },
-    "minehead_upgrade_affordable_0": {
-      "expression": "idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 0, 0)",
-      "result": 1
-    },
-    "minehead_upgrade_affordable_1": {
-      "expression": "idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 1, 0)",
-      "result": 0
-    },
-    "minehead_upgrade_affordable_29": {
-      "expression": "idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 29, 0)",
-      "result": 0
-    },
-    "minehead_upgrade_unlocked_20": {
-      "expression": "Number(idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 20, 0))",
-      "result": 1
-    },
-    "minehead_upgrade_unlocked_21": {
-      "expression": "Number(idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 21, 0))",
-      "result": 0
-    },
-    "minehead_upgrade_buyable_0": {
-      "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 0, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 0, 0))",
-      "result": 1
-    },
-    "minehead_upgrade_buyable_1": {
-      "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 1, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 1, 0))",
-      "result": 0
-    },
-    "minehead_upgrade_buyable_20": {
-      "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 20, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 20, 0))",
-      "result": 0
-    },
-    "minehead_upgrade_buyable_21": {
-      "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 21, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 21, 0))",
-      "result": 0
-    },
-    "minehead_upgrade_buyable_29": {
-      "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 29, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 29, 0))",
-      "result": 0
-    },
-    "minehead_upgrade_maxed_0": {
-      "expression": "Number(Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[0][1]) <= 998 && Number(idleon.getAttr(\"Research\")[8][0]) >= Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[0][1]))",
-      "result": 0
-    },
-    "minehead_upgrade_maxed_1": {
-      "expression": "Number(Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[1][1]) <= 998 && Number(idleon.getAttr(\"Research\")[8][1]) >= Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[1][1]))",
-      "result": 0
-    },
-    "minehead_upgrade_maxed_29": {
-      "expression": "Number(Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[29][1]) <= 998 && Number(idleon.getAttr(\"Research\")[8][29]) >= Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[29][1]))",
-      "result": 1
-    },
     "minehead_sushi_1": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 1, 0)",
       "result": 30
@@ -184,62 +20,6 @@
       "expression": "idleon.callFunction(\"Minehead\", \"CurrencyGain\", 0, 0)",
       "result": 7980.438938137625
     },
-    "opponent_0_max_hp": {
-      "expression": "idleon.callFunction(\"Minehead\", \"MaxHP_Opp\", 0, 0)",
-      "result": 5
-    },
-    "opponent_0_depth_charges": {
-      "expression": "idleon.callFunction(\"Minehead\", \"Mines_Opp\", 0, 0)",
-      "result": 1
-    },
-    "opponent_9_max_hp": {
-      "expression": "idleon.callFunction(\"Minehead\", \"MaxHP_Opp\", 9, 0)",
-      "result": 38164.32746680321
-    },
-    "opponent_9_depth_charges": {
-      "expression": "idleon.callFunction(\"Minehead\", \"Mines_Opp\", 9, 0)",
-      "result": 2
-    },
-    "opponent_17_max_hp": {
-      "expression": "idleon.callFunction(\"Minehead\", \"MaxHP_Opp\", 17, 0)",
-      "result": 363767860.4093668
-    },
-    "opponent_17_depth_charges": {
-      "expression": "idleon.callFunction(\"Minehead\", \"Mines_Opp\", 17, 0)",
-      "result": 8
-    },
-    "minehead_upgrade_quantity_4": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 4, 0)",
-      "result": 430
-    },
-    "minehead_upgrade_quantity_5": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 5, 0)",
-      "result": 970
-    },
-    "minehead_upgrade_quantity_7": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 7, 0)",
-      "result": 207
-    },
-    "minehead_upgrade_quantity_21": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 21, 0)",
-      "result": 0
-    },
-    "minehead_upgrade_quantity_22": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 22, 0)",
-      "result": 0
-    },
-    "minehead_upgrade_quantity_25": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 25, 0)",
-      "result": 0
-    },
-    "minehead_upgrade_quantity_27": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 27, 0)",
-      "result": 0
-    },
-    "minehead_upgrade_quantity_28": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 28, 0)",
-      "result": 0
-    },
     "minehead_description_max_tile_number": {
       "expression": "Math.round(1 + (idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 1, 0) + 1 + Math.min(1, Math.floor((idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 1, 0) + 1) / 9))))",
       "result": 11
@@ -259,10 +39,6 @@
     "minehead_description_currency_log_bonus": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 28, 0) * Math.log(Math.max(idleon.getAttr(\"Research\")[7][6], 1)) / 2.30259",
       "result": 0
-    },
-    "minehead_bonus_6": {
-      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 6, 0)",
-      "result": 50
     },
     "minehead_research_167": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 167, 0)",
@@ -352,25 +128,262 @@
       "expression": "idleon.getAttr(\"Research\")[7][4]",
       "result": 13
     },
-    "minehead_upgrade_quantity_6": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 6, 0)",
-      "result": 2
-    },
-    "minehead_upgrade_quantity_12": {
-      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 12, 0)",
-      "result": 2
-    },
-    "minehead_upgrade_cost_to_max_1": {
-      "expression": "Array.from({length: Math.max(0, Math.min(idleon.getAttr(\"CustomLists\").h.MineheadUPG[1][1], idleon.getAttr(\"Research\")[8][1] + 10) - idleon.getAttr(\"Research\")[8][1])}, (_, offset) => 6 * (1 / (1 + idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 26, 0) / 100)) * Math.max(.1, 1 - Math.max(idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 1, 0), idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 16, 0)) / 100) * Math.pow(idleon.getAttr(\"CustomLists\").h.MineheadUPG[1][2], idleon.getAttr(\"Research\")[8][1] + offset)).reduce((sum, cost) => sum + cost, 0)",
-      "result": 10155994659072
-    },
-    "minehead_upgrade_next10_cost_0": {
-      "expression": "Array.from({length: 10}, (_, offset) => 5 * (1 / (1 + idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 26, 0) / 100)) * Math.max(.1, 1 - Math.max(idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 1, 0), idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 16, 0)) / 100) * Math.pow(idleon.getAttr(\"CustomLists\").h.MineheadUPG[0][2], idleon.getAttr(\"Research\")[8][0] + offset)).reduce((sum, cost) => sum + cost, 0)",
-      "result": 1294675.2151330807
-    },
     "minehead_description_multiplier_tile": {
       "expression": "Number([\"1.0\", \"1.2\", \"1.4\", \"1.6\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"8\", \"8\", \"8\"][idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 12, 0)])",
       "result": 1.4
+    },
+    "minehead_upgrade_quantities": {
+      "expression": "idleon.getAttr(\"CustomLists\").h.MineheadUPG.map((_, index) => idleon.callFunction(\"Minehead\", \"UpgradeQTY\", index, 0))",
+      "result": [
+        109,
+        8,
+        8,
+        680,
+        430,
+        970,
+        2,
+        207,
+        4,
+        22,
+        1,
+        10,
+        2,
+        18,
+        2,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "minehead_upgrade_current_prices": {
+      "expression": "idleon.getAttr(\"CustomLists\").h.MineheadUPG.map((_, index) => idleon.callFunction(\"Minehead\", \"UpgCost\", index, 0))",
+      "result": [
+        81234.90761812578,
+        5038848,
+        35039520.263671875,
+        60348.385765388506,
+        97947.03675476456,
+        146722.2884080062,
+        2132858.283255199,
+        57732.75111952213,
+        762531.6485188233,
+        136436.49888446913,
+        1254603888083.5676,
+        13619.71715960677,
+        13025824.374179663,
+        46534.90961563138,
+        117717.37125335267,
+        348226.74486934725,
+        4222331.949340401,
+        1982283.1308425085,
+        5561989.733908418,
+        15551302.864798712,
+        43343407.80965871,
+        120455439.56717324,
+        333877832.50485265,
+        923216063.6423789,
+        2547175133.180756,
+        7013408423.782687,
+        19274409133.936085,
+        52877894594.7534,
+        144831046259.10028,
+        396087843839.4885
+      ]
+    },
+    "minehead_upgrade_requirements": {
+      "expression": "idleon.getAttr(\"CustomLists\").h.MineheadUPG.map((_, index) => idleon.callFunction(\"Minehead\", \"UpgLvREQ\", index, 0))",
+      "result": [
+        1,
+        4,
+        7,
+        11,
+        14,
+        17,
+        21,
+        24,
+        27,
+        31,
+        34,
+        38,
+        42,
+        45,
+        48,
+        52,
+        55,
+        58,
+        62,
+        65,
+        68,
+        72,
+        76,
+        79,
+        83,
+        86,
+        89,
+        93,
+        96,
+        99
+      ]
+    },
+    "minehead_opponent_bonuses": {
+      "expression": "idleon.getAttr(\"CustomLists\").h.Research[20].map((_, index) => idleon.callFunction(\"Minehead\", \"BonusQTY\", index, 0))",
+      "result": [
+        10,
+        2,
+        1,
+        40,
+        1,
+        100,
+        50,
+        1,
+        2,
+        80,
+        3,
+        25,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "minehead_opponent_preview_bonuses": {
+      "expression": "idleon.getAttr(\"CustomLists\").h.Research[20].map((_, index) => idleon.callFunction(\"Minehead\", \"BonusQTY\", index, 99))",
+      "result": [
+        10,
+        2,
+        1,
+        40,
+        1,
+        100,
+        50,
+        1,
+        2,
+        80,
+        3,
+        25,
+        1,
+        30,
+        2,
+        10,
+        20,
+        5,
+        1,
+        25,
+        1,
+        2,
+        50,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ]
+    },
+    "minehead_opponent_maximum_hp": {
+      "expression": "idleon.getAttr(\"CustomLists\").h.Research[20].map((_, index) => idleon.callFunction(\"Minehead\", \"MaxHP_Opp\", index, 0))",
+      "result": [
+        5,
+        14.4,
+        42.120000000000005,
+        116.64000000000001,
+        304.4304,
+        755.8272000000001,
+        1802.6478720000002,
+        7701.728002560001,
+        17328.888005760004,
+        38164.32746680321,
+        154276.54154939813,
+        332082.10700357804,
+        2822823.5622195513,
+        10975725.41828094,
+        22847179.787947796,
+        47158973.5465815,
+        178741016.494849,
+        363767860.4093668,
+        735931216.8653764,
+        10958505364.603415,
+        21944406992.61834,
+        43749947805.25642,
+        160712824403.017,
+        317940019818.98175,
+        626847254040.4166,
+        2279216615690.955,
+        17866296392765.133,
+        34918104163073.73,
+        125935089433068.12,
+        244935850060051.3,
+        475340826625942.75,
+        1703085791349619
+      ]
+    },
+    "minehead_opponent_depth_charges": {
+      "expression": "idleon.getAttr(\"CustomLists\").h.Research[20].map((_, index) => idleon.callFunction(\"Minehead\", \"Mines_Opp\", index, 0))",
+      "result": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        3,
+        4,
+        5,
+        7,
+        7,
+        8,
+        9,
+        9,
+        9,
+        11,
+        11,
+        11,
+        12,
+        12,
+        13,
+        14,
+        15,
+        15,
+        16,
+        16
+      ]
     }
   },
   "errors": {}

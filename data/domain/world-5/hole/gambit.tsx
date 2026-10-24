@@ -93,8 +93,12 @@ export class GambitBonus {
         }
     }
 
+    static getScoreThreshold(index: number): number {
+        return 2E3 + 1E3 * (index + 1) * (1 + index / 5) * Math.pow(1.26, index);
+    }
+
     getScoreThreshold(): number {
-        return 2E3 + 1E3 * (this.index + 1) * (1 + this.index / 5) * Math.pow(1.26, this.index);
+        return GambitBonus.getScoreThreshold(this.index);
     }
 }
 

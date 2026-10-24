@@ -64,8 +64,11 @@ export class Talent {
         this.skillIndex = data.skillIndex;
     }
 
+    resetAccountBonusInputs(): void {}
+
+
     /** Select the highest candidate bonus using candidate allocations and presets with the recipient's shared modifiers. */
-    static getAccountTalentBonus(players: readonly Player[], skillIndex: number, recipientInputs: TalentLevelInputs): number {
+    static getAccountTalentBonus(players: readonly Player[], skillIndex: number, recipientInputs: TalentLevelInputs, yBonus: boolean = false): number {
         let maximum = 0;
         for (const owner of players) {
             const talent = owner.getTalent(skillIndex);
@@ -76,7 +79,7 @@ export class Talent {
             const extraLevels = talent.pointsSpent > 0.5
                 ? talent.getExtraLevels(recipientInputs, owner.allPresetSuperTalentIndexes.has(skillIndex))
                 : 0;
-            maximum = Math.max(maximum, talent.getBonusAtLevel(talent.pointsSpent + extraLevels));
+            maximum = Math.max(maximum, talent.getBonusAtLevel(talent.pointsSpent + extraLevels, false, yBonus));
         }
         return maximum;
     }
@@ -90,6 +93,7 @@ export class Talent {
         const talentBonus = Talent.getAccountTalentBonus(players, 328, recipientInputs);
         return 1 + talentBonus * lavaLog(plunderousMobKills) / 100;
     }
+
 
     static getClassLevelAttributeBonus(player: Player): number {
         const talent = player.talents.find((talent): talent is WillOfTheEldestTalent => {
@@ -226,7 +230,7 @@ export class Talent {
 }
 
 class BeginnerBestClassTalent extends Talent {
-    private highestBeginnerLevel: number | undefined;
+    private highestBeginnerLevel: number = 0;
 
     static preparePowerBonuses(players: readonly Player[]): void {
         let highestBeginnerLevel = 0;
@@ -250,16 +254,18 @@ class BeginnerBestClassTalent extends Talent {
     }
 
     getWeaponPowerBonus(): number {
-        if (this.highestBeginnerLevel === undefined) {
-            throw new Error("Beginner Best Class requires prepared beginner character levels.");
-        }
         // Cap the settled talent curve at one weapon power per ten levels of the highest eligible character.
         return Math.min(this.getBonus(), Math.floor(this.highestBeginnerLevel / 10));
     }
+
+    override resetAccountBonusInputs(): void {
+        this.highestBeginnerLevel = 0;
+    }
+
 }
 
 class WillOfTheEldestTalent extends Talent {
-    private highestCharacterLevel: number | undefined;
+    private highestCharacterLevel: number = 0;
 
     static prepareAttributeBonuses(players: readonly Player[]): void {
         let highestCharacterLevel = 0;
@@ -281,11 +287,12 @@ class WillOfTheEldestTalent extends Talent {
     }
 
     getAttributeBonus(): number {
-        if (this.highestCharacterLevel === undefined) {
-            throw new Error("Will Of The Eldest requires prepared character levels.");
-        }
         // The attribute effect caps the ordinary talent curve at one point per ten character levels.
         return Math.min(this.getBonus(), Math.floor(this.highestCharacterLevel / 10));
+    }
+
+    override resetAccountBonusInputs(): void {
+        this.highestCharacterLevel = 0;
     }
 }
 

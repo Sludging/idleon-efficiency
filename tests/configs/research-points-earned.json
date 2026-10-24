@@ -1,0 +1,11 @@
+{
+  "description": "Research earned Points CORE comparison for the unchanged latest save and independently paired game results.",
+  "target": "Account-wide earned Research Points",
+  "extractions": [
+    {
+      "label": "points_earned",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_PTSearned\", 0, 0)",
+      "description": "Public native earned Points total; maps to ResearchGrid.points.earned without changing the account-level projection."
+    }
+  ]
+}

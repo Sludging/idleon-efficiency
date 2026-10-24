@@ -1,0 +1,26 @@
+{
+  "description": "Approved #491 account-wide lens CORE outputs only. Delivered v1.24 ResearchStuff selectors map directly to existing ResearchGrid.lensOwnership fields. Total ownership includes all lens kinds; no plain Magnifying Glass count is derived. Use unchanged latest.json with independently checked offline pairing.",
+  "target": "Research total lens ownership, Optical Monocles, Kaleidoscopes, and capacity per Observation",
+  "extractions": [
+    {
+      "label": "owned_lenses",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"MagnifiersOwned\", 0, 0)",
+      "description": "Total owned lenses of all kinds; maps to lensOwnership.total."
+    },
+    {
+      "label": "owned_monocles",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"OpticalMonocleOwned\", 0, 0)",
+      "description": "Owned Optical Monocles; maps to lensOwnership.opticalMonocles."
+    },
+    {
+      "label": "owned_kaleidoscopes",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"KaleidoscopeOwned\", 0, 0)",
+      "description": "Owned Kaleidoscopes; maps to lensOwnership.kaleidoscopes."
+    },
+    {
+      "label": "lens_capacity",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"MagnifiersPerSlot\", 0, 0)",
+      "description": "Maximum lenses per Observation; maps to lensOwnership.capacityPerObservation."
+    }
+  ]
+}

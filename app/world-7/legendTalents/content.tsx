@@ -62,14 +62,15 @@ function LegendaryTalents() {
                 <Text margin={{ bottom: "small" }}>Talents</Text>
                 <Grid columns={{ size: 'auto', count: 5 }} gap="small">
                 {
-                    legendTalents.talents.slice().filter(talent => talent.data.name != "filler").sort((talent1, talent2) => talent1.displayOrder > talent2.displayOrder ? 1 : -1).map((talent, index) => {
-                        const maxed = talent.level >= talent.data.maxLevel;
+                    legendTalents.talents.slice().filter(talent => talent.isAvailable()).sort((talent1, talent2) => talent1.displayOrder > talent2.displayOrder ? 1 : -1).map((talent, index) => {
+                        const maxLevel = talent.getMaxLevel();
+                        const maxed = talent.level >= maxLevel;
                         return (
                             <ShadowBox key={index} background='dark-1' style={{ opacity: talent.level > 0 ? 1 : 0.5 }} gap='small' pad='small' align='left'>
                                 <Box direction='column' justify='center' gap="small">
                                     <Box direction='row' justify='between'>
-                                        <Text size="small">{talent.data.name}</Text>
-                                        <Text size="small" color={maxed ? goldenColor : ""}>{`${talent.level}/${talent.data.maxLevel}`}</Text>
+                                        <Text size="small">{talent.getName()}</Text>
+                                        <Text size="small" color={maxed ? goldenColor : ""}>{`${talent.level}/${maxLevel}`}</Text>
                                     </Box>
                                     <Text size="small">{talent.getDesc()}</Text>
                                     {!maxed && 

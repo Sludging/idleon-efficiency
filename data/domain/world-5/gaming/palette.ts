@@ -1,4 +1,5 @@
 import { letterToNumber } from "../../../utility";
+import type { ImageData } from "../../imageData";
 import type { Gaming } from "../gaming";
 import type { GamingSuperbitBase } from "../../data/GamingSuperbitsRepo";
 import type { GamingPaletteBase } from "../../data/GamingPaletteRepo";
@@ -131,7 +132,7 @@ export class PaletteColor {
     unlockProbability = 0;
     levelUpProbability = 0;
     stageLuckMultipliers: PaletteStageLuck[] = [];
-
+    private blackStarState = 0;
     constructor(public index: number, data: GamingPaletteModel) {
         this.name = data.name;
         this.red = data.red;
@@ -154,6 +155,7 @@ export class PaletteColor {
         const equippedColors: number[] = (spelunk[10] ?? []).map(Number);
 
         this.level = Number(spelunk[9]?.[this.index] ?? 0);
+        this.blackStarState = Number(spelunk[49]?.[this.index] ?? 0);
         this.unlocked = this.level > 0;
 
         // Keep the saved slot position. Empty selectors must not shift later colors.
@@ -166,6 +168,7 @@ export class PaletteColor {
         const gaming = data.get("gaming") as Gaming;
         const legendTalents = data.get("legendTalents") as LegendTalents;
         const legendMultiplier = 1 + legendTalents.getBonusFromIndex(10) / 100;
+        const blackStarMultiplier = Math.max(1, 1 + this.blackStarState + Math.floor(this.blackStarState / 2));
         const loreMultiplier = gaming.palette.loreBonusUnlocked ? 1.5 : 1;
         const baseBonus = this.usesDecay === 1
             ? (this.level / (this.level + 25)) * this.bonusValue
@@ -175,8 +178,8 @@ export class PaletteColor {
             ? 2 + 0.5 * Number(gaming.isSuperbitPurchased(59))
             : 1;
 
-        // Earned bonuses include unequipped colors. Preserve the native multiplication order.
-        this.bonus = baseBonus * doubleMultiplier * legendMultiplier * loreMultiplier;
+        // Earned bonuses include unequipped colors. Preserve native multiplier order.
+        this.bonus = baseBonus * doubleMultiplier * legendMultiplier * blackStarMultiplier * loreMultiplier;
     }
 
     update(data: Map<string, any>): void {
@@ -189,6 +192,14 @@ export class PaletteColor {
             gaming.palette.bonusLuck *
             (1 / (this.levelUpBase * Math.pow(Math.max(1.2, this.levelUpExponent - 0.05), this.level)))
         );
+    }
+
+    getBlackStarState(): number { return this.blackStarState; }
+
+    getBlackStarImageData(): ImageData {
+        return this.blackStarState === 2
+            ? { location: "MenaBlackStarDouble", width: 18, height: 60 }
+            : { location: "MenaBlackStar", width: 18, height: 17 };
     }
 
     getBonus(): number { return this.bonus; }
@@ -244,9 +255,9 @@ export class PaletteProgress {
     updateBonuses(data: Map<string, any>): void {
         const gaming = data.get("gaming") as Gaming;
         const legendTalents = data.get("legendTalents") as LegendTalents;
-        const menagerie = data.get("menagerie") as { getResourceBalances(): { blackStarsOwned: number } };
+        const menagerie = data.get("menagerie") as { getResourceBalances(): { blackStarsAvailable: number } };
 
-        this.blackStarsAvailable = menagerie.getResourceBalances().blackStarsOwned;
+        this.blackStarsAvailable = menagerie.getResourceBalances().blackStarsAvailable;
 
         // The total-level bonus is an aggregate, not another color record.
         this.totalLevels = gaming.paletteColors.reduce((total, color) => total + color.level, 0);

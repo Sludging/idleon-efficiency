@@ -8,12 +8,32 @@ import { Item } from "../items";
 import { DivinityStyleModel } from "../model/divinityStyleModel";
 import { GodInfoModel } from "../model/godInfoModel";
 import { Activity, Player } from "../player";
-import { getCompanionActiveBonus, type Companion } from "../companions";
+import { getCompanionActiveBonus, getCompanionBonus, type Companion } from "../companions";
 import { SkillsIndex } from "../SkillsIndex";
 import type { Skilling } from "../skilling";
 import { Hole } from "./hole/hole";
 import { Sneaking } from "../world-6/sneaking";
 import { CoralKid } from "../world-7/coralKid";
+import { Sailing } from "./sailing/sailing";
+import type { Achievement } from "../achievements";
+import { Arcade } from "../world-2/arcade";
+import { Sigils } from "../world-2/alchemy/sigils";
+import { Bribe } from "../world-1/bribes";
+import { PlayerStatues } from "../world-1/statues";
+import { getStampBonusForKey, type Stamp } from "../world-1/stamps";
+import { Cooking } from "../world-4/cooking";
+import { Rift, SkillMastery } from "../world-4/rift";
+import { TaskBoard } from "../tasks";
+import { EquipmentBonus } from "../equipment-effects";
+import { EquipmentSets } from "../misc/equipmentSets";
+import { Guild } from "../guild";
+import { GemStore } from "../gemPurchases";
+import { UpgradeVault } from "../upgradeVault";
+import { LegendTalents } from "../world-7/legendTalents";
+import { SushiStation } from "../world-7/sushi";
+import { CoralReef } from "../world-7/coralReef";
+import { Votes } from "../world-2/votes";
+import { Talent } from "../talents";
 
 export class DivinityGod {
     blessLevel: number = 0;
@@ -135,6 +155,7 @@ export class PlayerDivinityInfo {
     dootOwned: boolean = false;
     pocketDivinityActive: boolean = false;
     player: Player | undefined;
+    styleIndex: number = 0;
 
     constructor(public playerIndex: number, public style: DivinityStyleModel, public gods: DivinityGod[], public active: boolean = false) { }
 
@@ -146,9 +167,9 @@ export class PlayerDivinityInfo {
         return [this.primaryGod];
     }
 
-    divinityPerHour = (): number => {
-        return 0;
-    }
+    expPerHour: number = 0;
+
+    getDivinityExpPerHour = (): number => this.expPerHour;
 
     isLinkedToGod = (godIndex: number): boolean => {
         return this.gods.some(god => god.index === godIndex);
@@ -161,14 +182,176 @@ export class GodOffering {
 
 export class Divinity extends Domain {
     playerInfo: PlayerDivinityInfo[] = [];
+    pointsPerHourByPlayerIndex: number[] = [];
     currentDivinity: number = 0;
     atomsBalance: number | null = null;
     gods: DivinityGod[] = DivinityGod.fromBase(initGodInfoRepo());
     offerings: GodOffering[] = [];
     godRank: number = 0;
     gamingGrowthMinorLinkBonus: number = 0;
+    w7ChosenDivinityBonusIndex: number = -1;
 
     getGamingGrowthMinorLinkBonus = (): number => this.gamingGrowthMinorLinkBonus;
+    private getBasePointsPerHour(style: number): number {
+        switch (style) {
+            case 0: return 1;
+            case 1: return 2;
+            case 2: return 4;
+            case 3: return 0;
+            case 4: return 2;
+            case 5: return 0;
+            case 6: return 8;
+            case 7: return 15;
+            default: return 0;
+        }
+    }
+
+    private getBaseExpPerHour(style: number): number {
+        switch (style) {
+            case 0: return 1;
+            case 1: return 2;
+            case 2: return 1;
+            case 3: return 1;
+            case 4: return 7;
+            case 5: return 3;
+            case 6: return 8;
+            case 7: return 10;
+            default: return 0;
+        }
+    }
+
+    private getDivinityBlessingRateBonus(godIndex: number, emporiumBonus33: number): number {
+        const god = this.gods[godIndex];
+        return god.blessLevel * god.data.blessingPerLevel * (1 + emporiumBonus33 * 0.05 * this.godRank);
+    }
+
+    private getDivinityPointsMultiplier(sneaking: Sneaking, sailing: Sailing): number {
+        const emporiumBonus33 = Number(sneaking.jadeUpgrades.find(upgrade => upgrade.index === 33)!.purchased);
+        const divider = 100;
+        const multiplier = (1 + this.getDivinityBlessingRateBonus(0, emporiumBonus33) / divider)
+            * (1 + this.getDivinityBlessingRateBonus(1, emporiumBonus33) / divider)
+            * (1 + sailing.artifacts.find(artifact => artifact.index === 11)!.getBonus() / divider)
+            * (1 + this.getDivinityBlessingRateBonus(3, emporiumBonus33) / divider)
+            * (1 + this.getDivinityBlessingRateBonus(5, emporiumBonus33) / divider)
+            * (1 + sailing.artifacts.find(artifact => artifact.index === 18)!.getBonus() / divider);
+        return Math.max(1, multiplier);
+    }
+
+    private getMajorBonus6Multiplier(companions: Companion[], hole: Hole): number {
+        if (getCompanionActiveBonus(companions, 0) === 1
+            || hole.majiks.pocketDivinity.selections.some(selection => selection.active && selection.bonusId === 6)
+            || this.w7ChosenDivinityBonusIndex === 6) {
+            return 2;
+        }
+
+        for (let playerIndex = 0; playerIndex < 12 && playerIndex < this.playerInfo.length; playerIndex++) {
+            if (this.playerInfo[playerIndex].primaryGod?.data.bonusIndex === 6) {
+                return 2;
+            }
+        }
+        return 1;
+    }
+    getDivinityPointsPerHour = (playerIndex: number): number => this.pointsPerHourByPlayerIndex[playerIndex] ?? 0;
+
+    updateRates(data: Map<string, unknown>): void {
+        const players = data.get("players") as Player[];
+        const coralKid = data.get("coralKid") as CoralKid;
+        const coralReef = data.get("coralReef") as CoralReef;
+        const gemStore = data.get("gems") as GemStore;
+        const companions = data.get("companions") as Companion[];
+        const hole = data.get("hole") as Hole;
+        const sneaking = data.get("sneaking") as Sneaking;
+        const sailing = data.get("sailing") as Sailing;
+        const alchemy = data.get("alchemy") as Alchemy;
+        const legendTalents = data.get("legendTalents") as LegendTalents;
+        const sushi = data.get("sushi") as SushiStation;
+        const skilling = data.get("skilling") as Skilling;
+        const achievements = data.get("achievements") as Achievement[];
+        const bribes = data.get("bribes") as Bribe[];
+        const guild = data.get("guild") as Guild;
+        const taskboard = data.get("taskboard") as TaskBoard;
+        const arcade = data.get("arcade") as Arcade;
+        const cooking = data.get("cooking") as Cooking;
+        const statues = data.get("statues") as PlayerStatues[];
+        const sigils = data.get("sigils") as Sigils;
+        const rift = data.get("rift") as Rift;
+        const equipmentSets = data.get("equipmentSets") as EquipmentSets;
+        const votes = data.get("votes") as Votes;
+        const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+        const stamps = data.get("stamps") as Stamp[][];
+        const gemPurchaseCount = gemStore.purchases.find(purchase => purchase.no === 130)!.pucrhased;
+        const skillMastery = rift.bonuses.find(bonus => bonus.name === SkillMastery.displayName) as SkillMastery;
+        const divinityRiftRank = skillMastery.getSkillRank(SkillsIndex.Divinity);
+        const riftMode0 = Number(skillMastery.active && divinityRiftRank > 0);
+        const riftMode1 = Number(skillMastery.active && divinityRiftRank > 1);
+        const pointsMultiplier = this.getDivinityPointsMultiplier(sneaking, sailing);
+        const majorBonus6Multiplier = this.getMajorBonus6Multiplier(companions, hole);
+        const coralReefUpgradeLevels = coralReef.getTotalUpgradeLevels();
+        const votingBonus23 = votes.getCurrentBonus(23);
+
+        this.pointsPerHourByPlayerIndex.length = this.playerInfo.length;
+        for (const playerInfo of this.playerInfo) {
+            const player = players[playerInfo.playerIndex];
+            const maxTalent505 = Talent.getAccountTalentBonus(players, 505, player.finalTalentInputs);
+            const maxTalent506 = Talent.getAccountTalentBonus(players, 506, player.finalTalentInputs);
+            const style = playerInfo.styleIndex;
+            const basePointsPerHour = this.getBasePointsPerHour(style);
+            const baseExpPerHour = this.getBaseExpPerHour(style);
+            const boxReward22c = player.getPostOfficeBonus("22c");
+            const statueBonus23 = statues[player.playerID].statues[23].getBonus(player);
+            const additivePointsBonus = boxReward22c
+                + 10 * Number(achievements[298].completed)
+                + 10 * Number(achievements[304].completed)
+                + 15 * riftMode1
+                + bribes.find(bribe => bribe.bribeIndex === 38)!.getBonus()
+                + upgradeVault.getBonusForId(71);
+            const pointsMultiplierFromCoralReef = 1 + coralReefUpgradeLevels * coralKid.getBonusFromIndex(4) / 100;
+            const pointsPerHour = basePointsPerHour
+                * (1 + gemPurchaseCount / 4)
+                * (1 + 0.25 * getCompanionBonus(companions, 0, 2))
+                * (1 + sushi.getBonusFromIndex(46) / 100)
+                * (1 + coralKid.getBonusFromIndex(6) / 100)
+                * pointsMultiplier
+                * (1 + maxTalent505 / 100)
+                * majorBonus6Multiplier
+                * (1 + votingBonus23 / 100)
+                * (1 + hole.lamp.getBonus(false, 1, 2) / 100)
+                * pointsMultiplierFromCoralReef
+                * (1 + additivePointsBonus / 100);
+            const additiveExpBonus = 10 * this.godRank
+                + boxReward22c
+                + sigils.sigils[22].getBonus()
+                + 6 * player.cardInfo!.cards.find(card => card.id === "w5a5")!.getLevels()
+                + getStampBonusForKey(stamps, "DivineExp")
+                + alchemy.getBubbleBonusForKey("M3ACTIVE")
+                + statueBonus23
+                + cooking.getMealBonusForKey("DivExp")
+                + alchemy.getVialBonusForKey("DivXP")
+                + player.getTalentBonus(464)
+                + 10 * taskboard.merits[36].level
+                + 25 * riftMode0
+                + (player.starSigns.find(sign => sign.name === "Divividov")?.getBonus("Divinity EXP") ?? 0)
+                + guild.guildBonuses[14].getBonus()
+                + arcade.bonuses[37].getBonus()
+                + player.gear.getBonus(EquipmentBonus.DivinityExp)
+                + votingBonus23
+                + equipmentSets.getSetBonus("MAGMA_SET")
+                + upgradeVault.getBonusForId(72);
+            const expPerHour = baseExpPerHour
+                * (1 + gemPurchaseCount / 4)
+                * (1 + legendTalents.getBonusFromIndex(15) / 100)
+                * skilling.getAllSkillExperienceMultiplier()
+                * (1 + coralKid.getBonusFromIndex(0) / 100)
+                * (1 + coralKid.getBonusFromIndex(8) / 100)
+                * majorBonus6Multiplier
+                * (1 + maxTalent506 / 100)
+                * (1 + getCompanionActiveBonus(companions, 16))
+                * (1 + additiveExpBonus / 100);
+
+            this.pointsPerHourByPlayerIndex[playerInfo.playerIndex] = pointsPerHour;
+            playerInfo.expPerHour = expPerHour;
+        }
+    }
 
     // The current source-backed callers require categories 4 and 7; other Bonus_Minor categories have additional branches.
     getMinorBonus(playerIndex: number, category: 4 | 7): number {
@@ -212,6 +395,9 @@ export class Divinity extends Domain {
         const divinity = data.get(this.getDataKey()) as Divinity;
         const charCount = data.get("charCount") as number;
         const divinityData = data.get("Divinity") as number[] || [];
+        const optionListAccount = data.get("OptLacc") as number[];
+        const selectedGodIndex = optionListAccount[425] - 1;
+        divinity.w7ChosenDivinityBonusIndex = selectedGodIndex >= 0 ? divinity.gods[selectedGodIndex].data.bonusIndex : -1;
         const afkTarget = range(0, charCount).map((_, index) => data.get(`AFKtarget_${index}`)) as string[];
         const talentLevels = range(0, charCount).map((_, index) => data.get(`SL_${index}`)) as Record<number, number>[];
 
@@ -247,6 +433,7 @@ export class Divinity extends Domain {
             // Player is active if actually on divinity alter or using Goharut as god and being in lab.
             const isActive = afkTarget[playerIndex] == "Divinity" || (playerLinkedGod && playerLinkedGod.index == 4 && afkTarget[playerIndex] == "Laboratory")
             divinity.playerInfo.push(new PlayerDivinityInfo(playerIndex, mantraInfo[playerMantra].data, playerLinkedGod ? [playerLinkedGod] : [], isActive));
+            divinity.playerInfo[playerIndex].styleIndex = playerMantra;
             divinity.playerInfo[playerIndex].primaryGod = playerLinkedGod;
 
             // Handle ES extra link talent.
@@ -328,4 +515,9 @@ export const updateDivinityBlessings = (data: Map<string, any>): void => {
     const skilling = data.get("skilling") as Skilling;
 
     (divinity.gods[2] as NobisectGod).updateBlessingInputs(alchemy, skilling);
+}
+
+export const updateDivinityRates = (data: Map<string, unknown>): void => {
+    const divinity = data.get("divinity") as Divinity;
+    divinity.updateRates(data);
 }

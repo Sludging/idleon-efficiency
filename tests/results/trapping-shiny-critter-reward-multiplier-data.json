@@ -1,0 +1,9 @@
+{
+  "extractions": {
+    "shiny_critter_reward_multiplier": {
+      "expression": "idleon.callFunction(\"TrappingStuffs\", \"RareBonusOnOpenMULTI\", 0)",
+      "result": 1
+    }
+  },
+  "errors": {}
+}

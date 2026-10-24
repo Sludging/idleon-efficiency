@@ -18,6 +18,7 @@ const KNOWLEDGE_CATEGORY_IDS: Record<string, number> = {
     "+{% faster Fuel generation": 4,
     "+^% chance for free shaker usage": 5,
     "+{% cheaper upgrades": 6,
+    "}x faster Fuel generation": 7,
     "+^% bigger effects from Slots": 8,
     "+^% bigger effects from Fireplaces": 9,
     "}x higher chance to Perfecto all sushi": 10,
@@ -70,6 +71,11 @@ export class Sushi {
 
     hasKnowledgeBonus(): boolean {
         return this.data.knowledgeBonusCategory !== undefined && this.data.knowledgeBonusBase !== undefined;
+    }
+
+    getKnowledgeBonusCategory(): number | undefined {
+        const category = this.data.knowledgeBonusCategory;
+        return category === undefined ? undefined : KNOWLEDGE_CATEGORY_IDS[category];
     }
 
     getKnowledgeBonus(level: number = this.level): number {
@@ -165,6 +171,7 @@ export class SushiStation extends Domain {
     private sailingArtifact39: number = 0;
     private upgradeLevels: number[] = [];
     private eventShop45: number = 0;
+    private fullKitchenSimmerOwned: number = 0;
     sushiDoublersOwned = 0;
     sushiDoublersRemaining = 0;
 
@@ -193,12 +200,14 @@ export class SushiStation extends Domain {
         this.upgradeLevels = [];
         this.bundleBonus = this.bundleBanJ = this.research188 = this.research189 = 0;
         this.jellyObstruction18 = this.arcade67 = this.eventShop45 = this.button2 = this.minehead11 = 0;
+        this.fullKitchenSimmerOwned = 0;
         this.gaming67 = this.atom14 = this.sailingArtifact39 = 0;
         return this;
     }
 
     parse(data: Map<string, any>): void {
         const station = data.get(this.getDataKey()) as SushiStation;
+        station.fullKitchenSimmerOwned = 0;
         const sushiData = data.get("Sushi") as number[][] || [];
         const sushiLevels = sushiData[7] || [];
         const sushiExperience = sushiData[6] || [];
@@ -271,8 +280,8 @@ export class SushiStation extends Domain {
             upgrade.fireplaceSparks = this.fireplaceSparks;
             upgrade.fuelOverflow = this.fuelOverflow;
             upgrade.uniqueSushi = this.uniqueSushi;
-            upgrade.fireplaceSparkMultiplier = 1 + this.getFireplaceSparkMultiplier() / 100;
-            upgrade.overtunedMultiplier = 1 + this.getOvertunedMultiplier() / 100;
+            upgrade.fireplaceSparkMultiplier = this.getFireplaceSparkFactor();
+            upgrade.overtunedMultiplier = this.getOvertunedBucksFactor();
             upgrade.knowledgeExperienceBase = this.getKnowledgeExperienceBase();
             upgrade.saffronHours = Math.round(1 + this.getUpgradeBonus(22));
         }
@@ -293,6 +302,7 @@ export class SushiStation extends Domain {
         this.jellyObstruction18 = jelly.obstructions[18].getBonus();
         this.arcade67 = arcade.bonuses[67].getBonus();
         this.eventShop45 = Number(eventShop.isBonusOwned(45));
+        this.fullKitchenSimmerOwned = Number(eventShop.isBonusOwned(66));
         this.button2 = button.getBonusForIndex(2);
         this.minehead11 = minehead.getBonusFromIndex(11);
         this.gaming67 = Number(gaming.isSuperbitPurchased(67));
@@ -317,10 +327,20 @@ export class SushiStation extends Domain {
 
     getKnowledgeBonusTotal(category: number): number {
         return this.sushi.reduce((total, sushi) => {
-            return KNOWLEDGE_CATEGORY_IDS[sushi.data.knowledgeBonusCategory ?? ""] === category
+            return sushi.getKnowledgeBonusCategory() === category
                 ? total + sushi.getKnowledgeBonus()
                 : total;
         }, 0);
+    }
+
+    getCookedTierOutcome(): { guaranteedExtraTiers: number; additionalTierChance: number } {
+        const extraTiers = (this.getUpgradeBonus(7) + this.getKnowledgeBonusTotal(2)) / 100;
+        const guaranteedExtraTiers = Math.floor(extraTiers);
+        return { guaranteedExtraTiers, additionalTierChance: extraTiers - guaranteedExtraTiers };
+    }
+
+    getKnowledgeUpgradeCostFactor(): number {
+        return 1 / (1 + this.getKnowledgeBonusTotal(6) / 100);
     }
 
     getSlotEffect(kind: number): number {
@@ -332,7 +352,7 @@ export class SushiStation extends Domain {
     }
 
     getFireplaceEffect(kind: number): number {
-        if (kind === 99) return (1 + this.getKnowledgeBonusTotal(9) / 100) * (1 + this.getFireplaceSparkMultiplier() / 100);
+        if (kind === 99) return (1 + this.getKnowledgeBonusTotal(9) / 100) * this.getFireplaceSparkFactor();
         if (kind === 0) return this.getFireplaceEffect(99);
         if (kind === 1) return 150 * this.getFireplaceEffect(99);
         if (kind === 2) return 20 * this.getFireplaceEffect(99);
@@ -344,12 +364,45 @@ export class SushiStation extends Domain {
         return 0.2 * lavaLog2(this.fireplaceSparks) + lavaLog(this.fireplaceSparks);
     }
 
+    getFireplaceSparkFactor(): number {
+        return 1 + this.getFireplaceSparkMultiplier() / 100;
+    }
+
+    getSparksPerHour(): number {
+        // Each Potassium fireplace generates one Spark per second, even without occupied Sushi slots.
+        return this.fireplaces.reduce((total, fireplace) => total + (fireplace.kind === 4 ? 3600 : 0), 0);
+    }
+
+    getNextSparkThresholds(): { targetFactor: number; totalSparksRequired: number }[] {
+        const currentFactor = this.getFireplaceSparkFactor();
+        const percentPerNaturalLog = 0.2 / Math.log(2) + 1 / 2.30259;
+        const thresholds: { targetFactor: number; totalSparksRequired: number }[] = [];
+        let targetHundredths = Math.floor(currentFactor * 100) + 1;
+
+        // These hundredth-factor goals invert the native logs. They are not game unlocks.
+        while (thresholds.length < 3) {
+            const targetFactor = targetHundredths / 100;
+            const totalSparksRequired = Math.exp((targetFactor - 1) * 100 / percentPerNaturalLog);
+            targetHundredths++;
+
+            // Floating-point rounding can place a candidate on an already reached boundary.
+            if (targetFactor <= currentFactor || totalSparksRequired <= this.fireplaceSparks) continue;
+            thresholds.push({ targetFactor, totalSparksRequired });
+        }
+
+        return thresholds;
+    }
+
+    getKnowledgeExperienceCollectionMultiplier(): number {
+        return 1 + this.getKnowledgeBonusTotal(1) / 100;
+    }
+
     getKnowledgeExperienceMultiplier(slot: number): number {
         const fireplaceKind = this.fireplaces[slot % 15]?.kind ?? 0;
         const fireplaceBonus = fireplaceKind === 3 ? this.getFireplaceEffect(3) : 0;
         return (1 + this.getUpgradeBonus(38) / 100)
             * (1 + fireplaceBonus / 100)
-            * (1 + this.getKnowledgeBonusTotal(1) / 100);
+            * this.getKnowledgeExperienceCollectionMultiplier();
     }
 
     getKnowledgeExperienceBase(): number {
@@ -370,6 +423,12 @@ export class SushiStation extends Domain {
         }, 0);
     }
 
+    getFasterFuelKnowledgeFactor(): number {
+        return (1 + this.sushi[27].getKnowledgeBonus() / 100)
+            * (1 + this.sushi[36].getKnowledgeBonus() / 100)
+            * (1 + this.sushi[45].getKnowledgeBonus() / 100);
+    }
+
     getFuelPerHour(): number {
         return 50
             * (1 + Math.min(1, this.bundleBonus))
@@ -388,6 +447,7 @@ export class SushiStation extends Domain {
     getFuelCapacity(): number {
         return (200 + this.getKnowledgeBonusTotal(3))
             * (1 + Math.min(1, this.bundleBonus))
+            * (1 + 9 * this.fullKitchenSimmerOwned)
             * (1 + (this.getUpgradeBonus(1) + (this.getUpgradeBonus(2) + (this.getUpgradeBonus(3) + (this.getUpgradeBonus(4) + this.getUpgradeBonus(5))))) / 100)
             * (1 + Number(this.upgradeLevels[2] ?? 0) / 100)
             * (1 + Number(this.upgradeLevels[3] ?? 0) / 100)
@@ -424,7 +484,7 @@ export class SushiStation extends Domain {
             * (1 + this.getUpgradeBonus(40) / 100)
             * Math.max(1, Math.min(1.25, 1 + this.minehead11 / 100))
             * (1 + (this.getUpgradeBonus(41) + this.getUpgradeBonus(43)) / 100)
-            * (1 + this.getOvertunedMultiplier() / 100)
+            * this.getOvertunedBucksFactor()
             * (1 + this.atom14 / 100)
             * (1 + this.sailingArtifact39);
     }
@@ -433,12 +493,20 @@ export class SushiStation extends Domain {
         return 5 * lavaLog2(this.fuelOverflow / 1e6) + 10 * lavaLog(this.fuelOverflow / 1e6);
     }
 
+    getOvertunedBucksFactor(): number {
+        return 1 + this.getOvertunedMultiplier() / 100;
+    }
+
     getFreeShakerChance(): number {
         return Math.min(0.6, (this.getUpgradeBonus(21) + (this.getKnowledgeBonusTotal(5) + this.research188)) / 100);
     }
 
+    getKnowledgePerfectoChanceMultiplier(): number {
+        return 1 + this.getKnowledgeBonusTotal(10) / 100;
+    }
+
     getPerfectoChance(tier: number): number {
-        return ((0.6 * Math.pow(0.81, tier)) / (1 + tier / 8)) * (1 + this.getKnowledgeBonusTotal(10) / 100);
+        return ((0.6 * Math.pow(0.81, tier)) / (1 + tier / 8)) * this.getKnowledgePerfectoChanceMultiplier();
     }
 
     getSaltTierUpChance(tier: number): number {

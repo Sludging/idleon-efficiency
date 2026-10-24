@@ -1,4 +1,5 @@
-import { Traps, updateTrapDisplayData } from './world-3/traps';
+import type { StaticRepositories } from './repositories';
+import { Traps, updateShinyCritterRewardMultiplier, updateTrapDisplayData } from './world-3/traps';
 import { Stamps, updateStampMaxCarry, updateStamps } from './world-1/stamps';
 import { Statues, updateStatueBonuses } from './world-1/statues';
 import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus, updatePlayerTalentPoints, Player, updatePlayerSpecialTalents } from './player';
@@ -31,14 +32,14 @@ import { Dungeons } from './dungeons';
 import { Forge, updateForge } from './world-1/forge';
 import { Cooking, updateCooking } from './world-4/cooking';
 import { Lab, updateLab } from './world-4/lab';
-import { Breeding, updateAllShinyEffects, updateBeastMasterImpact, updateBreeding, updateBreedingDisplayData } from './world-4/breeding';
+import { Breeding, updateAllShinyEffects, updateBeastMasterImpact, updateBreeding, updateBreedingDisplayData, prepareBreedingCrucibleLevel, prepareBreedingShinyLevels } from './world-4/breeding';
 import { notUndefined } from '../utility';
 import { Sigils, updateSigils, updateSigilsChargeSpeed } from './world-2/alchemy/sigils';
 import { AnvilWrapper, updateAnvil } from './world-1/anvil';
 import { Alerts, updateAlerts } from './alerts';
 import { Account, updateAccount } from './account';
-import { Divinity, updateDivinity, updateDivinityBlessings } from './world-5/divinity';
-import { Sailing, updateSailing, updateMinTravelTimeAndSpeed } from './world-5/sailing/sailing';
+import { Divinity, updateDivinity, updateDivinityBlessings, updateDivinityRates } from './world-5/divinity';
+import { Sailing, updateSailing, updateMinTravelTimeAndSpeed, updateSailingCaptainExperience } from './world-5/sailing/sailing';
 import { Gaming, updateGaming, updateGamingDisplay, updateSuperbitImpacts } from './world-5/gaming';
 import { AtomCollider, updateAtomCollider } from './world-3/construction/atomCollider';
 import { updateArtifactBuildSpeed, updateArtifacts, updateSailingArtifactSlabBoost } from './world-5/sailing/artifacts';
@@ -54,17 +55,17 @@ import { Guild } from './guild';
 import { Rift } from "./world-4/rift";
 import { Equinox, updateEquinoxBar } from './world-3/equinox';
 import { POExtra } from './world-2/postoffice';
-import { Sneaking, updateSneaking } from './world-6/sneaking';
+import { Sneaking, updateSneaking, updateSneakingGemstones, updateSneakingNinjas, updateSneakingOmnijade, updateSneakingProgression } from './world-6/sneaking';
 import { Summoning, updateSummoningUpgrades, updateSummoningWinnerBonusBoost, updateSummoningWinnerImpact } from './world-6/summoning';
 import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLandRankBonuses, updateFarmingLevel, updateFarmingStickerBonuses } from './world-6/farming';
 import { SushiStation, updateSushiStation } from './world-7/sushi';
-import { Spelunking, updateSpelunkingChapterBonuses, updateSpelunkingPresentation } from './world-7/spelunking';
+import { Spelunking, updateSpelunkingChapterBonuses, updateSpelunkingUpgradeBonuses, updateSpelunkingPower, updateSpelunkingAccountMetrics, updateSpelunkingLateCalculations, updateSpelunkingPresentation } from './world-7/spelunking';
 import { ResearchGrid, updateResearchGrid, updateResearchDisplay } from './world-7/research';
 import { Minehead, updateMinehead, updateMineheadDropRate, updateMineheadDailyTries, updateMineheadBaseDamage, updateMineheadDepthCharges, updateMineheadCurrencyGain } from './world-7/minehead';
-import { Glimbo } from './world-7/glimbo';
+import { Glimbo, updateGlimbo } from './world-7/glimbo';
 import { JellyOperator, updateJellyOperator, updateJellyOperatorPresentation } from './world-7/jellyOperator';
 import { Button, updateButton } from './world-7/button';
-import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './starsigns';
+import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked, updateStarSignMeritocracyBonus } from './starsigns';
 import { IslandExpeditions, updateIslandExpeditions } from './world-2/islandExpedition';
 import { Tome, updateTomeBonuses, updateTomeScores } from './world-4/tome';
 import { KillRoy } from './world-2/killroy';
@@ -83,19 +84,19 @@ import { Clamworks, updateClamWorkOutputs } from './world-7/clamworks';
 import { Meritocraty, updateMeritocratyBonus, updateMeritocratyLate } from './world-7/meritocraty';
 import { LegendTalents, updateLegendTalents } from './world-7/legendTalents';
 import { MasterClasses, updateMasterClasses } from './masterClasses';
-import { Bubba, updateBubba } from './world-3/bubba';
 import { CoralKid } from './world-7/coralKid';
+import { Bubba, updateBubba, updateBubbaMeatRate } from './world-3/bubba';
 import { BigFish, updateBigFishUnlocked } from './world-7/bigFish';
-import { CoralReef, updateCoralReefDailyGain } from './world-7/coralReef';
+import { CoralReef, updateCoralReefDailyGain, updateCoralReefMaximumLevels } from './world-7/coralReef';
 import { DancingCoral } from './world-7/dancingCoral';
 import { Hoops } from './world-1/hoops';
 import { Darts } from './world-1/darts';
 import { Orion, updateOrionFeatherRate, updateOrionGlobalBonus } from './world-1/orion';
-import { Poppy, updatePoppyFishRate, updatePoppyGlobalBonus } from './world-2/poppy';
+import { Poppy, updatePoppyFishRate, updatePoppyFishPerCatch, updatePoppyGlobalBonus } from './world-2/poppy';
 import { updateNonDepositedZenithClusters, ZenithMarket } from './world-7/zenithShop';
 import { Gallery, updateGallery } from './world-7/gallery';
 import { HatRack, updateHatRack } from './world-7/hatRack';
-import { Skilling, updateAllEfficiencies, updateSkillEfficiencies } from './skilling';
+import { Skilling, updateAllEfficiencies, updateAllSkillExperienceMultiplier, updateSkillEfficiencies } from './skilling';
 import { updateAttributeTalents, updatePowerTalents, updateRightHandOfActionBonuses } from './talents';
 import { updatePlayerHealth } from './player-health';
 import { Menagerie, prepareMenagerie, updateMenagerieMissions } from "./menagerie";
@@ -252,13 +253,13 @@ export class IdleonData {
     }
 }
 
-export const initAccountDataKeys = (allItems: Item[]) => {
+export const initAccountDataKeys = (allItems: Item[], repositories: StaticRepositories) => {
     const accountData: Map<string, any> = new Map();
     accountData.set("itemsData", allItems);
     domainList.forEach(dataDomain => {
         if (!dataDomain.initialized) {
             const key = dataDomain.getDataKey();
-            const domainData = dataDomain.init(allItems, 0);
+            const domainData = dataDomain.init(allItems, 0, repositories);
             // This is to protect from mistakes of forgetting to return a value from init.
             if (!domainData) {
                 console.error("forgot to return data for init, key:", key);
@@ -276,12 +277,20 @@ export const initAccountDataKeys = (allItems: Item[]) => {
 // ORDER IS IMPORTANT, the keys are not relevant as data doesn't get persisted.
 // This allows for multiple calls that touch the same data to happen in the same map (artifacts + sailing for example)
 const postProcessingMap: Record<string, Function> = {
+    // Tome reads mastery-scaled open floors before the existing Sneaking update.
+    "sneakingProgression": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateSneakingProgression(accountData),
     // Study effects use saved state and must be ready before schematic consumers.
     "holeStudyEffects": (_doc: Cloudsave, accountData: Map<string, any>) => updateHoleStudyEffects(accountData),
     // Camp effects use parsed Majik and Harp state before their shared consumers.
     "holeUpgradeEffects": (_doc: Cloudsave, accountData: Map<string, any>) => updateHoleUpgradeEffects(accountData),
+    // Pet Arena Crucible rewards need parsed Menagerie unlocks before Menagerie prepares Lumi inputs.
+    "breedingCrucibleLevel": (_doc: Cloudsave, accountData: Map<string, any>) => prepareBreedingCrucibleLevel(accountData),
+    // Shiny levels need their Menagerie cap before account-wide shiny effects are distributed.
+    "breedingShinyLevels": (_doc: Cloudsave, accountData: Map<string, unknown>) => prepareBreedingShinyLevels(accountData),
     // Parse-owned Menagerie effects must be ready before the earliest recipient calculation.
     "menageriePrepared": (_doc: Cloudsave, accountData: Map<string, any>) => prepareMenagerie(accountData),
+    // Coral Reef maximum levels use parsed Menagerie unlocks before cap consumers run.
+    "coralReefMaximumLevels": (_doc: Cloudsave, accountData: Map<string, any>) => updateCoralReefMaximumLevels(accountData),
     // Clam Work uses parsed Menagerie state and must settle before post-post-processing consumers.
     "clamWorkOutputs": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateClamWorkOutputs(accountData),
     // Minehead rewards are account-wide inputs to downstream bonus consumers.
@@ -295,10 +304,13 @@ const postProcessingMap: Record<string, Function> = {
     "gamingSuperbitImpacts": (doc: Cloudsave, accountData: Map<string, any>) => updateSuperbitImpacts(accountData),
     // Research consumes parsed companion, Equinox, and Sushi state before downstream consumers calculate.
     "researchGrid": (doc: Cloudsave, accountData: Map<string, any>) => updateResearchGrid(accountData),
+    "glimbo": (_doc: Cloudsave, accountData: Map<string, any>) => updateGlimbo(accountData),
     "mineheadDailyTries": (_doc: Cloudsave, accountData: Map<string, any>) => updateMineheadDailyTries(accountData),
     // Minehead's trade multiplier consumes prepared Research without delaying early opponent rewards.
     "mineheadDropRate": (_doc: Cloudsave, accountData: Map<string, any>) => updateMineheadDropRate(accountData),
-    // Stickers need calculated Research; Event Shop, Superbit ownership and sticker counts are parsed inputs.
+    // Prepare the canonical account Farming level before sticker odds.
+    "farmingLevel": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingLevel(accountData),
+    // Stickers need prepared Research and companion effects; Arcade levels, Sushi unlocks and Menagerie ownership are parsed inputs.
     "farmingStickerBonuses": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingStickerBonuses(accountData),
     "button": (doc: Cloudsave, accountData: Map<string, any>) => updateButton(accountData),
     "updateOrionGlobalBonus": (doc: Cloudsave, accountData: Map<string, any>) => updateOrionGlobalBonus(accountData),
@@ -327,7 +339,6 @@ const postProcessingMap: Record<string, Function> = {
     "summoningWinnerBonus": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningWinnerBonusBoost(accountData),
     "summoningWinnerImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningWinnerImpact(accountData),
     "starSignsUnlocked": (doc: Cloudsave, accountData: Map<string, any>) => updateStarSignsUnlocked(accountData),
-    "farmingLevel": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingLevel(accountData),
     "divinity": (doc: Cloudsave, accountData: Map<string, any>) => updateDivinity(accountData),
     "updatePlayerTalentLevelWithoutESBonus": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentLevelExceptESBonus(accountData),
     "family": (doc: Cloudsave, accountData: Map<string, any>) => calculateFamily(accountData),
@@ -361,7 +372,7 @@ const postProcessingMap: Record<string, Function> = {
     // Prepare exalted stamp scaling after its account inputs and before stamp bonuses.
     "compassExaltedStampBonus": (_doc: Cloudsave, accountData: Map<string, any>) => updateCompassExaltedStampBonus(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStamps(accountData),
-    "forge": (doc: Cloudsave, accountData: Map<string, any>) => updateForge(accountData.get("forge"), accountData.get("gems"), accountData.get("menagerie")),
+    "forge": (doc: Cloudsave, accountData: Map<string, any>) => updateForge(accountData.get("forge"), accountData.get("gems"), accountData.get("menagerie"), accountData.get("cards")),
     "worshipTotalizer": (doc: Cloudsave, accountData: Map<string, any>) => updateWorshipTotalizer(accountData),
     "arcade": (doc: Cloudsave, accountData: Map<string, any>) => updateArcade(accountData),
     "cooking": (doc: Cloudsave, accountData: Map<string, any>) => updateCooking(accountData),
@@ -375,11 +386,15 @@ const postProcessingMap: Record<string, Function> = {
     "hatRack": (doc: Cloudsave, accountData: Map<string, any>) => updateHatRack(accountData),
     // Sushi consumes settled Arcade, Gaming, Collider, Sailing, Research, Button, Jelly and Minehead state.
     "sushiStation": (doc: Cloudsave, accountData: Map<string, any>) => updateSushiStation(accountData),
+    "updatePoppyFishPerCatch": (_doc: Cloudsave, accountData: Map<string, any>) => updatePoppyFishPerCatch(accountData),
+    "updateBubbaMeatRate": (_doc: Cloudsave, accountData: Map<string, any>) => updateBubbaMeatRate(accountData),
     "mineheadCurrencyGain": (_doc: Cloudsave, accountData: Map<string, any>) => updateMineheadCurrencyGain(accountData),
     "players": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayers(accountData),
     "capacity": (doc: Cloudsave, accountData: Map<string, any>) => updateCapacity(accountData),
     "votes": (doc: Cloudsave, accountData: Map<string, any>) => updateVotesBonus(accountData),
     "playerTalentContexts": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentContexts(accountData),
+    // Gemstone effects use each character's final actual talent level.
+    "sneakingGemstones": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateSneakingGemstones(accountData),
     // Prepare Will Of The Eldest's account-wide level cap before attribute source consumers.
     "attributeTalents": (_doc: Cloudsave, accountData: Map<string, any>) => updateAttributeTalents(accountData),
     // Beginner Best Class uses its own beginner-line level cap before weapon-power consumers.
@@ -413,6 +428,11 @@ const postProcessingMap: Record<string, Function> = {
     "rightHandOfActionBonuses": (_doc: Cloudsave, accountData: Map<string, any>) => updateRightHandOfActionBonuses(accountData),
     "updateSkillEfficiencies": (_doc: Cloudsave, accountData: Map<string, any>) => updateSkillEfficiencies(accountData),
     "updateHoleCharacterCapabilities": (_doc: Cloudsave, accountData: Map<string, any>) => updateHoleCharacterCapabilities(accountData),
+    // Persistent POW consumes settled producers and effective account upgrade bonuses.
+    "spelunkingUpgradeBonuses": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingUpgradeBonuses(accountData),
+    "spelunkingPower": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingPower(accountData),
+    // Saved metrics use final character inputs and effective account upgrade bonuses.
+    "spelunkingAccountMetrics": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingAccountMetrics(accountData),
 }
 
 // I really really hate this.
@@ -430,6 +450,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
     "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
     "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateMinTravelTimeAndSpeed(accountData),
+    "sailingCaptainExperience": (doc: Cloudsave, accountData: Map<string, any>) => updateSailingCaptainExperience(accountData),
     "farming": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingDisplayData(accountData),
     "sigilsChargeSpeed": (doc: Cloudsave, accountData: Map<string, any>) => updateSigilsChargeSpeed(accountData),
     "breedingShinyAndBreedingSpeed": (doc: Cloudsave, accountData: Map<string, any>) => updateBreedingDisplayData(accountData),
@@ -443,7 +464,15 @@ const postPostProcessingMap: Record<string, Function> = {
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
     "royalArmoryLate": (doc: Cloudsave, accountData: Map<string, any>) => updateRoyalArmoryLateInputs(accountData),
     "meritocraty": (doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyLate(accountData),
-    // Saved-snapshot stamina and page locations need late Meritocracy and final character talent contexts.
+    // Construction rates read Star Sign bonuses after Meritocracy settles.
+    "starSignMeritocracyBonus": (_doc: Cloudsave, accountData: Map<string, any>) => updateStarSignMeritocracyBonus(accountData),
+    // Shared ninja inputs need settled account Star Signs and final talent, statue, ballot, and Land Rank bonuses.
+    "sneakingNinjas": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateSneakingNinjas(accountData),
+    // Omnijade summaries and Charm Collector need the prepared permanent charms and settled account providers.
+    "sneakingOmnijade": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateSneakingOmnijade(accountData),
+    "shinyCritterRewardMultiplier": (_doc: Cloudsave, accountData: Map<string, any>) => updateShinyCritterRewardMultiplier(accountData),
+    // Numerical stamina inputs need late Royal Armory and Meritocracy before page-stack preparation.
+    "spelunkingLateCalculations": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingLateCalculations(accountData),
     "spelunkingPresentation": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingPresentation(accountData),
     // These Gaming results are UI-only; Imports, Garden and Palette chances need the settled account inputs above.
     "gaming": (doc: Cloudsave, accountData: Map<string, any>) => updateGamingDisplay(accountData),
@@ -454,6 +483,8 @@ const postPostProcessingMap: Record<string, Function> = {
     "menagerieMissions": (_doc: Cloudsave, accountData: Map<string, any>) => updateMenagerieMissions(accountData),
     // Button task progress uses settled account and character results.
     "buttonTaskProgress": (_doc: Cloudsave, accountData: Map<string, any>) => updateButtonTaskProgress(accountData),
+    "allSkillExperienceMultiplier": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateAllSkillExperienceMultiplier(accountData),
+    "divinityRates": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateDivinityRates(accountData),
 }
 
 export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: CompanionState[], serverVars: Record<string, any>, isStatic: boolean = false) => {

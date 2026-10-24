@@ -1,0 +1,11 @@
+{
+  "description": "Extract all current-level raw Upgrade Vault quotes from the native catalog",
+  "target": "Upgrade Vault current-level raw quotes",
+  "extractions": [
+    {
+      "label": "vault_upgrade_costs",
+      "expression": "idleon.getAttr(\"CustomLists\").h.UpgradeVault.map((upgrade, index) => ({ index, level: Number(idleon.getAttr(\"UpgVault\")[index]), maxLevel: idleon.callFunction(\"Summoning\", \"VaultUpgMaxLV\", index, 0), cost: idleon.callFunction(\"Summoning\", \"VaultUpgCost\", index, 0) }))",
+      "description": "Complete native catalog of raw quotes at genuine saved levels. VaultUpgCost does not apply the purchase cap gate; capped upgrades can retain nonzero quotes."
+    }
+  ]
+}

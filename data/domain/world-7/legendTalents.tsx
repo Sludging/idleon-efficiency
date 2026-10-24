@@ -1,29 +1,92 @@
 import { Domain, RawData } from "../base/domain";
 import { Companion, getCompanionActiveBonus } from "../companions";
+import { initLegendTalentMetadataRepo } from "../data/LegendTalentMetadataRepo";
 import { initLegendTalentsRepo, LegendTalentBase } from "../data/LegendTalentsRepo";
 import { EventShop } from "../eventShop";
 import { GemStore } from "../gemPurchases";
 import { Item } from "../items";
+import { Menagerie, MenagerieUnlock } from "../menagerie";
+import { LegendTalentActivationModel } from "../model/legendTalentActivationModel";
+import { LegendTalentMenagerieCapSourceModel } from "../model/legendTalentMenagerieCapSourceModel";
+import { LegendTalentMetadataModel } from "../model/legendTalentMetadataModel";
 import { LegendTalentModel } from "../model/legendTalentModel";
+import { LegendTalentResearchCapSourceModel } from "../model/legendTalentResearchCapSourceModel";
 import { Player } from "../player";
 import { Sailing } from "../world-5/sailing/sailing";
 import { Clamworks } from "./clamworks";
+import { ResearchGrid } from "./research";
 import { SushiStation } from "./sushi";
 import { ZenithMarket } from "./zenithShop";
 
 export class LegendTalent {
     level: number = 0;
 
-    constructor(public index: number, public data: LegendTalentModel, public displayOrder: number = 0) {}
+    private researchMaximumLevelBonus: number = 0;
+    private menagerieCapOwned: boolean = false;
+    private activationOwned: boolean = false;
 
-    static fromBase(data : LegendTalentBase[]) {
-        return data.map(d => new LegendTalent(d.index, d.data, legendTalentsDisplayOrder.indexOf(d.index)));
+    constructor(
+        public index: number,
+        public data: LegendTalentModel,
+        public displayOrder: number = 0,
+        private readonly researchCapSource?: LegendTalentResearchCapSourceModel,
+        private readonly menagerieCapSource?: LegendTalentMenagerieCapSourceModel,
+        private readonly activation?: LegendTalentActivationModel,
+    ) {}
+
+    static fromBase(data: LegendTalentBase[], metadata: LegendTalentMetadataModel) {
+        return data.map(talent => new LegendTalent(
+            talent.index,
+            talent.data,
+            legendTalentsDisplayOrder.indexOf(talent.index),
+            metadata.researchCapSources.find(source => source.talentIndices.includes(talent.index)),
+            metadata.menagerieCapSources.find(source => source.talentIndices.includes(talent.index)),
+            metadata.activations.find(activation => activation.talentIndex === talent.index),
+        ));
+    }
+
+    parse(savedLevel: number | undefined): void {
+        this.level = savedLevel ?? 0;
+        this.researchMaximumLevelBonus = 0;
+        this.menagerieCapOwned = false;
+        this.activationOwned = false;
+    }
+
+    update(research: ResearchGrid, menagerieUnlocks: MenagerieUnlock[]): void {
+        this.researchMaximumLevelBonus = this.researchCapSource === undefined
+            ? 0
+            : research.getBonusForId(this.researchCapSource.researchGridIndex, 1);
+        this.menagerieCapOwned = this.menagerieCapSource !== undefined
+            && menagerieUnlocks[this.menagerieCapSource.menagerieUnlockIndex].owned;
+        this.activationOwned = this.activation !== undefined
+            && menagerieUnlocks[this.activation.menagerieUnlockIndex].owned;
+    }
+
+    getName(): string {
+        return this.activation?.canonicalName ?? this.data.name;
+    }
+
+    isAvailable(): boolean {
+        return this.data.bonus !== "filler" && (this.activation === undefined || this.activationOwned);
+    }
+
+    getMaxLevel(): number {
+        let maximumLevel = this.data.maxLevel;
+        if (this.researchCapSource !== undefined) {
+            maximumLevel = Math.floor(maximumLevel + this.researchMaximumLevelBonus);
+        }
+
+        // The Menagerie increase applies after the Research maximum is floored.
+        if (this.menagerieCapSource !== undefined && this.menagerieCapOwned) {
+            maximumLevel = Math.floor(this.menagerieCapSource.capIncrement + maximumLevel);
+        }
+
+        return maximumLevel;
     }
 
     getBonus = (level: number = this.level): number => {
-        return this.data.name == "filler" 
-            ? 0 
-            : level * this.data.bonusValue;
+        // Saved levels grant their raw bonus independently of talent activation.
+        return Math.round(level * this.data.bonusValue);
     }
 
     getSecondaryValue = (level: number = this.level): string => {
@@ -36,7 +99,7 @@ export class LegendTalent {
     }
 
     getNextLevelDesc = (): string => {
-        if (this.level >= this.data.maxLevel) {
+        if (this.level >= this.getMaxLevel()) {
             return "";
         }
 
@@ -69,7 +132,8 @@ export class LegendTalents extends Domain {
 
 
     init(_allItems: Item[]) {
-        this.talents = LegendTalent.fromBase(initLegendTalentsRepo());
+        const metadata = initLegendTalentMetadataRepo()[0].data;
+        this.talents = LegendTalent.fromBase(initLegendTalentsRepo(), metadata);
         return this;
     }
 
@@ -79,7 +143,7 @@ export class LegendTalents extends Domain {
 
         const legendTalentsLevels = spelunkingData[18] ?? [];
         legendTalents.talents.forEach(talent => {
-            talent.level = legendTalentsLevels[talent.index] ?? 0;
+            talent.parse(legendTalentsLevels[talent.index]);
         });
     }
     
@@ -105,6 +169,11 @@ export const updateLegendTalents = (data: Map<string, any>) => {
     const eventShop = data.get("eventShop") as EventShop;
     const zenithMarket = data.get("zenithMarket") as ZenithMarket;
     const sushiStation = data.get("sushi") as SushiStation;
+    const research = data.get("research") as ResearchGrid;
+    const menagerie = data.get("menagerie") as Menagerie;
+
+    const menagerieUnlocks = menagerie.getUnlocks();
+    legendTalents.talents.forEach(talent => talent.update(research, menagerieUnlocks));
 
     // Legend Talents Points
     let pointsOwned = 0;

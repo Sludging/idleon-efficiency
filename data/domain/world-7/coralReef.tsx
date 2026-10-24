@@ -17,11 +17,13 @@ import { Sneaking } from "../world-6/sneaking";
 import { Clamworks } from "./clamworks";
 import { CoralKid } from "./coralKid";
 import { DancingCoral } from "./dancingCoral";
+import { Menagerie } from "../menagerie";
 import { LegendTalents } from "./legendTalents";
 
 export class CoralReefUpgrade {
     level: number = 0;
     unlocked: boolean = false;
+    private maximumLevelBonus: number = 0;
 
     constructor(public index: number, public data: CoralReefUpgradeModel) { }
 
@@ -33,8 +35,14 @@ export class CoralReefUpgrade {
         return this.data.x1 * Math.pow(this.data.x2, this.level);
     }
 
+    updateMaximumLevelBonus(pillarCoralUnlockOwned: boolean): void {
+        // The Pillar Coral Reef gains three maximum levels from its Menagerie unlock.
+        // The game applies this increase only when its base maximum is 12.
+        this.maximumLevelBonus = this.index === 3 && this.data.x0 === 12 && pillarCoralUnlockOwned ? 3 : 0;
+    }
+
     getMaxLevel(): number {
-        return this.data.x0;
+        return this.data.x0 + this.maximumLevelBonus;
     }
 
     isMaxed(): boolean {
@@ -116,6 +124,13 @@ export class CoralReef extends Domain {
 
         coralReef.ownedCoral = spelunkCurrencies[5];
     }
+    updateMaximumLevels(pillarCoralUnlockOwned: boolean): void {
+        this.upgrades.forEach(upgrade => upgrade.updateMaximumLevelBonus(pillarCoralUnlockOwned));
+    }
+
+    getTotalUpgradeLevels(): number {
+        return this.upgrades.reduce((total, upgrade) => total + upgrade.level, 0);
+    }
 
     canAffordUpgrade(index: number): boolean {
         const upgrade = this.upgrades.find(upgrade => upgrade.index === index);
@@ -147,6 +162,13 @@ export class CoralReef extends Domain {
         return this.upgrades.find(upgrade => upgrade.index == index)?.getUpgradeCost() || 0;
     }
 }
+
+export const updateCoralReefMaximumLevels = (data: Map<string, any>): void => {
+    const coralReef = data.get("coralReef") as CoralReef;
+    const menagerie = data.get("menagerie") as Menagerie;
+
+    coralReef.updateMaximumLevels(menagerie.getUnlocks()[9].owned);
+};
 
 export const updateCoralReefDailyGain = (data: Map<string, any>) => {
     const coralReef = data.get("coralReef") as CoralReef;

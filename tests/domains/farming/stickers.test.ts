@@ -15,13 +15,14 @@ const stickerCases: [number, string][] = [
     [6, 'Threepeat Champ Sticker Spelunking POW bonus without earned stickers'],
 ];
 
-describe('Farming earned sticker bonuses', () => {
+describe('Farming sticker account results', () => {
     let farming: Farming;
     let results: ExtractionResults;
     beforeAll(() => {
         results = loadExtractionResults('farming-stickers-data.json');
         validateExtractionHealth(results);
-        farming = loadGameDataFromSave('latest').get('farming') as Farming;
+        const data = loadGameDataFromSave('latest');
+        farming = data.get('farming') as Farming;
     });
     it.each(stickerCases)('%i: %s', (index, description) => {
         expect(farming.getStickerBonus(index)).toMatchLiveGameWithDetails(
@@ -32,28 +33,70 @@ describe('Farming earned sticker bonuses', () => {
             }
         );
     });
+
+    it.each(stickerCases)('%i: %s saved count', (index, description) => {
+        expect(farming.stickers[index].count).toMatchLiveGameWithDetails(
+            getExtractedValue(results, `farming_sticker_count_${index}`), {
+                tolerance: 0,
+                context: `${description}: saved copies`,
+            }
+        );
+    });
+
+    it('matches total owned sticker quantity, including every saved sticker slot', () => {
+        expect(farming.getTotalStickers()).toMatchLiveGameWithDetails(
+            getExtractedValue(results, 'farming_sticker_total'), {
+                tolerance: 0,
+                context: 'Total owned Farming stickers, not distinct sticker types',
+            }
+        );
+    });
+
+    it('matches the direct sticker damage multiplier', () => {
+        expect(farming.getStickerDamageMultiplier()).toMatchLiveGameWithDetails(
+            getExtractedValue(results, 'farming_sticker_damage_multiplier'), {
+                tolerance: 0,
+                context: 'Damage multiplier from all owned Farming stickers',
+            }
+        );
+    });
+
+    it.each(stickerCases)('%i: %s base next-find chance', (index, description) => {
+        const probability = farming.stickers[index].getFindProbability();
+        // The native Sticker Depot shows 1 / StickerOdds without a plot overgrowth factor.
+        // Compare that visible denominator so very small probabilities retain relative precision.
+        expect(1 / probability).toMatchLiveGameWithDetails(
+            getExtractedValue(results, `farming_sticker_denominator_${index}`), {
+                tolerance: 0,
+                context: `${description}: base next-copy chance denominator`,
+                debugInfo: { probability, count: farming.stickers[index].count },
+            }
+        );
+    });
 });
 
-it('reinitialization, reparsing and repeated Farming updates preserve earned sticker bonuses', () => {
+it('preserves an earned sticker effect and damage after reparsing and repeated updates', () => {
     const results = loadExtractionResults('farming-stickers-data.json');
     validateExtractionHealth(results);
     const save = loadTestSave('latest');
     const data = loadGameDataFromSave('latest');
     const farming = data.get('farming') as Farming;
-    const assertStickerResults = () => {
-        for (let index = 0; index < 7; index++) {
-            expect(farming.getStickerBonus(index)).toMatchLiveGame(
-                getExtractedValue(results, `farming_sticker_bonus_${index}`), 0
-            );
-        }
-    };
-    assertStickerResults();
     const parsed = new Map(data);
     farming.getRawKeys().forEach(raw => HandleRawDataKey(raw, parsed, save, data.get('charCount')));
-    farming.init([], 0);
     farming.parse(parsed);
     updateFarmingStickerBonuses(data);
-    assertStickerResults();
     updateFarmingStickerBonuses(data);
-    assertStickerResults();
+
+    expect(farming.getStickerBonus(0)).toMatchLiveGameWithDetails(
+        getExtractedValue(results, 'farming_sticker_bonus_0'), {
+            tolerance: 0,
+            context: 'Mega Mongo Sticker Class EXP after reparsing and repeated updates',
+        }
+    );
+    expect(farming.getStickerDamageMultiplier()).toMatchLiveGameWithDetails(
+        getExtractedValue(results, 'farming_sticker_damage_multiplier'), {
+            tolerance: 0,
+            context: 'Prepared sticker damage after reparsing and repeated updates',
+        }
+    );
 });

@@ -1,6 +1,7 @@
 import { Box, CheckBox, Grid, Select, Text } from 'grommet';
 import type { ThemeType } from 'grommet';
 import { normalizeColor } from 'grommet/utils';
+import { CircleInformation } from 'grommet-icons';
 import styled from 'styled-components';
 import IconImage from '../../base/IconImage';
 import RoundedShadowBox from '../../base/RoundedShadowBox';
@@ -8,6 +9,8 @@ import TextAndLabel, { ComponentAndLabel } from '../../base/TextAndLabel';
 import TipDisplay from '../../base/TipDisplay';
 import { Discovery, Spelunking, Tunnel } from '../../../data/domain/world-7/spelunking';
 import type { AmberDenomination } from '../../../data/domain/world-7/spelunking';
+import type { Player } from '../../../data/domain/player';
+import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import { Item } from '../../../data/domain/items';
 import { commaNotation, notateNumber } from '../../../data/utility';
 
@@ -55,6 +58,7 @@ export type CollectionStatus = 'All' | 'Found' | 'Missing';
 
 interface SpelunkingDisplayProps {
     spelunking: Spelunking;
+    players: Player[];
     showLocked: boolean;
     collectionStatus: CollectionStatus;
     onShowLockedChange: (showLocked: boolean) => void;
@@ -63,6 +67,7 @@ interface SpelunkingDisplayProps {
 
 export default function SpelunkingDisplay({
     spelunking,
+    players,
     showLocked,
     collectionStatus,
     onShowLockedChange,
@@ -71,6 +76,10 @@ export default function SpelunkingDisplay({
     const ordinarySummary = spelunking.ordinarySummary;
     const grandSummary = spelunking.grandSummary;
     const currentAmber = spelunking.currentAmberDenomination;
+    const grandPlayer = players.find(player => player.playerID === spelunking.grandDiscoveryPlayerID);
+    if (players.length > 0 && grandPlayer === undefined) {
+        throw new Error('Spelunking Grand Discovery character has not been prepared');
+    }
 
     return (
         <Box gap="medium">
@@ -104,14 +113,20 @@ export default function SpelunkingDisplay({
             </TunnelSummaryStrip>
             <Grid columns={{ count: 'fit', size: 'min(100%, 500px)' }} gap="medium">
                 {spelunking.tunnels.filter(tunnel => showLocked || tunnel.available).map(tunnel => (
-                    <TunnelCard key={tunnel.index} tunnel={tunnel} amber={currentAmber} collectionStatus={collectionStatus} />
+                    <TunnelCard key={tunnel.index} tunnel={tunnel} amber={currentAmber} collectionStatus={collectionStatus} spelunking={spelunking} grandPlayer={grandPlayer} />
                 ))}
             </Grid>
         </Box>
     );
 }
 
-function TunnelCard({ tunnel, amber, collectionStatus }: { tunnel: Tunnel; amber: AmberDenomination; collectionStatus: CollectionStatus }) {
+function TunnelCard({ tunnel, amber, collectionStatus, spelunking, grandPlayer }: {
+    tunnel: Tunnel;
+    amber: AmberDenomination;
+    collectionStatus: CollectionStatus;
+    spelunking: Spelunking;
+    grandPlayer: Player | undefined;
+}) {
     const bossArt = tunnel.getLoreBossImageData();
     const amberArt = amber.getImageData();
     const biggestHaulText = amber.formatAmount(tunnel.biggestHaul);
@@ -170,6 +185,7 @@ function TunnelCard({ tunnel, amber, collectionStatus }: { tunnel: Tunnel; amber
                     <Box gap="xxsmall" pad="small" fill justify="between">
                         <Text size="large">{grandSummary.found} / {grandSummary.capacity}</Text>
                         <Text size="xsmall">Grand discoveries</Text>
+                        <GrandDiscoveryChance tunnel={tunnel} spelunking={spelunking} player={grandPlayer} />
                     </Box>
                 </TunnelMetrics>
             </Box>
@@ -178,6 +194,61 @@ function TunnelCard({ tunnel, amber, collectionStatus }: { tunnel: Tunnel; amber
                 {ordinaryEntries.map(discovery => <DiscoveryIcon key={discovery.index} discovery={discovery} />)}
             </Box>
         </RoundedShadowBox>
+    );
+}
+
+function formatGrandOdds(chance: number): string {
+    if (chance >= 1) {
+        return 'Guaranteed';
+    }
+    if (chance === 0) {
+        return '0%';
+    }
+
+    const denominator = 1 / chance;
+    const decimals = denominator < 10 ? 6 : denominator < 100 ? 2 : 0;
+    const scale = 10 ** decimals;
+    const roundedUp = Math.ceil(denominator * scale) / scale;
+    if (roundedUp <= 1) {
+        return '1 in >1';
+    }
+    return `1 in ≈${roundedUp.toLocaleString('en-US', { maximumFractionDigits: decimals })}`;
+}
+
+function GrandDiscoveryChance({ tunnel, spelunking, player }: {
+    tunnel: Tunnel;
+    spelunking: Spelunking;
+    player: Player | undefined;
+}) {
+    const chance = player === undefined ? undefined : spelunking.getNextGrandDiscoveryChance(tunnel.index, player.playerID);
+    let unavailable = 'Unavailable';
+    if (tunnel.grandSummary.missing === 0) {
+        unavailable = 'Maxed';
+    } else if (!tunnel.available || !spelunking.grandDiscoveryUpgrade.unlocked || spelunking.grandDiscoveryUpgradeBonus < 1) {
+        unavailable = 'Locked';
+    } else if (!tunnel.finalDiscovery.found) {
+        unavailable = 'Discover final object';
+    }
+
+    return (
+        <Box direction="row" align="center" gap="xxsmall" data-spelunking-grand-chance={tunnel.index}>
+            <Text size="xsmall">Next: {chance === undefined ? unavailable : formatGrandOdds(chance)}</Text>
+            <TipDisplay heading="Next Grand Discovery chance" maxWidth="420px" body={
+                <Box gap="small" data-spelunking-grand-detail={tunnel.index}>
+                    {player !== undefined && <Text size="small" color="dark-1">
+                        Uses {player.playerName}, your highest-level Spelunking character (level {commaNotation(player.skills.get(SkillsIndex.Spelunking)!.level)}).
+                    </Text>}
+                    <Text size="small" color="dark-1">Shared bonuses include the strongest Grand Discovery talent across your characters.</Text>
+                    <Text size="small" color="dark-1">Uses saved bonuses. Excludes active elixir effects.</Text>
+                    <Text size="small" color="dark-1">Applies when you destroy this tunnel's final ordinary object again. Unlock and discovery requirements still apply.</Text>
+                    {chance !== undefined && chance >= 1 && <Text size="small" color="dark-1">Guaranteed on an eligible destruction. Each success grants one Grand Discovery.</Text>}
+                </Box>
+            }>
+                <Box tabIndex={0} aria-label={`${tunnel.data.name} Grand Discovery chance details`}>
+                    <CircleInformation size="small" />
+                </Box>
+            </TipDisplay>
+        </Box>
     );
 }
 

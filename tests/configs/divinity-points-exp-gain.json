@@ -1,0 +1,17 @@
+{
+  "description": "Extract the selected character's account Points gain potential and per-character Divinity EXP rate",
+  "target": "Divinity Points gain potential and EXP rate",
+  "requiredActivePlayerIndex": 3,
+  "extractions": [
+    {
+      "label": "divinity_points_gain_potential",
+      "expression": "idleon.callFunction(\"Divinity\", \"DivPTSPerHr\", idleon.engine.getGameAttribute(\"GetPlayersUsernames\").indexOf(idleon.engine.getGameAttribute(\"UserInfo\")[0]), 999)",
+      "description": "Selected character's account Points gain potential shown in Divinity INFO"
+    },
+    {
+      "label": "divinity_exp_gain_per_hour",
+      "expression": "idleon.callFunction(\"Divinity\", \"DivPerHr_EXP\", idleon.engine.getGameAttribute(\"GetPlayersUsernames\").indexOf(idleon.engine.getGameAttribute(\"UserInfo\")[0]), 0)",
+      "description": "Selected character's Divinity EXP gain per hour shown in Divinity INFO"
+    }
+  ]
+}

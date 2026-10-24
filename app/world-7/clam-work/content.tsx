@@ -6,21 +6,18 @@ import { ClamWorkOverview } from '../../../components/world-7/clam-work/clamWork
 import { CompensationRewards } from '../../../components/world-7/clam-work/compensationRewards';
 import { Clamworks } from '../../../data/domain/world-7/clamworks';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
-import { DataStatus } from '../../../lib/stores/appDataStore';
 
 export default function ClamWorkContent() {
-    const { theData, dataStatus } = useAppDataStore(useShallow(state => ({
+
+    const { theData } = useAppDataStore(useShallow(state => ({
         theData: state.data.getData(),
-        dataStatus: state.dataStatus,
         lastUpdated: state.lastUpdated,
     })));
- 
-    if (![DataStatus.LiveData, DataStatus.StaticData].includes(dataStatus)) {
+    const clamworks = theData.get('clamworks') as Clamworks | undefined;
+
+    if (!clamworks) {
         return <>Loading...</>;
     }
-
-    const clamworks = theData.get('clamworks') as Clamworks;
-
     return (
         <Box gap="medium">
             <Heading level="2" size="medium" margin={{ top: 'medium', bottom: 'small' }} style={{ fontWeight: 'normal' }}>

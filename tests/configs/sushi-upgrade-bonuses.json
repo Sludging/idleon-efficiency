@@ -1,0 +1,11 @@
+{
+  "description": "Effective Sushi Station upgrade bonuses for the full catalog, including Menagerie doubling.",
+  "target": "Sushi Station upgrade bonuses",
+  "extractions": [
+    {
+      "label": "sushi_upgrade_bonuses",
+      "expression": "(()=>{const selected=idleon.getAttr(\"Spelunk\")[52];return idleon.engine.getGameAttribute(\"CustomLists\").h.SushiUPG.map((_,index)=>({index,selected:selected.includes(index),quantity:idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",index,0)}))})()",
+      "description": "Effective bonuses for every Sushi Station catalog upgrade, including any Menagerie doubling."
+    }
+  ]
+}

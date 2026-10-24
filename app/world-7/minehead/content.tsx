@@ -1,19 +1,22 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Box, Grid, Heading, ResponsiveContext, Text } from 'grommet';
 import { useContext } from 'react';
 import ContentTabs from '../../../components/base/ContentTabs';
 import IconImage from '../../../components/base/IconImage';
+import { DoublerBadge, DoublerSummary } from '../../../components/base/DoublerStatus';
 import RoundedShadowBox from '../../../components/base/RoundedShadowBox';
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { UpgradeTable } from '../../../components/account/shared/UpgradeTable';
 import type { FilterOptions } from '../../../components/account/shared/UpgradeTableFilters';
 import { Minehead as MineheadDomain, MineheadUpgrade } from '../../../data/domain/world-7/minehead';
+import { Menagerie } from '../../../data/domain/menagerie';
 import type { ImageData } from '../../../data/domain/imageData';
 import { commaNotation, notateNumber } from '../../../data/utility';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
+import useHydrated from '../../../lib/hooks/useHydrated';
 
 type UpgradeRow = { id: number; upgrade: MineheadUpgrade; description: string; capped: boolean; maxed: boolean; locked: boolean; nextCost: number; bulkCost: number };
 type MineheadSection = 'upgrades' | 'opponents';
@@ -109,7 +112,10 @@ function MineheadUpgrades({ minehead }: { minehead: MineheadDomain }) {
             header: 'Upgrade',
             render: (row: UpgradeRow) => <Box direction="row" gap="small" align="center" style={{ minWidth: '180px', opacity: row.locked ? 0.5 : 1 }}>
                 <IconImage data={row.upgrade.getImageData()} scale={0.75} />
-                <Text size="xsmall">{row.upgrade.data.name}</Text>
+                <Box direction="row" gap="xsmall" align="center">
+                    <Text size="xsmall">{row.upgrade.data.name}</Text>
+                    {row.upgrade.menagerieDoubled && <DoublerBadge image={Menagerie.getUsableResourceImageData('mineheadDoublers')} label="Minehead doubler applied" />}
+                </Box>
             </Box>,
         },
         {
@@ -160,6 +166,13 @@ function MineheadUpgrades({ minehead }: { minehead: MineheadDomain }) {
         searchPlaceholder="Search name or effect..."
         sortOptions={[{ label: 'In-game order', value: 'default' }]}
         variant="panel"
+        additionalFilters={<DoublerSummary
+            label="Doublers"
+            owned={minehead.mineheadDoublersOwned}
+            available={minehead.mineheadDoublersRemaining}
+            image={Menagerie.getUsableResourceImageData('mineheadDoublers')}
+            description="Each doubler doubles an upgrade's quantity."
+        />}
     />;
 }
 
@@ -245,18 +258,14 @@ function MineheadOpponents({ minehead }: { minehead: MineheadDomain }) {
 }
 
 export default function MineheadContent() {
+    const hydrated = useHydrated();
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
     const [section, setSection] = useState<MineheadSection>('upgrades');
-    const [mounted, setMounted] = useState(false);
     const minehead = theData.get('minehead') as MineheadDomain | undefined;
 
-    useEffect(() => {
-        setMounted(true);
-    }, []);
-
-    if (!mounted || !minehead) {
+    if (!hydrated || !minehead) {
         return <>Loading...</>;
     }
 

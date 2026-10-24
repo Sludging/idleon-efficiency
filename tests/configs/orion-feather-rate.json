@@ -1,0 +1,11 @@
+{
+  "description": "Direct native Orion feather production rate",
+  "target": "Orion feather production rate",
+  "extractions": [
+    {
+      "label": "feather_rate",
+      "expression": "idleon.callFunction(\"Summoning\",\"OwlFeatherRate\",0,0)",
+      "description": "Current native Orion feather production rate per second"
+    }
+  ]
+}

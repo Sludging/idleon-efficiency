@@ -1,7 +1,12 @@
 {
-  "description": "Extract seven Friend Bonus stats and the four account-wide inputs used to calculate slots and the active multiplier.",
+  "description": "Extract seven Friend Bonus stats, available slots, and the four account-wide inputs used to calculate slots and the active multiplier.",
   "target": "Friend Bonuses (Stats)",
   "extractions": [
+    {
+      "label": "friend_bonus_slots",
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusSlots\", 0, 0)",
+      "description": "Available Friend Bonus slots"
+    },
     {
       "label": "friend_bonus_stat_0",
       "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 0, 0)",

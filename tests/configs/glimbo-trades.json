@@ -1,0 +1,20 @@
+{
+  "description": "Glimbo trade costs, caps, total trades, and Drop Rate multiplier from the regular save",
+  "target": "Glimbo",
+  "extractions": [
+    { "label": "total_trades", "expression": "idleon.callFunction(\"Minehead\", \"GlimboTotalTrades\", 0, 0)", "description": "Total trades used by Research and Tome" },
+    { "label": "drop_rate_multiplier", "expression": "idleon.callFunction(\"Minehead\", \"GlimboDRmulti\", 0, 0)", "description": "Current Glimbo Drop Rate multiplier" },
+    { "label": "trade_0_count", "expression": "idleon.getAttr(\"Research\")[12][0]", "description": "Completed trade count for BOGO-eligible Coral 3 trade" },
+    { "label": "trade_0_cost", "expression": "idleon.callFunction(\"Minehead\", \"Glimbo_Cost\", 0, 0)", "description": "Next Coral 3 trade cost after native discounts" },
+    { "label": "trade_0_maximum", "expression": "Math.round(Number(idleon.getAttr(\"CustomLists\").h.UpgradeVault[Number(idleon.getAttr(\"CustomLists\").h.Research[26][0])][4]) + Math.max(0, Math.min(10, 10 * Number(idleon.getAttr(\"BundlesReceived\").h.bon_u || 0))) + (1 + idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 169, 1) + idleon.callFunction(\"Summoning\", \"EventShopOwned\", 40, 0)) * (Number(idleon.getAttr(\"Research\")[12][0]) + 1))", "description": "Current native maximum-level cap preview for Glimbo trade 0" },
+    { "label": "trade_0_next_gain", "expression": "1 + idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 169, 1) + idleon.callFunction(\"Summoning\", \"EventShopOwned\", 40, 0)", "description": "Native maximum-level increase from next trade 0" },
+    { "label": "trade_2_count", "expression": "idleon.getAttr(\"Research\")[12][2]", "description": "Completed trade count for regular Refinery 3 trade" },
+    { "label": "trade_2_cost", "expression": "idleon.callFunction(\"Minehead\", \"Glimbo_Cost\", 2, 0)", "description": "Next Refinery 3 trade cost after native discounts" },
+    { "label": "trade_2_maximum", "expression": "Math.round(Number(idleon.getAttr(\"CustomLists\").h.UpgradeVault[Number(idleon.getAttr(\"CustomLists\").h.Research[26][2])][4]) + Math.max(0, Math.min(10, 10 * Number(idleon.getAttr(\"BundlesReceived\").h.bon_u || 0))) + Number(idleon.getAttr(\"Research\")[12][2]) + 1)", "description": "Current native maximum-level cap preview for regular trade 2" },
+    { "label": "trade_2_next_gain", "expression": "Math.round(Number(idleon.getAttr(\"CustomLists\").h.UpgradeVault[Number(idleon.getAttr(\"CustomLists\").h.Research[26][2])][4]) + Math.max(0, Math.min(10, 10 * Number(idleon.getAttr(\"BundlesReceived\").h.bon_u || 0))) + Number(idleon.getAttr(\"Research\")[12][2]) + 2) - Math.round(Number(idleon.getAttr(\"CustomLists\").h.UpgradeVault[Number(idleon.getAttr(\"CustomLists\").h.Research[26][2])][4]) + Math.max(0, Math.min(10, 10 * Number(idleon.getAttr(\"BundlesReceived\").h.bon_u || 0))) + Number(idleon.getAttr(\"Research\")[12][2]) + 1)", "description": "Native next-trade maximum-level gain for regular trade 2" },
+    { "label": "trade_15_count", "expression": "idleon.getAttr(\"Research\")[12][15]", "description": "Completed trade count for BOGO-eligible World 7 trade" },
+    { "label": "trade_15_cost", "expression": "idleon.callFunction(\"Minehead\", \"Glimbo_Cost\", 15, 0)", "description": "Next trade 15 cost after native discounts" },
+    { "label": "trade_15_maximum", "expression": "Math.round(Number(idleon.getAttr(\"CustomLists\").h.UpgradeVault[Number(idleon.getAttr(\"CustomLists\").h.Research[26][15])][4]) + Math.max(0, Math.min(10, 10 * Number(idleon.getAttr(\"BundlesReceived\").h.bon_u || 0))) + (1 + idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 169, 1) + idleon.callFunction(\"Summoning\", \"EventShopOwned\", 40, 0)) * (Number(idleon.getAttr(\"Research\")[12][15]) + 1))", "description": "Current native maximum-level cap preview for trade 15" },
+    { "label": "trade_15_next_gain", "expression": "1 + idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 169, 1) + idleon.callFunction(\"Summoning\", \"EventShopOwned\", 40, 0)", "description": "Native maximum-level increase from next trade 15" }
+  ]
+}

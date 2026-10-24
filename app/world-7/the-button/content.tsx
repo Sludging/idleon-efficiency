@@ -1,15 +1,14 @@
 "use client";
 
 import { Box, Grid, Heading, Text } from "grommet";
-import { useEffect, useState } from "react";
+import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import { useShallow } from "zustand/react/shallow";
 import IconImage from "../../../components/base/IconImage";
 import ShadowBox from "../../../components/base/ShadowBox";
 import TextAndLabel from "../../../components/base/TextAndLabel";
 import { Button as ButtonDomain, UPCOMING_BUTTON_TASK_COUNT } from "../../../data/domain/world-7/button";
 import { commaNotation, notateNumber } from "../../../data/utility";
-import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
-import { DataStatus } from "../../../lib/stores/appDataStore";
-import { useShallow } from "zustand/react/shallow";
+import useHydrated from "../../../lib/hooks/useHydrated";
 
 const getTaskText = (description: string, requiredValue: number): string => {
     const requirement = notateNumber(requiredValue, "Smaller");
@@ -20,17 +19,13 @@ const getTaskText = (description: string, requiredValue: number): string => {
 };
 
 export default function ButtonContent() {
-    const [hydrated, setHydrated] = useState(false);
-    const { theData, dataStatus } = useAppDataStore(useShallow(
-        (state) => ({ theData: state.data.getData(), dataStatus: state.dataStatus, lastUpdated: state.lastUpdated })
+    const hydrated = useHydrated();
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
     const button = theData.get("button") as ButtonDomain | undefined;
 
-    useEffect(() => {
-        setHydrated(true);
-    }, []);
-
-    if (!hydrated || (dataStatus !== DataStatus.StaticData && dataStatus !== DataStatus.LiveData) || !button) {
+    if (!hydrated || !button) {
         return <>Loading...</>;
     }
 

@@ -1,0 +1,51 @@
+{
+  "description": "Gallery podium state, character-specific bonus multiplier, combined deposited effects, and saved collection state from the paired target-player save.",
+  "target": "Gallery summary and character-specific bonuses",
+  "extractions": [
+    {
+      "label": "podium_capacity",
+      "expression": "idleon.callFunction(\"Gallery\", \"PodiumsOwned\", 0, 0)",
+      "description": "Available podium capacity in the target player's account"
+    },
+    {
+      "label": "podiums_tier_2",
+      "expression": "idleon.callFunction(\"Gallery\", \"PodiumsOwned_Lv2\", 0, 0)",
+      "description": "Target-player podium slots at improved tier 2"
+    },
+    {
+      "label": "podiums_tier_3",
+      "expression": "idleon.callFunction(\"Gallery\", \"PodiumsOwned_Lv3\", 0, 0)",
+      "description": "Target-player podium slots at tier 3"
+    },
+    {
+      "label": "podiums_tier_4",
+      "expression": "idleon.callFunction(\"Gallery\", \"PodiumsOwned_Lv4\", 0, 0)",
+      "description": "Target-player podium slots at tier 4"
+    },
+    {
+      "label": "bonus_multiplier",
+      "expression": "idleon.callFunction(\"Gallery\", \"GalleryBonusMulti\", 0, 0)",
+      "description": "Gallery effect multiplier for active target character"
+    },
+    {
+      "label": "gallery_unlocked",
+      "expression": "idleon.callFunction(\"Gallery\", \"GalleryBonusSystemON\", 0, 0)",
+      "description": "Gallery effects unlocked for the active target character"
+    },
+    {
+      "label": "gallery_placements",
+      "expression": "idleon.engine.getGameAttribute(\"Spelunk\")[16]",
+      "description": "Saved trophy shelf and podium placements"
+    },
+    {
+      "label": "nametag_counts",
+      "expression": "idleon.engine.getGameAttribute(\"Spelunk\")[17]",
+      "description": "Saved nametag deposit counts"
+    },
+    {
+      "label": "combined_drop_rate",
+      "expression": "(() => { const d = idleon.engine.getGameAttribute(\"DNSM\").h; return Number(d.GalleryTrophyBonTOT.h[\"%_DROP_RATE\"] || 0) + Number(d.GalleryNametagBonTOT.h[\"%_DROP_RATE\"] || 0); })()",
+      "description": "Game-prepared combined deposited trophy and nametag Drop Rate effects"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "description": "Approved Breeding core catalogs, account OverLV total, and current-context Shiny speed for the unchanged save.",
+  "target": "Breeding Arena and Crucible unlock flags, Shiny progression and bonuses, and OverLV effects",
+  "extractions": [
+    {
+      "label": "shiny_speed_equipment",
+      "expression": "(()=>{const e=idleon.engine;const h=e.getGameAttribute(\"DNSM\").h;const name=e.getGameAttribute(\"UserInfo\")[0];const activeIndex=e.getGameAttribute(\"GetPlayersUsernames\").indexOf(name);return {activeIndex,manualStarSigns:String(e.getGameAttribute(\"PersonalValuesMap\").h.StarSign).split(\",\"),activeChipIds:e.getGameAttribute(\"Lab\")[1+activeIndex].slice(0,7),preparedBreedabilliShinyBonus:h.StarSigns.h[\"57b\"],preparedChipOwner:h.ChipBbonusz?.h.PlayerNAME,preparedStarChipBonus:h.ChipBbonusz?.h.star,seraphCosmosUnlocked:Object.prototype.hasOwnProperty.call(e.getGameAttribute(\"StarSignsUnlocked\").h,\"Seraph_Cosmos\")}})()",
+      "description": "Read-only equipment metadata for the core Shiny speed scenario. Native actor 3 has infinite Breedabilli and Silkrode. The website baseline already includes Silkrode, so compare getShinySpeed(true, false), not its extra-doubled scenario."
+    },
+    {
+      "label": "arena_bonuses",
+      "expression": "idleon.engine.getGameAttribute(\"CustomLists\").h.RANDOlist[53].map((_,index)=>({index,unlocked:idleon.callFunction(\"Breeding\",\"PetArenaBonus\",\"0\",index,0)}))",
+      "description": "All native Arena reward unlock flags."
+    },
+    {
+      "label": "crucible_bonuses",
+      "expression": "idleon.engine.getGameAttribute(\"CustomLists\").h.RANDOlist[115].map((_,index)=>({index,unlocked:idleon.callFunction(\"Breeding\",\"PetArenaCrucBonus\",\"0\",index,0)}))",
+      "description": "All native Crucible reward unlock flags, including the locked Crucible branch."
+    },
+    {
+      "label": "shiny_bonuses",
+      "expression": "idleon.engine.getGameAttribute(\"CustomLists\").h.RANDOlist[91].map((_,index)=>({index,bonus:idleon.callFunction(\"Breeding\",\"ShinyBonusS\",\"Nah\",index,-1)}))",
+      "description": "All native aggregate Shiny bonus outputs."
+    },
+    {
+      "label": "shiny_species",
+      "expression": "idleon.engine.getGameAttribute(\"CustomLists\").h.PetStats.slice(0,4).flatMap((pets,world)=>pets.map((pet,petIndex)=>({world,petIndex,petId:pet[0],level:idleon.callFunction(\"Breeding\",\"SpecialPassives\",\"Lv\",world,petIndex),requirement:idleon.callFunction(\"Breeding\",\"SpecialPassives\",\"REQ\",world,petIndex)})))",
+      "description": "Native Shiny level and next requirement for every species in the four supported pet worlds."
+    },
+    {
+      "label": "total_shiny_overlevels",
+      "expression": "idleon.callFunction(\"Breeding\",\"SpecialzOverLVL\",\"0\",0,0)",
+      "description": "Native account-wide Shiny OverLV total. The unchanged save has no positive OverLV."
+    },
+    {
+      "label": "shiny_speed",
+      "expression": "idleon.callFunction(\"Breeding\",\"ShinySpdMulti\",\"0\",0,0)",
+      "description": "Native full Shiny speed in the active character equipment context. Compare only a matching existing public equipment scenario."
+    }
+  ]
+}

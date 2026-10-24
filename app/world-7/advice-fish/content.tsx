@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, CheckBox, Grid, Heading, Text } from "grommet";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import IconImage from "../../../components/base/IconImage";
 import ShadowBox from "../../../components/base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../../components/base/TextAndLabel";
@@ -9,22 +9,18 @@ import CoinsDisplay from "../../../components/coinsDisplay";
 import { BigFish as BigFishDomain } from "../../../data/domain/world-7/bigFish";
 import { commaNotation, getCoinsArray } from "../../../data/utility";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
-import { DataStatus } from "../../../lib/stores/appDataStore";
 import { useShallow } from "zustand/react/shallow";
+import useHydrated from "../../../lib/hooks/useHydrated";
 
 export default function AdviceFishContent() {
-    const [hydrated, setHydrated] = useState(false);
+    const hydrated = useHydrated();
     const [showLocked, setShowLocked] = useState(true);
-    const { theData, dataStatus } = useAppDataStore(useShallow(
-        (state) => ({ theData: state.data.getData(), dataStatus: state.dataStatus, lastUpdated: state.lastUpdated })
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
     const bigFish = theData.get("bigFish") as BigFishDomain | undefined;
 
-    useEffect(() => {
-        setHydrated(true);
-    }, []);
-
-    if (!hydrated || (dataStatus !== DataStatus.StaticData && dataStatus !== DataStatus.LiveData) || !bigFish) {
+    if (!hydrated || !bigFish) {
         return <>Loading...</>;
     }
 

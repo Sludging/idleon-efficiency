@@ -23,7 +23,7 @@ export class HatRack extends Domain {
     private depositedHats: string[] = [];
     private unlockKillsLeft: (number | undefined)[] = [];
     private itemEffects = new Map<string, ItemEffect[]>();
-    private calculatedBonuses: Map<string, number> | undefined;
+    private calculatedBonuses = new Map<string, number>();
 
     getRawKeys(): RawData[] {
         return [
@@ -34,6 +34,7 @@ export class HatRack extends Domain {
 
     init(allItems: Item[], _charCount: number) {
         this.hats = [];
+        this.calculatedBonuses = new Map();
         this.itemEffects.clear();
         for (const item of allItems) {
             // Catalog eligibility uses the definition sentinel, not the recipe-derived Item level.
@@ -78,7 +79,7 @@ export class HatRack extends Domain {
             (data.get(`KLA_${index}`) as number[][])[50]?.[0]
         );
         // Parsed saves invalidate totals from the previous account state.
-        hatRack.calculatedBonuses = undefined;
+        hatRack.calculatedBonuses = new Map();
     }
 
     getDepositedHatCount(): number {
@@ -92,9 +93,6 @@ export class HatRack extends Domain {
     }
 
     getBonus(effect: string, player: Player): number {
-        if (!this.calculatedBonuses) {
-            throw new Error(`Hat Rack bonuses have not been calculated for player ${player.playerID}`);
-        }
         if (!this.isUnlocked(player)) return 0;
         return this.calculatedBonuses.get(effect) ?? 0;
     }
@@ -121,7 +119,7 @@ export class HatRack extends Domain {
     }
 
     private calculate(multiplier: number): void {
-        this.calculatedBonuses = undefined;
+        this.calculatedBonuses = new Map();
         const bonuses = new Map<string, number>();
         // Match the game's per-hat, per-channel multiplication order for precision.
         for (const name of this.depositedHats) {

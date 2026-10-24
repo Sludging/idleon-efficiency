@@ -296,6 +296,7 @@ function ArtifactDisplay() {
                                             { status: ArtifactStatus.Sovereign, label: "SOVEREIGN BONUS", getText: () => artifact.data.sovereignBonus!, labelColor: "#7FFFD4" },
                                             { status: ArtifactStatus.Omnipotent, label: "OMNIPOTENT BONUS", getText: () => artifact.data.omnipotentBonus!, labelColor: "#4ec4ff" },
                                             { status: ArtifactStatus.Transcendent, label: "TRANSCENDENT BONUS", getText: () => artifact.data.transcendentBonus!, labelColor: "#756a6a" },
+                                            { status: ArtifactStatus.Verisimilitude, label: "VERISIMILITUDE BONUS", getText: () => artifact.data.verisimilitudeBonus!, labelColor: "#D200FF" },
                                         ];
 
                                         const currentTierIndex = tiers.findIndex(tier => tier.status === artifact.status);
@@ -492,19 +493,21 @@ function IslandDisplay() {
                                         key={aIndex}
                                         margin={{ right: 'small' }}
                                         border={
-                                            artifact.status == ArtifactStatus.Transcendent ? { color: '#756a6a', side: 'all' } :
-                                                artifact.status == ArtifactStatus.Omnipotent ? { color: '#4ec4ff', side: 'all' } :
-                                                    artifact.status == ArtifactStatus.Sovereign ? { color: '#7FFFD4', side: 'all' } :
-                                                        artifact.status == ArtifactStatus.Eldritch ? { color: '#FFFFF0', side: 'all' } :
-                                                            artifact.status == ArtifactStatus.Ancient ? { color: '#FFD700', side: 'all' } :
-                                                                undefined} style={{ opacity: artifact.status == ArtifactStatus.Unobtained ? 0.2 : 1 }}>
+                                            artifact.status == ArtifactStatus.Verisimilitude ? { color: '#D200FF', side: 'all' } :
+                                                artifact.status == ArtifactStatus.Transcendent ? { color: '#756a6a', side: 'all' } :
+                                                    artifact.status == ArtifactStatus.Omnipotent ? { color: '#4ec4ff', side: 'all' } :
+                                                        artifact.status == ArtifactStatus.Sovereign ? { color: '#7FFFD4', side: 'all' } :
+                                                            artifact.status == ArtifactStatus.Eldritch ? { color: '#FFFFF0', side: 'all' } :
+                                                                artifact.status == ArtifactStatus.Ancient ? { color: '#FFD700', side: 'all' } :
+                                                                    undefined} style={{ opacity: artifact.status == ArtifactStatus.Unobtained ? 0.2 : 1 }}>
                                         <TipDisplay
-                                            heading={`${artifact.data.name}${artifact.status == ArtifactStatus.Transcendent ? " (Transcendent)" :
-                                                artifact.status == ArtifactStatus.Omnipotent ? " (Omnipotent)" :
-                                                    artifact.status == ArtifactStatus.Sovereign ? " (Sovereign)" :
-                                                        artifact.status == ArtifactStatus.Eldritch ? " (Eldritch)" :
-                                                            artifact.status == ArtifactStatus.Ancient ? " (Ancient)" :
-                                                                ""}`}
+                                            heading={`${artifact.data.name}${artifact.status == ArtifactStatus.Verisimilitude ? " (Verisimilitude)" :
+                                                artifact.status == ArtifactStatus.Transcendent ? " (Transcendent)" :
+                                                    artifact.status == ArtifactStatus.Omnipotent ? " (Omnipotent)" :
+                                                        artifact.status == ArtifactStatus.Sovereign ? " (Sovereign)" :
+                                                            artifact.status == ArtifactStatus.Eldritch ? " (Eldritch)" :
+                                                                artifact.status == ArtifactStatus.Ancient ? " (Ancient)" :
+                                                                    ""}`}
                                             body={<Text>{artifact.getBonusText()}</Text>}
                                         >
                                             <IconImage data={artifact.getImageData()} />

@@ -1,31 +1,102 @@
+export interface ChangelogSection {
+  title: string;
+  changes: string[];
+}
+
+/** Changes accept plain bullets or titled sections with their own bullet lists. */
 export interface ChangelogEntryData {
   version: string;
   title: string;
   date: string;
-  changes: string[];
+  changes: (string | ChangelogSection)[];
 }
 
 export const changelogData: ChangelogEntryData[] = [
+  {
+    version: "1.6.1",
+    title: "1.24 and Menagerie",
+    date: "October 24, 2026",
+    changes: [
+      {
+        title: "Update 1.24",
+        changes: [
+          "Companions: Added Maccie’s Lumi bonus.",
+          "Companions: Added Ancientfish’s upgrade-doubling capacity.",
+          "Event Shop: Added Black Star, Organic Label, and Lumi rewards.",
+          "Game Data: Updated items, cards, companions, and shop data for 1.24.",
+          "Upgrade Vault: Updated level caps and prices to include Event Shop rewards, bundles, Glimbo trades, and companion and Sushi discounts.",
+        ],
+      },
+      {
+        title: "Menagerie",
+        changes: [
+          "Breeding: Added increased shiny pet level caps and bonuses from levels above 20 to shiny levelling speed and pet damage.",
+          "Coral Reef: Added Menagerie’s increased Pillar Coral level cap.",
+          "Forge: Fixed smelting speed calculations, including Menagerie, Godshard card, and oil bonuses.",
+          "Gaming: Fixed Black Star multipliers and available Black Star counts.",
+          "Obols: Fixed Silver Jellyfish bonuses to non-attribute stats.",
+          "Sneaking: Added Omnijade allocation tracking and upgrade bonuses.",
+          "Trapping: Fixed Menagerie and Meritocracy multipliers for shiny critter rewards.",
+        ],
+      },
+      {
+        title: "Older Content",
+        changes: [
+          "Farming: Added Exotic Market upgrade tracking.",
+          "Farming: Added Sticker collection tracking.",
+          "Gallery: Added page with trophies, nametags, podiums, and bonus summaries.",
+          "Glimbo: Added page with trade costs, affordability, Vault cap increases, and an option to preserve greenstacks.",
+          "Sneaking: Added floor progression, Mastery, Gemstones, and daily charm roll tracking.",
+          "Summoning: Added Essences & Stones overview with generation rates, stone wins, next boss HP, and upgrade bonuses.",
+        ],
+      },
+      {
+        title: "Other Fixes",
+        changes: [
+          "Alchemy: Fixed character assignment counts for the first Sigil.",
+          "Breeding: Fixed shiny pet levelling speed, pet damage bonuses, and Grey DNA estimates when trashing pets.",
+          "Bubba: Fixed upgrade prices and production.",
+          "Clam Work: Fixed upgrade costs, promotion-level requirements, and Scurge discounts.",
+          "Construction: Fixed character build speed, cog build and EXP rates, flag speed, and Shrine level caps.",
+          "Cooking: Fixed cooking speed, Mastery EXP, meal level caps, ribbon bonuses, and No Meal Left Behind indicators and bundle support.",
+          "Divinity: Fixed Divinity point and EXP rates.",
+          "Farming: Fixed Exotic Market bonuses and Land Rank EXP calculations.",
+          "Kangaroo: Fixed upgrade prices and production.",
+          "Legend Talents: Fixed talent activation, level caps, and bonuses.",
+          "Owl: Fixed upgrade prices and production.",
+          "Players: Fixed character damage and drop rate calculations.",
+          "Research: Fixed EXP bonuses from Crucible, Gallery nametags, Clam Work, Arcade, Killroy, and companions. Marked Gallery and Silkrode assumptions.",
+          "Sailing: Fixed artifact bonuses, artifact find chance, captain EXP, and treasure value.",
+          "Spelunking: Fixed persistent POW calculations.",
+          "Summoning: Fixed essence generation, Teal unlocks, and Dream Pack bonuses.",
+        ],
+      },
+    ]
+  },
   {
     version: "1.6.0",
     title: "We are cooking!",
     date: "October 19, 2026",
     changes: [
       "Added Menagerie page to track missions, rank, Lumi, Shells, unlocks, and bonuses. Menagerie's impact on other systems is not complete yet.",
-      "--- Older Content ---",
-      "Added Research page to track Observations, lenses, Papers, Research EXP, Grid upgrades, and Shapes.",
-      "Added Spelunking page to track tunnels, discoveries, Journal pages, character progression, Amber, Shop upgrades, and Elixirs.",
-      "Added Emperor, Minehead, and Clam Work pages.",
-      "Expanded The Hole with villager growth, Opals, Studies, Schematics, Majik, and Measurements.",
-      "Added cavern resource, production, collectible, and upgrade tracking to The Hole.",
-      "Detailed progression remains limited for Bravery, Justice, Wisdom, Dawg Den, Gloomie Mushroom Grotto, Gambit, and Temple.",
-      "Added Advice Fish, Zenith Market, and The Button pages to track bonuses, upgrades, costs, and task progress.",
-      "Added Bribes, Guild Bonuses, Event Shop, and Armor Smithy pages, plus bonus summaries for Owl, Kangaroo, and Bubba.",
-      "Expanded character stats with defence, accuracy, movement speed, weapon power, and drop rate.",
-      "Fixed upgrade costs for Compass, Grimoire, and Tesseract.",
-      "Fixed card-star progress and card bonus calculations, including Cardifiers.",
-      "Added passive Prayer bonus and per-character Nobisect blessing displays.",
-      "Refreshed Sushi Station and Jelly Operator layouts.",
+      {
+        title: "Older Content",
+        changes: [
+          "Added Research page to track Observations, lenses, Papers, Research EXP, Grid upgrades, and Shapes.",
+          "Added Spelunking page to track tunnels, discoveries, Journal pages, character progression, Amber, Shop upgrades, and Elixirs.",
+          "Added Emperor, Minehead, and Clam Work pages.",
+          "Expanded The Hole with villager growth, Opals, Studies, Schematics, Majik, and Measurements.",
+          "Added cavern resource, production, collectible, and upgrade tracking to The Hole.",
+          "Detailed progression remains limited for Bravery, Justice, Wisdom, Dawg Den, Gloomie Mushroom Grotto, Gambit, and Temple.",
+          "Added Advice Fish, Zenith Market, and The Button pages to track bonuses, upgrades, costs, and task progress.",
+          "Added Bribes, Guild Bonuses, Event Shop, and Armor Smithy pages, plus bonus summaries for Owl, Kangaroo, and Bubba.",
+          "Expanded character stats with defence, accuracy, movement speed, weapon power, and drop rate.",
+          "Fixed upgrade costs for Compass, Grimoire, and Tesseract.",
+          "Fixed card-star progress and card bonus calculations, including Cardifiers.",
+          "Added passive Prayer bonus and per-character Nobisect blessing displays.",
+          "Refreshed Sushi Station and Jelly Operator layouts.",
+        ]
+      }
     ]
   },
   {

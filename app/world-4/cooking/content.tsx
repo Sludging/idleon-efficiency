@@ -17,6 +17,8 @@ import TipDisplay, { TipDirection } from '../../../components/base/TipDisplay';
 import CoinsDisplay from '../../../components/coinsDisplay';
 import { territoryNiceNames } from '../../../data/domain/world-4/breeding';
 import { Cooking as CookingDomain, Kitchen, KitchenStatus, Meal, UpgradeType } from '../../../data/domain/world-4/cooking';
+import type { Rift } from '../../../data/domain/world-4/rift';
+import type { Companion } from '../../../data/domain/companions';
 import { getCoinsArray, nFormatter, notateNumber, toTime } from '../../../data/utility';
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { AtomCollider } from '../../../data/domain/world-3/construction/atomCollider';
@@ -333,6 +335,8 @@ function Cooking() {
                     }
                     margin={{ right: 'medium' }}
                 />
+                <TextAndLabel label="Max level" text={cooking.meals[0].maxLevel.toString()} margin={{ right: 'medium' }} />
+                {cooking.isCookingMasteryUnlocked(theData.get('rift') as Rift, theData.get('companions') as Companion[]) && <TextAndLabel label="Mastery EXP/hour" text={notateNumber(cooking.getMasteryExperienceRate())} margin={{ right: 'medium' }} />}
                 {cooking.mealsDiscovered < cooking.getMaxMeals() && <TextAndLabel label="Meals Discovered" text={`${cooking.mealsDiscovered}/${cooking.getMaxMeals()}`} margin={{ right: 'medium' }} />}
                 {cooking.mealsAtDiamond > 0 && cooking.mealsAtDiamond < cooking.getMaxMeals() && <TextAndLabel label="Lv 11+ Meals" text={`${cooking.mealsAtDiamond}/${cooking.getMaxMeals()}`} margin={{ right: 'medium' }} />}
                 {hasColliderBonus && cooking.mealsAtVoid > 0 && <TextAndLabel label="Lv 30+ Meals" text={`${cooking.mealsAtVoid}/${cooking.getMaxMeals()}`} margin={{ right: 'medium' }} />}
@@ -409,7 +413,7 @@ function Cooking() {
                         cooking.meals.filter(meal => meal.noMealLeftBehindAffected == true).length > 0 &&
                         <Box direction="row" align="center">
                             <Ascending color="Legendary" size="large" />
-                            <Text size="xsmall">Indicates meals that will level from &quot;No Meal Left Behind&quot; Jade Emporium bonus</Text>
+                            <Text size="xsmall">Indicates meals that will level from &quot;No Meal Left Behind&quot;</Text>
                         </Box>
                     }
                 </Box>

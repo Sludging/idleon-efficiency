@@ -1,0 +1,178 @@
+{
+  "extractions": {
+    "artifact_main_bonuses": {
+      "expression": "(()=>{const records=idleon.engine.getGameAttribute(\"CustomLists\").h.ArtifactInfo;return records.map((record,index)=>({index,bonus:idleon.callFunction(\"Sailing\",\"ArtifactBonus\",index,0)}))})()",
+      "result": [
+        {
+          "index": 0,
+          "bonus": 1
+        },
+        {
+          "index": 1,
+          "bonus": 17076
+        },
+        {
+          "index": 2,
+          "bonus": 1661.29236
+        },
+        {
+          "index": 3,
+          "bonus": 1116
+        },
+        {
+          "index": 4,
+          "bonus": 1
+        },
+        {
+          "index": 5,
+          "bonus": 2232
+        },
+        {
+          "index": 6,
+          "bonus": 1
+        },
+        {
+          "index": 7,
+          "bonus": 1
+        },
+        {
+          "index": 8,
+          "bonus": 470.3255439104096
+        },
+        {
+          "index": 9,
+          "bonus": 1
+        },
+        {
+          "index": 10,
+          "bonus": 6645.16944
+        },
+        {
+          "index": 11,
+          "bonus": 1200
+        },
+        {
+          "index": 12,
+          "bonus": 1
+        },
+        {
+          "index": 13,
+          "bonus": 13398.266709511368
+        },
+        {
+          "index": 14,
+          "bonus": 1
+        },
+        {
+          "index": 15,
+          "bonus": 180
+        },
+        {
+          "index": 16,
+          "bonus": 6
+        },
+        {
+          "index": 17,
+          "bonus": 60
+        },
+        {
+          "index": 18,
+          "bonus": 4983.877079999998
+        },
+        {
+          "index": 19,
+          "bonus": 12
+        },
+        {
+          "index": 20,
+          "bonus": 24919.3854
+        },
+        {
+          "index": 21,
+          "bonus": 150
+        },
+        {
+          "index": 22,
+          "bonus": 1
+        },
+        {
+          "index": 23,
+          "bonus": 20750
+        },
+        {
+          "index": 24,
+          "bonus": 125
+        },
+        {
+          "index": 25,
+          "bonus": 679650
+        },
+        {
+          "index": 26,
+          "bonus": 125
+        },
+        {
+          "index": 27,
+          "bonus": 72.20949779759705
+        },
+        {
+          "index": 28,
+          "bonus": 50
+        },
+        {
+          "index": 29,
+          "bonus": 897.8104291314982
+        },
+        {
+          "index": 30,
+          "bonus": 150
+        },
+        {
+          "index": 31,
+          "bonus": 5
+        },
+        {
+          "index": 32,
+          "bonus": 125
+        },
+        {
+          "index": 33,
+          "bonus": 1
+        },
+        {
+          "index": 34,
+          "bonus": 5
+        },
+        {
+          "index": 35,
+          "bonus": 150
+        },
+        {
+          "index": 36,
+          "bonus": 125
+        },
+        {
+          "index": 37,
+          "bonus": 5
+        },
+        {
+          "index": 38,
+          "bonus": 250
+        },
+        {
+          "index": 39,
+          "bonus": 500
+        },
+        {
+          "index": 40,
+          "bonus": 50
+        }
+      ]
+    },
+    "gold_relic_tier_increment": {
+      "expression": "idleon.callFunction(\"Sailing\",\"ArtifactBonus\",4,1)",
+      "result": 5
+    }
+  },
+  "errors": {}
+}
