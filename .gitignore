@@ -108,3 +108,4 @@ tsconfig.tsbuildinfo
 # Private UI verification screenshots, traces, and logs
 /.ui-verification/
 docs/runbooks
+.imppecable
