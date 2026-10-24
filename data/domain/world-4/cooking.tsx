@@ -1,5 +1,6 @@
 import { commaNotation, lavaLog, round } from "../../utility"
 import { Achievement } from "../achievements";
+import { Account } from "../account";
 import { Companion, getCompanionActiveBonus } from "../companions";
 import { Alchemy } from "../world-2/alchemy/alchemy";
 import { AtomCollider } from "../world-3/construction/atomCollider";
@@ -634,16 +635,18 @@ export class Cooking extends Domain {
     updateNoMealLeftBehind = (bonusActivated: boolean) => {
         this.meals.forEach(meal => meal.noMealLeftBehindAffected = false);
         if (bonusActivated) {
-            const mealToUpgrade = 1;
-
-            const sortedMeals = this.meals.filter(meal => meal.level > 5 && meal.level < meal.maxLevel).sort((meal1, meal2) => {
+            const sortedMeals = this.meals.filter(meal => meal.level >= 2 && meal.level < meal.maxLevel).sort((meal1, meal2) => {
                 // If same level, then go with higher meal index.
                 if (meal1.level == meal2.level) {
                     return meal1.mealIndex > meal2.mealIndex ? -1 : 1
                 }
                 return meal1.level < meal2.level ? -1 : 1
             });
-            sortedMeals.slice(0, mealToUpgrade).forEach(meal => meal.noMealLeftBehindAffected = true);
+            const selectedMeal = sortedMeals[0];
+            // The daily-award ceiling is separate from the actual meal level cap.
+            if (selectedMeal && selectedMeal.level < 150) {
+                selectedMeal.noMealLeftBehindAffected = true;
+            }
         }
     }
 
@@ -753,6 +756,7 @@ const populateDiscovery = (cooking: Cooking) => {
 
 export const updateCooking = (data: Map<string, any>) => {
     const cooking = data.get("cooking") as Cooking;
+    const account = data.get("account") as Account;
     const gemStore = data.get("gems") as GemStore;
     const alchemy = data.get("alchemy") as Alchemy;
     const stamps = data.get("stamps") as Stamp[][];
@@ -981,7 +985,10 @@ export const updateCooking = (data: Map<string, any>) => {
         }
     });
 
-    cooking.updateNoMealLeftBehind(sneaking.jadeUpgrades.find(upgrade => upgrade.data.name == "No Meal Left Behind")?.purchased ?? false);
+    cooking.updateNoMealLeftBehind(
+        (sneaking.jadeUpgrades.find(upgrade => upgrade.data.name == "No Meal Left Behind")?.purchased ?? false)
+        || account.hasNoMealLeftBehindBundle
+    );
 
     populateDiscovery(cooking);
 

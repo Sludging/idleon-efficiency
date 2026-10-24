@@ -131,6 +131,7 @@ export class Account extends Domain {
     hasDeathBringerBundle: boolean = false;
     hasExplorerBundle: boolean = false;
     hasBankBundle: boolean = false;
+    hasNoMealLeftBehindBundle: boolean = false;
     hasBundleL: boolean = false;
     hasBundleM: boolean = false;
     weeklyBoss: WeeklyBoss = new WeeklyBoss();
@@ -251,6 +252,7 @@ export class Account extends Domain {
             : JSON.parse(rawData.BundlesReceived);
         account.hasDeathBringerBundle = Number(bundles.bun_v) === 1;
         account.hasExplorerBundle = Number(bundles.bun_p) === 1;
+        account.hasNoMealLeftBehindBundle = Number(bundles.bun_s) === 1;
         account.hasEquinoxBundle = Number(bundles.bun_q) === 1;
         account.hasDamageMultiplierBundle = Number(bundles.bon_a) === 1;
         account.hasBankBundle = Number(bundles.ban_k) === 1;

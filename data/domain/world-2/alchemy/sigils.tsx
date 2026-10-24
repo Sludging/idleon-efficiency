@@ -110,10 +110,10 @@ export class Sigils extends Domain {
         // Reset active players to 0 before parse.
         sigils.sigils.forEach(sigil => sigil.activePlayers = 0);
         
-        const jobsThatMatter = cauldronJobs1.slice(0, 11); // TODO: Change this to 11 when Lava fixes the bug that player 10 isn't helpful.
+        const jobsThatMatter = cauldronJobs1.slice(0, 11); // Only the first 11 character assignments contribute to Sigil progress.
         jobsThatMatter.forEach((job, _) => {
             const sigilIndex = Math.round(job) - 100;
-            if (sigilIndex > 0) {
+            if (sigilIndex >= 0) {
                 sigils.sigils[sigilIndex].activePlayers += 1;
             }
         })
