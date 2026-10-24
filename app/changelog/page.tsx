@@ -1,13 +1,52 @@
 import { Metadata } from "next";
 import { Box, Heading, Paragraph, Text } from "grommet";
+import { Fragment } from "react";
 import { ChangelogEntry } from "../../components/changelog/changelogEntry";
 import { changelogData } from "../../data/changelog";
+import type { ChangelogEntryData, ChangelogSection } from "../../data/changelog";
 import ChangelogTracker from "./changelogTracker";
 
 export const metadata: Metadata = {
     title: "Change log",
     description: "Track all updates and changes to Idleon Efficiency",
 };
+
+function ChangelogChanges({ changes }: { changes: ChangelogEntryData["changes"] }) {
+    const groups: (string[] | ChangelogSection)[] = [];
+
+    for (const change of changes) {
+        if (typeof change !== "string") {
+            groups.push(change);
+            continue;
+        }
+
+        const previousGroup = groups[groups.length - 1];
+        if (Array.isArray(previousGroup)) {
+            previousGroup.push(change);
+        } else {
+            groups.push([change]);
+        }
+    }
+
+    if (groups.length === 0) {
+        return <Box as="ul" margin={{ left: "medium" }} />;
+    }
+
+    return groups.map((group, index) => (
+        <Fragment key={index}>
+            {!Array.isArray(group) && (
+                <Heading level={3} size="small" margin={{ top: "medium", bottom: "small" }}>
+                    {group.title}
+                </Heading>
+            )}
+            <Box as="ul" margin={{ left: "medium" }}>
+                {(Array.isArray(group) ? group : group.changes).map((change, changeIndex) => (
+                    <Text key={changeIndex} as="li">{change}</Text>
+                ))}
+            </Box>
+        </Fragment>
+    ));
+}
 
 export default function ChangelogPage() {
     return (
@@ -34,11 +73,7 @@ export default function ChangelogPage() {
                         title={entry.title}
                         date={entry.date}
                     >
-                        <Box as="ul" margin={{ left: "medium" }}>
-                            {entry.changes.map((change, index) => (
-                                <Text key={index} as="li">{change}</Text>
-                            ))}
-                        </Box>
+                        <ChangelogChanges changes={entry.changes} />
                     </ChangelogEntry>
                 ))}
             </Box>
