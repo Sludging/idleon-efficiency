@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { Box, Heading, Paragraph, Text } from "grommet";
-import { Fragment } from "react";
 import { ChangelogEntry } from "../../components/changelog/changelogEntry";
 import { changelogData } from "../../data/changelog";
 import type { ChangelogEntryData, ChangelogSection } from "../../data/changelog";
@@ -29,23 +28,27 @@ function ChangelogChanges({ changes }: { changes: ChangelogEntryData["changes"] 
     }
 
     if (groups.length === 0) {
-        return <Box as="ul" margin={{ left: "medium" }} />;
+        return <Box as="ul" margin="none" pad={{ left: "medium", right: "none", vertical: "none" }} />;
     }
 
-    return groups.map((group, index) => (
-        <Fragment key={index}>
-            {!Array.isArray(group) && (
-                <Heading level={3} size="small" margin={{ top: "medium", bottom: "small" }}>
-                    {group.title}
-                </Heading>
-            )}
-            <Box as="ul" margin={{ left: "medium" }}>
-                {(Array.isArray(group) ? group : group.changes).map((change, changeIndex) => (
-                    <Text key={changeIndex} as="li">{change}</Text>
-                ))}
-            </Box>
-        </Fragment>
-    ));
+    return (
+        <Box gap="medium">
+            {groups.map((group, index) => (
+                <Box key={index} gap="xsmall">
+                    {!Array.isArray(group) && (
+                        <Text as="h3" size="small" weight="bold" margin="none">
+                            {group.title}
+                        </Text>
+                    )}
+                    <Box as="ul" margin="none" pad={{ left: "medium", right: "none", vertical: "none" }}>
+                        {(Array.isArray(group) ? group : group.changes).map((change, changeIndex) => (
+                            <Text key={changeIndex} as="li" size="small">{change}</Text>
+                        ))}
+                    </Box>
+                </Box>
+            ))}
+        </Box>
+    );
 }
 
 export default function ChangelogPage() {
@@ -53,12 +56,12 @@ export default function ChangelogPage() {
         <Box pad={{ vertical: "medium" }}>
             {/* Client component to track changelog views */}
             <ChangelogTracker />
-            
+
             <Box margin={{ bottom: "medium" }}>
-                <Heading level={1} margin={{ top: "none", bottom: "small" }}>
+                <Heading level={1} size="small" style={{ fontWeight: "normal" }} margin={{ top: "none", bottom: "small" }}>
                     Change log
                 </Heading>
-                <Paragraph margin={{ bottom: "none" }}>
+                <Paragraph size="small" fill margin={{ top: "none", bottom: "none" }}>
                     Track all updates and changes to Idleon Efficiency. This page lists all significant updates,
                     new features, improvements, and bug fixes in chronological order.
                 </Paragraph>
