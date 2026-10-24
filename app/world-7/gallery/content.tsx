@@ -70,13 +70,13 @@ function getSourceMetadata(data: Map<string, unknown>): Record<string, GallerySo
 
     return {
         base: { system: 'Gallery', name: 'Starting podium capacity' },
-        coralReefUpgrade4: { system: 'Coral Reef', name: coralUpgrade.data.name },
+        coralReefUpgrade4: { system: 'Coral Reef', name: 'Coral Reef' },
         jadeUpgrade42: { system: 'Jade Emporium', name: jadeUpgrade.data.name },
         gemPurchase40: { system: 'Gem Store', name: galleryShowcase.mtxName },
         lunarheimLore5: { system: 'Spelunking', name: tunnel.data.name },
         sailingArtifact33: { system: 'Sailing', name: artifact.data.name },
         eventShopBonus26: { system: 'Event Shop', name: eventBonus26.data.name },
-        clamworksBonus0: { system: 'Clam Work', name: clamBonus.data.name },
+        clamworksBonus0: { system: 'Clam Work', name: 'First Clamwork Bonus'},
         killroyPodiumsLevel2: { system: 'Killroy', name: 'Level 2 Podiums' },
         companion42: { system: 'Companion', name: companion42.name },
         gemPurchase40Halves: { system: 'Gem Store', name: galleryShowcase.mtxName },

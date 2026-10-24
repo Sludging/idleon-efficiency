@@ -15,6 +15,7 @@ import { CoralReef } from '../../../data/domain/world-7/coralReef'
 import { DancingCoral } from '../../../data/domain/world-7/dancingCoral'
 import { Construction } from '../../../data/domain/world-3/construction/construction'
 import { notateNumber } from '../../../data/utility'
+import { Storage } from 'data/domain/storage'
 
 const formatNumber = (value: number | undefined, notation: 'Whole' | 'Smaller' = 'Smaller') =>
     Number.isFinite(value) ? notateNumber(value as number, notation) : 'Unavailable'
@@ -54,6 +55,7 @@ function CoralContent() {
     const reef = theData.get('coralReef') as CoralReef
     const dancingCoral = theData.get('dancingCoral') as DancingCoral
     const construction = theData.get('construction') as Construction
+    const storage = theData.get('storage') as Storage;
 
     const reefUpgrades = reef.upgrades.filter(upgrade => !upgrade.data.desc.endsWith('...'))
     const dancingBonuses = dancingCoral.bonuses.filter(bonus => bonus.data.desc !== '+{% who knows')
@@ -99,7 +101,6 @@ function CoralContent() {
                         const maxLevel = upgrade.getMaxLevel()
                         const maxed = upgrade.isMaxed()
                         const nextLevelCost = upgrade.getNextLevelCost()
-                        const saved = reef.ownedCoral
                         const affordable = reef.canAffordUpgrade(upgrade.index)
                         const days = reef.getDaysUntilNextLevel(upgrade.index)
 
@@ -108,7 +109,7 @@ function CoralContent() {
                                 key={upgrade.index}
                                 columns={size === 'small'
                                     ? '100%'
-                                    : ['minmax(0, 3fr)', 'minmax(80px, 1fr)', 'minmax(100px, 1.2fr)', 'minmax(0, 2fr)']}
+                                    : ['minmax(0, 3fr)', 'minmax(80px, 1fr)', 'minmax(0, 2fr)']}
                                 opacity={upgrade.unlocked ? 1 : 0.6}
                                 fields={[
                                     {
@@ -126,7 +127,6 @@ function CoralContent() {
                                         </Box>,
                                     },
                                     { key: 'level', kind: 'text', label: 'Level', value: `${formatNumber(upgrade.level, 'Whole')}${maxLevel !== undefined ? ` / ${formatNumber(maxLevel, 'Whole')}` : ''}` },
-                                    { key: 'status', kind: 'text', label: 'Status', value: !upgrade.unlocked ? 'Locked' : maxed ? 'Maxed' : 'Unlocked' },
                                     {
                                         key: 'cost', kind: 'content', label: null,
                                         content: <Box gap="xxsmall">
@@ -135,19 +135,17 @@ function CoralContent() {
                                                 : !upgrade.unlocked
                                                     ? <TextAndLabel
                                                         label="First-level cost after unlock"
-                                                        text={nextLevelCost === undefined ? 'Unavailable' : `${formatNumber(nextLevelCost, 'Whole')} Coral`}
+                                                        text={nextLevelCost === undefined ? 'Unavailable' : `${formatNumber(nextLevelCost, 'Whole')}`}
                                                         textSize="small"
                                                         labelSize="xsmall"
                                                     />
                                                     : nextLevelCost !== undefined
                                                         ? <>
-                                                            <TextAndLabel label="Next level cost" text={`${formatNumber(nextLevelCost, 'Whole')} Coral`} textSize="small" labelSize="xsmall" />
-                                                            <TextAndLabel label="Saved toward cost" text={`${formatNumber(saved, 'Whole')} / ${formatNumber(nextLevelCost, 'Whole')} Coral`} textSize="small" labelSize="xsmall" />
-                                                            {affordable
-                                                                ? <Text size="xsmall">Ready</Text>
-                                                                : days !== undefined
-                                                                    ? <Text size="xsmall">Estimated time: {formatNumber(days, 'Whole')} {days === 1 ? 'day' : 'days'} assuming the daily rate stays constant</Text>
-                                                                    : <Text size="xsmall">No ETA: daily Coral rate is zero or unavailable.</Text>}
+                                                            <TextAndLabel textColor={affordable ? 'green-1' : ''} label="Next level cost" text={`${formatNumber(nextLevelCost, 'Whole')}`} textSize="small" labelSize="xsmall" />
+                                                            {days !== undefined
+                                                                ? <Text size="xsmall">Estimated time: {formatNumber(days, 'Whole')} {days === 1 ? 'day' : 'days'}</Text>
+                                                                : <Text size="xsmall">No ETA: daily Coral rate is zero or unavailable.</Text>
+                                                            }
                                                         </>
                                                         : <Text size="xsmall">Next-level cost unavailable.</Text>}
                                         </Box>,
@@ -162,12 +160,12 @@ function CoralContent() {
             <Box as="section" gap="small" aria-labelledby="dancing-heading">
                 <Box gap="xsmall">
                     <Heading id="dancing-heading" level="2" size="small" margin="none" style={{ fontWeight: 'normal' }}>Dancing Coral</Heading>
-                    <Text size="xsmall">Unpurchased rows show their coral cost with its icon.</Text>
                 </Box>
                 <Box gap="small">
                     {dancingBonuses.map(bonus => {
                         const shrineIndex = 18 + bonus.index
                         const shrine = construction.buildings.find(building => building.index === shrineIndex)
+                        const coralInStorage = storage.amountInStorage(`Coral${bonus.index}`);
 
                         return (
                             <DataRow
@@ -203,7 +201,7 @@ function CoralContent() {
                                             <TipDisplay heading={bonus.data.name} size="small">
                                                 <Box><IconImage data={Item.getImageData(`Coral${bonus.index}`)} scale={0.7} /></Box>
                                             </TipDisplay>
-                                            <Text size="small">{formatNumber(bonus.getCost(), 'Whole')}</Text>
+                                            <Text size="small">{formatNumber(coralInStorage, 'Whole')}/{formatNumber(bonus.getCost(), 'Whole')}</Text>
                                         </Box>,
                                     },
                                 ]}
