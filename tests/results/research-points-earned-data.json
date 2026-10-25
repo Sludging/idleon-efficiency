@@ -2,7 +2,7 @@
   "extractions": {
     "points_earned": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_PTSearned\", 0, 0)",
-      "result": 116
+      "result": 117
     }
   },
   "errors": {}

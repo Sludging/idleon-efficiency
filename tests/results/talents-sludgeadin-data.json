@@ -14,11 +14,11 @@
     },
     "talent_146_bonus": {
       "expression": "idleon.callFunction(\"TalentEnh\", 146)",
-      "result": 5844.324873033144
+      "result": 7071.633096370106
     },
     "talent_536_bonus": {
       "expression": "idleon.callFunction(\"TalentEnh\", 536)",
-      "result": 49.708404802744425
+      "result": 49.726027397260275
     },
     "talent_35_bonus": {
       "expression": "idleon.callFunction(\"TalentEnh\", 35)",
@@ -30,18 +30,18 @@
     },
     "all_talent_level_146": {
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLV\", \"146\")",
-      "result": 184
+      "result": 185
     },
     "talent_59_bonus": {
       "expression": "idleon.callFunction(\"TalentCalc\", 59)",
       "result": {
         "type": "large_number",
-        "value": "2.877380000484569e+45"
+        "value": "6.87344771541785e+45"
       }
     },
     "talent_112_bonus": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 112)",
-      "result": 88.50574712643679
+      "result": 88.53211009174312
     },
     "talent_91_y_bonus": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 2, 91)",
@@ -49,11 +49,11 @@
     },
     "talent_8_bonus": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 8)",
-      "result": 451
+      "result": 452
     },
     "talent_91_x_bonus": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 91)",
-      "result": 486
+      "result": 487.5
     },
     "talent_max_level_149_bonus": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1 , 149)",

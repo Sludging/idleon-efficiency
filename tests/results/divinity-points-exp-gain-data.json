@@ -2,11 +2,11 @@
   "extractions": {
     "divinity_points_gain_potential": {
       "expression": "idleon.callFunction(\"Divinity\", \"DivPTSPerHr\", idleon.engine.getGameAttribute(\"GetPlayersUsernames\").indexOf(idleon.engine.getGameAttribute(\"UserInfo\")[0]), 999)",
-      "result": 0
+      "result": 330749237730610.4
     },
     "divinity_exp_gain_per_hour": {
       "expression": "idleon.callFunction(\"Divinity\", \"DivPerHr_EXP\", idleon.engine.getGameAttribute(\"GetPlayersUsernames\").indexOf(idleon.engine.getGameAttribute(\"UserInfo\")[0]), 0)",
-      "result": 14061139.964067696
+      "result": 50600190.228376314
     }
   },
   "errors": {}

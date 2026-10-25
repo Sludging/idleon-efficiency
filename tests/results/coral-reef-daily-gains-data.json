@@ -2,7 +2,7 @@
   "extractions": {
     "reef_daily_gains": {
       "expression": "idleon.callFunction(\"Thingies\", \"ReefDayGains\")",
-      "result": 259.02855902944043
+      "result": 272.69382492946124
     },
     "param_companion_40_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 40)",
@@ -18,7 +18,7 @@
     },
     "param_clamwork_bonus_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"ClamWorkBonus\", 5, 0)",
-      "result": 0
+      "result": 1
     },
     "param_killroy_bonus_6": {
       "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 6, 0)",
@@ -46,7 +46,7 @@
     },
     "param_statue_31_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven31\")",
-      "result": 37.83759359999999
+      "result": 40.613036766701356
     }
   },
   "errors": {}

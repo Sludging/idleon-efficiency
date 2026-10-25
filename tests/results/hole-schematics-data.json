@@ -18,7 +18,7 @@
           "Sludgev10",
           "Sludgev11"
         ],
-        "version": 395.1
+        "version": 398.1
       }
     },
     "paired_hole_inputs": {
@@ -29,14 +29,14 @@
           49,
           69,
           30,
-          151
+          153
         ],
         "exp": [
-          2363201389368159.5,
-          134040130449709.69,
-          1229267586379241,
-          367807733715546.3,
-          126341118529132.05
+          3733187070224574.5,
+          472291432957897.44,
+          4197572602002648,
+          706059036221493,
+          86946475319013.66
         ],
         "investments": [
           114,
@@ -67,9 +67,9 @@
           21,
           18,
           16,
-          36,
-          36,
-          36,
+          37,
+          37,
+          37,
           26,
           36,
           36,
@@ -87,9 +87,9 @@
           645050.2468780265,
           214429.636600765,
           221428.0462261185,
-          37401978.81707617,
-          37246449.36162575,
-          38128505.04677769,
+          31225568.150346205,
+          31070038.69489579,
+          31952094.380047724,
           840302.5741329693,
           1076598.0439762478,
           1076614.8450074797,
@@ -99,12 +99,12 @@
         "cavernOpals": [
           19,
           19,
-          14,
+          26,
           12,
           20,
           8,
-          9,
-          17,
+          28,
+          18,
           12,
           10,
           6,
@@ -129,10 +129,10 @@
           0
         ],
         "lanternUses": 0,
-        "wishes": 3457,
+        "wishes": 305,
         "layers": [
           19,
-          17,
+          18,
           19,
           9
         ],
@@ -361,7 +361,7 @@
           "released": true,
           "available": true,
           "requiredLevel": 5,
-          "price": 5444.517870735018,
+          "price": 5444.517870735017,
           "stock": 289987324298136600,
           "currentCost": null,
           "shortfall": null,
@@ -377,7 +377,7 @@
           "available": true,
           "requiredLevel": 5,
           "price": 6968.982874540822,
-          "stock": 79513978197695480000,
+          "stock": 105076808372676260000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -421,8 +421,8 @@
           "released": true,
           "available": true,
           "requiredLevel": 6,
-          "price": 18707.22095783557,
-          "stock": 79513978197695480000,
+          "price": 18707.220957835565,
+          "stock": 105076808372676260000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -437,7 +437,7 @@
           "available": true,
           "requiredLevel": 6,
           "price": 183.0912332995335,
-          "stock": 43503760372860305000,
+          "stock": 9359281376146790000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -452,7 +452,7 @@
           "available": true,
           "requiredLevel": 7,
           "price": 259.91424088473605,
-          "stock": 43503760372860305000,
+          "stock": 9359281376146790000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -512,7 +512,7 @@
           "available": true,
           "requiredLevel": 8,
           "price": 1351.1082522937716,
-          "stock": 74811102246306480000,
+          "stock": 110839439227556700000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -527,7 +527,7 @@
           "available": true,
           "requiredLevel": 8,
           "price": 2455.0630025093283,
-          "stock": 41747210167831540000,
+          "stock": 3534186116770267000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -542,7 +542,7 @@
           "available": true,
           "requiredLevel": 9,
           "price": 282695.53036454174,
-          "stock": 28532371855383572,
+          "stock": 1389387742447844,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -557,7 +557,7 @@
           "available": true,
           "requiredLevel": 9,
           "price": 463168.3569492651,
-          "stock": 79513978197695480000,
+          "stock": 105076808372676260000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -572,7 +572,7 @@
           "available": true,
           "requiredLevel": 9,
           "price": 8990.010259149774,
-          "stock": 74811102246306480000,
+          "stock": 110839439227556700000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -587,7 +587,7 @@
           "available": true,
           "requiredLevel": 10,
           "price": 758855.0360256761,
-          "stock": 28532371855383572,
+          "stock": 1389387742447844,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -601,8 +601,8 @@
           "released": true,
           "available": true,
           "requiredLevel": 10,
-          "price": 23189.70413384566,
-          "stock": 74811082800989950000,
+          "price": 23189.704133845655,
+          "stock": 110839419782240160000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -632,7 +632,7 @@
           "available": true,
           "requiredLevel": 10,
           "price": 46732.63384105805,
-          "stock": 41747210167831540000,
+          "stock": 3534186116770267000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -647,7 +647,7 @@
           "available": true,
           "requiredLevel": 11,
           "price": 3337479.743626425,
-          "stock": 79513978197695480000,
+          "stock": 105076808372676260000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -707,7 +707,7 @@
           "available": true,
           "requiredLevel": 12,
           "price": 441420.83158835815,
-          "stock": 315892568427190600000,
+          "stock": 21429140137919970000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -722,7 +722,7 @@
           "available": true,
           "requiredLevel": 12,
           "price": 802094.0959613405,
-          "stock": 74811082800989950000,
+          "stock": 110839419782240160000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -737,7 +737,7 @@
           "available": true,
           "requiredLevel": 13,
           "price": 1138643.693162842,
-          "stock": 4.6660644274881036e+21,
+          "stock": 6.922327624590383e+21,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -752,7 +752,7 @@
           "available": true,
           "requiredLevel": 13,
           "price": 1616405.689192364,
-          "stock": 74811082800989950000,
+          "stock": 110839419782240160000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -782,7 +782,7 @@
           "available": true,
           "requiredLevel": 14,
           "price": 64556246.952172786,
-          "stock": 79513978197695480000,
+          "stock": 105076808372676260000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -797,7 +797,7 @@
           "available": true,
           "requiredLevel": 14,
           "price": 7576312.605353276,
-          "stock": 74811082800989950000,
+          "stock": 110839419782240160000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -842,7 +842,7 @@
           "available": true,
           "requiredLevel": 15,
           "price": 22555388.923202172,
-          "stock": 4.6660644274881036e+21,
+          "stock": 6.922327624590383e+21,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -857,7 +857,7 @@
           "available": true,
           "requiredLevel": 15,
           "price": 28870897.821698777,
-          "stock": 326476922584735300000,
+          "stock": 55122918317586970000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -872,7 +872,7 @@
           "available": true,
           "requiredLevel": 15,
           "price": 36954749.21177444,
-          "stock": 4.6660644274881036e+21,
+          "stock": 6.922327624590383e+21,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -887,7 +887,7 @@
           "available": true,
           "requiredLevel": 16,
           "price": 60546661.10857124,
-          "stock": 315892568427190600000,
+          "stock": 21429140137919970000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -902,7 +902,7 @@
           "available": true,
           "requiredLevel": 16,
           "price": 77499726.2189712,
-          "stock": 41747210167831540000,
+          "stock": 3534186116770267000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -917,7 +917,7 @@
           "available": true,
           "requiredLevel": 16,
           "price": 99199649.56028312,
-          "stock": 4.6660644274881036e+21,
+          "stock": 6.922327624590383e+21,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -932,7 +932,7 @@
           "available": true,
           "requiredLevel": 17,
           "price": 2045869129.9350917,
-          "stock": 28532371855383572,
+          "stock": 1389387742447844,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -962,7 +962,7 @@
           "available": true,
           "requiredLevel": 17,
           "price": 340847400.5088614,
-          "stock": 326476922584735300000,
+          "stock": 55122918317586970000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -1066,7 +1066,7 @@
           "released": true,
           "available": true,
           "requiredLevel": 20,
-          "price": 1251.1232204160628,
+          "price": 1251.123220416063,
           "stock": 4056247.89102039,
           "currentCost": null,
           "shortfall": null,
@@ -1081,7 +1081,7 @@
           "released": true,
           "available": true,
           "requiredLevel": 20,
-          "price": 1881.8723246525337,
+          "price": 1881.8723246525342,
           "stock": 4056247.89102039,
           "currentCost": null,
           "shortfall": null,
@@ -1127,7 +1127,7 @@
           "available": true,
           "requiredLevel": 21,
           "price": 13826413178.921282,
-          "stock": 42204722354436940000,
+          "stock": 4718034085209629000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -1337,7 +1337,7 @@
           "available": true,
           "requiredLevel": 25,
           "price": 1505563072816.0618,
-          "stock": 74811036378938560000,
+          "stock": 110839373360188770000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -1487,7 +1487,7 @@
           "available": true,
           "requiredLevel": 28,
           "price": 957575765.0267452,
-          "stock": 9189348132631198,
+          "stock": 2011424231171732,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -1502,7 +1502,7 @@
           "available": true,
           "requiredLevel": 29,
           "price": 1000000000,
-          "stock": 9189348132631198,
+          "stock": 2011424231171732,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -1517,7 +1517,7 @@
           "available": true,
           "requiredLevel": 29,
           "price": 2304026878.533912,
-          "stock": 9189348132631198,
+          "stock": 2011424231171732,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -1532,7 +1532,7 @@
           "available": true,
           "requiredLevel": 29,
           "price": 150,
-          "stock": 79097997416998530,
+          "stock": 7295356772584645,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -1547,7 +1547,7 @@
           "available": true,
           "requiredLevel": 30,
           "price": 500,
-          "stock": 366182311359923800,
+          "stock": 1305095564509206300,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -1562,7 +1562,7 @@
           "available": true,
           "requiredLevel": 30,
           "price": 2500,
-          "stock": 366182311359923800,
+          "stock": 1305095564509206300,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -1577,7 +1577,7 @@
           "available": true,
           "requiredLevel": 30,
           "price": 7500,
-          "stock": 212576520105553340,
+          "stock": 493260948370827400,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -1592,7 +1592,7 @@
           "available": true,
           "requiredLevel": 30,
           "price": 25000,
-          "stock": 187932310610557150,
+          "stock": 637647418982821600,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -1607,7 +1607,7 @@
           "available": true,
           "requiredLevel": 31,
           "price": 1000000000,
-          "stock": 211071448074067000,
+          "stock": 734665482412707800,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -1622,7 +1622,7 @@
           "available": true,
           "requiredLevel": 31,
           "price": 43006641120.20487,
-          "stock": 187932310610557150,
+          "stock": 637647418982821600,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -1637,7 +1637,7 @@
           "available": true,
           "requiredLevel": 31,
           "price": 57628899101.07453,
-          "stock": 283024372524957470,
+          "stock": 802023208880020000,
           "currentCost": null,
           "shortfall": null,
           "affordable": null
@@ -1652,9 +1652,9 @@
           "available": true,
           "requiredLevel": 32,
           "price": 103478451225.88945,
-          "stock": 1183902465.152099,
+          "stock": 124291662.87226519,
           "currentCost": 103478451225.88945,
-          "shortfall": 102294548760.73735,
+          "shortfall": 103354159563.01718,
           "affordable": false
         },
         {
@@ -1667,9 +1667,9 @@
           "available": true,
           "requiredLevel": 32,
           "price": 138661124642.6919,
-          "stock": 1183902465.152099,
+          "stock": 124291662.87226519,
           "currentCost": 138661124642.6919,
-          "shortfall": 137477222177.5398,
+          "shortfall": 138536832979.81964,
           "affordable": false
         },
         {
@@ -1682,9 +1682,9 @@
           "available": true,
           "requiredLevel": 32,
           "price": 185805907021.2071,
-          "stock": 562722347.5414644,
+          "stock": 26016926.971035272,
           "currentCost": 185805907021.2071,
-          "shortfall": 185243184673.66562,
+          "shortfall": 185779890094.23605,
           "affordable": false
         },
         {
@@ -1697,9 +1697,9 @@
           "available": true,
           "requiredLevel": 33,
           "price": 333633086647.27954,
-          "stock": 562722347.5414644,
+          "stock": 26016926.971035272,
           "currentCost": 333633086647.27954,
-          "shortfall": 333070364299.7381,
+          "shortfall": 333607069720.30853,
           "affordable": false
         },
         {
@@ -1711,7 +1711,7 @@
           "released": true,
           "available": true,
           "requiredLevel": 33,
-          "price": 83711609936427380,
+          "price": 83711609936427400,
           "stock": 7883181261094234,
           "currentCost": null,
           "shortfall": null,
@@ -1727,7 +1727,7 @@
           "available": false,
           "requiredLevel": null,
           "price": 8512319027340113,
-          "stock": 74811036378938560000,
+          "stock": 110839373360188770000,
           "currentCost": 8512319027340113,
           "shortfall": 0,
           "affordable": true
@@ -1760,7 +1760,7 @@
     },
     "effect_53": {
       "expression": "1+(idleon.callFunction('Holes','B_UPG',53,1))/100",
-      "result": 1.76
+      "result": 1.8
     },
     "effect_54": {
       "expression": "idleon.callFunction('Holes','B_UPG',54,1)",
@@ -1768,7 +1768,7 @@
     },
     "effect_55": {
       "expression": "idleon.callFunction('Holes','B_UPG',55,1)",
-      "result": 190
+      "result": 200
     },
     "effect_56": {
       "expression": "idleon.callFunction('Holes','B_UPG',56,1)",
@@ -1784,7 +1784,7 @@
     },
     "effect_59": {
       "expression": "idleon.callFunction('Holes','B_UPG',59,1)",
-      "result": 34.1
+      "result": 76.8
     },
     "effect_82": {
       "expression": "idleon.callFunction('Holes','B_UPG',82,20)",
@@ -1800,11 +1800,11 @@
     },
     "effect_49_10": {
       "expression": "idleon.callFunction('Holes','B_UPG',49,10)",
-      "result": 640
+      "result": 650
     },
     "effect_49_15": {
       "expression": "idleon.callFunction('Holes','B_UPG',49,15)",
-      "result": 960
+      "result": 975
     },
     "availability": {
       "expression": "idleon.callFunction('Holes','SchematicsAvailable',0,0)",

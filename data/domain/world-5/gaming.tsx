@@ -1,6 +1,7 @@
 import { Domain, RawData } from "../base/domain";
 import { SkillsIndex } from "../SkillsIndex";
 import { Item } from "../items";
+import { Player } from "../player";
 import { initGamingBoxRepo } from "../data/GamingBoxRepo";
 import { initGamingImportRepo } from "../data/GamingImportRepo";
 import { initGamingMetadataRepo } from "../data/GamingMetadataRepo";
@@ -57,8 +58,6 @@ export class Gaming extends Domain {
             { key: "Research", perPlayer: false, default: [] },
             { key: "OptLacc", perPlayer: false, default: [] },
             { key: "GemItemsPurchased", perPlayer: false, default: [] },
-            // Gaming's level is account-wide; every character stores the same value.
-            { key: "Lv0_0", perPlayer: false, default: [] },
         ];
     }
 
@@ -89,8 +88,6 @@ export class Gaming extends Domain {
         gaming.init([], 0);
 
         const savedGaming = data.get("Gaming") as unknown[] ?? [];
-        const skillLevels = data.get("Lv0_0") as number[] ?? [];
-        gaming.level = Number(skillLevels[SkillsIndex.Gaming] ?? 0);
         gaming.bits = Number(savedGaming[0] ?? 0);
         const savedAccountOptions = data.get("OptLacc") as number[] | null;
         const cglunkoUpgradeLevel = savedAccountOptions?.[644];
@@ -126,6 +123,9 @@ export const updateGaming = (data: Map<string, any>): Gaming => {
 // Replace every contribution, including when a subsequent save no longer owns the Superbit.
 export const updateSuperbitImpacts = (data: Map<string, any>): void => {
     const gaming = data.get("gaming") as Gaming;
+    const players = data.get("players") as Player[];
+    gaming.level = players.reduce(
+        (highestLevel, player) => Math.max(highestLevel, player.skills.get(SkillsIndex.Gaming)?.level ?? 0), 0);
     const construction = data.get("construction") as Construction;
     construction.library.gamingCheckoutBoost = gaming.isSuperbitPurchased(12) ? gaming.level : 0;
 

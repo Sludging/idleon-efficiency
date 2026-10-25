@@ -2,7 +2,7 @@
   "extractions": {
     "royal_armory_passive_units_rank_row_53_type_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 53, 2)",
-      "result": 0
+      "result": 2
     }
   },
   "errors": {}

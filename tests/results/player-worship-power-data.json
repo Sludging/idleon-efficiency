@@ -6,7 +6,7 @@
     },
     "alchemy_worship_power_m7": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.M7",
-      "result": 256.4607329842932
+      "result": 262.28938600666345
     }
   },
   "errors": {}

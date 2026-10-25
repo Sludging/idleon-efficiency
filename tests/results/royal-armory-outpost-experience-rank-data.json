@@ -2,7 +2,7 @@
   "extractions": {
     "royal_armory_outpost_experience_rank_row_1_type_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 0)",
-      "result": 15
+      "result": 17
     },
     "royal_armory_outpost_experience_rank_row_1_type_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 1)",
@@ -50,7 +50,7 @@
     },
     "royal_armory_outpost_experience_formula_rank_7_type_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 7, 0)",
-      "result": 282.3683265
+      "result": 282.3683265000001
     },
     "royal_armory_outpost_experience_formula_rank_8_type_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 8, 0)",

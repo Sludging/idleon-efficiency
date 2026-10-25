@@ -18,7 +18,7 @@
     },
     "player_build_speed_construction_mastery_4": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ConstMasteryBonus\", 2, 0)",
-      "result": 1585
+      "result": 1595
     },
     "player_build_speed_shinyfin_vial": {
       "expression": "idleon.getDNSM(\"AlchVials\").h.Contspd",
@@ -38,11 +38,11 @@
     },
     "player_build_speed_bubba_1": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 1, 0)",
-      "result": 140
+      "result": 210
     },
     "player_build_speed_vault_48": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 48, 0)",
-      "result": 60
+      "result": 72.4
     },
     "player_build_speed_winner_13": {
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 13, 0)",
@@ -50,7 +50,7 @@
     },
     "player_build_speed_palette_25": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 25, 0)",
-      "result": 130.5
+      "result": 135
     },
     "player_build_speed_atom_1": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomBonuses\", 1, 0)",

@@ -1,3 +1,4 @@
+import type { Storage } from '../../../data/domain/storage';
 import type { Lab } from '../../../data/domain/world-4/lab';
 import type { Breeding } from '../../../data/domain/world-4/breeding';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
@@ -9,6 +10,7 @@ const jewelExtractionResultsName = 'lab-jewel-bonus-data.json';
 describe('Lab Mainframe direct parameters', () => {
   let lab: Lab;
   let breeding: Breeding;
+  let storage: Storage;
   let mainframeResults: ExtractionResults;
   let jewelResults: ExtractionResults;
 
@@ -21,6 +23,7 @@ describe('Lab Mainframe direct parameters', () => {
     const gameData = loadGameDataFromSave('latest');
     lab = gameData.get('lab') as Lab;
     breeding = gameData.get('breeding') as Breeding;
+    storage = gameData.get('storage') as Storage;
   });
 
   it('matches the calculated Breeding total pets found used by Mainframe 0', () => {
@@ -33,6 +36,13 @@ describe('Lab Mainframe direct parameters', () => {
   it('matches Jewel 1 used by Mainframe 0', () => {
     expect(lab.jewels[1].getBonus()).toMatchLiveGame(
       getExtractedValue(jewelResults, 'jewel_1_bonus'),
+      0,
+    );
+  });
+
+  it('matches saved green-stack credits used by Mainframe 11', () => {
+    expect(storage.creditedGreenStackCount).toMatchLiveGame(
+      getExtractedValue(mainframeResults, 'player_damage_storage_credited_green_stack_count'),
       0,
     );
   });

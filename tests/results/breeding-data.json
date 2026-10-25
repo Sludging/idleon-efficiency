@@ -759,7 +759,7 @@
     },
     "shiny_speed": {
       "expression": "idleon.callFunction(\"Breeding\",\"ShinySpdMulti\",\"0\",0,0)",
-      "result": 12631.879004691855
+      "result": 15551.632684440776
     }
   },
   "errors": {}

@@ -599,11 +599,6 @@
       "description": "Original Worship best-wave total prepared for Gaming Research reward."
     },
     {
-      "label": "shared_insight_multiplier",
-      "expression": "idleon.callFunction(\"ResearchStuff\",\"ObservationInsightExpRate\",17,0)/(3*idleon.getAttr(\"Research\")[5].filter((kind,index)=>index%4===3&&kind===1&&idleon.getAttr(\"Research\")[5][index-1]===17).length*idleon.callFunction(\"ResearchStuff\",\"Kalei_MultiTot\",17,0))",
-      "description": "Recover the shared Insight multiplier from the original rate, actual Monocle count, and support. This real state has Monocles on Observation 17."
-    },
-    {
       "label": "gambit_points_multiplier",
       "expression": "idleon.callFunction(\"Holes\",\"GambitPTSmulti\",0,0)",
       "description": "Calculated Gambit score multiplier prepared before the Research offline reward."

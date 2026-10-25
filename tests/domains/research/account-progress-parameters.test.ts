@@ -539,12 +539,6 @@ const parameterSpecs: (ParameterTestSpec & {owner: string})[] = [
         domainExtractor: gameData => (gameData.get('hole') as Hole).gambit.getGambitTotalScore(),
     },
     {
-        owner: "Research",
-        description: "Shared Insight multiplier used by each Optical Monocle",
-        extractionKey: "shared_insight_multiplier",
-        domainExtractor: gameData => (gameData.get('research') as ResearchGrid).production.insightMultiplier,
-    },
-    {
         owner: "Hole",
         description: "Gambit score multiplier used before reward score gates",
         extractionKey: "gambit_points_multiplier",

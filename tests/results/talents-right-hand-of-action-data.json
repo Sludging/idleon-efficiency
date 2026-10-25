@@ -9,7 +9,7 @@
       "result": 0
     },
     "source_action_bonus": {
-      "expression": "idleon.callFunction(\"ArbitraryCode5Inputs\", idleon.engine.getGameAttribute(\"CustomLists\").h.TalentDescriptions[43][1][2], Number(idleon.engine.getGameAttribute(\"CustomLists\").h.TalentDescriptions[43][1][0]), Number(idleon.engine.getGameAttribute(\"CustomLists\").h.TalentDescriptions[43][1][1]), idleon.engine.getGameAttribute(\"PlayerDATABASE\").h.SludgeMan.h.SkillLevels[43], 0, 0)",
+      "expression": "(() => { const db = idleon.engine.getGameAttribute(\"PlayerDATABASE\").h; let source = \"No\"; for (const id of Object.keys(db)) if (Number(db[id].h.CharacterClass) >= 3 && Number(db[id].h.CharacterClass) < 6) source = id; const description = idleon.engine.getGameAttribute(\"CustomLists\").h.TalentDescriptions[43][1]; return idleon.callFunction(\"ArbitraryCode5Inputs\", description[2], Number(description[0]), Number(description[1]), db[source].h.SkillLevels[43], 0, 0); })()",
       "result": 103.125
     },
     "enhancement_eclipse_bonus": {

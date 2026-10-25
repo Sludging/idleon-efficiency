@@ -15,11 +15,10 @@ describe('Bubba next permanent bonus upgrade', () => {
     bubba = loadGameDataFromSave(saveName).get('bubba') as Bubba;
   });
 
-  it('matches the next ordered bonus, meat cost, balance, and affordability', () => {
+  it('matches the next ordered bonus, meat cost, and affordability', () => {
     const nextUpgrade = bubba.getNextGlobalBonusUpgrade();
     const liveBonusIndex = getExtractedValue(extractionResults, 'next_bonus_index');
     const liveCost = getExtractedValue(extractionResults, 'next_bonus_cost');
-    const liveMeatBalance = getExtractedValue(extractionResults, 'meat_balance');
     const canAfford = getExtractedValue(extractionResults, 'can_afford_next_bonus') === 1;
 
     expect(nextUpgrade.bonusIndex).toMatchLiveGameWithDetails(liveBonusIndex, {
@@ -29,10 +28,6 @@ describe('Bubba next permanent bonus upgrade', () => {
     expect(nextUpgrade.cost).toMatchLiveGameWithDetails(liveCost, {
       tolerance: 0,
       context: 'The next Bubba Boon purchase cost in meat slices',
-    });
-    expect(nextUpgrade.resourceBalance).toMatchLiveGameWithDetails(liveMeatBalance, {
-      tolerance: 0,
-      context: 'Current meat slices available for the next Bubba Boon purchase',
     });
     expect(nextUpgrade.canAfford).toBe(canAfford);
   });

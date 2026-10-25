@@ -11,22 +11,22 @@
         {
           "index": 1,
           "selected": false,
-          "quantity": 28700
+          "quantity": 29850
         },
         {
           "index": 2,
           "selected": false,
-          "quantity": 67800
+          "quantity": 86800
         },
         {
           "index": 3,
           "selected": false,
-          "quantity": 310500
+          "quantity": 394500
         },
         {
           "index": 4,
           "selected": false,
-          "quantity": 870000
+          "quantity": 1340000
         },
         {
           "index": 5,
@@ -46,27 +46,27 @@
         {
           "index": 8,
           "selected": false,
-          "quantity": 7545
+          "quantity": 7605
         },
         {
           "index": 9,
           "selected": false,
-          "quantity": 32700
+          "quantity": 39200
         },
         {
           "index": 10,
           "selected": false,
-          "quantity": 138750
+          "quantity": 181500
         },
         {
           "index": 11,
           "selected": false,
-          "quantity": 385000
+          "quantity": 770000
         },
         {
           "index": 12,
           "selected": false,
-          "quantity": 825000
+          "quantity": 1400000
         },
         {
           "index": 13,
@@ -110,8 +110,8 @@
         },
         {
           "index": 21,
-          "selected": false,
-          "quantity": 9
+          "selected": true,
+          "quantity": 20
         },
         {
           "index": 22,
@@ -136,7 +136,7 @@
         {
           "index": 26,
           "selected": false,
-          "quantity": 0
+          "quantity": 1
         },
         {
           "index": 27,
@@ -156,17 +156,17 @@
         {
           "index": 30,
           "selected": false,
-          "quantity": 588
+          "quantity": 694
         },
         {
           "index": 31,
           "selected": false,
-          "quantity": 807
+          "quantity": 813
         },
         {
           "index": 32,
           "selected": false,
-          "quantity": 620
+          "quantity": 1005
         },
         {
           "index": 33,
@@ -185,13 +185,13 @@
         },
         {
           "index": 36,
-          "selected": false,
-          "quantity": 91
+          "selected": true,
+          "quantity": 326
         },
         {
           "index": 37,
           "selected": false,
-          "quantity": 36
+          "quantity": 38
         },
         {
           "index": 38,
@@ -221,7 +221,7 @@
         {
           "index": 43,
           "selected": false,
-          "quantity": 434
+          "quantity": 454
         },
         {
           "index": 44,

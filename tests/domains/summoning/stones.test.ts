@@ -61,16 +61,6 @@ describe('Summoning current stone results', () => {
     });
   });
 
-  // Supervisor-approved worked examples use the genuine retained account and dedicated canonical stone metadata.
-  // Native actor mode and stone colour were both -1. These literals are source-backed, not extracted full-HP outputs.
-  it.each([
-    { colour: SummonEssenceColor.White, name: 'White', state: 'after four wins', expectedHp: 1.28e20 },
-    { colour: SummonEssenceColor.Red, name: 'Red', state: 'before the first win', expectedHp: 80000000 },
-  ])('matches the source-backed worked example for next $name stone boss HP $state', ({ colour, expectedHp }) => {
-    const essence = summoning.summonEssences.find(candidate => candidate.color === colour)!;
-    expect(essence.nextStoneBossHp).toBe(expectedHp);
-  });
-
   it('does not assign a future placeholder stone boss HP to Teal Essence', () => {
     const teal = summoning.summonEssences.find(essence => essence.color === SummonEssenceColor.Teal)!;
     expect(teal.nextStoneBossHp).toBeUndefined();

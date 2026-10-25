@@ -9,6 +9,7 @@ export class Storage extends Domain {
     refinery: RefineryStorage[] = []
     storageChestsUsed: Record<string, number> = {}
     money: number = 0;
+    creditedGreenStackCount: number = 0;
 
     amountInStorage = (itemName: string): number => {
         let finalCount = 0;
@@ -26,6 +27,7 @@ export class Storage extends Domain {
             { key: "ChestQuantity", perPlayer: false, default: [] },
             { key: "InvStorageUsed", perPlayer: false, default: {} },
             { key: "MoneyBANK", perPlayer: false, default: 0 },
+            { key: "GreenStacks", perPlayer: false, default: [] },
             { key: "InventoryOrder_", perPlayer: true, default: [] },
             { key: "ItemQTY_", perPlayer: true, default: [] },
             { key: "IMm_", perPlayer: true, default: {} },
@@ -44,6 +46,9 @@ export class Storage extends Domain {
         const chestOrder = data.get("ChestOrder") as string[];
         const chestQuantity = data.get("ChestQuantity") as number[];
         const storageInvUsed = data.get("InvStorageUsed") as Record<string, number>;
+        const creditedGreenStacks = data.get("GreenStacks") as string[];
+
+        storage.creditedGreenStackCount = creditedGreenStacks.length;
 
         // Chest data has no "persistence", so we reset the previous data.
         storage.chest = [];

@@ -2,15 +2,15 @@
   "extractions": {
     "vault_upgrade_12_bonus": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 12, 0)",
-      "result": 154
+      "result": 165
     },
     "vault_upgrade_3_bonus": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 3, 0)",
-      "result": 1299.76
+      "result": 1570.8
     },
     "vault_upgrade_35_bonus": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 35, 0)",
-      "result": 30
+      "result": 36.2
     },
     "grimoire_upgrade_24_bonus": {
       "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 24, 0)",
@@ -26,7 +26,7 @@
     },
     "win_bonus_23": {
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 23, 0)",
-      "result": 1988.0444999999997
+      "result": 2124.4275
     }
   },
   "errors": {}

@@ -5,35 +5,35 @@
       "result": [
         {
           "colour": 0,
-          "generationPerHour": 4.211775965211496e+24
+          "generationPerHour": 1.383633552309559e+25
         },
         {
           "colour": 1,
-          "generationPerHour": 2.3958130091450356e+23
+          "generationPerHour": 1.3239645789231068e+24
         },
         {
           "colour": 2,
-          "generationPerHour": 1.1720478176312203e+23
+          "generationPerHour": 4.1004783155325534e+23
         },
         {
           "colour": 3,
-          "generationPerHour": 1.4395635752802943e+23
+          "generationPerHour": 5.448123385609566e+23
         },
         {
           "colour": 4,
-          "generationPerHour": 4.9717539127197635e+22
+          "generationPerHour": 1.2370381912868334e+24
         },
         {
           "colour": 5,
-          "generationPerHour": 1.7145905434116882e+21
+          "generationPerHour": 3.3747462945493026e+23
         },
         {
           "colour": 6,
-          "generationPerHour": 2.571675365298366e+21
+          "generationPerHour": 5.846118286258912e+22
         },
         {
           "colour": 7,
-          "generationPerHour": 6370559859865533000
+          "generationPerHour": 18381753905529194000
         }
       ]
     }

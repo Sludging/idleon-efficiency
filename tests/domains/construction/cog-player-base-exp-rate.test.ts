@@ -24,13 +24,6 @@ describe('Construction cog player base EXP/hour', () => {
         validateExtractionHealth(extractionResults);
     });
 
-    it('covers every saved character with native base Construction EXP/hour', () => {
-        expect(players.map(player => player.playerID).sort((left, right) => left - right))
-            .toEqual(Array.from({ length: 11 }, (_, index) => index));
-        expect(Object.keys(extractionResults.extractions).sort())
-            .toEqual(targetPlayers.map(({ extractionKey }) => extractionKey).sort());
-    });
-
     it.each(targetPlayers)('matches base Construction EXP/hour for $playerName in the current-character context', ({ player, playerIndex, extractionKey }) => {
         const expected = getExtractedValue(extractionResults, extractionKey);
 

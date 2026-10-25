@@ -5,11 +5,11 @@
       "result": [
         {
           "index": 0,
-          "floor": 6,
+          "floor": 10,
           "level": 1058,
           "activity": "Sneaking",
-          "stealth": 2.6337412442702267e+44,
-          "detectionPercent": 99.88694773966058,
+          "stealth": 9.837867078087426e+44,
+          "detectionPercent": 0,
           "equipment": [
             {
               "id": "NjItem11",
@@ -17,25 +17,25 @@
             },
             {
               "id": "NjGl2",
-              "level": 331
+              "level": 2057
             },
             {
               "id": "NjTr17",
-              "level": 4822
+              "level": 6722
             },
             {
               "id": "NjTr4",
-              "level": 4234
+              "level": 6315
             }
           ]
         },
         {
           "index": 1,
-          "floor": 6,
+          "floor": 10,
           "level": 1058,
           "activity": "Sneaking",
-          "stealth": 2.6204505935226694e+44,
-          "detectionPercent": 99.88751765201096,
+          "stealth": 9.881482080257978e+44,
+          "detectionPercent": 0,
           "equipment": [
             {
               "id": "NjItem5",
@@ -47,21 +47,21 @@
             },
             {
               "id": "NjTr17",
-              "level": 4779
+              "level": 6947
             },
             {
               "id": "NjTr4",
-              "level": 4009
+              "level": 6612
             }
           ]
         },
         {
           "index": 2,
-          "floor": 6,
+          "floor": 10,
           "level": 1058,
-          "activity": "KnockedOut",
-          "stealth": 2.6044163262142675e+44,
-          "detectionPercent": 99.88820522041624,
+          "activity": "Sneaking",
+          "stealth": 9.826398659137248e+44,
+          "detectionPercent": 0,
           "equipment": [
             {
               "id": "NjItem12",
@@ -69,25 +69,25 @@
             },
             {
               "id": "NjGl2",
-              "level": 127
+              "level": 331
             },
             {
               "id": "NjTr17",
-              "level": 4525
+              "level": 6463
             },
             {
               "id": "NjTr4",
-              "level": 3909
+              "level": 6430
             }
           ]
         },
         {
           "index": 3,
-          "floor": 6,
+          "floor": 10,
           "level": 1057,
           "activity": "Sneaking",
-          "stealth": 2.629434809646502e+44,
-          "detectionPercent": 99.88713240192584,
+          "stealth": 9.847596293818791e+44,
+          "detectionPercent": 0,
           "equipment": [
             {
               "id": "NjItem9",
@@ -99,21 +99,21 @@
             },
             {
               "id": "NjTr17",
-              "level": 4724
+              "level": 6791
             },
             {
               "id": "NjTr4",
-              "level": 4277
+              "level": 6467
             }
           ]
         },
         {
           "index": 4,
-          "floor": 6,
+          "floor": 10,
           "level": 1059,
-          "activity": "Breaching",
-          "stealth": 2.071503326389449e+44,
-          "detectionPercent": 99.9110620583356,
+          "activity": "Sneaking",
+          "stealth": 7.8797292545256e+44,
+          "detectionPercent": 0,
           "equipment": [
             {
               "id": "NjItem1",
@@ -121,51 +121,51 @@
             },
             {
               "id": "NjWep0",
-              "level": 2458
+              "level": 2498
             },
             {
               "id": "NjTr17",
-              "level": 3953
+              "level": 6494
             },
             {
               "id": "NjTr4",
-              "level": 4101
+              "level": 6558
             }
           ]
         },
         {
           "index": 5,
-          "floor": 6,
+          "floor": 10,
           "level": 1057,
           "activity": "Sneaking",
-          "stealth": 2.1109422145918424e+44,
-          "detectionPercent": 99.90937018386707,
+          "stealth": 7.864486255634023e+44,
+          "detectionPercent": 0,
           "equipment": [
             {
               "id": "NjItem4",
               "level": 0
             },
             {
-              "id": "NjGl1",
-              "level": 1468
+              "id": "NjGl2",
+              "level": 127
             },
             {
               "id": "NjTr17",
-              "level": 4823
+              "level": 6274
             },
             {
               "id": "NjTr4",
-              "level": 4387
+              "level": 6791
             }
           ]
         },
         {
           "index": 6,
-          "floor": 6,
+          "floor": 10,
           "level": 997,
           "activity": "Sneaking",
-          "stealth": 1.2826364248384352e+36,
-          "detectionPercent": 99.99999999944886,
+          "stealth": 4.4023603891111413e+36,
+          "detectionPercent": 99.99984866906982,
           "equipment": [
             {
               "id": "NjItem6",
@@ -177,21 +177,21 @@
             },
             {
               "id": "NjTr16",
-              "level": 4568
+              "level": 6034
             },
             {
               "id": "NjTr16",
-              "level": 4940
+              "level": 6397
             }
           ]
         },
         {
           "index": 7,
-          "floor": 6,
+          "floor": 10,
           "level": 997,
-          "activity": "Sneaking",
-          "stealth": 1.2835158245949953e+36,
-          "detectionPercent": 99.99999999944849,
+          "activity": "KnockedOut",
+          "stealth": 4.401445879859466e+36,
+          "detectionPercent": 99.99984870050599,
           "equipment": [
             {
               "id": "NjItem5",
@@ -203,21 +203,21 @@
             },
             {
               "id": "NjTr16",
-              "level": 4489
+              "level": 6304
             },
             {
               "id": "NjTr16",
-              "level": 4750
+              "level": 6242
             }
           ]
         },
         {
           "index": 8,
-          "floor": 6,
+          "floor": 10,
           "level": 997,
-          "activity": "Sneaking",
-          "stealth": 1.2821189710542292e+36,
-          "detectionPercent": 99.99999999944909,
+          "activity": "KnockedOut",
+          "stealth": 4.403053670139378e+36,
+          "detectionPercent": 99.99984864523834,
           "equipment": [
             {
               "id": "NjItem5",
@@ -229,21 +229,21 @@
             },
             {
               "id": "NjTr16",
-              "level": 4765
+              "level": 6224
             },
             {
               "id": "NjTr16",
-              "level": 4853
+              "level": 6010
             }
           ]
         },
         {
           "index": 9,
-          "floor": 6,
+          "floor": 10,
           "level": 997,
           "activity": "Sneaking",
-          "stealth": 1.3319320880834323e+36,
-          "detectionPercent": 99.99999999942769,
+          "stealth": 4.404151832885952e+36,
+          "detectionPercent": 99.9998486074891,
           "equipment": [
             {
               "id": "NjItem13",
@@ -251,30 +251,39 @@
             },
             {
               "id": "NjGl1",
-              "level": 381
+              "level": 2193
             },
             {
               "id": "NjTr16",
-              "level": 4907
+              "level": 6091
             },
             {
               "id": "NjTr16",
-              "level": 4573
+              "level": 5953
             }
           ]
         },
         {
           "index": 10,
-          "floor": 8,
-          "level": 1,
-          "activity": "Tied",
-          "stealth": 3.7183183362174626e+26,
-          "detectionPercent": 100,
+          "floor": 10,
+          "level": 873,
+          "activity": "Sneaking",
+          "stealth": 3.964352893992803e+36,
+          "detectionPercent": 99.99986372553809,
           "equipment": [
             null,
-            null,
-            null,
-            null
+            {
+              "id": "NjGl2",
+              "level": 435
+            },
+            {
+              "id": "NjTr16",
+              "level": 6239
+            },
+            {
+              "id": "NjTr16",
+              "level": 6294
+            }
           ]
         }
       ]
@@ -285,85 +294,85 @@
         {
           "index": 0,
           "damageDone": 1000,
-          "maxHP": 1,
+          "maxHP": 0,
           "remainingHP": 0,
           "flowerStacks": 0
         },
         {
           "index": 1,
           "damageDone": 2.7363874629068767e+76,
-          "maxHP": 6.144e+63,
+          "maxHP": 0,
           "remainingHP": 0,
-          "flowerStacks": 7407
+          "flowerStacks": 0
         },
         {
           "index": 2,
           "damageDone": 7.999677699273779e+83,
-          "maxHP": 3.2768e+64,
+          "maxHP": 0,
           "remainingHP": 0,
-          "flowerStacks": 26053
+          "flowerStacks": 0
         },
         {
           "index": 3,
           "damageDone": 1.2910716460042805e+84,
-          "maxHP": 2.0479999999999998e+65,
+          "maxHP": 0,
           "remainingHP": 0,
-          "flowerStacks": 723
+          "flowerStacks": 0
         },
         {
           "index": 4,
           "damageDone": 1.3107647950031135e+84,
-          "maxHP": 1.0239999999999999e+66,
+          "maxHP": 0,
           "remainingHP": 0,
-          "flowerStacks": 118
+          "flowerStacks": 619
         },
         {
           "index": 5,
           "damageDone": 1.3107647950031135e+84,
-          "maxHP": 8.191999999999999e+66,
+          "maxHP": 0,
           "remainingHP": 0,
-          "flowerStacks": 1587
+          "flowerStacks": 0
         },
         {
           "index": 6,
           "damageDone": 0,
-          "maxHP": 6.143999999999999e+67,
-          "remainingHP": 6.143999999999999e+67,
-          "flowerStacks": 568
+          "maxHP": 0,
+          "remainingHP": 0,
+          "flowerStacks": 0
         },
         {
           "index": 7,
           "damageDone": 0,
-          "maxHP": 8.192e+68,
-          "remainingHP": 8.192e+68,
+          "maxHP": 0,
+          "remainingHP": 0,
           "flowerStacks": 0
         },
         {
           "index": 8,
           "damageDone": 0,
-          "maxHP": 4.096e+69,
-          "remainingHP": 4.096e+69,
-          "flowerStacks": 0
+          "maxHP": 0,
+          "remainingHP": 0,
+          "flowerStacks": 495
         },
         {
           "index": 9,
           "damageDone": 0,
-          "maxHP": 8.192e+70,
-          "remainingHP": 8.192e+70,
-          "flowerStacks": 0
+          "maxHP": 0,
+          "remainingHP": 0,
+          "flowerStacks": 1498
         },
         {
           "index": 10,
           "damageDone": 0,
-          "maxHP": 1.6384e+72,
-          "remainingHP": 1.6384e+72,
-          "flowerStacks": 0
+          "maxHP": 0,
+          "remainingHP": 0,
+          "flowerStacks": 975
         },
         {
           "index": 11,
           "damageDone": 0,
-          "maxHP": "Infinity",
-          "remainingHP": "Infinity",
+          "maxHP": 0,
+          "remainingHP": 0,
           "flowerStacks": 0
         }
       ]
@@ -371,9 +380,9 @@
     "daily_charm_rolls": {
       "expression": "(()=>{var A=k=>idleon.getAttr(k),N=idleon.allScripts.ActorEvents_579._customBlock_Ninja;var used=Number(A(\"OptionsListAccount\")[402]);return {used,pristineRemaining:Math.max(0,120-used),symbolRemaining:Math.max(0,75-used),symbolsUnlocked:N(\"NLbonuses\",17,0)>0}})()",
       "result": {
-        "used": 1,
-        "pristineRemaining": 119,
-        "symbolRemaining": 74,
+        "used": 121,
+        "pristineRemaining": 0,
+        "symbolRemaining": 0,
         "symbolsUnlocked": true
       }
     }

@@ -18,7 +18,7 @@
           "Sludgev10",
           "Sludgev11"
         ],
-        "version": 395.1
+        "version": 398.1
       }
     },
     "paired_hole_inputs": {
@@ -29,14 +29,14 @@
           49,
           69,
           30,
-          151
+          153
         ],
         "exp": [
-          2362967883615147,
-          133982482920435.08,
-          1228761691456072.2,
-          367750086186271.3,
-          126283470999857.44
+          3733187070224574.5,
+          472291432957897.44,
+          4197572602002648,
+          706059036221493,
+          86946475319013.66
         ],
         "investments": [
           114,
@@ -67,9 +67,9 @@
           21,
           18,
           16,
-          36,
-          36,
-          36,
+          37,
+          37,
+          37,
           26,
           36,
           36,
@@ -87,9 +87,9 @@
           645050.2468780265,
           214429.636600765,
           221428.0462261185,
-          37398250.2720197,
-          37242720.81656928,
-          38124776.50172122,
+          31225568.150346205,
+          31070038.69489579,
+          31952094.380047724,
           840302.5741329693,
           1076598.0439762478,
           1076614.8450074797,
@@ -99,12 +99,12 @@
         "cavernOpals": [
           19,
           19,
-          14,
+          26,
           12,
           20,
           8,
-          9,
-          17,
+          28,
+          18,
           12,
           10,
           6,
@@ -129,10 +129,10 @@
           0
         ],
         "lanternUses": 0,
-        "wishes": 3457,
+        "wishes": 305,
         "layers": [
           19,
-          17,
+          18,
           19,
           9
         ],
@@ -144,23 +144,23 @@
       "result": {
         "earlyExplorerUpgrade": 0,
         "bundle": null,
-        "gemOpals": 18,
+        "gemOpals": 22,
         "statueLevels": [
           [
             571,
             36346460615.3791
           ],
           [
-            600,
-            526531663177.78094
+            607,
+            127463949374.48563
           ],
           [
-            586,
-            364166904553.1018
+            594,
+            62114706382.272255
           ],
           [
-            605,
-            297239299284.42377
+            608,
+            109791011040.73895
           ],
           [
             557,
@@ -171,52 +171,52 @@
             2469.70639736455
           ],
           [
-            583,
-            120146732543.03893
+            585,
+            60018698525.02925
           ],
           [
-            594,
-            261636058120.2089
+            598,
+            57793830252.92234
           ],
           [
-            533,
-            228603740359.35367
+            554,
+            26207189424.14525
           ],
           [
-            533,
-            217992152469.86398
+            554,
+            15595601534.655565
           ],
           [
-            467,
-            25939957661.501316
+            488,
+            1935399140.7769108
           ],
           [
-            553,
-            79465432184.5109
+            557,
+            24677962442.526283
           ],
           [
-            481,
-            40138587986.69238
+            501,
+            4784915773.535748
           ],
           [
-            526,
-            90386921747.03976
+            539,
+            15576419747.576727
           ],
           [
-            494,
-            37366750337.019104
+            509,
+            5277996110.118111
           ],
           [
-            155,
-            18561.7498254505
+            345,
+            23229385.948356424
           ],
           [
             228,
             402358.43326976884
           ],
           [
-            367,
-            3799418632.6312275
+            419,
+            191831315.3480221
           ],
           [
             135,
@@ -263,8 +263,8 @@
             389981.326843138
           ],
           [
-            248,
-            481047.6482600017
+            266,
+            1883488.7543599552
           ],
           [
             232,
@@ -295,11 +295,11 @@
     },
     "statue_28": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven28\")",
-      "result": 6666.932159999998
+      "result": 7155.961443995839
     },
     "statue_factor": {
       "expression": "1 + idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven28\") / 100",
-      "result": 67.66932159999998
+      "result": 72.55961443995838
     },
     "jar_4": {
       "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 4, 0)",
@@ -311,7 +311,7 @@
     },
     "jar_12": {
       "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 12, 0)",
-      "result": 240
+      "result": 288
     },
     "jar_16": {
       "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 16, 0)",
@@ -335,7 +335,7 @@
     },
     "lore_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 1, 0)",
-      "result": 232.3644090355622
+      "result": 233.42557171078457
     },
     "exotic_51": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 51, 0)",
@@ -411,11 +411,11 @@
     },
     "measurement_0": {
       "expression": "idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 0, 0)",
-      "result": 311.2134955932204
+      "result": 331.09996934579436
     },
     "measurement_7": {
       "expression": "idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 7, 0)",
-      "result": 291.9889085545723
+      "result": 293.0154100294985
     },
     "majik_0": {
       "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 0)",
@@ -447,7 +447,7 @@
     },
     "summoning_21": {
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 21, 0)",
-      "result": 288.5025
+      "result": 314.73
     },
     "vault_73": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 73, 0)",
@@ -463,7 +463,7 @@
     },
     "emperor_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 3, 0)",
-      "result": 5
+      "result": 6
     },
     "sushi_56": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 56, 0)",
@@ -475,7 +475,7 @@
     },
     "study_rate": {
       "expression": "idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0)",
-      "result": 107382.09762711865
+      "result": 108758.79118644068
     },
     "study_bonus_0": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 0, 0)",
@@ -523,15 +523,15 @@
     },
     "study_bonus_11": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 11, 0)",
-      "result": 180
+      "result": 185
     },
     "study_bonus_12": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 12, 0)",
-      "result": 36
+      "result": 37
     },
     "study_bonus_13": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 13, 0)",
-      "result": 180
+      "result": 185
     },
     "study_bonus_14": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 14, 0)",
@@ -570,7 +570,7 @@
     },
     "villager_requirement_4": {
       "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 4, 0)",
-      "result": 176494020228985.6
+      "result": 229241962935329.8
     },
     "study_requirement_0": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 0, 0)",
@@ -618,15 +618,15 @@
     },
     "study_requirement_11": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 11, 0)",
-      "result": 27733391.1991762
+      "result": 34666738.99897024
     },
     "study_requirement_12": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 12, 0)",
-      "result": 27733391.1991762
+      "result": 34666738.99897024
     },
     "study_requirement_13": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 13, 0)",
-      "result": 27733391.1991762
+      "result": 34666738.99897024
     },
     "study_requirement_14": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 14, 0)",

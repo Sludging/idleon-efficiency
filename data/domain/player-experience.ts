@@ -47,7 +47,6 @@ import type { Friends } from './friends';
 import type { GoldenFood } from './golden-food';
 import type { EquipmentSets } from './misc/equipmentSets';
 import type { Button } from './world-7/button';
-import type { Clamworks } from './world-7/clamworks';
 import type { Meritocraty } from './world-7/meritocraty';
 import type { RoyalArmory } from './world-6/royalArmory/royalArmory';
 import type { Tesseract } from './tesseract';
@@ -94,7 +93,6 @@ export const getClassExperienceMultiplier = (data: Map<string, any>, player: Pla
     const goldenFood = data.get('goldenFood') as GoldenFood;
     const equipmentSets = data.get('equipmentSets') as EquipmentSets;
     const button = data.get('button') as Button;
-    const clamworks = data.get('clamworks') as Clamworks;
     const meritocraty = data.get('meritocraty') as Meritocraty;
     const achievements = data.get('achievements') as Achievement[];
     const royalArmory = data.get('royalArmory') as RoyalArmory;
@@ -129,7 +127,7 @@ export const getClassExperienceMultiplier = (data: Map<string, any>, player: Pla
     const expGainLuck5 = getClassExperienceMultiplierFactors(
         data, player, players, hasCompassMedallion, compass, gaming, farming, research, jellyOperator,
         zenithMarket, arcade, alchemy, tesseract, bigFish, dancingCoral, coralKid, divinity,
-        sushi, hole, spelunking, clamworks, meritocraty, account, royalArmory,
+        sushi, hole, spelunking, meritocraty, account, royalArmory,
     );
     const isLowestLevelPlayer = players.every(candidate => candidate === player || player.level < candidate.level);
     const expGainLuck3 = Number(account.hasEquinoxBundle) * 20
@@ -228,7 +226,6 @@ const getClassExperienceMultiplierFactors = (
     sushi: SushiStation,
     hole: Hole,
     spelunking: Spelunking,
-    clamworks: Clamworks,
     meritocraty: Meritocraty,
     account: Account,
     royalArmory: RoyalArmory,
@@ -279,7 +276,6 @@ const getClassExperienceMultiplierFactors = (
         Math.pow(1.03, discoveryCount)
         * Number(gaming.isSuperbitPurchased(24))
         * (1 + meritocraty.getCurrentBonus(27) / 100)
-        * (1 + Math.max(0, 5 * (clamworks.promoLevel - 8)) / 100)
     );
     return gatedTalent * firstFactor * secondFactor * accountMultiplier;
 };

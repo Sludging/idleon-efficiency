@@ -21,13 +21,13 @@
     },
     "import_bonus_1": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"ImportItemBonus\",1,0)",
-      "result": 553
+      "result": 569
     },
     "import_upgrade_cost_1": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"ImportItemCOST\",1,0)",
       "result": {
         "type": "large_number",
-        "value": "6.0841586427975735e+84"
+        "value": "1.4724535383370218e+89"
       }
     },
     "import_purchase_cost_2": {
@@ -51,13 +51,13 @@
     },
     "import_bonus_3": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"ImportItemBonus\",3,0)",
-      "result": 513
+      "result": 536
     },
     "import_upgrade_cost_3": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"ImportItemCOST\",3,0)",
       "result": {
         "type": "large_number",
-        "value": "2.2994412163450757e+86"
+        "value": "5.27918804907467e+89"
       }
     },
     "import_purchase_cost_4": {
@@ -116,13 +116,13 @@
     },
     "import_bonus_7": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"ImportItemBonus\",7,0)",
-      "result": 379
+      "result": 409
     },
     "import_upgrade_cost_7": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"ImportItemCOST\",7,0)",
       "result": {
         "type": "large_number",
-        "value": "3.6855876244806904e+84"
+        "value": "8.919649958408042e+88"
       }
     },
     "import_purchase_cost_8": {
@@ -145,65 +145,65 @@
     },
     "acorn_shop_cost_0": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"AcornShopCost\",0,0)",
-      "result": 1242
+      "result": 1296
     },
     "acorn_shop_bonus_0": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"AcornShopBonus\",0,0)",
-      "result": 6.001499250374812
+      "result": 6.08029197080292
     },
     "rat_shop_cost_0": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"RatShopCost\",0,0)",
-      "result": 23457.047638797492
+      "result": 26957.504784617115
     },
     "rat_shop_bonus_0": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"RatShopBonuses\",0,0)",
-      "result": 335
+      "result": 340
     },
     "fertilizer_cost_0": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"FertilizerUpgCosts\",0,0)",
       "result": {
         "type": "large_number",
-        "value": "1.262557142872236e+86"
+        "value": "5.732028478484161e+89"
       }
     },
     "acorn_shop_cost_1": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"AcornShopCost\",1,0)",
-      "result": 1353
+      "result": 1404
     },
     "acorn_shop_bonus_1": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"AcornShopBonus\",1,0)",
-      "result": 321.6189917041262
+      "result": 331.217846741234
     },
     "rat_shop_cost_1": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"RatShopCost\",1,0)",
-      "result": 26957.504784617115
+      "result": 35611.44007765613
     },
     "rat_shop_bonus_1": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"RatShopBonuses\",1,0)",
-      "result": 204
+      "result": 210
     },
     "fertilizer_cost_1": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"FertilizerUpgCosts\",1,0)",
       "result": {
         "type": "large_number",
-        "value": "9.818828790016061e+85"
+        "value": "4.985520703662447e+88"
       }
     },
     "acorn_shop_cost_2": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"AcornShopCost\",2,0)",
-      "result": 1201
+      "result": 1357
     },
     "acorn_shop_bonus_2": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"AcornShopBonus\",2,0)",
-      "result": 96.63937282979164
+      "result": 106.46843855688029
     },
     "rat_shop_cost_2": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"RatShopCost\",2,0)",
-      "result": 17765.574774137993
+      "result": 35611.44007765613
     },
     "rat_shop_bonus_2": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"RatShopBonuses\",2,0)",
-      "result": 130
+      "result": 140
     },
     "fertilizer_cost_2": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"FertilizerUpgCosts\",2,0)",
@@ -214,11 +214,11 @@
     },
     "RatBitMulti": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"RatBitMulti\",0,0)",
-      "result": 38.7305422718877
+      "result": 243.49681583330184
     },
     "RatCurrencyGain": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"RatCurrencyGain\",0,0)",
-      "result": 17.854541015625
+      "result": 20.80485
     },
     "MaxSnailLV": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"MaxSnailLV\",0,0)",
@@ -226,7 +226,7 @@
     },
     "LogGameMulti": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"LogGameMulti\",0,0)",
-      "result": 2.0736
+      "result": 4.2998169599999985
     },
     "GamingPOINGmulti": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"GamingPOINGmulti\",0,0)",
@@ -240,7 +240,7 @@
       "expression": "idleon.callFunction(\"GamingStatType\",\"SproutValueBase\",0,0)",
       "result": {
         "type": "large_number",
-        "value": "9.152568042878247e+23"
+        "value": "6.71410042700925e+24"
       }
     },
     "SproutCapacity": {
@@ -251,31 +251,31 @@
       "expression": "idleon.callFunction(\"GamingStatType\",\"MutateUpgCosts\",0,0)",
       "result": {
         "type": "large_number",
-        "value": "1.688905027337942e+85"
+        "value": "2.6041152365293515e+87"
       }
     },
     "SproutValueNonPlantMulti": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"SproutValueNonPlantMulti\",0,0)",
       "result": {
         "type": "large_number",
-        "value": "1.4702467961307823e+55"
+        "value": "1.8292617733006461e+58"
       }
     },
     "NewMutantChanceDEC": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"NewMutantChanceDEC\",0,0)",
-      "result": 0.0035808652328579355
+      "result": 0.003581082100113877
     },
     "SproutGrowthTime": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"SproutGrowthTime\",0,0)",
-      "result": 78.49019081733482
+      "result": 74.60689031308996
     },
     "SproutMaxEvo": {
       "expression": "1+idleon.callFunction(\"GamingStatType\",\"SproutMaxEvo\",0,0)",
-      "result": 9
+      "result": 10
     },
     "PaletteLuck": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteLuck\",0,0)",
-      "result": 157.74788461077495
+      "result": 171.24512817131523
     },
     "TotalSelectorSlots": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"TotalSelectorSlots\",0,0)",
@@ -283,11 +283,11 @@
     },
     "rat_crown_odds_0": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"RatCrownOdds\",0,0)",
-      "result": 0.4938750000000001
+      "result": 0.505125
     },
     "rat_crown_odds_1": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"RatCrownOdds\",1,0)",
-      "result": 0.7408125000000002
+      "result": 0.7576875000000001
     },
     "rat_crown_odds_2": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"RatCrownOdds\",2,0)",
@@ -299,7 +299,7 @@
     },
     "snail_stuff_0": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"SnailStuff\",0,0)",
-      "result": 0.022534495773964377
+      "result": 0.023046643405190838
     },
     "snail_stuff_1": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"SnailStuff\",1,0)",
@@ -319,23 +319,23 @@
     },
     "palette_level_chance_0": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"LVupChance\",0,0)",
-      "result": 0.031549576922154994
+      "result": 0.03424902563426305
     },
     "palette_unlock_chance_0": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PalUnlockChance\",0,0)",
-      "result": 0.00007511804029084521
+      "result": 0.00008154529912919772
     },
     "palette_level_chance_3": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"LVupChance\",3,0)",
-      "result": 0.0059202776195964165
+      "result": 0.005141463302808987
     },
     "palette_unlock_chance_3": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PalUnlockChance\",3,0)",
-      "result": 0.0026291314101795824
+      "result": 0.0028540854695219206
     },
     "palette_level_chance_18": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"LVupChance\",18,0)",
-      "result": 0.006182102274665691
+      "result": 0.0018729325788831262
     },
     "palette_unlock_chance_18": {
       "expression": "Math.min(1,idleon.callFunction(\"GamingStatType\",\"PalUnlockChance\",18,0))",
@@ -347,7 +347,7 @@
     },
     "palette_bonus_3": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",3,0)",
-      "result": 72.85714285714286
+      "result": 75.34883720930233
     },
     "palette_bonus_7": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",7,0)",
@@ -363,11 +363,11 @@
     },
     "palette_bonus_18": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",18,0)",
-      "result": 999
+      "result": 1188
     },
     "palette_bonus_25": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",25,0)",
-      "result": 130.5
+      "result": 135
     },
     "palette_bonus_31": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",31,0)",
@@ -379,7 +379,7 @@
     },
     "palette_bonus_37": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",37,0)",
-      "result": 702
+      "result": 736
     },
     "superbit_cost_0": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"SuperbitCost\",0,0)",
@@ -412,15 +412,15 @@
     },
     "slot_evolution_probability_0": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"SproutGrowthCHANCE\",0,0)",
-      "result": 1.130787908821087e-7
+      "result": 0.0007115816057599394
     },
     "slot_evolution_probability_2": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"SproutGrowthCHANCE\",2,0)",
-      "result": 0.026353879965778912
+      "result": 0.0007115816057599394
     },
     "slot_evolution_probability_4": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"SproutGrowthCHANCE\",4,0)",
-      "result": 1.130787908821087e-7
+      "result": 0.0007115816057599394
     },
     "dependency_Voting_VotingBonusz_22": {
       "expression": "idleon.callFunction(\"Summoning\",\"VotingBonusz\",22,0)",
@@ -428,7 +428,7 @@
     },
     "dependency_Holes_B_UPG_53": {
       "expression": "idleon.callFunction(\"Holes\",\"B_UPG\",53,0)",
-      "result": 76
+      "result": 80
     },
     "dependency_AtomCollider_AtomBonuses_10": {
       "expression": "idleon.callFunction(\"AtomCollider\",\"AtomBonuses\",10,0)",
@@ -460,7 +460,7 @@
     },
     "dependency_Thingies_LoreEpiBon_5": {
       "expression": "idleon.callFunction(\"Thingies\",\"LoreEpiBon\",5,0)",
-      "result": 292.4514685803277
+      "result": 294.51132897750017
     },
     "dependency_Farming_ExoticBonusQTY_44": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"ExoticBonusQTY\",44,0)",
@@ -472,7 +472,7 @@
     },
     "dependency_Research_Grid_Bonus_107": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",107,2)",
-      "result": 97.50000000000001
+      "result": 171.60000000000002
     },
     "dependency_Thingies_LegendPTS_bonus_10": {
       "expression": "idleon.callFunction(\"Thingies\",\"LegendPTS_bonus\",10,0)",
@@ -488,11 +488,11 @@
     },
     "global_gaming_minor_bonus": {
       "expression": "idleon.callFunction(\"Divinity\",\"Bonus_Minor\",-1,6)",
-      "result": 118.57430103408657
+      "result": 119.6147915661512
     },
     "crop_scientist_evolution_chance": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"CropSCbonus\",1,0)",
-      "result": 222.79516286016326
+      "result": 337.68312993040576
     },
     "voting_mutation_bonus": {
       "expression": "idleon.callFunction(\"Summoning\",\"VotingBonusz\",21,0)",
@@ -508,11 +508,11 @@
     },
     "harvest_artifact20": {
       "expression": "idleon.callFunction(\"Sailing\",\"ArtifactBonus\",20,0)",
-      "result": 24919.3854
+      "result": 25137.976499999997
     },
     "harvest_artifact23": {
       "expression": "idleon.callFunction(\"Sailing\",\"ArtifactBonus\",23,0)",
-      "result": 20750
+      "result": 25800
     },
     "harvest_monument": {
       "expression": "idleon.callFunction(\"Holes\",\"MonumentROGbonuses\",0,4)",
@@ -532,7 +532,7 @@
     },
     "harvest_lamp": {
       "expression": "idleon.callFunction(\"Holes\",\"LampBonuses\",1,1)",
-      "result": 3933.6
+      "result": 4488
     },
     "harvest_emperor": {
       "expression": "idleon.callFunction(\"Thingies\",\"EmperorBon\",7,0)",
@@ -544,11 +544,11 @@
     },
     "harvest_sticker": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",3,0)",
-      "result": 3127.5000000000005
+      "result": 3794.3999999999996
     },
     "harvest_vault": {
       "expression": "idleon.callFunction(\"Summoning\",\"VaultUpgBonus\",68,0)",
-      "result": 1581
+      "result": 1708.5
     },
     "harvest_vial7bits": {
       "expression": "idleon.getDNSM(\"AlchVials.h.7bits\")",
@@ -564,11 +564,11 @@
     },
     "harvest_talent": {
       "expression": "idleon.callFunction(\"getbonus2\", 1, 177, -1)",
-      "result": 16.825396825396826
+      "result": 16.835443037974684
     },
     "harvest_companion": {
       "expression": "idleon.callFunction(\"Companions\",53)",
-      "result": 199
+      "result": 499
     },
     "harvest_card": {
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"CardLv\",\"w7b2\")",
@@ -576,19 +576,19 @@
     },
     "logbook_bits_multiplier": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"LogBookBitBonus\",Array.from(idleon.getAttr(\"Gaming\")[11]).reduce((sum,char)=>sum+idleon.getAttr(\"Number2Letter\").indexOf(char),0),0)",
-      "result": 205.90940925207633
+      "result": 682.6758800975933
     },
     "water_charges": {
       "expression": "Math.floor(Math.pow(idleon.getAttr(\"GamingSprout\")[25][1]*(1+idleon.callFunction(\"GamingStatType\",\"ImportItemBonus\",0,0)/100)/3600,0.75))",
-      "result": 713
+      "result": 58
     },
     "squirrel_acorns_ready": {
       "expression": "Math.floor(Math.pow(idleon.getAttr(\"GamingSprout\")[27][1]*(1+idleon.callFunction(\"GamingStatType\",\"ImportItemBonus\",2,0)/100)/3600,0.85))",
-      "result": 7
+      "result": 21
     },
     "shell_next_threshold": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"ShellRankREQ\",idleon.getAttr(\"GamingSprout\")[28][2]+1,0)",
-      "result": 411579.5789901509
+      "result": 534626.6928285371
     },
     "shovel_island_bonus": {
       "expression": "25*idleon.callFunction(\"RandomEvent\",\"FractalIslandBonus\",4,999)",
@@ -604,15 +604,15 @@
     },
     "shovel_digs": {
       "expression": "Math.round(Math.floor(Math.pow(idleon.getAttr(\"GamingSprout\")[26][1]/3600,0.44))*(1+(25*idleon.callFunction(\"RandomEvent\",\"FractalIslandBonus\",4,999)+idleon.callFunction(\"GetBribeBonus\",\"37\")+idleon.callFunction(\"ArcadeBonus\",31,0))/100)*(1+idleon.callFunction(\"Summoning\",\"VotingBonusz\",22,0)/100))",
-      "result": 0
+      "result": 1
     },
     "shovel_nugget_minimum": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"ImportItemBonus\",1,0)*(1+idleon.getAttr(\"Dream\")[9]*idleon.getAttr(\"OptionsListAccount\")[192]/100)",
-      "result": 714188.4400000001
+      "result": 1008137.13
     },
     "shovel_nugget_maximum": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"ImportItemBonus\",1,0)*(1/Math.pow(0.00001,0.64))*(1+idleon.getAttr(\"Dream\")[9]*idleon.getAttr(\"OptionsListAccount\")[192]/100)",
-      "result": 1131912396.6904225
+      "result": 1597789674.4042847
     },
     "logbook_bubble": {
       "expression": "idleon.getDNSM(\"AlchBubbles.h.Y3\")",
@@ -622,27 +622,27 @@
       "expression": "idleon.callFunction(\"GamingStatType\",\"SproutValueBase\",0,0)*idleon.callFunction(\"GamingStatType\",\"SproutValueNonPlantMulti\",0,0)*(1/(1+2*idleon.getAttr(\"GamingSprout\")[29][1]))",
       "result": {
         "type": "large_number",
-        "value": "1.3456533841410727e+79"
+        "value": "1.2281847253229567e+83"
       }
     },
     "shell_earned_multiplier": {
       "expression": "1+idleon.getAttr(\"GamingSprout\")[28][2]*idleon.callFunction(\"GamingStatType\",\"ImportItemBonus\",3,0)/100",
-      "result": 139.51
+      "result": 151.08
     },
     "shovel_metal_detector": {
       "expression": "1+idleon.getAttr(\"Dream\")[9]*idleon.getAttr(\"OptionsListAccount\")[192]/100",
-      "result": 1291.48
+      "result": 1771.77
     },
     "native_bits": {
       "expression": "idleon.getAttr(\"Gaming\")[0]",
       "result": {
         "type": "large_number",
-        "value": "3.217264464146253e+86"
+        "value": "2.5055406799741676e+89"
       }
     },
     "library_gaming_contribution": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"SuperBitType\",12,0)*idleon.getAttr(\"Lv0\")[15]",
-      "result": 415
+      "result": 430
     }
   },
   "errors": {}

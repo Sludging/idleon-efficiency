@@ -6,7 +6,7 @@
     },
     "zenith_market_0_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 0, 0)",
-      "result": 134
+      "result": 136
     },
     "event_shop_19_owned": {
       "expression": "0.3 * 100 * idleon.callFunction(\"Summoning\", \"EventShopOwned\", 19, 0)",
@@ -18,7 +18,7 @@
     },
     "upgrade_vault_25_bonus": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 25, 0)",
-      "result": 154
+      "result": 165
     },
     "voodoo_statufication_bonus": {
       "expression": "idleon.callFunction(\"getbonus2\", 1, 56, -1)",
@@ -34,7 +34,7 @@
     },
     "talent_127_bonus": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 127)",
-      "result": 91.37931034482759
+      "result": 91.40893470790378
     },
     "talent_292_bonus": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 292)",
@@ -54,71 +54,71 @@
     },
     "statue_0_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven0\")",
-      "result": 2145078.0639885147
+      "result": 2419424.8059218726
     },
     "statue_1_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven1\")",
-      "result": 39259.25047295999
+      "result": 44790.01944614285
     },
     "statue_5_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven5\")",
-      "result": 3700.827647999999
+      "result": 3972.2888015650374
     },
     "statue_24_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven24\")",
-      "result": 15585.201139199995
+      "result": 16846.20419938231
     },
     "statue_2_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven2\")",
-      "result": 220142.86260897884
+      "result": 251687.97455649596
     },
     "statue_3_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven3\")",
-      "result": 155852.01139199996
+      "result": 169297.39096238755
     },
     "statue_6_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven6\")",
-      "result": 114440.71512867835
+      "result": 129499.973851698
     },
     "statue_7_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven7\")",
-      "result": 292845.44084126886
+      "result": 318720.5573233056
     },
     "statue_8_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven8\")",
-      "result": 41191.30020095998
+      "result": 46278.332858468435
     },
     "statue_9_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven9\")",
-      "result": 41191.30020095998
+      "result": 46278.332858468435
     },
     "statue_10_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven10\")",
-      "result": 12030.229639679997
+      "result": 13588.343221981107
     },
     "statue_11_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven11\")",
-      "result": 71228.23330559998
+      "result": 77548.22924839627
     },
     "statue_12_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven12\")",
-      "result": 61954.394611199976
+      "result": 69751.63887512842
     },
     "statue_13_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven13\")",
-      "result": 27100.21751807999
+      "result": 30016.872937081225
     },
     "statue_14_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven14\")",
-      "result": 101806.14033407999
+      "result": 113384.69999980957
     },
     "statue_17_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven17\")",
-      "result": 9454.163335679998
+      "result": 11667.04059428296
     },
     "statue_29_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven29\")",
-      "result": 1081.4719999999998
+      "result": 1168.1347096774196
     }
   },
   "errors": {}

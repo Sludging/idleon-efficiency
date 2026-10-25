@@ -2,15 +2,15 @@
   "extractions": {
     "parchment_drop_chance": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ParchmentDrop\", 0, 0)",
-      "result": 0.0015300000000000001
+      "result": 0.0017900000000000001
     },
     "royal_castle_maximum_damage": {
       "expression": "idleon.callFunction(\"RoyalG\", \"RatDMG\", 0, 0)",
-      "result": 320
+      "result": 405
     },
     "castle_base_damage_bonus": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 35, 0)",
-      "result": 310
+      "result": 395
     },
     "castle_damage_percent_bonus": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 36, 0)",
@@ -22,7 +22,7 @@
     },
     "parchment_surplus_bonus": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 38, 0)",
-      "result": 18
+      "result": 44
     },
     "orblet_parchment_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 9, 0)",

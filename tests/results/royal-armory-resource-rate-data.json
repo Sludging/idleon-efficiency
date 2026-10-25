@@ -2,11 +2,11 @@
   "extractions": {
     "royal_armory_rate_row_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostResourceRate\", 1, 0)",
-      "result": 3002985.6595872664
+      "result": 712505114.3739233
     },
     "royal_armory_rate_row_0_empty": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostResourceRate\", 0, 0)",
-      "result": 59341.97203992246
+      "result": 7683808.061188806
     },
     "royal_armory_rate_companion_141": {
       "expression": "idleon.callFunction(\"Companions\", 141)",
@@ -14,7 +14,7 @@
     },
     "royal_armory_rate_orblet_market_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 1, 0)",
-      "result": 175
+      "result": 180
     },
     "royal_armory_rate_sushi_60": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 60, 0)",
@@ -30,11 +30,11 @@
     },
     "royal_armory_rate_armory_upgrade_18": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 18, 0)",
-      "result": 0
+      "result": 10
     },
     "royal_armory_rate_armory_upgrade_50": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 50, 0)",
-      "result": 8
+      "result": 12
     },
     "royal_armory_rate_armory_upgrade_51": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 51, 0)",
@@ -50,7 +50,7 @@
     },
     "royal_armory_rate_armory_upgrade_70": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 70, 0)",
-      "result": 245
+      "result": 315
     },
     "royal_armory_rate_armory_upgrade_73": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 73, 0)",
@@ -66,7 +66,7 @@
     },
     "royal_armory_rate_support_collection": {
       "expression": "idleon.callFunction(\"RoyalG\", \"SupportCollection\", 0, 0)",
-      "result": 206
+      "result": 214
     },
     "royal_armory_rate_total_supports_row_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalSupports\", 1, 0)",
@@ -82,11 +82,11 @@
     },
     "royal_armory_rate_total_statz_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalStatz\", 0, 0)",
-      "result": 371
+      "result": 577
     },
     "royal_armory_rate_total_statz_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalStatz\", 1, 0)",
-      "result": 193
+      "result": 257
     },
     "royal_armory_rate_total_statz_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalStatz\", 2, 0)",
@@ -94,15 +94,15 @@
     },
     "royal_armory_rate_total_statz_3": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalStatz\", 3, 0)",
-      "result": 20.927551616241512
+      "result": 25.337920864967018
     },
     "royal_armory_rate_unit_spec_effect_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 0, 0)",
-      "result": 200
+      "result": 230
     },
     "royal_armory_rate_total_units_row_1_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 1, 0)",
-      "result": 3
+      "result": 5
     },
     "royal_armory_rate_talent_225_best": {
       "expression": "idleon.callFunction(\"getbonus2\", 1, 225, -1)",

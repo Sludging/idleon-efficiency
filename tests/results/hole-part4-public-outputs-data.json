@@ -6,8 +6,8 @@
         "playerId": 3,
         "playerName": "Sludgev4",
         "version": {
-          "title": "Luminous_Menagerie",
-          "version": "1.23"
+          "title": "Halloween_Event",
+          "version": "1.24"
         }
       }
     },
@@ -15,12 +15,12 @@
       "expression": "idleon.callFunction(\"Holes\", \"BucketFillRate\", 0, 0)",
       "result": {
         "type": "large_number",
-        "value": "100350592397289070"
+        "value": "116053780720879700"
       }
     },
     "lamp_wishes_per_day": {
       "expression": "idleon.callFunction(\"Holes\", \"LampWishPerDay\", 0, 0)",
-      "result": 29.953020408163265
+      "result": 30.507639751552798
     },
     "harp_power_per_hour": {
       "expression": "idleon.callFunction(\"Holes\", \"HarpPOWperHR\", 0, 0)",

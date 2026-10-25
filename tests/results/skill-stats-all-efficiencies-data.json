@@ -2,15 +2,15 @@
   "extractions": {
     "skill_all_efficiencies": {
       "expression": "idleon.callFunction(\"SkillStats\", \"AllEfficiencies\")",
-      "result": 29454.453801863714
+      "result": 29659.261993585475
     },
     "all_eff_family_bonus_42": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[42]",
-      "result": 27.991967871485944
+      "result": 28.00531914893617
     },
     "all_eff_etc_bonus_48": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"48\")",
-      "result": 81.04927952733921
+      "result": 66.38177698608251
     },
     "all_eff_vial_6_skill_eff": {
       "expression": "idleon.getDNSM(\"AlchVials\").h[\"6SkillEff\"]",
@@ -22,7 +22,7 @@
     },
     "all_eff_total_quests_complete": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"TotalQuestsComplete\")",
-      "result": 317
+      "result": 319
     },
     "all_eff_talent_617": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 617)",
@@ -30,7 +30,7 @@
     },
     "all_eff_meal_seff": {
       "expression": "idleon.callFunction(\"MealBonus\", \"Seff\")",
-      "result": 16651.35971442272
+      "result": 17219.170539912324
     },
     "all_eff_talent_646": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 646)",
@@ -38,7 +38,7 @@
     },
     "all_eff_tome_bonus_1": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 1, 0)",
-      "result": 561.6914359857285
+      "result": 572.3275046074751
     },
     "all_eff_palette_10": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 10, 0)",
@@ -62,7 +62,7 @@
     },
     "all_eff_hole_b_upg_49_15": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 49, 15)",
-      "result": 960
+      "result": 975
     },
     "all_eff_hoops_bonus_3": {
       "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[422])",

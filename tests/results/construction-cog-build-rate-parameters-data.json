@@ -10,7 +10,7 @@
     },
     "construction_royal_outpost_build_speed_multiplier": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostROGbon\", 0, 0)",
-      "result": 5.520547945205479
+      "result": 5.594594594594595
     }
   },
   "errors": {}

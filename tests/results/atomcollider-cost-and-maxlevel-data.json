@@ -50,7 +50,7 @@
     },
     "bubba_bonus_7": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 7, 0)",
-      "result": 21
+      "result": 42
     },
     "atom_max_level": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomMaxLv\", 0, 0)",
@@ -58,23 +58,23 @@
     },
     "atom_0_cost": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomCost\", 0, 0)",
-      "result": 28384388.38849394
+      "result": 27427644.750908244
     },
     "atom_3_cost": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomCost\", 3, 0)",
-      "result": 18634746.642036773
+      "result": 18006631.10740657
     },
     "atom_5_cost": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomCost\", 5, 0)",
-      "result": 334593247.7435306
+      "result": 323315218.54747
     },
     "atom_8_cost": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomCost\", 8, 0)",
-      "result": 662450647.7294455
+      "result": 640121632.4357216
     },
     "atom_11_cost": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomCost\", 11, 0)",
-      "result": 2120563801.596353
+      "result": 2049086625.569045
     }
   },
   "errors": {}

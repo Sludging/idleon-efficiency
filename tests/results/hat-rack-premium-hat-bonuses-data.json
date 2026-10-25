@@ -2,15 +2,15 @@
   "extractions": {
     "hat_rack_drop_rate": {
       "expression": "idleon.getDNSM(\"PremHatBonTOT\").h[\"%_DROP_RATE\"]",
-      "result": 51.900000000000006
+      "result": 52.199999999999996
     },
     "hat_rack_weapon_power": {
       "expression": "idleon.getDNSM(\"PremHatBonTOT\").h.Weapon_Power",
-      "result": 15.569999999999999
+      "result": 15.66
     },
     "hat_rack_strength": {
       "expression": "idleon.getDNSM(\"PremHatBonTOT\").h.STR",
-      "result": 79.57999999999998
+      "result": 81.77999999999997
     },
     "hat_rack_build_speed": {
       "expression": "Object.prototype.hasOwnProperty.call(idleon.getDNSM(\"PremHatBonTOT\").h, \"%_BUILD_SPD\") ? idleon.getDNSM(\"PremHatBonTOT\").h[\"%_BUILD_SPD\"] : 0",
@@ -120,7 +120,10 @@
         "EquipmentHats135",
         "EquipmentHats139",
         "EquipmentHats140",
-        "EquipmentHats141"
+        "EquipmentHats141",
+        "EquipmentHats145",
+        "EquipmentHats146",
+        "EquipmentHats147"
       ]
     },
     "hat_rack_missing_hats": {
@@ -136,7 +139,6 @@
         "EquipmentHats79",
         "EquipmentHats31",
         "EquipmentHats32",
-        "EquipmentHats35",
         "EquipmentHats36",
         "EquipmentHats37",
         "EquipmentHats47",
@@ -168,7 +170,10 @@
         "EquipmentHats135",
         "EquipmentHats139",
         "EquipmentHats140",
-        "EquipmentHats141"
+        "EquipmentHats141",
+        "EquipmentHats145",
+        "EquipmentHats146",
+        "EquipmentHats147"
       ]
     }
   },

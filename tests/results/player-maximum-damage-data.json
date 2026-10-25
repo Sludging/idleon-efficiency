@@ -1,0 +1,17 @@
+{
+  "extractions": {
+    "player_maximum_damage": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0)",
+      "result": {
+        "type": "large_number",
+        "value": "8.135530682548266e+28"
+      }
+    }
+  },
+  "errors": {},
+  "context": {
+    "activePlayerIndex": 3,
+    "mapId": 150,
+    "mapInternalName": "xSpaceaaTown"
+  }
+}

@@ -679,9 +679,9 @@
           3,
           3,
           8,
-          2,
+          5,
           0,
-          0,
+          6,
           0,
           0,
           0,
@@ -758,30 +758,49 @@
           "2f",
           "1d",
           "1_",
-          "4e"
+          "4e",
+          "0g",
+          "2g",
+          "4a",
+          "0h",
+          "1g",
+          "3_",
+          "3g",
+          "3c",
+          "7b",
+          "9d",
+          "6g",
+          "4d",
+          "8g",
+          "7g",
+          "8_",
+          "3b",
+          "9e",
+          "7d",
+          "5_"
         ],
         "trades": [
-          20,
-          50,
-          42,
-          40,
-          4,
-          25,
-          83,
-          10,
-          20,
-          30,
-          5,
-          5,
-          0,
-          25,
-          0,
-          7,
-          20,
-          20,
+          85,
+          271,
           60,
-          7,
-          25,
+          103,
+          15,
+          67,
+          108,
+          43,
+          101,
+          79,
+          14,
+          36,
+          31,
+          44,
+          22,
+          33,
+          64,
+          20,
+          84,
+          45,
+          37,
           0,
           0,
           0,
@@ -802,7 +821,7 @@
           0,
           0
         ],
-        "researchLevel": 71,
+        "researchLevel": 72,
         "artifactStatus": 5,
         "researchMerit": 0,
         "rift": [
@@ -821,13 +840,13 @@
           0,
           0
         ],
-        "accumulatedReduction": 4553.20000000001,
-        "spelunkingReduction": 11383
+        "accumulatedReduction": 4834.000000000008,
+        "spelunkingReduction": 12085
       }
     },
     "points_earned": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_PTSearned\",0,0)",
-      "result": 116
+      "result": 117
     },
     "points_spent": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_PTSspent\",-1,0)",
@@ -835,7 +854,7 @@
     },
     "points_available": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_PTSavailable\",0,0)",
-      "result": 0
+      "result": 1
     },
     "catalogue": {
       "expression": "idleon.getAttr(\"CustomLists\").h.ResGridSquares.map((square, index) => ({ index, name: square[0], template: square[5], cap: idleon.callFunction(\"ResearchStuff\",\"Grid_MaxLV\",index,0), level: idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",index,1), primary: idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",index,0), secondary: idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",index,2), reachable: idleon.callFunction(\"ResearchStuff\",\"Grid_CanWeSelect\",index,0), canUpgrade: idleon.callFunction(\"ResearchStuff\",\"Grid_CanWeUpgrade\",index,0) })).filter(square => square.name !== \"Name\")",
@@ -924,9 +943,9 @@
           "cap": 3,
           "level": 1,
           "primary": 39,
-          "secondary": 975,
+          "secondary": 1716,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 68,
@@ -935,7 +954,7 @@
           "cap": 1,
           "level": 1,
           "primary": 1.56,
-          "secondary": 39,
+          "secondary": 68.64,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -992,7 +1011,7 @@
           "primary": 26,
           "secondary": 26,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 87,
@@ -1014,7 +1033,7 @@
           "primary": 78,
           "secondary": 78,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 89,
@@ -1025,7 +1044,7 @@
           "primary": 936,
           "secondary": 936,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 90,
@@ -1078,7 +1097,7 @@
           "cap": 4,
           "level": 4,
           "primary": 6.5,
-          "secondary": 1228.5,
+          "secondary": 1287,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1111,7 +1130,7 @@
           "cap": 1,
           "level": 1,
           "primary": 3.9000000000000004,
-          "secondary": 97.50000000000001,
+          "secondary": 171.60000000000002,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1190,7 +1209,7 @@
           "primary": 3.9000000000000004,
           "secondary": 3.9000000000000004,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 127,
@@ -1223,7 +1242,7 @@
           "primary": 15.600000000000001,
           "secondary": 15.600000000000001,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 130,
@@ -1234,7 +1253,7 @@
           "primary": 7.800000000000001,
           "secondary": 7.800000000000001,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 131,
@@ -1245,7 +1264,7 @@
           "primary": 7.800000000000001,
           "secondary": 7.800000000000001,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 132,
@@ -1256,7 +1275,7 @@
           "primary": 7.800000000000001,
           "secondary": 7.800000000000001,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 146,
@@ -1267,7 +1286,7 @@
           "primary": 13,
           "secondary": 13,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 147,
@@ -1278,7 +1297,7 @@
           "primary": 32.5,
           "secondary": 32.5,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 148,
@@ -1289,7 +1308,7 @@
           "primary": 32.5,
           "secondary": 32.5,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 149,
@@ -1320,7 +1339,7 @@
           "cap": 2,
           "level": 2,
           "primary": 78,
-          "secondary": 11383,
+          "secondary": 12085,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1333,7 +1352,7 @@
           "primary": 7.800000000000001,
           "secondary": 7.800000000000001,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 164,
@@ -1344,7 +1363,7 @@
           "primary": 0,
           "secondary": 0,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 165,
@@ -1355,7 +1374,7 @@
           "primary": 6.5,
           "secondary": 6.5,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 166,
@@ -1366,7 +1385,7 @@
           "primary": 19.5,
           "secondary": 19.5,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 167,
@@ -1377,7 +1396,7 @@
           "primary": 19.5,
           "secondary": 19.5,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 168,
@@ -1386,7 +1405,7 @@
           "cap": 1,
           "level": 1,
           "primary": 1.3,
-          "secondary": 5.2,
+          "secondary": 16.900000000000002,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1399,7 +1418,7 @@
           "primary": 15.600000000000001,
           "secondary": 15.600000000000001,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 170,
@@ -1410,7 +1429,7 @@
           "primary": 0,
           "secondary": 0,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 171,
@@ -1421,7 +1440,7 @@
           "primary": 78,
           "secondary": 78,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 172,
@@ -1432,7 +1451,7 @@
           "primary": 39,
           "secondary": 39,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 173,
@@ -1454,7 +1473,7 @@
           "primary": 6.5,
           "secondary": 6.5,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 186,
@@ -1465,7 +1484,7 @@
           "primary": 5.2,
           "secondary": 5.2,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 187,
@@ -1476,7 +1495,7 @@
           "primary": 39,
           "secondary": 39,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 188,
@@ -1498,7 +1517,7 @@
           "primary": 78,
           "secondary": 78,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 190,
@@ -1811,7 +1830,7 @@
     },
     "observation_levels": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"TotalObsLVs\",-1,0)",
-      "result": 189
+      "result": 198
     },
     "discoveries": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"TotalOccurrencesFound\",-1,0)",
@@ -1819,7 +1838,7 @@
     },
     "glimbo_trades": {
       "expression": "idleon.callFunction(\"Minehead\",\"GlimboTotalTrades\",0,0)",
-      "result": 498
+      "result": 1362
     },
     "cooking_mastery": {
       "expression": "idleon.callFunction(\"Summoning2\",\"isMasteryUnlocked\",0,0)",
@@ -2083,11 +2102,11 @@
         },
         {
           "index": 67,
-          "text": "For_every_King_Rat_Crown_you_reclaim,_your_Megacrop_growth_chance_goes_up_by_39%._Total_Bonus:10.75x"
+          "text": "For_every_King_Rat_Crown_you_reclaim,_your_Megacrop_growth_chance_goes_up_by_39%._Total_Bonus:18.16x"
         },
         {
           "index": 68,
-          "text": "For_every_King_Rat_Crown_you_reclaim,_all_your_stickers_gives_1.6%_higher_bonuses._Total_Bonus:39%"
+          "text": "For_every_King_Rat_Crown_you_reclaim,_all_your_stickers_gives_1.6%_higher_bonuses._Total_Bonus:69%"
         },
         {
           "index": 69,
@@ -2139,7 +2158,7 @@
         },
         {
           "index": 94,
-          "text": "Design_problem,_why_would_players_level_up_old_Observations?_How_about..._+6.5%_Research_EXP_per_TOTAL_Observation_LV!_@_Total_Bonus:1,229%"
+          "text": "Design_problem,_why_would_players_level_up_old_Observations?_How_about..._+6.5%_Research_EXP_per_TOTAL_Observation_LV!_@_Total_Bonus:1,287%"
         },
         {
           "index": 105,
@@ -2151,7 +2170,7 @@
         },
         {
           "index": 107,
-          "text": "+3.9%_Palette_Luck_for_every_King_Rat_Crown_you_reclaim._@_Total_Bonus:98%"
+          "text": "+3.9%_Palette_Luck_for_every_King_Rat_Crown_you_reclaim._@_Total_Bonus:172%"
         },
         {
           "index": 108,
@@ -2223,11 +2242,11 @@
         },
         {
           "index": 150,
-          "text": "Reduces_the_cost_of_all_OG_Masterclass_upgrades_(DB,_WW,_AC)_by_31.2%_every_day,_FOREVER!_Total_Reduction:-97.85%"
+          "text": "Reduces_the_cost_of_all_OG_Masterclass_upgrades_(DB,_WW,_AC)_by_31.2%_every_day,_FOREVER!_Total_Reduction:-97.97%"
         },
         {
           "index": 151,
-          "text": "Boosts_Spelunking_POW_by_+78%_every_day,_FOREVER!_@_Total_Boost:114.83x_POW"
+          "text": "Boosts_Spelunking_POW_by_+78%_every_day,_FOREVER!_@_Total_Boost:121.85x_POW"
         },
         {
           "index": 152,
@@ -2251,7 +2270,7 @@
         },
         {
           "index": 168,
-          "text": "+1.3%_Drop_Rate_TRUE_Multi_per_100_Glimbo_Trades!_@_Total_Bonus:1.05x_DR"
+          "text": "+1.3%_Drop_Rate_TRUE_Multi_per_100_Glimbo_Trades!_@_Total_Bonus:1.17x_DR"
         },
         {
           "index": 169,
@@ -2305,11 +2324,11 @@
     },
     "accumulated_reduction_percent": {
       "expression": "Math.floor(1e4*(1-1/(1+Number(idleon.getAttr(\"OptionsListAccount\")[499])/100)))/100",
-      "result": 97.85
+      "result": 97.97
     },
     "masterclass_cost_multiplier": {
       "expression": "1/(1+Number(idleon.getAttr(\"OptionsListAccount\")[499])/100)",
-      "result": 0.021490587122840153
+      "result": 0.02026753141467366
     },
     "pairing_after": {
       "expression": "(() => { const research = idleon.getAttr(\"Research\"); return { levels: research[0], owners: research[1], placements: research[6], found: research[2], insightLevels: research[4], crowns: research[11], trades: research[12], researchLevel: Number(idleon.getAttr(\"Lv0\")[20]), artifactStatus: Number(idleon.getAttr(\"Sailing\")[3][37]), researchMerit: Number(idleon.getAttr(\"Tasks\")[2][6][3]), rift: idleon.getAttr(\"Rift\"), accumulatedReduction: Number(idleon.getAttr(\"OptionsListAccount\")[499]), spelunkingReduction: Number(idleon.getAttr(\"OptionsListAccount\")[500]) }; })()",
@@ -2990,9 +3009,9 @@
           3,
           3,
           8,
-          2,
+          5,
           0,
-          0,
+          6,
           0,
           0,
           0,
@@ -3069,30 +3088,49 @@
           "2f",
           "1d",
           "1_",
-          "4e"
+          "4e",
+          "0g",
+          "2g",
+          "4a",
+          "0h",
+          "1g",
+          "3_",
+          "3g",
+          "3c",
+          "7b",
+          "9d",
+          "6g",
+          "4d",
+          "8g",
+          "7g",
+          "8_",
+          "3b",
+          "9e",
+          "7d",
+          "5_"
         ],
         "trades": [
-          20,
-          50,
-          42,
-          40,
-          4,
-          25,
-          83,
-          10,
-          20,
-          30,
-          5,
-          5,
-          0,
-          25,
-          0,
-          7,
-          20,
-          20,
+          85,
+          271,
           60,
-          7,
-          25,
+          103,
+          15,
+          67,
+          108,
+          43,
+          101,
+          79,
+          14,
+          36,
+          31,
+          44,
+          22,
+          33,
+          64,
+          20,
+          84,
+          45,
+          37,
           0,
           0,
           0,
@@ -3113,7 +3151,7 @@
           0,
           0
         ],
-        "researchLevel": 71,
+        "researchLevel": 72,
         "artifactStatus": 5,
         "researchMerit": 0,
         "rift": [
@@ -3132,8 +3170,8 @@
           0,
           0
         ],
-        "accumulatedReduction": 4553.20000000001,
-        "spelunkingReduction": 11383
+        "accumulatedReduction": 4834.000000000008,
+        "spelunkingReduction": 12085
       }
     }
   },

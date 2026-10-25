@@ -1,16 +1,11 @@
 {
-  "description": "Compare active-character Class EXP and normal-world maximum damage with public native Button helpers; retain existing damage parameter entries.",
+  "description": "Compare active-character Class EXP and three normal-world damage parameters with native helpers.",
   "target": "Player combat stats",
   "extractions": [
     {
       "label": "player_class_experience_multiplier",
       "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 15, 0)",
       "description": "Class EXP multiplier from the original ExpMulti(0) helper for the retained active character"
-    },
-    {
-      "label": "player_maximum_damage",
-      "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0)",
-      "description": "Normal-world persistent maximum damage from original DamageDealed(\"Max\") helper for the retained active character"
     },
     {
       "label": "player_maximum_damage_sigil_lab_bonus",

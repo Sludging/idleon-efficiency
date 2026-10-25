@@ -2,15 +2,15 @@
   "extractions": {
     "golden_food_base_damage": {
       "expression": "idleon.callFunction('GoldFoodBonuses','BaseDamage')",
-      "result": 342427.33363622223
+      "result": 343685.10001724545
     },
     "golden_food_damage_multiplier": {
       "expression": "idleon.callFunction('GoldFoodBonuses','Damage')",
-      "result": 158.11348534853357
+      "result": 158.69057730488632
     },
     "golden_food_class_experience_percent": {
       "expression": "idleon.callFunction('GoldFoodBonuses','ClassEXPz')",
-      "result": 65564.6415148867
+      "result": 65805.4663375011
     }
   },
   "errors": {}

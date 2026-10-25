@@ -15,7 +15,4 @@ function(e,t,i){if("CavesUnlocked"==e){a.engine.getGameAttribute("DNSM").h.Spelu
  * It assumes no further stamina spending and fixed bonuses, recharge, maxima, and threshold.
  * It targets only the next saved-level threshold and never changes the saved level.
  * The game must process elapsed progress; this is not a live countdown or observed completion.
- * Source-model comparison: tests/domains/spelunking/overstim-estimate.test.ts.
- * That test combines original retained save inputs with paired native operands.
- * Its independent overflow model uses bisection, not the website's event-interval solver.
  */

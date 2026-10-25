@@ -30,7 +30,7 @@
     },
     "hole_b_upg_49_15": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 49, 15)",
-      "result": 960
+      "result": 975
     },
     "hole_b_upg_52_0": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 52, 0)",
@@ -38,7 +38,7 @@
     },
     "hole_b_upg_53_0": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 53, 0)",
-      "result": 76
+      "result": 80
     },
     "hole_b_upg_54_0": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 54, 0)",
@@ -46,7 +46,7 @@
     },
     "hole_b_upg_55_0": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 55, 0)",
-      "result": 190
+      "result": 200
     },
     "hole_b_upg_56_0": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 56, 0)",
@@ -62,7 +62,7 @@
     },
     "hole_b_upg_59_0": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 59, 0)",
-      "result": 34.1
+      "result": 76.8
     },
     "hole_b_upg_82_2": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 82, 2)",

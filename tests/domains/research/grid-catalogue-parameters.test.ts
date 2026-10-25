@@ -8,9 +8,9 @@ import { JellyOperator } from '../../../data/domain/world-7/jellyOperator';
 import { DivineDesignResearchGridBonus, ObservationLevelResearchGridBonus, OccurrenceCountResearchGridBonus, ResearchGrid } from '../../../data/domain/world-7/research';
 import { SushiStation } from '../../../data/domain/world-7/sushi';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { ExtractionResults, loadExtractionResults } from '../../utils/live-game-data-loader';
+import { ExtractionResults, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
-import { OriginalBoatQualification, OriginalGridUpgrade, assertPairing, extracted, numeric, resultName } from './grid-catalogue-test-helpers';
+import { OriginalBoatQualification, OriginalGridUpgrade, extracted, numeric, resultName } from './grid-catalogue-test-helpers';
 
 // All direct calculated inputs stay here, including same-domain inputs used by secondary effects and presentation.
 // Static caps, Shape percentages, saved levels/options, artifact status, merit level, and placements are supporting state.
@@ -72,7 +72,7 @@ describe('Research Grid catalogue direct parameters', () => {
 
     beforeAll(() => {
         results = loadExtractionResults(resultName);
-        assertPairing(results);
+        validateExtractionHealth(results);
         data = loadGameDataFromSave('latest');
         research = data.get('research') as ResearchGrid;
     });

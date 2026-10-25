@@ -149,11 +149,23 @@ Create JSON config files in `tests/configs/`:
 }
 ```
 
+Set `"requiresTown": true` on an extraction whose comparison requires a town.
+The extractor uses the native internal map name to identify towns, rather than
+a fixed map ID list. It captures the active player index, map ID, and internal
+map name in the results' `context` field. Outside town, the label receives an
+error without invoking its expression or retaining an older result.
+
+Full maximum damage uses its own `player-maximum-damage.json` config, so its town
+prerequisite does not block Class EXP or other damage parameter captures. The
+comparison also checks that the selected save and captured context describe the
+same player and town map. Use a genuine matching town save and extraction;
+changing only the expected value or adding a guard to an old capture is invalid.
+
 ### Output Format
 
-Results are saved as compact JSON with only `extractions` and `errors` at the
-root. Successful labels contain the resolved expression sent to the server
-and its result; failed labels contain the resolved expression and error:
+Results store `extractions` and `errors` at the root. Town-required captures also
+store `context`. Successful labels contain the resolved expression sent to the
+server and its result; failed labels contain the resolved expression and error:
 
 ```json
 {
@@ -172,7 +184,7 @@ and its result; failed labels contain the resolved expression and error:
 }
 ```
 
-Timestamps, server status/metadata, and config descriptions are not persisted.
+Timestamps, server readiness status, and config descriptions are not persisted.
 Descriptions remain in the configs. Runtime status checks and extraction
 diagnostics still run; removing persisted status does not bypass safeguards.
 

@@ -2,7 +2,7 @@
   "extractions": {
     "worship_efficiency": {
       "expression": "idleon.callFunction(\"skillstats2\", \"WorshipEfficiency\")",
-      "result": 55623755267.71321
+      "result": 61643191130.11375
     },
     "food_bonus_worship_soul_boosts": {
       "expression": "idleon.callFunction(\"TotalFoodBonuses\", \"WorshipSoulBoosts\")",
@@ -10,7 +10,7 @@
     },
     "talent_57": {
       "expression": "idleon.callFunction(\"TalentCalc\", 57)",
-      "result": 1053.134328358209
+      "result": 1059.402985074627
     },
     "bubba_bonus_3": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 3, 0)",
@@ -26,7 +26,7 @@
     },
     "vault_upgrade_50": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 50, 0)",
-      "result": 480
+      "result": 698.66
     }
   },
   "errors": {}

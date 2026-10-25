@@ -30,15 +30,15 @@
     },
     "bonus_upgrade_3": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"TotUpgBonus\", 3, 0)",
-      "result": 13
+      "result": 16
     },
     "global_bonus_1": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 1, 0)",
-      "result": 140
+      "result": 210
     },
     "global_bonus_2": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 2, 0)",
-      "result": 70
+      "result": 105
     },
     "global_bonus_3": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 3, 0)",
@@ -58,7 +58,7 @@
     },
     "global_bonus_7": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 7, 0)",
-      "result": 21
+      "result": 42
     }
   },
   "errors": {}

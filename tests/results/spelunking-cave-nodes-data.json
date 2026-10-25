@@ -5,8 +5,8 @@
       "result": {
         "eligible": true,
         "harvestChance": 1,
-        "pagesPerDrop": 99,
-        "efficiency": 514111526.14841,
+        "pagesPerDrop": 144,
+        "efficiency": 1486824991.4107401,
         "prowess": 0.1,
         "difficulty": 100
       }
@@ -16,8 +16,8 @@
       "result": {
         "eligible": true,
         "harvestChance": 1,
-        "pagesPerDrop": 32,
-        "efficiency": 514111526.14841,
+        "pagesPerDrop": 46,
+        "efficiency": 1486824991.4107401,
         "prowess": 0.1,
         "difficulty": 2500
       }
@@ -27,8 +27,8 @@
       "result": {
         "eligible": true,
         "harvestChance": 1,
-        "pagesPerDrop": 8,
-        "efficiency": 514111526.14841,
+        "pagesPerDrop": 12,
+        "efficiency": 1486824991.4107401,
         "prowess": 0.1,
         "difficulty": 100000
       }
@@ -38,8 +38,8 @@
       "result": {
         "eligible": true,
         "harvestChance": 1,
-        "pagesPerDrop": 3,
-        "efficiency": 514111526.14841,
+        "pagesPerDrop": 4,
+        "efficiency": 1486824991.4107401,
         "prowess": 0.1,
         "difficulty": 2000000
       }
@@ -49,8 +49,8 @@
       "result": {
         "eligible": true,
         "harvestChance": 1,
-        "pagesPerDrop": 1,
-        "efficiency": 514111526.14841,
+        "pagesPerDrop": 2,
+        "efficiency": 1486824991.4107401,
         "prowess": 0.1,
         "difficulty": 15000000
       }
@@ -59,9 +59,9 @@
       "expression": "(() => { const efficiency = idleon.callFunction(\"Spelunk\", \"SpelunkingEfficiency\", 0, 0); const prowess = idleon.callFunction(\"ArbitraryCode\", \"SpelunkingProwess\"); const difficulty = Number(idleon.getAttr(\"MonsterDefinitionsGET\").h.Spelunking5.h.Defence); const ratio = efficiency / difficulty; const harvestChance = ratio >= 0.25 ? Math.min(1.512 * (ratio - 0.0763) / (ratio + 5), 1) : 0; const eligible = harvestChance > 0.05; return { eligible, harvestChance, pagesPerDrop: eligible ? Math.floor(Math.max(Math.pow(efficiency / (10 * difficulty), 0.25 + prowess), 1)) : null, efficiency, prowess, difficulty }; })()",
       "result": {
         "eligible": true,
-        "harvestChance": 0.2387615127353988,
+        "harvestChance": 0.5494087630462973,
         "pagesPerDrop": 1,
-        "efficiency": 514111526.14841,
+        "efficiency": 1486824991.4107401,
         "prowess": 0.1,
         "difficulty": 500000000
       }
@@ -72,7 +72,7 @@
         "eligible": false,
         "harvestChance": 0,
         "pagesPerDrop": null,
-        "efficiency": 514111526.14841,
+        "efficiency": 1486824991.4107401,
         "prowess": 0.1,
         "difficulty": 100000000000
       }

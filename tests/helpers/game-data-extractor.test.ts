@@ -2,6 +2,7 @@ import { createServer } from 'http';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
+import { runInNewContext } from 'vm';
 import BatchExtractor from './extract-all-game-data';
 import GameDataExtractor from './game-data-extractor';
 import targetPlayerConfig from '../utils/target-player.json';
@@ -91,6 +92,188 @@ describe('GameDataExtractor active-player policy', () => {
       expression: `game.callFunction(${targetPlayerConfig.index})`,
       result: targetPlayerConfig.index
     });
+  });
+});
+
+describe('GameDataExtractor Town capture policy', () => {
+  let tempDir: string;
+  let extractor: GameDataExtractor;
+  let mapId: number;
+  let failContext: boolean;
+  let failDamage: boolean;
+  let damage: jest.Mock;
+  let experience: jest.Mock;
+  let getAttr: jest.Mock;
+  const damageExpression = 'idleon.callFunction("Minehead", "Button_uHave", 49, 0)';
+  const experienceExpression = 'idleon.callFunction("Minehead", "Button_uHave", 15, 0)';
+  const extractions = [
+    { label: 'damage', expression: damageExpression, requiresTown: true },
+    { label: 'experience', expression: experienceExpression, requiresTown: false },
+  ];
+  const capture = async () => {
+    await extractor.extractData();
+    extractor.saveResults();
+    return JSON.parse(fs.readFileSync(extractor.outputPath, 'utf8'));
+  };
+
+  beforeEach(() => {
+    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'game-data-extractor-town-'));
+    extractor = new GameDataExtractor(
+      path.join(tempDir, 'config.json'),
+      path.join(tempDir, 'results.json'),
+      { verbose: false }
+    );
+    extractor.config = { extractions };
+    mapId = 0;
+    failContext = false;
+    failDamage = false;
+    damage = jest.fn(() => {
+      if (failDamage) {
+        throw new Error('Damage unavailable');
+      }
+      return 123;
+    });
+    experience = jest.fn(() => 4);
+    getAttr = jest.fn((name: string) => {
+      if (name === 'GetPlayersUsernames') return ['Retained player'];
+      if (name === 'UserInfo') return ['Retained player'];
+      if (name === 'CurrentMap') {
+        if (failContext) throw new Error('Map unavailable');
+        return mapId;
+      }
+      if (name === 'CustomLists') return { h: { MapName: { 0: 'Town', 306: 'uAquaA6' } } };
+      throw new Error(`Unexpected attribute: ${name}`);
+    });
+    const idleon = {
+      getAttr,
+      callFunction: (_scene: string, _helper: string, index: number) => {
+        if (index === 49) return damage();
+        if (index === 15) return experience();
+        throw new Error(`Unexpected helper index: ${index}`);
+      },
+    };
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+    jest.spyOn(global, 'fetch').mockImplementation(async (_url, options) => {
+      const { expression } = JSON.parse(String(options?.body));
+      try {
+        const result = runInNewContext(expression, { idleon });
+        return { ok: true, json: async () => ({ result }) } as Response;
+      } catch (error) {
+        return {
+          ok: false,
+          json: async () => ({ error: (error as Error).message }),
+        } as Response;
+      }
+    });
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+    fs.rmSync(tempDir, { recursive: true, force: true });
+  });
+
+  it('persists non-Town context and a label error without invoking damage or blocking EXP', async () => {
+    mapId = 306;
+
+    const results = await capture();
+
+    expect(damage).not.toHaveBeenCalled();
+    expect(experience).toHaveBeenCalledTimes(1);
+    expect(results.context).toEqual({ activePlayerIndex: 0, mapId: 306, mapInternalName: 'uAquaA6' });
+    expect(results.extractions.damage).toBeUndefined();
+    expect(results.errors.damage).toMatchObject({
+      expression: damageExpression,
+      error: expect.stringContaining('Town capture required'),
+    });
+    expect(results.errors.experience).toBeUndefined();
+    expect(results.extractions.experience).toBeDefined();
+  });
+
+  it('captures Town context once and invokes each eligible damage extraction', async () => {
+    extractor.config.extractions = [
+      ...extractions,
+      { label: 'second_damage', expression: damageExpression, requiresTown: true },
+    ];
+
+    const results = await capture();
+
+    expect(damage).toHaveBeenCalledTimes(2);
+    expect(getAttr.mock.calls.filter(([name]) => name === 'CurrentMap')).toHaveLength(1);
+    expect(results.context).toEqual({ activePlayerIndex: 0, mapId: 0, mapInternalName: 'Town' });
+    expect(Object.keys(results.extractions)).toEqual(['damage', 'experience', 'second_damage']);
+    expect(results.errors).toEqual({});
+  });
+
+  it('replaces a previous Town capture and removes its damage value after leaving Town', async () => {
+    await capture();
+    mapId = 306;
+
+    const results = await capture();
+
+    expect(damage).toHaveBeenCalledTimes(1);
+    expect(experience).toHaveBeenCalledTimes(2);
+    expect(results.context.mapId).toBe(306);
+    expect(results.extractions.damage).toBeUndefined();
+    expect(results.errors.damage.error).toContain('Town capture required');
+  });
+
+  it('removes a previous value when native damage fails in a new Town capture', async () => {
+    await capture();
+    failDamage = true;
+
+    const results = await capture();
+
+    expect(damage).toHaveBeenCalledTimes(2);
+    expect(results.context.mapInternalName).toBe('Town');
+    expect(results.extractions.damage).toBeUndefined();
+    expect(results.errors.damage.error).toContain('Damage unavailable');
+    expect(results.errors.experience).toBeUndefined();
+  });
+
+  it('discards old context and damage on context failure while continuing EXP', async () => {
+    await capture();
+    failContext = true;
+
+    const results = await capture();
+
+    expect(damage).toHaveBeenCalledTimes(1);
+    expect(experience).toHaveBeenCalledTimes(2);
+    expect(results.context).toBeUndefined();
+    expect(results.extractions.damage).toBeUndefined();
+    expect(results.errors.damage.error).toContain('Town capture prerequisite failed');
+    expect(results.errors.damage.error).toContain('Map unavailable');
+    expect(results.errors.experience).toBeUndefined();
+  });
+
+  it('clears a previous eligibility error when the next capture reaches Town', async () => {
+    mapId = 306;
+    await capture();
+    mapId = 0;
+
+    const results = await capture();
+
+    expect(damage).toHaveBeenCalledTimes(1);
+    expect(results.extractions.damage).toBeDefined();
+    expect(results.errors).toEqual({});
+  });
+
+  it('does not capture context or restrict unflagged extractions outside Town', async () => {
+    await capture();
+    mapId = 306;
+    extractor.config.extractions = [
+      { label: 'damage', expression: damageExpression },
+      { label: 'experience', expression: experienceExpression, requiresTown: false },
+    ];
+    getAttr.mockClear();
+
+    const results = await capture();
+
+    expect(getAttr).not.toHaveBeenCalled();
+    expect(damage).toHaveBeenCalledTimes(2);
+    expect(results.context).toBeUndefined();
+    expect(Object.keys(results.extractions)).toEqual(['damage', 'experience']);
+    expect(results.errors).toEqual({});
   });
 });
 

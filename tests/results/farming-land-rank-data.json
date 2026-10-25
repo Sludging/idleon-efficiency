@@ -2,15 +2,15 @@
   "extractions": {
     "land_rank_0_bonus": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"LankRankUpgBonus\", 0, 0)",
-      "result": 625.8047873512852
+      "result": 626.7466544965846
     },
     "land_rank_19_bonus": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"LankRankUpgBonus\", 19, 0)",
-      "result": 622.123582719807
+      "result": 623.059909470134
     },
     "account_dank_ranks_bonus": {
       "expression": "idleon.callFunction(\"getbonus2\", 1, 207, -1)",
-      "result": 2.186991869918699
+      "result": 2.1902834008097165
     },
     "plump_database_bonus": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 14, 0)",
@@ -18,225 +18,225 @@
     },
     "dank_ranks_candidate_0_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode5Inputs\", \"decayMulti\", 2, 200, Number(idleon.engine.getGameAttribute(\"PlayerDATABASE\").h[idleon.engine.getGameAttribute(\"GetPlayersUsernames\")[0]].h.SkillLevels[207]) + idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"AllTalentLVz\", \"207|0\", 0), 0, 0)",
-      "result": 2.186991869918699
+      "result": 2.1902834008097165
     },
     "land_rank_plot_state": {
       "expression": "(()=>{const ranks=idleon.getAttr(\"FarmRank\");return Array.from({length:36},(_,index)=>({index,rank:ranks[0][index],exp:ranks[1][index],requirement:idleon.callFunction(\"FarmingStuffs\",\"LankRankEXPreq\",index,0)}));})()",
       "result": [
         {
           "index": 0,
-          "rank": 182,
-          "exp": 347152808746.8823,
-          "requirement": 387288653209.5633
+          "rank": 183,
+          "exp": 402289905796.184,
+          "requirement": 431268258924.9954
         },
         {
           "index": 1,
           "rank": 184,
-          "exp": 13907352197.370789,
+          "exp": 453828723770.3198,
           "requirement": 480237185193.987
         },
         {
           "index": 2,
-          "rank": 184,
-          "exp": 264743882111.36194,
-          "requirement": 480237185193.987
+          "rank": 185,
+          "exp": 205674956967.3821,
+          "requirement": 540823978394.3021
         },
         {
           "index": 3,
           "rank": 185,
-          "exp": 87474580556.9743,
+          "exp": 424293088984.6823,
           "requirement": 540823978394.3021
         },
         {
           "index": 4,
           "rank": 183,
-          "exp": 29691496425.384094,
+          "exp": 355978303899.22534,
           "requirement": 431268258924.9954
         },
         {
           "index": 5,
-          "rank": 187,
-          "exp": 61043882290.105286,
-          "requirement": 670532582135.1869
-        },
-        {
-          "index": 6,
-          "rank": 187,
-          "exp": 242058209740.43204,
-          "requirement": 670532582135.1869
-        },
-        {
-          "index": 7,
-          "rank": 187,
-          "exp": 557200416866.7224,
-          "requirement": 670532582135.1869
-        },
-        {
-          "index": 8,
           "rank": 188,
-          "exp": 301165812467.181,
+          "exp": 118010698451.80508,
           "requirement": 746612930057.3972
         },
         {
+          "index": 6,
+          "rank": 188,
+          "exp": 405431510150.83594,
+          "requirement": 746612930057.3972
+        },
+        {
+          "index": 7,
+          "rank": 188,
+          "exp": 475275623405.45233,
+          "requirement": 746612930057.3972
+        },
+        {
+          "index": 8,
+          "rank": 189,
+          "exp": 60824221273.59951,
+          "requirement": 831317510278.6581
+        },
+        {
           "index": 9,
-          "rank": 186,
-          "exp": 255183472116.38348,
-          "requirement": 602199011673.3363
+          "rank": 187,
+          "exp": 338150003763.6704,
+          "requirement": 670532582135.1869
         },
         {
           "index": 10,
-          "rank": 190,
-          "exp": 226062090625.4215,
-          "requirement": 935839672000.5852
+          "rank": 191,
+          "exp": 235040186835.10068,
+          "requirement": 1041957352187.656
         },
         {
           "index": 11,
-          "rank": 190,
-          "exp": 43655993346.982834,
-          "requirement": 935839672000.5852
+          "rank": 191,
+          "exp": 138713893821.01523,
+          "requirement": 1041957352187.656
         },
         {
           "index": 12,
           "rank": 189,
-          "exp": 171487315154.07788,
+          "exp": 827408019407.9287,
           "requirement": 831317510278.6581
         },
         {
           "index": 13,
-          "rank": 188,
-          "exp": 600194821040.8691,
-          "requirement": 746612930057.3972
+          "rank": 189,
+          "exp": 683464584186.2875,
+          "requirement": 831317510278.6581
         },
         {
           "index": 14,
-          "rank": 189,
-          "exp": 256735794824.46637,
-          "requirement": 831317510278.6581
+          "rank": 190,
+          "exp": 174818335509.69937,
+          "requirement": 935839672000.5852
         },
         {
           "index": 15,
-          "rank": 192,
-          "exp": 88864167086.66211,
-          "requirement": 1160097261984.6753
+          "rank": 193,
+          "exp": 193253446739.6645,
+          "requirement": 1291620267975.568
         },
         {
           "index": 16,
-          "rank": 189,
-          "exp": 659149105310.9855,
-          "requirement": 831317510278.6581
+          "rank": 190,
+          "exp": 769403905244.5222,
+          "requirement": 935839672000.5852
         },
         {
           "index": 17,
-          "rank": 189,
-          "exp": 196445646883.42746,
-          "requirement": 831317510278.6581
+          "rank": 190,
+          "exp": 46108194234.13689,
+          "requirement": 935839672000.5852
         },
         {
           "index": 18,
-          "rank": 188,
-          "exp": 664399982184.3755,
-          "requirement": 746612930057.3972
+          "rank": 190,
+          "exp": 243549287306.48038,
+          "requirement": 935839672000.5852
         },
         {
           "index": 19,
           "rank": 189,
-          "exp": 87536292564.33815,
+          "exp": 619927377939.6622,
           "requirement": 831317510278.6581
         },
         {
           "index": 20,
-          "rank": 189,
-          "exp": 238523451028.99982,
-          "requirement": 831317510278.6581
+          "rank": 190,
+          "exp": 295990437225.6417,
+          "requirement": 935839672000.5852
         },
         {
           "index": 21,
-          "rank": 189,
-          "exp": 556307032915.5747,
-          "requirement": 831317510278.6581
+          "rank": 190,
+          "exp": 240690902084.00537,
+          "requirement": 935839672000.5852
         },
         {
           "index": 22,
           "rank": 189,
-          "exp": 41456423594.74426,
+          "exp": 777929327409.672,
           "requirement": 831317510278.6581
         },
         {
           "index": 23,
-          "rank": 189,
-          "exp": 780848027585.5973,
-          "requirement": 831317510278.6581
-        },
-        {
-          "index": 24,
-          "rank": 189,
-          "exp": 751782982862.0653,
-          "requirement": 831317510278.6581
-        },
-        {
-          "index": 25,
-          "rank": 188,
-          "exp": 576334956422.3373,
-          "requirement": 746612930057.3972
-        },
-        {
-          "index": 26,
-          "rank": 188,
-          "exp": 589833044663.435,
-          "requirement": 746612930057.3972
-        },
-        {
-          "index": 27,
-          "rank": 187,
-          "exp": 670519242007.4559,
-          "requirement": 670532582135.1869
-        },
-        {
-          "index": 28,
-          "rank": 186,
-          "exp": 587999792710.5773,
-          "requirement": 602199011673.3363
-        },
-        {
-          "index": 29,
           "rank": 190,
-          "exp": 613313072212.5836,
+          "exp": 795861777826.6846,
           "requirement": 935839672000.5852
         },
         {
-          "index": 30,
-          "rank": 186,
-          "exp": 23032404371.927612,
-          "requirement": 602199011673.3363
+          "index": 24,
+          "rank": 190,
+          "exp": 629515387694.6558,
+          "requirement": 935839672000.5852
         },
         {
-          "index": 31,
+          "index": 25,
+          "rank": 189,
+          "exp": 493269912685.35266,
+          "requirement": 831317510278.6581
+        },
+        {
+          "index": 26,
+          "rank": 189,
+          "exp": 687866063900.004,
+          "requirement": 831317510278.6581
+        },
+        {
+          "index": 27,
+          "rank": 189,
+          "exp": 116115894726.22478,
+          "requirement": 831317510278.6581
+        },
+        {
+          "index": 28,
           "rank": 187,
-          "exp": 441443678570.7831,
+          "exp": 626266807907.9047,
           "requirement": 670532582135.1869
         },
         {
+          "index": 29,
+          "rank": 191,
+          "exp": 213407506722.4014,
+          "requirement": 1041957352187.656
+        },
+        {
+          "index": 30,
+          "rank": 187,
+          "exp": 136955979290.76825,
+          "requirement": 670532582135.1869
+        },
+        {
+          "index": 31,
+          "rank": 188,
+          "exp": 388000418969.82587,
+          "requirement": 746612930057.3972
+        },
+        {
           "index": 32,
-          "rank": 186,
-          "exp": 264592727229.51752,
-          "requirement": 602199011673.3363
+          "rank": 187,
+          "exp": 402392237067.3557,
+          "requirement": 670532582135.1869
         },
         {
           "index": 33,
           "rank": 170,
-          "exp": 73624852230.90616,
+          "exp": 73635529659.89995,
           "requirement": 103910696245.34111
         },
         {
           "index": 34,
           "rank": 173,
-          "exp": 16849280690.03746,
+          "exp": 16859027712.05003,
           "requirement": 143567265649.76138
         },
         {
           "index": 35,
           "rank": 177,
-          "exp": 72289226776.37434,
+          "exp": 72299144685.17142,
           "requirement": 223522763237.8735
         }
       ]
@@ -246,25 +246,25 @@
       "result": [
         {
           "index": 2,
-          "bonus": 89.76444768715466
+          "bonus": 89.89954761895657
         },
         {
           "index": 6,
-          "bonus": 644.4976576228171
+          "bonus": 645.467658462067
         },
         {
           "index": 13,
-          "bonus": 1823.4656734890896
+          "bonus": 1826.2100794814273
         }
       ]
     },
     "land_rank_exp_database_total": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"LandRankUpgBonusTOTAL\",2,0)",
-      "result": 2467.963331111907
+      "result": 2471.6777379434943
     },
     "land_rank_exp_multiplier": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"PlotRankGain\",0,0)",
-      "result": 55.16126706659604
+      "result": 55.483847575757416
     }
   },
   "errors": {}

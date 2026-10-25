@@ -10,7 +10,7 @@
     },
     "lore_epic_bonus_8": {
       "expression": "idleon.callFunction(\"Thingies\",\"LoreEpiBon\", 8, 0)",
-      "result": 336.2761737713592
+      "result": 336.4340832510642
     },
     "companion_15_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 15)",
@@ -46,7 +46,7 @@
     },
     "equinox_bar_rate": {
       "expression": "idleon.callFunction(\"Dreamstuff\",\"BarFillRate\", 0)",
-      "result": 138768.6335249902
+      "result": 138818.8606151608
     }
   },
   "errors": {}

@@ -4,34 +4,34 @@
       "expression": "(() => { const chapters = idleon.getAttr(\"CustomLists\").h.SpelunkChapters; return chapters.map((row, chapter) => row.map((_, bonus) => idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\", chapter, bonus))); })()",
       "result": [
         [
-          3262.5,
-          79.86447241045498,
+          3637.5,
+          243.6823104693141,
           2.0428015564202333
         ],
         [
-          2675,
+          4950,
           20.095168374816982,
-          3.499099909990999,
+          3.7203687445127303,
           2.5
         ],
         [
-          4.522263450834879,
+          9.263202725724021,
           10.670731707317074,
           0
         ],
         [
-          6.481481481481481,
-          18.917963224893917,
+          7.964224872231687,
+          20.833333333333336,
           0.16144814090019569,
           0
         ],
         [
-          9.172354948805461,
-          0,
+          11.974535165723525,
+          0.12640449438202248,
           0
         ],
         [
-          0.4144422590615341,
+          0.935093509350935,
           0.14910536779324055,
           0
         ],
@@ -48,51 +48,51 @@
     },
     "stamina_recharge_hourly": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
-      "result": 285.2017063389306
+      "result": 25.92742784899369
     },
     "stamina_max_player_0": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",0,0)",
-      "result": 2240
+      "result": 2250
     },
     "stamina_max_player_1": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",1,0)",
-      "result": 2986
+      "result": 2996
     },
     "stamina_max_player_2": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",2,0)",
-      "result": 3453
+      "result": 3463
     },
     "stamina_max_player_3": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",3,0)",
-      "result": 2801
+      "result": 2811
     },
     "stamina_max_player_4": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",4,0)",
-      "result": 3370
+      "result": 3380
     },
     "stamina_max_player_5": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",5,0)",
-      "result": 2992
+      "result": 3002
     },
     "stamina_max_player_6": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",6,0)",
-      "result": 3549
+      "result": 3558
     },
     "stamina_max_player_7": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",7,0)",
-      "result": 2889
+      "result": 3277
     },
     "stamina_max_player_8": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",8,0)",
-      "result": 2989
+      "result": 2999
     },
     "stamina_max_player_9": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",9,0)",
-      "result": 3275
+      "result": 3285
     },
     "stamina_max_player_10": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",10,0)",
-      "result": 2701
+      "result": 2711
     },
     "artifact_35": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Sailing(\"ArtifactBonus\",35,0)",
@@ -200,7 +200,7 @@
     },
     "meritocracy_17": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Summoning2(\"MeritocBonusz\",17,0)",
-      "result": 1000
+      "result": 0
     },
     "legend_talent_30": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Thingies(\"LegendPTS_bonus\",30,0)",

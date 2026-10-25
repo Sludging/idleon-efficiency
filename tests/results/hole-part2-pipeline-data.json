@@ -18,7 +18,7 @@
           "Sludgev10",
           "Sludgev11"
         ],
-        "version": 395.1
+        "version": 398.1
       }
     },
     "paired_hole_inputs": {
@@ -29,14 +29,14 @@
           49,
           69,
           30,
-          151
+          153
         ],
         "exp": [
-          2363201389368159.5,
-          134040130449709.69,
-          1229267586379241,
-          367807733715546.3,
-          126341118529132.05
+          3733187070224574.5,
+          472291432957897.44,
+          4197572602002648,
+          706059036221493,
+          86946475319013.66
         ],
         "investments": [
           114,
@@ -67,9 +67,9 @@
           21,
           18,
           16,
-          36,
-          36,
-          36,
+          37,
+          37,
+          37,
           26,
           36,
           36,
@@ -87,9 +87,9 @@
           645050.2468780265,
           214429.636600765,
           221428.0462261185,
-          37401978.81707617,
-          37246449.36162575,
-          38128505.04677769,
+          31225568.150346205,
+          31070038.69489579,
+          31952094.380047724,
           840302.5741329693,
           1076598.0439762478,
           1076614.8450074797,
@@ -99,12 +99,12 @@
         "cavernOpals": [
           19,
           19,
-          14,
+          26,
           12,
           20,
           8,
-          9,
-          17,
+          28,
+          18,
           12,
           10,
           6,
@@ -129,10 +129,10 @@
           0
         ],
         "lanternUses": 0,
-        "wishes": 3457,
+        "wishes": 305,
         "layers": [
           19,
-          17,
+          18,
           19,
           9
         ],
@@ -141,23 +141,23 @@
     },
     "vote_multiplier": {
       "expression": "idleon.callFunction('Summoning2','VotingBonuszMulti',0,0)",
-      "result": 6.25
+      "result": 6.30679347826087
     },
     "equinox_rate": {
       "expression": "idleon.callFunction('Dreamstuff','BarFillRate',0)",
-      "result": 483535.0490792258
+      "result": 138818.8606151608
     },
     "gaming_primary_links": {
       "expression": "idleon.callFunction('Divinity','Bonus_Minor',-1,6)",
-      "result": 118.57430103408657
+      "result": 119.6147915661512
     },
     "gambit_multiplier": {
       "expression": "idleon.callFunction('Holes2','GambitPTSmulti',0,0)",
-      "result": 4.994925054151624
+      "result": 5.047583249097473
     },
     "growth_0": {
       "expression": "idleon.callFunction('Holes','VillagerExpPerHour',0,0)",
-      "result": 6724965686601.469
+      "result": 7494765157372.117
     },
     "vote_majik": {
       "expression": "idleon.callFunction('Holes','CosmoBonusQTY',2,3)",

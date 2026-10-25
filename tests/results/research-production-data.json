@@ -6,7 +6,7 @@
     },
     "observation_levels_refresh": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"TotalObsLVs\", -1, 0)",
-      "result": 189
+      "result": 198
     },
     "support_refresh": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Kalei_MultiTot\", 0, 999)",
@@ -14,15 +14,15 @@
     },
     "epilogue_refresh": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", -1, 0)",
-      "result": 632.4554618707631
+      "result": 636.0608937201399
     },
     "exp_multiplier": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"ResearchEXPmulti\", 0, 0)",
-      "result": 4936.451746735838
+      "result": 7313.935005802389
     },
     "exp_total": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"ResearchEXPrateTOT\", 0, 0)",
-      "result": 118041094.5747806
+      "result": 174891792.32929674
     },
     "observation_subtotals": {
       "expression": "idleon.getAttr(\"CustomLists\").h.Occurrences.map((entry,index)=>({index,subtotal:idleon.callFunction(\"ResearchStuff\",\"ResearchEXPrateObj\",index,0)}))",

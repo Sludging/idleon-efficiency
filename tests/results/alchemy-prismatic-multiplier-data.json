@@ -18,7 +18,7 @@
     },
     "palette_bonus_28": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 28, 0)",
-      "result": 5.829545454545454
+      "result": 11.659090909090908
     },
     "total_purple_sigils": {
       "expression": "idleon.callFunction(\"Labb\", \"TotalPurpleSigils\", \"0\", 0, 0)",
@@ -38,7 +38,7 @@
     },
     "prismatic_multiplier": {
       "expression": "idleon.callFunction(\"ArcaneType\", \"PrismaBonusMult\", 0, 0)",
-      "result": 3.1917711262956363
+      "result": 3.2500665808410907
     }
   },
   "errors": {}

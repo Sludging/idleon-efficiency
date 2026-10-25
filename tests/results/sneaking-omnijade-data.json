@@ -18,11 +18,11 @@
     },
     "knowledge_bonus_2": {
       "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 2, 0)",
-      "result": 7116
+      "result": 7122
     },
     "knowledge_bonus_3": {
       "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 3, 0)",
-      "result": 353
+      "result": 357
     },
     "knowledge_bonus_4": {
       "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 4, 0)",
@@ -34,11 +34,11 @@
     },
     "knowledge_bonus_6": {
       "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 6, 0)",
-      "result": 2799
+      "result": 2466
     },
     "knowledge_bonus_7": {
       "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 7, 0)",
-      "result": 2551
+      "result": 2218
     },
     "knowledge_bonus_8": {
       "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 8, 0)",
@@ -46,19 +46,19 @@
     },
     "knowledge_bonus_10": {
       "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 10, 0)",
-      "result": 2567
+      "result": 2234
     },
     "knowledge_bonus_11": {
       "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 11, 0)",
-      "result": 7051
+      "result": 6993
     },
     "knowledge_bonus_12": {
       "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 12, 0)",
-      "result": 2626
+      "result": 2293
     },
     "knowledge_bonus_13": {
       "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 13, 0)",
-      "result": 5279
+      "result": 5284
     },
     "knowledge_bonus_14": {
       "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 14, 0)",

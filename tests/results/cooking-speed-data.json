@@ -5,43 +5,43 @@
       "result": [
         {
           "index": 0,
-          "speed": 3.9884956123870965e+149
+          "speed": 5.594763286408288e+152
         },
         {
           "index": 1,
-          "speed": 3.1352192376084548e+149
+          "speed": 4.3978510170441605e+152
         },
         {
           "index": 2,
-          "speed": 3.3319646299132716e+149
+          "speed": 4.673830735868068e+152
         },
         {
           "index": 3,
-          "speed": 3.151672809329282e+149
+          "speed": 4.420930856647858e+152
         },
         {
           "index": 4,
-          "speed": 3.0755975146236304e+149
+          "speed": 4.314218124032585e+152
         },
         {
           "index": 5,
-          "speed": 2.92599473070051e+149
+          "speed": 4.1043665297527556e+152
         },
         {
           "index": 6,
-          "speed": 2.728583513421238e+149
+          "speed": 3.827452841461589e+152
         },
         {
           "index": 7,
-          "speed": 2.5737190949023534e+149
+          "speed": 3.6102206197663857e+152
         },
         {
           "index": 8,
-          "speed": 2.4912139435261878e+149
+          "speed": 3.5521203198759184e+152
         },
         {
           "index": 9,
-          "speed": 2.496725478799475e+149
+          "speed": 3.5521203198759184e+152
         }
       ]
     },
@@ -53,16 +53,16 @@
       "expression": "idleon.callFunction(\"TalentCalc\", 59)",
       "result": {
         "type": "large_number",
-        "value": "3.241920388431345e+45"
+        "value": "6.87344771541785e+45"
       }
     },
     "crop_sc_3_bonus": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 3, 0)",
-      "result": 1994888366.06459
+      "result": 14762672519.77076
     },
     "talent_enh_146_bonus": {
       "expression": "idleon.callFunction(\"TalentEnh\", 146)",
-      "result": 5844.324873033144
+      "result": 7071.633096370106
     },
     "voting_13_bonus": {
       "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 13, 0)",
@@ -70,7 +70,7 @@
     },
     "vault_upg_54_bonus": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 54, 0)",
-      "result": 3078
+      "result": 4278.84
     },
     "meal_bonus_zmealfarm": {
       "expression": "idleon.callFunction(\"MealBonus\", \"zMealFarm\", 0, 0)",
@@ -80,7 +80,7 @@
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.MealSpdz",
       "result": {
         "type": "large_number",
-        "value": "4.8432347966637514e+45"
+        "value": "1.848475655220024e+46"
       }
     },
     "atom_bonuses_8_bonus": {
@@ -93,11 +93,11 @@
     },
     "artifact_13_bonus": {
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 13, 0)",
-      "result": 13398.266709511368
+      "result": 14307.051985659682
     },
     "button_bonus_7": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 7, 0)",
-      "result": 418.25
+      "result": 784.21875
     },
     "arcade_28_bonus": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 28)",
@@ -117,11 +117,11 @@
     },
     "mainframe_114_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 114)",
-      "result": 921.6
+      "result": 923.2
     },
     "meal_bonus_Mcook": {
       "expression": "idleon.callFunction(\"MealBonus\", \"Mcook\")",
-      "result": 319664.6057159226
+      "result": 325467.03485585336
     },
     "summoning_win_bonus_15": {
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 15, 0)",
@@ -137,7 +137,7 @@
     },
     "lamp_bonuses_0": {
       "expression": "idleon.callFunction(\"Holes\", \"LampBonuses\", 0, 0)",
-      "result": 2793.75
+      "result": 3187.5
     },
     "alch_vials_6cookspd_bonus": {
       "expression": "idleon.getDNSM(\"AlchVials\").h[\"6CookSpd\"]",
@@ -161,7 +161,7 @@
     },
     "menagerie_cooking_multiplier": {
       "expression": "1 + idleon.callFunction(\"MenagerieStuff\", \"BoostQTY\", 4, 0) / 100",
-      "result": 1
+      "result": 6
     }
   },
   "errors": {}

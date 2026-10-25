@@ -1,9 +1,9 @@
 import { initResearchGridBonusRepo } from '../../../data/domain/data/ResearchGridBonusRepo';
 import { ResearchGrid } from '../../../data/domain/world-7/research';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { ExtractionResults, loadExtractionResults } from '../../utils/live-game-data-loader';
+import { ExtractionResults, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import {
-    OriginalGridInputs, OriginalGridUpgrade, assertPairing, extracted, numeric, resultName,
+    OriginalGridInputs, OriginalGridUpgrade, extracted, numeric, resultName,
 } from './grid-catalogue-test-helpers';
 const realDefinitions = initResearchGridBonusRepo().filter(square => square.data.name !== 'Name');
 
@@ -19,7 +19,7 @@ describe('Research Grid catalogue, Points, linked grants, and Shapes', () => {
 
     beforeAll(() => {
         results = loadExtractionResults(resultName);
-        assertPairing(results);
+        validateExtractionHealth(results);
         data = loadGameDataFromSave('latest');
         research = data.get('research') as ResearchGrid;
         original = extracted<OriginalGridUpgrade[]>(results, 'catalogue');

@@ -2,27 +2,27 @@
   "extractions": {
     "tome_bonus_0": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 0, 0)",
-      "result": 1495.2090020486505
+      "result": 1525.7897203040407
     },
     "tome_bonus_1": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 1, 0)",
-      "result": 559.7483452320384
+      "result": 572.3275046074751
     },
     "tome_bonus_2": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 2, 0)",
-      "result": 260.1260989162304
+      "result": 266.6126685778327
     },
     "tome_bonus_3": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 3, 0)",
-      "result": 922.4263224645649
+      "result": 988.709253067555
     },
     "tome_bonus_4": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 4, 0)",
-      "result": 96.87674027844456
+      "result": 101.97551608257322
     },
     "tome_bonus_5": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 5, 0)",
-      "result": 94.25413223140497
+      "result": 99.21487603305786
     },
     "tome_bonus_6": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 6, 0)",
@@ -34,7 +34,7 @@
     },
     "tome_bonus_score": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[84]",
-      "result": 44382
+      "result": 45611
     },
     "tome_bonus_unlocked_0": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[81][0]",
@@ -78,15 +78,15 @@
     },
     "tome_bonus_alchemy_str": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.W8",
-      "result": 922.4263224645649
+      "result": 988.709253067555
     },
     "tome_bonus_alchemy_agi": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.A9",
-      "result": 96.87674027844456
+      "result": 101.97551608257322
     },
     "tome_bonus_alchemy_wis": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.M9",
-      "result": 94.25413223140497
+      "result": 99.21487603305786
     }
   },
   "errors": {}

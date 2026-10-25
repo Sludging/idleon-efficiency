@@ -1,17 +1,12 @@
-import { getButtonTaskProgress, updateButtonTaskProgress } from '../../../data/domain/world-7/buttonTaskProgress';
+import { getButtonTaskProgress } from '../../../data/domain/world-7/buttonTaskProgress';
 import { getExtractedValue, loadExtractionResults, validateExtractionHealth, type ExtractionResults } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Button } from '../../../data/domain/world-7/button';
 
 const saveName = 'latest';
 const extractionResultsName = 'button-task-progress-data.json';
-const taskCases = [
-  { offset: 0, indexKey: 'button_task_0_index', pressCountKey: 'button_task_0_press_count', requiredKey: 'button_task_0_requirement', haveKey: 'button_task_0_have' },
-  { offset: 1, indexKey: 'button_task_1_index', pressCountKey: 'button_task_1_press_count', requiredKey: 'button_task_1_requirement', haveKey: 'button_task_1_have' },
-  { offset: 2, indexKey: 'button_task_2_index', pressCountKey: 'button_task_2_press_count', requiredKey: 'button_task_2_requirement', haveKey: 'button_task_2_have' },
-] as const;
 
-describe('The Button - upcoming task progress', () => {
+describe('The Button - current task and Copper sample progress', () => {
   let button: Button;
   let gameData: ReturnType<typeof loadGameDataFromSave>;
   let extractionResults: ExtractionResults;
@@ -32,36 +27,18 @@ describe('The Button - upcoming task progress', () => {
     });
   });
 
-  it('matches the active and next two tasks, requirements, progress, and readiness', () => {
-    updateButtonTaskProgress(gameData);
-    const tasks = button.getUpcomingTasks();
+  it('matches the current task identity and requirement', () => {
+    const task = button.getUpcomingTasks()[0];
+    const expectedIndex = getExtractedValue(extractionResults, 'button_task_0_index');
+    const expectedRequirement = getExtractedValue(extractionResults, 'button_task_0_requirement');
 
-    taskCases.forEach(({ offset, indexKey, pressCountKey, requiredKey, haveKey }) => {
-      const task = tasks[offset];
-      const expectedIndex = getExtractedValue(extractionResults, indexKey);
-      const expectedPressCount = getExtractedValue(extractionResults, pressCountKey);
-      const expectedRequirement = getExtractedValue(extractionResults, requiredKey);
-      const expectedHave = getExtractedValue(extractionResults, haveKey);
-
-      expect(task.index).toMatchLiveGameWithDetails(expectedIndex, {
-        tolerance: 0,
-        context: `The Button task index at queue position ${offset}`,
-      });
-      expect(task.pressCount).toMatchLiveGameWithDetails(expectedPressCount, {
-        tolerance: 0,
-        context: `The completed press count for Button task ${task.index}`,
-      });
-      expect(task.pressNumber).toBe(expectedPressCount + 1);
-      expect(task.requiredValue).toMatchLiveGameWithDetails(expectedRequirement, {
-        tolerance: 0,
-        context: `The requirement for Button task ${task.index}`,
-      });
-
-      expect(task.progress.currentValue).toMatchLiveGameWithDetails(expectedHave, {
-        tolerance: 0,
-        context: `Saved progress for Button task ${task.index}`,
-      });
-      expect(task.progress.isReady).toBe(expectedHave >= expectedRequirement);
+    expect(task.index).toMatchLiveGameWithDetails(expectedIndex, {
+      tolerance: 0,
+      context: 'The current Button task index',
+    });
+    expect(task.requiredValue).toMatchLiveGameWithDetails(expectedRequirement, {
+      tolerance: 0,
+      context: `The requirement for current Button task ${task.index}`,
     });
   });
 

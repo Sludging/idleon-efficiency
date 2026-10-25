@@ -2,7 +2,7 @@
   "extractions": {
     "worship_efficiency": {
       "expression": "idleon.callFunction(\"skillstats2\", \"WorshipEfficiency\")",
-      "result": 55623755267.71321
+      "result": 61643191130.11375
     },
     "worship_talent_532": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 532)",
@@ -14,7 +14,7 @@
     },
     "worship_statue_16": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven16\")",
-      "result": 17620.293519359995
+      "result": 19045.956483268597
     },
     "worship_talent_445": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 445)",

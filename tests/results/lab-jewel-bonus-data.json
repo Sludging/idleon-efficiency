@@ -62,7 +62,7 @@
     },
     "jewel_14_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 114)",
-      "result": 921.6
+      "result": 923.2
     },
     "jewel_15_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 115)",

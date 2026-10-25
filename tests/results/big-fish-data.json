@@ -107,7 +107,7 @@
     },
     "big_fish_family_level": {
       "expression": "idleon.getAttr(\"GetPlayersUsernames\").reduce((sum, name) => sum + Number(idleon.getAttr(\"PlayerDATABASE\").h[name].h.Lv0[0]), 0)",
-      "result": 15014
+      "result": 15328
     },
     "big_fish_bonus_level_0": {
       "expression": "idleon.getAttr(\"Spelunk\")[11][0]",

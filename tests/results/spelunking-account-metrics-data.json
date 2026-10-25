@@ -216,30 +216,33 @@
           "Dead_Tree",
           "Barbed_Wire",
           "Persisting_Time",
-          "Small_Sonar"
+          "Small_Sonar",
+          "Cherno_Bile",
+          "Labeled_Waste",
+          "Incognisnow"
         ],
         "chapterLevels": [
-          261,
-          33,
+          291,
+          108,
           56,
           0,
-          107,
+          198,
           183,
-          111,
+          139,
           0,
-          39,
+          87,
           56,
           0,
           0,
-          140,
-          107,
+          187,
+          120,
           22,
           0,
-          172,
+          237,
+          60,
           0,
           0,
-          0,
-          59,
+          136,
           21,
           0,
           0,
@@ -281,9 +284,9 @@
           0
         ],
         "grandCounts": [
-          4,
           5,
-          3,
+          5,
+          5,
           4,
           4,
           2,
@@ -293,7 +296,7 @@
           0
         ],
         "manicDepths": [
-          5,
+          19,
           5,
           5,
           11,
@@ -304,8 +307,8 @@
           10,
           0
         ],
-        "overstimLevel": 25,
-        "trackometerLevel": 8,
+        "overstimLevel": 11,
+        "trackometerLevel": 9,
         "savedManicToggle": 0,
         "spelunkingLevelPlayer3": 224
       }
@@ -314,20 +317,20 @@
       "expression": "(() => { const g = idleon.getAttr(\"PixelHelperActor\")[26].behaviors.getBehavior(\"ActorEvents_713\")._GenINFO; if (g[70] == null || g[90] == null || Number(g[70]) !== 0 || Number(g[90]) !== 0 || !Array.isArray(g[107]) || g[107].length !== 13 || Array.from(g[107]).some(effect => effect == null || Number(effect) !== 0)) throw new Error(\"Saved Amber preview requires native depth zero, zero destroyed objects, and all 13 active effects zero\"); return idleon.callFunction(\"Spelunk\", \"AmberGain\", 0, 0); })()",
       "result": {
         "type": "large_number",
-        "value": "2271887656710422000"
+        "value": "2052025228540030700"
       }
     },
     "spelunking_efficiency_player_3": {
       "expression": "idleon.callFunction(\"Spelunk\", \"SpelunkingEfficiency\", 0, 0)",
-      "result": 514111526.14841
+      "result": 1486824991.4107401
     },
     "overstim_level": {
       "expression": "Number(idleon.getAttr(\"Spelunk\")[4][1])",
-      "result": 25
+      "result": 11
     },
     "overstim_threshold": {
       "expression": "idleon.callFunction(\"Spelunk\", \"OverstimQtyREQ\", 0, 0)",
-      "result": 70564.10014866822
+      "result": 1792.1603940370005
     },
     "overstim_bonus_per_level": {
       "expression": "idleon.callFunction(\"Spelunk\", \"OverstimBonus_PerLV\", 0, 0)",
@@ -335,7 +338,7 @@
     },
     "overstim_bonus": {
       "expression": "idleon.callFunction(\"Spelunk\", \"OverstimBonus\", 0, 0)",
-      "result": 4925
+      "result": 2167
     },
     "overstim_fill_bonus_percent": {
       "expression": "idleon.callFunction(\"Spelunk\", \"OverstimFillRate\", 0, 0)",
@@ -348,17 +351,17 @@
     "native_stamina_regen_per_hour_by_player": {
       "expression": "idleon.getAttr(\"GetPlayersUsernames\").map((_, player) => idleon.callFunction(\"Spelunk\", \"StaminaRegenRate\", player, 0))",
       "result": [
-        285.2017063389306,
-        285.2017063389306,
-        285.2017063389306,
-        285.2017063389306,
-        285.2017063389306,
-        285.2017063389306,
-        285.2017063389306,
-        285.2017063389306,
-        285.2017063389306,
-        285.2017063389306,
-        285.2017063389306
+        25.92742784899369,
+        25.92742784899369,
+        25.92742784899369,
+        25.92742784899369,
+        25.92742784899369,
+        25.92742784899369,
+        25.92742784899369,
+        25.92742784899369,
+        25.92742784899369,
+        25.92742784899369,
+        25.92742784899369
       ]
     },
     "overstim_unlocked": {
@@ -367,7 +370,7 @@
     },
     "overstim_potential_fill_per_hour": {
       "expression": "(() => { if (idleon.callFunction(\"Spelunk\", \"OverstimUnlocked\", 0, 0) !== 1) return 0; return idleon.getAttr(\"GetPlayersUsernames\").reduce((sum, _, player) => sum + idleon.callFunction(\"Spelunk\", \"StaminaRegenRate\", player, 0), 0) * (1 + idleon.callFunction(\"Spelunk\", \"OverstimFillRate\", 0, 0) / 100); })()",
-      "result": 3137.218769728237
+      "result": 285.20170633893065
     },
     "saved_manic_enabled": {
       "expression": "Number(Number(idleon.getAttr(\"Spelunk\")[4][10]) >= 1)",
@@ -375,31 +378,31 @@
     },
     "tunnel_0_next_grand_chance": {
       "expression": "(() => { const t = 0; const s = idleon.getAttr(\"Spelunk\"); const rocks = idleon.getAttr(\"CustomLists\").h.SpelunkRocks[t]; const effects = idleon.getAttr(\"PixelHelperActor\")[26].behaviors.getBehavior(\"ActorEvents_713\")._GenINFO[107]; if (!Array.isArray(effects) || effects.length !== 13 || Number(effects[9]) !== 0) throw new Error(\"Saved Grand chance requires native Grand elixir effect zero\"); if (t >= idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0) || !s[6].includes(String(rocks[rocks.length - 2][0])) || idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0) < 1 || Number(s[44][t]) >= 10) return null; return idleon.callFunction(\"Spelunk\", \"GrandDiscoveries_FindChance\", t, 0); })()",
-      "result": 0.0001995815317793455
+      "result": 0.00012665809079957468
     },
     "tunnel_1_next_grand_chance": {
       "expression": "(() => { const t = 1; const s = idleon.getAttr(\"Spelunk\"); const rocks = idleon.getAttr(\"CustomLists\").h.SpelunkRocks[t]; const effects = idleon.getAttr(\"PixelHelperActor\")[26].behaviors.getBehavior(\"ActorEvents_713\")._GenINFO[107]; if (!Array.isArray(effects) || effects.length !== 13 || Number(effects[9]) !== 0) throw new Error(\"Saved Grand chance requires native Grand elixir effect zero\"); if (t >= idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0) || !s[6].includes(String(rocks[rocks.length - 2][0])) || idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0) < 1 || Number(s[44][t]) >= 10) return null; return idleon.callFunction(\"Spelunk\", \"GrandDiscoveries_FindChance\", t, 0); })()",
-      "result": 0.00009979076588967275
+      "result": 0.00012665809079957468
     },
     "tunnel_2_next_grand_chance": {
       "expression": "(() => { const t = 2; const s = idleon.getAttr(\"Spelunk\"); const rocks = idleon.getAttr(\"CustomLists\").h.SpelunkRocks[t]; const effects = idleon.getAttr(\"PixelHelperActor\")[26].behaviors.getBehavior(\"ActorEvents_713\")._GenINFO[107]; if (!Array.isArray(effects) || effects.length !== 13 || Number(effects[9]) !== 0) throw new Error(\"Saved Grand chance requires native Grand elixir effect zero\"); if (t >= idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0) || !s[6].includes(String(rocks[rocks.length - 2][0])) || idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0) < 1 || Number(s[44][t]) >= 10) return null; return idleon.callFunction(\"Spelunk\", \"GrandDiscoveries_FindChance\", t, 0); })()",
-      "result": 0.000399163063558691
+      "result": 0.00012665809079957468
     },
     "tunnel_3_next_grand_chance": {
       "expression": "(() => { const t = 3; const s = idleon.getAttr(\"Spelunk\"); const rocks = idleon.getAttr(\"CustomLists\").h.SpelunkRocks[t]; const effects = idleon.getAttr(\"PixelHelperActor\")[26].behaviors.getBehavior(\"ActorEvents_713\")._GenINFO[107]; if (!Array.isArray(effects) || effects.length !== 13 || Number(effects[9]) !== 0) throw new Error(\"Saved Grand chance requires native Grand elixir effect zero\"); if (t >= idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0) || !s[6].includes(String(rocks[rocks.length - 2][0])) || idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0) < 1 || Number(s[44][t]) >= 10) return null; return idleon.callFunction(\"Spelunk\", \"GrandDiscoveries_FindChance\", t, 0); })()",
-      "result": 0.0001995815317793455
+      "result": 0.00025331618159914936
     },
     "tunnel_4_next_grand_chance": {
       "expression": "(() => { const t = 4; const s = idleon.getAttr(\"Spelunk\"); const rocks = idleon.getAttr(\"CustomLists\").h.SpelunkRocks[t]; const effects = idleon.getAttr(\"PixelHelperActor\")[26].behaviors.getBehavior(\"ActorEvents_713\")._GenINFO[107]; if (!Array.isArray(effects) || effects.length !== 13 || Number(effects[9]) !== 0) throw new Error(\"Saved Grand chance requires native Grand elixir effect zero\"); if (t >= idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0) || !s[6].includes(String(rocks[rocks.length - 2][0])) || idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0) < 1 || Number(s[44][t]) >= 10) return null; return idleon.callFunction(\"Spelunk\", \"GrandDiscoveries_FindChance\", t, 0); })()",
-      "result": 0.0001995815317793455
+      "result": 0.00025331618159914936
     },
     "tunnel_5_next_grand_chance": {
       "expression": "(() => { const t = 5; const s = idleon.getAttr(\"Spelunk\"); const rocks = idleon.getAttr(\"CustomLists\").h.SpelunkRocks[t]; const effects = idleon.getAttr(\"PixelHelperActor\")[26].behaviors.getBehavior(\"ActorEvents_713\")._GenINFO[107]; if (!Array.isArray(effects) || effects.length !== 13 || Number(effects[9]) !== 0) throw new Error(\"Saved Grand chance requires native Grand elixir effect zero\"); if (t >= idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0) || !s[6].includes(String(rocks[rocks.length - 2][0])) || idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0) < 1 || Number(s[44][t]) >= 10) return null; return idleon.callFunction(\"Spelunk\", \"GrandDiscoveries_FindChance\", t, 0); })()",
-      "result": 0.000798326127117382
+      "result": 0.0010132647263965974
     },
     "tunnel_6_next_grand_chance": {
       "expression": "(() => { const t = 6; const s = idleon.getAttr(\"Spelunk\"); const rocks = idleon.getAttr(\"CustomLists\").h.SpelunkRocks[t]; const effects = idleon.getAttr(\"PixelHelperActor\")[26].behaviors.getBehavior(\"ActorEvents_713\")._GenINFO[107]; if (!Array.isArray(effects) || effects.length !== 13 || Number(effects[9]) !== 0) throw new Error(\"Saved Grand chance requires native Grand elixir effect zero\"); if (t >= idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0) || !s[6].includes(String(rocks[rocks.length - 2][0])) || idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0) < 1 || Number(s[44][t]) >= 10) return null; return idleon.callFunction(\"Spelunk\", \"GrandDiscoveries_FindChance\", t, 0); })()",
-      "result": 0.003193304508469528
+      "result": 0.00405305890558639
     },
     "tunnel_7_next_grand_chance": {
       "expression": "(() => { const t = 7; const s = idleon.getAttr(\"Spelunk\"); const rocks = idleon.getAttr(\"CustomLists\").h.SpelunkRocks[t]; const effects = idleon.getAttr(\"PixelHelperActor\")[26].behaviors.getBehavior(\"ActorEvents_713\")._GenINFO[107]; if (!Array.isArray(effects) || effects.length !== 13 || Number(effects[9]) !== 0) throw new Error(\"Saved Grand chance requires native Grand elixir effect zero\"); if (t >= idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0) || !s[6].includes(String(rocks[rocks.length - 2][0])) || idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0) < 1 || Number(s[44][t]) >= 10) return null; return idleon.callFunction(\"Spelunk\", \"GrandDiscoveries_FindChance\", t, 0); })()",

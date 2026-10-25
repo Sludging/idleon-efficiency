@@ -16,6 +16,37 @@ talent-helper result is not used as an oracle for the earlier Family Guy input.
 Pre-ES inputs exclude Elemental Sorcerer Family levels but include applicable
 Super Talent levels.
 
+Bubba progression tests compare the next bonus, purchase cost, and affordability.
+They do not assert the continuously changing raw meat balance.
+
+Summoning stone tests compare native win counts and upgrade effects without
+pinning boss HP to the progression of a particular saved account snapshot.
+
+Gaming prepares its account level from the highest parsed player Gaming skill
+before applying Superbit effects, Palette calculations, and harvest multipliers.
+
+Button queue tests compare only the dynamic current task and its requirement
+with native APIs. Copper sample progress has a separate matching calculation
+comparison; queue progress and readiness do not mix active-character game values
+with the website's account-best projections.
+
+Class EXP tests compare the final multiplier with native `ExpMulti(0)` and check
+its direct inputs separately. Clamworks promotion reward text does not supply an
+extra class EXP factor absent from the native calculation.
+
+Lab Mainframe 11 uses Storage's saved `GreenStacks` credit count, not the number
+of current chest entries holding at least 10 million items. Current storage
+quantities and inventory-based stack indicators remain unchanged.
+
+The full normal-world maximum-damage comparison uses the dedicated
+`player-maximum-damage.json` extraction config. Its native capture requires a town
+and records the active player index, map ID, and internal map name. The test
+requires a town save matching the captured player and map. Unsuitable captures
+fail explicitly; the test does not skip or compare restricted-map damage.
+Class EXP and damage parameter extractions remain independent of this requirement.
+Town eligibility is a location prerequisite, not proof that every temporary buff
+is absent.
+
 ## Automatic Domain Class Reference Report
 
 `scripts/domain-class-references.ts` inventories class declarations in editable
