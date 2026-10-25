@@ -128,6 +128,7 @@ export class Player {
     allPresetSuperTalentIndexes: Set<number> = new Set();
     finalTalentInputs!: TalentLevelInputs;
     beforeActiveBubbleMultiplierTalentInputs!: TalentLevelInputs;
+    private appliedTalentInputs!: TalentLevelInputs;
     talentPoints: TalentPoints[] = [];
     postOffice: Box[] = initPostOffice();
     activeBubblesString: string[] = [];
@@ -339,7 +340,12 @@ export class Player {
         return talent.getBonusAtLevel(talent.pointsSpent + extraLevels);
     }
 
+    get currentTalentInputs(): Readonly<TalentLevelInputs> {
+        return this.appliedTalentInputs;
+    }
+
     applyTalentLevelInputs(inputs: TalentLevelInputs): void {
+        this.appliedTalentInputs = inputs;
         for (const talent of this.talents) {
             const extraLevels = talent.getExtraLevels(inputs, this.activeSuperTalentIndexes.has(talent.skillIndex));
             talent.level = talent.pointsSpent + (talent.pointsSpent > 0.5 ? extraLevels : 0);
@@ -1169,12 +1175,13 @@ const getPlayerTalentLevelInputs = (
     };
 };
 
-// Family captures Family Guy before the Elemental Sorcerer and Super Talent additions.
+// Family captures Family Guy with Super Talent levels before Elemental Sorcerer additions.
 export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const divinity = data.get("divinity") as Divinity;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
     for (const player of players) {
-        const inputs = getPlayerTalentLevelInputs(data, player, 0, divinity.gods[1].getMinorLinkBonus(player), 0, 9999);
+        const inputs = getPlayerTalentLevelInputs(data, player, 0, divinity.gods[1].getMinorLinkBonus(player), legendTalents.superTalentBonusLevels, 9999);
         player.extraLevelsFromTalent = Math.floor(inputs.eliteTalentLevels);
         player.extraLevelsFromAchievements = inputs.achievementTalentLevels;
         player.extraLevelsFromBear = Math.ceil(inputs.minorLinkTalentLevels);

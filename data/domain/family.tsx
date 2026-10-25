@@ -2,7 +2,7 @@ import { lavaFunc, round } from "../utility";
 import { Domain, RawData } from "./base/domain";
 import { Item } from "./items";
 import { Player } from "./player";
-import { ClassIndex } from "./talents";
+import { ClassIndex, Talent } from "./talents";
 
 
 
@@ -214,7 +214,11 @@ export const calculateFamily = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
 
     family.classBonus.clear();
-    const highestFamilyGuy = players.reduce((highest, player) => Math.max(highest, player.getTalentBonus(144)), 0);
+    // Use the best recipient's shared modifiers with Super Talent levels before Elemental Sorcerer levels apply.
+    let highestFamilyGuy = 0;
+    for (const recipient of players) {
+        highestFamilyGuy = Math.max(highestFamilyGuy, Talent.getAccountTalentBonus(players, 144, recipient.currentTalentInputs));
+    }
     const playerIDs = players.map(player => player.playerID);
 
     players.forEach(player => {

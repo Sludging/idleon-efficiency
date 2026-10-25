@@ -6,67 +6,67 @@
     },
     "family_bonus_4": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[4]",
-      "result": 266
+      "result": 271
     },
     "family_bonus_6": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[6]",
-      "result": 5.57325746799431
+      "result": 5.580419580419581
     },
     "family_bonus_8": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[8]",
-      "result": 4.175461741424802
+      "result": 4.188311688311688
     },
     "family_bonus_14": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[14]",
-      "result": 277
+      "result": 280
     },
     "family_bonus_16": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[16]",
-      "result": 23.292349726775956
+      "result": 23.306233062330623
     },
     "family_bonus_18": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[18]",
-      "result": 49.62572077581689
+      "result": 49.68392120934494
     },
     "family_bonus_20": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[20]",
-      "result": 17.606382978723403
+      "result": 17.62532981530343
     },
     "family_bonus_24": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[24]",
-      "result": 59.79516409394618
+      "result": 59.89728652460524
     },
     "family_bonus_28": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[28]",
-      "result": 36.74418604651163
+      "result": 36.87861271676301
     },
     "family_bonus_32": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[32]",
-      "result": 8.135840653222814
+      "result": 8.187235428199283
     },
     "family_bonus_38": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[38]",
-      "result": 283
+      "result": 285
     },
     "family_bonus_40": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[40]",
-      "result": 35.306874557051735
+      "result": 35.444519166106254
     },
     "family_bonus_42": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[42]",
-      "result": 27.991967871485944
+      "result": 28.00531914893617
     },
     "family_bonus_44": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[44]",
-      "result": 23.50279405047491
+      "result": 23.664337063588494
     },
     "family_bonus_50": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[50]",
-      "result": 4.413298565840939
+      "result": 4.417098445595855
     },
     "family_bonus_58": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[58]",
-      "result": 1.8651384909264563
+      "result": 1.8676806083650188
     },
     "family_bonus_62": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[62]",
@@ -74,7 +74,7 @@
     },
     "family_bonus_64": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[64]",
-      "result": 217
+      "result": 225
     },
     "family_bonus_66": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[66]",
@@ -82,7 +82,7 @@
     },
     "family_bonus_68": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[68]",
-      "result": 15.64134495641345
+      "result": 15.770392749244714
     },
     "family_bonus_72": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[72]",
@@ -94,11 +94,7 @@
     },
     "family_guy_talent_144": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 144)",
-      "result": 33.388429752066116
-    },
-    "family_guy_special_144": {
-      "expression": "idleon.callFunction(\"getbonus2\", 1, 144, -1)",
-      "result": 33.399339933993396
+      "result": 33.41021416803954
     }
   },
   "errors": {}
