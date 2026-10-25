@@ -3,7 +3,7 @@ import { BuildingBase } from "../../data/BuildingRepo";
 import { initRandoListRepo } from "../../data/RandoListRepo";
 import { ImageData } from "../../imageData";
 import { BuildingModel } from "../../model/buildingModel";
-import { ComponentModel } from "../../model/componentModel";
+import type { ComponentModel } from "../../model/componentModel";
 
 export class Building {
     description: string
@@ -33,14 +33,11 @@ export class Building {
         this.bonus = data.bonus;
         this.maxLvl = data.maxLvl;
         this.baseMaxLvl = data.maxLvl;
-        this.lvlUpReq = data.lvlUpReq.map(requirement => {
-            if (!("item" in requirement) || typeof requirement.item !== "string"
-                || !("quantity" in requirement) || typeof requirement.quantity !== "number") {
-                throw new Error(`Building ${data.name} has invalid level-up requirement data.`);
-            }
-
-            return { item: requirement.item, quantity: requirement.quantity };
-        });
+        const requirements = data.lvlUpReq as ComponentModel[];
+        this.lvlUpReq = requirements.map(requirement => ({
+            item: requirement.item,
+            quantity: requirement.quantity
+        }));
         this.costIncrement = data.costInc;
         this.bonusInc = data.bonusInc;
         this.misc = data.misc;

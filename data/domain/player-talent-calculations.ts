@@ -30,7 +30,7 @@ const getSecondCurveTalentBonus = (player: Player, skillIndex: number): number =
 const getTalentCalculationMap31 = (player: Player, deathnote: Deathnote): number => {
     const killsLeft = deathnote.getKillsLeftToAdvance(player.playerID, 100);
     if (killsLeft === undefined) {
-        throw new Error(`Missing portal progress for player ${player.playerID}, map 100.`);
+        return 0;
     }
 
     let minimumSkillLevel = 1000;
@@ -73,7 +73,9 @@ const getTalentCalculationMap110 = (player: Player, deathnote: Deathnote): numbe
     return Math.min(fightingMapsWithAtLeast100KRemainingKills, getSecondCurveTalentBonus(player, 110));
 };
 
-export const getTalentCalculationBonus = (data: Map<string, any>, player: Player, selector: number): number => {
+export type TalentCalculationSelector = 31 | 57 | 110 | 125 | 305 | 470 | 485 | 656;
+
+export const getTalentCalculationBonus = (data: Map<string, unknown>, player: Player, selector: TalentCalculationSelector): number => {
 
     switch (selector) {
         case 31: {
@@ -150,7 +152,5 @@ export const getTalentCalculationBonus = (data: Map<string, any>, player: Player
             }
             return player.getTalentBonusAtInputs(656, player.finalTalentInputs) * completedDreamChallenges;
         }
-        default:
-            throw new Error(`Unsupported TalentCalc selector ${selector}.`);
     }
 };

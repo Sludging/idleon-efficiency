@@ -37,7 +37,8 @@ import { Storage } from "./storage";
 import { Lab } from "./world-4/lab";
 import { GoldenFood } from "./golden-food";
 import { Bribe } from "./world-1/bribes";
-import { getStatCards, type SkillStatsDNSkill } from "./player-stats";
+import { getStatCards } from "./player-stats";
+import type { SkillStatsDNSkill } from "./player-stats";
 import { lavaLog } from "../utility";
 import type { Sneaking } from "./world-6/sneaking";
 import { Meritocraty } from "./world-7/meritocraty";
@@ -57,6 +58,24 @@ export class Skilling extends Domain {
 
     private allSkillExperienceMultiplier = 1;
 
+    private resetEfficiencies(charCount: number): void {
+        this.allEfficiencies.clear();
+        this.skillEfficiencies.clear();
+        this.allBaseSkillEfficiencies.clear();
+
+        for (let playerID = 0; playerID < charCount; playerID++) {
+            this.allEfficiencies.set(playerID, 1);
+            this.allBaseSkillEfficiencies.set(playerID, 0);
+            this.skillEfficiencies.set(playerID, {
+                [SkillsIndex.Mining]: 0,
+                [SkillsIndex.Chopping]: 0,
+                [SkillsIndex.Fishing]: 0,
+                [SkillsIndex.Catching]: 0,
+                [SkillsIndex.Worship]: 0,
+            });
+        }
+    }
+
     updateAllSkillExperienceMultiplier(
         meritocracyBonus: number,
         legendPointsBonus: number,
@@ -73,19 +92,11 @@ export class Skilling extends Domain {
     }
 
     getSkillEfficiency(playerID: number, skill: SkillingSkill): number {
-        const result = this.skillEfficiencies.get(playerID)?.[skill];
-        if (result === undefined) {
-            throw new Error(`Skill efficiency has not been calculated for player ${playerID} and skill ${skill}`);
-        }
-        return result;
+        return this.skillEfficiencies.get(playerID)![skill];
     }
 
     getAllBaseSkillEfficiency(player: Player): number {
-        const result = this.allBaseSkillEfficiencies.get(player.playerID);
-        if (result === undefined) {
-            throw new Error(`AllBaseSkillEff has not been calculated for player ${player.playerID}`);
-        }
-        return result;
+        return this.allBaseSkillEfficiencies.get(player.playerID)!;
     }
 
     updateSkillEfficiencies(data: Map<string, any>): void {
@@ -111,8 +122,6 @@ export class Skilling extends Domain {
         const fishingRooBonus = (data.get("poppy") as Poppy).getGlobalBonus(0);
         const fishingBribe = bribes.find(bribe => bribe.bribeIndex === 29)!.getBonus();
 
-        this.skillEfficiencies.clear();
-        this.allBaseSkillEfficiencies.clear();
         for (const player of players) {
             const postOfficeBox = player.postOffice.find(box => box.index === 20)!;
             const allBaseSkillEfficiency = breeding.shinyBonuses.find(bonus => bonus.data.index === 22)!.getBonus()
@@ -294,20 +303,17 @@ export class Skilling extends Domain {
         return [];
     }
 
-    init(_allItems: Item[], _charCount: number): Skilling {
+    init(_allItems: Item[], charCount: number): Skilling {
+        this.resetEfficiencies(charCount);
         return this;
     }
 
-    parse(_data: Map<string, any>): void {
-        return;
+    parse(data: Map<string, any>): void {
+        this.resetEfficiencies(data.get("charCount") as number);
     }
 
     getAllEfficiencies(player: Player): number {
-        const result = this.allEfficiencies.get(player.playerID);
-        if (result === undefined) {
-            throw new Error(`AllEfficiencies has not been calculated for player ${player.playerID}`);
-        }
-        return result;
+        return this.allEfficiencies.get(player.playerID)!;
     }
 
     updateAllEfficiencies(data: Map<string, any>): void {
@@ -348,7 +354,6 @@ export class Skilling extends Domain {
         const prayer1 = prayers.find(prayer => prayer.index === 1);
         const prayer17 = prayers.find(prayer => prayer.index === 17);
 
-        this.allEfficiencies.clear();
         for (const player of players) {
             // Quest completion contributes 0.1% each, capped by this character's Talent 617 bonus.
             const questBonus = Math.min(0.1 * totalQuestsComplete, player.getTalentBonus(617));

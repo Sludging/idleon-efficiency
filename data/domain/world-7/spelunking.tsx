@@ -125,6 +125,7 @@ export interface SpelunkingCharacterMetricInputs {
 
 export interface SpelunkingPlayerMetricInputs {
     playerID: number;
+    playerName: string;
     skillLevel: number;
     allEfficiencyMultiplier: number;
     efficiencyTalentMultiplier: number;
@@ -134,7 +135,36 @@ export interface SpelunkingPlayerMetricInputs {
 export interface CaveNodeHarvestOutcome {
     eligible: boolean;
     harvestChance: number;
-    pagesPerDrop: number | undefined;
+    pagesPerDrop: number;
+}
+
+const NEUTRAL_CAVE_NODE_HARVEST: Readonly<CaveNodeHarvestOutcome> = Object.freeze({
+    eligible: false,
+    harvestChance: 0,
+    pagesPerDrop: 0,
+});
+
+export class SpelunkingCharacterResults {
+    playerName: string = "";
+    skillLevel: number = 0;
+    efficiency: number = 0;
+    readonly grandDiscoveryChances: number[];
+    readonly caveNodeHarvests: Readonly<CaveNodeHarvestOutcome>[];
+
+    constructor(public readonly playerID: number, tunnels: readonly Tunnel[], chapters: readonly Chapter[]) {
+        this.grandDiscoveryChances = tunnels.map(() => 0);
+        this.caveNodeHarvests = chapters.map(() => NEUTRAL_CAVE_NODE_HARVEST);
+    }
+}
+
+export class SpelunkingGrandDiscoveryResults {
+    playerName: string = "";
+    skillLevel: number = 0;
+    readonly chances: number[];
+
+    constructor(tunnels: readonly Tunnel[]) {
+        this.chances = tunnels.map(() => 0);
+    }
 }
 
 interface SpelunkingCaveNodeInputs {
@@ -969,10 +999,8 @@ export class Spelunking extends Domain {
     stamina: SpelunkingStamina[] = []
     persistentPower: number = 1;
     savedAmberGainMultiplier: number = 1;
-    private readonly efficiencies = new Map<number, number>();
-    private readonly grandDiscoveryBases = new Map<number, number>();
-    grandDiscoveryPlayerID: number | undefined;
-    private readonly caveNodeHarvests = new Map<number, Map<number, Readonly<CaveNodeHarvestOutcome>>>();
+    characters: SpelunkingCharacterResults[] = [];
+    grandDiscovery: SpelunkingGrandDiscoveryResults = new SpelunkingGrandDiscoveryResults([]);
     dailyReadLimit: number = 5;
     dailyReadsUsed: number = 0;
     readonly baseHourlyRecharge: number = 5;
@@ -1079,37 +1107,6 @@ export class Spelunking extends Domain {
         return this.grandDiscoveryUpgrade.data.bonusPerLevel * this.grandDiscoveryUpgrade.purchasedLevel;
     }
 
-    getEfficiency(playerID: number): number {
-        const efficiency = this.efficiencies.get(playerID);
-        if (efficiency === undefined) {
-            throw new Error(`Spelunking efficiency has not been calculated for player ${playerID}`);
-        }
-        return efficiency;
-    }
-
-    getCaveNodeHarvest(chapterIndex: number, playerID: number): Readonly<CaveNodeHarvestOutcome> {
-        const harvests = this.caveNodeHarvests.get(playerID);
-        if (harvests === undefined) {
-            throw new Error(`Spelunking Cave Node harvests have not been calculated for player ${playerID}`);
-        }
-        const harvest = harvests.get(chapterIndex);
-        if (harvest === undefined) {
-            throw new Error(`Spelunking Cave Node chapter ${chapterIndex} does not exist`);
-        }
-        return harvest;
-    }
-
-    getNextGrandDiscoveryChance(tunnelIndex: number, playerID: number): number | undefined {
-        const tunnel = this.tunnels[tunnelIndex];
-        if (!tunnel.grandEligible) {
-            return undefined;
-        }
-        const base = this.grandDiscoveryBases.get(playerID);
-        if (base === undefined) {
-            throw new Error(`Spelunking Grand chance has not been calculated for player ${playerID}`);
-        }
-        return base * Math.pow(2, -tunnel.grandSummary.found);
-    }
 
     get ordinarySummary(): CollectionSummary {
         const found = this.getTotalDiscoveries();
@@ -1182,10 +1179,6 @@ export class Spelunking extends Domain {
     init(allItems: Item[], charCount: number, repositories: StaticRepositories) {
         this.persistentPower = 1;
         this.savedAmberGainMultiplier = 1;
-        this.efficiencies.clear();
-        this.grandDiscoveryBases.clear();
-        this.grandDiscoveryPlayerID = undefined;
-        this.caveNodeHarvests.clear();
         this.chapters = Chapter.fromBase(initSpelunkingChapterRepo(), allItems);
         this.upgrades = Upgrade.fromBase(initSpelunkingUpgradeRepo());
         this.tools = SpelunkingTool.fromBase(initSpelunkingToolRepo());
@@ -1214,6 +1207,7 @@ export class Spelunking extends Domain {
         this.grandDiscoveryUpgrade = this.upgrades[GRAND_DISCOVERY_UPGRADE_INDEX];
         this.tunnels = Tunnel.fromBase(initSpelunkingTunnelRepo(), this, metadata.itemDrops);
         this.stamina = Array.from({ length: charCount }, (_, playerID) => new SpelunkingStamina(playerID));
+        this.resetCharacterMetrics();
         this.dailyReadLimit = 5;
         this.dailyReadsUsed = 0;
         const bubble = repositories.get("Bubble")
@@ -1288,18 +1282,15 @@ export class Spelunking extends Domain {
         return this;
     }
 
-    parse(data: Map<string, any>): void {
+    parse(data: Map<string, unknown>): void {
         const spelunking = data.get(this.getDataKey()) as Spelunking;
         spelunking.persistentPower = 1;
         spelunking.savedAmberGainMultiplier = 1;
-        spelunking.efficiencies.clear();
-        spelunking.grandDiscoveryBases.clear();
-        spelunking.grandDiscoveryPlayerID = undefined;
-        spelunking.caveNodeHarvests.clear();
         const charCount = data.get("charCount") as number;
         spelunking.stamina = Array.from({ length: charCount }, (_, playerID) =>
             spelunking.stamina.find(stamina => stamina.playerID === playerID) ?? new SpelunkingStamina(playerID)
         );
+        spelunking.resetCharacterMetrics();
         const spelunkingData = (data.get("Spelunk") ?? []) as unknown[][];
         spelunking.mineheadDepthChargeCellLevel = Number((spelunkingData[18] as unknown[] | undefined)?.[40] ?? 0);
         const savedStamina = (spelunkingData[3] ?? []) as (number | string)[];
@@ -1433,19 +1424,25 @@ export class Spelunking extends Domain {
             * (1 + this.upgrades[21].sourceBonus / 150);
     }
 
+    private resetCharacterMetrics(): void {
+        this.characters = this.stamina.map(stamina =>
+            new SpelunkingCharacterResults(stamina.playerID, this.tunnels, this.chapters)
+        );
+        this.grandDiscovery = new SpelunkingGrandDiscoveryResults(this.tunnels);
+    }
+
     prepareCharacterMetrics(
         inputs: SpelunkingCharacterMetricInputs,
         players: readonly SpelunkingPlayerMetricInputs[]
     ): void {
-        this.efficiencies.clear();
-        this.grandDiscoveryBases.clear();
-        this.grandDiscoveryPlayerID = undefined;
-        this.caveNodeHarvests.clear();
-        let highestSpelunkingLevel: number | undefined;
+        this.resetCharacterMetrics();
+        let grandCharacter: SpelunkingCharacterResults | undefined;
         for (const player of players) {
-            if (highestSpelunkingLevel === undefined || player.skillLevel > highestSpelunkingLevel) {
-                highestSpelunkingLevel = player.skillLevel;
-                this.grandDiscoveryPlayerID = player.playerID;
+            const character = this.characters[player.playerID];
+            character.playerName = player.playerName;
+            character.skillLevel = player.skillLevel;
+            if (grandCharacter === undefined || player.skillLevel > grandCharacter.skillLevel) {
+                grandCharacter = character;
             }
             const efficiency = (10 + (this.chapters[0].bonuses[0].getBonus()
                 + this.chapters[1].bonuses[0].getBonus()))
@@ -1457,7 +1454,7 @@ export class Spelunking extends Domain {
                 * (1 + (inputs.efficiencyStampBonus
                     + (player.efficiencyCardBonus
                         + (inputs.efficiencyVialBonus + inputs.efficiencyBubbleBonus))) / 100);
-            this.efficiencies.set(player.playerID, efficiency);
+            character.efficiency = efficiency;
 
             const grandBase = 0.00004
                 * (1 + this.upgrades[43].sourceBonus / 100)
@@ -1469,7 +1466,24 @@ export class Spelunking extends Domain {
                 * Math.max(1, inputs.grandTalentMultiplier)
                 * (1 + this.upgrades[55].sourceBonus / 100)
                 * Math.max(1, this.chapters[6].bonuses[1].getBonus());
-            this.grandDiscoveryBases.set(player.playerID, grandBase);
+            for (const tunnel of this.tunnels) {
+                character.grandDiscoveryChances[tunnel.index] = tunnel.grandEligible
+                    ? grandBase * Math.pow(2, -tunnel.grandSummary.found)
+                    : 0;
+            }
+        }
+        if (grandCharacter !== undefined) {
+            this.grandDiscovery.playerName = grandCharacter.playerName;
+            this.grandDiscovery.skillLevel = grandCharacter.skillLevel;
+            for (const tunnel of this.tunnels) {
+                this.grandDiscovery.chances[tunnel.index] = grandCharacter.grandDiscoveryChances[tunnel.index];
+            }
+        }
+    }
+
+    private resetCaveNodeHarvests(): void {
+        for (const character of this.characters) {
+            character.caveNodeHarvests.fill(NEUTRAL_CAVE_NODE_HARVEST);
         }
     }
 
@@ -1477,14 +1491,14 @@ export class Spelunking extends Domain {
         inputs: SpelunkingCaveNodeInputs,
         players: readonly SpelunkingPlayerCaveNodeInputs[]
     ): void {
-        this.caveNodeHarvests.clear();
+        this.resetCaveNodeHarvests();
         for (const player of players) {
-            const efficiency = this.getEfficiency(player.playerID);
+            const character = this.characters[player.playerID];
+            const efficiency = character.efficiency;
             const prowess = Math.max(0, Math.min(0.1,
                 (inputs.bubbleProwessMultiplier - 1) / 10
                 + (0.001 * player.starSignProwess + 0.0005 * inputs.mealProwessPercent)
             ));
-            const harvests = new Map<number, Readonly<CaveNodeHarvestOutcome>>();
             for (const chapter of this.chapters) {
                 const difficulty = chapter.gatheringSource.details.Defence;
                 const ratio = efficiency / difficulty;
@@ -1494,10 +1508,9 @@ export class Spelunking extends Domain {
                 const eligible = harvestChance > 0.05;
                 const pagesPerDrop = eligible
                     ? Math.floor(Math.max(Math.pow(efficiency / (10 * difficulty), 0.25 + prowess), 1))
-                    : undefined;
-                harvests.set(chapter.index, { eligible, harvestChance, pagesPerDrop });
+                    : 0;
+                character.caveNodeHarvests[chapter.index] = { eligible, harvestChance, pagesPerDrop };
             }
-            this.caveNodeHarvests.set(player.playerID, harvests);
         }
     }
 
@@ -1696,6 +1709,7 @@ export const updateSpelunkingAccountMetrics = (data: Map<string, any>): void => 
         grandTalentMultiplier,
     }, players.map(player => ({
         playerID: player.playerID,
+        playerName: player.playerName,
         skillLevel: player.skills.get(SkillsIndex.Spelunking)!.level,
         allEfficiencyMultiplier: skilling.getAllEfficiencies(player),
         efficiencyTalentMultiplier: player.getTalentBonusAtInputs(237, player.finalTalentInputs),

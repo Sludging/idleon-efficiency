@@ -252,68 +252,56 @@ export class PlayerStats {
     agility: number = 0;
     wisdom: number = 0;
     luck: number = 0;
-    private preparedWeaponPower: number | undefined;
-    private skillPowers: Record<SkillPowerSkill, number> | undefined;
-    private preparedDefence: number | undefined;
-    private preparedBaseAccuracy: number | undefined;
-    private preparedAccuracy: number | undefined;
-    private preparedDropRateMultiplier: number | undefined;
-    private preparedMovementSpeed: number | undefined;
-    private preparedSkillStatsDN: SkillStatsDN | undefined;
+    private preparedWeaponPower: number = 0;
+    private skillPowers: Record<SkillPowerSkill, number> = {
+        [SkillsIndex.Mining]: 0,
+        [SkillsIndex.Chopping]: 0,
+        [SkillsIndex.Fishing]: 0,
+        [SkillsIndex.Catching]: 0,
+        [SkillsIndex.Trapping]: 0,
+        [SkillsIndex.Worship]: 0,
+    };
+    private preparedDefence: number = 0;
+    private preparedBaseAccuracy: number = 0;
+    private preparedAccuracy: number = 0;
+    private preparedDropRateMultiplier: number = 1;
+    private preparedMovementSpeed: number = 1;
+    private preparedSkillStatsDN: SkillStatsDN = {
+        [SkillsIndex.Mining]: 0,
+        [SkillsIndex.Chopping]: 0,
+        [SkillsIndex.Fishing]: 0,
+        [SkillsIndex.Catching]: 0,
+    };
 
     get defence(): number {
-        if (this.preparedDefence === undefined) {
-            throw new Error('Defence has not been calculated');
-        }
         return this.preparedDefence;
     }
 
     get baseAccuracy(): number {
-        if (this.preparedBaseAccuracy === undefined) {
-            throw new Error('Base Accuracy has not been calculated');
-        }
         return this.preparedBaseAccuracy;
     }
 
     get accuracy(): number {
-        if (this.preparedAccuracy === undefined) {
-            throw new Error('Accuracy has not been calculated');
-        }
         return this.preparedAccuracy;
     }
 
     get movementSpeed(): number {
-        if (this.preparedMovementSpeed === undefined) {
-            throw new Error('Movement speed has not been calculated');
-        }
         return this.preparedMovementSpeed;
     }
 
     get dropRateMultiplier(): number {
-        if (this.preparedDropRateMultiplier === undefined) {
-            throw new Error('Drop-rate multiplier has not been calculated');
-        }
         return this.preparedDropRateMultiplier;
     }
 
     get weaponPower(): number {
-        if (this.preparedWeaponPower === undefined) {
-            throw new Error('Weapon Power has not been calculated');
-        }
         return this.preparedWeaponPower;
     }
 
     getSkillPower(skill: SkillPowerSkill): number {
-        if (this.skillPowers === undefined) {
-            throw new Error('Skill powers have not been calculated');
-        }
         return this.skillPowers[skill];
     }
 
     getSkillStatsDN(skill: SkillStatsDNSkill): number {
-        if (this.preparedSkillStatsDN === undefined) {
-            throw new Error('SkillStatsDN has not been prepared');
-        }
         return this.preparedSkillStatsDN[skill];
     }
 
@@ -519,7 +507,6 @@ export class PlayerStats {
     }
 
     updateDropRate(player: Player, players: readonly Player[], sources: DropRateSources): void {
-        this.preparedDropRateMultiplier = undefined;
         const { account, alchemy, stamps, family, sigils, breeding, arcade, guild, hole, shrines,
             prayers, goldenFood, equipmentSets, votes, orion, companions, sneaking, summoning,
             achievements, farming, grimoire, upgradeVault, emperor, friends, legendTalents,

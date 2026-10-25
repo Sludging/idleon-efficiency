@@ -234,12 +234,13 @@ export class Stamp {
     }
 
     static fromBase = (data: Item[]) => {
-        return data.map(stamp => {
+        const stamps: Stamp[] = [];
+        for (const stamp of data) {
             if (isStampItem(stamp.data.item)) {
-                return new Stamp(stamp.displayName, stamp.internalName, stamp.type, stamp.data.item.bonus, stamp.data.item.stampData);
+                stamps.push(new Stamp(stamp.displayName, stamp.internalName, stamp.type, stamp.data.item.bonus, stamp.data.item.stampData));
             }
-            throw new Error("This shouldn't be happening.");
-        });
+        }
+        return stamps;
     }
 }
 
@@ -249,8 +250,7 @@ export class Stamps extends Domain {
     }
 
     init = (allItems: Item[]) => {
-        const stampItems = allItems.filter(item => isStampItem(item.data.item));
-        const allStamps = Stamp.fromBase(stampItems);
+        const allStamps = Stamp.fromBase(allItems);
         const combat_stamp = allStamps.filter(stamp => stamp.type == "Combat Stamp");
         const skills_stamp = allStamps.filter(stamp => stamp.type == "Skills Stamp");
         const misc_stamp = allStamps.filter(stamp => stamp.type == "Misc Stamp");

@@ -1,6 +1,7 @@
 import { StarSignMap, StarSign, StarSigns } from './starsigns';
 import { Box, initPostOffice, PostOfficeConst } from './world-2/postoffice';
-import { ClassIndex, Talent, ClassTalentMap, GetTalentArray, TalentConst, ApocalypseChowTalent, EnhancedTalent, BloodMarrowTalent, type TalentLevelInputs } from './talents';
+import { ClassIndex, Talent, ClassTalentMap, GetTalentArray, TalentConst, ApocalypseChowTalent, EnhancedTalent, BloodMarrowTalent } from './talents';
+import type { BeginnerBestClassTalent, TalentLevelInputs, WillOfTheEldestTalent } from './talents';
 import { Card, CardInfo } from "./cards";
 import { Item } from "./items";
 import { EquipmentBonus } from './equipment-effects';
@@ -319,7 +320,11 @@ export class Player {
         return this.talents.find(talent => talent.skillIndex == skillIndex)?.getBonus() ?? 0;
     }
 
-    getTalent = (skillIndex: number) => {
+    // parseTalents creates these subclasses through Talent.fromBase.
+    getTalent(skillIndex: 616): BeginnerBestClassTalent | undefined;
+    getTalent(skillIndex: 620): WillOfTheEldestTalent | undefined;
+    getTalent(skillIndex: number): Talent | undefined;
+    getTalent(skillIndex: number): Talent | undefined {
         return this.talents.find(talent => talent.skillIndex == skillIndex);
     }
 

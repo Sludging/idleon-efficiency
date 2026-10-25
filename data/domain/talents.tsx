@@ -1,7 +1,7 @@
 import { lavaFunc, lavaLog } from "../utility";
 import { initTalentTreeRepo } from "./data/TalentTreeRepo";
 import { ImageData } from "./imageData";
-import { TalentModel } from "./model/talentModel";
+import type { TalentModel } from "./model/talentModel";
 import type { Player } from "./player";
 import { SkillsIndex } from "./SkillsIndex";
 
@@ -96,15 +96,7 @@ export class Talent {
 
 
     static getClassLevelAttributeBonus(player: Player): number {
-        const talent = player.talents.find((talent): talent is WillOfTheEldestTalent => {
-            if (talent.skillIndex !== 620) {
-                return false;
-            }
-            if (!(talent instanceof WillOfTheEldestTalent)) {
-                throw new Error("Will Of The Eldest must use its specialized talent factory.");
-            }
-            return true;
-        });
+        const talent = player.getTalent(620);
         return talent ? talent.getAttributeBonus() : 0;
     }
 
@@ -112,9 +104,6 @@ export class Talent {
         const talent = player.getTalent(616);
         if (!talent) {
             return 0;
-        }
-        if (!(talent instanceof BeginnerBestClassTalent)) {
-            throw new Error("Beginner Best Class must use its specialized talent factory.");
         }
         return talent.getWeaponPowerBonus();
     }
@@ -209,7 +198,10 @@ export class Talent {
         return 0;
     }
 
-    static fromBase = (talentName: string, talentInfo: TalentModel) => {
+    static fromBase(talentName: string, talentInfo: TalentModel & { skillIndex: 616 }): BeginnerBestClassTalent;
+    static fromBase(talentName: string, talentInfo: TalentModel & { skillIndex: 620 }): WillOfTheEldestTalent;
+    static fromBase(talentName: string, talentInfo: TalentModel): Talent;
+    static fromBase(talentName: string, talentInfo: TalentModel): Talent {
         switch (talentInfo.skillIndex) {
             case 43:
                 return new RightHandOfActionTalent(talentName, talentInfo);
@@ -229,7 +221,7 @@ export class Talent {
     }
 }
 
-class BeginnerBestClassTalent extends Talent {
+export class BeginnerBestClassTalent extends Talent {
     private highestBeginnerLevel: number = 0;
 
     static preparePowerBonuses(players: readonly Player[]): void {
@@ -246,9 +238,6 @@ class BeginnerBestClassTalent extends Talent {
             if (!talent) {
                 continue;
             }
-            if (!(talent instanceof BeginnerBestClassTalent)) {
-                throw new Error("Beginner Best Class must use its specialized talent factory.");
-            }
             talent.highestBeginnerLevel = highestBeginnerLevel;
         }
     }
@@ -264,7 +253,7 @@ class BeginnerBestClassTalent extends Talent {
 
 }
 
-class WillOfTheEldestTalent extends Talent {
+export class WillOfTheEldestTalent extends Talent {
     private highestCharacterLevel: number = 0;
 
     static prepareAttributeBonuses(players: readonly Player[]): void {
@@ -278,9 +267,6 @@ class WillOfTheEldestTalent extends Talent {
             const talent = player.getTalent(620);
             if (!talent) {
                 continue;
-            }
-            if (!(talent instanceof WillOfTheEldestTalent)) {
-                throw new Error("Will Of The Eldest must use its specialized talent factory.");
             }
             talent.highestCharacterLevel = highestCharacterLevel;
         }

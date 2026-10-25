@@ -121,8 +121,7 @@ export class Import {
     static fromBase(records: GamingImportBase[], boxes: GamingBoxBase[]): Import[] {
         const boxesById = new Map(boxes.map(box => [box.data.boxId, box.data]));
         return records.map(({ data }) => {
-            const box = boxesById.get(data.boxId);
-            if (!box) throw new Error(`Missing Gaming box ${data.boxId} for import ${data.importId}`);
+            const box = boxesById.get(data.boxId)!;
             switch (data.importId) {
                 case 0: return new SprinklerImport(data, box);
                 case 1: return new ShovelImport(data, box);

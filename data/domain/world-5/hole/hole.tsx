@@ -1241,7 +1241,7 @@ export interface HoleCharacterCapability {
  playerName: string;
  skill: SkillingSkill;
  efficiency: number;
- meetsThreshold: boolean | null;
+ meetsThreshold: boolean;
 }
 const resourceCavernSkills = [
  SkillsIndex.Mining, SkillsIndex.Catching, SkillsIndex.Chopping, SkillsIndex.Fishing,
@@ -1300,17 +1300,12 @@ export class ResourceCavren {
   this.resourceRequirementMet = this.resourceCurrent >= this.resourceRequirement;
  }
 
- prepareCharacterCapabilities(players: Player[], assignments: (number | null)[], skilling: Skilling): void {
+ prepareCharacterCapabilities(players: readonly Player[], skilling: Skilling): void {
   this.characterCapabilities = [];
   const skill = resourceCavernSkills[this.index];
 
-  assignments.forEach((assignedCavernId, playerIndex) => {
-   if (assignedCavernId !== this.cavernId) return;
-   const player = players.find(candidate => candidate.playerID === playerIndex);
-   if (!player) return;
-
+  for (const player of players) {
    const efficiency = skilling.getSkillEfficiency(player.playerID, skill);
-   if (efficiency === null) return;
    this.characterCapabilities.push({
     playerID: player.playerID,
     playerName: player.playerName,
@@ -1318,7 +1313,7 @@ export class ResourceCavren {
     efficiency,
     meetsThreshold: efficiency >= this.efficiencyThreshold,
    });
-  });
+  }
  }
 }
 
@@ -2425,10 +2420,9 @@ export const updateHoleCharacterCapabilities = (data: Map<string, any>): void =>
  const players = data.get("players") as Player[];
  const skilling = data.get("skilling") as Skilling;
  const resourceCavrens = hole.resourceCavrens;
- const assignments = resourceCavrens.characterAssignments;
 
  Object.values(resourceCavrens.cavrens).forEach(cavern => {
-  cavern.prepareCharacterCapabilities(players, assignments, skilling);
+  cavern.prepareCharacterCapabilities(players, skilling);
  });
  hole.cove.accountEffects = hole.cove.prepareAccountEffects({
   campUpgrade100Bonus: hole.getSchematicBonus(100, 25),

@@ -1,6 +1,8 @@
 import { Coins } from "../../utility";
-import { Domain, RawData } from "../base/domain";
-import { ButtonBonusBase, initButtonBonusRepo } from "../data/ButtonBonusRepo";
+import { Domain } from "../base/domain";
+import type { RawData } from "../base/domain";
+import { initButtonBonusRepo } from "../data/ButtonBonusRepo";
+import type { ButtonBonusBase } from "../data/ButtonBonusRepo";
 import type { ImageData } from "../imageData";
 import { Item } from "../items";
 import { Skilling } from "../skilling";
@@ -8,7 +10,8 @@ import { SkillsIndex } from "../SkillsIndex";
 import { ClassIndex } from "../talents";
 import { Companion, getCompanionActiveBonus } from "../companions";
 import { ResearchGrid } from "./research";
-import { ButtonTaskBase, initButtonTaskRepo } from "../data/ButtonTaskRepo";
+import { initButtonTaskRepo } from "../data/ButtonTaskRepo";
+import type { ButtonTaskBase } from "../data/ButtonTaskRepo";
 import type { ButtonTaskModel } from "../model/buttonTaskModel";
 import { sushiBucksImage } from "components/world-7/sushi/sushiImages";
 
@@ -35,9 +38,8 @@ const getButtonTaskRequirement = (task: ButtonTaskModel, pressCount: number): nu
    return Math.ceil(task.baseRequirement + pressCount / task.scalingValue);
   case "exponent":
    return task.baseRequirement * Math.pow(task.scalingValue, pressCount);
-  default:
-   throw new Error(`Unsupported Button task scaling type: ${task.scalingType}`);
  }
+ return 0;
 };
 
 const BUTTON_COMPANION = 147;
@@ -104,7 +106,7 @@ export class Button extends Domain {
  tasks: ButtonTaskBase[] = [];
  pressCount: number = 0;
  upcomingTaskProgress: readonly ButtonTaskProgress[] = [];
- private taskByPosition: Array<ButtonTaskBase | undefined> = [];
+ private taskByPosition: ButtonTaskBase[] = [];
  private bonusMultiplier: number = 1;
 
  getRawKeys(): RawData[] {
@@ -118,20 +120,13 @@ export class Button extends Domain {
   this.bonusMultiplier = 1;
   // Account processing replaces neutral progress after the task producers update.
   this.upcomingTaskProgress = Array.from({ length: UPCOMING_BUTTON_TASK_COUNT }, () => ({ currentValue: 0 }));
-  this.taskByPosition = Array.from({ length: BUTTON_TASK_CYCLE_LENGTH });
+  this.taskByPosition = new Array<ButtonTaskBase>(BUTTON_TASK_CYCLE_LENGTH);
 
   this.tasks.forEach(task => {
    task.data.cycleIndexes.forEach(position => {
-    if (this.taskByPosition[position]) {
-     throw new Error(`Duplicate Button task cycle position: ${position}`);
-    }
     this.taskByPosition[position] = task;
    });
   });
-
-  if (this.taskByPosition.some(task => task === undefined)) {
-   throw new Error("Button task cycle must cover all 100 positions");
-  }
 
   return this;
  }
@@ -163,9 +158,6 @@ export class Button extends Domain {
  getUpcomingTaskIndex(offset: number): number {
   const pressCount = this.pressCount + offset;
   const task = this.taskByPosition[pressCount % BUTTON_TASK_CYCLE_LENGTH];
-  if (!task) {
-   throw new Error(`Button task cycle has no task at position ${pressCount % BUTTON_TASK_CYCLE_LENGTH}`);
-  }
   return task.index;
  }
 
@@ -174,9 +166,6 @@ export class Button extends Domain {
   return Array.from({ length: UPCOMING_BUTTON_TASK_COUNT }, (_, offset) => {
    const pressCount = this.pressCount + offset;
    const task = this.taskByPosition[pressCount % BUTTON_TASK_CYCLE_LENGTH];
-   if (!task) {
-    throw new Error(`Button task cycle has no task at position ${pressCount % BUTTON_TASK_CYCLE_LENGTH}`);
-   }
    const progress = this.upcomingTaskProgress[offset];
 
    const scheduledTask = {

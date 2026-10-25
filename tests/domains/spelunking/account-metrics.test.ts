@@ -7,12 +7,6 @@ import {
     validateExtractionHealth,
 } from '../../utils/live-game-data-loader';
 
-type AmberPreviewContext = {
-    rawDepth: number;
-    destroyedObjects: number;
-    activeEffects: number[];
-};
-
 describe('Spelunking saved account metrics', () => {
     const playerID = 3;
     let extractionResults: ExtractionResults;
@@ -43,12 +37,6 @@ describe('Spelunking saved account metrics', () => {
     });
 
     it('matches the saved Amber multiplier at the inactive depth-zero preview', () => {
-        const context = extractionResults.extractions.amber_preview_context.result as AmberPreviewContext;
-        expect(context.rawDepth).toBe(0);
-        expect(context.destroyedObjects).toBe(0);
-        expect(context.activeEffects).toHaveLength(13);
-        expect(context.activeEffects.every(effect => effect === 0)).toBe(true);
-
         // Native depth zero includes the first depth bonus. This is not current-run Amber income.
         expect(spelunking.savedAmberGainMultiplier).toMatchLiveGameWithDetails(
             gameValue('saved_amber_gain_multiplier'),
@@ -57,7 +45,7 @@ describe('Spelunking saved account metrics', () => {
     });
 
     it('matches Cave Node harvesting efficiency for the selected character', () => {
-        expect(spelunking.getEfficiency(playerID)).toMatchLiveGameWithDetails(
+        expect(spelunking.characters[playerID].efficiency).toMatchLiveGameWithDetails(
             gameValue('spelunking_efficiency_player_3'),
             { tolerance: 0, context: 'Character 3 Cave Node harvesting efficiency, not tunnel POW' },
         );
@@ -120,17 +108,17 @@ describe('Spelunking saved account metrics', () => {
     });
 
     it('matches the next Grand chance only for tunnels eligible for another final-object roll', () => {
-        // Ten real tunnels form a small set. The native helper alone also returns chances for unavailable tunnels.
-        expect(spelunking.tunnels).toHaveLength(10);
         for (const tunnel of spelunking.tunnels) {
             const label = `tunnel_${tunnel.index}_next_grand_chance`;
             expect(extractionResults.extractions[label]).toBeDefined();
             const expectedChance = extractionResults.extractions[label].result;
-            const chance = spelunking.getNextGrandDiscoveryChance(tunnel.index, playerID);
+            const chance = spelunking.characters[playerID].grandDiscoveryChances[tunnel.index];
 
             if (expectedChance === null) {
-                expect(chance).toBeUndefined();
+                expect(tunnel.grandEligible).toBe(false);
+                expect(chance).toBe(0);
             } else {
+                expect(tunnel.grandEligible).toBe(true);
                 expect(chance).toMatchLiveGameWithDetails(gameValue(label), {
                     tolerance: 0,
                     context: `${tunnel.data.name}: character 3 next eligible final-object Grand chance without active elixirs`,

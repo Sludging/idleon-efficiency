@@ -8,7 +8,8 @@ import { Item } from "../items";
 import { DivinityStyleModel } from "../model/divinityStyleModel";
 import { GodInfoModel } from "../model/godInfoModel";
 import { Activity, Player } from "../player";
-import { getCompanionActiveBonus, getCompanionBonus, type Companion } from "../companions";
+import { getCompanionActiveBonus, getCompanionBonus } from "../companions";
+import type { Companion } from "../companions";
 import { SkillsIndex } from "../SkillsIndex";
 import type { Skilling } from "../skilling";
 import { Hole } from "./hole/hole";
@@ -20,7 +21,8 @@ import { Arcade } from "../world-2/arcade";
 import { Sigils } from "../world-2/alchemy/sigils";
 import { Bribe } from "../world-1/bribes";
 import { PlayerStatues } from "../world-1/statues";
-import { getStampBonusForKey, type Stamp } from "../world-1/stamps";
+import { getStampBonusForKey } from "../world-1/stamps";
+import type { Stamp } from "../world-1/stamps";
 import { Cooking } from "../world-4/cooking";
 import { Rift, SkillMastery } from "../world-4/rift";
 import { TaskBoard } from "../tasks";
@@ -103,12 +105,17 @@ export class DivinityGod {
 }
 
 export class NobisectGod extends DivinityGod {
-    private alchemy!: Alchemy;
-    private skilling!: Skilling;
+    private playerBlessings: number[] = [];
 
-    updateBlessingInputs(alchemy: Alchemy, skilling: Skilling): void {
-        this.alchemy = alchemy;
-        this.skilling = skilling;
+    resetBlessings(charCount: number): void {
+        this.playerBlessings = Array(charCount).fill(0);
+    }
+
+    updateBlessings(players: readonly Player[], alchemy: Alchemy, skilling: Skilling): void {
+        this.resetBlessings(players.length);
+        for (const player of players) {
+            this.playerBlessings[player.playerID] = this.calculateBlessing(player, alchemy, skilling);
+        }
     }
 
     override getBlessingBonusText = (): string => {
@@ -116,13 +123,13 @@ export class NobisectGod extends DivinityGod {
     }
 
     override getBlessingBonus = (player?: Player): number => {
-        if (!player) {
-            throw new Error("Nobisect's blessing bonus requires an explicit player.");
-        }
+        return player === undefined ? 0 : this.playerBlessings[player.playerID];
+    }
 
-        const allEfficiencies = this.skilling.getAllEfficiencies(player);
-        const miningEfficiency = this.alchemy.getBubbleBonusForKey("MinEff", player);
-        const choppingEfficiency = this.alchemy.getBubbleBonusForKey("ChopEff", player);
+    private calculateBlessing(player: Player, alchemy: Alchemy, skilling: Skilling): number {
+        const allEfficiencies = skilling.getAllEfficiencies(player);
+        const miningEfficiency = alchemy.getBubbleBonusForKey("MinEff", player);
+        const choppingEfficiency = alchemy.getBubbleBonusForKey("ChopEff", player);
 
         // Nobisect adds base efficiency; independent all-skill efficiency, bubbles and attributes set its scaling input.
         // Source: docs/game-snippets/divinity/Divinity.1.22.js:50-55.
@@ -387,7 +394,11 @@ export class Divinity extends Domain {
         ]
     }
 
-    init(_allItems: Item[], _charCount: number) {
+    init(_allItems: Item[], charCount: number) {
+        this.gods.forEach(god => {
+            god.blessLevel = 0;
+        });
+        (this.gods[2] as NobisectGod).resetBlessings(charCount);
         return this;
     }
 
@@ -405,8 +416,10 @@ export class Divinity extends Domain {
         divinity.offerings = [];
         divinity.atomsBalance = divinityData[39] == null ? null : Number(divinityData[39]);
         divinity.gods.forEach(god => {
+            god.blessLevel = 0;
             god.linkedPlayers = [];
         });
+        (divinity.gods[2] as NobisectGod).resetBlessings(charCount);
         if (divinityData.length === 0) {
             return;
         }
@@ -513,8 +526,9 @@ export const updateDivinityBlessings = (data: Map<string, any>): void => {
     const divinity = data.get("divinity") as Divinity;
     const alchemy = data.get("alchemy") as Alchemy;
     const skilling = data.get("skilling") as Skilling;
+    const players = data.get("players") as Player[];
 
-    (divinity.gods[2] as NobisectGod).updateBlessingInputs(alchemy, skilling);
+    (divinity.gods[2] as NobisectGod).updateBlessings(players, alchemy, skilling);
 }
 
 export const updateDivinityRates = (data: Map<string, unknown>): void => {

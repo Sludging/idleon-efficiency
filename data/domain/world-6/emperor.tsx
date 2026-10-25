@@ -119,16 +119,17 @@ export class Emperor extends Domain {
     getEffectiveBonus(index: number): number {
         return this.emperorBonuses[index].getBonus(this.getCombinedBonusPercent());
     }
-    getNextAwardShowdown(index: number): number {
-        const bonus = this.emperorBonuses[index];
-        for (let offset = 0; offset < 48; offset++) {
-            const showdown = this.emperorKills + offset;
-            if (bonus.data.levelMappings.includes(showdown % 48)) {
-                return showdown + 1;
-            }
+    getNextAwardShowdown(bonus: EmperorBonus): number {
+        const currentScheduleIndex = this.emperorKills % 48;
+        const awardSchedule = bonus.data.levelMappings;
+        let nextAwardOffset = (awardSchedule[0] - currentScheduleIndex + 48) % 48;
+
+        for (let index = 1; index < awardSchedule.length; index++) {
+            const offset = (awardSchedule[index] - currentScheduleIndex + 48) % 48;
+            nextAwardOffset = Math.min(nextAwardOffset, offset);
         }
 
-        throw new Error(`Emperor bonus ${index} has no scheduled award in the 48-showdown cycle.`);
+        return this.emperorKills + nextAwardOffset + 1;
     }
 
     getNextEffectiveBonus(index: number): number {

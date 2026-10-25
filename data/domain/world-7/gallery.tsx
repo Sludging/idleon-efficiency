@@ -40,7 +40,6 @@ export type GalleryTierThreshold = {
 
 export type GalleryItemBonus = Readonly<{ channel: 'effect' | 'property'; name: string; value: number }>;
 
-type ItemEffect = GalleryItemBonus;
 type MutableGalleryItemBonus = { channel: GalleryItemBonus['channel']; name: string; value: number };
 const gallerySource = (
     source: string,
@@ -61,7 +60,12 @@ export class GalleryTrophy {
     count = 0;
     hasPendingDeposit = false;
 
-    constructor(public index: number, public internalName: string, public name: string) {}
+    constructor(
+        public index: number,
+        public internalName: string,
+        public name: string,
+        public readonly effects: readonly GalleryItemBonus[],
+    ) {}
 
     get obtained(): boolean { return this.count > 0; }
 }
@@ -78,7 +82,12 @@ export class GalleryPodium {
 export class GalleryNametag {
     count = 0;
     hasPendingDeposit = false;
-    constructor(public index: number, public internalName: string, public name: string) {}
+    constructor(
+        public index: number,
+        public internalName: string,
+        public name: string,
+        public readonly effects: readonly GalleryItemBonus[],
+    ) {}
 
     get stackMultiplier(): number {
         // Keep every deposited copy; only the first five improve its effect.
@@ -106,7 +115,6 @@ export class Gallery extends Domain {
     podiums: GalleryPodium[] = [];
     nametags: GalleryNametag[] = [];
     private unlockKillsLeft: (number | undefined)[] = [];
-    private itemEffects = new Map<string, ItemEffect[]>();
     private trophyBonuses = new Map<string, number>();
     private nametagBonuses = new Map<string, number>();
     private trophyItemBonuses = new Map<string, MutableGalleryItemBonus[]>();
@@ -149,7 +157,6 @@ export class Gallery extends Domain {
         };
         this.podiumGradeSources = { 2: [], 3: [], 4: [] };
         this.unlockKillsLeft = [];
-        this.itemEffects.clear();
         this.trophyBonuses.clear();
         this.nametagBonuses.clear();
         this.trophyItemBonuses.clear();
@@ -160,19 +167,13 @@ export class Gallery extends Domain {
             if (!item.internalName.startsWith('Trophy') && !item.internalName.startsWith('EquipmentNametag')) continue;
             const trophy = /^Trophy(\d+)$/.exec(item.internalName);
             const nametag = /^EquipmentNametag(\d+)$/.exec(item.internalName);
-            if (trophy) {
-                this.trophies.push(new GalleryTrophy(Number(trophy[1]), item.internalName, item.displayName));
-            } else if (item.internalName === 'EquipmentNametag6b' || (nametag && Number(nametag[1]) !== 6)) {
-                this.nametags.push(new GalleryNametag(nametag ? Number(nametag[1]) : 6, item.internalName, item.displayName));
-            }
-            const effects: ItemEffect[] = [];
+            const effects: GalleryItemBonus[] = [];
             for (const stat of item.itemStats) {
                 if (stat.stoneName !== 'UQ1val' && stat.stoneName !== 'UQ2val') continue;
                 // Items supplies unupgraded definition effects; keep exact labels,
                 // including trailing dungeon markers, rather than substring matches.
                 if (stat.extra && stat.extra !== '0') effects.push({ channel: 'effect', name: stat.extra.toUpperCase(), value: stat.getValue() });
             }
-            this.itemEffects.set(item.internalName, effects);
             // Raw replacement properties use the same deposit scaling as unique effects.
             effects.push(
                 { channel: 'property', name: 'Weapon_Power', value: item.weaponPower },
@@ -182,6 +183,11 @@ export class Gallery extends Domain {
                 { channel: 'property', name: 'LUK', value: item.luk },
                 { channel: 'property', name: 'Defence', value: item.defence },
             );
+            if (trophy) {
+                this.trophies.push(new GalleryTrophy(Number(trophy[1]), item.internalName, item.displayName, effects));
+            } else if (item.internalName === 'EquipmentNametag6b' || (nametag && Number(nametag[1]) !== 6)) {
+                this.nametags.push(new GalleryNametag(nametag ? Number(nametag[1]) : 6, item.internalName, item.displayName, effects));
+            }
         }
         this.trophies.sort((a, b) => a.index - b.index);
         this.nametags.sort((a, b) => a.index - b.index);
@@ -200,7 +206,10 @@ export class Gallery extends Domain {
             const value = placements[slot];
             if (!(value >= 1)) return undefined;
             const trophy = trophiesByIndex.get(Math.round(value));
-            if (!trophy) throw new Error(`Missing Gallery item definition Trophy${Math.round(value)}`);
+            if (!trophy) {
+                console.log('Missing Gallery item definition', `Trophy${Math.round(value)}`);
+                return undefined;
+            }
             trophy.count++;
             return trophy;
         };
@@ -215,7 +224,8 @@ export class Gallery extends Domain {
             const nametag = nametagsByIndex.get(index);
             // Collection index 6 uses the alternate, non-replica definition.
             if (!nametag && count >= 1) {
-                throw new Error(`Missing Gallery item definition EquipmentNametag${index === 6 ? '6b' : index}`);
+                console.log('Missing Gallery item definition', `EquipmentNametag${index === 6 ? '6b' : index}`);
+                return;
             }
             if (nametag) nametag.count = count;
         });
@@ -261,7 +271,7 @@ export class Gallery extends Domain {
         const deposited = this.trophyItemBonuses.get(trophy.internalName);
         return deposited
             ? this.scaleItemBonuses(deposited, multiplier)
-            : this.scaleItemBonuses(this.itemEffects.get(trophy.internalName) ?? [], this.shelfMultiplier * multiplier);
+            : this.scaleItemBonuses(trophy.effects, this.shelfMultiplier * multiplier);
     }
 
     getNametagItemBonusesForChip(nametag: GalleryNametag, silkrodeMotherboard: boolean): readonly GalleryItemBonus[] {
@@ -269,7 +279,7 @@ export class Gallery extends Domain {
         const deposited = this.nametagItemBonuses.get(nametag.internalName);
         return deposited
             ? this.scaleItemBonuses(deposited, multiplier)
-            : this.scaleItemBonuses(this.itemEffects.get(nametag.internalName) ?? [], multiplier);
+            : this.scaleItemBonuses(nametag.effects, multiplier);
     }
 
     getBonusMultiplierForChip(silkrodeMotherboard: boolean): number {
@@ -446,13 +456,13 @@ export class Gallery extends Domain {
         this.trophyItemBonuses.clear();
         this.nametagItemBonuses.clear();
         for (const trophy of this.shelves) {
-            if (trophy) this.addItemEffects(this.trophyBonuses, this.trophyItemBonuses, trophy.internalName, this.shelfMultiplier);
+            if (trophy) this.addItemEffects(this.trophyBonuses, this.trophyItemBonuses, trophy, this.shelfMultiplier);
         }
         for (const podium of this.podiums) {
-            if (podium.trophy) this.addItemEffects(this.trophyBonuses, this.trophyItemBonuses, podium.trophy.internalName, podium.multiplier);
+            if (podium.trophy) this.addItemEffects(this.trophyBonuses, this.trophyItemBonuses, podium.trophy, podium.multiplier);
         }
         for (const nametag of this.nametags) {
-            if (nametag.count >= 1) this.addItemEffects(this.nametagBonuses, this.nametagItemBonuses, nametag.internalName, nametag.stackMultiplier);
+            if (nametag.count >= 1) this.addItemEffects(this.nametagBonuses, this.nametagItemBonuses, nametag, nametag.stackMultiplier);
         }
         this.galleryCoralLevel = coralLevel;
         this.sharedScaling = sharedScaling;
@@ -461,11 +471,10 @@ export class Gallery extends Domain {
     private addItemEffects(
         bonuses: Map<string, number>,
         itemBonuses: Map<string, MutableGalleryItemBonus[]>,
-        name: string,
+        item: GalleryTrophy | GalleryNametag,
         factor: number,
     ): void {
-        const effects = this.itemEffects.get(name);
-        if (!effects) throw new Error(`Missing Gallery item definition ${name}`);
+        const { internalName: name, effects } = item;
         let itemContributions = itemBonuses.get(name);
         if (!itemContributions) {
             itemContributions = [];

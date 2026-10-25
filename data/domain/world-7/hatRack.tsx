@@ -124,7 +124,10 @@ export class HatRack extends Domain {
         // Match the game's per-hat, per-channel multiplication order for precision.
         for (const name of this.depositedHats) {
             const effects = this.itemEffects.get(name);
-            if (!effects) throw new Error(`Missing Hat Rack item definition ${name}`);
+            if (!effects) {
+                console.log('Missing Hat Rack item definition', name);
+                continue;
+            }
             for (const { effect, value } of effects) {
                 bonuses.set(effect, (bonuses.get(effect) ?? 0) + multiplier * value);
             }

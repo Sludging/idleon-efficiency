@@ -17,17 +17,17 @@ import Schematics from "../../../components/world-5/hole/schematics";
 import Measurements from "../../../components/world-5/hole/measurements";
 import { usePreservedScroll } from "../../../components/world-5/hole/upgradeInspection";
 import Part4CavernDetails from "../../../components/world-5/hole/part4Caverns";
-import { Benefit, CavernMetricStrip, CavernStudySummary, type CavernMetric } from "../../../components/world-5/hole/cavernLayout";
+import { Benefit, CavernMetricStrip, CavernStudySummary } from "../../../components/world-5/hole/cavernLayout";
+import type { CavernMetric } from "../../../components/world-5/hole/cavernLayout";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import useHydrated from "../../../lib/hooks/useHydrated";
 import type { Companion } from "../../../data/domain/companions";
 import { Item } from "../../../data/domain/items";
 import type { Player } from "../../../data/domain/player";
 import type { Divinity } from "../../../data/domain/world-5/divinity";
-import { Hole, type Study, type StudyEffect } from "../../../data/domain/world-5/hole/hole";
+import { Hole } from "../../../data/domain/world-5/hole/hole";
+import type { Study, StudyEffect } from "../../../data/domain/world-5/hole/hole";
 import type { Account } from "../../../data/domain/account";
-import { SkillsIndex } from "../../../data/domain/SkillsIndex";
-import type { Skilling, SkillingSkill } from "../../../data/domain/skilling";
 import type { Villager, VillagerCharacterRate } from "../../../data/domain/world-5/hole/villager";
 import { commaNotation, nFormatter, notateNumber } from "../../../data/utility";
 
@@ -57,7 +57,6 @@ const upgradeNames = ["Majik", "Schematics", "Studies", "Measurements"] as const
 const resourceCavernRailIndices = [1, 7, 11, 16];
 const resourceCavernResourceNames: Record<number, string> = { 1: "Ore", 7: "Flies", 11: "Everlogs", 16: "Fish" };
 const resourceCavernSynergyIds: Record<number, number[]> = { 1: [58, 15], 7: [41], 11: [80], 16: [94] };
-const resourceCavernSkillIndices: Record<number, SkillingSkill> = { 1: SkillsIndex.Mining, 7: SkillsIndex.Catching, 11: SkillsIndex.Chopping, 16: SkillsIndex.Fishing };
 const genuineTips = new Set([0, 2, 3, 4, 9, 13]);
 type Tab = "Villagers" | "Upgrades" | "Caverns";
 
@@ -200,13 +199,9 @@ export default function HoleContent() {
         setTab("Upgrades");
         setUpgrade("Studies");
     });
-    const skilling = data.get("skilling") as Skilling;
-    const resourceCharacters = selectedResourceCavern === null ? [] : characters
-        .map(character => ({
-            ...character,
-            efficiency: skilling.getSkillEfficiency(character.playerId, resourceCavernSkillIndices[cavern]),
-        }))
-        .filter(character => character.efficiency >= selectedResourceCavern.efficiencyThreshold);
+    const resourceCharacters = selectedResourceCavern === null ? [] : selectedResourceCavern.characterCapabilities
+        .filter(character => character.meetsThreshold)
+        .map(character => ({ playerId: character.playerID, playerName: character.playerName }));
     const selectedSynergy = selectedResourceCavern === null ? [] : (resourceCavernSynergyIds[cavern] ?? []).flatMap(index => {
         const schematic = hole.schematics[index];
         if (!schematic.built) return [];

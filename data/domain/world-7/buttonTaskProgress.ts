@@ -1,12 +1,18 @@
 import { getMaximumDamage } from "../player-damage";
-import { Button, UPCOMING_BUTTON_TASK_COUNT, type ButtonTaskProgress } from "./button";
+import { Button, UPCOMING_BUTTON_TASK_COUNT } from "./button";
+import type { ButtonTaskProgress } from "./button";
 import { getClassExperienceMultiplier } from "../player-experience";
 import { SkillsIndex } from "../SkillsIndex";
-import { BoneType, type Grimoire } from "../grimoire";
-import { DustType, type Compass } from "../compass";
-import { TesseractType, type Tesseract } from "../tesseract";
-import { CauldronIndex, type Alchemy } from "../world-2/alchemy/alchemy";
-import { SummonEssenceColor, type Summoning } from "../world-6/summoning";
+import { BoneType } from "../grimoire";
+import type { Grimoire } from "../grimoire";
+import { DustType } from "../compass";
+import type { Compass } from "../compass";
+import { TesseractType } from "../tesseract";
+import type { Tesseract } from "../tesseract";
+import { CauldronIndex } from "../world-2/alchemy/alchemy";
+import type { Alchemy } from "../world-2/alchemy/alchemy";
+import { SummonEssenceColor } from "../world-6/summoning";
+import type { Summoning } from "../world-6/summoning";
 import type { Player } from "../player";
 import type { PlayerStatues } from "../world-1/statues";
 import type { Stamp } from "../world-1/stamps";
@@ -54,6 +60,10 @@ const bestCharacterProgress = (
     players: readonly Player[],
     getValue: (player: Player) => number,
 ): Progress => {
+    if (players.length === 0) {
+        return available(0);
+    }
+
     let bestValue = getValue(players[0]);
     let bestCharacterName = players[0].playerName;
 
@@ -72,7 +82,7 @@ const bestCharacterProgress = (
 const getPlayers = (data: Map<string, any>): Player[] => data.get("players") as Player[];
 
 
-export const getButtonTaskProgress = (data: Map<string, any>, taskIndex: number): Progress => {
+export const getButtonTaskProgress = (data: Map<string, unknown>, taskIndex: number): Progress => {
     switch (taskIndex) {
         case 0:
             return bestCharacterProgress(getPlayers(data), player => player.stats.strength);
@@ -127,6 +137,10 @@ export const getButtonTaskProgress = (data: Map<string, any>, taskIndex: number)
             return available(alchemy.cauldrons[cauldron].bubbles[0].level);
         }
         case 21: {
+            if (getPlayers(data).length === 0) {
+                return available(0);
+            }
+
             const best = getBestCogBuildRate(data);
             return available(best.rate, best.characterName);
         }
@@ -167,6 +181,10 @@ export const getButtonTaskProgress = (data: Map<string, any>, taskIndex: number)
         case 29: {
             const tome = data.get("tome") as Tome;
             const players = getPlayers(data);
+            if (players.length === 0) {
+                return available(tome.getHighestScore());
+            }
+
             return available(tome.getHighestScore(), players[tome.highestScoreIndex].playerName);
         }
         case 30:
@@ -256,9 +274,8 @@ export const getButtonTaskProgress = (data: Map<string, any>, taskIndex: number)
             const bubba = data.get("bubba") as Bubba;
             return available(bubba.ownedFlesh);
         }
-        default:
-            throw new Error(`No Button task progress resolver exists for task ${taskIndex}`);
     }
+    return available(0);
 };
 
 export const updateButtonTaskProgress = (data: Map<string, any>): readonly ButtonTaskProgress[] => {

@@ -61,7 +61,7 @@ function EmperorContent() {
         image: bonusImages[bonus.index],
         name: bonus.getDisplayName(),
         currentBonus: bonus.getDescription(emperor.getEffectiveBonus(bonus.index)),
-        nextShowdown: emperor.getNextAwardShowdown(bonus.index),
+        nextShowdown: emperor.getNextAwardShowdown(bonus),
         nextBonus: bonus.getFormattedValue(emperor.getNextEffectiveBonus(bonus.index))
     }));
     const displayedRows = rows.sort((left, right) => {

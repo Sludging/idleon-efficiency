@@ -1,5 +1,6 @@
 import type { Player } from '../../../data/domain/player';
 import { getTalentCalculationBonus } from '../../../data/domain/player-talent-calculations';
+import type { TalentCalculationSelector } from '../../../data/domain/player-talent-calculations';
 import type { Divinity } from '../../../data/domain/world-5/divinity';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
@@ -7,7 +8,7 @@ import { getTargetPlayer } from '../../utils/target-player';
 
 describe('Player damage talent and divinity direct parameters', () => {
   let player: Player;
-  let data: Map<string, any>;
+  let data: Map<string, unknown>;
   let nativeTalentCalculationBonuses: Record<number, number>;
   let nativeDivinityMinorBonus4: number;
   let nativeDivinityMinorBonus7: number;
@@ -30,7 +31,7 @@ describe('Player damage talent and divinity direct parameters', () => {
     player = getTargetPlayer(data.get('players') as Player[]);
   });
 
-  const talentCalculations = [
+  const talentCalculations: { selector: TalentCalculationSelector; effect: string }[] = [
     { selector: 31, effect: 'skill-level-scaled talent bonus' },
     { selector: 110, effect: 'fighting-map portal-progress talent bonus' },
     { selector: 125, effect: 'accuracy-gated refinery-rank talent bonus' },
