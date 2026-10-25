@@ -9,6 +9,7 @@ import { initArcadeBonusRepo } from "./data/ArcadeBonusRepo";
 import { initArenaBonusRepo } from "./data/ArenaBonusRepo";
 import { initArtifactRepo } from "./data/ArtifactRepo";
 import { initAtomColliderRepo } from "./data/AtomColliderRepo";
+import { initBallotRotationRepo } from "./data/BallotRotationRepo";
 import { initBellActionRepo } from "./data/BellActionRepo";
 import { initBellBonusRepo } from "./data/BellBonusRepo";
 import { initBellImprovementRepo } from "./data/BellImprovementRepo";
@@ -232,6 +233,7 @@ export const repositoryFactories = {
     "ArenaBonus": initArenaBonusRepo,
     "Artifact": initArtifactRepo,
     "AtomCollider": initAtomColliderRepo,
+    "BallotRotation": initBallotRotationRepo,
     "BellAction": initBellActionRepo,
     "BellBonus": initBellBonusRepo,
     "BellImprovement": initBellImprovementRepo,

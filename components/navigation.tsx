@@ -33,6 +33,7 @@ const navItems: NavItem[] = [
             { subLink: "/alchemy", label: "Alchemy" },
             { subLink: "/arcade", label: "Arcade" },
             { subLink: "/kangaroo", label: "Kangaroo" },
+            { subLink: "/vote-ballot", label: "Vote Ballot" },
         ]
     },
     {
@@ -43,6 +44,7 @@ const navItems: NavItem[] = [
             { subLink: "/equinox", label: "Equinox" },
             { subLink: "/armor-smithy", label: "Armor Smithy" },
             { subLink: "/bubba", label: "Bubba" },
+            { subLink: "/hat-rack", label: "Hat Rack" },
         ]
     },
     {
@@ -110,6 +112,7 @@ const navItems: NavItem[] = [
             { subLink: "/tome", label: "The Tome" },
             { subLink: "/upgrade-vault", label: "Upgrade Vault" },
             { subLink: "/guild", label: "Guild" },
+            { subLink: "/friends-stats", label: "Friends Stats" },
             { subLink: "/event-shop", label: "Event Shop" },
         ]
     },

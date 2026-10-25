@@ -25,7 +25,7 @@
     {
       "label": "hat_rack_companion_31",
       "expression": "idleon.callFunction(\"Companions\", 31)",
-      "description": "Pet2 companion +15% contribution to the Hat Rack Bonus Multi"
+      "description": "Pet2 companion +25% contribution to the Hat Rack Bonus Multi"
     },
     {
       "label": "hat_rack_minehead_21",
@@ -46,6 +46,26 @@
       "label": "hat_rack_missing_hats",
       "expression": "Object.entries(idleon.getAttr(\"ItemDefinitionsGET\").h).filter(([n, d]) => d.h.Type == \"PREMIUM_HELMET\" && d.h.typeGen == \"aHelmetMTX\" && d.h.lvReqToCraft != 69420 && !idleon.getAttr(\"Spelunk\")[46].includes(n)).map(([n]) => n)",
       "description": "Eligible premium-hat definitions absent from saved Spelunk[46]; preserves the ownership-independent catalog predicate, excludes the runtime lvReqToCraft == 69420 sentinel definitions, and performs only a read-only membership check"
+    },
+    {
+      "label": "hat_rack_deposited_hats",
+      "expression": "idleon.getAttr(\"Spelunk\")[46]",
+      "description": "Saved deposited-hat sequence. Its length supplies the deposited count without deduplication."
+    },
+    {
+      "label": "hat_rack_bonus_multiplier",
+      "expression": "idleon.callFunction(\"Gallery\", \"HatrackBonusMulti\", 0, 0)",
+      "description": "Native account multiplier for deposited premium-hat channels."
+    },
+    {
+      "label": "hat_rack_account_bonuses",
+      "expression": "Object.fromEntries(Object.entries(idleon.getDNSM(\"PremHatBonTOT\").h))",
+      "description": "Complete native cached account aggregate. Tests translate underscores to existing domain effect keys without recalculating totals."
+    },
+    {
+      "label": "hat_rack_deposited_item_bonuses",
+      "expression": "(() => { const definitions = idleon.getAttr(\"ItemDefinitionsGET\").h; const multiplier = idleon.callFunction(\"Gallery\", \"HatrackBonusMulti\", 0, 0); return [\"EquipmentHats108\", \"EquipmentHats76\"].map(name => { const definition = definitions[name].h; const channels = []; for (let channel = 1; channel <= 2; channel++) { const effect = definition[`UQ${channel}txt`]; if (effect !== \"0\") channels.push({ effect, value: Number(definition[`UQ${channel}val`]) * multiplier }); } for (const effect of [\"Weapon_Power\", \"STR\", \"AGI\", \"WIS\", \"LUK\", \"Defence\"]) channels.push({ effect, value: Number(definition[effect]) * multiplier }); return { name, channels }; }); })()",
+      "description": "Two genuine deposited hats from the native definitions. EquipmentHats108 covers both unique channels, Weapon Power, Defence, and zero primary attributes. EquipmentHats76 covers one unique channel and all four nonzero primary attributes. The native Hat Rack source multiplies each channel before addition. No website Item data or aggregate formula supplies these expectations."
     }
   ]
 }

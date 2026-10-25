@@ -1,0 +1,213 @@
+{
+  "extractions": {
+    "bonus_state": {
+      "expression": "(()=>{const ballot=idleon.getAttr('PixelHelperActor')[25].behaviors.getBehavior('ActorEvents_670')._GenINFO;return {currentBonusIndex:ballot[36],candidateIndices:ballot[31].slice(1,4),candidatePercents:ballot[34].slice(0,3)};})()",
+      "result": {
+        "currentBonusIndex": 23,
+        "candidateIndices": [
+          11,
+          20,
+          21
+        ],
+        "candidatePercents": [
+          24,
+          66,
+          10
+        ]
+      }
+    },
+    "meritocracy_state": {
+      "expression": "(()=>{const ballot=idleon.getAttr('PixelHelperActor')[25].behaviors.getBehavior('ActorEvents_670')._GenINFO;return {currentBonusIndex:idleon.getAttr('OptionsListAccount')[453],candidateIndices:ballot[233].slice(1,4),candidatePercents:ballot[236].slice(0,3),canVote:idleon.callFunction('Summoning2','MeritocCanVote',0,0)===1,haveReachedW7:Number(idleon.getAttr('KillsLeft2Advance')[250][0])<=0};})()",
+      "result": {
+        "currentBonusIndex": 24,
+        "candidateIndices": [
+          7,
+          19,
+          26
+        ],
+        "candidatePercents": [
+          31,
+          33,
+          36
+        ],
+        "canVote": true,
+        "haveReachedW7": true
+      }
+    },
+    "bonus_multiplier": {
+      "expression": "idleon.callFunction('Summoning2','VotingBonuszMulti',0,0)",
+      "result": 6.30679347826087
+    },
+    "meritocracy_multiplier": {
+      "expression": "idleon.callFunction('Summoning2','MeritocBonuszMulti',0,0)",
+      "result": 5
+    },
+    "bonus_earned": {
+      "expression": "Array.from({length:idleon.getAttr('CustomLists').h.NinjaInfo[38].length/3},(_,index)=>idleon.callFunction('Summoning2','VotingBonusz',index,0))",
+      "result": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        378.4076086956522,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "meritocracy_earned": {
+      "expression": "Array.from({length:idleon.getAttr('CustomLists').h.NinjaInfo[41].length/3},(_,index)=>idleon.callFunction('Summoning2','MeritocBonusz',index,0))",
+      "result": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1000,
+        0,
+        0,
+        0
+      ]
+    },
+    "bonus_potential": {
+      "expression": "(()=>{const table=idleon.getAttr('CustomLists').h.NinjaInfo[38];const multi=idleon.callFunction('Summoning2','VotingBonuszMulti',0,0);return [11,20,21,23].map(index=>{const contribution=Number(table[1+3*index])*multi;return {index,contribution,factor:1+contribution/100};});})()",
+      "result": [
+        {
+          "index": 11,
+          "contribution": 126.1358695652174,
+          "factor": 2.261358695652174
+        },
+        {
+          "index": 20,
+          "contribution": 195.51059782608698,
+          "factor": 2.9551059782608697
+        },
+        {
+          "index": 21,
+          "contribution": 504.5434782608696,
+          "factor": 6.045434782608696
+        },
+        {
+          "index": 23,
+          "contribution": 378.4076086956522,
+          "factor": 4.784076086956522
+        }
+      ]
+    },
+    "meritocracy_potential": {
+      "expression": "(()=>{const table=idleon.getAttr('CustomLists').h.NinjaInfo[41];const multi=idleon.callFunction('Summoning2','MeritocBonuszMulti',0,0);return [7,19,26,24].map(index=>{const contribution=Number(table[1+3*index])*multi;return {index,contribution,factor:1+contribution/100};});})()",
+      "result": [
+        {
+          "index": 7,
+          "contribution": 1000,
+          "factor": 11
+        },
+        {
+          "index": 19,
+          "contribution": 1000,
+          "factor": 11
+        },
+        {
+          "index": 26,
+          "contribution": 250,
+          "factor": 3.5
+        },
+        {
+          "index": 24,
+          "contribution": 1000,
+          "factor": 11
+        }
+      ]
+    },
+    "bonus_sources": {
+      "expression": "(()=>{const call=(...args)=>idleon.callFunction(...args);return {crystalCuttlefish:call('Companions',41),equinox:idleon.getAttr('Dream')[13],cosmo:call('Holes','CosmoBonusQTY',2,3),summoning:call('Summoning','WinBonus',22,0),eventShop7:17*call('Summoning','EventShopOwned',7,0),eventShop16:13*call('Summoning','EventShopOwned',16,0),mashedPotato:call('Companions',19),palette:call('GamingStatType','PaletteBonus',32,0),legendTalent:call('Thingies','LegendPTS_bonus',22,0),sushi:call('SushiStuff','RoG_BonusQTY',50,0)};})()",
+      "result": {
+        "crystalCuttlefish": 50,
+        "equinox": 2,
+        "cosmo": 30,
+        "summoning": 27,
+        "eventShop7": 0,
+        "eventShop16": 0,
+        "mashedPotato": 8,
+        "palette": 10.271739130434781,
+        "legendTalent": 25,
+        "sushi": 0
+      }
+    },
+    "bonus_week": {
+      "expression": "(()=>{const ballot=idleon.getAttr('PixelHelperActor')[25].behaviors.getBehavior('ActorEvents_670')._GenINFO;const options=idleon.getAttr('OptionsListAccount');const unixTimeSeconds=Number(idleon.getAttr('TimeAway').h.GlobalTime);const offsetSeconds=Number(ballot[37]);const periodSeconds=604800;const currentPeriod=Math.floor((unixTimeSeconds+offsetSeconds)/periodSeconds);const secondsUntilRotation=periodSeconds-(unixTimeSeconds+offsetSeconds-periodSeconds*currentPeriod);const selectedSlot=Number(options[308]);const savedVotePeriod=Number(options[309]);return {unixTimeSeconds,periodSeconds,offsetSeconds,selectedSlot,savedVotePeriod,currentPeriod,secondsUntilRotation,nextRotationAt:unixTimeSeconds+secondsUntilRotation,hasVotedThisWeek:Number(Number.isInteger(selectedSlot)&&selectedSlot>=1&&selectedSlot<=3&&savedVotePeriod===currentPeriod)};})()",
+      "result": {
+        "unixTimeSeconds": 1792913073.943,
+        "periodSeconds": 604800,
+        "offsetSeconds": 197860,
+        "selectedSlot": 0,
+        "savedVotePeriod": 2963,
+        "currentPeriod": 2964,
+        "secondsUntilRotation": 121066.0569999218,
+        "nextRotationAt": 1793034140,
+        "hasVotedThisWeek": 0
+      }
+    },
+    "meritocracy_week": {
+      "expression": "(()=>{const ballot=idleon.getAttr('PixelHelperActor')[25].behaviors.getBehavior('ActorEvents_670')._GenINFO;const options=idleon.getAttr('OptionsListAccount');const unixTimeSeconds=Number(idleon.getAttr('TimeAway').h.GlobalTime);const offsetSeconds=Number(ballot[239]);const periodSeconds=604800;const currentPeriod=Math.floor((unixTimeSeconds+offsetSeconds)/periodSeconds);const secondsUntilRotation=periodSeconds-(unixTimeSeconds+offsetSeconds-periodSeconds*currentPeriod);const selectedSlot=Number(options[450]);const savedVotePeriod=Number(options[451]);return {unixTimeSeconds,periodSeconds,offsetSeconds,selectedSlot,savedVotePeriod,currentPeriod,secondsUntilRotation,nextRotationAt:unixTimeSeconds+secondsUntilRotation,hasVotedThisWeek:Number(Number.isInteger(selectedSlot)&&selectedSlot>=1&&selectedSlot<=3&&savedVotePeriod===currentPeriod)};})()",
+      "result": {
+        "unixTimeSeconds": 1792913073.943,
+        "periodSeconds": 604800,
+        "offsetSeconds": 543460,
+        "selectedSlot": 0,
+        "savedVotePeriod": 2962,
+        "currentPeriod": 2965,
+        "secondsUntilRotation": 380266.0569999218,
+        "nextRotationAt": 1793293340,
+        "hasVotedThisWeek": 0
+      }
+    }
+  },
+  "errors": {}
+}

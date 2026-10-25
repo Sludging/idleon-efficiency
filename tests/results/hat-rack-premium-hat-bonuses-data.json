@@ -175,6 +175,167 @@
         "EquipmentHats146",
         "EquipmentHats147"
       ]
+    },
+    "hat_rack_deposited_hats": {
+      "expression": "idleon.getAttr(\"Spelunk\")[46]",
+      "result": [
+        "EquipmentHats38",
+        "EquipmentHatsBeg1",
+        "EquipmentHats21",
+        "EquipmentHats24",
+        "EquipmentHats42",
+        "EquipmentHats51",
+        "EquipmentHats108",
+        "EquipmentHats56",
+        "EquipmentHats63",
+        "EquipmentHats64",
+        "EquipmentHats67",
+        "EquipmentHats75",
+        "EquipmentHats76",
+        "EquipmentHats33",
+        "EquipmentHats34",
+        "EquipmentHats57",
+        "EquipmentHats62",
+        "EquipmentHats69",
+        "EquipmentHats109",
+        "EquipmentHats82",
+        "EquipmentHats86",
+        "EquipmentHats90",
+        "EquipmentHats91",
+        "EquipmentHats93",
+        "EquipmentHats94",
+        "EquipmentHats95",
+        "EquipmentHats96",
+        "EquipmentHats97",
+        "EquipmentHats99",
+        "EquipmentHats100",
+        "EquipmentHats101",
+        "EquipmentHats102",
+        "EquipmentHats103",
+        "EquipmentHats104",
+        "EquipmentHats112",
+        "EquipmentHats113",
+        "EquipmentHats118",
+        "EquipmentHats40",
+        "EquipmentHats116",
+        "EquipmentHats85",
+        "EquipmentHats87",
+        "EquipmentHats88",
+        "EquipmentHats125",
+        "EquipmentHats131",
+        "EquipmentHats50",
+        "EquipmentHats80",
+        "EquipmentHats46",
+        "EquipmentHats35"
+      ]
+    },
+    "hat_rack_bonus_multiplier": {
+      "expression": "idleon.callFunction(\"Gallery\", \"HatrackBonusMulti\", 0, 0)",
+      "result": 1.74
+    },
+    "hat_rack_account_bonuses": {
+      "expression": "Object.fromEntries(Object.entries(idleon.getDNSM(\"PremHatBonTOT\").h))",
+      "result": {
+        "Weapon_Power": 15.66,
+        "STR": 81.77999999999997,
+        "AGI": 95.69999999999993,
+        "WIS": 81.77999999999997,
+        "LUK": 76.55999999999997,
+        "Defence": 104.4,
+        "%_MONEY": 43.5,
+        "%_XP_FROM_MONSTERS": 104.4,
+        "%_CLASS_EXP_MULTI": 38.28,
+        "%_DROP_RATE": 52.199999999999996,
+        "%_MULTIKILL": 26.1,
+        "%_SKILL_EXP": 26.1,
+        "%_SKILL_EFFICIENCY": 19.14,
+        "%_BONUS_MONEY": 43.5,
+        "%_ALL_AFK_GAIN": 17.4,
+        "%_ALL_STATS": 8.7,
+        "%_DROP_RATE_MULTI": 6.96,
+        "%_DIVINITY_EXP": 26.1,
+        "%_DAMAGE_MULTI": 8.7,
+        "%_AFK_GAINS_MULTI": 1.74,
+        "%_MASTERCLASS_DROPS": 1.74,
+        "%_EXTRA_BONES": 43.5,
+        "%_DUST_MULTI": 43.5,
+        "%_BONUS_KILLS": 5.22
+      }
+    },
+    "hat_rack_deposited_item_bonuses": {
+      "expression": "(() => { const definitions = idleon.getAttr(\"ItemDefinitionsGET\").h; const multiplier = idleon.callFunction(\"Gallery\", \"HatrackBonusMulti\", 0, 0); return [\"EquipmentHats108\", \"EquipmentHats76\"].map(name => { const definition = definitions[name].h; const channels = []; for (let channel = 1; channel <= 2; channel++) { const effect = definition[`UQ${channel}txt`]; if (effect !== \"0\") channels.push({ effect, value: Number(definition[`UQ${channel}val`]) * multiplier }); } for (const effect of [\"Weapon_Power\", \"STR\", \"AGI\", \"WIS\", \"LUK\", \"Defence\"]) channels.push({ effect, value: Number(definition[effect]) * multiplier }); return { name, channels }; }); })()",
+      "result": [
+        {
+          "name": "EquipmentHats108",
+          "channels": [
+            {
+              "effect": "%_XP_FROM_MONSTERS",
+              "value": 6.96
+            },
+            {
+              "effect": "%_DROP_RATE",
+              "value": 5.22
+            },
+            {
+              "effect": "Weapon_Power",
+              "value": 3.48
+            },
+            {
+              "effect": "STR",
+              "value": 0
+            },
+            {
+              "effect": "AGI",
+              "value": 0
+            },
+            {
+              "effect": "WIS",
+              "value": 0
+            },
+            {
+              "effect": "LUK",
+              "value": 0
+            },
+            {
+              "effect": "Defence",
+              "value": 8.7
+            }
+          ]
+        },
+        {
+          "name": "EquipmentHats76",
+          "channels": [
+            {
+              "effect": "%_SKILL_EFFICIENCY",
+              "value": 10.44
+            },
+            {
+              "effect": "Weapon_Power",
+              "value": 5.22
+            },
+            {
+              "effect": "STR",
+              "value": 8.7
+            },
+            {
+              "effect": "AGI",
+              "value": 8.7
+            },
+            {
+              "effect": "WIS",
+              "value": 8.7
+            },
+            {
+              "effect": "LUK",
+              "value": 8.7
+            },
+            {
+              "effect": "Defence",
+              "value": 17.4
+            }
+          ]
+        }
+      ]
     }
   },
   "errors": {}

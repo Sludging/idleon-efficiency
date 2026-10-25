@@ -4,6 +4,29 @@
       "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusSlots\", 0, 0)",
       "result": 7
     },
+    "friend_bonus_multiplier": {
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusXtraMulti\", 0, 0)",
+      "result": 2.75
+    },
+    "friend_bonus_sources": {
+      "expression": "({ baseSlots: 2, spearfishSlots: idleon.callFunction(\"Companions\", 44), mrPigSlots: 2 * idleon.callFunction(\"Companions\", 30), friendlySlotSlots: idleon.callFunction(\"Summoning\", \"EventShopOwned\", 22, 0), slotOfFriendshipSlots: idleon.callFunction(\"Summoning\", \"EventShopOwned\", 67, 0), baseMultiplier: 1, mrPigMultiplierIncrease: 100 * idleon.callFunction(\"Companions\", 30) / 100, spearfishMultiplierIncrease: 25 * idleon.callFunction(\"CompLV2\", 44) / 100, totalSlots: idleon.callFunction(\"Thingies\", \"FriendBonusSlots\", 0, 0), totalMultiplier: idleon.callFunction(\"Thingies\", \"FriendBonusXtraMulti\", 0, 0) })",
+      "result": {
+        "baseSlots": 2,
+        "spearfishSlots": 1,
+        "mrPigSlots": 3,
+        "friendlySlotSlots": 1,
+        "slotOfFriendshipSlots": 0,
+        "baseMultiplier": 1,
+        "mrPigMultiplierIncrease": 1.5,
+        "spearfishMultiplierIncrease": 0.25,
+        "totalSlots": 7,
+        "totalMultiplier": 2.75
+      }
+    },
+    "friend_bonus_assignments": {
+      "expression": "idleon.engine.getGameAttribute(\"OptionsListAccount\")[476]",
+      "result": "1,13053,MaxionSquire;0,13053,MaxionSquire;3,13053,MaxionSquire;5,13053,MaxionSquire;4,13053,MaxionSquire;2,13053,MaxionSquire"
+    },
     "friend_bonus_stat_0": {
       "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 0, 0)",
       "result": 283.6688719913783
