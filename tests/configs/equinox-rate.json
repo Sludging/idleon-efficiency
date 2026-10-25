@@ -48,6 +48,11 @@
       "description": "Eternal Stream Tesseract multiplier to Equinox Bar Fill Rate"
     },
     {
+      "label": "legend_talent_bonus_35",
+      "expression": "idleon.callFunction(\"Thingies\",\"LegendPTS_bonus\", 35, 0)",
+      "description": "Obsolete No More Legend Talent bonus to Equinox bar fill rate"
+    },
+    {
       "label": "royal_armory_bonus_76",
       "expression": "idleon.callFunction(\"RoyalG\",\"ArmoryUpgBonus\", 76, 0)",
       "description": "Farmer Joe Royal Armory bonus to Equinox bar fill rate"

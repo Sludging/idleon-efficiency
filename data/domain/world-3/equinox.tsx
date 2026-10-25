@@ -17,6 +17,7 @@ import { Tome } from "../world-4/tome";
 import { EventShop } from "../eventShop";
 import { ResearchGrid } from "../world-7/research";
 import { RoyalArmory } from "../world-6/royalArmory/royalArmory";
+import { LegendTalents } from "../world-7/legendTalents";
 
 class Challenge {
   complete: boolean = false;
@@ -372,6 +373,7 @@ export function updateEquinoxBar(data: Map<string, any>) {
   const rawData = data.get("rawData") as Record<string, any>;
   const tome = data.get("tome") as Tome;
   const eventShop = data.get("eventShop") as EventShop;
+  const legendTalents = data.get("legendTalents") as LegendTalents;
   const royalArmory = data.get("royalArmory") as RoyalArmory;
 
   let bundleInfo = undefined;
@@ -389,6 +391,7 @@ export function updateEquinoxBar(data: Map<string, any>) {
   const cosmo26Bonus =
     hole.majiks.IdleonUpgrades.find((upgrade) => upgrade.index == 26)?.getBonus() ?? 0;
   const eventShop3Bonus = eventShop.isBonusOwned(3) ? 1 : 0;
+  const legendTalent35Bonus = legendTalents.getBonusFromIndex(35);
   const option320Bonus = Number(optionList[320] ?? 0);
   const arcade41Bonus = arcade.bonuses.find((bonus) => bonus.index == 41)?.getBonus() ?? 0;
   const emperor5Bonus = emperor.getEffectiveBonus(5);
@@ -422,6 +425,7 @@ export function updateEquinoxBar(data: Map<string, any>) {
     (1 + companion15Bonus) *
     (1 + cosmo26Bonus / 100) *
     (1 + 0.5 * eventShop3Bonus) *
+    (1 + legendTalent35Bonus / 100) *
     (1 + option320Bonus / 10) *
     (1 + tesseract37Bonus / 100) *
     (1 + royalArmory76Bonus / 100) *

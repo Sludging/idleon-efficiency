@@ -11,6 +11,7 @@ import { Tesseract } from '../../../data/domain/tesseract';
 import { Tome } from '../../../data/domain/tome';
 import { ResearchGrid } from '../../../data/domain/world-7/research';
 import { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
+import { LegendTalents } from '../../../data/domain/world-7/legendTalents';
 
 const saveName = 'latest';
 const extractionResultsName = 'equinox-rate-data.json';
@@ -87,6 +88,14 @@ const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     domainExtractor: (gameData) => {
       const tesseract = gameData.get("tesseract") as Tesseract;
       return tesseract.getUpgradeBonus(37) ?? 0;
+    }
+  },
+  legend_talent_bonus_35: {
+    description: 'Obsolete No More Legend Talent bonus to Equinox bar fill rate',
+    extractionKey: 'legend_talent_bonus_35',
+    domainExtractor: (gameData) => {
+      const legendTalents = gameData.get("legendTalents") as LegendTalents;
+      return legendTalents.getBonusFromIndex(35);
     }
   },
   royal_armory_bonus_76: {

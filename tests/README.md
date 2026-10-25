@@ -2,6 +2,13 @@
 
 Testing approach that validates domain calculations against extracted game values. Use the [canonical game-access policy](helpers/README.md#game-access) to select the default offline server or justify live access.
 
+## Saved-account calculation tests
+
+Domain suites compare website results with extracted game values. They do not
+add domain-specific save-pairing, fixed-roster, or extraction-context guards.
+Shared extraction-health, character-selection, and dataset-integrity checks
+remain in `tests/utils/` and `tests/helpers/`.
+
 ## Automatic Domain Class Reference Report
 
 `scripts/domain-class-references.ts` inventories class declarations in editable
