@@ -14,7 +14,7 @@
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { BigFish, updateBigFishUnlocked } from '../../../data/domain/world-7/bigFish';
+import { BigFish } from '../../../data/domain/world-7/bigFish';
 
 const saveName = 'latest';
 const extractionResultsName = 'big-fish-data.json';
@@ -331,8 +331,6 @@ describe('Big Fish Domain - Calculations', () => {
   });
 
   it('marks all Advice Fish entries unlocked for the retained account', () => {
-   updateBigFishUnlocked(gameData);
-
    expect(bigFish.bonuses.map((bonus) => bonus.unlocked)).toEqual([
     true, true, true, true, true, true, true,
    ]);

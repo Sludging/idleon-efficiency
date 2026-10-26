@@ -1,6 +1,6 @@
 import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import { Player } from '../../../data/domain/player';
-import { ClassIndex, getRightHandOfActionBonus, RightHandOfActionTalent, updateRightHandOfActionBonuses } from '../../../data/domain/talents';
+import { ClassIndex, getRightHandOfActionBonus, RightHandOfActionTalent } from '../../../data/domain/talents';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { getTargetPlayer } from '../../utils/target-player';
@@ -30,7 +30,6 @@ describe('Talents Right Hand of Action', () => {
 
   beforeAll(() => {
     const accountData = loadGameDataFromSave('latest');
-    updateRightHandOfActionBonuses(accountData);
     players = accountData.get('players') as Player[];
   });
 

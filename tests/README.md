@@ -2,6 +2,53 @@
 
 Testing approach that validates domain calculations against extracted game values. Use the [canonical game-access policy](helpers/README.md#game-access) to select the default offline server or justify live access.
 
+## Running tests
+
+`yarn test` still runs Jest. Select original source files with the usual Jest
+arguments, for example:
+
+```bash
+yarn test tests/domains/cooking/meal-speed.test.ts
+yarn test --runTestsByPath tests/domains/cooking/meal-speed.test.ts
+```
+
+The package command starts the installed Jest binary with Node's
+`--max-old-space-size=512`. This limits V8 old-space heap, not total process
+memory. `test:watch`, `test:coverage`, `test:domains`, and `test:integration`
+delegate to this command. Direct `yarn jest` uses the same Jest configuration
+but does not add this package-command heap limit. The account runner also does
+not add this heap limit.
+
+Jest selects source files before the sequencer groups domain suites into ten
+natural website groups: `account`, `players`, `master-classes`, and `world-1`
+through `world-7`. Each selected group runs through a short-lived require
+wrapper. Each Jest process uses a unique operating-system temporary directory
+for wrappers and removes that directory on exit. Non-domain suites remain
+separate Jest entries with their usual runtime isolation.
+
+New test files in an existing domain directory are discovered automatically.
+They inherit the directory's group; do not register each file.
+The directory mapping is in `tests/helpers/domain-test-groups.cjs` and uses the
+first directory below `tests/domains/`. Add a mapping once when adding a new
+domain directory. Use `perFileOverrides` only when a test's website group differs
+from its directory's default, such as tests in mixed legacy directories.
+An unmapped domain directory stops test execution with an error; its tests are
+not silently skipped. `--listTests` only lists discovered source files and does
+not validate group mappings.
+
+Within each group's Jest runtime, `loadGameDataFromSave` shares one prepared
+account per resolved save path after `updateIdleonData` completes.
+Treat that prepared state as read-only; object and array writes and
+`Map`, `Set`, and `Date` mutators are blocked. The cache
+ends with that Jest runtime; it does not span groups or processes.
+
+Normal and opt-in account runs default to one worker and a `512MB`
+`workerIdleMemoryLimit`. Jest can recycle a worker between scheduled entries
+after it exceeds this idle threshold. The threshold does not impose a hard
+heap or total-memory cap. Explicit Jest worker and memory options override
+the defaults.
+`--runInBand` runs in the main process instead of using worker recycling.
+
 ## Saved-account calculation tests
 
 Domain suites compare website results with extracted game values. They do not

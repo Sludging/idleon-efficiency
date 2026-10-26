@@ -1,7 +1,7 @@
 import { Compass } from '../../../data/domain/compass';
 import { Lab } from '../../../data/domain/world-4/lab';
 import { Player } from '../../../data/domain/player';
-import { Printer, updatePrinter } from '../../../data/domain/world-3/construction/printer';
+import { Printer } from '../../../data/domain/world-3/construction/printer';
 import { Rift, SkillMastery } from '../../../data/domain/world-4/rift';
 import { Sailing } from '../../../data/domain/world-5/sailing/sailing';
 import { Votes } from '../../../data/domain/world-2/votes';
@@ -80,7 +80,6 @@ describe('Printer output - mapped inputs', () => {
     extractionResults = loadExtractionResults(extractionResultsName);
     validateExtractionHealth(extractionResults);
     gameData = loadGameDataFromSave(saveName);
-    updatePrinter(gameData);
   });
 
 

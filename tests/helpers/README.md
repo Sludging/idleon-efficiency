@@ -259,11 +259,23 @@ calculation failures remain visible; this workflow does not skip mismatches,
 change tolerances, or synthesize account values. Public saves are consented
 player uploads; the importer restores required representation without adding
 resources or simulating progress.
-Account Jest runs default to one worker and a `512MB` worker idle-memory limit.
-Jest can recycle workers between test files after a worker exceeds this limit.
-Pass `--maxWorkers` or `--workerIdleMemoryLimit` after `--` to override each
-default. Pass `--runInBand` or `-i` to disable both worker defaults. Ordinary
-`yarn test` does not use these account-runner options.
+Account and normal `yarn test` runs share the Jest defaults: one worker and a
+`512MB` `workerIdleMemoryLimit`. Jest can recycle workers between scheduled
+entries after a worker exceeds this idle threshold. This is not a hard heap or
+total-memory cap. Pass `--maxWorkers` or `--workerIdleMemoryLimit` after `--`
+to override each default for an account run. Pass `--runInBand` or `-i` to run
+in the main process without worker recycling.
+
+The normal package command also uses Node's `--max-old-space-size=512` to
+limit V8 old-space heap. The account runner does not add this package-command
+heap limit. Neither setting caps total process memory.
+
+Both commands use the [same grouped execution](../README.md#running-tests).
+Jest selects original source paths before grouping domain suites into ten
+natural website groups. Each group shares read-only prepared account state
+per resolved save path within its Jest runtime. Non-domain suites keep separate
+Jest entries. Generated require wrappers live in a unique operating-system
+temporary directory and are removed automatically.
 
 The runner accepts `--config PATH`, `--cache-dir PATH`, and `--port NUMBER`.
 Configuration uses `{ "accounts": [...] }`. All selected suites run against

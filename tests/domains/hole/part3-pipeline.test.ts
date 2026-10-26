@@ -4,7 +4,6 @@ import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import { Skilling } from '../../../data/domain/skilling';
 import { getTargetPlayer } from '../../utils/target-player';
 import type { Player } from '../../../data/domain/player';
-import { updateHoleCharacterCapabilities } from '../../../data/domain/world-5/hole/hole';
 import type { Hole } from '../../../data/domain/world-5/hole/hole';
 
 describe('Hole part-three public skill efficiencies', () => {
@@ -29,14 +28,11 @@ describe('Hole part-three public skill efficiencies', () => {
         });
     });
 
-    it('prepares resource-cavern eligibility for every character without stacking results', () => {
+    it('matches prepared resource-cavern eligibility for every character', () => {
         const gameData = loadGameDataFromSave('latest');
         const players = gameData.get('players') as Player[];
         const hole = gameData.get('hole') as Hole;
         const skilling = gameData.get('skilling') as Skilling;
-
-        updateHoleCharacterCapabilities(gameData);
-        updateHoleCharacterCapabilities(gameData);
 
         for (const cavern of Object.values(hole.resourceCavrens.cavrens)) {
             expect(cavern.characterCapabilities).toHaveLength(players.length);

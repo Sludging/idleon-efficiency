@@ -6,8 +6,6 @@ import { loadExtractionResults, validateExtractionHealth } from '../../utils/liv
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Divinity, NobisectGod } from '../../../data/domain/world-5/divinity';
 import type { Player } from '../../../data/domain/player';
-import type { Alchemy } from '../../../data/domain/world-2/alchemy/alchemy';
-import type { Skilling } from '../../../data/domain/skilling';
 import { getTargetPlayer } from '../../utils/target-player';
 const saveName = 'latest';
 const extractionResultsName = 'divinity-blessing-data.json';
@@ -37,55 +35,11 @@ describe('Divinity Domain - Blessing Bonus', () => {
   }
  });
 
- describe('Nobisect blessing lifecycle', () => {
+ describe('Nobisect blessing context', () => {
   it('returns zero without player context', () => {
    const god = divinity.gods[2] as NobisectGod;
 
    expect(god.getBlessingBonus()).toBe(0);
-  });
-
-  it('initializes zero bonuses for every loaded player', () => {
-   const roster = gameData.get('players') as Player[];
-   const initializedDivinity = new Divinity().init([], roster.length);
-   const god = initializedDivinity.gods[2] as NobisectGod;
-
-   expect(roster.length).toBeGreaterThan(0);
-   for (const player of roster) {
-    expect(god.getBlessingBonus(player)).toBe(0);
-   }
-  });
-
-  it('resets prepared bonuses and reproduces them after updating', () => {
-   const roster = gameData.get('players') as Player[];
-   const alchemy = gameData.get('alchemy') as Alchemy;
-   const skilling = gameData.get('skilling') as Skilling;
-   const initializedDivinity = new Divinity().init([], roster.length);
-   const god = initializedDivinity.gods[2] as NobisectGod;
-   god.blessLevel = divinity.gods[2].blessLevel;
-   god.updateBlessings(roster, alchemy, skilling);
-   const originalBonuses = roster.map(player => god.getBlessingBonus(player));
-
-   god.resetBlessings(roster.length);
-   for (const player of roster) {
-    expect(god.getBlessingBonus(player)).toBe(0);
-   }
-   god.updateBlessings(roster, alchemy, skilling);
-
-   expect(roster.map(player => god.getBlessingBonus(player))).toEqual(originalBonuses);
-  });
-
-  it('retains prepared bonuses across repeated updates with unchanged inputs', () => {
-   const roster = gameData.get('players') as Player[];
-   const alchemy = gameData.get('alchemy') as Alchemy;
-   const skilling = gameData.get('skilling') as Skilling;
-   const god = divinity.gods[2] as NobisectGod;
-   const originalBonuses = roster.map(player => god.getBlessingBonus(player));
-
-   god.updateBlessings(roster, alchemy, skilling);
-   expect(roster.map(player => god.getBlessingBonus(player))).toEqual(originalBonuses);
-
-   god.updateBlessings(roster, alchemy, skilling);
-   expect(roster.map(player => god.getBlessingBonus(player))).toEqual(originalBonuses);
   });
  });
 

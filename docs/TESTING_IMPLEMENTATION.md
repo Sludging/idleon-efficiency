@@ -34,9 +34,42 @@ When extraction is needed, use the [extraction helper guide](../tests/helpers/RE
 
 For a correctness case, follow the [plan approval step](calculation-correctness/PLAYBOOK.md#2-plan-and-obtain-approval) before changing tests or extraction configs. Use the approved scope and interface. When extraction is needed, return the request to the human or explicitly delegated supervising session under the [playbook extraction procedure](calculation-correctness/PLAYBOOK.md#extraction-when-needed).
 
+## Test execution
+
+`yarn test` remains the normal Jest command. Jest discovers and selects the
+original source paths before the sequencer groups selected domain suites into
+ten natural website groups. Existing source-path filters and
+`--runTestsByPath` keep selecting those original files.
+
+The package command starts the installed Jest binary through Node with
+`--max-old-space-size=512`. This limits V8 old-space heap, not total process
+memory. `test:watch`, `test:coverage`, `test:domains`, and `test:integration`
+delegate to `yarn test`. Direct `yarn jest` and the account runner do not add
+this package-command heap limit.
+
+Each group runs in one Jest runtime through a generated require wrapper.
+Wrappers live in a unique operating-system temporary directory and are removed
+automatically. Non-domain suites remain separate Jest entries with their usual
+runtime isolation.
+
+`loadGameDataFromSave` caches the prepared account after `updateIdleonData`
+completes. The cache uses the resolved save path and lasts only for that
+group's Jest runtime. Tests share read-only prepared state, not a process-global
+or cross-runtime account. The guard blocks object and array writes and
+`Map`, `Set`, and `Date` mutators.
+
+Normal and opt-in account runs default to one Jest worker and a `512MB`
+`workerIdleMemoryLimit`. This idle threshold lets Jest recycle workers between
+scheduled entries. The threshold is separate from the package-command heap
+limit and does not impose a hard heap or total-memory cap.
+Explicit `--maxWorkers` and `--workerIdleMemoryLimit` values override the
+defaults. `--runInBand` runs in the main process without worker recycling.
+
 ## Keep tests tied to genuine saves
 
 Use a genuine real save and its matching extracted game values. Result-only extraction, whether offline or live, does not establish pairing with a retained save; offline and live snapshots are not presumed equivalent. A live save refresh precedes config extraction rather than taking an atomic snapshot, so establish that results match the saved state before using them. Tests must not construct synthetic saves, alter inputs to simulate a branch, or calculate expected values from the implementation. This deliberately leaves unobserved permutations uncovered. State which meaningful behavior the paired save exercises, and raise uncovered behavior as a coverage question rather than inventing test data.
+
+Treat fully prepared account state as read-only in regular core and parameter tests. `loadGameDataFromSave` already runs initialization, parsing, and calculation; read its prepared public results without rerunning those steps. Do not add same-save reloads, reset/reparse cycles, or repeated-updater checks as routine calculation coverage. Dedicated lifecycle coverage requires an explicit request.
 
 Routine `yarn test` and extraction use `tests/fixtures/saves/latest.json` and its matching results; reuse the shared default offline server when ready. Public-account testing is opt-in only when the user explicitly requests multi-account or public-profile validation. DO NOT USE THIS IN NORMAL OPERATIONS. It is not a routine prerequisite or fallback for regular-save mismatches or missing results. The importer changes required save representation only; it does not add resources or simulate progress. Fetched data stays local under `.cache/test-accounts/` by default. Fetching, extraction, and tests are separate commands; tests use stored paired datasets and never fetch profiles.
 
@@ -54,11 +87,8 @@ Run this sequence only when the user explicitly requests multi-account or public
 
 Use `yarn test:accounts:list --accounts <ids>` to inspect configured accounts, source dates, and observed progression. Fetch explicitly with `yarn test:accounts:fetch --accounts <ids>`, extract with `yarn test:accounts:extract --accounts <ids>`, then run fresh Jest processes with `yarn test:accounts --accounts <ids>`. Pass Jest suite arguments after `--`. See [helper account testing](../tests/helpers/README.md#integration-with-tests) for options and cache behavior. Account-specific calculation failures remain failures. Do not suppress known mismatches or change comparison tolerances.
 
-Account test processes default to one Jest worker with a `512MB`
-`workerIdleMemoryLimit`. Jest can recycle workers between test files when a
-worker exceeds the limit. Pass `--maxWorkers` or `--workerIdleMemoryLimit` after
-`--` to override a default; pass `--runInBand` or `-i` to disable both worker
-defaults. This does not change normal `yarn test`.
+Opt-in account runs use the same worker defaults as normal `yarn test`.
+Pass Jest options after `--` when using `yarn test:accounts`.
 Each extraction entry used here should support a core result or a direct parameter comparison. A parameter is a calculation the selected result directly uses, including one in the same domain; keep its comparison even when it also has a core test. Static/supporting metadata is not a calculation target.
 
 Write the completed test against the typed public API directly and assert the calculated result. For a missing implementation during the tests stage, keep an active test whose extractor reports the missing calculation and game function signature. This temporary failure scaffolding exposes the missing API; once implemented, remove `typeof`/`in` guards, `unknown` casts, and `.call` wrappers. A missing selected implementation can support implementation after tests-stage approval; a missing directly used result follows the [dependency procedure](calculation-correctness/PLAYBOOK.md#dependencies-and-wikibot).

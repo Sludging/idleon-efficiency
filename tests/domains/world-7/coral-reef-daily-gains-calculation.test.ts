@@ -12,7 +12,7 @@
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { CoralReef, updateCoralReefDailyGain } from '../../../data/domain/world-7/coralReef';
+import { CoralReef } from '../../../data/domain/world-7/coralReef';
 
 const saveName = 'latest';
 const extractionResultsName = 'coral-reef-daily-gains-data.json';
@@ -31,10 +31,6 @@ describe('CoralReef Daily Gains - Calculation', () => {
   try {
    gameData = loadGameDataFromSave(saveName);
 
-   // Run the daily gains calculation
-   updateCoralReefDailyGain(gameData);
-
-   // Get the updated coral reef domain
    coralReef = gameData.get('coralReef') as CoralReef;
    if (!coralReef) {
     throw new Error('CoralReef domain not found in save data');

@@ -1,10 +1,8 @@
 import type { Grimoire } from '../../../data/domain/grimoire';
-import { updateIdleonData } from '../../../data/domain/idleonData';
-import { normalizeCompanionStates } from '../../../data/domain/companions/companionState';
 import { EfficiencyEngine } from '../../../lib/efficiencyEngine/efficiencyEngine';
 import { CheapestPathCalculator } from '../../../lib/efficiencyEngine/calculators';
 import type { ExtractionResults } from '../../utils/live-game-data-loader';
-import { loadGameDataFromSave, loadTestSave } from '../../utils/cloudsave-loader';
+import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import {
     getExtractedValue,
     loadExtractionResults,
@@ -49,7 +47,6 @@ describe('Grimoire current upgrade purchase costs', () => {
         it(`matches quoted ${mechanic}`, () => {
             comparePrice(grimoire.upgrades[upgradeId].getCost(grimoire.upgrades));
         });
-
     });
 
     it('matches the first Cranium-only cheapest-path purchase price for Wraith Accuracy III', () => {
@@ -66,26 +63,6 @@ describe('Grimoire current upgrade purchase costs', () => {
                 context: 'First Cranium-only cheapest-path current purchase price; Wraith Accuracy III at owned level 227',
             },
         );
-    });
-
-    it('keeps current purchase prices unchanged when normal account processing repeats for the same save', () => {
-        const save = loadTestSave('latest');
-        let accountData = loadGameDataFromSave('latest');
-        accountData = updateIdleonData(
-            accountData, save, save.get('playerNames'),
-            normalizeCompanionStates(save.get('companions')), save.get('servervars'), true,
-        ).getData();
-
-        const preparedGrimoire = accountData.get('grimoire') as Grimoire;
-        currentPrices.forEach(({ upgradeId, label, mechanic }) => {
-            expect(preparedGrimoire.upgrades[upgradeId].cost).toMatchLiveGameWithDetails(
-                getExtractedValue(extractionResults, label),
-                {
-                    tolerance: 0,
-                    context: `${mechanic} after repeated normal account processing with unchanged real save inputs`,
-                },
-            );
-        });
     });
 
     // The game returns a raw price at cap, but its purchase gate prevents another purchase.

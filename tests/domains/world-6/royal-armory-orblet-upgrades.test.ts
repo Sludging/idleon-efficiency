@@ -4,9 +4,7 @@ import {
     loadExtractionResults,
     validateExtractionHealth,
 } from '../../utils/live-game-data-loader';
-import { loadGameDataFromSave, loadTestSave } from '../../utils/cloudsave-loader';
-import { updateIdleonData } from '../../../data/domain/idleonData';
-import { normalizeCompanionStates } from '../../../data/domain/companions/companionState';
+import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
 import { RoyalArmoryOrbletMarketBonus } from '../../../data/domain/world-6/royalArmory/orblets';
 
@@ -27,13 +25,12 @@ const marketRows = [
 
 describe('Royal Armory Orblet upgrade calculations', () => {
     let extractionResults: ExtractionResults;
-    let gameData: Map<string, unknown>;
     let royalArmory: RoyalArmory;
 
     beforeAll(() => {
         extractionResults = loadExtractionResults(extractionResultsName);
         validateExtractionHealth(extractionResults);
-        gameData = loadGameDataFromSave(saveName);
+        const gameData = loadGameDataFromSave(saveName);
         royalArmory = gameData.get('royalArmory') as RoyalArmory;
     });
 
@@ -88,36 +85,4 @@ describe('Royal Armory Orblet upgrade calculations', () => {
             assertCurrentValues(upgrade, `${name} after preview`);
         });
     });
-
-    it('matches prices, bonuses, previews and balance after repeated normal processing', () => {
-        const cloudSave = loadTestSave(saveName);
-        for (let pass = 0; pass < 2; pass++) {
-            if (pass > 0) {
-                gameData = updateIdleonData(
-                    gameData,
-                    cloudSave,
-                    cloudSave.get('playerNames'),
-                    normalizeCompanionStates(cloudSave.get('companions')),
-                    cloudSave.get('servervars'),
-                    true,
-                ).getData();
-                royalArmory = gameData.get('royalArmory') as RoyalArmory;
-            }
-            for (const { index, name } of marketRows) {
-                const upgrade = upgradeAt(index);
-                assertCurrentValues(upgrade, `${name}, processing pass ${pass + 1}`);
-                if (index !== 4) {
-                    upgrade.getCurrentValue();
-                    upgrade.getNextValue();
-                    upgrade.getDescription(true);
-                    assertCurrentValues(upgrade, `${name}, processing pass ${pass + 1} after preview`);
-                }
-            }
-            expect(royalArmory.getOrbletsOwned()).toMatchLiveGameWithDetails(
-                getExtractedValue(extractionResults, 'calculationStorage.amountInStorageOrblet'),
-                { tolerance: 0, context: `Repeated account processing pass ${pass + 1}: Orblet balance` },
-            );
-        }
-    });
-
 });

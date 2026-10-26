@@ -5,6 +5,9 @@ module.exports = {
   // Match TypeScript's repository-root baseUrl for bare local imports.
   modulePaths: ['<rootDir>'],
   testMatch: ['**/tests/**/*.test.ts'],
+  testSequencer: '<rootDir>/tests/helpers/domain-test-sequencer.cjs',
+  maxWorkers: 1,
+  workerIdleMemoryLimit: '512MB',
   collectCoverageFrom: [
     'data/domain/**/*.tsx',
     '!data/domain/data/**',     // Exclude auto-generated files

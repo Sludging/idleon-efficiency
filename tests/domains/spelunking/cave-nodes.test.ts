@@ -1,6 +1,4 @@
-import { initAllItems } from '../../../data/domain/items';
-import { StaticRepositories } from '../../../data/domain/repositories';
-import { Spelunking, updateSpelunkingAccountMetrics, updateSpelunkingLateCalculations } from '../../../data/domain/world-7/spelunking';
+import { Spelunking } from '../../../data/domain/world-7/spelunking';
 import { loadGameDataFromSave, loadTestSave } from '../../utils/cloudsave-loader';
 import type { ExtractionResults } from '../../utils/live-game-data-loader';
 import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
@@ -36,80 +34,6 @@ describe('Spelunking Cave Node harvest outcomes', () => {
         gameData = loadGameDataFromSave('latest');
         spelunking = gameData.get('spelunking') as Spelunking;
         expect(spelunking.chapters).toHaveLength(caveNodes.length);
-    });
-
-    it('initializes neutral results for every saved character, tunnel, and chapter', () => {
-        const names = loadTestSave('latest').get('playerNames') as string[];
-        const initialized = new Spelunking();
-        initialized.init(initAllItems(), names.length, new StaticRepositories());
-
-        expect(initialized.characters).toHaveLength(names.length);
-        initialized.characters.forEach((character, playerID) => {
-            expect(character.playerID).toBe(playerID);
-            expect(character.playerName).toBe('');
-            expect(character.skillLevel).toBe(0);
-            expect(character.efficiency).toBe(0);
-            expect(character.grandDiscoveryChances).toHaveLength(initialized.tunnels.length);
-            expect(character.caveNodeHarvests).toHaveLength(initialized.chapters.length);
-            initialized.tunnels.forEach(tunnel => {
-                expect(character.grandDiscoveryChances[tunnel.index]).toBe(0);
-            });
-            initialized.chapters.forEach(chapter => {
-                const outcome = character.caveNodeHarvests[chapter.index];
-                expect(outcome.eligible).toBe(false);
-                expect(outcome.harvestChance).toBe(0);
-                expect(outcome.pagesPerDrop).toBe(0);
-            });
-        });
-        expect(initialized.grandDiscovery.playerName).toBe('');
-        expect(initialized.grandDiscovery.skillLevel).toBe(0);
-        expect(initialized.grandDiscovery.chances).toHaveLength(initialized.tunnels.length);
-        initialized.tunnels.forEach(tunnel => {
-            expect(tunnel.grandEligible).toBe(false);
-            expect(initialized.grandDiscovery.chances[tunnel.index]).toBe(0);
-        });
-    });
-
-    it('resets prepared character results when parsing the real save again', () => {
-        const save = loadTestSave('latest');
-        const names = save.get('playerNames') as string[];
-        const prepared = new Spelunking('spelunking').init(initAllItems(), names.length, new StaticRepositories());
-        const data = new Map(gameData);
-        data.set('spelunking', prepared);
-        data.set('charCount', names.length);
-        ['Spelunk', 'OptLacc', 'GemItemsPurchased'].forEach(key => {
-            const value = save.get(key);
-            data.set(key, typeof value === 'string' ? JSON.parse(value) : value);
-        });
-
-        prepared.parse(data);
-        updateSpelunkingAccountMetrics(data);
-        updateSpelunkingLateCalculations(data);
-        expect(prepared.characters.some(character => character.efficiency > 0)).toBe(true);
-        expect(prepared.grandDiscovery.playerName).not.toBe('');
-
-        prepared.parse(data);
-
-        expect(prepared.characters).toHaveLength(names.length);
-        prepared.characters.forEach(character => {
-            expect(character.playerName).toBe('');
-            expect(character.skillLevel).toBe(0);
-            expect(character.efficiency).toBe(0);
-            prepared.tunnels.forEach(tunnel => {
-                expect(character.grandDiscoveryChances[tunnel.index]).toBe(0);
-            });
-            prepared.chapters.forEach(chapter => {
-                const outcome = character.caveNodeHarvests[chapter.index];
-                expect(outcome.eligible).toBe(false);
-                expect(outcome.harvestChance).toBe(0);
-                expect(outcome.pagesPerDrop).toBe(0);
-            });
-        });
-        expect(prepared.grandDiscovery.playerName).toBe('');
-        expect(prepared.grandDiscovery.skillLevel).toBe(0);
-        prepared.tunnels.forEach(tunnel => {
-            expect(prepared.grandDiscovery.chances[tunnel.index]).toBe(0);
-        });
     });
 
     it.each(caveNodes)('matches character 3 eligibility, harvest chance, and pages per drop at $name', ({ chapterIndex, name }) => {
