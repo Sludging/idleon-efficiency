@@ -208,7 +208,7 @@ export class KillroySavedWeek {
             return;
         }
         const playersByIndex = new Map(players.map(player => [player.playerID, player]));
-        // Parsed character indexes are ascending. The first prepared character owns the account projection.
+        // The prepared character with the lowest character index supplies the account's default fight list.
         for (const character of this.parsedCharacters) {
             const player = playersByIndex.get(character.playerIndex);
             if (player !== undefined) {

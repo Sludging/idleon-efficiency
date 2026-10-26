@@ -71,6 +71,14 @@ Use a genuine real save and its matching extracted game values. Result-only extr
 
 Treat fully prepared account state as read-only in regular core and parameter tests. `loadGameDataFromSave` already runs initialization, parsing, and calculation; read its prepared public results without rerunning those steps. Do not add same-save reloads, reset/reparse cycles, or repeated-updater checks as routine calculation coverage. Dedicated lifecycle coverage requires an explicit request.
 
+Regular core and parameter tests must not assume developer-specific character
+names, save timestamps, owned levels, unlock states, balances, or optimizer
+selections. Use the selected save's matching native captures for account-dependent
+expectations. Remove fixture-pinned cases rather than preserving them behind
+skips, state guards, or replacement assertions. Constants that define game
+mechanics or controlled unit inputs remain valid. Keep genuine extraction-health
+and comparison-context checks.
+
 Routine `yarn test` and extraction use `tests/fixtures/saves/latest.json` and its matching results; reuse the shared default offline server when ready. Public-account testing is opt-in only when the user explicitly requests multi-account or public-profile validation. DO NOT USE THIS IN NORMAL OPERATIONS. It is not a routine prerequisite or fallback for regular-save mismatches or missing results. The importer changes required save representation only; it does not add resources or simulate progress. Fetched data stays local under `.cache/test-accounts/` by default. Fetching, extraction, and tests are separate commands; tests use stored paired datasets and never fetch profiles.
 
 All Toolbox-to-save conversion belongs in `tests/helpers/public-profile-import.cjs`.

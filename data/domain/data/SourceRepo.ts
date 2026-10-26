@@ -3087,7 +3087,6 @@ export const initSourceRepo = () => {
                         "txtName": "Task Unlocks Tab 5"
                     },
                     <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"},
-                    <SourceModel>{"wikiName": "[[Skull Shop]]", "txtName": "Killroy Shop"},
                     <SourceModel>{
                         "wikiName": "[[Alchemy#Level up Gift|Level up Gift]]",
                         "txtName": "Alchemy: Level up Gift"
@@ -15548,11 +15547,6 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("Blank", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
         new SourcesBase("StonePremSTR", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
@@ -17331,16 +17325,6 @@ export const initSourceRepo = () => {
             }),
         new SourcesBase("DungEquipmentRings4", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Dungeons]]", "txtName": "Dungeons"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Timecandy0", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Skull Shop]]", "txtName": "Killroy Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Timecandy#", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Skull Shop]]", "txtName": "Killroy Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),

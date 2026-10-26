@@ -88,7 +88,7 @@ export class KillroyRunUpgrade extends KillroyRunUpgradeBase {
     }
 
     getExpectedRespawnCreditsMultiplier(level: number = this.level): number {
-        // The upgrade adds expected spawn credits. It does not shorten the spawn interval.
+        // The upgrade increases the average number of monsters spawned. It does not shorten the spawn interval.
         return 1 + level / 100;
     }
 
@@ -409,7 +409,7 @@ export class KillRoy extends Domain {
     }
 
     get spelunkingExpMulti(): number {
-        // Research and Spelunking use the native multiplier directly in version 1.24.
+        // Research and Spelunking use this bonus as a multiplier, not a percentage.
         return this.permanentBonuses[5].value;
     }
 

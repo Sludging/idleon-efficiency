@@ -135,8 +135,8 @@ export default function VoteBallotContent() {
                                 ['Equinox', votes.bonusSources.equinox],
                                 ['Cosmo', votes.bonusSources.cosmo],
                                 ['Summoning Win', votes.bonusSources.summoning],
-                                ['Event Shop 7', votes.bonusSources.eventShop7],
-                                ['Event Shop 16', votes.bonusSources.eventShop16],
+                                ['Event Shop — Gilded Vote Button', votes.bonusSources.eventShop7],
+                                ['Event Shop — Royal Vote Button', votes.bonusSources.eventShop16],
                                 ['Mashed Potato', votes.bonusSources.mashedPotato],
                                 ['Palette', votes.bonusSources.palette],
                                 ['Legend Talent', votes.bonusSources.legendTalent],
@@ -180,7 +180,7 @@ export default function VoteBallotContent() {
                         </Box>
                         <Box gap="xxsmall">
                             <Text size="xsmall">World 7: {meritocraty.haveReachedW7 ? 'reached — multiplier applies' : 'not reached — required for multiplier to apply'}</Text>
-                            <Text size="xsmall">Demonflesh voting: {meritocraty.canVote ? 'unlocked — voting enabled; full multiplier baseline' : 'locked — voting disabled; reduced multiplier baseline'}</Text>
+                            <Text size="xsmall">Demonflesh voting: {meritocraty.canVote ? 'Unlocked. You can vote. Base bonus multiplier: 1x.' : 'Locked. You cannot vote. Base bonus multiplier: 0.25x.'}</Text>
                         </Box>
                     </Box>
                 }>

@@ -56,7 +56,7 @@ function runEffect(upgrade: KillroyRunUpgrade, next: boolean = false): string {
     }
 }
 
-const runEffectNames = ['Room time', 'Talent Point drop chance', 'Skull drop chance bonus', 'Average monsters per timed respawn', 'Dungeon Credit drop chance', 'Pearl drop chance'];
+const runEffectNames = ['Room time', 'Talent Point drop chance', 'Skull drop chance bonus', 'Monster spawn multiplier', 'Dungeon Credit drop chance', 'Pearl drop chance'];
 
 function RunUpgrades({ killroy }: { killroy: KillRoy }) {
     return <Box gap="medium" data-killroy-upgrades>
@@ -80,6 +80,7 @@ function RunUpgrades({ killroy }: { killroy: KillRoy }) {
                         </Box>
                     </Box>
                     {upgrade.id === KillroyRunUpgradeId.TalentDrops && <Text size="xsmall" color="accent-2">Chance falls as you collect more Killroy Talent Points.</Text>}
+                    {upgrade.id === KillroyRunUpgradeId.FasterRespawn && <Text size="xsmall" color="accent-2">Increases the average number of monsters spawned. The respawn interval does not change.</Text>}
                     {!upgrade.unlocked && upgrade.runsUntilUnlock > 0 && <Text size="xsmall" color="accent-2">Requires {commaNotation(upgrade.completedRunsRequired)} completed runs · {commaNotation(upgrade.runsUntilUnlock)} more</Text>}
                     {upgrade.id >= upgrade.availableChoiceCount && <Text size="small">Requires more Shades of K upgrade choices.</Text>}
                 </Box>
@@ -233,7 +234,7 @@ function CurrentFights({ killroy }: { killroy: KillRoy }) {
                 })}
             </Box>
             {projection.fights.length === 0 && <Text size="small">All available fights have been entered.</Text>}
-        </> : <Text size="small">No fights available.</Text>}
+        </> : <Text size="small">Could not load fight details.</Text>}
         {killroy.airhornUsed && <Text size="xsmall" color="accent-2">Airhorn used this week.</Text>}
     </Box>;
 }

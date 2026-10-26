@@ -56,13 +56,6 @@ add domain-specific save-pairing, fixed-roster, or extraction-context guards.
 Shared extraction-health, character-selection, and dataset-integrity checks
 remain in `tests/utils/` and `tests/helpers/`.
 
-Family selects the highest Family Guy account-talent effect across all recipient
-characters using their currently applied pre-ES inputs. Class-bonus tests compare
-the resulting stored bonuses with the game's stored results. A current game
-talent-helper result is not used as an oracle for the earlier Family Guy input.
-Pre-ES inputs exclude Elemental Sorcerer Family levels but include applicable
-Super Talent levels.
-
 Bubba progression tests compare the next bonus, purchase cost, and affordability.
 They do not assert the continuously changing raw meat balance.
 

@@ -17,7 +17,7 @@ import { commaNotation } from "../../../data/utility";
 import useHydrated from "../../../lib/hooks/useHydrated";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 
-// Native 1.24 hides purchase limits at this cutoff (idleon1.24.txt:483279-483286).
+// Offers at or above this purchase limit display as repeatable, without a finite completion target.
 const purchaseLimitDisplayCutoff = 50_000;
 const groups = [
     { id: 0, name: "Oddities" },

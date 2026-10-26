@@ -65,7 +65,7 @@
     {
       "label": "killroy_bonus_5",
       "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 5, 0)",
-      "description": "Current native World 7 skill EXP multiplier. Version 1.24 Research and Spelunking use max(1, output) directly, not one plus output divided by 100."
+      "description": "World 7 skill EXP multiplier. Research and Spelunking use this value directly as a multiplier, with a minimum of 1."
     },
     {
       "label": "killroy_bonus_6",
@@ -80,7 +80,7 @@
     {
       "label": "killroy_masterclass_multiplier",
       "expression": "1+idleon.callFunction(\"RandomEvent\",\"KillroyBonuses\",4,0)/100",
-      "description": "Applied Masterclass drop multiplier. Version 1.24 AllMasterclassDropz applies one plus the native shop value divided by 100."
+      "description": "Applied Masterclass drop multiplier: one plus the shop bonus percentage divided by 100."
     },
     {
       "label": "killroy_extra_shop_row",

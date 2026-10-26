@@ -32340,7 +32340,6 @@ export const initItemRepo = () => {
                             "txtName": "Task Unlocks Tab 5"
                         },
                         <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"},
-                        <SourceModel>{"wikiName": "[[Skull Shop]]", "txtName": "Killroy Shop"},
                         <SourceModel>{
                             "wikiName": "[[Alchemy#Level up Gift|Level up Gift]]",
                             "txtName": "Alchemy: Level up Gift"

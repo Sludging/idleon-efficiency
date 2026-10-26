@@ -77,7 +77,7 @@ function hasObtainedReward(evidence: IslandRewardPossession): boolean {
 
 function PossessionEvidence({ evidence }: { evidence: IslandRewardPossession }) {
     if (!hasObtainedReward(evidence)) {
-        return <Text size="xsmall" color="accent-2">Ownership unknown</Text>;
+        return null;
     }
     return <Box gap="xsmall">
         <Text size="small" weight="bold">Obtained</Text>

@@ -41,7 +41,6 @@ export class FriendBonus {
   }
 }
 
-/** Parses one saved Friend Bonus assignment into named contributor state. */
 const parseAssignment = (record: string): FriendBonusAssignment => {
   const [rawStatIndex, rawAccountLevel, friendName = ""] = record.split(",");
   return {

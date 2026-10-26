@@ -90,8 +90,9 @@ const islandBookTalentByOrder: Readonly<Record<number, 649 | 650 | undefined>> =
 const repositories = new StaticRepositories();
 
 export function getIslandBookReward(bookPayload: number): IslandBookReward | undefined {
-    // Native 1.24, 117492–117507 decodes digit count, talent order, then book cap.
-    // TalentOrder maps these two island rewards directly: 302640–302641.
+    // The first digit gives the talent identifier length. The following digits identify the talent.
+    // The remaining digits give the maximum talent level.
+    // Supported island books map directly to talent identifiers.
     const payload = String(bookPayload);
     const orderDigits = Number(payload[0]);
     const talentOrder = Number(payload.substring(1, orderDigits + 1));

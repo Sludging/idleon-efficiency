@@ -361,7 +361,7 @@ describe('Killroy account progress CORE', () => {
     });
 
     it('supplies Research and Spelunking with the native direct World 7 EXP multiplier', () => {
-      // Version 1.24 consumers apply this multiplier directly, without the Masterclass percentage conversion.
+      // Research and Spelunking use this bonus as a multiplier, not a percentage.
       expect(killroy.spelunkingExpMulti).toMatchLiveGameWithDetails(
         getExtractedValue(extractionResults, 'killroy_bonus_5'),
         {

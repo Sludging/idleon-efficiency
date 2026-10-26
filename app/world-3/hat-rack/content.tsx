@@ -16,7 +16,7 @@ import useHydrated from '../../../lib/hooks/useHydrated';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 
 type HatRackTab = 'Bonuses' | 'Premium Helmets';
-type HatOwnership = 'All' | 'Owned' | 'Not owned';
+type HatDepositFilter = 'All' | 'Deposited' | 'Not deposited';
 
 const HatCardHeader = styled(Box)`
     position: relative;
@@ -91,7 +91,7 @@ export default function HatRackContent() {
     const [tab, setTab] = useState<HatRackTab>('Bonuses');
     const [hideZeroBonuses, setHideZeroBonuses] = useState(true);
     const [query, setQuery] = useState('');
-    const [ownership, setOwnership] = useState<HatOwnership>('All');
+    const [depositFilter, setDepositFilter] = useState<HatDepositFilter>('All');
 
     if (!hydrated || !hatRack) return <>Loading Hat Rack data...</>;
 
@@ -100,8 +100,8 @@ export default function HatRackContent() {
     const orderedHats = [...hats].sort((left, right) => Number(right.stored) - Number(left.stored));
     const normalizedQuery = query.trim().toLowerCase();
     const filteredHats = orderedHats.filter(hat => hat.name.toLowerCase().includes(normalizedQuery)
-        && (ownership === 'All' || (ownership === 'Owned' ? hat.stored : !hat.stored)));
-    const filtersChanged = query !== '' || ownership !== 'All';
+        && (depositFilter === 'All' || (depositFilter === 'Deposited' ? hat.stored : !hat.stored)));
+    const filtersChanged = query !== '' || depositFilter !== 'All';
     const accountBonuses = hatRack.getAccountBonuses();
     const catalogEffects = new Set(['Weapon Power', 'STR', 'AGI', 'WIS', 'LUK', 'Defence']);
     hats.forEach(hat => {
@@ -128,9 +128,9 @@ export default function HatRackContent() {
                     <Text size="xsmall" color="accent-2">Deposited hats</Text>
                 </Box>
                 <Box gap="xsmall">
-                                <Text size="large" weight="bold">{round(hatRack.getBonusMultiplier()).toFixed(2)}x</Text>
-                                <Text size="xsmall" color="accent-2">Bonus Multiplier</Text>
-                            </Box>
+                    <Text size="large" weight="bold">{round(hatRack.getBonusMultiplier()).toFixed(2)}x</Text>
+                    <Text size="xsmall" color="accent-2">Bonus Multiplier</Text>
+                </Box>
             </Box>
             <Box gap="medium">
                 <ContentTabs<HatRackTab>
@@ -168,14 +168,14 @@ export default function HatRackContent() {
                             </Box>
                             <Box width="180px">
                                 <ComponentAndLabel
-                                    label={<label htmlFor="hat-rack-registration"><Text size="xsmall" color="accent-2">Registration</Text></label>}
-                                    component={<Select id="hat-rack-registration" size="small" aria-label="Hat Rack registration"
-                                        options={['All', 'Owned', 'Not owned']} value={ownership} onChange={({ option }) => setOwnership(option)} />}
+                                    label={<label htmlFor="hat-rack-deposit"><Text size="xsmall" color="accent-2">Hat Rack deposit</Text></label>}
+                                    component={<Select id="hat-rack-deposit" size="small" aria-label="Hat Rack deposit"
+                                        options={['All', 'Deposited', 'Not deposited']} value={depositFilter} onChange={({ option }) => setDepositFilter(option)} />}
                                 />
                             </Box>
                             {query && <Button plain label={<Text size="small" color="brand">Clear search</Text>} onClick={() => setQuery('')} />}
                             {filtersChanged && <Button plain label={<Text size="small" color="brand">Clear filters</Text>}
-                                onClick={() => { setQuery(''); setOwnership('All'); }} />}
+                                onClick={() => { setQuery(''); setDepositFilter('All'); }} />}
                             <Text size="xsmall" color="accent-2">{filteredHats.length} hats</Text>
                         </Box>
                         <Grid columns={columns} gap="small" style={{ rowGap: '12px', columnGap: '12px', gridAutoRows: '1fr' }}>

@@ -5,7 +5,7 @@
     {
       "label": "player_maximum_damage",
       "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0)",
-      "description": "Normal-world persistent maximum damage from original DamageDealed(\"Max\") helper for the retained active character",
+      "description": "Normal-world persistent maximum damage for the retained active character",
       "requiresTown": true
     }
   ]
