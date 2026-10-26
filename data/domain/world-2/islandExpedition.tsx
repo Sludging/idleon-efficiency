@@ -14,6 +14,16 @@ import { ExpeditionUnlockCostBase, initExpeditionUnlockCostRepo } from "../data/
 import { ExpeditionIslandModel } from "../model/expeditionIslandModel";
 import { initRandoIslandRewardRepo, RandoIslandRewardBase } from "../data/RandoIslandRewardRepo";
 import { FractalIslandRewardBase, initFractalIslandRewardRepo } from "../data/FractalIslandRewardRepo";
+import type { Player } from "../player";
+import type { Storage } from "../storage";
+import type { Stamp } from "../world-1/stamps";
+import type { Slab } from "../world-5/slab";
+import {
+    createEmptyIslandRewardPossession,
+    getIslandRewardPossession,
+    type IslandPossessionInputs,
+    type IslandRewardPossession,
+} from "./island-expeditions/possession";
 
 export class ExpeditionIsland {
     unlocked: boolean = false;
@@ -89,15 +99,44 @@ export class RandoIsland {
     lootLevel: number = 0;
     doubleBossLevel: number = 0;
     rewards: RandoIslandRewardBase[] = [];
+    rewardPossession: ReadonlyMap<number, IslandRewardPossession> = new Map();
 
     init(): void {
         this.rewards = initRandoIslandRewardRepo();
+        this.resetRewardPossession();
     }
 
     parse(options: (number | string)[]): void {
+        this.resetRewardPossession();
         this.lootLevel = Number(options[166] ?? 0);
         this.doubleBossLevel = Number(options[167] ?? 0);
         this.eventUsedThisWeek = Number(options[168] ?? 0) === 1;
+    }
+
+    resetRewardPossession(): void {
+        const rewardPossession = new Map<number, IslandRewardPossession>();
+        for (const reward of this.rewards) {
+            if (reward.data.itemId !== undefined) {
+                rewardPossession.set(reward.index, createEmptyIslandRewardPossession({
+                    itemId: reward.data.itemId,
+                    bookPayload: reward.data.bookPayload,
+                }));
+            }
+        }
+        this.rewardPossession = rewardPossession;
+    }
+
+    prepareRewardPossession(inputs: IslandPossessionInputs): void {
+        const rewardPossession = new Map<number, IslandRewardPossession>();
+        for (const reward of this.rewards) {
+            if (reward.data.itemId !== undefined) {
+                rewardPossession.set(reward.index, getIslandRewardPossession(inputs, {
+                    itemId: reward.data.itemId,
+                    bookPayload: reward.data.bookPayload,
+                }));
+            }
+        }
+        this.rewardPossession = rewardPossession;
     }
 
     get lootUpgradePercent(): number {
@@ -234,6 +273,7 @@ export class IslandExpeditions extends Domain {
 
     init(_allItems: Item[], _charCount: number) {
         this.access.init();
+        this.collection.reset();
         this.trash.init();
         this.rando.init();
         this.shimmer.init();
@@ -242,7 +282,7 @@ export class IslandExpeditions extends Domain {
 
     parse(data: Map<string, any>): void {
         const expeditions = data.get(this.getDataKey()) as IslandExpeditions;
-        const optionList = data.get("OptLacc") as (number | string)[];
+        const optionList = (data.get("OptLacc") ?? []) as (number | string)[];
         expeditions.bottles = Number(optionList[162] ?? 0);
         expeditions.access.parse(optionList[169]);
         expeditions.collection.parse(data, data.get("charCount") as number);
@@ -302,10 +342,24 @@ export const updateIslandExpeditions = (data: Map<string, any>) => {
     const account = data.get("account") as Account;
     const bribes = data.get("bribes") as Bribe[];
     expeditions.collection.prepare({
+        players: data.get("players") as Player[],
         bottleServiceBonus: bribes[31].getBonus(),
         bottleUpgradeLevel: expeditions.trash.bottleGainLevel,
         explorerBundleOwned: account.hasExplorerBundle,
     });
 
+    return expeditions;
+};
+
+export const updateIslandRewardPossession = (data: Map<string, any>) => {
+    const expeditions = data.get("islandExpeditions") as IslandExpeditions;
+    const inputs: IslandPossessionInputs = {
+        storage: data.get("storage") as Storage,
+        players: data.get("players") as Player[],
+        stamps: data.get("stamps") as Stamp[][],
+        slab: data.get("slab") as Slab,
+    };
+    expeditions.trash.prepareRewardPossession(inputs);
+    expeditions.rando.prepareRewardPossession(inputs);
     return expeditions;
 };

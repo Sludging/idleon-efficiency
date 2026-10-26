@@ -61,7 +61,9 @@ function HatEntry({ hat, hatRack }: { hat: HatRackHat; hatRack: HatRack }) {
                         <Box gap="small">
                             {hat.item.description && <Text size="small">{hat.item.description}</Text>}
                             <Text size="xsmall">Upgrade Slots Left: {commaNotation(hat.item.upgradeSlots)}</Text>
-                            {(hat.item.sources.sources?.length > 0 || hat.item.sources.recipeFrom?.length > 0 || hat.item.sources.questAss?.length > 0)
+                            {((hat.item.sources.sources?.length ?? 0) > 0
+                                || (hat.item.sources.recipeFrom?.length ?? 0) > 0
+                                || (hat.item.sources.questAss?.length ?? 0) > 0)
                                 && <ItemSourcesDisplay sources={hat.item.sources} />}
                         </Box>
                     )}

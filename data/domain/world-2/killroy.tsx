@@ -168,7 +168,7 @@ export class KillroyPermanentBonus {
             case 6:
                 return 25;
             default:
-                throw new Error(`Unknown Killroy permanent bonus: ${this.id}`);
+                return 0;
         }
     }
 
@@ -193,7 +193,7 @@ export class KillroyPermanentBonus {
                 denominator = 250;
                 break;
             default:
-                throw new Error(`Unknown Killroy permanent bonus: ${this.id}`);
+                return 0;
         }
         return Math.max(0, Math.min(100, this.level / (denominator + this.level) * 100));
     }
@@ -217,7 +217,7 @@ export class KillroyPermanentBonus {
             case 7:
                 return 1 + (level / (200 + level)) * 2;
             default:
-                throw new Error(`Unknown Killroy permanent bonus: ${this.id}`);
+                return 0;
         }
     }
 }

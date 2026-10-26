@@ -1,48 +1,74 @@
 import { initTrashIslandRewardRepo, TrashIslandRewardBase } from "../../data/TrashIslandRewardRepo";
 import type { Player } from "../../player";
+import {
+    createEmptyIslandRewardPossession,
+    getIslandRewardPossession,
+    type IslandPossessionInputs,
+    type IslandRewardPossession,
+} from "./possession";
 
 export class BottleCollection {
     unclaimedDays: number = 0;
     completedOmarQuests: Map<number, number> = new Map();
-    selectedPlayerID: number | undefined = undefined;
+    selectedPlayerName: string = "";
     selectedCompletedOmarQuests: number = 0;
+    bottlesPerDay: number = 0;
     private bottleServiceBonus: number = 0;
     private bottleUpgradeLevel: number = 0;
     private explorerBundleOwned: boolean = false;
 
-    parse(data: Map<string, any>, characterCount: number): void {
-        const options = data.get("OptLacc") as (number | string)[];
-        this.unclaimedDays = Number(options[170] ?? 0);
-        this.completedOmarQuests.clear();
-        this.selectedPlayerID = undefined;
+    reset(): void {
+        this.unclaimedDays = 0;
+        this.completedOmarQuests = new Map();
+        this.selectedPlayerName = "";
         this.selectedCompletedOmarQuests = 0;
+        this.bottlesPerDay = 0;
         this.bottleServiceBonus = 0;
         this.bottleUpgradeLevel = 0;
         this.explorerBundleOwned = false;
+    }
 
+    parse(data: Map<string, any>, characterCount: number): void {
+        this.reset();
+        const options = (data.get("OptLacc") ?? []) as (number | string)[];
+        this.unclaimedDays = Number(options[170] ?? 0);
         for (let playerIndex = 0; playerIndex < characterCount; playerIndex++) {
-            const quests = data.get(`QuestComplete_${playerIndex}`) as Record<string, number>;
+            const quests = (data.get(`QuestComplete_${playerIndex}`) ?? {}) as Record<string, number>;
             let completedQuests = 0;
             for (let questIndex = 1; questIndex <= 6; questIndex++) {
                 completedQuests += Math.max(0, Math.min(1, Number(quests[`Omar_Da_Ogar${questIndex}`] ?? 0)));
             }
             this.completedOmarQuests.set(playerIndex, completedQuests);
         }
-
-        for (const [playerID, completedQuests] of this.completedOmarQuests) {
-            if (this.selectedPlayerID === undefined
-                || completedQuests > this.selectedCompletedOmarQuests
-                || (completedQuests === this.selectedCompletedOmarQuests && playerID < this.selectedPlayerID)) {
-                this.selectedPlayerID = playerID;
-                this.selectedCompletedOmarQuests = completedQuests;
-            }
-        }
     }
 
-    prepare(inputs: { bottleServiceBonus: number; bottleUpgradeLevel: number; explorerBundleOwned: boolean }): void {
+    prepare(inputs: {
+        players: readonly Player[];
+        bottleServiceBonus: number;
+        bottleUpgradeLevel: number;
+        explorerBundleOwned: boolean;
+    }): void {
         this.bottleServiceBonus = inputs.bottleServiceBonus;
         this.bottleUpgradeLevel = inputs.bottleUpgradeLevel;
         this.explorerBundleOwned = inputs.explorerBundleOwned;
+
+        this.selectedPlayerName = "";
+        this.selectedCompletedOmarQuests = 0;
+        this.bottlesPerDay = 0;
+        let selectedPlayer: Player | undefined;
+        for (const player of inputs.players) {
+            const completedQuests = this.completedOmarQuests.get(player.playerID) ?? 0;
+            if (selectedPlayer === undefined
+                || completedQuests > this.selectedCompletedOmarQuests
+                || (completedQuests === this.selectedCompletedOmarQuests && player.playerID < selectedPlayer.playerID)) {
+                selectedPlayer = player;
+                this.selectedCompletedOmarQuests = completedQuests;
+            }
+        }
+        if (selectedPlayer !== undefined) {
+            this.selectedPlayerName = selectedPlayer.playerName;
+            this.bottlesPerDay = this.getBottlesPerDay(selectedPlayer);
+        }
     }
 
     getBottleGainPercent(player: Player): number {
@@ -71,17 +97,46 @@ export class TrashIsland {
     bottleGainLevel: number = 0;
     bribeSetUnlocked: boolean = false;
     rewards: TrashIslandRewardBase[] = [];
+    rewardPossession: ReadonlyMap<number, IslandRewardPossession> = new Map();
 
     init(): void {
         this.rewards = initTrashIslandRewardRepo();
+        this.resetRewardPossession();
     }
 
     parse(options: (number | string)[]): void {
+        this.resetRewardPossession();
         this.unclaimedDays = Number(options[160] ?? 0);
         this.garbage = Number(options[161] ?? 0);
         this.garbageGainLevel = Number(options[163] ?? 0);
         this.bottleGainLevel = Number(options[164] ?? 0);
         this.bribeSetUnlocked = Number(options[165] ?? 0) === 1;
+    }
+
+    resetRewardPossession(): void {
+        const rewardPossession = new Map<number, IslandRewardPossession>();
+        for (const reward of this.rewards) {
+            if (reward.data.itemId !== undefined) {
+                rewardPossession.set(reward.index, createEmptyIslandRewardPossession({
+                    itemId: reward.data.itemId,
+                    bookPayload: reward.data.bookPayload,
+                }));
+            }
+        }
+        this.rewardPossession = rewardPossession;
+    }
+
+    prepareRewardPossession(inputs: IslandPossessionInputs): void {
+        const rewardPossession = new Map<number, IslandRewardPossession>();
+        for (const reward of this.rewards) {
+            if (reward.data.itemId !== undefined) {
+                rewardPossession.set(reward.index, getIslandRewardPossession(inputs, {
+                    itemId: reward.data.itemId,
+                    bookPayload: reward.data.bookPayload,
+                }));
+            }
+        }
+        this.rewardPossession = rewardPossession;
     }
 
     getNextCost(index: number): number {

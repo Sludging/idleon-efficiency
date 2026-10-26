@@ -104,27 +104,49 @@ export function getIslandBookReward(bookPayload: number): IslandBookReward | und
     return { talentId, maxLevel };
 }
 
-/** Reports positive evidence only. Parsed defaults do not preserve missing save sources. */
-export function getIslandRewardPossession(
-    inputs: IslandPossessionInputs,
-    reward: IslandPhysicalReward,
-): IslandRewardPossession {
+export function createEmptyIslandRewardPossession(reward: IslandPhysicalReward) {
     const book = reward.bookPayload === undefined ? undefined : getIslandBookReward(reward.bookPayload);
     const held: IslandHeldEvidence[] = [];
     const unresolvedSlots: IslandUnresolvedSlot[] = [];
     const learnedBy: IslandLearnedEvidence[] = [];
     const equippedBy: IslandCharacterEvidence[] = [];
-    const limitations = new Set<IslandPossessionLimitation>([
+    const limitations: IslandPossessionLimitation[] = [
         "source-presence-unavailable",
         "purchase-history-unavailable",
-    ]);
+    ];
+    if (reward.itemId === "TalentBook1" && book === undefined) {
+        limitations.push("unsupported-book-payload");
+    }
+
+    return {
+        itemId: reward.itemId,
+        book: book === undefined ? undefined : {
+            ...book,
+            talentName: repositories.get("TalentName").find(entry => entry.data.id === book.talentId)!.data.name,
+            talent: undefined,
+        },
+        held,
+        unresolvedSlots,
+        deposited: undefined,
+        learnedBy,
+        equippedBy,
+        slabRegistered: undefined,
+        limitations,
+    };
+}
+
+/** Reports positive evidence only. Parsed defaults do not preserve missing save sources. */
+export function getIslandRewardPossession(
+    inputs: IslandPossessionInputs,
+    reward: IslandPhysicalReward,
+): IslandRewardPossession {
+    const emptyPossession = createEmptyIslandRewardPossession(reward);
+    const book = emptyPossession.book;
+    const { held, unresolvedSlots, learnedBy, equippedBy } = emptyPossession;
+    const limitations = new Set(emptyPossession.limitations);
     const isBook = reward.itemId === "TalentBook1";
     let talent: Readonly<Talent> | undefined;
     let deposited: IslandDepositedEvidence | undefined;
-
-    if (isBook && book === undefined) {
-        limitations.add("unsupported-book-payload");
-    }
 
     const inspectSlot = (item: Item, location: IslandItemLocation): void => {
         if (item.internalName !== reward.itemId) {
@@ -204,10 +226,9 @@ export function getIslandRewardPossession(
     ) ? true : undefined;
 
     return {
-        itemId: reward.itemId,
+        ...emptyPossession,
         book: book === undefined ? undefined : {
             ...book,
-            talentName: repositories.get("TalentName").find(entry => entry.data.id === book.talentId)!.data.name,
             talent,
         },
         held,

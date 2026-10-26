@@ -66,7 +66,7 @@ import { Glimbo, updateGlimbo } from './world-7/glimbo';
 import { JellyOperator, updateJellyOperator, updateJellyOperatorPresentation } from './world-7/jellyOperator';
 import { Button, updateButton } from './world-7/button';
 import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked, updateStarSignMeritocracyBonus } from './starsigns';
-import { IslandExpeditions, updateIslandExpeditions } from './world-2/islandExpedition';
+import { IslandExpeditions, updateIslandExpeditions, updateIslandRewardPossession } from './world-2/islandExpedition';
 import { Tome, updateTomeBonuses, updateTomeScores } from './world-4/tome';
 import { KillRoy, updateKillroy } from './world-2/killroy';
 import { updateVotesBonus, Votes } from './world-2/votes';
@@ -447,6 +447,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStampMaxCarry(accountData),
     "traps": (doc: Cloudsave, accountData: Map<string, any>) => updateTrapDisplayData(accountData),
     "slab": (doc: Cloudsave, accountData: Map<string, any>) => updateSlabBonusDisplay(accountData),
+    "islandRewardPossession": (doc: Cloudsave, accountData: Map<string, any>) => updateIslandRewardPossession(accountData),
     "playersExtraMaths": (doc: Cloudsave, accountData: Map<string, any>) => playerExtraCalculations(accountData),
     "artifactBuildSpeed": (_doc: Cloudsave, accountData: Map<string, any>) => updateArtifactBuildSpeed(accountData),
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),

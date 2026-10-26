@@ -61,6 +61,8 @@ Equipment and Obols cache contributions, not final character stats. Their empty 
 
 Select and prepare each account projection once, then expose its numeric results to consumers. [`Spelunking`](../../data/domain/world-7/spelunking.tsx) stores per-character results and a required Grand Discovery projection. Its UI reads those values without finding a selected player. [`NobisectGod`](../../data/domain/world-5/divinity.tsx) prepares per-character blessing bonuses during account calculation. Preserve per-character results where the bonus varies by recipient.
 
+[`IslandExpeditions`](../../data/domain/world-2/islandExpedition.tsx) prepares its collector name and daily bottle rate on `BottleCollection`. Trash and Rando initialize neutral reward-possession records, then replace them after Storage and Slab are ready.
+
 For calculations currently called only by UI code, apply [MODEL-01](../../CODING_STANDARDS.md#model-01--model-responsible-concepts) with the preparation workflow above. Follow the UI guide for presentation, not calculation ownership.
 
 ## Make repeated processing safe

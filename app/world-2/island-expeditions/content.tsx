@@ -8,11 +8,7 @@ import TextAndLabel from '../../../components/base/TextAndLabel';
 import TipDisplay from '../../../components/base/TipDisplay';
 import { initItemDetailRepo } from '../../../data/domain/data/ItemDetailRepo';
 import { Item } from '../../../data/domain/items';
-import type { Player } from '../../../data/domain/player';
-import type { Storage } from '../../../data/domain/storage';
-import type { Stamp } from '../../../data/domain/world-1/stamps';
-import { getIslandRewardPossession, type IslandPossessionInputs, type IslandRewardPossession } from '../../../data/domain/world-2/island-expeditions/possession';
-import type { Slab } from '../../../data/domain/world-5/slab';
+import type { IslandRewardPossession } from '../../../data/domain/world-2/island-expeditions/possession';
 import type { IslandExpeditions } from '../../../data/domain/world-2/islandExpedition';
 import { commaNotation } from '../../../data/utility';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
@@ -27,8 +23,8 @@ const itemDetails = Object.fromEntries(initItemDetailRepo().map(item => [item.id
 const bottlesImage = Item.getImageData('Island1');
 const garbageImage = { location: 'Island0_x1', width: 36, height: 36 };
 
-function CollectionSummary({ expeditions, players }: { expeditions: IslandExpeditions; players: Player[] }) {
-    const collector = players.find(player => player.playerID === expeditions.collection.selectedPlayerID);
+function CollectionSummary({ expeditions }: { expeditions: IslandExpeditions }) {
+    const collectorName = expeditions.collection.selectedPlayerName;
     const completed = expeditions.collection.selectedCompletedOmarQuests;
     return <Box direction="row" align="center" gap="medium" wrap pad={{ vertical: 'small' }} data-testid="island-summary">
         <Box gap="small" pad={{ right: 'medium' }}>
@@ -38,16 +34,19 @@ function CollectionSummary({ expeditions, players }: { expeditions: IslandExpedi
                     <IslandResourceAmount image={bottlesImage} amount={expeditions.bottles} textSize="xxlarge" />
                     <Text size="xsmall" color="accent-2">Balance</Text>
                 </Box>
-                {collector && <Box gap="xxsmall">
-                    <TipDisplay heading="Bottle collection character" maxWidth="360px" body={<Text size="small">
-                        Collect with {collector.playerName} for this rate. Their {completed}/6 completed Omar quests increase Bottle gain.
+                <Box gap="xxsmall">
+                    {collectorName ? <TipDisplay heading="Bottle collection character" maxWidth="360px" body={<Text size="small">
+                        Collect with {collectorName} for this rate. Their {completed}/6 completed Omar quests increase Bottle gain.
                     </Text>}>
                         <Box tabIndex={0} aria-label="Bottle collection character" style={{ cursor: 'help' }}>
-                            <Text size="large">{commaNotation(expeditions.collection.getBottlesPerDay(collector))}</Text>
+                            <Text size="large">{commaNotation(expeditions.collection.bottlesPerDay)}</Text>
                             <Text size="xsmall" color="accent-2">Bottles/day</Text>
                         </Box>
-                    </TipDisplay>
-                </Box>}
+                    </TipDisplay> : <Box>
+                        <Text size="large">{commaNotation(expeditions.collection.bottlesPerDay)}</Text>
+                        <Text size="xsmall" color="accent-2">Bottles/day</Text>
+                    </Box>}
+                </Box>
                 <Box gap="xxsmall">
                     <Text size="large">{commaNotation(expeditions.collection.unclaimedDays)}</Text>
                     <Text size="xsmall" color="accent-2">Pending Bottle days</Text>
@@ -69,15 +68,6 @@ function CollectionSummary({ expeditions, players }: { expeditions: IslandExpedi
             </Box>
         </Box>
     </Box>;
-}
-
-function possessionInputs(theData: Map<string, any>): IslandPossessionInputs {
-    return {
-        storage: theData.get('storage') as Storage,
-        players: theData.get('players') as Player[],
-        stamps: theData.get('stamps') as Stamp[][],
-        slab: theData.get('slab') as Slab,
-    };
 }
 
 function hasObtainedReward(evidence: IslandRewardPossession): boolean {
@@ -104,15 +94,14 @@ function PossessionEvidence({ evidence }: { evidence: IslandRewardPossession }) 
     </Box>;
 }
 
-function TrashDetails({ expeditions, theData }: { expeditions: IslandExpeditions; theData: Map<string, any> }) {
-    const inputs = possessionInputs(theData);
+function TrashDetails({ expeditions }: { expeditions: IslandExpeditions }) {
     const trash = expeditions.trash;
     return <Box gap="medium" data-testid="island-trash">
         <TextAndLabel label="Pending Garbage days" text={commaNotation(trash.unclaimedDays)} textSize="large" />
         <Grid columns={{ count: 'fit', size: 'medium' }} gap="medium" align="stretch">
             {trash.rewards.map(reward => {
                 const itemId = reward.data.itemId;
-                const evidence = itemId ? getIslandRewardPossession(inputs, { itemId, bookPayload: reward.data.bookPayload }) : undefined;
+                const evidence = trash.rewardPossession.get(reward.index);
                 const completed = evidence ? hasObtainedReward(evidence) : reward.index === 5 && trash.bribeSetUnlocked;
                 let name: string;
                 if (itemId) {
@@ -142,15 +131,14 @@ function TrashDetails({ expeditions, theData }: { expeditions: IslandExpeditions
     </Box>;
 }
 
-function RandoDetails({ expeditions, theData }: { expeditions: IslandExpeditions; theData: Map<string, any> }) {
-    const inputs = possessionInputs(theData);
+function RandoDetails({ expeditions }: { expeditions: IslandExpeditions }) {
     const rando = expeditions.rando;
     return <Box gap="medium" data-testid="island-rando">
         <TextAndLabel label="Weekly event" text={rando.eventUsedThisWeek ? 'Used' : 'Available'} />
         <Grid columns={{ count: 'fit', size: 'medium' }} gap="medium" align="stretch">
             {rando.rewards.map(reward => {
                 const itemId = reward.data.itemId;
-                const evidence = itemId ? getIslandRewardPossession(inputs, { itemId, bookPayload: reward.data.bookPayload }) : undefined;
+                const evidence = rando.rewardPossession.get(reward.index);
                 const completed = evidence ? hasObtainedReward(evidence) : false;
                 const name = itemId
                     ? (evidence?.book ? `${evidence.book.talentName} ${itemDetails[itemId].displayName}` : itemDetails[itemId].displayName)
@@ -181,12 +169,11 @@ export default function IslandExpeditionsContent() {
     const [tab, setTab] = useState<IslandTab>('Trash');
     const expeditions = theData.get('islandExpeditions') as IslandExpeditions | undefined;
     if (!hydrated || !expeditions) return <>Loading Island Expeditions data</>;
-    const players = theData.get('players') as Player[];
     const island = expeditions.islands[islandIndex[tab]];
 
     return <Box gap="medium" data-testid="island-expeditions">
         <Heading level="2" size="medium" margin={{ top: 'medium', bottom: 'small' }} style={{ fontWeight: 'normal' }}>Island Expeditions</Heading>
-        <CollectionSummary expeditions={expeditions} players={players} />
+        <CollectionSummary expeditions={expeditions} />
         <ContentTabs options={tabs.map(value => ({ value, label: value }))} value={tab} onChange={setTab} />
         <Box gap="medium" style={{ opacity: island.unlocked ? 1 : 0.5 }}>
             <Box gap="small" data-testid="island-access">
@@ -196,8 +183,8 @@ export default function IslandExpeditionsContent() {
                 </Box>
                 <Text size="small" color="accent-2">{island.data.description.replace(/_/g, ' ')}</Text>
             </Box>
-            {tab === 'Trash' && <TrashDetails expeditions={expeditions} theData={theData} />}
-            {tab === 'Rando' && <RandoDetails expeditions={expeditions} theData={theData} />}
+            {tab === 'Trash' && <TrashDetails expeditions={expeditions} />}
+            {tab === 'Rando' && <RandoDetails expeditions={expeditions} />}
             {tab === 'Crystal' && <CrystalDetails expeditions={expeditions} />}
             {tab === 'Shimmer' && <ShimmerDetails expeditions={expeditions} />}
             {tab === 'Fractal' && <FractalDetails expeditions={expeditions} />}
