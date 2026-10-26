@@ -7,144 +7,164 @@ export class SkullShopBase { constructor(public index: number, public data: Skul
 export const initSkullShopRepo = () => {
     return [    
         new SkullShopBase(0, <SkullShopModel>{
-                "description": "Get a random time candy! Pick it up off the floor.",
-                "baseCost": 5,
-                "costInc": 1,
-                "rewardId": "Timecandy#",
-                "qty": 1
+                "id": 0,
+                "descriptionTemplate": "Get a random time candy! Pick it up off the floor.",
+                "skullCost": 5,
+                "dropsItem": true,
+                "itemIdOrPattern": "Timecandy#",
+                "rawQuantity": 1
             }),
         new SkullShopBase(1, <SkullShopModel>{
-                "description": "Get a black pearl, gives Skill EXP! Pick it up off the floor.",
-                "baseCost": 9,
-                "costInc": 1,
-                "rewardId": "Pearl4",
-                "qty": 1
+                "id": 1,
+                "descriptionTemplate": "Get a black pearl, gives Skill EXP! Pick it up off the floor.",
+                "skullCost": 9,
+                "dropsItem": true,
+                "itemIdOrPattern": "Pearl4",
+                "rawQuantity": 1
             }),
         new SkullShopBase(2, <SkullShopModel>{
-                "description": "Get a white pearl, gives Class EXP! Pick it up off the floor.",
-                "baseCost": 10,
-                "costInc": 1,
-                "rewardId": "Pearl5",
-                "qty": 1
+                "id": 2,
+                "descriptionTemplate": "Get a white pearl, gives Class EXP! Pick it up off the floor.",
+                "skullCost": 10,
+                "dropsItem": true,
+                "itemIdOrPattern": "Pearl5",
+                "rawQuantity": 1
             }),
         new SkullShopBase(3, <SkullShopModel>{
-                "description": "Your next kill spawns 1 Crystal Mob! Expires at end of day!",
-                "baseCost": 3,
-                "costInc": 0,
-                "rewardId": "Timecandy1",
-                "qty": 1
+                "id": 3,
+                "descriptionTemplate": "Your next kill spawns 1 Crystal Mob! Expires at end of day!",
+                "skullCost": 3,
+                "dropsItem": false,
+                "itemIdOrPattern": "Timecandy1",
+                "rawQuantity": 1
             }),
         new SkullShopBase(4, <SkullShopModel>{
-                "description": "Get a Dungeon Loot Dice! Pick it up off the floor.",
-                "baseCost": 6,
-                "costInc": 1,
-                "rewardId": "LootDice",
-                "qty": 1
+                "id": 4,
+                "descriptionTemplate": "Get a Dungeon Loot Dice! Pick it up off the floor.",
+                "skullCost": 6,
+                "dropsItem": true,
+                "itemIdOrPattern": "LootDice",
+                "rawQuantity": 1
             }),
         new SkullShopBase(5, <SkullShopModel>{
-                "description": "Get 10 Balls! They're put right into the arcade!",
-                "baseCost": 4,
-                "costInc": 0,
-                "rewardId": "Timecandy1",
-                "qty": 6
+                "id": 5,
+                "descriptionTemplate": "Get 10 Balls! They're put right into the arcade!",
+                "skullCost": 4,
+                "dropsItem": false,
+                "itemIdOrPattern": "Timecandy1",
+                "rawQuantity": 6
             }),
         new SkullShopBase(6, <SkullShopModel>{
-                "description": "Get 2 Library Checkouts! It's put right into the library!",
-                "baseCost": 8,
-                "costInc": 0,
-                "rewardId": "Timecandy1",
-                "qty": 2
+                "id": 6,
+                "descriptionTemplate": "Get 2 Library Checkouts! It's put right into the library!",
+                "skullCost": 8,
+                "dropsItem": false,
+                "itemIdOrPattern": "Timecandy1",
+                "rawQuantity": 2
             }),
         new SkullShopBase(7, <SkullShopModel>{
-                "description": "Complete 1 Refinery Cycle auto- matically, right here right now!",
-                "baseCost": 1,
-                "costInc": 0,
-                "rewardId": "Timecandy1",
-                "qty": 1
+                "id": 7,
+                "descriptionTemplate": "Complete 1 Refinery Cycle automatically, right here right now!",
+                "skullCost": 1,
+                "dropsItem": false,
+                "itemIdOrPattern": "Timecandy1",
+                "rawQuantity": 1
             }),
         new SkullShopBase(8, <SkullShopModel>{
-                "description": "Get 2 Mob Eggs! Pick them up off the floor.",
-                "baseCost": 8,
-                "costInc": 1,
-                "rewardId": "PetEgg",
-                "qty": 2
+                "id": 8,
+                "descriptionTemplate": "Get 2 Mob Eggs! Pick them up off the floor.",
+                "skullCost": 8,
+                "dropsItem": true,
+                "itemIdOrPattern": "PetEgg",
+                "rawQuantity": 2
             }),
         new SkullShopBase(9, <SkullShopModel>{
-                "description": "Get 3 Kitchen Ladles! Pick them up off the floor.",
-                "baseCost": 5,
-                "costInc": 1,
-                "rewardId": "Ladle",
-                "qty": 3
+                "id": 9,
+                "descriptionTemplate": "Get 3 Kitchen Ladles! Pick them up off the floor.",
+                "skullCost": 5,
+                "dropsItem": true,
+                "itemIdOrPattern": "Ladle",
+                "rawQuantity": 3
             }),
         new SkullShopBase(10, <SkullShopModel>{
-                "description": "1% Chance to permanently unlock the 3rd Killroy Weekly Fight!",
-                "baseCost": 4,
-                "costInc": 0,
-                "rewardId": "Timecandy1",
-                "qty": 1
+                "id": 10,
+                "descriptionTemplate": "1% Chance to permanently unlock the 3rd Killroy Weekly Fight!",
+                "skullCost": 4,
+                "dropsItem": false,
+                "itemIdOrPattern": "Timecandy1",
+                "rawQuantity": 1
             }),
         new SkullShopBase(11, <SkullShopModel>{
-                "description": "Permanently boosts Artifact Find Chance! Current bonus is x",
-                "baseCost": 9,
-                "costInc": 0,
-                "rewardId": "Timecandy1",
-                "qty": 2
+                "id": 11,
+                "descriptionTemplate": "Permanently boosts Artifact Find Chance! Current bonus is {x",
+                "skullCost": 9,
+                "dropsItem": false,
+                "itemIdOrPattern": "Timecandy1",
+                "rawQuantity": 2
             }),
         new SkullShopBase(12, <SkullShopModel>{
-                "description": "Adds 1 nugget to your Shovel in Gaming, go dig it up!",
-                "baseCost": 5,
-                "costInc": 0,
-                "rewardId": "Timecandy1",
-                "qty": 1
+                "id": 12,
+                "descriptionTemplate": "Adds 1 nugget to your Shovel in Gaming, go dig it up!",
+                "skullCost": 5,
+                "dropsItem": false,
+                "itemIdOrPattern": "Timecandy1",
+                "rawQuantity": 1
             }),
         new SkullShopBase(13, <SkullShopModel>{
-                "description": "Permanently boosts Crop Evolution Chance! Current bonus is x",
-                "baseCost": 6,
-                "costInc": 0,
-                "rewardId": "Timecandy1",
-                "qty": 2
+                "id": 13,
+                "descriptionTemplate": "Permanently boosts Crop Evolution Chance! Current bonus is {x",
+                "skullCost": 6,
+                "dropsItem": false,
+                "itemIdOrPattern": "Timecandy1",
+                "rawQuantity": 2
             }),
         new SkullShopBase(14, <SkullShopModel>{
-                "description": "Permanently boosts Jade Gain! Current bonus is x",
-                "baseCost": 7,
-                "costInc": 0,
-                "rewardId": "Timecandy1",
-                "qty": 3
+                "id": 14,
+                "descriptionTemplate": "Permanently boosts Jade Gain! Current bonus is {x",
+                "skullCost": 7,
+                "dropsItem": false,
+                "itemIdOrPattern": "Timecandy1",
+                "rawQuantity": 3
             }),
         new SkullShopBase(15, <SkullShopModel>{
-                "description": "5% Chance for +1 Grade for your Gallery in World 7!",
-                "baseCost": 15,
-                "costInc": 0,
-                "rewardId": "Timecandy1",
-                "qty": 1
+                "id": 15,
+                "descriptionTemplate": "5% Chance for +1 Grade for your Gallery in World 7!",
+                "skullCost": 15,
+                "dropsItem": false,
+                "itemIdOrPattern": "Timecandy1",
+                "rawQuantity": 1
             }),
         new SkullShopBase(16, <SkullShopModel>{
-                "description": "Permanently boosts the drops of Masterclasses by x",
-                "baseCost": 7,
-                "costInc": 0,
-                "rewardId": "Timecandy1",
-                "qty": 2
+                "id": 16,
+                "descriptionTemplate": "Permanently boosts the drops of Masterclasses by {x",
+                "skullCost": 7,
+                "dropsItem": false,
+                "itemIdOrPattern": "Timecandy1",
+                "rawQuantity": 2
             }),
         new SkullShopBase(17, <SkullShopModel>{
-                "description": "Permanently boosts EXP gain for all World 7 skills by x",
-                "baseCost": 6,
-                "costInc": 0,
-                "rewardId": "Timecandy1",
-                "qty": 1
+                "id": 17,
+                "descriptionTemplate": "Permanently boosts EXP gain for all World 7 skills by {x",
+                "skullCost": 6,
+                "dropsItem": false,
+                "itemIdOrPattern": "Timecandy1",
+                "rawQuantity": 1
             }),
         new SkullShopBase(18, <SkullShopModel>{
-                "description": "Permanently boosts daily coral gain by +%",
-                "baseCost": 10,
-                "costInc": 0,
-                "rewardId": "Timecandy1",
-                "qty": 2
+                "id": 18,
+                "descriptionTemplate": "Permanently boosts daily coral gain by +{%",
+                "skullCost": 10,
+                "dropsItem": false,
+                "itemIdOrPattern": "Timecandy1",
+                "rawQuantity": 2
             }),
         new SkullShopBase(19, <SkullShopModel>{
-                "description": "Permanently boosts something... Current bonus is x",
-                "baseCost": 12,
-                "costInc": 0,
-                "rewardId": "Timecandy1",
-                "qty": 3
+                "id": 19,
+                "descriptionTemplate": "Permanently boosts something... Current bonus is {x",
+                "skullCost": 12,
+                "dropsItem": false,
+                "itemIdOrPattern": "Timecandy1",
+                "rawQuantity": 3
             })    
 ]
 }

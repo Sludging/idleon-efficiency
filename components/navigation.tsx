@@ -34,6 +34,8 @@ const navItems: NavItem[] = [
             { subLink: "/arcade", label: "Arcade" },
             { subLink: "/kangaroo", label: "Kangaroo" },
             { subLink: "/vote-ballot", label: "Vote Ballot" },
+            { subLink: "/island-expeditions", label: "Island Expeditions" },
+            { subLink: "/killroy", label: "Killroy" },
         ]
     },
     {
@@ -114,6 +116,7 @@ const navItems: NavItem[] = [
             { subLink: "/guild", label: "Guild" },
             { subLink: "/friends-stats", label: "Friends Stats" },
             { subLink: "/event-shop", label: "Event Shop" },
+            { subLink: "/gem-shop", label: "Gem Shop" },
         ]
     },
     { link: "/raw-data", label: "Raw Data" },

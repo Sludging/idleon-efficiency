@@ -10,5 +10,9 @@ export interface GemShopItemModel {
     no: number,
     maxPurchases: number,
     qty: number,
-    costIncrement: number
+    costIncrement: number,
+    groupId: number,
+    sectionId: number,
+    slot: number,
+    isOffer: boolean
 }

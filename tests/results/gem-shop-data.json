@@ -1,0 +1,104 @@
+{
+  "extractions": {
+    "gem_balance": {
+      "expression": "idleon.getAttr('GemsOwned')",
+      "result": 2124
+    },
+    "catalog_quotes": {
+      "expression": "idleon.getAttr('CustomLists').h.MTXinfo.flatMap((group, g) => group.flatMap((rows, s) => rows.map((row, slot) => ({ group: g, section: s, slot, counterId: Number(row[4]), shopName: row[1], purchased: Number(idleon.getAttr('GemItemsPurchased')[Number(row[4])]), displayedCost: Math.round(Number(idleon.getAttr('GemItemsPurchased')[Number(row[4])]) * Number(row[7]) + Number(row[3])) })))).filter(row => [2, 5, 55, 56, 65, 103, 112, 128, 140].includes(row.counterId))",
+      "result": [
+        {
+          "group": 0,
+          "section": 0,
+          "slot": 2,
+          "counterId": 2,
+          "shopName": "RESOURCE_BOOST",
+          "purchased": 10,
+          "displayedCost": 570
+        },
+        {
+          "group": 0,
+          "section": 0,
+          "slot": 5,
+          "counterId": 5,
+          "shopName": "OPAL",
+          "purchased": 22,
+          "displayedCost": 250
+        },
+        {
+          "group": 0,
+          "section": 1,
+          "slot": 0,
+          "counterId": 128,
+          "shopName": "BOTTLED_WIND",
+          "purchased": 0,
+          "displayedCost": 240
+        },
+        {
+          "group": 1,
+          "section": 1,
+          "slot": 0,
+          "counterId": 55,
+          "shopName": "ITEM_BACKPACK_SPACE",
+          "purchased": 6,
+          "displayedCost": 350
+        },
+        {
+          "group": 1,
+          "section": 1,
+          "slot": 1,
+          "counterId": 56,
+          "shopName": "STORAGE_CHEST_SPACE",
+          "purchased": 12,
+          "displayedCost": 475
+        },
+        {
+          "group": 1,
+          "section": 3,
+          "slot": 1,
+          "counterId": 65,
+          "shopName": "ANCIENT_CARD_PACK",
+          "purchased": 2,
+          "displayedCost": 425
+        },
+        {
+          "group": 1,
+          "section": 3,
+          "slot": 2,
+          "counterId": 65,
+          "shopName": "ETERNAL_CARD_PACK",
+          "purchased": 2,
+          "displayedCost": 600
+        },
+        {
+          "group": 2,
+          "section": 0,
+          "slot": 0,
+          "counterId": 103,
+          "shopName": "INFINITY_HAMMER",
+          "purchased": 1,
+          "displayedCost": 300
+        },
+        {
+          "group": 2,
+          "section": 1,
+          "slot": 1,
+          "counterId": 112,
+          "shopName": "MORE_SAMPLE_SPACES",
+          "purchased": 6,
+          "displayedCost": 490
+        },
+        {
+          "group": 2,
+          "section": 4,
+          "slot": 5,
+          "counterId": 140,
+          "shopName": "LIFE_REFILL",
+          "purchased": 0,
+          "displayedCost": 60
+        }
+      ]
+    }
+  },
+  "errors": {}
+}

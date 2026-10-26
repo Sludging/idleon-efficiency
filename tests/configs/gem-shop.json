@@ -1,0 +1,16 @@
+{
+  "description": "Gem Shop balance, purchase counters, and displayed gem quotes for the regular save.",
+  "target": "GemStore.gemBalance, GemPurchase.pucrhased, and GemPurchase.getCurrentCost",
+  "extractions": [
+    {
+      "label": "gem_balance",
+      "expression": "idleon.getAttr('GemsOwned')",
+      "description": "Account gem balance. Public profiles can omit this private value."
+    },
+    {
+      "label": "catalog_quotes",
+      "expression": "idleon.getAttr('CustomLists').h.MTXinfo.flatMap((group, g) => group.flatMap((rows, s) => rows.map((row, slot) => ({ group: g, section: s, slot, counterId: Number(row[4]), shopName: row[1], purchased: Number(idleon.getAttr('GemItemsPurchased')[Number(row[4])]), displayedCost: Math.round(Number(idleon.getAttr('GemItemsPurchased')[Number(row[4])]) * Number(row[7]) + Number(row[3])) })))).filter(row => [2, 5, 55, 56, 65, 103, 112, 128, 140].includes(row.counterId))",
+      "description": "Read native catalog rows and saved counters. Apply the original display arithmetic from idleon1.24.txt:483288-483291, not a purchase action. Includes fixed and rising quotes, capped rows, zero counters, and both card packs sharing counter 65."
+    }
+  ]
+}

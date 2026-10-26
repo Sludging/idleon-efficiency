@@ -1,0 +1,16 @@
+{
+  "description": "Read native expedition account state, selected-character Bottle bonus, Fractal flags, and initialized Shimmer shop costs without entering island scenes",
+  "target": "Island Expeditions account state and numeric outcomes",
+  "extractions": [
+    {
+      "label": "island_state",
+      "expression": "({options:idleon.getAttr(\"OptionsListAccount\").slice(160,185),letters:idleon.getAttr(\"Number2Letter\").slice(0,6),bottleBonus:idleon.callFunction(\"RandomEvent\",\"BottleIslandBonus\",0,0),fractal:Array.from({length:8},(_,i)=>idleon.callFunction(\"RandomEvent\",\"FractalIslandBonus\",i,0)),shimmer:idleon.callFunction(\"Dreamstuff\",\"AllShimmerBonuses\",0)})",
+      "description": "Current account balances and activity state. Native Bottle bonus belongs to the active character. Native Fractal helper reads initialized unlock flags. Existing shovel, kitchen and talent contributions convert flags 4, 2 and 5 to 25, 30 and 100 respectively, as established by native source and retained domain behavior."
+    },
+    {
+      "label": "shimmer_shop_cache",
+      "expression": "(()=>{const a=idleon.engine.getGameAttribute(\"PixelHelperActor\")[24];const b=a&&a.behaviors.getBehavior(\"ActorEvents_623\");return b?{costs:b._GenINFO[17],thresholds:b._GenINFO[20],trial:b._GenINFO[21],claimed:b._GenINFO[23]}:null})()",
+      "description": "Read the original initialized Shimmer shop cache. Tests require matching trial and base allocations; no scene event is called to populate or refresh this cache."
+    }
+  ]
+}

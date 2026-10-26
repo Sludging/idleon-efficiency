@@ -68,7 +68,7 @@ import { Button, updateButton } from './world-7/button';
 import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked, updateStarSignMeritocracyBonus } from './starsigns';
 import { IslandExpeditions, updateIslandExpeditions } from './world-2/islandExpedition';
 import { Tome, updateTomeBonuses, updateTomeScores } from './world-4/tome';
-import { KillRoy } from './world-2/killroy';
+import { KillRoy, updateKillroy } from './world-2/killroy';
 import { updateVotesBonus, Votes } from './world-2/votes';
 import { Hole, updateHole, updateHoleCharacterCapabilities, updateHolePresentation, updateHoleStudyEffects, updateHoleUpgradeEffects } from './world-5/hole/hole';
 import { UpgradeVault } from './upgradeVault';
@@ -302,6 +302,8 @@ const postProcessingMap: Record<string, Function> = {
     "friends": (doc: Cloudsave, accountData: Map<string, any>) => updateFriends(accountData),
     // Parsed ownership contributes to Equinox before Research and to Collider/Construction before their consumers.
     "gamingSuperbitImpacts": (doc: Cloudsave, accountData: Map<string, any>) => updateSuperbitImpacts(accountData),
+    // Killroy uses parsed Rift progress and prepares run gates before shared bonus consumers.
+    "killroy": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateKillroy(accountData),
     // Research consumes parsed companion, Equinox, and Sushi state before downstream consumers calculate.
     "researchGrid": (doc: Cloudsave, accountData: Map<string, any>) => updateResearchGrid(accountData),
     "glimbo": (_doc: Cloudsave, accountData: Map<string, any>) => updateGlimbo(accountData),

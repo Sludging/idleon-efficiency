@@ -25,21 +25,22 @@ export function ResourceDisplay({
     showTooltip = false,
     tooltipHeading = "Exact Resource Count"
 }: ResourceDisplayProps) {
+    const amount = <Text size={textSize} color={canAfford ? "green-1" : undefined}>
+        {nFormatter(cost)}
+    </Text>;
+
     return (
         <Box direction="row" gap="small" align="end">
             <IconImage data={resourceImageData} scale={resourceImageScale} />
-            <TipDisplay
+            {showTooltip ? <TipDisplay
                 heading={tooltipHeading}
                 body={
                     <Text size="small">{cost.toLocaleString(undefined, { maximumFractionDigits: 0 })}</Text>
                 }
                 direction={TipDirection.Down}
-                visibility={showTooltip ? undefined : 'none'}
             >
-                <Text size={textSize} color={canAfford ? "green-1" : undefined}>
-                    {nFormatter(cost)}
-                </Text>
-            </TipDisplay>
+                {amount}
+            </TipDisplay> : <Box justify="center">{amount}</Box>}
         </Box>
     );
 } 

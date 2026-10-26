@@ -1,9 +1,10 @@
 
 
 export interface SkullShopModel {
-    description: string,
-    baseCost: number,
-    costInc: number,
-    rewardId: string,
-    qty: number
+    id: number,
+    descriptionTemplate: string,
+    skullCost: number,
+    dropsItem: boolean,
+    itemIdOrPattern: string,
+    rawQuantity: number
 }

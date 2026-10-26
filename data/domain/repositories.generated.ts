@@ -70,6 +70,8 @@ import { initEquipmentMetadataRepo } from "./data/EquipmentMetadataRepo";
 import { initEquipmentSetsRepo } from "./data/EquipmentSetsRepo";
 import { initEventShopBonusRepo } from "./data/EventShopBonusRepo";
 import { initExoticMarketRepo } from "./data/ExoticMarketRepo";
+import { initExpeditionIslandRepo } from "./data/ExpeditionIslandRepo";
+import { initExpeditionUnlockCostRepo } from "./data/ExpeditionUnlockCostRepo";
 import { initFarmingLandRankUpgradeRepo } from "./data/FarmingLandRankUpgradeRepo";
 import { initFarmingMetadataRepo } from "./data/FarmingMetadataRepo";
 import { initFarmingStickerRepo } from "./data/FarmingStickerRepo";
@@ -79,6 +81,7 @@ import { initFishingToolkitRepo } from "./data/FishingToolkitRepo";
 import { initFlurboShopRepo } from "./data/FlurboShopRepo";
 import { initFountainCurrencyRepo } from "./data/FountainCurrencyRepo";
 import { initFountainUpgradeRepo } from "./data/FountainUpgradeRepo";
+import { initFractalIslandRewardRepo } from "./data/FractalIslandRewardRepo";
 import { initFriendBonusRepo } from "./data/FriendBonusRepo";
 import { initGambitBonusRepo } from "./data/GambitBonusRepo";
 import { initGamingBoxRepo } from "./data/GamingBoxRepo";
@@ -113,6 +116,8 @@ import { initJellyOperationMetadataRepo } from "./data/JellyOperationMetadataRep
 import { initJellyOperatorUpgradeRepo } from "./data/JellyOperatorUpgradeRepo";
 import { initJewelRepo } from "./data/JewelRepo";
 import { initKeychainBonusRepo } from "./data/KeychainBonusRepo";
+import { initKillroyRoomPoolRepo } from "./data/KillroyRoomPoolRepo";
+import { initKillroyRunUpgradeRepo } from "./data/KillroyRunUpgradeRepo";
 import { initLabBonusRepo } from "./data/LabBonusRepo";
 import { initLampWishRepo } from "./data/LampWishRepo";
 import { initLegendTalentMetadataRepo } from "./data/LegendTalentMetadataRepo";
@@ -151,6 +156,7 @@ import { initPostOfficeUpgradesRepo } from "./data/PostOfficeUpgradesRepo";
 import { initPrayerRepo } from "./data/PrayerRepo";
 import { initQuestMetadataRepo } from "./data/QuestMetadataRepo";
 import { initQuestNameRepo } from "./data/QuestNameRepo";
+import { initRandoIslandRewardRepo } from "./data/RandoIslandRewardRepo";
 import { initRandoListRepo } from "./data/RandoListRepo";
 import { initRandoList2Repo } from "./data/RandoList2Repo";
 import { initRecipeRepo } from "./data/RecipeRepo";
@@ -211,6 +217,7 @@ import { initTomeBonusRepo } from "./data/TomeBonusRepo";
 import { initTomeEpilogueBonusRepo } from "./data/TomeEpilogueBonusRepo";
 import { initTournamentRaidRepo } from "./data/TournamentRaidRepo";
 import { initTrapBoxRepo } from "./data/TrapBoxRepo";
+import { initTrashIslandRewardRepo } from "./data/TrashIslandRewardRepo";
 import { initUpgradeVaultRepo } from "./data/UpgradeVaultRepo";
 import { initUsesRepo } from "./data/UsesRepo";
 import { initVendorRepo } from "./data/VendorRepo";
@@ -294,6 +301,8 @@ export const repositoryFactories = {
     "EquipmentSets": initEquipmentSetsRepo,
     "EventShopBonus": initEventShopBonusRepo,
     "ExoticMarket": initExoticMarketRepo,
+    "ExpeditionIsland": initExpeditionIslandRepo,
+    "ExpeditionUnlockCost": initExpeditionUnlockCostRepo,
     "FarmingLandRankUpgrade": initFarmingLandRankUpgradeRepo,
     "FarmingMetadata": initFarmingMetadataRepo,
     "FarmingSticker": initFarmingStickerRepo,
@@ -303,6 +312,7 @@ export const repositoryFactories = {
     "FlurboShop": initFlurboShopRepo,
     "FountainCurrency": initFountainCurrencyRepo,
     "FountainUpgrade": initFountainUpgradeRepo,
+    "FractalIslandReward": initFractalIslandRewardRepo,
     "FriendBonus": initFriendBonusRepo,
     "GambitBonus": initGambitBonusRepo,
     "GamingBox": initGamingBoxRepo,
@@ -337,6 +347,8 @@ export const repositoryFactories = {
     "JellyOperatorUpgrade": initJellyOperatorUpgradeRepo,
     "Jewel": initJewelRepo,
     "KeychainBonus": initKeychainBonusRepo,
+    "KillroyRoomPool": initKillroyRoomPoolRepo,
+    "KillroyRunUpgrade": initKillroyRunUpgradeRepo,
     "LabBonus": initLabBonusRepo,
     "LampWish": initLampWishRepo,
     "LegendTalentMetadata": initLegendTalentMetadataRepo,
@@ -375,6 +387,7 @@ export const repositoryFactories = {
     "Prayer": initPrayerRepo,
     "QuestMetadata": initQuestMetadataRepo,
     "QuestName": initQuestNameRepo,
+    "RandoIslandReward": initRandoIslandRewardRepo,
     "RandoList": initRandoListRepo,
     "RandoList2": initRandoList2Repo,
     "Recipe": initRecipeRepo,
@@ -435,6 +448,7 @@ export const repositoryFactories = {
     "TomeEpilogueBonus": initTomeEpilogueBonusRepo,
     "TournamentRaid": initTournamentRaidRepo,
     "TrapBox": initTrapBoxRepo,
+    "TrashIslandReward": initTrashIslandRewardRepo,
     "UpgradeVault": initUpgradeVaultRepo,
     "Uses": initUsesRepo,
     "Vendor": initVendorRepo,
