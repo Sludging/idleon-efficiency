@@ -126,6 +126,7 @@ import { initMapDataRepo } from "./data/MapDataRepo";
 import { initMapMetadataRepo } from "./data/MapMetadataRepo";
 import { initMapNameRepo } from "./data/MapNameRepo";
 import { initMapPortalsRepo } from "./data/MapPortalsRepo";
+import { initMapTransitionsRepo } from "./data/MapTransitionsRepo";
 import { initMarketInfoRepo } from "./data/MarketInfoRepo";
 import { initMealRepo } from "./data/MealRepo";
 import { initMeasurementRepo } from "./data/MeasurementRepo";
@@ -357,6 +358,7 @@ export const repositoryFactories = {
     "MapMetadata": initMapMetadataRepo,
     "MapName": initMapNameRepo,
     "MapPortals": initMapPortalsRepo,
+    "MapTransitions": initMapTransitionsRepo,
     "MarketInfo": initMarketInfoRepo,
     "Meal": initMealRepo,
     "Measurement": initMeasurementRepo,

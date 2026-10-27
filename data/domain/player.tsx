@@ -8,7 +8,7 @@ import { EquipmentBonus } from './equipment-effects';
 import { PlayerEquipment } from './equipment';
 import type { GoldenFood } from './golden-food';
 import { lavaLog, notUndefined, range } from '../utility';
-import { Cloudsave } from "./cloudsave";
+import { Cloudsave, safeJsonParse } from "./cloudsave";
 import { EnemyData, EnemyInfo } from "./enemies";
 import { MapInfo } from "./maps";
 import { Chip, chipSlotReq, Lab } from "./world-4/lab";
@@ -23,7 +23,6 @@ import { Breeding } from "./world-4/breeding";
 import { Dungeons, PassiveType } from "./dungeons";
 import { Stamp, StampConsts, StampTab } from "./world-1/stamps";
 import { Achievement } from "./achievements";
-import { safeJsonParse } from "./idleonData";
 import { Arcade } from "./world-2/arcade";
 import { ObolsData } from "./world-2/obols";
 import { ImageData } from "./imageData";
@@ -61,6 +60,7 @@ import { PlayerHealth } from './player-health';
 import { PlayerStats } from './player-stats';
 import { initFishingToolkitRepo } from './data/FishingToolkitRepo';
 import type { CoralKid } from './world-7/coralKid';
+import type { Speedrun } from './speedrun';
 export type { TalentLevelInputs } from './talents';
 const fishingToolkitRepo = initFishingToolkitRepo();
 
@@ -330,14 +330,14 @@ export class Player {
     }
 
 
-    getTalentBonusAtInputs(skillIndex: number, inputs: TalentLevelInputs): number {
+    getTalentBonusAtInputs(skillIndex: number, inputs: Readonly<TalentLevelInputs>, yBonus: boolean = false): number {
         const talent = this.getTalent(skillIndex);
         if (!talent || talent.pointsSpent <= 0.5) {
             return 0;
         }
         const extraLevels = talent.getExtraLevels(inputs,
             this.activeSuperTalentIndexes.has(skillIndex));
-        return talent.getBonusAtLevel(talent.pointsSpent + extraLevels);
+        return talent.getBonusAtLevel(talent.pointsSpent + extraLevels, false, yBonus);
     }
 
     get currentTalentInputs(): Readonly<TalentLevelInputs> {
@@ -914,6 +914,25 @@ export class Players extends Domain {
     }
 }
 
+const getVoidwalkerFourthTabPointsOwned = (player: Player, speedrun: Speedrun, companions: Companion[]): number => {
+    return Math.floor(Math.max(0, 1 + getCompanionActiveBonus(companions, 20)
+        + player.getTalentBonusAtInputs(34, player.currentTalentInputs)
+        + speedrun.getTalentPointEntitlement(player, player.currentTalentInputs)));
+};
+
+export const updateSpeedrunTalentPoints = (data: Map<string, any>): void => {
+    const players = data.get("players") as Player[];
+    const speedrun = data.get("speedrun") as Speedrun;
+    const companions = data.get("companions") as Companion[];
+    // Final talent inputs can change One Step Ahead after the general point update.
+    for (const player of players) {
+        if (player.classId === ClassIndex.Voidwalker) {
+            player.talentPoints.find(points => points.tab === TalentTab.FourthTab)!.totalOwned =
+                getVoidwalkerFourthTabPointsOwned(player, speedrun, companions);
+        }
+    }
+};
+
 export const updatePlayerTalentPoints = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const account = data.get("account") as Account;
@@ -926,7 +945,7 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
     const cards = data.get("cards") as Card[];
     const taskBoard = data.get("taskboard") as TaskBoard;
     const achievements = data.get("achievements") as Achievement[];
-    const optionListAccount = data.get("OptLacc") as number[];
+    const speedrun = data.get("speedrun") as Speedrun;
     const sigils = data.get("sigils") as Sigils;
     const dungeonsData = data.get("dungeons") as Dungeons;
     const breeding = data.get("breeding") as Breeding;
@@ -1043,10 +1062,8 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
 
         // Fourth tab
         let fourthTabPoints = 0;
-        if (player.getEliteClass() == ClassIndex.Maestro) {
-            fourthTabPoints = Math.floor(Math.max(0, 1 +
-                player.getTalentBonus(34) +
-                player.getTalentBonus(45) * optionListAccount[158]));
+        if (player.classId === ClassIndex.Voidwalker) {
+            fourthTabPoints = getVoidwalkerFourthTabPointsOwned(player, speedrun, companions);
         } else {
             fourthTabPoints = Math.floor(Math.max(0,
                 3 * Math.min(player.level - 89, 100) +

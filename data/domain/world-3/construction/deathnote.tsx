@@ -85,14 +85,13 @@ export class Deathnote extends Domain {
     getDeathnoteMinibossRank = (killCount: number) => {
         switch (true) {
             case killCount < 100: return 0;
-            case killCount > 100 && killCount < 250: return 1;
-            case killCount > 250 && killCount < 1000: return 2;
-            case killCount > 1000 && killCount < 5000: return 3;
-            case killCount > 5000 && killCount < 25000: return 4;
-            case killCount > 25000 && killCount < 100000: return 5;
-            case killCount > 100000 && killCount < 1000000: return 7;
-            case killCount > 1000000 && killCount < 10000000: return 10;
-            default: return 0;
+            case killCount < 250: return 1;
+            case killCount < 1000: return 2;
+            case killCount < 5000: return 3;
+            case killCount < 25000: return 4;
+            case killCount < 100000: return 5;
+            case killCount < 1000000: return 7;
+            default: return 10;
         }
     }
 

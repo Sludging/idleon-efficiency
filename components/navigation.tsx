@@ -36,6 +36,7 @@ const navItems: NavItem[] = [
             { subLink: "/vote-ballot", label: "Vote Ballot" },
             { subLink: "/island-expeditions", label: "Island Expeditions" },
             { subLink: "/killroy", label: "Killroy" },
+            { subLink: "/weekly-bosses", label: "Weekly Bosses" },
         ]
     },
     {
@@ -117,6 +118,8 @@ const navItems: NavItem[] = [
             { subLink: "/friends-stats", label: "Friends Stats" },
             { subLink: "/event-shop", label: "Event Shop" },
             { subLink: "/gem-shop", label: "Gem Shop" },
+            { subLink: "/bundles", label: "Bundles" },
+            { subLink: "/speedrun", label: "Speedrun" },
         ]
     },
     { link: "/raw-data", label: "Raw Data" },

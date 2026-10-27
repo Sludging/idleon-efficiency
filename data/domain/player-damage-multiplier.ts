@@ -60,7 +60,7 @@ const damageSoftcaps: readonly [number, number][] = [
 
 
 /** Calculates native DamageDealed("Max") component D in its source order. */
-export const getPlayerDamageTotalMultiplier = (data: Map<string, any>, player: Player): number => {
+export const getPlayerDamageTotalMultiplier = (data: Map<string, any>, player: Player, mapId: number = player.currentMapId): number => {
     const players = data.get('players') as Player[];
     const account = data.get('account') as Account;
     const alchemy = data.get('alchemy') as Alchemy;
@@ -131,7 +131,7 @@ export const getPlayerDamageTotalMultiplier = (data: Map<string, any>, player: P
     const monumentDamageBonus = hole.getMonumentBonus('Bravery', 6);
     component *= 1 + (grimoire.getUpgradeBonus(35)
         + equipmentSets.getSetBonus('LUSTRE_SET')
-        + shrines[0].getBonus(player.currentMapId)
+        + shrines[0].getBonus(mapId)
         + monumentDamageBonus
         + player.getPostOfficeBonus('12c')
         + player.getPostOfficeBonus('21c')

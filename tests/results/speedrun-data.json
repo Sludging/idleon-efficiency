@@ -1,0 +1,93 @@
+{
+  "extractions": {
+    "speedrun_account_state": {
+      "expression": "(()=>{const weekly=idleon.getAttr('WeeklyBoss').h;const bosses=idleon.getAttr('BossInfo');return {highscore:Number(idleon.getAttr('OptionsListAccount')[158]),equinoxChallengeProgress:Number(weekly.d_32??0),equinoxChallengeComplete:Number(weekly.d_32)===-1,selectedBossDifficulties:Array.from({length:6},(_,index)=>Number(bosses[index][0]))}})()",
+      "result": {
+        "highscore": 71,
+        "equinoxChallengeProgress": 71,
+        "equinoxChallengeComplete": false,
+        "selectedBossDifficulties": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "speedrun_saved_runners": {
+      "expression": "(()=>{const names=idleon.getAttr('GetPlayersUsernames');const db=idleon.getAttr('PlayerDATABASE').h;return names.flatMap((name,playerID)=>{const player=db[name].h;const classId=Number(player.CharacterClass);return classId===4||classId===5?[{playerID,classId,trialLevel:Number(player.SkillLevels[45]??0),radiusLevel:Number(player.SkillLevels[46]??0),bossingLevel:Number(player.SkillLevels[47]??0),familyLevel:Number(player.SkillLevels[58]??0),buffs:player.BuffsActive}]:[]})})()",
+      "result": [
+        {
+          "playerID": 6,
+          "classId": 4,
+          "trialLevel": 19,
+          "radiusLevel": 1,
+          "bossingLevel": 1,
+          "familyLevel": 302,
+          "buffs": []
+        }
+      ]
+    },
+    "speedrun_family_talent_candidates": {
+      "expression": "idleon.getAttr('GetPlayersUsernames').map((_,playerID)=>({playerID,bonus:idleon.callFunction('getbonus2',1,58,playerID)}))",
+      "result": [
+        {
+          "playerID": 0,
+          "bonus": 0
+        },
+        {
+          "playerID": 1,
+          "bonus": 0
+        },
+        {
+          "playerID": 2,
+          "bonus": 0
+        },
+        {
+          "playerID": 3,
+          "bonus": 0
+        },
+        {
+          "playerID": 4,
+          "bonus": 0
+        },
+        {
+          "playerID": 5,
+          "bonus": 0
+        },
+        {
+          "playerID": 6,
+          "bonus": 12.03187250996016
+        },
+        {
+          "playerID": 7,
+          "bonus": 0
+        },
+        {
+          "playerID": 8,
+          "bonus": 0
+        },
+        {
+          "playerID": 9,
+          "bonus": 0
+        },
+        {
+          "playerID": 10,
+          "bonus": 0
+        }
+      ]
+    },
+    "speedrun_shared_talent_context": {
+      "expression": "({companionTalentLevels:idleon.callFunction('Companions',1),allActiveBubbles:idleon.callFunction('Companions',4),companionTalentPoints:idleon.callFunction('Companions',20),familyTalentLevels:Number(idleon.getDNSM('FamBonusQTYs').h[68])})",
+      "result": {
+        "companionTalentLevels": 35,
+        "allActiveBubbles": 1,
+        "companionTalentPoints": 40,
+        "familyTalentLevels": 15.770392749244714
+      }
+    }
+  },
+  "errors": {}
+}

@@ -1,0 +1,28 @@
+{
+  "extractions": {
+    "bundles_received": {
+      "expression": "idleon.getAttr(\"BundlesReceived\").h",
+      "result": {
+        "bun_d": 1,
+        "bun_e": 1,
+        "bun_f": 1,
+        "bun_g": 1,
+        "bun_h": 1,
+        "bun_i": 1,
+        "bun_j": 1,
+        "bun_k": 1,
+        "bun_l": 1,
+        "bun_m": 1,
+        "bun_n": 1,
+        "bun_p": 1,
+        "bun_a": 1,
+        "bun_q": 1,
+        "bun_r": 1,
+        "bun_b": 1,
+        "bun_c": 1,
+        "bun_s": 1
+      }
+    }
+  },
+  "errors": {}
+}

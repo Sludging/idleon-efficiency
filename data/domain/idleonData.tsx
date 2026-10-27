@@ -5,6 +5,7 @@ import { Statues, updateStatueBonuses } from './world-1/statues';
 import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus, updatePlayerTalentPoints, Player, updatePlayerSpecialTalents } from './player';
 import { Alchemy, updateAlchemy, updateAlchemySlabBubbles, updateAlchemyTomeBubbles } from './world-2/alchemy/alchemy';
 import { updatePlayerTalentContexts } from './player';
+import { updateSpeedrunTalentPoints } from './player';
 import { updateEquipmentProperties } from './equipment';
 import { GoldenFood, updateGoldenFood } from './golden-food';
 import { updatePlayerDropRates, updatePlayerPowers, updatePlayerSecondaryStats, updatePlayerSkillStatsDN, updatePlayerStats } from './player-stats';
@@ -100,20 +101,8 @@ import { Skilling, updateAllEfficiencies, updateAllSkillExperienceMultiplier, up
 import { updateAttributeTalents, updatePowerTalents, updateRightHandOfActionBonuses } from './talents';
 import { updatePlayerHealth } from './player-health';
 import { Menagerie, prepareMenagerie, updateMenagerieMissions } from "./menagerie";
-
-export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
-    const data = doc.get(key);
-    try {
-        if (typeof (data) === "string") {
-            return JSON.parse(doc.get(key))
-        }
-        return data;
-    }
-    catch (e) {
-        console.debug(key, doc.get(key), e)
-    }
-    return emptyValue;
-}
+import { Speedrun, updateSpeedrunBonuses, updateSpeedrun } from './speedrun';
+import { updateWeeklyBoss } from './weekly-boss';
 
 export interface IParser {
     (raw: Cloudsave, data: Map<string, any>): void
@@ -169,6 +158,7 @@ const domainList: Domain[] = [
     new Rift("rift"),
     new POExtra("POExtra"),
     new Equinox("equinox"),
+    new Speedrun("speedrun"),
     new Sneaking("sneaking"),
     new Summoning("summoning"),
     new Farming("farming"),
@@ -397,6 +387,9 @@ const postProcessingMap: Record<string, Function> = {
     "capacity": (doc: Cloudsave, accountData: Map<string, any>) => updateCapacity(accountData),
     "votes": (doc: Cloudsave, accountData: Map<string, any>) => updateVotesBonus(accountData),
     "playerTalentContexts": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentContexts(accountData),
+    "speedrunBonuses": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpeedrunBonuses(accountData),
+    // Refresh only Voidwalker's fourth-tab total after One Step Ahead receives its final talent inputs.
+    "speedrunTalentPoints": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpeedrunTalentPoints(accountData),
     // Gemstone effects use each character's final actual talent level.
     "sneakingGemstones": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateSneakingGemstones(accountData),
     // Prepare Will Of The Eldest's account-wide level cap before attribute source consumers.
@@ -490,6 +483,16 @@ const postPostProcessingMap: Record<string, Function> = {
     "buttonTaskProgress": (_doc: Cloudsave, accountData: Map<string, any>) => updateButtonTaskProgress(accountData),
     "allSkillExperienceMultiplier": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateAllSkillExperienceMultiplier(accountData),
     "divinityRates": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateDivinityRates(accountData),
+    // Weekly task inputs need final character, capacity, stamp, shrine, prayer, and companion preparation.
+    "weeklyBoss": (_doc: Cloudsave, accountData: Map<string, any>) => {
+        updateWeeklyBoss(accountData);
+        return (accountData.get("account") as Account).weeklyBoss;
+    },
+    "speedrun": (_doc: Cloudsave, accountData: Map<string, any>) => {
+        updateSpeedrun(accountData);
+        // This map stores updater returns, so retain the registered domain.
+        return accountData.get("speedrun");
+    },
 }
 
 export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: CompanionState[], serverVars: Record<string, any>, isStatic: boolean = false) => {

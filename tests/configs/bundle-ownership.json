@@ -1,0 +1,11 @@
+{
+  "description": "Extract the native received-entitlement ledger for Account bundle ownership comparisons",
+  "target": "Account bundle ownership and existing bundle effect flags",
+  "extractions": [
+    {
+      "label": "bundles_received",
+      "expression": "idleon.getAttr(\"BundlesReceived\").h",
+      "description": "Raw native receipt ledger; a flag equal to 1 means the entitlement was received, not a transaction count"
+    }
+  ]
+}
