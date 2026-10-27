@@ -19,11 +19,12 @@ const SAVE_PATH = path.join(__dirname, '../fixtures/saves/latest.json');
 const RESULTS_DIR = path.join(__dirname, '../results');
 
 class BatchExtractor {
- constructor({ verbose = false, skipSaveRefresh = true, outputDir = RESULTS_DIR, playerServers = {} } = {}) {
+ constructor({ verbose = false, skipSaveRefresh = true, outputDir = RESULTS_DIR, playerServers = {}, serverURL = DEFAULT_DEBUG_SERVER_URL } = {}) {
   this.verbose = verbose;
   this.skipSaveRefresh = skipSaveRefresh;
   this.outputDir = path.resolve(outputDir);
   this.playerServers = playerServers;
+  this.serverURL = serverURL;
   this.configFiles = [];
   this.results = {
    successful: [],
@@ -62,7 +63,7 @@ class BatchExtractor {
 
  async checkServerStatus() {
   try {
-   const response = await fetch(`${DEFAULT_DEBUG_SERVER_URL}/status`);
+   const response = await fetch(`${this.serverURL}/status`);
    const status = await response.json();
 
    if (!response.ok) {
@@ -85,7 +86,7 @@ class BatchExtractor {
  }
 
  async fetchCloudSave() {
-  const statusResponse = await fetch(`${DEFAULT_DEBUG_SERVER_URL}/status`);
+  const statusResponse = await fetch(`${this.serverURL}/status`);
   if (!statusResponse.ok) {
    throw new Error(`Cannot update latest.json: live source verification failed (HTTP ${statusResponse.status}). Use an updated live debug server.`);
   }
@@ -94,7 +95,7 @@ class BatchExtractor {
    throw new Error(`Cannot update latest.json from ${status?.source || 'unknown'} source; only source='live' is allowed. Set GAME_SERVER_URL to an updated live debug server and restart its HTTP process.`);
   }
 
-  const response = await fetch(`${DEFAULT_DEBUG_SERVER_URL}/cloud-save`);
+  const response = await fetch(`${this.serverURL}/cloud-save`);
   const cloudSave = await response.json();
 
   if (!response.ok) {
@@ -120,8 +121,8 @@ class BatchExtractor {
     const configContents = JSON.parse(fs.readFileSync(config.configPath, 'utf8'));
     const configuredIndex = configContents.requiredActivePlayerIndex;
     const serverURL = configuredIndex === undefined
-     ? DEFAULT_DEBUG_SERVER_URL
-     : this.playerServers[configuredIndex] || DEFAULT_DEBUG_SERVER_URL;
+     ? this.serverURL
+     : this.playerServers[configuredIndex] || this.serverURL;
     if (configuredIndex !== undefined && this.playerServers[configuredIndex]) {
      console.log(`Using explicit player ${configuredIndex} server for ${config.name}: ${serverURL}`);
     }
@@ -215,7 +216,7 @@ class BatchExtractor {
    const startTime = Date.now();
    this.log('🚀 Batch Game Data Extractor Starting...\n');
    this.log(`${'='.repeat(80)}\n`);
-   console.log(`Primary extraction and save server: ${DEFAULT_DEBUG_SERVER_URL}`);
+   console.log(`Primary extraction and save server: ${this.serverURL}`);
    Object.entries(this.playerServers).forEach(([index, serverURL]) => {
     console.log(`Explicit player ${index} extraction server: ${serverURL}`);
    });

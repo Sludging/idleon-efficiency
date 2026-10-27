@@ -71,10 +71,10 @@ function readJson(filePath, description) {
 function resolveAccountDataset(datasetPath, options = {}) {
   const resolved = path.resolve(datasetPath);
   const descriptor = readJson(resolved, 'Account dataset');
-  if (!descriptor || descriptor.schemaVersion !== 1) {
+  if (!descriptor || descriptor.schemaVersion !== 2) {
     throw new Error(`Unsupported account dataset schemaVersion in ${resolved}`);
   }
-  const required = ['accountId', 'profileName', 'adapterVersion', 'savePath', 'saveSha256', 'resultsDir', 'playerIndex', 'playerName', 'gameVersion', 'assetSha256', 'configSha256', 'results', 'extractedAt'];
+  const required = ['accountId', 'profileName', 'adapterVersion', 'savePath', 'saveSha256', 'resultsDir', 'playerIndex', 'playerName', 'preparationPlayerIndex', 'preparationPlayerName', 'gameVersion', 'assetSha256', 'configSha256', 'results', 'extractedAt'];
   for (const key of required) {
     if (descriptor[key] === undefined || descriptor[key] === null) {
       throw new Error(`Account dataset missing ${key}: ${resolved}`);
@@ -88,6 +88,9 @@ function resolveAccountDataset(datasetPath, options = {}) {
   }
   if (!Number.isInteger(descriptor.playerIndex) || descriptor.playerIndex < 0 || typeof descriptor.playerName !== 'string') {
     throw new Error(`Invalid selected player in account dataset: ${resolved}`);
+  }
+  if (!Number.isSafeInteger(descriptor.preparationPlayerIndex) || descriptor.preparationPlayerIndex < 0 || typeof descriptor.preparationPlayerName !== 'string') {
+    throw new Error(`Invalid preparation player in account dataset: ${resolved}`);
   }
   if (!descriptor.gameVersion || typeof descriptor.gameVersion.title !== 'string' || typeof descriptor.gameVersion.version !== 'string') {
     throw new Error(`Invalid gameVersion in account dataset: ${resolved}`);
@@ -111,6 +114,9 @@ function resolveAccountDataset(datasetPath, options = {}) {
   }
   if (!Array.isArray(save.playerNames) || save.playerNames[descriptor.playerIndex] !== descriptor.playerName) {
     throw new Error(`Account dataset selected character mismatch: index ${descriptor.playerIndex} is not ${descriptor.playerName}`);
+  }
+  if (save.playerNames[descriptor.preparationPlayerIndex] !== descriptor.preparationPlayerName) {
+    throw new Error(`Account dataset preparation character mismatch: index ${descriptor.preparationPlayerIndex} is not ${descriptor.preparationPlayerName}`);
   }
   if (hashConfigs(options.configsDir) !== descriptor.configSha256) {
     throw new Error(`Account dataset config fingerprint mismatch: ${resolved}`);

@@ -30,7 +30,7 @@ function writeDataset(): void {
   fs.writeFileSync(savePath, JSON.stringify({ playerNames: ['First', 'Selected'] }));
   fs.writeFileSync(resultPath, JSON.stringify({ extractions: {}, errors: {} }));
   const descriptor = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     accountId: 'sample',
     profileName: 'Sample',
     adapterVersion: ADAPTER_VERSION,
@@ -39,6 +39,8 @@ function writeDataset(): void {
     resultsDir: 'results',
     playerIndex: 1,
     playerName: 'Selected',
+    preparationPlayerIndex: 0,
+    preparationPlayerName: 'First',
     gameVersion: { title: 'Test', version: '1' },
     assetSha256: accountDataset.hashAssets(assetRoot),
     configSha256: accountDataset.hashConfigs(configsDir),
@@ -67,6 +69,13 @@ afterEach(() => {
 });
 
 describe('account dataset selection', () => {
+  it('rejects schemaVersion 1 datasets', () => {
+    const descriptor = JSON.parse(fs.readFileSync(datasetPath, 'utf8'));
+    descriptor.schemaVersion = 1;
+    fs.writeFileSync(datasetPath, JSON.stringify(descriptor));
+    expect(() => accountDataset.loadAccountDataset(datasetPath, { configsDir, assetRoot })).toThrow('Unsupported account dataset schemaVersion');
+  });
+
   it('rejects a save whose bytes do not match its descriptor', () => {
     fs.writeFileSync(savePath, JSON.stringify({ playerNames: ['Changed', 'Selected'] }));
     expect(() => accountDataset.loadAccountDataset(datasetPath, { configsDir, assetRoot })).toThrow('save hash mismatch');
@@ -124,5 +133,34 @@ describe('account dataset selection', () => {
     descriptor.playerName = 'Wrong';
     fs.writeFileSync(datasetPath, JSON.stringify(descriptor));
     expect(() => accountDataset.loadAccountDataset(datasetPath, { configsDir, assetRoot })).toThrow('selected character mismatch');
+  });
+
+  it.each(['preparationPlayerIndex', 'preparationPlayerName'])('rejects a descriptor missing %s', (field) => {
+    const descriptor = JSON.parse(fs.readFileSync(datasetPath, 'utf8'));
+    delete descriptor[field];
+    fs.writeFileSync(datasetPath, JSON.stringify(descriptor));
+    expect(() => accountDataset.loadAccountDataset(datasetPath, { configsDir, assetRoot })).toThrow(`Account dataset missing ${field}`);
+  });
+
+  it.each([-1, 0.5, Number.MAX_SAFE_INTEGER + 1, '0'])('rejects malformed preparation index %s', (index) => {
+    const descriptor = JSON.parse(fs.readFileSync(datasetPath, 'utf8'));
+    descriptor.preparationPlayerIndex = index;
+    fs.writeFileSync(datasetPath, JSON.stringify(descriptor));
+    expect(() => accountDataset.loadAccountDataset(datasetPath, { configsDir, assetRoot })).toThrow('Invalid preparation player');
+  });
+
+  it('rejects a non-string preparation name', () => {
+    const descriptor = JSON.parse(fs.readFileSync(datasetPath, 'utf8'));
+    descriptor.preparationPlayerName = 0;
+    fs.writeFileSync(datasetPath, JSON.stringify(descriptor));
+    expect(() => accountDataset.loadAccountDataset(datasetPath, { configsDir, assetRoot })).toThrow('Invalid preparation player');
+  });
+
+  it.each([0, 2])('rejects a preparation character that does not match save index %s', (index) => {
+    const descriptor = JSON.parse(fs.readFileSync(datasetPath, 'utf8'));
+    descriptor.preparationPlayerIndex = index;
+    descriptor.preparationPlayerName = 'Selected';
+    fs.writeFileSync(datasetPath, JSON.stringify(descriptor));
+    expect(() => accountDataset.loadAccountDataset(datasetPath, { configsDir, assetRoot })).toThrow('preparation character mismatch');
   });
 });

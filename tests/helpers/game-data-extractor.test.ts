@@ -55,6 +55,15 @@ describe('GameDataExtractor active-player policy', () => {
 
     await expect(extractor.checkActivePlayer()).resolves.toBe(2);
   });
+
+  it('uses the config-required index instead of the account player index', async () => {
+    process.env.TEST_ACCOUNT_PLAYER_INDEX = '3';
+    const extractor = createExtractor({ requiredActivePlayerIndex: 0 });
+    mockActivePlayerIndex(0);
+
+    await expect(extractor.checkActivePlayer()).resolves.toBe(0);
+  });
+
   it('uses a validated account player index for the shared target', async () => {
     process.env.TEST_ACCOUNT_PLAYER_INDEX = '3';
     const extractor = createExtractor();
@@ -471,13 +480,17 @@ describe('GameDataExtractor persisted results', () => {
   );
 });
 describe('BatchExtractor player server routing', () => {
-  it('routes a config requiring player zero to its explicitly selected server', async () => {
+  it.each([false, true])('routes through the actor URL unless a required player overrides it (%s)', async (useOverride) => {
     const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'batch-player-server-'));
-    const configPath = path.join(tempDir, 'player-zero.json');
-    const resultPath = path.join(tempDir, 'player-zero-data.json');
+    const configPath = path.join(tempDir, 'talents.json');
+    const resultPath = path.join(tempDir, 'talents-data.json');
+    const genuineConfig = JSON.parse(fs.readFileSync(
+      path.join(__dirname, '../configs/talents-sludgeadin.json'), 'utf8'
+    ));
+    const extraction = genuineConfig.extractions[0];
     fs.writeFileSync(configPath, JSON.stringify({
-      requiredActivePlayerIndex: 0,
-      extractions: [{ label: 'value', expression: 'game.value()' }],
+      ...(useOverride ? { requiredActivePlayerIndex: genuineConfig.requiredActivePlayerIndex } : {}),
+      extractions: [extraction],
     }));
 
     const requests: Array<{ path: string; expression?: string }> = [];
@@ -495,7 +508,9 @@ describe('BatchExtractor player server routing', () => {
       requests.push({ path: request.url || '', expression });
       response.writeHead(200, { 'Content-Type': 'application/json' });
       response.end(JSON.stringify({
-        result: expression.includes('GetPlayersUsernames') ? 0 : 'player-zero-value',
+        result: expression.includes('GetPlayersUsernames')
+          ? (useOverride ? genuineConfig.requiredActivePlayerIndex : Number(process.env.TEST_ACCOUNT_PLAYER_INDEX ?? targetPlayerConfig.index))
+          : 'routed-value',
       }));
     });
 
@@ -504,18 +519,21 @@ describe('BatchExtractor player server routing', () => {
       const address = server.address();
       if (!address || typeof address === 'string') throw new Error('Test server did not bind');
 
+      const actorURL = `http://127.0.0.1:${address.port}`;
       const batch = new BatchExtractor({
         outputDir: tempDir,
-        playerServers: { 0: `http://127.0.0.1:${address.port}` },
+        serverURL: useOverride ? 'http://127.0.0.1:1' : actorURL,
+        playerServers: { [genuineConfig.requiredActivePlayerIndex]: useOverride ? actorURL : 'http://127.0.0.1:1' },
       });
-      batch.configFiles = [{ name: 'player-zero.json', configPath, resultPath }];
+      batch.configFiles = [{ name: 'talents.json', configPath, resultPath }];
       await batch.extractAll();
 
+      expect(batch.results.failed).toEqual([]);
       expect(requests.map(request => request.path)).toEqual(['/status', '/exec', '/exec']);
       expect(requests[1].expression).toContain('GetPlayersUsernames');
-      expect(requests[2]).toMatchObject({ path: '/exec', expression: 'game.value()' });
-      expect(JSON.parse(fs.readFileSync(resultPath, 'utf8')).extractions.value.result)
-        .toBe('player-zero-value');
+      expect(requests[2]).toMatchObject({ path: '/exec', expression: extraction.expression });
+      expect(JSON.parse(fs.readFileSync(resultPath, 'utf8')).extractions[extraction.label].result)
+        .toBe('routed-value');
     } finally {
       await new Promise<void>((resolve, reject) =>
         server.close(error => error ? reject(error) : resolve())
