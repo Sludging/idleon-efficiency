@@ -79,24 +79,20 @@ skips, state guards, or replacement assertions. Constants that define game
 mechanics or controlled unit inputs remain valid. Keep genuine extraction-health
 and comparison-context checks.
 
-Routine `yarn test` and extraction use `tests/fixtures/saves/latest.json` and its matching results; reuse the shared default offline server when ready. Public-account testing is opt-in only when the user explicitly requests multi-account or public-profile validation. DO NOT USE THIS IN NORMAL OPERATIONS. It is not a routine prerequisite or fallback for regular-save mismatches or missing results. The importer changes required save representation only; it does not add resources or simulate progress. Fetched data stays local under `.cache/test-accounts/` by default. Fetching, extraction, and tests are separate commands; tests use stored paired datasets and never fetch profiles.
-
-All Toolbox-to-save conversion belongs in `tests/helpers/public-profile-import.cjs`.
-Its output is an ordinary IE save for both extraction and domain loading.
-Bundle ownership is restored from positive purchase flags before offline startup,
-without granting resources or replaying purchase receipts. Raw downloads remain unchanged.
+For opt-in public-profile validation, follow the [public-profile maintenance workflow](../tests/helpers/README.md#public-profile-maintenance).
+That guide owns account selection, import policy, commands, cache refresh, and cohort coverage.
+Routine work uses the regular save and matching results under the [game-access policy](../tests/helpers/README.md#game-access).
 
 Extraction expressions must read account-dependent operands from the selected save.
 Do not embed balances or levels from another account.
+When an extraction replays game source, check its branches against the selected runtime version.
+For example, the four normal gear replays apply the version 1.24 Menagerie multiplier to non-attribute obols.
+Keep identical embedded replays aligned when updating a shared branch. Compare their public result with the original native getter when available.
+Match inventory scope to the native consumer. Mining, Chopping, and Catching material bonuses use the chest, Refinery, and the selected character's inventory, not other characters' bags.
 For actionable prices, apply the native purchase gate.
 A raw quote can remain nonzero when purchases are blocked.
 
-Run this sequence only when the user explicitly requests multi-account or public-profile validation. See [canonical game-access policy](../tests/helpers/README.md#game-access) for the regular-save default and gate.
-
-Use `yarn test:accounts:list --accounts <ids>` to inspect configured accounts, source dates, and observed progression. Fetch explicitly with `yarn test:accounts:fetch --accounts <ids>`, extract with `yarn test:accounts:extract --accounts <ids>`, then run fresh Jest processes with `yarn test:accounts --accounts <ids>`. Pass Jest suite arguments after `--`. See [helper account testing](../tests/helpers/README.md#integration-with-tests) for options and cache behavior. Account-specific calculation failures remain failures. Do not suppress known mismatches or change comparison tolerances.
-
-Opt-in account runs use the same worker defaults as normal `yarn test`.
-Pass Jest options after `--` when using `yarn test:accounts`.
+Do not suppress account-specific calculation failures or change tolerances to make a public profile pass.
 Each extraction entry used here should support a core result or a direct parameter comparison. A parameter is a calculation the selected result directly uses, including one in the same domain; keep its comparison even when it also has a core test. Static/supporting metadata is not a calculation target.
 
 Write the completed test against the typed public API directly and assert the calculated result. For a missing implementation during the tests stage, keep an active test whose extractor reports the missing calculation and game function signature. This temporary failure scaffolding exposes the missing API; once implemented, remove `typeof`/`in` guards, `unknown` casts, and `.call` wrappers. A missing selected implementation can support implementation after tests-stage approval; a missing directly used result follows the [dependency procedure](calculation-correctness/PLAYBOOK.md#dependencies-and-wikibot).

@@ -10,6 +10,9 @@ function(e,t,i){if("UpgLvREQ"==e)return Math.floor(1+(Math.min(2,t)+Math.min(4,t
 /*
  * Website consumer notes
  * Unlock rewards and Knowledge bonuses are independent; collection filters use Knowledge bonuses.
+ * Missing Knowledge categories become numeric index 0 in the game, including Sushi indices 59 through 63.
+ * These entries use the first category's base bonus and contribute to the Bucks Knowledge total.
+ * Sushi.fromBase fills absent metadata from the generated first category-0 entry for calculations and display.
  * Five numeric getters expose collection XP and Perfecto factors, cooked tiers, cost, and faster Fuel.
  * Collection XP and Perfecto factors are 1 + their category percentage / 100, not final results.
  * Cooked tiers include floor(q) guaranteed extras and fractional chance q - floor(q) for one more.
