@@ -10,7 +10,6 @@ import { SpeedrunPortals } from "../../../components/account/speedrun/speedrunPo
 import { SpeedrunBosses } from "../../../components/account/speedrun/speedrunBosses";
 import { MapInfo } from "../../../data/domain/maps";
 import { EnemyInfo } from "../../../data/domain/enemies";
-import type { Player } from "../../../data/domain/player";
 import type { Speedrun } from "../../../data/domain/speedrun";
 import useHydrated from "../../../lib/hooks/useHydrated";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
@@ -33,30 +32,28 @@ export default function SpeedrunContent() {
         return <>Loading...</>;
     }
 
-    const players = theData.get("players") as Player[];
     const runner = speedrun.runners.find(candidate => candidate.playerID === selectedPlayerID) ?? speedrun.runners[0];
-    const player = runner ? players.find(candidate => candidate.playerID === runner.playerID)! : undefined;
     const runnerOptions = speedrun.runners.map(candidate => ({
         value: candidate.playerID,
-        label: players.find(player => player.playerID === candidate.playerID)!.playerName,
+        label: candidate.playerName,
     }));
 
     return (
         <Box gap="medium">
             <Heading level="2" size="medium" style={{ fontWeight: "normal" }}>Speedrun</Heading>
-            {player && (
+            {runner && (
                 <Box direction="row" gap="small" align="center">
-                    <IconImage data={player.getClassImageData()} />
+                    <IconImage data={runner.classImageData} />
                     {speedrun.runners.length > 1 ? (
                         <Select
                             aria-label="Speedrun character"
                             options={runnerOptions}
                             labelKey="label"
                             valueKey={{ key: "value", reduce: true }}
-                            value={player.playerID}
+                            value={runner.playerID}
                             onChange={({ value }) => setSelectedPlayerID(value)}
                         />
-                    ) : <Text size="small">{player.playerName}</Text>}
+                    ) : <Text size="small">{runner.playerName}</Text>}
                 </Box>
             )}
             <SpeedrunOverview speedrun={speedrun} runner={runner} />

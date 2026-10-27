@@ -125,6 +125,8 @@ export class SpeedrunRunner {
         public readonly savedRadiusBuff: SavedSpeedrunBuff | undefined,
     ) {
         this.playerID = player.playerID;
+        this.playerName = player.playerName;
+        this.classImageData = player.getClassImageData();
         this.classId = player.classId;
         this.eligible = Speedrun.isEligibleClass(player.classId);
         this.trialTalentAvailable = (player.getTalent(45)?.pointsSpent ?? 0) > 0;
@@ -140,6 +142,8 @@ export class SpeedrunRunner {
     }
 
     readonly playerID: number;
+    readonly playerName: string;
+    readonly classImageData: ImageData;
     readonly classId: ClassIndex;
 
     get savedTrialBuffPresent(): boolean {

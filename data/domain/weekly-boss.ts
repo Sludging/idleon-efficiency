@@ -6,6 +6,7 @@ import { TypeGenEnum } from "./enum/typeGenEnum";
 import { WeeklyShopSectionEnum } from "./enum/weeklyShopSectionEnum";
 import type { GemStore } from "./gemPurchases";
 import type { Guild } from "./guild";
+import type { ImageData } from "./imageData";
 import type { Player } from "./player";
 import type { DeepReadonly, StaticRepositories } from "./repositories";
 import type { RepositoryRecords } from "./repositories.generated";
@@ -32,8 +33,13 @@ export interface WeeklyBossWeek {
 }
 
 
-export interface WeeklyBossPreparedCharacter {
+export interface WeeklyBossCharacterIdentity {
     readonly playerIndex: number;
+    readonly playerName: string;
+    readonly classImageData: ImageData;
+}
+
+export interface WeeklyBossPreparedCharacter extends WeeklyBossCharacterIdentity {
     readonly rawValue: number | undefined;
     readonly quantity: number | undefined;
     readonly power: number | undefined;
@@ -44,8 +50,7 @@ export interface WeeklyBossPreparationGroup {
     readonly characters: readonly WeeklyBossPreparedCharacter[];
 }
 
-export interface WeeklyBossCapacityRecommendation {
-    readonly playerIndex: number;
+export interface WeeklyBossCapacityRecommendation extends WeeklyBossCharacterIdentity {
     readonly contextFactor: number;
 }
 
@@ -69,20 +74,25 @@ export interface WeeklyBossShopProgress {
     readonly world5KillsLeft: number | undefined;
 }
 
-export interface WeeklyBossShopReward {
-    readonly playerIndex: number;
+export interface WeeklyBossShopReward extends WeeklyBossCharacterIdentity {
     readonly itemId: string;
     readonly itemName: string;
     readonly quantity: number;
 }
 
-export class WeeklyBossShopCharacter {
+export class WeeklyBossShopCharacter implements WeeklyBossCharacterIdentity {
+    readonly playerIndex: number;
+    readonly playerName: string;
+    readonly classImageData: ImageData;
     private readonly worldTier: number | undefined;
 
     constructor(
-        public readonly playerIndex: number,
+        identity: WeeklyBossCharacterIdentity,
         progress: WeeklyBossShopProgress,
     ) {
+        this.playerIndex = identity.playerIndex;
+        this.playerName = identity.playerName;
+        this.classImageData = identity.classImageData;
         let worldTier: number | undefined = 1;
         const residuals = [
             progress.world2KillsLeft, progress.world3KillsLeft,
@@ -141,6 +151,8 @@ export class WeeklyBoss {
     private shopRewards = new Map<number, readonly WeeklyBossShopReward[]>();
     private shopHatDeposits = new Map<number, boolean>();
     private playerIndices: number[] = [];
+    private playerIdentities: WeeklyBossCharacterIdentity[] = [];
+    private shopCharacters: readonly WeeklyBossShopCharacter[] = [];
     private taskQuantities: Map<number, number>[] = [];
     private rawKillValues: Map<number, number>[] = [];
     private capacityInputs: WeeklyCapacityInputs[] = [];
@@ -181,6 +193,8 @@ export class WeeklyBoss {
         this.savedBattleWeekNumber = Number(optionList?.[191] ?? 0);
         this.savedGlobalTimeSeconds = globalTimeSeconds;
         this.playerIndices = [];
+        this.playerIdentities = [];
+        this.shopCharacters = [];
         this.taskQuantities = [];
         this.rawKillValues = [];
         this.capacityInputs = [];
@@ -308,7 +322,13 @@ export class WeeklyBoss {
                 context.allCapacityMultiplier;
             if (!recommendation || contextFactor > recommendation.contextFactor ||
                 (contextFactor === recommendation.contextFactor && playerIndex < recommendation.playerIndex)) {
-                recommendation = { playerIndex, contextFactor };
+                const identity = this.playerIdentities[playerIndex];
+                recommendation = {
+                    playerIndex,
+                    playerName: identity.playerName,
+                    classImageData: identity.classImageData,
+                    contextFactor,
+                };
             }
         }
         return recommendation;
@@ -325,8 +345,11 @@ export class WeeklyBoss {
                 turn.playerIndex, turn.taskId, capacityRecommendation?.playerIndex ?? turn.playerIndex,
             );
             const characters = groups.get(turn.taskId) ?? [];
+            const identity = this.playerIdentities[turn.playerIndex];
             characters.push({
                 playerIndex: turn.playerIndex,
+                playerName: identity.playerName,
+                classImageData: identity.classImageData,
                 rawValue: killTasks.has(turn.taskId)
                     ? this.rawKillValues[turn.playerIndex].get(turn.taskId)
                     : quantity,
@@ -355,6 +378,10 @@ export class WeeklyBoss {
         ];
     }
 
+    getShopCharacters(): readonly WeeklyBossCharacterIdentity[] {
+        return this.shopCharacters;
+    }
+
     getShopRewards(entryId: number): readonly WeeklyBossShopReward[] {
         return this.shopRewards.get(entryId) ?? emptyShopRewards;
     }
@@ -367,6 +394,7 @@ export class WeeklyBoss {
         characters: readonly WeeklyBossShopCharacter[],
         hats: readonly Pick<HatRackHat, "internalName" | "stored">[],
     ): void {
+        this.shopCharacters = characters;
         this.shopRewards.clear();
         this.shopHatDeposits.clear();
         const items = this.repositories.get("Item");
@@ -384,6 +412,8 @@ export class WeeklyBoss {
                         const item = items.find(candidate => candidate.id === reward.itemId)!;
                         rewards.push({
                             playerIndex: character.playerIndex,
+                            playerName: character.playerName,
+                            classImageData: character.classImageData,
                             itemId: reward.itemId,
                             itemName: item.data.item.displayName,
                             quantity: reward.quantity,
@@ -421,6 +451,7 @@ export class WeeklyBoss {
 
         this.playerIndices = players.map(player => player.playerID);
         this.taskQuantities = [];
+        this.playerIdentities = [];
         this.rawKillValues = [];
         this.capacityInputs = [];
         this.materialStampBonus = stamps.find(stamp => stamp.raw_name === "StampB8")!.getBonus();
@@ -432,6 +463,11 @@ export class WeeklyBoss {
         const companionPrayerBonus = 30 * isCompanionLevelTwo(companions, 2);
 
         for (const player of players) {
+            this.playerIdentities[player.playerID] = {
+                playerIndex: player.playerID,
+                playerName: player.playerName,
+                classImageData: player.getClassImageData(),
+            };
             const quantities = new Map<number, number>();
             const rawKills = new Map<number, number>();
             for (const [taskId, skill] of skillTasks) {
@@ -479,7 +515,11 @@ export function updateWeeklyBoss(data: Map<string, any>): void {
     const players = data.get("players") as Player[];
     const deathnote = data.get("deathnote") as Deathnote;
     const hatRack = data.get("hatRack") as HatRack;
-    const characters = players.map(player => new WeeklyBossShopCharacter(player.playerID, {
+    const characters = players.map(player => new WeeklyBossShopCharacter({
+        playerIndex: player.playerID,
+        playerName: player.playerName,
+        classImageData: player.getClassImageData(),
+    }, {
         world2KillsLeft: deathnote.getKillsLeftToAdvance(player.playerID, 0),
         world3KillsLeft: deathnote.getKillsLeftToAdvance(player.playerID, 50),
         world4KillsLeft: deathnote.getKillsLeftToAdvance(player.playerID, 100),

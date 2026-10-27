@@ -14,9 +14,8 @@ import TipDisplay from '../../../components/base/TipDisplay';
 import type { Account } from '../../../data/domain/account';
 import type { ImageData } from '../../../data/domain/imageData';
 import { Item } from '../../../data/domain/items';
-import type { Player } from '../../../data/domain/player';
 import { WeeklyShopSectionEnum } from '../../../data/domain/enum/weeklyShopSectionEnum';
-import type { WeeklyBoss, WeeklyBossPreparedCharacter, WeeklyBossPreparation } from '../../../data/domain/weekly-boss';
+import type { WeeklyBoss, WeeklyBossPreparedCharacter, WeeklyBossPreparation, WeeklyBossShopReward } from '../../../data/domain/weekly-boss';
 import { commaNotation, notateNumber, toTime } from '../../../data/utility';
 import useHydrated from '../../../lib/hooks/useHydrated';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
@@ -119,10 +118,9 @@ function PowerHelp({ weeklyBoss, taskId, requirement }: { weeklyBoss: WeeklyBoss
     </TipDisplay>;
 }
 
-function RequirementGroups({ weeklyBoss, preparation, players }: {
+function RequirementGroups({ weeklyBoss, preparation }: {
     weeklyBoss: WeeklyBoss;
     preparation: WeeklyBossPreparation;
-    players: readonly Player[];
 }) {
     const size = useContext(ResponsiveContext);
     const columns = size === 'small' ? ['minmax(0, 1fr)']
@@ -143,11 +141,10 @@ function RequirementGroups({ weeklyBoss, preparation, players }: {
                 </Box>
                 <Box background="dark-1" pad="small" gap="small" style={{ minWidth: 0 }}>
                     {group.characters.map(character => {
-                        const player = players.find(candidate => candidate.playerID === character.playerIndex)!;
                         const fields: DataRowField[] = [
                             {
-                                key: 'character', kind: 'identity', name: `${player.playerName} (slot ${character.playerIndex + 1})`,
-                                artwork: <IconImage data={player.getClassImageData()} scale={0.8} />,
+                                key: 'character', kind: 'identity', name: `${character.playerName} (slot ${character.playerIndex + 1})`,
+                                artwork: <IconImage data={character.classImageData} scale={0.8} />,
                             },
                             { key: 'saved-stat', kind: 'content', label: 'Current stat', content: <SavedStat character={character} requirement={task.requirement} /> },
                             { key: 'power', kind: 'content', label: 'Power', content: <PowerMeter power={character.power} /> },
@@ -174,19 +171,19 @@ function OfferArtwork({ intName, appearance, name }: { intName: string; appearan
     return <IconImage data={Item.getImageData(intName)} />;
 }
 
-function CharacterRewards({ weeklyBoss, entryId, players }: { weeklyBoss: WeeklyBoss; entryId: number; players: readonly Player[] }) {
+function CharacterRewards({ weeklyBoss, entryId }: { weeklyBoss: WeeklyBoss; entryId: number }) {
     const rewards = weeklyBoss.getShopRewards(entryId);
-    const groups = new Map<string, { itemId: string; itemName: string; quantity: number; players: Player[] }>();
+    const groups = new Map<string, { itemId: string; itemName: string; quantity: number; characters: WeeklyBossShopReward[] }>();
     for (const reward of rewards) {
         const key = `${reward.itemId}:${reward.quantity}`;
         let group = groups.get(key);
         if (!group) {
-            group = { itemId: reward.itemId, itemName: reward.itemName, quantity: reward.quantity, players: [] };
+            group = { itemId: reward.itemId, itemName: reward.itemName, quantity: reward.quantity, characters: [] };
             groups.set(key, group);
         }
-        group.players.push(players.find(player => player.playerID === reward.playerIndex)!);
+        group.characters.push(reward);
     }
-    const unknownPlayers = players.filter(player => !rewards.some(reward => reward.playerIndex === player.playerID));
+    const unknownCharacters = weeklyBoss.getShopCharacters().filter(character => !rewards.some(reward => reward.playerIndex === character.playerIndex));
     const rewardHelp = weeklyBoss.shopEntries[entryId].data.intName === 'EquipmentStatues' ? 'Which statue?' : 'Which food?';
 
     return <Box gap="small">
@@ -195,26 +192,25 @@ function CharacterRewards({ weeklyBoss, entryId, players }: { weeklyBoss: Weekly
             <Text size="small">{commaNotation(reward.quantity)} {reward.itemName}{reward.itemName.endsWith(' Statue') ? 's' : ''} per purchase</Text>
         </Box>)}
         {groups.size > 1 && <TipDisplay heading={rewardHelp} maxWidth="medium" body={<Box gap="xxsmall">
-            {Array.from(groups.values()).flatMap(reward => reward.players.map(player => <Text size="small" key={player.playerID}>
-                {player.playerName} → {commaNotation(reward.quantity)} {reward.itemName}
+            {Array.from(groups.values()).flatMap(reward => reward.characters.map(character => <Text size="small" key={character.playerIndex}>
+                {character.playerName} → {commaNotation(reward.quantity)} {reward.itemName}
             </Text>))}
-            {unknownPlayers.map(player => <Text size="small" key={player.playerID}>{player.playerName} → Unknown reward</Text>)}
+            {unknownCharacters.map(character => <Text size="small" key={character.playerIndex}>{character.playerName} → Unknown reward</Text>)}
         </Box>}>
             <Box direction="row" align="center" gap="xsmall" tabIndex={0} aria-label={rewardHelp}>
                 <Text size="xsmall" color="accent-2">{rewardHelp}</Text>
                 <CircleInformation size="small" />
             </Box>
         </TipDisplay>}
-        {unknownPlayers.length > 0 && <Text size="xsmall" color="accent-2">Unknown reward for {unknownPlayers.length} {unknownPlayers.length === 1 ? 'character' : 'characters'}</Text>}
+        {unknownCharacters.length > 0 && <Text size="xsmall" color="accent-2">Unknown reward for {unknownCharacters.length} {unknownCharacters.length === 1 ? 'character' : 'characters'}</Text>}
         <Text size="xsmall" color="accent-2">Only the buying character receives these items.</Text>
         <Text size="xsmall" color="accent-2">Repeatable with shared Trophies and an empty inventory slot.</Text>
     </Box>;
 }
 
-function WeeklyShop({ weeklyBoss, preparation, players }: {
+function WeeklyShop({ weeklyBoss, preparation }: {
     weeklyBoss: WeeklyBoss;
     preparation: WeeklyBossPreparation;
-    players: readonly Player[];
 }) {
     const size = useContext(ResponsiveContext);
 
@@ -239,7 +235,7 @@ function WeeklyShop({ weeklyBoss, preparation, players }: {
                     <IconImage data={trophyImage} />
                     <Text size="small">{commaNotation(offer.cost)}</Text>
                 </Box>} />
-                {generic ? <CharacterRewards weeklyBoss={weeklyBoss} entryId={entryId} players={players} />
+                {generic ? <CharacterRewards weeklyBoss={weeklyBoss} entryId={entryId} />
                     : !appearance && <Text size="xsmall" color="accent-2">{offer.desc.replace(/_/g, ' ')}</Text>}
                 {collected && <Box direction="row" align="center" gap="xsmall">
                     <Checkmark size="small" aria-label={appearance ? 'Appearance collected' : 'Deposited in Hat Rack'} />
@@ -261,21 +257,18 @@ export default function WeeklyBossesContent() {
         lastUpdated: state.lastUpdated,
     })));
     const account = theData.get('account') as Account | undefined;
-    const players = theData.get('players') as Player[] | undefined;
     const weeklyBoss = account?.weeklyBoss;
-    const preparation = useMemo(() => weeklyBoss && players ? weeklyBoss.getPreparation() : undefined,
-        [weeklyBoss, players, lastUpdated]);
+    const preparation = useMemo(() => weeklyBoss ? weeklyBoss.getPreparation() : undefined,
+        [weeklyBoss, lastUpdated]);
 
-    if (!hydrated || !weeklyBoss || !players || !preparation) return <>Loading...</>;
+    if (!hydrated || !weeklyBoss || !preparation) return <>Loading...</>;
 
     const week = preparation.week;
     const boss = weeklyBoss.bosses[week.bossId].data;
     const nowSeconds = Math.floor(Date.now() / 1000);
     const secondsRemaining = Math.max(0, week.endsAtSeconds - nowSeconds);
     const dateRange = `${weeklyDateFormat.format(new Date(week.startsAtSeconds * 1000))} – ${weeklyDateFormat.format(new Date(week.endsAtSeconds * 1000))} UTC`;
-    const recommendedPlayer = preparation.capacityRecommendation
-        ? players.find(player => player.playerID === preparation.capacityRecommendation!.playerIndex)!
-        : undefined;
+    const recommendedCharacter = preparation.capacityRecommendation;
 
     return <Box gap="medium" style={{ minWidth: 0 }}>
         <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Weekly Bosses</Heading>
@@ -298,12 +291,12 @@ export default function WeeklyBossesContent() {
         <Box gap="medium">
             <ContentTabs options={preparationTabs} value={tab} onChange={setTab} />
             {tab === 'Preparation' ? <Box gap="medium">
-                {recommendedPlayer && <Box gap="xsmall">
-                    <Text size="small">Recommended character to log in for material-capacity turns: {recommendedPlayer.playerName} (slot {recommendedPlayer.playerID + 1}).</Text>
+                {recommendedCharacter && <Box gap="xsmall">
+                    <Text size="small">Recommended character to log in for material-capacity turns: {recommendedCharacter.playerName} (slot {recommendedCharacter.playerIndex + 1}).</Text>
                     <Text size="xsmall" color="accent-2">Capacity uses this character's saved equipment, signs, prayers, talents, and map. This does not change character order.</Text>
                 </Box>}
-                <RequirementGroups weeklyBoss={weeklyBoss} preparation={preparation} players={players} />
-            </Box> : <WeeklyShop weeklyBoss={weeklyBoss} preparation={preparation} players={players} />}
+                <RequirementGroups weeklyBoss={weeklyBoss} preparation={preparation} />
+            </Box> : <WeeklyShop weeklyBoss={weeklyBoss} preparation={preparation} />}
         </Box>
     </Box>;
 }

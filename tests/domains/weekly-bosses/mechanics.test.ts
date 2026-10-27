@@ -1,10 +1,18 @@
 import { StaticRepositories } from '../../../data/domain/repositories';
-import { WeeklyBoss, WeeklyBossShopCharacter } from '../../../data/domain/weekly-boss';
+import { WeeklyBoss, WeeklyBossShopCharacter, type WeeklyBossCharacterIdentity } from '../../../data/domain/weekly-boss';
 
 function createWeeklyBoss(): WeeklyBoss {
   const weeklyBoss = new WeeklyBoss();
   weeklyBoss.init(new StaticRepositories());
   return weeklyBoss;
+}
+
+function characterIdentity(playerIndex: number): WeeklyBossCharacterIdentity {
+  return {
+    playerIndex,
+    playerName: `Character ${playerIndex + 1}`,
+    classImageData: { location: 'ClassIcons0', width: 36, height: 36 },
+  };
 }
 
 describe('Weekly Bosses task power', () => {
@@ -35,19 +43,19 @@ describe('Weekly Bosses task power', () => {
 
 describe('Weekly Bosses character shop rewards', () => {
   it('uses independent world gates, including exact zero and negative residuals', () => {
-    const starter = new WeeklyBossShopCharacter(0, {
+    const starter = new WeeklyBossShopCharacter(characterIdentity(0), {
       world2KillsLeft: 1, world3KillsLeft: 1, world4KillsLeft: 1, world5KillsLeft: 1,
     });
-    const world2 = new WeeklyBossShopCharacter(1, {
+    const world2 = new WeeklyBossShopCharacter(characterIdentity(1), {
       world2KillsLeft: 0, world3KillsLeft: 1, world4KillsLeft: 1, world5KillsLeft: 1,
     });
-    const world3 = new WeeklyBossShopCharacter(2, {
+    const world3 = new WeeklyBossShopCharacter(characterIdentity(2), {
       world2KillsLeft: 1, world3KillsLeft: -1, world4KillsLeft: 1, world5KillsLeft: 1,
     });
-    const world4 = new WeeklyBossShopCharacter(3, {
+    const world4 = new WeeklyBossShopCharacter(characterIdentity(3), {
       world2KillsLeft: 1, world3KillsLeft: 1, world4KillsLeft: 0, world5KillsLeft: 1,
     });
-    const world5 = new WeeklyBossShopCharacter(4, {
+    const world5 = new WeeklyBossShopCharacter(characterIdentity(4), {
       world2KillsLeft: 1, world3KillsLeft: 1, world4KillsLeft: 1, world5KillsLeft: 0,
     });
 
@@ -64,10 +72,10 @@ describe('Weekly Bosses character shop rewards', () => {
   });
 
   it('floors each subtype and applies the native lower and upper caps', () => {
-    const starter = new WeeklyBossShopCharacter(0, {
+    const starter = new WeeklyBossShopCharacter(characterIdentity(0), {
       world2KillsLeft: 1, world3KillsLeft: 1, world4KillsLeft: 1, world5KillsLeft: 1,
     });
-    const advanced = new WeeklyBossShopCharacter(1, {
+    const advanced = new WeeklyBossShopCharacter(characterIdentity(1), {
       world2KillsLeft: 0, world3KillsLeft: 0, world4KillsLeft: 0, world5KillsLeft: 0,
     });
 
@@ -82,10 +90,10 @@ describe('Weekly Bosses character shop rewards', () => {
   });
 
   it('does not invent progress when a missing later gate can change the reward', () => {
-    const unknown = new WeeklyBossShopCharacter(0, {
+    const unknown = new WeeklyBossShopCharacter(characterIdentity(0), {
       world2KillsLeft: 0, world3KillsLeft: 0, world4KillsLeft: 0, world5KillsLeft: undefined,
     });
-    const knownLaterGate = new WeeklyBossShopCharacter(1, {
+    const knownLaterGate = new WeeklyBossShopCharacter(characterIdentity(1), {
       world2KillsLeft: undefined, world3KillsLeft: undefined, world4KillsLeft: undefined, world5KillsLeft: 0,
     });
 
@@ -100,7 +108,7 @@ describe('Weekly Bosses character shop rewards', () => {
     const food = weeklyBoss.shopEntries.find(entry => entry.data.intName === 'FoodG')!;
     const headband = weeklyBoss.shopEntries.find(entry => entry.data.intName === 'EquipmentHats10')!;
     const crow = weeklyBoss.shopEntries.find(entry => entry.data.intName === 'EquipmentHats84')!;
-    const character = new WeeklyBossShopCharacter(7, {
+    const character = new WeeklyBossShopCharacter(characterIdentity(7), {
       world2KillsLeft: 0, world3KillsLeft: 0, world4KillsLeft: 0, world5KillsLeft: 0,
     });
 

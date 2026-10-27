@@ -63,6 +63,8 @@ Select and prepare each account projection once, then expose its numeric results
 
 [`IslandExpeditions`](../../data/domain/world-2/islandExpedition.tsx) prepares its collector name and daily bottle rate on `BottleCollection`. Trash and Rando initialize neutral reward-possession records, then replace them after Storage and Slab are ready.
 
+[`WeeklyBoss`](../../data/domain/weekly-boss.ts) and [`SpeedrunRunner`](../../data/domain/speedrun.ts) retain character names and class artwork. Their pages render these identities without rejoining the player roster.
+
 For calculations currently called only by UI code, apply [MODEL-01](../../CODING_STANDARDS.md#model-01--model-responsible-concepts) with the preparation workflow above. Follow the UI guide for presentation, not calculation ownership.
 
 ## Make repeated processing safe
