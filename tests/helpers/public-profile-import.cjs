@@ -1,6 +1,6 @@
 const { isDeepStrictEqual } = require('node:util');
 
-const ADAPTER_VERSION = 'v1.23-public-profile-2';
+const ADAPTER_VERSION = 'v1.23-public-profile-3';
 
 const jsonListKeys = new Set(`AchieveReg,AnvilCraftStatus,ArcadeUpg,AttackLoadout_,AttackLoadoutpre_,Boats,Breeding,Bubba,BugInfo,Captains,CardPreset_,Cards1,CauldronBubbles,CauldronJobs0,CauldronJobs1,CauldronP2W,CogO,Compass,CookMaster,Cooking,DungUpg,FarmPlot,FarmRank,FlagP,FlagU,GamingSprout,GemItemsPurchased,Guild,HintStatus,Holes,Jars,KLA_,Lab,MapBon,Meals,Menagerie,Ninja,POu_,Pets,PetsStored,PlayerStuff_,PldTraps_,PrayOwned,Prayers_,Print,Refinery,Research,RoyalG,RoyalMaps,SSprog,SailChests,Sailing,SaltLick,Shrine,Spelunk,StatueLevels_,SteamAchieve,StuG,Summon,Sushi,TaskZZ0,TaskZZ1,TaskZZ2,TaskZZ3,TaskZZ4,TaskZZ5,Territory,Tess,TotemInfo,Tower`.split(','));
 const sparseListKeys = new Set(`CMm,CogM,EMm0_,EMm1_,IMm_,ObolEqMAP_,ObolEqMAPz1,ObolEqMAPz2,ObolInvMAP_0,ObolInvMAP_1,ObolInvMAP_2,ObolInvMAP_3`.split(','));
@@ -120,6 +120,8 @@ function importPublicProfile(profile) {
     servervars: profile.serverVars,
     companions,
   };
+
+  if (save.GemsPacksPurchased === 0) delete save.GemsPacksPurchased;
 
   encodeSourceFields(save, jsonListKeys, 'arrays or objects', value => Array.isArray(value) || isRecord(value));
   encodeSourceFields(save, sparseListKeys, 'sparse objects', isRecord);

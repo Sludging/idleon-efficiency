@@ -35,6 +35,36 @@ describe('public profile import', () => {
     expect(result.servervars).toEqual({ GameVERSION: 141 });
   });
 
+  test('omits numeric-zero private receipt history without changing the profile or gameplay fields', () => {
+    const input = profile({ data: {
+      GemsPacksPurchased: 0,
+      GemsOwned: 123,
+      GemItemsPurchased: [1, 2],
+      BundlesReceived: { bun_u: 1 },
+    } });
+    const original = structuredClone(input);
+    const result = importPublicProfile(input);
+
+    expect(result).not.toHaveProperty('GemsPacksPurchased');
+    expect(input).toEqual(original);
+    expect(result.GemsOwned).toBe(123);
+    expect(JSON.parse(result.GemItemsPurchased)).toEqual([1, 2]);
+    expect(JSON.parse(result.BundlesReceived)).toEqual({ bun_u: 1 });
+  });
+
+  test.each([
+    ['valid array', ['receipt']],
+    ['nonzero number', 1],
+    ['string zero', '0'],
+  ])('preserves private receipt history: %s', (_name, history) => {
+    const input = profile({ data: { GemsPacksPurchased: history } });
+    const original = structuredClone(input);
+    const result = importPublicProfile(input);
+
+    expect(result.GemsPacksPurchased).toEqual(history);
+    expect(input).toEqual(original);
+  });
+
   test('reconstructs owned bundle summaries for save consumers', () => {
     const data = {
       bun_u: 1,
