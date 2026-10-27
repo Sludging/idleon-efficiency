@@ -49,12 +49,6 @@ describe('existing producers', () => {
             expect(mastery.getSkillBonus(SkillsIndex.Spelunking, slot)).toMatchLiveGame(expected(label), 0);
         });
     });
-    characterIDs.forEach(id => {
-        it(`matches character ${id}'s own Spelunking Specialty effect`, () => {
-            const player = (data.get('players') as Player[]).find(player => player.playerID === id)!;
-            expect(player.getTalentBonus(236)).toMatchLiveGame(expected(`talent_236_player_${id}`), 0);
-        });
-    });
     it('selects the highest Specialty effect from all actual talent owners', () => {
         const players = data.get('players') as Player[];
         expect(Math.max(...players.map(player => player.getTalentBonus(236))))

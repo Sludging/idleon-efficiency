@@ -1,5 +1,9 @@
 {
   "extractions": {
+    "tome_producer_17_dungeon_rank": {
+      "expression": "idleon.getAttr('PixelHelperActor')[9].behaviors.getBehavior('ActorEvents_498')._GenINFO[12]",
+      "result": 51
+    },
     "tome_pts_0": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 0, 0)",
       "result": 1064

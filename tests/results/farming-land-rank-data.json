@@ -16,10 +16,6 @@
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 14, 0)",
       "result": 9.409780775716694
     },
-    "dank_ranks_candidate_0_bonus": {
-      "expression": "idleon.callFunction(\"ArbitraryCode5Inputs\", \"decayMulti\", 2, 200, Number(idleon.engine.getGameAttribute(\"PlayerDATABASE\").h[idleon.engine.getGameAttribute(\"GetPlayersUsernames\")[0]].h.SkillLevels[207]) + idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"AllTalentLVz\", \"207|0\", 0), 0, 0)",
-      "result": 2.1902834008097165
-    },
     "land_rank_plot_state": {
       "expression": "(()=>{const ranks=idleon.getAttr(\"FarmRank\");return Array.from({length:36},(_,index)=>({index,rank:ranks[0][index],exp:ranks[1][index],requirement:idleon.callFunction(\"FarmingStuffs\",\"LankRankEXPreq\",index,0)}));})()",
       "result": [

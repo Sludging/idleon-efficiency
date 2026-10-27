@@ -18,6 +18,11 @@
       "description": "Sushi RoG bonus quantity 23"
     },
     {
+      "label": "jelly_rog_bonus_qty_36",
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 36, 0)",
+      "description": "Jelly Operator obstruction bonus to prismatic bubble strength"
+    },
+    {
       "label": "world_6_trophy_bonus",
       "expression": "idleon.callFunction(\"Thingies\", \"HaveW6Trophy\", 0, 0)",
       "description": "World 6 trophy bonus (Trophy23 - 10 if obtained, 0 otherwise)"
@@ -50,7 +55,7 @@
     {
       "label": "prismatic_multiplier",
       "expression": "idleon.callFunction(\"ArcaneType\", \"PrismaBonusMult\", 0, 0)",
-      "description": "Final prismatic multiplier calculation (min 4, base 2)"
+      "description": "Final prismatic multiplier calculation (cap 5, base 2)"
     }
   ]
 }

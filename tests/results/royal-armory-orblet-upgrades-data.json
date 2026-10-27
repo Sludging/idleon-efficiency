@@ -115,10 +115,6 @@
     "orblet_market_display_level_9": {
       "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][9]); })()",
       "result": 0
-    },
-    "calculationStorage.amountInStorageOrblet": {
-      "expression": "idleon.getAttr(\"PixelHelperActor\")[5].behaviors.getBehavior(\"ActorEvents_232\")._ItemsAndStorageOWNED.h.Orblet",
-      "result": 1623
     }
   },
   "errors": {}

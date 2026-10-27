@@ -12,6 +12,10 @@
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 23, 0)",
       "result": 1
     },
+    "jelly_rog_bonus_qty_36": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 36, 0)",
+      "result": 0
+    },
     "world_6_trophy_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"HaveW6Trophy\", 0, 0)",
       "result": 10

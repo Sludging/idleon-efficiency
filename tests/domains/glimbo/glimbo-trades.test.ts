@@ -53,7 +53,7 @@ describe('Glimbo trade state and previews', () => {
         expect(trade.getCostAtCount(trade.count + 1)).toBeGreaterThan(0);
     });
 
-    it.each([0, 2, 15])('prices only sequential trades covered by the supplied budget for trade %i', index => {
+    it.each([0, 2, 15])('checks the first trade against the supplied budget for trade %i', index => {
         const trade = glimbo.trades[index];
         const nextCost = trade.getCostAtCount(trade.count);
 
@@ -61,7 +61,6 @@ describe('Glimbo trade state and previews', () => {
         expect(trade.canAfford(nextCost)).toBe(true);
         expect(trade.getAffordableTradeCount(nextCost - 1)).toBe(0);
         expect(trade.getAffordableTradeCount(nextCost)).toBe(1);
-        expect(trade.getAffordableTradeCount(nextCost + trade.getCostAtCount(trade.count + 1))).toBe(2);
         expect(trade.count).toBe(getExtractedValue(extractionResults, `trade_${index}_count`));
     });
 

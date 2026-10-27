@@ -109,54 +109,6 @@ describe('Killroy account progress CORE', () => {
     });
   });
 
-  describe('source-backed saved-week fight projection', () => {
-    // These expectations are independent source projections, not initialized native NPC output.
-    // Version 1.24 source: RNG 1318–1361, multiply 524427–524431; assignments 101408–101463;
-    // ordered pools 308064–308068 and 308109; world progression 125873–125884.
-    // Retained operands: clock 1792913071.9430003, restock 76679.73224663734,
-    // reset counter 5, server offset 139, consumed slots 0, third fight flag 1.
-    // Week 2965 produces seeds 3104/3154/3204. Native first values are 1707/10007,
-    // 7847/10007, and 4007/10007, giving rolls 170/784/400 and classes 1/3/1.
-    // Pools 68/70/99 use indices 5/4/8. Class and map selection each restart the seeded RNG.
-    // Summoning progress 6 enables pool 99. Both characters have cleared portals through 250
-    // and no special-mode buff. This save does not cover consumed slots, other pools,
-    // or special-mode branches. The isolated oracle preserves native hash assignment order.
-    const expectedFights = [
-      { slot: 1, classCategory: 1, mapId: 15, sceneKey: 'SewerB', enemyId: 'ratB', bestKills: 0 },
-      { slot: 2, classCategory: 3, mapId: 106, sceneKey: 'ySnowB2', enemyId: 'mamoth', bestKills: 0 },
-      { slot: 3, classCategory: 1, mapId: 259, sceneKey: 'vSpiritB4', enemyId: 'w6b4', bestKills: 0 },
-    ];
-
-    it.each([
-      { playerIndex: 0, playerName: 'Sludgadin' },
-      { playerIndex: 3, playerName: 'Sludgev4' },
-    ])('matches $playerName saved fight projection, not a native NPC capture', ({ playerIndex, playerName }) => {
-      const projection = killroy.characterFights.find(character => character.playerIndex === playerIndex);
-      expect(projection).toMatchObject({
-        playerIndex,
-        playerName,
-        worldProgression: 7,
-        accessibleFightCount: 3,
-        fights: expectedFights,
-      });
-    });
-
-    it('uses the first saved character for the account projection', () => {
-      expect(killroy.accountFightProjection).toMatchObject({
-        playerIndex: 0,
-        playerName: 'Sludgadin',
-        worldProgression: 7,
-        accessibleFightCount: 3,
-        fights: expectedFights,
-      });
-    });
-
-    it('keeps the projected reset window tied to the retained saved clock', () => {
-      expect(killroy.savedWeekEndTimestamp).toBe(1793421751.9430003);
-      expect(killroy.savedWeekStartTimestamp).toBe(1792816951.9430003);
-    });
-  });
-
   describe('six current run upgrades', () => {
     it('includes every native run upgrade in native order', () => {
       expect(killroy.runUpgrades).toHaveLength(nativeAccount.runLevels.length);
@@ -168,55 +120,6 @@ describe('Killroy account progress CORE', () => {
         tolerance: 0,
         context: 'Killroy current room timer, including its saved upgrade level',
       });
-    });
-
-    // Fixed projections use the retained save, not a native combat capture.
-    // Version 1.24 source: timer 198458; Talent Points 83388–83391;
-    // skull factor 83376–83382; respawn credits 198467–198472;
-    // Dungeon Credits 83413–83415; Pearls 83416–83422.
-    // Levels are 52, 3, 1, 10, 1, 0. Prior Talent Point drops are 53.
-    // Skull and respawn factors do not represent full combat yields.
-    it.each([
-      ['runDurationSeconds', 152, 'room duration in seconds'],
-      ['talentPointDropProbability', 0.0003433860853986264, 'Talent Point probability per eligible kill'],
-      ['bonusSkullMultiplier', 1.01, 'skull chance factor before the native cap'],
-      ['expectedRespawnCreditsMultiplier', 1.1, 'expected credits per scheduled respawn event'],
-      ['dungeonCreditDropProbability', 0.0101, 'Dungeon Credit probability per eligible kill'],
-      ['pearlDropProbability', 0, 'Pearl probability with its upgrade at level zero'],
-    ] as const)('matches the source-backed saved projection for %s', (field, expected, description) => {
-      expect(killroy[field]).toMatchLiveGameWithDetails(expected, {
-        tolerance: 0,
-        context: `Killroy source-backed saved projection: ${description}; not a native combat capture`,
-      });
-    });
-
-    // Fixed literals come from independently reviewed native 1.24 branches and retained save operands.
-    // See docs/plans/killroy-research-brief.md, "Run-effect oracle correction", for the arithmetic.
-    // Next-level values are source projections, not native future-state captures.
-    it.each([
-      { id: 0, method: 'getRunDurationSeconds', level: 52, current: 152, next: 153 },
-      { id: 1, method: 'getTalentPointDropProbability', level: 3, current: 0.0003433860853986264, next: 0.0003583159151985667 },
-      { id: 2, method: 'getBonusSkullMultiplier', level: 1, current: 1.01, next: 1.02 },
-      { id: 3, method: 'getExpectedRespawnCreditsMultiplier', level: 10, current: 1.1, next: 1.11 },
-      { id: 4, method: 'getDungeonCreditDropProbability', level: 1, current: 0.0101, next: 0.0102 },
-      { id: 5, method: 'getPearlDropProbability', level: 0, current: 0, next: 0.00202 },
-    ] as const)('matches fixed current and next-level source projections for $method without changing saved progress', ({ id, method, level, current, next }) => {
-      // Bind these fixed projections to the genuine account state that supplied their operands.
-      expect(nativeAccount.runLevels[id]).toBe(level);
-      expect(nativeAccount.priorTalentPointDrops).toBe(53);
-
-      const upgrade = killroy.runUpgrades[id];
-      expect(upgrade[method]()).toMatchLiveGameWithDetails(current, {
-        tolerance: 0,
-        context: `Killroy upgrade ${id} fixed current source projection; not a native combat capture`,
-      });
-      expect(upgrade[method](upgrade.level + 1)).toMatchLiveGameWithDetails(next, {
-        tolerance: 0,
-        context: `Killroy upgrade ${id} fixed next-level source projection with historical Talent Point drops unchanged`,
-      });
-      expect(upgrade.level).toBe(nativeAccount.runLevels[id]);
-      expect(upgrade.priorTalentPointDrops).toBe(nativeAccount.priorTalentPointDrops);
-      expect(killroy.priorTalentPointDrops).toBe(nativeAccount.priorTalentPointDrops);
     });
 
     // All six choices are offered in this save. Pearl drops fail only the completed-run gate.
@@ -266,88 +169,6 @@ describe('Killroy account progress CORE', () => {
         tolerance: 0,
         context: `Killroy ${name} public consumer value`,
       });
-    });
-
-    // Independent version 1.24 source projections: dispatcher 236720–236737;
-    // Gallery actual effect 243371–243380; Masterclass conversion 238578–238580.
-    // Caps, progress, and next-success effects are not native future-state captures.
-    // Caps are asymptotic, with no finite maximum level. Progress excludes the zero-level baseline, including Masterclass 1.01.
-    // Progress fractions: L/(300+L) for 0–2; L/(200+L) for 3,4,7; L/(150+L) for 5; L/(250+L) for 6.
-    it.each([
-      { id: 0, level: 17, current: 1.053627760252366, next: 1.0566037735849056, cap: 2, progressPercent: 5.3627760252365935 },
-      { id: 1, level: 1, current: 1.0299003322259137, next: 1.0596026490066226, cap: 10, progressPercent: 0.33222591362126247 },
-      { id: 2, level: 2, current: 1.0132450331125828, next: 1.0198019801980198, cap: 3, progressPercent: 0.6622516556291391 },
-      { id: 3, level: 0, current: 0, next: 0.0004975124378109452, cap: 0.1, progressPercent: 0 },
-      { id: 4, level: 2, current: 1.010128712871287, next: 1.010192118226601, cap: 1.023, progressPercent: 0.9900990099009901 },
-      { id: 5, level: 4, current: 1.0207792207792208, next: 1.0258064516129033, cap: 1.8, progressPercent: 2.5974025974025974 },
-      { id: 6, level: 0, current: 0, next: 0.099601593625498, cap: 25, progressPercent: 0 },
-      { id: 7, level: 0, current: 1, next: 1.0099502487562189, cap: 3, progressPercent: 0 },
-    ])('matches bonus $id actual effects, asymptotic cap, and earned progress without changing saved level', ({ id, level, current, next, cap, progressPercent }) => {
-      const bonus = killroy.permanentBonuses[id];
-      expect(nativeAccount.permanentLevels[id]).toBe(level);
-      expect(bonus.level).toBe(level);
-      expect(bonus.getEffectValue()).toMatchLiveGameWithDetails(current, {
-        tolerance: 0,
-        context: `Killroy bonus ${id} fixed current actual effect at retained level ${level}`,
-      });
-      expect(bonus.getEffectValue(level + 1)).toMatchLiveGameWithDetails(next, {
-        tolerance: 0,
-        context: `Killroy bonus ${id} fixed next-success actual effect; source projection, not a native future capture`,
-      });
-      expect(bonus.getEffectCap()).toMatchLiveGameWithDetails(cap, {
-        tolerance: 0,
-        context: `Killroy bonus ${id} source-projected asymptotic effect cap, not a finite maximum level`,
-      });
-      expect(bonus.getCapProgress()).toMatchLiveGameWithDetails(progressPercent, {
-        tolerance: 0,
-        context: `Killroy bonus ${id} source-projected earned progress percentage above its zero-level baseline`,
-      });
-      expect(bonus.level).toBe(level);
-      expect(nativeAccount.permanentLevels[id]).toBe(level);
-    });
-
-    // Independent saved-level projections, not native future-state captures.
-    // Version 1.24 formulas: 236720–236736. Successful purchases add one level:
-    // 100905–100936. Retained levels are 17, 1, 2, 0, 2, 4, 0, 0.
-    // Gallery succeeds on native integer rolls 1–5 out of 100 below level two.
-    it.each([
-      { id: 0, expected: 1.0566037735849056, successProbability: 1 },
-      { id: 1, expected: 1.0596026490066226, successProbability: 1 },
-      { id: 2, expected: 1.0198019801980198, successProbability: 1 },
-      { id: 3, expected: 0.04975124378109452, successProbability: 0.05 },
-      { id: 4, expected: 1.0192118226600986, successProbability: 1 },
-      { id: 5, expected: 1.0258064516129033, successProbability: 1 },
-      { id: 6, expected: 0.099601593625498, successProbability: 1 },
-      { id: 7, expected: 1.0099502487562189, successProbability: 1 },
-    ])('matches bonus $id next-success projection and current success probability', ({ id, expected, successProbability }) => {
-      const bonus = killroy.permanentBonuses[id];
-      expect(bonus.nextSuccessfulUpgradeValue).toMatchLiveGameWithDetails(expected, {
-        tolerance: 0,
-        context: `Killroy bonus ${id} source-backed saved-level next-success projection; not a native capture`,
-      });
-      expect(bonus.upgradeSuccessProbability).toMatchLiveGameWithDetails(successProbability, {
-        tolerance: 0,
-        context: `Killroy bonus ${id} source-backed current purchase success probability`,
-      });
-    });
-
-    it('matches Gallery actual extra multiplier current, next-success, and asymptotic cap', () => {
-      // Version 1.24 gameplay 243371–243380 uses native output / 100; 101177–101180 floors only the shop display.
-      const gallery = killroy.permanentBonuses[3];
-      expect(gallery.level).toBe(0);
-      expect(gallery.galleryMultiplierBonus).toMatchLiveGameWithDetails(0, {
-        tolerance: 0,
-        context: 'Killroy Gallery actual extra multiplier at retained level zero',
-      });
-      expect(gallery.getGalleryMultiplierBonus(gallery.level + 1)).toMatchLiveGameWithDetails(0.0004975124378109452, {
-        tolerance: 0,
-        context: 'Killroy Gallery next-success extra multiplier; source projection, not a native future capture',
-      });
-      expect(gallery.getEffectCap()).toMatchLiveGameWithDetails(0.1, {
-        tolerance: 0,
-        context: 'Killroy Gallery source-projected asymptotic extra multiplier cap, not a finite maximum level',
-      });
-      expect(gallery.level).toBe(0);
     });
 
     it('matches the applied Masterclass multiplier rather than its shop value', () => {

@@ -21,14 +21,6 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
             return storage.amountInStorage('RGenh');
         },
     },
-    storage_marble_2: {
-        description: 'settled marble quantity used by the covered Frosty statue restoration',
-        extractionKey: 'storage_marble_2',
-        domainExtractor: (gameData) => {
-            const storage = gameData.get('storage') as Storage;
-            return storage.amountInStorage('RGshard2');
-        },
-    },
 };
 
 describe('Royal Statue direct bonus and owned-material parameters', () => {

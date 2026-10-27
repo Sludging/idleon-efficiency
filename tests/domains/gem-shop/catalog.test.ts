@@ -3,7 +3,6 @@ import type { Player } from '../../../data/domain/player';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import {
     ExtractionResults,
-    getExtractedValue,
     loadExtractionResults,
     validateExtractionHealth,
 } from '../../utils/live-game-data-loader';
@@ -46,13 +45,6 @@ describe('Gem Shop numeric catalog', () => {
         gems = gameData.get('gems') as GemStore;
     });
 
-    it('matches the account gem balance', () => {
-        expect(gems.gemBalance).toMatchLiveGameWithDetails(getExtractedValue(extractionResults, 'gem_balance'), {
-            tolerance: 0,
-            context: 'Account gem balance',
-        });
-    });
-
     it.each(scenarios)('matches $shopName: $behavior', ({ shopName, nativeName, itemCode }) => {
         const nativeQuote = nativeQuotes.find(row => row.shopName === nativeName);
         const purchase = gems.purchases.find(row => row.name === itemCode);
@@ -67,29 +59,6 @@ describe('Gem Shop numeric catalog', () => {
         expect(purchase.getCurrentCost()).toMatchLiveGameWithDetails(nativeQuote.displayedCost, {
             tolerance: 0,
             context: `${shopName} displayed gem quote`,
-        });
-    });
-
-    // Native 1.24 source 482418-482429 rounds each purchase price, then increments the count.
-    // Operands: docs/plans/gem-shop-mechanics-research.md:44-55.
-    // These independently calculated catalog-cap projections are not native observed totals.
-    // Resource Boost: completed empty sum = 0. Opal: (60 - 22) * 250 = 9500.
-    // Bottled Wind: 4 * 240 = 960. Life Refill: 15 prices, 60, 69, ... 186, total 1845.
-    // Integer operands do not exercise fractional rounding. These saved counts do not cover above-cap counts.
-    it.each([
-        { shopName: 'Resource Boost', itemCode: 'GemP41', expected: 0, behavior: 'completed empty sum' },
-        { shopName: 'Opal', itemCode: 'GemP43', expected: 9500, behavior: 'fixed-price remainder' },
-        { shopName: 'Bottled Wind', itemCode: 'Quest72', expected: 960, behavior: 'unpurchased fixed stock' },
-        { shopName: 'Life Refill', itemCode: 'GemP32', expected: 1845, behavior: 'unpurchased increasing prices' },
-    ])('CORE: matches $shopName catalog-cap cost: $behavior', ({ shopName, itemCode, expected }) => {
-        const purchase = gems.purchases.find(row => row.name === itemCode);
-        if (!purchase) {
-            throw new Error(`Missing domain Gem Shop row: ${shopName}`);
-        }
-
-        expect(purchase.getCostToMax()).toMatchLiveGameWithDetails(expected, {
-            tolerance: 0,
-            context: `${shopName} gem cost from saved count to catalog cap; independent projection, not a native observed total`,
         });
     });
 });

@@ -1,6 +1,5 @@
 import { Compass } from '../../../data/domain/compass';
 import { Lab } from '../../../data/domain/world-4/lab';
-import { Player } from '../../../data/domain/player';
 import { Printer } from '../../../data/domain/world-3/construction/printer';
 import { Rift, SkillMastery } from '../../../data/domain/world-4/rift';
 import { Sailing } from '../../../data/domain/world-5/sailing/sailing';
@@ -31,14 +30,9 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
     },
   },
   account_max_talent_178: {
-    description: 'King of the Remembered Printer-growth contribution across saved characters (getbonus2(1,178,-1))',
-    // The game selector -1 chooses the highest saved character's talent bonus.
+    description: 'Attainable account-best King of the Remembered bonus before the orb-kill multiplier (getbonus2(1,178,-1))',
     extractionKey: 'best_divine_knight_talent_178',
-    domainExtractor: gameData => {
-      // The game's -1 selector takes the maximum over all saved characters, without a class restriction.
-      return (gameData.get('players') as Player[])
-        .reduce((maximum, player) => Math.max(maximum, player.getTalentBonus(178)), 0);
-    },
+    domainExtractor: gameData => (gameData.get('printer') as Printer).accountTalent178Bonus,
   },
   rift_skill_mastery_printer_output: {
     description: 'Skill Mastery aggregate Printer-output bonus (RiftSkillETC index 3)',

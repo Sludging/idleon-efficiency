@@ -1,6 +1,5 @@
 /**
- * Hourly Royal Guardian Outpost collection for a developed outpost and the
- * raw calculated rate for the saved empty row, which is not forced to zero.
+ * Hourly Royal Guardian Outpost collection for source-selected map rows 1 and 0.
  * Player-specific bonuses use the player selected by the matching extraction
  * configuration.
  */
@@ -12,22 +11,23 @@ import {
  validateExtractionHealth,
 } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
+import { getTargetPlayer } from '../../utils/target-player';
 import { Player } from '../../../data/domain/player';
 import { Alchemy } from '../../../data/domain/world-2/alchemy/alchemy';
 import { RoyalArmory, getRoyalGuardianContribution } from '../../../data/domain/world-6/royalArmory/royalArmory';
 
 const saveName = 'latest';
 const extractionResultsName = 'royal-armory-resource-rate-data.json';
-const extractedPlayerID = 3;
 const rateCases = [
- { mapIndex: 1, extractionKey: 'royal_armory_rate_row_1', description: 'developed outpost row 1' },
- { mapIndex: 0, extractionKey: 'royal_armory_rate_row_0_empty', description: 'empty outpost row 0' },
+ { mapIndex: 1, extractionKey: 'royal_armory_rate_row_1', description: 'source-selected map row 1' },
+ { mapIndex: 0, extractionKey: 'royal_armory_rate_row_0_empty', description: 'source-selected map row 0' },
 ] as const;
 
 describe('Royal Armory hourly outpost collection', () => {
  let extractionResults: ExtractionResults;
  let royalArmory: RoyalArmory;
  let player: Player;
+ let players: Player[];
  let alchemy: Alchemy;
 
  beforeAll(() => {
@@ -36,12 +36,8 @@ describe('Royal Armory hourly outpost collection', () => {
   const gameData = loadGameDataFromSave(saveName);
   royalArmory = gameData.get('royalArmory') as RoyalArmory;
   alchemy = gameData.get('alchemy') as Alchemy;
-  const players = gameData.get('players') as Player[];
-  const matchingPlayer = players.find(candidate => candidate.playerID === extractedPlayerID);
-  if (!matchingPlayer) {
-   throw new Error(`The paired save has no player ${extractedPlayerID} from the extraction state.`);
-  }
-  player = matchingPlayer;
+  players = gameData.get('players') as Player[];
+  player = getTargetPlayer(players);
  });
 
  rateCases.forEach(({ mapIndex, extractionKey, description }) => {
@@ -49,7 +45,7 @@ describe('Royal Armory hourly outpost collection', () => {
    const liveValue = getExtractedValue(extractionResults, extractionKey);
    const domainValue = royalArmory.mapStates.get(mapIndex)!.getResourceCollectionRate(
     royalArmory.resourceCollectionBonuses,
-    getRoyalGuardianContribution(player, alchemy),
+    getRoyalGuardianContribution(player, alchemy, players),
    );
 
    expect(domainValue).toMatchLiveGameWithDetails(liveValue, {

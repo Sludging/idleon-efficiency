@@ -54,7 +54,7 @@ describe('Meritocracy Ballot core results', () => {
     week = extractionResults.extractions.meritocracy_week.result as BallotWeek;
   });
 
-  it('matches the saved active bonus and the next three candidate IDs', () => {
+  it('matches the current server winner and the next three candidate IDs', () => {
     expect(meritocracy.currentBonusIndex).toBe(state.currentBonusIndex);
     expect([
       meritocracy.ongoingVoteTopOptionIndex,

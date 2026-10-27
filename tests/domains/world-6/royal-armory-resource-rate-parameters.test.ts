@@ -1,6 +1,8 @@
 /**
  * Direct calculations consumed by the Royal Armory hourly collection rate.
  * Each selected parameter is compared with the game's result for the same save.
+ * Account talent maxima use the selected recipient's talent modifiers,
+ * not each talent owner's settled bonus.
  */
 
 import {
@@ -13,7 +15,7 @@ import { Arcade } from '../../../data/domain/world-2/arcade';
 import { Companion, getCompanionActiveBonus } from '../../../data/domain/companions';
 import { Player } from '../../../data/domain/player';
 import { OutpostRank } from '../../../data/domain/world-6/royalArmory/outposts';
-import { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
+import { RoyalArmory, getRoyalGuardianContribution } from '../../../data/domain/world-6/royalArmory/royalArmory';
 import { RoyalUnitRole } from '../../../data/domain/world-6/royalArmory/units';
 import { SushiStation } from '../../../data/domain/world-7/sushi';
 import { ZenithMarket } from '../../../data/domain/world-7/zenithShop';
@@ -135,27 +137,30 @@ const parameterComparisons: ParameterComparison[] = [
   },
  },
  {
-  description: 'Account-best talent 225 contribution to the Royal Armory rate',
+  description: 'Recipient-specific account talent 225 bonus used by the Royal Armory rate',
   extractionKey: 'royal_armory_rate_talent_225_best',
   domainValue: gameData => {
    const players = gameData.get('players') as Player[];
-   return Math.max(...players.map(player => player.getTalentBonus(225)));
+   const alchemy = gameData.get('alchemy') as Alchemy;
+   return getRoyalGuardianContribution(getTargetPlayer(players), alchemy, players).collectionTalentBonus;
   },
  },
  {
-  description: 'Account-best talent 226 contribution to the Royal Armory rate',
+  description: 'Recipient-specific account talent 226 bonus used by the Royal Armory rate',
   extractionKey: 'royal_armory_rate_talent_226_best',
   domainValue: gameData => {
    const players = gameData.get('players') as Player[];
-   return Math.max(...players.map(player => player.getTalentBonus(226)));
+   const alchemy = gameData.get('alchemy') as Alchemy;
+   return getRoyalGuardianContribution(getTargetPlayer(players), alchemy, players).guardianTalentBonus;
   },
  },
  {
-  description: 'Account-best talent 230 multiplier used by the Royal Armory rate',
+  description: 'Recipient-specific account talent 230 multiplier used by the Royal Armory rate',
   extractionKey: 'royal_armory_rate_talent_230_best',
   domainValue: gameData => {
    const players = gameData.get('players') as Player[];
-   return Math.max(...players.map(player => player.getTalentBonus(230)));
+   const alchemy = gameData.get('alchemy') as Alchemy;
+   return getRoyalGuardianContribution(getTargetPlayer(players), alchemy, players).collectionTalentMultiplier;
   },
  },
  {
@@ -233,7 +238,7 @@ const parameterComparisons: ParameterComparison[] = [
   domainValue: gameData => {
    const alchemy = gameData.get('alchemy') as Alchemy;
    const players = gameData.get("players") as Player[];
-   return alchemy.getBubbleBonusForKey('W14', getTargetPlayer(players, 3));
+   return alchemy.getBubbleBonusForKey('W14', getTargetPlayer(players));
   },
  }
 ];

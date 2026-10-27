@@ -23,7 +23,6 @@ import { Emperor } from '../../../data/domain/world-6/emperor';
 import { UpgradeVault } from '../../../data/domain/upgradeVault';
 import { Alchemy } from '../../../data/domain/world-2/alchemy/alchemy';
 import { Cooking } from '../../../data/domain/world-4/cooking';
-import { Player } from '../../../data/domain/player';
 import { Companion, getCompanionActiveBonus } from '../../../data/domain/companions';
 import { Card } from '../../../data/domain/cards';
 import { SprinklerImport, ShovelImport, SquirrelImport, ShellImport, BogLogImport, HighScoreImport, SnailImport, KingRatImport } from '../../../data/domain/world-5/gaming/imports';
@@ -71,7 +70,7 @@ const parameters: ParameterTestSpec[] = [
     { extractionKey: "harvest_vial7bits", description: "7 Figure Followers vial Bits percentage", domainExtractor: data => (data.get('alchemy') as Alchemy).getVialBonusForKey('7bits') },
     { extractionKey: "harvest_vialGameBits", description: "Jar of Glitter vial Bits percentage", domainExtractor: data => (data.get('alchemy') as Alchemy).getVialBonusForKey('GameBits') },
     { extractionKey: "harvest_meal", description: "Cooking Bits percentage", domainExtractor: data => (data.get('cooking') as Cooking).getMealBonusForKey('GamingBits') },
-    { extractionKey: "harvest_talent", description: "prepared Bits talent percentage", domainExtractor: data => (data.get('players') as Player[]).reduce((best, player) => Math.max(best, player.getTalentBonus(177)), 0) },
+    { extractionKey: "harvest_talent", description: "prepared Bits talent percentage", domainExtractor: data => (data.get('gaming') as Gaming).garden.bitsTalent },
     { extractionKey: "harvest_companion", description: "Bits companion effect", domainExtractor: data => getCompanionActiveBonus(data.get('companions') as Companion[], 53) },
     // The card grants 20 percent Bits per native progression level.
     { extractionKey: "harvest_card", description: "Bits card percentage", domainExtractor: data => (data.get('cards') as Card[]).find(card => card.id === 'w7b2')!.getBonus() },

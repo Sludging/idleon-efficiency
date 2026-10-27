@@ -21,7 +21,11 @@ import { loadExtractionResults, validateExtractionHealth } from '../../utils/liv
 import { getTargetPlayer } from '../../utils/target-player';
 import type { Divinity } from '../../../data/domain/world-5/divinity';
 
-type Terms = { accuracyTerms: Record<string, number>; speedTerms: Record<string, number> };
+type Terms = {
+  selectedAttribute: 'STR' | 'AGI' | 'WIS' | 'LUK';
+  accuracyTerms: Record<string, number>;
+  speedTerms: Record<string, number>;
+};
 
 describe('Combat Accuracy and movement speed direct owner parameters', () => {
   let data: Map<string, unknown>;
@@ -51,7 +55,16 @@ describe('Combat Accuracy and movement speed direct owner parameters', () => {
   }, player.finalTalentInputs);
 
   const accuracy: { key: string; name: string; value: () => number }[] = [
-    { key: 'selectedAttributeValue', name: 'class-selected WIS attribute', value: () => player.stats.wisdom },
+    {
+      key: 'selectedAttributeValue',
+      name: 'class-selected Accuracy attribute',
+      value: () => ({
+        STR: player.stats.strength,
+        AGI: player.stats.agility,
+        WIS: player.stats.wisdom,
+        LUK: player.stats.luck,
+      })[terms.selectedAttribute],
+    },
     { key: 'alchemyAccuracyPercent', name: 'Alchemy AccPct', value: () => owner<Alchemy>('alchemy').getBubbleBonusForKey('AccPct', player) },
     { key: 'buff288SecondCurve', name: 'selected buff 288 second curve', value: () => selectedBuff(288, true) },
     { key: 'card17', name: 'card 17 Accuracy percentage', value: () => Card.GetTotalBonusForId(cards(), 17) },

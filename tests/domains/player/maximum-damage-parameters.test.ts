@@ -18,6 +18,7 @@ import type { Votes } from '../../../data/domain/world-2/votes';
 import { getExtractedValue, loadExtractionResults, validateExtractionHealth, type ExtractionResults } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { getTargetPlayer } from '../../utils/target-player';
+import extractionConfig from '../../configs/player-damage-parameters.json';
 
 const extractionResultsName = 'player-damage-parameters-data.json';
 const saveName = 'latest';
@@ -25,16 +26,13 @@ const saveName = 'latest';
 describe('Player maximum damage - component D parameters', () => {
   let gameData: Map<string, any>;
   let extractionResults: ExtractionResults;
-  let baseExtractionResults: ExtractionResults;
   let player: Player;
 
   beforeAll(() => {
-    baseExtractionResults = loadExtractionResults('player-combat-stats-data.json');
-    validateExtractionHealth(baseExtractionResults);
     extractionResults = loadExtractionResults(extractionResultsName);
     validateExtractionHealth(extractionResults);
     gameData = loadGameDataFromSave(saveName);
-    player = getTargetPlayer(gameData.get('players') as Player[]);
+    player = getTargetPlayer(gameData.get('players') as Player[], extractionConfig.requiredActivePlayerIndex);
   });
 
   it.each([
@@ -164,18 +162,18 @@ describe('Player maximum damage - component D parameters', () => {
     it('matches native SigilBonus(Blank, 4) with sigil and Meritocracy bonuses', () => {
       const sigils = gameData.get('sigils') as Sigils;
       const meritocracy = gameData.get('meritocraty') as Meritocraty;
-      const expected = getExtractedValue(baseExtractionResults, 'player_maximum_damage_sigil_lab_bonus');
+      const expected = getExtractedValue(extractionResults, 'player_maximum_damage_sigil_lab_bonus');
       expect(sigils.sigils[4].getBonus() * (1 + meritocracy.getCurrentBonus(21) / 100)).toMatchLiveGame(expected, 0);
     });
 
     it('matches native CosmoBonusQTY(2, 4) with Hole upgrade bonus', () => {
       const hole = gameData.get('hole') as Hole;
-      const expected = getExtractedValue(baseExtractionResults, 'player_maximum_damage_cosmo_bonus_2_4');
+      const expected = getExtractedValue(extractionResults, 'player_maximum_damage_cosmo_bonus_2_4');
       expect(hole.majiks.IdleonUpgrades[4].getBonus()).toMatchLiveGame(expected, 0);
     });
 
     it('matches native BoxRewards.basedmg with player post-office bonus', () => {
-      const expected = getExtractedValue(baseExtractionResults, 'player_maximum_damage_box_reward_base_damage');
+      const expected = getExtractedValue(extractionResults, 'player_maximum_damage_box_reward_base_damage');
       expect(player.getPostOfficeBonus('basedmg')).toMatchLiveGame(expected, 0);
     });
   });

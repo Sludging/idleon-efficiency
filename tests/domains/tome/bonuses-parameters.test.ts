@@ -1,7 +1,7 @@
 /**
  * Tome Bonus directly uses the Tome score, Grimoire upgrade 17 bonus, Troll
  * equipment set bonus, ownership of the Golden Tome and Singed Tome Event Shop
- * items, and player 0's final Alchemy bubble bonuses for +{% STR, +{% AGI,
+ * items, and the selected player's final Alchemy bubble bonuses for +{% STR, +{% AGI,
  * and +{% WIS. The Alchemy bubble bonuses are validated here as direct
  * cross-domain parameters.
  */
@@ -13,6 +13,7 @@ import {
 } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
+import { getTargetPlayer } from '../../utils/target-player';
 import type { EquipmentSets } from '../../../data/domain/misc/equipmentSets';
 import type { EventShop } from '../../../data/domain/eventShop';
 import type { Grimoire } from '../../../data/domain/grimoire';
@@ -48,30 +49,30 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   },
  },
  tome_bonus_alchemy_str: {
-  description: 'Player 0 final Alchemy Strength stat bonus used by Tome STR',
+  description: 'Selected player final Alchemy Strength stat bonus used by Tome STR',
   extractionKey: 'tome_bonus_alchemy_str',
   domainExtractor: (gameData) => {
    const alchemy = gameData.get('alchemy') as Alchemy;
    const players = gameData.get('players') as Player[];
-   return alchemy.getBubbleBonusForKey('W8', players[0]);
+   return alchemy.getBubbleBonusForKey('W8', getTargetPlayer(players));
   },
  },
  tome_bonus_alchemy_agi: {
-  description: 'Player 0 final Alchemy Agility stat bonus used by Tome AGI',
+  description: 'Selected player final Alchemy Agility stat bonus used by Tome AGI',
   extractionKey: 'tome_bonus_alchemy_agi',
   domainExtractor: (gameData) => {
    const alchemy = gameData.get('alchemy') as Alchemy;
    const players = gameData.get('players') as Player[];
-   return alchemy.getBubbleBonusForKey('A9', players[0]);
+   return alchemy.getBubbleBonusForKey('A9', getTargetPlayer(players));
   },
  },
  tome_bonus_alchemy_wis: {
-  description: 'Player 0 final Alchemy Wisdom stat bonus used by Tome WIS',
+  description: 'Selected player final Alchemy Wisdom stat bonus used by Tome WIS',
   extractionKey: 'tome_bonus_alchemy_wis',
   domainExtractor: (gameData) => {
    const alchemy = gameData.get('alchemy') as Alchemy;
    const players = gameData.get('players') as Player[];
-   return alchemy.getBubbleBonusForKey('M9', players[0]);
+   return alchemy.getBubbleBonusForKey('M9', getTargetPlayer(players));
   },
  },
  tome_bonus_event_shop_0: {

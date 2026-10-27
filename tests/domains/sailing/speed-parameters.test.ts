@@ -25,8 +25,7 @@ const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
     extractionKey: 'divinity_minor_bonus_6',
     domainExtractor: (gameData) => {
       const divinity = gameData.get("divinity") as Divinity;
-      const purrmepPlayer = divinity.gods[6].linkedPlayers.at(0);
-      return purrmepPlayer ? divinity.gods[6].getMinorLinkBonus(purrmepPlayer) : 0;
+      return divinity.gamingGrowthMinorLinkBonus;
     }
   },
   card_w5c1_bonus: {

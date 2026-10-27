@@ -146,50 +146,6 @@
       "expression": "10*idleon.allScripts.ActorEvents_579._customBlock_RiftStuff(\"RiftSkillBonus,18\",5)",
       "result": 10
     },
-    "talent_236_player_0": {
-      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,0)",
-      "result": 0
-    },
-    "talent_236_player_3": {
-      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,3)",
-      "result": 0.796812749003984
-    },
-    "talent_236_player_1": {
-      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,1)",
-      "result": 0
-    },
-    "talent_236_player_2": {
-      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,2)",
-      "result": 0
-    },
-    "talent_236_player_4": {
-      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,4)",
-      "result": 0
-    },
-    "talent_236_player_5": {
-      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,5)",
-      "result": 0
-    },
-    "talent_236_player_6": {
-      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,6)",
-      "result": 0
-    },
-    "talent_236_player_7": {
-      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,7)",
-      "result": 0
-    },
-    "talent_236_player_8": {
-      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,8)",
-      "result": 0
-    },
-    "talent_236_player_9": {
-      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,9)",
-      "result": 0
-    },
-    "talent_236_player_10": {
-      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,10)",
-      "result": 0
-    },
     "talent_236_best": {
       "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,-1)",
       "result": 0.796812749003984

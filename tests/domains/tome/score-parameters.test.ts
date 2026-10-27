@@ -12,6 +12,7 @@ import {
  validateExtractionHealth,
 } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
+import { Dungeons } from '../../../data/domain/dungeons';
 import { Farming } from '../../../data/domain/world-6/farming';
 import { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
@@ -20,6 +21,11 @@ const saveName = 'latest';
 const extractionResultsName = 'tome-score-data.json';
 
 const parameterSpecs: Record<string, ParameterTestSpec> = {
+ dungeonRank: {
+  description: 'Dungeon rank used in Tome score line 17',
+  extractionKey: 'tome_producer_17_dungeon_rank',
+  domainExtractor: (gameData) => (gameData.get('dungeons') as Dungeons).rank,
+ },
  farmingTotalStickers: {
   description: 'Farming sticker collection total used for Tome score',
   extractionKey: 'tome_producer_112_total_stickers',

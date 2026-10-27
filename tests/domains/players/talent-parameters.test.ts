@@ -6,6 +6,8 @@
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
+import { getTargetPlayer } from '../../utils/target-player';
+import talentConfig from '../../configs/talents-sludgeadin.json';
 import { Player } from '../../../data/domain/player';
 import { ClassIndex } from '../../../data/domain/talents';
 
@@ -24,20 +26,20 @@ const generalTalentParameterSpecs: Record<string, ParameterTestSpec> = {
   }
  },
  all_talent_level_146: {
-  description: 'AllTalentLV level addition for eligible talent 146',
+  description: 'AllTalentLV target-character level addition for talent 146',
   extractionKey: 'all_talent_level_146',
   domainExtractor: (gameData) => {
    const players = gameData.get("players") as Player[];
-   const talent146 = players.flatMap(player => player.talents).find(talent => talent.skillIndex == 146);
+   const talent146 = getTargetPlayer(players, talentConfig.requiredActivePlayerIndex).getTalent(146);
    return talent146 ? talent146.maxLevel - talent146.bookMaxLevel : 0;
   }
  },
  all_talent_level_49: {
-  description: 'AllTalentLV level addition for banned talent 49',
+  description: 'AllTalentLV target-character level addition for talent 49',
   extractionKey: 'all_talent_level_49',
   domainExtractor: (gameData) => {
    const players = gameData.get("players") as Player[];
-   const talent49 = players.flatMap(player => player.talents).find(talent => talent.skillIndex == 49);
+   const talent49 = getTargetPlayer(players, talentConfig.requiredActivePlayerIndex).getTalent(49);
    return talent49 ? talent49.maxLevel - talent49.bookMaxLevel : 0;
   }
  },

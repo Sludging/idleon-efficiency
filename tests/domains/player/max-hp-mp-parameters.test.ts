@@ -392,13 +392,23 @@ const alchemyManaParameterSpecs: ParameterSpec[] = [
     // The delivered map has no BaseMP entry; the existing bubble lookup also returns zero.
     getValue: (gameData, player) => (gameData.get('alchemy') as Alchemy).getBubbleBonusForKey('BaseMP', player),
   },
-  ...parameterSpecs.filter(spec => mpParameterKeys[spec.key] && spec.key !== 'talent_1').map(spec => ({
+  ...parameterSpecs.filter(spec => mpParameterKeys[spec.key]
+    && !['talent_1', 'talent_272', 'talent_452'].includes(spec.key)).map(spec => ({
     ...spec,
     key: ({
-      total_wisdom: 'wisdom', talent_272: 'talent272', talent_452: 'talent452',
+      total_wisdom: 'wisdom',
       card_3: 'card3', card_29: 'card29', stamp_base_mp: 'stampBaseMP',
       post_office_baseMP: 'boxBaseMP', post_office_pctMP: 'boxPercentMP',
     } as Record<string, string>)[spec.key],
+  })),
+  ...[
+    { index: 272, effect: 'maximum HP and MP percentage' },
+    { index: 452, effect: 'maximum MP percentage' },
+  ].map(({ index, effect }): ParameterSpec => ({
+    key: `talent${index}`,
+    description: `the talent contribution to ${effect}`,
+    getValue: (_gameData, player) =>
+      player.getTalentBonusAtInputs(index, player.beforeActiveBubbleMultiplierTalentInputs),
   })),
   ...[149, 374, 539].map(index => ({
     key: `talent${index}`,

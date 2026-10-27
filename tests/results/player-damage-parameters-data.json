@@ -106,6 +106,18 @@
     "player_damage_exotic_market_41": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 41, 0)",
       "result": 280
+    },
+    "player_maximum_damage_sigil_lab_bonus": {
+      "expression": "idleon.callFunction(\"Labb\", \"SigilBonus\", \"Blank\", 4, 0)",
+      "result": 70000
+    },
+    "player_maximum_damage_cosmo_bonus_2_4": {
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 2, 4)",
+      "result": 300
+    },
+    "player_maximum_damage_box_reward_base_damage": {
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.BoxRewards.h.basedmg; })()",
+      "result": 400
     }
   },
   "errors": {}

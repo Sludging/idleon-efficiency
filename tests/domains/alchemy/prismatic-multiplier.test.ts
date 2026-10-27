@@ -4,7 +4,7 @@
  * Tests our alchemy prismatic bubble multiplier final calculation against live game data.
  *
  * The prismatic multiplier is applied to all prismatic bubbles to boost their bonus values.
- * Formula: Math.min(4, 2 + (various bonuses) / 100)
+ * Formula: Math.min(5, 2 + (various bonuses) / 100)
  *
  * This test verifies that prismatic bubbles have the correct multiplier value set.
  */

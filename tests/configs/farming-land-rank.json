@@ -23,11 +23,6 @@
       "description": "Plump Database percentage boost to Land Rank bonuses"
     },
     {
-      "label": "dank_ranks_candidate_0_bonus",
-      "expression": "idleon.callFunction(\"ArbitraryCode5Inputs\", \"decayMulti\", 2, 200, Number(idleon.engine.getGameAttribute(\"PlayerDATABASE\").h[idleon.engine.getGameAttribute(\"GetPlayersUsernames\")[0]].h.SkillLevels[207]) + idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"AllTalentLVz\", \"207|0\", 0), 0, 0)",
-      "description": "Allocated candidate Sludgadin's native Dank Ranks curve with candidate-specific extra levels; source query from correctness-451-m2-landrank-source.md:45-54"
-    },
-    {
       "label": "land_rank_plot_state",
       "expression": "(()=>{const ranks=idleon.getAttr(\"FarmRank\");return Array.from({length:36},(_,index)=>({index,rank:ranks[0][index],exp:ranks[1][index],requirement:idleon.callFunction(\"FarmingStuffs\",\"LankRankEXPreq\",index,0)}));})()",
       "description": "Every retained plot rank, saved Rank EXP, and next-rank EXP requirement"

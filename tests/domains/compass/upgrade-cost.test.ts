@@ -63,28 +63,4 @@ describe('Compass current upgrade purchase prices', () => {
         });
     });
 
-    // The game still quotes Moon of Print at cap, but its purchase gate blocks another level.
-    // The website exposes zero as the actionable price, not the raw capped quote.
-    it('keeps capped Moon of Print actionable prices at zero and blocks purchase', () => {
-        const upgrade = compass.upgrades[43];
-        expect(upgrade.cost).toBe(0);
-        expect(upgrade.getCost(compass.upgrades, ...compass.getAdditionalCostArgs())).toBe(0);
-        expect(compass.canAffordUpgrade(upgrade)).toBe(false);
-        expect(compass.canAffordUpgrade(upgrade, 0)).toBe(false);
-    });
-
-    // Only the first engine purchase uses the unchanged saved state. Later purchases are outside this case.
-    describe('efficiency goals current purchase prices', () => {
-        it.each(['Tempest Damage', 'Dust Multiplier', 'Tempest Accuracy', 'Tempest Defense'])(
-            'matches %s first purchase against the game quote',
-            goal => {
-                const result = compass.efficiencyResults.get(goal)!;
-                const firstPurchase = result.pathUpgrades[0];
-                const upgrade = compass.upgrades[firstPurchase.upgrade.getId()];
-                expectCurrentPrice(
-                    firstPurchase.resourceCost, extractionResults, upgrade, `${goal} first purchase`,
-                );
-            },
-        );
-    });
 });

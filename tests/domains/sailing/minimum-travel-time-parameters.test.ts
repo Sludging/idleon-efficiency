@@ -1,4 +1,5 @@
 import { Family } from '../../../data/domain/family';
+import type { Player } from '../../../data/domain/player';
 import { ClassIndex } from '../../../data/domain/talents';
 import { Sailing } from '../../../data/domain/world-5/sailing/sailing';
 import { LegendTalents } from '../../../data/domain/world-7/legendTalents';
@@ -9,6 +10,7 @@ import {
   loadExtractionResults,
   validateExtractionHealth,
 } from '../../utils/live-game-data-loader';
+import { getTargetPlayer } from '../../utils/target-player';
 
 const saveName = 'latest';
 
@@ -28,9 +30,10 @@ describe('Sailing Domain - Minimum Travel Time - Parameters', () => {
     validateExtractionHealth(legendTalentResults);
   });
 
-  it('matches the Siege Breaker family bonus used by minimum travel time', () => {
+  it('matches the captured-recipient Siege Breaker Family bonus', () => {
     const family = gameData.get('family') as Family;
-    const domainValue = family.classBonus.get(ClassIndex.Siege_Breaker)?.getBonus() ?? 0;
+    const player = getTargetPlayer(gameData.get('players') as Player[]);
+    const domainValue = family.classBonus.get(ClassIndex.Siege_Breaker)!.getBonus(player);
 
     expect(domainValue).toMatchLiveGame(getExtractedValue(familyResults, 'family_bonus_44'), 0);
   });

@@ -3,6 +3,11 @@
   "target": "Tome score",
   "extractions": [
     {
+      "label": "tome_producer_17_dungeon_rank",
+      "expression": "idleon.getAttr('PixelHelperActor')[9].behaviors.getBehavior('ActorEvents_498')._GenINFO[12]",
+      "description": "Native prepared Dungeon rank used by Tome row 17."
+    },
+    {
       "label": "tome_pts_0",
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 0, 0)",
       "description": "Total level of all stamps."
@@ -305,7 +310,7 @@
     {
       "label": "tome_pts_60",
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 60, 0)",
-      "description": "Weighted artifact progression: Obtained=1, Ancient=2, Eldritch=3, Sovereign=4, Omnipotent=5, Transcendent=6."
+      "description": "Weighted artifact progression: Unobtained=0, Obtained=1, Ancient=2, Eldritch=3, Sovereign=4, Omnipotent=5, Transcendent=6, Verisimilitude=7."
     },
     {
       "label": "tome_pts_61",

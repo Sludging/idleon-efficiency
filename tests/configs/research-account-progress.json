@@ -1,7 +1,6 @@
 {
-  "description": "Research Part 1 public outcomes and direct producer inputs. Original offline v1.22 character 3 is the saved highest-level reference. Saved EXP, partial Insight EXP, and save time use retained original startup input, not warmed runtime values. Getter refreshes use original supported arguments. Extraction alone does not prove relevant-state pairing.",
+  "description": "Research Part 1 public outcomes and direct producer inputs. Use the selected account character; Research has no fixed character-index requirement. The historical v1.22 capture used character 3 as its saved highest-level reference. Saved EXP, partial Insight EXP, and save time use retained original startup input, not warmed runtime values. Getter refreshes use original supported arguments. Extraction alone does not prove relevant-state pairing.",
   "target": "Research account progress, discoveries, lenses, Insight, hourly production, offline gains, Papers, and Posty Notes",
-  "requiredActivePlayerIndex": 3,
   "pairingEvidence": {
     "source": "Original Jelly_Operator v1.22, isolated offline port 3101, character 3 Sludgev4.",
     "originalInput": "GET /cloud-save matched all 799 retained latest.json keys after JSON decoding. No offline fixture export occurred.",

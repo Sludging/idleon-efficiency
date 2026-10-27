@@ -4,7 +4,7 @@
  * Tests our alchemy prismatic bubble multiplier parameter calculations against live game data.
  *
  * Formula:
- *   Math.min(4, 2 + (arcaneUpg45 + arcade54 + sushiRoGBonus23 + w6Trophy + palette28 + 0.2*purpleSigils + exotic48 + legend36 + 50*companion88) / 100)
+ *   Math.min(5, 2 + (arcaneUpg45 + arcade54 + sushiRoGBonus23 + jellyRoGBonus36 + w6Trophy + palette28 + 0.2*purpleSigils + exotic48 + legend36 + 50*companion88) / 100)
  *
  * This multiplier is applied to all prismatic bubbles to boost their bonus values.
  */
@@ -20,6 +20,7 @@ import { Farming } from '../../../data/domain/world-6/farming';
 import { Companion, getCompanionActiveBonus } from '../../../data/domain/companions';
 import { Gaming } from '../../../data/domain/world-5/gaming';
 import { SushiStation } from '../../../data/domain/world-7/sushi';
+import type { JellyOperator } from '../../../data/domain/world-7/jellyOperator';
 
 const saveName = 'latest';
 const extractionResultsName = 'alchemy-prismatic-multiplier-data.json';
@@ -39,7 +40,7 @@ const parameterSpecs = {
   extractionKey: 'arcade_bonus_54',
   domainExtractor: (gameData: Map<string, any>) => {
    const arcade = gameData.get("arcade") as Arcade;
-   return arcade.bonuses[54]?.getBonus() || 0;
+   return arcade.bonuses[54].getBonus();
   }
  },
 
@@ -95,6 +96,15 @@ const parameterSpecs = {
   domainExtractor: (gameData: Map<string, any>) => {
    const sushi = gameData.get("sushi") as SushiStation;
    return sushi.getBonusFromIndex(23);
+  }
+ },
+
+ jelly_rog_bonus_qty_36: {
+  description: 'Jelly Operator prismatic bubble strength bonus',
+  extractionKey: 'jelly_rog_bonus_qty_36',
+  domainExtractor: (gameData: Map<string, any>) => {
+   const jellyOperator = gameData.get("jellyOperator") as JellyOperator;
+   return jellyOperator.getObstructionBonus(36);
   }
  },
 

@@ -55,12 +55,12 @@
     {
       "label": "parameter_rates",
       "expression": "idleon.getAttr(\"RoyalMaps\").map((r,m)=>r.length>2?[m,idleon.callFunction(\"RoyalG\",\"OutpostResourceRate\",m,0)]:null).filter(r=>r!==null)",
-      "description": "Uncapped collection rate on every genuine built Outpost directly used by account totals, including positive/depleted and grade0 map60"
+      "description": "Uncapped collection rates on all built Outposts for the extraction-selected character; account production selects its best eligible Guardian separately"
     },
     {
       "label": "parameter_savage",
       "expression": "idleon.callFunction(\"RoyalG\", \"SavageCollection\", 0, 0)",
-      "description": "Prepared Savage removal multiplier; current fixture has only Resource Depots so its application remains source-only"
+      "description": "Prepared Savage Stronghold node-removal multiplier"
     },
     {
       "label": "parameter_savage_upgrade",

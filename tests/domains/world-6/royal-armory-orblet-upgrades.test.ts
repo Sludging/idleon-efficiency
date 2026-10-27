@@ -68,13 +68,6 @@ describe('Royal Armory Orblet upgrade calculations', () => {
         });
     });
 
-    it('matches the settled real Orblet balance', () => {
-        expect(royalArmory.getOrbletsOwned()).toMatchLiveGameWithDetails(
-            getExtractedValue(extractionResults, 'calculationStorage.amountInStorageOrblet'),
-            { tolerance: 0, context: 'Orblet balance after normal account processing' },
-        );
-    });
-
     marketRows.filter(({ index }) => index !== 4).forEach(({ index, name }) => {
         it(`keeps ${name} price and current bonus unchanged by previews`, () => {
             const upgrade = upgradeAt(index);

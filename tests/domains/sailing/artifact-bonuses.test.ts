@@ -36,7 +36,7 @@ describe('Sailing artifact bonuses', () => {
     nativeGoldRelicTierIncrement = extractionResults.extractions['gold_relic_tier_increment']?.result as number | null;
     gameData = loadGameDataFromSave('latest');
     sailing = gameData.get('sailing') as Sailing;
-    player = getTargetPlayer(gameData.get('players') as Player[], 3);
+    player = getTargetPlayer(gameData.get('players') as Player[]);
   });
 
   it.each(artifacts)('matches the current main bonus for $name (artifact $index)', ({ index, name }) => {

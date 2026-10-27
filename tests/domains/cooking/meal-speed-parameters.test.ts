@@ -156,7 +156,7 @@ const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
     extractionKey: 'arcade_28_bonus',
     domainExtractor: (gameData) => {
       const arcade = gameData.get("arcade") as Arcade;
-      return arcade.bonuses.find(bonus => bonus.effect == "+{% Cook SPD multi")?.getBonus() ?? 0;
+      return arcade.bonuses[28].getBonus();
     }
   },
 

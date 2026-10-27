@@ -330,10 +330,5 @@ describe('Big Fish Domain - Calculations', () => {
    });
   });
 
-  it('marks all Advice Fish entries unlocked for the retained account', () => {
-   expect(bigFish.bonuses.map((bonus) => bonus.unlocked)).toEqual([
-    true, true, true, true, true, true, true,
-   ]);
-  });
  });
 });

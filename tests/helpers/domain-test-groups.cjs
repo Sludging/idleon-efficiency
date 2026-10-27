@@ -12,6 +12,7 @@ const rootDirectoryToGroup = {
   construction: 'world-3',
   cooking: 'world-4',
   divinity: 'world-5',
+  dungeons: 'account',
   emperor: 'world-6',
   equinox: 'world-3',
   'event-shop': 'account',

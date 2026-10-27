@@ -1,26 +1,11 @@
 {
-  "description": "Compare active-character Class EXP and three normal-world damage parameters with native helpers.",
+  "description": "Compare default-character Class EXP with its native helper.",
   "target": "Player combat stats",
   "extractions": [
     {
       "label": "player_class_experience_multiplier",
       "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 15, 0)",
       "description": "Class EXP multiplier from the original ExpMulti(0) helper for the retained active character"
-    },
-    {
-      "label": "player_maximum_damage_sigil_lab_bonus",
-      "expression": "idleon.callFunction(\"Labb\", \"SigilBonus\", \"Blank\", 4, 0)",
-      "description": "Native Lab SigilBonus helper for sigil index 4 used by the normal-world B component"
-    },
-    {
-      "label": "player_maximum_damage_cosmo_bonus_2_4",
-      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 2, 4)",
-      "description": "Native Hole CosmoBonusQTY(2,4) used in the weapon power multiplier"
-    },
-    {
-      "label": "player_maximum_damage_box_reward_base_damage",
-      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.BoxRewards.h.basedmg; })()",
-      "description": "Native computed BoxRewards.basedmg value used additively in DamageDealed(\"Max\") B"
     }
   ]
 }

@@ -4,7 +4,7 @@
  * Tests our Dancing Coral bonus and cost calculations against live game data.
  *
  * Dancing Coral provides 9 upgrades purchased with various coral types:
- * - Bonus formula: baseBonus * max(0, shrineLevel - 200) (0 if not purchased)
+ * - Bonus formula: baseBonus * max(0, shrineLevel - 200), regardless of purchase state
  * - Cost formula: baseCost / (1 + (10 * unlockValue + 1.05^unlockValue) / 100)
  *
  * Each upgrade has a shrine level (Tower[18-26]) that must exceed 200 to provide benefits.

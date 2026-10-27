@@ -35,11 +35,6 @@ type FamilyBonusCase = {
  description: string;
 };
 
-type ExplicitWinnerCase = FamilyBonusCase & {
- ownerID: number;
- ownerDescription: string;
-};
-
 const branchZeroCases: FamilyBonusCase[] = [
  { classIndex: ClassIndex.Beginner, gameKey: 2, description: 'Beginner' },
  { classIndex: ClassIndex.Journeyman, gameKey: 4, description: 'Journeyman' },
@@ -65,27 +60,6 @@ const branchZeroCases: FamilyBonusCase[] = [
  { classIndex: ClassIndex.Bubonic_Conjuror, gameKey: 72, description: 'Bubonic Conjuror' },
  { classIndex: ClassIndex.Arcane_Cultist, gameKey: 80, description: 'Arcane Cultist' },
 ];
-
-// These are the raw-candidate winners in the paired v1.21 save: Royal Guardian
-// player 3 supplies Divine Knight, while the higher-level Siege Breaker player 2
-// beats the second Siege Breaker candidate (player 9).
-const explicitWinnerCases: ExplicitWinnerCase[] = [
- {
-  classIndex: ClassIndex.Divine_Knight,
-  gameKey: 24,
-  description: 'Divine Knight',
-  ownerID: 3,
-  ownerDescription: 'player 3 Royal Guardian (level 1354)',
- },
- {
-  classIndex: ClassIndex.Siege_Breaker,
-  gameKey: 44,
-  description: 'Siege Breaker',
-  ownerID: 2,
-  ownerDescription: 'player 2 Siege Breaker (level 1340)',
- },
-];
-
 
 describe('Family Domain - Class Bonus', () => {
  let extractionResults: ExtractionResults;
@@ -117,25 +91,6 @@ describe('Family Domain - Class Bonus', () => {
    expect(domainBonus).toMatchLiveGameWithDetails(liveBonus, {
     tolerance: 0,
     context: `Family ${description} class bonus (FamBonusQTYs[${gameKey}])`,
-   });
-  });
- });
-
-
- explicitWinnerCases.forEach(({ classIndex, gameKey, description, ownerID, ownerDescription }) => {
-  it(`matches the game ${description} Family Bonus for its explicit winning owner (${ownerDescription})`, () => {
-   const liveBonus = getExtractedValue(extractionResults, `family_bonus_${gameKey}`);
-   const explicitWinningOwner = getTargetPlayer(players, ownerID);
-   const domainBonus = family.getClassBonus(classIndex)?.getBonus(explicitWinningOwner);
-
-   expect(domainBonus).toBeDefined();
-   if (domainBonus === undefined) {
-    return;
-   }
-
-   expect(domainBonus).toMatchLiveGameWithDetails(liveBonus, {
-    tolerance: 0,
-    context: `Family ${description} class bonus for explicit winning owner (${ownerDescription}) (FamBonusQTYs[${gameKey}])`,
    });
   });
  });

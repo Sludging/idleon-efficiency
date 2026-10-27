@@ -1,16 +1,16 @@
 {
-  "description": "Hourly collection from built Royal Guardian outposts, with direct comparisons for the account and outpost bonuses that scale collection",
-  "target": "RoyalG OutpostResourceRate(mapIndex), the raw hourly collection rate for a Royal Guardian outpost",
+  "description": "Hourly Royal Guardian Outpost collection for the extraction-selected character, with direct account and outpost bonus comparisons",
+  "target": "RoyalG OutpostResourceRate(mapIndex), the raw hourly collection rate in the selected character context",
   "extractions": [
     {
       "label": "royal_armory_rate_row_1",
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostResourceRate\", 1, 0)",
-      "description": "Raw Royal Armory rate for populated row 1; the detail caller displays this scalar per hour before collection conversion"
+      "description": "Raw Royal Armory rate for source-selected map row 1 before collection conversion"
     },
     {
       "label": "royal_armory_rate_row_0_empty",
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostResourceRate\", 0, 0)",
-      "description": "Raw rate for empty row 0; verifies the scalar calculation does not add caller-only row eligibility filtering"
+      "description": "Raw rate for source-selected map row 0 without caller-only row eligibility filtering"
     },
     {
       "label": "royal_armory_rate_companion_141",
@@ -135,17 +135,17 @@
     {
       "label": "royal_armory_rate_talent_225_best",
       "expression": "idleon.callFunction(\"getbonus2\", 1, 225, -1)",
-      "description": "Highest saved-character bonus from talent 225, added to the shared production percentage"
+      "description": "Account-best talent 225 bonus using the selected character's shared talent-level inputs and each owner's allocation and both Super Talent presets"
     },
     {
       "label": "royal_armory_rate_talent_226_best",
       "expression": "idleon.callFunction(\"getbonus2\", 1, 226, -1)",
-      "description": "Highest saved-character bonus from talent 226, added to the shared production percentage"
+      "description": "Account-best talent 226 bonus using the selected character's shared talent-level inputs and each owner's allocation and both Super Talent presets"
     },
     {
       "label": "royal_armory_rate_talent_230_best",
       "expression": "idleon.callFunction(\"getbonus2\", 1, 230, -1)",
-      "description": "Highest saved-character talent 230 bonus, used as a resource-rate multiplier with a minimum of one"
+      "description": "Account-best talent 230 multiplier using the selected character's shared talent-level inputs and each owner's allocation and both Super Talent presets; the rate applies a minimum of one"
     },
     {
       "label": "royal_armory_rate_zenith_market_10",
