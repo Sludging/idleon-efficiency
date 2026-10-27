@@ -58,13 +58,17 @@ export class OutpostRankProgress {
     }
 }
 
-export type RoyalGuardianContribution = Readonly<{ playerID: number; level: number; w14Bonus: number }>;
-export type RoyalGuardianAccountBonuses = Readonly<{
-    companionCollectionBonus: number;
-    arcadeCollectionBonus: number;
+export type RoyalGuardianContribution = Readonly<{
+    playerID: number;
+    level: number;
+    w14Bonus: number;
     collectionTalentBonus: number;
     guardianTalentBonus: number;
     collectionTalentMultiplier: number;
+}>;
+export type RoyalGuardianAccountBonuses = Readonly<{
+    companionCollectionBonus: number;
+    arcadeCollectionBonus: number;
 }>;
 export type ResourceCollectionBonuses = Readonly<{
     orbletCollectionBonus: number;
@@ -217,7 +221,7 @@ export class RoyalMapSource {
 
     getResourceCollectionRate(bonuses: ResourceCollectionBonuses, guardian: RoyalGuardianContribution): number {
         const late = bonuses.guardianBonuses;
-        // Collection depends on the late account talent and character inputs.
+        // The recipient's talent inputs belong to the Guardian; companion and arcade bonuses belong to the account.
         if (!late) return 0;
         return (
             125 *
@@ -237,8 +241,8 @@ export class RoyalMapSource {
             (1 +
                 (Math.floor(Math.max(0, guardian.level - 1000) / 100) * bonuses.guardianLevelBonus) / 100) *
             (1 + (bonuses.workerCollectionBonus * this.units.getTotalCount(RoyalUnitRole.Worker)) / 100) *
-            (1 + (late.collectionTalentBonus + late.guardianTalentBonus) / 100) *
-            Math.max(1, late.collectionTalentMultiplier) *
+            (1 + (guardian.collectionTalentBonus + guardian.guardianTalentBonus) / 100) *
+            Math.max(1, guardian.collectionTalentMultiplier) *
             (1 + (bonuses.resourceQuantityLogTotal * bonuses.stockpileBonus) / 100) *
             (1 + bonuses.zenithCollectionBonus / 100) *
             Math.min(5, 1 + (10 * Math.max(0, Math.round(this.mapLevel - 5))) / 100)

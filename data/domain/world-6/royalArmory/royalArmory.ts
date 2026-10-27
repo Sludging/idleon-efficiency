@@ -6,7 +6,7 @@ import { initRoyalStatueRepo } from "../../data/RoyalStatueRepo";
 import { MapInfo } from "../../maps";
 import type { Item } from "../../items";
 import type { Player } from "../../player";
-import { ClassIndex } from "../../talents";
+import { ClassIndex, Talent } from "../../talents";
 import type { BigFish } from "../../world-7/bigFish";
 import type { JellyOperator } from "../../world-7/jellyOperator";
 import type { Spelunking } from "../../world-7/spelunking";
@@ -46,10 +46,14 @@ const emptyRankExperienceBonuses: RankExperienceBonuses = {
     militiaExperienceEnabled: false,
 };
 
-export const getRoyalGuardianContribution = (player: Player, alchemy: Alchemy): RoyalGuardianContribution => ({
+// Account talent candidates keep their allocations and presets, but use this Guardian's shared talent modifiers.
+export const getRoyalGuardianContribution = (player: Player, alchemy: Alchemy, players: readonly Player[]): RoyalGuardianContribution => ({
     playerID: player.playerID,
     level: player.level,
     w14Bonus: alchemy.getBubbleBonusForKey("W14", player),
+    collectionTalentBonus: Talent.getAccountTalentBonus(players, 225, player.finalTalentInputs),
+    guardianTalentBonus: Talent.getAccountTalentBonus(players, 226, player.finalTalentInputs),
+    collectionTalentMultiplier: Talent.getAccountTalentBonus(players, 230, player.finalTalentInputs),
 });
 
 export class RoyalArmory extends Domain {
@@ -363,26 +367,17 @@ export class RoyalArmory extends Domain {
     }
 
     updateOutpostResourceRateLateInputs(players: Player[], companionCollectionBonus: number, arcadeCollectionBonus: number, alchemy: Alchemy): void {
-        let collectionTalentBonus = players[0]?.getTalentBonus(225) ?? 0;
-        let guardianTalentBonus = players[0]?.getTalentBonus(226) ?? 0;
-        let collectionTalentMultiplier = players[0]?.getTalentBonus(230) ?? 0;
-        for (let index = 1; index < players.length; index++) {
-            collectionTalentBonus = Math.max(collectionTalentBonus, players[index].getTalentBonus(225));
-            guardianTalentBonus = Math.max(guardianTalentBonus, players[index].getTalentBonus(226));
-            collectionTalentMultiplier = Math.max(collectionTalentMultiplier, players[index].getTalentBonus(230));
-        }
-        // The three talents use independent account maxima, not just the selected Guardian.
         this.resourceCollectionBonuses = { ...this.resourceCollectionBonuses, guardianBonuses: {
-            companionCollectionBonus, arcadeCollectionBonus, collectionTalentBonus, guardianTalentBonus, collectionTalentMultiplier,
+            companionCollectionBonus, arcadeCollectionBonus,
         } };
         this.selectedRoyalGuardian = undefined;
         let bestRate = -Infinity;
         const comparisonMap = this.mapStates.values().next().value as RoyalMapSource | undefined;
         if (!comparisonMap) return;
-        // Map multipliers are shared, so the same map compares each Guardian's actual contribution.
+        // Compare complete recipient contributions to keep the selected account rate attainable by one Guardian.
         for (const player of players) {
             if (player.classId !== ClassIndex.Royal_Guardian) continue;
-            const contribution = getRoyalGuardianContribution(player, alchemy);
+            const contribution = getRoyalGuardianContribution(player, alchemy, players);
             const rate = comparisonMap.getResourceCollectionRate(this.resourceCollectionBonuses, contribution);
             if (rate > bestRate) {
                 bestRate = rate;

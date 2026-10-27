@@ -34,6 +34,7 @@ import type { Farming } from '../../world-6/farming';
 import { getCompanionActiveBonus, type Companion } from '../../companions';
 import type { SushiStation } from '../../world-7/sushi';
 import { Gaming } from '../../world-5/gaming';
+import type { JellyOperator } from '../../world-7/jellyOperator';
 
 export enum CauldronIndex {
     Power = 0,
@@ -1039,6 +1040,7 @@ export function updateAlchemy(data: Map<string, any>) {
     const farming = data.get("farming") as Farming;
     const companions = data.get("companions") as Companion[];
     const sushi = data.get("sushi") as SushiStation;
+    const jellyOperator = data.get("jellyOperator") as JellyOperator;
     const gaming = data.get("gaming") as Gaming
 
     const vaultBonus42 = vault.getBonusForId(42);
@@ -1110,8 +1112,9 @@ export function updateAlchemy(data: Map<string, any>) {
     // Update prismatic multiplier
     const world6Trophy = slab.obtainableItems.find(item => item.internalName == "Trophy23");
     const arcaneBonus45 = tesseract.getUpgradeBonus(45);
-    const arcadeBonus54 = arcade.bonuses[54] ? arcade.bonuses[54].getBonus() : 0;
+    const arcadeBonus54 = arcade.bonuses[54].getBonus();
     const sushiBonus23 = sushi.getBonusFromIndex(23);
+    const jellyBonus36 = jellyOperator.getObstructionBonus(36);
     const world6TrophyBonus = world6Trophy?.obtained ? 10 : 0;
     const paletteBonus28 = gaming.getPaletteBonus(28);
     const legendBonus36 = legendTalents.getBonusFromIndex(36);
@@ -1120,7 +1123,7 @@ export function updateAlchemy(data: Map<string, any>) {
     // Prismatic strength uses the companion's active bonus, including its evolved value.
     const companion88Bonus = getCompanionActiveBonus(companions, 88);
 
-    const prismaBonus = Math.min(4, 2 + (arcaneBonus45 + (arcadeBonus54 + sushiBonus23 + (world6TrophyBonus + (paletteBonus28 + (.2 * purpleSigilsBonus + exoticMarketBonus48)))) + (legendBonus36 + 50 * companion88Bonus)) / 100);
+    const prismaBonus = Math.min(5, 2 + (arcaneBonus45 + (arcadeBonus54 + (sushiBonus23 + jellyBonus36) + (world6TrophyBonus + (paletteBonus28 + (.2 * purpleSigilsBonus + exoticMarketBonus48)))) + (legendBonus36 + 50 * companion88Bonus)) / 100);
 
     alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).forEach(bubble => {
         if (bubble.prismatic) {

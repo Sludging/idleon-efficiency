@@ -123,9 +123,11 @@ export class Skilling extends Domain {
         const fishingBribe = bribes.find(bribe => bribe.bribeIndex === 29)!.getBonus();
 
         for (const player of players) {
+            // Toilet Paper Postage applies character-specific efficiency stamp bonuses.
+            const efficiencyStampMultiplier = Math.max(player.getTalentBonus(625), 1);
             const postOfficeBox = player.postOffice.find(box => box.index === 20)!;
             const allBaseSkillEfficiency = breeding.shinyBonuses.find(bonus => bonus.data.index === 22)!.getBonus()
-                + getStampBonusForKey(stamps, "BaseAllEff")
+                + getStampBonusForKey(stamps, "BaseAllEff") * efficiencyStampMultiplier
                 + divinity.gods.find(god => god.index === 2)!.getBlessingBonus(player)
                 + (postOfficeBox.bonuses[1].getBonus(postOfficeBox.level, 1)
                     + (player.getChipBonus("eff") + (player.getTalentBonus(636)
@@ -159,10 +161,10 @@ export class Skilling extends Domain {
             const starSignChopping = getStarSignEfficiency(player, "Chop Efficiency");
             const starSignFishing = getStarSignEfficiency(player, "Fishing Efficiency");
             const starSignCatching = getStarSignEfficiency(player, "Catch Efficiency");
-            const baseMiningStamp = getStampBonusForKey(stamps, "BaseMinEff");
-            const baseChoppingStamp = getStampBonusForKey(stamps, "BaseChopEff");
-            const baseFishingStamp = getStampBonusForKey(stamps, "BaseFishEff");
-            const baseCatchingStamp = getStampBonusForKey(stamps, "BaseCatchEff");
+            const baseMiningStamp = getStampBonusForKey(stamps, "BaseMinEff") * efficiencyStampMultiplier;
+            const baseChoppingStamp = getStampBonusForKey(stamps, "BaseChopEff") * efficiencyStampMultiplier;
+            const baseFishingStamp = getStampBonusForKey(stamps, "BaseFishEff") * efficiencyStampMultiplier;
+            const baseCatchingStamp = getStampBonusForKey(stamps, "BaseCatchEff") * efficiencyStampMultiplier;
             const miningVial = alchemy.getVialBonusForKey("MinEff");
             const choppingVial = alchemy.getVialBonusForKey("ChopEff");
             const fishingVial = alchemy.getVialBonusForKey("FishEff");
@@ -173,9 +175,10 @@ export class Skilling extends Domain {
             const choppingMonument = hole.getMonumentBonus("Wisdom", 0);
             const catchingMonument = hole.getMonumentBonus("Justice", 0);
             const miningExtraEfficiency = 1;
-            const miningAtomLog = lavaLog(storage.amountInStorage("Copper"));
-            const choppingLog = lavaLog(storage.amountInStorage("Leaf1"));
-            const catchingLog = lavaLog(storage.amountInStorage("OakTree"));
+            // Native material bonuses count only the active player's inventory, chest, and refinery.
+            const miningAtomLog = lavaLog(storage.amountInStorage("Copper", player.playerID));
+            const choppingLog = lavaLog(storage.amountInStorage("Leaf1", player.playerID));
+            const catchingLog = lavaLog(storage.amountInStorage("OakTree", player.playerID));
             const miningGoldFood = goldenFood.getSkillEfficiencyMultiplier(player, sneaking, "MiningEff");
             const fishingGoldFood = goldenFood.getSkillEfficiencyMultiplier(player, sneaking, "FishingEff");
             const miningSkillEffPct = player.getPostOfficeBonus("MinEffPct");
@@ -230,7 +233,7 @@ export class Skilling extends Domain {
                     (1 + (miningTalent142 +
                         (fishingRiftBonus + (votes.getCurrentBonus(8) + platinumSet)) +
                         15 * fishingBribe +
-                        getStampBonusForKey(stamps, "FishEffPerLv") * fishingLevel) / 100)) *
+                        getStampBonusForKey(stamps, "FishEffPerLv") * efficiencyStampMultiplier * fishingLevel) / 100)) *
                 (1 + (fishingSkillEffPct + rightHandFishing) / 100) *
                 (1 + fishingPower / 100) *
                 allEfficiencies *
@@ -279,7 +282,7 @@ export class Skilling extends Domain {
             // Game adds the outer 10 after every multiplicative efficiency bonus.
             const worshipEfficiency = (worshipPowerTerm +
                 (Math.pow(wisdom + 1, 0.6) * (1 + player.getTalentBonus(532) / 100) +
-                    (getStampBonusForKey(stamps, "WorshipEff") + allBaseSkillEfficiency))) *
+                    (getStampBonusForKey(stamps, "WorshipEff") * efficiencyStampMultiplier + allBaseSkillEfficiency))) *
                 (1 + player.skills.get(SkillsIndex.Worship)!.level / 200) *
                 (1 + (player.getTalentBonus(445) * worshipMastery
                     + player.getPostOfficeBonus("18a")

@@ -15,8 +15,6 @@ export class DancingCoralBonus {
     }
 
     getBonus(): number {
-        if (!this.purchased) return 0;
-
         return this.data.bonus * Math.max(0, this.shrineLevel - 200);
     }
 
@@ -76,10 +74,6 @@ export class DancingCoral extends Domain {
 
     getBonusFromIndex(index: number): number {
         return this.bonuses.find(bonus => bonus.index == index)?.getBonus() || 0;
-    }
-    getLumiBonusFromIndex(index: number): number {
-        const bonus = this.bonuses.find(bonus => bonus.index === index)!;
-        return bonus.data.bonus * Math.max(0, bonus.shrineLevel - 200);
     }
 
 

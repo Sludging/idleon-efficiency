@@ -571,7 +571,7 @@ export class SneakingUpgrade {
 
     updateCharmCollector(gemstoneBonus: number, paletteBonus: number, vaultBonus: number, cloudBonus: number): void {
         // Preserve the native grouping before the final Knowledge effect rounds.
-        this.charmCollectorBonus = Math.ceil(gemstoneBonus) + Math.floor(paletteBonus + (vaultBonus + 100 * cloudBonus));
+        this.charmCollectorBonus = Math.ceil(gemstoneBonus) + Math.floor(paletteBonus + (vaultBonus + cloudBonus));
     }
 
     nextLevelCost = (): number => {

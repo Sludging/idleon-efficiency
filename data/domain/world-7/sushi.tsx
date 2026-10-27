@@ -47,7 +47,22 @@ export class Sushi {
 
     constructor(public index: number, public data: SushiModel) { }
 
-    static fromBase = (data: SushiBase[]): Sushi[] => data.map(sushi => new Sushi(sushi.index, sushi.data));
+    static fromBase = (data: SushiBase[]): Sushi[] => {
+        const defaultKnowledgeBonus = data[0].data;
+        return data.map(sushi => {
+            const sushiData = sushi.data;
+            if (sushiData.knowledgeBonusCategory !== undefined && sushiData.knowledgeBonusBase !== undefined) {
+                return new Sushi(sushi.index, sushiData);
+            }
+
+            // The game converts a missing Knowledge category to numeric index 0, then reads that category's base.
+            return new Sushi(sushi.index, {
+                ...sushiData,
+                knowledgeBonusCategory: sushiData.knowledgeBonusCategory ?? defaultKnowledgeBonus.knowledgeBonusCategory,
+                knowledgeBonusBase: sushiData.knowledgeBonusBase ?? defaultKnowledgeBonus.knowledgeBonusBase,
+            });
+        });
+    };
 
     getBaseBonus(): number {
         return this.data.unlockBonus;

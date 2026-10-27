@@ -1175,7 +1175,7 @@ const getPlayerTalentLevelInputs = (
     };
 };
 
-// Family captures Family Guy with Super Talent levels before Elemental Sorcerer additions.
+// Prepare inputs without ES levels. Family projects raw and amplified ES values in the original game order.
 export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const divinity = data.get("divinity") as Divinity;
@@ -1197,7 +1197,7 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
     return players;
 };
 
-// Consume Family's cached pre-ES result; never calculate Family from the later talent projection.
+// Consume the recipient's ordered Family result without changing the inputs used by Family's local projection.
 export const updatePlayerTalentLevelESBonus = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const family = data.get("family") as Family;

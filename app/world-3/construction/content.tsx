@@ -423,6 +423,8 @@ function PrinterDisplay() {
         return masteroes;
     }, [playerData])
 
+    const rememberedTalent = playerData?.map(player => player.talents.find(talent => talent.skillIndex == 178)).find(talent => talent !== undefined);
+
     return (
         <Box gap="medium">
             <Box direction="row" wrap justify="center">
@@ -448,20 +450,16 @@ function PrinterDisplay() {
                     )
                 })
                 }
-                {playerData && printerData.bestDivineKnightPlayerId != -1 &&
+                {rememberedTalent &&
                     <ShadowBox key={"best_dk"} background="dark-1" pad="medium" align="center" margin={{ right: 'large', bottom: 'small' }}>
                         <Box gap="small">
-                            <Box direction="row" gap="small">
-                                <IconImage data={playerData[printerData.bestDivineKnightPlayerId].getClassImageData()} scale={0.8} />
-                                <Text>{playerData[printerData.bestDivineKnightPlayerId].playerName}</Text>
-                            </Box>
                             <Box direction="row" gap="small">
                                 <ComponentAndLabel
                                     label="King Of The Remembered"
                                     component={
                                         <Box direction="row" gap="small" align="center" margin={{ top: 'medium' }}>
-                                            <IconImage data={playerData[printerData.bestDivineKnightPlayerId]!.talents.find(talent => talent.skillIndex == 178)!.getImageData()} scale={0.6} />
-                                            <Text size="small">{nFormatter(playerData[printerData.bestDivineKnightPlayerId].getTalentBonus(178) * lavaLog(printerData.divineKnightOrbKills))}% ({nFormatter(printerData.divineKnightOrbKills)} Kills)</Text>
+                                            <IconImage data={rememberedTalent.getImageData()} scale={0.6} />
+                                            <Text size="small">{nFormatter(printerData.accountTalent178Bonus * lavaLog(printerData.divineKnightOrbKills))}% ({nFormatter(printerData.divineKnightOrbKills)} Kills)</Text>
                                         </Box>
                                     }
                                 />

@@ -2,6 +2,7 @@ import { GroupBy, lavaFunc, range } from "../utility"
 import { DungItemBase, initDungItemRepo } from "./data/DungItemRepo"
 import { DungPassivesBase, initDungPassivesRepo } from "./data/DungPassivesRepo"
 import { DungSetBase, initDungTraitRepo } from "./data/DungTraitRepo"
+import { initRandoListRepo } from "./data/RandoListRepo"
 import { DungItemModel } from "./model/dungItemModel"
 import { ImageData } from "./imageData"
 import { DungPassiveModel } from "./model/dungPassiveModel"
@@ -13,7 +14,8 @@ export enum PassiveType {
     Flurbo = "Flurbo"
 }
 
-export const dungeonLevels = "0 4 10 18 28 40 70 110 160 230 320 470 670 940 1310 1760 2400 3250 4000 5000 6160 8000 10000 12500 15000 18400 21000 25500 30500 36500 45400 52000 61000 72500 85000 110000 125000 145000 170000 200000 250000 275000 325000 400000 490000 600000 725000 875000 1000000 1200000 1500000 3000000 5000000 10000000 20000000 30000000 40000000 50000000 60000000 80000000 100000000 999999999 999999999 999999999 999999999 999999999 1999999999 1999999999 1999999999 1999999999 1999999999".split(" ")
+// Generated game data owns rank thresholds. Reaching a threshold advances to the next rank.
+export const dungeonLevels = initRandoListRepo()[29].data.elements.map(Number);
 
 export class DungeonItem {
     name: string
@@ -203,14 +205,13 @@ export class Dungeons extends Domain {
     flurbos: number = 0;
 
     public static getDungeonRank = (dungeonXP: number) => {
-        const rank = Number(dungeonLevels.reduce((rank, req, index, _) => {
-            if (dungeonXP > Number(req)) {
-                rank = index.toString()
+        for (let index = 0; index < dungeonLevels.length; index++) {
+            if (dungeonXP < dungeonLevels[index]) {
+                return index;
             }
-            return rank;
-        }, "0")) + 1;
+        }
 
-        return rank;
+        return 1;
     }
 
     public static getDungeonImageData = (dungeonRank: number): ImageData => {
@@ -268,12 +269,7 @@ export class Dungeons extends Domain {
 
 
         dungeons.xp = optionList[71]
-        dungeons.rank = Number(dungeonLevels.reduce((rank, req, index, _) => {
-            if (optionList[71] > Number(req)) {
-                rank = index.toString()
-            }
-            return rank;
-        }, "0")) + 1;
+        dungeons.rank = Dungeons.getDungeonRank(dungeons.xp);
 
         dungeons.flurbos = optionList[73];
         dungeons.credits = optionList[72];

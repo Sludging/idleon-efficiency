@@ -29,6 +29,7 @@ import type { Achievement } from "../../achievements";
 import { getCompanionActiveBonus, type Companion } from "../../companions";
 import { TotalizerBonus, type Worship } from "../../world-3/worship";
 import { SkillsIndex } from "../../SkillsIndex";
+import { Talent } from "../../talents";
 
 export class Plant {
     speciesId: number;
@@ -173,6 +174,7 @@ export class Garden {
     growthCycleSeconds = 5000;
     harvestBits = 1;
     nonPlantBitsMultiplier = 1;
+    bitsTalent = 0;
     initialAppearanceProbability = 0.13;
     evolutionUpgradeLevel = 0;
     evolutionUpgradeCostBits = 36;
@@ -290,7 +292,10 @@ export class Garden {
         const rat = gaming.getImport(8) as KingRatImport;
         const shovel = gaming.getImport(1) as ShovelImport;
 
-        const bitsTalent = players.reduce((best, player) => Math.max(best, player.getTalentBonus(177)), 0);
+        this.bitsTalent = 0;
+        for (const recipient of players) {
+            this.bitsTalent = Math.max(this.bitsTalent, Talent.getAccountTalentBonus(players, 177, recipient.finalTalentInputs));
+        }
         const card = cards.find(card => card.id === "w7b2")!;
         // Skill Mastery supplies the complete Bits percentage.
         const masteryBits = skillMastery.getSkillBonus(SkillsIndex.Gaming, 1);
@@ -313,7 +318,7 @@ export class Garden {
             * shell.earnedBitsMultiplier
             * Math.max(1, gaming.logbook.bitsMultiplier * log.bitsMultiplier * rat.bitsMultiplier)
             * (1 + (cooking.getMealBonusForKey("GamingBits") + alchemy.getVialBonusForKey("GameBits")) / 100)
-            * (1 + bitsTalent * gaming.level / 100)
+            * (1 + this.bitsTalent * gaming.level / 100)
             * Math.max(1, Math.min(25, pong.bitsMultiplier))
             * (1 + (Number(achievements.find(achievement => achievement.index === 296)!.completed)
                 + Number(achievements.find(achievement => achievement.index === 307)!.completed)) / 20)

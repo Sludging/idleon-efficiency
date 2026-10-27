@@ -31,7 +31,6 @@ import { Sailing } from '../world-5/sailing/sailing';
 import { Divinity } from '../world-5/divinity';
 import { Gaming } from '../world-5/gaming';
 import { ShellImport, ShovelImport, SnailImport } from '../world-5/gaming/imports';
-import { ArtifactStatus } from '../world-5/sailing/artifacts';
 import { Account } from '../account';
 import { Farming } from '../world-6/farming';
 import { RoyalArmory } from '../world-6/royalArmory/royalArmory';
@@ -598,16 +597,8 @@ export const updateTomeScores = (data: Map<string, any>) => {
     // Sum of boat loot and speed upgrade levels.
     const totalBoatLevels = sailing.boats.reduce((sum, boat) => sum + boat.lootUpgrades + boat.speedUpgrades, 0);
 
-    // Weighted artifact progression by status: Obtained +1, Ancient +2, Eldritch +3, Sovereign +4, Omnipotent +5, Transcendent +6.
-    const totalArtifactFound = sailing.artifacts.reduce((sum, artifact) =>
-        artifact.status == ArtifactStatus.Obtained ? sum + 1
-            : artifact.status == ArtifactStatus.Ancient ? sum + 2
-                : artifact.status == ArtifactStatus.Eldritch ? sum + 3
-                    : artifact.status == ArtifactStatus.Sovereign ? sum + 4
-                        : artifact.status == ArtifactStatus.Omnipotent ? sum + 5
-                            : artifact.status == ArtifactStatus.Transcendent ? sum + 6
-                                : sum + 0
-        , 0);
+    // Each artifact contributes its rank, from 0 (Unobtained) to 7 (Verisimilitude).
+    const totalArtifactFound = sailing.artifacts.reduce((sum, artifact) => sum + artifact.status, 0);
 
     // Highest Sailing captain level.
     const highestLevelCaptain = Math.max(0, ...sailing.captains.map(captain => captain.level));
@@ -944,7 +935,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.updateAllPlayersCurrentValue((gaming.getImport(3) as ShellImport).evolutionProgress);
                 break;
             case 60:
-                // Weighted artifact progression by status: Obtained +1, Ancient +2, Eldritch +3, Sovereign +4, Omnipotent +5, Transcendent +6.
+                // Sum of artifact ranks, including Verisimilitude.
                 line.updateAllPlayersCurrentValue(totalArtifactFound);
                 break;
             case 61:

@@ -3,6 +3,7 @@ import { Domain, RawData } from "./base/domain";
 import { Item } from "./items";
 import { Player } from "./player";
 import { ClassIndex, Talent } from "./talents";
+import type { TalentLevelInputs } from "./talents";
 
 
 
@@ -129,22 +130,17 @@ export const FamilyBonusRelations: Record<ClassIndex, ClassIndex[]> = {
     [ClassIndex.Arcane_Cultist]: [ClassIndex.Mage, ClassIndex.Shaman, ClassIndex.Bubonic_Conjuror],
 }
 
-// Family bonuses are calculated at runtime by the game, we can't do that so we store candidates.
-// For each player we store the Family bonus value, the player ID, and that player's Family Guy percentage
-// captured during the Family phase.
 type FamilyBonusCandidate = {
+    classIndex: ClassIndex;
     value: number;
-    playerID: number;
-    familyGuyBonus: number;
+    owner: Player;
+    inputs: Readonly<TalentLevelInputs>;
 };
 
 export class FamilyBonus {
-    private readonly candidates: FamilyBonusCandidate[] = [];
-    // Each player gets its own set of results.
     private readonly results: Map<number | undefined, number> = new Map();
 
-    // highestFamilyGuy is used only by the account-wide multiplier on Divine Knight and Siege Breaker.
-    constructor(public classIndex: ClassIndex, public bonus: string, public highestFamilyGuy: number) { }
+    constructor(public classIndex: ClassIndex, public bonus: string) { }
 
     getBonusText = (player: Player | undefined = undefined, rounding: boolean = true) => {
         return this.bonus.replace(/_/g, " ").replace("|", " ").replace("#@", "x ").replace(/{/g, this.getBonus(player, rounding).toString());
@@ -155,45 +151,98 @@ export class FamilyBonus {
         return rounding ? round(familyBonus) : familyBonus;
     }
 
-    addCandidate = (value: number, playerID: number, familyGuyBonus: number) => {
-        this.candidates.push({ value, playerID, familyGuyBonus });
-    }
-
-    // Pre-calculate the cached results so we don't have to recalculate them every time a we query the bonus.
-    calculateResults = (playerIDs: Iterable<number>) => {
-        this.results.clear();
-        this.results.set(undefined, this.calculateResult(undefined));
-        for (const playerID of playerIDs) {
-            this.results.set(playerID, this.calculateResult(playerID));
-        }
-    }
-
-    private calculateResult = (playerID: number | undefined) => {
-        let familyBonus = 0;
-        const usesAccountWideFamilyGuy = [ClassIndex.Siege_Breaker, ClassIndex.Divine_Knight].includes(this.classIndex);
-
-        // Candidates are considered in game order. Compare each raw candidate to the current stored
-        // result; when it wins, write it first, then apply the owner's captured Family Guy value for
-        // the requested player context. DK/SB overwrite that owner-specific value with the account-wide
-        // Family Guy multiplier, rather than stacking both multipliers.
-        this.candidates.forEach(candidate => {
-            if (candidate.value > familyBonus) {
-                familyBonus = candidate.value;
-                if (usesAccountWideFamilyGuy) {
-                    familyBonus *= 1 + this.highestFamilyGuy / 100;
-                } else if (playerID === candidate.playerID) {
-                    familyBonus *= 1 + candidate.familyGuyBonus / 100;
-                }
-            }
-        });
-
-        return familyBonus;
+    setResult(playerID: number | undefined, value: number): void {
+        this.results.set(playerID, value);
     }
 }
 
 export class Family extends Domain {
     classBonus: Map<ClassIndex, FamilyBonus> = new Map()
     getClassBonus = (classIndex: ClassIndex) => this.classBonus.get(classIndex);
+
+    calculate(players: Player[]): void {
+        this.classBonus.clear();
+        const candidates: FamilyBonusCandidate[] = [];
+        const capturedInputs = new Map<Player, Readonly<TalentLevelInputs>>();
+        for (const player of players) {
+            const inputs = { ...player.currentTalentInputs };
+            capturedInputs.set(player, inputs);
+            const familyLineage = FamilyBonusRelations[player.classId] ?? [];
+            for (const classIndex of familyLineage) {
+                this.collectCandidate(candidates, player, inputs, classIndex);
+            }
+            this.collectCandidate(candidates, player, inputs, player.classId);
+        }
+
+        for (const recipient of players) {
+            this.calculateResults(players, candidates, capturedInputs, recipient);
+        }
+        this.calculateResults(players, candidates, capturedInputs, undefined);
+    }
+
+    private collectCandidate(
+        candidates: FamilyBonusCandidate[], owner: Player, inputs: Readonly<TalentLevelInputs>, classIndex: ClassIndex,
+    ): void {
+        const bonusData = familyBonusMapping[classIndex];
+        if (!bonusData) {
+            return;
+        }
+
+        const value = lavaFunc(
+            bonusData[3],
+            Math.max(0, Math.round(owner.level - Number(classAccountBonus[classIndex][1]))),
+            Number(bonusData[1]),
+            Number(bonusData[2]),
+            false
+        );
+        if (!this.classBonus.has(classIndex)) {
+            this.classBonus.set(classIndex, new FamilyBonus(classIndex, bonusData[0]));
+        }
+        candidates.push({ classIndex, value, owner, inputs });
+    }
+
+    private calculateResults(
+        players: Player[], candidates: FamilyBonusCandidate[],
+        capturedInputs: ReadonlyMap<Player, Readonly<TalentLevelInputs>>, recipient: Player | undefined,
+    ): void {
+        const results = new Map<ClassIndex, number>();
+        const projectedInputs = new Map<Readonly<TalentLevelInputs>, TalentLevelInputs>();
+        if (recipient === undefined) {
+            for (const inputs of capturedInputs.values()) {
+                projectedInputs.set(inputs, { ...inputs });
+            }
+        } else {
+            const inputs = capturedInputs.get(recipient)!;
+            projectedInputs.set(inputs, { ...inputs });
+        }
+
+        for (const candidate of candidates) {
+            if (candidate.value <= (results.get(candidate.classIndex) ?? 0)) {
+                continue;
+            }
+
+            // The raw ES bonus is visible to its own Family Guy before amplification.
+            // Later classes use the amplified ES bonus.
+            results.set(candidate.classIndex, candidate.value);
+            const familyTalentLevels = results.get(ClassIndex.Elemental_Sorcerer) ?? 0;
+            let familyGuyBonus = 0;
+            if (candidate.classIndex === ClassIndex.Divine_Knight || candidate.classIndex === ClassIndex.Siege_Breaker) {
+                for (const inputs of projectedInputs.values()) {
+                    inputs.familyTalentLevels = familyTalentLevels;
+                    familyGuyBonus = Math.max(familyGuyBonus, Talent.getAccountTalentBonus(players, 144, inputs));
+                }
+            } else if (candidate.owner === recipient) {
+                const inputs = projectedInputs.get(candidate.inputs)!;
+                inputs.familyTalentLevels = familyTalentLevels;
+                familyGuyBonus = candidate.owner.getTalentBonusAtInputs(144, inputs);
+            }
+            results.set(candidate.classIndex, candidate.value * (1 + familyGuyBonus / 100));
+        }
+
+        for (const [classIndex, bonus] of this.classBonus) {
+            bonus.setResult(recipient?.playerID, results.get(classIndex) ?? 0);
+        }
+    }
 
     getRawKeys(): RawData[] {
         return [];
@@ -208,52 +257,9 @@ export class Family extends Domain {
     }
 }
 
-// This function runs in the pre-ES phase to match the game behavior.
 export const calculateFamily = (data: Map<string, any>) => {
     const family = data.get("family") as Family;
     const players = data.get("players") as Player[];
-
-    family.classBonus.clear();
-    // Use the best recipient's shared modifiers with Super Talent levels before Elemental Sorcerer levels apply.
-    let highestFamilyGuy = 0;
-    for (const recipient of players) {
-        highestFamilyGuy = Math.max(highestFamilyGuy, Talent.getAccountTalentBonus(players, 144, recipient.currentTalentInputs));
-    }
-    const playerIDs = players.map(player => player.playerID);
-
-    players.forEach(player => {
-        // The game uses the pre-ES bonus, so we need to capture it explicitly at this stage.
-        const familyGuyBonus = player.getTalentBonus(144);
-        // Family considers each useful ancestor lineage before adding the owner's direct class.
-        const familyLineage = FamilyBonusRelations[player.classId] ?? [];
-        familyLineage.forEach(classId => updateFamilyBonus(family, player, classId, highestFamilyGuy, familyGuyBonus));
-        updateFamilyBonus(family, player, player.classId, highestFamilyGuy, familyGuyBonus);
-    });
-
-    // Pre-calculate the family bonus for each player based on the candidates collected above.
-    family.classBonus.forEach(familyBonus => familyBonus.calculateResults(playerIDs));
+    family.calculate(players);
     return family;
-}
-
-const updateFamilyBonus = (family: Family, player: Player, classId: ClassIndex, highestFamilyGuy: number, familyGuyBonus: number) => {
-    const bonusData = familyBonusMapping[classId];
-    if (!bonusData) {
-        return;
-    }
-
-    const familyBonus = lavaFunc(
-        bonusData[3],
-        Math.max(0, Math.round(player.level - Number(classAccountBonus[classId][1]))),
-        Number(bonusData[1]),
-        Number(bonusData[2]),
-        false
-    );
-    // First, create a bonus if non exist for this classId yet.
-    let familyClassBonus = family.classBonus.get(classId);
-    if (!familyClassBonus) {
-        familyClassBonus = new FamilyBonus(classId, bonusData[0], highestFamilyGuy);
-        family.classBonus.set(classId, familyClassBonus);
-    }
-    // Then add candidate player to later calculate the final bonus.
-    familyClassBonus.addCandidate(familyBonus, player.playerID, familyGuyBonus);
 }

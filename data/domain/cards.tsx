@@ -69,7 +69,7 @@ export class Card {
         // Owned zero-star cards contribute native level 1 to card effects.
         let level = this.count > 0 ? 1 : 0;
         for (let thresholdIndex = 0; thresholdIndex < this.gameThresholdCount; thresholdIndex++) {
-            if (this.count >= this.getCardsForLevel(thresholdIndex + 1)) {
+            if (this.count >= this.getProgressionThreshold(thresholdIndex + 1)) {
                 level = thresholdIndex + 2;
             }
         }
@@ -86,14 +86,19 @@ export class Card {
         return (this.baseDropChance > 0) ? "1 in " + nFormatter(Math.round(1 / this.baseDropChance)) : "Not Found";
     }
 
-    // The target is display stars. Saved integer counts must strictly exceed the game threshold.
+    // Display-star requirements use a different curve from native effect-level progression.
     getCardsForLevel = (level: number): number => {
         if (level <= 0) {
             return 1;
         }
 
+        const threshold = this.data.perTier * Math.pow(level + Math.floor(level / 4) + 16 * Math.floor(level / 5) + 100 * Math.floor(level / 6), 2);
+        return Math.floor(threshold) + 1;
+    }
+
+    private getProgressionThreshold = (level: number): number => {
         const thresholdLevel = level - 1;
-        // Chaotic Chizoar uses its own threshold curve instead of the normal high-star scaling.
+        // Only native effect-level progression uses Chaotic Chizoar's special threshold curve.
         const threshold = this.id == "Boss3B"
             ? 1.5 * Math.pow(thresholdLevel + 1 + Math.floor(thresholdLevel / 3), 2)
             : this.data.perTier * Math.pow(thresholdLevel + 1 + (Math.floor(thresholdLevel / 3) + (16 * Math.floor(thresholdLevel / 4) + 100 * Math.floor(thresholdLevel / 5))), 2);

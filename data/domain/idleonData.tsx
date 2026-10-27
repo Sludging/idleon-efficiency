@@ -70,7 +70,7 @@ import { IslandExpeditions, updateIslandExpeditions, updateIslandRewardPossessio
 import { Tome, updateTomeBonuses, updateTomeScores } from './world-4/tome';
 import { KillRoy, updateKillroy } from './world-2/killroy';
 import { updateVotesBonus, Votes } from './world-2/votes';
-import { Hole, updateHole, updateHoleCharacterCapabilities, updateHolePresentation, updateHoleStudyEffects, updateHoleUpgradeEffects } from './world-5/hole/hole';
+import { Hole, updateHole, updateHoleCharacterCapabilities, updateHolePresentation, updateHoleStudyEffects, updateHoleUpgradeEffects, updateHoleWell } from './world-5/hole/hole';
 import { UpgradeVault } from './upgradeVault';
 import { Grimoire, updateGrimoireEfficiency, updateGrimoireUpgradeCosts } from './grimoire';
 import { Tesseract, updateArcaneCultistImpact, updateTesseractEfficiency, updateTesseractUpgradeCosts } from './tesseract';
@@ -374,6 +374,8 @@ const postProcessingMap: Record<string, Function> = {
     // Prepare exalted stamp scaling after its account inputs and before stamp bonuses.
     "compassExaltedStampBonus": (_doc: Cloudsave, accountData: Map<string, any>) => updateCompassExaltedStampBonus(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStamps(accountData),
+    // Well rates use settled Cavern Resource Stamp bonuses.
+    "holeWell": (_doc: Cloudsave, accountData: Map<string, any>) => updateHoleWell(accountData),
     "forge": (doc: Cloudsave, accountData: Map<string, any>) => updateForge(accountData.get("forge"), accountData.get("gems"), accountData.get("menagerie"), accountData.get("cards")),
     "worshipTotalizer": (doc: Cloudsave, accountData: Map<string, any>) => updateWorshipTotalizer(accountData),
     "arcade": (doc: Cloudsave, accountData: Map<string, any>) => updateArcade(accountData),

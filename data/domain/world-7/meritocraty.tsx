@@ -73,8 +73,8 @@ export class Meritocraty extends Domain {
         }
 
         meritocraty.canVote = optionList[472] == 1;
-        // Earned effects follow the saved active selector, not the server's newest winner.
-        meritocraty.currentBonusIndex = optionList[453] ?? 0;
+        // Native startup replaces the saved selector with the server's current winner.
+        meritocraty.currentBonusIndex = serverVars.voteCat2?.[0] ?? 1;
 
         // The game server payload names these categories voteCat2.
         if (!serverVars.voteCat2 || serverVars.voteCat2.length == 0) {

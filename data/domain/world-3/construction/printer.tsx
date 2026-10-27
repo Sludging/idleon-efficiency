@@ -11,7 +11,7 @@ import { Lab } from "../../world-4/lab";
 import { Player } from "../../player";
 import { Rift, SkillMastery } from "../../world-4/rift";
 import { Sailing } from "../../world-5/sailing/sailing";
-import { ClassIndex } from "../../talents";
+import { Talent } from "../../talents";
 import { Votes } from "../../world-2/votes";
 import { Sneaking } from "../../world-6/sneaking";
 import { LegendTalents } from "../../world-7/legendTalents";
@@ -58,7 +58,7 @@ export class PlayerInfo {
 export class Printer extends Domain {
     // 2d array of players and their 5 samples.
     samples: Sample[][] = [];
-    bestDivineKnightPlayerId: number = -1;
+    accountTalent178Bonus: number = 0;
     divineKnightOrbKills: number = 0;
 
     slotsUnlocked: number = 4;
@@ -166,15 +166,14 @@ export const updatePrinter = (data: Map<string, any>) => {
         printer.samples[linkedPlayer.playerID].forEach(sample => sample.harriep = true);
     })
 
-
-    const bestDivineKnight = players.filter(player => player.getEliteClass() === ClassIndex.Divine_Knight).sort((player1, player2) => player1.getTalentBonus(178) > player2.getTalentBonus(178) ? 1 : -1).pop()
-    const divineKnightOrbKills = optLacc[138] || 0;
-    let talent178Bonus = 1;
-    if (bestDivineKnight) {
-        printer.divineKnightOrbKills = divineKnightOrbKills;
-        printer.bestDivineKnightPlayerId = bestDivineKnight.playerID;
-        talent178Bonus = (1 + bestDivineKnight.getTalentBonus(178) * lavaLog(divineKnightOrbKills) / 100);
+    printer.divineKnightOrbKills = optLacc[138] || 0;
+    printer.accountTalent178Bonus = 0;
+    // King of the Remembered is the only recipient-dependent factor in account-wide Printer growth.
+    for (const recipient of players) {
+        const talentBonus = Talent.getAccountTalentBonus(players, 178, recipient.finalTalentInputs);
+        printer.accountTalent178Bonus = Math.max(printer.accountTalent178Bonus, talentBonus);
     }
+    const talent178Bonus = 1 + printer.accountTalent178Bonus * lavaLog(printer.divineKnightOrbKills) / 100;
 
     // Printing boosts
     const artifactDaysSinceLastSample = optLacc[INDEX_DAYS_SINCE_SAMPLE_ARTIFACT] || 0;
