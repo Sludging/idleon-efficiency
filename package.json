@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "eslint .",
     "ssl:setup": "node scripts/create-ssl-certs.js",
-    "test": "node --max-old-space-size=512 node_modules/jest/bin/jest.js",
+    "test": "node --max-old-space-size=2048 node_modules/jest/bin/jest.js",
     "test:watch": "yarn test --watch",
     "test:coverage": "yarn test --coverage",
     "test:domains": "yarn test domains/",

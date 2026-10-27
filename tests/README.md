@@ -13,7 +13,7 @@ yarn test --runTestsByPath tests/domains/cooking/meal-speed.test.ts
 ```
 
 The package command starts the installed Jest binary with Node's
-`--max-old-space-size=512`. This limits V8 old-space heap, not total process
+`--max-old-space-size=2048`. This limits V8 old-space heap, not total process
 memory. `test:watch`, `test:coverage`, `test:domains`, and `test:integration`
 delegate to this command. Direct `yarn jest` uses the same Jest configuration
 but does not add this package-command heap limit. The account runner also does
@@ -42,7 +42,7 @@ Treat that prepared state as read-only; object and array writes and
 `Map`, `Set`, and `Date` mutators are blocked. The cache
 ends with that Jest runtime; it does not span groups or processes.
 
-Normal and opt-in account runs default to one worker and a `512MB`
+Normal and opt-in account runs default to one worker and a `1024MB`
 `workerIdleMemoryLimit`. Jest can recycle a worker between scheduled entries
 after it exceeds this idle threshold. The threshold does not impose a hard
 heap or total-memory cap. Explicit Jest worker and memory options override

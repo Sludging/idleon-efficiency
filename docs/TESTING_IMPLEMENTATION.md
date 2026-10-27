@@ -42,7 +42,7 @@ ten natural website groups. Existing source-path filters and
 `--runTestsByPath` keep selecting those original files.
 
 The package command starts the installed Jest binary through Node with
-`--max-old-space-size=512`. This limits V8 old-space heap, not total process
+`--max-old-space-size=2048`. This limits V8 old-space heap, not total process
 memory. `test:watch`, `test:coverage`, `test:domains`, and `test:integration`
 delegate to `yarn test`. Direct `yarn jest` and the account runner do not add
 this package-command heap limit.
@@ -58,7 +58,7 @@ group's Jest runtime. Tests share read-only prepared state, not a process-global
 or cross-runtime account. The guard blocks object and array writes and
 `Map`, `Set`, and `Date` mutators.
 
-Normal and opt-in account runs default to one Jest worker and a `512MB`
+Normal and opt-in account runs default to one Jest worker and a `1024MB`
 `workerIdleMemoryLimit`. This idle threshold lets Jest recycle workers between
 scheduled entries. The threshold is separate from the package-command heap
 limit and does not impose a hard heap or total-memory cap.

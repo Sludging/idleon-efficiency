@@ -7,7 +7,7 @@ module.exports = {
   testMatch: ['**/tests/**/*.test.ts'],
   testSequencer: '<rootDir>/tests/helpers/domain-test-sequencer.cjs',
   maxWorkers: 1,
-  workerIdleMemoryLimit: '512MB',
+  workerIdleMemoryLimit: '1024MB',
   collectCoverageFrom: [
     'data/domain/**/*.tsx',
     '!data/domain/data/**',     // Exclude auto-generated files

@@ -6,7 +6,7 @@ Use offline game server by default for snippets, extraction-config testing, and 
 
 Routine development, extraction, and tests use `tests/fixtures/saves/latest.json`, matching `tests/results/`, and `tests/utils/target-player.json`. Reuse the shared default offline server at `http://127.0.0.1:3101` when it is ready; do not start another server for ordinary work.
 
-Public Toolbox account listing, fetching, extraction, and testing are opt-in ONLY when the user explicitly requests multi-account or public-profile validation. DO NOT USE PUBLIC-ACCOUNT WORKFLOWS IN NORMAL OPERATIONS. Do not use public accounts as a routine prerequisite or fallback. A necessary specific-character override for an extraction config remains valid; it does not make that work multi-account testing.
+Public-account listing, fetching, extraction, and testing are opt-in ONLY when the user explicitly requests multi-account or public-profile validation. DO NOT USE PUBLIC-ACCOUNT WORKFLOWS IN NORMAL OPERATIONS. Do not use public accounts as a routine prerequisite or fallback. A necessary specific-character override for an extraction config remains valid; it does not make that work multi-account testing.
 
 For setup and start instructions, see the [offline tool guide](../../sub-projects/idleon-offline/README.md#startup).
 
@@ -225,7 +225,7 @@ Run these commands from the repository root.
 
 #### Add a profile
 
-1. Choose a player-published Toolbox profile that adds a missing coverage condition.
+1. Choose a player-published Toolbox or IdleOn Efficiency profile that adds a missing coverage condition.
    Add an entry to `tests/accounts/accounts.json`.
    This is the minimum configuration:
 
@@ -246,6 +246,25 @@ Run these commands from the repository root.
    `playerIndex` is a zero-based slot in the imported save's `playerNames` array.
    Index `0` is a provisional choice, not a claim about the best character.
    Keep existing entries when adding another profile.
+
+   `source` defaults to `"toolbox"` when omitted, so existing Toolbox entries need no change.
+   Use `"source": "idleon-efficiency"` for an IE-published profile:
+
+   ```json
+   {
+     "id": "ie-example",
+     "profileName": "published-ie-profile",
+     "source": "idleon-efficiency",
+     "playerIndex": 0
+   }
+   ```
+
+   Set `profileName` to the profile handle, not a URL.
+   The IE landing page is `https://<handle>.idleonefficiency.com`.
+   The runner downloads JSON from `https://cdn.idleonefficiency.com/profiles/<handle>.json`, not the landing page.
+   It lowercases and URL-encodes the handle for the CDN path.
+   The [publisher and downloader](../../data/storage/profiles.tsx) define the IE publication format.
+   Unknown `source` values fail instead of falling back to another format.
 
    An entry can also contain these optional fields:
 
@@ -269,7 +288,7 @@ Run these commands from the repository root.
    yarn test:accounts:list --accounts "$ACCOUNT_IDS"
    ```
 
-   `list` shows configured defaults, source upload dates, fetched metrics, and optional selection notes.
+   `list` shows configured defaults, source timestamps, available fetched metrics, and optional selection notes.
    It does not list character candidates or select the best character.
    Fetch writes immutable snapshots under `.cache/test-accounts/<id>/snapshots/`.
    The account's `latest.json` points to the selected snapshot.
@@ -297,6 +316,9 @@ Run these commands from the repository root.
 
    Inspect `raw-profile.json` and `save.json` in that snapshot when metrics omit a required condition.
    Toolbox summary metrics help select candidates; original game outputs establish expected values.
+   IE saves have no Toolbox `parsedData` summary; unavailable metrics do not imply zero progress.
+   For IE, `sourceUpdatedAt` comes from HTTP `Last-Modified` when available.
+   This timestamp identifies publication time, not gameplay activity; `fetchedAt` records the separate download time.
 
 3. Select both character roles using [manual candidate comparison](#manual-candidate-comparison).
    Set `preparationPlayerIndex` to a character with the highest measured native Tome total.
@@ -422,28 +444,32 @@ Testing starts a fresh Jest process per account and uses stored datasets only.
 Testing does not fetch profiles or start game servers.
 Test runs use the same Jest suite selection for each requested account.
 
-Account tests default to one Jest worker and a `512MB` `workerIdleMemoryLimit`.
+Account tests default to one Jest worker and a `1024MB` `workerIdleMemoryLimit`.
 The idle threshold permits recycling between scheduled entries; it is not a hard memory cap.
 Pass Jest options after `--` to override those defaults.
 `--runInBand` disables worker recycling.
-Unlike normal `yarn test`, the runner does not add Node's `--max-old-space-size=512` heap limit.
+Unlike normal `yarn test`, the runner does not add Node's `--max-old-space-size=2048` heap limit.
 Neither setting limits total process memory.
 Both commands use the [same grouped execution](../README.md#running-tests).
 Keep cohort work serial unless resource capacity has been established for an explicitly requested run.
 
 #### Versions and refresh rules
 
-`ADAPTER_VERSION` in `public-profile-import.cjs` identifies Toolbox-to-save conversion semantics.
-Snapshot extraction and dataset loading both reject a different current adapter version.
-Bump it when conversion rules change, not when fetching profiles or choosing characters.
+`ADAPTER_VERSION` in `public-profile-import.cjs` identifies the existing Toolbox-to-save conversion semantics.
+IE import has a separate adapter version.
+`getAdapterVersion(source)` selects the current version; an omitted source means Toolbox.
+Snapshot extraction and dataset loading reject a version mismatch for the recorded source.
+Bump only the affected source's version when its import semantics change.
+Adding or changing IE import does not invalidate unchanged Toolbox datasets.
+Fetching profiles or choosing characters does not require an adapter bump.
 Routine test, documentation, extraction-config, and SDK initialization changes do not require an adapter bump.
-This identifier is independent of the game version and dataset schema version.
+Adapter versions are independent of the game version and dataset schema version.
 
 | Change | Required action |
 | --- | --- |
 | Public upload changed, or configured `profileName` changed | Fetch the intended profile, review character selection, then extract again. |
 | Default or preparation character changed | Extract again from the retained snapshot; a new fetch is not required. |
-| Import conversion semantics changed | Bump `ADAPTER_VERSION`, reimport retained raw bytes or fetch again, then extract again. |
+| Import semantics changed for one source | Bump that source's adapter version, reimport its retained raw bytes or fetch again, then extract again. |
 | Extraction configs or local game assets changed | Extract again; review selection when the change affects compared outputs. |
 | Offline SDK initialization or cache refresh changed | Restart inspection runtimes and extract fresh datasets, even if current hash checks pass. |
 | Only domain code or test assertions changed | Use the existing matching dataset unless new captures or changed context are required. |
@@ -456,6 +482,7 @@ For changes to original-game cache preparation, follow
 
 Snapshot manifests use schema version `1`.
 Generated dataset descriptors use schema version `2`.
+New snapshots and datasets record the resolved `source`; legacy manifests without it mean Toolbox.
 The runner records character indices and names, preparation identity, asset version, and save/config/asset/result hashes.
 Dataset loading validates both character identities against the retained save and checks the fingerprints.
 An unsupported dataset schema requires fresh extraction, not a new profile fetch.
@@ -478,8 +505,10 @@ To retain the exact downloaded input, use the exported
 
 ```javascript
 const { writeProfileSnapshot } = require('./tests/helpers/test-accounts.cjs');
-const snapshot = writeProfileSnapshot(options, account, rawBytes, {
+const sourceAccount = { ...account, source: sourceManifest.source ?? 'toolbox' };
+const snapshot = writeProfileSnapshot(options, sourceAccount, rawBytes, {
   fetchedAt: sourceManifest.fetchedAt,
+  sourceUpdatedAt: sourceManifest.sourceUpdatedAt,
   importedAt: new Date().toISOString(),
   sourceSnapshot: sourcePointer.snapshot
 });
@@ -490,7 +519,10 @@ Read `sourcePointer` from the account's `latest.json` and `sourceManifest` from 
 Use the snapshot's unchanged `raw-profile.json` bytes after checking its recorded raw hash.
 `sourceSnapshot` is the account-relative snapshot path, not an absolute path.
 Read the old manifest directly when its adapter version no longer passes extraction validation.
-The writer runs the current importer and preserves the original source upload date.
+The writer runs the current importer for the retained source.
+Pass `sourceUpdatedAt` from the old manifest to preserve IE publication time during a body-only reimport.
+The retained body has no HTTP headers; do not replace this timestamp with the reimport time.
+Toolbox imports continue to use the profile's `lastUpdated`.
 It completes the snapshot before atomically advancing `latest.json`.
 Then extract and test with the normal commands.
 Reimport alone does not replace the selected dataset.
@@ -503,12 +535,19 @@ Treat retained inputs as immutable; original startup actions may still advance l
 Compare rates and balances only when their inputs describe the same state.
 A saved balance and a later runtime affordability result do not establish a matching comparison.
 
-`public-profile-import.cjs` owns all Toolbox-to-save conversion.
-Downstream tools consume its ordinary IE save without Toolbox-specific rules.
-The importer restores bundle ownership from positive purchase flags before startup, so original loading does not replay bundle rewards.
-The existing approved omission removes optional private receipt field `GemsPacksPurchased` only when its native value is numeric `0`.
+`public-profile-import.cjs` owns the source-specific import boundary.
+Downstream tools consume its ordinary IE save without source-specific conversion rules.
+
+The Toolbox branch restores bundle ownership from positive purchase flags before startup, so original loading does not replay bundle rewards.
+Its existing approved omission removes optional private receipt field `GemsPacksPurchased` only when its native value is numeric `0`.
 This lets the game apply its missing-field default.
 It preserves valid purchase-history arrays and leaves downloaded raw bytes unchanged.
 It does not invent receipts, resources, purchases, or bundle ownership.
 Do not generalize that omission to other values or missing public fields without establishing their real representation and game behavior.
+
+The IE branch validates required root metadata and preserves ordinary save values and genuine omissions.
+It does not apply Toolbox field encoding, bundle reconstruction, or the numeric-zero receipt omission.
+The IE [publisher](../../data/storage/profiles.tsx) removes `GemsOwned`, `ServerGemsReceived`, `BundlesReceived`, `GemsPacksPurchased`, `ServerGems`, and `CYGems`.
+It also removes purchase fields named by `BundlesReceived`.
+Preserve these redactions; do not fill missing fields from another save or fabricate defaults.
 

@@ -7,14 +7,14 @@ services:
       context: ../..
       dockerfile: sub-projects/ui-verification/app.Dockerfile
     init: true
-    mem_limit: 4g
+    mem_limit: 6g
     memswap_limit: 12g
     cpus: 2
     environment:
       NODE_ENV: development
       NEXT_PUBLIC_APP_STAGE: local
       NEXT_PUBLIC_UI_FIXTURE_MODE: '1'
-      NODE_OPTIONS: --max-old-space-size=3072
+      NODE_OPTIONS: --max-old-space-size=4096
       LOCAL_SAVE_FILE: ${UI_LOCAL_SAVE_FILE:-tests/fixtures/saves/latest.json}
     volumes:
       - type: bind
