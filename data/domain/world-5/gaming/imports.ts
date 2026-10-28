@@ -225,7 +225,7 @@ export class ShovelImport extends Import {
         const arcade = data.get("arcade") as Arcade;
         const votes = data.get("votes") as Votes;
         const equinox = data.get("equinox") as Equinox;
-        const bribeBonus = bribes.find(bribe => bribe.bribeIndex === 37)!.value;
+        const bribeBonus = bribes.find(bribe => bribe.bribeIndex === 37)!.getBonus();
         const arcadeBonus = arcade.bonuses.find(bonus => bonus.index === 31)!.getBonus();
 
         this.bonus = Math.floor(10 * (1 + Math.pow(60 * this.level / (250 + this.level), 1.7))) / 10;

@@ -176,7 +176,7 @@ export class InfiniteStarsBonus extends RiftBonus {
  shinyBonus: number = 0;
 
  override getBonus = () => {
-  return 5 + this.shinyBonus;
+  return this.active ? 5 + this.shinyBonus : 0;
  }
 }
 

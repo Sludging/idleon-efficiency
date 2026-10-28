@@ -266,8 +266,12 @@ export class TomeLine {
     }
 
     getLineUnlockLevel = (): number => {
-        const displayOrder = this.getDisplayOrder()
-        return (500 + (50 * displayOrder + (10 * Math.max(0, displayOrder - 30) + 10 * Math.max(0, displayOrder - 50))));
+        const displayOrder = this.getDisplayOrder();
+        return 350 + 40 * displayOrder
+            + 5 * Math.max(0, displayOrder - 35)
+            + 10 * Math.max(0, displayOrder - 60)
+            + 10 * Math.max(0, displayOrder - 80)
+            + 15 * Math.max(0, displayOrder - 100);
     }
 
     updateIsLineUnlocked = (accountTotalLevel: number) => {
