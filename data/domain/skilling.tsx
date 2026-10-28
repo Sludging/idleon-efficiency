@@ -127,7 +127,7 @@ export class Skilling extends Domain {
             const efficiencyStampMultiplier = Math.max(player.getTalentBonus(625), 1);
             const postOfficeBox = player.postOffice.find(box => box.index === 20)!;
             const allBaseSkillEfficiency = breeding.shinyBonuses.find(bonus => bonus.data.index === 22)!.getBonus()
-                + getStampBonusForKey(stamps, "BaseAllEff") * efficiencyStampMultiplier
+                + getStampBonusForKey(stamps, "BaseAllEff", player) * efficiencyStampMultiplier
                 + divinity.gods.find(god => god.index === 2)!.getBlessingBonus(player)
                 + (postOfficeBox.bonuses[1].getBonus(postOfficeBox.level, 1)
                     + (player.getChipBonus("eff") + (player.getTalentBonus(636)
@@ -161,10 +161,10 @@ export class Skilling extends Domain {
             const starSignChopping = getStarSignEfficiency(player, "Chop Efficiency");
             const starSignFishing = getStarSignEfficiency(player, "Fishing Efficiency");
             const starSignCatching = getStarSignEfficiency(player, "Catch Efficiency");
-            const baseMiningStamp = getStampBonusForKey(stamps, "BaseMinEff") * efficiencyStampMultiplier;
-            const baseChoppingStamp = getStampBonusForKey(stamps, "BaseChopEff") * efficiencyStampMultiplier;
-            const baseFishingStamp = getStampBonusForKey(stamps, "BaseFishEff") * efficiencyStampMultiplier;
-            const baseCatchingStamp = getStampBonusForKey(stamps, "BaseCatchEff") * efficiencyStampMultiplier;
+            const baseMiningStamp = getStampBonusForKey(stamps, "BaseMinEff", player) * efficiencyStampMultiplier;
+            const baseChoppingStamp = getStampBonusForKey(stamps, "BaseChopEff", player) * efficiencyStampMultiplier;
+            const baseFishingStamp = getStampBonusForKey(stamps, "BaseFishEff", player) * efficiencyStampMultiplier;
+            const baseCatchingStamp = getStampBonusForKey(stamps, "BaseCatchEff", player) * efficiencyStampMultiplier;
             const miningVial = alchemy.getVialBonusForKey("MinEff");
             const choppingVial = alchemy.getVialBonusForKey("ChopEff");
             const fishingVial = alchemy.getVialBonusForKey("FishEff");
@@ -233,7 +233,7 @@ export class Skilling extends Domain {
                     (1 + (miningTalent142 +
                         (fishingRiftBonus + (votes.getCurrentBonus(8) + platinumSet)) +
                         15 * fishingBribe +
-                        getStampBonusForKey(stamps, "FishEffPerLv") * efficiencyStampMultiplier * fishingLevel) / 100)) *
+                        getStampBonusForKey(stamps, "FishEffPerLv", player) * efficiencyStampMultiplier * fishingLevel) / 100)) *
                 (1 + (fishingSkillEffPct + rightHandFishing) / 100) *
                 (1 + fishingPower / 100) *
                 allEfficiencies *
@@ -282,7 +282,7 @@ export class Skilling extends Domain {
             // Game adds the outer 10 after every multiplicative efficiency bonus.
             const worshipEfficiency = (worshipPowerTerm +
                 (Math.pow(wisdom + 1, 0.6) * (1 + player.getTalentBonus(532) / 100) +
-                    (getStampBonusForKey(stamps, "WorshipEff") * efficiencyStampMultiplier + allBaseSkillEfficiency))) *
+                    (getStampBonusForKey(stamps, "WorshipEff", player) * efficiencyStampMultiplier + allBaseSkillEfficiency))) *
                 (1 + player.skills.get(SkillsIndex.Worship)!.level / 200) *
                 (1 + (player.getTalentBonus(445) * worshipMastery
                     + player.getPostOfficeBonus("18a")

@@ -203,22 +203,30 @@ export class Stamp {
         this.atomDiscount = currentAtomDiscount;
     }
 
-    getBonusText = (skillLevel: number = 0): string => {
+    getBonusText = (skillLevel?: number): string => {
         const bonus = this.getBonus(skillLevel, true);
         // Only show decimals if they exist
         const formattedBonus = Number.isInteger(bonus) ? bonus.toString() : bonus.toFixed(2);
         return this.bonus.replace(/{/, formattedBonus);
     }
 
-    getBonus = (skillLevel: number = 0, round = false): number => {
-        const normalLevel = this.level * 10 / this.data.upgradeInterval;
-        const lvlDiff = 3 + (normalLevel - 3) * Math.pow(skillLevel / (normalLevel - 3), 0.75)
-        const reducedLevel = Math.floor(lvlDiff * this.data.upgradeInterval / 10);
-        // only second tab gets reduced level math and only if the reduced level is lower than stamp level.
-        if (this.removeLimitFromUnderLevel == false && skillLevel > 0 && reducedLevel < this.level && this.data.i10 > 0) {
-            return lavaFunc(this.data.function, reducedLevel, this.data.x1, this.data.x2, round) * this.exaltedMultiplier * this.labMultiplier * this.baseStatVaultMultiplier * this.pristineCharmMultiplier;
+    getBonus = (skillLevel?: number, round = false): number => {
+        let effectiveLevel = this.level;
+        if (skillLevel !== undefined && this.data.i10 > 0 && !this.removeLimitFromUnderLevel && this.data.upgradeInterval > 1) {
+            const interval = this.data.upgradeInterval;
+            const normalLevel = this.level * (200 / (20 * interval));
+            // Low normalized levels do not use the reverse scaling step.
+            effectiveLevel = normalLevel > 3
+                ? (3 + (normalLevel - 3) * Math.pow(skillLevel / (normalLevel - 3), 0.75)) * ((20 * interval) / 200)
+                : normalLevel;
+            effectiveLevel = Math.min(effectiveLevel, this.level);
         }
-        return lavaFunc(this.data.function, this.level, this.data.x1, this.data.x2, round) * this.exaltedMultiplier * this.labMultiplier * this.baseStatVaultMultiplier * this.pristineCharmMultiplier;
+        return lavaFunc(this.data.function, Math.floor(effectiveLevel), this.data.x1, this.data.x2, round) * this.exaltedMultiplier * this.labMultiplier * this.baseStatVaultMultiplier * this.pristineCharmMultiplier;
+    }
+
+    getBonusForPlayer = (player: Player, round = false): number => {
+        const skillLevel = this.data.i10 > 0 ? player.skills.get(this.data.i10)?.level ?? 0 : undefined;
+        return this.getBonus(skillLevel, round);
     }
 
     isMaxLevel = (): boolean => {
@@ -290,8 +298,9 @@ export class Stamps extends Domain {
     }
 }
 
-export const getStampBonusForKey = (stamps: Stamp[][], key: string) => {
-    return stamps.flatMap(tab => tab).filter(stamp => stamp.data.effect == key).reduce((sum, stamp) => sum += stamp.getBonus(), 0);
+export const getStampBonusForKey = (stamps: Stamp[][], key: string, player?: Player) => {
+    return stamps.flatMap(tab => tab).filter(stamp => stamp.data.effect == key)
+        .reduce((sum, stamp) => sum += player ? stamp.getBonusForPlayer(player) : stamp.getBonus(), 0);
 }
 
 const isStampItem = (x: BaseItemModel): x is StampItemModel => "stampData" in x

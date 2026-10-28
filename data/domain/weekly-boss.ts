@@ -63,6 +63,8 @@ export interface WeeklyBossPreparation {
 interface WeeklyCapacityInputs {
     readonly bagCapacity: number | undefined;
     readonly extraBagsBonus: number;
+    readonly materialStampBonus: number;
+    readonly allCarryStampBonus: number;
     readonly starSignBonus: number;
     readonly allCapacityMultiplier: number;
 }
@@ -156,8 +158,6 @@ export class WeeklyBoss {
     private taskQuantities: Map<number, number>[] = [];
     private rawKillValues: Map<number, number>[] = [];
     private capacityInputs: WeeklyCapacityInputs[] = [];
-    private materialStampBonus: number = 0;
-    private allCarryStampBonus: number = 0;
     private capacityGemPurchases: number = 0;
 
     private repositories!: StaticRepositories;
@@ -198,8 +198,6 @@ export class WeeklyBoss {
         this.taskQuantities = [];
         this.rawKillValues = [];
         this.capacityInputs = [];
-        this.materialStampBonus = 0;
-        this.allCarryStampBonus = 0;
         this.capacityGemPurchases = 0;
         this.ownedAppearanceIds = new Set();
         this.appearanceOwnershipKnown = Object.keys(weeklyBossMap).length > 0;
@@ -307,9 +305,9 @@ export class WeeklyBoss {
         }
         return Math.floor(Math.min(2050000000,
             target.bagCapacity *
-            (1 + this.materialStampBonus / 100) *
+            (1 + context.materialStampBonus / 100) *
             (1 + 25 * this.capacityGemPurchases / 100) *
-            (1 + (this.allCarryStampBonus + context.starSignBonus) / 100) *
+            (1 + (context.allCarryStampBonus + context.starSignBonus) / 100) *
             (1 + target.extraBagsBonus / 100) *
             context.allCapacityMultiplier));
     }
@@ -318,7 +316,8 @@ export class WeeklyBoss {
         let recommendation: WeeklyBossCapacityRecommendation | undefined;
         for (const playerIndex of this.playerIndices) {
             const context = this.capacityInputs[playerIndex];
-            const contextFactor = (1 + (this.allCarryStampBonus + context.starSignBonus) / 100) *
+            const contextFactor = (1 + context.materialStampBonus / 100) *
+                (1 + (context.allCarryStampBonus + context.starSignBonus) / 100) *
                 context.allCapacityMultiplier;
             if (!recommendation || contextFactor > recommendation.contextFactor ||
                 (contextFactor === recommendation.contextFactor && playerIndex < recommendation.playerIndex)) {
@@ -454,8 +453,8 @@ export class WeeklyBoss {
         this.playerIdentities = [];
         this.rawKillValues = [];
         this.capacityInputs = [];
-        this.materialStampBonus = stamps.find(stamp => stamp.raw_name === "StampB8")!.getBonus();
-        this.allCarryStampBonus = stamps.find(stamp => stamp.raw_name === CapacityConst.AllCarryStamp)!.getBonus();
+        const materialStamp = stamps.find(stamp => stamp.raw_name === "StampB8")!;
+        const allCarryStamp = stamps.find(stamp => stamp.raw_name === CapacityConst.AllCarryStamp)!;
         this.capacityGemPurchases = gems.purchases[58].pucrhased;
         const guildCarryBonus = guild.guildBonuses[2].getBonus();
         const bribeCarryBonus = bribes.find(bribe => bribe.name === "Bottomless Bags")!.status === BribeStatus.Purchased ? 5 : 0;
@@ -496,6 +495,8 @@ export class WeeklyBoss {
             this.capacityInputs[player.playerID] = {
                 bagCapacity: bag?.capacity,
                 extraBagsBonus: player.getTalentBonus(CapacityConst.ExtraBagsSkillIndex),
+                materialStampBonus: materialStamp.getBonusForPlayer(player),
+                allCarryStampBonus: allCarryStamp.getBonusForPlayer(player),
                 starSignBonus: player.starSigns.reduce((sum, sign) => sum + sign.getBonus("Carry Cap"), 0),
                 allCapacityMultiplier: (1 + (guildCarryBonus + telekineticStorageBonus) / 100) *
                     (1 + companionCarryBonus / 100) *

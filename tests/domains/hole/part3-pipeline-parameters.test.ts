@@ -51,7 +51,7 @@ describe('Hole part-three direct skill-efficiency parameters', () => {
         { key: 'all_base_efficiency_stamp', stampKey: 'BaseAllEff', description: 'all-base skill efficiency' },
     ].forEach(({ key, stampKey, description }) => {
         it(`matches the effective ${description} stamp bonus`, () => {
-            expect(getStampBonusForKey(stamps, stampKey) * efficiencyStampMultiplier)
+            expect(getStampBonusForKey(stamps, stampKey, player) * efficiencyStampMultiplier)
                 .toMatchLiveGame(getExtractedValue(results, key), 0);
         });
     });

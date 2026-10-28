@@ -295,7 +295,7 @@ export const updateWorship = (data: Map<string, any>) => {
             maxChargeCardBonus += player.cardInfo?.equippedCards.find(x => x.id == "SoulCard6")?.getBonus() ?? cards.find(card => card.id == "SoulCard6" && card.passive == true)?.getBonus() ?? 0;
             const talentChargeBonus = player.activeBuffs.find(x => x.skillIndex == TalentConst.ChargeSiphonIndex)?.getBonus(false, true) ?? 0;
             const postOfficeBonus = player.postOffice[18].bonuses[1].getBonus(player.postOffice[18].level, 1);
-            const maxCharge = playerSkull ? Worship.getMaxCharge(playerSkull.maxCharge, maxChargeCardBonus, talentChargeBonus, praydayStamp.getBonus(worshipLevel), gospelLeaderBonus, worshipLevel, popeBonus, postOfficeBonus) : 0;
+            const maxCharge = playerSkull ? Worship.getMaxCharge(playerSkull.maxCharge, maxChargeCardBonus, talentChargeBonus, praydayStamp.getBonusForPlayer(player), gospelLeaderBonus, worshipLevel, popeBonus, postOfficeBonus) : 0;
 
             // charge rate
             const flowinStamp = stamps[StampTab.Skill][StampConsts.FlowinIndex];
@@ -303,7 +303,7 @@ export const updateWorship = (data: Map<string, any>) => {
             const talentBonus = chargeSpeedTalent?.getBonus() ?? 0;
             let chargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "SoulCard5")?.getBonus() ?? cards.find(card => card.id == "SoulCard5" && card.passive == true)?.getBonus() ?? 0;
             chargeCardBonus += player.cardInfo?.equippedCards.find(x => x.id == "SoulCard7")?.getBonus() ?? cards.find(card => card.id == "SoulCard7" && card.passive == true)?.getBonus() ?? 0;
-            const chargeRate = playerSkull ? Worship.getChargeRate(playerSkull.Speed, worshipLevel, popeBonus, chargeCardBonus, flowinStamp.getBonus(worshipLevel), talentBonus) : 0;
+            const chargeRate = playerSkull ? Worship.getChargeRate(playerSkull.Speed, worshipLevel, popeBonus, chargeCardBonus, flowinStamp.getBonusForPlayer(player), talentBonus) : 0;
 
             worship.playerData.push({
                 maxCharge: maxCharge,
