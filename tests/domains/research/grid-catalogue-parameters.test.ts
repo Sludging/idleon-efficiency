@@ -11,6 +11,7 @@ import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ExtractionResults, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
 import { OriginalBoatQualification, OriginalGridUpgrade, extracted, numeric, resultName } from './grid-catalogue-test-helpers';
+import { nativeResearchNumber, PreviewExpectations, researchExpected, researchPreviewExpectations } from './preview-expectations';
 
 // All direct calculated inputs stay here, including same-domain inputs used by secondary effects and presentation.
 // Static caps, Shape percentages, saved levels/options, artifact status, merit level, and placements are supporting state.
@@ -69,17 +70,24 @@ describe('Research Grid catalogue direct parameters', () => {
     let results: ExtractionResults;
     let data: Map<string, any>;
     let research: ResearchGrid;
+    let preview: PreviewExpectations | undefined;
 
     beforeAll(() => {
         results = loadExtractionResults(resultName);
         validateExtractionHealth(results);
         data = loadGameDataFromSave('latest');
         research = data.get('research') as ResearchGrid;
+        preview = researchPreviewExpectations();
     });
 
     parameters.forEach(spec => {
-        it(`matches ${spec.description}`, () => {
-            expect(spec.domainExtractor(data)).toMatchLiveGame(numeric(results, spec.extractionKey), 0);
+        const key = spec.extractionKey;
+        const previewKey = key === 'points_earned' || key === 'points_available' || key === 'point_milestone' || key === 'shape_count' ? key : undefined;
+        it(`${previewKey ? 'reports website preview or matches native' : 'matches'} ${spec.description}`, () => {
+            const expected = previewKey
+                ? researchExpected(preview, previewKey, () => nativeResearchNumber(results, previewKey))
+                : numeric(results, key);
+            expect(spec.domainExtractor(data)).toMatchLiveGame(expected, 0);
         });
     });
 

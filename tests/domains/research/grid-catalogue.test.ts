@@ -5,10 +5,9 @@ import { ExtractionResults, loadExtractionResults, validateExtractionHealth } fr
 import {
     OriginalGridInputs, OriginalGridUpgrade, extracted, numeric, resultName,
 } from './grid-catalogue-test-helpers';
+import { nativeResearchNumber, PreviewExpectations, researchExpected, researchPreviewExpectations } from './preview-expectations';
 const realDefinitions = initResearchGridBonusRepo().filter(square => square.data.name !== 'Name');
 
-// The retained save observes zero available Points, capped/uncapped ranks, all specialized effects, and five owned Shapes.
-// It does not observe row-edge purchases, missing placements, nonzero rotations, qualifying boats, or non-Doot text.
 // Existing Grid suites retain generic numerical API regressions. These comparisons cover the complete new public catalogue.
 describe('Research Grid catalogue, Points, linked grants, and Shapes', () => {
     let results: ExtractionResults;
@@ -16,6 +15,7 @@ describe('Research Grid catalogue, Points, linked grants, and Shapes', () => {
     let research: ResearchGrid;
     let original: OriginalGridUpgrade[];
     let inputs: OriginalGridInputs;
+    let preview: PreviewExpectations | undefined;
 
     beforeAll(() => {
         results = loadExtractionResults(resultName);
@@ -24,6 +24,7 @@ describe('Research Grid catalogue, Points, linked grants, and Shapes', () => {
         research = data.get('research') as ResearchGrid;
         original = extracted<OriginalGridUpgrade[]>(results, 'catalogue');
         inputs = extracted<OriginalGridInputs>(results, 'pairing_before');
+        preview = researchPreviewExpectations();
     });
 
     realDefinitions.forEach(definition => {
@@ -48,11 +49,11 @@ describe('Research Grid catalogue, Points, linked grants, and Shapes', () => {
         });
     });
 
-    it('matches earned, running-rounded spent, and available Points without clamping', () => {
-        expect(research.points.earned).toMatchLiveGameWithDetails(numeric(results, 'points_earned'), { tolerance: 0, debugInfo: research.points.contributors });
+    it('reports website preview Points before entry and matches native Points after entry', () => {
+        expect(research.points.earned).toMatchLiveGameWithDetails(researchExpected(preview, 'points_earned', () => nativeResearchNumber(results, 'points_earned')), { tolerance: 0, debugInfo: research.points.contributors });
         expect(research.points.spent).toMatchLiveGameWithDetails(numeric(results, 'points_spent'), { tolerance: 0 });
-        expect(research.points.available).toMatchLiveGameWithDetails(numeric(results, 'points_available'), { tolerance: 0 });
-        expect(research.points.milestone.cumulativeMilestonePoints).toMatchLiveGameWithDetails(numeric(results, 'point_milestone'), { tolerance: 0 });
+        expect(research.points.available).toMatchLiveGameWithDetails(researchExpected(preview, 'points_available', () => nativeResearchNumber(results, 'points_available')), { tolerance: 0 });
+        expect(research.points.milestone.cumulativeMilestonePoints).toMatchLiveGameWithDetails(researchExpected(preview, 'point_milestone', () => nativeResearchNumber(results, 'point_milestone')), { tolerance: 0 });
     });
 
 

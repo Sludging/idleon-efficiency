@@ -2,22 +2,21 @@ import { ResearchGrid } from '../../../data/domain/world-7/research';
 import { initResearchObservationRepo } from '../../../data/domain/data/ResearchObservationRepo';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ExtractionResults, getExtractedValue, loadExtractionResults } from '../../utils/live-game-data-loader';
+import { highestSavedResearchLevel, PreviewExpectations, researchExpected, researchPreviewExpectations } from './preview-expectations';
 
 const observations = initResearchObservationRepo();
 
-// Startup /cloud-save matched all 799 retained keys after JSON decoding.
-// Runtime EXP and partial Insight advanced. Saved progress must use the original input.
-// Reached and upcoming milestones, reserved lens slots, no support, and multiple support are observed.
-// Owned unplaced lenses, exhausted attempts, impossible rolls, row-edge Kaleidoscopes, ownership caps, and nonzero pending time are not observed.
 describe('Research account progress and production', () => {
     let results: ExtractionResults;
     let gameData: Map<string, any>;
     let research: ResearchGrid;
+    let preview: PreviewExpectations | undefined;
 
     beforeAll(() => {
         results = loadExtractionResults('research-account-progress-data.json');
         gameData = loadGameDataFromSave('latest');
         research = gameData.get('research') as ResearchGrid;
+        preview = researchPreviewExpectations();
     });
 
     // Keep missing pairing local to the affected result. Other comparisons remain active.
@@ -30,6 +29,14 @@ describe('Research account progress and production', () => {
         extracted(label);
         return getExtractedValue(results, label);
     };
+    it('uses zero Research progress before entry and the highest saved level after entry', () => {
+        const highestLevel = highestSavedResearchLevel();
+        expect(research.progress.highestLevel).toBe(Math.max(0, highestLevel));
+        if (highestLevel <= 0) {
+            expect(research.progress.currentXP).toBe(0);
+            expect(research.progress.xpReq).toBe(0);
+        }
+    });
 
 
 
@@ -51,12 +58,13 @@ describe('Research account progress and production', () => {
     });
 
 
-    it('matches total lens ownership, fixed-kind counts, and per-Observation capacity', () => {
-        expect(research.lensOwnership.total).toMatchLiveGameWithDetails(value('owned_lenses'), {tolerance: 0});
+    it('reports website preview lens ownership before entry and matches native ownership after entry', () => {
+        const total = researchExpected(preview, 'owned_lenses', () => value('owned_lenses'));
+        expect(research.lensOwnership.total).toMatchLiveGameWithDetails(total, {tolerance: 0});
         expect(research.lensOwnership.opticalMonocles).toMatchLiveGameWithDetails(value('owned_monocles'), {tolerance: 0});
         expect(research.lensOwnership.kaleidoscopes).toMatchLiveGameWithDetails(value('owned_kaleidoscopes'), {tolerance: 0});
-        expect(research.lensOwnership.magnifyingGlasses).toMatchLiveGameWithDetails(value('owned_lenses') - value('owned_monocles') - value('owned_kaleidoscopes'), {tolerance: 0});
-        expect(research.lensOwnership.capacityPerObservation).toMatchLiveGameWithDetails(value('lens_capacity'), {tolerance: 0});
+        expect(research.lensOwnership.magnifyingGlasses).toMatchLiveGameWithDetails(researchExpected(preview, 'magnifying_glasses', () => value('owned_lenses') - value('owned_monocles') - value('owned_kaleidoscopes')), {tolerance: 0});
+        expect(research.lensOwnership.capacityPerObservation).toMatchLiveGameWithDetails(researchExpected(preview, 'lens_capacity', () => value('lens_capacity')), {tolerance: 0});
     });
 
 
