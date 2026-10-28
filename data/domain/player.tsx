@@ -1176,7 +1176,9 @@ const getPlayerTalentLevelInputs = (
     const gaming = data.get("gaming") as Gaming;
     const sneaking = data.get("sneaking") as Sneaking;
     return {
-        eliteTalentLevels: player.getTalentBonus(149) + player.getTalentBonus(374) + player.getTalentBonus(539),
+        eliteTalentLevels: player.talents
+            .filter(talent => [149, 374, 539].includes(talent.skillIndex) && talent.pointsSpent > 0)
+            .reduce((sum, talent) => sum + talent.getBonus(), 0),
         achievementTalentLevels: achievements[291].completed ? 1 : 0,
         familyTalentLevels,
         companionTalentLevels: getCompanionActiveBonus(companions, 1),

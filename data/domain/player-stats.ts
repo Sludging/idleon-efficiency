@@ -328,6 +328,7 @@ export class PlayerStats {
         const archerWeapon = alchemy.getBubbleBonusForKey('A1', player);
         const mageWeapon = alchemy.getBubbleBonusForKey('M1', player);
 
+        // Family entries exist only for owned classes and their ancestors.
         // Chips and weapon bubbles scale only gear. Flat bonuses remain outside this multiplier.
         this.preparedWeaponPower =
             5 + player.getPostOfficeBonus('12a') + dungeons.passives.get(PassiveType.Flurbo)![0].getBonus() + foodWeapon
@@ -335,7 +336,7 @@ export class PlayerStats {
             + (player.gear.getProperty('Weapon_Power')
                 * (1 + (player.getChipBonus('weppow') + (warriorWeapon + (archerWeapon + mageWeapon))) / 100)
                 + Talent.getBeginnerWeaponPowerBonus(player)
-                + (alchemy.getVialBonusForKey('WeaponPOW') + (family.getClassBonus(ClassIndex.Barbarian)!.getBonus(player) + (signWeapon
+                + (alchemy.getVialBonusForKey('WeaponPOW') + ((family.getClassBonus(ClassIndex.Barbarian)?.getBonus(player) ?? 0) + (signWeapon
                     + (arcade.bonuses[17].getBonus() + (skillWeapon.progression + (petWeapon + skillWeapon.intellect)))))));
 
         const warriorPower = alchemy.getBubbleBonusForKey('W2', player);
@@ -593,7 +594,7 @@ export class PlayerStats {
         multiplier *= 1 + royalArmory.statues.find(statue => statue.index === 1)!.getBonus() / 100;
         multiplier *= menagerie.getBonusMultiplier(24);
         multiplier *= 1 + Card.GetTotalBonusForId(cards, 101) / 100;
-        multiplier *= 1 + family.getClassBonus(ClassIndex.Royal_Guardian)!.getBonus(player) / 100;
+        multiplier *= 1 + (family.getClassBonus(ClassIndex.Royal_Guardian)?.getBonus(player) ?? 0) / 100;
         multiplier *= 1 + 0.3 * getCompanionActiveBonus(companions, 168);
         multiplier *= 1 + (Math.min(0.5, companion132) + 0.2 * isCompanionLevelTwo(companions, 132));
         multiplier *= 1 + (sushi.getBonusFromIndex(48) + jellyOperator.getObstructionBonus(14)) / 100;
@@ -636,7 +637,7 @@ export class PlayerStats {
                 15 * getCompanionActiveBonus(companions, 0) * hole.majiks.IdleonUpgrades.find(upgrade => upgrade.index === 21)!.getBonus()
                 + lab.jewels[4].getBonus() + getStampBonusForKey(stamps, 'AllStatPct') + (
                     Card.GetTotalBonusForId(cards, 82) + summoning.summonBonuses.find(bonus => bonus.data.bonusId === 19)!.getBonus() + (
-                        family.getClassBonus(ClassIndex.Bubonic_Conjuror)!.getBonus(player) + (sailing.artifacts[28].getBonus() + (goldenFood.getAllStatPercent(player) + (
+                        (family.getClassBonus(ClassIndex.Bubonic_Conjuror)?.getBonus(player) ?? 0) + (sailing.artifacts[28].getBonus() + (goldenFood.getAllStatPercent(player) + (
                             Number(achievements[309].completed) + (Talent.getDummyTargetAllStatBonus(player, islandExpeditions.dummyTargetBestDPS) + (
                                 Number(achievements[362].completed) + sneaking.getMasteryAllStatBonus() + (farming.landrankDatabase.getUpgradeBonusForPlayer(19, player) + (
                                     votes.getCurrentBonus(2) + equipmentSets.getSetBonus('MARBIGLASS_SET')
@@ -660,7 +661,7 @@ export class PlayerStats {
                     (getStampBonusForKey(stamps, 'BaseSTR') + player.gear.getBonus(EquipmentBonus.StrengthFlat))) +
                 (player.getTalentBonusAtInputs(98, player.finalTalentInputs) + player.getTalentBonusAtInputs(203, player.finalTalentInputs) +
                     ((player.activeBuffs.find(talent => talent.skillIndex === 94)?.getBonus() ?? 0) + (secondTalentBonus(player, 142) + islandExpeditions.getShimmerBonus(0)))) +
-                (family.getClassBonus(ClassIndex.Warrior)!.getBonus(player) +
+                ((family.getClassBonus(ClassIndex.Warrior)?.getBonus(player) ?? 0) +
                     (signBonus(player, 'STR', false) + player.getPostOfficeBonus('23b') +
                         (will + (Card.GetTotalBonusForId(cards, 9) + (baseAllStat + (allStatFlat + (sigils.sigils[0].getBonus() +
                             (alchemy.getBubbleBonusForKey('W4', player) + (breeding.shinyBonuses.find(bonus => bonus.data.index === 6)!.getBonus() +
@@ -676,7 +677,7 @@ export class PlayerStats {
                 (player.getTalentBonusAtInputs(11, player.finalTalentInputs) + Talent.getAccountTalentBonus(players, 52, player.finalTalentInputs) +
                     (getStampBonusForKey(stamps, 'BaseAGI') + player.gear.getBonus(EquipmentBonus.AgilityFlat))) +
                 (player.getTalentBonusAtInputs(278, player.finalTalentInputs) + player.getTalentBonusAtInputs(428, player.finalTalentInputs) + islandExpeditions.getShimmerBonus(1)) +
-                (family.getClassBonus(ClassIndex.Archer)!.getBonus(player) +
+                ((family.getClassBonus(ClassIndex.Archer)?.getBonus(player) ?? 0) +
                     (signBonus(player, 'AGI', false) + player.getPostOfficeBonus('21b') +
                         (will + (Card.GetTotalBonusForId(cards, 7) + (baseAllStat + (allStatFlat + (sigils.sigils[1].getBonus() +
                             (secondTalentBonus(player, 367) + (archerFlatBubble + (breeding.shinyBonuses.find(bonus => bonus.data.index === 7)!.getBonus() +
@@ -691,7 +692,7 @@ export class PlayerStats {
             (player.gear.getProperty('WIS') +
                 (player.getTalentBonusAtInputs(12, player.finalTalentInputs) + Talent.getAccountTalentBonus(players, 53, player.finalTalentInputs) +
                     (getStampBonusForKey(stamps, 'BaseWIS') + player.gear.getBonus(EquipmentBonus.WisdomFlat))) +
-                (player.getTalentBonusAtInputs(459, player.finalTalentInputs) + islandExpeditions.getShimmerBonus(2)) + family.getClassBonus(ClassIndex.Mage)!.getBonus(player) +
+                (player.getTalentBonusAtInputs(459, player.finalTalentInputs) + islandExpeditions.getShimmerBonus(2)) + (family.getClassBonus(ClassIndex.Mage)?.getBonus(player) ?? 0) +
                 (signBonus(player, 'WIS', false) + player.getPostOfficeBonus('22b') +
                     (player.getTalentBonusAtInputs(593, player.finalTalentInputs) + will +
                         (Card.GetTotalBonusForId(cards, 5) + (baseAllStat + (allStatFlat + (sigils.sigils[2].getBonus() +
@@ -709,7 +710,7 @@ export class PlayerStats {
                 (player.getTalentBonusAtInputs(13, player.finalTalentInputs) + Talent.getAccountTalentBonus(players, 54, player.finalTalentInputs) +
                     (getStampBonusForKey(stamps, 'BaseLUK') + player.getPostOfficeBonus('15c') +
                         (player.gear.getBonus(EquipmentBonus.LuckFlat) + islandExpeditions.getShimmerBonus(3)))) +
-                (player.getPostOfficeBonus('LUK') + (family.getClassBonus(ClassIndex.Journeyman)!.getBonus(player) + signBonus(player, 'LUK', false) +
+                (player.getPostOfficeBonus('LUK') + ((family.getClassBonus(ClassIndex.Journeyman)?.getBonus(player) ?? 0) + signBonus(player, 'LUK', false) +
                     (questChungus + (will + (Card.GetTotalBonusForId(cards, 2) + (player.getTalentBonusAtInputs(23, player.finalTalentInputs) +
                         (baseAllStat + (allStatFlat + (sigils.sigils[3].getBonus() + (archerFlatBubble +
                             (breeding.shinyBonuses.find(bonus => bonus.data.index === 9)!.getBonus() + (arcade.bonuses[22].getBonus() + orionAllStat))))))))))))

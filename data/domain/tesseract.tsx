@@ -935,7 +935,7 @@ export class Tesseract extends Domain implements EfficiencyDomain {
    return 0;
   }
 
-  const maxBonus = 100 * (Talent.getAccountTalentBonus(players, 589, player.finalTalentInputs) - 1)
+  const maxBonus = 100 * (Math.max(1, Talent.getAccountTalentBonus(players, 589, player.finalTalentInputs)) - 1)
    + Math.min(10, this.getUpgradeBonus(58));
   const status1KillCount = mapStatusKillCounts.status1KillCount;
   if (status1KillCount < 1) {

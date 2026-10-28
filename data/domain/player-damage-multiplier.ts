@@ -136,7 +136,7 @@ export const getPlayerDamageTotalMultiplier = (data: Map<string, any>, player: P
         + player.getPostOfficeBonus('12c')
         + player.getPostOfficeBonus('21c')
         + player.getPostOfficeBonus('23c')
-        + family.getClassBonus(ClassIndex.Blood_Berserker)!.getBonus(player)
+        + (family.getClassBonus(ClassIndex.Blood_Berserker)?.getBonus(player) ?? 0)
         + (sailing.artifacts.find(artifact => artifact.index === 25)! as CrystalSteakArtifact).getBonusForPlayer(player)
         + collider.atoms[9].getBonus()
         + breeding.shinyBonuses.find(bonus => bonus.data.index === 5)!.getBonus()
@@ -276,7 +276,8 @@ export const getPlayerDamageTotalMultiplier = (data: Map<string, any>, player: P
     if (account.hasDamageMultiplierBundle) {
         component *= 1.5;
     }
-    component *= 1 + family.getClassBonus(ClassIndex.Arcane_Cultist)!.getBonus(player) / 100;
+    // No owned Arcane Cultist or descendant means no Family entry.
+    component *= 1 + (family.getClassBonus(ClassIndex.Arcane_Cultist)?.getBonus(player) ?? 0) / 100;
 
     const hasReliquarium = storage.playerStorage[player.playerID]
         .some(item => item.internalName === 'Quest105');

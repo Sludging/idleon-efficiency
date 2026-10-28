@@ -52,6 +52,17 @@ import type { RoyalArmory } from './world-6/royalArmory/royalArmory';
 import type { Tesseract } from './tesseract';
 import type { Menagerie } from './menagerie';
 
+/** Returns the active class EXP bubble contribution for the selected player. */
+export const getActiveClassExperienceBubble = (alchemy: Alchemy, player: Player, companions: Companion[]): number => {
+    const bubble = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles)
+        .find(candidate => candidate.data.bonusKey === 'expACTIVE')!;
+    const equipped = player.activeBubblesString.some(id => alchemy.getActiveBubble(id) === bubble);
+    if (bubble.level <= 0 || (!equipped && getCompanionActiveBonus(companions, 4) !== 1)) {
+        return 0;
+    }
+    return alchemy.getBonusForPlayer(player, bubble.cauldronIndex, bubble.bubbleIndex);
+};
+
 /** Reproduces native ExpMulti(0) for the selected persistent player. */
 export const getClassExperienceMultiplier = (data: Map<string, any>, player: Player): number => {
     const players = data.get('players') as Player[];
@@ -158,7 +169,7 @@ export const getClassExperienceMultiplier = (data: Map<string, any>, player: Pla
     const mainExperienceSignBonus = player.starSigns.reduce((sum, sign) => sum + sign.getClassExperienceBonus(player.level), 0);
     const monsterExperienceVial = alchemy.getVialBonusForKey('MonsterEXP');
     const cardMonsterExperience = Card.GetTotalBonusForId(getStatCards(player), 44);
-    const activeMonsterExperienceBubble = alchemy.getBubbleBonusForKey('expACTIVE', player);
+    const activeMonsterExperienceBubble = getActiveClassExperienceBubble(alchemy, player, companions);
     const shrineExperience = shrines[5].getBonus(player.currentMapId);
     const saltLickExperience = saltLick.getBonus(3);
     const prayer0 = prayers.find(prayer => prayer.index === 0)!.getBonusForPlayer(player);

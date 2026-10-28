@@ -1,7 +1,7 @@
 import { range } from "../../utility";
 import { Domain, RawData } from "../base/domain";
 import { Item, ItemStat, StoneProps } from "../items";
-import { EquipmentBonus, getEquipmentEffect } from "../equipment-effects";
+import { EquipmentBonus, getEquipmentEffect, getItemEquipmentEffect } from "../equipment-effects";
 import type { EquipmentProperty, PrimaryAttribute } from "../equipment-effects";
 import type { Player } from "../player";
 import { initEquipmentMetadataRepo } from "../data/EquipmentMetadataRepo";
@@ -133,7 +133,8 @@ export class ObolStats {
             // Display rows hold the complete collection total, not a base/stone split.
             this.stats.push(new ItemStat(newStat.displayName, newStat.stoneName, value, newStat.extra));
         }
-        if (newStat.extra !== '') this.effects.set(effect, (this.effects.get(effect) ?? 0) + value);
+        const equipmentEffect = getItemEquipmentEffect(newStat.extra);
+        if (equipmentEffect !== undefined) this.effects.set(equipmentEffect, (this.effects.get(equipmentEffect) ?? 0) + value);
     }
 
     updateProperties(

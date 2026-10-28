@@ -157,7 +157,8 @@ export class SpeedrunKillCredit {
             player.gear.getBonus(EquipmentBonus.KillsInWorld6),
             bigFish.getBonusFromIndex(3) + player.gear.getBonus(EquipmentBonus.KillsInWorld7),
         ];
-        this.familyAndVoteKillPercent = family.getClassBonus(ClassIndex.Death_Bringer)!.getBonus(player)
+        // No Death Bringer character means no class Family entry.
+        this.familyAndVoteKillPercent = (family.getClassBonus(ClassIndex.Death_Bringer)?.getBonus(player) ?? 0)
             + votes.getCurrentBonus(5);
         const divinityInfo = divinity.playerInfo.find(info => info.playerIndex === player.playerID);
         const nobisectActive = divinity.w7ChosenDivinityBonusIndex === 7
