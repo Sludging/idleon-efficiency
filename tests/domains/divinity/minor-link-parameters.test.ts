@@ -13,11 +13,11 @@ const extractionResultsName = 'divinity-minor-link-data.json';
 
 const parameterSpecs = {
   alchemy_bubble_y2active: {
-    description: 'Big P bubble input that increases linked-god passive bonuses',
+    description: 'Effective Big P multiplier that increases linked-god passive bonuses',
     extractionKey: 'alchemy_bubble_y2active',
     domainExtractor: (gameData: Map<string, any>) => {
       const alchemy = gameData.get("alchemy") as Alchemy;
-      return alchemy.getBubbleBonusForKey("Y2ACTIVE");
+      return Math.max(1, alchemy.getBubbleBonusForKey("Y2ACTIVE"));
     }
   },
 

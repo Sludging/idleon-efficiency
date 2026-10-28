@@ -1,21 +1,5 @@
 {
   "extractions": {
-    "speedrun_account_state": {
-      "expression": "(()=>{const weekly=idleon.getAttr('WeeklyBoss').h;const bosses=idleon.getAttr('BossInfo');return {highscore:Number(idleon.getAttr('OptionsListAccount')[158]),equinoxChallengeProgress:Number(weekly.d_32??0),equinoxChallengeComplete:Number(weekly.d_32)===-1,selectedBossDifficulties:Array.from({length:6},(_,index)=>Number(bosses[index][0]))}})()",
-      "result": {
-        "highscore": 71,
-        "equinoxChallengeProgress": 71,
-        "equinoxChallengeComplete": false,
-        "selectedBossDifficulties": [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ]
-      }
-    },
     "speedrun_saved_runners": {
       "expression": "(()=>{const names=idleon.getAttr('GetPlayersUsernames');const db=idleon.getAttr('PlayerDATABASE').h;return names.flatMap((name,playerID)=>{const player=db[name].h;const classId=Number(player.CharacterClass);return classId===4||classId===5?[{playerID,classId,trialLevel:Number(player.SkillLevels[45]??0),radiusLevel:Number(player.SkillLevels[46]??0),bossingLevel:Number(player.SkillLevels[47]??0),familyLevel:Number(player.SkillLevels[58]??0),buffs:player.BuffsActive}]:[]})})()",
       "result": [

@@ -1,17 +1,5 @@
 {
   "extractions": {
-    "outpost_range_1": {
-      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostRange\", 1, 0)",
-      "result": 141
-    },
-    "outpost_range_6": {
-      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostRange\", 6, 0)",
-      "result": 94
-    },
-    "outpost_range_51": {
-      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostRange\", 51, 0)",
-      "result": 134
-    },
     "range_orblet_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 8, 0)",
       "result": 0

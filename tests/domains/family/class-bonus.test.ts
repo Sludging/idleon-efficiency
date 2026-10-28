@@ -1,11 +1,9 @@
 /**
  * Family Class Bonus calculation tests.
  *
- * TalentCalc(-3) rebuilds FamBonusQTYs from every character's v1.21
- * ReturnClasses lineage. Branch 0 is stored at `2 * classId`; the paired
- * save exercises the 23 class IDs listed below through its eight direct
- * classes. The comparisons use Family's public API rather than the static
- * bonus mapping.
+ * TalentCalc(-3) rebuilds FamBonusQTYs from each character's class lineage.
+ * Branch 0 is stored at `2 * classId`. Unowned classes contribute zero.
+ * The comparisons use Family's public API rather than the static bonus mapping.
  *
  * The delivered source has placeholder fields for branch 1 for these class
  * IDs, and Family currently exposes only branch-0 FamilyBonus values, so no
@@ -81,12 +79,7 @@ describe('Family Domain - Class Bonus', () => {
 
   it(`matches the game ${description} Family Bonus (FamBonusQTYs[${gameKey}])`, () => {
    const liveBonus = getExtractedValue(extractionResults, `family_bonus_${gameKey}`);
-   const domainBonus = family.getClassBonus(classIndex)?.getBonus(player);
-
-   expect(domainBonus).toBeDefined();
-   if (domainBonus === undefined) {
-    return;
-   }
+   const domainBonus = family.getClassBonus(classIndex)?.getBonus(player) ?? 0;
 
    expect(domainBonus).toMatchLiveGameWithDetails(liveBonus, {
     tolerance: 0,

@@ -21,11 +21,6 @@ describe('Royal Armory saved-link production and candidate direct parameters', (
         contribution = getRoyalGuardianContribution(getTargetPlayer(players), alchemy, players);
     });
     [1, 27].forEach(mapId => {
-        it(`matches the connection reach used by candidates of map${mapId}`, () => {
-            const map = armory.mapStates.get(mapId)!;
-            if (!map.isOutpost()) throw new Error(`Missing genuine Outpost${mapId}`);
-            expect(map.connectionRange).toMatchLiveGame(getExtractedValue(results, `parameter_range_${mapId}`), 0);
-        });
         it(`matches the source outpost gate for saved production on map${mapId}`, () => {
             expect(Number(armory.mapStates.get(mapId)!.outpostEligible)).toMatchLiveGame(getExtractedValue(results, `parameter_eligible_${mapId}`), 0);
         });

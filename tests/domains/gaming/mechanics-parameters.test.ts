@@ -35,7 +35,7 @@ import { ParameterTestSpec } from '../../utils/parameter-test-config';
 const parameters: ParameterTestSpec[] = [
     { extractionKey: "dependency_Voting_VotingBonusz_22", description: "Votes dig quantity bonus", domainExtractor: data => (data.get('votes') as Votes).getCurrentBonus(22) },
     { extractionKey: "shovel_island_bonus", description: "Fractal Island dig quantity bonus", domainExtractor: data => (data.get('islandExpeditions') as IslandExpeditions).bonusToShovelSpeed },
-    { extractionKey: "shovel_bribe_bonus", description: "Shovel bribe dig quantity bonus", domainExtractor: data => (data.get('bribes') as Bribe[]).find(bribe => bribe.bribeIndex === 37)!.value },
+    { extractionKey: "shovel_bribe_bonus", description: "Shovel bribe dig quantity bonus", domainExtractor: data => (data.get('bribes') as Bribe[]).find(bribe => bribe.bribeIndex === 37)!.getBonus() },
     { extractionKey: "shovel_arcade_bonus", description: "Arcade dig quantity bonus", domainExtractor: data => (data.get('arcade') as Arcade).bonuses.find(bonus => bonus.index === 31)!.getBonus() },
     { extractionKey: "shovel_metal_detector", description: "Metal Detector nugget multiplier", domainExtractor: data => ((data.get('equinox') as Equinox).upgrades[7] as MetalDetector).getTotalBonus() },
     { extractionKey: "dependency_Holes_B_UPG_53", description: "Hole schematic Snail success bonus", domainExtractor: data => (data.get('hole') as Hole).getSchematicBonus(53, 0) },

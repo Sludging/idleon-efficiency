@@ -19,12 +19,12 @@ const extractionResultsName = 'royal-armory-extra-clear-kills-data.json';
 
 const parameterComparisons = [
     {
-        description: 'account-roster maximum talent 231 multiplier input',
+        description: 'effective account-roster maximum talent 231 multiplier input',
         extractionKey: 'royal_armory_extra_clear_kills_talent_231',
         domainValue: (gameData: Map<string, any>): number => {
             const players = gameData.get('players') as Player[];
             // The game uses its roster-wide maximum for getbonus2(..., -1), not an active character.
-            return players.reduce((maximum, player) => Math.max(maximum, player.getTalentBonus(231)), 0);
+            return Math.max(1, players.reduce((maximum, player) => Math.max(maximum, player.getTalentBonus(231)), 0));
         },
     },
     {

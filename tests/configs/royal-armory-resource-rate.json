@@ -144,8 +144,8 @@
     },
     {
       "label": "royal_armory_rate_talent_230_best",
-      "expression": "idleon.callFunction(\"getbonus2\", 1, 230, -1)",
-      "description": "Account-best talent 230 multiplier using the selected character's shared talent-level inputs and each owner's allocation and both Super Talent presets; the rate applies a minimum of one"
+      "expression": "Math.max(1, idleon.callFunction(\"getbonus2\", 1, 230, -1))",
+      "description": "Effective account-best talent 230 multiplier using the selected character's shared talent-level inputs and each owner's allocation and both Super Talent presets"
     },
     {
       "label": "royal_armory_rate_zenith_market_10",

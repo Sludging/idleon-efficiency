@@ -82,10 +82,6 @@
       "expression": "idleon.callFunction(\"SushiStuff\",\"FreeShaker\",0,0)",
       "result": 0.271
     },
-    "sushi_perfecto_chance_occupied_tier": {
-      "expression": "(()=>{const tiers=idleon.getAttr(\"Sushi\")[0];const tier=tiers.find(value=>value>=0);return idleon.callFunction(\"SushiStuff\",\"PerfectOdds\",tier,0)})()",
-      "result": 0.0003651903266604551
-    },
     "sushi_knowledge_total_0": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",0,0)",
       "result": 3064

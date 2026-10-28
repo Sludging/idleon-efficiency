@@ -19,9 +19,9 @@
       "description": "Talent 79 bonus"
     },
     {
-      "label": "talent_146_bonus",
-      "expression": "idleon.callFunction(\"TalentEnh\", 146)",
-      "description": "Talent 146 bonus - Apocalypse Chow"
+      "label": "talent_146_multiplier",
+      "expression": "Math.max(1, idleon.callFunction(\"TalentEnh\", 146))",
+      "description": "Effective Apocalypse Chow multiplier used by cooking"
     },
     {
       "label": "talent_536_bonus",
@@ -69,9 +69,9 @@
       "description": "Talent 91 X bonus"
     },
     {
-      "label": "talent_max_level_149_bonus",
-      "expression": "idleon.callFunction(\"GetTalentNumber\", 1 , 149)",
-      "description": "Talent level bonus from talent 149"
+      "label": "symbols_of_beyond_bonus",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 149) + idleon.callFunction(\"GetTalentNumber\", 1, 374) + idleon.callFunction(\"GetTalentNumber\", 1, 539)",
+      "description": "Talent level bonus from Symbols of Beyond"
     },
     {
       "label": "talent_max_family_bonus_68",

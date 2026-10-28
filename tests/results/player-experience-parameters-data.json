@@ -1,7 +1,7 @@
 {
   "extractions": {
     "class_experience_food": {
-      "expression": "idleon.callFunction('Minehead','TotalFoodBonuses','ClassEXP')",
+      "expression": "idleon.callFunction('TotalFoodBonuses','ClassEXP')",
       "result": 0
     },
     "shim_lantern_bonus": {

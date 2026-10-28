@@ -9,8 +9,8 @@
     },
     {
       "label": "royal_armory_extra_clear_kills_talent_231",
-      "expression": "idleon.callFunction(\"getbonus2\", 1, 231, -1)",
-      "description": "Warbound Politics talent bonus used by the account's strongest character to increase Outpost clearing"
+      "expression": "Math.max(1, idleon.callFunction(\"getbonus2\", 1, 231, -1))",
+      "description": "Effective Warbound Politics multiplier used by the account's strongest character to increase Outpost clearing"
     },
     {
       "label": "royal_armory_extra_clear_kills_orblet_3",

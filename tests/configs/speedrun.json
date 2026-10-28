@@ -1,12 +1,7 @@
 {
   "description": "Read-only Speedrun account and saved-runner evidence for the regular save. No active-character combat calls or character switches.",
-  "target": "Speedrun account, runner talent state, and boss selections CORE",
+  "target": "Speedrun saved runner talent state and shared talent context CORE",
   "extractions": [
-    {
-      "label": "speedrun_account_state",
-      "expression": "(()=>{const weekly=idleon.getAttr('WeeklyBoss').h;const bosses=idleon.getAttr('BossInfo');return {highscore:Number(idleon.getAttr('OptionsListAccount')[158]),equinoxChallengeProgress:Number(weekly.d_32??0),equinoxChallengeComplete:Number(weekly.d_32)===-1,selectedBossDifficulties:Array.from({length:6},(_,index)=>Number(bosses[index][0]))}})()",
-      "description": "Native saved highscore, separate Equinox challenge progress and completion, and all six selected boss difficulties. Selections do not prove unlocked difficulty limits."
-    },
     {
       "label": "speedrun_saved_runners",
       "expression": "(()=>{const names=idleon.getAttr('GetPlayersUsernames');const db=idleon.getAttr('PlayerDATABASE').h;return names.flatMap((name,playerID)=>{const player=db[name].h;const classId=Number(player.CharacterClass);return classId===4||classId===5?[{playerID,classId,trialLevel:Number(player.SkillLevels[45]??0),radiusLevel:Number(player.SkillLevels[46]??0),bossingLevel:Number(player.SkillLevels[47]??0),familyLevel:Number(player.SkillLevels[58]??0),buffs:player.BuffsActive}]:[]})})()",

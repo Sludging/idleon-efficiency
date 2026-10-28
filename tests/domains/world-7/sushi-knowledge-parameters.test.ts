@@ -27,7 +27,8 @@ describe('Sushi Station - Knowledge - Parameters', () => {
     levels = extractionResults.extractions.sushi_knowledge_levels.result;
     experience = extractionResults.extractions.sushi_knowledge_experience.result;
     required = extractionResults.extractions.sushi_knowledge_experience_required.result;
-    slotInputs = extractionResults.extractions.sushi_knowledge_passive_slot_inputs.result;
+    // Extraction serialization represents an empty source-slot array as null.
+    slotInputs = extractionResults.extractions.sushi_knowledge_passive_slot_inputs.result ?? [];
   });
 
 

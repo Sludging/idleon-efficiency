@@ -1,6 +1,6 @@
 {
-  "description": "Land Rank Database bonuses and Rank EXP public results for the retained real save",
-  "target": "Land Rank Database, plot rank and EXP, global Rank EXP multiplier",
+  "description": "Land Rank Database bonuses and global Rank EXP results for the selected real save",
+  "target": "Land Rank Database and global Rank EXP multiplier",
   "extractions": [
     {
       "label": "land_rank_0_bonus",
@@ -13,19 +13,14 @@
       "description": "Seed of Stats uses the linear Land Rank formula and grants All Stat percentage points"
     },
     {
-      "label": "account_dank_ranks_bonus",
-      "expression": "idleon.callFunction(\"getbonus2\", 1, 207, -1)",
-      "description": "Raw account maximum Dank Ranks bonus before the Land Rank minimum multiplier"
+      "label": "account_dank_ranks_multiplier",
+      "expression": "Math.max(1, idleon.callFunction(\"getbonus2\", 1, 207, -1))",
+      "description": "Effective account Dank Ranks multiplier used by Land Rank bonuses"
     },
     {
       "label": "plump_database_bonus",
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 14, 0)",
       "description": "Plump Database percentage boost to Land Rank bonuses"
-    },
-    {
-      "label": "land_rank_plot_state",
-      "expression": "(()=>{const ranks=idleon.getAttr(\"FarmRank\");return Array.from({length:36},(_,index)=>({index,rank:ranks[0][index],exp:ranks[1][index],requirement:idleon.callFunction(\"FarmingStuffs\",\"LankRankEXPreq\",index,0)}));})()",
-      "description": "Every retained plot rank, saved Rank EXP, and next-rank EXP requirement"
     },
     {
       "label": "land_rank_exp_database",

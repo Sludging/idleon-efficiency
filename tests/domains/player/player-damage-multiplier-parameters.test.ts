@@ -119,12 +119,12 @@ describe('Player damage multiplier direct parameters', () => {
  
   it('matches native family damage quantity 20 with Blood Berserker family bonus', () => {
     const family = data.get('family') as Family;
-    expect(family.getClassBonus(ClassIndex.Blood_Berserker)!.getBonus(player)).toMatchLiveGame(nativeFamilyBonus20, 0);
+    expect(family.getClassBonus(ClassIndex.Blood_Berserker)?.getBonus(player) ?? 0).toMatchLiveGame(nativeFamilyBonus20, 0);
   });
 
   it('matches native family damage quantity 80 with Arcane Cultist family bonus', () => {
     const family = data.get('family') as Family;
-    expect(family.getClassBonus(ClassIndex.Arcane_Cultist)!.getBonus(player)).toMatchLiveGame(nativeFamilyBonus80, 0);
+    expect(family.getClassBonus(ClassIndex.Arcane_Cultist)?.getBonus(player) ?? 0).toMatchLiveGame(nativeFamilyBonus80, 0);
   });
   it('matches native WepPowDmgPCT with weapon base power and weapon-map stone value', () => {
     const weaponPower = player.gear.equipment[1]?.getProperty('Weapon_Power');

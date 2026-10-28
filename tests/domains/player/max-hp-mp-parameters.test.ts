@@ -168,7 +168,7 @@ const parameterSpecs: ParameterSpec[] = [
     key: 'family_hp',
     description: 'the prepared Family HP contribution used by maximum HP',
     // Prepared Family keys use twice the class entry; slot 18 is Squire's HP bonus.
-    getValue: (gameData, player) => (gameData.get('family') as Family).getClassBonus(ClassIndex.Squire)!.getBonus(player),
+    getValue: (gameData, player) => (gameData.get('family') as Family).getClassBonus(ClassIndex.Squire)?.getBonus(player) ?? 0,
   },
   {
     key: 'secret_set',
@@ -256,7 +256,7 @@ const parameterSpecs: ParameterSpec[] = [
     key: 'family_gold_food',
     description: 'Family golden-food effectiveness',
     // Slot 66 is Shaman's account-candidate maximum with the recipient's Family Guy context.
-    getValue: (gameData, player) => (gameData.get('family') as Family).getClassBonus(ClassIndex.Shaman)!.getBonus(player),
+    getValue: (gameData, player) => (gameData.get('family') as Family).getClassBonus(ClassIndex.Shaman)?.getBonus(player) ?? 0,
   },
   ...[
     { key: 'shrine_card_level', cardID: 'Boss3B', description: 'the Chaotic Chizoar card level used by shrine effects' },
@@ -417,7 +417,7 @@ const alchemyManaParameterSpecs: ParameterSpec[] = [
   })),
   {
     key: 'familyTalentLevels', description: 'Elemental Sorcerer Family talent-level bonus before rounding',
-    getValue: (gameData, player) => (gameData.get('family') as Family).getClassBonus(ClassIndex.Elemental_Sorcerer)!.getBonus(player),
+    getValue: (gameData, player) => (gameData.get('family') as Family).getClassBonus(ClassIndex.Elemental_Sorcerer)?.getBonus(player) ?? 0,
   },
   {
     key: 'companionTalentLevels', description: 'active Rift Slug talent-level bonus',

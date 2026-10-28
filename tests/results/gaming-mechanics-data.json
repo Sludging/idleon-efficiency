@@ -411,15 +411,15 @@
       "result": 1
     },
     "slot_evolution_probability_0": {
-      "expression": "idleon.callFunction(\"GamingStatType\",\"SproutGrowthCHANCE\",0,0)",
+      "expression": "(() => { const row = idleon.engine.getGameAttribute(\"GamingSprout\")[0]; return row[0] !== 1 || Number(row[3]) >= idleon.callFunction(\"GamingStatType\",\"SproutMaxEvo\",0,0) ? 0 : idleon.callFunction(\"GamingStatType\",\"SproutGrowthCHANCE\",0,0); })()",
       "result": 0.0007115816057599394
     },
     "slot_evolution_probability_2": {
-      "expression": "idleon.callFunction(\"GamingStatType\",\"SproutGrowthCHANCE\",2,0)",
+      "expression": "(() => { const row = idleon.engine.getGameAttribute(\"GamingSprout\")[2]; return row[0] !== 1 || Number(row[3]) >= idleon.callFunction(\"GamingStatType\",\"SproutMaxEvo\",0,0) ? 0 : idleon.callFunction(\"GamingStatType\",\"SproutGrowthCHANCE\",2,0); })()",
       "result": 0.0007115816057599394
     },
     "slot_evolution_probability_4": {
-      "expression": "idleon.callFunction(\"GamingStatType\",\"SproutGrowthCHANCE\",4,0)",
+      "expression": "(() => { const row = idleon.engine.getGameAttribute(\"GamingSprout\")[4]; return row[0] !== 1 || Number(row[3]) >= idleon.callFunction(\"GamingStatType\",\"SproutMaxEvo\",0,0) ? 0 : idleon.callFunction(\"GamingStatType\",\"SproutGrowthCHANCE\",4,0); })()",
       "result": 0.0007115816057599394
     },
     "dependency_Voting_VotingBonusz_22": {
@@ -578,14 +578,6 @@
       "expression": "idleon.callFunction(\"GamingStatType\",\"LogBookBitBonus\",Array.from(idleon.getAttr(\"Gaming\")[11]).reduce((sum,char)=>sum+idleon.getAttr(\"Number2Letter\").indexOf(char),0),0)",
       "result": 682.6758800975933
     },
-    "water_charges": {
-      "expression": "Math.floor(Math.pow(idleon.getAttr(\"GamingSprout\")[25][1]*(1+idleon.callFunction(\"GamingStatType\",\"ImportItemBonus\",0,0)/100)/3600,0.75))",
-      "result": 58
-    },
-    "squirrel_acorns_ready": {
-      "expression": "Math.floor(Math.pow(idleon.getAttr(\"GamingSprout\")[27][1]*(1+idleon.callFunction(\"GamingStatType\",\"ImportItemBonus\",2,0)/100)/3600,0.85))",
-      "result": 21
-    },
     "shell_next_threshold": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"ShellRankREQ\",idleon.getAttr(\"GamingSprout\")[28][2]+1,0)",
       "result": 534626.6928285371
@@ -601,10 +593,6 @@
     "shovel_arcade_bonus": {
       "expression": "idleon.callFunction(\"ArcadeBonus\",31,0)",
       "result": 1.1538461538461537
-    },
-    "shovel_digs": {
-      "expression": "Math.round(Math.floor(Math.pow(idleon.getAttr(\"GamingSprout\")[26][1]/3600,0.44))*(1+(25*idleon.callFunction(\"RandomEvent\",\"FractalIslandBonus\",4,999)+idleon.callFunction(\"GetBribeBonus\",\"37\")+idleon.callFunction(\"ArcadeBonus\",31,0))/100)*(1+idleon.callFunction(\"Summoning\",\"VotingBonusz\",22,0)/100))",
-      "result": 1
     },
     "shovel_nugget_minimum": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"ImportItemBonus\",1,0)*(1+idleon.getAttr(\"Dream\")[9]*idleon.getAttr(\"OptionsListAccount\")[192]/100)",

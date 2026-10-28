@@ -434,18 +434,18 @@
     },
     {
       "label": "slot_evolution_probability_0",
-      "expression": "idleon.callFunction(\"GamingStatType\",\"SproutGrowthCHANCE\",0,0)",
-      "description": "slot_evolution_probability_0"
+      "expression": "(() => { const row = idleon.engine.getGameAttribute(\"GamingSprout\")[0]; return row[0] !== 1 || Number(row[3]) >= idleon.callFunction(\"GamingStatType\",\"SproutMaxEvo\",0,0) ? 0 : idleon.callFunction(\"GamingStatType\",\"SproutGrowthCHANCE\",0,0); })()",
+      "description": "Slot 0 occupied-plant evolution probability with maximum-stage cap; not full garden growth scheduling."
     },
     {
       "label": "slot_evolution_probability_2",
-      "expression": "idleon.callFunction(\"GamingStatType\",\"SproutGrowthCHANCE\",2,0)",
-      "description": "slot_evolution_probability_2"
+      "expression": "(() => { const row = idleon.engine.getGameAttribute(\"GamingSprout\")[2]; return row[0] !== 1 || Number(row[3]) >= idleon.callFunction(\"GamingStatType\",\"SproutMaxEvo\",0,0) ? 0 : idleon.callFunction(\"GamingStatType\",\"SproutGrowthCHANCE\",2,0); })()",
+      "description": "Slot 2 occupied-plant evolution probability with maximum-stage cap; not full garden growth scheduling."
     },
     {
       "label": "slot_evolution_probability_4",
-      "expression": "idleon.callFunction(\"GamingStatType\",\"SproutGrowthCHANCE\",4,0)",
-      "description": "slot_evolution_probability_4"
+      "expression": "(() => { const row = idleon.engine.getGameAttribute(\"GamingSprout\")[4]; return row[0] !== 1 || Number(row[3]) >= idleon.callFunction(\"GamingStatType\",\"SproutMaxEvo\",0,0) ? 0 : idleon.callFunction(\"GamingStatType\",\"SproutGrowthCHANCE\",4,0); })()",
+      "description": "Slot 4 occupied-plant evolution probability with maximum-stage cap; not full garden growth scheduling."
     },
     {
       "label": "dependency_Voting_VotingBonusz_22",
@@ -643,16 +643,6 @@
       "description": "Native Logbook Bits multiplier from saved native-stage total"
     },
     {
-      "label": "water_charges",
-      "expression": "Math.floor(Math.pow(idleon.getAttr(\"GamingSprout\")[25][1]*(1+idleon.callFunction(\"GamingStatType\",\"ImportItemBonus\",0,0)/100)/3600,0.75))",
-      "description": "Native sprinkler accumulated-water display calculation from ActorEvents_577"
-    },
-    {
-      "label": "squirrel_acorns_ready",
-      "expression": "Math.floor(Math.pow(idleon.getAttr(\"GamingSprout\")[27][1]*(1+idleon.callFunction(\"GamingStatType\",\"ImportItemBonus\",2,0)/100)/3600,0.85))",
-      "description": "Native squirrel accumulated acorn display calculation from ActorEvents_577"
-    },
-    {
       "label": "shell_next_threshold",
       "expression": "idleon.callFunction(\"GamingStatType\",\"ShellRankREQ\",idleon.getAttr(\"GamingSprout\")[28][2]+1,0)",
       "description": "Following Shell rank evolution requirement"
@@ -671,11 +661,6 @@
       "label": "shovel_arcade_bonus",
       "expression": "idleon.callFunction(\"ArcadeBonus\",31,0)",
       "description": "Arcade dig quantity parameter"
-    },
-    {
-      "label": "shovel_digs",
-      "expression": "Math.round(Math.floor(Math.pow(idleon.getAttr(\"GamingSprout\")[26][1]/3600,0.44))*(1+(25*idleon.callFunction(\"RandomEvent\",\"FractalIslandBonus\",4,999)+idleon.callFunction(\"GetBribeBonus\",\"37\")+idleon.callFunction(\"ArcadeBonus\",31,0))/100)*(1+idleon.callFunction(\"Summoning\",\"VotingBonusz\",22,0)/100))",
-      "description": "Native shovel available-digs display calculation; same rounding and direct bonus calls"
     },
     {
       "label": "shovel_nugget_minimum",

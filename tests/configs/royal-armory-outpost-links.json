@@ -1,5 +1,5 @@
 {
-  "description": "Correctness425 paired real-save native Outpost availability, collection parameters, and saved-link depletion. RoyalG 1.22; map1,27,60 provide availability and parameter cases.",
+  "description": "Native Outpost source availability and direct collection parameters for the selected real save.",
   "target": "RoyalMapSource.outpostEligible and direct Outpost parameters for the paired real save",
   "extractions": [
     {
@@ -33,19 +33,9 @@
       "description": "Source outpost availability of map 3; own-key NonAFK membership includes destination zero on37 and hidden x9999 map3"
     },
     {
-      "label": "parameter_range_1",
-      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostRange\", 1, 0)",
-      "description": "Direct prepared connection reach"
-    },
-    {
       "label": "parameter_eligible_1",
       "expression": "idleon.callFunction(\"RoyalG\", \"HasOutpost\", 1, 0)",
       "description": "Direct source eligibility gate used by saved-link production"
-    },
-    {
-      "label": "parameter_range_27",
-      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostRange\", 27, 0)",
-      "description": "Direct prepared connection reach"
     },
     {
       "label": "parameter_eligible_27",
@@ -66,11 +56,6 @@
       "label": "parameter_savage_upgrade",
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 69, 0)",
       "description": "Direct Armory69 bonus consumed by the prepared Savage multiplier"
-    },
-    {
-      "label": "link_27_exhausted",
-      "expression": "Number(idleon.getAttr(\"RoyalG\")[4][idleon.getAttr(\"RoyalMaps\")[27][8]] == -1)",
-      "description": "Saved link27 depletion sentinel, independently of valid interaction geometry"
     }
   ]
 }

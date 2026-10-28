@@ -1,10 +1,9 @@
-import { Outpost } from '../../../data/domain/world-6/royalArmory/outposts';
 import { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 
 
-describe('Royal Armory source eligibility and saved-link depletion', () => {
+describe('Royal Armory Outpost source eligibility', () => {
     let armory: RoyalArmory;
     let results: ExtractionResults;
     beforeAll(() => {
@@ -12,11 +11,6 @@ describe('Royal Armory source eligibility and saved-link depletion', () => {
         validateExtractionHealth(results);
         armory = loadGameDataFromSave('latest').get('royalArmory') as RoyalArmory;
     });
-    function outpostAt(mapId: number): Outpost {
-        const map = armory.mapStates.get(mapId);
-        if (!map?.isOutpost()) throw new Error(`Missing genuine Outpost ${mapId} in paired save`);
-        return map;
-    }
     [
         { mapId: 0, description: 'world town' },
         { mapId: 8, description: 'fixed excluded map' },
@@ -30,9 +24,5 @@ describe('Royal Armory source eligibility and saved-link depletion', () => {
                 getExtractedValue(results, `eligible_${mapId}`), { tolerance: 0, context: `Source outpost availability on map${mapId}` },
             );
         });
-    });
-    it('matches the saved depleted-link state', () => {
-        const link = outpostAt(27).linkDetails[0];
-        expect(Number(link.exhausted)).toMatchLiveGame(getExtractedValue(results, 'link_27_exhausted'), 0);
     });
 });

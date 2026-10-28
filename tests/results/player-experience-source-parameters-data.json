@@ -181,11 +181,11 @@
       "result": 20
     },
     "talent_429": {
-      "expression": "idleon.callFunction('getbonus2',1,429,-1)",
+      "expression": "Math.max(1, idleon.callFunction('getbonus2',1,429,-1))",
       "result": 2.8169398907103824
     },
     "talent_434": {
-      "expression": "idleon.callFunction('getbonus2',1,434,-1)",
+      "expression": "Math.max(1, idleon.callFunction('getbonus2',1,434,-1))",
       "result": 1.034015345268542
     },
     "companion_bonus_128": {

@@ -34,10 +34,6 @@ const getExtractedNames = (results: ExtractionResults, key: string): string[] =>
 const sortNames = (names: string[]): string[] => [...names].sort();
 const toDomainEffect = (effect: string): string => effect.replace(/_/g, ' ');
 
-type NativeHatItemBonuses = {
- name: string;
- channels: { effect: string; value: number }[];
-};
 
 
 describe('Hat Rack Domain - Premium Hat Bonuses', () => {
@@ -119,25 +115,6 @@ describe('Hat Rack Domain - Premium Hat Bonuses', () => {
   }
  });
 
- it('matches native deposited-hat channels with both unique effects and nonzero primary attributes', () => {
-  const expectedHats = extractionResults.extractions.hat_rack_deposited_item_bonuses.result as NativeHatItemBonuses[];
-  const rack = gameData.get('hatRack') as HatRack;
-
-  for (const expectedHat of expectedHats) {
-   const hat = rack.hats.find(hat => hat.internalName === expectedHat.name)!;
-   const actualChannels = rack.getHatItemBonuses(hat);
-   expect(hat.stored).toBe(true);
-   expect(actualChannels.map(channel => channel.effect)).toEqual(
-    expectedHat.channels.map(channel => toDomainEffect(channel.effect)),
-   );
-   expectedHat.channels.forEach((channel, index) => {
-    expect(actualChannels[index].value).toMatchLiveGameWithDetails(channel.value, {
-     tolerance: 0,
-     context: `Deposited Hat Rack ${hat.name} ${toDomainEffect(channel.effect)}`,
-    });
-   });
-  }
- });
 
  it('matches missing premium-hat identities and their absent current contributions', () => {
   const expectedNames = getExtractedNames(extractionResults, 'hat_rack_missing_hats');

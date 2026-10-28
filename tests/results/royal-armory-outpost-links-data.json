@@ -24,17 +24,9 @@
       "expression": "idleon.callFunction(\"RoyalG\", \"HasOutpost\", 3, 0)",
       "result": 0
     },
-    "parameter_range_1": {
-      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostRange\", 1, 0)",
-      "result": 141
-    },
     "parameter_eligible_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"HasOutpost\", 1, 0)",
       "result": 1
-    },
-    "parameter_range_27": {
-      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostRange\", 27, 0)",
-      "result": 94
     },
     "parameter_eligible_27": {
       "expression": "idleon.callFunction(\"RoyalG\", \"HasOutpost\", 27, 0)",
@@ -212,10 +204,6 @@
     "parameter_savage_upgrade": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 69, 0)",
       "result": 0
-    },
-    "link_27_exhausted": {
-      "expression": "Number(idleon.getAttr(\"RoyalG\")[4][idleon.getAttr(\"RoyalMaps\")[27][8]] == -1)",
-      "result": 1
     }
   },
   "errors": {}

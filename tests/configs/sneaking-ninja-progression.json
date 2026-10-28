@@ -1,12 +1,7 @@
 {
-  "description": "Native 1.24 current per-ninja outputs and source-backed consumer invariants. Infinity encoded before JSON. No mutation.",
-  "target": "Ninja current state, doors, flowers, equipment and roll windows",
+  "description": "Native 1.24 door and floor progress and daily charm-roll windows. Infinity encoded before JSON. No mutation.",
+  "target": "Sneaking doors, flowers and daily charm-roll windows",
   "extractions": [
-    {
-      "label": "ninja_progression",
-      "expression": "(()=>{var A=k=>idleon.getAttr(k),N=idleon.allScripts.ActorEvents_579._customBlock_Ninja;return A(\"GetPlayersUsernames\").map((name,index)=>{var row=A(\"Ninja\")[index],floor=Number(row[0]),slots=A(\"Ninja\").slice(12+4*index,16+4*index),weapon=slots[1][0],level=Number(A(\"PlayerDATABASE\").h[name].h.Lv0[17]),timer=Number(row[1]);return {index,floor,level,activity:!N(\"PlayerUntied\",index,0)||timer===0?\"Tied\":timer<0?\"KnockedOut\":N(\"DoorMaxHP\",floor,0)>Number(A(\"Ninja\")[100][floor])&&weapon===\"NjWep0\"?\"Breaching\":A(\"GetPlayersUsernames\").some((_,j)=>Number(A(\"Ninja\")[j][0])===floor&&!N(\"PlayerUntied\",j,0))&&weapon===\"NjWep1\"?\"Untying\":\"Sneaking\",stealth:N(\"Stealth\",index,0),detectionPercent:100*N(\"DetectionDEC\",index,0),equipment:slots.map(slot=>slot[0]===\"Blank\"||slot[0]===\"\"||slot[0]===\"_\"?null:({id:slot[0],level:Number(slot[1])}))}})})()",
-      "description": "All eleven real ninjas; native Stealth/DetectionDEC with consumer state"
-    },
     {
       "label": "floor_progression",
       "expression": "(()=>{var A=k=>idleon.getAttr(k),N=idleon.allScripts.ActorEvents_579._customBlock_Ninja;return A(\"CustomLists\").h.NinjaInfo[3].map((_,index)=>{var maxHP=N(\"DoorMaxHP\",index,0),damageDone=Number(A(\"Ninja\")[100][index]??0),remainingHP=Math.max(0,maxHP-damageDone);return {index,damageDone,maxHP:Number.isFinite(maxHP)?maxHP:String(maxHP),remainingHP:Number.isFinite(remainingHP)?remainingHP:String(remainingHP),flowerStacks:Number(A(\"Spelunk\")[15][index])}})})()",

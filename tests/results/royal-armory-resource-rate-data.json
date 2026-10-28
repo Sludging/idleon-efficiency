@@ -113,7 +113,7 @@
       "result": 0.4983388704318937
     },
     "royal_armory_rate_talent_230_best": {
-      "expression": "idleon.callFunction(\"getbonus2\", 1, 230, -1)",
+      "expression": "Math.max(1, idleon.callFunction(\"getbonus2\", 1, 230, -1))",
       "result": 1.0199335548172757
     },
     "royal_armory_rate_zenith_market_10": {

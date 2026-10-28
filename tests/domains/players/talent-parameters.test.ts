@@ -16,13 +16,13 @@ const extractionResultsName = 'talents-sludgeadin-data.json';
 
 
 const generalTalentParameterSpecs: Record<string, ParameterTestSpec> = {
- talent_146_bonus: {
-  description: 'Apocalypse Chow enhanced bonus used by Blood Berserker talent 146',
-  extractionKey: 'talent_146_bonus',
+ talent_146_multiplier: {
+  description: 'Apocalypse Chow multiplier used by cooking',
+  extractionKey: 'talent_146_multiplier',
   domainExtractor: (gameData) => {
    const players = gameData.get("players") as Player[];
-   const lastIndexBloodBerserker = players.filter(player => player.getEliteClass() == ClassIndex.Blood_Berserker).sort((player1, player2) => player2.playerID - player1.playerID)[0] ?? undefined;
-   return lastIndexBloodBerserker.getTalentEnhancedBonus(146);
+   const lastIndexBloodBerserker = players.filter(player => player.getEliteClass() == ClassIndex.Blood_Berserker).sort((player1, player2) => player2.playerID - player1.playerID)[0];
+   return Math.max(1, lastIndexBloodBerserker?.getTalentEnhancedBonus(146) ?? 0);
   }
  },
  all_talent_level_146: {

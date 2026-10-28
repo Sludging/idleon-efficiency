@@ -1,9 +1,8 @@
 /**
  * Account-wide Friend Bonus values, contributor state, slots, multiplier, and sources.
  *
- * The regular account assigns six bonuses to MaxionSquire at level 13,053.
- * Extra Kills remains unassigned. Native assignment records supply contributor
- * expectations independently from the website parser and bonus calculations.
+ * Native assignment records supply contributor expectations independently
+ * from the website parser and bonus calculations.
  *
  */
 
@@ -38,9 +37,11 @@ describe('Friends Domain - Stats', () => {
  beforeAll(() => {
   extractionResults = loadExtractionResults(extractionResultsName);
   validateExtractionHealth(extractionResults);
-  const nativeAssignments: string = extractionResults.extractions.friend_bonus_assignments.result;
+  const nativeAssignments = String(extractionResults.extractions.friend_bonus_assignments.result);
+  // Native consumers treat both sentinels as no assigned Friend Bonuses.
+  const assignmentRecords = nativeAssignments === '0' || nativeAssignments === '' ? [] : nativeAssignments.split(';');
   contributors = new Map(
-   nativeAssignments.split(';').map(record => {
+   assignmentRecords.map(record => {
     const [statIndex, accountLevel, friendName] = record.split(',');
     return [Number(statIndex), { accountLevel: Number(accountLevel), friendName }];
    }),

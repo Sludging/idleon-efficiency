@@ -1,7 +1,7 @@
 {
   "extractions": {
-    "diamond_chef_final_bonus": {
-      "expression": "idleon.getDNSM(\"AlchBubbles\").h.MealSpdz",
+    "diamond_chef_meal_and_fire_speed_multiplier": {
+      "expression": "Math.max(1, Number(idleon.getDNSM(\"AlchBubbles\").h.MealSpdz ?? 0))",
       "result": {
         "type": "large_number",
         "value": "1.848475655220024e+46"

@@ -8,6 +8,8 @@ import { TotalizerBonus, type Worship } from '../../../data/domain/world-3/worsh
 import type { Equinox } from '../../../data/domain/world-3/equinox';
 import { Food } from '../../../data/domain/items';
 import type { Player } from '../../../data/domain/player';
+import { getActiveClassExperienceBubble } from '../../../data/domain/player-experience';
+import type { Companion } from '../../../data/domain/companions';
 import type { Sailing } from '../../../data/domain/world-5/sailing/sailing';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
@@ -34,6 +36,7 @@ describe('Persistent player stat input used by class EXP', () => {
   let activeExperienceBubble: number;
   let farming: Farming;
   let alchemy: Alchemy;
+  let companions: Companion[];
 
   beforeAll(() => {
     const results = loadExtractionResults('player-experience-parameters-data.json');
@@ -58,6 +61,7 @@ describe('Persistent player stat input used by class EXP', () => {
     sailing = data.get('sailing') as Sailing;
     farming = data.get('farming') as Farming;
     alchemy = data.get('alchemy') as Alchemy;
+    companions = data.get('companions') as Companion[];
     equinox = data.get('equinox') as Equinox;
   });
 
@@ -133,8 +137,8 @@ describe('Persistent player stat input used by class EXP', () => {
     });
   });
 
-  it('matches native active EXP bubble through the typed Alchemy bubble API', () => {
-    expect(alchemy.getBubbleBonusForKey('expACTIVE', player)).toMatchLiveGameWithDetails(activeExperienceBubble, {
+  it('matches native active EXP bubble through the selected player contribution', () => {
+    expect(getActiveClassExperienceBubble(alchemy, player, companions)).toMatchLiveGameWithDetails(activeExperienceBubble, {
       tolerance: 0,
       context: 'Prepared active EXP bubble additive',
     });

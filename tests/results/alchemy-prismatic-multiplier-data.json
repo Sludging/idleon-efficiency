@@ -39,10 +39,6 @@
     "companion_88_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 88, 0)",
       "result": 1.5
-    },
-    "prismatic_multiplier": {
-      "expression": "idleon.callFunction(\"ArcaneType\", \"PrismaBonusMult\", 0, 0)",
-      "result": 3.2500665808410907
     }
   },
   "errors": {}

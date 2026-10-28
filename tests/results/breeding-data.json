@@ -273,12 +273,13 @@
       ]
     },
     "shiny_species": {
-      "expression": "idleon.engine.getGameAttribute(\"CustomLists\").h.PetStats.slice(0,4).flatMap((pets,world)=>pets.map((pet,petIndex)=>({world,petIndex,petId:pet[0],level:idleon.callFunction(\"Breeding\",\"SpecialPassives\",\"Lv\",world,petIndex),requirement:idleon.callFunction(\"Breeding\",\"SpecialPassives\",\"REQ\",world,petIndex)})))",
+      "expression": "idleon.engine.getGameAttribute(\"CustomLists\").h.PetStats.slice(0,4).flatMap((pets,world)=>pets.map((pet,petIndex)=>({world,petIndex,petId:pet[0],progress:Number(idleon.engine.getGameAttribute(\"Breeding\")[22+world][petIndex]),level:idleon.callFunction(\"Breeding\",\"SpecialPassives\",\"Lv\",world,petIndex),requirement:idleon.callFunction(\"Breeding\",\"SpecialPassives\",\"REQ\",world,petIndex)})))",
       "result": [
         {
           "world": 0,
           "petIndex": 0,
           "petId": "mushG",
+          "progress": 86.8874566558514,
           "level": 5,
           "requirement": 200
         },
@@ -286,6 +287,7 @@
           "world": 0,
           "petIndex": 1,
           "petId": "Pet0",
+          "progress": 86.8874272866383,
           "level": 5,
           "requirement": 200
         },
@@ -293,6 +295,7 @@
           "world": 0,
           "petIndex": 2,
           "petId": "frogG",
+          "progress": 2224238.182391896,
           "level": 19,
           "requirement": 2681786
         },
@@ -300,6 +303,7 @@
           "world": 0,
           "petIndex": 3,
           "petId": "beanG",
+          "progress": 170.829152709922,
           "level": 5,
           "requirement": 200
         },
@@ -307,6 +311,7 @@
           "world": 0,
           "petIndex": 4,
           "petId": "mushR",
+          "progress": 90.0209899810932,
           "level": 5,
           "requirement": 200
         },
@@ -314,6 +319,7 @@
           "world": 0,
           "petIndex": 5,
           "petId": "slimeG",
+          "progress": 587.938147852367,
           "level": 7,
           "requirement": 964
         },
@@ -321,6 +327,7 @@
           "world": 0,
           "petIndex": 6,
           "petId": "Pet1",
+          "progress": 793.708555638286,
           "level": 7,
           "requirement": 964
         },
@@ -328,6 +335,7 @@
           "world": 0,
           "petIndex": 7,
           "petId": "snakeG",
+          "progress": 792.123833470933,
           "level": 7,
           "requirement": 964
         },
@@ -335,6 +343,7 @@
           "world": 0,
           "petIndex": 8,
           "petId": "carrotO",
+          "progress": 65213.5470897578,
           "level": 14,
           "requirement": 116522
         },
@@ -342,6 +351,7 @@
           "world": 0,
           "petIndex": 9,
           "petId": "goblinG",
+          "progress": 589.521039681755,
           "level": 7,
           "requirement": 964
         },
@@ -349,6 +359,7 @@
           "world": 0,
           "petIndex": 10,
           "petId": "plank",
+          "progress": 740.793532117358,
           "level": 7,
           "requirement": 964
         },
@@ -356,6 +367,7 @@
           "world": 0,
           "petIndex": 11,
           "petId": "frogBIG",
+          "progress": 65102.5015200492,
           "level": 14,
           "requirement": 116522
         },
@@ -363,6 +375,7 @@
           "world": 0,
           "petIndex": 12,
           "petId": "Pet2",
+          "progress": 2224238.098474155,
           "level": 19,
           "requirement": 2681786
         },
@@ -370,6 +383,7 @@
           "world": 0,
           "petIndex": 13,
           "petId": "branch",
+          "progress": 65187.896595344,
           "level": 14,
           "requirement": 116522
         },
@@ -377,6 +391,7 @@
           "world": 0,
           "petIndex": 14,
           "petId": "acorn",
+          "progress": 0.0000215185185185185,
           "level": 1,
           "requirement": 3
         },
@@ -384,6 +399,7 @@
           "world": 0,
           "petIndex": 15,
           "petId": "poopSmall",
+          "progress": 2224238.075271235,
           "level": 19,
           "requirement": 2681786
         },
@@ -391,6 +407,7 @@
           "world": 0,
           "petIndex": 16,
           "petId": "ratB",
+          "progress": 2224238.1682026107,
           "level": 19,
           "requirement": 2681786
         },
@@ -398,6 +415,7 @@
           "world": 1,
           "petIndex": 0,
           "petId": "jarSand",
+          "progress": 793.708808051476,
           "level": 7,
           "requirement": 964
         },
@@ -405,6 +423,7 @@
           "world": 1,
           "petIndex": 1,
           "petId": "mimicA",
+          "progress": 2224238.1418752205,
           "level": 19,
           "requirement": 2681786
         },
@@ -412,6 +431,7 @@
           "world": 1,
           "petIndex": 2,
           "petId": "crabcake",
+          "progress": 52.9165666968395,
           "level": 4,
           "requirement": 85
         },
@@ -419,6 +439,7 @@
           "world": 1,
           "petIndex": 3,
           "petId": "coconut",
+          "progress": 2224238.1146157254,
           "level": 19,
           "requirement": 2681786
         },
@@ -426,6 +447,7 @@
           "world": 1,
           "petIndex": 4,
           "petId": "Pet3",
+          "progress": 0.0000215185185185185,
           "level": 1,
           "requirement": 3
         },
@@ -433,6 +455,7 @@
           "world": 1,
           "petIndex": 5,
           "petId": "sandcastle",
+          "progress": 2224238.0419806736,
           "level": 19,
           "requirement": 2681786
         },
@@ -440,6 +463,7 @@
           "world": 1,
           "petIndex": 6,
           "petId": "pincermin",
+          "progress": 46.3634297307169,
           "level": 4,
           "requirement": 85
         },
@@ -447,6 +471,7 @@
           "world": 1,
           "petIndex": 7,
           "petId": "potato",
+          "progress": 65102.5915588404,
           "level": 14,
           "requirement": 116522
         },
@@ -454,6 +479,7 @@
           "world": 1,
           "petIndex": 8,
           "petId": "steak",
+          "progress": 2224978.9477432305,
           "level": 19,
           "requirement": 2681786
         },
@@ -461,6 +487,7 @@
           "world": 1,
           "petIndex": 9,
           "petId": "Pet4",
+          "progress": 536.602504226697,
           "level": 7,
           "requirement": 964
         },
@@ -468,6 +495,7 @@
           "world": 1,
           "petIndex": 10,
           "petId": "moonman",
+          "progress": 25.7297169225894,
           "level": 3,
           "requirement": 33
         },
@@ -475,6 +503,7 @@
           "world": 1,
           "petIndex": 11,
           "petId": "sandgiant",
+          "progress": 65102.4879092226,
           "level": 14,
           "requirement": 116522
         },
@@ -482,6 +511,7 @@
           "world": 1,
           "petIndex": 12,
           "petId": "snailZ",
+          "progress": 2224238.0591304414,
           "level": 19,
           "requirement": 2681786
         },
@@ -489,6 +519,7 @@
           "world": 1,
           "petIndex": 13,
           "petId": "shovelR",
+          "progress": 2224238.1297522914,
           "level": 19,
           "requirement": 2681786
         },
@@ -496,6 +527,7 @@
           "world": 1,
           "petIndex": 14,
           "petId": "steakR",
+          "progress": 2224235.7976983106,
           "level": 19,
           "requirement": 2681786
         },
@@ -503,6 +535,7 @@
           "world": 1,
           "petIndex": 15,
           "petId": "potatoB",
+          "progress": 7714.85025873981,
           "level": 10,
           "requirement": 8227
         },
@@ -510,6 +543,7 @@
           "world": 1,
           "petIndex": 16,
           "petId": "Pet5",
+          "progress": 7714.8625940338,
           "level": 10,
           "requirement": 8227
         },
@@ -517,6 +551,7 @@
           "world": 2,
           "petIndex": 0,
           "petId": "sheep",
+          "progress": 30859.4189071996,
           "level": 12,
           "requirement": 31633
         },
@@ -524,6 +559,7 @@
           "world": 2,
           "petIndex": 1,
           "petId": "flake",
+          "progress": 29471.6511003991,
           "level": 12,
           "requirement": 31633
         },
@@ -531,6 +567,7 @@
           "world": 2,
           "petIndex": 2,
           "petId": "stache",
+          "progress": 1020.93878593617,
           "level": 8,
           "requirement": 2013
         },
@@ -538,6 +575,7 @@
           "world": 2,
           "petIndex": 3,
           "petId": "skele",
+          "progress": 29471.376553228,
           "level": 12,
           "requirement": 31633
         },
@@ -545,6 +583,7 @@
           "world": 2,
           "petIndex": 4,
           "petId": "Pet6",
+          "progress": 29471.3716078655,
           "level": 12,
           "requirement": 31633
         },
@@ -552,6 +591,7 @@
           "world": 2,
           "petIndex": 5,
           "petId": "bloque",
+          "progress": 29471.385728691,
           "level": 12,
           "requirement": 31633
         },
@@ -559,6 +599,7 @@
           "world": 2,
           "petIndex": 6,
           "petId": "mamoth",
+          "progress": 29471.6652227986,
           "level": 12,
           "requirement": 31633
         },
@@ -566,6 +607,7 @@
           "world": 2,
           "petIndex": 7,
           "petId": "snowball",
+          "progress": 29471.659115252,
           "level": 12,
           "requirement": 31633
         },
@@ -573,6 +615,7 @@
           "world": 2,
           "petIndex": 8,
           "petId": "penguin",
+          "progress": 894.380267518857,
           "level": 7,
           "requirement": 964
         },
@@ -580,6 +623,7 @@
           "world": 2,
           "petIndex": 9,
           "petId": "thermostat",
+          "progress": 54.3084666718273,
           "level": 4,
           "requirement": 85
         },
@@ -587,6 +631,7 @@
           "world": 2,
           "petIndex": 10,
           "petId": "glass",
+          "progress": 100.671942072767,
           "level": 5,
           "requirement": 200
         },
@@ -594,6 +639,7 @@
           "world": 2,
           "petIndex": 11,
           "petId": "snakeB",
+          "progress": 2224239.6415716065,
           "level": 19,
           "requirement": 2681786
         },
@@ -601,6 +647,7 @@
           "world": 2,
           "petIndex": 12,
           "petId": "Pet7",
+          "progress": 2224239.5878833374,
           "level": 19,
           "requirement": 2681786
         },
@@ -608,6 +655,7 @@
           "world": 2,
           "petIndex": 13,
           "petId": "speaker",
+          "progress": 526.588936363495,
           "level": 7,
           "requirement": 964
         },
@@ -615,6 +663,7 @@
           "world": 2,
           "petIndex": 14,
           "petId": "eye",
+          "progress": 7742.09446888076,
           "level": 10,
           "requirement": 8227
         },
@@ -622,6 +671,7 @@
           "world": 2,
           "petIndex": 15,
           "petId": "ram",
+          "progress": 7810.11281722426,
           "level": 10,
           "requirement": 8227
         },
@@ -629,6 +679,7 @@
           "world": 2,
           "petIndex": 16,
           "petId": "skele2",
+          "progress": 7810.11005076622,
           "level": 10,
           "requirement": 8227
         },
@@ -636,6 +687,7 @@
           "world": 2,
           "petIndex": 17,
           "petId": "Pet8",
+          "progress": 7810.10782359054,
           "level": 10,
           "requirement": 8227
         },
@@ -643,6 +695,7 @@
           "world": 3,
           "petIndex": 0,
           "petId": "mushP",
+          "progress": 54.3068546463654,
           "level": 4,
           "requirement": 85
         },
@@ -650,6 +703,7 @@
           "world": 3,
           "petIndex": 1,
           "petId": "w4a2",
+          "progress": 2224239.604689058,
           "level": 19,
           "requirement": 2681786
         },
@@ -657,6 +711,7 @@
           "world": 3,
           "petIndex": 2,
           "petId": "w4a3",
+          "progress": 2224239.624081051,
           "level": 19,
           "requirement": 2681786
         },
@@ -664,6 +719,7 @@
           "world": 3,
           "petIndex": 3,
           "petId": "demonP",
+          "progress": 590.913517140546,
           "level": 7,
           "requirement": 964
         },
@@ -671,6 +727,7 @@
           "world": 3,
           "petIndex": 4,
           "petId": "w4b1",
+          "progress": 520.25404721906,
           "level": 7,
           "requirement": 964
         },
@@ -678,6 +735,7 @@
           "world": 3,
           "petIndex": 5,
           "petId": "Pet9",
+          "progress": 7810.10510895195,
           "level": 10,
           "requirement": 8227
         },
@@ -685,6 +743,7 @@
           "world": 3,
           "petIndex": 6,
           "petId": "w4b2",
+          "progress": 7810.10236408534,
           "level": 10,
           "requirement": 8227
         },
@@ -692,6 +751,7 @@
           "world": 3,
           "petIndex": 7,
           "petId": "w4b3",
+          "progress": 7810.09878870377,
           "level": 10,
           "requirement": 8227
         },
@@ -699,6 +759,7 @@
           "world": 3,
           "petIndex": 8,
           "petId": "w4b4",
+          "progress": 7810.09548728166,
           "level": 10,
           "requirement": 8227
         },
@@ -706,6 +767,7 @@
           "world": 3,
           "petIndex": 9,
           "petId": "w4b5",
+          "progress": 7810.09366024945,
           "level": 10,
           "requirement": 8227
         },
@@ -713,6 +775,7 @@
           "world": 3,
           "petIndex": 10,
           "petId": "Pet10",
+          "progress": 95.2309182559824,
           "level": 5,
           "requirement": 200
         },
@@ -720,6 +783,7 @@
           "world": 3,
           "petIndex": 11,
           "petId": "w4c1",
+          "progress": 95.2308870165379,
           "level": 5,
           "requirement": 200
         },
@@ -727,6 +791,7 @@
           "world": 3,
           "petIndex": 12,
           "petId": "w4c2",
+          "progress": 95.2308630009882,
           "level": 5,
           "requirement": 200
         },
@@ -734,6 +799,7 @@
           "world": 3,
           "petIndex": 13,
           "petId": "w4c3",
+          "progress": 95.2289291609359,
           "level": 5,
           "requirement": 200
         },
@@ -741,6 +807,7 @@
           "world": 3,
           "petIndex": 14,
           "petId": "w4c4",
+          "progress": 95.2288850468792,
           "level": 5,
           "requirement": 200
         },
@@ -748,6 +815,7 @@
           "world": 3,
           "petIndex": 15,
           "petId": "Pet11",
+          "progress": 95.22885961865,
           "level": 5,
           "requirement": 200
         }

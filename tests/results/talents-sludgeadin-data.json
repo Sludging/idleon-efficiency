@@ -12,8 +12,8 @@
       "expression": "idleon.callFunction(\"TalentEnh\", 79)",
       "result": 0
     },
-    "talent_146_bonus": {
-      "expression": "idleon.callFunction(\"TalentEnh\", 146)",
+    "talent_146_multiplier": {
+      "expression": "Math.max(1, idleon.callFunction(\"TalentEnh\", 146))",
       "result": 7071.633096370106
     },
     "talent_536_bonus": {
@@ -55,8 +55,8 @@
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 91)",
       "result": 487.5
     },
-    "talent_max_level_149_bonus": {
-      "expression": "idleon.callFunction(\"GetTalentNumber\", 1 , 149)",
+    "symbols_of_beyond_bonus": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 149) + idleon.callFunction(\"GetTalentNumber\", 1, 374) + idleon.callFunction(\"GetTalentNumber\", 1, 539)",
       "result": 11
     },
     "talent_max_family_bonus_68": {

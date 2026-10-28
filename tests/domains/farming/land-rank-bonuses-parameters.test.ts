@@ -8,13 +8,12 @@ import { ParameterTestSpec } from '../../utils/parameter-test-config';
 
 const parameterSpecs: ParameterTestSpec[] = [
   {
-    description: 'raw account Dank Ranks bonus with recipient talent inputs used by Land Rank upgrades',
-    extractionKey: 'account_dank_ranks_bonus',
+    description: 'effective account Dank Ranks multiplier used by Land Rank upgrades',
+    extractionKey: 'account_dank_ranks_multiplier',
     domainExtractor: gameData => {
       const players = gameData.get('players') as Player[];
       const recipient = getTargetPlayer(players);
-      // Farming applies its minimum multiplier after the recipient-aware raw account result.
-      return Talent.getAccountTalentBonus(players, 207, recipient.finalTalentInputs);
+      return Math.max(1, Talent.getAccountTalentBonus(players, 207, recipient.finalTalentInputs));
     },
   },
   {

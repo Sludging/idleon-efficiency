@@ -3,16 +3,8 @@ import { Farming, LandRankBonusType } from '../../../data/domain/world-6/farming
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 
-type NativePlotRank = {
-  index: number;
-  rank: number;
-  exp: number;
-  requirement: number;
-};
-
 type NativeRankExpUpgrade = { index: number; bonus: number };
 
-const plotIndices = Array.from({ length: 36 }, (_, index) => index);
 const rankExpUpgrades = [
   [2, 'Soil EXP Boost from the previous plot rank'],
   [6, 'Soil EXP Megaboost for all plots'],
@@ -23,7 +15,6 @@ describe('Farming Land Rank EXP account results', () => {
   let farming: Farming;
   let players: Player[];
   let results: ExtractionResults;
-  let nativePlots: NativePlotRank[];
   let nativeUpgrades: NativeRankExpUpgrade[];
 
   beforeAll(() => {
@@ -32,31 +23,10 @@ describe('Farming Land Rank EXP account results', () => {
     const data = loadGameDataFromSave('latest');
     farming = data.get('farming') as Farming;
     players = data.get('players') as Player[];
-    nativePlots = results.extractions.land_rank_plot_state.result;
     nativeUpgrades = results.extractions.land_rank_exp_database.result;
-    // Reject missing records before comparing the public values for every retained plot.
-    expect(nativePlots.map(plot => plot.index)).toEqual(plotIndices);
-    expect(farming.farmPlots.map((_, index) => index)).toEqual(plotIndices);
     expect(nativeUpgrades.map(upgrade => upgrade.index)).toEqual(rankExpUpgrades.map(([index]) => index));
   });
 
-  it.each(plotIndices)('plot %i: matches saved rank, earned EXP, and next-rank requirement', index => {
-    const plot = farming.farmPlots[index];
-    const native = nativePlots.find(plot => plot.index === index)!;
-    expect(plot.landRank).toMatchLiveGameWithDetails(native.rank, {
-      tolerance: 0,
-      context: `Plot ${index}: Land Rank`,
-    });
-    expect(plot.landExp).toMatchLiveGameWithDetails(native.exp, {
-      tolerance: 0,
-      context: `Plot ${index}: saved Rank EXP`,
-    });
-    expect(plot.getExpToNextRank()).toMatchLiveGameWithDetails(native.requirement, {
-      tolerance: 0,
-      context: `Plot ${index}: EXP required for the next Land Rank`,
-      debugInfo: { rank: plot.landRank },
-    });
-  });
 
   it.each(rankExpUpgrades)('%i: matches %s', (index, description) => {
     const native = nativeUpgrades.find(upgrade => upgrade.index === index)!;

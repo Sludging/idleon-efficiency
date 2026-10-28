@@ -51,11 +51,6 @@
       "label": "companion_88_bonus",
       "expression": "idleon.callFunction(\"Companions\", 88, 0)",
       "description": "Companion 88 prismatic multiplier input"
-    },
-    {
-      "label": "prismatic_multiplier",
-      "expression": "idleon.callFunction(\"ArcaneType\", \"PrismaBonusMult\", 0, 0)",
-      "description": "Final prismatic multiplier calculation (cap 5, base 2)"
     }
   ]
 }

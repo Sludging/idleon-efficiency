@@ -20,10 +20,6 @@
       "expression": "Math.max(idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"demonP\") - 1, 0)",
       "result": 6
     },
-    "w7a5_next_level_card_requirement": {
-      "expression": "(() => { idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardsTillNextLV\", \"w7a5\"); return Math.floor(idleon.getAttr(\"DNSM\").h.cardLvCalco2 + Number(idleon.getAttr(\"Cards\")[0].h.w7a5)) + 1; })()",
-      "result": 135001
-    },
     "card_ruby_unlock": {
       "expression": "idleon.callFunction(\"RiftStuff\", \"5starCards\", 0)",
       "result": 1

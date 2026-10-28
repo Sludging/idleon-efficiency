@@ -155,12 +155,12 @@ const parameterComparisons: ParameterComparison[] = [
   },
  },
  {
-  description: 'Recipient-specific account talent 230 multiplier used by the Royal Armory rate',
+  description: 'Effective recipient-specific account talent 230 multiplier used by the Royal Armory rate',
   extractionKey: 'royal_armory_rate_talent_230_best',
   domainValue: gameData => {
    const players = gameData.get('players') as Player[];
    const alchemy = gameData.get('alchemy') as Alchemy;
-   return getRoyalGuardianContribution(getTargetPlayer(players), alchemy, players).collectionTalentMultiplier;
+   return Math.max(1, getRoyalGuardianContribution(getTargetPlayer(players), alchemy, players).collectionTalentMultiplier);
   },
  },
  {

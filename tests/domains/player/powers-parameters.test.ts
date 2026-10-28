@@ -46,7 +46,7 @@ describe('Persistent powers direct owner results', () => {
     { key: 'guild', name: 'Guild Weapon Power bonus', getValue: () => (data.get('guild') as Guild).guildBonuses[3].getBonus() },
     { key: 'sigil', name: 'Alchemy Sigil Weapon Power bonus', getValue: () => (data.get('sigils') as Sigils).sigils[17].getBonus() },
     { key: 'vial', name: 'Weapon Power vial bonus', getValue: () => (data.get('alchemy') as Alchemy).getVialBonusForKey('WeaponPOW') },
-    { key: 'family', name: 'recipient-aware Barbarian family Weapon Power', getValue: () => (data.get('family') as Family).getClassBonus(ClassIndex.Barbarian)!.getBonus(player) },
+    { key: 'family', name: 'recipient-aware Barbarian family Weapon Power', getValue: () => (data.get('family') as Family).getClassBonus(ClassIndex.Barbarian)?.getBonus(player) ?? 0 },
     { key: 'sign', name: 'prepared star-sign Weapon Power', getValue: () => player.starSigns.reduce((total, sign) => total + sign.getBonus('Weapon Power'), 0) },
     { key: 'arcade', name: 'Arcade Weapon Power bonus', getValue: () => (data.get('arcade') as Arcade).bonuses[17].getBonus() },
   ];

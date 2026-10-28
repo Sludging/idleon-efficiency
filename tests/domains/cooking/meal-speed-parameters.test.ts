@@ -62,12 +62,11 @@ const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   enhancedTalent146Bonus: {
-    description: 'Apocalypse Chow enhanced talent cooking-speed bonus',
+    description: 'Effective Apocalypse Chow cooking-speed multiplier',
     extractionKey: 'talent_enh_146_bonus',
     domainExtractor: (gameData) => {
       const players = gameData.get('players') as Player[];
-      const bestapocalypseChowBonus = Math.max(...players.flatMap(player => (player.getTalentEnhancedBonus(146))));
-      return bestapocalypseChowBonus;
+      return Math.max(1, ...players.map(player => player.getTalentEnhancedBonus(146)));
     },
   },
 
@@ -103,22 +102,20 @@ const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   alchBubblesMealSpdzBonus: {
-    description: 'Diamond Chef bubble bonus to meal and fire kitchen speeds',
+    description: 'Effective Diamond Chef multiplier to meal and fire kitchen speeds',
     extractionKey: 'alch_bubbles_meal_spdz_bonus',
     domainExtractor: (gameData) => {
       const alchemy = gameData.get("alchemy") as Alchemy;
-      const diamonChef = alchemy.getBubbleBonusForKey("MealSpdz");
-      return diamonChef
+      return Math.max(1, alchemy.getBubbleBonusForKey("MealSpdz"));
     }
   },
 
-  atomBonuses8Bonus: {
-    description: 'Fluoride (Void Plate Chef) atom bonus to kitchen speed',
-    extractionKey: 'atom_bonuses_8_bonus',
+  atomBonuses8Factor: {
+    description: 'Effective Fluoride (Void Plate Chef) multiplier to meal and fire kitchen speeds',
+    extractionKey: 'atom_bonuses_8_factor',
     domainExtractor: (gameData) => {
       const collider = gameData.get("collider") as AtomCollider;
-      const atomBonus8 = collider.atoms[8].getBonus();
-      return atomBonus8;
+      return Math.max(1, collider.atoms[8].getBonus());
     }
   },
 

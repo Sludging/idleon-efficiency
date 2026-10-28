@@ -1807,7 +1807,7 @@
       "result": 975
     },
     "availability": {
-      "expression": "idleon.callFunction('Holes','SchematicsAvailable',0,0)",
+      "expression": "idleon.callFunction('Holes','VillagersOwned',0,0) > 1 ? idleon.callFunction('Holes','SchematicsAvailable',0,0) : 0",
       "result": 105
     },
     "lamp_stacks": {
