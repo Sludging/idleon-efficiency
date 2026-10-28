@@ -28,6 +28,27 @@ The [real examples below](#examples-from-existing-tests) show these distinctions
 4. **Obtain any new expected values.** Follow the [playbook extraction triggers](calculation-correctness/PLAYBOOK.md#extraction-when-needed). With unchanged config and usable results, continue with the existing matching save and results.
 5. **Write and run the tests.** Use the matchers below and record the actual commands and results before changing domain code.
 
+Compare the same feature state as the game's consumer. Some internal helpers return default levels or requirements for inactive content. Apply the consumer's activation checks before comparing those results with active website progression.
+
+For actor-specific stamp comparisons, pass the captured target player to `getStampBonusForKey`.
+Without a player, the result is an unrestricted preview and may not match the actor's bonus.
+
+Research uses a website preview when every saved character has a nonpositive Research level. The preview uses level, EXP, and EXP requirement zero. Its lens, Shape, and Point expectations retain independently owned rewards and are not native parity comparisons. After Research starts, compare those values with native captures. Continue native comparisons for unaffected calculations before Research starts.
+
+Keep generic comparisons independent of one save's owned classes, items, unlocks, or character and plot counts. Remove fixture-specific scenarios instead of requiring every public account to satisfy them.
+
+Prepared bonus maps can omit scalar entries whose contribution is zero. Require the owning preparation step and map, but match the original consumer's numeric conversion for sparse entries. Keep failures for genuinely invalid numbers.
+
+A helper can return zero for inactive content while the calculation uses a minimum multiplier of one.
+Compare the multiplier actually used, not an unclamped helper with an already-clamped result.
+Compare numeric character contributions rather than nullable UI summaries.
+Keep raw helper comparisons only when both APIs return the same quantity.
+Some game dispatchers return zero for unknown commands.
+Check the original function and exercise a non-zero case when one is available.
+
+Keep saved values separate from unlock state when the game uses both.
+A locked record can contain a saved rank that another calculation still counts.
+
 For server selection, readiness, version lookup, and live-only save refresh, follow the [canonical game-access policy](../tests/helpers/README.md#game-access).
 
 When extraction is needed, use the [extraction helper guide](../tests/helpers/README.md#quick-start---batch-extraction) for commands, server selection, save refresh, and active-player prerequisites.
@@ -69,6 +90,9 @@ defaults. `--runInBand` runs in the main process without worker recycling.
 
 Use a genuine real save and its matching extracted game values. Result-only extraction, whether offline or live, does not establish pairing with a retained save; offline and live snapshots are not presumed equivalent. A live save refresh precedes config extraction rather than taking an atomic snapshot, so establish that results match the saved state before using them. Tests must not construct synthetic saves, alter inputs to simulate a branch, or calculate expected values from the implementation. This deliberately leaves unobserved permutations uncovered. State which meaningful behavior the paired save exercises, and raise uncovered behavior as a coverage question rather than inventing test data.
 
+Runtime balances can advance after the retained save, so compare saved progress with the genuine save rather than later captures.
+For Refinery cycle projections, first match native and saved ranks, then use native power and capacity with saved progress.
+
 Treat fully prepared account state as read-only in regular core and parameter tests. `loadGameDataFromSave` already runs initialization, parsing, and calculation; read its prepared public results without rerunning those steps. Do not add same-save reloads, reset/reparse cycles, or repeated-updater checks as routine calculation coverage. Dedicated lifecycle coverage requires an explicit request.
 
 Regular core and parameter tests must not assume developer-specific character
@@ -78,6 +102,9 @@ expectations. Remove fixture-pinned cases rather than preserving them behind
 skips, state guards, or replacement assertions. Constants that define game
 mechanics or controlled unit inputs remain valid. Keep genuine extraction-health
 and comparison-context checks.
+
+Policy projections also belong to the save used to produce them.
+Do not use a regular-save projection as an oracle for a selected public account.
 
 For opt-in public-profile validation, follow the [public-profile maintenance workflow](../tests/helpers/README.md#public-profile-maintenance).
 That guide owns account selection, import policy, commands, cache refresh, and cohort coverage.
