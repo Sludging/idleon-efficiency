@@ -95,13 +95,50 @@ describe('account dataset selection', () => {
     expect(() => accountDataset.loadAccountDataset(datasetPath, { configsDir, assetRoot })).toThrow('Account save not found');
   });
 
-  it('returns selected player from paired save metadata', () => {
+  it('accepts legacy Toolbox datasets with no source and returns the selected player', () => {
     expect(accountDataset.loadAccountDataset(datasetPath, { configsDir, assetRoot })).toEqual(expect.objectContaining({
       savePath,
       resultsDir: path.dirname(resultPath),
       playerIndex: 1,
       playerName: 'Selected',
     }));
+  });
+
+  it.each([
+    ['toolbox', ADAPTER_VERSION],
+    ['idleon-efficiency', 'ie-public-profile-1'],
+  ])('accepts a %s dataset with its source adapter version', (source, adapterVersion) => {
+    const descriptor = JSON.parse(fs.readFileSync(datasetPath, 'utf8'));
+    descriptor.source = source;
+    descriptor.adapterVersion = adapterVersion;
+    fs.writeFileSync(datasetPath, JSON.stringify(descriptor));
+
+    expect(accountDataset.loadAccountDataset(datasetPath, { configsDir, assetRoot })).toEqual(expect.objectContaining({
+      savePath,
+      resultsDir: path.dirname(resultPath),
+      playerIndex: 1,
+      playerName: 'Selected',
+    }));
+  });
+
+  it.each([
+    ['idleon-efficiency', ADAPTER_VERSION],
+    ['toolbox', 'ie-public-profile-1'],
+  ])('rejects a %s dataset with the other source adapter version', (source, adapterVersion) => {
+    const descriptor = JSON.parse(fs.readFileSync(datasetPath, 'utf8'));
+    descriptor.source = source;
+    descriptor.adapterVersion = adapterVersion;
+    fs.writeFileSync(datasetPath, JSON.stringify(descriptor));
+
+    expect(() => accountDataset.loadAccountDataset(datasetPath, { configsDir, assetRoot })).toThrow('adapter version mismatch');
+  });
+
+  it('rejects an unsupported profile source', () => {
+    const descriptor = JSON.parse(fs.readFileSync(datasetPath, 'utf8'));
+    descriptor.source = 'unknown';
+    fs.writeFileSync(datasetPath, JSON.stringify(descriptor));
+
+    expect(() => accountDataset.loadAccountDataset(datasetPath, { configsDir, assetRoot })).toThrow('Unsupported public profile source');
   });
 
   it('rejects config changes after extraction', () => {

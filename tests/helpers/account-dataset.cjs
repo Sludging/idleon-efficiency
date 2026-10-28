@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
-const { ADAPTER_VERSION } = require('./public-profile-import.cjs');
+const { getAdapterVersion } = require('./public-profile-import.cjs');
 
 const REPO_ROOT = path.resolve(__dirname, '../..');
 const DEFAULT_SAVE_PATH = path.join(REPO_ROOT, 'tests/fixtures/saves/latest.json');
@@ -83,8 +83,9 @@ function resolveAccountDataset(datasetPath, options = {}) {
   if (typeof descriptor.accountId !== 'string' || typeof descriptor.profileName !== 'string') {
     throw new Error(`Invalid account identity in ${resolved}`);
   }
-  if (descriptor.adapterVersion !== ADAPTER_VERSION) {
-    throw new Error(`Account dataset adapter version mismatch: ${descriptor.adapterVersion} (current ${ADAPTER_VERSION})`);
+  const adapterVersion = getAdapterVersion(descriptor.source);
+  if (descriptor.adapterVersion !== adapterVersion) {
+    throw new Error(`Account dataset adapter version mismatch: ${descriptor.adapterVersion} (current ${adapterVersion})`);
   }
   if (!Number.isInteger(descriptor.playerIndex) || descriptor.playerIndex < 0 || typeof descriptor.playerName !== 'string') {
     throw new Error(`Invalid selected player in account dataset: ${resolved}`);

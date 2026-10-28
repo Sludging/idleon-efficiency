@@ -1,6 +1,13 @@
 const { isDeepStrictEqual } = require('node:util');
 
 const ADAPTER_VERSION = 'v1.23-public-profile-3';
+const IE_ADAPTER_VERSION = 'ie-public-profile-1';
+
+function getAdapterVersion(source = 'toolbox') {
+  if (source === 'toolbox') return ADAPTER_VERSION;
+  if (source === 'idleon-efficiency') return IE_ADAPTER_VERSION;
+  throw new Error(`Unsupported public profile source: ${String(source)}`);
+}
 
 const jsonListKeys = new Set(`AchieveReg,AnvilCraftStatus,ArcadeUpg,AttackLoadout_,AttackLoadoutpre_,Boats,Breeding,Bubba,BugInfo,Captains,CardPreset_,Cards1,CauldronBubbles,CauldronJobs0,CauldronJobs1,CauldronP2W,CogO,Compass,CookMaster,Cooking,DungUpg,FarmPlot,FarmRank,FlagP,FlagU,GamingSprout,GemItemsPurchased,Guild,HintStatus,Holes,Jars,KLA_,Lab,MapBon,Meals,Menagerie,Ninja,POu_,Pets,PetsStored,PlayerStuff_,PldTraps_,PrayOwned,Prayers_,Print,Refinery,Research,RoyalG,RoyalMaps,SSprog,SailChests,Sailing,SaltLick,Shrine,Spelunk,StatueLevels_,SteamAchieve,StuG,Summon,Sushi,TaskZZ0,TaskZZ1,TaskZZ2,TaskZZ3,TaskZZ4,TaskZZ5,Territory,Tess,TotemInfo,Tower`.split(','));
 const sparseListKeys = new Set(`CMm,CogM,EMm0_,EMm1_,IMm_,ObolEqMAP_,ObolEqMAPz1,ObolEqMAPz2,ObolInvMAP_0,ObolInvMAP_1,ObolInvMAP_2,ObolInvMAP_3`.split(','));
@@ -80,7 +87,7 @@ function normalizeBundlesReceived(data, save) {
   save.BundlesReceived = ownership;
 }
 
-function importPublicProfile(profile) {
+function importToolboxProfile(profile) {
   if (!isRecord(profile)) throw new Error('Public profile must be an object');
   if (!isRecord(profile.data)) throw new Error('Public profile is missing save data');
   if (!Array.isArray(profile.charNames) || profile.charNames.length === 0 || profile.charNames.some(name => typeof name !== 'string' || name.length === 0)) {
@@ -131,4 +138,18 @@ function importPublicProfile(profile) {
   return save;
 }
 
-module.exports = { ADAPTER_VERSION, importPublicProfile };
+function importPublicProfile(profile, source = 'toolbox') {
+  getAdapterVersion(source);
+  if (source === 'toolbox') return importToolboxProfile(profile);
+
+  if (!isRecord(profile)) throw new Error('Idleon Efficiency public profile must be an object');
+  if (!Array.isArray(profile.playerNames) || profile.playerNames.length === 0 || profile.playerNames.some(name => typeof name !== 'string' || name.length === 0)) {
+    throw new Error('Idleon Efficiency public profile is missing valid character names');
+  }
+  if (!isRecord(profile.servervars)) throw new Error('Idleon Efficiency public profile is missing valid server variables');
+  if (!Array.isArray(profile.companions)) throw new Error('Idleon Efficiency public profile is missing companion ownership data');
+
+  return { ...profile };
+}
+
+module.exports = { ADAPTER_VERSION, getAdapterVersion, importPublicProfile };

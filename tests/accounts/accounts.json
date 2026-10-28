@@ -38,6 +38,14 @@
         "menagerieOwnedUnlocks": 14,
         "menagerieBonusLevels": 107
       }
+    },
+    {
+      "id": "randomdudeman",
+      "profileName": "randomdudeman",
+      "source": "idleon-efficiency",
+      "playerIndex": 1,
+      "preparationPlayerIndex": 6,
+      "reason": "Midgame IE-published account with long-inactive characters."
     }
   ]
 }

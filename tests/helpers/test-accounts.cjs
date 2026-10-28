@@ -5,7 +5,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const net = require('node:net');
 const { spawn } = require('node:child_process');
-const { importPublicProfile, ADAPTER_VERSION } = require('./public-profile-import.cjs');
+const { importPublicProfile, getAdapterVersion } = require('./public-profile-import.cjs');
 const { loadAccountDataset, hashFile, hashConfigs, hashAssets } = require('./account-dataset.cjs');
 
 const root = path.resolve(__dirname, '../..');
@@ -104,6 +104,7 @@ function selectedAccounts(options) {
   return options.ids.map(id => {
     const account = all.get(id);
     if (!account) fail(`Unknown account ID: ${id}`);
+    getAdapterVersion(account.source);
     preparationIndexFor(account);
     return account;
   });
@@ -131,8 +132,15 @@ function validateSnapshotManifest(manifest, account) {
   if (manifest.accountId !== account.id) {
     fail(`Latest snapshot does not match configured account ${account.id}`);
   }
-  if (manifest.adapterVersion !== ADAPTER_VERSION) {
-    fail(`Snapshot importer version mismatch for ${account.id}: expected ${ADAPTER_VERSION}, found ${manifest.adapterVersion}`);
+  const source = manifest.source === undefined ? 'toolbox' : manifest.source;
+  const configuredSource = account.source === undefined ? 'toolbox' : account.source;
+  const adapterVersion = getAdapterVersion(source);
+  getAdapterVersion(configuredSource);
+  if (source !== configuredSource) {
+    fail(`Snapshot source mismatch for ${account.id}: expected ${configuredSource}, found ${source}`);
+  }
+  if (manifest.adapterVersion !== adapterVersion) {
+    fail(`Snapshot importer version mismatch for ${account.id}: expected ${adapterVersion}, found ${manifest.adapterVersion}`);
   }
   if (!Number.isSafeInteger(manifest.playerIndex) || manifest.playerIndex < 0) {
     fail(`Invalid snapshot player index for ${account.id}`);
@@ -156,9 +164,11 @@ function writeJsonAtomically(file, value) {
 }
 function snapshotId() { return `${new Date().toISOString().replaceAll(/[:.]/g, '-')}-${crypto.randomBytes(4).toString('hex')}`; }
 
-function writeProfileSnapshot(options, account, rawBytes, { fetchedAt, importedAt, sourceSnapshot }) {
+function writeProfileSnapshot(options, account, rawBytes, { fetchedAt, importedAt, sourceSnapshot, sourceUpdatedAt }) {
+  const source = account.source === undefined ? 'toolbox' : account.source;
+  const adapterVersion = getAdapterVersion(source);
   const profile = JSON.parse(rawBytes.toString('utf8'));
-  const save = importPublicProfile(profile);
+  const save = importPublicProfile(profile, source);
   const playerName = save.playerNames[account.playerIndex];
   if (!playerName) fail(`Configured player index ${account.playerIndex} is absent for ${account.id}`);
   const base = accountDirectory(options, account);
@@ -168,15 +178,16 @@ function writeProfileSnapshot(options, account, rawBytes, { fetchedAt, importedA
   fs.mkdirSync(snapshot);
   fs.writeFileSync(path.join(snapshot, 'raw-profile.json'), rawBytes);
   writeJson(path.join(snapshot, 'save.json'), save);
-  const metrics = publicProfileMetrics(profile);
   const manifest = {
-    schemaVersion: 1, accountId: account.id, profileName: account.profileName,
-    adapterVersion: ADAPTER_VERSION, savePath: 'save.json', saveSha256: hashFile(path.join(snapshot, 'save.json')),
+    schemaVersion: 1, accountId: account.id, profileName: account.profileName, source,
+    adapterVersion, savePath: 'save.json', saveSha256: hashFile(path.join(snapshot, 'save.json')),
     rawProfilePath: 'raw-profile.json', rawProfileSha256: hashFile(path.join(snapshot, 'raw-profile.json')),
     playerIndex: account.playerIndex, playerName, fetchedAt,
-    sourceUpdatedAt: profile.lastUpdated,
-    progression: { source: 'latest profile parsedData', metrics, accountSelection: account.progression }
+    sourceUpdatedAt: source === 'toolbox' ? profile.lastUpdated : sourceUpdatedAt
   };
+  if (source === 'toolbox') {
+    manifest.progression = { source: 'latest profile parsedData', metrics: publicProfileMetrics(profile), accountSelection: account.progression };
+  }
   if (importedAt !== undefined) manifest.importedAt = importedAt;
   if (sourceSnapshot !== undefined) manifest.sourceSnapshot = sourceSnapshot;
   writeJson(path.join(snapshot, 'manifest.json'), manifest);
@@ -186,11 +197,18 @@ function writeProfileSnapshot(options, account, rawBytes, { fetchedAt, importedA
 
 async function fetchProfiles(options, accounts) {
   for (const account of accounts) {
-    const url = `https://profiles.idleontoolbox.workers.dev/api/profiles/?profile=${encodeURIComponent(account.profileName)}`;
+    const source = account.source === undefined ? 'toolbox' : account.source;
+    getAdapterVersion(source);
+    const url = source === 'idleon-efficiency'
+      ? `https://cdn.idleonefficiency.com/profiles/${encodeURIComponent(account.profileName.toLowerCase())}.json`
+      : `https://profiles.idleontoolbox.workers.dev/api/profiles/?profile=${encodeURIComponent(account.profileName)}`;
     const response = await fetch(url);
     if (!response.ok) fail(`Profile fetch failed for ${account.id}: HTTP ${response.status}`);
     const rawBytes = Buffer.from(await response.arrayBuffer());
-    const snapshot = writeProfileSnapshot(options, account, rawBytes, { fetchedAt: new Date().toISOString() });
+    const snapshot = writeProfileSnapshot(options, account, rawBytes, {
+      fetchedAt: new Date().toISOString(),
+      sourceUpdatedAt: source === 'idleon-efficiency' ? response.headers.get('last-modified') ?? undefined : undefined
+    });
     const manifest = readSnapshotManifest(snapshot, account);
     const base = accountDirectory(options, account);
     console.log(`${account.id}: fetched ${formatSourceDate(manifest.sourceUpdatedAt)}; snapshot ${path.relative(base, snapshot)}`);
@@ -400,7 +418,8 @@ async function extractAccount(options, account) {
     if (!files.length) fail(`Batch extractor produced no results for ${account.id}; outputs retained at ${resultsDir}`);
     const hashes = Object.fromEntries(files.map(file => [file, hashFile(path.join(resultsDir, file))]));
     const descriptor = {
-      schemaVersion: 2, accountId: account.id, profileName: account.profileName, adapterVersion: ADAPTER_VERSION,
+      schemaVersion: 2, accountId: account.id, profileName: account.profileName,
+      source: manifest.source === undefined ? 'toolbox' : manifest.source, adapterVersion: manifest.adapterVersion,
       savePath: path.relative(runDir, savePath).split(path.sep).join('/'), saveSha256: manifest.saveSha256,
       resultsDir: 'results', playerIndex: account.playerIndex, playerName: name, gameVersion: primaryVersion,
       ...preparationIdentity,

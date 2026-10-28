@@ -405,6 +405,12 @@ Stop the process before starting the next candidate on the same port.
 Keep candidates, game assets, save input, and startup conditions identical except for the chosen character.
 Compare ties explicitly; no single character must maximize every output.
 
+Check every character-sensitive output covered by the selected tests, not only the example talent.
+Gaming's Bits talent and Breeding's Arena Spirit can change with the recipient.
+Confirm that a genuine character reaches each complete account-best result.
+If different results need different characters, record which comparisons need another character context.
+Do not combine different characters' inputs into one claimed in-game result.
+
 After choosing the preparation character, repeat the relevant checks with that preparation character and the chosen extraction character.
 Also check any config-required extraction character.
 Startup preserves the native Tome cache while original UI navigation selects the final character.

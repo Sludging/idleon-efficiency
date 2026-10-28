@@ -75,6 +75,100 @@ describe('account runner CLI contract', () => {
   });
 });
 
+describe('public-profile snapshot source boundaries', () => {
+  let cacheDir: string;
+  const account = { id: 'synthetic-profile', profileName: 'Synthetic', playerIndex: 1, source: 'idleon-efficiency' };
+  const ieAdapterVersion = 'ie-public-profile-1';
+
+  beforeEach(() => {
+    cacheDir = fs.mkdtempSync(path.join(os.tmpdir(), 'profile-source-snapshot-'));
+  });
+
+  afterEach(() => {
+    fs.rmSync(cacheDir, { recursive: true, force: true });
+  });
+
+  it.each([undefined, 'toolbox'])('accepts legacy source-omitted Toolbox snapshots with configured source %s', (source) => {
+    fs.writeFileSync(path.join(cacheDir, 'manifest.json'), JSON.stringify({
+      schemaVersion: 1, accountId: account.id, playerIndex: 1, adapterVersion: ADAPTER_VERSION
+    }));
+
+    expect(() => readSnapshotManifest(cacheDir, { ...account, source })).not.toThrow();
+  });
+
+  it.each([
+    ['idleon-efficiency', 'toolbox', ieAdapterVersion, 'Snapshot source mismatch'],
+    ['toolbox', 'idleon-efficiency', ADAPTER_VERSION, 'Snapshot source mismatch'],
+    [undefined, 'idleon-efficiency', ADAPTER_VERSION, 'Snapshot source mismatch'],
+    ['idleon-efficiency', 'idleon-efficiency', ADAPTER_VERSION, 'Snapshot importer version mismatch'],
+    ['toolbox', 'toolbox', ieAdapterVersion, 'Snapshot importer version mismatch'],
+    ['unknown-source', 'unknown-source', ieAdapterVersion, 'Unsupported public profile source']
+  ])('rejects snapshot source %s with configured source %s and adapter %s', (source, configuredSource, adapterVersion, error) => {
+    fs.writeFileSync(path.join(cacheDir, 'manifest.json'), JSON.stringify({
+      schemaVersion: 1, accountId: account.id, playerIndex: 1, source, adapterVersion
+    }));
+
+    expect(() => readSnapshotManifest(cacheDir, { ...account, source: configuredSource })).toThrow(error);
+  });
+
+  it.each(['2026-10-19T12:00:00.000Z', undefined])(
+    'preserves IE cached bytes and publication metadata %s without using gameplay timestamps',
+    (sourceUpdatedAt) => {
+      const options = { cacheDir };
+      const fetchedAt = '2026-10-20T12:00:00.000Z';
+      const importedAt = '2026-10-21T12:00:00.000Z';
+      const rawBytes = Buffer.from(`${JSON.stringify({
+        playerNames: ['First', 'Selected'],
+        servervars: { GameVERSION: 141 },
+        companions: [],
+        AttackLoadout_0: '[1, 2]',
+        NativeUnknown: [1, { kept: true }],
+        TimeAway: '{"GlobalTime":123,"TimeAway":456}',
+        lastUpdated: '2020-01-01T00:00:00.000Z',
+        bun_u: 1
+      }, null, 2)}\n`);
+      const firstSnapshot = writeProfileSnapshot(options, account, rawBytes, { fetchedAt, sourceUpdatedAt });
+      const firstManifestPath = path.join(firstSnapshot, 'manifest.json');
+      const firstManifestBytes = fs.readFileSync(firstManifestPath);
+      const firstManifest = readSnapshotManifest(firstSnapshot, account);
+      const firstSaveBytes = fs.readFileSync(path.join(firstSnapshot, firstManifest.savePath));
+      const retainedRawBytes = fs.readFileSync(path.join(firstSnapshot, firstManifest.rawProfilePath));
+      const accountDir = path.join(cacheDir, account.id);
+      const sourceSnapshot = path.relative(accountDir, firstSnapshot).split(path.sep).join('/');
+      const secondSnapshot = writeProfileSnapshot(options, account, retainedRawBytes, {
+        fetchedAt, importedAt, sourceSnapshot, sourceUpdatedAt: firstManifest.sourceUpdatedAt
+      });
+      const secondManifest = readSnapshotManifest(secondSnapshot, account);
+      const secondSavePath = path.join(secondSnapshot, secondManifest.savePath);
+      const secondRawPath = path.join(secondSnapshot, secondManifest.rawProfilePath);
+      const secondSave = JSON.parse(fs.readFileSync(secondSavePath, 'utf8'));
+
+      expect(secondSnapshot).not.toBe(firstSnapshot);
+      expect(retainedRawBytes).toEqual(rawBytes);
+      expect(fs.readFileSync(secondRawPath)).toEqual(rawBytes);
+      expect(firstManifest).toMatchObject({
+        schemaVersion: 1, source: 'idleon-efficiency', adapterVersion: ieAdapterVersion,
+        fetchedAt, playerIndex: 1, playerName: 'Selected'
+      });
+      expect(secondManifest).toMatchObject({
+        schemaVersion: 1, source: 'idleon-efficiency', adapterVersion: ieAdapterVersion,
+        fetchedAt, importedAt, sourceSnapshot, playerIndex: 1, playerName: 'Selected',
+        rawProfileSha256: hashFile(secondRawPath), saveSha256: hashFile(secondSavePath)
+      });
+      expect(firstManifest.sourceUpdatedAt).toBe(sourceUpdatedAt);
+      expect(secondManifest.sourceUpdatedAt).toBe(sourceUpdatedAt);
+      expect(secondManifest.rawProfileSha256).toBe(firstManifest.rawProfileSha256);
+      expect(secondSave.AttackLoadout_0).toBe('[1, 2]');
+      expect(secondSave.NativeUnknown).toEqual([1, { kept: true }]);
+      expect(secondSave.TimeAway).toBe('{"GlobalTime":123,"TimeAway":456}');
+      expect(secondSave).not.toHaveProperty('GemsPacksPurchased');
+      expect(secondSave).not.toHaveProperty('BundlesReceived');
+      expect(fs.readFileSync(firstManifestPath)).toEqual(firstManifestBytes);
+      expect(fs.readFileSync(path.join(firstSnapshot, firstManifest.savePath))).toEqual(firstSaveBytes);
+    }
+  );
+});
+
 describe('serial public-account extraction', () => {
   const root = path.resolve(__dirname, '../..');
   const configsDir = path.join(root, 'tests/configs');
@@ -109,8 +203,8 @@ describe('serial public-account extraction', () => {
     fs.rmSync(cacheDir, { recursive: true, force: true });
   });
 
-  function snapshotFixture(playerIndex = 1) {
-    const account = { id: 'retained-save', profileName: 'retained-save', playerIndex };
+  function snapshotFixture(playerIndex = 1, source?: string) {
+    const account = { id: 'retained-save', profileName: 'retained-save', playerIndex, source };
     const accountDir = path.join(cacheDir, account.id);
     const snapshot = path.join(accountDir, 'snapshots', 'retained');
     const savePath = path.join(snapshot, 'save.json');
@@ -125,7 +219,8 @@ describe('serial public-account extraction', () => {
       schemaVersion: 1,
       accountId: account.id,
       profileName: account.profileName,
-      adapterVersion: ADAPTER_VERSION,
+      source,
+      adapterVersion: source === 'idleon-efficiency' ? 'ie-public-profile-1' : ADAPTER_VERSION,
       savePath: 'save.json',
       saveSha256: hashFile(savePath),
       playerIndex: 3,
@@ -186,6 +281,7 @@ describe('serial public-account extraction', () => {
     expect(secondSave.GemsOwned).toBe(123);
     expect(secondSave.GemItemsPurchased).toBe(JSON.stringify([1, 2]));
     expect(firstManifest).toMatchObject({
+      source: 'toolbox', adapterVersion: ADAPTER_VERSION,
       fetchedAt, sourceUpdatedAt, playerIndex: 1, playerName: retainedSave.playerNames[1],
       rawProfilePath: 'raw-profile.json', savePath: 'save.json',
       rawProfileSha256: hashFile(firstRawPath), saveSha256: hashFile(firstSavePath)
@@ -193,6 +289,7 @@ describe('serial public-account extraction', () => {
     expect(firstManifest).not.toHaveProperty('importedAt');
     expect(firstManifest).not.toHaveProperty('sourceSnapshot');
     expect(secondManifest).toMatchObject({
+      source: 'toolbox', adapterVersion: ADAPTER_VERSION,
       fetchedAt, sourceUpdatedAt, importedAt, sourceSnapshot,
       playerIndex: 1, playerName: retainedSave.playerNames[1],
       rawProfilePath: 'raw-profile.json', savePath: 'save.json',
@@ -432,6 +529,8 @@ describe('serial public-account extraction', () => {
     expect(files).toEqual(configNames.map(name => name.replace('.json', '-data.json')).sort());
     expect(Object.keys(descriptor.results).sort()).toEqual(files);
     expect(descriptor.schemaVersion).toBe(2);
+    expect(descriptor.source).toBe('toolbox');
+    expect(descriptor.adapterVersion).toBe(ADAPTER_VERSION);
     expect(descriptor.saveSha256).toBe(hashFile(fixture.savePath));
     expect(descriptor.configSha256).toBe(hashConfigs(configsDir));
     expect(descriptor.assetSha256).toBe(hashAssets(assetRoot));
@@ -440,7 +539,7 @@ describe('serial public-account extraction', () => {
     expect(descriptor.preparationPlayerIndex).toBe(fixture.account.playerIndex);
     expect(descriptor.preparationPlayerName).toBe(retainedSave.playerNames[fixture.account.playerIndex]);
     expect(Object.keys(descriptor).sort()).toEqual([
-      'schemaVersion', 'accountId', 'profileName', 'adapterVersion', 'savePath', 'saveSha256',
+      'schemaVersion', 'accountId', 'profileName', 'source', 'adapterVersion', 'savePath', 'saveSha256',
       'resultsDir', 'playerIndex', 'playerName', 'gameVersion', 'preparationPlayerIndex',
       'preparationPlayerName', 'assetSha256', 'configSha256', 'results', 'extractedAt'
     ].sort());
@@ -516,8 +615,11 @@ describe('serial public-account extraction', () => {
     expect(runtime.discoveries).toBe(1);
   });
 
-  it.each([0, 6])('uses explicit preparation actor %s for every extraction group', async (preparationPlayerIndex) => {
-    const fixture = snapshotFixture();
+  it.each([
+    { preparationPlayerIndex: 0, source: undefined, adapterVersion: ADAPTER_VERSION },
+    { preparationPlayerIndex: 6, source: 'idleon-efficiency', adapterVersion: 'ie-public-profile-1' }
+  ])('uses preparation actor $preparationPlayerIndex and records source $source', async ({ preparationPlayerIndex, source, adapterVersion }) => {
+    const fixture = snapshotFixture(1, source);
     const account = { ...fixture.account, preparationPlayerIndex };
     const runtime = externalRuntime({ configs: narrowConfigs });
 
@@ -530,6 +632,8 @@ describe('serial public-account extraction', () => {
     expect(runtime.unclosed).toBe(0);
     const descriptor = JSON.parse(fs.readFileSync(latestDatasetPath(fixture.options, account), 'utf8'));
     expect(descriptor.schemaVersion).toBe(2);
+    expect(descriptor.source).toBe(source ?? 'toolbox');
+    expect(descriptor.adapterVersion).toBe(adapterVersion);
     expect(descriptor.playerIndex).toBe(1);
     expect(descriptor.playerName).toBe(retainedSave.playerNames[1]);
     expect(descriptor.preparationPlayerIndex).toBe(preparationPlayerIndex);
