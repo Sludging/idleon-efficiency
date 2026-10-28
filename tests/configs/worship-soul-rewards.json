@@ -23,11 +23,6 @@
       "description": "Bubba global bonus 3 (Soul Gain)"
     },
     {
-      "label": "dementia_set_bonus",
-      "expression": "idleon.callFunction(\"GetSetBonus\", \"DEMENTIA_SET\", \"Bonus\", 0, 0)",
-      "description": "Dementia equipment set bonus"
-    },
-    {
       "label": "arcade_bonus_24",
       "expression": "idleon.callFunction(\"ArcadeBonus\", 24)",
       "description": "Arcade bonus 24"

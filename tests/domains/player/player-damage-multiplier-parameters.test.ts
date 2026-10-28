@@ -126,9 +126,10 @@ describe('Player damage multiplier direct parameters', () => {
     const family = data.get('family') as Family;
     expect(family.getClassBonus(ClassIndex.Arcane_Cultist)?.getBonus(player) ?? 0).toMatchLiveGame(nativeFamilyBonus80, 0);
   });
-  it('matches native WepPowDmgPCT with weapon base power and weapon-map stone value', () => {
+  it('matches native WepPowDmgPCT with weapon power and Minehead bonus 4', () => {
     const weaponPower = player.gear.equipment[1]?.getProperty('Weapon_Power');
-    expect((weaponPower ? weaponPower.value + weaponPower.stone : 0)).toMatchLiveGame(nativeWeaponPowerBonus, 0);
+    const minehead = data.get('minehead') as Minehead;
+    expect((weaponPower ? weaponPower.value + weaponPower.stone : 0) * minehead.getBonusFromIndex(4)).toMatchLiveGame(nativeWeaponPowerBonus, 0);
   });
 
  

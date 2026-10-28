@@ -16,10 +16,6 @@
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 3, 0)",
       "result": 70
     },
-    "dementia_set_bonus": {
-      "expression": "idleon.callFunction(\"GetSetBonus\", \"DEMENTIA_SET\", \"Bonus\", 0, 0)",
-      "result": 50
-    },
     "arcade_bonus_24": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 24)",
       "result": 7.2727272727272725

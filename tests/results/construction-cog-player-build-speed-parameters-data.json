@@ -1,5 +1,9 @@
 {
   "extractions": {
+    "player_build_speed_active_player": {
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0])",
+      "result": 3
+    },
     "player_build_speed_bubble_12": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.Construction",
       "result": 4.926900584795321

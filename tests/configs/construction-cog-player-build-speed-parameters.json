@@ -1,7 +1,12 @@
 {
-  "description": "Direct calculated inputs used by Construction cog player build speed in active context 3",
+  "description": "Direct calculated inputs used by Construction cog player build speed",
   "target": "Construction cog player build speed parameters",
   "extractions": [
+    {
+      "label": "player_build_speed_active_player",
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0])",
+      "description": "Active character whose prepared gear supplies EtcBonuses"
+    },
     {
       "label": "player_build_speed_bubble_12",
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.Construction",

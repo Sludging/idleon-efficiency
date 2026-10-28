@@ -15,9 +15,11 @@ import { EquipmentBonus } from '../../../data/domain/equipment-effects';
 import { getExtractedValue, loadExtractionResults, validateExtractionHealth, type ExtractionResults } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import type { ParameterTestSpec } from '../../utils/parameter-test-config';
+import { getTargetPlayer } from '../../utils/target-player';
 
 const saveName = 'latest';
 const extractionResultsName = 'construction-cog-player-build-speed-parameters-data.json';
+let activePlayerId: number;
 
 const parameterSpecs: Record<string, ParameterTestSpec> = {
   construction_bubble_12: {
@@ -36,9 +38,9 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
     domainExtractor: data => (data.get('guild') as Guild).guildBonuses.find(bonus => bonus.index === 5)?.getBonus() ?? 0,
   },
   context_gear_build_speed: {
-    description: 'active context character 3 gear Build Speed bonus',
+    description: 'active context character gear Build Speed bonus',
     extractionKey: 'player_build_speed_gear_build_speed',
-    domainExtractor: data => ((data.get('players') as Player[])[3]).gear.getBonus(EquipmentBonus.BuildSpeed),
+    domainExtractor: data => getTargetPlayer(data.get('players') as Player[], activePlayerId).gear.getBonus(EquipmentBonus.BuildSpeed),
   },
   construction_mastery_4: {
     description: 'Construction Mastery build-speed bonus at public index 4',
@@ -104,6 +106,8 @@ describe('Construction cog player build speed parameters', () => {
   beforeAll(() => {
     extractionResults = loadExtractionResults(extractionResultsName);
     validateExtractionHealth(extractionResults);
+    activePlayerId = getExtractedValue(extractionResults, 'player_build_speed_active_player');
+    if (!Number.isInteger(activePlayerId) || activePlayerId < 0) throw new Error('Invalid active character in Construction gear capture');
     gameData = loadGameDataFromSave(saveName);
   });
 
