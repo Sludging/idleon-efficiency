@@ -435,7 +435,7 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Traps, arc
 
     // Refinery
     Object.entries(refinery.salts).forEach(([saltName, saltInfo]) => {
-        if (saltInfo.progress == saltInfo.getCap()) {
+        if (saltInfo.unlocked && saltInfo.progress == saltInfo.getCap()) {
             globalAlerts.push(new GlobalAlert(`${saltName} is ready for rank up.`, AlertType.Refinery, Item.getImageData(saltName)))
         }
         // Fuel is empty math, need storage items logic from the construction page.

@@ -65,7 +65,7 @@ function RefineryDisplay() {
     }, [playerData])
 
     const saltsUnlocked = useMemo(() => {
-        return Object.entries(refineryData.salts).some(([_, info]) => info.rank > 0);
+        return Object.values(refineryData.salts).some(info => info.unlocked);
     }, [refineryData]);
 
     const squireTimeSave = useMemo(() => {
@@ -217,7 +217,7 @@ function RefineryDisplay() {
 
                     if (saltItem) {
                         return (
-                            <ShadowBox key={index} background="dark-1" style={{ opacity: info.rank == 0 ? 0.5 : 1 }}>
+                            <ShadowBox key={index} background="dark-1" style={{ opacity: info.unlocked ? 1 : 0.5 }}>
                                 <Grid columns={size == "small" ? ["50%", "50%"] : ["15%", "20%", "25%", "20%", "20%"]}>
                                     <Box direction="row" gap="medium" align="center" background="dark-2" pad="medium" justify="center" fill>
                                         <Box align="center">

@@ -78,6 +78,7 @@ export class SaltStatus {
     getCap = () => {
         // The math.max(x,25) is taken from Lava's code, guess he got lazy to add more values after 25.
         return parseInt(RankToPowerCap[Math.min(this.rank, 25)]);
+    unlocked: boolean = false
     }
 
     getPowerPerCycle = () => {
@@ -184,10 +185,9 @@ export class Refinery extends Domain {
 
             [...Array(unlockedSalts)].forEach((_, i) => {
                 const saltIndex = i + 3;
-                if (i >= Object.keys(refinery.salts).length) {
+                if (i >= Object.keys(refinery.salts).length || !refineryData[saltIndex]) {
                     return;
                 }
-                refinery.salts[`Refinery${i + 1}`].rank = refineryData[saltIndex][1];
                 refinery.salts[`Refinery${i + 1}`].progress = refineryData[saltIndex][0];
                 refinery.salts[`Refinery${i + 1}`].autoRefine = refineryData[saltIndex][4];
                 refinery.salts[`Refinery${i + 1}`].active = refineryData[saltIndex][3] as boolean;
@@ -237,3 +237,13 @@ export function updateRefinery(data: Map<string, any>) {
 
     return refinery;
 }
+            Object.values(refinery.salts).forEach((salt, index) => {
+                salt.unlocked = index < unlockedSalts;
+                if (refineryData[index + 3]?.[1] != null) {
+                    salt.rank = refineryData[index + 3][1];
+                }
+                if (!salt.unlocked) {
+                    salt.active = false;
+                }
+            });
+
