@@ -77,7 +77,7 @@ describe('Breeding Shiny progression and bonuses', () => {
         debugInfo,
       });
 
-      // The native UI and aggregate bonus consumer require positive progress before reading these helpers.
+      // The game UI and aggregate bonus consumer require positive progress before using these helpers.
       if (expected.progress > 0) {
         expect(pet.shinyLevel).toMatchLiveGameWithDetails(expected.level, {
           tolerance: 0,

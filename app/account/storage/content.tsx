@@ -129,7 +129,7 @@ function StorageDisplay() {
             header: 'In chest / 10M',
             render: (row: GreenstackRow) => (
                 <Box width="small" gap="xxsmall" style={{ opacity: row.credited ? 0.6 : 1 }}>
-                    {row.credited ? <Text size="small">Done</Text> : (
+                    {row.credited ? <Text size="small">Credited</Text> : (
                         <>
                             <Text size="xsmall" color="accent-2">{nFormatter(row.chestAmount)} / 10M</Text>
                             <Box background="grey-1" height="8px" overflow="hidden"

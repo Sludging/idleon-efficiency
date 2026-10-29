@@ -19,7 +19,7 @@ import { Printer } from "./printer";
 import { Cooking } from "../../world-4/cooking";
 import { ResearchGrid } from "../../world-7/research";
 
-// PowerPerCycle caps the result before rounding (game 1.24, idleon1.24.txt:172357-172366).
+// Cap power per cycle before rounding down.
 const MAX_POWER_PER_CYCLE = 250000;
 
 const RankToPowerCap = "50 50 200 800 3000 8000 14000 20000 30000 40000 50000 65000 80000 100000 200000 300000 400000 500000 600000 700000 800000 900000 1000000 1000000 1000000 1000000".split(" ");
@@ -163,7 +163,8 @@ export class SaltStatus {
     }
 
     getCyclesTillNextRank = () => {
-        // Game 1.24 rounds remaining cycles; the Refinery screen fills an overshoot gap without fuel (169655–169663, 169857–169887).
+        // Round the remaining cycle count to the nearest whole cycle.
+        // The Refinery screen fills the final progress without consuming fuel.
         const remainingProgress = Math.max(0, this.getCap() - this.progress);
         return Math.round(remainingProgress / Math.max(this.getPowerPerCycle(), 1));
     }
@@ -337,7 +338,7 @@ export function updateRefinery(data: Map<string, any>) {
     refinery.cycleInfo["Synthesis"].cycleTime = Math.ceil(900 * Math.pow(4, 1) / ((1 + (vialBonus + (saltLickBonus + divineKnightBonus + (sigilsBonus + (stampBonus + (refinery.shinyBonusSpeed + (riftBonus + (arcadeBonus + votesBonus + researchSpeedBonus))))))) / 100) * Math.max(1, labCycleBonus) * (1 + legendTalentBonus / 100)));
     refinery.cycleInfo["Synthesis"].timePast += secondsSinceUpdate;
 
-    // Polymerization has a longer base cycle and its own speed bonuses (game 1.24, idleon1.24.txt:172366-172386).
+    // Polymerization has a longer base cycle and its own speed bonuses.
     refinery.cycleInfo["Polymerization"].cycleTime = Math.ceil(900 * Math.pow(4, 2) * 25 / ((1 + (vialBonus + (saltLickBonus + divineKnightBonus + (sigilsBonus + (stampBonus + (refinery.shinyBonusSpeed + (riftBonus + (arcadeBonus + votesBonus + researchSpeedBonus))))))) / 100) * Math.max(1, labCycleBonus) * (1 + legendTalentBonus / 100) * (1 + polymerizationBonus / 100)));
     refinery.cycleInfo["Polymerization"].timePast += secondsSinceUpdate;
 

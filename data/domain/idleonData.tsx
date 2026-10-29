@@ -292,7 +292,7 @@ const postProcessingMap: Record<string, Function> = {
     "friends": (doc: Cloudsave, accountData: Map<string, any>) => updateFriends(accountData),
     // Parsed ownership contributes to Equinox before Research and to Collider/Construction before their consumers.
     "gamingSuperbitImpacts": (doc: Cloudsave, accountData: Map<string, any>) => updateSuperbitImpacts(accountData),
-    // Killroy uses parsed Rift progress and prepares run gates before shared bonus consumers.
+    // Killroy uses Rift progress and prepares run requirements before shared bonuses.
     "killroy": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateKillroy(accountData),
     // Research consumes parsed companion, Equinox, and Sushi state before downstream consumers calculate.
     "researchGrid": (doc: Cloudsave, accountData: Map<string, any>) => updateResearchGrid(accountData),
@@ -364,7 +364,7 @@ const postProcessingMap: Record<string, Function> = {
     // Prepare exalted stamp scaling after its account inputs and before stamp bonuses.
     "compassExaltedStampBonus": (_doc: Cloudsave, accountData: Map<string, any>) => updateCompassExaltedStampBonus(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStamps(accountData),
-    // Well rates use settled Cavern Resource Stamp bonuses.
+    // Well rates use calculated Cavern Resource Stamp bonuses.
     "holeWell": (_doc: Cloudsave, accountData: Map<string, any>) => updateHoleWell(accountData),
     "forge": (doc: Cloudsave, accountData: Map<string, any>) => updateForge(accountData.get("forge"), accountData.get("gems"), accountData.get("menagerie"), accountData.get("cards")),
     "worshipTotalizer": (doc: Cloudsave, accountData: Map<string, any>) => updateWorshipTotalizer(accountData),
@@ -430,7 +430,7 @@ const postProcessingMap: Record<string, Function> = {
     "spelunkingPower": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingPower(accountData),
     // Saved metrics use final character inputs and effective account upgrade bonuses.
     "spelunkingAccountMetrics": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingAccountMetrics(accountData),
-    // Meritocracy and Star Signs must settle before character-specific Construction rates.
+    // Calculate Meritocracy and Star Sign bonuses before character-specific Construction rates.
     "meritocratyLate": (_doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyLate(accountData),
     "starSignMeritocracyBonus": (_doc: Cloudsave, accountData: Map<string, any>) => updateStarSignMeritocracyBonus(accountData),
     "storageGreenstacks": (_doc: Cloudsave, accountData: Map<string, any>) => updateStorageGreenstacks(accountData),

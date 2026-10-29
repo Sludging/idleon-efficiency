@@ -12,7 +12,7 @@ const usage = `Usage:
   node data/compose-starter-offers.js [--output-dir <directory>]
   node data/compose-starter-offers.js --help
 
-Compose genuine APK layers at their native nonhover positions.
+Compose APK layers at their native positions when the pointer is not over the offer.
 Output files are StarterOfferBabyTroll.png, StarterOfferBalloonfish.png, and StarterOfferBubba.png.
 Existing files are overwritten. --output-dir is relative to the current working directory.
 Print one JSON evidence record per output. Bounds and cropOffset use card-local coordinates.`;

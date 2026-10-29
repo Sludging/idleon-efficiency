@@ -63,7 +63,7 @@ describe('Meritocracy Ballot core results', () => {
     ]).toEqual(state.candidateIndices);
   });
 
-  it.each([0, 1, 2])('matches candidate %i vote percentage', (slot) => {
+  it.each([0, 1, 2])("matches candidate %i's vote percentage", (slot) => {
     const percentages = [
       meritocracy.ongoingVoteTopOptionPercent,
       meritocracy.ongoingVoteMiddleOptionPercent,

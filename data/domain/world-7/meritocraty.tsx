@@ -73,7 +73,7 @@ export class Meritocraty extends Domain {
         }
 
         meritocraty.canVote = optionList[472] == 1;
-        // Native startup replaces the saved selector with the server's current winner.
+        // On startup, the game replaces the saved selection with the server's current winner.
         meritocraty.currentBonusIndex = serverVars.voteCat2?.[0] ?? 1;
 
         // The game server payload names these categories voteCat2.
@@ -145,7 +145,7 @@ export const updateMeritocratyBonus = (data: Map<string, any>) => {
     const legendTalentsBonus24 = legendTalents.getBonusFromIndex(24);
     const arcadeBonus59 = arcade.bonuses.find(bonus => bonus.index == 59)?.getBonus() || 0;
     const eventShopBonus23 = eventShop.isBonusOwned(23) ? 20 : 0;
-    // Sushi RoG_BonusQTY gates by the total unique unlock count, not a scene or level.
+    // Masago Temaki's unlock bonus applies once 52 unique Sushi are unlocked.
     const sushiBonus51 = sushi.getUniqueSushi() > 51 ? sushi.getBonusFromIndex(51) : 0;
     const jellyBonus33 = jelly.obstructions.find(obstruction => obstruction.index == 33)?.getBonus() ?? 0;
 

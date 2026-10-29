@@ -763,7 +763,7 @@ export class Alchemy extends Domain {
         };
     }
 
-    // Targets use saved levels and the first-15 scan. The reset can choose different targets.
+    // Targets use saved levels and only the first 15 bubbles in each cauldron.
     // Level gains are the game's displayed values, not bounds on every reset.
     getDailyBubbleProgression(player: Player): DailyBubbleProgression {
         const enabled = this.dailyMainframeBonus > 0.5 || this.dailyBundleOwned || this.dailyEventOwned;
@@ -906,7 +906,7 @@ export class Alchemy extends Domain {
         return this.cauldrons[cauldron].bubbles[bubble].getBonusText(this.getBonusForBubble(cauldron, bubble));
     }
 
-    // Class-bound bonuses retain Beginner exceptions (game source 104416–104440).
+    // Some class-bound bonuses also apply to Beginners.
     private isBubbleAllowedForClass(bonusKey: string, classId: number): boolean {
         switch (bonusKey) {
             case 'W1':
@@ -944,7 +944,7 @@ export class Alchemy extends Domain {
         }
 
         if (bonusKey === 'MinEff' || bonusKey === 'ChopEff') {
-            // health or mana scales the raw bonus before class and 16th-bubble multipliers.
+            // Health or mana scales the raw bonus before class and 16th-bubble multipliers.
             const preparationMaximum = bonusKey === 'MinEff'
                 ? player.health.getAlchemyMaxHP()
                 : player.health.getAlchemyMaxMP();

@@ -1194,7 +1194,7 @@ const getPlayerTalentLevelInputs = (
     };
 };
 
-// Prepare inputs without ES levels. Family projects raw and amplified ES values in the original game order.
+// Prepare inputs without Elemental Sorcerer levels. Family calculates its bonuses in game order.
 export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const divinity = data.get("divinity") as Divinity;
@@ -1216,7 +1216,7 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
     return players;
 };
 
-// Consume the recipient's ordered Family result without changing the inputs used by Family's local projection.
+// Use the recipient's Family result without changing the inputs used to calculate it.
 export const updatePlayerTalentLevelESBonus = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const family = data.get("family") as Family;

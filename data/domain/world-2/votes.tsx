@@ -134,7 +134,7 @@ export const updateVotesBonus = (data: Map<string, any>) => {
     const multiFromGamingPalette32 = gaming.getPaletteBonus(32);
     const multiFromLegendTalents22 = legendTalents.getBonusFromIndex(22);
     const multiFromCompanion19 = getCompanionActiveBonus(companions, 19);
-    // RoG_BonusQTY(50, 0) returns Sushi 50's unlock bonus only after 51 unique Sushi are unlocked.
+    // Masago's unlock bonus applies only after 51 unique Sushi are unlocked.
     const multiFromSushi50 = sushi.getUniqueSushi() > 50 ? sushi.getBonusFromIndex(50) : 0;
     votes.bonusSources.crystalCuttlefish = multiFromCompanion41;
     votes.bonusSources.equinox = multiFromDream13;

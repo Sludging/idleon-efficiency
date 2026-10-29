@@ -30,7 +30,7 @@ describe('Sailing Domain - Minimum Travel Time - Parameters', () => {
     validateExtractionHealth(legendTalentResults);
   });
 
-  it('matches the captured-recipient Siege Breaker Family bonus', () => {
+  it('matches the Siege Breaker Family bonus for the captured character', () => {
     const family = gameData.get('family') as Family;
     const player = getTargetPlayer(gameData.get('players') as Player[]);
     const domainValue = family.classBonus.get(ClassIndex.Siege_Breaker)!.getBonus(player);

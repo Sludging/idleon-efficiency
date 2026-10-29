@@ -38,7 +38,7 @@ describe('Friends Domain - Stats', () => {
   extractionResults = loadExtractionResults(extractionResultsName);
   validateExtractionHealth(extractionResults);
   const nativeAssignments = String(extractionResults.extractions.friend_bonus_assignments.result);
-  // Native consumers treat both sentinels as no assigned Friend Bonuses.
+  // The game treats both '0' and an empty string as no assigned Friend Bonuses.
   const assignmentRecords = nativeAssignments === '0' || nativeAssignments === '' ? [] : nativeAssignments.split(';');
   contributors = new Map(
    assignmentRecords.map(record => {

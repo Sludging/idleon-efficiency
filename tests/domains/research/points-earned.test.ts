@@ -20,7 +20,7 @@ describe('Research earned Points', () => {
         preview = researchPreviewExpectations();
     });
 
-    it('reports website preview earned Points before entry and matches native earned Points after entry', () => {
+    it('reports previewed earned Points before entry and matches game Points after entry', () => {
         const extraction = results.extractions.points_earned;
         if (!extraction || extraction.result === null || extraction.result === undefined) {
             throw new Error('Missing native earned Research Points: ResearchStuff/Grid_PTSearned(0, 0)');

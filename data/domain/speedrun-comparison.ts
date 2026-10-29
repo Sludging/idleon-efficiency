@@ -24,7 +24,7 @@ export const getSpeedrunPortalEstimate = (
 };
 
 
-/** Estimates portal progress from native credit per defeated monster. */
+/** Estimates portal progress from the game's credit per defeated monster. */
 export class SpeedrunComparison {
     private readonly killCredit: SpeedrunKillCredit;
 

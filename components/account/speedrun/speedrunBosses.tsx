@@ -27,7 +27,7 @@ export function SpeedrunBosses({ speedrun, runner }: { speedrun: Speedrun; runne
                 <Text size="small" color="accent-2">
                     Defeating Normal first uses that boss&apos;s award. Harder difficulties cannot award it again during the same run.
                 </Text>
-                {!awardsAvailable && <Text size="small">Learn Void Trial Rerun and Bossing Vain to earn boss portals.</Text>}
+                {!awardsAvailable && <Text size="small">Boss portal awards require Void Trial Rerun and Bossing Vain.</Text>}
             </Box>
             <Box gap="small">
                 <Box direction="row" align="center" gap="medium" wrap>

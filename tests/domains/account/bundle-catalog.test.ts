@@ -142,7 +142,7 @@ describe('Filtered bundle offer totals - CORE', () => {
     });
   });
 
-  it('sums Prisma fragment units separately from Gems and keeps unknown resource amounts partial', () => {
+  it('sums Prisma fragments separately from Gems and reports partial totals for unknown amounts', () => {
     const totals = calculateBundleTableTotals([
       controlledOffer({ otherCurrencies: [{ name: 'Prisma Bubble fragments', amount: 20 }] }),
       controlledOffer({ otherCurrencies: [{ name: 'Prisma Bubble fragments', amount: 10 }] }),

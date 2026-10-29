@@ -49,7 +49,7 @@ it('matches the final Majik point pool, upgrade caps, and bonuses', () => {
   });
  });
 
-it('matches paired Pocket Divinity selected character All Stat contribution', () => {
+it('matches the selected character’s paired Pocket Divinity All Stat contribution', () => {
   const target = getTargetPlayer(data.get('players') as Player[]);
   const character = hole.majiks.pocketDivinity.characters.find(record => record.playerId === target.playerID)!;
   coreNumber(character.allStatPercent, results,

@@ -139,7 +139,6 @@ function ShopCard({ offer, killroy }: { offer: KillroyShopOffer; killroy: KillRo
                     <Text size="xsmall" color="accent-2">Success chance: {probability(bonus.upgradeSuccessProbability)} per purchase.{bonus.upgradeSuccessProbability < 1 ? ' Guaranteed from level 2.' : ''}</Text>
                     <Text size="xsmall" color="accent-2">Also contributes toward up to 2 extra Grade 2 podiums.</Text>
                 </>}
-                {!offer.hasKnownGameplayEffect && <Text size="small">This reward has no known use yet.</Text>}
             </> : name ? <Text size="small">{shopDescription(offer)}</Text> : null}
             {!completed && <ResourceDisplay resourceImageData={skullImage} cost={offer.data.skullCost} canAfford={killroy.skulls >= offer.data.skullCost} textSize="small" showTooltip={false} />}
         </Box>

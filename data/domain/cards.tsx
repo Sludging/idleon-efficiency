@@ -86,7 +86,7 @@ export class Card {
         return (this.baseDropChance > 0) ? "1 in " + nFormatter(Math.round(1 / this.baseDropChance)) : "Not Found";
     }
 
-    // Display-star requirements use a different curve from native effect-level progression.
+    // Displayed star requirements use a different curve from card effect levels.
     getCardsForLevel = (level: number): number => {
         if (level <= 0) {
             return 1;
@@ -98,7 +98,7 @@ export class Card {
 
     private getProgressionThreshold = (level: number): number => {
         const thresholdLevel = level - 1;
-        // Only native effect-level progression uses Chaotic Chizoar's special threshold curve.
+        // Only card effect levels use Chaotic Chizoar's special threshold curve.
         const threshold = this.id == "Boss3B"
             ? 1.5 * Math.pow(thresholdLevel + 1 + Math.floor(thresholdLevel / 3), 2)
             : this.data.perTier * Math.pow(thresholdLevel + 1 + (Math.floor(thresholdLevel / 3) + (16 * Math.floor(thresholdLevel / 4) + 100 * Math.floor(thresholdLevel / 5))), 2);

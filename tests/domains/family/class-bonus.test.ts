@@ -1,7 +1,7 @@
 /**
  * Family Class Bonus calculation tests.
  *
- * TalentCalc(-3) rebuilds FamBonusQTYs from each character's class lineage.
+ * TalentCalc(-3) rebuilds Family Bonus values from each character's class lineage.
  * Branch 0 is stored at `2 * classId`. Unowned classes contribute zero.
  * The comparisons use Family's public API rather than the static bonus mapping.
  *

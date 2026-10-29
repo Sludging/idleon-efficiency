@@ -36,7 +36,7 @@ function CollectionSummary({ expeditions }: { expeditions: IslandExpeditions }) 
                 </Box>
                 <Box gap="xxsmall">
                     {collectorName ? <TipDisplay heading="Bottle collection character" maxWidth="360px" body={<Text size="small">
-                        Collect with {collectorName} for this rate. Their {completed}/6 completed Omar quests increase Bottle gain.
+                        Collect with {collectorName} for this rate. Omar quests completed: {completed}/6. Each completed quest increases Bottle gain.
                     </Text>}>
                         <Box tabIndex={0} aria-label="Bottle collection character" style={{ cursor: 'help' }}>
                             <Text size="large">{commaNotation(expeditions.collection.bottlesPerDay)}</Text>
@@ -142,7 +142,7 @@ function RandoDetails({ expeditions }: { expeditions: IslandExpeditions }) {
                 const completed = evidence ? hasObtainedReward(evidence) : false;
                 const name = itemId
                     ? (evidence?.book ? `${evidence.book.talentName} ${itemDetails[itemId].displayName}` : itemDetails[itemId].displayName)
-                    : reward.index === 0 ? 'Random-event loot' : 'Rando Island double-boss chance';
+                    : reward.index === 0 ? 'Random Event loot' : 'Rando Island double-boss chance';
                 return <RewardCard key={reward.index} name={name} itemId={itemId} completed={completed} testId={`island-rando-reward-${reward.index}`}>
                     {reward.index === 0 && <>
                         <Text size="xsmall" color="accent-2">Level {rando.lootLevel}</Text>

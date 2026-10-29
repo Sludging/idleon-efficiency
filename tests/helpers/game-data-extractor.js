@@ -117,7 +117,7 @@ Use live mode only to refresh a save. See tests/helpers/README.md#game-access.`)
      const context = this.results.context;
      if (typeof context?.mapInternalName !== 'string' || !context.mapInternalName.includes('Town')) {
       throw new Error(
-       `Town capture required for '${label}': active map ${context?.mapId} (${context?.mapInternalName}) is not a Town. Capture this value in a Town with a matching Town save.`
+       `Town capture required for '${label}': active map ${context?.mapId} (${context?.mapInternalName}). Capture this value in a Town with a matching Town save.`
       );
      }
     }

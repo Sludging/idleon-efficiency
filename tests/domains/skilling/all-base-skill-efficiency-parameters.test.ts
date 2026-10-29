@@ -17,7 +17,7 @@ const parameters: ParameterTestSpec[] = [
     domainExtractor: data => (data.get('breeding') as Breeding).shinyBonuses.find(bonus => bonus.data.index === 22)!.getBonus(),
   },
   {
-    description: 'stamps add the target-character effective stamp contribution to base efficiency',
+    description: 'stamps add base efficiency for the target character',
     extractionKey: 'stamps_base_efficiency',
     domainExtractor: data => getStampBonusForKey(data.get('stamps') as Stamp[][], 'BaseAllEff') * Math.max(targetPlayer(data).getTalentBonus(625), 1),
   },

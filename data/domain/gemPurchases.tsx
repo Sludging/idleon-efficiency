@@ -40,11 +40,11 @@ export class GemPurchase {
     }
 
     getCurrentCost(): number {
-        // This displayed quote does not establish whether the purchase is available.
         return Math.round(this.pucrhased * this.costIncrement + this.cost);
     }
 
     getCostToMax(): number {
+        // Round each purchase price before adding the remaining costs.
         let total = 0;
         for (let count = this.pucrhased; count < this.maxPurchases; count++) {
             total += Math.round(count * this.costIncrement + this.cost);

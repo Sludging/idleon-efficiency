@@ -20,7 +20,7 @@ describe('Research account-wide lens ownership', () => {
         preview = researchPreviewExpectations();
     });
 
-    it('reports website preview total lenses before entry and matches native total after entry', () => {
+    it('reports the previewed lens total before entry and matches the game total after entry', () => {
         expect(research.lensOwnership.total).toMatchLiveGameWithDetails(researchExpected(preview, 'owned_lenses', () => getExtractedValue(results, 'owned_lenses')), {
             tolerance: 0,
             context: 'Total owned Research lenses, including Optical Monocles and Kaleidoscopes',
@@ -41,7 +41,7 @@ describe('Research account-wide lens ownership', () => {
         });
     });
 
-    it('reports website preview lens capacity before entry and matches native capacity after entry', () => {
+    it('reports previewed lens capacity before entry and matches game capacity after entry', () => {
         expect(research.lensOwnership.capacityPerObservation).toMatchLiveGameWithDetails(researchExpected(preview, 'lens_capacity', () => getExtractedValue(results, 'lens_capacity')), {
             tolerance: 0,
             context: 'Maximum lenses per Observation',

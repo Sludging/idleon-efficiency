@@ -38,7 +38,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
     domainExtractor: data => (data.get('guild') as Guild).guildBonuses.find(bonus => bonus.index === 5)?.getBonus() ?? 0,
   },
   context_gear_build_speed: {
-    description: 'active context character gear Build Speed bonus',
+    description: 'active character gear Build Speed bonus',
     extractionKey: 'player_build_speed_gear_build_speed',
     domainExtractor: data => getTargetPlayer(data.get('players') as Player[], activePlayerId).gear.getBonus(EquipmentBonus.BuildSpeed),
   },

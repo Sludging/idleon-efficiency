@@ -21,7 +21,7 @@ describe('validateTownExtractionContext', () => {
     expect(() => validateTownExtractionContext(results, selectedContext)).not.toThrow();
   });
 
-  it('requires new Town capture when capture context is missing', () => {
+  it('requires a new Town capture when capture context is missing', () => {
     const withoutContext: ExtractionResults = { extractions: {}, errors: {} };
 
     expect(() => validateTownExtractionContext(withoutContext, selectedContext))

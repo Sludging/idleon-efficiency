@@ -33,14 +33,14 @@ Compare the same feature state as the game's consumer. Some internal helpers ret
 For actor-specific stamp comparisons, pass the captured target player to `getStampBonusForKey`.
 Without a player, the result is an unrestricted preview and may not match the actor's bonus.
 
-Research uses a website preview when every saved character has a nonpositive Research level. The preview uses level, EXP, and EXP requirement zero. Its lens, Shape, and Point expectations retain independently owned rewards and are not native parity comparisons. After Research starts, compare those values with native captures. Continue native comparisons for unaffected calculations before Research starts.
+Research uses a website preview when every saved character has a Research level of zero or less. The preview uses zero for level, EXP, and EXP requirement. Lens, Shape, and Point expectations retain independently owned rewards; they are not comparisons with the native game. After Research starts, compare those values with native captures. Before Research starts, continue native comparisons for unaffected calculations.
 
 Keep generic comparisons independent of one save's owned classes, items, unlocks, or character and plot counts. Remove fixture-specific scenarios instead of requiring every public account to satisfy them.
 
 Prepared bonus maps can omit scalar entries whose contribution is zero. Require the owning preparation step and map, but match the original consumer's numeric conversion for sparse entries. Keep failures for genuinely invalid numbers.
 
 A helper can return zero for inactive content while the calculation uses a minimum multiplier of one.
-Compare the multiplier actually used, not an unclamped helper with an already-clamped result.
+Compare the multiplier the calculation uses, not an unclamped helper with a clamped result.
 Compare numeric character contributions rather than nullable UI summaries.
 Keep raw helper comparisons only when both APIs return the same quantity.
 Some game dispatchers return zero for unknown commands.

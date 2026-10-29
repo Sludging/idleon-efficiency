@@ -153,7 +153,7 @@ describe('Island Expeditions Domain - Account State and Numeric Outcomes', () =>
   });
  });
 
- it('matches the active character Message Bottle gain bonus', () => {
+ it("matches the active character's Message Bottle gain bonus", () => {
   expect(expeditions.collection.getBottleGainPercent(player)).toMatchLiveGameWithDetails(nativeState.bottleBonus, {
    tolerance: 0,
    context: 'Message Bottle gain percentage points for player 3',

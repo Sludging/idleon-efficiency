@@ -4,7 +4,7 @@ Testing approach that validates domain calculations against extracted game value
 
 ## Running tests
 
-`yarn test` still runs Jest. Select original source files with the usual Jest
+`yarn test` runs Jest. Select original source files with the usual Jest
 arguments, for example:
 
 ```bash
@@ -20,7 +20,7 @@ but does not add this package-command heap limit. The account runner also does
 not add this heap limit.
 
 Jest selects source files before the sequencer groups domain suites into ten
-natural website groups: `account`, `players`, `master-classes`, and `world-1`
+website groups: `account`, `players`, `master-classes`, and `world-1`
 through `world-7`. Each selected group runs through a short-lived require
 wrapper. Each Jest process uses a unique operating-system temporary directory
 for wrappers and removes that directory on exit. Non-domain suites remain

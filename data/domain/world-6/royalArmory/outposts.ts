@@ -221,7 +221,7 @@ export class RoyalMapSource {
 
     getResourceCollectionRate(bonuses: ResourceCollectionBonuses, guardian: RoyalGuardianContribution): number {
         const late = bonuses.guardianBonuses;
-        // The recipient's talent inputs belong to the Guardian; companion and arcade bonuses belong to the account.
+        // Talent modifiers use the Guardian's inputs. Companion and Arcade bonuses apply account-wide.
         if (!late) return 0;
         return (
             125 *

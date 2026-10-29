@@ -1,7 +1,7 @@
 import type { Player } from './player';
 import type { Prayer } from './world-3/prayers';
 
-/** Returns the native monster hit chance as a percentage. */
+/** Returns the game's monster hit chance as a percentage. */
 export const getSpeedrunHitChance = (accuracy: number, defence: number): number => {
     const ratio = accuracy / defence;
     return ratio >= 0.5 ? Math.floor(Math.min(100 * (0.95 * ratio - 0.425), 100)) : 0;

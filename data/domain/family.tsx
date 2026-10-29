@@ -221,8 +221,8 @@ export class Family extends Domain {
                 continue;
             }
 
-            // The raw ES bonus is visible to its own Family Guy before amplification.
-            // Later classes use the amplified ES bonus.
+            // Family Guy uses the unamplified Elemental Sorcerer bonus for that class.
+            // Later classes use the amplified Elemental Sorcerer bonus.
             results.set(candidate.classIndex, candidate.value);
             const familyTalentLevels = results.get(ClassIndex.Elemental_Sorcerer) ?? 0;
             let familyGuyBonus = 0;

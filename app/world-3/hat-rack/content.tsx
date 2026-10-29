@@ -129,8 +129,9 @@ export default function HatRackContent() {
                 </Box>
                 <Box gap="xsmall">
                     <Text size="large" weight="bold">{round(hatRack.getBonusMultiplier()).toFixed(2)}x</Text>
-                    <Text size="xsmall" color="accent-2">Bonus Multiplier</Text>
+                    <Text size="xsmall" color="accent-2">Bonus multiplier</Text>
                 </Box>
+                <Text size="small" color="accent-2">The multiplier starts at 1x and increases by 1% per deposited hat. Other bonuses also increase it.</Text>
             </Box>
             <Box gap="medium">
                 <ContentTabs<HatRackTab>
@@ -143,7 +144,7 @@ export default function HatRackContent() {
                 />
                 {tab === 'Bonuses' ? (
                     <Box gap="medium">
-                        <CheckBox checked={hideZeroBonuses} label="Hide zero" onChange={event => setHideZeroBonuses(event.target.checked)} />
+                        <CheckBox checked={hideZeroBonuses} label="Hide zero bonuses" onChange={event => setHideZeroBonuses(event.target.checked)} />
                         <Box gap="small">
                             <Heading level="3" size="small" style={{ fontWeight: 'normal' }}>Combined bonuses</Heading>
                             <Grid columns={columns} gap="small" style={{ rowGap: '12px', columnGap: '12px' }}>

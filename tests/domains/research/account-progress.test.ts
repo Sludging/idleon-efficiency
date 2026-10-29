@@ -58,7 +58,7 @@ describe('Research account progress and production', () => {
     });
 
 
-    it('reports website preview lens ownership before entry and matches native ownership after entry', () => {
+    it('reports previewed lens ownership before entry and matches game ownership after entry', () => {
         const total = researchExpected(preview, 'owned_lenses', () => value('owned_lenses'));
         expect(research.lensOwnership.total).toMatchLiveGameWithDetails(total, {tolerance: 0});
         expect(research.lensOwnership.opticalMonocles).toMatchLiveGameWithDetails(value('owned_monocles'), {tolerance: 0});

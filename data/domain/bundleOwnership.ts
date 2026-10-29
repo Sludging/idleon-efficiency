@@ -63,7 +63,7 @@ export class BundleOwnership {
             }
         }
 
-        // The three Starter Pack variants share one received-entitlement family.
+        // Count the three Starter Pack variants as one shared entitlement.
         if (category === 'starterOffer') {
             return {
                 ownedCount: Number(summary.ownedCount > 0),

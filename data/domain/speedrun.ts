@@ -245,7 +245,7 @@ export class Speedrun extends Domain {
     }
 
     updateAccountBonus(players: readonly Player[]): void {
-        // Family talent58 uses saved allocations. Its curve does not add shared or Super Talent levels.
+        // Master Of The System uses saved allocations, without shared or Super Talent levels.
         this.accountMultikillPerTierBonus = players.length === 0 ? 0
             : Talent.getAccountTalentBonus(players, 58, players[0].currentTalentInputs) * this.completedPortalSteps;
     }
@@ -295,7 +295,7 @@ export class Speedrun extends Domain {
             index,
             EnemyInfo.find(enemy => enemy.id === `${enemyPrefix}${'ABC'[Number(bossInfo[index]?.[0] ?? 0)]}`)!,
             Number(bossInfo[index]?.[0] ?? 0),
-            // The native Emperor handler uses Kattlekruk's selected difficulty.
+            // The game's Emperor handler uses Kattlekruk's selected difficulty.
             Number(bossInfo[index === 5 ? 4 : index]?.[0] ?? 0),
         ));
     }

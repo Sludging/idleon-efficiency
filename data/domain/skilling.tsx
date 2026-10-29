@@ -175,7 +175,7 @@ export class Skilling extends Domain {
             const choppingMonument = hole.getMonumentBonus("Wisdom", 0);
             const catchingMonument = hole.getMonumentBonus("Justice", 0);
             const miningExtraEfficiency = 1;
-            // Native material bonuses count only the active player's inventory, chest, and refinery.
+            // Material bonuses count only the active character's inventory, chest, and refinery.
             const miningAtomLog = lavaLog(storage.amountInStorage("Copper", player.playerID));
             const choppingLog = lavaLog(storage.amountInStorage("Leaf1", player.playerID));
             const catchingLog = lavaLog(storage.amountInStorage("OakTree", player.playerID));

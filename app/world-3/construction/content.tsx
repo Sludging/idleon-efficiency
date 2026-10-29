@@ -225,7 +225,7 @@ function RefineryDisplay() {
                                 { key: "salt", kind: "identity", name: saltItem.displayName, artwork: <IconImage data={saltItem.getImageData()} scale={0.8} /> },
                                 { key: "rank", kind: "text", label: "Rank / sustainable", value: `${commaNotation(info.rank)} / ${!info.unlocked ? "Locked" : info.maxSafeRank == null ? "No calculated limit" : commaNotation(info.maxSafeRank)}` },
                                 {
-                                    key: "rates", kind: "content", label: "Production", content: <Box direction="row" align="center" gap="xsmall">
+                                    key: "rates", kind: "content", label: "Net production", content: <Box direction="row" align="center" gap="xsmall">
                                         <Text size="small">{info.balancePerHour < 0 ? "-" : ""}{nFormatter(Math.abs(info.balancePerHour))}/hr</Text>
                                         <TipDisplay heading="Production per hour" body={<Box gap="xsmall">
                                             <Text size="small">Output: {nFormatter(info.outputPerHour)}/hr</Text>
@@ -260,7 +260,7 @@ function RefineryDisplay() {
                                 },
                                 {
                                     key: "fuel", kind: "content", label: "Est. fuel left", content: !info.unlocked ? <Text size="small">Locked</Text> : <Box gap="xsmall">
-                                        {fuelShort && <Text size="small" color="accent-1">Saved fuel cannot fill</Text>}
+                                        {fuelShort && <Text size="small" color="accent-1">Stored fuel is not enough to rank up</Text>}
                                         {!info.active ? <Text size="small">—</Text> : fuelTime === null
                                             ? <Text size="small">No estimated depletion</Text> : fuelTime <= 0
                                                 ? <Text size="small">Estimate elapsed</Text>

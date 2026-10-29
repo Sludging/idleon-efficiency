@@ -267,12 +267,12 @@ export default function BundlesContent() {
             <Text size="small" color="accent-2" data-bundle-row-count>{rows.length} / {entries.length} entries</Text>
         </Box>
         {summary.unknownCount > 0 && <Text size="small" color="accent-2">
-            This save does not share bundle receipts. Unknown entries are not confirmed missing.
+            Could not load bundle ownership.
         </Text>}
         <Box gap="small">
             <ContentTabs options={categoryOptions} value={category} onChange={setCategory} />
             {category === "starterOffer" && <Text size="small" color="accent-2">
-                One Starter Pack family, with three alternative offers.
+                The three Starter Pack offers are alternatives. You can choose one.
             </Text>}
             <UpgradeTable<BundleRow>
                 tableName={`${categoryOptions.find(option => option.value === category)!.label} catalog`}

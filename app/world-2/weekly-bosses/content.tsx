@@ -195,14 +195,14 @@ function CharacterRewards({ weeklyBoss, entryId }: { weeklyBoss: WeeklyBoss; ent
             {Array.from(groups.values()).flatMap(reward => reward.characters.map(character => <Text size="small" key={character.playerIndex}>
                 {character.playerName} → {commaNotation(reward.quantity)} {reward.itemName}
             </Text>))}
-            {unknownCharacters.map(character => <Text size="small" key={character.playerIndex}>{character.playerName} → Unknown reward</Text>)}
+            {unknownCharacters.map(character => <Text size="small" key={character.playerIndex}>{character.playerName} → Reward unavailable</Text>)}
         </Box>}>
             <Box direction="row" align="center" gap="xsmall" tabIndex={0} aria-label={rewardHelp}>
                 <Text size="xsmall" color="accent-2">{rewardHelp}</Text>
                 <CircleInformation size="small" />
             </Box>
         </TipDisplay>}
-        {unknownCharacters.length > 0 && <Text size="xsmall" color="accent-2">Unknown reward for {unknownCharacters.length} {unknownCharacters.length === 1 ? 'character' : 'characters'}</Text>}
+        {unknownCharacters.length > 0 && <Text size="xsmall" color="accent-2">Reward unavailable for {unknownCharacters.length} {unknownCharacters.length === 1 ? 'character' : 'characters'}</Text>}
         <Text size="xsmall" color="accent-2">Only the buying character receives these items.</Text>
         <Text size="xsmall" color="accent-2">Repeatable with shared Trophies and an empty inventory slot.</Text>
     </Box>;
@@ -286,13 +286,13 @@ export default function WeeklyBossesContent() {
             </Box>} />
         </Box>
         {secondsRemaining === 0 && <Text size="small" color="accent-2">
-            This saved week has ended. Load a newer save to see its current weekly assignments.
+            This saved week has ended. Load a newer save to see the current week's assignments.
         </Text>}
         <Box gap="medium">
             <ContentTabs options={preparationTabs} value={tab} onChange={setTab} />
             {tab === 'Preparation' ? <Box gap="medium">
                 {recommendedCharacter && <Box gap="xsmall">
-                    <Text size="small">Recommended character to log in for material-capacity turns: {recommendedCharacter.playerName} (slot {recommendedCharacter.playerIndex + 1}).</Text>
+                    <Text size="small">Log in with {recommendedCharacter.playerName} (slot {recommendedCharacter.playerIndex + 1}) for material carry capacity turns.</Text>
                     <Text size="xsmall" color="accent-2">Capacity uses this character's saved equipment, signs, prayers, talents, and map. This does not change character order.</Text>
                 </Box>}
                 <RequirementGroups weeklyBoss={weeklyBoss} preparation={preparation} />

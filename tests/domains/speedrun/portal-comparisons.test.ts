@@ -26,7 +26,7 @@ describe('Speedrun portal kill counts', () => {
         expect(result.killsNeeded).toBe(2);
     });
 
-    it('rounds fractional portal credit up to a whole monster count', () => {
+    it('rounds the monster count up when portal credit per kill is fractional', () => {
         const result = getSpeedrunPortalEstimate({ ...estimate, portalProgressPerKill: 2.5 }, 6);
 
         expect(result.reachable).toBe(true);

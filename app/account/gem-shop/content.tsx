@@ -134,7 +134,7 @@ export default function GemShopContent() {
                         {row.repeatable ? commaNotation(row.purchase.pucrhased)
                             : `${commaNotation(row.purchase.pucrhased)} / ${commaNotation(row.purchase.maxPurchases)}`}
                     </Text>
-                    {row.completed && <Checkmark size="small" color="green-1" aria-label="Catalog limit reached" />}
+                    {row.completed && <Checkmark size="small" color="green-1" aria-label="Purchase limit reached" />}
                 </Box>
                 {row.repeatable && <Text size="xsmall" color="accent-2">Repeatable</Text>}
             </Box>,

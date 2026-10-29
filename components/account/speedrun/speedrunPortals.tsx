@@ -23,8 +23,8 @@ type PortalGoal = "all" | "normalOneKill" | "radiusOneKillOnly" | "radiusReduces
 const goalOptions: { value: PortalGoal; label: string }[] = [
     { value: "all", label: "All portals" },
     { value: "normalOneKill", label: "One kill normally" },
-    { value: "radiusOneKillOnly", label: "One kill only with Radius" },
-    { value: "radiusReducesKills", label: "Radius reduces kills" },
+    { value: "radiusOneKillOnly", label: "One kill with Void Radius" },
+    { value: "radiusReducesKills", label: "Fewer kills with Void Radius" },
 ];
 
 function compareKills(left: number | undefined, right: number | undefined): number {
@@ -91,8 +91,8 @@ export function SpeedrunPortals({ runner, maps, enemies }: {
 
     const estimateText = (row: PortalRow, estimate: SpeedrunCombatEstimate, radius = false) => (
         <Text size="small" style={{ opacity: row.locked ? 0.6 : 1, fontVariantNumeric: "tabular-nums" }}>
-            {radius && !runner.radiusAvailable ? "Not learned"
-                : estimate.killsNeeded === undefined ? "Out of reach" : notateNumber(estimate.killsNeeded, "Big")}
+            {radius && !runner.radiusAvailable ? "Trial or Radius not learned"
+                : estimate.killsNeeded === undefined ? "No estimate" : notateNumber(estimate.killsNeeded, "Big")}
         </Text>
     );
     const radiusKillsHeading = (
@@ -200,6 +200,16 @@ export function SpeedrunPortals({ runner, maps, enemies }: {
                                 value={goal}
                                 onChange={({ value }) => setGoal(value)}
                             />
+                            {goal === "radiusOneKillOnly" && (
+                                <Text size="xsmall" color="accent-2">
+                                    Shows portals not already estimated at one kill normally. Portals without a normal estimate are included.
+                                </Text>
+                            )}
+                            {goal === "radiusReducesKills" && (
+                                <Text size="xsmall" color="accent-2">
+                                    Shows portals where Void Radius lowers the kill requirement, plus portals that only have a Void Radius estimate.
+                                </Text>
+                            )}
                         </Box>
                     </>
                 }

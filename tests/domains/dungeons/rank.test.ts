@@ -9,7 +9,7 @@ describe("Dungeon rank", () => {
         [15000000000, 78],
         [0, 1],
         [4, 2],
-    ])("returns rank %s XP → %s", (xp, expectedRank) => {
+    ])("returns rank for %s XP → %s", (xp, expectedRank) => {
         expect(Dungeons.getDungeonRank(xp)).toBe(expectedRank);
     });
 

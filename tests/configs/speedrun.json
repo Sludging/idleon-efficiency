@@ -10,12 +10,12 @@
     {
       "label": "speedrun_family_talent_candidates",
       "expression": "idleon.getAttr('GetPlayersUsernames').map((_,playerID)=>({playerID,bonus:idleon.callFunction('getbonus2',1,58,playerID)}))",
-      "description": "Pure native per-player family talent58 x curves. Explicit player-index branch reads raw saved allocations and does not use active player3 talent modifiers. Native1.24 lines176537-176543."
+      "description": "Native per-player family talent 58 curves. The explicit player-index branch reads raw saved allocations and does not use active player 3 talent modifiers. Native 1.24 lines 176537-176543."
     },
     {
       "label": "speedrun_shared_talent_context",
       "expression": "({companionTalentLevels:idleon.callFunction('Companions',1),allActiveBubbles:idleon.callFunction('Companions',4),companionTalentPoints:idleon.callFunction('Companions',20),familyTalentLevels:Number(idleon.getDNSM('FamBonusQTYs').h[68])})",
-      "description": "Read-only shared native talent context. Companion4 enables the active Divinity bubble for runner6 without changing the active character. Family cache68 and companion1 are shared inputs, not player3 combat outputs."
+      "description": "Read-only shared native talent context. Companion 4 enables the active Divinity bubble for runner 6 without changing the active character. Family cache 68 and companion 1 are shared inputs, not player 3 combat outputs."
     }
   ]
 }

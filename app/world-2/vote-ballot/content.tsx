@@ -87,7 +87,7 @@ function BallotSection({ title, ballot, imagePrefix, locked = false }: {
                             style={{ position: 'relative', zIndex: 1, boxShadow: '0 3px 6px rgba(0, 0, 0, 0.18)' }}>
                             <BallotArtwork prefix={imagePrefix} index={candidate.index} />
                             <Box gap="xxsmall">
-                                <Text size="small" weight="bold">{notateNumber(candidate.percent, 'Smaller')}% votes</Text>
+                                <Text size="small" weight="bold">{notateNumber(candidate.percent, 'Smaller')}% of votes</Text>
                                 {leading && <Text size="xsmall" color="accent-2">Current leader</Text>}
                             </Box>
                         </Box>
@@ -140,7 +140,7 @@ export default function VoteBallotContent() {
                                 ['Mashed Potato', votes.bonusSources.mashedPotato],
                                 ['Palette', votes.bonusSources.palette],
                                 ['Legend Talent', votes.bonusSources.legendTalent],
-                                ['Sushi Tier 50', votes.bonusSources.sushi],
+                                ['Sushi Tier 51: Masago', votes.bonusSources.sushi],
                             ] as const).map(([label, value]) => <Text key={label} size="xsmall" style={{ opacity: value === 0 ? 0.6 : 1 }}>
                                 {label}: +{notateNumber(value, 'Smaller')}%
                             </Text>)}
@@ -168,7 +168,7 @@ export default function VoteBallotContent() {
                                 ['Legend Talent', meritocraty.legendTalentBonus],
                                 ['Arcade', meritocraty.arcadeBonus],
                                 ['Event Shop', meritocraty.eventShopBonus],
-                                ['Sushi Tier 51', meritocraty.sushiBonus],
+                                ['Sushi Tier 52: Masago Temaki', meritocraty.sushiBonus],
                                 ['Jelly Operator', meritocraty.jellyBonus],
                             ] as const).map(([label, value]) => <Text key={label} size="xsmall" style={{ opacity: value === 0 ? 0.6 : 1 }}>
                                 {label}: +{notateNumber(value, 'Smaller')}%

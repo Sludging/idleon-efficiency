@@ -37,7 +37,7 @@ export function ShimmerDetails({ expeditions }: IslandDetailsProps) {
         </Box>
         <RoundedShadowBox pad="none" overflow="hidden" style={{ border: '1px solid #e1b454', background: '#29271f' }} data-testid="island-shimmer-trial">
             <GreyCardHeader background="grey-1" pad={{ horizontal: 'medium', vertical: 'small' }}>
-                <Text size="small" weight="bold">Current task</Text>
+                <Text size="small" weight="bold">Current challenge</Text>
             </GreyCardHeader>
             <Box pad="medium" gap="small">
                 <Text size="small">{trial.data.description}</Text>

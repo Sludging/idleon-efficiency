@@ -46,7 +46,7 @@ const emptyRankExperienceBonuses: RankExperienceBonuses = {
     militiaExperienceEnabled: false,
 };
 
-// Account talent candidates keep their allocations and presets, but use this Guardian's shared talent modifiers.
+// Each character keeps their talent allocations and presets. Use this Guardian's shared talent modifiers.
 export const getRoyalGuardianContribution = (player: Player, alchemy: Alchemy, players: readonly Player[]): RoyalGuardianContribution => ({
     playerID: player.playerID,
     level: player.level,
@@ -374,7 +374,7 @@ export class RoyalArmory extends Domain {
         let bestRate = -Infinity;
         const comparisonMap = this.mapStates.values().next().value as RoyalMapSource | undefined;
         if (!comparisonMap) return;
-        // Compare complete recipient contributions to keep the selected account rate attainable by one Guardian.
+        // Compare each Guardian's full contribution so the selected rate is attainable by one Guardian.
         for (const player of players) {
             if (player.classId !== ClassIndex.Royal_Guardian) continue;
             const contribution = getRoyalGuardianContribution(player, alchemy, players);

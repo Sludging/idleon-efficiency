@@ -47,7 +47,7 @@ const diminishMultikill = (percent: number): number => {
     return percent;
 };
 
-/** Prepares native multikill and active portal credit without changing the saved character. */
+/** Prepares multikill and active portal credit without changing the saved character. */
 export class SpeedrunKillCredit {
     private readonly accuracy: number;
     private readonly deathNoteUnlocked: boolean;
@@ -212,7 +212,7 @@ export class SpeedrunKillCredit {
         let baseMultikill = this.baseMultikillPercent;
         let multikillPerTier = this.multikillPerTierPercent + (this.worldRanks[worldIndex] ?? 0) + radiusBonus;
         if (diminished) {
-            // Native compresses both operands separately, before multiplying by the tier count.
+            // The game reduces both values separately before multiplying by the tier count.
             baseMultikill = diminishMultikill(baseMultikill);
             multikillPerTier = diminishMultikill(multikillPerTier);
         }

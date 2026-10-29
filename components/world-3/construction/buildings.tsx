@@ -190,7 +190,7 @@ export function BuildingsDisplay() {
                 />
             </Box>
             <Text size="small" color="accent-2">
-                {timing ? `Rates use ${timing.playerName}'s board.` : "Rates use the fastest character's board."} ETAs assume a constant rate in each slot type.
+                {timing ? `Rates use ${timing.playerName}'s board. ` : ""}ETAs assume a constant rate in each slot type.
             </Text>
             <UpgradeTable
                 tableName="Buildings"
@@ -206,7 +206,7 @@ export function BuildingsDisplay() {
                     <Box direction="row" gap="small" wrap>
                         <CheckBox checked={filters.hideMaxed} label="Hide max level buildings"
                             onChange={event => setFilters({ ...filters, hideMaxed: event.target.checked })} />
-                        <CheckBox checked={onlyCurrentlyBuilding} label="Show only in progress buildings"
+                        <CheckBox checked={onlyCurrentlyBuilding} label="Show only buildings in progress"
                             onChange={event => setOnlyCurrentlyBuilding(event.target.checked)} />
                     </Box>
                 }
