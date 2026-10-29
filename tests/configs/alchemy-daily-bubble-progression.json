@@ -1,0 +1,96 @@
+{
+  "description": "Native daily automatic bubble progression values",
+  "target": "ArcaneType NBLB display and Kattlekruk daily progression",
+  "extractions": [
+    {
+      "label": "nblb_enabled",
+      "expression": "idleon.callFunction(\"ArcaneType\", \"is_NBLB_on\", 0, 0)",
+      "description": "Whether automatic bubble upgrades are active"
+    },
+    {
+      "label": "nblb_upgrade_count",
+      "expression": "idleon.callFunction(\"ArcaneType\", \"NBLB_bubbleQTY\", 0, 0)",
+      "description": "Displayed daily bubble upgrade count; the reset can randomly select an additional bubble"
+    },
+    {
+      "label": "nblb_min_levels",
+      "expression": "(()=>{const h=idleon.engine.gameAttributes.h;const saved=h.DummyNumber;try{return idleon.callFunction(\"ArcaneType\",\"NBLB_bubbleLVrangeDisp\",0,0)}finally{h.DummyNumber=saved}})()",
+      "description": "Displayed minimum daily bubble level gain"
+    },
+    {
+      "label": "nblb_max_levels",
+      "expression": "(()=>{const h=idleon.engine.gameAttributes.h;const saved=h.DummyNumber;try{return idleon.callFunction(\"ArcaneType\",\"NBLB_bubbleLVrangeDisp\",99,0)}finally{h.DummyNumber=saved}})()",
+      "description": "Displayed maximum daily bubble level gain"
+    },
+    {
+      "label": "nblb_mainframe",
+      "expression": "idleon.callFunction(\"MainframeBonus\", 3)",
+      "description": "Active No Bubble Left Behind mainframe bonus"
+    },
+    {
+      "label": "nblb_pyrite",
+      "expression": "idleon.callFunction(\"MainframeBonus\", 107)",
+      "description": "Pyrite Rhinestone bonus"
+    },
+    {
+      "label": "nblb_mainframe_connected_base",
+      "expression": "Number(idleon.engine.getGameAttribute('CustomLists').h.LabMainBonus[3][5])",
+      "description": "No Bubble Left Behind mainframe bonus when connected"
+    },
+    {
+      "label": "nblb_pyrite_potential",
+      "expression": "Number(idleon.engine.getGameAttribute('CustomLists').h.JewelDesc[7][12]) * idleon.callFunction('MainframeBonus', 8)",
+      "description": "Pyrite Rhinestone bonus with the current jewel multiplier when connected"
+    },
+    {
+      "label": "nblb_amberite_potential_base",
+      "expression": "Number(idleon.engine.getGameAttribute('CustomLists').h.ArtifactInfo[12][3])",
+      "description": "Amberite base reward before ownership"
+    },
+    {
+      "label": "nblb_amberite_potential_ancient",
+      "expression": "Number(idleon.engine.getGameAttribute('CustomLists').h.ArtifactInfo[12][6])",
+      "description": "Ancient Amberite tier reward before ownership"
+    },
+    {
+      "label": "nblb_amberite_base",
+      "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 12, 0)",
+      "description": "Amberite base bonus"
+    },
+    {
+      "label": "nblb_amberite_tier",
+      "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 12, 1)",
+      "description": "Amberite tier bonus"
+    },
+    {
+      "label": "nblb_merit",
+      "expression": "Number(idleon.engine.getGameAttribute('Tasks')[2][3][6])",
+      "description": "World 4 merit daily bubble count bonus"
+    },
+    {
+      "label": "nblb_superbit_4",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 4, 0)",
+      "description": "First Superbit contribution input"
+    },
+    {
+      "label": "nblb_superbit_22",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 22, 0)",
+      "description": "Second Superbit contribution input"
+    },
+    {
+      "label": "nblb_normal_targets",
+      "expression": "(()=>{if(!idleon.callFunction('ArcaneType','is_NBLB_on',0,0))return [];const levels=idleon.getAttr('CauldronInfo');const count=idleon.callFunction('ArcaneType','NBLB_bubbleQTY',0,0);const selected=[];for(let n=0;n<count;n++){let lowest=99999,chosen=null;for(let cauldron=0;cauldron<4;cauldron++){for(let bubble=0;bubble<15;bubble++){const id=1000*cauldron+bubble;const level=Number(levels[cauldron][bubble]);if(!selected.includes(id)&&level>=2&&level<=lowest){lowest=level;chosen=id}}}if(lowest<10000)selected.push(chosen)}return selected})()",
+      "description": "Replay the version 1.24 daily reset selection for the normal first-15-bubbles path, using the displayed count and current saved levels"
+    },
+    {
+      "label": "kruk_targets",
+      "expression": "(()=>{if(!idleon.callFunction('Divinity','Bonus_MAJOR',0,8))return [];const tier=idleon.callFunction('Thingies','ZenithMarketBonus',1,0);const targets=[0,1000,2000];if(tier>=1)targets.push(3000);if(tier>=2)targets.push(3009);if(tier>=3)targets.push(11);if(tier>=4)targets.push(1011);if(tier>=5)targets.push(1002);return targets})()",
+      "description": "Replay the version 1.24 daily reset Kattlekruk bubble gates"
+    },
+    {
+      "label": "kruk_active",
+      "expression": "idleon.callFunction(\"Divinity\", \"Bonus_MAJOR\", 0, 8)",
+      "description": "Kattlekruk major blessing active at daily reset"
+    }
+  ]
+}

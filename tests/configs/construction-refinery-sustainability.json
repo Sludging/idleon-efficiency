@@ -1,0 +1,11 @@
+{
+  "description": "Native refinery and active printer inputs for continuous website sustainability projections",
+  "target": "Refinery PowerPerCycle and CycleInitialTime; WorkbenchStuff ExtraPrinting",
+  "extractions": [
+    {
+      "label": "refinery_sustainability_inputs",
+      "expression": "(()=>{const e=idleon.engine;const refinery=e.getGameAttribute('Refinery');const info=e.getGameAttribute('CustomLists').h.RefineryInfo;const printer=e.getGameAttribute('Printer');const slots=[];for(let i=5;i+13<printer.length;i+=14){for(const offset of [10,12]){const name=printer[i+offset];if(name&&name!=='Blank')slots.push({name,quantity:Number(printer[i+offset+1]),factor:idleon.callFunction('WorkbenchStuff','ExtraPrinting',(i-5)/14,0)});}}return {refinery,info,task:e.getGameAttribute('Tasks')[2][2][6],cycles:[0,1,2].map(i=>idleon.callFunction('Refinery','CycleInitialTime',i)),powers:info.map((_,i)=>idleon.callFunction('Refinery','PowerPerCycle',refinery[i+3][1])),companion:idleon.callFunction('Companions',35),slots};})()",
+      "description": "Native saved states and recipes, cycle seconds, power per cycle, companion bonus, and active printer samples"
+    }
+  ]
+}

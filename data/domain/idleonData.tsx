@@ -3,7 +3,7 @@ import { Traps, updateShinyCritterRewardMultiplier, updateTrapDisplayData } from
 import { Stamps, updateStampMaxCarry, updateStamps } from './world-1/stamps';
 import { Statues, updateStatueBonuses } from './world-1/statues';
 import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus, updatePlayerTalentPoints, Player, updatePlayerSpecialTalents } from './player';
-import { Alchemy, updateAlchemy, updateAlchemySlabBubbles, updateAlchemyTomeBubbles } from './world-2/alchemy/alchemy';
+import { Alchemy, updateAlchemy, updateAlchemyDailyBubbleProgression, updateAlchemySlabBubbles, updateAlchemyTomeBubbles } from './world-2/alchemy/alchemy';
 import { updatePlayerTalentContexts } from './player';
 import { updateSpeedrunTalentPoints } from './player';
 import { updateEquipmentProperties } from './equipment';
@@ -15,16 +15,16 @@ import { GemStore } from './gemPurchases';
 import { Achievements } from './achievements';
 import { Shrines, updateShrines } from './world-3/construction/shrines';
 import { Item } from './items';
-import { Storage, updateStorage } from './storage';
+import { Storage, updateStorage, updateStorageGreenstacks } from './storage';
 import { Quests } from './quests';
 import { Prayers, updatePrayerPlayerBonuses } from './world-3/prayers';
-import { Refinery, updateRefinery } from './world-3/construction/refinery';
+import { Refinery, updateRefinery, updateRefinerySustainability } from './world-3/construction/refinery';
 import { SaltLick } from './world-3/construction/saltLick';
 import { Printer, updatePrinter } from './world-3/construction/printer';
 import { TaskBoard } from './tasks';
 import { Cloudsave } from './cloudsave';
 import { Worship, updateTotemsBonuses, updateWorship, updateWorshipTotalizer } from './world-3/worship';
-import { Construction, updateConstruction } from './world-3/construction/construction';
+import { Construction, updateConstruction, updateConstructionBuildingTiming } from './world-3/construction/construction';
 import { updateCards, Cards } from './cards';
 import { Arcade, updateArcade } from './world-2/arcade';
 import { ObolsData } from './world-2/obols';
@@ -430,6 +430,15 @@ const postProcessingMap: Record<string, Function> = {
     "spelunkingPower": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingPower(accountData),
     // Saved metrics use final character inputs and effective account upgrade bonuses.
     "spelunkingAccountMetrics": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingAccountMetrics(accountData),
+    // Meritocracy and Star Signs must settle before character-specific Construction rates.
+    "meritocratyLate": (_doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyLate(accountData),
+    "starSignMeritocracyBonus": (_doc: Cloudsave, accountData: Map<string, any>) => updateStarSignMeritocracyBonus(accountData),
+    "storageGreenstacks": (_doc: Cloudsave, accountData: Map<string, any>) => updateStorageGreenstacks(accountData),
+    "alchemyDailyBubbleProgression": (_doc: Cloudsave, accountData: Map<string, any>) => updateAlchemyDailyBubbleProgression(accountData),
+    "constructionBuildingTiming": (_doc: Cloudsave, accountData: Map<string, any>) => updateConstructionBuildingTiming(accountData),
+    // Refinery rates use prepared cycle times, Printer output, Merits and Companions.
+    "refinery": (_doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
+    "refinerySustainability": (_doc: Cloudsave, accountData: Map<string, any>) => updateRefinerySustainability(accountData),
 }
 
 // I really really hate this.
@@ -446,7 +455,6 @@ const postPostProcessingMap: Record<string, Function> = {
     "playersExtraMaths": (doc: Cloudsave, accountData: Map<string, any>) => playerExtraCalculations(accountData),
     "artifactBuildSpeed": (_doc: Cloudsave, accountData: Map<string, any>) => updateArtifactBuildSpeed(accountData),
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
-    "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
     "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateMinTravelTimeAndSpeed(accountData),
     "sailingCaptainExperience": (doc: Cloudsave, accountData: Map<string, any>) => updateSailingCaptainExperience(accountData),
     "farming": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingDisplayData(accountData),
@@ -461,9 +469,6 @@ const postPostProcessingMap: Record<string, Function> = {
     "nonDepositedZenithClusters": (doc: Cloudsave, accountData: Map<string, any>) => updateNonDepositedZenithClusters(accountData),
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
     "royalArmoryLate": (doc: Cloudsave, accountData: Map<string, any>) => updateRoyalArmoryLateInputs(accountData),
-    "meritocraty": (doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyLate(accountData),
-    // Construction rates read Star Sign bonuses after Meritocracy settles.
-    "starSignMeritocracyBonus": (_doc: Cloudsave, accountData: Map<string, any>) => updateStarSignMeritocracyBonus(accountData),
     // Shared ninja inputs need settled account Star Signs and final talent, statue, ballot, and Land Rank bonuses.
     "sneakingNinjas": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateSneakingNinjas(accountData),
     // Omnijade summaries and Charm Collector need the prepared permanent charms and settled account providers.

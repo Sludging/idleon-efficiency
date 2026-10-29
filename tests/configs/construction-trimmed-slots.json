@@ -1,0 +1,15 @@
+{
+  "description": "Native trimmed construction slot count, contributors, and assignments",
+  "target": "WorkbenchStuff TotalGildedSlots and TowerInfo",
+  "extractions": [
+    { "label": "trimmed_slot_count", "expression": "idleon.callFunction('WorkbenchStuff', 'TotalGildedSlots', 0, 0)", "description": "Number of trimmed building slots" },
+    { "label": "trimmed_slot_minehead", "expression": "idleon.callFunction('Minehead', 'BonusQTY', 18, 0)", "description": "Minehead opponent bonus" },
+    { "label": "trimmed_slot_lab", "expression": "idleon.callFunction('MainframeBonus', 103)", "description": "Sapphire Rhinestone bonus" },
+    { "label": "trimmed_slot_atom", "expression": "idleon.getAttr('Atoms')[6]", "description": "Boron atom level" },
+    { "label": "trimmed_slot_legend", "expression": "idleon.callFunction('Thingies', 'LegendPTS_bonus', 33, 0)", "description": "Legend talent bonus" },
+    { "label": "trimmed_slot_gambit", "expression": "idleon.callFunction('Holes', 'GambitBonuses', 9, 0)", "description": "Gambit bonus" },
+    { "label": "trimmed_slot_event", "expression": "idleon.callFunction('Summoning', 'EventShopOwned', 14, 0)", "description": "Event Shop bonus" },
+    { "label": "building_slot_assignments", "expression": "idleon.getAttr('TowerInfo').slice(54, 62)", "description": "Building IDs in slot order; -1 means empty" },
+    { "label": "building_levels", "expression": "idleon.getAttr('TowerInfo').slice(0, 27)", "description": "Saved building levels used by the native unlock gate" }
+  ]
+}

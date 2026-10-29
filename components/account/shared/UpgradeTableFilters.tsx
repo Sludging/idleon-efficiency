@@ -127,12 +127,13 @@ export function UpgradeTableFilters({
                 border={{ side: "bottom", color: "grey-1", size: "xsmall" }}
                 wrap
                 align="center"
+                style={{ rowGap: '12px' }}
             >
-                <Box direction="row" gap="medium" wrap align="center">
+                <Box direction="row" gap="medium" wrap align="center" style={{ rowGap: '12px' }}>
                     {leftControls}
                     {additionalFilters}
                 </Box>
-                <Box direction="row" gap="medium" wrap align="center">
+                <Box direction="row" gap="medium" wrap align="center" style={{ rowGap: '12px' }}>
                     {showSearch && searchControl}
                     {sortControl}
                 </Box>
@@ -143,7 +144,7 @@ export function UpgradeTableFilters({
     return (
         <>
             {/* Filter checkboxes and dropdowns */}
-            <Box direction="row" gap="medium" margin={{ bottom: 'medium' }} wrap align="center">
+            <Box direction="row" gap="medium" margin={{ bottom: 'medium' }} wrap align="center" style={{ rowGap: '12px' }}>
                 {leftControls}
                 {additionalFilters}
                 {sortControl}

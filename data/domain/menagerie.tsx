@@ -538,6 +538,7 @@ export class Menagerie extends Domain {
                 getRequiredRank(unlock.index, true),
             );
         });
+        this.yellowJellyfish.update(this.unlocks[this.yellowJellyfish.data.unlockId].owned);
         this.bonuses.forEach(bonus => {
             bonus.update(
                 bonus.index < this.availableBonusCount,
@@ -592,7 +593,6 @@ export class Menagerie extends Domain {
             this.unlocks[this.silverJellyfish.data.unlockId].owned,
             account.obolFragments,
         );
-        this.yellowJellyfish.update(this.unlocks[this.yellowJellyfish.data.unlockId].owned);
         this.greenJellyfish.update(
             this.unlocks[this.greenJellyfish.data.unlockId].owned,
             item => storage.amountInStorage(item),

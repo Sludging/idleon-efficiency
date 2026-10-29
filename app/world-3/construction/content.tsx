@@ -4,7 +4,6 @@ import {
     Box,
     Heading,
     Text,
-    Grid,
     ResponsiveContext,
     CheckBox,
     Meter,
@@ -22,7 +21,7 @@ import ContentTabs from '../../../components/base/ContentTabs';
 import { Refinery } from '../../../data/domain/world-3/construction/refinery';
 import { Item } from '../../../data/domain/items';
 import { Storage } from '../../../data/domain/storage';
-import { lavaLog, nFormatter, range, toTime } from '../../../data/utility';
+import { commaNotation, lavaLog, nFormatter, range, toTime } from '../../../data/utility';
 import { StaticTime, TimeDisplaySize, TimeDown } from '../../../components/base/TimeDisplay';
 import { INDEX_DAYS_SINCE_SAMPLE_ARTIFACT, Printer, Sample } from '../../../data/domain/world-3/construction/printer';
 import { Player } from '../../../data/domain/player';
@@ -42,6 +41,7 @@ import { AtomColliderDisplay } from '../../../components/world-3/construction/at
 import { Sailing } from '../../../data/domain/world-5/sailing/sailing';
 import { useShallow } from 'zustand/react/shallow';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import useHydrated from '../../../lib/hooks/useHydrated';
 
 function RefineryDisplay() {
     const [squirePowha, setSquirePowha] = useState<boolean>(false);
@@ -126,52 +126,39 @@ function RefineryDisplay() {
 
     const saltMeritLevel = useMemo(() => {
         const saltMerit = taskboardData?.merits.find(merit => merit.descLine1 == "Refinery Salt Costs don't scale beyond");
-        return (saltMerit?.level ?? 0) + 1;
+        return saltMerit?.level ?? 0;
 
     }, [taskboardData]);
 
     return (
         <Box gap="medium">
             <Box direction="row" wrap justify="center">
-                {
-                    Object.entries(refineryData.cycleInfo).map(([_, cycleInfo], index) => {
-                        return (
-                            <ShadowBox margin={{ right: 'large', bottom: 'small' }} background="dark-1" key={index} gap="xsmall" pad="medium" align="center">
-                                <TextAndLabel center textSize='xsmall' labelSize='medium' text='Next cycle in' label={cycleInfo.name} />
-                                <Box>
-                                    {saltsUnlocked ?
-                                        <TimeDown addSeconds={cycleInfo.cycleTime - cycleInfo.timePast} resetToSeconds={cycleInfo.cycleTime} /> :
-                                        <StaticTime fromSeconds={cycleInfo.cycleTime - cycleInfo.timePast} />
-                                    }
-                                </Box>
-                                <Text margin={{ top: 'small' }} color="accent-3" size="12px">* Might be off by a few seconds.</Text>
-                                <Text color="accent-3" size="12px">Max cycle is: {toTime(cycleInfo.cycleTime)}</Text>
-                            </ShadowBox>
-                        )
-                    })
-                }
-                {squireInfo && squireInfo.map((squire, index) => {
-                    const [refineryTalent, cooldown] = [...squire.cooldown.entries()].filter(([talent, _]) => talent.skillIndex == 130)?.pop() as [Talent, number];
+                {Object.values(refineryData.cycleInfo).map(cycle => (
+                    <ShadowBox key={cycle.name} margin={{ right: 'large', bottom: 'small' }} background="dark-1" gap="xsmall" pad="medium" align="center">
+                        <TextAndLabel center textSize="xsmall" labelSize="medium" text="Next cycle in" label={cycle.name} />
+                        {saltsUnlocked
+                            ? <TimeDown addSeconds={cycle.cycleTime - cycle.timePast} resetToSeconds={cycle.cycleTime} />
+                            : <StaticTime fromSeconds={cycle.cycleTime - cycle.timePast} />}
+                        <Text margin={{ top: 'small' }} color="accent-3" size="small">May be off by a few seconds.</Text>
+                        <Text color="accent-3" size="small">Max cycle: {toTime(cycle.cycleTime)}</Text>
+                    </ShadowBox>
+                ))}
+                {squireInfo.map(squire => {
+                    const entry = [...squire.cooldown.entries()].find(([talent]) => talent.skillIndex == 130);
+                    if (!entry) return null;
+                    const [talent, cooldown] = entry;
                     const realCD = cooldown - squire.afkFor;
                     return (
-                        <ShadowBox key={index} background="dark-1" pad="medium" align="center" margin={{ right: 'large', bottom: 'small' }}>
-                            <Box gap="small">
-                                <Box direction="row" gap="small">
-                                    <IconImage data={squire.getClassImageData()} scale={0.8} />
-                                    <Text>{squire.playerName}</Text>
-                                </Box>
-                                <Box direction="row" gap="small">
-                                    <Box style={{ opacity: realCD <= 0 ? 1 : 0.5 }}>
-                                        <IconImage data={refineryTalent.getImageData()} scale={0.8} />
-                                    </Box>
-                                    {realCD > 0 && <TimeDown size={TimeDisplaySize.Small} addSeconds={realCD} resetToSeconds={72000} />}
-                                    {realCD <= 0 && <Text>Skill is ready!</Text>}
-                                </Box>
-                            </Box>
-                        </ShadowBox>
-                    )
-                })
-                }
+                        <Box key={squire.playerName} direction="row" gap="xsmall" align="center">
+                            <IconImage data={squire.getClassImageData()} scale={0.8} />
+                            <Text size="small">{squire.playerName}</Text>
+                            <IconImage data={talent.getImageData()} scale={0.8} />
+                            {realCD > 0
+                                ? <TimeDown size={TimeDisplaySize.XSmall} addSeconds={realCD} resetToSeconds={72000} />
+                                : <Text size="small">Skill ready</Text>}
+                        </Box>
+                    );
+                })}
             </Box>
             <CheckBox
                 checked={squirePowha}
@@ -193,161 +180,106 @@ function RefineryDisplay() {
                 </Box>}
                 onChange={(event) => setSquirePowha(event.target.checked)}
             />
-            <Text>This is WIP - fuel times don&apos;t account for printer or auto refine salt generation.</Text>
-            {
-                Object.entries(refineryData.salts).map(([salt, info], index) => {
-                    const saltItem = itemData.find((item) => item.internalName == salt);
-                    const costItems = info.baseCost.map((cost) => cost.item);
-                    const storageItems = itemData.filter((item) => costItems.includes(item.internalName)) ?? [];
-                    storageItems.forEach((storageItem) => {
-                        const inSaltStorage = refineryData.storage.find((saltStorageItem) => saltStorageItem.name == storageItem.internalName);
-                        const inChestStorage = storage?.chest.find((item) => item.internalName == storageItem.internalName)
-                        storageItem.count = (inSaltStorage?.quantity ?? 0) + (inChestStorage?.count ?? 0);
-                    });
-                    let refineryCycle = refineryData.cycleInfo["Combustion"];
-                    if (Math.floor(index / 3) == 1) {
-                        refineryCycle = refineryData.cycleInfo["Synthesis"];
-                    }
-                    if (Math.floor(index / 3) == 2) {
-                        refineryCycle = refineryData.cycleInfo["Polymerization"]
-                    }
-                    const secondsSinceUpdate = (new Date().getTime() - (lastUpdated?.getTime() ?? 0)) / 1000;
-                    const fuelTime = Math.max(0, info.getFuelTime(storageItems, [], index <= saltMeritLevel) * refineryCycle.cycleTime - secondsSinceUpdate);
-                    const timeToNextRank = info.getTimeToNextRank(refineryCycle.cycleTime) - secondsSinceUpdate;
-
-                    if (saltItem) {
-                        return (
-                            <ShadowBox key={index} background="dark-1" style={{ opacity: info.unlocked ? 1 : 0.5 }}>
-                                <Grid columns={size == "small" ? ["50%", "50%"] : ["15%", "20%", "25%", "20%", "20%"]}>
-                                    <Box direction="row" gap="medium" align="center" background="dark-2" pad="medium" justify="center" fill>
-                                        <Box align="center">
-                                            <Box title={saltItem.displayName}>
-                                                <IconImage data={saltItem.getImageData()} scale={2} />
-                                            </Box>
-                                            <Box align="center">
-                                                <Text size="large">{info.rank}</Text>
-                                                <Text color="accent-2" size="small">Rank</Text>
-                                            </Box>
-                                        </Box>
+            <Text size="small" color="accent-2">
+                Rates assume continuous cycles and sufficient fuel. Sustainable rank assumes previous salt production and uses active printer samples.
+                Unsampled inputs and stored fuel do not guarantee sustainability.
+            </Text>
+            <Box gap="small">
+                {Object.entries(refineryData.salts).map(([salt, info], index) => {
+                    const saltItem = itemData.find(item => item.internalName === salt);
+                    if (!saltItem) return null;
+                    const cycle = Object.values(refineryData.cycleInfo)[Math.floor(index / 3)];
+                    const quantity = (name: string) =>
+                        (refineryData.storage.find(item => item.name === name)?.quantity ?? 0)
+                        + storage.chest.filter(item => item.internalName === name).reduce((sum, item) => sum + item.count, 0);
+                    const secondsSinceUpdate = (Date.now() - (lastUpdated?.getTime() ?? 0)) / 1000;
+                    const fuelProjection = info.getFuelTime(quantity, printer, cycle.cycleTime, index <= saltMeritLevel);
+                    const fuelTime = fuelProjection === null ? null : Math.max(0, fuelProjection - secondsSinceUpdate);
+                    const rankTime = Math.max(0, info.getTimeToNextRank(cycle.cycleTime) - secondsSinceUpdate);
+                    const fuelShort = info.unlocked && info.isStoredFuelInsufficient(quantity, index <= saltMeritLevel);
+                    const details = (
+                        <Box gap="xsmall">
+                            <Text size="small">Cost per hour / cost to rank up (stored)</Text>
+                            <Text size="small">Fuel time assumes continuous consumption and active printing at current rates. It excludes salt production and auto-refining.</Text>
+                            {info.baseCost.map(cost => {
+                                const item = itemData.find(candidate => candidate.internalName === cost.item);
+                                if (!item) return null;
+                                const perCycle = cost.quantity * info.getCostMulti(cost.item.includes("Refinery"), index <= saltMeritLevel);
+                                const printing = printer.GetTotalActive(cost.item);
+                                return (
+                                    <Box key={cost.item} direction="row" gap="xsmall" align="center">
+                                        <IconImage data={item.getImageData()} scale={0.8} />
+                                        <Text size="small">{item.displayName}: {nFormatter(perCycle * 3600 / cycle.cycleTime)} / {nFormatter(perCycle * info.getCyclesTillNextRank())} ({nFormatter(quantity(cost.item))})</Text>
+                                        {!cost.item.includes("Refinery") && <Text size="small">· Printing {nFormatter(printing)}/hr · Net use {nFormatter(Math.max(0, info.getNetFuelUsePerHour(cost.item, printer, cycle.cycleTime, index <= saltMeritLevel)))}/hr</Text>}
                                     </Box>
-                                    <Box pad="medium" align="center">
-                                        <Box pad={{ vertical: "medium" }} gap="small" border={{ color: 'grey-1', side: 'right', size: '3px' }} fill>
-                                            {
-                                                timeToNextRank > 0 ?
-                                                    <Box>
-                                                        <Text color="accent-2" size="small">Rank up in</Text>
-                                                        <Box>
-                                                            {fuelTime >= 0 && (info.active ?
-                                                                <TimeDown size={size == "medium" ? TimeDisplaySize.Medium : TimeDisplaySize.Large} addSeconds={squirePowha ? squireTimeSave[index] : timeToNextRank} />
-                                                                : <StaticTime size={size == "medium" ? TimeDisplaySize.Medium : TimeDisplaySize.Large} fromSeconds={squirePowha ? squireTimeSave[index] : timeToNextRank} color='accent-1' />
-                                                            )}
-                                                            {!info.active && <Box margin={{ top: 'medium' }}><Text color="accent-1" size="medium">Not active</Text></Box>}
-                                                        </Box>
-                                                    </Box>
-                                                    :
-                                                    <Box >
-                                                        <Text size="xlarge">Rank up ready</Text>
-                                                    </Box>
-                                            }
-                                        </Box>
+                                );
+                            })}
+                        </Box>
+                    );
+                    return (
+                        <DataRow
+                            key={salt}
+                            opacity={!info.unlocked ? 0.65 : info.active ? 1 : 0.85}
+                            columns={size === "small" ? ["minmax(0, 1fr)", "minmax(0, 1fr)"] : ["minmax(0, 22fr)", "minmax(0, 16fr)", "minmax(0, 18fr)", "minmax(0, 24fr)", "minmax(0, 14fr)"]}
+                            fields={[
+                                { key: "salt", kind: "identity", name: saltItem.displayName, artwork: <IconImage data={saltItem.getImageData()} scale={0.8} /> },
+                                { key: "rank", kind: "text", label: "Rank / sustainable", value: `${commaNotation(info.rank)} / ${!info.unlocked ? "Locked" : info.maxSafeRank == null ? "No calculated limit" : commaNotation(info.maxSafeRank)}` },
+                                {
+                                    key: "rates", kind: "content", label: "Production", content: <Box direction="row" align="center" gap="xsmall">
+                                        <Text size="small">{info.balancePerHour < 0 ? "-" : ""}{nFormatter(Math.abs(info.balancePerHour))}/hr</Text>
+                                        <TipDisplay heading="Production per hour" body={<Box gap="xsmall">
+                                            <Text size="small">Output: {nFormatter(info.outputPerHour)}/hr</Text>
+                                            <Text size="small">Consumption: {nFormatter(info.consumedPerHour)}/hr</Text>
+                                            <Text size="small">Net: {info.balancePerHour < 0 ? "-" : ""}{nFormatter(Math.abs(info.balancePerHour))}/hr</Text>
+                                        </Box>}><Box tabIndex={0} aria-label="Production details"><CircleInformation size="small" /></Box></TipDisplay>
                                     </Box>
-                                    <Box pad="medium">
-                                        <Box gap="small" border={{ color: 'grey-1', side: 'right', size: '3px' }} fill>
-                                            <Box>
-                                                <Text color="accent-2" size="small">Power</Text>
-                                                <Text size="medium">{info.progress} / {info.getCap()}</Text>
+                                },
+                                {
+                                    key: "power", kind: "content", label: "Power / auto refine", content: <Box gap="xxsmall" style={{ minWidth: 0 }}>
+                                        {info.unlocked && <>
+                                            <Box direction="row" justify="between" gap="xsmall">
+                                                <Text size="xsmall" color="accent-2">Power</Text>
+                                                <Text size="xsmall">{commaNotation(info.progress)} / {commaNotation(info.getCap())}</Text>
                                             </Box>
-                                            <Box>
-                                                <Text color="accent-2" size="small">Auto Refine at</Text>
-                                                <Text size="medium">{info.autoRefine}%</Text>
+                                            <Box background="grey-1" height="8px" overflow="hidden" role="progressbar"
+                                                aria-label={`${saltItem.displayName} power progress`} aria-valuemin={0}
+                                                aria-valuemax={info.getCap()} aria-valuenow={Math.min(info.progress, info.getCap())}>
+                                                <Box background="brand" height="8px" flex={false} style={{
+                                                    width: `${info.getCap() > 0 ? 100 * Math.max(0, Math.min(1, info.progress / info.getCap())) : 0}%`,
+                                                }} />
                                             </Box>
-                                            <Box>
-                                                <Text color="accent-2" size="small">Fuel</Text>
-                                                {fuelTime > 0 && (info.active ?
-                                                    <TimeDown color={fuelTime > timeToNextRank ? 'green-1' : 'accent-1'} addSeconds={fuelTime} />
-                                                    : <StaticTime color={fuelTime > timeToNextRank ? 'green-1' : 'accent-1'} fromSeconds={fuelTime} />
-                                                )}
-                                                {fuelTime <= 0 && <Text color="accent-1" size="small">Empty</Text>}
-                                            </Box>
+                                        </>}
+                                        <Box direction="row" justify="between" gap="xsmall" align="center">
+                                            <Text size="xsmall" color="accent-2">Est. rank-up</Text>
+                                            {!info.unlocked ? <Text size="xsmall">Locked</Text> : !info.active ? <Text size="xsmall">Not active</Text> : info.progress >= info.getCap() ? <Text size="xsmall" color="green-1" weight="bold">Ready</Text> : (squirePowha ? squireTimeSave[index] : rankTime) <= 0
+                                                ? <Text size="xsmall">Estimate elapsed</Text>
+                                                : <TimeDown size={TimeDisplaySize.XSmall} addSeconds={squirePowha ? squireTimeSave[index] : rankTime} />}
                                         </Box>
+                                        {info.unlocked && <Text size="small">Auto-refine: {info.autoRefineEnabled ? "ON" : "OFF"}</Text>}
                                     </Box>
-                                    <Box pad="medium">
-                                        <Box wrap align="start" gap="small" border={{ color: 'grey-1', side: 'right', size: '3px' }} fill>
-                                            <Text size="small">Cost per hour</Text>
-                                            <Box gap="xsmall">
-                                                {
-                                                    info.baseCost && info.baseCost.map((costData, costIndex) => {
-                                                        const costItem = itemData.find((item) => item.internalName == costData.item);
-                                                        const itemCost = costData.quantity * info.getCostMulti(costData.item.includes("Refinery"), index <= saltMeritLevel);
-                                                        const cyclesPerHour = Math.ceil(3600 / refineryCycle.cycleTime);
-                                                        const isSalt = costItem?.internalName.includes("Refinery");
-                                                        const currentPrinting = printer?.GetTotalActive(costData.item) ?? 0;
-                                                        if (costItem != undefined) {
-                                                            return (
-                                                                <Box key={costIndex} direction="row" align="center">
-                                                                    <Box title={costItem.displayName}>
-                                                                        <IconImage data={costItem.getImageData()} scale={0.8} />
-                                                                    </Box>
-                                                                    {
-                                                                        isSalt ?
-                                                                            <Box direction="row" gap="xsmall" align="center">
-                                                                                <Text size="small">{nFormatter(itemCost * cyclesPerHour, "Smaller")}</Text>
-                                                                            </Box>
-                                                                            :
-                                                                            <TipDisplay
-                                                                                heading='Printing'
-                                                                                body={`Currently printing ${nFormatter(currentPrinting, "Smaller")}`}
-                                                                                direction={TipDirection.Left}
-                                                                                size="Small"
-                                                                            >
-                                                                                <Box direction="row" gap="xsmall" align="center">
-                                                                                    <Text color={currentPrinting > itemCost * cyclesPerHour ? 'green-1' : 'red'} size="small">{nFormatter(itemCost * cyclesPerHour, "Smaller")}</Text>
-                                                                                </Box>
-                                                                            </TipDisplay>
-                                                                    }
-                                                                </Box>
-                                                            )
-                                                        }
-                                                    })
-                                                }
-                                            </Box>
-                                        </Box>
+                                },
+                                {
+                                    key: "fuel", kind: "content", label: "Est. fuel left", content: !info.unlocked ? <Text size="small">Locked</Text> : <Box gap="xsmall">
+                                        {fuelShort && <Text size="small" color="accent-1">Saved fuel cannot fill</Text>}
+                                        {!info.active ? <Text size="small">—</Text> : fuelTime === null
+                                            ? <Text size="small">No estimated depletion</Text> : fuelTime <= 0
+                                                ? <Text size="small">Estimate elapsed</Text>
+                                                : <TimeDown size={TimeDisplaySize.XSmall} addSeconds={fuelTime} />}
                                     </Box>
-                                    <Box pad="medium">
-                                        <Box wrap align="start" gap="small">
-                                            <Text size="small">Cost to rank up</Text>
-                                            <Box gap="xsmall">
-                                                {
-                                                    info.baseCost && info.baseCost.map((costData, costIndex) => {
-                                                        const costItem = itemData?.find((item) => item.internalName == costData.item);
-                                                        const itemCost = costData.quantity * info.getCostMulti(costData.item.includes("Refinery"), index <= saltMeritLevel);
-                                                        const storageQuantity = storageItems.find(x => x.internalName == costData.item)?.count ?? 0;
-                                                        const resourceCostToMax = info.getCyclesTillNextRank() * itemCost;
-                                                        if (costItem != undefined) {
-                                                            return (
-                                                                <Box key={costIndex} direction="row" align="center">
-                                                                    <Box title={costItem.displayName}>
-                                                                        <IconImage data={costItem.getImageData()} scale={0.8} />
-                                                                    </Box>
-                                                                    <Box direction="row" gap="xsmall" align="center">
-                                                                        <Text color={storageQuantity < resourceCostToMax ? 'accent-1' : ''} size="small">{nFormatter(resourceCostToMax)}</Text>
-                                                                        <Text size="small">({nFormatter(storageQuantity)})</Text>
-                                                                    </Box>
-                                                                </Box>
-                                                            )
-                                                        }
-                                                    })
-                                                }
-                                            </Box>
-                                        </Box>
+                                },
+                            ]}
+                            details={[
+                                {
+                                    key: "stored", label: "Stored salt / fuel and costs", content: <Box direction="row" gap="small" align="center">
+                                        <Text size="small">{nFormatter(quantity(salt))}</Text>
+                                        <TipDisplay heading="Fuel and costs" body={details} maxWidth="large"><Box tabIndex={0} aria-label="Fuel and cost details"><CircleInformation size="small" /></Box></TipDisplay>
                                     </Box>
-                                </Grid>
-                            </ShadowBox>
-                        )
-                    }
-                }
-                )
-            }
+                                },
+                            ]}
+                        />
+                    );
+                })}
+            </Box>
         </Box>
     )
 }
@@ -680,7 +612,12 @@ function ShrinesDisplay() {
 }
 
 function Construction() {
+    const hydrated = useHydrated();
     const [activeTab, setActiveTab] = useState<string>("Refinery");
+
+    if (!hydrated) {
+        return <>Loading...</>;
+    }
 
     return (
         <Box>

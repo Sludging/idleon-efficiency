@@ -6,6 +6,7 @@ import { getCompanionActiveBonus } from "../../companions";
 import type { Companion } from "../../companions";
 import { Domain, RawData } from "../../base/domain";
 import { Building } from "./buildings";
+import type { BuildingCompletionTimes } from "./buildings";
 import { Cooking } from "../../world-4/cooking";
 import { initBuildingRepo } from "../../data/BuildingRepo";
 import { ImageData } from "../../imageData";
@@ -19,9 +20,14 @@ import { Player } from "../../player";
 import { CogBoard, getRoyalOutpostCogBuildSpeedMultiplier } from "./cog";
 import type { RoyalArmory } from "../../world-6/royalArmory/royalArmory";
 import { SushiStation } from "../../world-7/sushi";
+import type { Hole } from "../../world-5/hole/hole";
 import type { ResearchGrid } from "../../world-7/research";
 import type { Card } from "../../cards";
 import type { GemStore } from "../../gemPurchases";
+import type { LegendTalents } from "../../world-7/legendTalents";
+import type { Lab } from "../../world-4/lab";
+import type { Minehead } from "../../world-7/minehead";
+import type { EventShop } from "../../eventShop";
 
 export { getCogPlayerBaseExpRate } from "./playerBuildSpeed";
 
@@ -60,10 +66,35 @@ export class Library {
     }
 }
 
+export interface ConstructionBuildingTiming {
+    playerID: number;
+    playerName: string;
+    lowerBuildRatePercent: number;
+    normalBuildSpeed: number;
+    trimmedBuildSpeed: number;
+    buildings: BuildingCompletionTimes[];
+}
+
+export interface TrimmedSlotContributions {
+    minehead: number;
+    lab: number;
+    atom: number;
+    legendTalent: number;
+    gambit: number;
+    eventShop: number;
+}
+
 export class Construction extends Domain {
     buildings: Building[] = [];
     buildingSlots: number[] = [-1, -1, -1, -1, -1, -1, -1, -1];
+    trimmedSlotCount: number = 0;
+    trimmedSlotContributions: TrimmedSlotContributions = {
+        minehead: 0, lab: 0, atom: 0, legendTalent: 0, gambit: 0, eventShop: 0,
+    };
     totalBuildSpeed: number = 0;
+    private buildingTimingByPlayer = new Map<number, ConstructionBuildingTiming>();
+    bestBuildingTiming: ConstructionBuildingTiming | null = null;
+    buildingTimingComparison: ConstructionBuildingTiming[] = [];
     cogProgress: { name: string, progress: number }[] = [
         { name: "Nooby", progress: 0 },
         { name: "Decent", progress: 0 },
@@ -72,6 +103,38 @@ export class Construction extends Domain {
     ];
     library: Library = new Library();
     cogBoard: CogBoard = new CogBoard();
+
+    getBuildingTiming(player: Player): ConstructionBuildingTiming {
+        return this.buildingTimingByPlayer.get(player.playerID)!;
+    }
+
+    prepareBuildingTiming(rates: { player: Player; normalBuildSpeed: number }[], trimmedMultiplier: number): void {
+        this.buildingTimingByPlayer.clear();
+        this.bestBuildingTiming = null;
+        this.buildingTimingComparison = [];
+        rates.forEach(({ player, normalBuildSpeed }) => {
+            const trimmedBuildSpeed = normalBuildSpeed * trimmedMultiplier;
+            const timing = {
+                playerID: player.playerID,
+                playerName: player.playerName,
+                lowerBuildRatePercent: 0,
+                normalBuildSpeed,
+                trimmedBuildSpeed,
+                buildings: this.buildings.map(building => building.getCompletionTimes(normalBuildSpeed, trimmedBuildSpeed)),
+            };
+            this.buildingTimingByPlayer.set(player.playerID, timing);
+            this.buildingTimingComparison.push(timing);
+            if (!this.bestBuildingTiming || normalBuildSpeed > this.bestBuildingTiming.normalBuildSpeed) {
+                this.bestBuildingTiming = timing;
+            }
+        });
+        const bestRate = this.bestBuildingTiming?.normalBuildSpeed ?? 0;
+        this.buildingTimingComparison.forEach(timing => {
+            timing.lowerBuildRatePercent = bestRate > 0
+                ? (bestRate - timing.normalBuildSpeed) / bestRate * 100
+                : 0;
+        });
+    }
 
 
     getRawKeys(): RawData[] {
@@ -93,6 +156,9 @@ export class Construction extends Domain {
         // init again to reset the data set;
         // TODO: This is very ugly, need to do better.
         construction.init([], 0);
+        construction.buildingTimingByPlayer.clear();
+        construction.bestBuildingTiming = null;
+        construction.buildingTimingComparison = [];
         construction.cogBoard.parse(data.get("CogM"), data.get("CogO"));
 
         const towerData = data.get("Tower") as number[];
@@ -129,6 +195,7 @@ export class Construction extends Domain {
             building.currentXP = towerData[building.index + 12 + construction.buildings.length * 2];
 
             building.currentlyBuilding = construction.buildingSlots.includes(building.index);
+            building.unlocked = building.index % 9 === 0 || towerData[building.index - 1] > 0;
         });
 
         // current book count;
@@ -149,6 +216,7 @@ export const updateConstruction = (data: Map<string, any>) => {
     const dancingCoral = data.get("dancingCoral") as DancingCoral;
     const menagerie = data.get("menagerie") as Menagerie;
     const sushi = data.get("sushi") as SushiStation;
+    const hole = data.get("hole") as Hole;
     const costCruncher = construction?.buildings.find(building => building.index == 5) as Building;
 
     // Figure out max building levels
@@ -175,7 +243,7 @@ export const updateConstruction = (data: Map<string, any>) => {
             case 16:
             case 17:
                 const carbonAtom = collider.atoms[5] as CarbonAtom
-                building.maxLvl += constMastery.getBonusByIndex(6) + carbonAtom.getExtraLevels();
+                building.maxLvl += Math.round(constMastery.getBonusByIndex(6) + carbonAtom.getExtraLevels() + 100 * hole.gambit.getBonus(9));
                 break;
             // Shrines
             case 18:
@@ -285,6 +353,38 @@ export const getBestCogBuildRate = (data: Map<string, any>): CogBuildRateResult 
         rate: getCogBuildRateForContext(data, contextPlayer),
         characterName: contextPlayer.playerName,
     })).reduce((best, current) => current.rate > best.rate ? current : best);
+}
+
+export const updateConstructionBuildingTiming = (data: Map<string, any>): Construction => {
+    const construction = data.get("construction") as Construction;
+    const players = data.get("players") as Player[];
+    const collider = data.get("collider") as AtomCollider;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
+    const minehead = data.get("minehead") as Minehead;
+    const lab = data.get("lab") as Lab;
+    const hole = data.get("hole") as Hole;
+    const eventShop = data.get("eventShop") as EventShop;
+    const contributions = {
+        minehead: Math.min(1, minehead.getBonusFromIndex(18)),
+        lab: Math.ceil(lab.jewels[3].getBonus() / 5),
+        atom: Math.min(collider.atoms[6].level, 1),
+        legendTalent: Math.min(1, legendTalents.getBonusFromIndex(33)),
+        gambit: hole.gambit.getBonus(9),
+        eventShop: Number(eventShop.isBonusOwned(14)),
+    };
+    construction.trimmedSlotContributions = contributions;
+    construction.trimmedSlotCount = Math.round(Math.min(8, Object.values(contributions).reduce((sum, value) => sum + value, 0)));
+    construction.buildings.forEach(building => {
+        building.currentlyTrimmed = construction.buildingSlots.slice(0, construction.trimmedSlotCount).includes(building.index);
+    });
+    const trimmedMultiplier = (3 + collider.atoms[6].getBonus() / 100) *
+        (1 + legendTalents.getBonusFromIndex(33) / 100);
+
+    construction.prepareBuildingTiming(players.map(player => ({
+        player,
+        normalBuildSpeed: getCogBuildRateForContext(data, player),
+    })), trimmedMultiplier);
+    return construction;
 }
 
 export const getCogFlaggyRateForContext = (data: Map<string, any>, contextPlayer: Player): number => {

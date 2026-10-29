@@ -1,0 +1,11 @@
+{
+  "description": "Trimmed construction speed multiplier for the retained account",
+  "target": "WorkbenchStuff TotalGildedBoostio",
+  "extractions": [
+    {
+      "label": "construction_trimmed_multiplier",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"TotalGildedBoostio\", 0, 0)",
+      "description": "Native multiplier for trimmed building slots"
+    }
+  ]
+}

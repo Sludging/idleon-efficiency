@@ -35,6 +35,12 @@ import { getCompanionActiveBonus, type Companion } from '../../companions';
 import type { SushiStation } from '../../world-7/sushi';
 import { Gaming } from '../../world-5/gaming';
 import type { JellyOperator } from '../../world-7/jellyOperator';
+import { Talent } from '../../talents';
+import type { Account } from '../../account';
+import type { EventShop } from '../../eventShop';
+import type { Divinity } from '../../world-5/divinity';
+import type { Hole } from '../../world-5/hole/hole';
+import type { ZenithMarket } from '../../world-7/zenithShop';
 
 export enum CauldronIndex {
     Power = 0,
@@ -579,10 +585,214 @@ export class P2W {
     }
 }
 
+export interface DailyBubbleSources {
+    mainframe: number;
+    pyrite: number;
+    mainframeActive: boolean;
+    mainframeCount: number;
+    pyriteCount: number;
+    mainframeLevelGain: number;
+    pyriteLevelGain: number;
+    superbitCount: number;
+    superbit4Chance: number;
+    superbit22Chance: number;
+    amberiteBase: number;
+    amberiteTier: number;
+    merit: number;
+    superbit4: number;
+    superbit22: number;
+    bundle: boolean;
+    event: boolean;
+    tachyon: boolean;
+    pyriteActive: boolean;
+    amberiteOwned: boolean;
+    amberiteTierOwned: boolean;
+    potentialMainframeCount: number;
+    potentialMainframeLevelGain: number;
+    potentialPyrite: number;
+    potentialPyriteCount: number;
+    potentialPyriteLevelGain: number;
+    potentialAmberiteBase: number;
+    potentialAmberiteTier: number;
+    potentialMerit: number;
+    potentialSuperbit4Chance: number;
+    potentialSuperbit22Chance: number;
+}
+
+export interface DailyBubbleProgression {
+    enabled: boolean;
+    upgradeCount: number;
+    minLevelGain: number;
+    maxLevelGain: number;
+    normalTargets: readonly Bubble[];
+    krukActive: boolean;
+    krukTargets: readonly Bubble[];
+    sources: DailyBubbleSources;
+}
+
+export interface AccountDailyBubbleProgression extends DailyBubbleProgression {
+    maxLevelGainVaries: boolean;
+    krukActiveVaries: boolean;
+}
+
 export class Alchemy extends Domain {
     cauldrons: Array<Cauldron> = [];
     vials: Array<Vial> = [];
     p2w: P2W = new P2W();
+    private dailyPlayers: readonly Player[] = [];
+    private dailyMainframeBonus = 0;
+    private dailyBundleOwned = false;
+    private dailyEventOwned = false;
+    private dailyUpgradeCount = 0;
+    private dailyKrukAccountActive = false;
+    private dailyDootPlayers = new Set<number>();
+    private dailyZenithTier = 0;
+    private dailyNormalTargets: Bubble[] = [];
+    private dailySources: Omit<DailyBubbleSources, "tachyon"> = {
+        mainframe: 0, pyrite: 0, mainframeActive: false, amberiteBase: 0,
+        amberiteTier: 0, merit: 0, superbit4: 0, superbit22: 0,
+        mainframeCount: 0, pyriteCount: 0, superbitCount: 0,
+        mainframeLevelGain: 0, pyriteLevelGain: 0,
+        superbit4Chance: 0, superbit22Chance: 0, bundle: false, event: false,
+        potentialMainframeCount: 0, potentialMainframeLevelGain: 0,
+        potentialPyrite: 0, potentialPyriteCount: 0, potentialPyriteLevelGain: 0,
+        potentialAmberiteBase: 0, potentialAmberiteTier: 0, potentialMerit: 0,
+        pyriteActive: false, amberiteOwned: false, amberiteTierOwned: false,
+        potentialSuperbit4Chance: 0.2, potentialSuperbit22Chance: 0.3,
+    };
+    dailyBubbleProgression: AccountDailyBubbleProgression | null = null;
+
+    prepareDailyBubbleProgression(
+        players: Player[], lab: Lab, sailing: Sailing, taskboard: TaskBoard,
+        gaming: Gaming, account: Account, eventShop: EventShop, divinity: Divinity,
+        hole: Hole, zenithMarket: ZenithMarket,
+    ): void {
+        const mainframe = lab.bonuses[3];
+        this.dailyMainframeBonus = mainframe.getBonus() + (mainframe.active ? lab.jewels[7].getBonus() : 0);
+        this.dailyBundleOwned = account.hasNoMealLeftBehindBundle;
+        this.dailyEventOwned = eventShop.isBonusOwned(2);
+        this.dailyPlayers = players;
+
+        const amberite = sailing.artifacts[12];
+        const tierBonuses = [
+            0, 0, amberite.data.ancientBonusQty, amberite.data.eldritchBonusQty,
+            amberite.data.sovereignBonusQty, amberite.data.omnipotentBonusQty,
+            amberite.data.transcendentBonusQty, amberite.data.verisimilitudeBonusQty,
+        ];
+        const amberiteBonus = amberite.getBonus() + (tierBonuses[amberite.status] ?? 0);
+        const meritUpgrade = taskboard.merits.find(value => value.descLine1.includes("Bubbles upgraded by"))!;
+        const merit = meritUpgrade.level;
+        const superbitBonus = Math.floor(0.2 * Number(gaming.isSuperbitPurchased(4)) + 0.3 * Number(gaming.isSuperbitPurchased(22)));
+        const mainframeCount = Math.min(2, Math.max(0, mainframe.getBonus()));
+        const mainframeLevelGain = Math.round(Math.max(1, mainframe.getBonus() - 1));
+        const totalLevelGain = Math.round(Math.max(1, this.dailyMainframeBonus - 1));
+        const potentialMainframe = mainframe.bonusOn;
+        const potentialPyrite = lab.jewels[7].data.bonusGiven * lab.jewels[7].bonusMultiplier;
+        const mainframeForPyrite = mainframe.active ? mainframe.getBonus() : potentialMainframe;
+        const potentialMainframeLevel = Math.round(Math.max(1, potentialMainframe - 1));
+        this.dailySources = {
+            mainframe: this.dailyMainframeBonus,
+            pyrite: lab.jewels[7].getBonus(),
+            mainframeActive: mainframe.active,
+            mainframeCount,
+            pyriteCount: Math.max(0, Math.min(2, this.dailyMainframeBonus) - mainframeCount),
+            mainframeLevelGain: mainframeLevelGain - 1,
+            pyriteLevelGain: totalLevelGain - mainframeLevelGain,
+            superbitCount: superbitBonus,
+            superbit4Chance: 0.2 * Number(gaming.isSuperbitPurchased(4)),
+            superbit22Chance: 0.3 * Number(gaming.isSuperbitPurchased(22)),
+            amberiteBase: amberite.getBonus(),
+            amberiteTier: tierBonuses[amberite.status] ?? 0,
+            merit,
+            superbit4: Number(gaming.isSuperbitPurchased(4)),
+            superbit22: Number(gaming.isSuperbitPurchased(22)),
+            bundle: this.dailyBundleOwned,
+            event: this.dailyEventOwned,
+            pyriteActive: lab.jewels[7].active,
+            amberiteOwned: amberite.status > 0,
+            amberiteTierOwned: amberite.status > 1,
+            potentialSuperbit4Chance: 0.2,
+            potentialSuperbit22Chance: 0.3,
+            potentialMainframeCount: Math.min(2, Math.max(0, potentialMainframe)),
+            potentialMainframeLevelGain: potentialMainframeLevel - 1,
+            potentialPyrite,
+            potentialPyriteCount: Math.max(0, Math.min(2, mainframeForPyrite + potentialPyrite) - Math.min(2, Math.max(0, mainframeForPyrite))),
+            potentialPyriteLevelGain: Math.round(Math.max(1, mainframeForPyrite + potentialPyrite - 1))
+                - Math.round(Math.max(1, mainframeForPyrite - 1)),
+            potentialAmberiteBase: amberite.getBonus(true),
+            potentialAmberiteTier: amberite.data.ancientBonusQty,
+            potentialMerit: meritUpgrade.bonusPerLevel,
+        };
+        this.dailyUpgradeCount = Math.min(10, Math.max(3, Math.round(
+            Math.min(4, this.dailyMainframeBonus + 2) + amberiteBonus + merit + superbitBonus,
+        )));
+
+        const enabled = this.dailyMainframeBonus > 0.5 || this.dailyBundleOwned || this.dailyEventOwned;
+        this.dailyNormalTargets = enabled
+            ? this.cauldrons.flatMap(cauldron => cauldron.bubbles.slice(0, 15))
+                .filter(bubble => bubble.level >= 2 && bubble.level < 10000)
+                .sort((a, b) => a.level - b.level || b.cauldronIndex - a.cauldronIndex || b.bubbleIndex - a.bubbleIndex)
+                .slice(0, this.dailyUpgradeCount)
+            : [];
+        const selected = new Set(this.dailyNormalTargets);
+        this.cauldrons.forEach(cauldron => cauldron.bubbles.forEach(bubble => {
+            bubble.labUpgrade = selected.has(bubble);
+        }));
+
+        this.dailyKrukAccountActive = divinity.w7ChosenDivinityBonusIndex === 8
+            || hole.majiks.pocketDivinity.selections.some(selection => selection.active && selection.bonusId === 8)
+            || divinity.playerInfo.some(info => info.playerIndex < 12 && info.primaryGod?.data.bonusIndex === 8);
+        this.dailyDootPlayers = new Set(divinity.playerInfo.filter(info => info.dootActive).map(info => info.playerIndex));
+        this.dailyZenithTier = zenithMarket.getBonusForId(1);
+        const recipients = players.map(player => this.getDailyBubbleProgression(player));
+        if (recipients.length === 0) {
+            this.dailyBubbleProgression = null;
+            return;
+        }
+
+        const first = recipients[0];
+        const best = recipients.reduce((current, recipient) =>
+            recipient.maxLevelGain > current.maxLevelGain ? recipient : current, first);
+        const krukRecipient = recipients.find(recipient => recipient.krukActive);
+        this.dailyBubbleProgression = {
+            ...best,
+            krukActive: !!krukRecipient,
+            krukTargets: krukRecipient?.krukTargets ?? [],
+            maxLevelGainVaries: recipients.some(recipient => recipient.maxLevelGain !== first.maxLevelGain),
+            krukActiveVaries: recipients.some(recipient => recipient.krukActive !== first.krukActive),
+        };
+    }
+
+    // Targets use saved levels and the first-15 scan. The reset can choose different targets.
+    // Level gains are the game's displayed values, not bounds on every reset.
+    getDailyBubbleProgression(player: Player): DailyBubbleProgression {
+        const enabled = this.dailyMainframeBonus > 0.5 || this.dailyBundleOwned || this.dailyEventOwned;
+        const minLevelGain = Math.round(Math.max(1, this.dailyMainframeBonus - 1));
+        let maxLevelGain = Math.round(Math.max(1, this.dailyMainframeBonus - 1) + 1);
+        if (this.dailyBundleOwned) {
+            maxLevelGain = Math.round(maxLevelGain + 3);
+            if (this.dailyMainframeBonus > 0.5) maxLevelGain = Math.round(maxLevelGain + 1);
+        }
+        if (this.dailyEventOwned) maxLevelGain = Math.round(maxLevelGain + 2);
+        const tachyon = Talent.getAccountTalentBonus(this.dailyPlayers, 598, player.finalTalentInputs) >= 1;
+        if (tachyon) {
+            maxLevelGain = Math.round(maxLevelGain + 3);
+        }
+
+        const krukActive = this.dailyKrukAccountActive || this.dailyDootPlayers.has(player.playerID);
+        const krukTargets: Bubble[] = [];
+        if (krukActive) {
+            krukTargets.push(this.cauldrons[0].bubbles[0], this.cauldrons[1].bubbles[0], this.cauldrons[2].bubbles[0]);
+            if (this.dailyZenithTier >= 1) krukTargets.push(this.cauldrons[3].bubbles[0]);
+            if (this.dailyZenithTier >= 2) krukTargets.push(this.cauldrons[3].bubbles[9]);
+            if (this.dailyZenithTier >= 3) krukTargets.push(this.cauldrons[0].bubbles[11]);
+            if (this.dailyZenithTier >= 4) krukTargets.push(this.cauldrons[1].bubbles[11]);
+            if (this.dailyZenithTier >= 5) krukTargets.push(this.cauldrons[1].bubbles[2]);
+        }
+        return { enabled, upgradeCount: this.dailyUpgradeCount, minLevelGain, maxLevelGain,
+            normalTargets: this.dailyNormalTargets, krukActive, krukTargets,
+            sources: { ...this.dailySources, tachyon } };
+    }
 
     getUndevelopedCostsBubbleLevel = (): number => {
         if (this.cauldrons.length > 0) {
@@ -1028,8 +1238,6 @@ export function updateAlchemy(data: Map<string, any>) {
     const lab = data.get("lab") as Lab;
     const cooking = data.get("cooking") as Cooking;
     const players = data.get("players") as Player[];
-    const sailing = data.get("sailing") as Sailing;
-    const taskboard = data.get("taskboard") as TaskBoard;
     const rift = data.get("rift") as Rift;
     const vault = data.get("upgradeVault") as UpgradeVault;
     const tesseract = data.get("tesseract") as Tesseract;
@@ -1060,29 +1268,6 @@ export function updateAlchemy(data: Map<string, any>) {
         // Vault Bonus 42 buffs vials as well.
         vial.vaultBonus = vaultBonus42
     });
-
-    if (lab.bonuses.find(bonus => bonus.name == "No Bubble Left Behind")?.active) {
-        let bubblesToUpgrade = 3;
-        if (lab.jewels.find(jewel => jewel.data.name == "Pyrite Rhinestone")?.active) {
-            bubblesToUpgrade += 1;
-        }
-        bubblesToUpgrade += sailing.artifacts[12].getBonus(); //Amberite Artifact
-        bubblesToUpgrade += taskboard.merits.find(merit => merit.descLine1.includes("Bubbles upgraded by"))?.getBonus() ?? 0;
-
-        const sortedBubbles = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles.slice(0, 15).filter(bubble => bubble.level > 5)).sort((bubble1, bubble2) => {
-            // If same level, then go with higher cauldron index + higher bubble index.
-            if (bubble1.level == bubble2.level) {
-                if (bubble1.cauldronIndex == bubble2.cauldronIndex) {
-                    return bubble1.bubbleIndex > bubble2.bubbleIndex ? -1 : 1
-                }
-                else {
-                    return bubble1.cauldronIndex > bubble2.cauldronIndex ? -1 : 1
-                }
-            }
-            return bubble1.level < bubble2.level ? -1 : 1
-        });
-        sortedBubbles.slice(0, bubblesToUpgrade).forEach(bubble => bubble.labUpgrade = true);
-    }
 
     const diamonChefBubble = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Diamond Chef") as DiamonChefBubble;
     if (diamonChefBubble) {
@@ -1130,4 +1315,20 @@ export function updateAlchemy(data: Map<string, any>) {
             bubble.prismaticMultiplier = prismaBonus;
         }
     })
+}
+
+export function updateAlchemyDailyBubbleProgression(data: Map<string, any>): void {
+    const alchemy = data.get("alchemy") as Alchemy;
+    alchemy.prepareDailyBubbleProgression(
+        data.get("players") as Player[],
+        data.get("lab") as Lab,
+        data.get("sailing") as Sailing,
+        data.get("taskboard") as TaskBoard,
+        data.get("gaming") as Gaming,
+        data.get("account") as Account,
+        data.get("eventShop") as EventShop,
+        data.get("divinity") as Divinity,
+        data.get("hole") as Hole,
+        data.get("zenithMarket") as ZenithMarket,
+    );
 }

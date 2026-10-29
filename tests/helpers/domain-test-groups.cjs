@@ -45,6 +45,7 @@ const rootDirectoryToGroup = {
   sneaking: 'world-6',
   spelunking: 'world-7',
   speedrun: 'master-classes',
+  storage: 'account',
   summoning: 'world-6',
   talents: 'players',
   tesseract: 'master-classes',

@@ -5,6 +5,11 @@ import { ImageData } from "../../imageData";
 import { BuildingModel } from "../../model/buildingModel";
 import type { ComponentModel } from "../../model/componentModel";
 
+export interface BuildingCompletionTimes {
+    normalCompletionSeconds: number | null;
+    trimmedCompletionSeconds: number | null;
+}
+
 export class Building {
     description: string
     bonus: string
@@ -17,13 +22,16 @@ export class Building {
     name: string
 
     level: number = 0;
+    unlocked: boolean = false;
     nextLevelUnlocked: boolean = false;
     finishedUpgrade: boolean = false;
     maxed: boolean = false;
     currentXP: number = 0;
     currentlyBuilding: boolean = false;
+    currentlyTrimmed: boolean = false;
     buildPercentage: number = 0;
     upgradable: boolean = false;
+
 
     buildingMultiplier: number = 0;
     
@@ -67,6 +75,23 @@ export class Building {
             return this.buildingMultiplier * Math.pow(this.costIncrement, level);
         }
     }
+
+    getCompletionTimes(normalBuildSpeed: number, trimmedBuildSpeed: number): BuildingCompletionTimes {
+        if (this.maxed) {
+            return { normalCompletionSeconds: null, trimmedCompletionSeconds: null };
+        }
+
+        const remainingWork = Math.max(0, this.getBuildCost() - this.currentXP);
+        // These are constant-rate projections, including for buildings not in a slot.
+        // Completed work takes zero seconds; a nonpositive rate cannot finish remaining work.
+        const completionSeconds = (rate: number): number | null =>
+            remainingWork === 0 ? 0 : rate > 0 && Number.isFinite(rate) ? remainingWork * 3600 / rate : null;
+        return {
+            normalCompletionSeconds: completionSeconds(normalBuildSpeed),
+            trimmedCompletionSeconds: completionSeconds(trimmedBuildSpeed),
+        };
+    }
+
 
     // Gives NEXT level costs, so if input 0 it will give level 1, etc...
     getLevelCosts = (level: number = this.level, costCruncher: Building): { item: string, quantity: number}[] => {

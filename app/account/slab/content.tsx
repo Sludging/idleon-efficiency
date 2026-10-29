@@ -17,6 +17,7 @@ import { NoteModel } from '../../../data/domain/model/noteModel';
 import ShadowBox from '../../../components/base/ShadowBox';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
+import useHydrated from '../../../lib/hooks/useHydrated';
 
 function ItemSourcesDisplay({ sources, notes }: { sources: SourcesModel, notes: NoteModel | undefined }) {
 
@@ -53,13 +54,14 @@ function ItemSourcesDisplay({ sources, notes }: { sources: SourcesModel, notes: 
 }
 
 function Slab() {
+    const hydrated = useHydrated();
     const [onlyMissing, setOnlyMissing] = useState<boolean>(false);
     const [onlyLooted, setOnlyLooted] = useState<boolean>(false);
-    const { theData, lastUpdated } = useAppDataStore(useShallow(
-        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    const { data, lastUpdated } = useAppDataStore(useShallow(
+        (state) => ({ data: state.data, lastUpdated: state.lastUpdated })
     ));
-    
-    const slabInfo = theData.get("slab") as SlabDomain;
+
+    const slabInfo = data.getData().get("slab") as SlabDomain;
 
     const missingItems = useMemo(() => {
         if (!slabInfo) {
@@ -67,7 +69,7 @@ function Slab() {
         }
 
         return slabInfo.obtainableItems.filter(item => !item.obtained).filter(item => !customHandCraftedListOfUnobtainableItems.includes(item.internalName));
-    }, [slabInfo, lastUpdated]);
+    }, [slabInfo, data, lastUpdated]);
 
     const obtainedItems = useMemo(() => {
         if (!slabInfo) {
@@ -75,9 +77,9 @@ function Slab() {
         }
 
         return slabInfo.obtainableItems.filter(item => item.obtained);
-    }, [slabInfo, lastUpdated]);
+    }, [slabInfo, data, lastUpdated]);
 
-    if (!slabInfo) {
+    if (!hydrated || !slabInfo) {
         return <Box>Loading</Box>
     }
 

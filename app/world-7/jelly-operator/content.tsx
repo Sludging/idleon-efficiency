@@ -8,18 +8,20 @@ import { JellyCells, JellyObstructions } from "../../../components/world-7/jelly
 import { JellyOverview } from "../../../components/world-7/jelly-operator/jellyOverview";
 import { JellyUpgrades } from "../../../components/world-7/jelly-operator/jellyUpgrades";
 import { JellyOperator } from "../../../data/domain/world-7/jellyOperator";
+import useHydrated from "../../../lib/hooks/useHydrated";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 
 type Section = 'Cells' | 'Upgrades' | 'Obstructions';
 
 export default function JellyOperatorContent() {
+    const hydrated = useHydrated();
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
     const [section, setSection] = useState<Section>('Cells');
     const jelly = theData.get("jellyOperator") as JellyOperator | undefined;
 
-    if (!jelly) {
+    if (!hydrated || !jelly) {
         return <>Loading...</>
     }
 

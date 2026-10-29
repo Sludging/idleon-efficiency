@@ -24,6 +24,7 @@ export interface UpgradeTableProps<T> {
     variant?: "default" | "panel";
     showLockedAndMaxedFilters?: boolean;
     showSearch?: boolean;
+    pageSize?: number;
 }
 
 export function UpgradeTable<T>({
@@ -40,7 +41,8 @@ export function UpgradeTable<T>({
     minWidth = "1100px",
     variant = "default",
     showLockedAndMaxedFilters = true,
-    showSearch = true
+    showSearch = true,
+    pageSize
 }: UpgradeTableProps<T>) {
     const filterControls = (
         <UpgradeTableFilters
@@ -66,7 +68,8 @@ export function UpgradeTable<T>({
                     fill
                     columns={columns}
                     data={data}
-                    step={data.length}
+                    step={pageSize ?? data.length}
+                    paginate={pageSize !== undefined}
                     primaryKey={primaryKey}
                     background={variant === "panel" ? { body: "dark-1" } : { body: ["dark-1", "grey-4"] }}
                 />
