@@ -32,7 +32,7 @@ function prepareJestArgs(options) {
   const hasMaxWorkers = retainedArgs.some(argument => argument === '--maxWorkers' || argument.startsWith('--maxWorkers=') || argument === '-w' || argument.startsWith('-w='));
   const hasMemoryLimit = retainedArgs.some(argument => argument === '--workerIdleMemoryLimit' || argument.startsWith('--workerIdleMemoryLimit='));
   if (!hasMaxWorkers) workerArgs.push('--maxWorkers=1');
-  if (!hasMemoryLimit) workerArgs.push('--workerIdleMemoryLimit=512MB');
+  if (!hasMemoryLimit) workerArgs.push('--workerIdleMemoryLimit=1024MB');
   return [...workerArgs, ...retainedArgs];
 }
 

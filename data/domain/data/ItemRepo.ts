@@ -26049,7 +26049,7 @@ export const initItemRepo = () => {
                         "mCostExp": 2,
                         "startingCost": 35000,
                         "cCostExp": 1.4,
-                        "i10": -1,
+                        "i10": 1,
                         "upgradeText": "{} Mining Efficiency",
                         "i12": 0
                     }

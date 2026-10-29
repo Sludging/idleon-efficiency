@@ -34,7 +34,7 @@ export class Building {
 
 
     buildingMultiplier: number = 0;
-    
+
 
     constructor(public index: number, data: BuildingModel, multiplier: number = 0) {
         this.description = data.description;
@@ -94,14 +94,14 @@ export class Building {
 
 
     // Gives NEXT level costs, so if input 0 it will give level 1, etc...
-    getLevelCosts = (level: number = this.level, costCruncher: Building): { item: string, quantity: number}[] => {
-        const toReturn: { item: string, quantity: number}[] = [];
+    getLevelCosts = (level: number = this.level, costCruncher: Building): { item: string, quantity: number }[] => {
+        const toReturn: { item: string, quantity: number }[] = [];
         this.lvlUpReq.forEach(item => {
-            const math1 =  Math.min(0.1, 0.1 * Math.floor((costCruncher.level + 999) / 1000));
+            const math1 = Math.min(0.1, 0.1 * Math.floor((costCruncher.level + 999) / 1000));
             const math2 = Math.max(0, costCruncher.level - 1);
             const costReduction = Math.max(0.2, 1 - (math1 + (math2 * costCruncher.bonusInc[0]) / 100))
             if (item.item.includes("Refinery")) {
-                toReturn.push({ 
+                toReturn.push({
                     item: item.item,
                     quantity: Math.floor(costReduction * item.quantity * (level + 1))
                 });
@@ -117,8 +117,8 @@ export class Building {
         return toReturn;
     }
 
-    getMaxLevelCosts = (costCruncher: Building): { item: string, quantity: number}[] => {
-        let toReturn: { item: string, quantity: number}[] = [];
+    getMaxLevelCosts = (costCruncher: Building): { item: string, quantity: number }[] => {
+        let toReturn: { item: string, quantity: number }[] = [];
         range(this.level, this.maxLvl).forEach(level => {
             const thisLevelCosts = this.getLevelCosts(level, costCruncher);
             if (toReturn.length == 0) {
