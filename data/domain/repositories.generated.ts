@@ -122,6 +122,7 @@ import { initLabBonusRepo } from "./data/LabBonusRepo";
 import { initLampWishRepo } from "./data/LampWishRepo";
 import { initLegendTalentMetadataRepo } from "./data/LegendTalentMetadataRepo";
 import { initLegendTalentsRepo } from "./data/LegendTalentsRepo";
+import { initLibraryMetadataRepo } from "./data/LibraryMetadataRepo";
 import { initMapDataRepo } from "./data/MapDataRepo";
 import { initMapMetadataRepo } from "./data/MapMetadataRepo";
 import { initMapNameRepo } from "./data/MapNameRepo";
@@ -354,6 +355,7 @@ export const repositoryFactories = {
     "LampWish": initLampWishRepo,
     "LegendTalentMetadata": initLegendTalentMetadataRepo,
     "LegendTalents": initLegendTalentsRepo,
+    "LibraryMetadata": initLibraryMetadataRepo,
     "MapData": initMapDataRepo,
     "MapMetadata": initMapMetadataRepo,
     "MapName": initMapNameRepo,

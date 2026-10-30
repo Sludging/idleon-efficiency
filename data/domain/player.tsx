@@ -61,8 +61,17 @@ import { PlayerStats } from './player-stats';
 import { initFishingToolkitRepo } from './data/FishingToolkitRepo';
 import type { CoralKid } from './world-7/coralKid';
 import type { Speedrun } from './speedrun';
+import type { Spelunking } from './world-7/spelunking';
 export type { TalentLevelInputs } from './talents';
 const fishingToolkitRepo = initFishingToolkitRepo();
+
+const SUPER_TALENT_SLOT_LIMIT = 20;
+const SUPER_TALENT_CLASS_LEVEL_OFFSET = 400;
+const SUPER_TALENT_CLASS_LEVELS_PER_POINT = 100;
+const SUPER_TALENT_POINT_LIMIT = 20;
+export const LUNARHEIM_TUNNEL_INDEX = 5;
+export const LUNARHEIM_SUPER_TALENT_POINTS = 1;
+export const MAROON_WARSHIP_TALENT_LEVELS = 1;
 
 
 
@@ -129,6 +138,7 @@ export class Player {
     finalTalentInputs!: TalentLevelInputs;
     beforeActiveBubbleMultiplierTalentInputs!: TalentLevelInputs;
     private appliedTalentInputs!: TalentLevelInputs;
+    superTalentPoints: { total: number; spent: number; remaining: number } = { total: 0, spent: 0, remaining: 0 };
     talentPoints: TalentPoints[] = [];
     postOffice: Box[] = initPostOffice();
     activeBubblesString: string[] = [];
@@ -172,6 +182,38 @@ export class Player {
         this.playerName = playerName;
         this.skills = new Map<SkillsIndex, SkillData>();
         this.skillsRank = new Map<SkillsIndex, number>();
+    }
+
+    setActiveSuperTalentSlots(slots: readonly number[]): void {
+        this.activeSuperTalentIndexes = new Set(slots);
+        let spent = 0;
+        for (let index = 0; index < Math.min(slots.length, SUPER_TALENT_SLOT_LIMIT); index++) {
+            if (slots[index] !== -1) spent++;
+        }
+        this.superTalentPoints = { total: 0, spent, remaining: 0 };
+    }
+
+    getSuperTalentPointsFromClassLevel(classLevel: number = this.level): number {
+        return Math.floor(Math.max(0, classLevel - SUPER_TALENT_CLASS_LEVEL_OFFSET) / SUPER_TALENT_CLASS_LEVELS_PER_POINT);
+    }
+
+    updateSuperTalentPoints(lunarheimLoreCompleted: boolean): void {
+        const levelPoints = this.getSuperTalentPointsFromClassLevel();
+        const total = Math.min(SUPER_TALENT_POINT_LIMIT, levelPoints + (lunarheimLoreCompleted ? LUNARHEIM_SUPER_TALENT_POINTS : 0));
+        const spent = this.superTalentPoints.spent;
+        this.superTalentPoints = { total, spent, remaining: Math.max(0, total - spent) };
+    }
+
+    getTalentPageProgress(talents: readonly Talent[]): { pointsRequiredToMax: number; isMaxed: boolean } {
+        let pointsRequiredToMax = 0;
+        let isMaxed = true;
+        for (const talent of talents) {
+            if (talent.bookMaxLevel > 0) {
+                pointsRequiredToMax += talent.bookMaxLevel;
+                if (talent.pointsSpent < talent.bookMaxLevel) isMaxed = false;
+            }
+        }
+        return { pointsRequiredToMax, isMaxed };
     }
 
     getBaseClass = (): ClassIndex => {
@@ -677,7 +719,7 @@ const keyFunctionMap: Record<string, Function> = {
         doc.get(`SL_${player.playerID}`),
         doc.get(`SM_${player.playerID}`),
         safeJsonParse(doc, "Spelunk", []) as number[][],
-        safeJsonParse(doc, `PlayerStuff_${player.playerID}`, [0, 0])[1],
+        safeJsonParse(doc, `PlayerStuff_${player.playerID}`, [0, 0])[1] ?? 0,
         player
     ),
     "postoffice": (doc: Cloudsave, player: Player) => parsePostOffice(doc.get(`POu_${player.playerID}`), player),
@@ -753,13 +795,14 @@ const parseTalents = (talentLevels: string, talentMaxLevels: string, spelunkData
     }
 
     player.allPresetSuperTalentIndexes = new Set([
-        ...spelunkData[20 + player.playerID],
-        ...spelunkData[32 + player.playerID],
+        ...(spelunkData[20 + player.playerID] ?? []),
+        ...(spelunkData[32 + player.playerID] ?? []),
     ]);
     // Ordinary talent projection uses the active preset; account talent maxima use both presets.
-    player.activeSuperTalentIndexes = new Set(spelunkData[Math.round(20 + player.playerID + 12 * activePreset)]);
+    player.setActiveSuperTalentSlots(spelunkData[Math.round(20 + player.playerID + 12 * activePreset)] ?? []);
     player.talents.forEach((talent) => {
         talent.resetAccountBonusInputs();
+        talent.libraryMaxLevel = undefined;
         talent.level = jsonTalents[talent.skillIndex] ?? 0;
         talent.pointsSpent = jsonTalents[talent.skillIndex] ?? 0;
         talent.maxLevel = jsonMaxTalents[talent.skillIndex] ?? 0;
@@ -952,8 +995,10 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
     const arcade = data.get("arcade") as Arcade;
     const companions = data.get("companions") as Companion[];
     const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+    const spelunking = data.get("spelunking") as Spelunking;
 
     players.forEach(player => {
+        player.updateSuperTalentPoints(spelunking.tunnels[LUNARHEIM_TUNNEL_INDEX].loreCompleted);
         player.talentPoints = [];
         const talentDL: number[] = [];
         const talentDLbonus: number[] = [];
@@ -1179,7 +1224,7 @@ const getPlayerTalentLevelInputs = (
         eliteTalentLevels: player.talents
             .filter(talent => [149, 374, 539].includes(talent.skillIndex) && talent.pointsSpent > 0)
             .reduce((sum, talent) => sum + talent.getBonus(), 0),
-        achievementTalentLevels: achievements[291].completed ? 1 : 0,
+        achievementTalentLevels: achievements[291].completed ? MAROON_WARSHIP_TALENT_LEVELS : 0,
         familyTalentLevels,
         companionTalentLevels: getCompanionActiveBonus(companions, 1),
         minorLinkTalentLevels,
@@ -1188,7 +1233,7 @@ const getPlayerTalentLevelInputs = (
         grimoireTalentLevels: grimoire.getUpgradeBonus(39),
         equipmentTalentLevels: equipmentSets.getSetBonus("KATTLEKRUK_SET"),
         tesseractTalentLevels: tesseract.getUpgradeBonus(57),
-        gamingTalentLevels: gaming.isSuperbitPurchased(47) ? Math.max(0, Math.floor((player.level - 500) / 100)) : 0,
+        gamingTalentLevels: gaming.isSuperbitPurchased(47) ? gaming.getSuperbitTalentLevelsAtClassLevel(player.level) : 0,
         superTalentLevels,
         allTalentCap,
     };

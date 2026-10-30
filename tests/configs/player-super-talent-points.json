@@ -1,0 +1,11 @@
+{
+  "description": "Active character Super Talent points, bonus, Lunarheim Lore reward, and active preset slots",
+  "target": "Thingies SuperTalentPTS and Spelunk Lunarheim Lore",
+  "extractions": [
+    { "label": "super_points_total", "expression": "idleon.callFunction(\"Thingies\", \"SuperTalentPTS_totaltospend\", 0, 0)", "description": "Native total Super Talent points" },
+    { "label": "super_points_remaining", "expression": "idleon.callFunction(\"Thingies\", \"SuperTalentPTS_lefttospend\", 0, 0)", "description": "Native remaining Super Talent points; getter writes only native scratch state" },
+    { "label": "super_bonus_levels", "expression": "idleon.callFunction(\"Thingies\", \"SuperTalentPTS_LVgiven\", 0, 0)", "description": "Native Super Talent bonus levels" },
+    { "label": "lunarheim_lore", "expression": "idleon.callFunction(\"Spelunk\", \"DoWeHaveLoreN1\", 5, 0)", "description": "Lunarheim Lore Boss completion flag used by Super Talent points" },
+    { "label": "active_super_slots", "expression": "(() => { const engine = idleon.engine; const id = engine.getGameAttribute(\"GetPlayersUsernames\").indexOf(engine.getGameAttribute(\"UserInfo\")[0]); const preset = engine.getGameAttribute(\"PlayerStuff\")[1]; return engine.getGameAttribute(\"Spelunk\")[Math.round(20 + id + 12 * preset)].slice(0, 20); })()", "description": "First 20 active preset slots; each non-minus-one slot costs one point" }
+  ]
+}

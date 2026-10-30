@@ -24,7 +24,7 @@ import { Printer, updatePrinter } from './world-3/construction/printer';
 import { TaskBoard } from './tasks';
 import { Cloudsave } from './cloudsave';
 import { Worship, updateTotemsBonuses, updateWorship, updateWorshipTotalizer } from './world-3/worship';
-import { Construction, updateConstruction, updateConstructionBuildingTiming } from './world-3/construction/construction';
+import { Construction, updateConstruction, updateConstructionBuildingTiming, updateLibraryBookLevels } from './world-3/construction/construction';
 import { updateCards, Cards } from './cards';
 import { Arcade, updateArcade } from './world-2/arcade';
 import { ObolsData } from './world-2/obols';
@@ -487,6 +487,8 @@ const postPostProcessingMap: Record<string, Function> = {
     // Button task progress uses settled account and character results.
     "buttonTaskProgress": (_doc: Cloudsave, accountData: Map<string, any>) => updateButtonTaskProgress(accountData),
     "allSkillExperienceMultiplier": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateAllSkillExperienceMultiplier(accountData),
+    // Library eligibility uses settled account bonuses and each character's class.
+    "libraryBookLevels": (_doc: Cloudsave, accountData: Map<string, any>) => updateLibraryBookLevels(accountData),
     "divinityRates": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateDivinityRates(accountData),
     // Weekly task inputs need final character, capacity, stamp, shrine, prayer, and companion preparation.
     "weeklyBoss": (_doc: Cloudsave, accountData: Map<string, any>) => {

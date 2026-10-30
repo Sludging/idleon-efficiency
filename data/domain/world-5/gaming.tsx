@@ -42,6 +42,10 @@ export class Gaming extends Domain {
     isSuperbitPurchased = (id: number): boolean =>
         this.superbits.find(superbit => superbit.superbitId === id)?.purchased ?? false;
 
+    getSuperbitTalentLevelsAtClassLevel(classLevel: number): number {
+        return Math.max(0, Math.floor((classLevel - 500) / 100));
+    }
+
     getPaletteBonus = (index: number): number => this.paletteColors.find(color => color.index === index)?.getBonus() ?? 0;
 
     getImport = (id: number): Import | undefined => this.imports.find(importItem => importItem.importId === id);

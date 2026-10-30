@@ -162,7 +162,9 @@ class Upgrade {
     return "";
   };
 
-  getBonus = () => {
+  getBonus = () => this.getBonusAtLevel(this.level);
+
+  getBonusAtLevel = (level: number) => {
     // This is pretty ugly as a hardcoded list but there's not much I can do if the source data is bad.
     // Also I rather put all the "math" here instead of splattered across the repo.
     switch (this.index) {
@@ -171,24 +173,24 @@ class Upgrade {
       case 2:
         return -1;
       case 3:
-        return 9 * this.level; // Reinvested liquid
+        return 9 * level; // Reinvested liquid
       case 4:
-        return 10 * this.level; // dmg
+        return 10 * level; // dmg
       case 5:
-        return 1 * this.level; // tower dmg every second
+        return 1 * level; // tower dmg every second
       case 6:
-        return 1 * this.level; // lab px
+        return 1 * level; // lab px
       case 7:
-        return 1 * this.level; // nugget size
+        return 1 * level; // nugget size
       case 8:
-        return 5 * this.level; // drop rate
+        return 5 * level; // drop rate
       // case 9: This one is a special one, so has it's own class
       case 10:
-        return 1 * this.level; // talent levels
+        return 1 * level; // talent levels
       case 11:
-        return 1 * this.level; // Votes bonuses boost
+        return 1 * level; // Votes bonuses boost
       case 12:
-        return this.data.x2 * this.level;
+        return this.data.x2 * level;
       default:
         return -1;
     }

@@ -15,3 +15,16 @@ function(e,t,i){if("ExtraStorage"==e)return Math.round(12*m._customBlock_Summoni
  * Their numeric results do not establish their effects.
  * These effects remain undocumented. Do not invent an effect for either coral.
  */
+
+/**
+ * Super Talent point accounting:
+ * Class levels and Lunarheim Lore Boss completion grant points.
+ * Each occupied slot in the current preset spends one point.
+ * Other presets and ordinary talent allocations do not affect this balance.
+ * Player.setActiveSuperTalentSlots and Player.updateSuperTalentPoints implement these rules.
+ * Native comparisons use tests/configs/player-super-talent-points.json.
+ * Players talent source tooltips show class and Lore Boss contributions before the shared 20-point cap.
+ * Super Talent bonus levels are round(50 + LegendTalentBonus(7) + ZenithMarketBonus(5)).
+ * data/domain/talentSources.ts exposes current contributions and intrinsic acquisition rewards.
+ * Inactive rewards use owner preview APIs without changing saved levels.
+ */

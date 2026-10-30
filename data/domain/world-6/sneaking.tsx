@@ -898,9 +898,9 @@ export class Sneaking extends Domain {
         return 10 * Math.floor((98 + this.completedMasteries) / 100);
     }
 
-    getMasteryTalentLevels(): number {
+    getMasteryTalentLevels(completedMasteries: number = this.completedMasteries): number {
         // All-talent levels start one completed mastery after the all-stat milestone.
-        return 5 * Math.floor((97 + this.completedMasteries) / 100);
+        return 5 * Math.floor((97 + completedMasteries) / 100);
     }
 
     updateProgression(): void {

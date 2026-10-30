@@ -49,6 +49,8 @@ export class Talent {
     maxLevel: number = 0;
     // Represent the max level of a talent as it is displayed in-game, so not including any bonus that could affect talent levels
     bookMaxLevel: number = 0;
+    // Maximum learned level available from the Library, without extra levels.
+    libraryMaxLevel: number | undefined = undefined;
     // Represent whether this talent has an active Super Talent membership.
     isSupered: boolean = false;
 
@@ -62,6 +64,14 @@ export class Talent {
         this.funcY = data.funcY;
         this.lvlUpText = data.lvlUpText;
         this.skillIndex = data.skillIndex;
+    }
+
+    public isFullyBooked(): boolean {
+        return this.libraryMaxLevel !== undefined && this.bookMaxLevel >= this.libraryMaxLevel;
+    }
+
+    public canBookHigher(): boolean {
+        return this.libraryMaxLevel !== undefined && this.bookMaxLevel < this.libraryMaxLevel;
     }
 
     resetAccountBonusInputs(): void {}
