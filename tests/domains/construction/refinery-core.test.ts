@@ -1,5 +1,4 @@
 import type { Refinery } from '../../../data/domain/world-3/construction/refinery';
-import type { Printer } from '../../../data/domain/world-3/construction/printer';
 import type { Storage } from '../../../data/domain/storage';
 import { loadGameDataFromSave, loadTestSave } from '../../utils/cloudsave-loader';
 import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
@@ -28,7 +27,12 @@ describe('Refinery saved power and cycle limit', () => {
     const savedRows: (number | string)[][] = typeof savedRefinery === 'string'
       ? JSON.parse(savedRefinery)
       : savedRefinery;
-    const refinery = loadGameDataFromSave('latest').get('refinery') as Refinery;
+    const data = loadGameDataFromSave('latest');
+    const refinery = data.get('refinery') as Refinery;
+    const storage = data.get('storage') as Storage;
+    const quantity = (name: string) =>
+      (refinery.storage.find(item => item.name === name)?.quantity ?? 0)
+      + storage.chest.filter(item => item.internalName === name).reduce((sum, item) => sum + item.count, 0);
 
     captures.forEach((capture, index) => {
       const savedState = savedRows[index + 3];
@@ -40,9 +44,8 @@ describe('Refinery saved power and cycle limit', () => {
         const savedProgress = Number(savedState[0]);
         const expectedCycles = Math.max(0, Math.round((capture.cap - savedProgress) / Math.max(capture.power, 1)));
         expect(salt.progress).toBe(savedProgress);
-        const quantities = new Map(capture.costs.map(cost => [cost.name, cost.quantity]));
-        const shortage = capture.costs.some(cost => cost.quantity < cost.perCycle * expectedCycles);
-        expect(salt.isStoredFuelInsufficient(name => quantities.get(name) ?? 0, capture.meritApplies)).toBe(shortage);
+        const shortage = capture.costs.some(cost => quantity(cost.name) < cost.perCycle * expectedCycles);
+        expect(salt.storedFuelInsufficient).toBe(shortage);
         expect(salt.autoRefineEnabled).toBe(capture.autoRefine > 0);
         expect(salt.getCyclesTillNextRank()).toMatchLiveGameWithDetails(expectedCycles, { tolerance: 0, context: `${capture.name} saved-state remaining cycles with native power and capacity` });
       }
@@ -64,7 +67,6 @@ describe('Refinery fuel projection', () => {
     };
     const data = loadGameDataFromSave('latest');
     const refinery = data.get('refinery') as Refinery;
-    const printer = data.get('printer') as Printer;
     const storage = data.get('storage') as Storage;
     const quantity = (name: string) =>
       (refinery.storage.find(item => item.name === name)?.quantity ?? 0)
@@ -85,15 +87,15 @@ describe('Refinery fuel projection', () => {
           .filter(slot => slot.name === name)
           .reduce((sum, slot) => sum + slot.quantity * slot.factor, 0);
         const netPerSecond = perCycle / cycleTime - printedPerHour / 3600;
-        expect(salt.getNetFuelUsePerHour(name, printer, cycleTime, capture.meritApplies))
-          .toMatchLiveGameWithDetails(netPerSecond * 3600, {
-            tolerance: 0,
-            context: `${capture.name} ${name} net fuel use per hour`,
-          });
+        const fuel = salt.fuelInputs.find(row => row.item === name)!;
+        expect(fuel.netUsePerHour).toMatchLiveGameWithDetails(Math.max(0, netPerSecond * 3600), {
+          tolerance: 0,
+          context: `${capture.name} ${name} net fuel use per hour`,
+        });
         if (netPerSecond > 0) limits.push(quantity(name) / netPerSecond);
       });
       const expected = limits.length ? Math.min(...limits) : null;
-      const actual = salt.getFuelTime(quantity, printer, cycleTime, capture.meritApplies);
+      const actual = salt.fuelTimeSeconds;
       if (expected === null) {
         expect(actual).toBeNull();
       } else {

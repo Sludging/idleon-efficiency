@@ -1,5 +1,5 @@
 {
-  "description": "Native refinery saved state, power, caps, and remaining cycle counts",
+  "description": "Native refinery saved state, power, caps, and remaining cycle counts used to check domain-prepared fuel projections and rows",
   "target": "Refinery PowerPerCycle, PowerCAP, and saved refinery data",
   "extractions": [
     {

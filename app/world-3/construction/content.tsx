@@ -20,7 +20,6 @@ import DataRow from '../../../components/base/DataRow';
 import ContentTabs from '../../../components/base/ContentTabs';
 import { Refinery } from '../../../data/domain/world-3/construction/refinery';
 import { Item } from '../../../data/domain/items';
-import { Storage } from '../../../data/domain/storage';
 import { commaNotation, lavaLog, nFormatter, range, toTime } from '../../../data/utility';
 import { StaticTime, TimeDisplaySize, TimeDown } from '../../../components/base/TimeDisplay';
 import { INDEX_DAYS_SINCE_SAMPLE_ARTIFACT, Printer, Sample } from '../../../data/domain/world-3/construction/printer';
@@ -30,7 +29,6 @@ import TipDisplay, { TipDirection } from '../../../components/base/TipDisplay';
 import { Deathnote } from '../../../data/domain/world-3/construction/deathnote';
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { ClassIndex, Talent } from '../../../data/domain/talents';
-import { TaskBoard } from '../../../data/domain/tasks';
 import { Shrine } from '../../../data/domain/world-3/construction/shrines';
 import { MapInfo } from '../../../data/domain/maps';
 import IconImage from '../../../components/base/IconImage';
@@ -54,10 +52,7 @@ function RefineryDisplay() {
         )));
     const refineryData = theData.get("refinery") as Refinery;
     const itemData = theData.get("itemsData") as Item[];
-    const storage = theData.get("storage") as Storage;
     const playerData = theData.get("players") as Player[];
-    const taskboardData = theData.get("taskboard") as TaskBoard;
-    const printer = theData.get("printer") as Printer;
 
     const squireInfo = useMemo(() => {
         const squires = playerData.filter(player => (player.classId == ClassIndex.Squire || player.classId == ClassIndex.Divine_Knight));
@@ -124,12 +119,6 @@ function RefineryDisplay() {
 
     }, [squireInfo, refineryData, squirePowha])
 
-    const saltMeritLevel = useMemo(() => {
-        const saltMerit = taskboardData?.merits.find(merit => merit.descLine1 == "Refinery Salt Costs don't scale beyond");
-        return saltMerit?.level ?? 0;
-
-    }, [taskboardData]);
-
     return (
         <Box gap="medium">
             <Box direction="row" wrap justify="center">
@@ -189,31 +178,22 @@ function RefineryDisplay() {
                     const saltItem = itemData.find(item => item.internalName === salt);
                     if (!saltItem) return null;
                     const cycle = Object.values(refineryData.cycleInfo)[Math.floor(index / 3)];
-                    const quantity = (name: string) =>
-                        (refineryData.storage.find(item => item.name === name)?.quantity ?? 0)
-                        + storage.chest.filter(item => item.internalName === name).reduce((sum, item) => sum + item.count, 0);
+                    const fuelProjection = info.fuelTimeSeconds;
                     const secondsSinceUpdate = (Date.now() - (lastUpdated?.getTime() ?? 0)) / 1000;
-                    const fuelProjection = info.getFuelTime(quantity, printer, cycle.cycleTime, index <= saltMeritLevel);
                     const fuelTime = fuelProjection === null ? null : Math.max(0, fuelProjection - secondsSinceUpdate);
                     const rankTime = Math.max(0, info.getTimeToNextRank(cycle.cycleTime) - secondsSinceUpdate);
-                    const fuelShort = info.unlocked && info.isStoredFuelInsufficient(quantity, index <= saltMeritLevel);
+                    const fuelShort = info.unlocked && info.storedFuelInsufficient;
                     const details = (
                         <Box gap="xsmall">
                             <Text size="small">Cost per hour / cost to rank up (stored)</Text>
                             <Text size="small">Fuel time assumes continuous consumption and active printing at current rates. It excludes salt production and auto-refining.</Text>
-                            {info.baseCost.map(cost => {
-                                const item = itemData.find(candidate => candidate.internalName === cost.item);
-                                if (!item) return null;
-                                const perCycle = cost.quantity * info.getCostMulti(cost.item.includes("Refinery"), index <= saltMeritLevel);
-                                const printing = printer.GetTotalActive(cost.item);
-                                return (
-                                    <Box key={cost.item} direction="row" gap="xsmall" align="center">
-                                        <IconImage data={item.getImageData()} scale={0.8} />
-                                        <Text size="small">{item.displayName}: {nFormatter(perCycle * 3600 / cycle.cycleTime)} / {nFormatter(perCycle * info.getCyclesTillNextRank())} ({nFormatter(quantity(cost.item))})</Text>
-                                        {!cost.item.includes("Refinery") && <Text size="small">· Printing {nFormatter(printing)}/hr · Net use {nFormatter(Math.max(0, info.getNetFuelUsePerHour(cost.item, printer, cycle.cycleTime, index <= saltMeritLevel)))}/hr</Text>}
-                                    </Box>
-                                );
-                            })}
+                            {info.fuelInputs.map(fuel => (
+                                <Box key={fuel.item} direction="row" gap="xsmall" align="center">
+                                    <IconImage data={fuel.imageData} scale={0.8} />
+                                    <Text size="small">{fuel.displayName}: {nFormatter(fuel.costPerHour)} / {nFormatter(fuel.costToRankUp)} ({nFormatter(fuel.stored)})</Text>
+                                    {!fuel.isSalt && <Text size="small">· Printing {nFormatter(fuel.printedPerHour)}/hr · Net use {nFormatter(fuel.netUsePerHour)}/hr</Text>}
+                                </Box>
+                            ))}
                         </Box>
                     );
                     return (
@@ -271,7 +251,7 @@ function RefineryDisplay() {
                             details={[
                                 {
                                     key: "stored", label: "Stored salt / fuel and costs", content: <Box direction="row" gap="small" align="center">
-                                        <Text size="small">{nFormatter(quantity(salt))}</Text>
+                                        <Text size="small">{nFormatter(info.storedSaltQuantity)}</Text>
                                         <TipDisplay heading="Fuel and costs" body={details} maxWidth="large"><Box tabIndex={0} aria-label="Fuel and cost details"><CircleInformation size="small" /></Box></TipDisplay>
                                     </Box>
                                 },

@@ -13,6 +13,40 @@ export interface ChangelogEntryData {
 
 export const changelogData: ChangelogEntryData[] = [
   {
+    version: "1.6.2",
+    title: "Super Talents, Construction, and More",
+    date: "October 31, 2026",
+    changes: [
+      {
+        title: "Players & Construction",
+        changes: [
+          "Players: Added Super Talent tracking, talent filters, and Library checkout estimates.",
+          "Construction: Added building completion estimates, Trimmed slot bonuses, and Refinery production and fuel details.",
+        ],
+      },
+      {
+        title: "More Tracking",
+        changes: [
+          "Added Gem Shop, Bundles, Friends Stats, and Speedrun pages.",
+          "Added Hat Rack, Vote Ballot, Island Expeditions, Killroy, and Weekly Bosses pages.",
+          "Storage: Added Greenstack tracking and filters.",
+          "Alchemy: Added daily bubble upgrade estimates and target indicators.",
+        ],
+      },
+      {
+        title: "Bug Fixes",
+        changes: [
+          "Players: Fixed calculations and loading for incomplete account data.",
+          "Talents: Fixed Super Talent contributions to Family bonuses and talent bonuses to 3D Printer and Royal Armory.",
+          "Construction: Fixed Refinery rank and unlock tracking and Equinox fill bonuses.",
+          "Stamps: Fixed bonuses to respect character skill levels.",
+          "Fixed Infinite Stars activation, Tome unlock requirements, Gaming shovel bonuses, and Sushi Knowledge bonuses.",
+          "Research: Fixed progress previews before entering Research.",
+        ],
+      },
+    ],
+  },
+  {
     version: "1.6.1",
     title: "1.24 and Menagerie",
     date: "October 24, 2026",

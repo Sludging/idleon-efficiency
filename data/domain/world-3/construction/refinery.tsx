@@ -18,6 +18,8 @@ import { TaskBoard } from "../../tasks";
 import { Printer } from "./printer";
 import { Cooking } from "../../world-4/cooking";
 import { ResearchGrid } from "../../world-7/research";
+import { ImageData } from "../../imageData";
+import { Storage } from "../../storage";
 
 // Cap power per cycle before rounding down.
 const MAX_POWER_PER_CYCLE = 250000;
@@ -76,6 +78,18 @@ const RankToPowerCap = "50 50 200 800 3000 8000 14000 20000 30000 40000 50000 65
 // return (t = b.engine.getGameAttribute("DNSM")), (parsenum(t) = null != d.RefineDN0 ? t.getReserved("RefineDN0") : t.h.RefineDN0) * C._customBlock_Refinery("CycleInitialTime", Math.floor(n / 3));
 // }
 
+export interface RefineryFuelInput {
+    item: string;
+    displayName: string;
+    imageData: ImageData;
+    isSalt: boolean;
+    stored: number;
+    costPerHour: number;
+    costToRankUp: number;
+    printedPerHour: number;
+    netUsePerHour: number;
+}
+
 export class SaltStatus {
     rank: number = 0
     unlocked: boolean = false
@@ -87,6 +101,10 @@ export class SaltStatus {
     consumedPerHour: number = 0
     balancePerHour: number = 0
     maxSafeRank: number | null = null
+    fuelTimeSeconds: number | null = null
+    storedFuelInsufficient: boolean = false
+    storedSaltQuantity: number = 0
+    fuelInputs: RefineryFuelInput[] = []
     private powerBonus: number = 0;
 
 
@@ -169,30 +187,48 @@ export class SaltStatus {
         return Math.round(remainingProgress / Math.max(this.getPowerPerCycle(), 1));
     }
 
-    isStoredFuelInsufficient = (quantity: (item: string) => number, saltMeritApplies: boolean): boolean => {
+    prepareFuel(
+        name: string,
+        quantity: (item: string) => number,
+        items: Item[],
+        printer: Printer,
+        cycleTime: number,
+        saltMeritApplies: boolean,
+    ) {
         const cycles = this.getCyclesTillNextRank();
-        return this.baseCost.some(cost =>
+        this.storedSaltQuantity = quantity(name);
+        this.storedFuelInsufficient = this.unlocked && this.baseCost.some(cost =>
             quantity(cost.item) < cost.quantity * this.getCostMulti(cost.item.includes("Refinery"), saltMeritApplies) * cycles
         );
-    }
-
-    getNetFuelUsePerHour = (item: string, printer: Printer, cycleTime: number, saltMeritApplies: boolean): number => {
-        const isSalt = item.includes("Refinery");
-        const perCycle = this.baseCost.filter(cost => cost.item === item)
-            .reduce((total, cost) => total + cost.quantity * this.getCostMulti(isSalt, saltMeritApplies), 0);
-        return perCycle * 3600 / cycleTime - (isSalt ? 0 : printer.GetTotalActive(item));
-    }
-
-    getFuelTime = (quantity: (item: string) => number, printer: Printer, cycleTime: number, saltMeritApplies: boolean): number | null => {
-        let fuelTime: number | null = null;
-        const items = new Set(this.baseCost.map(cost => cost.item));
-        for (const item of items) {
-            const netConsumption = this.getNetFuelUsePerHour(item, printer, cycleTime, saltMeritApplies);
+        this.fuelTimeSeconds = null;
+        const netUse = new Map<string, number>();
+        for (const item of new Set(this.baseCost.map(cost => cost.item))) {
+            const isSalt = item.includes("Refinery");
+            const perCycle = this.baseCost.filter(cost => cost.item === item)
+                .reduce((total, cost) => total + cost.quantity * this.getCostMulti(isSalt, saltMeritApplies), 0);
+            const netConsumption = perCycle * 3600 / cycleTime - (isSalt ? 0 : printer.GetTotalActive(item));
+            netUse.set(item, netConsumption);
             if (netConsumption <= 0) continue;
             const time = quantity(item) * 3600 / netConsumption;
-            fuelTime = fuelTime === null ? time : Math.min(fuelTime, time);
+            this.fuelTimeSeconds = this.fuelTimeSeconds === null ? time : Math.min(this.fuelTimeSeconds, time);
         }
-        return fuelTime;
+        this.fuelInputs = this.baseCost.flatMap(cost => {
+            const item = items.find(candidate => candidate.internalName === cost.item);
+            if (!item) return [];
+            const isSalt = cost.item.includes("Refinery");
+            const perCycle = cost.quantity * this.getCostMulti(isSalt, saltMeritApplies);
+            return [{
+                item: cost.item,
+                displayName: item.displayName,
+                imageData: item.getImageData(),
+                isSalt,
+                stored: quantity(cost.item),
+                costPerHour: perCycle * 3600 / cycleTime,
+                costToRankUp: perCycle * cycles,
+                printedPerHour: printer.GetTotalActive(cost.item),
+                netUsePerHour: Math.max(0, netUse.get(cost.item)!),
+            }];
+        });
     }
 
 
@@ -229,6 +265,16 @@ export class Refinery extends Domain {
                 next?.[1], name, next ? cycles[Math.floor((index + 1) / 3)].cycleTime : 0,
                 saltMeritLevel, index, powerBonus, printer,
             );
+        });
+    }
+
+    prepareFuel(storage: Storage, items: Item[], printer: Printer, saltMeritLevel: number) {
+        const quantity = (name: string) =>
+            (this.storage.find(item => item.name === name)?.quantity ?? 0)
+            + storage.chest.filter(item => item.internalName === name).reduce((sum, item) => sum + item.count, 0);
+        const cycles = [this.cycleInfo["Combustion"], this.cycleInfo["Synthesis"], this.cycleInfo["Polymerization"]];
+        Object.entries(this.salts).forEach(([name, salt], index) => {
+            salt.prepareFuel(name, quantity, items, printer, cycles[Math.floor(index / 3)].cycleTime, index <= saltMeritLevel);
         });
     }
 
@@ -351,8 +397,11 @@ export function updateRefinerySustainability(data: Map<string, any>) {
     const printer = data.get("printer") as Printer;
     const taskboard = data.get("taskboard") as TaskBoard;
     const companions = data.get("companions") as Companion[];
+    const storage = data.get("storage") as Storage;
+    const items = data.get("itemsData") as Item[];
     const saltMerit = taskboard.merits.find(merit => merit.descLine1 === "Refinery Salt Costs don't scale beyond")!;
 
     refinery.updateSustainability(printer, saltMerit.level, getCompanionActiveBonus(companions, 35));
+    refinery.prepareFuel(storage, items, printer, saltMerit.level);
     return refinery;
 }
