@@ -137,7 +137,7 @@ const parameterComparisons: ParameterComparison[] = [
   },
  },
  {
-  description: 'Recipient-specific account talent 225 bonus used by the Royal Armory rate',
+  description: 'Account-wide Castle Convene bonus calculated with the selected character modifiers',
   extractionKey: 'royal_armory_rate_talent_225_best',
   domainValue: gameData => {
    const players = gameData.get('players') as Player[];
@@ -146,7 +146,7 @@ const parameterComparisons: ParameterComparison[] = [
   },
  },
  {
-  description: 'Recipient-specific account talent 226 bonus used by the Royal Armory rate',
+  description: 'Account-wide Royal Armory talent bonus calculated with the selected character modifiers',
   extractionKey: 'royal_armory_rate_talent_226_best',
   domainValue: gameData => {
    const players = gameData.get('players') as Player[];
@@ -155,7 +155,7 @@ const parameterComparisons: ParameterComparison[] = [
   },
  },
  {
-  description: 'Effective recipient-specific account talent 230 multiplier used by the Royal Armory rate',
+  description: 'Account-wide Industrial Politics multiplier for the selected character, with a minimum of 1',
   extractionKey: 'royal_armory_rate_talent_230_best',
   domainValue: gameData => {
    const players = gameData.get('players') as Player[];

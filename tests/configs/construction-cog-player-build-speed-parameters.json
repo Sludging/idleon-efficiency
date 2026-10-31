@@ -5,7 +5,7 @@
     {
       "label": "player_build_speed_active_player",
       "expression": "idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0])",
-      "description": "Active character whose prepared gear supplies EtcBonuses"
+      "description": "Active character whose equipped items supply equipment bonuses"
     },
     {
       "label": "player_build_speed_bubble_12",

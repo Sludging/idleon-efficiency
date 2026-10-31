@@ -1,6 +1,6 @@
 /**
  * The Family Guy talent (144) boosts the winning character's Family Class
- * Bonus. This comparison isolates its player-specific value.
+ * Bonus.
  */
 import {
   ExtractionResults,

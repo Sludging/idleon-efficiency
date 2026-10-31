@@ -407,7 +407,7 @@ function BubblesDisplay() {
                         <Text size="xsmall">Any one of these sources enables daily upgrades:</Text>
                         <Text size="xsmall" style={{ opacity: daily.sources.mainframe > 0.5 ? 1 : 0.6 }}>No Bubble Left Behind active in the Lab</Text>
                         <Text size="xsmall" style={{ opacity: daily.sources.bundle ? 1 : 0.6 }}>No Meal Left Behind bundle</Text>
-                        <Text size="xsmall" style={{ opacity: daily.sources.event ? 1 : 0.6 }}>Event shop bonus</Text>
+                        <Text size="xsmall" style={{ opacity: daily.sources.event ? 1 : 0.6 }}>Event Shop — Bubble Broth</Text>
                     </Box>} />
                     <ComponentAndLabel label="Daily bubbles" component={<TipDisplay heading="Daily bubbles" size="small" body={<Box gap="xxsmall">
                         <Text size="xsmall">Base: 2</Text>
@@ -415,7 +415,7 @@ function BubblesDisplay() {
                         {daily.sources.pyriteActive && daily.sources.mainframeActive
                             ? <Text size="xsmall">Pyrite Rhinestone: +{daily.sources.pyriteCount}</Text>
                             : <Box style={{ opacity: 0.6 }}>
-                                <Text size="xsmall">Pyrite Rhinestone: +{daily.sources.potentialPyrite} No Bubble Left Behind Lab bonus (with Lab active)</Text>
+                                <Text size="xsmall">Pyrite Rhinestone: +{daily.sources.potentialPyrite} to the Lab No Bubble Left Behind bonus (with Lab active)</Text>
                                 <Text size="xsmall">{daily.sources.potentialPyriteCount > 0 ? `Projected daily bubble bonus: +${daily.sources.potentialPyriteCount}` : "The Lab daily bubble bonus is already at its limit."}</Text>
                             </Box>}
                         <Text size="xsmall" style={{ opacity: daily.sources.amberiteOwned ? 1 : 0.6 }}>Sailing Amberite: +{daily.sources.amberiteOwned ? daily.sources.amberiteBase : daily.sources.potentialAmberiteBase}</Text>
@@ -432,7 +432,7 @@ function BubblesDisplay() {
                         <Text size="xsmall" style={{ opacity: daily.sources.pyriteActive && daily.sources.mainframeActive ? 1 : 0.6 }}>Pyrite Rhinestone: +{daily.sources.pyriteActive && daily.sources.mainframeActive ? daily.sources.pyriteLevelGain : daily.sources.potentialPyriteLevelGain} levels to each end of the range{daily.sources.pyriteActive && daily.sources.mainframeActive ? "" : " (with Lab active)"}</Text>
                         <Text size="xsmall" style={{ opacity: daily.sources.bundle ? 1 : 0.6 }}>No Meal Left Behind bundle: +3 maximum</Text>
                         <Text size="xsmall" style={{ opacity: daily.sources.bundle && daily.sources.mainframeActive ? 1 : 0.6 }}>Bundle with active Lab: +1 maximum</Text>
-                        <Text size="xsmall" style={{ opacity: daily.sources.event ? 1 : 0.6 }}>Event shop: +2 maximum</Text>
+                        <Text size="xsmall" style={{ opacity: daily.sources.event ? 1 : 0.6 }}>Event Shop — Bubble Broth: +2 maximum</Text>
                         <Text size="xsmall" style={{ opacity: daily.sources.tachyon ? 1 : 0.6 }}>Tachyon Truth talent: +3 maximum</Text>
                     </Box>}><Text size="small" tabIndex={0} style={{ textDecoration: "underline dotted", cursor: "help" }}>{daily.enabled ? `${daily.minLevelGain}–${daily.maxLevelGain}` : "—"}</Text></TipDisplay>} />
                     <TextAndLabel label="Kattlekruk" text={daily.krukActiveVaries ? "Active for some" : daily.krukActive ? "Active" : "Inactive"} textSize="small" />

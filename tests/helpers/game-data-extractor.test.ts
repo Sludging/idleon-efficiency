@@ -480,7 +480,7 @@ describe('GameDataExtractor persisted results', () => {
   );
 });
 describe('BatchExtractor player server routing', () => {
-  it.each([false, true])('routes through the actor URL unless a required player overrides it (%s)', async (useOverride) => {
+  it.each([false, true])('uses the character server unless the config requires another player (%s)', async (useOverride) => {
     const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'batch-player-server-'));
     const configPath = path.join(tempDir, 'talents.json');
     const resultPath = path.join(tempDir, 'talents-data.json');

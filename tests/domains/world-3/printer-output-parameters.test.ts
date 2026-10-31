@@ -30,7 +30,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
     },
   },
   account_max_talent_178: {
-    description: 'Attainable account-best King of the Remembered bonus before the orb-kill multiplier (getbonus2(1,178,-1))',
+    description: 'Highest attainable King of the Remembered bonus across characters, before the orb-kill multiplier',
     extractionKey: 'best_divine_knight_talent_178',
     domainExtractor: gameData => (gameData.get('printer') as Printer).accountTalent178Bonus,
   },

@@ -6,6 +6,7 @@ import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerSt
 import { Alchemy, updateAlchemy, updateAlchemyDailyBubbleProgression, updateAlchemySlabBubbles, updateAlchemyTomeBubbles } from './world-2/alchemy/alchemy';
 import { updatePlayerTalentContexts } from './player';
 import { updateSpeedrunTalentPoints } from './player';
+import { updatePlayerTalentPresentation } from './talentSources';
 import { updateEquipmentProperties } from './equipment';
 import { GoldenFood, updateGoldenFood } from './golden-food';
 import { updatePlayerDropRates, updatePlayerPowers, updatePlayerSecondaryStats, updatePlayerSkillStatsDN, updatePlayerStats } from './player-stats';
@@ -489,6 +490,8 @@ const postPostProcessingMap: Record<string, Function> = {
     "allSkillExperienceMultiplier": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateAllSkillExperienceMultiplier(accountData),
     // Library eligibility uses settled account bonuses and each character's class.
     "libraryBookLevels": (_doc: Cloudsave, accountData: Map<string, any>) => updateLibraryBookLevels(accountData),
+    // Talent presentation needs final character inputs, account sources, and prepared Library eligibility.
+    "playerTalentPresentation": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentPresentation(accountData),
     "divinityRates": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateDivinityRates(accountData),
     // Weekly task inputs need final character, capacity, stamp, shrine, prayer, and companion preparation.
     "weeklyBoss": (_doc: Cloudsave, accountData: Map<string, any>) => {

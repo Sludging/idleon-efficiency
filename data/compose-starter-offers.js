@@ -18,7 +18,8 @@ Existing files are overwritten. --output-dir is relative to the current working 
 Print one JSON evidence record per output. Bounds and cropOffset use card-local coordinates.`;
 
 // Coordinates and frames: docs/plans/bundles-starter-native-composition-research.md.
-// This still uses native counter zero, not a captured simultaneous animation frame.
+// Compose a still image with the offer animation counter set to zero.
+// Pet frames do not represent one captured animation frame.
 const sine = degrees => Math.sin(degrees * Math.PI / 180);
 const offers = [
     {
@@ -97,7 +98,7 @@ function renderPasses(offer, index) {
     const sheet = loadPng(`graphics/1x/sprite-2-${offer.spriteId}.png`, offer.sheetSize);
     const [width, height] = offer.frameSize;
     const movingCrop = [offer.movingFrame % 6 * width, Math.floor(offer.movingFrame / 6) * height, width, height];
-    // Native scale 3 preserves each actor's bottom-center origin, not the frame center.
+    // Scaling pets to 3x preserves their bottom-center origin, not the frame center.
     const pets = [
         layer(sheet, offer.largePosition[0] - 2 * offer.origin[0], offer.largePosition[1] - 2 * offer.origin[1], {
             crop: [0, 0, width, height], scale: 3,
@@ -121,7 +122,7 @@ function drawLayer(output, bounds, source) {
         for (let x = source.left; x < source.right; x++) {
             const dx = x + 0.5 - source.centerX;
             const dy = y + 0.5 - source.centerY;
-            // Inverse mapping keeps transparent rotation and pet scaling nearest-neighbor.
+            // Use nearest-neighbor sampling when rotating or resizing layers.
             const sourceX = Math.floor((dx * source.cosine + dy * source.sine) / source.scale + source.width / 2);
             const sourceY = Math.floor((-dx * source.sine + dy * source.cosine) / source.scale + source.height / 2);
             if (sourceX < 0 || sourceY < 0 || sourceX >= source.width || sourceY >= source.height) continue;

@@ -18,11 +18,11 @@ type Projection = {
   balancePerHour: number;
 };
 
-// Game 1.24 idleon1.24.txt:172357-172366 supplies cycle time and power.
-// The printer multiplier and collection are at :173300-173325 and :197636-197639.
-// Toolbox refinery.ts:271-293,323-415 defines this website projection, not a native getter.
-// It assumes continuous cycles with enough fuel, even when a salt's power bar is full.
-// Safe rank assumes the previous salt is active and ignores inputs without active samples.
+// These website projections assume continuous cycles with enough fuel, even when a salt's power bar is full.
+// Safe ranks assume the previous salt is active. Other fuel inputs constrain ranks only with active printer samples.
+// Game sources: idleon1.24.txt:172357-172366 (cycle time and power),
+// :173300-173325 (printer multiplier), and :197636-197639 (printer collection).
+// Projection reference: Toolbox refinery.ts:271-293,323-415.
 const project = (capture: Capture, index: number): Projection => {
   const { refinery, info, task, cycles, powers } = capture;
   const unlocked = (i: number) => i < refinery[0][0];

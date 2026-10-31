@@ -4,9 +4,10 @@ import { Grimoire } from '../../../data/domain/grimoire';
 import { EquipmentSets } from '../../../data/domain/misc/equipmentSets';
 import { LUNARHEIM_TUNNEL_INDEX, Player, SkillData } from '../../../data/domain/player';
 import { SkillsIndex } from '../../../data/domain/SkillsIndex';
-import { Talent, TalentLevelInputs } from '../../../data/domain/talents';
-import { getTalentSourceGroups } from '../../../data/domain/talentSources';
+import { ClassIndex, Talent, TalentLevelInputs } from '../../../data/domain/talents';
+import { getTalentSourceGroups, updatePlayerTalentPresentation } from '../../../data/domain/talentSources';
 import { Tesseract } from '../../../data/domain/tesseract';
+import { Library } from '../../../data/domain/world-3/construction/construction';
 import { Equinox } from '../../../data/domain/world-3/equinox';
 import { Divinity } from '../../../data/domain/world-5/divinity';
 import { Gaming } from '../../../data/domain/world-5/gaming';
@@ -102,7 +103,7 @@ describe('Talent source contributions', () => {
     expect(getTalentSourceGroups(data, player).ordinaryLevels[8].value).toBe(2.7);
   });
 
-  it('previews real intrinsic acquisition bonuses without changing ownership or levels', () => {
+  it('previews bonuses from unowned sources without changing ownership or levels', () => {
     const fixture = createFixture();
     const { player, data, companions, equipmentSets, legendTalents, zenithMarket,
       grimoire, tesseract, equinox, sneaking } = fixture;
@@ -186,5 +187,97 @@ describe('Talent source contributions', () => {
     expect(points[0]).toMatchObject({ value: 46, active: true, obtainableValue: 1 });
     expect(points[1]).toMatchObject({ value: 1, active: true, obtainableValue: 1 });
     expect(player.superTalentPoints.total).toBe(20);
+  });
+});
+
+describe('Prepared talent presentation', () => {
+  it('keeps character results separate and removes old contributions and checkout requirements after refresh', () => {
+    const { player, inputs, data } = createFixture();
+    const secondPlayer = new Player(1, '');
+    const library = new Library();
+    const players = [player, secondPlayer];
+    data.set('players', players);
+    data.set('construction', { library });
+
+    expect(player.talentPresentation).toEqual({
+      sources: { points: [], superLevels: [], ordinaryLevels: [] },
+      bonusLevels: 0,
+      superTalentLevels: 0,
+      checkoutSummary: { requiredCheckouts: 0, vipTalentsToBook: 0 },
+    });
+
+    player.classId = ClassIndex.Blood_Berserker;
+    player.level = 700;
+    player.talents = [
+      Object.assign(createTalent(0), { bookMaxLevel: 100, libraryMaxLevel: 200 }),
+      createTalent(149),
+    ];
+    player.applyTalentLevelInputs({ ...inputs, eliteTalentLevels: 1, companionTalentLevels: 25, superTalentLevels: 60 });
+    secondPlayer.talents = [
+      Object.assign(createTalent(0), { bookMaxLevel: 200, libraryMaxLevel: 200 }),
+      Object.assign(createTalent(641), { bookMaxLevel: 100, libraryMaxLevel: 200 }),
+    ];
+    secondPlayer.applyTalentLevelInputs({ ...inputs, equipmentTalentLevels: 5 });
+
+    updatePlayerTalentPresentation(data);
+
+    expect(player.talentPresentation).toMatchObject({
+      bonusLevels: 26,
+      superTalentLevels: 60,
+      checkoutSummary: { requiredCheckouts: 20, vipTalentsToBook: 0 },
+    });
+    expect(player.talentPresentation.sources.points[0]).toMatchObject({ value: 3, active: true });
+    expect(player.talentPresentation.sources.ordinaryLevels.filter(row => row.active).map(row => row.value)).toEqual([1, 25]);
+    expect(secondPlayer.talentPresentation).toMatchObject({
+      bonusLevels: 5,
+      superTalentLevels: 50,
+      checkoutSummary: { requiredCheckouts: 0, vipTalentsToBook: 1 },
+    });
+    expect(secondPlayer.talentPresentation.sources.points[0]).toMatchObject({ value: 0, active: false });
+    expect(secondPlayer.talentPresentation.sources.ordinaryLevels.filter(row => row.active).map(row => row.value)).toEqual([5]);
+
+    player.level = 0;
+    player.talents = [];
+    player.applyTalentLevelInputs(inputs);
+    updatePlayerTalentPresentation(data);
+
+    expect(player.talentPresentation).toMatchObject({
+      bonusLevels: 0,
+      superTalentLevels: 50,
+      checkoutSummary: { requiredCheckouts: 0, vipTalentsToBook: 0 },
+    });
+    expect(player.talentPresentation.sources.points[0]).toMatchObject({ value: 0, active: false });
+    expect(player.talentPresentation.sources.ordinaryLevels).toHaveLength(10);
+    expect(player.talentPresentation.sources.ordinaryLevels.every(row => !row.active && row.value === 0)).toBe(true);
+    expect(secondPlayer.talentPresentation).toMatchObject({
+      bonusLevels: 5,
+      superTalentLevels: 50,
+      checkoutSummary: { requiredCheckouts: 0, vipTalentsToBook: 1 },
+    });
+    expect(secondPlayer.talentPresentation.sources.ordinaryLevels.filter(row => row.active).map(row => row.value)).toEqual([5]);
+  });
+
+  it('counts only displayed class and special talent identities, with separate VIP requirements', () => {
+    const { player, data } = createFixture();
+    player.classId = ClassIndex.Barbarian;
+    // The Squire talent is bookable but does not appear on a Barbarian page.
+    const hiddenSquireSkill = 120;
+    const vipSkill = 641;
+    player.talents = [0, 100, 105, hiddenSquireSkill, vipSkill, 0, vipSkill].map(skillIndex =>
+      Object.assign(createTalent(skillIndex), { bookMaxLevel: 100, libraryMaxLevel: 200 }),
+    );
+    player.talents.push(
+      Object.assign(createTalent(642), { bookMaxLevel: 200, libraryMaxLevel: 200 }),
+      createTalent(643),
+    );
+    data.set('players', [player]);
+    data.set('construction', { library: new Library() });
+
+    updatePlayerTalentPresentation(data);
+
+    expect(player.talentPresentation.checkoutSummary).toEqual({
+      requiredCheckouts: 60,
+      vipTalentsToBook: 1,
+    });
   });
 });

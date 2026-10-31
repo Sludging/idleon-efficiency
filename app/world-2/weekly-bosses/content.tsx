@@ -68,7 +68,7 @@ function getRequirementLabel(requirement: string): string {
 
 function SavedStat({ character, requirement }: { character: WeeklyBossPreparedCharacter; requirement: string }) {
     if (character.rawValue === undefined) {
-        return <Text size="small" color="accent-2">Saved stat unavailable</Text>;
+        return <Text size="small" color="accent-2">Could not load this stat.</Text>;
     }
 
     const killRequirement = requirement.includes('Digits of');
@@ -241,7 +241,7 @@ function WeeklyShop({ weeklyBoss, preparation }: {
                     <Checkmark size="small" aria-label={appearance ? 'Appearance collected' : 'Deposited in Hat Rack'} />
                     <Text size="xsmall">{appearance ? 'Appearance collected' : 'Deposited in Hat Rack'}</Text>
                 </Box>}
-                {appearance && owned === undefined && <Text size="xsmall" color="accent-2">Appearance ownership unavailable</Text>}
+                {appearance && owned === undefined && <Text size="xsmall" color="accent-2">Could not load appearance ownership.</Text>}
                 {deposited === false && <Text size="xsmall" color="accent-2">Not deposited in Hat Rack</Text>}
             </ShadowBox>;
         })}

@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { useShallow } from "zustand/react/shallow";
 import { Player, TalentTab } from "../../data/domain/player";
 import { ClassTalentMap, GetTalentArray, Talent } from "../../data/domain/talents";
-import { getTalentSourceGroups, TalentBonusSource } from "../../data/domain/talentSources";
+import type { TalentBonusSource } from "../../data/domain/talentSources";
 import { Construction } from "../../data/domain/world-3/construction/construction";
 import { LegendTalents } from "../../data/domain/world-7/legendTalents";
 import { notateNumber } from "../../data/utility";
@@ -79,7 +79,7 @@ export default function TalentDisplay({ player }: { player: Player }) {
     })).filter(({ page, slots }) => classPages.includes(page) || slots.some(Boolean));
     const allRows = pageRows.flatMap(page => page.slots.filter((row): row is TalentRow => row !== undefined));
     const checkoutSummary = focus === "Can book higher"
-        ? construction.library.getBookCheckoutSummary(allRows.map(({ talent }) => talent))
+        ? player.talentPresentation.checkoutSummary
         : undefined;
     const search = filters.searchText.trim().toLowerCase();
     const rows = allRows.filter(({ talent, page }) => !search || `${talent.name} ${page} ${talent.getBonusText()}`.toLowerCase().includes(search));
@@ -95,10 +95,7 @@ export default function TalentDisplay({ player }: { player: Player }) {
             default: return a.order - b.order;
         }
     });
-    const inputs = player.currentTalentInputs;
-    const sources = getTalentSourceGroups(theData, player);
-    const ordinaryTalent = allRows.find(({ talent }) => talent.skillIndex >= 0 && talent.skillIndex < 49)?.talent;
-    const bonusLevels = ordinaryTalent?.getExtraLevels(inputs, false) ?? 0;
+    const { sources, bonusLevels, superTalentLevels } = player.talentPresentation;
     const specialPoints = player.talentPoints.find(points => points.tab === TalentTab.SpecialTab);
     const specialTalents = pageRows.filter(({ page }) => !classPages.includes(page))
         .flatMap(({ slots }) => slots.flatMap(row => row ? [row.talent] : []));
@@ -116,7 +113,7 @@ export default function TalentDisplay({ player }: { player: Player }) {
         <Box direction="row" wrap gap="large" align="start">
             {legendTalents.superTalentUnlocked ? <Box direction="row" wrap gap="medium">
                 <TextAndLabel
-                    label="Super talents"
+                    label="Super Talent points"
                     text={`${player.superTalentPoints.remaining}/${player.superTalentPoints.total}`}
                     tooltip={<Box gap="xxsmall">
                         <TalentSourceRows sources={sources.points} />
@@ -125,7 +122,7 @@ export default function TalentDisplay({ player }: { player: Player }) {
                 />
                 <TextAndLabel
                     label="Super Talent bonus"
-                    text={`+${inputs.superTalentLevels} levels`}
+                    text={`+${superTalentLevels} levels`}
                     tooltip={<TalentSourceRows sources={sources.superLevels} />}
                 />
             </Box> : <Text size="small">Super Talents Locked</Text>}
@@ -154,7 +151,7 @@ export default function TalentDisplay({ player }: { player: Player }) {
                 label="Library checkouts"
                 text={`${construction.library.currentBooks}/${checkoutSummary.requiredCheckouts}`}
                 tooltip={<Box gap="xsmall">
-                    <Text size="small">Required to max out all talents assuming 20 checkouts per max-level book.</Text>
+                    <Text size="small">Checkouts needed to reach the maximum book level for these talents. Assumes 20 checkouts per maximum-level book.</Text>
                     {checkoutSummary.vipTalentsToBook > 0 && <Text size="small">
                         Excludes {checkoutSummary.vipTalentsToBook} VIP {checkoutSummary.vipTalentsToBook === 1 ? "talent" : "talents"}.
                         {" "}VIP books roll random levels.
@@ -171,7 +168,7 @@ export default function TalentDisplay({ player }: { player: Player }) {
                 const showPoints = points && !progress.isMaxed && (!isSpecial || pageIndex === classPages.length);
                 return <Box key={page} align="center" gap="small">
                     <Text>{page}</Text>
-                    {showPoints && <Text size="xsmall" color="accent-2">Talents: {points.totalOwned}/{progress.pointsRequiredToMax}</Text>}
+                    {showPoints && <Text size="xsmall" color="accent-2">Talent points: {points.totalOwned}/{progress.pointsRequiredToMax}</Text>}
                     <Grid columns={{ count: 5, size: "20%" }} fill>
                         {slots.map((row, index) => row ? <TalentTip key={row.talent.skillIndex} talent={row.talent}>
                             <Box pad="xxsmall" direction={size === "small" ? "column" : "row"} gap="xxsmall" align="center" background={isHighlighted(row.talent) ? "#294665" : undefined}>

@@ -72,8 +72,8 @@ describe('Refinery fuel projection', () => {
       (refinery.storage.find(item => item.name === name)?.quantity ?? 0)
       + storage.chest.filter(item => item.internalName === name).reduce((sum, item) => sum + item.count, 0);
 
-    // This is a website projection, not a native fuel-time getter.
-    // Captured costs and active printer slots supply independent rates; balances come from the saved account.
+    // The website projects fuel duration; the game does not provide this value directly.
+    // Captured costs and active 3D Printer slots provide rates. Fuel balances come from the saved account.
     captures.forEach((capture, index) => {
       if (!capture.unlocked) return;
       const salt = refinery.salts[capture.name];

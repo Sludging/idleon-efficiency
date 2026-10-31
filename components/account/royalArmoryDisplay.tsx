@@ -642,7 +642,7 @@ export default function RoyalArmoryDisplay() {
         .filter((type): type is number => type !== undefined))], [upgrades]);
 
     if (!hydrated) {
-        return <Box><Text>Waiting for imported account data.</Text></Box>;
+        return <Box><Text>Loading account data...</Text></Box>;
     }
 
     return (

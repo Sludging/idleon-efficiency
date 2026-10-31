@@ -42,8 +42,8 @@ export default function FriendsStatsContent() {
         { name: 'Base', value: friends.slotSources.base },
         { name: spearfish.name, value: friends.slotSources.spearfish },
         { name: mrPig.name, value: friends.slotSources.mrPig },
-        { name: eventShop.bonuses.find(bonus => bonus.index === 22)!.data.name, value: friends.slotSources.friendlySlot },
-        { name: eventShop.bonuses.find(bonus => bonus.index === 67)!.data.name, value: friends.slotSources.slotOfFriendship },
+        { name: `Event Shop — ${eventShop.bonuses.find(bonus => bonus.index === 22)!.data.name}`, value: friends.slotSources.friendlySlot },
+        { name: `Event Shop — ${eventShop.bonuses.find(bonus => bonus.index === 67)!.data.name}`, value: friends.slotSources.slotOfFriendship },
     ];
     const multiplierSources = [
         { name: 'Base', value: friends.multiplierSources.base },

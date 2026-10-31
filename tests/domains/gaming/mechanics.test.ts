@@ -99,9 +99,9 @@ const cases: [string, string, (gaming: Gaming) => number | null][] = [
     ["initial_appearance_probability", "initial appearance chance is separate from evolution", g => g.garden.initialAppearanceProbability],
     ["logbook_bits_multiplier", "Logbook earned Bits multiplier from historical stages", g => g.logbook.bitsMultiplier],
     ["garden_standard_harvest", "standard stage-one sprout harvest before species effects", g => g.garden.harvestBits],
-    ["slot_evolution_probability_0", "slot 0 occupied-plant evolution probability with maximum-stage cap", g => g.garden.slots[0].nextEvolutionProbability],
-    ["slot_evolution_probability_2", "slot 2 occupied-plant evolution probability with maximum-stage cap", g => g.garden.slots[2].nextEvolutionProbability],
-    ["slot_evolution_probability_4", "slot 4 occupied-plant evolution probability with maximum-stage cap", g => g.garden.slots[4].nextEvolutionProbability],
+    ["slot_evolution_probability_0", "evolution chance for the plant in slot 0, with the maximum-stage limit", g => g.garden.slots[0].nextEvolutionProbability],
+    ["slot_evolution_probability_2", "evolution chance for the plant in slot 2, with the maximum-stage limit", g => g.garden.slots[2].nextEvolutionProbability],
+    ["slot_evolution_probability_4", "evolution chance for the plant in slot 4, with the maximum-stage limit", g => g.garden.slots[4].nextEvolutionProbability],
 ];
 
 describe('Gaming account mechanics', () => {

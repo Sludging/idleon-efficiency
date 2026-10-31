@@ -15,7 +15,6 @@ interface NativeQuote {
     displayedCost: number;
 }
 
-// These rows cover fixed and rising quotes, capped rows, and both shared-counter card packs.
 const scenarios = [
     { shopName: 'Resource Boost', nativeName: 'RESOURCE_BOOST', itemCode: 'GemP41', behavior: 'a capped resource upgrade with a rising quote' },
     { shopName: 'Opal', nativeName: 'OPAL', itemCode: 'GemP43', behavior: 'a fixed-price resource purchase' },

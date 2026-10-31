@@ -80,12 +80,12 @@
     {
       "label": "nblb_normal_targets",
       "expression": "(()=>{if(!idleon.callFunction('ArcaneType','is_NBLB_on',0,0))return [];const levels=idleon.getAttr('CauldronInfo');const count=idleon.callFunction('ArcaneType','NBLB_bubbleQTY',0,0);const selected=[];for(let n=0;n<count;n++){let lowest=99999,chosen=null;for(let cauldron=0;cauldron<4;cauldron++){for(let bubble=0;bubble<15;bubble++){const id=1000*cauldron+bubble;const level=Number(levels[cauldron][bubble]);if(!selected.includes(id)&&level>=2&&level<=lowest){lowest=level;chosen=id}}}if(lowest<10000)selected.push(chosen)}return selected})()",
-      "description": "Replay the version 1.24 daily reset selection for the normal first-15-bubbles path, using the displayed count and current saved levels"
+      "description": "Select daily upgrades among the first 15 bubbles in each cauldron. Use the displayed count and current saved levels. This replays the version 1.24 daily reset."
     },
     {
       "label": "kruk_targets",
       "expression": "(()=>{if(!idleon.callFunction('Divinity','Bonus_MAJOR',0,8))return [];const tier=idleon.callFunction('Thingies','ZenithMarketBonus',1,0);const targets=[0,1000,2000];if(tier>=1)targets.push(3000);if(tier>=2)targets.push(3009);if(tier>=3)targets.push(11);if(tier>=4)targets.push(1011);if(tier>=5)targets.push(1002);return targets})()",
-      "description": "Replay the version 1.24 daily reset Kattlekruk bubble gates"
+      "description": "Select Kattlekruk's daily bubble upgrades using the blessing and Zenith Market unlocks. This replays the version 1.24 daily reset."
     },
     {
       "label": "kruk_active",

@@ -16,14 +16,14 @@ function characterIdentity(playerIndex: number): WeeklyBossCharacterIdentity {
 }
 
 describe('Weekly Bosses task power', () => {
-  it('starts at zero and reaches the native half-power reference', () => {
+  it('starts at zero and reaches half power at the Mining reference quantity', () => {
     const weeklyBoss = createWeeklyBoss();
-    // Mining uses a native half-power quantity of 60.
+    // Mining reaches 50% task power at a quantity of 60.
     expect(weeklyBoss.getTaskPower(0, 0)).toBe(0);
     expect(weeklyBoss.getTaskPower(60, 0)).toBe(0.5);
   });
 
-  it('gives meaningful 50%, 75%, and 90% preparation references', () => {
+  it('provides quantities for 50%, 75%, and 90% task power', () => {
     const weeklyBoss = createWeeklyBoss();
     expect(weeklyBoss.getTaskPowerReferences(0)).toEqual([
       { power: 0.5, quantity: 60 },
@@ -42,7 +42,7 @@ describe('Weekly Bosses task power', () => {
 });
 
 describe('Weekly Bosses character shop rewards', () => {
-  it('uses independent world gates, including exact zero and negative residuals', () => {
+  it('checks each world unlock separately, including zero and negative remaining kills', () => {
     const starter = new WeeklyBossShopCharacter(characterIdentity(0), {
       world2KillsLeft: 1, world3KillsLeft: 1, world4KillsLeft: 1, world5KillsLeft: 1,
     });
@@ -71,7 +71,7 @@ describe('Weekly Bosses character shop rewards', () => {
     expect(world5.getReward('FoodG', 500)).toEqual({ itemId: 'FoodG6', quantity: 100 });
   });
 
-  it('floors each subtype and applies the native lower and upper caps', () => {
+  it('rounds each reward item number down and applies its lower and upper limits', () => {
     const starter = new WeeklyBossShopCharacter(characterIdentity(0), {
       world2KillsLeft: 1, world3KillsLeft: 1, world4KillsLeft: 1, world5KillsLeft: 1,
     });
@@ -89,7 +89,7 @@ describe('Weekly Bosses character shop rewards', () => {
     expect(advanced.getReward('FoodG', 999)).toEqual({ itemId: 'FoodG10', quantity: 100 });
   });
 
-  it('does not invent progress when a missing later gate can change the reward', () => {
+  it('leaves rewards unknown when missing world progress can change the item', () => {
     const unknown = new WeeklyBossShopCharacter(characterIdentity(0), {
       world2KillsLeft: 0, world3KillsLeft: 0, world4KillsLeft: 0, world5KillsLeft: undefined,
     });
@@ -102,7 +102,7 @@ describe('Weekly Bosses character shop rewards', () => {
     expect(knownLaterGate.getReward('EquipmentStatues', 500)).toEqual({ itemId: 'EquipmentStatues15', quantity: 1000 });
   });
 
-  it('projects typed rewards and joins deposited hats by exact reward identity', () => {
+  it('calculates character rewards and matches Hat Rack deposits by exact item ID', () => {
     const weeklyBoss = createWeeklyBoss();
     const statues = weeklyBoss.shopEntries.find(entry => entry.data.intName === 'EquipmentStatues')!;
     const food = weeklyBoss.shopEntries.find(entry => entry.data.intName === 'FoodG')!;

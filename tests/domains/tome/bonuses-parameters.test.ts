@@ -1,9 +1,8 @@
 /**
- * Tome Bonus directly uses the Tome score, Grimoire upgrade 17 bonus, Troll
- * equipment set bonus, ownership of the Golden Tome and Singed Tome Event Shop
- * items, and the selected player's final Alchemy bubble bonuses for +{% STR, +{% AGI,
- * and +{% WIS. The Alchemy bubble bonuses are validated here as direct
- * cross-domain parameters.
+ * Tome bonuses use the Tome score, Grimoire upgrade 17, the Troll equipment set,
+ * and ownership of the Golden Tome and Singed Tome Event Shop items.
+ * They also use the selected player's final Alchemy bubble bonuses for
+ * Strength, Agility, and Wisdom. These tests compare those inputs with game results.
  */
 import {
  ExtractionResults,
@@ -49,7 +48,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   },
  },
  tome_bonus_alchemy_str: {
-  description: 'Selected player final Alchemy Strength stat bonus used by Tome STR',
+  description: "Selected player's final Alchemy Strength bonus used by Tome",
   extractionKey: 'tome_bonus_alchemy_str',
   domainExtractor: (gameData) => {
    const alchemy = gameData.get('alchemy') as Alchemy;
@@ -58,7 +57,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   },
  },
  tome_bonus_alchemy_agi: {
-  description: 'Selected player final Alchemy Agility stat bonus used by Tome AGI',
+  description: "Selected player's final Alchemy Agility bonus used by Tome",
   extractionKey: 'tome_bonus_alchemy_agi',
   domainExtractor: (gameData) => {
    const alchemy = gameData.get('alchemy') as Alchemy;
@@ -67,7 +66,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   },
  },
  tome_bonus_alchemy_wis: {
-  description: 'Selected player final Alchemy Wisdom stat bonus used by Tome WIS',
+  description: "Selected player's final Alchemy Wisdom bonus used by Tome",
   extractionKey: 'tome_bonus_alchemy_wis',
   domainExtractor: (gameData) => {
    const alchemy = gameData.get('alchemy') as Alchemy;

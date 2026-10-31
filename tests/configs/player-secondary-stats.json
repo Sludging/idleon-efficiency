@@ -1,5 +1,5 @@
 {
-  "description": "Independent native normal Defence and base Accuracy source replay from TotalStats.1.22.js:498-537 for the shared target player. Embeds gear replay without changing arithmetic. Never call TotalStats, Shrine, initializers, or Roo recomputation. Native getters may write prepared scratch. No refresh, switching, or reset. The obol replay includes the version 1.24 miscellaneous-obol branch.",
+  "description": "Replay normal Defence and base Accuracy for the target character, including gear bonuses. Apply the Menagerie multiplier to non-attribute obols. Do not recalculate full stats, Shrine bonuses, or Roo bonuses, initialize missing maps, refresh state, switch characters, or reset. Native getters may update temporary calculation values. Source: TotalStats.1.22.js:498-537, with the version 1.24 non-attribute obol update.",
   "target": "Persistent normal Defence and base Accuracy",
   "extractions": [
     {

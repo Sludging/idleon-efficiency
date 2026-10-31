@@ -40,8 +40,8 @@ describe('Library book levels', () => {
     expect(Array.isArray(caps)).toBe(true);
     expect(Array.isArray(points)).toBe(true);
     for (const talent of player.talents) {
-      // Game 1.24 saves only positive caps; its -1 unlearned sentinel is absent from the save.
-      // See idleon1.24.txt:145773-145784. The website reads an absent saved cap as zero.
+      // The game reports unlearned talent caps as -1 but omits them from the save.
+      // The website treats an absent saved cap as zero.
       const savedCap = caps[talent.skillIndex] === -1 ? 0 : caps[talent.skillIndex];
       expect(talent.bookMaxLevel).toMatchLiveGameWithDetails(savedCap, {
         tolerance: 0,
@@ -69,8 +69,7 @@ describe('Library book levels', () => {
       skills: number[];
     };
     expect(player.classId).toBe(page.classId);
-    // Game 1.24 removes the current class from the skipped pages before navigation.
-    // See idleon1.24.txt:198393-198402 and 194787-194805.
+    // The Library includes the current class page even when it normally skips that page.
     for (const skill of page.skills) {
       const talent = player.getTalent(skill);
       expect(talent).toBeDefined();

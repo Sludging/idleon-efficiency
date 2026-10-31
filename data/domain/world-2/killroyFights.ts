@@ -108,7 +108,7 @@ export class KillroyCharacterFights {
                 continue;
             }
             const seed = Math.round(inputs.weekNumber + 50 * zeroBasedSlot + inputs.serverSeedOffset);
-            // Native class and map selection each reseed, then use the same first random value.
+            // The game resets the seed for class and map selection, so both use the same first random value.
             const random = new LavaRand(seed).rand();
             const classCategory = Math.max(0, Math.min(3,
                 Math.ceil(3 * random - Math.floor(zeroBasedSlot / 2)))) as KillroyFight["classCategory"];

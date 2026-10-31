@@ -31,8 +31,8 @@ describe('Construction building completion time', () => {
     expect(rate).toBeGreaterThan(0);
     expect(multiplier).toBeGreaterThan(0);
 
-    // Game 1.24 adds work per hour to each occupied slot; trimmed slots apply the native multiplier.
-    // These constant-rate projections are not native game ETA values.
+    // Each occupied slot receives the full hourly build rate; trimmed slots also apply the trimmed-slot multiplier.
+    // These completion times assume a constant rate. The game does not calculate them directly.
     const remainingWork = work.required - work.progress;
     expect(timing.normalCompletionSeconds).toMatchLiveGameWithDetails(remainingWork * 3600 / rate, {
       tolerance: 0,

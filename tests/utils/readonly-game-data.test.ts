@@ -49,7 +49,7 @@ describe('guardAndFreeze', () => {
     expect(date.toISOString()).toBe('2024-01-02T03:04:05.000Z');
   });
 
-  it('freezes cyclic graphs, arrays, symbol properties, and captured-this functions', () => {
+  it('freezes cyclic graphs, arrays, symbol properties, and state used by arrow functions', () => {
     const symbol = Symbol('member');
     class Probe {
       values = [{ value: 1 }];

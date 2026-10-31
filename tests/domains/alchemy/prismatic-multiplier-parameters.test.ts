@@ -3,8 +3,7 @@
  *
  * Tests our alchemy prismatic bubble multiplier parameter calculations against live game data.
  *
- * Formula:
- *   Math.min(5, 2 + (arcaneUpg45 + arcade54 + sushiRoGBonus23 + jellyRoGBonus36 + w6Trophy + palette28 + 0.2*purpleSigils + exotic48 + legend36 + 50*companion88) / 100)
+ * Prismatic bubble strength starts at 2x. Bonus sources increase it to a maximum of 5x.
  *
  * This multiplier is applied to all prismatic bubbles to boost their bonus values.
  */

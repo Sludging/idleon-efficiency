@@ -178,7 +178,7 @@ export default function BundlesContent() {
     })));
 
     if (!hydrated || !account) {
-        return <Box><Text>Waiting for imported account data.</Text></Box>;
+        return <Box><Text>Loading account data...</Text></Box>;
     }
 
     const summary = account.bundles.getCategorySummary(category);
@@ -212,7 +212,7 @@ export default function BundlesContent() {
                 <Box gap="xxsmall" style={{ opacity: row.ownership === "unowned" ? 0.6 : 1 }}>
                     <Text size="xsmall" weight={700}>{row.entry.name ?? "Unknown bundle"}</Text>
                 </Box>
-                {row.ownership === "unknown" && <Text size="xsmall" color="accent-2">Unknown</Text>}
+                {row.ownership === "unknown" && <Text size="xsmall" color="accent-2">Could not load ownership.</Text>}
             </Box>,
         },
         {

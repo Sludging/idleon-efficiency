@@ -107,7 +107,7 @@ describe('Construction cog player build speed parameters', () => {
     extractionResults = loadExtractionResults(extractionResultsName);
     validateExtractionHealth(extractionResults);
     activePlayerId = getExtractedValue(extractionResults, 'player_build_speed_active_player');
-    if (!Number.isInteger(activePlayerId) || activePlayerId < 0) throw new Error('Invalid active character in Construction gear capture');
+    if (!Number.isInteger(activePlayerId) || activePlayerId < 0) throw new Error('Construction gear capture has an invalid active character ID');
     gameData = loadGameDataFromSave(saveName);
   });
 

@@ -58,7 +58,7 @@ const permanentBonuses = [
   { id: 7, name: 'future bonus shop value', consumer: 'nextUpdateBonus' },
 ] as const;
 
-describe('Killroy account progress CORE', () => {
+describe('Killroy account progress', () => {
   let extractionResults: ExtractionResults;
   let killroy: KillRoy;
   let nativeAccount: NativeAccountState;
@@ -95,16 +95,16 @@ describe('Killroy account progress CORE', () => {
       });
     });
 
-    // The regular save observes an unlocked third fight. It does not cover every unlock transition.
+    // This save has an unlocked third fight. It does not cover every unlock transition.
     it('matches the separate third weekly fight unlock', () => {
       expect(killroy.thirdBattleUnlocked).toBe(nativeAccount.thirdBattleUnlocked);
     });
 
-    it('matches consumed weekly fight slots from the retained native room-usage capture', () => {
+    it('matches consumed weekly fight slots from the captured game values', () => {
       expect(killroy.consumedFightSlots).toEqual(nativeAccount.consumedFightSlots);
     });
 
-    it('matches whether this week has used the Airhorn reset', () => {
+    it('matches whether the Airhorn reset was used this week', () => {
       expect(killroy.airhornUsed).toBe(nativeAccount.airhornUsed);
     });
   });
@@ -122,8 +122,8 @@ describe('Killroy account progress CORE', () => {
       });
     });
 
-    // All six choices are offered in this save. Pearl drops fail only the completed-run gate.
-    // This account cannot cover a choice locked by Shades of K progression.
+    // This save offers all six choices. Only the completed-run requirement prevents Pearl drops.
+    // This account does not cover choices locked by Shades of K progression.
     it.each(runUpgrades)('matches $name level, unlock gate, and remaining runs', ({ id, name }) => {
       const upgrade = killroy.runUpgrades[id];
       expect(upgrade.id).toBe(id);

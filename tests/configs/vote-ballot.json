@@ -10,7 +10,7 @@
     {
       "label": "meritocracy_state",
       "expression": "(()=>{const ballot=idleon.getAttr('PixelHelperActor')[25].behaviors.getBehavior('ActorEvents_670')._GenINFO;return {currentBonusIndex:idleon.getAttr('OptionsListAccount')[453],candidateIndices:ballot[233].slice(1,4),candidatePercents:ballot[236].slice(0,3),canVote:idleon.callFunction('Summoning2','MeritocCanVote',0,0)===1,haveReachedW7:Number(idleon.getAttr('KillsLeft2Advance')[250][0])<=0};})()",
-      "description": "Saved active Meritocracy bonus, candidates, vote percentages, and account gates; this retained account's active character has cleared the World 7 portal"
+      "description": "Saved active Meritocracy bonus, candidates, vote percentages, voting access, and World 7 portal completion"
     },
     {
       "label": "bonus_multiplier",
@@ -25,7 +25,7 @@
     {
       "label": "bonus_earned",
       "expression": "Array.from({length:idleon.getAttr('CustomLists').h.NinjaInfo[38].length/3},(_,index)=>idleon.callFunction('Summoning2','VotingBonusz',index,0))",
-      "description": "Native earned Bonus effects for the catalogue; this account reaches the winning bonus's world and needs no damage fallback"
+      "description": "Earned Bonus Ballot effects for all catalogue entries, including the damage fallback when world access is missing"
     },
     {
       "label": "meritocracy_earned",

@@ -95,7 +95,7 @@ const fractalBonuses = [
  'World 7 bonus',
 ] as const;
 
-// Delivered game 1.24 fixes these contributions at 25, 30, and 100 per native unlock flag.
+// Unlocked Fractal bonuses contribute fixed amounts; additional AFK hours do not increase these amounts.
 // See docs/plans/island-expeditions-game-evidence.md, Fractal Island.
 const fractalContributions = [
  { description: 'Dirty Shovel nugget gain', flagIndex: 4, amount: 25, getValue: (domain: IslandExpeditions) => domain.bonusToShovelSpeed },

@@ -136,17 +136,17 @@
     {
       "label": "player_maximum_damage_sigil_lab_bonus",
       "expression": "idleon.callFunction(\"Labb\", \"SigilBonus\", \"Blank\", 4, 0)",
-      "description": "Native Lab SigilBonus helper for sigil index 4 used by the normal-world B component"
+      "description": "Lab sigil 4 bonus used in maximum damage outside Dungeons"
     },
     {
       "label": "player_maximum_damage_cosmo_bonus_2_4",
       "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 2, 4)",
-      "description": "Native Hole CosmoBonusQTY(2,4) used in the weapon power multiplier"
+      "description": "Hole Idleon upgrade 4 bonus used in the weapon power multiplier"
     },
     {
       "label": "player_maximum_damage_box_reward_base_damage",
       "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.BoxRewards.h.basedmg; })()",
-      "description": "Native computed BoxRewards.basedmg value used additively in DamageDealed(\"Max\") B"
+      "description": "Post Office base damage bonus added to the maximum damage calculation"
     }
   ]
 }

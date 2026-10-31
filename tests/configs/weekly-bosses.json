@@ -1,17 +1,17 @@
 {
-  "description": "Weekly Bosses CORE observations from the regular save. Read-only native state, catalogs, generated choices, levels, kill operands, and dedicated material capacity. The capacity query uses the saved turn as target and active character 3 as context; do not change either during capture.",
+  "description": "Read Weekly Boss state, catalogues, generated choices, character levels, kill requirements, and material capacity. The capacity query uses the saved turn and active character index 3. Do not change either during capture.",
   "target": "Account.weeklyBoss numeric schedule, task quantities, shop metadata, ownership, and existing bonuses and dreams",
   "requiredActivePlayerIndex": 3,
   "extractions": [
     {
       "label": "native_weekly_packet",
       "expression": "JSON.stringify({weekly:idleon.getAttr('WeeklyBoss'),options:idleon.getAttr('OptionsListAccount').slice(180,195),players:idleon.getAttr('GetPlayersUsernames'),catalogs:{boss:idleon.getAttr('CustomLists').h.WeeklyBOSS,shop:idleon.getAttr('CustomLists').h.WeeklySHOP,task:idleon.getAttr('CustomLists').h.WeeklyTASK,action:idleon.getAttr('CustomLists').h.WeeklyACTION},generation:idleon.getAttr('PixelHelperActor')[24].behaviors.getBehavior('ActorEvents_623')._GenINFO.slice(35,47),clock:idleon.getAttr('TimeAway'),greenPortalRequirement:idleon.getAttr('CustomLists').h.MapDetails[1][0][0],operands:idleon.getAttr('GetPlayersUsernames').map(name=>({name,levels:idleon.getAttr('PlayerDATABASE').h[name].h.Lv0,greenResidual:idleon.getAttr('PlayerDATABASE').h[name].h.KillsLeft2Advance[1][0]})),currentQuantity:idleon.callFunction('WeeklyBoss','TaskQTY',0),materialCapacity:idleon.callFunction('MaxCapacity','bCraftOtherPlayer')})",
-      "description": "Native current battle state, all catalogs, 15 generated task/action slots, four section-local offers, all character levels, direct current TaskQTY, and direct MaxCapacity bCraftOtherPlayer. TaskQTY reads only the current saved turn; it does not observe other turns."
+      "description": "Current battle state, catalogues, 15 generated task and action slots, four shop offers, character levels, task progress, and material capacity. Task progress applies only to the current saved turn."
     },
     {
       "label": "native_weekly_kill_operands",
       "expression": "JSON.stringify({bossId:idleon.callFunction('WeeklyBoss','BossID',0),killMaps:[53,1,116,205,158].map(mapIndex=>({mapIndex,portalRequirement:idleon.getAttr('CustomLists').h.MapDetails[mapIndex][0][0],residuals:idleon.getAttr('GetPlayersUsernames').map(name=>idleon.getAttr('PlayerDATABASE').h[name].h.KillsLeft2Advance[mapIndex][0])}))})",
-      "description": "Direct native boss ID and portal requirements plus all character residuals for the five reachable kill tasks. No RNG or turn mutation."
+      "description": "Boss ID, portal kill requirements, and each character's remaining portal kills for the five reachable kill tasks. Do not advance turns or generate new random values."
     }
   ]
 }

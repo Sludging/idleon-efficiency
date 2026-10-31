@@ -1,7 +1,8 @@
 import type { Companion } from "./companions";
 import type { Grimoire } from "./grimoire";
 import type { EquipmentSets } from "./misc/equipmentSets";
-import { LUNARHEIM_SUPER_TALENT_POINTS, LUNARHEIM_TUNNEL_INDEX, MAROON_WARSHIP_TALENT_LEVELS, Player } from "./player";
+import { LUNARHEIM_SUPER_TALENT_POINTS, LUNARHEIM_TUNNEL_INDEX, MAROON_WARSHIP_TALENT_LEVELS } from "./player";
+import type { Player } from "./player";
 import type { Tesseract } from "./tesseract";
 import type { Equinox } from "./world-3/equinox";
 import type { Divinity } from "./world-5/divinity";
@@ -10,6 +11,7 @@ import type { Sneaking } from "./world-6/sneaking";
 import { BASE_SUPER_TALENT_LEVELS, LegendTalents } from "./world-7/legendTalents";
 import type { Spelunking } from "./world-7/spelunking";
 import type { ZenithMarket } from "./world-7/zenithShop";
+import type { Construction } from "./world-3/construction/construction";
 
 export interface TalentBonusSource {
     name: string;
@@ -19,13 +21,15 @@ export interface TalentBonusSource {
     basis?: string;
 }
 
-// Native 1.24 applies source-specific rounding before the final Talent.getExtraLevels floor.
-// These rows describe source contributions before a talent's shared-level cap.
-export const getTalentSourceGroups = (data: Map<string, any>, player: Player): {
+export interface TalentSourceGroups {
     points: TalentBonusSource[];
     superLevels: TalentBonusSource[];
     ordinaryLevels: TalentBonusSource[];
-} => {
+}
+
+// Round each source contribution before rounding the combined extra talent levels down.
+// These rows describe source contributions before a talent's shared-level cap.
+export const getTalentSourceGroups = (data: Map<string, any>, player: Player): TalentSourceGroups => {
     const inputs = player.currentTalentInputs;
     const companions = data.get("companions") as Companion[];
     const divinity = data.get("divinity") as Divinity;
@@ -75,7 +79,7 @@ export const getTalentSourceGroups = (data: Map<string, any>, player: Player): {
             name: "Elemental Sorcerer Family bonus",
             value: familyLevels,
             active: familyLevels !== 0,
-            basis: "from your highest-level Elemental Sorcerer",
+            basis: "from class levels and Family Guy",
         },
         {
             name: "Maroon Warship achievement",
@@ -167,4 +171,13 @@ export const getTalentSourceGroups = (data: Map<string, any>, player: Player): {
         ],
         ordinaryLevels,
     };
+};
+
+export const updatePlayerTalentPresentation = (accountData: Map<string, any>): Player[] => {
+    const players = accountData.get("players") as Player[];
+    const library = (accountData.get("construction") as Construction).library;
+    for (const player of players) {
+        player.prepareTalentPresentation(getTalentSourceGroups(accountData, player), library);
+    }
+    return players;
 };

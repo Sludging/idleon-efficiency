@@ -1,21 +1,21 @@
 {
   "description": "Read-only Speedrun account and saved-runner evidence for the regular save. No active-character combat calls or character switches.",
-  "target": "Speedrun saved runner talent state and shared talent context CORE",
+  "target": "Speedrun saved runner talents and shared talent bonuses",
   "extractions": [
     {
       "label": "speedrun_saved_runners",
       "expression": "(()=>{const names=idleon.getAttr('GetPlayersUsernames');const db=idleon.getAttr('PlayerDATABASE').h;return names.flatMap((name,playerID)=>{const player=db[name].h;const classId=Number(player.CharacterClass);return classId===4||classId===5?[{playerID,classId,trialLevel:Number(player.SkillLevels[45]??0),radiusLevel:Number(player.SkillLevels[46]??0),bossingLevel:Number(player.SkillLevels[47]??0),familyLevel:Number(player.SkillLevels[58]??0),buffs:player.BuffsActive}]:[]})})()",
-      "description": "Actual saved eligible roster and allocated talent/buff inputs from PlayerDATABASE. These are not effective talent levels or proof that a live run resumed."
+      "description": "Saved eligible characters, allocated talents, and active buffs. Allocated points are not effective talent levels or proof that a run resumed."
     },
     {
       "label": "speedrun_family_talent_candidates",
       "expression": "idleon.getAttr('GetPlayersUsernames').map((_,playerID)=>({playerID,bonus:idleon.callFunction('getbonus2',1,58,playerID)}))",
-      "description": "Native per-player family talent 58 curves. The explicit player-index branch reads raw saved allocations and does not use active player 3 talent modifiers. Native 1.24 lines 176537-176543."
+      "description": "Per-character Family talent bonuses from saved allocations. These exclude the active character's talent modifiers. Source: idleon1.24.txt:176537-176543."
     },
     {
       "label": "speedrun_shared_talent_context",
       "expression": "({companionTalentLevels:idleon.callFunction('Companions',1),allActiveBubbles:idleon.callFunction('Companions',4),companionTalentPoints:idleon.callFunction('Companions',20),familyTalentLevels:Number(idleon.getDNSM('FamBonusQTYs').h[68])})",
-      "description": "Read-only shared native talent context. Companion 4 enables the active Divinity bubble for runner 6 without changing the active character. Family cache 68 and companion 1 are shared inputs, not player 3 combat outputs."
+      "description": "Shared companion and Family talent bonuses used by runner calculations. Read these account inputs without changing characters or calling character combat calculations."
     }
   ]
 }

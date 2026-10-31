@@ -32,7 +32,6 @@ function compareNumber(actual: number | undefined, expected: number, context: st
   expect(actual).toMatchLiveGameWithDetails(expected, { tolerance: 0, context });
 }
 
-// CORE only. Expected calculations use the selected account's native observations.
 describe('Weekly Bosses account state and numeric stats', () => {
   let weeklyBoss: WeeklyBoss;
   let native: NativeWeeklyPacket;
@@ -93,14 +92,14 @@ describe('Weekly Bosses account state and numeric stats', () => {
 
   });
 
-  it('matches dedicated material capacity for the captured target and active context', () => {
+  it('matches material capacity for the saved turn character and active character', () => {
     const targetPlayerIndex = native.options[5];
     const contextPlayerIndex = extractionConfig.requiredActivePlayerIndex;
     // Task 15 uses the dedicated other-character branch, not ordinary material capacity.
     compareNumber(
       weeklyBoss.getTaskQuantity(targetPlayerIndex, 15, contextPlayerIndex),
       native.materialCapacity,
-      `Native material capacity for target ${targetPlayerIndex} under context ${contextPlayerIndex}`,
+      `Material capacity for turn character ${targetPlayerIndex} with active character ${contextPlayerIndex}`,
     );
   });
 
@@ -125,7 +124,7 @@ describe('Weekly Bosses account state and numeric stats', () => {
   });
 
   it('retains defeated difficulty, optional bonus absence, and completed and unfinished dreams', () => {
-    compareNumber(weeklyBoss.defeatedDifficultiesThisWeek, native.options[9], 'Defeated-difficulty high-water snapshot');
+    compareNumber(weeklyBoss.defeatedDifficultiesThisWeek, native.options[9], 'Highest difficulty defeated this week');
     expect(weeklyBoss.getClassExperienceBonusPoints()).toBe(native.weekly.h.c);
     expect(weeklyBoss.getDamageBonusPoints()).toBe(native.weekly.h.g);
     Object.entries(native.weekly.h).forEach(([key, progress]) => {

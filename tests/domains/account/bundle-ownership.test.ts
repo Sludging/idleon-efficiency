@@ -26,7 +26,7 @@ const effectFlags = [
 ] as const;
 
 // The paired save does not exercise unavailable/private receipts or an owned Starter Pack.
-describe('Account bundle ownership - CORE', () => {
+describe('Account bundle ownership', () => {
   let account: Account;
   let nativeLedger: Record<string, number> | null;
 

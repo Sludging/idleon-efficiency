@@ -79,7 +79,7 @@ describe('Hat Rack Domain - Premium Hat Bonuses', () => {
   expect(sortNames(actualNames)).toEqual(sortNames(expectedNames));
  });
 
- it('matches deposited premium-hat identities and the saved deposited count', () => {
+ it('matches deposited premium-hat names and the saved deposit count', () => {
   const expectedNames = getExtractedNames(extractionResults, 'hat_rack_deposited_hats');
   const rack = gameData.get('hatRack') as HatRack;
   const actualNames = rack.hats.filter(hat => hat.stored).map(hat => hat.internalName);
@@ -116,7 +116,7 @@ describe('Hat Rack Domain - Premium Hat Bonuses', () => {
  });
 
 
- it('matches missing premium-hat identities and their absent current contributions', () => {
+ it('matches missing premium-hat names and confirms they contribute no bonuses', () => {
   const expectedNames = getExtractedNames(extractionResults, 'hat_rack_missing_hats');
   const rack = gameData.get('hatRack') as HatRack;
   const actualNames = rack.hats.filter(hat => !hat.stored).map(hat => hat.internalName);

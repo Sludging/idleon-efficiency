@@ -29,7 +29,7 @@ describe('Research account progress and production', () => {
         extracted(label);
         return getExtractedValue(results, label);
     };
-    it('uses zero Research progress before entry and the highest saved level after entry', () => {
+    it('uses zero progress without a positive saved Research level; otherwise uses the highest saved level', () => {
         const highestLevel = highestSavedResearchLevel();
         expect(research.progress.highestLevel).toBe(Math.max(0, highestLevel));
         if (highestLevel <= 0) {
@@ -58,7 +58,7 @@ describe('Research account progress and production', () => {
     });
 
 
-    it('reports previewed lens ownership before entry and matches game ownership after entry', () => {
+    it('previews lens ownership without a positive saved Research level; otherwise matches game ownership', () => {
         const total = researchExpected(preview, 'owned_lenses', () => value('owned_lenses'));
         expect(research.lensOwnership.total).toMatchLiveGameWithDetails(total, {tolerance: 0});
         expect(research.lensOwnership.opticalMonocles).toMatchLiveGameWithDetails(value('owned_monocles'), {tolerance: 0});

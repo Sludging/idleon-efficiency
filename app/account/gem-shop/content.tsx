@@ -49,7 +49,7 @@ type OfferRow = {
 };
 
 function sectionName(purchase: GemPurchase): string {
-    // These two native section images have no text title.
+    // These two in-game section images have no text title.
     if (purchase.groupId === 0 && purchase.sectionId === 2) return "Premium Stones";
     if (purchase.groupId === 0 && purchase.sectionId === 5) return "Chat Rings";
     return purchase.section;
@@ -67,7 +67,7 @@ export default function GemShopContent() {
     })));
 
     if (!hydrated || !gems) {
-        return <Box><Text>Waiting for imported account data.</Text></Box>;
+        return <Box><Text>Loading account data...</Text></Box>;
     }
 
     const offers = gems.purchases.filter(purchase => purchase.isOffer);

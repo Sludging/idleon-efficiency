@@ -296,8 +296,9 @@ export class WeeklyBoss {
             return this.taskQuantities[playerIndex].get(taskId);
         }
 
-        // Weekly material capacity uses the target bag and talent, but the explicit context's shared factors.
-        // This native branch excludes ordinary capacity's added base capacity.
+        // Weekly material capacity uses the target character's bag and Extra Bags talent.
+        // Shared capacity bonuses come from the selected character.
+        // Unlike normal capacity, this calculation does not add base capacity.
         const target = this.capacityInputs[playerIndex];
         const context = this.capacityInputs[capacityContextPlayerIndex];
         if (target.bagCapacity === undefined) {

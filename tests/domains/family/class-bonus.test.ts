@@ -1,9 +1,8 @@
 /**
  * Family Class Bonus calculation tests.
  *
- * TalentCalc(-3) rebuilds Family Bonus values from each character's class lineage.
- * Branch 0 is stored at `2 * classId`. Unowned classes contribute zero.
- * The comparisons use Family's public API rather than the static bonus mapping.
+ * The game calculates Family Bonus values from each character's class lineage.
+ * Extraction stores branch-0 values at `2 * classId`. Unowned classes contribute zero.
  *
  * The delivered source has placeholder fields for branch 1 for these class
  * IDs, and Family currently exposes only branch-0 FamilyBonus values, so no

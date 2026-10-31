@@ -21,14 +21,13 @@ describe('Royal Armory saved-link production and candidate direct parameters', (
         contribution = getRoyalGuardianContribution(getTargetPlayer(players), alchemy, players);
     });
     [1, 27].forEach(mapId => {
-        it(`matches the source outpost gate for saved production on map${mapId}`, () => {
+        it(`matches Outpost eligibility for saved production on map ${mapId}`, () => {
             expect(Number(armory.mapStates.get(mapId)!.outpostEligible)).toMatchLiveGame(getExtractedValue(results, `parameter_eligible_${mapId}`), 0);
         });
     });
-    it('matches every built Outpost collection rate for the capture-selected character context', () => {
-        // Preserve the source array rather than numeric-normalizing the whole extraction.
+    it('matches every built Outpost collection rate for the character selected during capture', () => {
         const extracted = results.extractions.parameter_rates;
-        if (!extracted || !Array.isArray(extracted.result)) throw new Error('Missing source collection-rate array for all genuine built Outposts');
+        if (!extracted || !Array.isArray(extracted.result)) throw new Error('Missing extracted collection rates for built Outposts');
         for (const [mapId, expected] of extracted.result as [number, number][]) {
             const map = armory.mapStates.get(mapId)!;
             expect(map.getResourceCollectionRate(armory.resourceCollectionBonuses, contribution)).toMatchLiveGame(expected, 0);

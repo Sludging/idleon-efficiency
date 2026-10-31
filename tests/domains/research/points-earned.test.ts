@@ -20,10 +20,10 @@ describe('Research earned Points', () => {
         preview = researchPreviewExpectations();
     });
 
-    it('reports previewed earned Points before entry and matches game Points after entry', () => {
+    it('previews earned Points without a positive saved Research level; otherwise matches game Points', () => {
         const extraction = results.extractions.points_earned;
         if (!extraction || extraction.result === null || extraction.result === undefined) {
-            throw new Error('Missing native earned Research Points: ResearchStuff/Grid_PTSearned(0, 0)');
+            throw new Error('Missing extracted Research Points earned');
         }
 
         expect(research.points.earned).toMatchLiveGameWithDetails(researchExpected(preview, 'points_earned', () => getExtractedValue(results, 'points_earned')), {

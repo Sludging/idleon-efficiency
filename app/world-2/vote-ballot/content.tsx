@@ -197,8 +197,8 @@ export default function VoteBallotContent() {
             } />
         </Box>
         {(noBonusVoteRecorded || noMeritocracyVoteRecorded) && <Box gap="xxsmall">
-            {noBonusVoteRecorded && <Text size="small">No Bonus Ballot vote recorded this week in the loaded save.</Text>}
-            {noMeritocracyVoteRecorded && <Text size="small">No Meritocracy vote recorded this week in the loaded save.</Text>}
+            {noBonusVoteRecorded && <Text size="small">Bonus Ballot: Not voted this week.</Text>}
+            {noMeritocracyVoteRecorded && <Text size="small">Meritocracy: Not voted this week.</Text>}
         </Box>}
         <BallotSection title="Bonus Ballot" ballot={votes} imagePrefix="VoteBon" />
         <BallotSection title="Meritocracy" ballot={meritocraty} imagePrefix="MeritBon" locked={!meritocraty.haveReachedW7} />

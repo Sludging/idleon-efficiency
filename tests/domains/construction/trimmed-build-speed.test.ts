@@ -16,8 +16,6 @@ describe('Construction trimmed build speed', () => {
     const gameData = loadGameDataFromSave('latest');
     const construction = gameData.get('construction') as Construction;
     const result = construction.getBuildingTiming(getTargetPlayer(gameData.get('players') as Player[])).trimmedBuildSpeed;
-    // Game 1.24 applies this multiplier to the board rate for trimmed slots.
-    // Toolbox exposes the same product as trimmed build speed.
     expect(result).toMatchLiveGameWithDetails(rate * multiplier, {
       tolerance: 0,
       context: 'Trimmed building work per hour for the retained account',

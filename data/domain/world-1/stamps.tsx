@@ -215,7 +215,8 @@ export class Stamp {
         if (skillLevel !== undefined && this.data.i10 > 0 && !this.removeLimitFromUnderLevel && this.data.upgradeInterval > 1) {
             const interval = this.data.upgradeInterval;
             const normalLevel = this.level * (200 / (20 * interval));
-            // Low normalized levels do not use the reverse scaling step.
+            // Convert stamp levels to a scale with ten levels per upgrade interval.
+            // Values at or below three skip the skill-level reduction and conversion back.
             effectiveLevel = normalLevel > 3
                 ? (3 + (normalLevel - 3) * Math.pow(skillLevel / (normalLevel - 3), 0.75)) * ((20 * interval) / 200)
                 : normalLevel;

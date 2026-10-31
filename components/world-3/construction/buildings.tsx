@@ -15,8 +15,8 @@ import type { FilterOptions } from "../../account/shared/UpgradeTableFilters";
 
 const sortOptions = [
     { label: "In-game order", value: "default" },
-    { label: "Shortest normal ETA", value: "normalETA" },
-    { label: "Shortest trimmed ETA", value: "trimmedETA" }
+    { label: "Shortest normal completion time", value: "normalETA" },
+    { label: "Shortest trimmed completion time", value: "trimmedETA" }
 ];
 
 export function BuildingsDisplay() {
@@ -129,12 +129,12 @@ export function BuildingsDisplay() {
         },
         {
             property: "normalETA",
-            header: "Normal ETA",
+            header: "Normal completion time",
             render: (building: Building) => building.maxed ? <Text size="xsmall">—</Text> : renderTime(timing?.buildings[building.index]?.normalCompletionSeconds)
         },
         {
             property: "trimmedETA",
-            header: "Trimmed ETA",
+            header: "Trimmed completion time",
             render: (building: Building) => building.maxed ? <Text size="xsmall">—</Text> : renderTime(timing?.buildings[building.index]?.trimmedCompletionSeconds)
         },
         { property: "nextCost", header: "Next level costs", render: (building: Building) => renderCosts(building, false) },
@@ -189,9 +189,6 @@ export function BuildingsDisplay() {
                     }
                 />
             </Box>
-            <Text size="small" color="accent-2">
-                {timing ? `Rates use ${timing.playerName}'s board. ` : ""}ETAs assume a constant rate in each slot type.
-            </Text>
             <UpgradeTable
                 tableName="Buildings"
                 columns={styledColumns}

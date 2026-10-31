@@ -250,7 +250,7 @@ export default function KillroyContent() {
         <Box direction="row" wrap gap="large" pad={{ vertical: 'small' }} data-killroy-summary>
             <ComponentAndLabel label="Skulls" component={<ResourceDisplay resourceImageData={skullImage} cost={killroy.skulls} resourceImageScale={1} textSize="xxlarge" showTooltip={false} />} />
             <TextAndLabel label="Total Best Kills" text={notateNumber(killroy.totalBestKills, 'Big')} textSize="xxlarge" tooltip={<Text>{commaNotation(killroy.totalBestKills)} best kills across 104 monsters.</Text>} />
-            <TextAndLabel label="Killroy Prime Damage" text={multiplier(killroy.damageMultiplier)} textSize="xxlarge" tooltip={<Text>Your monster bests increase this Rift reward. The damage bonus stops at +200%.</Text>} />
+            <TextAndLabel label="Killroy Prime Damage" text={multiplier(killroy.damageMultiplier)} textSize="xxlarge" tooltip={<Text>Your best kill counts increase this Rift reward. The damage bonus stops at +200%.</Text>} />
         </Box>
         <CurrentFights killroy={killroy} />
         <Box gap="medium">

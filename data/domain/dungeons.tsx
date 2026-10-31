@@ -14,7 +14,7 @@ export enum PassiveType {
     Flurbo = "Flurbo"
 }
 
-// Generated game data owns rank thresholds. Reaching a threshold advances to the next rank.
+// Reaching an XP threshold advances the Dungeon rank.
 export const dungeonLevels = initRandoListRepo()[29].data.elements.map(Number);
 
 export class DungeonItem {

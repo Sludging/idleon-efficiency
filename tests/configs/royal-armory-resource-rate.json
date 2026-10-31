@@ -135,17 +135,17 @@
     {
       "label": "royal_armory_rate_talent_225_best",
       "expression": "idleon.callFunction(\"getbonus2\", 1, 225, -1)",
-      "description": "Account-best talent 225 bonus using the selected character's shared talent-level inputs and each owner's allocation and both Super Talent presets"
+      "description": "Highest Castle Convene bonus across talent owners. Use the selected character's shared talent-level inputs, each owner's allocation, and both Super Talent presets."
     },
     {
       "label": "royal_armory_rate_talent_226_best",
       "expression": "idleon.callFunction(\"getbonus2\", 1, 226, -1)",
-      "description": "Account-best talent 226 bonus using the selected character's shared talent-level inputs and each owner's allocation and both Super Talent presets"
+      "description": "Highest Royal Armory talent bonus across talent owners. Use the selected character's shared talent-level inputs, each owner's allocation, and both Super Talent presets."
     },
     {
       "label": "royal_armory_rate_talent_230_best",
       "expression": "Math.max(1, idleon.callFunction(\"getbonus2\", 1, 230, -1))",
-      "description": "Effective account-best talent 230 multiplier using the selected character's shared talent-level inputs and each owner's allocation and both Super Talent presets"
+      "description": "Highest Industrial Politics multiplier across talent owners, with a minimum of one. Use the selected character's shared talent-level inputs, each owner's allocation, and both Super Talent presets."
     },
     {
       "label": "royal_armory_rate_zenith_market_10",

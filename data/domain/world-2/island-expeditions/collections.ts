@@ -179,7 +179,7 @@ export class CrystalIsland {
         if (days <= 0) {
             return 0;
         }
-        // The capped branch intentionally gives fewer mobs than thirteen pending days.
+        // At fourteen pending days, the formula produces fewer monsters than at thirteen.
         return Math.ceil(days < this.dayCap ? 1 + 2 * days : Math.sqrt(16 * days));
     }
 }

@@ -1,9 +1,6 @@
 /**
- * Account-wide Friend Bonus values, contributor state, slots, multiplier, and sources.
- *
- * Native assignment records supply contributor expectations independently
- * from the website parser and bonus calculations.
- *
+ * Captured game assignments provide expected contributor names and levels.
+ * These expectations do not depend on the website parser or bonus calculations.
  */
 
 import {
@@ -73,7 +70,7 @@ describe('Friends Domain - Stats', () => {
   });
  });
 
- it('matches each current effective slot and additive multiplier source', () => {
+ it('matches each slot-count source and additive multiplier source', () => {
   const liveSources = extractionResults.extractions.friend_bonus_sources.result;
   const domainSources = {
    baseSlots: friends.slotSources.base,

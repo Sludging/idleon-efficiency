@@ -1,8 +1,3 @@
-/**
- * Compares Purrmep's account-wide passive bonus from saved primary links
- * with the matching game result.
- */
-
 import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Divinity } from '../../../data/domain/world-5/divinity';

@@ -34,7 +34,7 @@ describe('Super Talent point boundaries', () => {
     expect(player.superTalentPoints).toEqual({ total: 1, spent: 1, remaining: 0 });
   });
 
-  it('replaces the previous preset count rather than unioning presets', () => {
+  it('counts only the latest active preset', () => {
     const player = new Player(0, '');
     player.level = 600;
     player.setActiveSuperTalentSlots([1, 2]);

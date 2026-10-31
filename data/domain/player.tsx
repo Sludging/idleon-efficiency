@@ -62,6 +62,8 @@ import { initFishingToolkitRepo } from './data/FishingToolkitRepo';
 import type { CoralKid } from './world-7/coralKid';
 import type { Speedrun } from './speedrun';
 import type { Spelunking } from './world-7/spelunking';
+import type { TalentSourceGroups } from './talentSources';
+import type { Library } from './world-3/construction/construction';
 export type { TalentLevelInputs } from './talents';
 const fishingToolkitRepo = initFishingToolkitRepo();
 
@@ -112,6 +114,13 @@ interface TalentPoints {
     totalOwned: number
 }
 
+interface TalentPresentation {
+    sources: TalentSourceGroups;
+    bonusLevels: number;
+    superTalentLevels: number;
+    checkoutSummary: { requiredCheckouts: number; vipTalentsToBook: number };
+}
+
 export class Player {
     playerID: number;
     playerName: string;
@@ -140,6 +149,12 @@ export class Player {
     private appliedTalentInputs!: TalentLevelInputs;
     superTalentPoints: { total: number; spent: number; remaining: number } = { total: 0, spent: 0, remaining: 0 };
     talentPoints: TalentPoints[] = [];
+    talentPresentation: TalentPresentation = {
+        sources: { points: [], superLevels: [], ordinaryLevels: [] },
+        bonusLevels: 0,
+        superTalentLevels: 0,
+        checkoutSummary: { requiredCheckouts: 0, vipTalentsToBook: 0 },
+    };
     postOffice: Box[] = initPostOffice();
     activeBubblesString: string[] = [];
     activeBubbles: Bubble[] = [];
@@ -214,6 +229,29 @@ export class Player {
             }
         }
         return { pointsRequiredToMax, isMaxed };
+    }
+
+    prepareTalentPresentation(sources: TalentSourceGroups, library: Library): void {
+        const pages = [...ClassTalentMap[this.classId], ...Array.from({ length: 5 }, (_, index) => `Special Talent ${index + 1}`)];
+        const talentByIndex = new Map(this.talents.map(talent => [talent.skillIndex, talent]));
+        const displayedTalents: Talent[] = [];
+        for (const page of pages) {
+            for (const original of GetTalentArray(page)) {
+                const talent = talentByIndex.get(original.skillIndex);
+                if (talent) {
+                    displayedTalents.push(talent);
+                }
+            }
+        }
+
+        const inputs = this.currentTalentInputs;
+        const ordinaryTalent = displayedTalents.find(talent => talent.skillIndex >= 0 && talent.skillIndex < 49);
+        this.talentPresentation = {
+            sources,
+            bonusLevels: ordinaryTalent?.getExtraLevels(inputs, false) ?? 0,
+            superTalentLevels: inputs.superTalentLevels,
+            checkoutSummary: library.getBookCheckoutSummary(displayedTalents),
+        };
     }
 
     getBaseClass = (): ClassIndex => {

@@ -24,7 +24,6 @@ function controlledOffer(values: Partial<BundleCatalogEntry> = {}): BundleCatalo
 describe('Bundle catalog ownership - CORE', () => {
 
   it('keeps unavailable ownership unknown instead of reporting missing offers', () => {
-    // No save is synthesized or parsed. This is the aspect's pre-load state.
     const ownership = new BundleOwnership();
     const bundles = ownership.getCategorySummary('bundle');
     const starter = ownership.getCategorySummary('starterOffer');
@@ -195,7 +194,7 @@ describe('Filtered bundle offer totals - CORE', () => {
 });
 
 describe('Bundle reward categories - CORE', () => {
-  it('distinguishes native equipment from consumables and stamps', () => {
+  it('distinguishes equipment from consumables and stamps', () => {
     const equipment = getBundleRewardCategories(controlledOffer({
       contents: [{ name: 'Cape', quantity: 1, itemId: 'EquipmentCape0' }],
     }));

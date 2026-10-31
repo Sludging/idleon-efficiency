@@ -150,7 +150,7 @@ export class KillroyPermanentBonus {
     }
 
     getEffectCap(): number {
-        // These limits are asymptotes. No finite upgrade level reaches them.
+        // Each bonus approaches its cap but never reaches it at a finite upgrade level.
         switch (this.id) {
             case 0:
                 return 2;

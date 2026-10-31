@@ -30,7 +30,7 @@ beforeAll(() => {
 });
 
 describe('Menagerie account progression', () => {
-  // Runtime Lumi can progress after the retained save.
+  // Lumi can increase between saving the account and capturing game values.
   // Compare stable progression and rates, not current Lumi balances or affordability.
   it('reports saved Shells, rank, threshold, hourly Lumi rate, and availability totals', () => {
     const expected = accountProgression;

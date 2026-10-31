@@ -31,7 +31,7 @@ const tomeLineDescriptions: Record<string, string> = Object.fromEntries(
 
 const getTomeLineDescription = (index: number): string =>
  tomeLineDescriptions[`tome_pts_${index}`] ?? `Tome line ${index}`;
-// Native Tome quantities stay cached from the preparation player before navigation to the target player.
+// The game caches Tome quantities for the preparation player, even after switching to the target player.
 // Allow up to 1% relative drift; anything larger requires manual intervention.
 const TOME_SCORE_DRIFT_TOLERANCE = 0.01;
 

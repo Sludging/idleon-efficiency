@@ -49,7 +49,7 @@ describe('Research Grid catalogue, Points, linked grants, and Shapes', () => {
         });
     });
 
-    it('reports previewed Points before entry and matches game Points after entry', () => {
+    it('previews Points without a positive saved Research level; otherwise matches game Points', () => {
         expect(research.points.earned).toMatchLiveGameWithDetails(researchExpected(preview, 'points_earned', () => nativeResearchNumber(results, 'points_earned')), { tolerance: 0, debugInfo: research.points.contributors });
         expect(research.points.spent).toMatchLiveGameWithDetails(numeric(results, 'points_spent'), { tolerance: 0 });
         expect(research.points.available).toMatchLiveGameWithDetails(researchExpected(preview, 'points_available', () => nativeResearchNumber(results, 'points_available')), { tolerance: 0 });

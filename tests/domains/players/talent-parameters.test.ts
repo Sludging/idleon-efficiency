@@ -26,7 +26,7 @@ const generalTalentParameterSpecs: Record<string, ParameterTestSpec> = {
   }
  },
  all_talent_level_146: {
-  description: 'AllTalentLV target-character level addition for talent 146',
+  description: 'Target character extra levels for talent 146',
   extractionKey: 'all_talent_level_146',
   domainExtractor: (gameData) => {
    const players = gameData.get("players") as Player[];
@@ -35,7 +35,7 @@ const generalTalentParameterSpecs: Record<string, ParameterTestSpec> = {
   }
  },
  all_talent_level_49: {
-  description: 'AllTalentLV target-character level addition for talent 49',
+  description: 'Target character extra levels for talent 49',
   extractionKey: 'all_talent_level_49',
   domainExtractor: (gameData) => {
    const players = gameData.get("players") as Player[];

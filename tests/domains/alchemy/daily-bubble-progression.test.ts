@@ -42,7 +42,7 @@ describe('Alchemy daily bubble progression', () => {
     });
   });
 
-  it('reports the native daily upgrade source inputs', () => {
+  it('matches daily bubble upgrade inputs to game values', () => {
     const sources = progression.sources;
     const comparisons: Array<[number, string]> = [
       [sources.mainframe, 'nblb_mainframe'],
@@ -164,7 +164,7 @@ describe('Alchemy daily bubble progression', () => {
     expect(bubbleIds(progression.krukTargets)).toEqual(expected.slice().sort((a, b) => a - b));
   });
 
-  it('prepares the best displayed account range and recipient-dependent Kruk eligibility', () => {
+  it('uses the highest player level-gain maximum and tracks player-specific Kattlekruk activation', () => {
     const account = alchemy.dailyBubbleProgression;
     expect(account).not.toBeNull();
     const recipients = players.map(player => alchemy.getDailyBubbleProgression(player));
