@@ -2,7 +2,7 @@
   "extractions": {
     "player_drop_rate_multiplier": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 16, 0)",
-      "result": 5086.359233227054
+      "result": 6135.579270207991
     }
   },
   "errors": {}

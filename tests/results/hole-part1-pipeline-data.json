@@ -18,7 +18,7 @@
           "Sludgev10",
           "Sludgev11"
         ],
-        "version": 395.1
+        "version": 398.1
       }
     },
     "paired_hole_inputs": {
@@ -29,14 +29,14 @@
           49,
           69,
           30,
-          151
+          153
         ],
         "exp": [
-          2362967883615147,
-          133982482920435.08,
-          1228761691456072.2,
-          367750086186271.3,
-          126283470999857.44
+          3733187070224574.5,
+          472291432957897.44,
+          4197572602002648,
+          706059036221493,
+          86946475319013.66
         ],
         "investments": [
           114,
@@ -67,9 +67,9 @@
           21,
           18,
           16,
-          36,
-          36,
-          36,
+          37,
+          37,
+          37,
           26,
           36,
           36,
@@ -87,9 +87,9 @@
           645050.2468780265,
           214429.636600765,
           221428.0462261185,
-          37398250.2720197,
-          37242720.81656928,
-          38124776.50172122,
+          31225568.150346205,
+          31070038.69489579,
+          31952094.380047724,
           840302.5741329693,
           1076598.0439762478,
           1076614.8450074797,
@@ -99,12 +99,12 @@
         "cavernOpals": [
           19,
           19,
-          14,
+          26,
           12,
           20,
           8,
-          9,
-          17,
+          28,
+          18,
           12,
           10,
           6,
@@ -129,10 +129,10 @@
           0
         ],
         "lanternUses": 0,
-        "wishes": 3457,
+        "wishes": 305,
         "layers": [
           19,
-          17,
+          18,
           19,
           9
         ],
@@ -145,35 +145,35 @@
     },
     "pipeline_gambit_multiplier": {
       "expression": "idleon.callFunction(\"Holes2\", \"GambitPTSmulti\", 0, 0)",
-      "result": 4.994925054151624
+      "result": 5.047583249097473
     },
     "pipeline_gambit_points": {
       "expression": "idleon.callFunction(\"Holes2\", \"GambitPts\", 777, 0)",
-      "result": 4320560.222590943
+      "result": 4366109.034637156
     },
     "pipeline_tome_93": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 93, 0)",
-      "result": 259
+      "result": 276
     },
     "growth_0": {
       "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 0, 0)",
-      "result": 6729269581446.607
+      "result": 7494765157372.117
     },
     "growth_1": {
       "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 1, 0)",
-      "result": 1661316587844.4045
+      "result": 1850597272055.4092
     },
     "growth_2": {
       "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 2, 0)",
-      "result": 14579131971193.117
+      "result": 16239512458838.11
     },
     "growth_3": {
       "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 3, 0)",
-      "result": 1661316587844.4045
+      "result": 1850597272055.4092
     },
     "growth_4": {
       "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 4, 0)",
-      "result": 1661316587844.4045
+      "result": 1850597272055.4092
     }
   },
   "errors": {}

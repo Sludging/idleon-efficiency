@@ -1,7 +1,7 @@
 {
   "extractions": {
     "alchemy_bubble_y2active": {
-      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.Y2ACTIVE",
+      "expression": "Math.max(1, Number(idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.Y2ACTIVE ?? 0))",
       "result": 1.4955317247542448
     },
     "clamworks_bonus_3": {
@@ -10,7 +10,7 @@
     },
     "divinity_minor_bonus_6": {
       "expression": "idleon.callFunction(\"Divinity\", \"Bonus_Minor\", -1, 6)",
-      "result": 118.57430103408657
+      "result": 119.6147915661512
     }
   },
   "errors": {}

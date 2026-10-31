@@ -1,0 +1,96 @@
+{
+  "description": "Extract current Killroy account state, run upgrades, permanent bonuses, canonical monster records, damage, and shop gates for the regular save.",
+  "target": "Killroy current account progress CORE",
+  "extractions": [
+    {
+      "label": "killroy_account_state",
+      "expression": "(()=>{const options=idleon.getAttr(\"OptionsListAccount\");return {skulls:Number(options[105]),completedRuns:Number(options[112]),thirdBattleUnlocked:Number(options[227])===1,consumedFightSlots:[1,2,3].filter(id=>String(options[113]).includes(String(id))),airhornUsed:Number(options[115])===1,priorTalentPointDrops:Number(options[114]),laterShopProgression:Number(options[466]),runLevels:options.slice(106,112).map(Number),permanentLevels:[228,229,230,467,468,469,470,471].map(index=>Number(options[index]))}})()",
+      "description": "Named native saved state. Third weekly fight uses its own unlock flag, not Jade Gain progression. Consumed fight slots encode one-based slot numbers as decimal digits."
+    },
+    {
+      "label": "killroy_run_state",
+      "expression": "(()=>{const options=idleon.getAttr(\"OptionsListAccount\");const runs=Number(options[112]);const shadesOfKLevel=Number(idleon.getAttr(\"Dream\")[4]);const availableChoiceCount=Math.round(3+shadesOfKLevel);const requirements=Array.from({length:6},(_,index)=>index===0?0:Math.pow(2*index,Math.min(index,2)));return {runDurationSeconds:100+Number(options[106]),shadesOfKLevel,availableChoiceCount,requirements,unlocked:requirements.map((required,index)=>index<availableChoiceCount&&(index===0||runs>=required)),remaining:requirements.map(required=>Math.max(0,required-runs))}})()",
+      "description": "Current timer and all six run upgrade gates from native saved operands and version 1.24 source 194324–194337 and 194566–194568. The timer adds its level to 100 seconds. Shades of K permits round(3 + level) choices. Each offered upgrade also requires (2*index)^min(index,2) completed runs, except upgrade zero. Remaining runs measures only the completed-run deficit; reaching zero does not bypass the choice gate."
+    },
+    {
+      "label": "killroy_monster_records",
+      "expression": "(()=>{const mobs=idleon.getAttr(\"CustomLists\").h.DeathNoteMobs.flat();const records=idleon.getAttr(\"KRbest\").h;return mobs.map(enemyId=>({enemyId,bestKills:Number(records[enemyId]||0)}))})()",
+      "description": "Every canonical Death Note monster and its Killroy best, including zero records. Excludes unrelated saved record keys."
+    },
+    {
+      "label": "killroy_total_best_kills",
+      "expression": "(()=>{const mobs=idleon.getAttr(\"CustomLists\").h.DeathNoteMobs.flat();const records=idleon.getAttr(\"KRbest\").h;return mobs.reduce((sum,enemyId)=>sum+Number(records[enemyId]||0),0)})()",
+      "description": "Native canonical aggregate of monster bests. This is not the sum of every saved record or lifetime room kills."
+    },
+    {
+      "label": "killroy_damage_bonus",
+      "expression": "idleon.callFunction(\"RiftStuff\", \"KillroyDMG\", 0)",
+      "description": "Native Rift Killroy damage bonus in percentage points."
+    },
+    {
+      "label": "killroy_damage_multiplier",
+      "expression": "1+Math.min(2,Math.max(0,idleon.callFunction(\"RiftStuff\",\"KillroyDMG\",0)/100))",
+      "description": "Applied version 1.24 damage multiplier: one plus native damage percentage divided by 100, with that contribution clamped between zero and two."
+    },
+    {
+      "label": "killroy_next_damage_requirement",
+      "expression": "(()=>{const mobs=idleon.getAttr(\"CustomLists\").h.DeathNoteMobs.flat();const records=idleon.getAttr(\"KRbest\").h;const total=mobs.reduce((sum,enemyId)=>sum+Number(records[enemyId]||0),0);const bonus=idleon.callFunction(\"RiftStuff\",\"KillroyDMG\",0);const nextDamageTotalBestKills=Math.ceil(Math.pow(bonus+1,2.5));return {nextDamageTotalBestKills,killsUntilNextDamageBonus:Math.max(0,nextDamageTotalBestKills-total)}})()",
+      "description": "Independent inverse of the native floor(total^0.4) percentage rule, using native damage and canonical saved bests. No separate native next-requirement helper exists. This targets the next raw percentage point, not a change to the capped applied multiplier."
+    },
+    {
+      "label": "killroy_bonus_0",
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 0, 0)",
+      "description": "Current native Artifact Find Chance multiplier."
+    },
+    {
+      "label": "killroy_bonus_1",
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 1, 0)",
+      "description": "Current native Crop Evolution Chance multiplier."
+    },
+    {
+      "label": "killroy_bonus_2",
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 2, 0)",
+      "description": "Current native Jade Gain multiplier."
+    },
+    {
+      "label": "killroy_bonus_3",
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 3, 0)",
+      "description": "Current native Gallery progression value, before consumer-specific podium caps."
+    },
+    {
+      "label": "killroy_bonus_4",
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 4, 0)",
+      "description": "Current native Masterclass drop shop value, distinct from its applied multiplier."
+    },
+    {
+      "label": "killroy_bonus_5",
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 5, 0)",
+      "description": "World 7 skill EXP multiplier. Research and Spelunking use this value directly as a multiplier, with a minimum of 1."
+    },
+    {
+      "label": "killroy_bonus_6",
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 6, 0)",
+      "description": "Current native daily coral gain percentage points."
+    },
+    {
+      "label": "killroy_bonus_7",
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 7, 0)",
+      "description": "Current native future bonus shop value. No gameplay consumer is established."
+    },
+    {
+      "label": "killroy_masterclass_multiplier",
+      "expression": "1+idleon.callFunction(\"RandomEvent\",\"KillroyBonuses\",4,0)/100",
+      "description": "Applied Masterclass drop multiplier: one plus the shop bonus percentage divided by 100."
+    },
+    {
+      "label": "killroy_extra_shop_row",
+      "expression": "idleon.callFunction(\"RiftStuff\", \"KillroyXtra\", 0)",
+      "description": "Native first extra Skull Shop row gate from Rift progress. This does not unlock the third weekly fight."
+    },
+    {
+      "label": "killroy_later_shop_row",
+      "expression": "idleon.callFunction(\"RiftStuff\", \"KillroyXtra2\", 0)",
+      "description": "Native later Skull Shop row gate from Rift progress and saved later-shop progression."
+    }
+  ]
+}

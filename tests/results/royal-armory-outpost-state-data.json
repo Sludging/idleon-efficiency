@@ -16,40 +16,20 @@
       "expression": "idleon.getAttr(\"RoyalMaps\")[51].length > 3 ? 1 : 0",
       "result": 1
     },
-    "outpost_unused_points_1": {
-      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostPTSleft\", 1, 0)",
-      "result": 20
-    },
     "outpost_1_track_0_rank": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 0)",
-      "result": 15
-    },
-    "outpost_1_track_0_experience": {
-      "expression": "Number(idleon.getAttr(\"RoyalMaps\")[1][3])",
-      "result": 3433.9270752948
+      "result": 17
     },
     "outpost_1_track_0_previous_threshold": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 1, 0)",
-      "result": 3149.901108559433
+      "result": 5988.749482648622
     },
     "outpost_1_track_0_next_threshold": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 1, 0)",
-      "result": 4350.800906197716
-    },
-    "outpost_1_track_0_progress_experience": {
-      "expression": "Number(idleon.getAttr(\"RoyalMaps\")[1][3]) - idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 1, 0)",
-      "result": 284.0259667353671
-    },
-    "outpost_1_track_0_required_experience": {
-      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 1, 0) - idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 1, 0)",
-      "result": 1200.8997976382834
+      "result": 8217.895123412276
     },
     "outpost_1_track_1_rank": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 1)",
-      "result": 0
-    },
-    "outpost_1_track_1_experience": {
-      "expression": "Number(idleon.getAttr(\"RoyalMaps\")[1][4])",
       "result": 0
     },
     "outpost_1_track_1_previous_threshold": {
@@ -60,21 +40,9 @@
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 1, 1)",
       "result": 10
     },
-    "outpost_1_track_1_progress_experience": {
-      "expression": "Number(idleon.getAttr(\"RoyalMaps\")[1][4]) - idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 1, 1)",
-      "result": 0
-    },
-    "outpost_1_track_1_required_experience": {
-      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 1, 1) - idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 1, 1)",
-      "result": 10
-    },
     "outpost_1_track_2_rank": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 2)",
       "result": 3
-    },
-    "outpost_1_track_2_experience": {
-      "expression": "Number(idleon.getAttr(\"RoyalMaps\")[1][5])",
-      "result": 916.9419714752445
     },
     "outpost_1_track_2_previous_threshold": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 1, 2)",
@@ -84,20 +52,8 @@
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 1, 2)",
       "result": 1166.4
     },
-    "outpost_1_track_2_progress_experience": {
-      "expression": "Number(idleon.getAttr(\"RoyalMaps\")[1][5]) - idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 1, 2)",
-      "result": 430.94197147524443
-    },
-    "outpost_1_track_2_required_experience": {
-      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 1, 2) - idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 1, 2)",
-      "result": 680.4000000000001
-    },
     "outpost_1_track_3_rank": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 3)",
-      "result": 0
-    },
-    "outpost_1_track_3_experience": {
-      "expression": "Number(idleon.getAttr(\"RoyalMaps\")[1][6])",
       "result": 0
     },
     "outpost_1_track_3_previous_threshold": {
@@ -108,20 +64,8 @@
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 1, 3)",
       "result": 10
     },
-    "outpost_1_track_3_progress_experience": {
-      "expression": "Number(idleon.getAttr(\"RoyalMaps\")[1][6]) - idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 1, 3)",
-      "result": 0
-    },
-    "outpost_1_track_3_required_experience": {
-      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 1, 3) - idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 1, 3)",
-      "result": 10
-    },
     "outpost_1_track_4_rank": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 4)",
-      "result": 0
-    },
-    "outpost_1_track_4_experience": {
-      "expression": "Number(idleon.getAttr(\"RoyalMaps\")[1][7])",
       "result": 0
     },
     "outpost_1_track_4_previous_threshold": {
@@ -132,96 +76,44 @@
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 1, 4)",
       "result": 100000
     },
-    "outpost_1_track_4_progress_experience": {
-      "expression": "Number(idleon.getAttr(\"RoyalMaps\")[1][7]) - idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 1, 4)",
-      "result": 0
-    },
-    "outpost_1_track_4_required_experience": {
-      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 1, 4) - idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 1, 4)",
-      "result": 100000
-    },
-    "outpost_unused_points_51": {
-      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostPTSleft\", 51, 0)",
-      "result": 9
-    },
     "outpost_51_track_0_rank": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 51, 0)",
-      "result": 14
-    },
-    "outpost_51_track_0_experience": {
-      "expression": "Number(idleon.getAttr(\"RoyalMaps\")[51][3])",
-      "result": 3095.3093607116252
+      "result": 16
     },
     "outpost_51_track_0_previous_threshold": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 51, 0)",
-      "result": 2271.5632994418984
+      "result": 4350.800906197716
     },
     "outpost_51_track_0_next_threshold": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 51, 0)",
-      "result": 3149.901108559433
-    },
-    "outpost_51_track_0_progress_experience": {
-      "expression": "Number(idleon.getAttr(\"RoyalMaps\")[51][3]) - idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 51, 0)",
-      "result": 823.7460612697269
-    },
-    "outpost_51_track_0_required_experience": {
-      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 51, 0) - idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 51, 0)",
-      "result": 878.3378091175346
+      "result": 5988.749482648622
     },
     "outpost_51_track_1_rank": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 51, 1)",
-      "result": 0
-    },
-    "outpost_51_track_1_experience": {
-      "expression": "Number(idleon.getAttr(\"RoyalMaps\")[51][4])",
-      "result": 0
+      "result": 7
     },
     "outpost_51_track_1_previous_threshold": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 51, 1)",
-      "result": 0
+      "result": 193.07236000000003
     },
     "outpost_51_track_1_next_threshold": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 51, 1)",
-      "result": 10
-    },
-    "outpost_51_track_1_progress_experience": {
-      "expression": "Number(idleon.getAttr(\"RoyalMaps\")[51][4]) - idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 51, 1)",
-      "result": 0
-    },
-    "outpost_51_track_1_required_experience": {
-      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 51, 1) - idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 51, 1)",
-      "result": 10
+      "result": 282.3683265000001
     },
     "outpost_51_track_2_rank": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 51, 2)",
-      "result": 3
-    },
-    "outpost_51_track_2_experience": {
-      "expression": "Number(idleon.getAttr(\"RoyalMaps\")[51][5])",
-      "result": 1086.5112412242206
+      "result": 4
     },
     "outpost_51_track_2_previous_threshold": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 51, 2)",
-      "result": 486.00000000000006
+      "result": 1166.4
     },
     "outpost_51_track_2_next_threshold": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 51, 2)",
-      "result": 1166.4
-    },
-    "outpost_51_track_2_progress_experience": {
-      "expression": "Number(idleon.getAttr(\"RoyalMaps\")[51][5]) - idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 51, 2)",
-      "result": 600.5112412242206
-    },
-    "outpost_51_track_2_required_experience": {
-      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 51, 2) - idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 51, 2)",
-      "result": 680.4000000000001
+      "result": 2624.4
     },
     "outpost_51_track_3_rank": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 51, 3)",
-      "result": 0
-    },
-    "outpost_51_track_3_experience": {
-      "expression": "Number(idleon.getAttr(\"RoyalMaps\")[51][6])",
       "result": 0
     },
     "outpost_51_track_3_previous_threshold": {
@@ -232,20 +124,8 @@
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 51, 3)",
       "result": 10
     },
-    "outpost_51_track_3_progress_experience": {
-      "expression": "Number(idleon.getAttr(\"RoyalMaps\")[51][6]) - idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 51, 3)",
-      "result": 0
-    },
-    "outpost_51_track_3_required_experience": {
-      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 51, 3) - idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 51, 3)",
-      "result": 10
-    },
     "outpost_51_track_4_rank": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 51, 4)",
-      "result": 0
-    },
-    "outpost_51_track_4_experience": {
-      "expression": "Number(idleon.getAttr(\"RoyalMaps\")[51][7])",
       "result": 0
     },
     "outpost_51_track_4_previous_threshold": {
@@ -254,14 +134,6 @@
     },
     "outpost_51_track_4_next_threshold": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 51, 4)",
-      "result": 100000
-    },
-    "outpost_51_track_4_progress_experience": {
-      "expression": "Number(idleon.getAttr(\"RoyalMaps\")[51][7]) - idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 51, 4)",
-      "result": 0
-    },
-    "outpost_51_track_4_required_experience": {
-      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 51, 4) - idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 51, 4)",
       "result": 100000
     },
     "outpost_jelly_bonus_3": {
@@ -274,11 +146,11 @@
     },
     "outpost_armory_bonus_9": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 9, 0)",
-      "result": 23
+      "result": 35
     },
     "outpost_armory_bonus_10": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 10, 0)",
-      "result": 8
+      "result": 13
     },
     "outpost_armory_bonus_71": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 71, 0)",

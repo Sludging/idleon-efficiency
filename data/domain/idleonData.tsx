@@ -3,8 +3,10 @@ import { Traps, updateShinyCritterRewardMultiplier, updateTrapDisplayData } from
 import { Stamps, updateStampMaxCarry, updateStamps } from './world-1/stamps';
 import { Statues, updateStatueBonuses } from './world-1/statues';
 import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus, updatePlayerTalentPoints, Player, updatePlayerSpecialTalents } from './player';
-import { Alchemy, updateAlchemy, updateAlchemySlabBubbles, updateAlchemyTomeBubbles } from './world-2/alchemy/alchemy';
+import { Alchemy, updateAlchemy, updateAlchemyDailyBubbleProgression, updateAlchemySlabBubbles, updateAlchemyTomeBubbles } from './world-2/alchemy/alchemy';
 import { updatePlayerTalentContexts } from './player';
+import { updateSpeedrunTalentPoints } from './player';
+import { updatePlayerTalentPresentation } from './talentSources';
 import { updateEquipmentProperties } from './equipment';
 import { GoldenFood, updateGoldenFood } from './golden-food';
 import { updatePlayerDropRates, updatePlayerPowers, updatePlayerSecondaryStats, updatePlayerSkillStatsDN, updatePlayerStats } from './player-stats';
@@ -14,16 +16,16 @@ import { GemStore } from './gemPurchases';
 import { Achievements } from './achievements';
 import { Shrines, updateShrines } from './world-3/construction/shrines';
 import { Item } from './items';
-import { Storage, updateStorage } from './storage';
+import { Storage, updateStorage, updateStorageGreenstacks } from './storage';
 import { Quests } from './quests';
 import { Prayers, updatePrayerPlayerBonuses } from './world-3/prayers';
-import { Refinery, updateRefinery } from './world-3/construction/refinery';
+import { Refinery, updateRefinery, updateRefinerySustainability } from './world-3/construction/refinery';
 import { SaltLick } from './world-3/construction/saltLick';
 import { Printer, updatePrinter } from './world-3/construction/printer';
 import { TaskBoard } from './tasks';
 import { Cloudsave } from './cloudsave';
 import { Worship, updateTotemsBonuses, updateWorship, updateWorshipTotalizer } from './world-3/worship';
-import { Construction, updateConstruction } from './world-3/construction/construction';
+import { Construction, updateConstruction, updateConstructionBuildingTiming, updateLibraryBookLevels } from './world-3/construction/construction';
 import { updateCards, Cards } from './cards';
 import { Arcade, updateArcade } from './world-2/arcade';
 import { ObolsData } from './world-2/obols';
@@ -66,11 +68,11 @@ import { Glimbo, updateGlimbo } from './world-7/glimbo';
 import { JellyOperator, updateJellyOperator, updateJellyOperatorPresentation } from './world-7/jellyOperator';
 import { Button, updateButton } from './world-7/button';
 import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked, updateStarSignMeritocracyBonus } from './starsigns';
-import { IslandExpeditions, updateIslandExpeditions } from './world-2/islandExpedition';
+import { IslandExpeditions, updateIslandExpeditions, updateIslandRewardPossession } from './world-2/islandExpedition';
 import { Tome, updateTomeBonuses, updateTomeScores } from './world-4/tome';
-import { KillRoy } from './world-2/killroy';
+import { KillRoy, updateKillroy } from './world-2/killroy';
 import { updateVotesBonus, Votes } from './world-2/votes';
-import { Hole, updateHole, updateHoleCharacterCapabilities, updateHolePresentation, updateHoleStudyEffects, updateHoleUpgradeEffects } from './world-5/hole/hole';
+import { Hole, updateHole, updateHoleCharacterCapabilities, updateHolePresentation, updateHoleStudyEffects, updateHoleUpgradeEffects, updateHoleWell } from './world-5/hole/hole';
 import { UpgradeVault } from './upgradeVault';
 import { Grimoire, updateGrimoireEfficiency, updateGrimoireUpgradeCosts } from './grimoire';
 import { Tesseract, updateArcaneCultistImpact, updateTesseractEfficiency, updateTesseractUpgradeCosts } from './tesseract';
@@ -100,20 +102,8 @@ import { Skilling, updateAllEfficiencies, updateAllSkillExperienceMultiplier, up
 import { updateAttributeTalents, updatePowerTalents, updateRightHandOfActionBonuses } from './talents';
 import { updatePlayerHealth } from './player-health';
 import { Menagerie, prepareMenagerie, updateMenagerieMissions } from "./menagerie";
-
-export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
-    const data = doc.get(key);
-    try {
-        if (typeof (data) === "string") {
-            return JSON.parse(doc.get(key))
-        }
-        return data;
-    }
-    catch (e) {
-        console.debug(key, doc.get(key), e)
-    }
-    return emptyValue;
-}
+import { Speedrun, updateSpeedrunBonuses, updateSpeedrun } from './speedrun';
+import { updateWeeklyBoss } from './weekly-boss';
 
 export interface IParser {
     (raw: Cloudsave, data: Map<string, any>): void
@@ -169,6 +159,7 @@ const domainList: Domain[] = [
     new Rift("rift"),
     new POExtra("POExtra"),
     new Equinox("equinox"),
+    new Speedrun("speedrun"),
     new Sneaking("sneaking"),
     new Summoning("summoning"),
     new Farming("farming"),
@@ -302,6 +293,8 @@ const postProcessingMap: Record<string, Function> = {
     "friends": (doc: Cloudsave, accountData: Map<string, any>) => updateFriends(accountData),
     // Parsed ownership contributes to Equinox before Research and to Collider/Construction before their consumers.
     "gamingSuperbitImpacts": (doc: Cloudsave, accountData: Map<string, any>) => updateSuperbitImpacts(accountData),
+    // Killroy uses Rift progress and prepares run requirements before shared bonuses.
+    "killroy": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateKillroy(accountData),
     // Research consumes parsed companion, Equinox, and Sushi state before downstream consumers calculate.
     "researchGrid": (doc: Cloudsave, accountData: Map<string, any>) => updateResearchGrid(accountData),
     "glimbo": (_doc: Cloudsave, accountData: Map<string, any>) => updateGlimbo(accountData),
@@ -372,6 +365,8 @@ const postProcessingMap: Record<string, Function> = {
     // Prepare exalted stamp scaling after its account inputs and before stamp bonuses.
     "compassExaltedStampBonus": (_doc: Cloudsave, accountData: Map<string, any>) => updateCompassExaltedStampBonus(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStamps(accountData),
+    // Well rates use calculated Cavern Resource Stamp bonuses.
+    "holeWell": (_doc: Cloudsave, accountData: Map<string, any>) => updateHoleWell(accountData),
     "forge": (doc: Cloudsave, accountData: Map<string, any>) => updateForge(accountData.get("forge"), accountData.get("gems"), accountData.get("menagerie"), accountData.get("cards")),
     "worshipTotalizer": (doc: Cloudsave, accountData: Map<string, any>) => updateWorshipTotalizer(accountData),
     "arcade": (doc: Cloudsave, accountData: Map<string, any>) => updateArcade(accountData),
@@ -393,6 +388,9 @@ const postProcessingMap: Record<string, Function> = {
     "capacity": (doc: Cloudsave, accountData: Map<string, any>) => updateCapacity(accountData),
     "votes": (doc: Cloudsave, accountData: Map<string, any>) => updateVotesBonus(accountData),
     "playerTalentContexts": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentContexts(accountData),
+    "speedrunBonuses": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpeedrunBonuses(accountData),
+    // Refresh only Voidwalker's fourth-tab total after One Step Ahead receives its final talent inputs.
+    "speedrunTalentPoints": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpeedrunTalentPoints(accountData),
     // Gemstone effects use each character's final actual talent level.
     "sneakingGemstones": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateSneakingGemstones(accountData),
     // Prepare Will Of The Eldest's account-wide level cap before attribute source consumers.
@@ -433,6 +431,15 @@ const postProcessingMap: Record<string, Function> = {
     "spelunkingPower": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingPower(accountData),
     // Saved metrics use final character inputs and effective account upgrade bonuses.
     "spelunkingAccountMetrics": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingAccountMetrics(accountData),
+    // Calculate Meritocracy and Star Sign bonuses before character-specific Construction rates.
+    "meritocratyLate": (_doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyLate(accountData),
+    "starSignMeritocracyBonus": (_doc: Cloudsave, accountData: Map<string, any>) => updateStarSignMeritocracyBonus(accountData),
+    "storageGreenstacks": (_doc: Cloudsave, accountData: Map<string, any>) => updateStorageGreenstacks(accountData),
+    "alchemyDailyBubbleProgression": (_doc: Cloudsave, accountData: Map<string, any>) => updateAlchemyDailyBubbleProgression(accountData),
+    "constructionBuildingTiming": (_doc: Cloudsave, accountData: Map<string, any>) => updateConstructionBuildingTiming(accountData),
+    // Refinery rates use prepared cycle times, Printer output, Merits and Companions.
+    "refinery": (_doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
+    "refinerySustainability": (_doc: Cloudsave, accountData: Map<string, any>) => updateRefinerySustainability(accountData),
 }
 
 // I really really hate this.
@@ -445,10 +452,10 @@ const postPostProcessingMap: Record<string, Function> = {
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStampMaxCarry(accountData),
     "traps": (doc: Cloudsave, accountData: Map<string, any>) => updateTrapDisplayData(accountData),
     "slab": (doc: Cloudsave, accountData: Map<string, any>) => updateSlabBonusDisplay(accountData),
+    "islandRewardPossession": (doc: Cloudsave, accountData: Map<string, any>) => updateIslandRewardPossession(accountData),
     "playersExtraMaths": (doc: Cloudsave, accountData: Map<string, any>) => playerExtraCalculations(accountData),
     "artifactBuildSpeed": (_doc: Cloudsave, accountData: Map<string, any>) => updateArtifactBuildSpeed(accountData),
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
-    "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
     "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateMinTravelTimeAndSpeed(accountData),
     "sailingCaptainExperience": (doc: Cloudsave, accountData: Map<string, any>) => updateSailingCaptainExperience(accountData),
     "farming": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingDisplayData(accountData),
@@ -463,9 +470,6 @@ const postPostProcessingMap: Record<string, Function> = {
     "nonDepositedZenithClusters": (doc: Cloudsave, accountData: Map<string, any>) => updateNonDepositedZenithClusters(accountData),
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
     "royalArmoryLate": (doc: Cloudsave, accountData: Map<string, any>) => updateRoyalArmoryLateInputs(accountData),
-    "meritocraty": (doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyLate(accountData),
-    // Construction rates read Star Sign bonuses after Meritocracy settles.
-    "starSignMeritocracyBonus": (_doc: Cloudsave, accountData: Map<string, any>) => updateStarSignMeritocracyBonus(accountData),
     // Shared ninja inputs need settled account Star Signs and final talent, statue, ballot, and Land Rank bonuses.
     "sneakingNinjas": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateSneakingNinjas(accountData),
     // Omnijade summaries and Charm Collector need the prepared permanent charms and settled account providers.
@@ -484,7 +488,21 @@ const postPostProcessingMap: Record<string, Function> = {
     // Button task progress uses settled account and character results.
     "buttonTaskProgress": (_doc: Cloudsave, accountData: Map<string, any>) => updateButtonTaskProgress(accountData),
     "allSkillExperienceMultiplier": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateAllSkillExperienceMultiplier(accountData),
+    // Library eligibility uses settled account bonuses and each character's class.
+    "libraryBookLevels": (_doc: Cloudsave, accountData: Map<string, any>) => updateLibraryBookLevels(accountData),
+    // Talent presentation needs final character inputs, account sources, and prepared Library eligibility.
+    "playerTalentPresentation": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentPresentation(accountData),
     "divinityRates": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateDivinityRates(accountData),
+    // Weekly task inputs need final character, capacity, stamp, shrine, prayer, and companion preparation.
+    "weeklyBoss": (_doc: Cloudsave, accountData: Map<string, any>) => {
+        updateWeeklyBoss(accountData);
+        return (accountData.get("account") as Account).weeklyBoss;
+    },
+    "speedrun": (_doc: Cloudsave, accountData: Map<string, any>) => {
+        updateSpeedrun(accountData);
+        // This map stores updater returns, so retain the registered domain.
+        return accountData.get("speedrun");
+    },
 }
 
 export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: CompanionState[], serverVars: Record<string, any>, isStatic: boolean = false) => {

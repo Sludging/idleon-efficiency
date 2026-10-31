@@ -46,6 +46,7 @@ import type { Menagerie } from "../menagerie";
 import type { Gallery } from "./gallery";
 import type { Clamworks } from "./clamworks";
 import type { Breeding } from "../world-4/breeding";
+import type { Account } from "../account";
 
 const RESEARCH_GRID_ALL_MULTI_CHALLENGES = [71, 72, 76];
 const RESEARCH_GRID_ALL_MULTI_COMPANION = 55;
@@ -1501,6 +1502,7 @@ class ResearchSourceCatalogue {
   const lore = this.repositories.get("SpelunkingTunnel").find(entry => entry.index === 7)!;
   const shapeOwnership = [
    this.event(36), shapeCompanion,
+   this.add("Bundle: Pack of Magnificence", () => Number(this.get<Account>("account").hasBundleM), "add"),
    this.add(`Spelunking Lore: ${lore.data.name}`,
     () => shapeLevelGate() * Number(this.get<Spelunking>("spelunking").tunnels.find(entry => entry.index === 7)!.loreCompleted),
     "add", 1, "Completed Lore and Research level 20"),
@@ -1519,6 +1521,7 @@ class ResearchSourceCatalogue {
   this.pointMilestone = this.base("Posty Notes: Points every ten Research levels", 0, "add");
   this.points = [
    this.add("Research level", () => this.research.progress.highestLevel, "add"),
+   this.add("Bundle: Alpha Omega Pack", () => 5 * Number(this.get<Account>("account").hasBankBundle), "add"),
    this.companion(153, 10, "add", "Points"), this.companionTwo(153, 5, "add", "Points"),
    this.sushi(3, "add", "Points"), this.sushi(13, "add", "Points"),
    this.add(`Sailing artifact: ${pointArtifact.data.name}`,

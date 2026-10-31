@@ -1,6 +1,7 @@
 {
-  "description": "Compare component D's typed damage and prayer inputs with native results",
+  "description": "Compare maximum damage parameters for character index 3, retained in a genuine Town save.",
   "target": "Player maximum damage parameters",
+  "requiredActivePlayerIndex": 3,
   "extractions": [
     {
       "label": "player_damage_etc_bonus_72",
@@ -131,6 +132,21 @@
       "label": "player_damage_exotic_market_41",
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 41, 0)",
       "description": "Native Exotic Market bonus 41 used by component D"
+    },
+    {
+      "label": "player_maximum_damage_sigil_lab_bonus",
+      "expression": "idleon.callFunction(\"Labb\", \"SigilBonus\", \"Blank\", 4, 0)",
+      "description": "Lab sigil 4 bonus used in maximum damage outside Dungeons"
+    },
+    {
+      "label": "player_maximum_damage_cosmo_bonus_2_4",
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 2, 4)",
+      "description": "Hole Idleon upgrade 4 bonus used in the weapon power multiplier"
+    },
+    {
+      "label": "player_maximum_damage_box_reward_base_damage",
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.BoxRewards.h.basedmg; })()",
+      "description": "Post Office base damage bonus added to the maximum damage calculation"
     }
   ]
 }

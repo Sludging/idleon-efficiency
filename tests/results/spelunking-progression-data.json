@@ -6,11 +6,11 @@
     },
     "grand_total": {
       "expression": "idleon.callFunction(\"Spelunk\", \"GrandDiscoveries_Total\", 0, 0)",
-      "result": 22
+      "result": 25
     },
     "tunnel_0_grand_found": {
       "expression": "Number(idleon.getAttr(\"Spelunk\")[44][0])",
-      "result": 4
+      "result": 5
     },
     "tunnel_1_grand_found": {
       "expression": "Number(idleon.getAttr(\"Spelunk\")[44][1])",
@@ -18,7 +18,7 @@
     },
     "tunnel_2_grand_found": {
       "expression": "Number(idleon.getAttr(\"Spelunk\")[44][2])",
-      "result": 3
+      "result": 5
     },
     "tunnel_3_grand_found": {
       "expression": "Number(idleon.getAttr(\"Spelunk\")[44][3])",

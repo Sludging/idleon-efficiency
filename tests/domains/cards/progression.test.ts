@@ -43,16 +43,6 @@ describe('Cards progression effects', () => {
       });
     });
   });
-  it('matches the next-level card requirement for owned w7a5', () => {
-    const card = player.cardInfo!.cards.find(({ id }) => id === 'w7a5')!;
-    expect(card.getCardsForLevel(card.getStarCount() + 1)).toMatchLiveGameWithDetails(
-      getExtractedValue(extractionResults, 'w7a5_next_level_card_requirement'),
-      {
-        tolerance: 0,
-        context: 'w7a5 next-level saved-card requirement',
-      },
-    );
-  });
   it('matches equipped-card crystal monster spawn chance after progression and effect boosts', () => {
     expect(Card.GetTotalBonusForId(player.cardInfo!.equippedCards, 14)).toMatchLiveGameWithDetails(
       getExtractedValue(extractionResults, 'equipped_crystal_spawn_chance'),

@@ -14,15 +14,15 @@
     },
     "orblet_market_cost_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 1, 0)",
-      "result": 79
+      "result": 83
     },
     "orblet_market_bonus_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 1, 0)",
-      "result": 175
+      "result": 180
     },
     "orblet_market_display_level_1": {
       "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][1]); })()",
-      "result": 35
+      "result": 36
     },
     "orblet_market_cost_2": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 2, 0)",
@@ -58,15 +58,15 @@
     },
     "orblet_market_cost_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 5, 0)",
-      "result": 59
+      "result": 184
     },
     "orblet_market_bonus_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 5, 0)",
-      "result": 8
+      "result": 18
     },
     "orblet_market_display_level_5": {
       "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][5]); })()",
-      "result": 8
+      "result": 18
     },
     "orblet_market_cost_6": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 6, 0)",
@@ -115,10 +115,6 @@
     "orblet_market_display_level_9": {
       "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][9]); })()",
       "result": 0
-    },
-    "calculationStorage.amountInStorageOrblet": {
-      "expression": "idleon.getAttr(\"PixelHelperActor\")[5].behaviors.getBehavior(\"ActorEvents_232\")._ItemsAndStorageOWNED.h.Orblet",
-      "result": 48
     }
   },
   "errors": {}

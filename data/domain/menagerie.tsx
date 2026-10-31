@@ -538,6 +538,7 @@ export class Menagerie extends Domain {
                 getRequiredRank(unlock.index, true),
             );
         });
+        this.yellowJellyfish.update(this.unlocks[this.yellowJellyfish.data.unlockId].owned);
         this.bonuses.forEach(bonus => {
             bonus.update(
                 bonus.index < this.availableBonusCount,
@@ -592,7 +593,6 @@ export class Menagerie extends Domain {
             this.unlocks[this.silverJellyfish.data.unlockId].owned,
             account.obolFragments,
         );
-        this.yellowJellyfish.update(this.unlocks[this.yellowJellyfish.data.unlockId].owned);
         this.greenJellyfish.update(
             this.unlocks[this.greenJellyfish.data.unlockId].owned,
             item => storage.amountInStorage(item),
@@ -634,7 +634,7 @@ export class Menagerie extends Domain {
         const collider = accountData.get("collider") as { atoms: { getBonus(): number }[] };
         const zenithMarket = accountData.get("zenithMarket") as { getBonusForId(index: number): number };
         const dancingCoral = accountData.get("dancingCoral") as {
-            getLumiBonusFromIndex(index: number): number;
+            getBonusFromIndex(index: number): number;
         };
         const alchemy = accountData.get("alchemy") as { getVialBonusForKey(bonusKey: string): number };
         const cards = accountData.get("cards") as { id: string; getLevels(): number }[];
@@ -680,7 +680,7 @@ export class Menagerie extends Domain {
             yellowConstructionBonus: savedLumiInputs.yellowConstructionBonus,
             atomBonus16: collider.atoms[16].getBonus(),
             zenithMarketBonus11: zenithMarket.getBonusForId(11),
-            dancingCoralBonus6: dancingCoral.getLumiBonusFromIndex(6),
+            dancingCoralBonus6: dancingCoral.getBonusFromIndex(6),
             lumiVialBonus: alchemy.getVialBonusForKey("7lumiadd"),
             researchBonus164: research.getBonusForId(164),
             cardLevel: cards.find(card => card.id === "w7b10")!.getLevels(),

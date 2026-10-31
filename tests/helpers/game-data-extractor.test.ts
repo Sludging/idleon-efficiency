@@ -2,6 +2,7 @@ import { createServer } from 'http';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
+import { runInNewContext } from 'vm';
 import BatchExtractor from './extract-all-game-data';
 import GameDataExtractor from './game-data-extractor';
 import targetPlayerConfig from '../utils/target-player.json';
@@ -54,6 +55,15 @@ describe('GameDataExtractor active-player policy', () => {
 
     await expect(extractor.checkActivePlayer()).resolves.toBe(2);
   });
+
+  it('uses the config-required index instead of the account player index', async () => {
+    process.env.TEST_ACCOUNT_PLAYER_INDEX = '3';
+    const extractor = createExtractor({ requiredActivePlayerIndex: 0 });
+    mockActivePlayerIndex(0);
+
+    await expect(extractor.checkActivePlayer()).resolves.toBe(0);
+  });
+
   it('uses a validated account player index for the shared target', async () => {
     process.env.TEST_ACCOUNT_PLAYER_INDEX = '3';
     const extractor = createExtractor();
@@ -91,6 +101,188 @@ describe('GameDataExtractor active-player policy', () => {
       expression: `game.callFunction(${targetPlayerConfig.index})`,
       result: targetPlayerConfig.index
     });
+  });
+});
+
+describe('GameDataExtractor Town capture policy', () => {
+  let tempDir: string;
+  let extractor: GameDataExtractor;
+  let mapId: number;
+  let failContext: boolean;
+  let failDamage: boolean;
+  let damage: jest.Mock;
+  let experience: jest.Mock;
+  let getAttr: jest.Mock;
+  const damageExpression = 'idleon.callFunction("Minehead", "Button_uHave", 49, 0)';
+  const experienceExpression = 'idleon.callFunction("Minehead", "Button_uHave", 15, 0)';
+  const extractions = [
+    { label: 'damage', expression: damageExpression, requiresTown: true },
+    { label: 'experience', expression: experienceExpression, requiresTown: false },
+  ];
+  const capture = async () => {
+    await extractor.extractData();
+    extractor.saveResults();
+    return JSON.parse(fs.readFileSync(extractor.outputPath, 'utf8'));
+  };
+
+  beforeEach(() => {
+    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'game-data-extractor-town-'));
+    extractor = new GameDataExtractor(
+      path.join(tempDir, 'config.json'),
+      path.join(tempDir, 'results.json'),
+      { verbose: false }
+    );
+    extractor.config = { extractions };
+    mapId = 0;
+    failContext = false;
+    failDamage = false;
+    damage = jest.fn(() => {
+      if (failDamage) {
+        throw new Error('Damage unavailable');
+      }
+      return 123;
+    });
+    experience = jest.fn(() => 4);
+    getAttr = jest.fn((name: string) => {
+      if (name === 'GetPlayersUsernames') return ['Retained player'];
+      if (name === 'UserInfo') return ['Retained player'];
+      if (name === 'CurrentMap') {
+        if (failContext) throw new Error('Map unavailable');
+        return mapId;
+      }
+      if (name === 'CustomLists') return { h: { MapName: { 0: 'Town', 306: 'uAquaA6' } } };
+      throw new Error(`Unexpected attribute: ${name}`);
+    });
+    const idleon = {
+      getAttr,
+      callFunction: (_scene: string, _helper: string, index: number) => {
+        if (index === 49) return damage();
+        if (index === 15) return experience();
+        throw new Error(`Unexpected helper index: ${index}`);
+      },
+    };
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+    jest.spyOn(global, 'fetch').mockImplementation(async (_url, options) => {
+      const { expression } = JSON.parse(String(options?.body));
+      try {
+        const result = runInNewContext(expression, { idleon });
+        return { ok: true, json: async () => ({ result }) } as Response;
+      } catch (error) {
+        return {
+          ok: false,
+          json: async () => ({ error: (error as Error).message }),
+        } as Response;
+      }
+    });
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+    fs.rmSync(tempDir, { recursive: true, force: true });
+  });
+
+  it('persists non-Town context and a label error without invoking damage or blocking EXP', async () => {
+    mapId = 306;
+
+    const results = await capture();
+
+    expect(damage).not.toHaveBeenCalled();
+    expect(experience).toHaveBeenCalledTimes(1);
+    expect(results.context).toEqual({ activePlayerIndex: 0, mapId: 306, mapInternalName: 'uAquaA6' });
+    expect(results.extractions.damage).toBeUndefined();
+    expect(results.errors.damage).toMatchObject({
+      expression: damageExpression,
+      error: expect.stringContaining('Town capture required'),
+    });
+    expect(results.errors.experience).toBeUndefined();
+    expect(results.extractions.experience).toBeDefined();
+  });
+
+  it('captures Town context once and invokes each eligible damage extraction', async () => {
+    extractor.config.extractions = [
+      ...extractions,
+      { label: 'second_damage', expression: damageExpression, requiresTown: true },
+    ];
+
+    const results = await capture();
+
+    expect(damage).toHaveBeenCalledTimes(2);
+    expect(getAttr.mock.calls.filter(([name]) => name === 'CurrentMap')).toHaveLength(1);
+    expect(results.context).toEqual({ activePlayerIndex: 0, mapId: 0, mapInternalName: 'Town' });
+    expect(Object.keys(results.extractions)).toEqual(['damage', 'experience', 'second_damage']);
+    expect(results.errors).toEqual({});
+  });
+
+  it('replaces a previous Town capture and removes its damage value after leaving Town', async () => {
+    await capture();
+    mapId = 306;
+
+    const results = await capture();
+
+    expect(damage).toHaveBeenCalledTimes(1);
+    expect(experience).toHaveBeenCalledTimes(2);
+    expect(results.context.mapId).toBe(306);
+    expect(results.extractions.damage).toBeUndefined();
+    expect(results.errors.damage.error).toContain('Town capture required');
+  });
+
+  it('removes a previous value when native damage fails in a new Town capture', async () => {
+    await capture();
+    failDamage = true;
+
+    const results = await capture();
+
+    expect(damage).toHaveBeenCalledTimes(2);
+    expect(results.context.mapInternalName).toBe('Town');
+    expect(results.extractions.damage).toBeUndefined();
+    expect(results.errors.damage.error).toContain('Damage unavailable');
+    expect(results.errors.experience).toBeUndefined();
+  });
+
+  it('discards old context and damage on context failure while continuing EXP', async () => {
+    await capture();
+    failContext = true;
+
+    const results = await capture();
+
+    expect(damage).toHaveBeenCalledTimes(1);
+    expect(experience).toHaveBeenCalledTimes(2);
+    expect(results.context).toBeUndefined();
+    expect(results.extractions.damage).toBeUndefined();
+    expect(results.errors.damage.error).toContain('Town capture prerequisite failed');
+    expect(results.errors.damage.error).toContain('Map unavailable');
+    expect(results.errors.experience).toBeUndefined();
+  });
+
+  it('clears a previous eligibility error when the next capture reaches Town', async () => {
+    mapId = 306;
+    await capture();
+    mapId = 0;
+
+    const results = await capture();
+
+    expect(damage).toHaveBeenCalledTimes(1);
+    expect(results.extractions.damage).toBeDefined();
+    expect(results.errors).toEqual({});
+  });
+
+  it('does not capture context or restrict unflagged extractions outside Town', async () => {
+    await capture();
+    mapId = 306;
+    extractor.config.extractions = [
+      { label: 'damage', expression: damageExpression },
+      { label: 'experience', expression: experienceExpression, requiresTown: false },
+    ];
+    getAttr.mockClear();
+
+    const results = await capture();
+
+    expect(getAttr).not.toHaveBeenCalled();
+    expect(damage).toHaveBeenCalledTimes(2);
+    expect(results.context).toBeUndefined();
+    expect(Object.keys(results.extractions)).toEqual(['damage', 'experience']);
+    expect(results.errors).toEqual({});
   });
 });
 
@@ -288,13 +480,17 @@ describe('GameDataExtractor persisted results', () => {
   );
 });
 describe('BatchExtractor player server routing', () => {
-  it('routes a config requiring player zero to its explicitly selected server', async () => {
+  it.each([false, true])('uses the character server unless the config requires another player (%s)', async (useOverride) => {
     const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'batch-player-server-'));
-    const configPath = path.join(tempDir, 'player-zero.json');
-    const resultPath = path.join(tempDir, 'player-zero-data.json');
+    const configPath = path.join(tempDir, 'talents.json');
+    const resultPath = path.join(tempDir, 'talents-data.json');
+    const genuineConfig = JSON.parse(fs.readFileSync(
+      path.join(__dirname, '../configs/talents-sludgeadin.json'), 'utf8'
+    ));
+    const extraction = genuineConfig.extractions[0];
     fs.writeFileSync(configPath, JSON.stringify({
-      requiredActivePlayerIndex: 0,
-      extractions: [{ label: 'value', expression: 'game.value()' }],
+      ...(useOverride ? { requiredActivePlayerIndex: genuineConfig.requiredActivePlayerIndex } : {}),
+      extractions: [extraction],
     }));
 
     const requests: Array<{ path: string; expression?: string }> = [];
@@ -312,7 +508,9 @@ describe('BatchExtractor player server routing', () => {
       requests.push({ path: request.url || '', expression });
       response.writeHead(200, { 'Content-Type': 'application/json' });
       response.end(JSON.stringify({
-        result: expression.includes('GetPlayersUsernames') ? 0 : 'player-zero-value',
+        result: expression.includes('GetPlayersUsernames')
+          ? (useOverride ? genuineConfig.requiredActivePlayerIndex : Number(process.env.TEST_ACCOUNT_PLAYER_INDEX ?? targetPlayerConfig.index))
+          : 'routed-value',
       }));
     });
 
@@ -321,18 +519,21 @@ describe('BatchExtractor player server routing', () => {
       const address = server.address();
       if (!address || typeof address === 'string') throw new Error('Test server did not bind');
 
+      const actorURL = `http://127.0.0.1:${address.port}`;
       const batch = new BatchExtractor({
         outputDir: tempDir,
-        playerServers: { 0: `http://127.0.0.1:${address.port}` },
+        serverURL: useOverride ? 'http://127.0.0.1:1' : actorURL,
+        playerServers: { [genuineConfig.requiredActivePlayerIndex]: useOverride ? actorURL : 'http://127.0.0.1:1' },
       });
-      batch.configFiles = [{ name: 'player-zero.json', configPath, resultPath }];
+      batch.configFiles = [{ name: 'talents.json', configPath, resultPath }];
       await batch.extractAll();
 
+      expect(batch.results.failed).toEqual([]);
       expect(requests.map(request => request.path)).toEqual(['/status', '/exec', '/exec']);
       expect(requests[1].expression).toContain('GetPlayersUsernames');
-      expect(requests[2]).toMatchObject({ path: '/exec', expression: 'game.value()' });
-      expect(JSON.parse(fs.readFileSync(resultPath, 'utf8')).extractions.value.result)
-        .toBe('player-zero-value');
+      expect(requests[2]).toMatchObject({ path: '/exec', expression: extraction.expression });
+      expect(JSON.parse(fs.readFileSync(resultPath, 'utf8')).extractions[extraction.label].result)
+        .toBe('routed-value');
     } finally {
       await new Promise<void>((resolve, reject) =>
         server.close(error => error ? reject(error) : resolve())

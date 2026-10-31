@@ -1,0 +1,13 @@
+{
+  "description": "Compare normal-world persistent maximum damage for character index 3, retained in a genuine Town save.",
+  "target": "Player maximum damage",
+  "requiredActivePlayerIndex": 3,
+  "extractions": [
+    {
+      "label": "player_maximum_damage",
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0)",
+      "description": "Normal-world persistent maximum damage for the retained active character",
+      "requiresTown": true
+    }
+  ]
+}

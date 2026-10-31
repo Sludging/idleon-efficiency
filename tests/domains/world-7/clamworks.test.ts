@@ -11,7 +11,8 @@ describe('Clam Work account outputs', () => {
   let menagerie: Menagerie;
   let results: ExtractionResults;
 
-  beforeEach(() => {
+  // These comparisons only read prepared account state, so load it once for the suite.
+  beforeAll(() => {
     accountData = loadGameDataFromSave('latest');
     clamworks = accountData.get('clamworks') as Clamworks;
     menagerie = accountData.get('menagerie') as Menagerie;

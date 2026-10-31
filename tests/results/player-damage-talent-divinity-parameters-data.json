@@ -10,7 +10,7 @@
     },
     "talent_calculation_125": {
       "expression": "idleon.callFunction('TalentCalc', 125)",
-      "result": 666
+      "result": 681
     },
     "talent_calculation_305": {
       "expression": "idleon.callFunction('TalentCalc', 305)",
@@ -30,11 +30,11 @@
     },
     "divinity_minor_bonus_4": {
       "expression": "idleon.callFunction('Divinity', 'Bonus_Minor', 3, 4)",
-      "result": 236.30010429009025
+      "result": 237.08489012306853
     },
     "divinity_minor_bonus_7": {
       "expression": "idleon.callFunction('Divinity', 'Bonus_Minor', 3, 7)",
-      "result": 472.6002085801805
+      "result": 474.16978024613707
     }
   },
   "errors": {}

@@ -2,27 +2,27 @@
   "extractions": {
     "skill_all_efficiencies": {
       "expression": "idleon.callFunction(\"SkillStats\", \"AllEfficiencies\")",
-      "result": 29454.453801863714
+      "result": 29659.261993585475
     },
     "alchemy_bubble_mineff": {
       "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.MinEff",
-      "result": 40626.89435759935
+      "result": 42185.87883128492
     },
     "alchemy_bubble_chopeff": {
       "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.ChopEff",
-      "result": 2360.5381203721304
+      "result": 2406.1466681256097
     },
     "total_stats_str": {
       "expression": "idleon.callFunction(\"TotalStats\", \"STR\")",
-      "result": 6796531
+      "result": 6964942
     },
     "total_stats_agi": {
       "expression": "idleon.callFunction(\"TotalStats\", \"AGI\")",
-      "result": 2398610
+      "result": 2436960
     },
     "total_stats_wis": {
       "expression": "idleon.callFunction(\"TotalStats\", \"WIS\")",
-      "result": 2396300
+      "result": 2434009
     },
     "divinity_blessing_2": {
       "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 2, 0)",
@@ -30,19 +30,19 @@
     },
     "divinity_blessing_4": {
       "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 4, 0)",
-      "result": 1158
+      "result": 1389.6000000000001
     },
     "divinity_blessing_6": {
       "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 6, 0)",
-      "result": 1071
+      "result": 1285.2
     },
     "divinity_blessing_7": {
       "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 7, 0)",
-      "result": 199.5
+      "result": 239.4
     },
     "divinity_blessing_9": {
       "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 9, 0)",
-      "result": 847.5
+      "result": 1017
     }
   },
   "errors": {}

@@ -78,7 +78,7 @@ export const getPlayerDamagePercentComponent = (
             + (0.4 * upgradeVault.getBonusForId(10) + (bribes.find(bribe => bribe.bribeIndex === 30)?.getBonus() ?? 0))
             + (bribes.find(bribe => bribe.bribeIndex === 20)?.getBonus() ?? 0)
             + (getStampBonusForKey(stamps, 'PctDmg')
-                + farming.landrankDatabase.getUpgradeBonusByIndex(14)
+                + farming.landrankDatabase.getUpgradeBonusForPlayer(14, player)
                 + statues[player.playerID].statues.find(statue => statue.index === 22)!.getBonus(player)
                 + player.getTalentBonusAtInputs(113, player.finalTalentInputs))
             + hpAndWorldAdditivePercent);

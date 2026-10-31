@@ -138,61 +138,6 @@
       "description": "Full source recharge mastery contribution"
     },
     {
-      "label": "talent_236_player_0",
-      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,0)",
-      "description": "Spelunking Specialty first-effect output for player 0"
-    },
-    {
-      "label": "talent_236_player_3",
-      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,3)",
-      "description": "Spelunking Specialty first-effect output for player 3"
-    },
-    {
-      "label": "talent_236_player_1",
-      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,1)",
-      "description": "Spelunking Specialty first-effect output for player 1"
-    },
-    {
-      "label": "talent_236_player_2",
-      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,2)",
-      "description": "Spelunking Specialty first-effect output for player 2"
-    },
-    {
-      "label": "talent_236_player_4",
-      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,4)",
-      "description": "Spelunking Specialty first-effect output for player 4"
-    },
-    {
-      "label": "talent_236_player_5",
-      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,5)",
-      "description": "Spelunking Specialty first-effect output for player 5"
-    },
-    {
-      "label": "talent_236_player_6",
-      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,6)",
-      "description": "Spelunking Specialty first-effect output for player 6"
-    },
-    {
-      "label": "talent_236_player_7",
-      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,7)",
-      "description": "Spelunking Specialty first-effect output for player 7"
-    },
-    {
-      "label": "talent_236_player_8",
-      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,8)",
-      "description": "Spelunking Specialty first-effect output for player 8"
-    },
-    {
-      "label": "talent_236_player_9",
-      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,9)",
-      "description": "Spelunking Specialty first-effect output for player 9"
-    },
-    {
-      "label": "talent_236_player_10",
-      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,10)",
-      "description": "Spelunking Specialty first-effect output for player 10"
-    },
-    {
       "label": "talent_236_best",
       "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,-1)",
       "description": "Highest account Spelunking Specialty first effect"

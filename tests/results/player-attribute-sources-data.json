@@ -2,23 +2,23 @@
   "extractions": {
     "bubble_TotalSTR": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.TotalSTR",
-      "result": 398644.83088573493
+      "result": 414915.53000604344
     },
     "bubble_TotalAGI": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.TotalAGI",
-      "result": 405672.2062401491
+      "result": 421698.75801817985
     },
     "bubble_TotalWIS": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.TotalWIS",
-      "result": 408386.022376268
+      "result": 424361.76832866156
     },
     "bubble_TotalLUK": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.TotalLUK",
-      "result": 51065.467879373115
+      "result": 52293.41458294903
     },
     "bubble_W4": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.W4",
-      "result": 3418.9997318233445
+      "result": 3485.241916839528
     },
     "bubble_A4": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.A4",
@@ -30,27 +30,27 @@
     },
     "talent_10": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 10)",
-      "result": 1715
+      "result": 1731
     },
     "talent_11": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 11)",
-      "result": 686
+      "result": 688
     },
     "talent_12": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 12)",
-      "result": 600
+      "result": 602
     },
     "talent_13": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 13)",
-      "result": 292
+      "result": 294
     },
     "talent_98": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 98)",
-      "result": 411
+      "result": 413
     },
     "talent_203": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 203)",
-      "result": 965
+      "result": 975
     },
     "talent_278": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 278)",
@@ -82,7 +82,7 @@
     },
     "talent_143": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 143)",
-      "result": 12.520661157024794
+      "result": 12.528830313014828
     },
     "talent_368": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 368)",
@@ -98,7 +98,7 @@
     },
     "talent_142_second": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 2, 142)",
-      "result": 253
+      "result": 254
     },
     "talent_367_second": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 2, 367)",
@@ -126,7 +126,7 @@
     },
     "stamp_BaseAllStat": {
       "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseAllStat\")",
-      "result": 870
+      "result": 900
     },
     "stamp_AllStatPct": {
       "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"AllStatPct\")",
@@ -278,11 +278,11 @@
     },
     "buff_94": {
       "expression": "idleon.callFunction(\"GetBuffBonuses\", 94, 1)",
-      "result": 452
+      "result": 454
     },
     "quest_count": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"TotalQuestsComplete\")",
-      "result": 317
+      "result": 319
     },
     "meal_stat": {
       "expression": "idleon.callFunction(\"MealBonus\", \"Stat\")",
@@ -342,7 +342,7 @@
     },
     "farming_all_stat": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"LankRankUpgBonus\", 19, 0)",
-      "result": 622.123582719807
+      "result": 623.059909470134
     },
     "votes_all_stat": {
       "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 2, 0)",

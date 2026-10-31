@@ -36,6 +36,20 @@ export class Cloudsave {
     }
 
   }
+
+export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
+    const data = doc.get(key);
+    try {
+        if (typeof (data) === "string") {
+            return JSON.parse(doc.get(key))
+        }
+        return data;
+    }
+    catch (e) {
+        console.debug(key, doc.get(key), e)
+    }
+    return emptyValue;
+}
   
 export const cloudsaveConverter = {
     toFirestore(_: WithFieldValue<Cloudsave>): DocumentData {

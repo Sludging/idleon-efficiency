@@ -18,6 +18,8 @@ import { ResearchGrid } from "./research";
 import { SushiStation } from "./sushi";
 import { ZenithMarket } from "./zenithShop";
 
+export const BASE_SUPER_TALENT_LEVELS = 50;
+
 export class LegendTalent {
     level: number = 0;
 
@@ -122,7 +124,7 @@ export class LegendTalents extends Domain {
     pointsAvaible: number = 0;
 
     superTalentUnlocked: boolean = false;
-    superTalentBonusLevels: number = 50;
+    superTalentBonusLevels: number = BASE_SUPER_TALENT_LEVELS;
 
     getRawKeys(): RawData[] {
         return [
@@ -200,7 +202,7 @@ export const updateLegendTalents = (data: Map<string, any>) => {
     legendTalents.superTalentUnlocked = legendTalents.getBonusFromIndex(39) >= 1;
     const legendTalentBonus7 = legendTalents.getBonusFromIndex(7);
     const zenithMarketBonus5 = zenithMarket.getBonusForId(5);
-    legendTalents.superTalentBonusLevels = Math.round(50 + legendTalentBonus7 + zenithMarketBonus5);
+    legendTalents.superTalentBonusLevels = Math.round(BASE_SUPER_TALENT_LEVELS + legendTalentBonus7 + zenithMarketBonus5);
 
     return legendTalents;
 }

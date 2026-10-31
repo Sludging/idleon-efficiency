@@ -1,11 +1,26 @@
 {
-  "description": "Extract seven Friend Bonus stats, available slots, and the four account-wide inputs used to calculate slots and the active multiplier.",
+  "description": "Extract seven Friend Bonus stats, available slots, the shared multiplier, current effective sources, saved contributors, and existing slot/multiplier parameter values.",
   "target": "Friend Bonuses (Stats)",
   "extractions": [
     {
       "label": "friend_bonus_slots",
       "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusSlots\", 0, 0)",
       "description": "Available Friend Bonus slots"
+    },
+    {
+      "label": "friend_bonus_multiplier",
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusXtraMulti\", 0, 0)",
+      "description": "Shared multiplier applied to assigned Friend Bonuses"
+    },
+    {
+      "label": "friend_bonus_sources",
+      "expression": "({ baseSlots: 2, spearfishSlots: idleon.callFunction(\"Companions\", 44), mrPigSlots: 2 * idleon.callFunction(\"Companions\", 30), friendlySlotSlots: idleon.callFunction(\"Summoning\", \"EventShopOwned\", 22, 0), slotOfFriendshipSlots: idleon.callFunction(\"Summoning\", \"EventShopOwned\", 67, 0), baseMultiplier: 1, mrPigMultiplierIncrease: 100 * idleon.callFunction(\"Companions\", 30) / 100, spearfishMultiplierIncrease: 25 * idleon.callFunction(\"CompLV2\", 44) / 100, totalSlots: idleon.callFunction(\"Thingies\", \"FriendBonusSlots\", 0, 0), totalMultiplier: idleon.callFunction(\"Thingies\", \"FriendBonusXtraMulti\", 0, 0) })",
+      "description": "Current effective additive Friend Bonus sources and totals from native 1.24 formulas; Mr Pig adds 3 slots and 1.5 to the multiplier"
+    },
+    {
+      "label": "friend_bonus_assignments",
+      "expression": "idleon.engine.getGameAttribute(\"OptionsListAccount\")[476]",
+      "description": "Saved active Friend Bonus records: stat index, sender account level, and sender name"
     },
     {
       "label": "friend_bonus_stat_0",
@@ -50,7 +65,7 @@
     {
       "label": "friend_bonus_companion_30",
       "expression": "idleon.callFunction(\"Companions\", 30)",
-      "description": "Mr Pig active bonus contributes 1.5 slots and 150% to the Friend Bonus multiplier"
+      "description": "Mr Pig active bonus contributes 3 slots and 150% to the Friend Bonus multiplier"
     },
     {
       "label": "friend_bonus_companion_lv2_44",

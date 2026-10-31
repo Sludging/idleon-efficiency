@@ -1,13 +1,14 @@
 import { StarSignMap, StarSign, StarSigns } from './starsigns';
 import { Box, initPostOffice, PostOfficeConst } from './world-2/postoffice';
-import { ClassIndex, Talent, ClassTalentMap, GetTalentArray, TalentConst, ApocalypseChowTalent, EnhancedTalent, BloodMarrowTalent, type TalentLevelInputs } from './talents';
+import { ClassIndex, Talent, ClassTalentMap, GetTalentArray, TalentConst, ApocalypseChowTalent, EnhancedTalent, BloodMarrowTalent } from './talents';
+import type { BeginnerBestClassTalent, TalentLevelInputs, WillOfTheEldestTalent } from './talents';
 import { Card, CardInfo } from "./cards";
 import { Item } from "./items";
 import { EquipmentBonus } from './equipment-effects';
 import { PlayerEquipment } from './equipment';
 import type { GoldenFood } from './golden-food';
 import { lavaLog, notUndefined, range } from '../utility';
-import { Cloudsave } from "./cloudsave";
+import { Cloudsave, safeJsonParse } from "./cloudsave";
 import { EnemyData, EnemyInfo } from "./enemies";
 import { MapInfo } from "./maps";
 import { Chip, chipSlotReq, Lab } from "./world-4/lab";
@@ -22,7 +23,6 @@ import { Breeding } from "./world-4/breeding";
 import { Dungeons, PassiveType } from "./dungeons";
 import { Stamp, StampConsts, StampTab } from "./world-1/stamps";
 import { Achievement } from "./achievements";
-import { safeJsonParse } from "./idleonData";
 import { Arcade } from "./world-2/arcade";
 import { ObolsData } from "./world-2/obols";
 import { ImageData } from "./imageData";
@@ -60,8 +60,20 @@ import { PlayerHealth } from './player-health';
 import { PlayerStats } from './player-stats';
 import { initFishingToolkitRepo } from './data/FishingToolkitRepo';
 import type { CoralKid } from './world-7/coralKid';
+import type { Speedrun } from './speedrun';
+import type { Spelunking } from './world-7/spelunking';
+import type { TalentSourceGroups } from './talentSources';
+import type { Library } from './world-3/construction/construction';
 export type { TalentLevelInputs } from './talents';
 const fishingToolkitRepo = initFishingToolkitRepo();
+
+const SUPER_TALENT_SLOT_LIMIT = 20;
+const SUPER_TALENT_CLASS_LEVEL_OFFSET = 400;
+const SUPER_TALENT_CLASS_LEVELS_PER_POINT = 100;
+const SUPER_TALENT_POINT_LIMIT = 20;
+export const LUNARHEIM_TUNNEL_INDEX = 5;
+export const LUNARHEIM_SUPER_TALENT_POINTS = 1;
+export const MAROON_WARSHIP_TALENT_LEVELS = 1;
 
 
 
@@ -102,6 +114,13 @@ interface TalentPoints {
     totalOwned: number
 }
 
+interface TalentPresentation {
+    sources: TalentSourceGroups;
+    bonusLevels: number;
+    superTalentLevels: number;
+    checkoutSummary: { requiredCheckouts: number; vipTalentsToBook: number };
+}
+
 export class Player {
     playerID: number;
     playerName: string;
@@ -127,7 +146,15 @@ export class Player {
     allPresetSuperTalentIndexes: Set<number> = new Set();
     finalTalentInputs!: TalentLevelInputs;
     beforeActiveBubbleMultiplierTalentInputs!: TalentLevelInputs;
+    private appliedTalentInputs!: TalentLevelInputs;
+    superTalentPoints: { total: number; spent: number; remaining: number } = { total: 0, spent: 0, remaining: 0 };
     talentPoints: TalentPoints[] = [];
+    talentPresentation: TalentPresentation = {
+        sources: { points: [], superLevels: [], ordinaryLevels: [] },
+        bonusLevels: 0,
+        superTalentLevels: 0,
+        checkoutSummary: { requiredCheckouts: 0, vipTalentsToBook: 0 },
+    };
     postOffice: Box[] = initPostOffice();
     activeBubblesString: string[] = [];
     activeBubbles: Bubble[] = [];
@@ -170,6 +197,61 @@ export class Player {
         this.playerName = playerName;
         this.skills = new Map<SkillsIndex, SkillData>();
         this.skillsRank = new Map<SkillsIndex, number>();
+    }
+
+    setActiveSuperTalentSlots(slots: readonly number[]): void {
+        this.activeSuperTalentIndexes = new Set(slots);
+        let spent = 0;
+        for (let index = 0; index < Math.min(slots.length, SUPER_TALENT_SLOT_LIMIT); index++) {
+            if (slots[index] !== -1) spent++;
+        }
+        this.superTalentPoints = { total: 0, spent, remaining: 0 };
+    }
+
+    getSuperTalentPointsFromClassLevel(classLevel: number = this.level): number {
+        return Math.floor(Math.max(0, classLevel - SUPER_TALENT_CLASS_LEVEL_OFFSET) / SUPER_TALENT_CLASS_LEVELS_PER_POINT);
+    }
+
+    updateSuperTalentPoints(lunarheimLoreCompleted: boolean): void {
+        const levelPoints = this.getSuperTalentPointsFromClassLevel();
+        const total = Math.min(SUPER_TALENT_POINT_LIMIT, levelPoints + (lunarheimLoreCompleted ? LUNARHEIM_SUPER_TALENT_POINTS : 0));
+        const spent = this.superTalentPoints.spent;
+        this.superTalentPoints = { total, spent, remaining: Math.max(0, total - spent) };
+    }
+
+    getTalentPageProgress(talents: readonly Talent[]): { pointsRequiredToMax: number; isMaxed: boolean } {
+        let pointsRequiredToMax = 0;
+        let isMaxed = true;
+        for (const talent of talents) {
+            if (talent.bookMaxLevel > 0) {
+                pointsRequiredToMax += talent.bookMaxLevel;
+                if (talent.pointsSpent < talent.bookMaxLevel) isMaxed = false;
+            }
+        }
+        return { pointsRequiredToMax, isMaxed };
+    }
+
+    prepareTalentPresentation(sources: TalentSourceGroups, library: Library): void {
+        const pages = [...ClassTalentMap[this.classId], ...Array.from({ length: 5 }, (_, index) => `Special Talent ${index + 1}`)];
+        const talentByIndex = new Map(this.talents.map(talent => [talent.skillIndex, talent]));
+        const displayedTalents: Talent[] = [];
+        for (const page of pages) {
+            for (const original of GetTalentArray(page)) {
+                const talent = talentByIndex.get(original.skillIndex);
+                if (talent) {
+                    displayedTalents.push(talent);
+                }
+            }
+        }
+
+        const inputs = this.currentTalentInputs;
+        const ordinaryTalent = displayedTalents.find(talent => talent.skillIndex >= 0 && talent.skillIndex < 49);
+        this.talentPresentation = {
+            sources,
+            bonusLevels: ordinaryTalent?.getExtraLevels(inputs, false) ?? 0,
+            superTalentLevels: inputs.superTalentLevels,
+            checkoutSummary: library.getBookCheckoutSummary(displayedTalents),
+        };
     }
 
     getBaseClass = (): ClassIndex => {
@@ -319,22 +401,31 @@ export class Player {
         return this.talents.find(talent => talent.skillIndex == skillIndex)?.getBonus() ?? 0;
     }
 
-    getTalent = (skillIndex: number) => {
+    // parseTalents creates these subclasses through Talent.fromBase.
+    getTalent(skillIndex: 616): BeginnerBestClassTalent | undefined;
+    getTalent(skillIndex: 620): WillOfTheEldestTalent | undefined;
+    getTalent(skillIndex: number): Talent | undefined;
+    getTalent(skillIndex: number): Talent | undefined {
         return this.talents.find(talent => talent.skillIndex == skillIndex);
     }
 
 
-    getTalentBonusAtInputs(skillIndex: number, inputs: TalentLevelInputs): number {
+    getTalentBonusAtInputs(skillIndex: number, inputs: Readonly<TalentLevelInputs>, yBonus: boolean = false): number {
         const talent = this.getTalent(skillIndex);
         if (!talent || talent.pointsSpent <= 0.5) {
             return 0;
         }
         const extraLevels = talent.getExtraLevels(inputs,
             this.activeSuperTalentIndexes.has(skillIndex));
-        return talent.getBonusAtLevel(talent.pointsSpent + extraLevels);
+        return talent.getBonusAtLevel(talent.pointsSpent + extraLevels, false, yBonus);
+    }
+
+    get currentTalentInputs(): Readonly<TalentLevelInputs> {
+        return this.appliedTalentInputs;
     }
 
     applyTalentLevelInputs(inputs: TalentLevelInputs): void {
+        this.appliedTalentInputs = inputs;
         for (const talent of this.talents) {
             const extraLevels = talent.getExtraLevels(inputs, this.activeSuperTalentIndexes.has(talent.skillIndex));
             talent.level = talent.pointsSpent + (talent.pointsSpent > 0.5 ? extraLevels : 0);
@@ -666,7 +757,7 @@ const keyFunctionMap: Record<string, Function> = {
         doc.get(`SL_${player.playerID}`),
         doc.get(`SM_${player.playerID}`),
         safeJsonParse(doc, "Spelunk", []) as number[][],
-        safeJsonParse(doc, `PlayerStuff_${player.playerID}`, [0, 0])[1],
+        safeJsonParse(doc, `PlayerStuff_${player.playerID}`, [0, 0])[1] ?? 0,
         player
     ),
     "postoffice": (doc: Cloudsave, player: Player) => parsePostOffice(doc.get(`POu_${player.playerID}`), player),
@@ -742,13 +833,14 @@ const parseTalents = (talentLevels: string, talentMaxLevels: string, spelunkData
     }
 
     player.allPresetSuperTalentIndexes = new Set([
-        ...spelunkData[20 + player.playerID],
-        ...spelunkData[32 + player.playerID],
+        ...(spelunkData[20 + player.playerID] ?? []),
+        ...(spelunkData[32 + player.playerID] ?? []),
     ]);
     // Ordinary talent projection uses the active preset; account talent maxima use both presets.
-    player.activeSuperTalentIndexes = new Set(spelunkData[Math.round(20 + player.playerID + 12 * activePreset)]);
+    player.setActiveSuperTalentSlots(spelunkData[Math.round(20 + player.playerID + 12 * activePreset)] ?? []);
     player.talents.forEach((talent) => {
         talent.resetAccountBonusInputs();
+        talent.libraryMaxLevel = undefined;
         talent.level = jsonTalents[talent.skillIndex] ?? 0;
         talent.pointsSpent = jsonTalents[talent.skillIndex] ?? 0;
         talent.maxLevel = jsonMaxTalents[talent.skillIndex] ?? 0;
@@ -903,6 +995,25 @@ export class Players extends Domain {
     }
 }
 
+const getVoidwalkerFourthTabPointsOwned = (player: Player, speedrun: Speedrun, companions: Companion[]): number => {
+    return Math.floor(Math.max(0, 1 + getCompanionActiveBonus(companions, 20)
+        + player.getTalentBonusAtInputs(34, player.currentTalentInputs)
+        + speedrun.getTalentPointEntitlement(player, player.currentTalentInputs)));
+};
+
+export const updateSpeedrunTalentPoints = (data: Map<string, any>): void => {
+    const players = data.get("players") as Player[];
+    const speedrun = data.get("speedrun") as Speedrun;
+    const companions = data.get("companions") as Companion[];
+    // Final talent inputs can change One Step Ahead after the general point update.
+    for (const player of players) {
+        if (player.classId === ClassIndex.Voidwalker) {
+            player.talentPoints.find(points => points.tab === TalentTab.FourthTab)!.totalOwned =
+                getVoidwalkerFourthTabPointsOwned(player, speedrun, companions);
+        }
+    }
+};
+
 export const updatePlayerTalentPoints = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const account = data.get("account") as Account;
@@ -915,15 +1026,17 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
     const cards = data.get("cards") as Card[];
     const taskBoard = data.get("taskboard") as TaskBoard;
     const achievements = data.get("achievements") as Achievement[];
-    const optionListAccount = data.get("OptLacc") as number[];
+    const speedrun = data.get("speedrun") as Speedrun;
     const sigils = data.get("sigils") as Sigils;
     const dungeonsData = data.get("dungeons") as Dungeons;
     const breeding = data.get("breeding") as Breeding;
     const arcade = data.get("arcade") as Arcade;
     const companions = data.get("companions") as Companion[];
     const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+    const spelunking = data.get("spelunking") as Spelunking;
 
     players.forEach(player => {
+        player.updateSuperTalentPoints(spelunking.tunnels[LUNARHEIM_TUNNEL_INDEX].loreCompleted);
         player.talentPoints = [];
         const talentDL: number[] = [];
         const talentDLbonus: number[] = [];
@@ -1032,10 +1145,8 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
 
         // Fourth tab
         let fourthTabPoints = 0;
-        if (player.getEliteClass() == ClassIndex.Maestro) {
-            fourthTabPoints = Math.floor(Math.max(0, 1 +
-                player.getTalentBonus(34) +
-                player.getTalentBonus(45) * optionListAccount[158]));
+        if (player.classId === ClassIndex.Voidwalker) {
+            fourthTabPoints = getVoidwalkerFourthTabPointsOwned(player, speedrun, companions);
         } else {
             fourthTabPoints = Math.floor(Math.max(0,
                 3 * Math.min(player.level - 89, 100) +
@@ -1148,8 +1259,10 @@ const getPlayerTalentLevelInputs = (
     const gaming = data.get("gaming") as Gaming;
     const sneaking = data.get("sneaking") as Sneaking;
     return {
-        eliteTalentLevels: player.getTalentBonus(149) + player.getTalentBonus(374) + player.getTalentBonus(539),
-        achievementTalentLevels: achievements[291].completed ? 1 : 0,
+        eliteTalentLevels: player.talents
+            .filter(talent => [149, 374, 539].includes(talent.skillIndex) && talent.pointsSpent > 0)
+            .reduce((sum, talent) => sum + talent.getBonus(), 0),
+        achievementTalentLevels: achievements[291].completed ? MAROON_WARSHIP_TALENT_LEVELS : 0,
         familyTalentLevels,
         companionTalentLevels: getCompanionActiveBonus(companions, 1),
         minorLinkTalentLevels,
@@ -1158,18 +1271,19 @@ const getPlayerTalentLevelInputs = (
         grimoireTalentLevels: grimoire.getUpgradeBonus(39),
         equipmentTalentLevels: equipmentSets.getSetBonus("KATTLEKRUK_SET"),
         tesseractTalentLevels: tesseract.getUpgradeBonus(57),
-        gamingTalentLevels: gaming.isSuperbitPurchased(47) ? Math.max(0, Math.floor((player.level - 500) / 100)) : 0,
+        gamingTalentLevels: gaming.isSuperbitPurchased(47) ? gaming.getSuperbitTalentLevelsAtClassLevel(player.level) : 0,
         superTalentLevels,
         allTalentCap,
     };
 };
 
-// Family captures Family Guy before the Elemental Sorcerer and Super Talent additions.
+// Prepare inputs without Elemental Sorcerer levels. Family calculates its bonuses in game order.
 export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const divinity = data.get("divinity") as Divinity;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
     for (const player of players) {
-        const inputs = getPlayerTalentLevelInputs(data, player, 0, divinity.gods[1].getMinorLinkBonus(player), 0, 9999);
+        const inputs = getPlayerTalentLevelInputs(data, player, 0, divinity.gods[1].getMinorLinkBonus(player), legendTalents.superTalentBonusLevels, 9999);
         player.extraLevelsFromTalent = Math.floor(inputs.eliteTalentLevels);
         player.extraLevelsFromAchievements = inputs.achievementTalentLevels;
         player.extraLevelsFromBear = Math.ceil(inputs.minorLinkTalentLevels);
@@ -1185,7 +1299,7 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
     return players;
 };
 
-// Consume Family's cached pre-ES result; never calculate Family from the later talent projection.
+// Use the recipient's Family result without changing the inputs used to calculate it.
 export const updatePlayerTalentLevelESBonus = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const family = data.get("family") as Family;

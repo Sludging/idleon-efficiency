@@ -1,6 +1,6 @@
 {
-  "description": "Approved correctness #429: read-only Orblet current prices, progression, ordinary previews, exceptional numeric compatibility and settled account balance. Real paired save only; no purchase/map eligibility. All entries support active public-output or direct-parameter assertions. IIFEs explicitly bind idleon because idleon-debug-server.js:698-709 evaluates expressions containing the direct window cheat accessor without adding its normal idleon context.",
-  "target": "RoyalArmory.orbletMarketBonuses public results and settled Storage.amountInStorage(\"Orblet\") direct parameter; Jelly_Operator 1.22",
+  "description": "Approved correctness #429: read-only Orblet current prices, progression, ordinary previews and exceptional numeric compatibility. Real paired save only; no purchase/map eligibility. All entries support active public-output or direct-parameter assertions. IIFEs explicitly bind idleon because idleon-debug-server.js:698-709 evaluates expressions containing the direct window cheat accessor without adding its normal idleon context.",
+  "target": "RoyalArmory.orbletMarketBonuses public results; Jelly_Operator 1.22",
   "extractions": [
     {
       "label": "orblet_market_cost_0",
@@ -146,11 +146,6 @@
       "label": "orblet_market_display_level_9",
       "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][9]); })()",
       "description": "Parchmore: ordinary current level presented by the list consumer after processing, compared through public getLevel(), not a raw save-array or copied-property assertion; converter as in delivered Thingies.1.22.js:70-76"
-    },
-    {
-      "label": "calculationStorage.amountInStorageOrblet",
-      "expression": "idleon.getAttr(\"PixelHelperActor\")[5].behaviors.getBehavior(\"ActorEvents_232\")._ItemsAndStorageOWNED.h.Orblet",
-      "description": "Actual game-owned account Orblet currency. Direct parameter comparison: settled Storage.amountInStorage(\"Orblet\"). Core consumers compare RoyalArmory.getOrbletsOwned and economic affordability (this count >= exact Thingies price), without shop/map eligibility."
     }
   ]
 }

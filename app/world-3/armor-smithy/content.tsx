@@ -45,23 +45,26 @@ function ArmorSmithy() {
                     />
                 </Box>
                 <Grid columns={{ count: "fit", size: "260px" }} gap="small">
-                    {visibleSets.map(set => (
-                        <ShadowBox
-                            key={set.data.name}
-                            background="dark-1"
-                            pad="small"
-                            gap="small"
-                            style={{ opacity: set.unlocked ? 1 : 0.5 }}
-                        >
-                            <Box direction="row" align="center" gap="small">
-                                <IconImage data={set.getImageData()} scale={0.6} />
-                                <Text size="small" weight="bold">
-                                    {set.data.name.toLowerCase().replace(/_/g, ' ').replace(/\b\w/g, character => character.toUpperCase())}
-                                </Text>
-                            </Box>
-                            <Text size="xsmall" role="description">{set.getDescription()}</Text>
-                        </ShadowBox>
-                    ))}
+                    {visibleSets.map(set => {
+                        const imageData = set.getImageData();
+                        return (
+                            <ShadowBox
+                                key={set.data.name}
+                                background="dark-1"
+                                pad="small"
+                                gap="small"
+                                style={{ opacity: set.unlocked ? 1 : 0.5 }}
+                            >
+                                <Box direction="row" align="center" gap="small">
+                                    {imageData && <IconImage data={imageData} scale={0.6} />}
+                                    <Text size="small" weight="bold">
+                                        {set.data.name.toLowerCase().replace(/_/g, ' ').replace(/\b\w/g, character => character.toUpperCase())}
+                                    </Text>
+                                </Box>
+                                <Text size="xsmall" role="description">{set.getDescription()}</Text>
+                            </ShadowBox>
+                        );
+                    })}
                 </Grid>
             </Box>
         </Box>

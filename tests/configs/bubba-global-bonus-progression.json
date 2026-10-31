@@ -18,11 +18,6 @@
       "description": "Bubba Boon upgrade 3 bonus directly used to choose the next ordered bonus"
     },
     {
-      "label": "meat_balance",
-      "expression": "idleon.engine.getGameAttribute(\"Bubba\")[0][0]",
-      "description": "Current meat slices available for the next Bubba Boon purchase"
-    },
-    {
       "label": "can_afford_next_bonus",
       "expression": "idleon.engine.getGameAttribute(\"Bubba\")[0][0] >= idleon.callFunction(\"Bubbastuff\", \"UpgCost\", 3, 0) ? 1 : 0",
       "description": "Whether current meat slices meet the game price for the next permanent Bubba Boon upgrade"

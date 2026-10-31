@@ -1,0 +1,16 @@
+{
+  "extractions": {
+    "building_work": {
+      "expression": "(() => { const tower=idleon.getAttr(\"TowerInfo\"), defs=idleon.getAttr(\"CustomLists\").h.TowerInfo; for (let slot=0;slot<8;slot++) { const index=Number(tower[54+slot]); if(index<0) continue; const level=Number(tower[index]), base=Number(defs[index][8]), maxLevel=base+idleon.callFunction(\"WorkbenchStuff\",\"ExtraMaxLvAtom\",base,index), progress=Number(tower[66+index]), required=idleon.callFunction(\"WorkbenchStuff\",\"TowerBuildReq\",index,0); if(level<maxLevel && level===Number(tower[index+27]) && progress<required) return {slot,index,level,progress,required,maxLevel}; } return null; })()",
+      "result": {
+        "slot": 0,
+        "index": 13,
+        "level": 192,
+        "progress": 6.764363193246196e+21,
+        "required": 7.308721068399508e+21,
+        "maxLevel": 280
+      }
+    }
+  },
+  "errors": {}
+}

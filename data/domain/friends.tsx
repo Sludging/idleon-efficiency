@@ -14,11 +14,13 @@ type FriendBonusData = FriendBonusBase["data"];
 type FriendBonusAssignment = {
   statIndex: number;
   accountLevel: number;
+  friendName: string;
 };
 
 /** A Friend Bonus stat backed by repository metadata. */
 export class FriendBonus {
   accountLevel: number = 0;
+  friendName: string = "";
   active: boolean = false;
   bonusMultiplier: number = 1;
 
@@ -39,23 +41,22 @@ export class FriendBonus {
   }
 }
 
-/**
- * Parses one account assignment in the form
- * "statIndex,accountLevel,friendName". Only the stat index and account level
- * affect the website calculation; the friend name remains display metadata.
- */
 const parseAssignment = (record: string): FriendBonusAssignment => {
-  const [rawStatIndex, rawAccountLevel] = record.split(",");
+  const [rawStatIndex, rawAccountLevel, friendName = ""] = record.split(",");
   return {
     statIndex: Number(rawStatIndex),
     accountLevel: Number(rawAccountLevel) || 0,
+    friendName,
   };
 };
 
 export class Friends extends Domain {
   bonuses: FriendBonus[] = [];
   friendBonusSlots: number = 0;
+  bonusMultiplier: number = 1;
   friendshipSlotBonus: number = 0;
+  slotSources = { base: 2, spearfish: 0, mrPig: 0, friendlySlot: 0, slotOfFriendship: 0 };
+  multiplierSources = { base: 1, mrPig: 0, spearfish: 0 };
 
   getRawKeys(): RawData[] {
     return [
@@ -74,11 +75,17 @@ export class Friends extends Domain {
     const optionList = data.get("OptLacc") as (number | string)[];
     const rawAssignments = (optionList[FRIEND_BONUS_ASSIGNMENTS_OPTION] as string) || "";
     const assignments = rawAssignments ? rawAssignments.split(";").map(parseAssignment) : [];
+    friends.bonuses.forEach(bonus => {
+      bonus.friendName = "";
+      bonus.accountLevel = 0;
+      bonus.active = false;
+    });
 
     assignments.forEach(assignment => {
       const bonus = friends.bonuses.find(bonus => bonus.index === assignment.statIndex);
       if (bonus) {
         bonus.accountLevel = assignment.accountLevel;
+        bonus.friendName = assignment.friendName;
         bonus.active = true;
       }
     });
@@ -101,13 +108,22 @@ export const updateFriends = (data: Map<string, unknown>) => {
   const friendlySlotBonus = eventShop.isBonusOwned(22) ? 1 : 0;
   friends.friendshipSlotBonus = Number(eventShop.isBonusOwned(67));
 
+  friends.slotSources.spearfish = spearfishBonus;
+  friends.slotSources.mrPig = 2 * mrPigBonus;
+  friends.slotSources.friendlySlot = friendlySlotBonus;
+  friends.slotSources.slotOfFriendship = friends.friendshipSlotBonus;
+  friends.multiplierSources.mrPig = 100 * mrPigBonus / 100;
+  friends.multiplierSources.spearfish = 25 * spearfishLevelTwo / 100;
+
   friends.friendBonusSlots = Math.round(
     Math.min(
       FRIEND_BONUS_SLOT_LIMIT,
-      2 + spearfishBonus + (2 * mrPigBonus + friendlySlotBonus + friends.friendshipSlotBonus),
+      friends.slotSources.base + friends.slotSources.spearfish
+      + (friends.slotSources.mrPig + friends.slotSources.friendlySlot + friends.slotSources.slotOfFriendship),
     ),
   );
 
-  const friendBonusMultiplier = 1 + (100 * mrPigBonus + 25 * spearfishLevelTwo) / 100;
-  friends.bonuses.forEach(bonus => bonus.bonusMultiplier = friendBonusMultiplier);
+  // Keep the combined percentage calculation to preserve arithmetic order.
+  friends.bonusMultiplier = friends.multiplierSources.base + (100 * mrPigBonus + 25 * spearfishLevelTwo) / 100;
+  friends.bonuses.forEach(bonus => bonus.bonusMultiplier = friends.bonusMultiplier);
 };

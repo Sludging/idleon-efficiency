@@ -12,13 +12,17 @@
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 23, 0)",
       "result": 1
     },
+    "jelly_rog_bonus_qty_36": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 36, 0)",
+      "result": 0
+    },
     "world_6_trophy_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"HaveW6Trophy\", 0, 0)",
       "result": 10
     },
     "palette_bonus_28": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 28, 0)",
-      "result": 5.829545454545454
+      "result": 11.659090909090908
     },
     "total_purple_sigils": {
       "expression": "idleon.callFunction(\"Labb\", \"TotalPurpleSigils\", \"0\", 0, 0)",
@@ -35,10 +39,6 @@
     "companion_88_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 88, 0)",
       "result": 1.5
-    },
-    "prismatic_multiplier": {
-      "expression": "idleon.callFunction(\"ArcaneType\", \"PrismaBonusMult\", 0, 0)",
-      "result": 3.1917711262956363
     }
   },
   "errors": {}

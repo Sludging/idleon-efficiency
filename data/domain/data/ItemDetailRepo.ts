@@ -11804,7 +11804,7 @@ export const initItemDetailRepo = () => {
                 "ID": 1009,
                 "Type": "Stamp",
                 "lvReqToCraft": 0,
-                "desc_line1": "BaseMinEff,add,2,0,10,EquipmentToolsHatchet1,1,2,35000,1.4,t1,{} Mining Efficiency,0",
+                "desc_line1": "BaseMinEff,add,2,0,10,EquipmentToolsHatchet1,1,2,35000,1.4,	1,{} Mining Efficiency,0",
                 "desc_line2": "Filler",
                 "desc_line3": "Filler",
                 "desc_line4": "Filler",

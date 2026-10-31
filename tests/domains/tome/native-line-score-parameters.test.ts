@@ -43,6 +43,12 @@ describe('Tome native line score inputs', () => {
     );
   });
 
+  it('includes every miniboss in the native Deathnote digit score', () => {
+    expect(getTomeLine(tome, 38).getPlayerScore(0)).toBe(
+      getExtractedValue(extractionResults, 'tome_pts_38'),
+    );
+  });
+
 
   tomeLineTests.forEach(({ index, description }) => {
     it(`matches ${description}`, () => {

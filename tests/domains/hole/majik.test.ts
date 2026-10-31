@@ -1,7 +1,9 @@
+import type { Player } from '../../../data/domain/player';
 import type { Hole } from '../../../data/domain/world-5/hole/hole';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import type { ExtractionResults } from '../../utils/live-game-data-loader';
 import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
+import { getTargetPlayer } from '../../utils/target-player';
 import { captured, coreNumber } from './part1-test-helpers';
 import type { CapturedMajik, CapturedMajikPool } from './part2-test-helpers';
 import { compareCore } from './part2-test-helpers';
@@ -47,9 +49,11 @@ it('matches the final Majik point pool, upgrade caps, and bonuses', () => {
   });
  });
 
-it('matches paired Pocket Divinity All Stat contribution', () => {
-  coreNumber(hole.majiks.pocketDivinity.getDootAllStatPercent(), results,
-   'pocket_all_stat', 'Pocket Divinity All Stat contribution');
+it('matches the selected character’s paired Pocket Divinity All Stat contribution', () => {
+  const target = getTargetPlayer(data.get('players') as Player[]);
+  const character = hole.majiks.pocketDivinity.characters.find(record => record.playerId === target.playerID)!;
+  coreNumber(character.allStatPercent, results,
+   'pocket_all_stat', 'Pocket Divinity selected character All Stat contribution');
  });
 
 });

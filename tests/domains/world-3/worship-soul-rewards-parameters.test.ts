@@ -14,7 +14,6 @@ import {
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { getTargetPlayer } from '../../utils/target-player';
 import type { Bubba } from '../../../data/domain/world-3/bubba';
-import type { EquipmentSets } from '../../../data/domain/misc/equipmentSets';
 import type { Arcade } from '../../../data/domain/world-2/arcade';
 import type { UpgradeVault } from '../../../data/domain/upgradeVault';
 const saveName = 'latest';
@@ -62,16 +61,6 @@ const parameterSpecs = {
     domainExtractor: (gameData: Map<string, any>) => {
       const bubba = gameData.get("bubba") as Bubba;
       return bubba.getGlobalBonus(3);
-    }
-  },
-
-  dementia_set_bonus: {
-    description: 'Dementia equipment set bonus',
-    extractionKey: 'dementia_set_bonus',
-    domainExtractor: (gameData: Map<string, any>) => {
-      const equipmentSets = gameData.get("equipmentSets") as EquipmentSets;
-      const dementiaSet = equipmentSets.equipmentSets.find(set => set.data.name == "DEMENTIA_SET");
-      return dementiaSet?.getBonus(true) || 0;
     }
   },
 

@@ -4,8 +4,8 @@
   "extractions": [
     {
       "label": "alchemy_bubble_y2active",
-      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.Y2ACTIVE",
-      "description": "Big P Alchemy bubble that increases linked-god passive bonuses"
+      "expression": "Math.max(1, Number(idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.Y2ACTIVE ?? 0))",
+      "description": "Effective Big P multiplier used for linked-god passive bonuses"
     },
     {
       "label": "clamworks_bonus_3",

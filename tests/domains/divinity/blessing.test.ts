@@ -4,8 +4,8 @@
  */
 import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { Divinity } from '../../../data/domain/divinity';
-import { Player } from '../../../data/domain/player';
+import { Divinity, NobisectGod } from '../../../data/domain/world-5/divinity';
+import type { Player } from '../../../data/domain/player';
 import { getTargetPlayer } from '../../utils/target-player';
 const saveName = 'latest';
 const extractionResultsName = 'divinity-blessing-data.json';
@@ -33,6 +33,14 @@ describe('Divinity Domain - Blessing Bonus', () => {
   } catch (error: any) {
    throw new Error(`❌ Failed to load save data: ${error.message}`);
   }
+ });
+
+ describe('Nobisect blessing context', () => {
+  it('returns zero without player context', () => {
+   const god = divinity.gods[2] as NobisectGod;
+
+   expect(god.getBlessingBonus()).toBe(0);
+  });
  });
 
  describe('Blessing Bonus Calculations', () => {

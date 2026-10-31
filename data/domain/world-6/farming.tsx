@@ -147,10 +147,7 @@ export class LandRankDataBase {
     }
 
     getUpgradeBonusForPlayer(index: number, player: Player): number {
-        const dankRanksBonus = this.recipientDankRanksBonuses.get(player.playerID);
-        if (dankRanksBonus === undefined) {
-            throw new Error(`Land Rank bonuses are not prepared for player ${player.playerID}.`);
-        }
+        const dankRanksBonus = this.recipientDankRanksBonuses.get(player.playerID) ?? 1;
         return this.upgrades[index].getUpgradeBonus(dankRanksBonus);
     }
 

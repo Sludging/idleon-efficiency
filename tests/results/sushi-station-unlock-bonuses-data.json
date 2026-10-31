@@ -31,8 +31,8 @@
     "sushi_game_version": {
       "expression": "idleon.getGameVersion()",
       "result": {
-        "title": "Luminous_Menagerie",
-        "version": "1.23"
+        "title": "Halloween_Event",
+        "version": "1.24"
       }
     }
   },

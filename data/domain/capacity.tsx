@@ -497,7 +497,6 @@ export function updateCapacity(data: Map<string, any>) {
     const bribeCapBonus = bribes.find(bribe => bribe.name == "Bottomless Bags")?.status == BribeStatus.Purchased ? 5 : 0;
     const zergPrayer = prayers[4];
     const ruckSackPrayer = prayers[12];
-    const allCapStampBonus = stamps.find((stamp) => stamp.raw_name == CapacityConst.AllCarryStamp)?.getBonus() ?? 0;
     const gemCapacityBonus = gemStore.purchases[58].pucrhased;
     const vaultBonus = upgradeVault.getBonusForId(17);
 
@@ -506,6 +505,7 @@ export function updateCapacity(data: Map<string, any>) {
         const currentPlayerInfo = capacity.players[player.playerID];
 
         if (currentPlayerInfo) {
+            const allCapStampBonus = stamps.find(stamp => stamp.raw_name == CapacityConst.AllCarryStamp)?.getBonusForPlayer(player) ?? 0;
             const telekineticStorageBonus = player.getTalentBonus(CapacityConst.TelekineticStorageSkillIndex);
             const extraBagsTalentBonus = player.getTalentBonus(CapacityConst.ExtraBagsSkillIndex);
             const starSignExtraCap = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Carry Cap"), 0);
@@ -528,8 +528,7 @@ export function updateCapacity(data: Map<string, any>) {
                 }
                 let stampBonus = 0;
                 if (playerBag.stampName) {
-                    const skillLevel = playerBag.skill && player.skills.get(playerBag.skill)?.level
-                    stampBonus = stamps.find(stamp => stamp.raw_name == playerBag.stampName)?.getBonus(skillLevel) ?? 0;
+                    stampBonus = stamps.find(stamp => stamp.raw_name == playerBag.stampName)?.getBonusForPlayer(player) ?? 0;
                 }
 
                 playerBag.setCapacity({

@@ -1,0 +1,78 @@
+{
+  "extractions": {
+    "trimmed_slot_count": {
+      "expression": "idleon.callFunction('WorkbenchStuff', 'TotalGildedSlots', 0, 0)",
+      "result": 6
+    },
+    "trimmed_slot_minehead": {
+      "expression": "idleon.callFunction('Minehead', 'BonusQTY', 18, 0)",
+      "result": 0
+    },
+    "trimmed_slot_lab": {
+      "expression": "idleon.callFunction('MainframeBonus', 103)",
+      "result": 9.600000000000001
+    },
+    "trimmed_slot_atom": {
+      "expression": "idleon.getAttr('Atoms')[6]",
+      "result": 50
+    },
+    "trimmed_slot_legend": {
+      "expression": "idleon.callFunction('Thingies', 'LegendPTS_bonus', 33, 0)",
+      "result": 225
+    },
+    "trimmed_slot_gambit": {
+      "expression": "idleon.callFunction('Holes', 'GambitBonuses', 9, 0)",
+      "result": 1
+    },
+    "trimmed_slot_event": {
+      "expression": "idleon.callFunction('Summoning', 'EventShopOwned', 14, 0)",
+      "result": 1
+    },
+    "building_slot_assignments": {
+      "expression": "idleon.getAttr('TowerInfo').slice(54, 62)",
+      "result": [
+        13,
+        11,
+        12,
+        16,
+        9,
+        14,
+        10,
+        17
+      ]
+    },
+    "building_levels": {
+      "expression": "idleon.getAttr('TowerInfo').slice(0, 27)",
+      "result": [
+        11,
+        201,
+        51,
+        11,
+        25,
+        60,
+        50,
+        5,
+        200,
+        158,
+        150,
+        180,
+        186,
+        192,
+        192,
+        182,
+        192,
+        97,
+        300,
+        300,
+        300,
+        300,
+        300,
+        200,
+        200,
+        200,
+        200
+      ]
+    }
+  },
+  "errors": {}
+}

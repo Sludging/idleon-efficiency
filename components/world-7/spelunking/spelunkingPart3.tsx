@@ -132,25 +132,26 @@ function formatSourceBonus(value: number): string {
     return fraction ? `${groupedInteger}.${fraction}` : groupedInteger;
 }
 
+const sourceCountBindings: Record<number, (spelunking: Spelunking) => number> = {
+    1: spelunking => spelunking.getTotalDiscoveries(),
+    2: spelunking => spelunking.bestDepthTotal,
+    3: spelunking => spelunking.biggestHaulDigitTotal,
+    8: spelunking => spelunking.spelunkingSkillLevelTotal,
+    9: spelunking => spelunking.bestDepthTotal,
+    10: spelunking => spelunking.getTotalDiscoveries(),
+    54: spelunking => spelunking.manic.totalDepth,
+    55: spelunking => spelunking.manic.totalDepth,
+    56: spelunking => spelunking.manic.totalDepth,
+};
+
+const shopDetailBindings: Record<number, (spelunking: Spelunking) => number> = {
+    27: spelunking => spelunking.exaltedStampFragments,
+    28: spelunking => spelunking.prismaBubblesFound,
+    40: spelunking => spelunking.bestUnlockedTool.data.damageMultiplier,
+};
+
 function sourceCount(upgrade: Upgrade, spelunking: Spelunking): string {
-    switch (upgrade.index) {
-        case 1:
-        case 10:
-            return commaNotation(spelunking.getTotalDiscoveries());
-        case 2:
-        case 9:
-            return commaNotation(spelunking.bestDepthTotal);
-        case 3:
-            return commaNotation(spelunking.biggestHaulDigitTotal);
-        case 8:
-            return commaNotation(spelunking.spelunkingSkillLevelTotal);
-        case 54:
-        case 55:
-        case 56:
-            return commaNotation(spelunking.manic.totalDepth);
-        default:
-            throw new Error(`No Spelunking count binding for upgrade ${upgrade.index}`);
-    }
+    return commaNotation(sourceCountBindings[upgrade.index](spelunking));
 }
 
 function sourceDollar(upgrade: Upgrade, spelunking: Spelunking): string {
@@ -197,11 +198,7 @@ function getShopDescriptionPieces(
 
     return pieces.flatMap(piece => {
         if (piece === '#') {
-            let value: string;
-            if (upgrade.index === 27) value = commaNotation(spelunking.exaltedStampFragments);
-            else if (upgrade.index === 28) value = commaNotation(spelunking.prismaBubblesFound);
-            else if (upgrade.index === 40) value = commaNotation(spelunking.bestUnlockedTool.data.damageMultiplier);
-            else throw new Error(`No Spelunking detail binding for upgrade ${upgrade.index}`);
+            const value = commaNotation(shopDetailBindings[upgrade.index](spelunking));
             return [{ text: value, emphasize: false }];
         }
 

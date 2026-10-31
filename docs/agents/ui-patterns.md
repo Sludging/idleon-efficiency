@@ -131,6 +131,10 @@ Shared primitives alone do not establish a new composition convention.
   use `useShallow` and select only displayed values. A view reading the mutable domain `Map`
   retains its `lastUpdated` refresh dependency. This is separate from the save timestamp used
   for elapsed-time displays.
+- For render-time countdown calculations, use [useCurrentTime](../../lib/hooks/useCurrentTime.ts).
+  It returns Unix time in milliseconds and updates once per second. Its server snapshot is
+  `undefined`. Keep available content visible while the clock starts. Refinery estimates use
+  saved values until a client snapshot supplies elapsed time.
 - Shared account loading runs in [appDataStore](../../lib/stores/appDataStore.tsx), initialized
   through [AppDataStoreProvider / useAppDataStore](../../lib/providers/appDataStoreProvider.tsx).
   The provider wraps routes in [the root layout](../../app/layout.tsx).

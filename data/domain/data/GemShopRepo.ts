@@ -7,7 +7,7 @@ export class GemShopItemBase { constructor(public index: number, public data: Ge
 export const initGemShopRepo = () => {
     return [    
         new GemShopItemBase(0, <GemShopItemModel>{
-                "section": "Hats",
+                "section": "Caverns",
                 "name": "Quest90",
                 "mtxName": "2 Hour Lantern",
                 "itemDisplayName": "Blinding Lantern",
@@ -16,10 +16,14 @@ export const initGemShopRepo = () => {
                 "no": 0,
                 "maxPurchases": 8,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 0,
+                "slot": 0,
+                "isOffer": true
             }),
         new GemShopItemBase(1, <GemShopItemModel>{
-                "section": "Hats",
+                "section": "Caverns",
                 "name": "GemP40",
                 "mtxName": "Parallel Villagers",
                 "itemDisplayName": "",
@@ -28,10 +32,14 @@ export const initGemShopRepo = () => {
                 "no": 1,
                 "maxPurchases": 5,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 0,
+                "slot": 1,
+                "isOffer": true
             }),
         new GemShopItemBase(2, <GemShopItemModel>{
-                "section": "Hats",
+                "section": "Caverns",
                 "name": "GemP41",
                 "mtxName": "Resource Boost",
                 "itemDisplayName": "",
@@ -40,10 +48,14 @@ export const initGemShopRepo = () => {
                 "no": 2,
                 "maxPurchases": 10,
                 "qty": 0,
-                "costIncrement": 15
+                "costIncrement": 15,
+                "groupId": 0,
+                "sectionId": 0,
+                "slot": 2,
+                "isOffer": true
             }),
         new GemShopItemBase(3, <GemShopItemModel>{
-                "section": "Hats",
+                "section": "Caverns",
                 "name": "Blank",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "ERROR",
@@ -52,10 +64,14 @@ export const initGemShopRepo = () => {
                 "no": 3,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 0,
+                "slot": 3,
+                "isOffer": false
             }),
         new GemShopItemBase(4, <GemShopItemModel>{
-                "section": "Hats",
+                "section": "Caverns",
                 "name": "GemP42",
                 "mtxName": "Conjuror Pts",
                 "itemDisplayName": "",
@@ -64,10 +80,14 @@ export const initGemShopRepo = () => {
                 "no": 4,
                 "maxPurchases": 12,
                 "qty": 0,
-                "costIncrement": 15
+                "costIncrement": 15,
+                "groupId": 0,
+                "sectionId": 0,
+                "slot": 4,
+                "isOffer": true
             }),
         new GemShopItemBase(5, <GemShopItemModel>{
-                "section": "Hats",
+                "section": "Caverns",
                 "name": "GemP43",
                 "mtxName": "Opal",
                 "itemDisplayName": "",
@@ -76,10 +96,14 @@ export const initGemShopRepo = () => {
                 "no": 5,
                 "maxPurchases": 60,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 0,
+                "slot": 5,
+                "isOffer": true
             }),
         new GemShopItemBase(6, <GemShopItemModel>{
-                "section": "Hats",
+                "section": "Caverns",
                 "name": "Blank",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "ERROR",
@@ -88,10 +112,14 @@ export const initGemShopRepo = () => {
                 "no": 6,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 0,
+                "slot": 6,
+                "isOffer": false
             }),
         new GemShopItemBase(7, <GemShopItemModel>{
-                "section": "Hats",
+                "section": "Caverns",
                 "name": "Blank",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "ERROR",
@@ -100,10 +128,14 @@ export const initGemShopRepo = () => {
                 "no": 7,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 0,
+                "slot": 7,
+                "isOffer": false
             }),
         new GemShopItemBase(8, <GemShopItemModel>{
-                "section": "Chat Rings",
+                "section": "Time Skips",
                 "name": "Quest72",
                 "mtxName": "Bottled Wind",
                 "itemDisplayName": "Bottled Wind",
@@ -112,10 +144,14 @@ export const initGemShopRepo = () => {
                 "no": 128,
                 "maxPurchases": 4,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 1,
+                "slot": 0,
+                "isOffer": true
             }),
         new GemShopItemBase(9, <GemShopItemModel>{
-                "section": "Chat Rings",
+                "section": "Time Skips",
                 "name": "Quest73",
                 "mtxName": "Gaming Fertilizer",
                 "itemDisplayName": "Gaming Fertilizer",
@@ -124,10 +160,14 @@ export const initGemShopRepo = () => {
                 "no": 132,
                 "maxPurchases": 2,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 1,
+                "slot": 1,
+                "isOffer": true
             }),
         new GemShopItemBase(10, <GemShopItemModel>{
-                "section": "Chat Rings",
+                "section": "Time Skips",
                 "name": "GemP30",
                 "mtxName": "Sand Of Time",
                 "itemDisplayName": "Sand of Time",
@@ -136,10 +176,14 @@ export const initGemShopRepo = () => {
                 "no": 138,
                 "maxPurchases": 6,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 1,
+                "slot": 2,
+                "isOffer": true
             }),
         new GemShopItemBase(11, <GemShopItemModel>{
-                "section": "Chat Rings",
+                "section": "Time Skips",
                 "name": "Quest81",
                 "mtxName": "Compost Bag",
                 "itemDisplayName": "Compost Bag",
@@ -148,10 +192,14 @@ export const initGemShopRepo = () => {
                 "no": 150,
                 "maxPurchases": 2,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 1,
+                "slot": 3,
+                "isOffer": true
             }),
         new GemShopItemBase(12, <GemShopItemModel>{
-                "section": "Chat Rings",
+                "section": "Time Skips",
                 "name": "Quest82",
                 "mtxName": "Summoner Stone",
                 "itemDisplayName": "Summoner Stone",
@@ -160,10 +208,14 @@ export const initGemShopRepo = () => {
                 "no": 151,
                 "maxPurchases": 9,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 1,
+                "slot": 4,
+                "isOffer": true
             }),
         new GemShopItemBase(13, <GemShopItemModel>{
-                "section": "Chat Rings",
+                "section": "Time Skips",
                 "name": "Quest108",
                 "mtxName": "Stamina Battery",
                 "itemDisplayName": "Stamina Battery",
@@ -172,10 +224,14 @@ export const initGemShopRepo = () => {
                 "no": 13,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 1,
+                "slot": 5,
+                "isOffer": true
             }),
         new GemShopItemBase(14, <GemShopItemModel>{
-                "section": "Chat Rings",
+                "section": "Time Skips",
                 "name": "Blank",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "ERROR",
@@ -184,10 +240,14 @@ export const initGemShopRepo = () => {
                 "no": 14,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 1,
+                "slot": 6,
+                "isOffer": false
             }),
         new GemShopItemBase(15, <GemShopItemModel>{
-                "section": "Chat Rings",
+                "section": "Time Skips",
                 "name": "Blank",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "ERROR",
@@ -196,10 +256,14 @@ export const initGemShopRepo = () => {
                 "no": 15,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 1,
+                "slot": 7,
+                "isOffer": false
             }),
         new GemShopItemBase(16, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "StonePremSTR",
                 "mtxName": "Str Stone",
                 "itemDisplayName": "Premium STR Stone",
@@ -208,10 +272,14 @@ export const initGemShopRepo = () => {
                 "no": 95,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 2,
+                "slot": 0,
+                "isOffer": true
             }),
         new GemShopItemBase(17, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "StonePremAGI",
                 "mtxName": "Agi Stone",
                 "itemDisplayName": "Premium AGI Stone",
@@ -220,10 +288,14 @@ export const initGemShopRepo = () => {
                 "no": 96,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 2,
+                "slot": 1,
+                "isOffer": true
             }),
         new GemShopItemBase(18, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "StonePremWIS",
                 "mtxName": "Wis Stone",
                 "itemDisplayName": "Premium WIS Stone",
@@ -232,10 +304,14 @@ export const initGemShopRepo = () => {
                 "no": 97,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 2,
+                "slot": 2,
+                "isOffer": true
             }),
         new GemShopItemBase(19, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "StonePremLUK",
                 "mtxName": "Luk Stone",
                 "itemDisplayName": "Premium LUK Stone",
@@ -244,10 +320,14 @@ export const initGemShopRepo = () => {
                 "no": 98,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 2,
+                "slot": 3,
+                "isOffer": true
             }),
         new GemShopItemBase(20, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "Blank",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "ERROR",
@@ -256,10 +336,14 @@ export const initGemShopRepo = () => {
                 "no": 99,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 2,
+                "slot": 4,
+                "isOffer": false
             }),
         new GemShopItemBase(21, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "Ht",
                 "mtxName": "Hat Premiumifier",
                 "itemDisplayName": "Hat Premiumifier",
@@ -268,10 +352,14 @@ export const initGemShopRepo = () => {
                 "no": 100,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 2,
+                "slot": 5,
+                "isOffer": true
             }),
         new GemShopItemBase(22, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "StonePremStatswap",
                 "mtxName": "Premium Hat Swapper",
                 "itemDisplayName": "Premium Bonus Swapper",
@@ -280,10 +368,14 @@ export const initGemShopRepo = () => {
                 "no": 101,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 2,
+                "slot": 6,
+                "isOffer": true
             }),
         new GemShopItemBase(23, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "StonePremRestore",
                 "mtxName": "Premium Stone Refund",
                 "itemDisplayName": "Premium Stone Refunder",
@@ -292,10 +384,14 @@ export const initGemShopRepo = () => {
                 "no": 102,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 2,
+                "slot": 7,
+                "isOffer": true
             }),
         new GemShopItemBase(24, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentHats1",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "Farmer Brim",
@@ -304,10 +400,14 @@ export const initGemShopRepo = () => {
                 "no": 16,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 3,
+                "slot": 0,
+                "isOffer": false
             }),
         new GemShopItemBase(25, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentHats1",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "Farmer Brim",
@@ -316,10 +416,14 @@ export const initGemShopRepo = () => {
                 "no": 17,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 3,
+                "slot": 1,
+                "isOffer": false
             }),
         new GemShopItemBase(26, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentHats1",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "Farmer Brim",
@@ -328,10 +432,14 @@ export const initGemShopRepo = () => {
                 "no": 18,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 3,
+                "slot": 2,
+                "isOffer": false
             }),
         new GemShopItemBase(27, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentHats1",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "Farmer Brim",
@@ -340,10 +448,14 @@ export const initGemShopRepo = () => {
                 "no": 19,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 3,
+                "slot": 3,
+                "isOffer": false
             }),
         new GemShopItemBase(28, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentHats1",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "Farmer Brim",
@@ -352,10 +464,14 @@ export const initGemShopRepo = () => {
                 "no": 20,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 3,
+                "slot": 4,
+                "isOffer": false
             }),
         new GemShopItemBase(29, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentHats1",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "Farmer Brim",
@@ -364,10 +480,14 @@ export const initGemShopRepo = () => {
                 "no": 21,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 3,
+                "slot": 5,
+                "isOffer": false
             }),
         new GemShopItemBase(30, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentHats1",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "Farmer Brim",
@@ -376,10 +496,14 @@ export const initGemShopRepo = () => {
                 "no": 22,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 3,
+                "slot": 6,
+                "isOffer": false
             }),
         new GemShopItemBase(31, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentHats1",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "Farmer Brim",
@@ -388,10 +512,14 @@ export const initGemShopRepo = () => {
                 "no": 23,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 3,
+                "slot": 7,
+                "isOffer": false
             }),
         new GemShopItemBase(32, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentHats1",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "Farmer Brim",
@@ -400,10 +528,14 @@ export const initGemShopRepo = () => {
                 "no": 32,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 4,
+                "slot": 0,
+                "isOffer": false
             }),
         new GemShopItemBase(33, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentHats1",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "Farmer Brim",
@@ -412,10 +544,14 @@ export const initGemShopRepo = () => {
                 "no": 33,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 4,
+                "slot": 1,
+                "isOffer": false
             }),
         new GemShopItemBase(34, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentHats1",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "Farmer Brim",
@@ -424,10 +560,14 @@ export const initGemShopRepo = () => {
                 "no": 34,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 4,
+                "slot": 2,
+                "isOffer": false
             }),
         new GemShopItemBase(35, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentHats1",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "Farmer Brim",
@@ -436,10 +576,14 @@ export const initGemShopRepo = () => {
                 "no": 35,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 4,
+                "slot": 3,
+                "isOffer": false
             }),
         new GemShopItemBase(36, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentHats1",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "Farmer Brim",
@@ -448,10 +592,14 @@ export const initGemShopRepo = () => {
                 "no": 36,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 4,
+                "slot": 4,
+                "isOffer": false
             }),
         new GemShopItemBase(37, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentHats1",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "Farmer Brim",
@@ -460,10 +608,14 @@ export const initGemShopRepo = () => {
                 "no": 37,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 4,
+                "slot": 5,
+                "isOffer": false
             }),
         new GemShopItemBase(38, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentHats1",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "Farmer Brim",
@@ -472,10 +624,14 @@ export const initGemShopRepo = () => {
                 "no": 38,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 4,
+                "slot": 6,
+                "isOffer": false
             }),
         new GemShopItemBase(39, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentHats1",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "Farmer Brim",
@@ -484,10 +640,14 @@ export const initGemShopRepo = () => {
                 "no": 39,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 4,
+                "slot": 7,
+                "isOffer": false
             }),
         new GemShopItemBase(40, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentRingsChat1",
                 "mtxName": "Lovers Chat Ring",
                 "itemDisplayName": "Love Ring",
@@ -496,10 +656,14 @@ export const initGemShopRepo = () => {
                 "no": 24,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 5,
+                "slot": 0,
+                "isOffer": true
             }),
         new GemShopItemBase(41, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentRingsChat2",
                 "mtxName": "All Natural Chat Ring",
                 "itemDisplayName": "Leafy Ring",
@@ -508,10 +672,14 @@ export const initGemShopRepo = () => {
                 "no": 25,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 5,
+                "slot": 1,
+                "isOffer": true
             }),
         new GemShopItemBase(42, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentRingsChat4",
                 "mtxName": "Bandit Bob Chat Ring",
                 "itemDisplayName": "Bob Ring",
@@ -520,10 +688,14 @@ export const initGemShopRepo = () => {
                 "no": 26,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 5,
+                "slot": 2,
+                "isOffer": true
             }),
         new GemShopItemBase(43, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentRingsChat5",
                 "mtxName": "Bubble Pop Chat Ring",
                 "itemDisplayName": "Bubble Ring",
@@ -532,10 +704,14 @@ export const initGemShopRepo = () => {
                 "no": 27,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 5,
+                "slot": 3,
+                "isOffer": true
             }),
         new GemShopItemBase(44, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentRingsChat6",
                 "mtxName": "Eyes Of Cthulu Chat Ring",
                 "itemDisplayName": "Cthulu's Ring",
@@ -544,10 +720,14 @@ export const initGemShopRepo = () => {
                 "no": 28,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 5,
+                "slot": 4,
+                "isOffer": true
             }),
         new GemShopItemBase(45, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentRingsChat3",
                 "mtxName": "Money Talks Chat Ring",
                 "itemDisplayName": "Wealth Ring",
@@ -556,10 +736,14 @@ export const initGemShopRepo = () => {
                 "no": 31,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 5,
+                "slot": 5,
+                "isOffer": true
             }),
         new GemShopItemBase(46, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "EquipmentRingsChat9",
                 "mtxName": "Honk Ring",
                 "itemDisplayName": "HONK Ring",
@@ -568,10 +752,14 @@ export const initGemShopRepo = () => {
                 "no": 29,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 5,
+                "slot": 6,
+                "isOffer": true
             }),
         new GemShopItemBase(47, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "",
                 "name": "Blank",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "ERROR",
@@ -580,7 +768,11 @@ export const initGemShopRepo = () => {
                 "no": 30,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 0,
+                "sectionId": 5,
+                "slot": 7,
+                "isOffer": false
             }),
         new GemShopItemBase(48, <GemShopItemModel>{
                 "section": "Time Candy",
@@ -592,7 +784,11 @@ export const initGemShopRepo = () => {
                 "no": 47,
                 "maxPurchases": 4,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 0,
+                "slot": 0,
+                "isOffer": true
             }),
         new GemShopItemBase(49, <GemShopItemModel>{
                 "section": "Time Candy",
@@ -604,7 +800,11 @@ export const initGemShopRepo = () => {
                 "no": 48,
                 "maxPurchases": 4,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 0,
+                "slot": 1,
+                "isOffer": true
             }),
         new GemShopItemBase(50, <GemShopItemModel>{
                 "section": "Time Candy",
@@ -616,7 +816,11 @@ export const initGemShopRepo = () => {
                 "no": 49,
                 "maxPurchases": 4,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 0,
+                "slot": 2,
+                "isOffer": true
             }),
         new GemShopItemBase(51, <GemShopItemModel>{
                 "section": "Time Candy",
@@ -628,7 +832,11 @@ export const initGemShopRepo = () => {
                 "no": 50,
                 "maxPurchases": 4,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 0,
+                "slot": 3,
+                "isOffer": true
             }),
         new GemShopItemBase(52, <GemShopItemModel>{
                 "section": "Time Candy",
@@ -640,7 +848,11 @@ export const initGemShopRepo = () => {
                 "no": 51,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 0,
+                "slot": 4,
+                "isOffer": false
             }),
         new GemShopItemBase(53, <GemShopItemModel>{
                 "section": "Time Candy",
@@ -652,7 +864,11 @@ export const initGemShopRepo = () => {
                 "no": 52,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 0,
+                "slot": 5,
+                "isOffer": false
             }),
         new GemShopItemBase(54, <GemShopItemModel>{
                 "section": "Time Candy",
@@ -664,7 +880,11 @@ export const initGemShopRepo = () => {
                 "no": 53,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 0,
+                "slot": 6,
+                "isOffer": false
             }),
         new GemShopItemBase(55, <GemShopItemModel>{
                 "section": "Time Candy",
@@ -676,7 +896,11 @@ export const initGemShopRepo = () => {
                 "no": 54,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 0,
+                "slot": 7,
+                "isOffer": false
             }),
         new GemShopItemBase(56, <GemShopItemModel>{
                 "section": "Inventory & Storage",
@@ -688,7 +912,11 @@ export const initGemShopRepo = () => {
                 "no": 55,
                 "maxPurchases": 6,
                 "qty": 1,
-                "costIncrement": 25
+                "costIncrement": 25,
+                "groupId": 1,
+                "sectionId": 1,
+                "slot": 0,
+                "isOffer": true
             }),
         new GemShopItemBase(57, <GemShopItemModel>{
                 "section": "Inventory & Storage",
@@ -700,7 +928,11 @@ export const initGemShopRepo = () => {
                 "no": 56,
                 "maxPurchases": 12,
                 "qty": 1,
-                "costIncrement": 25
+                "costIncrement": 25,
+                "groupId": 1,
+                "sectionId": 1,
+                "slot": 1,
+                "isOffer": true
             }),
         new GemShopItemBase(58, <GemShopItemModel>{
                 "section": "Inventory & Storage",
@@ -712,7 +944,11 @@ export const initGemShopRepo = () => {
                 "no": 58,
                 "maxPurchases": 10,
                 "qty": 0,
-                "costIncrement": 25
+                "costIncrement": 25,
+                "groupId": 1,
+                "sectionId": 1,
+                "slot": 2,
+                "isOffer": true
             }),
         new GemShopItemBase(59, <GemShopItemModel>{
                 "section": "Inventory & Storage",
@@ -724,7 +960,11 @@ export const initGemShopRepo = () => {
                 "no": 59,
                 "maxPurchases": 2,
                 "qty": 0,
-                "costIncrement": 300
+                "costIncrement": 300,
+                "groupId": 1,
+                "sectionId": 1,
+                "slot": 3,
+                "isOffer": true
             }),
         new GemShopItemBase(60, <GemShopItemModel>{
                 "section": "Inventory & Storage",
@@ -736,7 +976,11 @@ export const initGemShopRepo = () => {
                 "no": 60,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 1,
+                "slot": 4,
+                "isOffer": false
             }),
         new GemShopItemBase(61, <GemShopItemModel>{
                 "section": "Inventory & Storage",
@@ -748,7 +992,11 @@ export const initGemShopRepo = () => {
                 "no": 109,
                 "maxPurchases": 10,
                 "qty": 1,
-                "costIncrement": 12
+                "costIncrement": 12,
+                "groupId": 1,
+                "sectionId": 1,
+                "slot": 5,
+                "isOffer": true
             }),
         new GemShopItemBase(62, <GemShopItemModel>{
                 "section": "Inventory & Storage",
@@ -760,7 +1008,11 @@ export const initGemShopRepo = () => {
                 "no": 66,
                 "maxPurchases": 5,
                 "qty": 0,
-                "costIncrement": 160
+                "costIncrement": 160,
+                "groupId": 1,
+                "sectionId": 1,
+                "slot": 6,
+                "isOffer": true
             }),
         new GemShopItemBase(63, <GemShopItemModel>{
                 "section": "Inventory & Storage",
@@ -772,7 +1024,11 @@ export const initGemShopRepo = () => {
                 "no": 62,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 1,
+                "slot": 7,
+                "isOffer": false
             }),
         new GemShopItemBase(64, <GemShopItemModel>{
                 "section": "Dailies N' Resets",
@@ -784,7 +1040,11 @@ export const initGemShopRepo = () => {
                 "no": 71,
                 "maxPurchases": 10,
                 "qty": 0,
-                "costIncrement": 40
+                "costIncrement": 40,
+                "groupId": 1,
+                "sectionId": 2,
+                "slot": 0,
+                "isOffer": true
             }),
         new GemShopItemBase(65, <GemShopItemModel>{
                 "section": "Dailies N' Resets",
@@ -796,7 +1056,11 @@ export const initGemShopRepo = () => {
                 "no": 72,
                 "maxPurchases": 4,
                 "qty": 0,
-                "costIncrement": 50
+                "costIncrement": 50,
+                "groupId": 1,
+                "sectionId": 2,
+                "slot": 1,
+                "isOffer": true
             }),
         new GemShopItemBase(66, <GemShopItemModel>{
                 "section": "Dailies N' Resets",
@@ -808,7 +1072,11 @@ export const initGemShopRepo = () => {
                 "no": 73,
                 "maxPurchases": 10,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 2,
+                "slot": 2,
+                "isOffer": true
             }),
         new GemShopItemBase(67, <GemShopItemModel>{
                 "section": "Dailies N' Resets",
@@ -820,7 +1088,11 @@ export const initGemShopRepo = () => {
                 "no": 74,
                 "maxPurchases": 3,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 2,
+                "slot": 3,
+                "isOffer": true
             }),
         new GemShopItemBase(68, <GemShopItemModel>{
                 "section": "Dailies N' Resets",
@@ -832,7 +1104,11 @@ export const initGemShopRepo = () => {
                 "no": 75,
                 "maxPurchases": 2,
                 "qty": 1,
-                "costIncrement": 250
+                "costIncrement": 250,
+                "groupId": 1,
+                "sectionId": 2,
+                "slot": 4,
+                "isOffer": true
             }),
         new GemShopItemBase(69, <GemShopItemModel>{
                 "section": "Dailies N' Resets",
@@ -844,7 +1120,11 @@ export const initGemShopRepo = () => {
                 "no": 76,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 2,
+                "slot": 5,
+                "isOffer": true
             }),
         new GemShopItemBase(70, <GemShopItemModel>{
                 "section": "Dailies N' Resets",
@@ -856,7 +1136,11 @@ export const initGemShopRepo = () => {
                 "no": 77,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 2,
+                "slot": 6,
+                "isOffer": false
             }),
         new GemShopItemBase(71, <GemShopItemModel>{
                 "section": "Dailies N' Resets",
@@ -868,7 +1152,11 @@ export const initGemShopRepo = () => {
                 "no": 78,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 2,
+                "slot": 7,
+                "isOffer": true
             }),
         new GemShopItemBase(72, <GemShopItemModel>{
                 "section": "Cards",
@@ -880,7 +1168,11 @@ export const initGemShopRepo = () => {
                 "no": 64,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 3,
+                "slot": 0,
+                "isOffer": true
             }),
         new GemShopItemBase(73, <GemShopItemModel>{
                 "section": "Cards",
@@ -892,7 +1184,11 @@ export const initGemShopRepo = () => {
                 "no": 65,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 3,
+                "slot": 1,
+                "isOffer": true
             }),
         new GemShopItemBase(74, <GemShopItemModel>{
                 "section": "Cards",
@@ -904,7 +1200,11 @@ export const initGemShopRepo = () => {
                 "no": 65,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 3,
+                "slot": 2,
+                "isOffer": true
             }),
         new GemShopItemBase(75, <GemShopItemModel>{
                 "section": "Cards",
@@ -916,7 +1216,11 @@ export const initGemShopRepo = () => {
                 "no": 69,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 3,
+                "slot": 3,
+                "isOffer": true
             }),
         new GemShopItemBase(76, <GemShopItemModel>{
                 "section": "Cards",
@@ -928,7 +1232,11 @@ export const initGemShopRepo = () => {
                 "no": 63,
                 "maxPurchases": 4,
                 "qty": 0,
-                "costIncrement": 40
+                "costIncrement": 40,
+                "groupId": 1,
+                "sectionId": 3,
+                "slot": 4,
+                "isOffer": true
             }),
         new GemShopItemBase(77, <GemShopItemModel>{
                 "section": "Cards",
@@ -940,7 +1248,11 @@ export const initGemShopRepo = () => {
                 "no": 67,
                 "maxPurchases": 100000,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 3,
+                "slot": 5,
+                "isOffer": true
             }),
         new GemShopItemBase(78, <GemShopItemModel>{
                 "section": "Cards",
@@ -952,7 +1264,11 @@ export const initGemShopRepo = () => {
                 "no": 61,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 3,
+                "slot": 6,
+                "isOffer": true
             }),
         new GemShopItemBase(79, <GemShopItemModel>{
                 "section": "Cards",
@@ -964,7 +1280,11 @@ export const initGemShopRepo = () => {
                 "no": 70,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 3,
+                "slot": 7,
+                "isOffer": true
             }),
         new GemShopItemBase(80, <GemShopItemModel>{
                 "section": "Goods & Services",
@@ -976,7 +1296,11 @@ export const initGemShopRepo = () => {
                 "no": 79,
                 "maxPurchases": 100000,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 4,
+                "slot": 0,
+                "isOffer": true
             }),
         new GemShopItemBase(81, <GemShopItemModel>{
                 "section": "Goods & Services",
@@ -988,7 +1312,11 @@ export const initGemShopRepo = () => {
                 "no": 80,
                 "maxPurchases": 100000,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 4,
+                "slot": 1,
+                "isOffer": true
             }),
         new GemShopItemBase(82, <GemShopItemModel>{
                 "section": "Goods & Services",
@@ -1000,7 +1328,11 @@ export const initGemShopRepo = () => {
                 "no": 81,
                 "maxPurchases": 100000,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 4,
+                "slot": 2,
+                "isOffer": true
             }),
         new GemShopItemBase(83, <GemShopItemModel>{
                 "section": "Goods & Services",
@@ -1012,7 +1344,11 @@ export const initGemShopRepo = () => {
                 "no": 82,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 4,
+                "slot": 3,
+                "isOffer": false
             }),
         new GemShopItemBase(84, <GemShopItemModel>{
                 "section": "Goods & Services",
@@ -1024,7 +1360,11 @@ export const initGemShopRepo = () => {
                 "no": 84,
                 "maxPurchases": 11,
                 "qty": 0,
-                "costIncrement": 40
+                "costIncrement": 40,
+                "groupId": 1,
+                "sectionId": 4,
+                "slot": 4,
+                "isOffer": true
             }),
         new GemShopItemBase(85, <GemShopItemModel>{
                 "section": "Goods & Services",
@@ -1036,7 +1376,11 @@ export const initGemShopRepo = () => {
                 "no": 86,
                 "maxPurchases": 100000,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 4,
+                "slot": 5,
+                "isOffer": true
             }),
         new GemShopItemBase(86, <GemShopItemModel>{
                 "section": "Goods & Services",
@@ -1048,7 +1392,11 @@ export const initGemShopRepo = () => {
                 "no": 85,
                 "maxPurchases": 100000,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 4,
+                "slot": 6,
+                "isOffer": true
             }),
         new GemShopItemBase(87, <GemShopItemModel>{
                 "section": "Goods & Services",
@@ -1060,7 +1408,11 @@ export const initGemShopRepo = () => {
                 "no": 83,
                 "maxPurchases": 100000,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 4,
+                "slot": 7,
+                "isOffer": true
             }),
         new GemShopItemBase(88, <GemShopItemModel>{
                 "section": "Limited Specials",
@@ -1072,7 +1424,11 @@ export const initGemShopRepo = () => {
                 "no": 87,
                 "maxPurchases": 20,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 5,
+                "slot": 0,
+                "isOffer": true
             }),
         new GemShopItemBase(89, <GemShopItemModel>{
                 "section": "Limited Specials",
@@ -1084,7 +1440,11 @@ export const initGemShopRepo = () => {
                 "no": 88,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 5,
+                "slot": 1,
+                "isOffer": true
             }),
         new GemShopItemBase(90, <GemShopItemModel>{
                 "section": "Limited Specials",
@@ -1096,7 +1456,11 @@ export const initGemShopRepo = () => {
                 "no": 89,
                 "maxPurchases": 1,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 5,
+                "slot": 2,
+                "isOffer": true
             }),
         new GemShopItemBase(91, <GemShopItemModel>{
                 "section": "Limited Specials",
@@ -1108,7 +1472,11 @@ export const initGemShopRepo = () => {
                 "no": 90,
                 "maxPurchases": 5,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 5,
+                "slot": 3,
+                "isOffer": true
             }),
         new GemShopItemBase(92, <GemShopItemModel>{
                 "section": "Limited Specials",
@@ -1120,7 +1488,11 @@ export const initGemShopRepo = () => {
                 "no": 91,
                 "maxPurchases": 6,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 5,
+                "slot": 4,
+                "isOffer": false
             }),
         new GemShopItemBase(93, <GemShopItemModel>{
                 "section": "Limited Specials",
@@ -1132,7 +1504,11 @@ export const initGemShopRepo = () => {
                 "no": 92,
                 "maxPurchases": 6,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 5,
+                "slot": 5,
+                "isOffer": false
             }),
         new GemShopItemBase(94, <GemShopItemModel>{
                 "section": "Limited Specials",
@@ -1144,7 +1520,11 @@ export const initGemShopRepo = () => {
                 "no": 93,
                 "maxPurchases": 6,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 5,
+                "slot": 6,
+                "isOffer": false
             }),
         new GemShopItemBase(95, <GemShopItemModel>{
                 "section": "Limited Specials",
@@ -1156,10 +1536,14 @@ export const initGemShopRepo = () => {
                 "no": 94,
                 "maxPurchases": 6,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 1,
+                "sectionId": 5,
+                "slot": 7,
+                "isOffer": false
             }),
         new GemShopItemBase(96, <GemShopItemModel>{
-                "section": "Premium Stones",
+                "section": "World 1&2",
                 "name": "GemP1",
                 "mtxName": "Infinity Hammer",
                 "itemDisplayName": "Infinite Forge",
@@ -1168,10 +1552,14 @@ export const initGemShopRepo = () => {
                 "no": 103,
                 "maxPurchases": 1,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 2,
+                "sectionId": 0,
+                "slot": 0,
+                "isOffer": true
             }),
         new GemShopItemBase(97, <GemShopItemModel>{
-                "section": "Premium Stones",
+                "section": "World 1&2",
                 "name": "GemP4",
                 "mtxName": "Brimstone Forge Slot",
                 "itemDisplayName": "",
@@ -1180,10 +1568,14 @@ export const initGemShopRepo = () => {
                 "no": 104,
                 "maxPurchases": 16,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 2,
+                "sectionId": 0,
+                "slot": 1,
+                "isOffer": true
             }),
         new GemShopItemBase(98, <GemShopItemModel>{
-                "section": "Premium Stones",
+                "section": "World 1&2",
                 "name": "GemP6",
                 "mtxName": "Ivory Bubble Cauldrons",
                 "itemDisplayName": "",
@@ -1192,10 +1584,14 @@ export const initGemShopRepo = () => {
                 "no": 105,
                 "maxPurchases": 4,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 2,
+                "sectionId": 0,
+                "slot": 2,
+                "isOffer": true
             }),
         new GemShopItemBase(99, <GemShopItemModel>{
-                "section": "Premium Stones",
+                "section": "World 1&2",
                 "name": "GemP7",
                 "mtxName": "Bleach Liquid Cauldrons",
                 "itemDisplayName": "",
@@ -1204,10 +1600,14 @@ export const initGemShopRepo = () => {
                 "no": 106,
                 "maxPurchases": 4,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 2,
+                "sectionId": 0,
+                "slot": 3,
+                "isOffer": true
             }),
         new GemShopItemBase(100, <GemShopItemModel>{
-                "section": "Premium Stones",
+                "section": "World 1&2",
                 "name": "GemP5",
                 "mtxName": "Obol Storage Space",
                 "itemDisplayName": "",
@@ -1216,10 +1616,14 @@ export const initGemShopRepo = () => {
                 "no": 57,
                 "maxPurchases": 12,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 2,
+                "sectionId": 0,
+                "slot": 4,
+                "isOffer": true
             }),
         new GemShopItemBase(101, <GemShopItemModel>{
-                "section": "Premium Stones",
+                "section": "World 1&2",
                 "name": "GemP9",
                 "mtxName": "Quality Obol Stack",
                 "itemDisplayName": "Quality Obol Stack",
@@ -1228,10 +1632,14 @@ export const initGemShopRepo = () => {
                 "no": 107,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 2,
+                "sectionId": 0,
+                "slot": 5,
+                "isOffer": true
             }),
         new GemShopItemBase(102, <GemShopItemModel>{
-                "section": "Premium Stones",
+                "section": "World 1&2",
                 "name": "GemP10",
                 "mtxName": "Marvelous Obol Stack",
                 "itemDisplayName": "Marvelous Obol Stack",
@@ -1240,10 +1648,14 @@ export const initGemShopRepo = () => {
                 "no": 108,
                 "maxPurchases": 100000,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 2,
+                "sectionId": 0,
+                "slot": 6,
+                "isOffer": true
             }),
         new GemShopItemBase(103, <GemShopItemModel>{
-                "section": "Premium Stones",
+                "section": "World 1&2",
                 "name": "GemP17",
                 "mtxName": "Sigil Supercharge",
                 "itemDisplayName": "",
@@ -1252,10 +1664,14 @@ export const initGemShopRepo = () => {
                 "no": 110,
                 "maxPurchases": 10,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 2,
+                "sectionId": 0,
+                "slot": 7,
+                "isOffer": true
             }),
         new GemShopItemBase(104, <GemShopItemModel>{
-                "section": "World 1&2",
+                "section": "World 3",
                 "name": "GemQ1",
                 "mtxName": "Crystal 3d Printer",
                 "itemDisplayName": "Infinite Forge",
@@ -1264,10 +1680,14 @@ export const initGemShopRepo = () => {
                 "no": 111,
                 "maxPurchases": 1,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 2,
+                "sectionId": 1,
+                "slot": 0,
+                "isOffer": true
             }),
         new GemShopItemBase(105, <GemShopItemModel>{
-                "section": "World 1&2",
+                "section": "World 3",
                 "name": "GemQ2",
                 "mtxName": "More Sample Spaces",
                 "itemDisplayName": "Infinite Forge",
@@ -1276,10 +1696,14 @@ export const initGemShopRepo = () => {
                 "no": 112,
                 "maxPurchases": 6,
                 "qty": 0,
-                "costIncrement": 40
+                "costIncrement": 40,
+                "groupId": 2,
+                "sectionId": 1,
+                "slot": 1,
+                "isOffer": true
             }),
         new GemShopItemBase(106, <GemShopItemModel>{
-                "section": "World 1&2",
+                "section": "World 3",
                 "name": "GemQ3",
                 "mtxName": "Burning Bad Books",
                 "itemDisplayName": "Infinite Forge",
@@ -1288,10 +1712,14 @@ export const initGemShopRepo = () => {
                 "no": 113,
                 "maxPurchases": 4,
                 "qty": 0,
-                "costIncrement": 75
+                "costIncrement": 75,
+                "groupId": 2,
+                "sectionId": 1,
+                "slot": 2,
+                "isOffer": true
             }),
         new GemShopItemBase(107, <GemShopItemModel>{
-                "section": "World 1&2",
+                "section": "World 3",
                 "name": "GemQ4",
                 "mtxName": "Prayer Slots",
                 "itemDisplayName": "Infinite Forge",
@@ -1300,10 +1728,14 @@ export const initGemShopRepo = () => {
                 "no": 114,
                 "maxPurchases": 4,
                 "qty": 0,
-                "costIncrement": 75
+                "costIncrement": 75,
+                "groupId": 2,
+                "sectionId": 1,
+                "slot": 3,
+                "isOffer": true
             }),
         new GemShopItemBase(108, <GemShopItemModel>{
-                "section": "World 1&2",
+                "section": "World 3",
                 "name": "GemQ5",
                 "mtxName": "Zen Cogs",
                 "itemDisplayName": "Infinite Forge",
@@ -1312,10 +1744,14 @@ export const initGemShopRepo = () => {
                 "no": 115,
                 "maxPurchases": 8,
                 "qty": 0,
-                "costIncrement": 125
+                "costIncrement": 125,
+                "groupId": 2,
+                "sectionId": 1,
+                "slot": 4,
+                "isOffer": true
             }),
         new GemShopItemBase(109, <GemShopItemModel>{
-                "section": "World 1&2",
+                "section": "World 3",
                 "name": "GemQ6",
                 "mtxName": "Cog Inventory Space",
                 "itemDisplayName": "Infinite Forge",
@@ -1324,10 +1760,14 @@ export const initGemShopRepo = () => {
                 "no": 116,
                 "maxPurchases": 20,
                 "qty": 0,
-                "costIncrement": 40
+                "costIncrement": 40,
+                "groupId": 2,
+                "sectionId": 1,
+                "slot": 5,
+                "isOffer": true
             }),
         new GemShopItemBase(110, <GemShopItemModel>{
-                "section": "World 1&2",
+                "section": "World 3",
                 "name": "GemQ7",
                 "mtxName": "Tower Building Slots",
                 "itemDisplayName": "Infinite Forge",
@@ -1336,10 +1776,14 @@ export const initGemShopRepo = () => {
                 "no": 117,
                 "maxPurchases": 4,
                 "qty": 0,
-                "costIncrement": 100
+                "costIncrement": 100,
+                "groupId": 2,
+                "sectionId": 1,
+                "slot": 6,
+                "isOffer": true
             }),
         new GemShopItemBase(111, <GemShopItemModel>{
-                "section": "World 1&2",
+                "section": "World 3",
                 "name": "GemQ8",
                 "mtxName": "Fluorescent Flaggies",
                 "itemDisplayName": "Infinite Forge",
@@ -1348,10 +1792,14 @@ export const initGemShopRepo = () => {
                 "no": 118,
                 "maxPurchases": 6,
                 "qty": 0,
-                "costIncrement": 75
+                "costIncrement": 75,
+                "groupId": 2,
+                "sectionId": 1,
+                "slot": 7,
+                "isOffer": true
             }),
         new GemShopItemBase(112, <GemShopItemModel>{
-                "section": "World 3",
+                "section": "World 4",
                 "name": "GemQ10",
                 "mtxName": "Royal Egg Cap",
                 "itemDisplayName": "Infinite Forge",
@@ -1360,10 +1808,14 @@ export const initGemShopRepo = () => {
                 "no": 119,
                 "maxPurchases": 5,
                 "qty": 0,
-                "costIncrement": 50
+                "costIncrement": 50,
+                "groupId": 2,
+                "sectionId": 2,
+                "slot": 0,
+                "isOffer": true
             }),
         new GemShopItemBase(113, <GemShopItemModel>{
-                "section": "World 3",
+                "section": "World 4",
                 "name": "GemQ11",
                 "mtxName": "Richelin Kitchen",
                 "itemDisplayName": "Infinite Forge",
@@ -1372,10 +1824,14 @@ export const initGemShopRepo = () => {
                 "no": 120,
                 "maxPurchases": 10,
                 "qty": 0,
-                "costIncrement": 40
+                "costIncrement": 40,
+                "groupId": 2,
+                "sectionId": 2,
+                "slot": 1,
+                "isOffer": true
             }),
         new GemShopItemBase(114, <GemShopItemModel>{
-                "section": "World 3",
+                "section": "World 4",
                 "name": "GemQ12",
                 "mtxName": "Console Chip",
                 "itemDisplayName": "Infinite Forge",
@@ -1384,10 +1840,14 @@ export const initGemShopRepo = () => {
                 "no": 121,
                 "maxPurchases": 7,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 2,
+                "sectionId": 2,
+                "slot": 2,
+                "isOffer": true
             }),
         new GemShopItemBase(115, <GemShopItemModel>{
-                "section": "World 3",
+                "section": "World 4",
                 "name": "GemQ13",
                 "mtxName": "Mainframe Jewel",
                 "itemDisplayName": "Infinite Forge",
@@ -1396,10 +1856,14 @@ export const initGemShopRepo = () => {
                 "no": 122,
                 "maxPurchases": 2,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 2,
+                "sectionId": 2,
+                "slot": 3,
+                "isOffer": true
             }),
         new GemShopItemBase(116, <GemShopItemModel>{
-                "section": "World 3",
+                "section": "World 4",
                 "name": "GemQ14",
                 "mtxName": "Souped Up Tube",
                 "itemDisplayName": "Infinite Forge",
@@ -1408,10 +1872,14 @@ export const initGemShopRepo = () => {
                 "no": 123,
                 "maxPurchases": 5,
                 "qty": 0,
-                "costIncrement": 65
+                "costIncrement": 65,
+                "groupId": 2,
+                "sectionId": 2,
+                "slot": 4,
+                "isOffer": true
             }),
         new GemShopItemBase(117, <GemShopItemModel>{
-                "section": "World 3",
+                "section": "World 4",
                 "name": "GemQ15",
                 "mtxName": "Mob Storage",
                 "itemDisplayName": "Infinite Forge",
@@ -1420,10 +1888,14 @@ export const initGemShopRepo = () => {
                 "no": 124,
                 "maxPurchases": 12,
                 "qty": 0,
-                "costIncrement": 55
+                "costIncrement": 55,
+                "groupId": 2,
+                "sectionId": 2,
+                "slot": 5,
+                "isOffer": true
             }),
         new GemShopItemBase(118, <GemShopItemModel>{
-                "section": "World 3",
+                "section": "World 4",
                 "name": "GemQ16",
                 "mtxName": "Fenceyard Space",
                 "itemDisplayName": "Infinite Forge",
@@ -1432,10 +1904,14 @@ export const initGemShopRepo = () => {
                 "no": 125,
                 "maxPurchases": 6,
                 "qty": 0,
-                "costIncrement": 45
+                "costIncrement": 45,
+                "groupId": 2,
+                "sectionId": 2,
+                "slot": 6,
+                "isOffer": true
             }),
         new GemShopItemBase(119, <GemShopItemModel>{
-                "section": "World 3",
+                "section": "World 4",
                 "name": "GemP56",
                 "mtxName": "New Meal",
                 "itemDisplayName": "",
@@ -1444,10 +1920,14 @@ export const initGemShopRepo = () => {
                 "no": 126,
                 "maxPurchases": 100000,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 2,
+                "sectionId": 2,
+                "slot": 7,
+                "isOffer": true
             }),
         new GemShopItemBase(120, <GemShopItemModel>{
-                "section": "World 4",
+                "section": "World 5",
                 "name": "GemP20",
                 "mtxName": "Miracle Chest",
                 "itemDisplayName": "Infinite Forge",
@@ -1456,10 +1936,14 @@ export const initGemShopRepo = () => {
                 "no": 127,
                 "maxPurchases": 10,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 2,
+                "sectionId": 3,
+                "slot": 0,
+                "isOffer": true
             }),
         new GemShopItemBase(121, <GemShopItemModel>{
-                "section": "World 4",
+                "section": "World 5",
                 "name": "GemP53",
                 "mtxName": "Davey Jones Training",
                 "itemDisplayName": "",
@@ -1468,10 +1952,14 @@ export const initGemShopRepo = () => {
                 "no": 8,
                 "maxPurchases": 8,
                 "qty": 0,
-                "costIncrement": 10
+                "costIncrement": 10,
+                "groupId": 2,
+                "sectionId": 3,
+                "slot": 1,
+                "isOffer": true
             }),
         new GemShopItemBase(122, <GemShopItemModel>{
-                "section": "World 4",
+                "section": "World 5",
                 "name": "GemP21",
                 "mtxName": "Chest Sluggo",
                 "itemDisplayName": "Infinite Forge",
@@ -1480,10 +1968,14 @@ export const initGemShopRepo = () => {
                 "no": 129,
                 "maxPurchases": 12,
                 "qty": 0,
-                "costIncrement": 30
+                "costIncrement": 30,
+                "groupId": 2,
+                "sectionId": 3,
+                "slot": 2,
+                "isOffer": true
             }),
         new GemShopItemBase(123, <GemShopItemModel>{
-                "section": "World 4",
+                "section": "World 5",
                 "name": "GemP26",
                 "mtxName": "Ancient Artifact",
                 "itemDisplayName": "",
@@ -1492,10 +1984,14 @@ export const initGemShopRepo = () => {
                 "no": 134,
                 "maxPurchases": 2,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 2,
+                "sectionId": 3,
+                "slot": 3,
+                "isOffer": true
             }),
         new GemShopItemBase(124, <GemShopItemModel>{
-                "section": "World 4",
+                "section": "World 5",
                 "name": "GemP22",
                 "mtxName": "Divinity Sparkie",
                 "itemDisplayName": "Infinite Forge",
@@ -1504,10 +2000,14 @@ export const initGemShopRepo = () => {
                 "no": 130,
                 "maxPurchases": 8,
                 "qty": 0,
-                "costIncrement": 50
+                "costIncrement": 50,
+                "groupId": 2,
+                "sectionId": 3,
+                "slot": 4,
+                "isOffer": true
             }),
         new GemShopItemBase(125, <GemShopItemModel>{
-                "section": "World 4",
+                "section": "World 5",
                 "name": "GemP23",
                 "mtxName": "Golden Sprinkler",
                 "itemDisplayName": "Infinite Forge",
@@ -1516,10 +2016,14 @@ export const initGemShopRepo = () => {
                 "no": 131,
                 "maxPurchases": 4,
                 "qty": 0,
-                "costIncrement": 25
+                "costIncrement": 25,
+                "groupId": 2,
+                "sectionId": 3,
+                "slot": 5,
+                "isOffer": true
             }),
         new GemShopItemBase(126, <GemShopItemModel>{
-                "section": "World 4",
+                "section": "World 5",
                 "name": "GemP24",
                 "mtxName": "Lava Sprouts",
                 "itemDisplayName": "Infinite Forge",
@@ -1528,10 +2032,14 @@ export const initGemShopRepo = () => {
                 "no": 133,
                 "maxPurchases": 6,
                 "qty": 0,
-                "costIncrement": 40
+                "costIncrement": 40,
+                "groupId": 2,
+                "sectionId": 3,
+                "slot": 6,
+                "isOffer": true
             }),
         new GemShopItemBase(127, <GemShopItemModel>{
-                "section": "World 4",
+                "section": "World 5",
                 "name": "GemP57",
                 "mtxName": "Snehebatu Link",
                 "itemDisplayName": "",
@@ -1540,10 +2048,14 @@ export const initGemShopRepo = () => {
                 "no": 9,
                 "maxPurchases": 1,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 2,
+                "sectionId": 3,
+                "slot": 7,
+                "isOffer": true
             }),
         new GemShopItemBase(128, <GemShopItemModel>{
-                "section": "World 5",
+                "section": "World 6",
                 "name": "GemP27",
                 "mtxName": "Plot Of Land",
                 "itemDisplayName": "",
@@ -1552,10 +2064,14 @@ export const initGemShopRepo = () => {
                 "no": 135,
                 "maxPurchases": 12,
                 "qty": 0,
-                "costIncrement": 40
+                "costIncrement": 40,
+                "groupId": 2,
+                "sectionId": 4,
+                "slot": 0,
+                "isOffer": true
             }),
         new GemShopItemBase(129, <GemShopItemModel>{
-                "section": "World 5",
+                "section": "World 6",
                 "name": "GemP28",
                 "mtxName": "Pristine Charm",
                 "itemDisplayName": "",
@@ -1564,10 +2080,14 @@ export const initGemShopRepo = () => {
                 "no": 136,
                 "maxPurchases": 2,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 2,
+                "sectionId": 4,
+                "slot": 1,
+                "isOffer": true
             }),
         new GemShopItemBase(130, <GemShopItemModel>{
-                "section": "World 5",
+                "section": "World 6",
                 "name": "GemP29",
                 "mtxName": "Shroom Familiar",
                 "itemDisplayName": "",
@@ -1576,10 +2096,14 @@ export const initGemShopRepo = () => {
                 "no": 137,
                 "maxPurchases": 6,
                 "qty": 0,
-                "costIncrement": 10
+                "costIncrement": 10,
+                "groupId": 2,
+                "sectionId": 4,
+                "slot": 2,
+                "isOffer": true
             }),
         new GemShopItemBase(131, <GemShopItemModel>{
-                "section": "World 5",
+                "section": "World 6",
                 "name": "GemP54",
                 "mtxName": "Novelty Jade Coins",
                 "itemDisplayName": "",
@@ -1588,10 +2112,14 @@ export const initGemShopRepo = () => {
                 "no": 10,
                 "maxPurchases": 7,
                 "qty": 0,
-                "costIncrement": 20
+                "costIncrement": 20,
+                "groupId": 2,
+                "sectionId": 4,
+                "slot": 3,
+                "isOffer": true
             }),
         new GemShopItemBase(132, <GemShopItemModel>{
-                "section": "World 5",
+                "section": "World 6",
                 "name": "GemP31",
                 "mtxName": "Instagrow Generator",
                 "itemDisplayName": "",
@@ -1600,10 +2128,14 @@ export const initGemShopRepo = () => {
                 "no": 139,
                 "maxPurchases": 8,
                 "qty": 0,
-                "costIncrement": 50
+                "costIncrement": 50,
+                "groupId": 2,
+                "sectionId": 4,
+                "slot": 4,
+                "isOffer": true
             }),
         new GemShopItemBase(133, <GemShopItemModel>{
-                "section": "World 5",
+                "section": "World 6",
                 "name": "GemP32",
                 "mtxName": "Life Refill",
                 "itemDisplayName": "",
@@ -1612,10 +2144,14 @@ export const initGemShopRepo = () => {
                 "no": 140,
                 "maxPurchases": 15,
                 "qty": 0,
-                "costIncrement": 9
+                "costIncrement": 9,
+                "groupId": 2,
+                "sectionId": 4,
+                "slot": 5,
+                "isOffer": true
             }),
         new GemShopItemBase(134, <GemShopItemModel>{
-                "section": "World 5",
+                "section": "World 6",
                 "name": "GemP55",
                 "mtxName": "King Of All Winners",
                 "itemDisplayName": "",
@@ -1624,10 +2160,14 @@ export const initGemShopRepo = () => {
                 "no": 11,
                 "maxPurchases": 5,
                 "qty": 0,
-                "costIncrement": 20
+                "costIncrement": 20,
+                "groupId": 2,
+                "sectionId": 4,
+                "slot": 6,
+                "isOffer": true
             }),
         new GemShopItemBase(135, <GemShopItemModel>{
-                "section": "World 5",
+                "section": "World 6",
                 "name": "Blank",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "ERROR",
@@ -1636,10 +2176,14 @@ export const initGemShopRepo = () => {
                 "no": 12,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 2,
+                "sectionId": 4,
+                "slot": 7,
+                "isOffer": false
             }),
         new GemShopItemBase(136, <GemShopItemModel>{
-                "section": "World 6",
+                "section": "World 7",
                 "name": "GemP48",
                 "mtxName": "Gallery Showcases",
                 "itemDisplayName": "",
@@ -1648,10 +2192,14 @@ export const initGemShopRepo = () => {
                 "no": 40,
                 "maxPurchases": 6,
                 "qty": 0,
-                "costIncrement": 20
+                "costIncrement": 20,
+                "groupId": 2,
+                "sectionId": 5,
+                "slot": 0,
+                "isOffer": true
             }),
         new GemShopItemBase(137, <GemShopItemModel>{
-                "section": "World 6",
+                "section": "World 7",
                 "name": "GemP49",
                 "mtxName": "More Coral",
                 "itemDisplayName": "",
@@ -1660,10 +2208,14 @@ export const initGemShopRepo = () => {
                 "no": 41,
                 "maxPurchases": 10,
                 "qty": 0,
-                "costIncrement": 15
+                "costIncrement": 15,
+                "groupId": 2,
+                "sectionId": 5,
+                "slot": 1,
+                "isOffer": true
             }),
         new GemShopItemBase(138, <GemShopItemModel>{
-                "section": "World 6",
+                "section": "World 7",
                 "name": "GemP50",
                 "mtxName": "Legend Talent Pts",
                 "itemDisplayName": "",
@@ -1672,10 +2224,14 @@ export const initGemShopRepo = () => {
                 "no": 42,
                 "maxPurchases": 5,
                 "qty": 0,
-                "costIncrement": 40
+                "costIncrement": 40,
+                "groupId": 2,
+                "sectionId": 5,
+                "slot": 2,
+                "isOffer": true
             }),
         new GemShopItemBase(139, <GemShopItemModel>{
-                "section": "World 6",
+                "section": "World 7",
                 "name": "GemP51",
                 "mtxName": "Super Auto Mode",
                 "itemDisplayName": "",
@@ -1684,10 +2240,14 @@ export const initGemShopRepo = () => {
                 "no": 43,
                 "maxPurchases": 4,
                 "qty": 0,
-                "costIncrement": 40
+                "costIncrement": 40,
+                "groupId": 2,
+                "sectionId": 5,
+                "slot": 3,
+                "isOffer": true
             }),
         new GemShopItemBase(140, <GemShopItemModel>{
-                "section": "World 6",
+                "section": "World 7",
                 "name": "GemP52",
                 "mtxName": "Bling Bags",
                 "itemDisplayName": "",
@@ -1696,10 +2256,14 @@ export const initGemShopRepo = () => {
                 "no": 44,
                 "maxPurchases": 8,
                 "qty": 0,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 2,
+                "sectionId": 5,
+                "slot": 4,
+                "isOffer": true
             }),
         new GemShopItemBase(141, <GemShopItemModel>{
-                "section": "World 6",
+                "section": "World 7",
                 "name": "Quest116",
                 "mtxName": "Professional Papers",
                 "itemDisplayName": "",
@@ -1708,10 +2272,14 @@ export const initGemShopRepo = () => {
                 "no": 45,
                 "maxPurchases": 10,
                 "qty": 0,
-                "costIncrement": 30
+                "costIncrement": 30,
+                "groupId": 2,
+                "sectionId": 5,
+                "slot": 5,
+                "isOffer": true
             }),
         new GemShopItemBase(142, <GemShopItemModel>{
-                "section": "World 6",
+                "section": "World 7",
                 "name": "Blank",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "ERROR",
@@ -1720,10 +2288,14 @@ export const initGemShopRepo = () => {
                 "no": 46,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 2,
+                "sectionId": 5,
+                "slot": 6,
+                "isOffer": false
             }),
         new GemShopItemBase(143, <GemShopItemModel>{
-                "section": "World 6",
+                "section": "World 7",
                 "name": "Blank",
                 "mtxName": "Name Of Item",
                 "itemDisplayName": "ERROR",
@@ -1732,7 +2304,11 @@ export const initGemShopRepo = () => {
                 "no": 47,
                 "maxPurchases": 1,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 0,
+                "groupId": 2,
+                "sectionId": 5,
+                "slot": 7,
+                "isOffer": false
             })    
 ]
 }

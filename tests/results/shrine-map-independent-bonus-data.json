@@ -10,12 +10,12 @@
           "playerId": 3,
           "playerName": "Sludgev4",
           "characterClass": 16,
-          "level": 1384,
-          "currentMap": 324,
+          "level": 1404,
+          "currentMap": 150,
           "dungeon": -1,
           "version": {
-            "title": "Luminous_Menagerie",
-            "version": "1.23"
+            "title": "Halloween_Event",
+            "version": "1.24"
           }
         }
       }

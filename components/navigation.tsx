@@ -33,6 +33,10 @@ const navItems: NavItem[] = [
             { subLink: "/alchemy", label: "Alchemy" },
             { subLink: "/arcade", label: "Arcade" },
             { subLink: "/kangaroo", label: "Kangaroo" },
+            { subLink: "/vote-ballot", label: "Vote Ballot" },
+            { subLink: "/island-expeditions", label: "Island Expeditions" },
+            { subLink: "/killroy", label: "Killroy" },
+            { subLink: "/weekly-bosses", label: "Weekly Bosses" },
         ]
     },
     {
@@ -43,6 +47,7 @@ const navItems: NavItem[] = [
             { subLink: "/equinox", label: "Equinox" },
             { subLink: "/armor-smithy", label: "Armor Smithy" },
             { subLink: "/bubba", label: "Bubba" },
+            { subLink: "/hat-rack", label: "Hat Rack" },
         ]
     },
     {
@@ -110,7 +115,11 @@ const navItems: NavItem[] = [
             { subLink: "/tome", label: "The Tome" },
             { subLink: "/upgrade-vault", label: "Upgrade Vault" },
             { subLink: "/guild", label: "Guild" },
+            { subLink: "/friends-stats", label: "Friends Stats" },
             { subLink: "/event-shop", label: "Event Shop" },
+            { subLink: "/gem-shop", label: "Gem Shop" },
+            { subLink: "/bundles", label: "Bundles" },
+            { subLink: "/speedrun", label: "Speedrun" },
         ]
     },
     { link: "/raw-data", label: "Raw Data" },

@@ -25,7 +25,7 @@
     {
       "label": "hat_rack_companion_31",
       "expression": "idleon.callFunction(\"Companions\", 31)",
-      "description": "Pet2 companion +15% contribution to the Hat Rack Bonus Multi"
+      "description": "Wild Boar companion +25% contribution to the Hat Rack Bonus Multi"
     },
     {
       "label": "hat_rack_minehead_21",
@@ -46,6 +46,21 @@
       "label": "hat_rack_missing_hats",
       "expression": "Object.entries(idleon.getAttr(\"ItemDefinitionsGET\").h).filter(([n, d]) => d.h.Type == \"PREMIUM_HELMET\" && d.h.typeGen == \"aHelmetMTX\" && d.h.lvReqToCraft != 69420 && !idleon.getAttr(\"Spelunk\")[46].includes(n)).map(([n]) => n)",
       "description": "Eligible premium-hat definitions absent from saved Spelunk[46]; preserves the ownership-independent catalog predicate, excludes the runtime lvReqToCraft == 69420 sentinel definitions, and performs only a read-only membership check"
+    },
+    {
+      "label": "hat_rack_deposited_hats",
+      "expression": "idleon.getAttr(\"Spelunk\")[46]",
+      "description": "Saved deposited-hat sequence. Its length supplies the deposited count without deduplication."
+    },
+    {
+      "label": "hat_rack_bonus_multiplier",
+      "expression": "idleon.callFunction(\"Gallery\", \"HatrackBonusMulti\", 0, 0)",
+      "description": "Account multiplier for deposited premium-hat effects."
+    },
+    {
+      "label": "hat_rack_account_bonuses",
+      "expression": "Object.fromEntries(Object.entries(idleon.getDNSM(\"PremHatBonTOT\").h))",
+      "description": "Complete native cached account aggregate. Tests translate underscores to existing domain effect keys without recalculating totals."
     }
   ]
 }

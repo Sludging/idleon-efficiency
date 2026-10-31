@@ -264,7 +264,7 @@ export class CanCraftLuckierLad extends GlobalAlert {
 
 export class CanBuySummoningFamiliar extends GlobalAlert {
     constructor() {
-        super(`You have enough white essence to buy a familiar, go get it`, AlertType.CanBuyFamiliar, 
+        super(`You have enough white essence to buy a familiar, go get it`, AlertType.CanBuyFamiliar,
             {
                 location: 'SumUpgIc2',
                 height: 50,
@@ -343,7 +343,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
 
         if (playerDivinityData.active) {
             const mantraUsers = divinityData.playerInfo.filter(info => (info.style.name ?? '') == 'Mantra' && info.active).length;
-            switch(true) {
+            switch (true) {
                 case playerDivinityLevel >= 80:
                     if (playerMeditationStyle != 'Mindful') {
                         alerts.push(new DivinityStyleAlert(player, "You should use Mindful style"));
@@ -371,7 +371,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
                         alerts.push(new DivinityStyleAlert(player, "You should use Chakra style"));
                     }
                     break;
-            } 
+            }
         }
     }
 
@@ -429,17 +429,15 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Traps, arc
     const globalAlerts: Alert[] = [];
 
     // Worship
-    if (worship.totalData.maxCharge > 0 && worship.totalData.overFlowTime <= 0 ) {
+    if (worship.totalData.maxCharge > 0 && worship.totalData.overFlowTime <= 0) {
         globalAlerts.push(new GlobalAlert("Overflowing charge. Go to World 3 -> Worship for more details.", AlertType.Worship, Skilling.getSkillImageData(SkillsIndex.Worship)))
     }
 
     // Refinery
     Object.entries(refinery.salts).forEach(([saltName, saltInfo]) => {
-        if (saltInfo.progress == saltInfo.getCap()) {
+        if (saltInfo.unlocked && saltInfo.progress == saltInfo.getCap()) {
             globalAlerts.push(new GlobalAlert(`${saltName} is ready for rank up.`, AlertType.Refinery, Item.getImageData(saltName)))
         }
-        // Fuel is empty math, need storage items logic from the construction page.
-        //if (saltInfo.active && saltInfo.getFuelTime())
     })
 
     // Traps
@@ -471,7 +469,7 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Traps, arc
     // Check if there's an unlocked upgrade that can be leveled
     const canUpgradeSomething = equinox.upgrades.filter(upgrade => upgrade.unlocked == true).some(upgrade => upgrade.level < upgrade.maxLevel);
     // The first upgrade is always unlocked, so to avoid showing the alert for beginner accounts that shouldn't have this, verify if there's at a level in any upgrade
-    const totalLevels = equinox.upgrades.reduce((total: number, upgrade) => {return total + upgrade.level}, 0);
+    const totalLevels = equinox.upgrades.reduce((total: number, upgrade) => { return total + upgrade.level }, 0);
     // If bar is full and have an upgrade that can be improved, display the alert
     if (equinoxBarFull && canUpgradeSomething && totalLevels > 0) {
         globalAlerts.push(new EquinoxBarFull());
@@ -491,7 +489,7 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Traps, arc
     if (recipeUnlocked && luckyLadOwned >= 75) {
         globalAlerts.push(new CanCraftLuckierLad());
     }
-    
+
     // Can buy a familiar for Summoning (in case cost reset for example)
     const familiarUpgrade = summoning.summonUpgrades.find(bonus => bonus.index == 2);
     if (familiarUpgrade) {
@@ -505,7 +503,7 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Traps, arc
     }
 
     if (sailing.enderCaptainUnlocked) {
-        const enderCaptainAvailable = sailing.shopCaptains.slice(0,(Math.min(sailing.shopCaptains.length, sailing.shopCaptainUnlocked))).reduce((sum, captain) => sum += (captain.tier == 6 ? 1 : 0), 0);
+        const enderCaptainAvailable = sailing.shopCaptains.slice(0, (Math.min(sailing.shopCaptains.length, sailing.shopCaptainUnlocked))).reduce((sum, captain) => sum += (captain.tier == 6 ? 1 : 0), 0);
         if (enderCaptainAvailable > 0) {
             globalAlerts.push(new EnderCaptainAvailableForPurchase(enderCaptainAvailable));
         }

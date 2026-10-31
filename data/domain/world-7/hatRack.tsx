@@ -10,7 +10,9 @@ import { TypeGenEnum } from "../enum/typeGenEnum";
 import type { ArmourItemModel } from "../model/armourItemModel";
 import type { ItemProperty } from "../equipment-effects";
 
-type ItemEffect = { effect: string; value: number };
+export type HatRackItemBonus = { readonly effect: string; readonly value: number };
+
+const emptyHatItemBonuses: readonly HatRackItemBonus[] = [];
 
 export class HatRackHat {
     stored: boolean = false;
@@ -22,7 +24,9 @@ export class HatRack extends Domain {
     hats: HatRackHat[] = [];
     private depositedHats: string[] = [];
     private unlockKillsLeft: (number | undefined)[] = [];
-    private itemEffects = new Map<string, ItemEffect[]>();
+    private itemEffects = new Map<string, HatRackItemBonus[]>();
+    private hatItemBonuses = new Map<string, readonly HatRackItemBonus[]>();
+    private bonusMultiplier: number = 1;
     private calculatedBonuses = new Map<string, number>();
 
     getRawKeys(): RawData[] {
@@ -36,13 +40,15 @@ export class HatRack extends Domain {
         this.hats = [];
         this.calculatedBonuses = new Map();
         this.itemEffects.clear();
+        this.hatItemBonuses.clear();
+        this.bonusMultiplier = 1;
         for (const item of allItems) {
             // Catalog eligibility uses the definition sentinel, not the recipe-derived Item level.
             if (item.type === "Premium Helmet" && item.typeGen === TypeGenEnum.aHelmetMTX
                 && (item.data.item as ArmourItemModel).lvReqToCraft !== 69420) {
                 this.hats.push(new HatRackHat(item.internalName, item.displayName, item));
             }
-            const effects: ItemEffect[] = [];
+            const effects: HatRackItemBonus[] = [];
             for (const stoneName of ["UQ1val", "UQ2val"]) {
                 const stat = item.itemStats.find(stat => stat.stoneName === stoneName);
                 if (stat?.extra && stat.extra !== "0") {
@@ -80,10 +86,24 @@ export class HatRack extends Domain {
         );
         // Parsed saves invalidate totals from the previous account state.
         hatRack.calculatedBonuses = new Map();
+        hatRack.hatItemBonuses.clear();
+        hatRack.bonusMultiplier = 1;
     }
 
     getDepositedHatCount(): number {
         return this.depositedHats.length;
+    }
+
+    getBonusMultiplier(): number {
+        return this.bonusMultiplier;
+    }
+
+    getAccountBonuses(): ReadonlyMap<string, number> {
+        return this.calculatedBonuses;
+    }
+
+    getHatItemBonuses(hat: HatRackHat): readonly HatRackItemBonus[] {
+        return this.hatItemBonuses.get(hat.internalName) ?? emptyHatItemBonuses;
     }
 
     isUnlocked(player: Player): boolean {
@@ -119,14 +139,23 @@ export class HatRack extends Domain {
     }
 
     private calculate(multiplier: number): void {
-        this.calculatedBonuses = new Map();
+        this.bonusMultiplier = multiplier;
+        this.hatItemBonuses.clear();
         const bonuses = new Map<string, number>();
         // Match the game's per-hat, per-channel multiplication order for precision.
         for (const name of this.depositedHats) {
-            const effects = this.itemEffects.get(name);
-            if (!effects) throw new Error(`Missing Hat Rack item definition ${name}`);
-            for (const { effect, value } of effects) {
-                bonuses.set(effect, (bonuses.get(effect) ?? 0) + multiplier * value);
+            let hatBonuses = this.hatItemBonuses.get(name);
+            if (!hatBonuses) {
+                const effects = this.itemEffects.get(name);
+                if (!effects) {
+                    console.log('Missing Hat Rack item definition', name);
+                    continue;
+                }
+                hatBonuses = effects.map(({ effect, value }) => ({ effect, value: multiplier * value }));
+                this.hatItemBonuses.set(name, hatBonuses);
+            }
+            for (const { effect, value } of hatBonuses) {
+                bonuses.set(effect, (bonuses.get(effect) ?? 0) + value);
             }
         }
         this.calculatedBonuses = bonuses;

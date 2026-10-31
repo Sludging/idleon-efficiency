@@ -2,7 +2,7 @@
   "extractions": {
     "construction_cog_flaggy_rate": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"FlagSpeed\", 0, 0)",
-      "result": 2890425771234576
+      "result": 3376703167393236
     }
   },
   "errors": {}

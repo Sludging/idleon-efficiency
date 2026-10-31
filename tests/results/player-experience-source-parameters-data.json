@@ -2,7 +2,7 @@
   "extractions": {
     "farming_sticker_0": {
       "expression": "idleon.callFunction('FarmingStuffs','StickerBonus',0,0)",
-      "result": 194.60000000000002
+      "result": 236.096
     },
     "hole_schematic_47": {
       "expression": "idleon.callFunction('Holes','B_UPG',47,0)",
@@ -90,11 +90,11 @@
     },
     "gear_monster_exp": {
       "expression": "idleon.callFunction('EtcBonuses','4')",
-      "result": 205.11642985526566
+      "result": 170.5384877805155
     },
     "gear_class_exp_multi": {
       "expression": "idleon.callFunction('EtcBonuses','78')",
-      "result": 272.42201246678854
+      "result": 293.7598992993128
     },
     "gear_bonus_class_exp": {
       "expression": "idleon.callFunction('EtcBonuses','84')",
@@ -122,11 +122,11 @@
     },
     "arcade_60": {
       "expression": "idleon.callFunction('ArcadeBonus',60)",
-      "result": 11.83206106870229
+      "result": 14.788732394366198
     },
     "shrine_5": {
       "expression": "idleon.callFunction('Shrine',5)",
-      "result": 47.25
+      "result": 48.6
     },
     "salt_lick_3": {
       "expression": "idleon.callFunction('SaltLick',3)",
@@ -150,7 +150,7 @@
     },
     "stamp_class_xp": {
       "expression": "idleon.callFunction('StampBonusOfTypeX','classxp')",
-      "result": 0
+      "result": 4.285714285714286
     },
     "friend_bonus_1": {
       "expression": "idleon.callFunction('Thingies','FriendBonusStatz',1,0)",
@@ -158,7 +158,7 @@
     },
     "button_bonus_8": {
       "expression": "idleon.callFunction('Minehead','Button_Bonuses',8,0)",
-      "result": 52.28125
+      "result": 156.84375
     },
     "iron_set_class_exp": {
       "expression": "idleon.callFunction('GetSetBonus','IRON_SET','Bonus',0,0)",
@@ -166,7 +166,7 @@
     },
     "talent_328": {
       "expression": "idleon.callFunction('getbonus2',1,328,-1)",
-      "result": 4.83419689119171
+      "result": 4.837209302325581
     },
     "talent_35": {
       "expression": "idleon.callFunction('GetTalentNumber',1,35)",
@@ -181,12 +181,12 @@
       "result": 20
     },
     "talent_429": {
-      "expression": "idleon.callFunction('getbonus2',1,429,-1)",
-      "result": 2.815068493150685
+      "expression": "Math.max(1, idleon.callFunction('getbonus2',1,429,-1))",
+      "result": 2.8169398907103824
     },
     "talent_434": {
-      "expression": "idleon.callFunction('getbonus2',1,434,-1)",
-      "result": 1.033974358974359
+      "expression": "Math.max(1, idleon.callFunction('getbonus2',1,434,-1))",
+      "result": 1.034015345268542
     },
     "companion_bonus_128": {
       "expression": "idleon.callFunction('Companions',128)",
@@ -198,7 +198,7 @@
     },
     "statue_bonus_10": {
       "expression": "idleon.callFunction('ArbitraryCode','StatueBonusGiven10')",
-      "result": 12030.229639679997
+      "result": 13588.343221981107
     },
     "meritocracy_bonus_27": {
       "expression": "idleon.callFunction('Summoning2','MeritocBonusz',27,0)",

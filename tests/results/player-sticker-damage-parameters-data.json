@@ -2,7 +2,7 @@
   "extractions": {
     "sticker_damage_multiplier": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"StickerDMGmulti\", 0, 0)",
-      "result": 2.8096
+      "result": 2.9032
     }
   },
   "errors": {}

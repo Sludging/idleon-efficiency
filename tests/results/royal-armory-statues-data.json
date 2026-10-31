@@ -24,10 +24,6 @@
       "expression": "idleon.callFunction(\"RoyalG\", \"Statue_CanAfford\", 2, 0)",
       "result": 1
     },
-    "storage_marble_2": {
-      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const owned = idleon.getAttr(\"PixelHelperActor\")[5].behaviors.getBehavior(\"ActorEvents_232\")._ItemsAndStorageOWNED.h; return asNumber(owned[\"RGshard2\"]); })()",
-      "result": 3
-    },
     "royal_reverence_bonus": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 45, 0)",
       "result": 0

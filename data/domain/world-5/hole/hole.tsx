@@ -1241,7 +1241,7 @@ export interface HoleCharacterCapability {
  playerName: string;
  skill: SkillingSkill;
  efficiency: number;
- meetsThreshold: boolean | null;
+ meetsThreshold: boolean;
 }
 const resourceCavernSkills = [
  SkillsIndex.Mining, SkillsIndex.Catching, SkillsIndex.Chopping, SkillsIndex.Fishing,
@@ -1300,17 +1300,12 @@ export class ResourceCavren {
   this.resourceRequirementMet = this.resourceCurrent >= this.resourceRequirement;
  }
 
- prepareCharacterCapabilities(players: Player[], assignments: (number | null)[], skilling: Skilling): void {
+ prepareCharacterCapabilities(players: readonly Player[], skilling: Skilling): void {
   this.characterCapabilities = [];
   const skill = resourceCavernSkills[this.index];
 
-  assignments.forEach((assignedCavernId, playerIndex) => {
-   if (assignedCavernId !== this.cavernId) return;
-   const player = players.find(candidate => candidate.playerID === playerIndex);
-   if (!player) return;
-
+  for (const player of players) {
    const efficiency = skilling.getSkillEfficiency(player.playerID, skill);
-   if (efficiency === null) return;
    this.characterCapabilities.push({
     playerID: player.playerID,
     playerName: player.playerName,
@@ -1318,7 +1313,7 @@ export class ResourceCavren {
     efficiency,
     meetsThreshold: efficiency >= this.efficiencyThreshold,
    });
-  });
+  }
  }
 }
 
@@ -1573,7 +1568,7 @@ export class Lamp {
  prepare(hole: Hole, cavernCount: number): void {
   const measurement = hole.measurements[4].effectiveBenefit;
   const cosmo = hole.majiks.HoleUpgrades[2];
-  const monument = hole.getMonumentBonus("Wisdom", 7);
+  const monument = hole.getMonumentBonus("Justice", 7);
   const bell = hole.bell.bonuses[3].getBonus();
   const study = hole.getStudyBolaiaBonuses(6);
   this.wishesPerDay = cavernCount < 6 ? 0
@@ -2337,11 +2332,16 @@ export const updateHole = (data: Map<string, any>) => {
   currencyValueExponent: hole.fountain.currencyValueExponent,
   duckCount: hole.fountain.duckCount,
  });
- const stamps = data.get("stamps") as Stamp[][];
- const stampBonus = getStampBonusForKey(stamps, "CavernRes");
- hole.well.prepare(hole, hole.savedGemShopBucketPurchase, stampBonus, gaming.getCglunkoBonus());
  hole.resourceCavrens.prepare(hole.getResourceRequirementReduction());
 }
+
+export const updateHoleWell = (data: Map<string, any>): void => {
+ const hole = data.get("hole") as Hole;
+ const stamps = data.get("stamps") as Stamp[][];
+ const gaming = data.get("gaming") as Gaming;
+ const stampBonus = getStampBonusForKey(stamps, "CavernRes");
+ hole.well.prepare(hole, hole.savedGemShopBucketPurchase, stampBonus, gaming.getCglunkoBonus());
+};
 
 
 export const updateHoleStudyEffects = (data: Map<string, any>): void => {
@@ -2425,10 +2425,9 @@ export const updateHoleCharacterCapabilities = (data: Map<string, any>): void =>
  const players = data.get("players") as Player[];
  const skilling = data.get("skilling") as Skilling;
  const resourceCavrens = hole.resourceCavrens;
- const assignments = resourceCavrens.characterAssignments;
 
  Object.values(resourceCavrens.cavrens).forEach(cavern => {
-  cavern.prepareCharacterCapabilities(players, assignments, skilling);
+  cavern.prepareCharacterCapabilities(players, skilling);
  });
  hole.cove.accountEffects = hole.cove.prepareAccountEffects({
   campUpgrade100Bonus: hole.getSchematicBonus(100, 25),

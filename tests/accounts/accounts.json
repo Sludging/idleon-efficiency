@@ -3,8 +3,9 @@
     {
       "id": "suk69",
       "profileName": "suk69",
-      "playerIndex": 3,
-      "reason": "Public profile uploaded 2026-10-17. Its Menagerie save has 13 owned-unlock flags and 82 bonus levels; the developer save has 0 owned flags and 1 bonus level. It also has 514 breedability levels and 55 outposts.",
+      "playerIndex": 6,
+      "preparationPlayerIndex": 0,
+      "reason": "Covers developed Menagerie unlocks, bonus levels, and Breeding progress absent from the regular fixture.",
       "progression": {
         "sourceUpdatedAt": "2026-10-17T12:40:12.401Z",
         "currentWorld": 7,
@@ -21,8 +22,9 @@
     {
       "id": "lunaonline",
       "profileName": "lunaonline",
-      "playerIndex": 3,
-      "reason": "Public profile uploaded 2026-10-17. Its Menagerie save has 14 owned-unlock flags and 107 bonus levels, versus suk69's 13 and 82 and the developer save's 0 and 1. It has 1,387 shiny levels, 612 breedability levels, 56 outposts, and 54,248 Tome points.",
+      "playerIndex": 8,
+      "preparationPlayerIndex": 6,
+      "reason": "Adds different Menagerie ownership and stronger shiny and breedability progress.",
       "progression": {
         "sourceUpdatedAt": "2026-10-17T19:48:54.816Z",
         "currentWorld": 7,
@@ -36,6 +38,14 @@
         "menagerieOwnedUnlocks": 14,
         "menagerieBonusLevels": 107
       }
+    },
+    {
+      "id": "randomdudeman",
+      "profileName": "randomdudeman",
+      "source": "idleon-efficiency",
+      "playerIndex": 1,
+      "preparationPlayerIndex": 6,
+      "reason": "Midgame IE-published account with long-inactive characters."
     }
   ]
 }

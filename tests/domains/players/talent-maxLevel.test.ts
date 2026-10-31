@@ -13,9 +13,9 @@ const saveName = 'latest';
 const extractionResultsName = 'talents-sludgeadin-data.json';
 
 const talentMaxLevelParameterSpecs = {
-  talent_max_level_149_bonus: {
-    description: 'Max level bonus - Symbols of Beyond - Sludgadin',
-    extractionKey: 'talent_max_level_149_bonus',
+  symbols_of_beyond_bonus: {
+    description: 'Talent level bonus - Symbols of Beyond',
+    extractionKey: 'symbols_of_beyond_bonus',
     domainExtractor: (gameData: Map<string, any>) => {
       const players = gameData.get("players") as Player[];
       const sludgadin = players.find(player => player.playerID == 0) ?? undefined;

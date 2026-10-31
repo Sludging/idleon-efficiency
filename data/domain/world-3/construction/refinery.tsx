@@ -13,6 +13,16 @@ import { ClassIndex } from "../../talents";
 import { Arcade } from "../../world-2/arcade";
 import { Votes } from "../../world-2/votes";
 import { LegendTalents } from "../../world-7/legendTalents";
+import { Companion, getCompanionActiveBonus } from "../../companions";
+import { TaskBoard } from "../../tasks";
+import { Printer } from "./printer";
+import { Cooking } from "../../world-4/cooking";
+import { ResearchGrid } from "../../world-7/research";
+import { ImageData } from "../../imageData";
+import { Storage } from "../../storage";
+
+// Cap power per cycle before rounding down.
+const MAX_POWER_PER_CYCLE = 250000;
 
 const RankToPowerCap = "50 50 200 800 3000 8000 14000 20000 30000 40000 50000 65000 80000 100000 200000 300000 400000 500000 600000 700000 800000 900000 1000000 1000000 1000000 1000000".split(" ");
 
@@ -68,12 +78,94 @@ const RankToPowerCap = "50 50 200 800 3000 8000 14000 20000 30000 40000 50000 65
 // return (t = b.engine.getGameAttribute("DNSM")), (parsenum(t) = null != d.RefineDN0 ? t.getReserved("RefineDN0") : t.h.RefineDN0) * C._customBlock_Refinery("CycleInitialTime", Math.floor(n / 3));
 // }
 
+export interface RefineryFuelInput {
+    item: string;
+    displayName: string;
+    imageData: ImageData;
+    isSalt: boolean;
+    stored: number;
+    costPerHour: number;
+    costToRankUp: number;
+    printedPerHour: number;
+    netUsePerHour: number;
+}
+
 export class SaltStatus {
     rank: number = 0
+    unlocked: boolean = false
     progress: number = 0
-    autoRefine: number = 0
+    autoRefineEnabled: boolean = false
     active: boolean = false
     baseCost: ComponentModel[] = []
+    outputPerHour: number = 0
+    consumedPerHour: number = 0
+    balancePerHour: number = 0
+    maxSafeRank: number | null = null
+    fuelTimeSeconds: number | null = null
+    storedFuelInsufficient: boolean = false
+    storedSaltQuantity: number = 0
+    fuelInputs: RefineryFuelInput[] = []
+    private powerBonus: number = 0;
+
+
+    updateSustainability(
+        cycleTime: number,
+        previous: SaltStatus | undefined,
+        previousName: string | undefined,
+        previousCycleTime: number,
+        next: SaltStatus | undefined,
+        name: string,
+        nextCycleTime: number,
+        saltMeritLevel: number,
+        index: number,
+        powerBonus: number,
+        printer: Printer,
+    ) {
+        this.powerBonus = powerBonus;
+        const power = (salt: SaltStatus) =>
+            Math.floor(Math.min(MAX_POWER_PER_CYCLE, Math.pow(salt.rank, 1.3) * (1 + powerBonus)));
+        const maxRank = (allowance: number, quantity: number, exponent: number) => {
+            let lower = 0;
+            let upper = 1;
+            while (Math.floor(Math.pow(upper, exponent)) * quantity <= allowance + 1e-9) {
+                lower = upper;
+                upper *= 2;
+            }
+            while (lower + 1 < upper) {
+                const candidate = Math.floor((lower + upper) / 2);
+                if (Math.floor(Math.pow(candidate, exponent)) * quantity <= allowance + 1e-9) {
+                    lower = candidate;
+                } else {
+                    upper = candidate;
+                }
+            }
+            return lower;
+        };
+
+        this.outputPerHour = this.unlocked && this.active ? power(this) * 3600 / cycleTime : 0;
+        const nextCost = next?.baseCost.find(cost => cost.item === name);
+        this.consumedPerHour = this.unlocked && next?.unlocked && next.active && nextCost
+            ? Math.floor(Math.pow(next.rank, index + 1 <= saltMeritLevel ? 1.3 : 1.5)) * nextCost.quantity * 3600 / nextCycleTime
+            : 0;
+        this.balancePerHour = this.outputPerHour - this.consumedPerHour;
+        this.maxSafeRank = null;
+        if (!this.unlocked) return;
+
+        // The previous salt is assumed active, even when it is currently switched off.
+        const previousCost = this.baseCost.find(cost => cost.item === previousName);
+        const allowance = previous?.unlocked ? power(previous) * cycleTime / previousCycleTime : 0;
+        if (previousCost) {
+            this.maxSafeRank = maxRank(allowance, previousCost.quantity, index <= saltMeritLevel ? 1.3 : 1.5);
+        }
+        for (const cost of this.baseCost) {
+            if (cost.item.includes("Refinery")) continue;
+            const printed = printer.GetTotalActive(cost.item);
+            if (printed > 0) {
+                const printerLimit = maxRank(printed * cycleTime / 3600, cost.quantity, 1.5);
+                this.maxSafeRank = this.maxSafeRank === null ? printerLimit : Math.min(this.maxSafeRank, printerLimit);
+            }
+        }
+    }
 
     getCap = () => {
         // The math.max(x,25) is taken from Lava's code, guess he got lazy to add more values after 25.
@@ -81,11 +173,7 @@ export class SaltStatus {
     }
 
     getPowerPerCycle = () => {
-        // If salt isn't unlocked, just return 1 per cycle.
-        if (this.rank == 0) {
-            return 1
-        }
-        return Math.floor(Math.pow(this.rank, 1.3));
+        return Math.floor(Math.min(MAX_POWER_PER_CYCLE, Math.pow(this.rank, 1.3) * (1 + this.powerBonus)));
     }
 
     getTimeToNextRank = (cycleTime: number) => {
@@ -93,31 +181,58 @@ export class SaltStatus {
     }
 
     getCyclesTillNextRank = () => {
-        const remainingProgress = this.getCap() - this.progress;
-        return Math.ceil(remainingProgress / this.getPowerPerCycle())
+        // Round the remaining cycle count to the nearest whole cycle.
+        // The Refinery screen fills the final progress without consuming fuel.
+        const remainingProgress = Math.max(0, this.getCap() - this.progress);
+        return Math.round(remainingProgress / Math.max(this.getPowerPerCycle(), 1));
     }
 
-    getFuelTime = (itemsInStorage: Item[], itemsInPrinter: Item[], taskBought: boolean = false) => {
-        const timeArray: number[] = [];
-        this.baseCost.forEach((cost) => {
-            const multiplier = this.getCostMulti(cost.item.includes("Refinery"), taskBought);
-            const storageInfo = itemsInStorage.find((item) => item.internalName == cost.item);
-            if (!storageInfo || storageInfo.count < cost.quantity * multiplier) {
-                timeArray.push(0)
-            }
-            timeArray.push((storageInfo?.count ?? 0) / (cost.quantity * multiplier));
+    prepareFuel(
+        name: string,
+        quantity: (item: string) => number,
+        items: Item[],
+        printer: Printer,
+        cycleTime: number,
+        saltMeritApplies: boolean,
+    ) {
+        const cycles = this.getCyclesTillNextRank();
+        this.storedSaltQuantity = quantity(name);
+        this.storedFuelInsufficient = this.unlocked && this.baseCost.some(cost =>
+            quantity(cost.item) < cost.quantity * this.getCostMulti(cost.item.includes("Refinery"), saltMeritApplies) * cycles
+        );
+        this.fuelTimeSeconds = null;
+        const netUse = new Map<string, number>();
+        for (const item of new Set(this.baseCost.map(cost => cost.item))) {
+            const isSalt = item.includes("Refinery");
+            const perCycle = this.baseCost.filter(cost => cost.item === item)
+                .reduce((total, cost) => total + cost.quantity * this.getCostMulti(isSalt, saltMeritApplies), 0);
+            const netConsumption = perCycle * 3600 / cycleTime - (isSalt ? 0 : printer.GetTotalActive(item));
+            netUse.set(item, netConsumption);
+            if (netConsumption <= 0) continue;
+            const time = quantity(item) * 3600 / netConsumption;
+            this.fuelTimeSeconds = this.fuelTimeSeconds === null ? time : Math.min(this.fuelTimeSeconds, time);
+        }
+        this.fuelInputs = this.baseCost.flatMap(cost => {
+            const item = items.find(candidate => candidate.internalName === cost.item);
+            if (!item) return [];
+            const isSalt = cost.item.includes("Refinery");
+            const perCycle = cost.quantity * this.getCostMulti(isSalt, saltMeritApplies);
+            return [{
+                item: cost.item,
+                displayName: item.displayName,
+                imageData: item.getImageData(),
+                isSalt,
+                stored: quantity(cost.item),
+                costPerHour: perCycle * 3600 / cycleTime,
+                costToRankUp: perCycle * cycles,
+                printedPerHour: printer.GetTotalActive(cost.item),
+                netUsePerHour: Math.max(0, netUse.get(cost.item)!),
+            }];
         });
-
-        return Math.min(...timeArray);
     }
 
 
     getCostMulti = (salt: boolean, taskBought: boolean = false) => {
-        // For unranked salts, just show base costs.
-        if (this.rank == 0) {
-            return 1;
-        }
-
         if (salt && taskBought) {
             return Math.floor(Math.pow(this.rank, 1.3));
         }
@@ -137,6 +252,31 @@ export class Refinery extends Domain {
     salts: Record<string, SaltStatus> = {}
     storage: RefineryStorage[] = []
     cycleInfo: Record<string, CycleInfo> = {}
+
+    updateSustainability(printer: Printer, saltMeritLevel: number, powerBonus: number) {
+        const salts = Object.entries(this.salts);
+        const cycles = [this.cycleInfo["Combustion"], this.cycleInfo["Synthesis"], this.cycleInfo["Polymerization"]];
+        salts.forEach(([name, salt], index) => {
+            const previous = salts[index - 1];
+            const next = salts[index + 1];
+            salt.updateSustainability(
+                cycles[Math.floor(index / 3)].cycleTime,
+                previous?.[1], previous?.[0], previous ? cycles[Math.floor((index - 1) / 3)].cycleTime : 0,
+                next?.[1], name, next ? cycles[Math.floor((index + 1) / 3)].cycleTime : 0,
+                saltMeritLevel, index, powerBonus, printer,
+            );
+        });
+    }
+
+    prepareFuel(storage: Storage, items: Item[], printer: Printer, saltMeritLevel: number) {
+        const quantity = (name: string) =>
+            (this.storage.find(item => item.name === name)?.quantity ?? 0)
+            + storage.chest.filter(item => item.internalName === name).reduce((sum, item) => sum + item.count, 0);
+        const cycles = [this.cycleInfo["Combustion"], this.cycleInfo["Synthesis"], this.cycleInfo["Polymerization"]];
+        Object.entries(this.salts).forEach(([name, salt], index) => {
+            salt.prepareFuel(name, quantity, items, printer, cycles[Math.floor(index / 3)].cycleTime, index <= saltMeritLevel);
+        });
+    }
 
     shinyBonusSpeed: number = 0;
 
@@ -182,14 +322,23 @@ export class Refinery extends Domain {
                 }
             });
 
+            Object.values(refinery.salts).forEach((salt, index) => {
+                salt.unlocked = index < unlockedSalts;
+                if (refineryData[index + 3]?.[1] != null) {
+                    salt.rank = refineryData[index + 3][1];
+                }
+                if (!salt.unlocked) {
+                    salt.active = false;
+                }
+            });
+
             [...Array(unlockedSalts)].forEach((_, i) => {
                 const saltIndex = i + 3;
-                if (i >= Object.keys(refinery.salts).length) {
+                if (i >= Object.keys(refinery.salts).length || !refineryData[saltIndex]) {
                     return;
                 }
-                refinery.salts[`Refinery${i + 1}`].rank = refineryData[saltIndex][1];
                 refinery.salts[`Refinery${i + 1}`].progress = refineryData[saltIndex][0];
-                refinery.salts[`Refinery${i + 1}`].autoRefine = refineryData[saltIndex][4];
+                refinery.salts[`Refinery${i + 1}`].autoRefineEnabled = refineryData[saltIndex][4] > 0;
                 refinery.salts[`Refinery${i + 1}`].active = refineryData[saltIndex][3] as boolean;
             })
         }
@@ -210,6 +359,8 @@ export function updateRefinery(data: Map<string, any>) {
     const votes = data.get("votes") as Votes;
     const legendTalents = data.get("legendTalents") as LegendTalents;
     const lastUpdated = data.get("lastUpdated") as Date;
+    const cooking = data.get("cooking") as Cooking;
+    const research = data.get("research") as ResearchGrid;
 
     const constMastery = rift.bonuses.find(bonus => bonus.name == "Construct Mastery") as ConstructionMastery;
 
@@ -224,16 +375,33 @@ export function updateRefinery(data: Map<string, any>) {
     const sigilsBonus = sigils.sigils[10].getBonus() ?? 0;
     const votesBonus = votes.getCurrentBonus(33);
     const legendTalentBonus = legendTalents.getBonusFromIndex(19);
+    const researchSpeedBonus = research.getBonusForId(49);
+    const polymerizationBonus = cooking.getMealBonusForKey("PolyRefSpd") + research.getBonusForId(48);
 
-    refinery.cycleInfo["Combustion"].cycleTime = Math.ceil(900 * Math.pow(4, 0) / ((1 + (vialBonus + (saltLickBonus + divineKnightBonus + (sigilsBonus + (stampBonus + (refinery.shinyBonusSpeed + (riftBonus + (arcadeBonus + votesBonus))))))) / 100) * Math.max(1, labCycleBonus) * (1 + legendTalentBonus / 100)));
+    refinery.cycleInfo["Combustion"].cycleTime = Math.ceil(900 * Math.pow(4, 0) / ((1 + (vialBonus + (saltLickBonus + divineKnightBonus + (sigilsBonus + (stampBonus + (refinery.shinyBonusSpeed + (riftBonus + (arcadeBonus + votesBonus + researchSpeedBonus))))))) / 100) * Math.max(1, labCycleBonus) * (1 + legendTalentBonus / 100)));
     refinery.cycleInfo["Combustion"].timePast += secondsSinceUpdate;
 
-    refinery.cycleInfo["Synthesis"].cycleTime = Math.ceil(900 * Math.pow(4, 1) / ((1 + (vialBonus + (saltLickBonus + divineKnightBonus + (sigilsBonus + (stampBonus + (refinery.shinyBonusSpeed + (riftBonus + (arcadeBonus + votesBonus))))))) / 100) * Math.max(1, labCycleBonus) * (1 + legendTalentBonus / 100)));
+    refinery.cycleInfo["Synthesis"].cycleTime = Math.ceil(900 * Math.pow(4, 1) / ((1 + (vialBonus + (saltLickBonus + divineKnightBonus + (sigilsBonus + (stampBonus + (refinery.shinyBonusSpeed + (riftBonus + (arcadeBonus + votesBonus + researchSpeedBonus))))))) / 100) * Math.max(1, labCycleBonus) * (1 + legendTalentBonus / 100)));
     refinery.cycleInfo["Synthesis"].timePast += secondsSinceUpdate;
 
-    refinery.cycleInfo["Polymerization"].cycleTime = Math.ceil(900 * Math.pow(4, 2) / ((1 + (vialBonus + (saltLickBonus + divineKnightBonus + (sigilsBonus + (stampBonus + (refinery.shinyBonusSpeed + (riftBonus + (arcadeBonus + votesBonus))))))) / 100) * Math.max(1, labCycleBonus) * (1 + legendTalentBonus / 100)));
+    // Polymerization has a longer base cycle and its own speed bonuses.
+    refinery.cycleInfo["Polymerization"].cycleTime = Math.ceil(900 * Math.pow(4, 2) * 25 / ((1 + (vialBonus + (saltLickBonus + divineKnightBonus + (sigilsBonus + (stampBonus + (refinery.shinyBonusSpeed + (riftBonus + (arcadeBonus + votesBonus + researchSpeedBonus))))))) / 100) * Math.max(1, labCycleBonus) * (1 + legendTalentBonus / 100) * (1 + polymerizationBonus / 100)));
     refinery.cycleInfo["Polymerization"].timePast += secondsSinceUpdate;
 
 
+    return refinery;
+}
+
+export function updateRefinerySustainability(data: Map<string, any>) {
+    const refinery = data.get("refinery") as Refinery;
+    const printer = data.get("printer") as Printer;
+    const taskboard = data.get("taskboard") as TaskBoard;
+    const companions = data.get("companions") as Companion[];
+    const storage = data.get("storage") as Storage;
+    const items = data.get("itemsData") as Item[];
+    const saltMerit = taskboard.merits.find(merit => merit.descLine1 === "Refinery Salt Costs don't scale beyond")!;
+
+    refinery.updateSustainability(printer, saltMerit.level, getCompanionActiveBonus(companions, 35));
+    refinery.prepareFuel(storage, items, printer, saltMerit.level);
     return refinery;
 }

@@ -26049,7 +26049,7 @@ export const initItemRepo = () => {
                         "mCostExp": 2,
                         "startingCost": 35000,
                         "cCostExp": 1.4,
-                        "i10": -1,
+                        "i10": 1,
                         "upgradeText": "{} Mining Efficiency",
                         "i12": 0
                     }
@@ -32340,7 +32340,6 @@ export const initItemRepo = () => {
                             "txtName": "Task Unlocks Tab 5"
                         },
                         <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"},
-                        <SourceModel>{"wikiName": "[[Skull Shop]]", "txtName": "Killroy Shop"},
                         <SourceModel>{
                             "wikiName": "[[Alchemy#Level up Gift|Level up Gift]]",
                             "txtName": "Alchemy: Level up Gift"

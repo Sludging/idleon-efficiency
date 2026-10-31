@@ -4,8 +4,8 @@
   "extractions": [
     {
       "label": "account_progression",
-      "expression": "[idleon.engine.getGameAttribute(\"Menagerie\")[0][0], idleon.engine.getGameAttribute(\"Menagerie\")[0][1], idleon.engine.getGameAttribute(\"Menagerie\")[0][2], idleon.callFunction(\"MenagerieStuff\", \"ShellEXPreq\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"LumiGainRate\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"UpgUnlocked\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"UpgUnlocked\", 1, 0), idleon.callFunction(\"MenagerieStuff\", \"UpgUnlocked\", 2, 0)]",
-      "description": "Saved Lumi, Shells, and rank, threshold, calculated hourly Lumi, and available missions/unlocks/bonuses"
+      "expression": "[idleon.engine.getGameAttribute(\"Menagerie\")[0][1], idleon.engine.getGameAttribute(\"Menagerie\")[0][2], idleon.callFunction(\"MenagerieStuff\", \"ShellEXPreq\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"LumiGainRate\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"UpgUnlocked\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"UpgUnlocked\", 1, 0), idleon.callFunction(\"MenagerieStuff\", \"UpgUnlocked\", 2, 0)]",
+      "description": "Saved Shells and rank, threshold, calculated hourly Lumi, and available missions, unlocks, and bonuses"
     },
     {
       "label": "mission_states",
@@ -14,13 +14,13 @@
     },
     {
       "label": "unlock_states",
-      "expression": "Array.from({ length: 25 }, (_, i) => [i, idleon.callFunction(\"MenagerieStuff\", \"UnlockOwned\", i, 0), idleon.callFunction(\"MenagerieStuff\", \"Cost\", 1, i), idleon.callFunction(\"MenagerieStuff\", \"CanClaim\", 1, i)])",
-      "description": "Ownership, next Lumi cost, and affordability for every Menagerie unlock"
+      "expression": "Array.from({ length: 25 }, (_, i) => [i, idleon.callFunction(\"MenagerieStuff\", \"UnlockOwned\", i, 0), idleon.callFunction(\"MenagerieStuff\", \"Cost\", 1, i)])",
+      "description": "Ownership and next Lumi cost for every Menagerie unlock"
     },
     {
       "label": "bonus_states",
-      "expression": "Array.from({ length: 25 }, (_, i) => [i, idleon.engine.getGameAttribute(\"Menagerie\")[3][i], idleon.callFunction(\"MenagerieStuff\", \"BoostQTY\", i, 0), idleon.callFunction(\"MenagerieStuff\", \"Cost\", 2, i), idleon.callFunction(\"MenagerieStuff\", \"CanClaim\", 2, i)])",
-      "description": "Current levels and effects, next costs, and affordability for all repeatable Menagerie bonuses"
+      "expression": "Array.from({ length: 25 }, (_, i) => [i, idleon.engine.getGameAttribute(\"Menagerie\")[3][i], idleon.callFunction(\"MenagerieStuff\", \"BoostQTY\", i, 0), idleon.callFunction(\"MenagerieStuff\", \"Cost\", 2, i)])",
+      "description": "Current levels, effects, and next costs for all repeatable Menagerie bonuses"
     },
     {
       "label": "usable_resources",

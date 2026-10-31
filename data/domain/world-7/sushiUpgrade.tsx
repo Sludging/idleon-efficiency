@@ -119,7 +119,7 @@ export class SushiUpgrade {
             return unlockDescription;
         }
 
-        let description = this.data.description
+        const description = this.data.description
             .replace(
                 "{",
                 this.data.description.includes("{%")
@@ -130,16 +130,9 @@ export class SushiUpgrade {
                 "}",
                 notateNumber(1 + this.getBonus(level) / 100, "MultiplierInfo").replace("#", "")
             );
-        if (description.includes("$")) {
-            description = description.replace("$", this.getDollarDescriptionValue(level));
-        }
-        return description;
-    }
-
-    private getDollarDescriptionValue(level: number): string {
         switch (this.index) {
             case 1:
-                return formatGameAmount(this.fuelCapacity);
+                return description.replace("$", formatGameAmount(this.fuelCapacity));
             case 2:
             case 3:
             case 4:
@@ -148,23 +141,23 @@ export class SushiUpgrade {
             case 10:
             case 11:
             case 12:
-                return `${Math.round(100 * (1 + level / 100)) / 100}`;
+                return description.replace("$", `${Math.round(100 * (1 + level / 100)) / 100}`);
             case 6:
-                return formatGameAmount(Math.round(this.getBonus(level)) + 1);
+                return description.replace("$", formatGameAmount(Math.round(this.getBonus(level)) + 1));
             case 8:
-                return `${formatGameAmount(this.fuelPerHour)}/hr; maximum capacity is ${formatGameAmount(this.fuelCapacity)}.`;
+                return description.replace("$", `${formatGameAmount(this.fuelPerHour)}/hr; maximum capacity is ${formatGameAmount(this.fuelCapacity)}.`);
             case 22:
-                return formatGameAmount(level === this.level ? this.saffronHours : Math.round(1 + this.getBonus(level)));
+                return description.replace("$", formatGameAmount(level === this.level ? this.saffronHours : Math.round(1 + this.getBonus(level))));
             case 29:
-                return `${this.uniqueSushi - 6}`;
+                return description.replace("$", `${this.uniqueSushi - 6}`);
             case 36:
-                return `${Math.round(1e4 * (1 - 1 / (1 + this.getBonus(level) / 100))) / 100}`;
+                return description.replace("$", `${Math.round(1e4 * (1 - 1 / (1 + this.getBonus(level) / 100))) / 100}`);
             case 37:
-                return formatGameAmount(
+                return description.replace("$", formatGameAmount(
                     level === this.level ? this.knowledgeExperienceBase : Math.round((1 + this.getBonus(level) / 10) * 10) / 10
-                );
+                ));
             default:
-                throw new Error(`No Sushi upgrade description value for record ${this.index}.`);
+                return description;
         }
     }
 

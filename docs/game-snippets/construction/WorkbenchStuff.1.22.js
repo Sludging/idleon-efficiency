@@ -4,6 +4,10 @@
  * Game version: 1.22 ("Jelly_Operator")
  * Captured: 2026-09-22 via game-debug-tool (findFunction + toString)
  * Case reference: correctness case issue 398
+ * Printer growth research, checked against version 1.24:
+ * King of the Remembered is the only recipient-dependent factor in AdditionExtraPrinting.
+ * Evaluate account candidates with each real recipient's shared talent inputs, then use the highest attainable bonus.
+ * ExtraPrinting keeps each character's actual Laboratory and Harriep multipliers.
  */
 function (e, t, i) {
                             if ("FlagReq" == e)

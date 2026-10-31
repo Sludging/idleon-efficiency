@@ -29,6 +29,8 @@ export const selectResearchSkillProgress = (data: Map<string, unknown>, charCoun
       xpReq = Number(requirements[SkillsIndex.Research]);
     }
   }
+  // The website previews Research at zero before it starts; this does not initialize the game.
+  if (highestLevel <= 0) return { highestLevel: 0, currentXP: 0, xpReq: 0 };
 
   return { highestLevel, currentXP, xpReq };
 };

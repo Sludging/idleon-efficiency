@@ -1,4 +1,4 @@
-import type { Spelunking } from '../../../data/domain/world-7/spelunking';
+import { Spelunking } from '../../../data/domain/world-7/spelunking';
 import { loadGameDataFromSave, loadTestSave } from '../../utils/cloudsave-loader';
 import type { ExtractionResults } from '../../utils/live-game-data-loader';
 import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
@@ -26,11 +26,13 @@ describe('Spelunking Cave Node harvest outcomes', () => {
     const playerID = 3;
     let extractionResults: ExtractionResults;
     let spelunking: Spelunking;
+    let gameData: Map<string, unknown>;
 
     beforeAll(() => {
         extractionResults = loadExtractionResults('spelunking-cave-nodes-data.json');
         validateExtractionHealth(extractionResults);
-        spelunking = loadGameDataFromSave('latest').get('spelunking') as Spelunking;
+        gameData = loadGameDataFromSave('latest');
+        spelunking = gameData.get('spelunking') as Spelunking;
         expect(spelunking.chapters).toHaveLength(caveNodes.length);
     });
 
@@ -39,7 +41,7 @@ describe('Spelunking Cave Node harvest outcomes', () => {
         expect(extractionResults.extractions[label]).toBeDefined();
         expect(extractionResults.extractions[label].result).not.toBeNull();
         const expected = extractionResults.extractions[label].result as NativeCaveNodeOutcome;
-        const outcome = spelunking.getCaveNodeHarvest(chapterIndex, playerID);
+        const outcome = spelunking.characters[playerID].caveNodeHarvests[chapterIndex];
         const context = `${name}: character 3; native efficiency ${expected.efficiency}, prowess ${expected.prowess}, difficulty ${expected.difficulty}`;
 
         // Efficiency eligibility does not bypass normal access to the node's map.
@@ -50,7 +52,8 @@ describe('Spelunking Cave Node harvest outcomes', () => {
         });
 
         if (expected.pagesPerDrop === null) {
-            expect(outcome.pagesPerDrop).toBeUndefined();
+            expect(outcome.eligible).toBe(false);
+            expect(outcome.pagesPerDrop).toBe(0);
         } else {
             // This integer quantity does not include extra drops or an EXP multiplier.
             expect(outcome.pagesPerDrop).toMatchLiveGameWithDetails(expected.pagesPerDrop, {
@@ -77,9 +80,16 @@ describe('Spelunking Cave Node harvest outcomes', () => {
         });
 
         expect(expectedPlayerID).toBeDefined();
-        expect(spelunking.grandDiscoveryPlayerID).toMatchLiveGameWithDetails(expectedPlayerID, {
+        const selectedPlayerID = expectedPlayerID!;
+        expect(spelunking.grandDiscovery.playerName).toBe(names[selectedPlayerID]);
+        expect(spelunking.grandDiscovery.skillLevel).toMatchLiveGameWithDetails(highestLevel, {
             tolerance: 0,
             context: `Highest actual saved Spelunking level ${highestLevel}; first roster character wins a tie`,
+        });
+        spelunking.tunnels.forEach(tunnel => {
+            expect(spelunking.grandDiscovery.chances[tunnel.index]).toBe(
+                spelunking.characters[selectedPlayerID].grandDiscoveryChances[tunnel.index],
+            );
         });
     });
 });

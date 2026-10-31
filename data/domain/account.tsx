@@ -1,6 +1,7 @@
 import { GroupByFunction, range } from "../utility";
 import { Arcade } from "./world-2/arcade";
 import { Domain, RawData } from "./base/domain";
+import { BundleOwnership } from "./bundleOwnership";
 import { Construction, Library } from "./world-3/construction/construction";
 import { initTalentNameRepo } from "./data/TalentNameRepo";
 import { AFKTypeEnum } from "./enum/aFKTypeEnum";
@@ -9,6 +10,7 @@ import { Player } from "./player";
 import { Quests } from "./quests";
 import { Storage } from "./storage";
 import { WeeklyBoss } from "./weekly-boss";
+import type { StaticRepositories } from "./repositories";
 import { FractIslandBonusesThresholds } from "./world-2/islandExpedition";
 
 // Option List Indexes:
@@ -128,6 +130,7 @@ export class Account extends Domain {
     totalMoney: number = 0;
     talentsMaxLevels: number[] = [];
     plunderousMobKills: number = 0;
+    onyxStatuesUnlocked: boolean = false;
     hasDeathBringerBundle: boolean = false;
     hasExplorerBundle: boolean = false;
     hasBankBundle: boolean = false;
@@ -135,6 +138,7 @@ export class Account extends Domain {
     hasBundleL: boolean = false;
     hasBundleM: boolean = false;
     weeklyBoss: WeeklyBoss = new WeeklyBoss();
+    bundles: BundleOwnership = new BundleOwnership();
     movementSpeedBonusPercent: number = 0;
     spelunkingPowerBonus: number = 0;
     fractalIslandProgress: number = 0;
@@ -194,11 +198,13 @@ export class Account extends Domain {
             { key: "FamValMinigameHiscores", perPlayer: false, default: [] },
             { key: "CYTalentPoints", perPlayer: false, default: [] },
             { key: "WeeklyBoss", perPlayer: false, default: {} },
+            { key: "TimeAway", perPlayer: false, default: { GlobalTime: 0 } },
             { key: "SM_", perPlayer: true, default: {} },
         ]
     }
 
-    init(allItems: Item[], _charCount: number) {
+    init(allItems: Item[], _charCount: number, repositories: StaticRepositories) {
+        this.weeklyBoss.init(repositories);
         this.miniBosses = [];
         this.miniBosses.push(new Miniboss("mini3a", 0));
         this.miniBosses.push(new Miniboss("mini4a", 0));
@@ -227,6 +233,7 @@ export class Account extends Domain {
         const charCount = data.get("charCount") as number;
 
         account.plunderousMobKills = Number(optionList?.[139] ?? 0);
+        account.onyxStatuesUnlocked = Number(optionList?.[69] ?? 0) >= 2;
         account.obolFragments = Number(obolFragments);
         account.movementSpeedBonusPercent = Number(optionList?.[438] ?? 0);
         account.spelunkingPowerBonus = Number(optionList?.[500] ?? 0);
@@ -245,19 +252,18 @@ export class Account extends Domain {
         account.damageMultiplierFloorInput = Number(optionList?.[232] ?? 0);
         account.damageExponentInput = Number(optionList?.[473] ?? 0);
         account.cavernDamageUpgradeLevel = Number(optionList?.[649] ?? 0);
-        account.weeklyBoss.parse(optionList, data.get("WeeklyBoss") as Record<string, unknown>);
+        const timeAway = data.get("TimeAway") as { GlobalTime: number };
+        account.weeklyBoss.parse(optionList, data.get("WeeklyBoss") as Record<string, unknown>, Number(timeAway.GlobalTime));
         const rawData = data.get("rawData") as Record<string, string | undefined>;
-        const bundles: Record<string, string | number> = rawData.BundlesReceived === undefined
-            ? {}
-            : JSON.parse(rawData.BundlesReceived);
-        account.hasDeathBringerBundle = Number(bundles.bun_v) === 1;
-        account.hasExplorerBundle = Number(bundles.bun_p) === 1;
-        account.hasNoMealLeftBehindBundle = Number(bundles.bun_s) === 1;
-        account.hasEquinoxBundle = Number(bundles.bun_q) === 1;
-        account.hasDamageMultiplierBundle = Number(bundles.bon_a) === 1;
-        account.hasBankBundle = Number(bundles.ban_k) === 1;
-        account.hasBundleL = Number(bundles.ban_l) === 1;
-        account.hasBundleM = Number(bundles.ban_m) === 1;
+        account.bundles.parse(rawData.BundlesReceived);
+        account.hasDeathBringerBundle = account.bundles.getOwnership("bun_v") === "owned";
+        account.hasExplorerBundle = account.bundles.getOwnership("bun_p") === "owned";
+        account.hasNoMealLeftBehindBundle = account.bundles.getOwnership("bun_s") === "owned";
+        account.hasEquinoxBundle = account.bundles.getOwnership("bun_q") === "owned";
+        account.hasDamageMultiplierBundle = account.bundles.getOwnership("bon_a") === "owned";
+        account.hasBankBundle = account.bundles.getOwnership("ban_k") === "owned";
+        account.hasBundleL = account.bundles.getOwnership("ban_l") === "owned";
+        account.hasBundleM = account.bundles.getOwnership("ban_m") === "owned";
 
         account.talentPointsOwned = [];
         talentPointsOwned.forEach((points) => {

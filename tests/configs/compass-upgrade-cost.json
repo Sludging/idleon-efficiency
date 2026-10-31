@@ -38,21 +38,6 @@
       "description": "Sneaky Sale I source Survival group differs from its display Nomadic path: current raw game quote at the unchanged saved level"
     },
     {
-      "label": "compass_upgrade_cost_123",
-      "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 123, 0)",
-      "description": "Tempest Damage efficiency goal's observed first purchase: current game quote at the unchanged saved level"
-    },
-    {
-      "label": "compass_upgrade_cost_148",
-      "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 148, 0)",
-      "description": "Dust Multiplier efficiency goal's observed first purchase: current game quote at the unchanged saved level"
-    },
-    {
-      "label": "compass_upgrade_cost_6",
-      "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 6, 0)",
-      "description": "Tempest Accuracy and Tempest Defense efficiency goals' first purchase after current-price correction: current game quote at the unchanged saved level"
-    },
-    {
       "label": "masterclasses_upgrade_cost_multiplier",
       "expression": "idleon.callFunction(\"Summoning\", \"AllMasterclassCostRedux\", 0, 0)",
       "description": "Whole shared Master Classes cost multiplier directly used by every Compass upgrade price"

@@ -29,7 +29,7 @@
     },
     "tunnel_0_amber_text": {
       "expression": "(() => { const amount = Number(idleon.getAttr(\"Spelunk\")[2][0]) / idleon.callFunction(\"Spelunk\", \"AmberDenominator\", 0, 0); return amount > 1e14 ? idleon.callFunction(\"NotateNumber\", amount, \"Big\") : idleon.callFunction(\"CommaNotation\", amount); })()",
-      "result": "200,125"
+      "result": "4,431,833"
     },
     "tunnel_7_amber_text": {
       "expression": "(() => { const amount = Number(idleon.getAttr(\"Spelunk\")[2][7]) / idleon.callFunction(\"Spelunk\", \"AmberDenominator\", 0, 0); return amount > 1e14 ? idleon.callFunction(\"NotateNumber\", amount, \"Big\") : idleon.callFunction(\"CommaNotation\", amount); })()",

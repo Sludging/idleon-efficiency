@@ -27,6 +27,8 @@ For repository-backed concepts selected under [MODEL-01](../../CODING_STANDARDS.
 
 [`FriendBonus`](../../data/domain/friends.tsx) wraps generated `FriendBonusBase` data and owns active/account-level state and its bonus calculation. [`Meal`](../../data/domain/world-4/cooking.tsx) and [`MainframeBonus`](../../data/domain/world-4/lab.tsx) show other uses of website wrappers and `fromBase`. Keep generated repositories and models as game data sources; put website state and behavior in handwritten domain code.
 
+Use generated repository types directly for static record indexes and scaling fields. Avoid maintaining duplicate literal unions for those values. Keep overloads that describe specialized return types from handwritten factories.
+
 ### Raw static repository catalogue
 
 Use `repositories.get('Item')` to read raw `ItemRepo` records as `DeepReadonly` data. The catalogue returns raw records, not website-owned wrappers; use wrappers only when a concept needs website state or behavior.
@@ -51,13 +53,17 @@ For example, Lab's ordinary mainframe bonuses share `MainframeBonus` behavior. `
 
 Keep the established `init` → `parse` → `calculate` boundaries: initialize domain structures, parse the save into state, then calculate derived values in the registered dependency order. Updaters prepare cross-domain inputs on their owning object; consumer-facing getters may perform the final formula from that prepared state. `Totalizer` is one example. Read the [architecture skill](../../skills/architecture/SKILL.md) when changing pipeline dependencies rather than duplicating its ordering tutorial here.
 
-Account-level getters must also work before a save loads. Initialize owned contribution inputs with neutral values, then replace them during calculation. Poppy's bonus inputs, Farming's Land Rank multipliers, and Hat Rack's empty contribution map illustrate this pattern. Use neutral values when resetting these inputs, and accept an empty roster for account projections. Keep validation for requests that require an actual player.
+Account-level getters must also work before a save loads. Initialize owned contribution inputs with neutral values, then replace them during calculation. Poppy's bonus inputs, Farming's Land Rank multipliers, and Hat Rack's empty contribution map illustrate this pattern. Use neutral values when resetting these inputs, and accept an empty roster for account projections. Use trusted typed contracts for internal player references; keep checks for genuinely optional save input.
 
 When parsing reuses character-owned objects, reset their prepared inputs before replacing saved values. The Talent reset hook clears class-level caps without rebuilding every talent. Prayer passive fractions and Crucible progress also reset to zero until their calculation runs.
 
 Equipment and Obols cache contributions, not final character stats. Their empty property channels start at zero; final stats still require actor-specific calculation.
 
-For account-wide mechanics that use a selected or best character contribution, select and prepare it once, then expose the result to consumers. Lab stores `bestBuboPlayerID` and prepares the connection bonus in [`lab.tsx`](../../data/domain/world-4/lab.tsx). This illustrates where selection belongs, not endorsement of Lab's specific player-selection expression for other calculations. Preserve explicit player context when a result is genuinely per-character; do not replace it with an account-wide value. Skilling's player-specific cache and callers are useful references in [`skilling.tsx`](../../data/domain/skilling.tsx).
+Select and prepare each account projection once, then expose its numeric results to consumers. [`Spelunking`](../../data/domain/world-7/spelunking.tsx) stores per-character results and a required Grand Discovery projection. Its UI reads those values without finding a selected player. [`NobisectGod`](../../data/domain/world-5/divinity.tsx) prepares per-character blessing bonuses during account calculation. Preserve per-character results where the bonus varies by recipient.
+
+[`IslandExpeditions`](../../data/domain/world-2/islandExpedition.tsx) prepares its collector name and daily bottle rate on `BottleCollection`. Trash and Rando initialize neutral reward-possession records, then replace them after Storage and Slab are ready.
+
+[`WeeklyBoss`](../../data/domain/weekly-boss.ts) and [`SpeedrunRunner`](../../data/domain/speedrun.ts) retain character names and class artwork. Their pages render these identities without rejoining the player roster.
 
 For calculations currently called only by UI code, apply [MODEL-01](../../CODING_STANDARDS.md#model-01--model-responsible-concepts) with the preparation workflow above. Follow the UI guide for presentation, not calculation ownership.
 

@@ -1,7 +1,6 @@
 {
   "description": "Extract the selected character's account Points gain potential and per-character Divinity EXP rate",
   "target": "Divinity Points gain potential and EXP rate",
-  "requiredActivePlayerIndex": 3,
   "extractions": [
     {
       "label": "divinity_points_gain_potential",

@@ -24,8 +24,8 @@
     },
     {
       "label": "shiny_species",
-      "expression": "idleon.engine.getGameAttribute(\"CustomLists\").h.PetStats.slice(0,4).flatMap((pets,world)=>pets.map((pet,petIndex)=>({world,petIndex,petId:pet[0],level:idleon.callFunction(\"Breeding\",\"SpecialPassives\",\"Lv\",world,petIndex),requirement:idleon.callFunction(\"Breeding\",\"SpecialPassives\",\"REQ\",world,petIndex)})))",
-      "description": "Native Shiny level and next requirement for every species in the four supported pet worlds."
+      "expression": "idleon.engine.getGameAttribute(\"CustomLists\").h.PetStats.slice(0,4).flatMap((pets,world)=>pets.map((pet,petIndex)=>({world,petIndex,petId:pet[0],progress:Number(idleon.engine.getGameAttribute(\"Breeding\")[22+world][petIndex]),level:idleon.callFunction(\"Breeding\",\"SpecialPassives\",\"Lv\",world,petIndex),requirement:idleon.callFunction(\"Breeding\",\"SpecialPassives\",\"REQ\",world,petIndex)})))",
+      "description": "Native progress, Shiny level, and next-level requirement for every species in the four supported pet worlds. UI progression and aggregate bonuses use the level and requirement only when saved progress is positive."
     },
     {
       "label": "total_shiny_overlevels",

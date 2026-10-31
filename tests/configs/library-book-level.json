@@ -1,0 +1,19 @@
+{
+  "description": "Library book ceiling, VIP membership, saved talent caps, and direct calculated inputs for the active character.",
+  "target": "WorkbenchStuff maxBookLv and Labb VIPmembership",
+  "extractions": [
+    { "label": "maximum_book_level", "expression": "idleon.callFunction('WorkbenchStuff','maxBookLv',0,0)", "description": "Account-wide Library maximum book level." },
+    { "label": "vip_membership", "expression": "idleon.callFunction('Labb','VIPmembership','Blank',0,0)", "description": "Account VIP membership percentage." },
+    { "label": "saved_talent_caps", "expression": "idleon.getAttr('SkillLevelsMAX')", "description": "Active character runtime caps. Game 1.24 save serialization writes only positive caps, so native -1 unlearned entries have no saved value and parse as zero." },
+    { "label": "saved_talent_points", "expression": "idleon.getAttr('SkillLevels')", "description": "Active character talent point allocations." },
+    { "label": "current_class_page", "expression": "(() => { const classId = idleon.getAttr('CharacterClass'); const lists = idleon.getAttr('CustomLists').h; return { classId, className: lists.ClassNames[classId], skills: lists.TalentOrder.slice(15 * (classId - 1), 15 * classId).map(Number).filter(skill => !lists.RANDOlist[16].includes(String(skill))) }; })()", "description": "Native current class and its non-blacklisted page skills. Library initialization removes the current class from the skipped classes in game 1.24." },
+    { "label": "fury_relic", "expression": "idleon.callFunction('Sailing','ArtifactBonus',21,0)", "description": "Fury Relic talent book cap bonus." },
+    { "label": "summoning_winner", "expression": "idleon.callFunction('Summoning','WinBonus',19,0)", "description": "Summoning winner talent book cap bonus." },
+    { "label": "salt_lick", "expression": "idleon.callFunction('SaltLick',4)", "description": "Spontaneity Salts talent book cap bonus." },
+    { "label": "world_3_merit", "expression": "Number(idleon.getAttr('Tasks')[2][2][2])*Number(idleon.getAttr('CustomLists').h.TaskShopDesc[2][2][11])", "description": "World 3 merit talent book cap bonus." },
+    { "label": "vip_meal", "expression": "idleon.callFunction('MealBonus','VIP')", "description": "VIP meal membership contribution." },
+    { "label": "vip_arena_1", "expression": "idleon.callFunction('Breeding','PetArenaBonus','0',1,0)", "description": "First VIP Arena reward unlock." },
+    { "label": "vip_arena_10", "expression": "idleon.callFunction('Breeding','PetArenaBonus','0',10,0)", "description": "Second VIP Arena reward unlock." },
+    { "label": "vip_sigil", "expression": "idleon.callFunction('Labb','SigilBonus','Blank',15,0)", "description": "VIP sigil membership contribution." }
+  ]
+}

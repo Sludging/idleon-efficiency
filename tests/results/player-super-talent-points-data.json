@@ -1,0 +1,46 @@
+{
+  "extractions": {
+    "super_points_total": {
+      "expression": "idleon.callFunction(\"Thingies\", \"SuperTalentPTS_totaltospend\", 0, 0)",
+      "result": 11
+    },
+    "super_points_remaining": {
+      "expression": "idleon.callFunction(\"Thingies\", \"SuperTalentPTS_lefttospend\", 0, 0)",
+      "result": 1
+    },
+    "super_bonus_levels": {
+      "expression": "idleon.callFunction(\"Thingies\", \"SuperTalentPTS_LVgiven\", 0, 0)",
+      "result": 117
+    },
+    "lunarheim_lore": {
+      "expression": "idleon.callFunction(\"Spelunk\", \"DoWeHaveLoreN1\", 5, 0)",
+      "result": 1
+    },
+    "active_super_slots": {
+      "expression": "(() => { const engine = idleon.engine; const id = engine.getGameAttribute(\"GetPlayersUsernames\").indexOf(engine.getGameAttribute(\"UserInfo\")[0]); const preset = engine.getGameAttribute(\"PlayerStuff\")[1]; return engine.getGameAttribute(\"Spelunk\")[Math.round(20 + id + 12 * preset)].slice(0, 20); })()",
+      "result": [
+        168,
+        125,
+        97,
+        95,
+        93,
+        86,
+        6,
+        5,
+        85,
+        178,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ]
+    }
+  },
+  "errors": {}
+}

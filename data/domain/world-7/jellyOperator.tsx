@@ -188,6 +188,7 @@ export class JellyOperator extends Domain {
     selectedFeverIndex: number = 0;
     jellyBundleOwned: boolean = false;
     purchasedPlotCount: number = 0;
+    superTalentPlotCapacity: number = 0;
     cells: JellyCell[] = JellyCell.fromBase(initJellyCellRepo());
     fevers: JellyFeverBase[] = initJellyFeverRepo();
     private operationMetadata = initJellyOperationMetadataRepo()[0].data;
@@ -214,6 +215,7 @@ export class JellyOperator extends Domain {
     getRawKeys(): RawData[] {
         return [
             { key: "Research", perPlayer: false, default: [] },
+            { key: "Spelunk", perPlayer: false, default: [] },
             // Jelly shop unlocks are account-wide and use player 0's Research level.
             { key: "Lv0_0", perPlayer: false, default: [] },
             { key: "BundlesReceived", perPlayer: false, default: {} },
@@ -247,6 +249,9 @@ export class JellyOperator extends Domain {
         jellyOperator.bestOperationBloodcells = Number(progression[14]) || 0;
         const bundlesReceived = data.get("BundlesReceived") as Record<string, unknown>;
         jellyOperator.jellyBundleOwned = Number(bundlesReceived.ban_j) === 1;
+        const spelunk = data.get("Spelunk") as number[][];
+        // The Jelly Super Talent grants a plot on its first, third, and fifth upgrades.
+        jellyOperator.superTalentPlotCapacity = Math.min(3, Math.ceil(Number(spelunk[18]?.[41] ?? 0) / 2));
         const purchasedPlots = research[18] || [];
         jellyOperator.purchasedPlotCount = purchasedPlots.length;
         jellyOperator.plotPurchaseCounts.fill(0);
@@ -447,7 +452,9 @@ export const updateJellyOperatorPresentation = (data: Map<string, any>) => {
 
     jellyOperator.plotPurchasesLeft = Math.round(jellyOperator.getUpgradeQuantity(9)
         + (jellyOperator.getUpgradeQuantity(8)
-            + (jellyOperator.obstructions[44].getBonus() + (Number(jellyOperator.jellyBundleOwned) + eventShopPlotCapacity)))
+            + (jellyOperator.obstructions[44].getBonus()
+                + (Number(jellyOperator.jellyBundleOwned)
+                    + (jellyOperator.superTalentPlotCapacity + eventShopPlotCapacity))))
         - jellyOperator.purchasedPlotCount);
     jellyOperator.unlockedTileCount = jellyOperator.calculateUnlockedTileCount();
 

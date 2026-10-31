@@ -14,6 +14,7 @@ const path = require('path');
 const DEFAULT_DEBUG_SERVER_URL = process.env.GAME_SERVER_URL || 'http://127.0.0.1:3101';
 const TARGET_PLAYER_CONFIG_PATH = path.resolve(__dirname, '../utils/target-player.json');
 const TARGET_PLAYER_PLACEHOLDER = '__TARGET_PLAYER__';
+const TOWN_CONTEXT_EXPRESSION = "(()=>{const activePlayerIndex=idleon.getAttr('GetPlayersUsernames').indexOf(idleon.getAttr('UserInfo')[0]);const mapId=idleon.getAttr('CurrentMap');const mapInternalName=idleon.getAttr('CustomLists').h.MapName[mapId];return{activePlayerIndex,mapId,mapInternalName};})()";
 
 class GameDataExtractor {
  constructor(configPath, outputPath, options = {}) {
@@ -84,11 +85,22 @@ Use live mode only to refresh a save. See tests/helpers/README.md#game-access.`)
  }
 
  async extractData() {
+  this.results = { extractions: {}, errors: {} };
+
   if (!this.config?.extractions) {
    throw new Error('No extractions found in config');
   }
 
   this.log(`\n🎯 Extracting ${this.config.extractions.length} values from game...\n`);
+  let contextError;
+  if (this.config.extractions.some(extraction => extraction.requiresTown === true)) {
+   try {
+    this.results.context = await this.executeExpression(TOWN_CONTEXT_EXPRESSION);
+   } catch (error) {
+    contextError = error;
+   }
+  }
+
 
   for (const extraction of this.config.extractions) {
    const { label, expression } = extraction;
@@ -97,6 +109,19 @@ Use live mode only to refresh a save. See tests/helpers/README.md#game-access.`)
    try {
     this.log(`  Extracting: ${label}`);
     this.log(`    Expression: ${executedExpression}`);
+    if (extraction.requiresTown === true) {
+     if (contextError) {
+      throw new Error(`Town capture prerequisite failed: ${contextError.message}`);
+     }
+
+     const context = this.results.context;
+     if (typeof context?.mapInternalName !== 'string' || !context.mapInternalName.includes('Town')) {
+      throw new Error(
+       `Town capture required for '${label}': active map ${context?.mapId} (${context?.mapInternalName}). Capture this value in a Town with a matching Town save.`
+      );
+     }
+    }
+
 
     const result = await this.executeExpression(executedExpression);
 

@@ -24,8 +24,8 @@
     },
     {
       "label": "talent_enh_146_bonus",
-      "expression": "idleon.callFunction(\"TalentEnh\", 146)",
-      "description": "Apocalypse Chow enhanced talent cooking-speed bonus"
+      "expression": "Math.max(1, idleon.callFunction(\"TalentEnh\", 146))",
+      "description": "Effective Apocalypse Chow cooking-speed multiplier"
     },
     {
       "label": "voting_13_bonus",
@@ -44,13 +44,13 @@
     },
     {
       "label": "alch_bubbles_meal_spdz_bonus",
-      "expression": "idleon.getDNSM(\"AlchBubbles\").h.MealSpdz",
-      "description": "Diamond Chef bubble bonus to meal and fire kitchen speeds"
+      "expression": "Math.max(1, Number(idleon.getDNSM(\"AlchBubbles\").h.MealSpdz ?? 0))",
+      "description": "Effective Diamond Chef multiplier to meal and fire kitchen speeds"
     },
     {
-      "label": "atom_bonuses_8_bonus",
-      "expression": "idleon.callFunction(\"AtomCollider\", \"AtomBonuses\", 8, 0)",
-      "description": "Fluoride (Void Plate Chef) atom bonus"
+      "label": "atom_bonuses_8_factor",
+      "expression": "Math.max(1, idleon.callFunction(\"AtomCollider\", \"AtomBonuses\", 8, 0))",
+      "description": "Effective Fluoride (Void Plate Chef) multiplier to meal and fire kitchen speeds"
     },
     {
       "label": "msa_1_bonus",

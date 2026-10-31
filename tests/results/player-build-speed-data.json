@@ -14,7 +14,7 @@
     },
     "construction_mastery_bonus": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ConstMasteryBonus\", 2, 0)",
-      "result": 1585
+      "result": 1595
     },
     "vial_equinox_fish_bonus": {
       "expression": "idleon.getDNSM(\"AlchVials\").h.Contspd",
@@ -34,11 +34,11 @@
     },
     "vault_upgrade_48": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 48, 0)",
-      "result": 60
+      "result": 72.4
     },
     "bubba_bonus_1": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 1, 0)",
-      "result": 140
+      "result": 210
     },
     "atom_collider_1": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomBonuses\", 1, 0)",
@@ -50,51 +50,11 @@
     },
     "palette_bonus_25": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 25, 0)",
-      "result": 130.5
+      "result": 135
     },
     "gear_bonus_etc_bonuses_30": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"30\")",
       "result": 98
-    },
-    "build_speed_player_0": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 0, 0)",
-      "result": 846620861605.5898
-    },
-    "build_speed_player_1": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 1, 0)",
-      "result": 497591326207.07477
-    },
-    "build_speed_player_2": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 2, 0)",
-      "result": 472185326309.7697
-    },
-    "build_speed_player_3": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 3, 0)",
-      "result": 14479842281615.977
-    },
-    "build_speed_player_4": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 4, 0)",
-      "result": 471575881409.8006
-    },
-    "build_speed_player_5": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 5, 0)",
-      "result": 489446994001.05365
-    },
-    "build_speed_player_6": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 6, 0)",
-      "result": 1276220835142.1978
-    },
-    "build_speed_player_7": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 7, 0)",
-      "result": 1676042491992.662
-    },
-    "build_speed_player_8": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 8, 0)",
-      "result": 483856987943.60803
-    },
-    "build_speed_player_9": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 9, 0)",
-      "result": 480768487036.8286
     }
   },
   "errors": {}

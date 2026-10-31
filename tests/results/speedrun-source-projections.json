@@ -1,0 +1,11 @@
+{
+  "provenance": {
+    "kind": "independently reviewed native-source mechanic constant, not a saved-account projection",
+    "independentReview": "SpeedrunBackend.SpeedrunProjectionReview confirmed the Equinox goal against native source.",
+    "gameVersion": "1.24",
+    "evidence": "docs/plans/speedrun-game-evidence.md: Reachable backend evidence"
+  },
+  "account": {
+    "equinoxGoal": 75
+  }
+}

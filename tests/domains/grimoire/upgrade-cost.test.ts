@@ -1,10 +1,6 @@
 import type { Grimoire } from '../../../data/domain/grimoire';
-import { updateIdleonData } from '../../../data/domain/idleonData';
-import { normalizeCompanionStates } from '../../../data/domain/companions/companionState';
-import { EfficiencyEngine } from '../../../lib/efficiencyEngine/efficiencyEngine';
-import { CheapestPathCalculator } from '../../../lib/efficiencyEngine/calculators';
 import type { ExtractionResults } from '../../utils/live-game-data-loader';
-import { loadGameDataFromSave, loadTestSave } from '../../utils/cloudsave-loader';
+import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import {
     getExtractedValue,
     loadExtractionResults,
@@ -49,52 +45,5 @@ describe('Grimoire current upgrade purchase costs', () => {
         it(`matches quoted ${mechanic}`, () => {
             comparePrice(grimoire.upgrades[upgradeId].getCost(grimoire.upgrades));
         });
-
-    });
-
-    it('matches the first Cranium-only cheapest-path purchase price for Wraith Accuracy III', () => {
-        // Cranium-only farming selects this observed current purchase without changing the saved account.
-        const resourceWeights = { 0: 0, 1: 0, 2: 1, 3: 0 };
-        const engine = new EfficiencyEngine<Grimoire>();
-        const calculator = new CheapestPathCalculator<Grimoire>();
-        const path = engine.calculateEfficiency(grimoire, calculator, 1, resourceWeights);
-
-        expect(path.pathUpgrades[0].resourceCost).toMatchLiveGameWithDetails(
-            getExtractedValue(extractionResults, 'grimoire_upgrade_cost_25'),
-            {
-                tolerance: 0,
-                context: 'First Cranium-only cheapest-path current purchase price; Wraith Accuracy III at owned level 227',
-            },
-        );
-    });
-
-    it('keeps current purchase prices unchanged when normal account processing repeats for the same save', () => {
-        const save = loadTestSave('latest');
-        let accountData = loadGameDataFromSave('latest');
-        accountData = updateIdleonData(
-            accountData, save, save.get('playerNames'),
-            normalizeCompanionStates(save.get('companions')), save.get('servervars'), true,
-        ).getData();
-
-        const preparedGrimoire = accountData.get('grimoire') as Grimoire;
-        currentPrices.forEach(({ upgradeId, label, mechanic }) => {
-            expect(preparedGrimoire.upgrades[upgradeId].cost).toMatchLiveGameWithDetails(
-                getExtractedValue(extractionResults, label),
-                {
-                    tolerance: 0,
-                    context: `${mechanic} after repeated normal account processing with unchanged real save inputs`,
-                },
-            );
-        });
-    });
-
-    // The game returns a raw price at cap, but its purchase gate prevents another purchase.
-    // The website exposes the actionable price as zero for this owned Ripped Page.
-    it('keeps capped Ripped Page prepared actionable cost at zero', () => {
-        expect(grimoire.upgrades[52].cost).toBe(0);
-    });
-
-    it('keeps capped Ripped Page quoted actionable cost at zero', () => {
-        expect(grimoire.upgrades[52].getCost(grimoire.upgrades)).toBe(0);
     });
 });

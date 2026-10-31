@@ -29,7 +29,7 @@ const bubbleBonusCalculationSpecs: Record<string, { description: string; extract
  },
  diamondChef: {
   description: 'Diamond Chef meal and fire-kitchen speed multiplier',
-  extractionKey: 'diamond_chef_final_bonus',
+  extractionKey: 'diamond_chef_meal_and_fire_speed_multiplier',
   bonusKey: 'MealSpdz',
  },
  dailyDrip: {

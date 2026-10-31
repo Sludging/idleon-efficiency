@@ -23,6 +23,11 @@
       "description": "Native total discovered pets, bounded by available pet worlds"
     },
     {
+      "label": "player_damage_storage_credited_green_stack_count",
+      "expression": "idleon.engine.getGameAttribute(\"GreenStacks\").length",
+      "description": "Saved green-stack list length used by Mainframe 11, independent of current chest quantities"
+    },
+    {
       "label": "player_damage_breeding_world_bound",
       "expression": "Math.max(3, Number(idleon.engine.getGameAttribute(\"OptionsListAccount\")[117]))",
       "description": "Native pet-world boundary initialized in ActorEvents breeding GenINFO slot 71"

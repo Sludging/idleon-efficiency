@@ -4,6 +4,7 @@ import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import { Skilling } from '../../../data/domain/skilling';
 import { getTargetPlayer } from '../../utils/target-player';
 import type { Player } from '../../../data/domain/player';
+import type { Hole } from '../../../data/domain/world-5/hole/hole';
 
 describe('Hole part-three public skill efficiencies', () => {
     it('matches active-player Mining, Choppin, Fishing, and Catching efficiency', () => {
@@ -25,5 +26,23 @@ describe('Hole part-three public skill efficiencies', () => {
                 { tolerance: 0, context: `Player ${player.playerID} ${name} efficiency` },
             );
         });
+    });
+
+    it('matches prepared resource-cavern eligibility for every character', () => {
+        const gameData = loadGameDataFromSave('latest');
+        const players = gameData.get('players') as Player[];
+        const hole = gameData.get('hole') as Hole;
+        const skilling = gameData.get('skilling') as Skilling;
+
+        for (const cavern of Object.values(hole.resourceCavrens.cavrens)) {
+            expect(cavern.characterCapabilities).toHaveLength(players.length);
+            for (const player of players) {
+                const capability = cavern.characterCapabilities.find(result => result.playerID === player.playerID)!;
+                const efficiency = skilling.getSkillEfficiency(player.playerID, capability.skill);
+                expect(capability.playerName).toBe(player.playerName);
+                expect(capability.efficiency).toBe(efficiency);
+                expect(capability.meetsThreshold).toBe(efficiency >= cavern.efficiencyThreshold);
+            }
+        }
     });
 });

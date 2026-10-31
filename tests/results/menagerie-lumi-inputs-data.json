@@ -2,7 +2,7 @@
   "extractions": {
     "lumi_rate": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"LumiGainRate\", 0, 0)",
-      "result": 12.30075
+      "result": 573.3314914285714
     },
     "coral_kid_10": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 10, 0)",
@@ -14,11 +14,11 @@
     },
     "arcade_73": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 73)",
-      "result": 0
+      "result": 14.025974025974026
     },
     "menagerie_bonus_1": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"BoostQTY\", 1, 0)",
-      "result": 0
+      "result": 200
     },
     "research_165": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 165, 0)",
@@ -26,7 +26,7 @@
     },
     "purple_jelly_0": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"PinkJellyBonus\", 0, 0)",
-      "result": 0
+      "result": 18
     },
     "crucible_4": {
       "expression": "idleon.callFunction(\"Breeding\", \"PetArenaCrucBonus\", \"0\", 4, 0)",

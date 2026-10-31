@@ -26,11 +26,11 @@
     },
     "farming_vault_upgrade_85_bonus": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 85, 0)",
-      "result": 82
+      "result": 114
     },
     "farming_magic_beans_from_depot": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"BeanTradeQTY\", 0, 0)",
-      "result": 9713959971.153898
+      "result": 14882088055.963472
     }
   },
   "errors": {}

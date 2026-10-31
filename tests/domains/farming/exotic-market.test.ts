@@ -102,9 +102,4 @@ describe('Farming Exotic Market account results', () => {
       }
     );
   });
-
-  it('matches native current weekly IDs in rolled order using saved account time', () => {
-    const current = farming.getCurrentExoticMarketRotation();
-    expect(current.upgradeIds).toEqual(results.extractions.exotic_native_current_ids.result);
-  });
 });

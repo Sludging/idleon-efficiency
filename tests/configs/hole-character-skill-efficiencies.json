@@ -1,7 +1,27 @@
 {
-  "description": "Native v1.23 active-player skill efficiency, card factor, Right Hand of Action, and prepared Tool bubble values compared by the Hole part 3 pipeline test.",
+  "description": "Native v1.24 active-player skill efficiency, character-specific Toilet Paper Postage stamp bonuses, card factor, Right Hand of Action, and prepared Tool bubble values compared by the Hole part 3 pipeline test.",
   "target": "Character skill efficiencies and directly consumed bonus calculations",
   "extractions": [
+    {
+      "label": "efficiency_stamp_talent_multiplier",
+      "expression": "Math.max(idleon.callFunction('GetTalentNumber',1,625),1)",
+      "description": "Character-specific Toilet Paper Postage efficiency stamp multiplier"
+    },
+    {
+      "label": "mining_efficiency_stamp",
+      "expression": "idleon.callFunction('StampBonusOfTypeX','BaseMinEff')",
+      "description": "Effective Mining efficiency stamp bonus"
+    },
+    {
+      "label": "all_base_efficiency_stamp",
+      "expression": "idleon.callFunction('StampBonusOfTypeX','BaseAllEff')",
+      "description": "Effective all-base skill efficiency stamp bonus"
+    },
+    {
+      "label": "all_base_skill_efficiency",
+      "expression": "idleon.callFunction('SkillStats','AllBaseSkillEff')",
+      "description": "All-base skill efficiency consumed by skill calculations"
+    },
     {
       "label": "mining_card_factor",
       "expression": "idleon.callFunction(\"CardBonusREAL\", 24)",

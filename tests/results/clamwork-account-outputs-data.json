@@ -3,29 +3,29 @@
     "account_outputs": {
       "expression": "[(idleon.callFunction(\"Thingies\", \"ClamPearlValue\", 0, 0) / (1 + idleon.callFunction(\"Thingies\", \"ClamBonuses\", 3, 0) / 100)), idleon.callFunction(\"Thingies\", \"Clam_BlackPearlValue\", 0, 0), idleon.callFunction(\"Thingies\", \"Clam_Mobs\", 0, 0), idleon.callFunction(\"Thingies\", \"Clamz_HP\", 0, 0), idleon.callFunction(\"Thingies\", \"Clam_Respawn\", 0, 0)]",
       "result": [
-        412.5,
-        1050,
-        17,
-        2.43e+23,
+        3385.7999999999997,
+        1800,
+        22,
+        1.9683e+29,
         60
       ]
     },
     "scurge_state": {
       "expression": "[idleon.engine.getGameAttribute(\"Menagerie\")[0][7], idleon.engine.getGameAttribute(\"Menagerie\")[0][8], idleon.callFunction(\"MenagerieStuff\", \"ScurgeUnlocked\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"ScurgeEXP_Req\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"ScurgePTS_Left\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"ScurgeEXPgain\", 0, 0), idleon.engine.getGameAttribute(\"Menagerie\")[5]]",
       "result": [
-        0,
-        0,
-        0,
-        50,
-        0,
+        501554936.92220926,
+        141,
         1,
+        111739680.27157886,
+        0,
+        12495,
         [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
+          48,
+          10,
+          1,
+          16,
+          56,
+          10,
           0,
           0,
           0
@@ -35,30 +35,30 @@
     "scurge_bonus_inputs": {
       "expression": "[idleon.callFunction(\"Thingies\", \"ClamBonuses\", 0, 1), idleon.callFunction(\"Thingies\", \"ClamBonuses\", 4, 1), idleon.callFunction(\"Thingies\", \"ClamBonuses\", 2, 1)]",
       "result": [
-        0,
-        0,
-        0
+        48,
+        8400,
+        200
       ]
     },
     "clamwork_parameters": {
       "expression": "[idleon.callFunction(\"Thingies\", \"ClamBonuses\", 0, 0), idleon.callFunction(\"Thingies\", \"ClamBonuses\", 7, 0), idleon.callFunction(\"Thingies\", \"ClamPromochance\", 0, 0), idleon.callFunction(\"Thingies\", \"Clam_Cost\", 9, 0), idleon.engine.getGameAttribute(\"OptionsListAccount\")[454], idleon.engine.getGameAttribute(\"OptionsListAccount\")[464]]",
       "result": [
-        124,
+        170,
         230,
-        0.07142857142857142,
-        10000000000,
-        577093307.3126311,
-        5
+        0.045454545454545456,
+        100000000000000,
+        242250969162.36337,
+        9
       ]
     },
     "clam_count_bonus_parameter": {
       "expression": "idleon.callFunction(\"Thingies\", \"ClamBonuses\", 1, 0)",
-      "result": 15
+      "result": 20
     },
     "scurge_pearl_bonus_inputs": {
       "expression": "[idleon.callFunction(\"Thingies\", \"ClamBonuses\", 1, 1), idleon.callFunction(\"Thingies\", \"ClamBonuses\", 8, 1)]",
       "result": [
-        0,
+        500,
         0
       ]
     },
@@ -71,30 +71,30 @@
           true,
           true,
           true,
-          false,
-          false,
-          false,
-          false,
+          true,
+          true,
+          true,
+          true,
           false,
           false,
           false
         ],
-        5,
-        6
+        9,
+        10
       ]
     },
     "clam_upgrade_costs": {
       "expression": "Array.from({ length: 9 }, (_, index) => idleon.callFunction(\"Thingies\", \"Clam_Cost\", index, 0))",
       "result": [
-        600724403.1168395,
-        11137802243.439302,
-        766118806.8506385,
-        858798106.3096753,
-        622286345.0291203,
-        474061475.3824976,
-        2625985898.7739234,
-        15094536739.681541,
-        2227560447.0802917
+        7262058189.289151,
+        427082094225.96216,
+        2941735896.1834607,
+        12496281732.462442,
+        2237999594.971436,
+        12221154659.440226,
+        15235548722.23089,
+        21411377362.156086,
+        4676447149.408867
       ]
     }
   },

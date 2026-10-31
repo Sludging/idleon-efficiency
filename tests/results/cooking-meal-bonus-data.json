@@ -22,7 +22,7 @@
     },
     "meal_bonus_mcook": {
       "expression": "idleon.callFunction(\"MealBonus\", \"Mcook\")",
-      "result": 319664.6057159226
+      "result": 325467.03485585336
     },
     "meal_bonus_kitchen_eff": {
       "expression": "idleon.callFunction(\"MealBonus\", \"KitchenEff\")",
@@ -34,7 +34,7 @@
     },
     "bonus_multi_cook_meal_12": {
       "expression": "idleon.callFunction(\"Summoning2\", \"BonusMultiCook\", 12, 0)",
-      "result": 1.375
+      "result": 1.4444444444444444
     },
     "bonus_multi_cook_meal_13": {
       "expression": "idleon.callFunction(\"Summoning2\", \"BonusMultiCook\", 13, 0)",

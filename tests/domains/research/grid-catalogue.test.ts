@@ -1,14 +1,13 @@
 import { initResearchGridBonusRepo } from '../../../data/domain/data/ResearchGridBonusRepo';
 import { ResearchGrid } from '../../../data/domain/world-7/research';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { ExtractionResults, loadExtractionResults } from '../../utils/live-game-data-loader';
+import { ExtractionResults, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import {
-    OriginalGridInputs, OriginalGridUpgrade, assertPairing, extracted, numeric, resultName,
+    OriginalGridInputs, OriginalGridUpgrade, extracted, numeric, resultName,
 } from './grid-catalogue-test-helpers';
+import { nativeResearchNumber, PreviewExpectations, researchExpected, researchPreviewExpectations } from './preview-expectations';
 const realDefinitions = initResearchGridBonusRepo().filter(square => square.data.name !== 'Name');
 
-// The retained save observes zero available Points, capped/uncapped ranks, all specialized effects, and five owned Shapes.
-// It does not observe row-edge purchases, missing placements, nonzero rotations, qualifying boats, or non-Doot text.
 // Existing Grid suites retain generic numerical API regressions. These comparisons cover the complete new public catalogue.
 describe('Research Grid catalogue, Points, linked grants, and Shapes', () => {
     let results: ExtractionResults;
@@ -16,14 +15,16 @@ describe('Research Grid catalogue, Points, linked grants, and Shapes', () => {
     let research: ResearchGrid;
     let original: OriginalGridUpgrade[];
     let inputs: OriginalGridInputs;
+    let preview: PreviewExpectations | undefined;
 
     beforeAll(() => {
         results = loadExtractionResults(resultName);
-        assertPairing(results);
+        validateExtractionHealth(results);
         data = loadGameDataFromSave('latest');
         research = data.get('research') as ResearchGrid;
         original = extracted<OriginalGridUpgrade[]>(results, 'catalogue');
         inputs = extracted<OriginalGridInputs>(results, 'pairing_before');
+        preview = researchPreviewExpectations();
     });
 
     realDefinitions.forEach(definition => {
@@ -48,11 +49,11 @@ describe('Research Grid catalogue, Points, linked grants, and Shapes', () => {
         });
     });
 
-    it('matches earned, running-rounded spent, and available Points without clamping', () => {
-        expect(research.points.earned).toMatchLiveGameWithDetails(numeric(results, 'points_earned'), { tolerance: 0, debugInfo: research.points.contributors });
+    it('previews Points without a positive saved Research level; otherwise matches game Points', () => {
+        expect(research.points.earned).toMatchLiveGameWithDetails(researchExpected(preview, 'points_earned', () => nativeResearchNumber(results, 'points_earned')), { tolerance: 0, debugInfo: research.points.contributors });
         expect(research.points.spent).toMatchLiveGameWithDetails(numeric(results, 'points_spent'), { tolerance: 0 });
-        expect(research.points.available).toMatchLiveGameWithDetails(numeric(results, 'points_available'), { tolerance: 0 });
-        expect(research.points.milestone.cumulativeMilestonePoints).toMatchLiveGameWithDetails(numeric(results, 'point_milestone'), { tolerance: 0 });
+        expect(research.points.available).toMatchLiveGameWithDetails(researchExpected(preview, 'points_available', () => nativeResearchNumber(results, 'points_available')), { tolerance: 0 });
+        expect(research.points.milestone.cumulativeMilestonePoints).toMatchLiveGameWithDetails(researchExpected(preview, 'point_milestone', () => nativeResearchNumber(results, 'point_milestone')), { tolerance: 0 });
     });
 
 

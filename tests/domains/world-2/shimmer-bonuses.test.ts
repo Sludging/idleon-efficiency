@@ -4,6 +4,9 @@
  * The seven comparisons cover the stat-to-account-slot mappings, not seven
  * multiplier branches. The live account's artifact rarity determines which
  * clamp behavior is exercised; zero base amounts cannot verify the boost.
+ * Explicit current allocations and current bonuses after a proposed allocation
+ * use the same retained native results. Proposed next bonuses remain source-backed;
+ * no native next-allocation result was captured.
  *
  */
 
@@ -41,8 +44,17 @@ describe('Island Expeditions Domain - Shimmer Bonuses', () => {
  });
 
  shimmerBonuses.forEach(({ index, label, description }) => {
-  it(`matches the complete account-wide ${description} bonus after The Shim Lantern boost`, () => {
+  it(`preserves the current account-wide ${description} bonus while previewing the next allocation`, () => {
    const liveValue = getExtractedValue(extractionResults, label);
+   const bonus = expeditions.shimmerBonuses[index];
+
+   expect(bonus.getBonus(bonus.baseBonus)).toMatchLiveGameWithDetails(liveValue, {
+    tolerance: 0,
+    context: `Explicit current Shimmer ${description} allocation`,
+    debugInfo: { saveName, baseBonus: bonus.baseBonus },
+   });
+
+   bonus.getBonus(bonus.baseBonus + 1);
    const domainValue = expeditions.getShimmerBonus(index);
 
    expect(domainValue).toMatchLiveGameWithDetails(liveValue, {

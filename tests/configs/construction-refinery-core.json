@@ -1,0 +1,11 @@
+{
+  "description": "Native refinery saved state, power, caps, and remaining cycle counts used to check domain-prepared fuel projections and rows",
+  "target": "Refinery PowerPerCycle, PowerCAP, and saved refinery data",
+  "extractions": [
+    {
+      "label": "refinery_core",
+      "expression": "(()=>{const refinery=idleon.getAttr('Refinery');const info=idleon.getAttr('CustomLists').h.RefineryInfo;const owned=idleon.getAttr('PixelHelperActor')[5].behaviors.getBehavior('ActorEvents_232')._JustStorageOWNED.h;const merit=idleon.getAttr('Tasks')[2][2][6];return info.map((recipe,i)=>{const state=refinery[i+3];const power=idleon.callFunction('Refinery','PowerPerCycle',state[1]);const cap=idleon.callFunction('Refinery','PowerCAP',state[1]);const remainingCycles=Math.max(0,Math.round((cap-state[0])/Math.max(power,1)));const costs=recipe.slice(0,6).map((name,j)=>({name,quantity:Number(owned[name]||0),perCycle:Number(recipe[j+6])*Math.floor(Math.pow(state[1],name.includes('Refinery')&&i<=merit?1.3:1.5))})).filter(cost=>cost.name!=='Blank');return {name:recipe[12],unlocked:i<refinery[0][0],progress:state[0],autoRefine:state[4],power,cap,remainingCycles,meritApplies:i<=merit,costs};});})()",
+      "description": "Saved refinery state, native power, capacity, cycle processing limit, and stored fuel inputs"
+    }
+  ]
+}

@@ -294,7 +294,7 @@ export const updateAnvil = (data: Map<string, any>) => {
         playerAnvil.costDiscount = alchemy.getBonusForPlayer(player, CauldronIndex.Quicc, AlchemyConst.Anvilnomics);
 
         // Speed math
-        const anvilZoomerBonus = stampData ? stampData[1][2].getBonus(player.skills.get(SkillsIndex.Smithing)?.level) : 0;
+        const anvilZoomerBonus = stampData ? stampData[1][2].getBonusForPlayer(player) : 0;
         const blackSmithBox = player.postOffice[PostOfficeConst.BlacksmithBoxIndex];
         const postOfficeBonus = blackSmithBox.level > 0 ? blackSmithBox.bonuses[1].getBonus(blackSmithBox.level, 1) : 0;
         const activeHammer = player.activeBubbles.find(bubble => bubble.name == "Hammer Hammer");

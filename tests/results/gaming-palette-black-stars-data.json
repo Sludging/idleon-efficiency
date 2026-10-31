@@ -14,7 +14,7 @@
     },
     "palette_bonus_3": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",3,0)",
-      "result": 72.85714285714286
+      "result": 75.34883720930233
     },
     "palette_bonus_4": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",4,0)",
@@ -62,7 +62,7 @@
     },
     "palette_bonus_15": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",15,0)",
-      "result": 35.1219512195122
+      "result": 44.08163265306123
     },
     "palette_bonus_16": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",16,0)",
@@ -74,11 +74,11 @@
     },
     "palette_bonus_18": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",18,0)",
-      "result": 999
+      "result": 1188
     },
     "palette_bonus_19": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",19,0)",
-      "result": 33.92857142857143
+      "result": 35.26119402985075
     },
     "palette_bonus_20": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",20,0)",
@@ -102,11 +102,11 @@
     },
     "palette_bonus_25": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",25,0)",
-      "result": 130.5
+      "result": 135
     },
     "palette_bonus_26": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",26,0)",
-      "result": 292.5
+      "result": 315
     },
     "palette_bonus_27": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",27,0)",
@@ -114,7 +114,7 @@
     },
     "palette_bonus_28": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",28,0)",
-      "result": 5.829545454545454
+      "result": 11.659090909090908
     },
     "palette_bonus_29": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",29,0)",
@@ -130,11 +130,11 @@
     },
     "palette_bonus_32": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",32,0)",
-      "result": 10
+      "result": 10.271739130434781
     },
     "palette_bonus_33": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",33,0)",
-      "result": 0
+      "result": 64.28571428571428
     },
     "palette_bonus_34": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",34,0)",

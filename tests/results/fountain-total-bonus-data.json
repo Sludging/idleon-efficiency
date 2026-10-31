@@ -58,11 +58,11 @@
     },
     "fountain_total_bonus_2_0": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 0)",
-      "result": 0
+      "result": 3
     },
     "fountain_total_bonus_2_1": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 1)",
-      "result": 300
+      "result": 390
     },
     "fountain_total_bonus_2_2": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 2)",
@@ -70,7 +70,7 @@
     },
     "fountain_total_bonus_2_8": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 8)",
-      "result": 29
+      "result": 58
     },
     "fountain_total_bonus_2_12": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 12)",
@@ -82,7 +82,7 @@
     },
     "fountain_total_bonus_2_19": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 19)",
-      "result": 8
+      "result": 10
     }
   },
   "errors": {}

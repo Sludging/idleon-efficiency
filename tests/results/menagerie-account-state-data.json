@@ -1,16 +1,15 @@
 {
   "extractions": {
     "account_progression": {
-      "expression": "[idleon.engine.getGameAttribute(\"Menagerie\")[0][0], idleon.engine.getGameAttribute(\"Menagerie\")[0][1], idleon.engine.getGameAttribute(\"Menagerie\")[0][2], idleon.callFunction(\"MenagerieStuff\", \"ShellEXPreq\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"LumiGainRate\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"UpgUnlocked\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"UpgUnlocked\", 1, 0), idleon.callFunction(\"MenagerieStuff\", \"UpgUnlocked\", 2, 0)]",
+      "expression": "[idleon.engine.getGameAttribute(\"Menagerie\")[0][1], idleon.engine.getGameAttribute(\"Menagerie\")[0][2], idleon.callFunction(\"MenagerieStuff\", \"ShellEXPreq\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"LumiGainRate\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"UpgUnlocked\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"UpgUnlocked\", 1, 0), idleon.callFunction(\"MenagerieStuff\", \"UpgUnlocked\", 2, 0)]",
       "result": [
-        7.039823430375153,
         0,
-        7,
-        3,
-        12.30075,
-        3,
-        7,
-        6
+        14,
+        5,
+        573.3314914285714,
+        13,
+        10,
+        10
       ]
     },
     "mission_states": {
@@ -36,69 +35,69 @@
         ],
         [
           3,
-          0,
-          200,
-          1
+          2,
+          250,
+          0
         ],
         [
           4,
-          0,
-          50,
-          1
+          2,
+          150,
+          0
         ],
         [
           5,
-          0,
-          500,
-          1
+          4,
+          1300,
+          0
         ],
         [
           6,
-          0,
-          5,
-          1
+          3,
+          20,
+          0
         ],
         [
           7,
-          0,
-          100,
-          1
+          4,
+          140,
+          0
         ],
         [
           8,
-          0,
-          3,
-          1
+          7,
+          10,
+          0
         ],
         [
           9,
-          0,
-          9,
-          1
+          2,
+          15,
+          0
         ],
         [
           10,
-          0,
-          40,
-          1
+          1,
+          45,
+          0
         ],
         [
           11,
-          0,
-          14,
-          1
+          2,
+          22,
+          0
         ],
         [
           12,
-          0,
-          400,
+          1,
+          450,
           0
         ],
         [
           13,
           0,
           1000,
-          0
+          1
         ],
         [
           14,
@@ -194,7 +193,7 @@
           29,
           0,
           25,
-          0
+          1
         ],
         [
           30,
@@ -217,348 +216,298 @@
       ]
     },
     "unlock_states": {
-      "expression": "Array.from({ length: 25 }, (_, i) => [i, idleon.callFunction(\"MenagerieStuff\", \"UnlockOwned\", i, 0), idleon.callFunction(\"MenagerieStuff\", \"Cost\", 1, i), idleon.callFunction(\"MenagerieStuff\", \"CanClaim\", 1, i)])",
+      "expression": "Array.from({ length: 25 }, (_, i) => [i, idleon.callFunction(\"MenagerieStuff\", \"UnlockOwned\", i, 0), idleon.callFunction(\"MenagerieStuff\", \"Cost\", 1, i)])",
       "result": [
         [
           0,
-          0,
-          10,
-          0
+          1,
+          10
         ],
         [
           1,
-          0,
-          27.0875,
-          0
+          1,
+          27.0875
         ],
         [
           2,
-          0,
-          82.32874999999999,
-          0
+          1,
+          82.32874999999999
         ],
         [
           3,
-          0,
-          258.57333789062506,
-          0
+          1,
+          258.57333789062506
         ],
         [
           4,
-          0,
-          792.9481625000001,
-          0
+          1,
+          792.9481625000001
         ],
         [
           5,
-          0,
-          2314.604277610779,
-          0
+          1,
+          2314.604277610779
         ],
         [
           6,
-          0,
-          6377.437889132322,
-          0
+          1,
+          6377.437889132322
         ],
         [
           7,
-          0,
-          16565.07168253949,
-          0
+          1,
+          16565.07168253949
         ],
         [
           8,
-          0,
-          40608.14641664003,
-          0
+          1,
+          40608.14641664003
         ],
         [
           9,
           0,
-          94112.31090686558,
-          0
+          94112.31090686558
         ],
         [
           10,
           0,
-          206529.46927527897,
-          0
+          206529.46927527897
         ],
         [
           11,
           0,
-          429697.29659808055,
-          0
+          429697.29659808055
         ],
         [
           12,
           0,
-          848334.3521133763,
-          0
+          848334.3521133763
         ],
         [
           13,
           0,
-          1590082.2459613166,
-          0
+          1590082.2459613166
         ],
         [
           14,
           0,
-          2830131.5304572806,
-          0
+          2830131.5304572806
         ],
         [
           15,
           0,
-          4782924.549545914,
-          0
+          4782924.549545914
         ],
         [
           16,
           0,
-          7672541.6008987175,
-          0
+          7672541.6008987175
         ],
         [
           17,
           0,
-          11676373.334992193,
-          0
+          11676373.334992193
         ],
         [
           18,
           0,
-          16845274.993064288,
-          0
+          16845274.993064288
         ],
         [
           19,
           0,
-          23017007.996937934,
-          0
+          23017007.996937934
         ],
         [
           20,
           0,
-          29753963.810454406,
-          0
+          29753963.810454406
         ],
         [
           21,
           0,
-          36342828.554372504,
-          0
+          36342828.554372504
         ],
         [
           22,
           0,
-          41884448.28237305,
-          0
+          41884448.28237305
         ],
         [
           23,
           0,
-          45473550.49236774,
-          0
+          45473550.49236774
         ],
         [
           24,
           0,
-          46427703.233358964,
-          0
+          46427703.233358964
         ]
       ]
     },
     "bonus_states": {
-      "expression": "Array.from({ length: 25 }, (_, i) => [i, idleon.engine.getGameAttribute(\"Menagerie\")[3][i], idleon.callFunction(\"MenagerieStuff\", \"BoostQTY\", i, 0), idleon.callFunction(\"MenagerieStuff\", \"Cost\", 2, i), idleon.callFunction(\"MenagerieStuff\", \"CanClaim\", 2, i)])",
+      "expression": "Array.from({ length: 25 }, (_, i) => [i, idleon.engine.getGameAttribute(\"Menagerie\")[3][i], idleon.callFunction(\"MenagerieStuff\", \"BoostQTY\", i, 0), idleon.callFunction(\"MenagerieStuff\", \"Cost\", 2, i)])",
       "result": [
         [
           0,
-          1,
-          1,
-          14.5,
-          0
+          11,
+          11,
+          17583.357899804967
         ],
         [
           1,
-          0,
-          0,
-          13.274999999999999,
-          0
+          8,
+          200,
+          5067.611997170721
         ],
         [
           2,
-          0,
-          0,
-          37.03335306700244,
-          0
+          1,
+          1,
+          848.3604499276556
         ],
         [
           3,
-          0,
-          0,
-          99.5760029329968,
-          0
+          1,
+          10,
+          133.44880381289585
         ],
         [
           4,
-          0,
-          0,
-          252.82530000000006,
-          0
+          1,
+          500,
+          332.6728900000001
         ],
         [
           5,
           0,
           0,
-          603.889427538726,
-          0
+          603.889427538726
         ],
         [
           6,
           0,
           0,
-          1358.1536128955809,
-          0
+          1358.1536128955809
         ],
         [
           7,
           0,
           0,
-          2881.3237854316394,
-          0
+          2881.3237854316394
         ],
         [
           8,
           0,
           0,
-          5775.866860011838,
-          0
+          5775.866860011838
         ],
         [
           9,
           0,
           0,
-          10953.75373409733,
-          0
+          10953.75373409733
         ],
         [
           10,
           0,
           0,
-          19668.171585661425,
-          0
+          19668.171585661425
         ],
         [
           11,
           0,
           0,
-          33447.96106642236,
-          0
+          33447.96106642236
         ],
         [
           12,
           0,
           0,
-          53872.73438921638,
-          0
+          53872.73438921638
         ],
         [
           13,
           0,
           0,
-          82151.03161535086,
-          0
+          82151.03161535086
         ],
         [
           14,
           0,
           0,
-          118531.06342759935,
-          0
+          118531.06342759935
         ],
         [
           15,
           0,
           0,
-          161677.63500579624,
-          0
+          161677.63500579624
         ],
         [
           16,
           0,
           0,
-          208253.44680925974,
-          0
+          208253.44680925974
         ],
         [
           17,
           0,
           0,
-          252984.29952602508,
-          0
+          252984.29952602508
         ],
         [
           18,
           0,
           0,
-          289401.7757643193,
-          0
+          289401.7757643193
         ],
         [
           19,
           0,
           0,
-          311226.26958247175,
-          0
+          311226.26958247175
         ],
         [
           20,
           0,
           0,
-          314046.287294269,
-          0
+          314046.287294269
         ],
         [
           21,
           0,
           0,
-          296715.44368134043,
-          0
+          296715.44368134043
         ],
         [
           22,
           0,
           0,
-          383954.48476288765,
-          0
+          383954.48476288765
         ],
         [
           23,
           0,
           0,
-          593347.1982308639,
-          0
+          593347.1982308639
         ],
         [
           24,
           0,
           0,
-          914609.5972019747,
-          0
+          914609.5972019747
         ]
       ]
     },
     "usable_resources": {
       "expression": "[idleon.callFunction(\"MenagerieStuff\", \"BlackStarsOwned\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"OrganicLabelOwned\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"MineheadDoublersLEFT\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"SushiDoublersLEFT\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"JellyOpDoublersLEFT\", 0, 0)]",
       "result": [
+        1,
         0,
-        0,
-        0,
-        0,
-        0
+        -2,
+        -2,
+        -2
       ]
     },
     "extra_bundle_flags": {
@@ -573,15 +522,15 @@
       "result": {
         "minehead": [
           0,
-          0
+          -2
         ],
         "sushi": [
           0,
-          0
+          -2
         ],
         "jellyOperator": [
           0,
-          0
+          -2
         ]
       }
     },
@@ -589,34 +538,34 @@
       "expression": "({ unlocks: Array.from({ length: 6 }, (_, i) => idleon.callFunction(\"MenagerieStuff\", \"SideJellyUnlocked\", i, 0)), purple: [idleon.engine.getGameAttribute(\"Menagerie\")[0][1], idleon.engine.getGameAttribute(\"Menagerie\")[0][3], idleon.engine.getGameAttribute(\"Menagerie\")[0][4], idleon.callFunction(\"MenagerieStuff\", \"PinkJellyCosts\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"PinkJellyCosts\", 1, 0), idleon.callFunction(\"MenagerieStuff\", \"PinkJellyBonus\", 0, 0)], blue: [idleon.engine.getGameAttribute(\"Menagerie\")[0][5]], red: [idleon.engine.getGameAttribute(\"Menagerie\")[0][6], idleon.callFunction(\"MenagerieStuff\", \"RedJellyReadingMulti\", 0, 0), idleon.engine.getGameAttribute(\"Menagerie\")[4]], silver: [idleon.engine.getGameAttribute(\"Menagerie\")[0][9], idleon.engine.getGameAttribute(\"Menagerie\")[0][10], idleon.callFunction(\"MenagerieStuff\", \"SilverJellyCosts\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"SilverJellyCosts\", 1, 0), idleon.callFunction(\"MenagerieStuff\", \"ObolMISCmulti\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"ObolAutoTrashRate\", 0, 0)], yellow: [idleon.engine.getGameAttribute(\"Menagerie\")[0].slice(11, 15), idleon.engine.getGameAttribute(\"Menagerie\")[0][15], idleon.callFunction(\"MenagerieStuff\", \"ConstBuildREQ\", 0, 0), Array.from({ length: 4 }, (_, i) => idleon.callFunction(\"MenagerieStuff\", \"ConstBuildBONUSES\", i, 0))], green: [idleon.engine.getGameAttribute(\"Spelunk\")[17][28]] })",
       "result": {
         "unlocks": [
-          0,
-          0,
-          0,
+          1,
+          1,
+          1,
           0,
           0,
           0
         ],
         "purple": [
           0,
-          0,
-          0,
-          1e+35,
-          1e+30,
-          0
+          3,
+          18,
+          5.12e+43,
+          1.01559956668416e+44,
+          18
         ],
         "blue": [
-          0
+          12881174
         ],
         "red": [
           1,
           1,
           [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
+            626000,
+            2010000,
+            3000,
+            9600,
+            3900000,
+            55417,
             0,
             0,
             0,

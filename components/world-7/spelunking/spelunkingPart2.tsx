@@ -246,7 +246,7 @@ function ChapterCard({ chapter, spelunking, players }: SpelunkingPart2Props & { 
     const theme = useContext(ThemeContext);
     const harvests = players.map(player => ({
         player,
-        outcome: spelunking.getCaveNodeHarvest(chapter.index, player.playerID),
+        outcome: spelunking.characters[player.playerID].caveNodeHarvests[chapter.index],
     }));
     const eligibleCount = harvests.filter(({ outcome }) => outcome.eligible).length;
     const storageStacks = chapter.chestPageStacks.filter(stack => stack.count > 0);
@@ -313,7 +313,7 @@ function ChapterCard({ chapter, spelunking, players }: SpelunkingPart2Props & { 
                                     <Text key={`${player.playerID}-name`} size="xsmall" color="dark-1">{player.playerName}</Text>,
                                     <Text key={`${player.playerID}-chance`} size="xsmall" color="dark-1">{(outcome.harvestChance * 100).toFixed(2)}%</Text>,
                                     <Text key={`${player.playerID}-pages`} size="xsmall" color="dark-1">
-                                        {outcome.eligible ? commaNotation(outcome.pagesPerDrop!) : 'Unavailable · Below minimum'}
+                                        {outcome.eligible ? commaNotation(outcome.pagesPerDrop) : 'Unavailable · Below minimum'}
                                     </Text>,
                                 ])}
                             </Box>

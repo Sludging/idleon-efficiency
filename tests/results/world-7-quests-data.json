@@ -10,11 +10,11 @@
     },
     "quest_snootie_2": {
       "expression": "idleon.getAttr(\"QuestComplete\").h[\"Snootie2\"]",
-      "result": -1
+      "result": 1
     },
     "quest_snootie_3": {
       "expression": "idleon.getAttr(\"QuestComplete\").h[\"Snootie3\"]",
-      "result": -1
+      "result": 1
     },
     "quest_bloo_radley_1": {
       "expression": "idleon.getAttr(\"QuestComplete\").h[\"Bloo_Radley1\"]",

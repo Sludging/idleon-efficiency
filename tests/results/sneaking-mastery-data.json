@@ -3,7 +3,7 @@
     "mastery_progression": {
       "expression": "({selectedMastery:Number(idleon.getAttr(\"OptionsListAccount\")[231]),completedMasteries:Number(idleon.getAttr(\"OptionsListAccount\")[232]),earnedRewardCount:Number(idleon.getAttr(\"OptionsListAccount\")[232])})",
       "result": {
-        "selectedMastery": 6,
+        "selectedMastery": 5,
         "completedMasteries": 6,
         "earnedRewardCount": 6
       }

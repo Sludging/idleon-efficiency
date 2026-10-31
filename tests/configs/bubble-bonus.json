@@ -3,9 +3,9 @@
   "target": "Alchemy Bubble Bonus",
   "extractions": [
     {
-      "label": "diamond_chef_final_bonus",
-      "expression": "idleon.getDNSM(\"AlchBubbles\").h.MealSpdz",
-      "description": "Diamond Chef final bubble bonus (MealSpdz)"
+      "label": "diamond_chef_meal_and_fire_speed_multiplier",
+      "expression": "Math.max(1, Number(idleon.getDNSM(\"AlchBubbles\").h.MealSpdz ?? 0))",
+      "description": "Effective Diamond Chef multiplier to meal and fire kitchen speeds"
     },
     {
       "label": "alchemy_prismatic_bonus",

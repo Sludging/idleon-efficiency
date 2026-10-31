@@ -43,18 +43,16 @@ describe('Armor Smithy set bonuses', () => {
     });
   });
 
-  it('matches the Secret set multiplier used by Gold Food', () => {
+  it('matches the Secret set Gold Food percentage points', () => {
     const set = equipmentSets.equipmentSets.find(candidate => candidate.data.name === 'SECRET_SET');
     if (!set) {
       throw new Error('Secret set is missing from the equipment set data');
     }
 
     const secretSetPercent = getExtractedValue(foodResults, 'secret_set');
-    // GoldFoodBonuses.1.22.js:8 applies 1 + GetSetBonus("SECRET_SET", "Bonus", 0, 0) / 100.
-    const expectedMultiplier = 1 + secretSetPercent / 100;
-    expect(equipmentSets.getSetBonus('SECRET_SET')).toMatchLiveGameWithDetails(expectedMultiplier, {
+    expect(equipmentSets.getSetBonus('SECRET_SET', true)).toMatchLiveGameWithDetails(secretSetPercent, {
       tolerance: 0,
-      context: 'Secret set Gold Food multiplier',
+      context: 'Secret set Gold Food percentage points',
       debugInfo: {
         saveName,
         unlocked: set.unlocked,

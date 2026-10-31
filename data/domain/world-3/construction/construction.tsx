@@ -6,6 +6,7 @@ import { getCompanionActiveBonus } from "../../companions";
 import type { Companion } from "../../companions";
 import { Domain, RawData } from "../../base/domain";
 import { Building } from "./buildings";
+import type { BuildingCompletionTimes } from "./buildings";
 import { Cooking } from "../../world-4/cooking";
 import { initBuildingRepo } from "../../data/BuildingRepo";
 import { ImageData } from "../../imageData";
@@ -19,17 +20,124 @@ import { Player } from "../../player";
 import { CogBoard, getRoyalOutpostCogBuildSpeedMultiplier } from "./cog";
 import type { RoyalArmory } from "../../world-6/royalArmory/royalArmory";
 import { SushiStation } from "../../world-7/sushi";
+import type { Hole } from "../../world-5/hole/hole";
 import type { ResearchGrid } from "../../world-7/research";
 import type { Card } from "../../cards";
 import type { GemStore } from "../../gemPurchases";
+import type { LegendTalents } from "../../world-7/legendTalents";
+import type { Lab } from "../../world-4/lab";
+import type { Minehead } from "../../world-7/minehead";
+import type { EventShop } from "../../eventShop";
+import { initLibraryMetadataRepo } from "../../data/LibraryMetadataRepo";
+import { initRandoListRepo } from "../../data/RandoListRepo";
+import { initTalentTreeRepo } from "../../data/TalentTreeRepo";
+import { ClassIndex, ClassTalentMap } from "../../talents";
+import type { Talent } from "../../talents";
+import type { Sailing } from "../../world-5/sailing/sailing";
+import type { Summoning } from "../../world-6/summoning";
+import type { SaltLick } from "./saltLick";
+import type { TaskBoard } from "../../tasks";
+import type { Breeding } from "../../world-4/breeding";
+import type { Sigils } from "../../world-2/alchemy/sigils";
 
 export { getCogPlayerBaseExpRate } from "./playerBuildSpeed";
 
 const BOOKS_FOR_MAX_CHECKOUT = 20;
+const libraryMetadata = initLibraryMetadataRepo()[0].data;
+const vipLibrarySkills = new Set(libraryMetadata.vipTalents.map(talent => talent.skillIndex));
+const randoLists = initRandoListRepo();
+const libraryBlacklist = new Set(randoLists[16].data.elements.map(Number));
+const hiddenLibraryClasses = new Set(randoLists[67].data.elements);
+const libraryTalentPages = initTalentTreeRepo();
+
 
 export class Library {
     currentBooks: number = 0;
     libCheckoutSpeed: number = 0;
+    maximumBookLevel: number = libraryMetadata.baseMaximumLevel;
+    vipMembership: number = 0;
+
+    resetBookLevels(): void {
+        this.maximumBookLevel = libraryMetadata.baseMaximumLevel;
+        this.vipMembership = 0;
+    }
+
+    prepareBookLevels(data: Map<string, any>, players: readonly Player[]): void {
+        const sailing = data.get("sailing") as Sailing;
+        const summoning = data.get("summoning") as Summoning;
+        const collider = data.get("collider") as AtomCollider;
+        const achievements = data.get("achievements") as Achievement[];
+        const saltLick = data.get("saltLick") as SaltLick;
+        const taskboard = data.get("taskboard") as TaskBoard;
+        const cooking = data.get("cooking") as Cooking;
+        const breeding = data.get("breeding") as Breeding;
+        const sigils = data.get("sigils") as Sigils;
+
+        this.maximumBookLevel = Math.round(
+            libraryMetadata.baseMaximumLevel
+            + sailing.artifacts[21].getBonus()
+            + summoning.getSummoningWinnerBonusFromIndex(19)
+            + libraryMetadata.oxygenMaximumIncrease * Math.min(collider.atoms[libraryMetadata.oxygenAtomIndex].level, 1)
+            + Math.min(libraryMetadata.checkoutAchievementMaximumIncrease, Math.max(0,
+                libraryMetadata.checkoutAchievementMaximumIncrease * Number(achievements[libraryMetadata.checkoutAchievementIndex].completed)))
+            + saltLick.getBonus(4)
+            + taskboard.merits[18].getBonus()
+        );
+        this.vipMembership = cooking.getMealBonusForKey("VIP")
+            + libraryMetadata.arenaMembershipBonuses.reduce((sum, bonus) =>
+                sum + (breeding.hasBonus(bonus.arenaBonusIndex) ? bonus.membershipIncrease : 0), 0)
+            + sigils.sigils[15].getBonus();
+
+        for (const player of players) {
+            const beginnerPageCount = player.classId === ClassIndex.Voidwalker ? 4
+                : player.classId === ClassIndex.Maestro ? 3 : 2;
+            const pageNames = ["Beginner", "Journeyman", "Maestro", "Voidwalker"].slice(0, beginnerPageCount);
+            const currentClass = ClassIndex[player.classId].toUpperCase();
+            for (const page of ClassTalentMap[player.classId]) {
+                const className = page.toUpperCase().replace(/ /g, "_");
+                if (!hiddenLibraryClasses.has(className) || className === currentClass) {
+                    pageNames.push(page);
+                }
+            }
+            const eligibleSkills = new Set(
+                libraryTalentPages.filter(page => pageNames.includes(page.id))
+                    .flatMap(page => Object.values(page.data.talents).map(talent => talent.skillIndex))
+            );
+            for (const vip of libraryMetadata.vipTalents) {
+                if (this.vipMembership >= vip.requiredMembership) {
+                    eligibleSkills.add(vip.skillIndex);
+                }
+            }
+            for (const talent of player.talents) {
+                talent.libraryMaxLevel = !libraryBlacklist.has(talent.skillIndex) && eligibleSkills.has(talent.skillIndex)
+                    ? this.maximumBookLevel : undefined;
+            }
+        }
+    }
+
+    getBookCheckoutSummary(talents: readonly Talent[]): { requiredCheckouts: number; vipTalentsToBook: number } {
+        let requiredCheckouts = 0;
+        let vipTalentsToBook = 0;
+        const countedSkills = new Set<number>();
+
+        for (const talent of talents) {
+            if (!talent.canBookHigher() || countedSkills.has(talent.skillIndex)) {
+                continue;
+            }
+
+            // Shared talent identities need only one book, even when several pages display them.
+            countedSkills.add(talent.skillIndex);
+            if (vipLibrarySkills.has(talent.skillIndex)) {
+                // VIP books roll random levels and cannot use the guaranteed maximum setting.
+                vipTalentsToBook++;
+            } else {
+                requiredCheckouts += BOOKS_FOR_MAX_CHECKOUT;
+            }
+        }
+
+        return { requiredCheckouts, vipTalentsToBook };
+    }
+
 
     secondsToNextCheckout: number = -1;
     secondsToMaxCheckout: number = -1;
@@ -60,10 +168,35 @@ export class Library {
     }
 }
 
+export interface ConstructionBuildingTiming {
+    playerID: number;
+    playerName: string;
+    lowerBuildRatePercent: number;
+    normalBuildSpeed: number;
+    trimmedBuildSpeed: number;
+    buildings: BuildingCompletionTimes[];
+}
+
+export interface TrimmedSlotContributions {
+    minehead: number;
+    lab: number;
+    atom: number;
+    legendTalent: number;
+    gambit: number;
+    eventShop: number;
+}
+
 export class Construction extends Domain {
     buildings: Building[] = [];
     buildingSlots: number[] = [-1, -1, -1, -1, -1, -1, -1, -1];
+    trimmedSlotCount: number = 0;
+    trimmedSlotContributions: TrimmedSlotContributions = {
+        minehead: 0, lab: 0, atom: 0, legendTalent: 0, gambit: 0, eventShop: 0,
+    };
     totalBuildSpeed: number = 0;
+    private buildingTimingByPlayer = new Map<number, ConstructionBuildingTiming>();
+    bestBuildingTiming: ConstructionBuildingTiming | null = null;
+    buildingTimingComparison: ConstructionBuildingTiming[] = [];
     cogProgress: { name: string, progress: number }[] = [
         { name: "Nooby", progress: 0 },
         { name: "Decent", progress: 0 },
@@ -72,6 +205,38 @@ export class Construction extends Domain {
     ];
     library: Library = new Library();
     cogBoard: CogBoard = new CogBoard();
+
+    getBuildingTiming(player: Player): ConstructionBuildingTiming {
+        return this.buildingTimingByPlayer.get(player.playerID)!;
+    }
+
+    prepareBuildingTiming(rates: { player: Player; normalBuildSpeed: number }[], trimmedMultiplier: number): void {
+        this.buildingTimingByPlayer.clear();
+        this.bestBuildingTiming = null;
+        this.buildingTimingComparison = [];
+        for (const { player, normalBuildSpeed } of rates) {
+            const trimmedBuildSpeed = normalBuildSpeed * trimmedMultiplier;
+            const timing = {
+                playerID: player.playerID,
+                playerName: player.playerName,
+                lowerBuildRatePercent: 0,
+                normalBuildSpeed,
+                trimmedBuildSpeed,
+                buildings: this.buildings.map(building => building.getCompletionTimes(normalBuildSpeed, trimmedBuildSpeed)),
+            };
+            this.buildingTimingByPlayer.set(player.playerID, timing);
+            this.buildingTimingComparison.push(timing);
+            if (!this.bestBuildingTiming || normalBuildSpeed > this.bestBuildingTiming.normalBuildSpeed) {
+                this.bestBuildingTiming = timing;
+            }
+        }
+        const bestRate = this.bestBuildingTiming?.normalBuildSpeed ?? 0;
+        this.buildingTimingComparison.forEach(timing => {
+            timing.lowerBuildRatePercent = bestRate > 0
+                ? (bestRate - timing.normalBuildSpeed) / bestRate * 100
+                : 0;
+        });
+    }
 
 
     getRawKeys(): RawData[] {
@@ -93,6 +258,10 @@ export class Construction extends Domain {
         // init again to reset the data set;
         // TODO: This is very ugly, need to do better.
         construction.init([], 0);
+        construction.buildingTimingByPlayer.clear();
+        construction.bestBuildingTiming = null;
+        construction.buildingTimingComparison = [];
+        construction.library.resetBookLevels();
         construction.cogBoard.parse(data.get("CogM"), data.get("CogO"));
 
         const towerData = data.get("Tower") as number[];
@@ -129,11 +298,18 @@ export class Construction extends Domain {
             building.currentXP = towerData[building.index + 12 + construction.buildings.length * 2];
 
             building.currentlyBuilding = construction.buildingSlots.includes(building.index);
+            building.unlocked = building.index % 9 === 0 || towerData[building.index - 1] > 0;
         });
 
         // current book count;
         construction.library.currentBooks = optionsList[55] as number || 0;
     }
+}
+
+export const updateLibraryBookLevels = (data: Map<string, any>): Library => {
+    const library = (data.get("construction") as Construction).library;
+    library.prepareBookLevels(data, data.get("players") as Player[]);
+    return library;
 }
 
 export const updateConstruction = (data: Map<string, any>) => {
@@ -149,6 +325,7 @@ export const updateConstruction = (data: Map<string, any>) => {
     const dancingCoral = data.get("dancingCoral") as DancingCoral;
     const menagerie = data.get("menagerie") as Menagerie;
     const sushi = data.get("sushi") as SushiStation;
+    const hole = data.get("hole") as Hole;
     const costCruncher = construction?.buildings.find(building => building.index == 5) as Building;
 
     // Figure out max building levels
@@ -175,7 +352,7 @@ export const updateConstruction = (data: Map<string, any>) => {
             case 16:
             case 17:
                 const carbonAtom = collider.atoms[5] as CarbonAtom
-                building.maxLvl += constMastery.getBonusByIndex(6) + carbonAtom.getExtraLevels();
+                building.maxLvl += Math.round(constMastery.getBonusByIndex(6) + carbonAtom.getExtraLevels() + 100 * hole.gambit.getBonus(9));
                 break;
             // Shrines
             case 18:
@@ -285,6 +462,38 @@ export const getBestCogBuildRate = (data: Map<string, any>): CogBuildRateResult 
         rate: getCogBuildRateForContext(data, contextPlayer),
         characterName: contextPlayer.playerName,
     })).reduce((best, current) => current.rate > best.rate ? current : best);
+}
+
+export const updateConstructionBuildingTiming = (data: Map<string, any>): Construction => {
+    const construction = data.get("construction") as Construction;
+    const players = data.get("players") as Player[];
+    const collider = data.get("collider") as AtomCollider;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
+    const minehead = data.get("minehead") as Minehead;
+    const lab = data.get("lab") as Lab;
+    const hole = data.get("hole") as Hole;
+    const eventShop = data.get("eventShop") as EventShop;
+    const contributions = {
+        minehead: Math.min(1, minehead.getBonusFromIndex(18)),
+        lab: Math.ceil(lab.jewels[3].getBonus() / 5),
+        atom: Math.min(collider.atoms[6].level, 1),
+        legendTalent: Math.min(1, legendTalents.getBonusFromIndex(33)),
+        gambit: hole.gambit.getBonus(9),
+        eventShop: Number(eventShop.isBonusOwned(14)),
+    };
+    construction.trimmedSlotContributions = contributions;
+    construction.trimmedSlotCount = Math.round(Math.min(8, Object.values(contributions).reduce((sum, value) => sum + value, 0)));
+    construction.buildings.forEach(building => {
+        building.currentlyTrimmed = construction.buildingSlots.slice(0, construction.trimmedSlotCount).includes(building.index);
+    });
+    const trimmedMultiplier = (3 + collider.atoms[6].getBonus() / 100) *
+        (1 + legendTalents.getBonusFromIndex(33) / 100);
+
+    construction.prepareBuildingTiming(players.map(player => ({
+        player,
+        normalBuildSpeed: getCogBuildRateForContext(data, player),
+    })), trimmedMultiplier);
+    return construction;
 }
 
 export const getCogFlaggyRateForContext = (data: Map<string, any>, contextPlayer: Player): number => {

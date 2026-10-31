@@ -597,9 +597,8 @@ export const updateMinTravelTimeAndSpeed = (data: Map<string, any>) => {
     const upgradeVault = data.get("upgradeVault") as UpgradeVault;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
-    const purrmepPlayer = divinity.gods[6].linkedPlayers.at(0); // purrmep is limited to only 1 player linked.
     const cardBonus = cards.filter(card => card.data.effect.includes("Sailing Speed (Passive)")).reduce((sum, card) => sum += card.getBonus(), 0);
-    const divinityMinorBonus = purrmepPlayer ? divinity.gods[6].getMinorLinkBonus(purrmepPlayer) : 0;
+    const divinityMinorBonus = divinity.gamingGrowthMinorLinkBonus;
     const stampBonus = stamps.flatMap(tab => tab).reduce((sum, stamp) => sum += stamp.data.effect == "SailSpd" ? stamp.getBonus() : 0, 0);
     const mealBonus = cooking.getMealBonusForKey("Sailing");
     const skillMasteryBonus = skillMastery.getSkillBonus(SkillsIndex.Sailing, 1);

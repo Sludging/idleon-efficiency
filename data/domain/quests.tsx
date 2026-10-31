@@ -93,6 +93,7 @@ export class Quests extends Domain {
     getRawKeys(): RawData[] {
         return [
             { key: "QuestComplete_", perPlayer: true, default: {} },
+            { key: "QuestStatus_", perPlayer: true, default: {} },
             { key: "NPCdialogue_", perPlayer: true, default: {} },
         ]
     }
@@ -131,8 +132,24 @@ export class Quests extends Domain {
         const questsData = data.get(this.getDataKey()) as Quests;
         const charCount = data.get("charCount") as number;
 
+        const firstPlayerStatus = data.get("QuestStatus_0") as Record<string, unknown>;
+        const missingQuests = new Set<string>();
+        if (charCount > 0) {
+            Object.values(questsData.npcData).forEach(npc => {
+                Object.values(npc.data.quests).forEach(quest => {
+                    if (quest.Type !== QuestTypeEnum.Custom && quest.Type !== QuestTypeEnum.ItemsAndSpaceRequired) return;
+                    const key = quest.QuestName.replace(/ /g, "_");
+                    if (!Object.prototype.hasOwnProperty.call(firstPlayerStatus, key)) missingQuests.add(key);
+                });
+            });
+        }
+
         range(0, charCount).forEach((_, index) => {
-            questsData.playerData[index] = data.get(`QuestComplete_${index}`) as Record<string, number>
+            const completion = { ...data.get(`QuestComplete_${index}`) as Record<string, number> };
+            missingQuests.forEach(key => {
+                if (!Object.prototype.hasOwnProperty.call(completion, key)) completion[key] = -1;
+            });
+            questsData.playerData[index] = completion;
             questsData.dialogData[index] = data.get(`NPCdialogue_${index}`) as Record<string, number>
         });
 

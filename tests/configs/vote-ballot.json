@@ -1,0 +1,61 @@
+{
+  "description": "Read Bonus Ballot and Multi Meritocracy state, weekly timing, saved participation, earned effects, and catalogue potential effects for the retained regular account",
+  "target": "Summoning2 ballot bonuses, saved vote records, and native ballot presentation operands",
+  "extractions": [
+    {
+      "label": "bonus_state",
+      "expression": "(()=>{const ballot=idleon.getAttr('PixelHelperActor')[25].behaviors.getBehavior('ActorEvents_670')._GenINFO;return {currentBonusIndex:ballot[36],candidateIndices:ballot[31].slice(1,4),candidatePercents:ballot[34].slice(0,3)};})()",
+      "description": "Global Bonus Ballot winner and next-week candidate IDs and vote percentages"
+    },
+    {
+      "label": "meritocracy_state",
+      "expression": "(()=>{const ballot=idleon.getAttr('PixelHelperActor')[25].behaviors.getBehavior('ActorEvents_670')._GenINFO;return {currentBonusIndex:idleon.getAttr('OptionsListAccount')[453],candidateIndices:ballot[233].slice(1,4),candidatePercents:ballot[236].slice(0,3),canVote:idleon.callFunction('Summoning2','MeritocCanVote',0,0)===1,haveReachedW7:Number(idleon.getAttr('KillsLeft2Advance')[250][0])<=0};})()",
+      "description": "Saved active Meritocracy bonus, candidates, vote percentages, voting access, and World 7 portal completion"
+    },
+    {
+      "label": "bonus_multiplier",
+      "expression": "idleon.callFunction('Summoning2','VotingBonuszMulti',0,0)",
+      "description": "Complete Bonus Ballot account multiplier"
+    },
+    {
+      "label": "meritocracy_multiplier",
+      "expression": "idleon.callFunction('Summoning2','MeritocBonuszMulti',0,0)",
+      "description": "Complete Multi Meritocracy account multiplier"
+    },
+    {
+      "label": "bonus_earned",
+      "expression": "Array.from({length:idleon.getAttr('CustomLists').h.NinjaInfo[38].length/3},(_,index)=>idleon.callFunction('Summoning2','VotingBonusz',index,0))",
+      "description": "Earned Bonus Ballot effects for all catalogue entries, including the damage fallback when world access is missing"
+    },
+    {
+      "label": "meritocracy_earned",
+      "expression": "Array.from({length:idleon.getAttr('CustomLists').h.NinjaInfo[41].length/3},(_,index)=>idleon.callFunction('Summoning2','MeritocBonusz',index,0))",
+      "description": "Native earned Meritocracy effects for the catalogue, including inactive zero contributions"
+    },
+    {
+      "label": "bonus_potential",
+      "expression": "(()=>{const table=idleon.getAttr('CustomLists').h.NinjaInfo[38];const multi=idleon.callFunction('Summoning2','VotingBonuszMulti',0,0);return [11,20,21,23].map(index=>{const contribution=Number(table[1+3*index])*multi;return {index,contribution,factor:1+contribution/100};});})()",
+      "description": "Printer, artifact, and Gaming candidates plus active mixed Divinity effect; reads native effect amount, not minimum world, and preserves both unrounded native presentation operands (idleon1.24.txt:258509-258530)"
+    },
+    {
+      "label": "meritocracy_potential",
+      "expression": "(()=>{const table=idleon.getAttr('CustomLists').h.NinjaInfo[41];const multi=idleon.callFunction('Summoning2','MeritocBonuszMulti',0,0);return [7,19,26,24].map(index=>{const contribution=Number(table[1+3*index])*multi;return {index,contribution,factor:1+contribution/100};});})()",
+      "description": "Monument, Masterclass AFK, and Statue candidates plus active Brain Coral effect; reads native amount and account multiplier without changing the selector (idleon1.24.txt:258613-258634)"
+    },
+    {
+      "label": "bonus_sources",
+      "expression": "(()=>{const call=(...args)=>idleon.callFunction(...args);return {crystalCuttlefish:call('Companions',41),equinox:idleon.getAttr('Dream')[13],cosmo:call('Holes','CosmoBonusQTY',2,3),summoning:call('Summoning','WinBonus',22,0),eventShop7:17*call('Summoning','EventShopOwned',7,0),eventShop16:13*call('Summoning','EventShopOwned',16,0),mashedPotato:call('Companions',19),palette:call('GamingStatType','PaletteBonus',32,0),legendTalent:call('Thingies','LegendPTS_bonus',22,0),sushi:call('SushiStuff','RoG_BonusQTY',50,0)};})()",
+      "description": "Numeric Bonus Ballot source values exposed by the domain for source details; native formula adds both event-button contributions (idleon1.24.txt:239846-239855)"
+    },
+    {
+      "label": "bonus_week",
+      "expression": "(()=>{const ballot=idleon.getAttr('PixelHelperActor')[25].behaviors.getBehavior('ActorEvents_670')._GenINFO;const options=idleon.getAttr('OptionsListAccount');const unixTimeSeconds=Number(idleon.getAttr('TimeAway').h.GlobalTime);const offsetSeconds=Number(ballot[37]);const periodSeconds=604800;const currentPeriod=Math.floor((unixTimeSeconds+offsetSeconds)/periodSeconds);const secondsUntilRotation=periodSeconds-(unixTimeSeconds+offsetSeconds-periodSeconds*currentPeriod);const selectedSlot=Number(options[308]);const savedVotePeriod=Number(options[309]);return {unixTimeSeconds,periodSeconds,offsetSeconds,selectedSlot,savedVotePeriod,currentPeriod,secondsUntilRotation,nextRotationAt:unixTimeSeconds+secondsUntilRotation,hasVotedThisWeek:Number(Number.isInteger(selectedSlot)&&selectedSlot>=1&&selectedSlot<=3&&savedVotePeriod===currentPeriod)};})()",
+      "description": "Native synchronized Unix seconds, Bonus selected slot and saved period, current period, and unrounded countdown operand. Reads native offset and uses the native period and arithmetic (idleon1.24.txt:256777-256794,257810-257812,258570-258576). Adds countdown seconds to the same timestamp to capture the reset deadline; exact native boundaries return a full period. No account state or clock is changed."
+    },
+    {
+      "label": "meritocracy_week",
+      "expression": "(()=>{const ballot=idleon.getAttr('PixelHelperActor')[25].behaviors.getBehavior('ActorEvents_670')._GenINFO;const options=idleon.getAttr('OptionsListAccount');const unixTimeSeconds=Number(idleon.getAttr('TimeAway').h.GlobalTime);const offsetSeconds=Number(ballot[239]);const periodSeconds=604800;const currentPeriod=Math.floor((unixTimeSeconds+offsetSeconds)/periodSeconds);const secondsUntilRotation=periodSeconds-(unixTimeSeconds+offsetSeconds-periodSeconds*currentPeriod);const selectedSlot=Number(options[450]);const savedVotePeriod=Number(options[451]);return {unixTimeSeconds,periodSeconds,offsetSeconds,selectedSlot,savedVotePeriod,currentPeriod,secondsUntilRotation,nextRotationAt:unixTimeSeconds+secondsUntilRotation,hasVotedThisWeek:Number(Number.isInteger(selectedSlot)&&selectedSlot>=1&&selectedSlot<=3&&savedVotePeriod===currentPeriod)};})()",
+      "description": "Native synchronized Unix seconds, Meritocracy selected slot and saved period, current period, and unrounded countdown operand. Reads native offset and uses the native period and arithmetic (idleon1.24.txt:256984-257016,257888-257890,258671-258677). Adds countdown seconds to the same timestamp to capture the reset deadline; exact native boundaries return a full period. No account state or clock is changed."
+    }
+  ]
+}

@@ -385,11 +385,7 @@ export const number2letterArray = ['_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 
     'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '肥', '肢', '肖', '肋', '肉', '職', '耐', '者', '箱', '管', '算', '箔', '策', '答', '筒', '筍', '白'];
 
 export const number2letter = (number: number) => {
-    if (number < number2letterArray.length) {
-        return number2letterArray[number];
-    }
-    
-    throw new Error(`Number ${number} is too large to convert to a letter`);
+    return number2letterArray[number];
 }
 
 // CoinStrings from the Idleon 1.22 CustomLists source table.

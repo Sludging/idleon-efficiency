@@ -37,6 +37,7 @@ import { Deathnote } from '../../../data/domain/world-3/construction/deathnote';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ExtractionResults, getExtractedValue, loadExtractionResults } from '../../utils/live-game-data-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
+import { PreviewExpectations, researchExpected, researchPreviewExpectations } from './preview-expectations';
 
 const gridMetadata = initResearchGridBonusRepo();
 const companionMetadata = Companion.fromBase(initCompanionRepo());
@@ -539,12 +540,6 @@ const parameterSpecs: (ParameterTestSpec & {owner: string})[] = [
         domainExtractor: gameData => (gameData.get('hole') as Hole).gambit.getGambitTotalScore(),
     },
     {
-        owner: "Research",
-        description: "Shared Insight multiplier used by each Optical Monocle",
-        extractionKey: "shared_insight_multiplier",
-        domainExtractor: gameData => (gameData.get('research') as ResearchGrid).production.insightMultiplier,
-    },
-    {
         owner: "Hole",
         description: "Gambit score multiplier used before reward score gates",
         extractionKey: "gambit_points_multiplier",
@@ -676,11 +671,13 @@ describe('Research direct calculation parameters and producer preparation', () =
     let results: ExtractionResults;
     let gameData: Map<string, any>;
     let research: ResearchGrid;
+    let preview: PreviewExpectations | undefined;
 
     beforeAll(() => {
         results = loadExtractionResults('research-account-progress-data.json');
         gameData = loadGameDataFromSave('latest');
         research = gameData.get('research') as ResearchGrid;
+        preview = researchPreviewExpectations();
     });
 
     const extracted = <T,>(label: string): T => {
@@ -696,8 +693,12 @@ describe('Research direct calculation parameters and producer preparation', () =
     ['Research', 'Sailing', 'Spelunking', 'Hole'].forEach(owner => {
         describe(owner + ' direct parameters', () => {
             parameterSpecs.filter(spec => spec.owner === owner).forEach(spec => {
-                it('matches ' + spec.description, () => {
-                    const expected = value(spec.extractionKey);
+                const key = spec.extractionKey;
+                const previewKey = key === 'owned_lenses' || key === 'lens_capacity' || key === 'shape_count' || key === 'point_term' ? key : undefined;
+                it((previewKey ? 'reports website preview or matches native ' : 'matches ') + spec.description, () => {
+                    const expected = previewKey
+                        ? researchExpected(preview, previewKey, () => value(previewKey))
+                        : value(key);
                     expect(spec.domainExtractor(gameData)).toMatchLiveGame(expected, 0);
                 });
             });

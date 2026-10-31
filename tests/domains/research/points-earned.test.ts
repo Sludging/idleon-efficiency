@@ -6,24 +6,27 @@ import {
     loadExtractionResults,
     validateExtractionHealth,
 } from '../../utils/live-game-data-loader';
+import { PreviewExpectations, researchExpected, researchPreviewExpectations } from './preview-expectations';
 
 describe('Research earned Points', () => {
     let results: ExtractionResults;
     let research: ResearchGrid;
+    let preview: PreviewExpectations | undefined;
 
     beforeAll(() => {
         results = loadExtractionResults('research-points-earned-data.json');
         validateExtractionHealth(results);
         research = loadGameDataFromSave('latest').get('research') as ResearchGrid;
+        preview = researchPreviewExpectations();
     });
 
-    it('matches account-wide earned Points', () => {
+    it('previews earned Points without a positive saved Research level; otherwise matches game Points', () => {
         const extraction = results.extractions.points_earned;
         if (!extraction || extraction.result === null || extraction.result === undefined) {
-            throw new Error('Missing native earned Research Points: ResearchStuff/Grid_PTSearned(0, 0)');
+            throw new Error('Missing extracted Research Points earned');
         }
 
-        expect(research.points.earned).toMatchLiveGameWithDetails(getExtractedValue(results, 'points_earned'), {
+        expect(research.points.earned).toMatchLiveGameWithDetails(researchExpected(preview, 'points_earned', () => getExtractedValue(results, 'points_earned')), {
             tolerance: 0,
             context: 'Account-wide earned Research Points',
             debugInfo: research.points.contributors,

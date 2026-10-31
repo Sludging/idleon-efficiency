@@ -3,6 +3,8 @@ import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import { getStatCards } from '../../../data/domain/player-stats';
 import { getRightHandOfActionBonus } from '../../../data/domain/talents';
 import type { Player } from '../../../data/domain/player';
+import { Skilling } from '../../../data/domain/skilling';
+import { getStampBonusForKey, Stamp } from '../../../data/domain/world-1/stamps';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { getTargetPlayer } from '../../utils/target-player';
@@ -36,6 +38,28 @@ describe('Hole part-three direct skill-efficiency parameters', () => {
     const gameData = loadGameDataFromSave('latest');
     const players = gameData.get('players') as Player[];
     const player = getTargetPlayer(players);
+    const stamps = gameData.get('stamps') as Stamp[][];
+    const skilling = gameData.get('skilling') as Skilling;
+    const efficiencyStampMultiplier = Math.max(player.getTalentBonus(625), 1);
+
+    it('matches the character-specific Toilet Paper Postage efficiency stamp multiplier', () => {
+        expect(efficiencyStampMultiplier).toMatchLiveGame(getExtractedValue(results, 'efficiency_stamp_talent_multiplier'), 0);
+    });
+
+    [
+        { key: 'mining_efficiency_stamp', stampKey: 'BaseMinEff', description: 'Mining efficiency' },
+        { key: 'all_base_efficiency_stamp', stampKey: 'BaseAllEff', description: 'all-base skill efficiency' },
+    ].forEach(({ key, stampKey, description }) => {
+        it(`matches the effective ${description} stamp bonus`, () => {
+            expect(getStampBonusForKey(stamps, stampKey, player) * efficiencyStampMultiplier)
+                .toMatchLiveGame(getExtractedValue(results, key), 0);
+        });
+    });
+
+    it('matches the all-base skill efficiency used by skill calculations', () => {
+        expect(skilling.getAllBaseSkillEfficiency(player))
+            .toMatchLiveGame(getExtractedValue(results, 'all_base_skill_efficiency'), 0);
+    });
 
     parameterCases.forEach(({ key, description, calculate }) => {
         it(`matches the ${description} used by skill efficiency`, () => {

@@ -71,56 +71,6 @@
       "label": "gear_bonus_etc_bonuses_30",
       "expression": "idleon.callFunction(\"EtcBonuses\", \"30\")",
       "description": "EtcBonuses 30 Build Speed input used by PlayerBuildSpd"
-    },
-    {
-      "label": "build_speed_player_0",
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 0, 0)",
-      "description": "Build speed for player 0"
-    },
-    {
-      "label": "build_speed_player_1",
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 1, 0)",
-      "description": "Build speed for player 1"
-    },
-    {
-      "label": "build_speed_player_2",
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 2, 0)",
-      "description": "Build speed for player 2"
-    },
-    {
-      "label": "build_speed_player_3",
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 3, 0)",
-      "description": "Build speed for player 3"
-    },
-    {
-      "label": "build_speed_player_4",
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 4, 0)",
-      "description": "Build speed for player 4"
-    },
-    {
-      "label": "build_speed_player_5",
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 5, 0)",
-      "description": "Build speed for player 5"
-    },
-    {
-      "label": "build_speed_player_6",
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 6, 0)",
-      "description": "Build speed for player 6"
-    },
-    {
-      "label": "build_speed_player_7",
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 7, 0)",
-      "description": "Build speed for player 7"
-    },
-    {
-      "label": "build_speed_player_8",
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 8, 0)",
-      "description": "Build speed for player 8"
-    },
-    {
-      "label": "build_speed_player_9",
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 9, 0)",
-      "description": "Build speed for player 9"
     }
   ]
 }

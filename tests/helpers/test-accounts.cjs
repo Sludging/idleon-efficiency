@@ -5,17 +5,17 @@ const fs = require('node:fs');
 const path = require('node:path');
 const net = require('node:net');
 const { spawn } = require('node:child_process');
-const { importPublicProfile, ADAPTER_VERSION } = require('./public-profile-import.cjs');
+const { importPublicProfile, getAdapterVersion } = require('./public-profile-import.cjs');
 const { loadAccountDataset, hashFile, hashConfigs, hashAssets } = require('./account-dataset.cjs');
 
 const root = path.resolve(__dirname, '../..');
 const defaultConfig = path.join(root, 'tests/accounts/accounts.json');
 const defaultCache = path.join(root, '.cache/test-accounts');
 const offlineStart = path.join(root, 'sub-projects/idleon-offline/start.cjs');
-const batchExtractor = path.join(root, 'tests/helpers/extract-all-game-data.js');
+const BatchExtractor = require('./extract-all-game-data.js');
 const assetRoot = path.join(root, 'assets/distBuild/static/game');
 const ownedProcesses = new Set();
-let shuttingDown = false;
+let cleanupPromise;
 function cleanEnv(overrides = {}) {
   const env = { ...process.env };
   delete env.TEST_ACCOUNT_DATASET;
@@ -32,7 +32,7 @@ function prepareJestArgs(options) {
   const hasMaxWorkers = retainedArgs.some(argument => argument === '--maxWorkers' || argument.startsWith('--maxWorkers=') || argument === '-w' || argument.startsWith('-w='));
   const hasMemoryLimit = retainedArgs.some(argument => argument === '--workerIdleMemoryLimit' || argument.startsWith('--workerIdleMemoryLimit='));
   if (!hasMaxWorkers) workerArgs.push('--maxWorkers=1');
-  if (!hasMemoryLimit) workerArgs.push('--workerIdleMemoryLimit=512MB');
+  if (!hasMemoryLimit) workerArgs.push('--workerIdleMemoryLimit=1024MB');
   return [...workerArgs, ...retainedArgs];
 }
 
@@ -92,11 +92,20 @@ function readConfig(file) {
   const byId = new Map(config.accounts.map(account => [account.id, account]));
   return byId;
 }
+function preparationIndexFor(account) {
+  const index = account.preparationPlayerIndex === undefined ? account.playerIndex : account.preparationPlayerIndex;
+  if (!Number.isSafeInteger(index) || index < 0) {
+    fail(`Invalid preparationPlayerIndex ${index} for ${account.id}: expected a nonnegative safe integer`);
+  }
+  return index;
+}
 function selectedAccounts(options) {
   const all = readConfig(options.configPath);
   return options.ids.map(id => {
     const account = all.get(id);
     if (!account) fail(`Unknown account ID: ${id}`);
+    getAdapterVersion(account.source);
+    preparationIndexFor(account);
     return account;
   });
 }
@@ -120,11 +129,21 @@ function latestDatasetPath(options, account) {
 
 function validateSnapshotManifest(manifest, account) {
   if (!manifest || manifest.schemaVersion !== 1) fail('Unsupported snapshot manifest schema version');
-  if (manifest.accountId !== account.id || manifest.playerIndex !== account.playerIndex) {
+  if (manifest.accountId !== account.id) {
     fail(`Latest snapshot does not match configured account ${account.id}`);
   }
-  if (manifest.adapterVersion !== ADAPTER_VERSION) {
-    fail(`Snapshot importer version mismatch for ${account.id}: expected ${ADAPTER_VERSION}, found ${manifest.adapterVersion}`);
+  const source = manifest.source === undefined ? 'toolbox' : manifest.source;
+  const configuredSource = account.source === undefined ? 'toolbox' : account.source;
+  const adapterVersion = getAdapterVersion(source);
+  getAdapterVersion(configuredSource);
+  if (source !== configuredSource) {
+    fail(`Snapshot source mismatch for ${account.id}: expected ${configuredSource}, found ${source}`);
+  }
+  if (manifest.adapterVersion !== adapterVersion) {
+    fail(`Snapshot importer version mismatch for ${account.id}: expected ${adapterVersion}, found ${manifest.adapterVersion}`);
+  }
+  if (!Number.isSafeInteger(manifest.playerIndex) || manifest.playerIndex < 0) {
+    fail(`Invalid snapshot player index for ${account.id}`);
   }
 }
 function readSnapshotManifest(snapshot, account) {
@@ -145,57 +164,65 @@ function writeJsonAtomically(file, value) {
 }
 function snapshotId() { return `${new Date().toISOString().replaceAll(/[:.]/g, '-')}-${crypto.randomBytes(4).toString('hex')}`; }
 
+function writeProfileSnapshot(options, account, rawBytes, { fetchedAt, importedAt, sourceSnapshot, sourceUpdatedAt }) {
+  const source = account.source === undefined ? 'toolbox' : account.source;
+  const adapterVersion = getAdapterVersion(source);
+  const profile = JSON.parse(rawBytes.toString('utf8'));
+  const save = importPublicProfile(profile, source);
+  const playerName = save.playerNames[account.playerIndex];
+  if (!playerName) fail(`Configured player index ${account.playerIndex} is absent for ${account.id}`);
+  const base = accountDirectory(options, account);
+  const snapshots = path.resolve(base, 'snapshots');
+  fs.mkdirSync(snapshots, { recursive: true });
+  const snapshot = path.join(snapshots, snapshotId());
+  fs.mkdirSync(snapshot);
+  fs.writeFileSync(path.join(snapshot, 'raw-profile.json'), rawBytes);
+  writeJson(path.join(snapshot, 'save.json'), save);
+  const manifest = {
+    schemaVersion: 1, accountId: account.id, profileName: account.profileName, source,
+    adapterVersion, savePath: 'save.json', saveSha256: hashFile(path.join(snapshot, 'save.json')),
+    rawProfilePath: 'raw-profile.json', rawProfileSha256: hashFile(path.join(snapshot, 'raw-profile.json')),
+    playerIndex: account.playerIndex, playerName, fetchedAt,
+    sourceUpdatedAt: source === 'toolbox' ? profile.lastUpdated : sourceUpdatedAt
+  };
+  if (source === 'toolbox') {
+    manifest.progression = { source: 'latest profile parsedData', metrics: publicProfileMetrics(profile), accountSelection: account.progression };
+  }
+  if (importedAt !== undefined) manifest.importedAt = importedAt;
+  if (sourceSnapshot !== undefined) manifest.sourceSnapshot = sourceSnapshot;
+  writeJson(path.join(snapshot, 'manifest.json'), manifest);
+  writeJsonAtomically(path.join(base, 'latest.json'), { snapshot: path.relative(base, snapshot).split(path.sep).join('/') });
+  return snapshot;
+}
+
 async function fetchProfiles(options, accounts) {
   for (const account of accounts) {
-    const url = `https://profiles.idleontoolbox.workers.dev/api/profiles/?profile=${encodeURIComponent(account.profileName)}`;
+    const source = account.source === undefined ? 'toolbox' : account.source;
+    getAdapterVersion(source);
+    const url = source === 'idleon-efficiency'
+      ? `https://cdn.idleonefficiency.com/profiles/${encodeURIComponent(account.profileName.toLowerCase())}.json`
+      : `https://profiles.idleontoolbox.workers.dev/api/profiles/?profile=${encodeURIComponent(account.profileName)}`;
     const response = await fetch(url);
     if (!response.ok) fail(`Profile fetch failed for ${account.id}: HTTP ${response.status}`);
     const rawBytes = Buffer.from(await response.arrayBuffer());
-    const profile = JSON.parse(rawBytes.toString('utf8'));
-    const save = importPublicProfile(profile);
-    const playerName = save.playerNames[account.playerIndex];
-    if (!playerName) fail(`Configured player index ${account.playerIndex} is absent for ${account.id}`);
+    const snapshot = writeProfileSnapshot(options, account, rawBytes, {
+      fetchedAt: new Date().toISOString(),
+      sourceUpdatedAt: source === 'idleon-efficiency' ? response.headers.get('last-modified') ?? undefined : undefined
+    });
+    const manifest = readSnapshotManifest(snapshot, account);
     const base = accountDirectory(options, account);
-    const snapshot = path.join(base, 'snapshots', snapshotId());
-    fs.mkdirSync(snapshot, { recursive: true });
-    fs.writeFileSync(path.join(snapshot, 'raw-profile.json'), rawBytes);
-    writeJson(path.join(snapshot, 'save.json'), save);
-    const metrics = publicProfileMetrics(profile);
-    const manifest = {
-      schemaVersion: 1, accountId: account.id, profileName: account.profileName,
-      adapterVersion: ADAPTER_VERSION, savePath: 'save.json', saveSha256: hashFile(path.join(snapshot, 'save.json')),
-      rawProfilePath: 'raw-profile.json', rawProfileSha256: hashFile(path.join(snapshot, 'raw-profile.json')),
-      playerIndex: account.playerIndex, playerName, fetchedAt: new Date().toISOString(),
-      sourceUpdatedAt: profile.lastUpdated,
-      progression: { source: 'latest profile parsedData', metrics, accountSelection: account.progression }
-    };
-    writeJson(path.join(snapshot, 'manifest.json'), manifest);
-    writeJson(path.join(base, 'latest.json'), { snapshot: path.relative(base, snapshot).split(path.sep).join('/') });
-    console.log(`${account.id}: fetched ${formatSourceDate(profile.lastUpdated)}; snapshot ${path.relative(base, snapshot)}`);
+    console.log(`${account.id}: fetched ${formatSourceDate(manifest.sourceUpdatedAt)}; snapshot ${path.relative(base, snapshot)}`);
   }
 }
 
-function configPlayerIndexes() {
-  const configsPath = path.join(root, 'tests/configs');
-  const indexes = new Set();
-  for (const filename of fs.readdirSync(configsPath).filter(name => name.endsWith('.json'))) {
-    const config = readJson(path.join(configsPath, filename));
-    if (config.requiredActivePlayerIndex !== undefined) {
-      const value = config.requiredActivePlayerIndex;
-      if (!Number.isSafeInteger(value) || value < 0) fail(`Invalid requiredActivePlayerIndex in ${filename}`);
-      indexes.add(value);
-    }
-  }
-  return [...indexes].sort((left, right) => left - right);
-}
 function wait(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 async function requestJson(url) {
   const response = await fetch(url);
   if (!response.ok) fail(`${url} returned HTTP ${response.status}`);
   return response.json();
 }
-function startOwned(savePath, index, port) {
-  const child = spawn(process.execPath, [offlineStart, '--save', savePath, '--character', String(index), '--port', String(port)], {
+function startOwned(savePath, index, port, preparationIndex) {
+  const child = spawn(process.execPath, [offlineStart, '--save', savePath, '--character', String(index), '--prepare-character', String(preparationIndex), '--port', String(port)], {
     cwd: root, stdio: ['ignore', 'pipe', 'pipe'], env: cleanEnv({ GAME_SERVER_URL: `http://127.0.0.1:${port}` })
   });
   let output = '';
@@ -207,7 +234,10 @@ function startOwned(savePath, index, port) {
   });
   child.outputText = () => output;
   ownedProcesses.add(child);
-  child.once('exit', () => ownedProcesses.delete(child));
+  child.once('close', () => {
+    child.closed = true;
+    ownedProcesses.delete(child);
+  });
   return child;
 }
 function waitForChild(child) {
@@ -230,9 +260,9 @@ async function assertPortAvailable(port) {
     server.listen(port, '127.0.0.1', () => server.close(error => error ? reject(error) : resolve()));
   });
 }
-async function startReady(savePath, index, port, expectedName) {
+async function startReady(savePath, index, port, expectedName, preparationIndex, preparationName) {
   await assertPortAvailable(port);
-  const child = startOwned(savePath, index, port);
+  const child = startOwned(savePath, index, port, preparationIndex);
   const url = `http://127.0.0.1:${port}`;
   const deadline = Date.now() + 120000;
   while (Date.now() < deadline) {
@@ -246,29 +276,64 @@ async function startReady(savePath, index, port, expectedName) {
         continue;
       }
       if (status.character !== index || status.playerName !== expectedName) fail(`Offline server ${port} loaded unexpected active player identity`);
+      if (status.preparationCharacter !== preparationIndex || status.preparationPlayerName !== preparationName) {
+        fail(`Offline server ${port} loaded unexpected preparation player identity`);
+      }
       const save = await requestJson(`${url}/cloud-save`);
       if (save.playerNames?.[index] !== expectedName) fail(`Offline server ${port} loaded unexpected save identity`);
       const gameVersion = await requestJson(`${url}/game-version`);
-      return { child, url, gameVersion };
+      return {
+        child, url, gameVersion,
+        preparationPlayerIndex: status.preparationCharacter,
+        preparationPlayerName: status.preparationPlayerName
+      };
     } catch (error) {
-      if (error.message.includes('unexpected source') || error.message.includes('unexpected active player identity') || error.message.includes('unexpected save identity')) throw error;
+      if (error.message.includes('unexpected source') || error.message.includes('unexpected active player identity') || error.message.includes('unexpected preparation player identity') || error.message.includes('unexpected save identity')) throw error;
       await wait(500);
     }
   }
   fail(`Offline server ${port} did not become ready: ${child.outputText()}`);
 }
 async function cleanup() {
-  if (shuttingDown) return;
-  shuttingDown = true;
-  const children = [...ownedProcesses];
-  for (const child of children) child.kill('SIGTERM');
-  await Promise.all(children.map(child => new Promise(resolve => {
-    if (child.spawnError || child.exitCode !== null || child.signalCode !== null) return resolve();
-    const timer = setTimeout(() => { child.kill('SIGKILL'); resolve(); }, 5000);
-    child.once('exit', () => { clearTimeout(timer); resolve(); });
-    child.once('error', () => { clearTimeout(timer); resolve(); });
+  if (cleanupPromise) return cleanupPromise;
+  cleanupPromise = Promise.all([...ownedProcesses].map(child => new Promise((resolve, reject) => {
+    if (child.spawnError || child.closed) {
+      ownedProcesses.delete(child);
+      resolve();
+      return;
+    }
+    let settled = false;
+    let forced = false;
+    let timer;
+    const finish = error => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      child.removeListener('close', onClose);
+      child.removeListener('error', onError);
+      if (error) reject(error);
+      else resolve();
+    };
+    const onClose = (code, signal) => {
+      if (forced) finish(new Error('Offline process required SIGKILL; browser cleanup was not confirmed'));
+      else if (code !== 0) finish(new Error(`Offline process cleanup failed (exit ${code ?? signal})`));
+      else finish();
+    };
+    const onError = error => finish(error);
+    child.once('close', onClose);
+    child.once('error', onError);
+    timer = setTimeout(() => {
+      forced = true;
+      timer = setTimeout(() => finish(new Error('Offline process did not close after SIGKILL')), 5000);
+      try { child.kill('SIGKILL'); } catch (error) { finish(error); }
+    }, 5000);
+    try { child.kill('SIGTERM'); } catch (error) { finish(error); }
   })));
-  shuttingDown = false;
+  try {
+    await cleanupPromise;
+  } finally {
+    cleanupPromise = undefined;
+  }
 }
 for (const signal of ['SIGINT', 'SIGTERM']) process.once(signal, () => cleanup().finally(() => process.exit(signal === 'SIGINT' ? 130 : 143)));
 
@@ -278,43 +343,86 @@ async function extractAccount(options, account) {
   const savePath = safePointer(snapshot, manifest.savePath);
   if (hashFile(savePath) !== manifest.saveSha256) fail(`Snapshot save hash mismatch for ${account.id}`);
   const save = readJson(savePath);
+  if (save.playerNames?.[manifest.playerIndex] !== manifest.playerName || !manifest.playerName) {
+    fail(`Snapshot player identity mismatch for ${account.id}`);
+  }
   const name = save.playerNames?.[account.playerIndex];
-  if (!name || manifest.playerName !== name) fail(`Snapshot player identity mismatch for ${account.id}`);
-  const indexes = [...new Set([account.playerIndex, ...configPlayerIndexes()])];
+  if (!Number.isSafeInteger(account.playerIndex) || account.playerIndex < 0 || !name) {
+    fail(`Configured player index ${account.playerIndex} is absent for ${account.id}`);
+  }
+  const preparationIndex = preparationIndexFor(account);
+  const preparationName = save.playerNames?.[preparationIndex];
+  if (typeof preparationName !== 'string' || !preparationName) {
+    fail(`Configured preparation player index ${preparationIndex} is absent for ${account.id}`);
+  }
   const runsDir = path.join(snapshot, 'runs');
   const runDir = path.join(runsDir, snapshotId());
   const resultsDir = path.join(runDir, 'results');
   fs.mkdirSync(resultsDir, { recursive: true });
+  const discovery = new BatchExtractor({ outputDir: resultsDir });
+  discovery.findConfigFiles();
+  if (!discovery.configFiles.length) fail(`No extraction configs found; outputs retained at ${resultsDir}`);
+  const groups = new Map([[account.playerIndex, []]]);
+  for (const configFile of discovery.configFiles) {
+    const config = readJson(configFile.configPath);
+    const index = config.requiredActivePlayerIndex ?? account.playerIndex;
+    if (!Number.isSafeInteger(index) || index < 0) fail(`Invalid requiredActivePlayerIndex in ${configFile.name}`);
+    if (!groups.has(index)) groups.set(index, []);
+    groups.get(index).push(configFile);
+  }
   let primaryVersion;
-  const routes = new Map();
+  let preparationIdentity;
+  const failures = [];
+  const previousPlayerIndex = process.env.TEST_ACCOUNT_PLAYER_INDEX;
+  process.env.TEST_ACCOUNT_PLAYER_INDEX = String(account.playerIndex);
   try {
-    for (let offset = 0; offset < indexes.length; offset += 1) {
-      const index = indexes[offset];
-      const playerName = save.playerNames?.[index];
-      const port = options.basePort + offset;
-      if (port > 65535) fail('Offline port range exceeds 65535');
-      if (port === 3101) fail('Account runner must not reuse the default server port 3101');
-      const server = await startReady(savePath, index, port, playerName);
-      if (!primaryVersion) primaryVersion = server.gameVersion;
-      else if (JSON.stringify(server.gameVersion) !== JSON.stringify(primaryVersion)) fail('Offline runtimes report different game versions');
-      routes.set(index, server.url);
+    for (const [index, configFiles] of groups) {
+      if (!configFiles.length) continue;
+      try {
+        const playerName = save.playerNames?.[index];
+        if (!playerName) fail(`Required player index ${index} is absent for ${account.id}`);
+        const server = await startReady(savePath, index, options.basePort, playerName, preparationIndex, preparationName);
+        preparationIdentity = {
+          preparationPlayerIndex: server.preparationPlayerIndex,
+          preparationPlayerName: server.preparationPlayerName
+        };
+        if (!primaryVersion) primaryVersion = server.gameVersion;
+        else if (JSON.stringify(server.gameVersion) !== JSON.stringify(primaryVersion)) fail('Offline runtimes report different game versions');
+        const batch = new BatchExtractor({
+          outputDir: resultsDir,
+          serverURL: server.url,
+          playerServers: { [index]: server.url }
+        });
+        batch.configFiles = configFiles;
+        await batch.extractAll();
+        for (const failure of batch.results.failed) {
+          const details = failure.error || failure.errors.map(entry => `${entry.label}: ${entry.error}`).join('; ');
+          failures.push(`player ${index}, ${failure.config}: ${details}`);
+        }
+        if (batch.results.successful.length + batch.results.failed.length !== configFiles.length) {
+          failures.push(`player ${index}: batch extractor did not complete all configs`);
+        }
+      } catch (error) {
+        failures.push(`player ${index}: ${error.message}`);
+      } finally {
+        try {
+          await cleanup();
+        } catch (error) {
+          failures.push(`player ${index} cleanup: ${error.message}`);
+          fail(`Cleanup failed for ${account.id}: ${failures.join(' | ')}; outputs retained at ${resultsDir}`);
+        }
+      }
     }
-    const primaryIndex = account.playerIndex;
-    const args = [batchExtractor, '--output-dir', resultsDir];
-    for (const [index, url] of routes) args.push('--player-server', `${index}=${url}`);
-    const env = cleanEnv({ GAME_SERVER_URL: routes.get(primaryIndex), TEST_ACCOUNT_PLAYER_INDEX: String(account.playerIndex) });
-    const child = spawn(process.execPath, args, { cwd: root, env, stdio: 'inherit' });
-    ownedProcesses.add(child);
-    const result = await waitForChild(child);
-    if (result.error) fail(`Could not run batch extractor for ${account.id}: ${result.error.message}; outputs retained at ${resultsDir}`);
-    if (result.code !== 0) fail(`Batch extraction failed for ${account.id} (exit ${result.code ?? result.signal}); outputs retained at ${resultsDir}`);
+    if (failures.length) fail(`Batch extraction failed for ${account.id}: ${failures.join(' | ')}; outputs retained at ${resultsDir}`);
     const files = fs.readdirSync(resultsDir).filter(file => file.endsWith('.json')).sort();
     if (!files.length) fail(`Batch extractor produced no results for ${account.id}; outputs retained at ${resultsDir}`);
     const hashes = Object.fromEntries(files.map(file => [file, hashFile(path.join(resultsDir, file))]));
     const descriptor = {
-      schemaVersion: 1, accountId: account.id, profileName: account.profileName, adapterVersion: ADAPTER_VERSION,
+      schemaVersion: 2, accountId: account.id, profileName: account.profileName,
+      source: manifest.source === undefined ? 'toolbox' : manifest.source, adapterVersion: manifest.adapterVersion,
       savePath: path.relative(runDir, savePath).split(path.sep).join('/'), saveSha256: manifest.saveSha256,
       resultsDir: 'results', playerIndex: account.playerIndex, playerName: name, gameVersion: primaryVersion,
+      ...preparationIdentity,
       assetSha256: hashAssets(assetRoot), configSha256: hashConfigs(path.join(root, 'tests/configs')),
       results: hashes, extractedAt: new Date().toISOString()
     };
@@ -326,7 +434,8 @@ async function extractAccount(options, account) {
     });
     console.log(`${account.id}: extraction complete; dataset ${datasetPath}`);
   } finally {
-    await cleanup();
+    if (previousPlayerIndex === undefined) delete process.env.TEST_ACCOUNT_PLAYER_INDEX;
+    else process.env.TEST_ACCOUNT_PLAYER_INDEX = previousPlayerIndex;
   }
 }
 async function runTests(options, accounts) {
@@ -372,4 +481,4 @@ async function main() {
 }
 
 if (require.main === module) main().catch(async error => { console.error(error.stack || error.message); await cleanup(); process.exitCode = 1; });
-module.exports = { latestDatasetPath, parseArgs, readSnapshotManifest, safePointer, selectedAccounts };
+module.exports = { extractAccount, latestDatasetPath, parseArgs, readSnapshotManifest, safePointer, selectedAccounts, writeProfileSnapshot };

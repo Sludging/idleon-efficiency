@@ -28,37 +28,98 @@ The [real examples below](#examples-from-existing-tests) show these distinctions
 4. **Obtain any new expected values.** Follow the [playbook extraction triggers](calculation-correctness/PLAYBOOK.md#extraction-when-needed). With unchanged config and usable results, continue with the existing matching save and results.
 5. **Write and run the tests.** Use the matchers below and record the actual commands and results before changing domain code.
 
+Compare the same feature state as the game's consumer. Some internal helpers return default levels or requirements for inactive content. Apply the consumer's activation checks before comparing those results with active website progression.
+
+For actor-specific stamp comparisons, pass the captured target player to `getStampBonusForKey`.
+Without a player, the result is an unrestricted preview and may not match the actor's bonus.
+
+Research uses a website preview when every saved character has a Research level of zero or less. The preview uses zero for level, EXP, and EXP requirement. Lens, Shape, and Point expectations retain independently owned rewards; they are not comparisons with the native game. After Research starts, compare those values with native captures. Before Research starts, continue native comparisons for unaffected calculations.
+
+Keep generic comparisons independent of one save's owned classes, items, unlocks, or character and plot counts. Remove fixture-specific scenarios instead of requiring every public account to satisfy them.
+
+Prepared bonus maps can omit scalar entries whose contribution is zero. Require the owning preparation step and map, but match the original consumer's numeric conversion for sparse entries. Keep failures for genuinely invalid numbers.
+
+A helper can return zero for inactive content while the calculation uses a minimum multiplier of one.
+Compare the multiplier the calculation uses, not an unclamped helper with a clamped result.
+Compare numeric character contributions rather than nullable UI summaries.
+Keep raw helper comparisons only when both APIs return the same quantity.
+Some game dispatchers return zero for unknown commands.
+Check the original function and exercise a non-zero case when one is available.
+
+Keep saved values separate from unlock state when the game uses both.
+A locked record can contain a saved rank that another calculation still counts.
+
 For server selection, readiness, version lookup, and live-only save refresh, follow the [canonical game-access policy](../tests/helpers/README.md#game-access).
 
 When extraction is needed, use the [extraction helper guide](../tests/helpers/README.md#quick-start---batch-extraction) for commands, server selection, save refresh, and active-player prerequisites.
 
 For a correctness case, follow the [plan approval step](calculation-correctness/PLAYBOOK.md#2-plan-and-obtain-approval) before changing tests or extraction configs. Use the approved scope and interface. When extraction is needed, return the request to the human or explicitly delegated supervising session under the [playbook extraction procedure](calculation-correctness/PLAYBOOK.md#extraction-when-needed).
 
+## Test execution
+
+`yarn test` remains the normal Jest command. Jest discovers and selects the
+original source paths before the sequencer groups selected domain suites into
+ten natural website groups. Existing source-path filters and
+`--runTestsByPath` keep selecting those original files.
+
+The package command starts the installed Jest binary through Node with
+`--max-old-space-size=2048`. This limits V8 old-space heap, not total process
+memory. `test:watch`, `test:coverage`, `test:domains`, and `test:integration`
+delegate to `yarn test`. Direct `yarn jest` and the account runner do not add
+this package-command heap limit.
+
+Each group runs in one Jest runtime through a generated require wrapper.
+Wrappers live in a unique operating-system temporary directory and are removed
+automatically. Non-domain suites remain separate Jest entries with their usual
+runtime isolation.
+
+`loadGameDataFromSave` caches the prepared account after `updateIdleonData`
+completes. The cache uses the resolved save path and lasts only for that
+group's Jest runtime. Tests share read-only prepared state, not a process-global
+or cross-runtime account. The guard blocks object and array writes and
+`Map`, `Set`, and `Date` mutators.
+
+Normal and opt-in account runs default to one Jest worker and a `1024MB`
+`workerIdleMemoryLimit`. This idle threshold lets Jest recycle workers between
+scheduled entries. The threshold is separate from the package-command heap
+limit and does not impose a hard heap or total-memory cap.
+Explicit `--maxWorkers` and `--workerIdleMemoryLimit` values override the
+defaults. `--runInBand` runs in the main process without worker recycling.
+
 ## Keep tests tied to genuine saves
 
 Use a genuine real save and its matching extracted game values. Result-only extraction, whether offline or live, does not establish pairing with a retained save; offline and live snapshots are not presumed equivalent. A live save refresh precedes config extraction rather than taking an atomic snapshot, so establish that results match the saved state before using them. Tests must not construct synthetic saves, alter inputs to simulate a branch, or calculate expected values from the implementation. This deliberately leaves unobserved permutations uncovered. State which meaningful behavior the paired save exercises, and raise uncovered behavior as a coverage question rather than inventing test data.
 
-Routine `yarn test` and extraction use `tests/fixtures/saves/latest.json` and its matching results; reuse the shared default offline server when ready. Public-account testing is opt-in only when the user explicitly requests multi-account or public-profile validation. DO NOT USE THIS IN NORMAL OPERATIONS. It is not a routine prerequisite or fallback for regular-save mismatches or missing results. The importer changes required save representation only; it does not add resources or simulate progress. Fetched data stays local under `.cache/test-accounts/` by default. Fetching, extraction, and tests are separate commands; tests use stored paired datasets and never fetch profiles.
+Runtime balances can advance after the retained save, so compare saved progress with the genuine save rather than later captures.
+For Refinery cycle projections, first match native and saved ranks, then use native power and capacity with saved progress.
 
-All Toolbox-to-save conversion belongs in `tests/helpers/public-profile-import.cjs`.
-Its output is an ordinary IE save for both extraction and domain loading.
-Bundle ownership is restored from positive purchase flags before offline startup,
-without granting resources or replaying purchase receipts. Raw downloads remain unchanged.
+Treat fully prepared account state as read-only in regular core and parameter tests. `loadGameDataFromSave` already runs initialization, parsing, and calculation; read its prepared public results without rerunning those steps. Do not add same-save reloads, reset/reparse cycles, or repeated-updater checks as routine calculation coverage. Dedicated lifecycle coverage requires an explicit request.
+
+Regular core and parameter tests must not assume developer-specific character
+names, save timestamps, owned levels, unlock states, balances, or optimizer
+selections. Use the selected save's matching native captures for account-dependent
+expectations. Remove fixture-pinned cases rather than preserving them behind
+skips, state guards, or replacement assertions. Constants that define game
+mechanics or controlled unit inputs remain valid. Keep genuine extraction-health
+and comparison-context checks.
+
+Policy projections also belong to the save used to produce them.
+Do not use a regular-save projection as an oracle for a selected public account.
+
+For opt-in public-profile validation, follow the [public-profile maintenance workflow](../tests/helpers/README.md#public-profile-maintenance).
+That guide owns account selection, import policy, commands, cache refresh, and cohort coverage.
+Routine work uses the regular save and matching results under the [game-access policy](../tests/helpers/README.md#game-access).
 
 Extraction expressions must read account-dependent operands from the selected save.
 Do not embed balances or levels from another account.
+When an extraction replays game source, check its branches against the selected runtime version.
+For example, the four normal gear replays apply the version 1.24 Menagerie multiplier to non-attribute obols.
+Keep identical embedded replays aligned when updating a shared branch. Compare their public result with the original native getter when available.
+Match inventory scope to the native consumer. Mining, Chopping, and Catching material bonuses use the chest, Refinery, and the selected character's inventory, not other characters' bags.
 For actionable prices, apply the native purchase gate.
 A raw quote can remain nonzero when purchases are blocked.
 
-Run this sequence only when the user explicitly requests multi-account or public-profile validation. See [canonical game-access policy](../tests/helpers/README.md#game-access) for the regular-save default and gate.
-
-Use `yarn test:accounts:list --accounts <ids>` to inspect configured accounts, source dates, and observed progression. Fetch explicitly with `yarn test:accounts:fetch --accounts <ids>`, extract with `yarn test:accounts:extract --accounts <ids>`, then run fresh Jest processes with `yarn test:accounts --accounts <ids>`. Pass Jest suite arguments after `--`. See [helper account testing](../tests/helpers/README.md#integration-with-tests) for options and cache behavior. Account-specific calculation failures remain failures. Do not suppress known mismatches or change comparison tolerances.
-
-Account test processes default to one Jest worker with a `512MB`
-`workerIdleMemoryLimit`. Jest can recycle workers between test files when a
-worker exceeds the limit. Pass `--maxWorkers` or `--workerIdleMemoryLimit` after
-`--` to override a default; pass `--runInBand` or `-i` to disable both worker
-defaults. This does not change normal `yarn test`.
+Do not suppress account-specific calculation failures or change tolerances to make a public profile pass.
 Each extraction entry used here should support a core result or a direct parameter comparison. A parameter is a calculation the selected result directly uses, including one in the same domain; keep its comparison even when it also has a core test. Static/supporting metadata is not a calculation target.
 
 Write the completed test against the typed public API directly and assert the calculated result. For a missing implementation during the tests stage, keep an active test whose extractor reports the missing calculation and game function signature. This temporary failure scaffolding exposes the missing API; once implemented, remove `typeof`/`in` guards, `unknown` casts, and `.call` wrappers. A missing selected implementation can support implementation after tests-stage approval; a missing directly used result follows the [dependency procedure](calculation-correctness/PLAYBOOK.md#dependencies-and-wikibot).

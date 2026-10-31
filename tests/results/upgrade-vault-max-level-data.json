@@ -13,11 +13,11 @@
         },
         {
           "index": 2,
-          "maxLevel": 540
+          "maxLevel": 670
         },
         {
           "index": 3,
-          "maxLevel": 600
+          "maxLevel": 1042
         },
         {
           "index": 4,
@@ -57,7 +57,7 @@
         },
         {
           "index": 13,
-          "maxLevel": 122
+          "maxLevel": 140
         },
         {
           "index": 14,
@@ -89,7 +89,7 @@
         },
         {
           "index": 21,
-          "maxLevel": 180
+          "maxLevel": 306
         },
         {
           "index": 22,
@@ -133,7 +133,7 @@
         },
         {
           "index": 32,
-          "maxLevel": 54
+          "maxLevel": 65
         },
         {
           "index": 33,
@@ -177,7 +177,7 @@
         },
         {
           "index": 43,
-          "maxLevel": 125
+          "maxLevel": 167
         },
         {
           "index": 44,
@@ -185,7 +185,7 @@
         },
         {
           "index": 45,
-          "maxLevel": 416
+          "maxLevel": 466
         },
         {
           "index": 46,
@@ -205,7 +205,7 @@
         },
         {
           "index": 50,
-          "maxLevel": 320
+          "maxLevel": 386
         },
         {
           "index": 51,
@@ -221,7 +221,7 @@
         },
         {
           "index": 54,
-          "maxLevel": 540
+          "maxLevel": 702
         },
         {
           "index": 55,
@@ -229,15 +229,15 @@
         },
         {
           "index": 56,
-          "maxLevel": 310
+          "maxLevel": 408
         },
         {
           "index": 57,
-          "maxLevel": 505
+          "maxLevel": 514
         },
         {
           "index": 58,
-          "maxLevel": 260
+          "maxLevel": 322
         },
         {
           "index": 59,
@@ -249,7 +249,7 @@
         },
         {
           "index": 61,
-          "maxLevel": 50
+          "maxLevel": 81
         },
         {
           "index": 62,
@@ -257,7 +257,7 @@
         },
         {
           "index": 63,
-          "maxLevel": 300
+          "maxLevel": 338
         },
         {
           "index": 64,
@@ -265,7 +265,7 @@
         },
         {
           "index": 65,
-          "maxLevel": 500
+          "maxLevel": 544
         },
         {
           "index": 66,
@@ -277,7 +277,7 @@
         },
         {
           "index": 68,
-          "maxLevel": 314
+          "maxLevel": 366
         },
         {
           "index": 69,
@@ -289,7 +289,7 @@
         },
         {
           "index": 71,
-          "maxLevel": 140
+          "maxLevel": 228
         },
         {
           "index": 72,
@@ -329,7 +329,7 @@
         },
         {
           "index": 81,
-          "maxLevel": 370
+          "maxLevel": 418
         },
         {
           "index": 82,
@@ -345,7 +345,7 @@
         },
         {
           "index": 85,
-          "maxLevel": 64
+          "maxLevel": 140
         },
         {
           "index": 86,
@@ -353,7 +353,7 @@
         },
         {
           "index": 87,
-          "maxLevel": 250
+          "maxLevel": 274
         },
         {
           "index": 88,

@@ -343,7 +343,7 @@
     },
     "points_owned": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_owned\", 0, 0)",
-      "result": 129
+      "result": 133
     },
     "points_spent": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_spent\", 0, 0)",
@@ -351,7 +351,7 @@
     },
     "points_available": {
       "expression": "Math.round(idleon.callFunction(\"Thingies\", \"LegendPTS_owned\", 0, 0) - idleon.callFunction(\"Thingies\", \"LegendPTS_spent\", 0, 0))",
-      "result": 7
+      "result": 11
     },
     "companion_37_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 37, 0)",

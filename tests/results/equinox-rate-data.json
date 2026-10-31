@@ -2,7 +2,7 @@
   "extractions": {
     "voting_bonus_32": {
       "expression": "idleon.callFunction(\"Summoning\",\"VotingBonusz\", 32, 0)",
-      "result": 250
+      "result": 0
     },
     "research_grid_bonus_86": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\", 86, 0)",
@@ -10,7 +10,7 @@
     },
     "lore_epic_bonus_8": {
       "expression": "idleon.callFunction(\"Thingies\",\"LoreEpiBon\", 8, 0)",
-      "result": 334.6682825803205
+      "result": 336.4340832510642
     },
     "companion_15_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 15)",
@@ -36,13 +36,17 @@
       "expression": "idleon.callFunction(\"ArcaneType\",\"ArcaneUpgBonus\", 37, 0)",
       "result": 111.22000000000001
     },
+    "legend_talent_bonus_35": {
+      "expression": "idleon.callFunction(\"Thingies\",\"LegendPTS_bonus\", 35, 0)",
+      "result": 25
+    },
     "royal_armory_bonus_76": {
       "expression": "idleon.callFunction(\"RoyalG\",\"ArmoryUpgBonus\", 76, 0)",
       "result": 0
     },
     "equinox_bar_rate": {
       "expression": "idleon.callFunction(\"Dreamstuff\",\"BarFillRate\", 0)",
-      "result": 483900.211215243
+      "result": 138818.8606151608
     }
   },
   "errors": {}

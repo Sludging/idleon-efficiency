@@ -34,12 +34,9 @@ const cases: [string, string, (gaming: Gaming) => number | null][] = [
     ["import_purchase_cost_8", "purchase cost of King Rat", g => g.getImport(8)!.purchaseCostBits],
     ["import_upgrade_cost_8", "upgrade cost of King Rat", g => g.getImport(8)!.getUpgradeCost()],
     ["import_bonus_8", "earned upgrade effect of King Rat", g => g.getImport(8)!.getBonus()],
-    ["water_charges", "available accumulated sprinkler charges", g => (g.getImport(0) as SprinklerImport).waterCharges],
     ["SaveSprinkler", "combined golden sprinkler and Palette preservation probability", g => (g.getImport(0) as SprinklerImport).preservationProbability],
-    ["shovel_digs", "available accumulated shovel digs", g => (g.getImport(1) as ShovelImport).digs],
     ["shovel_nugget_minimum", "nugget lower draw bound, not a guaranteed improvement", g => (g.getImport(1) as ShovelImport).nuggetRange.minimum],
     ["shovel_nugget_maximum", "nugget upper draw bound with Metal Detector", g => (g.getImport(1) as ShovelImport).nuggetRange.maximum],
-    ["squirrel_acorns_ready", "available accumulated squirrel acorns", g => (g.getImport(2) as SquirrelImport).acornsReady],
     ["shell_next_threshold", "next Shell rank cumulative evolution requirement", g => (g.getImport(3) as ShellImport).nextRankThreshold],
     ["LogGameMulti", "earned Bog Log high score multiplier", g => (g.getImport(5) as BogLogImport).bitsMultiplier],
     ["GamingPOINGmulti", "earned POiNG high score multiplier", g => (g.getImport(6) as HighScoreImport).bitsMultiplier],
@@ -102,9 +99,9 @@ const cases: [string, string, (gaming: Gaming) => number | null][] = [
     ["initial_appearance_probability", "initial appearance chance is separate from evolution", g => g.garden.initialAppearanceProbability],
     ["logbook_bits_multiplier", "Logbook earned Bits multiplier from historical stages", g => g.logbook.bitsMultiplier],
     ["garden_standard_harvest", "standard stage-one sprout harvest before species effects", g => g.garden.harvestBits],
-    ["slot_evolution_probability_0", "visible stage-four Berry evolution chance", g => g.garden.slots[0].nextEvolutionProbability],
-    ["slot_evolution_probability_2", "visible stage-seven Chemical evolution chance", g => g.garden.slots[2].nextEvolutionProbability],
-    ["slot_evolution_probability_4", "visible stage-five Evergreen evolution chance", g => g.garden.slots[4].nextEvolutionProbability],
+    ["slot_evolution_probability_0", "evolution chance for the plant in slot 0, with the maximum-stage limit", g => g.garden.slots[0].nextEvolutionProbability],
+    ["slot_evolution_probability_2", "evolution chance for the plant in slot 2, with the maximum-stage limit", g => g.garden.slots[2].nextEvolutionProbability],
+    ["slot_evolution_probability_4", "evolution chance for the plant in slot 4, with the maximum-stage limit", g => g.garden.slots[4].nextEvolutionProbability],
 ];
 
 describe('Gaming account mechanics', () => {

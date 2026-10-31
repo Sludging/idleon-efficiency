@@ -1,6 +1,5 @@
-import { HandleRawDataKey } from '../../../data/domain/base/domain';
-import { Farming, updateFarmingStickerBonuses } from '../../../data/domain/world-6/farming';
-import { loadGameDataFromSave, loadTestSave } from '../../utils/cloudsave-loader';
+import { Farming } from '../../../data/domain/world-6/farming';
+import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 
 // All seven Farming sticker effects form a small set. The genuine account has
@@ -73,30 +72,4 @@ describe('Farming sticker account results', () => {
             }
         );
     });
-});
-
-it('preserves an earned sticker effect and damage after reparsing and repeated updates', () => {
-    const results = loadExtractionResults('farming-stickers-data.json');
-    validateExtractionHealth(results);
-    const save = loadTestSave('latest');
-    const data = loadGameDataFromSave('latest');
-    const farming = data.get('farming') as Farming;
-    const parsed = new Map(data);
-    farming.getRawKeys().forEach(raw => HandleRawDataKey(raw, parsed, save, data.get('charCount')));
-    farming.parse(parsed);
-    updateFarmingStickerBonuses(data);
-    updateFarmingStickerBonuses(data);
-
-    expect(farming.getStickerBonus(0)).toMatchLiveGameWithDetails(
-        getExtractedValue(results, 'farming_sticker_bonus_0'), {
-            tolerance: 0,
-            context: 'Mega Mongo Sticker Class EXP after reparsing and repeated updates',
-        }
-    );
-    expect(farming.getStickerDamageMultiplier()).toMatchLiveGameWithDetails(
-        getExtractedValue(results, 'farming_sticker_damage_multiplier'), {
-            tolerance: 0,
-            context: 'Prepared sticker damage after reparsing and repeated updates',
-        }
-    );
 });

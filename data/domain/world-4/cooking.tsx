@@ -861,7 +861,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const worshipBonus = worship.totalizer.getBonus(TotalizerBonus.Cooking);
     const starsign58 = Math.max(...players.map(player => player.starSigns.find(sign => sign.name == "Gordonius Major")?.getBonus("Cooking SPD (Multiplicative!)") ?? 0), 0);
     const cropScientistBonus = farming.cropScientist.getBonus(CropScientistBonusText.CookingSpeed);
-    const arcadeBonus = arcade.bonuses.find(bonus => bonus.effect == "+{% Cook SPD multi")?.getBonus() ?? 0;
+    const arcadeBonus = arcade.bonuses[28].getBonus();
     const summonBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == 16);
     const winnerBonus = summonBonus?.getBonus() ?? 0;
     const eventShopDoughRollerBonus = eventShop.isBonusOwned(53) ? 1 : 0;

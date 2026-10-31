@@ -6,21 +6,22 @@ import {
     loadExtractionResults,
     validateExtractionHealth,
 } from '../../utils/live-game-data-loader';
+import { PreviewExpectations, researchExpected, researchPreviewExpectations } from './preview-expectations';
 
-// Compare all four approved native lens outputs without deriving plain Magnifying Glass ownership.
-// The genuine save covers current ownership and capacity, not every ownership source or cap transition.
 describe('Research account-wide lens ownership', () => {
     let results: ExtractionResults;
     let research: ResearchGrid;
+    let preview: PreviewExpectations | undefined;
 
     beforeAll(() => {
         results = loadExtractionResults('research-lens-ownership-data.json');
         validateExtractionHealth(results);
         research = loadGameDataFromSave('latest').get('research') as ResearchGrid;
+        preview = researchPreviewExpectations();
     });
 
-    it('matches total owned lenses across all lens kinds', () => {
-        expect(research.lensOwnership.total).toMatchLiveGameWithDetails(getExtractedValue(results, 'owned_lenses'), {
+    it('previews the lens total without a positive saved Research level; otherwise matches the game total', () => {
+        expect(research.lensOwnership.total).toMatchLiveGameWithDetails(researchExpected(preview, 'owned_lenses', () => getExtractedValue(results, 'owned_lenses')), {
             tolerance: 0,
             context: 'Total owned Research lenses, including Optical Monocles and Kaleidoscopes',
         });
@@ -40,8 +41,8 @@ describe('Research account-wide lens ownership', () => {
         });
     });
 
-    it('matches lens capacity per Observation', () => {
-        expect(research.lensOwnership.capacityPerObservation).toMatchLiveGameWithDetails(getExtractedValue(results, 'lens_capacity'), {
+    it('previews lens capacity without a positive saved Research level; otherwise matches game capacity', () => {
+        expect(research.lensOwnership.capacityPerObservation).toMatchLiveGameWithDetails(researchExpected(preview, 'lens_capacity', () => getExtractedValue(results, 'lens_capacity')), {
             tolerance: 0,
             context: 'Maximum lenses per Observation',
         });

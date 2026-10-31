@@ -2,23 +2,23 @@
   "extractions": {
     "total_trades": {
       "expression": "idleon.callFunction(\"Minehead\", \"GlimboTotalTrades\", 0, 0)",
-      "result": 498
+      "result": 1362
     },
     "drop_rate_multiplier": {
       "expression": "idleon.callFunction(\"Minehead\", \"GlimboDRmulti\", 0, 0)",
-      "result": 1.052
+      "result": 1.169
     },
     "trade_0_count": {
       "expression": "idleon.getAttr(\"Research\")[12][0]",
-      "result": 20
+      "result": 85
     },
     "trade_0_cost": {
       "expression": "idleon.callFunction(\"Minehead\", \"Glimbo_Cost\", 0, 0)",
-      "result": 32
+      "result": 6045
     },
     "trade_0_maximum": {
       "expression": "Math.round(Number(idleon.getAttr(\"CustomLists\").h.UpgradeVault[Number(idleon.getAttr(\"CustomLists\").h.Research[26][0])][4]) + Math.max(0, Math.min(10, 10 * Number(idleon.getAttr(\"BundlesReceived\").h.bon_u || 0))) + (1 + idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 169, 1) + idleon.callFunction(\"Summoning\", \"EventShopOwned\", 40, 0)) * (Number(idleon.getAttr(\"Research\")[12][0]) + 1))",
-      "result": 542
+      "result": 672
     },
     "trade_0_next_gain": {
       "expression": "1 + idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 169, 1) + idleon.callFunction(\"Summoning\", \"EventShopOwned\", 40, 0)",
@@ -26,15 +26,15 @@
     },
     "trade_2_count": {
       "expression": "idleon.getAttr(\"Research\")[12][2]",
-      "result": 42
+      "result": 60
     },
     "trade_2_cost": {
       "expression": "idleon.callFunction(\"Minehead\", \"Glimbo_Cost\", 2, 0)",
-      "result": 44869
+      "result": 1701694
     },
     "trade_2_maximum": {
       "expression": "Math.round(Number(idleon.getAttr(\"CustomLists\").h.UpgradeVault[Number(idleon.getAttr(\"CustomLists\").h.Research[26][2])][4]) + Math.max(0, Math.min(10, 10 * Number(idleon.getAttr(\"BundlesReceived\").h.bon_u || 0))) + Number(idleon.getAttr(\"Research\")[12][2]) + 1)",
-      "result": 123
+      "result": 141
     },
     "trade_2_next_gain": {
       "expression": "Math.round(Number(idleon.getAttr(\"CustomLists\").h.UpgradeVault[Number(idleon.getAttr(\"CustomLists\").h.Research[26][2])][4]) + Math.max(0, Math.min(10, 10 * Number(idleon.getAttr(\"BundlesReceived\").h.bon_u || 0))) + Number(idleon.getAttr(\"Research\")[12][2]) + 2) - Math.round(Number(idleon.getAttr(\"CustomLists\").h.UpgradeVault[Number(idleon.getAttr(\"CustomLists\").h.Research[26][2])][4]) + Math.max(0, Math.min(10, 10 * Number(idleon.getAttr(\"BundlesReceived\").h.bon_u || 0))) + Number(idleon.getAttr(\"Research\")[12][2]) + 1)",
@@ -42,15 +42,15 @@
     },
     "trade_15_count": {
       "expression": "idleon.getAttr(\"Research\")[12][15]",
-      "result": 7
+      "result": 33
     },
     "trade_15_cost": {
       "expression": "idleon.callFunction(\"Minehead\", \"Glimbo_Cost\", 15, 0)",
-      "result": 17
+      "result": 26347
     },
     "trade_15_maximum": {
       "expression": "Math.round(Number(idleon.getAttr(\"CustomLists\").h.UpgradeVault[Number(idleon.getAttr(\"CustomLists\").h.Research[26][15])][4]) + Math.max(0, Math.min(10, 10 * Number(idleon.getAttr(\"BundlesReceived\").h.bon_u || 0))) + (1 + idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 169, 1) + idleon.callFunction(\"Summoning\", \"EventShopOwned\", 40, 0)) * (Number(idleon.getAttr(\"Research\")[12][15]) + 1))",
-      "result": 316
+      "result": 368
     },
     "trade_15_next_gain": {
       "expression": "1 + idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 169, 1) + idleon.callFunction(\"Summoning\", \"EventShopOwned\", 40, 0)",

@@ -5,7 +5,7 @@
       "result": {
         "playerId": 3,
         "playerName": "Sludgev4",
-        "version": 395.1
+        "version": 398.1
       }
     },
     "native_jar_types_owned": {
@@ -34,7 +34,7 @@
     },
     "rupie_lamp_99": {
       "expression": "idleon.callFunction(\"Holes\", \"LampBonuses\", 99, 0)",
-      "result": 3203.5
+      "result": 3655
     },
     "rupie_wisdom_monument": {
       "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 2, 1)",
@@ -43,8 +43,8 @@
     "rupie_measurements": {
       "expression": "[idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 10, 0), idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 14, 0)]",
       "result": [
-        26580.666666666664,
-        27383.624854065238
+        26749.666666666664,
+        27682.328119835573
       ]
     },
     "rupie_collectibles": {
@@ -74,9 +74,9 @@
         4,
         8,
         9,
-        4532.518244208975,
-        10349.807397878641,
-        842.4707950379016
+        3542.325400621068,
+        6569.987956535203,
+        3940.9789369449554
       ]
     },
     "requirement_balance": {
@@ -93,7 +93,7 @@
     },
     "collectible_12": {
       "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 12, 0)",
-      "result": 240
+      "result": 288
     },
     "collectible_16": {
       "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 16, 0)",
@@ -125,7 +125,7 @@
     },
     "measurement_12": {
       "expression": "idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 12, 0)",
-      "result": 323.63507956989247
+      "result": 329.92048172043013
     },
     "production_upgrade_67": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 67, 30)",
@@ -145,7 +145,7 @@
     },
     "producer_rate_0": {
       "expression": "idleon.callFunction('Holes', 'JarProductionPerHR', 0, 0)",
-      "result": 788162.8901608335
+      "result": 793625.7585879574
     },
     "producer_requirement_1": {
       "expression": "idleon.callFunction('Holes', 'JarProductionREQ', idleon.getAttr('Holes')[25][1], 0)",
@@ -153,19 +153,19 @@
     },
     "producer_rate_1": {
       "expression": "idleon.callFunction('Holes', 'JarProductionPerHR', 1, 0)",
-      "result": 788162.8901608335
+      "result": 793625.7585879574
     },
     "producer_requirement_2": {
       "expression": "idleon.callFunction('Holes', 'JarProductionREQ', idleon.getAttr('Holes')[25][2], 0)",
-      "result": 11529.906389085836
+      "result": 11514.303150431826
     },
     "producer_rate_2": {
       "expression": "idleon.callFunction('Holes', 'JarProductionPerHR', 2, 0)",
-      "result": 788162.8901608335
+      "result": 793625.7585879574
     },
     "jar_rupie_value": {
       "expression": "idleon.callFunction('Holes', 'JarRupieValue', 0, 0)",
-      "result": 31894698959.317028
+      "result": 36201428484.96218
     }
   },
   "errors": {}

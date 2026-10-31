@@ -1,15 +1,15 @@
 {
   "extractions": {
     "gear_properties": {
-      "expression": "(() => {\n const replay = selector => {\n const attr = key => idleon.engine.getGameAttribute(key);\n const number = value => value == null ? 0 : Number(value);\n const owns = (map, key) => Object.prototype.hasOwnProperty.call(map, key);\n const order = attr(\"EquipmentOrder\"), maps = attr(\"EquipmentMap\");\n const definitions = attr(\"ItemDefinitionsGET\").h;\n const suffixes = attr(\"CustomLists\").h.PowerSuffixes;\n const galleryOn = idleon.callFunction(\"Gallery\", \"GalleryBonusSystemON\", 0, 0) == 1;\n const hatOn = idleon.callFunction(\"Gallery\", \"PremHatBonusesSystemON\", 0, 0) == 1;\n const prepared = attr(\"DNSM\").h;\n let total = 0;\n for (let pass = 0; pass < 2; pass++) {\n  for (let slot = 0; slot < 8 + 8 * (1 - pass); slot++) {\n   const name = order[pass][slot];\n   if (name === \"Blank\" || name.includes(\"Dung\") || (pass === 0 && ((galleryOn && (slot === 10 || slot === 14)) || (hatOn && slot === 8)))) continue;\n   let property = selector;\n   if (selector.includes(\"Power\")) {\n    const family = selector.substring(0, selector.indexOf(\"_\"));\n    let selected = false;\n    if (pass === 0) {\n     for (let index = 0; index < suffixes.length; index++) {\n      if (name.includes(suffixes[index])) { selected = suffixes[index] === family; break; }\n      if (index + 1 === suffixes.length && family === \"Weapon\") selected = true;\n     }\n    } else selected = suffixes.indexOf(family) === slot;\n    if (!selected) continue;\n    property = \"Weapon_Power\";\n   }\n   const upgrade = maps[pass][slot].h;\n   total += owns(upgrade, property) ? number(definitions[name].h[property]) + number(upgrade[property]) : number(definitions[name].h[property]);\n  }\n }\n if (galleryOn) {\n  for (const key of [\"GalleryTrophyBonTOT\", \"GalleryNametagBonTOT\"]) {\n   if (!owns(prepared, key)) throw new Error(\"Missing prepared replacement \" + key);\n   if (owns(prepared[key].h, selector)) total += number(prepared[key].h[selector]);\n  }\n }\n if (hatOn) {\n  if (!owns(prepared, \"PremHatBonTOT\")) throw new Error(\"Missing prepared premium-hat replacement\");\n  if (owns(prepared.PremHatBonTOT.h, selector)) total += number(prepared.PremHatBonTOT.h[selector]);\n }\n const primary = {STR:96, AGI:276, WIS:456, LUK:21};\n if (owns(primary, selector)) total *= 1 + (idleon.callFunction(\"GetTalentNumber\", 1, primary[selector]) + idleon.callFunction(\"StampBonusOfTypeX\", \"Pct\" + selector)) / 100;\n let obol = 0;\n for (const row of attr(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === selector) obol += number(row[3]);\n const secondary = {STR:111, AGI:291, WIS:486, LUK:36};\n if (owns(secondary, selector)) obol *= 1 + (idleon.callFunction(\"GetTalentNumber\", 1, secondary[selector]) + 40 * idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 2, 0)) / 100;\n return total + obol;\n };\n const result = {};\n for (const selector of [\"STR\", \"AGI\", \"WIS\", \"LUK\", \"Defence\", \"Accuracy\", \"Weapon_Power\", \"Mining_Power\", \"Choppin_Power\", \"Fishing_Power\", \"Catching_Power\", \"Trapping_Power\", \"Worship_Power\"]) result[selector] = replay(selector);\n return result;\n})()",
+      "expression": "(() => {\n const replay = selector => {\n const attr = key => idleon.engine.getGameAttribute(key);\n const number = value => value == null ? 0 : Number(value);\n const owns = (map, key) => Object.prototype.hasOwnProperty.call(map, key);\n const order = attr(\"EquipmentOrder\"), maps = attr(\"EquipmentMap\");\n const definitions = attr(\"ItemDefinitionsGET\").h;\n const suffixes = attr(\"CustomLists\").h.PowerSuffixes;\n const galleryOn = idleon.callFunction(\"Gallery\", \"GalleryBonusSystemON\", 0, 0) == 1;\n const hatOn = idleon.callFunction(\"Gallery\", \"PremHatBonusesSystemON\", 0, 0) == 1;\n const prepared = attr(\"DNSM\").h;\n let total = 0;\n for (let pass = 0; pass < 2; pass++) {\n  for (let slot = 0; slot < 8 + 8 * (1 - pass); slot++) {\n   const name = order[pass][slot];\n   if (name === \"Blank\" || name.includes(\"Dung\") || (pass === 0 && ((galleryOn && (slot === 10 || slot === 14)) || (hatOn && slot === 8)))) continue;\n   let property = selector;\n   if (selector.includes(\"Power\")) {\n    const family = selector.substring(0, selector.indexOf(\"_\"));\n    let selected = false;\n    if (pass === 0) {\n     for (let index = 0; index < suffixes.length; index++) {\n      if (name.includes(suffixes[index])) { selected = suffixes[index] === family; break; }\n      if (index + 1 === suffixes.length && family === \"Weapon\") selected = true;\n     }\n    } else selected = suffixes.indexOf(family) === slot;\n    if (!selected) continue;\n    property = \"Weapon_Power\";\n   }\n   const upgrade = maps[pass][slot].h;\n   total += owns(upgrade, property) ? number(definitions[name].h[property]) + number(upgrade[property]) : number(definitions[name].h[property]);\n  }\n }\n if (galleryOn) {\n  for (const key of [\"GalleryTrophyBonTOT\", \"GalleryNametagBonTOT\"]) {\n   if (!owns(prepared, key)) throw new Error(\"Missing prepared replacement \" + key);\n   if (owns(prepared[key].h, selector)) total += number(prepared[key].h[selector]);\n  }\n }\n if (hatOn) {\n  if (!owns(prepared, \"PremHatBonTOT\")) throw new Error(\"Missing prepared premium-hat replacement\");\n  if (owns(prepared.PremHatBonTOT.h, selector)) total += number(prepared.PremHatBonTOT.h[selector]);\n }\n const primary = {STR:96, AGI:276, WIS:456, LUK:21};\n if (owns(primary, selector)) total *= 1 + (idleon.callFunction(\"GetTalentNumber\", 1, primary[selector]) + idleon.callFunction(\"StampBonusOfTypeX\", \"Pct\" + selector)) / 100;\n let obol = 0;\n for (const row of attr(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === selector) obol += number(row[3]);\n const secondary = {STR:111, AGI:291, WIS:486, LUK:36};\n if (owns(secondary, selector)) obol *= 1 + (idleon.callFunction(\"GetTalentNumber\", 1, secondary[selector]) + 40 * idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 2, 0)) / 100;\n else obol *= idleon.callFunction(\"MenagerieStuff\", \"ObolMISCmulti\", 0, 0);\n return total + obol;\n };\n const result = {};\n for (const selector of [\"STR\", \"AGI\", \"WIS\", \"LUK\", \"Defence\", \"Accuracy\", \"Weapon_Power\", \"Mining_Power\", \"Choppin_Power\", \"Fishing_Power\", \"Catching_Power\", \"Trapping_Power\", \"Worship_Power\"]) result[selector] = replay(selector);\n return result;\n})()",
       "result": {
-        "STR": 18711.192306283523,
-        "AGI": 1433.5781597354253,
-        "WIS": 1294.918880208086,
-        "LUK": 1988.8447264002307,
-        "Defence": 3534.2047010460146,
+        "STR": 19178.0666260965,
+        "AGI": 1486.097764996708,
+        "WIS": 1346.3887290152647,
+        "LUK": 2059.9631089698355,
+        "Defence": 3651.5404045119253,
         "Accuracy": 0,
-        "Weapon_Power": 633.2528681619368,
+        "Weapon_Power": 653.6375327014572,
         "Mining_Power": 110,
         "Choppin_Power": 90,
         "Fishing_Power": 112,
@@ -24,7 +24,7 @@
     },
     "obol_adjusted_STR": {
       "expression": "((() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"STR\") total += Number(row[3]); return total; })()) * (1 + (idleon.callFunction(\"GetTalentNumber\", 1, 111) + 40 * idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 2, 0)) / 100)",
-      "result": 74.57894736842105
+      "result": 74.59883720930232
     },
     "obol_raw_AGI": {
       "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"AGI\") total += Number(row[3]); return total; })()",
@@ -124,79 +124,79 @@
     },
     "trophy_STR": {
       "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryTrophyBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"STR\") ? Number(map[\"STR\"]) : 0; })()",
-      "result": 371.28875343700406
+      "result": 397.0408901363645
     },
     "trophy_AGI": {
       "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryTrophyBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"AGI\") ? Number(map[\"AGI\"]) : 0; })()",
-      "result": 433.3080329643433
+      "result": 460.02992611780786
     },
     "trophy_WIS": {
       "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryTrophyBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"WIS\") ? Number(map[\"WIS\"]) : 0; })()",
-      "result": 371.28875343700406
+      "result": 397.0408901363645
     },
     "trophy_LUK": {
       "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryTrophyBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"LUK\") ? Number(map[\"LUK\"]) : 0; })()",
-      "result": 657.6110939215534
+      "result": 698.3384455809352
     },
     "trophy_Defence": {
       "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryTrophyBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"Defence\") ? Number(map[\"Defence\"]) : 0; })()",
-      "result": 720.4572971759238
+      "result": 831.455274955052
     },
     "trophy_Weapon_Power": {
       "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryTrophyBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"Weapon_Power\") ? Number(map[\"Weapon_Power\"]) : 0; })()",
-      "result": 119.49047855600686
+      "result": 127.6577795890585
     },
     "nametag_STR": {
       "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryNametagBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"STR\") ? Number(map[\"STR\"]) : 0; })()",
-      "result": 181.92321994686168
+      "result": 205.7641842060482
     },
     "nametag_AGI": {
       "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryNametagBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"AGI\") ? Number(map[\"AGI\"]) : 0; })()",
-      "result": 161.2501267710819
+      "result": 184.76783887890045
     },
     "nametag_WIS": {
       "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryNametagBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"WIS\") ? Number(map[\"WIS\"]) : 0; })()",
-      "result": 161.2501267710819
+      "result": 184.76783887890045
     },
     "nametag_LUK": {
       "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryNametagBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"LUK\") ? Number(map[\"LUK\"]) : 0; })()",
-      "result": 462.0436324786771
+      "result": 490.2646633889006
     },
     "nametag_Defence": {
       "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryNametagBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"Defence\") ? Number(map[\"Defence\"]) : 0; })()",
-      "result": 366.9474038700903
+      "result": 372.6851295568731
     },
     "nametag_Weapon_Power": {
       "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryNametagBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"Weapon_Power\") ? Number(map[\"Weapon_Power\"]) : 0; })()",
-      "result": 104.19238960592988
+      "result": 116.3197531123987
     },
     "hat_STR": {
       "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.PremHatBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"STR\") ? Number(map[\"STR\"]) : 0; })()",
-      "result": 79.57999999999998
+      "result": 81.77999999999997
     },
     "hat_AGI": {
       "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.PremHatBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"AGI\") ? Number(map[\"AGI\"]) : 0; })()",
-      "result": 93.42000000000002
+      "result": 95.69999999999993
     },
     "hat_WIS": {
       "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.PremHatBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"WIS\") ? Number(map[\"WIS\"]) : 0; })()",
-      "result": 79.57999999999998
+      "result": 81.77999999999997
     },
     "hat_LUK": {
       "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.PremHatBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"LUK\") ? Number(map[\"LUK\"]) : 0; })()",
-      "result": 74.39000000000001
+      "result": 76.55999999999997
     },
     "hat_Defence": {
       "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.PremHatBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"Defence\") ? Number(map[\"Defence\"]) : 0; })()",
-      "result": 103.8
+      "result": 104.4
     },
     "hat_Weapon_Power": {
       "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.PremHatBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"Weapon_Power\") ? Number(map[\"Weapon_Power\"]) : 0; })()",
-      "result": 15.569999999999999
+      "result": 15.66
     },
     "primary_talent_STR": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 96)",
-      "result": 655.5
+      "result": 658.5
     },
     "stamp_STR": {
       "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"PctSTR\")",
@@ -228,7 +228,7 @@
     },
     "secondary_talent_STR": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 111)",
-      "result": 51.228070175438596
+      "result": 51.27906976744186
     },
     "secondary_talent_AGI": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 291)",

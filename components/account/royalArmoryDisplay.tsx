@@ -5,6 +5,7 @@ import { Box, DataTableProps, Grid, Meter, Select, Stack, Text, TextInput, Theme
 import { useShallow } from "zustand/react/shallow";
 import styled from "styled-components";
 import { normalizeColor } from "grommet/utils";
+import useHydrated from "../../lib/hooks/useHydrated";
 import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
 import { OUTPOST_RANKS, Outpost, OutpostKind, OutpostLinkDetails, OutpostRank, RoyalMapSource } from "../../data/domain/world-6/royalArmory/outposts";
 import { RoyalArmory } from "../../data/domain/world-6/royalArmory/royalArmory";
@@ -622,6 +623,7 @@ export default function RoyalArmoryDisplay() {
         theData: state.data.getData(),
         lastUpdated: state.lastUpdated
     })));
+    const hydrated = useHydrated();
     const [tab, setTab] = useState('Upgrades');
     const [filters, setFilters] = useState<FilterOptions>({
         searchText: '',
@@ -638,6 +640,10 @@ export default function RoyalArmoryDisplay() {
     const resourceTypes = useMemo(() => [...new Set(upgrades
         .map(upgrade => upgrade.getPurchaseResourceType())
         .filter((type): type is number => type !== undefined))], [upgrades]);
+
+    if (!hydrated) {
+        return <Box><Text>Loading account data...</Text></Box>;
+    }
 
     return (
         <Box>

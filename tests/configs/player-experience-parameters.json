@@ -4,7 +4,7 @@
   "extractions": [
     {
       "label": "class_experience_food",
-      "expression": "idleon.callFunction('Minehead','TotalFoodBonuses','ClassEXP')",
+      "expression": "idleon.callFunction('TotalFoodBonuses','ClassEXP')",
       "description": "Equipped ordinary food additive class EXP percentage points for the retained player"
     },
     {

@@ -14,11 +14,11 @@
     },
     "base_damage": {
       "expression": "idleon.callFunction(\"Minehead\", \"BaseDMG\", 0, 0)",
-      "result": 9135.123725000001
+      "result": 17453.572500000002
     },
     "currency_gain": {
       "expression": "idleon.callFunction(\"Minehead\", \"CurrencyGain\", 0, 0)",
-      "result": 7980.438938137625
+      "result": 22101.465333467735
     },
     "minehead_description_max_tile_number": {
       "expression": "Math.round(1 + (idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 1, 0) + 1 + Math.min(1, Math.floor((idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 1, 0) + 1) / 9))))",
@@ -54,7 +54,7 @@
     },
     "minehead_currency_log_factor": {
       "expression": "Math.log(Math.max(idleon.getAttr(\"Research\")[7][6], 1)) / 2.30259",
-      "result": 6.434101988617822
+      "result": 7.018176031842034
     },
     "minehead_research_148": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 148, 0)",
@@ -94,7 +94,7 @@
     },
     "minehead_button_1": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 1, 0)",
-      "result": 62.7375
+      "result": 119.20125000000004
     },
     "minehead_arcade_62": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 62)",
@@ -118,7 +118,7 @@
     },
     "mine_currency": {
       "expression": "idleon.getAttr(\"Research\")[7][5]",
-      "result": 3118138.5089678895
+      "result": 202010.6417048503
     },
     "max_lives": {
       "expression": "idleon.callFunction(\"Minehead\", \"MaxHP_You\", 0, 0)",
@@ -126,7 +126,7 @@
     },
     "opponents_beaten": {
       "expression": "idleon.getAttr(\"Research\")[7][4]",
-      "result": 13
+      "result": 14
     },
     "minehead_description_multiplier_tile": {
       "expression": "Number([\"1.0\", \"1.2\", \"1.4\", \"1.6\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"8\", \"8\", \"8\"][idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 12, 0)])",
@@ -135,20 +135,20 @@
     "minehead_upgrade_quantities": {
       "expression": "idleon.getAttr(\"CustomLists\").h.MineheadUPG.map((_, index) => idleon.callFunction(\"Minehead\", \"UpgradeQTY\", index, 0))",
       "result": [
-        109,
+        113,
         8,
         8,
-        680,
-        430,
-        970,
+        730,
+        435,
+        2100,
         2,
-        207,
+        486,
         4,
-        22,
+        26,
         1,
-        10,
-        2,
         18,
+        2,
+        54,
         2,
         1,
         1,
@@ -170,20 +170,20 @@
     "minehead_upgrade_current_prices": {
       "expression": "idleon.getAttr(\"CustomLists\").h.MineheadUPG.map((_, index) => idleon.callFunction(\"Minehead\", \"UpgCost\", index, 0))",
       "result": [
-        81234.90761812578,
+        118936.028243698,
         5038848,
         35039520.263671875,
-        60348.385765388506,
-        97947.03675476456,
-        146722.2884080062,
+        121382.1594632368,
+        109700.68116533633,
+        314512.25560899504,
         2132858.283255199,
-        57732.75111952213,
+        181190.10437967954,
         762531.6485188233,
-        136436.49888446913,
+        389676.28446393233,
         1254603888083.5676,
-        13619.71715960677,
+        38899.2741795529,
         13025824.374179663,
-        46534.90961563138,
+        107638.07366382245,
         117717.37125335267,
         348226.74486934725,
         4222331.949340401,
@@ -253,7 +253,7 @@
         3,
         25,
         1,
-        0,
+        30,
         0,
         0,
         0,

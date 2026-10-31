@@ -1,0 +1,551 @@
+{
+  "extractions": {
+    "killroy_account_state": {
+      "expression": "(()=>{const options=idleon.getAttr(\"OptionsListAccount\");return {skulls:Number(options[105]),completedRuns:Number(options[112]),thirdBattleUnlocked:Number(options[227])===1,consumedFightSlots:[1,2,3].filter(id=>String(options[113]).includes(String(id))),airhornUsed:Number(options[115])===1,priorTalentPointDrops:Number(options[114]),laterShopProgression:Number(options[466]),runLevels:options.slice(106,112).map(Number),permanentLevels:[228,229,230,467,468,469,470,471].map(index=>Number(options[index]))}})()",
+      "result": {
+        "skulls": 8,
+        "completedRuns": 67,
+        "thirdBattleUnlocked": true,
+        "consumedFightSlots": [],
+        "airhornUsed": false,
+        "priorTalentPointDrops": 53,
+        "laterShopProgression": 4,
+        "runLevels": [
+          52,
+          3,
+          1,
+          10,
+          1,
+          0
+        ],
+        "permanentLevels": [
+          17,
+          1,
+          2,
+          0,
+          2,
+          4,
+          0,
+          0
+        ]
+      }
+    },
+    "killroy_run_state": {
+      "expression": "(()=>{const options=idleon.getAttr(\"OptionsListAccount\");const runs=Number(options[112]);const shadesOfKLevel=Number(idleon.getAttr(\"Dream\")[4]);const availableChoiceCount=Math.round(3+shadesOfKLevel);const requirements=Array.from({length:6},(_,index)=>index===0?0:Math.pow(2*index,Math.min(index,2)));return {runDurationSeconds:100+Number(options[106]),shadesOfKLevel,availableChoiceCount,requirements,unlocked:requirements.map((required,index)=>index<availableChoiceCount&&(index===0||runs>=required)),remaining:requirements.map(required=>Math.max(0,required-runs))}})()",
+      "result": {
+        "runDurationSeconds": 152,
+        "shadesOfKLevel": 3,
+        "availableChoiceCount": 6,
+        "requirements": [
+          0,
+          2,
+          16,
+          36,
+          64,
+          100
+        ],
+        "unlocked": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "remaining": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          33
+        ]
+      }
+    },
+    "killroy_monster_records": {
+      "expression": "(()=>{const mobs=idleon.getAttr(\"CustomLists\").h.DeathNoteMobs.flat();const records=idleon.getAttr(\"KRbest\").h;return mobs.map(enemyId=>({enemyId,bestKills:Number(records[enemyId]||0)}))})()",
+      "result": [
+        {
+          "enemyId": "mushG",
+          "bestKills": 895
+        },
+        {
+          "enemyId": "mushR",
+          "bestKills": 710
+        },
+        {
+          "enemyId": "frogG",
+          "bestKills": 371
+        },
+        {
+          "enemyId": "beanG",
+          "bestKills": 1882
+        },
+        {
+          "enemyId": "slimeG",
+          "bestKills": 1612
+        },
+        {
+          "enemyId": "snakeG",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "carrotO",
+          "bestKills": 1377
+        },
+        {
+          "enemyId": "goblinG",
+          "bestKills": 499
+        },
+        {
+          "enemyId": "plank",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "frogBIG",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "poopSmall",
+          "bestKills": 1571
+        },
+        {
+          "enemyId": "ratB",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "branch",
+          "bestKills": 781
+        },
+        {
+          "enemyId": "acorn",
+          "bestKills": 1179
+        },
+        {
+          "enemyId": "mushW",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "jarSand",
+          "bestKills": 1185
+        },
+        {
+          "enemyId": "mimicA",
+          "bestKills": 1314
+        },
+        {
+          "enemyId": "crabcake",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "coconut",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "sandcastle",
+          "bestKills": 1543
+        },
+        {
+          "enemyId": "pincermin",
+          "bestKills": 808
+        },
+        {
+          "enemyId": "potato",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "steak",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "moonman",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "sandgiant",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "snailZ",
+          "bestKills": 623
+        },
+        {
+          "enemyId": "sheep",
+          "bestKills": 1559
+        },
+        {
+          "enemyId": "flake",
+          "bestKills": 808
+        },
+        {
+          "enemyId": "stache",
+          "bestKills": 353
+        },
+        {
+          "enemyId": "bloque",
+          "bestKills": 1087
+        },
+        {
+          "enemyId": "mamoth",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "snowball",
+          "bestKills": 1702
+        },
+        {
+          "enemyId": "penguin",
+          "bestKills": 1164
+        },
+        {
+          "enemyId": "thermostat",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "glass",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "snakeB",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "speaker",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "eye",
+          "bestKills": 1833
+        },
+        {
+          "enemyId": "ram",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "skele2",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "mushP",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w4a2",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w4a3",
+          "bestKills": 932
+        },
+        {
+          "enemyId": "demonP",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w4b2",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w4b1",
+          "bestKills": 1008
+        },
+        {
+          "enemyId": "w4b3",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w4b4",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w4b5",
+          "bestKills": 859
+        },
+        {
+          "enemyId": "w4c1",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w4c2",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w4c3",
+          "bestKills": 2008
+        },
+        {
+          "enemyId": "w4c4",
+          "bestKills": 1164
+        },
+        {
+          "enemyId": "w5a1",
+          "bestKills": 381
+        },
+        {
+          "enemyId": "w5a2",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w5a3",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w5a4",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w5a5",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w5b1",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w5b2",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w5b3",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w5b4",
+          "bestKills": 1942
+        },
+        {
+          "enemyId": "w5b5",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w5b6",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w5c1",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w5c2",
+          "bestKills": 1242
+        },
+        {
+          "enemyId": "w6a1",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w6a2",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w6a3",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w6a4",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w6a5",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w6b1",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w6b2",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w6b3",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w6b4",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w6c1",
+          "bestKills": 1726
+        },
+        {
+          "enemyId": "w6c2",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w6d1",
+          "bestKills": 240
+        },
+        {
+          "enemyId": "w6d2",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w6d3",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7a1",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7a2",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7a3",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7a4",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7a5",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7a6",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7a7",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7a8",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7a9",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7a10",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7a11",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7a12",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7b1",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7b2",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7b3",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7b11",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7b12",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7b4",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7b5",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7b6",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7b7",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7b8",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7b9",
+          "bestKills": 0
+        },
+        {
+          "enemyId": "w7b10",
+          "bestKills": 0
+        }
+      ]
+    },
+    "killroy_total_best_kills": {
+      "expression": "(()=>{const mobs=idleon.getAttr(\"CustomLists\").h.DeathNoteMobs.flat();const records=idleon.getAttr(\"KRbest\").h;return mobs.reduce((sum,enemyId)=>sum+Number(records[enemyId]||0),0)})()",
+      "result": 36358
+    },
+    "killroy_damage_bonus": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"KillroyDMG\", 0)",
+      "result": 66
+    },
+    "killroy_damage_multiplier": {
+      "expression": "1+Math.min(2,Math.max(0,idleon.callFunction(\"RiftStuff\",\"KillroyDMG\",0)/100))",
+      "result": 1.6600000000000001
+    },
+    "killroy_next_damage_requirement": {
+      "expression": "(()=>{const mobs=idleon.getAttr(\"CustomLists\").h.DeathNoteMobs.flat();const records=idleon.getAttr(\"KRbest\").h;const total=mobs.reduce((sum,enemyId)=>sum+Number(records[enemyId]||0),0);const bonus=idleon.callFunction(\"RiftStuff\",\"KillroyDMG\",0);const nextDamageTotalBestKills=Math.ceil(Math.pow(bonus+1,2.5));return {nextDamageTotalBestKills,killsUntilNextDamageBonus:Math.max(0,nextDamageTotalBestKills-total)}})()",
+      "result": {
+        "nextDamageTotalBestKills": 36745,
+        "killsUntilNextDamageBonus": 387
+      }
+    },
+    "killroy_bonus_0": {
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 0, 0)",
+      "result": 1.053627760252366
+    },
+    "killroy_bonus_1": {
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 1, 0)",
+      "result": 1.0299003322259137
+    },
+    "killroy_bonus_2": {
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 2, 0)",
+      "result": 1.0132450331125828
+    },
+    "killroy_bonus_3": {
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 3, 0)",
+      "result": 0
+    },
+    "killroy_bonus_4": {
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 4, 0)",
+      "result": 1.0128712871287129
+    },
+    "killroy_bonus_5": {
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 5, 0)",
+      "result": 1.0207792207792208
+    },
+    "killroy_bonus_6": {
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 6, 0)",
+      "result": 0
+    },
+    "killroy_bonus_7": {
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 7, 0)",
+      "result": 1
+    },
+    "killroy_masterclass_multiplier": {
+      "expression": "1+idleon.callFunction(\"RandomEvent\",\"KillroyBonuses\",4,0)/100",
+      "result": 1.010128712871287
+    },
+    "killroy_extra_shop_row": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"KillroyXtra\", 0)",
+      "result": 1
+    },
+    "killroy_later_shop_row": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"KillroyXtra2\", 0)",
+      "result": 1
+    }
+  },
+  "errors": {}
+}

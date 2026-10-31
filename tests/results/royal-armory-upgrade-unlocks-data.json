@@ -2,11 +2,11 @@
   "extractions": {
     "royal_armory_total_upgrade_levels": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgTotal\", 0, 0)",
-      "result": 731
+      "result": 966
     },
     "royal_armory_unlocked_upgrade_count": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0)",
-      "result": 37
+      "result": 42
     },
     "royal_armory_upgrade_unlocked_display_0": {
       "expression": "0 < idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0)",

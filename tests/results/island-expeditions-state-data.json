@@ -1,0 +1,98 @@
+{
+  "extractions": {
+    "island_state": {
+      "expression": "({options:idleon.getAttr(\"OptionsListAccount\").slice(160,185),letters:idleon.getAttr(\"Number2Letter\").slice(0,6),bottleBonus:idleon.callFunction(\"RandomEvent\",\"BottleIslandBonus\",0,0),fractal:Array.from({length:8},(_,i)=>idleon.callFunction(\"RandomEvent\",\"FractalIslandBonus\",i,0)),shimmer:idleon.callFunction(\"Dreamstuff\",\"AllShimmerBonuses\",0)})",
+      "result": {
+        "options": [
+          54,
+          29.93168128000002,
+          80.05351660000011,
+          9,
+          0,
+          1,
+          8,
+          8,
+          0,
+          "_cdabe",
+          54,
+          14,
+          1636646954665690000,
+          0,
+          11,
+          1,
+          2,
+          0,
+          6,
+          1,
+          13,
+          0,
+          0,
+          1,
+          2242
+        ],
+        "letters": [
+          "_",
+          "a",
+          "b",
+          "c",
+          "d",
+          "e"
+        ],
+        "bottleBonus": 80,
+        "fractal": [
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "shimmer": 4
+      }
+    },
+    "shimmer_shop_cache": {
+      "expression": "(()=>{const a=idleon.engine.getGameAttribute(\"PixelHelperActor\")[24];const b=a&&a.behaviors.getBehavior(\"ActorEvents_623\");return b?{costs:b._GenINFO[17],thresholds:b._GenINFO[20],trial:b._GenINFO[21],claimed:b._GenINFO[23]}:null})()",
+      "result": {
+        "costs": [
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          3,
+          2
+        ],
+        "thresholds": [
+          50000,
+          15000,
+          15000,
+          15000,
+          15000,
+          14,
+          18,
+          18,
+          20,
+          5000000,
+          20000,
+          500,
+          250,
+          25,
+          1500000,
+          1500000,
+          240,
+          12,
+          11,
+          9,
+          10,
+          600
+        ],
+        "trial": 1,
+        "claimed": 0
+      }
+    }
+  },
+  "errors": {}
+}

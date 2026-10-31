@@ -1,0 +1,9 @@
+{
+  "extractions": {
+    "construction_trimmed_multiplier": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"TotalGildedBoostio\", 0, 0)",
+      "result": 34.125
+    }
+  },
+  "errors": {}
+}

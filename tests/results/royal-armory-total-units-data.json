@@ -2,7 +2,7 @@
   "extractions": {
     "royal_armory_total_units_row_1_selector_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 1, 0)",
-      "result": 3
+      "result": 5
     },
     "royal_armory_total_units_row_1_selector_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 1, 1)",
@@ -14,7 +14,7 @@
     },
     "royal_armory_total_units_row_15_selector_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 15, 0)",
-      "result": 0
+      "result": 2
     },
     "royal_armory_total_units_row_15_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 15, 2)",
@@ -22,11 +22,11 @@
     },
     "royal_armory_total_units_row_16_selector_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 16, 0)",
-      "result": 2
+      "result": 4
     },
     "royal_armory_total_units_row_16_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 16, 2)",
-      "result": 1
+      "result": 2
     },
     "royal_armory_total_units_row_26_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 26, 2)",
@@ -34,11 +34,11 @@
     },
     "royal_armory_total_units_row_51_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 51, 2)",
-      "result": 2
+      "result": 1
     },
     "royal_armory_total_units_row_53_selector_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 53, 1)",
-      "result": 2
+      "result": 1
     },
     "royal_armory_total_units_row_53_selector_3": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 53, 3)",
@@ -70,7 +70,7 @@
     },
     "royal_armory_passive_units_row_16_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 16, 2)",
-      "result": 0
+      "result": 1
     },
     "royal_armory_passive_units_row_26_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 26, 2)",
@@ -82,7 +82,7 @@
     },
     "royal_armory_passive_units_row_53_selector_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 53, 1)",
-      "result": 0
+      "result": 1
     },
     "royal_armory_passive_units_row_53_selector_3": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 53, 3)",

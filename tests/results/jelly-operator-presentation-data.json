@@ -6,7 +6,7 @@
     },
     "jelly_current_target_hp": {
       "expression": "idleon.callFunction('JellyOperation', 'BossHP', Number(idleon.getAttr('Research')[7][9]), 0)",
-      "result": 3329565.857578124
+      "result": 14956826.027973128
     },
     "jelly_current_time_limit": {
       "expression": "idleon.callFunction('JellyOperation', 'BossTime', Number(idleon.getAttr('Research')[7][9]), 0)",
@@ -14,23 +14,23 @@
     },
     "jelly_dps_bloodcell_multiplier": {
       "expression": "idleon.callFunction('JellyOperation', 'DPSmulti', 23, 0)",
-      "result": 1.558881195250256
+      "result": 1.6900287527804831
     },
     "jelly_daily_bloodcells": {
       "expression": "idleon.callFunction('JellyOperation', 'BloodcellDaily', 0, 0)",
-      "result": 82142164.36784005
+      "result": 2651278425.0670543
     },
     "jelly_xp_per_hit": {
       "expression": "idleon.callFunction('JellyOperation', 'CanLvUpUnits', 0, 0) === 1 ? idleon.callFunction('JellyOperation', 'EXPMulti', 0, 0) : 0",
-      "result": 8
+      "result": 9
     },
     "jelly_cell_xp_required_0": {
       "expression": "idleon.callFunction('JellyOperation', 'CellExpREQ', 0, 0)",
-      "result": 8350.78108268263
+      "result": 23850.66585024986
     },
     "jelly_cell_xp_required_2": {
       "expression": "idleon.callFunction('JellyOperation', 'CellExpREQ', 2, 0)",
-      "result": 2249.108139039149
+      "result": 4941.290581469011
     },
     "jelly_cell_xp_required_7": {
       "expression": "idleon.callFunction('JellyOperation', 'CellExpREQ', 7, 0)",
@@ -38,7 +38,7 @@
     },
     "jelly_unlocked_cell_count": {
       "expression": "idleon.callFunction('JellyOperation', 'UnitsOwned', 0, 0)",
-      "result": 4
+      "result": 5
     },
     "jelly_cell_unlocks": {
       "expression": "Array.from({length: 8}, (_, index) => index < idleon.callFunction('JellyOperation', 'UnitsOwned', 0, 0))",
@@ -47,7 +47,7 @@
         true,
         true,
         true,
-        false,
+        true,
         false,
         false,
         false
@@ -55,11 +55,11 @@
     },
     "jelly_total_cell_levels": {
       "expression": "idleon.callFunction('JellyOperation', 'CellLV_tot', 0, 0)",
-      "result": 84
+      "result": 106
     },
     "jelly_plot_purchases_left": {
       "expression": "idleon.callFunction('JellyOperation', 'SlotPurchasesLeft', 0, 0)",
-      "result": 0
+      "result": 1
     },
     "jelly_unlocked_tiles": {
       "expression": "Array.from({length: 180}, (_, index) => index).filter(index => idleon.callFunction('JellyOperation', 'SlotUnlocked', index, 0) === 1)",
@@ -111,7 +111,7 @@
     },
     "jelly_bloodcells_per_damage": {
       "expression": "idleon.callFunction('JellyOperation', 'CurrencyMulti', 0, 0)",
-      "result": 49.58607780822853
+      "result": 69.68488796224756
     },
     "jelly_research_daily_allowance": {
       "expression": "idleon.callFunction('ResearchStuff', 'Grid_Bonus', 186, 1)",
@@ -167,7 +167,7 @@
     },
     "jelly_upgrade_quantity_4": {
       "expression": "idleon.callFunction('JellyOperation', 'UpgradeQTY', 4, 0)",
-      "result": 0
+      "result": 1
     },
     "jelly_upgrade_quantity_5": {
       "expression": "idleon.callFunction('JellyOperation', 'UpgradeQTY', 5, 0)",
@@ -183,7 +183,7 @@
     },
     "jelly_upgrade_quantity_8": {
       "expression": "idleon.callFunction('JellyOperation', 'UpgradeQTY', 8, 0)",
-      "result": 5
+      "result": 6
     },
     "jelly_upgrade_quantity_9": {
       "expression": "idleon.callFunction('JellyOperation', 'UpgradeQTY', 9, 0)",
@@ -191,7 +191,7 @@
     },
     "jelly_upgrade_quantity_10": {
       "expression": "idleon.callFunction('JellyOperation', 'UpgradeQTY', 10, 0)",
-      "result": 700
+      "result": 800
     },
     "jelly_upgrade_quantity_11": {
       "expression": "idleon.callFunction('JellyOperation', 'UpgradeQTY', 11, 0)",
@@ -199,15 +199,15 @@
     },
     "jelly_upgrade_quantity_23": {
       "expression": "idleon.callFunction('JellyOperation', 'UpgradeQTY', 23, 0)",
-      "result": 785
+      "result": 850
     },
     "jelly_upgrade_quantity_24": {
       "expression": "idleon.callFunction('JellyOperation', 'UpgradeQTY', 24, 0)",
-      "result": 650
+      "result": 800
     },
     "jelly_upgrade_quantity_25": {
       "expression": "idleon.callFunction('JellyOperation', 'UpgradeQTY', 25, 0)",
-      "result": 25
+      "result": 75
     },
     "jelly_upgrade_quantity_26": {
       "expression": "idleon.callFunction('JellyOperation', 'UpgradeQTY', 26, 0)",
@@ -227,11 +227,11 @@
     },
     "jelly_upgrade_quantity_33": {
       "expression": "idleon.callFunction('JellyOperation', 'UpgradeQTY', 33, 0)",
-      "result": 4
+      "result": 6
     },
     "jelly_upgrade_quantity_38": {
       "expression": "idleon.callFunction('JellyOperation', 'UpgradeQTY', 38, 0)",
-      "result": 100
+      "result": 320
     }
   },
   "errors": {}

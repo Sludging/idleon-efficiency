@@ -1,7 +1,7 @@
 {
   "extractions": {
     "class_experience_food": {
-      "expression": "idleon.callFunction('Minehead','TotalFoodBonuses','ClassEXP')",
+      "expression": "idleon.callFunction('TotalFoodBonuses','ClassEXP')",
       "result": 0
     },
     "shim_lantern_bonus": {
@@ -38,7 +38,7 @@
     },
     "native_active_exp_bubble": {
       "expression": "(() => { idleon.callFunction('Minehead','Button_uHave',15,0); return idleon.engine.getGameAttribute('DNSM').h.AlchBubbles.h.expACTIVE; })()",
-      "result": 14253.1
+      "result": 16489.6
     }
   },
   "errors": {}

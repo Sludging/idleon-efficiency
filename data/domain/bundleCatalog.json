@@ -1,0 +1,3682 @@
+[
+  {
+    "nativeId": "bun_a",
+    "category": "bundle",
+    "name": "Lava Supporter Pack",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4200,
+      "delivery": "unspecified"
+    },
+    "petCrystals": null,
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Trailblazer",
+        "quantity": 1,
+        "itemId": "Trophy8"
+      },
+      {
+        "name": "4 HR Time Candy",
+        "quantity": 7,
+        "itemId": "Timecandy3"
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_a",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_b",
+    "category": "bundle",
+    "name": "New Year Pack",
+    "price": {
+      "amount": 9.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 2021,
+      "delivery": "unspecified"
+    },
+    "petCrystals": null,
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Giftmas Tree",
+        "quantity": 1,
+        "itemId": "EquipmentHats45"
+      },
+      {
+        "name": "Newbie Card Pack",
+        "quantity": 4,
+        "itemId": "CardPack1"
+      },
+      {
+        "name": "12 HR Time Candy",
+        "quantity": 4,
+        "itemId": "Timecandy4"
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_b",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_c",
+    "category": "bundle",
+    "name": "Starter Pack",
+    "price": {
+      "amount": 4.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 1750,
+      "delivery": "daily-total",
+      "dailyAmount": 350,
+      "durationDays": 5
+    },
+    "petCrystals": null,
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Newbie Card Pack",
+        "quantity": 4,
+        "itemId": "CardPack1"
+      },
+      {
+        "name": "Storage slots",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 16
+      },
+      {
+        "name": "Sheep Pet",
+        "rewardCategories": [
+          "pets"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_c",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_d",
+    "category": "bundle",
+    "name": "Easter Bundle",
+    "price": {
+      "amount": 9.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 2500,
+      "delivery": "unspecified"
+    },
+    "petCrystals": null,
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Big Bunny",
+        "quantity": 1,
+        "itemId": "EquipmentHats57"
+      },
+      {
+        "name": "2 HR Time Candy",
+        "quantity": 5,
+        "itemId": "Timecandy2"
+      },
+      {
+        "name": "4 HR Time Candy",
+        "quantity": 2,
+        "itemId": "Timecandy3"
+      },
+      {
+        "name": "24 HR Time Candy",
+        "quantity": 1,
+        "itemId": "Timecandy5"
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_d",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_e",
+    "category": "bundle",
+    "name": "Totally Chill Pack",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4500,
+      "delivery": "unspecified"
+    },
+    "petCrystals": null,
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Fluffy Ramsy",
+        "quantity": 1,
+        "itemId": "EquipmentHats62"
+      },
+      {
+        "name": "Eternal Card Pack",
+        "quantity": 3,
+        "itemId": "CardPack3"
+      },
+      {
+        "name": "24 HR Time Candy",
+        "quantity": 4,
+        "itemId": "Timecandy5"
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_e",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_f",
+    "category": "bundle",
+    "name": "Summer Bundle",
+    "price": {
+      "amount": 9.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 2000,
+      "delivery": "unspecified"
+    },
+    "petCrystals": null,
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Beach Bro",
+        "quantity": 1,
+        "itemId": "Trophy14"
+      },
+      {
+        "name": "Quality Obol Stack",
+        "quantity": 3,
+        "itemId": "GemP9"
+      },
+      {
+        "name": "2 HR Time Candy",
+        "quantity": 20,
+        "itemId": "Timecandy2"
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_f",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_g",
+    "category": "bundle",
+    "name": "Dungeon Bundle",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4000,
+      "delivery": "unspecified"
+    },
+    "petCrystals": null,
+    "otherCurrencies": [
+      {
+        "name": "Arcade Balls",
+        "amount": 250
+      }
+    ],
+    "contents": [
+      {
+        "name": "Dungeon Card Pack",
+        "quantity": 3,
+        "itemId": "CardPack4"
+      },
+      {
+        "name": "Dungeon passes",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 20
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_g",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_h",
+    "category": "bundle",
+    "name": "Giftmas Bundle",
+    "price": {
+      "amount": 9.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 2021,
+      "delivery": "unspecified"
+    },
+    "petCrystals": null,
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Giftmas Snoozy Cap",
+        "quantity": 3,
+        "itemId": "EquipmentHats69"
+      },
+      {
+        "name": "2021 Giftmas Box",
+        "quantity": 250,
+        "itemId": "Quest64"
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_h",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_i",
+    "category": "bundle",
+    "name": "Auto-Loot Pack",
+    "price": {
+      "amount": 4.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 900,
+      "delivery": "unspecified"
+    },
+    "petCrystals": null,
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Auto-Loot",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Enable Auto-Loot in the game settings."
+      },
+      {
+        "name": "Inventory slots",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 5,
+        "detail": "Applies before the 112-slot cap."
+      },
+      {
+        "name": "Storage slots",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 8
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_i",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_j",
+    "category": "bundle",
+    "name": "OUTTA THIS WORLD",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4300,
+      "delivery": "unspecified"
+    },
+    "petCrystals": null,
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Angel Wings",
+        "quantity": 1,
+        "itemId": "EquipmentCape0"
+      },
+      {
+        "name": "Galaxy Card Pack",
+        "quantity": 3,
+        "itemId": "CardPack5"
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_j",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_k",
+    "category": "bundle",
+    "name": "EGGSCELLENT",
+    "price": {
+      "amount": 9.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 2500,
+      "delivery": "unspecified"
+    },
+    "petCrystals": null,
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Easter Egg Backpack",
+        "quantity": 1,
+        "itemId": "EquipmentCape2"
+      },
+      {
+        "name": "Egg Capsule",
+        "quantity": 250,
+        "itemId": "Quest42"
+      },
+      {
+        "name": "Goldegg Capsule",
+        "quantity": 60,
+        "itemId": "Quest44"
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_k",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_l",
+    "category": "bundle",
+    "name": "SUPER HOT FIRE",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4300,
+      "delivery": "unspecified"
+    },
+    "petCrystals": null,
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Molten Cloak",
+        "quantity": 1,
+        "itemId": "EquipmentCape7"
+      },
+      {
+        "name": "Smolderin Card Pack",
+        "quantity": 1,
+        "itemId": "CardPack6"
+      },
+      {
+        "name": "Bottled Wind",
+        "quantity": 3,
+        "itemId": "Quest72"
+      },
+      {
+        "name": "Gaming Fertilizer",
+        "quantity": 3,
+        "itemId": "Quest73"
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_l",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_m",
+    "category": "bundle",
+    "name": "GEM MOTHERLODE",
+    "price": {
+      "amount": 14.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4200,
+      "delivery": "daily-total",
+      "dailyAmount": 350,
+      "durationDays": 12
+    },
+    "petCrystals": null,
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Gem Envelope",
+        "quantity": 100,
+        "itemId": "Quest71",
+        "detail": "The 100 envelopes can give up to 10,000 Gems in total. This maximum is not guaranteed."
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_m",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_n",
+    "category": "bundle",
+    "name": "RIFTWALKER",
+    "price": {
+      "amount": 29.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 6400,
+      "delivery": "unspecified"
+    },
+    "petCrystals": null,
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Riftwalker Wings",
+        "quantity": 1,
+        "itemId": "EquipmentCape11"
+      },
+      {
+        "name": "Riftwalker Nametag",
+        "quantity": 1,
+        "itemId": "EquipmentNametag1"
+      },
+      {
+        "name": "Galaxy Card Pack",
+        "quantity": 2,
+        "itemId": "CardPack5"
+      },
+      {
+        "name": "Smolderin Card Pack",
+        "quantity": 2,
+        "itemId": "CardPack6"
+      },
+      {
+        "name": "Equipment bonuses",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "+20% Damage, +4% AFK Gains, and +50% EXP."
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_n",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_o",
+    "category": "bundle",
+    "name": "BLOOMIN' PET",
+    "price": {
+      "amount": 24.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4500,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2000
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Blooming Vine",
+        "quantity": 1,
+        "itemId": "EquipmentCape12"
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_o",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_p",
+    "category": "bundle",
+    "name": "ISLAND EXPLORER",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4400,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 1000
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Island Adventurer Nametag",
+        "quantity": 1,
+        "itemId": "EquipmentNametag7"
+      },
+      {
+        "name": "Account bonuses",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "+30% Bottle gain and 1.20x Drop Rate. Always active."
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_p",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_q",
+    "category": "bundle",
+    "name": "EQUINOX DREAMER",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4500,
+      "delivery": "unspecified"
+    },
+    "petCrystals": null,
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Equinox Ring",
+        "quantity": 1,
+        "itemId": "EquipmentRingsChat11"
+      },
+      {
+        "name": "Account bonuses",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "+50% Equinox Bar Fill Rate and 1.20x Class EXP Gain. Always active."
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_q",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_r",
+    "category": "bundle",
+    "name": "CALM SERENITY",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4600,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 1000
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Phoenix Wings",
+        "quantity": 1,
+        "itemId": "EquipmentCape14"
+      },
+      {
+        "name": "Spirit Card Pack",
+        "quantity": 1,
+        "itemId": "CardPack7"
+      },
+      {
+        "name": "Compost Bag",
+        "quantity": 4,
+        "itemId": "Quest81"
+      },
+      {
+        "name": "Sand of Time",
+        "quantity": 4,
+        "itemId": "GemP30"
+      },
+      {
+        "name": "Summoner Stone",
+        "quantity": 4,
+        "itemId": "Quest82"
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_r",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_s",
+    "category": "bundle",
+    "name": "Sacred Methods Pack",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4500,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 1000
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Gold Pocketwatch",
+        "quantity": 1,
+        "itemId": "Quest77",
+        "detail": "Requires a free inventory slot when you buy the pack."
+      },
+      {
+        "name": "Daily level gains",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "+10 Bubble levels, +2 Meal levels, and +5 Stamp levels each day."
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_s",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_t",
+    "category": "bundle",
+    "name": "Timeless Pack",
+    "price": {
+      "amount": 29.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 6400,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2000
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Timeless Watch",
+        "quantity": 1,
+        "itemId": "EquipmentCape16"
+      },
+      {
+        "name": "Timeless Nametag",
+        "quantity": 1,
+        "itemId": "EquipmentNametag13"
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_t",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_u",
+    "category": "bundle",
+    "name": "Ancient Echoes Pack",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4500,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 1250
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Cobalt Robe",
+        "quantity": 1,
+        "itemId": "EquipmentGown1"
+      },
+      {
+        "name": "Account bonuses",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "+30% AFK Gains and 1.50x Villager EXP. Always active."
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_u",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_v",
+    "category": "bundle",
+    "name": "Deathbringer Pack",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4400,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 1350
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Abyssal Robe",
+        "quantity": 1,
+        "itemId": "EquipmentGown2"
+      },
+      {
+        "name": "Daily ribbons",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 5
+      },
+      {
+        "name": "Account Drop Rate bonus",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "+200% Drop Rate. Always active."
+      },
+      {
+        "name": "Ribbon shelf unlock",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_v",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_w",
+    "category": "bundle",
+    "name": "Windwalker Pack",
+    "price": {
+      "amount": 24.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 5700,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2250
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Evergreen Robe",
+        "quantity": 1,
+        "itemId": "EquipmentGown3"
+      },
+      {
+        "name": "Aethermoon Nametag",
+        "quantity": 1,
+        "itemId": "EquipmentNametag19"
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_w",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_x",
+    "category": "bundle",
+    "name": "Arcane Cultist Pack",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4500,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 1200
+    },
+    "otherCurrencies": [
+      {
+        "name": "Prisma Bubble fragments",
+        "amount": 20
+      }
+    ],
+    "contents": [
+      {
+        "name": "Silkshard Robe",
+        "quantity": 1,
+        "itemId": "EquipmentGown4"
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_x",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_y",
+    "category": "bundle",
+    "name": "Valenslime Day Pack",
+    "price": {
+      "amount": 9.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 3000,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 600
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Event plays",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 12
+      },
+      {
+        "name": "Coins from mobs bonus",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "2.50x Coins from Mobs. Always active."
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_y",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bun_z",
+    "category": "bundle",
+    "name": "Fallen Spirits Pet Pack",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4500,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 3000
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "True Crown",
+        "quantity": 1,
+        "itemId": "EquipmentHats114"
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bun_z",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bon_a",
+    "category": "bundle",
+    "name": "Storage Ram Pack",
+    "price": {
+      "amount": 8.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 2100,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 1000
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Ram Pet",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. Access Storage from anywhere."
+      },
+      {
+        "name": "Storage slots",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 20
+      },
+      {
+        "name": "Damage bonus",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "1.50x Damage."
+      },
+      {
+        "name": "Pet Tournament Power: 120",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bon_a",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bon_c",
+    "category": "bundle",
+    "name": "Blazing Star Anniversary Pack",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4600,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2000
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Cool Bird pet benefits",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. 4x Coins from Mobs."
+      },
+      {
+        "name": "Event plays",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 15
+      },
+      {
+        "name": "Pet Tournament Power: 100",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [
+      {
+        "name": "Cool Bird",
+        "companionIndex": 24,
+        "imageLocation": "pet10"
+      }
+    ],
+    "artwork": {
+      "location": "bon_c",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bon_d",
+    "category": "bundle",
+    "name": "Midnight Tide Anniversary Pack",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 5000,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 1400
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Axolotl pet benefits",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. +50% AFK Gains."
+      },
+      {
+        "name": "Event plays",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 15
+      },
+      {
+        "name": "Pet Tournament Power: 110",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [
+      {
+        "name": "Axolotl",
+        "companionIndex": 25,
+        "imageLocation": "pet12",
+        "imageAvailable": false
+      }
+    ],
+    "artwork": {
+      "location": "bon_d",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bon_e",
+    "category": "bundle",
+    "name": "Lush Emerald Anniversary Pack",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4200,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2600
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Mallay pet benefits",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. 1.30x Drop Rate."
+      },
+      {
+        "name": "Event plays",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 15
+      },
+      {
+        "name": "Pet Tournament Power: 100",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [
+      {
+        "name": "Mallay",
+        "companionIndex": 26,
+        "imageLocation": "pet3"
+      }
+    ],
+    "artwork": {
+      "location": "bon_e",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bon_f",
+    "category": "bundle",
+    "name": "Eternal Hunter Pack",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4500,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 1500
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Reindeer pet benefits",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. 2x Gold Ball Shop Bonuses."
+      },
+      {
+        "name": "Inventory slots",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 8
+      },
+      {
+        "name": "Filter slots",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 32
+      },
+      {
+        "name": "Pet Tournament Power: 150",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [
+      {
+        "name": "Spirit Reindeer",
+        "companionIndex": 27,
+        "imageLocation": "reindeer",
+        "imageAvailable": false
+      }
+    ],
+    "artwork": {
+      "location": "bon_f",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bon_g",
+    "category": "bundle",
+    "name": "Gilded Treasure Pack",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4500,
+      "delivery": "unspecified"
+    },
+    "petCrystals": null,
+    "otherCurrencies": [
+      {
+        "name": "Prisma Bubble fragments",
+        "amount": 10
+      }
+    ],
+    "contents": [
+      {
+        "name": "Chains of the Gilded Vaultguard",
+        "quantity": 1,
+        "itemId": "EquipmentCape18"
+      },
+      {
+        "name": "Event plays",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 15
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bon_g",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bon_h",
+    "category": "bundle",
+    "name": "Lil' Squirrel Pack",
+    "price": {
+      "amount": 9.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 2500,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 500
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Squirrel Pet",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. 1.50x Extra Kills."
+      },
+      {
+        "name": "Pet Tournament Power: 115",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bon_h",
+      "width": 569,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bon_i",
+    "category": "bundle",
+    "name": "Ocean Raider Pack",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4500,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2000
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Corsair Uniform",
+        "quantity": 1,
+        "itemId": "EquipmentGown5"
+      },
+      {
+        "name": "Whale pet benefits",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. 2x Class EXP and 2x Skill EXP."
+      },
+      {
+        "name": "Pet Tournament Power: 125",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [
+      {
+        "name": "Whale",
+        "companionIndex": 32,
+        "imageLocation": "pet4"
+      }
+    ],
+    "artwork": {
+      "location": "bon_i",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bon_j",
+    "category": "bundle",
+    "name": "Piggy Pal Pack",
+    "price": {
+      "amount": 29.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 6500,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2200
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Marvelous Pig Pet",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. 2x Friend Bonuses and +2 Friend Bonus Slots."
+      },
+      {
+        "name": "Pig gift recipient benefits",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Gift recipients get Auto-Loot, Storage access anywhere, and Infinite Teleporting."
+      },
+      {
+        "name": "Pet Tournament Power: 110",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bon_j",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bon_k",
+    "category": "bundle",
+    "name": "Autumn Breeze Pack",
+    "price": {
+      "amount": 24.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 5700,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2000
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Chippy pet benefits",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. 2x Damage and 2x Class EXP Gain."
+      },
+      {
+        "name": "Account bonus",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "2x drops for Statues and Golden Food."
+      },
+      {
+        "name": "Event plays",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 20
+      },
+      {
+        "name": "Pet Tournament Power: 100",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [
+      {
+        "name": "Chippy",
+        "companionIndex": 33,
+        "imageLocation": "pet5"
+      }
+    ],
+    "artwork": {
+      "location": "bon_k",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bon_l",
+    "category": "bundle",
+    "name": "Best Friend Bubba Pack",
+    "price": {
+      "amount": 29.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 7000,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 3000
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Seal Team Skipper Hat",
+        "quantity": 1,
+        "itemId": "EquipmentHats127"
+      },
+      {
+        "name": "Bubba pet benefits",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. +30% Gallery Multiplier."
+      },
+      {
+        "name": "Event plays",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 25
+      },
+      {
+        "name": "Pet Tournament Power: 165",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [
+      {
+        "name": "Bubba the Seal",
+        "companionIndex": 49,
+        "imageLocation": "bubba",
+        "imageAvailable": false
+      }
+    ],
+    "artwork": {
+      "location": "bon_l",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bon_m",
+    "category": "bundle",
+    "name": "Snowy Splendor Pack",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4400,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2000
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Bunny pet benefits",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. 3x Class EXP Gain."
+      },
+      {
+        "name": "Event plays",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 15
+      },
+      {
+        "name": "Pet Tournament Power: 80",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [
+      {
+        "name": "Bunny",
+        "companionIndex": 34,
+        "imageLocation": "pet6"
+      }
+    ],
+    "artwork": {
+      "location": "bon_m",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bon_n",
+    "category": "bundle",
+    "name": "Northern Lights Pack",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4500,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 1800
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Hedgehog pet benefits",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. +200% Gold Ball Gain from the Arcade."
+      },
+      {
+        "name": "Event plays",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 15
+      },
+      {
+        "name": "Pet Tournament Power: 100",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [
+      {
+        "name": "Hedgehog",
+        "companionIndex": 36,
+        "imageLocation": "pet11"
+      }
+    ],
+    "artwork": {
+      "location": "bon_n",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bon_o",
+    "category": "bundle",
+    "name": "Blizzard Bliss Pack",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4700,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 1700
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Panda pet benefits",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. 2x Refinery Salt production."
+      },
+      {
+        "name": "Event plays",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 15
+      },
+      {
+        "name": "Pet Tournament Power: 110",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [
+      {
+        "name": "Panda",
+        "companionIndex": 35,
+        "imageLocation": "pet8"
+      }
+    ],
+    "artwork": {
+      "location": "bon_o",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bon_p",
+    "category": "bundle",
+    "name": "Santas Little Helper Pack",
+    "price": {
+      "amount": 24.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 5600,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2500
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Santa pet benefits",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. 3x bonuses from Orion, Poppy, and Bubba."
+      },
+      {
+        "name": "Account bonus",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "75% cheaper Masterclass Upgrades."
+      },
+      {
+        "name": "Event plays",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 20
+      },
+      {
+        "name": "Pet Tournament Power: 130",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [
+      {
+        "name": "Santas Little Helper",
+        "companionIndex": 51,
+        "imageLocation": "w6c2b"
+      }
+    ],
+    "artwork": {
+      "location": "bon_p",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bon_q",
+    "category": "bundle",
+    "name": null,
+    "price": null,
+    "gems": null,
+    "petCrystals": null,
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Unknown reward",
+        "rewardCategories": [],
+        "rewardUnknown": true,
+        "quantity": null
+      }
+    ],
+    "pets": [],
+    "artwork": null
+  },
+  {
+    "nativeId": "bon_r",
+    "category": "bundle",
+    "name": "Pirate Glimbo Pack",
+    "price": {
+      "amount": 16.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4100,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 700
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Glimbo Pet",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "1.60x Extra Kills and 2x Artifact Find Chance."
+      },
+      {
+        "name": "Pet Tournament Power: 160",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "bon_r",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bon_s",
+    "category": "bundle",
+    "name": "Heavy Metals Pack",
+    "price": {
+      "amount": 29.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 6300,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 3000
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Bulwark Armor",
+        "quantity": 1,
+        "itemId": "EquipmentGown6"
+      },
+      {
+        "name": "Boomy Mine pet benefits",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "20x Spelunking Power and 2x Minehead Currency Gain."
+      },
+      {
+        "name": "Pet Tournament Power: 190",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [
+      {
+        "name": "Boomy Mine",
+        "companionIndex": 143,
+        "imageLocation": "w7b2"
+      }
+    ],
+    "artwork": {
+      "location": "bon_s",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bon_t",
+    "category": "bundle",
+    "name": "Sweet & Lovely Pack",
+    "price": {
+      "amount": 24.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 5300,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2000
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Vanillie pet benefits",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "+2500% Golden Food Bonuses."
+      },
+      {
+        "name": "Recurring event plays bonus",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 5,
+        "detail": "+5 plays in every event. Separate from the 20 included event plays."
+      },
+      {
+        "name": "Event plays",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 20
+      },
+      {
+        "name": "Pet Tournament Power: 175",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [
+      {
+        "name": "Vanillie",
+        "companionIndex": 155,
+        "imageLocation": "w4b4b"
+      }
+    ],
+    "artwork": {
+      "location": "bon_t",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bon_u",
+    "category": "bundle",
+    "name": "Pot of Gold Pack",
+    "price": {
+      "amount": 12.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 3200,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 1500
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Potluck pet benefits",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "2.50x Coins from Mobs."
+      },
+      {
+        "name": "Upgrade Vault maximum levels",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 10,
+        "detail": "+10 maximum levels for Upgrade Vault upgrades."
+      },
+      {
+        "name": "Event plays",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 10
+      },
+      {
+        "name": "Pet Tournament Power: 110",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [
+      {
+        "name": "Potluck",
+        "companionIndex": 159,
+        "imageLocation": "potg"
+      }
+    ],
+    "artwork": {
+      "location": "bon_u",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bon_v",
+    "category": "bundle",
+    "name": "Kelp N' Roll Pack",
+    "price": {
+      "amount": 24.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 5700,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2100
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Dragonroll Mantlepiece",
+        "quantity": 1,
+        "itemId": "EquipmentCape19"
+      },
+      {
+        "name": "Eggroll pet benefits",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. 3x Class EXP Gain."
+      },
+      {
+        "name": "Sushi Station account bonuses",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "2x Fuel and 2x Bucks."
+      },
+      {
+        "name": "Pet Tournament Power: 180",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [
+      {
+        "name": "Eggroll",
+        "companionIndex": 145,
+        "imageLocation": "w7b4"
+      }
+    ],
+    "artwork": {
+      "location": "bon_v",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "ban_a",
+    "category": "bundle",
+    "name": "5TH BIRTHDAY BUNDLE",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 5555,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 1555
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Wicker pet benefits",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. 1.25x Meal Bonuses and 5x Cheap Meals."
+      },
+      {
+        "name": "Daily ribbon rank bonus",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "All daily ribbons start one rank higher."
+      },
+      {
+        "name": "Event plays",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 15
+      },
+      {
+        "name": "Pet Tournament Power: 165",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [
+      {
+        "name": "Wickerlight Spirit",
+        "companionIndex": 162,
+        "imageLocation": "w6b2b"
+      }
+    ],
+    "artwork": {
+      "location": "ban_a",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "ban_b",
+    "category": "bundle",
+    "name": "TIME TRAVELLER PACK:",
+    "price": {
+      "amount": 29.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 7000,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 3000
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Time Traveler Outfit",
+        "quantity": 1,
+        "itemId": "EquipmentGown7"
+      },
+      {
+        "name": "Time Traveler Top Hat",
+        "quantity": 1,
+        "itemId": "EquipmentHats132"
+      },
+      {
+        "name": "Equipment bonuses",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "1.30x Kills, 1.30x Class EXP, and 4x Masterclass Drops."
+      },
+      {
+        "name": "Pet tradeability",
+        "rewardCategories": [
+          "pets"
+        ],
+        "quantity": null,
+        "detail": "Tradeable pet."
+      },
+      {
+        "name": "Event plays",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 20
+      },
+      {
+        "name": "Pet Tournament Power: 190",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [
+      {
+        "name": "Smoke Devil",
+        "companionIndex": 163,
+        "imageLocation": "w5b5b"
+      }
+    ],
+    "artwork": {
+      "location": "ban_b",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "ban_c",
+    "category": "bundle",
+    "name": "YOLKMASTER PACK:",
+    "price": {
+      "amount": 34.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 8000,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 3700
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Beeg Egg",
+        "quantity": 1,
+        "itemId": "EquipmentCape20"
+      },
+      {
+        "name": "Grand Egg Nametag",
+        "quantity": 1,
+        "itemId": "EquipmentNametag37"
+      },
+      {
+        "name": "Pet tradeability",
+        "rewardCategories": [
+          "pets"
+        ],
+        "quantity": null,
+        "detail": "Tradeable pet."
+      },
+      {
+        "name": "Event plays",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 25
+      }
+    ],
+    "pets": [
+      {
+        "name": "Royal Egg",
+        "companionIndex": 135,
+        "imageLocation": "w6d1"
+      }
+    ],
+    "artwork": {
+      "location": "ban_c",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "ban_d",
+    "category": "bundle",
+    "name": "THE SPOOKY PACK:",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4600,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 900
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Spooky pet benefits",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "3x Cook Mastery EXP Gain and +5 Cook Mastery Points."
+      }
+    ],
+    "pets": [
+      {
+        "name": "Rift Spooker",
+        "companionIndex": 87,
+        "imageLocation": "rift1"
+      }
+    ],
+    "artwork": {
+      "location": "ban_d",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "ban_e",
+    "category": "bundle",
+    "name": "CRYSTALLINE GLUNKO PACK:",
+    "price": {
+      "amount": 29.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 7000,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 3100
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Glunko Pet",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. 1.50x Damage, 1.40x EXP, 1.30x Drop Rate, and 1.20x Extra Kills."
+      },
+      {
+        "name": "Daily Monument bonus levels",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 150,
+        "detail": "+150 levels for all Monument bonuses every day."
+      },
+      {
+        "name": "Pet Tournament Power: 210",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "ban_e",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "ban_f",
+    "category": "bundle",
+    "name": "PARADISE PACK:",
+    "price": {
+      "amount": 24.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 5700,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2000
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Boar Pet",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. +15% Hat Rack Bonus Multiplier."
+      },
+      {
+        "name": "Daily ribbons",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 5
+      },
+      {
+        "name": "Event plays",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 20
+      },
+      {
+        "name": "Pet Tournament Power: 170",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "ban_f",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "ban_g",
+    "category": "bundle",
+    "name": "ARMADILLIUS SUPERIUS PACK:",
+    "price": {
+      "amount": 24.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 5200,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2500
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Crystal Crescent",
+        "quantity": 1,
+        "itemId": "EquipmentCape21"
+      },
+      {
+        "name": "Armadillo Pet",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. +100% Crystal Monster chance."
+      },
+      {
+        "name": "Pet Tournament Power: 180",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "ban_g",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "ban_h",
+    "category": "bundle",
+    "name": "CORAL GUARDIAN",
+    "price": {
+      "amount": 34.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 8100,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 4100
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Bladed Rucksack",
+        "quantity": 1,
+        "itemId": "EquipmentCape22"
+      },
+      {
+        "name": "Arctic Furcoat",
+        "quantity": 1,
+        "itemId": "EquipmentGown8"
+      },
+      {
+        "name": "Crab Pet",
+        "rewardCategories": [
+          "pets"
+        ],
+        "quantity": null
+      },
+      {
+        "name": "Pet Tournament Power: 200",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "ban_h",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "ban_i",
+    "category": "bundle",
+    "name": "DAYDREAMER PACK",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4600,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2000
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Rice Pet",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. 4x Summoning EXP."
+      },
+      {
+        "name": "Summoning account bonus",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "+50% Winner Bonuses from Summoning."
+      },
+      {
+        "name": "Event plays",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 15
+      },
+      {
+        "name": "Pet Tournament Power: 160",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "ban_i",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "ban_j",
+    "category": "bundle",
+    "name": "GELATINOUS PACK",
+    "price": {
+      "amount": 24.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 5800,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2500
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Frostyman Nametag",
+        "quantity": 1,
+        "itemId": "EquipmentNametag15"
+      },
+      {
+        "name": "Lovely Day Nametag",
+        "quantity": 1,
+        "itemId": "EquipmentNametag16"
+      },
+      {
+        "name": "Spectacular 4th Year Nametag",
+        "quantity": 1,
+        "itemId": "EquipmentNametag17"
+      },
+      {
+        "name": "Deadbones Nametag",
+        "quantity": 1,
+        "itemId": "EquipmentNametag20"
+      },
+      {
+        "name": "Gingerbread Nametag",
+        "quantity": 1,
+        "itemId": "EquipmentNametag31"
+      },
+      {
+        "name": "Jelly Pet",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. 10x Farming Sticker find chance."
+      },
+      {
+        "name": "Account currency bonuses",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "2x Minehead currency, Sushi Bucks, and Jelly Operator Bloodcells."
+      },
+      {
+        "name": "Pet Tournament Power: 180",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "ban_j",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "ban_k",
+    "category": "bundle",
+    "name": "ALPHA OMEGA PACK",
+    "price": {
+      "amount": 9.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 2750,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 1500
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Cosmic Balls",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 25,
+        "detail": "2x bonuses."
+      },
+      {
+        "name": "Omega Balls",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 10,
+        "detail": "6x bonuses."
+      },
+      {
+        "name": "Lumi rate bonus",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "2x Lumi per hour."
+      },
+      {
+        "name": "Menagerie Missions",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 3
+      },
+      {
+        "name": "Research Points",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 5,
+        "detail": "Spend these points on Research Grid upgrades."
+      },
+      {
+        "name": "Grub Pet",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. 1.25x Damage."
+      },
+      {
+        "name": "Pet Tournament Power: 130",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "ban_k",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "ban_l",
+    "category": "bundle",
+    "name": "IMPERIAL POWER PACK",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 5100,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 3000
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Celebration Gown",
+        "quantity": 1,
+        "itemId": "EquipmentGown9"
+      },
+      {
+        "name": "Lumi rate bonus",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "3x Lumi per hour."
+      },
+      {
+        "name": "Minehead Doubler",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 3
+      },
+      {
+        "name": "Sushi Doubler",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 3
+      },
+      {
+        "name": "Jelly Operator Doubler",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 3
+      },
+      {
+        "name": "Omega Arcade Balls",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 10
+      },
+      {
+        "name": "Ogre Pet",
+        "rewardCategories": [
+          "pets"
+        ],
+        "quantity": null,
+        "detail": "Tradeable pet."
+      },
+      {
+        "name": "Pet Tournament Power: 220",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "ban_l",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "ban_m",
+    "category": "bundle",
+    "name": "PACK OF MAGNIFICENCE",
+    "price": {
+      "amount": 34.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 8000,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 4250
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Magni Pet",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. 25x Sailing Loot and 5x Artifact Chance."
+      },
+      {
+        "name": "Research Shape",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 1
+      },
+      {
+        "name": "Lumi rate bonus",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "3x Lumi per hour."
+      },
+      {
+        "name": "Palette Black Stars",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 4
+      },
+      {
+        "name": "Grade 4 showcase",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 1
+      },
+      {
+        "name": "Pet Tournament Power: 250",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [],
+    "artwork": {
+      "location": "ban_m",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "ban_n",
+    "category": "bundle",
+    "name": "Halloween Pack",
+    "price": {
+      "amount": 24.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 5700,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2700
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Warlock Hat",
+        "quantity": 1,
+        "itemId": "EquipmentHats147",
+        "imageAvailable": false
+      },
+      {
+        "name": "Halloween Treat",
+        "quantity": 500,
+        "itemId": "Quest79"
+      },
+      {
+        "name": "Maccie pet benefits",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null,
+        "detail": "Tradeable. +30% Lumi per hour."
+      },
+      {
+        "name": "Event plays",
+        "rewardCategories": [
+          "items"
+        ],
+        "quantity": 20
+      },
+      {
+        "name": "Pet Tournament Power: 160",
+        "rewardCategories": [
+          "pets",
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [
+      {
+        "name": "Maccie",
+        "companionIndex": 116,
+        "imageLocation": "w5a2"
+      }
+    ],
+    "artwork": {
+      "location": "ban_n",
+      "width": 711,
+      "height": 130
+    }
+  },
+  {
+    "nativeId": "bon_w",
+    "category": "starterOffer",
+    "name": "Baby Troll",
+    "price": {
+      "amount": 6.99,
+      "symbol": "$",
+      "crossedOutAmount": 9.99
+    },
+    "gems": {
+      "amount": 2000,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 800
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Giant Starflower",
+        "quantity": 1,
+        "itemId": "EquipmentCape10"
+      },
+      {
+        "name": "Inventory slots",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 4
+      },
+      {
+        "name": "Baby Troll pet tradeability",
+        "rewardCategories": [
+          "pets"
+        ],
+        "quantity": null,
+        "detail": "Tradeable pet."
+      },
+      {
+        "name": "Auto-Loot",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [
+      {
+        "name": "Baby Troll",
+        "companionIndex": 128,
+        "imageLocation": "w6a4"
+      }
+    ],
+    "artwork": {
+      "location": "StarterOfferBabyTroll",
+      "width": 320,
+      "height": 473
+    }
+  },
+  {
+    "nativeId": "bon_x",
+    "category": "starterOffer",
+    "name": "Balloonfish",
+    "price": {
+      "amount": 14.99,
+      "symbol": "$",
+      "crossedOutAmount": 21.99
+    },
+    "gems": {
+      "amount": 6000,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2250
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Phoenix Wings",
+        "quantity": 1,
+        "itemId": "EquipmentCape14"
+      },
+      {
+        "name": "Corsair Uniform",
+        "quantity": 1,
+        "itemId": "EquipmentGown5"
+      },
+      {
+        "name": "Inventory slots",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 20
+      },
+      {
+        "name": "Storage slots",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 30
+      },
+      {
+        "name": "Balloonfish pet tradeability",
+        "rewardCategories": [
+          "pets"
+        ],
+        "quantity": null,
+        "detail": "Tradeable pet."
+      },
+      {
+        "name": "Auto-Loot",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [
+      {
+        "name": "Balloonfish",
+        "companionIndex": 38,
+        "imageLocation": "w7a5",
+        "imageAvailable": false
+      }
+    ],
+    "artwork": {
+      "location": "StarterOfferBalloonfish",
+      "width": 400,
+      "height": 494
+    }
+  },
+  {
+    "nativeId": "bon_y",
+    "category": "starterOffer",
+    "name": "Bubba the Seal",
+    "price": {
+      "amount": 29.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 7000,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 3000
+    },
+    "otherCurrencies": [],
+    "contents": [
+      {
+        "name": "Timeless Watch",
+        "quantity": 1,
+        "itemId": "EquipmentCape16"
+      },
+      {
+        "name": "Arctic Furcoat",
+        "quantity": 1,
+        "itemId": "EquipmentGown8"
+      },
+      {
+        "name": "Inventory slots",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 24
+      },
+      {
+        "name": "Storage slots",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": 35
+      },
+      {
+        "name": "Bubba pet tradeability",
+        "rewardCategories": [
+          "pets"
+        ],
+        "quantity": null,
+        "detail": "Tradeable pet."
+      },
+      {
+        "name": "Auto-Loot",
+        "rewardCategories": [
+          "bonuses"
+        ],
+        "quantity": null
+      }
+    ],
+    "pets": [
+      {
+        "name": "Bubba the Seal",
+        "companionIndex": 49,
+        "imageLocation": "bubba",
+        "imageAvailable": false
+      }
+    ],
+    "artwork": {
+      "location": "StarterOfferBubba",
+      "width": 440,
+      "height": 473
+    }
+  },
+  {
+    "nativeId": "bin_a",
+    "category": "petMart",
+    "name": "Jelly Joy Pack",
+    "price": {
+      "amount": 6.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 2500,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 800
+    },
+    "otherCurrencies": [],
+    "contents": [],
+    "pets": [
+      {
+        "name": "Jellofish",
+        "companionIndex": 52,
+        "imageLocation": "w7b5",
+        "imageAvailable": false
+      }
+    ],
+    "artwork": null
+  },
+  {
+    "nativeId": "bin_b",
+    "category": "petMart",
+    "name": "Koisome Pack",
+    "price": {
+      "amount": 12.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 3400,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 1350
+    },
+    "otherCurrencies": [],
+    "contents": [],
+    "pets": [
+      {
+        "name": "Koi Fish",
+        "companionIndex": 53,
+        "imageLocation": "w7b1b",
+        "imageAvailable": false
+      }
+    ],
+    "artwork": null
+  },
+  {
+    "nativeId": "bin_c",
+    "category": "petMart",
+    "name": "Neonscale Pack",
+    "price": {
+      "amount": 19.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4200,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2100
+    },
+    "otherCurrencies": [],
+    "contents": [],
+    "pets": [
+      {
+        "name": "Neonscale",
+        "companionIndex": 54,
+        "imageLocation": "w7b6b",
+        "imageAvailable": false
+      }
+    ],
+    "artwork": null
+  },
+  {
+    "nativeId": "bin_d",
+    "category": "petMart",
+    "name": "Pirate Pack",
+    "price": {
+      "amount": 29.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 5500,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 3100
+    },
+    "otherCurrencies": [],
+    "contents": [],
+    "pets": [
+      {
+        "name": "Pirate Deckhand",
+        "companionIndex": 55,
+        "imageLocation": "w7b11",
+        "imageAvailable": false
+      }
+    ],
+    "artwork": null
+  },
+  {
+    "nativeId": "bin_e",
+    "category": "petMart",
+    "name": "Magnifish Pack",
+    "price": {
+      "amount": 39.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 8200,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 4500
+    },
+    "otherCurrencies": [],
+    "contents": [],
+    "pets": [
+      {
+        "name": "Magni Pufferfin",
+        "companionIndex": 56,
+        "imageLocation": "w7b10",
+        "imageAvailable": false
+      }
+    ],
+    "artwork": null
+  },
+  {
+    "nativeId": "bin_f",
+    "category": "petMart",
+    "name": "Dreadnaught Pack",
+    "price": {
+      "amount": 49.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 10000,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 5500
+    },
+    "otherCurrencies": [],
+    "contents": [],
+    "pets": [
+      {
+        "name": "Dreadnaught Captain",
+        "companionIndex": 57,
+        "imageLocation": "w7b12",
+        "imageAvailable": false
+      }
+    ],
+    "artwork": null
+  },
+  {
+    "nativeId": "bin_g",
+    "category": "petMart",
+    "name": "Supadupa Bubba",
+    "price": {
+      "amount": 64.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 12500,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 7200
+    },
+    "otherCurrencies": [],
+    "contents": [],
+    "pets": [
+      {
+        "name": "Bubba Supreme",
+        "companionIndex": 58,
+        "imageLocation": "bubbab",
+        "imageAvailable": false
+      }
+    ],
+    "artwork": null
+  },
+  {
+    "nativeId": "bin_h",
+    "category": "petMart",
+    "name": "Nightmare Pack",
+    "price": {
+      "amount": 34.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 6600,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 3600
+    },
+    "otherCurrencies": [],
+    "contents": [],
+    "pets": [
+      {
+        "name": "Rift Stalker",
+        "companionIndex": 153,
+        "imageLocation": "rift5",
+        "imageAvailable": false
+      }
+    ],
+    "artwork": null
+  },
+  {
+    "nativeId": "bin_i",
+    "category": "petMart",
+    "name": "Hivemind Pack",
+    "price": {
+      "amount": 22.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4700,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2500
+    },
+    "otherCurrencies": [],
+    "contents": [],
+    "pets": [
+      {
+        "name": "Rift Hivemind",
+        "companionIndex": 88,
+        "imageLocation": "rift4",
+        "imageAvailable": false
+      }
+    ],
+    "artwork": null
+  },
+  {
+    "nativeId": "bin_j",
+    "category": "petMart",
+    "name": "Cryology Pack",
+    "price": {
+      "amount": 3.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 1000,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 500
+    },
+    "otherCurrencies": [],
+    "contents": [],
+    "pets": [
+      {
+        "name": "Cryosnake",
+        "companionIndex": 99,
+        "imageLocation": "snakeb"
+      }
+    ],
+    "artwork": null
+  },
+  {
+    "nativeId": "bin_k",
+    "category": "petMart",
+    "name": "Mechanic Pack",
+    "price": {
+      "amount": 5.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 1450,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 700
+    },
+    "otherCurrencies": [],
+    "contents": [],
+    "pets": [
+      {
+        "name": "Mechanical Mouse",
+        "companionIndex": 157,
+        "imageLocation": "pet7"
+      }
+    ],
+    "artwork": null
+  },
+  {
+    "nativeId": "bin_l",
+    "category": "petMart",
+    "name": "Manta Ray Pack",
+    "price": {
+      "amount": 18.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 4100,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2000
+    },
+    "otherCurrencies": [],
+    "contents": [],
+    "pets": [
+      {
+        "name": "Mantaray",
+        "companionIndex": 147,
+        "imageLocation": "w7b7",
+        "imageAvailable": false
+      }
+    ],
+    "artwork": null
+  },
+  {
+    "nativeId": "bin_m",
+    "category": "petMart",
+    "name": "Baby Troll Pack",
+    "price": {
+      "amount": 9.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 2600,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 1100
+    },
+    "otherCurrencies": [],
+    "contents": [],
+    "pets": [
+      {
+        "name": "Baby Troll",
+        "companionIndex": 128,
+        "imageLocation": "w6a4"
+      }
+    ],
+    "artwork": null
+  },
+  {
+    "nativeId": "bin_n",
+    "category": "petMart",
+    "name": "King Doot Pack",
+    "price": {
+      "amount": 9.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 2500,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 1000
+    },
+    "otherCurrencies": [],
+    "contents": [],
+    "pets": [
+      {
+        "name": "King Doot",
+        "companionIndex": 0,
+        "imageLocation": "babamummy",
+        "imageAvailable": false
+      }
+    ],
+    "artwork": null
+  },
+  {
+    "nativeId": "bin_o",
+    "category": "petMart",
+    "name": "Clammie Pack",
+    "price": {
+      "amount": 4.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 1250,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 750
+    },
+    "otherCurrencies": [],
+    "contents": [],
+    "pets": [
+      {
+        "name": "Clammie",
+        "companionIndex": 111,
+        "imageLocation": "w4c1"
+      }
+    ],
+    "artwork": null
+  },
+  {
+    "nativeId": "bin_p",
+    "category": "petMart",
+    "name": "Mama Troll Pack",
+    "price": {
+      "amount": 24.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 5250,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2650
+    },
+    "otherCurrencies": [],
+    "contents": [],
+    "pets": [
+      {
+        "name": "Mama Troll",
+        "companionIndex": 132,
+        "imageLocation": "w6b3"
+      }
+    ],
+    "artwork": null
+  },
+  {
+    "nativeId": "bin_q",
+    "category": "petMart",
+    "name": "Glowing Pack",
+    "price": {
+      "amount": 26.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 5300,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 2500
+    },
+    "otherCurrencies": [],
+    "contents": [],
+    "pets": [
+      {
+        "name": "Glowfish",
+        "companionIndex": 148,
+        "imageLocation": "w7b8",
+        "imageAvailable": false
+      }
+    ],
+    "artwork": null
+  },
+  {
+    "nativeId": "bin_r",
+    "category": "petMart",
+    "name": "Ancient Pack",
+    "price": {
+      "amount": 33.99,
+      "symbol": "$"
+    },
+    "gems": {
+      "amount": 5250,
+      "delivery": "unspecified"
+    },
+    "petCrystals": {
+      "amount": 3000
+    },
+    "otherCurrencies": [],
+    "contents": [],
+    "pets": [
+      {
+        "name": "Ancientfish",
+        "companionIndex": 149,
+        "imageLocation": "w7b9",
+        "imageAvailable": false
+      }
+    ],
+    "artwork": null
+  }
+]

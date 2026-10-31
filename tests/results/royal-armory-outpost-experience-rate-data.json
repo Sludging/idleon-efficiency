@@ -2,7 +2,7 @@
   "extractions": {
     "xp_multiplier_6_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 0, 6)",
-      "result": 6.75
+      "result": 7.7625
     },
     "xp_multiplier_6_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 1, 6)",
@@ -10,7 +10,7 @@
     },
     "xp_multiplier_6_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 2, 6)",
-      "result": 1.940625
+      "result": 2.278125
     },
     "xp_multiplier_6_3": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 3, 6)",
@@ -22,7 +22,7 @@
     },
     "xp_multiplier_31_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 0, 31)",
-      "result": 7.425000000000001
+      "result": 8.53875
     },
     "xp_multiplier_31_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 1, 31)",
@@ -30,7 +30,7 @@
     },
     "xp_multiplier_31_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 2, 31)",
-      "result": 2.1346875
+      "result": 2.5059375000000004
     },
     "xp_multiplier_31_3": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 3, 31)",
@@ -42,19 +42,19 @@
     },
     "xp_multiplier_53_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 0, 53)",
-      "result": 7.425000000000001
+      "result": 8.53875
     },
     "xp_multiplier_51_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 2, 51)",
-      "result": 1.940625
+      "result": 2.278125
     },
     "xp_multiplier_1_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 0, 1)",
-      "result": 20.655
+      "result": 24.37425
     },
     "xp_multiplier_1_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"BarExpRate\", 2, 1)",
-      "result": 5.9383125
+      "result": 7.1533125
     },
     "xp_orblet_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 6, 0)",
@@ -70,7 +70,7 @@
     },
     "xp_support_bonus": {
       "expression": "idleon.callFunction(\"RoyalG\", \"SupportEXP\", 0, 0)",
-      "result": 206
+      "result": 214
     },
     "xp_jelly_bonus": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 1, 0)",
@@ -82,7 +82,7 @@
     },
     "xp_role_effect_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 1, 0)",
-      "result": 300
+      "result": 360
     },
     "xp_rank_purified_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"isMapPurified\", 0, 0)",
@@ -98,7 +98,7 @@
     },
     "xp_role_effect_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 5, 0)",
-      "result": 15
+      "result": 35
     },
     "xp_rank_purified_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"isMapPurified\", 2, 0)",
@@ -142,7 +142,7 @@
     },
     "xp_movable_count_1_5": {
       "expression": "(() => { const g = idleon.getAttr(\"RoyalG\"); let count = 0; for (let w = 0; w < 8; w++) { const roles = g[6+2*w] || []; const maps = g[7+2*w] || []; for (let u = 0; u < roles.length; u++) if (Number(roles[u]) === 5 && Number(maps[u]) === 1) count++; } return count; })()",
-      "result": 1
+      "result": 0
     },
     "xp_stationary_count_1_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 1, 1)",
@@ -158,7 +158,7 @@
     },
     "xp_threshold_6_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 6, 0)",
-      "result": 3149.901108559433
+      "result": 4350.800906197716
     },
     "xp_threshold_6_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 6, 2)",
@@ -166,7 +166,7 @@
     },
     "xp_threshold_53_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 53, 0)",
-      "result": 8217.895123412276
+      "result": 11245.540695195745
     }
   },
   "errors": {}

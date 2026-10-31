@@ -1,7 +1,7 @@
 import { range } from "../../utility";
 import { Domain, RawData } from "../base/domain";
 import { Item, ItemStat, StoneProps } from "../items";
-import { EquipmentBonus, getEquipmentEffect } from "../equipment-effects";
+import { EquipmentBonus, getEquipmentEffect, getItemEquipmentEffect } from "../equipment-effects";
 import type { EquipmentProperty, PrimaryAttribute } from "../equipment-effects";
 import type { Player } from "../player";
 import { initEquipmentMetadataRepo } from "../data/EquipmentMetadataRepo";
@@ -133,7 +133,8 @@ export class ObolStats {
             // Display rows hold the complete collection total, not a base/stone split.
             this.stats.push(new ItemStat(newStat.displayName, newStat.stoneName, value, newStat.extra));
         }
-        if (newStat.extra !== '') this.effects.set(effect, (this.effects.get(effect) ?? 0) + value);
+        const equipmentEffect = getItemEquipmentEffect(newStat.extra);
+        if (equipmentEffect !== undefined) this.effects.set(equipmentEffect, (this.effects.get(equipmentEffect) ?? 0) + value);
     }
 
     updateProperties(
@@ -178,21 +179,21 @@ export class ObolsData extends Domain {
     private combinedStats = new Map<number, ObolStats>();
 
     getStats(playerID: number): ObolStats {
-        const stats = this.combinedStats.get(playerID);
-        if (!stats) throw new Error(`Obol contributions have not been calculated for player ${playerID}`);
-        return stats;
+        return this.combinedStats.get(playerID)!;
     }
 
     updateCombinedStats(players: readonly Player[]): void {
         this.playerStats = this.playerObols.map(obols => this.calculateCollection(obols));
         this.familyStats = this.calculateCollection(this.familyObols);
         this.combinedStats.clear();
+        for (let playerID = 0; playerID < this.playerStats.length; playerID++) {
+            this.combinedStats.set(playerID, new ObolStats());
+        }
         for (const player of players) {
-            const combined = new ObolStats();
+            const combined = this.getStats(player.playerID);
             // Personal collection comes first. Each row then adds the complete family collection total.
             for (const stat of this.playerStats[player.playerID].stats) combined.addStat(stat);
             for (const stat of this.familyStats.stats) combined.addStat(stat);
-            this.combinedStats.set(player.playerID, combined);
         }
     }
 
@@ -239,7 +240,15 @@ export class ObolsData extends Domain {
         ]
     }
 
-    init(_allItems: Item[], _charCount: number) {
+    init(_allItems: Item[], charCount: number) {
+        this.playerObols = Array.from({ length: charCount }, () => []);
+        this.playerStats = this.playerObols.map(() => new ObolStats());
+        this.familyObols = [];
+        this.familyStats = new ObolStats();
+        this.combinedStats.clear();
+        for (let playerID = 0; playerID < charCount; playerID++) {
+            this.combinedStats.set(playerID, new ObolStats());
+        }
         return this;
     }
 
@@ -249,11 +258,7 @@ export class ObolsData extends Domain {
         const allItems = data.get("itemsData") as Item[];
 
         // Some obol data has no "persistence", so we reset the previous data.
-        obols.playerObols = [];
-        obols.playerStats = [];
-        obols.familyObols = [];
-        obols.familyStats = new ObolStats();
-        obols.combinedStats.clear();
+        obols.init(allItems, charCount);
 
         range(0, charCount).forEach((_, playerIndex) => {
             const playerObols = data.get(`ObolEqO0_${playerIndex}`) as string[];
@@ -266,7 +271,7 @@ export class ObolsData extends Domain {
                 }
                 playerObolArray.push(new Obol(itemInfo, obolIndex, true));
             });
-            obols.playerObols.push(playerObolArray);
+            obols.playerObols[playerIndex] = playerObolArray;
         })
 
         const familyObols = data.get(`ObolEqO1`) as string[];

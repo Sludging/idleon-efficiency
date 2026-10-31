@@ -2,15 +2,15 @@
   "extractions": {
     "hat_rack_drop_rate": {
       "expression": "idleon.getDNSM(\"PremHatBonTOT\").h[\"%_DROP_RATE\"]",
-      "result": 51.900000000000006
+      "result": 52.199999999999996
     },
     "hat_rack_weapon_power": {
       "expression": "idleon.getDNSM(\"PremHatBonTOT\").h.Weapon_Power",
-      "result": 15.569999999999999
+      "result": 15.66
     },
     "hat_rack_strength": {
       "expression": "idleon.getDNSM(\"PremHatBonTOT\").h.STR",
-      "result": 79.57999999999998
+      "result": 81.77999999999997
     },
     "hat_rack_build_speed": {
       "expression": "Object.prototype.hasOwnProperty.call(idleon.getDNSM(\"PremHatBonTOT\").h, \"%_BUILD_SPD\") ? idleon.getDNSM(\"PremHatBonTOT\").h[\"%_BUILD_SPD\"] : 0",
@@ -120,7 +120,10 @@
         "EquipmentHats135",
         "EquipmentHats139",
         "EquipmentHats140",
-        "EquipmentHats141"
+        "EquipmentHats141",
+        "EquipmentHats145",
+        "EquipmentHats146",
+        "EquipmentHats147"
       ]
     },
     "hat_rack_missing_hats": {
@@ -136,7 +139,6 @@
         "EquipmentHats79",
         "EquipmentHats31",
         "EquipmentHats32",
-        "EquipmentHats35",
         "EquipmentHats36",
         "EquipmentHats37",
         "EquipmentHats47",
@@ -168,8 +170,97 @@
         "EquipmentHats135",
         "EquipmentHats139",
         "EquipmentHats140",
-        "EquipmentHats141"
+        "EquipmentHats141",
+        "EquipmentHats145",
+        "EquipmentHats146",
+        "EquipmentHats147"
       ]
+    },
+    "hat_rack_deposited_hats": {
+      "expression": "idleon.getAttr(\"Spelunk\")[46]",
+      "result": [
+        "EquipmentHats38",
+        "EquipmentHatsBeg1",
+        "EquipmentHats21",
+        "EquipmentHats24",
+        "EquipmentHats42",
+        "EquipmentHats51",
+        "EquipmentHats108",
+        "EquipmentHats56",
+        "EquipmentHats63",
+        "EquipmentHats64",
+        "EquipmentHats67",
+        "EquipmentHats75",
+        "EquipmentHats76",
+        "EquipmentHats33",
+        "EquipmentHats34",
+        "EquipmentHats57",
+        "EquipmentHats62",
+        "EquipmentHats69",
+        "EquipmentHats109",
+        "EquipmentHats82",
+        "EquipmentHats86",
+        "EquipmentHats90",
+        "EquipmentHats91",
+        "EquipmentHats93",
+        "EquipmentHats94",
+        "EquipmentHats95",
+        "EquipmentHats96",
+        "EquipmentHats97",
+        "EquipmentHats99",
+        "EquipmentHats100",
+        "EquipmentHats101",
+        "EquipmentHats102",
+        "EquipmentHats103",
+        "EquipmentHats104",
+        "EquipmentHats112",
+        "EquipmentHats113",
+        "EquipmentHats118",
+        "EquipmentHats40",
+        "EquipmentHats116",
+        "EquipmentHats85",
+        "EquipmentHats87",
+        "EquipmentHats88",
+        "EquipmentHats125",
+        "EquipmentHats131",
+        "EquipmentHats50",
+        "EquipmentHats80",
+        "EquipmentHats46",
+        "EquipmentHats35"
+      ]
+    },
+    "hat_rack_bonus_multiplier": {
+      "expression": "idleon.callFunction(\"Gallery\", \"HatrackBonusMulti\", 0, 0)",
+      "result": 1.74
+    },
+    "hat_rack_account_bonuses": {
+      "expression": "Object.fromEntries(Object.entries(idleon.getDNSM(\"PremHatBonTOT\").h))",
+      "result": {
+        "Weapon_Power": 15.66,
+        "STR": 81.77999999999997,
+        "AGI": 95.69999999999993,
+        "WIS": 81.77999999999997,
+        "LUK": 76.55999999999997,
+        "Defence": 104.4,
+        "%_MONEY": 43.5,
+        "%_XP_FROM_MONSTERS": 104.4,
+        "%_CLASS_EXP_MULTI": 38.28,
+        "%_DROP_RATE": 52.199999999999996,
+        "%_MULTIKILL": 26.1,
+        "%_SKILL_EXP": 26.1,
+        "%_SKILL_EFFICIENCY": 19.14,
+        "%_BONUS_MONEY": 43.5,
+        "%_ALL_AFK_GAIN": 17.4,
+        "%_ALL_STATS": 8.7,
+        "%_DROP_RATE_MULTI": 6.96,
+        "%_DIVINITY_EXP": 26.1,
+        "%_DAMAGE_MULTI": 8.7,
+        "%_AFK_GAINS_MULTI": 1.74,
+        "%_MASTERCLASS_DROPS": 1.74,
+        "%_EXTRA_BONES": 43.5,
+        "%_DUST_MULTI": 43.5,
+        "%_BONUS_KILLS": 5.22
+      }
     }
   },
   "errors": {}

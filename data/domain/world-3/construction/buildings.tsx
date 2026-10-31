@@ -3,7 +3,12 @@ import { BuildingBase } from "../../data/BuildingRepo";
 import { initRandoListRepo } from "../../data/RandoListRepo";
 import { ImageData } from "../../imageData";
 import { BuildingModel } from "../../model/buildingModel";
-import { ComponentModel } from "../../model/componentModel";
+import type { ComponentModel } from "../../model/componentModel";
+
+export interface BuildingCompletionTimes {
+    normalCompletionSeconds: number | null;
+    trimmedCompletionSeconds: number | null;
+}
 
 export class Building {
     description: string
@@ -17,30 +22,30 @@ export class Building {
     name: string
 
     level: number = 0;
+    unlocked: boolean = false;
     nextLevelUnlocked: boolean = false;
     finishedUpgrade: boolean = false;
     maxed: boolean = false;
     currentXP: number = 0;
     currentlyBuilding: boolean = false;
+    currentlyTrimmed: boolean = false;
     buildPercentage: number = 0;
     upgradable: boolean = false;
 
+
     buildingMultiplier: number = 0;
-    
+
 
     constructor(public index: number, data: BuildingModel, multiplier: number = 0) {
         this.description = data.description;
         this.bonus = data.bonus;
         this.maxLvl = data.maxLvl;
         this.baseMaxLvl = data.maxLvl;
-        this.lvlUpReq = data.lvlUpReq.map(requirement => {
-            if (!("item" in requirement) || typeof requirement.item !== "string"
-                || !("quantity" in requirement) || typeof requirement.quantity !== "number") {
-                throw new Error(`Building ${data.name} has invalid level-up requirement data.`);
-            }
-
-            return { item: requirement.item, quantity: requirement.quantity };
-        });
+        const requirements = data.lvlUpReq as ComponentModel[];
+        this.lvlUpReq = requirements.map(requirement => ({
+            item: requirement.item,
+            quantity: requirement.quantity
+        }));
         this.costIncrement = data.costInc;
         this.bonusInc = data.bonusInc;
         this.misc = data.misc;
@@ -71,15 +76,32 @@ export class Building {
         }
     }
 
+    getCompletionTimes(normalBuildSpeed: number, trimmedBuildSpeed: number): BuildingCompletionTimes {
+        if (this.maxed) {
+            return { normalCompletionSeconds: null, trimmedCompletionSeconds: null };
+        }
+
+        const remainingWork = Math.max(0, this.getBuildCost() - this.currentXP);
+        // These are constant-rate projections, including for buildings not in a slot.
+        // Completed work takes zero seconds; a nonpositive rate cannot finish remaining work.
+        const completionSeconds = (rate: number): number | null =>
+            remainingWork === 0 ? 0 : rate > 0 && Number.isFinite(rate) ? remainingWork * 3600 / rate : null;
+        return {
+            normalCompletionSeconds: completionSeconds(normalBuildSpeed),
+            trimmedCompletionSeconds: completionSeconds(trimmedBuildSpeed),
+        };
+    }
+
+
     // Gives NEXT level costs, so if input 0 it will give level 1, etc...
-    getLevelCosts = (level: number = this.level, costCruncher: Building): { item: string, quantity: number}[] => {
-        const toReturn: { item: string, quantity: number}[] = [];
+    getLevelCosts = (level: number = this.level, costCruncher: Building): { item: string, quantity: number }[] => {
+        const toReturn: { item: string, quantity: number }[] = [];
         this.lvlUpReq.forEach(item => {
-            const math1 =  Math.min(0.1, 0.1 * Math.floor((costCruncher.level + 999) / 1000));
+            const math1 = Math.min(0.1, 0.1 * Math.floor((costCruncher.level + 999) / 1000));
             const math2 = Math.max(0, costCruncher.level - 1);
             const costReduction = Math.max(0.2, 1 - (math1 + (math2 * costCruncher.bonusInc[0]) / 100))
             if (item.item.includes("Refinery")) {
-                toReturn.push({ 
+                toReturn.push({
                     item: item.item,
                     quantity: Math.floor(costReduction * item.quantity * (level + 1))
                 });
@@ -95,8 +117,8 @@ export class Building {
         return toReturn;
     }
 
-    getMaxLevelCosts = (costCruncher: Building): { item: string, quantity: number}[] => {
-        let toReturn: { item: string, quantity: number}[] = [];
+    getMaxLevelCosts = (costCruncher: Building): { item: string, quantity: number }[] => {
+        let toReturn: { item: string, quantity: number }[] = [];
         range(this.level, this.maxLvl).forEach(level => {
             const thisLevelCosts = this.getLevelCosts(level, costCruncher);
             if (toReturn.length == 0) {

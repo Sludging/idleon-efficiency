@@ -11,8 +11,7 @@ import {
     Heading,
     ThemeContext,
     ResponsiveContext,
-    Meter,
-    CheckBox
+    Meter
 } from 'grommet'
 import { useState, useContext, useMemo } from 'react';
 
@@ -21,7 +20,7 @@ import { getClassExperienceMultiplier } from '../../data/domain/player-experienc
 import { getMaximumDamage } from '../../data/domain/player-damage';
 import type { GoldenFood } from '../../data/domain/golden-food';
 import { SkillsIndex } from "../../data/domain/SkillsIndex";
-import { ClassIndex, ClassTalentMap, GetTalentArray } from '../../data/domain/talents';
+import { ClassIndex } from '../../data/domain/talents';
 import { Capacity, playerInventoryBagMapping } from '../../data/domain/capacity';
 import { Alchemy, Bubble } from "../../data/domain/world-2/alchemy/alchemy";
 import { Shrine } from '../../data/domain/world-3/construction/shrines';
@@ -33,7 +32,7 @@ import ShadowBox from '../../components/base/ShadowBox';
 import LeftNavButton from '../../components/base/LeftNavButton';
 import { customTabsTheme, CustomTabTitle } from '../../components/base/CustomTabs';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
-import { Alert, CircleInformation } from 'grommet-icons';
+import { Alert } from 'grommet-icons';
 import { Item, ItemStat, Food, DropSource } from '../../data/domain/items';
 import { Storage } from '../../data/domain/storage';
 import { Prayer } from '../../data/domain/world-3/prayers';
@@ -51,6 +50,7 @@ import { Chip } from '../../data/domain/world-4/lab';
 import { AnvilWrapper } from '../../data/domain/world-1/anvil';
 import { Alerts, CardSetAlert } from '../../data/domain/alerts';
 import { POExtra } from '../../data/domain/world-2/postoffice';
+import TalentDisplay from '../../components/players/TalentDisplay';
 
 import { useShallow } from 'zustand/react/shallow'
 import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
@@ -852,87 +852,6 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
     )
 }
 
-function TalentDisplay({ player }: { player: Player }) {
-    const size = useContext(ResponsiveContext);
-    const [bookMaxLevel, setBookMaxLevel] = useState<boolean>(false);
-    return (
-        <Box pad="medium" gap="medium">
-            <Text size='medium'>Talents</Text>
-            <Box direction="row" gap="medium">
-                {player.extraLevelsFromTalent > 0 && <TextAndLabel label="Symbols Of Beyond" text={`+${player.extraLevelsFromTalent}`} />}
-                {player.extraLevelsFromBear > 0 && <TextAndLabel label="Bear God" text={`+${player.extraLevelsFromBear}`} />}
-                {player.extraLevelsFromES > 0 && <TextAndLabel label="Elemental Sorcerer" text={`+${player.extraLevelsFromES}`} />}
-                {player.extraLevelsFromAchievements > 0 && <TextAndLabel label="Achievements" text={`+${player.extraLevelsFromAchievements}`} />}
-                {player.extraLevelsFromEquinox > 0 && <TextAndLabel label="Equinox" text={`+${player.extraLevelsFromEquinox}`} />}
-                {player.extraLevelsFromSlug > 0 && <TextAndLabel label="Slug companion" text={`+${player.extraLevelsFromSlug}`} />}
-                {(player.extraLevelsFromBear > 0 || player.extraLevelsFromTalent > 0 || player.extraLevelsFromES > 0 || player.extraLevelsFromSlug > 0 || player.extraLevelsFromEquinox > 0 || player.extraLevelsFromAchievements > 0) &&
-                    <CheckBox
-                        checked={bookMaxLevel}
-                        label={<Box direction="row" align="center">
-                            <Text margin={{ right: 'xsmall' }} size="small">Show book level</Text>
-                            <TipDisplay
-                                body={<Box gap="xsmall">
-                                    <Text>This will match the in-game UI showing you the max level without bonuses from symbols and bear god.</Text>
-                                </Box>}
-                                size="small"
-                                heading='Show book level'
-                                maxWidth='medium'
-                                direction={TipDirection.Down}
-                            >
-                                <CircleInformation size="small" />
-                            </TipDisplay>
-                        </Box>}
-                        onChange={(event) => setBookMaxLevel(event.target.checked)}
-                    />
-                }
-            </Box>
-            {
-                ClassTalentMap[ClassIndex[player.class.replace(/ /g, "_") as keyof typeof ClassIndex]].concat(["Special Talent 1", "Special Talent 2", "Special Talent 3", "Special Talent 4"]).map((talentPage, _) => {
-                    return (
-                        <Box key={`player_${player.playerID}_talents_${talentPage}`} align="center" gap="medium">
-                            <Text>{talentPage}</Text>
-                            <Grid columns={{ count: 5, size: "20%" }} fill>
-                                {
-                                    GetTalentArray(talentPage).map((originalTalent, index) => {
-                                        const talent = player.talents.find(x => x.skillIndex == originalTalent.skillIndex);
-                                        if (talent) {
-                                            const maxLeveLToShow = bookMaxLevel ? talent.bookMaxLevel : talent.maxLevel;
-                                            return (
-                                                <Box key={index}>
-                                                    <Tip
-                                                        plain
-                                                        content={
-                                                            <Box pad="small" gap="small" background="white">
-                                                                <Text size={size == "small" ? 'small' : ''} weight="bold">{talent.name} ({talent.level}/{maxLeveLToShow})</Text>
-                                                                <hr style={{ width: "100%" }} />
-                                                                <Text>{talent.getBonusText()}</Text>
-                                                            </Box>
-                                                        }
-                                                        dropProps={{ align: { top: 'bottom' } }}
-                                                    >
-                                                        <Box pad="xxsmall" key={`player_${player.playerID}_talents_${index}`} direction={size == "small" ? "column" : "row"} gap="xxsmall" align="center">
-                                                            <Box title={talent.name} style={{ opacity: talent.level > 0 ? 1 : 0.2 }} align="center">
-                                                                <IconImage data={talent.getImageData()} scale={size == "small" ? 0.5 : 0.8} />
-                                                            </Box>
-                                                            <Box direction="row">
-                                                                <Text color={talent.maxLevel > 0 && talent.level >= talent.maxLevel ? 'status-ok' : ''} size={size == "small" ? "xsmall" : "small"}>{`${talent.level} / ${maxLeveLToShow}`}</Text>
-                                                            </Box>
-                                                        </Box>
-                                                    </Tip>
-                                                </Box>
-                                            )
-                                        }
-                                        return <></>
-                                    })
-                                }
-                            </Grid>
-                        </Box>
-                    )
-                })
-            }
-        </Box>
-    );
-}
 
 function PostOfficeDisplay({ player, extra }: { player: Player, extra: POExtra }) {
     const size = useContext(ResponsiveContext);

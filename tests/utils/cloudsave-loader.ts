@@ -6,14 +6,19 @@
  */
 
 import fs from 'fs';
+import path from 'path';
 import { Cloudsave } from '../../data/domain/cloudsave';
 import { initAllItems } from '../../data/domain/items';
 import { initAccountDataKeys, updateIdleonData } from '../../data/domain/idleonData';
 import { StaticRepositories } from '../../data/domain/repositories';
 import { normalizeCompanionStates } from '../../data/domain/companions/companionState';
+import { guardAndFreeze } from './readonly-game-data';
 const accountDataset = require('../helpers/account-dataset.cjs') as {
   resolveTestSavePath(saveName: string): string;
 };
+
+// Each Jest runtime owns its prepared accounts. Grouped suites share this module.
+const preparedGameDataBySavePath = new Map<string, Map<string, unknown>>();
 
 // Mock localStorage for Node.js environment
 if (typeof global !== 'undefined' && !global.localStorage) {
@@ -26,8 +31,7 @@ if (typeof global !== 'undefined' && !global.localStorage) {
   global.localStorage = localStorageMock as any;
 }
 
-export const loadTestSave = (saveName: string): Cloudsave => {
-  const savePath = accountDataset.resolveTestSavePath(saveName);
+const loadTestSaveFromPath = (savePath: string): Cloudsave => {
   if (!fs.existsSync(savePath)) {
     throw new Error(`Test save file not found: ${savePath}. Place save files in tests/fixtures/saves/`);
   }
@@ -35,8 +39,17 @@ export const loadTestSave = (saveName: string): Cloudsave => {
   return Cloudsave.fromJSON(saveData);
 };
 
+export const loadTestSave = (saveName: string): Cloudsave =>
+  loadTestSaveFromPath(accountDataset.resolveTestSavePath(saveName));
+
 export const loadGameDataFromSave = (saveName: string): Map<string, any> => {
-  const cloudSave = loadTestSave(saveName);
+  const savePath = path.resolve(accountDataset.resolveTestSavePath(saveName));
+  const cachedGameData = preparedGameDataBySavePath.get(savePath);
+  if (cachedGameData) {
+    return cachedGameData;
+  }
+
+  const cloudSave = loadTestSaveFromPath(savePath);
   
   // Initialize all items data (needed for domain calculations)
   const allItems = initAllItems();
@@ -52,8 +65,11 @@ export const loadGameDataFromSave = (saveName: string): Map<string, any> => {
   // Update account data with parsed cloudsave
   const idleonData = updateIdleonData(accountData, cloudSave, charNames, companions, serverVars, true);
   
-  validateGameDataStructure(idleonData.getData());
-  return idleonData.getData();
+  const gameData = idleonData.getData();
+  validateGameDataStructure(gameData);
+  guardAndFreeze(gameData);
+  preparedGameDataBySavePath.set(savePath, gameData);
+  return gameData;
 };
 
 export const validateGameDataStructure = (gameData: Map<string, any>): void => {

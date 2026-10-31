@@ -39,12 +39,12 @@
     },
     {
       "label": "divinity_minor_bonus_4",
-      "expression": "idleon.callFunction('Divinity', 'Bonus_Minor', 3, 4)",
+      "expression": "idleon.callFunction('Divinity', 'Bonus_Minor', __TARGET_PLAYER__, 4)",
       "description": "Native minor divinity bonus for the target player and bonus category 4"
     },
     {
       "label": "divinity_minor_bonus_7",
-      "expression": "idleon.callFunction('Divinity', 'Bonus_Minor', 3, 7)",
+      "expression": "idleon.callFunction('Divinity', 'Bonus_Minor', __TARGET_PLAYER__, 7)",
       "description": "Native minor divinity bonus for the target player and bonus category 7"
     }
   ]

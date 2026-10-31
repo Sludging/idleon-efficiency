@@ -1,5 +1,21 @@
 {
   "extractions": {
+    "efficiency_stamp_talent_multiplier": {
+      "expression": "Math.max(idleon.callFunction('GetTalentNumber',1,625),1)",
+      "result": 1
+    },
+    "mining_efficiency_stamp": {
+      "expression": "idleon.callFunction('StampBonusOfTypeX','BaseMinEff')",
+      "result": 6200.306451612903
+    },
+    "all_base_efficiency_stamp": {
+      "expression": "idleon.callFunction('StampBonusOfTypeX','BaseAllEff')",
+      "result": 16326.686217008795
+    },
+    "all_base_skill_efficiency": {
+      "expression": "idleon.callFunction('SkillStats','AllBaseSkillEff')",
+      "result": 19917.110368453137
+    },
     "mining_card_factor": {
       "expression": "idleon.callFunction(\"CardBonusREAL\", 24)",
       "result": 77
@@ -36,41 +52,41 @@
       "expression": "idleon.callFunction(\"SkillStats\", \"MiningEfficiency\")",
       "result": {
         "type": "large_number",
-        "value": "8.351811138782258e+26"
+        "value": "1.1921626379865813e+27"
       }
     },
     "chopping_efficiency": {
       "expression": "idleon.callFunction(\"SkillStats\", \"ChoppinEfficiency\")",
       "result": {
         "type": "large_number",
-        "value": "15565022434122541000"
+        "value": "22723686178372410000"
       }
     },
     "fishing_efficiency": {
       "expression": "idleon.callFunction(\"SkillStats\", \"FishingEfficiency\")",
       "result": {
         "type": "large_number",
-        "value": "1.059298803080666e+22"
+        "value": "1.3943061650074417e+22"
       }
     },
     "catching_efficiency": {
       "expression": "idleon.callFunction(\"SkillStats\", \"CatchingEfficiency\")",
       "result": {
         "type": "large_number",
-        "value": "45193043436810056"
+        "value": "59229330641644296"
       }
     },
     "tool_m_final_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.ToolM",
-      "result": 461.4679314636946
+      "result": 469.89631863757336
     },
     "tool_a_final_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.ToolA",
-      "result": 461.581743906173
+      "result": 470.0122097842585
     },
     "fishing_skill_stats_dn": {
       "expression": "(() => { idleon.callFunction(\"SkillStats\", \"FishingEfficiency\"); return idleon.engine.getGameAttribute(\"DummyNumbersStatManager\").h.SkillStatsDN; })()",
-      "result": 42312.55624858724
+      "result": 47416.118710714785
     },
     "mining_efficiency_vial": {
       "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.AlchVials.h.MinEff",

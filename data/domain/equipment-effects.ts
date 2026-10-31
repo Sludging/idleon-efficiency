@@ -4,8 +4,8 @@ export type SkillPowerFamily = 'Mining' | 'Choppin' | 'Fishing' | 'Catching' | '
 export type EquipmentProperty = ItemProperty | `${SkillPowerFamily}_Power`;
 
 /**
- * Equipment effects use exact labels; trailing spaces keep dungeon effects distinct.
- * Match item labels by replacing underscores with spaces, without trimming.
+ * Equipment effects use exact labels; leading and trailing spaces are significant.
+ * Item labels omit the leading space on flat effects.
  * Source: docs/game-snippets/gallery/IDforETCbonus.1.21.js.
  */
 export enum EquipmentBonus {
@@ -229,3 +229,12 @@ const equipmentEffects: Record<number, string> = {
 };
 
 export const getEquipmentEffect = (bonus: number): string | undefined => equipmentEffects[bonus];
+
+const itemEffectLabels = new Map<string, string>();
+for (const effect of Object.values(equipmentEffects)) {
+    itemEffectLabels.set(effect, effect);
+    if (effect.startsWith(' ')) itemEffectLabels.set(effect.slice(1), effect);
+}
+
+export const getItemEquipmentEffect = (label: string): string | undefined =>
+    itemEffectLabels.get(label.replace(/_/g, ' ').toUpperCase());

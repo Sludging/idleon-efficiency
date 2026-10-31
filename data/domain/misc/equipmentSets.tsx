@@ -8,7 +8,7 @@ import { EquipmentSetsModel } from "../model/equipmentSetsModel";
 export class EquipmentSet {
 
     unlocked: boolean = false;
-    constructor(public index: number, public data: EquipmentSetsModel, public imageData: ImageData) { }
+    constructor(public index: number, public data: EquipmentSetsModel, public imageData: ImageData | undefined) { }
 
     getImageData = () => this.imageData;
 
@@ -37,11 +37,7 @@ export class EquipmentSet {
             ].find(name => name !== "none" && itemsByName.has(name));
             const item = itemName ? itemsByName.get(itemName) : undefined;
 
-            if (!item) {
-                throw new Error(`No equipment image item found for ${equipmentSet.data.name}`);
-            }
-
-            return new EquipmentSet(index, equipmentSet.data, item.getImageData());
+            return new EquipmentSet(index, equipmentSet.data, item?.getImageData());
         });
     }
 }
@@ -93,11 +89,7 @@ export class EquipmentSets extends Domain {
     }
 
     getSetBonus = (setName: string, raw: boolean = false) => {
-        const set = this.equipmentSets.find(set => set.data.name == setName);
-
-        if (!set) {
-            throw new Error(`Set ${setName} not found`);
-        }
+        const set = this.equipmentSets.find(set => set.data.name == setName)!;
 
         if (set.unlocked) {
             return set.getBonus(raw);

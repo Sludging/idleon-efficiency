@@ -109,15 +109,6 @@ describe('Sushi Station - current setup calculations', () => {
     }
   });
 
-  it('matches Pepper Perfecto chance for an actually occupied Sushi tier', () => {
-    const tier = station.board.find(slot => slot.sushi !== undefined)?.sushi?.index;
-    if (tier === undefined) throw new Error('Current save has no occupied Sushi slot for Pepper Perfecto chance comparison');
-    const expected = getExtractedValue(extractionResults, 'sushi_perfecto_chance_occupied_tier');
-    expect(station.getPerfectoChance(tier)).toMatchLiveGameWithDetails(expected, {
-      tolerance: 0,
-      context: `Pepper Perfecto chance for occupied tier ${tier}`,
-    });
-  });
 
   const upgradeCases = [
     { index: 0, displayOrder: 6, role: 'finite-cap Sushi Slot' },

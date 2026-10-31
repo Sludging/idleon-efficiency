@@ -33,10 +33,10 @@ describe('Emperor public results', () => {
         const expectedShowdowns = loadExtractionResults(extractionResultsName)
             .extractions.emperor_next_award_showdowns.result as number[];
 
-        for (const index of Array.from({ length: 12 }, (_, bonusIndex) => bonusIndex)) {
-            expect(emperor.getNextAwardShowdown(index)).toMatchLiveGameWithDetails(
-                expectedShowdowns[index],
-                { tolerance: 0, context: `Next awarded Showdown for Emperor bonus ${index}` },
+        for (const bonus of emperor.emperorBonuses) {
+            expect(emperor.getNextAwardShowdown(bonus)).toMatchLiveGameWithDetails(
+                expectedShowdowns[bonus.index],
+                { tolerance: 0, context: `Next awarded Showdown for Emperor bonus ${bonus.index}` },
             );
         }
     });

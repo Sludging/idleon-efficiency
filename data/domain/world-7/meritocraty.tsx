@@ -9,8 +9,13 @@ import { EventShop } from "../eventShop";
 import { LegendTalents } from "./legendTalents";
 import { SushiStation } from "./sushi";
 import { JellyOperator } from "./jellyOperator";
+import { BallotRotation } from "../ballotRotation";
 
 export class Meritocraty extends Domain {
+    private rotation!: BallotRotation;
+    private selectedCandidateSlot: number = 0;
+    private savedVotePeriod: number = -1;
+
     clamWorkBonus: number = 0;
     companionBonus: number = 0;
     companionBonus161: number = 0;
@@ -42,6 +47,7 @@ export class Meritocraty extends Domain {
 
     init(_allItems: Item[], _charCount: number) {
         this.bonuses = MeritocratyBonus.fromBase(initMeritocratyBonusRepo());
+        this.rotation = BallotRotation.forMeritocracy();
 
         return this;
     }
@@ -50,6 +56,9 @@ export class Meritocraty extends Domain {
         const meritocraty = data.get(this.getDataKey()) as Meritocraty;
         const serverVars = data.get("servervars") as Record<string, any>;
         const optionList = data.get("OptLacc") as number[];
+
+        meritocraty.selectedCandidateSlot = Number(optionList?.[450] ?? 0);
+        meritocraty.savedVotePeriod = Number(optionList?.[451] ?? -1);
 
         const charCount = data.get("charCount") as number;
         // Website bonuses are account-wide: a known cleared W7 portal on any character
@@ -64,8 +73,8 @@ export class Meritocraty extends Domain {
         }
 
         meritocraty.canVote = optionList[472] == 1;
-        // Earned effects follow the saved active selector, not the server's newest winner.
-        meritocraty.currentBonusIndex = optionList[453] ?? 0;
+        // On startup, the game replaces the saved selection with the server's current winner.
+        meritocraty.currentBonusIndex = serverVars.voteCat2?.[0] ?? 1;
 
         // The game server payload names these categories voteCat2.
         if (!serverVars.voteCat2 || serverVars.voteCat2.length == 0) {
@@ -81,8 +90,27 @@ export class Meritocraty extends Domain {
         meritocraty.ongoingVoteBottomOptionPercent = (serverVars.votePercent2[2] ?? 0);
     }
 
+    getNextRotationAt(unixTimeSeconds: number): number {
+        return this.rotation.getNextRotationAt(unixTimeSeconds);
+    }
+
+    hasVotedThisWeek(unixTimeSeconds: number): boolean {
+        return Number.isInteger(this.selectedCandidateSlot)
+            && this.selectedCandidateSlot >= 1
+            && this.selectedCandidateSlot <= 3
+            && this.savedVotePeriod === this.rotation.getPeriod(unixTimeSeconds);
+    }
+
     getCurrentBonus = (index: number) => {
         return this.currentBonusIndex == index ? (this.bonuses.find(bonus => bonus.index == index)?.data.bonus ?? 0) * this.getBonusMultiplier() : 0;
+    }
+
+    getPotentialBonus = (index: number): number => {
+        return (this.bonuses.find(bonus => bonus.index == index)?.data.bonus ?? 0) * this.getBonusMultiplier();
+    }
+
+    getPotentialBonusMultiplier = (index: number): number => {
+        return 1 + this.getPotentialBonus(index) / 100;
     }
 
     getBonusMultiplier = () => {
@@ -117,7 +145,7 @@ export const updateMeritocratyBonus = (data: Map<string, any>) => {
     const legendTalentsBonus24 = legendTalents.getBonusFromIndex(24);
     const arcadeBonus59 = arcade.bonuses.find(bonus => bonus.index == 59)?.getBonus() || 0;
     const eventShopBonus23 = eventShop.isBonusOwned(23) ? 20 : 0;
-    // Sushi RoG_BonusQTY gates by the total unique unlock count, not a scene or level.
+    // Masago Temaki's unlock bonus applies once 52 unique Sushi are unlocked.
     const sushiBonus51 = sushi.getUniqueSushi() > 51 ? sushi.getBonusFromIndex(51) : 0;
     const jellyBonus33 = jelly.obstructions.find(obstruction => obstruction.index == 33)?.getBonus() ?? 0;
 

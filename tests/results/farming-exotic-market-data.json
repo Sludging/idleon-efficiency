@@ -185,9 +185,9 @@
         },
         {
           "index": 30,
-          "level": 0,
+          "level": 1187,
           "isOrganic": false,
-          "bonus": 0
+          "bonus": 27.13763145861911
         },
         {
           "index": 31,
@@ -287,9 +287,9 @@
         },
         {
           "index": 47,
-          "level": 85,
+          "level": 357,
           "isOrganic": false,
-          "bonus": 15.668202764976957
+          "bonus": 52.616064848931465
         },
         {
           "index": 48,
@@ -368,14 +368,14 @@
     "exotic_native_current_ids": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[24].getValue(\"ActorEvents_623\",\"_GenINFO\")[181]",
       "result": [
-        20,
-        12,
-        10,
-        18,
-        55,
+        4,
+        14,
+        38,
         51,
-        21,
-        56
+        37,
+        47,
+        5,
+        30
       ]
     },
     "organic_labels_owned": {

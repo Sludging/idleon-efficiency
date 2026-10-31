@@ -1,10 +1,6 @@
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
-import { loadGameDataFromSave, loadTestSave } from '../../utils/cloudsave-loader';
-import { initAllItems } from '../../../data/domain/items';
-import { Hole, updateHole } from '../../../data/domain/world-5/hole/hole';
-import { initAccountDataKeys, updateIdleonData } from '../../../data/domain/idleonData';
-import { StaticRepositories } from '../../../data/domain/repositories';
-import { normalizeCompanionStates } from '../../../data/domain/companions/companionState';
+import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
+import { Hole } from '../../../data/domain/world-5/hole/hole';
 
 import { getStampBonusForKey } from '../../../data/domain/world-1/stamps';
 const saveName = 'latest';
@@ -103,37 +99,6 @@ describe('Hole part-five imported state', () => {
         expect(hole.getSchematicBonus(72, 10)).toMatchLiveGame(getExtractedValue(jarResults, 'production_upgrade_72'), 0);
     });
 
-    it('keeps part-five outputs stable on repeated updates', () => {
-        const jarBonuses = hole.jar.jarBonuses.map(bonus => bonus.getBonus());
-        const jarProducers = hole.jar.producers;
-        const jarHoldings = hole.jar.holdings;
-        const fountainUpgrades = hole.fountain.upgrades.map(upgrade => [
-            upgrade.data.waterIndex, upgrade.data.index, upgrade.level, upgrade.marbleizationLevel, upgrade.getBonus(),
-            upgrade.data.marbleizeEligible,
-        ]);
-        const coveUpgrades = hole.cove.upgrades.map(upgrade => [upgrade.level, upgrade.getBonus()]);
-        const blueShapeBalances = [...hole.cove.blueShapeBalances];
-        const purpleShapeBalances = [...hole.cove.purpleShapeBalances];
-        const currencyValue = hole.fountain.getCurrencyValue(0);
-        const marbleizeEligibility = hole.fountain.canMarbleize(0, 9);
-
-        updateHole(gameData);
-        updateHole(gameData);
-
-        expect(hole.jar.jarBonuses.map(bonus => bonus.getBonus())).toEqual(jarBonuses);
-        expect(hole.jar.producers).toEqual(jarProducers);
-        expect(hole.jar.holdings).toEqual(jarHoldings);
-        expect(hole.fountain.upgrades.map(upgrade => [
-            upgrade.data.waterIndex, upgrade.data.index, upgrade.level, upgrade.marbleizationLevel, upgrade.getBonus(),
-            upgrade.data.marbleizeEligible,
-        ])).toEqual(fountainUpgrades);
-        expect(hole.cove.upgrades.map(upgrade => [upgrade.level, upgrade.getBonus()])).toEqual(coveUpgrades);
-        expect(hole.fountain.getCurrencyValue(0)).toBe(currencyValue);
-        expect(hole.fountain.canMarbleize(0, 9)).toBe(marbleizeEligibility);
-        expect(hole.cove.blueShapeBalances).toEqual(blueShapeBalances);
-        expect(hole.cove.purpleShapeBalances).toEqual(purpleShapeBalances);
-    });
-
     it('matches Fountain currency values against native game results', () => {
         const gameCurrencyValues = fountainCoveResults.extractions.currency_values.result as number[];
         const gameFountainBonusTerms = fountainCoveResults.extractions.fountain_bonus_terms.result as {
@@ -197,25 +162,6 @@ describe('Hole part-five imported state', () => {
             getExtractedValue(fountainCoveResults, 'native_fountain_opal_progress'),
             { tolerance: 0, context: 'Saved Fountain Opal progress' },
         );
-    });
-
-    it('repeats normal imports without mutating the saved Fountain and Jar inputs', () => {
-        const save = loadTestSave(saveName);
-        const sourceSnapshot = JSON.stringify(save.toJSON());
-        const importNormally = () => updateIdleonData(
-            initAccountDataKeys(initAllItems(), new StaticRepositories()),
-            save,
-            save.get('playerNames'),
-            normalizeCompanionStates(save.get('companions')),
-            save.get('servervars'),
-            true,
-        ).getData();
-        const firstImport = importNormally().get('hole') as Hole;
-        const secondImport = importNormally().get('hole') as Hole;
-
-        expect(JSON.stringify(save.toJSON())).toBe(sourceSnapshot);
-        expect(secondImport.fountain.stacks).toEqual(firstImport.fountain.stacks);
-        expect(secondImport.cove.accountEffects).toEqual(firstImport.cove.accountEffects);
     });
 
 

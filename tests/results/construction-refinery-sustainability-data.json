@@ -1,0 +1,446 @@
+{
+  "extractions": {
+    "refinery_sustainability_inputs": {
+      "expression": "(()=>{const e=idleon.engine;const refinery=e.getGameAttribute('Refinery');const info=e.getGameAttribute('CustomLists').h.RefineryInfo;const printer=e.getGameAttribute('Printer');const slots=[];for(let i=5;i+13<printer.length;i+=14){for(const offset of [10,12]){const name=printer[i+offset];if(name&&name!=='Blank')slots.push({name,quantity:Number(printer[i+offset+1]),factor:idleon.callFunction('WorkbenchStuff','ExtraPrinting',(i-5)/14,0)});}}return {refinery,info,task:e.getGameAttribute('Tasks')[2][2][6],cycles:[0,1,2].map(i=>idleon.callFunction('Refinery','CycleInitialTime',i)),powers:info.map((_,i)=>idleon.callFunction('Refinery','PowerPerCycle',refinery[i+3][1])),companion:idleon.callFunction('Companions',35),slots};})()",
+      "result": {
+        "refinery": [
+          [
+            8,
+            6.173429489135742,
+            11.173429489135742,
+            194.17342944070697,
+            170106387.17342925,
+            170106387.17342925,
+            170106387.17342925,
+            170106387.17342925
+          ],
+          [
+            "Refinery5",
+            "Refinery6",
+            "Refinery3",
+            "Refinery1",
+            "Refinery2",
+            "Refinery4",
+            "Refinery8",
+            "Refinery7"
+          ],
+          [
+            13868650,
+            4281015,
+            17758447,
+            10004068,
+            16930868,
+            17903141,
+            257407,
+            237929
+          ],
+          [
+            998556,
+            336,
+            0,
+            1,
+            0
+          ],
+          [
+            1000000,
+            176,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            12,
+            0,
+            1,
+            0.01
+          ],
+          [
+            1000000,
+            135,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            14,
+            0,
+            1,
+            0.01
+          ],
+          [
+            0,
+            8,
+            0,
+            1,
+            0.01
+          ],
+          [
+            81950,
+            16,
+            0,
+            1,
+            0
+          ],
+          [
+            68540,
+            14,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "info": [
+          [
+            "Grasslands1",
+            "Copper",
+            "Blank",
+            "Blank",
+            "Blank",
+            "Blank",
+            "10",
+            "5",
+            "0",
+            "0",
+            "0",
+            "0",
+            "Refinery1"
+          ],
+          [
+            "Forest3",
+            "ForestTree",
+            "Refinery1",
+            "Blank",
+            "Blank",
+            "Blank",
+            "10",
+            "5",
+            "2",
+            "0",
+            "0",
+            "0",
+            "Refinery2"
+          ],
+          [
+            "DesertA1",
+            "Fish1",
+            "Bug1",
+            "Refinery2",
+            "Blank",
+            "Blank",
+            "50",
+            "30",
+            "40",
+            "2",
+            "0",
+            "0",
+            "Refinery3"
+          ],
+          [
+            "SnowA1",
+            "Soul2",
+            "Critter3",
+            "Refinery3",
+            "Blank",
+            "Blank",
+            "10",
+            "2",
+            "1",
+            "1",
+            "0",
+            "0",
+            "Refinery4"
+          ],
+          [
+            "SnowB4",
+            "Fish4",
+            "Bug3",
+            "Critter4",
+            "Refinery4",
+            "Blank",
+            "25",
+            "5",
+            "5",
+            "5",
+            "2",
+            "0",
+            "Refinery5"
+          ],
+          [
+            "SnowC4",
+            "VoidBar",
+            "Tree7",
+            "Bug6",
+            "Soul4",
+            "Refinery5",
+            "50",
+            "5",
+            "5",
+            "5",
+            "5",
+            "2",
+            "Refinery6"
+          ],
+          [
+            "SpiB2",
+            "Soul7",
+            "Critter11",
+            "Refinery6",
+            "Blank",
+            "Blank",
+            "10",
+            "2",
+            "1",
+            "1",
+            "0",
+            "0",
+            "Refinery7"
+          ],
+          [
+            "w7A1",
+            "Fish12",
+            "Bug15",
+            "PrehistriumBar",
+            "Refinery7",
+            "Blank",
+            "25",
+            "5",
+            "5",
+            "5",
+            "2",
+            "0",
+            "Refinery8"
+          ],
+          [
+            "w7B10",
+            "FillerMaterial",
+            "FillerMaterial",
+            "FillerMaterial",
+            "Soul8",
+            "Refinery8",
+            "50",
+            "5",
+            "5",
+            "5",
+            "5",
+            "2",
+            "Refinery9"
+          ]
+        ],
+        "task": 5,
+        "cycles": [
+          7,
+          26,
+          923
+        ],
+        "powers": [
+          5772,
+          2490,
+          75,
+          1764,
+          92,
+          44,
+          110,
+          92,
+          3
+        ],
+        "companion": 2,
+        "slots": [
+          {
+            "name": "Copper",
+            "quantity": 10101132105.699354,
+            "factor": 3798.110239869742
+          },
+          {
+            "name": "Copper",
+            "quantity": 10101132105.699354,
+            "factor": 3798.110239869742
+          },
+          {
+            "name": "OakTree",
+            "quantity": 97977235976.3825,
+            "factor": 3798.110239869742
+          },
+          {
+            "name": "OakTree",
+            "quantity": 97977235976.3825,
+            "factor": 3798.110239869742
+          },
+          {
+            "name": "Bug15",
+            "quantity": 2459345.17988005,
+            "factor": 3798.110239869742
+          },
+          {
+            "name": "Bug1",
+            "quantity": 589119983.913874,
+            "factor": 3798.110239869742
+          },
+          {
+            "name": "Copper",
+            "quantity": 27362171667.4218,
+            "factor": 3798.110239869742
+          },
+          {
+            "name": "Copper",
+            "quantity": 27362171667.4218,
+            "factor": 3798.110239869742
+          },
+          {
+            "name": "OakTree",
+            "quantity": 13018537151.4598,
+            "factor": 3798.110239869742
+          },
+          {
+            "name": "BirchTree",
+            "quantity": 7983066213.212927,
+            "factor": 3798.110239869742
+          },
+          {
+            "name": "GalaxyA1",
+            "quantity": 533565.8712,
+            "factor": 3798.110239869742
+          },
+          {
+            "name": "LavaA1",
+            "quantity": 455442.6528,
+            "factor": 3798.110239869742
+          },
+          {
+            "name": "GalaxyA1",
+            "quantity": 1961922,
+            "factor": 3798.110239869742
+          },
+          {
+            "name": "GalaxyA3",
+            "quantity": 1865059,
+            "factor": 3798.110239869742
+          },
+          {
+            "name": "Copper",
+            "quantity": 6331015254.76345,
+            "factor": 3798.110239869742
+          },
+          {
+            "name": "Copper",
+            "quantity": 6331015254.76345,
+            "factor": 3798.110239869742
+          },
+          {
+            "name": "OakTree",
+            "quantity": 9897662705.37914,
+            "factor": 3798.110239869742
+          },
+          {
+            "name": "OakTree",
+            "quantity": 9897662705.37914,
+            "factor": 3798.110239869742
+          },
+          {
+            "name": "Bug1",
+            "quantity": 144669513.679334,
+            "factor": 3798.110239869742
+          },
+          {
+            "name": "Bug1",
+            "quantity": 144669513.679334,
+            "factor": 3798.110239869742
+          }
+        ]
+      }
+    }
+  },
+  "errors": {}
+}

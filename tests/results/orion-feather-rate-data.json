@@ -4,7 +4,7 @@
       "expression": "idleon.callFunction(\"Summoning\",\"OwlFeatherRate\",0,0)",
       "result": {
         "type": "large_number",
-        "value": "8.393285540621327e+31"
+        "value": "1.4832649703336055e+32"
       }
     }
   },

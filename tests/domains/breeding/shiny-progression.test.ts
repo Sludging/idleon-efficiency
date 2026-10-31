@@ -9,6 +9,7 @@ type ShinySpeciesProgression = {
   world: number;
   petIndex: number;
   petId: string;
+  progress: number;
   level: number;
   requirement: number;
 };
@@ -64,29 +65,33 @@ describe('Breeding Shiny progression and bonuses', () => {
       expect(pet.data.petId).toBe(expected.petId);
     });
 
-    it('matches the Shiny level with the game', () => {
-      expect(pet.shinyLevel).toMatchLiveGameWithDetails(expected.level, {
+    it('matches active Shiny progression and inactive bonus state with the game', () => {
+      const debugInfo = {
+        world: expected.world,
+        petIndex: expected.petIndex,
+        shinyProgress: pet.shinyProgress,
+      };
+      expect(pet.shinyProgress).toMatchLiveGameWithDetails(expected.progress, {
         tolerance: 0,
-        context: `${expected.petId} Shiny level`,
-        debugInfo: {
-          world: expected.world,
-          petIndex: expected.petIndex,
-          shinyProgress: pet.shinyProgress,
-        },
+        context: `${expected.petId} Shiny progress`,
+        debugInfo,
       });
-    });
 
-    it('matches the next Shiny requirement with the game', () => {
-      expect(pet.getNextShinyGoal()).toMatchLiveGameWithDetails(expected.requirement, {
-        tolerance: 0,
-        context: `${expected.petId} next Shiny requirement`,
-        debugInfo: {
-          world: expected.world,
-          petIndex: expected.petIndex,
-          shinyLevel: pet.shinyLevel,
-          shinyProgress: pet.shinyProgress,
-        },
-      });
+      // The game uses Shiny levels and requirements only for pets with positive Shiny progress.
+      if (expected.progress > 0) {
+        expect(pet.shinyLevel).toMatchLiveGameWithDetails(expected.level, {
+          tolerance: 0,
+          context: `${expected.petId} active Shiny level`,
+          debugInfo,
+        });
+        expect(pet.getNextShinyGoal()).toMatchLiveGameWithDetails(expected.requirement, {
+          tolerance: 0,
+          context: `${expected.petId} active next Shiny requirement`,
+          debugInfo,
+        });
+      } else {
+        expect(pet.getShinyBonus()).toBe(0);
+      }
     });
   });
 

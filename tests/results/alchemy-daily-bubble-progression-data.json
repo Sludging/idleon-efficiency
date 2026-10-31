@@ -1,0 +1,97 @@
+{
+  "extractions": {
+    "nblb_enabled": {
+      "expression": "idleon.callFunction(\"ArcaneType\", \"is_NBLB_on\", 0, 0)",
+      "result": 1
+    },
+    "nblb_upgrade_count": {
+      "expression": "idleon.callFunction(\"ArcaneType\", \"NBLB_bubbleQTY\", 0, 0)",
+      "result": 10
+    },
+    "nblb_min_levels": {
+      "expression": "(()=>{const h=idleon.engine.gameAttributes.h;const saved=h.DummyNumber;try{return idleon.callFunction(\"ArcaneType\",\"NBLB_bubbleLVrangeDisp\",0,0)}finally{h.DummyNumber=saved}})()",
+      "result": 3
+    },
+    "nblb_max_levels": {
+      "expression": "(()=>{const h=idleon.engine.gameAttributes.h;const saved=h.DummyNumber;try{return idleon.callFunction(\"ArcaneType\",\"NBLB_bubbleLVrangeDisp\",99,0)}finally{h.DummyNumber=saved}})()",
+      "result": 11
+    },
+    "nblb_mainframe": {
+      "expression": "idleon.callFunction(\"MainframeBonus\", 3)",
+      "result": 4.2
+    },
+    "nblb_pyrite": {
+      "expression": "idleon.callFunction(\"MainframeBonus\", 107)",
+      "result": 3.2
+    },
+    "nblb_mainframe_connected_base": {
+      "expression": "Number(idleon.engine.getGameAttribute('CustomLists').h.LabMainBonus[3][5])",
+      "result": 1
+    },
+    "nblb_pyrite_potential": {
+      "expression": "Number(idleon.engine.getGameAttribute('CustomLists').h.JewelDesc[7][12]) * idleon.callFunction('MainframeBonus', 8)",
+      "result": 3.2
+    },
+    "nblb_amberite_potential_base": {
+      "expression": "Number(idleon.engine.getGameAttribute('CustomLists').h.ArtifactInfo[12][3])",
+      "result": 1
+    },
+    "nblb_amberite_potential_ancient": {
+      "expression": "Number(idleon.engine.getGameAttribute('CustomLists').h.ArtifactInfo[12][6])",
+      "result": 1
+    },
+    "nblb_amberite_base": {
+      "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 12, 0)",
+      "result": 1
+    },
+    "nblb_amberite_tier": {
+      "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 12, 1)",
+      "result": 5
+    },
+    "nblb_merit": {
+      "expression": "Number(idleon.engine.getGameAttribute('Tasks')[2][3][6])",
+      "result": 3
+    },
+    "nblb_superbit_4": {
+      "expression": "idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 4, 0)",
+      "result": 1
+    },
+    "nblb_superbit_22": {
+      "expression": "idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 22, 0)",
+      "result": 1
+    },
+    "nblb_normal_targets": {
+      "expression": "(()=>{if(!idleon.callFunction('ArcaneType','is_NBLB_on',0,0))return [];const levels=idleon.getAttr('CauldronInfo');const count=idleon.callFunction('ArcaneType','NBLB_bubbleQTY',0,0);const selected=[];for(let n=0;n<count;n++){let lowest=99999,chosen=null;for(let cauldron=0;cauldron<4;cauldron++){for(let bubble=0;bubble<15;bubble++){const id=1000*cauldron+bubble;const level=Number(levels[cauldron][bubble]);if(!selected.includes(id)&&level>=2&&level<=lowest){lowest=level;chosen=id}}}if(lowest<10000)selected.push(chosen)}return selected})()",
+      "result": [
+        2012,
+        1013,
+        1010,
+        1004,
+        1008,
+        14,
+        9,
+        8,
+        3010,
+        3003
+      ]
+    },
+    "kruk_targets": {
+      "expression": "(()=>{if(!idleon.callFunction('Divinity','Bonus_MAJOR',0,8))return [];const tier=idleon.callFunction('Thingies','ZenithMarketBonus',1,0);const targets=[0,1000,2000];if(tier>=1)targets.push(3000);if(tier>=2)targets.push(3009);if(tier>=3)targets.push(11);if(tier>=4)targets.push(1011);if(tier>=5)targets.push(1002);return targets})()",
+      "result": [
+        0,
+        1000,
+        2000,
+        3000,
+        3009,
+        11,
+        1011,
+        1002
+      ]
+    },
+    "kruk_active": {
+      "expression": "idleon.callFunction(\"Divinity\", \"Bonus_MAJOR\", 0, 8)",
+      "result": 1
+    }
+  },
+  "errors": {}
+}

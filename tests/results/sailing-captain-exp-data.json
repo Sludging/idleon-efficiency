@@ -5,35 +5,35 @@
       "result": [
         {
           "index": 0,
-          "requirement": 3999447717.9498796
+          "requirement": 10345173381.11453
         },
         {
           "index": 1,
-          "requirement": 3999447717.9498796
+          "requirement": 10345173381.11453
         },
         {
           "index": 2,
-          "requirement": 3999447717.9498796
+          "requirement": 10345173381.11453
         },
         {
           "index": 3,
-          "requirement": 3999447717.9498796
+          "requirement": 10345173381.11453
         },
         {
           "index": 4,
-          "requirement": 3999447717.9498796
+          "requirement": 10345173381.11453
         },
         {
           "index": 5,
-          "requirement": 3999447717.9498796
+          "requirement": 10345173381.11453
         },
         {
           "index": 6,
-          "requirement": 3999447717.9498796
+          "requirement": 10345173381.11453
         },
         {
           "index": 7,
-          "requirement": 3999447717.9498796
+          "requirement": 10345173381.11453
         },
         {
           "index": 8,
@@ -41,47 +41,47 @@
         },
         {
           "index": 9,
-          "requirement": 3999447717.9498796
+          "requirement": 10345173381.11453
         },
         {
           "index": 10,
-          "requirement": 3999447717.9498796
+          "requirement": 10345173381.11453
         },
         {
           "index": 11,
-          "requirement": 3999447717.9498796
+          "requirement": 10345173381.11453
         },
         {
           "index": 12,
-          "requirement": 3999447717.9498796
+          "requirement": 10345173381.11453
         },
         {
           "index": 13,
-          "requirement": 3999447717.9498796
+          "requirement": 10345173381.11453
         },
         {
           "index": 14,
-          "requirement": 3999447717.9498796
+          "requirement": 10345173381.11453
         },
         {
           "index": 15,
-          "requirement": 3999447717.9498796
+          "requirement": 10345173381.11453
         },
         {
           "index": 16,
-          "requirement": 3999447717.9498796
+          "requirement": 10345173381.11453
         },
         {
           "index": 17,
-          "requirement": 3999447717.9498796
+          "requirement": 10345173381.11453
         },
         {
           "index": 18,
-          "requirement": 3999447717.9498796
+          "requirement": 10345173381.11453
         },
         {
           "index": 19,
-          "requirement": 3999447717.9498796
+          "requirement": 10345173381.11453
         },
         {
           "index": 30,
@@ -106,71 +106,71 @@
       "result": [
         {
           "index": 0,
-          "expPerTrip": 17899.51655605381
+          "expPerTrip": 19072.384000000002
         },
         {
           "index": 1,
-          "expPerTrip": 53698.54966816143
+          "expPerTrip": 57217.152
         },
         {
           "index": 2,
-          "expPerTrip": 89497.58278026906
+          "expPerTrip": 95361.92000000001
         },
         {
           "index": 3,
-          "expPerTrip": 178995.16556053812
+          "expPerTrip": 190723.84000000003
         },
         {
           "index": 4,
-          "expPerTrip": 268492.74834080716
+          "expPerTrip": 286085.76
         },
         {
           "index": 5,
-          "expPerTrip": 492236.7052914798
+          "expPerTrip": 524490.56
         },
         {
           "index": 6,
-          "expPerTrip": 760729.453632287
+          "expPerTrip": 810576.3200000001
         },
         {
           "index": 7,
-          "expPerTrip": 1342463.7417040358
+          "expPerTrip": 1430428.8
         },
         {
           "index": 8,
-          "expPerTrip": 2684927.4834080716
+          "expPerTrip": 2860857.6
         },
         {
           "index": 9,
-          "expPerTrip": 5369854.966816143
+          "expPerTrip": 5721715.2
         },
         {
           "index": 10,
-          "expPerTrip": 8054782.450224215
+          "expPerTrip": 8582572.8
         },
         {
           "index": 11,
-          "expPerTrip": 13424637.41704036
+          "expPerTrip": 14304288.000000002
         },
         {
           "index": 12,
-          "expPerTrip": 26849274.83408072
+          "expPerTrip": 28608576.000000004
         },
         {
           "index": 13,
-          "expPerTrip": 44748791.39013453
+          "expPerTrip": 47680960.00000001
         },
         {
           "index": 14,
-          "expPerTrip": 89497582.78026906
+          "expPerTrip": 95361920.00000001
         },
         {
           "index": 15,
-          "expPerTrip": 894975827.8026906
+          "expPerTrip": 953619200.0000001
         },
         {
           "index": 16,
-          "expPerTrip": 2237439569.5067263
+          "expPerTrip": 2384048000
         }
       ]
     }

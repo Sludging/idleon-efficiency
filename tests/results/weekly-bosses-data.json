@@ -1,0 +1,120 @@
+{
+  "extractions": {
+    "native_weekly_packet": {
+      "expression": "JSON.stringify({weekly:idleon.getAttr('WeeklyBoss'),options:idleon.getAttr('OptionsListAccount').slice(180,195),players:idleon.getAttr('GetPlayersUsernames'),catalogs:{boss:idleon.getAttr('CustomLists').h.WeeklyBOSS,shop:idleon.getAttr('CustomLists').h.WeeklySHOP,task:idleon.getAttr('CustomLists').h.WeeklyTASK,action:idleon.getAttr('CustomLists').h.WeeklyACTION},generation:idleon.getAttr('PixelHelperActor')[24].behaviors.getBehavior('ActorEvents_623')._GenINFO.slice(35,47),clock:idleon.getAttr('TimeAway'),greenPortalRequirement:idleon.getAttr('CustomLists').h.MapDetails[1][0][0],operands:idleon.getAttr('GetPlayersUsernames').map(name=>({name,levels:idleon.getAttr('PlayerDATABASE').h[name].h.Lv0,greenResidual:idleon.getAttr('PlayerDATABASE').h[name].h.KillsLeft2Advance[1][0]})),currentQuantity:idleon.callFunction('WeeklyBoss','TaskQTY',0),materialCapacity:idleon.callFunction('MaxCapacity','bCraftOtherPlayer')})",
+      "result": "{\"weekly\":{\"h\":{\"d_27\":-1,\"d_16\":-1,\"d_17\":-1,\"d_28\":-1,\"d_18\":-1,\"d_19\":-1,\"set3\":10,\"d_0\":-1,\"d_1\":-1,\"d_2\":-1,\"d_3\":-1,\"d_30\":-1,\"d_4\":-1,\"d_31\":-1,\"d_20\":-1,\"d_32\":71,\"d_10\":-1,\"d_21\":-1,\"d_5\":-1,\"d_33\":-1,\"d_6\":-1,\"d_22\":-1,\"d_11\":-1,\"d_34\":13,\"d_23\":-1,\"d_12\":-1,\"d_7\":-1,\"d_35\":32,\"d_8\":-1,\"d_24\":-1,\"d_13\":-1,\"d_25\":-1,\"d_14\":-1,\"d_9\":-1,\"d_26\":-1,\"UI_j\":1,\"d_15\":-1,\"d_76\":32,\"d_36\":-1,\"d_37\":-1,\"d_38\":-1,\"d_66\":9,\"d_39\":-1,\"d_40\":-1,\"d_42\":-1,\"d_49\":44,\"d_57\":44,\"d_70\":44,\"d_43\":42,\"d_65\":42,\"d_44\":319,\"d_45\":153,\"d_46\":158,\"d_47\":118,\"d_48\":4366109,\"d_50\":19,\"d_51\":568872384,\"d_52\":60,\"d_53\":3,\"d_54\":10,\"d_55\":6,\"d_56\":1652,\"d_58\":462540,\"d_59\":209360656,\"d_63\":144,\"d_64\":41,\"d_67\":12,\"d_68\":60,\"d_69\":6,\"d_72\":1,\"d_74\":85,\"d_75\":6,\"d_71\":5,\"d_60\":1,\"d_41\":-1,\"d_73\":1}},\"options\":[13,0,0,1,2242,0,0,0,19,0,0,2964,7699,0,1],\"players\":[\"Sludgadin\",\"Sludgev2\",\"Sludgev3\",\"Sludgev4\",\"Sludgev5\",\"Sludgev6\",\"SludgeMan\",\"Sludgev8\",\"Sludgev9\",\"Sludgev10\",\"Sludgev11\"],\"catalogs\":{\"boss\":[[\"Eclectic_Lazlo\",\"2\",\"3\",\"18\",\"200\",\"2.6\",\"440\",\"90\",\"0\"],[\"Decibop_Box\",\"1\",\"21\",\"2\",\"250\",\"2.8\",\"442\",\"95\",\"-5\"],[\"Mutalius_Cuboid\",\"5\",\"19\",\"4\",\"300\",\"2.7\",\"434\",\"105\",\"-15\"],[\"Jupiteye_Major\",\"6\",\"24\",\"18\",\"400\",\"2.5\",\"443\",\"100\",\"-10\"],[\"The_Nugenator\",\"17\",\"7\",\"0\",\"100\",\"3.7\",\"440\",\"95\",\"-5\"],[\"Fat_Eggplonk\",\"4\",\"18\",\"19\",\"600\",\"2.3\",\"441\",\"91\",\"-1\"],[\"Mollo_Gomm\",\"0\",\"15\",\"18\",\"1000\",\"1.9\",\"440\",\"101\",\"-11\"],[\"Unit_T-31\",\"8\",\"9\",\"20\",\"200\",\"3\",\"438\",\"93\",\"-3\"],[\"SWR_Containment\",\"7\",\"23\",\"24\",\"350\",\"2.6\",\"439\",\"105\",\"-15\"]],\"shop\":[[[\"Galaxy_UI\",\"50\",\"UImain_a\",\"filler\",\"0\"],[\"Hardwood_UI\",\"15\",\"UImain_b\",\"filler\",\"0\"],[\"Deadwood_UI\",\"15\",\"UImain_c\",\"filler\",\"0\"],[\"Corkboard_UI\",\"25\",\"UImain_d\",\"filler\",\"0\"],[\"Catacomb_UI\",\"40\",\"UImain_e\",\"filler\",\"0\"],[\"Rift_UI\",\"35\",\"UImain_f\",\"filler\",\"0\"],[\"Magma_UI\",\"40\",\"UImain_g\",\"filler\",\"0\"],[\"Grassy_UI\",\"30\",\"UImain_h\",\"filler\",\"0\"],[\"Sandburn_UI\",\"25\",\"UImain_i\",\"filler\",\"0\"],[\"Graveyard_UI\",\"20\",\"UImain_j\",\"filler\",\"0\"],[\"Goldwood_UI\",\"60\",\"UImain_k\",\"filler\",\"0\"],[\"Peachwood_UI\",\"20\",\"UImain_l\",\"filler\",\"0\"]],[[\"Pink_Headband\",\"999\",\"EquipmentHats10\",\"The_legendary_Pink_Headband\",\"1\"],[\"Killroy_Skulls\",\"14\",\"Quest69\",\"25_Skulls_for_Killroy's_Shop,_deposited_instantly_for_use\",\"0\"],[\"Trophy_Starbook\",\"25\",\"TalentBook1\",\"Trophy_Star_Talent_book_with_random_Max_LV_up_to_Lv_100\",\"0\"],[\"Death_Starbook\",\"25\",\"TalentBook1\",\"Death_Star_Talent_book_with_random_Max_LV_up_to_Lv_100\",\"0\"],[\"The_Crow_Perch\",\"125\",\"EquipmentHats84\",\"A_little_crow_on_a_hat,_perfect_for_premiumify-ing\",\"1\"],[\"Gold_Food\",\"12\",\"FoodG\",\"100_Gold_Food_of_the_type_shown_to_the_left\",\"0\"],[\"Statues\",\"12\",\"EquipmentStatues\",\"1000_Statues_of_the_type_shown_to_the_left\",\"0\"],[\"Silver_Pocketwatch\",\"2\",\"Quest76\",\"Alter_your_daily_reset_time_forward_or_backward_by_15_mins\",\"1\"],[\"Gold_Pocketwatch\",\"60\",\"Quest77\",\"Shift_time_forward_by_24_hours,_triggering_daily_bonuses_and_resets\",\"1\"]]],\"task\":[[\"You_notice_a_weakspot_that_could_be_further_exposed_with_a_swing_of_your_pickaxe...\",\"60\",\"Mining_LV_of_{\",\"a\"],[\"A_small_hole_on_the_speaker_glistens_in_the_light,_just_large_enough_to_fit_a_fishing_hook_in...\",\"50\",\"Fishing_LV_of_{\",\"b\"],[\"It_looks_like_the_boss_is_literally_made_of_wood..._fortunately_your_hatchet_is_on_hand.\",\"60\",\"Choppin_LV_of_{\",\"c\"],[\"The_air_feels_electric,_as_though_there_are_spirits_abound._Maybe_they_could_be_of_assistance...\",\"50\",\"Worship_LV_of_{\",\"d\"],[\"Knowing_which_toxins_will_be_most_effective_will_aid_in_your_next_move...\",\"50\",\"Alchemy_LV_of_{\",\"e\"],[\"Perhaps_a_bone_could_be_dislodged_by_entangling_it_with_the_end_of_your_net...\",\"50\",\"Catching_LV_of_{\",\"f\"],[\"Trapping_critters_has_given_you_a_keen_sense_of_where_best_to_strike...\",\"40\",\"Trapping_LV_of_{\",\"g\"],[\"You_don't_quite_know_why,_but_your_ability_to_cook_various_meals_fills_you_with_confidence!\",\"35\",\"Cooking_LV_of_{\",\"h\"],[\"All_that_time_spent_in_the_tube_has_got_to_be_useful_for_something,_right?_Maybe_this_situation?\",\"60\",\"Laboratory_LV_of_{\",\"i\"],[\"You_notice_the_divine_signaling_to_you_from_their_volcanos_with_what_is_likely_helpful_advice...\",\"50\",\"Divinity_LV_of_{\",\"j\"],[\"A_good_bill_of_health_can_help_turn_any_fight_around,_regardless_of_the_opponent.\",\"50000\",\"Max_HP_of_{\",\"k\"],[\"The_wisdom_that_comes_with_large_mana_reserves_will_make_your_moves_that_more_effective...\",\"50000\",\"Max_MP_of_{\",\"l\"],[\"You_take_a_moment_to_pinpoint_the_small_areas_of_weakness_to_aim_for...\",\"200000\",\"Accuracy_of_{\",\"m\"],[\"You've_heard_that_great_defence_is_the_best_offence,_and_are_hoping_it_holds_true_here...\",\"100000\",\"Defence_of_{\",\"n\"],[\"With_a_spring_in_your_step,_you_consider_how_best_to_use_your_agile_frame_to_your_advantage...\",\"220\",\"Movement_Speed_of_{\",\"o\"],[\"There's_got_to_be_something_useful_in_that_massive_inventory_of_yours...\",\"10000\",\"Material_Carry_Cap_of_{\",\"p\"],[\"You've_learned_a_thing_or_two_from_all_your_past_endeavors,_making_your_next_move_all_the_better...\",\"100\",\"{_Completed_Quests\",\"q\"],[\"Cake_by_cake_has_fallen_before_you,_and_how_different_could_a_massive_boss_really_be_from_a_cake?\",\"5\",\"{_Digits_of_Crabcake_Kills\",\"r\"],[\"You_lean_on_the_vast_amount_of_experience_you've_accumulated_to_drive_your_decision...\",\"175\",\"Class_LV_of_{\",\"s\"],[\"Even_something_as_trivial_as_defeating_the_weakest_opponent_can_be_helpful_if_done_endlessly...\",\"5\",\"{_Digits_of_Green_Mushroom_Kills\",\"t\"],[\"Standing_firm_against_charging_mobs_has_given_you_determination_in_situations_like_this...\",\"5\",\"{_Digits_of_Ram_Kills\",\"u\"],[\"The_hours_you've_spent_learning_to_fight_with_a_height_disadvantage_are_sure_to_pay_off_here...\",\"5\",\"{_Digits_of_Stiltmole_Kills\",\"v\"],[\"Knowledge_and_skills_can_only_get_you_so_far,_but_THIS_is_something_you_can_always_rely_on...\",\"7\",\"{_Digits_of_Max_Damage\",\"w\"],[\"Dissecting_the_choccie_monsters_gives_a_deep_understanding_of..._wait_how_does_this_help?\",\"5\",\"{_Digits_of_Choccie_Kills\",\"y\"],[\"Construction_is_a_lot_more_than_just_building,_it's_also_about_breaking_stuff...\",\"50\",\"Construction_LV_of_{\",\"z\"]],\"action\":[[\"(ATTACK)_You_steady_your_nerves_and_strike_the_boss_directly,_dealing_{_damage\",\"1\",\"1000\",\"none\",\"0\"],[\"(BUFF)_You_drop_your_weapon,_drawing_attention_and_allowing_the_next_ATTACK_to_deal_{%_more_damage\",\"1\",\"150\",\"a\",\"1\"],[\"(BUFF)_You_tell_the_others_of_a_new_technique,_so_every_ATTACK_in_the_future_deals_{%_more_damage\",\"0.5\",\"60\",\"b\",\"1\"],[\"(MISC)_Tired_and_slightly_agitated,_you_take_a_tea_drinking_break,_giving_+{%_Class_EXP_for_all_characters.\",\"1\",\"30\",\"c\",\"2\"],[\"(ATTACK)_You_burn_their_skin,_dealing_{_damage._This_exact_damage_re-triggers_each_time_an_ATTACK_is_chosen.\",\"1\",\"400\",\"d\",\"0\"],[\"(BUFF)_You_conjure_a_friendly_spirit,_which_boosts_all_damage_dealt_to_boss_by_{%\",\"1\",\"40\",\"e\",\"1\"],[\"(ATTACK)_You_clamp_a_cursed_ring_to_their_toe,_dealing_{_damage_now_and_each_time_a_BUFF_is_cast_in_the_future.\",\"1\",\"250\",\"k\",\"0\"],[\"(ATTACK)_Dual_wielding_the_next_characters_weapon,_you_deal_{_damage,_but_the_next_char_can't_choose_ATTACK.\",\"1.5\",\"1500\",\"f\",\"0\"],[\"(MISC)_You_add_extra_chilly_cheese_to_everyone's_hotdogs_outside_the_fight,_giving_+{%_DMG_to_all_characters\",\"1\",\"10\",\"g\",\"2\"],[\"(ATTACK)_You_just_start_randomly_grabbing_weapons,_dealing_{_damage,_but_the_next_2_chars_can't_choose_ATTACK.\",\"1.5\",\"2500\",\"f\",\"0\"],[\"(BUFF)_You_cast_a_gross_but_effective_fog,_increasing_all_damage_by_{%,_but_the_next_char_can't_choose_BUFF.\",\"1.5\",\"120\",\"h\",\"1\"],[\"(ATTACK)_You_trip_and_fall_dealing_{_damage_lmao,_but_the_boss's_HP_gets_set_to_30%_from_laughing_so_hard.\",\"1\",\"0\",\"none\",\"0\"],[\"(BUFF)_You_align_the_energy_in_the_air,_so_that_the_next_BUFF_is_2x_more_powerful,_except_for_this_one._No_4x_for_you.\",\"0\",\"1\",\"i\",\"1\"],[\"(BUFF)_You_create_a_portal_to_the_'oof_owie'_dimension,_so_that_whatever_damage_hits_the_boss_next_is_doubled.\",\"0\",\"1\",\"j\",\"1\"],[\"(MISC)_You_notice_a_trophy_on_the_ground,_and_run_to_pick_it_up_instead_of_attacking.\",\"0\",\"1\",\"none\",\"2\"],[\"(ATTACK)_Deal_{_damage_for_each_previous_ATTACK_cast._If_3_or_more,_rewind_a_character_and_reset_number_of_casts\",\"1\",\"650\",\"none\",\"0\"],[\"(BUFF)_Boost_all_damage_by_{%_for_each_previous_BUFF_cast._If_3_or_more,_rewind_a_character_and_reset_number_of_casts\",\"1\",\"25\",\"e\",\"1\"],[\"(MISC)_You_reminisce_on_all_the_times_MISC_was_cast._If_2_or_more,_rewind_back_to_1st_character._This_only_works_once.\",\"0\",\"1\",\"none\",\"2\"],[\"(MISC)_You_tell_a_really_freakin'_funny_joke_to_your_final_character,_who_gets_to_select_an_extra_turn!\",\"0\",\"1\",\"o\",\"2\"],[\"(ATTACK)_You_sense_weakness_and_deal_a_crushing_blow_of_{_damage._If_boss_is_under_half_HP,_damage_is_dealt_twice.\",\"1\",\"700\",\"none\",\"0\"],[\"(ATTACK)_Punch_them_into_yesteryear,_dealing_{_damage._If_9+_ATTACK_casted,_rewind_to_1st_character._Only_works_once.\",\"1\",\"500\",\"none\",\"0\"],[\"(BUFF)_Summon_a_blackhole,_boosting_all_damage_by_{%._If_9+_BUFF_casted,_rewind_to_1st_character._Only_works_once.\",\"1\",\"30\",\"e\",\"1\"]]},\"generation\":[null,0,662,[19,4,4,4,4,18,18,19,19,4,18,18,4,4,4],0,0,[2,8,4,6],0,8,19,[16,15,17,10,5,18,11,2,8],[[3,13,4],[2,21,14],[19,10,11],[5,20,3],[6,9,1],[15,17,2],[13,7,11],[21,5,4],[12,19,15],[1,9,10],[16,20,14],[4,21,19],[8,2,11],[18,5,10],[17,15,16]]],\"clock\":{\"h\":{\"GlobalTime\":1792913073.943,\"Arcade\":1792650796.0279999,\"Player\":1792913073.943,\"Construction\":1792913073.943,\"Sailing\":1792913073.943,\"Cauldron\":1792913073.943,\"Printer\":1792910019.6,\"Cooking\":1792913073.943,\"DailyRewards\":115754317.26775424,\"BookLib\":3500.475496219049,\"Pets\":1792913073.943,\"ShopRestock\":76677.73224663734,\"Forge\":1792913073.943,\"PostOfficeRefresh\":76678.86699962616}},\"greenPortalRequirement\":21,\"operands\":[{\"name\":\"Sludgadin\",\"levels\":[1405,102,162,121,100,160,99,125,2595,138,109,125,464,196,479,429,456,1058,216,165,72,-1,-1,-1,-1],\"greenResidual\":-10993436899.678938},{\"name\":\"Sludgev2\",\"levels\":[1406,119,146,120,115,177,106,125,2114,143,120,125,522,196,433,429,456,1058,216,242,72,-1,-1,-1,-1],\"greenResidual\":-9816553166.29629},{\"name\":\"Sludgev3\",\"levels\":[1416,84,148,85,81,160,91,127,2083,116,123,125,485,196,450,429,456,1058,215,291,72,-1,-1,-1,-1],\"greenResidual\":-245771790376.148},{\"name\":\"Sludgev4\",\"levels\":[1404,112,167,159,115,160,105,124,3565,152,125,125,474,196,443,430,459,1057,216,224,72,-1,-1,-1,-1],\"greenResidual\":-1092191332.731111},{\"name\":\"Sludgev5\",\"levels\":[1374,85,132,141,80,160,81,124,2083,153,123,125,512,196,451,429,456,1059,215,288,72,-1,-1,-1,-1],\"greenResidual\":-8152200379.62613},{\"name\":\"Sludgev6\",\"levels\":[1433,108,146,131,105,160,116,129,2105,129,123,125,466,196,450,429,456,1057,215,246,72,-1,-1,-1,-1],\"greenResidual\":-38055792925.5555},{\"name\":\"SludgeMan\",\"levels\":[1359,156,142,216,146,160,196,132,3028,137,123,125,459,196,464,429,456,997,216,302,72,-1,-1,-1,-1],\"greenResidual\":-12047907.953537343},{\"name\":\"Sludgev8\",\"levels\":[1380,68,124,16,113,160,36,130,3380,110,123,125,482,196,440,429,456,997,215,272,72,-1,-1,-1,-1],\"greenResidual\":-1177351478.08},{\"name\":\"Sludgev9\",\"levels\":[1419,109,127,136,112,169,112,130,2097,116,118,125,524,196,361,429,456,997,216,244,72,-1,-1,-1,-1],\"greenResidual\":-8245606640.5},{\"name\":\"Sludgev10\",\"levels\":[1392,107,127,123,94,160,116,133,2094,116,122,125,483,196,449,429,456,997,215,277,72,-1,-1,-1,-1],\"greenResidual\":-7658563108.70426},{\"name\":\"Sludgev11\",\"levels\":[1340,65,95,90,1,137,80,1,2604,1,120,125,503,196,470,429,456,873,216,210,72,0,-1,-1,-1],\"greenResidual\":-589326.9009501034}],\"currentQuantity\":11,\"materialCapacity\":92905822}"
+    },
+    "native_weekly_kill_operands": {
+      "expression": "JSON.stringify({bossId:idleon.callFunction('WeeklyBoss','BossID',0),killMaps:[53,1,116,205,158].map(mapIndex=>({mapIndex,portalRequirement:idleon.getAttr('CustomLists').h.MapDetails[mapIndex][0][0],residuals:idleon.getAttr('GetPlayersUsernames').map(name=>idleon.getAttr('PlayerDATABASE').h[name].h.KillsLeft2Advance[mapIndex][0])}))})",
+      "result": "{\"bossId\":5,\"killMaps\":[{\"mapIndex\":53,\"portalRequirement\":150,\"residuals\":[-1009276817.8054283,-305402.036959401,-19809859.9242946,-2807763768.470268,-103502609.913985,-4459351.91166695,-1999000,-1689217535.73333,-45556,-52.1230291262121,150]},{\"mapIndex\":1,\"portalRequirement\":21,\"residuals\":[-10993436899.678938,-9816553166.29629,-245771790376.148,-1092191332.731111,-8152200379.62613,-38055792925.5555,-12047907.953537343,-1177351478.08,-8245606640.5,-7658563108.70426,-589326.9009501034]},{\"mapIndex\":116,\"portalRequirement\":250000,\"residuals\":[-382021405.759337,-5040536.20705817,-1398561.63252815,-1956115998.6227376,-373475560.380956,-479189754.915402,-1750000,-1606667844,-418478617,-163368521,-147641.80760200028]},{\"mapIndex\":205,\"portalRequirement\":75000,\"residuals\":[-11636704.41433296,-174664902.83626273,-82662034.7595131,-41497.3267487175,-4602.91736169731,-639044969.4174507,-1962146.1732368302,-5692590823.56631,-8181.8360821251,-45193435.2856311,75000]},{\"mapIndex\":158,\"portalRequirement\":120000,\"residuals\":[-1713666.418557083,-362844619.372331,-23079.2800000033,-688518.923615384,-1693850216.33185,-2818065.295737184,-1880000,-6605102507.91754,-133961,-24886,120000]}]}"
+    }
+  },
+  "errors": {},
+  "metadata": {
+    "pairing": {
+      "server": "http://127.0.0.1:3101",
+      "gameVersion": {
+        "title": "Halloween_Event",
+        "version": "1.24"
+      },
+      "fixture": "tests/fixtures/saves/latest.json",
+      "fixtureSha256": "c1f9598ecdcffcb8c20c21c59e8c9faae315b058c3526b2ecdea9bf30cd24707",
+      "cloudSaveEqualsFixture": true,
+      "status": {
+        "source": "offline",
+        "cdpConnected": true,
+        "injected": true,
+        "gameReady": true,
+        "character": 3,
+        "playerName": "Sludgev4",
+        "evaluationTimeMs": 1792913071943,
+        "advancedMilliseconds": 1700,
+        "scene": "xSpaceaaTown",
+        "sceneID": 78
+      },
+      "fixtureGlobalTime": 1792913071.9430003,
+      "runtimeGlobalTime": 1792913073.943
+    },
+    "capacity": {
+      "targetPlayerIndex": 0,
+      "contextPlayerIndex": 3,
+      "nativeCall": "idleon.callFunction(\"MaxCapacity\", \"bCraftOtherPlayer\")"
+    },
+    "reviewedSourceProjections": {
+      "provenance": "docs/plans/weekly-bosses-game-evidence.md:198-219,249-287; docs/game-snippets/weekly-boss/WeeklyBoss.1.24.js; WeeklyGeneration.source.1.24.js; Rand.1.24.js. Fixed reviewed results, not extractor formulas or fresh native future-week observations.",
+      "currentTaskQuantities": {
+        "values": [
+          11,
+          177,
+          160,
+          160,
+          160,
+          1433,
+          1359,
+          10,
+          10,
+          160,
+          1340
+        ],
+        "source": "Native TaskQTY directly observes turn 0 only. Other values are fixed reviewed projections from captured PlayerDATABASE levels and Green Mushroom portal requirement/residuals. Matching source is native 1.24:237109-237215. No turn was changed."
+      },
+      "futureWeeks": {
+        "weekNumbers": [
+          2964,
+          2965,
+          2966,
+          2967,
+          2968,
+          2969,
+          2970,
+          2971,
+          2972,
+          2973
+        ],
+        "startsAtSeconds": [
+          1792627200,
+          1793232000,
+          1793836800,
+          1794441600,
+          1795046400,
+          1795651200,
+          1796256000,
+          1796860800,
+          1797465600,
+          1798070400
+        ],
+        "endsAtSeconds": [
+          1793232000,
+          1793836800,
+          1794441600,
+          1795046400,
+          1795651200,
+          1796256000,
+          1796860800,
+          1797465600,
+          1798070400,
+          1798675200
+        ],
+        "bossIds": [
+          5,
+          1,
+          7,
+          0,
+          1,
+          7,
+          7,
+          8,
+          4,
+          0
+        ],
+        "source": "Fixed independently reviewed first-draw source projections from native 1.24:1313-1378 and 254547-254659. Only week 2964 has matching native generated-array observation. No future task, action, or shop native coverage is claimed."
+      }
+    },
+    "coverageLimits": [
+      "No future native week capture; future boss IDs and week bounds use fixed reviewed source projections.",
+      "Only current turn quantity and target0/context3 material capacity are native dispatcher results.",
+      "No player/turn changes, save changes, actions, scenes, clock advances, or RNG calls.",
+      "No synthetic stale save, reset, optional bonus presence, alternate capacity context, or purchase execution coverage."
+    ]
+  }
+}

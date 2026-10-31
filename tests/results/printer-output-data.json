@@ -2,7 +2,7 @@
   "extractions": {
     "printer_addition_extra_printing": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"AdditionExtraPrinting\", 0, 0)",
-      "result": 632.3413413958257
+      "result": 633.0183733116237
     },
     "sailing_gold_relic_tier_increment": {
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 4, 1)",
@@ -10,7 +10,7 @@
     },
     "best_divine_knight_talent_178": {
       "expression": "idleon.callFunction(\"getbonus2\", 1, 178, -1)",
-      "result": 4.028497409326425
+      "result": 4.0310077519379846
     },
     "rift_skill_mastery_printer_output": {
       "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillETC\", 3)",

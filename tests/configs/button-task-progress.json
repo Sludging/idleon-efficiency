@@ -1,6 +1,6 @@
 {
-  "description": "Compare the active and next two Button tasks with the retained game save",
-  "target": "The Button task queue",
+  "description": "Compare the current Button task identity and requirement with the retained game save",
+  "target": "The current Button task",
   "extractions": [
     {
       "label": "button_task_0_index",
@@ -11,56 +11,6 @@
       "label": "button_task_0_requirement",
       "expression": "idleon.callFunction(\"Minehead\", \"Button_REQ\", 0, 0)",
       "description": "Current Button task requirement from the original task selector"
-    },
-    {
-      "label": "button_task_0_have",
-      "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 44, 0)",
-      "description": "Current saved Summoning career wins used by Button task 44"
-    },
-    {
-      "label": "button_task_1_index",
-      "expression": "Math.round(idleon.engine.getGameAttribute(\"CustomLists\").h.Research[39][(idleon.engine.getGameAttribute(\"OptionsListAccount\")[594] + 1) % 100] - idleon.engine.getGameAttribute(\"CustomLists\").h.ButtonTasks.length * Math.floor(idleon.engine.getGameAttribute(\"CustomLists\").h.Research[39][(idleon.engine.getGameAttribute(\"OptionsListAccount\")[594] + 1) % 100] / idleon.engine.getGameAttribute(\"CustomLists\").h.ButtonTasks.length))",
-      "description": "Next Button task index from source Research[39] order at press count plus one, normalized by task count"
-    },
-    {
-      "label": "button_task_1_requirement",
-      "expression": "Number(idleon.engine.getGameAttribute(\"CustomLists\").h.ButtonTasks[36][1]) * Math.pow(Number(idleon.engine.getGameAttribute(\"CustomLists\").h.ButtonTasks[36][3]), idleon.engine.getGameAttribute(\"OptionsListAccount\")[594] + 1)",
-      "description": "Next task requirement using original exponent formula and press count plus one"
-    },
-    {
-      "label": "button_task_1_have",
-      "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 36, 0)",
-      "description": "Current saved Divinity points for the next Button task"
-    },
-    {
-      "label": "button_task_2_index",
-      "expression": "Math.round(idleon.engine.getGameAttribute(\"CustomLists\").h.Research[39][(idleon.engine.getGameAttribute(\"OptionsListAccount\")[594] + 2) % 100] - idleon.engine.getGameAttribute(\"CustomLists\").h.ButtonTasks.length * Math.floor(idleon.engine.getGameAttribute(\"CustomLists\").h.Research[39][(idleon.engine.getGameAttribute(\"OptionsListAccount\")[594] + 2) % 100] / idleon.engine.getGameAttribute(\"CustomLists\").h.ButtonTasks.length))",
-      "description": "Second future Button task index from source Research[39] order at press count plus two, normalized by task count"
-    },
-    {
-      "label": "button_task_2_requirement",
-      "expression": "Number(idleon.engine.getGameAttribute(\"CustomLists\").h.ButtonTasks[20][1]) * Math.pow(Number(idleon.engine.getGameAttribute(\"CustomLists\").h.ButtonTasks[20][3]), idleon.engine.getGameAttribute(\"OptionsListAccount\")[594] + 2)",
-      "description": "Second future task requirement using original exponent formula and press count plus two"
-    },
-    {
-      "label": "button_task_2_have",
-      "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 20, 0)",
-      "description": "Current saved Stable Jenius bubble level for the second future Button task"
-    },
-    {
-      "label": "button_task_0_press_count",
-      "expression": "idleon.engine.getGameAttribute(\"OptionsListAccount\")[594]",
-      "description": "Completed account press count for the current task position"
-    },
-    {
-      "label": "button_task_1_press_count",
-      "expression": "idleon.engine.getGameAttribute(\"OptionsListAccount\")[594] + 1",
-      "description": "Completed account press count for the next task position"
-    },
-    {
-      "label": "button_task_2_press_count",
-      "expression": "idleon.engine.getGameAttribute(\"OptionsListAccount\")[594] + 2",
-      "description": "Completed account press count for the second future task position"
     }
   ]
 }

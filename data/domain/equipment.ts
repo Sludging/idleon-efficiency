@@ -1,5 +1,5 @@
 import { Item, type Food, type StoneProps, type Tool } from './items';
-import { EquipmentBonus, getEquipmentEffect } from './equipment-effects';
+import { EquipmentBonus, getEquipmentEffect, getItemEquipmentEffect } from './equipment-effects';
 import type { EquipmentProperty, ItemProperty, PrimaryAttribute, SkillPowerFamily } from './equipment-effects';
 import { initEquipmentMetadataRepo } from './data/EquipmentMetadataRepo';
 import type { Player } from './player';
@@ -121,8 +121,8 @@ export class PlayerEquipment {
       ? 1 + modifiers.finalSlotResearchPercent / 100 : 1;
     for (const stat of item.itemStats) {
      if ((stat.stoneName !== 'UQ1val' && stat.stoneName !== 'UQ2val' && stat.stoneName !== 'Nothing') || !stat.extra || stat.extra === '0') continue;
-     // Preserve trailing spaces: dungeon-labelled effects are distinct normal-loadout effects.
-     const effect = stat.extra.toUpperCase().replace(/_/g, ' ');
+     const effect = getItemEquipmentEffect(stat.extra);
+     if (effect === undefined) continue;
      effects.set(effect, (effects.get(effect) ?? 0) + stat.getValue() * multiplier);
     }
    }

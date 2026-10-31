@@ -2,27 +2,27 @@
   "extractions": {
     "royal_armory_upgrade_price_display_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 1, 0)",
-      "result": 55923417.940763004
+      "result": 5936422442.899058
     },
     "royal_armory_upgrade_price_display_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 2, 0)",
-      "result": 4727366.036838408
+      "result": 120955916.51425755
     },
     "royal_armory_upgrade_price_display_5": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 5, 0)",
-      "result": 1148934350.855209
+      "result": 34468030525.656265
     },
     "royal_armory_upgrade_price_display_30": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 30, 0)",
-      "result": 37603227.02949452
+      "result": 2718526473.19815
     },
     "royal_armory_upgrade_price_display_41": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 41, 0)",
-      "result": 3908858.2886261344
+      "result": 19544291.44313067
     },
     "royal_armory_price_masterclass_multiplier": {
       "expression": "idleon.callFunction(\"Summoning\", \"AllMasterclassCostRedux\", 0, 0)",
-      "result": 0.11111111111111112
+      "result": 0.5555555555555556
     },
     "royal_armory_price_jelly_quantity_11": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 11, 0)",

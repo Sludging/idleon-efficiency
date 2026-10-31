@@ -2,15 +2,15 @@
   "extractions": {
     "boat_0_artifact_find_multiplier": {
       "expression": "idleon.callFunction(\"Sailing\", \"BoatArtiMulti\", 0, 0)",
-      "result": 10874669071.52262
+      "result": 17522253790.757076
     },
     "boat_1_artifact_find_multiplier": {
       "expression": "idleon.callFunction(\"Sailing\", \"BoatArtiMulti\", 1, 0)",
-      "result": 11964545404.448538
+      "result": 19195594201.55875
     },
     "sailing_artifact_bonus_3": {
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 3, 0)",
-      "result": 1116
+      "result": 1176
     },
     "boat_0_captain_artifact_bonus": {
       "expression": "window.frames[0].__idleon_cheats__[\"scripts.ActorEvents_579\"]._customBlock_CaptBonusCalc(3, window.frames[0].__idleon_cheats__[\"com.stencyl.Engine\"].engine.getGameAttribute(\"Boats\")[0][0])",
@@ -18,7 +18,7 @@
     },
     "boat_1_captain_artifact_bonus": {
       "expression": "window.frames[0].__idleon_cheats__[\"scripts.ActorEvents_579\"]._customBlock_CaptBonusCalc(3, window.frames[0].__idleon_cheats__[\"com.stencyl.Engine\"].engine.getGameAttribute(\"Boats\")[1][0])",
-      "result": 210
+      "result": 220
     },
     "breeding_shiny_bonus_21": {
       "expression": "idleon.callFunction(\"Breeding\", \"ShinyBonusS\", \"Nah\", 21, -1)",
@@ -34,7 +34,7 @@
     },
     "arcade_bonus_32": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 32, 0)",
-      "result": 10.317460317460318
+      "result": 18.15286624203822
     },
     "arcade_bonus_66": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 66, 0)",
@@ -42,11 +42,11 @@
     },
     "hole_b_upg_55": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 55, 0)",
-      "result": 190
+      "result": 200
     },
     "farming_sticker_bonus_2": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"StickerBonus\", 2, 0)",
-      "result": 208.50000000000003
+      "result": 252.95999999999995
     },
     "research_grid_bonus_109": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 109, 0)",
@@ -54,7 +54,7 @@
     },
     "upgrade_vault_bonus_63": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 63, 0)",
-      "result": 336.04
+      "result": 422.1
     },
     "starsign_bonus_61": {
       "expression": "idleon.getAttr(\"DNSM\").h.StarSigns.h[61]",
@@ -70,7 +70,7 @@
     },
     "button_bonus_3": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 3, 0)",
-      "result": 41.824999999999996
+      "result": 62.73749999999998
     },
     "research_grid_bonus_106": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 106, 0)",
@@ -90,7 +90,7 @@
     },
     "jelly_bonus_19": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 19, 0)",
-      "result": 0
+      "result": 20
     },
     "boat_0_davey_jones_bonus": {
       "expression": "idleon.callFunction(\"Sailing\", \"DaveyJonesBonus\", 0, 0)",
@@ -106,7 +106,7 @@
     },
     "tome_epilogue_bonus_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 3, 0)",
-      "result": 153.56024333994154
+      "result": 154.31281327129028
     },
     "voting_bonus_20": {
       "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 20, 0)",
@@ -133,83 +133,83 @@
       "result": [
         {
           "index": 0,
-          "multiplier": 10874669071.52262
+          "multiplier": 17522253790.757076
         },
         {
           "index": 1,
-          "multiplier": 11964545404.448538
+          "multiplier": 19195594201.55875
         },
         {
           "index": 2,
-          "multiplier": 10874669071.52262
+          "multiplier": 17522253790.757076
         },
         {
           "index": 3,
-          "multiplier": 13054421737.374449
+          "multiplier": 20868934612.36043
         },
         {
           "index": 4,
-          "multiplier": 10874669071.52262
+          "multiplier": 17522253790.757076
         },
         {
           "index": 5,
-          "multiplier": 10874669071.52262
+          "multiplier": 17522253790.757076
         },
         {
           "index": 6,
-          "multiplier": 10874669071.52262
+          "multiplier": 17522253790.757076
         },
         {
           "index": 7,
-          "multiplier": 11855557771.155943
+          "multiplier": 19028260160.47858
         },
         {
           "index": 8,
-          "multiplier": 10874669071.52262
+          "multiplier": 17522253790.757076
         },
         {
           "index": 9,
-          "multiplier": 12945434104.081858
+          "multiplier": 20701600571.28025
         },
         {
           "index": 10,
-          "multiplier": 10874669071.52262
+          "multiplier": 17522253790.757076
         },
         {
           "index": 11,
-          "multiplier": 10874669071.52262
+          "multiplier": 17522253790.757076
         },
         {
           "index": 12,
-          "multiplier": 10874669071.52262
+          "multiplier": 17522253790.757076
         },
         {
           "index": 13,
-          "multiplier": 10874669071.52262
+          "multiplier": 17522253790.757076
         },
         {
           "index": 14,
-          "multiplier": 10874669071.52262
+          "multiplier": 17522253790.757076
         },
         {
           "index": 15,
-          "multiplier": 10874669071.52262
+          "multiplier": 17522253790.757076
         },
         {
           "index": 16,
-          "multiplier": 11637582504.57076
+          "multiplier": 18693592078.318245
         },
         {
           "index": 17,
-          "multiplier": 10874669071.52262
+          "multiplier": 17522253790.757076
         },
         {
           "index": 18,
-          "multiplier": 10874669071.52262
+          "multiplier": 17522253790.757076
         },
         {
           "index": 19,
-          "multiplier": 10874669071.52262
+          "multiplier": 17522253790.757076
         }
       ]
     }

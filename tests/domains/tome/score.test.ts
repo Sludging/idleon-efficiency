@@ -14,9 +14,12 @@ import { Tome, TomeLine } from '../../../data/domain/world-4/tome';
 import tomeScoreConfig from '../../configs/tome-score.json';
 import { TARGET_PLAYER_INDEX } from '../../utils/target-player';
 
-
+const { getSelectedAccountDataset } = require('../../helpers/account-dataset.cjs') as {
+ getSelectedAccountDataset: () => { manifest: { preparationPlayerIndex: number } } | null;
+};
 const saveName = 'latest';
 const extractionResultsName = 'tome-score-data.json';
+const capturedPlayerIndex = getSelectedAccountDataset()?.manifest.preparationPlayerIndex ?? TARGET_PLAYER_INDEX;
 const tomeLineIndices = tomeScoreConfig.extractions
  .filter((extraction) => /^tome_pts_\d+$/.test(extraction.label))
  .map((extraction) => Number(extraction.label.replace('tome_pts_', '')));
@@ -28,7 +31,7 @@ const tomeLineDescriptions: Record<string, string> = Object.fromEntries(
 
 const getTomeLineDescription = (index: number): string =>
  tomeLineDescriptions[`tome_pts_${index}`] ?? `Tome line ${index}`;
-// The game can cache Tome producers while the domain recalculates the current save.
+// The game caches Tome quantities for the preparation player, even after switching to the target player.
 // Allow up to 1% relative drift; anything larger requires manual intervention.
 const TOME_SCORE_DRIFT_TOLERANCE = 0.01;
 
@@ -63,9 +66,9 @@ describe('Tome Domain - Score', () => {
    const liveScore = getExtractedValue(extractionResults, `tome_pts_${index}`);
    const description = getTomeLineDescription(index);
 
-   expect(line.getPlayerScore(TARGET_PLAYER_INDEX)).toMatchLiveGameWithDetails(liveScore, {
+   expect(line.getPlayerScore(capturedPlayerIndex)).toMatchLiveGameWithDetails(liveScore, {
     tolerance: TOME_SCORE_DRIFT_TOLERANCE,
-    context: `Tome ${description} score`,
+    context: `Tome ${description} score (captured player ${capturedPlayerIndex})`,
    });
   });
 
@@ -74,8 +77,8 @@ describe('Tome Domain - Score', () => {
   tome.lines
    .filter((line) => !line.unlocked)
    .forEach((line) => {
-    expect(line.getLineMultiplyer(0)).toBe(0);
-    expect(line.getPlayerScore(0)).toBe(0);
+    expect(line.getLineMultiplyer(capturedPlayerIndex)).toBe(0);
+    expect(line.getPlayerScore(capturedPlayerIndex)).toBe(0);
    });
  });
 });

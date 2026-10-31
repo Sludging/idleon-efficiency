@@ -2,15 +2,15 @@
   "extractions": {
     "damage_tome_bonus_0": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 0, 0)",
-      "result": 1495.2090020486505
+      "result": 1525.7897203040407
     },
     "damage_construction_mastery_1": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ConstMasteryBonus\", 1, 0)",
-      "result": 734
+      "result": 738
     },
     "damage_killroy_multiplier": {
       "expression": "idleon.callFunction(\"RiftStuff\", \"KillroyDMG\", 0)",
-      "result": 65
+      "result": 66
     },
     "damage_minehead_bonus_0": {
       "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 0, 0)",
@@ -38,7 +38,7 @@
     },
     "damage_family_bonus_20": {
       "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.FamBonusQTYs.h[20]; })()",
-      "result": 17.606382978723403
+      "result": 17.62532981530343
     },
     "damage_family_bonus_80": {
       "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.FamBonusQTYs.h[80]; })()",

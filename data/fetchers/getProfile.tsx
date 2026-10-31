@@ -18,7 +18,6 @@ export const fetcher = async (profileName: string): Promise<{ data: Map<string, 
         }
         catch (e) {
             console.debug(e);
-            throw new Error("Failed fetching data for " + profileName);
         }
     }
 

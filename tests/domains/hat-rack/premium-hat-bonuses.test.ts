@@ -1,7 +1,7 @@
 /**
- * Representative Hat Rack contributions for the target player from the paired save.
- * These samples cover populated unique/base effects and an absent effect, not
- * locked characters, empty collections, new deposits or dungeon transitions.
+ * Prepared account totals and representative character/item contributions from the paired save.
+ * Native captures cover deposited hats, both unique channels, primary properties, and missing hats.
+ * This account does not cover locked characters, empty collections, new deposits or dungeon transitions.
  */
 import { Player } from '../../../data/domain/player';
 import { HatRack } from '../../../data/domain/world-7/hatRack';
@@ -32,6 +32,8 @@ const getExtractedNames = (results: ExtractionResults, key: string): string[] =>
 };
 
 const sortNames = (names: string[]): string[] => [...names].sort();
+const toDomainEffect = (effect: string): string => effect.replace(/_/g, ' ');
+
 
 
 describe('Hat Rack Domain - Premium Hat Bonuses', () => {
@@ -77,11 +79,52 @@ describe('Hat Rack Domain - Premium Hat Bonuses', () => {
   expect(sortNames(actualNames)).toEqual(sortNames(expectedNames));
  });
 
- it('matches eligible premium hats that are missing from the saved rack', () => {
-  const expectedNames = getExtractedNames(extractionResults, 'hat_rack_missing_hats');
-  const hats = (gameData.get('hatRack') as HatRack).hats;
-  const actualNames = hats.filter(hat => !hat.stored).map(hat => hat.internalName);
+ it('matches deposited premium-hat names and the saved deposit count', () => {
+  const expectedNames = getExtractedNames(extractionResults, 'hat_rack_deposited_hats');
+  const rack = gameData.get('hatRack') as HatRack;
+  const actualNames = rack.hats.filter(hat => hat.stored).map(hat => hat.internalName);
 
   expect(sortNames(actualNames)).toEqual(sortNames(expectedNames));
+  expect(rack.getDepositedHatCount()).toMatchLiveGameWithDetails(expectedNames.length, {
+   tolerance: 0,
+   context: 'Saved Hat Rack deposited count, without deduplicating the saved sequence',
+  });
+ });
+
+ it('matches the native premium-hat bonus multiplier', () => {
+  const rack = gameData.get('hatRack') as HatRack;
+  expect(rack.getBonusMultiplier()).toMatchLiveGameWithDetails(
+   getExtractedValue(extractionResults, 'hat_rack_bonus_multiplier'),
+   { tolerance: 0, context: 'Account Hat Rack bonus multiplier' },
+  );
+ });
+
+ it('matches every native account bonus without selecting a character', () => {
+  const expectedBonuses = extractionResults.extractions.hat_rack_account_bonuses.result as Record<string, number>;
+  const rack = gameData.get('hatRack') as HatRack;
+  const actualBonuses = rack.getAccountBonuses();
+  const expectedEffects = Object.keys(expectedBonuses).map(toDomainEffect);
+
+  expect(sortNames([...actualBonuses.keys()])).toEqual(sortNames(expectedEffects));
+  for (const [nativeEffect, expectedValue] of Object.entries(expectedBonuses)) {
+   const effect = toDomainEffect(nativeEffect);
+   expect(actualBonuses.get(effect)).toMatchLiveGameWithDetails(expectedValue, {
+    tolerance: 0,
+    context: `Account Hat Rack ${effect}`,
+   });
+  }
+ });
+
+
+ it('matches missing premium-hat names and confirms they contribute no bonuses', () => {
+  const expectedNames = getExtractedNames(extractionResults, 'hat_rack_missing_hats');
+  const rack = gameData.get('hatRack') as HatRack;
+  const actualNames = rack.hats.filter(hat => !hat.stored).map(hat => hat.internalName);
+
+  expect(sortNames(actualNames)).toEqual(sortNames(expectedNames));
+  for (const name of expectedNames) {
+   const hat = rack.hats.find(hat => hat.internalName === name)!;
+   expect(rack.getHatItemBonuses(hat)).toEqual([]);
+  }
  });
 });

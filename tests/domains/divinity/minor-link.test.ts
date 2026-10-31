@@ -1,11 +1,6 @@
-/**
- * Compares Purrmep's linked-player passive bonus shown by the website with
- * the matching game result for the saved linked player.
- */
-
 import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { Divinity } from '../../../data/domain/divinity';
+import { Divinity } from '../../../data/domain/world-5/divinity';
 
 const saveName = 'latest';
 const extractionResultsName = 'divinity-minor-link-data.json';
@@ -36,19 +31,13 @@ describe('Divinity Domain - Minor Link Bonus', () => {
  });
 
  describe('Minor Link Bonus Calculations', () => {
-  it('matches Purrmep minor-link bonus for its linked player', () => {
-   const god = divinity.gods[6];
-   if (!god) throw new Error('God 6 (Purrmep) not found');
-
-   const purrmepPlayer = god.linkedPlayers.at(0);
-   if (!purrmepPlayer) throw new Error('No player linked to Purrmep');
-
+  it('matches Purrmep account-wide minor-link bonus from primary links', () => {
    const extractedBonus = extractionResults.extractions.divinity_minor_bonus_6.result;
-   const calculatedBonus = god.getMinorLinkBonus(purrmepPlayer);
+   const calculatedBonus = divinity.gamingGrowthMinorLinkBonus;
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
     tolerance: 0,
-    context: 'Purrmep minor-link passive bonus shown for its linked player',
+    context: 'Purrmep account-wide minor-link passive bonus from primary links',
    });
   });
  });

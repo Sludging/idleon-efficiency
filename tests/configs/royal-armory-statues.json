@@ -33,11 +33,6 @@
       "description": "Numeric affordability result for one Frosty statue marble restoration attempt"
     },
     {
-      "label": "storage_marble_2",
-      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const owned = idleon.getAttr(\"PixelHelperActor\")[5].behaviors.getBehavior(\"ActorEvents_232\")._ItemsAndStorageOWNED.h; return asNumber(owned[\"RGshard2\"]); })()",
-      "description": "Settled Storage marble quantity used by the Frosty statue restoration attempt"
-    },
-    {
       "label": "royal_reverence_bonus",
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 45, 0)",
       "description": "Royal Reverence bonus used by current statue bonuses"

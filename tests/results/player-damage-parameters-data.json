@@ -2,7 +2,7 @@
   "extractions": {
     "player_damage_etc_bonus_72": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"72\")",
-      "result": 317.55025354216383
+      "result": 474.71923172996594
     },
     "player_damage_etc_bonus_75": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"75\")",
@@ -30,11 +30,11 @@
     },
     "player_damage_divinity_blessing_7": {
       "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 7, 0)",
-      "result": 199.5
+      "result": 239.4
     },
     "player_damage_divinity_blessing_8": {
       "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 8, 0)",
-      "result": 238.5
+      "result": 286.2
     },
     "player_damage_chip_bonus_dmg": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"dmg\")",
@@ -42,7 +42,7 @@
     },
     "player_damage_meal_total_damage": {
       "expression": "idleon.callFunction(\"MealBonus\", \"TotDmg\")",
-      "result": 31451.934048516483
+      "result": 32004.36446945664
     },
     "player_damage_card_set_5": {
       "expression": "idleon.callFunction(\"CardSetBonuses\", 0, \"5\")",
@@ -58,13 +58,13 @@
     },
     "player_damage_native_component_d": {
       "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DummyNumbersStatManager\").h.DamageDealtLIST[2]; })()",
-      "result": 932368538619105.8
+      "result": 1358223225728849.2
     },
     "player_damage_native_maximum": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0)",
       "result": {
         "type": "large_number",
-        "value": "5.1135901919855255e+28"
+        "value": "8.135530682548266e+28"
       }
     },
     "player_damage_pristine_charm_0": {
@@ -81,7 +81,7 @@
     },
     "player_damage_divinity_god_rank": {
       "expression": "Math.max(0, Number(idleon.engine.getGameAttribute(\"Divinity\")[25]) - 10)",
-      "result": 10
+      "result": 16
     },
     "player_damage_vial_7dmg": {
       "expression": "Number(idleon.engine.getGameAttribute(\"DNSM\").h.AlchVials.h[\"7dmg\"])",
@@ -93,19 +93,31 @@
     },
     "player_damage_summoning_upgrade_79": {
       "expression": "idleon.callFunction(\"Summoning\", \"SummUpgBonus\", 79, 0)",
-      "result": 26
+      "result": 42
     },
     "player_damage_artifact_25_effective": {
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 25, 0)",
-      "result": 676050
+      "result": 696490
     },
     "player_damage_artifact_8_contextual": {
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 8, 0)",
-      "result": 470.7151784428696
+      "result": 473.0171180665857
     },
     "player_damage_exotic_market_41": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 41, 0)",
       "result": 280
+    },
+    "player_maximum_damage_sigil_lab_bonus": {
+      "expression": "idleon.callFunction(\"Labb\", \"SigilBonus\", \"Blank\", 4, 0)",
+      "result": 70000
+    },
+    "player_maximum_damage_cosmo_bonus_2_4": {
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 2, 4)",
+      "result": 300
+    },
+    "player_maximum_damage_box_reward_base_damage": {
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.BoxRewards.h.basedmg; })()",
+      "result": 400
     }
   },
   "errors": {}
