@@ -3,7 +3,6 @@
 import { useContext, useMemo, useState } from 'react';
 import { Anchor, Box, Grid, Heading, Meter, ResponsiveContext, Text } from 'grommet';
 import { Checkmark, CircleInformation } from 'grommet-icons';
-import { useTime } from 'react-timer-hook';
 import { useShallow } from 'zustand/react/shallow';
 import ContentTabs from '../../../components/base/ContentTabs';
 import DataRow, { type DataRowField } from '../../../components/base/DataRow';
@@ -17,6 +16,7 @@ import { Item } from '../../../data/domain/items';
 import { WeeklyShopSectionEnum } from '../../../data/domain/enum/weeklyShopSectionEnum';
 import type { WeeklyBoss, WeeklyBossPreparedCharacter, WeeklyBossPreparation, WeeklyBossShopReward } from '../../../data/domain/weekly-boss';
 import { commaNotation, notateNumber, toTime } from '../../../data/utility';
+import useCurrentTime from '../../../lib/hooks/useCurrentTime';
 import useHydrated from '../../../lib/hooks/useHydrated';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 
@@ -251,7 +251,7 @@ function WeeklyShop({ weeklyBoss, preparation }: {
 export default function WeeklyBossesContent() {
     const hydrated = useHydrated();
     const [tab, setTab] = useState<'Preparation' | 'Weekly shop'>('Preparation');
-    useTime();
+    const currentTime = useCurrentTime();
     const { theData, lastUpdated } = useAppDataStore(useShallow(state => ({
         theData: state.data.getData(),
         lastUpdated: state.lastUpdated,
@@ -261,11 +261,11 @@ export default function WeeklyBossesContent() {
     const preparation = useMemo(() => weeklyBoss ? weeklyBoss.getPreparation() : undefined,
         [weeklyBoss, lastUpdated]);
 
-    if (!hydrated || !weeklyBoss || !preparation) return <>Loading...</>;
+    if (!hydrated || currentTime === undefined || !weeklyBoss || !preparation) return <>Loading...</>;
 
     const week = preparation.week;
     const boss = weeklyBoss.bosses[week.bossId].data;
-    const nowSeconds = Math.floor(Date.now() / 1000);
+    const nowSeconds = Math.floor(currentTime / 1000);
     const secondsRemaining = Math.max(0, week.endsAtSeconds - nowSeconds);
     const dateRange = `${weeklyDateFormat.format(new Date(week.startsAtSeconds * 1000))} – ${weeklyDateFormat.format(new Date(week.endsAtSeconds * 1000))} UTC`;
     const recommendedCharacter = preparation.capacityRecommendation;

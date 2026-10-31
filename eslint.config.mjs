@@ -6,6 +6,12 @@ const eslintConfig = defineConfig([
     ...nextVitals,
     ...nextTs,
     {
+        files: ['**/*.cjs'],
+        rules: {
+            '@typescript-eslint/no-require-imports': 'off',
+        },
+    },
+    {
         files: ['**/*.ts', '**/*.tsx'],
         rules: {
             'react/no-unescaped-entities': 'off',
@@ -61,6 +67,7 @@ const eslintConfig = defineConfig([
         'build/**',
         'next-env.d.ts',
         // Custom ignores:
+        '.ui-verification/**',
         'reference-repos/**',
         '**/*.js',
         'tests/**',

@@ -26,19 +26,18 @@ export function IslandResourceAmount({ image, amount, textSize = 'small' }: {
     amount: number;
     textSize?: string;
 }) {
-    return <CenteredResourceAmount data-testid="island-resource-amount">
+    return <CenteredResourceAmount>
         <ResourceDisplay cost={amount} resourceImageData={image} textSize={textSize} resourceImageScale={0.8} showTooltip={false} />
     </CenteredResourceAmount>;
 }
 
-export function RewardCard({ name, itemId, completed = false, children, testId }: {
+export function RewardCard({ name, itemId, completed = false, children }: {
     name: string;
     itemId?: string;
     completed?: boolean;
     children: ReactNode;
-    testId: string;
 }) {
-    return <RoundedShadowBox background="dark-1" pad="none" overflow="hidden" data-testid={testId}
+    return <RoundedShadowBox background="dark-1" pad="none" overflow="hidden"
         style={{ opacity: completed ? 0.65 : 1, display: 'grid', gridRow: 'span 2', gridTemplateRows: 'subgrid', rowGap: 0 }}>
         <GreyCardHeader direction="row" align="center" gap="small" background="grey-1" pad={{ horizontal: 'medium', vertical: 'small' }}>
             {itemId && <IconImage data={Item.getImageData(itemId)} scale={0.9} />}

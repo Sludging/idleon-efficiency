@@ -40,9 +40,11 @@ import { Sailing } from '../../../data/domain/world-5/sailing/sailing';
 import { useShallow } from 'zustand/react/shallow';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import useHydrated from '../../../lib/hooks/useHydrated';
+import useCurrentTime from '../../../lib/hooks/useCurrentTime';
 
 function RefineryDisplay() {
     const [squirePowha, setSquirePowha] = useState<boolean>(false);
+    const currentTime = useCurrentTime();
 
     const size = useContext(ResponsiveContext);
 
@@ -119,6 +121,10 @@ function RefineryDisplay() {
 
     }, [squireInfo, refineryData, squirePowha])
 
+    const secondsSinceUpdate = currentTime === undefined
+        ? 0
+        : (currentTime - (lastUpdated?.getTime() ?? 0)) / 1000;
+
     return (
         <Box gap="medium">
             <Box direction="row" wrap justify="center">
@@ -179,7 +185,6 @@ function RefineryDisplay() {
                     if (!saltItem) return null;
                     const cycle = Object.values(refineryData.cycleInfo)[Math.floor(index / 3)];
                     const fuelProjection = info.fuelTimeSeconds;
-                    const secondsSinceUpdate = (Date.now() - (lastUpdated?.getTime() ?? 0)) / 1000;
                     const fuelTime = fuelProjection === null ? null : Math.max(0, fuelProjection - secondsSinceUpdate);
                     const rankTime = Math.max(0, info.getTimeToNextRank(cycle.cycleTime) - secondsSinceUpdate);
                     const fuelShort = info.unlocked && info.storedFuelInsufficient;

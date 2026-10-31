@@ -3,7 +3,6 @@
 import { useMemo, useState } from 'react';
 import { Box, Button, CheckBox, Grid, Heading, Meter, Select, Text, TextInput } from 'grommet';
 import { useShallow } from 'zustand/react/shallow';
-import { useTime } from 'react-timer-hook';
 import styled from 'styled-components';
 import ContentTabs from '../../../components/base/ContentTabs';
 import { ResourceDisplay } from '../../../components/account/shared/ResourceDisplay';
@@ -14,6 +13,7 @@ import { EnemyInfo } from '../../../data/domain/enemies';
 import { Item } from '../../../data/domain/items';
 import { KillRoy, KillroyPermanentBonus, KillroyRunUpgrade, KillroyRunUpgradeId, KillroyShopOffer } from '../../../data/domain/world-2/killroy';
 import { commaNotation, notateNumber, toTime } from '../../../data/utility';
+import useCurrentTime from '../../../lib/hooks/useCurrentTime';
 import useHydrated from '../../../lib/hooks/useHydrated';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 
@@ -208,11 +208,13 @@ function Monsters({ killroy }: { killroy: KillRoy }) {
 }
 
 function CurrentFights({ killroy }: { killroy: KillRoy }) {
-    useTime();
+    const currentTime = useCurrentTime();
     const projection = killroy.accountFightProjection;
     const classNames = ['Beginner', 'Warrior', 'Archer', 'Mage'];
     const resetDeadline = killroy.savedWeekEndTimestamp;
-    const secondsRemaining = resetDeadline === undefined ? undefined : Math.max(0, resetDeadline - Math.floor(Date.now() / 1000));
+    const secondsRemaining = resetDeadline === undefined || currentTime === undefined
+        ? undefined
+        : Math.max(0, resetDeadline - Math.floor(currentTime / 1000));
     return <Box gap="small" border={{ side: 'top', color: 'grey-1' }} pad={{ top: 'medium' }} data-killroy-current-fights>
         <Box direction="row" wrap gap="medium" align="center" justify="between">
             <Text size="small" weight="bold">Available Fights</Text>

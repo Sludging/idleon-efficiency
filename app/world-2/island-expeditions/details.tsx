@@ -14,8 +14,8 @@ type IslandDetailsProps = { expeditions: IslandExpeditions };
 export function CrystalDetails({ expeditions }: IslandDetailsProps) {
     const crystal = expeditions.crystal;
 
-    return <Box gap="medium" data-testid="island-crystal">
-        <Box background="dark-1" pad="medium" gap="small" data-testid="island-crystal-pending">
+    return <Box gap="medium">
+        <Box background="dark-1" pad="medium" gap="small">
             <Box direction="row" align="center" wrap gap="large">
                 <TextAndLabel label="Pending days" text={`${commaNotation(crystal.unclaimedDays)} / ${commaNotation(crystal.dayCap)}`} textSize="large" />
                 <TextAndLabel label="Mobs waiting" text={commaNotation(crystal.mobsWaiting)} textSize="large" />
@@ -30,12 +30,12 @@ export function ShimmerDetails({ expeditions }: IslandDetailsProps) {
     const trial = shimmer.currentTrial;
     const digitScore = trial.data.description.includes('number of digits');
 
-    return <Box gap="medium" data-testid="island-shimmer">
+    return <Box gap="medium">
         <Box direction="row" align="center" wrap gap="large">
             <ComponentAndLabel label="Shimmer" component={<IslandResourceAmount image={shimmerImage} amount={shimmer.currency} textSize="xxlarge" />} />
             <TextAndLabel label="Best-ever Dummy Target DPS" text={notateNumber(expeditions.dummyTargetBestDPS, 'Smaller')} textSize="large" />
         </Box>
-        <RoundedShadowBox pad="none" overflow="hidden" style={{ border: '1px solid #e1b454', background: '#29271f' }} data-testid="island-shimmer-trial">
+        <RoundedShadowBox pad="none" overflow="hidden" style={{ border: '1px solid #e1b454', background: '#29271f' }}>
             <GreyCardHeader background="grey-1" pad={{ horizontal: 'medium', vertical: 'small' }}>
                 <Text size="small" weight="bold">Current challenge</Text>
             </GreyCardHeader>
@@ -55,7 +55,7 @@ export function ShimmerDetails({ expeditions }: IslandDetailsProps) {
                 const current = template.replace('{', notateNumber(bonus.getBonus(), 'Small'));
                 const next = template.replace('{', notateNumber(bonus.getBonus(bonus.baseBonus + 1), 'Small'));
 
-                return <RewardCard key={bonus.index} name={name} testId={`island-shimmer-upgrade-${bonus.index}`}>
+                return <RewardCard key={bonus.index} name={name}>
                     <Text size="xsmall" color="accent-2">Level {commaNotation(bonus.baseBonus)}</Text>
                     <EffectPreview current={current} next={next} />
                     <IslandCost image={shimmerImage} amount={bonus.getNextCost()} />
@@ -68,12 +68,11 @@ export function ShimmerDetails({ expeditions }: IslandDetailsProps) {
 export function FractalDetails({ expeditions }: IslandDetailsProps) {
     const fractal = expeditions.fractal;
 
-    return <Box gap="medium" data-testid="island-fractal">
+    return <Box gap="medium">
         <TextAndLabel label="Nothing AFK hours" text={commaNotation(fractal.afkHours)} textSize="large" />
         <Grid columns={['flex', 'flex', 'flex', 'flex']} gap="medium" align="stretch">
             {fractal.rewards.map(reward => <RoundedShadowBox key={reward.index} background="dark-1" pad="none" overflow="hidden"
-                style={{ opacity: fractal.isBonusUnlocked(reward.index) ? 1 : 0.5, display: 'grid', gridRow: 'span 2', gridTemplateRows: 'subgrid', rowGap: 0 }}
-                data-testid={`island-fractal-reward-${reward.index}`}>
+                style={{ opacity: fractal.isBonusUnlocked(reward.index) ? 1 : 0.5, display: 'grid', gridRow: 'span 2', gridTemplateRows: 'subgrid', rowGap: 0 }}>
                 <GreyCardHeader background="grey-1" pad={{ horizontal: 'medium', vertical: 'small' }}>
                     <Text size="small" weight="bold">{commaNotation(reward.data.requiredHours)} Nothing AFK hours</Text>
                 </GreyCardHeader>

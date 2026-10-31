@@ -26,7 +26,7 @@ const garbageImage = { location: 'Island0_x1', width: 36, height: 36 };
 function CollectionSummary({ expeditions }: { expeditions: IslandExpeditions }) {
     const collectorName = expeditions.collection.selectedPlayerName;
     const completed = expeditions.collection.selectedCompletedOmarQuests;
-    return <Box direction="row" align="center" gap="medium" wrap pad={{ vertical: 'small' }} data-testid="island-summary">
+    return <Box direction="row" align="center" gap="medium" wrap pad={{ vertical: 'small' }}>
         <Box gap="small" pad={{ right: 'medium' }}>
             <Text size="small">Message Bottles</Text>
             <Box direction="row" align="center" gap="medium" wrap>
@@ -96,7 +96,7 @@ function PossessionEvidence({ evidence }: { evidence: IslandRewardPossession }) 
 
 function TrashDetails({ expeditions }: { expeditions: IslandExpeditions }) {
     const trash = expeditions.trash;
-    return <Box gap="medium" data-testid="island-trash">
+    return <Box gap="medium">
         <TextAndLabel label="Pending Garbage days" text={commaNotation(trash.unclaimedDays)} textSize="large" />
         <Grid columns={{ count: 'fit', size: 'medium' }} gap="medium" align="stretch">
             {trash.rewards.map(reward => {
@@ -113,7 +113,7 @@ function TrashDetails({ expeditions }: { expeditions: IslandExpeditions }) {
                 } else {
                     name = 'Unlock next bribe set';
                 }
-                return <RewardCard key={reward.index} name={name} itemId={itemId} completed={completed} testId={`island-trash-reward-${reward.index}`}>
+                return <RewardCard key={reward.index} name={name} itemId={itemId} completed={completed}>
                     {reward.index === 4 && <>
                         <Text size="xsmall" color="accent-2">Level {trash.garbageGainLevel}</Text>
                         <EffectPreview current={`+${trash.garbageGainPercent}%`} next={`+${trash.getGarbageGainPercent(trash.garbageGainLevel + 1)}%`} />
@@ -133,7 +133,7 @@ function TrashDetails({ expeditions }: { expeditions: IslandExpeditions }) {
 
 function RandoDetails({ expeditions }: { expeditions: IslandExpeditions }) {
     const rando = expeditions.rando;
-    return <Box gap="medium" data-testid="island-rando">
+    return <Box gap="medium">
         <TextAndLabel label="Weekly event" text={rando.eventUsedThisWeek ? 'Used' : 'Available'} />
         <Grid columns={{ count: 'fit', size: 'medium' }} gap="medium" align="stretch">
             {rando.rewards.map(reward => {
@@ -143,7 +143,7 @@ function RandoDetails({ expeditions }: { expeditions: IslandExpeditions }) {
                 const name = itemId
                     ? (evidence?.book ? `${evidence.book.talentName} ${itemDetails[itemId].displayName}` : itemDetails[itemId].displayName)
                     : reward.index === 0 ? 'Random Event loot' : 'Rando Island double-boss chance';
-                return <RewardCard key={reward.index} name={name} itemId={itemId} completed={completed} testId={`island-rando-reward-${reward.index}`}>
+                return <RewardCard key={reward.index} name={name} itemId={itemId} completed={completed}>
                     {reward.index === 0 && <>
                         <Text size="xsmall" color="accent-2">Level {rando.lootLevel}</Text>
                         <EffectPreview current={`+${rando.lootUpgradePercent}%`} next={`+${rando.getLootUpgradePercent(rando.lootLevel + 1)}%`} />
@@ -171,12 +171,12 @@ export default function IslandExpeditionsContent() {
     if (!hydrated || !expeditions) return <>Loading Island Expeditions data</>;
     const island = expeditions.islands[islandIndex[tab]];
 
-    return <Box gap="medium" data-testid="island-expeditions">
+    return <Box gap="medium">
         <Heading level="2" size="medium" margin={{ top: 'medium', bottom: 'small' }} style={{ fontWeight: 'normal' }}>Island Expeditions</Heading>
         <CollectionSummary expeditions={expeditions} />
         <ContentTabs options={tabs.map(value => ({ value, label: value }))} value={tab} onChange={setTab} />
         <Box gap="medium" style={{ opacity: island.unlocked ? 1 : 0.5 }}>
-            <Box gap="small" data-testid="island-access">
+            <Box gap="small">
                 <Box direction="row" align="center" gap="medium" wrap>
                     <Text weight="bold">{tab} Island</Text>
                     {island.nextUnlockCost !== undefined && <IslandCost label="Unlock cost" image={bottlesImage} amount={island.nextUnlockCost} />}

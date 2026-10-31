@@ -1,7 +1,6 @@
 'use client';
 
 import { Box, Heading, Text } from 'grommet';
-import { useTime } from 'react-timer-hook';
 import styled from 'styled-components';
 import { useShallow } from 'zustand/react/shallow';
 import IconImage from '../../../components/base/IconImage';
@@ -12,6 +11,7 @@ import type { ImageData } from '../../../data/domain/imageData';
 import { Votes } from '../../../data/domain/world-2/votes';
 import { Meritocraty } from '../../../data/domain/world-7/meritocraty';
 import { notateNumber, toTime } from '../../../data/utility';
+import useCurrentTime from '../../../lib/hooks/useCurrentTime';
 import useHydrated from '../../../lib/hooks/useHydrated';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 
@@ -103,7 +103,7 @@ function BallotSection({ title, ballot, imagePrefix, locked = false }: {
 
 export default function VoteBallotContent() {
     const hydrated = useHydrated();
-    useTime();
+    const currentTime = useCurrentTime();
     const { theData } = useAppDataStore(useShallow(state => ({
         theData: state.data.getData(),
         lastUpdated: state.lastUpdated,
@@ -111,11 +111,11 @@ export default function VoteBallotContent() {
     const votes = theData.get('votes') as Votes | undefined;
     const meritocraty = theData.get('meritocraty') as Meritocraty | undefined;
 
-    if (!hydrated || !votes || !meritocraty) {
+    if (!hydrated || currentTime === undefined || !votes || !meritocraty) {
         return <>Loading...</>;
     }
 
-    const unixTimeSeconds = Math.floor(Date.now() / 1000);
+    const unixTimeSeconds = Math.floor(currentTime / 1000);
     const bonusSecondsRemaining = Math.max(0, votes.getNextRotationAt(unixTimeSeconds) - unixTimeSeconds);
     const meritocracySecondsRemaining = Math.max(0, meritocraty.getNextRotationAt(unixTimeSeconds) - unixTimeSeconds);
     const noBonusVoteRecorded = !votes.hasVotedThisWeek(unixTimeSeconds);
