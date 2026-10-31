@@ -214,7 +214,7 @@ export class Construction extends Domain {
         this.buildingTimingByPlayer.clear();
         this.bestBuildingTiming = null;
         this.buildingTimingComparison = [];
-        rates.forEach(({ player, normalBuildSpeed }) => {
+        for (const { player, normalBuildSpeed } of rates) {
             const trimmedBuildSpeed = normalBuildSpeed * trimmedMultiplier;
             const timing = {
                 playerID: player.playerID,
@@ -229,7 +229,7 @@ export class Construction extends Domain {
             if (!this.bestBuildingTiming || normalBuildSpeed > this.bestBuildingTiming.normalBuildSpeed) {
                 this.bestBuildingTiming = timing;
             }
-        });
+        }
         const bestRate = this.bestBuildingTiming?.normalBuildSpeed ?? 0;
         this.buildingTimingComparison.forEach(timing => {
             timing.lowerBuildRatePercent = bestRate > 0
