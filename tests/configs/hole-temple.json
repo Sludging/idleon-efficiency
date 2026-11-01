@@ -1,0 +1,71 @@
+{
+  "description": "Temple current-account numeric progression, upgrade effects, and torch costs. Source: Halloween_Event 1.24 ActorEvents_579 Holes2 Temple branches. No purchase or encounter mutation.",
+  "target": "Temple numeric backend core outputs",
+  "extractions": [
+    {
+      "label": "torches",
+      "expression": "Number(idleon.getAttr('Holes')[11][56])",
+      "description": "Current saved Temple Torch balance."
+    },
+    {
+      "label": "layer",
+      "expression": "Math.round(Number(idleon.getAttr('Holes')[11][55]) + 1)",
+      "description": "Current Sanctum, displayed as Layer by competitor. Cleared Sanctums plus one."
+    },
+    {
+      "label": "extra_torch_chance",
+      "expression": "idleon.callFunction('Holes2', 'TempleExtraTorches', 0, 0)",
+      "description": "Uncapped extra torch chance in percent."
+    },
+    {
+      "label": "opals_found",
+      "expression": "Number(idleon.getAttr('Holes')[7][14])",
+      "description": "Temple Opals earned."
+    },
+    {
+      "label": "illuminate_level",
+      "expression": "Number(idleon.getAttr('Holes')[11][57])",
+      "description": "Illuminate purchases since the last successful Centurion awakening."
+    },
+    {
+      "label": "illuminate_search_multiplier",
+      "expression": "idleon.callFunction('Holes2', 'TempleTorchBonuses', 0, 0)",
+      "description": "Illuminate multiplier applied to Search chance."
+    },
+    {
+      "label": "illuminate_cost",
+      "expression": "idleon.callFunction('Holes2', 'TempleTorchCost', 0, 0)",
+      "description": "Current Illuminate torch cost."
+    },
+    {
+      "label": "search_level",
+      "expression": "Number(idleon.getAttr('Holes')[11][58])",
+      "description": "Cumulative Search purchases. This count does not scale the awakening chance."
+    },
+    {
+      "label": "centurion_awaken_chance_percent",
+      "expression": "100 * Math.min(1, idleon.callFunction('Holes2', 'TempleTorchBonuses', 1, 0))",
+      "description": "Current displayed Centurion awakening chance in percent. The native drawing consumer caps probability at one. Search spends torches before resolving a purchase, so this is the displayed pre-purchase chance."
+    },
+    {
+      "label": "search_cost",
+      "expression": "idleon.callFunction('Holes2', 'TempleTorchCost', 1, 0)",
+      "description": "Current Search torch cost, based on current balance."
+    },
+    {
+      "label": "amplify_level",
+      "expression": "Number(idleon.getAttr('Holes')[11][59])",
+      "description": "Amplify purchase level."
+    },
+    {
+      "label": "golem_respawn_speed_percent",
+      "expression": "idleon.callFunction('Holes2', 'TempleTorchBonuses', 2, 0)",
+      "description": "Amplify percentage increase to Golem respawn speed."
+    },
+    {
+      "label": "amplify_cost",
+      "expression": "idleon.callFunction('Holes2', 'TempleTorchCost', 2, 0)",
+      "description": "Current Amplify torch cost."
+    }
+  ]
+}

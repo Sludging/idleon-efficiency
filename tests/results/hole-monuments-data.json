@@ -1,0 +1,472 @@
+{
+  "extractions": {
+    "story_progress": {
+      "expression": "Array.from({length:3},(_,index)=>{const holes=idleon.getAttr('Holes');const removedBricks=Number(holes[14][2*index+1]);const hours=Number(holes[14][2*index]);const nextUpgradeIndex=removedBricks<8?removedBricks:null;const requiredHours=nextUpgradeIndex===null?0:Number(idleon.getAttr('CustomLists').h.HolesInfo[30][nextUpgradeIndex]);return {storedSeconds:Number(holes[11][11+index]),linearLimitSeconds:idleon.callFunction('Holes','MonumentRewardMulti_MaxLinearTime',index,0),removedBricks,nextUpgradeIndex,hoursRemaining:nextUpgradeIndex===null?0:Math.max(0,requiredHours-hours),claimable:nextUpgradeIndex!==null&&hours>=requiredHours};})",
+      "result": [
+        {
+          "storedSeconds": 17995433.27699554,
+          "linearLimitSeconds": 2102400,
+          "removedBricks": 7,
+          "nextUpgradeIndex": 7,
+          "hoursRemaining": 8930,
+          "claimable": false
+        },
+        {
+          "storedSeconds": 33712992.039002046,
+          "linearLimitSeconds": 3312000,
+          "removedBricks": 8,
+          "nextUpgradeIndex": null,
+          "hoursRemaining": 0,
+          "claimable": false
+        },
+        {
+          "storedSeconds": 16615829.57302973,
+          "linearLimitSeconds": 2102400,
+          "removedBricks": 7,
+          "nextUpgradeIndex": 7,
+          "hoursRemaining": 13523,
+          "claimable": false
+        }
+      ]
+    },
+    "bravery_minimum_damage": {
+      "expression": "idleon.callFunction(\"Holes\", \"Bravery_MinDMG\", 0, 0)",
+      "result": 1778456.3186409813
+    },
+    "bravery_maximum_damage": {
+      "expression": "idleon.callFunction(\"Holes\", \"Bravery_MaxDMG\", 0, 0)",
+      "result": 5549819.745753067
+    },
+    "bravery_swords": {
+      "expression": "idleon.callFunction(\"Holes\", \"Bravery_SwordsOwned\", 0, 0)",
+      "result": 7
+    },
+    "bravery_rethrows": {
+      "expression": "idleon.callFunction(\"Holes\", \"MaxRerolls\", 0, 0)",
+      "result": 15
+    },
+    "bravery_retellings": {
+      "expression": "idleon.callFunction(\"Holes\", \"MaxRevisions\", 0, 0)",
+      "result": 1
+    },
+    "justice_mental_health": {
+      "expression": "idleon.callFunction(\"Holes\", \"J_StartHealth\", 0, 0)",
+      "result": 5
+    },
+    "justice_coins": {
+      "expression": "idleon.callFunction(\"Holes\", \"J_StartCoins\", 0, 0)",
+      "result": 59
+    },
+    "justice_popularity": {
+      "expression": "idleon.callFunction(\"Holes\", \"J_Happiness\", 0, 0)",
+      "result": 10
+    },
+    "justice_dismissals": {
+      "expression": "idleon.callFunction(\"Holes\", \"J_Dismissals\", 0, 0)",
+      "result": 4
+    },
+    "wisdom_attempts": {
+      "expression": "idleon.callFunction(\"Holes2\", \"W_attempts\", 0, 0)",
+      "result": 54
+    },
+    "wisdom_attempts_per_round": {
+      "expression": "idleon.callFunction(\"Holes2\", \"W_attemptsGainPerRound\", 0, 0)",
+      "result": 3
+    },
+    "wisdom_seconds_per_match": {
+      "expression": "idleon.callFunction(\"Holes2\", \"W_timePerMatch\", 0, 0)",
+      "result": 12.6
+    },
+    "wisdom_instant_matches": {
+      "expression": "idleon.callFunction(\"Holes2\", \"W_instamatches\", 0, 0)",
+      "result": 4
+    },
+    "bravery_hours": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[14][0])",
+      "result": 15070
+    },
+    "bravery_reward_multiplier": {
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentRewardMulti\", 0, 0)",
+      "result": 99.7660489792842
+    },
+    "bravery_opal_chance": {
+      "expression": "100 * idleon.callFunction(\"Holes\", \"Bravery_OpalRewardChanceDEC\", 0, 0)",
+      "result": 1.2273046875
+    },
+    "bravery_seconds_until_ready": {
+      "expression": "Math.max(0, 72000 * (1 - idleon.callFunction(\"Holes\", \"MonumentRewardMulti\", 0, 0)))",
+      "result": 0
+    },
+    "bravery_ready": {
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentRewardMulti\", 0, 0) >= 1",
+      "result": true
+    },
+    "bravery_total_levels": {
+      "expression": "idleon.getAttr(\"Holes\")[15].slice(0, 10).reduce((sum, level) => sum + Number(level), 0)",
+      "result": 27464
+    },
+    "bravery_opals": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][3])",
+      "result": 12
+    },
+    "justice_hours": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[14][2])",
+      "result": 24090
+    },
+    "justice_reward_multiplier": {
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentRewardMulti\", 1, 0)",
+      "result": 153.41179095177517
+    },
+    "justice_opal_chance": {
+      "expression": "100 * idleon.callFunction(\"Holes\", \"Justice_OpalRewardChanceDEC\", 0, 0)",
+      "result": 26.6954296875
+    },
+    "justice_seconds_until_ready": {
+      "expression": "Math.max(0, 72000 * (1 - idleon.callFunction(\"Holes\", \"MonumentRewardMulti\", 1, 0)))",
+      "result": 0
+    },
+    "justice_ready": {
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentRewardMulti\", 1, 0) >= 1",
+      "result": true
+    },
+    "justice_total_levels": {
+      "expression": "idleon.getAttr(\"Holes\")[15].slice(10, 20).reduce((sum, level) => sum + Number(level), 0)",
+      "result": 4826
+    },
+    "justice_opals": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][9])",
+      "result": 10
+    },
+    "wisdom_hours": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[14][4])",
+      "result": 10477
+    },
+    "wisdom_reward_multiplier": {
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentRewardMulti\", 2, 0)",
+      "result": 99.36037098652389
+    },
+    "wisdom_opal_chance": {
+      "expression": "100 * idleon.callFunction(\"Holes2\", \"Wisdom_OpalRewardChanceDEC\", 0, 0)",
+      "result": 3.96875
+    },
+    "wisdom_seconds_until_ready": {
+      "expression": "Math.max(0, 72000 * (1 - idleon.callFunction(\"Holes\", \"MonumentRewardMulti\", 2, 0)))",
+      "result": 0
+    },
+    "wisdom_ready": {
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentRewardMulti\", 2, 0) >= 1",
+      "result": true
+    },
+    "wisdom_total_levels": {
+      "expression": "idleon.getAttr(\"Holes\")[15].slice(20, 30).reduce((sum, level) => sum + Number(level), 0)",
+      "result": 5342
+    },
+    "wisdom_opals": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][12])",
+      "result": 7
+    },
+    "bravery_bonuses": {
+      "expression": "(() => { const levels = idleon.getAttr(\"Holes\")[15]; const coefficients = idleon.getAttr(\"CustomLists\").h.HolesInfo[37]; const fountain = 1 + idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 13) / 100; const self = idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 0, 9); const cosmo = idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 0, 0); return Array.from({ length: 10 }, (_, i) => { const coefficient = Number(coefficients[0 + i]); const multiplier = Math.max(1, (i === 9 ? 1 : 1 + self / 100 + cosmo / 100) * fountain); const bonus = idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 0, i); const capped = coefficient >= 30; const bonusCap = capped ? coefficient * multiplier : null; return { level: Number(levels[0 + i]), bonus, perLevelIncrement: capped ? null : coefficient, bonusCap, capTargetLevel: capped ? Math.ceil(250 * (10 * coefficient * multiplier - 1)) : null, progressPercent: capped ? bonus / bonusCap * 100 : null }; }); })()",
+      "result": [
+        {
+          "level": 6049,
+          "bonus": 41859.08,
+          "perLevelIncrement": 2,
+          "bonusCap": null,
+          "capTargetLevel": null,
+          "progressPercent": null
+        },
+        {
+          "level": 1136,
+          "bonus": 15722.24,
+          "perLevelIncrement": 4,
+          "bonusCap": null,
+          "capTargetLevel": null,
+          "progressPercent": null
+        },
+        {
+          "level": 4613,
+          "bonus": 159609.8,
+          "perLevelIncrement": 10,
+          "bonusCap": null,
+          "capTargetLevel": null,
+          "progressPercent": null
+        },
+        {
+          "level": 2403,
+          "bonus": 8314.38,
+          "perLevelIncrement": 1,
+          "bonusCap": null,
+          "capTargetLevel": null,
+          "progressPercent": null
+        },
+        {
+          "level": 5931,
+          "bonus": 164170.08,
+          "perLevelIncrement": 8,
+          "bonusCap": null,
+          "capTargetLevel": null,
+          "progressPercent": null
+        },
+        {
+          "level": 712,
+          "bonus": 4927.04,
+          "perLevelIncrement": 2,
+          "bonusCap": null,
+          "capTargetLevel": null,
+          "progressPercent": null
+        },
+        {
+          "level": 5028,
+          "bonus": 17396.88,
+          "perLevelIncrement": 1,
+          "bonusCap": null,
+          "capTargetLevel": null,
+          "progressPercent": null
+        },
+        {
+          "level": 710,
+          "bonus": 2456.6,
+          "perLevelIncrement": 1,
+          "bonusCap": null,
+          "capTargetLevel": null,
+          "progressPercent": null
+        },
+        {
+          "level": 882,
+          "bonus": 134.8,
+          "perLevelIncrement": null,
+          "bonusCap": 173,
+          "capTargetLevel": 432250,
+          "progressPercent": 77.91907514450868
+        },
+        {
+          "level": 0,
+          "bonus": 0,
+          "perLevelIncrement": null,
+          "bonusCap": 432.5,
+          "capTargetLevel": 1081000,
+          "progressPercent": 0
+        }
+      ]
+    },
+    "bravery_unlocks": {
+      "expression": "Array.from({ length: 8 }, (_, index) => Number(idleon.getAttr(\"Holes\")[14][1]) > index)",
+      "result": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    "justice_bonuses": {
+      "expression": "(() => { const levels = idleon.getAttr(\"Holes\")[15]; const coefficients = idleon.getAttr(\"CustomLists\").h.HolesInfo[37]; const fountain = 1 + idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 13) / 100; const self = idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 1, 9); const cosmo = idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 0, 0); return Array.from({ length: 10 }, (_, i) => { const coefficient = Number(coefficients[10 + i]); const multiplier = Math.max(1, (i === 9 ? 1 : 1 + self / 100 + cosmo / 100) * fountain); const bonus = idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 1, i); const capped = coefficient >= 30; const bonusCap = capped ? coefficient * multiplier : null; return { level: Number(levels[10 + i]), bonus, perLevelIncrement: capped ? null : coefficient, bonusCap, capTargetLevel: capped ? Math.ceil(250 * (10 * coefficient * multiplier - 1)) : null, progressPercent: capped ? bonus / bonusCap * 100 : null }; }); })()",
+      "result": [
+        {
+          "level": 234,
+          "bonus": 1712.88,
+          "perLevelIncrement": 2,
+          "bonusCap": null,
+          "capTargetLevel": null,
+          "progressPercent": null
+        },
+        {
+          "level": 373,
+          "bonus": 5460.72,
+          "perLevelIncrement": 4,
+          "bonusCap": null,
+          "capTargetLevel": null,
+          "progressPercent": null
+        },
+        {
+          "level": 177,
+          "bonus": 758.6,
+          "perLevelIncrement": null,
+          "bonusCap": 1830,
+          "capTargetLevel": 4574750,
+          "progressPercent": 41.45355191256831
+        },
+        {
+          "level": 1649,
+          "bonus": 6035.34,
+          "perLevelIncrement": 1,
+          "bonusCap": null,
+          "capTargetLevel": null,
+          "progressPercent": null
+        },
+        {
+          "level": 744,
+          "bonus": 13615.2,
+          "perLevelIncrement": 5,
+          "bonusCap": null,
+          "capTargetLevel": null,
+          "progressPercent": null
+        },
+        {
+          "level": 342,
+          "bonus": 2503.44,
+          "perLevelIncrement": 2,
+          "bonusCap": null,
+          "capTargetLevel": null,
+          "progressPercent": null
+        },
+        {
+          "level": 1206,
+          "bonus": 4413.96,
+          "perLevelIncrement": 1,
+          "bonusCap": null,
+          "capTargetLevel": null,
+          "progressPercent": null
+        },
+        {
+          "level": 0,
+          "bonus": 0,
+          "perLevelIncrement": null,
+          "bonusCap": 1098,
+          "capTargetLevel": 2744750,
+          "progressPercent": 0
+        },
+        {
+          "level": 101,
+          "bonus": 52.7,
+          "perLevelIncrement": null,
+          "bonusCap": 183,
+          "capTargetLevel": 457250,
+          "progressPercent": 28.797814207650273
+        },
+        {
+          "level": 0,
+          "bonus": 0,
+          "perLevelIncrement": null,
+          "bonusCap": 457.5,
+          "capTargetLevel": 1143500,
+          "progressPercent": 0
+        }
+      ]
+    },
+    "justice_unlocks": {
+      "expression": "Array.from({ length: 8 }, (_, index) => Number(idleon.getAttr(\"Holes\")[14][3]) > index)",
+      "result": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    "wisdom_bonuses": {
+      "expression": "(() => { const levels = idleon.getAttr(\"Holes\")[15]; const coefficients = idleon.getAttr(\"CustomLists\").h.HolesInfo[37]; const fountain = 1 + idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 13) / 100; const self = idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 2, 9); const cosmo = idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 0, 0); return Array.from({ length: 10 }, (_, i) => { const coefficient = Number(coefficients[20 + i]); const multiplier = Math.max(1, (i === 9 ? 1 : 1 + self / 100 + cosmo / 100) * fountain); const bonus = idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 2, i); const capped = coefficient >= 30; const bonusCap = capped ? coefficient * multiplier : null; return { level: Number(levels[20 + i]), bonus, perLevelIncrement: capped ? null : coefficient, bonusCap, capTargetLevel: capped ? Math.ceil(250 * (10 * coefficient * multiplier - 1)) : null, progressPercent: capped ? bonus / bonusCap * 100 : null }; }); })()",
+      "result": [
+        {
+          "level": 2487,
+          "bonus": 9948,
+          "perLevelIncrement": 2,
+          "bonusCap": null,
+          "capTargetLevel": null,
+          "progressPercent": null
+        },
+        {
+          "level": 645,
+          "bonus": 3870,
+          "perLevelIncrement": 3,
+          "bonusCap": null,
+          "capTargetLevel": null,
+          "progressPercent": null
+        },
+        {
+          "level": 430,
+          "bonus": 1720,
+          "perLevelIncrement": 2,
+          "bonusCap": null,
+          "capTargetLevel": null,
+          "progressPercent": null
+        },
+        {
+          "level": 338,
+          "bonus": 676,
+          "perLevelIncrement": 1,
+          "bonusCap": null,
+          "capTargetLevel": null,
+          "progressPercent": null
+        },
+        {
+          "level": 681,
+          "bonus": 5448,
+          "perLevelIncrement": 4,
+          "bonusCap": null,
+          "capTargetLevel": null,
+          "progressPercent": null
+        },
+        {
+          "level": 102,
+          "bonus": 408,
+          "perLevelIncrement": 2,
+          "bonusCap": null,
+          "capTargetLevel": null,
+          "progressPercent": null
+        },
+        {
+          "level": 614,
+          "bonus": 142.20000000000002,
+          "perLevelIncrement": null,
+          "bonusCap": 200,
+          "capTargetLevel": 499750,
+          "progressPercent": 71.10000000000001
+        },
+        {
+          "level": 0,
+          "bonus": 0,
+          "perLevelIncrement": null,
+          "bonusCap": 70,
+          "capTargetLevel": 174750,
+          "progressPercent": 0
+        },
+        {
+          "level": 45,
+          "bonus": 15.3,
+          "perLevelIncrement": null,
+          "bonusCap": 100,
+          "capTargetLevel": 249750,
+          "progressPercent": 15.299999999999999
+        },
+        {
+          "level": 0,
+          "bonus": 0,
+          "perLevelIncrement": null,
+          "bonusCap": 250,
+          "capTargetLevel": 624750,
+          "progressPercent": 0
+        }
+      ]
+    },
+    "wisdom_unlocks": {
+      "expression": "Array.from({ length: 8 }, (_, index) => Number(idleon.getAttr(\"Holes\")[14][5]) > index)",
+      "result": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    "normal_story_context": {
+      "expression": "(() => { const actor = idleon.getAttr(\"PixelHelperActor\")[25].behaviors.getBehavior(\"ActorEvents_670\"); return { braveryRound: Number(actor._GenINFO[89]), braveryDamageBoost: Number(actor._GenINFO[127]), wisdomMode: Number(actor._GenINFO[210]) }; })()",
+      "result": {
+        "braveryRound": 0,
+        "braveryDamageBoost": 0,
+        "wisdomMode": 0
+      }
+    }
+  },
+  "errors": {}
+}

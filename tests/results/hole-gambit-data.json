@@ -1,0 +1,129 @@
+{
+  "extractions": {
+    "next_opal_score": {
+      "expression": "Math.ceil(Math.exp(2.30259 * (1 + Number(idleon.engine.getGameAttribute('Holes')[7][13]))))",
+      "result": 10000344
+    },
+    "run_times": {
+      "expression": "idleon.engine.getGameAttribute('Holes')[11].slice(65,71).map(Number)",
+      "result": [
+        649.100000000079,
+        454.600000000035,
+        149.599999999996,
+        988.2000000001561,
+        541.400000000055,
+        514.600000000048
+      ]
+    },
+    "total_time": {
+      "expression": "idleon.engine.getGameAttribute('Holes')[11].slice(65,71).reduce((total,value)=>total+Number(value),0)",
+      "result": 3297.5000000003693
+    },
+    "base_points": {
+      "expression": "idleon.callFunction('Holes','GambitPts',99,0)",
+      "result": 864990.000000066
+    },
+    "final_points": {
+      "expression": "idleon.callFunction('Holes','GambitPts',777,0)",
+      "result": 4366109.034637156
+    },
+    "points_multiplier": {
+      "expression": "idleon.callFunction('Holes','GambitPTSmulti',0,0)",
+      "result": 5.047583249097473
+    },
+    "doublers_total": {
+      "expression": "idleon.callFunction('Holes','GambitBonuses',0,0)+10*idleon.callFunction('Summoning','EventShopOwned',15,0)",
+      "result": 20
+    },
+    "doublers_available": {
+      "expression": "idleon.callFunction('Holes','Gambit_SummoningDoublersLeft',0,0)",
+      "result": 2
+    },
+    "reward_thresholds": {
+      "expression": "Array.from({length:19},(_,index)=>idleon.callFunction('Holes','GambitPtsREQ',index,0))",
+      "result": [
+        3000,
+        5024,
+        8667.92,
+        14802.406400000002,
+        24684.263840000003,
+        40109.5632512,
+        63623.16377719041,
+        98804.3881881682,
+        150655.2386114558,
+        226126.35975265643,
+        334827.6442326948,
+        489985.8405622638,
+        709731.9643904582,
+        1018828.2956256031,
+        1450980.3212664844,
+        2051925.843981216,
+        2883555.1348113455,
+        4029397.059006916,
+        5601912.547046434
+      ]
+    },
+    "reward_effects": {
+      "expression": "Array.from({length:19},(_,index)=>idleon.callFunction('Holes','GambitBonuses',index,0))",
+      "result": [
+        20,
+        6.640080426544538,
+        20,
+        166.00201066361345,
+        20,
+        166.00201066361345,
+        35,
+        66.40080426544537,
+        664.0080426544538,
+        1,
+        1,
+        166.00201066361345,
+        1,
+        1,
+        250,
+        3,
+        1,
+        1,
+        0
+      ]
+    },
+    "reward_unlocked": {
+      "expression": "Array.from({length:19},(_,index)=>idleon.callFunction('Holes','GambitPts',777,0)>=idleon.callFunction('Holes','GambitPtsREQ',index,0))",
+      "result": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    "reward_multipliers": {
+      "expression": "Object.fromEntries([5,7,8,11].map(index=>[index,1+idleon.callFunction('Holes','GambitBonuses',index,0)/100]))",
+      "result": {
+        "5": 2.6600201066361344,
+        "7": 1.6640080426544537,
+        "8": 7.640080426544538,
+        "11": 2.6600201066361344
+      }
+    },
+    "opals_found": {
+      "expression": "Number(idleon.engine.getGameAttribute('Holes')[7][13])",
+      "result": 6
+    }
+  },
+  "errors": {}
+}

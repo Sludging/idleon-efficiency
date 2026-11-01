@@ -1,0 +1,31 @@
+{
+  "description": "Dawg Den core outputs for the regular account and its saved amplifier levels.",
+  "target": "Dawg Den score, Opal threshold, multiplier and all eight amplifier effects",
+  "extractions": [
+    {
+      "label": "best_score",
+      "expression": "Number(idleon.getAttr('Holes')[11][8])",
+      "description": "Saved best Dawg Den score."
+    },
+    {
+      "label": "next_opal_score",
+      "expression": "idleon.callFunction('Holes', 'HoundNextOpalScoreReq', 0, 0)",
+      "description": "Native score requirement for the next Dawg Den Opal."
+    },
+    {
+      "label": "score_multiplier",
+      "expression": "idleon.callFunction('Holes', 'AmpMulti', 0, 0)",
+      "description": "Native multiplier from current amplifier levels and the amplifier schematic."
+    },
+    {
+      "label": "opals_found",
+      "expression": "Number(idleon.getAttr('Holes')[7][2])",
+      "description": "Saved earned Dawg Den Opals, exposed by the existing cavern ledger."
+    },
+    {
+      "label": "modifiers",
+      "expression": "Array.from({length:8},(_,index)=>({index,level:Number(idleon.getAttr('Holes')[12][index]),effect:idleon.callFunction('Holes','AmpDebuff',index,0)}))",
+      "description": "All eight native amplifier effects and the saved levels that select them."
+    }
+  ]
+}

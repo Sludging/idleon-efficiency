@@ -14,12 +14,18 @@ import { Item } from "../../../data/domain/items";
 import { AtomCollider } from "../../../data/domain/world-3/construction/atomCollider";
 import type { ImageData } from "../../../data/domain/imageData";
 import type { Hole } from "../../../data/domain/world-5/hole/hole";
+import type { Summoning } from "../../../data/domain/world-6/summoning";
 import { commaNotation, getCoinsArray, notateNumber, toTime } from "../../../data/utility";
 
 import { ResourceDisplay } from "../../account/shared/ResourceDisplay";
 import { UpgradeTable } from "../../account/shared/UpgradeTable";
 import type { FilterOptions } from "../../account/shared/UpgradeTableFilters";
 import { CavernMetricStrip, CavernStudySummary } from "./cavernLayout";
+import DawgDenView from "./dawgDen";
+import MonumentCavernView from "./monumentCaverns";
+import GrottoView from "./grotto";
+import GambitView from "./gambit";
+import TempleView from "./temple";
 
 function value(amount: number | null, suffix = ""): string {
     return amount === null ? "Unavailable" : `${notateNumber(amount)}${suffix}`;
@@ -999,19 +1005,27 @@ function LampView({ hole, onOpenStudies }: { hole: Hole; onOpenStudies: () => vo
     </Box>;
 }
 
-export default function Part4CavernDetails({ hole, cavern, totalMoney, onOpenStudies, characters }: {
+export default function Part4CavernDetails({ hole, cavern, totalMoney, onOpenStudies, characters, summoning }: {
     hole: Hole;
     cavern: number;
     totalMoney: number;
     onOpenStudies: () => void;
     characters: { playerId: number; playerName: string }[];
+    summoning: Summoning;
 }) {
     switch (cavern) {
         case 0: return <WellView hole={hole} onOpenStudies={onOpenStudies} />;
+        case 2: return <DawgDenView hole={hole} onOpenStudies={onOpenStudies} />;
+        case 3: return <MonumentCavernView hole={hole} cavern={3} onOpenStudies={onOpenStudies} />;
         case 4: return <BellView hole={hole} totalMoney={totalMoney} onOpenStudies={onOpenStudies} />;
         case 5: return <HarpView hole={hole} onOpenStudies={onOpenStudies} />;
         case 6: return <LampView hole={hole} onOpenStudies={onOpenStudies} />;
+        case 8: return <GrottoView hole={hole} onOpenStudies={onOpenStudies} />;
+        case 9: return <MonumentCavernView hole={hole} cavern={9} onOpenStudies={onOpenStudies} />;
         case 10: return <JarView hole={hole} onOpenStudies={onOpenStudies} />;
+        case 12: return <MonumentCavernView hole={hole} cavern={12} onOpenStudies={onOpenStudies} />;
+        case 13: return <GambitView hole={hole} summoning={summoning} onOpenStudies={onOpenStudies} />;
+        case 14: return <TempleView hole={hole} onOpenStudies={onOpenStudies} />;
         case 15: return <FountainView hole={hole} onOpenStudies={onOpenStudies} />;
         case 17: return <CoveView hole={hole} onOpenStudies={onOpenStudies} />;
         default: return null;

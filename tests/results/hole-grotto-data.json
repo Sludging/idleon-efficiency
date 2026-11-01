@@ -1,0 +1,48 @@
+{
+  "extractions": {
+    "colonies_defeated": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[11][26])",
+      "result": 12
+    },
+    "layer": {
+      "expression": "Math.round(Number(idleon.getAttr(\"Holes\")[11][26]) + 1)",
+      "result": 13
+    },
+    "monarch_hp": {
+      "expression": "idleon.callFunction(\"Holes\", \"MonarchHP\", 0, 0)",
+      "result": {
+        "type": "large_number",
+        "value": "3.1676352024078367e+21"
+      }
+    },
+    "mushroom_kills": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[11][27])",
+      "result": 1901637656.7288694
+    },
+    "mushroom_kill_requirement": {
+      "expression": "5000 * Math.pow(3.4, Number(idleon.getAttr(\"Holes\")[11][26]))",
+      "result": 11932103418.465502
+    },
+    "mushroom_kills_remaining": {
+      "expression": "idleon.callFunction(\"Holes\", \"MushKillsLeft\", 0, 0)",
+      "result": 10030465761.736633
+    },
+    "lootie_bonus_percent": {
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 46, 0)",
+      "result": 60
+    },
+    "expie_bonus_percent": {
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 47, 0)",
+      "result": 300
+    },
+    "opie_bonus_percent": {
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 48, 0)",
+      "result": 120
+    },
+    "opals_found": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][8])",
+      "result": 12
+    }
+  },
+  "errors": {}
+}
