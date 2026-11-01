@@ -1,0 +1,70 @@
+{
+  "provenance": {
+    "native": "Idleon 1.24 Halloween_Event, dedicated offline server 3102, acting player 1, preparation player 3. This is a distinct recipient dataset from acting-player-3 alchemy-brewing-data.json.",
+    "saveSha256": "c1f9598ecdcffcb8c20c21c59e8c9faae315b058c3526b2ecdea9bf30cd24707",
+    "winnerEvidence": "Native actor 1 Bubble Breakthrough effect 2085.8999999999996 exceeds actor 8 effect 1460.6000000000001. All other saved talent ranks are zero; the native getter returns zero before added levels. See local://alchemy-native-oracles.md and local://alchemy-projection-oracles.md:262-264.",
+    "projection": "Actual IdleonToolbox getMaxCauldron/getBaseNewBubbleChance/getExpectedNewBubbles executed independently through Bun TypeScript transpilation with retained saved brew and matching native actor-1 chance. Source: parsers/world-2/alchemy.ts:598-635; next-ten identity mapping pages/account/world-2/cauldrons.jsx:283-290. These projections are not native getters. Reproduction and literal output: local://alchemy-projection-oracles.md:180-260. Regenerate the projection independently after save changes; the native config only captures best_brewer_chances.",
+    "competitorParserSha256": "3bdacbe561e17bfb7de349ea3ed25ee25494f70fe15fd991578e0d3875927940",
+    "chanceSemantics": "Raw unbounded percent. Only the expected-unlock iteration clamps probability to one. Next-bubble and preview percentages do not apply UI rounding or a 100-percent display cap."
+  },
+  "extractions": {
+    "best_brewer_chances": {
+      "expression": "[0,1,2,3].map(i=>idleon.callFunction(\"CauldronStats\",\"PctChanceNewBubble\",i,0,0))",
+      "result": [0.026395843616228418,0.27609996762207484,0.10069460728540935,0.27609996762207484]
+    },
+    "best_brewer_previews": {
+      "expression": "IdleonToolbox getExpectedNewBubbles/getMaxCauldron/getBaseNewBubbleChance; retained latest.json; independently proven best recipient player 1; matching native recipient chance; alchemy.ts:598-635 and cauldrons.jsx:283-290",
+      "result": [
+        {"playerId":1,"chancePercent":0.026395843616228418,"estimatedUnlocks":0,"nextBubbles":[
+          {"bubbleNumber":43,"worldNumber":9,"brewRequirement":985824566.0142931,"chancePercent":0.026395843616228418},
+          {"bubbleNumber":44,"worldNumber":9,"brewRequirement":1354979840.839482,"chancePercent":0.018905400446642087},
+          {"bubbleNumber":45,"worldNumber":9,"brewRequirement":1859810477.2421453,"chancePercent":0.013545369320010783},
+          {"bubbleNumber":46,"worldNumber":10,"brewRequirement":2549388346.7371674,"chancePercent":0.009708335610815},
+          {"bubbleNumber":47,"worldNumber":10,"brewRequirement":3490289992.0416026,"chancePercent":0.00696052990668254},
+          {"bubbleNumber":48,"worldNumber":10,"brewRequirement":4772766088.156496,"chancePercent":0.004992043203248811},
+          {"bubbleNumber":49,"worldNumber":10,"brewRequirement":6519062497.080515,"chancePercent":0.003581360649779017},
+          {"bubbleNumber":50,"worldNumber":10,"brewRequirement":8894636334.457876,"chancePercent":0.0025700815239261625},
+          {"bubbleNumber":51,"worldNumber":11,"brewRequirement":12123265219.901905,"chancePercent":0.0018448901872583302},
+          {"bubbleNumber":52,"worldNumber":11,"brewRequirement":16507389293.389563,"chancePercent":0.0013246916426543414}
+        ]},
+        {"playerId":1,"chancePercent":0.27609996762207484,"estimatedUnlocks":4.608458466978005,"nextBubbles":[
+          {"bubbleNumber":36,"worldNumber":8,"brewRequirement":101667932.23354478,"chancePercent":0.27609996762207484},
+          {"bubbleNumber":37,"worldNumber":8,"brewRequirement":141425608.92088515,"chancePercent":0.19717138992141653},
+          {"bubbleNumber":38,"worldNumber":8,"brewRequirement":196333477.2978888,"chancePercent":0.14087266539491838},
+          {"bubbleNumber":39,"worldNumber":8,"brewRequirement":272040641.50180334,"chancePercent":0.10069460728540935},
+          {"bubbleNumber":40,"worldNumber":8,"brewRequirement":376264241.0059114,"chancePercent":0.07200691916899477},
+          {"bubbleNumber":41,"worldNumber":9,"brewRequirement":519534735.7653145,"chancePercent":0.051513749973498855},
+          {"bubbleNumber":42,"worldNumber":9,"brewRequirement":716206175.174779,"chancePercent":0.0368676838045629},
+          {"bubbleNumber":43,"worldNumber":9,"brewRequirement":985824566.0142931,"chancePercent":0.026395843616228404},
+          {"bubbleNumber":44,"worldNumber":9,"brewRequirement":1354979840.839482,"chancePercent":0.018905400446642077},
+          {"bubbleNumber":45,"worldNumber":9,"brewRequirement":1859810477.2421453,"chancePercent":0.013545369320010776}
+        ]},
+        {"playerId":1,"chancePercent":0.10069460728540935,"estimatedUnlocks":0.268854601452043,"nextBubbles":[
+          {"bubbleNumber":39,"worldNumber":8,"brewRequirement":272040641.50180334,"chancePercent":0.10069460728540935},
+          {"bubbleNumber":40,"worldNumber":8,"brewRequirement":376264241.0059114,"chancePercent":0.07200691916899477},
+          {"bubbleNumber":41,"worldNumber":9,"brewRequirement":519534735.7653145,"chancePercent":0.051513749973498855},
+          {"bubbleNumber":42,"worldNumber":9,"brewRequirement":716206175.174779,"chancePercent":0.0368676838045629},
+          {"bubbleNumber":43,"worldNumber":9,"brewRequirement":985824566.0142931,"chancePercent":0.026395843616228404},
+          {"bubbleNumber":44,"worldNumber":9,"brewRequirement":1354979840.839482,"chancePercent":0.018905400446642077},
+          {"bubbleNumber":45,"worldNumber":9,"brewRequirement":1859810477.2421453,"chancePercent":0.013545369320010776},
+          {"bubbleNumber":46,"worldNumber":10,"brewRequirement":2549388346.7371674,"chancePercent":0.009708335610814994},
+          {"bubbleNumber":47,"worldNumber":10,"brewRequirement":3490289992.0416026,"chancePercent":0.0069605299066825355},
+          {"bubbleNumber":48,"worldNumber":10,"brewRequirement":4772766088.156496,"chancePercent":0.004992043203248808}
+        ]},
+        {"playerId":1,"chancePercent":0.27609996762207484,"estimatedUnlocks":4.233302418107543,"nextBubbles":[
+          {"bubbleNumber":36,"worldNumber":8,"brewRequirement":101667932.23354478,"chancePercent":0.27609996762207484},
+          {"bubbleNumber":37,"worldNumber":8,"brewRequirement":141425608.92088515,"chancePercent":0.19717138992141653},
+          {"bubbleNumber":38,"worldNumber":8,"brewRequirement":196333477.2978888,"chancePercent":0.14087266539491838},
+          {"bubbleNumber":39,"worldNumber":8,"brewRequirement":272040641.50180334,"chancePercent":0.10069460728540935},
+          {"bubbleNumber":40,"worldNumber":8,"brewRequirement":376264241.0059114,"chancePercent":0.07200691916899477},
+          {"bubbleNumber":41,"worldNumber":9,"brewRequirement":519534735.7653145,"chancePercent":0.051513749973498855},
+          {"bubbleNumber":42,"worldNumber":9,"brewRequirement":716206175.174779,"chancePercent":0.0368676838045629},
+          {"bubbleNumber":43,"worldNumber":9,"brewRequirement":985824566.0142931,"chancePercent":0.026395843616228404},
+          {"bubbleNumber":44,"worldNumber":9,"brewRequirement":1354979840.839482,"chancePercent":0.018905400446642077},
+          {"bubbleNumber":45,"worldNumber":9,"brewRequirement":1859810477.2421453,"chancePercent":0.013545369320010776}
+        ]}
+      ]
+    }
+  },
+  "errors": {}
+}

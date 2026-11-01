@@ -3,7 +3,8 @@ import { Traps, updateShinyCritterRewardMultiplier, updateTrapDisplayData } from
 import { Stamps, updateStampMaxCarry, updateStamps } from './world-1/stamps';
 import { Statues, updateStatueBonuses } from './world-1/statues';
 import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus, updatePlayerTalentPoints, Player, updatePlayerSpecialTalents } from './player';
-import { Alchemy, updateAlchemy, updateAlchemyDailyBubbleProgression, updateAlchemySlabBubbles, updateAlchemyTomeBubbles } from './world-2/alchemy/alchemy';
+import { Alchemy, updateAlchemy, updateAlchemyDailyBubbleProgression, updateAlchemySlabBubbles, updateAlchemyTomeBubbles, updateAlchemyBrewing } from './world-2/alchemy/alchemy';
+import { updateAlchemyLiquids } from './world-2/alchemy/liquidCauldron';
 import { updatePlayerTalentContexts } from './player';
 import { updateSpeedrunTalentPoints } from './player';
 import { updatePlayerTalentPresentation } from './talentSources';
@@ -504,6 +505,11 @@ const postPostProcessingMap: Record<string, Function> = {
         updateSpeedrun(accountData);
         // This map stores updater returns, so retain the registered domain.
         return accountData.get("speedrun");
+    },
+    // Brewing uses final attributes, talent contexts, Star Signs, and shared bonuses. Liquids use settled capacity sources.
+    "alchemy": (_doc: Cloudsave, accountData: Map<string, any>) => {
+        updateAlchemyBrewing(accountData);
+        return updateAlchemyLiquids(accountData);
     },
 }
 

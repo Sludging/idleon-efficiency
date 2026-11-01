@@ -1,0 +1,27 @@
+{
+  "extractions": {
+    "liquid_capacities": {
+      "expression": "[0,1,2,3].map(i=>idleon.callFunction(\"CauldronStats\",\"LiquidCap\",i,0,0))",
+      "result": [
+        103179.7123773352,
+        105256.1901320232,
+        91310.5655315386,
+        83922.4576803587
+      ]
+    },
+    "liquid_upgrade_requirements": {
+      "expression": "[4,5,6,7].map(i=>[2,3].map(j=>idleon.callFunction(\"CauldronStats\",\"CauldronLvsBrewREQ\",i,j,0)))",
+      "result": [
+        [69880, 68605],
+        [76411, 75746],
+        [77748, 79773],
+        [77078, 76744]
+      ]
+    },
+    "liquid_fill_percentages": {
+      "expression": "(async()=>{const save=await (await fetch(\"/cloud-save\")).json();return [0,1,2,3].map(i=>100*Number(save.CauldronInfo[6][i])/idleon.callFunction(\"CauldronStats\",\"LiquidCap\",i,0,0));})()",
+      "result": [100, 100.00000000000001, 100, 100]
+    }
+  },
+  "errors": {}
+}

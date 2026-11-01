@@ -1,0 +1,760 @@
+{
+  "provenance": {
+    "kind": "competitor-local-saved-state-projection",
+    "description": "Actual IdleonToolbox projection functions executed locally against the retained regular save. These values are not named native game outputs or game-server extraction results.",
+    "save": "tests/fixtures/saves/latest.json",
+    "saveSha256": "c1f9598ecdcffcb8c20c21c59e8c9faae315b058c3526b2ecdea9bf30cd24707",
+    "sources": [
+      {
+        "path": "reference-repos/IdleonToolbox/parsers/world-2/alchemy.ts",
+        "lines": "1222-1287",
+        "sha256": "3bdacbe561e17bfb7de349ea3ed25ee25494f70fe15fd991578e0d3875927940",
+        "functions": ["getMaxBonus(func, x1)", "getBubbleEffectPercent(account, bubble, level)", "getBubbleLevelForPercent(account, bubble, percent)"]
+      },
+      {
+        "path": "reference-repos/IdleonToolbox/utility/wiki/growth.mjs",
+        "lines": "1-77",
+        "sha256": "48b3c11c232cd7b41443a9a040d39398d6c9b0498e91fa5b3eb9468035820083"
+      },
+      {
+        "path": "data/domain/data/BubbleRepo.ts",
+        "lines": "19-57",
+        "role": "Static identities and curve operands. The milestone projection below records all selected cauldrons and indexes."
+      }
+    ],
+    "prismaMultiplier": {
+      "source": "tests/results/bubble-bonus-data.json",
+      "sha256": "ca234cd39d9e3427d382387f103cf2ff9ecd853ed6c0edd5828fb1c738a3a91b",
+      "label": "alchemy_prismatic_bonus",
+      "nativeExpression": "idleon.callFunction(\"ArcaneType\", \"PrismaBonusMult\", 0, 0)",
+      "result": 3.2500665808410907,
+      "confirmation": "The native researcher independently captured the same multiplier from offline game version 1.24 with matching retained inputs."
+    },
+    "nativeCurveEvidence": {
+      "version": "1.24",
+      "sourceFunctions": [
+        "ActorEvents_189._customBlock_CauldronStats(\"BubbleBonus\", cauldronIndex, bubbleIndex, 0)",
+        "ActorEvents_12._customBlock_ArbitraryCode5Inputs(func, x1, x2, level, 0, 0)"
+      ],
+      "description": "Native source establishes the growth curves and Prisma scaling. The finite maximum display and progress percentage follow competitor policy, not a named native result."
+    },
+    "units": {
+      "maximumBonus": "Prisma-scaled raw growth bonus: STR points for Roid Ragin, dimensionless multiplier for Warriors Rule, percentage points for Hearty Diggy. Excludes character and account effect amplification.",
+      "bonusProgress": "Percent from 0 to 100. Multiplier curves measure progress of their gain, not the whole current multiplier divided by its maximum.",
+      "null": "No supported finite maximum; the public Bubble API must return undefined for both methods."
+    },
+    "coverageLimits": [
+      "Saved representatives cover addDECAY, Prisma decayMulti, ordinary decay, non-Prisma decayMulti, unbounded bigBase, all five next targets, and current progress above 99%.",
+      "Read-only proposed levels cover zero, the addDECAY transition, and exact milestone candidates and predecessors.",
+      "The retained save has no Prisma addDECAY record. Other unsupported curves and invalid inputs remain uncovered."
+    ],
+    "reproduction": {
+      "status": "Actual competitor evaluation ran through Bun. This command reconstructs that evaluation; the assembled shell replay was not separately run.",
+      "workingDirectory": "repository root",
+      "argv": [
+        "bun",
+        "-e",
+        "const save=await Bun.file(\"tests/fixtures/saves/latest.json\").json();\nconst p=(await Bun.file(\"reference-repos/IdleonToolbox/parsers/world-2/alchemy.ts\").text()).split(\"\\n\");\nconst g=await Bun.file(\"reference-repos/IdleonToolbox/utility/wiki/growth.mjs\").text();\nconst source=g+\"\\n\"+p.slice(1221,1263).join(\"\\n\");\nconst js=new Bun.Transpiler({loader:\"ts\"}).transformSync(source.replaceAll(\"export \",\"\"));\nconst prisma=(await Bun.file(\"tests/results/bubble-bonus-data.json\").json()).extractions.alchemy_prismatic_bonus.result;\nconst api=new Function(\"isPrismaBubble\",\"getPrismaMulti\",\"round\",js+\"\\nreturn {getMaxBonus,getBubbleEffectPercent};\")((a,id)=>a.alchemy.prismaBubbles.indexOf(id+\",\")!==-1,()=>({value:prisma}),n=>Math.round((n+Number.EPSILON)*100)/100);\nconst records=[[\"Roid Ragin\",0,\"addDECAY\",1,0],[\"Warriors Rule\",1,\"decayMulti\",2,50],[\"Hearty Diggy\",2,\"decay\",50,100],[\"Wyoming Blood\",3,\"bigBase\",23.5,1.5]];\nconsole.log(JSON.stringify(records.map(([name,index,func,x1,x2])=>{const level=Number(save.CauldronInfo[0][index]),id=\"_\"+index;const prismatic=save.OptLacc[384].includes(id+\",\");const rawMaximum=api.getMaxBonus(func,x1);return {cauldronIndex:0,bubbleIndex:index,name,func,level,prismatic,maximumBonus:rawMaximum===null?null:rawMaximum*(prismatic?prisma:1),bonusProgress:api.getBubbleEffectPercent({alchemy:{prismaBubbles:save.OptLacc[384]}},{func,x1,x2,bubbleIndex:id,level})};}),null,2));"
+      ]
+    },
+    "milestoneProjection": {
+      "kind": "actual competitor local read-only evaluation",
+      "save": "tests/fixtures/saves/latest.json",
+      "saveSha256": "c1f9598ecdcffcb8c20c21c59e8c9faae315b058c3526b2ecdea9bf30cd24707",
+      "hashes": {
+        "tests/fixtures/saves/latest.json": "c1f9598ecdcffcb8c20c21c59e8c9faae315b058c3526b2ecdea9bf30cd24707",
+        "tests/results/bubble-bonus-data.json": "ca234cd39d9e3427d382387f103cf2ff9ecd853ed6c0edd5828fb1c738a3a91b",
+        "tests/results/alchemy-bubble-progression-data.json": "3f88be4b1f62a73314e1b016dfafad85d8b9595f5ee6dafe63843f22a900fccd",
+        "data/domain/data/BubbleRepo.ts": "60bd5c0929932e7e428b42891f9906e3000d1a5e75a1dbf69be6b414a7fd8599",
+        "reference-repos/IdleonToolbox/parsers/world-2/alchemy.ts": "3bdacbe561e17bfb7de349ea3ed25ee25494f70fe15fd991578e0d3875927940",
+        "reference-repos/IdleonToolbox/utility/wiki/growth.mjs": "48b3c11c232cd7b41443a9a040d39398d6c9b0498e91fa5b3eb9468035820083",
+        "reference-repos/IdleonToolbox/utility/helpers.js": "cc3da4876f48111b4f855567497f5f1b4944726e4a19f17832e3d36b0c4d9e0e"
+      },
+      "gameVersionContext": {
+        "version": "1.24",
+        "sourceFunctions": [
+          "ActorEvents_189._customBlock_CauldronStats(\"BubbleBonus\", cauldronIndex, bubbleIndex, 0)",
+          "ActorEvents_12._customBlock_ArbitraryCode5Inputs(func, x1, x2, level, 0, 0)"
+        ],
+        "description": "Native source establishes the growth curves and Prisma scaling. The finite maximum display and progress percentage follow competitor policy, not a named native result."
+      },
+      "prisma": {
+        "source": "tests/results/bubble-bonus-data.json",
+        "sha256": "ca234cd39d9e3427d382387f103cf2ff9ecd853ed6c0edd5828fb1c738a3a91b",
+        "label": "alchemy_prismatic_bonus",
+        "nativeExpression": "idleon.callFunction(\"ArcaneType\", \"PrismaBonusMult\", 0, 0)",
+        "result": 3.2500665808410907,
+        "confirmation": "The native researcher independently captured the same multiplier from offline game version 1.24 with matching retained inputs.",
+        "value": 3.2500665808410907
+      },
+      "operandMapping": {
+        "level": "Number(save.CauldronInfo[cauldronIndex][index])",
+        "coefficients": "Generated BubbleRepo.ts records in cauldron and bubble order; no website domain calls",
+        "bubbleIndex": "CAULDRON_INFO bubblePrefix + index; prefixes _,a,b,c",
+        "prismaBubbles": "save.OptLacc[384]",
+        "accountProjection": {
+          "alchemy": {
+            "prismaBubbles": "0c17,c9,_1,b1,a1,_16,b16,a16,b32,c32,c2,_30,c31,a30,_18,"
+          }
+        }
+      },
+      "sources": {
+        "parser": "1222-1287; isPrismaBubble 122-124; CAULDRON_INFO 54-59",
+        "growth": "1-77",
+        "round": "utility/helpers.js:301-303"
+      },
+      "policy": "Next target uses raw unrounded progress strictly less than target. Minimal integer level uses exact comparator progress >= target, without tolerance.",
+      "limits": [
+        "Competitor-defined progress and milestone policy, not a named native game milestone output.",
+        "Proposed levels do not mutate retained save or domain objects.",
+        "Native Prisma multiplier reused from retained capture; no new server observation."
+      ],
+      "coverage": {
+        "savedRecords": 140,
+        "prismaAddDecay": [],
+        "ordinaryDecayMulti": [
+          "a12",
+          "b11",
+          "c4",
+          "c21",
+          "c28"
+        ],
+        "savedAtLeast99": [
+          "c9",
+          "c17",
+          "c21"
+        ]
+      },
+      "reproduction": {
+        "status": "Executed successfully with this exact argv; exit code 0, empty stderr.",
+        "workingDirectory": "/home/sludge/Development/idleon-efficiency",
+        "argv": [
+          "bun",
+          "-e",
+          "const paths={save:'tests/fixtures/saves/latest.json',capture:'tests/results/bubble-bonus-data.json',prior:'tests/results/alchemy-bubble-progression-data.json',static:'data/domain/data/BubbleRepo.ts',parser:'reference-repos/IdleonToolbox/parsers/world-2/alchemy.ts',growth:'reference-repos/IdleonToolbox/utility/wiki/growth.mjs',helpers:'reference-repos/IdleonToolbox/utility/helpers.js'};\nconst text=Object.fromEntries(await Promise.all(Object.entries(paths).map(async([k,p])=>[k,await Bun.file(p).text()])));\nconst save=JSON.parse(text.save),capture=JSON.parse(text.capture),prior=JSON.parse(text.prior);\nconst prisma=capture.extractions.alchemy_prismatic_bonus.result;\nconst p=text.parser.split('\\n');\nconst helper=text.helpers.split('\\n').slice(300,303).join('\\n');\nconst source=text.growth+'\\n'+p.slice(121,124).join('\\n')+'\\n'+helper+'\\n'+p.slice(1221,1287).join('\\n');\nconst js=new Bun.Transpiler({loader:'ts'}).transformSync(source.replaceAll('export ',''));\nconst api=new Function('getPrismaMulti',js+'\\nreturn {getMaxBonus,getBubbleEffectPercent,getBubbleLevelForPercent,isPrismaBubble};')(()=>({value:prisma}));\nconst account={alchemy:{prismaBubbles:save.OptLacc[384]}};\nconst all=[];let ci=-1,bi=0;\nfor(const line of text.static.split('\\n')){\n if(line.includes('new CauldronBase(')){ci++;bi=0;}\n}\nconst groups=text.static.split('new CauldronBase(').slice(1);\nfor(let c=0;c<Math.min(4,groups.length);c++){\n const re=/<BubbleModel>\\{\\s*\"cauldron\":\\s*\"([^\"]+)\",\\s*\"name\":\\s*\"([^\"]+)\",\\s*\"x1\":\\s*([\\d.-]+),\\s*\"x2\":\\s*([\\d.-]+),\\s*\"func\":\\s*\"([^\"]+)\"/g;let m,i=0;\n while((m=re.exec(groups[c]))){const b={cauldronIndex:c,index:i,name:m[2],cauldron:m[1],func:m[5],x1:Number(m[3]),x2:Number(m[4]),bubbleIndex:['_','a','b','c'][c]+i,level:Number(save.CauldronInfo[c][i])};i++;b.prismatic=api.isPrismaBubble(account,b.bubbleIndex);b.bonusProgress=api.getBubbleEffectPercent(account,b);all.push(b);}\n}\nconst selected=[...all.filter(b=>b.cauldronIndex===0&&b.index<4)];\nfor(const b of [all.find(b=>b.bonusProgress!==null&&b.bonusProgress>=99),all.find(b=>b.prismatic&&b.func==='addDECAY'),all.find(b=>!b.prismatic&&b.func==='decayMulti')])if(b&&!selected.some(x=>x.bubbleIndex===b.bubbleIndex))selected.push(b);\nfor(const [lower,upper] of [[0,50],[50,75],[75,90],[90,95]]){const b=all.find(b=>b.bonusProgress!==null&&b.bonusProgress>=lower&&b.bonusProgress<upper);if(b&&!selected.some(x=>x.bubbleIndex===b.bubbleIndex))selected.push(b);}\nconst targets=[50,75,90,95,99];\nconst projections=selected.map(b=>{\n const progress=l=>api.getBubbleEffectPercent(account,b,l);const rawMax=api.getMaxBonus(b.func,b.x1);\n const milestones=rawMax===null?[]:targets.map(percent=>{const candidate=api.getBubbleLevelForPercent(account,b,percent);let level=candidate;while(level>0&&progress(level-1)>=percent)level--;while(progress(level)<percent)level++;return {percent,comparatorCandidate:candidate,candidateProgress:progress(candidate),candidatePredecessorProgress:candidate>0?progress(candidate-1):null,minimalLevel:level,progress:progress(level),predecessorProgress:level>0?progress(level-1):null};});\n const next=targets.find(t=>t>b.bonusProgress);const milestone=rawMax===null||!next?null:milestones.find(m=>m.percent===next);\n return {...b,prismaticMultiplier:b.prismatic?prisma:1,saveLevelPath:'CauldronInfo['+b.cauldronIndex+']['+b.index+']',rawMaximum:rawMax,maximumBonus:rawMax===null?null:rawMax*(b.prismatic?prisma:1),nextGrowthMilestone:milestone?{percentage:milestone.percent,level:milestone.minimalLevel}:null,milestoneBoundaries:milestones.map(m=>({percentage:m.percent,level:m.minimalLevel,progress:m.progress,predecessorProgress:m.predecessorProgress,comparatorLevel:m.comparatorCandidate,comparatorProgress:m.candidateProgress,comparatorPredecessorProgress:m.candidatePredecessorProgress})),proposedLevels:[0,50000,50001].map(level=>({level,progress:progress(level)}))};\n});\nconst hashes=Object.fromEntries(Object.entries(text).map(([k,t])=>[paths[k],new Bun.CryptoHasher('sha256').update(t).digest('hex')]));\nconsole.log(JSON.stringify({provenance:{kind:'actual competitor local read-only evaluation',save:paths.save,saveSha256:hashes[paths.save],hashes,gameVersionContext:prior.provenance.nativeCurveEvidence,prisma:{...prior.provenance.prismaMultiplier,value:prisma},operandMapping:{level:'Number(save.CauldronInfo[cauldronIndex][index])',coefficients:'Generated BubbleRepo.ts records in cauldron and bubble order; no website domain calls',bubbleIndex:'CAULDRON_INFO bubblePrefix + index; prefixes _,a,b,c',prismaBubbles:'save.OptLacc[384]',accountProjection:account},sources:{parser:'1222-1287; isPrismaBubble 122-124; CAULDRON_INFO 54-59',growth:'1-77',round:'utility/helpers.js:301-303'},policy:'Next target uses raw unrounded progress strictly less than target. Minimal integer level uses exact comparator progress >= target, without tolerance.',limits:['Competitor-defined progress and milestone policy, not a named native game milestone output.','Proposed levels do not mutate retained save or domain objects.','Native Prisma multiplier reused from retained capture; no new server observation.'],coverage:{savedRecords:all.length,prismaAddDecay:all.filter(b=>b.prismatic&&b.func==='addDECAY').map(b=>b.bubbleIndex),ordinaryDecayMulti:all.filter(b=>!b.prismatic&&b.func==='decayMulti').map(b=>b.bubbleIndex),savedAtLeast99:all.filter(b=>b.bonusProgress!==null&&b.bonusProgress>=99).map(b=>b.bubbleIndex)}},projections}));"
+        ],
+        "runtime": "Bun v1.3.14 (Linux x64)",
+        "checksRun": []
+      },
+      "coverageGaps": [
+        "No genuinely saved Prisma addDECAY record exists among 140 static bubble identities projected from this retained save. Prisma addDECAY rounding coverage remains unavailable.",
+        "Proposed levels are read-only comparator arguments, not genuine saved levels.",
+        "Unsupported growth coverage includes bigBase only.",
+        "No finite saved bubble has raw progress exactly at 50%, 75%, 90%, 95%, or 99%. Strict equality selection remains unobserved.",
+        "No saved addDECAY bubble has a next target of 95% or 99%. Proposed-level comparisons cover those rounded boundaries, not saved-state inverse calls."
+      ]
+    }
+  },
+  "extractions": {
+    "bubble_progression": {
+      "expression": "Actual IdleonToolbox getMaxBonus/getBubbleEffectPercent/getBubbleLevelForPercent; retained latest.json; parser lines 1222-1287 and independent growth.mjs; local policy projection, not native capture",
+      "result": [
+        {
+          "cauldronIndex": 0,
+          "name": "Roid Ragin",
+          "cauldron": "Power Cauldron",
+          "func": "addDECAY",
+          "x1": 1,
+          "x2": 0,
+          "level": 61830,
+          "prismatic": false,
+          "bonusProgress": 53.65507,
+          "prismaticMultiplier": 1,
+          "saveLevelPath": "CauldronInfo[0][0]",
+          "rawMaximum": 100000,
+          "maximumBonus": 100000,
+          "nextGrowthMilestone": {
+            "percentage": 75,
+            "level": 200000
+          },
+          "milestoneBoundaries": [
+            {
+              "percentage": 50,
+              "level": 50000,
+              "progress": 50,
+              "predecessorProgress": 49.999,
+              "comparatorLevel": 50000,
+              "comparatorProgress": 50,
+              "comparatorPredecessorProgress": 49.999
+            },
+            {
+              "percentage": 75,
+              "level": 200000,
+              "progress": 75,
+              "predecessorProgress": 74.99992,
+              "comparatorLevel": 200000,
+              "comparatorProgress": 75,
+              "comparatorPredecessorProgress": 74.99992
+            },
+            {
+              "percentage": 90,
+              "level": 650000,
+              "progress": 90,
+              "predecessorProgress": 89.99999000000001,
+              "comparatorLevel": 650000,
+              "comparatorProgress": 90,
+              "comparatorPredecessorProgress": 89.99999000000001
+            },
+            {
+              "percentage": 95,
+              "level": 1399999,
+              "progress": 95,
+              "predecessorProgress": 94.99999,
+              "comparatorLevel": 1399999,
+              "comparatorProgress": 95,
+              "comparatorPredecessorProgress": 94.99999
+            },
+            {
+              "percentage": 99,
+              "level": 7399963,
+              "progress": 99,
+              "predecessorProgress": 98.99999000000001,
+              "comparatorLevel": 7399963,
+              "comparatorProgress": 99,
+              "comparatorPredecessorProgress": 98.99999000000001
+            }
+          ],
+          "proposedLevels": [
+            {
+              "level": 0,
+              "progress": 0
+            },
+            {
+              "level": 50000,
+              "progress": 50
+            },
+            {
+              "level": 50001,
+              "progress": 50.000330000000005
+            }
+          ],
+          "bubbleIndex": 0,
+          "comparatorBubbleIndex": "_0"
+        },
+        {
+          "cauldronIndex": 0,
+          "name": "Warriors Rule",
+          "cauldron": "Power Cauldron",
+          "func": "decayMulti",
+          "x1": 2,
+          "x2": 50,
+          "level": 2001,
+          "prismatic": true,
+          "bonusProgress": 97.56216479765968,
+          "prismaticMultiplier": 3.2500665808410907,
+          "saveLevelPath": "CauldronInfo[0][1]",
+          "rawMaximum": 3,
+          "maximumBonus": 9.750199742523272,
+          "nextGrowthMilestone": {
+            "percentage": 99,
+            "level": 4950
+          },
+          "milestoneBoundaries": [
+            {
+              "percentage": 50,
+              "level": 50,
+              "progress": 50,
+              "predecessorProgress": 49.494949494949495,
+              "comparatorLevel": 50,
+              "comparatorProgress": 50,
+              "comparatorPredecessorProgress": 49.494949494949495
+            },
+            {
+              "percentage": 75,
+              "level": 150,
+              "progress": 75,
+              "predecessorProgress": 74.87437185929649,
+              "comparatorLevel": 150,
+              "comparatorProgress": 75,
+              "comparatorPredecessorProgress": 74.87437185929649
+            },
+            {
+              "percentage": 90,
+              "level": 450,
+              "progress": 90,
+              "predecessorProgress": 89.97995991983969,
+              "comparatorLevel": 450,
+              "comparatorProgress": 90,
+              "comparatorPredecessorProgress": 89.97995991983969
+            },
+            {
+              "percentage": 95,
+              "level": 950,
+              "progress": 95,
+              "predecessorProgress": 94.994994994995,
+              "comparatorLevel": 950,
+              "comparatorProgress": 95,
+              "comparatorPredecessorProgress": 94.994994994995
+            },
+            {
+              "percentage": 99,
+              "level": 4950,
+              "progress": 99,
+              "predecessorProgress": 98.999799959992,
+              "comparatorLevel": 4950,
+              "comparatorProgress": 99,
+              "comparatorPredecessorProgress": 98.999799959992
+            }
+          ],
+          "proposedLevels": [
+            {
+              "level": 0,
+              "progress": 0
+            },
+            {
+              "level": 50000,
+              "progress": 99.9000999000999
+            },
+            {
+              "level": 50001,
+              "progress": 99.90010189606602
+            }
+          ],
+          "bubbleIndex": 1,
+          "comparatorBubbleIndex": "_1"
+        },
+        {
+          "cauldronIndex": 0,
+          "name": "Hearty Diggy",
+          "cauldron": "Power Cauldron",
+          "func": "decay",
+          "x1": 50,
+          "x2": 100,
+          "level": 2002,
+          "prismatic": false,
+          "bonusProgress": 95.24262607040913,
+          "prismaticMultiplier": 1,
+          "saveLevelPath": "CauldronInfo[0][2]",
+          "rawMaximum": 50,
+          "maximumBonus": 50,
+          "nextGrowthMilestone": {
+            "percentage": 99,
+            "level": 9900
+          },
+          "milestoneBoundaries": [
+            {
+              "percentage": 50,
+              "level": 100,
+              "progress": 50,
+              "predecessorProgress": 49.74874371859296,
+              "comparatorLevel": 100,
+              "comparatorProgress": 50,
+              "comparatorPredecessorProgress": 49.74874371859296
+            },
+            {
+              "percentage": 75,
+              "level": 300,
+              "progress": 75,
+              "predecessorProgress": 74.93734335839599,
+              "comparatorLevel": 300,
+              "comparatorProgress": 75,
+              "comparatorPredecessorProgress": 74.93734335839599
+            },
+            {
+              "percentage": 90,
+              "level": 900,
+              "progress": 90,
+              "predecessorProgress": 89.98998998999,
+              "comparatorLevel": 900,
+              "comparatorProgress": 90,
+              "comparatorPredecessorProgress": 89.98998998999
+            },
+            {
+              "percentage": 95,
+              "level": 1900,
+              "progress": 95,
+              "predecessorProgress": 94.99749874937469,
+              "comparatorLevel": 1900,
+              "comparatorProgress": 95,
+              "comparatorPredecessorProgress": 94.99749874937469
+            },
+            {
+              "percentage": 99,
+              "level": 9900,
+              "progress": 99,
+              "predecessorProgress": 98.999899989999,
+              "comparatorLevel": 9900,
+              "comparatorProgress": 99,
+              "comparatorPredecessorProgress": 98.999899989999
+            }
+          ],
+          "proposedLevels": [
+            {
+              "level": 0,
+              "progress": 0
+            },
+            {
+              "level": 50000,
+              "progress": 99.8003992015968
+            },
+            {
+              "level": 50001,
+              "progress": 99.80040318556516
+            }
+          ],
+          "bubbleIndex": 2,
+          "comparatorBubbleIndex": "_2"
+        },
+        {
+          "cauldronIndex": 0,
+          "name": "Wyoming Blood",
+          "cauldron": "Power Cauldron",
+          "func": "bigBase",
+          "x1": 23.5,
+          "x2": 1.5,
+          "level": 1053,
+          "prismatic": false,
+          "bonusProgress": null,
+          "prismaticMultiplier": 1,
+          "saveLevelPath": "CauldronInfo[0][3]",
+          "rawMaximum": null,
+          "maximumBonus": null,
+          "nextGrowthMilestone": null,
+          "milestoneBoundaries": [],
+          "proposedLevels": [
+            {
+              "level": 0,
+              "progress": null
+            },
+            {
+              "level": 50000,
+              "progress": null
+            },
+            {
+              "level": 50001,
+              "progress": null
+            }
+          ],
+          "bubbleIndex": 3,
+          "comparatorBubbleIndex": "_3"
+        },
+        {
+          "cauldronIndex": 3,
+          "name": "Laaarrrryyyy",
+          "cauldron": "Kazam Cauldron",
+          "func": "decay",
+          "x1": 120,
+          "x2": 100,
+          "level": 43163,
+          "prismatic": true,
+          "bonusProgress": 99.76885560409588,
+          "prismaticMultiplier": 3.2500665808410907,
+          "saveLevelPath": "CauldronInfo[3][9]",
+          "rawMaximum": 120,
+          "maximumBonus": 390.00798970093086,
+          "nextGrowthMilestone": null,
+          "milestoneBoundaries": [
+            {
+              "percentage": 50,
+              "level": 100,
+              "progress": 50,
+              "predecessorProgress": 49.74874371859296,
+              "comparatorLevel": 100,
+              "comparatorProgress": 50,
+              "comparatorPredecessorProgress": 49.74874371859296
+            },
+            {
+              "percentage": 75,
+              "level": 300,
+              "progress": 75,
+              "predecessorProgress": 74.93734335839599,
+              "comparatorLevel": 300,
+              "comparatorProgress": 75,
+              "comparatorPredecessorProgress": 74.93734335839599
+            },
+            {
+              "percentage": 90,
+              "level": 900,
+              "progress": 90,
+              "predecessorProgress": 89.98998998999,
+              "comparatorLevel": 900,
+              "comparatorProgress": 90,
+              "comparatorPredecessorProgress": 89.98998998999
+            },
+            {
+              "percentage": 95,
+              "level": 1900,
+              "progress": 95,
+              "predecessorProgress": 94.99749874937469,
+              "comparatorLevel": 1900,
+              "comparatorProgress": 95,
+              "comparatorPredecessorProgress": 94.99749874937469
+            },
+            {
+              "percentage": 99,
+              "level": 9900,
+              "progress": 99,
+              "predecessorProgress": 98.999899989999,
+              "comparatorLevel": 9900,
+              "comparatorProgress": 99,
+              "comparatorPredecessorProgress": 98.999899989999
+            }
+          ],
+          "proposedLevels": [
+            {
+              "level": 0,
+              "progress": 0
+            },
+            {
+              "level": 50000,
+              "progress": 99.8003992015968
+            },
+            {
+              "level": 50001,
+              "progress": 99.80040318556516
+            }
+          ],
+          "bubbleIndex": 9,
+          "comparatorBubbleIndex": "c9"
+        },
+        {
+          "cauldronIndex": 1,
+          "name": "Cuz I Catch Em All",
+          "cauldron": "Quicc Cauldron",
+          "func": "decayMulti",
+          "x1": 3,
+          "x2": 100,
+          "level": 781,
+          "prismatic": false,
+          "bonusProgress": 88.64926220204313,
+          "prismaticMultiplier": 1,
+          "saveLevelPath": "CauldronInfo[1][12]",
+          "rawMaximum": 4,
+          "maximumBonus": 4,
+          "nextGrowthMilestone": {
+            "percentage": 90,
+            "level": 900
+          },
+          "milestoneBoundaries": [
+            {
+              "percentage": 50,
+              "level": 100,
+              "progress": 50,
+              "predecessorProgress": 49.74874371859296,
+              "comparatorLevel": 100,
+              "comparatorProgress": 50,
+              "comparatorPredecessorProgress": 49.74874371859296
+            },
+            {
+              "percentage": 75,
+              "level": 300,
+              "progress": 75,
+              "predecessorProgress": 74.93734335839599,
+              "comparatorLevel": 300,
+              "comparatorProgress": 75,
+              "comparatorPredecessorProgress": 74.93734335839599
+            },
+            {
+              "percentage": 90,
+              "level": 900,
+              "progress": 90,
+              "predecessorProgress": 89.98998998999,
+              "comparatorLevel": 900,
+              "comparatorProgress": 90,
+              "comparatorPredecessorProgress": 89.98998998999
+            },
+            {
+              "percentage": 95,
+              "level": 1900,
+              "progress": 95,
+              "predecessorProgress": 94.99749874937469,
+              "comparatorLevel": 1900,
+              "comparatorProgress": 95,
+              "comparatorPredecessorProgress": 94.99749874937469
+            },
+            {
+              "percentage": 99,
+              "level": 9900,
+              "progress": 99,
+              "predecessorProgress": 98.999899989999,
+              "comparatorLevel": 9900,
+              "comparatorProgress": 99,
+              "comparatorPredecessorProgress": 98.999899989999
+            }
+          ],
+          "proposedLevels": [
+            {
+              "level": 0,
+              "progress": 0
+            },
+            {
+              "level": 50000,
+              "progress": 99.8003992015968
+            },
+            {
+              "level": 50001,
+              "progress": 99.80040318556516
+            }
+          ],
+          "bubbleIndex": 12,
+          "comparatorBubbleIndex": "a12"
+        },
+        {
+          "cauldronIndex": 0,
+          "name": "Big Meaty Claws",
+          "cauldron": "Power Cauldron",
+          "func": "addDECAY",
+          "x1": 4,
+          "x2": 0,
+          "level": 775,
+          "prismatic": false,
+          "bonusProgress": 0.775,
+          "prismaticMultiplier": 1,
+          "saveLevelPath": "CauldronInfo[0][5]",
+          "rawMaximum": 400000,
+          "maximumBonus": 400000,
+          "nextGrowthMilestone": {
+            "percentage": 50,
+            "level": 50000
+          },
+          "milestoneBoundaries": [
+            {
+              "percentage": 50,
+              "level": 50000,
+              "progress": 50,
+              "predecessorProgress": 49.999,
+              "comparatorLevel": 50000,
+              "comparatorProgress": 50,
+              "comparatorPredecessorProgress": 49.999
+            },
+            {
+              "percentage": 75,
+              "level": 200000,
+              "progress": 75,
+              "predecessorProgress": 74.9999175,
+              "comparatorLevel": 200000,
+              "comparatorProgress": 75,
+              "comparatorPredecessorProgress": 74.9999175
+            },
+            {
+              "percentage": 90,
+              "level": 650000,
+              "progress": 90,
+              "predecessorProgress": 89.9999875,
+              "comparatorLevel": 650000,
+              "comparatorProgress": 90,
+              "comparatorPredecessorProgress": 89.9999875
+            },
+            {
+              "percentage": 95,
+              "level": 1400000,
+              "progress": 95,
+              "predecessorProgress": 94.9999975,
+              "comparatorLevel": 1400000,
+              "comparatorProgress": 95,
+              "comparatorPredecessorProgress": 94.9999975
+            },
+            {
+              "percentage": 99,
+              "level": 7399991,
+              "progress": 99,
+              "predecessorProgress": 98.9999975,
+              "comparatorLevel": 7399991,
+              "comparatorProgress": 99,
+              "comparatorPredecessorProgress": 98.9999975
+            }
+          ],
+          "proposedLevels": [
+            {
+              "level": 0,
+              "progress": 0
+            },
+            {
+              "level": 50000,
+              "progress": 50
+            },
+            {
+              "level": 50001,
+              "progress": 50.0003325
+            }
+          ],
+          "bubbleIndex": 5,
+          "comparatorBubbleIndex": "_5"
+        },
+        {
+          "cauldronIndex": 0,
+          "name": "Reely Smart",
+          "cauldron": "Power Cauldron",
+          "func": "decay",
+          "x1": 100,
+          "x2": 80,
+          "level": 1000,
+          "prismatic": false,
+          "bonusProgress": 92.5925925925926,
+          "prismaticMultiplier": 1,
+          "saveLevelPath": "CauldronInfo[0][4]",
+          "rawMaximum": 100,
+          "maximumBonus": 100,
+          "nextGrowthMilestone": {
+            "percentage": 95,
+            "level": 1520
+          },
+          "milestoneBoundaries": [
+            {
+              "percentage": 50,
+              "level": 80,
+              "progress": 50,
+              "predecessorProgress": 49.685534591194966,
+              "comparatorLevel": 80,
+              "comparatorProgress": 50,
+              "comparatorPredecessorProgress": 49.685534591194966
+            },
+            {
+              "percentage": 75,
+              "level": 240,
+              "progress": 75,
+              "predecessorProgress": 74.92163009404389,
+              "comparatorLevel": 240,
+              "comparatorProgress": 75,
+              "comparatorPredecessorProgress": 74.92163009404389
+            },
+            {
+              "percentage": 90,
+              "level": 720,
+              "progress": 90,
+              "predecessorProgress": 89.98748435544431,
+              "comparatorLevel": 720,
+              "comparatorProgress": 90,
+              "comparatorPredecessorProgress": 89.98748435544431
+            },
+            {
+              "percentage": 95,
+              "level": 1520,
+              "progress": 95,
+              "predecessorProgress": 94.99687304565353,
+              "comparatorLevel": 1520,
+              "comparatorProgress": 95,
+              "comparatorPredecessorProgress": 94.99687304565353
+            },
+            {
+              "percentage": 99,
+              "level": 7920,
+              "progress": 99,
+              "predecessorProgress": 98.99987498437305,
+              "comparatorLevel": 7920,
+              "comparatorProgress": 99,
+              "comparatorPredecessorProgress": 98.99987498437305
+            }
+          ],
+          "proposedLevels": [
+            {
+              "level": 0,
+              "progress": 0
+            },
+            {
+              "level": 50000,
+              "progress": 99.84025559105432
+            },
+            {
+              "level": 50001,
+              "progress": 99.84025878077514
+            }
+          ],
+          "bubbleIndex": 4,
+          "comparatorBubbleIndex": "_4"
+        }
+      ]
+    }
+  },
+  "errors": {}
+}

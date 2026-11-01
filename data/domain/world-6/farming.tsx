@@ -65,10 +65,10 @@ export class ExoticMarketUpgrade {
         this.isOrganic = isOrganic;
     }
 
-    getBonus(): number {
+    getBonus(level: number = this.level): number {
         let bonus = this.isDiminishing
-            ? this.data.effect * this.level / (1000 + this.level)
-            : this.data.effect * this.level;
+            ? this.data.effect * level / (1000 + level)
+            : this.data.effect * level;
         if (this.isOrganic) {
             bonus *= 2;
         }

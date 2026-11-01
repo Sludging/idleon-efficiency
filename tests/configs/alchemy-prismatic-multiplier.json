@@ -35,7 +35,7 @@
     {
       "label": "total_purple_sigils",
       "expression": "idleon.callFunction(\"Labb\", \"TotalPurpleSigils\", \"0\", 0, 0)",
-      "description": "Total purple sigils (boost level >= 3)"
+      "description": "Purple sigil count. Native Prisma strength adds 0.2 percentage points per purple sigil."
     },
     {
       "label": "exotic_market_bonus_48",
@@ -50,7 +50,7 @@
     {
       "label": "companion_88_bonus",
       "expression": "idleon.callFunction(\"Companions\", 88, 0)",
-      "description": "Companion 88 prismatic multiplier input"
+      "description": "Active companion 88 bonus, including evolution. Native Prisma strength adds 50 times this value in percentage points."
     }
   ]
 }

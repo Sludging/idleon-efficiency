@@ -1,0 +1,21 @@
+{
+  "description": "Alchemy liquid CORE outputs for the retained regular save. Saved amounts, upgrade levels and progress, player assignments, and Dragonic purchases are read from the retained save in the test, not from advancing runtime balances.",
+  "target": "Alchemy.liquids capacities, saved fill percentages, and distinct capacity/rate upgrade requirements",
+  "extractions": [
+    {
+      "label": "liquid_capacities",
+      "expression": "[0,1,2,3].map(i=>idleon.callFunction(\"CauldronStats\",\"LiquidCap\",i,0,0))",
+      "description": "Maximum capacity for all four index-ordered liquids. Native upgrade levels and relevant saved account state were matched to the retained regular save."
+    },
+    {
+      "label": "liquid_upgrade_requirements",
+      "expression": "[4,5,6,7].map(i=>[2,3].map(j=>idleon.callFunction(\"CauldronStats\",\"CauldronLvsBrewREQ\",i,j,0)))",
+      "description": "Capacity and Rate requirement pairs for all four liquids. Native categories 4 through 7 use slots 2 and 3, which map to saved upgrade indexes 18+4*liquidIndex and 19+4*liquidIndex. Slots 0 and 1 are not liquid upgrades."
+    },
+    {
+      "label": "liquid_fill_percentages",
+      "expression": "(async()=>{const save=await (await fetch(\"/cloud-save\")).json();return [0,1,2,3].map(i=>100*Number(save.CauldronInfo[6][i])/idleon.callFunction(\"CauldronStats\",\"LiquidCap\",i,0,0));})()",
+      "description": "Independent display projection, not a named native getter: unrounded, unclamped saved amount divided by native capacity, as a percentage. Source: reference-repos/IdleonToolbox/pages/account/world-2/cauldrons.jsx:90-92. The offline cloud-save input was matched exactly to the retained regular save. Do not use advancing runtime liquid balances."
+    }
+  ]
+}

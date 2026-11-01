@@ -1,0 +1,13 @@
+{
+  "extractions": {
+    "alchemy_prismatic_bonus": {
+      "expression": "idleon.callFunction(\"ArcaneType\",\"PrismaBonusMult\",0,0)",
+      "result": 3.2500665808410907
+    },
+    "alchemy_vial_bonus_multiplier": {
+      "expression": "(()=>{const d=idleon.getAttr(\"CustomLists\").h.AlchemyDescription[4][0];return idleon.callFunction(\"CauldronStats\",\"VialBonus\",4,0,0)/idleon.callFunction(\"ArbitraryCode5Inputs\",d[3],Number(d[1]),Number(d[2]),Number(idleon.getAttr(\"CauldronInfo\")[4][0]),0,0);})()",
+      "result": 5.32
+    }
+  },
+  "errors": {}
+}

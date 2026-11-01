@@ -1,0 +1,39 @@
+{
+  "provenance": {
+    "native": "Idleon 1.24 Halloween_Event, offline server 3101, acting player 3, preparation player 3. Native source and consumers: local://alchemy-native-oracles.md. Runtime cloud-save equals the retained fixture; saved balances below never use advanced runtime amounts.",
+    "saveSha256": "c1f9598ecdcffcb8c20c21c59e8c9faae315b058c3526b2ecdea9bf30cd24707",
+    "savedProjections": "Independently executed saved-attempt and raw fill projections from local://alchemy-projection-oracles.md:164-176,266-310. These are not native runtime captures. Regenerate these entries independently after changing the retained save; the native extraction config does not produce them.",
+    "boostMaximum": "Native ActorEvents_232._customEvent_decant caps boosts at 170. CORE tests compare this fixed game mechanic directly."
+  },
+  "extractions": {
+    "brew_requirements": {
+      "expression": "[0,1,2,3].map(i=>idleon.callFunction(\"CauldronStats\",\"MaxCauldronQTY\",i,0,0))",
+      "result": [985824566.0142926,101667932.23354474,272040641.50180316,101667932.23354474]
+    },
+    "brew_speeds": {
+      "expression": "[0,1,2,3].map(i=>idleon.getAttr(\"CauldronJobs\")[0][i].filter(p=>p!==-1).reduce((s,p)=>s+idleon.callFunction(\"CauldronStats\",\"ResearchSpeed\",p,0,0)*idleon.callFunction(\"CauldronStats\",\"SpecificSpdBonuses\",i,0,0),0))",
+      "result": [0,0,0,0]
+    },
+    "actor_new_bubble_chances": {
+      "expression": "[0,1,2,3].map(i=>idleon.callFunction(\"CauldronStats\",\"PctChanceNewBubble\",i,0,0))",
+      "result": [0.0012075503735865512,0.012630951444351293,0.004606551410650505,0.012630951444351293]
+    },
+    "boost_requirements": {
+      "expression": "[0,1,2,3].map(i=>[0,1,2,3].map(j=>idleon.callFunction(\"CauldronStats\",\"CauldronLvsBrewREQ\",i,j,0)))",
+      "result": [[1588676969,1588676969,1588676969,1588676969],[1588676969,1588676969,1588676969,1588676969],[1588676969,1588676969,1588676969,1588676969],[1588676969,1588676969,1588676969,1588676969]]
+    },
+    "saved_attempt_state": {
+      "expression": "Native MaxCauldronQTY requirements paired with retained CauldronInfo[5]; independently evaluated floor(saved brew/requirement), saved brew-readyAttempts*requirement",
+      "result": [{"readyAttempts":0,"attemptProgress":748612385.6244184},{"readyAttempts":8226,"attemptProgress":64947941.71911621},{"readyAttempts":267,"attemptProgress":25699773.942092896},{"readyAttempts":6295,"attemptProgress":81392232.85839844}]
+    },
+    "saved_brew_progress_percent": {
+      "expression": "IdleonToolbox pages/account/world-2/cauldrons.jsx:230-238 raw ratio; retained CauldronInfo[5] and matching native MaxCauldronQTY requirements",
+      "result": [75.93768824924626,63.88242614192464,9.447034751946264,80.05693739440837]
+    },
+    "saved_boost_progress_percent": {
+      "expression": "IdleonToolbox pages/account/world-2/cauldrons.jsx:273 raw ratio; retained CauldUpgXPs[4*i+j] and native CauldronLvsBrewREQ",
+      "result": [[0.09523835327736158,0,0,0],[0.03307555884179782,0,0.09755626651648905,0],[0.0809660548591795,0,0,0],[0.006168150278268973,0,0,0]]
+    }
+  },
+  "errors": {}
+}

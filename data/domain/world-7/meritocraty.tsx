@@ -109,6 +109,10 @@ export class Meritocraty extends Domain {
         return (this.bonuses.find(bonus => bonus.index == index)?.data.bonus ?? 0) * this.getBonusMultiplier();
     }
 
+    getPotentialBonusWhenEligible = (index: number): number => {
+        return (this.bonuses.find(bonus => bonus.index == index)?.data.bonus ?? 0) * this.getEligibleBonusMultiplier();
+    }
+
     getPotentialBonusMultiplier = (index: number): number => {
         return 1 + this.getPotentialBonus(index) / 100;
     }
@@ -119,6 +123,10 @@ export class Meritocraty extends Domain {
             return 0;
         }
 
+        return this.getEligibleBonusMultiplier();
+    }
+
+    private getEligibleBonusMultiplier = (): number => {
         const baseValue = Math.min(1, Math.max(.25, .25 + Number(this.canVote)));
         return (1 + this.companionBonus161 / 100)
             * (baseValue + (this.clamWorkBonus
