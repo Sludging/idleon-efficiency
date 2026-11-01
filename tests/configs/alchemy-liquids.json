@@ -5,7 +5,7 @@
     {
       "label": "liquid_capacities",
       "expression": "[0,1,2,3].map(i=>idleon.callFunction(\"CauldronStats\",\"LiquidCap\",i,0,0))",
-      "description": "Maximum capacity for all four index-ordered liquids. Native upgrade levels and relevant saved account state were matched to the retained regular save."
+      "description": "Maximum capacity for all four liquids in game order. Game upgrade levels and relevant account state match the retained regular save."
     },
     {
       "label": "liquid_upgrade_requirements",
@@ -15,7 +15,7 @@
     {
       "label": "liquid_fill_percentages",
       "expression": "(async()=>{const save=await (await fetch(\"/cloud-save\")).json();return [0,1,2,3].map(i=>100*Number(save.CauldronInfo[6][i])/idleon.callFunction(\"CauldronStats\",\"LiquidCap\",i,0,0));})()",
-      "description": "Independent display projection, not a named native getter: unrounded, unclamped saved amount divided by native capacity, as a percentage. Source: reference-repos/IdleonToolbox/pages/account/world-2/cauldrons.jsx:90-92. The offline cloud-save input was matched exactly to the retained regular save. Do not use advancing runtime liquid balances."
+      "description": "Saved liquid amount divided by game capacity, as a percentage. Do not round the result or cap it at 100%. This is an independent display projection, not a named game getter. Source: reference-repos/IdleonToolbox/pages/account/world-2/cauldrons.jsx:90-92. The offline cloud save matches the retained regular save. Do not use advancing runtime liquid balances."
     }
   ]
 }

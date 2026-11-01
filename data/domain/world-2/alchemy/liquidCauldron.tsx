@@ -96,7 +96,7 @@ export class LiquidCauldron {
         const capacityUpgradeBonus = Math.round(this.capacityUpgrade.level);
         const arcadeBonus = Math.ceil(inputs.arcadeCapacityBonus);
 
-        // Preserve the native addition order for each liquid. Capacity is not rounded.
+        // Keep the game's addition order to match floating-point results. Do not round capacity.
         switch (this.liquidIndex) {
             case 0:
                 return multiplier * (10 + (capacityUpgradeBonus + (inputs.vialCapacityBonus

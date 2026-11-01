@@ -268,7 +268,7 @@ export class Bubble {
             upper = Math.min(upper * 2, Number.MAX_SAFE_INTEGER);
         }
 
-        // Search the existing rounded progress policy for the first passing integer.
+        // Find the first whole-number level that reaches the milestone, including bonus rounding.
         while (lower < upper) {
             const middle = lower + Math.floor((upper - lower) / 2);
             const progress = this.getBonusProgress(middle);
@@ -468,7 +468,7 @@ export class Cauldron {
     hiddenBubbleLevels: number = 0;
     brewProgress = 0;
     brewRequirement = 0.01;
-    // Estimated brew points per hour use the account's inferred brewing actor.
+    // Estimated brew points per hour use one character's bonuses for shared speed factors.
     brewSpeed = 0;
     bestBrewerPreview: BestBrewerPreview = {
         playerId: undefined, chancePercent: 0, estimatedUnlocks: 0, nextBubbles: [],
@@ -613,7 +613,6 @@ export class Cauldron {
     }
 
     getImageData(): ImageData {
-        // Use the native colored attempt marker as this cauldron's identity icon.
         return { location: `aBrewBarCircle${cauldronIndex[this.name]}`, width: 24, height: 24 };
     }
 
@@ -1002,12 +1001,11 @@ export class Alchemy extends Domain {
     sigilSyrup = 0;
     private savedBrewerWisdom = new Map<number, number>();
     private savedBrewerLastActive = new Map<number, number>();
-    // The save does not identify the live actor. Infer one shared context for native rate factors.
+    // The save does not identify the active character. Estimate shared bonuses from saved character activity.
     brewingContextPlayerId: number | undefined = undefined;
 
     prepareBrewing(players: Player[], stampBonus: number, guildBonus: number, companionBonus: number): void {
         let contextPlayer: Player | undefined;
-        // Saved activity is a context heuristic, not proof of the current live actor.
         let latestActivity = 0;
         for (const player of players) {
             const activity = this.savedBrewerLastActive.get(player.playerID)!;
@@ -1017,7 +1015,7 @@ export class Alchemy extends Domain {
             }
         }
         if (!contextPlayer) {
-            // Without activity timestamps, retain the existing shared added-level context heuristic.
+            // If activity timestamps are missing, use the character with the most bonus talent levels.
             let bestAddedLevels = -1;
             for (const player of players) {
                 const inputs = player.finalTalentInputs;
@@ -1056,7 +1054,7 @@ export class Alchemy extends Domain {
                     characterSpeed *= 1 + wisdomCurve / 0.6;
                     characterSpeed *= 1 + (busyBrewing + townSpeed) / 100;
                 } else {
-                    // Native inactive brewing uses the allocated rank, not the talent's percentage effect.
+                    // Inactive characters use allocated Busy Brewing points, not the talent's percentage bonus.
                     const busyBrewingRank = player.getTalent(491)?.pointsSpent ?? 0;
                     characterSpeed *= (1 + busyBrewingRank / 100) * (1 + wisdomCurve / 0.6);
                 }

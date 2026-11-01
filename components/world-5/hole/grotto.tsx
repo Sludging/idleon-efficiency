@@ -14,9 +14,9 @@ export default function GrottoView({ hole, onOpenStudies }: { hole: Hole; onOpen
     const requirement = grotto.getMushroomKillRequirement();
     const opals = hole.cavernOpalSources.find(source => source.id === "cavern:8")!.opals;
     const effects = [
-        { index: 46, label: "Lootie bonus", value: grotto.effects.lootieBonusPercent },
-        { index: 47, label: "Expie bonus", value: grotto.effects.expieBonusPercent },
-        { index: 48, label: "Opie bonus", value: grotto.effects.opieBonusPercent },
+        { index: 46, label: "Lootie Drop Rate", value: grotto.effects.lootieBonusPercent },
+        { index: 47, label: "Expie Class EXP", value: grotto.effects.expieBonusPercent },
+        { index: 48, label: "Opie Villager EXP", value: grotto.effects.opieBonusPercent },
     ];
 
     return <Box gap="medium">
@@ -27,7 +27,7 @@ export default function GrottoView({ hole, onOpenStudies }: { hole: Hole; onOpen
         ]} />
 
         <Box gap="small">
-            <Text size="medium" weight={500}>Mushroom kills progress</Text>
+            <Text size="medium" weight={500}>Mushroom kill progress</Text>
             <Box direction="row" gap="medium" align="center" wrap>
                 <Box gap="xxsmall" style={{ flex: "1 1 240px", minWidth: 0 }}>
                     <Text size="xsmall" color="accent-2">Current colony</Text>

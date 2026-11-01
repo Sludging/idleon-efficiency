@@ -21,11 +21,12 @@ function rewardName(bonus: GambitBonus): string {
         .replace(/TAP ME/gi, "")
         .replace(/_/g, " ")
         .replace("Wiz Max LV", "Wizard Tower max level")
-        .replace("daily particle bubble upg", "daily Particle bubble upgrades")
+        .replace("2 daily particle bubble upg", "2× daily bubble upgrades using particles")
         .trim();
     if (bonus.index === 0) return "Summoning Doublers";
     if (bonus.index === 1) return "Opals";
     if (bonus.index === 5) return "Summoning Essence Gain";
+    if (bonus.index === 6) return `${notateNumber(bonus.data.x0)}% chance to gain 2 Ribbon tiers`;
     if (bonus.index >= 16) return name.replace(/\.{3}.*$/, "");
     if (bonus.data.x1 === 1) return name.replace(/\+?\{%?|\}/g, "").trim();
     return name.replace("{", notateNumber(bonus.data.x0));
@@ -44,6 +45,9 @@ function rewardValue(bonus: GambitBonus, score: number, preview: boolean): strin
 function rewardDescription(bonus: GambitBonus): string {
     if (bonus.index === 0) return "Double a Summoning upgrade with its star button. Reset Doublers at The Lamp.";
     if (bonus.index === 1) return "Higher point milestones award 1 Opal each.";
+    if (bonus.index === 6) return "For example, two T8 ribbons can combine into a T10 ribbon instead of a T9 ribbon.";
+    if (bonus.index === 9) return "Adds a gold Trimmed Construction slot and increases the maximum Wizard Tower level.";
+    if (bonus.index === 13) return "Requires Boron - Particle Upgrader in the Atom Collider.";
     if (bonus.index >= 16) return "Future reward";
     if (bonus.data.description === "no") return "";
     return bonus.data.description

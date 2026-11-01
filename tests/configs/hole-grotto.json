@@ -25,7 +25,7 @@
     {
       "label": "mushroom_kill_requirement",
       "expression": "5000 * Math.pow(3.4, Number(idleon.getAttr(\"Holes\")[11][26]))",
-      "description": "Native MushKillsLeft requirement term before current-colony progress is subtracted, from idleon1.24.txt:241194."
+      "description": "Mushroom kills required for the current colony before subtracting credited kills. Source: idleon1.24.txt:241194."
     },
     {
       "label": "mushroom_kills_remaining",

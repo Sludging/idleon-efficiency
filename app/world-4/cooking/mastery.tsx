@@ -115,7 +115,7 @@ export function CookingMasterySummary({ mastery }: { mastery: CookingMastery }) 
                 </Box>
                 <Box gap="xxsmall">
                     <Text size="large" weight="normal">{amount(mastery.experience)} / {amount(mastery.getExperienceRequired())}</Text>
-                    <Text size="xsmall" color="accent-2">Mastery EXP / next level</Text>
+                    <Text size="xsmall" color="accent-2">EXP / required for next level</Text>
                 </Box>
                 <Box gap="xxsmall">
                     <MasteryExperienceValue mastery={mastery} />

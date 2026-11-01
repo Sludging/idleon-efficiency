@@ -317,7 +317,7 @@ function Cooking() {
                                     <Box>
                                         {
                                             starSignInfinity ?
-                                                <Text size='small'>Infinite Stars keeps this star sign active.</Text>
+                                                <Text size='small'>The Rift’s Infinite Stars bonus keeps this star sign active.</Text>
                                                 :
                                                 <Text size='small'>Apply this star sign to meal and kitchen speed estimates.</Text>
                                         }

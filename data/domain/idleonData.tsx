@@ -434,7 +434,7 @@ const postProcessingMap: Record<string, Function> = {
     "spelunkingAccountMetrics": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingAccountMetrics(accountData),
     // Calculate Meritocracy and Star Sign bonuses before character-specific Construction rates.
     "meritocratyLate": (_doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyLate(accountData),
-    // Daily ribbons use the account-best final talent effect and settled Meritocracy inputs.
+    // Daily ribbons use the highest Ribbon Winning bonus across characters and the final Meritocracy bonus.
     "cookingRibbons": (_doc: Cloudsave, accountData: Map<string, any>) => updateCookingRibbons(accountData),
     "starSignMeritocracyBonus": (_doc: Cloudsave, accountData: Map<string, any>) => updateStarSignMeritocracyBonus(accountData),
     "storageGreenstacks": (_doc: Cloudsave, accountData: Map<string, any>) => updateStorageGreenstacks(accountData),
@@ -506,7 +506,7 @@ const postPostProcessingMap: Record<string, Function> = {
         // This map stores updater returns, so retain the registered domain.
         return accountData.get("speedrun");
     },
-    // Brewing uses final attributes, talent contexts, Star Signs, and shared bonuses. Liquids use settled capacity sources.
+    // Brewing needs final attributes, talent bonuses, Star Signs, and shared bonuses. Liquids need final capacity bonuses.
     "alchemy": (_doc: Cloudsave, accountData: Map<string, any>) => {
         updateAlchemyBrewing(accountData);
         return updateAlchemyLiquids(accountData);

@@ -42,7 +42,7 @@ describe('Cooking ribbons and meal Mastery nodes', () => {
     expect(cooking.ribbons.highestRank).toBe(expected.highestRank);
   });
 
-  it('matches each rank legend multiplier and equipped-meal count', () => {
+  it('matches each ribbon rank multiplier and equipped-meal count', () => {
     expect(cooking.ribbons.rankSummaries).toHaveLength(expected.rankSummaries.length);
     for (const row of expected.rankSummaries) {
       const actual = cooking.ribbons.rankSummaries.find(candidate => candidate.rank === row.rank)!;
@@ -52,7 +52,7 @@ describe('Cooking ribbons and meal Mastery nodes', () => {
   });
 
   it('matches saved meal ranks and Mastery nodes with their native multipliers', () => {
-    // Capture one meal for each distinct saved rank/node pair, including neutral nodes.
+    // Cover each ribbon rank and Mastery level combination, including meals with neither bonus.
     const representatives = expected.meals.filter((row, index, rows) => rows.findIndex(candidate =>
       candidate.ribbonRank === row.ribbonRank && candidate.masteryLevel === row.masteryLevel) === index);
     for (const row of representatives) {

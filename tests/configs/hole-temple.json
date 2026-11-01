@@ -1,6 +1,6 @@
 {
-  "description": "Temple current-account numeric progression, upgrade effects, and torch costs. Source: Halloween_Event 1.24 ActorEvents_579 Holes2 Temple branches. No purchase or encounter mutation.",
-  "target": "Temple numeric backend core outputs",
+  "description": "Temple progression, upgrade effects, and torch costs from the regular save. Reads do not make purchases or start encounters.",
+  "target": "Temple progression, upgrade effects, and torch costs",
   "extractions": [
     {
       "label": "torches",
@@ -10,7 +10,7 @@
     {
       "label": "layer",
       "expression": "Math.round(Number(idleon.getAttr('Holes')[11][55]) + 1)",
-      "description": "Current Sanctum, displayed as Layer by competitor. Cleared Sanctums plus one."
+      "description": "Current Sanctum: cleared Sanctums plus one."
     },
     {
       "label": "extra_torch_chance",
@@ -45,7 +45,7 @@
     {
       "label": "centurion_awaken_chance_percent",
       "expression": "100 * Math.min(1, idleon.callFunction('Holes2', 'TempleTorchBonuses', 1, 0))",
-      "description": "Current displayed Centurion awakening chance in percent. The native drawing consumer caps probability at one. Search spends torches before resolving a purchase, so this is the displayed pre-purchase chance."
+      "description": "Displayed Centurion awakening chance, capped at 100%. Search spends torches before resolving the awakening, so this records the pre-purchase chance."
     },
     {
       "label": "search_cost",

@@ -116,7 +116,7 @@ function CookingDetails({ row, cooking, starSign, silkrode }: {
         return Number.isFinite(amount) ? notateNumber(amount, "Smaller") : "—";
     };
     return <Box gap="small">
-        <Text size="small">{useContribution ? "Current kitchens" : "All kitchens"}</Text>
+        <Text size="small">{useContribution ? "Uses kitchens currently cooking this meal." : "Assumes all kitchens cook this meal."}</Text>
         {useContribution && <Text size="small">Cooking speed: {notateNumber(contribution, "Smaller")} / hour</Text>}
         {row.nextCost !== undefined && <Box gap="xxsmall">
             <Text size="small">Next level: {formatTime(meal.getTimeTill(row.nextCost, starSign, silkrode, useContribution))}</Text>

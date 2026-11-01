@@ -668,7 +668,7 @@ export class CookingMastery {
             const multiplier = 1 + percent / 100;
             return { source, percent, multiplier, active: percent !== 0, impact: 1 - 1 / multiplier };
         });
-        // Preserve the native grouped addition and factor order.
+        // Vial, Arcade, and Salt Lick percentages add together after the separate EXP multipliers.
         const additivePercent = inputs.vialBonus + (inputs.arcadeBonus + inputs.saltLickBonus);
         const additiveInputs: Pick<CookingMasteryExperienceBreakdown['additiveBonuses'][number], 'source' | 'percent'>[] = [
             { source: 'vial', percent: inputs.vialBonus },
@@ -919,7 +919,7 @@ export class CookingRibbons {
             0.1 + (inputs.grimoireRankBonus + 15 * Number(inputs.deathBringerBundleOwned)) / 100));
         let continuing = new Map<number, number>([[1, 1]]);
         const stopped = new Map<number, number>();
-        // The first two failures continue. From the third trial onward, a failure ends the roll.
+        // Failures in the first two trials do not stop the roll. Later failures stop it.
         for (let trial = 0; trial < 7; trial++) {
             const next = new Map<number, number>();
             for (const [rank, probability] of continuing) {
@@ -1543,7 +1543,7 @@ export const updateCookingRibbons = (data: Map<string, any>): void => {
     const sushi = data.get("sushi") as SushiStation;
     const royalArmory = data.get("royalArmory") as RoyalArmory;
 
-    // Account displays use the strongest prepared talent effect, as Farming and Gaming do.
+    // Daily ribbon estimates use the highest Ribbon Winning bonus available across characters.
     let ribbonWinningTalentBonus = 0;
     for (const player of players) {
         ribbonWinningTalentBonus = Math.max(ribbonWinningTalentBonus,

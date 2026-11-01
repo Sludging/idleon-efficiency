@@ -50,7 +50,7 @@ No core tests, production-pipeline smoke, build, lint, or formatter ran during t
 | Grotto | `data/domain/world-5/hole/grotto.ts`, `components/world-5/hole/grotto.tsx` | Layer, Monarch HP, current-colony kill progress, schematic bonuses, and Opals. The redundant kills-left display was removed. |
 | Monuments | `data/domain/world-5/hole/hole.tsx`, `components/world-5/hole/monumentCaverns.tsx` | Story / Starting upgrades / Bonuses tabs; eight upgrades and ten bonuses each; summary/Study content outside tabs; native starting-stat images; paired intrinsic reward headers. Unearned cards retain 0.6 opacity without negative status labels. |
 | Gambit | `data/domain/world-5/hole/gambit.tsx`, `components/world-5/hole/gambit.tsx` | Prepared score and multiplier, total time, Summoning-owned Doublers, 19 reward thresholds, six named challenge times, and automatic current → next-Opal reward comparisons. Available art, Rewards/Times tabs, and inactive opacity remain. No editable target or `(available / total)` suffix remains. |
-| Temple | `data/domain/world-5/hole/temple.ts`, `components/world-5/hole/temple.tsx` | Torches, layer, uncapped extra torch chance, Opals, and Illuminate/Search/Amplify levels, effects, and current costs. Search uses the pre-purchase torch balance. |
+| Temple | `data/domain/world-5/hole/temple.ts`, `components/world-5/hole/temple.tsx` | Torches, Sanctum, uncapped extra torch chance, Opals, and Illuminate/Search/Amplify levels, effects, and current costs. Search uses the pre-purchase torch balance. |
 
 Backend parsing and preparation use the existing Hole pipeline. Existing `idleonData.tsx` registration was sufficient. Opals remain on the existing ledger. No generated directories were edited for this feature.
 
@@ -106,6 +106,10 @@ This covered all 30 monument bonus rows, prepared rewards/readiness and starting
 ### Native and earlier isolated evidence
 
 Native captures contain **81 successful labels and zero errors**: Dawg 5, Grotto 10, Temple 13, Gambit 12, monuments 41. These are extraction labels, not Jest tests.
+
+Extraction provenance: Temple uses the `Halloween_Event 1.24` source, `ActorEvents_579`, and its `Holes2` Temple branches. The derived monument cap, target-level, and progress fields follow the competitor reference `bravery.ts:53-70`, using native coefficients and multipliers. These derived fields are not direct game getters.
+
+Language-audit vocabulary evidence comes from `idleon1.24.txt`. Lines 262435–262441 draw Temple's **Sanctum** label. Lines 309923–309935 name **Boron - Particle Upgrader** in the Atom Collider. Lines 322565–322581 show that Gambit's particle reward doubles the daily bubble-upgrade allowance and requires Boron. These static references support the revised labels; they are not new runtime verification.
 
 Earlier isolated checks also exited 0:
 

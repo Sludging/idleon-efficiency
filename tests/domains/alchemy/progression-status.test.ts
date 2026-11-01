@@ -193,7 +193,7 @@ describe('Alchemy account progression status', () => {
       });
     });
 
-    it('preserves current World 7 Meritocracy strength when the vial bonus wins; locked-world preview needs a separate genuine oracle', () => {
+    it('previews the current World 7 Meritocracy reward and applies it only when the vial bonus wins', () => {
       const results = loadExtractionResults('vote-ballot-data.json');
       validateExtractionHealth(results);
       const nativeState = results.extractions.meritocracy_state.result as {

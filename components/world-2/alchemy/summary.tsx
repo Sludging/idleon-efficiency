@@ -33,7 +33,7 @@ const sourceBasisText: Record<AlchSourceRewardBasis, string> = {
     perMaxedVial: "per level-13 vial",
     perEtherealSigil: "per Ethereal-or-higher sigil",
     whenWinning: "if this bonus wins",
-    afterWorld7Winning: "after World 7, if this bonus wins",
+    afterWorld7Winning: "after reaching World 7, if this bonus wins",
 };
 
 function SourceReward({ label, value, reward, factor = false }: {
@@ -42,14 +42,14 @@ function SourceReward({ label, value, reward, factor = false }: {
     reward: AlchemySourceReward;
     factor?: boolean;
 }) {
-    // An active Mastery reward can have no qualifying vials yet.
+    // Vial Mastery can be active before any vial reaches level 13.
     const perUnit = reward.basis === "perMaxedVial";
     const showPotential = !reward.active || perUnit;
     const displayedValue = showPotential ? reward.potentialValue : value;
     const formattedValue = displayedValue !== 0 && Math.abs(displayedValue) < 0.01
         ? Number(displayedValue.toPrecision(4)).toString()
         : notateNumber(displayedValue, "Smaller");
-    const basisText = factor ? "when enabled" : sourceBasisText[reward.basis];
+    const basisText = factor ? "when active" : sourceBasisText[reward.basis];
 
     return <Text size="xsmall" style={{ opacity: reward.active ? 1 : 0.6 }}>
         {label}: {factor ? "×" : displayedValue >= 0 ? "+" : ""}{formattedValue}{factor ? "" : "%"}
@@ -80,16 +80,16 @@ export default function AlchemySummary({ alchemy, tesseract, sigils }: { alchemy
                     <Box gap="xsmall">
                         <Text size="xsmall" weight="bold">Additive bonuses</Text>
                         <Box gap="xxsmall">
-                            <SourceReward label="Tesseract" value={prismaSources.tesseractPercent} reward={prismaRewards.tesseractPercent} />
+                            <SourceReward label="Tesseract — Pinnacle of Prisma" value={prismaSources.tesseractPercent} reward={prismaRewards.tesseractPercent} />
                             <SourceReward label="Arcade" value={prismaSources.arcadePercent} reward={prismaRewards.arcadePercent} />
-                            <SourceReward label="Sushi" value={prismaSources.sushiPercent} reward={prismaRewards.sushiPercent} />
-                            <SourceReward label="Jelly Operator" value={prismaSources.jellyOperatorPercent} reward={prismaRewards.jellyOperatorPercent} />
-                            <SourceReward label="World 6 trophy" value={prismaSources.world6TrophyPercent} reward={prismaRewards.world6TrophyPercent} />
-                            <SourceReward label="Gaming palette" value={prismaSources.palettePercent} reward={prismaRewards.palettePercent} />
-                            <SourceReward label="Purple sigils" value={prismaSources.purpleSigilsPercent} reward={prismaRewards.purpleSigilsPercent} />
-                            <SourceReward label="Exotic Market" value={prismaSources.exoticMarketPercent} reward={prismaRewards.exoticMarketPercent} />
-                            <SourceReward label="Legend talent" value={prismaSources.legendTalentPercent} reward={prismaRewards.legendTalentPercent} />
-                            <SourceReward label="Companion" value={prismaSources.companionPercent} reward={prismaRewards.companionPercent} />
+                            <SourceReward label="Sushi — Tobo Tamago" value={prismaSources.sushiPercent} reward={prismaRewards.sushiPercent} />
+                            <SourceReward label="Jelly Operator — Bowling Pin" value={prismaSources.jellyOperatorPercent} reward={prismaRewards.jellyOperatorPercent} />
+                            <SourceReward label="World 6 trophy — Heroic Spirit" value={prismaSources.world6TrophyPercent} reward={prismaRewards.world6TrophyPercent} />
+                            <SourceReward label="Gaming palette — Violet" value={prismaSources.palettePercent} reward={prismaRewards.palettePercent} />
+                            <SourceReward label="Ethereal-or-higher sigils" value={prismaSources.purpleSigilsPercent} reward={prismaRewards.purpleSigilsPercent} />
+                            <SourceReward label="Exotic Market — PRISMA PETAL" value={prismaSources.exoticMarketPercent} reward={prismaRewards.exoticMarketPercent} />
+                            <SourceReward label="Legend talent — Wowa Woowa" value={prismaSources.legendTalentPercent} reward={prismaRewards.legendTalentPercent} />
+                            <SourceReward label="Companion — Rift Hivemind" value={prismaSources.companionPercent} reward={prismaRewards.companionPercent} />
                         </Box>
                     </Box>
                 </SourceValue>
@@ -106,13 +106,13 @@ export default function AlchemySummary({ alchemy, tesseract, sigils }: { alchemy
                         <Text size="xsmall" weight="bold">Vial Mastery + Vault</Text>
                         <Box gap="xxsmall">
                             <Text size="xsmall">Additive bonuses</Text>
-                            <SourceReward label="Vial Mastery" value={vialSources.vialMasteryPercent} reward={vialRewards.vialMasteryPercent} />
-                            <SourceReward label="Upgrade Vault" value={vialSources.vaultPercent} reward={vialRewards.vaultPercent} />
+                            <SourceReward label="Rift — Vial Mastery" value={vialSources.vialMasteryPercent} reward={vialRewards.vialMasteryPercent} />
+                            <SourceReward label="Upgrade Vault — Vial Overtune 製" value={vialSources.vaultPercent} reward={vialRewards.vaultPercent} />
                         </Box>
                     </Box>
                     <Box gap="xsmall">
                         <Text size="xsmall" weight="bold">Separate multipliers</Text>
-                        <SourceReward label="Lab" value={vialSources.labFactor} reward={vialRewards.labFactor} factor />
+                        <SourceReward label="Lab — My 1st Chemistry Set" value={vialSources.labFactor} reward={vialRewards.labFactor} factor />
                         <SourceReward label="Meritocracy" value={vialSources.meritocracyPercent} reward={vialRewards.meritocracyPercent} />
                     </Box>
                 </Grid>

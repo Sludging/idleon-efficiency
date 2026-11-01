@@ -29,12 +29,12 @@ interface BubbleProgressionProjection {
 const representatives = [
   { cauldronIndex: 0, bubbleIndex: 0, description: 'Roid Ragin additive growth toward its finite maximum' },
   { cauldronIndex: 0, bubbleIndex: 1, description: 'prismatic Warriors Rule multiplier growth toward its finite maximum' },
-  { cauldronIndex: 0, bubbleIndex: 2, description: 'Hearty Diggy decaying growth toward its finite maximum' },
+  { cauldronIndex: 0, bubbleIndex: 2, description: 'Hearty Diggy diminishing returns toward its finite maximum' },
   { cauldronIndex: 0, bubbleIndex: 3, description: 'Wyoming Blood growth without a finite maximum' },
   { cauldronIndex: 3, bubbleIndex: 9, description: 'prismatic Laaarrrryyyy with finite growth already above 99%' },
   { cauldronIndex: 1, bubbleIndex: 12, description: 'non-Prisma Cuz I Catch Em All multiplier growth toward 90%' },
   { cauldronIndex: 0, bubbleIndex: 5, description: 'Big Meaty Claws additive growth toward 50%' },
-  { cauldronIndex: 0, bubbleIndex: 4, description: 'Reely Smart decaying growth toward 95%' },
+  { cauldronIndex: 0, bubbleIndex: 4, description: 'Reely Smart diminishing returns toward 95%' },
 ];
 
 describe('Alchemy bubble progression', () => {

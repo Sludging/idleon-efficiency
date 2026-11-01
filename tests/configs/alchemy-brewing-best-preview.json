@@ -1,12 +1,12 @@
 {
-  "description": "Dedicated native chance capture for the independently verified best-account Bubble Breakthrough recipient. Comparator estimated unlocks and next-ten projections use the same recipient and retained save, but are not native getters.",
-  "target": "Alchemy best-account Bubble Breakthrough preview chance",
+  "description": "Game capture of new-bubble chances with the account's strongest Bubble Breakthrough character active. Independent unlock estimates and next-ten-bubble projections use the same character and retained save. Those projections are not game captures.",
+  "target": "Alchemy new-bubble chances with the best brewer",
   "requiredActivePlayerIndex": 1,
   "extractions": [
     {
       "label": "best_brewer_chances",
       "expression": "[0,1,2,3].map(i=>idleon.callFunction(\"CauldronStats\",\"PctChanceNewBubble\",i,0,0))",
-      "description": "Unclamped native percent chances for the matching best-account brewer. Keep separate from the ordinary acting-player dataset."
+      "description": "Game new-bubble chances for the account's best brewer, without a 100% cap. Keep these results separate from captures for other active characters."
     }
   ]
 }

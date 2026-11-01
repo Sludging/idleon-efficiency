@@ -32,7 +32,7 @@ const boosts = [
   { index: CauldronBoostIndex.Extra, name: 'Extra' },
 ];
 
-// Errors remain active when an independent oracle is unavailable. Do not use defaults.
+// Missing independent results must fail the test, not fall back to default values.
 const readOracle = <T,>(results: ExtractionResults, label: string): T => {
   const extraction = results.extractions[label];
   if (!extraction || results.errors[label]) {
@@ -64,7 +64,6 @@ describe('Alchemy brewing CORE results', () => {
     bestPreviewResults = loadExtractionResults('alchemy-brewing-best-preview-data.json');
   });
 
-  // All four brewing cauldrons form a small set with independent saved balances.
   cauldrons.forEach(({ index, name }) => {
     describe(`${name} cauldron`, () => {
       let cauldron: Cauldron;
@@ -142,7 +141,7 @@ describe('Alchemy brewing CORE results', () => {
             } else if (field === 'progressPercent') {
               expected = readOracle<number[][]>(results, 'saved_boost_progress_percent')[index][boostIndex];
             } else {
-              // Idleon 1.24 ActorEvents_232._customEvent_decant caps each upgrade with Math.min(170, ...).
+              // Brewing boosts stop at level 170, even if saved progress exceeds the next requirement.
               expected = 170;
             }
             expect(boost[field])

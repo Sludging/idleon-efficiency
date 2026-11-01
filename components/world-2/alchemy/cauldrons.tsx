@@ -52,16 +52,16 @@ export function BrewingDisplay({ alchemy, players }: { alchemy: Alchemy; players
     const brewerInstruction = sameBrewer
         ? commonBrewer
             ? `Best brewer: ${commonBrewer.playerName}. Use this character when you click Brew.`
-            : "No eligible brewer."
+            : "No character has a Bubble Breakthrough bonus."
         : `Best brewers: ${alchemy.cauldrons.map(cauldron => {
             const brewer = players.find(player => player.playerID === cauldron.bestBrewerPreview.playerId);
-            return `${cauldron.name}: ${brewer ? brewer.playerName : "No eligible brewer"}`;
+            return `${cauldron.name}: ${brewer ? brewer.playerName : "No Bubble Breakthrough bonus"}`;
         }).join("; ")}. Use these characters when you click Brew.`;
     return <Box gap="small">
         <Box gap="xxsmall">
             <Text size="small">{brewerInstruction}{" "}
-                Speed uses saved assignments and account context; live speed can differ.</Text>
-            <Text size="xsmall" color="accent-2">Bubble Breakthrough sets the chance. Unlock estimates include fractional unlocks.</Text>
+                Brew speed uses your saved character assignments.</Text>
+            <Text size="xsmall" color="accent-2">Chance includes your best Bubble Breakthrough bonus. Estimated unlocks are averages, not guaranteed results.</Text>
         </Box>
         {alchemy.cauldrons.map(cauldron => {
             const preview = cauldron.bestBrewerPreview;
@@ -109,7 +109,7 @@ export function BrewingDisplay({ alchemy, players }: { alchemy: Alchemy; players
                                     return <Box key={boostNames[index]} gap="xxsmall">
                                         <Text size="small">{boostNames[index]} {boost.level} / {boost.maxLevel}</Text>
                                         {maxed ? <Text size="xsmall" color="accent-2">Maxed</Text>
-                                            : exactXPDetail ? <TipDisplay heading={`${boostNames[index]} exact saved XP`}
+                                            : exactXPDetail ? <TipDisplay heading={`${boostNames[index]} boost progress`}
                                                 body={`${boost.progress} / ${boost.requirement} brew points`}>
                                                 <Box tabIndex={0} style={{ cursor: "help" }}>{savedXP}</Box>
                                             </TipDisplay> : savedXP}

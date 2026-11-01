@@ -12,12 +12,12 @@ import { commaNotation, notateNumber } from '../../../data/utility';
 const quantitySourceLabels: Record<CookingDailyCountBreakdown['sources'][number]['source'], string> = {
     base: 'Base',
     dailyRoll: 'Daily random roll',
-    legendTalent: 'Legend Talents',
+    legendTalent: 'Legend Talents — Blue Ribbon Certification',
     eventShop: 'Event Shop — Ribbon Connoisseur',
     deathBringerBundle: 'Death Bringer bundle',
     boaringBundle: 'Boaring bundle',
     ribbonWinningTalent: 'Death Bringer — Ribbon Winning',
-    palette: 'Gaming Palette',
+    palette: 'Gaming Palette — Balmy Red',
 };
 
 const rankSourceLabels: Record<CookingDailyRankBreakdown['sources'][number]['source'], string> = {
@@ -27,7 +27,7 @@ const rankSourceLabels: Record<CookingDailyRankBreakdown['sources'][number]['sou
     anniversaryBundle: 'Anniversary bundle',
     smoky: 'Cooking Mastery — Smoky',
     armoryEventShop: 'Royal Armory and Event Shop — Elegant Ribbons',
-    companion: 'Companion',
+    companion: 'Companion — Bin Goosey',
 };
 
 const amount = (value: number) => notateNumber(value, 'Smaller');
@@ -105,7 +105,7 @@ function QuantityDetails({ cooking }: { cooking: CookingDomain }) {
             </Box>
         </Grid>
         {cooking.ribbons.dailyGenerationUnlocked && <Text size="xsmall">
-            Average after rounding: {exact(quantity.dailyCount)} ribbons/day.
+            Daily average: {exact(quantity.dailyCount)} ribbons.
         </Text>}
     </>;
 }

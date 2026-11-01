@@ -5,7 +5,7 @@
     {
       "label": "vial_lab_factor",
       "expression": "idleon.callFunction(\"MainframeBonus\", 10) === 2 ? 2 : 1",
-      "description": "Native VialBonus uses factor 2 only when MainframeBonus(10) equals 2; otherwise it uses factor 1. This captures that branch directly, without dividing the aggregate."
+      "description": "My 1st Chemistry Set doubles vial bonuses when active. Capture its multiplier directly: 2 when active, otherwise 1."
     }
   ]
 }

@@ -11,7 +11,7 @@
     {
       "label": "brew_speeds",
       "expression": "[0,1,2,3].map(i=>idleon.getAttr(\"CauldronJobs\")[0][i].filter(p=>p!==-1).reduce((s,p)=>s+idleon.callFunction(\"CauldronStats\",\"ResearchSpeed\",p,0,0)*idleon.callFunction(\"CauldronStats\",\"SpecificSpdBonuses\",i,0,0),0))",
-      "description": "Native production consumer sums assigned brewers in brew points per hour. The retained account has no assigned brewer, so every total is zero. ResearchSpeed alone is not this result."
+      "description": "Total brew points per hour from all assigned characters. The retained account has no assigned brewer, so every total is zero. An individual character's brew speed is not the cauldron's total."
     },
     {
       "label": "actor_new_bubble_chances",
@@ -21,7 +21,7 @@
     {
       "label": "boost_requirements",
       "expression": "[0,1,2,3].map(i=>[0,1,2,3].map(j=>idleon.callFunction(\"CauldronStats\",\"CauldronLvsBrewREQ\",i,j,0)))",
-      "description": "Native brew-point requirements for Speed, Luck, Cost, and Extra boosts in each brewing cauldron. Getter remains numeric when the upgrade consumer reaches its maximum."
+      "description": "Brew points required for Speed, Luck, Cost, and Extra boosts in each brewing cauldron. The game still returns a numeric requirement for maxed boosts."
     }
   ]
 }

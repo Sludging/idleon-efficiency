@@ -47,7 +47,7 @@ export default function TempleView({ hole, onOpenStudies }: { hole: Hole; onOpen
                 image: torchImage,
                 tooltip: <Text size="small">{temple.torches.toLocaleString("en-US", { maximumFractionDigits: 0 })}</Text>,
             },
-            { label: "Layer", value: commaNotation(temple.layer) },
+            { label: "Sanctum", value: commaNotation(temple.layer) },
             {
                 label: "Extra torch chance",
                 value: `${temple.extraTorchChance.toLocaleString("en-US", { maximumFractionDigits: 2 })}%`,
@@ -67,7 +67,7 @@ export default function TempleView({ hole, onOpenStudies }: { hole: Hole; onOpen
                         text={`${action.effect.toLocaleString("en-US", { maximumSignificantDigits: 4 })}${action.unit}`}
                         textSize="small"
                         labelSize="xsmall"
-                        tooltip={action.name === "Search" ? <Text size="small">Chance uses your current torches, before Search pays its cost.</Text> : undefined}
+                        tooltip={action.name === "Search" ? <Text size="small">Chance shown before you spend torches on Search.</Text> : undefined}
                     />
                     <ComponentAndLabel
                         label="Current cost"

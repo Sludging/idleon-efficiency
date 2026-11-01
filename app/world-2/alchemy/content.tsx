@@ -82,7 +82,7 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
                     {growthProgress !== undefined && maximumBonus !== undefined && <Box gap="xxsmall">
                         <Text size="small">Growth progress: {growthProgress.toLocaleString(undefined, { maximumFractionDigits: 2 })}%</Text>
                         <Text size="small">Maximum growth bonus: {notateNumber(maximumBonus, "Smaller")}</Text>
-                        <Text size="xsmall">Includes Prisma. This is not the class-amplified bonus or the character&apos;s final effect.</Text>
+                        <Text size="xsmall">Includes Prisma, but not class or other account multipliers.</Text>
                     </Box>}
                     <Box gap="small">
                         <ComponentAndLabel
@@ -426,9 +426,8 @@ function BubblesDisplay() {
         {
             property: "growth",
             header: <TipDisplay heading="Growth progress" maxWidth="medium" body={<Box gap="xsmall">
-                <Text size="small">Shows the bubble&apos;s growth bonus and limit, including Prisma.</Text>
-                <Text size="small">Other account-based multipliers are not included.</Text>
-                <Text size="small">This is not the class-amplified bonus or the character&apos;s final effect.</Text>
+                <Text size="small">Shows progress toward the bubble&apos;s maximum level-based bonus.</Text>
+                <Text size="small">Includes Prisma, but not class or other account multipliers.</Text>
             </Box>}>
                 <Box direction="row" gap="xsmall" align="center" tabIndex={0} aria-label="Growth help">
                     <Text>Growth</Text>

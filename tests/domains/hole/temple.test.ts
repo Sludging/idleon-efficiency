@@ -14,9 +14,9 @@ describe('Temple current progression and torch upgrades', () => {
         hole = loadGameDataFromSave('latest').get('hole') as Hole;
     });
 
-    it('matches torches, current layer, extra torch chance, and earned Opals', () => {
+    it('matches torches, current Sanctum, extra torch chance, and earned Opals', () => {
         coreNumber(hole.temple.torches, results, 'torches', 'Temple torch balance');
-        coreNumber(hole.temple.layer, results, 'layer', 'Temple current layer');
+        coreNumber(hole.temple.layer, results, 'layer', 'Temple current Sanctum');
         coreNumber(hole.temple.extraTorchChance, results, 'extra_torch_chance', 'Temple extra torch chance');
         coreNumber(hole.temple.opalsFound, results, 'opals_found', 'Temple earned Opals');
     });

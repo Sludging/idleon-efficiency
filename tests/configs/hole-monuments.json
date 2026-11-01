@@ -10,72 +10,72 @@
     {
       "label": "bravery_minimum_damage",
       "expression": "idleon.callFunction(\"Holes\", \"Bravery_MinDMG\", 0, 0)",
-      "description": "Native bravery minimum damage getter."
+      "description": "Minimum starting sword damage for a Bravery story, without temporary damage boosts."
     },
     {
       "label": "bravery_maximum_damage",
       "expression": "idleon.callFunction(\"Holes\", \"Bravery_MaxDMG\", 0, 0)",
-      "description": "Native bravery maximum damage getter."
+      "description": "Maximum starting sword damage for a Bravery story, without temporary damage boosts."
     },
     {
       "label": "bravery_swords",
       "expression": "idleon.callFunction(\"Holes\", \"Bravery_SwordsOwned\", 0, 0)",
-      "description": "Native bravery swords getter."
+      "description": "Starting swords for a Bravery story."
     },
     {
       "label": "bravery_rethrows",
       "expression": "idleon.callFunction(\"Holes\", \"MaxRerolls\", 0, 0)",
-      "description": "Native bravery rethrows getter."
+      "description": "Maximum sword rethrows for a Bravery story."
     },
     {
       "label": "bravery_retellings",
       "expression": "idleon.callFunction(\"Holes\", \"MaxRevisions\", 0, 0)",
-      "description": "Native bravery retellings getter."
+      "description": "Maximum retellings for a Bravery story."
     },
     {
       "label": "justice_mental_health",
       "expression": "idleon.callFunction(\"Holes\", \"J_StartHealth\", 0, 0)",
-      "description": "Native justice mental health getter."
+      "description": "Starting Mental Health for a Justice trial."
     },
     {
       "label": "justice_coins",
       "expression": "idleon.callFunction(\"Holes\", \"J_StartCoins\", 0, 0)",
-      "description": "Native justice coins getter."
+      "description": "Starting Court Coins for a Justice trial."
     },
     {
       "label": "justice_popularity",
       "expression": "idleon.callFunction(\"Holes\", \"J_Happiness\", 0, 0)",
-      "description": "Native justice popularity getter."
+      "description": "Starting Popularity for a Justice trial."
     },
     {
       "label": "justice_dismissals",
       "expression": "idleon.callFunction(\"Holes\", \"J_Dismissals\", 0, 0)",
-      "description": "Native justice dismissals getter."
+      "description": "Starting Dismissals for a Justice trial."
     },
     {
       "label": "wisdom_attempts",
       "expression": "idleon.callFunction(\"Holes2\", \"W_attempts\", 0, 0)",
-      "description": "Native wisdom attempts getter."
+      "description": "Starting attempts for a normal Wisdom story."
     },
     {
       "label": "wisdom_attempts_per_round",
       "expression": "idleon.callFunction(\"Holes2\", \"W_attemptsGainPerRound\", 0, 0)",
-      "description": "Native wisdom attempts per round getter."
+      "description": "Attempts gained per completed Wisdom board."
     },
     {
       "label": "wisdom_seconds_per_match",
       "expression": "idleon.callFunction(\"Holes2\", \"W_timePerMatch\", 0, 0)",
-      "description": "Native wisdom seconds per match getter."
+      "description": "Time per Wisdom match, in seconds."
     },
     {
       "label": "wisdom_instant_matches",
       "expression": "idleon.callFunction(\"Holes2\", \"W_instamatches\", 0, 0)",
-      "description": "Native wisdom instant matches getter."
+      "description": "Starting instant matches for a Wisdom story."
     },
     {
       "label": "bravery_hours",
       "expression": "Number(idleon.getAttr(\"Holes\")[14][0])",
-      "description": "Saved monument hours."
+      "description": "Saved respect hours for Bravery."
     },
     {
       "label": "bravery_reward_multiplier",
@@ -110,7 +110,7 @@
     {
       "label": "justice_hours",
       "expression": "Number(idleon.getAttr(\"Holes\")[14][2])",
-      "description": "Saved monument hours."
+      "description": "Saved respect hours for Justice."
     },
     {
       "label": "justice_reward_multiplier",
@@ -145,7 +145,7 @@
     {
       "label": "wisdom_hours",
       "expression": "Number(idleon.getAttr(\"Holes\")[14][4])",
-      "description": "Saved monument hours."
+      "description": "Saved respect hours for Wisdom."
     },
     {
       "label": "wisdom_reward_multiplier",
@@ -180,7 +180,7 @@
     {
       "label": "bravery_bonuses",
       "expression": "(() => { const levels = idleon.getAttr(\"Holes\")[15]; const coefficients = idleon.getAttr(\"CustomLists\").h.HolesInfo[37]; const fountain = 1 + idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 13) / 100; const self = idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 0, 9); const cosmo = idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 0, 0); return Array.from({ length: 10 }, (_, i) => { const coefficient = Number(coefficients[0 + i]); const multiplier = Math.max(1, (i === 9 ? 1 : 1 + self / 100 + cosmo / 100) * fountain); const bonus = idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 0, i); const capped = coefficient >= 30; const bonusCap = capped ? coefficient * multiplier : null; return { level: Number(levels[0 + i]), bonus, perLevelIncrement: capped ? null : coefficient, bonusCap, capTargetLevel: capped ? Math.ceil(250 * (10 * coefficient * multiplier - 1)) : null, progressPercent: capped ? bonus / bonusCap * 100 : null }; }); })()",
-      "description": "Native bonus values and saved levels. Cap, target, and progress replay competitor domain semantics from bravery.ts:53-70 using native coefficients and multipliers; target is not the first level reached by native ceiling rounding."
+      "description": "Native bonus values and saved levels. Derived caps include monument multipliers. Target levels use the displayed cap, not the first level that ceiling rounding reaches."
     },
     {
       "label": "bravery_unlocks",
@@ -190,7 +190,7 @@
     {
       "label": "justice_bonuses",
       "expression": "(() => { const levels = idleon.getAttr(\"Holes\")[15]; const coefficients = idleon.getAttr(\"CustomLists\").h.HolesInfo[37]; const fountain = 1 + idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 13) / 100; const self = idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 1, 9); const cosmo = idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 0, 0); return Array.from({ length: 10 }, (_, i) => { const coefficient = Number(coefficients[10 + i]); const multiplier = Math.max(1, (i === 9 ? 1 : 1 + self / 100 + cosmo / 100) * fountain); const bonus = idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 1, i); const capped = coefficient >= 30; const bonusCap = capped ? coefficient * multiplier : null; return { level: Number(levels[10 + i]), bonus, perLevelIncrement: capped ? null : coefficient, bonusCap, capTargetLevel: capped ? Math.ceil(250 * (10 * coefficient * multiplier - 1)) : null, progressPercent: capped ? bonus / bonusCap * 100 : null }; }); })()",
-      "description": "Native bonus values and saved levels. Cap, target, and progress replay competitor domain semantics from bravery.ts:53-70 using native coefficients and multipliers; target is not the first level reached by native ceiling rounding."
+      "description": "Native bonus values and saved levels. Derived caps include monument multipliers. Target levels use the displayed cap, not the first level that ceiling rounding reaches."
     },
     {
       "label": "justice_unlocks",
@@ -200,7 +200,7 @@
     {
       "label": "wisdom_bonuses",
       "expression": "(() => { const levels = idleon.getAttr(\"Holes\")[15]; const coefficients = idleon.getAttr(\"CustomLists\").h.HolesInfo[37]; const fountain = 1 + idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 13) / 100; const self = idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 2, 9); const cosmo = idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 0, 0); return Array.from({ length: 10 }, (_, i) => { const coefficient = Number(coefficients[20 + i]); const multiplier = Math.max(1, (i === 9 ? 1 : 1 + self / 100 + cosmo / 100) * fountain); const bonus = idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 2, i); const capped = coefficient >= 30; const bonusCap = capped ? coefficient * multiplier : null; return { level: Number(levels[20 + i]), bonus, perLevelIncrement: capped ? null : coefficient, bonusCap, capTargetLevel: capped ? Math.ceil(250 * (10 * coefficient * multiplier - 1)) : null, progressPercent: capped ? bonus / bonusCap * 100 : null }; }); })()",
-      "description": "Native bonus values and saved levels. Cap, target, and progress replay competitor domain semantics from bravery.ts:53-70 using native coefficients and multipliers; target is not the first level reached by native ceiling rounding."
+      "description": "Native bonus values and saved levels. Derived caps include monument multipliers. Target levels use the displayed cap, not the first level that ceiling rounding reaches."
     },
     {
       "label": "wisdom_unlocks",

@@ -50,7 +50,7 @@ describe('Cooking No Meal Left Behind', () => {
     }
   });
 
-  it('matches the next awarding target, current level, next level and effective free levels', () => {
+  it('matches the next upgrade target, current level, next level and free levels gained', () => {
     for (const key of ['targetMealIndex', 'currentLevel', 'nextLevel', 'effectiveLevelGain'] as const) {
       compare(cooking.noMealLeftBehind[key], expected[key], `No Meal Left Behind ${key}`);
     }

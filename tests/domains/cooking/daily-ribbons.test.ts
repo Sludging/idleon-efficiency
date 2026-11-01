@@ -44,15 +44,15 @@ describe('Daily Cooking ribbons', () => {
     cooking = gameData.get('cooking') as Cooking;
   });
 
-  it('matches generation availability and website account-best expected quantity and random daily range', () => {
+  it('matches daily ribbon unlocks, average quantity and quantity range using the highest account-wide talent bonus', () => {
     expect(cooking.ribbons.dailyGenerationUnlocked).toBe(expected.dailyGenerationUnlocked);
     const quantity = cooking.ribbons.dailyQuantity;
-    compare(quantity.dailyCount, expected.dailyCount, 'Website account-best expected daily ribbons');
+    compare(quantity.dailyCount, expected.dailyCount, 'Average daily ribbons with the highest account-wide Ribbon Winning bonus');
     compare(quantity.minimumDailyCount, expected.minimumDailyCount, 'Minimum daily ribbon quantity');
     compare(quantity.maximumDailyCount, expected.maximumDailyCount, 'Maximum daily ribbon quantity');
   });
 
-  it('matches exact finite rank probabilities and average rank', () => {
+  it('matches exact rank probabilities and average rank', () => {
     const probabilities = cooking.ribbons.dailyRankProbabilities;
     expect(probabilities.map(row => row.rank)).toEqual(expected.dailyRankProbabilities.map(row => row.rank));
     for (const row of expected.dailyRankProbabilities) {

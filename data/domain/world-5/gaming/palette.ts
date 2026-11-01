@@ -210,7 +210,7 @@ export class PaletteColor {
             ? (level / (level + 25)) * this.bonusValue
             : level * this.bonusValue;
 
-        // Preserve native multiplier order.
+        // Keep the game's multiplication order to match floating-point results.
         return baseBonus * this.doubleMultiplier * this.legendMultiplier * this.blackStarMultiplier * this.loreMultiplier;
     }
 
