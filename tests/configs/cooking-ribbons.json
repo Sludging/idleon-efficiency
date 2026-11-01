@@ -1,0 +1,11 @@
+{
+  "description": "Native ribbon shelf, equipped rank summary, rank multipliers and meal Mastery nodes. Runtime game1.24; unchanged regular save.",
+  "target": "Cooking ribbons and meal Mastery state",
+  "extractions": [
+    {
+      "label": "cooking_ribbons",
+      "expression": "(()=>{const f=(name,...args)=>idleon.callFunction(name,...args);const a=name=>idleon.getAttr(name);const c=a('CookMaster');const L=Number(c[1][0]);const count=a('CustomLists').h.MealINFO.length;const ranks=a('Ribbon').slice(28,28+count).map(Number);const positive=ranks.filter(r=>r>0);const max=f('CookingR','RibbonsMaxLV',0,0);return{unlocked:f('Summoning','RibbonShelfUnlocked',0,0)===1,shelf:a('Ribbon').slice(0,28).map((r,index)=>({index,rank:Number(r)===0?null:Number(r)})),totalRanks:ranks.reduce((s,r)=>s+r,0),ribbonedMealCount:positive.length,mealCount:count,maxRank:max,lowestRank:positive.length?Math.min(...positive):null,highestRank:positive.length?Math.max(...positive):null,rankSummaries:Array.from({length:max},(_,i)=>({rank:i+1,mealCount:ranks.filter(r=>r===i+1).length,multiplier:f('Summoning','RibbonBonus',i+1,0)})),meals:Array.from({length:count},(_,index)=>({index,ribbonRank:ranks[index],ribbonMultiplier:f('Summoning','RibbonBonus',ranks[index],0),masteryLevel:Number(c[0][index]),masteryMultiplier:f('Summoning2','BonusMultiCook',index,0)}))};})()",
+      "description": "Read saved ranks and native multipliers. Summaries cover generated meals only; shelf positions remain intact."
+    }
+  ]
+}

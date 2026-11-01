@@ -3,6 +3,107 @@
     "cooking_mastery_experience_rate": {
       "expression": "idleon.callFunction(\"Summoning2\", \"ExpRateCook\", 0, 0)",
       "result": 10780445.511007717
+    },
+    "cooking_mastery_experience_breakdown": {
+      "expression": "(()=>{const f=(name,...args)=>idleon.callFunction(name,...args);const a=name=>idleon.getAttr(name);const factors=[['salty',f('Summoning2','BonusAmountcook',0,99)],['spicy',f('Summoning2','BonusAmountcook',1,99)],['sweet',f('Summoning2','BonusAmountcook',2,99)],['menagerie',f('MenagerieStuff','BoostQTY',21,0)],['sour',f('Summoning2','BonusAmountcook',4,99)],['research',f('ResearchStuff','Grid_Bonus',190,0)],['superbit',40*f('GamingStatType','SuperBitType',68,0)],['savory',f('Summoning2','BonusAmountcook',5,99)],['companion',200*f('Companions',87)],['fountain',f('Holes2','Fountain_BonTOT',2,17)]].map(([source,percent])=>({source,percent,multiplier:1+percent/100,active:percent!==0,impact:1-1/(1+percent/100)}));const bonuses=[['vial',Number(a('DNSM').h.AlchVials.h['7cookmastery'])],['arcade',f('ArcadeBonus',69)],['saltLick',f('SaltLick',10)]];const additivePercent=bonuses[0][1]+(bonuses[1][1]+bonuses[2][1]);return{base:2,factors,additiveBonuses:bonuses.map(([source,percent])=>({source,percent,active:percent!==0,share:additivePercent===0?0:percent/additivePercent})),additivePercent,additiveMultiplier:1+additivePercent/100,total:f('Summoning2','ExpRateCook',0,0)};})()",
+      "result": {
+        "base": 2,
+        "factors": [
+          {
+            "source": "salty",
+            "percent": 19119.46782281973,
+            "multiplier": 192.1946782281973,
+            "active": true,
+            "impact": 0.9947969423023635
+          },
+          {
+            "source": "spicy",
+            "percent": 1645,
+            "multiplier": 17.45,
+            "active": true,
+            "impact": 0.9426934097421203
+          },
+          {
+            "source": "sweet",
+            "percent": 8100,
+            "multiplier": 82,
+            "active": true,
+            "impact": 0.9878048780487805
+          },
+          {
+            "source": "menagerie",
+            "percent": 0,
+            "multiplier": 1,
+            "active": false,
+            "impact": 0
+          },
+          {
+            "source": "sour",
+            "percent": 0,
+            "multiplier": 1,
+            "active": false,
+            "impact": 0
+          },
+          {
+            "source": "research",
+            "percent": 390,
+            "multiplier": 4.9,
+            "active": true,
+            "impact": 0.7959183673469388
+          },
+          {
+            "source": "superbit",
+            "percent": 0,
+            "multiplier": 1,
+            "active": false,
+            "impact": 0
+          },
+          {
+            "source": "savory",
+            "percent": 0,
+            "multiplier": 1,
+            "active": false,
+            "impact": 0
+          },
+          {
+            "source": "companion",
+            "percent": 300,
+            "multiplier": 4,
+            "active": true,
+            "impact": 0.75
+          },
+          {
+            "source": "fountain",
+            "percent": 0,
+            "multiplier": 1,
+            "active": false,
+            "impact": 0
+          }
+        ],
+        "additiveBonuses": [
+          {
+            "source": "vial",
+            "percent": 0,
+            "active": false,
+            "share": 0
+          },
+          {
+            "source": "arcade",
+            "percent": 0,
+            "active": false,
+            "share": 0
+          },
+          {
+            "source": "saltLick",
+            "percent": 0,
+            "active": false,
+            "share": 0
+          }
+        ],
+        "additivePercent": 0,
+        "additiveMultiplier": 1,
+        "total": 10780445.511007717
+      }
     }
   },
   "errors": {}

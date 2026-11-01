@@ -32,7 +32,7 @@ import { ObolsData } from './world-2/obols';
 import { Family, calculateFamily } from './family';
 import { Dungeons } from './dungeons';
 import { Forge, updateForge } from './world-1/forge';
-import { Cooking, updateCooking } from './world-4/cooking';
+import { Cooking, updateCooking, updateCookingRibbons } from './world-4/cooking';
 import { Lab, updateLab } from './world-4/lab';
 import { Breeding, updateAllShinyEffects, updateBeastMasterImpact, updateBreeding, updateBreedingDisplayData, prepareBreedingCrucibleLevel, prepareBreedingShinyLevels } from './world-4/breeding';
 import { notUndefined } from '../utility';
@@ -433,6 +433,8 @@ const postProcessingMap: Record<string, Function> = {
     "spelunkingAccountMetrics": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingAccountMetrics(accountData),
     // Calculate Meritocracy and Star Sign bonuses before character-specific Construction rates.
     "meritocratyLate": (_doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyLate(accountData),
+    // Daily ribbons use the account-best final talent effect and settled Meritocracy inputs.
+    "cookingRibbons": (_doc: Cloudsave, accountData: Map<string, any>) => updateCookingRibbons(accountData),
     "starSignMeritocracyBonus": (_doc: Cloudsave, accountData: Map<string, any>) => updateStarSignMeritocracyBonus(accountData),
     "storageGreenstacks": (_doc: Cloudsave, accountData: Map<string, any>) => updateStorageGreenstacks(accountData),
     "alchemyDailyBubbleProgression": (_doc: Cloudsave, accountData: Map<string, any>) => updateAlchemyDailyBubbleProgression(accountData),

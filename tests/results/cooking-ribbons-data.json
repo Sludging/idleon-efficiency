@@ -1,0 +1,778 @@
+{
+  "extractions": {
+    "cooking_ribbons": {
+      "expression": "(()=>{const f=(name,...args)=>idleon.callFunction(name,...args);const a=name=>idleon.getAttr(name);const c=a('CookMaster');const L=Number(c[1][0]);const count=a('CustomLists').h.MealINFO.length;const ranks=a('Ribbon').slice(28,28+count).map(Number);const positive=ranks.filter(r=>r>0);const max=f('CookingR','RibbonsMaxLV',0,0);return{unlocked:f('Summoning','RibbonShelfUnlocked',0,0)===1,shelf:a('Ribbon').slice(0,28).map((r,index)=>({index,rank:Number(r)===0?null:Number(r)})),totalRanks:ranks.reduce((s,r)=>s+r,0),ribbonedMealCount:positive.length,mealCount:count,maxRank:max,lowestRank:positive.length?Math.min(...positive):null,highestRank:positive.length?Math.max(...positive):null,rankSummaries:Array.from({length:max},(_,i)=>({rank:i+1,mealCount:ranks.filter(r=>r===i+1).length,multiplier:f('Summoning','RibbonBonus',i+1,0)})),meals:Array.from({length:count},(_,index)=>({index,ribbonRank:ranks[index],ribbonMultiplier:f('Summoning','RibbonBonus',ranks[index],0),masteryLevel:Number(c[0][index]),masteryMultiplier:f('Summoning2','BonusMultiCook',index,0)}))};})()",
+      "result": {
+        "unlocked": true,
+        "shelf": [
+          {
+            "index": 0,
+            "rank": 18
+          },
+          {
+            "index": 1,
+            "rank": 16
+          },
+          {
+            "index": 2,
+            "rank": 10
+          },
+          {
+            "index": 3,
+            "rank": 13
+          },
+          {
+            "index": 4,
+            "rank": 17
+          },
+          {
+            "index": 5,
+            "rank": 7
+          },
+          {
+            "index": 6,
+            "rank": 15
+          },
+          {
+            "index": 7,
+            "rank": 12
+          },
+          {
+            "index": 8,
+            "rank": 10
+          },
+          {
+            "index": 9,
+            "rank": 7
+          },
+          {
+            "index": 10,
+            "rank": 12
+          },
+          {
+            "index": 11,
+            "rank": 9
+          },
+          {
+            "index": 12,
+            "rank": 9
+          },
+          {
+            "index": 13,
+            "rank": 6
+          },
+          {
+            "index": 14,
+            "rank": 8
+          },
+          {
+            "index": 15,
+            "rank": 12
+          },
+          {
+            "index": 16,
+            "rank": 6
+          },
+          {
+            "index": 17,
+            "rank": 9
+          },
+          {
+            "index": 18,
+            "rank": 7
+          },
+          {
+            "index": 19,
+            "rank": 9
+          },
+          {
+            "index": 20,
+            "rank": 8
+          },
+          {
+            "index": 21,
+            "rank": 11
+          },
+          {
+            "index": 22,
+            "rank": 6
+          },
+          {
+            "index": 23,
+            "rank": 8
+          },
+          {
+            "index": 24,
+            "rank": 5
+          },
+          {
+            "index": 25,
+            "rank": 8
+          },
+          {
+            "index": 26,
+            "rank": 4
+          },
+          {
+            "index": 27,
+            "rank": 6
+          }
+        ],
+        "totalRanks": 382,
+        "ribbonedMealCount": 34,
+        "mealCount": 74,
+        "maxRank": 25,
+        "lowestRank": 8,
+        "highestRank": 21,
+        "rankSummaries": [
+          {
+            "rank": 1,
+            "mealCount": 0,
+            "multiplier": 1.05
+          },
+          {
+            "rank": 2,
+            "mealCount": 0,
+            "multiplier": 1.1400000000000001
+          },
+          {
+            "rank": 3,
+            "mealCount": 0,
+            "multiplier": 1.19
+          },
+          {
+            "rank": 4,
+            "mealCount": 0,
+            "multiplier": 1.33
+          },
+          {
+            "rank": 5,
+            "mealCount": 0,
+            "multiplier": 1.51
+          },
+          {
+            "rank": 6,
+            "mealCount": 0,
+            "multiplier": 1.6600000000000001
+          },
+          {
+            "rank": 7,
+            "mealCount": 0,
+            "multiplier": 1.71
+          },
+          {
+            "rank": 8,
+            "mealCount": 5,
+            "multiplier": 1.92
+          },
+          {
+            "rank": 9,
+            "mealCount": 7,
+            "multiplier": 1.97
+          },
+          {
+            "rank": 10,
+            "mealCount": 12,
+            "multiplier": 2.45
+          },
+          {
+            "rank": 11,
+            "mealCount": 1,
+            "multiplier": 2.5
+          },
+          {
+            "rank": 12,
+            "mealCount": 3,
+            "multiplier": 2.77
+          },
+          {
+            "rank": 13,
+            "mealCount": 0,
+            "multiplier": 2.8200000000000003
+          },
+          {
+            "rank": 14,
+            "mealCount": 0,
+            "multiplier": 3.04
+          },
+          {
+            "rank": 15,
+            "mealCount": 0,
+            "multiplier": 3.54
+          },
+          {
+            "rank": 16,
+            "mealCount": 2,
+            "multiplier": 3.88
+          },
+          {
+            "rank": 17,
+            "mealCount": 0,
+            "multiplier": 3.93
+          },
+          {
+            "rank": 18,
+            "mealCount": 0,
+            "multiplier": 4.21
+          },
+          {
+            "rank": 19,
+            "mealCount": 1,
+            "multiplier": 4.26
+          },
+          {
+            "rank": 20,
+            "mealCount": 2,
+            "multiplier": 5.25
+          },
+          {
+            "rank": 21,
+            "mealCount": 1,
+            "multiplier": 5.3
+          },
+          {
+            "rank": 22,
+            "mealCount": 0,
+            "multiplier": 5.65
+          },
+          {
+            "rank": 23,
+            "mealCount": 0,
+            "multiplier": 5.7
+          },
+          {
+            "rank": 24,
+            "mealCount": 0,
+            "multiplier": 6.1
+          },
+          {
+            "rank": 25,
+            "mealCount": 0,
+            "multiplier": 6.93
+          }
+        ],
+        "meals": [
+          {
+            "index": 0,
+            "ribbonRank": 8,
+            "ribbonMultiplier": 1.92,
+            "masteryLevel": 2,
+            "masteryMultiplier": 1.2857142857142858
+          },
+          {
+            "index": 1,
+            "ribbonRank": 20,
+            "ribbonMultiplier": 5.25,
+            "masteryLevel": 8,
+            "masteryMultiplier": 1.6153846153846154
+          },
+          {
+            "index": 2,
+            "ribbonRank": 9,
+            "ribbonMultiplier": 1.97,
+            "masteryLevel": 1,
+            "masteryMultiplier": 1.1666666666666667
+          },
+          {
+            "index": 3,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 4,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 5,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 6,
+            "ribbonRank": 10,
+            "ribbonMultiplier": 2.45,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 7,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 8,
+            "ribbonRank": 8,
+            "ribbonMultiplier": 1.92,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 9,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 10,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 11,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 12,
+            "ribbonRank": 20,
+            "ribbonMultiplier": 5.25,
+            "masteryLevel": 4,
+            "masteryMultiplier": 1.4444444444444444
+          },
+          {
+            "index": 13,
+            "ribbonRank": 21,
+            "ribbonMultiplier": 5.3,
+            "masteryLevel": 5,
+            "masteryMultiplier": 1.5
+          },
+          {
+            "index": 14,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 15,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 16,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 17,
+            "ribbonRank": 10,
+            "ribbonMultiplier": 2.45,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 18,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 19,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 20,
+            "ribbonRank": 8,
+            "ribbonMultiplier": 1.92,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 21,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 1,
+            "masteryMultiplier": 1.1666666666666667
+          },
+          {
+            "index": 22,
+            "ribbonRank": 8,
+            "ribbonMultiplier": 1.92,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 23,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 24,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 25,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 26,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 27,
+            "ribbonRank": 10,
+            "ribbonMultiplier": 2.45,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 28,
+            "ribbonRank": 10,
+            "ribbonMultiplier": 2.45,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 29,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 30,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 31,
+            "ribbonRank": 10,
+            "ribbonMultiplier": 2.45,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 32,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 33,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 34,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 35,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 36,
+            "ribbonRank": 9,
+            "ribbonMultiplier": 1.97,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 37,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 1,
+            "masteryMultiplier": 1.1666666666666667
+          },
+          {
+            "index": 38,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 39,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 40,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 41,
+            "ribbonRank": 9,
+            "ribbonMultiplier": 1.97,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 42,
+            "ribbonRank": 10,
+            "ribbonMultiplier": 2.45,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 43,
+            "ribbonRank": 16,
+            "ribbonMultiplier": 3.88,
+            "masteryLevel": 1,
+            "masteryMultiplier": 1.1666666666666667
+          },
+          {
+            "index": 44,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 45,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 46,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 47,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 48,
+            "ribbonRank": 9,
+            "ribbonMultiplier": 1.97,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 49,
+            "ribbonRank": 8,
+            "ribbonMultiplier": 1.92,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 50,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 51,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 52,
+            "ribbonRank": 16,
+            "ribbonMultiplier": 3.88,
+            "masteryLevel": 3,
+            "masteryMultiplier": 1.375
+          },
+          {
+            "index": 53,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 54,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 55,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 56,
+            "ribbonRank": 9,
+            "ribbonMultiplier": 1.97,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 57,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 58,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 59,
+            "ribbonRank": 10,
+            "ribbonMultiplier": 2.45,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 60,
+            "ribbonRank": 12,
+            "ribbonMultiplier": 2.77,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 61,
+            "ribbonRank": 12,
+            "ribbonMultiplier": 2.77,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 62,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 63,
+            "ribbonRank": 19,
+            "ribbonMultiplier": 4.26,
+            "masteryLevel": 8,
+            "masteryMultiplier": 1.6153846153846154
+          },
+          {
+            "index": 64,
+            "ribbonRank": 10,
+            "ribbonMultiplier": 2.45,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 65,
+            "ribbonRank": 10,
+            "ribbonMultiplier": 2.45,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 66,
+            "ribbonRank": 0,
+            "ribbonMultiplier": 1,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 67,
+            "ribbonRank": 10,
+            "ribbonMultiplier": 2.45,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 68,
+            "ribbonRank": 10,
+            "ribbonMultiplier": 2.45,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 69,
+            "ribbonRank": 11,
+            "ribbonMultiplier": 2.5,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 70,
+            "ribbonRank": 9,
+            "ribbonMultiplier": 1.97,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 71,
+            "ribbonRank": 9,
+            "ribbonMultiplier": 1.97,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 72,
+            "ribbonRank": 10,
+            "ribbonMultiplier": 2.45,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          },
+          {
+            "index": 73,
+            "ribbonRank": 12,
+            "ribbonMultiplier": 2.77,
+            "masteryLevel": 0,
+            "masteryMultiplier": 1
+          }
+        ]
+      }
+    }
+  },
+  "errors": {}
+}
