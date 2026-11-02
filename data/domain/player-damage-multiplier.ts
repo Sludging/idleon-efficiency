@@ -48,6 +48,7 @@ import type { Tome } from './world-4/tome';
 import type { Votes } from './world-2/votes';
 import type { JellyOperator } from './world-7/jellyOperator';
 import type { CoralKid } from './world-7/coralKid';
+import type { Sigils } from './world-2/alchemy/sigils';
 
 
 const randoList2 = initRandoList2Repo();
@@ -57,6 +58,12 @@ const damageSoftcaps: readonly [number, number][] = [
     [20_000_000, 0.8], [500_000_000, 0.6],
     [2_000_000_000, 0.45], [15_000_000_000, 0.36], [60_000_000_000, 0.28],
 ];
+
+export const getEclecticSigilDamageMultiplier = (sigils: Sigils, researchGrid: ResearchGrid): number => {
+    // Boost level 4 is Eclectic. Count higher tiers even without the Research or Spelunking unlock.
+    const eclecticCount = sigils.sigils.reduce((count, sigil) => count + Number(sigil.boostLevel >= 4), 0);
+    return 1 + Math.min(100, eclecticCount * researchGrid.getBonusForId(127)) / 100;
+};
 
 
 /** Calculates native DamageDealed("Max") component D in its source order. */
@@ -102,6 +109,7 @@ export const getPlayerDamageTotalMultiplier = (data: Map<string, any>, player: P
     const cooking = data.get('cooking') as Cooking;
     const researchGrid = data.get('research') as ResearchGrid;
     const jellyOperator = data.get('jellyOperator') as JellyOperator;
+    const sigils = data.get('sigils') as Sigils;
     const constructionMastery = rift.bonuses.find(bonus => bonus.name === 'Construct Mastery') as ConstructionMastery;
     const skillMastery = rift.bonuses.find(bonus => bonus.name === 'Skill Mastery') as SkillMastery;
     const killroy = rift.bonuses.find(bonus => bonus.name === 'Killroy Prime') as KillroyPrime;
@@ -271,7 +279,8 @@ export const getPlayerDamageTotalMultiplier = (data: Map<string, any>, player: P
     const crystalCardLevel = player.cardInfo!.cards.find(card => card.id === 'Crystal6')!.getLevels();
     component *= companionDamageMultiplier
         * (1 + Math.min(1.5 * crystalCardLevel, 15) / 100)
-        * (1 + meritocraty.getCurrentBonus(5) / 100);
+        * (1 + meritocraty.getCurrentBonus(5) / 100)
+        * getEclecticSigilDamageMultiplier(sigils, researchGrid);
 
     if (account.hasDamageMultiplierBundle) {
         component *= 1.5;

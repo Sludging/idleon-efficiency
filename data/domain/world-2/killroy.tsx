@@ -143,7 +143,7 @@ export class KillroyPermanentBonus {
             case 3:
                 return this.getGalleryMultiplierBonus(level);
             case 4:
-                return 1 + this.getValue(level) / 100;
+                return Math.max(1, this.getValue(level));
             default:
                 return this.getValue(level);
         }
@@ -162,7 +162,7 @@ export class KillroyPermanentBonus {
             case 3:
                 return 0.1;
             case 4:
-                return 1.023;
+                return 2.3;
             case 5:
                 return 1.8;
             case 6:
@@ -173,7 +173,7 @@ export class KillroyPermanentBonus {
     }
 
     getCapProgress(): number {
-        // Measure earned effect above the zero-level baseline, which is 1.01 for Masterclass drops.
+        // Measure earned effect above each bonus's zero-level baseline.
         let denominator: number;
         switch (this.id) {
             case 0:
@@ -404,8 +404,7 @@ export class KillRoy extends Domain {
     }
 
     get masterClassDropMultiplier(): number {
-        // Masterclass drops apply the shop value as percentage points.
-        return 1 + this.masterClassBonusDrop / 100;
+        return Math.max(1, this.masterClassBonusDrop);
     }
 
     get spelunkingExpMulti(): number {

@@ -56,6 +56,7 @@ const navItems: NavItem[] = [
             { subLink: "/lab", label: "Lab" },
             { subLink: "/breeding", label: "Breeding" },
             { subLink: "/rift", label: "Rift" },
+            { subLink: "/cape-vine", label: "Cape Vine" },
         ]
     },
     {

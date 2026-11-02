@@ -40,13 +40,14 @@ import { RoyalArmory } from "../world-6/royalArmory/royalArmory";
 import type { ImageData } from "../imageData";
 import { Glimbo } from "./glimbo";
 import { TaskBoard } from "../tasks";
-import { Rift } from "../world-4/rift";
+import { Rift, SkillMastery } from "../world-4/rift";
 import { commaNotation, nFormatter, notateNumber } from "../../utility";
 import type { Menagerie } from "../menagerie";
 import type { Gallery } from "./gallery";
 import type { Clamworks } from "./clamworks";
 import type { Breeding } from "../world-4/breeding";
 import type { Account } from "../account";
+import { SkillsIndex } from "../SkillsIndex";
 
 const RESEARCH_GRID_ALL_MULTI_CHALLENGES = [71, 72, 76];
 const RESEARCH_GRID_ALL_MULTI_COMPANION = 55;
@@ -1099,7 +1100,8 @@ export class ResearchGrid extends Domain {
   this.discoveryAllowance = {
    remainingAttempts: this.remainingAttempts,
    dailyAllocation: Math.round(sumContributors(inputs.dailyAllocation)),
-   minimumRoll: Math.floor(this.metadata.baseDiscoveryMinRoll + currentFailedRollBonus),
+   // Apply the failed-roll bonus cap before adding the Skill Mastery bonus.
+   minimumRoll: Math.floor(sumContributors(this.sources.minimumRoll)),
    maximumRoll: Math.floor(sumContributors(inputs.maximumRoll)),
    inclusiveRollBounds: true,
    failedRollCount: this.failedRollCount, currentFailedRollBonus, failedRollBonusCap,
@@ -1316,6 +1318,7 @@ class ResearchSource implements ResearchContributor {
 class ResearchSourceCatalogue {
  private readonly records: ResearchSource[] = [];
  private data!: Map<string, any>;
+ private mastery!: SkillMastery;
  private readonly farmingStickerExp: ResearchContributor;
  readonly inputs: ResearchDisplayInputs;
  readonly minimumRoll: ResearchSource[];
@@ -1379,6 +1382,7 @@ class ResearchSourceCatalogue {
    shopExp,
    this.add("Crucible: Research EXP", () => 25 * this.get<Breeding>("breeding").getCrucibleBonus(2)
     + 35 * this.get<Breeding>("breeding").getCrucibleBonus(8)),
+   this.masteryBonus(0), this.masteryBonus(3),
   ];
 
   const companion52 = this.companion(52, 1, "add");
@@ -1435,6 +1439,7 @@ class ResearchSourceCatalogue {
    ...[0, 23, 46, 54].map(index => this.asMultiplier(this.jelly(index))),
    this.add("Menagerie: Research EXP", () => this.get<Menagerie>("menagerie").getBonusMultiplier(3), "multiply"),
    outpostExp,
+   this.masteryBonus(5, "multiply"),
   ];
 
   const artifact = this.repositories.get("Artifact").find(entry => entry.index === 36)!;
@@ -1470,6 +1475,7 @@ class ResearchSourceCatalogue {
    this.base("Base maximum discovery roll", this.research.metadata.baseDiscoveryMaxRoll, "add"),
    this.grid(51, 1, "add", "maximum discovery roll"), this.sushi(30, "add", "maximum discovery roll"),
    this.jelly(12, "add", "maximum discovery roll"),
+   this.masteryBonus(6, "add"),
   ];
   const dailyAllocation = [
    this.base("Base daily discovery attempts", this.research.metadata.baseDiscoveryRollsPerDay, "add"),
@@ -1515,7 +1521,10 @@ class ResearchSourceCatalogue {
   this.failedRoll = this.base(this.research.bonuses.find(entry => entry.index === 31)!.data.name, 0, "add");
   this.failedRoll.cap = 0;
   this.failedRoll.gate = "Shared failed-roll counter. This counter is not attempts used today.";
-  this.minimumRoll = [this.base("Base discovery roll", this.research.metadata.baseDiscoveryMinRoll, "add"), this.failedRoll];
+  this.minimumRoll = [
+   this.base("Base discovery roll", this.research.metadata.baseDiscoveryMinRoll, "add"),
+   this.failedRoll, this.masteryBonus(1, "add"),
+  ];
   const pointMerit = this.repositories.get("TaskShopDesc").find(entry => entry.index === 51)!;
   const pointArtifact = this.repositories.get("Artifact").find(entry => entry.index === 37)!;
   this.pointMilestone = this.base("Posty Notes: Points every ten Research levels", 0, "add");
@@ -1528,6 +1537,7 @@ class ResearchSourceCatalogue {
     () => Math.round(this.get<Sailing>("sailing").artifacts.find(entry => entry.index === 37)!.status), "add", 10),
    this.add(`World 7 merit: ${pointMerit.data.descLine1}`, () => this.get<TaskBoard>("taskboard").merits[51]!.level, "add"),
    this.jelly(4, "add", "Points"), this.jelly(57, "add", "Points"), this.event(64), this.pointMilestone,
+   this.masteryBonus(2, "add"), this.masteryBonus(4, "add"),
   ];
   const sigilLore = this.repositories.get("SpelunkingTunnel").find(entry => entry.index === 6)!;
   this.linked = {
@@ -1550,6 +1560,12 @@ class ResearchSourceCatalogue {
 
  private get<T>(key: string): T {
   return this.data.get(key) as T;
+ }
+
+ private masteryBonus(slot: number, operation: ResearchContributor["operation"] = "addPercent"): ResearchSource {
+  const source = `Rift Skill Mastery: Research tier ${slot + 1}`;
+  const read = () => this.mastery.getSkillBonus(SkillsIndex.Research, slot);
+  return operation === "multiply" ? this.percent(source, read) : this.add(source, read, operation);
  }
 
 
@@ -1749,6 +1765,7 @@ class ResearchSourceCatalogue {
 
  update(data: Map<string, any>): void {
   this.data = data;
+  this.mastery = this.get<Rift>("rift").bonuses.find(bonus => bonus.name === SkillMastery.displayName) as SkillMastery;
   const farmingStickerExpPercent = this.get<Farming>("farming").getStickerBonus(1);
   const farmingStickerExpConverted = this.get<Menagerie>("menagerie").getUnlocks()[22].owned;
   const previousStickerSources = this.farmingStickerExp.operation === "multiply"

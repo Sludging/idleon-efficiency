@@ -99,6 +99,7 @@ import { Poppy, updatePoppyFishRate, updatePoppyFishPerCatch, updatePoppyGlobalB
 import { updateNonDepositedZenithClusters, ZenithMarket } from './world-7/zenithShop';
 import { Gallery, updateGallery } from './world-7/gallery';
 import { HatRack, updateHatRack } from './world-7/hatRack';
+import { CapeVine, updateCapeVine } from './world-4/capeVine';
 import { Skilling, updateAllEfficiencies, updateAllSkillExperienceMultiplier, updateSkillEfficiencies } from './skilling';
 import { updateAttributeTalents, updatePowerTalents, updateRightHandOfActionBonuses } from './talents';
 import { updatePlayerHealth } from './player-health';
@@ -203,6 +204,7 @@ const domainList: Domain[] = [
     new ZenithMarket("zenithMarket"),
     new Gallery("gallery"),
     new HatRack("hatRack"),
+    new CapeVine("capeVine"),
     new Skilling("skilling"),
     new Menagerie("menagerie"),
 ]
@@ -380,6 +382,8 @@ const postProcessingMap: Record<string, Function> = {
     "gallery": (doc: Cloudsave, accountData: Map<string, any>) => updateGallery(accountData),
     // Hat Rack consumes settled Minehead, companion, Event Shop and Sushi state.
     "hatRack": (doc: Cloudsave, accountData: Map<string, any>) => updateHatRack(accountData),
+    // Cape Vine reads prepared Hat Rack properties and companion bonuses before equipment replacement.
+    "capeVine": (_doc: Cloudsave, accountData: Map<string, any>) => updateCapeVine(accountData),
     // Sushi consumes settled Arcade, Gaming, Collider, Sailing, Research, Button, Jelly and Minehead state.
     "sushiStation": (doc: Cloudsave, accountData: Map<string, any>) => updateSushiStation(accountData),
     "updatePoppyFishPerCatch": (_doc: Cloudsave, accountData: Map<string, any>) => updatePoppyFishPerCatch(accountData),
