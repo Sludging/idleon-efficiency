@@ -193,9 +193,15 @@ export class Meal {
     }
 
     getMealLevelCost = (level: number = this.level) => {
+        const tier = Math.floor((level + 1000) / 1111);
         const reductionMultipier = this.reducedCostToUpgrade ? 1 / 1.1 : 1;
-        const baseMath = reductionMultipier * (10 + (level + Math.pow(level, 2)));
-        return (baseMath * Math.pow(1.2 + 0.05 * level, level)) * this.foodLustDiscount;
+        return Math.max(0.001, 1 / Math.max(1, 5 * this.companion162Bonus)) *
+            Math.pow(10, 22 * tier) *
+            reductionMultipier *
+            this.foodLustDiscount *
+            (10 + (level + Math.pow(level, 2))) *
+            Math.pow(1.2 + 0.05 * level, level) *
+            Math.pow(1 + 0.4 * tier, level);
     }
 
     getCostsTillDiamond = () => {
