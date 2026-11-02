@@ -441,8 +441,9 @@ export const updateArtifacts = (data: Map<string, any>) => {
     (sailing.artifacts[27] as OperaMaskArtifact).goldOwned = sailing.loot[0];
 
     // Skills related (parse data)
-    (sailing.artifacts[5] as GenieLampArtifact).sailingLevel = players[0].skills.get(SkillsIndex.Sailing)?.level ?? 0;
-    (sailing.artifacts[3] as FauxoryTuskArtifact).sailingLevel = players[0].skills.get(SkillsIndex.Sailing)?.level ?? 0;
+    sailing.updateSailingLevelProjection(players);
+    (sailing.artifacts[5] as GenieLampArtifact).sailingLevel = sailing.highestSailingLevel;
+    (sailing.artifacts[3] as FauxoryTuskArtifact).sailingLevel = sailing.highestSailingLevel;
     (sailing.artifacts[23] as WeatherbookArtifact).gamingLevel = players.reduce(
         (highestLevel, player) => Math.max(highestLevel, player.skills.get(SkillsIndex.Gaming)?.level ?? 0), 0);
 
