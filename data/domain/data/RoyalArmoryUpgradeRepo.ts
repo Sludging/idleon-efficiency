@@ -1059,7 +1059,7 @@ export const initRoyalArmoryUpgradeRepo = () => {
         new RoyalArmoryUpgradeBase(75, <RoyalArmoryUpgradeModel>{
                 "index": 75,
                 "displayOrder": 57,
-                "name": "Purity Rank",
+                "name": "Purity Rank 製",
                 "costBase": 1,
                 "costExponent": 1,
                 "resourceType": 9,

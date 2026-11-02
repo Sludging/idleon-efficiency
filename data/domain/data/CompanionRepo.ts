@@ -1477,18 +1477,18 @@ export const initCompanionRepo = () => {
                 "bonus2": 1
             }),
         new CompanionBase(105, <CompanionModel>{
-                "id": "thermostat",
-                "desc": "Not officially in the game and may never be",
-                "bonus": 1,
-                "x1": 0,
+                "id": "cathie",
+                "desc": "{10% Cape Vine Bonus Multi",
+                "bonus": 10,
+                "x1": -29,
                 "x2": 0,
-                "x3": 0,
+                "x3": -6,
                 "x4": 1,
-                "x5": 100,
-                "x6": 9999,
-                "x7": 99,
-                "desc2": "Not officially in the game and may never be",
-                "bonus2": 1
+                "x5": 180,
+                "x6": 3800,
+                "x7": 260,
+                "desc2": "{20% Cape Vine Bonus Multi",
+                "bonus2": 20
             }),
         new CompanionBase(106, <CompanionModel>{
                 "id": "w4a2",
