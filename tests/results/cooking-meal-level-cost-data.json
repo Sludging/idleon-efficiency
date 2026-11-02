@@ -1,0 +1,21 @@
+{
+  "extractions": {
+    "cooking_meal_level_cost": {
+      "expression": "idleon.callFunction(\"CookingR\", \"CookingMenuMealCosts\", 0, 0)",
+      "result": {
+        "type": "large_number",
+        "value": "3.3684168321114205e+159"
+      }
+    },
+    "cooking_meal_level_cost_context": {
+      "expression": "({mealIndex:0,name:idleon.getAttr(\"CustomLists\").h.MealINFO[0][0],currentLevel:Number(idleon.getAttr(\"Meals\")[0][0]),owned:Number(idleon.getAttr(\"Meals\")[2][0])})",
+      "result": {
+        "mealIndex": 0,
+        "name": "Turkey_of_Thank",
+        "currentLevel": 130,
+        "owned": 9.280749655579193e+158
+      }
+    }
+  },
+  "errors": {}
+}
