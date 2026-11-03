@@ -4,7 +4,9 @@ import { Box, CheckBox, Grid, Heading, Text } from "grommet";
 import { useState } from "react";
 import IconImage from "../../../components/base/IconImage";
 import ShadowBox from "../../../components/base/ShadowBox";
+import { ComponentAndLabel } from "../../../components/base/TextAndLabel";
 import { Guild as GuildDomain } from "../../../data/domain/guild";
+import { commaNotation } from "../../../data/utility";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
 import useHydrated from "../../../lib/hooks/useHydrated";
@@ -26,6 +28,7 @@ function GuildDisplay() {
 
     const maxedBonuses = guildBonuses.filter((bonus) => bonus.level >= bonus.maxLevel).length;
     const smallGuildBonusMemberLimit = guild.getSmallGuildBonusMemberLimit();
+    const pointImageData = guild.getPointsImageData();
 
     return (
         <Box gap="small">
@@ -43,6 +46,7 @@ function GuildDisplay() {
                     .filter((bonus) => showMaxed || bonus.level < bonus.maxLevel)
                     .map((bonus) => {
                         const opacity = bonus.level > 0 ? 1 : 0.5;
+                        const isMaxed = bonus.level >= bonus.maxLevel;
 
                         return (
                             <ShadowBox
@@ -64,6 +68,28 @@ function GuildDisplay() {
                                         .replace(/[{}]/, bonus.getBonusDisplayValue().toFixed(2))
                                         .replace("]", String(smallGuildBonusMemberLimit))}
                                 </Text>
+                                <Box direction="row" gap="medium" wrap>
+                                    <ComponentAndLabel
+                                        label="Next level cost"
+                                        component={isMaxed ? <Text size="small">Maxed</Text> : (
+                                            <Box direction="row" align="center" gap="small">
+                                                <IconImage data={pointImageData} />
+                                                <Text size="small">{commaNotation(bonus.getUpgradeCost())}</Text>
+                                            </Box>
+                                        )}
+                                        labelSize="xsmall"
+                                    />
+                                    <ComponentAndLabel
+                                        label="To max"
+                                        component={
+                                            <Box direction="row" align="center" gap="small">
+                                                <IconImage data={pointImageData} />
+                                                <Text size="small">{commaNotation(bonus.getCostToMax())}</Text>
+                                            </Box>
+                                        }
+                                        labelSize="xsmall"
+                                    />
+                                </Box>
                             </ShadowBox>
                         );
                     })}

@@ -1,0 +1,21 @@
+{
+  "description": "Extract the individual times-cheaper contributions used by the Upgrade Vault cost reduction tooltip.",
+  "target": "UpgradeVault.getCostReductionMultipliers()",
+  "extractions": [
+    {
+      "label": "vault_darts_cheaper_multiplier",
+      "expression": "1 / (1 / (1 + Number(idleon.getAttr(\"OptionsListAccount\")[437]) / 100))",
+      "description": "Dimensionless Darts times-cheaper contribution. Replays the reciprocal Darts cost factor in idleon1.25.txt:238737-238751 before color-band floors."
+    },
+    {
+      "label": "vault_companion_cheaper_multiplier",
+      "expression": "1 / Math.max(0.1, 1 - idleon.callFunction(\"Companions\", 99) / 100)",
+      "description": "Dimensionless active Sushi Roll companion times-cheaper contribution. Replays the reciprocal native Companion 99 cost factor in idleon1.25.txt:238737-238751, including its independent 0.1 floor."
+    },
+    {
+      "label": "vault_sushi_cheaper_multiplier",
+      "expression": "1 / Math.max(0.1, 1 - Math.max(idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 38, 0), idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 47, 0)) / 100)",
+      "description": "Dimensionless strongest Sushi Station times-cheaper contribution. Replays the reciprocal native Sushi cost factor in idleon1.25.txt:238737-238751. Uses only the stronger bonus and its independent 0.1 floor."
+    }
+  ]
+}

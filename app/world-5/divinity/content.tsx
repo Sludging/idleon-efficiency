@@ -14,31 +14,22 @@ import DataRow from '../../../components/base/DataRow';
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { Divinity as DivinityDomain, NobisectGod } from '../../../data/domain/world-5/divinity';
 import { Player } from '../../../data/domain/player';
+import { Item } from '../../../data/domain/items';
 import { Skilling } from '../../../data/domain/skilling';
 import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
 import useHydrated from '../../../lib/hooks/useHydrated';
 import { CharacterBox } from '../../../components/base/CharacterBox';
-import { commaNotation } from '../../../data/utility';
+import { commaNotation, notateNumber } from '../../../data/utility';
+import CoralKidDisplay from '../../../components/world-5/divinity/coralKidDisplay';
+import { CoralKid } from '../../../data/domain/world-7/coralKid';
 
-function AlignmentDisplay() {
-    const hydrated = useHydrated();
-    const { theData } = useAppDataStore(useShallow(
-        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
-    ));
-    const divinity = theData.get("divinity") as DivinityDomain | undefined;
-    const playerData: Player[] = theData.get("players");
-
-    if (!hydrated || !divinity) {
-        return (
-            <Box>Still loading or error occured.</Box>
-        )
-    }
+function AlignmentDisplay({ divinity, players: playerData }: { divinity: DivinityDomain; players: Player[] }) {
 
     return (
         <Grid columns={{ size: 'small' }}>
-            {playerData && playerData.map((player, index) => {
+            {playerData.map((player, index) => {
                 return (
                     <ShadowBox style={{ opacity: divinity.playerInfo[player.playerID].active ? 1 : 0.6 }} key={index} background="dark-1" pad="medium" align="start" margin={{ right: 'medium', bottom: 'small' }}>
                         <Box gap="small">
@@ -88,19 +79,12 @@ function AlignmentDisplay() {
     )
 };
 
-function GodDisplay() {
-    const hydrated = useHydrated();
-    const { theData } = useAppDataStore(useShallow(
-        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
-    ));
-
-    const divinity = theData.get("divinity") as DivinityDomain | undefined;
-    const players: Player[] = theData.get("players");
+function GodDisplay({ divinity, players }: { divinity: DivinityDomain; players: Player[] }) {
 
     return (
         <Box margin={{ top: 'small' }} gap="small">
             {
-                hydrated && divinity && divinity.gods.map((god, index) => {
+                divinity.gods.map((god, index) => {
                     const unlinkedBlessingPlayers = god instanceof NobisectGod
                         ? players.filter(player => !god.linkedPlayers.some(linkedPlayer => linkedPlayer.playerID === player.playerID))
                         : [];
@@ -204,20 +188,54 @@ function GodDisplay() {
 }
 
 function Divinity() {
+    const hydrated = useHydrated();
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const [activeTab, setActiveTab] = useState<string>("Gods");
+
+    if (!hydrated || !theData.has("divinity") || !theData.has("players") || !theData.has("coralKid")) {
+        return <Box pad={{ vertical: 'medium' }}><Text>Loading Divinity data…</Text></Box>;
+    }
+
+    const divinity = theData.get("divinity") as DivinityDomain;
+    const players = theData.get("players") as Player[];
+    const coralKid = theData.get("coralKid") as CoralKid;
 
     return (
         <Box>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Divinity</Heading>
-            <Box margin={{ bottom: 'small' }}>
+            <Box gap="small">
+                <Grid columns={["max-content", "max-content", "max-content"]} gap={{ column: "medium", row: "xxsmall" }}
+                    pad={{ vertical: "small" }} style={{ gridTemplateRows: "auto auto" }}>
+                    <Box style={{ display: "grid", gridRow: "span 2", gridTemplateRows: "subgrid", alignItems: "center" }}>
+                        <Text size="large">{commaNotation(divinity.godRank)}</Text>
+                        <Text size="xsmall" color="accent-2">God Rank</Text>
+                    </Box>
+                    <Box style={{ display: "grid", gridRow: "span 2", gridTemplateRows: "subgrid", alignItems: "center" }}>
+                        <Box direction="row" gap="xsmall" align="center">
+                            <IconImage data={Skilling.getSkillImageData(SkillsIndex.Divinity)} scale={0.5} />
+                            <Text size="large">{notateNumber(divinity.currentDivinity)}</Text>
+                        </Box>
+                        <Text size="xsmall" color="accent-2">Current Divinity</Text>
+                    </Box>
+                    <Box style={{ display: "grid", gridRow: "span 2", gridTemplateRows: "subgrid", alignItems: "center" }}>
+                        <Box direction="row" gap="xsmall" align="center">
+                            <IconImage data={Item.getImageData('CKsing')} scale={0.7} />
+                            <Text size="large">{notateNumber(coralKid.singularity.spiralsOwned)}</Text>
+                        </Box>
+                        <Text size="xsmall" color="accent-2">Singularity Spirals</Text>
+                    </Box>
+                </Grid>
                 <ContentTabs
-                    options={["Gods", "Alignment"].map(tabName => ({ value: tabName, label: tabName }))}
+                    options={["Gods", "Alignment", "Coral Kid"].map(tabName => ({ value: tabName, label: tabName }))}
                     value={activeTab}
                     onChange={setActiveTab}
                 />
+                {activeTab == "Gods" && <GodDisplay divinity={divinity} players={players} />}
+                {activeTab == "Alignment" && <AlignmentDisplay divinity={divinity} players={players} />}
+                {activeTab == "Coral Kid" && <CoralKidDisplay coralKid={coralKid} players={players} divinityPoints={divinity.currentDivinity} />}
             </Box>
-            {activeTab == "Gods" && <GodDisplay />}
-            {activeTab == "Alignment" && <AlignmentDisplay />}
         </Box>
     )
 }

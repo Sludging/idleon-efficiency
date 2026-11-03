@@ -1,6 +1,7 @@
 const rootDirectoryToGroup = {
   account: 'account',
   alchemy: 'world-2',
+  anvil: 'world-1',
   arcade: 'world-2',
   'armor-smithy': 'world-3',
   breeding: 'world-4',
@@ -46,6 +47,7 @@ const rootDirectoryToGroup = {
   sneaking: 'world-6',
   spelunking: 'world-7',
   speedrun: 'master-classes',
+  stamps: 'world-1',
   storage: 'account',
   summoning: 'world-6',
   talents: 'players',

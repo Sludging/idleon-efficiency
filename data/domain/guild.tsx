@@ -44,6 +44,17 @@ export class GuildBonus {
         const bonusValue = this.getBonus();
         return this.bonus.includes("}") ? 100 - bonusValue : bonusValue;
     }
+
+    getUpgradeCost = (): number => {
+        // This is the raw quote, even when the bonus is at its maximum level.
+        return this.gpBaseCost + this.level * this.gpIncrease;
+    }
+
+    getCostToMax = (): number => {
+        const remainingLevels = Math.max(this.maxLevel - this.level, 0);
+        return remainingLevels * (2 * this.gpBaseCost + (this.level + this.maxLevel - 1) * this.gpIncrease) / 2;
+    }
+
     getImageData = (): ImageData => {
         return {
             location: `Gbonus${this.index}`,
@@ -60,6 +71,10 @@ export class GuildBonus {
 
 export class Guild extends Domain {
     guildBonuses: GuildBonus[] = [];
+
+    getPointsImageData(): ImageData {
+        return { location: "GuildPointCurrency", width: 23, height: 20 };
+    }
 
     getRawKeys(): RawData[] {
         return [

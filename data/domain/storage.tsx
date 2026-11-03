@@ -3,8 +3,40 @@ import { Domain, RawData } from "./base/domain";
 import { Item, StoneProps } from "./items";
 import { Refinery, RefineryStorage } from "./world-3/construction/refinery";
 import { initSlabItemSortRepo } from "./data/SlabItemSortRepo";
-import type { StaticRepositories } from "./repositories";
+import type { DeepReadonly, StaticRepositories } from "./repositories";
 import { nonStorableGreenstackItems, unobtainableGreenstackItems, unrealisticGreenstackItems } from "./storage-greenstack-policy";
+import type { CommonItemBase } from "./data/ItemDetailRepo";
+import type { BundleOwnership } from "./bundleOwnership";
+import type { Account } from "./account";
+import type { Construction } from "./world-3/construction/construction";
+import type { GemStore } from "./gemPurchases";
+import type { EventShop } from "./eventShop";
+import type { UpgradeVault } from "./upgradeVault";
+
+export class StorageChestUpgrade {
+    internalName: string;
+    displayName: string;
+    id: number;
+    capacity: number;
+    unlocked: boolean = false;
+    slotContribution: number = 0;
+
+    constructor(item: DeepReadonly<CommonItemBase>) {
+        this.internalName = item.id;
+        this.displayName = item.data.displayName;
+        this.id = item.data.ID;
+        this.capacity = item.data.lvReqToCraft;
+    }
+
+    static fromBase(items: readonly DeepReadonly<CommonItemBase>[]): StorageChestUpgrade[] {
+        return items.filter(item => item.data.Type === 'Storage').map(item => new StorageChestUpgrade(item));
+    }
+
+    parse(usedChests: Record<string, number>): void {
+        this.unlocked = Object.hasOwn(usedChests, String(this.id));
+        this.slotContribution = this.unlocked ? Number(usedChests[String(this.id)]) : 0;
+    }
+}
 
 const nonStorableGreenstackTypes = ['Dungeon Evaporate', 'Dungeon Food', 'Dungeon Item'];
 
@@ -16,11 +48,52 @@ export class Storage extends Domain {
     money: number = 0;
     creditedGreenStackCount: number = 0;
     creditedGreenStackItems: string[] = [];
+    chestUpgrades: StorageChestUpgrade[] = [];
+    private slotCount: number = 54;
 
     private greenstackableItems: string[] = [];
     private eligibleGreenstackItems: string[] = [];
     private missingGreenstackItems: string[] = [];
     private unrealisticGreenstackItems: string[] = [];
+
+    prepareSlotCount(
+        towerStorageLevel: number,
+        bundles: BundleOwnership,
+        moreStoragePurchases: number,
+        eventShop: EventShop,
+        vaultStorageSlots: number,
+    ): void {
+        let slots = 54;
+        for (const contribution of Object.values(this.storageChestsUsed)) {
+            slots += Number(contribution);
+        }
+
+        // Keep the game's initial capacity calculation and rounding order.
+        slots = Math.round(slots + 2 * towerStorageLevel);
+        if (bundles.getOwnership('bun_i') === 'owned') {
+            slots = Math.round(slots + 8);
+        }
+        if (bundles.getOwnership('bun_c') === 'owned') {
+            slots = Math.round(slots + 16);
+        }
+        if (bundles.getOwnership('bon_a') === 'owned') {
+            slots = Math.round(slots + 20);
+        }
+        slots = Math.round(slots + 9 * moreStoragePurchases);
+
+        const starterOfferTwoOwned = Number(bundles.getOwnership('bon_x') === 'owned');
+        const starterOfferThreeOwned = Number(bundles.getOwnership('bon_y') === 'owned');
+        const extraStorage = Math.round(
+            12 * Number(eventShop.isBonusOwned(10))
+            + 16 * Number(eventShop.isBonusOwned(11))
+            + (vaultStorageSlots + (22 * starterOfferTwoOwned + 27 * starterOfferThreeOwned)),
+        );
+        this.slotCount = Math.round(slots + extraStorage);
+    }
+
+    getSlotCount(): number {
+        return this.slotCount;
+    }
 
     getGreenstackCount(): number {
         return this.creditedGreenStackCount;
@@ -92,6 +165,7 @@ export class Storage extends Domain {
 
     init(_allItems: Item[], _charCount: number, repositories: StaticRepositories) {
         const itemDetails = new Map(repositories.get('ItemDetail').map(item => [item.id, item.data]));
+        this.chestUpgrades = StorageChestUpgrade.fromBase(repositories.get('ItemDetail'));
         this.greenstackableItems = initSlabItemSortRepo().flatMap(slabItem => {
             const item = slabItem.data.item.item;
             const detail = itemDetails.get(item);
@@ -151,6 +225,8 @@ export class Storage extends Domain {
         })
 
         storage.storageChestsUsed = storageInvUsed;
+        storage.chestUpgrades.forEach(chest => chest.parse(storageInvUsed));
+        storage.slotCount = 54;
         storage.money = data.get("MoneyBANK");
     }
 }
@@ -158,8 +234,21 @@ export class Storage extends Domain {
 export const updateStorage = (data: Map<string, any>) => {
     const storage = data.get("storage") as Storage;
     const refinery = data.get("refinery") as Refinery;
+    const construction = data.get("construction") as Construction;
+    const account = data.get("account") as Account;
+    const gemStore = data.get("gems") as GemStore;
+    const eventShop = data.get("eventShop") as EventShop;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+    const moreStorage = gemStore.purchases.find(purchase => purchase.no === 109)!;
 
     storage.refinery = refinery.storage;
+    storage.prepareSlotCount(
+        construction.buildings[4].level,
+        account.bundles,
+        moreStorage.pucrhased,
+        eventShop,
+        upgradeVault.getBonusForId(33),
+    );
 
     return storage;
 }

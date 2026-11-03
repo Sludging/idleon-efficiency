@@ -1,0 +1,11 @@
+{
+  "description": "Extract the overall Arcade gold-ball gain multiplier for ordinary board rewards. Native 1.25 reward consumer: ../IdleonWikiBot/codefiles/idleon1.25.txt:211739-211741; additive account bonus:238559-238566. The event multiplier does not apply to the jackpot (211955-211965).",
+  "target": "Arcade.getGoldBallGainMultiplier(): number",
+  "extractions": [
+    {
+      "label": "arcade_gold_ball_gain_multiplier",
+      "expression": "(1 + idleon.callFunction(\"Summoning\", \"ArcadeGballsExtraPCT\", 0, 0) / 100) * (1 + window.frames[0].__idleon_cheats__[\"FirebaseStorage\"].getServerVarLoad(\"ArcGballPCT\") / 100)",
+      "description": "Dimensionless overall gold-ball multiplier, including the native server-event factor. This reproduces the multiplier in the regular reward consumer, before per-award rounding. Native account-bonus and server-variable getters supply both operands."
+    }
+  ]
+}

@@ -15,7 +15,7 @@ import {
     ThemeContext,
 } from "grommet"
 
-import { Stamp } from '../../../data/domain/world-1/stamps';
+import { Stamp, StampAutomaticProgression } from '../../../data/domain/world-1/stamps';
 import { useState, useContext } from 'react';
 import { getCoinsArray, nFormatter } from '../../../data/utility'
 import CoinsDisplay from "../../../components/coinsDisplay";
@@ -35,6 +35,7 @@ import StampsTableView from "../../../components/world-1/stampTableView";
 import { Capacity } from "../../../data/domain/capacity";
 import { Compass } from "../../../data/domain/compass";
 import { DoublerSummary } from "../../../components/base/DoublerStatus";
+import useHydrated from "../../../lib/hooks/useHydrated";
 
 function CarryCapacitySummary() {
     const { theData } = useAppDataStore(useShallow(
@@ -264,6 +265,7 @@ function StampTab({ tab, index, highlight }: { tab: Stamp[], index: number, high
 }
 
 function Stamps() {
+    const hydrated = useHydrated();
     const theme = useContext(ThemeContext);
     const [highlight, setHighlight] = useState(false);
     const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
@@ -271,7 +273,12 @@ function Stamps() {
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
 
+    if (!hydrated || !theData.get("stamps") || !theData.get("stampAutomaticProgression") || !theData.get("collider") || !theData.get("compass") || !theData.get("capacity") || !theData.get("storage")) {
+        return <>Loading Stamps data</>;
+    }
+
     const stampData = theData.get("stamps") as Stamp[][];
+    const progression = theData.get("stampAutomaticProgression") as StampAutomaticProgression;
     const collider = theData.get("collider") as AtomCollider;
     const compass = theData.get("compass") as Compass;
 
@@ -283,47 +290,69 @@ function Stamps() {
     return (
         <Box>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Stamps</Heading>
-            <Box direction="row" margin={{ bottom: 'medium' }} justify="between" fill>
-                <Box direction="row" align="center" gap="medium">
-                    <Box direction="row" gap="medium">
-                        <TextAndLabel label="Total Levels" text={totalLevels.toString()} />
-                        {hydrogen && hydrogen.level > 0 && <TextAndLabel label="Atom Discount" text={`${stampData[0][0].atomDiscount}% (+${hydrogen.level * hydrogen.data.bonusPerLv}%/day)`} />}
-                        {stampData[0][0].gildedAvailable && <TextAndLabel label="Gilded Stamps" text={`${gildedCount}`} />}
-                        <DoublerSummary
-                            label="Exalted Stamps"
-                            owned={compass.stampDoublersOwned}
-                            available={compass.stampDoublersAvailable}
-                            image={Compass.getExaltedStampImageData()}
-                            description={
-                                <Text size="small">
-                                    Exalted Stamps gain +{nFormatter(exaltedStampBonus)}% bonus ({nFormatter(1 + exaltedStampBonus / 100, "MultiplierInfo")}x total).
-                                </Text>
-                            }
-                        />
-                    </Box>
-                    <Box direction="row" gap="medium">
-                        <Box direction="row" align="center" gap="xsmall">
-                            <CheckBox
-                                checked={highlight}
-                                label="Highlight Stamps"
-                                onChange={(event) => setHighlight(event.target.checked)}
-                            />
-                            <TipDisplay
-                                heading="Highlight Stamps"
-                                body={
-                                    <Box gap="xsmall">
-                                        <Text size="small">Enable this check to highlight stamps based on certain conditions:</Text>
-                                        <Text><span style={{ color: normalizeColor("stamp-positive-1", theme) }}>⬤</span> Can be upgraded with materials.</Text>
-                                        <Text><span style={{ color: normalizeColor("stamp-positive-2", theme) }}>⬤</span> Can be upgraded with coins.</Text>
-                                        <Text><span style={{ color: normalizeColor("stamp-negative-1", theme) }}>⬤</span> Missing materials or money.</Text>
-                                        <Text><span style={{ color: normalizeColor("stamp-negative-2", theme) }}>⬤</span> Not enough carry cap.</Text>
-                                    </Box>
-                                }
-                            >
-                                <CircleInformation color='accent-3' size="16px" />
-                            </TipDisplay>
-                        </Box>
-                    </Box>
+            <Box direction="row" wrap gap="medium" align="start" margin={{ bottom: 'medium' }}>
+                <TextAndLabel label="Total Levels" text={totalLevels.toString()} />
+                {hydrogen && hydrogen.level > 0 && <TextAndLabel label="Atom Discount" text={`${stampData[0][0].atomDiscount}% (+${hydrogen.level * hydrogen.data.bonusPerLv}%/day)`} />}
+                {stampData[0][0].gildedAvailable && <Box direction="row" gap="medium" pad={{ left: 'medium' }} border={{ side: 'left', color: 'grey-1' }}>
+                    <TextAndLabel label="Gilded Stamps" text={`${gildedCount}`} textSize="large" />
+                    <TextAndLabel
+                        label="Daily gain chance"
+                        text={`${progression.gildedStampGainChancePercent.toLocaleString(undefined, { maximumFractionDigits: 2 })}%`}
+                        textSize="large"
+                        tooltip={<Box gap="xsmall">
+                            <Text size="small">Daily chance to gain one Gilded Stamp.</Text>
+                            <Text size="small">A chance of 100% or more guarantees one Gilded Stamp, not multiple.</Text>
+                        </Box>}
+                    />
+                </Box>}
+                <Box gap="xxsmall" pad={{ left: 'medium' }} border={{ side: 'left', color: 'grey-1' }}>
+                    <ComponentAndLabel
+                        label="No Stamp Left Behind"
+                        component={<TipDisplay heading="Levels / day" size="small" body={<Box gap="xxsmall">
+                            <Text size="xsmall" style={{ opacity: progression.noStampLeftBehindSources.bundle > 0 ? 1 : 0.6 }}>No Meal Left Behind bundle: +{progression.noStampLeftBehindSources.bundle.toLocaleString()}</Text>
+                            <Text size="xsmall" style={{ opacity: progression.noStampLeftBehindSources.eventShop > 0 ? 1 : 0.6 }}>Event Shop — Stamp Stack: +{progression.noStampLeftBehindSources.eventShop.toLocaleString()}</Text>
+                            <Text size="xsmall" style={{ opacity: progression.noStampLeftBehindSources.summoning > 0 ? 1 : 0.6 }}>Summoning: +{progression.noStampLeftBehindSources.summoning.toLocaleString()}</Text>
+                        </Box>}>
+                            <Text size="large" tabIndex={0} style={{ textDecoration: "underline dotted", cursor: "help" }}>
+                                {`${progression.noStampLeftBehindLevelsPerDay.toLocaleString()} ${progression.noStampLeftBehindLevelsPerDay === 1 ? 'level' : 'levels'} / day`}
+                            </Text>
+                        </TipDisplay>}
+                    />
+                    <Text size="xsmall" color="accent-2">To one randomly chosen owned stamp</Text>
+                </Box>
+                <DoublerSummary
+                    label="Exalted Stamps"
+                    owned={compass.stampDoublersOwned}
+                    available={compass.stampDoublersAvailable}
+                    image={Compass.getExaltedStampImageData()}
+                    description={
+                        <Text size="small">
+                            Exalted Stamps gain +{nFormatter(exaltedStampBonus)}% bonus ({nFormatter(1 + exaltedStampBonus / 100, "MultiplierInfo")}x total).
+                        </Text>
+                    }
+                />
+            </Box>
+            <Box direction="row" wrap gap="medium" margin={{ bottom: 'medium' }} justify="between" align="center">
+                <Box direction="row" align="center" gap="xsmall">
+                    <CheckBox
+                        checked={highlight}
+                        label="Highlight Stamps"
+                        onChange={(event) => setHighlight(event.target.checked)}
+                    />
+                    <TipDisplay
+                        heading="Highlight Stamps"
+                        body={
+                            <Box gap="xsmall">
+                                <Text size="small">Enable this check to highlight stamps based on certain conditions:</Text>
+                                <Text><span style={{ color: normalizeColor("stamp-positive-1", theme) }}>⬤</span> Can be upgraded with materials.</Text>
+                                <Text><span style={{ color: normalizeColor("stamp-positive-2", theme) }}>⬤</span> Can be upgraded with coins.</Text>
+                                <Text><span style={{ color: normalizeColor("stamp-negative-1", theme) }}>⬤</span> Missing materials or money.</Text>
+                                <Text><span style={{ color: normalizeColor("stamp-negative-2", theme) }}>⬤</span> Not enough carry cap.</Text>
+                            </Box>
+                        }
+                    >
+                        <CircleInformation color='accent-3' size="16px" />
+                    </TipDisplay>
                 </Box>
                 <Box direction="row" align="center" gap="small">
                     <Text size="small">View:</Text>

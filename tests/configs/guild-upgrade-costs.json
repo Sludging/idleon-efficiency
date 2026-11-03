@@ -1,0 +1,11 @@
+{
+  "description": "Capture per-bonus Guild Point quotes and remaining upgrade costs for all 17 real Guild bonuses. Native 1.25 source: IdleonWikiBot/codefiles/idleon1.25.txt:164217-164222,164433-164449. Remaining cost sums native per-level prices; the game does not expose a total-to-max getter. Quotes do not imply purchase eligibility.",
+  "target": "GuildBonus.getUpgradeCost and GuildBonus.getCostToMax",
+  "extractions": [
+    {
+      "label": "guild_bonus_costs",
+      "expression": "idleon.getAttr(\"CustomLists\").h.GuildBonuses.slice(0,17).map((b,index)=>{const level=+idleon.getAttr(\"GuildTasks\")[0][index];let costToMax=0;for(let l=level;l<+b[7];l++)costToMax+=+b[10]+l*b[11];return {index,level,upgradeCost:+b[10]+level*b[11],costToMax}})",
+      "description": "Native static base GP, per-level increase and maximum supply the cost inputs. Saved GuildTasks[0] supplies current levels. Sum each native price from current level through maximum minus one. Exclude only the zero-maximum placeholder at index 17. Keep saved levels beside prices to establish save/capture pairing."
+    }
+  ]
+}

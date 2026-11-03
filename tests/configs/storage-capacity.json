@@ -1,0 +1,16 @@
+{
+  "description": "Storage slot total and chest upgrade catalogue for the unchanged regular save. Native capacity initialization: ../IdleonWikiBot/codefiles/idleon1.25.txt:326247-326272. Chest use saves its numeric slot contribution: 181227-181276.",
+  "target": "Storage.getSlotCount and Storage.chestUpgrades",
+  "extractions": [
+    {
+      "label": "storage_slots_owned",
+      "expression": "idleon.getAttr('ChestSlotsOwned')",
+      "description": "Actual native owned slot total. Read the initialized attribute without replaying the competitor formula."
+    },
+    {
+      "label": "storage_chest_catalogue",
+      "expression": "(()=>{const defs=idleon.engine.getGameAttribute('ItemDefinitionsGET').h;return Object.keys(defs).filter(key=>key.startsWith('InvStorage')&&defs[key].h.Type==='STORAGE_').map(internalName=>{const item=defs[internalName].h;return {internalName,id:Number(item.ID),displayName:String(item.displayName),capacity:Number(item.lvReqToCraft)};}).sort((a,b)=>a.id-b.id);})()",
+      "description": "Native numbered and named chest identities, names, save IDs, and potential slot capacities. The native STORAGE_ consumer excludes quest receipts. Compare ownership and earned contributions against genuine InvStorageUsed save values, not later runtime balances."
+    }
+  ]
+}

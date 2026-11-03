@@ -1,0 +1,13 @@
+{
+  "extractions": {
+    "gilded_stamp_gain_chance": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"gildedStampChance\", 0)",
+      "result": 1.8032
+    },
+    "no_stamp_left_behind_count": {
+      "expression": "(() => { const bundleCount = Number(idleon.getAttr(\"BundlesReceived\").h.bun_s) === 1 ? 5 : 0; const eventCount = Number(idleon.callFunction(\"Summoning\", \"EventShopOwned\", 1, 0)) === 1 ? 3 : 0; const summoningCount = Number(idleon.callFunction(\"Summoning\", \"WinBonus\", 20, 0)); return bundleCount + eventCount + (summoningCount > 0 ? Math.round(summoningCount) : 0); })()",
+      "result": 11
+    }
+  },
+  "errors": {}
+}

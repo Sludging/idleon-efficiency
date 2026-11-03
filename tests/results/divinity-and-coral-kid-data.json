@@ -1,0 +1,118 @@
+{
+  "extractions": {
+    "upgrade_bonuses": {
+      "expression": "Array.from({length:12},(_,index)=>idleon.callFunction('Thingies','CoralKidUpgBonus',index,0))",
+      "result": [
+        660,
+        50,
+        14.791666666666668,
+        80,
+        28,
+        2.4390243902439024,
+        3900,
+        330,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "upgrade_costs": {
+      "expression": "Array.from({length:12},(_,index)=>idleon.callFunction('Thingies','CoralKidUpgCost',index,0))",
+      "result": [
+        5394077978.276371,
+        15881867761.018133,
+        312739794892.5797,
+        4424544463504.635,
+        49215578432.38809,
+        85536000000,
+        117.5057979057673,
+        507.96190633458906,
+        121,
+        2197,
+        28561,
+        759375
+      ]
+    },
+    "current_effects": {
+      "expression": "(()=>{const f=(index)=>idleon.callFunction('Thingies','CoralKidUpgBonus',index,0);const rank=Number(idleon.getAttr('Divinity')[25]);return[Math.pow(1+f(2)/100,Math.max(0,rank-10)),idleon.getAttr('Spelunk')[13].slice(0,6).reduce((sum,value)=>sum+Number(value),0)*f(4),Math.pow(1+f(11)/100,Math.max(0,rank-35)),100*idleon.callFunction('MenagerieStuff','CK_NonDivHourTime',0,0)];})()",
+      "result": [
+        9.090039776347721,
+        1456,
+        1,
+        0
+      ]
+    },
+    "minor_link_skill_multipliers": {
+      "expression": "idleon.getAttr('GetPlayersUsernames').map(name=>{const level=Number(idleon.getAttr('PlayerDATABASE').h[name].h.Lv0[14]);return 1+((1+idleon.callFunction('Thingies','CoralKidUpgBonus',3,0)/100)*level)/(60+level);})",
+      "result": [
+        2.6036363636363635,
+        2.592706333973129,
+        2.5882352941176467,
+        2.585288270377734,
+        2.593103448275862,
+        2.5882352941176467,
+        2.5958412098298678,
+        2.584,
+        2.5434679334916863,
+        2.587819253438114,
+        2.59622641509434
+      ]
+    },
+    "singularity": {
+      "expression": "['UnlockOwned','CK_BaseValue','CK_KillMulti','CK_TimeMulti','CK_TotalValue'].map(command=>idleon.callFunction('MenagerieStuff',command,command==='UnlockOwned'?2:0,0))",
+      "result": [
+        1,
+        176.98342001950647,
+        3.6168449255569226,
+        6.29364916731037,
+        4028.7006779282983
+      ]
+    },
+    "comparison_operands": {
+      "expression": "({levels:[...idleon.getAttr('OptionsListAccount').slice(427,433),...idleon.getAttr('OptionsListAccount').slice(616,622)].map(Number),rank:Number(idleon.getAttr('Divinity')[25]),points:Number(idleon.getAttr('Divinity')[24]),kills:Number(idleon.getAttr('OptionsListAccount')[623]),hours:Number(idleon.getAttr('OptionsListAccount')[624]),reefLevels:idleon.getAttr('Spelunk')[13].slice(0,6).map(Number),divinityLevels:idleon.getAttr('GetPlayersUsernames').map(name=>Number(idleon.getAttr('PlayerDATABASE').h[name].h.Lv0[14]))})",
+      "result": {
+        "levels": [
+          66,
+          25,
+          71,
+          80,
+          14,
+          1,
+          39,
+          33,
+          0,
+          0,
+          0,
+          0
+        ],
+        "rank": 26,
+        "points": 72419981760583040,
+        "kills": 347181354012.12866,
+        "hours": 135,
+        "reefLevels": [
+          15,
+          2,
+          10,
+          15,
+          10,
+          0
+        ],
+        "divinityLevels": [
+          490,
+          461,
+          450,
+          443,
+          462,
+          450,
+          469,
+          440,
+          361,
+          449,
+          470
+        ]
+      }
+    }
+  },
+  "errors": {}
+}

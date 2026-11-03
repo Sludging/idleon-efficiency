@@ -6,7 +6,7 @@ import { AnvilProduceBase, initAnvilRepo } from '../data/AnvilRepo';
 import { AnvilProduceModel } from '../model/anvilProduceModel';
 import { Item } from '../items';
 import { Alchemy, AlchemyConst, CauldronIndex } from '../world-2/alchemy/alchemy';
-import { Stamp } from './stamps';
+import { getStampBonusForKey, Stamp } from './stamps';
 import { SkillsIndex } from '../SkillsIndex';
 import { PlayerStatues, StatueConst } from './statues';
 import { Shrine } from '../world-3/construction/shrines';
@@ -25,6 +25,8 @@ import { Worship } from '../world-3/worship';
 import { Summoning } from '../world-6/summoning';
 import { Guild } from '../guild';
 import type { GoldenFood } from '../golden-food';
+import { UpgradeVault } from '../upgradeVault';
+import { getStatCards } from '../player-stats';
 
 
 // if ("Costs2TypeAnvilPA" == t) {}
@@ -68,6 +70,8 @@ export class Anvil {
     availablePoints: number = 0;
     pointsFromCoins: number = 0;
     pointsFromMats: number = 0;
+    pointsFromSmithing: number = 0;
+    pointsFromAcme: number = 0;
     xpPoints: number = 0;
     speedPoints: number = 0;
     capPoints: number = 0;
@@ -84,22 +88,29 @@ export class Anvil {
         this.production = AnvilProduct.fromBase(initAnvilRepo());
     }
 
+    get totalPoints(): number {
+        return this.pointsFromSmithing + this.pointsFromAcme + this.pointsFromCoins + this.pointsFromMats;
+    }
+
+    get allocatedPoints(): number {
+        return this.totalPoints - this.availablePoints;
+    }
+
     setCapacity = (bagCapacity: number = 0) => {
-        this.productCapacity = Math.round(bagCapacity * (2 + 0.1 * this.capPoints));
+        this.productCapacity = Math.round(Math.min(2e9, bagCapacity * (2 + 0.1 * this.capPoints)));
     };
 
-    setSpeed = (agility: number = 0, stampBonus: number = 0, poBoxBonus: number = 0, hammerHammerBonus: number = 0, statueBonus: number = 0, starSignTownSpeed: number = 0, talentTownSpeed: number = 0) => {
-        const boxAndStatueMath = 1 + ((poBoxBonus + statueBonus) / 100);
+    setSpeed = (agility: number = 0, stampBonus: number = 0, poBoxBonus: number = 0, hammerHammerBonus: number = 0, statueBonus: number = 0, starSignTownSpeed: number = 0, talentTownSpeed: number = 0, vaultBonus: number = 0) => {
+        const boxAndStatueMath = 1 + (poBoxBonus + (statueBonus + vaultBonus)) / 100;
         const agilityBonus = this.getSpeedBonusFromAgility(agility);
         this.anvilSpeed = 3600 * (1 + (stampBonus + (2 * this.speedPoints)) / 100) * boxAndStatueMath * (1 + (hammerHammerBonus / 100)) * agilityBonus * (1 + (starSignTownSpeed + talentTownSpeed) / 100);
     };
 
-    getXPMulti = (player: Player, allSkillsXP: number, mmanBonus: number, riftBonus: number) => {
+    getXPMulti = (player: Player, allSkillsXP: number, mmanBonus: number, riftBonus: number, stampBonus: number = 0) => {
         const focusedSoulBonus = player.talents.find(talent => talent.skillIndex == 265)?.getBonus() ?? 0;
-        const stampBonus = 0; // TODO: Real look up, but currently stamp isn't obtainable.
         const happyDudeBonus = player.talents.find(talent => talent.skillIndex == 75)?.getBonus() ?? 0;
         const math1 = 1 + ((focusedSoulBonus + stampBonus + happyDudeBonus + riftBonus) / 100);
-        const smithingCardBonus = 1 + Card.GetTotalBonusForId(player.cardInfo?.equippedCards ?? [], 49) / 100;
+        const smithingCardBonus = 1 + Card.GetTotalBonusForId(getStatCards(player), 49) / 100;
         const blackSmithBox = player.postOffice[PostOfficeConst.BlacksmithBoxIndex];
         const postOfficeBonus = blackSmithBox.level > 0 ? blackSmithBox.bonuses[0].getBonus(blackSmithBox.level, 0) : 0;
 
@@ -107,19 +118,18 @@ export class Anvil {
     };
 
     setXP = (xpMulti: number) => {
-        const baseMath = (1 + (3 * (this.xpPoints / 100))) * xpMulti;
-        if (baseMath < 20) {
-            this.anvilXP = baseMath;
-            return;
-        }
+        const baseMultiplier = (1 + 3 * this.xpPoints / 100) * xpMulti;
+        const multiplier = baseMultiplier < 20
+            ? baseMultiplier
+            : Math.min(20 + (baseMultiplier - 20) / (baseMultiplier - 20 + 70) * 50, 75);
 
-        const finalMath = Math.min(20 + ((baseMath - 20) / (baseMath - 20 + 70) * 50), 75);
-        this.anvilXP = (100 * (finalMath - 1));
+        // Existing consumers use a bonus percentage on both sides of the soft cap.
+        this.anvilXP = 100 * (multiplier - 1);
     };
 
     getSpeedBonusFromAgility = (agility: number = 0): number => {
         let base: number = (Math.pow(agility + 1, 0.37) - 1) / 40;
-        if (agility > 1000) {
+        if (agility >= 1000) {
             base = ((agility - 1000) / (agility + 2500)) * 0.5 + 0.297;
         }
         return (base * 2) + 1;
@@ -180,6 +190,16 @@ export class Anvil {
         });
 
         return totalCost;
+    };
+
+    // Reconstruct purchased prices with the current discount, not historical discounts.
+    getTotalMonsterMatCost = (): Record<string, number> => {
+        const costs: Record<string, number> = {};
+        for (let point = 0; point < this.pointsFromMats; point++) {
+            const material = this.getMonsterMat(point);
+            costs[material] = (costs[material] ?? 0) + this.getMonsterMatCost(point);
+        }
+        return costs;
     };
 
     getMonsterCostToMax = (pointsBought: number = this.pointsFromMats) => {
@@ -282,13 +302,29 @@ export const updateAnvil = (data: Map<string, any>) => {
     const summoning = data.get("summoning") as Summoning;
     const guild = data.get("guild") as Guild;
     const goldenFood = data.get("goldenFood") as GoldenFood;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+    const skilling = data.get("skilling") as Skilling;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
     // Cap stuff
     const capacity = data.get("capacity") as Capacity;
+    let maestro: Player | undefined;
+    // The native account scan selects the last Maestro or advanced class.
+    for (const player of players) {
+        if (player.classId >= ClassIndex.Maestro && player.classId <= ClassIndex.Infinilyte) {
+            maestro = player;
+        }
+    }
+    const leftHand = maestro?.getTalent(42);
+    const leftHandBonus = leftHand ? leftHand.getBonusAtLevel(leftHand.pointsSpent) : 0;
+    const enhancedLeftHand = players.some(player => player.getTalentBonus(49) >= 25);
 
     players.forEach(player => {
         const playerAnvil = anvilWrapper.playerAnvils[player.playerID];
+        playerAnvil.pointsFromSmithing = player.skills.get(SkillsIndex.Smithing)!.level;
+        const acme = player.getTalent(281);
+        playerAnvil.pointsFromAcme = (acme?.pointsSpent ?? 0)
+            + player.getTalentBonusAtInputs(281, player.finalTalentInputs) * Math.floor(playerAnvil.pointsFromSmithing / 10);
 
         // Get anvilnomics discount.
         playerAnvil.costDiscount = alchemy.getBonusForPlayer(player, CauldronIndex.Quicc, AlchemyConst.Anvilnomics);
@@ -302,15 +338,24 @@ export const updateAnvil = (data: Map<string, any>) => {
         const anvilStatueBonus = statues[player.playerID].statues[StatueConst.AnvilIndex].getBonus(player);
         const starSignBonus = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Speed in Town"), 0);
         const talentTownSpeedBonus = player.talents.find(x => x.skillIndex == 269)?.getBonus() ?? 0;
-        playerAnvil.setSpeed(player.stats.agility, anvilZoomerBonus, postOfficeBonus, hammerHammerBonus, anvilStatueBonus, starSignBonus, talentTownSpeedBonus);
+        playerAnvil.setSpeed(player.stats.agility, anvilZoomerBonus, postOfficeBonus, hammerHammerBonus, anvilStatueBonus, starSignBonus, talentTownSpeedBonus, upgradeVault.getBonusForId(24));
 
         // XP Math
         const saltLickBonus = saltLick.getBonus(3);
         const dungeonBonus = (dungeonsData.passives.get(PassiveType.Flurbo) ?? [])[2]?.getBonus() ?? 0; // Lava is looking at the wrong bonus.
-        const allSkillXP = Skilling.getAllSkillXP(player, players, shrines, statues[player.playerID], prayers, saltLickBonus, dungeonBonus, divinity, cards, achievementsInfo, skillMastery, breeding, worship, guild, summoning, goldenFood);
-        const mmanBonus = players.find(player => [ClassIndex.Maestro, ClassIndex.Voidwalker].includes(player.classId))?.talents.find(talent => talent.skillIndex == 42)?.getBonus() ?? 0;
+        const allSkillXP = skilling.getAllSkillXP(player, players, shrines, statues[player.playerID], prayers, saltLickBonus, dungeonBonus, divinity, cards, achievementsInfo, skillMastery, breeding, worship, guild, summoning, goldenFood);
+        let mmanBonus = 0;
+        if (maestro) {
+            if (maestro.playerID === player.playerID) {
+                mmanBonus = enhancedLeftHand ? 2 * leftHandBonus : 0;
+            }
+            else if (playerAnvil.pointsFromSmithing < maestro.skills.get(SkillsIndex.Smithing)!.level) {
+                // Left Hand compares skill levels and uses only the source's allocated talent points.
+                mmanBonus = leftHandBonus;
+            }
+        }
         const riftBonus = skillMastery.getSkillBonus(SkillsIndex.Smithing, 1);
-        const xpMulti = playerAnvil.getXPMulti(player, allSkillXP, mmanBonus, riftBonus);
+        const xpMulti = playerAnvil.getXPMulti(player, allSkillXP, mmanBonus, riftBonus, getStampBonusForKey(stampData, "SmithExp", player));
         playerAnvil.setXP(xpMulti);
 
         // Capacity

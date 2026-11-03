@@ -9,6 +9,11 @@ import { Item } from "../items";
 import { ArcadeBonusModel } from "../model/arcadeBonusModel";
 import { Stamp, getStampBonusForKey } from "../world-1/stamps";
 import { TaskBoard } from "../tasks";
+import { type Companion, getCompanionActiveBonus } from "../companions";
+import type { Tesseract } from "../tesseract";
+import type { Gaming } from "../world-5/gaming";
+import type { Farming } from "../world-6/farming";
+import type { CoralKid } from "../world-7/coralKid";
 
 export const ARCADE_MAX_LEVEL: number = 100
 const achivementsWithBallBonus: number[][] = [
@@ -104,6 +109,16 @@ export class ArcadeBonus {
     }
 }
 
+export interface ArcadeGoldBallGainSources {
+    goldenYellowPercent: number;
+    arcadeShopPercent: number;
+    spheresOfGoldPercent: number;
+    goldFigleafPercent: number;
+    ballthezarPercent: number;
+    hedgehogPercent: number;
+    eventMultiplier: number;
+}
+
 export class Arcade extends Domain {
     bonuses: ArcadeBonus[] = [];
     balls: number = 0;
@@ -116,6 +131,52 @@ export class Arcade extends Domain {
     maxClaimTime: number = 0;
     ballsToClaim: number = 0;
     maxBalls: number = 0;
+    private goldBallGainSources: ArcadeGoldBallGainSources = {
+        goldenYellowPercent: 0,
+        arcadeShopPercent: 0,
+        spheresOfGoldPercent: 0,
+        goldFigleafPercent: 0,
+        ballthezarPercent: 0,
+        hedgehogPercent: 0,
+        eventMultiplier: 1,
+    };
+
+    updateGoldBallGainInputs(
+        goldenYellowBonus: number,
+        spheresOfGoldBonus: number,
+        goldFigleafBonus: number,
+        coralKidFirstUpgradeLevel: number,
+        activeKingDootBonus: number,
+        hedgehogBonus: number,
+        eventBonusPercent: number,
+    ): void {
+        this.goldBallGainSources = {
+            goldenYellowPercent: goldenYellowBonus,
+            arcadeShopPercent: this.bonuses[39].getBonus(),
+            spheresOfGoldPercent: spheresOfGoldBonus,
+            goldFigleafPercent: goldFigleafBonus,
+            ballthezarPercent: 50 * Math.min(1, coralKidFirstUpgradeLevel * activeKingDootBonus),
+            hedgehogPercent: hedgehogBonus,
+            eventMultiplier: 1 + eventBonusPercent / 100,
+        };
+    }
+
+    /** Account contributions use percentage points. The event uses a separate factor. */
+    getGoldBallGainSources(): Readonly<ArcadeGoldBallGainSources> {
+        return this.goldBallGainSources;
+    }
+
+    /** Return the ordinary reward multiplier. The event does not apply to jackpots. */
+    getGoldBallGainMultiplier(): number {
+        const sources = this.goldBallGainSources;
+        // Preserve the game's nested addition order.
+        const accountBonusPercent = sources.goldenYellowPercent
+            + (sources.arcadeShopPercent
+                + (sources.spheresOfGoldPercent
+                    + (sources.goldFigleafPercent
+                        + (sources.ballthezarPercent + sources.hedgehogPercent))));
+        return (1 + accountBonusPercent / 100) * sources.eventMultiplier;
+    }
 
     setMaxClaimTime = (stampBonus: number = 0) => {
         this.maxClaimTime = Math.ceil(3600 * (48 + Math.min(10, stampBonus)));
@@ -165,6 +226,16 @@ export class Arcade extends Domain {
         const bonusArray = data.get("ArcadeUpg") as number[];
         const optionList = data.get("OptLacc") as number[];
 
+        arcade.goldBallGainSources = {
+            goldenYellowPercent: 0,
+            arcadeShopPercent: 0,
+            spheresOfGoldPercent: 0,
+            goldFigleafPercent: 0,
+            ballthezarPercent: 0,
+            hedgehogPercent: 0,
+            eventMultiplier: 1,
+        };
+
         bonusArray.forEach((level, index) => {
             if (index < arcade.bonuses.length) {
                 arcade.bonuses[index].level = level;
@@ -185,6 +256,22 @@ export const updateArcade = (data: Map<string, any>) => {
     const achievementData = data.get("achievements") as Achievement[];
     const taskboardData = data.get("taskboard") as TaskBoard;
     const bribeData = data.get("bribes") as Bribe[];
+    const gaming = data.get("gaming") as Gaming;
+    const tesseract = data.get("tesseract") as Tesseract;
+    const farming = data.get("farming") as Farming;
+    const coralKid = data.get("coralKid") as CoralKid;
+    const companions = data.get("companions") as Companion[];
+    const serverVars = data.get("servervars") as Record<string, unknown>;
+
+    arcade.updateGoldBallGainInputs(
+        gaming.getPaletteBonus(15),
+        tesseract.upgrades[16].getBonus(tesseract.upgrades),
+        farming.getExoticMarketBonusValue(57),
+        coralKid.coralKidBonuses[0].level,
+        getCompanionActiveBonus(companions, 0),
+        getCompanionActiveBonus(companions, 36),
+        Number(serverVars.ArcGballPCT ?? 0),
+    );
 
     // Balls per Second
     const ballVialBonus = alchemyData?.vials.find(vial => vial.name == "Ball Pickle Jar")?.getBonus() ?? 0;

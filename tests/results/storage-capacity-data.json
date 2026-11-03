@@ -1,0 +1,314 @@
+{
+  "extractions": {
+    "storage_slots_owned": {
+      "expression": "idleon.getAttr('ChestSlotsOwned')",
+      "result": 551
+    },
+    "storage_chest_catalogue": {
+      "expression": "(()=>{const defs=idleon.engine.getGameAttribute('ItemDefinitionsGET').h;return Object.keys(defs).filter(key=>key.startsWith('InvStorage')&&defs[key].h.Type==='STORAGE_').map(internalName=>{const item=defs[internalName].h;return {internalName,id:Number(item.ID),displayName:String(item.displayName),capacity:Number(item.lvReqToCraft)};}).sort((a,b)=>a.id-b.id);})()",
+      "result": [
+        {
+          "internalName": "InvStorage1",
+          "id": 0,
+          "displayName": "Storage_Chest_1",
+          "capacity": 3
+        },
+        {
+          "internalName": "InvStorage2",
+          "id": 1,
+          "displayName": "Storage_Chest_2",
+          "capacity": 3
+        },
+        {
+          "internalName": "InvStorage3",
+          "id": 2,
+          "displayName": "Storage_Chest_3",
+          "capacity": 3
+        },
+        {
+          "internalName": "InvStorage4",
+          "id": 3,
+          "displayName": "Storage_Chest_4",
+          "capacity": 3
+        },
+        {
+          "internalName": "InvStorage5",
+          "id": 4,
+          "displayName": "Storage_Chest_5",
+          "capacity": 3
+        },
+        {
+          "internalName": "InvStorage6",
+          "id": 5,
+          "displayName": "Storage_Chest_6",
+          "capacity": 4
+        },
+        {
+          "internalName": "InvStorage7",
+          "id": 6,
+          "displayName": "Storage_Chest_7",
+          "capacity": 4
+        },
+        {
+          "internalName": "InvStorage8",
+          "id": 7,
+          "displayName": "Storage_Chest_8",
+          "capacity": 4
+        },
+        {
+          "internalName": "InvStorage9",
+          "id": 8,
+          "displayName": "Storage_Chest_9",
+          "capacity": 4
+        },
+        {
+          "internalName": "InvStorage10",
+          "id": 9,
+          "displayName": "Storage_Chest_10",
+          "capacity": 5
+        },
+        {
+          "internalName": "InvStorage11",
+          "id": 10,
+          "displayName": "Storage_Chest_11",
+          "capacity": 5
+        },
+        {
+          "internalName": "InvStorage12",
+          "id": 11,
+          "displayName": "Storage_Chest_12",
+          "capacity": 5
+        },
+        {
+          "internalName": "InvStorage13",
+          "id": 12,
+          "displayName": "Storage_Chest_13",
+          "capacity": 5
+        },
+        {
+          "internalName": "InvStorage15",
+          "id": 13,
+          "displayName": "Storage_Chest_15",
+          "capacity": 6
+        },
+        {
+          "internalName": "InvStorage14",
+          "id": 14,
+          "displayName": "Storage_Chest_14",
+          "capacity": 5
+        },
+        {
+          "internalName": "InvStorage16",
+          "id": 15,
+          "displayName": "Storage_Chest_16",
+          "capacity": 6
+        },
+        {
+          "internalName": "InvStorage17",
+          "id": 16,
+          "displayName": "Storage_Chest_17",
+          "capacity": 6
+        },
+        {
+          "internalName": "InvStorage18",
+          "id": 17,
+          "displayName": "Storage_Chest_18",
+          "capacity": 6
+        },
+        {
+          "internalName": "InvStorage19",
+          "id": 18,
+          "displayName": "Storage_Chest_19",
+          "capacity": 6
+        },
+        {
+          "internalName": "InvStorage20",
+          "id": 19,
+          "displayName": "Storage_Chest_20",
+          "capacity": 7
+        },
+        {
+          "internalName": "InvStorage21",
+          "id": 20,
+          "displayName": "Storage_Chest_21",
+          "capacity": 7
+        },
+        {
+          "internalName": "InvStorage22",
+          "id": 21,
+          "displayName": "Storage_Chest_22",
+          "capacity": 8
+        },
+        {
+          "internalName": "InvStorage23",
+          "id": 22,
+          "displayName": "Storage_Chest_23",
+          "capacity": 9
+        },
+        {
+          "internalName": "InvStorage24",
+          "id": 23,
+          "displayName": "Storage_Chest_24",
+          "capacity": 9
+        },
+        {
+          "internalName": "InvStorage25",
+          "id": 24,
+          "displayName": "Storage_Chest_25",
+          "capacity": 9
+        },
+        {
+          "internalName": "InvStorage26",
+          "id": 25,
+          "displayName": "Storage_Chest_26",
+          "capacity": 9
+        },
+        {
+          "internalName": "InvStorage27",
+          "id": 26,
+          "displayName": "Storage_Chest_27",
+          "capacity": 9
+        },
+        {
+          "internalName": "InvStorage28",
+          "id": 27,
+          "displayName": "Storage_Chest_28",
+          "capacity": 10
+        },
+        {
+          "internalName": "InvStorage29",
+          "id": 28,
+          "displayName": "Storage_Chest_29",
+          "capacity": 5
+        },
+        {
+          "internalName": "InvStorage30",
+          "id": 29,
+          "displayName": "Storage_Chest_30",
+          "capacity": 6
+        },
+        {
+          "internalName": "InvStorage31",
+          "id": 30,
+          "displayName": "Storage_Chest_31",
+          "capacity": 9
+        },
+        {
+          "internalName": "InvStorage32",
+          "id": 31,
+          "displayName": "Storage_Chest_32",
+          "capacity": 9
+        },
+        {
+          "internalName": "InvStorage33",
+          "id": 32,
+          "displayName": "Storage_Chest_33",
+          "capacity": 9
+        },
+        {
+          "internalName": "InvStorage34",
+          "id": 33,
+          "displayName": "Storage_Chest_34",
+          "capacity": 9
+        },
+        {
+          "internalName": "InvStorage35",
+          "id": 34,
+          "displayName": "Storage_Chest_35",
+          "capacity": 9
+        },
+        {
+          "internalName": "InvStorage36",
+          "id": 35,
+          "displayName": "Storage_Chest_36",
+          "capacity": 9
+        },
+        {
+          "internalName": "InvStorage37",
+          "id": 36,
+          "displayName": "Storage_Chest_37",
+          "capacity": 9
+        },
+        {
+          "internalName": "InvStorage38",
+          "id": 37,
+          "displayName": "Storage_Chest_38",
+          "capacity": 9
+        },
+        {
+          "internalName": "InvStorage39",
+          "id": 38,
+          "displayName": "Storage_Chest_39",
+          "capacity": 9
+        },
+        {
+          "internalName": "InvStorage40",
+          "id": 39,
+          "displayName": "Storage_Chest_40",
+          "capacity": 9
+        },
+        {
+          "internalName": "InvStorage41",
+          "id": 40,
+          "displayName": "Storage_Chest_41",
+          "capacity": 9
+        },
+        {
+          "internalName": "InvStorage42",
+          "id": 41,
+          "displayName": "Storage_Chest_42",
+          "capacity": 9
+        },
+        {
+          "internalName": "InvStorageF",
+          "id": 100,
+          "displayName": "Dank_Paypay_Chest",
+          "capacity": 3
+        },
+        {
+          "internalName": "InvStorageS",
+          "id": 101,
+          "displayName": "Gelatinous_Chest",
+          "capacity": 3
+        },
+        {
+          "internalName": "InvStorageC",
+          "id": 102,
+          "displayName": "Cheesy_Chest",
+          "capacity": 4
+        },
+        {
+          "internalName": "InvStorageD",
+          "id": 103,
+          "displayName": "Woodlin_Chest",
+          "capacity": 4
+        },
+        {
+          "internalName": "InvStorageN",
+          "id": 104,
+          "displayName": "Ninja_Chest",
+          "capacity": 3
+        },
+        {
+          "internalName": "InvStorageH",
+          "id": 105,
+          "displayName": "Holiday_Chest",
+          "capacity": 16
+        },
+        {
+          "internalName": "InvStorageL",
+          "id": 106,
+          "displayName": "Valenslime_Chest",
+          "capacity": 16
+        },
+        {
+          "internalName": "InvStorageZ",
+          "id": 107,
+          "displayName": "Buried_Treasure|Chest",
+          "capacity": 16
+        }
+      ]
+    }
+  },
+  "errors": {}
+}

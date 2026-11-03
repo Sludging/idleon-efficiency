@@ -1,0 +1,33 @@
+{
+  "extractions": {
+    "golden_yellow_percent": {
+      "expression": "idleon.callFunction('GamingStatType', 'PaletteBonus', 15, 0)",
+      "result": 44.08163265306123
+    },
+    "arcade_shop_percent": {
+      "expression": "idleon.callFunction('ArcadeBonus', 39)",
+      "result": 612
+    },
+    "spheres_of_gold_percent": {
+      "expression": "idleon.callFunction('ArcaneType', 'ArcaneUpgBonus', 16, 0)",
+      "result": 44
+    },
+    "gold_figleaf_percent": {
+      "expression": "idleon.callFunction('FarmingStuffs', 'ExoticBonusQTY', 57, 0)",
+      "result": 1.6036943744752308
+    },
+    "ballthezar_percent": {
+      "expression": "50 * Math.min(1, Number(idleon.getAttr('OptionsListAccount')[427]) * idleon.callFunction('Companions', 0))",
+      "result": 50
+    },
+    "hedgehog_percent": {
+      "expression": "idleon.callFunction('Companions', 36)",
+      "result": 300
+    },
+    "event_multiplier": {
+      "expression": "1 + window.frames[0].__idleon_cheats__['FirebaseStorage'].getServerVarLoad('ArcGballPCT') / 100",
+      "result": 1
+    }
+  },
+  "errors": {}
+}

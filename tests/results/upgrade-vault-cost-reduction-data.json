@@ -1,0 +1,9 @@
+{
+  "extractions": {
+    "vault_cost_reduction_multiplier": {
+      "expression": "1 / ((1 / (1 + Number(idleon.getAttr(\"OptionsListAccount\")[437]) / 100)) * Math.max(0.1, 1 - idleon.callFunction(\"Companions\", 99) / 100) * Math.max(0.1, 1 - Math.max(idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 38, 0), idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 47, 0)) / 100))",
+      "result": 8
+    }
+  },
+  "errors": {}
+}

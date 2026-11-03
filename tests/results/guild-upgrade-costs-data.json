@@ -1,0 +1,112 @@
+{
+  "extractions": {
+    "guild_bonus_costs": {
+      "expression": "idleon.getAttr(\"CustomLists\").h.GuildBonuses.slice(0,17).map((b,index)=>{const level=+idleon.getAttr(\"GuildTasks\")[0][index];let costToMax=0;for(let l=level;l<+b[7];l++)costToMax+=+b[10]+l*b[11];return {index,level,upgradeCost:+b[10]+level*b[11],costToMax}})",
+      "result": [
+        {
+          "index": 0,
+          "level": 5,
+          "upgradeCost": 210,
+          "costToMax": 198550
+        },
+        {
+          "index": 1,
+          "level": 4,
+          "upgradeCost": 260,
+          "costToMax": 74060
+        },
+        {
+          "index": 2,
+          "level": 5,
+          "upgradeCost": 370,
+          "costToMax": 85950
+        },
+        {
+          "index": 3,
+          "level": 8,
+          "upgradeCost": 660,
+          "costToMax": 96600
+        },
+        {
+          "index": 4,
+          "level": 6,
+          "upgradeCost": 570,
+          "costToMax": 110220
+        },
+        {
+          "index": 5,
+          "level": 0,
+          "upgradeCost": 30,
+          "costToMax": 124000
+        },
+        {
+          "index": 6,
+          "level": 9,
+          "upgradeCost": 740,
+          "costToMax": 95940
+        },
+        {
+          "index": 7,
+          "level": 5,
+          "upgradeCost": 480,
+          "costToMax": 110700
+        },
+        {
+          "index": 8,
+          "level": 3,
+          "upgradeCost": 390,
+          "costToMax": 596550
+        },
+        {
+          "index": 9,
+          "level": 1,
+          "upgradeCost": 20,
+          "costToMax": 12740
+        },
+        {
+          "index": 10,
+          "level": 20,
+          "upgradeCost": 1220,
+          "costToMax": 62700
+        },
+        {
+          "index": 11,
+          "level": 5,
+          "upgradeCost": 370,
+          "costToMax": 85950
+        },
+        {
+          "index": 12,
+          "level": 8,
+          "upgradeCost": 660,
+          "costToMax": 96600
+        },
+        {
+          "index": 13,
+          "level": 5,
+          "upgradeCost": 480,
+          "costToMax": 110700
+        },
+        {
+          "index": 14,
+          "level": 1,
+          "upgradeCost": 190,
+          "costToMax": 2992960
+        },
+        {
+          "index": 15,
+          "level": 6,
+          "upgradeCost": 500,
+          "costToMax": 97680
+        },
+        {
+          "index": 16,
+          "level": 0,
+          "upgradeCost": 30,
+          "costToMax": 111750
+        }
+      ]
+    }
+  },
+  "errors": {}
+}
