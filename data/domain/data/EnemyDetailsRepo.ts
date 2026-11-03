@@ -5552,6 +5552,27 @@ export const initEnemyDetailsRepo = () => {
                 "Damages": [2, 1],
                 "DefFor0": 0.5
             }),
+        new EnemyDetailsBase("cathie", <EnemyDetailsModel>{
+                "Name": "Catherine",
+                "AFKtype": AFKTypeEnum.Fighting,
+                "MonsterFace": 23,
+                "MonsterOffsetX": 38,
+                "MonsterOffsetY": 47,
+                "HeightOfMonster": 70,
+                "MonsterMoving": 1,
+                "MovingFrame": 11,
+                "RespawnTime": 40,
+                "DeathFrame": 22,
+                "MonsterHPTotal": 14000,
+                "Type": EnemyTypeEnum.monsterType,
+                "SpecialType": "",
+                "ExpGiven": 420,
+                "ExpType": 0,
+                "Defence": 1,
+                "MoveSPEED": 5,
+                "Damages": [2, 1],
+                "DefFor0": 0.5
+            }),
         new EnemyDetailsBase("fm_frog", <EnemyDetailsModel>{
                 "Name": "Abacus Frog",
                 "AFKtype": AFKTypeEnum.Fighting,

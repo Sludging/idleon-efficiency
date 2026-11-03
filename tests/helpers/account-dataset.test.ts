@@ -16,26 +16,32 @@ const accountDataset = require('./account-dataset.cjs') as {
 let tempRoot: string;
 let datasetPath: string;
 let savePath: string;
+let sourceSavePath: string;
 let resultPath: string;
 let configsDir: string;
 let assetRoot: string;
 let originalDataset: string | undefined;
 function writeDataset(): void {
   fs.mkdirSync(path.dirname(savePath), { recursive: true });
+  fs.mkdirSync(path.dirname(sourceSavePath), { recursive: true });
   fs.mkdirSync(path.dirname(resultPath), { recursive: true });
   fs.mkdirSync(configsDir, { recursive: true });
   fs.mkdirSync(assetRoot, { recursive: true });
   fs.writeFileSync(path.join(configsDir, 'config.json'), '{}');
   fs.writeFileSync(path.join(assetRoot, 'asset.bin'), 'asset');
   fs.writeFileSync(savePath, JSON.stringify({ playerNames: ['First', 'Selected'] }));
+  fs.writeFileSync(sourceSavePath, JSON.stringify({ playerNames: ['First', 'Selected'], transportInput: 'source snapshot' }));
   fs.writeFileSync(resultPath, JSON.stringify({ extractions: {}, errors: {} }));
   const descriptor = {
-    schemaVersion: 2,
+    schemaVersion: 3,
     accountId: 'sample',
     profileName: 'Sample',
     adapterVersion: ADAPTER_VERSION,
-    savePath: 'save.json',
+    savePath: 'effective-save.json',
     saveSha256: accountDataset.hashFile(savePath),
+    sourceSavePath: path.relative(path.dirname(datasetPath), sourceSavePath),
+    sourceSaveSha256: accountDataset.hashFile(sourceSavePath),
+    inputOptions: { zeroCharacterAfk: false, evaluationTimeMs: 1760000000000 },
     resultsDir: 'results',
     playerIndex: 1,
     playerName: 'Selected',
@@ -54,7 +60,8 @@ beforeEach(() => {
   originalDataset = process.env.TEST_ACCOUNT_DATASET;
   tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'account-dataset-'));
   datasetPath = path.join(tempRoot, 'runs', 'run-1', 'dataset.json');
-  savePath = path.join(path.dirname(datasetPath), 'save.json');
+  savePath = path.join(path.dirname(datasetPath), 'effective-save.json');
+  sourceSavePath = path.join(tempRoot, 'snapshot', 'save.json');
   resultPath = path.join(path.dirname(datasetPath), 'results', 'sample-data.json');
   configsDir = path.join(tempRoot, 'configs');
   assetRoot = path.join(tempRoot, 'assets');
@@ -69,9 +76,9 @@ afterEach(() => {
 });
 
 describe('account dataset selection', () => {
-  it('rejects schemaVersion 1 datasets', () => {
+  it.each([1, 2])('rejects schemaVersion %s datasets', (schemaVersion) => {
     const descriptor = JSON.parse(fs.readFileSync(datasetPath, 'utf8'));
-    descriptor.schemaVersion = 1;
+    descriptor.schemaVersion = schemaVersion;
     fs.writeFileSync(datasetPath, JSON.stringify(descriptor));
     expect(() => accountDataset.loadAccountDataset(datasetPath, { configsDir, assetRoot })).toThrow('Unsupported account dataset schemaVersion');
   });
@@ -79,6 +86,52 @@ describe('account dataset selection', () => {
   it('rejects a save whose bytes do not match its descriptor', () => {
     fs.writeFileSync(savePath, JSON.stringify({ playerNames: ['Changed', 'Selected'] }));
     expect(() => accountDataset.loadAccountDataset(datasetPath, { configsDir, assetRoot })).toThrow('save hash mismatch');
+  });
+
+  it('rejects source snapshot bytes that do not match their provenance hash', () => {
+    fs.writeFileSync(sourceSavePath, '{"changed":true}');
+    expect(() => accountDataset.loadAccountDataset(datasetPath, { configsDir, assetRoot })).toThrow('source save hash mismatch');
+  });
+
+  it('rejects a missing source snapshot', () => {
+    fs.rmSync(sourceSavePath);
+    expect(() => accountDataset.loadAccountDataset(datasetPath, { configsDir, assetRoot })).toThrow();
+  });
+
+  it.each<[string, unknown, string]>([
+    ['sourceSavePath', 7, 'Invalid save or results path'],
+    ['sourceSavePath', '/absolute/save.json', 'Invalid save or results path'],
+    ['sourceSaveSha256', 7, 'Invalid account dataset fingerprint'],
+  ])('rejects invalid provenance %s %p', (field, value, error) => {
+    const descriptor = JSON.parse(fs.readFileSync(datasetPath, 'utf8'));
+    descriptor[field] = value;
+    fs.writeFileSync(datasetPath, JSON.stringify(descriptor));
+    expect(() => accountDataset.loadAccountDataset(datasetPath, { configsDir, assetRoot })).toThrow(error);
+  });
+
+  it.each([
+    [],
+    false,
+    {},
+    { zeroCharacterAfk: 'false', evaluationTimeMs: 1760000000000 },
+    { zeroCharacterAfk: false },
+    { zeroCharacterAfk: false, evaluationTimeMs: 0 },
+    { zeroCharacterAfk: false, evaluationTimeMs: -1 },
+    { zeroCharacterAfk: false, evaluationTimeMs: 0.5 },
+    { zeroCharacterAfk: false, evaluationTimeMs: '1760000000000' },
+    { zeroCharacterAfk: false, evaluationTimeMs: Number.MAX_SAFE_INTEGER + 1 },
+  ].map(inputOptions => [inputOptions]))('rejects invalid captured input options %p', (inputOptions) => {
+    const descriptor = JSON.parse(fs.readFileSync(datasetPath, 'utf8'));
+    descriptor.inputOptions = inputOptions;
+    fs.writeFileSync(datasetPath, JSON.stringify(descriptor));
+    expect(() => accountDataset.loadAccountDataset(datasetPath, { configsDir, assetRoot })).toThrow('Invalid inputOptions');
+  });
+
+  it.each([false, true])('loads the effective save for zero-character-AFK %s', (zeroCharacterAfk) => {
+    const descriptor = JSON.parse(fs.readFileSync(datasetPath, 'utf8'));
+    descriptor.inputOptions.zeroCharacterAfk = zeroCharacterAfk;
+    fs.writeFileSync(datasetPath, JSON.stringify(descriptor));
+    expect(accountDataset.loadAccountDataset(datasetPath, { configsDir, assetRoot }).savePath).toBe(savePath);
   });
 
   it('rejects missing required result inputs', () => {
@@ -172,7 +225,7 @@ describe('account dataset selection', () => {
     expect(() => accountDataset.loadAccountDataset(datasetPath, { configsDir, assetRoot })).toThrow('selected character mismatch');
   });
 
-  it.each(['preparationPlayerIndex', 'preparationPlayerName'])('rejects a descriptor missing %s', (field) => {
+  it.each(['preparationPlayerIndex', 'preparationPlayerName', 'sourceSavePath', 'sourceSaveSha256', 'inputOptions'])('rejects a descriptor missing %s', (field) => {
     const descriptor = JSON.parse(fs.readFileSync(datasetPath, 'utf8'));
     delete descriptor[field];
     fs.writeFileSync(datasetPath, JSON.stringify(descriptor));

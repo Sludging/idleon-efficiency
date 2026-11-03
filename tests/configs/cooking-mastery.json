@@ -1,0 +1,11 @@
+{
+  "description": "Read account Mastery progress, EXP requirements, point totals, and six upgrade bonuses at current account values. Calculate points without changing game counters.",
+  "target": "Cooking Mastery account progression",
+  "extractions": [
+    {
+      "label": "cooking_mastery",
+      "expression": "(()=>{const f=(name,...args)=>idleon.callFunction(name,...args);const a=name=>idleon.getAttr(name);const c=a('CookMaster');const L=Number(c[1][0]);const e=f('Summoning','EventShopOwned',54,0);const companion=f('Companions',87);const pointPool=(levels,jelly,research)=>{let spent=0;for(const v of levels)spent=Math.round(spent+Number(v));const total=Math.round(L+(1+5*e+(5*companion+jelly)))+research;return{total,spent,available:Math.max(0,total-spent)};};const requirements=Array.from({length:9},(_,i)=>f('Summoning2','RankREQcook',i,0));return{level:L,nativeRank:L+1,unlockTier:requirements.reduce((tier,r,i)=>L>=r?i:tier,-1),unlocked:f('Summoning2','isMasteryUnlocked',0,0)===1,experience:Number(c[1][1]),totalLadles:Number(c[1][3]),experienceRequired:f('Summoning2','ExpReqCook',0,0),purplePoints:pointPool(c[2],f('JellyOperation','RoG_BonusQTY',13,0),0),yellowPoints:pointPool(c[0],f('JellyOperation','RoG_BonusQTY',5,0),f('ResearchStuff','Grid_Bonus',190,1)),context:{totalLadles:Number(c[1][3]),totalCookingLevels:a('GetPlayersUsernames').reduce((s,n)=>s+Number(a('PlayerDATABASE').h[n].h.Lv0[10]),0),divorceCakeLevel:Number(a('Meals')[0][73]),totalRibbonRanks:a('Ribbon').slice(28).reduce((s,r)=>s+Number(r),0),nativeRank:L+1},upgrades:Array.from({length:6},(_,index)=>({index,level:Number(c[2][index]),unlocked:L>=requirements[index],coefficient:f('Summoning2','BonusAmountcook',index,0),effect:f('Summoning2','BonusAmountcook',index,99)}))};})()",
+      "description": "Read game values and calculate available purple and yellow points without changing game counters. Runtime EXP can increase after the save. The test uses saved EXP to calculate time to the next level."
+    }
+  ]
+}

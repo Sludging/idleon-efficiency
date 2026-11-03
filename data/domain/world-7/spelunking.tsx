@@ -57,6 +57,7 @@ import type { Hole } from "../world-5/hole/hole";
 import type { Skilling } from "../skilling";
 import type { Minehead } from "./minehead";
 import type { ZenithMarket } from "./zenithShop";
+import { Talent } from "../talents";
 
 const ELIXIR_EFFECT_QUANTITIES = [25, 1, 30, 1, 20, 60, 25, 30, 1, 1, 1, 0];
 const GRAND_DISCOVERIES_PER_TUNNEL = 10;
@@ -1712,7 +1713,7 @@ export const updateSpelunkingAccountMetrics = (data: Map<string, any>): void => 
         playerName: player.playerName,
         skillLevel: player.skills.get(SkillsIndex.Spelunking)!.level,
         allEfficiencyMultiplier: skilling.getAllEfficiencies(player),
-        efficiencyTalentMultiplier: player.getTalentBonusAtInputs(237, player.finalTalentInputs),
+        efficiencyTalentMultiplier: Talent.getAccountTalentBonus(players, 237, player.finalTalentInputs),
         efficiencyCardBonus: Card.GetTotalBonusForId(
             player.cardInfo!.cards.filter(card => card.passive || player.cardInfo!.equippedCards.includes(card)), 98
         ),

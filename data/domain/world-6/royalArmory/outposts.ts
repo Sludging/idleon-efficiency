@@ -245,7 +245,7 @@ export class RoyalMapSource {
             Math.max(1, guardian.collectionTalentMultiplier) *
             (1 + (bonuses.resourceQuantityLogTotal * bonuses.stockpileBonus) / 100) *
             (1 + bonuses.zenithCollectionBonus / 100) *
-            Math.min(5, 1 + (10 * Math.max(0, Math.round(this.mapLevel - 5))) / 100)
+            Math.min(5, 1 + (10 * Math.max(0, Math.round(this.mapLevel - 6))) / 100)
         );
     }
 }

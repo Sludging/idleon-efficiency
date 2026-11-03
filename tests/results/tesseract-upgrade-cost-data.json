@@ -2,11 +2,11 @@
   "extractions": {
     "tesseract_upgrade_cost_0": {
       "expression": "Number(idleon.getAttr('Arcane')[0]) >= Number(idleon.getAttr('CustomLists').h.ArcaneUpg[0][4]) ? 0 : idleon.callFunction('ArcaneType', 'ArcaneUpgCost', 0, 0)",
-      "result": 9483657774658.67
+      "result": 1739630458832.1216
     },
     "tesseract_upgrade_cost_49": {
       "expression": "Number(idleon.getAttr('Arcane')[49]) >= Number(idleon.getAttr('CustomLists').h.ArcaneUpg[49][4]) ? 0 : idleon.callFunction('ArcaneType', 'ArcaneUpgCost', 49, 0)",
-      "result": 259241395153411.47
+      "result": 47553827638538.984
     },
     "tesseract_upgrade_cost_57": {
       "expression": "Number(idleon.getAttr('Arcane')[57]) >= Number(idleon.getAttr('CustomLists').h.ArcaneUpg[57][4]) ? 0 : idleon.callFunction('ArcaneType', 'ArcaneUpgCost', 57, 0)",
@@ -18,11 +18,11 @@
     },
     "tesseract_masterclass_cost_multiplier": {
       "expression": "idleon.callFunction(\"Summoning\", \"AllMasterclassCostRedux\", 0, 0)",
-      "result": 0.5555555555555556
+      "result": 0.10526315789473684
     },
     "tesseract_first_three_cost_multiplier": {
       "expression": "idleon.callFunction(\"Summoning\", \"First3MC_CostRedux\", 0, 0)",
-      "result": 0.02026753141467366
+      "result": 0.019621539741466566
     }
   },
   "errors": {}

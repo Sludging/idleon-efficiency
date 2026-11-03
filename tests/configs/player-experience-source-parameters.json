@@ -30,7 +30,7 @@
     { "label": "cooking_class_exp_meal", "expression": "idleon.callFunction('MealBonus','Clexp')", "description": "Meal bonus Clexp added to class EXP below character level 120" },
     { "label": "alchemy_vial_monster_exp", "expression": "idleon.engine.getGameAttribute('DNSM').h.AlchVials.h.MonsterEXP", "description": "Monster EXP vial additive percentage points" },
     { "label": "alchemy_vial_class_exp", "expression": "idleon.engine.getGameAttribute('DNSM').h.AlchVials.h['7classexp']", "description": "Class EXP vial multiplying class EXP" },
-    { "label": "star_sign_main_xp", "expression": "idleon.engine.getGameAttribute('DNSM').h.StarSigns.h.MainXP", "description": "Main XP star-sign additive percentage points" },
+    { "label": "star_sign_main_xp", "expression": "(() => { const map = idleon.engine.getGameAttribute('DNSM').h.StarSigns.h; return Object.prototype.hasOwnProperty.call(map, 'MainXP') ? map['MainXP'] : 0; })()", "description": "Main XP star-sign additive percentage points" },
     { "label": "arcade_12", "expression": "idleon.callFunction('ArcadeBonus',12)", "description": "Arcade bonus 12 added to class EXP" },
     { "label": "arcade_60", "expression": "idleon.callFunction('ArcadeBonus',60)", "description": "Arcade bonus 60 multiplying class EXP" },
     { "label": "shrine_5", "expression": "idleon.callFunction('Shrine',5)", "description": "Shrine 5 bonus added to class EXP" },

@@ -13,6 +13,43 @@ export interface ChangelogEntryData {
 
 export const changelogData: ChangelogEntryData[] = [
   {
+    version: "1.6.3",
+    title: "1.25, Cooking, and Alchemy",
+    date: "November 3, 2026",
+    changes: [
+      {
+        title: "Update 1.25",
+        changes: [
+          "Added Cape Vine page to track deposited capes, golden slots, and combined bonuses.",
+          "Research: Added Rift Skill Mastery bonuses to EXP, Observation rolls, and Research points.",
+          "Game Data: Updated items, companions, and other game data for 1.25.",
+          "Coins: Added new coin types and icons through Verdigris, and fixed coin display math for large amounts.",
+        ],
+      },
+      {
+        title: "Older Content",
+        changes: [
+          "Cooking: Added Ribbons and Mastery tabs with daily ribbon estimates, Mastery EXP, points, and upgrade bonuses.",
+          "Cooking: Added meal filters, per-meal ribbon and Mastery details, and No Meal Left Behind daily target tracking.",
+          "Alchemy: Added Brewing and Liquids tabs with assignments, production, upgrade progress, and bubble unlock estimates.",
+          "Alchemy: Added bubble growth targets and filters, plus Prisma, vial, and Sigil progress summaries.",
+          "The Hole: Added detailed tracking for Dawg Den, Bravery, Gloomie Mushroom Grotto, Justice, Wisdom, Gambit, and Temple.",
+        ],
+      },
+      {
+        title: "Bug Fixes",
+        changes: [
+          "Cooking: Fixed high-level meal upgrade costs and companion cost reductions.",
+          "Players: Added missing Eclectic Sigil damage bonuses.",
+          "Construction: Fixed missing Legend Talent bonuses to 3D Printer output.",
+          "Killroy: Fixed Masterclass drop multipliers.",
+          "Royal Armory: Fixed Outpost collection scaling.",
+          "Spelunking: Fixed account-wide Pit o' Pages talent bonuses to efficiency.",
+        ],
+      },
+    ],
+  },
+  {
     version: "1.6.2",
     title: "Super Talents, Construction, and More",
     date: "October 31, 2026",

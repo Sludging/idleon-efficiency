@@ -2,7 +2,7 @@
   "extractions": {
     "player_damage_etc_bonus_72": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"72\")",
-      "result": 474.71923172996594
+      "result": 477.9569768204338
     },
     "player_damage_etc_bonus_75": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"75\")",
@@ -42,7 +42,7 @@
     },
     "player_damage_meal_total_damage": {
       "expression": "idleon.callFunction(\"MealBonus\", \"TotDmg\")",
-      "result": 32004.36446945664
+      "result": 33999.904237808645
     },
     "player_damage_card_set_5": {
       "expression": "idleon.callFunction(\"CardSetBonuses\", 0, \"5\")",
@@ -58,13 +58,13 @@
     },
     "player_damage_native_component_d": {
       "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DummyNumbersStatManager\").h.DamageDealtLIST[2]; })()",
-      "result": 1358223225728849.2
+      "result": 1692325871404519
     },
     "player_damage_native_maximum": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0)",
       "result": {
         "type": "large_number",
-        "value": "8.135530682548266e+28"
+        "value": "1.4416714629473527e+29"
       }
     },
     "player_damage_pristine_charm_0": {
@@ -97,11 +97,11 @@
     },
     "player_damage_artifact_25_effective": {
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 25, 0)",
-      "result": 696490
+      "result": 712820
     },
     "player_damage_artifact_8_contextual": {
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 8, 0)",
-      "result": 473.0171180665857
+      "result": 473.6396910495103
     },
     "player_damage_exotic_market_41": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 41, 0)",

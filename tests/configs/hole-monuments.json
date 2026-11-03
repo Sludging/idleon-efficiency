@@ -1,0 +1,216 @@
+{
+  "description": "Extract regular-save monument core values from native game version 1.24. No parameter captures.",
+  "target": "Bravery, Justice, Wisdom story attempts, rewards, and bonus progress",
+  "extractions": [
+    {
+      "label": "story_progress",
+      "expression": "Array.from({length:3},(_,index)=>{const holes=idleon.getAttr('Holes');const removedBricks=Number(holes[14][2*index+1]);const hours=Number(holes[14][2*index]);const nextUpgradeIndex=removedBricks<8?removedBricks:null;const requiredHours=nextUpgradeIndex===null?0:Number(idleon.getAttr('CustomLists').h.HolesInfo[30][nextUpgradeIndex]);return {storedSeconds:Number(holes[11][11+index]),linearLimitSeconds:idleon.callFunction('Holes','MonumentRewardMulti_MaxLinearTime',index,0),removedBricks,nextUpgradeIndex,hoursRemaining:nextUpgradeIndex===null?0:Math.max(0,requiredHours-hours),claimable:nextUpgradeIndex!==null&&hours>=requiredHours};})",
+      "description": "Saved story time and removed bricks, native full-rate reward window, and next-brick eligibility. Respect hours are not spent."
+    },
+    {
+      "label": "bravery_minimum_damage",
+      "expression": "idleon.callFunction(\"Holes\", \"Bravery_MinDMG\", 0, 0)",
+      "description": "Minimum starting sword damage for a Bravery story, without temporary damage boosts."
+    },
+    {
+      "label": "bravery_maximum_damage",
+      "expression": "idleon.callFunction(\"Holes\", \"Bravery_MaxDMG\", 0, 0)",
+      "description": "Maximum starting sword damage for a Bravery story, without temporary damage boosts."
+    },
+    {
+      "label": "bravery_swords",
+      "expression": "idleon.callFunction(\"Holes\", \"Bravery_SwordsOwned\", 0, 0)",
+      "description": "Starting swords for a Bravery story."
+    },
+    {
+      "label": "bravery_rethrows",
+      "expression": "idleon.callFunction(\"Holes\", \"MaxRerolls\", 0, 0)",
+      "description": "Maximum sword rethrows for a Bravery story."
+    },
+    {
+      "label": "bravery_retellings",
+      "expression": "idleon.callFunction(\"Holes\", \"MaxRevisions\", 0, 0)",
+      "description": "Maximum retellings for a Bravery story."
+    },
+    {
+      "label": "justice_mental_health",
+      "expression": "idleon.callFunction(\"Holes\", \"J_StartHealth\", 0, 0)",
+      "description": "Starting Mental Health for a Justice trial."
+    },
+    {
+      "label": "justice_coins",
+      "expression": "idleon.callFunction(\"Holes\", \"J_StartCoins\", 0, 0)",
+      "description": "Starting Court Coins for a Justice trial."
+    },
+    {
+      "label": "justice_popularity",
+      "expression": "idleon.callFunction(\"Holes\", \"J_Happiness\", 0, 0)",
+      "description": "Starting Popularity for a Justice trial."
+    },
+    {
+      "label": "justice_dismissals",
+      "expression": "idleon.callFunction(\"Holes\", \"J_Dismissals\", 0, 0)",
+      "description": "Starting Dismissals for a Justice trial."
+    },
+    {
+      "label": "wisdom_attempts",
+      "expression": "idleon.callFunction(\"Holes2\", \"W_attempts\", 0, 0)",
+      "description": "Starting attempts for a normal Wisdom story."
+    },
+    {
+      "label": "wisdom_attempts_per_round",
+      "expression": "idleon.callFunction(\"Holes2\", \"W_attemptsGainPerRound\", 0, 0)",
+      "description": "Attempts gained per completed Wisdom board."
+    },
+    {
+      "label": "wisdom_seconds_per_match",
+      "expression": "idleon.callFunction(\"Holes2\", \"W_timePerMatch\", 0, 0)",
+      "description": "Time per Wisdom match, in seconds."
+    },
+    {
+      "label": "wisdom_instant_matches",
+      "expression": "idleon.callFunction(\"Holes2\", \"W_instamatches\", 0, 0)",
+      "description": "Starting instant matches for a Wisdom story."
+    },
+    {
+      "label": "bravery_hours",
+      "expression": "Number(idleon.getAttr(\"Holes\")[14][0])",
+      "description": "Saved respect hours for Bravery."
+    },
+    {
+      "label": "bravery_reward_multiplier",
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentRewardMulti\", 0, 0)",
+      "description": "Native story reward multiplier."
+    },
+    {
+      "label": "bravery_opal_chance",
+      "expression": "100 * idleon.callFunction(\"Holes\", \"Bravery_OpalRewardChanceDEC\", 0, 0)",
+      "description": "Native story Opal probability converted to percent."
+    },
+    {
+      "label": "bravery_seconds_until_ready",
+      "expression": "Math.max(0, 72000 * (1 - idleon.callFunction(\"Holes\", \"MonumentRewardMulti\", 0, 0)))",
+      "description": "Native story wait estimate in seconds, clamped to zero when ready."
+    },
+    {
+      "label": "bravery_ready",
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentRewardMulti\", 0, 0) >= 1",
+      "description": "Native story readiness gate."
+    },
+    {
+      "label": "bravery_total_levels",
+      "expression": "idleon.getAttr(\"Holes\")[15].slice(0, 10).reduce((sum, level) => sum + Number(level), 0)",
+      "description": "Total saved monument bonus levels."
+    },
+    {
+      "label": "bravery_opals",
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][3])",
+      "description": "Found monument Opals supplied by the cavern ledger."
+    },
+    {
+      "label": "justice_hours",
+      "expression": "Number(idleon.getAttr(\"Holes\")[14][2])",
+      "description": "Saved respect hours for Justice."
+    },
+    {
+      "label": "justice_reward_multiplier",
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentRewardMulti\", 1, 0)",
+      "description": "Native story reward multiplier."
+    },
+    {
+      "label": "justice_opal_chance",
+      "expression": "100 * idleon.callFunction(\"Holes\", \"Justice_OpalRewardChanceDEC\", 0, 0)",
+      "description": "Native story Opal probability converted to percent."
+    },
+    {
+      "label": "justice_seconds_until_ready",
+      "expression": "Math.max(0, 72000 * (1 - idleon.callFunction(\"Holes\", \"MonumentRewardMulti\", 1, 0)))",
+      "description": "Native story wait estimate in seconds, clamped to zero when ready."
+    },
+    {
+      "label": "justice_ready",
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentRewardMulti\", 1, 0) >= 1",
+      "description": "Native story readiness gate."
+    },
+    {
+      "label": "justice_total_levels",
+      "expression": "idleon.getAttr(\"Holes\")[15].slice(10, 20).reduce((sum, level) => sum + Number(level), 0)",
+      "description": "Total saved monument bonus levels."
+    },
+    {
+      "label": "justice_opals",
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][9])",
+      "description": "Found monument Opals supplied by the cavern ledger."
+    },
+    {
+      "label": "wisdom_hours",
+      "expression": "Number(idleon.getAttr(\"Holes\")[14][4])",
+      "description": "Saved respect hours for Wisdom."
+    },
+    {
+      "label": "wisdom_reward_multiplier",
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentRewardMulti\", 2, 0)",
+      "description": "Native story reward multiplier."
+    },
+    {
+      "label": "wisdom_opal_chance",
+      "expression": "100 * idleon.callFunction(\"Holes2\", \"Wisdom_OpalRewardChanceDEC\", 0, 0)",
+      "description": "Native story Opal probability converted to percent."
+    },
+    {
+      "label": "wisdom_seconds_until_ready",
+      "expression": "Math.max(0, 72000 * (1 - idleon.callFunction(\"Holes\", \"MonumentRewardMulti\", 2, 0)))",
+      "description": "Native story wait estimate in seconds, clamped to zero when ready."
+    },
+    {
+      "label": "wisdom_ready",
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentRewardMulti\", 2, 0) >= 1",
+      "description": "Native story readiness gate."
+    },
+    {
+      "label": "wisdom_total_levels",
+      "expression": "idleon.getAttr(\"Holes\")[15].slice(20, 30).reduce((sum, level) => sum + Number(level), 0)",
+      "description": "Total saved monument bonus levels."
+    },
+    {
+      "label": "wisdom_opals",
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][12])",
+      "description": "Found monument Opals supplied by the cavern ledger."
+    },
+    {
+      "label": "bravery_bonuses",
+      "expression": "(() => { const levels = idleon.getAttr(\"Holes\")[15]; const coefficients = idleon.getAttr(\"CustomLists\").h.HolesInfo[37]; const fountain = 1 + idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 13) / 100; const self = idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 0, 9); const cosmo = idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 0, 0); return Array.from({ length: 10 }, (_, i) => { const coefficient = Number(coefficients[0 + i]); const multiplier = Math.max(1, (i === 9 ? 1 : 1 + self / 100 + cosmo / 100) * fountain); const bonus = idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 0, i); const capped = coefficient >= 30; const bonusCap = capped ? coefficient * multiplier : null; return { level: Number(levels[0 + i]), bonus, perLevelIncrement: capped ? null : coefficient, bonusCap, capTargetLevel: capped ? Math.ceil(250 * (10 * coefficient * multiplier - 1)) : null, progressPercent: capped ? bonus / bonusCap * 100 : null }; }); })()",
+      "description": "Native bonus values and saved levels. Derived caps include monument multipliers. Target levels use the displayed cap, not the first level that ceiling rounding reaches."
+    },
+    {
+      "label": "bravery_unlocks",
+      "expression": "Array.from({ length: 8 }, (_, index) => Number(idleon.getAttr(\"Holes\")[14][1]) > index)",
+      "description": "Removed monument bricks grant effects; accumulated hours alone do not unlock effects."
+    },
+    {
+      "label": "justice_bonuses",
+      "expression": "(() => { const levels = idleon.getAttr(\"Holes\")[15]; const coefficients = idleon.getAttr(\"CustomLists\").h.HolesInfo[37]; const fountain = 1 + idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 13) / 100; const self = idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 1, 9); const cosmo = idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 0, 0); return Array.from({ length: 10 }, (_, i) => { const coefficient = Number(coefficients[10 + i]); const multiplier = Math.max(1, (i === 9 ? 1 : 1 + self / 100 + cosmo / 100) * fountain); const bonus = idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 1, i); const capped = coefficient >= 30; const bonusCap = capped ? coefficient * multiplier : null; return { level: Number(levels[10 + i]), bonus, perLevelIncrement: capped ? null : coefficient, bonusCap, capTargetLevel: capped ? Math.ceil(250 * (10 * coefficient * multiplier - 1)) : null, progressPercent: capped ? bonus / bonusCap * 100 : null }; }); })()",
+      "description": "Native bonus values and saved levels. Derived caps include monument multipliers. Target levels use the displayed cap, not the first level that ceiling rounding reaches."
+    },
+    {
+      "label": "justice_unlocks",
+      "expression": "Array.from({ length: 8 }, (_, index) => Number(idleon.getAttr(\"Holes\")[14][3]) > index)",
+      "description": "Removed monument bricks grant effects; accumulated hours alone do not unlock effects."
+    },
+    {
+      "label": "wisdom_bonuses",
+      "expression": "(() => { const levels = idleon.getAttr(\"Holes\")[15]; const coefficients = idleon.getAttr(\"CustomLists\").h.HolesInfo[37]; const fountain = 1 + idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 13) / 100; const self = idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 2, 9); const cosmo = idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 0, 0); return Array.from({ length: 10 }, (_, i) => { const coefficient = Number(coefficients[20 + i]); const multiplier = Math.max(1, (i === 9 ? 1 : 1 + self / 100 + cosmo / 100) * fountain); const bonus = idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 2, i); const capped = coefficient >= 30; const bonusCap = capped ? coefficient * multiplier : null; return { level: Number(levels[20 + i]), bonus, perLevelIncrement: capped ? null : coefficient, bonusCap, capTargetLevel: capped ? Math.ceil(250 * (10 * coefficient * multiplier - 1)) : null, progressPercent: capped ? bonus / bonusCap * 100 : null }; }); })()",
+      "description": "Native bonus values and saved levels. Derived caps include monument multipliers. Target levels use the displayed cap, not the first level that ceiling rounding reaches."
+    },
+    {
+      "label": "wisdom_unlocks",
+      "expression": "Array.from({ length: 8 }, (_, index) => Number(idleon.getAttr(\"Holes\")[14][5]) > index)",
+      "description": "Removed monument bricks grant effects; accumulated hours alone do not unlock effects."
+    },
+    {
+      "label": "normal_story_context",
+      "expression": "(() => { const actor = idleon.getAttr(\"PixelHelperActor\")[25].behaviors.getBehavior(\"ActorEvents_670\"); return { braveryRound: Number(actor._GenINFO[89]), braveryDamageBoost: Number(actor._GenINFO[127]), wisdomMode: Number(actor._GenINFO[210]) }; })()",
+      "description": "Native getter comparisons require no transient Bravery boosts and normal Wisdom story mode. No actor state is changed."
+    }
+  ]
+}

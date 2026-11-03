@@ -171,12 +171,12 @@ describe('Killroy account progress', () => {
       });
     });
 
-    it('matches the applied Masterclass multiplier rather than its shop value', () => {
+    it('matches the direct Masterclass drop multiplier', () => {
       expect(killroy.masterClassDropMultiplier).toMatchLiveGameWithDetails(
-        getExtractedValue(extractionResults, 'killroy_masterclass_multiplier'),
+        Math.max(1, getExtractedValue(extractionResults, 'killroy_bonus_4')),
         {
           tolerance: 0,
-          context: 'Killroy Masterclass drop multiplier after the native percentage conversion',
+          context: 'Killroy Masterclass drop multiplier with a minimum of 1',
         },
       );
     });
@@ -260,5 +260,47 @@ describe('Killroy account progress', () => {
       const nativeGate = getExtractedValue(extractionResults, 'killroy_later_shop_row');
       expect(killroy.laterShopRowUnlocked).toBe(nativeGate === 1);
     });
+  });
+});
+
+describe('Killroy Masterclass drop scaling', () => {
+  // The shop value is already a multiplier, not a percentage bonus.
+  it.each([
+    { level: 0, multiplier: 1, progress: 0 },
+    { level: 2, multiplier: 1.0128712871287129, progress: 0.9900990099009901 },
+    { level: 200, multiplier: 1.65, progress: 50 },
+  ])('applies and projects the direct multiplier at level $level', ({ level, multiplier, progress }) => {
+    const killroy = new KillRoy();
+    const bonus = killroy.permanentBonuses[4];
+    bonus.level = level;
+
+    expect(bonus.value).toBeCloseTo(multiplier, 12);
+    expect(bonus.getEffectValue()).toBeCloseTo(multiplier, 12);
+    expect(killroy.masterClassBonusDrop).toBeCloseTo(multiplier, 12);
+    expect(killroy.masterClassDropMultiplier).toBeCloseTo(multiplier, 12);
+    expect(bonus.getEffectCap()).toBe(2.3);
+    expect(bonus.getCapProgress()).toBeCloseTo(progress, 12);
+  });
+
+  it('projects another upgrade level without changing the current level', () => {
+    const killroy = new KillRoy();
+    const bonus = killroy.permanentBonuses[4];
+    bonus.level = 2;
+
+    expect(bonus.getEffectValue(200)).toBeCloseTo(1.65, 12);
+    expect(bonus.level).toBe(2);
+    expect(killroy.masterClassDropMultiplier).toBeCloseTo(1.0128712871287129, 12);
+  });
+
+  it('approaches the 2.3x cap from below at high finite levels', () => {
+    const killroy = new KillRoy();
+    const bonus = killroy.permanentBonuses[4];
+    bonus.level = 1e12;
+
+    expect(killroy.masterClassDropMultiplier).toBeLessThan(2.3);
+    expect(killroy.masterClassDropMultiplier).toBeCloseTo(2.3, 9);
+    expect(bonus.getEffectValue()).toBeCloseTo(2.3, 9);
+    expect(bonus.getCapProgress()).toBeLessThan(100);
+    expect(bonus.getCapProgress()).toBeCloseTo(100, 7);
   });
 });

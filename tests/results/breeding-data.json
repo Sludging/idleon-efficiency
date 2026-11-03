@@ -295,7 +295,7 @@
           "world": 0,
           "petIndex": 2,
           "petId": "frogG",
-          "progress": 2224238.182391896,
+          "progress": 2348012.834329837,
           "level": 19,
           "requirement": 2681786
         },
@@ -375,7 +375,7 @@
           "world": 0,
           "petIndex": 12,
           "petId": "Pet2",
-          "progress": 2224238.098474155,
+          "progress": 2348012.7504120963,
           "level": 19,
           "requirement": 2681786
         },
@@ -399,7 +399,7 @@
           "world": 0,
           "petIndex": 15,
           "petId": "poopSmall",
-          "progress": 2224238.075271235,
+          "progress": 2348012.727209176,
           "level": 19,
           "requirement": 2681786
         },
@@ -407,7 +407,7 @@
           "world": 0,
           "petIndex": 16,
           "petId": "ratB",
-          "progress": 2224238.1682026107,
+          "progress": 2348012.820140552,
           "level": 19,
           "requirement": 2681786
         },
@@ -423,7 +423,7 @@
           "world": 1,
           "petIndex": 1,
           "petId": "mimicA",
-          "progress": 2224238.1418752205,
+          "progress": 2348012.7938131616,
           "level": 19,
           "requirement": 2681786
         },
@@ -439,7 +439,7 @@
           "world": 1,
           "petIndex": 3,
           "petId": "coconut",
-          "progress": 2224238.1146157254,
+          "progress": 2348012.7665536664,
           "level": 19,
           "requirement": 2681786
         },
@@ -455,7 +455,7 @@
           "world": 1,
           "petIndex": 5,
           "petId": "sandcastle",
-          "progress": 2224238.0419806736,
+          "progress": 2348012.6939186146,
           "level": 19,
           "requirement": 2681786
         },
@@ -479,7 +479,7 @@
           "world": 1,
           "petIndex": 8,
           "petId": "steak",
-          "progress": 2224978.9477432305,
+          "progress": 2348753.5996811716,
           "level": 19,
           "requirement": 2681786
         },
@@ -511,7 +511,7 @@
           "world": 1,
           "petIndex": 12,
           "petId": "snailZ",
-          "progress": 2224238.0591304414,
+          "progress": 2348012.7110683825,
           "level": 19,
           "requirement": 2681786
         },
@@ -519,7 +519,7 @@
           "world": 1,
           "petIndex": 13,
           "petId": "shovelR",
-          "progress": 2224238.1297522914,
+          "progress": 2348012.7816902325,
           "level": 19,
           "requirement": 2681786
         },
@@ -527,7 +527,7 @@
           "world": 1,
           "petIndex": 14,
           "petId": "steakR",
-          "progress": 2224235.7976983106,
+          "progress": 2348010.4496362517,
           "level": 19,
           "requirement": 2681786
         },
@@ -639,7 +639,7 @@
           "world": 2,
           "petIndex": 11,
           "petId": "snakeB",
-          "progress": 2224239.6415716065,
+          "progress": 2348014.2935095476,
           "level": 19,
           "requirement": 2681786
         },
@@ -647,7 +647,7 @@
           "world": 2,
           "petIndex": 12,
           "petId": "Pet7",
-          "progress": 2224239.5878833374,
+          "progress": 2348014.2398212785,
           "level": 19,
           "requirement": 2681786
         },
@@ -703,7 +703,7 @@
           "world": 3,
           "petIndex": 1,
           "petId": "w4a2",
-          "progress": 2224239.604689058,
+          "progress": 2348014.256626999,
           "level": 19,
           "requirement": 2681786
         },
@@ -711,7 +711,7 @@
           "world": 3,
           "petIndex": 2,
           "petId": "w4a3",
-          "progress": 2224239.624081051,
+          "progress": 2348014.276018992,
           "level": 19,
           "requirement": 2681786
         },
@@ -827,7 +827,7 @@
     },
     "shiny_speed": {
       "expression": "idleon.callFunction(\"Breeding\",\"ShinySpdMulti\",\"0\",0,0)",
-      "result": 15551.632684440776
+      "result": 15908.094135909743
     }
   },
   "errors": {}

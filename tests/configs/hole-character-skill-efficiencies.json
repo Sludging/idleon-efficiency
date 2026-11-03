@@ -124,22 +124,22 @@
     },
     {
       "label": "mining_star_sign_efficiency",
-      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.StarSigns.h.MiningEff",
+      "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.StarSigns.h; return Object.prototype.hasOwnProperty.call(map, \"MiningEff\") ? map[\"MiningEff\"] : 0; })()",
       "description": "Prepared Mining Efficiency Star Sign bonus"
     },
     {
       "label": "chopping_star_sign_efficiency",
-      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.StarSigns.h.ChopEff",
+      "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.StarSigns.h; return Object.prototype.hasOwnProperty.call(map, \"ChopEff\") ? map[\"ChopEff\"] : 0; })()",
       "description": "Prepared Choppin Efficiency Star Sign bonus"
     },
     {
       "label": "fishing_star_sign_efficiency",
-      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.StarSigns.h.FishEff",
+      "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.StarSigns.h; return Object.prototype.hasOwnProperty.call(map, \"FishEff\") ? map[\"FishEff\"] : 0; })()",
       "description": "Prepared Fishing Efficiency Star Sign bonus"
     },
     {
       "label": "catching_star_sign_efficiency",
-      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.StarSigns.h.CatchingEff",
+      "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.StarSigns.h; return Object.prototype.hasOwnProperty.call(map, \"CatchingEff\") ? map[\"CatchingEff\"] : 0; })()",
       "description": "Prepared Catching Efficiency Star Sign bonus"
     },
     {

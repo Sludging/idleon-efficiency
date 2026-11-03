@@ -18,27 +18,27 @@
     },
     "outpost_1_track_0_rank": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 0)",
-      "result": 17
+      "result": 19
     },
     "outpost_1_track_0_previous_threshold": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 1, 0)",
-      "result": 5988.749482648622
+      "result": 11245.540695195745
     },
     "outpost_1_track_0_next_threshold": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 1, 0)",
-      "result": 8217.895123412276
+      "result": 15350.163048942193
     },
     "outpost_1_track_1_rank": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 1)",
-      "result": 0
+      "result": 10
     },
     "outpost_1_track_1_previous_threshold": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 1, 1)",
-      "result": 0
+      "result": 583.2474655150002
     },
     "outpost_1_track_1_next_threshold": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 1, 1)",
-      "result": 10
+      "result": 827.1509510940003
     },
     "outpost_1_track_2_rank": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 2)",
@@ -54,15 +54,15 @@
     },
     "outpost_1_track_3_rank": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 3)",
-      "result": 0
+      "result": 8
     },
     "outpost_1_track_3_previous_threshold": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 1, 3)",
-      "result": 0
+      "result": 282.3683265000001
     },
     "outpost_1_track_3_next_threshold": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 1, 3)",
-      "result": 10
+      "result": 407.8653605000001
     },
     "outpost_1_track_4_rank": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 4)",
@@ -78,27 +78,27 @@
     },
     "outpost_51_track_0_rank": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 51, 0)",
-      "result": 16
+      "result": 17
     },
     "outpost_51_track_0_previous_threshold": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 51, 0)",
-      "result": 4350.800906197716
+      "result": 5988.749482648622
     },
     "outpost_51_track_0_next_threshold": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 51, 0)",
-      "result": 5988.749482648622
+      "result": 8217.895123412276
     },
     "outpost_51_track_1_rank": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 51, 1)",
-      "result": 7
+      "result": 10
     },
     "outpost_51_track_1_previous_threshold": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreqPREV\", 51, 1)",
-      "result": 193.07236000000003
+      "result": 583.2474655150002
     },
     "outpost_51_track_1_next_threshold": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPreq\", 51, 1)",
-      "result": 282.3683265000001
+      "result": 827.1509510940003
     },
     "outpost_51_track_2_rank": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 51, 2)",
@@ -150,11 +150,11 @@
     },
     "outpost_armory_bonus_10": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 10, 0)",
-      "result": 13
+      "result": 16
     },
     "outpost_armory_bonus_71": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 71, 0)",
-      "result": 1
+      "result": 2
     }
   },
   "errors": {}

@@ -74,7 +74,7 @@
     },
     {
       "label": "starsign_bonus_61",
-      "expression": "idleon.getAttr(\"DNSM\").h.StarSigns.h[61]",
+      "expression": "(() => { const map = idleon.getAttr(\"DNSM\").h.StarSigns.h; return Object.prototype.hasOwnProperty.call(map, 61) ? map[61] : 0; })()",
       "description": "Native StarSigns cache value consumed by BoatArtiMulti"
     },
     {

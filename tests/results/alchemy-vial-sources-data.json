@@ -1,0 +1,9 @@
+{
+  "extractions": {
+    "vial_lab_factor": {
+      "expression": "idleon.callFunction(\"MainframeBonus\", 10) === 2 ? 2 : 1",
+      "result": 2
+    }
+  },
+  "errors": {}
+}

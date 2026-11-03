@@ -29,7 +29,7 @@
     },
     {
       "label": "royal_armory_rate_alchemy_w14_raw",
-      "expression": "idleon.getAttr(\"DNSM\").h.AlchBubbles.h.W14",
+      "expression": "(() => { const map = idleon.getAttr(\"DNSM\").h.AlchBubbles.h; return Object.prototype.hasOwnProperty.call(map, \"W14\") ? map[\"W14\"] : 0; })()",
       "description": "Raw W14 alchemy bubble bonus for the extraction's selected player, before the Outpost rate applies its 50-point cap"
     },
     {

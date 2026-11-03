@@ -3,8 +3,8 @@
     "killroy_account_state": {
       "expression": "(()=>{const options=idleon.getAttr(\"OptionsListAccount\");return {skulls:Number(options[105]),completedRuns:Number(options[112]),thirdBattleUnlocked:Number(options[227])===1,consumedFightSlots:[1,2,3].filter(id=>String(options[113]).includes(String(id))),airhornUsed:Number(options[115])===1,priorTalentPointDrops:Number(options[114]),laterShopProgression:Number(options[466]),runLevels:options.slice(106,112).map(Number),permanentLevels:[228,229,230,467,468,469,470,471].map(index=>Number(options[index]))}})()",
       "result": {
-        "skulls": 8,
-        "completedRuns": 67,
+        "skulls": 14,
+        "completedRuns": 70,
         "thirdBattleUnlocked": true,
         "consumedFightSlots": [],
         "airhornUsed": false,
@@ -13,7 +13,7 @@
         "runLevels": [
           52,
           3,
-          1,
+          4,
           10,
           1,
           0
@@ -58,7 +58,7 @@
           0,
           0,
           0,
-          33
+          30
         ]
       }
     },
@@ -111,7 +111,7 @@
         },
         {
           "enemyId": "ratB",
-          "bestKills": 0
+          "bestKills": 1281
         },
         {
           "enemyId": "branch",
@@ -187,7 +187,7 @@
         },
         {
           "enemyId": "mamoth",
-          "bestKills": 0
+          "bestKills": 2216
         },
         {
           "enemyId": "snowball",
@@ -363,7 +363,7 @@
         },
         {
           "enemyId": "w6b4",
-          "bestKills": 0
+          "bestKills": 1017
         },
         {
           "enemyId": "w6c1",
@@ -485,21 +485,21 @@
     },
     "killroy_total_best_kills": {
       "expression": "(()=>{const mobs=idleon.getAttr(\"CustomLists\").h.DeathNoteMobs.flat();const records=idleon.getAttr(\"KRbest\").h;return mobs.reduce((sum,enemyId)=>sum+Number(records[enemyId]||0),0)})()",
-      "result": 36358
+      "result": 40872
     },
     "killroy_damage_bonus": {
       "expression": "idleon.callFunction(\"RiftStuff\", \"KillroyDMG\", 0)",
-      "result": 66
+      "result": 69
     },
     "killroy_damage_multiplier": {
       "expression": "1+Math.min(2,Math.max(0,idleon.callFunction(\"RiftStuff\",\"KillroyDMG\",0)/100))",
-      "result": 1.6600000000000001
+      "result": 1.69
     },
     "killroy_next_damage_requirement": {
       "expression": "(()=>{const mobs=idleon.getAttr(\"CustomLists\").h.DeathNoteMobs.flat();const records=idleon.getAttr(\"KRbest\").h;const total=mobs.reduce((sum,enemyId)=>sum+Number(records[enemyId]||0),0);const bonus=idleon.callFunction(\"RiftStuff\",\"KillroyDMG\",0);const nextDamageTotalBestKills=Math.ceil(Math.pow(bonus+1,2.5));return {nextDamageTotalBestKills,killsUntilNextDamageBonus:Math.max(0,nextDamageTotalBestKills-total)}})()",
       "result": {
-        "nextDamageTotalBestKills": 36745,
-        "killsUntilNextDamageBonus": 387
+        "nextDamageTotalBestKills": 40997,
+        "killsUntilNextDamageBonus": 125
       }
     },
     "killroy_bonus_0": {
@@ -533,10 +533,6 @@
     "killroy_bonus_7": {
       "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 7, 0)",
       "result": 1
-    },
-    "killroy_masterclass_multiplier": {
-      "expression": "1+idleon.callFunction(\"RandomEvent\",\"KillroyBonuses\",4,0)/100",
-      "result": 1.010128712871287
     },
     "killroy_extra_shop_row": {
       "expression": "idleon.callFunction(\"RiftStuff\", \"KillroyXtra\", 0)",

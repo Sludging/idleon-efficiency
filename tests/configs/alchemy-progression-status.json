@@ -1,0 +1,16 @@
+{
+  "description": "Native account-wide Alchemy progression multipliers for CORE comparisons. Saved balances and P2W levels come from the retained save, not runtime captures.",
+  "target": "Alchemy account progression status",
+  "extractions": [
+    {
+      "label": "alchemy_prismatic_bonus",
+      "expression": "idleon.callFunction(\"ArcaneType\",\"PrismaBonusMult\",0,0)",
+      "description": "Account-wide Prisma bonus multiplier as a dimensionless factor."
+    },
+    {
+      "label": "alchemy_vial_bonus_multiplier",
+      "expression": "(()=>{const d=idleon.getAttr(\"CustomLists\").h.AlchemyDescription[4][0];return idleon.callFunction(\"CauldronStats\",\"VialBonus\",4,0,0)/idleon.callFunction(\"ArbitraryCode5Inputs\",d[3],Number(d[1]),Number(d[2]),Number(idleon.getAttr(\"CauldronInfo\")[4][0]),0,0);})()",
+      "description": "Overall vial bonus multiplier as a dimensionless factor. Native version 1.24 has no named aggregate getter. Copper Corona's native final bonus divided by its native raw curve isolates the shared aggregate. Both calls use the selected account's descriptor and vial level; no multiplier dependency formula is reconstructed."
+    }
+  ]
+}

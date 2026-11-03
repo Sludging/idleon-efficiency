@@ -171,7 +171,7 @@
       "result": 25
     },
     "bubble_Y11": {
-      "expression": "idleon.getAttr(\"DNSM\").h.AlchBubbles.h.Y11",
+      "expression": "(()=>{const map=idleon.getAttr(\"DNSM\").h.AlchBubbles.h;return Object.prototype.hasOwnProperty.call(map,\"Y11\")?map[\"Y11\"]:0;})()",
       "result": 19.380037197768132
     },
     "native_card_w7a10": {

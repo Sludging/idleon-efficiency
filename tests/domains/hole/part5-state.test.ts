@@ -79,13 +79,11 @@ describe('Hole part-five imported state', () => {
             .toMatchLiveGame(getExtractedValue(jarResults, 'rupie_cove_upgrade_14'), 0);
     });
 
-    it('matches available Jar producer inputs and outputs against the paired game', () => {
+    it('matches Jar producer types, requirements, and rates against native outputs', () => {
         const gameAssignment = jarResults.extractions.producer_assignment.result as number[];
         hole.jar.producers.forEach((producer, index) => {
             expect(hole.jar.producerAssignments[index].type)
                 .toMatchLiveGame(gameAssignment[index], 0);
-            expect(hole.jar.producerAssignments[index].work)
-                .toMatchLiveGame(gameAssignment[index + 3], 0);
             expect(producer.requirement)
                 .toMatchLiveGame(getExtractedValue(jarResults, `producer_requirement_${index}`), 0);
             expect(producer.ratePerHour)

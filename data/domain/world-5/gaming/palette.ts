@@ -133,6 +133,10 @@ export class PaletteColor {
     levelUpProbability = 0;
     stageLuckMultipliers: PaletteStageLuck[] = [];
     private blackStarState = 0;
+    private doubleMultiplier = 1;
+    private legendMultiplier = 1;
+    private blackStarMultiplier = 1;
+    private loreMultiplier = 1;
     constructor(public index: number, data: GamingPaletteModel) {
         this.name = data.name;
         this.red = data.red;
@@ -167,19 +171,16 @@ export class PaletteColor {
     updateBonuses(data: Map<string, any>): void {
         const gaming = data.get("gaming") as Gaming;
         const legendTalents = data.get("legendTalents") as LegendTalents;
-        const legendMultiplier = 1 + legendTalents.getBonusFromIndex(10) / 100;
-        const blackStarMultiplier = Math.max(1, 1 + this.blackStarState + Math.floor(this.blackStarState / 2));
-        const loreMultiplier = gaming.palette.loreBonusUnlocked ? 1.5 : 1;
-        const baseBonus = this.usesDecay === 1
-            ? (this.level / (this.level + 25)) * this.bonusValue
-            : this.level * this.bonusValue;
+        this.legendMultiplier = 1 + legendTalents.getBonusFromIndex(10) / 100;
+        this.blackStarMultiplier = Math.max(1, 1 + this.blackStarState + Math.floor(this.blackStarState / 2));
+        this.loreMultiplier = gaming.palette.loreBonusUnlocked ? 1.5 : 1;
         const doubler = colorDoublers[this.index];
-        const doubleMultiplier = doubler !== undefined && gaming.isSuperbitPurchased(doubler)
+        this.doubleMultiplier = doubler !== undefined && gaming.isSuperbitPurchased(doubler)
             ? 2 + 0.5 * Number(gaming.isSuperbitPurchased(59))
             : 1;
 
-        // Earned bonuses include unequipped colors. Preserve native multiplier order.
-        this.bonus = baseBonus * doubleMultiplier * legendMultiplier * blackStarMultiplier * loreMultiplier;
+        // Earned bonuses include unequipped colors.
+        this.bonus = this.getBonusAtLevel(this.level);
     }
 
     update(data: Map<string, any>): void {
@@ -203,6 +204,16 @@ export class PaletteColor {
     }
 
     getBonus(): number { return this.bonus; }
+
+    getBonusAtLevel(level: number): number {
+        const baseBonus = this.usesDecay === 1
+            ? (level / (level + 25)) * this.bonusValue
+            : level * this.bonusValue;
+
+        // Keep the game's multiplication order to match floating-point results.
+        return baseBonus * this.doubleMultiplier * this.legendMultiplier * this.blackStarMultiplier * this.loreMultiplier;
+    }
+
     getBonusText(): string {
         return this.bonusText.replace("{", this.bonus.toString()).replace("}", (1 + this.bonus / 100).toString());
     }

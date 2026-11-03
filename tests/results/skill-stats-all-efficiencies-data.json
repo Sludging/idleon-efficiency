@@ -2,15 +2,15 @@
   "extractions": {
     "skill_all_efficiencies": {
       "expression": "idleon.callFunction(\"SkillStats\", \"AllEfficiencies\")",
-      "result": 29659.261993585475
+      "result": 29877.634932036563
     },
     "all_eff_family_bonus_42": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[42]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 42) ? map[42] : 0; })()",
       "result": 28.00531914893617
     },
     "all_eff_etc_bonus_48": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"48\")",
-      "result": 66.38177698608251
+      "result": 69.46141166723874
     },
     "all_eff_vial_6_skill_eff": {
       "expression": "idleon.getDNSM(\"AlchVials\").h[\"6SkillEff\"]",
@@ -34,11 +34,11 @@
     },
     "all_eff_talent_646": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 646)",
-      "result": 0
+      "result": 38.20754716981132
     },
     "all_eff_tome_bonus_1": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 1, 0)",
-      "result": 572.3275046074751
+      "result": 577.1341236102646
     },
     "all_eff_palette_10": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 10, 0)",

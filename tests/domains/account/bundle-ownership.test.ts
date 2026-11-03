@@ -1,5 +1,6 @@
 import { Account } from '../../../data/domain/account';
-import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
+import { safeJsonParse } from '../../../data/domain/cloudsave';
+import { loadGameDataFromSave, loadTestSave } from '../../utils/cloudsave-loader';
 import {
   loadExtractionResults,
   validateExtractionHealth,
@@ -25,10 +26,10 @@ const effectFlags = [
   { name: 'Bundle M', property: 'hasBundleM', nativeEntryId: 'ban_m' },
 ] as const;
 
-// The paired save does not exercise unavailable/private receipts or an owned Starter Pack.
 describe('Account bundle ownership', () => {
   let account: Account;
   let nativeLedger: Record<string, number> | null;
+  let retainedLedgerAvailable: boolean;
 
   // Unknown ownership must not match a known native receipt indicator.
   const receiptByOwnership = { owned: 1, unowned: 0, unknown: Number.NaN };
@@ -37,14 +38,26 @@ describe('Account bundle ownership', () => {
     const extractionResults = loadExtractionResults('bundle-ownership-data.json');
     validateExtractionHealth(extractionResults);
     nativeLedger = extractionResults.extractions.bundles_received.result as Record<string, number> | null;
+    // Public saves can omit private receipts even when the native runtime supplies an empty ledger.
+    const retainedLedger = safeJsonParse<Record<string, number | string> | null | undefined>(
+      loadTestSave('latest'), 'BundlesReceived', undefined,
+    );
+    retainedLedgerAvailable = retainedLedger != null;
     account = loadGameDataFromSave('latest').get('account') as Account;
   });
 
-  it('matches ownership availability to native receipt-ledger presence', () => {
-    expect(account.bundles.available).toBe(nativeLedger !== null && nativeLedger !== undefined);
+  it('matches ownership availability to retained receipt-ledger presence', () => {
+    expect(account.bundles.available).toBe(retainedLedgerAvailable);
   });
 
   it('matches every received entitlement in the native ledger', () => {
+    if (!retainedLedgerAvailable) {
+      for (const { nativeEntryId } of representativeEntries) {
+        expect(account.bundles.getOwnership(nativeEntryId)).toBe('unknown');
+      }
+      return;
+    }
+
     for (const [nativeEntryId, nativeReceipt] of Object.entries(nativeLedger ?? {})) {
       if (nativeReceipt !== 1) continue;
 
@@ -59,7 +72,7 @@ describe('Account bundle ownership', () => {
 
   it.each(representativeEntries)('matches the $name receipt state', ({ name, nativeEntryId }) => {
     const ownership = account.bundles.getOwnership(nativeEntryId);
-    if (nativeLedger === null || nativeLedger === undefined) {
+    if (!retainedLedgerAvailable) {
       expect(ownership).toBe('unknown');
       return;
     }

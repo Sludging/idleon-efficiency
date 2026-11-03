@@ -9,8 +9,6 @@ interface NativeWeeklyPacket {
   clock: { h: { GlobalTime: number } };
   operands: { levels: number[]; greenResidual: number }[];
   greenPortalRequirement: number;
-  currentQuantity: number;
-  materialCapacity: number;
 }
 
 

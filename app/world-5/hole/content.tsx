@@ -27,6 +27,7 @@ import type { Player } from "../../../data/domain/player";
 import type { Divinity } from "../../../data/domain/world-5/divinity";
 import { Hole } from "../../../data/domain/world-5/hole/hole";
 import type { Study, StudyEffect } from "../../../data/domain/world-5/hole/hole";
+import type { Summoning } from "../../../data/domain/world-6/summoning";
 import type { Account } from "../../../data/domain/account";
 import type { Villager, VillagerCharacterRate } from "../../../data/domain/world-5/hole/villager";
 import { commaNotation, nFormatter, notateNumber } from "../../../data/utility";
@@ -190,7 +191,7 @@ export default function HoleContent() {
     });
     const visibleStudies = studies.filter(view => (!showUnlocked || view.study.access === true) && view.searchable.includes(search.toLowerCase()));
     const part4Cavern = cavern === 0 || cavern === 4 || cavern === 5 || cavern === 6;
-    const detailedCavern = part4Cavern || cavern === 10 || cavern === 15 || cavern === 17;
+    const detailedCavern = part4Cavern || cavern === 2 || cavern === 3 || cavern === 8 || cavern === 9 || cavern === 10 || cavern === 12 || cavern === 13 || cavern === 14 || cavern === 15 || cavern === 17;
     const resourceCavernPosition = resourceCavernRailIndices.indexOf(cavern);
     const selectedResourceCavern = resourceCavernPosition < 0
         ? null
@@ -304,7 +305,7 @@ export default function HoleContent() {
                 <Box pad="medium" height="100%">{cavernArt.map((image, index) => <Box direction="row" align="center" key={image.name}><CavernImage index={index} width={32} height={28} /><Box flex><LeftNavButton text={image.name} isActive={cavern === index} clickHandler={() => preserveScroll(() => setCavern(index))} /></Box></Box>)}</Box>
                 <Box fill background="dark-1" pad="medium" gap="medium" style={{ minWidth: 0 }}>
                     <Box direction="row" gap="small" align="center"><CavernImage index={cavern} width={96} height={80} />{!detailedCavern && <Heading level="3" size="small" margin="none">{cavernArt[cavern].name}</Heading>}</Box>
-                    {detailedCavern ? <Part4CavernDetails hole={hole} cavern={cavern} totalMoney={account.totalMoney} onOpenStudies={onOpenStudies} characters={characters} /> : selectedResourceCavern === null ? <>
+                    {detailedCavern ? <Part4CavernDetails hole={hole} cavern={cavern} totalMoney={account.totalMoney} onOpenStudies={onOpenStudies} characters={characters} summoning={data.get("summoning") as Summoning} /> : selectedResourceCavern === null ? <>
                         <CavernMetricStrip metrics={cavernOpalMetrics(hole, cavern)} />
                         <Text size="small">Other cavern tools are not supported on this website yet.</Text>
                         <CavernStudySummary study={hole.studies[cavern]} onOpenStudies={onOpenStudies} />

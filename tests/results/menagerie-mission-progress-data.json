@@ -2,7 +2,7 @@
   "extractions": {
     "mission_progress_0": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"MissionProg\", 0)",
-      "result": 15328
+      "result": 15357
     },
     "mission_progress_1": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"MissionProg\", 1)",
@@ -14,7 +14,7 @@
     },
     "mission_progress_3": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"MissionProg\", 3)",
-      "result": 233
+      "result": 239
     },
     "mission_progress_4": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"MissionProg\", 4)",
@@ -42,15 +42,15 @@
     },
     "mission_progress_10": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"MissionProg\", 10)",
-      "result": 41
+      "result": 60
     },
     "mission_progress_11": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"MissionProg\", 11)",
-      "result": 21
+      "result": 23
     },
     "mission_progress_12": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"MissionProg\", 12)",
-      "result": 400
+      "result": 402
     },
     "mission_progress_13": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"MissionProg\", 13)",
@@ -62,15 +62,15 @@
     },
     "mission_progress_15": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"MissionProg\", 15)",
-      "result": 61
+      "result": 62
     },
     "mission_progress_16": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"MissionProg\", 16)",
-      "result": 45611
+      "result": 46112
     },
     "mission_progress_17": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"MissionProg\", 17)",
-      "result": 44
+      "result": 45
     },
     "mission_progress_18": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"MissionProg\", 18)",
@@ -86,7 +86,7 @@
     },
     "mission_progress_21": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"MissionProg\", 21)",
-      "result": 276
+      "result": 279
     },
     "mission_progress_22": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"MissionProg\", 22)",
@@ -98,15 +98,15 @@
     },
     "mission_progress_24": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"MissionProg\", 24)",
-      "result": 89
+      "result": 91
     },
     "mission_progress_25": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"MissionProg\", 25)",
-      "result": 11
+      "result": 12
     },
     "mission_progress_26": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"MissionProg\", 26)",
-      "result": 6
+      "result": 7
     },
     "mission_progress_27": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"MissionProg\", 27)",
@@ -114,7 +114,7 @@
     },
     "mission_progress_28": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"MissionProg\", 28)",
-      "result": 736
+      "result": 744
     },
     "mission_progress_29": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"MissionProg\", 29)",
@@ -130,7 +130,7 @@
     },
     "mission_progress_32": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"MissionProg\", 32)",
-      "result": 36358
+      "result": 40872
     }
   },
   "errors": {}

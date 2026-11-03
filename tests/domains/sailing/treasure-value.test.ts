@@ -20,7 +20,8 @@ describe('Sailing boat treasure value', () => {
   let sailing: Sailing;
 
   beforeAll(() => {
-    sailing = loadGameDataFromSave('latest').get('sailing') as Sailing;
+    const gameData = loadGameDataFromSave('latest');
+    sailing = gameData.get('sailing') as Sailing;
   });
 
   describe.each(treasureValues)('boat $index', ({ index, current, next }) => {

@@ -8,7 +8,7 @@
       "expression": "idleon.callFunction(\"Summoning\", \"OwlCost\", 1, 0)",
       "result": {
         "type": "large_number",
-        "value": "2.7558524318086864e+41"
+        "value": "2.467185275184371e+41"
       }
     },
     "can_afford_next_bonus": {

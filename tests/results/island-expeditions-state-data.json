@@ -4,9 +4,9 @@
       "expression": "({options:idleon.getAttr(\"OptionsListAccount\").slice(160,185),letters:idleon.getAttr(\"Number2Letter\").slice(0,6),bottleBonus:idleon.callFunction(\"RandomEvent\",\"BottleIslandBonus\",0,0),fractal:Array.from({length:8},(_,i)=>idleon.callFunction(\"RandomEvent\",\"FractalIslandBonus\",i,0)),shimmer:idleon.callFunction(\"Dreamstuff\",\"AllShimmerBonuses\",0)})",
       "result": {
         "options": [
-          54,
-          29.93168128000002,
-          80.05351660000011,
+          6,
+          134.93168128000002,
+          142.0535166000001,
           9,
           0,
           1,
@@ -14,8 +14,8 @@
           8,
           0,
           "_cdabe",
-          54,
-          14,
+          6,
+          6,
           1636646954665690000,
           0,
           11,
@@ -27,7 +27,7 @@
           13,
           0,
           0,
-          1,
+          8,
           2242
         ],
         "letters": [
@@ -89,7 +89,7 @@
           10,
           600
         ],
-        "trial": 1,
+        "trial": 8,
         "claimed": 0
       }
     }

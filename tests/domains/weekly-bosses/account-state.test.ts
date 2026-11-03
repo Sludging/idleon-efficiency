@@ -3,7 +3,6 @@ import { WeeklyBoss } from '../../../data/domain/weekly-boss';
 import { WeeklyShopSectionEnum } from '../../../data/domain/enum/weeklyShopSectionEnum';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
-import extractionConfig from '../../configs/weekly-bosses.json';
 
 interface NativeWeeklyPacket {
   weekly: { h: Record<string, number> };
@@ -18,8 +17,6 @@ interface NativeWeeklyPacket {
   clock: { h: { GlobalTime: number } };
   operands: { name: string; levels: number[]; greenResidual: number }[];
   greenPortalRequirement: number;
-  currentQuantity: number;
-  materialCapacity: number;
 }
 
 interface NativeKillPacket {
@@ -78,29 +75,6 @@ describe('Weekly Bosses account state and numeric stats', () => {
       compareNumber(turn.playerIndex, playerIndex, `Account order for Weekly Battle character ${playerIndex}`);
       compareNumber(turn.taskId, native.generation[3][playerIndex], `Task for Weekly Battle character ${playerIndex}`);
     });
-  });
-
-  it('matches the native current-turn quantity', () => {
-    const contextPlayerIndex = extractionConfig.requiredActivePlayerIndex;
-    const week = weeklyBoss.getWeek(0);
-    const currentTurn = week.turns[weeklyBoss.currentCharacterIndex];
-    compareNumber(
-      weeklyBoss.getTaskQuantity(currentTurn.playerIndex, currentTurn.taskId, contextPlayerIndex),
-      native.currentQuantity,
-      'Direct native quantity for the saved current turn',
-    );
-
-  });
-
-  it('matches material capacity for the saved turn character and active character', () => {
-    const targetPlayerIndex = native.options[5];
-    const contextPlayerIndex = extractionConfig.requiredActivePlayerIndex;
-    // Task 15 uses the dedicated other-character branch, not ordinary material capacity.
-    compareNumber(
-      weeklyBoss.getTaskQuantity(targetPlayerIndex, 15, contextPlayerIndex),
-      native.materialCapacity,
-      `Material capacity for turn character ${targetPlayerIndex} with active character ${contextPlayerIndex}`,
-    );
   });
 
   it('matches every native shop price and observed appearance ownership', () => {

@@ -1,0 +1,209 @@
+{
+  "extractions": {
+    "cooking_daily_ribbons": {
+      "expression": "(()=>{const f=(name,...args)=>idleon.callFunction(name,...args);const a=name=>idleon.getAttr(name);const bundles=a('BundlesReceived').h;const bundle=k=>Number(bundles[k]||0);const grimoire=f('Summoning','GrimoireUpgBonus',5,0);const event=f('Summoning','EventShopOwned',13,0);const death=bundle('bun_v');const boaring=bundle('ban_f');const enabled=grimoire>=1||death===1||boaring===1||event===1;const merit=1+f('Summoning2','MeritocBonusz',11,0)/100;const palette=f('GamingStatType','PaletteBonus',33,0)/100;const talent=f('getbonus2',1,204,-1)/100;const legend=f('Thingies','LegendPTS_bonus',13,0);const base=1+3*event+Math.min(5,5*death)+Math.min(5,5*boaring)+legend;const paletteParts=[[Math.min(3,Math.floor(palette)),1-(palette-Math.floor(palette))],[Math.min(3,Math.floor(palette)+1),palette-Math.floor(palette)]];const countProb=new Map();for(const[q,prob]of paletteParts){if(prob===0)continue;const cuts=[0,1];for(let k=Math.floor((merit*base+talent+q));k<=Math.ceil((merit*base+talent+q+1));k++){const cut=k-merit*base-talent-q;if(cut>0&&cut<1)cuts.push(cut);}cuts.sort((x,y)=>x-y);for(let i=1;i<cuts.length;i++){const count=Math.floor(merit*base+talent+q+(cuts[i]+cuts[i-1])/2);countProb.set(count,(countProb.get(count)||0)+(cuts[i]-cuts[i-1])*prob);}}const count=enabled?[...countProb].reduce((s,[n,p])=>s+n*p,0):0;const paletteMean=paletteParts.reduce((s,[q,p])=>s+q*p,0);const countAmounts=[['base',1],['dailyRoll',0.5],['legendTalent',legend],['eventShop',3*event],['deathBringerBundle',Math.min(5,5*death)],['boaringBundle',Math.min(5,5*boaring)],['ribbonWinningTalent',talent],['palette',paletteMean]];const additiveTotal=countAmounts.reduce((s,[,v])=>s+v,0);const baseTotal=base;const additionalTotal=.5+talent+paletteMean;const countBreakdown={sources:countAmounts.map(([source,amount])=>{const group=['dailyRoll','ribbonWinningTalent','palette'].includes(source)?'additional':'base';const groupTotal=group==='base'?baseTotal:additionalTotal;return{source,group,amount,active:amount!==0,share:groupTotal===0?0:amount/groupTotal};}),baseTotal,additionalTotal,additiveTotal,meritocracyMultiplier:merit,meritocracyImpact:1-1/merit,expectedRawCount:merit*baseTotal+additionalTotal,roundingAdjustment:count-(merit*baseTotal+additionalTotal),total:count};const p=Math.min(.65,.1+(grimoire+15*death)/100);let ranks=new Map();for(let mask=0;mask<128;mask++){let rank=1;let probability=1;for(let trial=0;trial<7;trial++)probability*=mask&(1<<trial)?p:1-p;for(let trial=0;trial<7;trial++){if(mask&(1<<trial))rank++;else if(trial>=2)break;}ranks.set(rank,(ranks.get(rank)||0)+probability);}const mean=m=>[...m].reduce((s,[n,p])=>s+n*p,0);const rankAmounts=[['base',1],['grimoire',mean(ranks)-1]];const apply=(source,outcomes)=>{rankAmounts.push([source,outcomes.reduce((s,[n,p])=>s+n*p,0)]);const next=new Map();for(const[r,p]of ranks)for(const[n,q]of outcomes)if(q>0)next.set(r+n,(next.get(r+n)||0)+p*q);ranks=next;};const sushi=f('SushiStuff','RoG_BonusQTY',14,0)>=1?.1:0;apply('sushi',[[0,1-sushi],[1,sushi]]);apply('anniversaryBundle',[[bundle('ban_a')>=1?1:0,1]]);const smoky=Math.max(0,f('Summoning2','BonusAmountcook',3,99)/100);const smokyLow=Math.floor(smoky);const smokyFraction=smoky-smokyLow;apply('smoky',[[Math.min(3,smokyLow),1-smokyFraction],[Math.min(3,smokyLow+1),smokyFraction]]);const armory=Math.max(0,Math.min(1,(f('RoyalG','ArmoryUpgBonus',82,0)+25*f('Summoning','EventShopOwned',51,0))/100));apply('armoryEventShop',[[0,1-armory],[1,armory]]);const companion=f('Companions',169);const levelTwo=f('CompLV2',169);apply('companion',companion===1?[[5+3*levelTwo,.1],[3+levelTwo,.9*.45],[1,.9*.55]]:[[0,1]]);const beforeOverflow=mean(ranks);const finalRanks=new Map();for(const[r,p]of ranks){const rank=r>20?2:r;finalRanks.set(rank,(finalRanks.get(rank)||0)+p);}const average=mean(finalRanks);return{nativeActiveContext:{recipientIndex:a('GetPlayersUsernames').indexOf(a('UserInfo')[0]),ribbonWinningTalent:talent,dailyCount:count,minimumDailyCount:enabled?Math.min(...countProb.keys()):0,maximumDailyCount:enabled?Math.max(...countProb.keys()):0},dailyGenerationUnlocked:enabled,dailyCount:count,minimumDailyCount:enabled?Math.min(...countProb.keys()):0,maximumDailyCount:enabled?Math.max(...countProb.keys()):0,dailyCountBreakdown:countBreakdown,dailyRankProbabilities:[...finalRanks].filter(([,probability])=>probability>0).sort(([x],[y])=>x-y).map(([rank,probability])=>({rank,probability})),averageDailyRank:average,dailyRankBreakdown:{sources:rankAmounts.map(([source,amount])=>({source,amount,active:amount!==0,share:beforeOverflow===0?0:amount/beforeOverflow})),beforeOverflow,overflowAdjustment:average-beforeOverflow,total:average}};})()",
+      "result": {
+        "nativeActiveContext": {
+          "recipientIndex": 3,
+          "ribbonWinningTalent": 1.9195678271308523,
+          "dailyCount": 11.763317827130852,
+          "minimumDailyCount": 10,
+          "maximumDailyCount": 12
+        },
+        "dailyGenerationUnlocked": true,
+        "dailyCount": 11.763317827130852,
+        "minimumDailyCount": 10,
+        "maximumDailyCount": 12,
+        "dailyCountBreakdown": {
+          "sources": [
+            {
+              "source": "base",
+              "group": "base",
+              "amount": 1,
+              "active": true,
+              "share": 0.1111111111111111
+            },
+            {
+              "source": "dailyRoll",
+              "group": "additional",
+              "amount": 0.5,
+              "active": true,
+              "share": 0.1532182969869061
+            },
+            {
+              "source": "legendTalent",
+              "group": "base",
+              "amount": 5,
+              "active": true,
+              "share": 0.5555555555555556
+            },
+            {
+              "source": "eventShop",
+              "group": "base",
+              "amount": 3,
+              "active": true,
+              "share": 0.3333333333333333
+            },
+            {
+              "source": "deathBringerBundle",
+              "group": "base",
+              "amount": 0,
+              "active": false,
+              "share": 0
+            },
+            {
+              "source": "boaringBundle",
+              "group": "base",
+              "amount": 0,
+              "active": false,
+              "share": 0
+            },
+            {
+              "source": "ribbonWinningTalent",
+              "group": "additional",
+              "amount": 1.9195678271308523,
+              "active": true,
+              "share": 0.5882258268476899
+            },
+            {
+              "source": "palette",
+              "group": "additional",
+              "amount": 0.84375,
+              "active": true,
+              "share": 0.258555876165404
+            }
+          ],
+          "baseTotal": 9,
+          "additionalTotal": 3.2633178271308525,
+          "additiveTotal": 12.263317827130852,
+          "meritocracyMultiplier": 1,
+          "meritocracyImpact": 0,
+          "expectedRawCount": 12.263317827130852,
+          "roundingAdjustment": -0.5,
+          "total": 11.763317827130852
+        },
+        "dailyRankProbabilities": [
+          {
+            "rank": 3,
+            "probability": 0.004494308823529411
+          },
+          {
+            "rank": 4,
+            "probability": 0.03472031911764705
+          },
+          {
+            "rank": 5,
+            "probability": 0.09579945374999999
+          },
+          {
+            "rank": 6,
+            "probability": 0.12407472949632349
+          },
+          {
+            "rank": 7,
+            "probability": 0.11226345652555147
+          },
+          {
+            "rank": 8,
+            "probability": 0.1338561661080193
+          },
+          {
+            "rank": 9,
+            "probability": 0.1404494058255055
+          },
+          {
+            "rank": 10,
+            "probability": 0.10570775260533088
+          },
+          {
+            "rank": 11,
+            "probability": 0.0726719448985524
+          },
+          {
+            "rank": 12,
+            "probability": 0.055525493765923715
+          },
+          {
+            "rank": 13,
+            "probability": 0.05393308469632353
+          },
+          {
+            "rank": 14,
+            "probability": 0.033524539032490815
+          },
+          {
+            "rank": 15,
+            "probability": 0.012725278078607538
+          },
+          {
+            "rank": 16,
+            "probability": 0.008473192920036765
+          },
+          {
+            "rank": 17,
+            "probability": 0.00731119598529412
+          },
+          {
+            "rank": 18,
+            "probability": 0.004094802120404413
+          },
+          {
+            "rank": 19,
+            "probability": 0.000374876250459559
+          }
+        ],
+        "averageDailyRank": 8.72136619485294,
+        "dailyRankBreakdown": {
+          "sources": [
+            {
+              "source": "base",
+              "amount": 1,
+              "active": true,
+              "share": 0.11466093472719523
+            },
+            {
+              "source": "grimoire",
+              "amount": 2.9416603125,
+              "active": true,
+              "share": 0.3372935210811432
+            },
+            {
+              "source": "sushi",
+              "amount": 0.1,
+              "active": true,
+              "share": 0.011466093472719523
+            },
+            {
+              "source": "anniversaryBundle",
+              "amount": 0,
+              "active": false,
+              "share": 0
+            },
+            {
+              "source": "smoky",
+              "amount": 1.7647058823529411,
+              "active": true,
+              "share": 0.20234282598916803
+            },
+            {
+              "source": "armoryEventShop",
+              "amount": 0,
+              "active": false,
+              "share": 0
+            },
+            {
+              "source": "companion",
+              "amount": 2.915,
+              "active": true,
+              "share": 0.33423662472977406
+            }
+          ],
+          "beforeOverflow": 8.72136619485294,
+          "overflowAdjustment": 0,
+          "total": 8.72136619485294
+        }
+      }
+    }
+  },
+  "errors": {}
+}

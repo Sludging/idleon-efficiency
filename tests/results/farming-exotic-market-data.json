@@ -173,9 +173,9 @@
         },
         {
           "index": 28,
-          "level": 122,
+          "level": 827,
           "isOrganic": false,
-          "bonus": 5.436720142602495
+          "bonus": 22.63273125342091
         },
         {
           "index": 29,
@@ -305,9 +305,9 @@
         },
         {
           "index": 50,
-          "level": 178,
+          "level": 312,
           "isOrganic": false,
-          "bonus": 45.331069609507644
+          "bonus": 71.34146341463415
         },
         {
           "index": 51,
@@ -368,23 +368,23 @@
     "exotic_native_current_ids": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[24].getValue(\"ActorEvents_623\",\"_GenINFO\")[181]",
       "result": [
-        4,
-        14,
-        38,
-        51,
-        37,
-        47,
-        5,
-        30
+        50,
+        7,
+        24,
+        53,
+        16,
+        40,
+        28,
+        43
       ]
     },
     "organic_labels_owned": {
       "expression": "idleon.callFunction(\"MenagerieStuff\",\"OrganicLabelOwned\",0,0)",
-      "result": 0
+      "result": 1
     },
     "organic_labels_available": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"ExoticOrganicsLEFT\",0,0)",
-      "result": 0
+      "result": 1
     },
     "land_rank_fifth_column_max": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"LandRank5thColumnMaxLV\",0,0)",

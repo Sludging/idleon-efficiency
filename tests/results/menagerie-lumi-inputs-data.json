@@ -2,7 +2,7 @@
   "extractions": {
     "lumi_rate": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"LumiGainRate\", 0, 0)",
-      "result": 573.3314914285714
+      "result": 814.0277554208001
     },
     "coral_kid_10": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 10, 0)",
@@ -18,11 +18,11 @@
     },
     "menagerie_bonus_1": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"BoostQTY\", 1, 0)",
-      "result": 200
+      "result": 225
     },
     "research_165": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 165, 0)",
-      "result": 6.5
+      "result": 7.86
     },
     "purple_jelly_0": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"PinkJellyBonus\", 0, 0)",
@@ -58,7 +58,7 @@
     },
     "research_164": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 164, 0)",
-      "result": 0
+      "result": 25.152
     },
     "w7b10_card_level": {
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7b10\")",

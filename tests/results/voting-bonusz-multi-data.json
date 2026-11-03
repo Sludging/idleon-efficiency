@@ -2,7 +2,7 @@
   "extractions": {
     "voting_bonusz_multi": {
       "expression": "idleon.callFunction(\"Summoning2\", \"VotingBonuszMulti\", 0, 0)",
-      "result": 6.30679347826087
+      "result": 6.55679347826087
     },
     "meritocracy_bonus_9": {
       "expression": "idleon.callFunction(\"Summoning2\", \"MeritocBonusz\", 9, 0)",
@@ -26,7 +26,7 @@
     },
     "sushi_rog_bonus_50": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 50, 0)",
-      "result": 0
+      "result": 10
     }
   },
   "errors": {}

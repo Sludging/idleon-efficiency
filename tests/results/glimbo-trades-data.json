@@ -6,7 +6,7 @@
     },
     "drop_rate_multiplier": {
       "expression": "idleon.callFunction(\"Minehead\", \"GlimboDRmulti\", 0, 0)",
-      "result": 1.169
+      "result": 1.2043599999999999
     },
     "trade_0_count": {
       "expression": "idleon.getAttr(\"Research\")[12][0]",

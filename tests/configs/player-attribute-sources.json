@@ -169,42 +169,42 @@
     },
     {
       "label": "sign_STR",
-      "expression": "idleon.getDNSM(\"StarSigns\").h.STR",
+      "expression": "(() => { const map = idleon.getDNSM(\"StarSigns\").h; return Object.prototype.hasOwnProperty.call(map, \"STR\") ? map[\"STR\"] : 0; })()",
       "description": "Selected Star Signs STR complete contribution"
     },
     {
       "label": "sign_pctSTR",
-      "expression": "idleon.getDNSM(\"StarSigns\").h.pctSTR",
+      "expression": "(() => { const map = idleon.getDNSM(\"StarSigns\").h; return Object.prototype.hasOwnProperty.call(map, \"pctSTR\") ? map[\"pctSTR\"] : 0; })()",
       "description": "Selected Star Signs pctSTR complete contribution"
     },
     {
       "label": "sign_AGI",
-      "expression": "idleon.getDNSM(\"StarSigns\").h.AGI",
+      "expression": "(() => { const map = idleon.getDNSM(\"StarSigns\").h; return Object.prototype.hasOwnProperty.call(map, \"AGI\") ? map[\"AGI\"] : 0; })()",
       "description": "Selected Star Signs AGI complete contribution"
     },
     {
       "label": "sign_pctAGI",
-      "expression": "idleon.getDNSM(\"StarSigns\").h.pctAGI",
+      "expression": "(() => { const map = idleon.getDNSM(\"StarSigns\").h; return Object.prototype.hasOwnProperty.call(map, \"pctAGI\") ? map[\"pctAGI\"] : 0; })()",
       "description": "Selected Star Signs pctAGI complete contribution"
     },
     {
       "label": "sign_WIS",
-      "expression": "idleon.getDNSM(\"StarSigns\").h.WIS",
+      "expression": "(() => { const map = idleon.getDNSM(\"StarSigns\").h; return Object.prototype.hasOwnProperty.call(map, \"WIS\") ? map[\"WIS\"] : 0; })()",
       "description": "Selected Star Signs WIS complete contribution"
     },
     {
       "label": "sign_pctWIS",
-      "expression": "idleon.getDNSM(\"StarSigns\").h.pctWIS",
+      "expression": "(() => { const map = idleon.getDNSM(\"StarSigns\").h; return Object.prototype.hasOwnProperty.call(map, \"pctWIS\") ? map[\"pctWIS\"] : 0; })()",
       "description": "Selected Star Signs pctWIS complete contribution"
     },
     {
       "label": "sign_LUK",
-      "expression": "idleon.getDNSM(\"StarSigns\").h.LUK",
+      "expression": "(() => { const map = idleon.getDNSM(\"StarSigns\").h; return Object.prototype.hasOwnProperty.call(map, \"LUK\") ? map[\"LUK\"] : 0; })()",
       "description": "Selected Star Signs LUK complete contribution"
     },
     {
       "label": "sign_pctLUK",
-      "expression": "idleon.getDNSM(\"StarSigns\").h.pctLUK",
+      "expression": "(() => { const map = idleon.getDNSM(\"StarSigns\").h; return Object.prototype.hasOwnProperty.call(map, \"pctLUK\") ? map[\"pctLUK\"] : 0; })()",
       "description": "Selected Star Signs pctLUK complete contribution"
     },
     {

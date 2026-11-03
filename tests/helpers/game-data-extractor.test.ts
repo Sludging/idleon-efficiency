@@ -104,7 +104,7 @@ describe('GameDataExtractor active-player policy', () => {
   });
 });
 
-describe('GameDataExtractor Town capture policy', () => {
+describe('GameDataExtractor map exclusion policy', () => {
   let tempDir: string;
   let extractor: GameDataExtractor;
   let mapId: number;
@@ -116,8 +116,8 @@ describe('GameDataExtractor Town capture policy', () => {
   const damageExpression = 'idleon.callFunction("Minehead", "Button_uHave", 49, 0)';
   const experienceExpression = 'idleon.callFunction("Minehead", "Button_uHave", 15, 0)';
   const extractions = [
-    { label: 'damage', expression: damageExpression, requiresTown: true },
-    { label: 'experience', expression: experienceExpression, requiresTown: false },
+    { label: 'damage', expression: damageExpression, excludedMapInternalNames: ['uAquaA6'] },
+    { label: 'experience', expression: experienceExpression },
   ];
   const capture = async () => {
     await extractor.extractData();
@@ -126,7 +126,7 @@ describe('GameDataExtractor Town capture policy', () => {
   };
 
   beforeEach(() => {
-    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'game-data-extractor-town-'));
+    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'game-data-extractor-context-'));
     extractor = new GameDataExtractor(
       path.join(tempDir, 'config.json'),
       path.join(tempDir, 'results.json'),
@@ -150,7 +150,7 @@ describe('GameDataExtractor Town capture policy', () => {
         if (failContext) throw new Error('Map unavailable');
         return mapId;
       }
-      if (name === 'CustomLists') return { h: { MapName: { 0: 'Town', 306: 'uAquaA6' } } };
+      if (name === 'CustomLists') return { h: { MapName: { 0: 'Town', 1: 'W1Field', 306: 'uAquaA6' } } };
       throw new Error(`Unexpected attribute: ${name}`);
     });
     const idleon = {
@@ -182,7 +182,7 @@ describe('GameDataExtractor Town capture policy', () => {
     fs.rmSync(tempDir, { recursive: true, force: true });
   });
 
-  it('persists non-Town context and a label error without invoking damage or blocking EXP', async () => {
+  it('rejects Clamworks before invoking damage without blocking EXP', async () => {
     mapId = 306;
 
     const results = await capture();
@@ -193,16 +193,16 @@ describe('GameDataExtractor Town capture policy', () => {
     expect(results.extractions.damage).toBeUndefined();
     expect(results.errors.damage).toMatchObject({
       expression: damageExpression,
-      error: expect.stringContaining('Town capture required'),
+      error: expect.any(String),
     });
     expect(results.errors.experience).toBeUndefined();
     expect(results.extractions.experience).toBeDefined();
   });
 
-  it('captures Town context once and invokes each eligible damage extraction', async () => {
+  it('captures context once and invokes each eligible damage extraction', async () => {
     extractor.config.extractions = [
       ...extractions,
-      { label: 'second_damage', expression: damageExpression, requiresTown: true },
+      { label: 'second_damage', expression: damageExpression, excludedMapInternalNames: ['uAquaA6'] },
     ];
 
     const results = await capture();
@@ -214,7 +214,7 @@ describe('GameDataExtractor Town capture policy', () => {
     expect(results.errors).toEqual({});
   });
 
-  it('replaces a previous Town capture and removes its damage value after leaving Town', async () => {
+  it('replaces a previous capture and removes damage after entering Clamworks', async () => {
     await capture();
     mapId = 306;
 
@@ -224,10 +224,10 @@ describe('GameDataExtractor Town capture policy', () => {
     expect(experience).toHaveBeenCalledTimes(2);
     expect(results.context.mapId).toBe(306);
     expect(results.extractions.damage).toBeUndefined();
-    expect(results.errors.damage.error).toContain('Town capture required');
+    expect(results.errors.damage).toBeDefined();
   });
 
-  it('removes a previous value when native damage fails in a new Town capture', async () => {
+  it('removes a previous value when native damage fails in a new capture', async () => {
     await capture();
     failDamage = true;
 
@@ -250,29 +250,29 @@ describe('GameDataExtractor Town capture policy', () => {
     expect(experience).toHaveBeenCalledTimes(2);
     expect(results.context).toBeUndefined();
     expect(results.extractions.damage).toBeUndefined();
-    expect(results.errors.damage.error).toContain('Town capture prerequisite failed');
     expect(results.errors.damage.error).toContain('Map unavailable');
     expect(results.errors.experience).toBeUndefined();
   });
 
-  it('clears a previous eligibility error when the next capture reaches Town', async () => {
+  it('clears a previous eligibility error after leaving Clamworks', async () => {
     mapId = 306;
     await capture();
-    mapId = 0;
+    mapId = 1;
 
     const results = await capture();
 
+    expect(results.context).toEqual({ activePlayerIndex: 0, mapId: 1, mapInternalName: 'W1Field' });
     expect(damage).toHaveBeenCalledTimes(1);
     expect(results.extractions.damage).toBeDefined();
     expect(results.errors).toEqual({});
   });
 
-  it('does not capture context or restrict unflagged extractions outside Town', async () => {
+  it('does not capture context or restrict unflagged extractions in Clamworks', async () => {
     await capture();
     mapId = 306;
     extractor.config.extractions = [
       { label: 'damage', expression: damageExpression },
-      { label: 'experience', expression: experienceExpression, requiresTown: false },
+      { label: 'experience', expression: experienceExpression },
     ];
     getAttr.mockClear();
 
@@ -283,6 +283,172 @@ describe('GameDataExtractor Town capture policy', () => {
     expect(results.context).toBeUndefined();
     expect(Object.keys(results.extractions)).toEqual(['damage', 'experience']);
     expect(results.errors).toEqual({});
+  });
+
+  it('captures normal-world damage in fields without a Town prerequisite', async () => {
+    mapId = 1;
+
+    const results = await capture();
+
+    expect(damage).toHaveBeenCalledTimes(1);
+    expect(results.context).toEqual({ activePlayerIndex: 0, mapId: 1, mapInternalName: 'W1Field' });
+    expect(results.extractions.damage.result).toBe(123);
+    expect(results.errors).toEqual({});
+  });
+
+  it('rejects malformed capture context without invoking damage', async () => {
+    mapId = -1;
+
+    const results = await capture();
+
+    expect(damage).not.toHaveBeenCalled();
+    expect(experience).toHaveBeenCalledTimes(1);
+    expect(results.context).toBeUndefined();
+    expect(results.errors.damage).toBeDefined();
+  });
+});
+
+describe('Prepared sparse numeric captures', () => {
+  const evaluate = (filename: string, label: string, prepared: Record<string, unknown>) => {
+    const config = JSON.parse(fs.readFileSync(path.join(__dirname, '../configs', filename), 'utf8'));
+    const extraction = config.extractions.find((entry: { label: string }) => entry.label === label);
+    if (!extraction) throw new Error(`Missing capture ${filename}: ${label}`);
+    return runInNewContext(extraction.expression, {
+      idleon: {
+        getDNSM: (name: string) => prepared[name],
+        engine: { getGameAttribute: () => ({ h: prepared }) },
+      },
+    });
+  };
+  const captures = [
+    { filename: 'family-class-bonus.json', label: 'family_bonus_2', owner: 'FamBonusQTYs', key: '2' },
+    { filename: 'player-equipment-bonuses.json', label: 'gallery_trophy_skill_efficiency', owner: 'GalleryTrophyBonTOT', key: '%_SKILL_EFFICIENCY' },
+    { filename: 'player-equipment-bonuses.json', label: 'gallery_nametag_drop_rate', owner: 'GalleryNametagBonTOT', key: '%_DROP_RATE' },
+    { filename: 'player-equipment-bonuses.json', label: 'hat_rack_skill_efficiency', owner: 'PremHatBonTOT', key: '%_SKILL_EFFICIENCY' },
+    { filename: 'cooking-speed.json', label: 'starsign_58_bonus', owner: 'StarSigns', key: '58' },
+    { filename: 'bubble-bonus.json', label: 'y13_final_bonus', owner: 'AlchBubbles', key: 'Y13' },
+  ];
+
+  describe.each(captures)('$label', ({ filename, label, owner, key }) => {
+    it('requires the prepared owner and map', () => {
+      expect(() => evaluate(filename, label, {})).toThrow();
+      expect(() => evaluate(filename, label, { [owner]: {} })).toThrow();
+    });
+
+    it('uses zero only when the effect is absent from the prepared map', () => {
+      expect(evaluate(filename, label, { [owner]: { h: {} } })).toBe(0);
+      expect(evaluate(filename, label, { [owner]: { h: Object.create({ [key]: 99 }) } })).toBe(0);
+    });
+
+    it.each([0, 12.5, null, undefined, NaN])('preserves an own member value: %s', value => {
+      expect(evaluate(filename, label, { [owner]: { h: { [key]: value } } })).toBe(value);
+    });
+  });
+
+  it('keeps the kitchen speed minimum without coercing present invalid values', () => {
+    const filename = 'bubble-bonus.json';
+    const label = 'diamond_chef_meal_and_fire_speed_multiplier';
+    expect(evaluate(filename, label, { AlchBubbles: { h: {} } })).toBe(1);
+    for (const value of [null, undefined, NaN]) {
+      expect(evaluate(filename, label, { AlchBubbles: { h: { MealSpdz: value } } })).toBe(value);
+    }
+  });
+
+  it('floors valid Family talent levels without coercing present invalid values', () => {
+    const filename = 'talents-sludgeadin.json';
+    const label = 'talent_max_family_bonus_68';
+    expect(evaluate(filename, label, { FamBonusQTYs: { h: {} } })).toBe(0);
+    expect(evaluate(filename, label, { FamBonusQTYs: { h: { 68: 12.5 } } })).toBe(12);
+    for (const value of [null, undefined, NaN]) {
+      expect(evaluate(filename, label, { FamBonusQTYs: { h: { 68: value } } })).toBe(value);
+    }
+  });
+
+  it('adds only valid Gallery effects and rejects invalid present effects', () => {
+    const filename = 'gallery-summary.json';
+    const label = 'combined_drop_rate';
+    const prepared = {
+      GalleryTrophyBonTOT: { h: {} as Record<string, unknown> },
+      GalleryNametagBonTOT: { h: {} as Record<string, unknown> },
+    };
+    expect(evaluate(filename, label, prepared)).toBe(0);
+    prepared.GalleryTrophyBonTOT.h['%_DROP_RATE'] = 12;
+    prepared.GalleryNametagBonTOT.h['%_DROP_RATE'] = 3;
+    expect(evaluate(filename, label, prepared)).toBe(15);
+    for (const value of [null, undefined, NaN, Infinity]) {
+      prepared.GalleryTrophyBonTOT.h['%_DROP_RATE'] = value;
+      expect(() => evaluate(filename, label, prepared)).toThrow();
+    }
+    expect(() => evaluate(filename, label, {})).toThrow();
+  });
+});
+
+describe('Construction capture player guards', () => {
+  it.each([
+    ['construction-cog-player-base-exp-rate.json', 'player_base_exp_rate_player_'],
+    ['construction-cog-player-build-speed.json', 'player_build_speed_player_'],
+  ])('calls native only for owned characters in %s', (filename, labelPrefix) => {
+    const config = JSON.parse(fs.readFileSync(path.join(__dirname, '../configs', filename), 'utf8'));
+    const callFunction = jest.fn();
+    const getAttr = jest.fn().mockReturnValue(Array.from({ length: 10 }, (_, index) => `player${index}`));
+    const evaluate = (index: number) => {
+      const extraction = config.extractions.find(
+        (entry: { label: string }) => entry.label === `${labelPrefix}${index}`
+      );
+      if (!extraction) throw new Error(`Missing capture ${filename}: ${labelPrefix}${index}`);
+      return runInNewContext(extraction.expression, { idleon: { getAttr, callFunction } });
+    };
+
+    expect(evaluate(10)).toBeNull();
+    expect(callFunction).not.toHaveBeenCalled();
+    evaluate(9);
+    expect(callFunction).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('GameDataExtractor execution result boundary', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('rejects an omitted result but preserves an explicit null result', async () => {
+    const extractor = new GameDataExtractor('/tmp/config.json', '/tmp/results.json', { verbose: false });
+    jest.spyOn(global, 'fetch')
+      .mockResolvedValueOnce({ ok: true, json: async () => ({}) } as Response)
+      .mockResolvedValueOnce({ ok: true, json: async () => ({ result: null }) } as Response);
+
+    await expect(extractor.executeExpression('missing()')).rejects.toThrow();
+    await expect(extractor.executeExpression('unavailable()')).resolves.toBeNull();
+  });
+
+  it('rejects a raw native exception before normalizing the result', async () => {
+    const extractor = new GameDataExtractor('/tmp/config.json', '/tmp/results.json', { verbose: false });
+    jest.spyOn(global, 'fetch').mockResolvedValue({
+      ok: true,
+      json: async () => ({ result: 'Function call error: missing player' }),
+    } as Response);
+
+    await expect(extractor.executeExpression('native()')).rejects.toThrow(
+      'Function call error: missing player'
+    );
+  });
+
+  it('records a missing result and continues capturing other values', async () => {
+    const extractor = new GameDataExtractor('/tmp/config.json', '/tmp/results.json', { verbose: false });
+    extractor.config = { extractions: [
+      { label: 'missing', expression: 'missing()' },
+      { label: 'present', expression: 'present()' },
+    ] };
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+    jest.spyOn(global, 'fetch')
+      .mockResolvedValueOnce({ ok: true, json: async () => ({}) } as Response)
+      .mockResolvedValueOnce({ ok: true, json: async () => ({ result: 0 }) } as Response);
+
+    await extractor.extractData();
+
+    expect(extractor.results.extractions.missing).toBeUndefined();
+    expect(extractor.results.errors.missing).toBeDefined();
+    expect(extractor.results.extractions.present.result).toBe(0);
   });
 });
 
@@ -477,6 +643,61 @@ describe('GameDataExtractor persisted results', () => {
       );
       expect(fs.statSync(outputPath).mtimeMs).not.toBe(originalMtime);
     }
+  );
+
+  it.each([
+    null,
+    [],
+    {},
+    '',
+    'ordinary string',
+    '{"malformed":',
+    'Reported Function call error: not a native exception',
+    '{"message":"ordinary string","values":[null,[],{}]}',
+    JSON.stringify({ message: 'Reported Function call error: ordinary text' }),
+  ].map(captured => ({ captured })))('preserves successful values without decoding strings: %j', async ({ captured }) => {
+    value = captured;
+
+    const bytes = await extract();
+
+    expect(JSON.parse(bytes.toString('utf8')).extractions.value.result).toEqual(captured);
+  });
+
+  it.each([
+    { name: 'exact prefix', captured: 'Function call error:' },
+    { name: 'raw exception', captured: 'Function call error: missing player' },
+    { name: 'nested object', captured: { player: { result: 'Function call error: missing player' } } },
+    { name: 'nested array', captured: [0, [{ result: 'Function call error: missing player' }]] },
+    { name: 'JSON packet', captured: JSON.stringify({ result: 'Function call error: missing player' }) },
+    {
+      name: 'nested JSON packet',
+      captured: { players: [JSON.stringify({ result: JSON.stringify(['Function call error: missing player']) })] },
+    },
+  ])('persists $name as an error without a successful label', async ({ captured }) => {
+    value = captured;
+
+    const bytes = await extract();
+    const results = JSON.parse(bytes.toString('utf8'));
+
+    expect(results.extractions).not.toHaveProperty('value');
+    expect(results.errors.value).toEqual({
+      expression: valueExpression,
+      error: expect.stringContaining('Function call error:'),
+    });
+    expect(results.extractions.large).toBeDefined();
+  });
+
+  it.each([undefined, NaN, Infinity, -Infinity])(
+    'records invalid top-level values as errors instead of successful nulls: %s',
+    async captured => {
+      value = captured;
+
+      const bytes = await extract();
+      const results = JSON.parse(bytes.toString('utf8'));
+
+      expect(results.extractions.value).toBeUndefined();
+      expect(results.errors.value).toBeDefined();
+    },
   );
 });
 describe('BatchExtractor player server routing', () => {

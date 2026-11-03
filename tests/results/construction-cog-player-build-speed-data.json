@@ -1,48 +1,48 @@
 {
   "extractions": {
     "player_build_speed_player_0": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 0, 0)",
-      "result": 1004464833351.5321
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 0 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 0, 0) : null",
+      "result": 1027125955308.9926
     },
     "player_build_speed_player_1": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 1, 0)",
-      "result": 590611643145.4924
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 1 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 1, 0) : null",
+      "result": 603114248903.5898
     },
     "player_build_speed_player_2": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 2, 0)",
-      "result": 568446314496.8306
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 2 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 2, 0) : null",
+      "result": 569255854894.357
     },
     "player_build_speed_player_3": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 3, 0)",
-      "result": 16571673880630.53
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 3 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 3, 0) : null",
+      "result": 17465341041066.424
     },
     "player_build_speed_player_4": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 4, 0)",
-      "result": 568446314496.8306
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 4 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 4, 0) : null",
+      "result": 582080747864.4185
     },
     "player_build_speed_player_5": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 5, 0)",
-      "result": 584122765954.7678
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 5 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 5, 0) : null",
+      "result": 584954631628.0881
     },
     "player_build_speed_player_6": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 6, 0)",
-      "result": 1498466502072.924
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 6 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 6, 0) : null",
+      "result": 1555162036855.211
     },
     "player_build_speed_player_7": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 7, 0)",
-      "result": 1971210852251.943
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 7 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 7, 0) : null",
+      "result": 1974049029867.8003
     },
     "player_build_speed_player_8": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 8, 0)",
-      "result": 578391865181.9849
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 8 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 8, 0) : null",
+      "result": 608260275929.1835
     },
     "player_build_speed_player_9": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 9, 0)",
-      "result": 576251735930.2173
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 9 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 9, 0) : null",
+      "result": 577072392248.12
     },
     "player_build_speed_player_10": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 10, 0)",
-      "result": 984649802736.8185
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 10 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 10, 0) : null",
+      "result": 986093181360.0884
     }
   },
   "errors": {}

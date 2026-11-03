@@ -2,23 +2,23 @@
   "extractions": {
     "sushi_effects_knowledge_experience_percent": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"KnowledgeBonusTOT\", 1, 0)",
-      "result": 217.0666666666667
+      "result": 282
     },
     "sushi_effects_cooked_tier_percent": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"BonusCookTierPCT\", 0, 0)",
-      "result": 35.010000000000005
+      "result": 45.553333333333335
     },
     "sushi_effects_knowledge_upgrade_cost_factor": {
       "expression": "1 / (1 + idleon.callFunction(\"SushiStuff\", \"KnowledgeBonusTOT\", 6, 0) / 100)",
-      "result": 0.5031024652020795
+      "result": 0.3911852914330421
     },
     "sushi_effects_faster_fuel_knowledge_factor": {
       "expression": "(1 + idleon.callFunction(\"SushiStuff\", \"KnowledgeBonusSpecific\", 27, 0) / 100) * (1 + idleon.callFunction(\"SushiStuff\", \"KnowledgeBonusSpecific\", 36, 0) / 100) * (1 + idleon.callFunction(\"SushiStuff\", \"KnowledgeBonusSpecific\", 45, 0) / 100)",
-      "result": 1.80504
+      "result": 3.579443999999999
     },
     "sushi_effects_knowledge_perfecto_percent": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"KnowledgeBonusTOT\", 10, 0)",
-      "result": 0
+      "result": 6466.666666666667
     }
   },
   "errors": {}

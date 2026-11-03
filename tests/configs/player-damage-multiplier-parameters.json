@@ -49,12 +49,12 @@
     },
     {
       "label": "damage_family_bonus_20",
-      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.FamBonusQTYs.h[20]; })()",
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); const map = idleon.engine.getGameAttribute(\"DNSM\").h.FamBonusQTYs.h; return Object.prototype.hasOwnProperty.call(map, 20) ? map[20] : 0; })()",
       "description": "Native family total-damage quantity at key 20 used in the D component"
     },
     {
       "label": "damage_family_bonus_80",
-      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.FamBonusQTYs.h[80]; })()",
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); const map = idleon.engine.getGameAttribute(\"DNSM\").h.FamBonusQTYs.h; return Object.prototype.hasOwnProperty.call(map, 80) ? map[80] : 0; })()",
       "description": "Native late family damage multiplier at key 80 used in the D component"
     },
     {

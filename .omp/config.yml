@@ -1,6 +1,6 @@
 modelRoles:
-  pattern_researcher: openai-codex/gpt-6-luna:medium
-  game_researcher: openai-codex/gpt-6-luna:medium
+  pattern_researcher: openai-codex/gpt-6.1-sol:low
+  game_researcher: openai-codex/gpt-6.1-sol:low
 task:
   enableEffort: false
   maxEffort: medium

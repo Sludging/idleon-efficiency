@@ -10,12 +10,12 @@
           "playerId": 3,
           "playerName": "Sludgev4",
           "characterClass": 16,
-          "level": 1404,
+          "level": 1422,
           "currentMap": 150,
           "dungeon": -1,
           "version": {
-            "title": "Halloween_Event",
-            "version": "1.24"
+            "title": "The_Cape_Vine",
+            "version": "1.25"
           }
         }
       }

@@ -1,0 +1,56 @@
+{
+  "description": "Extract Grotto core values from the regular save. Native game version 1.24 uses current-colony progress, not lifetime mushroom kills.",
+  "target": "Grotto layers, Monarch HP, mushroom challenge progress, schematic effects, and cavern Opals",
+  "extractions": [
+    {
+      "label": "colonies_defeated",
+      "expression": "Number(idleon.getAttr(\"Holes\")[11][26])",
+      "description": "Defeated Gloomie colonies. Native Monarch defeat increments this saved count."
+    },
+    {
+      "label": "layer",
+      "expression": "Math.round(Number(idleon.getAttr(\"Holes\")[11][26]) + 1)",
+      "description": "Native Grotto colony label uses the rounded defeated count plus one, from idleon1.24.txt:261845."
+    },
+    {
+      "label": "monarch_hp",
+      "expression": "idleon.callFunction(\"Holes\", \"MonarchHP\", 0, 0)",
+      "description": "Current Monarch HP from the native Grotto calculation."
+    },
+    {
+      "label": "mushroom_kills",
+      "expression": "Number(idleon.getAttr(\"Holes\")[11][27])",
+      "description": "Credited mushroom kills for the current colony. Monarch defeat clears this progress; lifetime kills use a separate saved counter."
+    },
+    {
+      "label": "mushroom_kill_requirement",
+      "expression": "5000 * Math.pow(3.4, Number(idleon.getAttr(\"Holes\")[11][26]))",
+      "description": "Mushroom kills required for the current colony before subtracting credited kills. Source: idleon1.24.txt:241194."
+    },
+    {
+      "label": "mushroom_kills_remaining",
+      "expression": "idleon.callFunction(\"Holes\", \"MushKillsLeft\", 0, 0)",
+      "description": "Remaining mushroom kills, clamped at zero by the native Grotto calculation."
+    },
+    {
+      "label": "lootie_bonus_percent",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 46, 0)",
+      "description": "Built Gloomie Lootie schematic Drop Rate bonus, in percent."
+    },
+    {
+      "label": "expie_bonus_percent",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 47, 0)",
+      "description": "Built Gloomie Expie schematic Class EXP bonus, in percent."
+    },
+    {
+      "label": "opie_bonus_percent",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 48, 0)",
+      "description": "Built Gloomie Opie schematic Villager EXP bonus, in percent."
+    },
+    {
+      "label": "opals_found",
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][8])",
+      "description": "Grotto Opals already owned by the cavern ledger."
+    }
+  ]
+}

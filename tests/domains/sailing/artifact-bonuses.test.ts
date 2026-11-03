@@ -1,8 +1,11 @@
 import { initArtifactRepo } from '../../../data/domain/data/ArtifactRepo';
 import type { Player } from '../../../data/domain/player';
+import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import {
   CrystalSteakArtifact,
+  FauxoryTuskArtifact,
   FunHippoeteArtifact,
+  GenieLampArtifact,
   GoldRelicArtifact,
 } from '../../../data/domain/world-5/sailing/artifacts';
 import type { Sailing } from '../../../data/domain/world-5/sailing/sailing';
@@ -19,7 +22,10 @@ type ArtifactMainBonus = {
 };
 
 const extractionResultsName = 'sailing-artifact-bonuses-data.json';
-const artifacts = initArtifactRepo().map(({ index, data }) => ({ index, name: data.name }));
+// True Lantern uses saved particles, which advance before the native runtime capture.
+const comparableArtifacts = initArtifactRepo()
+  .filter(({ index }) => index !== 29)
+  .map(({ index, data }) => ({ index, name: data.name }));
 
 // The genuine save covers transcendent and omnipotent artifacts, not lower tiers or Verisimilitude.
 describe('Sailing artifact bonuses', () => {
@@ -39,7 +45,7 @@ describe('Sailing artifact bonuses', () => {
     player = getTargetPlayer(gameData.get('players') as Player[]);
   });
 
-  it.each(artifacts)('matches the current main bonus for $name (artifact $index)', ({ index, name }) => {
+  it.each(comparableArtifacts)('matches the current main bonus for $name (artifact $index)', ({ index, name }) => {
     const expected = nativeBonuses?.find(candidate => candidate.index === index);
     if (!expected || typeof expected.bonus !== 'number') {
       throw new Error(`Native main bonus for artifact ${index} (${name}) is unavailable`);
@@ -47,7 +53,7 @@ describe('Sailing artifact bonuses', () => {
     const artifact = sailing.artifacts.find(candidate => candidate.index === index);
     if (!artifact) throw new Error(`Sailing artifact ${index} (${name}) not found`);
 
-    // Keep account projections unchanged. Only these two artifacts expose a player-aware public bonus.
+    // Crystal Steak and Fun Hippoete use the captured recipient; other bonuses are account-shared.
     let actual: number;
     let publicMethod = 'getBonus()';
     if (artifact instanceof CrystalSteakArtifact) {
@@ -70,6 +76,21 @@ describe('Sailing artifact bonuses', () => {
         publicMethod,
       },
     });
+  });
+
+  it('prepares Sailing-level artifact bonuses from a highest-Sailing character', () => {
+    const players = gameData.get('players') as Player[];
+    const highestSailingLevel = Math.max(...players.map(candidate => candidate.skills.get(SkillsIndex.Sailing)?.level ?? 0));
+    const projectedPlayer = players.find(candidate => candidate.playerName === sailing.highestSailingPlayerName);
+    if (!projectedPlayer) throw new Error('Highest-Sailing projection character not found');
+
+    expect(sailing.highestSailingLevel).toBe(highestSailingLevel);
+    expect(projectedPlayer.skills.get(SkillsIndex.Sailing)?.level ?? 0).toBe(highestSailingLevel);
+
+    const tusk = sailing.artifacts[3] as FauxoryTuskArtifact;
+    const lamp = sailing.artifacts[5] as GenieLampArtifact;
+    expect(tusk.sailingLevel).toBe(highestSailingLevel);
+    expect(lamp.sailingLevel).toBe(highestSailingLevel);
   });
 
   it('matches the Gold Relic tier increment used by Printer', () => {

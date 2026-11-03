@@ -15,6 +15,11 @@ import { getTargetPlayer } from '../../utils/target-player';
 import { Player } from '../../../data/domain/player';
 import { Alchemy } from '../../../data/domain/world-2/alchemy/alchemy';
 import { RoyalArmory, getRoyalGuardianContribution } from '../../../data/domain/world-6/royalArmory/royalArmory';
+import {
+ Outpost,
+ ResourceCollectionBonuses,
+ RoyalGuardianContribution,
+} from '../../../data/domain/world-6/royalArmory/outposts';
 
 const saveName = 'latest';
 const extractionResultsName = 'royal-armory-resource-rate-data.json';
@@ -55,4 +60,52 @@ describe('Royal Armory hourly outpost collection', () => {
   });
  });
 
+});
+
+describe('Expanded Barracks collection bonus boundaries', () => {
+ const bonuses: ResourceCollectionBonuses = {
+  orbletCollectionBonus: 0,
+  sushiCollectionBonus: 0,
+  zenithCollectionBonus: 0,
+  purificationBonus: 0,
+  supportCollectionBonus: 0,
+  resourceGradeBonus: 0,
+  outpostUpgradeBonus: 0,
+  purifiedOutpostBonus: 0,
+  guardianLevelBonus: 0,
+  stockpileBonus: 0,
+  armoryCollectionBonus: 0,
+  commandRankBonus: 0,
+  totalResourceGrade: 0,
+  totalOutpostUpgradeLevels: 0,
+  purifiedOutpostCount: 0,
+  resourceQuantityLogTotal: 0,
+  workerCollectionBonus: 0,
+  guardianBonuses: {
+   companionCollectionBonus: 0,
+   arcadeCollectionBonus: 0,
+  },
+ };
+ const guardian: RoyalGuardianContribution = {
+  playerID: 0,
+  level: 0,
+  w14Bonus: 0,
+  collectionTalentBonus: 0,
+  guardianTalentBonus: 0,
+  collectionTalentMultiplier: 1,
+ };
+
+ it.each([
+  [0, 1],
+  [5, 1],
+  [6, 1],
+  [7, 1.1],
+  [46, 5],
+  [47, 5],
+ ])('applies the level %i collection factor of %s', (level, factor) => {
+  const outpost = new Outpost(1);
+  outpost.parse([level, 0]);
+
+  expect(outpost.getResourceCollectionRate(bonuses, guardian)).toBe(125 * factor);
+ });
 });

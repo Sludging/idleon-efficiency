@@ -2,7 +2,7 @@
   "extractions": {
     "royal_armory_total_units_row_1_selector_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 1, 0)",
-      "result": 5
+      "result": 4
     },
     "royal_armory_total_units_row_1_selector_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 1, 1)",

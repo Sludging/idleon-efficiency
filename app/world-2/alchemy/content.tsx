@@ -3,6 +3,7 @@
 import {
     Box,
     Grid,
+    Meter,
     Stack,
     Text,
     Tip,
@@ -13,14 +14,14 @@ import {
 } from "grommet"
 import styled from 'styled-components'
 
-import { Alchemy as AlchemyData, Cauldron, Bubble, CauldronBoostIndex, Vial } from '../../../data/domain/world-2/alchemy/alchemy';
+import { Alchemy as AlchemyData, Cauldron, Bubble, CauldronBoostIndex, Vial, bubbleGrowthMilestones } from '../../../data/domain/world-2/alchemy/alchemy';
 import { Achievement, AchievementConst } from '../../../data/domain/achievements'
-import { useEffect, useState, useContext } from 'react';
-import { nFormatter, notateNumber, round } from '../../../data/utility'
+import { useState, useContext } from 'react';
+import { commaNotation, nFormatter, notateNumber, round } from '../../../data/utility'
 import ContentTabs from "../../../components/base/ContentTabs";
 import { Item } from "../../../data/domain/items";
 import TipDisplay, { TipDirection } from "../../../components/base/TipDisplay";
-import { Ascending, Grid as GridIcon, List } from "grommet-icons";
+import { Ascending, CircleInformation, Grid as GridIcon, List } from "grommet-icons";
 import IconImage from "../../../components/base/IconImage";
 import { Sigils } from "../../../data/domain/world-2/alchemy/sigils";
 import TextAndLabel, { ComponentAndLabel } from "../../../components/base/TextAndLabel";
@@ -36,6 +37,10 @@ import type { FilterOptions } from "../../../components/account/shared/UpgradeTa
 import { Gaming } from "../../../data/domain/world-5/gaming";
 import { Divinity } from "../../../data/domain/world-5/divinity";
 import { ImageData } from "../../../data/domain/imageData";
+import type { Player } from "../../../data/domain/player";
+import { BrewingDisplay, LiquidsDisplay } from "../../../components/world-2/alchemy/cauldrons";
+import AlchemySummary from "../../../components/world-2/alchemy/summary";
+import type { Tesseract } from "../../../data/domain/tesseract";
 
 const CapitalizedH3 = styled.h3`
     text-transform: capitalize
@@ -58,12 +63,14 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
     const size = useContext(ResponsiveContext)
 
     const bargainBubbleLevel = cauldron.bubbles[14].level;
-    const cauldronCostLevel = cauldron.boostLevels[CauldronBoostIndex.Cost];
+    const cauldronCostLevel = cauldron.boosts[CauldronBoostIndex.Cost].level;
     const newMultiBubbleLevel = cauldron.short_name != "Y" ? cauldron.bubbles[16].level : 0;
     const classMultiBubbleLevel = (classMultiBonus && cauldron.short_name != "Y") ? cauldron.bubbles[1].level : 0;
 
     function TipContent({ bubble, faceLeft }: { bubble: Bubble, faceLeft: boolean }) {
         const materialCosts: Map<Item, number> = bubble.getMaterialCost(cauldronCostLevel, undevelopedCostsBubbleLevel, barleyBrewVialLevel, bargainBubbleLevel, classMultiBubbleLevel, discountLevel, hasAchievement, newMultiBubbleLevel, vialMultiplier);
+        const growthProgress = bubble.getBonusProgress();
+        const maximumBonus = bubble.getMaximumBonus();
         return (
             <Box direction="row" align="center" width={{ max: 'medium' }}>
                 <Box pad="small" gap="small" background="white">
@@ -72,6 +79,11 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
                     {bubble.labUpgrade && <Text size="small">Estimated daily target. Lithium and Kattlekruk upgrades can change the targets.</Text>}
                     {krukTargets.includes(bubble) && <Text size="small">Eligible for Kattlekruk daily upgrades.</Text>}
                     <Text size="small">Bonus: {bubble.getBonusText()}</Text>
+                    {growthProgress !== undefined && maximumBonus !== undefined && <Box gap="xxsmall">
+                        <Text size="small">Growth progress: {growthProgress.toLocaleString(undefined, { maximumFractionDigits: 2 })}%</Text>
+                        <Text size="small">Maximum growth bonus: {notateNumber(maximumBonus, "Smaller")}</Text>
+                        <Text size="xsmall">Includes Prisma, but not class or other account multipliers.</Text>
+                    </Box>}
                     <Box gap="small">
                         <ComponentAndLabel
                             label="Material cost"
@@ -135,6 +147,7 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
             <Box>
             {
                     cauldron.bubbles.map((bubble, index) => {
+                        const growthProgress = bubble.getBonusProgress();
                         return (
                             <Box key={`cauldron_${index}_${bubble.name}`}>
                                 <Tip
@@ -199,7 +212,7 @@ function VialsDisplay() {
     const alchemyData = theData.get("alchemy") as AlchemyData;
 
     return (
-        <ShadowBox background="dark-1" pad="medium">
+        <ShadowBox background="dark-1" pad="medium" gap="small">
             <Box direction="row" wrap>
                 {
                     alchemyData.vials.map((vial, index) => (
@@ -228,26 +241,23 @@ function VialsDisplay() {
 }
 
 function SigilsDisplay() {
-    const [sigilData, setSigilData] = useState<Sigils>();
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
 
-    useEffect(() => {
-        setSigilData(theData.get("sigils"));
-    }, [theData]);
+    const sigilData = theData.get("sigils") as Sigils;
 
     return (
         <Box pad="medium" gap="small">
-            <Box>
+            <Box direction="row" gap="medium" wrap>
                 <TextAndLabel
                     label="Charge speed per player"
-                    text={nFormatter(sigilData?.chargeSpeed ?? 0)}
+                    text={nFormatter(sigilData.chargeSpeed)}
                 />
             </Box>
             <Grid columns="1/3">
                 {
-                    sigilData?.sigils.map((sigil, index) => {
+                    sigilData.sigils.map((sigil, index) => {
                         const reqLimit = (sigil.boostLevel == 1 && sigil.canBeIonized) ? (sigil.data.x1 ?? 0) : sigil.boostLevel == 0 ? sigil.data.boostCost : sigil.boostLevel == -1 ? sigil.data.unlockCost : 0;
                         const chargeSpeed = sigil.activePlayers * sigilData.chargeSpeed;
                         const timeToNext = ((reqLimit - sigil.progress) / chargeSpeed) * 3600;
@@ -302,6 +312,7 @@ function BubblesDisplay() {
     const [cauldronFilter, setCauldronFilter] = useState("All");
     const [ownershipFilter, setOwnershipFilter] = useState("All");
     const [dailyFilter, setDailyFilter] = useState("All");
+    const [growthThreshold, setGrowthThreshold] = useState<number | "No cap" | undefined>(undefined);
 
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
@@ -365,12 +376,32 @@ function BubblesDisplay() {
         { label: "In-game order", value: "default" },
         { label: "Level: high to low", value: "level" },
     ];
-    const rows = alchemyData.cauldrons.flatMap(cauldron => cauldron.bubbles.map(bubble => ({
-        id: `${bubble.cauldronIndex}-${bubble.bubbleIndex}`, cauldron, bubble,
-    }))).filter(({ cauldron, bubble }) => {
+    const growthOptions = [
+        { label: "All", value: "All" },
+        ...bubbleGrowthMilestones.map(percentage => ({ label: `Below ${percentage}%`, value: percentage })),
+        { label: "No cap", value: "No cap" },
+    ];
+    const eligibleRows = alchemyData.cauldrons.flatMap(cauldron => cauldron.bubbles
+        .filter(bubble => bubble.data.name !== "Bubble")
+        .map(bubble => ({
+            id: `${bubble.cauldronIndex}-${bubble.bubbleIndex}`, cauldron, bubble,
+        })));
+    const allBubblesOwned = eligibleRows.length > 0 && eligibleRows.every(({ bubble }) => bubble.level > 0);
+    const rows = eligibleRows.filter(({ cauldron, bubble }) => {
+        if (growthThreshold !== undefined) {
+            const maximumBonus = bubble.getMaximumBonus();
+            const growthProgress = bubble.getBonusProgress();
+            const hasNoCap = maximumBonus === undefined || !Number.isFinite(maximumBonus)
+                || growthProgress === undefined || !Number.isFinite(growthProgress);
+            if (growthThreshold === "No cap") {
+                if (!hasNoCap) return false;
+            } else if (hasNoCap || growthProgress >= growthThreshold) {
+                return false;
+            }
+        }
         const search = filters.searchText.trim().toLowerCase();
         return (cauldronFilter === "All" || cauldron.name === cauldronFilter)
-            && (ownershipFilter === "All" || (ownershipFilter === "Owned" ? bubble.level > 0 : bubble.level === 0))
+            && (allBubblesOwned || ownershipFilter === "All" || (ownershipFilter === "Owned" ? bubble.level > 0 : bubble.level === 0))
             && (dailyFilter === "All" || (dailyFilter === "Estimated daily target" ? bubble.labUpgrade : daily?.krukTargets.includes(bubble)))
             && (!search || `${bubble.name} ${bubble.getBonusText()} ${cauldron.name}`.toLowerCase().includes(search));
     }).sort((a, b) => {
@@ -379,16 +410,56 @@ function BubblesDisplay() {
     });
     const featureFilters = <Box direction="row" gap="small" wrap align="center" style={{ rowGap: '12px' }}>
         <Box direction="row" align="center" gap="xsmall"><Text size="small">Cauldron:</Text><Select aria-label="Cauldron" value={cauldronFilter} options={["All", ...alchemyData.cauldrons.map(c => c.name)]} onChange={({ option }) => setCauldronFilter(option)} /></Box>
-        <Box direction="row" align="center" gap="xsmall"><Text size="small">Ownership:</Text><Select aria-label="Ownership" value={ownershipFilter} options={["All", "Owned", "Locked"]} onChange={({ option }) => setOwnershipFilter(option)} /></Box>
+        {!allBubblesOwned && <Box direction="row" align="center" gap="xsmall"><Text size="small">Ownership:</Text><Select aria-label="Ownership" value={ownershipFilter} options={["All", "Owned", "Locked"]} onChange={({ option }) => setOwnershipFilter(option)} /></Box>}
         <Box direction="row" align="center" gap="xsmall"><Text size="small">Daily:</Text><Select aria-label="Daily eligibility" value={dailyFilter} options={["All", "Estimated daily target", "Kattlekruk"]} onChange={({ option }) => setDailyFilter(option)} /></Box>
+        <Box direction="row" align="center" gap="xsmall">
+            <Text size="small">Growth:</Text>
+            <Select aria-label="Growth threshold" labelKey="label" valueKey={{ key: 'value', reduce: true }}
+                value={growthThreshold ?? "All"} options={growthOptions}
+                onChange={({ value }) => setGrowthThreshold(value === "All" ? undefined : value)} />
+        </Box>
     </Box>;
     const columns = [
         { property: "bubble", header: "Bubble", render: ({ bubble }: typeof rows[number]) => <Box direction="row" align="center" gap="small" style={{ opacity: bubble.level > 0 ? 1 : 0.5 }}><IconImage data={bubble.getImageData()} scale={0.6} /><Text size="small">{bubble.name}</Text></Box> },
-        { property: "cauldron", header: "Cauldron", render: ({ cauldron }: typeof rows[number]) => <Text size="small">{cauldron.name}</Text> },
         { property: "level", header: "Level", render: ({ bubble }: typeof rows[number]) => <Text size="small">{bubble.level}</Text> },
         { property: "effect", header: "Effect", size: "30%", render: ({ bubble }: typeof rows[number]) => <Text size="small">{bubble.getBonusText()}</Text> },
+        {
+            property: "growth",
+            header: <TipDisplay heading="Growth progress" maxWidth="medium" body={<Box gap="xsmall">
+                <Text size="small">Shows progress toward the bubble&apos;s maximum level-based bonus.</Text>
+                <Text size="small">Includes Prisma, but not class or other account multipliers.</Text>
+            </Box>}>
+                <Box direction="row" gap="xsmall" align="center" tabIndex={0} aria-label="Growth help">
+                    <Text>Growth</Text>
+                    <CircleInformation size="small" />
+                </Box>
+            </TipDisplay>,
+            render: ({ bubble }: typeof rows[number]) => {
+                const maximumBonus = bubble.getMaximumBonus();
+                const growthProgress = bubble.getBonusProgress();
+                if (maximumBonus === undefined || !Number.isFinite(maximumBonus)
+                    || growthProgress === undefined || !Number.isFinite(growthProgress)) {
+                    return <Text size="small">No cap</Text>;
+                }
+                const currentBonus = bubble.getGrowthBonus();
+                const nextMilestone = bubble.getNextGrowthMilestone();
+                const roundedProgress = Math.round(growthProgress * 100) / 100;
+                const progressText = growthProgress < 100 && roundedProgress >= 100
+                    ? "~100%"
+                    : `${growthProgress.toLocaleString(undefined, { maximumFractionDigits: 2 })}%`;
+                return <Box gap="xsmall" style={{ minWidth: '230px' }}>
+                    <Box direction="row" align="center" justify="between" gap="small">
+                        <Text size="small">{notateNumber(currentBonus, "Smaller")} / {notateNumber(maximumBonus, "Smaller")} ({progressText})</Text>
+                        {nextMilestone && <Text size="small">{nextMilestone.percentage}% at Lv. {commaNotation(nextMilestone.level)}</Text>}
+                    </Box>
+                    <Meter type="bar" size="full" thickness="4px" background="grey-1" max={100}
+                        values={[{ value: Math.max(0, Math.min(100, growthProgress)), color: 'brand' }]}
+                        aria-label={`${bubble.name} growth toward its limit`} />
+                </Box>;
+            },
+        },
         { property: "cost", header: "Material cost", size: "220px", render: ({ bubble, cauldron }: typeof rows[number]) => {
-            const costs = bubble.getMaterialCost(cauldron.boostLevels[CauldronBoostIndex.Cost], undevelopedCostsBubbleLevel, barleyBrewVialLevel, cauldron.bubbles[14].level, classMulti && cauldron.short_name !== "Y" ? cauldron.bubbles[1].level : 0, Number(discountLevel), hasAlchemyAchievement, cauldron.short_name !== "Y" ? cauldron.bubbles[16].level : 0, vialMultiplier);
+            const costs = bubble.getMaterialCost(cauldron.boosts[CauldronBoostIndex.Cost].level, undevelopedCostsBubbleLevel, barleyBrewVialLevel, cauldron.bubbles[14].level, classMulti && cauldron.short_name !== "Y" ? cauldron.bubbles[1].level : 0, Number(discountLevel), hasAlchemyAchievement, cauldron.short_name !== "Y" ? cauldron.bubbles[16].level : 0, vialMultiplier);
             const firstCost = Array.from(costs.values())[0];
             const firstItem = Array.from(costs.keys())[0];
             return <Box gap="xsmall"><Box direction="row" gap="small" wrap>{Array.from(costs).map(([item, cost]) => <Box key={item.internalName} direction="row" align="center"><IconImage data={item.getImageData()} scale={0.6} /><Text size="xsmall">{notateNumber(round(cost))}</Text></Box>)}</Box>
@@ -470,27 +541,34 @@ function Alchemy() {
     ));
     const [activeTab, setActiveTab] = useState<string>("Bubbles");
 
-    if (!hydrated || !theData.get("alchemy") || !theData.get("achievements") || !theData.get("collider")) {
+    if (!hydrated || !theData.get("alchemy") || !theData.get("achievements") || !theData.get("collider") || !theData.get("players") || !theData.get("sigils") || !theData.get("tesseract")) {
         return <>Loading Alchemy data</>;
     }
+    const alchemyData = theData.get("alchemy") as AlchemyData;
+    const players = theData.get("players") as Player[];
+    const tesseract = theData.get("tesseract") as Tesseract;
+    const sigils = theData.get("sigils") as Sigils;
 
     return (
-        <Box>
-            <Box>
-                <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Alchemy</Heading>
-                <Box margin={{ bottom: 'small' }}>
-                    <ContentTabs
-                        options={[
-                            { value: "Bubbles", label: "Bubbles" },
-                            { value: "Vials", label: "Vials" },
-                            { value: "Sigils", label: "Sigils" },
-                            { value: "P2W", label: "P2W" },
-                        ]}
-                        value={activeTab}
-                        onChange={setActiveTab}
-                    />
-                </Box>
+        <Box gap="medium">
+            <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Alchemy</Heading>
+            <AlchemySummary alchemy={alchemyData} tesseract={tesseract} sigils={sigils} />
+            <Box gap="small">
+                <ContentTabs
+                    options={[
+                        { value: "Bubbles", label: "Bubbles" },
+                        { value: "Brewing", label: "Brewing" },
+                        { value: "Liquids", label: "Liquids" },
+                        { value: "Vials", label: "Vials" },
+                        { value: "Sigils", label: "Sigils" },
+                        { value: "P2W", label: "P2W" },
+                    ]}
+                    value={activeTab}
+                    onChange={setActiveTab}
+                />
                 {activeTab == "Bubbles" && <BubblesDisplay />}
+                {activeTab == "Brewing" && <BrewingDisplay alchemy={alchemyData} players={players} />}
+                {activeTab == "Liquids" && <LiquidsDisplay alchemy={alchemyData} />}
                 {activeTab == "Vials" && <VialsDisplay />}
                 {activeTab == "Sigils" && <SigilsDisplay />}
                 {activeTab == "P2W" && <P2WDisplay />}

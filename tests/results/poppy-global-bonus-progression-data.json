@@ -8,12 +8,12 @@
       "expression": "idleon.callFunction(\"Summoning\", \"RooCost\", 3, 0)",
       "result": {
         "type": "large_number",
-        "value": "2.061442595099866e+26"
+        "value": "7.242622108809923e+26"
       }
     },
     "can_afford_next_bonus": {
       "expression": "idleon.engine.getGameAttribute(\"OptionsListAccount\")[267] >= idleon.callFunction(\"Summoning\", \"RooCost\", 3, 0) ? 1 : 0",
-      "result": 1
+      "result": 0
     }
   },
   "errors": {}

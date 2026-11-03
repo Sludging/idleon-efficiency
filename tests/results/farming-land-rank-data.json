@@ -2,15 +2,15 @@
   "extractions": {
     "land_rank_0_bonus": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"LankRankUpgBonus\", 0, 0)",
-      "result": 626.7466544965846
+      "result": 627.2147339263698
     },
     "land_rank_19_bonus": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"LankRankUpgBonus\", 19, 0)",
-      "result": 623.059909470134
+      "result": 623.5252354915087
     },
     "account_dank_ranks_multiplier": {
       "expression": "Math.max(1, idleon.callFunction(\"getbonus2\", 1, 207, -1))",
-      "result": 2.1902834008097165
+      "result": 2.191919191919192
     },
     "plump_database_bonus": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 14, 0)",
@@ -21,25 +21,25 @@
       "result": [
         {
           "index": 2,
-          "bonus": 89.89954761895657
+          "bonus": 89.96668819112482
         },
         {
           "index": 6,
-          "bonus": 645.467658462067
+          "bonus": 645.9497194852094
         },
         {
           "index": 13,
-          "bonus": 1826.2100794814273
+          "bonus": 1827.5739660958016
         }
       ]
     },
     "land_rank_exp_database_total": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"LandRankUpgBonusTOTAL\",2,0)",
-      "result": 2471.6777379434943
+      "result": 2473.523685581011
     },
     "land_rank_exp_multiplier": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"PlotRankGain\",0,0)",
-      "result": 55.483847575757416
+      "result": 55.645137830338115
     }
   },
   "errors": {}

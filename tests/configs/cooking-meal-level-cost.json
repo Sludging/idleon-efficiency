@@ -1,0 +1,16 @@
+{
+  "description": "Next-level upgrade cost for Turkey of Thank, the first named Cooking meal. This representative selection does not depend on the account's saved meal level.",
+  "target": "Cooking meal next-level cost",
+  "extractions": [
+    {
+      "label": "cooking_meal_level_cost",
+      "expression": "idleon.callFunction(\"CookingR\", \"CookingMenuMealCosts\", 0, 0)",
+      "description": "Native raw quantity of Turkey of Thank consumed to upgrade from its saved current level to the next level. Compare with the prepared Meal.getMealLevelCost() result without rounding."
+    },
+    {
+      "label": "cooking_meal_level_cost_context",
+      "expression": "({mealIndex:0,name:idleon.getAttr(\"CustomLists\").h.MealINFO[0][0],currentLevel:Number(idleon.getAttr(\"Meals\")[0][0]),owned:Number(idleon.getAttr(\"Meals\")[2][0])})",
+      "description": "Read-only meal identity, saved current level, and owned quantity for capture pairing and smoke review. This context is not another calculation comparison."
+    }
+  ]
+}

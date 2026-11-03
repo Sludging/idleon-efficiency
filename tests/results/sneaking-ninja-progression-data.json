@@ -78,7 +78,7 @@
           "damageDone": 0,
           "maxHP": 0,
           "remainingHP": 0,
-          "flowerStacks": 975
+          "flowerStacks": 4215
         },
         {
           "index": 11,
@@ -92,7 +92,7 @@
     "daily_charm_rolls": {
       "expression": "(()=>{var A=k=>idleon.getAttr(k),N=idleon.allScripts.ActorEvents_579._customBlock_Ninja;var used=Number(A(\"OptionsListAccount\")[402]);return {used,pristineRemaining:Math.max(0,120-used),symbolRemaining:Math.max(0,75-used),symbolsUnlocked:N(\"NLbonuses\",17,0)>0}})()",
       "result": {
-        "used": 121,
+        "used": 213,
         "pristineRemaining": 0,
         "symbolRemaining": 0,
         "symbolsUnlocked": true

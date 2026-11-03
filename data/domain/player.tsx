@@ -54,6 +54,7 @@ import { Construction } from './world-3/construction/construction';
 import { Gaming } from './world-5/gaming';
 import type { Gallery } from './world-7/gallery';
 import type { HatRack } from './world-7/hatRack';
+import type { CapeVine } from './world-4/capeVine';
 import type { ResearchGrid } from './world-7/research';
 import { RoyalArmory } from './world-6/royalArmory/royalArmory';
 import { PlayerHealth } from './player-health';
@@ -1425,10 +1426,11 @@ export const updatePlayers = (data: Map<string, any>) => {
     obols.updateCombinedStats(players);
     const gallery = data.get("gallery") as Gallery;
     const hatRack = data.get("hatRack") as HatRack;
+    const capeVine = data.get("capeVine") as CapeVine;
     const research = data.get("research") as ResearchGrid;
     const finalSlotResearchPercent = research.getBonusForId(172);
     for (const player of players) {
-        player.gear.updateUniqueEffects(player, { gallery, hatRack, obols: obols.getStats(player.playerID) }, {
+        player.gear.updateUniqueEffects(player, { gallery, hatRack, capeVine, obols: obols.getStats(player.playerID) }, {
             pendantChip: player.getChipBonus("pend"),
             upperKeychainChip: player.getChipBonus("key1"),
             trophyChip: player.getChipBonus("troph"),

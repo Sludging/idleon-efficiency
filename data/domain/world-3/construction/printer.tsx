@@ -196,8 +196,7 @@ export const updatePrinter = (data: Map<string, any>) => {
     const legendTalentsBonus = (1 + legendTalentDaysSinceLastSample * legendTalents.getBonusFromIndex(17) / 100);
 
     printer.samples.flatMap(player => player).forEach(sample => {
-        // Do not uncomment this yet, in-game show it in the printer UI but doesn't use it in the calculation
-        sample.printingTotalBoost = artifactBonus * talent178Bonus * bonus3 * bonus4 * eventShopBonus * companionBonus * compassBonus /* * legendTalentsBonus*/;
+        sample.printingTotalBoost = artifactBonus * talent178Bonus * bonus3 * bonus4 * eventShopBonus * companionBonus * compassBonus * legendTalentsBonus;
     });
 
     printer.slotsUnlocked = 4 + (gemStore.purchases.find(purchase => purchase.no == 112)?.pucrhased ?? 0);

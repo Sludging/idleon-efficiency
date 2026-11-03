@@ -6,6 +6,7 @@ const rootDirectoryToGroup = {
   breeding: 'world-4',
   bribes: 'world-1',
   button: 'world-7',
+  'cape-vine': 'world-4',
   cards: 'account',
   companions: 'account',
   compass: 'master-classes',

@@ -22,6 +22,8 @@ import { Votes } from '../../../data/domain/world-2/votes';
 import { Gaming } from '../../../data/domain/world-5/gaming';
 import { Player } from '../../../data/domain/player';
 import type { Account } from '../../../data/domain/account';
+import { FauxoryTuskArtifact } from '../../../data/domain/world-5/sailing/artifacts';
+import { getTargetPlayer } from '../../utils/target-player';
 
 const saveName = 'latest';
 const extractionResultsName = 'sailing-artifact-chance-data.json';
@@ -35,7 +37,10 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   sailing_artifact_bonus_3: {
     description: 'Sailing ArtifactBonus index 3 used in the additive artifact-find bonus',
     extractionKey: 'sailing_artifact_bonus_3',
-    domainExtractor: (data) => (data.get('sailing') as Sailing).artifacts[3].getBonus(),
+    domainExtractor: (data) => {
+      const artifact = (data.get('sailing') as Sailing).artifacts[3] as FauxoryTuskArtifact;
+      return artifact.getBonus();
+    },
   },
   boat_0_captain_artifact_bonus: {
     description: 'Artifact-find captain trait assigned to boat 0',
@@ -157,9 +162,8 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   starsign_bonus_61: {
     description: 'Character Artifosho bonus used as a multiplier',
     extractionKey: 'starsign_bonus_61',
-    domainExtractor: (data) => (data.get('players') as Player[])
-      .find(player => player.playerID === 3)?.starSigns.find(sign => sign.name === 'Artifosho')
-      ?.getBonus('Artifact Find Chance') ?? 0,
+    domainExtractor: (data) => getTargetPlayer(data.get('players') as Player[]).starSigns
+      .find(sign => sign.name === 'Artifosho')?.getBonus('Artifact Find Chance') ?? 0,
   },
   companion_bonus_43: {
     description: 'Active Companion 43 multiplier input',

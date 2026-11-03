@@ -3,7 +3,8 @@ import { Traps, updateShinyCritterRewardMultiplier, updateTrapDisplayData } from
 import { Stamps, updateStampMaxCarry, updateStamps } from './world-1/stamps';
 import { Statues, updateStatueBonuses } from './world-1/statues';
 import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus, updatePlayerTalentPoints, Player, updatePlayerSpecialTalents } from './player';
-import { Alchemy, updateAlchemy, updateAlchemyDailyBubbleProgression, updateAlchemySlabBubbles, updateAlchemyTomeBubbles } from './world-2/alchemy/alchemy';
+import { Alchemy, updateAlchemy, updateAlchemyDailyBubbleProgression, updateAlchemySlabBubbles, updateAlchemyTomeBubbles, updateAlchemyBrewing } from './world-2/alchemy/alchemy';
+import { updateAlchemyLiquids } from './world-2/alchemy/liquidCauldron';
 import { updatePlayerTalentContexts } from './player';
 import { updateSpeedrunTalentPoints } from './player';
 import { updatePlayerTalentPresentation } from './talentSources';
@@ -32,7 +33,7 @@ import { ObolsData } from './world-2/obols';
 import { Family, calculateFamily } from './family';
 import { Dungeons } from './dungeons';
 import { Forge, updateForge } from './world-1/forge';
-import { Cooking, updateCooking } from './world-4/cooking';
+import { Cooking, updateCooking, updateCookingRibbons } from './world-4/cooking';
 import { Lab, updateLab } from './world-4/lab';
 import { Breeding, updateAllShinyEffects, updateBeastMasterImpact, updateBreeding, updateBreedingDisplayData, prepareBreedingCrucibleLevel, prepareBreedingShinyLevels } from './world-4/breeding';
 import { notUndefined } from '../utility';
@@ -98,6 +99,7 @@ import { Poppy, updatePoppyFishRate, updatePoppyFishPerCatch, updatePoppyGlobalB
 import { updateNonDepositedZenithClusters, ZenithMarket } from './world-7/zenithShop';
 import { Gallery, updateGallery } from './world-7/gallery';
 import { HatRack, updateHatRack } from './world-7/hatRack';
+import { CapeVine, updateCapeVine } from './world-4/capeVine';
 import { Skilling, updateAllEfficiencies, updateAllSkillExperienceMultiplier, updateSkillEfficiencies } from './skilling';
 import { updateAttributeTalents, updatePowerTalents, updateRightHandOfActionBonuses } from './talents';
 import { updatePlayerHealth } from './player-health';
@@ -202,6 +204,7 @@ const domainList: Domain[] = [
     new ZenithMarket("zenithMarket"),
     new Gallery("gallery"),
     new HatRack("hatRack"),
+    new CapeVine("capeVine"),
     new Skilling("skilling"),
     new Menagerie("menagerie"),
 ]
@@ -379,6 +382,8 @@ const postProcessingMap: Record<string, Function> = {
     "gallery": (doc: Cloudsave, accountData: Map<string, any>) => updateGallery(accountData),
     // Hat Rack consumes settled Minehead, companion, Event Shop and Sushi state.
     "hatRack": (doc: Cloudsave, accountData: Map<string, any>) => updateHatRack(accountData),
+    // Cape Vine reads prepared Hat Rack properties and companion bonuses before equipment replacement.
+    "capeVine": (_doc: Cloudsave, accountData: Map<string, any>) => updateCapeVine(accountData),
     // Sushi consumes settled Arcade, Gaming, Collider, Sailing, Research, Button, Jelly and Minehead state.
     "sushiStation": (doc: Cloudsave, accountData: Map<string, any>) => updateSushiStation(accountData),
     "updatePoppyFishPerCatch": (_doc: Cloudsave, accountData: Map<string, any>) => updatePoppyFishPerCatch(accountData),
@@ -433,6 +438,8 @@ const postProcessingMap: Record<string, Function> = {
     "spelunkingAccountMetrics": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingAccountMetrics(accountData),
     // Calculate Meritocracy and Star Sign bonuses before character-specific Construction rates.
     "meritocratyLate": (_doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyLate(accountData),
+    // Daily ribbons use the highest Ribbon Winning bonus across characters and the final Meritocracy bonus.
+    "cookingRibbons": (_doc: Cloudsave, accountData: Map<string, any>) => updateCookingRibbons(accountData),
     "starSignMeritocracyBonus": (_doc: Cloudsave, accountData: Map<string, any>) => updateStarSignMeritocracyBonus(accountData),
     "storageGreenstacks": (_doc: Cloudsave, accountData: Map<string, any>) => updateStorageGreenstacks(accountData),
     "alchemyDailyBubbleProgression": (_doc: Cloudsave, accountData: Map<string, any>) => updateAlchemyDailyBubbleProgression(accountData),
@@ -502,6 +509,11 @@ const postPostProcessingMap: Record<string, Function> = {
         updateSpeedrun(accountData);
         // This map stores updater returns, so retain the registered domain.
         return accountData.get("speedrun");
+    },
+    // Brewing needs final attributes, talent bonuses, Star Signs, and shared bonuses. Liquids need final capacity bonuses.
+    "alchemy": (_doc: Cloudsave, accountData: Map<string, any>) => {
+        updateAlchemyBrewing(accountData);
+        return updateAlchemyLiquids(accountData);
     },
 }
 

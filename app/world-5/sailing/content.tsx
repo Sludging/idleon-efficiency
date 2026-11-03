@@ -22,6 +22,7 @@ import { ArtifactStatus } from '../../../data/domain/world-5/sailing/artifacts';
 import { nFormatter, range } from '../../../data/utility';
 import styled from 'styled-components';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import useHydrated from '../../../lib/hooks/useHydrated';
 import { useShallow } from 'zustand/react/shallow';
 
 const BlankBox = styled.div`
@@ -524,6 +525,7 @@ function IslandDisplay() {
 }
 
 function Sailing() {
+    const hydrated = useHydrated();
     const [activeTab, setActiveTab] = useState<string>("Overview");
     const [silkRodeChip, setSilkrode] = useState(false);
     const [starSignEquipped, setStarSignEquipped] = useState(false);

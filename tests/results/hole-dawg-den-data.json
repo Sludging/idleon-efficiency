@@ -1,0 +1,66 @@
+{
+  "extractions": {
+    "best_score": {
+      "expression": "Number(idleon.getAttr('Holes')[11][8])",
+      "result": 568872384.8767966
+    },
+    "next_opal_score": {
+      "expression": "idleon.callFunction('Holes', 'HoundNextOpalScoreReq', 0, 0)",
+      "result": 729960773.0441762
+    },
+    "score_multiplier": {
+      "expression": "idleon.callFunction('Holes', 'AmpMulti', 0, 0)",
+      "result": 26.24
+    },
+    "opals_found": {
+      "expression": "Number(idleon.getAttr('Holes')[7][2])",
+      "result": 26
+    },
+    "modifiers": {
+      "expression": "Array.from({length:8},(_,index)=>({index,level:Number(idleon.getAttr('Holes')[12][index]),effect:idleon.callFunction('Holes','AmpDebuff',index,0)}))",
+      "result": [
+        {
+          "index": 0,
+          "level": 44,
+          "effect": 738357389.1102494
+        },
+        {
+          "index": 1,
+          "level": 100,
+          "effect": 100661005505218830
+        },
+        {
+          "index": 2,
+          "level": 20,
+          "effect": 100
+        },
+        {
+          "index": 3,
+          "level": 4,
+          "effect": 6.077531250000002
+        },
+        {
+          "index": 4,
+          "level": 4,
+          "effect": 6.553980050000002
+        },
+        {
+          "index": 5,
+          "level": 3,
+          "effect": 4
+        },
+        {
+          "index": 6,
+          "level": 3,
+          "effect": 12
+        },
+        {
+          "index": 7,
+          "level": 1,
+          "effect": 0.1
+        }
+      ]
+    }
+  },
+  "errors": {}
+}

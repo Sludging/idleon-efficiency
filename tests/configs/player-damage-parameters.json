@@ -1,5 +1,5 @@
 {
-  "description": "Compare maximum damage parameters for character index 3, retained in a genuine Town save.",
+  "description": "Compare maximum damage parameters for character index 3, retained in a genuine save.",
   "target": "Player maximum damage parameters",
   "requiredActivePlayerIndex": 3,
   "extractions": [

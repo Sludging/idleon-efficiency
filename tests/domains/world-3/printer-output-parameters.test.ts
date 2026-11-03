@@ -1,6 +1,6 @@
 import { Compass } from '../../../data/domain/compass';
 import { Lab } from '../../../data/domain/world-4/lab';
-import { Printer } from '../../../data/domain/world-3/construction/printer';
+import { Printer, Sample, updatePrinter, INDEX_DAYS_SINCE_SAMPLE_LEGENDTALENT } from '../../../data/domain/world-3/construction/printer';
 import { Rift, SkillMastery } from '../../../data/domain/world-4/rift';
 import { Sailing } from '../../../data/domain/world-5/sailing/sailing';
 import { Votes } from '../../../data/domain/world-2/votes';
@@ -89,5 +89,45 @@ describe('Printer output - mapped inputs', () => {
     const gameEffect = getExtractedValue(extractionResults, 'printer_companion_17_effect');
     const websiteEffect = getCompanionActiveBonus(gameData.get('companions') as Companion[], 17);
     expect(websiteEffect).toMatchLiveGame(gameEffect, 0);
+  });
+});
+
+describe('Printer output - Yet Another Printer Multi', () => {
+  it.each([
+    { name: 'keeps zero days neutral', days: 0, talentBonus: 10, voteBonus: 0, expectedBoost: 1, expectedOutput: 100 },
+    { name: 'keeps zero talent bonus neutral', days: 20, talentBonus: 0, voteBonus: 0, expectedBoost: 1, expectedOutput: 100 },
+    { name: 'applies the day and talent multiplier', days: 20, talentBonus: 10, voteBonus: 0, expectedBoost: 3, expectedOutput: 300 },
+    { name: 'composes multiplicatively with the vote bonus', days: 20, talentBonus: 10, voteBonus: 50, expectedBoost: 4.5, expectedOutput: 450 },
+  ])('$name', ({ days, talentBonus, voteBonus, expectedBoost, expectedOutput }) => {
+    const printer = new Printer('printer');
+    const sample = new Sample('OakTree', 100);
+    sample.printing = 1;
+    sample.printingQuantity = 100;
+    printer.samples = [[sample]];
+
+    const optLacc: number[] = [];
+    optLacc[INDEX_DAYS_SINCE_SAMPLE_LEGENDTALENT] = days;
+    const dependencies = new Map<string, unknown>([
+      ['printer', printer],
+      ['lab', { bonuses: [{ active: false }, { active: false }], playersInTubes: [] }],
+      ['divinity', { gods: Array.from({ length: 4 }, () => ({ linkedPlayers: [] })) }],
+      ['sailing', { artifacts: Array.from({ length: 5 }, () => ({ getTierIncrement: () => 0 })) }],
+      ['players', []],
+      ['gems', { purchases: [] }],
+      ['rift', { bonuses: [{ name: 'Skill Mastery', getTotalBonusByIndex: () => 0 }] }],
+      ['OptLacc', optLacc],
+      ['sneaking', { pristineCharms: [] }],
+      ['eventShop', { isBonusOwned: () => false }],
+      ['votes', { getCurrentBonus: (index: number) => index === 11 ? voteBonus : 0 }],
+      ['companions', []],
+      ['compass', { upgrades: [] }],
+      ['legendTalents', { getBonusFromIndex: (index: number) => index === 17 ? talentBonus : 0 }],
+    ]);
+
+    updatePrinter(dependencies);
+
+    expect(sample.printingTotalBoost).toBe(expectedBoost);
+    expect(sample.getSampleQuantity(false)).toBe(expectedOutput);
+    expect(printer.GetTotalActive('OakTree')).toBe(expectedOutput);
   });
 });

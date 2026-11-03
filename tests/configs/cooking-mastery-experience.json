@@ -6,6 +6,11 @@
       "label": "cooking_mastery_experience_rate",
       "expression": "idleon.callFunction(\"Summoning2\", \"ExpRateCook\", 0, 0)",
       "description": "Raw account Cooking Mastery EXP per hour. The native rate does not apply the Mastery unlock gate."
+    },
+    {
+      "label": "cooking_mastery_experience_breakdown",
+      "expression": "(()=>{const f=(name,...args)=>idleon.callFunction(name,...args);const a=name=>idleon.getAttr(name);const factors=[['salty',f('Summoning2','BonusAmountcook',0,99)],['spicy',f('Summoning2','BonusAmountcook',1,99)],['sweet',f('Summoning2','BonusAmountcook',2,99)],['menagerie',f('MenagerieStuff','BoostQTY',21,0)],['sour',f('Summoning2','BonusAmountcook',4,99)],['research',f('ResearchStuff','Grid_Bonus',190,0)],['superbit',40*f('GamingStatType','SuperBitType',68,0)],['savory',f('Summoning2','BonusAmountcook',5,99)],['companion',200*f('Companions',87)],['fountain',f('Holes2','Fountain_BonTOT',2,17)]].map(([source,percent])=>({source,percent,multiplier:1+percent/100,active:percent!==0,impact:1-1/(1+percent/100)}));const bonuses=[['vial',Number(a('DNSM').h.AlchVials.h['7cookmastery'])],['arcade',f('ArcadeBonus',69)],['saltLick',f('SaltLick',10)]];const additivePercent=bonuses[0][1]+(bonuses[1][1]+bonuses[2][1]);return{base:2,factors,additiveBonuses:bonuses.map(([source,percent])=>({source,percent,active:percent!==0,share:additivePercent===0?0:percent/additivePercent})),additivePercent,additiveMultiplier:1+additivePercent/100,total:f('Summoning2','ExpRateCook',0,0)};})()",
+      "description": "Read Mastery EXP multipliers in calculation order. Vial, Arcade, and Salt Lick bonuses form one additive group. Impact measures the relative EXP loss when one multiplier is removed. Each additive share divides its bonus percentage by the group's total percentage."
     }
   ]
 }

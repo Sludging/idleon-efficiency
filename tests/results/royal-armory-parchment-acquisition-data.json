@@ -6,11 +6,11 @@
     },
     "royal_castle_maximum_damage": {
       "expression": "idleon.callFunction(\"RoyalG\", \"RatDMG\", 0, 0)",
-      "result": 405
+      "result": 460
     },
     "castle_base_damage_bonus": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 35, 0)",
-      "result": 395
+      "result": 450
     },
     "castle_damage_percent_bonus": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 36, 0)",

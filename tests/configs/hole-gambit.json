@@ -1,0 +1,71 @@
+{
+  "description": "Capture Gambit progress and all nineteen native reward states on the regular save. Native reward values include activation flags; static record names retain composite reward amounts.",
+  "target": "Gambit account progress and rewards",
+  "extractions": [
+    {
+      "label": "run_times",
+      "expression": "idleon.engine.getGameAttribute('Holes')[11].slice(65,71).map(Number)",
+      "description": "Six best run times in seconds, including saved fractional seconds."
+    },
+    {
+      "label": "total_time",
+      "expression": "idleon.engine.getGameAttribute('Holes')[11].slice(65,71).reduce((total,value)=>total+Number(value),0)",
+      "description": "Total Gambit time from all six saved run times, in seconds."
+    },
+    {
+      "label": "base_points",
+      "expression": "idleon.callFunction('Holes','GambitPts',99,0)",
+      "description": "Native sum of challenge scores before the account multiplier."
+    },
+    {
+      "label": "final_points",
+      "expression": "idleon.callFunction('Holes','GambitPts',777,0)",
+      "description": "Final native Gambit points after the account multiplier."
+    },
+    {
+      "label": "points_multiplier",
+      "expression": "idleon.callFunction('Holes','GambitPTSmulti',0,0)",
+      "description": "Native Gambit points multiplier."
+    },
+    {
+      "label": "doublers_total",
+      "expression": "idleon.callFunction('Holes','GambitBonuses',0,0)+10*idleon.callFunction('Summoning','EventShopOwned',15,0)",
+      "description": "Total Summoning Doubler capacity from Gambit and the Summoning Star."
+    },
+    {
+      "label": "doublers_available",
+      "expression": "idleon.callFunction('Holes','Gambit_SummoningDoublersLeft',0,0)",
+      "description": "Native available Summoning Doublers. This getter only changes a transient scratch counter."
+    },
+    {
+      "label": "reward_thresholds",
+      "expression": "Array.from({length:19},(_,index)=>idleon.callFunction('Holes','GambitPtsREQ',index,0))",
+      "description": "All unrounded reward score requirements."
+    },
+    {
+      "label": "reward_effects",
+      "expression": "Array.from({length:19},(_,index)=>idleon.callFunction('Holes','GambitBonuses',index,0))",
+      "description": "Every native active reward value. Rewards 9, 10, 12, 13 and future placeholders return flags, not complete composite magnitudes."
+    },
+    {
+      "label": "reward_unlocked",
+      "expression": "Array.from({length:19},(_,index)=>idleon.callFunction('Holes','GambitPts',777,0)>=idleon.callFunction('Holes','GambitPtsREQ',index,0))",
+      "description": "All reward score-unlock states. Native effect getters also suppress effects in Tutorial scenes."
+    },
+    {
+      "label": "reward_multipliers",
+      "expression": "Object.fromEntries([5,7,8,11].map(index=>[index,1+idleon.callFunction('Holes','GambitBonuses',index,0)/100]))",
+      "description": "Essence, coin, clicker and Ninja Stealth effect multipliers, calculated as 1 plus the native percentage bonus divided by 100. Do not apply the native description's display-only floor."
+    },
+    {
+      "label": "next_opal_score",
+      "expression": "Math.ceil(Math.exp(2.30259 * (1 + Number(idleon.engine.getGameAttribute('Holes')[7][13]))))",
+      "description": "Next whole-point target for an unclaimed Gambit Opal. This applies the source award rule and the game's rounded logarithm constant to the saved found count."
+    },
+    {
+      "label": "opals_found",
+      "expression": "Number(idleon.engine.getGameAttribute('Holes')[7][13])",
+      "description": "Saved Gambit cavern Opals credited to the account ledger."
+    }
+  ]
+}

@@ -5,7 +5,7 @@
       "result": {
         "playerId": 3,
         "playerName": "Sludgev4",
-        "version": 398.1
+        "version": 399.1
       }
     },
     "camp_upgrade_100_25": {
@@ -146,9 +146,9 @@
     "currency_values": {
       "expression": "Array.from({ length: 9 }, (_, currencyId) => idleon.callFunction('Holes2', 'Fount_CurrencyTotValue', currencyId, 0))",
       "result": [
-        18183655079686.68,
-        67096724329363.67,
-        18142553840268.62,
+        18273751641098.254,
+        67429176150443.44,
+        18232446794525.61,
         37055479353547.516,
         35076856008178.16,
         32222502605754.312,
@@ -853,9 +853,9 @@
         1,
         1,
         1,
-        0,
-        0,
-        0,
+        1,
+        1,
+        1,
         0,
         0,
         0,

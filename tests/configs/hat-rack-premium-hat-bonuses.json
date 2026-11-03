@@ -4,17 +4,17 @@
   "extractions": [
     {
       "label": "hat_rack_drop_rate",
-      "expression": "idleon.getDNSM(\"PremHatBonTOT\").h[\"%_DROP_RATE\"]",
+      "expression": "(() => { const map = idleon.getDNSM(\"PremHatBonTOT\").h; return Object.prototype.hasOwnProperty.call(map, \"%_DROP_RATE\") ? map[\"%_DROP_RATE\"] : 0; })()",
       "description": "Hat Rack Drop Rate contribution from PremHatBonTOT[%_DROP_RATE]"
     },
     {
       "label": "hat_rack_weapon_power",
-      "expression": "idleon.getDNSM(\"PremHatBonTOT\").h.Weapon_Power",
+      "expression": "(() => { const map = idleon.getDNSM(\"PremHatBonTOT\").h; return Object.prototype.hasOwnProperty.call(map, \"Weapon_Power\") ? map[\"Weapon_Power\"] : 0; })()",
       "description": "Hat Rack Weapon Power contribution from PremHatBonTOT[Weapon_Power]"
     },
     {
       "label": "hat_rack_strength",
-      "expression": "idleon.getDNSM(\"PremHatBonTOT\").h.STR",
+      "expression": "(() => { const map = idleon.getDNSM(\"PremHatBonTOT\").h; return Object.prototype.hasOwnProperty.call(map, \"STR\") ? map[\"STR\"] : 0; })()",
       "description": "Hat Rack STR contribution from PremHatBonTOT[STR]"
     },
     {

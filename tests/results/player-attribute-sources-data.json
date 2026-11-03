@@ -2,23 +2,23 @@
   "extractions": {
     "bubble_TotalSTR": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.TotalSTR",
-      "result": 414915.53000604344
+      "result": 437656.884310695
     },
     "bubble_TotalAGI": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.TotalAGI",
-      "result": 421698.75801817985
+      "result": 444372.6423166581
     },
     "bubble_TotalWIS": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.TotalWIS",
-      "result": 424361.76832866156
+      "result": 447039.679695612
     },
     "bubble_TotalLUK": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.TotalLUK",
-      "result": 52293.41458294903
+      "result": 53329.184816428125
     },
     "bubble_W4": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.W4",
-      "result": 3485.241916839528
+      "result": 3610.2693627021617
     },
     "bubble_A4": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.A4",
@@ -30,27 +30,27 @@
     },
     "talent_10": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 10)",
-      "result": 1731
+      "result": 1734
     },
     "talent_11": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 11)",
-      "result": 688
+      "result": 689
     },
     "talent_12": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 12)",
-      "result": 602
+      "result": 603
     },
     "talent_13": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 13)",
-      "result": 294
+      "result": 295
     },
     "talent_98": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 98)",
-      "result": 413
+      "result": 414
     },
     "talent_203": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 203)",
-      "result": 975
+      "result": 980
     },
     "talent_278": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 278)",
@@ -82,7 +82,7 @@
     },
     "talent_143": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 143)",
-      "result": 12.528830313014828
+      "result": 12.532894736842104
     },
     "talent_368": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 368)",
@@ -98,7 +98,7 @@
     },
     "talent_142_second": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 2, 142)",
-      "result": 254
+      "result": 255
     },
     "talent_367_second": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 2, 367)",
@@ -122,7 +122,7 @@
     },
     "stamp_BaseLUK": {
       "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseLUK\")",
-      "result": 2090
+      "result": 2120
     },
     "stamp_BaseAllStat": {
       "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseAllStat\")",
@@ -133,35 +133,35 @@
       "result": 8.035714285714286
     },
     "sign_STR": {
-      "expression": "idleon.getDNSM(\"StarSigns\").h.STR",
+      "expression": "(() => { const map = idleon.getDNSM(\"StarSigns\").h; return Object.prototype.hasOwnProperty.call(map, \"STR\") ? map[\"STR\"] : 0; })()",
       "result": 650
     },
     "sign_pctSTR": {
-      "expression": "idleon.getDNSM(\"StarSigns\").h.pctSTR",
+      "expression": "(() => { const map = idleon.getDNSM(\"StarSigns\").h; return Object.prototype.hasOwnProperty.call(map, \"pctSTR\") ? map[\"pctSTR\"] : 0; })()",
       "result": 40
     },
     "sign_AGI": {
-      "expression": "idleon.getDNSM(\"StarSigns\").h.AGI",
+      "expression": "(() => { const map = idleon.getDNSM(\"StarSigns\").h; return Object.prototype.hasOwnProperty.call(map, \"AGI\") ? map[\"AGI\"] : 0; })()",
       "result": 650
     },
     "sign_pctAGI": {
-      "expression": "idleon.getDNSM(\"StarSigns\").h.pctAGI",
+      "expression": "(() => { const map = idleon.getDNSM(\"StarSigns\").h; return Object.prototype.hasOwnProperty.call(map, \"pctAGI\") ? map[\"pctAGI\"] : 0; })()",
       "result": 40
     },
     "sign_WIS": {
-      "expression": "idleon.getDNSM(\"StarSigns\").h.WIS",
+      "expression": "(() => { const map = idleon.getDNSM(\"StarSigns\").h; return Object.prototype.hasOwnProperty.call(map, \"WIS\") ? map[\"WIS\"] : 0; })()",
       "result": 650
     },
     "sign_pctWIS": {
-      "expression": "idleon.getDNSM(\"StarSigns\").h.pctWIS",
+      "expression": "(() => { const map = idleon.getDNSM(\"StarSigns\").h; return Object.prototype.hasOwnProperty.call(map, \"pctWIS\") ? map[\"pctWIS\"] : 0; })()",
       "result": 40
     },
     "sign_LUK": {
-      "expression": "idleon.getDNSM(\"StarSigns\").h.LUK",
+      "expression": "(() => { const map = idleon.getDNSM(\"StarSigns\").h; return Object.prototype.hasOwnProperty.call(map, \"LUK\") ? map[\"LUK\"] : 0; })()",
       "result": 650
     },
     "sign_pctLUK": {
-      "expression": "idleon.getDNSM(\"StarSigns\").h.pctLUK",
+      "expression": "(() => { const map = idleon.getDNSM(\"StarSigns\").h; return Object.prototype.hasOwnProperty.call(map, \"pctLUK\") ? map[\"pctLUK\"] : 0; })()",
       "result": 40
     },
     "post_office_23b": {
@@ -278,7 +278,7 @@
     },
     "buff_94": {
       "expression": "idleon.callFunction(\"GetBuffBonuses\", 94, 1)",
-      "result": 454
+      "result": 0
     },
     "quest_count": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"TotalQuestsComplete\")",
@@ -342,7 +342,7 @@
     },
     "farming_all_stat": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"LankRankUpgBonus\", 19, 0)",
-      "result": 623.059909470134
+      "result": 623.5252354915087
     },
     "votes_all_stat": {
       "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 2, 0)",

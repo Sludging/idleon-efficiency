@@ -1,0 +1,22 @@
+{
+  "description": "Native cauldron brew requirements, acting-player new-bubble chances, and boost requirements. Stored progress uses the retained save rather than runtime balances.",
+  "target": "Alchemy cauldron brewing public results",
+  "requiredActivePlayerIndex": 3,
+  "extractions": [
+    {
+      "label": "brew_requirements",
+      "expression": "[0,1,2,3].map(i=>idleon.callFunction(\"CauldronStats\",\"MaxCauldronQTY\",i,0,0))",
+      "description": "Native brew points required per attempt for Power, Quicc, High-IQ, and Kazam cauldrons."
+    },
+    {
+      "label": "actor_new_bubble_chances",
+      "expression": "[0,1,2,3].map(i=>idleon.callFunction(\"CauldronStats\",\"PctChanceNewBubble\",i,0,0))",
+      "description": "Unclamped native percent chance for the explicit acting player. This is not the best-account Bubble Breakthrough preview."
+    },
+    {
+      "label": "boost_requirements",
+      "expression": "[0,1,2,3].map(i=>[0,1,2,3].map(j=>idleon.callFunction(\"CauldronStats\",\"CauldronLvsBrewREQ\",i,j,0)))",
+      "description": "Brew points required for Speed, Luck, Cost, and Extra boosts in each brewing cauldron. The game still returns a numeric requirement for maxed boosts."
+    }
+  ]
+}

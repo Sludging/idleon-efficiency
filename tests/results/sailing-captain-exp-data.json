@@ -106,71 +106,71 @@
       "result": [
         {
           "index": 0,
-          "expPerTrip": 19072.384000000002
+          "expPerTrip": 24146.227171492203
         },
         {
           "index": 1,
-          "expPerTrip": 57217.152
+          "expPerTrip": 72438.6815144766
         },
         {
           "index": 2,
-          "expPerTrip": 95361.92000000001
+          "expPerTrip": 120731.13585746102
         },
         {
           "index": 3,
-          "expPerTrip": 190723.84000000003
+          "expPerTrip": 241462.27171492204
         },
         {
           "index": 4,
-          "expPerTrip": 286085.76
+          "expPerTrip": 362193.40757238306
         },
         {
           "index": 5,
-          "expPerTrip": 524490.56
+          "expPerTrip": 664021.2472160356
         },
         {
           "index": 6,
-          "expPerTrip": 810576.3200000001
+          "expPerTrip": 1026214.6547884186
         },
         {
           "index": 7,
-          "expPerTrip": 1430428.8
+          "expPerTrip": 1810967.0378619153
         },
         {
           "index": 8,
-          "expPerTrip": 2860857.6
+          "expPerTrip": 3621934.0757238306
         },
         {
           "index": 9,
-          "expPerTrip": 5721715.2
+          "expPerTrip": 7243868.151447661
         },
         {
           "index": 10,
-          "expPerTrip": 8582572.8
+          "expPerTrip": 10865802.227171492
         },
         {
           "index": 11,
-          "expPerTrip": 14304288.000000002
+          "expPerTrip": 18109670.378619153
         },
         {
           "index": 12,
-          "expPerTrip": 28608576.000000004
+          "expPerTrip": 36219340.757238306
         },
         {
           "index": 13,
-          "expPerTrip": 47680960.00000001
+          "expPerTrip": 60365567.92873051
         },
         {
           "index": 14,
-          "expPerTrip": 95361920.00000001
+          "expPerTrip": 120731135.85746102
         },
         {
           "index": 15,
-          "expPerTrip": 953619200.0000001
+          "expPerTrip": 1207311358.5746102
         },
         {
           "index": 16,
-          "expPerTrip": 2384048000
+          "expPerTrip": 3018278396.4365253
         }
       ]
     }

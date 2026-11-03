@@ -14,7 +14,7 @@
     },
     "construction_mastery_bonus": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ConstMasteryBonus\", 2, 0)",
-      "result": 1595
+      "result": 1600
     },
     "vial_equinox_fish_bonus": {
       "expression": "idleon.getDNSM(\"AlchVials\").h.Contspd",

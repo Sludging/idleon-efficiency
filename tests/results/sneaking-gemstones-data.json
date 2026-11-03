@@ -2,7 +2,7 @@
   "extractions": {
     "gemstone_0_bonus": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",0,0)",
-      "result": 95230.02336743708
+      "result": 95327.61511099871
     },
     "gemstone_0_quantity": {
       "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[233])",
@@ -10,7 +10,7 @@
     },
     "gemstone_1_bonus": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",1,0)",
-      "result": 45713.98857612909
+      "result": 45760.836279117546
     },
     "gemstone_1_quantity": {
       "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[234])",
@@ -18,7 +18,7 @@
     },
     "gemstone_2_bonus": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",2,0)",
-      "result": 21903.148617795567
+      "result": 21925.5949680905
     },
     "gemstone_2_quantity": {
       "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[235])",
@@ -26,7 +26,7 @@
     },
     "gemstone_3_bonus": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",3,0)",
-      "result": 1947.4838726281153
+      "result": 1949.4796544201097
     },
     "gemstone_3_quantity": {
       "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[236])",
@@ -34,7 +34,7 @@
     },
     "gemstone_4_bonus": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",4,0)",
-      "result": 9688.082663375219
+      "result": 9698.011012077182
     },
     "gemstone_4_quantity": {
       "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[237])",
@@ -50,7 +50,7 @@
     },
     "gemstone_6_bonus": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",6,0)",
-      "result": 23840.20768692495
+      "result": 23864.639135671543
     },
     "gemstone_6_quantity": {
       "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[239])",
@@ -58,7 +58,7 @@
     },
     "gemstone_7_bonus": {
       "expression": "idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",7,0)",
-      "result": 298.7058231566114
+      "result": 299.01193693316054
     },
     "gemstone_7_quantity": {
       "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[240])",
@@ -66,7 +66,7 @@
     },
     "emerald_discount_percent": {
       "expression": "100*(1-1/(1+idleon.allScripts.ActorEvents_579._customBlock_Ninja(\"GemstoneBonus\",6,0)/100))",
-      "result": 99.58229267971383
+      "result": 99.58271852359692
     }
   },
   "errors": {}

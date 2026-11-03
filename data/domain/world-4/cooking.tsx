@@ -1,7 +1,7 @@
 import { commaNotation, lavaLog, round } from "../../utility"
 import { Achievement } from "../achievements";
 import { Account } from "../account";
-import { Companion, getCompanionActiveBonus } from "../companions";
+import { Companion, getCompanionActiveBonus, isCompanionLevelTwo } from "../companions";
 import { Alchemy } from "../world-2/alchemy/alchemy";
 import { AtomCollider } from "../world-3/construction/atomCollider";
 import { Breeding, territoryNiceNames } from "./breeding";
@@ -44,6 +44,18 @@ import type { SaltLick } from "../world-3/construction/saltLick";
 import type { Spelunking } from "../world-7/spelunking";
 import type { Grimoire } from "../grimoire";
 import type { Clamworks } from "../world-7/clamworks";
+import { initCookingMetadataRepo } from "../data/CookingMetadataRepo";
+import type { RoyalArmory } from "../world-6/royalArmory/royalArmory";
+import type { Meritocraty } from "../world-7/meritocraty";
+import type { LegendTalents } from "../world-7/legendTalents";
+import type { SushiStation } from "../world-7/sushi";
+import { Talent } from "../talents";
+
+const cookingMetadata = initCookingMetadataRepo()[0].data;
+const masteryUpgradeImages: readonly string[] = [
+    "CookingMasterySalty", "CookingMasterySpicy", "CookingMasterySweet",
+    "CookingMasterySmoky", "CookingMasterySour", "CookingMasterySavory",
+];
 
 const spiceValues: number[] = "0 3 5 8 10 13 15 19 20 23 27 31 33 37 41 45 48 50 53 56 58 60 63 66 70 73".split(" ").map(value => parseInt(value));
 const mealLuckValues: number[] = "1 .20 .10 .05 .02 .01 .004 .001 .0005 .0003".split(" ").map(value => parseFloat(value));
@@ -129,12 +141,23 @@ export class Meal {
         this.bonusKey = data.bonusKey;
     }
 
+    parse(mealsData: number[][], ribbonData: number[], masteryData: number[][]): void {
+        this.level = Number(mealsData?.[0]?.[this.mealIndex] ?? 0);
+        this.count = Number(mealsData?.[2]?.[this.mealIndex] ?? 0);
+        this.ribbonLevel = Number(ribbonData?.[28 + this.mealIndex] ?? 0);
+        this.cookMasterLevel = Number(masteryData?.[0]?.[this.mealIndex] ?? 0);
+    }
+
     getImageData = (): ImageData => {
         return {
             location: `CookingM${this.mealIndex}`,
             width: 41,
             height: 32
         }
+    }
+
+    getMasteryImageData(): ImageData {
+        return { location: "CookingMasteryMealNode", width: 31, height: 32 };
     }
 
     getRibbonBonus = (ribbonLevel: number = this.ribbonLevel) => {
@@ -170,9 +193,15 @@ export class Meal {
     }
 
     getMealLevelCost = (level: number = this.level) => {
+        const tier = Math.floor((level + 1000) / 1111);
         const reductionMultipier = this.reducedCostToUpgrade ? 1 / 1.1 : 1;
-        const baseMath = reductionMultipier * (10 + (level + Math.pow(level, 2)));
-        return (baseMath * Math.pow(1.2 + 0.05 * level, level)) * this.foodLustDiscount;
+        return Math.max(0.001, 1 / Math.max(1, 5 * this.companion162Bonus)) *
+            Math.pow(10, 22 * tier) *
+            reductionMultipier *
+            this.foodLustDiscount *
+            (10 + (level + Math.pow(level, 2))) *
+            Math.pow(1.2 + 0.05 * level, level) *
+            Math.pow(1 + 0.4 * tier, level);
     }
 
     getCostsTillDiamond = () => {
@@ -448,13 +477,51 @@ export class Kitchen {
     }
 }
 
+export interface CookingMasteryContext {
+    readonly totalLadles: number;
+    readonly totalCookingLevels: number;
+    readonly divorceCakeLevel: number;
+    readonly totalRibbonRanks: number;
+    readonly nativeRank: number;
+}
+
 export class CookingMasteryUpgrade {
     level: number = 0;
+    unlocked: boolean = false;
+    context: CookingMasteryContext = {
+        totalLadles: 0, totalCookingLevels: 0, divorceCakeLevel: 0, totalRibbonRanks: 0, nativeRank: 1,
+    };
 
     constructor(public index: number, public data: CookingMasteryUpgradeModel) { }
 
+    getImageData(): ImageData {
+        return { location: masteryUpgradeImages[this.index], width: 33, height: 35 };
+    }
+
+    parse(upgradeLevels: readonly number[]): void {
+        this.level = Number(upgradeLevels[this.index] ?? 0);
+    }
+
+    update(context: CookingMasteryContext, masteryLevel: number): void {
+        this.context = context;
+        this.unlocked = masteryLevel >= this.data.requiredMasteryLevel;
+    }
+
     getBonus(): number {
         return this.level * this.data.bonusPerLevel;
+    }
+
+    getContextualBonus(): number {
+        const bonus = this.getBonus();
+        switch (this.index) {
+            case 0: return lavaLog(this.context.totalLadles) * bonus;
+            case 1: return Math.max(0, this.context.totalCookingLevels - 1000) * bonus;
+            case 2: return Math.max(0, this.context.divorceCakeLevel - 75) * bonus;
+            case 3: return bonus / (25 + bonus) * 250;
+            case 4: return this.context.totalRibbonRanks * bonus;
+            case 5: return this.context.nativeRank * bonus;
+            default: return 0;
+        }
     }
 
     static fromBase(data: CookingMasteryUpgradeBase[]): CookingMasteryUpgrade[] {
@@ -465,6 +532,12 @@ export class CookingMasteryUpgrade {
 interface CookingMasteryInputs {
     totalCookingLevels: number;
     divorceCakeLevel: number;
+    totalRibbonRanks: number;
+    unlocked: boolean;
+    eventShopPointsOwned: boolean;
+    purpleJellyBonus: number;
+    yellowJellyBonus: number;
+    yellowResearchBonus: number;
     menagerieBonus: number;
     researchBonus: number;
     superbitPurchased: boolean;
@@ -475,53 +548,490 @@ interface CookingMasteryInputs {
     saltLickBonus: number;
 }
 
+export interface CookingMasteryPointPool {
+    readonly total: number;
+    readonly spent: number;
+    readonly available: number;
+}
+
+export interface CookingMasteryExperienceBreakdown {
+    readonly base: number;
+    readonly factors: readonly {
+        source: 'salty' | 'spicy' | 'sweet' | 'menagerie' | 'sour' | 'research' | 'superbit' | 'savory' | 'companion' | 'fountain';
+        percent: number;
+        multiplier: number;
+        active: boolean;
+        /** Relative loss when this factor alone is removed. */
+        impact: number;
+    }[];
+    readonly additiveBonuses: readonly {
+        source: 'vial' | 'arcade' | 'saltLick';
+        percent: number;
+        active: boolean;
+        /** Fraction of the additive percentage group, excluding its base multiplier. */
+        share: number;
+    }[];
+    readonly additivePercent: number;
+    readonly additiveMultiplier: number;
+    readonly total: number;
+}
+
 export class CookingMastery {
     readonly upgrades: CookingMasteryUpgrade[];
     rank: number = 0;
+    experience: number = 0;
     totalLadles: number = 0;
-    ribbonRanks: number[] = [];
-    private experienceRate: number = 2;
+    unlocked: boolean = false;
+    unlockTier: number = 0;
+    purplePoints: CookingMasteryPointPool = { total: 0, spent: 0, available: 0 };
+    yellowPoints: CookingMasteryPointPool = { total: 0, spent: 0, available: 0 };
+    experienceBreakdown: CookingMasteryExperienceBreakdown = {
+        base: 2, factors: [], additiveBonuses: [], additivePercent: 0, additiveMultiplier: 1, total: 2,
+    };
+    private purpleAllocations: number[] = [];
+    private yellowAllocations: number[] = [];
 
     constructor() {
         this.upgrades = CookingMasteryUpgrade.fromBase(initCookingMasteryRepo());
     }
 
-    parse(masteryData: number[][], ribbonData: number[]): void {
-        this.rank = masteryData?.[1]?.[0] ?? 0;
-        this.totalLadles = masteryData?.[1]?.[3] ?? 0;
-        this.ribbonRanks = ribbonData.slice(28);
-        this.upgrades.forEach(upgrade => {
-            upgrade.level = masteryData?.[2]?.[upgrade.index] ?? 0;
-        });
+    getImageData(): ImageData {
+        return { location: "CookingMastery", width: 44, height: 34 };
     }
 
-    updateExperienceRate(inputs: CookingMasteryInputs): void {
-        const ladleBonus = lavaLog(this.totalLadles) * this.upgrades[0].getBonus();
-        const cookingLevelBonus = Math.max(0, inputs.totalCookingLevels - 1000) * this.upgrades[1].getBonus();
-        const divorceCakeBonus = Math.max(0, inputs.divorceCakeLevel - 75) * this.upgrades[2].getBonus();
-        const totalRibbonRanks = this.ribbonRanks.reduce((total, rank) => total + rank, 0);
-        const ribbonRankBonus = totalRibbonRanks * this.upgrades[4].getBonus();
-        const masteryRankBonus = (this.rank + 1) * this.upgrades[5].getBonus();
+    getPointImageData(kind: 'purple' | 'yellow'): ImageData {
+        return {
+            location: kind === 'purple' ? "CookingMasteryPurplePoints" : "CookingMasteryYellowPoints",
+            width: 33,
+            height: 18,
+        };
+    }
 
-        // SMOKY increases daily ribbon gains, not Mastery EXP.
-        // Keep the account EXP factors in the game's multiplication order.
-        this.experienceRate = 2
-            * (1 + ladleBonus / 100)
-            * (1 + cookingLevelBonus / 100)
-            * (1 + divorceCakeBonus / 100)
-            * (1 + inputs.menagerieBonus / 100)
-            * (1 + ribbonRankBonus / 100)
-            * (1 + inputs.researchBonus / 100)
-            * (1 + 40 * Number(inputs.superbitPurchased) / 100)
-            * (1 + masteryRankBonus / 100)
-            * (1 + 2 * inputs.companionBonus)
-            * (1 + inputs.fountainBonus / 100)
-            * (1 + (inputs.vialBonus + (inputs.arcadeBonus + inputs.saltLickBonus)) / 100);
+    parse(masteryData: number[][]): void {
+        this.rank = Number(masteryData?.[1]?.[0] ?? 0);
+        this.experience = Number(masteryData?.[1]?.[1] ?? 0);
+        this.totalLadles = Number(masteryData?.[1]?.[3] ?? 0);
+        this.purpleAllocations = (masteryData?.[2] ?? []).map(Number);
+        this.yellowAllocations = (masteryData?.[0] ?? []).map(Number);
+        this.upgrades.forEach(upgrade => upgrade.parse(this.purpleAllocations));
+    }
+
+    getLevel(): number {
+        return this.rank;
+    }
+
+    getNativeRank(): number {
+        return this.rank + 1;
+    }
+
+    getExperienceRequired(): number {
+        return 100 * Math.pow(2.5, this.rank) * Math.pow(5, Math.max(0, this.rank - 40));
+    }
+
+    getTimeToNextLevelSeconds(): number | null {
+        const rate = this.getExperienceRate();
+        if (!this.unlocked || rate <= 0) return null;
+        return Math.max(0, this.getExperienceRequired() - this.experience) / rate * 3600;
+    }
+
+    update(inputs: CookingMasteryInputs): void {
+        this.unlocked = inputs.unlocked;
+        this.unlockTier = cookingMetadata.masteryRankRequirements.reduce(
+            (tier, requirement, index) => this.rank >= requirement ? index : tier, 0,
+        );
+        const context: CookingMasteryContext = {
+            totalLadles: this.totalLadles,
+            totalCookingLevels: inputs.totalCookingLevels,
+            divorceCakeLevel: inputs.divorceCakeLevel,
+            totalRibbonRanks: inputs.totalRibbonRanks,
+            nativeRank: this.getNativeRank(),
+        };
+        this.upgrades.forEach(upgrade => upgrade.update(context, this.rank));
+
+        // All saved allocations count, including meal slots beyond the displayed catalogue.
+        const purpleSpent = this.purpleAllocations.reduce((total, amount) => Math.round(total + amount), 0);
+        const yellowSpent = this.yellowAllocations.reduce((total, amount) => Math.round(total + amount), 0);
+        const purpleTotal = Math.round(this.rank + (1 + 5 * Number(inputs.eventShopPointsOwned)
+            + (5 * inputs.companionBonus + inputs.purpleJellyBonus)));
+        const yellowTotal = Math.round(this.rank + (1 + 5 * Number(inputs.eventShopPointsOwned)
+            + (5 * inputs.companionBonus + inputs.yellowJellyBonus))) + inputs.yellowResearchBonus;
+        this.purplePoints = { total: purpleTotal, spent: purpleSpent, available: Math.max(0, purpleTotal - purpleSpent) };
+        this.yellowPoints = { total: yellowTotal, spent: yellowSpent, available: Math.max(0, yellowTotal - yellowSpent) };
+
+        const factorInputs: Pick<CookingMasteryExperienceBreakdown['factors'][number], 'source' | 'percent'>[] = [
+            { source: 'salty', percent: this.upgrades[0].getContextualBonus() },
+            { source: 'spicy', percent: this.upgrades[1].getContextualBonus() },
+            { source: 'sweet', percent: this.upgrades[2].getContextualBonus() },
+            { source: 'menagerie', percent: inputs.menagerieBonus },
+            { source: 'sour', percent: this.upgrades[4].getContextualBonus() },
+            { source: 'research', percent: inputs.researchBonus },
+            { source: 'superbit', percent: 40 * Number(inputs.superbitPurchased) },
+            { source: 'savory', percent: this.upgrades[5].getContextualBonus() },
+            { source: 'companion', percent: 200 * inputs.companionBonus },
+            { source: 'fountain', percent: inputs.fountainBonus },
+        ];
+        const factors = factorInputs.map(({ source, percent }) => {
+            const multiplier = 1 + percent / 100;
+            return { source, percent, multiplier, active: percent !== 0, impact: 1 - 1 / multiplier };
+        });
+        // Vial, Arcade, and Salt Lick percentages add together after the separate EXP multipliers.
+        const additivePercent = inputs.vialBonus + (inputs.arcadeBonus + inputs.saltLickBonus);
+        const additiveInputs: Pick<CookingMasteryExperienceBreakdown['additiveBonuses'][number], 'source' | 'percent'>[] = [
+            { source: 'vial', percent: inputs.vialBonus },
+            { source: 'arcade', percent: inputs.arcadeBonus },
+            { source: 'saltLick', percent: inputs.saltLickBonus },
+        ];
+        const additiveBonuses = additiveInputs.map(({ source, percent }) => ({
+            source, percent, active: percent !== 0, share: additivePercent === 0 ? 0 : percent / additivePercent,
+        }));
+        const additiveMultiplier = 1 + additivePercent / 100;
+        const total = factors.reduce((rate, factor) => rate * factor.multiplier, 2) * additiveMultiplier;
+        this.experienceBreakdown = { base: 2, factors, additiveBonuses, additivePercent, additiveMultiplier, total };
     }
 
     getExperienceRate(): number {
         // Availability is separate from the native raw EXP rate.
-        return this.experienceRate;
+        return this.experienceBreakdown.total;
+    }
+}
+
+export interface RibbonShelfSlot {
+    readonly index: number;
+    readonly rank: number | null;
+}
+
+export interface RibbonRankSummary {
+    readonly rank: number;
+    readonly mealCount: number;
+    readonly multiplier: number;
+}
+
+export interface RibbonRankProbability {
+    readonly rank: number;
+    readonly probability: number;
+}
+
+export interface CookingDailyCountBreakdown {
+    readonly sources: readonly {
+        source: 'base' | 'dailyRoll' | 'legendTalent' | 'eventShop' | 'deathBringerBundle' | 'boaringBundle' | 'ribbonWinningTalent' | 'palette';
+        group: 'base' | 'additional';
+        amount: number;
+        active: boolean;
+        /** Fraction of this source's additive group before its multiplier. */
+        share: number;
+    }[];
+    readonly baseTotal: number;
+    readonly additionalTotal: number;
+    readonly additiveTotal: number;
+    readonly meritocracyMultiplier: number;
+    /** Relative loss in the base group when Meritocracy alone is removed. */
+    readonly meritocracyImpact: number;
+    readonly expectedRawCount: number;
+    readonly roundingAdjustment: number;
+    readonly total: number;
+}
+
+export interface CookingDailyRibbonQuantity {
+    readonly dailyCount: number;
+    readonly minimumDailyCount: number;
+    readonly maximumDailyCount: number;
+    readonly dailyCountBreakdown: CookingDailyCountBreakdown;
+}
+
+export interface CookingDailyRankBreakdown {
+    readonly sources: readonly {
+        source: 'base' | 'grimoire' | 'sushi' | 'anniversaryBundle' | 'smoky' | 'armoryEventShop' | 'companion';
+        amount: number;
+        active: boolean;
+        /** Fraction of expected rank before overflow replacement. */
+        share: number;
+    }[];
+    readonly beforeOverflow: number;
+    readonly overflowAdjustment: number;
+    readonly total: number;
+}
+
+interface CookingRibbonInputs {
+    grimoireShelfBonus: number;
+    grimoireRankBonus: number;
+    deathBringerBundleOwned: boolean;
+    boaringBundleOwned: boolean;
+    anniversaryBundleOwned: boolean;
+    eventShopDailyOwned: boolean;
+    eventShopRankOwned: boolean;
+    meritocracyBonus: number;
+    legendTalentBonus: number;
+    ribbonWinningTalentBonus: number;
+    paletteBonus: number;
+    sushiBonus: number;
+    smokyBonus: number;
+    armoryBonus: number;
+    companionBonus: number;
+    companionLevelTwo: number;
+}
+
+export class CookingRibbons {
+    shelf: readonly RibbonShelfSlot[] = Array.from({ length: 28 }, (_, index) => ({ index, rank: null }));
+    unlocked: boolean = false;
+    dailyGenerationUnlocked: boolean = false;
+    totalRanks: number = 0;
+    ribbonedMealCount: number = 0;
+    mealCount: number = 0;
+    readonly maxRank: number = cookingMetadata.maxRibbonRank;
+    lowestRank: number | null = null;
+    highestRank: number | null = null;
+    rankSummaries: readonly RibbonRankSummary[] = [];
+    dailyQuantity: CookingDailyRibbonQuantity = {
+        dailyCount: 0,
+        minimumDailyCount: 0,
+        maximumDailyCount: 0,
+        dailyCountBreakdown: {
+            sources: [], baseTotal: 0, additionalTotal: 0, additiveTotal: 0,
+            meritocracyMultiplier: 1, meritocracyImpact: 0,
+            expectedRawCount: 0, roundingAdjustment: 0, total: 0,
+        },
+    };
+    dailyRankProbabilities: readonly RibbonRankProbability[] = [];
+    averageDailyRank: number = 0;
+    dailyRankBreakdown: CookingDailyRankBreakdown = { sources: [], beforeOverflow: 0, overflowAdjustment: 0, total: 0 };
+    private shelfPreviouslyUnlocked: boolean = false;
+
+    getImageData(rank: number): ImageData {
+        return { location: `Ribbon${rank - 1}`, width: 42, height: 41 };
+    }
+
+    parse(ribbonData: readonly number[], optionList: readonly number[]): void {
+        this.shelf = Array.from({ length: 28 }, (_, index) => {
+            const rank = Number(ribbonData[index] ?? 0);
+            return { index, rank: rank === 0 ? null : rank };
+        });
+        this.shelfPreviouslyUnlocked = Number(optionList?.[337] ?? 0) === 1;
+    }
+
+    updateMealRanks(meals: readonly Meal[]): void {
+        this.mealCount = meals.length;
+        this.totalRanks = 0;
+        this.ribbonedMealCount = 0;
+        this.lowestRank = null;
+        this.highestRank = null;
+        const counts = new Map<number, number>();
+        for (const meal of meals) {
+            const rank = meal.ribbonLevel;
+            this.totalRanks += rank;
+            if (rank <= 0) continue;
+            this.ribbonedMealCount++;
+            this.lowestRank = this.lowestRank === null ? rank : Math.min(this.lowestRank, rank);
+            this.highestRank = this.highestRank === null ? rank : Math.max(this.highestRank, rank);
+            counts.set(rank, (counts.get(rank) ?? 0) + 1);
+        }
+        // All meals receive the same account ribbon inputs before this summary runs.
+        this.rankSummaries = meals.length === 0 ? [] : Array.from({ length: this.maxRank }, (_, index) => {
+            const rank = index + 1;
+            return { rank, mealCount: counts.get(rank) ?? 0, multiplier: meals[0].getRibbonBonus(rank) };
+        });
+    }
+
+    updateDaily(inputs: CookingRibbonInputs): void {
+        this.unlocked = inputs.grimoireShelfBonus >= 1 || inputs.deathBringerBundleOwned || this.shelfPreviouslyUnlocked;
+        this.dailyGenerationUnlocked = inputs.grimoireRankBonus >= 1 || inputs.deathBringerBundleOwned
+            || inputs.boaringBundleOwned || inputs.eventShopDailyOwned;
+        this.dailyQuantity = this.calculateDailyQuantity(inputs);
+        this.updateDailyRanks(inputs);
+    }
+
+    private getCappedIncrements(value: number, cap: number): Map<number, number> {
+        const lower = Math.floor(value);
+        const fraction = value - lower;
+        const distribution = new Map<number, number>();
+        distribution.set(Math.min(cap, lower), 1 - fraction);
+        if (fraction > 0) {
+            const upper = Math.min(cap, lower + 1);
+            distribution.set(upper, (distribution.get(upper) ?? 0) + fraction);
+        }
+        return distribution;
+    }
+
+    private calculateDailyQuantity(inputs: CookingRibbonInputs): CookingDailyRibbonQuantity {
+        const palette = this.getCappedIncrements(inputs.paletteBonus / 100, 3);
+        let paletteExpectation = 0;
+        for (const [amount, probability] of palette) paletteExpectation += amount * probability;
+        const sourceInputs: Pick<CookingDailyCountBreakdown['sources'][number], 'source' | 'group' | 'amount'>[] = [
+            { source: 'base', group: 'base', amount: 1 },
+            { source: 'dailyRoll', group: 'additional', amount: 0.5 },
+            { source: 'legendTalent', group: 'base', amount: inputs.legendTalentBonus },
+            { source: 'eventShop', group: 'base', amount: 3 * Number(inputs.eventShopDailyOwned) },
+            { source: 'deathBringerBundle', group: 'base', amount: 5 * Number(inputs.deathBringerBundleOwned) },
+            { source: 'boaringBundle', group: 'base', amount: 5 * Number(inputs.boaringBundleOwned) },
+            { source: 'ribbonWinningTalent', group: 'additional', amount: inputs.ribbonWinningTalentBonus / 100 },
+            { source: 'palette', group: 'additional', amount: paletteExpectation },
+        ];
+        const baseTotal = 1 + 3 * Number(inputs.eventShopDailyOwned)
+            + (5 * Number(inputs.deathBringerBundleOwned) + 5 * Number(inputs.boaringBundleOwned)) + inputs.legendTalentBonus;
+        const additionalTotal = 0.5 + inputs.ribbonWinningTalentBonus / 100 + paletteExpectation;
+        const sources = sourceInputs.map(source => {
+            const groupTotal = source.group === 'base' ? baseTotal : additionalTotal;
+            return { ...source, active: source.amount !== 0, share: groupTotal === 0 ? 0 : source.amount / groupTotal };
+        });
+        const meritocracyMultiplier = 1 + inputs.meritocracyBonus / 100;
+        const expectedRawCount = meritocracyMultiplier * baseTotal + additionalTotal;
+        const counts = new Map<number, number>();
+        if (this.dailyGenerationUnlocked) {
+            for (const [paletteCount, paletteProbability] of palette) {
+                // Only the base group receives Meritocracy. Integrate the final uniform roll exactly.
+                const offset = meritocracyMultiplier * baseTotal + inputs.ribbonWinningTalentBonus / 100 + paletteCount;
+                for (let count = Math.floor(offset); count < Math.ceil(offset + 1); count++) {
+                    const probability = Math.max(0, Math.min(1, count + 1 - offset) - Math.max(0, count - offset));
+                    if (probability > 0) counts.set(count, (counts.get(count) ?? 0) + probability * paletteProbability);
+                }
+            }
+        }
+        let dailyCount = 0;
+        let minimumDailyCount = Infinity;
+        let maximumDailyCount = -Infinity;
+        for (const [count, probability] of counts) {
+            dailyCount += count * probability;
+            minimumDailyCount = Math.min(minimumDailyCount, count);
+            maximumDailyCount = Math.max(maximumDailyCount, count);
+        }
+        return {
+            dailyCount,
+            minimumDailyCount: counts.size === 0 ? 0 : minimumDailyCount,
+            maximumDailyCount: counts.size === 0 ? 0 : maximumDailyCount,
+            dailyCountBreakdown: {
+                sources, baseTotal, additionalTotal, additiveTotal: baseTotal + additionalTotal,
+                meritocracyMultiplier, meritocracyImpact: 1 - 1 / meritocracyMultiplier,
+                expectedRawCount: this.dailyGenerationUnlocked ? expectedRawCount : 0,
+                roundingAdjustment: this.dailyGenerationUnlocked ? dailyCount - expectedRawCount : 0,
+                total: dailyCount,
+            },
+        };
+    }
+
+    private addRankIncrements(ranks: ReadonlyMap<number, number>, increments: ReadonlyMap<number, number>): Map<number, number> {
+        const result = new Map<number, number>();
+        for (const [rank, probability] of ranks) {
+            for (const [increment, incrementProbability] of increments) {
+                const combinedProbability = probability * incrementProbability;
+                if (combinedProbability <= 0) continue;
+                const combinedRank = rank + increment;
+                result.set(combinedRank, (result.get(combinedRank) ?? 0) + combinedProbability);
+            }
+        }
+        return result;
+    }
+
+    private updateDailyRanks(inputs: CookingRibbonInputs): void {
+        const chance = Math.max(0, Math.min(0.65,
+            0.1 + (inputs.grimoireRankBonus + 15 * Number(inputs.deathBringerBundleOwned)) / 100));
+        let continuing = new Map<number, number>([[1, 1]]);
+        const stopped = new Map<number, number>();
+        // Failures in the first two trials do not stop the roll. Later failures stop it.
+        for (let trial = 0; trial < 7; trial++) {
+            const next = new Map<number, number>();
+            for (const [rank, probability] of continuing) {
+                const success = probability * chance;
+                const failure = probability * (1 - chance);
+                if (success > 0) next.set(rank + 1, (next.get(rank + 1) ?? 0) + success);
+                const failureTarget = trial >= 2 ? stopped : next;
+                if (failure > 0) failureTarget.set(rank, (failureTarget.get(rank) ?? 0) + failure);
+            }
+            continuing = next;
+        }
+        for (const [rank, probability] of continuing) stopped.set(rank, (stopped.get(rank) ?? 0) + probability);
+        let grimoireIncrement = 0;
+        for (const [rank, probability] of stopped) grimoireIncrement += (rank - 1) * probability;
+        const sushiChance = inputs.sushiBonus >= 1 ? 0.1 : 0;
+        const armoryChance = Math.max(0, Math.min(1, (inputs.armoryBonus + 25 * Number(inputs.eventShopRankOwned)) / 100));
+        const smoky = this.getCappedIncrements(inputs.smokyBonus > 0 ? inputs.smokyBonus / 100 : 0, 3);
+        const companion = inputs.companionBonus === 1
+            ? new Map([[5 + 3 * inputs.companionLevelTwo, 0.1], [3 + inputs.companionLevelTwo, 0.405], [1, 0.495]])
+            : new Map([[0, 1]]);
+        const increments: { source: CookingDailyRankBreakdown['sources'][number]['source']; distribution: Map<number, number> }[] = [
+            { source: 'sushi', distribution: new Map([[0, 1 - sushiChance], [1, sushiChance]]) },
+            { source: 'anniversaryBundle', distribution: new Map([[Number(inputs.anniversaryBundleOwned), 1]]) },
+            { source: 'smoky', distribution: smoky },
+            { source: 'armoryEventShop', distribution: new Map([[0, 1 - armoryChance], [1, armoryChance]]) },
+            { source: 'companion', distribution: companion },
+        ];
+        const sourceInputs: Pick<CookingDailyRankBreakdown['sources'][number], 'source' | 'amount'>[] = [
+            { source: 'base', amount: 1 }, { source: 'grimoire', amount: grimoireIncrement },
+        ];
+        let ranks = stopped;
+        for (const increment of increments) {
+            let amount = 0;
+            for (const [value, probability] of increment.distribution) amount += value * probability;
+            sourceInputs.push({ source: increment.source, amount });
+            ranks = this.addRankIncrements(ranks, increment.distribution);
+        }
+        const beforeOverflow = sourceInputs.reduce((total, source) => total + source.amount, 0);
+        const finalRanks = new Map<number, number>();
+        // Native daily generation replaces ranks above 20 with rank 2; it does not cap them.
+        for (const [rank, probability] of ranks) {
+            const finalRank = rank > 20 ? 2 : rank;
+            finalRanks.set(finalRank, (finalRanks.get(finalRank) ?? 0) + probability);
+        }
+        this.dailyRankProbabilities = [...finalRanks].sort(([left], [right]) => left - right)
+            .map(([rank, probability]) => ({ rank, probability }));
+        this.averageDailyRank = this.dailyRankProbabilities.reduce((total, entry) => total + entry.rank * entry.probability, 0);
+        this.dailyRankBreakdown = {
+            sources: sourceInputs.map(source => ({
+                ...source, active: source.amount !== 0, share: beforeOverflow === 0 ? 0 : source.amount / beforeOverflow,
+            })),
+            beforeOverflow,
+            overflowAdjustment: this.averageDailyRank - beforeOverflow,
+            total: this.averageDailyRank,
+        };
+    }
+}
+
+export class NoMealLeftBehind {
+    enabled: boolean = false;
+    jadeUpgradeOwned: boolean = false;
+    bundleOwned: boolean = false;
+    dailyMealCount: number = 0;
+    dailyLevelGain: number = 0;
+    targetMealIndex: number | null = null;
+    currentLevel: number | null = null;
+    nextLevel: number | null = null;
+    effectiveLevelGain: number = 0;
+    readonly minimumMealLevel: number = 2;
+    levelLimit: number = 30;
+
+    getImageData(): ImageData {
+        return { location: "NjJupg16", width: 128, height: 78 };
+    }
+
+    update(meals: readonly Meal[], jadeUpgradeOwned: boolean, bundleOwned: boolean, maximumMealLevel: number): void {
+        this.jadeUpgradeOwned = jadeUpgradeOwned;
+        this.bundleOwned = bundleOwned;
+        this.enabled = jadeUpgradeOwned || bundleOwned;
+        this.dailyMealCount = this.enabled ? 1 : 0;
+        this.dailyLevelGain = Number(jadeUpgradeOwned) + 2 * Number(bundleOwned);
+        this.levelLimit = Math.min(150, maximumMealLevel);
+        this.targetMealIndex = null;
+        this.currentLevel = null;
+        this.nextLevel = null;
+        this.effectiveLevelGain = 0;
+        for (const meal of meals) meal.noMealLeftBehindAffected = false;
+        if (!this.enabled) return;
+
+        let target: Meal | null = null;
+        for (const meal of meals) {
+            if (meal.level < this.minimumMealLevel || meal.level >= maximumMealLevel) continue;
+            // Equal-level meals favor the later meal in the catalogue.
+            if (target === null || meal.level < target.level
+                || (meal.level === target.level && meal.mealIndex > target.mealIndex)) {
+                target = meal;
+            }
+        }
+        // The daily award stops at level 150, even when meals can reach a higher level.
+        if (target === null || target.level >= this.levelLimit) return;
+
+        this.targetMealIndex = target.mealIndex;
+        this.currentLevel = target.level;
+        this.nextLevel = Math.min(this.levelLimit, target.level + this.dailyLevelGain);
+        this.effectiveLevelGain = this.nextLevel - this.currentLevel;
+        target.noMealLeftBehindAffected = true;
     }
 }
 
@@ -530,6 +1040,8 @@ export class Cooking extends Domain {
     spices: number[] = [];
     kitchens: Kitchen[] = [...Array(10)].map((_, index) => { return new Kitchen(index) });
     readonly mastery: CookingMastery = new CookingMastery();
+    readonly ribbons: CookingRibbons = new CookingRibbons();
+    readonly noMealLeftBehind: NoMealLeftBehind = new NoMealLeftBehind();
 
     bestBerserker: Player | undefined;
     totalCookingSpeed: Stat = new Stat("Total Cooking Speed");
@@ -632,24 +1144,6 @@ export class Cooking extends Domain {
         return this.meals.filter(meal => meal.bonusKey == bonusKey).reduce((sum, meal) => sum += meal.getBonus(), 0);
     }
 
-    updateNoMealLeftBehind = (bonusActivated: boolean) => {
-        this.meals.forEach(meal => meal.noMealLeftBehindAffected = false);
-        if (bonusActivated) {
-            const sortedMeals = this.meals.filter(meal => meal.level >= 2 && meal.level < meal.maxLevel).sort((meal1, meal2) => {
-                // If same level, then go with higher meal index.
-                if (meal1.level == meal2.level) {
-                    return meal1.mealIndex > meal2.mealIndex ? -1 : 1
-                }
-                return meal1.level < meal2.level ? -1 : 1
-            });
-            const selectedMeal = sortedMeals[0];
-            // The daily-award ceiling is separate from the actual meal level cap.
-            if (selectedMeal && selectedMeal.level < 150) {
-                selectedMeal.noMealLeftBehindAffected = true;
-            }
-        }
-    }
-
     getRawKeys(): RawData[] {
         return [
             { key: "Cooking", perPlayer: false, default: [] },
@@ -674,22 +1168,12 @@ export class Cooking extends Domain {
         const ribbonData = data.get("Ribbon") as number[];
         const cookMasterData = data.get("CookMaster") as number[][];
 
-        cooking.mastery.parse(cookMasterData, ribbonData);
+        cooking.mastery.parse(cookMasterData);
+        cooking.ribbons.parse(ribbonData, data.get("OptLacc") as number[]);
+        cooking.meals.forEach(meal => meal.parse(mealsData, ribbonData, cookMasterData));
 
         if (cookingData.length == 0 || mealsData.length == 0) {
             return;
-        }
-
-        if (mealsData.length) {
-            mealsData[0].forEach((mealLevel, index) => {
-                // defend against future meals.
-                if (index < cooking.meals.length) {
-                    cooking.meals[index].level = mealLevel;
-                    cooking.meals[index].count = mealsData[2][index];
-                    cooking.meals[index].ribbonLevel = ribbonData[28 + index];
-                    cooking.meals[index].cookMasterLevel = cookMasterData?.[0]?.[index] ?? 0;
-                }
-            })
         }
 
         cooking.spices = mealsData[3];
@@ -827,9 +1311,16 @@ export const updateCooking = (data: Map<string, any>) => {
 
     cooking.foodLustDiscountCapped = foodLust.isCapped();
 
-    cooking.mastery.updateExperienceRate({
+    cooking.ribbons.updateMealRanks(cooking.meals);
+    cooking.mastery.update({
         totalCookingLevels: players.reduce((total, player) => total + (player.skills.get(SkillsIndex.Cooking)?.level ?? 0), 0),
         divorceCakeLevel: cooking.meals[73].level,
+        totalRibbonRanks: cooking.ribbons.totalRanks,
+        unlocked: cooking.isCookingMasteryUnlocked(data.get("rift") as Rift, companions),
+        eventShopPointsOwned: eventShop.isBonusOwned(54),
+        purpleJellyBonus: jellyOperator.getObstructionBonus(13),
+        yellowJellyBonus: jellyOperator.getObstructionBonus(5),
+        yellowResearchBonus: research.getBonusForId(190, 1),
         menagerieBonus: menagerie.getBonusValue(21),
         researchBonus: research.getBonusForId(190),
         superbitPurchased: gaming.isSuperbitPurchased(68),
@@ -985,9 +1476,11 @@ export const updateCooking = (data: Map<string, any>) => {
         }
     });
 
-    cooking.updateNoMealLeftBehind(
-        (sneaking.jadeUpgrades.find(upgrade => upgrade.data.name == "No Meal Left Behind")?.purchased ?? false)
-        || account.hasNoMealLeftBehindBundle
+    cooking.noMealLeftBehind.update(
+        cooking.meals,
+        sneaking.jadeUpgrades.find(upgrade => upgrade.data.name == "No Meal Left Behind")?.purchased ?? false,
+        account.hasNoMealLeftBehindBundle,
+        maximumMealLevel,
     );
 
     populateDiscovery(cooking);
@@ -1042,3 +1535,43 @@ export const updateCooking = (data: Map<string, any>) => {
 
     return cooking;
 }
+
+export const updateCookingRibbons = (data: Map<string, any>): void => {
+    const cooking = data.get("cooking") as Cooking;
+    const account = data.get("account") as Account;
+    const players = data.get("players") as Player[];
+    const companions = data.get("companions") as Companion[];
+    const eventShop = data.get("eventShop") as EventShop;
+    const grimoire = data.get("grimoire") as Grimoire;
+    const meritocraty = data.get("meritocraty") as Meritocraty;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
+    const gaming = data.get("gaming") as Gaming;
+    const sushi = data.get("sushi") as SushiStation;
+    const royalArmory = data.get("royalArmory") as RoyalArmory;
+
+    // Daily ribbon estimates use the highest Ribbon Winning bonus available across characters.
+    let ribbonWinningTalentBonus = 0;
+    for (const player of players) {
+        ribbonWinningTalentBonus = Math.max(ribbonWinningTalentBonus,
+            Talent.getAccountTalentBonus(players, 204, player.finalTalentInputs));
+    }
+
+    cooking.ribbons.updateDaily({
+        grimoireShelfBonus: grimoire.getUpgradeBonus(4),
+        grimoireRankBonus: grimoire.getUpgradeBonus(5),
+        deathBringerBundleOwned: account.bundles.getOwnership("bun_v") === "owned",
+        boaringBundleOwned: account.bundles.getOwnership("ban_f") === "owned",
+        anniversaryBundleOwned: account.bundles.getOwnership("ban_a") === "owned",
+        eventShopDailyOwned: eventShop.isBonusOwned(13),
+        eventShopRankOwned: eventShop.isBonusOwned(51),
+        meritocracyBonus: meritocraty.getCurrentBonus(11),
+        legendTalentBonus: legendTalents.getBonusFromIndex(13),
+        ribbonWinningTalentBonus,
+        paletteBonus: gaming.getPaletteBonus(33),
+        sushiBonus: sushi.getBonusFromIndex(14),
+        smokyBonus: cooking.mastery.upgrades[3].getContextualBonus(),
+        armoryBonus: royalArmory.getUpgradeBonus(82),
+        companionBonus: getCompanionActiveBonus(companions, 169),
+        companionLevelTwo: isCompanionLevelTwo(companions, 169),
+    });
+};

@@ -39,7 +39,7 @@
     },
     {
       "label": "worship_star_sign_efficiency",
-      "expression": "idleon.getDNSM(\"StarSigns\").h.WorshEff",
+      "expression": "(() => { const map = idleon.getDNSM(\"StarSigns\").h; return Object.prototype.hasOwnProperty.call(map, 'WorshEff') ? map['WorshEff'] : 0; })()",
       "description": "Character Worship efficiency star sign bonus"
     },
     {

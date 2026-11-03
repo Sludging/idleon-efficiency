@@ -4,7 +4,7 @@
   "extractions": [
     {
       "label": "diamond_chef_meal_and_fire_speed_multiplier",
-      "expression": "Math.max(1, Number(idleon.getDNSM(\"AlchBubbles\").h.MealSpdz ?? 0))",
+      "expression": "(() => { const map = idleon.getDNSM(\"AlchBubbles\").h; const value = Object.prototype.hasOwnProperty.call(map, \"MealSpdz\") ? map[\"MealSpdz\"] : 0; return value === null || typeof value !== \"number\" ? value : Math.max(1, value); })()",
       "description": "Effective Diamond Chef multiplier to meal and fire kitchen speeds"
     },
     {
@@ -54,7 +54,7 @@
     },
     {
       "label": "y13_final_bonus",
-      "expression": "idleon.getDNSM(\"AlchBubbles\").h.Y13",
+      "expression": "(() => { const map = idleon.getDNSM(\"AlchBubbles\").h; return Object.prototype.hasOwnProperty.call(map, \"Y13\") ? map[\"Y13\"] : 0; })()",
       "description": "Y13 public Alchemy bubble bonus (Codfrey Rulz Ok / Kazam cauldron 3, bubble 32)"
     },
     {

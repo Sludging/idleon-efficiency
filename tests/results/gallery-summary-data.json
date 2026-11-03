@@ -18,7 +18,7 @@
     },
     "bonus_multiplier": {
       "expression": "idleon.callFunction(\"Gallery\", \"GalleryBonusMulti\", 0, 0)",
-      "result": 2.099634532714778
+      "result": 2.114284962988388
     },
     "gallery_unlocked": {
       "expression": "idleon.callFunction(\"Gallery\", \"GalleryBonusSystemON\", 0, 0)",
@@ -114,7 +114,7 @@
         1,
         12,
         3,
-        6,
+        7,
         1,
         1,
         1,
@@ -175,8 +175,8 @@
       ]
     },
     "combined_drop_rate": {
-      "expression": "(() => { const d = idleon.engine.getGameAttribute(\"DNSM\").h; return Number(d.GalleryTrophyBonTOT.h[\"%_DROP_RATE\"] || 0) + Number(d.GalleryNametagBonTOT.h[\"%_DROP_RATE\"] || 0); })()",
-      "result": 4040.74665820959
+      "expression": "(() => { const d = idleon.engine.getGameAttribute(\"DNSM\").h; let total = 0; for (const owner of [\"GalleryTrophyBonTOT\", \"GalleryNametagBonTOT\"]) { const map = d[owner].h; if (Object.prototype.hasOwnProperty.call(map, \"%_DROP_RATE\")) { const value = map[\"%_DROP_RATE\"]; if (typeof value !== \"number\" || !Number.isFinite(value)) throw new Error(\"Invalid prepared \" + owner + \" Drop Rate\"); total += value; } } return total; })()",
+      "result": 4068.941411271153
     }
   },
   "errors": {}

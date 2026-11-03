@@ -1,60 +1,60 @@
 {
-  "description": "Native base Construction EXP/hour for all 11 saved characters in the unchanged current-character context. Excludes board position and aggregate cog EXP bonuses.",
+  "description": "Native base Construction EXP/hour for owned characters, up to 11, in the unchanged current-character context. Absent character slots intentionally return null. Excludes board position and aggregate cog EXP bonuses.",
   "target": "Construction Cog Player Base EXP Rate",
   "extractions": [
     {
       "label": "player_base_exp_rate_player_0",
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 0, 0)",
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 0 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 0, 0) : null",
       "description": "Native base Construction EXP/hour for saved character index 0"
     },
     {
       "label": "player_base_exp_rate_player_1",
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 1, 0)",
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 1 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 1, 0) : null",
       "description": "Native base Construction EXP/hour for saved character index 1"
     },
     {
       "label": "player_base_exp_rate_player_2",
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 2, 0)",
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 2 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 2, 0) : null",
       "description": "Native base Construction EXP/hour for saved character index 2"
     },
     {
       "label": "player_base_exp_rate_player_3",
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 3, 0)",
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 3 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 3, 0) : null",
       "description": "Native base Construction EXP/hour for saved character index 3"
     },
     {
       "label": "player_base_exp_rate_player_4",
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 4, 0)",
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 4 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 4, 0) : null",
       "description": "Native base Construction EXP/hour for saved character index 4"
     },
     {
       "label": "player_base_exp_rate_player_5",
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 5, 0)",
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 5 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 5, 0) : null",
       "description": "Native base Construction EXP/hour for saved character index 5"
     },
     {
       "label": "player_base_exp_rate_player_6",
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 6, 0)",
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 6 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 6, 0) : null",
       "description": "Native base Construction EXP/hour for saved character index 6"
     },
     {
       "label": "player_base_exp_rate_player_7",
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 7, 0)",
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 7 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 7, 0) : null",
       "description": "Native base Construction EXP/hour for saved character index 7"
     },
     {
       "label": "player_base_exp_rate_player_8",
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 8, 0)",
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 8 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 8, 0) : null",
       "description": "Native base Construction EXP/hour for saved character index 8"
     },
     {
       "label": "player_base_exp_rate_player_9",
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 9, 0)",
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 9 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 9, 0) : null",
       "description": "Native base Construction EXP/hour for saved character index 9"
     },
     {
       "label": "player_base_exp_rate_player_10",
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 10, 0)",
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 10 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 10, 0) : null",
       "description": "Native base Construction EXP/hour for saved character index 10"
     }
   ]

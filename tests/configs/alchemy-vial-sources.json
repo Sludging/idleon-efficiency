@@ -1,0 +1,11 @@
+{
+  "description": "Direct Lab contribution to the account-wide vial multiplier",
+  "target": "Alchemy.vialMultiplierSources.labFactor",
+  "extractions": [
+    {
+      "label": "vial_lab_factor",
+      "expression": "idleon.callFunction(\"MainframeBonus\", 10) === 2 ? 2 : 1",
+      "description": "My 1st Chemistry Set doubles vial bonuses when active. Capture its multiplier directly: 2 when active, otherwise 1."
+    }
+  ]
+}

@@ -56,6 +56,10 @@ add domain-specific save-pairing, fixed-roster, or extraction-context guards.
 Shared extraction-health, character-selection, and dataset-integrity checks
 remain in `tests/utils/` and `tests/helpers/`.
 
+Bundle ownership availability comes from the selected save's receipt ledger.
+A runtime-created empty ledger does not establish private purchase history.
+Missing receipts remain unknown; known receipt ledgers still use native comparisons.
+
 Bubba progression tests compare the next bonus, purchase cost, and affordability.
 They do not assert the continuously changing raw meat balance.
 
@@ -64,6 +68,10 @@ pinning boss HP to the progression of a particular saved account snapshot.
 
 Gaming prepares its account level from the highest parsed player Gaming skill
 before applying Superbit effects, Palette calculations, and harvest multipliers.
+
+Sailing uses the highest saved Sailing level for Tusk, Genie Lamp, boat treasure,
+and captain-shop unlocks. The first roster character wins ties. Artifact-find
+comparisons use the captured character for Artifosho and the shared Tusk bonus.
 
 Button queue tests compare only the dynamic current task and its requirement
 with native APIs. Copper sample progress has a separate matching calculation
@@ -79,13 +87,12 @@ of current chest entries holding at least 10 million items. Current storage
 quantities and inventory-based stack indicators remain unchanged.
 
 The full normal-world maximum-damage comparison uses the dedicated
-`player-maximum-damage.json` extraction config. Its native capture requires a town
-and records the active player index, map ID, and internal map name. The test
-requires a town save matching the captured player and map. Unsuitable captures
-fail explicitly; the test does not skip or compare restricted-map damage.
-Class EXP and damage parameter extractions remain independent of this requirement.
-Town eligibility is a location prerequisite, not proof that every temporary buff
-is absent.
+`player-maximum-damage.json` extraction config. It excludes only The Clamworks
+(`uAquaA6`, map 306), where Self Affliction reduces damage. Ordinary normal-world
+maps remain valid. Captures record the active player index, map ID, and internal
+map name; shared validation requires the selected save to match that context.
+Excluded or mismatched captures fail explicitly. Class EXP and damage parameter
+extractions remain independent of this restriction.
 
 ## Automatic Domain Class Reference Report
 

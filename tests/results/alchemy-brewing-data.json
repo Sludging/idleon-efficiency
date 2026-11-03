@@ -1,0 +1,52 @@
+{
+  "extractions": {
+    "brew_requirements": {
+      "expression": "[0,1,2,3].map(i=>idleon.callFunction(\"CauldronStats\",\"MaxCauldronQTY\",i,0,0))",
+      "result": [
+        985824566.0142926,
+        101667932.23354474,
+        272040641.50180316,
+        101667932.23354474
+      ]
+    },
+    "actor_new_bubble_chances": {
+      "expression": "[0,1,2,3].map(i=>idleon.callFunction(\"CauldronStats\",\"PctChanceNewBubble\",i,0,0))",
+      "result": [
+        0.0012075503735865512,
+        0.012630951444351293,
+        0.004606551410650505,
+        0.012630951444351293
+      ]
+    },
+    "boost_requirements": {
+      "expression": "[0,1,2,3].map(i=>[0,1,2,3].map(j=>idleon.callFunction(\"CauldronStats\",\"CauldronLvsBrewREQ\",i,j,0)))",
+      "result": [
+        [
+          1588676969,
+          1588676969,
+          1588676969,
+          1588676969
+        ],
+        [
+          1588676969,
+          1588676969,
+          1588676969,
+          1588676969
+        ],
+        [
+          1588676969,
+          1588676969,
+          1588676969,
+          1588676969
+        ],
+        [
+          1588676969,
+          1588676969,
+          1588676969,
+          1588676969
+        ]
+      ]
+    }
+  },
+  "errors": {}
+}

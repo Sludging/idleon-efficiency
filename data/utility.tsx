@@ -72,6 +72,16 @@ export enum Coins {
     Cyber = 18,
     Synthesis = 19,
     Polarity = 20,
+    Solaris = 21,
+    Nebula = 22,
+    Aurora = 23,
+    Abyssal = 24,
+    Twilight = 25,
+    Cinder = 26,
+    Frostshard = 27,
+    Seraph = 28,
+    Rubicon = 29,
+    Verdigris = 30,
 }
 
 export const dateToText = (date: Date): string => {
@@ -132,49 +142,36 @@ export const nFormatter = (num: number, type: string = "Smaller") => {
     }
 }
 
+// Parse decimal tier boundaries once to avoid power-calculation rounding.
+const coinDenominations = Array.from(
+    { length: Coins.Verdigris },
+    (_, index) => Number(`1e${2 * index}`),
+);
+
 export const getCoinsArray = (coins: number): Map<Coins, number> => {
-    // 1. We floor the coins since sometimes it's fractions, and we don't care about that.
-    // 2. We convert to BigInt so when we convert to string we have the full number instead of something like '1.2+e22'
-    // 3. We convert to string so we can splice it easier, more on why we splice later.
-    let n = BigInt(Math.floor(coins)).toString();
-
-    // Init an empty set of coins
-    let ret = new Map<Coins, number>();
-    // Start from copper
-    let i = 1;
-    // While we haven't processed the full string and we aren't at the max coin yet
-    while (n.length > 0 && i < Coins.Polarity) {
-        // If we have less than 2 digits left, we are done.
-        if (n.length < 2) {
-            ret.set(i, Number(n)); // Add the single digit
-            n = ""; // Empty out the string
-            break; // Break the while
-        }
-        // We have 2 or more, convert the LAST two digits to a number
-        const quantity = Number(n.slice(-2));
-        // Add that number to the coin array
-        ret.set(i, quantity);
-
-        // Modify the string to remove the 2 digits we just procesed.
-        n = n.slice(0, -2);
-        // Move to the next coin.
-        i += 1
+    const result = new Map<Coins, number>();
+    if (!Number.isFinite(coins) || coins < 1) {
+        result.set(Coins.Copper, 0);
+        return result;
     }
 
-    // If string isn't empty, it means we are at max coin (Polarity for now). Simply add the full string as number to the array.
-    if (n.length > 0) {
-        ret.set(Coins.Polarity, Number(n));
+    let highestTier = Coins.Copper;
+    while (highestTier < Coins.Verdigris && coins >= coinDenominations[highestTier]) {
+        highestTier += 1;
     }
 
-    // Can probably move this to the top but basically handling someone with 0 coins.
-    if (ret.size == 0) {
-        ret.set(1, 0);
+    // Show the highest five tiers, rather than the game's inventory tier groups.
+    const lowestTier = Math.max(Coins.Copper, highestTier - 4);
+    let remainder = Math.floor(coins);
+    for (let tier = highestTier; tier >= lowestTier; tier--) {
+        const denomination = coinDenominations[tier - 1];
+        const wholeCoins = Math.floor(remainder / denomination);
+        const quantity = tier === Coins.Verdigris ? wholeCoins : Math.min(wholeCoins, 99);
+        result.set(tier, quantity);
+        remainder = Math.max(0, remainder - quantity * denomination);
     }
 
-    // We want to sort the array by the highest coin first, so we sort and then reverse.
-    ret = new Map([...ret].sort((a, b) => a[0] - b[0]).reverse())
-
-    return ret;
+    return result;
 }
 
 /*

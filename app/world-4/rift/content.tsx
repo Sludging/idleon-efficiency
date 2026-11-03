@@ -20,6 +20,7 @@ import { Construction } from '../../../data/domain/world-3/construction/construc
 import { nFormatter } from '../../../data/utility';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
+import useHydrated from '../../../lib/hooks/useHydrated';
 
 function BonusBlock({ label, text, icon, textSize = 'xlarge' }: { label: string, text: string, icon?: ImageData, textSize?: string }) {
     return (
@@ -220,6 +221,10 @@ function RiftBonusDisplay() {
 
 function RiftDisplay() {
     const [activeTab, setActiveTab] = useState<string>("Bonuses");
+    const hydrated = useHydrated();
+
+    if (!hydrated) return <>Loading Rift data...</>;
+
     return (
         <Box>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Rift</Heading>

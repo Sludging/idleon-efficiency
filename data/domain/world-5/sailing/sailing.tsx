@@ -131,7 +131,7 @@ export enum BoatUpgradeType {
 }
 export class Boat {
     sigilBonus: number = 0;
-    genieLampBonus: number = 30;
+    genieLampBonus: number = 0;
     holeLampBonus: number = 0;
     unendingSearchBonus: number = 0;
     daveyJonesBonus: number = 1;
@@ -199,7 +199,7 @@ export class Boat {
 
     getLootValue = (
         { lootUpgrades = this.lootUpgrades, includeCaptain = true }
-            : { lootUpgrades?: number, includeCaptain?: boolean } = { lootUpgrades: this.lootUpgrades, includeCaptain: true }
+            : { lootUpgrades?: number, includeCaptain?: boolean } = {}
     ) => {
         // Check if captain is boosting the value.
         const captainBonus = includeCaptain ?
@@ -305,12 +305,29 @@ export class Sailing extends Domain {
 
     starSignInfinity: boolean = false;
     starSignUnlocked: boolean = false;
+    highestSailingPlayerName: string = '';
+    highestSailingLevel: number = 0;
 
     enderCaptainUnlocked: boolean = false;
     private researchExpSlabBonus: number = 0;
     private mineheadDamageSailingLevel = 0;
     private nightmarinerExcessLevels: number = 0;
     private nightmarinerUnlocked: boolean = false;
+
+    updateSailingLevelProjection(players: readonly Player[]): void {
+        // Sailing is shared; use the highest saved level. Equal levels keep roster order.
+        this.highestSailingPlayerName = '';
+        this.highestSailingLevel = 0;
+        let highestPlayer: Player | undefined;
+        for (const player of players) {
+            const sailingLevel = player.skills.get(SkillsIndex.Sailing)?.level ?? 0;
+            if (highestPlayer === undefined || sailingLevel > this.highestSailingLevel) {
+                highestPlayer = player;
+                this.highestSailingPlayerName = player.playerName;
+                this.highestSailingLevel = sailingLevel;
+            }
+        }
+    }
 
     updateNightmarinerInputs(menagerie: Menagerie): void {
         this.nightmarinerUnlocked = menagerie.getUnlocks()[13].owned;
@@ -471,7 +488,6 @@ export const updateSailing = (data: Map<string, any>) => {
     const sailing = data.get("sailing") as Sailing;
     const sigils = data.get("sigils") as Sigils;
     const gemStore = data.get("gems") as GemStore;
-    const players = data.get("players") as Player[];
     const taskboard = data.get("taskboard") as TaskBoard;
     const achievements = data.get("achievements") as Achievement[];
     const starSigns = data.get("starsigns") as StarSigns;
@@ -518,10 +534,11 @@ export const updateSailing = (data: Map<string, any>) => {
     const companionLootMultiplier = Math.max(1, getCompanionActiveBonus(companions, 56));
     const sushiLootBonus = sushi.getBonusFromIndex(57);
     const fountainLootBonus = hole.getFountainBonus(0, 17);
+    const genieLampBonus = sailing.artifacts[5].getBonus();
 
     // Update boat impacts
     sailing.boats.forEach(boat => {
-        boat.genieLampBonus = sailing.artifacts[5].getBonus()
+        boat.genieLampBonus = genieLampBonus;
         boat.sigilBonus = sigils.sigils[21].getBonus();
         boat.daveyJonesBonus = daveyJonesBonus * (1 + 2 * Math.max(0, Math.min(1,
             Math.floor((boat.lootUpgrades + boat.speedUpgrades + 99600) / 100000) * researchUnlock)));
@@ -560,7 +577,7 @@ export const updateSailing = (data: Map<string, any>) => {
 
     // Nice to have to create an alert
     sailing.enderCaptainUnlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 32)?.purchased ?? false;
-    const sailingLevel = players[0].skills.get(SkillsIndex.Sailing)?.level ?? 0;
+    const sailingLevel = sailing.highestSailingLevel;
     switch (true) {
         case sailingLevel >= 35:
             sailing.shopCaptainUnlocked = 4;

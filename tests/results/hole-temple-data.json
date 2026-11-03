@@ -1,0 +1,57 @@
+{
+  "extractions": {
+    "torches": {
+      "expression": "Number(idleon.getAttr('Holes')[11][56])",
+      "result": 1230313727.248796
+    },
+    "layer": {
+      "expression": "Math.round(Number(idleon.getAttr('Holes')[11][55]) + 1)",
+      "result": 19
+    },
+    "extra_torch_chance": {
+      "expression": "idleon.callFunction('Holes2', 'TempleExtraTorches', 0, 0)",
+      "result": 9489
+    },
+    "opals_found": {
+      "expression": "Number(idleon.getAttr('Holes')[7][14])",
+      "result": 18
+    },
+    "illuminate_level": {
+      "expression": "Number(idleon.getAttr('Holes')[11][57])",
+      "result": 135
+    },
+    "illuminate_search_multiplier": {
+      "expression": "idleon.callFunction('Holes2', 'TempleTorchBonuses', 0, 0)",
+      "result": 14.5
+    },
+    "illuminate_cost": {
+      "expression": "idleon.callFunction('Holes2', 'TempleTorchCost', 0, 0)",
+      "result": 52286.15469141957
+    },
+    "search_level": {
+      "expression": "Number(idleon.getAttr('Holes')[11][58])",
+      "result": 238
+    },
+    "centurion_awaken_chance_percent": {
+      "expression": "100 * Math.min(1, idleon.callFunction('Holes2', 'TempleTorchBonuses', 1, 0))",
+      "result": 3.3288641175809137
+    },
+    "search_cost": {
+      "expression": "idleon.callFunction('Holes2', 'TempleTorchCost', 1, 0)",
+      "result": 307578431.812199
+    },
+    "amplify_level": {
+      "expression": "Number(idleon.getAttr('Holes')[11][59])",
+      "result": 133
+    },
+    "golem_respawn_speed_percent": {
+      "expression": "idleon.callFunction('Holes2', 'TempleTorchBonuses', 2, 0)",
+      "result": 665
+    },
+    "amplify_cost": {
+      "expression": "idleon.callFunction('Holes2', 'TempleTorchCost', 2, 0)",
+      "result": 3200834.4959298708
+    }
+  },
+  "errors": {}
+}

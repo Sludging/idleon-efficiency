@@ -75,7 +75,7 @@
     },
     {
       "label": "talent_max_family_bonus_68",
-      "expression": "Math.floor(idleon.getDNSM(\"FamBonusQTYs\").h[68])",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; const value = Object.prototype.hasOwnProperty.call(map, 68) ? map[68] : 0; return typeof value === \"number\" ? Math.floor(value) : value; })()",
       "description": "Talent level bonus from family bonus 68 - Elemental Sorcerer"
     },
     {
@@ -107,11 +107,6 @@
       "label": "all_talent_level_149",
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLV\", \"149\")",
       "description": "All talent level 149 - gate-passing banned talent"
-    },
-    {
-      "label": "all_talent_level_z_225_player_3",
-      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLVz\", \"225|3\")",
-      "description": "All talent level 225 for player 3 via AllTalentLVz - Royal Guardian cap"
     }
   ]
 }

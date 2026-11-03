@@ -5,7 +5,6 @@ import { ExtractionResults, loadExtractionResults, validateExtractionHealth } fr
 type NativeMasteryProgression = {
     selectedMastery: number;
     completedMasteries: number;
-    earnedRewardCount: number;
 };
 
 describe('Sneaking Mastery reward progression', () => {
@@ -26,19 +25,12 @@ describe('Sneaking Mastery reward progression', () => {
         });
     });
 
-    it('retains the real account earned reward boundary', () => {
-        const rewards = sneaking.masteryRewards.filter(reward => reward.earned);
-        expect(rewards.length).toMatchLiveGameWithDetails(native.earnedRewardCount, {
-            tolerance: 0,
-            context: 'Earned Mastery card count from the source-backed native reward boundary',
-        });
-        expect(sneaking.masteryRewards.slice(0, native.earnedRewardCount).every(reward => reward.earned)).toBe(true);
+    it('marks existing rewards within completed Masteries as earned', () => {
+        expect(sneaking.masteryRewards.slice(0, native.completedMasteries).every(reward => reward.earned)).toBe(true);
     });
 
-    it('leaves every reward after the real earned boundary locked', () => {
-        // The native reward panel first conceals the row at the completed-count boundary.
-        // Compare the locked suffix without copying the per-row unlock formula.
-        const lockedRewards = sneaking.masteryRewards.slice(native.earnedRewardCount);
+    it('leaves existing rewards beyond completed Masteries locked', () => {
+        const lockedRewards = sneaking.masteryRewards.slice(native.completedMasteries);
         expect(lockedRewards.every(reward => !reward.earned)).toBe(true);
     });
 });

@@ -33,6 +33,10 @@ import { initHarpStringsRepo } from "../../data/HarpStringsRepo";
 import { Gambit } from "./gambit";
 import { Tesseract } from "../../tesseract";
 import { Cove } from "./cove";
+import { Grotto } from "./grotto";
+import { DawgDen } from "./dawgDen";
+import { Temple } from "./temple";
+import { Meritocraty } from "../../world-7/meritocraty";
 import { Jar } from "./jar";
 import { LegendTalents } from "../../world-7/legendTalents";
 import { ZenithMarket } from "../../world-7/zenithShop";
@@ -59,7 +63,7 @@ import { initGodInfoRepo } from "../../data/GodInfoRepo";
 import type { Divinity } from "../divinity";
 import type { ImageData } from "../../imageData";
 import { SkillsIndex } from "../../SkillsIndex";
-import type { Skilling, SkillingSkill } from "../../skilling";
+import { Skilling, type SkillingSkill } from "../../skilling";
 
 export interface HoleUpgradeEffect {
  key: string;
@@ -969,6 +973,12 @@ export class Measurement {
  }
 }
 
+const monumentImages: ImageData[] = [
+ { location: "HolePOI3", width: 141, height: 161 },
+ { location: "HolePOI9", width: 141, height: 161 },
+ { location: "HolePOI12", width: 141, height: 161 },
+];
+
 export class MonumentBonus {
  level: number = 0;
  monumentSelfBoost: number = 0;
@@ -976,31 +986,74 @@ export class MonumentBonus {
  fountainBonus: number = 0;
  constructor(public index: number, public data: MonumentBonusModel, public monumentIndex: number) { }
 
+ getImageData(): ImageData | undefined {
+  if (this.index === 3) return { location: "HoleUIvillager0", width: 303, height: 64 };
+  if (this.index === 5) return { location: "Opal", width: 30, height: 31 };
+  if (this.index === 8 || this.index === 9) return monumentImages[this.monumentIndex];
+
+  switch (this.monumentIndex) {
+   case 0:
+    switch (this.index) {
+     case 0: return Skilling.getSkillImageData(SkillsIndex.Mining);
+     case 1: return { location: "HoleWellBucket0", width: 62, height: 128 };
+     case 2: return Skilling.getSkillImageData(SkillsIndex.Cooking);
+     case 4: return Skilling.getSkillImageData(SkillsIndex.Gaming);
+     case 7: return { location: "HolePOI4", width: 260, height: 166 };
+     default: return undefined;
+    }
+   case 1:
+    switch (this.index) {
+     case 0: return Skilling.getSkillImageData(SkillsIndex.Catching);
+     case 1: return holeCurrencyImages[10];
+     case 2: return Skilling.getSkillImageData(SkillsIndex.Sailing);
+     case 4: return Skilling.getSkillImageData(SkillsIndex.Summoning);
+     case 7: return { location: "HoleLampWish", width: 99, height: 48 };
+     default: return undefined;
+    }
+   case 2:
+    switch (this.index) {
+     case 0: return Skilling.getSkillImageData(SkillsIndex.Chopping);
+     case 1: return { location: "HoleJar0", width: 67, height: 71 };
+     case 2: return Sneaking.getJadeImageData();
+     case 4: return Skilling.getSkillImageData(SkillsIndex.Farming);
+     case 7: return { location: "HolePOI13", width: 374, height: 125 };
+     default: return undefined;
+    }
+   default: return undefined;
+  }
+ }
+ get perLevelIncrement(): number | null {
+  return this.data.multiplier < 30 ? this.data.multiplier : null;
+ }
+
+ get bonusCap(): number | null {
+  return this.data.multiplier >= 30 ? this.data.multiplier * this.getEffectiveMultiplier() : null;
+ }
+
+ // This target uses the displayed bonus cap, not the first level affected by native rounding.
+ get capTargetLevel(): number | null {
+  return this.data.multiplier >= 30
+   ? Math.ceil(250 * (10 * this.data.multiplier * this.getEffectiveMultiplier() - 1))
+   : null;
+ }
+
+ get progressPercent(): number | null {
+  const cap = this.bonusCap;
+  return cap === null ? null : this.getBonus() / cap * 100;
+ }
+
+ private getEffectiveMultiplier(): number {
+  const base = this.index === 9 ? 1 : 1 + this.monumentSelfBoost / 100 + this.cosmoBonus / 100;
+  return Math.max(1, base * (1 + this.fountainBonus / 100));
+ }
+
  getBonus(): number {
-  let bonusMultiplier = 1;
-
-  // Apply ROG and Cosmo bonuses if i != 9
-  if (this.index !== 9) {
-   bonusMultiplier = 1 + this.monumentSelfBoost / 100;
-   bonusMultiplier += this.cosmoBonus / 100;
-  }
-
-  // Fountain bonuses apply to every monument bonus, including bonus 9.
-  bonusMultiplier *= 1 + this.fountainBonus / 100;
-
+  const bonusMultiplier = this.getEffectiveMultiplier();
   if (this.data.multiplier < 30) {
-   return this.level * this.data.multiplier * Math.max(1, bonusMultiplier);
-  } else {
-   return (
-    0.1 *
-    Math.ceil(
-     (this.level / (250 + this.level)) *
-     10 *
-     this.data.multiplier *
-     Math.max(1, bonusMultiplier)
-    )
-   );
+   return this.level * this.data.multiplier * bonusMultiplier;
   }
+  return 0.1 * Math.ceil(
+   this.level / (250 + this.level) * 10 * this.data.multiplier * bonusMultiplier);
  }
 
  getDescription(): string {
@@ -1013,7 +1066,19 @@ export class MonumentBonus {
 
 export class MonumentUnlock {
  unlocked: boolean = false;
- constructor(public index: number, public data: MonumentUnlockModel) { }
+ hoursRemaining: number = 0;
+ claimable: boolean = false;
+ constructor(public index: number, public data: MonumentUnlockModel, public monumentIndex: number) { }
+
+ getImageData(): ImageData | undefined {
+  if (this.monumentIndex === 0 && this.index !== 4) {
+   return { location: "HoleBraverySword", width: 61, height: 61 };
+  }
+  if (this.monumentIndex === 1 && (this.index === 0 || this.index === 3 || this.index === 6)) {
+   return { location: "HoleJusticeObj0", width: 21, height: 22 };
+  }
+  return undefined;
+ }
 }
 
 export class Monument {
@@ -1021,6 +1086,11 @@ export class Monument {
  bonuses: MonumentBonus[] = [];
  unlocks: MonumentUnlock[] = [];
  highestRound: number = 0;
+ storedAttemptSeconds: number = 0;
+ rewardMultiplier: number = 0;
+ rewardLinearLimitSeconds: number = 172800;
+ opalChancePercent: number = 0;
+ private opalsFound: number = 0;
 
  constructor(
   public index: number,
@@ -1028,30 +1098,196 @@ export class Monument {
   public bonusesData: MonumentBonusModel[],
   public unlocksData: MonumentUnlockModel[],
  ) {
-  this.bonusesData.forEach(bonus => {
-   this.bonuses.push(new MonumentBonus(bonus.index, bonus, this.index));
-  })
-  this.unlocksData.forEach(unlock => {
-   this.unlocks.push(new MonumentUnlock(unlock.index, unlock));
-  })
+  this.bonuses = bonusesData.map(bonus => new MonumentBonus(bonus.index, bonus, index));
+  this.unlocks = unlocksData.map(unlock => new MonumentUnlock(unlock.index, unlock, index));
+ }
+
+ getImageData(): ImageData {
+  return monumentImages[this.index];
+ }
+
+ parse(holeData: number[][], _optionListAccount: number[]): void {
+  this.hours = Number(holeData[14]?.[2 * this.index] ?? 0);
+  const removedBricks = Number(holeData[14]?.[1 + 2 * this.index] ?? 0);
+  this.storedAttemptSeconds = Number(holeData[11]?.[11 + this.index] ?? 0);
+  this.highestRound = Number(holeData[11]?.[73 + this.index] ?? 0);
+  this.opalsFound = Number(holeData[7]?.[[3, 9, 12][this.index]] ?? 0);
+  this.unlocks.forEach(unlock => {
+   unlock.unlocked = removedBricks > unlock.index;
+   unlock.hoursRemaining = Math.max(0, unlock.data.hours_required - this.hours);
+   unlock.claimable = unlock.index === removedBricks && unlock.hoursRemaining === 0;
+  });
+  this.bonuses.forEach(bonus => {
+   bonus.level = Number(holeData[15]?.[10 * this.index + bonus.index] ?? 0);
+  });
+ }
+
+ prepareBonuses(hole: Hole): void {
+  this.bonuses.forEach(bonus => {
+   bonus.cosmoBonus = hole.majiks.HoleUpgrades[0].getBonus();
+   bonus.fountainBonus = hole.fountain.getBonus(this.index, 13);
+   bonus.monumentSelfBoost = 0;
+  });
+  const selfBoost = this.bonuses[9].getBonus();
+  this.bonuses.forEach(bonus => {
+   bonus.monumentSelfBoost = selfBoost;
+  });
+ }
+
+ prepare(hole: Hole, legendBonus: number, meritocracyBonus: number, extendedSuperbit: boolean): void {
+  const justiceDays = this.index === 1 ? 14 * Number(hole.studies[9].ownedRule) : 0;
+  this.rewardLinearLimitSeconds = 86400 * (2 + hole.getSchematicBonus(70, 2) + hole.getSchematicBonus(96, 2)
+   + 10 * Number(extendedSuperbit) + legendBonus / 24 + justiceDays);
+  this.rewardMultiplier = (Math.min(this.storedAttemptSeconds, this.rewardLinearLimitSeconds) / 72000
+   + Math.pow(1 + Math.max(0, this.storedAttemptSeconds - this.rewardLinearLimitSeconds) / 72000, 0.3) - 1)
+   * (1 + meritocracyBonus / 100) * (1 + legendBonus / 100);
+  const studyBonus = this.index === 1 ? hole.getStudyBolaiaBonuses(9) : 0;
+  this.opalChancePercent = 100 * Math.min(0.5, Math.pow(0.5, this.opalsFound)
+   * (1 + this.bonuses[5].getBonus() / 100) * (1 + studyBonus / 100));
+ }
+
+ get ready(): boolean {
+  return this.rewardMultiplier >= 1;
+ }
+
+ // The game uses this wait estimate. External multipliers can change the actual readiness time.
+ get secondsUntilReady(): number {
+  return Math.max(0, 72000 * (1 - this.rewardMultiplier));
+ }
+
+ get totalBonusLevels(): number {
+  return this.bonuses.reduce((sum, bonus) => sum + bonus.level, 0);
+ }
+
+ get nextStartingUpgrade(): MonumentUnlock | undefined {
+  return this.unlocks.find(unlock => !unlock.unlocked);
+ }
+
+ protected unlocked(index: number): number {
+  return Number(this.unlocks[index].unlocked);
+ }
+}
+
+export class BraveryMonument extends Monument {
+ minimumDamage: number = 3;
+ maximumDamage: number = 25;
+
+ static getStartingStatImageData(stat: 'damage' | 'swords' | 'rethrows' | 'retellings'): ImageData {
+  switch (stat) {
+   case 'damage':
+   case 'swords': return { location: "HoleBraverySword", width: 61, height: 61 };
+   case 'rethrows': return { location: "BraveryRethrows", width: 21, height: 21 };
+   case 'retellings': return { location: "BraveryRetellings", width: 21, height: 21 };
+  }
+ }
+
+ prepare(hole: Hole, legendBonus: number, meritocracyBonus: number, extendedSuperbit: boolean): void {
+  super.prepare(hole, legendBonus, meritocracyBonus, extendedSuperbit);
+  const swordHours = Math.floor(this.hours / 6) * hole.getSchematicBonus(24, 1);
+  // Story previews exclude temporary damage boosts from an active attempt.
+  this.maximumDamage = (25 + 10 * swordHours) * (1 + hole.measurements[1].effectiveBenefit / 100);
+  this.minimumDamage = 3 + swordHours + hole.getStudyBolaiaBonuses(3) / 100 * this.maximumDamage;
+ }
+
+ get swords(): number {
+  return Math.round(Math.min(9, 3 + 2 * this.unlocked(1) + this.unlocked(3) + this.unlocked(5) + this.unlocked(7)));
+ }
+
+ get rethrows(): number {
+  return Math.round(5 * this.unlocked(2) + 10 * this.unlocked(6));
+ }
+
+ get retellings(): number {
+  return this.unlocked(4);
+ }
+}
+
+export class JusticeMonument extends Monument {
+ coins: number = 5;
+
+ static getStartingStatImageData(stat: 'mentalHealth' | 'coins' | 'popularity' | 'dismissals'): ImageData {
+  switch (stat) {
+   case 'mentalHealth': return { location: "JusticeMentalHealth", width: 21, height: 21 };
+   case 'coins': return { location: "HoleJusticeObj0", width: 21, height: 22 };
+   case 'popularity': return { location: "JusticePopularity", width: 21, height: 21 };
+   case 'dismissals': return { location: "JusticeDismissals", width: 21, height: 21 };
+  }
+ }
+
+ prepare(hole: Hole, legendBonus: number, meritocracyBonus: number, extendedSuperbit: boolean): void {
+  super.prepare(hole, legendBonus, meritocracyBonus, extendedSuperbit);
+  this.coins = Math.round((5 + Math.log(Math.max(this.hours, 1)) / Math.log(2) * hole.getSchematicBonus(61, 1))
+   * (1 + 0.5 * this.unlocked(3) + 1.5 * this.unlocked(6)));
+ }
+
+ get mentalHealth(): number {
+  return Math.round(1 + this.unlocked(1) + this.unlocked(4) + 2 * this.unlocked(7));
+ }
+
+ get popularity(): number {
+  return Math.round(3 + 7 * this.unlocked(5));
+ }
+
+ get dismissals(): number {
+  return Math.round(this.unlocked(2) + this.unlocked(4) + 2 * this.unlocked(7));
  }
 }
 
 export class WisdomMonument extends Monument {
  highestPureMemoryRound: number = 0;
+ attempts: number = 5;
+ readonly secondsPerMatch: number = 12.6;
+
+ static getStartingStatImageData(stat: 'attempts' | 'attemptsPerRound' | 'instantMatches'): ImageData {
+  switch (stat) {
+   case 'attempts':
+   case 'attemptsPerRound': return { location: "WisdomAttempts", width: 21, height: 21 };
+   case 'instantMatches': return { location: "WisdomInstantMatches", width: 48, height: 44 };
+  }
+ }
+
+ parse(holeData: number[][], optionListAccount: number[]): void {
+  super.parse(holeData, optionListAccount);
+  this.highestPureMemoryRound = Math.round(Math.min(12, optionListAccount[353] ?? 0) + 1);
+ }
+
+ prepare(hole: Hole, legendBonus: number, meritocracyBonus: number, extendedSuperbit: boolean): void {
+  super.prepare(hole, legendBonus, meritocracyBonus, extendedSuperbit);
+  this.attempts = Math.round(5 + hole.getStudyBolaiaBonuses(12) + 4 * this.unlocked(4)
+   + Math.floor(2 * lavaLog(Math.max(this.hours, 1))));
+ }
+
+ get attemptsPerRound(): number {
+  return Math.round(2 * this.unlocked(1) + this.unlocked(6));
+ }
+
+ get instantMatches(): number {
+  return Math.round(4 * this.unlocked(3) + 5 * this.unlocked(7));
+ }
 }
 
 export class Monuments {
- monuments: Record<string, Monument> = {}
+ monuments: Record<string, Monument> = {};
+
  constructor() {
-  const data = initMonumentRepo();
-  data.forEach(monument => {
-   if (monument.data.name == "Wisdom") {
-    this.monuments[monument.data.name] = new WisdomMonument(monument.index, monument.data.name, monument.data.bonuses, monument.data.unlocks);
-   } else {
-    this.monuments[monument.data.name] = new Monument(monument.index, monument.data.name, monument.data.bonuses, monument.data.unlocks);
-   }
-  })
+  initMonumentRepo().forEach(monument => {
+   const constructor = monument.index === 0 ? BraveryMonument : monument.index === 1 ? JusticeMonument : WisdomMonument;
+   this.monuments[monument.data.name] = new constructor(
+    monument.index, monument.data.name, monument.data.bonuses, monument.data.unlocks);
+  });
+ }
+
+ parse(holeData: number[][], optionListAccount: number[]): void {
+  Object.values(this.monuments).forEach(monument => monument.parse(holeData, optionListAccount));
+ }
+
+ prepareBonuses(hole: Hole): void {
+  Object.values(this.monuments).forEach(monument => monument.prepareBonuses(hole));
+ }
+
+ prepare(hole: Hole, legendBonus: number, meritocracyBonus: number, extendedSuperbit: boolean): void {
+  Object.values(this.monuments).forEach(monument =>
+   monument.prepare(hole, legendBonus, meritocracyBonus, extendedSuperbit));
  }
 }
 
@@ -1599,9 +1835,6 @@ export class Lamp {
  }
 }
 
-export class DawgDen {
- bestScore: number = 0;
-}
 
 export interface OpalSource {
  id: string;
@@ -1745,6 +1978,8 @@ export class Hole extends Domain {
  harp!: Harp;
  lamp!: Lamp;
  dawgDen!: DawgDen;
+ grotto!: Grotto;
+ temple!: Temple;
  jar!: Jar;
  cove!: Cove;
  gambit!: Gambit;
@@ -2062,6 +2297,8 @@ export class Hole extends Domain {
   this.harp = new Harp();
   this.lamp = new Lamp();
   this.dawgDen = new DawgDen();
+  this.grotto = new Grotto();
+  this.temple = new Temple();
   this.jar = new Jar();
   this.cove = new Cove();
   this.gambit = new Gambit();
@@ -2201,34 +2438,7 @@ export class Hole extends Domain {
   hole.fountain.parse(savedHoleData, optionListAccount, rawFountainData[31], rawFountainData[32], rawFountainData[29]);
 
   hole.cove.parse(optionListAccount);
-  // Monument Jazz
-  const braveryMonument = hole.monuments.monuments["Bravery"];
-  braveryMonument.hours = Number(holeData[14][2 * braveryMonument.index] ?? 0);
-  braveryMonument.highestRound = Number(holeData[11][73] ?? 0);
-
-  const justiceMonument = hole.monuments.monuments["Justice"];
-  justiceMonument.hours = Number(holeData[14][2 * justiceMonument.index] ?? 0);
-  justiceMonument.highestRound = Number(holeData[11][74] ?? 0);
-
-  const wisdomMonument = hole.monuments.monuments["Wisdom"] as WisdomMonument;
-  wisdomMonument.hours = Number(holeData[14][2 * wisdomMonument.index] ?? 0);
-  wisdomMonument.highestRound = Number(holeData[11][75] ?? 0);
-  wisdomMonument.highestPureMemoryRound = Math.round(Math.min(12, optionListAccount[353] ?? 0) + 1);
-
-  [braveryMonument, justiceMonument, wisdomMonument].forEach(monument => {
-   monument.unlocks.forEach(unlock => {
-    unlock.unlocked = monument.hours > unlock.data.hours_required;
-   });
-   monument.bonuses.forEach(bonus => {
-    bonus.level = Number(holeData[15][10 * monument.index + bonus.index] ?? 0);
-    // Monumental Vibes
-    bonus.cosmoBonus = hole.majiks.HoleUpgrades[0].getBonus();
-    bonus.fountainBonus = hole.fountain.getBonus(monument.index, 13);
-   });
-   monument.bonuses.forEach(bonus => {
-    bonus.monumentSelfBoost = monument.bonuses[9].getBonus();
-   });
-  });
+  hole.monuments.parse(holeData, optionListAccount);
 
   hole.bell.parse(holeData, savedHoleData[11]?.[19] ?? null);
 
@@ -2237,13 +2447,12 @@ export class Hole extends Domain {
   hole.well.parse(hole, holeData);
   hole.harp.parse(holeData, savedHoleData[11]?.[21] ?? null, savedHoleData[20] ?? []);
 
-  hole.dawgDen.bestScore = Number(holeData[11][8] ?? 0);
+  hole.dawgDen.parse(holeData);
+  hole.grotto.parse(holeData);
+  hole.temple.parse(holeData);
 
 
-  // Gambit
-  hole.gambit.challenges.forEach(challenge => {
-   challenge.maxTime = Number(holeData[11][challenge.index + 65] ?? 0);
-  });
+  hole.gambit.parse(holeData[11]);
 
   hole.jar.parse(holeData, (data.get("Jars") as number[][] | undefined) ?? null);
  }
@@ -2310,8 +2519,7 @@ export const updateHole = (data: Map<string, any>) => {
  gambitMultipliers += tesseract.getUpgradeBonus(47) + wisdomMonumentBonus;
  gambitMultipliers += hole.schematics[78].getBonus(10);
  gambitMultipliers += jarBonuses.reduce((sum, bonus) => sum + bonus, 0);
- hole.gambit.gambitPointsMulti = 1 + gambitMultipliers / 100;
- hole.gambit.updateUnlockedBonuses();
+ hole.gambit.prepare(1 + gambitMultipliers / 100);
  hole.bell.prepare(hole, players, gaming.bits, divinity.atomsBalance);
  const explorer = hole.villagers[VillagerIndex.Polonai];
  const cavernCount = Math.min(hole.studies.length, explorer.level);
@@ -2333,6 +2541,15 @@ export const updateHole = (data: Map<string, any>) => {
   duckCount: hole.fountain.duckCount,
  });
  hole.resourceCavrens.prepare(hole.getResourceRequirementReduction());
+ hole.grotto.prepare({
+  lootieBonusPercent: hole.getSchematicBonus(46),
+  expieBonusPercent: hole.getSchematicBonus(47),
+  opieBonusPercent: hole.getSchematicBonus(48),
+ });
+ hole.dawgDen.prepare(hole);
+ hole.temple.prepare(hole);
+ hole.monuments.prepare(hole, legendTalents.getBonusFromIndex(27),
+  (data.get("meritocraty") as Meritocraty).getCurrentBonus(7), gaming.isSuperbitPurchased(31));
 }
 
 export const updateHoleWell = (data: Map<string, any>): void => {
@@ -2352,6 +2569,7 @@ export const updateHoleStudyEffects = (data: Map<string, any>): void => {
 export const updateHoleUpgradeEffects = (data: Map<string, any>): void => {
  const hole = data.get("hole") as Hole;
  hole.prepareSharedUpgradeEffects();
+ hole.monuments.prepareBonuses(hole);
 };
 
 export const updateHolePresentation = (data: Map<string, any>): void => {

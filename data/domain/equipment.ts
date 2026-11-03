@@ -5,6 +5,7 @@ import { initEquipmentMetadataRepo } from './data/EquipmentMetadataRepo';
 import type { Player } from './player';
 import type { Gallery } from './world-7/gallery';
 import type { HatRack } from './world-7/hatRack';
+import type { CapeVine } from './world-4/capeVine';
 import type { ObolsData, ObolStats } from './world-2/obols';
 import type { Gaming } from './world-5/gaming';
 import type { Menagerie } from './menagerie';
@@ -43,12 +44,13 @@ export interface EquipmentUniqueEffectModifiers {
 export interface EquipmentSources {
  gallery: Gallery;
  hatRack: HatRack;
+ capeVine: CapeVine;
  obols: ObolStats;
 }
 
 /**
  * Owns saved gear and its prepared normal-character contributions, not final character stats.
- * Gallery, Hat Rack, and Obols own their replacement and secondary contributions.
+ * Gallery, Hat Rack, Cape Vine, and Obols own their replacement and secondary contributions.
  * Prepare unique effects after those owners; prepare properties after final talent contexts.
  * Dungeon equipment, temporary forms, and map overrides are excluded.
  */
@@ -102,6 +104,7 @@ export class PlayerEquipment {
  updateUniqueEffects(player: Player, sources: EquipmentSources, modifiers: EquipmentUniqueEffectModifiers): void {
   const galleryUnlocked = sources.gallery.isUnlocked(player);
   const hatRackUnlocked = sources.hatRack.isUnlocked(player);
+  const capeVineUnlocked = sources.capeVine.isUnlocked(player);
   const effects = new Map<string, number>();
   for (let row = 0; row < 2; row++) {
    const items = row === 0 ? this.equipment : this.tools;
@@ -109,7 +112,7 @@ export class PlayerEquipment {
     const item = items[slot];
     // Dungeon equipment does not contribute to normal-character gear results.
     if (!item || item.internalName === 'Blank' || item.internalName.includes('Dung')) continue;
-    if (row === 0 && ((galleryUnlocked && (slot === 10 || slot === 14)) || (hatRackUnlocked && slot === 8))) continue;
+    if (row === 0 && ((galleryUnlocked && (slot === 10 || slot === 14)) || (hatRackUnlocked && slot === 8) || (capeVineUnlocked && slot === 12))) continue;
     // Slot chips take precedence over the final-slot Research multiplier.
     const chipDoubles = row === 0 && (
      (slot === 3 && modifiers.pendantChip === 1) ||
@@ -136,6 +139,7 @@ export class PlayerEquipment {
     value += sources.gallery.getNametagBonus(effect, player);
    }
    if (hatRackUnlocked) value += sources.hatRack.getBonus(effect, player);
+   if (capeVineUnlocked) value += sources.capeVine.getBonus(effect, player);
    value += sources.obols.getBonus(bonus);
    effects.set(effect, value);
   }
@@ -149,6 +153,7 @@ export class PlayerEquipment {
  ): void {
   const galleryUnlocked = sources.gallery.isUnlocked(player);
   const hatRackUnlocked = sources.hatRack.isUnlocked(player);
+  const capeVineUnlocked = sources.capeVine.isUnlocked(player);
   const results = {} as Record<EquipmentProperty, number>;
   for (const property of properties) {
    const isPower = property.endsWith('_Power');
@@ -161,7 +166,7 @@ export class PlayerEquipment {
      const item = items[slot];
      // Dungeon equipment does not contribute to normal-character gear results.
      if (!item || item.internalName === 'Blank' || item.internalName.includes('Dung')) continue;
-     if (row === 0 && ((galleryUnlocked && (slot === 10 || slot === 14)) || (hatRackUnlocked && slot === 8))) continue;
+     if (row === 0 && ((galleryUnlocked && (slot === 10 || slot === 14)) || (hatRackUnlocked && slot === 8) || (capeVineUnlocked && slot === 12))) continue;
      if (isPower) {
       if (row === 0) {
        // Generated suffix order selects the first matching power family.
@@ -189,6 +194,7 @@ export class PlayerEquipment {
      primary += sources.gallery.getNametagProperty(itemProperty, player);
     }
     if (hatRackUnlocked) primary += sources.hatRack.getProperty(itemProperty, player);
+    if (capeVineUnlocked) primary += sources.capeVine.getProperty(itemProperty, player);
    }
    if (property === 'STR' || property === 'AGI' || property === 'WIS' || property === 'LUK') {
     const modifier = modifiers[property];
@@ -216,6 +222,7 @@ export const updateEquipmentProperties = (data: Map<string, any>): void => {
  const players = data.get('players') as Player[];
  const gallery = data.get('gallery') as Gallery;
  const hatRack = data.get('hatRack') as HatRack;
+ const capeVine = data.get('capeVine') as CapeVine;
  const obols = data.get('obols') as ObolsData;
  const gaming = data.get('gaming') as Gaming;
  const menagerie = data.get('menagerie') as Menagerie;
@@ -235,7 +242,7 @@ export const updateEquipmentProperties = (data: Map<string, any>): void => {
    WIS: { talentPercent: player.getTalentBonus(486), superbitBonus },
    LUK: { talentPercent: player.getTalentBonus(36), superbitBonus },
   }, menagerie.silverJellyfish.miscMultiplier);
-  player.gear.updateProperties(player, { gallery, hatRack, obols: combinedObols }, {
+  player.gear.updateProperties(player, { gallery, hatRack, capeVine, obols: combinedObols }, {
    STR: { talentPercent: player.getTalentBonus(96), stampPercent: stampPercent.STR },
    AGI: { talentPercent: player.getTalentBonus(276), stampPercent: stampPercent.AGI },
    WIS: { talentPercent: player.getTalentBonus(456), stampPercent: stampPercent.WIS },

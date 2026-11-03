@@ -10,7 +10,7 @@
     },
     "talent_calculation_125": {
       "expression": "idleon.callFunction('TalentCalc', 125)",
-      "result": 681
+      "result": 708
     },
     "talent_calculation_305": {
       "expression": "idleon.callFunction('TalentCalc', 305)",

@@ -49,7 +49,7 @@
     },
     {
       "label": "native_active_exp_bubble",
-      "expression": "(() => { idleon.callFunction('Minehead','Button_uHave',15,0); return idleon.engine.getGameAttribute('DNSM').h.AlchBubbles.h.expACTIVE; })()",
+      "expression": "(() => { idleon.callFunction('Minehead','Button_uHave',15,0); const map = idleon.engine.getGameAttribute('DNSM').h.AlchBubbles.h; return Object.prototype.hasOwnProperty.call(map, 'expACTIVE') ? map['expACTIVE'] : 0; })()",
       "description": "Native prepared active EXP bubble additive"
     }
   ]

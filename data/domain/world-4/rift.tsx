@@ -47,8 +47,8 @@ type SkillMasteryDisplayBonuses = Partial<Record<SkillMasteryBonusIndex, string>
  * points gained, Gaming 1.15x bits, Farming 1.15x crop evolution chance,
  * Sneaking 1.10x jade coins, and Summoning 1.10x essence. Spelunking's
  * seven effects are EXP, efficiency, passive cards, max stamina, daily page
- * reads, stamina regeneration, and amber gain across slots 0..6. Omitted
- * skill/slot pairs use the defaults above; Research has no display effect.
+ * reads, stamina regeneration, and amber gain across slots 0..6. Research's
+ * seven effects apply only to Research. Omitted skill/slot pairs use the defaults above.
  */
 const skillMasteryDisplayOverrides: Partial<Record<SkillsIndex, SkillMasteryDisplayBonuses>> = {
  [SkillsIndex.Mining]: { [skillMasteryBonusIndex.totalDamage]: 'ALL_MINING_CARDS_ARE_NOW_PASSIVE' },
@@ -75,6 +75,15 @@ const skillMasteryDisplayOverrides: Partial<Record<SkillsIndex, SkillMasteryDisp
   [skillMasteryBonusIndex.allSkillEfficiency]: '+3_DAILY_PAGE_READS',
   [skillMasteryBonusIndex.printerOutput]: '+10%_STAMINA_REGEN_RATE',
   [skillMasteryBonusIndex.largeAllSkillExperience]: '1.50x_ALL_AMBER_GAIN',
+ },
+ [SkillsIndex.Research]: {
+  0: '+10%_RESEARCH_EXP',
+  1: '+1_MINIMUM_ROLL_FOR_OBSERVATIONS',
+  2: '+1_RESEARCH_PTS',
+  3: '+15%_RESEARCH_EXP',
+  4: '+1_RESEARCH_PTS',
+  5: '1.10X_RESEARCH_EXP',
+  6: '+1_MAX_ROLL_FOR_OBSERVATIONS',
  },
 };
 
@@ -107,6 +116,7 @@ const skillMasteryNumericOverrides: Partial<Record<SkillsIndex, SkillMasteryNume
   [skillMasteryBonusIndex.printerOutput]: 10,
   [skillMasteryBonusIndex.largeAllSkillExperience]: 50,
  },
+ [SkillsIndex.Research]: { 0: 10, 1: 1, 2: 1, 3: 15, 4: 1, 5: 10, 6: 1 },
 };
 
 const defaultSkillBonusValues: Record<SkillMasteryBonusIndex, number> = {
@@ -180,8 +190,6 @@ export class InfiniteStarsBonus extends RiftBonus {
  }
 }
 
-// Keep all 20 SkillsIndex values in skillLevels so every category reports a
-// rank. Research is the one category with no Rift Skill Mastery effects.
 export class SkillMastery extends RiftBonus {
  static readonly displayName = "Skill Mastery";
 
@@ -228,8 +236,7 @@ export class SkillMastery extends RiftBonus {
  }
 
  getBonusText = (skill: SkillsIndex, bonusIndex: number) => {
-  // Research keeps its rank but has no numeric or display mastery effect.
-  if (skill === SkillsIndex.Research || !Object.prototype.hasOwnProperty.call(this.skillLevels, skill)) {
+  if (!Object.prototype.hasOwnProperty.call(this.skillLevels, skill)) {
    return "";
   }
 
@@ -248,8 +255,7 @@ export class SkillMastery extends RiftBonus {
  }
 
  getSkillBonus = (skill: SkillsIndex, bonusIndex: number) => {
-  // Research keeps its rank but has no numeric or display mastery effect.
-  if (!this.active || skill === SkillsIndex.Research || !Object.prototype.hasOwnProperty.call(this.skillLevels, skill)) {
+  if (!this.active || !Object.prototype.hasOwnProperty.call(this.skillLevels, skill)) {
    return 0;
   }
 

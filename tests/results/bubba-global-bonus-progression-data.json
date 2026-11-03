@@ -8,7 +8,7 @@
       "expression": "idleon.callFunction(\"Bubbastuff\", \"UpgCost\", 3, 0)",
       "result": {
         "type": "large_number",
-        "value": "25870032771637010"
+        "value": "20058817404278188"
       }
     },
     "bonus_upgrade_3": {
@@ -17,7 +17,7 @@
     },
     "can_afford_next_bonus": {
       "expression": "idleon.engine.getGameAttribute(\"Bubba\")[0][0] >= idleon.callFunction(\"Bubbastuff\", \"UpgCost\", 3, 0) ? 1 : 0",
-      "result": 0
+      "result": 1
     },
     "minehead_bonus_5": {
       "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 5, 0)",

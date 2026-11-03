@@ -87,6 +87,14 @@ function P2WDisplay() {
                         </ShadowBox>
                     </Box>
                 </Box>
+                <Box gap="small">
+                    <Text size="large">Player</Text>
+                    <Box direction="row" gap="medium" wrap pad="small">
+                        <TextAndLabel label="Alch Speed level" text={String(alchemyData.p2w.playerSpeedLevel)} textSize="small" labelSize="xsmall" />
+                        <TextAndLabel label="Extra Exp level" text={String(alchemyData.p2w.playerExpLevel)} textSize="small" labelSize="xsmall" />
+                        <Text size="xsmall" color="accent-2">Account-wide upgrades</Text>
+                    </Box>
+                </Box>
             </ShadowBox>
         </Box>
     )

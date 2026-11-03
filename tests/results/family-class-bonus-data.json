@@ -1,100 +1,100 @@
 {
   "extractions": {
     "family_bonus_2": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[2]",
-      "result": null
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 2) ? map[2] : 0; })()",
+      "result": 0
     },
     "family_bonus_4": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[4]",
-      "result": 271
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 4) ? map[4] : 0; })()",
+      "result": 273
     },
     "family_bonus_6": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[6]",
-      "result": 5.580419580419581
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 6) ? map[6] : 0; })()",
+      "result": 5.583333333333333
     },
     "family_bonus_8": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[8]",
-      "result": 4.188311688311688
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 8) ? map[8] : 0; })()",
+      "result": 4.193548387096774
     },
     "family_bonus_14": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[14]",
-      "result": 280
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 14) ? map[14] : 0; })()",
+      "result": 377.1106239460371
     },
     "family_bonus_16": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[16]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 16) ? map[16] : 0; })()",
       "result": 23.306233062330623
     },
     "family_bonus_18": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[18]",
-      "result": 49.68392120934494
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 18) ? map[18] : 0; })()",
+      "result": 49.73173742783919
     },
     "family_bonus_20": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[20]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 20) ? map[20] : 0; })()",
       "result": 17.62532981530343
     },
     "family_bonus_24": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[24]",
-      "result": 59.89728652460524
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 24) ? map[24] : 0; })()",
+      "result": 59.98299696902491
     },
     "family_bonus_28": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[28]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 28) ? map[28] : 0; })()",
       "result": 36.87861271676301
     },
     "family_bonus_32": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[32]",
-      "result": 8.187235428199283
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 32) ? map[32] : 0; })()",
+      "result": 8.2321187867049
     },
     "family_bonus_38": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[38]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 38) ? map[38] : 0; })()",
       "result": 285
     },
     "family_bonus_40": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[40]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 40) ? map[40] : 0; })()",
       "result": 35.444519166106254
     },
     "family_bonus_42": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[42]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 42) ? map[42] : 0; })()",
       "result": 28.00531914893617
     },
     "family_bonus_44": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[44]",
-      "result": 23.664337063588494
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 44) ? map[44] : 0; })()",
+      "result": 23.666353715134203
     },
     "family_bonus_50": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[50]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 50) ? map[50] : 0; })()",
       "result": 4.417098445595855
     },
     "family_bonus_58": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[58]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 58) ? map[58] : 0; })()",
       "result": 1.8676806083650188
     },
     "family_bonus_62": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[62]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 62) ? map[62] : 0; })()",
       "result": 283
     },
     "family_bonus_64": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[64]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 64) ? map[64] : 0; })()",
       "result": 225
     },
     "family_bonus_66": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[66]",
-      "result": 1.3731543624161073
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 66) ? map[66] : 0; })()",
+      "result": 1.3731723675385648
     },
     "family_bonus_68": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[68]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 68) ? map[68] : 0; })()",
       "result": 15.770392749244714
     },
     "family_bonus_72": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[72]",
-      "result": 4.411764705882353
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 72) ? map[72] : 0; })()",
+      "result": 4.412148922273024
     },
     "family_bonus_80": {
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[80]",
-      "result": 7.4066985645933014
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 80) ? map[80] : 0; })()",
+      "result": 7.408895265423243
     },
     "family_guy_talent_144": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 144)",
-      "result": 33.41021416803954
+      "result": 33.421052631578945
     }
   },
   "errors": {}

@@ -4,117 +4,117 @@
   "extractions": [
     {
       "label": "family_bonus_2",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[2]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 2) ? map[2] : 0; })()",
       "description": "Beginner Family Bonus branch 0 (FamBonusQTYs[2])"
     },
     {
       "label": "family_bonus_4",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[4]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 4) ? map[4] : 0; })()",
       "description": "Journeyman Family Bonus branch 0 (FamBonusQTYs[4])"
     },
     {
       "label": "family_bonus_6",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[6]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 6) ? map[6] : 0; })()",
       "description": "Maestro Family Bonus branch 0 (FamBonusQTYs[6])"
     },
     {
       "label": "family_bonus_8",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[8]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 8) ? map[8] : 0; })()",
       "description": "Voidwalker Family Bonus branch 0 (FamBonusQTYs[8])"
     },
     {
       "label": "family_bonus_14",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[14]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 14) ? map[14] : 0; })()",
       "description": "Warrior Family Bonus branch 0 (FamBonusQTYs[14])"
     },
     {
       "label": "family_bonus_16",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[16]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 16) ? map[16] : 0; })()",
       "description": "Barbarian Family Bonus branch 0 (FamBonusQTYs[16])"
     },
     {
       "label": "family_bonus_18",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[18]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 18) ? map[18] : 0; })()",
       "description": "Squire Family Bonus branch 0 (FamBonusQTYs[18])"
     },
     {
       "label": "family_bonus_20",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[20]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 20) ? map[20] : 0; })()",
       "description": "Blood Berserker Family Bonus branch 0 (FamBonusQTYs[20])"
     },
     {
       "label": "family_bonus_24",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[24]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 24) ? map[24] : 0; })()",
       "description": "Divine Knight Family Bonus branch 0 (FamBonusQTYs[24])"
     },
     {
       "label": "family_bonus_28",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[28]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 28) ? map[28] : 0; })()",
       "description": "Death Bringer Family Bonus branch 0 (FamBonusQTYs[28])"
     },
     {
       "label": "family_bonus_32",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[32]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 32) ? map[32] : 0; })()",
       "description": "Royal Guardian Family Bonus branch 0 (FamBonusQTYs[32])"
     },
     {
       "label": "family_bonus_38",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[38]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 38) ? map[38] : 0; })()",
       "description": "Archer Family Bonus branch 0 (FamBonusQTYs[38])"
     },
     {
       "label": "family_bonus_40",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[40]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 40) ? map[40] : 0; })()",
       "description": "Bowman Family Bonus branch 0 (FamBonusQTYs[40])"
     },
     {
       "label": "family_bonus_42",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[42]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 42) ? map[42] : 0; })()",
       "description": "Hunter Family Bonus branch 0 (FamBonusQTYs[42])"
     },
     {
       "label": "family_bonus_44",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[44]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 44) ? map[44] : 0; })()",
       "description": "Siege Breaker Family Bonus branch 0 (FamBonusQTYs[44])"
     },
     {
       "label": "family_bonus_50",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[50]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 50) ? map[50] : 0; })()",
       "description": "Beast Master Family Bonus branch 0 (FamBonusQTYs[50])"
     },
     {
       "label": "family_bonus_58",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[58]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 58) ? map[58] : 0; })()",
       "description": "Wind Walker Family Bonus branch 0 (FamBonusQTYs[58])"
     },
     {
       "label": "family_bonus_62",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[62]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 62) ? map[62] : 0; })()",
       "description": "Mage Family Bonus branch 0 (FamBonusQTYs[62])"
     },
     {
       "label": "family_bonus_64",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[64]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 64) ? map[64] : 0; })()",
       "description": "Wizard Family Bonus branch 0 (FamBonusQTYs[64])"
     },
     {
       "label": "family_bonus_66",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[66]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 66) ? map[66] : 0; })()",
       "description": "Shaman Family Bonus branch 0 (FamBonusQTYs[66])"
     },
     {
       "label": "family_bonus_68",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[68]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 68) ? map[68] : 0; })()",
       "description": "Elemental Sorcerer Family Bonus branch 0 (FamBonusQTYs[68])"
     },
     {
       "label": "family_bonus_72",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[72]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 72) ? map[72] : 0; })()",
       "description": "Bubonic Conjuror Family Bonus branch 0 (FamBonusQTYs[72])"
     },
     {
       "label": "family_bonus_80",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[80]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 80) ? map[80] : 0; })()",
       "description": "Arcane Cultist Family Bonus branch 0 (FamBonusQTYs[80])"
     },
     {

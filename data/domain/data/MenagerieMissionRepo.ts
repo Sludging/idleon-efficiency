@@ -162,8 +162,8 @@ export const initMenagerieMissionRepo = () => {
             }),
         new MenagerieMissionBase(22, <MenagerieMissionModel>{
                 "index": 22,
-                "description": "Reach Showdown { in the Emperors Castle",
-                "label": "Emperor Showdown",
+                "description": "Beat Showdown { in the Emperors Castle",
+                "label": "Emperor Showdown beaten",
                 "initialRequirement": 100,
                 "requirementIncrement": 25
             }),

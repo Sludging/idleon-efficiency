@@ -41,6 +41,10 @@ import type { EventShop } from '../../eventShop';
 import type { Divinity } from '../../world-5/divinity';
 import type { Hole } from '../../world-5/hole/hole';
 import type { ZenithMarket } from '../../world-7/zenithShop';
+import { LiquidCauldron } from './liquidCauldron';
+import type { Meritocraty } from '../../world-7/meritocraty';
+import { getStampBonusForKey, type Stamp } from '../../world-1/stamps';
+import type { Guild } from '../../guild';
 
 export enum CauldronIndex {
     Power = 0,
@@ -137,6 +141,8 @@ function handleToolBubbles(titleText: string, bubbleName: string) {
     }
 }
 
+export const bubbleGrowthMilestones = [50, 75, 90, 95, 99] as const;
+
 export class Bubble {
     name: string;
     x1: number;
@@ -194,8 +200,88 @@ export class Bubble {
     }
 
     getBonus = (roundResult: boolean = false): number => {
+        return this.getGrowthBonus(roundResult);
+    }
+
+    // Other account-based multipliers do not change the bubble's growth curve.
+    getGrowthBonus(roundResult: boolean = true): number {
         return lavaFunc(this.func, this.level, this.x1, this.x2, roundResult) *
             (this.prismatic ? this.prismaticMultiplier : 1);
+    }
+
+    getMaximumBonus(): number | undefined {
+        let maximum: number;
+        switch (this.func) {
+            case "decay": maximum = this.x1; break;
+            case "decayMulti": maximum = this.x1 + 1; break;
+            case "addDECAY": maximum = this.x1 * 100000; break;
+            default: return undefined;
+        }
+        return maximum * (this.prismatic ? this.prismaticMultiplier : 1);
+    }
+
+    getBonusProgress(level: number = this.level): number | undefined {
+        const maximum = this.getMaximumBonus();
+        if (maximum === undefined) {
+            return undefined;
+        }
+        if (this.func === "addDECAY") {
+            const current = lavaFunc(this.func, level, this.x1, this.x2)
+                * (this.prismatic ? this.prismaticMultiplier : 1);
+            return round(current) / maximum * 100;
+        }
+        return level / (level + this.x2) * 100;
+    }
+
+    getNextGrowthMilestone(): { percentage: number; level: number } | undefined {
+        const maximum = this.getMaximumBonus();
+        const currentProgress = this.getBonusProgress();
+        if (maximum === undefined || !Number.isFinite(maximum) ||
+            currentProgress === undefined || !Number.isFinite(currentProgress)) {
+            return undefined;
+        }
+
+        let percentage: number | undefined;
+        for (const milestone of bubbleGrowthMilestones) {
+            if (milestone > currentProgress) {
+                percentage = milestone;
+                break;
+            }
+        }
+        if (percentage === undefined) {
+            return undefined;
+        }
+
+        let lower = 0;
+        let upper = 1;
+        while (true) {
+            const progress = this.getBonusProgress(upper);
+            if (progress === undefined || !Number.isFinite(progress)) {
+                return undefined;
+            }
+            if (progress >= percentage) {
+                break;
+            }
+            if (upper === Number.MAX_SAFE_INTEGER) {
+                return undefined;
+            }
+            upper = Math.min(upper * 2, Number.MAX_SAFE_INTEGER);
+        }
+
+        // Find the first whole-number level that reaches the milestone, including bonus rounding.
+        while (lower < upper) {
+            const middle = lower + Math.floor((upper - lower) / 2);
+            const progress = this.getBonusProgress(middle);
+            if (progress === undefined || !Number.isFinite(progress)) {
+                return undefined;
+            }
+            if (progress >= percentage) {
+                upper = middle;
+            } else {
+                lower = middle + 1;
+            }
+        }
+        return { percentage, level: lower };
     }
 
     getBonusText = (bonus: number = this.getBonus(true)): string => {
@@ -338,16 +424,196 @@ export class CropiusMapperBubble extends Bubble {
     }
 }
 
+export class CauldronBoost {
+    level = 0;
+    progress = 0;
+    requirement = 0;
+    maxLevel = 170;
+
+    parse(level: unknown, progress: unknown): void {
+        this.level = Number(level ?? 0);
+        this.progress = Number(progress ?? 0);
+    }
+
+    prepareRequirement(requirementReduction: number): void {
+        const nextLevel = this.level + 1;
+        this.requirement = Math.floor(1 + Math.pow(1.5 * nextLevel, 1.6)
+            * Math.pow(1.073, nextLevel) * 2 * Math.max((100 - requirementReduction) / 100, 0.05));
+    }
+
+    get progressPercent(): number {
+        return this.progress / this.requirement * 100;
+    }
+}
+
+export interface NextBubblePreview {
+    bubbleNumber: number;
+    worldNumber: number;
+    brewRequirement: number;
+    chancePercent: number;
+}
+
+export interface BestBrewerPreview {
+    playerId: number | undefined;
+    chancePercent: number;
+    estimatedUnlocks: number;
+    nextBubbles: NextBubblePreview[];
+}
+
 export class Cauldron {
     name: string;
     short_name: string;
     bubbles: Array<Bubble> = [];
-    boostLevels: Array<number> = [0, 0, 0, 0];
+    boosts = Array.from({ length: 4 }, () => new CauldronBoost());
     hiddenBubbleLevels: number = 0;
+    brewProgress = 0;
+    brewRequirement = 0.01;
+    // Estimated brew points per hour use one character's bonuses for shared speed factors.
+    brewSpeed = 0;
+    bestBrewerPreview: BestBrewerPreview = {
+        playerId: undefined, chancePercent: 0, estimatedUnlocks: 0, nextBubbles: [],
+    };
+    private unlockedBubbleCount = 0;
+    private assignedPlayerIds: number[] = [];
+    private ivory = false;
+    private newBubbleMultiplier = 1;
+
+    parse(
+        index: number, levels: Record<string, number | string>, brew: unknown,
+        boostLevels: unknown[], boostProgress: unknown[], jobs: unknown[], ivoryEncoding: string,
+    ): void {
+        this.hiddenBubbleLevels = 0;
+        Object.entries(levels).forEach(([bubbleNumber, level]) => {
+            if (bubbleNumber === "length") {
+                return;
+            }
+            const bubbleIndex = Number(bubbleNumber);
+            if (bubbleIndex < this.bubbles.length) {
+                this.bubbles[bubbleIndex].level = Number(level);
+            } else {
+                this.hiddenBubbleLevels += Number(level);
+            }
+        });
+        this.unlockedBubbleCount = 0;
+        while (Number(levels[this.unlockedBubbleCount] ?? 0) !== 0) {
+            this.unlockedBubbleCount++;
+        }
+        this.brewProgress = Number(brew ?? 0);
+        this.boosts.forEach((boost, boostIndex) => {
+            const saveIndex = index * 4 + boostIndex;
+            boost.parse(boostLevels[saveIndex], boostProgress[saveIndex]);
+        });
+        this.assignedPlayerIds = [];
+        jobs.forEach((job, playerId) => {
+            if (Number(job) === index) {
+                this.assignedPlayerIds.push(playerId);
+            }
+        });
+        this.ivory = ivoryEncoding.charAt(index) === "1";
+    }
+
+    get readyAttempts(): number {
+        return Math.floor(this.brewProgress / this.brewRequirement);
+    }
+
+    get attemptProgress(): number {
+        return this.brewProgress - this.readyAttempts * this.brewRequirement;
+    }
+
+    get brewProgressPercent(): number {
+        return this.attemptProgress / this.brewRequirement * 100;
+    }
+
+    private getBrewRequirement(unlocked: number): number {
+        switch (unlocked) {
+            case 0: return 0.01;
+            case 1: return 0.15;
+            case 2: return 0.75;
+            case 3: return 5;
+            case 4: return 20;
+            default: return 1 + Math.pow(3 * (unlocked - 3), 2.2) * Math.pow(1.3, unlocked - 3);
+        }
+    }
+
+    private getBaseNewBubbleChance(unlocked: number): number {
+        return 139 * Math.pow(0.73, unlocked + 1) / Math.max(0.1 * unlocked + 1, 1);
+    }
+
+    getNewBubbleChance(player: Player): number {
+        return this.getBaseNewBubbleChance(this.unlockedBubbleCount) * this.newBubbleMultiplier
+            * (1 + player.getTalentBonusAtInputs(492, player.finalTalentInputs, true) / 100);
+    }
+
+    private getEstimatedUnlocks(chanceMultiplier: number): number {
+        let remaining = this.brewProgress;
+        let unlocked = this.unlockedBubbleCount;
+        let expected = 0;
+        while (expected < 1000) {
+            const requirement = this.getBrewRequirement(unlocked);
+            const chance = Math.min(this.getBaseNewBubbleChance(unlocked) * chanceMultiplier / 100, 1);
+            const attempts = Math.floor(remaining / requirement);
+            if (attempts <= 0 || chance <= 0) {
+                break;
+            }
+            const attemptsPerBubble = 1 / chance;
+            if (attempts < attemptsPerBubble) {
+                expected += attempts * chance;
+                break;
+            }
+            expected++;
+            remaining -= attemptsPerBubble * requirement;
+            unlocked++;
+        }
+        return expected;
+    }
+
+    prepareBrewing(
+        players: Player[], p2wChance: number, boostRequirementReduction: number,
+        specificSpeedMultiplier: number, playerBrewSpeeds: ReadonlyMap<number, number>,
+    ): void {
+        this.brewRequirement = this.getBrewRequirement(this.unlockedBubbleCount);
+        this.boosts.forEach(boost => boost.prepareRequirement(boostRequirementReduction));
+        const luck = Math.round(10 * (1 + 0.05 * this.boosts[CauldronBoostIndex.Luck].level)) / 10;
+        this.newBubbleMultiplier = luck * Math.max(p2wChance, 1) * (this.ivory ? 1.5 : 1);
+        const speedBoost = 1 + Math.round(5 * this.boosts[CauldronBoostIndex.Speed].level) / 100;
+        const ivoryMultiplier = this.ivory ? 1.5 * specificSpeedMultiplier : specificSpeedMultiplier;
+        const cauldronMultiplier = speedBoost * ivoryMultiplier;
+        this.brewSpeed = this.assignedPlayerIds.reduce((sum, playerId) =>
+            sum + (playerBrewSpeeds.get(playerId) ?? 0) * cauldronMultiplier, 0);
+
+        let bestPlayer: Player | undefined;
+        let bestBonus = 0;
+        players.forEach(player => {
+            const bonus = player.getTalentBonusAtInputs(492, player.finalTalentInputs, true);
+            if (bonus > bestBonus) {
+                bestPlayer = player;
+                bestBonus = bonus;
+            }
+        });
+        const chanceMultiplier = this.newBubbleMultiplier * (1 + bestBonus / 100);
+        this.bestBrewerPreview = {
+            playerId: bestPlayer?.playerID,
+            chancePercent: this.getBaseNewBubbleChance(this.unlockedBubbleCount) * chanceMultiplier,
+            estimatedUnlocks: this.getEstimatedUnlocks(chanceMultiplier),
+            nextBubbles: Array.from({ length: 10 }, (_, offset) => {
+                const unlocked = this.unlockedBubbleCount + offset;
+                return {
+                    bubbleNumber: unlocked + 1,
+                    worldNumber: Math.ceil((unlocked + 1) / 5),
+                    brewRequirement: this.getBrewRequirement(unlocked),
+                    chancePercent: this.getBaseNewBubbleChance(unlocked) * chanceMultiplier,
+                };
+            }),
+        };
+    }
 
     constructor(name: string, short_name: string) {
         this.name = name;
         this.short_name = short_name;
+    }
+
+    getImageData(): ImageData {
+        return { location: `aBrewBarCircle${cauldronIndex[this.name]}`, width: 24, height: 24 };
     }
 
     static fromBase = (data: CauldronBase) => {
@@ -391,6 +657,11 @@ export class Vial {
     bonusMulitplier: number = 1;
     vaultBonus: number = 0;
     maxedVials: number = 0;
+    meritocracyBonus = 0;
+
+    static calculateBonusMultiplier(labMultiplier: number, maxedVials: number, vaultBonus: number, meritocracyBonus: number): number {
+        return labMultiplier * (1 + (2 * maxedVials + vaultBonus) / 100) * (1 + meritocracyBonus / 100);
+    }
 
     constructor(id: string, public data: BubbleModel, public vialIndex: number) {
         this.name = id;
@@ -406,11 +677,8 @@ export class Vial {
     }
 
     getBonus = (round: boolean = false): number => {
-        const base = (2 * this.maxedVials) + this.vaultBonus;
-
         return lavaFunc(this.func, this.level, this.x1, this.x2, round)
-            * this.bonusMulitplier
-            * (1 + base / 100);
+            * Vial.calculateBonusMultiplier(this.bonusMulitplier, this.maxedVials, this.vaultBonus, this.meritocracyBonus);
     }
 
     getBonusText = (bonus: number = this.getBonus(true)): string => {
@@ -471,6 +739,39 @@ export class P2W {
     }
     vialAttempts: number = 0;
     vialsRng: number = 0;
+    playerSpeedLevel = 0;
+    playerExpLevel = 0;
+
+    parse(levels: number[][]): void {
+        Object.values(this.cauldronLevels).forEach((value, index) => {
+            const startIndex = index * 3;
+            value.speed = Number(levels[0]?.[startIndex] ?? 0);
+            value.newBubble = Number(levels[0]?.[startIndex + 1] ?? 0);
+            value.boostReq = Number(levels[0]?.[startIndex + 2] ?? 0);
+        });
+        Object.values(this.liquidLevels).forEach((value, index) => {
+            const startIndex = index * 2;
+            value.regen = Math.max(Number(levels[1]?.[startIndex] ?? 0), 0);
+            value.capacity = Math.max(Number(levels[1]?.[startIndex + 1] ?? 0), 0);
+        });
+        this.vialAttempts = Number(levels[2]?.[0] ?? 0);
+        this.vialsRng = Number(levels[2]?.[1] ?? 0);
+        this.playerSpeedLevel = Number(levels[3]?.[0] ?? 0);
+        this.playerExpLevel = Number(levels[3]?.[1] ?? 0);
+    }
+
+    getCauldronBonuses(index: number): { speed: number; newBubble: number; boostReq: number } {
+        const levels = Object.values(this.cauldronLevels)[index];
+        return {
+            speed: Math.max(0, lavaFunc("add", levels.speed, 3, 0.2)),
+            newBubble: Math.max(0, lavaFunc("decayMulti", levels.newBubble, 2.5, 100)),
+            boostReq: Math.max(0, lavaFunc("decay", levels.boostReq, 70, 100)),
+        };
+    }
+
+    getPlayerSpeedBonus(): number {
+        return Math.max(0, lavaFunc("decay", this.playerSpeedLevel, 35, 100));
+    }
 
     getCauldronCost = (
         type: "Speed" | "NewBubble" | "BoostReq",
@@ -635,10 +936,141 @@ export interface AccountDailyBubbleProgression extends DailyBubbleProgression {
     krukActiveVaries: boolean;
 }
 
+export type AlchSourceRewardBasis =
+    | "value"
+    | "perLevel"
+    | "levelOne"
+    | "whenUnlocked"
+    | "perMaxedVial"
+    | "perEtherealSigil"
+    | "whenWinning"
+    | "afterWorld7Winning";
+
+export type AlchemySourceReward = {
+    active: boolean;
+    potentialValue: number;
+    basis: AlchSourceRewardBasis;
+};
+
 export class Alchemy extends Domain {
     cauldrons: Array<Cauldron> = [];
     vials: Array<Vial> = [];
     p2w: P2W = new P2W();
+    liquids = Object.keys(this.p2w.liquidLevels).map((name, index) => new LiquidCauldron(index, name));
+    prismaFragments = 0;
+    prismaticBaseMultiplier = 2;
+    prismaticMaximumMultiplier = 5;
+    prismaticMultiplier = this.prismaticBaseMultiplier;
+    prismaticMultiplierSources = {
+        tesseractPercent: 0,
+        arcadePercent: 0,
+        sushiPercent: 0,
+        jellyOperatorPercent: 0,
+        world6TrophyPercent: 0,
+        palettePercent: 0,
+        purpleSigilsPercent: 0,
+        exoticMarketPercent: 0,
+        legendTalentPercent: 0,
+        companionPercent: 0,
+    };
+    prismaticMultiplierSourceRewards: Record<keyof Alchemy["prismaticMultiplierSources"], AlchemySourceReward> = {
+        tesseractPercent: { active: false, potentialValue: 0, basis: "perLevel" },
+        arcadePercent: { active: false, potentialValue: 0, basis: "levelOne" },
+        sushiPercent: { active: false, potentialValue: 0, basis: "whenUnlocked" },
+        jellyOperatorPercent: { active: false, potentialValue: 0, basis: "value" },
+        world6TrophyPercent: { active: false, potentialValue: 0, basis: "whenUnlocked" },
+        palettePercent: { active: false, potentialValue: 0, basis: "whenUnlocked" },
+        purpleSigilsPercent: { active: false, potentialValue: 0, basis: "perEtherealSigil" },
+        exoticMarketPercent: { active: false, potentialValue: 0, basis: "levelOne" },
+        legendTalentPercent: { active: false, potentialValue: 0, basis: "perLevel" },
+        companionPercent: { active: false, potentialValue: 0, basis: "whenUnlocked" },
+    };
+    vialBonusMultiplier = 1;
+    vialMultiplierSources = {
+        labFactor: 1,
+        vialMasteryPercent: 0,
+        vaultPercent: 0,
+        meritocracyPercent: 0,
+    };
+    vialMultiplierSourceRewards: Record<keyof Alchemy["vialMultiplierSources"], AlchemySourceReward> = {
+        labFactor: { active: false, potentialValue: 2, basis: "whenUnlocked" },
+        vialMasteryPercent: { active: false, potentialValue: 0, basis: "perMaxedVial" },
+        vaultPercent: { active: false, potentialValue: 0, basis: "perLevel" },
+        meritocracyPercent: { active: false, potentialValue: 0, basis: "afterWorld7Winning" },
+    };
+    sigilSyrup = 0;
+    private savedBrewerWisdom = new Map<number, number>();
+    private savedBrewerLastActive = new Map<number, number>();
+    // The save does not identify the active character. Estimate shared bonuses from saved character activity.
+    brewingContextPlayerId: number | undefined = undefined;
+
+    prepareBrewing(players: Player[], stampBonus: number, guildBonus: number, companionBonus: number): void {
+        let contextPlayer: Player | undefined;
+        let latestActivity = 0;
+        for (const player of players) {
+            const activity = this.savedBrewerLastActive.get(player.playerID)!;
+            if (Number.isFinite(activity) && activity > latestActivity) {
+                contextPlayer = player;
+                latestActivity = activity;
+            }
+        }
+        if (!contextPlayer) {
+            // If activity timestamps are missing, use the character with the most bonus talent levels.
+            let bestAddedLevels = -1;
+            for (const player of players) {
+                const inputs = player.finalTalentInputs;
+                const addedLevels = Math.ceil(inputs.minorLinkTalentLevels) + inputs.eliteTalentLevels
+                    + inputs.achievementTalentLevels + Math.floor(inputs.familyTalentLevels)
+                    + inputs.companionTalentLevels + inputs.ninjaMasteryTalentLevels
+                    + inputs.equinoxTalentLevels + inputs.grimoireTalentLevels + inputs.equipmentTalentLevels
+                    + Math.min(5, inputs.tesseractTalentLevels) + inputs.gamingTalentLevels;
+                if (addedLevels > bestAddedLevels) {
+                    contextPlayer = player;
+                    bestAddedLevels = addedLevels;
+                }
+            }
+        }
+        this.brewingContextPlayerId = contextPlayer?.playerID;
+        const playerBrewSpeeds = new Map<number, number>();
+        const playerSpeedBonus = this.p2w.getPlayerSpeedBonus();
+        if (contextPlayer) {
+            const bubbleBonus = this.getBubbleBonusForKey("BrewSpd", contextPlayer);
+            const postOfficeBonus = contextPlayer.getPostOfficeBonus("BrewSpeed");
+            const sharedMultiplier = 1 + (stampBonus + guildBonus + (bubbleBonus + postOfficeBonus)) / 100;
+            for (const player of players) {
+                const level = player.skills.get(SkillsIndex.Alchemy)!.level;
+                const isContextPlayer = player === contextPlayer;
+                const wisdom = isContextPlayer ? player.stats.wisdom : this.savedBrewerWisdom.get(player.playerID)!;
+                const wisdomCurve = wisdom < 1000
+                    ? (Math.pow(wisdom + 1, 0.37) - 1) / 40
+                    : (wisdom - 1000) / (wisdom + 2500) * 0.5 + 0.297;
+                let characterSpeed = playerSpeedBonus * level;
+                if (isContextPlayer) {
+                    const busyBrewing = player.getTalentBonusAtInputs(491, player.finalTalentInputs);
+                    const brokenTime = player.getTalentBonusAtInputs(269, player.finalTalentInputs);
+                    const starSignBonus = player.starSigns.reduce((sum, sign) =>
+                        sum + sign.getBonus("Speed in Town Skills"), 0);
+                    const townSpeed = brokenTime + starSignBonus;
+                    characterSpeed *= 1 + wisdomCurve / 0.6;
+                    characterSpeed *= 1 + (busyBrewing + townSpeed) / 100;
+                } else {
+                    // Inactive characters use allocated Busy Brewing points, not the talent's percentage bonus.
+                    const busyBrewingRank = player.getTalent(491)?.pointsSpent ?? 0;
+                    characterSpeed *= (1 + busyBrewingRank / 100) * (1 + wisdomCurve / 0.6);
+                }
+                const researchSpeed = Math.round(Math.pow(level, 0.8)) * sharedMultiplier
+                    * (1 + characterSpeed / 100) * (1 + companionBonus / 100);
+                playerBrewSpeeds.set(player.playerID, researchSpeed);
+            }
+        }
+        const vialKeys = ["OrangeBrew", "GreenBrew", "PurpleBrew", "YellowBrew"];
+        this.cauldrons.forEach((cauldron, index) => {
+            const p2w = this.p2w.getCauldronBonuses(index);
+            const specificSpeedMultiplier = (1 + this.getVialBonusForKey(vialKeys[index]) / 100)
+                * (1 + p2w.speed / 100);
+            cauldron.prepareBrewing(players, p2w.newBubble, p2w.boostReq, specificSpeedMultiplier, playerBrewSpeeds);
+        });
+    }
     private dailyPlayers: readonly Player[] = [];
     private dailyMainframeBonus = 0;
     private dailyBundleOwned = false;
@@ -981,6 +1413,10 @@ export class Alchemy extends Domain {
         return [
             { key: "CauldronInfo", default: {}, perPlayer: false },
             { key: "CauldUpgLVs", default: [], perPlayer: false },
+            { key: "CauldUpgXPs", default: [], perPlayer: false },
+            { key: "CauldronJobs1", default: [], perPlayer: false },
+            { key: "PVStatList_", default: [], perPlayer: true },
+            { key: "PTimeAway_", default: 0, perPlayer: true },
             { key: "CauldronP2W", default: [], perPlayer: false },
         ];
     }
@@ -1011,44 +1447,32 @@ export class Alchemy extends Domain {
 
     parse(data: Map<string, any>): void {
         const alchemy = data.get(this.getDataKey()) as Alchemy;
-        // Must stay as raw
-        const alchemyData = data.get("CauldronInfo") as Map<string, number>[];
+        const alchemyData = data.get("CauldronInfo") as Record<string, number | string>[];
         const boostLevels = data.get("CauldUpgLVs") as number[];
-        const cauldronP2w = data.get("CauldronP2W") as number[][];
+        const boostProgress = data.get("CauldUpgXPs") as number[];
+        const jobs = data.get("CauldronJobs1") as number[];
         const optionList = data.get("OptLacc") as (number | string)[];
 
-        alchemyData.forEach((indexData, index) => {
-            // Handle cauldrons if the first 4 arrays of data
-            if (index in CauldronIndex) {
-                handleCauldron(indexData, index, alchemy, boostLevels)
-            }
-            // Handle vials if 5th array of data
-            if (index == AlchemyConst.VialIndex) {
-                handleVial(indexData, alchemy);
-            }
-        })
-
-        // It should never be less but you know, better safe.
-        if (cauldronP2w.length > 2) {
-            Object.values(alchemy.p2w.cauldronLevels).forEach((value, index) => {
-                const startIndex = index * 3
-                // It should never be less but you know, better safe.
-                if (startIndex < cauldronP2w[0].length) {
-                    value.speed = cauldronP2w[0][startIndex];
-                    value.newBubble = cauldronP2w[0][startIndex + 1];
-                    value.boostReq = cauldronP2w[0][startIndex + 2];
-                }
-            })
-            Object.values(alchemy.p2w.liquidLevels).forEach((value, index) => {
-                const startIndex = index * 2
-                // It should never be less but you know, better safe.
-                if (startIndex < cauldronP2w[1].length) {
-                    value.regen = Math.max(cauldronP2w[1][startIndex], 0);
-                    value.capacity = Math.max(cauldronP2w[1][startIndex + 1], 0);
-                }
-            })
-            alchemy.p2w.vialAttempts = cauldronP2w[2][0];
-            alchemy.p2w.vialsRng = cauldronP2w[2][1];
+        alchemy.cauldrons.forEach((cauldron, index) => {
+            cauldron.parse(index, alchemyData[index] ?? {}, alchemyData[5]?.[index],
+                boostLevels, boostProgress, jobs, String(optionList[32] ?? ""));
+        });
+        if (alchemyData[AlchemyConst.VialIndex]) {
+            handleVial(alchemyData[AlchemyConst.VialIndex], alchemy);
+        }
+        alchemy.liquids.forEach(liquid => {
+            liquid.parse(alchemyData[6]?.[liquid.liquidIndex], boostLevels, boostProgress, jobs, Number(optionList[123] ?? 0));
+        });
+        alchemy.p2w.parse(data.get("CauldronP2W") as number[][]);
+        alchemy.prismaFragments = Number(optionList[383] ?? 0);
+        alchemy.sigilSyrup = Number(optionList[409] ?? 0);
+        alchemy.savedBrewerWisdom = new Map();
+        alchemy.savedBrewerLastActive = new Map();
+        const charCount = data.get("charCount") as number;
+        for (let playerId = 0; playerId < charCount; playerId++) {
+            const savedStats = data.get(`PVStatList_${playerId}`) as (number | string)[];
+            alchemy.savedBrewerWisdom.set(playerId, Number(savedStats[2] ?? 0));
+            alchemy.savedBrewerLastActive.set(playerId, Number(data.get(`PTimeAway_${playerId}`) ?? 0));
         }
 
         // Mark bubbles that are prismatic
@@ -1065,37 +1489,11 @@ export class Alchemy extends Domain {
     }
 }
 
-const handleCauldron = (cauldronData: Map<string, number>, index: number, alchemy: Alchemy, boostLevels: Array<number>) => {
-    Object.entries(cauldronData).forEach(([bubble_number, level], _) => {
-        if (bubble_number !== "length") {
-            if (parseInt(bubble_number) < alchemy.cauldrons[index].bubbles.length) {
-                try {
-                    alchemy.cauldrons[index].bubbles[parseInt(bubble_number)].level = level;
-                }
-                catch (e) {
-                    console.log(`Failed on ${bubble_number} / ${index}`, e)
-                }
-            } else {
-                // Those can be for example bubbles for future worlds for which bubble aren't displayed already but we need to know they're discovered (The Tome for example)
-                alchemy.cauldrons[index].hiddenBubbleLevels += level;
-            }
-        }
-    });
-
-    for (const boost in CauldronBoostIndex) {
-        // ignore the keys from the enum
-        if (isNaN(parseInt(boost))) {
-            continue;
-        }
-        alchemy.cauldrons[index].boostLevels[boost] = boostLevels[(index * AlchemyConst.CauldronCount) + parseInt(boost.toString())];
-    }
-}
-
-const handleVial = (vialData: Map<string, number>, alchemy: Alchemy) => {
+const handleVial = (vialData: Record<string, number | string>, alchemy: Alchemy) => {
     for (const [vial, level] of Object.entries(vialData)) {
         if (vial !== "length" && parseInt(vial) < alchemy.vials.length) {
             try {
-                alchemy.vials[parseInt(vial)].level = level;
+                alchemy.vials[parseInt(vial)].level = Number(level);
             }
             catch (e) {
                 console.log(`Failed on vial ${vial}`, e)
@@ -1255,18 +1653,40 @@ export function updateAlchemy(data: Map<string, any>) {
     const labBonusActive = lab.bonuses.find(bonus => bonus.name == "My 1st Chemistry Set")?.active ?? false;
     const riftVialMastery = rift.bonuses.find(bonus => bonus.name == "Vial Mastery");
     const maxVials = alchemy.vials.reduce((sum, vial) => sum += vial.level == 13 ? 1 : 0, 0);
+    const meritocracy = data.get("meritocraty") as Meritocraty;
+    const meritocracyBonus = meritocracy.getCurrentBonus(20);
+    const labMultiplier = labBonusActive ? 2 : 1;
+    const masteryMaxedVials = riftVialMastery?.active ? maxVials : 0;
+    alchemy.vialMultiplierSources = {
+        labFactor: labMultiplier,
+        vialMasteryPercent: 2 * masteryMaxedVials,
+        vaultPercent: vaultBonus42,
+        meritocracyPercent: meritocracyBonus,
+    };
+    const vaultUpgrade42 = vault.bonuses.find(upgrade => upgrade.id === 42)!;
+    alchemy.vialMultiplierSourceRewards = {
+        labFactor: { active: labBonusActive, potentialValue: 2, basis: "whenUnlocked" },
+        vialMasteryPercent: {
+            active: riftVialMastery?.active ?? false,
+            potentialValue: maxVials > 0 ? 2 * maxVials : 2,
+            basis: maxVials > 0 ? "whenUnlocked" : "perMaxedVial",
+        },
+        vaultPercent: { active: vaultUpgrade42.level > 0, potentialValue: vaultUpgrade42.data.value, basis: "perLevel" },
+        meritocracyPercent: {
+            active: meritocracy.haveReachedW7 && meritocracy.currentBonusIndex === 20,
+            potentialValue: meritocracy.haveReachedW7
+                ? meritocracy.getPotentialBonus(20)
+                : meritocracy.getPotentialBonusWhenEligible(20),
+            basis: meritocracy.haveReachedW7 ? "whenWinning" : "afterWorld7Winning",
+        },
+    };
+    alchemy.vialBonusMultiplier = Vial.calculateBonusMultiplier(labMultiplier, masteryMaxedVials, vaultBonus42, meritocracyBonus);
 
     alchemy.vials.forEach(vial => {
-        // If lab bonus is active, all vials are doubled.
-        if (labBonusActive) {
-            vial.bonusMulitplier = 2;
-        }
-        // If rift mastery is active, all vials are buffed by number of maxed vials.
-        if (riftVialMastery?.active ?? false) {
-            vial.maxedVials = maxVials;
-        }
-        // Vault Bonus 42 buffs vials as well.
-        vial.vaultBonus = vaultBonus42
+        vial.bonusMulitplier = labMultiplier;
+        vial.maxedVials = masteryMaxedVials;
+        vial.vaultBonus = vaultBonus42;
+        vial.meritocracyBonus = meritocracyBonus;
     });
 
     const diamonChefBubble = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Diamond Chef") as DiamonChefBubble;
@@ -1300,15 +1720,54 @@ export function updateAlchemy(data: Map<string, any>) {
     const arcadeBonus54 = arcade.bonuses[54].getBonus();
     const sushiBonus23 = sushi.getBonusFromIndex(23);
     const jellyBonus36 = jellyOperator.getObstructionBonus(36);
-    const world6TrophyBonus = world6Trophy?.obtained ? 10 : 0;
+    const world6TrophyReward = 10;
+    const world6TrophyBonus = world6Trophy?.obtained ? world6TrophyReward : 0;
     const paletteBonus28 = gaming.getPaletteBonus(28);
     const legendBonus36 = legendTalents.getBonusFromIndex(36);
     const purpleSigilsBonus = sigils.sigils.reduce((sum, sigil) => sum += (sigil.boostLevel >= 3 ? 1 : 0), 0);
     const exoticMarketBonus48 = farming.getExoticMarketBonusValue(48);
     // Prismatic strength uses the companion's active bonus, including its evolved value.
     const companion88Bonus = getCompanionActiveBonus(companions, 88);
+    const tesseractUpgrade45 = tesseract.upgrades.find(upgrade => upgrade.id === 45)!;
+    const sushi23 = sushi.sushi.find(sushi => sushi.index === 23)!;
+    const jellyObstruction36 = jellyOperator.obstructions.find(obstruction => obstruction.index === 36)!;
+    const paletteColor28 = gaming.paletteColors.find(color => color.index === 28)!;
+    const exoticMarketUpgrade48 = farming.exoticMarketUpgrades.find(upgrade => upgrade.index === 48)!;
+    const legendTalent36 = legendTalents.talents.find(talent => talent.index === 36)!;
+    const companion88 = companions.find(companion => companion.id === 88)!;
+    const purpleSigilReward = .2;
 
-    const prismaBonus = Math.min(5, 2 + (arcaneBonus45 + (arcadeBonus54 + (sushiBonus23 + jellyBonus36) + (world6TrophyBonus + (paletteBonus28 + (.2 * purpleSigilsBonus + exoticMarketBonus48)))) + (legendBonus36 + 50 * companion88Bonus)) / 100);
+    alchemy.prismaticMultiplierSources = {
+        tesseractPercent: arcaneBonus45,
+        arcadePercent: arcadeBonus54,
+        sushiPercent: sushiBonus23,
+        jellyOperatorPercent: jellyBonus36,
+        world6TrophyPercent: world6TrophyBonus,
+        palettePercent: paletteBonus28,
+        purpleSigilsPercent: purpleSigilReward * purpleSigilsBonus,
+        exoticMarketPercent: exoticMarketBonus48,
+        legendTalentPercent: legendBonus36,
+        companionPercent: 50 * companion88Bonus,
+    };
+    alchemy.prismaticMultiplierSourceRewards = {
+        tesseractPercent: { active: tesseractUpgrade45.level > 0, potentialValue: tesseractUpgrade45.data.value, basis: "perLevel" },
+        arcadePercent: { active: arcade.bonuses[54].level > 0, potentialValue: arcade.bonuses[54].getBonus(false, 1), basis: "levelOne" },
+        sushiPercent: { active: sushi23.unlocked, potentialValue: sushi23.getBaseBonus(), basis: "whenUnlocked" },
+        jellyOperatorPercent: { active: jellyObstruction36.completed, potentialValue: jellyOperator.getObstructionBonus(36, true), basis: "value" },
+        world6TrophyPercent: { active: world6Trophy?.obtained ?? false, potentialValue: world6TrophyReward, basis: "whenUnlocked" },
+        palettePercent: { active: paletteColor28.unlocked, potentialValue: paletteColor28.getBonusAtLevel(1), basis: "whenUnlocked" },
+        purpleSigilsPercent: { active: purpleSigilsBonus > 0, potentialValue: purpleSigilReward, basis: "perEtherealSigil" },
+        exoticMarketPercent: { active: exoticMarketUpgrade48.level > 0, potentialValue: exoticMarketUpgrade48.getBonus(1), basis: "levelOne" },
+        legendTalentPercent: { active: legendTalent36.level > 0, potentialValue: legendTalent36.data.bonusValue, basis: "perLevel" },
+        companionPercent: {
+            active: companion88.owned || companion88.bonusTokenActive,
+            potentialValue: 50 * (companion88.owned || companion88.bonusTokenActive ? companion88Bonus : companion88.data.bonus),
+            basis: "whenUnlocked",
+        },
+    };
+    const sources = alchemy.prismaticMultiplierSources;
+    const prismaBonus = Math.min(alchemy.prismaticMaximumMultiplier, alchemy.prismaticBaseMultiplier + (sources.tesseractPercent + (sources.arcadePercent + (sources.sushiPercent + sources.jellyOperatorPercent) + (sources.world6TrophyPercent + (sources.palettePercent + (sources.purpleSigilsPercent + sources.exoticMarketPercent)))) + (sources.legendTalentPercent + sources.companionPercent)) / 100);
+    alchemy.prismaticMultiplier = prismaBonus;
 
     alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).forEach(bubble => {
         if (bubble.prismatic) {
@@ -1331,4 +1790,15 @@ export function updateAlchemyDailyBubbleProgression(data: Map<string, any>): voi
         data.get("hole") as Hole,
         data.get("zenithMarket") as ZenithMarket,
     );
+}
+
+export function updateAlchemyBrewing(data: Map<string, any>): Alchemy {
+    const alchemy = data.get("alchemy") as Alchemy;
+    const players = data.get("players") as Player[];
+    const stamps = data.get("stamps") as Stamp[][];
+    const guild = data.get("guild") as Guild;
+    const companions = data.get("companions") as Companion[];
+    alchemy.prepareBrewing(players, getStampBonusForKey(stamps, "AlchSpd"),
+        guild.guildBonuses[5].getBonus(), getCompanionActiveBonus(companions, 46));
+    return alchemy;
 }
