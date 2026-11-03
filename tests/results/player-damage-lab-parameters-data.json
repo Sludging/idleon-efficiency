@@ -6,7 +6,7 @@
     },
     "player_damage_lab_mainframe_11": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 11)",
-      "result": 993.6
+      "result": 1004.4
     },
     "player_damage_lab_mainframe_110": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 110)",
@@ -18,7 +18,7 @@
     },
     "player_damage_storage_credited_green_stack_count": {
       "expression": "idleon.engine.getGameAttribute(\"GreenStacks\").length",
-      "result": 276
+      "result": 279
     },
     "player_damage_breeding_world_bound": {
       "expression": "Math.max(3, Number(idleon.engine.getGameAttribute(\"OptionsListAccount\")[117]))",

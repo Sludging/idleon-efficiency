@@ -2,7 +2,7 @@
   "extractions": {
     "all_base_skill_efficiency": {
       "expression": "idleon.callFunction(\"SkillStats\", \"AllBaseSkillEff\")",
-      "result": 19917.110368453137
+      "result": 30747.430492510804
     },
     "breeding_base_efficiency": {
       "expression": "idleon.callFunction(\"Breeding\", \"ShinyBonusS\", \"Nah\", 22, -1)",
@@ -10,7 +10,7 @@
     },
     "stamps_base_efficiency": {
       "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseAllEff\")",
-      "result": 16326.686217008795
+      "result": 27157.006341066462
     },
     "nobisect_base_efficiency": {
       "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 2, 0)",

@@ -1,6 +1,6 @@
 {
-  "description": "Extract representative restored and covered Royal Statue results and their direct Royal Reverence and Storage inputs",
-  "target": "Royal Statue bonuses and attempts",
+  "description": "Extract representative Royal Statue bonuses, upgrade chances, and their direct Royal Reverence input",
+  "target": "Royal Statue bonuses and upgrade chances",
   "extractions": [
     {
       "label": "statue_bonus_0",
@@ -13,34 +13,19 @@
       "description": "Damage statue upgrade success chance as a fraction"
     },
     {
-      "label": "statue_affordable_0",
-      "expression": "idleon.callFunction(\"RoyalG\", \"Statue_CanAfford\", 0, 0)",
-      "description": "Numeric affordability result for one Damage statue parchment upgrade attempt"
-    },
-    {
       "label": "statue_bonus_2",
       "expression": "idleon.callFunction(\"RoyalG\", \"StatueBon\", 2, 0)",
-      "description": "Current Frosty statue bonus while covered"
+      "description": "Current Frosty statue bonus at the saved level"
     },
     {
       "label": "statue_chance_2",
       "expression": "idleon.callFunction(\"RoyalG\", \"StatueUpgOdds\", 2, 0)",
-      "description": "Frosty statue restoration success chance as a fraction"
-    },
-    {
-      "label": "statue_affordable_2",
-      "expression": "idleon.callFunction(\"RoyalG\", \"Statue_CanAfford\", 2, 0)",
-      "description": "Numeric affordability result for one Frosty statue marble restoration attempt"
+      "description": "Frosty statue upgrade success chance as a fraction"
     },
     {
       "label": "royal_reverence_bonus",
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 45, 0)",
       "description": "Royal Reverence bonus used by current statue bonuses"
-    },
-    {
-      "label": "storage_parchment",
-      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const owned = idleon.getAttr(\"PixelHelperActor\")[5].behaviors.getBehavior(\"ActorEvents_232\")._ItemsAndStorageOWNED.h; return asNumber(owned[\"RGenh\"]); })()",
-      "description": "Settled Storage parchment quantity used by the Damage statue upgrade attempt"
     }
   ]
 }

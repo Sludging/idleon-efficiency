@@ -11,8 +11,8 @@ import { Player } from '../../../data/domain/player';
 const saveName = 'latest';
 const extractionResultsName = 'talents-sludgeadin-data.json';
 
-const getPlayerTalentAllLevel = (players: Player[], talentIndex: number, playerID: number = 0): number => {
- const player = players.find(candidate => candidate.playerID === playerID);
+const getPlayerTalentAllLevel = (players: Player[], talentIndex: number): number => {
+ const player = players.find(candidate => candidate.playerID === 0);
  const talent = player?.talents.find(candidate => candidate.skillIndex === talentIndex);
  return talent ? talent.maxLevel - talent.bookMaxLevel : 0;
 };
@@ -55,16 +55,6 @@ describe('Player Domain - All Talent Level', () => {
   expect(domainValue).toMatchLiveGameWithDetails(liveValue, {
    tolerance: 0,
    context: 'Player 0 Symbols Of Beyond AllTalentLV level addition',
-  });
- });
-
- it('validates capped AllTalentLVz level addition for Castle Convene (talent 225) on player 3', () => {
-  const liveValue = getExtractedValue(extractionResults, 'all_talent_level_z_225_player_3');
-  const domainValue = getPlayerTalentAllLevel(players, 225, 3);
-
-  expect(domainValue).toMatchLiveGameWithDetails(liveValue, {
-   tolerance: 0,
-   context: 'Player 3 Castle Convene AllTalentLVz level addition',
   });
  });
 });

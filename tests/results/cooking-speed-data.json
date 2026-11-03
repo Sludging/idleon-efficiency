@@ -5,60 +5,60 @@
       "result": [
         {
           "index": 0,
-          "speed": 5.594763286408288e+152
+          "speed": 1.3238114582078073e+155
         },
         {
           "index": 1,
-          "speed": 4.3978510170441605e+152
+          "speed": 1.040602661777933e+155
         },
         {
           "index": 2,
-          "speed": 4.673830735868068e+152
+          "speed": 1.1059039257115862e+155
         },
         {
           "index": 3,
-          "speed": 4.420930856647858e+152
+          "speed": 1.0460637250181241e+155
         },
         {
           "index": 4,
-          "speed": 4.314218124032585e+152
+          "speed": 1.0208137669875571e+155
         },
         {
           "index": 5,
-          "speed": 4.1043665297527556e+152
+          "speed": 9.711594865811452e+154
         },
         {
           "index": 6,
-          "speed": 3.827452841461589e+152
+          "speed": 9.056372303697003e+154
         },
         {
           "index": 7,
-          "speed": 3.6102206197663857e+152
+          "speed": 8.542365741755991e+154
         },
         {
           "index": 8,
-          "speed": 3.5521203198759184e+152
+          "speed": 8.505225021139664e+154
         },
         {
           "index": 9,
-          "speed": 3.5521203198759184e+152
+          "speed": 8.505225021139664e+154
         }
       ]
     },
     "starsign_58_bonus": {
-      "expression": "idleon.getDNSM(\"StarSigns\").h[58]",
+      "expression": "(() => { const map = idleon.getDNSM(\"StarSigns\").h; return Object.prototype.hasOwnProperty.call(map, 58) ? map[58] : 0; })()",
       "result": 150
     },
     "talent_59_bonus": {
       "expression": "idleon.callFunction(\"TalentCalc\", 59)",
       "result": {
         "type": "large_number",
-        "value": "6.87344771541785e+45"
+        "value": "1.4400129863755017e+46"
       }
     },
     "crop_sc_3_bonus": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 3, 0)",
-      "result": 14762672519.77076
+      "result": 26152974891.797623
     },
     "talent_enh_146_bonus": {
       "expression": "Math.max(1, idleon.callFunction(\"TalentEnh\", 146))",
@@ -80,7 +80,7 @@
       "expression": "Math.max(1, Number(idleon.getDNSM(\"AlchBubbles\").h.MealSpdz ?? 0))",
       "result": {
         "type": "large_number",
-        "value": "1.848475655220024e+46"
+        "value": "2.509041542246416e+47"
       }
     },
     "atom_bonuses_8_factor": {
@@ -97,7 +97,7 @@
     },
     "button_bonus_7": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 7, 0)",
-      "result": 784.21875
+      "result": 785.2031249999998
     },
     "arcade_28_bonus": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 28)",
@@ -117,11 +117,11 @@
     },
     "mainframe_114_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 114)",
-      "result": 923.2
+      "result": 924.8000000000001
     },
     "meal_bonus_Mcook": {
       "expression": "idleon.callFunction(\"MealBonus\", \"Mcook\")",
-      "result": 325467.03485585336
+      "result": 352182.8209682832
     },
     "summoning_win_bonus_15": {
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 15, 0)",
@@ -161,7 +161,7 @@
     },
     "menagerie_cooking_multiplier": {
       "expression": "1 + idleon.callFunction(\"MenagerieStuff\", \"BoostQTY\", 4, 0) / 100",
-      "result": 6
+      "result": 26
     }
   },
   "errors": {}

@@ -169,7 +169,7 @@
     },
     {
       "label": "family_hp",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[18]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 18) ? map[18] : 0; })()",
       "description": "Prepared Family maximum HP contribution for the target character"
     },
     {
@@ -194,8 +194,8 @@
     },
     {
       "label": "star_sign_hp",
-      "expression": "(() => { const value = idleon.getDNSM(\"StarSigns\").h.TotalHP; return value == null ? 0 : value; })()",
-      "description": "Total HP from target character star signs; c.asNumber maps absent/null source values to zero"
+      "expression": "(() => { const map = idleon.getDNSM(\"StarSigns\").h; return Object.prototype.hasOwnProperty.call(map, \"TotalHP\") ? map.TotalHP : 0; })()",
+      "description": "Total HP from target character star signs; an absent prepared effect contributes zero"
     },
     {
       "label": "secret_set",
@@ -219,7 +219,7 @@
     },
     {
       "label": "family_gold_food",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[66]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 66) ? map[66] : 0; })()",
       "description": "Prepared Family golden-food contribution; website producer mapping unresolved"
     },
     {
@@ -239,7 +239,7 @@
     },
     {
       "label": "bubble_gold_food",
-      "expression": "idleon.getDNSM(\"AlchBubbles\").h.GFoodz",
+      "expression": "(() => { const map = idleon.getDNSM(\"AlchBubbles\").h; return Object.prototype.hasOwnProperty.call(map, \"GFoodz\") ? map.GFoodz : 0; })()",
       "description": "Target character prepared golden-food Alchemy bonus"
     },
     {
@@ -254,7 +254,7 @@
     },
     {
       "label": "star_sign_gold_food",
-      "expression": "(() => { const value = idleon.getDNSM(\"StarSigns\").h[69]; return value == null ? 0 : value; })()",
+      "expression": "(() => { const map = idleon.getDNSM(\"StarSigns\").h; return Object.prototype.hasOwnProperty.call(map, 69) ? map[69] : 0; })()",
       "description": "Prepared golden-food star-sign contribution; source asNumber coerces absence to zero"
     },
     {

@@ -6,7 +6,7 @@
     },
     "node_maximum_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ResNodeQTYmax\", 2, 0)",
-      "result": 958755296.1644205
+      "result": 10920822045.37285
     },
     "node_maximum_21": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ResNodeQTYmax\", 21, 0)",

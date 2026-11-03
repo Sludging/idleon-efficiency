@@ -44,7 +44,7 @@
     },
     {
       "label": "combined_drop_rate",
-      "expression": "(() => { const d = idleon.engine.getGameAttribute(\"DNSM\").h; return Number(d.GalleryTrophyBonTOT.h[\"%_DROP_RATE\"] || 0) + Number(d.GalleryNametagBonTOT.h[\"%_DROP_RATE\"] || 0); })()",
+      "expression": "(() => { const d = idleon.engine.getGameAttribute(\"DNSM\").h; let total = 0; for (const owner of [\"GalleryTrophyBonTOT\", \"GalleryNametagBonTOT\"]) { const map = d[owner].h; if (Object.prototype.hasOwnProperty.call(map, \"%_DROP_RATE\")) { const value = map[\"%_DROP_RATE\"]; if (typeof value !== \"number\" || !Number.isFinite(value)) throw new Error(\"Invalid prepared \" + owner + \" Drop Rate\"); total += value; } } return total; })()",
       "description": "Game-prepared combined deposited trophy and nametag Drop Rate effects"
     }
   ]

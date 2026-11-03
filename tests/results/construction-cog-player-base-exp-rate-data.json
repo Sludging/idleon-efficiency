@@ -1,48 +1,48 @@
 {
   "extractions": {
     "player_base_exp_rate_player_0": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 0, 0)",
-      "result": 42191966116008.7
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 0 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 0, 0) : null",
+      "result": 49719515067773.61
     },
     "player_base_exp_rate_player_1": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 1, 0)",
-      "result": 3060321910113.1426
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 1 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 1, 0) : null",
+      "result": 3476162252761.2397
     },
     "player_base_exp_rate_player_2": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 2, 0)",
-      "result": 2979470522413.372
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 2 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 2, 0) : null",
+      "result": 3338387406629.8535
     },
     "player_base_exp_rate_player_3": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 3, 0)",
-      "result": 41722782015364.34
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 3 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 3, 0) : null",
+      "result": 160687498856804.75
     },
     "player_base_exp_rate_player_4": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 4, 0)",
-      "result": 2979470522413.372
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 4 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 4, 0) : null",
+      "result": 3390855611490.98
     },
     "player_base_exp_rate_player_5": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 5, 0)",
-      "result": 3036748474405.9365
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 5 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 5, 0) : null",
+      "result": 3402565254623.6816
     },
     "player_base_exp_rate_player_6": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 6, 0)",
-      "result": 55824139284585.49
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 6 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 6, 0) : null",
+      "result": 66470161391679.46
     },
     "player_base_exp_rate_player_7": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 7, 0)",
-      "result": 67627289524458.37
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 7 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 7, 0) : null",
+      "result": 78538461684688.39
     },
     "player_base_exp_rate_player_8": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 8, 0)",
-      "result": 3015863279300.4517
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 8 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 8, 0) : null",
+      "result": 3496896493048.306
     },
     "player_base_exp_rate_player_9": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 9, 0)",
-      "result": 3008048076010.226
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 9 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 9, 0) : null",
+      "result": 3370407509071.608
     },
     "player_base_exp_rate_player_10": {
-      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 10, 0)",
-      "result": 41597070249603.9
+      "expression": "idleon.getAttr(\"GetPlayersUsernames\").length > 10 ? idleon.callFunction(\"WorkbenchStuff\", \"PlayerConExp\", 10, 0) : null",
+      "result": 48310169029469.12
     }
   },
   "errors": {}

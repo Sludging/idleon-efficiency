@@ -14,7 +14,7 @@ const path = require('path');
 const DEFAULT_DEBUG_SERVER_URL = process.env.GAME_SERVER_URL || 'http://127.0.0.1:3101';
 const TARGET_PLAYER_CONFIG_PATH = path.resolve(__dirname, '../utils/target-player.json');
 const TARGET_PLAYER_PLACEHOLDER = '__TARGET_PLAYER__';
-const TOWN_CONTEXT_EXPRESSION = "(()=>{const activePlayerIndex=idleon.getAttr('GetPlayersUsernames').indexOf(idleon.getAttr('UserInfo')[0]);const mapId=idleon.getAttr('CurrentMap');const mapInternalName=idleon.getAttr('CustomLists').h.MapName[mapId];return{activePlayerIndex,mapId,mapInternalName};})()";
+const EXTRACTION_CONTEXT_EXPRESSION = "(()=>{const activePlayerIndex=idleon.getAttr('GetPlayersUsernames').indexOf(idleon.getAttr('UserInfo')[0]);const mapId=idleon.getAttr('CurrentMap');const mapInternalName=idleon.getAttr('CustomLists').h.MapName[mapId];return{activePlayerIndex,mapId,mapInternalName};})()";
 
 class GameDataExtractor {
  constructor(configPath, outputPath, options = {}) {
@@ -93,9 +93,15 @@ Use live mode only to refresh a save. See tests/helpers/README.md#game-access.`)
 
   this.log(`\n🎯 Extracting ${this.config.extractions.length} values from game...\n`);
   let contextError;
-  if (this.config.extractions.some(extraction => extraction.requiresTown === true)) {
+  if (this.config.extractions.some(extraction => extraction.excludedMapInternalNames !== undefined)) {
    try {
-    this.results.context = await this.executeExpression(TOWN_CONTEXT_EXPRESSION);
+    const context = await this.executeExpression(EXTRACTION_CONTEXT_EXPRESSION);
+    if (!Number.isInteger(context?.activePlayerIndex) || context.activePlayerIndex < 0 ||
+     !Number.isInteger(context?.mapId) || context.mapId < 0 ||
+     typeof context?.mapInternalName !== 'string' || context.mapInternalName.length === 0) {
+     throw new Error('Extraction context must identify the active player and map');
+    }
+    this.results.context = context;
    } catch (error) {
     contextError = error;
    }
@@ -109,16 +115,18 @@ Use live mode only to refresh a save. See tests/helpers/README.md#game-access.`)
    try {
     this.log(`  Extracting: ${label}`);
     this.log(`    Expression: ${executedExpression}`);
-    if (extraction.requiresTown === true) {
+    if (extraction.excludedMapInternalNames !== undefined) {
+     const excludedMaps = extraction.excludedMapInternalNames;
+     if (!Array.isArray(excludedMaps) || excludedMaps.some(name => typeof name !== 'string' || name.length === 0)) {
+      throw new Error(`Invalid map exclusion policy for '${label}'`);
+     }
      if (contextError) {
-      throw new Error(`Town capture prerequisite failed: ${contextError.message}`);
+      throw new Error(`Capture context prerequisite failed: ${contextError.message}`);
      }
 
      const context = this.results.context;
-     if (typeof context?.mapInternalName !== 'string' || !context.mapInternalName.includes('Town')) {
-      throw new Error(
-       `Town capture required for '${label}': active map ${context?.mapId} (${context?.mapInternalName}). Capture this value in a Town with a matching Town save.`
-      );
+     if (excludedMaps.includes(context.mapInternalName)) {
+      throw new Error(`Map excluded for '${label}': active map ${context.mapId} (${context.mapInternalName}). Capture this value with a matching save on an allowed map.`);
      }
     }
 
@@ -294,6 +302,11 @@ Use live mode only to refresh a save. See tests/helpers/README.md#game-access.`)
      throw new Error(`Execution failed: ${result.error || 'Unknown error'}`);
     }
 
+    if (!result || !Object.prototype.hasOwnProperty.call(result, 'result')) {
+     throw new Error('Execution response is missing a result');
+    }
+
+    this.assertNoNativeErrors(result.result);
     return this.normalizeResult(result.result);
    }
   } catch (error) {
@@ -301,19 +314,37 @@ Use live mode only to refresh a save. See tests/helpers/README.md#game-access.`)
   }
  }
 
- normalizeResult(result) {
-  // Handle null/undefined
-  if (result === null || result === undefined) {
-   return null;
-  }
+ assertNoNativeErrors(result) {
+  if (typeof result === 'string') {
+   if (result.startsWith('Function call error:')) {
+    throw new Error(result);
+   }
 
-  // Handle empty objects - convert to null for cleaner output
-  if (typeof result === 'object' && result !== null && Object.keys(result).length === 0) {
-   return null;
+   // Inspect JSON-string packets without changing captured strings.
+   let decoded;
+   try {
+    decoded = JSON.parse(result);
+   } catch {
+    return;
+   }
+   this.assertNoNativeErrors(decoded);
+  } else if (result !== null && typeof result === 'object') {
+   for (const value of Object.values(result)) {
+    this.assertNoNativeErrors(value);
+   }
+  }
+ }
+
+ normalizeResult(result) {
+  if (result === undefined) {
+   throw new Error('Expression returned undefined');
   }
 
   // Handle very large numbers that might lose precision
   if (typeof result === 'number') {
+   if (!Number.isFinite(result)) {
+    throw new Error(`Expression returned a nonfinite number: ${result}`);
+   }
    // If it's a very large number, preserve it as string to maintain precision
    if (Math.abs(result) > Number.MAX_SAFE_INTEGER ||
     (result !== 0 && Math.abs(result) < Number.MIN_VALUE)) {

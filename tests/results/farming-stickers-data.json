@@ -2,35 +2,35 @@
   "extractions": {
     "farming_sticker_bonus_0": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",0,0)",
-      "result": 236.096
+      "result": 239.03600000000006
     },
     "farming_sticker_bonus_1": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",1,0)",
-      "result": 101.184
+      "result": 102.44400000000002
     },
     "farming_sticker_bonus_2": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",2,0)",
-      "result": 252.95999999999995
+      "result": 256.11
     },
     "farming_sticker_bonus_3": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",3,0)",
-      "result": 3794.3999999999996
+      "result": 3841.6500000000005
     },
     "farming_sticker_bonus_4": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",4,0)",
-      "result": 607.1039999999999
+      "result": 614.6640000000001
     },
     "farming_sticker_bonus_5": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",5,0)",
-      "result": 354.144
+      "result": 358.5540000000001
     },
     "farming_sticker_bonus_6": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",6,0)",
-      "result": 0
+      "result": 102.44400000000002
     },
     "sticker_research_bonus": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",68,2)",
-      "result": 68.64
+      "result": 70.74000000000001
     },
     "sticker_event_shop_bonus": {
       "expression": "idleon.callFunction(\"Summoning\",\"EventShopOwned\",37,0)",
@@ -42,7 +42,7 @@
     },
     "farming_sticker_denominator_0": {
       "expression": "1 / idleon.callFunction(\"FarmingStuffs\",\"StickerOdds\",0,0)",
-      "result": 2131412805.4227386
+      "result": 1473602139.0425847
     },
     "farming_sticker_count_1": {
       "expression": "idleon.getAttr(\"Research\")[9][1]",
@@ -50,7 +50,7 @@
     },
     "farming_sticker_denominator_1": {
       "expression": "1 / idleon.callFunction(\"FarmingStuffs\",\"StickerOdds\",1,0)",
-      "result": 596795585.5183667
+      "result": 412608598.9319237
     },
     "farming_sticker_count_2": {
       "expression": "idleon.getAttr(\"Research\")[9][2]",
@@ -58,7 +58,7 @@
     },
     "farming_sticker_denominator_2": {
       "expression": "1 / idleon.callFunction(\"FarmingStuffs\",\"StickerOdds\",2,0)",
-      "result": 167102763.9451427
+      "result": 115530407.70093863
     },
     "farming_sticker_count_3": {
       "expression": "idleon.getAttr(\"Research\")[9][3]",
@@ -66,7 +66,7 @@
     },
     "farming_sticker_denominator_3": {
       "expression": "1 / idleon.callFunction(\"FarmingStuffs\",\"StickerOdds\",3,0)",
-      "result": 233943869.52319974
+      "result": 161742570.78131407
     },
     "farming_sticker_count_4": {
       "expression": "idleon.getAttr(\"Research\")[9][4]",
@@ -74,7 +74,7 @@
     },
     "farming_sticker_denominator_4": {
       "expression": "1 / idleon.callFunction(\"FarmingStuffs\",\"StickerOdds\",4,0)",
-      "result": 1637607086.6623983
+      "result": 1132197995.4691987
     },
     "farming_sticker_count_5": {
       "expression": "idleon.getAttr(\"Research\")[9][5]",
@@ -82,23 +82,23 @@
     },
     "farming_sticker_denominator_5": {
       "expression": "1 / idleon.callFunction(\"FarmingStuffs\",\"StickerOdds\",5,0)",
-      "result": 458529984.2654716
+      "result": 317015438.73137563
     },
     "farming_sticker_count_6": {
       "expression": "idleon.getAttr(\"Research\")[9][6]",
-      "result": 0
+      "result": 1
     },
     "farming_sticker_denominator_6": {
       "expression": "1 / idleon.callFunction(\"FarmingStuffs\",\"StickerOdds\",6,0)",
-      "result": 41084.286590186246
+      "result": 255641.24979298128
     },
     "farming_sticker_total": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"TotalStickers\",0,0)",
-      "result": 61
+      "result": 62
     },
     "farming_sticker_damage_multiplier": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerDMGmulti\",0,0)",
-      "result": 2.9032
+      "result": 2.94928
     }
   },
   "errors": {}

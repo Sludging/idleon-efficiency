@@ -30,15 +30,15 @@
     },
     "native_farming_exotic_50": {
       "expression": "idleon.callFunction('FarmingStuffs','ExoticBonusQTY',50,0)",
-      "result": 45.331069609507644
+      "result": 71.34146341463415
     },
     "native_box_monster_exp": {
       "expression": "(() => { idleon.callFunction('Minehead','Button_uHave',15,0); return idleon.engine.getGameAttribute('DNSM').h.BoxRewards.h.monsterExp; })()",
       "result": 18.51063829787234
     },
     "native_active_exp_bubble": {
-      "expression": "(() => { idleon.callFunction('Minehead','Button_uHave',15,0); return idleon.engine.getGameAttribute('DNSM').h.AlchBubbles.h.expACTIVE; })()",
-      "result": 16489.6
+      "expression": "(() => { idleon.callFunction('Minehead','Button_uHave',15,0); const map = idleon.engine.getGameAttribute('DNSM').h.AlchBubbles.h; return Object.prototype.hasOwnProperty.call(map, 'expACTIVE') ? map['expACTIVE'] : 0; })()",
+      "result": 19297
     }
   },
   "errors": {}

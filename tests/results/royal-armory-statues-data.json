@@ -8,10 +8,6 @@
       "expression": "idleon.callFunction(\"RoyalG\", \"StatueUpgOdds\", 0, 0)",
       "result": 0.03333333333333333
     },
-    "statue_affordable_0": {
-      "expression": "idleon.callFunction(\"RoyalG\", \"Statue_CanAfford\", 0, 0)",
-      "result": 0
-    },
     "statue_bonus_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"StatueBon\", 2, 0)",
       "result": 0
@@ -20,16 +16,8 @@
       "expression": "idleon.callFunction(\"RoyalG\", \"StatueUpgOdds\", 2, 0)",
       "result": 0.01
     },
-    "statue_affordable_2": {
-      "expression": "idleon.callFunction(\"RoyalG\", \"Statue_CanAfford\", 2, 0)",
-      "result": 1
-    },
     "royal_reverence_bonus": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 45, 0)",
-      "result": 0
-    },
-    "storage_parchment": {
-      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const owned = idleon.getAttr(\"PixelHelperActor\")[5].behaviors.getBehavior(\"ActorEvents_232\")._ItemsAndStorageOWNED.h; return asNumber(owned[\"RGenh\"]); })()",
       "result": 0
     }
   },

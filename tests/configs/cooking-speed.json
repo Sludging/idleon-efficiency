@@ -9,7 +9,7 @@
     },
     {
       "label": "starsign_58_bonus",
-      "expression": "idleon.getDNSM(\"StarSigns\").h[58]",
+      "expression": "(() => { const map = idleon.getDNSM(\"StarSigns\").h; return Object.prototype.hasOwnProperty.call(map, 58) ? map[58] : 0; })()",
       "description": "Star sign 58 (Gordonius Major) cooking speed bonus"
     },
     {

@@ -6,22 +6,22 @@
         {
           "name": "Refinery1",
           "unlocked": true,
-          "progress": 998556,
+          "progress": 1000000,
           "autoRefine": 0,
-          "power": 5772,
+          "power": 5929,
           "cap": 1000000,
           "remainingCycles": 0,
           "meritApplies": true,
           "costs": [
             {
               "name": "Grasslands1",
-              "quantity": 721008546,
-              "perCycle": 61580
+              "quantity": 646100946,
+              "perCycle": 63520
             },
             {
               "name": "Copper",
               "quantity": 1050000000,
-              "perCycle": 30790
+              "perCycle": 31760
             }
           ]
         },
@@ -30,57 +30,57 @@
           "unlocked": true,
           "progress": 1000000,
           "autoRefine": 0,
-          "power": 2490,
+          "power": 2620,
           "cap": 1000000,
           "remainingCycles": 0,
           "meritApplies": true,
           "costs": [
             {
               "name": "Forest3",
-              "quantity": 498079634,
-              "perCycle": 23340
+              "quantity": 432157964,
+              "perCycle": 24750
             },
             {
               "name": "ForestTree",
-              "quantity": 738815890,
-              "perCycle": 11670
+              "quantity": 705855055,
+              "perCycle": 12375
             },
             {
               "name": "Refinery1",
-              "quantity": 68642529,
-              "perCycle": 1660
+              "quantity": 70977136,
+              "perCycle": 1746
             }
           ]
         },
         {
           "name": "Refinery3",
           "unlocked": true,
-          "progress": 0,
-          "autoRefine": 0.01,
-          "power": 75,
-          "cap": 80000,
-          "remainingCycles": 1067,
+          "progress": 299970,
+          "autoRefine": 0,
+          "power": 101,
+          "cap": 300000,
+          "remainingCycles": 0,
           "meritApplies": true,
           "costs": [
             {
               "name": "DesertA1",
-              "quantity": 264618350,
-              "perCycle": 2050
+              "quantity": 202839850,
+              "perCycle": 2900
             },
             {
               "name": "Fish1",
-              "quantity": 112792890,
-              "perCycle": 1230
+              "quantity": 75725790,
+              "perCycle": 1740
             },
             {
               "name": "Bug1",
-              "quantity": 1049284960,
-              "perCycle": 1640
+              "quantity": 1050000000,
+              "perCycle": 2320
             },
             {
               "name": "Refinery2",
-              "quantity": 50722582,
-              "perCycle": 50
+              "quantity": 56236346,
+              "perCycle": 66
             }
           ]
         },
@@ -89,140 +89,140 @@
           "unlocked": true,
           "progress": 1000000,
           "autoRefine": 0,
-          "power": 1764,
+          "power": 1866,
           "cap": 1000000,
           "remainingCycles": 0,
           "meritApplies": true,
           "costs": [
             {
               "name": "SnowA1",
-              "quantity": 1005679440,
-              "perCycle": 15680
+              "quantity": 952062510,
+              "perCycle": 16740
             },
             {
               "name": "Soul2",
-              "quantity": 864192898,
-              "perCycle": 3136
+              "quantity": 853469512,
+              "perCycle": 3348
             },
             {
               "name": "Critter3",
-              "quantity": 989184520,
-              "perCycle": 1568
+              "quantity": 983822827,
+              "perCycle": 1674
             },
             {
               "name": "Refinery3",
-              "quantity": 21514724,
-              "perCycle": 588
+              "quantity": 21452316,
+              "perCycle": 622
             }
           ]
         },
         {
           "name": "Refinery5",
           "unlocked": true,
-          "progress": 0,
-          "autoRefine": 0.01,
-          "power": 92,
-          "cap": 200000,
-          "remainingCycles": 2174,
+          "progress": 399960,
+          "autoRefine": 0,
+          "power": 110,
+          "cap": 400000,
+          "remainingCycles": 0,
           "meritApplies": true,
           "costs": [
             {
               "name": "SnowB4",
-              "quantity": 650068429,
-              "perCycle": 1300
+              "quantity": 625080129,
+              "perCycle": 1600
             },
             {
               "name": "Fish4",
-              "quantity": 924615260,
-              "perCycle": 260
+              "quantity": 919617600,
+              "perCycle": 320
             },
             {
               "name": "Bug3",
-              "quantity": 930085400,
-              "perCycle": 260
+              "quantity": 925087740,
+              "perCycle": 320
             },
             {
               "name": "Critter4",
-              "quantity": 912869500,
-              "perCycle": 260
+              "quantity": 907871840,
+              "perCycle": 320
             },
             {
               "name": "Refinery4",
-              "quantity": 29173687,
-              "perCycle": 60
+              "quantity": 34029835,
+              "perCycle": 72
             }
           ]
         },
         {
           "name": "Refinery6",
           "unlocked": true,
-          "progress": 0,
-          "autoRefine": 0.01,
-          "power": 44,
-          "cap": 30000,
-          "remainingCycles": 682,
+          "progress": 49973,
+          "autoRefine": 0,
+          "power": 59,
+          "cap": 50000,
+          "remainingCycles": 0,
           "meritApplies": true,
           "costs": [
             {
               "name": "SnowC4",
-              "quantity": 317552261,
-              "perCycle": 1100
+              "quantity": 306995261,
+              "perCycle": 1550
             },
             {
               "name": "VoidBar",
-              "quantity": 14271488,
-              "perCycle": 110
+              "quantity": 13215788,
+              "perCycle": 155
             },
             {
               "name": "Tree7",
-              "quantity": 1015483650,
-              "perCycle": 110
+              "quantity": 1014427950,
+              "perCycle": 155
             },
             {
               "name": "Bug6",
-              "quantity": 872475901,
-              "perCycle": 110
+              "quantity": 871420201,
+              "perCycle": 155
             },
             {
               "name": "Soul4",
-              "quantity": 1035424780,
-              "perCycle": 110
+              "quantity": 1034369080,
+              "perCycle": 155
             },
             {
               "name": "Refinery5",
-              "quantity": 27697626,
-              "perCycle": 28
+              "quantity": 28781736,
+              "perCycle": 38
             }
           ]
         },
         {
           "name": "Refinery7",
           "unlocked": true,
-          "progress": 81950,
+          "progress": 170830,
           "autoRefine": 0,
           "power": 110,
           "cap": 400000,
-          "remainingCycles": 2891,
+          "remainingCycles": 2083,
           "meritApplies": false,
           "costs": [
             {
               "name": "SpiB2",
-              "quantity": 1048773840,
+              "quantity": 1048256720,
               "perCycle": 640
             },
             {
               "name": "Soul7",
-              "quantity": 38736040,
+              "quantity": 38632616,
               "perCycle": 128
             },
             {
               "name": "Critter11",
-              "quantity": 179041073,
+              "quantity": 178989361,
               "perCycle": 64
             },
             {
               "name": "Refinery6",
-              "quantity": 14770521,
+              "quantity": 15086410,
               "perCycle": 64
             }
           ]
@@ -230,36 +230,36 @@
         {
           "name": "Refinery8",
           "unlocked": true,
-          "progress": 68540,
+          "progress": 142876,
           "autoRefine": 0,
           "power": 92,
           "cap": 200000,
-          "remainingCycles": 1429,
+          "remainingCycles": 621,
           "meritApplies": false,
           "costs": [
             {
               "name": "w7A1",
-              "quantity": 11737741,
+              "quantity": 10687341,
               "perCycle": 1300
             },
             {
               "name": "Fish12",
-              "quantity": 1038755010,
+              "quantity": 1038544930,
               "perCycle": 260
             },
             {
               "name": "Bug15",
-              "quantity": 1049998960,
+              "quantity": 1049962300,
               "perCycle": 260
             },
             {
               "name": "PrehistriumBar",
-              "quantity": 2494271,
+              "quantity": 2284191,
               "perCycle": 260
             },
             {
               "name": "Refinery7",
-              "quantity": 248691,
+              "quantity": 164659,
               "perCycle": 104
             }
           ]
@@ -276,7 +276,7 @@
           "costs": [
             {
               "name": "w7B10",
-              "quantity": 3994,
+              "quantity": 4312,
               "perCycle": 50
             },
             {

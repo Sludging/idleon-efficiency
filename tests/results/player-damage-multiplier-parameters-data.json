@@ -2,15 +2,15 @@
   "extractions": {
     "damage_tome_bonus_0": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 0, 0)",
-      "result": 1525.7897203040407
+      "result": 1537.4816548753167
     },
     "damage_construction_mastery_1": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ConstMasteryBonus\", 1, 0)",
-      "result": 738
+      "result": 740
     },
     "damage_killroy_multiplier": {
       "expression": "idleon.callFunction(\"RiftStuff\", \"KillroyDMG\", 0)",
-      "result": 66
+      "result": 69
     },
     "damage_minehead_bonus_0": {
       "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 0, 0)",
@@ -34,15 +34,15 @@
     },
     "damage_sushi_49": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 49, 0)",
-      "result": 0
+      "result": 10
     },
     "damage_family_bonus_20": {
-      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.FamBonusQTYs.h[20]; })()",
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); const map = idleon.engine.getGameAttribute(\"DNSM\").h.FamBonusQTYs.h; return Object.prototype.hasOwnProperty.call(map, 20) ? map[20] : 0; })()",
       "result": 17.62532981530343
     },
     "damage_family_bonus_80": {
-      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); return idleon.engine.getGameAttribute(\"DNSM\").h.FamBonusQTYs.h[80]; })()",
-      "result": 7.4066985645933014
+      "expression": "(() => { idleon.callFunction(\"Minehead\", \"Button_uHave\", 49, 0); const map = idleon.engine.getGameAttribute(\"DNSM\").h.FamBonusQTYs.h; return Object.prototype.hasOwnProperty.call(map, 80) ? map[80] : 0; })()",
+      "result": 7.408895265423243
     },
     "damage_eclipse_skulls": {
       "expression": "idleon.callFunction(\"RiftStuff\", \"eclipseSkulls\", 0)",

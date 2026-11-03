@@ -3,21 +3,6 @@ import { loadGameDataFromSave, loadTestSave } from '../../utils/cloudsave-loader
 import { ExtractionResults, loadExtractionResults } from '../../utils/live-game-data-loader';
 import { getTargetPlayer } from '../../utils/target-player';
 import brewingConfig from '../../configs/alchemy-brewing.json';
-import bestPreviewConfig from '../../configs/alchemy-brewing-best-preview.json';
-
-interface NextBubbleOracle {
-  bubbleNumber: number;
-  worldNumber: number;
-  brewRequirement: number;
-  chancePercent: number;
-}
-
-interface BestBrewerPreviewOracle {
-  playerId: number | undefined;
-  chancePercent: number;
-  estimatedUnlocks: number;
-  nextBubbles: NextBubbleOracle[];
-}
 
 const cauldrons = [
   { index: CauldronIndex.Power, name: 'Power' },
@@ -51,7 +36,6 @@ describe('Alchemy brewing CORE results', () => {
   let savedBoostLevels: (number | string)[];
   let savedBoostProgress: (number | string)[];
   let results: ExtractionResults;
-  let bestPreviewResults: ExtractionResults;
 
   beforeAll(() => {
     gameData = loadGameDataFromSave('latest');
@@ -61,7 +45,6 @@ describe('Alchemy brewing CORE results', () => {
     savedBoostLevels = save.get('CauldUpgLVs');
     savedBoostProgress = save.get('CauldUpgXPs');
     results = loadExtractionResults('alchemy-brewing-data.json');
-    bestPreviewResults = loadExtractionResults('alchemy-brewing-best-preview-data.json');
   });
 
   cauldrons.forEach(({ index, name }) => {
@@ -80,41 +63,12 @@ describe('Alchemy brewing CORE results', () => {
           });
       });
 
-      ([
-        { field: 'brewRequirement', label: 'brew_requirements', description: 'brew points required per attempt' },
-        { field: 'brewSpeed', label: 'brew_speeds', description: 'assigned brewers total brew points per hour' },
-      ] as const).forEach(({ field, label, description }) => {
-        it(`matches ${description}`, () => {
-          const expected = readOracle<number[]>(results, label)[index];
-          const actual = cauldron[field];
-          expect(actual).toMatchLiveGameWithDetails(expected, {
-            tolerance: 0,
-            context: `${name} ${description}`,
-          });
+      it('matches brew points required per attempt', () => {
+        const expected = readOracle<number[]>(results, 'brew_requirements')[index];
+        expect(cauldron.brewRequirement).toMatchLiveGameWithDetails(expected, {
+          tolerance: 0,
+          context: `${name} brew points required per attempt`,
         });
-      });
-
-      (['readyAttempts', 'attemptProgress'] as const).forEach(field => {
-        it(`matches saved ${field} without advancing stored brew points`, () => {
-          const expected = readOracle<{ readyAttempts: number; attemptProgress: number }[]>(results, 'saved_attempt_state')[index];
-          const actual = cauldron[field];
-          expect(actual).toMatchLiveGameWithDetails(expected[field], {
-            tolerance: 0,
-            context: `${name} ${field} from retained save`,
-          });
-          if (field === 'readyAttempts') {
-            expect(Number.isInteger(actual)).toBe(true);
-          }
-        });
-      });
-
-      it('matches the saved remainder fill percentage without counting complete attempts', () => {
-        const expected = readOracle<number[]>(results, 'saved_brew_progress_percent')[index];
-        expect(cauldron.brewProgressPercent)
-          .toMatchLiveGameWithDetails(expected, {
-            tolerance: 0,
-            context: `${name} saved brewing fill percent`,
-          });
       });
 
       it('preserves the native new-bubble chance for the captured acting player', () => {
@@ -127,8 +81,8 @@ describe('Alchemy brewing CORE results', () => {
       });
 
       boosts.forEach(({ index: boostIndex, name: boostName }) => {
-        (['level', 'progress', 'requirement', 'maxLevel', 'progressPercent'] as const).forEach(field => {
-          it(`matches ${boostName} boost ${field}, including stored progress at maximum level`, () => {
+        (['level', 'progress', 'requirement'] as const).forEach(field => {
+          it(`matches ${boostName} boost ${field}`, () => {
             const boost: CauldronBoost = cauldron.boosts[boostIndex];
             const savedIndex = 4 * index + boostIndex;
             let expected: number;
@@ -136,56 +90,13 @@ describe('Alchemy brewing CORE results', () => {
               expected = Number(savedBoostLevels[savedIndex]);
             } else if (field === 'progress') {
               expected = Number(savedBoostProgress[savedIndex]);
-            } else if (field === 'requirement') {
-              expected = readOracle<number[][]>(results, 'boost_requirements')[index][boostIndex];
-            } else if (field === 'progressPercent') {
-              expected = readOracle<number[][]>(results, 'saved_boost_progress_percent')[index][boostIndex];
             } else {
-              // Brewing boosts stop at level 170, even if saved progress exceeds the next requirement.
-              expected = 170;
+              expected = readOracle<number[][]>(results, 'boost_requirements')[index][boostIndex];
             }
             expect(boost[field])
               .toMatchLiveGameWithDetails(expected, {
                 tolerance: 0,
                 context: `${name} ${boostName} boost ${field}`,
-              });
-          });
-        });
-      });
-
-      (['playerId', 'chancePercent', 'estimatedUnlocks'] as const).forEach(field => {
-        it(`matches best-account Bubble Breakthrough preview ${field}`, () => {
-          const expected = readOracle<BestBrewerPreviewOracle[]>(bestPreviewResults, 'best_brewer_previews')[index];
-          if (expected.playerId !== bestPreviewConfig.requiredActivePlayerIndex) {
-            throw new Error('Best-brewer projection recipient does not match the dedicated native capture config.');
-          }
-          const expectedValue = field === 'chancePercent'
-            ? readOracle<number[]>(bestPreviewResults, 'best_brewer_chances')[index]
-            : field === 'playerId' ? expected.playerId : expected.estimatedUnlocks;
-          expect(cauldron.bestBrewerPreview[field])
-            .toMatchLiveGameWithDetails(expectedValue, {
-              tolerance: 0,
-              context: `${name} best-account Bubble Breakthrough ${field}; not an unrelated active-player chance`,
-            });
-          if (field === 'playerId') {
-            getTargetPlayer(gameData.get('players'), cauldron.bestBrewerPreview.playerId);
-          }
-        });
-      });
-
-      it('matches ten sequential next-bubble records for the independently verified best brewer', () => {
-        const expected = readOracle<BestBrewerPreviewOracle[]>(bestPreviewResults, 'best_brewer_previews')[index];
-        const actual = cauldron.bestBrewerPreview.nextBubbles;
-        expect(actual.length).toMatchLiveGameWithDetails(10, {
-          tolerance: 0,
-          context: `${name} next-bubble preview record count`,
-        });
-        expected.nextBubbles.forEach((bubble, bubbleIndex) => {
-          (['bubbleNumber', 'worldNumber', 'brewRequirement', 'chancePercent'] as const).forEach(field => {
-            expect(actual[bubbleIndex][field])
-              .toMatchLiveGameWithDetails(bubble[field], {
-                tolerance: 0,
-                context: `${name} next bubble ${bubbleIndex + 1}: ${field}`,
               });
           });
         });

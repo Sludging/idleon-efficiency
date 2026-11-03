@@ -9,7 +9,7 @@
     },
     {
       "label": "all_eff_family_bonus_42",
-      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[42]",
+      "expression": "(() => { const map = idleon.getDNSM(\"FamBonusQTYs\").h; return Object.prototype.hasOwnProperty.call(map, 42) ? map[42] : 0; })()",
       "description": "Family bonus quantity 42 (factor A)"
     },
     {

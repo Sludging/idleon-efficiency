@@ -1,9 +1,5 @@
 {
   "extractions": {
-    "next_opal_score": {
-      "expression": "Math.ceil(Math.exp(2.30259 * (1 + Number(idleon.engine.getGameAttribute('Holes')[7][13]))))",
-      "result": 10000344
-    },
     "run_times": {
       "expression": "idleon.engine.getGameAttribute('Holes')[11].slice(65,71).map(Number)",
       "result": [
@@ -119,6 +115,10 @@
         "8": 7.640080426544538,
         "11": 2.6600201066361344
       }
+    },
+    "next_opal_score": {
+      "expression": "Math.ceil(Math.exp(2.30259 * (1 + Number(idleon.engine.getGameAttribute('Holes')[7][13]))))",
+      "result": 10000344
     },
     "opals_found": {
       "expression": "Number(idleon.engine.getGameAttribute('Holes')[7][13])",

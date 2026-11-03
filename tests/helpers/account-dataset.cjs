@@ -71,10 +71,10 @@ function readJson(filePath, description) {
 function resolveAccountDataset(datasetPath, options = {}) {
   const resolved = path.resolve(datasetPath);
   const descriptor = readJson(resolved, 'Account dataset');
-  if (!descriptor || descriptor.schemaVersion !== 2) {
-    throw new Error(`Unsupported account dataset schemaVersion in ${resolved}`);
+  if (!descriptor || descriptor.schemaVersion !== 3) {
+    throw new Error(`Unsupported account dataset schemaVersion in ${resolved}; extract again from the retained snapshot`);
   }
-  const required = ['accountId', 'profileName', 'adapterVersion', 'savePath', 'saveSha256', 'resultsDir', 'playerIndex', 'playerName', 'preparationPlayerIndex', 'preparationPlayerName', 'gameVersion', 'assetSha256', 'configSha256', 'results', 'extractedAt'];
+  const required = ['accountId', 'profileName', 'adapterVersion', 'savePath', 'saveSha256', 'sourceSavePath', 'sourceSaveSha256', 'inputOptions', 'resultsDir', 'playerIndex', 'playerName', 'preparationPlayerIndex', 'preparationPlayerName', 'gameVersion', 'assetSha256', 'configSha256', 'results', 'extractedAt'];
   for (const key of required) {
     if (descriptor[key] === undefined || descriptor[key] === null) {
       throw new Error(`Account dataset missing ${key}: ${resolved}`);
@@ -96,22 +96,31 @@ function resolveAccountDataset(datasetPath, options = {}) {
   if (!descriptor.gameVersion || typeof descriptor.gameVersion.title !== 'string' || typeof descriptor.gameVersion.version !== 'string') {
     throw new Error(`Invalid gameVersion in account dataset: ${resolved}`);
   }
+  const inputOptions = descriptor.inputOptions;
+  if (typeof inputOptions !== 'object' || Array.isArray(inputOptions) || typeof inputOptions.zeroCharacterAfk !== 'boolean' ||
+      !Number.isSafeInteger(inputOptions.evaluationTimeMs) || inputOptions.evaluationTimeMs <= 0) {
+    throw new Error(`Invalid inputOptions in account dataset: ${resolved}`);
+  }
 
-  if (typeof descriptor.savePath !== 'string' || typeof descriptor.resultsDir !== 'string') {
+  if (typeof descriptor.savePath !== 'string' || typeof descriptor.sourceSavePath !== 'string' || path.isAbsolute(descriptor.sourceSavePath) || typeof descriptor.resultsDir !== 'string') {
     throw new Error(`Invalid save or results path in account dataset: ${resolved}`);
   }
-  if (typeof descriptor.saveSha256 !== 'string' || typeof descriptor.configSha256 !== 'string' || typeof descriptor.assetSha256 !== 'string') {
+  if (typeof descriptor.saveSha256 !== 'string' || typeof descriptor.sourceSaveSha256 !== 'string' || typeof descriptor.configSha256 !== 'string' || typeof descriptor.assetSha256 !== 'string') {
     throw new Error(`Invalid account dataset fingerprint in ${resolved}`);
   }
   if (!descriptor.results || typeof descriptor.results !== 'object' || Array.isArray(descriptor.results) || Object.keys(descriptor.results).length === 0) {
     throw new Error(`Account dataset results must map filenames to SHA-256 hashes: ${resolved}`);
   }
   const savePath = path.resolve(path.dirname(resolved), descriptor.savePath);
+  const sourceSavePath = path.resolve(path.dirname(resolved), descriptor.sourceSavePath);
   const resultsDir = path.resolve(path.dirname(resolved), descriptor.resultsDir);
   const save = readJson(savePath, 'Account save');
   const saveSha256 = hashFile(savePath);
   if (saveSha256 !== descriptor.saveSha256) {
     throw new Error(`Account dataset save hash mismatch: ${savePath}`);
+  }
+  if (hashFile(sourceSavePath) !== descriptor.sourceSaveSha256) {
+    throw new Error(`Account dataset source save hash mismatch: ${sourceSavePath}`);
   }
   if (!Array.isArray(save.playerNames) || save.playerNames[descriptor.playerIndex] !== descriptor.playerName) {
     throw new Error(`Account dataset selected character mismatch: index ${descriptor.playerIndex} is not ${descriptor.playerName}`);

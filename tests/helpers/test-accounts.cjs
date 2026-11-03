@@ -5,6 +5,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const net = require('node:net');
 const { spawn } = require('node:child_process');
+const { isDeepStrictEqual } = require('node:util');
 const { importPublicProfile, getAdapterVersion } = require('./public-profile-import.cjs');
 const { loadAccountDataset, hashFile, hashConfigs, hashAssets } = require('./account-dataset.cjs');
 
@@ -62,13 +63,16 @@ function formatSourceDate(value) {
 function parseArgs(argv) {
   const [command, ...args] = argv;
   if (!['fetch', 'extract', 'test', 'list'].includes(command)) fail('Expected fetch, extract, test, or list command');
-  const options = { command, jestArgs: [] };
+  const options = { command, jestArgs: [], zeroCharacterAfk: false };
   let forwarding = false;
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
     if (forwarding) { options.jestArgs.push(arg); continue; }
     if (arg === '--') { forwarding = true; continue; }
-    if (arg === '--accounts' || arg === '--config' || arg === '--cache-dir' || arg === '--port') {
+    if (arg === '--zero-character-afk') {
+      if (command !== 'extract') fail('--zero-character-afk is only valid for the extract command');
+      options.zeroCharacterAfk = true;
+    } else if (arg === '--accounts' || arg === '--config' || arg === '--cache-dir' || arg === '--port') {
       if (!args[index + 1] || args[index + 1].startsWith('--')) fail(`${arg} requires a value`);
       const key = { '--accounts': 'accounts', '--config': 'config', '--cache-dir': 'cacheDir', '--port': 'port' }[arg];
       options[key] = args[++index];
@@ -221,8 +225,10 @@ async function requestJson(url) {
   if (!response.ok) fail(`${url} returned HTTP ${response.status}`);
   return response.json();
 }
-function startOwned(savePath, index, port, preparationIndex) {
-  const child = spawn(process.execPath, [offlineStart, '--save', savePath, '--character', String(index), '--prepare-character', String(preparationIndex), '--port', String(port)], {
+function startOwned(savePath, index, port, preparationIndex, zeroCharacterAfk) {
+  const args = [offlineStart, '--save', savePath, '--character', String(index), '--prepare-character', String(preparationIndex), '--port', String(port)];
+  if (zeroCharacterAfk) args.push('--zero-character-afk');
+  const child = spawn(process.execPath, args, {
     cwd: root, stdio: ['ignore', 'pipe', 'pipe'], env: cleanEnv({ GAME_SERVER_URL: `http://127.0.0.1:${port}` })
   });
   let output = '';
@@ -260,9 +266,9 @@ async function assertPortAvailable(port) {
     server.listen(port, '127.0.0.1', () => server.close(error => error ? reject(error) : resolve()));
   });
 }
-async function startReady(savePath, index, port, expectedName, preparationIndex, preparationName) {
+async function startReady(savePath, index, port, expectedName, preparationIndex, preparationName, zeroCharacterAfk) {
   await assertPortAvailable(port);
-  const child = startOwned(savePath, index, port, preparationIndex);
+  const child = startOwned(savePath, index, port, preparationIndex, zeroCharacterAfk);
   const url = `http://127.0.0.1:${port}`;
   const deadline = Date.now() + 120000;
   while (Date.now() < deadline) {
@@ -279,16 +285,21 @@ async function startReady(savePath, index, port, expectedName, preparationIndex,
       if (status.preparationCharacter !== preparationIndex || status.preparationPlayerName !== preparationName) {
         fail(`Offline server ${port} loaded unexpected preparation player identity`);
       }
+      if (status.zeroCharacterAfk !== zeroCharacterAfk) fail(`Offline server ${port} reported unexpected zero-character-AFK mode`);
+      if (!Number.isSafeInteger(status.evaluationTimeMs) || status.evaluationTimeMs <= 0) {
+        fail(`Offline server ${port} reported unexpected evaluation time`);
+      }
       const save = await requestJson(`${url}/cloud-save`);
       if (save.playerNames?.[index] !== expectedName) fail(`Offline server ${port} loaded unexpected save identity`);
       const gameVersion = await requestJson(`${url}/game-version`);
       return {
-        child, url, gameVersion,
+        child, url, gameVersion, save,
+        evaluationTimeMs: status.evaluationTimeMs, zeroCharacterAfk: status.zeroCharacterAfk,
         preparationPlayerIndex: status.preparationCharacter,
         preparationPlayerName: status.preparationPlayerName
       };
     } catch (error) {
-      if (error.message.includes('unexpected source') || error.message.includes('unexpected active player identity') || error.message.includes('unexpected preparation player identity') || error.message.includes('unexpected save identity')) throw error;
+      if (error.message.includes('unexpected source') || error.message.includes('unexpected active player identity') || error.message.includes('unexpected preparation player identity') || error.message.includes('unexpected save identity') || error.message.includes('unexpected zero-character-AFK mode') || error.message.includes('unexpected evaluation time')) throw error;
       await wait(500);
     }
   }
@@ -372,6 +383,8 @@ async function extractAccount(options, account) {
   }
   let primaryVersion;
   let preparationIdentity;
+  let effectiveInput;
+  const zeroCharacterAfk = options.zeroCharacterAfk ?? false;
   const failures = [];
   const previousPlayerIndex = process.env.TEST_ACCOUNT_PLAYER_INDEX;
   process.env.TEST_ACCOUNT_PLAYER_INDEX = String(account.playerIndex);
@@ -381,7 +394,16 @@ async function extractAccount(options, account) {
       try {
         const playerName = save.playerNames?.[index];
         if (!playerName) fail(`Required player index ${index} is absent for ${account.id}`);
-        const server = await startReady(savePath, index, options.basePort, playerName, preparationIndex, preparationName);
+        const server = await startReady(savePath, index, options.basePort, playerName, preparationIndex, preparationName, zeroCharacterAfk);
+        if (!effectiveInput) {
+          effectiveInput = {
+            save: server.save,
+            inputOptions: { zeroCharacterAfk: server.zeroCharacterAfk, evaluationTimeMs: server.evaluationTimeMs }
+          };
+        } else {
+          if (server.evaluationTimeMs !== effectiveInput.inputOptions.evaluationTimeMs) fail('Offline runtimes report different evaluation times');
+          if (!isDeepStrictEqual(server.save, effectiveInput.save)) fail('Offline runtimes report different effective saves');
+        }
         preparationIdentity = {
           preparationPlayerIndex: server.preparationPlayerIndex,
           preparationPlayerName: server.preparationPlayerName
@@ -417,10 +439,14 @@ async function extractAccount(options, account) {
     const files = fs.readdirSync(resultsDir).filter(file => file.endsWith('.json')).sort();
     if (!files.length) fail(`Batch extractor produced no results for ${account.id}; outputs retained at ${resultsDir}`);
     const hashes = Object.fromEntries(files.map(file => [file, hashFile(path.join(resultsDir, file))]));
+    const effectiveSavePath = path.join(runDir, 'effective-save.json');
+    writeJson(effectiveSavePath, effectiveInput.save);
     const descriptor = {
-      schemaVersion: 2, accountId: account.id, profileName: account.profileName,
+      schemaVersion: 3, accountId: account.id, profileName: account.profileName,
       source: manifest.source === undefined ? 'toolbox' : manifest.source, adapterVersion: manifest.adapterVersion,
-      savePath: path.relative(runDir, savePath).split(path.sep).join('/'), saveSha256: manifest.saveSha256,
+      savePath: 'effective-save.json', saveSha256: hashFile(effectiveSavePath),
+      sourceSavePath: path.relative(runDir, savePath).split(path.sep).join('/'), sourceSaveSha256: manifest.saveSha256,
+      inputOptions: effectiveInput.inputOptions,
       resultsDir: 'results', playerIndex: account.playerIndex, playerName: name, gameVersion: primaryVersion,
       ...preparationIdentity,
       assetSha256: hashAssets(assetRoot), configSha256: hashConfigs(path.join(root, 'tests/configs')),

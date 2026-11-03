@@ -2,7 +2,7 @@
   "extractions": {
     "royal_armory_purchase_price_display_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 1, 0)",
-      "result": 5936422442.899058
+      "result": 10150458987.630293
     },
     "royal_armory_purchase_price_display_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 0, 0)",
@@ -10,11 +10,11 @@
     },
     "royal_armory_purchase_price_display_24": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 24, 0)",
-      "result": 7112678101.80484
+      "result": 8422908278.4531
     },
     "royal_armory_purchase_price_display_30": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 30, 0)",
-      "result": 2718526473.19815
+      "result": 3819322228.349393
     },
     "royal_armory_purchase_unlocked_display_1": {
       "expression": "1 < idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0)",

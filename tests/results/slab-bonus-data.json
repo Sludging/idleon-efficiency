@@ -2,7 +2,7 @@
   "extractions": {
     "slab_bonus_multiplier": {
       "expression": "idleon.callFunction(\"Sailing\", \"SlabboBonus_AllMulti\", 0, 0)",
-      "result": 1.547
+      "result": 1.56
     },
     "meritocracy_bonus_23": {
       "expression": "idleon.callFunction(\"Summoning2\", \"MeritocBonusz\", 23, 0)",
@@ -14,7 +14,7 @@
     },
     "vault_upgrade_bonus_74": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 74, 0)",
-      "result": 19
+      "result": 20
     }
   },
   "errors": {}

@@ -307,7 +307,7 @@
           10,
           0
         ],
-        "overstimLevel": 11,
+        "overstimLevel": 18,
         "trackometerLevel": 9,
         "savedManicToggle": 0,
         "spelunkingLevelPlayer3": 224
@@ -317,20 +317,20 @@
       "expression": "(() => { const g = idleon.getAttr(\"PixelHelperActor\")[26].behaviors.getBehavior(\"ActorEvents_713\")._GenINFO; if (g[70] == null || g[90] == null || Number(g[70]) !== 0 || Number(g[90]) !== 0 || !Array.isArray(g[107]) || g[107].length !== 13 || Array.from(g[107]).some(effect => effect == null || Number(effect) !== 0)) throw new Error(\"Saved Amber preview requires native depth zero, zero destroyed objects, and all 13 active effects zero\"); return idleon.callFunction(\"Spelunk\", \"AmberGain\", 0, 0); })()",
       "result": {
         "type": "large_number",
-        "value": "2052025228540030700"
+        "value": "3655529801112198700"
       }
     },
     "spelunking_efficiency_player_3": {
       "expression": "idleon.callFunction(\"Spelunk\", \"SpelunkingEfficiency\", 0, 0)",
-      "result": 1486824991.4107401
+      "result": 1536504081.7177086
     },
     "overstim_level": {
       "expression": "Number(idleon.getAttr(\"Spelunk\")[4][1])",
-      "result": 11
+      "result": 18
     },
     "overstim_threshold": {
       "expression": "idleon.callFunction(\"Spelunk\", \"OverstimQtyREQ\", 0, 0)",
-      "result": 1792.1603940370005
+      "result": 11245.540695195745
     },
     "overstim_bonus_per_level": {
       "expression": "idleon.callFunction(\"Spelunk\", \"OverstimBonus_PerLV\", 0, 0)",
@@ -338,7 +338,7 @@
     },
     "overstim_bonus": {
       "expression": "idleon.callFunction(\"Spelunk\", \"OverstimBonus\", 0, 0)",
-      "result": 2167
+      "result": 3546
     },
     "overstim_fill_bonus_percent": {
       "expression": "idleon.callFunction(\"Spelunk\", \"OverstimFillRate\", 0, 0)",

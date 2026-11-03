@@ -94,11 +94,11 @@
     },
     "vault_bonus_73": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 73, 0)",
-      "result": 44
+      "result": 50
     },
     "vault_bonus_74": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 74, 0)",
-      "result": 19
+      "result": 20
     },
     "vault_bonus_76": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 76, 0)",
@@ -122,7 +122,7 @@
     },
     "vault_bonus_89": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 89, 0)",
-      "result": 34
+      "result": 35
     },
     "vault_bonus_2": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 2, 0)",
@@ -142,15 +142,15 @@
     },
     "vault_bonus_62": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 62, 0)",
-      "result": 134
+      "result": 135
     },
     "vault_bonus_63": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 63, 0)",
-      "result": 422.1
+      "result": 427.95000000000005
     },
     "vault_bonus_87": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 87, 0)",
-      "result": 328.3
+      "result": 363.15000000000003
     },
     "vault_bonus_90": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 90, 0)",

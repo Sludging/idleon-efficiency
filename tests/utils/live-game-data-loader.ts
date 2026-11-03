@@ -50,54 +50,58 @@ export const getExtractedValue = (results: ExtractionResults, label: string): an
   return normalizeExtractedValue(extraction.result);
 };
 
-export const normalizeExtractedValue = (value: any): number => {
-  // Handle our large number format
-  if (value && typeof value === 'object' && value.type === 'large_number') {
-    return parseFloat(value.value);
+export const normalizeExtractedValue = (value: unknown): number => {
+  let numericValue = value;
+  if (value && typeof value === 'object' && 'type' in value && value.type === 'large_number') {
+    numericValue = 'value' in value ? value.value : undefined;
+    if (typeof numericValue !== 'string') {
+      throw new Error('Extracted large number must contain numeric text');
+    }
   }
-  
-  // Handle null/undefined
-  if (value === null || value === undefined) {
-    return 0;
+
+  if (typeof numericValue === 'string') {
+    const text = numericValue.trim();
+    if (!/^[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?$/.test(text)) {
+      throw new Error('Extracted numeric text is malformed');
+    }
+    numericValue = Number(text);
   }
-  
-  // Handle regular numbers
-  if (typeof value === 'number') {
-    return value;
+
+  if (typeof numericValue !== 'number' || !Number.isFinite(numericValue)) {
+    throw new Error(`Extracted value is not a finite number: ${JSON.stringify(value)}`);
   }
-  
-  // Try to parse as number
-  const parsed = parseFloat(value);
-  if (isNaN(parsed)) {
-    throw new Error(`Cannot normalize extracted value to number: ${JSON.stringify(value)}`);
-  }
-  
-  return parsed;
+
+  return numericValue;
 };
 
-export const validateTownExtractionContext = (
+export const validateExtractionContext = (
   results: ExtractionResults,
-  selectedContext: ExtractionContext
+  selectedContext: ExtractionContext,
+  excludedMapInternalNames: readonly string[]
 ): void => {
   const captureContext = results.context;
   if (!captureContext) {
-    throw new Error('Extraction context is missing. Capture new results while the active player is in Town.');
+    throw new Error('Capture context is missing');
+  }
+  for (const [name, context] of [['Capture', captureContext], ['Selected save', selectedContext]] as const) {
+    if (!context || !Number.isInteger(context.activePlayerIndex) || context.activePlayerIndex < 0 ||
+      !Number.isInteger(context.mapId) || context.mapId < 0 ||
+      typeof context.mapInternalName !== 'string' || context.mapInternalName.length === 0) {
+      throw new Error(`${name} context must identify the active player and map`);
+    }
+
+    if (excludedMapInternalNames.includes(context.mapInternalName)) {
+      throw new Error(`${name} map ${context.mapId} (${context.mapInternalName}) is excluded from this comparison`);
+    }
   }
 
-  if (!captureContext.mapInternalName.includes('Town')) {
-    throw new Error('Extraction was not captured in Town. Move the active player to Town and capture new results.');
-  }
-
-  if (!selectedContext.mapInternalName.includes('Town')) {
-    throw new Error('The selected save is not in Town. Save with the active player in Town before comparing results.');
-  }
-
-  if (captureContext.mapId !== selectedContext.mapId) {
-    throw new Error(`Town map mismatch: capture mapId ${captureContext.mapId}, selected save mapId ${selectedContext.mapId}. Capture results in the selected save's Town.`);
+  if (captureContext.mapId !== selectedContext.mapId ||
+    captureContext.mapInternalName !== selectedContext.mapInternalName) {
+    throw new Error(`Map mismatch: capture ${captureContext.mapId} (${captureContext.mapInternalName}), selected save ${selectedContext.mapId} (${selectedContext.mapInternalName})`);
   }
 
   if (captureContext.activePlayerIndex !== selectedContext.activePlayerIndex) {
-    throw new Error(`Active player mismatch: capture activePlayerIndex ${captureContext.activePlayerIndex}, selected save activePlayerIndex ${selectedContext.activePlayerIndex}. Capture results with the selected save's active player.`);
+    throw new Error(`Active player mismatch: capture ${captureContext.activePlayerIndex}, selected save ${selectedContext.activePlayerIndex}`);
   }
 };
 

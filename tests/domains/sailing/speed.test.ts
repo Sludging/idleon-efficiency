@@ -3,7 +3,7 @@
  * 
  */
 
-import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
+import { getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Sailing } from '../../../data/domain/world-5/sailing/sailing';
 
@@ -43,7 +43,7 @@ describe('Sailing Domain - Speed', () => {
     throw new Error('Boat 0 not found');
    }
 
-   const extractedSpeed = extractionResults.extractions.boat_0_current_speed.result;
+   const extractedSpeed = getExtractedValue(extractionResults, 'boat_0_current_speed');
    const calculatedSpeed = boat.getSpeedValue({
     starSignEquipped: true,
     silkRodeEquipped: false,
@@ -64,7 +64,7 @@ describe('Sailing Domain - Speed', () => {
     throw new Error('Boat 0 not found');
    }
 
-   const extractedSpeed = extractionResults.extractions.boat_0_next_speed.result;
+   const extractedSpeed = getExtractedValue(extractionResults, 'boat_0_next_speed');
    const calculatedSpeed = boat.getSpeedValue({
     starSignEquipped: true,
     silkRodeEquipped: false,
@@ -86,7 +86,7 @@ describe('Sailing Domain - Speed', () => {
     throw new Error('Boat 0 not found');
    }
 
-   const extractedSpeed = extractionResults.extractions.boat_0_island_bound_speed.result;
+   const extractedSpeed = getExtractedValue(extractionResults, 'boat_0_island_bound_speed');
    const calculatedSpeed = boat.getSpeedValue({
     starSignEquipped: true,
     silkRodeEquipped: false,
@@ -107,7 +107,7 @@ describe('Sailing Domain - Speed', () => {
     throw new Error('Boat 1 not found');
    }
 
-   const extractedSpeed = extractionResults.extractions.boat_1_current_speed.result;
+   const extractedSpeed = getExtractedValue(extractionResults, 'boat_1_current_speed');
    const calculatedSpeed = boat.getSpeedValue({
     starSignEquipped: true,
     silkRodeEquipped: false,
@@ -128,7 +128,7 @@ describe('Sailing Domain - Speed', () => {
     throw new Error('Boat 1 not found');
    }
 
-   const extractedSpeed = extractionResults.extractions.boat_1_next_speed.result;
+   const extractedSpeed = getExtractedValue(extractionResults, 'boat_1_next_speed');
    const calculatedSpeed = boat.getSpeedValue({
     starSignEquipped: true,
     silkRodeEquipped: false,
@@ -150,7 +150,7 @@ describe('Sailing Domain - Speed', () => {
     throw new Error('Boat 1 not found');
    }
 
-   const extractedSpeed = extractionResults.extractions.boat_1_island_bound_speed.result;
+   const extractedSpeed = getExtractedValue(extractionResults, 'boat_1_island_bound_speed');
    const calculatedSpeed = boat.getSpeedValue({
     starSignEquipped: true,
     silkRodeEquipped: false,

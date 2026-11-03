@@ -15,7 +15,7 @@
     { "label": "rupie_collectibles", "expression": "[idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 3, 0), idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 17, 0), idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 28, 0), idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 0, 0), idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 6, 0), idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 13, 0), idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 21, 0), idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 33, 0)]" },
     { "label": "rupie_stamp_cavern_res", "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"CavernRes\")" },
     { "label": "rupie_cove_upgrade_14", "expression": "idleon.callFunction(\"Holes\", \"Cglunko_upgBon\", 14, 0)" },
-    { "label": "producer_assignment", "expression": "idleon.getAttr('Holes')[25].slice(0, 6)" },
+    { "label": "producer_assignment", "expression": "idleon.getAttr('Holes')[25].slice(0, 3)", "description": "Assigned Jar types, excluding accumulated production work that advances during startup." },
     { "label": "requirement_balance", "expression": "idleon.getAttr('Holes')[11][43]" },
     { "label": "collectible_4", "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 4, 0)" },
     { "label": "collectible_10", "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 10, 0)" },

@@ -6,11 +6,11 @@
     },
     "research_grid_bonus_86": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\", 86, 0)",
-      "result": 26
+      "result": 26.200000000000003
     },
     "lore_epic_bonus_8": {
       "expression": "idleon.callFunction(\"Thingies\",\"LoreEpiBon\", 8, 0)",
-      "result": 336.4340832510642
+      "result": 337.21599938798363
     },
     "companion_15_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 15)",
@@ -46,7 +46,7 @@
     },
     "equinox_bar_rate": {
       "expression": "idleon.callFunction(\"Dreamstuff\",\"BarFillRate\", 0)",
-      "result": 138818.8606151608
+      "result": 139288.31092353273
     }
   },
   "errors": {}

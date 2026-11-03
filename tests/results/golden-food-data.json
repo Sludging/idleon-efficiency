@@ -2,35 +2,35 @@
   "extractions": {
     "golden_drop_rate_percent": {
       "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"DropRatez\")",
-      "result": 0
+      "result": 3474.5451158097744
     },
     "golden_hp": {
       "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"MaxHPpct\")",
-      "result": 130.62312467388395
+      "result": 131.29544184286652
     },
     "golden_monster_cash": {
       "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"MonsterCash\")",
-      "result": 0
+      "result": 13029.544184286653
     },
     "golden_skill_exp": {
       "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"SkillExp\")",
-      "result": 15465.829500776046
+      "result": 15546.046227012888
     },
     "golden_all_stat_percent": {
       "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"AllStatz\")",
-      "result": 15914.493184852103
+      "result": 15997.03699816281
     },
     "golden_defence_percent": {
       "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"Defence\")",
-      "result": 25776.382501293414
+      "result": 25910.07704502148
     },
     "golden_base_accuracy": {
       "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"BaseAcc\")",
-      "result": 51552.76500258683
+      "result": 51820.15409004296
     },
     "golden_effectivity": {
       "expression": "(function(){idleon.callFunction(\"GoldFoodBonuses\", \"MaxHPpct\");return idleon.getDNSM(\"GfoodBonusMULTI\")})()",
-      "result": 752.9573548990469
+      "result": 756.8627240874841
     }
   },
   "errors": {}

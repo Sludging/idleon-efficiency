@@ -4,7 +4,7 @@
       "expression": "Array.from({length:3},(_,index)=>{const holes=idleon.getAttr('Holes');const removedBricks=Number(holes[14][2*index+1]);const hours=Number(holes[14][2*index]);const nextUpgradeIndex=removedBricks<8?removedBricks:null;const requiredHours=nextUpgradeIndex===null?0:Number(idleon.getAttr('CustomLists').h.HolesInfo[30][nextUpgradeIndex]);return {storedSeconds:Number(holes[11][11+index]),linearLimitSeconds:idleon.callFunction('Holes','MonumentRewardMulti_MaxLinearTime',index,0),removedBricks,nextUpgradeIndex,hoursRemaining:nextUpgradeIndex===null?0:Math.max(0,requiredHours-hours),claimable:nextUpgradeIndex!==null&&hours>=requiredHours};})",
       "result": [
         {
-          "storedSeconds": 17995433.27699554,
+          "storedSeconds": 18672999.76699388,
           "linearLimitSeconds": 2102400,
           "removedBricks": 7,
           "nextUpgradeIndex": 7,
@@ -12,7 +12,7 @@
           "claimable": false
         },
         {
-          "storedSeconds": 33712992.039002046,
+          "storedSeconds": 34390558.52900039,
           "linearLimitSeconds": 3312000,
           "removedBricks": 8,
           "nextUpgradeIndex": null,
@@ -20,7 +20,7 @@
           "claimable": false
         },
         {
-          "storedSeconds": 16615829.57302973,
+          "storedSeconds": 17293396.06302807,
           "linearLimitSeconds": 2102400,
           "removedBricks": 7,
           "nextUpgradeIndex": 7,
@@ -31,11 +31,11 @@
     },
     "bravery_minimum_damage": {
       "expression": "idleon.callFunction(\"Holes\", \"Bravery_MinDMG\", 0, 0)",
-      "result": 1778456.3186409813
+      "result": 1788104.1644951042
     },
     "bravery_maximum_damage": {
       "expression": "idleon.callFunction(\"Holes\", \"Bravery_MaxDMG\", 0, 0)",
-      "result": 5549819.745753067
+      "result": 5579969.264047201
     },
     "bravery_swords": {
       "expression": "idleon.callFunction(\"Holes\", \"Bravery_SwordsOwned\", 0, 0)",
@@ -87,7 +87,7 @@
     },
     "bravery_reward_multiplier": {
       "expression": "idleon.callFunction(\"Holes\", \"MonumentRewardMulti\", 0, 0)",
-      "result": 99.7660489792842
+      "result": 99.95634485779328
     },
     "bravery_opal_chance": {
       "expression": "100 * idleon.callFunction(\"Holes\", \"Bravery_OpalRewardChanceDEC\", 0, 0)",
@@ -115,7 +115,7 @@
     },
     "justice_reward_multiplier": {
       "expression": "idleon.callFunction(\"Holes\", \"MonumentRewardMulti\", 1, 0)",
-      "result": 153.41179095177517
+      "result": 153.53366279744995
     },
     "justice_opal_chance": {
       "expression": "100 * idleon.callFunction(\"Holes\", \"Justice_OpalRewardChanceDEC\", 0, 0)",
@@ -143,7 +143,7 @@
     },
     "wisdom_reward_multiplier": {
       "expression": "idleon.callFunction(\"Holes\", \"MonumentRewardMulti\", 2, 0)",
-      "result": 99.36037098652389
+      "result": 99.56281972317925
     },
     "wisdom_opal_chance": {
       "expression": "100 * idleon.callFunction(\"Holes2\", \"Wisdom_OpalRewardChanceDEC\", 0, 0)",

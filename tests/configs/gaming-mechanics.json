@@ -433,21 +433,6 @@
       "description": "initial_appearance_probability"
     },
     {
-      "label": "slot_evolution_probability_0",
-      "expression": "(() => { const row = idleon.engine.getGameAttribute(\"GamingSprout\")[0]; return row[0] !== 1 || Number(row[3]) >= idleon.callFunction(\"GamingStatType\",\"SproutMaxEvo\",0,0) ? 0 : idleon.callFunction(\"GamingStatType\",\"SproutGrowthCHANCE\",0,0); })()",
-      "description": "Slot 0 occupied-plant evolution probability with maximum-stage cap; not full garden growth scheduling."
-    },
-    {
-      "label": "slot_evolution_probability_2",
-      "expression": "(() => { const row = idleon.engine.getGameAttribute(\"GamingSprout\")[2]; return row[0] !== 1 || Number(row[3]) >= idleon.callFunction(\"GamingStatType\",\"SproutMaxEvo\",0,0) ? 0 : idleon.callFunction(\"GamingStatType\",\"SproutGrowthCHANCE\",2,0); })()",
-      "description": "Slot 2 occupied-plant evolution probability with maximum-stage cap; not full garden growth scheduling."
-    },
-    {
-      "label": "slot_evolution_probability_4",
-      "expression": "(() => { const row = idleon.engine.getGameAttribute(\"GamingSprout\")[4]; return row[0] !== 1 || Number(row[3]) >= idleon.callFunction(\"GamingStatType\",\"SproutMaxEvo\",0,0) ? 0 : idleon.callFunction(\"GamingStatType\",\"SproutGrowthCHANCE\",4,0); })()",
-      "description": "Slot 4 occupied-plant evolution probability with maximum-stage cap; not full garden growth scheduling."
-    },
-    {
       "label": "dependency_Voting_VotingBonusz_22",
       "expression": "idleon.callFunction(\"Summoning\",\"VotingBonusz\",22,0)",
       "description": "dependency_Voting_VotingBonusz_22"
@@ -674,7 +659,7 @@
     },
     {
       "label": "logbook_bubble",
-      "expression": "idleon.getDNSM(\"AlchBubbles.h.Y3\")",
+      "expression": "(()=>{const map=idleon.getDNSM(\"AlchBubbles\").h;return Object.prototype.hasOwnProperty.call(map,\"Y3\")?map[\"Y3\"]:0;})()",
       "description": "Calculated Bit By Bit bubble bonus directly used in native Logbook bonus"
     },
     {

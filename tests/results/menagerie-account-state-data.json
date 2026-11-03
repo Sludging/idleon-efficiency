@@ -3,12 +3,12 @@
     "account_progression": {
       "expression": "[idleon.engine.getGameAttribute(\"Menagerie\")[0][1], idleon.engine.getGameAttribute(\"Menagerie\")[0][2], idleon.callFunction(\"MenagerieStuff\", \"ShellEXPreq\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"LumiGainRate\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"UpgUnlocked\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"UpgUnlocked\", 1, 0), idleon.callFunction(\"MenagerieStuff\", \"UpgUnlocked\", 2, 0)]",
       "result": [
-        0,
-        14,
-        5,
-        573.3314914285714,
-        13,
-        10,
+        2,
+        15,
+        6,
+        814.0277554208001,
+        16,
+        11,
         10
       ]
     },
@@ -77,14 +77,14 @@
         ],
         [
           10,
-          1,
-          45,
+          5,
+          65,
           0
         ],
         [
           11,
-          2,
-          22,
+          3,
+          26,
           0
         ],
         [
@@ -95,9 +95,9 @@
         ],
         [
           13,
-          0,
-          1000,
-          1
+          2,
+          1400,
+          0
         ],
         [
           14,
@@ -265,7 +265,7 @@
         ],
         [
           9,
-          0,
+          1,
           94112.31090686558
         ],
         [
@@ -350,45 +350,45 @@
       "result": [
         [
           0,
-          11,
-          11,
-          17583.357899804967
+          12,
+          12,
+          36856.70677631487
         ],
         [
           1,
-          8,
-          200,
-          5067.611997170721
+          9,
+          225,
+          10598.067618362778
         ],
         [
           2,
-          1,
-          1,
-          848.3604499276556
+          2,
+          2,
+          19260.246685475297
         ],
         [
           3,
-          1,
           10,
-          133.44880381289585
+          100,
+          1434.3625354711385
         ],
         [
           4,
-          1,
-          500,
-          332.6728900000001
+          5,
+          2500,
+          964.9029810164992
         ],
         [
           5,
-          0,
-          0,
-          603.889427538726
+          1,
+          10,
+          13772.678947882952
         ],
         [
           6,
-          0,
-          0,
-          1358.1536128955809
+          1,
+          1,
+          4757.537645134533
         ],
         [
           7,
@@ -398,9 +398,9 @@
         ],
         [
           8,
-          0,
-          0,
-          5775.866860011838
+          1,
+          1,
+          202159.34010041432
         ],
         [
           9,
@@ -503,9 +503,9 @@
     "usable_resources": {
       "expression": "[idleon.callFunction(\"MenagerieStuff\", \"BlackStarsOwned\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"OrganicLabelOwned\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"MineheadDoublersLEFT\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"SushiDoublersLEFT\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"JellyOpDoublersLEFT\", 0, 0)]",
       "result": [
+        2,
         1,
-        0,
-        -2,
+        -1,
         -2,
         -2
       ]
@@ -521,8 +521,8 @@
       "expression": "({ minehead: [idleon.callFunction(\"MenagerieStuff\", \"MineheadDoublersOwned\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"MineheadDoublersLEFT\", 0, 0)], sushi: [idleon.callFunction(\"MenagerieStuff\", \"SushiDoublersOwned\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"SushiDoublersLEFT\", 0, 0)], jellyOperator: [idleon.callFunction(\"MenagerieStuff\", \"JellyOpDoublersOwned\", 0, 0), idleon.callFunction(\"MenagerieStuff\", \"JellyOpDoublersLEFT\", 0, 0)] })",
       "result": {
         "minehead": [
-          0,
-          -2
+          1,
+          -1
         ],
         "sushi": [
           0,
@@ -546,7 +546,7 @@
           0
         ],
         "purple": [
-          0,
+          2,
           3,
           18,
           5.12e+43,
@@ -557,8 +557,8 @@
           12881174
         ],
         "red": [
-          1,
-          1,
+          7,
+          4,
           [
             626000,
             2010000,

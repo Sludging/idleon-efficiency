@@ -6,7 +6,7 @@
     },
     "observation_levels_refresh": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"TotalObsLVs\", -1, 0)",
-      "result": 198
+      "result": 200
     },
     "support_refresh": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Kalei_MultiTot\", 0, 999)",
@@ -14,15 +14,15 @@
     },
     "epilogue_refresh": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", -1, 0)",
-      "result": 636.0608937201399
+      "result": 637.6555729629454
     },
     "exp_multiplier": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"ResearchEXPmulti\", 0, 0)",
-      "result": 7313.935005802389
+      "result": 15235.041041815068
     },
     "exp_total": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"ResearchEXPrateTOT\", 0, 0)",
-      "result": 174891792.32929674
+      "result": 367304336.4277101
     },
     "observation_subtotals": {
       "expression": "idleon.getAttr(\"CustomLists\").h.Occurrences.map((entry,index)=>({index,subtotal:idleon.callFunction(\"ResearchStuff\",\"ResearchEXPrateObj\",index,0)}))",
@@ -109,7 +109,7 @@
         },
         {
           "index": 20,
-          "subtotal": 7340.391162409591
+          "subtotal": 7392.966199564024
         },
         {
           "index": 21,
@@ -117,7 +117,7 @@
         },
         {
           "index": 22,
-          "subtotal": 16571.742619275537
+          "subtotal": 16716.21312063493
         },
         {
           "index": 23,

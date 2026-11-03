@@ -3,32 +3,32 @@
     "bonus_state": {
       "expression": "(()=>{const ballot=idleon.getAttr('PixelHelperActor')[25].behaviors.getBehavior('ActorEvents_670')._GenINFO;return {currentBonusIndex:ballot[36],candidateIndices:ballot[31].slice(1,4),candidatePercents:ballot[34].slice(0,3)};})()",
       "result": {
-        "currentBonusIndex": 23,
+        "currentBonusIndex": 20,
         "candidateIndices": [
-          11,
-          20,
-          21
+          24,
+          27,
+          32
         ],
         "candidatePercents": [
-          24,
-          66,
-          10
+          15,
+          45,
+          40
         ]
       }
     },
     "meritocracy_state": {
       "expression": "(()=>{const ballot=idleon.getAttr('PixelHelperActor')[25].behaviors.getBehavior('ActorEvents_670')._GenINFO;return {currentBonusIndex:idleon.getAttr('OptionsListAccount')[453],candidateIndices:ballot[233].slice(1,4),candidatePercents:ballot[236].slice(0,3),canVote:idleon.callFunction('Summoning2','MeritocCanVote',0,0)===1,haveReachedW7:Number(idleon.getAttr('KillsLeft2Advance')[250][0])<=0};})()",
       "result": {
-        "currentBonusIndex": 24,
+        "currentBonusIndex": 26,
         "candidateIndices": [
-          7,
-          19,
-          26
+          1,
+          11,
+          25
         ],
         "candidatePercents": [
-          31,
-          33,
-          36
+          52,
+          20,
+          28
         ],
         "canVote": true,
         "haveReachedW7": true
@@ -36,11 +36,11 @@
     },
     "bonus_multiplier": {
       "expression": "idleon.callFunction('Summoning2','VotingBonuszMulti',0,0)",
-      "result": 6.30679347826087
+      "result": 6.55679347826087
     },
     "meritocracy_multiplier": {
       "expression": "idleon.callFunction('Summoning2','MeritocBonuszMulti',0,0)",
-      "result": 5
+      "result": 5.25
     },
     "bonus_earned": {
       "expression": "Array.from({length:idleon.getAttr('CustomLists').h.NinjaInfo[38].length/3},(_,index)=>idleon.callFunction('Summoning2','VotingBonusz',index,0))",
@@ -65,10 +65,10 @@
         0,
         0,
         0,
+        203.26059782608698,
         0,
         0,
         0,
-        378.4076086956522,
         0,
         0,
         0,
@@ -109,9 +109,9 @@
         0,
         0,
         0,
-        1000,
         0,
         0,
+        262.5,
         0
       ]
     },
@@ -120,23 +120,23 @@
       "result": [
         {
           "index": 11,
-          "contribution": 126.1358695652174,
-          "factor": 2.261358695652174
+          "contribution": 131.1358695652174,
+          "factor": 2.3113586956521743
         },
         {
           "index": 20,
-          "contribution": 195.51059782608698,
-          "factor": 2.9551059782608697
+          "contribution": 203.26059782608698,
+          "factor": 3.03260597826087
         },
         {
           "index": 21,
-          "contribution": 504.5434782608696,
-          "factor": 6.045434782608696
+          "contribution": 524.5434782608696,
+          "factor": 6.2454347826086964
         },
         {
           "index": 23,
-          "contribution": 378.4076086956522,
-          "factor": 4.784076086956522
+          "contribution": 393.4076086956522,
+          "factor": 4.934076086956521
         }
       ]
     },
@@ -145,23 +145,23 @@
       "result": [
         {
           "index": 7,
-          "contribution": 1000,
-          "factor": 11
+          "contribution": 1050,
+          "factor": 11.5
         },
         {
           "index": 19,
-          "contribution": 1000,
-          "factor": 11
+          "contribution": 1050,
+          "factor": 11.5
         },
         {
           "index": 26,
-          "contribution": 250,
-          "factor": 3.5
+          "contribution": 262.5,
+          "factor": 3.625
         },
         {
           "index": 24,
-          "contribution": 1000,
-          "factor": 11
+          "contribution": 1050,
+          "factor": 11.5
         }
       ]
     },
@@ -177,34 +177,34 @@
         "mashedPotato": 8,
         "palette": 10.271739130434781,
         "legendTalent": 25,
-        "sushi": 0
+        "sushi": 10
       }
     },
     "bonus_week": {
       "expression": "(()=>{const ballot=idleon.getAttr('PixelHelperActor')[25].behaviors.getBehavior('ActorEvents_670')._GenINFO;const options=idleon.getAttr('OptionsListAccount');const unixTimeSeconds=Number(idleon.getAttr('TimeAway').h.GlobalTime);const offsetSeconds=Number(ballot[37]);const periodSeconds=604800;const currentPeriod=Math.floor((unixTimeSeconds+offsetSeconds)/periodSeconds);const secondsUntilRotation=periodSeconds-(unixTimeSeconds+offsetSeconds-periodSeconds*currentPeriod);const selectedSlot=Number(options[308]);const savedVotePeriod=Number(options[309]);return {unixTimeSeconds,periodSeconds,offsetSeconds,selectedSlot,savedVotePeriod,currentPeriod,secondsUntilRotation,nextRotationAt:unixTimeSeconds+secondsUntilRotation,hasVotedThisWeek:Number(Number.isInteger(selectedSlot)&&selectedSlot>=1&&selectedSlot<=3&&savedVotePeriod===currentPeriod)};})()",
       "result": {
-        "unixTimeSeconds": 1792913073.943,
+        "unixTimeSeconds": 1793590908.107,
         "periodSeconds": 604800,
         "offsetSeconds": 197860,
-        "selectedSlot": 0,
-        "savedVotePeriod": 2963,
-        "currentPeriod": 2964,
-        "secondsUntilRotation": 121066.0569999218,
-        "nextRotationAt": 1793034140,
-        "hasVotedThisWeek": 0
+        "selectedSlot": 1,
+        "savedVotePeriod": 2965,
+        "currentPeriod": 2965,
+        "secondsUntilRotation": 48031.89299988747,
+        "nextRotationAt": 1793638940,
+        "hasVotedThisWeek": 1
       }
     },
     "meritocracy_week": {
       "expression": "(()=>{const ballot=idleon.getAttr('PixelHelperActor')[25].behaviors.getBehavior('ActorEvents_670')._GenINFO;const options=idleon.getAttr('OptionsListAccount');const unixTimeSeconds=Number(idleon.getAttr('TimeAway').h.GlobalTime);const offsetSeconds=Number(ballot[239]);const periodSeconds=604800;const currentPeriod=Math.floor((unixTimeSeconds+offsetSeconds)/periodSeconds);const secondsUntilRotation=periodSeconds-(unixTimeSeconds+offsetSeconds-periodSeconds*currentPeriod);const selectedSlot=Number(options[450]);const savedVotePeriod=Number(options[451]);return {unixTimeSeconds,periodSeconds,offsetSeconds,selectedSlot,savedVotePeriod,currentPeriod,secondsUntilRotation,nextRotationAt:unixTimeSeconds+secondsUntilRotation,hasVotedThisWeek:Number(Number.isInteger(selectedSlot)&&selectedSlot>=1&&selectedSlot<=3&&savedVotePeriod===currentPeriod)};})()",
       "result": {
-        "unixTimeSeconds": 1792913073.943,
+        "unixTimeSeconds": 1793590908.107,
         "periodSeconds": 604800,
         "offsetSeconds": 543460,
         "selectedSlot": 0,
-        "savedVotePeriod": 2962,
-        "currentPeriod": 2965,
-        "secondsUntilRotation": 380266.0569999218,
-        "nextRotationAt": 1793293340,
+        "savedVotePeriod": 2965,
+        "currentPeriod": 2966,
+        "secondsUntilRotation": 307231.89299988747,
+        "nextRotationAt": 1793898140,
         "hasVotedThisWeek": 0
       }
     }

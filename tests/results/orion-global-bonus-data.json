@@ -10,31 +10,31 @@
     },
     "global_bonus_0": {
       "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 0, 0)",
-      "result": 11550
+      "result": 12075
     },
     "global_bonus_1": {
       "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 1, 0)",
-      "result": 19250
+      "result": 20125
     },
     "global_bonus_2": {
       "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 2, 0)",
-      "result": 3850
+      "result": 4025
     },
     "global_bonus_3": {
       "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 3, 0)",
-      "result": 7700
+      "result": 8050
     },
     "global_bonus_4": {
       "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 4, 0)",
-      "result": 1925
+      "result": 2012.5
     },
     "global_bonus_5": {
       "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 5, 0)",
-      "result": 3850
+      "result": 4025
     },
     "global_bonus_multi": {
       "expression": "100*idleon.callFunction(\"Summoning\", \"OwlMegafeather\", 1, 0)+100*idleon.callFunction(\"Summoning\", \"OwlMegafeather\", 3, 0)+100*idleon.callFunction(\"Summoning\", \"OwlMegafeather\", 5, 0)+100*idleon.callFunction(\"Summoning\", \"OwlMegafeather\", 7, 0)+100*Math.min(1,idleon.callFunction(\"Summoning\", \"OwlMegafeather\", 9, 0))+50*Math.max(0,idleon.callFunction(\"Summoning\", \"OwlMegafeather\", 9, 0)-1)",
-      "result": 1000
+      "result": 1050
     }
   },
   "errors": {}

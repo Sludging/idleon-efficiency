@@ -14,7 +14,7 @@
     },
     "palette_bonus_3": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",3,0)",
-      "result": 75.34883720930233
+      "result": 160
     },
     "palette_bonus_4": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",4,0)",
@@ -34,7 +34,7 @@
     },
     "palette_bonus_8": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",8,0)",
-      "result": 652.5
+      "result": 675
     },
     "palette_bonus_9": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",9,0)",
@@ -114,7 +114,7 @@
     },
     "palette_bonus_28": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",28,0)",
-      "result": 11.659090909090908
+      "result": 23.318181818181817
     },
     "palette_bonus_29": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",29,0)",
@@ -134,7 +134,7 @@
     },
     "palette_bonus_33": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",33,0)",
-      "result": 64.28571428571428
+      "result": 84.375
     },
     "palette_bonus_34": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"PaletteBonus\",34,0)",

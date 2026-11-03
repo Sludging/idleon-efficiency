@@ -49,7 +49,7 @@
     },
     {
       "label": "bubble_y5",
-      "expression": "idleon.getDNSM(\"AlchBubbles\").h.Y5",
+      "expression": "(() => { const map = idleon.getDNSM(\"AlchBubbles\").h; return Object.prototype.hasOwnProperty.call(map, \"Y5\") ? map[\"Y5\"] : 0; })()",
       "description": "Alchemy bubble Y5 (cost reduction)"
     },
     {

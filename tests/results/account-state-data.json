@@ -2,19 +2,19 @@
   "extractions": {
     "world_3_miniboss_counter": {
       "expression": "idleon.getAttr(\"OptionsListAccount\")[96]",
-      "result": 156
+      "result": 163
     },
     "world_4_miniboss_counter": {
       "expression": "idleon.getAttr(\"OptionsListAccount\")[98]",
-      "result": 159
+      "result": 166
     },
     "world_5_miniboss_counter": {
       "expression": "idleon.getAttr(\"OptionsListAccount\")[225]",
-      "result": 29
+      "result": 36
     },
     "world_6_miniboss_counter": {
       "expression": "idleon.getAttr(\"OptionsListAccount\")[226]",
-      "result": 29
+      "result": 36
     },
     "plunderous_mob_kills": {
       "expression": "idleon.getAttr(\"OptionsListAccount\")[139]",

@@ -63,16 +63,16 @@
     "nblb_normal_targets": {
       "expression": "(()=>{if(!idleon.callFunction('ArcaneType','is_NBLB_on',0,0))return [];const levels=idleon.getAttr('CauldronInfo');const count=idleon.callFunction('ArcaneType','NBLB_bubbleQTY',0,0);const selected=[];for(let n=0;n<count;n++){let lowest=99999,chosen=null;for(let cauldron=0;cauldron<4;cauldron++){for(let bubble=0;bubble<15;bubble++){const id=1000*cauldron+bubble;const level=Number(levels[cauldron][bubble]);if(!selected.includes(id)&&level>=2&&level<=lowest){lowest=level;chosen=id}}}if(lowest<10000)selected.push(chosen)}return selected})()",
       "result": [
-        2012,
-        1013,
-        1010,
-        1004,
-        1008,
+        2011,
         14,
         9,
+        3014,
+        1014,
+        1012,
+        13,
         8,
-        3010,
-        3003
+        3006,
+        2014
       ]
     },
     "kruk_targets": {

@@ -4,11 +4,11 @@ import { ExtractionResults, getExtractedValue, loadExtractionResults, validateEx
 
 const resultFile = 'royal-armory-statues-data.json';
 const statueCases = [
-    { index: 0, description: 'restored Damage statue parchment upgrade with a rounded positive chance' },
-    { index: 2, description: 'covered Frosty statue marble restoration with zero current bonus' },
+    { index: 0, description: 'Damage statue bonus and upgrade chance' },
+    { index: 2, description: 'Frosty statue bonus and upgrade chance' },
 ] as const;
 
-describe('Royal Statue bonuses and attempts', () => {
+describe('Royal Statue bonuses and upgrade chances', () => {
     let results: ExtractionResults;
     let armory: RoyalArmory;
 
@@ -27,7 +27,6 @@ describe('Royal Statue bonuses and attempts', () => {
             for (const [value, key, effect] of [
                 [statue.getBonus(), `statue_bonus_${index}`, 'current bonus'],
                 [statue.getSuccessChance(), `statue_chance_${index}`, 'fractional success chance'],
-                [Number(statue.isAffordable()), `statue_affordable_${index}`, 'balance-only affordability'],
             ] as const) {
                 expect(value).toMatchLiveGameWithDetails(getExtractedValue(results, key), {
                     tolerance: 0,

@@ -5,7 +5,7 @@
       "result": {
         "playerId": 3,
         "playerName": "Sludgev4",
-        "version": 398.1
+        "version": 399.1
       }
     },
     "native_jar_types_owned": {
@@ -44,7 +44,7 @@
       "expression": "[idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 10, 0), idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 14, 0)]",
       "result": [
         26749.666666666664,
-        27682.328119835573
+        28274.22922034054
       ]
     },
     "rupie_collectibles": {
@@ -69,14 +69,11 @@
       "result": 130
     },
     "producer_assignment": {
-      "expression": "idleon.getAttr('Holes')[25].slice(0, 6)",
+      "expression": "idleon.getAttr('Holes')[25].slice(0, 3)",
       "result": [
         4,
         8,
-        9,
-        3542.325400621068,
-        6569.987956535203,
-        3940.9789369449554
+        9
       ]
     },
     "requirement_balance": {
@@ -125,7 +122,7 @@
     },
     "measurement_12": {
       "expression": "idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 12, 0)",
-      "result": 329.92048172043013
+      "result": 330.50098064516123
     },
     "production_upgrade_67": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 67, 30)",
@@ -145,7 +142,7 @@
     },
     "producer_rate_0": {
       "expression": "idleon.callFunction('Holes', 'JarProductionPerHR', 0, 0)",
-      "result": 793625.7585879574
+      "result": 794130.2910223096
     },
     "producer_requirement_1": {
       "expression": "idleon.callFunction('Holes', 'JarProductionREQ', idleon.getAttr('Holes')[25][1], 0)",
@@ -153,7 +150,7 @@
     },
     "producer_rate_1": {
       "expression": "idleon.callFunction('Holes', 'JarProductionPerHR', 1, 0)",
-      "result": 793625.7585879574
+      "result": 794130.2910223096
     },
     "producer_requirement_2": {
       "expression": "idleon.callFunction('Holes', 'JarProductionREQ', idleon.getAttr('Holes')[25][2], 0)",
@@ -161,11 +158,11 @@
     },
     "producer_rate_2": {
       "expression": "idleon.callFunction('Holes', 'JarProductionPerHR', 2, 0)",
-      "result": 793625.7585879574
+      "result": 794130.2910223096
     },
     "jar_rupie_value": {
       "expression": "idleon.callFunction('Holes', 'JarRupieValue', 0, 0)",
-      "result": 36201428484.96218
+      "result": 36594365978.70311
     }
   },
   "errors": {}

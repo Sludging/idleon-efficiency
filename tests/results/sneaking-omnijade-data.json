@@ -2,7 +2,7 @@
   "extractions": {
     "omnijade_remaining": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"OmniJadeLeft\", 0, 0)",
-      "result": 0
+      "result": -3
     },
     "omnijade_daily_levels": {
       "expression": "idleon.callFunction(\"MenagerieStuff\", \"OmniJadeDailyLVs\", 0, 0)",
@@ -10,7 +10,7 @@
     },
     "knowledge_bonus_0": {
       "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 0, 0)",
-      "result": 2085
+      "result": 2105
     },
     "knowledge_bonus_1": {
       "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 1, 0)",
@@ -22,11 +22,11 @@
     },
     "knowledge_bonus_3": {
       "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 3, 0)",
-      "result": 357
+      "result": 360
     },
     "knowledge_bonus_4": {
       "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 4, 0)",
-      "result": 738
+      "result": 741
     },
     "knowledge_bonus_5": {
       "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 5, 0)",
@@ -50,7 +50,7 @@
     },
     "knowledge_bonus_11": {
       "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 11, 0)",
-      "result": 6993
+      "result": 6998
     },
     "knowledge_bonus_12": {
       "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 12, 0)",
@@ -62,11 +62,11 @@
     },
     "knowledge_bonus_14": {
       "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 14, 0)",
-      "result": 832
+      "result": 859
     },
     "knowledge_bonus_15": {
       "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 15, 0)",
-      "result": 986
+      "result": 1026
     },
     "knowledge_bonus_16": {
       "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 16, 0)",
@@ -74,7 +74,7 @@
     },
     "knowledge_bonus_31": {
       "expression": "idleon.callFunction(\"Ninja\", \"NLbonuses\", 31, 0)",
-      "result": 0
+      "result": 1
     },
     "pipsqueak_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 173)",

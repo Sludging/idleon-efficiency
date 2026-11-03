@@ -2,7 +2,7 @@
   "extractions": {
     "player_class_experience_multiplier": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 15, 0)",
-      "result": 18358924706465.777
+      "result": 39952590536330.56
     }
   },
   "errors": {}

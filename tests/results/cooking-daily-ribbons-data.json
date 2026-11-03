@@ -5,13 +5,13 @@
       "result": {
         "nativeActiveContext": {
           "recipientIndex": 3,
-          "ribbonWinningTalent": 1.9182692307692306,
-          "dailyCount": 11.561126373626372,
+          "ribbonWinningTalent": 1.9195678271308523,
+          "dailyCount": 11.763317827130852,
           "minimumDailyCount": 10,
           "maximumDailyCount": 12
         },
         "dailyGenerationUnlocked": true,
-        "dailyCount": 11.561126373626372,
+        "dailyCount": 11.763317827130852,
         "minimumDailyCount": 10,
         "maximumDailyCount": 12,
         "dailyCountBreakdown": {
@@ -28,7 +28,7 @@
               "group": "additional",
               "amount": 0.5,
               "active": true,
-              "share": 0.16333856854386358
+              "share": 0.1532182969869061
             },
             {
               "source": "legendTalent",
@@ -61,26 +61,26 @@
             {
               "source": "ribbonWinningTalent",
               "group": "additional",
-              "amount": 1.9182692307692306,
+              "amount": 1.9195678271308523,
               "active": true,
-              "share": 0.6266547004711689
+              "share": 0.5882258268476899
             },
             {
               "source": "palette",
               "group": "additional",
-              "amount": 0.6428571428571428,
+              "amount": 0.84375,
               "active": true,
-              "share": 0.21000673098496744
+              "share": 0.258555876165404
             }
           ],
           "baseTotal": 9,
-          "additionalTotal": 3.0611263736263736,
-          "additiveTotal": 12.061126373626372,
+          "additionalTotal": 3.2633178271308525,
+          "additiveTotal": 12.263317827130852,
           "meritocracyMultiplier": 1,
           "meritocracyImpact": 0,
-          "expectedRawCount": 12.061126373626374,
-          "roundingAdjustment": -0.5000000000000018,
-          "total": 11.561126373626372
+          "expectedRawCount": 12.263317827130852,
+          "roundingAdjustment": -0.5,
+          "total": 11.763317827130852
         },
         "dailyRankProbabilities": [
           {

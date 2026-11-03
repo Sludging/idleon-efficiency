@@ -4,7 +4,7 @@
   "extractions": [
     {
       "label": "gallery_trophy_agility_percent",
-      "expression": "idleon.getDNSM(\"GalleryTrophyBonTOT\").h[\"%_AGI\"]",
+      "expression": "(() => { const map = idleon.getDNSM(\"GalleryTrophyBonTOT\").h; return Object.prototype.hasOwnProperty.call(map, \"%_AGI\") ? map[\"%_AGI\"] : 0; })()",
       "description": "Trophy Agility contribution at the improved-podium boundary; the paired save has artifact33 status4 and Trophy10 in collection position62"
     },
     {
@@ -24,7 +24,7 @@
     },
     {
       "label": "gallery_alchemy_y13",
-      "expression": "idleon.getDNSM(\"AlchBubbles\").h.Y13",
+      "expression": "(() => { const map = idleon.getDNSM(\"AlchBubbles\").h; return Object.prototype.hasOwnProperty.call(map, \"Y13\") ? map[\"Y13\"] : 0; })()",
       "description": "Codfrey Rulz Ok bubble Gallery Bonus Multi contribution before Gallery's cap of 20"
     },
     {

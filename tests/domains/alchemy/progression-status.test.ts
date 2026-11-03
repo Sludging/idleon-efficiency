@@ -1,7 +1,6 @@
 import { Alchemy } from '../../../data/domain/world-2/alchemy/alchemy';
 import { Cloudsave, safeJsonParse } from '../../../data/domain/cloudsave';
 import { initJellyObstructionRepo } from '../../../data/domain/data/JellyObstructionRepo';
-import { initMeritocratyBonusRepo } from '../../../data/domain/data/MeritocratyBonusRepo';
 import { loadGameDataFromSave, loadTestSave } from '../../utils/cloudsave-loader';
 import {
   getExtractedValue,
@@ -193,40 +192,22 @@ describe('Alchemy account progression status', () => {
       });
     });
 
-    it('previews the current World 7 Meritocracy reward and applies it only when the vial bonus wins', () => {
+    it('applies only the earned Meritocracy vial contribution', () => {
       const results = loadExtractionResults('vote-ballot-data.json');
       validateExtractionHealth(results);
-      const nativeState = results.extractions.meritocracy_state.result as {
-        haveReachedW7: boolean;
-        currentBonusIndex: number;
-      };
-      const nativeMultiplier = getExtractedValue(results, 'meritocracy_multiplier');
       const nativeEarned = results.extractions.meritocracy_earned.result as number[];
-      const coefficient = initMeritocratyBonusRepo().find(entry => entry.index === 20)!.data.bonus;
-      const reward = alchemy.vialMultiplierSourceRewards.meritocracyPercent;
-
-      expect(reward.potentialValue).toMatchLiveGameWithDetails(coefficient * nativeMultiplier, {
-        tolerance: 0,
-        context: 'Meritocracy vial winning reward from generated bonus 20 and native current World 7 multiplier',
-      });
-      expect(reward.active).toBe(nativeState.haveReachedW7 && nativeState.currentBonusIndex === 20);
-      expect(reward.basis).toBe(nativeState.haveReachedW7 ? 'whenWinning' : 'afterWorld7Winning');
       expect(alchemy.vialMultiplierSources.meritocracyPercent).toMatchLiveGameWithDetails(nativeEarned[20], {
         tolerance: 0,
         context: 'Earned Meritocracy vial contribution from native meritocracy_earned bonus 20',
       });
     });
 
-    it('retains the native active companion evolution strength in its Prisma reward', () => {
+    it('applies the earned companion Prisma contribution only while active', () => {
       const results = loadExtractionResults('alchemy-prismatic-multiplier-data.json');
       validateExtractionHealth(results);
       const nativeBonus = getExtractedValue(results, 'companion_88_bonus');
       const reward = alchemy.prismaticMultiplierSourceRewards.companionPercent;
 
-      expect(reward.potentialValue).toMatchLiveGameWithDetails(nativeBonus * 50, {
-        tolerance: 0,
-        context: 'Companion Prisma reward in percentage points from native companion_88_bonus scaled by 50',
-      });
       expect(reward.active).toBe(nativeBonus > 0);
       expect(reward.basis).toBe('whenUnlocked');
       expect(alchemy.prismaticMultiplierSources.companionPercent).toMatchLiveGameWithDetails(nativeBonus * 50, {

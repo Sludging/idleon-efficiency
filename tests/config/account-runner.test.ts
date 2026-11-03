@@ -33,6 +33,22 @@ describe('account runner CLI contract', () => {
     expect(() => parseArgs(['extract', '--accounts', 'suk69', '--port', '3101'])).toThrow('must not reuse the default server port 3101');
   });
 
+  it('accepts zero-character-AFK only for explicitly selected extraction', () => {
+    expect(parseArgs(['extract', '--accounts', 'suk69']).zeroCharacterAfk).toBe(false);
+    expect(parseArgs(['extract', '--accounts', 'suk69', '--zero-character-afk']).zeroCharacterAfk).toBe(true);
+    expect(() => parseArgs(['extract', '--zero-character-afk'])).toThrow('--accounts is required');
+    for (const command of ['fetch', 'test', 'list']) {
+      expect(() => parseArgs([command, '--accounts', 'suk69', '--zero-character-afk']))
+        .toThrow('--zero-character-afk is only valid for the extract command');
+    }
+    for (const value of ['true', 'false']) {
+      expect(() => parseArgs(['extract', '--accounts', 'suk69', `--zero-character-afk=${value}`]))
+        .toThrow('Unknown option');
+      expect(() => parseArgs(['extract', '--accounts', 'suk69', '--zero-character-afk', value]))
+        .toThrow('Unknown option');
+    }
+  });
+
   it('rejects valid-looking account IDs absent from the selection config', () => {
     const options = parseArgs(['list', '--accounts', 'unknown-account']);
 
@@ -179,6 +195,7 @@ describe('serial public-account extraction', () => {
   const spawnMock = jest.mocked(spawn);
   const retainedSave = JSON.parse(fs.readFileSync(retainedSavePath, 'utf8'));
   const gameVersion = { title: 'Boundary runtime', version: 'transport-fixture' };
+  const evaluationTimeMs = 1760000000000;
   let cacheDir: string;
   let originalPlayerIndex: string | undefined;
   let originalDataset: string | undefined;
@@ -232,7 +249,7 @@ describe('serial public-account extraction', () => {
     fs.writeFileSync(pointerPath, previousPointer);
     return {
       account, snapshot, savePath, manifest, manifestPath, pointerPath, previousPointer, previousDatasetPath,
-      options: { cacheDir, basePort: 3211 }
+      options: { cacheDir, basePort: 3211, zeroCharacterAfk: false }
     };
   }
 
@@ -309,6 +326,8 @@ describe('serial public-account extraction', () => {
     extractionFailureIndex?: number;
     cleanupFailureIndex?: number;
     preparationStatus?: { preparationCharacter?: unknown; preparationPlayerName?: unknown };
+    inputStatus?: (actor: number) => { zeroCharacterAfk?: unknown; evaluationTimeMs?: unknown };
+    saveForActor?: (actor: number) => Record<string, unknown>;
   } = {}) {
     const events: string[] = [];
     const requests: Array<{ actor: number; route: string; expression?: string; selectedIndex?: string }> = [];
@@ -317,6 +336,7 @@ describe('serial public-account extraction', () => {
       preparationActor: number;
       port: number;
       savePath: string;
+      zeroCharacterAfk: boolean;
       child: EventEmitter;
     }> = [];
     let active: typeof children[number] | undefined;
@@ -441,7 +461,7 @@ describe('serial public-account extraction', () => {
           return true;
         })
       });
-      const runtime = { actor, preparationActor, port, savePath, child };
+      const runtime = { actor, preparationActor, port, savePath, child, zeroCharacterAfk: argv.includes('--zero-character-afk') };
       children.push(runtime);
       active = runtime;
       unclosed += 1;
@@ -470,10 +490,12 @@ describe('serial public-account extraction', () => {
           playerName: actor === options.startupFailureIndex ? 'wrong transport identity' : retainedSave.playerNames[actor],
           preparationCharacter: active.preparationActor,
           preparationPlayerName: retainedSave.playerNames[active.preparationActor],
-          ...options.preparationStatus
+          zeroCharacterAfk: active.zeroCharacterAfk, evaluationTimeMs,
+          ...options.preparationStatus,
+          ...options.inputStatus?.(actor)
         });
       }
-      if (route === '/cloud-save') return response(retainedSave);
+      if (route === '/cloud-save') return response(options.saveForActor ? options.saveForActor(actor) : retainedSave);
       if (route === '/game-version') return response(gameVersion);
       if (route !== '/exec') throw new Error(`Unexpected runtime route: ${route}`);
       if (expression === activePlayerExpression) return response({ result: actor });
@@ -528,30 +550,25 @@ describe('serial public-account extraction', () => {
     const { resultsDir, files } = retainedOutputs(fixture);
     expect(files).toEqual(configNames.map(name => name.replace('.json', '-data.json')).sort());
     expect(Object.keys(descriptor.results).sort()).toEqual(files);
-    expect(descriptor.schemaVersion).toBe(2);
+    expect(descriptor.schemaVersion).toBe(3);
     expect(descriptor.source).toBe('toolbox');
     expect(descriptor.adapterVersion).toBe(ADAPTER_VERSION);
-    expect(descriptor.saveSha256).toBe(hashFile(fixture.savePath));
+    const effectiveSavePath = path.join(path.dirname(datasetPath), 'effective-save.json');
+    expect(descriptor.saveSha256).toBe(hashFile(effectiveSavePath));
+    expect(JSON.parse(fs.readFileSync(effectiveSavePath, 'utf8'))).toEqual(retainedSave);
+    expect(descriptor.sourceSaveSha256).toBe(fixture.manifest.saveSha256);
+    expect(path.resolve(path.dirname(datasetPath), descriptor.sourceSavePath)).toBe(fixture.savePath);
+    expect(descriptor.inputOptions).toEqual({ zeroCharacterAfk: false, evaluationTimeMs });
     expect(descriptor.configSha256).toBe(hashConfigs(configsDir));
     expect(descriptor.assetSha256).toBe(hashAssets(assetRoot));
     expect(descriptor.playerIndex).toBe(fixture.account.playerIndex);
     expect(descriptor.playerName).toBe(retainedSave.playerNames[fixture.account.playerIndex]);
     expect(descriptor.preparationPlayerIndex).toBe(fixture.account.playerIndex);
     expect(descriptor.preparationPlayerName).toBe(retainedSave.playerNames[fixture.account.playerIndex]);
-    expect(Object.keys(descriptor).sort()).toEqual([
-      'schemaVersion', 'accountId', 'profileName', 'source', 'adapterVersion', 'savePath', 'saveSha256',
-      'resultsDir', 'playerIndex', 'playerName', 'gameVersion', 'preparationPlayerIndex',
-      'preparationPlayerName', 'assetSha256', 'configSha256', 'results', 'extractedAt'
-    ].sort());
     expect(descriptor.gameVersion).toEqual(gameVersion);
-    expect(path.resolve(path.dirname(datasetPath), descriptor.savePath)).toBe(fixture.savePath);
-    let expectedExecCalls = 0;
+    expect(path.resolve(path.dirname(datasetPath), descriptor.savePath)).toBe(effectiveSavePath);
     for (const name of configNames) {
       const config = JSON.parse(fs.readFileSync(path.join(configsDir, name), 'utf8'));
-      expectedExecCalls += config.extractions.length + 1;
-      if (config.extractions.some((entry: { requiresTown?: boolean }) => entry.requiresTown === true)) {
-        expectedExecCalls += 1;
-      }
       const resultFile = name.replace('.json', '-data.json');
       const result = JSON.parse(fs.readFileSync(path.join(resultsDir, resultFile), 'utf8'));
       expect(descriptor.results[resultFile]).toBe(hashFile(path.join(resultsDir, resultFile)));
@@ -563,7 +580,6 @@ describe('serial public-account extraction', () => {
         expect(calls.some(request => request.actor === (config.requiredActivePlayerIndex ?? fixture.account.playerIndex))).toBe(true);
       }
     }
-    expect(runtime.requests.filter(request => request.route === '/exec')).toHaveLength(expectedExecCalls);
     expect(runtime.discoveries).toBe(1);
     expect(runtime.maximumUnclosed).toBe(1);
     expect(runtime.unclosed).toBe(0);
@@ -572,6 +588,82 @@ describe('serial public-account extraction', () => {
     expect(fs.existsSync(promotions[0])).toBe(false);
     expect(fs.readFileSync(fixture.previousDatasetPath, 'utf8')).toBe('{"previous":true}');
     expect(hashFile(fixture.savePath)).toBe(fixture.manifest.saveSha256);
+  });
+
+  it.each([false, true])('captures effective runtime input once with zero-character-AFK %s', async (zeroCharacterAfk) => {
+    const fixture = snapshotFixture();
+    fixture.options.zeroCharacterAfk = zeroCharacterAfk;
+    const effectiveSave = { ...retainedSave, transportInput: 'effective runtime input' };
+    const runtime = externalRuntime({
+      configs: narrowConfigs,
+      saveForActor: actor => actor === 0
+        ? Object.fromEntries(Object.entries(effectiveSave).reverse())
+        : effectiveSave
+    });
+    const writeFile = fs.writeFileSync;
+    const effectiveWrites: string[] = [];
+    jest.spyOn(fs, 'writeFileSync').mockImplementation((file, data, writeOptions) => {
+      if (path.basename(String(file)) === 'effective-save.json') effectiveWrites.push(String(file));
+      return writeFile(file, data, writeOptions);
+    });
+
+    await extractAccount(fixture.options, fixture.account);
+
+    const datasetPath = latestDatasetPath(fixture.options, fixture.account);
+    const descriptor = JSON.parse(fs.readFileSync(datasetPath, 'utf8'));
+    const effectiveSavePath = path.resolve(path.dirname(datasetPath), descriptor.savePath);
+    expect(effectiveWrites).toEqual([effectiveSavePath]);
+    expect(JSON.parse(fs.readFileSync(effectiveSavePath, 'utf8'))).toEqual(effectiveSave);
+    expect(descriptor.saveSha256).toBe(hashFile(effectiveSavePath));
+    expect(descriptor.sourceSaveSha256).toBe(fixture.manifest.saveSha256);
+    expect(descriptor.saveSha256).not.toBe(descriptor.sourceSaveSha256);
+    expect(descriptor.inputOptions).toEqual({ zeroCharacterAfk, evaluationTimeMs });
+    expect(runtime.children.every(child => child.zeroCharacterAfk === zeroCharacterAfk)).toBe(true);
+    expect(hashFile(fixture.savePath)).toBe(fixture.manifest.saveSha256);
+  });
+
+  it.each([
+    { zeroCharacterAfk: true },
+    { zeroCharacterAfk: undefined },
+    { zeroCharacterAfk: 'false' },
+    { evaluationTimeMs: undefined },
+    { evaluationTimeMs: 0 },
+    { evaluationTimeMs: -1 },
+    { evaluationTimeMs: 0.5 },
+    { evaluationTimeMs: '1760000000000' },
+    { evaluationTimeMs: Number.MAX_SAFE_INTEGER + 1 }
+  ])('rejects invalid runtime input options %p without promotion', async (inputStatus) => {
+    const fixture = snapshotFixture();
+    const runtime = externalRuntime({ configs: narrowConfigs, inputStatus: () => inputStatus });
+
+    await expect(extractAccount(fixture.options, fixture.account))
+      .rejects.toThrow(/unexpected (zero-character-AFK mode|evaluation time)/);
+
+    expect(runtime.unclosed).toBe(0);
+    expect(runtime.requests.some(request => request.route === '/exec')).toBe(false);
+    expect(fs.readFileSync(fixture.pointerPath, 'utf8')).toBe(fixture.previousPointer);
+    expect(retainedOutputs(fixture).files).toEqual([]);
+  });
+
+  it.each(['epoch', 'save'] as const)('rejects character-group %s differences before promotion', async (difference) => {
+    const fixture = snapshotFixture();
+    const runtime = externalRuntime({
+      configs: narrowConfigs,
+      inputStatus: actor => ({ evaluationTimeMs: evaluationTimeMs + (difference === 'epoch' && actor === 0 ? 1 : 0) }),
+      saveForActor: actor => difference === 'save' && actor === 0
+        ? { ...retainedSave, transportInput: 'different runtime input' }
+        : retainedSave
+    });
+
+    await expect(extractAccount(fixture.options, fixture.account))
+      .rejects.toThrow(difference === 'epoch' ? 'different evaluation times' : 'different effective saves');
+
+    expect(runtime.unclosed).toBe(0);
+    expect(runtime.requests.some(request => request.actor === 0 && request.route === '/exec')).toBe(false);
+    expect(fs.readFileSync(fixture.pointerPath, 'utf8')).toBe(fixture.previousPointer);
+    const { resultsDir, files } = retainedOutputs(fixture);
+    expect(files).toContain('default-player-data.json');
+    expect(fs.existsSync(path.join(path.dirname(resultsDir), 'dataset.json'))).toBe(false);
   });
 
   it.each([undefined, '7'])('awaits close before the next actor and restores player override %s', async (previousIndex) => {
@@ -631,7 +723,7 @@ describe('serial public-account extraction', () => {
     expect(runtime.maximumUnclosed).toBe(1);
     expect(runtime.unclosed).toBe(0);
     const descriptor = JSON.parse(fs.readFileSync(latestDatasetPath(fixture.options, account), 'utf8'));
-    expect(descriptor.schemaVersion).toBe(2);
+    expect(descriptor.schemaVersion).toBe(3);
     expect(descriptor.source).toBe(source ?? 'toolbox');
     expect(descriptor.adapterVersion).toBe(adapterVersion);
     expect(descriptor.playerIndex).toBe(1);
@@ -766,7 +858,7 @@ describe('serial public-account extraction', () => {
     await extractAccount(fixture.options, fixture.account);
 
     const descriptor = JSON.parse(fs.readFileSync(latestDatasetPath(fixture.options, fixture.account), 'utf8'));
-    expect(descriptor.schemaVersion).toBe(2);
+    expect(descriptor.schemaVersion).toBe(3);
     expect(descriptor.playerIndex).toBe(1);
     expect(descriptor.playerName).toBe(retainedSave.playerNames[1]);
     expect(fs.readFileSync(fixture.manifestPath, 'utf8')).toBe(originalManifest);

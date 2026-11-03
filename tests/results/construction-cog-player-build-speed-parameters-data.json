@@ -22,7 +22,7 @@
     },
     "player_build_speed_construction_mastery_4": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ConstMasteryBonus\", 2, 0)",
-      "result": 1595
+      "result": 1600
     },
     "player_build_speed_shinyfin_vial": {
       "expression": "idleon.getDNSM(\"AlchVials\").h.Contspd",

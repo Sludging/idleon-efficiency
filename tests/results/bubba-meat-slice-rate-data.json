@@ -2,7 +2,7 @@
   "extractions": {
     "meat_slice_rate": {
       "expression": "idleon.callFunction(\"Bubbastuff\",\"MeatsliceRate\",0,0)",
-      "result": 67304537530.68412
+      "result": 147408839255.66385
     }
   },
   "errors": {}

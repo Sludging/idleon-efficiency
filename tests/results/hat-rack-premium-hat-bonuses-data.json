@@ -1,15 +1,15 @@
 {
   "extractions": {
     "hat_rack_drop_rate": {
-      "expression": "idleon.getDNSM(\"PremHatBonTOT\").h[\"%_DROP_RATE\"]",
+      "expression": "(() => { const map = idleon.getDNSM(\"PremHatBonTOT\").h; return Object.prototype.hasOwnProperty.call(map, \"%_DROP_RATE\") ? map[\"%_DROP_RATE\"] : 0; })()",
       "result": 52.199999999999996
     },
     "hat_rack_weapon_power": {
-      "expression": "idleon.getDNSM(\"PremHatBonTOT\").h.Weapon_Power",
+      "expression": "(() => { const map = idleon.getDNSM(\"PremHatBonTOT\").h; return Object.prototype.hasOwnProperty.call(map, \"Weapon_Power\") ? map[\"Weapon_Power\"] : 0; })()",
       "result": 15.66
     },
     "hat_rack_strength": {
-      "expression": "idleon.getDNSM(\"PremHatBonTOT\").h.STR",
+      "expression": "(() => { const map = idleon.getDNSM(\"PremHatBonTOT\").h; return Object.prototype.hasOwnProperty.call(map, \"STR\") ? map[\"STR\"] : 0; })()",
       "result": 81.77999999999997
     },
     "hat_rack_build_speed": {

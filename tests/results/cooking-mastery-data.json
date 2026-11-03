@@ -7,8 +7,8 @@
         "nativeRank": 21,
         "unlockTier": 3,
         "unlocked": true,
-        "experience": 6845785123.379201,
-        "totalLadles": 92568218,
+        "experience": 8929068087.808256,
+        "totalLadles": 169855262,
         "experienceRequired": 9094947017.729282,
         "purplePoints": {
           "total": 30,
@@ -21,10 +21,10 @@
           "available": 0
         },
         "context": {
-          "totalLadles": 92568218,
+          "totalLadles": 169855262,
           "totalCookingLevels": 1329,
           "divorceCakeLevel": 120,
-          "totalRibbonRanks": 382,
+          "totalRibbonRanks": 417,
           "nativeRank": 21
         },
         "upgrades": [
@@ -33,7 +33,7 @@
             "level": 12,
             "unlocked": true,
             "coefficient": 2400,
-            "effect": 19119.46782281973
+            "effect": 19752.147519828755
           },
           {
             "index": 1,

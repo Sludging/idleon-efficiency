@@ -11,23 +11,23 @@
           },
           {
             "index": 1,
-            "rank": 16
-          },
-          {
-            "index": 2,
-            "rank": 10
-          },
-          {
-            "index": 3,
-            "rank": 13
-          },
-          {
-            "index": 4,
             "rank": 17
           },
           {
+            "index": 2,
+            "rank": 14
+          },
+          {
+            "index": 3,
+            "rank": null
+          },
+          {
+            "index": 4,
+            "rank": 16
+          },
+          {
             "index": 5,
-            "rank": 7
+            "rank": 11
           },
           {
             "index": 6,
@@ -35,91 +35,91 @@
           },
           {
             "index": 7,
-            "rank": 12
+            "rank": null
           },
           {
             "index": 8,
-            "rank": 10
+            "rank": null
           },
           {
             "index": 9,
-            "rank": 7
+            "rank": null
           },
           {
             "index": 10,
-            "rank": 12
+            "rank": null
           },
           {
             "index": 11,
-            "rank": 9
+            "rank": null
           },
           {
             "index": 12,
-            "rank": 9
+            "rank": null
           },
           {
             "index": 13,
-            "rank": 6
+            "rank": null
           },
           {
             "index": 14,
-            "rank": 8
+            "rank": null
           },
           {
             "index": 15,
-            "rank": 12
+            "rank": null
           },
           {
             "index": 16,
-            "rank": 6
+            "rank": null
           },
           {
             "index": 17,
-            "rank": 9
+            "rank": null
           },
           {
             "index": 18,
-            "rank": 7
+            "rank": null
           },
           {
             "index": 19,
-            "rank": 9
+            "rank": null
           },
           {
             "index": 20,
-            "rank": 8
+            "rank": null
           },
           {
             "index": 21,
-            "rank": 11
+            "rank": null
           },
           {
             "index": 22,
-            "rank": 6
+            "rank": null
           },
           {
             "index": 23,
-            "rank": 8
+            "rank": null
           },
           {
             "index": 24,
-            "rank": 5
+            "rank": null
           },
           {
             "index": 25,
-            "rank": 8
+            "rank": null
           },
           {
             "index": 26,
-            "rank": 4
+            "rank": null
           },
           {
             "index": 27,
-            "rank": 6
+            "rank": null
           }
         ],
-        "totalRanks": 382,
-        "ribbonedMealCount": 34,
+        "totalRanks": 417,
+        "ribbonedMealCount": 36,
         "mealCount": 74,
         "maxRank": 25,
         "lowestRank": 8,
@@ -162,12 +162,12 @@
           },
           {
             "rank": 8,
-            "mealCount": 5,
+            "mealCount": 4,
             "multiplier": 1.92
           },
           {
             "rank": 9,
-            "mealCount": 7,
+            "mealCount": 6,
             "multiplier": 1.97
           },
           {
@@ -182,7 +182,7 @@
           },
           {
             "rank": 12,
-            "mealCount": 3,
+            "mealCount": 7,
             "multiplier": 2.77
           },
           {
@@ -202,7 +202,7 @@
           },
           {
             "rank": 16,
-            "mealCount": 2,
+            "mealCount": 1,
             "multiplier": 3.88
           },
           {
@@ -222,7 +222,7 @@
           },
           {
             "rank": 20,
-            "mealCount": 2,
+            "mealCount": 3,
             "multiplier": 5.25
           },
           {
@@ -254,8 +254,8 @@
         "meals": [
           {
             "index": 0,
-            "ribbonRank": 8,
-            "ribbonMultiplier": 1.92,
+            "ribbonRank": 12,
+            "ribbonMultiplier": 2.77,
             "masteryLevel": 2,
             "masteryMultiplier": 1.2857142857142858
           },
@@ -268,22 +268,22 @@
           },
           {
             "index": 2,
-            "ribbonRank": 9,
-            "ribbonMultiplier": 1.97,
+            "ribbonRank": 12,
+            "ribbonMultiplier": 2.77,
             "masteryLevel": 1,
             "masteryMultiplier": 1.1666666666666667
           },
           {
             "index": 3,
-            "ribbonRank": 0,
-            "ribbonMultiplier": 1,
+            "ribbonRank": 12,
+            "ribbonMultiplier": 2.77,
             "masteryLevel": 0,
             "masteryMultiplier": 1
           },
           {
             "index": 4,
-            "ribbonRank": 0,
-            "ribbonMultiplier": 1,
+            "ribbonRank": 12,
+            "ribbonMultiplier": 2.77,
             "masteryLevel": 0,
             "masteryMultiplier": 1
           },
@@ -555,8 +555,8 @@
           },
           {
             "index": 43,
-            "ribbonRank": 16,
-            "ribbonMultiplier": 3.88,
+            "ribbonRank": 20,
+            "ribbonMultiplier": 5.25,
             "masteryLevel": 1,
             "masteryMultiplier": 1.1666666666666667
           },

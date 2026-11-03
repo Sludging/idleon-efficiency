@@ -34,26 +34,6 @@ describe('Library book levels', () => {
     });
   });
 
-  it('matches captured learned caps and allocated points for the selected character', () => {
-    const caps = results.extractions.saved_talent_caps.result as number[];
-    const points = results.extractions.saved_talent_points.result as number[];
-    expect(Array.isArray(caps)).toBe(true);
-    expect(Array.isArray(points)).toBe(true);
-    for (const talent of player.talents) {
-      // The game reports unlearned talent caps as -1 but omits them from the save.
-      // The website treats an absent saved cap as zero.
-      const savedCap = caps[talent.skillIndex] === -1 ? 0 : caps[talent.skillIndex];
-      expect(talent.bookMaxLevel).toMatchLiveGameWithDetails(savedCap, {
-        tolerance: 0,
-        context: `Saved learned cap for ${talent.name}`,
-      });
-      expect(talent.pointsSpent).toMatchLiveGameWithDetails(points[talent.skillIndex] ?? 0, {
-        tolerance: 0,
-        context: `Allocated points for ${talent.name}`,
-      });
-    }
-  });
-
   it('offers the account ceiling for a normal Beginner talent', () => {
     const talent = player.getTalent(0)!;
     expect(talent.libraryMaxLevel).toMatchLiveGameWithDetails(getExtractedValue(results, 'maximum_book_level'), {

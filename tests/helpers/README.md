@@ -154,17 +154,16 @@ Create JSON config files in `tests/configs/`:
 }
 ```
 
-Set `"requiresTown": true` on an extraction whose comparison requires a town.
-The extractor uses the native internal map name to identify towns, rather than
-a fixed map ID list. It captures the active player index, map ID, and internal
-map name in the results' `context` field. Outside town, the label receives an
-error without invoking its expression or retaining an older result.
+Set `"excludedMapInternalNames"` on an extraction to exclude specific native map
+names. The extractor records the active player index, map ID, and internal map
+name in the results' `context` field. An excluded map produces an error before
+the expression runs; the extractor does not retain an older value.
 
-Full maximum damage uses its own `player-maximum-damage.json` config, so its town
-prerequisite does not block Class EXP or other damage parameter captures. The
-comparison also checks that the selected save and captured context describe the
-same player and town map. Use a genuine matching town save and extraction;
-changing only the expected value or adding a guard to an old capture is invalid.
+Full maximum damage uses `player-maximum-damage.json` with
+`"excludedMapInternalNames": ["uAquaA6"]`. This excludes only The Clamworks, where
+Self Affliction reduces damage. Towns and other normal-world maps remain valid.
+The comparison requires a genuine save and capture with the same player and map.
+Class EXP and other damage parameter captures remain independent.
 
 ### Output Format
 
@@ -203,8 +202,16 @@ diagnostics still run; removing persisted status does not bypass safeguards.
   }
   ```
   The wrapper contains no duplicate `original` field.
-- **Empty objects**: Converted to `null` for cleaner output
-- **Null/undefined**: Preserved as `null`
+- **Empty arrays and objects**: Preserved as `[]` and `{}`.
+- **Null**: Preserved as `null`; numeric comparison helpers reject it. Construction character captures return `null` for absent slots without calling the native function.
+- **Undefined**: Missing execution results fail extraction instead of becoming `null`.
+- **Nonfinite numbers**: Scalar `NaN`, `Infinity`, and `-Infinity` fail execution.
+- **Negative zero**: Preserved as a numeric result; JSON serializes it as `0`.
+- **Native function errors**: Values with the prefix `Function call error:` fail the label through `errors`, including values nested in objects, arrays, or JSON-string packets. Other strings and valid packets retain their original value.
+
+Sparse numeric contribution captures apply the native missing-member rule only
+after requiring the prepared owner map. Present nonfinite values remain errors;
+the numeric loader never treats an unavailable value as zero.
 
 ## Integration with Tests
 
@@ -442,10 +449,26 @@ Use the same config and cache directory for each action when overriding defaults
 The example inspection and cached-reimport scripts use the default config and cache directory.
 Adapt their `parseArgs` arguments when using overrides.
 
+Extraction also accepts the boolean flag `--zero-character-afk`.
+It is off by default and applies only to that extraction run.
+Do not pass a value or use this flag with `fetch`, `test`, or `list`.
+For example:
+
+```bash
+yarn test:accounts:extract --accounts "$ACCOUNT_IDS" --zero-character-afk
+```
+
+The offline runtime sets every real character's AFK timestamp to the chosen evaluation time once at startup.
+It also sets the active player's AFK timestamp to that time.
+Other timers, including global time, remain unchanged.
+The runtime retains this effective input across resets; the runner does not normalize the save.
+The imported source snapshot remains unchanged.
+
 Extraction runs selected accounts and character groups serially.
 It owns one offline runtime at a time, using loopback port `3211` by default.
 It closes each runtime before starting another and never reuses ordinary development port `3101`.
-Each group uses the same retained save and preparation character.
+Each group uses the same retained source save, preparation character, evaluation time, and requested input mode.
+The runner checks the reported mode and requires equal effective save content across groups.
 Testing starts a fresh Jest process per account and uses stored datasets only.
 Testing does not fetch profiles or start game servers.
 Test runs use the same Jest suite selection for each requested account.
@@ -478,6 +501,7 @@ Adapter versions are independent of the game version and dataset schema version.
 | Import semantics changed for one source | Bump that source's adapter version, reimport its retained raw bytes or fetch again, then extract again. |
 | Extraction configs or local game assets changed | Extract again; review selection when the change affects compared outputs. |
 | Offline SDK initialization or cache refresh changed | Restart inspection runtimes and extract fresh datasets, even if current hash checks pass. |
+| Zero-character-AFK mode changed | Extract again with the intended flag; a new fetch is not required. |
 | Only domain code or test assertions changed | Use the existing matching dataset unless new captures or changed context are required. |
 
 SDK/runtime source is not included in dataset fingerprints.
@@ -487,10 +511,15 @@ For changes to original-game cache preparation, follow
 [Adding a cache refresh](../../sub-projects/idleon-offline/MAINTENANCE.md#adding-a-cache-refresh).
 
 Snapshot manifests use schema version `1`.
-Generated dataset descriptors use schema version `2`.
+Generated dataset descriptors use schema version `3` in both input modes.
 New snapshots and datasets record the resolved `source`; legacy manifests without it mean Toolbox.
-The runner records character indices and names, preparation identity, asset version, and save/config/asset/result hashes.
-Dataset loading validates both character identities against the retained save and checks the fingerprints.
+The runner records character indices and names, preparation identity, asset version, and config/asset/result hashes.
+Each run captures `/cloud-save` once as `effective-save.json` after all character groups agree.
+`savePath` and `saveSha256` identify that effective input, which website tests load.
+`sourceSavePath` points back to the original snapshot; `sourceSaveSha256` retains its manifest hash.
+`inputOptions` records the boolean `zeroCharacterAfk` and positive safe integer `evaluationTimeMs`.
+Dataset loading requires these fields, validates both character identities against the effective save, and checks both save hashes.
+It also checks config, asset, and result fingerprints.
 An unsupported dataset schema requires fresh extraction, not a new profile fetch.
 These generated provenance fields are functional; do not replace them with manual selection notes.
 An older snapshot's recorded character does not pin a later extraction default.
