@@ -27,12 +27,12 @@ export default function CoinsDisplay(props: CoinProps) {
     }
 
     // Special handling for the most expensive coin, if quantity is greater than 10000
-    if (props.coinMap.has(Coins.Polarity) && props.coinMap.get(Coins.Polarity)! > 10000) {
-        const coin = Coins.Polarity;
+    if (props.coinMap.has(Coins.Verdigris) && props.coinMap.get(Coins.Verdigris)! > 10000) {
+        const coin = Coins.Verdigris;
         const value = props.coinMap.get(coin)!;
         // We return a formatted value of only the most expensive coin.
         return (
-            <Box key={`coin-${coin.valueOf()}`} direction="row" gap="xsmall">
+            <Box title={Coins[coin]} key={`coin-${coin.valueOf()}`} direction="row" gap="xsmall">
                 <IconImage data={getCoinClass(coin)} scale={props.coinScale ? props.coinScale : 1} />
                 <Text color={props.textColor}>{nFormatter(value)}</Text>
             </Box>

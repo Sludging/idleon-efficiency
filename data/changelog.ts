@@ -23,6 +23,7 @@ export const changelogData: ChangelogEntryData[] = [
           "Added Cape Vine page to track deposited capes, golden slots, and combined bonuses.",
           "Research: Added Rift Skill Mastery bonuses to EXP, Observation rolls, and Research points.",
           "Game Data: Updated items, companions, and other game data for 1.25.",
+          "Coins: Added new coin types and icons through Verdigris, and fixed coin display math for large amounts.",
         ],
       },
       {
