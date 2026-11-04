@@ -10,18 +10,12 @@ describe('Divinity rank and balance', () => {
 
   it('matches the current God Rank from the genuine save', () => {
     const savedDivinity = loadTestSave('latest').get('Divinity') as number[];
-    expect(divinity.godRank).toMatchLiveGameWithDetails(Math.max(0, Number(savedDivinity[25]) - 10), {
-      tolerance: 0,
-      context: 'Current Divinity God Rank, excluding the ten unlocked gods',
-    });
+    expect(divinity.godRank).toBe(Math.max(0, Number(savedDivinity[25]) - 10));
   });
 
   it('matches the saved Divinity point balance used by Singularity', () => {
     const savedDivinity = loadTestSave('latest').get('Divinity') as number[];
-    expect(divinity.currentDivinity).toMatchLiveGameWithDetails(Number(savedDivinity[24]), {
-      tolerance: 0,
-      context: 'Saved Divinity points available before Singularity conversion',
-    });
+    expect(divinity.currentDivinity).toBe(Number(savedDivinity[24]));
   });
 
 });

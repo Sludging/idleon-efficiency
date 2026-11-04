@@ -16,9 +16,7 @@ const sources: { field: keyof ArcadeGoldBallGainSources; label: string; descript
   { field: 'arcadeShopPercent', label: 'arcade_shop_percent', description: 'Arcade shop contribution in percentage points' },
   { field: 'spheresOfGoldPercent', label: 'spheres_of_gold_percent', description: 'Spheres of Gold contribution in percentage points' },
   { field: 'goldFigleafPercent', label: 'gold_figleaf_percent', description: 'Gold Figleaf contribution in percentage points' },
-  { field: 'ballthezarPercent', label: 'ballthezar_percent', description: 'Ballthezar contribution in percentage points' },
   { field: 'hedgehogPercent', label: 'hedgehog_percent', description: 'Hedgehog contribution in percentage points' },
-  { field: 'eventMultiplier', label: 'event_multiplier', description: 'separate event multiplier for ordinary rewards' },
 ];
 
 describe('Arcade - named gold-ball reward sources', () => {

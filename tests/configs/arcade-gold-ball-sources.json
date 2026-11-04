@@ -1,5 +1,5 @@
 {
-  "description": "Extract the named contributions to ordinary Arcade gold-ball rewards. Native 1.25 source: ../IdleonWikiBot/codefiles/idleon1.25.txt:238559-238566. Each account contribution is in percentage points. The separate event factor applies to ordinary rewards, not jackpots (211733-211743,211955-211965).",
+  "description": "Extract direct original-game contributions to ordinary Arcade gold-ball rewards. Native 1.25 source: ../IdleonWikiBot/codefiles/idleon1.25.txt:238559-238566. Each contribution is in percentage points.",
   "target": "Arcade.getGoldBallGainSources()",
   "extractions": [
     {
@@ -23,19 +23,9 @@
       "description": "Gold Figleaf contribution to gold-ball rewards, in percentage points."
     },
     {
-      "label": "ballthezar_percent",
-      "expression": "50 * Math.min(1, Number(idleon.getAttr('OptionsListAccount')[427]) * idleon.callFunction('Companions', 0))",
-      "description": "Native Ballthezar contribution using the saved first Coral Kid upgrade level and active King Doot bonus, in percentage points."
-    },
-    {
       "label": "hedgehog_percent",
       "expression": "idleon.callFunction('Companions', 36)",
       "description": "Active Hedgehog contribution to gold-ball rewards, in percentage points."
-    },
-    {
-      "label": "event_multiplier",
-      "expression": "1 + window.frames[0].__idleon_cheats__['FirebaseStorage'].getServerVarLoad('ArcGballPCT') / 100",
-      "description": "Dimensionless event factor consumed by ordinary rewards. The native jackpot consumer excludes this factor."
     }
   ]
 }

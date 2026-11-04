@@ -1,5 +1,5 @@
 {
-  "description": "Divinity God Rank and Coral Kid progression, including upgrades, account effects, minor links, and Singularity. Reuse the regular save without changing characters or refreshing fixtures.",
+  "description": "Coral Kid current upgrade bonuses, next purchase costs, and Singularity getters. Reuse the regular save without changing characters or refreshing fixtures.",
   "target": "Thingies / CoralKidUpgBonus and CoralKidUpgCost; MenagerieStuff / CK_*",
   "extractions": [
     {
@@ -13,24 +13,9 @@
       "description": "Next-level quotes for all twelve upgrades. First six spend Divinity points; second six spend Singularity Spirals. Source: idleon1.25.txt:240037-240070,285191-285206."
     },
     {
-      "label": "current_effects",
-      "expression": "(()=>{const f=(index)=>idleon.callFunction('Thingies','CoralKidUpgBonus',index,0);const rank=Number(idleon.getAttr('Divinity')[25]);return[Math.pow(1+f(2)/100,Math.max(0,rank-10)),idleon.getAttr('Spelunk')[13].slice(0,6).reduce((sum,value)=>sum+Number(value),0)*f(4),Math.pow(1+f(11)/100,Math.max(0,rank-35)),100*idleon.callFunction('MenagerieStuff','CK_NonDivHourTime',0,0)];})()",
-      "description": "Native tooltip composition: total class EXP multiplier, total added Divinity points percent, total damage multiplier, effective non-Divinity AFK time percent. Source: idleon1.25.txt:280884-280972,118860. Raw unlocked-god count minus35 means God Rank minus25."
-    },
-    {
-      "label": "minor_link_skill_multipliers",
-      "expression": "idleon.getAttr('GetPlayersUsernames').map(name=>{const level=Number(idleon.getAttr('PlayerDATABASE').h[name].h.Lv0[14]);return 1+((1+idleon.callFunction('Thingies','CoralKidUpgBonus',3,0)/100)*level)/(60+level);})",
-      "description": "Replay native Coral Kid minor-link tooltip for each genuine saved character's Divinity level. Source: idleon1.25.txt:280884-280972. No style or active-character changes."
-    },
-    {
       "label": "singularity",
-      "expression": "['UnlockOwned','CK_BaseValue','CK_KillMulti','CK_TimeMulti','CK_TotalValue'].map(command=>idleon.callFunction('MenagerieStuff',command,command==='UnlockOwned'?2:0,0))",
-      "description": "Singularity unlock2, conversion base, kill multiplier, elapsed-time multiplier, and raw capped conversion amount. Claim floors the last value. Source: idleon1.25.txt:118840-118860,281853-281900."
-    },
-    {
-      "label": "comparison_operands",
-      "expression": "({levels:[...idleon.getAttr('OptionsListAccount').slice(427,433),...idleon.getAttr('OptionsListAccount').slice(616,622)].map(Number),rank:Number(idleon.getAttr('Divinity')[25]),points:Number(idleon.getAttr('Divinity')[24]),kills:Number(idleon.getAttr('OptionsListAccount')[623]),hours:Number(idleon.getAttr('OptionsListAccount')[624]),reefLevels:idleon.getAttr('Spelunk')[13].slice(0,6).map(Number),divinityLevels:idleon.getAttr('GetPlayersUsernames').map(name=>Number(idleon.getAttr('PlayerDATABASE').h[name].h.Lv0[14]))})",
-      "description": "Read-only pairing context for the native comparisons. Core tests require these operands to match the retained genuine save. Runtime counters must not replace saved progress."
+      "expression": "['UnlockOwned','CK_BaseValue','CK_KillMulti','CK_TimeMulti'].map(command=>idleon.callFunction('MenagerieStuff',command,command==='UnlockOwned'?2:0,0))",
+      "description": "Singularity unlock state, conversion base, kill multiplier, and elapsed-time multiplier. Source: idleon1.25.txt:118840-118860,281853-281900."
     }
   ]
 }

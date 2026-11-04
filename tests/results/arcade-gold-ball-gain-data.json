@@ -1,9 +1,0 @@
-{
-  "extractions": {
-    "arcade_gold_ball_gain_multiplier": {
-      "expression": "(1 + idleon.callFunction(\"Summoning\", \"ArcadeGballsExtraPCT\", 0, 0) / 100) * (1 + window.frames[0].__idleon_cheats__[\"FirebaseStorage\"].getServerVarLoad(\"ArcGballPCT\") / 100)",
-      "result": 11.516853270275364
-    }
-  },
-  "errors": {}
-}
