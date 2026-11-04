@@ -21,19 +21,21 @@ describe('Equinox active challenge progress', () => {
   });
 
   it('matches active challenge identities to the genuine saved state', () => {
-    expect(expectedActiveIndices.length).toBeGreaterThan(0);
     expect(equinox.activeChallenges.map(challenge => challenge.index)).toEqual(expectedActiveIndices);
   });
 
   it('matches numerical progress for every active challenge to the genuine saved counter', () => {
-    expect(expectedActiveIndices.length).toBeGreaterThan(0);
+    const expectedProgress = expectedActiveIndices.map(index => savedWeeklyBoss[`d_${index}`] ?? 0);
+    const actualProgress = equinox.activeChallenges.map(challenge => challenge.progress);
+
+    expect(actualProgress).toHaveLength(expectedProgress.length);
     // Completion stays 0 or 1. Progress retains the saved count, even above the challenge requirement.
-    for (const challenge of equinox.activeChallenges) {
-      expect(challenge.progress).toMatchLiveGameWithDetails(savedWeeklyBoss[`d_${challenge.index}`] ?? 0, {
+    expectedProgress.forEach((progress, index) => {
+      expect(actualProgress[index]).toMatchLiveGameWithDetails(progress, {
         tolerance: 0,
-        context: `Saved numerical progress for Equinox challenge ${challenge.index}`,
+        context: `Saved numerical progress for Equinox challenge ${expectedActiveIndices[index]}`,
       });
-    }
+    });
   });
 
   it('preserves binary completion and clears progress for completed challenges', () => {
