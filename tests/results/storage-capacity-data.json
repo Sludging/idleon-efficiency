@@ -1,0 +1,9 @@
+{
+  "extractions": {
+    "storage_slots_owned": {
+      "expression": "idleon.getAttr('ChestSlotsOwned')",
+      "result": 551
+    }
+  },
+  "errors": {}
+}

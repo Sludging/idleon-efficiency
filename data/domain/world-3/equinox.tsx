@@ -21,6 +21,7 @@ import { LegendTalents } from "../world-7/legendTalents";
 
 class Challenge {
   complete: boolean = false;
+  progress: number = 0;
   constructor(
     public index: number,
     public data: DreamChallengeModel,
@@ -314,7 +315,9 @@ export class Equinox extends Domain {
     }
 
     equinox.challenges.forEach((challenge) => {
-      challenge.complete = weeklyBoss[`d_${challenge.index}`] == -1;
+      const savedProgress = weeklyBoss[`d_${challenge.index}`] ?? 0;
+      challenge.complete = savedProgress == -1;
+      challenge.progress = challenge.complete ? 0 : savedProgress;
     });
 
     const upgradesUnlocked = [0, 2, 5, 7, 10, 13, 17, 20, 23, 28, 31].reduce(

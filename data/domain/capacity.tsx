@@ -112,6 +112,8 @@ import { SkillsIndex } from "./SkillsIndex";
 import { Stamp } from "./world-1/stamps";
 import { Storage } from "./storage";
 import { UpgradeVault } from "./upgradeVault";
+import { Companion, getCompanionActiveBonus, isCompanionLevelTwo } from "./companions";
+import type { Account } from "./account";
 
 
 export const playerInventoryBagMapping = [
@@ -326,7 +328,7 @@ interface CapacityProps {
     stampAllCapBonus: number,
     extraBagsLevel: number,
     starSignExtraCap: number,
-    vaultBonus: number
+    baseCapacityBonus: number
 }
 
 interface CarryData {
@@ -367,12 +369,13 @@ export class PlayerCapacity {
     }
 
 
-    setAllCapsBonus = (guildBonus: number = 0, telekineticStorageBonus: number = 0, shrineBonus: number = 0, zergPrayer: number = 0, ruckSackPrayer: number = 0, bribeCapBonus: number = 0) => {
+    setAllCapsBonus = (guildBonus: number = 0, telekineticStorageBonus: number = 0, shrineBonus: number = 0, zergPrayer: number = 0, ruckSackPrayer: number = 0, bribeCapBonus: number = 0, companionCarryBonus: number = 0, companionPrayerBonus: number = 0) => {
         this.allCapBonus = (
             (1 + (guildBonus + telekineticStorageBonus) / 100) *
+            (1 + companionCarryBonus / 100) *
             (1 + (shrineBonus / 100)) *
             Math.max(1 - zergPrayer / 100, 0.4) *
-            (1 + (ruckSackPrayer + bribeCapBonus) / 100)
+            (1 + (ruckSackPrayer + (bribeCapBonus + companionPrayerBonus)) / 100)
         );
     }
 }
@@ -407,17 +410,17 @@ class Bag {
 
     setCapacity = (props: CapacityProps) => {
         if (this.name == "bCraft") {
-            this.maxCarry = this.getMaterialCapacity(props.allCapBonuses, props.stampMatCapBonus, props.gemsCapacityBought, props.stampAllCapBonus, props.extraBagsLevel, props.starSignExtraCap, props.vaultBonus);
+            this.maxCarry = this.getMaterialCapacity(props.allCapBonuses, props.stampMatCapBonus, props.gemsCapacityBought, props.stampAllCapBonus, props.extraBagsLevel, props.starSignExtraCap, props.baseCapacityBonus);
         }
         else if (this.skill != undefined || this.name == "Foods") {
-            this.maxCarry = this.getSkillCapacity(props.allCapBonuses, props.gemsCapacityBought, props.stampMatCapBonus, props.stampAllCapBonus, props.starSignExtraCap, props.vaultBonus)
+            this.maxCarry = this.getSkillCapacity(props.allCapBonuses, props.gemsCapacityBought, props.stampMatCapBonus, props.stampAllCapBonus, props.starSignExtraCap, props.baseCapacityBonus)
         }
     }
 
 
-    private getSkillCapacity = (allCapBonuses: number, gemCarryCap: number, skillCapstamp: number, allCapStamp: number, starSign: number, vaultBonus: number) => {
+    private getSkillCapacity = (allCapBonuses: number, gemCarryCap: number, skillCapstamp: number, allCapStamp: number, starSign: number, baseCapacityBonus: number) => {
         return Math.floor(
-            (this.capacity + vaultBonus) *
+            (this.capacity + baseCapacityBonus) *
             (1 + (25 * gemCarryCap) / 100) *
             (1 + skillCapstamp / 100) *
             (1 + (allCapStamp + starSign) / 100) *
@@ -425,13 +428,13 @@ class Bag {
         );
     }
 
-    private getMaterialCapacity = (allCapBonuses: number, stampMatCapBonus: number, gemsCapacityBought: number, stampAllCapBonus: number, extraBagsLevel: number, starSignExtraCap: number, vaultBonus: number) => {
+    private getMaterialCapacity = (allCapBonuses: number, stampMatCapBonus: number, gemsCapacityBought: number, stampAllCapBonus: number, extraBagsLevel: number, starSignExtraCap: number, baseCapacityBonus: number) => {
         const stampMatCapMath = (1 + stampMatCapBonus / 100);
         const gemPurchaseMath = (1 + (25 * gemsCapacityBought) / 100);
         const additionalCapMath = (1 + (stampAllCapBonus + starSignExtraCap) / 100);
         const talentBonusMath = (1 + extraBagsLevel / 100);
-        const bCraftCap = (this.capacity + vaultBonus);
-        return Math.floor(bCraftCap * stampMatCapMath * gemPurchaseMath * additionalCapMath * talentBonusMath * allCapBonuses);
+        const bCraftCap = (baseCapacityBonus + this.capacity);
+        return Math.floor(Math.min(2.05e9, bCraftCap * stampMatCapMath * gemPurchaseMath * additionalCapMath * talentBonusMath * allCapBonuses));
     }
 }
 
@@ -489,6 +492,8 @@ export function updateCapacity(data: Map<string, any>) {
     const prayers = data.get("prayers") as Prayer[];
     const gemStore = data.get("gems") as GemStore;
     const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+    const companions = data.get("companions") as Companion[];
+    const account = data.get("account") as Account;
 
     // Inventory slots
     const storage = data.get("storage") as Storage;
@@ -498,7 +503,14 @@ export function updateCapacity(data: Map<string, any>) {
     const zergPrayer = prayers[4];
     const ruckSackPrayer = prayers[12];
     const gemCapacityBonus = gemStore.purchases[58].pucrhased;
-    const vaultBonus = upgradeVault.getBonusForId(17);
+    const companionCarryBonus = getCompanionActiveBonus(companions, 18);
+    const companionPrayerBonus = 30 * isCompanionLevelTwo(companions, 2);
+    const bundleCapacityBonus = 1000 * (
+        Number(account.bundles.getOwnership("bon_w") === "owned")
+        + Number(account.bundles.getOwnership("bon_x") === "owned")
+        + Number(account.bundles.getOwnership("bon_y") === "owned")
+    );
+    const baseCapacityBonus = upgradeVault.getBonusForId(11) + bundleCapacityBonus;
 
     players.forEach(player => {
         // All Cap Math
@@ -512,9 +524,9 @@ export function updateCapacity(data: Map<string, any>) {
 
             const carryCapShrineBonus = shrines[ShrineConstants.CarryShrine].getBonus(player.currentMapId);
             const zergPrayerBonus = player.activePrayers.includes(4) ? zergPrayer.getCurse() : 0;
-            const ruckSackPrayerBonus = player.activePrayers.includes(12) ? ruckSackPrayer.getBonus() : 0;
+            const ruckSackPrayerBonus = ruckSackPrayer.getBonusForPlayer(player);
 
-            currentPlayerInfo.setAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus, bribeCapBonus);
+            currentPlayerInfo.setAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus, bribeCapBonus, companionCarryBonus, companionPrayerBonus);
 
             // Set max inventory slots.
             currentPlayerInfo.totalInventorySlots = storage.playerStorage[player.playerID].filter((item) => item.internalName != "LockedInvSpace").length;
@@ -538,7 +550,7 @@ export function updateCapacity(data: Map<string, any>) {
                     stampAllCapBonus: allCapStampBonus,
                     extraBagsLevel: extraBagsTalentBonus,
                     starSignExtraCap: starSignExtraCap,
-                    vaultBonus: vaultBonus
+                    baseCapacityBonus: baseCapacityBonus
                 })
 
                 // Keep track of highest carry cap player per type.

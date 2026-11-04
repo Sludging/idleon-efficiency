@@ -13,6 +13,48 @@ export interface ChangelogEntryData {
 
 export const changelogData: ChangelogEntryData[] = [
   {
+    version: "1.6.4",
+    title: "Coral Kid and Account Progression",
+    date: "November 4, 2026",
+    changes: [
+      {
+        title: "Divinity & Coral Kid",
+        changes: [
+          "Divinity: Added account summaries for God Rank and Divinity points.",
+          "Coral Kid: Added Original and Singularity upgrades with unlock requirements, costs, and bonus previews.",
+          "Coral Kid: Added character Minor Link bonuses and Singularity transmutation estimates.",
+        ],
+      },
+      {
+        title: "Production & Progression",
+        changes: [
+          "Anvil: Added point breakdowns, production progress, stored EXP, and time until full.",
+          "Stamps: Added Gilded Stamp daily chance and No Stamp Left Behind daily levels with bonus sources.",
+          "Arcade: Added gold-ball multiplier and bonus source breakdown.",
+          "Equinox: Added active challenge progress.",
+        ],
+      },
+      {
+        title: "Account Upgrades",
+        changes: [
+          "Storage: Added Capacity tab with owned slots, chest upgrades, and item sources.",
+          "Armor Smithy: Added set unlock requirements and locations of available equipment.",
+          "Event Shop: Added star balance, bonus prices, and total remaining cost.",
+          "Guild: Added next-level and max-level upgrade costs.",
+          "Upgrade Vault: Added cost-reduction summary and bonus sources.",
+        ],
+      },
+      {
+        title: "Bug Fixes",
+        changes: [
+          "Anvil: Fixed production speed, Smithing EXP bonuses, Maestro Left Hand bonuses, and capacity limits.",
+          "Players: Fixed missing skill EXP bonuses and passive Prayer effects.",
+          "Capacity: Fixed Vault, bundle, companion, and Prayer bonuses to carry capacity.",
+        ],
+      },
+    ],
+  },
+  {
     version: "1.6.3",
     title: "1.25, Cooking, and Alchemy",
     date: "November 3, 2026",

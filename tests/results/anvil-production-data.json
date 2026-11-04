@@ -1,0 +1,9 @@
+{
+  "extractions": {
+    "anvil_product_capacity": {
+      "expression": "window.frames[0].__idleon_cheats__['scripts.ActorEvents_189']._customBlock_AnvilProduceStats('Cap')",
+      "result": 608612768
+    }
+  },
+  "errors": {}
+}

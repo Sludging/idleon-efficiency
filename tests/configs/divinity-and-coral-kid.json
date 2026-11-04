@@ -1,0 +1,21 @@
+{
+  "description": "Coral Kid current upgrade bonuses, next purchase costs, and Singularity getters. Reuse the regular save without changing characters or refreshing fixtures.",
+  "target": "Thingies / CoralKidUpgBonus and CoralKidUpgCost; MenagerieStuff / CK_*",
+  "extractions": [
+    {
+      "label": "upgrade_bonuses",
+      "expression": "Array.from({length:12},(_,index)=>idleon.callFunction('Thingies','CoralKidUpgBonus',index,0))",
+      "description": "Current bonus values for all twelve upgrades. Source: IdleonWikiBot/codefiles/idleon1.25.txt:240037-240070. The first six upgrades also have captures in coral-kid-data.json."
+    },
+    {
+      "label": "upgrade_costs",
+      "expression": "Array.from({length:12},(_,index)=>idleon.callFunction('Thingies','CoralKidUpgCost',index,0))",
+      "description": "Next-level quotes for all twelve upgrades. First six spend Divinity points; second six spend Singularity Spirals. Source: idleon1.25.txt:240037-240070,285191-285206."
+    },
+    {
+      "label": "singularity",
+      "expression": "['UnlockOwned','CK_BaseValue','CK_KillMulti','CK_TimeMulti'].map(command=>idleon.callFunction('MenagerieStuff',command,command==='UnlockOwned'?2:0,0))",
+      "description": "Singularity unlock state, conversion base, kill multiplier, and elapsed-time multiplier. Source: idleon1.25.txt:118840-118860,281853-281900."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "description": "Initialized total of owned storage slots for the unchanged regular save. Native capacity initialization: ../IdleonWikiBot/codefiles/idleon1.25.txt:326247-326272.",
+  "target": "Storage.getSlotCount",
+  "extractions": [
+    {
+      "label": "storage_slots_owned",
+      "expression": "idleon.getAttr('ChestSlotsOwned')",
+      "description": "Read the game's initialized total of owned storage slots."
+    }
+  ]
+}

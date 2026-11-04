@@ -1,0 +1,11 @@
+{
+  "description": "Native Anvil per-product storage capacity for the selected active character. Source: docs/game-snippets/anvil/AnvilProduceStats.1.25.js.",
+  "target": "Anvil native per-product storage capacity",
+  "extractions": [
+    {
+      "label": "anvil_product_capacity",
+      "expression": "window.frames[0].__idleon_cheats__['scripts.ActorEvents_189']._customBlock_AnvilProduceStats('Cap')",
+      "description": "Native per-product storage capacity, including the two-billion item limit."
+    }
+  ]
+}

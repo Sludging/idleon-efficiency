@@ -1,0 +1,101 @@
+{
+  "description": "Armor Smithy piece requirements for all sets. Reads requirements without calculating set bonuses or changing permanent unlocks. Compare item locations directly with the matching save.",
+  "target": "Armor Smithy required set pieces",
+  "extractions": [
+    {
+      "label": "copper_set_required_parts",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"COPPER_SET\", \"PartsReq\", 0, 0)",
+      "description": "Pieces required to unlock the Copper set. Includes all armor, the required number of tools, and any required weapon."
+    },
+    {
+      "label": "iron_set_required_parts",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"IRON_SET\", \"PartsReq\", 0, 0)",
+      "description": "Pieces required to unlock the Iron set. Includes all armor, the required number of tools, and any required weapon."
+    },
+    {
+      "label": "amarok_set_required_parts",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"AMAROK_SET\", \"PartsReq\", 0, 0)",
+      "description": "Pieces required to unlock the Amarok set. Includes all armor, the required number of tools, and any required weapon."
+    },
+    {
+      "label": "gold_set_required_parts",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"GOLD_SET\", \"PartsReq\", 0, 0)",
+      "description": "Pieces required to unlock the Gold set. Includes all armor, the required number of tools, and any required weapon."
+    },
+    {
+      "label": "platinum_set_required_parts",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"PLATINUM_SET\", \"PartsReq\", 0, 0)",
+      "description": "Pieces required to unlock the Platinum set. Includes all armor, the required number of tools, and any required weapon."
+    },
+    {
+      "label": "efaunt_set_required_parts",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"EFAUNT_SET\", \"PartsReq\", 0, 0)",
+      "description": "Pieces required to unlock the Efaunt set. Includes all armor, the required number of tools, and any required weapon."
+    },
+    {
+      "label": "dementia_set_required_parts",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"DEMENTIA_SET\", \"PartsReq\", 0, 0)",
+      "description": "Pieces required to unlock the Dementia set. Includes all armor, the required number of tools, and any required weapon."
+    },
+    {
+      "label": "void_set_required_parts",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"VOID_SET\", \"PartsReq\", 0, 0)",
+      "description": "Pieces required to unlock the Void set. Includes all armor, the required number of tools, and any required weapon."
+    },
+    {
+      "label": "chizoar_set_required_parts",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"CHIZOAR_SET\", \"PartsReq\", 0, 0)",
+      "description": "Pieces required to unlock the Chizoar set. Includes all armor, the required number of tools, and any required weapon."
+    },
+    {
+      "label": "lustre_set_required_parts",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"LUSTRE_SET\", \"PartsReq\", 0, 0)",
+      "description": "Pieces required to unlock the Lustre set. Includes all armor, the required number of tools, and any required weapon."
+    },
+    {
+      "label": "diabolical_set_required_parts",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"DIABOLICAL_SET\", \"PartsReq\", 0, 0)",
+      "description": "Pieces required to unlock the Diabolical set. Includes all armor, the required number of tools, and any required weapon."
+    },
+    {
+      "label": "troll_set_required_parts",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"TROLL_SET\", \"PartsReq\", 0, 0)",
+      "description": "Pieces required to unlock the Troll set. Includes all armor, the required number of tools, and any required weapon."
+    },
+    {
+      "label": "secret_set_required_parts",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"SECRET_SET\", \"PartsReq\", 0, 0)",
+      "description": "Pieces required to unlock the Secret set. Includes all armor, the required number of tools, and any required weapon."
+    },
+    {
+      "label": "magma_set_required_parts",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"MAGMA_SET\", \"PartsReq\", 0, 0)",
+      "description": "Pieces required to unlock the Magma set. Includes all armor, the required number of tools, and any required weapon."
+    },
+    {
+      "label": "kattlekruk_set_required_parts",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"KATTLEKRUK_SET\", \"PartsReq\", 0, 0)",
+      "description": "Pieces required to unlock the Kattlekruk set. Includes all armor, the required number of tools, and any required weapon."
+    },
+    {
+      "label": "marbiglass_set_required_parts",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"MARBIGLASS_SET\", \"PartsReq\", 0, 0)",
+      "description": "Pieces required to unlock the Marbiglass set. Includes all armor, the required number of tools, and any required weapon."
+    },
+    {
+      "label": "godshard_set_required_parts",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"GODSHARD_SET\", \"PartsReq\", 0, 0)",
+      "description": "Pieces required to unlock the Godshard set. Includes all armor, the required number of tools, and any required weapon."
+    },
+    {
+      "label": "emperor_set_required_parts",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"EMPEROR_SET\", \"PartsReq\", 0, 0)",
+      "description": "Pieces required to unlock the Emperor set. Includes all armor, the required number of tools, and any required weapon."
+    },
+    {
+      "label": "prehistoric_set_required_parts",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"PREHISTORIC_SET\", \"PartsReq\", 0, 0)",
+      "description": "Pieces required to unlock the Prehistoric set. Includes all armor, the required number of tools, and any required weapon."
+    }
+  ]
+}

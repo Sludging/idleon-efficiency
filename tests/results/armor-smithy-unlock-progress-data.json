@@ -1,0 +1,81 @@
+{
+  "extractions": {
+    "copper_set_required_parts": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"COPPER_SET\", \"PartsReq\", 0, 0)",
+      "result": 4
+    },
+    "iron_set_required_parts": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"IRON_SET\", \"PartsReq\", 0, 0)",
+      "result": 4
+    },
+    "amarok_set_required_parts": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"AMAROK_SET\", \"PartsReq\", 0, 0)",
+      "result": 4
+    },
+    "gold_set_required_parts": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"GOLD_SET\", \"PartsReq\", 0, 0)",
+      "result": 6
+    },
+    "platinum_set_required_parts": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"PLATINUM_SET\", \"PartsReq\", 0, 0)",
+      "result": 6
+    },
+    "efaunt_set_required_parts": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"EFAUNT_SET\", \"PartsReq\", 0, 0)",
+      "result": 4
+    },
+    "dementia_set_required_parts": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"DEMENTIA_SET\", \"PartsReq\", 0, 0)",
+      "result": 7
+    },
+    "void_set_required_parts": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"VOID_SET\", \"PartsReq\", 0, 0)",
+      "result": 7
+    },
+    "chizoar_set_required_parts": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"CHIZOAR_SET\", \"PartsReq\", 0, 0)",
+      "result": 4
+    },
+    "lustre_set_required_parts": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"LUSTRE_SET\", \"PartsReq\", 0, 0)",
+      "result": 7
+    },
+    "diabolical_set_required_parts": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"DIABOLICAL_SET\", \"PartsReq\", 0, 0)",
+      "result": 7
+    },
+    "troll_set_required_parts": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"TROLL_SET\", \"PartsReq\", 0, 0)",
+      "result": 4
+    },
+    "secret_set_required_parts": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"SECRET_SET\", \"PartsReq\", 0, 0)",
+      "result": 5
+    },
+    "magma_set_required_parts": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"MAGMA_SET\", \"PartsReq\", 0, 0)",
+      "result": 8
+    },
+    "kattlekruk_set_required_parts": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"KATTLEKRUK_SET\", \"PartsReq\", 0, 0)",
+      "result": 6
+    },
+    "marbiglass_set_required_parts": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"MARBIGLASS_SET\", \"PartsReq\", 0, 0)",
+      "result": 9
+    },
+    "godshard_set_required_parts": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"GODSHARD_SET\", \"PartsReq\", 0, 0)",
+      "result": 11
+    },
+    "emperor_set_required_parts": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"EMPEROR_SET\", \"PartsReq\", 0, 0)",
+      "result": 7
+    },
+    "prehistoric_set_required_parts": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"PREHISTORIC_SET\", \"PartsReq\", 0, 0)",
+      "result": 11
+    }
+  },
+  "errors": {}
+}

@@ -5,7 +5,7 @@ export interface EquipmentSetsModel {
     armors: string[],
     tools: string[],
     weapons: string[],
-    toolsRequired: boolean,
+    toolsRequired: number,
     weaponRequired: boolean,
     bonusValue: number,
     description: string,

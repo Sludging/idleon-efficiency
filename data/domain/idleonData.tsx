@@ -1,6 +1,6 @@
 import type { StaticRepositories } from './repositories';
 import { Traps, updateShinyCritterRewardMultiplier, updateTrapDisplayData } from './world-3/traps';
-import { Stamps, updateStampMaxCarry, updateStamps } from './world-1/stamps';
+import { StampAutomaticProgression, Stamps, updateStampMaxCarry, updateStamps } from './world-1/stamps';
 import { Statues, updateStatueBonuses } from './world-1/statues';
 import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus, updatePlayerTalentPoints, Player, updatePlayerSpecialTalents } from './player';
 import { Alchemy, updateAlchemy, updateAlchemyDailyBubbleProgression, updateAlchemySlabBubbles, updateAlchemyTomeBubbles, updateAlchemyBrewing } from './world-2/alchemy/alchemy';
@@ -80,14 +80,14 @@ import { Tesseract, updateArcaneCultistImpact, updateTesseractEfficiency, update
 import { Compass, updateCompassDamageEfficiency, updateCompassExaltedStampBonus, updateCompassUpgradeCosts } from './compass';
 import { Emperor, updateEmperorMaxAttempts, updateEmperorBonuses } from './world-6/emperor';
 import { RoyalArmory, updateRoyalArmory, updateRoyalArmoryLateInputs } from './world-6/royalArmory/royalArmory';
-import { EquipmentSets } from './misc/equipmentSets';
+import { EquipmentSets, updateEquipmentSetAvailability } from './misc/equipmentSets';
 import { EventShop } from './eventShop';
 import { Friends, updateFriends } from './friends';
 import { Clamworks, updateClamWorkOutputs } from './world-7/clamworks';
 import { Meritocraty, updateMeritocratyBonus, updateMeritocratyLate } from './world-7/meritocraty';
 import { LegendTalents, updateLegendTalents } from './world-7/legendTalents';
 import { MasterClasses, updateMasterClasses } from './masterClasses';
-import { CoralKid } from './world-7/coralKid';
+import { CoralKid, updateCoralKid } from './world-7/coralKid';
 import { Bubba, updateBubba, updateBubbaMeatRate } from './world-3/bubba';
 import { BigFish, updateBigFishUnlocked } from './world-7/bigFish';
 import { CoralReef, updateCoralReefDailyGain, updateCoralReefMaximumLevels } from './world-7/coralReef';
@@ -117,6 +117,7 @@ export interface IParser {
 // the 'getDataKey' function instead.
 const domainList: Domain[] = [
     new Stamps("stamps"),
+    new StampAutomaticProgression('stampAutomaticProgression'),
     new Traps("traps"),
     new Statues("statues"),
     new AnvilWrapper("anvil"),
@@ -349,6 +350,8 @@ const postProcessingMap: Record<string, Function> = {
     "islandExpeditions": (doc: Cloudsave, accountData: Map<string, any>) => updateIslandExpeditions(accountData),
     "sigils": (doc: Cloudsave, accountData: Map<string, any>) => updateSigils(accountData),
     "storage": (doc: Cloudsave, accountData: Map<string, any>) => updateStorage(accountData),
+    // Coral Kid projections use parsed character skills and settled Divinity, Menagerie, Coral Reef, and Storage inputs.
+    "coralKid": (_doc: Cloudsave, accountData: Map<string, any>) => updateCoralKid(accountData),
     "lab": (doc: Cloudsave, accountData: Map<string, any>) => updateLab(accountData),
     "artifactsSlabBonus": (doc: Cloudsave, accountData: Map<string, any>) => updateSailingArtifactSlabBoost(accountData),
     // Journal effects consume the prepared Sailing artifact, including its Slab boost.
@@ -390,6 +393,10 @@ const postProcessingMap: Record<string, Function> = {
     "updateBubbaMeatRate": (_doc: Cloudsave, accountData: Map<string, any>) => updateBubbaMeatRate(accountData),
     "mineheadCurrencyGain": (_doc: Cloudsave, accountData: Map<string, any>) => updateMineheadCurrencyGain(accountData),
     "players": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayers(accountData),
+    // Smithy availability uses parsed inventories after Storage and player equipment updates.
+    "equipmentSetAvailability": (_doc: Cloudsave, accountData: Map<string, any>) => updateEquipmentSetAvailability(accountData),
+    // Prepare passive Prayer bonuses from parsed Superbits before capacity and later character consumers.
+    "prayerPlayerBonuses": (_doc: Cloudsave, accountData: Map<string, any>) => updatePrayerPlayerBonuses(accountData),
     "capacity": (doc: Cloudsave, accountData: Map<string, any>) => updateCapacity(accountData),
     "votes": (doc: Cloudsave, accountData: Map<string, any>) => updateVotesBonus(accountData),
     "playerTalentContexts": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentContexts(accountData),
@@ -413,8 +420,6 @@ const postProcessingMap: Record<string, Function> = {
     "playerHealth": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerHealth(accountData),
     "playerPowers": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerPowers(accountData),
     "playerSecondaryStats": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerSecondaryStats(accountData),
-    // Character Prayer bonuses use parsed Superbits and preserve the distinction between absent and empty saved slots.
-    "prayerPlayerBonuses": (_doc: Cloudsave, accountData: Map<string, any>) => updatePrayerPlayerBonuses(accountData),
     // Drop rate follows Luck and every prepared persistent source, including late Lab and Sigil results.
     "playerDropRates": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerDropRates(accountData),
     "printer": (doc: Cloudsave, accountData: Map<string, any>) => updatePrinter(accountData),
@@ -447,6 +452,8 @@ const postProcessingMap: Record<string, Function> = {
     // Refinery rates use prepared cycle times, Printer output, Merits and Companions.
     "refinery": (_doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
     "refinerySustainability": (_doc: Cloudsave, accountData: Map<string, any>) => updateRefinerySustainability(accountData),
+    // Shared skill EXP uses final talent contexts and settled account bonuses before Anvil calculations.
+    "allSkillExperienceBonuses": (_doc: Cloudsave, accountData: Map<string, any>) => (accountData.get("skilling") as Skilling).updateAllSkillExperienceBonuses(accountData),
 }
 
 // I really really hate this.

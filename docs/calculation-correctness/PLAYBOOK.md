@@ -115,9 +115,9 @@ Use a fresh session that did not implement the case. Review is read-only and doe
 Perform these checks in order:
 
 1. **Game behavior:** Check versioned [source](../game-snippets/README.md#rules), implementation, and callers. Verify conditions, representation, formula, composition, and operation order independently.
-2. **Named results:** Run targeted tests named in work/result with paired real save/results. Apply the linked numeric policy. Independently check any proposed bound's source-backed justification; separate exception results from normal-policy failures.
-3. **Core coverage:** Check distinct behaviors, branches, or representative values through the public result. State what the real save exercises. Unobserved branches are coverage limits, not defects when agreed coverage is met.
-4. **Direct parameters:** For every directly used cross-domain/aspect calculation, check game call, website result, and paired parameter test. Request missing required tests. A passing comparison ends investigation of that dependency. A failure or missing result follows the dependency procedure.
+2. **Named results:** Inspect how expected values were obtained under the [expected-result policy](../TESTING_IMPLEMENTATION.md#obtain-expected-calculation-results). Check extraction expressions, test bodies, and shared or domain-specific test helpers for calculations of expected values. Run targeted tests named in work/result with paired real save/results. Passing tests alone do not establish an independent comparison. Apply the linked numeric policy. Independently check any proposed bound's source-backed justification; separate exception results from normal-policy failures.
+3. **Core coverage:** Check distinct behaviors, branches, representative values, or meaningful saved progression through the public result. State what the real save exercises. Unobserved branches are coverage limits, not defects when agreed coverage is met.
+4. **Direct parameters:** For every directly used cross-domain/aspect calculation, check how the expected value was obtained, game call, website result, and paired parameter test. Request missing required tests. A passing comparison ends investigation of that dependency. A failure or missing result follows the dependency procedure.
 5. **Website fit and standards:** Check approved scope, ownership, interface, character semantics, and actual consumers. Verify registrations, callers, and pipeline order. Compare relevant named aspects of selected examples and apply coding standards independently of plan approval. Check mechanic explanations and required handling against supported inputs, interfaces, and behavior. State integration behavior actually covered.
 6. **Test-first evidence:** Check the recorded tests-stage result and acceptance before domain edits. Mark `satisfied`, `violated`, or `not established`. Later green tests do not repair missing or violated history.
 
@@ -127,7 +127,7 @@ Return `PASS` only when all normal technical checks pass. Return `CHANGES_REQUIR
 
 Reuse `tests/fixtures/saves/latest.json` and matching `tests/results/` while required config is unchanged and the pair remains usable. Add or correct a missing required entry, then extract. Extraction requires a necessary config change or human request.
 
-Use the [helper guide](../../tests/helpers/README.md#quick-start---batch-extraction) for commands, server selection, save refresh, and active-player prerequisites. Record command, server mode, effective `GAME_SERVER_URL`, result paths, and whether the save refreshed. Establish [save/result pairing](../TESTING_IMPLEMENTATION.md#keep-tests-tied-to-the-real-save) before using new results.
+Use the [helper guide](../../tests/helpers/README.md#quick-start---batch-extraction) for commands, server selection, save refresh, and active-player prerequisites. Record command, server mode, effective `GAME_SERVER_URL`, result paths, and whether the save refreshed. Establish [save/result pairing](../TESTING_IMPLEMENTATION.md#keep-tests-tied-to-genuine-saves) before using new results.
 
 Report extraction errors, artifacts already changed, and required human actions. If unchanged valid config has missing output from loss or failure, explain the condition and ask for refresh direction.
 

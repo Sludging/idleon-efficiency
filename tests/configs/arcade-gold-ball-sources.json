@@ -1,0 +1,31 @@
+{
+  "description": "Extract direct original-game contributions to ordinary Arcade gold-ball rewards. Native 1.25 source: ../IdleonWikiBot/codefiles/idleon1.25.txt:238559-238566. Each contribution is in percentage points.",
+  "target": "Arcade.getGoldBallGainSources()",
+  "extractions": [
+    {
+      "label": "golden_yellow_percent",
+      "expression": "idleon.callFunction('GamingStatType', 'PaletteBonus', 15, 0)",
+      "description": "Golden Yellow palette contribution to gold-ball rewards, in percentage points."
+    },
+    {
+      "label": "arcade_shop_percent",
+      "expression": "idleon.callFunction('ArcadeBonus', 39)",
+      "description": "Arcade shop contribution to gold-ball rewards, in percentage points."
+    },
+    {
+      "label": "spheres_of_gold_percent",
+      "expression": "idleon.callFunction('ArcaneType', 'ArcaneUpgBonus', 16, 0)",
+      "description": "Spheres of Gold contribution to gold-ball rewards, in percentage points."
+    },
+    {
+      "label": "gold_figleaf_percent",
+      "expression": "idleon.callFunction('FarmingStuffs', 'ExoticBonusQTY', 57, 0)",
+      "description": "Gold Figleaf contribution to gold-ball rewards, in percentage points."
+    },
+    {
+      "label": "hedgehog_percent",
+      "expression": "idleon.callFunction('Companions', 36)",
+      "description": "Active Hedgehog contribution to gold-ball rewards, in percentage points."
+    }
+  ]
+}

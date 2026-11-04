@@ -36,7 +36,7 @@ import { Alert } from 'grommet-icons';
 import { Item, ItemStat, Food, DropSource } from '../../data/domain/items';
 import { Storage } from '../../data/domain/storage';
 import { Prayer } from '../../data/domain/world-3/prayers';
-import { TimeDown, TimeUp } from '../../components/base/TimeDisplay';
+import { TimeUp } from '../../components/base/TimeDisplay';
 import { Worship } from '../../data/domain/world-3/worship';
 import ObolsInfo from '../../components/account/task-board/obolsInfo';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
@@ -48,12 +48,14 @@ import IconImage from '../../components/base/IconImage';
 import { SourcesModel } from '../../data/domain/model/sourcesModel';
 import { Chip } from '../../data/domain/world-4/lab';
 import { AnvilWrapper } from '../../data/domain/world-1/anvil';
+import { AnvilProductProgress } from '../world-1/anvil/anvilDetails';
 import { Alerts, CardSetAlert } from '../../data/domain/alerts';
 import { POExtra } from '../../data/domain/world-2/postoffice';
 import TalentDisplay from '../../components/players/TalentDisplay';
 
 import { useShallow } from 'zustand/react/shallow'
 import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
+import useHydrated from '../../lib/hooks/useHydrated';
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: SourcesModel, dropInfo: DropSource[] }) {
 
@@ -722,21 +724,24 @@ function AnvilDisplay({ player }: { player: Player }) {
     const storage = theData.get("storage") as Storage;
     const playerAnvil = anvils.playerAnvils[player.playerID];
 
-
     return (
         <Box pad="medium" gap="small">
-            <Text size='medium'>Anvil</Text>
+            <Text size="medium">Anvil</Text>
             <Box gap="small" pad="small">
                 <Text size="small">Available Points: {playerAnvil.availablePoints}</Text>
+                <Text size="small">Points from Smithing: {playerAnvil.pointsFromSmithing}</Text>
+                {player.getTalent(281) !== undefined &&
+                    <Text size="small">Points from Acme Anvil: {playerAnvil.pointsFromAcme}</Text>
+                }
                 <Text size="small">Points from coins: {playerAnvil.pointsFromCoins}/600</Text>
                 {playerAnvil.pointsFromCoins < 600 &&
                     <Box>
                         <ComponentAndLabel
-                            label={"Next Point Cost"}
+                            label="Next Point Cost"
                             component={<CoinsDisplay coinMap={getCoinsArray(playerAnvil.getCoinCost())} />}
                         />
                         <ComponentAndLabel
-                            label={"Cost to max"}
+                            label="Cost to max"
                             component={<CoinsDisplay coinMap={getCoinsArray(playerAnvil.getCoinCostToMax())} />}
                         />
                     </Box>
@@ -747,16 +752,15 @@ function AnvilDisplay({ player }: { player: Player }) {
                         label="Next Material Point Cost"
                         component={
                             <Box direction="row" align="center">
-                                <IconImage data={{
-                                    location: playerAnvil.getMonsterMat(),
-                                    height: 36,
-                                    width: 36
-                                }} scale={0.8} />
-                                <Text color={storage.amountInStorage(playerAnvil.getMonsterMat()) > playerAnvil.getMonsterMatCost() ? 'green-1' : 'white'}>{`${nFormatter(storage.amountInStorage(playerAnvil.getMonsterMat()))}/${nFormatter(playerAnvil.getMonsterMatCost())}`}</Text>
+                                <IconImage data={{ location: playerAnvil.getMonsterMat(), height: 36, width: 36 }} scale={0.8} />
+                                <Text color={storage.amountInStorage(playerAnvil.getMonsterMat()) > playerAnvil.getMonsterMatCost() ? 'green-1' : 'white'}>
+                                    {`${nFormatter(storage.amountInStorage(playerAnvil.getMonsterMat()))}/${nFormatter(playerAnvil.getMonsterMatCost())}`}
+                                </Text>
                             </Box>
                         }
                     />
                 }
+                <Text size="small">Allocated points: {commaNotation(playerAnvil.allocatedPoints)}/{commaNotation(playerAnvil.totalPoints)}</Text>
                 <Box direction="row">
                     <Box margin={{ right: 'small' }} border={{ side: 'right', color: 'grey-1', size: '2px' }}>
                         <TextAndLabel
@@ -768,59 +772,30 @@ function AnvilDisplay({ player }: { player: Player }) {
                     <Box margin={{ right: 'small' }} border={{ side: 'right', color: 'grey-1', size: '2px' }}>
                         <TextAndLabel
                             label="Speed"
-                            text={`${nFormatter(playerAnvil.anvilSpeed)} (${playerAnvil.speedPoints})`}
+                            text={`${nFormatter(playerAnvil.anvilSpeed)} work/hour (${playerAnvil.speedPoints})`}
                             margin={{ right: 'small' }}
                         />
                     </Box>
                     <TextAndLabel
                         label="Capacity"
-                        text={`${playerAnvil.productCapacity} (${playerAnvil.capPoints})`}
+                        text={`${nFormatter(playerAnvil.productCapacity)} items (${playerAnvil.capPoints})`}
                         margin={{ right: 'small' }}
                     />
                 </Box>
-                {playerAnvil.currentlySelect.indexOf(-1) > -1 && <Text>UNUSED PRODUCTION</Text>}
+                {playerAnvil.currentlySelect.includes(-1) && <Text>UNUSED PRODUCTION</Text>}
             </Box>
             <Box gap="small">
-                {
-                    playerAnvil.production.filter((x) => x.displayName != "Filler" && (x?.hammers ?? 0) > 0).map((anvilItem, index) => {
-                        return (
-                            <Box key={`player_${player.playerID}_anvil_${index}`} direction="column" align="center">
-                                <IconImage data={{ height: 36, location: `${anvilItem.data.item}`, width: 36 }} scale={1.2} />
-                                <Text size="small">Number of Hammers = {anvilItem.hammers}</Text>
-                                <Box direction="row" gap="small">
-                                    <Stack>
-                                        <Meter
-                                            size="small"
-                                            type="bar"
-                                            background="accent-3"
-                                            color="brand"
-                                            values={[
-                                                {
-                                                    value: anvilItem.futureProduction,
-                                                    label: 'current',
-                                                    color: 'brand'
-                                                }
-                                            ]}
-                                            max={playerAnvil.productCapacity} />
-                                        <Box align="center" pad="xxsmall">
-                                            <Text size="small">{anvilItem.futureProduction.toString()} ({(anvilItem.percentOfCap)}%)</Text>
-                                        </Box>
-                                    </Stack>
-                                    <Text>Cap: {playerAnvil.productCapacity}</Text>
-                                </Box>
-                                <Box direction="row" gap="xsmall">
-                                    <Text size="small">Time till cap =</Text>
-                                    <TimeDown addSeconds={anvilItem.timeTillCap} />
-                                </Box>
-                                <Text size="small">Production Per Hour (per hammer) = {Math.round(playerAnvil.anvilSpeed / anvilItem.data.time)} </Text>
-                                <Text size="small">Total Produced of this item = {nFormatter(Math.round(anvilItem.totalProduced))}</Text>
-                            </Box>
-                        )
-                    })
-                }
+                {playerAnvil.production.filter(product => product.displayName !== "Filler" &&
+                    (product.hammers > 0 || product.futureProduction > 0 || product.currentXP > 0)).map(product => (
+                    <Box key={`player_${player.playerID}_anvil_${product.index}`} direction="column" align="center">
+                        <IconImage data={{ height: 36, location: product.data.item, width: 36 }} scale={1.2} />
+                        <AnvilProductProgress anvil={playerAnvil} product={product} />
+                        <Text size="small">Total Produced of this item = {nFormatter(Math.round(product.totalProduced))}</Text>
+                    </Box>
+                ))}
             </Box>
         </Box>
-    )
+    );
 }
 
 function CarryCapacityDisplay({ player }: { player: Player }) {
@@ -1224,6 +1199,7 @@ function PlayerTab({ player }: PlayerTabProps) {
 
 function Players() {
     const [index, setIndex] = useState<number>(0);
+    const hydrated = useHydrated();
 
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
@@ -1232,6 +1208,10 @@ function Players() {
 
     const onActive = (nextIndex: number) => setIndex(nextIndex);
 
+
+    if (!hydrated) {
+        return <Box>Loading...</Box>;
+    }
 
     if (!playerData || playerData.length == 0) {
         return <Box>Nothing to see here.</Box>

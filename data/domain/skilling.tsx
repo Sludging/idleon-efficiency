@@ -8,7 +8,7 @@ import { SkillsIndex } from "./SkillsIndex";
 import { Prayer } from "./world-3/prayers";
 import { ShrineConstants, Shrine } from "./world-3/construction/shrines";
 import { PlayerStatues, StatueConst } from "./world-1/statues";
-import { ClassIndex, getRightHandOfActionBonus } from "./talents";
+import { ClassIndex, getRightHandOfActionBonus, Talent } from "./talents";
 import { ImageData } from "./imageData";
 import { Divinity } from "./world-5/divinity";
 import { Achievement } from "./achievements";
@@ -43,6 +43,8 @@ import { lavaLog } from "../utility";
 import type { Sneaking } from "./world-6/sneaking";
 import { Meritocraty } from "./world-7/meritocraty";
 import { LegendTalents } from "./world-7/legendTalents";
+import { Arcade } from "./world-2/arcade";
+import { Orion } from "./world-1/orion";
 export type SkillingSkill = SkillStatsDNSkill | SkillsIndex.Worship;
 
 
@@ -55,6 +57,7 @@ export class Skilling extends Domain {
     private allEfficiencies = new Map<number, number>();
     private skillEfficiencies = new Map<number, Record<SkillingSkill, number>>();
     private allBaseSkillEfficiencies = new Map<number, number>();
+    private preparedSkillExperienceBonuses = new Map<number, number>();
 
     private allSkillExperienceMultiplier = 1;
 
@@ -62,10 +65,12 @@ export class Skilling extends Domain {
         this.allEfficiencies.clear();
         this.skillEfficiencies.clear();
         this.allBaseSkillEfficiencies.clear();
+        this.preparedSkillExperienceBonuses.clear();
 
         for (let playerID = 0; playerID < charCount; playerID++) {
             this.allEfficiencies.set(playerID, 1);
             this.allBaseSkillEfficiencies.set(playerID, 0);
+            this.preparedSkillExperienceBonuses.set(playerID, 0);
             this.skillEfficiencies.set(playerID, {
                 [SkillsIndex.Mining]: 0,
                 [SkillsIndex.Chopping]: 0,
@@ -89,6 +94,65 @@ export class Skilling extends Domain {
 
     getAllSkillExperienceMultiplier(): number {
         return this.allSkillExperienceMultiplier;
+    }
+
+    updateAllSkillExperienceBonuses(data: Map<string, unknown>): void {
+        const players = data.get("players") as Player[];
+        const cards = data.get("cards") as Card[];
+        const arcade = data.get("arcade") as Arcade;
+        const lab = data.get("lab") as Lab;
+        const achievements = data.get("achievements") as Achievement[];
+        const companions = data.get("companions") as Companion[];
+        const orion = data.get("orion") as Orion;
+        const hole = data.get("hole") as Hole;
+        const equipmentSets = data.get("equipmentSets") as EquipmentSets;
+        const friends = data.get("friends") as Friends;
+
+        const springCardBonus = 2 * (cards.find(card => card.id === "springEvent2")?.getLevels() ?? 0);
+        const accountBonus = springCardBonus + arcade.bonuses[18].getBonus()
+            + 15 * Number(achievements[359].completed)
+            + getCompanionActiveBonus(companions, 9)
+            + orion.getGlobalBonus(3)
+            + hole.getSchematicBonus(49, 10)
+            + equipmentSets.getSetBonus("CHIZOAR_SET")
+            + friends.getFriendBonus(4);
+
+        let enhancementBonus = 0;
+        for (const player of players) {
+            const enhancementTalent = player.getTalent(49);
+            if (enhancementTalent) {
+                // Enhancement Eclipse uses saved allocations without extra talent levels.
+                enhancementBonus = Math.max(
+                    enhancementBonus,
+                    enhancementTalent.getBonusAtLevel(enhancementTalent.pointsSpent),
+                );
+            }
+        }
+
+        const anchorCoordinates = lab.playerCords[lab.bestBuboPlayerID];
+        for (const player of players) {
+            let greenTubeBonus = 0;
+            const playerCoordinates = lab.playerCords[player.playerID];
+            if (enhancementBonus >= 200 && playerCoordinates && anchorCoordinates
+                && playerCoordinates.x <= anchorCoordinates.x) {
+                // The anchor comes from Purple Tube. Green Tube uses the best account bonus for this recipient.
+                const accountGreenTubeBonus = Talent.getAccountTalentBonus(players, 536, player.currentTalentInputs);
+                greenTubeBonus = accountGreenTubeBonus * Math.min(1, accountGreenTubeBonus);
+            }
+
+            let luckyCharmsBonus = 0;
+            const talentBonus = player.getTalentBonusAtInputs(35, player.finalTalentInputs);
+            if (enhancementBonus >= 250 && talentBonus > 0) {
+                // Enhancement Eclipse unlocks this bonus at 250 points and caps it at 150%.
+                const luck = player.stats.luck;
+                const luckTransform = luck < 1000
+                    ? (Math.pow(luck + 1, 0.37) - 1) / 30
+                    : ((luck - 1000) / (luck + 2500)) * 0.8 + 0.3963;
+                luckyCharmsBonus = Math.min(150, 100 * (luckTransform * (1 + talentBonus / 100) / 1.8));
+            }
+
+            this.preparedSkillExperienceBonuses.set(player.playerID, accountBonus + greenTubeBonus + luckyCharmsBonus);
+        }
     }
 
     getSkillEfficiency(playerID: number, skill: SkillingSkill): number {
@@ -400,8 +464,7 @@ export class Skilling extends Domain {
         }
     }
 
-    // if ("AllSkillxpz" == d) {
-    static getAllSkillXP = (
+    getAllSkillXP = (
         player: Player,
         players: Player[],
         shrines: Shrine[],
@@ -425,8 +488,8 @@ export class Skilling extends Domain {
         const cardSetBonus = player.cardInfo?.getBonusForId(3) ?? 0;
         const shrineBonus = shrines[ShrineConstants.ExpShrine].getBonus(player.currentMapId);
         const statueBonus = playerStatues.statues[StatueConst.SkillXpIndex].getBonus(player);
-        const prayerIncrease = prayers.filter(prayer => [2, 17].includes(prayer.index) && player.activePrayers.includes(prayer.index)).reduce((sum, prayer) => sum += prayer.getBonus(), 0) ?? 0;
-        const prayerDecrease = prayers.filter(prayer => [1, 9].includes(prayer.index) && player.activePrayers.includes(prayer.index)).reduce((sum, prayer) => sum += prayer.getCurse(), 0) ?? 0;
+        const prayerIncrease = prayers.filter(prayer => [2, 17].includes(prayer.index)).reduce((sum, prayer) => sum += prayer.getBonusForPlayer(player), 0) ?? 0;
+        const prayerDecrease = prayers.filter(prayer => [1, 9].includes(prayer.index)).reduce((sum, prayer) => sum += prayer.getCurseForPlayer(player), 0) ?? 0;
         const masteroBuff = player.activeBuffs.find(talent => talent.skillIndex == 40)?.getBonus() ?? 0;
         const equipmentBonus = player.gear.getBonus(EquipmentBonus.SkillExp);
         const starSignBonus = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Skill EXP gain"), 0);
@@ -446,7 +509,8 @@ export class Skilling extends Domain {
         const myriadBox = player.postOffice.find(box => box.index == 20)
         const poBonus = myriadBox?.bonuses[2].getBonus(myriadBox.level, 2) ?? 0;
 
-        return starSignBonus + guildBonus + (skillingCardBonus + goldenFoodBonus) + (cardSetBonus + w5crystalCardBonus + shrineBonus + statueBonus + (prayerIncrease - prayerDecrease + (equipmentBonus + (masteroBuff + (saltLickBonus + dungeonBonus + poBonus + divinityBonus + achieveBonuses + riftBonus + shinyBonus + worshipBonus + summoningBonus)))));
+        return starSignBonus + guildBonus + (skillingCardBonus + goldenFoodBonus) + (cardSetBonus + w5crystalCardBonus + shrineBonus + statueBonus + (prayerIncrease - prayerDecrease + (equipmentBonus + (masteroBuff + (saltLickBonus + dungeonBonus + poBonus + divinityBonus + achieveBonuses + riftBonus + shinyBonus + worshipBonus + summoningBonus)))))
+            + this.preparedSkillExperienceBonuses.get(player.playerID)!;
     }
 
     static getSkillImageData = (skill: SkillsIndex): ImageData => {

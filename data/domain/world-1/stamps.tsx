@@ -6,6 +6,7 @@ import { AtomCollider } from '../world-3/construction/atomCollider';
 import { Domain, RawData } from '../base/domain';
 import { Bribe, BribeConst, BribeStatus } from './bribes';
 import { Capacity } from '../capacity';
+import { EventShop } from '../eventShop';
 import { ImageData } from '../imageData';
 import { Item } from '../items';
 import { Lab } from '../world-4/lab';
@@ -18,6 +19,7 @@ import { Rift } from '../world-4/rift';
 import { Sigils } from '../world-2/alchemy/sigils';
 import { Storage } from '../storage';
 import { Sneaking } from '../world-6/sneaking';
+import { Summoning } from '../world-6/summoning';
 import { UpgradeVault } from '../upgradeVault';
 
 export enum StampTab {
@@ -253,6 +255,71 @@ export class Stamp {
     }
 }
 
+export class StampAutomaticProgression extends Domain {
+    gildedStampGainChancePercent: number = 0;
+    noStampLeftBehindLevelsPerDay: number = 0;
+    noStampLeftBehindSources = {
+        bundle: 0,
+        eventShop: 0,
+        summoning: 0,
+    };
+
+    init(): StampAutomaticProgression {
+        this.reset();
+        return this;
+    }
+
+    getRawKeys(): RawData[] {
+        return [];
+    }
+
+    parse(data: Map<string, any>): void {
+        const progression = data.get(this.getDataKey()) as StampAutomaticProgression;
+        progression.reset();
+    }
+
+    private reset(): void {
+        this.gildedStampGainChancePercent = 0;
+        this.noStampLeftBehindLevelsPerDay = 0;
+        this.noStampLeftBehindSources.bundle = 0;
+        this.noStampLeftBehindSources.eventShop = 0;
+        this.noStampLeftBehindSources.summoning = 0;
+    }
+
+    prepare(inputs: {
+        stamps: Stamp[][];
+        riftLevel: number;
+        bundleOwned: boolean;
+        stampStackOwned: boolean;
+        summoningStampLevels: number;
+    }): void {
+        this.reset();
+        if (inputs.riftLevel >= 25) {
+            let totalLevels = 0;
+            for (const tab of inputs.stamps) {
+                for (const stamp of tab) {
+                    totalLevels += stamp.level;
+                }
+            }
+
+            // The daily Gilded Stamp roll uses this chance even above 100%.
+            this.gildedStampGainChancePercent = totalLevels / 100;
+        }
+
+        this.noStampLeftBehindSources.bundle = inputs.bundleOwned ? 5 : 0;
+        this.noStampLeftBehindSources.eventShop = inputs.stampStackOwned ? 3 : 0;
+        // Bundle and Event Shop gains are integers, so rounding Summoning first does not change the daily total.
+        this.noStampLeftBehindSources.summoning = inputs.summoningStampLevels > 0
+            ? Math.round(inputs.summoningStampLevels)
+            : 0;
+
+        // One randomly selected owned stamp receives all these levels.
+        this.noStampLeftBehindLevelsPerDay = this.noStampLeftBehindSources.bundle
+            + this.noStampLeftBehindSources.eventShop
+            + this.noStampLeftBehindSources.summoning;
+    }
+}
+
 export class Stamps extends Domain {
     constructor(public dataKey: string) {
         super(dataKey);
@@ -324,6 +391,10 @@ export function updateStamps(data: Map<string, any>) {
     const sneaking = data.get("sneaking") as Sneaking;
     const compass = data.get("compass") as Compass;
     const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+    const account = data.get("account") as Account;
+    const eventShop = data.get("eventShop") as EventShop;
+    const summoning = data.get("summoning") as Summoning;
+    const automaticProgression = data.get("stampAutomaticProgression") as StampAutomaticProgression;
     // Update gilded stamps (this can totally be done in parse if needed)
     const optLacc = data.get("OptLacc");
     const gildedStampCount = parseInt(optLacc[154]);
@@ -360,6 +431,14 @@ export function updateStamps(data: Map<string, any>) {
         stamp.removeLimitFromUnderLevel = limitIsRemoved;
         stamp.exaltedMultiplier = compass.exaltedStampNames.has(stamp.raw_name) ? exaltedMultiplier : 1;
     })
+
+    automaticProgression.prepare({
+        stamps,
+        riftLevel: rift.level,
+        bundleOwned: account.hasNoMealLeftBehindBundle,
+        stampStackOwned: eventShop.isBonusOwned(1),
+        summoningStampLevels: summoning.getSummoningWinnerBonusFromIndex(20),
+    });
 
     return stamps;
 }

@@ -15,13 +15,19 @@ import { Equinox as EquinoxDomain, isFoodLust } from '../../../data/domain/world
 import { TimeDown } from "../../../components/base/TimeDisplay";
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import useHydrated from '../../../lib/hooks/useHydrated';
 import { useShallow } from 'zustand/react/shallow';
 
 function Equinox() {
+    const hydrated = useHydrated();
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
     const equinox = theData.get("equinox") as EquinoxDomain;
+
+    if (!hydrated) {
+        return <Box>Loading...</Box>;
+    }
 
     if (!equinox) {
         return <></>
@@ -82,6 +88,12 @@ function Equinox() {
                                     <ShadowBox width={"200px"} key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium">
                                         <Text size="small">{challenge.data.challenge}</Text>
                                         <Text size="small">{challenge.data.reward}</Text>
+                                        <TextAndLabel
+                                            label="Progress"
+                                            text={challenge.progress.toString()}
+                                            textSize="small"
+                                            margin={{ top: 'small' }}
+                                        />
                                     </ShadowBox>
                                 ))
                             }

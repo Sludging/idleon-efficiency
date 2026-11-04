@@ -63,6 +63,10 @@ Missing receipts remain unknown; known receipt ledgers still use native comparis
 Bubba progression tests compare the next bonus, purchase cost, and affordability.
 They do not assert the continuously changing raw meat balance.
 
+Equinox tests accept saves with no active challenges. They compare the complete
+active challenge list and saved progress, including empty lists, and retain
+completion and progress-reset checks.
+
 Summoning stone tests compare native win counts and upgrade effects without
 pinning boss HP to the progression of a particular saved account snapshot.
 

@@ -5,12 +5,14 @@ import { useMemo, useState } from "react";
 import { UpgradeVault } from "../../data/domain/upgradeVault";
 import { getCoinsArray, nFormatter } from "../../data/utility";
 import DataRow, { type DataRowField } from "../base/DataRow";
-import { ComponentAndLabel } from "../base/TextAndLabel";
+import TextAndLabel, { ComponentAndLabel } from "../base/TextAndLabel";
 import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
 import CoinsDisplay from "../coinsDisplay";
 import IconImage from "../base/IconImage";
 import styled from "styled-components";
+import TipDisplay from "../base/TipDisplay";
+import useHydrated from "../../lib/hooks/useHydrated";
 
 const CompactCoins = styled(Box)`
     span { font-size: 14px; line-height: 20px; }
@@ -20,6 +22,7 @@ const CompactCoins = styled(Box)`
 export function UpgradeVaultDisplay() {
     const [hideMaxed, setHideMaxed] = useState(true);
     const [hideLocked, setHideLocked] = useState(true);
+    const hydrated = useHydrated();
     const { theData, lastUpdated } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
@@ -47,18 +50,59 @@ export function UpgradeVaultDisplay() {
         return filteredUpgrades;
     }, [upgradeVault, hideMaxed, hideLocked, lastUpdated]);
 
+    if (!hydrated || !upgradeVault) {
+        return <Box>Loading Upgrade Vault…</Box>;
+    }
+
+    const cheaperMultiplier = upgradeVault.getCostReductionMultiplier();
+    const sourceMultipliers = upgradeVault.getCostReductionMultipliers();
+    const costReductionSources = [
+        { label: "Darts", multiplier: sourceMultipliers.darts },
+        { label: "Sushi Roll companion", multiplier: sourceMultipliers.sushiRoll },
+        { label: "Sushi Station", multiplier: sourceMultipliers.sushiStation },
+    ];
+
     return (
-        <Box gap="small" pad="large">
-            <Box direction="row" gap="medium">
-                <ComponentAndLabel
-                    label="Total Vault Level"
-                    component={
-                        <Box direction="row" gap="small">
-                            <Text>{nFormatter(upgradeVault?.totalVaultLevel || 0)}</Text>
-                        </Box>
-                    }
-                />
-                <Box direction="row" gap="medium">
+        <Box gap="small">
+            <Box direction="row" wrap gap="medium" align="center" justify="between" margin={{ bottom: "small" }}>
+                <Box direction="row" wrap gap="medium" align="start">
+                    <TextAndLabel
+                        label="Total Vault level"
+                        labelSize="xsmall"
+                        textSize="large"
+                        text={nFormatter(upgradeVault.totalVaultLevel)}
+                    />
+                    {cheaperMultiplier > 1 && (
+                        <ComponentAndLabel
+                            label="Vault cost reduction"
+                            labelSize="xsmall"
+                            component={
+                                <TipDisplay
+                                    heading="Vault cost reduction"
+                                    size="small"
+                                    maxWidth="620px"
+                                    body={
+                                        <Box gap="xsmall" style={{ maxHeight: "40vh", overflowY: "auto", overflowWrap: "anywhere" }}>
+                                            <Box gap="xxsmall">
+                                                {costReductionSources.map(source => (
+                                                    <Text key={source.label} size="xsmall" style={{ opacity: source.multiplier === 1 ? 0.6 : 1 }}>
+                                                        {source.label}: ×{source.multiplier.toFixed(2)}
+                                                    </Text>
+                                                ))}
+                                            </Box>
+                                            <Text size="xsmall">Does not include Major Discount or the discount limits for each upgrade color.</Text>
+                                        </Box>
+                                    }
+                                >
+                                    <Text tabIndex={0} size="large" weight="bold" style={{ textDecoration: "underline dotted", textUnderlineOffset: "4px", cursor: "help" }}>
+                                        {cheaperMultiplier.toFixed(2)}x cheaper
+                                    </Text>
+                                </TipDisplay>
+                            }
+                        />
+                    )}
+                </Box>
+                <Box direction="row" wrap gap="medium">
                     <CheckBox
                         checked={hideMaxed}
                         label="Hide max level"

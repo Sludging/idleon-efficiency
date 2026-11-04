@@ -225,6 +225,33 @@ export class VaultUpgBonus {
 export class UpgradeVault extends Domain {
     bonuses: VaultUpgBonus[] = [];
     totalVaultLevel: number = 0;
+    private dartsDiscountPercent: number = 0;
+    private companionDiscountPercent: number = 0;
+    private sushiDiscountPercent: number = 0;
+
+    private get dartsCostFactor(): number {
+        return 1 / (1 + this.dartsDiscountPercent / 100);
+    }
+
+    private get companionCostFactor(): number {
+        return Math.max(0.1, 1 - this.companionDiscountPercent / 100);
+    }
+
+    private get sushiCostFactor(): number {
+        return Math.max(0.1, 1 - this.sushiDiscountPercent / 100);
+    }
+
+    getCostReductionMultiplier(): number {
+        return 1 / (this.dartsCostFactor * this.companionCostFactor * this.sushiCostFactor);
+    }
+
+    getCostReductionMultipliers(): { darts: number; sushiRoll: number; sushiStation: number } {
+        return {
+            darts: 1 / this.dartsCostFactor,
+            sushiRoll: 1 / this.companionCostFactor,
+            sushiStation: 1 / this.sushiCostFactor,
+        };
+    }
 
     getRawKeys(): RawData[] {   
         return [
@@ -254,6 +281,9 @@ export class UpgradeVault extends Domain {
 
         // Retrieve it directly without using the domain class to avoid a post parse recalculation
         const costReductionFromDarts = optionList[437] || 0;
+        upgradeVault.dartsDiscountPercent = costReductionFromDarts;
+        upgradeVault.companionDiscountPercent = 0;
+        upgradeVault.sushiDiscountPercent = 0;
     
         upgradesData.forEach((level, index) => {
             if (index < upgradeVault.bonuses.length) {
@@ -293,6 +323,8 @@ export class UpgradeVault extends Domain {
             + (research.bonuses[169].getLevel() + Number(eventShop.isBonusOwned(40)));
         const companionDiscountPercent = getCompanionActiveBonus(companions, 99);
         const sushiDiscountPercent = Math.max(sushi.getBonusFromIndex(38), sushi.getBonusFromIndex(47));
+        this.companionDiscountPercent = companionDiscountPercent;
+        this.sushiDiscountPercent = sushiDiscountPercent;
 
         this.bonuses.forEach(upgrade => {
             const trade = glimbo.trades.find(trade => trade.data.vaultUpgradeIndex === upgrade.id);

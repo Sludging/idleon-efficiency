@@ -16,14 +16,15 @@ import IconImage from "../../../components/base/IconImage";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
 import ContentTabs from "../../../components/base/ContentTabs";
-import { ComponentAndLabel } from "../../../components/base/TextAndLabel";
-import TipDisplay from "../../../components/base/TipDisplay";
+import TextAndLabel, { ComponentAndLabel } from "../../../components/base/TextAndLabel";
+import TipDisplay, { TipDirection } from "../../../components/base/TipDisplay";
+import ItemSourcesDisplay from "../../../components/base/ItemSourceDisplay";
 import { Item } from "../../../data/domain/items";
 import { UpgradeTable } from "../../../components/account/shared/UpgradeTable";
 import type { FilterOptions } from "../../../components/account/shared/UpgradeTableFilters";
 import useHydrated from "../../../lib/hooks/useHydrated";
 
-type StorageView = 'Stored items' | 'Greenstacks';
+type StorageView = 'Stored items' | 'Greenstacks' | 'Capacity';
 type GreenstackFilter = 'Missing' | 'Credited' | 'Unrealistic' | 'All';
 type GreenstackRow = {
     id: string;
@@ -181,6 +182,7 @@ function StorageDisplay() {
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Storage</Heading>
             {storage && (
                 <Box direction="row" gap="medium" wrap>
+                    <TextAndLabel label="Slots owned" text={Intl.NumberFormat().format(storage.getSlotCount())} />
                     <ComponentAndLabel label="Greenstacks" component={
                         <Box direction="row" align="center" gap="xxsmall">
                             <IconImage data={{ location: "GreenstackIcon", width: 39, height: 30 }} />
@@ -194,12 +196,40 @@ function StorageDisplay() {
             <ContentTabs
                 options={[
                     { value: 'Stored items', label: 'Stored items' },
-                    { value: 'Greenstacks', label: 'Greenstacks' }
+                    { value: 'Greenstacks', label: 'Greenstacks' },
+                    { value: 'Capacity', label: 'Capacity' }
                 ]}
                 value={view}
                 onChange={setView}
             />
-            {view === 'Greenstacks' ? (
+            {view === 'Capacity' ? (
+                <Box direction="row" wrap>
+                    {storage.chestUpgrades.map(upgrade => {
+                        const item = allItems.find(item => item.internalName === upgrade.internalName)!;
+
+                        return (
+                            <Box key={upgrade.internalName} margin={{ right: 'small', bottom: 'small' }}>
+                                <TipDisplay
+                                    heading={`${item.displayName} (${item.type})`}
+                                    body={
+                                        <Box gap="xsmall">
+                                            <Text>Slots: {upgrade.unlocked ? upgrade.slotContribution : upgrade.capacity}</Text>
+                                            <ItemSourcesDisplay sources={item.sources} titleTextSize="medium" />
+                                        </Box>
+                                    }
+                                    size="large"
+                                    direction={TipDirection.Down}
+                                    maxWidth="large"
+                                >
+                                    <Box style={{ opacity: upgrade.unlocked ? 1 : 0.2 }}>
+                                        <IconImage data={item.getImageData()} />
+                                    </Box>
+                                </TipDisplay>
+                            </Box>
+                        );
+                    })}
+                </Box>
+            ) : view === 'Greenstacks' ? (
                 <UpgradeTable
                     tableName="Greenstacks"
                     columns={greenstackColumns}

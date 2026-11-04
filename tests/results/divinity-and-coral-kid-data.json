@@ -1,0 +1,48 @@
+{
+  "extractions": {
+    "upgrade_bonuses": {
+      "expression": "Array.from({length:12},(_,index)=>idleon.callFunction('Thingies','CoralKidUpgBonus',index,0))",
+      "result": [
+        660,
+        50,
+        14.791666666666668,
+        80,
+        28,
+        2.4390243902439024,
+        3900,
+        330,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "upgrade_costs": {
+      "expression": "Array.from({length:12},(_,index)=>idleon.callFunction('Thingies','CoralKidUpgCost',index,0))",
+      "result": [
+        5394077978.276371,
+        15881867761.018133,
+        312739794892.5797,
+        4424544463504.635,
+        49215578432.38809,
+        85536000000,
+        117.5057979057673,
+        507.96190633458906,
+        121,
+        2197,
+        28561,
+        759375
+      ]
+    },
+    "singularity": {
+      "expression": "['UnlockOwned','CK_BaseValue','CK_KillMulti','CK_TimeMulti'].map(command=>idleon.callFunction('MenagerieStuff',command,command==='UnlockOwned'?2:0,0))",
+      "result": [
+        1,
+        176.98342001950647,
+        3.6168449255569226,
+        6.29364916731037
+      ]
+    }
+  },
+  "errors": {}
+}
