@@ -158,7 +158,6 @@ export class CoralKid extends Domain {
     }
 
     getBonusFromIndex(index: number): number {
-        // Coefficients keep native units so existing rate and damage consumers remain unchanged.
         return this.coralKidBonuses.find(bonus => bonus.index == index)?.getBonus() || 0;
     }
 

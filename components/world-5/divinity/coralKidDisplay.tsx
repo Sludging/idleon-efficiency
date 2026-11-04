@@ -78,7 +78,7 @@ function MinorLinkEffects({ coralKid, players }: Pick<CoralKidDisplayProps, "cor
 function SingularitySummary({ coralKid }: Pick<CoralKidDisplayProps, "coralKid">) {
     const singularity = coralKid.singularity;
     return <Box direction="row" wrap gap="medium" align="start" pad={{ vertical: "small" }} style={{ fontVariantNumeric: "tabular-nums" }}>
-        <ComponentAndLabel label="Spirals on claim" component={<Box direction="row" gap="xsmall" align="center">
+        <ComponentAndLabel label="Spirals from transmutation" component={<Box direction="row" gap="xsmall" align="center">
             <IconImage data={Item.getImageData("CKsing")} scale={0.7} />
             <Text size="large">{commaNotation(singularity.spiralsOnClaim)}</Text>
         </Box>} />

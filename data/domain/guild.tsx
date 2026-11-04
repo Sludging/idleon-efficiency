@@ -46,7 +46,7 @@ export class GuildBonus {
     }
 
     getUpgradeCost = (): number => {
-        // This is the raw quote, even when the bonus is at its maximum level.
+        // Return the next-level price even at the maximum level.
         return this.gpBaseCost + this.level * this.gpIncrease;
     }
 

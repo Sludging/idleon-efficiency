@@ -27,7 +27,7 @@ describe('Equinox active challenge progress', () => {
 
   it('matches numerical progress for every active challenge to the genuine saved counter', () => {
     expect(expectedActiveIndices.length).toBeGreaterThan(0);
-    // Completion getValue() remains binary; progress uses the saved counter and must not clamp to req.
+    // Completion stays 0 or 1. Progress retains the saved count, even above the challenge requirement.
     for (const challenge of equinox.activeChallenges) {
       expect(challenge.progress).toMatchLiveGameWithDetails(savedWeeklyBoss[`d_${challenge.index}`] ?? 0, {
         tolerance: 0,

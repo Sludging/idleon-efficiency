@@ -1,7 +1,6 @@
 import { Divinity } from '../../../data/domain/world-5/divinity';
 import { loadGameDataFromSave, loadTestSave } from '../../utils/cloudsave-loader';
 
-/** Core coverage for the account rank and saved Divinity balance. */
 describe('Divinity rank and balance', () => {
   let divinity: Divinity;
 

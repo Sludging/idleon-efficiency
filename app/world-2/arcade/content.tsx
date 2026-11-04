@@ -22,12 +22,12 @@ import { notateNumber } from '../../../data/utility';
 function GoldBallMultiplier({ arcade }: { arcade: ArcadeData }) {
     const sources = arcade.getGoldBallGainSources();
     const accountSources = [
-        { name: "Golden Yellow palette", value: sources.goldenYellowPercent },
+        { name: "Gaming palette — Golden Yellow", value: sources.goldenYellowPercent },
         { name: "Arcade shop", value: sources.arcadeShopPercent },
-        { name: "Spheres of Gold", value: sources.spheresOfGoldPercent },
-        { name: "Gold Figleaf", value: sources.goldFigleafPercent },
-        { name: "Ballthezar", value: sources.ballthezarPercent },
-        { name: "Hedgehog", value: sources.hedgehogPercent },
+        { name: "Tesseract — Spheres of Gold", value: sources.spheresOfGoldPercent },
+        { name: "Exotic Market — Gold Figleaf", value: sources.goldFigleafPercent },
+        { name: "Coral Kid — Ballthezar", value: sources.ballthezarPercent },
+        { name: "Hedgehog companion", value: sources.hedgehogPercent },
     ];
 
     return <Box gap="xxsmall" margin={{ right: 'medium' }}>

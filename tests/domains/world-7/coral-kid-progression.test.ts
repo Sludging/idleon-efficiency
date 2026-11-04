@@ -8,7 +8,6 @@ import {
   validateExtractionHealth,
 } from '../../utils/live-game-data-loader';
 
-/** Core coverage for both Coral Kid upgrade modes and the Singularity conversion. */
 describe('Coral Kid upgrade and Singularity account outputs', () => {
   let coralKid: CoralKid;
   let results: ExtractionResults;
@@ -59,7 +58,7 @@ describe('Coral Kid upgrade and Singularity account outputs', () => {
   it('matches current bonuses and next costs for every upgrade in both modes', () => {
     const bonuses = results.extractions.upgrade_bonuses.result as unknown[];
     const costs = results.extractions.upgrade_costs.result as unknown[];
-    // Twelve records form a small set. The second page has different cost and effect rules.
+    // The second upgrade page uses different cost and effect rules.
     for (let index = 0; index < 12; index += 1) {
       expect(coralKid.getBonusFromIndex(index)).toMatchLiveGameWithDetails(normalizeExtractedValue(bonuses[index]), {
         tolerance: 0,

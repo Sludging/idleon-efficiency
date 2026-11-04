@@ -302,13 +302,13 @@ export class StampAutomaticProgression extends Domain {
                 }
             }
 
-            // The native daily roll uses the raw chance, including values above 100%.
+            // The daily Gilded Stamp roll uses this chance even above 100%.
             this.gildedStampGainChancePercent = totalLevels / 100;
         }
 
         this.noStampLeftBehindSources.bundle = inputs.bundleOwned ? 5 : 0;
         this.noStampLeftBehindSources.eventShop = inputs.stampStackOwned ? 3 : 0;
-        // The other gains are integers, so rounding here matches rounding after each reset addition.
+        // Bundle and Event Shop gains are integers, so rounding Summoning first does not change the daily total.
         this.noStampLeftBehindSources.summoning = inputs.summoningStampLevels > 0
             ? Math.round(inputs.summoningStampLevels)
             : 0;

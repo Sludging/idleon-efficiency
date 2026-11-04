@@ -5,7 +5,7 @@
     {
       "label": "storage_slots_owned",
       "expression": "idleon.getAttr('ChestSlotsOwned')",
-      "description": "Actual native owned slot total. Read the initialized attribute without replaying the competitor formula."
+      "description": "Read the game's initialized total of owned storage slots."
     },
     {
       "label": "storage_chest_catalogue",

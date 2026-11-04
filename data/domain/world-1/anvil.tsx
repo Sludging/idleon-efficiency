@@ -123,7 +123,7 @@ export class Anvil {
             ? baseMultiplier
             : Math.min(20 + (baseMultiplier - 20) / (baseMultiplier - 20 + 70) * 50, 75);
 
-        // Existing consumers use a bonus percentage on both sides of the soft cap.
+        // Store the EXP bonus as a percentage, including below the soft cap.
         this.anvilXP = 100 * (multiplier - 1);
     };
 
@@ -309,7 +309,7 @@ export const updateAnvil = (data: Map<string, any>) => {
     // Cap stuff
     const capacity = data.get("capacity") as Capacity;
     let maestro: Player | undefined;
-    // The native account scan selects the last Maestro or advanced class.
+    // The last Maestro or its advanced class in character order supplies the Left Hand bonus.
     for (const player of players) {
         if (player.classId >= ClassIndex.Maestro && player.classId <= ClassIndex.Infinilyte) {
             maestro = player;

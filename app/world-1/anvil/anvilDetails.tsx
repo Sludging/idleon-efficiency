@@ -23,7 +23,7 @@ export function AnvilProductProgress({ anvil, product }: { anvil: Anvil; product
             </Box>
             {product.hammers > 0 && product.futureProduction < anvil.productCapacity &&
                 <ComponentAndLabel
-                    label="Time till cap"
+                    label="Time until full"
                     labelSize="xsmall"
                     component={<StaticTime fromSeconds={product.timeTillCap} />}
                 />

@@ -90,7 +90,7 @@ export function UpgradeVaultDisplay() {
                                                     </Text>
                                                 ))}
                                             </Box>
-                                            <Text size="xsmall">Excludes Major Discount and color-band price floors. Individual prices can differ.</Text>
+                                            <Text size="xsmall">Does not include Major Discount or the discount limits for each upgrade color.</Text>
                                         </Box>
                                     }
                                 >

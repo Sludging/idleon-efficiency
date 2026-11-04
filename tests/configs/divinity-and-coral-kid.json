@@ -5,7 +5,7 @@
     {
       "label": "upgrade_bonuses",
       "expression": "Array.from({length:12},(_,index)=>idleon.callFunction('Thingies','CoralKidUpgBonus',index,0))",
-      "description": "All twelve current upgrade coefficients. Source: IdleonWikiBot/codefiles/idleon1.25.txt:240037-240070. First-six values also have existing coral-kid-data.json evidence."
+      "description": "Current bonus values for all twelve upgrades. Source: IdleonWikiBot/codefiles/idleon1.25.txt:240037-240070. The first six upgrades also have captures in coral-kid-data.json."
     },
     {
       "label": "upgrade_costs",
