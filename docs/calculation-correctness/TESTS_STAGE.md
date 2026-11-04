@@ -17,16 +17,16 @@ Write tests and extraction config, not domain code. Read the approved plan, phas
 
 Use the [core and parameter definitions](../TESTING_IMPLEMENTATION.md#core-tests-and-parameter-tests):
 
-- Parameter tests compare every directly used cross-domain/aspect calculation, including other aspects in the same domain. Exclude static facts, trivial helpers, raw save plumbing, and dependency internals. The raw save plumbing exclusion does not exclude user-facing saved values covered by the canonical core definition above.
+- Parameter tests compare every directly used cross-domain/aspect calculation, including other aspects in the same domain. Exclude static facts, trivial helpers, raw save plumbing, and dependency internals. The raw save plumbing exclusion does not exclude meaningful saved progression covered by the canonical core definition above.
 - Core tests compare the selected public result for the paired real save. Choose meaningful observed behaviors, branches, or representative inputs. Explain gameplay effect and website result checked. State actual save coverage and unobserved limits.
 
 Use real-save evidence, not synthetic saves, altered branch inputs, or expected values derived from domain code. Raise unresolved coverage questions. Record selected result, direct parameters, core coverage, and questions.
 
 ## Build and run the comparisons
 
-1. Locate and reuse existing configs, tests, saves, and results under the [pairing rule](../TESTING_IMPLEMENTATION.md#keep-tests-tied-to-the-real-save).
-2. Give every expected core and parameter value an extraction entry with its exact delivered-game expression/value. A WikiBot fact alone is not a calculation comparison. After required config changes, return `EXTRACTION_NEEDED` with changed path and command from the [helper guide](../../tests/helpers/README.md#quick-start---batch-extraction). Follow the [extraction procedure](PLAYBOOK.md#extraction-when-needed); report unchanged-config failures as concrete technical errors.
-3. Write active comparisons under the [numeric comparison policy](../TESTING_IMPLEMENTATION.md#numeric-comparison-policy). Preserve delivered representation and source-backed conversions. For missing selected implementations, keep active failure scaffolding naming the calculation and game function signature. After implementation, call the typed public API directly; remove guards, `unknown` casts, and `.call` wrappers through this stage. Keep failing direct parameters visible with game call and domain location or missing status.
+1. Locate and reuse existing configs, tests, saves, and results under the [pairing rule](../TESTING_IMPLEMENTATION.md#keep-tests-tied-to-genuine-saves).
+2. Obtain expected core and parameter values under the [expected-result policy](../TESTING_IMPLEMENTATION.md#obtain-expected-calculation-results). A WikiBot fact alone is not a calculation comparison. After required config changes, return `EXTRACTION_NEEDED` with changed path and command from the [helper guide](../../tests/helpers/README.md#quick-start---batch-extraction). Follow the [extraction procedure](PLAYBOOK.md#extraction-when-needed); report unchanged-config failures as concrete technical errors.
+3. Write active comparisons under the [numeric comparison policy](../TESTING_IMPLEMENTATION.md#numeric-comparison-policy). For missing selected implementations, keep active failure scaffolding naming the calculation and game function signature. After implementation, call the typed public API directly; remove guards, `unknown` casts, and `.call` wrappers through this stage. Keep failing direct parameters visible with game call and domain location or missing status.
 4. Run every targeted test file. Record exact commands and observed results. Keep edits within selected tests/config; leave generated data unchanged under the playbook.
 
 ## Result classification and completion

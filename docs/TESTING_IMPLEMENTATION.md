@@ -8,7 +8,7 @@ For a correctness case, the selected stage defines allowed work. The tests stage
 
 ## Core tests and parameter tests
 
-A **core test** compares the selected domain/aspect's public result with its extracted game value, including calculated and user-facing saved values. Every distinct user-facing value must have a relevant assertion against the public domain result that supplies it. Include direct saved values even when parsing is trivial; the trivial plumbing exclusion does not exclude these public values. Choose tests for distinct behaviors or branches, or a representative set of input values. Testing every value can be reasonable when the set is small, such as about ten values.
+A **core test** compares a selected public domain result with the unchanged result returned by an original game function. Meaningful saved progression, such as an upgrade level, can instead be compared with the matching real save. A value does not need a test merely because the website displays or uses it. Choose tests for distinct behaviors or branches, or a representative set of input values. Testing every value can be reasonable when the set is small, such as about ten values.
 
 A **parameter test** compares a calculation directly used by the selected aspect with its extracted game value. Include every such calculation from another domain/aspect, including another aspect in the same domain. Keep the comparison even when that calculation has its own core test.
 
@@ -24,25 +24,20 @@ The [real examples below](#examples-from-existing-tests) show these distinctions
 
 1. **Establish game behavior.** Follow the [shared research rule](../AGENTS.md#research-specialists) before exploratory research. Verify the selected result, its conditions, and directly used calculations against focused delivered game source for the version under review.
 2. **Locate the domain code and tests.** Match each game calculation to the domain method and test that check it, or record that the implementation is missing. Ask the human if the meaning or owning domain/aspect is unclear.
-3. **Choose extraction values.** Each core or parameter comparison needs an entry in `tests/configs/`. Use the game function and arguments, or game value, used by the selected calculation. Each entry should support a comparison.
+3. **Choose extraction values.** Each game-function comparison needs an entry in `tests/configs/`. Use the original function and arguments that return the selected result. Read meaningful saved-progression expectations from the matching save. Follow [Obtain expected calculation results](#obtain-expected-calculation-results).
 4. **Obtain any new expected values.** Follow the [playbook extraction triggers](calculation-correctness/PLAYBOOK.md#extraction-when-needed). With unchanged config and usable results, continue with the existing matching save and results.
 5. **Write and run the tests.** Use the matchers below and record the actual commands and results before changing domain code.
 
-Compare the same feature state as the game's consumer. Some internal helpers return default levels or requirements for inactive content. Apply the consumer's activation checks before comparing those results with active website progression.
+Compare the same quantity and feature state on both sides. Select an original game function that returns that quantity, including any activation behavior. Do not copy a consumer's activation checks to turn another result into the expected value.
 
-For actor-specific stamp comparisons, pass the captured target player to `getStampBonusForKey`.
-Without a player, the result is an unrestricted preview and may not match the actor's bonus.
+For character-specific stamp comparisons, pass the captured character to `getStampBonusForKey`.
+Without a character, the result is an unrestricted preview and may not match that character's bonus.
 
-Research uses a website preview when every saved character has a Research level of zero or less. The preview uses zero for level, EXP, and EXP requirement. Lens, Shape, and Point expectations retain independently owned rewards; they are not comparisons with the native game. After Research starts, compare those values with native captures. Before Research starts, continue native comparisons for unaffected calculations.
+A website preview is not an expected game result. For example, before Research starts, preview Lens, Shape, and Point values do not check the game's calculations. Report that gap and continue comparisons for unaffected calculations.
 
 Keep generic comparisons independent of one save's owned classes, items, unlocks, or character and plot counts. Remove fixture-specific scenarios instead of requiring every public account to satisfy them.
 
-Prepared bonus maps can omit scalar entries whose contribution is zero. Require the owning preparation step and map, but match the original consumer's numeric conversion for sparse entries. Keep failures for genuinely invalid numbers.
-
-A helper can return zero for inactive content while the calculation uses a minimum multiplier of one.
-Compare the multiplier the calculation uses, not an unclamped helper with a clamped result.
-Compare numeric character contributions rather than nullable UI summaries.
-Keep raw helper comparisons only when both APIs return the same quantity.
+A helper's raw result and a calculation's clamped multiplier are different quantities. Select an original function that returns the multiplier instead of clamping the capture. Compare character contributions only when both APIs return the same quantity.
 Some game dispatchers return zero for unknown commands.
 Check the original function and exercise a non-zero case when one is available.
 
@@ -91,7 +86,7 @@ defaults. `--runInBand` runs in the main process without worker recycling.
 Use a genuine real save and its matching extracted game values. Result-only extraction, whether offline or live, does not establish pairing with a retained save; offline and live snapshots are not presumed equivalent. A live save refresh precedes config extraction rather than taking an atomic snapshot, so establish that results match the saved state before using them. Tests must not construct synthetic saves, alter inputs to simulate a branch, or calculate expected values from the implementation. This deliberately leaves unobserved permutations uncovered. State which meaningful behavior the paired save exercises, and raise uncovered behavior as a coverage question rather than inventing test data.
 
 Runtime balances can advance after the retained save, so compare saved progress with the genuine save rather than later captures.
-For Refinery cycle projections, first match native and saved ranks, then use native power and capacity with saved progress.
+Refinery cycle projections follow the [expected-result policy](#obtain-expected-calculation-results). Combining captured power and capacity with saved progress does not provide an original game function's result.
 
 Treat fully prepared account state as read-only in regular core and parameter tests. `loadGameDataFromSave` already runs initialization, parsing, and calculation; read its prepared public results without rerunning those steps. Do not add same-save reloads, reset/reparse cycles, or repeated-updater checks as routine calculation coverage. Dedicated lifecycle coverage requires an explicit request.
 
@@ -100,35 +95,38 @@ names, save timestamps, owned levels, unlock states, balances, or optimizer
 selections. Use the selected save's matching native captures for account-dependent
 expectations. Remove fixture-pinned cases rather than preserving them behind
 skips, state guards, or replacement assertions. Constants that define game
-mechanics or controlled unit inputs remain valid. Keep genuine extraction-health
-and comparison-context checks.
+mechanics or controlled unit inputs remain valid.
 
-Policy projections also belong to the save used to produce them.
-Do not use a regular-save projection as an oracle for a selected public account.
+Reuse the existing shared save-pairing and character checks. Do not add per-domain tests for pairing, a fixed character roster, or captured inputs matching the save. Keep domain tests focused on selected calculations and meaningful saved progression. Do not move every removed domain check into shared tests; retain only checks that serve the shared dataset contract.
+
+Compare projections only when an original game function returns the selected projection for the matching save. A locally calculated projection based on game source is not an expected game result.
 
 For opt-in public-profile validation, follow the [public-profile maintenance workflow](../tests/helpers/README.md#public-profile-maintenance).
 That guide owns account selection, import policy, commands, cache refresh, and cohort coverage.
 Routine work uses the regular save and matching results under the [game-access policy](../tests/helpers/README.md#game-access).
 
-Extraction expressions must read account-dependent operands from the selected save.
-Do not embed balances or levels from another account.
-When an extraction replays game source, check its branches against the selected runtime version.
-For example, the four normal gear replays apply the version 1.24 Menagerie multiplier to non-attribute obols.
-Keep identical embedded replays aligned when updating a shared branch. Compare their public result with the original native getter when available.
-Match inventory scope to the native consumer. Mining, Chopping, and Catching material bonuses use the chest, Refinery, and the selected character's inventory, not other characters' bags.
-For actionable prices, apply the native purchase gate.
-A raw quote can remain nonzero when purchases are blocked.
+## Obtain expected calculation results
+
+Use the unchanged result returned by an original game function as the expected calculation result for the matching real save. Read account-dependent arguments from that save. Keep exact function signatures and raw saved keys in extraction mappings, not gameplay explanations.
+
+Extraction may batch original calls for several characters, meals, or upgrades. Collect each returned result without recalculating it. Do not copy game calculations into extraction expressions, tests, or helpers. Do not combine returned numbers into an invented expected result.
+
+If no original function returns the selected result, report a coverage gap. Do not replace the missing result with a copied calculation. For meaningful saved-progression comparisons, read the expected progression directly from the matching save.
+
+Match inventory scope to the original game calculation. Mining, Chopping, and Catching material bonuses use the chest, Refinery, and the selected character's inventory, not other characters' bags.
+
+For a selected price, use the original game function that returns that price. Do not reconstruct an actionable price by copying purchase conditions or deriving buyability.
 
 Do not suppress account-specific calculation failures or change tolerances to make a public profile pass.
 Each extraction entry used here should support a core result or a direct parameter comparison. A parameter is a calculation the selected result directly uses, including one in the same domain; keep its comparison even when it also has a core test. Static/supporting metadata is not a calculation target.
 
-Write the completed test against the typed public API directly and assert the calculated result. For a missing implementation during the tests stage, keep an active test whose extractor reports the missing calculation and game function signature. This temporary failure scaffolding exposes the missing API; once implemented, remove `typeof`/`in` guards, `unknown` casts, and `.call` wrappers. A missing selected implementation can support implementation after tests-stage approval; a missing directly used result follows the [dependency procedure](calculation-correctness/PLAYBOOK.md#dependencies-and-wikibot).
+Write the completed test against the typed public API directly and assert the selected result. For a missing implementation during the tests stage, keep an active test whose extractor reports the missing calculation and game function signature. This temporary failure scaffolding exposes the missing API; once implemented, remove `typeof`/`in` guards, `unknown` casts, and `.call` wrappers. A missing selected implementation can support implementation after tests-stage approval; a missing directly used result follows the [dependency procedure](calculation-correctness/PLAYBOOK.md#dependencies-and-wikibot).
 
-Choose indices because they represent a game concept or scenario, and explain why they are selected. Descriptions should say what gameplay effect is compared and what website result would be wrong; keep obfuscated game identifiers and extraction mappings separately for traceability. Assert calculation results, not incidental save or object representation. Cover distinct behaviors and representative inputs rather than repeating aliases of the same path; a small exhaustive set is useful when the set itself is small and justified.
+Choose indices because they represent a game concept or scenario, and explain why they are selected. Descriptions should say what gameplay effect is compared and what website result would be wrong; keep obfuscated game identifiers and extraction mappings separately for traceability. Assert selected calculation results or meaningful saved progression, not incidental save or object representation. Cover distinct behaviors and representative inputs rather than repeating aliases of the same path; a small exhaustive set is useful when the set itself is small and justified.
 
 ### Positive patterns
 
-- **Core result:** compare the application's populated public result with the extracted game value for the same save. For example, the Cooking meal-speed test compares the kitchen's calculated `mealSpeed` with the matching `CookingR / CookingSPEED` extraction. Describe this as the kitchen's meal speed, not as a test of an obfuscated function name.
+- **Core result:** compare the application's populated public result with the original function's unchanged result for the same save. For example, the Cooking meal-speed test compares the kitchen's calculated `mealSpeed` with the original game's meal-speed result. Describe the gameplay effect and keep the exact call in its extraction mapping.
 - **Direct parameter:** compare a directly used calculation via its public typed method or property with its own extracted game value. The Tome Grimoire-bonus and Cooking meal-bonus examples below show separate parameter comparisons, including a same-domain parameter.
 - **Meaningful selection:** name the selected index by its gameplay role or observed state, and explain why it exercises a relevant behavior. The Tome example below checks locked and unlocked bonuses using one real saved state; it does not claim to cover every unlock transition.
 
@@ -139,7 +137,7 @@ Use these existing matchers:
 - Parameter comparisons: `toMatchLiveGame`, with configured tolerance `0`.
 - Core comparisons: `toMatchLiveGameWithDetails`, with `{ tolerance: 0, ... }` and useful calculation details.
 
-When a domain result uses a fixed conversion of the game value, convert the extraction value only when delivered game code establishes that conversion. Explain it in the config description.
+Test the underlying calculation, not a separate number-format or percentage-display conversion. Compare the same quantity on both sides. Do not change captured results to manufacture an expected value.
 
 ### Numeric comparison policy
 
@@ -174,7 +172,12 @@ Keep required comparisons active so differences outside the allowed bound still 
 
 After implementation, run the selected core and parameter tests and every test changed by the case. Record the commands and results, and report larger overrides separately. For the next stage and any new test/config needs, follow the [implementation and review workflow](calculation-correctness/PLAYBOOK.md#5-implement-and-review). For acceptance, use the [completion prerequisites](calculation-correctness/PLAYBOOK.md#6-complete-the-case).
 
-After implementation, review the actual UI values for missing assertions against the public domain results that supply them. Use this review to select domain assertions, not UI, component, or binding tests.
+After implementation, review coverage of the selected game calculations, their directly used parameter calculations, and meaningful saved progression. Use this checklist:
+
+- Does each expected result come unchanged from an original game function, or directly from the matching save for saved progression?
+- Does extraction collect results without repeating game math or combining numbers into a new expected result?
+- Does each comparison cover a meaningful calculation or progression, rather than formatting, catalog data, or simple website behavior such as affordability?
+- Do the selected characters and entries represent relevant behaviors or branches in the real save?
 
 ## Read the test results
 
@@ -231,7 +234,7 @@ These examples explain individual comparisons and coverage choices. Use the link
 
 ### Parameter test: Grimoire bonus used by Tome
 
-Tome's epilogue bonus uses Grimoire upgrade 17 in the captured [`LoreEpiBon` game code](game-snippets/tome/Thingies.1.21.js#L273-L309). Its parameter comparison is separate from the final epilogue result:
+Tome's epilogue bonus uses Grimoire upgrade 17 in the [captured game code](game-snippets/tome/Thingies.1.21.js#L273-L309). Its parameter comparison is separate from the final epilogue result:
 
 | Part | Existing example |
 | --- | --- |
@@ -241,17 +244,17 @@ Tome's epilogue bonus uses Grimoire upgrade 17 in the captured [`LoreEpiBon` gam
 
 The [config](../tests/configs/tome-epilogue-bonus.json#L60-L64) supplies the expected value. The [parameter test](../tests/domains/tome/epilogue-bonus-parameters.test.ts#L12-L19) obtains the domain value, and the table-driven runner compares them with `toMatchLiveGame(liveValue, 0)`. If this comparison fails, the Grimoire calculation needs attention before changing the Tome formula.
 
-**Same-domain example:** Cooking's meal-bonus [parameter test](../tests/domains/cooking/meal-bonus-parameters.test.ts#L69-L76) compares `cooking.meals[1].getBonusMultiCook()` with the [configured](../tests/configs/cooking-meal-bonus.json#L40-L44) `Summoning2 / BonusMultiCook` game call. In the [Cooking domain](../data/domain/world-4/cooking.tsx#L129-L149), `getBonus()` uses this Cooking Mastery multiplier. The multiplier remains a parameter even though both calculations are in Cooking. The captured [1.19 game function](game-snippets/cooking/Summoning2.1.19.js#L68) shows it is a calculated value, not static data.
+**Same-domain example:** Cooking's meal-bonus [parameter test](../tests/domains/cooking/meal-bonus-parameters.test.ts#L69-L76) compares `cooking.meals[1].getBonusMultiCook()` with the [configured game call](../tests/configs/cooking-meal-bonus.json#L40-L44). In the [Cooking domain](../data/domain/world-4/cooking.tsx#L129-L149), `getBonus()` uses this Cooking Mastery multiplier. The multiplier remains a parameter even though both calculations are in Cooking. The captured [game function](game-snippets/cooking/Summoning2.1.19.js#L68) shows it is a calculated value, not static data.
 
 ### Core test: meal speed for kitchen 0
 
-The [Cooking speed config](../tests/configs/cooking-speed.json#L5-L9) calls `CookingR / CookingSPEED` for kitchen 0. The [core test](../tests/domains/cooking/meal-speed.test.ts#L47-L71) compares that final result with `cooking.kitchens[0].mealSpeed`, which the application's calculation step has populated.
+The [Cooking speed config](../tests/configs/cooking-speed.json#L5-L9) calls the original meal-speed function for kitchen 0. The [core test](../tests/domains/cooking/meal-speed.test.ts#L47-L71) compares that final result with `cooking.kitchens[0].mealSpeed`, which the application's calculation step has populated.
 
-This checks the combined result, rather than checking each bonus as another core test. Kitchen 0 is a representative input. Its passing result would establish that comparison for the saved state, not every kitchen or branch. The captured [CookingSPEED source](game-snippets/cooking/CookingR.1.20c.js#L118-L146) helps identify other behavior that might need separate coverage.
+This checks the combined result, rather than checking each bonus as another core test. Kitchen 0 is a representative input. Its passing result would establish that comparison for the saved state, not every kitchen or branch. The captured [meal-speed source](game-snippets/cooking/CookingR.1.20c.js#L118-L146) helps identify other behavior that might need separate coverage.
 
 ### Branch: locked and unlocked Tome epilogue bonuses
 
-In the captured [`LoreEpiBon` function](game-snippets/tome/Thingies.1.21.js#L273-L309), the condition `Spelunk[13][2] > r` selects between calculating the bonus and returning zero. Here `Spelunk[13][2]` is the unlocked count and `r` is the bonus index. That condition is a branch. Selecting a different coefficient or threshold from a list with the index is not, by itself, another branch.
+The captured [Tome epilogue function](game-snippets/tome/Thingies.1.21.js#L273-L309) returns a calculated bonus for unlocked entries and zero for locked entries. That condition is a branch. Selecting a different coefficient or threshold from a list with the index is not, by itself, another branch.
 
 The [core test](../tests/domains/tome/epilogue-bonus.test.ts#L13-L38) checks all 11 indices: a small set that is reasonable to cover in full. The [recorded extraction](../tests/results/tome-epilogue-bonus-data.json) provides a concrete example with 10 unlocked bonuses: index 0 takes the calculation path, while index 10 takes the zero path. Both paths are exercised in that saved state. This does not establish every unlock transition or score threshold; use the source and current extracted values to explain which behavior a test actually checks.
 

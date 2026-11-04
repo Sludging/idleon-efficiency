@@ -138,6 +138,8 @@ Live setup is only needed for an explicitly justified live observation or reques
 
 ### Configuration Format
 
+Follow [Obtain expected calculation results](../../docs/TESTING_IMPLEMENTATION.md#obtain-expected-calculation-results) when choosing extraction values.
+
 Create JSON config files in `tests/configs/`:
 
 ```json
