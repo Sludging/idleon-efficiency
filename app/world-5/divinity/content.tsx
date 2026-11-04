@@ -206,7 +206,7 @@ function Divinity() {
         <Box>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Divinity</Heading>
             <Box gap="small">
-                <Grid columns={["max-content", "max-content", "max-content"]} gap={{ column: "medium", row: "xxsmall" }}
+                <Grid columns={["max-content", "max-content", "max-content", "max-content"]} gap={{ column: "medium", row: "xxsmall" }}
                     pad={{ vertical: "small" }} style={{ gridTemplateRows: "auto auto" }}>
                     <Box style={{ display: "grid", gridRow: "span 2", gridTemplateRows: "subgrid", alignItems: "center" }}>
                         <Text size="large">{commaNotation(divinity.godRank)}</Text>
@@ -225,6 +225,13 @@ function Divinity() {
                             <Text size="large">{notateNumber(coralKid.singularity.spiralsOwned)}</Text>
                         </Box>
                         <Text size="xsmall" color="accent-2">Singularity Spirals</Text>
+                    </Box>
+                    <Box style={{ display: "grid", gridRow: "span 2", gridTemplateRows: "subgrid", alignItems: "center" }}>
+                        <Box direction="row" gap="xsmall" align="center">
+                            <IconImage data={Skilling.getSkillImageData(SkillsIndex.Divinity)} scale={0.5} />
+                            <Text size="large">{commaNotation(coralKid.totalDivinityLevel)}</Text>
+                        </Box>
+                        <Text size="xsmall" color="accent-2">Total account Divinity level</Text>
                     </Box>
                 </Grid>
                 <ContentTabs

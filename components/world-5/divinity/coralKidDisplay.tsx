@@ -93,12 +93,13 @@ export default function CoralKidDisplay({ coralKid, players, divinityPoints }: C
     const [mode, setMode] = useState<"original" | "singularity">("original");
 
     return <Box gap="medium">
-        <TextAndLabel label="Total Divinity level" text={commaNotation(coralKid.totalDivinityLevel)} />
         <ContentTabs
             options={[{ value: "original", label: "Original" }, { value: "singularity", label: "Singularity" }]}
             value={mode}
             onChange={setMode}
         />
+        {mode === "singularity" && !coralKid.singularity.unlocked &&
+            <Text size="small" color="accent-2">Unlock Singularity in the Luminous Menagerie to access this mode.</Text>}
         {mode === "singularity" && <SingularitySummary coralKid={coralKid} />}
         {/* Flexible header tracks share one height across all card rows. */}
         <Grid columns={{ size: "medium", count: "fill" }} gap="medium" style={{ gridAutoRows: "1fr auto" }}>
@@ -106,12 +107,21 @@ export default function CoralKidDisplay({ coralKid, players, divinityPoints }: C
                 const usesDivinity = upgrade.costCurrency === "divinityPoints";
                 const cost = upgrade.getUpgradeCost();
                 const currencyOwned = usesDivinity ? divinityPoints : coralKid.singularity.spiralsOwned;
+                const levelsRemaining = Math.max(0, upgrade.data.requiredTotalDivinityLevel - coralKid.totalDivinityLevel);
+                const modeLocked = mode === "singularity" && !coralKid.singularity.unlocked;
+                const locked = modeLocked || levelsRemaining > 0;
                 return <RoundedShadowBox key={upgrade.index} background="dark-1" pad="none" overflow="hidden"
-                    style={{ opacity: mode === "singularity" && !coralKid.singularity.unlocked ? 0.5 : 1, minWidth: 0,
-                        gridRow: "span 2", display: "grid", gridTemplateRows: "subgrid", rowGap: 0 }}>
-                    <GreyCardHeader background="grey-1" pad={{ horizontal: "medium", vertical: "small" }} gap="xsmall">
+                    style={{
+                        opacity: locked ? 0.5 : 1, minWidth: 0,
+                        gridRow: "span 2", display: "grid", gridTemplateRows: "subgrid", rowGap: 0
+                    }}>
+                    <GreyCardHeader background="grey-1" pad={{ horizontal: "medium", vertical: "small" }} gap="xsmall" justify="between">
                         <Text size="small" weight="bold">{effectText(upgrade)}</Text>
-                        <Text size="xsmall" color="accent-2">Level {commaNotation(upgrade.level)}</Text>
+                        <Text size="xsmall" color="accent-2">
+                            {levelsRemaining > 0
+                                ? `${commaNotation(levelsRemaining)} more Divinity levels to unlock · Requires ${commaNotation(upgrade.data.requiredTotalDivinityLevel)} total`
+                                : modeLocked ? "Requires Menagerie Singularity unlock" : `Level ${commaNotation(upgrade.level)}`}
+                        </Text>
                     </GreyCardHeader>
                     <Box pad="medium" gap="small">
                         <Box direction="row" gap="xsmall" align="center" wrap background="dark-3" pad="small" round="xsmall">
@@ -126,7 +136,7 @@ export default function CoralKidDisplay({ coralKid, players, divinityPoints }: C
                         </TipDisplay>}
                         <ComponentAndLabel label="Next level cost" component={<ResourceDisplay
                             cost={cost}
-                            canAfford={currencyOwned >= cost}
+                            canAfford={!locked && currencyOwned >= cost}
                             resourceImageData={usesDivinity ? Skilling.getSkillImageData(SkillsIndex.Divinity) : Item.getImageData(upgrade.costCurrency)}
                             resourceImageScale={0.5}
                             textSize="small"
