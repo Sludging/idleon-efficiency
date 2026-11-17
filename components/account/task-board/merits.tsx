@@ -1,28 +1,27 @@
 import { Box, Grid, Text } from "grommet";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { TaskBoard } from "../../../data/domain/tasks";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel from "../../base/TextAndLabel";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
+import useHydrated from "../../../lib/hooks/useHydrated";
 
 function Merits({ worldIndex }: { worldIndex: number }) {
-    const [taskboardData, setTaskboardData] = useState<TaskBoard>();
-    const { theData } = useAppDataStore(useShallow(
+    const { theData, lastUpdated } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
+    const hydrated = useHydrated();
+    const taskboardData: TaskBoard | undefined = hydrated ? theData.get("taskboard") : undefined;
 
     const meritsToShow = useMemo(() => {
         if (taskboardData) {
             return taskboardData.merits.filter(merit => merit.world == worldIndex + 1 && merit.icon != "Blank");
         }
         return [];
-    }, [taskboardData, worldIndex])
+    }, [taskboardData, worldIndex, lastUpdated])
 
-    useEffect(() => {
-        setTaskboardData(theData.get("taskboard"));
-    }, [theData])
 
     return (
         <Grid columns={{ count: 3, size: 'auto' }} pad="small" gap="small">

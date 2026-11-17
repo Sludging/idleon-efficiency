@@ -7,7 +7,7 @@ import {
     Text,
 } from "grommet"
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ShadowBox from "../../../components/base/ShadowBox";
 import { Player } from "../../../data/domain/player";
 import LeftNavButton from "../../../components/base/LeftNavButton";
@@ -19,12 +19,14 @@ import { ItemStat } from "../../../data/domain/items";
 import IconImage from "../../../components/base/IconImage";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
+import useHydrated from "../../../lib/hooks/useHydrated";
 
 function ObolInventory() {
-    const [obolsData, setObolsData] = useState<ObolsData>();
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
+    const hydrated = useHydrated();
+    const obolsData: ObolsData | undefined = hydrated ? theData.get("obols") : undefined;
 
     const statsDisplay = (stats: ItemStat[], description: string) => {
         if (description) {
@@ -38,9 +40,6 @@ function ObolInventory() {
         }
     }
 
-    useEffect(() => {
-        setObolsData(theData.get("obols"));
-    }, [theData])
 
     if (!obolsData || obolsData.playerObols.length == 0) {
         return (
@@ -93,17 +92,15 @@ function ObolInventory() {
 }
 
 function Obols() {
-    const [playerData, setPlayerData] = useState<Player[]>();
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
+    const hydrated = useHydrated();
+    const playerData: Player[] | undefined = hydrated ? theData.get("players") : undefined;
 
     const [index, setIndex] = useState<number>(-1);
     const onActive = (nextIndex: number) => setIndex(nextIndex);
 
-    useEffect(() => {
-        setPlayerData(theData.get("players"));
-    }, [theData])
     return (
         <Box>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Obols</Heading>

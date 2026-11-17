@@ -13,7 +13,7 @@ import {
     TableCell,
     TableBody
 } from 'grommet'
-import React, { useEffect, useContext, useState, useMemo } from 'react';
+import React, { useContext, useState, useMemo } from 'react';
 
 import ShadowBox from '../../../components/base/ShadowBox';
 import DataRow from '../../../components/base/DataRow';
@@ -453,10 +453,10 @@ function PrinterDisplay() {
 }
 
 function DeathnoteDisplay() {
-    const [deathnoteData, setDeathnoteData] = useState<Deathnote>();
-    const { theData } = useAppDataStore(useShallow(
+    const { theData, lastUpdated } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
+    const deathnoteData = theData.get("deathnote") as Deathnote;
     const size = useContext(ResponsiveContext);
 
     const deathNoteByWorld = useMemo(() => {
@@ -466,7 +466,7 @@ function DeathnoteDisplay() {
         }
 
         return deathnoteData.getKillsMap();
-    }, [theData, deathnoteData])
+    }, [theData, deathnoteData, lastUpdated])
 
     const worldTierInfo = useMemo(() => {
         const toReturn: number[] = [];
@@ -479,11 +479,7 @@ function DeathnoteDisplay() {
             toReturn.push(worldRankSum);
         })
         return toReturn;
-    }, [theData, deathNoteByWorld, deathnoteData])
-
-    useEffect(() => {
-        setDeathnoteData(theData.get("deathnote"));
-    }, [theData]);
+    }, [theData, deathNoteByWorld, deathnoteData, lastUpdated])
 
     if (!deathnoteData) {
         return (

@@ -67,19 +67,7 @@ function CarryCapacitySummary() {
     );
 }
 
-function StampDisplay({ stamp, index, highlight, storageAmount = 0 }: { stamp: Stamp, index: number, highlight: boolean, storageAmount?: number }) {
-    const size = useContext(ResponsiveContext)
-    const { theData } = useAppDataStore(useShallow(
-        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
-    ));
-
-    const allItems = theData.get("itemsData") as Item[];
-    const stampItem = allItems.find(item => item.internalName == stamp.raw_name);
-    const compass = theData.get("compass") as Compass;
-    const isExalted = compass.exaltedStampNames.has(stamp.raw_name);
-    const theme = useContext(ThemeContext);
-
-    function TipContent({ stamp }: { stamp: Stamp }) {
+function TipContent({ stamp, stampItem, storageAmount }: { stamp: Stamp, stampItem: Item | undefined, storageAmount: number }) {
         if (stamp.level == 0) {
             if (stampItem && stampItem.sources.sources && stampItem.sources.sources.length > 0) {
                 return <Box>
@@ -183,7 +171,20 @@ function StampDisplay({ stamp, index, highlight, storageAmount = 0 }: { stamp: S
                 }
             </Box>
         )
-    }
+}
+
+function StampDisplay({ stamp, index, highlight, storageAmount = 0 }: { stamp: Stamp, index: number, highlight: boolean, storageAmount?: number }) {
+    const size = useContext(ResponsiveContext)
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
+
+    const allItems = theData.get("itemsData") as Item[];
+    const stampItem = allItems.find(item => item.internalName == stamp.raw_name);
+    const compass = theData.get("compass") as Compass;
+    const isExalted = compass.exaltedStampNames.has(stamp.raw_name);
+    const theme = useContext(ThemeContext);
+
 
     function highlightColor() {
         if (!highlight) {
@@ -202,7 +203,7 @@ function StampDisplay({ stamp, index, highlight, storageAmount = 0 }: { stamp: S
             style={{ backgroundColor: highlightColor() }}>
             <TipDisplay
                 body={
-                    <TipContent stamp={stamp} />
+                    <TipContent stamp={stamp} stampItem={stampItem} storageAmount={storageAmount} />
                 }
                 heading={`${stamp.name} (${stamp.level}/${stamp.maxLevel})`}
                 direction={Number(/Stamp[ABC](\d+)/g.exec(stamp.raw_name)?.[1]) > 28 ? TipDirection.Up : TipDirection.Down}

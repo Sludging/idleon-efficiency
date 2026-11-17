@@ -5,7 +5,7 @@ import {
     Heading,
     Text,
 } from 'grommet'
-import { useEffect, useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import styled from 'styled-components';
 
 import ShadowBox from '../../../components/base/ShadowBox';
@@ -20,6 +20,7 @@ import { TimeDisplaySize, TimeDown } from '../../../components/base/TimeDisplay'
 import IconImage from '../../../components/base/IconImage';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
+import useHydrated from '../../../lib/hooks/useHydrated';
 
 const CompactCoins = styled(Box)`
     span {
@@ -45,24 +46,21 @@ function ForgeItem({ item }: { item: Item }) {
 }
 
 function Forge() {
-    const [forge, setForge] = useState<ForgeDomain | undefined>(undefined);
+    const hydrated = useHydrated();
     const [activeTab, setActiveTab] = useState<string>("Slots");
-    const { theData } = useAppDataStore(useShallow(
+    const { theData, lastUpdated } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
+    const forge = hydrated ? theData.get("forge") as ForgeDomain : undefined;
 
     const firstSlotToEmpty = useMemo(() => {
         const forgeSpeed = forge?.upgrades[2].getStat() ?? 0;
         return [...(forge?.slots ?? [])].sort((slot1, slot2) => slot1.getTimeTillEmpty(forgeSpeed) < slot2.getTimeTillEmpty(forgeSpeed) ? -1 : 1)[0];
-    }, [theData, forge])
+    }, [theData, forge, lastUpdated])
 
     const totalCost = useMemo(() => {
         return forge?.upgrades.reduce((sum, upgrade) => sum += upgrade.getMaxCost(), 0) ?? 0;
-    }, [theData, forge])
-
-    useEffect(() => {
-        setForge(theData.get("forge"));
-    }, [theData]);
+    }, [theData, forge, lastUpdated])
 
     return (
         <Box>

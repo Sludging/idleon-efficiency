@@ -9,7 +9,7 @@ import {
     Text,
 } from 'grommet'
 import { CircleInformation, FormNext, Lock } from 'grommet-icons';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import IconImage from '../../../components/base/IconImage';
 import ShadowBox, { ShadowHoverBox } from '../../../components/base/ShadowBox';
 
@@ -39,14 +39,11 @@ background-color: black;
 `
 
 function ShipsDisplay({ silkRodeChip, starSignEquipped }: { silkRodeChip: boolean, starSignEquipped: boolean }) {
-    const [sailing, setSailing] = useState<SailingDomain>();
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
 
-    useEffect(() => {
-        setSailing(theData.get("sailing"));
-    }, [theData]);
+    const sailing = theData.get("sailing") as SailingDomain;
 
     if (!sailing) {
         return null;
@@ -148,14 +145,11 @@ function ShipsDisplay({ silkRodeChip, starSignEquipped }: { silkRodeChip: boolea
 };
 
 function CaptainsDisplay() {
-    const [sailing, setSailing] = useState<SailingDomain>();
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
 
-    useEffect(() => {
-        setSailing(theData.get("sailing"));
-    }, [theData]);
+    const sailing = theData.get("sailing") as SailingDomain;
 
     if (!sailing) {
         return null;
@@ -218,17 +212,13 @@ function CaptainsDisplay() {
 };
 
 function ArtifactDisplay() {
-    const [sailing, setSailing] = useState<SailingDomain>();
     const [hideUnobtained, setHideUnobtained] = useState(false);
-    const { theData } = useAppDataStore(useShallow(
+    const { theData, lastUpdated } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
+    const sailing = theData.get("sailing") as SailingDomain;
 
     const size = useContext(ResponsiveContext);
-
-    useEffect(() => {
-        setSailing(theData.get("sailing"));
-    }, [theData]);
 
     const artifactsToShow = useMemo(() => {
         if (!sailing) {
@@ -240,7 +230,7 @@ function ArtifactDisplay() {
         }
 
         return sailing.artifacts;
-    }, [sailing, hideUnobtained])
+    }, [sailing, hideUnobtained, lastUpdated])
 
     if (!sailing) {
         return null;
@@ -347,14 +337,11 @@ function ArtifactDisplay() {
 }
 
 function OverviewDisplay({ silkRodeChip, starSignEquipped }: { silkRodeChip: boolean, starSignEquipped: boolean }) {
-    const [sailing, setSailing] = useState<SailingDomain>();
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
 
-    useEffect(() => {
-        setSailing(theData.get("sailing"));
-    }, [theData]);
+    const sailing = theData.get("sailing") as SailingDomain;
 
     if (!sailing) {
         return null;
@@ -448,14 +435,11 @@ function OverviewDisplay({ silkRodeChip, starSignEquipped }: { silkRodeChip: boo
 }
 
 function IslandDisplay() {
-    const [sailing, setSailing] = useState<SailingDomain>();
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
 
-    useEffect(() => {
-        setSailing(theData.get("sailing"));
-    }, [theData]);
+    const sailing = theData.get("sailing") as SailingDomain;
 
     if (!sailing) {
         return null;
@@ -539,7 +523,7 @@ function Sailing() {
     const starSignInfinity = sailing?.starSignInfinity ?? false;
     const isStarSignActive = starSignInfinity || starSignEquipped;
 
-    if (!sailing) {
+    if (!hydrated || !sailing) {
         return <Box>Loading</Box>
     }
     return (

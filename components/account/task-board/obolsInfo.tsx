@@ -1,5 +1,5 @@
 import { Box, Text } from "grommet";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { ItemStat } from "../../../data/domain/items";
 import { ObolsData, ObolType } from "../../../data/domain/world-2/obols";
 import IconImage from "../../base/IconImage";
@@ -7,12 +7,14 @@ import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 import TipDisplay, { TipDirection } from "../../base/TipDisplay";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
+import useHydrated from "../../../lib/hooks/useHydrated";
 
 function ObolsInfo({ playerIndex, title, level }: { playerIndex: number, title: string, level: number }) {
-    const [obolsData, setObolsData] = useState<ObolsData>();
-    const { theData } = useAppDataStore(useShallow(
+    const { theData, lastUpdated } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
+    const hydrated = useHydrated();
+    const obolsData: ObolsData | undefined = hydrated ? theData.get("obols") : undefined;
 
 
     const statsDisplay = (stats: ItemStat[], description: string) => {
@@ -84,11 +86,8 @@ function ObolsInfo({ playerIndex, title, level }: { playerIndex: number, title: 
         catch {
             return undefined;
         }
-    }, [playerIndex, obolsData]);
+    }, [playerIndex, obolsData, lastUpdated]);
 
-    useEffect(() => {
-        setObolsData(theData.get("obols"));
-    }, [theData])
 
     if (!obolsData || obolsData.playerObols.length == 0) {
         return (

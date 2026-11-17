@@ -3,7 +3,7 @@ import {
     Grid,
     Text,
 } from 'grommet'
-import { useState, useMemo, useEffect } from "react";
+import { useMemo } from "react";
 import { Breeding as BreedingDomain, petArenaBonuses, waveReqs } from "../../../data/domain/world-4/breeding";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
@@ -16,20 +16,15 @@ import { useShallow } from 'zustand/react/shallow';
 import { TalentConst } from '../../../data/domain/talents';
 
 export const ArenaBonusDisplay = () => {
-    const [breeding, setBreeding] = useState<BreedingDomain>();
-    const [playerData, setPlayerData] = useState<Player[]>();
-    const { theData } = useAppDataStore(useShallow(
+    const { theData, lastUpdated } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
+    const breeding = theData.get("breeding") as BreedingDomain;
+    const playerData = theData.get("players") as Player[];
 
     const beastMasters = useMemo(() => {
         return playerData?.filter(player => (player.classId == ClassIndex.Beast_Master)) ?? [];
-    }, [playerData])
-
-    useEffect(() => {
-        setBreeding(theData.get("breeding"));
-        setPlayerData(theData.get("players"));
-    }, [theData]);
+    }, [playerData, lastUpdated])
 
     if (!breeding) {
         return (
