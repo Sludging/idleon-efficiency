@@ -3,7 +3,7 @@ import TipDisplay, { TipDirection } from "../../base/TipDisplay";
 import { Crop, Plot, PlotGrowthStage, Farming, CropQuantity } from "../../../data/domain/world-6/farming";
 import IconImage from "../../base/IconImage";
 import { nFormatter } from "../../../data/utility";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { ComponentAndLabel } from "../../base/TextAndLabel";
 import ShadowBox from "../../base/ShadowBox";
 import { Lock, Star } from 'grommet-icons';
@@ -79,13 +79,13 @@ const CropToCollectDisplay = ({ cropsToCollect}: { cropsToCollect: CropQuantity[
 }
 
 const PlotDisplay = ({ farmingPlot, cropDepot, canOvergrow, canLevelLandRank, silkRodeChip, starSignEvoEquipped, starSignOGEquipped }: { farmingPlot: Plot, cropDepot: Crop[], canOvergrow: boolean, canLevelLandRank: boolean, silkRodeChip: boolean, starSignEvoEquipped: boolean, starSignOGEquipped: boolean }) => {
-    const [readyToCollect, setReadyToCollect] = useState<boolean>(farmingPlot.readyToCollect);
-    const [completedOGcycles, setCompletedOGCycles] = useState<number>(farmingPlot.overgrowthCycleCompletedSinceLastLoggin);
-
-    useEffect(() => {
-        setReadyToCollect(farmingPlot.readyToCollect);
-        setCompletedOGCycles(farmingPlot.overgrowthCycleCompletedSinceLastLoggin);
-    }, [farmingPlot])
+    const [timerState, setTimerState] = useState<{ source: Plot, readyToCollect: boolean, completedOGcycles: number }>({
+        source: farmingPlot,
+        readyToCollect: farmingPlot.readyToCollect,
+        completedOGcycles: farmingPlot.overgrowthCycleCompletedSinceLastLoggin,
+    });
+    const readyToCollect = timerState.source === farmingPlot ? timerState.readyToCollect : farmingPlot.readyToCollect;
+    const completedOGcycles = timerState.source === farmingPlot ? timerState.completedOGcycles : farmingPlot.overgrowthCycleCompletedSinceLastLoggin;
 
     const plot = farmingPlot;
     const plotCanOvergrow = readyToCollect && canOvergrow;
@@ -198,7 +198,11 @@ const PlotDisplay = ({ farmingPlot, cropDepot, canOvergrow, canLevelLandRank, si
                             size={TimeDisplaySize.XSmall}
                             callBack={
                                 () => {
-                                    setReadyToCollect(true);
+                                    setTimerState(current => ({
+                                        source: farmingPlot,
+                                        readyToCollect: true,
+                                        completedOGcycles: current.source === farmingPlot ? current.completedOGcycles : farmingPlot.overgrowthCycleCompletedSinceLastLoggin,
+                                    }));
                                 }
                             }
                         />
@@ -223,7 +227,13 @@ const PlotDisplay = ({ farmingPlot, cropDepot, canOvergrow, canLevelLandRank, si
                             resetToSeconds={plot.seed.getFullCycleGrowthTime() / plot.growthRate} 
                             size={TimeDisplaySize.XSmall}
                             callBack={
-                                () => { setCompletedOGCycles(plot.overgrowthCycleCompletedSinceLastLoggin+1); }
+                                () => {
+                                    setTimerState(current => ({
+                                        source: farmingPlot,
+                                        readyToCollect: current.source === farmingPlot ? current.readyToCollect : farmingPlot.readyToCollect,
+                                        completedOGcycles: plot.overgrowthCycleCompletedSinceLastLoggin+1,
+                                    }));
+                                }
                             }
                         />
                     }

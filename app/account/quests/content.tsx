@@ -8,7 +8,7 @@ import {
     ResponsiveContext,
 } from "grommet"
 
-import { useEffect, useState, useContext, useMemo } from 'react';
+import { useState, useContext, useMemo } from 'react';
 import ShadowBox from "../../../components/base/ShadowBox";
 import ContentTabs from "../../../components/base/ContentTabs";
 import LeftNavButton from "../../../components/base/LeftNavButton";
@@ -22,6 +22,7 @@ import { QuestTypeEnum } from "../../../data/domain/enum/questTypeEnum";
 import { CharacterBox } from "../../../components/base/CharacterBox";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
+import useHydrated from "../../../lib/hooks/useHydrated";
 
 enum CharacterBoxStatus {
     Complete,
@@ -153,14 +154,15 @@ function NPCQuests({ npc, playerInfo, playerQuestData }: { npc: NPC, playerInfo:
 }
 
 function Quests() {
-    const [playerData, setPlayerData] = useState<Player[]>();
-    const [questsData, setQuestData] = useState<QuestInfo>();
     const [index, setIndex] = useState<number>(1);
     const [activeWorld, setActiveWorld] = useState<string>("Blunder Hills");
     const onActive = (nextIndex: number) => setIndex(nextIndex);
-    const { theData } = useAppDataStore(useShallow(
+    const { theData, lastUpdated } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
+    const hydrated = useHydrated();
+    const playerData: Player[] | undefined = hydrated ? theData.get("players") : undefined;
+    const questsData: QuestInfo | undefined = hydrated ? theData.get("quests") : undefined;
     const size = useContext(ResponsiveContext)
 
     const npcsToShow = useMemo(() => {
@@ -182,12 +184,8 @@ function Quests() {
         }
 
         return filtered.sort(([name1], [name2]) => name1 > name2 ? 1 : -1);
-    }, [questsData, activeWorld]);
+    }, [questsData, activeWorld, lastUpdated]);
 
-    useEffect(() => {
-        setPlayerData(theData.get("players"));
-        setQuestData(theData.get("quests"));
-    }, [theData])
     return (
         <Box>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Quests</Heading>

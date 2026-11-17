@@ -2,7 +2,7 @@ import {
     Box,
     Text,
 } from 'grommet'
-import { useState, useMemo, useEffect } from "react";
+import { useMemo } from "react";
 import { Breeding as BreedingDomain } from "../../../data/domain/world-4/breeding";
 import { nFormatter } from "../../../data/utility";
 import IconImage from "../../base/IconImage";
@@ -12,10 +12,10 @@ import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
 
 export const PetUpgradeDisplay = () => {
-    const [breeding, setBreeding] = useState<BreedingDomain>();
-    const { theData } = useAppDataStore(useShallow(
+    const { theData, lastUpdated } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
+    const breeding = theData.get("breeding") as BreedingDomain;
 
     const upgradeCosts = useMemo(() => {
         const cooking = theData.get("cooking") as Cooking;
@@ -43,11 +43,7 @@ export const PetUpgradeDisplay = () => {
             });
         }
         return [];
-    }, [theData, breeding])
-
-    useEffect(() => {
-        setBreeding(theData.get("breeding"));
-    }, [theData]);
+    }, [theData, breeding, lastUpdated])
 
     if (!breeding) {
         return (

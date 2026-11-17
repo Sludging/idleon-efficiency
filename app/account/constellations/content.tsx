@@ -8,7 +8,7 @@ import {
     ResponsiveContext
 } from "grommet"
 
-import { useEffect, useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import ShadowBox from "../../../components/base/ShadowBox";
 import { Player } from "../../../data/domain/player";
 import IconImage from "../../../components/base/IconImage";
@@ -19,6 +19,7 @@ import { Document, Fireball, Map } from "grommet-icons";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
 import ContentTabs, { ContentTabOption } from "../../../components/base/ContentTabs";
+import useHydrated from "../../../lib/hooks/useHydrated";
 
 type ConstellationWorld = 'A' | 'B' | 'C' | 'D' | 'E' | 'G';
 
@@ -32,20 +33,17 @@ const worldOptions: readonly ContentTabOption<ConstellationWorld>[] = [
 ];
 
 function Constellations() {
-    const [playerData, setPlayerData] = useState<Player[]>();
-    const [constellations, setConstellations] = useState<Constellation[]>();
     const [selectedWorld, setSelectedWorld] = useState<ConstellationWorld>('A');
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
+    const hydrated = useHydrated();
+    const playerData: Player[] | undefined = hydrated ? theData.get("players") : undefined;
+    const constellations: Constellation[] | undefined = hydrated ? theData.get("constellations") : undefined;
 
     const size = useContext(ResponsiveContext)
 
 
-    useEffect(() => {
-        setPlayerData(theData.get("players"));
-        setConstellations(theData.get("constellations"));
-    }, [theData])
     return (
         <Box>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Constellations</Heading>
