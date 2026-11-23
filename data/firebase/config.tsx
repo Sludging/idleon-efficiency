@@ -1,12 +1,14 @@
-import { initializeApp } from 'firebase/app';
+import { FirebaseOptions, getApp, getApps, initializeApp } from 'firebase/app';
 
-//2. Initialize app with the config vars
-const app = initializeApp({
+export const firebaseConfig: FirebaseOptions = {
     apiKey: "AIzaSyAU62kOE6xhSrFqoXQPv6_WHxYilmoUxDk",
     authDomain: "idlemmo.firebaseapp.com",
     databaseURL: "idlemmo.firebaseio.com",
     projectId: "idlemmo",
-});
+};
 
-//3. export it for use
+const app = getApps().some((existingApp) => existingApp.name === '[DEFAULT]')
+    ? getApp()
+    : initializeApp(firebaseConfig);
+
 export default app;

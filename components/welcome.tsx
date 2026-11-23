@@ -5,108 +5,31 @@ import {
     Text,
     Anchor,
     Grid,
-    TextInput,
-    Button,
-    Layer,
-    FormField,
     ResponsiveContext,
 } from 'grommet'
-import styled from 'styled-components'
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { AuthStatus } from '../data/firebase/authContext'
 import ShadowBox from './base/ShadowBox';
-import GoogleLogin from './login/googleLogin';
 import { useAuthStore } from '../lib/providers/authStoreProvider';
 import { DataStatus } from '../lib/stores/appDataStore';
 import { useAppDataStore } from '../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow'
 import IconImage from './base/IconImage';
-import SteamLogin from './login/steamLogin';
-
-const VerticalLine = styled.hr`
-    border: 0;
-    margin: 0;
-    border-left: 1px solid #30333A;
-    height: 100%; 
-    float: left;
-`
+import LoginForm from './login/loginForm';
 
 export default function Welcome() {
-    const { user, authStatus, emailLogin, appleLogin, errorCode } = useAuthStore(
+    const { user, authStatus } = useAuthStore(
         useShallow((state) => ({
             user: state.user,
             authStatus: state.authStatus,
-            emailLogin: state.emailLogin,
-            appleLogin: state.appleLogin,
-            errorCode: state.errorCode,
         })),
     )
-    const { profile, dataStatus, setDataStatus } = useAppDataStore(
-        useShallow((state) => ({ profile: state.profile, dataStatus: state.dataStatus, setDataStatus: state.setDataStatus }))
+    const { profile, dataStatus } = useAppDataStore(
+        useShallow((state) => ({ profile: state.profile, dataStatus: state.dataStatus }))
     )
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [showLayer, setShowLayer] = useState(false);
-    const [layerType, setLayerType] = useState<'google' | 'steam'>('google');
-    const [error, setError] = useState<string>('');
 
     const size = useContext(ResponsiveContext);
-
     const isLoading = authStatus == AuthStatus.Loading;
-
-    const googleLayer = () => {
-        setLayerType('google');
-        setShowLayer(true);
-    }
-
-    const steamLayer = () => {
-        setLayerType('steam');
-        setShowLayer(true);
-    }
-
-    const onButtonClick = async (toCall: Function | undefined, value?: string, value2?: string) => {
-        try {
-            if (toCall) {
-                if (value2) {
-                    await toCall(value, value2);
-                }
-                else if (value) {
-                    await toCall(value);
-                }
-                else {
-                    await toCall();
-                }
-            }
-        }
-        catch (e: any) {
-            console.log("Unexpected error: ", e);
-        }
-        finally {
-            if (errorCode) {
-                handleError(errorCode);
-            }
-            setShowLayer(false);
-        }
-    }
-
-    const handleError = (code: string) => {
-        switch (code) {
-            case "auth/invalid-credential":
-                setError("The inputed token is invalid, please try again.");
-                break;
-            case "auth/invalid-email":
-                setError("Invalid username and email, please try again.");
-                break;
-            case "auth/user-not-found":
-                setError("User not found.");
-                setDataStatus(DataStatus.MissingData);
-                break;
-            default:
-                setError("Something went wrong, please try again.");
-                console.error(code);
-                break;
-        }
-    }
 
     return (
         <Box>
@@ -122,50 +45,7 @@ export default function Welcome() {
                 </Box>
                 <Box width={{ max: '1440px' }} pad="large" fill margin={{ left: 'auto', right: 'auto' }} style={{ position: 'relative', top: '150px' }} >
                     {!isLoading && !user && dataStatus != DataStatus.StaticData &&
-                        <ShadowBox pad="large" background="dark-2" fill margin={{ left: 'auto', right: 'auto' }} flex={false}>
-                            <Box>
-                                <Grid columns={size == "small" ? ["100%"] : ["45%", "10%", "45%"]} pad={{ left: "large" }}>
-                                    <Box gap="medium" alignSelf="center" pad={{ left: 'medium', right: 'medium', bottom: size == "small" ? 'xlarge' : undefined }} border={size == "small" ? { size: '2px', color: 'grey-1', side: 'bottom' } : undefined}>
-                                        <Text size="24px">Sign in with social</Text>
-                                        <Text size="xsmall">Use this if you signed into Legends of Idleon using Google or Apple</Text>
-                                        <Button style={{ color: "white" }} primary color="accent-1" label="Google Login" onClick={googleLayer} />
-                                        <Button style={{ color: "white" }} primary color="brand" label="Apple Login" onClick={() => onButtonClick(appleLogin)} />
-                                        <Button style={{ color: "white" }} primary color="accent-3" label="Steam Login" onClick={steamLayer} />
-                                    </Box>
-                                    {size != "small" && <Box align="center">
-                                        <VerticalLine />
-                                        <Box margin={{ bottom: 'medium', top: 'small' }} align="center">
-                                            <Text>Or</Text>
-                                        </Box>
-                                        <VerticalLine />
-                                    </Box>
-                                    }
-                                    <Box gap="small" pad={{ left: 'large', right: 'large', top: size == "small" ? 'medium' : undefined }}>
-                                        <Text size="24px">Sign in with email</Text>
-                                        <Text size="xsmall">Use this if you signed into Legends of Idleon using email</Text>
-                                        <TextInput
-                                            placeholder="Enter Email"
-                                            value={email}
-                                            onChange={event => setEmail(event.target.value)}
-                                        />
-                                        <TextInput
-                                            placeholder="Enter Password"
-                                            value={password}
-                                            type='password'
-                                            onChange={event => setPassword(event.target.value)}
-                                        />
-                                        <Button primary color="brand" label="Login" onClick={() => onButtonClick(emailLogin, email, password)} />
-
-                                    </Box>
-                                </Grid>
-                                {
-                                    error != '' &&
-                                    <Box pad={{ top: "medium" }} align="center">
-                                        <FormField error={<Text color="accent-1">{error}</Text>} />
-                                    </Box>
-                                }
-                            </Box>
-                        </ShadowBox>
+                        <LoginForm />
                     }
                     {
                         dataStatus == DataStatus.StaticData &&
@@ -186,17 +66,6 @@ export default function Welcome() {
             </Box>
             <Box height="300px"></Box>
             <Box>
-                {showLayer &&
-                    <Layer
-                        onEsc={() => setShowLayer(false)}
-                        onClickOutside={() => setShowLayer(false)}
-                        modal={true}
-                        position="center"
-                    >
-                        {layerType == 'google' && <GoogleLogin /> }
-                        {layerType == 'steam' && <SteamLogin />}
-                    </Layer>
-                }
                 <Box width={{ max: '1440px' }} align="center" pad="small" fill margin={{ left: 'auto', right: 'auto' }}>
                     <Text size={size == "small" ? "26px" : "38px"}>Awesome Features</Text>
                 </Box>

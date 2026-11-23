@@ -2,6 +2,7 @@ import { SkillsIndex } from "./SkillsIndex";
 import { Alchemy } from "./world-2/alchemy/alchemy";
 import { Arcade } from "./world-2/arcade";
 import { Domain, RawData } from "./base/domain";
+import { readScopedCompanions } from "../firebase/accounts";
 import { CompanionBase, initCompanionRepo } from "./data/CompanionRepo";
 import { Divinity } from "./world-5/divinity";
 import { EnemyInfo } from "./enemies";
@@ -75,7 +76,7 @@ export class Companions extends Domain {
         const companions = data.get(this.getDataKey()) as Companion[];
         const ownedCompanions = mergeCompanionStates(data.get("ownedCompanions") as CompanionState[]);
 
-        const localCompanions = localStorage.getItem("companions");
+        const localCompanions = readScopedCompanions();
         const editedCompanions: Companion[] = [];
         if (localCompanions) {
             editedCompanions.push(...JSON.parse(localCompanions) as Companion[]);

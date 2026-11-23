@@ -5,16 +5,31 @@ import { useAuthStore } from "../../lib/providers/authStoreProvider";
 import { useShallow } from "zustand/react/shallow";
 import { useState } from "react";
 
+type SteamLoginProps = {
+    addAccount?: boolean;
+    onSuccess?: () => void;
+};
 
-export default function SteamLogin() {
+export default function SteamLogin({ addAccount = false, onSuccess }: SteamLoginProps) {
     const FIXED_STEAM_URL = "https://steamcommunity.com/openid/login?openid.ns=http://specs.openid.net/auth/2.0&openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select&openid.identity=http://specs.openid.net/auth/2.0/identifier_select&openid.return_to=https://www.legendsofidleon.com/steamsso/&openid.realm=https://www.legendsofidleon.com/steamsso/&openid.mode=checkid_setup"
     const [redirectUrl, setRedirectUrl] = useState<string>("");
+    const [error, setError] = useState<string>("");
 
     const { uglySteamLogin } = useAuthStore(useShallow(
         (state) => ({
             uglySteamLogin: state.uglySteamLogin,
         })
     ))
+
+    const onLoginClick = async () => {
+        setError("");
+        const ok = await uglySteamLogin(redirectUrl, { addAccount });
+        if (ok) {
+            onSuccess?.();
+        } else {
+            setError("Could not sign in with that Steam URL. Please check the URL and try again.");
+        }
+    }
 
     return (
         <ShadowBox background="dark-1" pad="large" gap="medium" width="500px">
@@ -45,12 +60,13 @@ export default function SteamLogin() {
                         value={redirectUrl}
                         onChange={event => setRedirectUrl(event.target.value)}
                     />
-                    <Button primary color="brand" label="Login" onClick={() => uglySteamLogin(redirectUrl)} />
+                    <Button primary color="brand" label="Login" onClick={onLoginClick} />
+                    {error && <Text size="xsmall" color="accent-1">{error}</Text>}
                 </Box>
             </Box>
             <Box pad={{ top: 'small' }}>
                 <Box background='grey-1' pad='medium' round='xsmall'>
-                    <Text size="xsmall">Tip: If you see "Unknown Error Occurred," ignore it. Just copy the URL and return here.</Text>
+                    <Text size="xsmall">Tip: If you see &quot;Unknown Error Occurred,&quot; ignore it. Just copy the URL and return here.</Text>
                 </Box>
             </Box>
         </ShadowBox>
