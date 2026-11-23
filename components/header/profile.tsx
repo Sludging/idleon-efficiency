@@ -14,6 +14,12 @@ import TextAndLabel from '../base/TextAndLabel';
 import { UserCircleIcon } from '@phosphor-icons/react/dist/csr/UserCircle';
 import LoginForm from '../login/loginForm';
 
+const fullWidthLinkStyle = {
+    width: '100%',
+    display: 'block',
+    textDecoration: 'none',
+} as const;
+
 export const Profile = () => {
     const {
         authStatus,
@@ -81,16 +87,7 @@ export const Profile = () => {
 
     if (authStatus == AuthStatus.Valid) {
         return (
-            <Box direction="row" gap="small" align="center">
-                {activeAccountLabel && (
-                    <TextAndLabel
-                        textColor="accent-2"
-                        textSize="xsmall"
-                        labelSize="xsmall"
-                        label="Account"
-                        text={activeAccountLabel}
-                    />
-                )}
+            <Box direction="row">
                 <DropButton
                     plain={true}
                     label={
@@ -117,113 +114,136 @@ export const Profile = () => {
                     }}
                     onClick={() => setProfileDropDownOpen(true)}
                     dropContent={
-                        <Box width={{ min: '220px', max: '260px' }} border={{ color: 'grey-1' }} round="small">
-                            <Box pad={{ horizontal: 'small', top: 'small', bottom: 'xsmall' }}>
-                                <Text size="xsmall" color="accent-3">Accounts</Text>
-                            </Box>
-                            {accounts.map((account) => {
-                                const isActive = account.id === activeAccountId;
-                                const displayName = getAccountDisplayName(account.id, account.firstCharName);
+                        <Box width={{ min: '220px', max: '260px' }} border={{ color: 'grey-1' }} round="small" overflow="hidden">
+                            <Box pad={{ vertical: 'xsmall' }}>
+                                <Box pad={{ horizontal: 'small', vertical: 'xxsmall' }}>
+                                    <Text size="xsmall" color="accent-3">Accounts</Text>
+                                </Box>
+                                {accounts.map((account) => {
+                                    const isActive = account.id === activeAccountId;
+                                    const displayName = getAccountDisplayName(account.id, account.firstCharName);
 
-                                return (
-                                    <Box
-                                        key={account.id}
-                                        direction="row"
-                                        align="center"
-                                        justify="between"
-                                        background={isActive ? 'dark-1' : undefined}
-                                    >
+                                    return (
+                                        <Box
+                                            key={account.id}
+                                            direction="row"
+                                            align="center"
+                                            justify="between"
+                                            background={isActive ? 'dark-1' : undefined}
+                                        >
+                                            <Button
+                                                plain
+                                                fill="horizontal"
+                                                hoverIndicator={{ color: 'brand', size: 'large' }}
+                                                onClick={() => {
+                                                    setProfileDropDownOpen(false);
+                                                    if (!isActive) {
+                                                        switchAccount(account.id);
+                                                    }
+                                                }}
+                                            >
+                                                <Box direction="row" align="center" gap="small" pad={{ horizontal: 'small', vertical: 'xsmall' }}>
+                                                    <Box width="14px" align="center" justify="center">
+                                                        {isActive && <Checkmark size="small" color="green-2" />}
+                                                    </Box>
+                                                    <Text size="small" color={isActive ? 'white-2' : 'accent-2'} truncate>
+                                                        {displayName}
+                                                    </Text>
+                                                </Box>
+                                            </Button>
+                                            {!isActive && (
+                                                <Button
+                                                    plain
+                                                    title={`Sign out ${displayName}`}
+                                                    hoverIndicator={{ color: 'grey-1' }}
+                                                    onClick={() => removeAccount(account.id)}
+                                                >
+                                                    <Box pad={{ horizontal: 'xsmall', vertical: 'xsmall' }}>
+                                                        <Close size="12px" color="accent-3" />
+                                                    </Box>
+                                                </Button>
+                                            )}
+                                        </Box>
+                                    );
+                                })}
+                                <Button
+                                    plain
+                                    fill="horizontal"
+                                    hoverIndicator={{ color: 'brand', size: 'large' }}
+                                    onClick={openAddAccountModal}
+                                >
+                                    <Box direction="row" align="center" gap="small" pad={{ horizontal: 'small', vertical: 'xsmall' }}>
+                                        <Box width="14px" align="center" justify="center">
+                                            <Add size="small" color="accent-2" />
+                                        </Box>
+                                        <Text size="small" color="accent-2">Add Account</Text>
+                                    </Box>
+                                </Button>
+                            </Box>
+                            <Box border={{ color: 'grey-1', side: 'bottom' }} fill="horizontal" />
+                            <Box pad={{ vertical: 'xsmall' }}>
+                                <Box pad={{ horizontal: 'small', vertical: 'xxsmall' }}>
+                                    <Text size="xsmall" color="accent-3">General</Text>
+                                </Box>
+                                {dataStatus == DataStatus.LiveData && (
+                                    <Link prefetch={false} href={'https://www.idleonefficiency.com/profile/upload'} style={fullWidthLinkStyle}>
                                         <Button
                                             plain
                                             fill="horizontal"
+                                            onClick={() => setProfileDropDownOpen(false)}
                                             hoverIndicator={{ color: 'brand', size: 'large' }}
-                                            onClick={() => {
-                                                setProfileDropDownOpen(false);
-                                                if (!isActive) {
-                                                    switchAccount(account.id);
-                                                }
-                                            }}
                                         >
-                                            <Box direction="row" align="center" gap="small" pad={{ horizontal: 'small', vertical: 'xsmall' }}>
-                                                <Box width="14px" align="center" justify="center">
-                                                    {isActive && <Checkmark size="small" color="green-2" />}
-                                                </Box>
-                                                <Text size="small" color={isActive ? 'white-2' : 'accent-2'} truncate>
-                                                    {displayName}
-                                                </Text>
+                                            <Box direction="row" align="center" pad={{ horizontal: 'small', vertical: 'xsmall' }}>
+                                                <Text size="small" color="accent-2">Public Profile</Text>
                                             </Box>
                                         </Button>
-                                        {!isActive && (
-                                            <Button
-                                                plain
-                                                title={`Sign out ${displayName}`}
-                                                hoverIndicator={{ color: 'grey-1' }}
-                                                onClick={() => removeAccount(account.id)}
-                                            >
-                                                <Box pad={{ horizontal: 'xsmall', vertical: 'xsmall' }}>
-                                                    <Close size="12px" color="accent-3" />
-                                                </Box>
-                                            </Button>
-                                        )}
-                                    </Box>
-                                );
-                            })}
-                            <Button
-                                hoverIndicator={{ color: 'brand', size: 'large' }}
-                                color="accent-2"
-                                onClick={openAddAccountModal}
-                            >
-                                <Box direction="row" align="center" justify="center" gap="xsmall" pad="small">
-                                    <Add size="small" />
-                                    <Text size="small">Add Account</Text>
-                                </Box>
-                            </Button>
-                            <Box border={{ color: 'grey-1', side: 'bottom' }} fill="horizontal" />
-                            {dataStatus == DataStatus.LiveData &&
-                                <>
-                                    <Link prefetch={false} href={'https://www.idleonefficiency.com/profile/upload'}>
-                                        <Button onClick={() => setProfileDropDownOpen(false)} hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2">
-                                            <Box align="center" pad="small">Public Profile</Box>
-                                        </Button>
                                     </Link>
-{/*                                     <Link prefetch={false} href={'https://www.idleonefficiency.com/profile/settings'}>
-                                        <Button onClick={() => setProfileDropDownOpen(false)} hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2">
-                                            <Box align="center" pad="small">Settings</Box>
-                                        </Button>
-                                    </Link> */}
-                                </>
-                            }
-                            <Link prefetch={false} href={'https://www.idleonefficiency.com/changelog'}>
-                                <Button onClick={() => setProfileDropDownOpen(false)} hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2">
-                                    <Box direction="row" justify="center" gap="small" align="center" pad="small">
-                                        Change log
-                                        {hasUnseenChangelogs && <Box background="status-critical" round="full" pad="xxsmall" width="8px" height="8px" />}
-                                    </Box>
-                                </Button>
-                            </Link>
+                                )}
+                                <Link prefetch={false} href={'https://www.idleonefficiency.com/changelog'} style={fullWidthLinkStyle}>
+                                    <Button
+                                        plain
+                                        fill="horizontal"
+                                        onClick={() => setProfileDropDownOpen(false)}
+                                        hoverIndicator={{ color: 'brand', size: 'large' }}
+                                    >
+                                        <Box direction="row" align="center" justify="between" pad={{ horizontal: 'small', vertical: 'xsmall' }}>
+                                            <Text size="small" color="accent-2">Change log</Text>
+                                            {hasUnseenChangelogs && <Box background="status-critical" round="full" pad="xxsmall" width="8px" height="8px" />}
+                                        </Box>
+                                    </Button>
+                                </Link>
+                            </Box>
                             <Box border={{ color: 'grey-1', side: 'bottom' }} fill="horizontal" />
-                            <Button
-                                hoverIndicator={{ color: 'brand', size: 'large' }}
-                                color="accent-2"
-                                onClick={() => {
-                                    setProfileDropDownOpen(false);
-                                    logout();
-                                }}
-                            >
-                                <Box pad="small">Sign Out</Box>
-                            </Button>
-                            {accounts.length > 1 && (
+                            <Box pad={{ vertical: 'xsmall' }}>
                                 <Button
+                                    plain
+                                    fill="horizontal"
                                     hoverIndicator={{ color: 'brand', size: 'large' }}
-                                    color="accent-2"
                                     onClick={() => {
                                         setProfileDropDownOpen(false);
-                                        logoutAll();
+                                        logout();
                                     }}
                                 >
-                                    <Box pad="small">Sign Out All</Box>
+                                    <Box direction="row" align="center" pad={{ horizontal: 'small', vertical: 'xsmall' }}>
+                                        <Text size="small" color="accent-2">Sign Out</Text>
+                                    </Box>
                                 </Button>
-                            )}
+                                {accounts.length > 1 && (
+                                    <Button
+                                        plain
+                                        fill="horizontal"
+                                        hoverIndicator={{ color: 'brand', size: 'large' }}
+                                        onClick={() => {
+                                            setProfileDropDownOpen(false);
+                                            logoutAll();
+                                        }}
+                                    >
+                                        <Box direction="row" align="center" pad={{ horizontal: 'small', vertical: 'xsmall' }}>
+                                            <Text size="small" color="accent-2">Sign Out All</Text>
+                                        </Box>
+                                    </Button>
+                                )}
+                            </Box>
                         </Box>
                     }
                 />
@@ -277,13 +297,16 @@ export const Profile = () => {
                     }}
                     onClick={() => setProfileDropDownOpen(true)}
                     dropContent={
-                        <Box width="small" border={{ color: 'grey-1' }} round="small">
-                            <Link prefetch={false} href={'https://www.idleonefficiency.com/changelog'}>
-                                {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
-                                }
-                                <Button onClick={() => setProfileDropDownOpen(false)} hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2">
-                                    <Box direction="row" justify="center" gap="small" align="center" pad="small">
-                                        Change log
+                        <Box width="small" border={{ color: 'grey-1' }} round="small" overflow="hidden" pad={{ vertical: 'xsmall' }}>
+                            <Link prefetch={false} href={'https://www.idleonefficiency.com/changelog'} style={fullWidthLinkStyle}>
+                                <Button
+                                    plain
+                                    fill="horizontal"
+                                    onClick={() => setProfileDropDownOpen(false)}
+                                    hoverIndicator={{ color: 'brand', size: 'large' }}
+                                >
+                                    <Box direction="row" align="center" justify="between" pad={{ horizontal: 'small', vertical: 'xsmall' }}>
+                                        <Text size="small" color="accent-2">Change log</Text>
                                         {hasUnseenChangelogs && <Box background="status-critical" round="full" pad="xxsmall" width="8px" height="8px" />}
                                     </Box>
                                 </Button>
