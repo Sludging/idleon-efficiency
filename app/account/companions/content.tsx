@@ -12,6 +12,7 @@ import { ChangeEvent, useCallback, useState } from 'react';
 import ShadowBox from "../../../components/base/ShadowBox";
 import IconImage from "../../../components/base/IconImage";
 import { Companion } from "../../../data/domain/companions";
+import { writeScopedCompanions } from "../../../data/firebase/accounts";
 import TipDisplay, { TipDirection } from "../../../components/base/TipDisplay";
 import { CircleInformation } from "grommet-icons";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
@@ -74,7 +75,7 @@ function CompanionDisplay() {
     const saveEdits = () => {
         setAllowEditing(false);
 
-        localStorage.setItem("companions", JSON.stringify(companions));
+        writeScopedCompanions(JSON.stringify(companions));
     }
 
     if (!companions) {

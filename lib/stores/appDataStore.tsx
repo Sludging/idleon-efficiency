@@ -2,7 +2,7 @@ import { createStore } from 'zustand/vanilla'
 import { IdleonData, updateIdleonData } from '../../data/domain/idleonData'
 import { Cloudsave } from '../../data/domain/cloudsave'
 import { getSubDomain, isSubDomain } from '../../data/utility'
-import { getApp } from 'firebase/app'
+import { getActiveFirebaseApp, updateAccountLabel } from '../../data/firebase/accounts'
 import { FirestoreData } from '../../data/firebase/data'
 import { fetcher } from '@profile-source'
 import { normalizeCompanionStates } from '../../data/domain/companions/companionState';
@@ -163,7 +163,7 @@ export const createAppDataStore = (
             set((_) => ({ initialized: true }));
 
             const subDomain = isSubDomain();
-            const app = getApp();
+            const app = getActiveFirebaseApp();
             // Regular usage, and firestore hasn't been initialised yet.
             if (!subDomain && userUid) {
                 const fireStore = new FirestoreData(userUid, app, get().handleLiveData)
@@ -204,6 +204,9 @@ export const createAppDataStore = (
         },
         handleLiveData: async (userUid: string, cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>, companions: CompanionState[]) => {
             set((_) => ({ dataStatus: DataStatus.Loading }));
+            if (charNames.length > 0 && charNames[0]) {
+                updateAccountLabel(userUid, charNames[0]);
+            }
             const newData = await handleLiveData(userUid, get().data, cloudsave, charNames, serverVars, companions);
             set((_) => ({ dataStatus: DataStatus.LiveData, data: newData, status: AppStatus.Ready, lastUpdated: new Date() }));
         },
